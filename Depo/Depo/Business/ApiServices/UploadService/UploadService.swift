@@ -853,15 +853,19 @@ final class UploadOperations: Operation {
     
     private func beginBackgroundTask() -> UIBackgroundTaskIdentifier {
         var taskId = UIBackgroundTaskInvalid
-        taskId = UIApplication.shared.beginBackgroundTask(withName: self.item.uuid, expirationHandler: {
-            UIApplication.shared.endBackgroundTask(taskId)
-        })
+        DispatchQueue.main.async {
+            taskId = UIApplication.shared.beginBackgroundTask(withName: self.item.uuid, expirationHandler: {
+                UIApplication.shared.endBackgroundTask(taskId)
+            })
+        }
         return taskId
     }
     
     private func endBackgroundTask() {
         if let taskId = backgroundTaskId {
-            UIApplication.shared.endBackgroundTask(taskId)
+            DispatchQueue.main.async {
+                UIApplication.shared.endBackgroundTask(taskId)
+            }
         }
     }
 }
