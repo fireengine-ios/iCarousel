@@ -6,8 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-import Foundation
-import QuartzCore
+import UIKit
 
 extension UIImage {
     

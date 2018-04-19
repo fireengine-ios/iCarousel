@@ -11,6 +11,33 @@ import SDWebImage
 import Alamofire
 import Adjust
 
+final class Migrator {
+    
+    func migrateAll() {
+        migratePasscode()
+        migratePasscodeTouchID()
+    }
+    
+    func migratePasscodeTouchID() {
+        let passcodeSetting = UserDefaults.standard.integer(forKey: "PassCodeSetting")
+        let passcodeSettingOnWithTouchID = 2
+        
+        if passcodeSetting == passcodeSettingOnWithTouchID {
+            var biometricsManager: BiometricsManager = factory.resolve()
+            biometricsManager.isEnabled = true
+        }
+    }
+    
+    func migratePasscode() {
+        guard let passcodeMD5 = UserDefaults.standard.string(forKey: "ApplicationPasscode"), !passcodeMD5.isEmpty else {
+            return
+        }
+        
+        let passcodeStorage: PasscodeStorage = factory.resolve()
+        passcodeStorage.save(passcode: passcodeMD5)
+    }
+}
+
 class AppConfigurator {
     
     static let dropboxManager: DropboxManager = factory.resolve()

@@ -13,6 +13,7 @@ public protocol PasscodeInputViewDelegate: class {
     func finishErrorAnimation()
 }
 
+
 //@IBDesignable
 public class PasscodeInputView: UIControl, PasscodeInput {
     
@@ -46,6 +47,10 @@ public class PasscodeInputView: UIControl, PasscodeInput {
     
     public var passcode: Passcode = "" {
         didSet { setNeedsDisplay() }
+    }
+    
+    public func animatePasscodeFullEnter() {
+        passcode = String(repeating: "0", count: passcodeLength)
     }
     
     public func clearPasscode() {
@@ -143,6 +148,8 @@ extension PasscodeInputView: UIKeyInput {
             return
         }
         passcode.append(text)
+        
+        
         
         if isPasscodeFull {
             DispatchQueue.main.asyncAfter(deadline: .now() + finishDelay ) {
