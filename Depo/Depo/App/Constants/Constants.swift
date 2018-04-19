@@ -805,56 +805,8 @@ struct TextConstants {
     //Periodic contacts sync
     static let periodicContactsSync = NSLocalizedString("Contacts Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-}
-
-
-struct NumericConstants {
-    //verefy phone screen
-    static let vereficationCharacterLimit = 6
-    static let vereficationTimerLimit = 120//in seconds
-    static let maxVereficationAttempts = 3
-    //
-    static let maxDetailsLoadingAttempts = 5
-    static let detailsLoadingTimeAwait = UInt32(2)
-    
-    static let countOfLoginBeforeNeedShowUploadOffPopUp = 3
-    
-    static let numerCellInLineOnIphone: CGFloat = 4
-    static let numerCellInDocumentLineOnIphone: CGFloat = 2
-    static let iPhoneGreedInset: CGFloat = 2
-    static let iPhoneGreedHorizontalSpace: CGFloat = 1
-    static let iPadGreedInset: CGFloat = 2
-    static let iPadGreedHorizontalSpace: CGFloat = 1
-    static let numerCellInLineOnIpad: CGFloat = 8
-    static let numerCellInDocumentLineOnIpad: CGFloat = 4
-    static let maxNumberPhotosInStory: Int = 20
-    static let maxNumberAudioInStory: Int = 1
-    static let creationStoryOrderingCountPhotosInLineiPhone: Int = 4
-    static let creationStoryOrderingCountPhotosInLineiPad: Int = 6
-    static let albumCellListHeight: CGFloat = 100
-    static let albumCellGreedHeight: CGFloat = 136
-    static let albumCellGreedWidth: CGFloat = 100
-    static let storiesCellGreedHeight: CGFloat = 100
-    
-    static let insetAlbumCellGreed: CGFloat = 16
-    static let amountInsetInRowAlbumCell: CGFloat = 76
-    static let heightTextAlbumCell: CGFloat = 21
-    
-    static let numberOfElementsInSyncRequest: Int = 30000
-    
-    static let animationDuration: Double = 0.3
-    static let fastAnimationDuration: Double = 0.1
-    
-    static let timeIntervalBetweenAutoSync: TimeInterval = 10 * 60
-    
-    static let timeIntervalBetweenAutoSyncAfterOutOfSpaceError: TimeInterval = 60 * 60 * 12 // 12 hours
-
-    static let freeAppSpaceLimit = 0.2
-    
-    static let fourGigabytes: UInt64 = 4 * 1024 * 1024 * 1024
-    
-    static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
-    
     static let errorLogin = NSLocalizedString("error_login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploading = NSLocalizedString("uploading", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    
 }
