@@ -1388,11 +1388,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return !serversUUIDs.contains($0.uuid)
             })
         
-            let localUUIDS = serverObjects.map {
+            let localIDs = serverObjects.map {
                 $0.getUUIDAsLocal()
             }
             
-            localObjectsForReplace = CoreDataStack.default.allLocalItems(withUUIDS: localUUIDS)
+            localObjectsForReplace = CoreDataStack.default.allLocalItems(trimmedLocalIds: localIDs)
 
             let uuids = localObjectsForReplace.map({ $0.uuid })
             

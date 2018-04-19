@@ -69,7 +69,11 @@ class Upload: UploadRequestParametrs {
 
         self.isFavorite = isFavorite
 
-        self.tmpUUId = UUID().uuidString
+        if item.isLocalItem {
+            self.tmpUUId = "\(item.getLocalID())~\(UUID().uuidString)"
+        } else {
+            self.tmpUUId = UUID().uuidString
+        }
     }
     
     var requestParametrs: Any {
@@ -78,7 +82,8 @@ class Upload: UploadRequestParametrs {
     var header: RequestHeaderParametrs {
         var header = RequestHeaders.authification()
         
-        header = header + [ HeaderConstant.ContentType : item.uploadContentType,
+        header = header + [
+            HeaderConstant.ContentType           : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
 //            HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,

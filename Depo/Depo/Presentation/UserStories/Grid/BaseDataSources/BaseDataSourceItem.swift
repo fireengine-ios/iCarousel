@@ -82,7 +82,7 @@ class BaseDataSourceItem: NSObject {
     }
     
     func getUUIDAsLocal() -> String {
-        if uuid.contains("~"){
+        if uuid.contains("~") {
             return uuid.components(separatedBy: "~").first ?? uuid
         }
         return uuid

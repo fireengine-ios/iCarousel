@@ -861,7 +861,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         super.init()
         parent = mediaItem.parent
         md5 = mediaItem.md5Value ?? "not md5"
-        uuid = mediaItem.uuidValue ?? ""//UUID().description
+        uuid = "\(mediaItem.trimmedLocalFileID)~\(UUID().uuidString)"
+        
         isLocalItem = mediaItem.isLocalItemValue
         name = mediaItem.nameValue
         creationDate = mediaItem.creationDateValue as Date?
@@ -925,8 +926,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     func getLocalID() -> String {
-        if isLocalItem {
-            return asset?.localIdentifier ?? ""
+        if isLocalItem, let localID = asset?.localIdentifier {
+            return  localID.components(separatedBy: "/").first ?? localID
         } else if uuid.contains("~"){
             return uuid.components(separatedBy: "~").first ?? uuid
         }
