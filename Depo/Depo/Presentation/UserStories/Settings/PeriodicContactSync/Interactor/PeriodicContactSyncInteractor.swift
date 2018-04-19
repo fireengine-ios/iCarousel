@@ -20,8 +20,10 @@ final class PeriodicContactSyncInteractor {
 extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
     
     func prepareCellModels() {
+        let settings = dataStorage.settings
+
         DispatchQueue.main.async { [weak self] in
-            self?.output.prepaire(syncSettings: self.dataStorage.settings)
+            self?.output.prepaire(syncSettings: settings)
         }
     }
     
