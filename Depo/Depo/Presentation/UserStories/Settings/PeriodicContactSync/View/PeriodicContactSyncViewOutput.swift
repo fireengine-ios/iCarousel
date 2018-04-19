@@ -9,6 +9,6 @@
 import Foundation
 
 protocol PeriodicContactSyncViewOutput: class {
-    func viewIsReady()
-    func save(settings: AutoSyncSettings)
+    func viewIsReady(tableView: UITableView)
+    func saveSettings()
 }

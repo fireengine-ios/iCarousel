@@ -17,8 +17,6 @@ final class PeriodicContactSyncViewController: UIViewController {
     
     private lazy var activityManager = ActivityIndicatorManager()
     
-    private let dataSource =  PeriodicContactSyncDataSource()
-    
     // MARK: - LifeCicle
     
     override func viewDidLoad() {
@@ -31,17 +29,14 @@ final class PeriodicContactSyncViewController: UIViewController {
         activityManager.delegate = self
         
         configureNavBar()
-        
-        dataSource.setup(table: tableView)
-        
-        output.viewIsReady()
+                
+        output.viewIsReady(tableView: tableView)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        let settings = dataSource.createAutoSyncSettings()
-        output.save(settings: settings)
+        output.saveSettings()
     }
     
     private func configureNavBar() {
@@ -52,9 +47,9 @@ final class PeriodicContactSyncViewController: UIViewController {
 
 }
 
-// MARK: - ActivityIndicator
+// MARK: - PeriodicContactSyncViewInput
 
-extension PeriodicContactSyncViewController: ActivityIndicator {
+extension PeriodicContactSyncViewController: PeriodicContactSyncViewInput {
     
     func startActivityIndicator() {
         activityManager.start()
@@ -62,20 +57,6 @@ extension PeriodicContactSyncViewController: ActivityIndicator {
     
     func stopActivityIndicator() {
         activityManager.stop()
-    }
-    
-}
-
-// MARK: - FaceImageViewInput
-
-extension PeriodicContactSyncViewController: PeriodicContactSyncViewInput {
-    
-    func prepaire(syncSettings: AutoSyncSettings) {
-        dataSource.showCells(from: syncSettings)
-    }
-    
-    func reloadTableView() {
-        dataSource.reloadTableView()
     }
     
 }

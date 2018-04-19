@@ -9,5 +9,4 @@
 protocol PeriodicContactSyncViewInput: class, ActivityIndicator {
     func startActivityIndicator()
     func stopActivityIndicator()
-    func prepaire(syncSettings: AutoSyncSettings)
 }

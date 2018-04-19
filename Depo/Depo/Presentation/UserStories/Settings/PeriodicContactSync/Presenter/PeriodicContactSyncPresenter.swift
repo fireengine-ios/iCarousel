@@ -13,19 +13,24 @@ final class PeriodicContactSyncPresenter: BasePresenter {
     weak var view: PeriodicContactSyncViewInput?
     var interactor: PeriodicContactSyncInteractorInput!
     var router: PeriodicContactSyncRouter!
+    
+    private let dataSource =  PeriodicContactSyncDataSource()
 }
 
 // MARK: - PeriodicContactSyncViewOutput
 
 extension PeriodicContactSyncPresenter: PeriodicContactSyncViewOutput {
     
-    func viewIsReady() {
+    func viewIsReady(tableView: UITableView) {
+        dataSource.setup(table: tableView)
+        dataSource.delegate = self
+        
         startAsyncOperationDisableScreen()
         interactor.prepareCellModels()
     }
     
-    func save(settings: AutoSyncSettings) {
-        interactor.onSave(settings: settings)
+    func saveSettings() {
+        interactor.onSave(settings: dataSource.createAutoSyncSettings())
     }
     
 }
@@ -44,7 +49,17 @@ extension PeriodicContactSyncPresenter: PeriodicContactSyncInteractorOutput {
     
     func prepaire(syncSettings: AutoSyncSettings) {
         completeAsyncOperationEnableScreen()
-        view?.prepaire(syncSettings: syncSettings)
+        dataSource.showCells(from: syncSettings)
+    }
+    
+}
+
+// MARK: - PeriodicContactSyncDataSourceDelegate
+
+extension PeriodicContactSyncPresenter: PeriodicContactSyncDataSourceDelegate {
+    
+    func onValueChanged() {
+        interactor.onSave(settings: dataSource.createAutoSyncSettings())
     }
     
 }
