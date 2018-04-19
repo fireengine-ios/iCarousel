@@ -14,5 +14,5 @@ protocol TurkcellSecurityViewInput: class {
 
 protocol TurkcellSecurityViewOutput: class {
     func viewIsReady()
-    func securityChanged(passcode: Bool, autoLogin: Bool)
+    func securityChanged(passcode: Bool, autoLogin: Bool, title: String)
 }

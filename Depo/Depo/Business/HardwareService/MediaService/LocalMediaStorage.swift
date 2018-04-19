@@ -58,6 +58,8 @@ protocol LocalMediaStorageProtocol {
     func copyAssetToDocument(asset: PHAsset) -> URL
     
     func fullInfoAboutAsset(asset: PHAsset) -> AssetInfo
+    
+    func clearTemporaryFolder()
 }
 
 class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
@@ -112,6 +114,18 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         completion(assetsInfo)
     }
     
+    func clearTemporaryFolder() {
+        log.debug("LocalMediaStorage clearTemporaryFolder")
+        
+        do {
+            let folderPath = Device.tmpFolderString()
+            try FileManager.default.contentsOfDirectory(atPath: folderPath).forEach { path in
+                try FileManager.default.removeItem(atPath: folderPath.stringByAppendingPathComponent(path: path))
+            }
+        } catch {
+            print(error.description)
+        }
+    }
     
     // MARK: Alerts
     private func showAccessAlert() {
@@ -528,6 +542,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                                         try data?.write(to: url)
                                                         semaphore.signal()
                                                     } catch {
+                                                        print(error.description)
                                                         semaphore.signal()
                                                     }
         }

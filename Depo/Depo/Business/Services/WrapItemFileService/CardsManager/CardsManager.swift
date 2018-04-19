@@ -165,11 +165,11 @@ class CardsManager: NSObject {
     }
     
     func setProgress(ratio: Float, operationType: OperationType, object: WrapData?) {
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             for notificationView in self.foloversArray {
                 notificationView.setProgress(ratio: ratio, for: operationType, object: object)
             }
-        }
+//        }
     }
     
     func stopOperationWithType(type: OperationType) {

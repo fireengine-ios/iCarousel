@@ -9,7 +9,7 @@
 import Foundation
 
 class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleInput {
-    
+
     weak var view: SearchViewInput!
     var interactor: SearchViewInteractorInput!
     var router: SearchViewRouterInput!
@@ -30,8 +30,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     var alertSheetModule: AlertFilesActionsSheetModuleInput?
     var alertSheetExcludeTypes = [ElementTypes]()
-    
-    private let albumMoreTypes: [ElementTypes] = [.shareAlbum, .download, .completelyDeleteAlbums, .removeAlbum, .albumDetails]
     
     private let semaphore = DispatchSemaphore(value: 0)
     
@@ -152,7 +150,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         view.endSearchRequestWith(text: text)
         //DBOUT
 //        dataSource.fetchService.performFetch(sortingRules: .timeUp, filtes: [.name(text)])
-        dataSource.reloadData()
     }
     
     // MARK: - BaseDataSourceForCollectionViewDelegate
@@ -195,6 +192,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
     }
+    
+    func onItemSelectedActiveState(item: BaseDataSourceItem) { }
     
     private func getSameTypeItems(item: BaseDataSourceItem, items: [[BaseDataSourceItem]]) -> [BaseDataSourceItem] {
         let allItems = items.flatMap { $0 }
@@ -264,19 +263,12 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         }
         log.debug("SearchViewPresenter onMoreActions")
         
+        dataSource.moreActionItem = item
         
-        if item.fileType == .photoAlbum {
-            alertSheetModule?.showSpecifiedAlertSheet(with: albumMoreTypes,
-                                                      item: item,
-                                                      presentedBy: sender,
-                                                      onSourceView: nil,
-                                                      viewController: nil)
-        } else {
-            alertSheetModule?.showSpecifiedAlertSheet(with: item,
-                                                      presentedBy: sender,
-                                                      onSourceView: nil,
-                                                      viewController: nil)
-        }
+        alertSheetModule?.showSpecifiedAlertSheet(with: item,
+                                                  presentedBy: sender,
+                                                  onSourceView: nil,
+                                                  viewController: nil)
     }
     
     func getNextItems() { }
@@ -489,6 +481,12 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     func changeCover() { }
     
     func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }
+    
+    func didDelete(items: [BaseDataSourceItem]) {
+        if dataSource.allObjectIsEmpty() {
+            view.setCollectionViewVisibilityStatus(visibilityStatus: true)
+        }
+    }
 }
 
 extension SearchViewPresenter: TabBarActionHandler {

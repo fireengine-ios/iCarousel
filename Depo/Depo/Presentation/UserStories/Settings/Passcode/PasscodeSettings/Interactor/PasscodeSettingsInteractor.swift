@@ -22,7 +22,7 @@ extension PasscodeSettingsInteractor: PasscodeSettingsInteractorInput {
         biometricsManager.isEnabled = false
         passcodeStorage.clearPasscode()
     }
-    
+        
     var biometricsStatus: BiometricsStatus {
         return biometricsManager.status
     }

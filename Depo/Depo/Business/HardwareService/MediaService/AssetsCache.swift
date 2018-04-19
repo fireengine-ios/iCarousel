@@ -78,6 +78,14 @@ class AssetsCache {
         }
     }
     
+    func remove(list: [PHAsset]) {
+        dispatchQueue.sync {
+            list.forEach {
+                storage.removeValue(forKey: $0.localIdentifier)
+            }
+        }
+    }
+    
     func remove(identifier: String) {
         dispatchQueue.sync {
             _ = storage.removeValue(forKey: identifier)

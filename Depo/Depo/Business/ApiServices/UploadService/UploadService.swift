@@ -88,6 +88,7 @@ final class UploadService: BaseRequestService {
         trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
     
         guard let filteredItems = filter(items: items) else {
+            success()
             return nil
         }
         
@@ -242,6 +243,7 @@ final class UploadService: BaseRequestService {
         uploadOperations.append(operations)
         
         uploadQueue.addOperations(operations, waitUntilFinished: false)
+        log.debug("UPLOADING upload: \(operations.count) have been added to the upload queue")
         print("UPLOADING upload: \(operations.count) have been added to the upload queue")
         
         return uploadOperations.filter({ $0.uploadType == .syncToUse })
@@ -330,6 +332,7 @@ final class UploadService: BaseRequestService {
         uploadOperations.append(operations)
         
         uploadQueue.addOperations(operations, waitUntilFinished: false)
+        log.debug("UPLOADING upload: \(operations.count) have been added to the upload queue")
         print("UPLOADING upload: \(operations.count) have been added to the upload queue")
         
         return uploadOperations.filter({ $0.uploadType == .fromHomePage })
@@ -417,6 +420,7 @@ final class UploadService: BaseRequestService {
         uploadOperations.append(operations)
         
         uploadQueue.addOperations(operations, waitUntilFinished: false)
+        log.debug("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
         print("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
         
         return uploadOperations.filter({ $0.uploadType == .autoSync })
@@ -592,7 +596,8 @@ extension UploadService {
             return nil
         }
         
-        result = result.filter { $0.fileSize < Device.getFreeDiskSpaceInBytes() ?? 0 }
+        let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes() ?? 0
+        result = result.filter { $0.fileSize < freeDiskSpaceInBytes }
         guard !result.isEmpty else {
             UIApplication.showErrorAlert(message: TextConstants.syncNotEnoughMemory)
             return nil
@@ -772,7 +777,11 @@ final class UploadOperations: Operation {
                             }
                             
                             if let localURL = uploadParam.urlToLocalFile {
-                                try? FileManager.default.removeItem(at: localURL)
+                                do {
+                                    try FileManager.default.removeItem(at: localURL)
+                                } catch {
+                                    print(error.description)
+                                }
                             }
                             
                             if let response = baseurlResponse as? SearchItemResponse {
@@ -844,19 +853,15 @@ final class UploadOperations: Operation {
     
     private func beginBackgroundTask() -> UIBackgroundTaskIdentifier {
         var taskId = UIBackgroundTaskInvalid
-        DispatchQueue.main.async {
-            taskId = UIApplication.shared.beginBackgroundTask(withName: self.item.uuid, expirationHandler: {
-                UIApplication.shared.endBackgroundTask(taskId)
-            })
-        }
+        taskId = UIApplication.shared.beginBackgroundTask(withName: self.item.uuid, expirationHandler: {
+            UIApplication.shared.endBackgroundTask(taskId)
+        })
         return taskId
     }
     
     private func endBackgroundTask() {
         if let taskId = backgroundTaskId {
-            DispatchQueue.main.async {
-                UIApplication.shared.endBackgroundTask(taskId)
-            }
+            UIApplication.shared.endBackgroundTask(taskId)
         }
     }
 }

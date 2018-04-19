@@ -12,4 +12,8 @@ protocol UploadFilesSelectionInteractorOutput: class {
 
     func networkOperationStopped()
     
+    func addToUploadSuccessed()
+    
+    func addToUploadFailedWith(errorMessage: String)
+    
 }

@@ -104,10 +104,13 @@ extension PasscodeManagerImp: PasscodeManager {
     
     private func canShowBiometrics() -> Bool {
         #if MAIN_APP
-        if UIApplication.shared.applicationState != .active || biometricsOnScreen || finishBiometrics {
+        if UIApplication.shared.applicationState != .active {
             return false
         }
         #endif
+        if biometricsOnScreen || finishBiometrics {
+            return false
+        }
         return true
     }
 }

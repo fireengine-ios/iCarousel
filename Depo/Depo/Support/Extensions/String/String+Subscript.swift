@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import Foundation
+
 extension String {
 
     subscript (i: Int) -> Character {
