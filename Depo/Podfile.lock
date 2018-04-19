@@ -68,6 +68,32 @@ DEPENDENCIES:
   - XCGLogger (~> 6.0.1)
   - XYPieChart
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Adjust
+    - Alamofire
+    - Bolts
+    - CircleProgressBar
+    - Crashlytics
+    - Fabric
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
+    - GoogleConversionTracking
+    - iCarousel
+    - JDStatusBarNotification
+    - MBProgressHUD
+    - MMWormhole
+    - ObjcExceptionBridging
+    - ObjectiveDropboxOfficial
+    - ReachabilitySwift
+    - SDWebImage
+    - SwiftyJSON
+    - Typist
+    - UIImage-Categories
+    - XCGLogger
+    - XYPieChart
+
 EXTERNAL SOURCES:
   SimpleExif:
     :git: https://github.com/bonyadmitr/SimpleExif.git
@@ -105,4 +131,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 0fb4e9276db033ecc4607c8f509ee5aba965b8ce
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0
