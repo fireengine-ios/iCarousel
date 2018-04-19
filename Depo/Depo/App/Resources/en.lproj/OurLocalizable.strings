@@ -573,6 +573,17 @@
 "Dropbox authorisation error" = "Dropbox authorisation error";
 "dropboxLastUpdatedFile" = "Last updated on %@ - %d file";
 "dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";
+"LifeboxSmallPopUpTitle" = "Lifebox storage is almost full";
+"LifeboxSmallPopUpSubTitle" = "You have reached your lifebox memory limit. Let’s have a look for upgrade options!";
+"LifeboxSmallPopUpCheckBoxTex" = "Don't show me this message again";
+"LifeboxSmallPopUpFirstButtonText" = "CANCEL";
+"LifeboxSmallPopUpSecondButtonText" = "OK";
+"LifeboxLargePopUpTitle100" = "You have reached your lifebox memory limit.";
+"LifeboxLargePopUpTitle90" = "90% of your storage is full!";
+"LifeboxLargePopUpTitle80" = "80% of your storage is full!";
+"LifeboxLargePopUpSubTitle" = "Let’s have a look at upgrade options!";
+"LifeboxLargePopUpExpandButtonTitle" = "Expand My Storage";
+"LifeboxLargePopUpSkipButtonTitle" = "Skip";
 "widgetTopTitleInProgress" = "Photo synchronization is in progress";
 "widgetTopTitleFinished" = "Photos are up-to-date";
 "widgetTopTitleInactive" = "Photo synchronization is inactive";

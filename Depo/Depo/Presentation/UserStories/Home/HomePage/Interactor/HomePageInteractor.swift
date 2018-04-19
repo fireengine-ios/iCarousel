@@ -19,6 +19,8 @@ class HomePageInteractor: HomePageInteractorInput {
         PushNotificationService.shared.openActionScreen()
         
         getAllCardsForHomePage()
+        
+        showQuotaPopUpIfNeed()
     }
     
     func needRefresh() {
@@ -37,6 +39,46 @@ class HomePageInteractor: HomePageInteractorInput {
                 }
             }
         }
+    }
+    
+    func showQuotaPopUpIfNeed() {
+        let storageVars: StorageVars = factory.resolve()
+        
+        let isFirstTime = !storageVars.homePageFirstTimeLogin
+        if isFirstTime {
+            storageVars.homePageFirstTimeLogin = true
+        }
+        AccountService().quotaInfo(success: { [weak self] response in
+            if let qresponce = response as? QuotaInfoResponse {
+                guard let quotaBytes = qresponce.bytes, let usedBytes = qresponce.bytesUsed else { return }
+                let usagePercent = 1.0 //Float(usedBytes) / Float(quotaBytes)
+                var viewForPresent: UIViewController? = nil
+                
+                if isFirstTime {
+                    if 0.8 <= usagePercent && usagePercent < 0.9 {
+                        viewForPresent = LargeFullOfQuotaPopUp.popUp(type: .LargeFullOfQuotaPopUpType80)
+                    }
+                    else if 0.9 <= usagePercent && usagePercent < 1.0 {
+                        viewForPresent = LargeFullOfQuotaPopUp.popUp(type: .LargeFullOfQuotaPopUpType90)
+                    }
+                    else if usagePercent >= 1.0 {
+                        viewForPresent = LargeFullOfQuotaPopUp.popUp(type: .LargeFullOfQuotaPopUpType100)
+                    }
+                } else if usagePercent >= 1.0{
+                    viewForPresent = SmallFullOfQuotaPopUp.popUp()
+                }
+                
+                if let popUpView = viewForPresent {
+                    self?.output.needPresentPopUp(popUpView: popUpView)
+                }
+                
+            }
+            
+            
+            }, fail: { error in
+                //error handling not need
+                
+        })
     }
 
 }

@@ -68,4 +68,8 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         }
     }
     
+    func needPresentPopUp(popUpView: UIViewController) {
+        view.needPresentPopUp(popUpView: popUpView)
+    }
+    
 }
