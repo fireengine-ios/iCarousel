@@ -359,6 +359,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             self.view.stopRefresher()
             self.updateNoFilesView()
             self.asyncOperationSucces()
+            self.updateThreeDotsButton()
         }
     }
 
