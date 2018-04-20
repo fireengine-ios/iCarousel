@@ -114,6 +114,22 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         completion(assetsInfo)
     }
     
+    func getCompactInfo(from assets: [PHAsset], completion: @escaping (_ assetsInfo: [AssetInfo])->Void) {
+        var assetsInfo = [AssetInfo]()
+        
+        var i = 0
+        let count = assets.count
+        for asset in assets {
+            print("iCLOUD updating: \(i) of \(count)")
+            i += 1
+            let _ = autoreleasepool {
+                let assetInfo = self.compactInfoAboutAsset(asset: asset)
+                assetsInfo.append(assetInfo)
+            }
+        }
+        completion(assetsInfo)
+    }
+    
     func clearTemporaryFolder() {
         log.debug("LocalMediaStorage clearTemporaryFolder")
         
@@ -569,6 +585,140 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
     }
     
+    private func compactInfoAboutAsset(asset: PHAsset) -> AssetInfo {
+        log.debug("LocalMediaStorage fullInfoAboutAsset")
+        
+        switch asset.mediaType {
+        case .image:
+            return compactInfoAboutImageAsset(asset: asset)
+            
+        case . video:
+            return compactInfoAboutVideoAsset(asset: asset)
+            
+        default:
+            return AssetInfo(libraryAsset: asset)
+        }
+    }
+    
+    private func compactInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
+        log.debug("LocalMediaStorage compactInfoAboutVideoAsset")
+        
+        var assetInfo = AssetInfo(libraryAsset: asset)
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        let operation = GetCompactVideoOperation(photoManager: self.photoManger, asset: asset) { avAsset, aVAudioMix, dict in
+            
+            self.dispatchQueue.async {
+                let failCompletion = {
+                    assetInfo.isValid = false
+                    semaphore.signal()
+                    return
+                }
+                
+                guard let dict = dict else {
+                    assetInfo.isValid = false
+                    semaphore.signal()
+                    return
+                }
+                
+                if let isDegraded = dict[PHImageResultIsDegradedKey] as? Bool, isDegraded  {
+                    semaphore.signal()
+                    return
+                }
+                
+                if let inCloud = dict[PHImageResultIsInCloudKey] as? Bool, inCloud {
+                    print("LOCAL_ITEMS: \(asset.localIdentifier) is in iCloud")
+                    failCompletion()
+                }
+                
+                if let error = dict[PHImageErrorKey] as? NSError {
+                    print(error.localizedDescription)
+                    failCompletion()
+                }
+                
+                if let urlToFile = (avAsset as? AVURLAsset)?.url {
+                    do {
+                        assetInfo.url = urlToFile
+                        if let size = try FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as? NSNumber {
+                            assetInfo.size = size.int64Value
+                        }
+                        
+                        if let name = asset.originalFilename {
+                            assetInfo.name = name
+                        }
+                        debugPrint("ORIGINAL NAME VIDEO is \(assetInfo.name)")
+                        semaphore.signal()
+                    } catch {
+                        failCompletion()
+                    }
+                } else {
+                    failCompletion()
+                }
+            }
+            
+        }
+        
+        getDetailQueue.addOperation(operation)
+        /// added timeout bcz callback from "requestAVAsset(forVideo" may not come
+        _ = semaphore.wait(timeout: .now() + .seconds(40))
+        return assetInfo
+    }
+    
+    func compactInfoAboutImageAsset(asset: PHAsset) -> AssetInfo {
+        log.debug("LocalMediaStorage compactInfoAboutImageAsset")
+        
+        var assetInfo = AssetInfo(libraryAsset: asset)
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let operation = GetCompactImageOperation(photoManager: self.photoManger, asset: asset) { data, string, orientation, dict in
+            self.dispatchQueue.async {
+                let failCompletion = {
+                    assetInfo.isValid = false
+                    semaphore.signal()
+                    return
+                }
+                
+                guard let dict = dict else {
+                    assetInfo.isValid = false
+                    semaphore.signal()
+                    return
+                }
+                
+                if let isDegraded = dict[PHImageResultIsDegradedKey] as? Bool, isDegraded  {
+                    semaphore.signal()
+                    return
+                }
+                
+                if let error = dict[PHImageErrorKey] as? NSError {
+                    print(error.localizedDescription)
+                    failCompletion()
+                }
+                
+                if let inCloud = dict[PHImageResultIsInCloudKey] as? Bool, inCloud {
+                    print("LOCAL_ITEMS: \(asset.localIdentifier) is in iCloud")
+                    failCompletion()
+                }
+                
+                if let dataValue = data {
+                    if let name = asset.originalFilename {
+                        assetInfo.name = name
+                    }
+                    if let unwrapedUrl = dict["PHImageFileURLKey"] as? URL {
+                        assetInfo.url = unwrapedUrl
+                    }
+                    assetInfo.size = Int64(dataValue.count)
+                    semaphore.signal()
+                } else {
+                    failCompletion()
+                }
+            }
+        }
+        getDetailQueue.addOperation(operation)
+        semaphore.wait()
+        return assetInfo
+    }
+    
+    
     func fullInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
         log.debug("LocalMediaStorage fullInfoAboutVideoAsset")
         
@@ -610,7 +760,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                         if let size = try FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as? NSNumber {
                             assetInfo.size = size.int64Value
                         }
-
+                        
                         if let name = asset.originalFilename {
                             assetInfo.name = name
                         }
@@ -799,6 +949,65 @@ class GetOriginalVideoOperation: Operation {
         options.version = .original
         options.deliveryMode = .highQualityFormat
 
+        photoManager.requestAVAsset(forVideo: asset, options: options, resultHandler: callback)
+    }
+}
+
+class GetCompactImageOperation: Operation {
+    
+    let photoManager: PHImageManager
+    
+    let callback: PhotoManagerOriginalCallBack
+    
+    let asset: PHAsset
+    
+    init(photoManager: PHImageManager, asset: PHAsset, callback: @escaping PhotoManagerOriginalCallBack) {
+        
+        self.photoManager = photoManager
+        self.callback = callback
+        self.asset = asset
+        super.init()
+    }
+    
+    override func main() {
+        
+        if isCancelled {
+            return
+        }
+        
+        let options = PHImageRequestOptions()
+        options.version = .current
+        options.deliveryMode = .fastFormat
+        
+        photoManager.requestImageData(for: asset, options: options, resultHandler: callback)
+    }
+}
+
+class GetCompactVideoOperation: Operation {
+    
+    let photoManager: PHImageManager
+    
+    let callback: PhotoManagerOriginalVideoCallBack
+    
+    let asset: PHAsset
+    
+    init(photoManager: PHImageManager, asset: PHAsset, callback: @escaping PhotoManagerOriginalVideoCallBack) {
+        
+        self.photoManager = photoManager
+        self.callback = callback
+        self.asset = asset
+        super.init()
+    }
+    
+    override func main() {
+        
+        if isCancelled {
+            return
+        }
+        let options = PHVideoRequestOptions()
+        options.version = .original
+        options.deliveryMode = .fastFormat
+        
         photoManager.requestAVAsset(forVideo: asset, options: options, resultHandler: callback)
     }
 }
