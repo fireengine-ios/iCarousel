@@ -51,7 +51,7 @@ class HomePageInteractor: HomePageInteractorInput {
         AccountService().quotaInfo(success: { [weak self] response in
             if let qresponce = response as? QuotaInfoResponse {
                 guard let quotaBytes = qresponce.bytes, let usedBytes = qresponce.bytesUsed else { return }
-                let usagePercent = 1.0 //Float(usedBytes) / Float(quotaBytes)
+                let usagePercent = Float(usedBytes) / Float(quotaBytes)
                 var viewForPresent: UIViewController? = nil
                 
                 if isFirstTime {
