@@ -14,7 +14,7 @@ fileprivate protocol PageSortingPredicates {
     func getSortingPredicateFirstPage(sortType: SortedRules, lastItem: Item) -> NSPredicate
 }
 
-class PageCompounder {
+final class PageCompounder {
     
     private var notAllowedMD5s = Set<String>()
     private var notAllowedLocalIDs = Set<String>()
@@ -304,7 +304,7 @@ class PageCompounder {
     
     private func getFilteringPredicate(md5s: Set<String>, localIDs: Set<String>, sizeLimit: UInt64 = NumericConstants.fourGigabytes) -> NSCompoundPredicate {
         let md5Predicate = NSPredicate(format:"NOT (md5Value IN %@)", md5s)
-        let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@) AND fileSizeValue < \(sizeLimit)", localIDs)
+        let predicate = NSPredicate(format: "trimmedLocalFileID != Nil AND NOT (trimmedLocalFileID IN %@) AND fileSizeValue < \(sizeLimit)", localIDs)
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, md5Predicate])
     }
     

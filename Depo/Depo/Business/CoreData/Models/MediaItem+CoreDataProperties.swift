@@ -24,6 +24,7 @@ extension MediaItem {
     @NSManaged public var idValue: Int64
     @NSManaged public var isLocalItemValue: Bool
     @NSManaged public var lastModifiDateValue: NSDate?
+    @NSManaged public var trimmedLocalFileID: String?
     @NSManaged public var localFileID: String?
     @NSManaged public var md5Value: String?
     @NSManaged public var monthValue: String?
@@ -32,7 +33,6 @@ extension MediaItem {
     @NSManaged public var parent: String?
     @NSManaged public var syncStatusValue: Int16
     @NSManaged public var urlToFileValue: String?
-    @NSManaged public var uuidValue: String?
     @NSManaged public var albums: NSOrderedSet?
     @NSManaged public var metadata: MediaItemsMetaData?
     @NSManaged public var isFolder: Bool
