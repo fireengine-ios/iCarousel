@@ -77,7 +77,7 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
             cell.textDelegate = self
             
             #if DEBUG
-                cell.textInputField.text = "qwerty@my.com"
+                cell.textInputField.text = "5322104481"
             #endif
 
             return cell
@@ -90,7 +90,7 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
             cell.textInput.tag = 33
             cell.textDelegate = self
             #if DEBUG
-                cell.textInput.text = "qwerty"
+                cell.textInput.text = "135246"
             #endif
             return cell
         }
