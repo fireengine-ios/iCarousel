@@ -41,7 +41,9 @@ final class PageCompounder {
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
                                                     in: requestContext)
-        request.fetchLimit = pageSize
+
+            request.fetchLimit = pageSize
+
         
         request.predicate = compoundedPredicate
         
@@ -55,6 +57,7 @@ final class PageCompounder {
         var tempoArray = pageItems
         
         let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
+        
         tempoArray.append(contentsOf: wrapedLocals)
         tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
         
@@ -115,8 +118,10 @@ final class PageCompounder {
         return items.filter{
             if !$0.isLocalItem {
                 return ($0.metaData?.takenDate != nil)
+            } else {
+                return true
             }
-            return $0.metaData != nil
+//            return $0.metaData != nil
         }.last
         
     }
@@ -368,27 +373,27 @@ extension PageCompounder: PageSortingPredicates {
     func getSortingPredicateMidPage(sortType: SortedRules, firstItem: Item,  lastItem: Item) -> NSPredicate {
         switch sortType {
         case .timeUp, .timeUpWithoutSection:
-            return NSPredicate(format: "creationDateValue > %@ AND creationDateValue < %@",
+            return NSPredicate(format: "creationDateValue >= %@ AND creationDateValue <= %@",
                                (lastItem.creationDate ?? Date()) as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
         case .timeDown, .timeDownWithoutSection:
-            return NSPredicate(format: "creationDateValue < %@ AND creationDateValue > %@", (lastItem.creationDate ?? Date()) as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
+            return NSPredicate(format: "creationDateValue <= %@ AND creationDateValue >= %@", (lastItem.creationDate ?? Date()) as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
         case .lettersAZ, .albumlettersAZ:
-            return NSPredicate(format: "nameValue > %@ AND nameValue < %@",
+            return NSPredicate(format: "nameValue >= %@ AND nameValue <= %@",
                                lastItem.name ?? "", firstItem.name ?? "")
         case .lettersZA, .albumlettersZA:
-            return NSPredicate(format: "nameValue < %@ AND nameValue > %@",
+            return NSPredicate(format: "nameValue <= %@ AND nameValue >= %@",
                                lastItem.name ?? "", firstItem.name ?? "")
         case .sizeAZ:
-            return NSPredicate(format: "fileSizeValue > %ui AND fileSizeValue < %ui",
+            return NSPredicate(format: "fileSizeValue >= %ui AND fileSizeValue <= %ui",
                                lastItem.fileSize, firstItem.fileSize)
         case .sizeZA:
-            return NSPredicate(format: "fileSizeValue < %ui AND fileSizeValue > %ui",
+            return NSPredicate(format: "fileSizeValue <= %ui AND fileSizeValue >= %ui",
                                lastItem.fileSize, firstItem.fileSize)
         case .metaDataTimeUp:
-            return NSPredicate(format: "creationDateValue > %@ AND creationDateValue < %@",
+            return NSPredicate(format: "creationDateValue >= %@ AND creationDateValue <= %@",
                                lastItem.metaDate as NSDate, firstItem.metaDate as NSDate)
         case .metaDataTimeDown:
-            return NSPredicate(format: "creationDateValue < %@ AND creationDateValue > %@",
+            return NSPredicate(format: "creationDateValue <= %@ AND creationDateValue >= %@",
                                lastItem.metaDate as NSDate, firstItem.metaDate as NSDate)
         }
     }
@@ -396,42 +401,42 @@ extension PageCompounder: PageSortingPredicates {
     func getSortingPredicateLastPage(sortType: SortedRules, firstItem: Item) -> NSPredicate {
         switch sortType {
         case .timeUp, .timeUpWithoutSection:
-            return NSPredicate(format: "creationDateValue < %@", (firstItem.creationDate ?? Date()) as NSDate)
+            return NSPredicate(format: "creationDateValue <= %@", (firstItem.creationDate ?? Date()) as NSDate)
         case .timeDown, .timeDownWithoutSection:
-            return NSPredicate(format: "creationDateValue > %@", (firstItem.creationDate ?? Date()) as NSDate)
+            return NSPredicate(format: "creationDateValue >= %@", (firstItem.creationDate ?? Date()) as NSDate)
         case .lettersAZ, .albumlettersAZ:
-            return NSPredicate(format: "nameValue < %@", firstItem.name ?? "")
+            return NSPredicate(format: "nameValue <= %@", firstItem.name ?? "")
         case .lettersZA, .albumlettersZA:
-            return NSPredicate(format: "nameValue > %@", firstItem.name ?? "")
+            return NSPredicate(format: "nameValue >= %@", firstItem.name ?? "")
         case .sizeAZ:
-            return NSPredicate(format: "fileSizeValue < %ui", firstItem.fileSize)
+            return NSPredicate(format: "fileSizeValue <= %ui", firstItem.fileSize)
         case .sizeZA:
-            return NSPredicate(format: "fileSizeValue > %ui", firstItem.fileSize)
+            return NSPredicate(format: "fileSizeValue >= %ui", firstItem.fileSize)
         case .metaDataTimeUp:
-            return NSPredicate(format: "creationDateValue < %@", firstItem.metaDate as NSDate)
+            return NSPredicate(format: "creationDateValue <= %@", firstItem.metaDate as NSDate)
         case .metaDataTimeDown:
-            return NSPredicate(format: "creationDateValue > %@", firstItem.metaDate as NSDate)
+            return NSPredicate(format: "creationDateValue >= %@", firstItem.metaDate as NSDate)
         }
     }
     
     func getSortingPredicateFirstPage(sortType: SortedRules, lastItem: Item) -> NSPredicate {
         switch sortType {
         case .timeUp, .timeUpWithoutSection:
-            return NSPredicate(format: "creationDateValue > %@", (lastItem.creationDate ?? Date()) as NSDate)
+            return NSPredicate(format: "creationDateValue >= %@", (lastItem.creationDate ?? Date()) as NSDate)
         case .timeDown, .timeDownWithoutSection:
-            return NSPredicate(format: "creationDateValue < %@", (lastItem.creationDate ?? Date()) as NSDate)
+            return NSPredicate(format: "creationDateValue <= %@", (lastItem.creationDate ?? Date()) as NSDate)
         case .lettersAZ, .albumlettersAZ:
-            return NSPredicate(format: "nameValue > %@", lastItem.name ?? "")
+            return NSPredicate(format: "nameValue >= %@", lastItem.name ?? "")
         case .lettersZA, .albumlettersZA:
-            return NSPredicate(format: "nameValue < %@", lastItem.name ?? "")
+            return NSPredicate(format: "nameValue <= %@", lastItem.name ?? "")
         case .sizeAZ:
-            return NSPredicate(format: "fileSizeValue > %ui", lastItem.fileSize)
+            return NSPredicate(format: "fileSizeValue >= %ui", lastItem.fileSize)
         case .sizeZA:
-            return NSPredicate(format: "fileSizeValue < %ui", lastItem.fileSize)
+            return NSPredicate(format: "fileSizeValue <= %ui", lastItem.fileSize)
         case .metaDataTimeUp:
-            return NSPredicate(format: "creationDateValue > %@", lastItem.metaDate as NSDate)
+            return NSPredicate(format: "creationDateValue >= %@", lastItem.metaDate as NSDate)
         case .metaDataTimeDown:
-            return NSPredicate(format: "creationDateValue < %@", lastItem.metaDate as NSDate)
+            return NSPredicate(format: "creationDateValue <= %@", lastItem.metaDate as NSDate)
         }
     }
     
