@@ -212,7 +212,8 @@ class BaseRequestService {
                                                             UIApplication.shared.endBackgroundTask(backgroundTaskID)
             })
         } else {
-            debugPrint("something went WRONG!! ", param)
+            debugPrint("Upload: wrong parameters", param)
+            return nil
         }
         
         task?.resume()

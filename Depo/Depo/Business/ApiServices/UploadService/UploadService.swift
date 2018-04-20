@@ -808,12 +808,11 @@ final class UploadOperations: Operation {
                             customFail(error)
                         }
                 })
-            }
-            
-            
-            ///If upload service can't create upload request task for some reason
-            if self.requestObject == nil {
-                customFail(ErrorResponse.string(TextConstants.commonServiceError))
+                
+                ///If upload service can't create upload request task for some reason
+                if self.requestObject == nil {
+                    customFail(ErrorResponse.string(TextConstants.commonServiceError))
+                }
             }
             
             }, fail: customFail)

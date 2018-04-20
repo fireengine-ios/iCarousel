@@ -830,10 +830,11 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         var assetDuration : Double?
         
+        
         if let assetId = mediaItem.localFileID,
            let url = mediaItem.urlToFileValue {
-    
-            if let asset = LocalMediaStorage.default.assetsCache.assetBy(identifier: assetId),
+            
+            if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject,
                 let urlToFile = URL(string: url) {
                 let tmp = LocalMediaContent(asset: asset,
                                              urlToFile: urlToFile)

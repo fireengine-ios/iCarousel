@@ -96,7 +96,7 @@ extension CoreDataStack {
                     let assetsInfo = info.filter { $0.isValid }
                     assetsInfo.forEach { element in
                         autoreleasepool {
-                            let wrapedItem =  WrapData(info: element)
+                            let wrapedItem = WrapData(info: element)
                             _ = MediaItem(wrapData: wrapedItem, context: context)
                             
                             addedObjects.append(wrapedItem)
