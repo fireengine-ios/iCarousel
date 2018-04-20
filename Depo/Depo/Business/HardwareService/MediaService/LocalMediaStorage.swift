@@ -55,7 +55,7 @@ protocol LocalMediaStorageProtocol {
     
     func removeAssets(deleteAsset: [PHAsset], success: FileOperation?, fail: FailResponse?)
     
-    func copyAssetToDocument(asset: PHAsset) -> URL
+    func copyAssetToDocument(asset: PHAsset) -> URL?
     
     func fullInfoAboutAsset(asset: PHAsset) -> AssetInfo
     
@@ -482,7 +482,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     // MARK: Copy Assets
     
-    func copyAssetToDocument(asset: PHAsset) -> URL {
+    func copyAssetToDocument(asset: PHAsset) -> URL? {
         log.debug("LocalMediaStorage copyAssetToDocument")
         
         switch  asset.mediaType {
@@ -493,7 +493,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             return copyVideoAsset(asset: asset)
         
         default:
-            return LocalMediaStorage.defaultUrl
+            return nil
         }
     }
     
