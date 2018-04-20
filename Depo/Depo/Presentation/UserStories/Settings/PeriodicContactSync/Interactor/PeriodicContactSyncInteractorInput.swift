@@ -10,6 +10,6 @@ import Foundation
 
 protocol PeriodicContactSyncInteractorInput: class {
     func prepareCellModels()
-    func onSave(settings: AutoSyncSettings)
+    func onSave(settings: PeriodicContactsSyncSettings)
 }
 

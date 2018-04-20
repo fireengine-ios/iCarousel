@@ -11,8 +11,8 @@ import Foundation
 final class PeriodicContactSyncInteractor {
     weak var output: PeriodicContactSyncInteractorOutput!
     
-    private var dataStorage = AutoSyncDataStorage()
-    private let localMediaStorage = LocalMediaStorage.default
+//    private var dataStorage = AutoSyncDataStorage()
+//    private let localMediaStorage = LocalMediaStorage.default
 }
 
 // MARK: - PeriodicContactSyncInteractorInput
@@ -20,16 +20,16 @@ final class PeriodicContactSyncInteractor {
 extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
     
     func prepareCellModels() {
-        let settings = dataStorage.settings
-
-        DispatchQueue.main.async { [weak self] in
-            self?.output.prepaire(syncSettings: settings)
-        }
+//        let settings = dataStorage.settings
+//
+//        DispatchQueue.main.async { [weak self] in
+//            self?.output.prepaire(syncSettings: settings)
+//        }
     }
     
-    func onSave(settings: AutoSyncSettings) {
-        dataStorage.save(autoSyncSettings: settings)
-        SyncServiceManager.shared.update(syncSettings: settings)
+    func onSave(settings: PeriodicContactsSyncSettings) {
+//        dataStorage.save(autoSyncSettings: settings)
+//        SyncServiceManager.shared.update(syncSettings: settings)
     }
     
 }

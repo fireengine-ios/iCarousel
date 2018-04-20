@@ -9,8 +9,8 @@
 import UIKit
 
 protocol PeriodicContactSyncSettingsTableViewCellDelegate {
-    func didChangeTime(setting: AutoSyncSetting)
-    func onValueChanged(model: AutoSyncModel, cell: PeriodicContactSyncSettingsTableViewCell)    
+    func didChangeTime(setting: PeriodicContactsSyncSetting)
+    func onValueChanged(cell: PeriodicContactSyncSettingsTableViewCell)
 }
 
 class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
@@ -21,19 +21,19 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
     @IBOutlet private weak var optionsStackView: UIStackView!
     @IBOutlet private var optionSeparators: [UIView]!
     
-    private let options: [AutoSyncOption] = [.daily, .weekly, .monthly]
+    private let options: [PeriodicContactsSyncOption] = [.daily, .weekly, .monthly]
     
-    private var model: AutoSyncModel?
+    private var model: PeriodContactsSyncModel?
     
     private var isFromSettings: Bool = false
     
     var delegate: PeriodicContactSyncSettingsTableViewCellDelegate?
     
-    private var autoSyncSetting = AutoSyncSetting(syncItemType: .time, option: .daily) {
+    private var periodicContactSyncSetting = PeriodicContactsSyncSetting(option: .daily) {
         didSet {
-            if autoSyncSetting != oldValue {
+            if periodicContactSyncSetting != oldValue {
                 updateViews()
-                delegate?.didChangeTime(setting: autoSyncSetting)
+                delegate?.didChangeTime(setting: periodicContactSyncSetting)
             }
         }
     }
@@ -51,7 +51,7 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         updateViews()
     }
     
-    func setup(with model: AutoSyncModel, setting: AutoSyncSetting) {
+    func setup(with model: PeriodContactsSyncModel, setting: PeriodicContactsSyncSetting) {
         self.model = model
         switcher.isOn = model.isSelected
         
@@ -63,7 +63,7 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         }
         
         optionsStackView.isHidden = !model.isSelected
-        autoSyncSetting = setting
+        periodicContactSyncSetting = setting
     }
     
     func setColors(isFromSettings: Bool) {
@@ -82,7 +82,7 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
     
     private func updateViews() {
         for (option, view) in zip(options, optionsViews) {
-            view.setup(with: option, isSelected: autoSyncSetting.option == option)
+            view.setup(with: option, isSelected: periodicContactSyncSetting.option == option)
             view.delegate = self
             view.setColors(isFromSettings: isFromSettings)
         }
@@ -96,7 +96,7 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         }
         
         model.isSelected = switcher.isOn
-        delegate?.onValueChanged(model: model, cell: self)
+        delegate?.onValueChanged(cell: self)
         optionsStackView.isHidden = !switcher.isOn
     }
     
@@ -105,8 +105,8 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
 // MARK: - AutoSyncSettingsOptionViewDelegate
 
 extension PeriodicContactSyncSettingsTableViewCell: AutoSyncSettingsOptionViewDelegate {
-    func didSelect(option: AutoSyncOption) {
-        autoSyncSetting.option = option
+    func didSelect(option: PeriodicContactsSyncOption) {
+        periodicContactSyncSetting.option = option
         updateViews()
     }
 }

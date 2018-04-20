@@ -47,7 +47,7 @@ extension PeriodicContactSyncPresenter: PeriodicContactSyncInteractorOutput {
         UIApplication.showErrorAlert(message: error)
     }
     
-    func prepaire(syncSettings: AutoSyncSettings) {
+    func prepaire(syncSettings: PeriodicContactsSyncSettings) {
         completeAsyncOperationEnableScreen()
         dataSource.showCells(from: syncSettings)
     }

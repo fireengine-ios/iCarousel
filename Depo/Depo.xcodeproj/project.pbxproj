@@ -179,6 +179,10 @@
 		4AC68934202C5312003400D0 /* FaceImageAddNameInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC68932202C5312003400D0 /* FaceImageAddNameInteractorInput.swift */; };
 		4AC68936202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC68935202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift */; };
 		4AC68937202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC68935202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift */; };
+		4AD1A81A208A277200930112 /* PeriodicContactsSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD1A819208A277200930112 /* PeriodicContactsSyncSettingsModel.swift */; };
+		4AD1A81B208A277200930112 /* PeriodicContactsSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD1A819208A277200930112 /* PeriodicContactsSyncSettingsModel.swift */; };
+		4AD1A81E208A2F2100930112 /* PeriodContactsSyncModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD1A81D208A2F2100930112 /* PeriodContactsSyncModel.swift */; };
+		4AD1A81F208A2F2100930112 /* PeriodContactsSyncModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD1A81D208A2F2100930112 /* PeriodContactsSyncModel.swift */; };
 		4ADE0872202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0871202D90CE0095346F /* FaceImageAddNameRouterInput.swift */; };
 		4ADE0873202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0871202D90CE0095346F /* FaceImageAddNameRouterInput.swift */; };
 		4ADE087E202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE087D202DC7890095346F /* FaceImagePhotosModuleOutput.swift */; };
@@ -3698,6 +3702,8 @@
 		4AC6892F202C5153003400D0 /* FaceImageAddNameViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameViewOutput.swift; sourceTree = "<group>"; };
 		4AC68932202C5312003400D0 /* FaceImageAddNameInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameInteractorInput.swift; sourceTree = "<group>"; };
 		4AC68935202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameInteractrorOutput.swift; sourceTree = "<group>"; };
+		4AD1A819208A277200930112 /* PeriodicContactsSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactsSyncSettingsModel.swift; sourceTree = "<group>"; };
+		4AD1A81D208A2F2100930112 /* PeriodContactsSyncModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodContactsSyncModel.swift; sourceTree = "<group>"; };
 		4ADE0871202D90CE0095346F /* FaceImageAddNameRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameRouterInput.swift; sourceTree = "<group>"; };
 		4ADE087D202DC7890095346F /* FaceImagePhotosModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosModuleOutput.swift; sourceTree = "<group>"; };
 		4ADE0880202DC8370095346F /* FaceImageItemsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsModuleOutput.swift; sourceTree = "<group>"; };
@@ -6371,6 +6377,7 @@
 		4A0AC133208736BA00032CC7 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
+				4AD1A81C208A2F0A00930112 /* Enteties */,
 				4A0AC1402087372E00032CC7 /* PeriodicContactSyncConfigurator.swift */,
 				4A0AC1432087374300032CC7 /* PeriodicContactSyncInitializer.swift */,
 			);
@@ -6562,6 +6569,14 @@
 				4A9F8E5220875A4300622A6C /* PeriodicContactSyncSettingsTableViewCell.xib */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		4AD1A81C208A2F0A00930112 /* Enteties */ = {
+			isa = PBXGroup;
+			children = (
+				4AD1A81D208A2F2100930112 /* PeriodContactsSyncModel.swift */,
+			);
+			path = Enteties;
 			sourceTree = "<group>";
 		};
 		4B3744A5DF696D9B6DBB817D /* Interactor */ = {
@@ -7429,6 +7444,7 @@
 				781839851FE9140E0046D73C /* FileForDownload.swift */,
 				CED4B02B201858D500D06CA9 /* HomeCardResponse.swift */,
 				B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */,
+				4AD1A819208A277200930112 /* PeriodicContactsSyncSettingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -14226,6 +14242,7 @@
 				8C0B91AA20170EB400A5BA81 /* ManageContactsModuleInput.swift in Sources */,
 				8C0E8E5E1FDEBDFF00789C91 /* LocalAlbumConfigurator.swift in Sources */,
 				4A8CC318201A025C00C040C4 /* FaceImageIneractor.swift in Sources */,
+				4AD1A81B208A277200930112 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				8C0B919720170E4C00A5BA81 /* DuplicatedContactsViewController.swift in Sources */,
 				4A0AC13F2087371A00032CC7 /* PeriodicContactSyncInteractor.swift in Sources */,
 				8C06AC0920066641003D8E05 /* TurkcellSecurityConfigurator.swift in Sources */,
@@ -14386,6 +14403,7 @@
 				8C0E8F051FDEBDFF00789C91 /* SyncContactsViewInput.swift in Sources */,
 				FA475ACD203EAFB9008D79C2 /* PushPopAnimator.swift in Sources */,
 				8C0E8F061FDEBDFF00789C91 /* SyncContactsViewOutput.swift in Sources */,
+				4AD1A81F208A2F2100930112 /* PeriodContactsSyncModel.swift in Sources */,
 				986B2066207C9C4100E04B96 /* TextEnterDataSource.swift in Sources */,
 				8C0E8F071FDEBDFF00789C91 /* SyncContactsViewController.swift in Sources */,
 				CE23A0F8205FF5320048267D /* EmailEnterCustomizator.swift in Sources */,
@@ -15454,6 +15472,7 @@
 				7CDABD0C1F1E3A6300C8CC16 /* UserProfileRouter.swift in Sources */,
 				7C0DBC311F2F2CE000F90590 /* SelectionImageView.swift in Sources */,
 				CEBB2DD81F7678DA00D725F0 /* Int64+Bytes.swift in Sources */,
+				4AD1A81E208A2F2100930112 /* PeriodContactsSyncModel.swift in Sources */,
 				8C6EF87D1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				CEE1D1FF1F714F350008F4CF /* MediaItemOperations.swift in Sources */,
 				8CFF86971F0FA84A00520D18 /* ContactsSyncService.swift in Sources */,
@@ -15620,6 +15639,7 @@
 				7CEEC1BB1F33251800BD433F /* CreateStoryPhotosOrderConfigurator.swift in Sources */,
 				78D9BA492007E82800F2233F /* DuplicatedContactsViewController.swift in Sources */,
 				7C4988171F3320420039C5F2 /* CreateStoryPhotosOrderInteractorInput.swift in Sources */,
+				4AD1A81A208A277200930112 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				4A56D5BE202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */,
 				84F590D00E5D8FE7C0F21A7E /* UploadFilesSelectionViewInput.swift in Sources */,
 				D4F104D678F058E4AF0F2045 /* UploadFilesSelectionViewOutput.swift in Sources */,
