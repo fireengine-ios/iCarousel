@@ -402,14 +402,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             let context = CoreDataStack.default.backgroundContext
             context.perform {
                 let mediaItem: MediaItem
-                if let existingMediaItem = CoreDataStack.default.mediaItemByUUIDs(uuidList: [item.uuid]).first {
+                if let existingMediaItem = CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getLocalID()]).first {
                     mediaItem = existingMediaItem
                 } else {
                     mediaItem = MediaItem(wrapData: wrapData, context: context)
                 }
                 
-                
                 mediaItem.localFileID = assetIdentifier
+                mediaItem.trimmedLocalFileID = assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier
                 CoreDataStack.default.updateSavedItems(savedItems: [mediaItem], remoteItems: [item], context: context)
             }
             

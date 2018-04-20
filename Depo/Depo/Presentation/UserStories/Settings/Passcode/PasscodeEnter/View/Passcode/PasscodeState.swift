@@ -89,8 +89,8 @@ class CreatePasscodeState: SetNewPasscodeState {
 class ConfirmNewPasscodeState: PasscodeState {
     let title = TextConstants.passcodeConfirm
     let isBiometricsAllowed = false
-    
     let passcode: Passcode
+    
     init(passcode: Passcode) {
         self.passcode = passcode
     }
@@ -116,11 +116,11 @@ class ConfirmCreateingNewPasscodeState: ConfirmNewPasscodeState {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     #endif
     
-    
     override func finish(with passcode: Passcode, manager: PasscodeManager) {
         if self.passcode == passcode {
             manager.storage.save(passcode: passcode)
             manager.view.passcodeOutput.animateError(with: TextConstants.passcodeSet)
+            
             #if MAIN_APP
             analyticsService.track(event: .setPasscode)
             #endif

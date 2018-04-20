@@ -70,12 +70,10 @@ class Upload: UploadRequestParametrs {
         self.isFavorite = isFavorite
 
         if item.isLocalItem {
-            let localID = item.asset?.localIdentifier ?? ""
-            self.tmpUUId = "\(localID)~\(UUID().uuidString)"
+            self.tmpUUId = "\(item.getLocalID())~\(UUID().uuidString)"
         } else {
             self.tmpUUId = UUID().uuidString
         }
-
     }
     
     var requestParametrs: Any {
@@ -84,19 +82,18 @@ class Upload: UploadRequestParametrs {
     var header: RequestHeaderParametrs {
         var header = RequestHeaders.authification()
         
-        header = header + [ HeaderConstant.ContentType : item.uploadContentType,
+        header = header + [
+            HeaderConstant.ContentType           : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
 //            HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
-            HeaderConstant.XObjectMetaSpecialFolder:uploadTo.rawValue,
-            HeaderConstant.Expect                : "100-continue"
-//            HeaderConstant.Etag                   : md5
-            //                  HeaderConstant.ContentLength         : contentLenght,
-            //                  HeaderConstant.XObjectMetaAlbumLabel  : "",
-            //                  HeaderConstant.XObjectMetaFolderLabel : "",
-            
+            HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
+            HeaderConstant.Expect                : "100-continue",
+            HeaderConstant.XObjectMetaDeviceType : Device.isIpad ? "IPAD" : "IPHONE",
+            HeaderConstant.XObjectMetaIosMetadataHash : item.asset?.localIdentifier ?? "",
+            HeaderConstant.ContentLength         : "\(item.fileSize)"
         ]
         return header
     }
