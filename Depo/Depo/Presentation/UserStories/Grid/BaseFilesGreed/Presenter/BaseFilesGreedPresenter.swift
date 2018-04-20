@@ -12,7 +12,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var dataSource: BaseDataSourceForCollectionView
     
-    weak var view: BaseFilesGreedViewInput!
+    var view: BaseFilesGreedViewInput!
     
     weak var moduleOutput: BaseFilesGreedModuleOutput?
     
@@ -57,6 +57,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func viewIsReady(collectionView: UICollectionView) {
         log.debug("BaseFilesGreedPresenter viewIsReady")
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.updateThreeDots(_:)),
+                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots),
+                                               object: nil)
 
         interactor.viewIsReady()
         if let unwrapedFilters = interactor.originalFilesTypeFilter {
@@ -294,6 +299,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func isSelectionState() -> Bool {
         return dataSource.isSelectionStateActive
+    }
+    
+    @objc private func updateThreeDots(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.updateThreeDotsButton()
+        }
     }
     
     //MARK : BasePresenter
