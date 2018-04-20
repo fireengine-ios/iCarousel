@@ -194,7 +194,14 @@ final class NextPageOperation: Operation {
             self.semaphore.signal()
             
         }, fail: { [weak self] errorResponce in
-            errorResponce.showInternetErrorGlobal()
+            
+            /// temp error handling
+            if UIApplication.topController() is FloatingContainerVC {
+                UIApplication.showOnTabBar(errorMessage: errorResponce.description)
+            } else {
+                errorResponce.showInternetErrorGlobal()
+            }
+            
             self?.fail?()
             self?.semaphore.signal()
         })

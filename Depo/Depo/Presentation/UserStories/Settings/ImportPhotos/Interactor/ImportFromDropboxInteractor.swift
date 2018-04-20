@@ -38,7 +38,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
                 case .success(let token):
                     self?.output?.loginSuccessCallback(token: token)
                 case .cancel:
-                    self?.output?.loginFailureCallback(errorMessage: "Canceled")
+                    self?.output?.loginCanceled()
                 case .failed(let errorString):
                     self?.output?.loginFailureCallback(errorMessage: errorString)
                 }
@@ -69,7 +69,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
                 case .failed(let error):
                     if let errorResponse = error as? ErrorResponse,
                         case ErrorResponse.error(let error) = errorResponse,
-                        error is URLError
+                        error.isNetworkError 
                     {
                         self?.output?.failedWithInternetError(errorMessage: error.description)
                     }

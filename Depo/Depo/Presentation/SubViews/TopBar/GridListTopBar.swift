@@ -14,7 +14,7 @@ protocol GridListTopBarDelegate: class {
     
 }
 
-class GridListTopBar: UIViewController {
+class GridListTopBar: ViewController {
     
     @IBOutlet fileprivate weak var sortByButton: UIButton!
     

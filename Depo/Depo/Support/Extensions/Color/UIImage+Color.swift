@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UIImage {
     convenience init?(color: UIColor) {

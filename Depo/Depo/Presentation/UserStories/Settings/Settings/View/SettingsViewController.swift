@@ -15,6 +15,8 @@ protocol SettingsDelegate: class {
     
     func goToAutoUpload()
     
+    func goToPeriodicContactSync()
+    
     func goToFaceImage()
     
     func goToHelpAndSupport()
@@ -183,7 +185,13 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
                 } else {
                     output.goToAutoApload()
                 }
-            case 3: // face image
+            case 3: // periodic contact sync
+                if (settingsDelegate != nil) {
+                    settingsDelegate?.goToPeriodicContactSync()
+                } else {
+                    output.goToPeriodicContactSync()
+                }
+            case 4: // face image
                 if (settingsDelegate != nil) {
                     settingsDelegate?.goToFaceImage()
                 } else {
@@ -290,7 +298,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     
     func profileWontChangeWith(error: Error) {
         let vc = PopUpController.with(title: TextConstants.errorAlert,
-                                      message: error.localizedDescription,
+                                      message: error.description,
                                       image: .error,
                                       buttonTitle: TextConstants.ok)
         present(vc, animated: true, completion: nil)

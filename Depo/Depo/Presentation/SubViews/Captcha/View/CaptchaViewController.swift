@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CaptchaViewController: UIViewController {
+final class CaptchaViewController: ViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var captchaPlaceholderLabel: UILabel!
     @IBOutlet weak var imageBackground: UIView!

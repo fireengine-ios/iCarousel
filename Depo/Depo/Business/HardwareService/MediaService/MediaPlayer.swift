@@ -24,18 +24,19 @@ final class MediaPlayer: NSObject {
             currentMetaData = currentItem?.metaData
         }
     }
+    
+    var currentArtwork: MPMediaItemArtwork?
+    
     private var currentMetaData: BaseMetaData? {
         didSet {
             currentMusicName = currentMetaData?.title ?? currentItem?.name ?? " "
             currentArtist = currentMetaData?.artist ?? " "
+            currentArtwork = nil
             
             SDWebImageManager.shared().loadImage(with: currentMetaData?.mediumUrl, options: [], progress: nil) { [weak self] image, data, error, type, result, url in
                 
                 if url == self?.currentMetaData?.mediumUrl, let image = image {
-                    let artwork = MPMediaItemArtwork(image: image)
-                    MPNowPlayingInfoCenter.default().nowPlayingInfo?[MPMediaItemPropertyArtwork] = artwork
-                } else {
-                    MPNowPlayingInfoCenter.default().nowPlayingInfo?[MPMediaItemPropertyArtwork] = nil
+                    self?.currentArtwork = MPMediaItemArtwork(image: image)
                 }
             }
         }
@@ -50,6 +51,7 @@ final class MediaPlayer: NSObject {
     private var player: AVPlayer!
     private var playerTimeObserver: Any?
     private let playDidEndNotification = Notification.Name.AVPlayerItemDidPlayToEndTime
+    private var enabledBackground = false
     
     // MARK: - Setup
     
@@ -58,14 +60,16 @@ final class MediaPlayer: NSObject {
         
         setup(player: AVPlayer())
         setupFinishedPlayingObserver()
-        enableBackground()
     }
     
     /// Add Capabilities - Background modes - Audio...
     private func enableBackground() {
-        try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-        try? AVAudioSession.sharedInstance().setActive(true)
-        UIApplication.shared.beginReceivingRemoteControlEvents()
+        if !enabledBackground {
+            try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try? AVAudioSession.sharedInstance().setActive(true)
+            UIApplication.shared.beginReceivingRemoteControlEvents()
+            enabledBackground = true
+        }
     }
     
     private func guardAudioSession() {
@@ -262,7 +266,7 @@ final class MediaPlayer: NSObject {
     
     func play(list: [Item], startAt index: Int) {
         self.list = list
-        let newUrls = list.flatMap { $0.urlToFile }
+        let newUrls = list.compactMap { $0.urlToFile }
         play(urls: newUrls, startAt: index)
     }
     
@@ -300,6 +304,7 @@ final class MediaPlayer: NSObject {
         }
         
         resetTime()
+        enableBackground()
     }
     
     private func validateItem(at index: Int) {
@@ -503,12 +508,18 @@ final class MediaPlayer: NSObject {
     }
     
     func updateNowPlayingInfoCenter(with time: Float) {
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+        var nowPlayingInfo: [String: Any] = [
             MPMediaItemPropertyTitle: currentMusicName,
             MPMediaItemPropertyArtist: currentArtist,
             MPMediaItemPropertyPlaybackDuration: duration as CFNumber,
             MPNowPlayingInfoPropertyElapsedPlaybackTime: time as CFNumber
         ]
+        
+        if let artwork = currentArtwork {
+            nowPlayingInfo[MPMediaItemPropertyArtwork] = artwork 
+        }
+        
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
 }
 

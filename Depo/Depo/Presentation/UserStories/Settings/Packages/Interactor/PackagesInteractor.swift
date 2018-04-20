@@ -255,7 +255,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                     if case ErrorResponse.httpCode(500) = errorResponse {
                         self?.output.failedPromocode(with: TextConstants.promocodeError)
                     } else {
-                        self?.output.failedPromocode(with: errorResponse.localizedDescription)
+                        self?.output.failedPromocode(with: errorResponse.description)
                     }
                 }
         })
@@ -311,7 +311,13 @@ extension PackagesInteractor: PackagesInteractorInput {
             }
             
             let currency = getCurrency(for: AccountType.all)
-            let priceString = String(format: TextConstants.offersPrice, currency, offer.rawPrice)
+            
+            let priceString: String
+            if let price = offer.price {
+                priceString = String(format: TextConstants.offersLocalizedPrice, price)
+            } else {
+                priceString = String(format: TextConstants.offersPrice, currency, offer.rawPrice)
+            }
             
             return subscriptionPlanWith(name: name, priceString: priceString, type: .default, model: offer)
         }

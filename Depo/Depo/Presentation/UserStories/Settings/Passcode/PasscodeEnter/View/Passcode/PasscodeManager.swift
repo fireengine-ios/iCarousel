@@ -13,7 +13,7 @@ protocol PasscodeManager: class {
     var view: PasscodeView { get }
     var storage: PasscodeStorage { get }
     func changeState(to state: PasscodeState)
-    weak var delegate: PasscodeManagerDelegate? { get set }
+    var delegate: PasscodeManagerDelegate? { get set }
     func authenticateWithBiometrics()
     var maximumInccorectPasscodeAttempts: Int { get }
     var finishBiometrics: Bool { get set }
@@ -86,8 +86,8 @@ extension PasscodeManagerImp: PasscodeManager {
         biometricsManager.authenticate(reason: state.title) { success in
             DispatchQueue.main.async {
                 if success {
+                    self.view.passcodeInput.animatePasscodeFullEnter()
                     let passcode = self.storage.passcode
-                    self.view.passcodeInput.passcode = passcode
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         self.state.finish(with: passcode, manager: self)
                     }
@@ -103,7 +103,12 @@ extension PasscodeManagerImp: PasscodeManager {
     }
     
     private func canShowBiometrics() -> Bool {
-        if UIApplication.shared.applicationState != .active || biometricsOnScreen || finishBiometrics {
+        #if MAIN_APP
+        if UIApplication.shared.applicationState != .active {
+            return false
+        }
+        #endif
+        if biometricsOnScreen || finishBiometrics {
             return false
         }
         return true

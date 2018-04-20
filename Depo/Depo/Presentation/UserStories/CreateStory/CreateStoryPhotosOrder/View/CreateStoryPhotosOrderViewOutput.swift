@@ -7,16 +7,7 @@
 //
 
 protocol CreateStoryPhotosOrderViewOutput {
-
-    /**
-        @author Oleg
-        Notify presenter that view is ready
-    */
-
     func viewIsReady()
-    
     func onNextButton(array: [Item])
-    
     func onMusicSelection()
-    
 }

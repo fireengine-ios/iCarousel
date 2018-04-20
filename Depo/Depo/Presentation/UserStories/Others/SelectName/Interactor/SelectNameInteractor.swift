@@ -94,7 +94,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
             }
         }) { error in
             DispatchQueue.main.async {[weak self] in
-                self?.output.operationFaildWithError(errorMessage: error.localizedDescription)
+                self?.output.operationFaildWithError(errorMessage: error.description)
             }
         }
     }
@@ -118,7 +118,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
                 }
             }, fail: {[weak self] error in
                 DispatchQueue.main.async {
-                    self?.output.operationFaildWithError(errorMessage: error.localizedDescription)
+                    self?.output.operationFaildWithError(errorMessage: error.description)
                 }
         })
     }

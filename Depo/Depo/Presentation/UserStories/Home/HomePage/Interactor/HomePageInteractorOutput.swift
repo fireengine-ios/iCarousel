@@ -12,4 +12,6 @@ protocol HomePageInteractorOutput: class {
     
     func stopRefresh()
     
+    func needPresentPopUp(popUpView: UIViewController)
+    
 }

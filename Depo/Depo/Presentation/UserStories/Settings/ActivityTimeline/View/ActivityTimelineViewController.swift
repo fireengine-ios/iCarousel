@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivityTimelineViewController: UIViewController {
+class ActivityTimelineViewController: ViewController {
     var output: ActivityTimelineViewOutput!
     
     @IBOutlet weak var tableView: UITableView!

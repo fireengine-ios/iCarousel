@@ -20,7 +20,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
             }
             }, fail: { [weak self] fail in
                 DispatchQueue.main.async {
-                    self?.output.fail(text: fail.localizedDescription)
+                    self?.output.fail(text: fail.description)
                 }
         })
         
@@ -28,7 +28,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
     
     func getUserInfoString(with languageName: String) {
         let group = DispatchGroup()
-        let queue = DispatchQueue(label: "GetUserInfo")
+        let queue = DispatchQueue(label: DispatchQueueLabels.getUserInfo)
         group.enter()
         group.enter()
         group.enter()

@@ -49,7 +49,8 @@ final class SavingAttemptsCounterByUnigueUserID {
 }
 
 extension SavingAttemptsCounterByUnigueUserID {
-    static let emptyEmailCounter = SavingAttemptsCounterByUnigueUserID(
-        limit: NumericConstants.emptyEmailUserCloseLimit,
-        userDefaultsKey: Keys.emailSavingAttemptsCounter)
+    static var emptyEmailCounter: SavingAttemptsCounterByUnigueUserID {
+        return SavingAttemptsCounterByUnigueUserID(limit: NumericConstants.emptyEmailUserCloseLimit,
+                                                   userDefaultsKey: Keys.emailSavingAttemptsCounter)
+    }
 }

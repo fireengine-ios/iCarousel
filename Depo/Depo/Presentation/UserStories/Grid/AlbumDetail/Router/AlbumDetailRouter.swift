@@ -31,7 +31,7 @@ class AlbumDetailRouter: BaseFilesGreedRouter, AlbumDetailRouterInput {
             default:
                 let albumUUID = RouterVC().getParentUUID()
                 let controller = router.filesDetailAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID)
-                let nController = UINavigationController(rootViewController: controller)
+                let nController = NavigationController(rootViewController: controller)
                 RouterVC().presentViewController(controller: nController)
         }
     }

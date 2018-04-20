@@ -52,7 +52,7 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
     
     
     private var expandHeight: CGFloat {
-        return isFullHeight ? 177.5 : 0.0
+        return isFullHeight ? 167.5 : 0.0
     }
     
     
@@ -105,8 +105,8 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
             view.setup(with: option, isSelected: autoSyncSetting.option == option)
             view.delegate = self
         }
-        expandButton.setTitle(autoSyncSetting.syncItemType.text(), for: .normal)
-        optionLabel.text = isFullHeight ? TextConstants.autoSyncSettingsSelect : autoSyncSetting.option.text()
+        expandButton.setTitle(autoSyncSetting.syncItemType.localizedText, for: .normal)
+        optionLabel.text = isFullHeight ? TextConstants.autoSyncSettingsSelect : autoSyncSetting.option.localizedText
         optionsStackView.isHidden = !isFullHeight
         expandHeightConstraint.constant = expandHeight
     }

@@ -69,14 +69,41 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             ItemOperationManager.default.startUploadFilesToAlbum(files: uploadItems)
         }
         
+        if let errorMessage = verify(items: uploadItems) {
+            uploadOutput?.addToUploadFailedWith(errorMessage: errorMessage)
+            return
+        }
+        
         UploadService.default.uploadFileList(items: uploadItems, uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
             log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList success")
 
-            self?.output.asyncOperationSucces()
-        }) { [weak self] errorResponse in
+            DispatchQueue.main.async {
+                self?.uploadOutput?.addToUploadSuccessed()
+            }
+        }, fail: { [weak self] errorResponse in
             log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList fail")
-
-            self?.output.asyncOperationSucces()
+            DispatchQueue.main.async {
+                self?.uploadOutput?.addToUploadFailedWith(errorMessage: errorResponse.description)
+            }
+        })
+    }
+    
+    fileprivate func verify(items: [WrapData]) -> String? {
+        guard !items.isEmpty else {
+            return TextConstants.uploadFromLifeBoxNoSelectedPhotosError
         }
+        
+        var filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes }
+        guard !filteredItems.isEmpty else {
+            return TextConstants.syncFourGbVideo
+        }
+        
+        let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes() ?? 0
+        filteredItems = filteredItems.filter { $0.fileSize < freeDiskSpaceInBytes }
+        guard !filteredItems.isEmpty else {
+            return TextConstants.syncNotEnoughMemory
+        }
+        
+        return nil
     }
 }

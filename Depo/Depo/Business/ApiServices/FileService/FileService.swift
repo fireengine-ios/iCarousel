@@ -238,7 +238,7 @@ typealias FileOperation = () -> Void
 class FileService: BaseRequestService {
     
     let downloadOperation = OperationQueue()
-    private let dispatchQueue = DispatchQueue(label: "Download Queue")
+    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.download)
     
     override init() {
         super.init()
@@ -377,10 +377,10 @@ class FileService: BaseRequestService {
                         default     : break
                     }
                     
-                    if let item = downloadParam.item, let mediaItem = CoreDataStack.default.mediaItemByUUIDs(uuidList: [item.uuid]).first {
+                    if let item = downloadParam.item, let mediaItem = CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getLocalID()]).first {
                         CoreDataStack.default.updateSavedItems(savedItems: [mediaItem],
                                                                remoteItems: [item],
-                                                               context: CoreDataStack.default.mainContext)
+                                                               context: CoreDataStack.default.newChildBackgroundContext)
                         removeDestinationFile()
                         success?()
                     } else {

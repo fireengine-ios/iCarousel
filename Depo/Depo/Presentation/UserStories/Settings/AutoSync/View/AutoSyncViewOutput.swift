@@ -11,5 +11,5 @@ protocol AutoSyncViewOutput {
     func skipForNowPressed(onSyncDisabled: @escaping VoidHandler)
     func change(settings: AutoSyncSettings)
     func save(settings: AutoSyncSettings)
-    func enableAutoSync()
+    func checkPermissions()
 }

@@ -14,7 +14,7 @@ import Foundation
 
 /// A thread-safe array.
 public class SynchronizedArray<Element> {
-    fileprivate let queue = DispatchQueue(label: "com.lifebox.SynchronizedArray", attributes: .concurrent)
+    fileprivate let queue = DispatchQueue(label: DispatchQueueLabels.syncronizedArray, attributes: .concurrent)
     fileprivate var array = [Element]()
 }
 

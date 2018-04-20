@@ -29,7 +29,7 @@ class MusicBar: UIView {
         delegate?.musicBarZoomWillOpen()
         
         let vc = VisualMusicPlayerModuleInitializer.initializeVisualMusicPlayerController(with: "VisualMusicPlayerViewController")
-        let navigation = UINavigationController(rootViewController: vc)
+        let navigation = NavigationController(rootViewController: vc)
         navigation.navigationBar.isHidden = false
         RouterVC().presentViewController(controller: navigation)
     }

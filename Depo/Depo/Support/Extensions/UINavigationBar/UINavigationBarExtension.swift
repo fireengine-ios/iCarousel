@@ -6,17 +6,13 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UIViewController {
     
     func rootNavController(vizible: Bool) {
         let rootNavController = RouterVC().navigationController
         rootNavController?.setNavigationBarHidden(!vizible, animated: false)
-    }
-    
-    private var navBar: UINavigationBar? {
-       return navigationController?.navigationBar
     }
     
     private var customNavBarView: CustomNavBarView? {
@@ -36,12 +32,13 @@ extension UIViewController {
         return nil
     }
     
-    private var tagHomeView: Int {
-        return 45634
-    }
-    
-    private var tagTitleView: Int {
-        return 787878
+    var statusBarColor: UIColor? {
+        get {
+            return UIApplication.shared.statusBarView?.backgroundColor
+        }
+        set {
+            UIApplication.shared.statusBarView?.backgroundColor = newValue
+        }
     }
     
     func defaultNavBarStyle(backgroundImg: UIImage = UIImage()) {
@@ -56,7 +53,7 @@ extension UIViewController {
             view.removeFromSuperview()
         }
         
-        setStatusBarBackgroundColor(color: .clear)
+        statusBarColor = .clear
     }
     
     func backButtonForNavigationItem(title: String) {
@@ -73,10 +70,6 @@ extension UIViewController {
         navigationItem.titleView = nil
         navigationItem.title = title
         navBar?.titleTextAttributes = [NSAttributedStringKey.font: UIFont.TurkcellSaturaDemFont(size: 19), NSAttributedStringKey.foregroundColor: UIColor.white]
-    }
-    
-    func setStatusBarBackgroundColor(color: UIColor) {
-        UIApplication.shared.statusBarView?.backgroundColor = color
     }
     
     func setNavigationBackgroundColor(color: UIColor) {
@@ -96,7 +89,7 @@ extension UIViewController {
         if let view = navBar?.viewWithTag(tagHomeView) {
             view.removeFromSuperview()
         }
-        setStatusBarBackgroundColor(color: .clear)
+        statusBarColor = .clear
         
         navBar?.isTranslucent = true
     }
@@ -132,7 +125,7 @@ extension UIViewController {
         }
         
         navBar?.backgroundColor = .black
-        setStatusBarBackgroundColor(color: .black)
+        statusBarColor = .black
         navBar?.isTranslucent = true
     }
     
@@ -191,38 +184,6 @@ extension UIViewController {
         toolBar.isUserInteractionEnabled = true
         
         return toolBar
-    }
-    
-    func setTitle(withString title: String, andSubTitle subTitle: String! = nil) {
-        
-        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle, style: .plain, target: nil, action: nil)
-        navBar?.topItem?.backBarButtonItem?.tintColor = .white
-        
-        if let _ = subTitle {
-            navigationItem.title = nil
-            navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
-
-            let customTitleView = TitleView.initFromXib()
-            customTitleView.tag = tagTitleView
-            customTitleView.setTitle(title)
-            customTitleView.setSubTitle(subTitle)
-            
-            if #available(iOS 11.0, *) {
-                // do nothing
-            } else {
-                // trick for resize
-                customTitleView.translatesAutoresizingMaskIntoConstraints = false
-                customTitleView.layoutIfNeeded()
-                customTitleView.sizeToFit()
-                customTitleView.translatesAutoresizingMaskIntoConstraints = true
-            }
-
-            navigationItem.titleView = customTitleView
-        } else {
-            navigationItem.titleView = nil
-            navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
-            navigationItem.title = title
-        }
     }
     
     func setTouchableTitle(title: String) {

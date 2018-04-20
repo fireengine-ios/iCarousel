@@ -182,9 +182,9 @@ class BaseRequestService {
         task.resume()
     }
     
-    func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask {
+    func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask? {
         var backgroundTaskID = UIBackgroundTaskInvalid
-        var task = URLSessionTask()
+        var task: URLSessionTask?
 
         if let localURL = param.urlToLocalFile {
             backgroundTaskID = beginBackgroundTask(with: localURL.absoluteString)
@@ -212,10 +212,11 @@ class BaseRequestService {
                                                             UIApplication.shared.endBackgroundTask(backgroundTaskID)
             })
         } else {
-            debugPrint("something went WRONG!! ", param)
+            debugPrint("Upload: wrong parameters", param)
+            return nil
         }
         
-        task.resume()
+        task?.resume()
         
         return task
     }

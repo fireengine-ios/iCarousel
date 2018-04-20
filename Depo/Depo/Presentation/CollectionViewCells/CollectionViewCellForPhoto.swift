@@ -67,7 +67,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         
         imageView.image = nil
 
-        if wrappered.isLocalItem {
+        if wrappered.isLocalItem && wrappered.fileSize < NumericConstants.fourGigabytes {
             cloudStatusImage.image = UIImage(named: "objectNotInCloud")
         } else {
             cloudStatusImage.image = UIImage()
@@ -117,7 +117,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             }
             
             guard error == nil else {
-                print("SD_WebImage_setImage error: \(error!.localizedDescription)")
+                print("SD_WebImage_setImage error: \(error!.description)")
                 return
             }
             

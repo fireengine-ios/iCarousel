@@ -44,6 +44,13 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     // MARK: Interactor Output
     
     func showError(errorType: SyncOperationErrors) {
+        switch errorType {
+        case .networkError, .remoteServerError:
+            view.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+        default:
+            // TODO: Error handling
+            break
+        }
         view.setStateWithoutBackUp()
         contactSyncResponse = nil
     }
@@ -58,12 +65,12 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     func analyzeSuccess(response: [ContactSync.AnalyzedContact]) {
-        if response.count > 0 {
+        if !response.isEmpty {
             router.goToDuplicatedContacts(with: response, moduleOutput: self)
         } else {
-            let controller = PopUpController.with(title: "",
-                                 message: TextConstants.errorAlertTextNoDuplicatedContacts,
-                                 image: .none, buttonTitle: TextConstants.ok)
+            let controller = PopUpController.with(title: nil,
+                                                  message: TextConstants.errorAlertTextNoDuplicatedContacts,
+                                                  image: .none, buttonTitle: TextConstants.ok)
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
             interactor.startOperation(operationType: .cancel)
         }
@@ -98,6 +105,13 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         outputView()?.hideSpiner()
     }
     
+    func showPopUpWithManyContacts() {
+        view.showErrorAlert(message: TextConstants.errorManyContactsToBackUp)
+        
+        view.setStateWithoutBackUp()
+        contactSyncResponse = nil
+    }
+    
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
@@ -118,8 +132,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     private func proccessOperation(_ operationType: SyncOperationType) {
-        if !self.reachability.isReachable &&
-            (operationType == .backup || operationType == .restore || operationType == .analyze) {
+        if !reachability.isReachable && operationType.isContained(in: [.backup, .restore, .analyze]) {
             router.goToConnectedToNetworkFailed()
             return
         }

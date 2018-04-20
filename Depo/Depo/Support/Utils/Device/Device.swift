@@ -11,24 +11,6 @@ import UIKit
 
 class Device {
     
-    static func getFreeDiskSpaceInBytes() -> Int64? {
-        guard
-            let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: Device.homeFolderString()),
-            let freeSize = systemAttributes[.systemFreeSize] as? NSNumber
-            else {
-                return nil
-        }
-        return freeSize.int64Value
-    }
-    
-    static func setStatusBarHiddenForLandscapeIfNeed(_ hidden: Bool) {
-        if !Device.isIpad, UIDevice.current.orientation.isContained(in: [.landscapeLeft, .landscapeRight]) {
-            UIApplication.shared.isStatusBarHidden = true
-        } else {
-            UIApplication.shared.isStatusBarHidden = hidden
-        }
-    }
-
     static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es"]
     static private let defaultLocale = "en"
     
@@ -45,8 +27,16 @@ class Device {
     }
     
     static func tmpFolderString() -> String {
+        let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).last!.stringByAppendingPathComponent(path: "Temp")
         
-        return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).last!
+        if !FileManager.default.fileExists(atPath: path) {
+            do {
+                try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return path
     }
     
     static func homeFolderString() -> String {
@@ -67,21 +57,48 @@ class Device {
         return ProcessInfo().operatingSystemVersion.majorVersion < version
     }
     
-    static var getFreeDiskSpaceInPercent: Double {
-        var totalFreeSpace: Double = 0
-        var totalSpace: Double = 0
-        
+    static func getFreeDiskSpaceInBytes() -> Int64? {
+        var freeSize: Int64?
+        if #available(iOS 11.0, *) {
+            let fileURL = URL(fileURLWithPath:Device.homeFolderString())
+            do {
+                let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
+                freeSize = values.volumeAvailableCapacityForImportantUsage
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return freeSize ?? getFreeDiskSpaceInBytesIOS10()
+    }
+    
+    static private func getFreeDiskSpaceInBytesIOS10() -> Int64? {
+        var freeSize: NSNumber?
+        do {
+            let systemAttributes = try FileManager.default.attributesOfFileSystem(forPath: Device.homeFolderString())
+            freeSize = systemAttributes[.systemFreeSize] as? NSNumber
+        } catch {
+            print(error.localizedDescription)
+        }
+        return freeSize?.int64Value
+    }
+    
+    static func getTotalDiskSpace() -> Int64? {
+        var totalSpace: NSNumber?
         do {
             let dict = try FileManager.default.attributesOfFileSystem(forPath: Device.homeFolderString())
-            
-            totalFreeSpace = (dict[.systemFreeSize] as! NSNumber).doubleValue
-            totalSpace = (dict[.systemSize] as! NSNumber).doubleValue
-            
+            totalSpace = dict[.systemSize] as? NSNumber
         } catch {
-            print("Can't calculate file size")
+            print(error.localizedDescription)
         }
-        let t = totalFreeSpace / totalSpace
-        return t
+        return totalSpace?.int64Value
+    }
+    
+    static var getFreeDiskSpaceInPercent: Double {
+        guard let freeSpace = getFreeDiskSpaceInBytes(),
+            let totalSpace = getTotalDiskSpace() else {
+            return 0
+        }
+        return Double(freeSpace)/Double(totalSpace)
     }
     
     static var deviceInfo: [String: Any] {

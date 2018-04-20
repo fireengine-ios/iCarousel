@@ -18,8 +18,17 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     var isCanChangeVisibility: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         setTitle(withString: mainTitle )
+        
+        navigationBarWithGradientStyle()
+        
+        editingTabBar?.view.layoutIfNeeded()
+        
+        output.viewWillAppear()
+        
+        if let searchController = navigationController?.topViewController as? SearchViewController {
+            searchController.dismissController(animated: false)
+        }
     }
 
     override func configurateNavigationBar() {

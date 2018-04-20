@@ -26,7 +26,7 @@ class SelectFolderModuleInitializer: NSObject {
         let interactor: BaseFilesGreedInteractor
         if let folder_ = folder {
             viewController.selectedFolder = folder
-            interactor = BaseFilesGreedInteractor(remoteItems: FolderService(requestSize: 9999, rootFolder: folder_.uuid, onlyFolders: true))
+            interactor = BaseFilesGreedInteractor(remoteItems: FolderService(requestSize: 9999, rootFolder: folder_.uuid, onlyFolders: false))
             interactor.folder = folder_
             filters.append(.rootFolder(folder_.uuid))
         } else {

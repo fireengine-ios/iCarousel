@@ -19,6 +19,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     func viewIsReady() {
         interactor.clearAllPreviouslyStoredInfo()
         showPasscodeIfNeed()
+        CoreDataStack.default.appendLocalMediaItems(completion: nil)
     }
     
     private func showPasscodeIfNeed() {
@@ -37,7 +38,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
             self.interactor.startLoginInBackroung()
         }
         
-        let navVC = UINavigationController(rootViewController: vc)
+        let navVC = NavigationController(rootViewController: vc)
         vc.navigationBarWithGradientStyleWithoutInsets()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -86,28 +87,16 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     private func openApp() {
         storageVars.emptyEmailUp = false
-        CoreDataStack.default.appendLocalMediaItems(progress: { [weak self] progressPercentage in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.showProgressSpinner(progress: progressPercentage)
+
+        if turkcellLogin {
+            if storageVars.autoSyncSet {
+                router.navigateToApplication()
+            } else {
+                router.goToSyncSettingsView()
             }
-            
-        }, end: { [weak self] in
-            DispatchQueue.main.async {
-                self?.customProgressHUD.hideProgressSpinner()
-                
-                if (self?.turkcellLogin)! {
-                    let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-                    if launchedBefore {
-                        self?.router.navigateToApplication()
-                    } else {
-                        self?.router.goToSyncSettingsView()
-                        UserDefaults.standard.set(true, forKey: "launchedBefore")
-                    }
-                } else {
-                    self?.router.navigateToApplication()
-                }
-            }
-        })
+        } else {
+            router.navigateToApplication()
+        }
     }
     
     func showEmptyEmail(show: Bool) {
@@ -120,7 +109,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         vc.approveCancelHandler = { [weak self] in
             self?.openApp()
         }
-        let navVC = UINavigationController(rootViewController: vc)
+        let navVC = NavigationController(rootViewController: vc)
         UIApplication.topController()?.present(navVC, animated: true, completion: nil)
     }
     

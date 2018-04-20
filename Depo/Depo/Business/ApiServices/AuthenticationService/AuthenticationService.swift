@@ -277,7 +277,9 @@ class AuthenticationService: BaseRequestService {
                             fail?(ErrorResponse.error(error))
                             return
                         }
-
+                        
+                        SingletonStorage.shared.updateAccountInfo()
+                        
                         sucess?(headers)
                         MenloworksAppEvents.onLogin()
                         
@@ -316,6 +318,7 @@ class AuthenticationService: BaseRequestService {
                 let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
+                SingletonStorage.shared.updateAccountInfo()
                 sucess?()
                 
             } else {
@@ -340,7 +343,7 @@ class AuthenticationService: BaseRequestService {
             CardsManager.default.clear()
             RecentSearchesService.shared.clearAll()
             SyncServiceManager.shared.stopSync()
-            AutoSyncDataStorage.clear()
+            AutoSyncDataStorage().clear()
             SingletonStorage.shared.accountInfo = nil
             ItemOperationManager.default.clear()
             self.player.stop()
@@ -361,11 +364,7 @@ class AuthenticationService: BaseRequestService {
     }
     
     func cancellAllRequests() {
-        SessionManager.default.session.getTasksWithCompletionHandler { dataTasks, uploadTasks, downloadTasks in
-            dataTasks.forEach { $0.cancel() }
-            uploadTasks.forEach { $0.cancel() }
-            downloadTasks.forEach { $0.cancel() }
-        }
+        SessionManager.default.cancellAllRequests()
     }
     
     func signUp(user: SignUpUser, sucess: SuccessResponse?, fail: FailResponse?) {

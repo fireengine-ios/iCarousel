@@ -12,7 +12,7 @@ final class FaceImageChangeCoverConfigurator {
                    itemsService: FaceImageDetailService, moduleOutput: FaceImageChangeCoverModuleOutput?) {
         let router = FaceImageChangeCoverRouter()
         
-        let presenter = FaceImageChangeCoverPresenter()
+        let presenter = FaceImageChangeCoverPresenter(sortedRule: .timeUp)
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                    selectionModeTypes: [.createStory, .addToFavorites, .delete])

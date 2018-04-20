@@ -17,4 +17,5 @@ protocol PackagesViewInput: class, ActivityIndicator {
     func showSubTurkcellOpenAlert(with text: String)
     
     func showRestoreButton()
+    func showInAppPolicy()
 }

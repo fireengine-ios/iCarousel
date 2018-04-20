@@ -82,19 +82,20 @@ class BaseDataSourceItem: NSObject {
     }
     
     func getUUIDAsLocal() -> String {
-        if uuid.contains("~"){
+        if uuid.contains("~") {
             return uuid.components(separatedBy: "~").first ?? uuid
         }
         return uuid
     }
     
     func isSynced() -> Bool {
-        return syncStatuses.contains(SingletonStorage.shared.unigueUserID)
+        return syncStatuses.contains(SingletonStorage.shared.uniqueUserID)
     }
     
     func setSyncStatusesAsSyncedForCurrentUser() {
-        if !syncStatuses.contains(SingletonStorage.shared.unigueUserID) {
-            syncStatuses.append(SingletonStorage.shared.unigueUserID)
+        let userId = SingletonStorage.shared.uniqueUserID
+        if !self.syncStatuses.contains(userId) {
+            self.syncStatuses.append(userId)
         }
     }
     

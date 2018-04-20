@@ -36,18 +36,13 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     override func onNextButton() {
-        if (dataSource.selectedItemsArray.count > 0) {
+        if !dataSource.selectedItemsArray.isEmpty {
             startAsyncOperation()
             if let interactor_ = interactor as? UploadFilesSelectionInteractor, let dataSource = dataSource as? ArrayDataSourceForCollectionView {
-
                 interactor_.addToUploadOnDemandItems(items: dataSource.getSelectedItems())
-                guard let uploadVC = view as? UploadFilesSelectionViewInput else {
-                    return
-                }
-                
-                uploadVC.currentVC.navigationController?.viewControllers.first?.dismiss(animated: true)
-                uploadVC.currentVC.navigationController?.popViewController(animated: true)
+                router.showBack()
             }
+            dataSource.selectAll(isTrue: false)
         } else {
             UIApplication.showErrorAlert(message: TextConstants.uploadFilesNothingUploadError)
         }
@@ -69,12 +64,28 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
         
     }
     
+    //MARK: - UploadFilesSelectionInteractorOutput
+    
     func networkOperationStopped() {
         log.debug("UploadFilesSelectionPresenter networkOperationStopped")
 
         asyncOperationSucces()
     }
-
-    override func onLongPressInCell() {}
+    
+    func addToUploadSuccessed() {
+        log.debug("UploadFilesSelectionPresenter addToUploadSuccessed")
+        
+        asyncOperationSucces()
+        if let uploadVC = view as? UploadFilesSelectionViewInput {
+            uploadVC.currentVC.navigationController?.viewControllers.first?.dismiss(animated: true)
+            uploadVC.currentVC.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func addToUploadFailedWith(errorMessage: String) {
+        log.debug("UploadFilesSelectionPresenter addToUploadFailedWithError: \(errorMessage)")
+        
+        asyncOperationFail(errorMessage: errorMessage)
+    }
     
 }

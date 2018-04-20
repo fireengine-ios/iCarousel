@@ -25,7 +25,7 @@ enum TabScreenIndex: Int {
     case documentsScreenIndex = 4
 }
 
-final class TabBarViewController: UIViewController, UITabBarDelegate {
+final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBOutlet weak var tabBar: CustomTabBar!
     
@@ -62,6 +62,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     static let notificationVideoScreen = "VideoScreenOn"
     static let notificationFullScreenOn = "FullScreenOn"
     static let notificationFullScreenOff = "FullScreenOff"
+    static let notificationUpdateThreeDots = "UpdateThreeDots"
     
     fileprivate var photoBtn: SubPlussButtonView!
     fileprivate var uploadBtn: SubPlussButtonView!
@@ -118,7 +119,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             selectedViewController?.view.frame = contentView.bounds
             contentView.addSubview(selectedViewController!.view)
             selectedViewController?.didMove(toParentViewController: self)
-            setNeedsStatusBarAppearanceUpdate()
             if let navigationController = selectedViewController as? UINavigationController {
                 navigationController.popToRootViewController(animated: true)
             }
@@ -132,6 +132,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         }
         return result
     }
+    
+    //MAKR: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,6 +156,10 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         player.delegates.add(self)
         
         plussButton.accessibilityLabel = TextConstants.accessibilityPlus
+    }
+       
+    override var childViewControllerForStatusBarStyle: UIViewController? {
+        return activeNavigationController?.viewControllers.last ?? activeNavigationController?.presentedViewController
     }
     
     deinit {
@@ -340,7 +346,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                     router.videosScreen,
                     router.musics,
                     router.documents]
-        customNavigationControllers = list.flatMap { UINavigationController(rootViewController: $0!) }
+        customNavigationControllers = list.compactMap { NavigationController(rootViewController: $0!) }
     }
     
     @objc func gearButtonAction(sender: Any) {
@@ -384,6 +390,8 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         currentViewController?.navigationItem.rightBarButtonItems?.forEach {
             $0.isEnabled = !show
         }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots), object: nil)
         
         if show {
             curtainView.frame = CGRect(x: 0, y: 0, width: currentViewController?.view.frame.width ?? 0, height: currentViewController?.view.frame.height ?? 0)
@@ -564,18 +572,16 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         switch index {
         case .photosScreenIndex:
             MenloworksAppEvents.onPhotosAndVideosOpen()
+            let settings = AutoSyncDataStorage().settings
+            MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnabled)
             
-            AutoSyncDataStorage().getAutoSyncSettingsForCurrentUser(success: { settings, userId in
-                MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnabled)
-                
-                if settings.isAutoSyncEnabled {
-                    MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
-                    MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
-                } else {
-                    MenloworksTagsService.shared.onAutosyncVideosStatusOff()
-                    MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
-                }
-            })
+            if settings.isAutoSyncEnabled {
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
+                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
+            } else {
+                MenloworksTagsService.shared.onAutosyncVideosStatusOff()
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
+            }
         case .musicScreenIndex:
             MenloworksAppEvents.onMusicOpen()
         case .documentsScreenIndex:
@@ -615,6 +621,10 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
                 tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
             
+            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.musicScreenIndex.rawValue, TabScreenIndex.documentsScreenIndex.rawValue]
+            if tabbarSelectedIndex == selectedIndex && arrayOfIndexesOfViewsThatShouldntBeRefreshed.contains(tabbarSelectedIndex) {
+                return
+            }
             selectedIndex = tabbarSelectedIndex
             
             if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
@@ -678,7 +688,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         }) { [weak self] error in
             DispatchQueue.main.async {
                 let vc = PopUpController.with(title: TextConstants.errorAlert,
-                                              message: error.localizedDescription,
+                                              message: error.description,
                                               image: .error,
                                               buttonTitle: TextConstants.ok)
                 self?.present(vc, animated: true, completion: nil)
@@ -720,7 +730,7 @@ extension TabBarViewController: TabBarActionHandler {
         case .createFolder:
             let isFavorites = router.isOnFavoritesView()
             let controller = router.createNewFolder(rootFolderID: getFolderUUID(), isFavorites: isFavorites)
-            let nController = UINavigationController(rootViewController: controller)
+            let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
             
         case .createStory:
@@ -731,13 +741,13 @@ extension TabBarViewController: TabBarActionHandler {
             guard !checkReadOnlyPermission() else { return }
 
             let controller = router.uploadPhotos()
-            let navigation = UINavigationController(rootViewController: controller)
+            let navigation = NavigationController(rootViewController: controller)
             navigation.navigationBar.isHidden = false
             router.presentViewController(controller: navigation)
             
         case .createAlbum:
             let controller = router.createNewAlbum()
-            let nController = UINavigationController(rootViewController: controller)
+            let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
             
         case .uploadFromLifeBox:
@@ -750,7 +760,7 @@ extension TabBarViewController: TabBarActionHandler {
             } else {
                 controller = router.uploadFromLifeBox(folderUUID: parentFolder)
             }
-            let navigationController = UINavigationController(rootViewController: controller)
+            let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         }

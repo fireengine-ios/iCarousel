@@ -59,6 +59,10 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToAutoApload()
     }
     
+    func goToPeriodicContactSync() {
+        router.goToPeriodicContactSync()
+    }
+    
     func goToFaceImage() {
         router.goToFaceImage()
     }

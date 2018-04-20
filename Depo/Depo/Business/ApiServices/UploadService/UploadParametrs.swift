@@ -69,12 +69,10 @@ class Upload: UploadRequestParametrs {
 
         self.isFavorite = isFavorite
 
-        if item.isLocalItem, !item.syncStatus.isContained(in: [.synced]), !item.uuid.isEmpty {
-            self.tmpUUId = item.uuid
+        if item.isLocalItem {
+            self.tmpUUId = "\(item.getLocalID())~\(UUID().uuidString)"
         } else {
-            var newUUID = item.uuid
-            if !newUUID.contains("~") { newUUID.append("~\(UUID().uuidString)") } // compound uuid
-            self.tmpUUId = newUUID
+            self.tmpUUId = UUID().uuidString
         }
     }
     
@@ -84,19 +82,18 @@ class Upload: UploadRequestParametrs {
     var header: RequestHeaderParametrs {
         var header = RequestHeaders.authification()
         
-        header = header + [ HeaderConstant.ContentType : item.uploadContentType,
+        header = header + [
+            HeaderConstant.ContentType           : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
-            HeaderConstant.XMetaRecentServerHash : "s",
+//            HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
-            HeaderConstant.XObjectMetaSpecialFolder:uploadTo.rawValue,
-            HeaderConstant.Expect                : "100-continue"
-//            HeaderConstant.Etag                   : md5
-            //                  HeaderConstant.ContentLength         : contentLenght,
-            //                  HeaderConstant.XObjectMetaAlbumLabel  : "",
-            //                  HeaderConstant.XObjectMetaFolderLabel : "",
-            
+            HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
+            HeaderConstant.Expect                : "100-continue",
+            HeaderConstant.XObjectMetaDeviceType : Device.isIpad ? "IPAD" : "IPHONE",
+            HeaderConstant.XObjectMetaIosMetadataHash : item.asset?.localIdentifier ?? "",
+            HeaderConstant.ContentLength         : "\(item.fileSize)"
         ]
         return header
     }

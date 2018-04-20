@@ -17,6 +17,7 @@ class SettingsInteractor: SettingsInteractorInput {
     let accountSerivese = AccountService()
     
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
@@ -43,6 +44,7 @@ class SettingsInteractor: SettingsInteractorInput {
         var array = [[TextConstants.settingsViewCellBeckup,
                       TextConstants.settingsViewCellImportPhotos,
                       TextConstants.settingsViewCellAutoUpload,
+                      TextConstants.settingsViewCellContactsSync,
                       TextConstants.settingsViewCellFaceAndImageGrouping],
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
@@ -68,6 +70,7 @@ class SettingsInteractor: SettingsInteractorInput {
 
     func onLogout() {
         authService.logout { [weak self] in
+            self?.storageVars.autoSyncSet = false
             MenloworksEventsService.shared.onLoggedOut()
             self?.output.goToOnboarding()
         }

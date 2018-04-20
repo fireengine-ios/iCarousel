@@ -9,11 +9,7 @@
 import Foundation
 
 protocol CreateStoryPhotosOrderInteractorInput {
-    
     func viewIsReady()
-    
     func onNextButton(array: [Item])
-    
     func onMusicSelection()
-    
 }

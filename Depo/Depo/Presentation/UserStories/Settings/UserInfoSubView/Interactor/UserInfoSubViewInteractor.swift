@@ -15,7 +15,7 @@ class UserInfoSubViewInteractor: UserInfoSubViewInteractorInput {
     func onStartRequests() {
         
         let group = DispatchGroup()
-        let queue = DispatchQueue(label: "GetUserInfo")
+        let queue = DispatchQueue(label: DispatchQueueLabels.getUserInfo)
         
         group.enter()
         group.enter()

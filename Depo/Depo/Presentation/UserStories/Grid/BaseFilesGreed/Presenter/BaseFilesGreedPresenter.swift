@@ -7,12 +7,12 @@
 //
 
 class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
-
+    
     lazy var player: MediaPlayer = factory.resolve()
     
     var dataSource: BaseDataSourceForCollectionView
     
-    weak var view: BaseFilesGreedViewInput!
+    var view: BaseFilesGreedViewInput!
     
     weak var moduleOutput: BaseFilesGreedModuleOutput?
     
@@ -41,6 +41,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var needShowProgressInCells = false
     
+    var needShowScrollIndicator = false
+    
+    private let semaphore = DispatchSemaphore(value: 0)
+    
+    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreed)
+    
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
         self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
@@ -51,6 +57,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func viewIsReady(collectionView: UICollectionView) {
         log.debug("BaseFilesGreedPresenter viewIsReady")
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.updateThreeDots(_:)),
+                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots),
+                                               object: nil)
 
         interactor.viewIsReady()
         if let unwrapedFilters = interactor.originalFilesTypeFilter {
@@ -61,6 +72,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
        
         dataSource.delegate = self
         dataSource.needShowProgressInCell = needShowProgressInCells
+        dataSource.needShowCustomScrollIndicator = needShowScrollIndicator
         dataSource.parentUUID = interactor.getFolder()?.uuid
         if let albumInteractor = interactor as? AlbumDetailInteractor {
             dataSource.parentUUID = albumInteractor.album?.uuid
@@ -140,7 +152,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func compoundAllFiltersAndNextItems(searchText: String? = nil) {
         log.debug("BaseFilesGreedPresenter compoundAllFiltersAndNextItems")
-
 //        startAsyncOperation()
         interactor.nextItems(searchText,
                              sortBy: sortedRule.sortingRules,
@@ -149,6 +160,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
     func reloadData() {
         log.debug("BaseFilesGreedPresenter reloadData")
+        debugPrint("BaseFilesGreedPresenter reloadData")
 
         dataSource.dropData()
         dataSource.currentSortType = sortedRule
@@ -188,13 +200,23 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func getContentWithSuccessEnd() {
         log.debug("BaseFilesGreedPresenter getContentWithSuccessEnd")
         debugPrint("???getContentWithSuccessEnd()")
-        asyncOperationSucces()
+//        asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
-        dataSource.appendCollectionView(items: [])
-        dataSource.reloadData()
-        updateNoFilesView()
-        updateThreeDotsButton()
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            self.dataSource.appendCollectionView(items: [], pageNum: self.interactor.requestPageNum)
+        }
+//        dataSource.reloadData()
+//        updateNoFilesView()
+//=======
+//        dataSource.appendCollectionView(items: [])
+//        dataSource.reloadData()
+//        updateNoFilesView()
+//        updateThreeDotsButton()
+//>>>>>>> develop
     }
     
     func getContentWithSuccess(items: [WrapData]) {
@@ -203,16 +225,25 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if (view == nil) {
             return
         }
-        asyncOperationSucces()
-        view.stopRefresher()
-        
 //        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+           self.dataSource.appendCollectionView(items: items, pageNum: self.interactor.requestPageNum)
+        }
+        
 
-        dataSource.appendCollectionView(items: items)
 
-        dataSource.reloadData()
-        updateNoFilesView()
-        updateThreeDotsButton()
+//        dataSource.reloadData()
+//        updateNoFilesView()
+//=======
+//        dataSource.appendCollectionView(items: items)
+//
+//        dataSource.reloadData()
+//        updateNoFilesView()
+//        updateThreeDotsButton()
+//>>>>>>> develop
     }
     
     func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
@@ -223,8 +254,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         debugPrint("???getContentWithSuccessEnd()")
         asyncOperationSucces()
-        view.stopRefresher()
+//        view.stopRefresher()
         if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView {
+
             dataSourceForArray.configurateWithArray(array: array)
         } else {
             dataSource.reloadData()
@@ -269,6 +301,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return dataSource.isSelectionStateActive
     }
     
+    @objc private func updateThreeDots(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.updateThreeDotsButton()
+        }
+    }
+    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {
@@ -291,6 +329,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }
     }
+    
+    func onItemSelectedActiveState(item: BaseDataSourceItem) { }
     
     private func getSameTypeItems(item: BaseDataSourceItem, items: [[BaseDataSourceItem]]) -> [BaseDataSourceItem] {
         let allItems = items.flatMap { $0 }
@@ -325,12 +365,55 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         reloadData()
     }
     
+    func filesAppendedAndSorted() {
+        DispatchQueue.main.async {
+            self.view.stopRefresher()
+            self.updateNoFilesView()
+            self.asyncOperationSucces()
+            self.updateThreeDotsButton()
+        }
+    }
+
     func didDelete(items: [BaseDataSourceItem]) {
         updateNoFilesView()
         updateThreeDotsButton()
     }
     
     func updateCoverPhotoIfNeeded() { }
+    
+    func didChangeTopHeader(text: String) {
+        if needShowCustomScrollIndicator() {
+            view.changeScrollIndicatorTitle(with: text)
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if needShowCustomScrollIndicator() {
+            view.startScrollCollectionView()
+        }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if needShowCustomScrollIndicator() {
+            view.startScrollCollectionView()
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if needShowCustomScrollIndicator() && !decelerate {
+            view.endScrollCollectionView()
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if needShowCustomScrollIndicator() {
+            view.endScrollCollectionView()
+        }
+    }
+    
+    private func needShowCustomScrollIndicator() -> Bool {
+         return needShowScrollIndicator && sortedRule != .sizeAZ && sortedRule != .sizeZA
+    }
     
     // MARK: - UnderNavBarBar/TopBar
     
@@ -341,7 +424,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view.setupUnderNavBarBar(withConfig: unwrapedConfig)
         sortedRule = unwrapedConfig.defaultSortType.sortedRulesConveted
     }
-    
+ 
     // MARK: Bottom Bar
     
     private func canShow3DotsButton() -> Bool {
@@ -529,27 +612,33 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.remove(at: editIndex)
             }
             
-            if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
-                let serverObjects = selectedItems.filter({ !$0.isLocalItem })
-                if serverObjects.isEmpty {
-                    actionTypes.remove(at: deleteOriginalIndex)
-                } else if selectedItems is [Item] {
-                    let localDuplicates = CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item])
-                    if localDuplicates.count == 0 {
-                        //selectedItems = localDuplicates
+            DispatchQueue.global().async {[weak self] in
+                if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
+                    let serverObjects = selectedItems.filter({ !$0.isLocalItem })
+                    if serverObjects.isEmpty {
                         actionTypes.remove(at: deleteOriginalIndex)
-                    } else {
-                        
+                    } else if selectedItems is [Item] {
+                        CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item], duplicatesCallBack: { [weak self] items in
+                            if items.count == 0 {
+                                //selectedItems = localDuplicates
+                                actionTypes.remove(at: deleteOriginalIndex)
+                            }
+                            self?.semaphore.signal()
+                        })
+                        self?.semaphore.wait()
                     }
+                    
                 }
                 
+                if let `self` = self {
+                    self.alertSheetModule?.showAlertSheet(with: actionTypes,
+                                                     items: selectedItems,
+                                                     presentedBy: sender,
+                                                     onSourceView: nil,
+                                                     excludeTypes: self.alertSheetExcludeTypes)
+                }
             }
             
-            alertSheetModule?.showAlertSheet(with: actionTypes,
-                                             items: selectedItems,
-                                             presentedBy: sender,
-                                             onSourceView: nil,
-                                             excludeTypes: alertSheetExcludeTypes)
         } else {
             actionTypes = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
             

@@ -81,7 +81,7 @@ class RouterVC: NSObject {
     
     func createRootNavigationController(controller: UIViewController) -> UINavigationController {
         
-        let navController = UINavigationController(rootViewController: controller)
+        let navController = NavigationController(rootViewController: controller)
         return navController
     }
     
@@ -275,6 +275,13 @@ class RouterVC: NSObject {
     
     var syncContacts: UIViewController {
         let viewController = SyncContactsModuleInitializer.initializeViewController(with: "SyncContactsViewController")
+        return viewController
+    }
+    
+    // MARK: PeriodicContacsSync
+    
+    var periodicContactsSync: UIViewController {
+        let viewController = PeriodicContactSyncInitializer.initializeViewController(with: "PeriodicContactSyncViewController")
         return viewController
     }
     

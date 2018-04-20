@@ -15,6 +15,10 @@ protocol AutoSyncSettingsOptionViewDelegate: class {
 
 final class AutoSyncSettingsOptionView: UIView {
     weak var delegate: AutoSyncSettingsOptionViewDelegate?
+    private var isFromSettings: Bool = false
+    
+    private let times: [AutoSyncOption] = [.daily, .weekly, .monthly]
+
     
     @IBOutlet private weak var button: UIButton!
     @IBOutlet private weak var checkboxImageView: UIImageView! {
@@ -28,7 +32,7 @@ final class AutoSyncSettingsOptionView: UIView {
     
     
     private var option: AutoSyncOption = .wifiOnly {
-        willSet { button.setTitle(newValue.text(), for: .normal) }
+        willSet { button.setTitle(newValue.localizedText, for: .normal) }
     }
     
     private var isSelected: Bool = false {
@@ -51,9 +55,17 @@ final class AutoSyncSettingsOptionView: UIView {
     }
     
     func setColors(isFromSettings: Bool) {
+        self.isFromSettings = isFromSettings
         let textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         button.setTitleColor(textColor, for: .normal)
         checkboxImageView.tintColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+        
+        if times.contains(option),
+            isFromSettings,
+            isSelected {
+            button.setTitleColor(.lrTealishTwo, for: .normal)
+            checkboxImageView.tintColor = .lrTealishTwo
+        }
     }
     
     
@@ -70,6 +82,11 @@ final class AutoSyncSettingsOptionView: UIView {
     
     @IBAction private func buttonTapped() {
         isSelected = true
+
+        if times.contains(option), isFromSettings {
+            button.setTitleColor(.lrTealishTwo, for: .normal)
+            checkboxImageView.tintColor = .lrTealishTwo
+        }
     }
     
 }

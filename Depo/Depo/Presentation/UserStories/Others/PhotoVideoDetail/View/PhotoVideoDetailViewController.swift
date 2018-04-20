@@ -52,10 +52,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //            }
             
             /// without animation
-            
-            Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+
             editingTabBar.view.isHidden = isFullScreen
-            navigationController?.navigationBar.isHidden = isFullScreen
+            navigationController?.setNavigationBarHidden(isFullScreen, animated: false)
+            setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
             
             bottomBlackView.isHidden = self.isFullScreen
             viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
@@ -79,7 +79,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             collectionView.layoutIfNeeded()
         }
     }
-    
+        
     // MARK: Life cycle
     
     override func viewDidLoad() {
@@ -99,13 +99,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isHidden = true
         
-        let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
-        cancelButton.setTitle(TextConstants.backTitle, for: .normal)
-        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
-        
-        let barButtonLeft = UIBarButtonItem(customView: cancelButton)
-        navigationItem.leftBarButtonItem = barButtonLeft
+        navigationItem.leftBarButtonItem = BackButtonItem(action: { [weak self] in 
+            self?.hideView()
+        })
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
     }
@@ -129,8 +125,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         output.viewIsReady(view: viewForBottomBar)
-        setStatusBarBackgroundColor(color: UIColor.black)
-        
+        statusBarColor = .black
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -144,7 +139,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         setNavigationBackgroundColor(color: UIColor.clear)
         
         visibleNavigationBarStyle()
-        setStatusBarBackgroundColor(color: .clear)
+        statusBarColor = .clear
         
         output.viewWillDisappear()
     }
@@ -158,10 +153,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
             needToScrollAfterRotation = false
             scrollToSelectedIndex()
         }
-    }
-    
-    @objc private func onCancelButton() {
-        hideView()
     }
     
     private func hideView() {
@@ -210,7 +201,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             return
         }
         if let name = objects[selectedIndex].name {
-            setTitle(withString: name)
+            setNavigationTitle(title: name)
         }
     }
     
@@ -229,7 +220,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         super.viewWillTransition(to: size, with: coordinator)
         
         needToScrollAfterRotation = true
-        Device.setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+        setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
     }
     
     override func getBacgroundColor() -> UIColor {
@@ -268,17 +259,17 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         localPlayer?.replaceCurrentItem(with: item)
         playerController = AVPlayerViewController()
         playerController?.player = localPlayer
-        present(playerController!, animated: true) { [weak playerController] in
-            playerController?.player?.play()
+        present(playerController!, animated: true) { [weak self] in
+            self?.playerController?.player?.play()
             if Device.operationSystemVersionLessThen(11) {
-                UIApplication.shared.isStatusBarHidden = true
+                self?.statusBarHidden = true
             }
         }
     }
     
     func onStopPlay() {
         if Device.operationSystemVersionLessThen(11) {
-            UIApplication.shared.isStatusBarHidden = false
+            statusBarHidden = false
         }
     }
     
@@ -301,8 +292,10 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
     }
     
     func finishedUploadFile(file: WrapData) {
-        output.setSelectedItemIndex(selectedIndex: selectedIndex)
-        setupNavigationBar()
+        DispatchQueue.main.async {
+            self.output.setSelectedItemIndex(selectedIndex: self.selectedIndex)
+            self.setupNavigationBar()
+        }
     }
 }
 
