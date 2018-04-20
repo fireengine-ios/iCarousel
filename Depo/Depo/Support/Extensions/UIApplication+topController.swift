@@ -31,6 +31,9 @@ extension UIApplication {
     }
     
     static func showErrorAlert(message: String) {
+        guard message != TextConstants.errorBadConnection else {
+            return
+        }
         let controller = topController()
         if controller is PopUpController {
             return

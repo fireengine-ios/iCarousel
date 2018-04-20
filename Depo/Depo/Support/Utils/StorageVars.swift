@@ -24,7 +24,7 @@ final class UserDefaultsVars: StorageVars {
     
     private let isAppFirstLaunchKey = "isAppFirstLaunchKey"
     var isAppFirstLaunch: Bool {
-        get { return userDefaults.object(forKey: isAppFirstLaunchKey) as? Bool ?? false }
+        get { return userDefaults.object(forKey: isAppFirstLaunchKey) as? Bool ?? true }
         set { userDefaults.set(newValue, forKey: isAppFirstLaunchKey) }
     }
     

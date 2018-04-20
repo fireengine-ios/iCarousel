@@ -62,6 +62,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     static let notificationVideoScreen = "VideoScreenOn"
     static let notificationFullScreenOn = "FullScreenOn"
     static let notificationFullScreenOff = "FullScreenOff"
+    static let notificationUpdateThreeDots = "UpdateThreeDots"
     
     fileprivate var photoBtn: SubPlussButtonView!
     fileprivate var uploadBtn: SubPlussButtonView!
@@ -389,6 +390,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         currentViewController?.navigationItem.rightBarButtonItems?.forEach {
             $0.isEnabled = !show
         }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots), object: nil)
         
         if show {
             curtainView.frame = CGRect(x: 0, y: 0, width: currentViewController?.view.frame.width ?? 0, height: currentViewController?.view.frame.height ?? 0)
