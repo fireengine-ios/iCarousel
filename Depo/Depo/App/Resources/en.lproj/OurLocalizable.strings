@@ -321,6 +321,7 @@
 "Face & Image Grouping" = "Face & Image Grouping";
 "Import Photos" = "Import Photos";
 "Back-up my contacts" = "Back-up my contacts";
+"Contacts Sync" = "Contacts Sync";
 "Leave feedback" = "Leave feedback";
 "Upload Photo" = "Upload Photo";
 "Login Settings" = "Login Settings";
@@ -366,6 +367,9 @@
 "Collage" = "Collage";
 "We have created a collage from your photos!" = "We have created a collage from your photos!";
 "Save Collage" = "Save Collage";
+"Animaion" = "Animaion";
+"We have created an animation from your photos!" = "We have created an animation from your photos!";
+"Save Animation" = "Save";
 "View" = "View";
 "Album Card" = "Album Card";
 "We have created an album for you." = "We have created an album for you.";
@@ -387,6 +391,7 @@
 "Error occurred while accessing your photos.\nPlease check your settings." = "Error occurred while accessing your photos.\nPlease check your settings.";
 "Photos" = "Photos";
 "Videos" = "Videos";
+"Auto Sync" = "Auto Sync";
 "Select All" = "Select All";
 "Select" = "Select";
 "Folder" = "Folder";
@@ -435,7 +440,7 @@
 "Warning" = "Warning";
 "TurkcellSecurityPasscodeWarningText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not to activate login with Turkcell password feature.";
 "TurkcellSecurityAutologinText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not to activate autologin with 3G/LTE feature.";
-"PasscodeActivationWhileTurkcellActivated" = "Auto login to lifebox with 3G/LTE and login to lifebox with Turkcell password have been deactivated for you to use lifebox passcode and touch id features safely, you can reactivate from login settings anytime you wish. In this case, you can login to lifebox with your lifebox password.";
+"PasscodeActivationWhileTurkcellActivated" = "Auto login to lifebox with 3G/LTE has been deactivated for you to use lifebox passcode and touch id features safely. You can also deactivate login to lifebox with Turkcell password from login settings anytime you wish. In this case, you can login to lifebox with your lifebox password.";
 "The file isn't supported" = "The file isn't supported";
 "Yes" = "Yes";
 "Nope" = "Nope";
@@ -561,6 +566,9 @@
 "View" = "View";
 "photos" = "photos";
 "Never" = "Never";
+"Daily" = "Daily";
+"Weekly" = "Weekly";
+"Monthly" = "Monthly";
 "Approve" = "Approve";
 "infomationEmptyEmail" = "Having an e-mail address on your account is one of the easiest and most reliable ways to help keep your account safe and ensure that you can get back into your account. Please add your e-mail address";
 "E-Mail Entry" = "E-Mail Entry";
@@ -568,6 +576,17 @@
 "Dropbox authorisation error" = "Dropbox authorisation error";
 "dropboxLastUpdatedFile" = "Last updated on %@ - %d file";
 "dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";
+"LifeboxSmallPopUpTitle" = "Lifebox storage is almost full";
+"LifeboxSmallPopUpSubTitle" = "You have reached your lifebox memory limit. Let’s have a look for upgrade options!";
+"LifeboxSmallPopUpCheckBoxTex" = "Don't show me this message again";
+"LifeboxSmallPopUpFirstButtonText" = "CANCEL";
+"LifeboxSmallPopUpSecondButtonText" = "OK";
+"LifeboxLargePopUpTitle100" = "You have reached your lifebox memory limit.";
+"LifeboxLargePopUpTitle90" = "90% of your storage is full!";
+"LifeboxLargePopUpTitle80" = "80% of your storage is full!";
+"LifeboxLargePopUpSubTitle" = "Let’s have a look at upgrade options!";
+"LifeboxLargePopUpExpandButtonTitle" = "Expand My Storage";
+"LifeboxLargePopUpSkipButtonTitle" = "Skip";
 "widgetTopTitleInProgress" = "Photo synchronization is in progress";
 "widgetTopTitleFinished" = "Photos are up-to-date";
 "widgetTopTitleInactive" = "Photo synchronization is inactive";
@@ -580,3 +599,4 @@
 "uploading" = "Uploading...";
 "error_internet" = "Please check your internet connection is active and Mobile Data is ON.";
 "error_login" = "You have not login via app yet";
+"Contacts Sync" = "Contacts Sync";

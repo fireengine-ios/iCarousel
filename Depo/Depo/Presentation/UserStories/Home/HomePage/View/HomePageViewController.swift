@@ -122,6 +122,10 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         hideSpiner()
     }
     
+    func needPresentPopUp(popUpView: UIViewController) {
+        present(popUpView, animated: true, completion: nil)
+    }
+    
     
     // MARK: BaseCollectionViewDataSourceDelegate
     

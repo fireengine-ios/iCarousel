@@ -108,6 +108,8 @@ class CoreDataStack: NSObject {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
         fetchRequest.predicate = NSPredicate(format: "md5Value IN %@", remoteMd5s)
+        let sort = NSSortDescriptor(key: "creationDateValue", ascending: false)
+        fetchRequest.sortDescriptors = [sort]
         
         let context = CoreDataStack.default.newChildBackgroundContext
         context.perform {

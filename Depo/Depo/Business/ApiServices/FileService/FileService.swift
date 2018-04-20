@@ -377,7 +377,7 @@ class FileService: BaseRequestService {
                         default     : break
                     }
                     
-                    if let item = downloadParam.item, let mediaItem = CoreDataStack.default.mediaItemByUUIDs(uuidList: [item.uuid]).first {
+                    if let item = downloadParam.item, let mediaItem = CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getLocalID()]).first {
                         CoreDataStack.default.updateSavedItems(savedItems: [mediaItem],
                                                                remoteItems: [item],
                                                                context: CoreDataStack.default.newChildBackgroundContext)

@@ -26,6 +26,10 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.autoUpload)
     }
     
+    func goToPeriodicContactSync() {
+        router.pushViewController(viewController: router.periodicContactsSync)
+    }
+    
     func goToFaceImage() {
         router.pushViewController(viewController: router.faceImage)
     }

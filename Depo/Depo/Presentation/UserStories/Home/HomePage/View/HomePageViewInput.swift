@@ -15,4 +15,6 @@ protocol HomePageViewInput: class, CurrentNavController {
 
     func stopRefresh()
     
+    func needPresentPopUp(popUpView: UIViewController)
+    
 }

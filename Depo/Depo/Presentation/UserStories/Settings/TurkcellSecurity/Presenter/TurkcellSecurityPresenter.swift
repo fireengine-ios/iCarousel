@@ -11,6 +11,8 @@ class TurkcellSecurityPresenter: BasePresenter {
     var interactor: TurkcellSecurityInteractorInput!
     var router: TurkcellSecurityRouterInput!
     
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
@@ -20,7 +22,7 @@ class TurkcellSecurityPresenter: BasePresenter {
 
 // MARK: TurkcellSecurityViewOutput
 extension TurkcellSecurityPresenter: TurkcellSecurityViewOutput {
-    func securityChanged(passcode: Bool, autoLogin: Bool) {
+    func securityChanged(passcode: Bool, autoLogin: Bool, title: String) {
         
         if interactor.isPasscodeEnabled, passcode, passcode != interactor.turkcellPasswordOn {
             let router = RouterVC()
@@ -40,6 +42,18 @@ extension TurkcellSecurityPresenter: TurkcellSecurityViewOutput {
             router.rootViewController?.present(popUP, animated: true, completion: nil)
         } else {
             startAsyncOperation()
+            
+            if !passcodeStorage.isEmpty {
+                let router = RouterVC()
+                if title == TextConstants.settingsViewCellTurkcellPassword, passcode {
+                    let popUp = PopUpController.with(title: TextConstants.warning, message: TextConstants.turkcellSecurityWaringPasscode, image: .error, buttonTitle: TextConstants.ok)
+                    router.rootViewController?.present(popUp, animated: true, completion: nil)
+                }
+                else if title == TextConstants.settingsViewCellTurkcellAutoLogin, autoLogin {
+                    let popUp = PopUpController.with(title: TextConstants.warning, message: TextConstants.turkcellSecurityWaringAutologin, image: .error, buttonTitle: TextConstants.ok)
+                    router.rootViewController?.present(popUp, animated: true, completion: nil)
+                }
+            }
             
             if passcode != interactor.turkcellPasswordOn {
                 MenloworksTagsService.shared.onTurkcellPasswordSettingsChanged(passcode)

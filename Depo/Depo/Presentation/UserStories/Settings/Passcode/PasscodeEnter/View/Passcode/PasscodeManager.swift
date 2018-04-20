@@ -86,8 +86,8 @@ extension PasscodeManagerImp: PasscodeManager {
         biometricsManager.authenticate(reason: state.title) { success in
             DispatchQueue.main.async {
                 if success {
+                    self.view.passcodeInput.animatePasscodeFullEnter()
                     let passcode = self.storage.passcode
-                    self.view.passcodeInput.passcode = passcode
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         self.state.finish(with: passcode, manager: self)
                     }
@@ -104,10 +104,13 @@ extension PasscodeManagerImp: PasscodeManager {
     
     private func canShowBiometrics() -> Bool {
         #if MAIN_APP
-        if UIApplication.shared.applicationState != .active || biometricsOnScreen || finishBiometrics {
+        if UIApplication.shared.applicationState != .active {
             return false
         }
         #endif
+        if biometricsOnScreen || finishBiometrics {
+            return false
+        }
         return true
     }
 }

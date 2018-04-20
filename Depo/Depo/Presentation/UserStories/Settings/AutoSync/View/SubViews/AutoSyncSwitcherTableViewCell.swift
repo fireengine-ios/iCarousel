@@ -9,21 +9,19 @@
 import UIKit
 
 protocol AutoSyncSwitcherTableViewCellDelegate {
-    
     func onValueChanged(model: AutoSyncModel, cell: AutoSyncSwitcherTableViewCell)
-    
 }
 
 class AutoSyncSwitcherTableViewCell: UITableViewCell {
     @IBOutlet weak var separatorView: UIView!
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subTitleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var subTitleLabel: UILabel!
     @IBOutlet weak var switcher: CustomSwitch!
+    
     var model: AutoSyncModel?
     
     var delegate: AutoSyncSwitcherTableViewCellDelegate?
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,7 +36,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         separatorView.isHidden = true
     }
     
-    func setup(with model: AutoSyncModel) {
+    func setup(with model: AutoSyncModel, setting: AutoSyncSetting) {
         self.model = model
         switcher.isOn = model.isSelected
         separatorView.isHidden = !model.isSelected

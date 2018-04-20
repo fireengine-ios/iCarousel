@@ -44,9 +44,8 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
         navigationItem.rightBarButtonItem = barButton
     }
     
-    override func setThreeDotsMenu(active isActive: Bool)  {
-        
-    }
+    /// don't remove
+    override func setThreeDotsMenu(active isActive: Bool)  {}
     
     @objc func onNextButton() {
         output.onNextButton()
@@ -57,9 +56,7 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
     }
     
     func hideView() {
-        dismiss(animated: true) {
-            
-        }
+        dismiss(animated: true, completion: nil)
     }
     
     override func isNeedShowTabBar() -> Bool {

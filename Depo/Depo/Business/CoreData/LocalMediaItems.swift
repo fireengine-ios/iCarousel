@@ -166,11 +166,11 @@ extension CoreDataStack {
         return items.flatMap { $0.wrapedObject }
     }
     
-    func  allLocalItems(withUUIDS uuids: [String]) -> [WrapData] {
+    func  allLocalItems(trimmedLocalIds: [String]) -> [WrapData] {
         let context = newChildBackgroundContext
-        let predicate = NSPredicate(format: "(uuidValue IN %@)", uuids)
+        let predicate = NSPredicate(format: "(trimmedLocalFileID != nil) AND (trimmedLocalFileID IN %@)", trimmedLocalIds)
         let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
-        return items.compactMap { $0.wrapedObject }
+        return items.flatMap { $0.wrapedObject }
     }
     
     func hasLocalItemsForSync(video: Bool, image: Bool, completion: @escaping  (_ has: Bool) -> Void) {
@@ -190,7 +190,9 @@ extension CoreDataStack {
             SingletonStorage.shared.getUniqueUserID(success: { userId in
                 let filtredArray = sortedItems.filter { !$0.syncStatusesArray.contains(userId) }
                 completion(filtredArray.compactMap { $0.wrapedObject })
-            }, fail: {})
+            }, fail: {
+                completion([])
+            })
             
         })
     }
