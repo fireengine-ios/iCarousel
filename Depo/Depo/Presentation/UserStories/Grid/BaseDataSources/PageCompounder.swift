@@ -58,7 +58,7 @@ final class PageCompounder {
         tempoArray.append(contentsOf: wrapedLocals)
         tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
         
-        notAllowedLocalIDs = notAllowedLocalIDs.union(wrapedLocals.compactMap{$0.asset?.localIdentifier})
+        notAllowedLocalIDs = notAllowedLocalIDs.union(wrapedLocals.compactMap{$0.getLocalID()})
         
         let actualArray = tempoArray.prefix(pageSize)
         let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
