@@ -66,6 +66,11 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
             self.tableView.insertRows(at: [path], with: .automatic)
             self.tableView.endUpdates()
             self.updateH()
+            
+            if let collectionView = self.superview as? UICollectionView {
+                collectionView.setContentOffset(CGPoint(x: 0, y: self.frame.origin.y), animated: true)
+            }
+            
             self.lock.unlock()
         }
     }
