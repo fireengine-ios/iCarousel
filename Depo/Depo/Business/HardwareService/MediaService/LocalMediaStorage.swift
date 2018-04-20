@@ -106,7 +106,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         var assetsInfo = [AssetInfo]()
         
         for asset in assets {
-            let _ = autoreleasepool {
+            autoreleasepool {
                 let assetInfo = self.fullInfoAboutAsset(asset: asset)
                 assetsInfo.append(assetInfo)
             }
@@ -122,7 +122,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         for asset in assets {
             print("iCLOUD updating: \(i) of \(count)")
             i += 1
-            let _ = autoreleasepool {
+            autoreleasepool {
                 let assetInfo = self.compactInfoAboutAsset(asset: asset)
                 assetsInfo.append(assetInfo)
             }
