@@ -369,7 +369,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         DispatchQueue.main.async {
             self.view.stopRefresher()
             self.updateNoFilesView()
-            self.updateThreeDotsButton()
             self.asyncOperationSucces()
         }
     }
