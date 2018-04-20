@@ -77,7 +77,7 @@ struct NumericConstants {
     static let emptyEmailUserCloseLimit = 3
     
     static let logDuration: TimeInterval = 24 * 60 * 60 * 3
-    static let logMaxSize: UInt64 = 10_485_760
+    static let logMaxSize: UInt64 = 5_242_880
     
     static let numberOfLocalItemsOnPage: Int = 100
     
