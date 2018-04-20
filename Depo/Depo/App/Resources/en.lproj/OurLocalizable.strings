@@ -75,6 +75,7 @@
 "Resend" = "Resend";
 "Next" = "Next";
 "%.2f %@ / month" = "%.2f %@ / month";
+"%@ / month" = "%@ / month";
 "Settings" = "Settings";
 "OK" = "OK";
 "Cancel" = "Cancel";
