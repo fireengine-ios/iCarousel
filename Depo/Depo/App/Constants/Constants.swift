@@ -808,5 +808,13 @@ struct TextConstants {
     static let errorLogin = NSLocalizedString("error_login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploading = NSLocalizedString("uploading", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
+    //MARK: - Spotlight
     
+    static let spotlightHomePageIconText = NSLocalizedString("We make easier to manage your memories with homepage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let spotlightHomePageGeneralText = NSLocalizedString("You can reach your recent activites and suggestions that are special for you from this page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let spotlightMovieCardText = NSLocalizedString("Discover your first story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let spotlightAlbumCard = NSLocalizedString("Discover your first album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let spotlightCollageCard = NSLocalizedString("Discover your first collage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let spotlightAnimationCard = NSLocalizedString("Discover your first animation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let spotlightFilterCard = NSLocalizedString("Discover your first filtered photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")    
 }

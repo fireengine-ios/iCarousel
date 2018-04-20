@@ -1452,9 +1452,9 @@
 		8C0B91B220170F4D00A5BA81 /* ContactSyncResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */; };
 		8C0B91B320170F5B00A5BA81 /* ContactSyncParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */; };
 		8C0B91B42017103600A5BA81 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
-		8C0B91B52017103900A5BA81 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		8C0B91B62017103D00A5BA81 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		8C0B91B82017104100A5BA81 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		8C0B91B52017103900A5BA81 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C0B91B62017103D00A5BA81 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C0B91B82017104100A5BA81 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C0B91B92017104300A5BA81 /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
 		8C0B91BA2017104500A5BA81 /* AuthorizationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */; };
 		8C0B91BB2017104800A5BA81 /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
@@ -2515,6 +2515,14 @@
 		986B2066207C9C4100E04B96 /* TextEnterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B2064207C9C4100E04B96 /* TextEnterDataSource.swift */; };
 		98A867772080DCBC00D2D4F4 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A867762080DCBC00D2D4F4 /* ArrayExtension.swift */; };
 		98A867782080DCBC00D2D4F4 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A867762080DCBC00D2D4F4 /* ArrayExtension.swift */; };
+		98A8677E2088C71A00D2D4F4 /* SpotlightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A8677D2088C71A00D2D4F4 /* SpotlightViewController.xib */; };
+		98A8677F2088C71A00D2D4F4 /* SpotlightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A8677D2088C71A00D2D4F4 /* SpotlightViewController.xib */; };
+		98A8678B2088CAE000D2D4F4 /* SpotlightTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A867852088CADE00D2D4F4 /* SpotlightTransitionController.swift */; };
+		98A8678C2088CAE000D2D4F4 /* SpotlightTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A867852088CADE00D2D4F4 /* SpotlightTransitionController.swift */; };
+		98A867922088CB9200D2D4F4 /* SpotlightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A867912088CB9200D2D4F4 /* SpotlightViewController.swift */; };
+		98A867932088CB9200D2D4F4 /* SpotlightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A867912088CB9200D2D4F4 /* SpotlightViewController.swift */; };
+		98A8679B208A0FEC00D2D4F4 /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8679A208A0FEC00D2D4F4 /* Spotlight.swift */; };
+		98A8679C208A0FEC00D2D4F4 /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8679A208A0FEC00D2D4F4 /* Spotlight.swift */; };
 		98B01C76206BCD7300DD78C7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */; };
 		98B01C77206BCD7300DD78C7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */; };
 		98B01C79206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */; };
@@ -4936,6 +4944,10 @@
 		986B2064207C9C4100E04B96 /* TextEnterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnterDataSource.swift; sourceTree = "<group>"; };
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
 		98A867762080DCBC00D2D4F4 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		98A8677D2088C71A00D2D4F4 /* SpotlightViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpotlightViewController.xib; sourceTree = "<group>"; };
+		98A867852088CADE00D2D4F4 /* SpotlightTransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightTransitionController.swift; sourceTree = "<group>"; };
+		98A867912088CB9200D2D4F4 /* SpotlightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightViewController.swift; sourceTree = "<group>"; };
+		98A8679A208A0FEC00D2D4F4 /* Spotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotlight.swift; sourceTree = "<group>"; };
 		98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceConstants.swift; sourceTree = "<group>"; };
 		98C878222074B78A00374177 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -9560,6 +9572,17 @@
 			path = CustomScrollIndicator;
 			sourceTree = "<group>";
 		};
+		98A8677C2088C64D00D2D4F4 /* SpotlightViewController */ = {
+			isa = PBXGroup;
+			children = (
+				98A8677D2088C71A00D2D4F4 /* SpotlightViewController.xib */,
+				98A867912088CB9200D2D4F4 /* SpotlightViewController.swift */,
+				98A867852088CADE00D2D4F4 /* SpotlightTransitionController.swift */,
+				98A8679A208A0FEC00D2D4F4 /* Spotlight.swift */,
+			);
+			path = SpotlightViewController;
+			sourceTree = "<group>";
+		};
 		98B01C74206BCD4A00DD78C7 /* AnalyticsService */ = {
 			isa = PBXGroup;
 			children = (
@@ -9791,6 +9814,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				98A8677C2088C64D00D2D4F4 /* SpotlightViewController */,
 				CEB2734A205BE3E500E1AE9C /* EmailEnter */,
 				CE1353332004F0D20004CBBE /* TextEnter */,
 				8C6EF8601F348B5C002AC795 /* BottomSelectionTabBar */,
@@ -12229,6 +12253,7 @@
 				8C06AF392008AD70003D8E05 /* close_icon.png in Resources */,
 				8C0E901E1FDEBDFF00789C91 /* MailVerificationViewController.xib in Resources */,
 				8C06B1492008AD72003D8E05 /* target_secili@2x.png in Resources */,
+				98A8677F2088C71A00D2D4F4 /* SpotlightViewController.xib in Resources */,
 				8C06B0072008AD71003D8E05 /* Kucuk_Selected.png in Resources */,
 				8C06B03D2008AD71003D8E05 /* Orta_Selected@2x.png in Resources */,
 				8C06AFF32008AD71003D8E05 /* kirmizi@2x.png in Resources */,
@@ -13153,6 +13178,7 @@
 				8C06B0582008AD71003D8E05 /* paylas_akilli_depo.png in Resources */,
 				8C06B1CC2008AD72003D8E05 /* sticker_resize.png in Resources */,
 				8C06B10E2008AD72003D8E05 /* status_badge@3x.png in Resources */,
+				98A8677E2088C71A00D2D4F4 /* SpotlightViewController.xib in Resources */,
 				8C06AEC22008AD70003D8E05 /* alt_cizgili_secili.png in Resources */,
 				7C5358101F9492DA00EABBAF /* OTPViewController~iphone.xib in Resources */,
 				8C06B1562008AD72003D8E05 /* text_selected@3x.png in Resources */,
@@ -13529,7 +13555,7 @@
 				8C0B91A820170EAD00A5BA81 /* ManageContactsRouterInput.swift in Sources */,
 				B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
 				8C0E8C661FDEBDFF00789C91 /* ActivityFileType.swift in Sources */,
-				8C0B91B62017103D00A5BA81 /* BuildFile in Sources */,
+				8C0B91B62017103D00A5BA81 /* (null) in Sources */,
 				8C0E8C671FDEBDFF00789C91 /* ActivityType.swift in Sources */,
 				CE1B7625204D347D00B5E12A /* Error+Network.swift in Sources */,
 				4A9886F520443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
@@ -13624,6 +13650,7 @@
 				B5C4C8A32049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				482509DA2061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */,
 				8C0E8CB71FDEBDFF00789C91 /* CreateStoryPhotosOrderPresenter.swift in Sources */,
+				98A8678C2088CAE000D2D4F4 /* SpotlightTransitionController.swift in Sources */,
 				8C0E8CB91FDEBDFF00789C91 /* LoginRouter.swift in Sources */,
 				8C0E8CBA1FDEBDFF00789C91 /* ActivityIndicatorManager.swift in Sources */,
 				8C0E8CBB1FDEBDFF00789C91 /* FeedbackService.swift in Sources */,
@@ -14100,7 +14127,7 @@
 				8C06AC1D20066641003D8E05 /* TurkcellSecurityViewIO.swift in Sources */,
 				8C0E8E4A1FDEBDFF00789C91 /* SyncDBUtils.m in Sources */,
 				8C0E8E4B1FDEBDFF00789C91 /* CreateStoryNameViewOutput.swift in Sources */,
-				8C0B91B52017103900A5BA81 /* BuildFile in Sources */,
+				8C0B91B52017103900A5BA81 /* (null) in Sources */,
 				4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */,
 				8C0E8E501FDEBDFF00789C91 /* LocalAlbumRouter.swift in Sources */,
 				CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */,
@@ -14430,6 +14457,7 @@
 				8C0E8F791FDEBDFF00789C91 /* SelectNameViewController.swift in Sources */,
 				8C0E8F7A1FDEBDFF00789C91 /* SelectNameModuleInput.swift in Sources */,
 				8C0E8F7B1FDEBDFF00789C91 /* SelectNamePresenter.swift in Sources */,
+				98A867932088CB9200D2D4F4 /* SpotlightViewController.swift in Sources */,
 				C62239A6204972F40043ED44 /* FaceImageItemsInteractorOutput.swift in Sources */,
 				8C0E8F7C1FDEBDFF00789C91 /* BaseView.swift in Sources */,
 				8C0E8F7D1FDEBDFF00789C91 /* ImageForDowload.swift in Sources */,
@@ -14460,7 +14488,7 @@
 				4A8CC31B201A027400C040C4 /* FaceImageInteractorInput.swift in Sources */,
 				8C0E8F8E1FDEBDFF00789C91 /* DropboxStatusValue.swift in Sources */,
 				8C0E8F8F1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
-				8C0B91B82017104100A5BA81 /* BuildFile in Sources */,
+				8C0B91B82017104100A5BA81 /* (null) in Sources */,
 				8C0E8F901FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				8C0E8F911FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				8C0E8F921FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
@@ -14484,6 +14512,7 @@
 				CE23A0F9205FF5320048267D /* UnderlineTextField.swift in Sources */,
 				8C0E8FA11FDEBDFF00789C91 /* AlbumDetailViewController.swift in Sources */,
 				8C0B919D20170E6400A5BA81 /* DuplicatedContactsInteractor.swift in Sources */,
+				98A8679C208A0FEC00D2D4F4 /* Spotlight.swift in Sources */,
 				8C0E8FA21FDEBDFF00789C91 /* SingletonStorage.swift in Sources */,
 				CE0596F420385E950083D6FC /* ImageFormat.swift in Sources */,
 				98EAC9432080CBFF00AAD5B6 /* ContactService.swift in Sources */,
@@ -14721,6 +14750,7 @@
 				4AFAEAC12027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */,
 				CE23A0F2205FF4E00048267D /* ErrorPresenter.swift in Sources */,
 				CE51AB6C1EF90853005DCEE0 /* LoginPresenter.swift in Sources */,
+				98A867922088CB9200D2D4F4 /* SpotlightViewController.swift in Sources */,
 				7C6945E720039F4A00152344 /* FreeAppSpaceConfigurator.swift in Sources */,
 				CE51AB6E1EF90853005DCEE0 /* CurioLocationManager.m in Sources */,
 				CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */,
@@ -14927,6 +14957,7 @@
 				7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				CE51AC461EF90853005DCEE0 /* CurioReachabilityEx.m in Sources */,
 				7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */,
+				98A8678B2088CAE000D2D4F4 /* SpotlightTransitionController.swift in Sources */,
 				7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				CE51AC471EF90853005DCEE0 /* DataStorage.swift in Sources */,
 				CEEF22AA2063D6E000CE3949 /* CALayer+Animation.swift in Sources */,
@@ -15351,6 +15382,7 @@
 				36F1269830911DA792B987AA /* PhotoVideoDetailViewController.swift in Sources */,
 				D49886581F3EFBE200F50C95 /* ImportPhotosInitializer.swift in Sources */,
 				065212E5C2E83D762D0B4492 /* PhotoVideoDetailModuleInput.swift in Sources */,
+				98A8679B208A0FEC00D2D4F4 /* Spotlight.swift in Sources */,
 				9BBF662583E415D3BC0ED486 /* PhotoVideoDetailPresenter.swift in Sources */,
 				423ACC30BF9A5D703D6D7EFD /* PhotoVideoDetailInteractorInput.swift in Sources */,
 				8CFF86931F0F96E600520D18 /* SyncSettings.m in Sources */,
