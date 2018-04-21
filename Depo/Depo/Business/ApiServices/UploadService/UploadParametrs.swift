@@ -91,7 +91,7 @@ class Upload: UploadRequestParametrs {
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
             HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
             HeaderConstant.Expect                : "100-continue",
-            HeaderConstant.XObjectMetaDeviceType : Device.isIpad ? "IPAD" : "IPHONE",
+            HeaderConstant.XObjectMetaDeviceType : Device.deviceType,
             HeaderConstant.XObjectMetaIosMetadataHash : item.asset?.localIdentifier ?? "",
             HeaderConstant.ContentLength         : "\(item.fileSize)"
         ]

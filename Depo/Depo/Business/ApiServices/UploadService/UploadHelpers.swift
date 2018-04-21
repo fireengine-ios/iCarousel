@@ -25,6 +25,3 @@ enum MetaStrategy: String {
     case ConflictControl = "0"
     case WithoutConflictControl = "1"
 }
-
-typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void
-typealias FileUploadOperationSucces = (_ item: WrapData) -> Void

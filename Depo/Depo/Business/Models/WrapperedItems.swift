@@ -11,9 +11,9 @@ import Photos
 import SDWebImage
 
 typealias Item = WrapData
-
+typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void
+typealias FileUploadOperationSucces = (_ item: WrapData) -> Void
 typealias RemoteImage = (_ image: UIImage?) -> Void
-
 typealias RemoteImageError = (_ error: Error?) -> Void
 
 class LocalMediaContent {
