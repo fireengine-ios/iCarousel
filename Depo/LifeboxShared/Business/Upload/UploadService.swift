@@ -100,11 +100,3 @@ final class UploadService {
         }
     }
 }
-
-
-extension FileManager {
-    func fileSize(at url: URL) -> Int64? {
-        let attributes = try? FileManager.default.attributesOfItem(atPath: url.path)
-        return attributes?[FileAttributeKey.size] as? Int64
-    }
-}
