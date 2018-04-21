@@ -20,6 +20,7 @@ class SelectFolderPresenter: DocumentsGreedPresenter {
         dataSource.maxSelectionCount = 0
         dataSource.setSelectionState(selectionState: false)
         dataSource.updateDisplayngType(type: .list)
+        dataSource.needShow3DotsInCell = false
     }
     
     override func onNextButton() {
