@@ -85,6 +85,8 @@ class LargeFullOfQuotaPopUp: UIViewController {
         }
     }
     
+    let gradient = CAGradientLayer()
+    
     // MARK: - Animation
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,19 +120,22 @@ class LargeFullOfQuotaPopUp: UIViewController {
             self.dismiss(animated: false, completion: completion)
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let colorTop = ColorConstants.orangeGradientStart
         let colorBottom = ColorConstants.orangeGradientEnd
         
-        let gradient = CAGradientLayer()
         gradient.colors = [colorTop.cgColor, colorBottom.cgColor]
         gradient.locations = [0.0, 1.0]
         gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
         gradient.endPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.frame = bacgroundViewForImage.frame
         bacgroundViewForImage.layer.insertSublayer(gradient, at: 0)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        gradient.frame = bacgroundViewForImage.frame
     }
     
     @IBAction func onSkipButton() {
