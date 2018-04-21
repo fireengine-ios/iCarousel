@@ -34,14 +34,10 @@ class SelectFolderPresenter: DocumentsGreedPresenter {
         }
     }
     
-//     func getContentWithSuccess(files: [BaseDataSourceItem]){
-//        super .getContentWithSuccess(files: files)
-//    }
-    
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         log.debug("SelectFolderPresenter onItemSelected")
 
-        guard let wraperd = item as? Item else {
+        guard let wraperd = item as? Item, wraperd.isFolder == true else {
             return
         }
         let router = RouterVC()
