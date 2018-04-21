@@ -8,7 +8,7 @@
 
 import Alamofire
 
-typealias ShareDataHandler = (_ shareData: ShareData) -> Void
+typealias ShareDataHandler = (ShareData) -> Void
 
 final class UploadQueueService {
     
@@ -30,7 +30,7 @@ final class UploadQueueService {
                       didStartUpload: ShareDataHandler? = nil,
                       complition: @escaping ResponseVoid) {
         
-        let operations: [Operation] = shareDataArray.flatMap { shareData in
+        let operations: [Operation] = shareDataArray.compactMap { shareData in
             
             UploadOperation(url: shareData.url, contentType: shareData.contentType, progressHandler: progress, didStartUpload: {
                 didStartUpload?(shareData)
