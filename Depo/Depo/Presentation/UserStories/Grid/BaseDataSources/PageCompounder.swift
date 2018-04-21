@@ -177,8 +177,7 @@ final class PageCompounder {
                         guard let `self` = self else {
                             return
                         }
-                        if compoundedPage.count < self.pageSize, self.coreData.inProcessAppendingLocalFiles,
-                           !self.coreData.originalAssetsBeingAppended.assets(afterDate: firstItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty {
+                        if compoundedPage.count < self.pageSize, self.coreData.inProcessAppendingLocalFiles {
                             self.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: compoundedPage, sortType: sortType, predicate: compundedPredicate, compoundedCallback: compoundedCallback)
                             return
                             
@@ -283,7 +282,6 @@ final class PageCompounder {
             
             guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
                 let firstFreshLocalItem = freshlyDBAppendedItems.first,
-                ///DO I need to cehck cache also here?
                 firstFreshLocalItem.metaDate >= lastItem.metaDate,
                 firstFreshLocalItem.metaDate <= firstItem.metaDate
                 else {
