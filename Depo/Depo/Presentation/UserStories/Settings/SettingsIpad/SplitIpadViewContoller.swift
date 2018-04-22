@@ -54,13 +54,13 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     
     func goToPeriodicContactSync() {
         if let left = leftController {
-            configurateWithControllers(leftViewController: left, controllers: [RouterVC().syncContacts])
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().periodicContactsSync])
         }
     }
     
     func goToFaceImage() {
         if let left = leftController {
-            configurateWithControllers(leftViewController: left, controllers: [RouterVC().periodicContactsSync])
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().faceImage])
         }
     }
     

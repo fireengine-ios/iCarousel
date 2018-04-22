@@ -17,9 +17,10 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet weak var switcher: CustomSwitch!
-    @IBOutlet private var optionsViews: [AutoSyncSettingsOptionView]!
+    @IBOutlet private var optionsViews: [PeriodicContactsSyncSettingsOptionView]!
     @IBOutlet private weak var optionsStackView: UIStackView!
     @IBOutlet private var optionSeparators: [UIView]!
+    @IBOutlet private weak var separatorView: UIView!
     
     private let options: [PeriodicContactsSyncOption] = [.daily, .weekly, .monthly]
     
@@ -59,10 +60,11 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         switcher.isSelected = model.isSelected
         
         for view in optionsViews {
-            view.setColors(isFromSettings: true)
+            view.setColors()
         }
         
         optionsStackView.isHidden = !model.isSelected
+        separatorView.isHidden = !model.isSelected
         periodicContactSyncSetting = setting
     }
     
@@ -72,7 +74,7 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         
         for view in optionsViews {
             view.delegate = self
-            view.setColors(isFromSettings: isFromSettings)
+            view.setColors()
         }
         
         for separator in optionSeparators {
@@ -84,7 +86,7 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         for (option, view) in zip(options, optionsViews) {
             view.setup(with: option, isSelected: periodicContactSyncSetting.option == option)
             view.delegate = self
-            view.setColors(isFromSettings: isFromSettings)
+            view.setColors()
         }
         
         optionsStackView.isHidden = !switcher.isOn
@@ -98,13 +100,14 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         model.isSelected = switcher.isOn
         delegate?.onValueChanged(cell: self)
         optionsStackView.isHidden = !switcher.isOn
+        separatorView.isHidden = !switcher.isOn
     }
     
 }
 
 // MARK: - AutoSyncSettingsOptionViewDelegate
 
-extension PeriodicContactSyncSettingsTableViewCell: AutoSyncSettingsOptionViewDelegate {
+extension PeriodicContactSyncSettingsTableViewCell: PeriodicContactsSyncSettingsOptionViewDelegate {
     func didSelect(option: PeriodicContactsSyncOption) {
         periodicContactSyncSetting.option = option
         updateViews()

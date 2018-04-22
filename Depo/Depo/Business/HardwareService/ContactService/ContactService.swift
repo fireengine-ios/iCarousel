@@ -9,6 +9,8 @@
 import Foundation
 import Contacts
 
+typealias ContactsLibraryGranted = (_ granted: Bool) -> Void
+
 final class ContactService {
 
     func getContactsCount() -> Int? {
@@ -26,4 +28,25 @@ final class ContactService {
         return contactsCount
     }
     
+    func askPermissionForContactsFramework(redirectToSettings: Bool, completion: @escaping ContactsLibraryGranted) {
+        log.debug("ContactService showAccessAlert")
+        
+        let store = CNContactStore()
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+        case .authorized:
+            completion(true)
+        case .denied:
+            DispatchQueue.main.async {
+                completion( false)
+            }
+        case .restricted, .notDetermined:
+            store.requestAccess(for: .contacts) { granted, error in
+                if granted {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
+        }
+    }
 }

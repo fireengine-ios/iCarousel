@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class PeriodicContactSyncViewController: UIViewController {
+final class PeriodicContactSyncViewController: ViewController {
     
     var output: PeriodicContactSyncViewOutput!
     
@@ -16,15 +16,25 @@ final class PeriodicContactSyncViewController: UIViewController {
     @IBOutlet weak private var tableView: UITableView!
     
     private lazy var activityManager = ActivityIndicatorManager()
-    
+        
     // MARK: - LifeCicle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if !Device.isIpad {
+            setNavigationTitle(title: TextConstants.periodicContactsSync)
+        }
+        
+        titleLabel.text = TextConstants.periodContactSyncFromSettingsTitle
+        titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        titleLabel.textAlignment = .left
         titleLabel.textColor = ColorConstants.textGrayColor
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
-        titleLabel.text = TextConstants.autoSyncFromSettingsTitle
+
+        if Device.isIpad {
+            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 22)
+            titleLabel.textAlignment = .center
+        }
         
         activityManager.delegate = self
         
@@ -40,9 +50,8 @@ final class PeriodicContactSyncViewController: UIViewController {
     }
     
     private func configureNavBar() {
-        setTitle(withString: TextConstants.periodicContactsSync)
-        
         navigationController?.navigationItem.title = TextConstants.backTitle
+        navigationBarWithGradientStyle()
     }
 
 }

@@ -17,6 +17,8 @@ protocol StorageVars: class {
     var autoSyncSettingsMigrationCompleted: Bool { get set }
     var homePageFirstTimeLogin: Bool { get set }
     var smallFullOfQuotaPopUpCheckBox: Bool { get set }
+    var periodicContactSyncSet: Bool { get set }
+    var periodicContactSyncSettings: [String: Any]? { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -40,6 +42,12 @@ final class UserDefaultsVars: StorageVars {
         set { userDefaults.set(newValue, forKey: autoSyncSetKey) }
     }
     
+    private let periodicContactSyncSetKey = "PeriodicContactSyncSetSetKey"
+    var periodicContactSyncSet: Bool {
+        get { return userDefaults.bool(forKey: periodicContactSyncSetKey) }
+        set { userDefaults.set(newValue, forKey: periodicContactSyncSetKey) }
+    }
+    
     /// need flag for SavingAttemptsCounterByUnigueUserID.emptyEmailCounter
     /// when user logged in but drop app at EmailEnterController (func openEmptyEmail)
     /// used in AppConfigurator emptyEmailUpIfNeed()
@@ -53,6 +61,12 @@ final class UserDefaultsVars: StorageVars {
     var autoSyncSettings: [String: Any]? {
         get { return userDefaults.dictionary(forKey: autoSyncSettingsKey) }
         set { userDefaults.set(newValue, forKey: autoSyncSettingsKey) }
+    }
+    
+    private let periodicContactSyncSettingsKey = "periodicContactSyncSettingsKey"
+    var periodicContactSyncSettings: [String: Any]? {
+        get { return userDefaults.dictionary(forKey: periodicContactSyncSettingsKey) }
+        set { userDefaults.set(newValue, forKey: periodicContactSyncSettingsKey) }
     }
     
     /// auto sync settings migration from the old app

@@ -13,5 +13,8 @@ protocol PeriodicContactSyncInteractorOutput: class {
     func showError(error: String)
     
     func prepaire(syncSettings: PeriodicContactsSyncSettings)
+
+    func permissionSuccess()
+    func permissionFail()
 }
 

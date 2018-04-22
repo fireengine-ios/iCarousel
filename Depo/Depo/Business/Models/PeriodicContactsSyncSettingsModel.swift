@@ -12,6 +12,12 @@ struct PeriodicContactsSyncSetting {
     var option: PeriodicContactsSyncOption
 }
 
+extension PeriodicContactsSyncSetting: Equatable {
+    static func ==(lhs: PeriodicContactsSyncSetting, rhs: PeriodicContactsSyncSetting) -> Bool {
+        return lhs.option == rhs.option
+    }
+}
+
 enum PeriodicContactsSyncOption {
     case daily
     case weekly
@@ -72,7 +78,7 @@ final class PeriodicContactsSyncSettings {
         timeSetting.option = .daily
     }
     
-    private func set(periodicContactsSync: PeriodicContactsSyncSetting) {
+    func set(periodicContactsSync: PeriodicContactsSyncSetting) {
         timeSetting = periodicContactsSync
     }
     

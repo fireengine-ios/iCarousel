@@ -60,7 +60,7 @@ final class PeriodicContactSyncDataSource: NSObject {
     
     func createAutoSyncSettings() -> PeriodicContactsSyncSettings {
         guard let settings = periodContactsSyncSettings else {
-            return PeriodContactsSyncSettings()
+            return PeriodicContactsSyncSettings()
         }
         return settings
     }
@@ -84,7 +84,7 @@ extension PeriodicContactSyncDataSource: PeriodicContactSyncSettingsTableViewCel
     
     func onValueChanged(cell: PeriodicContactSyncSettingsTableViewCell) {
         if cell.switcher.isOn {
-            periodContactsSyncSettings?.isAutoSyncTimingOptionEnabled = true
+            periodContactsSyncSettings?.isPeriodicContactsSyncOptionEnabled = true
         } else {
             forceDisableAutoSync()
             reloadTableView()
@@ -94,7 +94,7 @@ extension PeriodicContactSyncDataSource: PeriodicContactSyncSettingsTableViewCel
     }
     
     func didChangeTime(setting: PeriodicContactsSyncSetting) {
-        autoSyncSettings?.set(setting: setting)
+        periodContactsSyncSettings?.set(periodicContactsSync: setting)
         
         delegate?.onValueChanged()
     }

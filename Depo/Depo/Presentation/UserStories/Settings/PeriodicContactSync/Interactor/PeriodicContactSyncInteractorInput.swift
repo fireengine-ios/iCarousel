@@ -11,5 +11,6 @@ import Foundation
 protocol PeriodicContactSyncInteractorInput: class {
     func prepareCellModels()
     func onSave(settings: PeriodicContactsSyncSettings)
+    func checkPermission()
 }
 
