@@ -32,12 +32,12 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                 
                 if let album = collectionFetchResult.firstObject {
                     let assetsFetchResult = PHAsset.fetchAssets(in: album, options: nil)
-                    var assetsIds = [String]()
+                    var assets = [PHAsset]()
                     assetsFetchResult.enumerateObjects({ asset, index, stop in
-                        assetsIds.append(asset.localIdentifier)
+                        assets.append(asset)
                     })
                     
-                    var items = CoreDataStack.default.allLocalItems(with: assetsIds)
+                    var items = CoreDataStack.default.allLocalItems(with: assets)
                     
                     items.sort {
                         guard let firstDate = $0.creationDate else {

@@ -75,4 +75,8 @@ public class MediaItem: NSManagedObject {
     var wrapedObject: WrapData {
         return WrapData(mediaItem: self)
     }
+    
+    func wrapedObject(with asset: PHAsset) -> WrapData {
+        return WrapData(mediaItem: self, asset: asset)
+    }
 }
