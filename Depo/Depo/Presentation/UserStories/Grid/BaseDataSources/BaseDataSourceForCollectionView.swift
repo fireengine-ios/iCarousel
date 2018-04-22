@@ -336,7 +336,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     ///.filter{!$0.isLocalItem}.isEmpty in case for only remotes
                     let itemsToCompound = isEmptyLeftOvers ? pageTempoItems : self.pageLeftOvers
                     ///self.transformedLeftOvers() in case for only remotes
-                    if pageTempoItems.isEmpty, self.transformedLeftOvers().isEmpty
+                    if pageTempoItems.isEmpty, itemsToCompound.isEmpty//self.transformedLeftOvers().isEmpty
                         /**isEmptyLeftOvers*/ {
                         self.delegate?.getNextItems()
                         //DO I need callback here?
