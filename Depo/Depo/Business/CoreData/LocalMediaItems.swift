@@ -47,7 +47,7 @@ extension CoreDataStack {
 
         let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
         
-        updateICloudStatus(for: assetsList, context: backgroundContext)
+        updateICloudStatus(for: assetsList, context: newChildBackgroundContext)
         
         let notSaved = listAssetIdIsNotSaved(allList: assetsList, context: backgroundContext)
         originalAssetsBeingAppended.append(list: notSaved)///tempo assets
