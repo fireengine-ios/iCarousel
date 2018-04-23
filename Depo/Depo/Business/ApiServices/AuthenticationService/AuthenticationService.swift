@@ -344,6 +344,7 @@ class AuthenticationService: BaseRequestService {
             RecentSearchesService.shared.clearAll()
             SyncServiceManager.shared.stopSync()
             AutoSyncDataStorage().clear()
+            PeriodicContactSyncDataStorage().clear()
             SingletonStorage.shared.accountInfo = nil
             ItemOperationManager.default.clear()
             self.player.stop()

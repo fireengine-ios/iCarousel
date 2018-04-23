@@ -11,9 +11,9 @@ import Photos
 import SDWebImage
 
 typealias Item = WrapData
-
+typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void
+typealias FileUploadOperationSucces = (_ item: WrapData) -> Void
 typealias RemoteImage = (_ image: UIImage?) -> Void
-
 typealias RemoteImageError = (_ error: Error?) -> Void
 
 class LocalMediaContent {
@@ -860,7 +860,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         super.init()
         parent = mediaItem.parent
         md5 = mediaItem.md5Value ?? "not md5"
-        uuid = "\(mediaItem.trimmedLocalFileID)~\(UUID().uuidString)"
+        uuid = "\(mediaItem.trimmedLocalFileID ?? "")~\(UUID().uuidString)"
         
         isLocalItem = mediaItem.isLocalItemValue
         name = mediaItem.nameValue
