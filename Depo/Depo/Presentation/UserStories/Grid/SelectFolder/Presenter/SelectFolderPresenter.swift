@@ -20,6 +20,7 @@ class SelectFolderPresenter: DocumentsGreedPresenter {
         dataSource.maxSelectionCount = 0
         dataSource.setSelectionState(selectionState: false)
         dataSource.updateDisplayngType(type: .list)
+        dataSource.needShow3DotsInCell = false
     }
     
     override func onNextButton() {
@@ -34,14 +35,10 @@ class SelectFolderPresenter: DocumentsGreedPresenter {
         }
     }
     
-//     func getContentWithSuccess(files: [BaseDataSourceItem]){
-//        super .getContentWithSuccess(files: files)
-//    }
-    
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         log.debug("SelectFolderPresenter onItemSelected")
 
-        guard let wraperd = item as? Item else {
+        guard let wraperd = item as? Item, wraperd.isFolder == true else {
             return
         }
         let router = RouterVC()
