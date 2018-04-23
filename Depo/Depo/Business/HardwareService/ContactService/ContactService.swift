@@ -36,9 +36,7 @@ final class ContactService {
         case .authorized:
             completion(true)
         case .denied:
-            DispatchQueue.main.async {
-                completion( false)
-            }
+            completion( false)
         case .restricted, .notDetermined:
             store.requestAccess(for: .contacts) { granted, error in
                 if granted {
