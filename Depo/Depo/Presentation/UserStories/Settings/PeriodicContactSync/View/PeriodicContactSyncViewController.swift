@@ -22,10 +22,6 @@ final class PeriodicContactSyncViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if !Device.isIpad {
-            setNavigationTitle(title: TextConstants.periodicContactsSync)
-        }
-        
         titleLabel.text = TextConstants.periodContactSyncFromSettingsTitle
         titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
         titleLabel.textAlignment = .left
@@ -34,6 +30,8 @@ final class PeriodicContactSyncViewController: ViewController {
         if Device.isIpad {
             titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 22)
             titleLabel.textAlignment = .center
+        } else {
+            setNavigationTitle(title: TextConstants.periodicContactsSync)
         }
         
         activityManager.delegate = self
