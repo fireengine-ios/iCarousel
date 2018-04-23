@@ -1164,13 +1164,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     //MARK: UploadNotificationManagerProtocol
     
-    func getIndexPathForObject(objectUUID: String) -> IndexPath? {
+    func getIndexPathForObject(trimmedLocalID: String) -> IndexPath? {
         var indexPath: IndexPath? = nil
-        let items = getAllObjects()
         
-        for (section, array) in items.enumerated() {
+        for (section, array) in allItems.enumerated() {
             for (row, arraysObject) in array.enumerated() {
-                if arraysObject.uuid == objectUUID {
+                if arraysObject.getTrimmedLocalID() == trimmedLocalID {
                     indexPath = IndexPath(row: row, section: section)
                 }
             }
@@ -1179,7 +1178,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getCellForFile(objectUUID: String) -> CollectionViewCellForPhoto? {
-        guard let path = getIndexPathForObject(objectUUID: objectUUID),
+        guard let path = getIndexPathForObject(trimmedLocalID: objectUUID),
             let cell = collectionView?.cellForItem(at: path) as? CollectionViewCellForPhoto else {
                 return nil
         }
@@ -1309,7 +1308,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         var arrayOfPath = [IndexPath]()
         
         for item in items {
-            if let path = getIndexPathForObject(objectUUID: item.uuid) {
+            if let path = getIndexPathForObject(trimmedLocalID: item.uuid) {
                 arrayOfPath.append(path)
             }
         }
@@ -1354,6 +1353,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func deleteItems(items: [Item]) {
+        ///use background task here?
         guard !items.isEmpty else {
             return
         }
@@ -1374,56 +1374,59 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
             }
             
-            var serversUUIDs = [String]()
-            let items = getAllObjects()
-            for array in items {
+            var collectionItemsTrimmedLocalIDs = [String]()
+            
+            for array in allItems {
                 for arraysObject in array {
                     if !arraysObject.isLocalItem {
-                        serversUUIDs.append(arraysObject.uuid)
+                        collectionItemsTrimmedLocalIDs.append(arraysObject.getTrimmedLocalID())
                     }
                 }
             }
             objectsForRemoving = objectsForRemoving.filter({
-                return !serversUUIDs.contains($0.uuid)
+                return !collectionItemsTrimmedLocalIDs.contains($0.getTrimmedLocalID())
             })
         
+            if objectsForRemoving.isEmpty {
+                ///check md5
+            }
+            
             let localIDs = serverObjects.map {
-                $0.getUUIDAsLocal()
+                $0.getTrimmedLocalID()
             }
             
             localObjectsForReplace = CoreDataStack.default.allLocalItems(trimmedLocalIds: localIDs)
 
-            let uuids = localObjectsForReplace.map({ $0.uuid })
+            let trimmedLocalIDs = localObjectsForReplace.map({ $0.getTrimmedLocalID() })
             
             if (localObjectsForReplace.count != serverObjects.count) {
                 for object in serverObjects {
-                    if !uuids.contains(object.getUUIDAsLocal()) {
+                    if !trimmedLocalIDs.contains(object.getTrimmedLocalID()) {
                         objectsForRemoving.append(object)
                     }
                 }
             }
             
             for object in localObjectsForReplace {
-                if let index = serversUUIDs.index(of: object.getUUIDAsLocal()) {
-                    serversUUIDs.remove(at: index)
+                if let index = collectionItemsTrimmedLocalIDs.index(of: object.getTrimmedLocalID()) {
+                    collectionItemsTrimmedLocalIDs.remove(at: index)
                 }
             }
             
             for localObject in localObjectsForReplace {
                 for (index, object) in allMediaItems.enumerated() {
-                    if object.uuid == localObject.getUUIDAsLocal() {
+                    if object.getTrimmedLocalID() == localObject.getTrimmedLocalID() {
                         allMediaItems[index] = localObject
                     }
                 }
             }
             
             if (localObjectsForReplace.count > 0) {
-                var newArray = [[BaseDataSourceItem]]()
-                let items = getAllObjects()
-                for array in items {
-                    var sectionArray = [BaseDataSourceItem]()
+                var newArray = [[Item]]()
+                for array in allItems {
+                    var sectionArray = [Item]()
                     for arraysObject in array {
-                        if let index = uuids.index(of: arraysObject.getUUIDAsLocal()) {
+                        if let index = trimmedLocalIDs.index(of: arraysObject.getTrimmedLocalID()) {
                             sectionArray.append(localObjectsForReplace[index])
                         } else {
                             sectionArray.append(arraysObject)
@@ -1431,10 +1434,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     }
                     newArray.append(sectionArray)
                 }
-                
-                setAllItems(items: newArray)
+                allItems = newArray
             }
-        }else {
+        } else {
             objectsForRemoving = items
         }
         
@@ -1445,7 +1447,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         updateCoverPhoto()
     }
     
-    private func updateCellsForObjects(objectsForDelete: [BaseDataSourceItem], objectsForUpdate:[BaseDataSourceItem]) {
+    private func updateCellsForObjects(objectsForDelete: [Item], objectsForUpdate:[Item]) {
         if objectsForDelete.isEmpty && objectsForUpdate.isEmpty {
             return
         }
@@ -1455,22 +1457,21 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         var arrayOfSection = [Int]()
         
         for item in objectsForDelete {
-            if let path = getIndexPathForObject(objectUUID: item.uuid) {
+            if let path = getIndexPathForObject(trimmedLocalID: item.getTrimmedLocalID()) {
                 arrayOfPathForDelete.append(path)
             }
         }
         
         if arrayOfPathForDelete.count > 0{
-            var newArray = [[BaseDataSourceItem]]()
-            var uuids = objectsForDelete.map { $0.uuid }
+            var newArray = [[Item]]()
+            var trimmedLocalIDs = objectsForDelete.map { $0.getTrimmedLocalID() }
             
             var section = 0
-            let items = getAllObjects()
-            for array in items {
-                var newSectionArray = [BaseDataSourceItem]()
+            for array in allItems {
+                var newSectionArray = [Item]()
                 for arraysObject in array {
-                    if let index = uuids.index(of: arraysObject.uuid) {
-                        uuids.remove(at: index)
+                    if let index = trimmedLocalIDs.index(of: arraysObject.getTrimmedLocalID()) {
+                        trimmedLocalIDs.remove(at: index)
                     } else {
                         newSectionArray.append(arraysObject)
                     }
@@ -1489,28 +1490,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         for item in objectsForUpdate {
-            if let path = getIndexPathForObject(objectUUID: item.uuid) {
+            if let path = getIndexPathForObject(trimmedLocalID: item.getTrimmedLocalID()) {
                 arrayOfPathForUpdate.append(path)
             }
         }
-        
-        /////
-        if isPaginationDidEnd {
-            debugPrint("LastPage Reload updateCellsForObjects")
-        }
-        debugPrint("Reload updateCellsForObjects")
+
         collectionView?.reloadData()
-        
-//        collectionView.performBatchUpdates({[weak self] in
-//            if let `self` = self{
-//                self.collectionView.deleteItems(at: arrayOfPathForDelete)
-//                self.collectionView.deleteSections(IndexSet(arrayOfSection))
-//            }
-//        }) { [weak self] (flag) in
-//            if let `self` = self{
-//                self.collectionView.reloadItems(at: arrayOfPathForUpdate)
-//            }
-//        }
     }
     
     func newFolderCreated(){
@@ -1532,7 +1517,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
-        updateCellsForObjects(objectsForDelete: [BaseDataSourceItem](), objectsForUpdate: [item])
+        debugPrint("updatedAlbumCoverPhoto")
+        ///Need further testing, seems like we dont need this any longer.
+//        updateCellsForObjects(objectsForDelete: [], objectsForUpdate: [item as! WrapData])
     }
     
     func albumsDeleted(albums: [AlbumItem]) {
@@ -1631,7 +1618,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func updateCoverPhoto() {
         delegate?.updateCoverPhotoIfNeeded()
     }
-    
 }
 
 
