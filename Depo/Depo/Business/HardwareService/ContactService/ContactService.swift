@@ -47,4 +47,8 @@ final class ContactService {
             }
         }
     }
+    
+    func setPeriodicForContactsSync(periodic: SYNCPeriodic) {
+        SyncSettings.shared().periodicBackup = periodic
+    }
 }
