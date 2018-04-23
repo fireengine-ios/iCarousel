@@ -16,13 +16,11 @@ final class FilesExistManager {
     /// can one NSFileCoordinator coordinate some urls?
     /// put NSFileCoordinator() in property
     func waitFilePreparation(at url: URL, complition: ResponseVoid) {
-        var fcError: NSError? 
-        NSFileCoordinator().coordinate(readingItemAt: url, options: .forUploading, error: &fcError) { _ in
-            if let error = fcError {
-                complition(ResponseResult.failed(error))
-            } else {
-                complition(ResponseResult.success(()))
-            }
+        do {
+            _ = try NSFileCoordinator().coordinate(readingItemAt: url, options: .forUploading)
+            complition(ResponseResult.success(()))
+        } catch  {
+            complition(ResponseResult.failed(error))
         }
     }
 }

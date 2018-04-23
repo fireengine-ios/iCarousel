@@ -18,8 +18,8 @@ extension ShareController where Self: UIViewController {
         guard
             let inputItem = extensionContext?.inputItems.first as? NSExtensionItem,
             let attachments = inputItem.attachments as? [NSItemProvider]
-            else {
-                return
+        else {
+            return
         }
         
         /// type constatnts

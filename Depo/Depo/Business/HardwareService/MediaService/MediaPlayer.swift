@@ -249,7 +249,9 @@ final class MediaPlayer: NSObject {
         if deleteIndexes.contains(currentIndex) {
             // TODO: CHECK ALL STATES
             if play(at: currentIndex) {
-                currentIndex -= 1
+                if deleteIndexes.count > 1, currentIndex > 0 {
+                    currentIndex -= 1
+                }
             } else if list.count > 0 {
                 currentIndex = list.count - 1
                 play(at: currentIndex)

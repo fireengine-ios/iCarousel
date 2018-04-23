@@ -3071,6 +3071,11 @@
 		CE58FB0820444C00007F3F54 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
 		CE5A612D2060E85200793EB0 /* StorageVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6442D2060E776009AFC12 /* StorageVars.swift */; };
 		CE5A612F2060F8AE00793EB0 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
+		CE5FE962208B1C9E0065AC7E /* UploadHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE41FB5861A00FCE6AB /* UploadHelpers.swift */; };
+		CE5FE964208B20400065AC7E /* FileManager+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FE963208B20400065AC7E /* FileManager+Size.swift */; };
+		CE5FE965208B204A0065AC7E /* FileManager+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FE963208B20400065AC7E /* FileManager+Size.swift */; };
+		CE5FE966208B204A0065AC7E /* FileManager+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FE963208B20400065AC7E /* FileManager+Size.swift */; };
+		CE5FE969208B2C2F0065AC7E /* NSFileCoordinator+Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FE967208B2C260065AC7E /* NSFileCoordinator+Coordinate.swift */; };
 		CE61D1B82045947C001D01DC /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		CE61D1B92045947D001D01DC /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		CE61D1BB20459718001D01DC /* ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0596F220385E940083D6FC /* ImageFormat.swift */; };
@@ -5225,6 +5230,8 @@
 		CE58FAFF20444524007F3F54 /* SharedFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFactory.swift; sourceTree = "<group>"; };
 		CE58FB0520444BE8007F3F54 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		CE5A612E2060F8AE00793EB0 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		CE5FE963208B20400065AC7E /* FileManager+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Size.swift"; sourceTree = "<group>"; };
+		CE5FE967208B2C260065AC7E /* NSFileCoordinator+Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFileCoordinator+Coordinate.swift"; sourceTree = "<group>"; };
 		CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxShared.entitlements; sourceTree = "<group>"; };
 		CE61D1BC2046872A001D01DC /* URL+ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+ContentType.swift"; sourceTree = "<group>"; };
 		CE61D1C02046873A001D01DC /* UploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
@@ -10393,6 +10400,8 @@
 				7CD92DC02076027D00010BFA /* iOSDevCenters+GIF.swift */,
 				98A867762080DCBC00D2D4F4 /* ArrayExtension.swift */,
 				CE4ECA7420889B5400AB91C6 /* KeychainSwift+Optional.swift */,
+				CE5FE963208B20400065AC7E /* FileManager+Size.swift */,
+				CE5FE967208B2C260065AC7E /* NSFileCoordinator+Coordinate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -14640,6 +14649,7 @@
 				8C06AC272008AB91003D8E05 /* FreeAppSpacePresenter.swift in Sources */,
 				8C0E8FB61FDEBDFF00789C91 /* FeedbackViewInteractorInput.swift in Sources */,
 				8C0E8FB71FDEBDFF00789C91 /* UIImage+Orientation.swift in Sources */,
+				CE5FE966208B204A0065AC7E /* FileManager+Size.swift in Sources */,
 				8C0E8FB81FDEBDFF00789C91 /* FeedbackViewInteractorOutput.swift in Sources */,
 				8C0E8FB91FDEBDFF00789C91 /* FeedbackViewInteractor.swift in Sources */,
 				8C0E8FBA1FDEBDFF00789C91 /* FeedbackViewRouterInput.swift in Sources */,
@@ -15804,6 +15814,7 @@
 				CE878C45203D4E5000458E0B /* UIWebView+Gesture.swift in Sources */,
 				46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */,
 				7F27470E56D2B8E0764CFF33 /* OTPViewInitializer.swift in Sources */,
+				CE5FE964208B20400065AC7E /* FileManager+Size.swift in Sources */,
 				CE08BDE71FC8403C00440CA0 /* AuthorizationRepository.swift in Sources */,
 				7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */,
 				4A2039C72087ACBC004850ED /* AutoSyncRouterInput.swift in Sources */,
@@ -15831,6 +15842,7 @@
 				CE58FAF220444493007F3F54 /* ShareViewController.swift in Sources */,
 				CE58FB03204445E0007F3F54 /* TokenStorage.swift in Sources */,
 				CE58FB0220444525007F3F54 /* SharedFactory.swift in Sources */,
+				CE5FE965208B204A0065AC7E /* FileManager+Size.swift in Sources */,
 				CE58FB0820444C00007F3F54 /* ColorConstants.swift in Sources */,
 				CEE10CD02047EAD000D97B9F /* CGSize+Scale.swift in Sources */,
 				CE4ECA7720889B6500AB91C6 /* KeychainSwift+Optional.swift in Sources */,
@@ -15859,10 +15871,12 @@
 				CE1458D220458AFC00812544 /* ResponseResult.swift in Sources */,
 				CE61D1BF2046872A001D01DC /* URL+ContentType.swift in Sources */,
 				CE4D2821207E244A003AE4FB /* ViewController.swift in Sources */,
+				CE5FE969208B2C2F0065AC7E /* NSFileCoordinator+Coordinate.swift in Sources */,
 				CE4D2805207E086A003AE4FB /* NumericConstants.swift in Sources */,
 				CE4D2814207E0997003AE4FB /* PasscodeViewImp.swift in Sources */,
 				CE654FB62045613A00232025 /* AuthorizationRepository.swift in Sources */,
 				CE1458CB2045633D00812544 /* ShareConfigurator.swift in Sources */,
+				CE5FE962208B1C9E0065AC7E /* UploadHelpers.swift in Sources */,
 				CE1458C82045619500812544 /* RequestHeader.swift in Sources */,
 				CEE3017F2049520C007E70CE /* Mapping.swift in Sources */,
 				CEBDB1D720444C73007EE1AE /* UIColor+Adjust.swift in Sources */,

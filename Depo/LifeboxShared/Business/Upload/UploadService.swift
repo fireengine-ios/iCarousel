@@ -38,11 +38,20 @@ final class UploadService {
         }
     }
     
-    func upload(url: URL, contentType: String, progressHandler: @escaping Request.ProgressHandler, dataRequestHandler: DataRequestHandler?, complition: @escaping ResponseVoid) {
+    func upload(url: URL, contentType: String, progressHandler: @escaping Request.ProgressHandler, dataRequestHandler: DataRequestHandler?, completion: @escaping ResponseVoid) {
         
         FilesExistManager.shared.waitFilePreparation(at: url) { [weak self] result in
             switch result {
             case .success(_):
+                
+                guard
+                    let fileSize = FileManager.default.fileSize(at: url),
+                    fileSize < NumericConstants.fourGigabytes
+                else {
+                    let error = CustomErrors.text(TextConstants.syncFourGbVideo)
+                    completion(ResponseResult.failed(error))
+                    return
+                }
                 
                 let dataRequest = getBaseUploadUrl { [weak self] result in
                     switch result {
@@ -56,12 +65,14 @@ final class UploadService {
                         
                         let headers: HTTPHeaders = [
                             HeaderConstant.XObjectMetaFavorites: "false",
-                            HeaderConstant.XMetaStrategy: "1",
+                            HeaderConstant.XMetaStrategy: MetaStrategy.WithoutConflictControl.rawValue,
                             HeaderConstant.Expect: "100-continue",
                             HeaderConstant.XObjectMetaParentUuid: "",
                             HeaderConstant.XObjectMetaFileName: url.lastPathComponent,
                             HeaderConstant.ContentType: contentType,
-                            HeaderConstant.XObjectMetaSpecialFolder: "MOBILE_UPLOAD"
+                            HeaderConstant.XObjectMetaSpecialFolder: MetaSpesialFolder.MOBILE_UPLOAD.rawValue,
+                            HeaderConstant.ContentLength: String(fileSize),
+                            HeaderConstant.XObjectMetaDeviceType: Device.deviceType
                         ]
                         
                         let dataRequest = self.sessionManager
@@ -71,20 +82,25 @@ final class UploadService {
                             .responseString { response in
                                 switch response.result {
                                 case .success(_):
-                                    complition(ResponseResult.success(()))
+                                    completion(ResponseResult.success(()))
                                 case .failure(let error):
-                                    complition(ResponseResult.failed(error))
+                                    if response.response?.statusCode == 413 {
+                                        let errocustomError = CustomErrors.text(TextConstants.lifeboxMemoryLimit)
+                                        completion(ResponseResult.failed(errocustomError))
+                                    } else {
+                                        completion(ResponseResult.failed(error))
+                                    }
                                 }
                         }
                         dataRequestHandler?(dataRequest)
                     case .failed(let error):
-                        complition(ResponseResult.failed(error))
+                        completion(ResponseResult.failed(error))
                     }
                 }
                 dataRequestHandler?(dataRequest)
                 
             case .failed(let error):
-                complition(ResponseResult.failed(error))
+                completion(ResponseResult.failed(error))
             }
         }
     }
