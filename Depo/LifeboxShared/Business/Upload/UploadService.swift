@@ -84,7 +84,12 @@ final class UploadService {
                                 case .success(_):
                                     completion(ResponseResult.success(()))
                                 case .failure(let error):
-                                    completion(ResponseResult.failed(error))
+                                    if response.response?.statusCode == 413 {
+                                        let errocustomError = CustomErrors.text(TextConstants.lifeboxMemoryLimit)
+                                        completion(ResponseResult.failed(errocustomError))
+                                    } else {
+                                        completion(ResponseResult.failed(error))
+                                    }
                                 }
                         }
                         dataRequestHandler?(dataRequest)

@@ -601,3 +601,4 @@
 "error_internet" = "Please check your internet connection is active and Mobile Data is ON.";
 "error_login" = "You have not login via app yet";
 "Contacts Sync" = "Contacts Sync";
+"You have reached your lifebox memory limit" = "You have reached your lifebox memory limit";

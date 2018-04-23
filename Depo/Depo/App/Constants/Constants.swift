@@ -827,6 +827,5 @@ struct TextConstants {
     static let lifeboxLargePopUpSkipButtonTitle = NSLocalizedString("LifeboxLargePopUpSkipButtonTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorLogin = NSLocalizedString("error_login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploading = NSLocalizedString("uploading", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-
-    
+    static let lifeboxMemoryLimit = NSLocalizedString("You have reached your lifebox memory limit", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
