@@ -12,7 +12,7 @@ final class PeriodicContactSyncPresenter: BasePresenter {
     
     weak var view: PeriodicContactSyncViewInput?
     var interactor: PeriodicContactSyncInteractorInput!
-    var router: PeriodicContactSyncRouter!
+    var router: PeriodicContactSyncRouterInput!
     
     private let dataSource =  PeriodicContactSyncDataSource()
 }
@@ -38,7 +38,7 @@ extension PeriodicContactSyncPresenter: PeriodicContactSyncViewOutput {
 // MARK: - PeriodicContactSyncInteractorOutput
 
 extension PeriodicContactSyncPresenter: PeriodicContactSyncInteractorOutput {
-    
+ 
     func operationFinished() {
         view?.stopActivityIndicator()
     }
@@ -47,9 +47,18 @@ extension PeriodicContactSyncPresenter: PeriodicContactSyncInteractorOutput {
         UIApplication.showErrorAlert(message: error)
     }
     
-    func prepaire(syncSettings: AutoSyncSettings) {
+    func prepaire(syncSettings: PeriodicContactsSyncSettings) {
         completeAsyncOperationEnableScreen()
         dataSource.showCells(from: syncSettings)
+    }
+    
+    func permissionSuccess() {
+        interactor.onSave(settings: dataSource.createAutoSyncSettings())
+    }
+    
+    func permissionFail() {
+        dataSource.forceDisableAutoSync()
+        router.showContactsSettingsPopUp()
     }
     
 }
@@ -59,7 +68,7 @@ extension PeriodicContactSyncPresenter: PeriodicContactSyncInteractorOutput {
 extension PeriodicContactSyncPresenter: PeriodicContactSyncDataSourceDelegate {
     
     func onValueChanged() {
-        interactor.onSave(settings: dataSource.createAutoSyncSettings())
+        interactor.checkPermission()
     }
     
 }

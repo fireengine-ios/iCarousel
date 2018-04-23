@@ -15,9 +15,9 @@ final class PeriodicContactSyncDataSource: NSObject {
     
     @IBOutlet private weak var tableView: UITableView?
     
-    private var timeSettingModel: AutoSyncModel?
+    private var timeSettingModel: PeriodContactsSyncModel?
     
-    private var autoSyncSettings: AutoSyncSettings?
+    private var periodContactsSyncSettings: PeriodicContactsSyncSettings?
     
     var delegate: PeriodicContactSyncDataSourceDelegate?
         
@@ -39,13 +39,13 @@ final class PeriodicContactSyncDataSource: NSObject {
         }
     }
     
-    func showCells(from settings: AutoSyncSettings) {
-        autoSyncSettings = settings
+    func showCells(from settings: PeriodicContactsSyncSettings) {
+        periodContactsSyncSettings = settings
         setupCells(with: settings)
     }
     
     private func updateCells() {
-        guard let settings = autoSyncSettings else {
+        guard let settings = periodContactsSyncSettings else {
             return
         }
         
@@ -53,20 +53,20 @@ final class PeriodicContactSyncDataSource: NSObject {
         setupCells(with: settings)
     }
     
-    private func setupCells(with settings: AutoSyncSettings) {
-        timeSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellAutoSync, subTitle: "", type: .typeSwitcher, setting: settings.timeSetting, selected: settings.isAutoSyncTimingOptionEnabled)
+    private func setupCells(with settings: PeriodicContactsSyncSettings) {
+        timeSettingModel = PeriodContactsSyncModel(title: TextConstants.autoSyncCellAutoSync, setting: settings.timeSetting, selected: settings.isPeriodicContactsSyncOptionEnabled)
         reloadTableView()
     }
     
-    func createAutoSyncSettings() -> AutoSyncSettings {
-        guard let settings = autoSyncSettings else {
-            return AutoSyncSettings()
+    func createAutoSyncSettings() -> PeriodicContactsSyncSettings {
+        guard let settings = periodContactsSyncSettings else {
+            return PeriodicContactsSyncSettings()
         }
         return settings
     }
     
     func forceDisableAutoSync() {
-        autoSyncSettings?.disableTimingAutoSync()
+        periodContactsSyncSettings?.disablePeriodicContactsSync()
         updateCells()
     }
     
@@ -82,9 +82,9 @@ final class PeriodicContactSyncDataSource: NSObject {
 
 extension PeriodicContactSyncDataSource: PeriodicContactSyncSettingsTableViewCellDelegate {
     
-    func onValueChanged(model: AutoSyncModel, cell: PeriodicContactSyncSettingsTableViewCell) {
+    func onValueChanged(cell: PeriodicContactSyncSettingsTableViewCell) {
         if cell.switcher.isOn {
-            autoSyncSettings?.isAutoSyncTimingOptionEnabled = true
+            periodContactsSyncSettings?.isPeriodicContactsSyncOptionEnabled = true
         } else {
             forceDisableAutoSync()
             reloadTableView()
@@ -93,8 +93,8 @@ extension PeriodicContactSyncDataSource: PeriodicContactSyncSettingsTableViewCel
         delegate?.onValueChanged()
     }
     
-    func didChangeTime(setting: AutoSyncSetting) {
-        autoSyncSettings?.set(setting: setting)
+    func didChangeTime(setting: PeriodicContactsSyncSetting) {
+        periodContactsSyncSettings?.set(periodicContactsSync: setting)
         
         delegate?.onValueChanged()
     }
