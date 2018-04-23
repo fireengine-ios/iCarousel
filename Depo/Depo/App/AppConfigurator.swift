@@ -76,6 +76,7 @@ final class AppConfigurator {
     
     private static func logoutIfNeed() {
         if !tokenStorage.isRememberMe {
+            log.debug("isRememberMe false")
             AuthenticationService().logout(async: false, success: nil)
         }
     }
