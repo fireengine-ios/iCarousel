@@ -860,7 +860,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         super.init()
         parent = mediaItem.parent
         md5 = mediaItem.md5Value ?? "not md5"
-        uuid = "\(mediaItem.trimmedLocalFileID)~\(UUID().uuidString)"
+        uuid = "\(mediaItem.trimmedLocalFileID ?? "")~\(UUID().uuidString)"
         
         isLocalItem = mediaItem.isLocalItemValue
         name = mediaItem.nameValue
