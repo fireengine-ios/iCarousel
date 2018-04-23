@@ -34,7 +34,6 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
     }
     
     func checkPermission() {
-        DispatchQueue.main.async {
             self.contactsService.askPermissionForContactsFramework(redirectToSettings: false, completion: { [weak self] isAccessGranted in
                 if isAccessGranted {
                     self?.output.permissionSuccess()
@@ -42,7 +41,6 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
                     self?.output.permissionFail()
                 }
             })
-        }
     }
     
 }
