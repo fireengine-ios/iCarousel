@@ -19,12 +19,35 @@ extension PeriodicContactsSyncSetting: Equatable {
 }
 
 enum PeriodicContactsSyncOption {
+    case none
     case daily
     case weekly
     case monthly
     
     var localizedText: String {
         switch self {
+        case .none:
+            return ""
+        case .daily:
+            return TextConstants.autoSyncSettingsOptionDaily
+        case .weekly:
+            return TextConstants.autoSyncSettingsOptionWeekly
+        case .monthly:
+            return TextConstants.autoSyncSettingsOptionMonthly
+        }
+    }
+}
+
+enum PeriodicContactsSyncSettingsKey {
+    case isPeriodicContactsSyncEnabledKey
+    case daily
+    case weekly
+    case monthly
+    
+    var localizedText: String {
+        switch self {
+        case .isPeriodicContactsSyncEnabledKey:
+            return TextConstants.isPeriodicContactsSyncEnabledKey
         case .daily:
             return TextConstants.autoSyncSettingsOptionDaily
         case .weekly:
@@ -37,15 +60,6 @@ enum PeriodicContactsSyncOption {
 
 final class PeriodicContactsSyncSettings {
     
-    private struct SettingsKeys {
-        private init() {}
-        
-        static let isPeriodicContactsSyncEnabledKey = "isPeriodicContactsSyncEnabledKey"
-        static let dailyKey = "daily"
-        static let weeklyKey = "weekly"
-        static let monthlyKey = "monthly"
-    }
-    
     var isPeriodicContactsSyncEnabled: Bool {
         return isPeriodicContactsSyncOptionEnabled
     }
@@ -57,10 +71,10 @@ final class PeriodicContactsSyncSettings {
     init() { }
 
     init(with dictionary: [String: Bool]) {
-        isPeriodicContactsSyncOptionEnabled = dictionary[SettingsKeys.isPeriodicContactsSyncEnabledKey] ?? false
+        isPeriodicContactsSyncOptionEnabled = dictionary[PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText] ?? false
         
-        let daily = dictionary[SettingsKeys.dailyKey] ?? true
-        let weekly = dictionary[SettingsKeys.weeklyKey] ?? false
+        let daily = dictionary[PeriodicContactsSyncSettingsKey.daily.localizedText] ?? true
+        let weekly = dictionary[PeriodicContactsSyncSettingsKey.weekly.localizedText] ?? false
         
         //setup time setting
         
@@ -83,9 +97,9 @@ final class PeriodicContactsSyncSettings {
     }
     
     func asDictionary() -> [String: Bool] {
-        return [SettingsKeys.isPeriodicContactsSyncEnabledKey: isPeriodicContactsSyncOptionEnabled,
-                SettingsKeys.dailyKey: (timeSetting.option == .daily),
-                SettingsKeys.weeklyKey: (timeSetting.option == .weekly),
-                SettingsKeys.monthlyKey: (timeSetting.option == .monthly)]
+        return [PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText: isPeriodicContactsSyncOptionEnabled,
+                PeriodicContactsSyncSettingsKey.daily.localizedText: (timeSetting.option == .daily),
+                PeriodicContactsSyncSettingsKey.weekly.localizedText: (timeSetting.option == .weekly),
+                PeriodicContactsSyncSettingsKey.monthly.localizedText: (timeSetting.option == .monthly)]
     }
 }

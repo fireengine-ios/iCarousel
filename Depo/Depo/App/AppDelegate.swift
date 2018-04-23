@@ -197,7 +197,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !tokenStorage.isRememberMe {
             SyncServiceManager.shared.stopSync()
             AutoSyncDataStorage().clear()
-            PeriodicContactSyncDataStorage().clear()
         }
         
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
