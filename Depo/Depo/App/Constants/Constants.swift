@@ -249,6 +249,12 @@ struct TextConstants {
     static let homeCollageCardButtonSaveCollage = NSLocalizedString("Save Collage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     
+    // MARK: Home Animation card
+    static let homeAnimationCardTitle = NSLocalizedString("Animaion", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeAnimationCardSubTitle = NSLocalizedString("We have created an animation from your photos!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeAnimationCardButtonSaveCollage = NSLocalizedString("Save Animation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
     // MARK: Home Album card
     static let homeAlbumCardTitle = NSLocalizedString("Album Card", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeAlbumCardSubTitle = NSLocalizedString("We have created an album for you.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -658,6 +664,7 @@ struct TextConstants {
     static let offersOk = NSLocalizedString("OK", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let offersSettings = NSLocalizedString("Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let offersPrice = NSLocalizedString("%.2f %@ / month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let offersLocalizedPrice = NSLocalizedString("%@ / month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let offersAllCancel = NSLocalizedString("You can open settings and cancel subscption.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     static let subscriptionGoogleText = NSLocalizedString("Google Play Store", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -805,6 +812,20 @@ struct TextConstants {
     //Periodic contacts sync
     static let periodicContactsSync = NSLocalizedString("Contacts Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    // MARK: - Quota PopUps
+    static let fullQuotaSmallPopUpTitle = NSLocalizedString("LifeboxSmallPopUpTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fullQuotaSmallPopUpSubTitle = NSLocalizedString("LifeboxSmallPopUpSubTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fullQuotaSmallPopUpCheckBoxText = NSLocalizedString("LifeboxSmallPopUpCheckBoxTex", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fullQuotaSmallPopUpFistButtonTitle = NSLocalizedString("LifeboxSmallPopUpFirstButtonText", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fullQuotaSmallPopUpSecondButtonTitle = NSLocalizedString("LifeboxSmallPopUpSecondButtonText", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let lifeboxLargePopUpTitle100 = NSLocalizedString("LifeboxLargePopUpTitle100", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lifeboxLargePopUpTitle90 = NSLocalizedString("LifeboxLargePopUpTitle90", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lifeboxLargePopUpTitle80 = NSLocalizedString("LifeboxLargePopUpTitle80", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lifeboxLargePopUpSubTitle = NSLocalizedString("LifeboxLargePopUpSubTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lifeboxLargePopUpExpandButtonTitle = NSLocalizedString("LifeboxLargePopUpExpandButtonTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lifeboxLargePopUpSkipButtonTitle = NSLocalizedString("LifeboxLargePopUpSkipButtonTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let periodContactSyncFromSettingsTitle = NSLocalizedString("Lifebox can sync your contacts automatically.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorLogin = NSLocalizedString("error_login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploading = NSLocalizedString("uploading", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
@@ -817,4 +838,9 @@ struct TextConstants {
     static let spotlightCollageCard = NSLocalizedString("Discover your first collage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let spotlightAnimationCard = NSLocalizedString("Discover your first animation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let spotlightFilterCard = NSLocalizedString("Discover your first filtered photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")    
+    static let lifeboxMemoryLimit = NSLocalizedString("You have reached your lifebox memory limit", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let periodicContactsSyncAccessAlertTitle = NSLocalizedString("Error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let periodicContactsSyncAccessAlertText = NSLocalizedString("Error occurred while accessing your contacts.\nPlease check your settings.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let periodicContactsSyncAccessAlertGoToSettings = NSLocalizedString("Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let periodicContactsSyncAccessAlertNo = NSLocalizedString("No", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

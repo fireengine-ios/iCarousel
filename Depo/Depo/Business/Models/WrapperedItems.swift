@@ -11,9 +11,9 @@ import Photos
 import SDWebImage
 
 typealias Item = WrapData
-
+typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void
+typealias FileUploadOperationSucces = (_ item: WrapData) -> Void
 typealias RemoteImage = (_ image: UIImage?) -> Void
-
 typealias RemoteImageError = (_ error: Error?) -> Void
 
 class LocalMediaContent {
@@ -582,6 +582,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
             }
             return "image/jpg"
         case .video:
+            if let type = urlToFile?.pathExtension.lowercased(), !type.isEmpty {
+                return "video/\(type)"
+            }
             return "video/mp4"
         default:
             return "unknown"
@@ -817,7 +820,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
-    init(mediaItem: MediaItem) {
+    init(mediaItem: MediaItem, asset: PHAsset? = nil) {
 //        coreDataObject = mediaItem
         fileSize = mediaItem.fileSizeValue
         favorites = mediaItem.favoritesValue
@@ -832,11 +835,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         if let assetId = mediaItem.localFileID,
            let url = mediaItem.urlToFileValue {
-    
-            if let asset = LocalMediaStorage.default.assetsCache.assetBy(identifier: assetId),
+            
+            if let asset = asset ?? PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject,
                 let urlToFile = URL(string: url) {
-                let tmp = LocalMediaContent(asset: asset,
-                                             urlToFile: urlToFile)
+                let tmp = LocalMediaContent(asset: asset, urlToFile: urlToFile)
                 assetDuration = asset.duration
 //                mediaItem.metadata?.duration = asset.duration
                 patchToPreview = .localMediaContent(tmp)
@@ -858,7 +860,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         super.init()
         parent = mediaItem.parent
         md5 = mediaItem.md5Value ?? "not md5"
-        uuid = mediaItem.uuidValue ?? ""//UUID().description
+        uuid = "\(mediaItem.trimmedLocalFileID ?? "")~\(UUID().uuidString)"
+        
         isLocalItem = mediaItem.isLocalItemValue
         name = mediaItem.nameValue
         creationDate = mediaItem.creationDateValue as Date?
@@ -921,17 +924,17 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return ""
     }
     
-    func getLocalID() -> String {
-        if isLocalItem {
-            return asset?.localIdentifier ?? ""
+    func getTrimmedLocalID() -> String {
+        if isLocalItem, let localID = asset?.localIdentifier {
+            return  localID.components(separatedBy: "/").first ?? localID
         } else if uuid.contains("~"){
             return uuid.components(separatedBy: "~").first ?? uuid
         }
         return ""
     }
     
-    /*
-    //Need this beacase old app shares name with slash
+    /**
+     Need this beacase old app shares name with slash
     */
     private class func removeFirstSlash(text: String) -> String {
         var tempoString = text

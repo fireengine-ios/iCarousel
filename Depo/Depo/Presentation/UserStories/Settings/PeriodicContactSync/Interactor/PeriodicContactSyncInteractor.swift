@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import Contacts
 
 final class PeriodicContactSyncInteractor {
     weak var output: PeriodicContactSyncInteractorOutput!
     
-    private var dataStorage = AutoSyncDataStorage()
-    private let localMediaStorage = LocalMediaStorage.default
+    private var dataStorage = PeriodicContactSyncDataStorage()
+    
+    private let contactsService = ContactService()
 }
 
 // MARK: - PeriodicContactSyncInteractorInput
@@ -27,9 +29,18 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
         }
     }
     
-    func onSave(settings: AutoSyncSettings) {
-        dataStorage.save(autoSyncSettings: settings)
-        SyncServiceManager.shared.update(syncSettings: settings)
+    func onSave(settings: PeriodicContactsSyncSettings) {
+        dataStorage.save(periodicContactSyncSettings: settings)
+    }
+    
+    func checkPermission() {
+            self.contactsService.askPermissionForContactsFramework(redirectToSettings: false, completion: { [weak self] isAccessGranted in
+                if isAccessGranted {
+                    self?.output.permissionSuccess()
+                } else {
+                    self?.output.permissionFail()
+                }
+            })
     }
     
 }

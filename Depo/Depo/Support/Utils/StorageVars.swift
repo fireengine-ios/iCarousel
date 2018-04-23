@@ -9,15 +9,26 @@
 import Foundation
 
 protocol StorageVars: class {
+    var isAppFirstLaunch: Bool { get set }
     var currentUserID: String? { get set }
     var emptyEmailUp: Bool { get set }
     var autoSyncSet: Bool { get set }
     var autoSyncSettings: [String: Any]? { get set }
     var autoSyncSettingsMigrationCompleted: Bool { get set }
+    var homePageFirstTimeLogin: Bool { get set }
+    var smallFullOfQuotaPopUpCheckBox: Bool { get set }
+    var periodicContactSyncSet: Bool { get set }
+    var periodicContactSyncSettings: [String: Any]? { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
     private let userDefaults = UserDefaults.standard
+    
+    private let isAppFirstLaunchKey = "isAppFirstLaunchKey"
+    var isAppFirstLaunch: Bool {
+        get { return userDefaults.object(forKey: isAppFirstLaunchKey) as? Bool ?? true }
+        set { userDefaults.set(newValue, forKey: isAppFirstLaunchKey) }
+    }
     
     private let currentUserIDKey = "CurrentUserIDKey"
     var currentUserID: String? {
@@ -29,6 +40,12 @@ final class UserDefaultsVars: StorageVars {
     var autoSyncSet: Bool {
         get { return userDefaults.bool(forKey: autoSyncSetKey) }
         set { userDefaults.set(newValue, forKey: autoSyncSetKey) }
+    }
+    
+    private let periodicContactSyncSetKey = "PeriodicContactSyncSetSetKey"
+    var periodicContactSyncSet: Bool {
+        get { return userDefaults.bool(forKey: periodicContactSyncSetKey) }
+        set { userDefaults.set(newValue, forKey: periodicContactSyncSetKey) }
     }
     
     /// need flag for SavingAttemptsCounterByUnigueUserID.emptyEmailCounter
@@ -46,10 +63,28 @@ final class UserDefaultsVars: StorageVars {
         set { userDefaults.set(newValue, forKey: autoSyncSettingsKey) }
     }
     
+    private let periodicContactSyncSettingsKey = "periodicContactSyncSettingsKey"
+    var periodicContactSyncSettings: [String: Any]? {
+        get { return userDefaults.dictionary(forKey: periodicContactSyncSettingsKey) }
+        set { userDefaults.set(newValue, forKey: periodicContactSyncSettingsKey) }
+    }
+    
     /// auto sync settings migration from the old app
     private let autoSyncSettingsMigrationCompletedKey = "autoSyncSettingsMigrationCompletedKey"
     var autoSyncSettingsMigrationCompleted: Bool {
         get { return userDefaults.bool(forKey: autoSyncSettingsMigrationCompletedKey) }
         set { userDefaults.set(newValue, forKey: autoSyncSettingsMigrationCompletedKey) }
+    }
+    
+    private let homePageFirstTimeKey = "firstTimeKeyLargeQuotaPopUp"
+    var homePageFirstTimeLogin: Bool {
+        get { return userDefaults.bool(forKey: homePageFirstTimeKey + SingletonStorage.shared.uniqueUserID) }
+        set { userDefaults.set(newValue, forKey: homePageFirstTimeKey + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let smallFullOfQuotaPopUpCheckBoxKey = "smallFullOfQuotaPopUpCheckBox"
+    var smallFullOfQuotaPopUpCheckBox: Bool {
+        get { return userDefaults.bool(forKey: smallFullOfQuotaPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
+        set { userDefaults.set(newValue, forKey: smallFullOfQuotaPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
     }
 }

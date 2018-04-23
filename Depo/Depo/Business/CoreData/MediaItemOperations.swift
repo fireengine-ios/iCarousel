@@ -10,34 +10,6 @@ import Foundation
 
 extension CoreDataStack {
     
-    // FIXME: maybe delete and commented code used appendOnlyNewItems
-//    func appendOnlyNewItems(items: [WrapData]) {
-//        DispatchQueue.main.async {
-//            let uuidList = items.map{ $0.uuid }
-//            let predicateForRemoteFile = NSPredicate(format: "uuidValue IN %@", uuidList)
-//            
-//            let childrenContext = self.mainContext//backgroundContext
-//            
-//            let alreadySavedMediaItems = self.executeRequest(predicate: predicateForRemoteFile, context: childrenContext)
-//            
-//            self.updateSavedItems(savedItems: alreadySavedMediaItems, remoteItems: items, context: childrenContext)
-//            
-//            let inCoreData = alreadySavedMediaItems.flatMap{ $0.uuidValue }
-//            
-//            let appendItems = items.filter { !inCoreData.contains($0.uuid) }
-//            
-//            if appendItems.count == 0 {
-//                return
-//            }
-//            
-//            appendItems.forEach {
-//                _ = MediaItem(wrapData: $0, context: childrenContext)
-//            }
-//            
-//            self.saveDataForContext(context: childrenContext, saveAndWait: true)
-//        }
-//    }
-    
     func updateSavedItems(savedItems: [MediaItem], remoteItems: [WrapData], context: NSManagedObjectContext) {
         guard savedItems.count > 0 else {
             return
@@ -45,7 +17,7 @@ extension CoreDataStack {
         context.perform { [weak self] in
             for savedMediaItem in savedItems {
                 for remoteWrapedItem in remoteItems {
-                    if savedMediaItem.uuidValue == remoteWrapedItem.uuid {
+                    if savedMediaItem.trimmedLocalFileID == remoteWrapedItem.getTrimmedLocalID() {
                         if let unwrapedParent = remoteWrapedItem.parent {
                             savedMediaItem.parent = unwrapedParent
                         }
@@ -82,7 +54,7 @@ extension CoreDataStack {
             guard let `self` = self else {
                 return
             }
-            let predicateForRemoteFile = NSPredicate(format: "localFileID == %@", item.getLocalID())
+            let predicateForRemoteFile = NSPredicate(format: "trimmedLocalFileID == %@", item.getTrimmedLocalID())
             let alreadySavedMediaItems = self.executeRequest(predicate: predicateForRemoteFile, context: context)
                 alreadySavedMediaItems.forEach({ savedItem in
                     //for locals
@@ -109,8 +81,8 @@ extension CoreDataStack {
     
     // MARK: MediaItem
     
-    func mediaItemByUUIDs(uuidList: [String]) -> [MediaItem] {
-        let predicate = NSPredicate(format: "uuidValue IN %@", uuidList)
+    func mediaItemByLocalID(trimmedLocalIDS: [String]) -> [MediaItem] {
+        let predicate = NSPredicate(format: "trimmedLocalFileID IN %@", trimmedLocalIDS)
         return executeRequest(predicate: predicate, context: newChildBackgroundContext)
     }
     

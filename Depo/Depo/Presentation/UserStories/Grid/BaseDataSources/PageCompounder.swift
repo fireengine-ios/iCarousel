@@ -14,7 +14,7 @@ fileprivate protocol PageSortingPredicates {
     func getSortingPredicateFirstPage(sortType: SortedRules, lastItem: Item) -> NSPredicate
 }
 
-class PageCompounder {
+final class PageCompounder {
     
     private var notAllowedMD5s = Set<String>()
     private var notAllowedLocalIDs = Set<String>()
@@ -29,7 +29,7 @@ class PageCompounder {
                                compoundedCallback: @escaping CompoundedPageCallback) {
         
         notAllowedMD5s = notAllowedMD5s.union(pageItems.filter{!$0.isLocalItem}.map{$0.md5})
-        notAllowedLocalIDs = notAllowedLocalIDs.union(pageItems.map{$0.getLocalID()})///there should be no similar UID on BackEnd so this is fine
+        notAllowedLocalIDs = notAllowedLocalIDs.union(pageItems.map{$0.getTrimmedLocalID()})///there should be no similar UID on BackEnd so this is fine
         
         
         let filterPredicate = getFilteringPredicate(md5s: notAllowedMD5s, localIDs: notAllowedLocalIDs)
@@ -41,7 +41,9 @@ class PageCompounder {
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
                                                     in: requestContext)
-        request.fetchLimit = pageSize
+
+            request.fetchLimit = pageSize
+
         
         request.predicate = compoundedPredicate
         
@@ -55,10 +57,11 @@ class PageCompounder {
         var tempoArray = pageItems
         
         let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
+        
         tempoArray.append(contentsOf: wrapedLocals)
         tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
         
-        notAllowedLocalIDs = notAllowedLocalIDs.union(wrapedLocals.compactMap{$0.asset?.localIdentifier})
+        notAllowedLocalIDs = notAllowedLocalIDs.union(wrapedLocals.compactMap{$0.getTrimmedLocalID()})
         
         let actualArray = tempoArray.prefix(pageSize)
         let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
@@ -77,7 +80,7 @@ class PageCompounder {
                                    compoundedCallback: @escaping CompoundedPageCallback) {
         
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
-        if let lastItem = pageItems.last {
+        if let lastItem = getLastNonEmpty(items: pageItems, fileType: filesType) {
             let sortingTypePredicate = getSortingPredicateFirstPage(sortType: sortType, lastItem: lastItem)
             let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
             
@@ -106,6 +109,21 @@ class PageCompounder {
                           predicate: NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate]),
                           compoundedCallback: compoundedCallback)
         }
+    }
+    
+    private func getLastNonEmpty(items: [WrapData], fileType: FileType) -> WrapData? {
+        guard fileType == .video else {
+            return items.last
+        }
+        return items.filter{
+            if !$0.isLocalItem {
+                return ($0.metaData?.takenDate != nil)
+            } else {
+                return true
+            }
+//            return $0.metaData != nil
+        }.last
+        
     }
     
     func compoundMiddlePage(pageItems: [WrapData],
@@ -159,8 +177,7 @@ class PageCompounder {
                         guard let `self` = self else {
                             return
                         }
-                        if compoundedPage.count < self.pageSize, self.coreData.inProcessAppendingLocalFiles,
-                           !self.coreData.originalAssetsBeingAppended.assets(afterDate: firstItem.metaDate, mediaType: filesType.convertedToPHMediaType).isEmpty {
+                        if compoundedPage.count < self.pageSize, self.coreData.inProcessAppendingLocalFiles {
                             self.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: compoundedPage, sortType: sortType, predicate: compundedPredicate, compoundedCallback: compoundedCallback)
                             return
                             
@@ -183,7 +200,7 @@ class PageCompounder {
             guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
                 lastFreshLocalItem.metaDate <= firstItem.metaDate else {
                     
-                    debugPrint("!!! time for a recurcieve callback loop")
+                    debugPrint("!!!? time for a recurcieve callback loop monitorDBLastAppendedPageLast")
                     
                     self?.compoundItems(pageItems: pageItems,
                                         sortType: sortType,
@@ -198,6 +215,7 @@ class PageCompounder {
                                                 self.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                                 return
                                             } else if !compoundedPage.isEmpty {
+                                                debugPrint("!!!? monitorDBLastAppendedPageLast last non empty")
                                                 compoundedCallback(compoundedPage, leftovers)
                                             }
                                             
@@ -205,7 +223,7 @@ class PageCompounder {
                     
                     return
             }
-            debugPrint("!!! regular callback")
+            debugPrint("!!!? regular callback monitorDBLastAppendedPageLast")
             self?.compoundItems(pageItems: pageItems,
                                 sortType: sortType,
                                 predicate: predicate,
@@ -214,6 +232,7 @@ class PageCompounder {
                                         self?.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                         return
                                     }
+                                    debugPrint("!!!? last non empty")
                                     compoundedCallback(compoundedPage, leftovers)
             })
         }
@@ -233,17 +252,19 @@ class PageCompounder {
                     compoundedCallback(pageItems,[])
                     return
             }
-            
+            debugPrint("!!!? regular callback monitorDBLastAppendedPageFirst")
             self?.compoundItems(pageItems: pageItems,
                                 sortType: sortType,
                                 predicate: predicate,
                                 compoundedCallback: { [weak self] compoundedPage, leftovers  in
                                     
                                     guard !compoundedPage.isEmpty else {
+                                        debugPrint("!!!? regular callback monitorDBLastAppendedPageFirst else")
                                         /* or shpuld I use compundedPage.count >= self.pageSize ?*/
                                         self?.monitorDBLastAppendedPageFirst(lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                         return
                                     }
+                                    debugPrint("!!!? first non empty")
                                     compoundedCallback(compoundedPage, leftovers)
             })
         }
@@ -260,19 +281,37 @@ class PageCompounder {
             self?.coreData.pageAppendedCallBack = nil
             
             guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
-                ///DO I need to cehck cache also here?
-                lastFreshLocalItem.metaDate > lastItem.metaDate else {
-                    compoundedCallback(pageItems, [])
+                let firstFreshLocalItem = freshlyDBAppendedItems.first,
+                firstFreshLocalItem.metaDate >= lastItem.metaDate,
+                firstFreshLocalItem.metaDate <= firstItem.metaDate
+                else {
+                    debugPrint("!!!? regularcallbacklastFreshLocalItem.metaDate > lastItem.metaDate")
+//                    compoundedCallback(pageItems, [])
+                    self?.compoundItems(pageItems: pageItems,
+                                        sortType: sortType,
+                                        predicate: predicate,
+                                        compoundedCallback: { [weak self] compoundedPage, leftovers  in
+                                            guard !compoundedPage.isEmpty else {
+                                                debugPrint("!!!? regular callback monitorDBLastAppendedPageMiddle else")
+                                                self?.monitorDBLastAppendedPageMiddle(firstItem: firstItem, lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
+                                                return
+                                            }
+                                            debugPrint("!!!? middle non empty")
+                                            compoundedCallback(compoundedPage, leftovers)
+                    })
                     return
             }
+            debugPrint("!!!? regular callback monitorDBLastAppendedPageMiddle")
             self?.compoundItems(pageItems: pageItems,
                                 sortType: sortType,
                                 predicate: predicate,
                                 compoundedCallback: { [weak self] compoundedPage, leftovers  in
                                     guard !compoundedPage.isEmpty else {
+                                        debugPrint("!!!? regular callback monitorDBLastAppendedPageMiddle else")
                                         self?.monitorDBLastAppendedPageMiddle(firstItem: firstItem, lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                         return
                                     }
+                                    debugPrint("!!!? middle non empty")
                                     compoundedCallback(compoundedPage, leftovers)
             })
         }
@@ -304,7 +343,7 @@ class PageCompounder {
     
     private func getFilteringPredicate(md5s: Set<String>, localIDs: Set<String>, sizeLimit: UInt64 = NumericConstants.fourGigabytes) -> NSCompoundPredicate {
         let md5Predicate = NSPredicate(format:"NOT (md5Value IN %@)", md5s)
-        let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@) AND fileSizeValue < \(sizeLimit)", localIDs)
+        let predicate = NSPredicate(format: "trimmedLocalFileID != Nil AND NOT (trimmedLocalFileID IN %@) AND fileSizeValue < \(sizeLimit)", localIDs)
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, md5Predicate])
     }
     
@@ -332,27 +371,27 @@ extension PageCompounder: PageSortingPredicates {
     func getSortingPredicateMidPage(sortType: SortedRules, firstItem: Item,  lastItem: Item) -> NSPredicate {
         switch sortType {
         case .timeUp, .timeUpWithoutSection:
-            return NSPredicate(format: "creationDateValue > %@ AND creationDateValue < %@",
+            return NSPredicate(format: "creationDateValue >= %@ AND creationDateValue <= %@",
                                (lastItem.creationDate ?? Date()) as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
         case .timeDown, .timeDownWithoutSection:
-            return NSPredicate(format: "creationDateValue < %@ AND creationDateValue > %@", (lastItem.creationDate ?? Date()) as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
+            return NSPredicate(format: "creationDateValue <= %@ AND creationDateValue >= %@", (lastItem.creationDate ?? Date()) as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
         case .lettersAZ, .albumlettersAZ:
-            return NSPredicate(format: "nameValue > %@ AND nameValue < %@",
+            return NSPredicate(format: "nameValue >= %@ AND nameValue <= %@",
                                lastItem.name ?? "", firstItem.name ?? "")
         case .lettersZA, .albumlettersZA:
-            return NSPredicate(format: "nameValue < %@ AND nameValue > %@",
+            return NSPredicate(format: "nameValue <= %@ AND nameValue >= %@",
                                lastItem.name ?? "", firstItem.name ?? "")
         case .sizeAZ:
-            return NSPredicate(format: "fileSizeValue > %ui AND fileSizeValue < %ui",
+            return NSPredicate(format: "fileSizeValue >= %ui AND fileSizeValue <= %ui",
                                lastItem.fileSize, firstItem.fileSize)
         case .sizeZA:
-            return NSPredicate(format: "fileSizeValue < %ui AND fileSizeValue > %ui",
+            return NSPredicate(format: "fileSizeValue <= %ui AND fileSizeValue >= %ui",
                                lastItem.fileSize, firstItem.fileSize)
         case .metaDataTimeUp:
-            return NSPredicate(format: "creationDateValue > %@ AND creationDateValue < %@",
+            return NSPredicate(format: "creationDateValue >= %@ AND creationDateValue <= %@",
                                lastItem.metaDate as NSDate, firstItem.metaDate as NSDate)
         case .metaDataTimeDown:
-            return NSPredicate(format: "creationDateValue < %@ AND creationDateValue > %@",
+            return NSPredicate(format: "creationDateValue <= %@ AND creationDateValue >= %@",
                                lastItem.metaDate as NSDate, firstItem.metaDate as NSDate)
         }
     }
@@ -360,42 +399,42 @@ extension PageCompounder: PageSortingPredicates {
     func getSortingPredicateLastPage(sortType: SortedRules, firstItem: Item) -> NSPredicate {
         switch sortType {
         case .timeUp, .timeUpWithoutSection:
-            return NSPredicate(format: "creationDateValue < %@", (firstItem.creationDate ?? Date()) as NSDate)
+            return NSPredicate(format: "creationDateValue <= %@", (firstItem.creationDate ?? Date()) as NSDate)
         case .timeDown, .timeDownWithoutSection:
-            return NSPredicate(format: "creationDateValue > %@", (firstItem.creationDate ?? Date()) as NSDate)
+            return NSPredicate(format: "creationDateValue >= %@", (firstItem.creationDate ?? Date()) as NSDate)
         case .lettersAZ, .albumlettersAZ:
-            return NSPredicate(format: "nameValue < %@", firstItem.name ?? "")
+            return NSPredicate(format: "nameValue <= %@", firstItem.name ?? "")
         case .lettersZA, .albumlettersZA:
-            return NSPredicate(format: "nameValue > %@", firstItem.name ?? "")
+            return NSPredicate(format: "nameValue >= %@", firstItem.name ?? "")
         case .sizeAZ:
-            return NSPredicate(format: "fileSizeValue < %ui", firstItem.fileSize)
+            return NSPredicate(format: "fileSizeValue <= %ui", firstItem.fileSize)
         case .sizeZA:
-            return NSPredicate(format: "fileSizeValue > %ui", firstItem.fileSize)
+            return NSPredicate(format: "fileSizeValue >= %ui", firstItem.fileSize)
         case .metaDataTimeUp:
-            return NSPredicate(format: "creationDateValue < %@", firstItem.metaDate as NSDate)
+            return NSPredicate(format: "creationDateValue <= %@", firstItem.metaDate as NSDate)
         case .metaDataTimeDown:
-            return NSPredicate(format: "creationDateValue > %@", firstItem.metaDate as NSDate)
+            return NSPredicate(format: "creationDateValue >= %@", firstItem.metaDate as NSDate)
         }
     }
     
     func getSortingPredicateFirstPage(sortType: SortedRules, lastItem: Item) -> NSPredicate {
         switch sortType {
         case .timeUp, .timeUpWithoutSection:
-            return NSPredicate(format: "creationDateValue > %@", (lastItem.creationDate ?? Date()) as NSDate)
+            return NSPredicate(format: "creationDateValue >= %@", (lastItem.creationDate ?? Date()) as NSDate)
         case .timeDown, .timeDownWithoutSection:
-            return NSPredicate(format: "creationDateValue < %@", (lastItem.creationDate ?? Date()) as NSDate)
+            return NSPredicate(format: "creationDateValue <= %@", (lastItem.creationDate ?? Date()) as NSDate)
         case .lettersAZ, .albumlettersAZ:
-            return NSPredicate(format: "nameValue > %@", lastItem.name ?? "")
+            return NSPredicate(format: "nameValue >= %@", lastItem.name ?? "")
         case .lettersZA, .albumlettersZA:
-            return NSPredicate(format: "nameValue < %@", lastItem.name ?? "")
+            return NSPredicate(format: "nameValue <= %@", lastItem.name ?? "")
         case .sizeAZ:
-            return NSPredicate(format: "fileSizeValue > %ui", lastItem.fileSize)
+            return NSPredicate(format: "fileSizeValue >= %ui", lastItem.fileSize)
         case .sizeZA:
-            return NSPredicate(format: "fileSizeValue < %ui", lastItem.fileSize)
+            return NSPredicate(format: "fileSizeValue <= %ui", lastItem.fileSize)
         case .metaDataTimeUp:
-            return NSPredicate(format: "creationDateValue > %@", lastItem.metaDate as NSDate)
+            return NSPredicate(format: "creationDateValue >= %@", lastItem.metaDate as NSDate)
         case .metaDataTimeDown:
-            return NSPredicate(format: "creationDateValue < %@", lastItem.metaDate as NSDate)
+            return NSPredicate(format: "creationDateValue <= %@", lastItem.metaDate as NSDate)
         }
     }
     

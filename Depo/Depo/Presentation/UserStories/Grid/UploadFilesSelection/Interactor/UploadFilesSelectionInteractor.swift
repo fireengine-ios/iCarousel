@@ -23,35 +23,37 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         }
         
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) {[weak self] accessGranted, _ in
+            log.debug("UploadFilesSelectionInteractor getAllItems LocalMediaStorage askPermissionForPhotoFramework")
             guard accessGranted else {
                 return
             }
-            
-            log.debug("UploadFilesSelectionInteractor getAllItems LocalMediaStorage askPermissionForPhotoFramework")
-            
-            let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [uuid], options: nil)
-            
-            if let album = collectionFetchResult.firstObject {
-                let assetsFetchResult = PHAsset.fetchAssets(in: album, options: nil)
-                var assets = [PHAsset]()
-                assetsFetchResult.enumerateObjects({ asset, index, stop in
-                    assets.append(asset)
-                })
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [uuid], options: nil)
                 
-                var items = CoreDataStack.default.allLocalItems(with: assets.map({ $0.localIdentifier }))
-
-                items.sort {
-                    guard let firstDate = $0.creationDate else {
-                        return false
-                    }
-                    guard let secondDate = $1.creationDate else {
-                        return true
+                if let album = collectionFetchResult.firstObject {
+                    let assetsFetchResult = PHAsset.fetchAssets(in: album, options: nil)
+                    var assets = [PHAsset]()
+                    assetsFetchResult.enumerateObjects({ asset, index, stop in
+                        assets.append(asset)
+                    })
+                    
+                    var items = CoreDataStack.default.allLocalItems(with: assets)
+                    
+                    items.sort {
+                        guard let firstDate = $0.creationDate else {
+                            return false
+                        }
+                        guard let secondDate = $1.creationDate else {
+                            return true
+                        }
+                        
+                        return firstDate > secondDate
                     }
                     
-                    return firstDate > secondDate
+                    DispatchQueue.main.async {
+                        self?.output.getContentWithSuccess(array: [items])
+                    }
                 }
-                
-                self?.output.getContentWithSuccess(array: [items])
             }
         }
     }

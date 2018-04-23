@@ -53,6 +53,10 @@ class Device {
         return UI_USER_INTERFACE_IDIOM() == .pad
     }
     
+    static var deviceType: String {
+        return isIpad ? "IPAD" : "IPHONE"
+    }
+    
     static func operationSystemVersionLessThen(_ version: Int) -> Bool {
         return ProcessInfo().operatingSystemVersion.majorVersion < version
     }
@@ -60,7 +64,7 @@ class Device {
     static func getFreeDiskSpaceInBytes() -> Int64? {
         var freeSize: Int64?
         if #available(iOS 11.0, *) {
-            let fileURL = URL(fileURLWithPath:Device.homeFolderString())
+            let fileURL = URL(fileURLWithPath: Device.homeFolderString())
             do {
                 let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
                 freeSize = values.volumeAvailableCapacityForImportantUsage
@@ -110,7 +114,7 @@ class Device {
             result["uuid"] = uuid
         }
         result["name"] = device.name
-        result["deviceType"] = isIpad ? "IPAD":"IPHONE"
+        result["deviceType"] = Device.deviceType
         return result
     }
     

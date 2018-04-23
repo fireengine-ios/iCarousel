@@ -183,36 +183,25 @@ class BaseRequestService {
     }
     
     func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask? {
-        var backgroundTaskID = UIBackgroundTaskInvalid
         var task: URLSessionTask?
 
         if let localURL = param.urlToLocalFile {
-            backgroundTaskID = beginBackgroundTask(with: localURL.absoluteString)
-            
             task = requestService.uploadFileRequestTask(patch: param.patch,
                                                             headerParametrs: param.header,
                                                             fromFile: localURL,
                                                             method: RequestMethod.Put,
                                                             timeoutInterval: param.timeout,
-                                                            response: { data, urlResponse, error in
-                                                                response(data, urlResponse, error)
-                                                                UIApplication.shared.endBackgroundTask(backgroundTaskID)
-            })
+                                                            response: response)
         } else if let fileData = param.fileData {
-            let taskName = UUID().uuidString
-            backgroundTaskID = beginBackgroundTask(with: taskName)
-            
             task = requestService.uploadFileRequestTask(path: param.patch,
                                                         headerParametrs: param.header,
                                                         fileData: fileData,
                                                         method: RequestMethod.Put,
                                                         timeoutInterval: param.timeout,
-                                                        response: { data, urlResponse, error in
-                                                            response(data, urlResponse, error)
-                                                            UIApplication.shared.endBackgroundTask(backgroundTaskID)
-            })
+                                                        response: response)
         } else {
-            debugPrint("something went WRONG!! ", param)
+            debugPrint("Upload: wrong parameters", param)
+            return nil
         }
         
         task?.resume()
@@ -228,15 +217,4 @@ class BaseRequestService {
                                                   response: handler.response)
         task.resume()
     }
-    
-    // MARK: - Helpers
-    
-    private func beginBackgroundTask(with name: String?) -> UIBackgroundTaskIdentifier {
-        var taskId = UIBackgroundTaskInvalid
-        taskId = UIApplication.shared.beginBackgroundTask(withName: name, expirationHandler: {
-            UIApplication.shared.endBackgroundTask(taskId)
-        })
-        return taskId
-    }
-
 }

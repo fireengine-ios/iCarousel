@@ -47,7 +47,10 @@ final class HomeCardResponse {
             return .autoUploadIsOff
         case .freeUpSpace:
             return .freeAppSpace
+        case .animation:
+            return .animationCard
         }
+        
     }
 }
 
@@ -78,5 +81,5 @@ enum HomeCardTypes: String {
     case autoSyncOff = "AUTO_SYNC_OFF"
     case freeUpSpace = "FREE_UP_SPACE"
     //case rating = "RATING"
-    //case animation = "ANIMATION"
+    case animation = "ANIMATION"
 }

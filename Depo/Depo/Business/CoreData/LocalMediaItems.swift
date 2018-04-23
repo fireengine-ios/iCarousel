@@ -47,6 +47,8 @@ extension CoreDataStack {
 
         let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
         
+        updateICloudStatus(for: assetsList, context: backgroundContext)
+        
         let notSaved = listAssetIdIsNotSaved(allList: assetsList, context: backgroundContext)
         originalAssetsBeingAppended.append(list: notSaved)///tempo assets
         
@@ -96,7 +98,7 @@ extension CoreDataStack {
                     let assetsInfo = info.filter { $0.isValid }
                     assetsInfo.forEach { element in
                         autoreleasepool {
-                            let wrapedItem =  WrapData(info: element)
+                            let wrapedItem = WrapData(info: element)
                             _ = MediaItem(wrapData: wrapedItem, context: context)
                             
                             addedObjects.append(wrapedItem)
@@ -119,6 +121,24 @@ extension CoreDataStack {
         }
     }
     
+    private func updateICloudStatus(for assets: [PHAsset], context: NSManagedObjectContext) {
+        let alreadySavedAssets = listAssetIdAlreadySaved(allList: assets, context: context)
+        privateQueue.async { [weak self] in
+            let start = Date()
+            LocalMediaStorage.default.getCompactInfo(from: alreadySavedAssets, completion: { [weak self] info in
+                guard let `self` = self else {
+                    return
+                }
+                print("iCloud: updated iCloud in \(Date().timeIntervalSince(start)) secs")
+                context.perform {
+                    let invalidItems = info.filter { !$0.isValid }.compactMap { $0.asset.localIdentifier }
+                    print("iCloud: removing \(invalidItems.count) items")
+                    self.removeLocalMediaItems(with: invalidItems)
+                }
+            })
+        }
+    }
+    
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
         let currentlyInLibriaryIDs: [String] = allList.compactMap { $0.localIdentifier }
         
@@ -131,6 +151,18 @@ extension CoreDataStack {
         let alredySavedIDs = alredySaved.compactMap { $0.localFileID }
         
         return allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) }
+    }
+    
+    private func listAssetIdAlreadySaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
+        let currentlyInLibriaryIDs: [String] = allList.compactMap { $0.localIdentifier }
+        
+        let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
+        
+        let alredySaved: [MediaItem] = executeRequest(predicate: predicate, context: context)
+        
+        let alredySavedIDs = alredySaved.compactMap { $0.localFileID }
+        
+        return allList.filter { alredySavedIDs.contains( $0.localIdentifier ) }
     }
     
     func removeLocalMediaItems(with assetIdList: [String]) {
@@ -152,25 +184,52 @@ extension CoreDataStack {
  
     }
     
-    func  allLocalItems() -> [WrapData] {
+    func allLocalItems() -> [WrapData] {
         let context = newChildBackgroundContext
         let predicate = NSPredicate(format: "localFileID != nil")
         let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
         return items.flatMap { $0.wrapedObject }
     }
     
-    func  allLocalItems(with localIds: [String]) -> [WrapData] {
+    func allLocalItems(with localIds: [String]) -> [WrapData] {
         let context = newChildBackgroundContext
         let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", localIds)
         let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
         return items.flatMap { $0.wrapedObject }
     }
     
-    func  allLocalItems(withUUIDS uuids: [String]) -> [WrapData] {
+    func allLocalItems(with assets: [PHAsset]) -> [WrapData] {
         let context = newChildBackgroundContext
-        let predicate = NSPredicate(format: "(uuidValue IN %@)", uuids)
+        
+        let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", assets.map { $0.localIdentifier })
+        var items = executeRequest(predicate: predicate, context: context)
+        
+        /// sort items in the assets order
+        let ordering = Dictionary(uniqueKeysWithValues: assets.enumerated().map { ($1.localIdentifier, $0) })
+        items = items.sorted(by: { (firstItem, secondItem) -> Bool in
+            if let firstLocalId = firstItem.localFileID, let firstIndex = ordering[firstLocalId] {
+                if let secondLocalId = secondItem.localFileID, let secondIndex = ordering[secondLocalId] {
+                    return firstIndex < secondIndex
+                } else {
+                    return false
+                }
+            }
+            return false
+        })
+        
+        var localItems = [WrapData]()
+        for (item, asset) in zip(items, assets) {
+            localItems.append(item.wrapedObject(with: asset))
+        }
+
+        return localItems
+    }
+    
+    func allLocalItems(trimmedLocalIds: [String]) -> [WrapData] {
+        let context = newChildBackgroundContext
+        let predicate = NSPredicate(format: "(trimmedLocalFileID != nil) AND (trimmedLocalFileID IN %@)", trimmedLocalIds)
         let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
-        return items.compactMap { $0.wrapedObject }
+        return items.flatMap { $0.wrapedObject }
     }
     
     func hasLocalItemsForSync(video: Bool, image: Bool, completion: @escaping  (_ has: Bool) -> Void) {

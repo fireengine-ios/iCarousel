@@ -115,6 +115,7 @@ struct RouteRequests {
     
     struct HomeCards {
         static let all = BaseUrl +/ "api/assistant/v1"
+        //static let all = BasePreProdUrl +/ "api/assistant/v1"
         static func card(with id: Int) -> URL {
             return all +/ String(id)
         }

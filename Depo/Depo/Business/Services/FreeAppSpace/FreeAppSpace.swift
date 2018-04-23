@@ -244,8 +244,8 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 if let index_ = index {
                     self_.serverDuplicatesArray.append(item)
                     self_.duplicatesArray.append(self_.localtemsArray[index_])
-                    self_.localtemsArray.remove(at: index_)
-                    self_.localMD5Array.remove(at: index_)
+                    //self_.localtemsArray.remove(at: index_)
+                    //self_.localMD5Array.remove(at: index_)
                     
                     if (self_.localtemsArray.count == 0) {
                         finished = true
@@ -381,7 +381,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     return
                 }
                 
-                var localObjects = items.filter {
+                let localObjects = items.filter {
                     $0.isLocalItem
                 }
                 
@@ -394,9 +394,21 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 }
                 self.duplicatesArray = newDuplicatesArray
                 
-                let networksObjects = items.filter {
+                var networksObjects = items.filter {
                     !$0.isLocalItem
                 }
+                
+                var networksObjectsForDelete = [Item]()
+                var duplicatesMD5Array = self.duplicatesArray.map({ $0.md5 })
+                for item in networksObjects {
+                    if let index = duplicatesMD5Array.index(of: item.md5) {
+                        duplicatesMD5Array.remove(at: index)
+                        self.duplicatesArray.remove(at: index)
+                    } else {
+                        networksObjectsForDelete.append(item)
+                    }
+                }
+                networksObjects = networksObjectsForDelete
                 
                 CoreDataStack.default.getLocalDuplicates(remoteItems: networksObjects, duplicatesCallBack: { [weak self] items in
                     guard let `self` = self else {

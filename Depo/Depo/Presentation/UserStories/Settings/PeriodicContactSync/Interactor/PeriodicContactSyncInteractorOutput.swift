@@ -12,6 +12,9 @@ protocol PeriodicContactSyncInteractorOutput: class {
     func operationFinished()
     func showError(error: String)
     
-    func prepaire(syncSettings: AutoSyncSettings)
+    func prepaire(syncSettings: PeriodicContactsSyncSettings)
+
+    func permissionSuccess()
+    func permissionFail()
 }
 

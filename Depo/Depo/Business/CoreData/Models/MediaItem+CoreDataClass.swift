@@ -10,15 +10,6 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-//enum StatusAction {
-//    
-//    case waitingUpload
-//    
-//    case waitingDelete
-//    
-//    case waitingSync
-//}
-
 public class MediaItem: NSManagedObject {
     
     static let Identifier = "MediaItem"
@@ -54,11 +45,12 @@ public class MediaItem: NSManagedObject {
         case let .remoteUrl(url):
             patchToPreviewValue = url?.absoluteString
         case let .localMediaContent(assetContent):
-            localFileID = assetContent.asset.localIdentifier
+            let localID = assetContent.asset.localIdentifier
+            localFileID = localID
+            trimmedLocalFileID = localID.components(separatedBy: "/").first ?? localID
             patchToPreviewValue = nil
         }
         
-        uuidValue = wrapData.uuid
         md5Value = wrapData.md5
         
         let dateValue = self.creationDateValue as Date?
@@ -82,5 +74,9 @@ public class MediaItem: NSManagedObject {
     
     var wrapedObject: WrapData {
         return WrapData(mediaItem: self)
+    }
+    
+    func wrapedObject(with asset: PHAsset) -> WrapData {
+        return WrapData(mediaItem: self, asset: asset)
     }
 }
