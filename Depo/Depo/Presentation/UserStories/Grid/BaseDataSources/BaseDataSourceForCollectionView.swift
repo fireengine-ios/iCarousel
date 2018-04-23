@@ -1188,13 +1188,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     //Actualy those "new methods" wont needed if we just update Item model(UUID espetialy)
     
-    func getIndexPathForLocalObject(objectUUID: String) -> IndexPath? {
+    func getIndexPathForLocalObject(objectTrimmedLocalID: String) -> IndexPath? {
         var indexPath: IndexPath? = nil
-        let items = getAllObjects()
+//        let items = getAllObjects()
         
-        for (section, array) in items.enumerated() {
+        for (section, array) in allItems.enumerated() {
             for (row, arraysObject) in array.enumerated() {
-                if arraysObject.uuid == objectUUID, arraysObject.isLocalItem {
+                if arraysObject.getTrimmedLocalID() == objectTrimmedLocalID, arraysObject.isLocalItem {
                     indexPath = IndexPath(row: row, section: section)
                 }
             }
@@ -1202,8 +1202,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return indexPath
     }
     
-    func getCellForLocalFile(objectUUID: String) -> CollectionViewCellForPhoto? {
-        guard let path = getIndexPathForLocalObject(objectUUID: objectUUID),
+    func getCellForLocalFile(objectTrimmedLocalID: String) -> CollectionViewCellForPhoto? {
+        guard let path = getIndexPathForLocalObject(objectTrimmedLocalID: objectTrimmedLocalID),
             let cell = collectionView?.cellForItem(at: path) as? CollectionViewCellForPhoto else {
                 return nil
         }
@@ -1216,7 +1216,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
         
-        if let cell = getCellForLocalFile(objectUUID: file.uuid) {
+        if let cell = getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) {
             cell.setProgressForObject(progress: 0, blurOn: true)
         }
     }
@@ -1226,7 +1226,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
         
-        if let cell = getCellForLocalFile(objectUUID: file.uuid) {
+        if let cell = getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) {
             cell.setProgressForObject(progress: progress, blurOn: true)
         }
     }
