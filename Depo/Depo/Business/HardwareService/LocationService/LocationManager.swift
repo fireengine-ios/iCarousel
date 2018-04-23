@@ -35,6 +35,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func authorizationStatus(_ completion: @escaping (_ status: CLAuthorizationStatus) -> Void) {
+        if !CLLocationManager.locationServicesEnabled() {
+            completion(.restricted)
+            return
+        }
+        
         let currentStatus = CLLocationManager.authorizationStatus()
         if currentStatus == .notDetermined {
             requestAuthorizationStatusHandler = completion
