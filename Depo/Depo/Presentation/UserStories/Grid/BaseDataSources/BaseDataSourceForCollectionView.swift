@@ -336,7 +336,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     ///.filter{!$0.isLocalItem}.isEmpty in case for only remotes
                     let itemsToCompound = isEmptyLeftOvers ? pageTempoItems : self.pageLeftOvers
                     ///self.transformedLeftOvers() in case for only remotes
-                    if pageTempoItems.isEmpty, self.transformedLeftOvers().isEmpty
+                    if pageTempoItems.isEmpty, itemsToCompound.isEmpty//self.transformedLeftOvers().isEmpty
                         /**isEmptyLeftOvers*/ {
                         self.delegate?.getNextItems()
                         //DO I need callback here?
@@ -1237,7 +1237,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
         
-        let uuid = file.getLocalID()
+        let uuid = file.getTrimmedLocalID()
         
         if uploadedObjectID.index(of: file.uuid) == nil {
             uploadedObjectID.append(uuid)
@@ -1247,7 +1247,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         finished: for (section, array) in allItems.enumerated() {
             for (row, object) in array.enumerated() {
-                if object.getLocalID() == uuid {
+                if object.getTrimmedLocalID() == uuid {
                     if object.isLocalItem {
                         localFinishedItemUUID = object.uuid
                         file.isLocalItem = false

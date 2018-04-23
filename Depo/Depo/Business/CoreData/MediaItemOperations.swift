@@ -17,7 +17,7 @@ extension CoreDataStack {
         context.perform { [weak self] in
             for savedMediaItem in savedItems {
                 for remoteWrapedItem in remoteItems {
-                    if savedMediaItem.trimmedLocalFileID == remoteWrapedItem.getLocalID() {
+                    if savedMediaItem.trimmedLocalFileID == remoteWrapedItem.getTrimmedLocalID() {
                         if let unwrapedParent = remoteWrapedItem.parent {
                             savedMediaItem.parent = unwrapedParent
                         }
@@ -54,7 +54,7 @@ extension CoreDataStack {
             guard let `self` = self else {
                 return
             }
-            let predicateForRemoteFile = NSPredicate(format: "trimmedLocalFileID == %@", item.getLocalID())
+            let predicateForRemoteFile = NSPredicate(format: "trimmedLocalFileID == %@", item.getTrimmedLocalID())
             let alreadySavedMediaItems = self.executeRequest(predicate: predicateForRemoteFile, context: context)
                 alreadySavedMediaItems.forEach({ savedItem in
                     //for locals

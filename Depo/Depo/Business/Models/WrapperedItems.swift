@@ -924,7 +924,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return ""
     }
     
-    func getLocalID() -> String {
+    func getTrimmedLocalID() -> String {
         if isLocalItem, let localID = asset?.localIdentifier {
             return  localID.components(separatedBy: "/").first ?? localID
         } else if uuid.contains("~"){
@@ -933,8 +933,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return ""
     }
     
-    /*
-    //Need this beacase old app shares name with slash
+    /**
+     Need this beacase old app shares name with slash
     */
     private class func removeFirstSlash(text: String) -> String {
         var tempoString = text

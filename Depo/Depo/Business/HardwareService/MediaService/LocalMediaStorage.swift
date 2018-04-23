@@ -418,7 +418,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             let context = CoreDataStack.default.backgroundContext
             context.perform {
                 let mediaItem: MediaItem
-                if let existingMediaItem = CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getLocalID()]).first {
+                if let existingMediaItem = CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
                     mediaItem = existingMediaItem
                 } else {
                     mediaItem = MediaItem(wrapData: wrapData, context: context)

@@ -51,7 +51,7 @@ class PredicateRules {
         let serverObjects = objects.filter {
             !$0.isLocalItem
         }
-        let list = serverObjects.map { $0.getLocalID() }
+        let list = serverObjects.map { $0.getTrimmedLocalID() }
         let predicate = NSPredicate(format: "(isLocalItemValue == true) AND trimmedLocalFileID IN %@", list)
         return predicate
     }
