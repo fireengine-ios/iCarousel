@@ -27,7 +27,6 @@ final class UploadOperations: Operation {
     private var attemptsCount = 0
     private let semaphore: DispatchSemaphore
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.uploadOperation)
-    private var backgroundTaskId = UIBackgroundTaskInvalid
     
     
     //MARK: - Init
@@ -61,14 +60,13 @@ final class UploadOperations: Operation {
     }
     
     override func main() {
-        beginBackgroundTask {}
+        BackgroundTaskService.shared.beginBackgroundTask()
         
         ItemOperationManager.default.startUploadFile(file: item)
         
         attempmtUpload()
         
         semaphore.wait()
-        endBackgroundTask()
     }
     
     private func attempmtUpload() {
@@ -206,29 +204,6 @@ final class UploadOperations: Operation {
     }
 }
 
-
-//MARK: - Backgroud Task
-
-extension UploadOperations {
-    private func beginBackgroundTask(expirationHandler: @escaping VoidHandler) {
-        self.backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: self.item.uuid, expirationHandler: {
-            expirationHandler()
-            UIApplication.shared.endBackgroundTask(self.backgroundTaskId)
-        })
-        DispatchQueue.main.async {
-            print("BACKGROUND: \(UIApplication.shared.backgroundTimeRemaining)")
-            //1.79769313486232E+308 means infinite time
-        }
-        print("BACKGROUND: Task \(self.backgroundTaskId) has been added")
-    }
-    
-    private func endBackgroundTask() {
-        if backgroundTaskId != UIBackgroundTaskInvalid {
-            UIApplication.shared.endBackgroundTask(self.backgroundTaskId)
-            print("BACKGROUND: Task \(self.backgroundTaskId) has been ended")
-        }
-    }
-}
 
 
 //MARK: - OperationProgressServiceDelegate
