@@ -820,7 +820,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
-    init(mediaItem: MediaItem) {
+    init(mediaItem: MediaItem, asset: PHAsset? = nil) {
 //        coreDataObject = mediaItem
         fileSize = mediaItem.fileSizeValue
         favorites = mediaItem.favoritesValue
@@ -833,14 +833,12 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         var assetDuration : Double?
         
-        
         if let assetId = mediaItem.localFileID,
            let url = mediaItem.urlToFileValue {
             
-            if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject,
+            if let asset = asset ?? PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject,
                 let urlToFile = URL(string: url) {
-                let tmp = LocalMediaContent(asset: asset,
-                                             urlToFile: urlToFile)
+                let tmp = LocalMediaContent(asset: asset, urlToFile: urlToFile)
                 assetDuration = asset.duration
 //                mediaItem.metadata?.duration = asset.duration
                 patchToPreview = .localMediaContent(tmp)

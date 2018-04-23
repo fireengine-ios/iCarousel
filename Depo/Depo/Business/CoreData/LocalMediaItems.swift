@@ -184,21 +184,48 @@ extension CoreDataStack {
  
     }
     
-    func  allLocalItems() -> [WrapData] {
+    func allLocalItems() -> [WrapData] {
         let context = newChildBackgroundContext
         let predicate = NSPredicate(format: "localFileID != nil")
         let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
         return items.flatMap { $0.wrapedObject }
     }
     
-    func  allLocalItems(with localIds: [String]) -> [WrapData] {
+    func allLocalItems(with localIds: [String]) -> [WrapData] {
         let context = newChildBackgroundContext
         let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", localIds)
         let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
         return items.flatMap { $0.wrapedObject }
     }
     
-    func  allLocalItems(trimmedLocalIds: [String]) -> [WrapData] {
+    func allLocalItems(with assets: [PHAsset]) -> [WrapData] {
+        let context = newChildBackgroundContext
+        
+        let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", assets.map { $0.localIdentifier })
+        var items = executeRequest(predicate: predicate, context: context)
+        
+        /// sort items in the assets order
+        let ordering = Dictionary(uniqueKeysWithValues: assets.enumerated().map { ($1.localIdentifier, $0) })
+        items = items.sorted(by: { (firstItem, secondItem) -> Bool in
+            if let firstLocalId = firstItem.localFileID, let firstIndex = ordering[firstLocalId] {
+                if let secondLocalId = secondItem.localFileID, let secondIndex = ordering[secondLocalId] {
+                    return firstIndex < secondIndex
+                } else {
+                    return false
+                }
+            }
+            return false
+        })
+        
+        var localItems = [WrapData]()
+        for (item, asset) in zip(items, assets) {
+            localItems.append(item.wrapedObject(with: asset))
+        }
+
+        return localItems
+    }
+    
+    func allLocalItems(trimmedLocalIds: [String]) -> [WrapData] {
         let context = newChildBackgroundContext
         let predicate = NSPredicate(format: "(trimmedLocalFileID != nil) AND (trimmedLocalFileID IN %@)", trimmedLocalIds)
         let items: [MediaItem] = executeRequest(predicate: predicate, context: context)

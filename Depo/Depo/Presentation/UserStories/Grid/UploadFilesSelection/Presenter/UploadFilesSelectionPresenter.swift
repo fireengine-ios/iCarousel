@@ -27,8 +27,8 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     override func reloadData() {
+        startAsyncOperation()
         interactor.getAllItems(sortBy: sortedRule)
-        asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         dataSource.dropData()
         dataSource.reloadData()
@@ -61,7 +61,7 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     override func getContentWithSuccessEnd() {
-        
+        asyncOperationSucces()
     }
     
     //MARK: - UploadFilesSelectionInteractorOutput
