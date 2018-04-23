@@ -1177,8 +1177,21 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return indexPath
     }
     
+    func getIndexPathForObject(itemUUID: String) -> IndexPath? {
+        var indexPath: IndexPath? = nil
+        
+        for (section, array) in allItems.enumerated() {
+            for (row, arraysObject) in array.enumerated() {
+                if arraysObject.uuid == itemUUID {
+                    indexPath = IndexPath(row: row, section: section)
+                }
+            }
+        }
+        return indexPath
+    }
+    
     func getCellForFile(objectUUID: String) -> CollectionViewCellForPhoto? {
-        guard let path = getIndexPathForObject(trimmedLocalID: objectUUID),
+        guard let path = getIndexPathForObject(itemUUID: objectUUID),
             let cell = collectionView?.cellForItem(at: path) as? CollectionViewCellForPhoto else {
                 return nil
         }
@@ -1308,21 +1321,25 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         var arrayOfPath = [IndexPath]()
         
         for item in items {
-            if let path = getIndexPathForObject(trimmedLocalID: item.uuid) {
+//            if item.fileType != .folder
+            if let path = getIndexPathForObject(trimmedLocalID: item.getTrimmedLocalID()) {
+                arrayOfPath.append(path)
+            } else if let path = getIndexPathForObject(itemUUID: item.uuid) {
                 arrayOfPath.append(path)
             }
         }
         
         if arrayOfPath.count > 0 {
-            var uuids = items.map { $0.uuid }
-            guard let items = getAllObjects() as? [[Item]] else {
-                return
-            }
-            for array in items {
+            var trimmedLocalIDs = items.map { $0.getTrimmedLocalID() }
+            let uuids = items.map { $0.uuid }
+            for array in allItems {
                 for arraysObject in array {
-                    if let index = uuids.index(of: arraysObject.uuid) {
+                    if let index = trimmedLocalIDs.index(of: arraysObject.getTrimmedLocalID()) {
                         arraysObject.favorites = isFavorites
-                        uuids.remove(at: index)
+                        trimmedLocalIDs.remove(at: index)
+                    } else if let index = uuids.index(of: arraysObject.uuid)  {
+                        arraysObject.favorites = isFavorites
+                        trimmedLocalIDs.remove(at: index)
                     }
                 }
             }
@@ -1353,7 +1370,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func deleteItems(items: [Item]) {
-        ///use background task here?
         guard !items.isEmpty else {
             return
         }

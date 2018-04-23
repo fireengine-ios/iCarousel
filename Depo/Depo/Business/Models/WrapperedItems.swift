@@ -930,7 +930,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         } else if uuid.contains("~"){
             return uuid.components(separatedBy: "~").first ?? uuid
         }
-        return ""
+        return uuid
     }
     
     /**
