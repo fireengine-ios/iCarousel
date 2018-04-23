@@ -1190,7 +1190,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func getIndexPathForLocalObject(objectTrimmedLocalID: String) -> IndexPath? {
         var indexPath: IndexPath? = nil
-//        let items = getAllObjects()
         
         for (section, array) in allItems.enumerated() {
             for (row, arraysObject) in array.enumerated() {
