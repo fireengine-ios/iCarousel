@@ -334,6 +334,7 @@ class AuthenticationService: BaseRequestService {
 
     func logout(async: Bool = true, success: SuccessLogout?) {
         func logout() {
+            log.debug("AuthenticationService logout")
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
@@ -369,7 +370,7 @@ class AuthenticationService: BaseRequestService {
     }
     
     func signUp(user: SignUpUser, sucess: SuccessResponse?, fail: FailResponse?) {
-        log.debug("AuthenticationService logout")
+        log.debug("AuthenticationService signUp")
         
         let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: { value in
             MenloworksAppEvents.onSignUp()

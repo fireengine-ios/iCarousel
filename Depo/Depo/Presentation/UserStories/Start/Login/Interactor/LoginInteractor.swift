@@ -77,6 +77,7 @@ class LoginInteractor: LoginInteractorInput {
             
             self.emptyEmailCheck(for: headers)
             
+            log.debug("login isRememberMe \(self.rememberMe)")
             self.tokenStorage.isRememberMe = self.rememberMe
             self.analyticsService.track(event: .login)
             DispatchQueue.main.async {

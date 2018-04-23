@@ -28,7 +28,7 @@ final class AppMigrator {
         tokenStorage.isRememberMe = true
         
         if tokenStorage.accessToken == nil {
-            tokenStorage.accessToken = "" /// need not nil
+            tokenStorage.accessToken = "" /// need not nil to get new token
         }
     }
     
