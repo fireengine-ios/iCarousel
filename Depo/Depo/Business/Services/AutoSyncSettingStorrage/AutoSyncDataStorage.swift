@@ -17,7 +17,9 @@ final class AutoSyncDataStorage {
             return AutoSyncSettings(with: storedSettings)
         } else if !storageVars.autoSyncSettingsMigrationCompleted {
             storageVars.autoSyncSettingsMigrationCompleted = true
-            return AutoSyncSettings.createMigrated()
+            let settings = AutoSyncSettings.createMigrated()
+            save(autoSyncSettings: settings)
+            return settings
         }
         
         return AutoSyncSettings()
