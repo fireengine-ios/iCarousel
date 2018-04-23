@@ -23,14 +23,14 @@ final class PeriodicContactSyncViewController: ViewController {
         super.viewDidLoad()
         
         titleLabel.text = TextConstants.periodContactSyncFromSettingsTitle
-        titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
-        titleLabel.textAlignment = .left
         titleLabel.textColor = ColorConstants.textGrayColor
 
         if Device.isIpad {
             titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 22)
             titleLabel.textAlignment = .center
         } else {
+            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            titleLabel.textAlignment = .left
             setNavigationTitle(title: TextConstants.periodicContactsSync)
         }
         
