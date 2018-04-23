@@ -117,11 +117,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     func getCompactInfo(from assets: [PHAsset], completion: @escaping (_ assetsInfo: [AssetInfo])->Void) {
         var assetsInfo = [AssetInfo]()
         
-        var i = 0
-        let count = assets.count
         for asset in assets {
-            print("iCLOUD updating: \(i) of \(count)")
-            i += 1
             autoreleasepool {
                 let assetInfo = self.compactInfoAboutAsset(asset: asset)
                 assetsInfo.append(assetInfo)

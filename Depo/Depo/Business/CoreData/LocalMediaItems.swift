@@ -47,7 +47,7 @@ extension CoreDataStack {
 
         let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
         
-        updateICloudStatus(for: assetsList, context: backgroundContext)
+        updateICloudStatus(for: assetsList, context: newChildBackgroundContext)
         
         let notSaved = listAssetIdIsNotSaved(allList: assetsList, context: backgroundContext)
         originalAssetsBeingAppended.append(list: notSaved)///tempo assets
@@ -122,8 +122,12 @@ extension CoreDataStack {
     }
     
     private func updateICloudStatus(for assets: [PHAsset], context: NSManagedObjectContext) {
-        let alreadySavedAssets = listAssetIdAlreadySaved(allList: assets, context: context)
         privateQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            let alreadySavedAssets = self.listAssetIdAlreadySaved(allList: assets, context: context)
             let start = Date()
             LocalMediaStorage.default.getCompactInfo(from: alreadySavedAssets, completion: { [weak self] info in
                 guard let `self` = self else {
