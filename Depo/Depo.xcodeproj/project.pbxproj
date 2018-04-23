@@ -2589,6 +2589,8 @@
 		B5C4C8A52049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */; };
 		B5C4C8A7204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */; };
 		B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */; };
+		B5E74798208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
+		B5E74799208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5F40BB1204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
 		B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
 		B5FB65761FDE6F6900A02FD7 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
@@ -5027,6 +5029,7 @@
 		B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsTableViewCell.swift; sourceTree = "<group>"; };
 		B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncSettingsTableViewCell.xib; sourceTree = "<group>"; };
 		B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsOptionView.swift; sourceTree = "<group>"; };
+		B5E74797208B3736003A7110 /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsModel.swift; sourceTree = "<group>"; };
 		B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationProgressService.swift; sourceTree = "<group>"; };
 		B652E3FD76DE060B9DBD160F /* AlbumDetailViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewController.swift; sourceTree = "<group>"; };
@@ -10081,6 +10084,7 @@
 				CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */,
 				CEF69DE01FB5851E00FCE6AB /* UploadParametrs.swift */,
 				CEF69DE41FB5861A00FCE6AB /* UploadHelpers.swift */,
+				B5E74797208B3736003A7110 /* UploadOperation.swift */,
 			);
 			path = UploadService;
 			sourceTree = "<group>";
@@ -13674,6 +13678,7 @@
 				8C0E8C851FDEBDFF00789C91 /* CreateStoryPreviewViewController.swift in Sources */,
 				8C0E8C861FDEBDFF00789C91 /* FullyLoaded.m in Sources */,
 				C62239B32049738F0043ED44 /* FaceImageItemsRouterInput.swift in Sources */,
+				B5E74799208B3736003A7110 /* UploadOperation.swift in Sources */,
 				C62239AF204973330043ED44 /* FaceImageChangeCoverViewController.swift in Sources */,
 				CE924569206D2E22000C7791 /* AnimationFlowManager.swift in Sources */,
 				CE1458D02045734900812544 /* Alamofire+Validate.swift in Sources */,
@@ -15424,6 +15429,7 @@
 				CECD4E561FE1152600978BE7 /* UIImage+Color.swift in Sources */,
 				FDC8F998E27D9EA9B6B95F47 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				CE9487D985CF5DEAC28D4438 /* BaseFilesGreedInteractorOutput.swift in Sources */,
+				B5E74798208B3736003A7110 /* UploadOperation.swift in Sources */,
 				CE4851F02018B03A006B8854 /* FilterPhotoCard.swift in Sources */,
 				8C7786A01F3F38EF005CB432 /* VisualMusicPlayerInteractorInput.swift in Sources */,
 				8CFF868A1F0F96E600520D18 /* ContactDevice.m in Sources */,
