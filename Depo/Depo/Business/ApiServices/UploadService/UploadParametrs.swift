@@ -70,7 +70,7 @@ class Upload: UploadRequestParametrs {
         self.isFavorite = isFavorite
 
         if item.isLocalItem {
-            self.tmpUUId = "\(item.getLocalID())~\(UUID().uuidString)"
+            self.tmpUUId = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
         } else {
             self.tmpUUId = UUID().uuidString
         }

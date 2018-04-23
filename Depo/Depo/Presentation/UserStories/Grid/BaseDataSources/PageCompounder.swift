@@ -29,7 +29,7 @@ final class PageCompounder {
                                compoundedCallback: @escaping CompoundedPageCallback) {
         
         notAllowedMD5s = notAllowedMD5s.union(pageItems.filter{!$0.isLocalItem}.map{$0.md5})
-        notAllowedLocalIDs = notAllowedLocalIDs.union(pageItems.map{$0.getLocalID()})///there should be no similar UID on BackEnd so this is fine
+        notAllowedLocalIDs = notAllowedLocalIDs.union(pageItems.map{$0.getTrimmedLocalID()})///there should be no similar UID on BackEnd so this is fine
         
         
         let filterPredicate = getFilteringPredicate(md5s: notAllowedMD5s, localIDs: notAllowedLocalIDs)
@@ -61,7 +61,7 @@ final class PageCompounder {
         tempoArray.append(contentsOf: wrapedLocals)
         tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
         
-        notAllowedLocalIDs = notAllowedLocalIDs.union(wrapedLocals.compactMap{$0.getLocalID()})
+        notAllowedLocalIDs = notAllowedLocalIDs.union(wrapedLocals.compactMap{$0.getTrimmedLocalID()})
         
         let actualArray = tempoArray.prefix(pageSize)
         let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
