@@ -17,6 +17,7 @@ class BaseView: UIView, NibInit {
     var calculatedH: CGFloat = 0
     var cardObject: HomeCardResponse?
     lazy var homeCardsService: HomeCardsService = factory.resolve()
+    var shouldScrollToTop: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
