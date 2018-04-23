@@ -840,15 +840,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
                 let urlToFile = URL(string: url) {
                 let tmp = LocalMediaContent(asset: asset, urlToFile: urlToFile)
                 assetDuration = asset.duration
-//                mediaItem.metadata?.duration = asset.duration
                 patchToPreview = .localMediaContent(tmp)
             } else {
                 // WARNIG: THIS CASE INCOREECTif 
                 // add only for debud and test !!
-                patchToPreview = .remoteUrl(nil)
+                patchToPreview = .remoteUrl(tmpDownloadUrl)
             }
 
         } else {
+            assetDuration = mediaItem.metadata?.duration
             var previewUrl: URL? = nil
             if let previewUrlStr = mediaItem.patchToPreviewValue {
                 previewUrl = URL(string: previewUrlStr)
@@ -870,7 +870,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         syncStatuses.append(contentsOf: mediaItem.syncStatusesArray)
         fileType = FileType(value: mediaItem.fileTypeValue)
         isFolder = mediaItem.isFolder
-        duration = WrapData.getDuration(duration: mediaItem.metadata?.duration)
+        duration = WrapData.getDuration(duration:assetDuration)
 
 //        syncStatuses.append(contentsOf: mediaItem.syncStatusesArray)
         
@@ -930,7 +930,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         } else if uuid.contains("~"){
             return uuid.components(separatedBy: "~").first ?? uuid
         }
-        return ""
+        return uuid
     }
     
     /**

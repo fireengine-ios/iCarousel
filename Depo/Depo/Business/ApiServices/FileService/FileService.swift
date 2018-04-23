@@ -535,7 +535,7 @@ extension DownLoadOperation: OperationProgressServiceDelegate {
         
         if let item = param.item, param.urlToRemoteFile == url {
             CardsManager.default.setProgress(ratio: ratio, operationType: .download, object: item)
-            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
+//            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
         }
     }
 }
