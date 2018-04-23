@@ -2541,8 +2541,6 @@
 		98A867782080DCBC00D2D4F4 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A867762080DCBC00D2D4F4 /* ArrayExtension.swift */; };
 		98A8677E2088C71A00D2D4F4 /* SpotlightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A8677D2088C71A00D2D4F4 /* SpotlightViewController.xib */; };
 		98A8677F2088C71A00D2D4F4 /* SpotlightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98A8677D2088C71A00D2D4F4 /* SpotlightViewController.xib */; };
-		98A8678B2088CAE000D2D4F4 /* SpotlightTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A867852088CADE00D2D4F4 /* SpotlightTransitionController.swift */; };
-		98A8678C2088CAE000D2D4F4 /* SpotlightTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A867852088CADE00D2D4F4 /* SpotlightTransitionController.swift */; };
 		98A867922088CB9200D2D4F4 /* SpotlightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A867912088CB9200D2D4F4 /* SpotlightViewController.swift */; };
 		98A867932088CB9200D2D4F4 /* SpotlightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A867912088CB9200D2D4F4 /* SpotlightViewController.swift */; };
 		98A8679B208A0FEC00D2D4F4 /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A8679A208A0FEC00D2D4F4 /* Spotlight.swift */; };
@@ -5007,7 +5005,6 @@
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
 		98A867762080DCBC00D2D4F4 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		98A8677D2088C71A00D2D4F4 /* SpotlightViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpotlightViewController.xib; sourceTree = "<group>"; };
-		98A867852088CADE00D2D4F4 /* SpotlightTransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightTransitionController.swift; sourceTree = "<group>"; };
 		98A867912088CB9200D2D4F4 /* SpotlightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightViewController.swift; sourceTree = "<group>"; };
 		98A8679A208A0FEC00D2D4F4 /* Spotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotlight.swift; sourceTree = "<group>"; };
 		98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
@@ -9706,7 +9703,6 @@
 			children = (
 				98A8677D2088C71A00D2D4F4 /* SpotlightViewController.xib */,
 				98A867912088CB9200D2D4F4 /* SpotlightViewController.swift */,
-				98A867852088CADE00D2D4F4 /* SpotlightTransitionController.swift */,
 				98A8679A208A0FEC00D2D4F4 /* Spotlight.swift */,
 			);
 			path = SpotlightViewController;
@@ -13889,7 +13885,6 @@
 				B5C4C8A32049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				482509DA2061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */,
 				8C0E8CB71FDEBDFF00789C91 /* CreateStoryPhotosOrderPresenter.swift in Sources */,
-				98A8678C2088CAE000D2D4F4 /* SpotlightTransitionController.swift in Sources */,
 				8C0E8CB91FDEBDFF00789C91 /* LoginRouter.swift in Sources */,
 				8C0E8CBA1FDEBDFF00789C91 /* ActivityIndicatorManager.swift in Sources */,
 				8C0E8CBB1FDEBDFF00789C91 /* FeedbackService.swift in Sources */,
@@ -15219,7 +15214,6 @@
 				7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				CE51AC461EF90853005DCEE0 /* CurioReachabilityEx.m in Sources */,
 				7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */,
-				98A8678B2088CAE000D2D4F4 /* SpotlightTransitionController.swift in Sources */,
 				7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				CE51AC471EF90853005DCEE0 /* DataStorage.swift in Sources */,
 				CEEF22AA2063D6E000CE3949 /* CALayer+Animation.swift in Sources */,

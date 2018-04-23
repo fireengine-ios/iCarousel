@@ -12,6 +12,7 @@ class HomePageInteractor: HomePageInteractorInput {
     weak var output: HomePageInteractorOutput!
     
     private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
+    private(set) var homeCardsLoaded = false
     
     func homePagePresented() {
         FreeAppSpace.default.checkFreeAppSpace()
@@ -33,6 +34,8 @@ class HomePageInteractor: HomePageInteractorInput {
                 self?.output.stopRefresh()
                 switch result {
                 case .success(let array):
+                    self?.homeCardsLoaded = true
+                    self?.output.getAllCardsForHomePage()
                     CardsManager.default.startOperatonsForCardsResponces(cardsResponces: array)
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)

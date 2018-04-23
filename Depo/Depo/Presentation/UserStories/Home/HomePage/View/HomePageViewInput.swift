@@ -8,13 +8,10 @@
 
 protocol HomePageViewInput: class, CurrentNavController {
 
-    /**
-        @author AlexanderP
-        Setup initial state of the view
-    */
-
     func stopRefresh()
     
     func needPresentPopUp(popUpView: UIViewController)
+    
+    func needShowSpotlight(type: SpotlightType)
     
 }

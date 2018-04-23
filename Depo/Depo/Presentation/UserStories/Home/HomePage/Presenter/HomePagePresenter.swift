@@ -11,6 +11,9 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     weak var view: HomePageViewInput!
     var interactor: HomePageInteractorInput!
     var router: HomePageRouterInput!
+    
+    private let spotlightManager = SpotlightManager.shared
+    private var needShowSpotlightType: SpotlightType?
 
     private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
     private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
@@ -19,7 +22,11 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
     
     func viewIsReady() {
-        
+        spotlightManager.delegate = self
+    }
+    
+    func viewDidAppear() {
+        spotlightManager.requestShowSpotlight()
     }
     
     func homePagePresented() {
@@ -58,6 +65,13 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         view.stopRefresh()
     }
     
+    func getAllCardsForHomePage() {
+        if let type = needShowSpotlightType {
+            view.needShowSpotlight(type: type)
+            needShowSpotlightType = nil
+        }
+    }
+    
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
         if fieldType == .all {
             self.allFilesViewType = type
@@ -72,4 +86,18 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         view.needPresentPopUp(popUpView: popUpView)
     }
     
+    func shownSpotlight(type: SpotlightType) {
+        spotlightManager.shownSpotlight(type: type)
+    }
+}
+
+extension HomePagePresenter: SpotlightManagerDelegate {
+    
+    func needShowSpotlight(type: SpotlightType) {
+        if type.rawValue >= SpotlightType.homePageGeneral.rawValue || interactor.homeCardsLoaded {
+            view.needShowSpotlight(type: type)
+        }  else {
+            needShowSpotlightType = type
+        }
+    }    
 }

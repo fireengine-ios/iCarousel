@@ -24,6 +24,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     var navBarConfigurator = NavigationBarConfigurator()
     
+    private var topView: UIView?
+    
     private var homepageIsActiveAndVisible: Bool {
         var result = false
         if let topController = navigationController?.topViewController {
@@ -80,6 +82,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         } else {
             navigationBarWithGradientStyle()
         }
+        
+        output.viewDidAppear()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -126,6 +130,44 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         present(popUpView, animated: true, completion: nil)
     }
     
+    func needShowSpotlight(type: SpotlightType) {
+        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
+            return
+        }
+
+        var frame: CGRect = .zero
+        
+        switch type {
+        case .homePageIcon:
+            frame = CGRect(x: 0, y: tabBarVC.tabBar.frame.minY, width: 60, height: tabBarVC.tabBar.frame.height)
+            
+        case .homePageGeneral:
+            if let topView = topView {
+                let topViewFrame = topView.convert(topView.frame, to: tabBarVC.contentView)
+                frame = CGRect(x: 0, y: topViewFrame.maxY, width: topViewFrame.width, height: collectionView.frame.height - topViewFrame.height)
+            }
+        case .movieCard, .albumCard, .collageCard, .animationCard, .filterCard:
+            frame = cellCoordinates(cellType: type.cellType, to: tabBarVC.contentView)
+        }
+        
+        if frame != .zero {
+            let controller = SpotlightViewController.with(rect: frame, message: type.title)
+            
+            tabBarVC.present(controller, animated: true, completion: {
+                self.output.shownSpotlight(type: type)
+            })
+        }
+    }
+    
+    private func cellCoordinates<T: BaseView>(cellType: T.Type, to: UIView) -> CGRect {
+        for (row, cell) in homePageDataSource.popUps.enumerated() {
+            if type(of: cell) == cellType {
+                collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .bottom, animated: false)
+                return cell.convert(cell.frame, to: to)
+            }
+        }
+        return .zero
+    }
     
     // MARK: BaseCollectionViewDataSourceDelegate
     
@@ -157,7 +199,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
             if let headerView = headerView as? HomeViewTopView {
                 headerView.actionsDelegate = self
             }
-
+            topView = headerView
             return headerView
         default:
             assert(false, "Unexpected element kind")

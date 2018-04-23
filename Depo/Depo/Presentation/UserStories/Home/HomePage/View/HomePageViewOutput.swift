@@ -10,6 +10,8 @@ protocol HomePageViewOutput {
 
     func viewIsReady()
     
+    func viewDidAppear()
+    
     func homePagePresented()
     
     func showSettings()
@@ -25,4 +27,6 @@ protocol HomePageViewOutput {
     func createStory()
     
     func needRefresh()
+    
+    func shownSpotlight(type: SpotlightType)
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SpotlightViewController: BaseViewController {
+final class SpotlightViewController: ViewController {
 
     @IBOutlet weak var spotlightImageView: UIImageView!
     @IBOutlet weak var leftContraint: NSLayoutConstraint!
@@ -22,18 +22,12 @@ final class SpotlightViewController: BaseViewController {
     @IBOutlet weak var topArrowImage: UIImageView!
     @IBOutlet weak var bottomArrowImage: UIImageView!
     
-    private lazy var transitionController: SpotlightTransitionController = {
-        let controller = SpotlightTransitionController()
-        controller.delegate = self
-        return controller
-    }()
-    
     private var spotlightRect: CGRect = .zero {
         didSet {
-            topConstraint.constant = spotlightRect.minY - 15
+            topConstraint.constant = spotlightRect.minY
             leftContraint.constant = spotlightRect.minX - 20
             heightConstraint.constant = spotlightRect.height + 30
-            widthConstaint.constant = spotlightRect.width + 30
+            widthConstaint.constant = spotlightRect.width + 40
             view.layoutIfNeeded()
         }
     }
@@ -41,7 +35,7 @@ final class SpotlightViewController: BaseViewController {
     
     private var oldStatusBarColor: UIColor?
     
-    private let backgroundColor = UIColor(white: 0, alpha: 0.85)
+    private let backgroundColor = UIColor(white: 0, alpha: 0.8)
     
     //MARK: - Initialization
     
@@ -57,7 +51,7 @@ final class SpotlightViewController: BaseViewController {
     
     private func commonInit() {
         modalPresentationStyle = .overCurrentContext
-        transitioningDelegate = self
+        modalTransitionStyle = .crossDissolve
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped(_:)));
         view.addGestureRecognizer(gesture)
@@ -67,16 +61,23 @@ final class SpotlightViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         configureUI()
+        oldStatusBarColor = statusBarColor
+        statusBarColor = .clear
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if let oldStatusBarColor = oldStatusBarColor {
+            statusBarColor = oldStatusBarColor
+        }
     }
     
     private func configureUI() {
         backgroundViews.forEach { view in
             view.backgroundColor = backgroundColor
         }
-        
-        
     }
-    
 }
 
 extension SpotlightViewController: NibInit {
@@ -92,30 +93,5 @@ extension SpotlightViewController: NibInit {
 extension SpotlightViewController {
     @objc func viewTapped(_ gesture: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
-    }
-}
-
-extension SpotlightViewController: SpotlightTransitionControllerDelegate {
-    func spotlightTransitionWillPresent(_ controller: SpotlightTransitionController, transitionContext: UIViewControllerContextTransitioning) {
-        oldStatusBarColor = statusBarColor
-        statusBarColor = .clear
-    }
-    
-    func spotlightTransitionWillDismiss(_ controller: SpotlightTransitionController, transitionContext: UIViewControllerContextTransitioning) {
-        if let oldStatusBarColor = oldStatusBarColor {
-            statusBarColor = oldStatusBarColor
-        }
-    }
-}
-
-extension SpotlightViewController {
-    override func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transitionController.isPresent = true
-        return transitionController
-    }
-
-    override func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transitionController.isPresent = false
-        return transitionController
     }
 }
