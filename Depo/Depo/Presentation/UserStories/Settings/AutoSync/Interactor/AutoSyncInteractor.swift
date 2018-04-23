@@ -33,7 +33,7 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
             }
 
             self?.locationManager.authorizationStatus { [weak self] status in
-                let locationAccessGranted = (status == .authorizedAlways)
+                let locationAccessGranted = (status != .restricted)
                 
                 self?.output.onCheckPermissions(photoAccessGranted: photoAccessGranted, locationAccessGranted: locationAccessGranted)
             }

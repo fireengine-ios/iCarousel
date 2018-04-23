@@ -20,4 +20,7 @@ extension UIApplication {
         UIApplication.shared.openURL(URL(string: "App-Prefs:root")!)
     }
     
+    func openLocationSettings() {
+        UIApplication.shared.openURL(URL(string: "App-Prefs:root=LOCATION_SERVICES")!)
+    }
 }
