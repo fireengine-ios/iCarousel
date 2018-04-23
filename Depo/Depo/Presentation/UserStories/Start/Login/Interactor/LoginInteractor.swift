@@ -218,9 +218,8 @@ class LoginInteractor: LoginInteractorInput {
                 if failResponce.description == "EULA_APPROVE_REQUIRED" {
                     self?.output?.onFailEULA()
                 } else {
-                   self?.output?.onFailEULA()
+                    UIApplication.showErrorAlert(message: failResponce.description)
                 }
-                
             }
         }
         
