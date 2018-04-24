@@ -9,9 +9,23 @@
 final class PeriodicContactSyncDataStorage {
     
     private let storageVars: StorageVars = factory.resolve()
+    private let tokenStorage: TokenStorage = factory.resolve()
     
     var settings: PeriodicContactsSyncSettings {
-        if let storedSettings = storageVars.periodicContactSyncSettings as? [String: Bool] {
+        if var storedSettings = storageVars.periodicContactSyncSettings as? [String: Bool] {
+            switch SyncSettings.shared().periodicBackup {
+            case SYNCPeriodic.daily:
+                storedSettings.updateValue(true, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText)
+                storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.daily.localizedText)
+            case SYNCPeriodic.every7:
+                storedSettings.updateValue(true, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText)
+                storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.weekly.localizedText)
+            case SYNCPeriodic.every30:
+                storedSettings.updateValue(true, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText)
+                storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.monthly.localizedText)
+            case .none:
+                storedSettings.updateValue(false, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText)
+            }
             return PeriodicContactsSyncSettings(with: storedSettings)
         }
         
@@ -21,6 +35,7 @@ final class PeriodicContactSyncDataStorage {
     func save(periodicContactSyncSettings: PeriodicContactsSyncSettings) {
         let settingsToStore = periodicContactSyncSettings.asDictionary()
         storageVars.periodicContactSyncSettings = settingsToStore
+        SyncSettings.shared().token = tokenStorage.accessToken
     }
     
     func clear() {

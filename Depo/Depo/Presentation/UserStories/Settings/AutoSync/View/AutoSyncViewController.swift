@@ -172,7 +172,11 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
                                               secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
                                               secondAction: { vc in
                                                 vc.close {
-                                                    UIApplication.shared.openSettings()
+                                                    if message.contains("photos") {
+                                                        UIApplication.shared.openSettings()
+                                                    } else {
+                                                        UIApplication.shared.openLocationSettings()
+                                                    }
                                                 }
         })
         present(controller, animated: true, completion: nil)

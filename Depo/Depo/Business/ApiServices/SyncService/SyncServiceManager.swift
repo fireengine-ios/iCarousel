@@ -272,7 +272,9 @@ extension SyncServiceManager {
         if let phChanges = notification.userInfo {
             if let _ = phChanges[PhotoLibraryChangeType.added] as? [PHAsset] {
                 //TODO: append only added items
-                 checkReachabilityAndSettings(reachabilityChanged: false, newItems: true)
+                checkReachabilityAndSettings(reachabilityChanged: false, newItems: true)
+            } else {
+                checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
             }
         }
     }

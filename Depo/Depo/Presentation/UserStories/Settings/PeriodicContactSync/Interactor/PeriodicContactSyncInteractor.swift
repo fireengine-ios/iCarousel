@@ -14,7 +14,7 @@ final class PeriodicContactSyncInteractor {
     
     private var dataStorage = PeriodicContactSyncDataStorage()
     
-    private let contactsService = ContactService()
+    private let contactsService = ContactService()    
 }
 
 // MARK: - PeriodicContactSyncInteractorInput
@@ -31,6 +31,23 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
     
     func onSave(settings: PeriodicContactsSyncSettings) {
         dataStorage.save(periodicContactSyncSettings: settings)
+        
+        var periodicBackUp: SYNCPeriodic = SYNCPeriodic.none
+        
+        if settings.isPeriodicContactsSyncOptionEnabled {
+            switch settings.timeSetting.option {
+            case .daily:
+                periodicBackUp = SYNCPeriodic.daily
+            case .weekly:
+                periodicBackUp = SYNCPeriodic.every7
+            case .monthly:
+                periodicBackUp = SYNCPeriodic.every30
+            case .none:
+                periodicBackUp = SYNCPeriodic.none
+            }
+        }
+        
+        contactsService.setPeriodicForContactsSync(periodic: periodicBackUp)
     }
     
     func checkPermission() {

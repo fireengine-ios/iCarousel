@@ -25,6 +25,7 @@ extension PeriodicContactSyncRouter: PeriodicContactSyncRouterInput {
                                                     UIApplication.shared.openSettings()
                                                 }
         })
+        
         RouterVC().presentViewController(controller: controller)
     }
     
