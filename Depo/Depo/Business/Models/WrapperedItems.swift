@@ -840,8 +840,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
                 let urlToFile = URL(string: url) {
                 let tmp = LocalMediaContent(asset: asset, urlToFile: urlToFile)
                 assetDuration = asset.duration
-//                mediaItem.metadata?.duration = asset.duration
-//                duration = WrapData.getDuration(duration: asset.duration)
                 patchToPreview = .localMediaContent(tmp)
             } else {
                 // WARNIG: THIS CASE INCOREECTif 
@@ -932,7 +930,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         } else if uuid.contains("~"){
             return uuid.components(separatedBy: "~").first ?? uuid
         }
-        return ""
+        return uuid
     }
     
     /**

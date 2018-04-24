@@ -83,10 +83,8 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
             return
         }
         
-        guard locationAccessGranted else {
-            view.disableAutoSync()
+        if !locationAccessGranted {
             view.checkPermissionsFailedWith(error: TextConstants.locationServiceDisable)
-            return
         }
         
         view.checkPermissionsSuccessed()

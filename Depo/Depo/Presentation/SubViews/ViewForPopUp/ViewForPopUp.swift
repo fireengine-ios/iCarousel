@@ -67,7 +67,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
             self.tableView.endUpdates()
             self.updateH()
             
-            if let collectionView = self.superview as? UICollectionView {
+            if popUp.shouldScrollToTop, let collectionView = self.superview as? UICollectionView, collectionView.contentOffset.y < 1.0 {
                 collectionView.setContentOffset(CGPoint(x: 0, y: self.frame.origin.y), animated: true)
             }
             
@@ -198,6 +198,11 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         if viewsByType[type] == nil {
             
             let view = getViewForOperation(operation: type)
+            
+            if type == .sync || type == .upload || type == .prepareToAutoSync {
+                view.shouldScrollToTop = true
+            }
+            
             viewsByType[type] = view
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)

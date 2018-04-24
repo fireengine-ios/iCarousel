@@ -17,6 +17,7 @@ extension CoreDataStack {
     @objc func appendLocalMediaItems(completion: VoidHandler?) {
         let localMediaStorage = LocalMediaStorage.default
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
+            AppConfigurator.registerMenloworksForPushNotififcations()
             if authorized {
                 self.insertFromGallery(completion: completion)
             }
@@ -27,7 +28,6 @@ extension CoreDataStack {
     }
     
     func append(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
-//        let newBgcontext = backgroundContext//self.newChildBackgroundContext
         save(items: localMediaItems, context: newChildBackgroundContext, completion: completion)
     }
     
@@ -47,7 +47,7 @@ extension CoreDataStack {
 
         let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
         
-        updateICloudStatus(for: assetsList, context: backgroundContext)
+        updateICloudStatus(for: assetsList, context: newChildBackgroundContext)
         
         let notSaved = listAssetIdIsNotSaved(allList: assetsList, context: backgroundContext)
         originalAssetsBeingAppended.append(list: notSaved)///tempo assets
@@ -76,6 +76,8 @@ extension CoreDataStack {
             print("LOCAL_ITEMS: All local files have been added in \(Date().timeIntervalSince(start)) seconds")
             self?.inProcessAppendingLocalFiles = false
             NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
+            
+            self?.pageAppendedCallBack?([])
             completion?()
         }
     }
@@ -106,8 +108,6 @@ extension CoreDataStack {
                     }
                     
                     self?.saveDataForContext(context: context, saveAndWait: true, savedCallBack: { [weak self] in
-                        debugPrint("LOCAL_ITEMS: Saved to Context")
-                        log.debug("LocalMediaItem saveDataForContext(")
                         self?.pageAppendedCallBack?(addedObjects)
                         
                         ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
@@ -122,8 +122,12 @@ extension CoreDataStack {
     }
     
     private func updateICloudStatus(for assets: [PHAsset], context: NSManagedObjectContext) {
-        let alreadySavedAssets = listAssetIdAlreadySaved(allList: assets, context: context)
         privateQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            let alreadySavedAssets = self.listAssetIdAlreadySaved(allList: assets, context: context)
             let start = Date()
             LocalMediaStorage.default.getCompactInfo(from: alreadySavedAssets, completion: { [weak self] info in
                 guard let `self` = self else {

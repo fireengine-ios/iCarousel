@@ -42,7 +42,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="DjW-TS-eAX">
-                                        <rect key="frame" x="201" y="20" width="16" height="16"/>
+                                        <rect key="frame" x="242.5" y="20" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="20U-i8-ftb"/>
                                             <constraint firstAttribute="width" constant="16" id="mdm-wH-GOC"/>
@@ -65,7 +65,6 @@
                                     <constraint firstItem="XRK-wv-rPH" firstAttribute="leading" secondItem="ifI-JG-lGf" secondAttribute="leading" id="JaU-my-wpj"/>
                                     <constraint firstItem="DjW-TS-eAX" firstAttribute="centerY" secondItem="ifI-JG-lGf" secondAttribute="centerY" id="UaZ-FS-UmO"/>
                                     <constraint firstItem="vlD-lt-K55" firstAttribute="leading" secondItem="XRK-wv-rPH" secondAttribute="leading" constant="-12" id="dtU-bR-al4"/>
-                                    <constraint firstAttribute="trailing" secondItem="DjW-TS-eAX" secondAttribute="trailing" constant="58" id="mvW-b6-1ZQ"/>
                                     <constraint firstAttribute="bottom" secondItem="XRK-wv-rPH" secondAttribute="bottom" id="uIa-d9-Hgt"/>
                                 </constraints>
                                 <connections>
@@ -88,7 +87,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="dDd-y4-3DP">
-                                        <rect key="frame" x="201" y="20.5" width="16" height="16"/>
+                                        <rect key="frame" x="242.5" y="20.5" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="BtG-Cw-Ooh"/>
                                             <constraint firstAttribute="width" constant="16" id="dfm-Z1-Ary"/>
@@ -133,7 +132,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="hxK-WM-zMk">
-                                        <rect key="frame" x="201" y="20.5" width="16" height="16"/>
+                                        <rect key="frame" x="242.5" y="20.5" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="16" id="2ig-fM-e99"/>
                                             <constraint firstAttribute="height" constant="16" id="iqc-RS-QyS"/>
@@ -204,6 +203,7 @@
                     <constraint firstItem="LeE-sm-W0M" firstAttribute="leading" secondItem="vlD-lt-K55" secondAttribute="leading" id="GzC-Ij-xfe"/>
                     <constraint firstItem="LeE-sm-W0M" firstAttribute="trailing" secondItem="vlD-lt-K55" secondAttribute="trailing" id="TgN-no-Vya"/>
                     <constraint firstItem="LeE-sm-W0M" firstAttribute="top" secondItem="2Rj-mp-kEk" secondAttribute="bottom" constant="16" id="aYL-Vc-iLL"/>
+                    <constraint firstItem="DjW-TS-eAX" firstAttribute="centerX" secondItem="aOe-fe-AKA" secondAttribute="centerX" id="krv-O7-rqy"/>
                     <constraint firstItem="LZb-e6-h8C" firstAttribute="top" secondItem="LeE-sm-W0M" secondAttribute="bottom" constant="4" id="sVH-7i-8fU"/>
                     <constraint firstAttribute="bottom" secondItem="LZb-e6-h8C" secondAttribute="bottom" id="ucL-Gr-GUZ"/>
                     <constraint firstItem="2Rj-mp-kEk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="v7t-Xo-F3d"/>

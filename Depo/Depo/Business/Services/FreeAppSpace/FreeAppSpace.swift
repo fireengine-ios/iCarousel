@@ -42,9 +42,15 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     return
                 }
                 
+                let localSet = Set<String>(items.map({ $0.md5 }))
+                var newDuplicates = [WrapData]()
+                for object in self.duplicatesArray {
+                    if localSet.contains(object.md5){
+                        newDuplicates.append(object)
+                    }
+                }
                 self.duplicatesArray.removeAll(keepingCapacity: true)
-                
-                self.duplicatesArray.append(contentsOf: items)
+                self.duplicatesArray.append(contentsOf: newDuplicates)
                 
                 checkedArray(self.duplicatesArray)
                 
