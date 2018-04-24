@@ -129,13 +129,20 @@ final class AppConfigurator {
     private static func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         log.debug("AppConfigurator startMenloworks")
         
+        DispatchQueue.main.async {
+            MPush.applicationDidFinishLaunching(options: launchOptions)
+        }
+    }
+    
+    
+    static func registerMenloworksForPushNotififcations() {
+        log.debug("AppConfigurator registerMenloworksForPushNotififcations")
+        
         let types: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.sound, UIUserNotificationType.badge]
         let notificationTypes = NSInteger(types.rawValue)
         
         DispatchQueue.main.async {
             MPush.register(forRemoteNotificationTypes: MNotificationType(rawValue: notificationTypes))
-            MPush.applicationDidFinishLaunching(options: launchOptions)
         }
     }
-    
 }
