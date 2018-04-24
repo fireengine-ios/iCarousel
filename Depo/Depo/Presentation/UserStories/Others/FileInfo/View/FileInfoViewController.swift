@@ -116,6 +116,7 @@ class FileInfoViewController: ViewController, FileInfoViewInput, UITextFieldDele
                 uploadDateTitle.text = TextConstants.fileInfoCreationDateTitle
             } else {
                 folderSizeTitle.text = TextConstants.fileInfoFileSizeTitle
+                checkCanEdit(item: object)
             }
             
             if let createdDate = obj.creationDate, object.isSynced() {
@@ -184,7 +185,13 @@ class FileInfoViewController: ViewController, FileInfoViewInput, UITextFieldDele
             moreFileInfoLabel.text = string
         }
     }
-
+    
+    private func checkCanEdit(item: BaseDataSourceItem) {
+        if !item.isSynced() {
+            navigationItem.rightBarButtonItem = nil
+            fileName.isEnabled = false
+        }
+    }
     
     // MARK: FileInfoViewInput
     
@@ -206,7 +213,6 @@ class FileInfoViewController: ViewController, FileInfoViewInput, UITextFieldDele
         output.onRename(newName: textField.text!)
         return true
     }
-    
     
     // MARK: Actions
     

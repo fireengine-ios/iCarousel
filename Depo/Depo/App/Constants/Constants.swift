@@ -844,4 +844,5 @@ struct TextConstants {
     static let periodicContactsSyncAccessAlertText = NSLocalizedString("Error occurred while accessing your contacts.\nPlease check your settings.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let periodicContactsSyncAccessAlertGoToSettings = NSLocalizedString("Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let periodicContactsSyncAccessAlertNo = NSLocalizedString("No", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settings = NSLocalizedString("Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

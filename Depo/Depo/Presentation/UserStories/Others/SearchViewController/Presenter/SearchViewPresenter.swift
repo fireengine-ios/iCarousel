@@ -148,6 +148,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     func endSearchRequestWith(text: String) {
         hideSpinner()
         view.endSearchRequestWith(text: text)
+        
+        dataSource.isPaginationDidEnd = true
         //DBOUT
 //        dataSource.fetchService.performFetch(sortingRules: .timeUp, filtes: [.name(text)])
     }

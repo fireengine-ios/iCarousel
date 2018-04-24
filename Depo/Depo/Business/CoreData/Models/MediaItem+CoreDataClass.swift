@@ -62,11 +62,9 @@ public class MediaItem: NSManagedObject {
         self.metadata = metaData
         
         //LR-2356
-        log.debug("MediaItem  albums map")
         let albums = wrapData.albums?.map({ albumUuid -> MediaItemsAlbum in
             MediaItemsAlbum(uuid: albumUuid, context: context)
         })
-        log.debug("MediaItem albums save")
         self.albums = NSOrderedSet(array: albums ?? [])
         
         objectSyncStatus = NSSet(array: wrapData.syncStatuses)

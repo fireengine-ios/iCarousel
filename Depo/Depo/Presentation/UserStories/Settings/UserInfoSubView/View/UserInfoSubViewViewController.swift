@@ -74,6 +74,7 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     
     func updatePhoto(image: UIImage) {
         userIconImageView.image = image
+        dismissLoadingSpinner()
     }
     
     func showLoadingSpinner() {
@@ -87,7 +88,7 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     func setUserInfo(userInfo: AccountInfoResponse) {
         self.userInfo = userInfo
         editButton.isHidden = false
-        var string: String = ""
+        var string = ""
         if let name_ = userInfo.name {
             string = string + name_
         }
@@ -108,7 +109,9 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     }
     
     func setQuotaInfo(quotoInfo: QuotaInfoResponse) {
-        guard let quotaBytes = quotoInfo.bytes, let usedBytes = quotoInfo.bytesUsed else { return }
+        guard let quotaBytes = quotoInfo.bytes, let usedBytes = quotoInfo.bytesUsed else { 
+            return
+        }
         usersStorrageUssesProgress.progress = 1 - Float(usedBytes) / Float(quotaBytes)
         
         let quotaString = quotaBytes.bytesString
@@ -122,7 +125,6 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
 
     // MARK: UserInfoSubViewViewInput
     func setupInitialState() {
-        
     }
     
     // MARK: buttons actions
@@ -139,6 +141,5 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     
     @IBAction func onUpdateUserPhoto() {
         actionsDelegate?.changePhotoPressed()
-//        output.onChangeUserPhoto()
     }
 }
