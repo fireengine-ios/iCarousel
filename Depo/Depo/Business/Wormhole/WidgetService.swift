@@ -48,12 +48,13 @@ final class WidgetService {
     }
     
     var currentCompressedImage: UIImage? {
-        if let data = currentImageData {
-            var compressedImage = UIImage(data: data)
-            compressedImage = compressedImage?.resizedImage(to: CGSize(width: 100, height: 100))
-            return compressedImage
+        guard let data = currentImageData else {
+            return nil
         }
-        return nil
+        
+        var compressedImage = UIImage(data: data)
+        compressedImage = compressedImage?.resizedImage(to: CGSize(width: 100, height: 100))
+        return compressedImage
     }
     
     private lazy var dateFormatter: DateFormatter = {
