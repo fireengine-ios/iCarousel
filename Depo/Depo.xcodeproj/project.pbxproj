@@ -11891,7 +11891,6 @@
 				8C0E90751FDEBDFF00789C91 /* [CP] Embed Pods Frameworks */,
 				8C0E90771FDEBDFF00789C91 /* ShellScript */,
 				8C0E90781FDEBDFF00789C91 /* Embed App Extensions */,
-				176061AD48C945CF158F95B4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -11914,7 +11913,6 @@
 				B54BFF2C202B20250018AF82 /* Sources */,
 				B54BFF2D202B20250018AF82 /* Frameworks */,
 				B54BFF2E202B20250018AF82 /* Resources */,
-				FCBCA25A9CA95B96D3974121 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -11933,7 +11931,6 @@
 				CE1BE91E204831CD0074BDDC /* Sources */,
 				CE1BE91F204831CD0074BDDC /* Frameworks */,
 				CE1BE920204831CD0074BDDC /* Resources */,
-				1EFDEBF6FDEC03309CBD6A68 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -11973,7 +11970,6 @@
 				82B2D76F0D1B2CE153F470BD /* [CP] Embed Pods Frameworks */,
 				8C679AF51FBC244F00B78873 /* ShellScript */,
 				B51FD6381FD13C93000344BD /* Embed App Extensions */,
-				AE0C7537704B06164EC695BD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -11996,7 +11992,6 @@
 				CE58FAEB20444492007F3F54 /* Sources */,
 				CE58FAEC20444492007F3F54 /* Frameworks */,
 				CE58FAED20444492007F3F54 /* Resources */,
-				6FD71277022675E6CE043D23 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -13356,36 +13351,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		176061AD48C945CF158F95B4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1EFDEBF6FDEC03309CBD6A68 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2966BF073CA30A5D2203CC7F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -13420,21 +13385,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6FD71277022675E6CE043D23 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7745E7DF35170131924746B7 /* [CP] Check Pods Manifest.lock */ = {
@@ -13632,21 +13582,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 74412d8a38e9c5b44ca9993298b0ec4cba26289b 23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388";
 		};
-		AE0C7537704B06164EC695BD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		BCA0868506E6C5E554B5F870 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -13677,21 +13612,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#./Fabric.framework/run e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00";
-		};
-		FCBCA25A9CA95B96D3974121 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-autosync-widget/Pods-autosync-widget-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
