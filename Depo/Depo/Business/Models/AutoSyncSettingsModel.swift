@@ -68,6 +68,8 @@ final class AutoSyncSettings {
     }
     
     
+    private var storageVars: StorageVars = factory.resolve()
+    
     var isAutoSyncEnabled: Bool {
         return isAutoSyncOptionEnabled && (photoSetting.option != .never || videoSetting.option != .never)
     }
@@ -75,8 +77,8 @@ final class AutoSyncSettings {
     var photoSetting = AutoSyncSetting(syncItemType: .photo, option: .wifiAndCellular)
     var videoSetting = AutoSyncSetting(syncItemType: .video, option: .wifiOnly)
     
-
     var isAutoSyncOptionEnabled: Bool = true //auto sync switcher in settings is on/off
+    
     
     init() { }
     
@@ -167,6 +169,14 @@ extension AutoSyncSettings {
         case none
     }
     
+    static var hasSettingsToMigrate: Bool {
+        let oldValueAutoSyncState = UserDefaults.standard.integer(forKey: MigrationKeys.settingsUploadPhotosVideos)
+        let oldValueMediaType = UserDefaults.standard.integer(forKey: MigrationKeys.settingsUploadMediaType)
+        
+        return MigrationEnableOption(rawValue: oldValueAutoSyncState) != nil &&
+            MigrationSyncMediaType(rawValue: oldValueMediaType) != nil
+    }
+    
     static func createMigrated() -> AutoSyncSettings {
         let settings = AutoSyncSettings()
         settings.migrate()
@@ -178,6 +188,8 @@ extension AutoSyncSettings {
         defer {
             UserDefaults.standard.removeObject(forKey: MigrationKeys.settingsUploadPhotosVideos)
             UserDefaults.standard.removeObject(forKey: MigrationKeys.settingsUploadMediaType)
+            
+            storageVars.autoSyncSettings = self.asDictionary()
         }
         
         let oldValueAutoSyncState = UserDefaults.standard.integer(forKey: MigrationKeys.settingsUploadPhotosVideos)
