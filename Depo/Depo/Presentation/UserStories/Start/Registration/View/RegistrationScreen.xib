@@ -77,9 +77,6 @@
                         </tableView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Error label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i69-kg-6FH" userLabel="ErrorLabel">
                             <rect key="frame" x="30" y="48" width="317" height="21.5"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21.5" id="QSv-dH-Siq"/>
-                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
