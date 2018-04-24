@@ -40,6 +40,8 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     
     weak var settingsDelegate: SettingsDelegate?
     
+    private var isFromPhotoPicker = false
+    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,11 +65,17 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if isFromPhotoPicker {
+            isFromPhotoPicker = false
+            return
+        }
+        
         navigationBarWithGradientStyle()
-        if (Device.isIpad) {
-            splitViewController?.navigationController?.viewControllers.last?.title = "Settings"
+        if Device.isIpad {
+            splitViewController?.navigationController?.viewControllers.last?.title = TextConstants.settings
         } else {
-            self.setTitle(withString: "Settings")
+            self.setTitle(withString: TextConstants.settings)
         }
         output.viewWillBecomeActive()
         userInfoSubView.reloadUserInfo()
@@ -260,11 +268,9 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     }
     
     func showPhotoAlertSheet() {
-        let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: { _ in
-            
-        })
+        let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: nil)
         
-        let actionPhoto = UIAlertAction(title: TextConstants.actionSheetTakeAPhoto, style: .default, handler: { _ in
+        let actionCamera = UIAlertAction(title: TextConstants.actionSheetTakeAPhoto, style: .default, handler: { _ in
             self.output.onChooseFromPhotoCamera(onViewController: self)
         })
         
@@ -272,10 +278,8 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
             self.output.onChooseFromPhotoLibriary(onViewController: self)
         })
         
-        let actionsWithCancell: [UIAlertAction] = [cancellAction, actionPhoto, actionLibriary]
-        
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionsWithCancell.forEach({ actionSheetVC.addAction($0) })
+        actionSheetVC.addActions(cancellAction, actionCamera, actionLibriary)
         actionSheetVC.popoverPresentationController?.sourceView = view
         
         let originPoint = CGPoint(x: Device.winSize.width / 2 - actionSheetVC.preferredContentSize.width / 2,
@@ -286,6 +290,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         actionSheetVC.popoverPresentationController?.permittedArrowDirections = .init(rawValue: 0) // means no arrow
         
         present(actionSheetVC, animated: true, completion: nil)
+        isFromPhotoPicker = true
     }
     
     func profileInfoChanged() {
@@ -334,16 +339,15 @@ extension SettingsViewController: UIImagePickerControllerDelegate {
             photoData = imageData
             
         } else if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-            photoData = UIImagePNGRepresentation(image)
+            photoData = UIImageJPEGRepresentation(image, 0.9)
         } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            photoData = UIImagePNGRepresentation(image)
+            photoData = UIImageJPEGRepresentation(image, 0.9)
         }
         if let unwrapedPhotoData = photoData {
             output.photoCaptured(data: unwrapedPhotoData)
         }
         userInfoSubView.showLoadingSpinner()
         picker.dismiss(animated: true, completion: nil)
-        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
