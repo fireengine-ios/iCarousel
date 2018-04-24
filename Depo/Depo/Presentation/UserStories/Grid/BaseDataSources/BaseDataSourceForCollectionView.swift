@@ -1619,9 +1619,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        if !needShowProgressInCell{
-            delegate?.needReloadData()
-        }
+        delegate?.needReloadData()
     }
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
