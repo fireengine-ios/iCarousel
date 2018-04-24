@@ -215,6 +215,12 @@ final class PageCompounder {
                                                 self.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                                 return
                                             } else if !compoundedPage.isEmpty {
+                                               ///latesst change
+                                                self.compoundItems(pageItems: pageItems,
+                                                                    sortType: sortType,
+                                                                    predicate: predicate,
+                                                                    compoundedCallback: compoundedCallback)
+                                            } else {
                                                 debugPrint("!!!? monitorDBLastAppendedPageLast last non empty")
                                                 compoundedCallback(compoundedPage, leftovers)
                                             }
@@ -249,7 +255,17 @@ final class PageCompounder {
             
             guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
                 lastFreshLocalItem.metaDate >= lastItem.metaDate else {
-                    compoundedCallback(pageItems,[])
+                    guard let `self` = self else {
+                        return
+                    }
+                    guard self.coreData.inProcessAppendingLocalFiles else {
+                        self.compoundItems(pageItems: pageItems,
+                                           sortType: sortType,
+                                           predicate: predicate,
+                                           compoundedCallback: compoundedCallback)
+                        return
+                    }
+                    self.monitorDBLastAppendedPageFirst(lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                     return
             }
             debugPrint("!!!? regular callback monitorDBLastAppendedPageFirst")
@@ -281,24 +297,20 @@ final class PageCompounder {
             self?.coreData.pageAppendedCallBack = nil
             
             guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
-                let firstFreshLocalItem = freshlyDBAppendedItems.first,
-                firstFreshLocalItem.metaDate >= lastItem.metaDate,
-                firstFreshLocalItem.metaDate <= firstItem.metaDate
+                lastFreshLocalItem.metaDate <= firstItem.metaDate
                 else {
-                    debugPrint("!!!? regularcallbacklastFreshLocalItem.metaDate > lastItem.metaDate")
-//                    compoundedCallback(pageItems, [])
-                    self?.compoundItems(pageItems: pageItems,
-                                        sortType: sortType,
-                                        predicate: predicate,
-                                        compoundedCallback: { [weak self] compoundedPage, leftovers  in
-                                            guard !compoundedPage.isEmpty else {
-                                                debugPrint("!!!? regular callback monitorDBLastAppendedPageMiddle else")
-                                                self?.monitorDBLastAppendedPageMiddle(firstItem: firstItem, lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
-                                                return
-                                            }
-                                            debugPrint("!!!? middle non empty")
-                                            compoundedCallback(compoundedPage, leftovers)
-                    })
+                    
+                    guard let `self` = self else {
+                        return
+                    }
+                    guard self.coreData.inProcessAppendingLocalFiles else {
+                        self.compoundItems(pageItems: pageItems,
+                                            sortType: sortType,
+                                            predicate: predicate,
+                                            compoundedCallback: compoundedCallback)
+                        return
+                    }
+                    self.monitorDBLastAppendedPageMiddle(firstItem: firstItem, lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                     return
             }
             debugPrint("!!!? regular callback monitorDBLastAppendedPageMiddle")
@@ -307,8 +319,19 @@ final class PageCompounder {
                                 predicate: predicate,
                                 compoundedCallback: { [weak self] compoundedPage, leftovers  in
                                     guard !compoundedPage.isEmpty else {
+                                       
                                         debugPrint("!!!? regular callback monitorDBLastAppendedPageMiddle else")
-                                        self?.monitorDBLastAppendedPageMiddle(firstItem: firstItem, lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
+                                        guard let `self` = self else {
+                                            return
+                                        }
+                                        guard self.coreData.inProcessAppendingLocalFiles else {
+                                            self.compoundItems(pageItems: pageItems,
+                                                               sortType: sortType,
+                                                               predicate: predicate,
+                                                               compoundedCallback: compoundedCallback)
+                                            return
+                                        }
+                                        self.monitorDBLastAppendedPageMiddle(firstItem: firstItem, lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
                                         return
                                     }
                                     debugPrint("!!!? middle non empty")

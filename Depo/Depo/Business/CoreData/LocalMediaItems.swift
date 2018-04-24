@@ -17,6 +17,7 @@ extension CoreDataStack {
     @objc func appendLocalMediaItems(completion: VoidHandler?) {
         let localMediaStorage = LocalMediaStorage.default
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
+            AppConfigurator.registerMenloworksForPushNotififcations()
             if authorized {
                 self.insertFromGallery(completion: completion)
             }
@@ -75,6 +76,8 @@ extension CoreDataStack {
             print("LOCAL_ITEMS: All local files have been added in \(Date().timeIntervalSince(start)) seconds")
             self?.inProcessAppendingLocalFiles = false
             NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
+            
+            self?.pageAppendedCallBack?([])
             completion?()
         }
     }
@@ -105,8 +108,6 @@ extension CoreDataStack {
                     }
                     
                     self?.saveDataForContext(context: context, saveAndWait: true, savedCallBack: { [weak self] in
-                        debugPrint("LOCAL_ITEMS: Saved to Context")
-                        log.debug("LocalMediaItem saveDataForContext(")
                         self?.pageAppendedCallBack?(addedObjects)
                         
                         ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
