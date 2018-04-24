@@ -96,7 +96,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func photoLibraryIsAvailible() -> Bool {
-        log.debug("LocalMediaStorage photoLibraryIsAvailible")
 
         let status = PHPhotoLibrary.authorizationStatus()
         return status == .authorized
@@ -157,7 +156,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func askPermissionForPhotoFramework(redirectToSettings: Bool, completion: @escaping PhotoLibraryGranted) {
-        log.debug("LocalMediaStorage showAccessAlert")
 
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
@@ -567,7 +565,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
 
     
     func fullInfoAboutAsset(asset: PHAsset) -> AssetInfo {
-        log.debug("LocalMediaStorage fullInfoAboutAsset")
 
         switch asset.mediaType {
         case .image:
@@ -582,7 +579,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     private func compactInfoAboutAsset(asset: PHAsset) -> AssetInfo {
-        log.debug("LocalMediaStorage fullInfoAboutAsset")
         
         switch asset.mediaType {
         case .image:
@@ -597,7 +593,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     private func compactInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
-        log.debug("LocalMediaStorage compactInfoAboutVideoAsset")
         
         var assetInfo = AssetInfo(libraryAsset: asset)
         let semaphore = DispatchSemaphore(value: 0)
@@ -661,7 +656,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func compactInfoAboutImageAsset(asset: PHAsset) -> AssetInfo {
-        log.debug("LocalMediaStorage compactInfoAboutImageAsset")
         
         var assetInfo = AssetInfo(libraryAsset: asset)
         
@@ -716,7 +710,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     
     func fullInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
-        log.debug("LocalMediaStorage fullInfoAboutVideoAsset")
         
         var assetInfo = AssetInfo(libraryAsset: asset)
         let semaphore = DispatchSemaphore(value: 0)
@@ -779,7 +772,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func fullInfoAboutImageAsset(asset: PHAsset) -> AssetInfo {
-        log.debug("LocalMediaStorage fullInfoAboutImageAsset")
         
         var assetInfo = AssetInfo(libraryAsset: asset)
         
@@ -833,8 +825,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     
     func cancelRequest(asset: PHAsset) {
-        log.debug("LocalMediaStorage cancelRequest")
-
         if let all: [GetImageOperation] =  queue.operations as? [GetImageOperation] {
             let forAssets = all.filter { $0.asset == asset }
             forAssets.forEach { $0.cancel() }
