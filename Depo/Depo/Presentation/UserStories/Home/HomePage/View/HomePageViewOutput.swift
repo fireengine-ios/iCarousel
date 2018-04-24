@@ -29,4 +29,6 @@ protocol HomePageViewOutput {
     func needRefresh()
     
     func shownSpotlight(type: SpotlightType)
+    
+    func closedSpotlight(type: SpotlightType)
 }

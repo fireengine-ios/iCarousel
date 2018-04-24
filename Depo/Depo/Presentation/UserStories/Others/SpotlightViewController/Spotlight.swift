@@ -30,7 +30,6 @@ enum SpotlightType: Int {
     }
     
     var cellType: BaseView.Type {
-        return ContactBackupOld.self
         switch self {
         case .movieCard: return MovieCard.self
         case .albumCard: return AlbumCard.self
@@ -60,7 +59,8 @@ final class SpotlightManager {
     }
     
     func requestShowSpotlight() {
-        if lastShownSpotlight < SpotlightType.filterCard.rawValue, let spotlight = SpotlightType(rawValue: lastShownSpotlight + 1) {
+        if lastShownSpotlight < SpotlightType.filterCard.rawValue,
+           let spotlight = SpotlightType(rawValue: lastShownSpotlight + 1) {
             delegate?.needShowSpotlight(type: spotlight)
         }
     }
@@ -69,5 +69,10 @@ final class SpotlightManager {
         lastShownSpotlight = type.rawValue
     }
     
+    func closedSpotlight(type: SpotlightType) {
+        if type == .homePageIcon {
+            delegate?.needShowSpotlight(type: .homePageGeneral)
+        }
+    }
     
 }

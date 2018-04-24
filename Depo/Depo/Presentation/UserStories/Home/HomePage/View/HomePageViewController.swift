@@ -139,8 +139,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
         switch type {
         case .homePageIcon:
-            frame = CGRect(x: 0, y: tabBarVC.tabBar.frame.minY, width: 60, height: tabBarVC.tabBar.frame.height)
-            
+            let buttonFrame = tabBarVC.frameForTabAtIndex(index: 0)
+            frame = tabBarVC.tabBar.convert(buttonFrame, to: tabBarVC.contentView)
         case .homePageGeneral:
             if let topView = topView {
                 let topViewFrame = topView.convert(topView.frame, to: tabBarVC.contentView)
@@ -151,8 +151,10 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         }
         
         if frame != .zero {
-            let controller = SpotlightViewController.with(rect: frame, message: type.title)
-            
+            let controller = SpotlightViewController.with(rect: frame, message: type.title, completion: { [weak self] in
+                self?.output.closedSpotlight(type: type)
+            })
+
             tabBarVC.present(controller, animated: true, completion: {
                 self.output.shownSpotlight(type: type)
             })
@@ -162,7 +164,15 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     private func cellCoordinates<T: BaseView>(cellType: T.Type, to: UIView) -> CGRect {
         for (row, cell) in homePageDataSource.popUps.enumerated() {
             if type(of: cell) == cellType {
-                collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .bottom, animated: false)
+                let indexPath = IndexPath(row: row, section: 0)
+                let indexPathsVisibleCells = collectionView.indexPathsForVisibleItems.sorted { first, second -> Bool in
+                    return first < second
+                }
+                if indexPath == indexPathsVisibleCells.first {
+                    collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+                } else if indexPath == indexPathsVisibleCells.last || !indexPathsVisibleCells.contains(indexPath) {
+                    collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+                }
                 return cell.convert(cell.frame, to: to)
             }
         }

@@ -89,12 +89,16 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     func shownSpotlight(type: SpotlightType) {
         spotlightManager.shownSpotlight(type: type)
     }
+    
+    func closedSpotlight(type: SpotlightType) {
+        spotlightManager.closedSpotlight(type: type)
+    }
 }
 
 extension HomePagePresenter: SpotlightManagerDelegate {
     
     func needShowSpotlight(type: SpotlightType) {
-        if type.rawValue >= SpotlightType.homePageGeneral.rawValue || interactor.homeCardsLoaded {
+        if type.rawValue < SpotlightType.movieCard.rawValue || interactor.homeCardsLoaded {
             view.needShowSpotlight(type: type)
         }  else {
             needShowSpotlightType = type
