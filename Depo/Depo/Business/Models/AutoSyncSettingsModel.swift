@@ -173,12 +173,8 @@ extension AutoSyncSettings {
         let oldValueAutoSyncState = UserDefaults.standard.integer(forKey: MigrationKeys.settingsUploadPhotosVideos)
         let oldValueMediaType = UserDefaults.standard.integer(forKey: MigrationKeys.settingsUploadMediaType)
         
-        if MigrationEnableOption(rawValue: oldValueAutoSyncState) != nil,
-            MigrationSyncMediaType(rawValue: oldValueMediaType) != nil {
-            return true
-        }
-        
-        return false
+        return MigrationEnableOption(rawValue: oldValueAutoSyncState) != nil &&
+            MigrationSyncMediaType(rawValue: oldValueMediaType) != nil
     }
     
     static func createMigrated() -> AutoSyncSettings {
