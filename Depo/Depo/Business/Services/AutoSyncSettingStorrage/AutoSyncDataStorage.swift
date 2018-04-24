@@ -18,25 +18,28 @@ final class AutoSyncDataStorage {
         } else if !storageVars.autoSyncSettingsMigrationCompleted {
             storageVars.autoSyncSettingsMigrationCompleted = true
             let settings = AutoSyncSettings.createMigrated()
-            save(autoSyncSettings: settings)
+            save(autoSyncSettings: settings, triggerLocation: false)
             return settings
         }
         
         return AutoSyncSettings()
     }
     
-    func save(autoSyncSettings: AutoSyncSettings) {
+    
+    func save(autoSyncSettings: AutoSyncSettings, triggerLocation: Bool = true) {
         let settingsToStore = autoSyncSettings.asDictionary()
         storageVars.autoSyncSettings = settingsToStore
         
-        if autoSyncSettings.isAutoSyncEnabled {
-            LocationManager.shared.startUpdateLocation()
-        } else {
-            PopUpService.shared.setLoginCountForShowImmediately()
-            PopUpService.shared.checkIsNeedShowUploadOffPopUp()
-            LocationManager.shared.stopUpdateLocation()
+        if triggerLocation {
+            if autoSyncSettings.isAutoSyncEnabled {
+                LocationManager.shared.startUpdateLocation()
+            } else {
+                PopUpService.shared.setLoginCountForShowImmediately()
+                PopUpService.shared.checkIsNeedShowUploadOffPopUp()
+                LocationManager.shared.stopUpdateLocation()
+            }
+            
         }
-        
     }
     
     func clear() {
