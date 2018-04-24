@@ -193,7 +193,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 return false
             })
             
-            self.localMD5Array.append(contentsOf: self.localtemsArray.map({ $0.md5 }))
+            self.localMD5Array.append(contentsOf: self.localtemsArray.flatMap{ $0.md5 })
             let latestDate = self.localtemsArray.last?.creationDate ?? Date()
             
             //need to check have we duplicates
@@ -241,9 +241,9 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     break
                 }
                 let index = self_.localMD5Array.index(of: item.md5)
-                if let index_ = index {
+                if let index_ = index, let elementToAdd = self_.localtemsArray[index_] {
                     self_.serverDuplicatesArray.append(item)
-                    self_.duplicatesArray.append(self_.localtemsArray[index_])
+                    self_.duplicatesArray.append(elementToAdd)
                     //self_.localtemsArray.remove(at: index_)
                     //self_.localMD5Array.remove(at: index_)
                     
