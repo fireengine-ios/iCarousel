@@ -17,7 +17,6 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func viewIsReady() {
-//        interactor.getCellsData()
     }
     
     func viewWillBecomeActive() {

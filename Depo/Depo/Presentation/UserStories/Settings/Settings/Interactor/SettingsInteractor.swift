@@ -84,10 +84,10 @@ class SettingsInteractor: SettingsInteractorInput {
                 }
             })
             
-            }, fail: { [weak self] error in
-                DispatchQueue.main.async {
-                    self?.output.profilePhotoUploadFailed(error: error)
-                }
+        }, fail: { [weak self] error in
+            DispatchQueue.main.async {
+                self?.output.profilePhotoUploadFailed(error: error)
+            }
                 
         })
     }
