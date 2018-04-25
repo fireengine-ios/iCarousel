@@ -21,11 +21,12 @@ class PasscodeEnterViewController: ViewController, NibInit {
     
     @IBOutlet weak var passcodeViewImp: PasscodeViewImp!
     
-    let wormholePoster = WormholePoster()
+    private let wormholePoster = WormholePoster()
     
-    var passcodeManager: PasscodeManager!
+    lazy var passcodeManager: PasscodeManager = PasscodeManagerImp(passcodeView: passcodeViewImp,
+                                                                   state: state)
     
-    var state: PasscodeState!
+    var state: PasscodeState = ValidatePasscodeState()
     var navigationTitle = ""
     var success: VoidHandler?
     var isTurkCellUser: Bool?
@@ -33,8 +34,11 @@ class PasscodeEnterViewController: ViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTitle(withString: navigationTitle)
-        passcodeManager = PasscodeManagerImp(passcodeView: passcodeViewImp, state: state)
         passcodeManager.delegate = self
+    }
+
+    func becomeResponder() {
+        passcodeManager.view.becomeResponder()
     }
 }
 
