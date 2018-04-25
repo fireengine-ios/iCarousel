@@ -120,6 +120,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         log.debug("AppDelegate applicationWillEnterForeground")
+        
+        ContactSyncSDK.doPeriodicSync()
     }
     
     private func showPasscodeIfNeed() {
