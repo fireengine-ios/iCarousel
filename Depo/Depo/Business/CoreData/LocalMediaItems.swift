@@ -32,8 +32,7 @@ extension CoreDataStack {
     }
     
     func remove(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
-        removeLocalMediaItems(with: localMediaItems.map { $0.localIdentifier })
-        completion()
+        removeLocalMediaItems(with: localMediaItems.map { $0.localIdentifier }, completion: completion)
     }
 
     func insertFromGallery(completion: VoidHandler?) {
@@ -137,7 +136,7 @@ extension CoreDataStack {
                 context.perform {
                     let invalidItems = info.filter { !$0.isValid }.compactMap { $0.asset.localIdentifier }
                     print("iCloud: removing \(invalidItems.count) items")
-                    self.removeLocalMediaItems(with: invalidItems)
+                    self.removeLocalMediaItems(with: invalidItems, completion: {})
                 }
             })
         }
@@ -169,13 +168,14 @@ extension CoreDataStack {
         return allList.filter { alredySavedIDs.contains( $0.localIdentifier ) }
     }
     
-    func removeLocalMediaItems(with assetIdList: [String]) {
+    func removeLocalMediaItems(with assetIdList: [String], completion: @escaping VoidHandler) {
         guard assetIdList.count > 0 else {
             return
         }
         let context = self.newChildBackgroundContext
         context.perform { [weak self] in
             guard let `self` = self else {
+                completion()
                 return
             }
             let predicate = NSPredicate(format: "localFileID IN %@", assetIdList)
@@ -183,7 +183,7 @@ extension CoreDataStack {
             
             items.forEach { context.delete($0) }
             
-            self.saveDataForContext(context: context, savedCallBack: nil)
+            self.saveDataForContext(context: context, savedCallBack: completion)
         }
  
     }
