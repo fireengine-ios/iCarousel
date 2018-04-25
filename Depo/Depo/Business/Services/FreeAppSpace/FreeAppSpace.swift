@@ -322,7 +322,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             }
         
             if file.isLocalItem {
-                if self.localMD5Array.index(where: { $0.md5 == file.md5 }) == nil {
+                if self.localMD5Array.index(where: { $0 == file.md5 }) == nil {
                     file.metaData?.takenDate = Date()
                     self.localMD5Array.append(file.md5)
                 }
@@ -350,7 +350,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 //
                 let localObjects = fetchResult.map { WrapData(mediaItem: $0) }
                 for localObject in localObjects {
-                    if self.localMD5Array.index(where: { $0.md5 == localObject.md5 }) == nil {
+                    if self.localMD5Array.index(where: { $0 == localObject.md5 }) == nil {
                         file.metaData?.takenDate = Date()
                         self.localMD5Array.append(localObject.md5)
                     }
@@ -374,7 +374,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 }
                 if !items.isEmpty {
                     for localObject in items {
-                        if self.localMD5Array.index(where: { $0.md5 == localObject.md5 }) == nil {
+                        if self.localMD5Array.index(where: { $0 == localObject.md5 }) == nil {
                             file.metaData?.takenDate = Date()
                             self.duplicatesArray.append(localObject)
                             self.localMD5Array.append(localObject.md5)
