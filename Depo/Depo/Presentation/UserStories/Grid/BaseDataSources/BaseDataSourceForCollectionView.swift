@@ -900,6 +900,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         delegate?.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        if (elementKind == UICollectionElementKindSectionHeader) {
+            view.layer.zPosition = 0;
+        }
+    }
+    
     //MARK: collectionViewDataSource
     
     func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
