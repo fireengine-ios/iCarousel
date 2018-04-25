@@ -18,5 +18,5 @@ protocol PhotoVideoDetailViewInput: class {
     
     func onItemSelected(at index: Int, from items: [Item])
     
-//    func configureEditingTabBar(config: EditingBarConfig)
+    func hideView()
 }

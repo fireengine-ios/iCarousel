@@ -12,7 +12,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var dataSource: BaseDataSourceForCollectionView
     
-    var view: BaseFilesGreedViewInput!
+    weak var view: BaseFilesGreedViewInput!
     
     weak var moduleOutput: BaseFilesGreedModuleOutput?
     
