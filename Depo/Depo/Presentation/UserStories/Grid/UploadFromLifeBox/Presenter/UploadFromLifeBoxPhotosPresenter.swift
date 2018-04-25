@@ -72,4 +72,15 @@ class UploadFromLifeBoxPhotosPresenter: BaseFilesGreedPresenter, UploadFromLifeB
         uploadView.hideView()
     }
     
+    override func asyncOperationFail(errorResponse: ErrorResponse) {
+        if errorResponse.isOutOfSpaceError {
+            asyncOperationSucces()
+            guard let uploadView = view as? UploadFromLifeBoxViewInput else {
+                return
+            }
+            uploadView.showOutOfSpaceAlert()
+        } else {
+            asyncOperationFail(errorMessage: errorResponse.description)
+        }
+    }
 }

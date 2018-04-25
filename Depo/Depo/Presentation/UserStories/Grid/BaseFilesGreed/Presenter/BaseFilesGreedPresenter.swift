@@ -786,4 +786,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func changeCover() { }
+    
+//    override func asyncOperationFail(errorResponse: ErrorResponse) {
+//        super.asyncOperationFail(errorResponse: errorResponse)
+//    }
 }

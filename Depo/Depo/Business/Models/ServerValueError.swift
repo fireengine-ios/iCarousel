@@ -66,9 +66,10 @@ extension ServerValueError: LocalizedError {
             
         case ErrorKeys.PROMO_IS_INACTIVE:
             return TextConstants.PROMO_IS_INACTIVE
-            
         default:
-            return TextConstants.promocodeError
+            /// maybe will be need
+            /// TextConstants.promocodeError
+            return TextConstants.errorServer
         }
     }
 }

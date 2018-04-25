@@ -25,6 +25,7 @@ protocol BaseAsyncOperationInteractorOutput {
     func asyncOperationSucces()
     
     func asyncOperationFail(errorMessage: String?)
+    func asyncOperationFail(errorResponse: ErrorResponse)
 
 }
 
@@ -75,5 +76,9 @@ class BasePresenter: BaseAsyncOperationInteractorOutput {
         if let message = errorMessage {
             UIApplication.showErrorAlert(message: message)
         }
+    }
+    
+    func asyncOperationFail(errorResponse: ErrorResponse) {
+        asyncOperationFail(errorMessage: errorResponse.description)
     }
 }
