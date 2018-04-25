@@ -59,6 +59,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
 
     func addPopUpSubView(popUp: BaseView) {
         DispatchQueue.main.async {
+            
             self.lock.lock()
             self.viewsArray.insert(popUp, at: 0)
             let path = IndexPath(row: 0, section: 0)
@@ -66,10 +67,6 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
             self.tableView.insertRows(at: [path], with: .automatic)
             self.tableView.endUpdates()
             self.updateH()
-            
-            if popUp.shouldScrollToTop, let collectionView = self.superview as? UICollectionView, collectionView.contentOffset.y < 1.0 {
-                collectionView.setContentOffset(CGPoint(x: 0, y: self.frame.origin.y), animated: true)
-            }
             
             self.lock.unlock()
         }
