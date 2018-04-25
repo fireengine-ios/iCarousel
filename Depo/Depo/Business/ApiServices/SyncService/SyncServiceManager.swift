@@ -160,11 +160,6 @@ class SyncServiceManager {
             
             CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
             
-            guard !CoreDataStack.default.inProcessAppendingLocalFiles else {
-                CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
-                return
-            }
-            
             guard let reachability = self.reachabilityService else {
                 print("\(#function): reachabilityService is nil")
                 return

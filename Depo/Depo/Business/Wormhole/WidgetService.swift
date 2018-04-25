@@ -42,6 +42,21 @@ final class WidgetService {
         set { defaults?.set(newValue.rawValue, forKey: SharedConstants.syncStatusKey) }
     }
     
+    private var currentImageData: Data? {
+        get { return defaults?.data(forKey: SharedConstants.currentImageDataKey) }
+        set { defaults?.set(newValue, forKey: SharedConstants.currentImageDataKey) }
+    }
+    
+    var currentCompressedImage: UIImage? {
+        guard let data = currentImageData else {
+            return nil
+        }
+        
+        var compressedImage = UIImage(data: data)
+        compressedImage = compressedImage?.resizedImage(to: CGSize(width: 100, height: 100))
+        return compressedImage
+    }
+    
     private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
@@ -58,11 +73,8 @@ final class WidgetService {
     }
     
     func notifyWidgetAbout(currentImage: UIImage?) {
-        if let compressedData = currentImage?.jpeg(.low) {
-            var compressedImage = UIImage(data: compressedData)
-            compressedImage = compressedImage?.resizedImage(to: CGSize(width: 100, height: 100))
-            wormhole.passMessageObject(compressedImage, identifier: SharedConstants.wormholeCurrentImageIdentifier)
-        }
+        currentImageData = currentImage?.jpeg(.low)
+        wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)
     }
     
     func notifyWidgetAbout(status: AutoSyncStatus) {
@@ -71,6 +83,7 @@ final class WidgetService {
         if syncStatus != .executing {
             finishedCount = 0
             totalCount = 0
+            currentImageData = nil
         }
         
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)

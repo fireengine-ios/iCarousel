@@ -56,6 +56,12 @@ class ItemSyncServiceImpl: ItemSyncService {
     func start(newItems: Bool) {
         log.debug("ItemSyncServiceImpl start")
         
+        guard !CoreDataStack.default.inProcessAppendingLocalFiles else {
+            /// don't need to change status because it's fake preparation until CoreData processing is done
+            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
+            return
+        }
+        
         guard !(newItems && status.isContained(in: [.prepairing, .executing])) else {
             appendNewUnsyncedItems()
             return

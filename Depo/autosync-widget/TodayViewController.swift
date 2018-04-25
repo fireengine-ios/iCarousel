@@ -34,17 +34,6 @@ final class TodayViewController: UIViewController {
         widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeMessageIdentifier) { [weak self] messageObject in
             self?.updateFields()
         }
-        
-        widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeCurrentImageIdentifier) { [weak self] messageObject in
-            guard let `self` = self, let image = messageObject as? UIImage else {
-                return
-            }
-            
-            UIView.transition(with: self.currentImage,
-                              duration: 0.3,
-                              options: .transitionCrossDissolve, animations: { self.currentImage.image = image },
-                              completion: nil)
-        }
     }
     
     private func setupTagGesture() {
@@ -76,6 +65,7 @@ extension TodayViewController: NCWidgetProviding {
     private func updateFields() {
         switch widgetService.syncStatus {
         case .executing :
+            updateCurrentImage()
             topLabel.text = L10n.widgetTopTitleInProgress
             bottomLabel.text = "\(widgetService.finishedCount) / \(widgetService.totalCount)"
             successImage.isHidden = true
@@ -97,5 +87,13 @@ extension TodayViewController: NCWidgetProviding {
             currentImage.image = nil
             activityIndicator.stopAnimating()
         }
+    }
+    
+    private func updateCurrentImage() {
+        let compressedImage = WidgetService.shared.currentCompressedImage
+        UIView.transition(with: currentImage,
+                          duration: 0.3,
+                          options: .transitionCrossDissolve, animations: { self.currentImage.image = compressedImage },
+                          completion: nil)
     }
 }
