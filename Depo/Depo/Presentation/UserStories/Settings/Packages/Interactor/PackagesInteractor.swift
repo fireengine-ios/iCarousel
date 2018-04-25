@@ -201,6 +201,7 @@ extension PackagesInteractor: PackagesInteractorInput {
             group.enter()
             if let receipt = iapManager.receipt, let productId = offer.storeProductIdentifier {
                 offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
+                    group.leave()
                     guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
                         return
                     }
@@ -210,8 +211,6 @@ extension PackagesInteractor: PackagesInteractorInput {
                             self?.output.failedUsage(with: ErrorResponse.string(status.description))
                         }
                     }
-                    group.leave()
-                    
                     }, fail: { [weak self] errorResponse in
                         if !restore {
                             DispatchQueue.main.async {
