@@ -44,24 +44,23 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                     }
                     self_.isDeleteRequestRunning = false
                     if let presenter = self_.output as? FreeAppSpacePresenter {
-                        DispatchQueue.main.async {
-                            presenter.onItemDeleted()
-                            if FreeAppSpace.default.getDuplicatesObjects().count == 0 {
-                                CardsManager.default.stopOperationWithType(type: .freeAppSpace)
-                                CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
+                            DispatchQueue.main.async {
+                                presenter.onItemDeleted()
+                                if FreeAppSpace.default.getDuplicatesObjects().count == 0 {
+                                    CardsManager.default.stopOperationWithType(type: .freeAppSpace)
+                                    CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
+                                }
+                                presenter.goBack()
                             }
-                            presenter.goBack()
                         }
-                    }
-                    
-                }, fail: { [weak self] error in
-                    self?.isDeleteRequestRunning = false
-                    if let presenter = self?.output as? FreeAppSpacePresenter {
-                        DispatchQueue.main.async {
-                            presenter.canceled()
+                    }, fail: { [weak self] error in
+                        self?.isDeleteRequestRunning = false
+                        if let presenter = self?.output as? FreeAppSpacePresenter {
+                            DispatchQueue.main.async {
+                                presenter.canceled()
+                            }
                         }
-                    }
-                })
+                    })
                 }, fail: { [weak self] error in
                     self?.isDeleteRequestRunning = false
                     if let presenter = self?.output as? FreeAppSpacePresenter {
