@@ -60,7 +60,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             bottomBlackView.isHidden = self.isFullScreen
             viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
         }
-    } 
+    }
     
     private var selectedIndex = 0 {
         didSet {
@@ -155,9 +155,18 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
     }
     
-    private func hideView() {
+    func hideView() {
+        customDeinit()
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
-        dismiss(animated: true)
+        
+        /// need to check for PopUpController to dismiss it automaticaly for last photo in PhotoVideoDetail
+        if let presentedViewController = presentedViewController as? PopUpController {
+            presentedViewController.close { [weak self] in
+                self?.dismiss(animated: true)
+            }
+        }  else {
+            dismiss(animated: true)
+        }
     }
     
     private func scrollToSelectedIndex() {
@@ -169,7 +178,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
     } 
     
-    deinit {
+    /// FIXME: temp logic of deinit. ItemOperationManager holds "self" strong
+    func customDeinit() {
         ItemOperationManager.default.stopUpdateView(view: self)
         NotificationCenter.default.removeObserver(self)
     }
