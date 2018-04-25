@@ -25,6 +25,7 @@ final class PeriodicContactSyncDataStorage {
                 storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.monthly.localizedText)
             case .none:
                 storedSettings.updateValue(false, forKey: PeriodicContactsSyncSettingsKey.isPeriodicContactsSyncEnabledKey.localizedText)
+                storedSettings.updateValue(true, forKey: PeriodicContactsSyncOption.daily.localizedText)
             }
             return PeriodicContactsSyncSettings(with: storedSettings)
         }

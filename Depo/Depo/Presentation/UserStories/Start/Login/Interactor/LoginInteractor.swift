@@ -18,6 +18,8 @@ class LoginInteractor: LoginInteractorInput {
     private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var eulaService = EulaService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private var periodicContactSyncDataStorage = PeriodicContactSyncDataStorage()
+    private let contactsService = ContactService()
     
     private var rememberMe: Bool = true
     private var attempts: Int = 0
@@ -75,6 +77,8 @@ class LoginInteractor: LoginInteractorInput {
                 return
             }
             
+            self.getAccountInfo()
+            
             self.emptyEmailCheck(for: headers)
             
             log.debug("login isRememberMe \(self.rememberMe)")
@@ -84,7 +88,6 @@ class LoginInteractor: LoginInteractorInput {
                 self.output?.succesLogin()
             }
         }, fail: { [weak self] errorResponse  in
-            
             DispatchQueue.main.async {
                 guard let `self` = self else {
                     return
@@ -94,6 +97,7 @@ class LoginInteractor: LoginInteractorInput {
                     return
                 }
                 if self.inNeedOfCaptcha(forResponse: errorResponse) {
+                    self.getAccountInfo()
                     self.output?.needShowCaptcha()
                 } else if (!self.checkInternetConnection()) {
                     self.output?.failLogin(message: TextConstants.errorConnectedToNetwork)
@@ -118,6 +122,43 @@ class LoginInteractor: LoginInteractorInput {
                 }
             }
         })
+    }
+    
+    private func getAccountInfo() {
+        AccountService().info(success: { [weak self] response in
+            if let userInfo = response as? AccountInfoResponse {
+                SingletonStorage.shared.accountInfo = userInfo
+            }
+            
+            self?.setContactSettingsForUser()
+            }, fail: { error in
+        })
+    }
+    
+    private func setContactSettingsForUser() {
+        SingletonStorage.shared.users.forEach { user in
+            if user.id == SingletonStorage.shared.uniqueUserID {
+                periodicContactSyncDataStorage.save(periodicContactSyncSettings: user.contactSyncSettings)
+                
+                var periodicBackUp: SYNCPeriodic = SYNCPeriodic.none
+                
+                if user.contactSyncSettings.isPeriodicContactsSyncOptionEnabled {
+                    switch user.contactSyncSettings.timeSetting.option {
+                    case .daily:
+                        periodicBackUp = SYNCPeriodic.daily
+                    case .weekly:
+                        periodicBackUp = SYNCPeriodic.every7
+                    case .monthly:
+                        periodicBackUp = SYNCPeriodic.every30
+                    case .none:
+                        periodicBackUp = SYNCPeriodic.none
+                    }
+                }
+                
+                contactsService.setPeriodicForContactsSync(periodic: periodicBackUp,settings: user.contactSyncSettings)
+
+            }
+        }
     }
     
     func relogin() {

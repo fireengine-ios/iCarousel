@@ -17,6 +17,7 @@ class SingletonStorage {
     var signUpInfo: RegistrationUserInfoModel?
     var referenceToken: String?
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
+    var users: [UserModel] = []
     
     
     func updateAccountInfo() {
