@@ -157,4 +157,8 @@ final class AlbumCard: BaseView {
             }
         }
     }
+    
+    override func spotlightHeight() -> CGFloat {
+        return descriptionLabel.frame.maxY
+    }
 }

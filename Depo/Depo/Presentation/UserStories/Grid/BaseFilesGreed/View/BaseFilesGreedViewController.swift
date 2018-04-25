@@ -404,14 +404,15 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     // MARK: ViewForPopUpDelegate
     
     func onUpdateViewForPopUpH(h: CGFloat) {
+        let originalPoint = collectionView.contentOffset
         var sliderH: CGFloat = 0
         if let slider = self.contentSlider {
             sliderH = sliderH + slider.view.frame.size.height
         }
         
         let calculatedH = h + sliderH
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
-            
+        
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             if let yConstr = self.contentSliderTopY {
                 yConstr.constant = -h - sliderH
             }
@@ -421,6 +422,16 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             
             self.view.layoutIfNeeded()
             self.collectionView.contentInset = UIEdgeInsets(top: h + sliderH, left: 0, bottom: 25, right: 0)
+        }) { [weak self] (flag) in
+            guard let `self` = self else {
+                return
+            }
+            
+            if originalPoint.y > 1.0{
+                self.collectionView.contentOffset = originalPoint
+            } else {
+                self.collectionView.contentOffset = CGPoint(x: 0.0, y: -self.collectionView.contentInset.top)
+            }
         }
         
         refresherY = -calculatedH + 30

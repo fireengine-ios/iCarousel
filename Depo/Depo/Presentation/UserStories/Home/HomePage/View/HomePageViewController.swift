@@ -24,6 +24,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     var navBarConfigurator = NavigationBarConfigurator()
     
+    private var topView: UIView?
+    
     private var homepageIsActiveAndVisible: Bool {
         var result = false
         if let topController = navigationController?.topViewController {
@@ -80,6 +82,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         } else {
             navigationBarWithGradientStyle()
         }
+        
+        output.viewDidAppear()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -126,6 +130,82 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         present(popUpView, animated: true, completion: nil)
     }
     
+    func needShowSpotlight(type: SpotlightType) {        
+        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
+            return
+        }
+        
+        frameForSpotlight(type: type, controller: tabBarVC) { [weak self] frame in
+            if frame != .zero {
+                
+                let controller = SpotlightViewController.with(rect: frame, message: type.title, completion: { [weak self] in
+                    self?.output.closedSpotlight(type: type)
+                })
+                
+                tabBarVC.present(controller, animated: true, completion: {
+                    self?.output.shownSpotlight(type: type)
+                })
+            }
+        }
+    }
+    
+    private func frameForSpotlight(type: SpotlightType, controller: TabBarViewController, completion: @escaping (_ frame: CGRect) -> ()) {
+        var frame: CGRect = .zero
+        
+        switch type {
+        case .homePageIcon:
+            let buttonFrame = controller.frameForTabAtIndex(index: 0)
+            frame = controller.tabBar.convert(buttonFrame, to: controller.contentView)
+            completion(frame)
+        case .homePageGeneral:
+            if let topView = topView {
+                let topViewFrame = topView.convert(topView.frame, to: controller.contentView)
+                frame = CGRect(x: 0, y: topViewFrame.maxY, width: topViewFrame.width, height: collectionView.frame.height - topViewFrame.height)
+                completion(frame)
+            }
+        case .movieCard, .albumCard, .collageCard, .animationCard, .filterCard:
+            cellCoordinates(cellType: type.cellType, to: controller.contentView, completion: completion)
+        }
+    }
+    
+    private func cellCoordinates<T: BaseView>(cellType: T.Type, to: UIView, completion: @escaping (_ frame: CGRect) -> ()) {
+        for (row, popupView) in homePageDataSource.popUps.enumerated() {
+            if type(of: popupView) == cellType {
+                let indexPath = IndexPath(row: row, section: 0)
+                let indexPathsVisibleCells = collectionView.indexPathsForVisibleItems.sorted { first, second -> Bool in
+                    return first < second
+                }
+                
+                if collectionView.cellForItem(at: indexPath) != nil {
+                    if indexPath == indexPathsVisibleCells.first {
+                        collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+                    } else {
+                        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+                    }
+                    var frame = popupView.convert(popupView.frame, to: to)
+                    frame.origin.y = max(0, frame.origin.y)
+                    frame.size.height = popupView.spotlightHeight()
+                    completion(frame)
+                } else {
+                    var offset: CGFloat = 0
+                    for index in 0...row-1 {
+                        offset += homePageDataSource.collectionView(collectionView: collectionView, heightForCellAtIndexPath: IndexPath(row: index, section: 0), withWidth: 0)
+                    }
+                    
+                    UIView.animate(withDuration: 0.1, animations: {
+                        self.collectionView.setContentOffset(CGPoint(x: 0, y: offset), animated: false)
+                    }, completion: { _ in
+                        var frame = popupView.convert(popupView.frame, to: to)
+                        frame.origin.y = max(0, frame.origin.y)
+                        frame.size.height = popupView.spotlightHeight()
+                        completion(frame)
+                    })
+                    
+                }
+            }
+        }
+        completion (.zero)
+    }
     
     // MARK: BaseCollectionViewDataSourceDelegate
     
@@ -157,7 +237,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
             if let headerView = headerView as? HomeViewTopView {
                 headerView.actionsDelegate = self
             }
-
+            topView = headerView
             return headerView
         default:
             assert(false, "Unexpected element kind")

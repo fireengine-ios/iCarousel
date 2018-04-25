@@ -120,6 +120,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         log.debug("AppDelegate applicationWillEnterForeground")
+        
+        ContactSyncSDK.doPeriodicSync()
     }
     
     private func showPasscodeIfNeed() {
@@ -173,8 +175,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let topVC = UIApplication.topController()
-        if let vc = topVC as? PasscodeEnterViewController, !vc.passcodeManager.finishBiometrics {
-            vc.passcodeManager.authenticateWithBiometrics()
+        if let vc = topVC as? PasscodeEnterViewController {
+            vc.becomeResponder() /// need for iPad
+            if !vc.passcodeManager.finishBiometrics {
+                vc.passcodeManager.authenticateWithBiometrics()
+            }
         }
     }
     

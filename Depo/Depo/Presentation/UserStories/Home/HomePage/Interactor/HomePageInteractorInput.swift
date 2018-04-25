@@ -10,6 +10,8 @@ import Foundation
 
 protocol HomePageInteractorInput {
     
+    var homeCardsLoaded: Bool { get }
+    
     func homePagePresented()
     
     func needRefresh()

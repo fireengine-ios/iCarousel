@@ -57,6 +57,10 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func setSelectedItemIndex(selectedIndex: Int) {
+        if interactor.allItems.isEmpty {
+            return
+        }
+        
         interactor.setSelectedItemIndex(selectedIndex: selectedIndex)
         view.onItemSelected(at: selectedIndex, from: interactor.allItems)
         
@@ -134,7 +138,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func goBack() {
-        router.goBack(navigationConroller: view.getNavigationController())
+        view.hideView()
     }
     
     func updateItems(objects: [Item], selectedIndex: Int, isRightSwipe: Bool) {

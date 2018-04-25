@@ -9,8 +9,10 @@
 import Foundation
 
 protocol HomePageInteractorOutput: class {
-    
+        
     func stopRefresh()
+    
+    func getAllCardsForHomePage()
     
     func needPresentPopUp(popUpView: UIViewController)
     

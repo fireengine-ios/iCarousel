@@ -159,7 +159,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
        
     override var childViewControllerForStatusBarStyle: UIViewController? {
-        return activeNavigationController?.viewControllers.last ?? activeNavigationController?.presentedViewController
+        return activeNavigationController?.presentedViewController ?? activeNavigationController?.viewControllers.last
+    }
+    
+    override var childViewControllerForStatusBarHidden: UIViewController? {
+        return activeNavigationController?.presentedViewController ?? activeNavigationController?.viewControllers.last
     }
     
     deinit {
@@ -604,6 +608,19 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         }, completion: nil)
     }
     
+    func frameForTabAtIndex(index: Int) -> CGRect {
+        var frames = tabBar.subviews.compactMap { view -> CGRect? in
+            if let view = view as? UIControl {
+                return view.frame
+            }
+            return nil
+        }
+        frames.sort { $0.origin.x < $1.origin.x }
+        if frames.count > index {
+            return frames[index]
+        }
+        return frames.last ?? CGRect.zero
+    }
     
     // MARK: - tab bar delegate
     
