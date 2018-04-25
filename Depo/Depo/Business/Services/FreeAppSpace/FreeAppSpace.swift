@@ -266,7 +266,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                         break
                     }
                     
-                    if let index = self.localMD5Array.index(where:{ $0.md5 == item.md5 }),
+                    if let index = self.localMD5Array.index(where:{ $0 == item.md5 }),
                         let elementToAdd = self.localtemsArray[index] {
                         self.serverDuplicatesArray.append(item)
                         self.duplicatesArray.append(elementToAdd)
