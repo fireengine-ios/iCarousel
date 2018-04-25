@@ -254,7 +254,7 @@ final class PageCompounder {
             self?.coreData.pageAppendedCallBack = nil
             
             guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
-                lastFreshLocalItem.metaDate >= lastItem.metaDate else {
+                lastFreshLocalItem.metaDate <= lastItem.metaDate else {
                     guard let `self` = self else {
                         return
                     }
