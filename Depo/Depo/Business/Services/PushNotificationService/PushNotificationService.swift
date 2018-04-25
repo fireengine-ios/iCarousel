@@ -172,7 +172,7 @@ final class PushNotificationService {
     }
     
     private func openPeriodicContactSync() {
-        //TODO: Need to implement
+        pushTo(router.periodicContactsSync)
     }
     
     private func openFavorites() {
