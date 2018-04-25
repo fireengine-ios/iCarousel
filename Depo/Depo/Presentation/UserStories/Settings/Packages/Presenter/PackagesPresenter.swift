@@ -70,8 +70,8 @@ extension PackagesPresenter: PackagesViewOutput {
         case .moldovian:
             view?.showCancelOfferAlert(with: TextConstants.offersCancelMoldcell)
         case .all:
-            /// maybe will be need view?.startActivityIndicator() + stop
             if let offer = plan.model as? OfferApple {
+                view?.startActivityIndicator()
                 interactor.activate(offerApple: offer)
             } else {
                 view?.showCancelOfferApple()

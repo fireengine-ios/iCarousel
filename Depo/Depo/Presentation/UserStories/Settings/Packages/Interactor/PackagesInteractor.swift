@@ -185,7 +185,10 @@ extension PackagesInteractor: PackagesInteractorInput {
             case .success:
                 self?.analyticsService.trackInAppPurchase(product: offerApple.skProduct)
                 self?.validatePurchase(offersApple: [offerApple])
-            case .canceled: break
+            case .canceled:
+                DispatchQueue.main.async {
+                    self?.output.failedUsage(with: ErrorResponse.string(TextConstants.cancelPurchase))
+                }
             case .error(let error):
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.error(error))
