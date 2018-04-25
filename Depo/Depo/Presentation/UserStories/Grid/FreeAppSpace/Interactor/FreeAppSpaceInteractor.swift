@@ -71,8 +71,6 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                     UIApplication.showErrorAlert(message: error.description)
             })
         }
-        
-        
     }
     
     override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
