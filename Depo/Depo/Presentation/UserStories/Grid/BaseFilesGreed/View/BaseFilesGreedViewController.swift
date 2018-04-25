@@ -422,7 +422,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             
             self.view.layoutIfNeeded()
             self.collectionView.contentInset = UIEdgeInsets(top: h + sliderH, left: 0, bottom: 25, right: 0)
-        }) { (flag) in
+        }) { [weak self] (flag) in
+            guard let `self` = self else {
+                return
+            }
+            
             if originalPoint.y > 1.0{
                 self.collectionView.contentOffset = originalPoint
             } else {
