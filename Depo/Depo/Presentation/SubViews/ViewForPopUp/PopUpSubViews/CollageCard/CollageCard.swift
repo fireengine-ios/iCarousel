@@ -122,4 +122,8 @@ final class CollageCard: BaseView {
         let nController = NavigationController(rootViewController: controller)
         RouterVC().presentViewController(controller: nController)
     }
+    
+    override func spotlightHeight() -> CGFloat {
+        return subTitleLabel.frame.maxY
+    }
 }

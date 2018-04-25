@@ -59,6 +59,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     
     func needRefresh() {
         interactor.needRefresh()
+        spotlightManager.requestShowSpotlight()
     }
     
     func stopRefresh() {

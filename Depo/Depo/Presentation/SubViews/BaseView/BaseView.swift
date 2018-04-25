@@ -59,4 +59,8 @@ class BaseView: UIView, NibInit {
         }
     }
     
+    func spotlightHeight() -> CGFloat {
+        return bounds.height
+    }
+    
 }

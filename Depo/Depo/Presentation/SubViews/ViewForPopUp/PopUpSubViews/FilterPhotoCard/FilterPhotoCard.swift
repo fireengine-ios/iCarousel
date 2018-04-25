@@ -164,4 +164,8 @@ final class FilterPhotoCard: BaseView {
             }
         }
     }
+    
+    override func spotlightHeight() -> CGFloat {
+        return titleLabel.frame.maxY
+    }
 }

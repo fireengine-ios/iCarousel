@@ -58,6 +58,10 @@ final class SpotlightManager {
         set { UserDefaults.standard.set(newValue, forKey: "lastShownSpotlight")}
     }
     
+    func clear() {
+        lastShownSpotlight = 0
+    }
+    
     func requestShowSpotlight() {
         if lastShownSpotlight < SpotlightType.filterCard.rawValue,
            let spotlight = SpotlightType(rawValue: lastShownSpotlight + 1) {
