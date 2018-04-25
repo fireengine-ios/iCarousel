@@ -836,7 +836,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if let assetId = mediaItem.localFileID,
            let url = mediaItem.urlToFileValue {
             
-            if let asset = asset ?? PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject,
+            if let asset = asset ?? LocalMediaStorage.default.assetsCache.assetBy(identifier: assetId) ?? PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject,
                 let urlToFile = URL(string: url) {
                 let tmp = LocalMediaContent(asset: asset, urlToFile: urlToFile)
                 assetDuration = asset.duration
