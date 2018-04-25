@@ -1613,11 +1613,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if isLocalOnly(){
             return
         }
-//        if let unwrapedFilters = originalFilters  {
-//            if isFavoritesOnly(filters: unwrapedFilters) || isAlbumDetail(filters: unwrapedFilters){
-//                return
-//            }
-//        }
         delegate?.needReloadData()
     }
     
