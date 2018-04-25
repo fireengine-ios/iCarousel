@@ -35,7 +35,6 @@ final class AppConfigurator {
         AppWormholeListener.shared.startListen()
         _ = PushNotificationService.shared.assignNotificationActionBy(launchOptions: launchOptions)
         LocalMediaStorage.default.clearTemporaryFolder()
-        ContactSyncSDK.doPeriodicSync()
     }
     
     private static func firstStart() {
