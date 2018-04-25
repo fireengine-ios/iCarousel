@@ -287,7 +287,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func showNoFilesTop(text: String) {
         noFilesTopLabel?.text = text
-        noFilesTopLabel?.isHidden = false
+        noFilesTopLabel?.isHidden = !scrolliblePopUpView.viewsArray.isEmpty
         topBarContainer.isHidden = true
         floatingHeaderContainerHeightConstraint.constant = 0
         view.layoutIfNeeded()
