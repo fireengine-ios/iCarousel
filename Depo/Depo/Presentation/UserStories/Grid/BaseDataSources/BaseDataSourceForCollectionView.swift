@@ -900,6 +900,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         delegate?.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
     }
     
+    /// fixing iOS11 UICollectionSectionHeader clipping scroll indicator
+    /// https://stackoverflow.com/a/46930410/5893286
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        if #available(iOS 11.0, *), elementKind == UICollectionElementKindSectionHeader {
+            view.layer.zPosition = 0
+        }
+    }
+    
     //MARK: collectionViewDataSource
     
     func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
