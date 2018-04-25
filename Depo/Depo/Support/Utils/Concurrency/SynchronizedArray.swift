@@ -99,6 +99,13 @@ public extension SynchronizedArray {
         return result
     }
     
+    ///Sort itself without callback
+    func sortItself(by areInIncreasingOrder: @escaping (Element, Element) -> Bool) {
+        queue.async(flags: .barrier) {
+            self.array.sort(by: areInIncreasingOrder)
+        }
+    }
+    
     /// Returns an array containing the non-nil results of calling the given transformation with each element of this sequence.
     ///
     /// - Parameter transform: A closure that accepts an element of this sequence as its argument and returns an optional value.
@@ -129,6 +136,11 @@ public extension SynchronizedArray {
 
 // MARK: - Mutable
 public extension SynchronizedArray {
+    ///Get array
+    
+    func getArray() -> [Element] {
+        return Array(array)
+    }
     
     /// Adds a new element at the end of the array.
     ///
