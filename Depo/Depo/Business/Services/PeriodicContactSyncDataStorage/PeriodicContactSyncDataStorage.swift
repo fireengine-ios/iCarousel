@@ -39,6 +39,7 @@ final class PeriodicContactSyncDataStorage {
         storageVars.periodicContactSyncSettings = settingsToStore
         SyncSettings.shared().token = tokenStorage.accessToken
         
+        /// here must be "!". "if let" create copy
         if storageVars.usersWhoUsedApp != nil {
             storageVars.usersWhoUsedApp![SingletonStorage.shared.uniqueUserID] = settingsToStore
         } else {
