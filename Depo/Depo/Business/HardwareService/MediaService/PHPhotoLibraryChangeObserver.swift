@@ -26,9 +26,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         if changes.hasIncrementalChanges, changes.insertedIndexes != nil || changes.removedIndexes != nil {
             let previosFetch = changes.fetchResultBeforeChanges
             var phChanges = [PhotoLibraryChangeType: [PHAsset]]()
-            
-            
-            
+  
             func notify() {
                 NotificationCenter.default.post(name: LocalMediaStorage.notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
             }
@@ -52,7 +50,6 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
             if let addedIndexes = changes.insertedIndexes {
                 let newAssets = self.fetchResult.objects(at: addedIndexes)
                 phChanges[.added] = newAssets
-                LocalMediaStorage.default.assetsCache.append(list: newAssets)
                 
                 CoreDataStack.default.append(localMediaItems: newAssets) {
                     checkDeleteIndexes()

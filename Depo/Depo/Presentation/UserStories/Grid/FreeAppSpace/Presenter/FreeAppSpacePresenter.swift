@@ -106,4 +106,11 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         view.selectedItemsCountChange(with: selectedItemsCount)
     }
     
+    override func getContentWithSuccess(items: [WrapData]) {
+        if let view = view as? FreeAppSpaceViewController {
+            view.setTitleLabelText(duplicatesCount: items.count)
+        }
+        super.getContentWithSuccess(items: items)
+    }
+    
 }

@@ -346,6 +346,7 @@ class AuthenticationService: BaseRequestService {
             SyncServiceManager.shared.stopSync()
             AutoSyncDataStorage().clear()
             SingletonStorage.shared.accountInfo = nil
+            SyncSettings.shared().periodicBackup = SYNCPeriodic.none
             ItemOperationManager.default.clear()
             SpotlightManager.shared.clear()
             self.player.stop()

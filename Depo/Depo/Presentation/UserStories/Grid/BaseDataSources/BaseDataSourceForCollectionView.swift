@@ -656,7 +656,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag),
                                         activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
             }
-            
         }else{
             selectedItemsArray.removeAll()
             updateVisibleCells()
@@ -664,9 +663,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag),
                                         activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
             }
-            
-            updateSelectionCount()
         }
+        updateSelectionCount()
     }
     
     func reloadData() {

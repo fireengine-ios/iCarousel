@@ -28,7 +28,26 @@ extension CoreDataStack {
     }
     
     func append(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
-        save(items: localMediaItems, context: newChildBackgroundContext, completion: completion)
+        privateQueue.async { [weak self] in
+            guard let `self` = self else {
+                completion()
+                return
+            }
+            ///check which are new
+            var newAssets =  [PHAsset]()
+            var assetsToUpdate =  [PHAsset]()
+            localMediaItems.forEach {
+                if LocalMediaStorage.default.assetsCache.assetBy(identifier: $0.localIdentifier) != nil {
+                    //update
+                    assetsToUpdate.append($0) ///for now its useless
+                } else {
+                    newAssets.append($0)
+                }
+            }
+            LocalMediaStorage.default.assetsCache.append(list: newAssets)
+            
+            self.save(items: newAssets, context: self.newChildBackgroundContext, completion: completion)
+        }
     }
     
     func remove(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {

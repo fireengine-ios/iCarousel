@@ -18,6 +18,8 @@ class LoginInteractor: LoginInteractorInput {
     private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var eulaService = EulaService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private var periodicContactSyncDataStorage = PeriodicContactSyncDataStorage()
+    private let contactsService = ContactService()
     
     private var rememberMe: Bool = true
     private var attempts: Int = 0
@@ -75,6 +77,8 @@ class LoginInteractor: LoginInteractorInput {
                 return
             }
             
+            self.getAccountInfo()
+            
             self.emptyEmailCheck(for: headers)
             
             log.debug("login isRememberMe \(self.rememberMe)")
@@ -84,7 +88,6 @@ class LoginInteractor: LoginInteractorInput {
                 self.output?.succesLogin()
             }
         }, fail: { [weak self] errorResponse  in
-            
             DispatchQueue.main.async {
                 guard let `self` = self else {
                     return
@@ -118,6 +121,25 @@ class LoginInteractor: LoginInteractorInput {
                 }
             }
         })
+    }
+    
+    private func getAccountInfo() {
+        SingletonStorage.shared.getAccountInfoForUser(success: {  [weak self] response in
+            SingletonStorage.shared.accountInfo = response
+            
+            self?.setContactSettingsForUser()
+            }, fail: { error in
+        })
+    }
+    
+    private func setContactSettingsForUser() {
+        guard let contactSettings = storageVars.usersWhoUsedApp[SingletonStorage.shared.uniqueUserID] as? [String: Bool] else {
+            return
+        }
+        
+        let contactSyncSettings = PeriodicContactsSyncSettings(with: contactSettings)
+        periodicContactSyncDataStorage.save(periodicContactSyncSettings: contactSyncSettings)
+        contactsService.setPeriodicForContactsSync(periodic: contactSyncSettings.syncPeriodic)
     }
     
     func relogin() {

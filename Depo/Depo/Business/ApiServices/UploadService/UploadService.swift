@@ -581,7 +581,7 @@ extension UploadService {
         })
         
         DispatchQueue.main.async {
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+            RouterVC().tabBarVC?.present(controller, animated: false, completion: nil)
         }
     }
     
