@@ -19,6 +19,7 @@ protocol StorageVars: class {
     var smallFullOfQuotaPopUpCheckBox: Bool { get set }
     var periodicContactSyncSet: Bool { get set }
     var periodicContactSyncSettings: [String: Any]? { get set }
+    var usersWhoUsedApp: [String: Any]? { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -67,6 +68,12 @@ final class UserDefaultsVars: StorageVars {
     var periodicContactSyncSettings: [String: Any]? {
         get { return userDefaults.dictionary(forKey: periodicContactSyncSettingsKey) }
         set { userDefaults.set(newValue, forKey: periodicContactSyncSettingsKey) }
+    }
+    
+    private let usersWhoUsedAppKey = "usersWhoUsedAppKey"
+    var usersWhoUsedApp: [String: Any]? {
+        get { return userDefaults.dictionary(forKey: usersWhoUsedAppKey) }
+        set { userDefaults.set(newValue, forKey: usersWhoUsedAppKey) }
     }
     
     /// auto sync settings migration from the old app

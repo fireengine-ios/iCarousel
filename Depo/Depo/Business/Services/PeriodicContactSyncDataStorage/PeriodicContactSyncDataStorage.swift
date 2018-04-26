@@ -35,8 +35,17 @@ final class PeriodicContactSyncDataStorage {
     
     func save(periodicContactSyncSettings: PeriodicContactsSyncSettings) {
         let settingsToStore = periodicContactSyncSettings.asDictionary()
+        
         storageVars.periodicContactSyncSettings = settingsToStore
         SyncSettings.shared().token = tokenStorage.accessToken
+        
+        if storageVars.usersWhoUsedApp != nil {
+            storageVars.usersWhoUsedApp![SingletonStorage.shared.uniqueUserID] = settingsToStore
+        } else {
+            var usersWhoUsedApp = [String: Any]()
+            usersWhoUsedApp[SingletonStorage.shared.uniqueUserID] = settingsToStore
+            storageVars.usersWhoUsedApp = usersWhoUsedApp
+        }
     }
     
     func clear() {

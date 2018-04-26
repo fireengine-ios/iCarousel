@@ -125,10 +125,8 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     private func getAccountInfo() {
-        AccountService().info(success: { [weak self] response in
-            if let userInfo = response as? AccountInfoResponse {
-                SingletonStorage.shared.accountInfo = userInfo
-            }
+        SingletonStorage.shared.getAccountInfoForUser(success: {  [weak self] response in
+            SingletonStorage.shared.accountInfo = response
             
             self?.setContactSettingsForUser()
             }, fail: { error in
@@ -136,27 +134,31 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     private func setContactSettingsForUser() {
-        SingletonStorage.shared.users.forEach { user in
-            if user.id == SingletonStorage.shared.uniqueUserID {
-                periodicContactSyncDataStorage.save(periodicContactSyncSettings: user.contactSyncSettings)
-                
-                var periodicBackUp: SYNCPeriodic = SYNCPeriodic.none
-                
-                if user.contactSyncSettings.isPeriodicContactsSyncOptionEnabled {
-                    switch user.contactSyncSettings.timeSetting.option {
-                    case .daily:
-                        periodicBackUp = SYNCPeriodic.daily
-                    case .weekly:
-                        periodicBackUp = SYNCPeriodic.every7
-                    case .monthly:
-                        periodicBackUp = SYNCPeriodic.every30
-                    case .none:
-                        periodicBackUp = SYNCPeriodic.none
+        if let users = storageVars.usersWhoUsedApp {
+            for userId in users.keys {
+                if let settingsDict = users[userId] as? [String: Bool],
+                    userId == SingletonStorage.shared.uniqueUserID {
+                    let contactSyncSettings = PeriodicContactsSyncSettings(with: settingsDict)
+    
+                    periodicContactSyncDataStorage.save(periodicContactSyncSettings: contactSyncSettings)
+                    
+                    var periodicBackUp: SYNCPeriodic = SYNCPeriodic.none
+                    
+                    if contactSyncSettings.isPeriodicContactsSyncOptionEnabled {
+                        switch contactSyncSettings.timeSetting.option {
+                        case .daily:
+                            periodicBackUp = SYNCPeriodic.daily
+                        case .weekly:
+                            periodicBackUp = SYNCPeriodic.every7
+                        case .monthly:
+                            periodicBackUp = SYNCPeriodic.every30
+                        case .none:
+                            periodicBackUp = SYNCPeriodic.none
+                        }
                     }
+                    
+                    contactsService.setPeriodicForContactsSync(periodic: periodicBackUp)
                 }
-                
-                contactsService.setPeriodicForContactsSync(periodic: periodicBackUp,settings: user.contactSyncSettings)
-
             }
         }
     }

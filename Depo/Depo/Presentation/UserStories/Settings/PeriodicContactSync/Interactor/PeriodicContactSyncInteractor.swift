@@ -48,7 +48,7 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
             }
         }
         
-        contactsService.setPeriodicForContactsSync(periodic: periodicBackUp,settings: settings)
+        contactsService.setPeriodicForContactsSync(periodic: periodicBackUp)
     }
     
     func checkPermission() {
