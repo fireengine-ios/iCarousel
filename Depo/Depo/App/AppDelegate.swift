@@ -62,11 +62,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         setupLog()
-        
         MenloworksAppEvents.onAppLaunch()
         MenloworksTagsService.shared.passcodeStatus(!passcodeStorage.isEmpty)
-        
+        ContactSyncSDK.doPeriodicSync()
         passcodeStorage.systemCallOnScreen = false
+        
         return true
     }
     

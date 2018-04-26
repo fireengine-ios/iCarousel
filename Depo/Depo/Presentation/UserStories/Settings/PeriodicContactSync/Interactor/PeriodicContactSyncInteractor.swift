@@ -51,13 +51,13 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
     }
     
     func checkPermission() {
-            self.contactsService.askPermissionForContactsFramework(redirectToSettings: false, completion: { [weak self] isAccessGranted in
-                if isAccessGranted {
-                    self?.output.permissionSuccess()
-                } else {
-                    self?.output.permissionFail()
-                }
-            })
+        self.contactsService.askPermissionForContactsFramework(redirectToSettings: false, completion: { [weak self] isAccessGranted in
+            if isAccessGranted {
+                self?.output.permissionSuccess()
+            } else {
+                self?.output.permissionFail()
+            }
+        })
     }
     
 }
