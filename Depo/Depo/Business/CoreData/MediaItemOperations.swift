@@ -48,7 +48,7 @@ extension CoreDataStack {
     }
     
     func updateLocalItemSyncStatus(item: Item) {
-        let context = newChildBackgroundContext
+        let context = backgroundContext
         context.perform { [weak self] in
             
             guard let `self` = self else {
