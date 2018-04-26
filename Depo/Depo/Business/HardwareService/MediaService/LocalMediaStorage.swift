@@ -382,9 +382,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             self?.passcodeStorage.systemCallOnScreen = false
             
             if status {
-                if let item = item, let assetIdentifier = assetPlaceholder?.localIdentifier {
-                    self?.merge(asset: assetIdentifier, with: item)
-                }
                 if let album = album, let assetPlaceholder = assetPlaceholder {
                     self?.add(asset: assetPlaceholder.localIdentifier, to: album)
                 }
