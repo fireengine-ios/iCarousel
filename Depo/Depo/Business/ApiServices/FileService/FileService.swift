@@ -378,9 +378,10 @@ class FileService: BaseRequestService {
                     }
                     
                     if let item = downloadParam.item, let mediaItem = CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
-                        CoreDataStack.default.updateSavedItems(savedItems: [mediaItem],
-                                                               remoteItems: [item],
-                                                               context: CoreDataStack.default.newChildBackgroundContext)
+                        ///For now we do not update local files by remotes
+//                        CoreDataStack.default.updateSavedItems(savedItems: [mediaItem],
+//                                                               remoteItems: [item],
+//                                                               context: CoreDataStack.default.newChildBackgroundContext)
                         removeDestinationFile()
                         success?()
                     } else {

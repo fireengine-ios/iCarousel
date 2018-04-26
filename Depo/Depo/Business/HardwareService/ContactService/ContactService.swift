@@ -12,7 +12,7 @@ import Contacts
 typealias ContactsLibraryGranted = (_ granted: Bool) -> Void
 
 final class ContactService {
-    
+
     func getContactsCount() -> Int? {
         let contactStore = CNContactStore()
         var contactsCount: Int = 0
@@ -48,23 +48,7 @@ final class ContactService {
         }
     }
     
-    func setPeriodicForContactsSync(periodic: SYNCPeriodic, settings: PeriodicContactsSyncSettings) {
+    func setPeriodicForContactsSync(periodic: SYNCPeriodic) {
         SyncSettings.shared().periodicBackup = periodic
-        let model = UserModel(withUserId: SingletonStorage.shared.uniqueUserID, contactSyncSettings: settings)
-        
-        var isNewUser: Bool = true
-        
-        for number in SingletonStorage.shared.users.indices {
-            
-            if SingletonStorage.shared.users[number].id == model.id {
-                SingletonStorage.shared.users[number].contactSyncSettings = model.contactSyncSettings
-                isNewUser = false
-            }
-        }
-        
-        if isNewUser {
-            SingletonStorage.shared.users.append(model)
-        }
-        
     }
 }

@@ -38,9 +38,9 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
         button.setTitle(TextConstants.uploadFromLifeBoxNextButton, for: .normal)
         button.setTitleColor(ColorConstants.whiteColor, for: .normal)
         button.addTarget(self, action: #selector(onNextButton), for: .touchUpInside)
-
+        
         let barButton = UIBarButtonItem(customView: button)
-
+        
         navigationItem.rightBarButtonItem = barButton
     }
     
@@ -81,4 +81,27 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
         return parentUUID
     }
     
+    func showOutOfSpaceAlert() {
+        let controller = PopUpController.with(
+            title: TextConstants.syncOutOfSpaceAlertTitle,
+            message: TextConstants.syncOutOfSpaceAlertText,
+            image: .none,
+            firstButtonTitle: TextConstants.syncOutOfSpaceAlertCancel,
+            secondButtonTitle: TextConstants.syncOutOfSpaceAlertGoToSettings,
+            firstAction: nil,
+            secondAction: { vc in
+                vc.close(completion: {
+                    let router = RouterVC()
+                    if router.navigationController?.presentedViewController != nil {
+                        router.pushOnPresentedView(viewController: router.packages)
+                    } else {
+                        router.pushViewController(viewController: router.packages)
+                    }
+                })      
+        })
+        
+        dismiss(animated: true, completion: {
+            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        })
+    }
 }

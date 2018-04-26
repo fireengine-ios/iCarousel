@@ -382,11 +382,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             self?.passcodeStorage.systemCallOnScreen = false
             
             if status {
-                if let item = item, let assetIdentifier = assetPlaceholder?.localIdentifier {
-                    self?.merge(asset: assetIdentifier, with: item)
-                }
                 if let album = album, let assetPlaceholder = assetPlaceholder {
                     self?.add(asset: assetPlaceholder.localIdentifier, to: album)
+                }
+                if let item = item, let assetIdentifier = assetPlaceholder?.localIdentifier {
+                    self?.merge(asset: assetIdentifier, with: item)
                 }
                 success?()
             } else {
@@ -409,7 +409,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             let wrapData = WrapData(asset: asset)
             wrapData.copyFileData(from: item)
             
-            let context = CoreDataStack.default.backgroundContext
+            let context = CoreDataStack.default.newChildBackgroundContext
             context.perform {
                 let mediaItem: MediaItem
                 if let existingMediaItem = CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
@@ -420,7 +420,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 
                 mediaItem.localFileID = assetIdentifier
                 mediaItem.trimmedLocalFileID = assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier
-                CoreDataStack.default.updateSavedItems(savedItems: [mediaItem], remoteItems: [item], context: context)
+                LocalMediaStorage.default.assetsCache.append(list: [asset])
+                CoreDataStack.default.saveDataForContext(context: context, savedCallBack: nil)
+///WE might need this               CoreDataStack.default.updateSavedItems(savedItems: [mediaItem], remoteItems: [item], context: context)
             }
             
         }

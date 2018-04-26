@@ -102,4 +102,25 @@ final class PeriodicContactsSyncSettings {
                 PeriodicContactsSyncSettingsKey.weekly.localizedText: (timeSetting.option == .weekly),
                 PeriodicContactsSyncSettingsKey.monthly.localizedText: (timeSetting.option == .monthly)]
     }
+    
+    var syncPeriodic: SYNCPeriodic {
+        let periodicBackUp: SYNCPeriodic
+        
+        if isPeriodicContactsSyncOptionEnabled {
+            switch timeSetting.option {
+            case .daily:
+                periodicBackUp = .daily
+            case .weekly:
+                periodicBackUp = .every7
+            case .monthly:
+                periodicBackUp = .every30
+            case .none:
+                periodicBackUp = .none
+            }
+        } else {
+            periodicBackUp = .none
+        }
+        
+        return periodicBackUp
+    }
 }

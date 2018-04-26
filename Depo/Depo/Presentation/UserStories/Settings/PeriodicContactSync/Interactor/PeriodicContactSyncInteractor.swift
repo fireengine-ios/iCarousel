@@ -13,7 +13,6 @@ final class PeriodicContactSyncInteractor {
     weak var output: PeriodicContactSyncInteractorOutput!
     
     private var dataStorage = PeriodicContactSyncDataStorage()
-    private var singletonStorage = SingletonStorage()
     
     private let contactsService = ContactService()    
 }
@@ -48,17 +47,17 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
             }
         }
         
-        contactsService.setPeriodicForContactsSync(periodic: periodicBackUp,settings: settings)
+        contactsService.setPeriodicForContactsSync(periodic: periodicBackUp)
     }
     
     func checkPermission() {
-            self.contactsService.askPermissionForContactsFramework(redirectToSettings: false, completion: { [weak self] isAccessGranted in
-                if isAccessGranted {
-                    self?.output.permissionSuccess()
-                } else {
-                    self?.output.permissionFail()
-                }
-            })
+        self.contactsService.askPermissionForContactsFramework(redirectToSettings: false, completion: { [weak self] isAccessGranted in
+            if isAccessGranted {
+                self?.output.permissionSuccess()
+            } else {
+                self?.output.permissionFail()
+            }
+        })
     }
     
 }
