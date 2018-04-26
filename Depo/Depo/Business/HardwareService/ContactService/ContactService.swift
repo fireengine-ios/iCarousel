@@ -12,7 +12,7 @@ import Contacts
 typealias ContactsLibraryGranted = (_ granted: Bool) -> Void
 
 final class ContactService {
-    
+
     func getContactsCount() -> Int? {
         let contactStore = CNContactStore()
         var contactsCount: Int = 0

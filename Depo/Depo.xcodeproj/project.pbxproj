@@ -82,8 +82,6 @@
 		486F7B5A208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486F7B59208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift */; };
 		486F7B5B208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486F7B59208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift */; };
 		48AAD540DF9AE2C249F9B6D4 /* OTPViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */; };
-		4A021D182090D5C70067F49A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A021D172090D5C70067F49A /* UserModel.swift */; };
-		4A021D192090D5C70067F49A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A021D172090D5C70067F49A /* UserModel.swift */; };
 		4A0AC135208736F100032CC7 /* PeriodicContactSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC134208736F100032CC7 /* PeriodicContactSyncViewController.swift */; };
 		4A0AC136208736F100032CC7 /* PeriodicContactSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC134208736F100032CC7 /* PeriodicContactSyncViewController.swift */; };
 		4A0AC138208736FF00032CC7 /* PeriodicContactSyncRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC137208736FF00032CC7 /* PeriodicContactSyncRouter.swift */; };
@@ -3678,7 +3676,6 @@
 		492FFCA73A2AFF885199E9CF /* FeedbackViewInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractorOutput.swift; sourceTree = "<group>"; };
 		495272FEC812C8DD6AC7A071 /* SplashInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashInteractorInput.swift; sourceTree = "<group>"; };
 		49A793804B9422E2D6327427 /* UploadFilesSelectionPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionPresenter.swift; sourceTree = "<group>"; };
-		4A021D172090D5C70067F49A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		4A0AC134208736F100032CC7 /* PeriodicContactSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncViewController.swift; sourceTree = "<group>"; };
 		4A0AC137208736FF00032CC7 /* PeriodicContactSyncRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncRouter.swift; sourceTree = "<group>"; };
 		4A0AC13A2087370B00032CC7 /* PeriodicContactSyncPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncPresenter.swift; sourceTree = "<group>"; };
@@ -6369,14 +6366,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		4A021D162090D5A70067F49A /* Enteties */ = {
-			isa = PBXGroup;
-			children = (
-				4A021D172090D5C70067F49A /* UserModel.swift */,
-			);
-			path = Enteties;
-			sourceTree = "<group>";
-		};
 		4A0AC12E2087367A00032CC7 /* PeriodicContactSync */ = {
 			isa = PBXGroup;
 			children = (
@@ -6422,7 +6411,6 @@
 		4A0AC132208736B000032CC7 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				4A021D162090D5A70067F49A /* Enteties */,
 				4A0AC13D2087371A00032CC7 /* PeriodicContactSyncInteractor.swift */,
 				4A0AC14F2087378F00032CC7 /* PeriodicContactSyncInteractorInput.swift */,
 				4A0AC15B20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift */,
@@ -14025,7 +14013,6 @@
 				FA793D8A201872E200A02B46 /* PlacesService.swift in Sources */,
 				8C0E8D511FDEBDFF00789C91 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				8C0E8D521FDEBDFF00789C91 /* DataStorage.swift in Sources */,
-				4A021D192090D5C70067F49A /* UserModel.swift in Sources */,
 				8C0E8D531FDEBDFF00789C91 /* BaseUserInputCellView.swift in Sources */,
 				8C0E8D541FDEBDFF00789C91 /* LoginConfigurator.swift in Sources */,
 				8C0E8D551FDEBDFF00789C91 /* CurioSettings.m in Sources */,
@@ -15882,7 +15869,6 @@
 				4A8CC303201A00D400C040C4 /* FaceImageViewController.swift in Sources */,
 				8AC9821D58B05574782F11AB /* FeedbackViewInitializer.swift in Sources */,
 				9807261C203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */,
-				4A021D182090D5C70067F49A /* UserModel.swift in Sources */,
 				AD2151F5167A65F51A485818 /* ActivityTimelineViewInput.swift in Sources */,
 				EBE4DB98A7204834F0BB6B76 /* ActivityTimelineViewOutput.swift in Sources */,
 				0A2DCCF755BD78D7EE5ABDAB /* ActivityTimelineViewController.swift in Sources */,

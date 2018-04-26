@@ -97,7 +97,6 @@ class LoginInteractor: LoginInteractorInput {
                     return
                 }
                 if self.inNeedOfCaptcha(forResponse: errorResponse) {
-                    self.getAccountInfo()
                     self.output?.needShowCaptcha()
                 } else if (!self.checkInternetConnection()) {
                     self.output?.failLogin(message: TextConstants.errorConnectedToNetwork)
@@ -134,33 +133,16 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     private func setContactSettingsForUser() {
-        if let users = storageVars.usersWhoUsedApp {
-            for userId in users.keys {
-                if let settingsDict = users[userId] as? [String: Bool],
-                    userId == SingletonStorage.shared.uniqueUserID {
-                    let contactSyncSettings = PeriodicContactsSyncSettings(with: settingsDict)
-    
-                    periodicContactSyncDataStorage.save(periodicContactSyncSettings: contactSyncSettings)
-                    
-                    var periodicBackUp: SYNCPeriodic = SYNCPeriodic.none
-                    
-                    if contactSyncSettings.isPeriodicContactsSyncOptionEnabled {
-                        switch contactSyncSettings.timeSetting.option {
-                        case .daily:
-                            periodicBackUp = SYNCPeriodic.daily
-                        case .weekly:
-                            periodicBackUp = SYNCPeriodic.every7
-                        case .monthly:
-                            periodicBackUp = SYNCPeriodic.every30
-                        case .none:
-                            periodicBackUp = SYNCPeriodic.none
-                        }
-                    }
-                    
-                    contactsService.setPeriodicForContactsSync(periodic: periodicBackUp)
-                }
-            }
+        guard
+            let users = storageVars.usersWhoUsedApp,
+            let settingsDict = users[SingletonStorage.shared.uniqueUserID] as? [String: Bool]
+        else {
+            return
         }
+        
+        let contactSyncSettings = PeriodicContactsSyncSettings(with: settingsDict)
+        periodicContactSyncDataStorage.save(periodicContactSyncSettings: contactSyncSettings)
+        contactsService.setPeriodicForContactsSync(periodic: contactSyncSettings.syncPeriodic)
     }
     
     func relogin() {
