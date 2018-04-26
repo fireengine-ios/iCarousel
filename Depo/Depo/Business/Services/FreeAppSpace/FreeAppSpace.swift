@@ -43,17 +43,33 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                         return
                     }
                     
-                    let localSet = Set<String>(items.map({ $0.md5 }))
+                    var arrayForDisplay = [WrapData]()
+                    
+                    var localSet = Set<String>(items.map({ $0.md5 }))
                     var newDuplicates = [WrapData]()
                     self.duplicatesArray.forEach {
                         if localSet.contains($0.md5) {
                             newDuplicates.append($0)
                         }
                     }
+                    
+                    for item in self.duplicatesArray.getArray() {
+                        if localSet.contains(item.md5){
+                            if item.metaData?.takenDate == nil {
+                                item.metaData?.takenDate = Date()
+                            }
+                            
+                            arrayForDisplay.insert(item, at: 0)
+                            localSet.remove(item.md5)
+                        }
+                    }
+                    
                     self.duplicatesArray.removeAll()
                     self.duplicatesArray.append(newDuplicates)
                     
-                    checkedArray(self.duplicatesArray.getArray())
+                    
+                    
+                    checkedArray(arrayForDisplay)
                 }
             })
         }

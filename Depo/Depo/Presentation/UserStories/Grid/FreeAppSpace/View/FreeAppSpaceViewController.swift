@@ -21,15 +21,13 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
         duplicatesTextLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
         duplicatesTextLabel.text = ""
         
-        FreeAppSpace.default.getCheckedDuplicatesArray { [weak self] duplicatesArray in
-            DispatchQueue.main.async {
-                self?.duplicatesTextLabel?.text = String(format: TextConstants.freeAppSpaceTitle, FreeAppSpace.default.getDuplicatesObjects().count)
-            }
-        }
-        
         mainTitle = ""
         
         super.viewDidLoad()
+    }
+    
+    func setTitleLabelText(duplicatesCount: Int) {
+        duplicatesTextLabel?.text = String(format: TextConstants.freeAppSpaceTitle, duplicatesCount)
     }
     
     override func configurateNavigationBar() {
