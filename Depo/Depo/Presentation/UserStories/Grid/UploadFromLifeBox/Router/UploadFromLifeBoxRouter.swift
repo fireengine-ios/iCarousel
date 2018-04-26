@@ -17,5 +17,4 @@ extension UploadFromLifeBoxRouter: UploadFromLifeBoxRouterInput {
         let viewController = RouterVC().uploadFromLifeBox(folderUUID: destinationFolderUUID, soorceUUID: outputFolderUUID, sortRule: presenter.sortedRule)
         nController.pushViewController(viewController, animated: true)
     }
-
 }
