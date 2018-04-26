@@ -12,6 +12,7 @@ protocol UploadFromLifeBoxViewInput: class {
     func getNavigationController() -> UINavigationController?
     func getDestinationUUID() -> String
     func hideView()
+    func showOutOfSpaceAlert()
 }
 
 //protocol UploadFromLifeBoxViewOutput: class {
