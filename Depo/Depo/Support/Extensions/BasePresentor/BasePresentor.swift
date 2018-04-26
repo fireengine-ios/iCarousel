@@ -25,8 +25,8 @@ protocol BaseAsyncOperationInteractorOutput {
     func asyncOperationSucces()
     
     func asyncOperationFail(errorMessage: String?)
+    
     func asyncOperationFail(errorResponse: ErrorResponse)
-
 }
 
 class BasePresenter: BaseAsyncOperationInteractorOutput {
