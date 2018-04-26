@@ -18,8 +18,7 @@ protocol StorageVars: class {
     var homePageFirstTimeLogin: Bool { get set }
     var smallFullOfQuotaPopUpCheckBox: Bool { get set }
     var periodicContactSyncSet: Bool { get set }
-    var periodicContactSyncSettings: [String: Any]? { get set }
-    var usersWhoUsedApp: [String: Any]? { get set }
+    var usersWhoUsedApp: [String: Any] { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -64,15 +63,9 @@ final class UserDefaultsVars: StorageVars {
         set { userDefaults.set(newValue, forKey: autoSyncSettingsKey) }
     }
     
-    private let periodicContactSyncSettingsKey = "periodicContactSyncSettingsKey"
-    var periodicContactSyncSettings: [String: Any]? {
-        get { return userDefaults.dictionary(forKey: periodicContactSyncSettingsKey) }
-        set { userDefaults.set(newValue, forKey: periodicContactSyncSettingsKey) }
-    }
-    
     private let usersWhoUsedAppKey = "usersWhoUsedAppKey"
-    var usersWhoUsedApp: [String: Any]? {
-        get { return userDefaults.dictionary(forKey: usersWhoUsedAppKey) }
+    var usersWhoUsedApp: [String: Any] {
+        get { return userDefaults.dictionary(forKey: usersWhoUsedAppKey) ?? [String: Any]() }
         set { userDefaults.set(newValue, forKey: usersWhoUsedAppKey) }
     }
     

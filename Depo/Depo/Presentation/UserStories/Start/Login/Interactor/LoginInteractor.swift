@@ -133,14 +133,11 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     private func setContactSettingsForUser() {
-        guard
-            let users = storageVars.usersWhoUsedApp,
-            let settingsDict = users[SingletonStorage.shared.uniqueUserID] as? [String: Bool]
-        else {
+        guard let contsctSettings = storageVars.usersWhoUsedApp[SingletonStorage.shared.uniqueUserID] as? [String: Bool] else {
             return
         }
         
-        let contactSyncSettings = PeriodicContactsSyncSettings(with: settingsDict)
+        let contactSyncSettings = PeriodicContactsSyncSettings(with: contsctSettings)
         periodicContactSyncDataStorage.save(periodicContactSyncSettings: contactSyncSettings)
         contactsService.setPeriodicForContactsSync(periodic: contactSyncSettings.syncPeriodic)
     }
