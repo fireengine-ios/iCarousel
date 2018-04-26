@@ -50,7 +50,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
                 DispatchQueue.main.async {
                     if let `self` = self {
                         guard let out = self.output as? UploadFromLifeBoxInteractorOutput else {
-                            self.output.asyncOperationFail(errorResponse: fail)
+                            self.output.asyncOperationFail(errorMessage: fail.description)
                             return
                         }
                         out.asyncOperationFail(errorResponse: fail)

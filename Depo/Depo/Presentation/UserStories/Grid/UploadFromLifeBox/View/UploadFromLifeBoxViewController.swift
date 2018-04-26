@@ -100,7 +100,7 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
                 })      
         })
         
-        self.dismiss(animated: true, completion: {
+        dismiss(animated: true, completion: {
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
         })
     }

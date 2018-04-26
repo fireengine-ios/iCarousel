@@ -92,7 +92,7 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
         uploadView.hideView()
     }
     
-    override func asyncOperationFail(errorResponse: ErrorResponse) {
+    func asyncOperationFail(errorResponse: ErrorResponse) {
         if errorResponse.isOutOfSpaceError {
             asyncOperationSucces()
             dataSource.setSelectionState(selectionState: false)

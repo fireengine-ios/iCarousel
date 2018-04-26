@@ -71,4 +71,8 @@ class UploadFromLifeBoxPhotosPresenter: BaseFilesGreedPresenter, UploadFromLifeB
         }
         uploadView.hideView()
     }
+    
+    func asyncOperationFail(errorResponse: ErrorResponse) {
+        asyncOperationFail(errorMessage: errorResponse.description)
+    }
 }
