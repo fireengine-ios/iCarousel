@@ -13,7 +13,6 @@ final class PeriodicContactSyncInteractor {
     weak var output: PeriodicContactSyncInteractorOutput!
     
     private var dataStorage = PeriodicContactSyncDataStorage()
-    private var singletonStorage = SingletonStorage()
     
     private let contactsService = ContactService()    
 }
