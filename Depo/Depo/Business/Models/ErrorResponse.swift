@@ -25,6 +25,11 @@ extension ErrorResponse {
     var isOutOfSpaceError: Bool {
         if case ErrorResponse.httpCode(413) = self {
             return true
+        } else if case ErrorResponse.error(let error) = self,
+            let serverValueError = error as? ServerValueError,
+            serverValueError.code == 413 ///also value: "COPY"
+        {
+            return true
         }
         return false
     }

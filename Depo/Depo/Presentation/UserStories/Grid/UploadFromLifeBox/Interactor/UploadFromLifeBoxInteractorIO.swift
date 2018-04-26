@@ -16,4 +16,5 @@ protocol UploadFromLifeBoxInteractorInput: class {
 
 protocol UploadFromLifeBoxInteractorOutput: class {
     func uploadOperationSuccess()
+    func asyncOperationFail(errorResponse: ErrorResponse)
 }
