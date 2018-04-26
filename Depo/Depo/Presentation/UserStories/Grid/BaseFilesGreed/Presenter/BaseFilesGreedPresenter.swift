@@ -192,7 +192,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         log.debug("BaseFilesGreedPresenter getContentWithFail")
         asyncOperationFail(errorMessage: errorString)
     }
-    
+
     func serviceAreNotAvalible() {
         
     }
