@@ -256,7 +256,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 let specificFilters = self.getFileFilterType(filters: unwrapedFilters),
                 !self.showOnlyRemotes(filters: unwrapedFilters) else {
                     self.allMediaItems.append(contentsOf: pageItems)
-                    self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                    self.isLocalPaginationOn = false
+                    self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                     complition()
                     return
             }

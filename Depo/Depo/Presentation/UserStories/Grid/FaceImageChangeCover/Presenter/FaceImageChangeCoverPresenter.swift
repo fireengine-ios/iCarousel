@@ -29,6 +29,12 @@ final class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter {
         getContentWithSuccess(items: [])
     }
     
+    override func asyncOperationFail(errorMessage: String?) { //FIXME: on request for next items it recieves error, optimal soloution is to override get next items in interactor
+        super.asyncOperationFail(errorMessage: errorMessage)
+        dataSource.isPaginationDidEnd = true
+        dataSource.reloadData()
+    }
+    
     override func selectPressed(type: MoreActionsConfig.SelectedType) { }
     
     override func selectModeSelected() { }
