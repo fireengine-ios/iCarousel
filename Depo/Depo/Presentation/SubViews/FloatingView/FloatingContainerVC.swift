@@ -21,7 +21,6 @@ class FloatingContainerVC: UIViewController, UIPopoverPresentationControllerDele
         
         floatingContainerVC.setupContentView(withView: contentView.view)
   
-        floatingContainerVC.view.backgroundColor = UIColor.lrYellowSun
         floatingContainerVC.modalPresentationStyle = .popover
         floatingContainerVC.popoverPresentationController?.sourceView = sourceView
         floatingContainerVC.popoverPresentationController?.sourceRect = floatingContainerVC.offsetBox
