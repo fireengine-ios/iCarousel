@@ -74,10 +74,33 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
         var content = [[BaseDataSourceItem]]()
         array.forEach { items in
             content.append(items.filter { $0.fileType == .image })
-        }        
+        }
         super.getContentWithSuccess(array: content)
     }
+    
+    override func getContentWithSuccessEnd() {
+        if dataSource.allObjectIsEmpty(),
+           var filters = interactor.originalFilesTypeFilter,
+            !filters.contains(.favoriteStatus(.favorites)) {
+            filters.remove(.localStatus(.nonLocal))
+            filters.append(.localStatus(.local))
+            interactor.originalFilesTypeFilter = filters
+            dataSource.originalFilters = filters
+            self.filters = filters
+            dataSource.isPaginationDidEnd = true
+        }
+
+        super.getContentWithSuccessEnd()       
         
+    }
+    
+    override func filesAppendedAndSorted() {
+        if let dataSource = dataSource as? PhotoSelectionDataSource {
+            dataSource.configurateWithArray(array: [dataSource.allMediaItems])
+        }
+        super.filesAppendedAndSorted()
+    }
+    
     private func startEditing() {
         dataSource.setSelectionState(selectionState: true)
     }

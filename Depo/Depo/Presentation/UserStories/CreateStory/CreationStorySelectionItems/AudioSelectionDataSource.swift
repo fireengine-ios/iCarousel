@@ -12,7 +12,7 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
     private lazy var smallPlayer: MediaPlayer = MediaPlayer()
     
     override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?) {
-        super.setupCollectionView(collectionView: collectionView, filters: [.fileType(.audio)])
+        super.setupCollectionView(collectionView: collectionView, filters: filters)
         collectionView.register(nibCell: AudioSelectionCollectionViewCell.self)
         smallPlayer.delegates.add(self)
     }
