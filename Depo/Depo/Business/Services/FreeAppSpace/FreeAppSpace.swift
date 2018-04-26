@@ -59,7 +59,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                                 item.metaData?.takenDate = Date()
                             }
                             
-                            arrayForDisplay.insert(item, at: 0)
+                            arrayForDisplay.append(item)
                             localSet.remove(item.md5)
                         }
                     }
