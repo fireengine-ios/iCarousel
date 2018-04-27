@@ -132,7 +132,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     // MARK: - EULA
     
     func onSuccessEULA() {
-        completeAsyncOperationEnableScreen()
         openEmptyEmailIfNeedOrOpenSyncSettings()
     }
     
@@ -143,6 +142,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     private func openEmptyEmailIfNeedOrOpenSyncSettings() {
         if interactor.isShowEmptyEmail {
+            completeAsyncOperationEnableScreen()
             openEmptyEmail()
         } else {
             interactor.updateUserLanguage()
