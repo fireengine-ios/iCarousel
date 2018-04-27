@@ -95,6 +95,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         subscribeDataSource()
     }
     
+    func needToReloadVisibleCells() {
+        log.debug("BaseFilesGreedPresenter needToReloadVisibleCells")
+        
+        DispatchQueue.main.async {
+            self.dataSource.updateVisibleCells()
+        }
+    }
+    
     func subscribeDataSource() {
         ItemOperationManager.default.startUpdateView(view: dataSource)
     }

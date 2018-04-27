@@ -12,6 +12,8 @@ protocol BaseFilesGreedViewOutput {
     
     func onReloadData()
     
+    func needToReloadVisibleCells()
+    
     func searchByText(searchText: String)
     
     func onStartCreatingPhotoAndVideos()
