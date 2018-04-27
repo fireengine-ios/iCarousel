@@ -187,7 +187,7 @@ class FileInfoViewController: ViewController, FileInfoViewInput, UITextFieldDele
     }
     
     private func checkCanEdit(item: BaseDataSourceItem) {
-        if !item.isSynced() {
+        if !item.isSynced() || item.isLocalItem {
             navigationItem.rightBarButtonItem = nil
             fileName.isEnabled = false
         }
