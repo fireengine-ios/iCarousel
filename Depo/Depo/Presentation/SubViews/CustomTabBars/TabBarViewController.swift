@@ -395,13 +395,12 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             $0.isEnabled = !show
         }
         
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots), object: nil)
-        
         if show {
             curtainView.frame = CGRect(x: 0, y: 0, width: currentViewController?.view.frame.width ?? 0, height: currentViewController?.view.frame.height ?? 0)
             currentViewController?.view.addSubview(curtainView)
             currentViewController?.view.bringSubview(toFront: curtainView)
         } else {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots), object: nil)
             curtainView.removeFromSuperview()
         }
         
