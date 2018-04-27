@@ -14,7 +14,7 @@ class StoriesInitializer: NSObject {
         return [.LettersAZ, .LettersZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     }
     
-    class func initializeStoriesController(with nibName: String) -> BaseFilesGreedChildrenViewController {
+    class func initializeStoriesController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> BaseFilesGreedChildrenViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonCreateAStory])
@@ -23,6 +23,10 @@ class StoriesInitializer: NSObject {
                                                style: .default, tintColor: nil)
         
         let presenter = AlbumsPresenter()
+        
+        if let moduleOutput = moduleOutput {
+            presenter.sliderModuleOutput = moduleOutput
+        }
         
         let router = AlbumsRouter()
         router.presenter = presenter

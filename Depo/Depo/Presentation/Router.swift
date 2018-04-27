@@ -593,8 +593,8 @@ class RouterVC: NSObject {
     
     // MARK: Stories list
     
-    func storiesListController() -> BaseFilesGreedChildrenViewController {
-        let controller = StoriesInitializer.initializeStoriesController(with: "BaseFilesGreedViewController")
+    func storiesListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
+        let controller = StoriesInitializer.initializeStoriesController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
         return controller
     }
     
