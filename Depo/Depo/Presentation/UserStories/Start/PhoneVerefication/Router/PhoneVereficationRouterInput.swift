@@ -12,4 +12,5 @@ protocol PhoneVereficationRouterInput {
 //    func goToTermAndUses()
     func goAutoSync()
     func presentErrorPopUp(with message: String)
+    func showRedirectToSplash()
 }

@@ -495,6 +495,7 @@
 "Please enter a valid GSM number." = "Please enter a valid GSM number.";
 "Please enter a valid email address." = "Please enter a valid email address.";
 "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications";
+"You have successfully registered, please log in with your credentials" = "You have successfully registered, please log in with your credentials";
 "E-mail Usage Information" = "E-mail Usage Information";
 "Password fields do not match." = "Password fields do not match.";
 "Please check the e-mail address." = "Please check the e-mail address.";

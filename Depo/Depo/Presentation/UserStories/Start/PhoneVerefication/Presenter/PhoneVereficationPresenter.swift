@@ -86,6 +86,10 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         completeAsyncOperationEnableScreen(errorMessage: message)
     }
     
+    func didRedirectToSplash() {
+        router.showRedirectToSplash()
+    }
+    
     func reachedMaxAttempts() {
         view.resendButtonShow(show: true)
         view.dropTimer()

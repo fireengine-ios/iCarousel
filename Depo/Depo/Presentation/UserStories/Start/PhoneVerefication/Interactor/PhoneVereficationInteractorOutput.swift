@@ -18,6 +18,7 @@ protocol PhoneVereficationInteractorOutput: class {
     
     func succesLogin()
     func failLogin(message: String)
+    func didRedirectToSplash()
     
     func reachedMaxAttempts()
 }
