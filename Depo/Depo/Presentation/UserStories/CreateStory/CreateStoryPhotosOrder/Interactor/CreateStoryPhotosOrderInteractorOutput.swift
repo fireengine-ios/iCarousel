@@ -12,6 +12,8 @@ protocol CreateStoryPhotosOrderInteractorOutput: class {
     
     func showStory(story: PhotoStory)
     
+    func startCreateStory()
+    
     func storyCreated()
     
     func createdStoryFailed(with error: ErrorResponse)

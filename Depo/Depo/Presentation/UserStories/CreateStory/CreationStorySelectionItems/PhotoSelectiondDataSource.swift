@@ -9,7 +9,7 @@
 class PhotoSelectionDataSource: ArrayDataSourceForCollectionView {
     
     override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?) {
-        super.setupCollectionView(collectionView: collectionView, filters: [.fileType(.audio)])
+        super.setupCollectionView(collectionView: collectionView, filters: filters)
         
         let nib = UINib(nibName: CollectionViewCellsIdsConstant.cellForStoryImage, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForStoryImage)

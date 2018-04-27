@@ -10,6 +10,8 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
 
     weak var output: CreateStoryPhotosOrderInteractorOutput!
     
+    private lazy var fileService = WrapItemFileService()
+    
     var story: PhotoStory?
     
     var isRequestStarted = false
@@ -34,9 +36,22 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
             return
         }
         
+        if array.first(where: {$0.isLocalItem}) != nil {
+            sync(items: array)
+        } else {
+            createStory(with: array)
+        }
+    }
+    
+    private func createStory(with items: [Item]) {
+        guard let story = story else {
+            return
+        }
+        
+        output.startCreateStory()
         
         story.storyPhotos.removeAll()
-        story.storyPhotos.append(contentsOf: array)
+        story.storyPhotos.append(contentsOf: items)
         //TODO: creation story on server
         isRequestStarted = true
         if let parameter = story.photoStoryRequestParameter() {
@@ -52,43 +67,17 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
                         self.output.goToStoryPreview(story: story, responce: responce)
                     }
                 }
-            }, fail: { [weak self] fail in
-                if let `self` = self {
-                    self.isRequestStarted = false
-                    DispatchQueue.main.async {
-                        self.output.createdStoryFailed(with: fail)
+                }, fail: { [weak self] fail in
+                    if let `self` = self {
+                        self.isRequestStarted = false
+                        DispatchQueue.main.async {
+                            self.output.createdStoryFailed(with: fail)
+                        }
                     }
-                }
             })
         } else {
             isRequestStarted = false
         }
-        
-        
-        //            CreateStoryService().createStory(createStory: parameter_, success: {[weak self] in
-        //                let t = CreateStoryPreview(name: parameter_.title, imageuuid: parameter_.imageUUids, musicUUID: parameter_.audioUuid, musicId: parameter_.musicId)
-        //                CreateStoryService().getPreview(preview: t, success: {
-        //                    if let self_ = self {
-        //                        DispatchQueue.main.async {
-        //                            self_.output.storyCreated()
-        //                        }
-        //                    }
-        //                }, fail: { (d) in
-        //                    if let self_ = self {
-        //                        DispatchQueue.main.async {
-        //                            self_.output.storyCreatedWithError()
-        //                        }
-        //                    }
-        //                })
-        //
-        //                }, fail: {[weak self] (error) in
-        //                    if let self_ = self {
-        //                        DispatchQueue.main.async {
-        //                            self_.output.storyCreatedWithError()
-        //                        }
-        //                    }
-        //            })
-        
     }
     
     func onMusicSelection() {
@@ -96,6 +85,24 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
             return
         }
         output.goToAudioSelection(story: story_)
+    }
+    
+    private func sync(items: [Item]) {        
+        let operations = fileService.syncItemsIfNeeded(items, success: { [weak self] in
+            self?.createStory(with: items)
+        }) { [weak self] error in
+            DispatchQueue.main.async {
+                self?.output.createdStoryFailed(with: error)
+            }
+        }
+        
+        if operations != nil, let output = output as? BaseAsyncOperationInteractorOutput {
+            output.startCancelableAsync(cancel: { [weak self] in
+                DispatchQueue.main.async {
+                    self?.output.createdStoryFailed(with: ErrorResponse.string(TextConstants.createStoryCancel))
+                }
+            })
+        }
     }
     
 }

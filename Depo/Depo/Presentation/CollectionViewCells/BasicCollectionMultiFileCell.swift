@@ -199,10 +199,6 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         }
     
         
-        if wrappered.fileType.isFaceImageAlbum || wrappered.fileType.isFaceImageType {
-            moreButton.isHidden = true
-        }
-        
         if isCellSelected, !isBigSize() {
             setSelectionSmallSelectionImageView(isSelected, isHidden: !isImageOrVideoType(wrappered.fileType))
         }

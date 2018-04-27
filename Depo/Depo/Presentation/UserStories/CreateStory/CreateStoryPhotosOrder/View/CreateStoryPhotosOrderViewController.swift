@@ -102,7 +102,7 @@ class CreateStoryPhotosOrderViewController: BaseViewController, CreateStoryPhoto
 
     // MARK: CreateStoryPhotosOrderViewInput
     func setupInitialState() {
-        
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     

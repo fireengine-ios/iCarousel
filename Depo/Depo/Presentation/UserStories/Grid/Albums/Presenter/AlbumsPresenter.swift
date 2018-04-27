@@ -19,7 +19,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
         interactor.viewIsReady()
         sortedRule = .timeUp
         dataSource.setPreferedCellReUseID(reUseID: nil)
-        
+
         super.viewIsReady(collectionView: collectionView)
         
         let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar)
@@ -66,10 +66,16 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     }
     
     override func reloadData() {
-        log.debug("AlbumsPresenter reloadData")
-
+        log.debug("BaseFilesGreedPresenter reloadData")
+        debugPrint("BaseFilesGreedPresenter reloadData")
+        
+        dataSource.dropData()
+        dataSource.currentSortType = sortedRule
+        dataSource.reloadData()
         startAsyncOperation()
+        dataSource.isPaginationDidEnd = false
         interactor.getAllItems(sortBy: sortedRule)
+        view?.stopRefresher()
     }
     
     override func sortedPushedTopBar(with rule: MoreActionsConfig.SortRullesType) {
