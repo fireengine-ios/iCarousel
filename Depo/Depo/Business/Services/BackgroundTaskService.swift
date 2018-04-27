@@ -19,29 +19,21 @@ final class BackgroundTaskService {
     
     func beginBackgroundTask() {
         guard backgroundTaskId == UIBackgroundTaskInvalid else {
-            DispatchQueue.main.async {
-                print("BACKGROUND: \(UIApplication.shared.backgroundTimeRemaining)")
-                //1.79769313486232E+308 means infinite time
-            }
             return
         }
         
         self.backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: UUID().uuidString, expirationHandler: { [weak self] in
             self?.endBackgroundTask()
         })
-        
-        DispatchQueue.main.async {
-            print("BACKGROUND: \(UIApplication.shared.backgroundTimeRemaining)")
-            //1.79769313486232E+308 means infinite time
-        }
-        print("BACKGROUND: Task \(backgroundTaskId) has been added")
+
+        log.debug("beginBackgroundTask \(self.backgroundTaskId)")
     }
     
     private func endBackgroundTask() {
         if self.backgroundTaskId != UIBackgroundTaskInvalid {
             UIApplication.shared.endBackgroundTask(backgroundTaskId)
+            log.debug("endBackgroundTask \(backgroundTaskId)")
             backgroundTaskId = UIBackgroundTaskInvalid
-            print("BACKGROUND: Task \(backgroundTaskId) has been ended")
         }
     }
 }
