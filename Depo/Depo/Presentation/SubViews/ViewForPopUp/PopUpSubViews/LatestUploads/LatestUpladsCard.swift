@@ -53,6 +53,19 @@ class LatestUpladsCard: BaseView {
             collectionViewW = collectionView.frame.size.width
             collectionView.layoutSubviews()
             collectionView.reloadData()
+            
+            let cellWidth = calculateLinearDimensionsForCell()
+            
+            let calculatedHeightOfCollectionView : CGFloat
+            if moreThatOneRow() {
+                calculatedHeightOfCollectionView = cellWidth * 2 + minSeparatorSize
+            } else {
+                calculatedHeightOfCollectionView = cellWidth
+            }
+            
+            calculatedH = (frame.size.height - collectionView.frame.size.height) + calculatedHeightOfCollectionView
+            collectionViewH.constant = calculatedHeightOfCollectionView
+            layoutIfNeeded()
         }
     }
     
@@ -62,6 +75,10 @@ class LatestUpladsCard: BaseView {
         if let details = object?.details {
             set(details: details)
         }
+    }
+    
+    private func moreThatOneRow() -> Bool {
+        return collectionViewDataSource.count > numberOfСellInRow
     }
     
     private func set(details object: JSON) {
@@ -75,13 +92,6 @@ class LatestUpladsCard: BaseView {
                     break
                 }
             }
-        }
-        
-        if collectionViewDataSource.count <= numberOfСellInRow {
-            let deltaH: CGFloat = 45
-            collectionViewH.constant = collectionViewH.constant - deltaH
-            calculatedH = frame.size.height - deltaH
-            layoutIfNeeded()
         }
         
         collectionView.reloadData()
