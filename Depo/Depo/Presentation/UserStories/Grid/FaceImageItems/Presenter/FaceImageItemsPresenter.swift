@@ -51,6 +51,10 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
         allItmes = []
         
+        if let view = view as? FaceImageItemsViewInput {
+            view.updateShowHideButton(isShow: !items.isEmpty)
+        }
+        
         items.forEach { item in
             guard item.urlToFile != nil else { return }
 

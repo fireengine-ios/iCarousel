@@ -13,4 +13,5 @@ protocol FaceImageItemsViewInput: class {
     func updateUgglaViewPosition()
     func showUgglaView()
     func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool, isShowUggla: Bool)
+    func updateShowHideButton(isShow: Bool)
 }
