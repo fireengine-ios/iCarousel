@@ -258,7 +258,7 @@ class AlbumParameters: BaseRequestParametrs {
                                      sortOrder.description
                                      )
         
-        return URL(string: searchWithParam, relativeTo: RouteRequests.NewURL)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
@@ -287,7 +287,7 @@ class AlbumDetalParameters: BaseRequestParametrs {
                                      sortOrder.description
         )
         
-        return URL(string: searchWithParam, relativeTo: RouteRequests.NewURL)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
     }
 }
 
