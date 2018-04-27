@@ -31,6 +31,7 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
         }
     }
 
+    //configuration navigationBar will be after receipt items
     override func configurateNavigationBar() { }
     
     override func stopSelection() {
