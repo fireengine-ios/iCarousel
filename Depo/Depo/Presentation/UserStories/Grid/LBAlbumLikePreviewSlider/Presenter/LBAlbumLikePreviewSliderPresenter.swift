@@ -72,12 +72,15 @@ extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput
         dataSource.setCollectionView(items: items)
     }
     
-    func reload() {
+    func reloadAll() {
         interactor.requestAllItems()
     }
     
-    func reloadStories() {
-        interactor.reloadStories()
+    func reload(type: MyStreamType) {
+        interactor.reload(type: type)
     }
     
+    func countThumbnailsFor(type: MyStreamType) -> Int {
+        return interactor.currentItems.first(where: {$0.type == type})?.previewItems?.count ?? 0
+    }
 }
