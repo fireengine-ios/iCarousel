@@ -457,7 +457,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
     }
     
-    private func updateNoFilesView() {
+    func updateNoFilesView() {
         if needShowNoFileView() {
             if interactor.canShowNoFilesView() {
                 view.showNoFilesWith(text: interactor.textForNoFileLbel(),

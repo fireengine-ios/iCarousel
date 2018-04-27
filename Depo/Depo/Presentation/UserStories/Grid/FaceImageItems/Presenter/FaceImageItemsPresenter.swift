@@ -143,7 +143,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         reloadData()
     }
     
-    private func updateNoFilesView() {
+    override func updateNoFilesView() {
         if needShowNoFileView() {
             if let view = view as? FaceImageItemsViewInput {
                 view.showNoFilesWith(text: interactor.textForNoFileLbel(),
