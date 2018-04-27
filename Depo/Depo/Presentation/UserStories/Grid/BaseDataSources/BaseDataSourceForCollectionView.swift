@@ -594,7 +594,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if (isSelectionStateActive == selectionState){
             return
         }
-        if (!selectionState){
+        if selectionState {
+            needShow3DotsInCell = false
+        } else {
+            needShow3DotsInCell = true
             selectedItemsArray.removeAll()
         }
         
