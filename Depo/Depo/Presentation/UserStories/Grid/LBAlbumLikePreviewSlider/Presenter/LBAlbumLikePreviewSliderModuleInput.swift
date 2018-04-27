@@ -10,4 +10,5 @@ protocol LBAlbumLikePreviewSliderModuleInput: class {
 
     func setup(withItems items: [SliderItem])
     func reload()
+    func reloadStories()
 }

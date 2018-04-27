@@ -7,6 +7,8 @@
 //
 
 class AlbumsPresenter: BaseFilesGreedPresenter {
+    
+    weak var sliderModuleOutput: LBAlbumLikePreviewSliderModuleInput?
 
     override func viewIsReady(collectionView: UICollectionView) {
         if (interactor.remoteItems is AlbumService) {
@@ -22,6 +24,12 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
         
         let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar)
         NotificationCenter.default.post(name: notificationName, object: nil)
+    }
+    
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        
+        sliderModuleOutput?.reloadStories()
     }
 
     override func uploadData(_ searchText: String! = nil) {

@@ -43,7 +43,10 @@ final class LBAlbumLikePreviewSliderViewController: ViewController {
     }
 }
 
+// MARK: - LBAlbumLikePreviewSliderViewInput
+
 extension LBAlbumLikePreviewSliderViewController: LBAlbumLikePreviewSliderViewInput {
+    
     func setupInitialState() {
         view.backgroundColor = UIColor.lrSkinTone
         
@@ -60,4 +63,5 @@ extension LBAlbumLikePreviewSliderViewController: LBAlbumLikePreviewSliderViewIn
     func setTitle(_ title: String) {
         titleLabel.text = title
     }
+    
 }

@@ -56,6 +56,17 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         }
     }
     
+    func reloadStories() {
+        let group = DispatchGroup()
+        let queue = DispatchQueue(label: DispatchQueueLabels.myStreamAlbums)
+        
+        getStories(group: group)
+        
+        group.notify(queue: queue) { [weak self] in
+            self?.operationSuccessed()
+        }
+    }
+    
     private func getAlbums(group: DispatchGroup) {
         group.enter()
         let albumService = AlbumService(requestSize: 4)
