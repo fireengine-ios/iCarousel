@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FileInfoViewController: ViewController, FileInfoViewInput, UITextFieldDelegate, ActivityIndicator, ErrorPresenter {
+class FileInfoViewController: BaseViewController, FileInfoViewInput, UITextFieldDelegate, ActivityIndicator, ErrorPresenter {
     
     @IBOutlet weak var fileNameTitle: UILabel!
     @IBOutlet weak var fileName: UITextField!
