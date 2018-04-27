@@ -68,14 +68,9 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         
         albumSliderModuleOutput?.reload()
         
-        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
-            DispatchQueue.main.async {
-                view.updateUgglaViewPosition()
-            }
-        }
-        
         dataSource.isHeaderless = true
         updateThreeDotsButton()
+        updateUgglaViewIfNeed()
     }
     
     override func getContentWithSuccessEnd() {
@@ -92,6 +87,11 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func filesAppendedAndSorted() {
+        super.filesAppendedAndSorted()
+        updateUgglaViewIfNeed()
+    }
+    
     override func getContentWithFail(errorString: String?) {
         super.getContentWithFail(errorString: errorString)
         updateThreeDotsButton()
@@ -101,6 +101,14 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     override func needShowNoFileView() -> Bool {
         return dataSource.allMediaItems.isEmpty
+    }
+    
+    private func updateUgglaViewIfNeed() {
+        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
+            DispatchQueue.main.async {
+                view.updateUgglaViewPosition()
+            }
+        }
     }
     
     // MARK: - BaseDataSourceForCollectionViewDelegate
@@ -118,8 +126,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput, scrollView == dataSource.collectionView {
-            view.updateUgglaViewPosition()
+        if scrollView == dataSource.collectionView {
+            updateUgglaViewIfNeed()
         }
     }
     
@@ -166,6 +174,10 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         asyncOperationSucces()
         
         view.stopSelection()
+        
+        if let view = view as? FaceImageItemsViewInput {
+            view.hideUgglaView()
+        }
         
         reloadData()
     }
