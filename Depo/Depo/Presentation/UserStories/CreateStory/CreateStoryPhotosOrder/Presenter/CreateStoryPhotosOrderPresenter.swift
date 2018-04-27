@@ -20,9 +20,13 @@ class CreateStoryPhotosOrderPresenter: BasePresenter, CreateStoryPhotosOrderModu
         view.showStory(story: story)
     }
     
-    func onNextButton(array: [Item]) {
-        startAsyncOperation()
+    func onNextButton(array: [Item]) {        
         interactor.onNextButton(array: array)
+    }
+    
+    func startCreateStory() {
+        completeAsyncOperationEnableScreen()
+        startAsyncOperation()
     }
     
     func storyCreated() {
@@ -45,8 +49,9 @@ class CreateStoryPhotosOrderPresenter: BasePresenter, CreateStoryPhotosOrderModu
         
         let errorMessage = error.isNetworkError ? error.description : TextConstants.createStoryNotCreated
         view.showErrorAlert(message: errorMessage)
+        view.setupInitialState()
     }
-    
+        
     func onMusicSelection() {
         interactor.onMusicSelection()
     }
@@ -72,5 +77,4 @@ class CreateStoryPhotosOrderPresenter: BasePresenter, CreateStoryPhotosOrderModu
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
-    
 }
