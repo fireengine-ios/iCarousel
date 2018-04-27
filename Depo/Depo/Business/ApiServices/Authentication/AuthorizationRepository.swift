@@ -54,6 +54,9 @@ open class AuthorizationRepositoryImp: AuthorizationRepository {
         self.urls = urls
         self.tokenStorage = tokenStorage
     }
+    
+    private var refreshAttempts = 0
+    private var maxRefreshAttempts = 3
 }
 
 extension AuthorizationRepositoryImp: RequestAdapter {
@@ -144,9 +147,11 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                 guard let strongSelf = self else { return }
                 debugPrint(response)
                 
-                
                 /// if tokenStorage.refreshToken is invalid
                 if response.response?.statusCode == 401 {
+                    #if MAIN_APP
+                    log.debug("failed refreshAccessToken")
+                    #endif
                     strongSelf.refreshFailedHandler()
                     completion(false, nil)
                 
@@ -154,12 +159,20 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                 } else if let headers = response.response?.allHeaderFields as? [String: Any],
                     let accessToken = headers[strongSelf.accessTokenKey] as? String {
                     completion(true, accessToken)
-                } else {
+                    
+                /// retry refreshTokens request
+                } else if strongSelf.refreshAttempts < strongSelf.maxRefreshAttempts {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) { 
+                        strongSelf.refreshAttempts += 1
+                        strongSelf.isRefreshing = false
+                        strongSelf.refreshTokens(completion: completion)
+                    }
+                    return
+                } else {  
                     completion(false, nil)
                 }
                 
-                
-                // end refresh status
+                /// end refresh status
                 strongSelf.isRefreshing = false
         }
     }
