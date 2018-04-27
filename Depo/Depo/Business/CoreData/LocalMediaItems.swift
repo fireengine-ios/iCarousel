@@ -199,16 +199,16 @@ extension CoreDataStack {
             }
             let predicate = NSPredicate(format: "localFileID IN %@", assetIdList)
             let items = self.executeRequest(predicate: predicate, context: context)
-            if items.isEmpty {
-                let assetsList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
-                self.checkLocalFilesExistence(actualPhotoLibItemsIDs: assetsList.compactMap{$0.localIdentifier}) {
-                    completion()
-                }
-                return
-            }
+            
+            
             items.forEach { context.delete($0) }
             
-            self.saveDataForContext(context: context, savedCallBack: completion)
+            self.saveDataForContext(context: context, savedCallBack: { [weak self] in
+                ///Appearantly after recovery local ID may change, so temporary soloution is to check all files all over. and in the future chenge DataBase behavior heavily
+                let assetsList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
+                
+                self?.checkLocalFilesExistence(actualPhotoLibItemsIDs: assetsList.compactMap{$0.localIdentifier}, complition: completion)
+            })
         }
  
     }
