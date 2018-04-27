@@ -31,15 +31,8 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
         }
     }
 
-    override func configurateNavigationBar() {
-        if (isCanChangeVisibility) {
-            configurateFaceImagePeopleActions { [weak self] in
-                self?.configureDoneNavBarActions()
-            }
-        } else {
-            navigationItem.rightBarButtonItems = nil
-        }
-    }
+    //configuration navigationBar will be after receipt items
+    override func configurateNavigationBar() { }
     
     override func stopSelection() {
         if (isCanChangeVisibility) {
@@ -131,6 +124,16 @@ extension FaceImageItemsViewController: FaceImageItemsViewInput {
         isCanChangeVisibility = false
         if isShowUggla {
             ugglaImageView.isHidden = true
+        }
+    }
+    
+    func updateShowHideButton(isShow: Bool) {
+        if isCanChangeVisibility,
+            isShow,
+            navigationItem.rightBarButtonItems == nil {
+            configurateFaceImagePeopleActions { [weak self] in
+                self?.configureDoneNavBarActions()
+            }
         }
     }
     
