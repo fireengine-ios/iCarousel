@@ -607,15 +607,15 @@ class RouterVC: NSObject {
     
     // MARK: Thing list
     
-    func thingsListController() -> BaseFilesGreedChildrenViewController {
-        let controller = FaceImageItemsInitializer.initializeThingsController(with: "BaseFilesGreedViewController")
+    func thingsListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageItemsInitializer.initializeThingsController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
         return controller as! BaseFilesGreedChildrenViewController
     }
     
     // MARK: Place list
     
-    func placesListController() -> BaseFilesGreedChildrenViewController {
-        let controller = FaceImageItemsInitializer.initializePlacesController(with: "BaseFilesGreedViewController")
+    func placesListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageItemsInitializer.initializePlacesController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
         return controller as! BaseFilesGreedChildrenViewController
     }
     

@@ -18,6 +18,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private var allItmes: [WrapData] = []
     
+    private var updatedMyStream = false
+    
     override func viewIsReady(collectionView: UICollectionView) {        
         super.viewIsReady(collectionView: collectionView)
         
@@ -70,11 +72,10 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         
         super.getContentWithSuccess(items: allItmes)
         
-        albumSliderModuleOutput?.reload()
-        
         dataSource.isHeaderless = true
         updateThreeDotsButton()
         updateUgglaViewIfNeed()
+        updateMyStreamSliderIfNeed()
     }
     
     override func getContentWithSuccessEnd() {
@@ -156,6 +157,18 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
                                      needHideTopBar: interactor.needHideTopBar(),
                                      isShowUggla: hasUgglaLabel())
             }
+        }
+    }
+    
+    func updateMyStreamSliderIfNeed() {
+        // update my stream slider after upload photos
+        if !updatedMyStream {
+            if let type = faceImageType?.myStreamType,
+                let count = albumSliderModuleOutput?.countThumbnailsFor(type: type),
+                count < NumericConstants.myStreamSliderThumbnailsCount, count != allItmes.count  {
+                albumSliderModuleOutput?.reload(type: type)
+            }
+            updatedMyStream = true
         }
     }
 }

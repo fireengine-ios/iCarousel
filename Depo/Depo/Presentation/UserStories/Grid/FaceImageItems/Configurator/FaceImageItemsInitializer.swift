@@ -21,22 +21,22 @@ final class FaceImageItemsInitializer: NSObject {
         return viewController
     }
     
-    class func initializeThingsController(with nibName: String) -> UIViewController {
+    class func initializeThingsController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> UIViewController {
         let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)
         
         let configurator = FaceImageItemsConfigurator()
         
-        configurator.configure(viewController: viewController, remoteServices: ThingsItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamThingsTitle)
+        configurator.configure(viewController: viewController, remoteServices: ThingsItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamThingsTitle, moduleOutput: moduleOutput)
         
         return viewController
     }
     
-    class func initializePlacesController(with nibName: String) -> UIViewController {
+    class func initializePlacesController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> UIViewController {
         let viewController = FaceImageItemsViewController(nibName: nibName, bundle: nil)
         
         let configurator = FaceImageItemsConfigurator()
         
-        configurator.configure(viewController: viewController, remoteServices: PlacesItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamPlacesTitle)
+        configurator.configure(viewController: viewController, remoteServices: PlacesItemsService(requestSize: RequestSizeConstant.faceImageItemsRequestSize), title: TextConstants.myStreamPlacesTitle, moduleOutput: moduleOutput)
         
         return viewController
     }

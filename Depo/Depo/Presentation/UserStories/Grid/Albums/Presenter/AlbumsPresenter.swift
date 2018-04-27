@@ -29,7 +29,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     override func viewWillDisappear() {
         super.viewWillDisappear()
         
-        sliderModuleOutput?.reloadStories()
+        sliderModuleOutput?.reload(type: .story)
     }
 
     override func uploadData(_ searchText: String! = nil) {

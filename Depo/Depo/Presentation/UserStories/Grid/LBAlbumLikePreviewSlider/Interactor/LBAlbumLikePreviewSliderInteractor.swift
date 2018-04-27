@@ -56,11 +56,28 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         }
     }
     
-    func reloadStories() {
+    func reload(type: MyStreamType) {
+        guard type.isMyStreamSliderType() else {
+            return
+        }
+        
         let group = DispatchGroup()
         let queue = DispatchQueue(label: DispatchQueueLabels.myStreamAlbums)
         
-        getStories(group: group)
+        switch type {
+        case .story:
+            getStories(group: group)
+        case .album:
+            getAlbums(group: group)
+        case .people:
+            getThumbnails(forType: .people, group: group)
+        case .things:
+            getThumbnails(forType: .things, group: group)
+        case .places:
+            getThumbnails(forType: .places, group: group)
+        default:
+            break
+        }
         
         group.notify(queue: queue) { [weak self] in
             self?.operationSuccessed()
