@@ -207,7 +207,8 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     }
     
     var originalFilesTypeFilter: [GeneralFilesFiltrationType]? {
-        return originalFilters
+        get { return originalFilters }
+        set { originalFilters = newValue}
     }
     
     func getAllItems(sortBy: SortedRules) {

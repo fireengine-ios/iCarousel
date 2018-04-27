@@ -51,6 +51,10 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
         allItmes = []
         
+        if let view = view as? FaceImageItemsViewInput {
+            view.updateShowHideButton(isShow: !items.isEmpty)
+        }
+        
         items.forEach { item in
             guard item.urlToFile != nil else { return }
 
@@ -68,14 +72,9 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         
         albumSliderModuleOutput?.reload()
         
-        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
-            DispatchQueue.main.async {
-                view.updateUgglaViewPosition()
-            }
-        }
-        
         dataSource.isHeaderless = true
         updateThreeDotsButton()
+        updateUgglaViewIfNeed()
     }
     
     override func getContentWithSuccessEnd() {
@@ -92,6 +91,11 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func filesAppendedAndSorted() {
+        super.filesAppendedAndSorted()
+        updateUgglaViewIfNeed()
+    }
+    
     override func getContentWithFail(errorString: String?) {
         super.getContentWithFail(errorString: errorString)
         updateThreeDotsButton()
@@ -101,6 +105,14 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     override func needShowNoFileView() -> Bool {
         return dataSource.allMediaItems.isEmpty
+    }
+    
+    private func updateUgglaViewIfNeed() {
+        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
+            DispatchQueue.main.async {
+                view.updateUgglaViewPosition()
+            }
+        }
     }
     
     // MARK: - BaseDataSourceForCollectionViewDelegate
@@ -118,8 +130,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput, scrollView == dataSource.collectionView {
-            view.updateUgglaViewPosition()
+        if scrollView == dataSource.collectionView {
+            updateUgglaViewIfNeed()
         }
     }
     
@@ -135,7 +147,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         reloadData()
     }
     
-    private func updateNoFilesView() {
+    override func updateNoFilesView() {
         if needShowNoFileView() {
             if let view = view as? FaceImageItemsViewInput {
                 view.showNoFilesWith(text: interactor.textForNoFileLbel(),
@@ -166,6 +178,10 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         asyncOperationSucces()
         
         view.stopSelection()
+        
+        if let view = view as? FaceImageItemsViewInput {
+            view.hideUgglaView()
+        }
         
         reloadData()
     }

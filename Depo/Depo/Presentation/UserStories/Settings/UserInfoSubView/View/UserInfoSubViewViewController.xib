@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserInfoSubViewViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserInfoSubViewViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="editButton" destination="SQf-bN-tvc" id="r6s-GG-ZpG"/>
                 <outlet property="upgradeUserStorrageButton" destination="tg0-9Y-BfD" id="NX9-Py-19L"/>
@@ -42,7 +42,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O02-jH-Ujj" customClass="LoadingImageView" customModule="Depo_LifeTech" customModuleProvider="target">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O02-jH-Ujj" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
                     <rect key="frame" x="29" y="29" width="92" height="92"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="92" id="QMZ-GN-4Gs"/>
@@ -73,7 +73,7 @@
                     </constraints>
                     <state key="normal" image="UserSubModuleEdit"/>
                     <connections>
-                        <action selector="onEditUserInformationButton" destination="-1" eventType="touchUpInside" id="snI-Du-pl1"/>
+                        <action selector="onEditUserInformationButton:" destination="-1" eventType="touchUpInside" id="Gqd-JQ-19g"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lsG-5I-zeN">
@@ -94,7 +94,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tq3-Cw-n2e" customClass="RoundedProgressView" customModule="Depo_LifeTech" customModuleProvider="target">
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tq3-Cw-n2e" customClass="RoundedProgressView" customModule="lifebox" customModuleProvider="target">
                     <rect key="frame" x="139" y="99" width="228" height="6"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="6" id="y8H-Ug-91i"/>

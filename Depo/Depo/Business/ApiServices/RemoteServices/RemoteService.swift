@@ -359,12 +359,10 @@ class FaceImageDetailService: AlbumDetailService {
     }
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue?) {
-        nextItems(albumUUID: albumUUID, sortBy: sortBy, sortOrder: sortOrder, success: { items in
-            if items.isEmpty {
-                fail?()
-            } else {
-                success?(items)
-            }
+        nextItems(albumUUID: albumUUID, sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] items in
+            self?.currentPage += 1
+            success?(items)
+
         }, fail: fail)
     }
 

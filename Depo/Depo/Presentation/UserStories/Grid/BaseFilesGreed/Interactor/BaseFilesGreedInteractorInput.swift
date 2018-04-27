@@ -38,7 +38,7 @@ protocol BaseFilesGreedInteractorInput {
     
     var alerSheetMoreActionsConfig: AlertFilesActionsSheetInitialConfig? { get }
     
-    var originalFilesTypeFilter: [GeneralFilesFiltrationType]? { get }
+    var originalFilesTypeFilter: [GeneralFilesFiltrationType]? { get set }
     
     func getAllItems(sortBy: SortedRules)
     

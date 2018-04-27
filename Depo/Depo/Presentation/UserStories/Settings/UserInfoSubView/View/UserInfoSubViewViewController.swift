@@ -128,11 +128,13 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     }
     
     // MARK: buttons actions
-    @IBAction func onEditUserInformationButton() {
+    @IBAction func onEditUserInformationButton(_ sender: UIButton) {
+        sender.isEnabled = false
         guard let userInfo_ = userInfo else {
             return
         }
         actionsDelegate?.updateUserProfile(userInfo: userInfo_)
+        sender.isEnabled = true
     }
     
     @IBAction func onUpgradeUserStorrageButton() {

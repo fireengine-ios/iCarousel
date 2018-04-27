@@ -256,7 +256,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 let specificFilters = self.getFileFilterType(filters: unwrapedFilters),
                 !self.showOnlyRemotes(filters: unwrapedFilters) else {
                     self.allMediaItems.append(contentsOf: pageItems)
-                    self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                    self.isLocalPaginationOn = false
+                    self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                     complition()
                     return
             }
@@ -594,7 +595,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if (isSelectionStateActive == selectionState){
             return
         }
-        if (!selectionState){
+        if selectionState {
+            needShow3DotsInCell = false
+        } else {
+            needShow3DotsInCell = true
             selectedItemsArray.removeAll()
         }
         

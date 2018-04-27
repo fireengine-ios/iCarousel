@@ -419,7 +419,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
                 
                 mediaItem.localFileID = assetIdentifier
-                mediaItem.trimmedLocalFileID = assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier
+                mediaItem.trimmedLocalFileID = item.getTrimmedLocalID()//assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier
                 LocalMediaStorage.default.assetsCache.append(list: [asset])
                 CoreDataStack.default.saveDataForContext(context: context, savedCallBack: nil)
 ///WE might need this               CoreDataStack.default.updateSavedItems(savedItems: [mediaItem], remoteItems: [item], context: context)

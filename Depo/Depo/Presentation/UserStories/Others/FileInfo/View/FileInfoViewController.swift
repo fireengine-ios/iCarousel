@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FileInfoViewController: ViewController, FileInfoViewInput, UITextFieldDelegate, ActivityIndicator, ErrorPresenter {
+class FileInfoViewController: BaseViewController, FileInfoViewInput, UITextFieldDelegate, ActivityIndicator, ErrorPresenter {
     
     @IBOutlet weak var fileNameTitle: UILabel!
     @IBOutlet weak var fileName: UITextField!
@@ -187,7 +187,7 @@ class FileInfoViewController: ViewController, FileInfoViewInput, UITextFieldDele
     }
     
     private func checkCanEdit(item: BaseDataSourceItem) {
-        if !item.isSynced() {
+        if !item.isSynced() || item.isLocalItem {
             navigationItem.rightBarButtonItem = nil
             fileName.isEnabled = false
         }
