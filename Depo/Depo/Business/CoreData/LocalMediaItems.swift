@@ -191,15 +191,21 @@ extension CoreDataStack {
         guard assetIdList.count > 0 else {
             return
         }
-        let context = self.newChildBackgroundContext
+        let context = newChildBackgroundContext
         context.perform { [weak self] in
             guard let `self` = self else {
                 completion()
                 return
             }
             let predicate = NSPredicate(format: "localFileID IN %@", assetIdList)
-            let items:[MediaItem] = self.executeRequest(predicate: predicate, context: context)
-            
+            let items = self.executeRequest(predicate: predicate, context: context)
+            if items.isEmpty {
+                let assetsList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
+                self.checkLocalFilesExistence(actualPhotoLibItemsIDs: assetsList.compactMap{$0.localIdentifier}) {
+                    completion()
+                }
+                return
+            }
             items.forEach { context.delete($0) }
             
             self.saveDataForContext(context: context, savedCallBack: completion)
@@ -300,7 +306,7 @@ extension CoreDataStack {
         
     }
     
-    func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String]) {
+    func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], complition: VoidHandler? = nil) {
         
         let newContext = newChildBackgroundContext
         
@@ -318,6 +324,7 @@ extension CoreDataStack {
                 /// put notification here that item deleted
                 let items = allNonAccurateSavedLocalFiles.map { $0.wrapedObject }
                 ItemOperationManager.default.deleteItems(items: items)
+                complition?()
             })
         }
     }
