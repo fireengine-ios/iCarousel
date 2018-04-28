@@ -30,8 +30,7 @@ class ButtonWithCorner: InsetsButton {
         titleLabel?.font = ApplicationPalette.roundedCornersButtonFont
         
         let inset: CGFloat = 5
-        insets.left = inset
-        insets.right = inset
+        insets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
 
     func getColorForText() -> UIColor {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WhiteButtonWithRoundedCorner: UIButton {
+class WhiteButtonWithRoundedCorner: InsetsButton {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -42,7 +42,6 @@ class WhiteButtonWithRoundedCorner: UIButton {
         layer.cornerRadius = frame.height * 0.5
         
         let inset = frame.height * 0.3
-        titleEdgeInsets.left = inset
-        titleEdgeInsets.right = inset
+        insets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
 }
