@@ -8,9 +8,9 @@
 
 class PhoneVereficationRouter: PhoneVereficationRouterInput {
     
-    private func showToSplash() {
+    private func goToSplash() {
         if let splash = RouterVC().splash {
-            RouterVC().presentViewController(controller: splash)
+            RouterVC().pushViewController(viewController: splash)
         }
     }
     
@@ -25,8 +25,8 @@ class PhoneVereficationRouter: PhoneVereficationRouterInput {
     }
     
     func showRedirectToSplash() {
-        let popUp = PopUpController.with(title: nil, message: TextConstants.authificateCaptchaRequired, image: .none, buttonTitle: TextConstants.ok, action: { vc in
-            
+        let popUp = PopUpController.with(title: nil, message: TextConstants.authificateCaptchaRequired, image: .none, buttonTitle: TextConstants.ok, action: { [weak self] vc in
+            self?.goToSplash()
         })
    
         RouterVC().presentViewController(controller: popUp)
