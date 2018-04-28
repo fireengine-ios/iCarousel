@@ -69,6 +69,16 @@ final class AlbumCard: BaseView {
         }
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let bottomSpace : CGFloat = 0.0
+        let h = bottomButton.frame.origin.y + bottomButton.frame.size.height + bottomSpace
+        if calculatedH != h{
+            calculatedH = h
+            layoutIfNeeded()
+        }
+    }
+    
     private func set(details object: JSON) {
         album = AlbumServiceResponse(withJSON: object)
         

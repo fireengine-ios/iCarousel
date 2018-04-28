@@ -99,6 +99,16 @@ class AnimationCard: BaseView {
         }
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let bottomSpace : CGFloat = 0.0
+        let h = bottomButton.frame.origin.y + bottomButton.frame.size.height + bottomSpace
+        if calculatedH != h{
+            calculatedH = h
+            layoutIfNeeded()
+        }
+    }
+    
     private func saveImage() {
         guard let id = cardObject?.id else {
             return
