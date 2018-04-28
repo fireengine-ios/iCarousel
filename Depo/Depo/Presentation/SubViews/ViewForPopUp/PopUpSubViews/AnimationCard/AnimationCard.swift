@@ -51,7 +51,7 @@ class AnimationCard: BaseView {
     }
     
     override func viewWillShow() {
-        photoImageView.swowDownloadedGif()
+        photoImageView.showDownloadedGif()
     }
     
     override func set(object: HomeCardResponse?) {

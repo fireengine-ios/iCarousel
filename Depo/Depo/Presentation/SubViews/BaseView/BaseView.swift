@@ -37,6 +37,7 @@ class BaseView: UIView, NibInit {
         deleteCard()
     }
     
+    //base function for all base view
     func viewWillShow() {
         
     }

@@ -199,7 +199,7 @@ class LoadingImageView: UIImageView {
 //        }
     }
     
-    func swowDownloadedGif() {
+    func showDownloadedGif() {
         image = nil
         if let downloadedGifImage = downloadedGifImage {
             image = downloadedGifImage
