@@ -55,9 +55,10 @@ extension LBAlbumLikePreviewSliderViewController: LBAlbumLikePreviewSliderViewIn
         titleLabel.alpha = 0.5
         titleLabel.text = sliderTitle ?? TextConstants.albumLikeSlidertitle
         titleLabel.isUserInteractionEnabled = true
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTouchRecognition))
-        titleLabel.addGestureRecognizer(tapGesture)
+
+        ///LR-4845 we dont need clickable title for now
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTouchRecognition))
+//        titleLabel.addGestureRecognizer(tapGesture)
     }
     
     func setTitle(_ title: String) {
