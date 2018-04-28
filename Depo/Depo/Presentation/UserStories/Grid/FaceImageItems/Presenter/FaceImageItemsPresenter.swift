@@ -20,6 +20,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private var updatedMyStream = false
     
+    private var containsInvisibleItems = false
+    
     override func viewIsReady(collectionView: UICollectionView) {        
         super.viewIsReady(collectionView: collectionView)
         
@@ -51,14 +53,12 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         if let interactor = interactor as? FaceImageItemsInteractorInput {
             interactor.changeCheckPhotosState(isCheckPhotos: false)
         }
-        allItems = []
-        
-        if let view = view as? FaceImageItemsViewInput {
-            view.updateShowHideButton(isShow: !items.isEmpty)
-        }
         
         if faceImageType == .people && !isChangeVisibilityMode, let peopleItems = items as? [PeopleItem] {
-            allItems = peopleItems.filter { $0.urlToFile != nil && $0.responseObject.visible == true}
+            allItems = peopleItems.filter { $0.urlToFile != nil && $0.responseObject.visible == true }
+            if !containsInvisibleItems && peopleItems.first(where: { $0.urlToFile != nil && $0.responseObject.visible == false }) != nil {
+                containsInvisibleItems = true
+            }
         } else {
             allItems = items.filter { $0.urlToFile != nil }
         }
@@ -93,6 +93,11 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     override func filesAppendedAndSorted() {
         super.filesAppendedAndSorted()
         updateUgglaViewIfNeed()
+        
+        if let view = view as? FaceImageItemsViewInput {
+            let needShow = !dataSource.allMediaItems.isEmpty || (dataSource.allMediaItems.isEmpty && containsInvisibleItems)
+            view.updateShowHideButton(isShow: needShow)
+        }
     }
     
     override func getContentWithFail(errorString: String?) {
@@ -103,7 +108,11 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
     
     override func needShowNoFileView() -> Bool {
-        return dataSource.allMediaItems.isEmpty
+        if isChangeVisibilityMode {
+            return dataSource.allMediaItems.isEmpty && !containsInvisibleItems
+        } else {
+            return dataSource.allMediaItems.isEmpty
+        }
     }
     
     private func updateUgglaViewIfNeed() {
@@ -155,6 +164,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
                                      needHideTopBar: interactor.needHideTopBar(),
                                      isShowUggla: hasUgglaLabel())
             }
+        } else {
+            view.hideNoFiles()
         }
     }
     
