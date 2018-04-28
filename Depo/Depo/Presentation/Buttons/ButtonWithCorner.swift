@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ButtonWithCorner: UIButton {
+class ButtonWithCorner: InsetsButton {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -29,6 +29,9 @@ class ButtonWithCorner: UIButton {
         setTitleColor(getColorForText(), for: UIControlState.normal)
         titleLabel?.font = ApplicationPalette.roundedCornersButtonFont
         
+        let inset: CGFloat = 5
+        insets.left = inset
+        insets.right = inset
     }
 
     func getColorForText() -> UIColor {
