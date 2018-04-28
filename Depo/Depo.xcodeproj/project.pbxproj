@@ -5376,6 +5376,12 @@
 		CEB2734F205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAttemptsCounterByUnigueUserID.swift; sourceTree = "<group>"; };
 		CEB76EAF1FE9094600B679EB /* UIScrollView+Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Refresh.swift"; sourceTree = "<group>"; };
 		CEB996CE1F0770470074E264 /* RequestsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsKey.swift; sourceTree = "<group>"; };
+		CEBAB15420945AE2002824C6 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
+		CEBAB15520945C0D002824C6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
+		CEBAB15620945C33002824C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
+		CEBAB15720945C58002824C6 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
+		CEBAB15820945C66002824C6 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
+		CEBAB15920945C85002824C6 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
 		CEBB2DD71F7678DA00D725F0 /* Int64+Bytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Bytes.swift"; sourceTree = "<group>"; };
 		CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TurkcellSaturaBol.ttf; sourceTree = "<group>"; };
 		CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TurkcellSaturaBolIta.ttf; sourceTree = "<group>"; };
@@ -12233,6 +12239,7 @@
 				nl,
 				pt,
 				base,
+				ro,
 			);
 			mainGroup = 051E1DEA19CAC2F900FD1E03;
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
@@ -16051,6 +16058,12 @@
 			isa = PBXVariantGroup;
 			children = (
 				7C73CDF2200356B6000824AA /* en */,
+				CEBAB15420945AE2002824C6 /* tr */,
+				CEBAB15520945C0D002824C6 /* es */,
+				CEBAB15620945C33002824C6 /* ru */,
+				CEBAB15720945C58002824C6 /* ro */,
+				CEBAB15820945C66002824C6 /* de */,
+				CEBAB15920945C85002824C6 /* ar */,
 			);
 			name = OurLocalizable.strings;
 			path = .;
