@@ -64,7 +64,7 @@ struct NumericConstants {
     static let maxSuggestions: Int = 3  
     
     static let minute: TimeInterval = 60
-    static let defaultTimeout: TimeInterval = 73.0
+    static let defaultTimeout: TimeInterval = 30.0
     
     static let faceImageCellTransperentAlpha: CGFloat = 0.6
     
@@ -83,6 +83,8 @@ struct NumericConstants {
     
     static let limitContactsForBackUp: Int = 5000
     static let defaultCustomScrollIndicatorOffset: CGFloat = 50
+    
+    static let myStreamSliderThumbnailsCount: Int = 4
 }
 
 struct RequestSizeConstant {

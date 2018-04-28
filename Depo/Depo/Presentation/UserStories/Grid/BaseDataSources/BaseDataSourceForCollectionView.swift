@@ -1518,6 +1518,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         for item in objectsForUpdate {
             if let path = getIndexPathForObject(trimmedLocalID: item.getTrimmedLocalID()) {
                 arrayOfPathForUpdate.append(path)
+                //FIXME: arrayOfPathForUpdate is never used
             }
         }
 

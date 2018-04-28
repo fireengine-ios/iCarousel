@@ -46,6 +46,7 @@ extension UIViewController {
         navBar?.setBackgroundImage(backgroundImg, for: .default)
         navBar?.shadowImage = UIImage()
         navBar?.backgroundColor = .clear
+        navBar?.barTintColor = .clear
         navBar?.tintColor = .white
         navBar?.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         
@@ -84,6 +85,7 @@ extension UIViewController {
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.view.backgroundColor = .clear
         navBar?.tintColor = .white
+        navBar?.barTintColor = .clear
         navBar?.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
 
         if let view = navBar?.viewWithTag(tagHomeView) {
@@ -124,6 +126,7 @@ extension UIViewController {
             navBar?.setBackgroundImage(image, for: .default)
         }
         
+        navBar?.barTintColor = .black
         navBar?.backgroundColor = .black
         statusBarColor = .black
         navBar?.isTranslucent = true

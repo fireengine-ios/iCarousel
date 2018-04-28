@@ -52,10 +52,28 @@ final class SpotlightManager {
     static let shared = SpotlightManager()
     
     weak var delegate: SpotlightManagerDelegate?
+    
+    private lazy var storageVars: StorageVars = factory.resolve()
 
+    private let lastShownSpotlightKey = "lastShownSpotlightByUserID"
     private var lastShownSpotlight: Int {
-        get { return UserDefaults.standard.integer(forKey: "lastShownSpotlight") }
-        set { UserDefaults.standard.set(newValue, forKey: "lastShownSpotlight")}
+        get {
+            guard let userId = storageVars.currentUserID,
+                let dict = UserDefaults.standard.dictionary(forKey: lastShownSpotlightKey) as? [String: Int] else {
+                return 0
+            }
+            return dict[userId] ?? 0
+        }
+        set {
+            guard let userId = storageVars.currentUserID else {
+                return
+            }
+            var dict = UserDefaults.standard.dictionary(forKey: lastShownSpotlightKey) as? [String: Int] ?? [String: Int]()
+            dict[userId] = newValue
+            
+            UserDefaults.standard.set(dict, forKey: lastShownSpotlightKey)
+            UserDefaults.standard.synchronize()
+        }
     }
     
     func clear() {

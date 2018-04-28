@@ -9,5 +9,7 @@
 protocol LBAlbumLikePreviewSliderModuleInput: class {
 
     func setup(withItems items: [SliderItem])
-    func reload()
+    func reloadAll()
+    func reload(type: MyStreamType)
+    func countThumbnailsFor(type: MyStreamType) -> Int
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LBAlbumLikePreviewSliderViewOutput, LBAlbumLikePreviewSliderInteractorOutput {
+class LBAlbumLikePreviewSliderPresenter {
     
     weak var view: LBAlbumLikePreviewSliderViewInput!
     var interactor: LBAlbumLikePreviewSliderInteractorInput!
@@ -17,7 +17,11 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
     weak var baseGreedPresenterModule: BaseFilesGreedModuleInput?
     var dataSource: LBAlbumLikePreviewSliderDataSource = LBAlbumLikePreviewSliderDataSource()
     
-    // MARK: - View output
+}
+
+// MARK: LBAlbumLikePreviewSliderViewOutput
+
+extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderViewOutput {
     
     func viewIsReady(collectionView: UICollectionView) {
         dataSource.setupCollectionView(collectionView: collectionView)
@@ -25,42 +29,58 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
         view.setupInitialState()
         interactor.requestAllItems()
     }
-        
+    
     func sliderTitlePressed() {
-        router.goToAlbumbsGreedView()   
+        router.goToAlbumbsGreedView()
     }
     
     func reloadData() {
         interactor.requestAllItems()
     }
     
-    // MARK: - Presenter input
-    
-    func setup(withItems items: [SliderItem]) {
-        interactor.currentItems = items        
-        dataSource.setCollectionView(items: items)
-    }
-    
-    func reload() {
-        interactor.requestAllItems()
-    }
-    
-    // MARK: - Iteractor output
+}
+
+// MARK: LBAlbumLikePreviewSliderInteractorOutput
+
+extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderInteractorOutput {
     
     func operationSuccessed(withItems items: [SliderItem]) {
         dataSource.setCollectionView(items: items)
         faceImagePhotosModuleOutput?.getSliderItmes(items: items)
     }
     
-    func operationFailed() {
-        
-    }
-
+    func operationFailed() { }
+    
 }
+
+// MARK: LBAlbumLikePreviewSliderDataSourceDelegate
 
 extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderDataSourceDelegate {
     
     func onItemSelected(item: SliderItem) {
         router.onItemSelected(item, moduleOutput: self)
+    }
+    
+}
+
+// MARK: LBAlbumLikePreviewSliderModuleInput
+
+extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput {
+    
+    func setup(withItems items: [SliderItem]) {
+        interactor.currentItems = items
+        dataSource.setCollectionView(items: items)
+    }
+    
+    func reloadAll() {
+        interactor.requestAllItems()
+    }
+    
+    func reload(type: MyStreamType) {
+        interactor.reload(type: type)
+    }
+    
+    func countThumbnailsFor(type: MyStreamType) -> Int {
+        return interactor.currentItems.first(where: {$0.type == type})?.previewItems?.count ?? 0
     }
 }

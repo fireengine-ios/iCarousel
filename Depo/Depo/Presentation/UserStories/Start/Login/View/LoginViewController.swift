@@ -78,6 +78,10 @@ class LoginViewController: ViewController, LoginViewInput, LoginDataSourceAction
         output.viewAppeared()
     }
     
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
+    
     func configurateView() {
         tableView.backgroundColor = UIColor.clear
         

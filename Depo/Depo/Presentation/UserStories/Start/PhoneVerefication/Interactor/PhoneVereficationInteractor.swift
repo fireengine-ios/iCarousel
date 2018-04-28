@@ -103,15 +103,26 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                 self?.output.succesLogin()
             }
         }, fail: { [weak self] errorResponse  in
+            guard let `self` = self else {
+                return
+            }
             
             let incorrectCredentioal = true
             if (incorrectCredentioal) {
-                self?.attempts += 1
+                self.attempts += 1
             }
-            
             DispatchQueue.main.async {
-                self?.output.failLogin(message: errorResponse.description)
+
+                if self.isRedirectToSplash(forResponse: errorResponse) {
+                    self.output.didRedirectToSplash()
+                } else {
+                    self.output.failLogin(message: errorResponse.description)
+                }
             }
         })
+    }
+    
+    private func isRedirectToSplash(forResponse errorResponse: ErrorResponse) -> Bool {
+        return errorResponse.description.contains("captcha_required")
     }
 }

@@ -6,36 +6,15 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
+class LBAlbumLikePreviewSliderRouter {
     
     let router = RouterVC()
     
-    func onItemSelected(_ item: SliderItem, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) {
-        guard let type = item.type else {
-            return
-        }
-        
-        switch type {
-        case .albums: goToAlbumListView()
-        case .story: goToStoryListView()
-        case .people: goToPeopleListView(moduleOutput)
-        case .things: goToThingListView()
-        case .places: goToPlaceListView()
-        case .album:
-            guard let albumItem = item.albumItem else {
-                break
-            }
-            goToAlbumDetailView(album: albumItem)
-        }
-    }
-
+    // MARK: - Utility methods
+    
     private func goToAlbumDetailView(album: AlbumItem) {
         let controller = router.albumDetailController(album: album, type: .List, moduleOutput: nil)
         router.pushViewControllertoTableViewNavBar(viewController: controller)
-    }
-    
-    func goToAlbumbsGreedView() {
-        router.pushViewControllertoTableViewNavBar(viewController: router.albumsListController())
     }
     
     private func goToAlbumListView() {
@@ -43,8 +22,8 @@ class LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
-    private func goToStoryListView() {
-        let controller = router.storiesListController()
+    private func goToStoryListView(_ moduleOutput: LBAlbumLikePreviewSliderModuleInput?) {
+        let controller = router.storiesListController(moduleOutput: moduleOutput)
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
@@ -53,14 +32,43 @@ class LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
-    private func goToThingListView() {
-        let controller = router.thingsListController()
+    private func goToThingListView(_ moduleOutput: LBAlbumLikePreviewSliderModuleInput?) {
+        let controller = router.thingsListController(moduleOutput: moduleOutput)
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
-    private func goToPlaceListView() {
-        let controller = router.placesListController()
+    private func goToPlaceListView(_ moduleOutput: LBAlbumLikePreviewSliderModuleInput?) {
+        let controller = router.placesListController(moduleOutput: moduleOutput)
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
+}
+
+// MARK: - LBAlbumLikePreviewSliderRouterInput
+
+extension LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
+    
+    func onItemSelected(_ item: SliderItem, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) {
+        guard let type = item.type else {
+            return
+        }
+        
+        switch type {
+        case .albums: goToAlbumListView()
+        case .story: goToStoryListView(moduleOutput)
+        case .people: goToPeopleListView(moduleOutput)
+        case .things: goToThingListView(moduleOutput)
+        case .places: goToPlaceListView(moduleOutput)
+        case .album:
+            guard let albumItem = item.albumItem else {
+                break
+            }
+            goToAlbumDetailView(album: albumItem)
+        }
+    }
+    
+    func goToAlbumbsGreedView() {
+        router.pushViewControllertoTableViewNavBar(viewController: router.albumsListController())
+    }
+
 }

@@ -116,18 +116,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             subTitle = output.getSortTypeString()
         }
         
-        let allVisibleCells = collectionView.indexPathsForVisibleItems
-        if !allVisibleCells.isEmpty {
-            collectionView.performBatchUpdates({
-                collectionView.reloadItems(at: allVisibleCells)
-            })
-        }
-        
         output.viewWillAppear()
     
         if let searchController = navigationController?.topViewController as? SearchViewController {
             searchController.dismissController(animated: false)
         }
+        
+        output.needToReloadVisibleCells()
     }
     
     override func viewDidAppear(_ animated: Bool) {

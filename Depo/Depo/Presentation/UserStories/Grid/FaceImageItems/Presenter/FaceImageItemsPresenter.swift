@@ -16,7 +16,11 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private var isChangeVisibilityMode: Bool = false
     
-    private var allItmes: [WrapData] = []
+    private var allItems = [WrapData]()
+    
+    private var updatedMyStream = false
+    
+    private var containsInvisibleItems = false
     
     override func viewIsReady(collectionView: UICollectionView) {        
         super.viewIsReady(collectionView: collectionView)
@@ -49,32 +53,27 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         if let interactor = interactor as? FaceImageItemsInteractorInput {
             interactor.changeCheckPhotosState(isCheckPhotos: false)
         }
-        allItmes = []
         
-        if let view = view as? FaceImageItemsViewInput {
-            view.updateShowHideButton(isShow: !items.isEmpty)
-        }
-        
-        items.forEach { item in
-            guard item.urlToFile != nil else { return }
-
-            if isChangeVisibilityMode {
-                allItmes.append(item)
-            } else if let peopleItem = item as? PeopleItem,
-                let isVisible = peopleItem.responseObject.visible {
-                if isVisible { allItmes.append(item) }
-            } else {
-                allItmes.append(item)
+        if faceImageType == .people && !isChangeVisibilityMode, let peopleItems = items as? [PeopleItem] {
+            allItems = peopleItems.filter { $0.urlToFile != nil && $0.responseObject.visible == true }
+            if !containsInvisibleItems && peopleItems.first(where: { $0.urlToFile != nil && $0.responseObject.visible == false }) != nil {
+                containsInvisibleItems = true
             }
+        } else {
+            allItems = items.filter { $0.urlToFile != nil }
         }
         
-        super.getContentWithSuccess(items: allItmes)
+        super.getContentWithSuccess(items: allItems)
         
-        albumSliderModuleOutput?.reload()
+        if allItems.isEmpty && !items.isEmpty {
+            dataSource.isPaginationDidEnd = false
+            dataSource.delegate?.getNextItems()
+        }
         
         dataSource.isHeaderless = true
         updateThreeDotsButton()
         updateUgglaViewIfNeed()
+        updateMyStreamSliderIfNeed()
     }
     
     override func getContentWithSuccessEnd() {
@@ -94,6 +93,11 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     override func filesAppendedAndSorted() {
         super.filesAppendedAndSorted()
         updateUgglaViewIfNeed()
+        
+        if let view = view as? FaceImageItemsViewInput {
+            let needShow = !dataSource.allMediaItems.isEmpty || (dataSource.allMediaItems.isEmpty && containsInvisibleItems)
+            view.updateShowHideButton(isShow: needShow)
+        }
     }
     
     override func getContentWithFail(errorString: String?) {
@@ -104,7 +108,11 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     override func onChangeSelectedItemsCount(selectedItemsCount: Int) { }
     
     override func needShowNoFileView() -> Bool {
-        return dataSource.allMediaItems.isEmpty
+        if isChangeVisibilityMode {
+            return dataSource.allMediaItems.isEmpty && !containsInvisibleItems
+        } else {
+            return dataSource.allMediaItems.isEmpty
+        }
     }
     
     private func updateUgglaViewIfNeed() {
@@ -156,6 +164,20 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
                                      needHideTopBar: interactor.needHideTopBar(),
                                      isShowUggla: hasUgglaLabel())
             }
+        } else {
+            view.hideNoFiles()
+        }
+    }
+    
+    func updateMyStreamSliderIfNeed() {
+        // update my stream slider after upload photos
+        if !updatedMyStream {
+            if let type = faceImageType?.myStreamType,
+                let count = albumSliderModuleOutput?.countThumbnailsFor(type: type),
+                count < NumericConstants.myStreamSliderThumbnailsCount, count != allItems.count  {
+                albumSliderModuleOutput?.reload(type: type)
+            }
+            updatedMyStream = true
         }
     }
 }

@@ -48,6 +48,10 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput,
         
         output.viewIsReady()
     }
+    
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
 
     private func configureUI() {
         welcomeLabel.text = TextConstants.termsAndUseWelcomeText

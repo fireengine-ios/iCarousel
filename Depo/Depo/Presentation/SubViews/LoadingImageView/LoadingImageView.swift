@@ -23,6 +23,7 @@ class LoadingImageView: UIImageView {
     let activity = UIActivityIndicatorView(activityIndicatorStyle: .white)
     var url: URL?
     var path: PathForItem?
+    private var downloadedGifImage: UIImage?
     private var filesDataSource = FilesDataSource()
     
     var cornerView: UIView?
@@ -158,9 +159,11 @@ class LoadingImageView: UIImageView {
 
             do {
                 let data = try Data(contentsOf: url)
-                let image = UIImage.sd_animatedGIF(with: data)
+                self?.downloadedGifImage = UIImage.sd_animatedGIF(with: data)
                 DispatchQueue.main.async { [weak self] in
-                    self?.image = image
+                    if let `self` = self{
+                        self.image = self.downloadedGifImage
+                    }
                 }
             } catch {
                 return
@@ -194,6 +197,13 @@ class LoadingImageView: UIImageView {
 //            let gif = UIImage.gifImageWithData(data: nsdata)
 //            self?.image = gif
 //        }
+    }
+    
+    func showDownloadedGif() {
+        image = nil
+        if let downloadedGifImage = downloadedGifImage {
+            image = downloadedGifImage
+        }
     }
     
     func setBorderVisibility(visibility: Bool) {
