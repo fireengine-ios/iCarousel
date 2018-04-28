@@ -37,6 +37,10 @@ class BaseView: UIView, NibInit {
         deleteCard()
     }
     
+    func viewWillShow() {
+        
+    }
+    
     func deleteCard() {
         
         if let object = cardObject, let type = object.getOperationType() {
