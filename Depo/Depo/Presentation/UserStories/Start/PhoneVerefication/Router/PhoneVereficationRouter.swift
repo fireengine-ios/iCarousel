@@ -25,8 +25,10 @@ class PhoneVereficationRouter: PhoneVereficationRouterInput {
     }
     
     func showRedirectToSplash() {
-        let popUp = PopUpController.with(title: nil, message: TextConstants.authificateCaptchaRequired, image: .none, buttonTitle: TextConstants.ok, action: { [weak self] vc in
-            self?.goToSplash()
+        let popUp = PopUpController.with(title: nil, message: TextConstants.authificateCaptchaRequired, image: .none, buttonTitle: TextConstants.ok, action: { vc in
+            vc.close(completion: { [weak self] in
+                self?.goToSplash()
+            })
         })
    
         RouterVC().presentViewController(controller: popUp)
