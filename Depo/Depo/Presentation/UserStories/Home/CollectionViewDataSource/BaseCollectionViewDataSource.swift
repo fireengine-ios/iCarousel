@@ -93,6 +93,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         baseCell.cellDelegate = self
         let popUpView = popUps[indexPath.row]
         baseCell.addViewOnCell(controllersView: popUpView, withShadow: true)
+        popUpView.viewWillShow()
         return baseCell
     }
     
