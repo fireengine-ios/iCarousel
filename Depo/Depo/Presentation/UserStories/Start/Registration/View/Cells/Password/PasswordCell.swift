@@ -15,18 +15,34 @@ final class PasswordCell: ProtoInputTextCell {
         case reEnter
     }
     
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var showBtn: UIButton!
     @IBOutlet private weak var infoImage: UIImageView!
     @IBOutlet private weak var infoButton: UIButton!
+    
+    @IBOutlet private weak var titleLabel: UILabel! {
+        didSet {
+            titleLabel.textColor = ColorConstants.whiteColor
+        }
+    }
+    
+    @IBOutlet private weak var showBtn: UIButton! {
+        didSet {
+            showBtn.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            showBtn.setTitle(TextConstants.showPassword, for: .normal)
+        }
+    }
+    
     @IBOutlet weak var textInput: UITextField! {
-        didSet { inputTextField = textInput }
+        didSet {
+            inputTextField = textInput
+            textInput.delegate = self
+            textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
+        }
     }
     
     private var isSecureTextFieldAndMessage: Bool = true {
         willSet {
-            let title = newValue ? TextConstants.showPassword : TextConstants.hidePassword
-            showBtn.setTitle(title, for: .normal)
+            let showBtnTitle = newValue ? TextConstants.showPassword : TextConstants.hidePassword
+            showBtn.setTitle(showBtnTitle, for: .normal)
             
             /// https://stackoverflow.com/a/35295940/5893286
             textInput.isSecureTextEntry = newValue
@@ -41,9 +57,6 @@ final class PasswordCell: ProtoInputTextCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        textInput.delegate = self
-        textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
-        titleLabel.textColor = ColorConstants.whiteColor
         backgroundColor = UIColor.clear
         changeInfoButtonTo(hidden: true)
     }
