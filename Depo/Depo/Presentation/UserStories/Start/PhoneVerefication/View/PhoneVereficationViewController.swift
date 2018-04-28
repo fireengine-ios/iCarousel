@@ -41,6 +41,10 @@ class PhoneVereficationViewController: ViewController, PhoneVereficationViewInpu
         hidenNavigationBarStyle()
     }
     
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
+    
     @IBAction func ResendCode(_ sender: Any) {
         output.resendButtonPressed()
     }

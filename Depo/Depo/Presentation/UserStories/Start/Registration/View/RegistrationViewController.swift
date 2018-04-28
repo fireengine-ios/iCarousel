@@ -109,6 +109,10 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
                                                object: nil)
     }
     
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
+    
     func showErrorTitle(withText: String) {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 3

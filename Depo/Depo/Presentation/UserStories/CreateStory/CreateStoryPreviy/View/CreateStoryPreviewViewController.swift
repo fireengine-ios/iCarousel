@@ -59,6 +59,10 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
         output.viewIsReady()
     }
     
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .black
+    }
+    
     @IBAction func onPlayButton() {
         playVideoByURLString(urlSting: previewURLString)
     }
