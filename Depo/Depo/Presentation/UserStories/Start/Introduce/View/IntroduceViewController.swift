@@ -37,6 +37,9 @@ class IntroduceViewController: ViewController, IntroduceViewInput {
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
 
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
 
     // MARK: IntroduceViewInput
     func setupInitialState(models: [IntroduceModel]) {

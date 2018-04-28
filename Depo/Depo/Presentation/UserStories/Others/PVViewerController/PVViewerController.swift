@@ -46,6 +46,10 @@ final class PVViewerController: BaseViewController, NibInit {
         imageScrollView.updateZoom()
     }
     
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .black
+    }
+    
     override func getBacgroundColor() -> UIColor {
         return UIColor.black
     }

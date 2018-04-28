@@ -81,6 +81,10 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
             output.save(settings: settings)
         }
     }
+    
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
 
     // MARK: buttons actions
     

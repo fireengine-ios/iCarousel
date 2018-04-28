@@ -30,6 +30,10 @@ class ViewController: UIViewController {
         return statusBarStyle
     }
     
+    var preferredNavigationBarStyle: NavigationBarStyle {
+        return .gradient
+    }
+    
     func setStatusBarHiddenForLandscapeIfNeed(_ hidden: Bool) {
         if !Device.isIpad, UIDevice.current.orientation.isContained(in: [.landscapeLeft, .landscapeRight]) {
             statusBarHidden = true

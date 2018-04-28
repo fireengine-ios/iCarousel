@@ -155,6 +155,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
     }
     
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .black
+    }
+    
     func hideView() {
         customDeinit()
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)

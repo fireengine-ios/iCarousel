@@ -71,6 +71,10 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput, UIT
 
     }
     
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         endEditing()
     }
