@@ -194,6 +194,7 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
             view.hideUgglaView()
         }
         
+        albumSliderModuleOutput?.reload(type: .people)
         reloadData()
     }
     
