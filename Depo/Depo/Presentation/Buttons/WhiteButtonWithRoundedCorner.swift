@@ -32,10 +32,17 @@ class WhiteButtonWithRoundedCorner: UIButton {
         titleLabel?.font = ApplicationPalette.bigRoundButtonFont
         layer.masksToBounds = true
         setCornerRadius()
+        
+        titleLabel?.numberOfLines = 1
+        titleLabel?.adjustsFontSizeToFitWidth = true
+        titleLabel?.lineBreakMode = .byClipping
     }
     
     func setCornerRadius() {
-        layer.cornerRadius = frame.size.height * 0.5
+        layer.cornerRadius = frame.height * 0.5
+        
+        let inset = frame.height * 0.3
+        titleEdgeInsets.left = inset
+        titleEdgeInsets.right = inset
     }
-    
 }
