@@ -52,7 +52,23 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
         dataSource.setup(table: tableView)
         dataSource.delegate = self
         
+        setupTapHandler()
+        
         output.viewIsReady()
+    }
+    
+    private func setupTapHandler() {
+        let tapHandler = UITapGestureRecognizer(target: self, action: #selector(handle(tap:)))
+        tapHandler.numberOfTapsRequired = 1
+        tapHandler.numberOfTouchesRequired = 1
+        view.addGestureRecognizer(tapHandler)
+    }
+    
+    @objc private func handle(tap: UITapGestureRecognizer) {
+        let location = tap.location(in: tableView)
+        if tableView.indexPathForRow(at: location) == nil {
+            dataSource.collapseSettings()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

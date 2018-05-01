@@ -137,6 +137,13 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
             self.tableView?.reloadData()
         }
     }
+    
+    func collapseSettings() {
+        let modelsToUnselect = cellModels.filter { $0.key != .headerSlider }
+        modelsToUnselect.forEach{ $0.value.isSelected = false }
+        
+        reloadTableView()
+    }
 
 }
 
