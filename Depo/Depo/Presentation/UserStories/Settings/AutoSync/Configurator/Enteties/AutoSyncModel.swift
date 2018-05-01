@@ -8,19 +8,29 @@
 
 import UIKit
 
-enum AutoSyncCellType {
-    case headerLike//same as switcher but larger
-    case typeSwitcher
+
+enum AutoSyncSettingsRowType: Int {
+    case headerSlider
+    case photoSetting
+    case videoSetting
 }
+
 
 class AutoSyncModel {
     let titleString: String
     let subTitleString: String
-    let cellType: AutoSyncCellType
+    let cellType: AutoSyncSettingsRowType
     var syncSetting: AutoSyncSetting?
     var isSelected: Bool
+    var height: CGFloat {
+        if cellType != .headerSlider {
+            return isSelected ? 228 : 68
+        }
+        return 44
+    }
     
-    init(title: String, subTitle: String, type: AutoSyncCellType, setting: AutoSyncSetting?, selected: Bool) {
+    
+    init(title: String, subTitle: String, type: AutoSyncSettingsRowType, setting: AutoSyncSetting?, selected: Bool) {
         titleString = title
         subTitleString = subTitle
         cellType = type

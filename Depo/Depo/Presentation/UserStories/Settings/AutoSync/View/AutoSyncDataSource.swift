@@ -15,14 +15,12 @@ protocol AutoSyncDataSourceDelegate: class {
 
 
 class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
-
-    private let estimatedRowHeight: CGFloat = 260.0
     
     @IBOutlet weak var tableView: UITableView?
     
     var isFromSettings: Bool = false
     
-    var tableDataArray = [AutoSyncModel]()
+    private var cellModels = [AutoSyncSettingsRowType: AutoSyncModel]()
     
     private var autoSyncSettings: AutoSyncSettings?
     
@@ -33,8 +31,6 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.backgroundColor = UIColor.clear
-        tableView?.rowHeight = UITableViewAutomaticDimension
-        tableView?.estimatedRowHeight = estimatedRowHeight
         tableView?.separatorStyle = .none
         
         registerCells(with: [CellsIdConstants.autoSyncSwitcherCellID,
@@ -58,15 +54,19 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        tableDataArray.removeAll()
+        cellModels.removeAll()
         setupCells(with: settings)
     }
     
     private func setupCells(with settings: AutoSyncSettings) {
-        let headerModel = AutoSyncModel(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerLike, setting: settings.photoSetting, selected: settings.isAutoSyncOptionEnabled)
-        let photoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.photoSetting, selected: false)
-        let videoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .typeSwitcher, setting: settings.videoSetting, selected: false)
-        tableDataArray.append(contentsOf: [headerModel, photoSettingModel, videoSettingModel])
+        let headerModel = AutoSyncModel(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerSlider, setting: settings.photoSetting, selected: settings.isAutoSyncOptionEnabled)
+        let photoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .photoSetting, setting: settings.photoSetting, selected: false)
+        let videoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .videoSetting, setting: settings.videoSetting, selected: false)
+        
+        cellModels = [.headerSlider : headerModel,
+                      .photoSetting : photoSettingModel,
+                      .videoSetting : videoSettingModel]
+        
         reloadTableView()
     }
     
@@ -82,6 +82,7 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
         updateCells()
     }
     
+    
     // MARK: UITableView delegate
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -89,20 +90,27 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //FIXME: make it more bandable
-        if let model = tableDataArray.first, model.cellType == .headerLike, model.isSelected == false {
-            return 1
+        if let shouldShowAllSettings = cellModels[.headerSlider]?.isSelected, shouldShowAllSettings {
+            return cellModels.count
         }
-        return tableDataArray.count
+        
+        return 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        guard let cellType = AutoSyncSettingsRowType(rawValue: indexPath.row), let model = cellModels[cellType] else {
+            return UITableViewAutomaticDimension
+        }
+        
+        return model.height
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = tableDataArray[indexPath.row]//TODO: ework enum or change it to SWITCH - case
-        if model.cellType == .headerLike {
+        guard let rowType = AutoSyncSettingsRowType(rawValue: indexPath.row), let model = cellModels[rowType] else {
+            return UITableViewCell()
+        }
+        
+        if model.cellType == .headerSlider {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncSwitcherCellID, for: indexPath)
             cell.selectionStyle = .none
             let autoSyncCell = cell as! AutoSyncSwitcherTableViewCell
@@ -116,9 +124,7 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncSettingsCellID, for: indexPath)
             cell.selectionStyle = .none
             let autoSyncCell = cell as! AutoSyncSettingsTableViewCell
-            if let syncSetting = model.syncSetting {
-                autoSyncCell.setup(with: syncSetting)
-            }
+            autoSyncCell.setup(with: model)
             autoSyncCell.setColors(isFromSettings: isFromSettings)
             autoSyncCell.delegate = self
             return autoSyncCell
@@ -135,15 +141,11 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
 }
 
 extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
-    func onValueChanged(model: AutoSyncModel, cell: AutoSyncSwitcherTableViewCell) {
-        guard let indexPath = tableView?.indexPath(for: cell) else {
-            return
-        }
-        
-        tableDataArray[indexPath.row] = model
+    func onValueChanged(model: AutoSyncModel) {
+        cellModels[model.cellType] = model
 
-        if model.cellType == .headerLike {
-            if cell.switcher.isOn {
+        if model.cellType == .headerSlider {
+            if model.isSelected {
                 autoSyncSettings?.isAutoSyncOptionEnabled = true
                 delegate?.enableAutoSync()
             } else {
@@ -163,10 +165,12 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
         }
     }
     
-    func didChangeHeight() {
-        UIView.performWithoutAnimation {
-            tableView?.beginUpdates()
-            tableView?.endUpdates()
+    func shouldChangeHeight(toExpanded: Bool, cellType: AutoSyncSettingsRowType) {
+        if toExpanded {
+            let modelsToUnselect = cellModels.filter { !$0.key.isContained(in: [cellType, .headerSlider]) }
+            modelsToUnselect.forEach{ $0.value.isSelected = false }
         }
+
+        reloadTableView()
     }
 }
