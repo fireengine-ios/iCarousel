@@ -68,11 +68,19 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
         }
         
         showSpiner()
+        
+        /// to test popup sucess close without email update
+        /// also comment "authService.updateEmail..."
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+//            self?.hideSpiner()
+//            self?.showEmailConfirmation(for: email)
+//        }
+        
         authService.updateEmail(emailUpdateParameters: EmailUpdate(mail: email),
             sucess: { [weak self] response in
                 DispatchQueue.main.async {
                     self?.hideSpiner()
-                    self?.closeAnimated()
+                    self?.showEmailConfirmation(for: email)
                 }
             }, fail: { [weak self] error in
                 DispatchQueue.main.async {
@@ -80,5 +88,21 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
                     self?.hideSpiner()
                 }
         })
+    }
+    
+    private func showEmailConfirmation(for email: String) {
+        let message = String(format: TextConstants.registrationEmailPopupMessage, email)
+        
+        let controller = PopUpController.with(
+            title: TextConstants.registrationEmailPopupTitle,
+            message: message,
+            image: .error,
+            buttonTitle: TextConstants.ok,
+            action: { [weak self] vc in
+                vc.close { [weak self] in
+                    self?.closeAnimated()
+                }
+        })
+        present(controller, animated: true, completion: nil)
     }
 }

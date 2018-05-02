@@ -603,9 +603,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             self.dispatchQueue.async {
                 let failCompletion = {
+                    print("VIDEO_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
                     assetInfo.isValid = false
                     semaphore.signal()
-                    return
                 }
                 
                 guard let dict = dict else {
@@ -614,19 +614,21 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     return
                 }
                 
-                if let isDegraded = dict[PHImageResultIsDegradedKey] as? Bool, isDegraded  {
-                    semaphore.signal()
-                    return
-                }
-                
-                if let inCloud = dict[PHImageResultIsInCloudKey] as? Bool, inCloud {
-                    print("LOCAL_ITEMS: \(asset.localIdentifier) is in iCloud")
-                    failCompletion()
-                }
-                
                 if let error = dict[PHImageErrorKey] as? NSError {
                     print(error.localizedDescription)
                     failCompletion()
+                    return
+                }
+                
+                ///it seems that PHImageResultIsInCloudKey says nothing about local video availability
+//                if let inCloud = dict[PHImageResultIsInCloudKey] as? NSNumber, inCloud.boolValue {
+//                    failCompletion()
+//                    return
+//                }
+                
+                if let isDegraded = dict[PHImageResultIsDegradedKey] as? NSNumber, isDegraded.boolValue  {
+                    semaphore.signal()
+                    return
                 }
                 
                 if let urlToFile = (avAsset as? AVURLAsset)?.url {
@@ -643,9 +645,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                         semaphore.signal()
                     } catch {
                         failCompletion()
+                        return
                     }
                 } else {
                     failCompletion()
+                    return
                 }
             }
             
@@ -665,6 +669,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let operation = GetCompactImageOperation(photoManager: self.photoManger, asset: asset) { data, string, orientation, dict in
             self.dispatchQueue.async {
                 let failCompletion = {
+                    print("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
                     assetInfo.isValid = false
                     semaphore.signal()
                     return
@@ -676,19 +681,21 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     return
                 }
                 
-                if let isDegraded = dict[PHImageResultIsDegradedKey] as? Bool, isDegraded  {
-                    semaphore.signal()
-                    return
-                }
                 
                 if let error = dict[PHImageErrorKey] as? NSError {
                     print(error.localizedDescription)
                     failCompletion()
+                    return
                 }
                 
-                if let inCloud = dict[PHImageResultIsInCloudKey] as? Bool, inCloud {
-                    print("LOCAL_ITEMS: \(asset.localIdentifier) is in iCloud")
+                if let inCloud = dict[PHImageResultIsInCloudKey] as? NSNumber, inCloud.boolValue {
                     failCompletion()
+                    return
+                }
+                
+                if let isDegraded = dict[PHImageResultIsDegradedKey] as? NSNumber, isDegraded.boolValue  {
+                    semaphore.signal()
+                    return
                 }
                 
                 if let dataValue = data {
@@ -702,6 +709,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     semaphore.signal()
                 } else {
                     failCompletion()
+                    return
                 }
             }
         }
@@ -720,9 +728,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             self.dispatchQueue.async {
                 let failCompletion = {
+                    print("VIDEO_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
                     assetInfo.isValid = false
                     semaphore.signal()
-                    return
                 }
                 
                 guard let dict = dict else {
@@ -731,18 +739,19 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     return
                 }
                 
-                if let isDegraded = dict[PHImageResultIsDegradedKey] as? Bool, isDegraded  {
-                    return
-                }
-                
-                if let inCloud = dict[PHImageResultIsInCloudKey] as? Bool, inCloud {
-                    print("LOCAL_ITEMS: \(asset.localIdentifier) is in iCloud")
-                    failCompletion()
-                }
-                
                 if let error = dict[PHImageErrorKey] as? NSError {
                     print(error.localizedDescription)
                     failCompletion()
+                    return
+                }
+                
+//                if let inCloud = dict[PHImageResultIsInCloudKey] as? NSNumber, inCloud.boolValue {
+//                    failCompletion()
+//                    return
+//                }
+                
+                if let isDegraded = dict[PHImageResultIsDegradedKey] as? NSNumber, isDegraded.boolValue  {
+                    return
                 }
                 
                 if let urlToFile = (avAsset as? AVURLAsset)?.url {
@@ -759,9 +768,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                         semaphore.signal()
                     } catch {
                         failCompletion()
+                        return
                     }
                 } else {
                     failCompletion()
+                    return
                 }
             }
             
@@ -781,6 +792,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let operation = GetOriginalImageOperation(photoManager: self.photoManger, asset: asset) { data, string, orientation, dict in
             self.dispatchQueue.async {
                 let failCompletion = {
+                    print("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
                     assetInfo.isValid = false
                     semaphore.signal()
                     return
@@ -792,18 +804,20 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     return
                 }
                 
-                if let isDegraded = dict[PHImageResultIsDegradedKey] as? Bool, isDegraded  {
-                    return
-                }
                 
                 if let error = dict[PHImageErrorKey] as? NSError {
                     print(error.localizedDescription)
                     failCompletion()
+                    return
                 }
                 
-                if let inCloud = dict[PHImageResultIsInCloudKey] as? Bool, inCloud {
-                    print("LOCAL_ITEMS: \(asset.localIdentifier) is in iCloud")
+                if let inCloud = dict[PHImageResultIsInCloudKey] as? NSNumber, inCloud.boolValue {
                     failCompletion()
+                    return
+                }
+                
+                if let isDegraded = dict[PHImageResultIsDegradedKey] as? NSNumber, isDegraded.boolValue  {
+                    return
                 }
                 
                 if let dataValue = data {
@@ -817,6 +831,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     semaphore.signal()
                 } else {
                     failCompletion()
+                    return
                 }
             }
         }

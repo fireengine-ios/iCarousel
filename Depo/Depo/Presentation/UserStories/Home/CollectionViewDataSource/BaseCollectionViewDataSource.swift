@@ -52,6 +52,8 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
         if (isPopUpCell(path: indexPath)) {
             let popUpView = popUps[indexPath.row]
+            popUpView.frame.size = CGSize(width: withWidth, height: popUpView.frame.size.height)
+            popUpView.layoutIfNeeded()
             return popUpView.calculatedH
         }
         return 40
@@ -93,6 +95,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         baseCell.cellDelegate = self
         let popUpView = popUps[indexPath.row]
         baseCell.addViewOnCell(controllersView: popUpView, withShadow: true)
+        popUpView.viewWillShow()
         return baseCell
     }
     
@@ -175,7 +178,6 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 if let view = viewsByType[type], CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
                     view.removeFromSuperview()
                     view.set(object: object)
-                    view.layoutIfNeeded()
                     newPopUps.append(view)
                     if let index = popUps.index(of: view){
                         popUps.remove(at: index)
@@ -189,7 +191,6 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                     }
                     if !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
                         let view = getViewForOperation(operation: type)
-                        view.layoutIfNeeded()
                         newPopUps.insert(view, at: 0)
                         viewsByType[type] = view
                     }

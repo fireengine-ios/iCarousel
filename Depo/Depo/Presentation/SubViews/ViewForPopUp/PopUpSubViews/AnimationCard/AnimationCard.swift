@@ -50,6 +50,10 @@ class AnimationCard: BaseView {
         }
     }
     
+    override func viewWillShow() {
+        photoImageView.showDownloadedGif()
+    }
+    
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
         
@@ -92,6 +96,16 @@ class AnimationCard: BaseView {
             saveImage()
         case .display:
             showPhotoVideoDetail()
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let bottomSpace : CGFloat = 0.0
+        let h = bottomButton.frame.origin.y + bottomButton.frame.size.height + bottomSpace
+        if calculatedH != h{
+            calculatedH = h
+            layoutIfNeeded()
         }
     }
     

@@ -11,18 +11,18 @@ import UIKit
 
 protocol AutoSyncSettingsTableViewCellDelegate: class {
     func didChange(setting: AutoSyncSetting)
-    func didChangeHeight()
+    func shouldChangeHeight(toExpanded: Bool, cellType: AutoSyncSettingsRowType)
 }
 
 
 final class AutoSyncSettingsTableViewCell: UITableViewCell {
     weak var delegate: AutoSyncSettingsTableViewCellDelegate?
     
-    @IBOutlet weak var expandHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet private weak var optionsStackView: UIStackView!
     @IBOutlet private weak var dropDownArrow: UIImageView!
-    @IBOutlet private weak var optionLabel: UILabel!
+    @IBOutlet private weak var optionLabel: UILabel! {
+        didSet { optionLabel.font = UIFont.TurkcellSaturaRegFont(size: 18.0) }
+    }
     @IBOutlet private weak var expandButton: UIButton!
     @IBOutlet private var optionsViews: [AutoSyncSettingsOptionView]!
     
@@ -30,18 +30,12 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
     @IBOutlet private weak var cellSeparator: UIView!
     
     
-    private var isFullHeight: Bool = false {
-        didSet {
-            if isFullHeight != oldValue {
-                updateViews()
-                delegate?.didChangeHeight()
-            }
-        }
-    }
+    private var autoSyncModel: AutoSyncModel?
     
     private var autoSyncSetting = AutoSyncSetting(syncItemType: .photo, option: .wifiOnly) {
         didSet {
             if autoSyncSetting != oldValue {
+                autoSyncModel?.syncSetting = autoSyncSetting
                 updateViews()
                 delegate?.didChange(setting: autoSyncSetting)
             }
@@ -49,11 +43,6 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
     }
     
     private let options: [AutoSyncOption] = [.never, .wifiOnly, .wifiAndCellular]
-    
-    
-    private var expandHeight: CGFloat {
-        return isFullHeight ? 167.5 : 0.0
-    }
     
     
     override func awakeFromNib() {
@@ -68,18 +57,22 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
     
     // MARK: - Public
     
-    override func prepareForReuse() {
-        isFullHeight = false
-    }
-    
-    func setup(with setting: AutoSyncSetting) {
-        autoSyncSetting = setting
+    func setup(with model: AutoSyncModel) {
+        autoSyncModel = model
+        if let setting = model.syncSetting {
+            autoSyncSetting = setting
+        }
+        
+        updateViews()
     }
     
     func setColors(isFromSettings: Bool) {
         let textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         optionLabel.textColor = textColor
+        cellSeparator.backgroundColor = textColor
+        dropDownArrow.tintColor = textColor
         expandButton.setTitleColor(textColor, for: .normal)
+        
         for view in optionsViews {
             view.setColors(isFromSettings: isFromSettings)
         }
@@ -87,31 +80,32 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
         for separator in optionSeparators {
             separator.backgroundColor = isFromSettings ? ColorConstants.lightGrayColor : ColorConstants.whiteColor
         }
-        
-        cellSeparator.backgroundColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
-        
-        dropDownArrow.tintColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
     }
     
     
     // MARK: - Private
 
     @IBAction func changeHeight(_ sender: Any) {
-        isFullHeight = !isFullHeight
+        guard let model = autoSyncModel else {
+            return
+        }
+        
+        model.isSelected = !model.isSelected
+        delegate?.shouldChangeHeight(toExpanded: model.isSelected, cellType: model.cellType)
+        updateViews()
     }
     
     private func updateViews() {
+        let isSelected = autoSyncModel?.isSelected ?? false
+        
         for (option, view) in zip(options, optionsViews) {
             view.setup(with: option, isSelected: autoSyncSetting.option == option)
             view.delegate = self
         }
         expandButton.setTitle(autoSyncSetting.syncItemType.localizedText, for: .normal)
-        optionLabel.text = isFullHeight ? TextConstants.autoSyncSettingsSelect : autoSyncSetting.option.localizedText
-        optionsStackView.isHidden = !isFullHeight
-        expandHeightConstraint.constant = expandHeight
+        optionLabel.text = isSelected ? TextConstants.autoSyncSettingsSelect : autoSyncSetting.option.localizedText
+        optionsStackView.isHidden = !isSelected
     }
-    
-    
 }
 
 
