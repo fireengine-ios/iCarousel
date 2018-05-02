@@ -120,7 +120,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func onReloadData() {
         log.debug("BaseFilesGreedPresenter onReloadData")
         
+        
 //        dataSource.dropData()
+        view?.setThreeDotsMenu(active: false)
         reloadData()
     }
     
@@ -211,6 +213,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 //        asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
+        updateThreeDotsButton()
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 return
@@ -233,6 +236,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if (view == nil) {
             return
         }
+        
+        updateThreeDotsButton()
 //        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
