@@ -98,8 +98,8 @@ extension AuthorizationRepositoryImp: RequestRetrier {
             log.debug("401 for \(url)")
         } else {
             log.debug("request.request?.url?.absoluteString is nil")
-            log.debug(request)
         }
+        log.debug(request)
         #endif
         
         /// save request
@@ -155,6 +155,8 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                 if response.response?.statusCode == 401 {
                     #if MAIN_APP
                     log.debug("failed refreshAccessToken")
+                    log.debug(self?.tokenStorage.refreshToken ?? "nil")
+                    log.debug(response)
                     #endif
                     strongSelf.refreshFailedHandler()
                     completion(false, nil)
@@ -164,7 +166,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                     let accessToken = headers[strongSelf.accessTokenKey] as? String {
                     completion(true, accessToken)
                     
-                /// retry refreshTokens request
+                /// retry refreshTokens request only for bad internet
                 } else if strongSelf.refreshAttempts < strongSelf.maxRefreshAttempts {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 5) { 
                         strongSelf.refreshAttempts += 1
