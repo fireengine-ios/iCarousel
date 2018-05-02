@@ -1,14 +1,14 @@
 //
-//  InsetsLabel.swift
+//  InsetsButton.swift
 //  Depo_LifeTech
 //
-//  Created by Bondar Yaroslav on 11/17/17.
-//  Copyright © 2017 LifeTech. All rights reserved.
+//  Created by Bondar Yaroslav on 4/28/18.
+//  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-import UIKit
+import UIKit.UIButton
 
-class InsetsLabel: UILabel {
+class InsetsButton: UIButton {
     
     var insets: UIEdgeInsets = .zero {
         didSet {
@@ -32,9 +32,14 @@ class InsetsLabel: UILabel {
         }
     }
     
-    override func drawText(in rect: CGRect) {
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+    override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
+        return super.titleRect(forContentRect: UIEdgeInsetsInsetRect(contentRect, insets))
     }
+    
+    /// can be used
+    //override func draw(_ rect: CGRect) {
+    //    super.draw(UIEdgeInsetsInsetRect(rect, insets))
+    //}
     
     override var intrinsicContentSize: CGSize {
         var size = super.intrinsicContentSize

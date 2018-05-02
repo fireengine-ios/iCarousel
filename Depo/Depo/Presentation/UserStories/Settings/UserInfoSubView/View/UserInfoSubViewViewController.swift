@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol UserInfoSubViewViewControllerActionsDelegate: class {
     func changePhotoPressed()
@@ -66,6 +67,9 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         userIconImageView.layer.masksToBounds = true
         
         editButton.isHidden = true
+        
+        userIconImageView.sd_setShowActivityIndicatorView(true)
+        userIconImageView.sd_setIndicatorStyle(.gray)
     }
         
     func reloadUserInfo() {
@@ -75,6 +79,7 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     func updatePhoto(image: UIImage) {
         userIconImageView.image = image
         dismissLoadingSpinner()
+        uplaodLabel.isHidden = true
     }
     
     func showLoadingSpinner() {
@@ -103,8 +108,11 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         
         userEmailLabel.text = userInfo.email
         userPhoneNumber.text = userInfo.phoneNumber
+        
         if let url = userInfo.urlForPhoto {
-            userIconImageView.loadImageByURL(url: url)
+            userIconImageView.sd_setImage(with: url) { [weak self] _, _, _, _ in
+                self?.uplaodLabel.isHidden = true
+            }
         }
     }
     

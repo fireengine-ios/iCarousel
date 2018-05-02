@@ -3220,6 +3220,8 @@
 		CEB27350205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734F205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift */; };
 		CEB76EB01FE9094700B679EB /* UIScrollView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB76EAF1FE9094600B679EB /* UIScrollView+Refresh.swift */; };
 		CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB996CE1F0770470074E264 /* RequestsKey.swift */; };
+		CEBAB15B2094803C002824C6 /* InsetsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBAB15A2094803C002824C6 /* InsetsButton.swift */; };
+		CEBAB15C2094806C002824C6 /* InsetsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBAB15A2094803C002824C6 /* InsetsButton.swift */; };
 		CEBB2DD61F76550A00D725F0 /* String+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9A5FA1F23308800ED8610 /* String+Int.swift */; };
 		CEBB2DD81F7678DA00D725F0 /* Int64+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBB2DD71F7678DA00D725F0 /* Int64+Bytes.swift */; };
 		CEBBDE071F01E69B00CDF527 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
@@ -5382,6 +5384,7 @@
 		CEBAB15720945C58002824C6 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
 		CEBAB15820945C66002824C6 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
 		CEBAB15920945C85002824C6 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
+		CEBAB15A2094803C002824C6 /* InsetsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetsButton.swift; sourceTree = "<group>"; };
 		CEBB2DD71F7678DA00D725F0 /* Int64+Bytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Bytes.swift"; sourceTree = "<group>"; };
 		CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TurkcellSaturaBol.ttf; sourceTree = "<group>"; };
 		CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TurkcellSaturaBolIta.ttf; sourceTree = "<group>"; };
@@ -7285,6 +7288,7 @@
 				CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */,
 				CE6BD9CB1FBEF8D5008FA8A1 /* InsetsLabel.swift */,
 				CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */,
+				CEBAB15A2094803C002824C6 /* InsetsButton.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -14075,6 +14079,7 @@
 				8C0E8D8A1FDEBDFF00789C91 /* BasicCustomNavBarViewController.swift in Sources */,
 				8C0E8D8C1FDEBDFF00789C91 /* WrapperedItems.swift in Sources */,
 				CEF371AA20887848007AD36E /* BackButton.swift in Sources */,
+				CEBAB15C2094806C002824C6 /* InsetsButton.swift in Sources */,
 				8C0E8D8D1FDEBDFF00789C91 /* SearchService.swift in Sources */,
 				8C0E8D901FDEBDFF00789C91 /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
 				8CD84C461FDEC5E7005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
@@ -15714,6 +15719,7 @@
 				7CA4A171207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift in Sources */,
 				3027A2E14F67F63A1600AE42 /* FileInfoViewController.swift in Sources */,
 				9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */,
+				CEBAB15B2094803C002824C6 /* InsetsButton.swift in Sources */,
 				8C6EF8801F348B5C002AC795 /* BottomSelectionTabBarRouterInput.swift in Sources */,
 				BA527EDC7876722B487A0428 /* FileInfoPresenter.swift in Sources */,
 				5ED1673DE08513D8CA5485E3 /* FileInfoInteractorInput.swift in Sources */,

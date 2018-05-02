@@ -102,9 +102,9 @@ final class PopUpController: ViewController {
         }
     }
     
-    @IBOutlet private weak var firstButton: UIButton!
-    @IBOutlet private weak var secondButton: UIButton!
-    @IBOutlet private weak var singleButton: UIButton!
+    @IBOutlet private weak var firstButton: InsetsButton!
+    @IBOutlet private weak var secondButton: InsetsButton!
+    @IBOutlet private weak var singleButton: InsetsButton!
     
     @IBOutlet private weak var darkView: UIView!
     @IBOutlet weak var firstImageView: UIImageView!
@@ -194,7 +194,7 @@ final class PopUpController: ViewController {
         }
     }
     
-    private func setup(_ button: UIButton) {
+    private func setup(_ button: InsetsButton) {
         button.isExclusiveTouch = true
         button.setTitleColor(ColorConstants.blueColor, for: .normal)
         button.setTitleColor(ColorConstants.blueColor.darker(by: 30), for: .highlighted)
@@ -202,6 +202,13 @@ final class PopUpController: ViewController {
         button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
         button.layer.borderColor = ColorConstants.blueColor.cgColor
         button.layer.borderWidth = 1
+        
+        button.titleLabel?.numberOfLines = 1
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.lineBreakMode = .byClipping
+        
+        let inset: CGFloat = 2
+        button.insets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
     
     // MARK: - Animation
