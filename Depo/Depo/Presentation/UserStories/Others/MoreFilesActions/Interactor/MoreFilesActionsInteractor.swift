@@ -17,6 +17,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private var fileService = WrapItemFileService()
     private let photosAlbumService = PhotosAlbumService()
     private let albumService = PhotosAlbumService()
+    private let peopleService = PeopleService()
+    private let thingsService = ThingsService()
+    private let placesService = PlacesService()
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
@@ -391,10 +394,18 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func download(item: [BaseDataSourceItem]) {
-        if let item = item as? [Item] { //FIXME: transform all to BaseDataSourceItem
-            fileService.download(items: item, toPath: "",
-                                 success: succesAction(elementType: .download),
-                                 fail: failAction(elementType: .download))
+        if let item = item as? [Item] {
+            //FIXME: transform all to BaseDataSourceItem
+            if let item = item.first,
+                item.fileType == .faceImage(.people) ||
+                item.fileType == .faceImage(.things) ||
+                item.fileType == .faceImage(.places) {
+                downloadFaceImageAlbum(item: item)
+            } else {
+                fileService.download(items: item, toPath: "",
+                                     success: succesAction(elementType: .download),
+                                     fail: failAction(elementType: .download))
+            }
         } else if let albums = item as? [AlbumItem] {
             
             photosAlbumService.loadItemsBy(albums: albums, success: {[weak self] itemsByAlbums in
@@ -574,6 +585,48 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let operations = fileService.syncItemsIfNeeded(items, success: successClosure, fail: failClosure)
         if operations != nil {
             output?.startCancelableAsync(cancel: cancel)
+        }
+    }
+    
+    private func downloadFaceImageAlbum(item: Item) {
+        if item.fileType == .faceImage(.people),
+            let id = item.id {
+            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] album in
+                let albumItem = AlbumItem(remote: album)
+                self?.photosAlbumService.loadItemsBy(albums: [albumItem], success: {[weak self] itemsByAlbums in
+                    self?.fileService.download(itemsByAlbums: itemsByAlbums,
+                                               success: self?.succesAction(elementType: .download),
+                                               fail: self?.failAction(elementType: .download))
+                })
+                }, fail: { fail in
+                    UIApplication.showErrorAlert(message: fail.description)
+            })
+        } else if item.fileType == .faceImage(.things),
+            let id = item.id {
+            thingsService.getThingsAlbum(id: Int(id), success: { [weak self] album in
+                let albumItem = AlbumItem(remote: album)
+                
+                self?.photosAlbumService.loadItemsBy(albums: [albumItem], success: {[weak self] itemsByAlbums in
+                    self?.fileService.download(itemsByAlbums: itemsByAlbums,
+                                               success: self?.succesAction(elementType: .download),
+                                               fail: self?.failAction(elementType: .download))
+                })
+                }, fail: { fail in
+                    UIApplication.showErrorAlert(message: fail.description)
+            })
+        } else if item.fileType == .faceImage(.places),
+            let id = item.id {
+            placesService.getPlacesAlbum(id: Int(id), success: { [ weak self] album in
+                let albumItem = AlbumItem(remote: album)
+                
+                self?.photosAlbumService.loadItemsBy(albums: [albumItem], success: {[weak self] itemsByAlbums in
+                    self?.fileService.download(itemsByAlbums: itemsByAlbums,
+                                               success: self?.succesAction(elementType: .download),
+                                               fail: self?.failAction(elementType: .download))
+                })
+                }, fail: { fail in
+                    UIApplication.showErrorAlert(message: fail.description)
+            })
         }
     }
 }
