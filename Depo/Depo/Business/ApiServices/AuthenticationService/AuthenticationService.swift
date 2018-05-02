@@ -416,6 +416,7 @@ class AuthenticationService: BaseRequestService {
 
     func turkcellAuth(success: SuccessLogin?, fail: FailResponse?) {
         let user = Authentication3G()
+        log.debug("Authentication3G")
         self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
             self?.autificationByToken(sucess: success, fail: fail)
         })

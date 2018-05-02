@@ -82,6 +82,7 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="GuY-4m-Vk6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="h5b-Zr-not" secondAttribute="leading" constant="10" id="62U-oc-M6p"/>
                                 <constraint firstItem="GuY-4m-Vk6" firstAttribute="top" relation="greaterThanOrEqual" secondItem="AjX-a0-H7G" secondAttribute="bottom" constant="16" id="D7z-ju-C6T"/>
                                 <constraint firstItem="6Of-jr-mUw" firstAttribute="leading" secondItem="h5b-Zr-not" secondAttribute="leading" constant="23" id="EwA-ye-dEy"/>
                                 <constraint firstItem="hPg-w5-3NN" firstAttribute="centerX" secondItem="h5b-Zr-not" secondAttribute="centerX" id="MB3-ue-Irb"/>
@@ -89,6 +90,7 @@
                                 <constraint firstItem="6Of-jr-mUw" firstAttribute="top" secondItem="h5b-Zr-not" secondAttribute="top" constant="24" id="SHZ-Xf-gpj"/>
                                 <constraint firstAttribute="trailing" secondItem="6Of-jr-mUw" secondAttribute="trailing" constant="23" id="Wta-e4-EpR"/>
                                 <constraint firstItem="GuY-4m-Vk6" firstAttribute="centerX" secondItem="h5b-Zr-not" secondAttribute="centerX" id="bQU-mh-Lrs"/>
+                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GuY-4m-Vk6" secondAttribute="trailing" constant="10" id="ecu-Ul-pWJ"/>
                                 <constraint firstItem="AjX-a0-H7G" firstAttribute="leading" secondItem="h5b-Zr-not" secondAttribute="leading" id="ijW-O2-gTD"/>
                                 <constraint firstAttribute="bottom" secondItem="hPg-w5-3NN" secondAttribute="bottom" constant="16" id="j5U-l9-oY1"/>
                                 <constraint firstAttribute="trailing" secondItem="AjX-a0-H7G" secondAttribute="trailing" id="ny8-xG-Der"/>
