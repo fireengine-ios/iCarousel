@@ -191,7 +191,7 @@
                                                     <rect key="frame" x="262.66666666666669" y="0.0" width="131.33333333333331" height="50"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82P-10-K6U">
-                                                            <rect key="frame" x="10.333333333333364" y="0.0" width="111.33333333333331" height="21"/>
+                                                            <rect key="frame" x="10.333333333333307" y="0.0" width="111.33333333333331" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="Dvv-wE-oPP"/>
                                                             </constraints>
@@ -200,7 +200,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKY-Yp-o3j">
-                                                            <rect key="frame" x="10.333333333333364" y="26" width="111.33333333333331" height="24"/>
+                                                            <rect key="frame" x="10.333333333333307" y="26" width="111.33333333333331" height="24"/>
                                                             <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="16"/>
                                                             <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
