@@ -32,7 +32,7 @@ class IntroduceViewController: ViewController, IntroduceViewInput {
     
     func configurateView() {
         hidenNavigationBarStyle()
-        startUsingLifeBoxButton.setTitle(TextConstants.autoSyncStartUsingLifebox, for: .normal)
+        startUsingLifeBoxButton.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
         haveAccountButton.setTitle(TextConstants.introViewGoToLoginButtonText, for: .normal)
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }

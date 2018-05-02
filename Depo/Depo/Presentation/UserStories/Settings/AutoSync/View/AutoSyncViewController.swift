@@ -46,7 +46,7 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
         
         titleLabel.textColor = fromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         
-        startButton.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
+        startButton.setTitle(TextConstants.autoSyncStartUsingLifebox, for: .normal)
         skipButton.setTitle(TextConstants.autoSyncskipForNowButton, for: .normal)
         
         dataSource.setup(table: tableView)

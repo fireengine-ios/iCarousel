@@ -366,7 +366,7 @@
 "You’re skipping auto-sync setting turned off. You can activate this later in preferences." = "You’re skipping auto-upload settings. You can activate this later in settings.";
 "Skip setting Auto-Sync?" = "Do you want to skip auto upload settings?";
 "Skip for now" = "Skip";
-"Let’s start using Lifebox" = "Create a New Account";
+"Let’s start using Lifebox" = "Let’s start using Lifebox";
 "Select the items to sync with mobile data." = "Select the items to sync with mobile data.";
 "Mobile Data" = "Mobile Data";
 "Wi-fi" = "Wi-Fi";
@@ -406,7 +406,7 @@
 " You have to fill in your mail" = "You have to fill in your e-mail";
 "Re-Enter Password" = "Re-enter Password";
 "I have an account, let me log in" = "I have an account, let me log in";
-"Start using Lifebox now!" = "Start using lifebox now!";
+"Start using Lifebox now!" = "Create a New Account";
 "E-mail field is invalid" = "E-mail field is invalid";
 "Delete Device Original" = "Delete Device Original";
 "Please check your internet connection is active and Mobile Data is ON." = "Please check your internet connection is active and mobile data is on.";
