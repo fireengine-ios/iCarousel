@@ -17,7 +17,10 @@ final class AutoSyncSettingsOptionView: UIView {
     weak var delegate: AutoSyncSettingsOptionViewDelegate?
     private var isFromSettings: Bool = false
     
-    @IBOutlet private weak var button: UIButton!
+    @IBOutlet private weak var button: UIButton! {
+        didSet { button.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17.5) }
+    }
+    
     @IBOutlet private weak var checkboxImageView: UIImageView! {
         didSet {
             checkboxImageView.image = checkMarkImage
@@ -26,7 +29,6 @@ final class AutoSyncSettingsOptionView: UIView {
     }
     
     private let checkMarkImage = UIImage(named: "checkmark")
-    
     
     private var option: AutoSyncOption = .wifiOnly {
         willSet { button.setTitle(newValue.localizedText, for: .normal) }
@@ -53,9 +55,9 @@ final class AutoSyncSettingsOptionView: UIView {
     
     func setColors(isFromSettings: Bool) {
         self.isFromSettings = isFromSettings
-        let textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+        let textColor = isFromSettings ? UIColor.darkGray : ColorConstants.whiteColor
         button.setTitleColor(textColor, for: .normal)
-        checkboxImageView.tintColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+        checkboxImageView.tintColor = isFromSettings ? UIColor.darkGray : ColorConstants.whiteColor
     }
     
     

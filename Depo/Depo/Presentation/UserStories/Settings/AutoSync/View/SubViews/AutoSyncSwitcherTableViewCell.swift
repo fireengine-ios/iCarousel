@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AutoSyncSwitcherTableViewCellDelegate {
-    func onValueChanged(model: AutoSyncModel, cell: AutoSyncSwitcherTableViewCell)
+    func onValueChanged(model: AutoSyncModel)
 }
 
 class AutoSyncSwitcherTableViewCell: UITableViewCell {
@@ -22,6 +22,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
     var model: AutoSyncModel?
     
     var delegate: AutoSyncSwitcherTableViewCellDelegate?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,7 +60,7 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         
         model.isSelected = switcher.isOn
         separatorView.isHidden = !switcher.isOn
-        delegate?.onValueChanged(model: model, cell: self)
+        delegate?.onValueChanged(model: model)
     }
 
 }
