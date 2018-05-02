@@ -25,7 +25,7 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     @IBOutlet weak var userEmailLabel: UILabel!
     @IBOutlet weak var userPhoneNumber: UILabel!
     @IBOutlet weak var userStorrageInformationLabel: UILabel!
-    @IBOutlet weak var upgradeUserStorrageButton: UIButton!
+    @IBOutlet weak var upgradeUserStorrageButton: InsetsButton!
     @IBOutlet weak var usersStorrageUssesProgress: RoundedProgressView!
     @IBOutlet weak var uplaodLabel: UILabel!
     
@@ -53,6 +53,8 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         upgradeUserStorrageButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         upgradeUserStorrageButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
         upgradeUserStorrageButton.setTitle(TextConstants.settingsUserInfoViewUpgradeButtonText, for: .normal)
+        let inset: CGFloat = 5
+        upgradeUserStorrageButton.insets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
         
         uplaodLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
         uplaodLabel.textColor = UIColor.lrTealish

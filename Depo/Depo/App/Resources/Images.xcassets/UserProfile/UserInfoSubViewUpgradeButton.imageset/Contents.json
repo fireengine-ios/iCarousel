@@ -2,16 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "UserInfoSubViewUpgradeButton.png",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "UserInfoSubViewUpgradeButton.pdf",
+      "resizing" : {
+        "mode" : "3-part-horizontal",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1
+        },
+        "cap-insets" : {
+          "right" : 10,
+          "left" : 10
+        }
+      }
     }
   ],
   "info" : {

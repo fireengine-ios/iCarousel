@@ -109,11 +109,10 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tg0-9Y-BfD">
-                    <rect key="frame" x="296" y="105" width="71" height="21"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tg0-9Y-BfD" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="346" y="105" width="21" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="WC5-p4-4FC"/>
-                        <constraint firstAttribute="width" constant="71" id="nV2-rn-r7D"/>
                     </constraints>
                     <state key="normal" backgroundImage="UserInfoSubViewUpgradeButton"/>
                     <connections>
@@ -169,7 +168,7 @@
         </view>
     </objects>
     <resources>
-        <image name="UserInfoSubViewUpgradeButton" width="214" height="62"/>
+        <image name="UserInfoSubViewUpgradeButton" width="21" height="21"/>
         <image name="UserSubModuleEdit" width="19" height="19"/>
         <image name="settingsUserIcon" width="110" height="110"/>
     </resources>
