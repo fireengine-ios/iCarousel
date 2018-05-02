@@ -119,7 +119,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
     private var pageLeftOvers = [WrapData]()
-
+    private var emptyMetaItems = [WrapData]()
     
     private var allRemoteItems = [WrapData]()
     private var uploadedObjectID = [String]()
@@ -129,6 +129,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var needShowCloudIcon: Bool = true
     var needShow3DotsInCell: Bool = true
     var needShowCustomScrollIndicator = false
+    var needShowEmptyMetaItems = false
     
     var parentUUID: String?
     
@@ -152,22 +153,27 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func appendCollectionView(items: [WrapData], pageNum: Int) {
-        let nonEmptyMetaItems = items.filter {
-            if $0.fileType == .image, !$0.isLocalItem {
-                return ($0.metaData?.takenDate != nil)
+        let filteredItems: [WrapData]
+        if needShowEmptyMetaItems {
+            filteredItems = items
+        } else {
+            filteredItems = items.filter {
+                if $0.fileType == .image, !$0.isLocalItem {
+                    return ($0.metaData?.takenDate != nil)
+                }
+                return $0.metaData != nil
             }
-            return $0.metaData != nil
         }
         
-        if nonEmptyMetaItems.isEmpty {
+        if filteredItems.isEmpty {
             isPaginationDidEnd = true
         }
         lastPage = pageNum
-        log.debug("BaseDataSourceForCollectionView appendCollectionView \(nonEmptyMetaItems.count)")
+        log.debug("BaseDataSourceForCollectionView appendCollectionView \(filteredItems.count)")
         
-        allRemoteItems.append(contentsOf: nonEmptyMetaItems)
+        allRemoteItems.append(contentsOf: filteredItems)
         
-        compoundItems(pageItems: nonEmptyMetaItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] in
+        compoundItems(pageItems: filteredItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] in
             DispatchQueue.main.async {
                 debugPrint("!!!! remotes items \(self!.allRemoteItems.count)")
                 debugPrint("!!!! all media items \(self!.allMediaItems.count)")
@@ -398,9 +404,27 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private func breakItemsIntoSections(breakingArray: [WrapData]) {
         allItems.removeAll()
-        for item in breakingArray {
+        emptyMetaItems.removeAll()
+        
+        var items: [WrapData]
+        let needShowEmptyMetaDataItems = needShowEmptyMetaItems && (currentSortType == .metaDataTimeUp || currentSortType == .metaDataTimeDown)
+        
+        if needShowEmptyMetaDataItems {
+            items = [WrapData]()
+            breakingArray.forEach { item in
+                if item.metaData?.takenDate != nil || item.isLocalItem {
+                    items.append(item)
+                } else {
+                    emptyMetaItems.append(item)
+                }
+            }
+        } else {
+            items = breakingArray
+        }
+        
+        for item in items {
             autoreleasepool {
-                if allItems.count > 0,
+                if !allItems.isEmpty,
                     let lastItem = allItems.last?.last {
                     switch currentSortType {
                     case .timeUp, .timeDown:
@@ -410,7 +434,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     case .sizeAZ, .sizeZA:
                         addBySize(lastItem: lastItem, newItem: item)
                     case .timeUpWithoutSection, .timeDownWithoutSection:
-                        allItems.append(contentsOf: [breakingArray])
+                        allItems.append(contentsOf: [items])
                         return
                     case .metaDataTimeUp, .metaDataTimeDown:
                         addByDate(lastItem: lastItem, newItem: item, isMetaDate: true)
@@ -418,6 +442,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 } else {
                     allItems.append([item])
                 }
+            }
+        }
+        
+        if needShowEmptyMetaDataItems && !emptyMetaItems.isEmpty {
+            if currentSortType == .metaDataTimeUp {
+                allItems.append(emptyMetaItems)
+            } else if currentSortType == .metaDataTimeDown {
+                allItems.insert(emptyMetaItems, at: 0)
             }
         }
         
@@ -514,6 +546,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         case .metaDataTimeUp, .metaDataTimeDown:
             if let date = allItems[indexPath.section].first?.metaData?.takenDate {
                 headerText = date.getDateInTextForCollectionViewHeader()
+            } else if needShowEmptyMetaItems && !emptyMetaItems.isEmpty && allItems[indexPath.section].first?.isLocalItem == false {
+                headerText = TextConstants.photosVideosViewMissingDatesHeaderText
             } else if let date = allItems[indexPath.section].first?.creationDate {
                 headerText = date.getDateInTextForCollectionViewHeader()
             }
