@@ -202,10 +202,7 @@ final class PopUpController: ViewController {
         button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
         button.layer.borderColor = ColorConstants.blueColor.cgColor
         button.layer.borderWidth = 1
-        
-        button.titleLabel?.numberOfLines = 1
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.titleLabel?.lineBreakMode = .byClipping
+        button.adjustsFontSizeToFitWidth()
         
         let inset: CGFloat = 2
         button.insets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)

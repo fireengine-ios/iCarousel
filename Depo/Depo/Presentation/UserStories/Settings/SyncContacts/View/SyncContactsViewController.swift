@@ -82,9 +82,17 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         restoreButton.setTitle(TextConstants.settingsBackUpRestoreTitle, for: .normal)
         cancelButton.setTitle(TextConstants.settingsBackUpCancelAnalyzingTitle, for: .normal)
         deleteDuplicatedButton.setTitle(TextConstants.settingsBackUpDeleteDuplicatedButton, for: .normal)
+        
         backUpButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
         restoreButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
         deleteDuplicatedButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
+        
+        
+        backUpButton.adjustsFontSizeToFitWidth()
+        restoreButton.adjustsFontSizeToFitWidth()
+        cancelButton.adjustsFontSizeToFitWidth()
+        deleteDuplicatedButton.adjustsFontSizeToFitWidth()
+        
         output.viewIsReady()
         
         MenloworksAppEvents.onContactSyncPageOpen()

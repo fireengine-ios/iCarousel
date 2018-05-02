@@ -32,16 +32,15 @@ class WhiteButtonWithRoundedCorner: InsetsButton {
         titleLabel?.font = ApplicationPalette.bigRoundButtonFont
         layer.masksToBounds = true
         setCornerRadius()
-        
-        titleLabel?.numberOfLines = 1
-        titleLabel?.adjustsFontSizeToFitWidth = true
-        titleLabel?.lineBreakMode = .byClipping
+        adjustsFontSizeToFitWidth()
     }
     
     func setCornerRadius() {
         layer.cornerRadius = frame.height * 0.5
         
         let inset = frame.height * 0.3
-        insets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+        let isAddedImaged = image(for: .normal) != nil
+        let leftInset: CGFloat = isAddedImaged ? 0 : inset
+        insets = UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: inset)
     }
 }
