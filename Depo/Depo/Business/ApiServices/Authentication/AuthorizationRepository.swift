@@ -89,14 +89,18 @@ extension AuthorizationRepositoryImp: RequestRetrier {
         
         /// if accessToken is valid
         guard response.statusCode == 401 else {
-            #if MAIN_APP
-            if let url = request.request?.url?.absoluteString {
-                log.debug("401 for \(url)")
-            }
-            #endif
             completion(false, 0.0)
             return
         }
+        
+        #if MAIN_APP
+        if let url = request.request?.url?.absoluteString {
+            log.debug("401 for \(url)")
+        } else {
+            log.debug("request.request?.url?.absoluteString is nil")
+            log.debug(request)
+        }
+        #endif
         
         /// save request
         requestsToRetry.append(completion)
