@@ -44,7 +44,6 @@ final class UploadOperations: Operation {
         
         super.init()
         self.qualityOfService = (uploadType == .autoSync) ? .background : .userInitiated
-        SingletonStorage.shared.progressDelegates.add(self)
     }
     
     //MARK: - Overriding
@@ -64,9 +63,11 @@ final class UploadOperations: Operation {
         
         ItemOperationManager.default.startUploadFile(file: item)
         
+        SingletonStorage.shared.progressDelegates.add(self)
         attempmtUpload()
         
         semaphore.wait()
+        SingletonStorage.shared.progressDelegates.remove(self)
     }
     
     private func attempmtUpload() {
