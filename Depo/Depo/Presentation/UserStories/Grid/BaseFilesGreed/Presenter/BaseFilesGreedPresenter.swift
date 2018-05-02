@@ -43,7 +43,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var needShowScrollIndicator = false
     
-    private var operationType: ElementTypes?
+    private var currentOperationType: ElementTypes?
     
     private let semaphore = DispatchSemaphore(value: 0)
     
@@ -468,7 +468,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func updateNoFilesView() {
-        if needShowNoFileView() && operationType != .sync {
+        if needShowNoFileView() && currentOperationType != .sync {
             if interactor.canShowNoFilesView() {
                 view.showNoFilesWith(text: interactor.textForNoFileLbel(),
                                      image: interactor.imageForNoFileImageView(),
@@ -478,7 +478,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 view.showNoFilesTop(text: interactor.textForNoFileTopLabel())
             }
         } else {
-            operationType = nil
+            currentOperationType = nil
             view.hideNoFiles()
         }
     }
@@ -722,7 +722,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if type == .removeAlbum || type == .completelyDeleteAlbums {
             dismissBottomBar(animated: true)
         } else if type == .sync {
-            operationType = type
+            currentOperationType = type
         }
     }
     
