@@ -21,6 +21,7 @@ struct LbRequestkeys {
     static let eulaId = "eulaId"
     static let referenceToken = "referenceToken"
     static let otp = "otp"
+    static let processPersonalData = "processPersonalData"
     
     //
     static let fileName = "Folder-Name"
