@@ -468,7 +468,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func updateNoFilesView() {
-        if needShowNoFileView() && currentOperationType != .sync {
+        if needShowNoFileView(), currentOperationType != .sync {
             if interactor.canShowNoFilesView() {
                 view.showNoFilesWith(text: interactor.textForNoFileLbel(),
                                      image: interactor.imageForNoFileImageView(),
