@@ -43,6 +43,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var needShowScrollIndicator = false
     
+    var needShowEmptyMetaItems = false
+    
     private let semaphore = DispatchSemaphore(value: 0)
     
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreed)
@@ -73,6 +75,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.delegate = self
         dataSource.needShowProgressInCell = needShowProgressInCells
         dataSource.needShowCustomScrollIndicator = needShowScrollIndicator
+        dataSource.needShowEmptyMetaItems = needShowEmptyMetaItems
         dataSource.parentUUID = interactor.getFolder()?.uuid
         if let albumInteractor = interactor as? AlbumDetailInteractor {
             dataSource.parentUUID = albumInteractor.album?.uuid
