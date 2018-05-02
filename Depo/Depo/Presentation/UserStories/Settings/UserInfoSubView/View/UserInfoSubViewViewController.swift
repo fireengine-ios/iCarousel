@@ -49,6 +49,7 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         
         userStorrageInformationLabel.textColor = ColorConstants.textGrayColor
         userStorrageInformationLabel.font = UIFont.TurkcellSaturaMedFont(size: 14)
+        userStorrageInformationLabel.text = ""
         
         upgradeUserStorrageButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         upgradeUserStorrageButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
