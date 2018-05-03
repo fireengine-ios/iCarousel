@@ -63,6 +63,9 @@ class SyncServiceManager {
         return (photoSyncService.status == .failed || videoSyncService.status == .failed)
     }
     
+    private var newItemsToAppend = [PHAsset]()
+    private var lastTimeNewItemsAppended: Date?
+    
     
     // MARK: - Init
     
@@ -266,11 +269,32 @@ extension SyncServiceManager {
     
     @objc private func onPhotoLibraryDidChange(notification: Notification) {
         if let phChanges = notification.userInfo {
-            if let _ = phChanges[PhotoLibraryChangeType.added] as? [PHAsset] {
-                //TODO: append only added items
-                checkReachabilityAndSettings(reachabilityChanged: false, newItems: true)
-            } else {
-                checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+            if let addedAssets = phChanges[PhotoLibraryChangeType.added] as? [PHAsset] {
+                newItemsToAppend.append(contentsOf: addedAssets)
+            } else if let removedAssets = phChanges[PhotoLibraryChangeType.removed] as? [PHAsset] {
+                for asset in removedAssets {
+                    newItemsToAppend.remove(asset)
+                }
+            }
+            lastTimeNewItemsAppended = Date()
+            checkItemsToAppend()
+        }
+    }
+    
+    private func checkItemsToAppend() {
+        guard let lastChangeTime = lastTimeNewItemsAppended else {
+            return
+        }
+        
+        let timeInterval = Date().timeIntervalSince(lastChangeTime)
+        
+        if timeInterval > NumericConstants.intervalInSecondsBetweenAutoSyncItemsAppending {
+            checkReachabilityAndSettings(reachabilityChanged: false, newItems: !newItemsToAppend.isEmpty)
+            newItemsToAppend.removeAll()
+        } else {
+            let intervalToSyncAfter = Int(NumericConstants.intervalInSecondsBetweenAutoSyncItemsAppending - timeInterval)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(intervalToSyncAfter)) {
+                self.checkItemsToAppend()
             }
         }
     }
