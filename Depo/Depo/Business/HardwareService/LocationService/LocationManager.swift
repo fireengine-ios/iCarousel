@@ -18,8 +18,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     private var requestAuthorizationStatusHandler: RequestAuthorizationStatusHandler?
+    
+    
     
     private override init() {
         super.init()
@@ -86,14 +89,14 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         if settings.isAutoSyncEnabled {
             if CLLocationManager.locationServicesEnabled() {
                 if CLLocationManager.authorizationStatus() == .notDetermined {
-                    self.passcodeStorage.systemCallOnScreen = true
-                    self.locationManager.requestAlwaysAuthorization()
+                    passcodeStorage.systemCallOnScreen = true
+                    locationManager.requestAlwaysAuthorization()
                 } else {
-                    self.locationManager.startMonitoringSignificantLocationChanges()
-                    self.locationManager.allowsBackgroundLocationUpdates = true
+                    locationManager.allowsBackgroundLocationUpdates = true
+                    locationManager.startMonitoringSignificantLocationChanges()
                 }
             } else {
-                self.showIfNeedLocationPermissionAllert()
+                showIfNeedLocationPermissionAllert()
             }
         }
     }
@@ -107,8 +110,16 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     // CLLocationManager delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         log.debug("LocationManager locationManager")
-
+        
+        guard storage.accessToken != nil else {
+            return
+        }
+        
         SyncServiceManager.shared.updateInBackground()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        log.debug("LocationManager didFailWithError: \(error.localizedDescription)")
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
