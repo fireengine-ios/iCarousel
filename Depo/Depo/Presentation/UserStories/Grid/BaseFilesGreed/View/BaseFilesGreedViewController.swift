@@ -431,7 +431,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         refresherY = -calculatedH + 30
         updateRefresher()
-        output.updateNoFilesView()
     }
     
     func updateRefresher() {
