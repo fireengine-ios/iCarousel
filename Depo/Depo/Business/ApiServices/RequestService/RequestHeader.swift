@@ -73,6 +73,10 @@ class RequestHeaders {
     
     static func authificationByRememberMe() -> RequestHeaderParametrs {
         var result = base()
+        #if MAIN_APP
+        log.debug("authificationByRememberMe()")
+
+        #endif
         if let refreshToken = tokenStorage.refreshToken {
             result = result + [HeaderConstant.RememberMeToken: refreshToken]
         }
