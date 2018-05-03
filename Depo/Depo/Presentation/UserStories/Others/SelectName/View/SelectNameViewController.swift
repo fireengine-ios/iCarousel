@@ -68,13 +68,14 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
 
     // MARK: SelectNameViewInput
     func setupInitialState() {
-        
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     
     // MARK: Buttons actions
     
     @objc func onNextButton() {
+        navigationItem.rightBarButtonItem?.isEnabled = false
         textField.resignFirstResponder()
         output.onNextButton(name: textField.text ?? "")
     }

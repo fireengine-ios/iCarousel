@@ -54,19 +54,17 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
         switch operation {
         case .selectAlbumName:
             view.hideView()
-            break
         case .selectPlayListName:
             router.hideScreen()
-            break
         case .selectFolderName:
             view.hideView()
-            break
         }
     }
     
     func operationFaildWithError(errorMessage: String) {
         asyncOperationSucces()
         UIApplication.showErrorAlert(message: errorMessage)
+        view.setupInitialState()
     }
     
     

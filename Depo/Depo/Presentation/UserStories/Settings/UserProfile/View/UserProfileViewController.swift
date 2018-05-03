@@ -96,6 +96,7 @@ class UserProfileViewController: ViewController, UserProfileViewInput, UITextFie
     
     func setupEditState(_ isEdit: Bool) {
         let button = isEdit ? readyButton : editButton
+        button?.isEnabled = true
         navigationItem.setRightBarButton(button, animated: true)
         nameTextField.isUserInteractionEnabled = isEdit
         emailTextField.isUserInteractionEnabled = isEdit
@@ -184,6 +185,7 @@ class UserProfileViewController: ViewController, UserProfileViewInput, UITextFie
             self.present(controller, animated: true, completion: nil)
             
         } else {
+            readyButton?.isEnabled = false
             output.tapReadyButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
         }
         
