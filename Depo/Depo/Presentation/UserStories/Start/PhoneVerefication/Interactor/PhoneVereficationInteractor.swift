@@ -57,7 +57,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     func verifyCode(code: String) {
-        authenticationService.verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification(token: dataStorage.signUpResponse.referenceToken ?? "", otp: code), sucess: { [weak self]  _ in
+        authenticationService.verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification(token: dataStorage.signUpResponse.referenceToken ?? "", otp: code, processPersonalData: true), sucess: { [weak self]  _ in
             DispatchQueue.main.async {
                 self?.output.verificationSucces()
                 

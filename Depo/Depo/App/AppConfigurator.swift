@@ -39,16 +39,18 @@ final class AppConfigurator {
     
     private static func firstStart() {
         if storageVars.isAppFirstLaunch {
+            log.debug("isAppFirstLaunch")
             storageVars.isAppFirstLaunch = false
             
             KeychainSwift().clear()
+            /// call migrate after Keychain clear
             AppMigrator.migrateAll()
         }
     }
     
     private static func emptyEmailUpIfNeed() {
-        
         if storageVars.emptyEmailUp {
+            log.debug("emptyEmailUpIfNeed")
             storageVars.emptyEmailUp = false
             let attemptsCounter = SavingAttemptsCounterByUnigueUserID.emptyEmailCounter
             attemptsCounter.up(limitHandler: {
@@ -69,6 +71,7 @@ final class AppConfigurator {
     
     private static func clearTokensIfNeed() {
         if tokenStorage.isClearTokens {
+            log.debug("clearTokensIfNeed")
             tokenStorage.isClearTokens = false
             tokenStorage.clearTokens()
         }
@@ -76,7 +79,7 @@ final class AppConfigurator {
     
     private static func logoutIfNeed() {
         if !tokenStorage.isRememberMe {
-            log.debug("isRememberMe false")
+            log.debug("logoutIfNeed isRememberMe false")
             AuthenticationService().logout(async: false, success: nil)
         }
     }

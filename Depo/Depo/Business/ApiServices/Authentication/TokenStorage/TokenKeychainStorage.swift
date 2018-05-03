@@ -40,6 +40,9 @@ final class TokenKeychainStorage: TokenStorage {
             return token
         }
         set {
+            #if MAIN_APP
+            log.debug("new refreshToken: \(newValue ?? "nil")")
+            #endif
             keychain.set(newValue, forKey: refreshTokenKey)
         }
     }

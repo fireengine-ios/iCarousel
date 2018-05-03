@@ -23,8 +23,12 @@ class PasscodeEnterViewController: ViewController, NibInit {
     
     private let wormholePoster = WormholePoster()
     
-    lazy var passcodeManager: PasscodeManager = PasscodeManagerImp(passcodeView: passcodeViewImp,
-                                                                   state: state)
+    lazy var passcodeManager: PasscodeManager = {
+        loadViewIfNeeded()
+        let passcodeManager = PasscodeManagerImp(passcodeView: passcodeViewImp, state: state) 
+        passcodeManager.delegate = self
+        return passcodeManager
+    }()
     
     var state: PasscodeState = ValidatePasscodeState()
     var navigationTitle = ""
@@ -33,8 +37,8 @@ class PasscodeEnterViewController: ViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTitle(withString: navigationTitle)
         passcodeManager.delegate = self
+        setTitle(withString: navigationTitle)
     }
 
     func becomeResponder() {

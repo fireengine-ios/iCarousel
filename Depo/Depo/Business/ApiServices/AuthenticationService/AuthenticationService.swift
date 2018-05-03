@@ -120,10 +120,12 @@ struct SignUpUserPhoveVerification: RequestParametrs {
     
     let token: String
     let otp: String
+    let processPersonalData: Bool
     
     var requestParametrs: Any {
-        let dict: [String: Any] = [LbRequestkeys.referenceToken : token,
-                                   LbRequestkeys.otp            : otp]
+        let dict: [String: Any] = [LbRequestkeys.referenceToken      : token,
+                                   LbRequestkeys.otp                 : otp,
+                                   LbRequestkeys.processPersonalData : processPersonalData]
         return dict
     }
     
@@ -416,6 +418,7 @@ class AuthenticationService: BaseRequestService {
 
     func turkcellAuth(success: SuccessLogin?, fail: FailResponse?) {
         let user = Authentication3G()
+        log.debug("Authentication3G")
         self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
             self?.autificationByToken(sucess: success, fail: fail)
         })

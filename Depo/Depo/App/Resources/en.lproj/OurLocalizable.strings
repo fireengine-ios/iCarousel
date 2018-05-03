@@ -280,6 +280,7 @@
 "You don’t have any music on your Lifebox yet." = "You don’t have any music in your lifebox yet.";
 "info" = "info";
 "Enable photo permissions in settings" = "Enable photo permissions in settings";
+"Missing Dates" = "Missing Dates";
 "Start adding your photos" = "Start adding your photos";
 "You don’t have anything on your photo roll." = "You don’t have any photo or video in your lifebox yet.";
 "View All Pictures" = "View All Photos";
@@ -366,7 +367,7 @@
 "You’re skipping auto-sync setting turned off. You can activate this later in preferences." = "You’re skipping auto-upload settings. You can activate this later in settings.";
 "Skip setting Auto-Sync?" = "Do you want to skip auto upload settings?";
 "Skip for now" = "Skip";
-"Let’s start using Lifebox" = "Create a New Account";
+"Let’s start using Lifebox" = "Let’s start using Lifebox";
 "Select the items to sync with mobile data." = "Select the items to sync with mobile data.";
 "Mobile Data" = "Mobile Data";
 "Wi-fi" = "Wi-Fi";
@@ -406,7 +407,7 @@
 " You have to fill in your mail" = "You have to fill in your e-mail";
 "Re-Enter Password" = "Re-enter Password";
 "I have an account, let me log in" = "I have an account, let me log in";
-"Start using Lifebox now!" = "Start using lifebox now!";
+"Start using Lifebox now!" = "Create a New Account";
 "E-mail field is invalid" = "E-mail field is invalid";
 "Delete Device Original" = "Delete Device Original";
 "Please check your internet connection is active and Mobile Data is ON." = "Please check your internet connection is active and mobile data is on.";
@@ -471,6 +472,9 @@
 "We have created a collage from your photos!" = "We have created a collage for you!";
 "Save Collage" = "Save Collage";
 "View" = "View";
+"Animation" = "Animation";
+"We have created an animation from your photos!" = "We have created an animation from your photos!";
+"Save Animation" = "Save Animation";
 "Album Card" = "Album Card";
 "We have created an album for you." = "We have created an album for you.";
 "Save Album" = "Save Album";
@@ -567,3 +571,5 @@
 "dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";
 "PackagesPolicyHeader" = "Auto-renewable subscription nature of the in-app purchase:";
 "PackagesPolicyText" = "Subsriptions are renewed on a monthly basis \nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik";
+"Delete Duplicated" = "Delete Duplicated";
+"Lifebox %@ and Passcode" = "Lifebox %@ and Passcode";
