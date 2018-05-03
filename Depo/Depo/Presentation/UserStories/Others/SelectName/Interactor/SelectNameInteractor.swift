@@ -70,13 +70,10 @@ class SelectNameInteractor: SelectNameInteractorInput {
         switch moduleType {
         case .selectAlbumName:
             onCreateAlbumWithName(name: name)
-            break
         case .selectPlayListName:
             onCreatePlayListWithName(name: name)
-            break
         case .selectFolderName:
             onCreateFolderWithName(name: name)
-            break
         }
     }
     
