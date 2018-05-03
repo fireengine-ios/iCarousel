@@ -45,6 +45,12 @@ class UsageInfoViewController: ViewController {
     @IBOutlet weak private var pricesTitleLabel: UILabel!
     @IBOutlet weak private var notesLabel: UILabel!
     
+    @IBOutlet private weak var upgradeButton: UIButton! {
+        didSet {
+            upgradeButton.setTitle(TextConstants.settingsUserInfoViewUpgradeButtonText, for: .normal)
+        }
+    }
+    
     @IBOutlet weak private var tableView: ResizableTableView!
     
     private var internetDataUsages: [InternetDataUsage] = []

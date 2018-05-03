@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,6 +30,7 @@
                 <outlet property="songsCountLabel" destination="d4H-pi-vQo" id="MnI-G7-Shi"/>
                 <outlet property="songsMemoryLabel" destination="gUs-aE-N9i" id="Zt1-rh-1Wj"/>
                 <outlet property="tableView" destination="Z6r-Iv-ttc" id="7De-hT-YWE"/>
+                <outlet property="upgradeButton" destination="k00-xT-M1K" id="yt0-22-5TP"/>
                 <outlet property="videosCountLabel" destination="WiH-XY-PLy" id="1S8-2K-Eew"/>
                 <outlet property="videosMemoryLabel" destination="xLE-GQ-r4x" id="kpa-DJ-DiE"/>
                 <outlet property="view" destination="adX-RS-zAx" id="GG8-cp-hzB"/>

@@ -25,6 +25,12 @@ class ImportPhotosViewController: ViewController, ErrorPresenter {
     @IBOutlet weak private var dropboxLoaderImageView: RotatingImageView!
     @IBOutlet weak private var dropboxLoadingLabel: UILabel!
     
+    @IBOutlet private weak var subtitleLabel: UILabel! {
+        didSet {
+            subtitleLabel.text = TextConstants.packagesSubtitle
+        }
+    }
+    
     private lazy var activityManager = ActivityIndicatorManager()
     
     var isFBConnected: Bool = false {

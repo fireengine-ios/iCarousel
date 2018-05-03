@@ -333,7 +333,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func selectedItemsCountChange(with count: Int) {
-        setTitle(withString: String(count) + " Selected")
+        setTitle(withString: String(count) + " " + TextConstants.accessibilitySelected)
     }
     
     static let sliderH: CGFloat = 180

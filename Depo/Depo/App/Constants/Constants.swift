@@ -851,4 +851,6 @@ struct TextConstants {
     static let periodicContactsSyncAccessAlertGoToSettings = NSLocalizedString("Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let periodicContactsSyncAccessAlertNo = NSLocalizedString("No", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settings = NSLocalizedString("Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let packagesSubtitle = NSLocalizedString("Import fearture is totally free of charge and does not affect your internet package", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
