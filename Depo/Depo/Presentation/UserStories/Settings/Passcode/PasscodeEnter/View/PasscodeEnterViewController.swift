@@ -37,6 +37,7 @@ class PasscodeEnterViewController: ViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        passcodeManager.delegate = self
         setTitle(withString: navigationTitle)
     }
 
