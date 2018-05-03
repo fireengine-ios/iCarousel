@@ -30,7 +30,7 @@ final class TokenKeychainStorage: TokenStorage {
             #if MAIN_APP
             log.debug("new accessToken: \(newValue ?? "nil")")
             #endif
-            keychain.set(newValue, forKey: accessTokenKey)
+            keychain.set(newValue, forKey: accessTokenKey, withAccess: .accessibleAlways)
         }
     }
     
@@ -46,18 +46,18 @@ final class TokenKeychainStorage: TokenStorage {
             #if MAIN_APP
             log.debug("new refreshToken: \(newValue ?? "nil")")
             #endif
-            keychain.set(newValue, forKey: refreshTokenKey)
+            keychain.set(newValue, forKey: refreshTokenKey, withAccess: .accessibleAlways)
         }
     }
     
     var isRememberMe: Bool {
         get { return keychain.getBool(isRememberMeKey) ?? false }
-        set { keychain.set(newValue, forKey: isRememberMeKey) }
+        set { keychain.set(newValue, forKey: isRememberMeKey, withAccess: .accessibleAlways) }
     }
     
     var isClearTokens: Bool {
         get { return keychain.getBool(isClearTokensKey) ?? false }
-        set { keychain.set(newValue, forKey: isClearTokensKey) }
+        set { keychain.set(newValue, forKey: isClearTokensKey, withAccess: .accessibleAlways) }
     }
     
     func clearTokens() {
