@@ -31,4 +31,6 @@ protocol HomePageViewOutput {
     func shownSpotlight(type: SpotlightType)
     
     func closedSpotlight(type: SpotlightType)
+    
+    func didReloadCollectionView()
 }
