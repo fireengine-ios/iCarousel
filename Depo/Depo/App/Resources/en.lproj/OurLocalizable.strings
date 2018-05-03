@@ -584,3 +584,12 @@
 "Your last backup was on %@" = "Your last backup was on %@";
 "Contacts Sync" = "Contacts Sync";
 "Sort By" = "Sort By";
+"LifeboxLargePopUpTitle100" = "LifeboxLargePopUpTitle100";
+"LifeboxLargePopUpTitle90" = "LifeboxLargePopUpTitle90";
+"LifeboxLargePopUpTitle80" = "LifeboxLargePopUpTitle80";
+"LifeboxLargePopUpSubTitle" = "LifeboxLargePopUpSubTitle";
+"LifeboxLargePopUpExpandButtonTitle" = "LifeboxLargePopUpExpandButtonTitle";
+"LifeboxLargePopUpSkipButtonTitle" = "LifeboxLargePopUpSkipButtonTitle";
+"Lifebox can sync your contacts automatically." = "Lifebox can sync your contacts automatically.";
+"error_login" = "error_login";
+"uploading" = "uploading"
