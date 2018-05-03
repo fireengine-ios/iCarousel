@@ -86,6 +86,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             })
         }
         navigationItem.hidesBackButton = true
+        
+        let navBar = navigationController?.navigationBar
+        navBar?.barTintColor = UIColor.white
+        navBar?.tintColor = ColorConstants.darcBlueColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
