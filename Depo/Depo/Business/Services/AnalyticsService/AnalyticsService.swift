@@ -33,7 +33,7 @@ final class AnalyticsService {
             logPurchase(event: .purchaseNonTurkcell500, price: price, currency: currency)
         } else if name.contains("50") {
             logPurchase(event: .purchaseNonTurkcell50, price: price, currency: currency)
-        } else if name.contains("2.5") {
+        } else if name.contains("2.5") || name.contains("2,5") {
             logPurchase(event: .purchaseNonTurkcell2500, price: price, currency: currency)
         }
     }
@@ -47,7 +47,7 @@ final class AnalyticsService {
             logPurchase(event: .purchaseTurkcell500, price: String(price))
         } else if name.contains("50") {
             logPurchase(event: .purchaseTurkcell50, price: String(price))
-        } else if name.contains("2.5") {
+        } else if name.contains("2.5") || name.contains("2,5") {
             logPurchase(event: .purchaseTurkcell2500, price: String(price))
         }
     }
