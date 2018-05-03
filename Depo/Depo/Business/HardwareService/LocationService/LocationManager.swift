@@ -111,7 +111,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         log.debug("LocationManager locationManager")
         
-        guard storage.accessToken != nil else {
+        guard tokenStorage.accessToken != nil else {
             return
         }
         
