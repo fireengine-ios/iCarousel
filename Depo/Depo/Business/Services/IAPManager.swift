@@ -43,6 +43,8 @@ final class IAPManager: NSObject {
     }
     
     func loadProducts(productIds: [String], handler: @escaping OfferAppleHandler) {
+        log.debug("IAPManager loadProductsWithProductIds")
+        
         offerAppleHandler = handler
         let request = SKProductsRequest(productIdentifiers: Set(productIds))
         request.delegate = self
@@ -50,6 +52,8 @@ final class IAPManager: NSObject {
     }
     
     func purchase(offerApple: OfferApple, handler: @escaping PurchaseHandler) {
+        log.debug("IAPManager purchase offer")
+        
         if !canMakePayments { return }
         purchaseHandler = handler
         let payment = SKPayment(product: offerApple.skProduct)
@@ -57,6 +61,8 @@ final class IAPManager: NSObject {
     }
     
     func restorePurchases(restoreCallBack: @escaping RestoreHandler) {
+        log.debug("IAPManager restorePurchases")
+        
         restorePurchasesCallback = restoreCallBack
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
@@ -71,6 +77,8 @@ final class IAPManager: NSObject {
 
 extension IAPManager: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        log.debug("IAPManager productsRequest didReceive response")
+        
         let sortedOffers = response.products
             .map { OfferApple(skProduct: $0) }
             .sorted { $0.rawPrice < $1.rawPrice }
@@ -81,6 +89,8 @@ extension IAPManager: SKProductsRequestDelegate {
 extension IAPManager: SKPaymentTransactionObserver {
     
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        log.debug("IAPManager paymentQueue updatedTransactions")
+        
         var restoredIds: Set<String> = []
         var restoreError: Error? = nil
         
@@ -123,6 +133,7 @@ extension IAPManager: SKPaymentTransactionObserver {
     }
     
     public func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        log.debug("IAPManager paymentQueueRestoreCompletedTransactionsFinished")
         debugPrint("- paymentQueueRestoreCompletedTransactionsFinished", queue)
         
         var purchasedIDs: Set<String> = []
@@ -135,6 +146,7 @@ extension IAPManager: SKPaymentTransactionObserver {
     }
     
     public func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
+        log.debug("IAPManager paymentQueue restoreCompletedTransactionsFailedWithError")
         debugPrint("- ", queue, error)
         restorePurchasesCallback?(.fail(error))
     }
