@@ -31,7 +31,6 @@ final class PageCompounder {
         notAllowedMD5s = notAllowedMD5s.union(pageItems.filter{!$0.isLocalItem}.map{$0.md5})
         notAllowedLocalIDs = notAllowedLocalIDs.union(pageItems.map{$0.getTrimmedLocalID()})///there should be no similar UID on BackEnd so this is fine
         
-        
         let filterPredicate = getFilteringPredicate(md5s: notAllowedMD5s, localIDs: notAllowedLocalIDs)
         
         let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filterPredicate, predicate])
@@ -67,6 +66,11 @@ final class PageCompounder {
         let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
         compoundedCallback(Array(actualArray), Array(leftovers))
         
+    }
+    
+    func appendNotAllowedItems(items: [Item]) {
+        notAllowedMD5s = notAllowedMD5s.union(items.filter{!$0.isLocalItem}.map{$0.md5})
+        notAllowedLocalIDs = notAllowedLocalIDs.union(items.map{$0.getTrimmedLocalID()})
     }
     
     func dropData() {

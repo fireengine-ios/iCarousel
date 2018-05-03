@@ -37,7 +37,16 @@ class PhotoSelectionDataSource: ArrayDataSourceForCollectionView {
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewHeaderWithText, for: indexPath) as! CollectionViewHeaderWithText
             headerView.titleLabel.isHidden = indexPath.section != 0
             return headerView
-            
+        case UICollectionElementKindSectionFooter:
+            if indexPath.section == allItems.count - 1, !isPaginationDidEnd,
+                let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter, for: indexPath) as? CollectionViewSpinnerFooter
+            {
+                footerView.startSpinner()
+                return footerView
+                
+            } else {
+                return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter, for: indexPath)
+            }
         default:
             assert(false, "Unexpected element kind")
             return UICollectionReusableView()

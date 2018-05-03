@@ -153,9 +153,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func appendCollectionView(items: [WrapData], pageNum: Int) {
-        let filteredItems: [WrapData]
+        var filteredItems = [WrapData]()
         if needShowEmptyMetaItems {
-            filteredItems = items
+            items.forEach {
+                if $0.fileType == .image, !$0.isLocalItem, $0.metaData?.takenDate != nil {
+                   filteredItems.append($0)
+                } else {
+                    emptyMetaItems.append($0)
+                }
+            }
+            pageCompounder.appendNotAllowedItems(items: emptyMetaItems)
         } else {
             filteredItems = items.filter {
                 if $0.fileType == .image, !$0.isLocalItem {
@@ -404,25 +411,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private func breakItemsIntoSections(breakingArray: [WrapData]) {
         allItems.removeAll()
-        emptyMetaItems.removeAll()
-        
-        var items: [WrapData]
+  
         let needShowEmptyMetaDataItems = needShowEmptyMetaItems && (currentSortType == .metaDataTimeUp || currentSortType == .metaDataTimeDown)
-        
-        if needShowEmptyMetaDataItems {
-            items = [WrapData]()
-            breakingArray.forEach { item in
-                if item.metaData?.takenDate != nil || item.isLocalItem {
-                    items.append(item)
-                } else {
-                    emptyMetaItems.append(item)
-                }
-            }
-        } else {
-            items = breakingArray
-        }
-        
-        for item in items {
+
+        for item in breakingArray {
             autoreleasepool {
                 if !allItems.isEmpty,
                     let lastItem = allItems.last?.last {
@@ -434,7 +426,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     case .sizeAZ, .sizeZA:
                         addBySize(lastItem: lastItem, newItem: item)
                     case .timeUpWithoutSection, .timeDownWithoutSection:
-                        allItems.append(contentsOf: [items])
+                        allItems.append(contentsOf: [breakingArray])
                         return
                     case .metaDataTimeUp, .metaDataTimeDown:
                         addByDate(lastItem: lastItem, newItem: item, isMetaDate: true)
@@ -562,6 +554,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func dropData() {
         log.debug("BaseDataSourceForCollectionViewDelegate dropData()")
         
+        emptyMetaItems.removeAll()
         allRemoteItems.removeAll()
         allItems.removeAll()
         pageLeftOvers.removeAll()
