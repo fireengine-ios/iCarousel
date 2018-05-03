@@ -20,9 +20,10 @@ final class BackButton: UIButton {
     private var action: VoidHandler?
     
     convenience init(action: @escaping VoidHandler) {
-        let rect = CGRect(x: 0, y: 0, width: 60, height: 44)
-        self.init(frame: rect)
+//        let rect = CGRect(x: 0, y: 0, width: 80, height: 44)
+        self.init()
         self.action = action
+        
     }
     
     override init(frame: CGRect) {
@@ -48,14 +49,11 @@ final class BackButton: UIButton {
     
     private func setup() {
         buttonColor = ColorConstants.whiteColor
-        
-        contentHorizontalAlignment = .left
-        titleEdgeInsets.left = 8
-        
-        setTitle(TextConstants.backTitle, for: .normal)
+        setTitle("  " + TextConstants.backTitle, for: .normal)
         setImage(UIImage(named: "im_backButton"), for: .normal)
         titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
         addTarget(self, action: #selector(actionTouchUp), for: .touchUpInside)
+        sizeToFit()
     }
     
     @objc func actionTouchUp() {

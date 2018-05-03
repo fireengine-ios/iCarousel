@@ -287,6 +287,7 @@
                                         <constraint firstItem="anl-fD-He2" firstAttribute="top" secondItem="GvW-F8-l5K" secondAttribute="top" id="Ji8-H2-AKI"/>
                                         <constraint firstItem="TMp-5G-xBE" firstAttribute="leading" secondItem="anl-fD-He2" secondAttribute="trailing" constant="10" id="Jic-Fm-cpS"/>
                                         <constraint firstAttribute="trailing" secondItem="k00-xT-M1K" secondAttribute="trailing" id="Uxg-Os-NAs"/>
+                                        <constraint firstItem="k00-xT-M1K" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TMp-5G-xBE" secondAttribute="trailing" id="gVa-sc-TTR"/>
                                     </constraints>
                                 </view>
                             </subviews>
