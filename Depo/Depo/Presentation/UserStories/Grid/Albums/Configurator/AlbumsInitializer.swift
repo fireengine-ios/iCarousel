@@ -14,7 +14,7 @@ class AlbumsModuleInitializer: NSObject {
         return [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew]
     }
 
-    class func initializeAlbumsController(with nibName: String) -> BaseFilesGreedChildrenViewController {
+    class func initializeAlbumsController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> BaseFilesGreedChildrenViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonCreateAlbum])
@@ -23,6 +23,10 @@ class AlbumsModuleInitializer: NSObject {
                                                style: .default, tintColor: nil)
         
         let presenter = AlbumsPresenter()
+        
+        if let moduleOutput = moduleOutput {
+            presenter.sliderModuleOutput = moduleOutput
+        }
         
         let router = AlbumsRouter()
         router.presenter = presenter
