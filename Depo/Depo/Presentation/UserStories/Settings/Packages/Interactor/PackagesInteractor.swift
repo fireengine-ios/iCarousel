@@ -53,7 +53,7 @@ class PackagesInteractor {
                                     priceString: priceString,
                                     type: type,
                                     model: model)
-        } else if name.contains("2.5") {
+        } else if name.contains("2.5") || name.contains("2,5") {
             return SubscriptionPlan(name: name,
                                     photosCount: 2_560_000,
                                     videosCount: 256_000,
