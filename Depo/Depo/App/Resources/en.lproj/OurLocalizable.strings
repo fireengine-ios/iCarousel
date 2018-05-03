@@ -593,3 +593,12 @@
 "Lifebox can sync your contacts automatically." = "Lifebox can sync your contacts automatically.";
 "error_login" = "error_login";
 "uploading" = "uploading"
+"widgetBottomTitleLastSyncFormat" = "Last upload: %@";
+"widgetBottomTitleNewerSyncronized" = "never";
+"widgetTopTitleFinished" = "Photos are up-to-date";
+"widgetTopTitleInactive" = "Photo synchronization is inactive";
+"widgetTopTitleInProgress" = "Photo synchronization is in progress";
+"error_authentication_message" = "Please open lifebox app and sign in to continue";
+"error_authentication_title" = "Sign in to lifebox";
+"error_passcode_message" = "Files app cannot be used with a passcode. If you would like to use Files app, please open lifebox and disable Passcode Lock";
+"error_passcode_title" = "Passcode Lock is enabled";
