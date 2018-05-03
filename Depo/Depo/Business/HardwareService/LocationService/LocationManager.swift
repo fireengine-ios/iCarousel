@@ -18,8 +18,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     private var requestAuthorizationStatusHandler: RequestAuthorizationStatusHandler?
+    
+    
     
     private override init() {
         super.init()
@@ -107,7 +110,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     // CLLocationManager delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         log.debug("LocationManager locationManager")
-
+        
+        guard storage.accessToken != nil else {
+            return
+        }
+        
         SyncServiceManager.shared.updateInBackground()
     }
     
