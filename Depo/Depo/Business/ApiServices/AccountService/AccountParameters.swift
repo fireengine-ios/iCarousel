@@ -93,6 +93,7 @@ class UserPhoneNumberParameters: BaseRequestParametrs {
 class VerifyPhoneNumberParameter: BaseRequestParametrs {
     let otp: String?
     let referenceToken: String?
+    let processPersonalData: Bool = true
     
     init(otp: String, referenceToken: String) {
         self.otp = otp
@@ -101,7 +102,8 @@ class VerifyPhoneNumberParameter: BaseRequestParametrs {
     
     override var requestParametrs: Any {
         let dict: [String: String] = [AccountJSONConstants.otp: otp ?? "",
-                                      AccountJSONConstants.referenceToken: referenceToken ?? ""]
+                                      AccountJSONConstants.referenceToken: referenceToken ?? "",
+                                      LbRequestkeys.processPersonalData: String(processPersonalData)]
         return dict
     }
     
