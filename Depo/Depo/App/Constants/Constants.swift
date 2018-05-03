@@ -854,4 +854,5 @@ struct TextConstants {
     
     static let packagesSubtitle = NSLocalizedString("Import fearture is totally free of charge and does not affect your internet package", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let sortby = NSLocalizedString("Sort By", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let successfullyPurchased = NSLocalizedString("Successfully purchased", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
