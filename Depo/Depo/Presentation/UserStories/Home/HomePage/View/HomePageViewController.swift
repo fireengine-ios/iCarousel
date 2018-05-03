@@ -176,31 +176,42 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
                     return first < second
                 }
                 
-                if collectionView.cellForItem(at: indexPath) != nil {
+                if indexPathsVisibleCells.contains(indexPath) {
                     if indexPath == indexPathsVisibleCells.first {
                         collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
                     } else {
                         collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
                     }
+                    
                     var frame = popupView.convert(popupView.frame, to: to)
                     frame.origin.y = max(0, frame.origin.y)
                     frame.size.height = popupView.spotlightHeight()
                     completion(frame)
                 } else {
-                    var offset: CGFloat = 0
-                    for index in 0...row-1 {
-                        offset += homePageDataSource.collectionView(collectionView: collectionView, heightForCellAtIndexPath: IndexPath(row: index, section: 0), withWidth: 0)
+                    guard let layout = collectionView.collectionViewLayout as? CollectionViewLayout else {
+                        completion(.zero)
+                        return
                     }
+
+                    CATransaction.flush() //rendering what is already ready
+        
+                    let offset = layout.frameFor(indexPath: indexPath).origin.y
+                    
+                    let isLastCell = indexPath.row == homePageDataSource.popUps.count - 1
                     
                     UIView.animate(withDuration: 0.1, animations: {
-                        self.collectionView.setContentOffset(CGPoint(x: 0, y: offset), animated: false)
+                        if isLastCell {
+                            self.collectionView.scrollToBottom(animated: false)
+                        } else {
+                             self.collectionView.setContentOffset(CGPoint(x: 0, y: offset - 50), animated: false)
+                        }
                     }, completion: { _ in
                         var frame = popupView.convert(popupView.frame, to: to)
                         frame.origin.y = max(0, frame.origin.y)
                         frame.size.height = popupView.spotlightHeight()
                         completion(frame)
+
                     })
-                    
                 }
             }
         }
@@ -224,6 +235,9 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         return HomeViewTopView.getHeight()
     }
     
+    func didReloadCollectionView(_ collectionView: UICollectionView) {
+        output.didReloadCollectionView()
+    }
     
     // MARK: UICollectionViewDelegate
     

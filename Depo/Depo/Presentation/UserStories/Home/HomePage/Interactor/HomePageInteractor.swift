@@ -25,6 +25,7 @@ class HomePageInteractor: HomePageInteractorInput {
     }
     
     func needRefresh() {
+        homeCardsLoaded = false
         getAllCardsForHomePage()
     }
     
@@ -35,8 +36,7 @@ class HomePageInteractor: HomePageInteractorInput {
                 switch result {
                 case .success(let array):
                     self?.homeCardsLoaded = true
-                    self?.output.getAllCardsForHomePage()
-                    CardsManager.default.startOperatonsForCardsResponces(cardsResponces: array)
+                    CardsManager.default.startOperatonsForCardsResponces(cardsResponces: array)                    
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)
                 }
