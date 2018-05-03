@@ -155,13 +155,15 @@ extension AuthorizationRepositoryImp: RequestRetrier {
             .responseJSON { [weak self] response in
                 guard let strongSelf = self else { return }
                 debugPrint(response)
-                
+                #if MAIN_APP
+                log.debug(self?.tokenStorage.refreshToken ?? "tokenStorage.refreshToken nil")
+                log.debug(response)
+                #endif
                 /// if tokenStorage.refreshToken is invalid
                 if response.response?.statusCode == 401 {
                     #if MAIN_APP
                     log.debug("failed refreshAccessToken")
-                    log.debug(self?.tokenStorage.refreshToken ?? "tokenStorage.refreshToken nil")
-                    log.debug(response)
+
                     #endif
                     strongSelf.refreshFailedHandler()
                     completion(false, nil)

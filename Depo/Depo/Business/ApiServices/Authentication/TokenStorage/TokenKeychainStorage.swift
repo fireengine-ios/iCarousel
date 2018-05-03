@@ -27,6 +27,9 @@ final class TokenKeychainStorage: TokenStorage {
             return token
         }
         set {
+            #if MAIN_APP
+            log.debug("new accessToken: \(newValue ?? "nil")")
+            #endif
             keychain.set(newValue, forKey: accessTokenKey)
         }
     }
