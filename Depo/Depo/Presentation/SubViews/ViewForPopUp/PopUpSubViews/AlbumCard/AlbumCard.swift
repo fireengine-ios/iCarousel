@@ -67,6 +67,12 @@ final class AlbumCard: BaseView {
         if let details = object?.details {
             set(details: details)
         }
+        
+        if object?.saved == true {
+            cardType = .display
+        }else {
+            cardType = .save
+        }
     }
     
     override func layoutSubviews() {

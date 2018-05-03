@@ -60,6 +60,12 @@ class AnimationCard: BaseView {
         if let details = object?.details {
             set(details: details)
         }
+        
+        if object?.saved == true {
+            cardType = .display
+        }else {
+            cardType = .save
+        }
     }
     
     
