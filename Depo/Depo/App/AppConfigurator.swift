@@ -35,6 +35,8 @@ final class AppConfigurator {
         AppWormholeListener.shared.startListen()
         _ = PushNotificationService.shared.assignNotificationActionBy(launchOptions: launchOptions)
         LocalMediaStorage.default.clearTemporaryFolder()
+        
+        startUpdateLocation(with: launchOptions)
     }
     
     private static func firstStart() {
@@ -146,6 +148,12 @@ final class AppConfigurator {
         
         DispatchQueue.main.async {
             MPush.register(forRemoteNotificationTypes: MNotificationType(rawValue: notificationTypes))
+        }
+    }
+    
+    private static func startUpdateLocation(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        if let isLocationUpdate = launchOptions?[.location] as? NSNumber, isLocationUpdate.boolValue {
+            LocationManager.shared.startUpdateLocation()
         }
     }
 }

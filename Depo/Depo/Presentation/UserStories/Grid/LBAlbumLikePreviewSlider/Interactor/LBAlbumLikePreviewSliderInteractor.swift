@@ -67,7 +67,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         switch type {
         case .story:
             getStories(group: group)
-        case .album:
+        case .albums:
             getAlbums(group: group)
         case .people:
             getThumbnails(forType: .people, group: group)

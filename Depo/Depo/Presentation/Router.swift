@@ -572,8 +572,8 @@ class RouterVC: NSObject {
     
     // MARK: Albums list
     
-    func albumsListController() -> BaseFilesGreedChildrenViewController {
-        let controller = AlbumsModuleInitializer.initializeAlbumsController(with: "BaseFilesGreedViewController")
+    func albumsListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
+        let controller = AlbumsModuleInitializer.initializeAlbumsController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
         return controller
     }
     
