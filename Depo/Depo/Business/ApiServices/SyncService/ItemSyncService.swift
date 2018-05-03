@@ -274,8 +274,6 @@ extension CoreDataStack {
                     handler(localItems, nil)
                 }
             }
-            
-            
             }, fail: {
                 handler(nil, ErrorResponse.string(TextConstants.commonServiceError))
         }, newFieldValue: fieldValue)
