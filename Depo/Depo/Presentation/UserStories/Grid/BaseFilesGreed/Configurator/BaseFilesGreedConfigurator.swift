@@ -26,6 +26,7 @@ class BaseFilesGreedModuleConfigurator {
             presenter = BaseFilesGreedPresenter()
             presenter?.needShowProgressInCells = true
             presenter?.needShowScrollIndicator = true
+            presenter?.needShowEmptyMetaItems = true
         } else {
             presenter = DocumentsGreedPresenter()
             presenter?.sortedRule = .timeUpWithoutSection

@@ -145,6 +145,11 @@ extension AuthorizationRepositoryImp: RequestRetrier {
         
         let headers = [refreshTokenKey: tokenStorage.refreshToken ?? ""]
         
+        #if MAIN_APP
+        log.debug(tokenStorage.refreshToken ?? "tokenStorage.refreshToken nil")
+        #endif
+        
+        
         sessionManager
             .request(urls.refreshAccessToken, method: .post, parameters: [:], encoding: JSONEncoding.default, headers: headers)
             .responseJSON { [weak self] response in
@@ -155,7 +160,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                 if response.response?.statusCode == 401 {
                     #if MAIN_APP
                     log.debug("failed refreshAccessToken")
-                    log.debug(self?.tokenStorage.refreshToken ?? "nil")
+                    log.debug(self?.tokenStorage.refreshToken ?? "tokenStorage.refreshToken nil")
                     log.debug(response)
                     #endif
                     strongSelf.refreshFailedHandler()

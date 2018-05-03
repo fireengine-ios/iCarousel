@@ -10,18 +10,19 @@ import UIKit
 
 final class AppMigrator {
     
+    /// call migrate after Keychain clear
     static func migrateAll() {
         migrateTokens()
         migratePasscode()
         migratePasscodeTouchID()
     }
     
-    private static let migrationHasBeenCompleted = "application2018migrationKey"
-    
     static func migrateTokens() {
         guard let token = UserDefaults.standard.object(forKey: "REMEMBER_ME_TOKEN_KEY") as? String, !token.isEmpty else {
             return
         }
+        
+        log.debug("migrateTokens")
         
         let tokenStorage: TokenStorage = factory.resolve()
         tokenStorage.refreshToken = token
@@ -37,6 +38,8 @@ final class AppMigrator {
             return
         }
         
+        log.debug("migratePasscode")
+        
         let passcodeStorage: PasscodeStorage = factory.resolve()
         passcodeStorage.save(passcode: passcodeMD5)
     }
@@ -44,6 +47,8 @@ final class AppMigrator {
     static func migratePasscodeTouchID() {
         let passcodeSetting = UserDefaults.standard.integer(forKey: "PassCodeSetting")
         let passcodeSettingOnWithTouchID = 2
+        
+        log.debug("migratePasscodeTouchID")
         
         if passcodeSetting == passcodeSettingOnWithTouchID {
             var biometricsManager: BiometricsManager = factory.resolve()

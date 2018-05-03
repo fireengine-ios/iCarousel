@@ -120,10 +120,12 @@ struct SignUpUserPhoveVerification: RequestParametrs {
     
     let token: String
     let otp: String
+    let processPersonalData: Bool
     
     var requestParametrs: Any {
-        let dict: [String: Any] = [LbRequestkeys.referenceToken : token,
-                                   LbRequestkeys.otp            : otp]
+        let dict: [String: Any] = [LbRequestkeys.referenceToken      : token,
+                                   LbRequestkeys.otp                 : otp,
+                                   LbRequestkeys.processPersonalData : processPersonalData]
         return dict
     }
     
