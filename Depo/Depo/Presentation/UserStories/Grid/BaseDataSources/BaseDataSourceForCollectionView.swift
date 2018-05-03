@@ -1384,90 +1384,82 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
 
-        var objectsForRemoving = [Item]()
-        var localObjectsForReplace = [Item]()
+        var idsForRemove = [String]()
+        var objectsForReplaceDict = [String : Item]()
         
         if let unwrapedFilters = originalFilters,
             !showOnlyRemotes(filters: unwrapedFilters) {
             
             var serverObjects = [Item]()
             
+            var allItemsIDs = [String]()
+            for array in allItems {
+                for object in array {
+                    allItemsIDs.append(object.getTrimmedLocalID())
+                }
+            }
+            
             for object in items {
                 if object.isLocalItem {
-                    objectsForRemoving.append(object)
+                    idsForRemove.append(object.uuid)
                 } else {
                     serverObjects.append(object)
                 }
             }
             
-            var collectionItemsTrimmedLocalIDs = [String]()
-            
-            for array in allItems {
-                for arraysObject in array {
-                    if !arraysObject.isLocalItem {
-                        collectionItemsTrimmedLocalIDs.append(arraysObject.getTrimmedLocalID())
-                    }
-                }
-            }
-            objectsForRemoving = objectsForRemoving.filter({
-                return !collectionItemsTrimmedLocalIDs.contains($0.getTrimmedLocalID())
-            })
-        
-            if objectsForRemoving.isEmpty {
-                ///check md5
-            }
-            
             let localIDs = serverObjects.map {
                 $0.getTrimmedLocalID()
             }
+            let localObjectsForReplace = CoreDataStack.default.allLocalItems(trimmedLocalIds: localIDs)
             
-            localObjectsForReplace = CoreDataStack.default.allLocalItems(trimmedLocalIds: localIDs)
-
-            let trimmedLocalIDs = localObjectsForReplace.map({ $0.getTrimmedLocalID() })
-            
-            if (localObjectsForReplace.count != serverObjects.count) {
-                for object in serverObjects {
-                    if !trimmedLocalIDs.contains(object.getTrimmedLocalID()) {
-                        objectsForRemoving.append(object)
-                    }
-                }
+            let foundedLocalID = localObjectsForReplace.map {
+                $0.getTrimmedLocalID()
             }
-            
-            for object in localObjectsForReplace {
-                if let index = collectionItemsTrimmedLocalIDs.index(of: object.getTrimmedLocalID()) {
-                    collectionItemsTrimmedLocalIDs.remove(at: index)
-                }
-            }
-            
-            for localObject in localObjectsForReplace {
-                for (index, object) in allMediaItems.enumerated() {
-                    if object.getTrimmedLocalID() == localObject.getTrimmedLocalID() {
-                        allMediaItems[index] = localObject
-                    }
-                }
-            }
-            
-            if (localObjectsForReplace.count > 0) {
-                var newArray = [[Item]]()
-                for array in allItems {
-                    var sectionArray = [Item]()
-                    for arraysObject in array {
-                        if let index = trimmedLocalIDs.index(of: arraysObject.getTrimmedLocalID()) {
-                            sectionArray.append(localObjectsForReplace[index])
+            for object in serverObjects {
+                let trimmedID = object.getTrimmedLocalID()
+                if let index = foundedLocalID.index(of: trimmedID) {
+                    let objForReplace = localObjectsForReplace[index]
+                    if let index = allItemsIDs.index(of: trimmedID){
+                        allItemsIDs.remove(at: index)
+                        if allItemsIDs.contains(trimmedID){
+                            idsForRemove.append(object.uuid)
                         } else {
-                            sectionArray.append(arraysObject)
+                            objectsForReplaceDict[object.uuid] = objForReplace
                         }
                     }
-                    newArray.append(sectionArray)
+                } else {
+                    idsForRemove.append(object.uuid)
                 }
-                allItems = newArray
             }
         } else {
-            objectsForRemoving = items
+            idsForRemove = items.map{
+                $0.uuid
+            }
         }
         
-        updateCellsForObjects(objectsForDelete: objectsForRemoving, objectsForUpdate: localObjectsForReplace)
+        var newArray = [[WrapData]]()
         
+        for array in allItems {
+            var newSectionArray = [WrapData]()
+            for object in array {
+                
+                if let index = idsForRemove.index(of: object.uuid) {
+                    idsForRemove.remove(at: index)
+                    continue
+                }
+                if let obj = objectsForReplaceDict[object.uuid]{
+                    newSectionArray.append(obj)
+                    continue
+                }
+                newSectionArray.append(object)
+            }
+            if !newSectionArray.isEmpty{
+                newArray.append(newSectionArray)
+            }
+        }
+        
+        allItems = newArray
+        collectionView?.reloadData()
         delegate?.didDelete(items: items)
         
         updateCoverPhoto()
