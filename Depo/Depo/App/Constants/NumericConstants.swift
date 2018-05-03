@@ -85,6 +85,8 @@ struct NumericConstants {
     static let defaultCustomScrollIndicatorOffset: CGFloat = 50
     
     static let myStreamSliderThumbnailsCount: Int = 4
+    
+    static let intervalInSecondsBetweenAutoSyncItemsAppending = 8.0
 }
 
 struct RequestSizeConstant {

@@ -13,13 +13,14 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     var router: HomePageRouterInput!
     
     private let spotlightManager = SpotlightManager.shared
-    private var needShowSpotlightType: SpotlightType?
 
     private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
     private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
     
     private(set) var favoritesViewType = MoreActionsConfig.ViewType.Grid
     private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    
+    private var loadCollectionView = false
     
     func viewIsReady() {
         spotlightManager.delegate = self
@@ -59,20 +60,12 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     
     func needRefresh() {
         interactor.needRefresh()
-        spotlightManager.requestShowSpotlight()
     }
     
     func stopRefresh() {
         view.stopRefresh()
     }
-    
-    func getAllCardsForHomePage() {
-        if let type = needShowSpotlightType {
-            view.needShowSpotlight(type: type)
-            needShowSpotlightType = nil
-        }
-    }
-    
+        
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
         if fieldType == .all {
             self.allFilesViewType = type
@@ -94,15 +87,17 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     func closedSpotlight(type: SpotlightType) {
         spotlightManager.closedSpotlight(type: type)
     }
+    
+    func didReloadCollectionView() {
+        spotlightManager.requestShowSpotlight()
+    }
 }
 
 extension HomePagePresenter: SpotlightManagerDelegate {
     
     func needShowSpotlight(type: SpotlightType) {
-        if type.rawValue < SpotlightType.movieCard.rawValue || interactor.homeCardsLoaded {
+        if interactor.homeCardsLoaded {
             view.needShowSpotlight(type: type)
-        }  else {
-            needShowSpotlightType = type
-        }
-    }    
+        }  
+    }
 }

@@ -110,4 +110,13 @@ class CollectionViewLayout: UICollectionViewLayout {
         headerAttribute.frame = CGRect(x: 0.0, y: 0.0, width: contentWidth, height: headerH)
         return headerAttribute
     }
+    
+    func frameFor(indexPath: IndexPath) -> CGRect {
+        for attrib in cache {
+            if attrib.indexPath == indexPath {
+                return attrib.frame
+            }
+        }
+        return .zero
+    }
 }

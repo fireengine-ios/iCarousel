@@ -16,7 +16,11 @@ protocol GridListTopBarDelegate: class {
 
 class GridListTopBar: ViewController {
     
-    @IBOutlet fileprivate weak var sortByButton: UIButton!
+    @IBOutlet fileprivate weak var sortByButton: UIButton! {
+        didSet {
+            sortByButton.setTitle(TextConstants.sortby, for: .normal)
+        }
+    }
     
     @IBOutlet fileprivate weak var gridListButton: UIButton!
     

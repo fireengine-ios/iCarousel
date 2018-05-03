@@ -13,6 +13,7 @@ protocol BaseCollectionViewDataSourceDelegate {
     func numberOfColumns() -> Int
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
+    func didReloadCollectionView(_ collectionView: UICollectionView)
 }
 
 class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, CollectionViewLayoutDelegate, BaseCollectionViewCellWithSwipeDelegate, CardsManagerViewProtocol {
@@ -216,6 +217,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         popUps.append(contentsOf: newPopUps)
         
         collectionView.reloadData()
+        delegate?.didReloadCollectionView(self.collectionView)
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
@@ -245,6 +247,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 return order1 < order2
             })
             collectionView.reloadData()
+            delegate?.didReloadCollectionView(self.collectionView)
         }
     }
     
@@ -304,6 +307,5 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         for operationName in array {
             notPermittedPopUpViewTypes.insert(operationName)
         }
-    }
-    
+    }    
 }
