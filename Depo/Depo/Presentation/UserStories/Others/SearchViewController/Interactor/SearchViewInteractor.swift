@@ -206,6 +206,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
                 let peopleItemResponse = PeopleItemResponse()
                 peopleItemResponse.id = id
                 peopleItemResponse.name = item.info?.name ?? ""
+                peopleItemResponse.thumbnail = item.info?.thumbnail
                 
                 DispatchQueue.main.async {
                     self?.output?.getAlbum(albumItem: AlbumItem(remote: albumResponse),
@@ -270,6 +271,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
             suggest.type = .people
             info.id = peopleItem.responseObject.id
             info.name = peopleItem.responseObject.name
+            info.thumbnail = peopleItem.urlToFile
             
         case .faceImage(.things):
             guard let thingsItem = item as? ThingsItem else {
