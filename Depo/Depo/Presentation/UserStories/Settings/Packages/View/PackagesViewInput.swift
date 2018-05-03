@@ -18,4 +18,5 @@ protocol PackagesViewInput: class, ActivityIndicator {
     
     func showRestoreButton()
     func showInAppPolicy()
+    func reloadPackages()
 }

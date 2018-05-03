@@ -14,6 +14,11 @@ class PackagesPresenter {
     var activeSubscriptions: [SubscriptionPlanBaseResponse] = []
     private var accountType = AccountType.all
     
+    private var referenceToken = ""
+    private var userPhone = ""
+    private var offerToBuy: OfferServiceResponse?
+    private var optInVC: OptInController?
+    
     private func getAccountType(for accountType: String, subscriptionPlans: [SubscriptionPlanBaseResponse]) -> AccountType {
         if accountType == "TURKCELL" {
             return AccountType.turkcell
@@ -32,10 +37,14 @@ class PackagesPresenter {
         }
     }
     
-    var referenceToken = ""
-    var userPhone = ""
-    var offerToBuy: OfferServiceResponse?
-    var optInVC: OptInController?
+    private func refreshPage() {
+        activeSubscriptions = []
+        referenceToken = ""
+        userPhone = ""
+        offerToBuy = nil
+        optInVC = nil
+        view?.reloadPackages()
+    }
 }
 
 // MARK: PackagesViewOutput
@@ -164,6 +173,17 @@ extension PackagesPresenter: PackagesInteractorOutput {
         optInVC?.stopActivityIndicator()
         optInVC?.resignFirstResponder()
         RouterVC().popViewController()
+        
+        refreshPage()
+        
+        /// to wait popViewController animation
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { 
+            let popupVC = PopUpController.with(title: TextConstants.success,
+                                               message: TextConstants.successfullyPurchased,
+                                               image: .success,
+                                               buttonTitle: TextConstants.ok)
+            RouterVC().presentViewController(controller: popupVC)
+        }
     }
     
     func successed(activeSubscriptions: [SubscriptionPlanBaseResponse]) {
