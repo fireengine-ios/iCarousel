@@ -50,7 +50,7 @@ class OffersServiceIml: BaseRequestService, OffersService {
 
         let param = ValidateApplePurchaseParameters(receiptId: receiptId, productId: productId)
         let handler = BaseResponseHandler<ValidateApplePurchaseResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
+        executePostRequest(param: param, handler: handler)
     }
     
     func initOffer(offer: OfferServiceResponse, success: SuccessResponse?, fail: @escaping FailResponse) {
