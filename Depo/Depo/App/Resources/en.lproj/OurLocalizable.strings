@@ -606,3 +606,4 @@
 "error_passcode_message" = "Files app cannot be used with a passcode. If you would like to use Files app, please open lifebox and disable Passcode Lock";
 "error_passcode_title" = "Passcode Lock is enabled";
 "Successfully purchased" = "Successfully purchased";
+"This text doesn't match. Please try again" = "This text doesn't match. Please try again";
