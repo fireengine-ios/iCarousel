@@ -25,7 +25,12 @@ class FileInfoInteractor: FileInfoInteractorInput {
     
     func onRename(newName: String) {
         guard !newName.isEmpty else {
-            output.updated()
+            if let name = item?.name {
+                output.cancelSave(use: name)
+            } else {
+                output.updated()
+            }
+
             return
         }
         
