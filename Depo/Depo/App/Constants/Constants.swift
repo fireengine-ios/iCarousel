@@ -252,7 +252,7 @@ struct TextConstants {
     
     
     // MARK: Home Animation card
-    static let homeAnimationCardTitle = NSLocalizedString("Animaion", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeAnimationCardTitle = NSLocalizedString("Animation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeAnimationCardSubTitle = NSLocalizedString("We have created an animation from your photos!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeAnimationCardButtonSaveCollage = NSLocalizedString("Save Animation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
