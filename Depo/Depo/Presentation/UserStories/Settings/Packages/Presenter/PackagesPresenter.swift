@@ -177,7 +177,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
         refreshPage()
         
         /// to wait popViewController animation
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { 
+        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) { 
             let popupVC = PopUpController.with(title: TextConstants.success,
                                                message: TextConstants.successfullyPurchased,
                                                image: .success,
