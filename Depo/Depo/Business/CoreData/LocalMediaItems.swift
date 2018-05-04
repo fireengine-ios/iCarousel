@@ -314,6 +314,7 @@ extension CoreDataStack {
             guard let `self` = self else {
                 return
             }
+
             let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@)", actualPhotoLibItemsIDs)
             let allNonAccurateSavedLocalFiles: [MediaItem] = self.executeRequest(predicate: predicate,
                                                                             context: newContext)

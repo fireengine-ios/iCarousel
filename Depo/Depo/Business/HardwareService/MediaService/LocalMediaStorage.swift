@@ -405,7 +405,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     private func merge(asset assetIdentifier: String, with item: WrapData) {
 
         if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
-
+            LocalMediaStorage.default.assetsCache.append(list: [asset])
             let wrapData = WrapData(asset: asset)
             wrapData.copyFileData(from: item)
             
@@ -417,10 +417,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 } else {
                     mediaItem = MediaItem(wrapData: wrapData, context: context)
                 }
-                
+
                 mediaItem.localFileID = assetIdentifier
                 mediaItem.trimmedLocalFileID = item.getTrimmedLocalID()//assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier
-                LocalMediaStorage.default.assetsCache.append(list: [asset])
+                
                 CoreDataStack.default.saveDataForContext(context: context, savedCallBack: nil)
 ///WE might need this               CoreDataStack.default.updateSavedItems(savedItems: [mediaItem], remoteItems: [item], context: context)
             }
