@@ -89,6 +89,10 @@ extension ActivityTimelineViewController: ActivityTimelineViewInput {
             tableView.backgroundView = ActivityTimelineTableBackView.fromNib
             setupInfinityScroll()
         }
+        
+        if tableView.contentSize.height < tableView.frame.height {
+            endInfinityScrollWithNoMoreData()
+        }
     }
     
     func endInfinityScrollWithNoMoreData() {

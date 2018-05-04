@@ -14,7 +14,7 @@ enum SpotlightType: Int {
     case movieCard
     case albumCard
     case collageCard
-    case animationCard
+//    case animationCard
     case filterCard
     
     var title: String {
@@ -24,7 +24,7 @@ enum SpotlightType: Int {
         case .movieCard: return TextConstants.spotlightMovieCardText
         case .albumCard: return TextConstants.spotlightAlbumCard
         case .collageCard: return TextConstants.spotlightCollageCard
-        case .animationCard: return TextConstants.spotlightAnimationCard
+//        case .animationCard: return TextConstants.spotlightAnimationCard
         case .filterCard: return TextConstants.spotlightFilterCard
         }
     }
@@ -34,7 +34,7 @@ enum SpotlightType: Int {
         case .movieCard: return MovieCard.self
         case .albumCard: return AlbumCard.self
         case .collageCard: return CollageCard.self
-        case .animationCard: return AnimationCard.self
+//        case .animationCard: return AnimationCard.self
         case .filterCard: return FilterPhotoCard.self
         default: return BaseView.self
         }
