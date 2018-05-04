@@ -136,6 +136,11 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         }
         
         frameForSpotlight(type: type, controller: tabBarVC) { [weak self] frame in
+            guard let navVC = tabBarVC.activeNavigationController,
+                navVC.topViewController is HomePageViewController else {
+                    return
+            }
+            
             if frame != .zero {
                 
                 let controller = SpotlightViewController.with(rect: frame, message: type.title, completion: { [weak self] in
