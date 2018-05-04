@@ -8,8 +8,10 @@
 
 import UIKit
 import MessageUI
+import XCGLogger
 
-class Mail: NSObject, MFMailComposeViewControllerDelegate {
+
+final class Mail: NSObject, MFMailComposeViewControllerDelegate {
     
     typealias MailSuccessHandler = () -> Void
     typealias MailFailHandler = (_ error: Error?) -> Void
@@ -48,7 +50,7 @@ class Mail: NSObject, MFMailComposeViewControllerDelegate {
         mailController!.setMessageBody(emailBody, isHTML: false)
         
 
-        let logPath: String = Device.documentsFolderUrl(withComponent: "app.log").path
+        let logPath: String = Device.documentsFolderUrl(withComponent: XCGLogger.lifeboxLogFileName).path
         if FileManager.default.fileExists(atPath: logPath) {
             if let logData = NSData(contentsOfFile: logPath) {
                 mailController?.addAttachmentData(Data(referencing: logData), mimeType: "text/plain", fileName: "logs.txt")

@@ -15,15 +15,15 @@ import XCGLogger
 
 // the global reference to logging mechanism to be available in all files
 var log: XCGLogger = {
-    let log = XCGLogger(identifier: "advancedLogger", includeDefaultDestinations: false)
+    let log = XCGLogger(identifier: XCGLogger.lifeboxAdvancedLoggerIdentifier, includeDefaultDestinations: false)
     
-    let logPath = Device.documentsFolderUrl(withComponent: "app.log")
+    let logPath = Device.documentsFolderUrl(withComponent: XCGLogger.lifeboxLogFileName)
     
     let autoRotatingFileDestination = AutoRotatingFileDestination(owner: log,
                                                                   writeToFile: logPath,
-                                                                  identifier: "advancedLogger.fileDestination",
+                                                                  identifier: XCGLogger.lifeboxFileDestinationIdentifier,
                                                                   shouldAppend: true,
-                                                                  appendMarker: "-- Relaunched App --",
+                                                                  appendMarker: XCGLogger.lifeboxAppendMarker,
                                                                   attributes: [.protectionKey : FileProtectionType.completeUntilFirstUserAuthentication],
                                                                   maxFileSize: NumericConstants.logMaxSize,
                                                                   maxTimeInterval: NumericConstants.logDuration,

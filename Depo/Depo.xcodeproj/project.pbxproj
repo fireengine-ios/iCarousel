@@ -2579,6 +2579,8 @@
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B520000C202492A90096D036 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520000B202492A90096D036 /* SynchronizedArray.swift */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
+		B54844C0209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
+		B54844C1209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54BFF31202B20250018AF82 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C850A21ACD63F700F976DE /* NotificationCenter.framework */; };
 		B54BFF34202B20250018AF82 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF33202B20250018AF82 /* TodayViewController.swift */; };
 		B54BFF37202B20250018AF82 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54BFF35202B20250018AF82 /* MainInterface.storyboard */; };
@@ -5053,6 +5055,7 @@
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
 		B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncOperation.swift; sourceTree = "<group>"; };
+		B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCGLogger+Extension.swift"; sourceTree = "<group>"; };
 		B54BFF30202B20250018AF82 /* autosync-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "autosync-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54BFF33202B20250018AF82 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		B54BFF36202B20250018AF82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -10482,6 +10485,7 @@
 				CE5FE967208B2C260065AC7E /* NSFileCoordinator+Coordinate.swift */,
 				CE19CE00208F016600DB903E /* UIAlertController+Action.swift */,
 				CE49E8F92099BD71007F05A6 /* UIButton+Font.swift */,
+				B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -14572,6 +14576,7 @@
 				8C0B919320170E0D00A5BA81 /* DuplicatedContactsPresenter.swift in Sources */,
 				8C06AC0D20066641003D8E05 /* TurkcellSecurityInteractor.swift in Sources */,
 				8C0E8F3C1FDEBDFF00789C91 /* SplashInteractor.swift in Sources */,
+				B54844C1209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */,
 				8C0E8F3D1FDEBDFF00789C91 /* MailVerificationViewController.swift in Sources */,
 				8C0B919C20170E5C00A5BA81 /* DuplicatedContactsRouter.swift in Sources */,
 				8C0E8F3E1FDEBDFF00789C91 /* SplashRouterInput.swift in Sources */,
@@ -15915,6 +15920,7 @@
 				4AAF28B720205454007B43BA /* FaceImageItemsConfigurator.swift in Sources */,
 				C35EE3E71E1DE92F727B422B /* OTPViewModuleInput.swift in Sources */,
 				C16DECBEE5DA1602185ABA27 /* OTPViewInteractor.swift in Sources */,
+				B54844C0209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */,
 				759BB6DB00ECA61DBDBBB0B9 /* OTPViewInteractorIO.swift in Sources */,
 				7CA4A165207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.swift in Sources */,
 				4A8CC31A201A027400C040C4 /* FaceImageInteractorInput.swift in Sources */,
