@@ -121,11 +121,15 @@ extension PackagesViewController: PackagesViewInput {
         UIApplication.showErrorAlert(message: error.description)
     }
     
-    func display(subscriptionPlans array: [SubscriptionPlan]) {
+    func display(subscriptionPlans array: [SubscriptionPlan], append: Bool = false) {
         if let layout = collectionView.collectionViewLayout as? ColumnsCollectionLayout {
             layout.cellHeight = SubscriptionPlanCollectionViewCell.heightForAccount(type: output.getAccountType())
         }
-        plans += array
+        if append {
+            plans += array
+        } else {
+            plans = array
+        }
     }
     
     func showActivateOfferAlert(for offer: OfferServiceResponse) {

@@ -229,20 +229,20 @@ extension PackagesPresenter: PackagesInteractorOutput {
         }
         
         let subscriptionPlans = interactor.convertToASubscriptionList(activeSubscriptionList: activeSubscriptions, accountType: accountType)
-        view?.display(subscriptionPlans: subscriptionPlans)
+        view?.display(subscriptionPlans: subscriptionPlans, append: false)
         
         view?.stopActivityIndicator()
     }
     
     func successed(offers: [OfferServiceResponse]) {
         let subscriptionPlans = interactor.convertToSubscriptionPlans(offers: offers, accountType: accountType)
-        view?.display(subscriptionPlans: subscriptionPlans)
+        view?.display(subscriptionPlans: subscriptionPlans, append: true)
         view?.stopActivityIndicator()
     }
     
     func successed(offerApples: [OfferApple]) {
         let subscriptionPlans = interactor.convertToSubscriptionPlans(offerApples: offerApples)
-        view?.display(subscriptionPlans: subscriptionPlans)
+        view?.display(subscriptionPlans: subscriptionPlans, append: true)
         view?.stopActivityIndicator()
     }
     
