@@ -47,14 +47,11 @@ class Mail: NSObject, MFMailComposeViewControllerDelegate {
         mailController!.setSubject(subject)
         mailController!.setMessageBody(emailBody, isHTML: false)
         
-        let paths: [String] = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        if let documentsDirectory: String = paths.first {
-            let logPath: String = documentsDirectory.stringByAppendingPathComponent(path: "app.log")
-            if FileManager.default.fileExists(atPath: logPath) {
-                let logData = NSData.init(contentsOfFile: logPath)
-                if let `logData` = logData {
-                    mailController?.addAttachmentData(Data(referencing: logData), mimeType: "text/plain", fileName: "logs.txt")
-                }
+
+        let logPath: String = Device.documentsFolderUrl(withComponent: "app.log").path
+        if FileManager.default.fileExists(atPath: logPath) {
+            if let logData = NSData(contentsOfFile: logPath) {
+                mailController?.addAttachmentData(Data(referencing: logData), mimeType: "text/plain", fileName: "logs.txt")
             }
         }
         
