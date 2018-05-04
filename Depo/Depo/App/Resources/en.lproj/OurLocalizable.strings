@@ -607,3 +607,11 @@
 "error_passcode_title" = "Passcode Lock is enabled";
 "Successfully purchased" = "Successfully purchased";
 "This text doesn't match. Please try again" = "This text doesn't match. Please try again";
+"Cancel Analyzing" = "Cancel Analyzing";
+"Delete all" = "Delete all";
+"Keep" = "Keep";
+"Duplicated Contacts" = "Duplicated Contacts";
+"Free" = "Free";
+"%d%% Backed up…" = "%d%% Backed up…";
+"%d%% Restored…" = "%d%% Restored…";
+"%d%% Analyzed…" = "%d%% Analyzed…";
