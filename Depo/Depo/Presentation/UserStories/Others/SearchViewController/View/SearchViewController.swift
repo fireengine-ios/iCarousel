@@ -90,6 +90,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         let navBar = navigationController?.navigationBar
         navBar?.barTintColor = UIColor.white
         navBar?.tintColor = ColorConstants.darcBlueColor
+        navBar?.setBackgroundImage(UIImage(color: .white), for: .default)
     }
     
     override func viewDidAppear(_ animated: Bool) {
