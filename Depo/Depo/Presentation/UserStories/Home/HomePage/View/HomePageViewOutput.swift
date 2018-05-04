@@ -9,9 +9,7 @@
 protocol HomePageViewOutput {
 
     func viewIsReady()
-    
-    func viewDidAppear()
-    
+       
     func homePagePresented()
     
     func showSettings()
@@ -32,5 +30,5 @@ protocol HomePageViewOutput {
     
     func closedSpotlight(type: SpotlightType)
     
-    func didReloadCollectionView()
+    func requestShowSpotlight(for types: [SpotlightType])
 }

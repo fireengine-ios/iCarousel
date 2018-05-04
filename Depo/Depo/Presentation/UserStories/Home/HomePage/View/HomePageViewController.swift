@@ -83,7 +83,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
             navigationBarWithGradientStyle()
         }
         
-        output.viewDidAppear()
+        requestShowSpotlight()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -128,6 +128,12 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     func needPresentPopUp(popUpView: UIViewController) {
         present(popUpView, animated: true, completion: nil)
+    }
+    
+    private func requestShowSpotlight() {
+        var cardTypes: [SpotlightType] = [.homePageIcon, .homePageGeneral]
+        cardTypes.append(contentsOf: homePageDataSource.popUps.compactMap { SpotlightType(cardView: $0) })
+        output.requestShowSpotlight(for: cardTypes)
     }
     
     func needShowSpotlight(type: SpotlightType) {        
@@ -241,7 +247,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     }
     
     func didReloadCollectionView(_ collectionView: UICollectionView) {
-        output.didReloadCollectionView()
+        requestShowSpotlight()
     }
     
     // MARK: UICollectionViewDelegate
