@@ -7,10 +7,10 @@
 //
 
 final class FaceImageAddNameConfigurator {
-    func configure(viewController: FaceImageAddNameViewController, item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?) {
+    func configure(viewController: FaceImageAddNameViewController, item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?, isSearchItem: Bool) {
         let router = FaceImageAddNameRouter()
         
-        let presenter = FaceImageAddNamePresenter()
+        let presenter = FaceImageAddNamePresenter(isSearchItem: isSearchItem)
                 
         presenter.view = viewController
         presenter.router = router

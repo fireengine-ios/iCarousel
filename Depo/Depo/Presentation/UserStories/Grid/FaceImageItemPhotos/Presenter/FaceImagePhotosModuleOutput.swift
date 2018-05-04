@@ -9,5 +9,6 @@
 protocol FaceImagePhotosModuleOutput: class {
     func didChangeName(item: WrapData)
     func didMergePeople()
+    func didMergeAfterSearch(item: Item)
     func getSliderItmes(items: [SliderItem])
 }

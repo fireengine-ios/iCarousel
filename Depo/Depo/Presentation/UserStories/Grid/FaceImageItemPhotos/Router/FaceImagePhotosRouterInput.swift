@@ -7,7 +7,7 @@
 //
 
 protocol FaceImagePhotosRouterInput {
-    func openAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?)
+    func openAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?, isSearchItem: Bool)
     func openChangeCoverWith(_ albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput)
     func showRemoveFromAlbum(completion: @escaping (() -> Void))
 }
