@@ -245,6 +245,8 @@ class AuthenticationService: BaseRequestService {
     func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?) {
         log.debug("AuthenticationService loginUser")
         
+        storageVars.currentUserID = user.login
+        
         let params: [String: Any] = ["username": user.login,
                                      "password": user.password,
                                      "deviceInfo": Device.deviceInfo]

@@ -58,16 +58,14 @@ final class SpotlightManager {
     private let lastShownSpotlightKey = "lastShownSpotlightByUserID"
     private var lastShownSpotlight: Int {
         get {
-            guard let userId = storageVars.currentUserID,
-                let dict = UserDefaults.standard.dictionary(forKey: lastShownSpotlightKey) as? [String: Int] else {
+            let userId = SingletonStorage.shared.uniqueUserID
+            guard let dict = UserDefaults.standard.dictionary(forKey: lastShownSpotlightKey) as? [String: Int] else {
                 return 0
             }
             return dict[userId] ?? 0
         }
         set {
-            guard let userId = storageVars.currentUserID else {
-                return
-            }
+            let userId = SingletonStorage.shared.uniqueUserID
             var dict = UserDefaults.standard.dictionary(forKey: lastShownSpotlightKey) as? [String: Int] ?? [String: Int]()
             dict[userId] = newValue
             
