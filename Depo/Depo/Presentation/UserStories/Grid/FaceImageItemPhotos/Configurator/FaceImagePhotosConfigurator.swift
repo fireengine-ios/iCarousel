@@ -14,12 +14,12 @@ final class FaceImagePhotosConfigurator {
         return [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     }
     
-    func configure(viewController: FaceImagePhotosViewController, album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?) {
+    func configure(viewController: FaceImagePhotosViewController, album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool) {
         let router = FaceImagePhotosRouter()
         router.view = viewController
         router.item = item
         
-        let presenter = FaceImagePhotosPresenter(item: item)
+        let presenter = FaceImagePhotosPresenter(item: item, isSearchItem: isSearchItem)
         
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .changeCoverPhoto],
                                                                    selectionModeTypes: [.createStory, .deleteFaceImage])

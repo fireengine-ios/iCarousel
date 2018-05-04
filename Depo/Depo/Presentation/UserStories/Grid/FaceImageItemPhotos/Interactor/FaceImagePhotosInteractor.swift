@@ -177,4 +177,24 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
         }
     }
     
+    func updateCurrentItem(_ item: BaseDataSourceItem) {
+        guard let item = item as? Item, let id = item.id else { return }
+        
+        if item is PeopleItem {
+            output.startAsyncOperation()
+            
+            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] album in
+                let albumItem = AlbumItem(remote: album)
+                self?.remoteItems = FaceImageDetailService(albumUUID: albumItem.uuid, requestSize: RequestSizeConstant.faceImageItemsRequestSize)
+                if let output = self?.output as? FaceImagePhotosInteractorOutput {
+                    output.didReload()
+                }
+                
+                self?.output.asyncOperationSucces()
+                }, fail: { [weak self] fail in
+                    self?.output.asyncOperationFail(errorMessage: fail.description)
+            })
+        }
+    }
 }
+
