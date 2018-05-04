@@ -64,8 +64,6 @@ class PhotoSelectionDataSource: ArrayDataSourceForCollectionView {
     }
     
     override func updateSelectionCount() {
-        if !selectedItemsArray.isEmpty {
-            super.updateSelectionCount()
-        }
+        super.updateSelectionCount()
     }
 }
