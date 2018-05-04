@@ -792,7 +792,7 @@ struct TextConstants {
     
     // MARK: - Navigation bar title names
     
-    static let showHideBtnTitleName = "Show & Hide"
+    static let showHideBtnTitleName = NSLocalizedString("Show & Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     // MARK: - Accessibility
     static let accessibilityPlus = NSLocalizedString("Plus", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -856,5 +856,6 @@ struct TextConstants {
     static let sortby = NSLocalizedString("Sort By", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let successfullyPurchased = NSLocalizedString("Successfully purchased", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let invalidCaptcha = NSLocalizedString("This text doesn't match. Please try again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let free = NSLocalizedString("Free", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
 }
