@@ -95,14 +95,14 @@ extension IAPManager: SKPaymentTransactionObserver {
         var restoreError: Error? = nil
         
         for transaction in transactions {
-            //let productId = transaction.payment.productIdentifier
+
             switch transaction.transactionState {
             case .purchased:
-                if let productId = transaction.transactionIdentifier,
-                    let type = MenloworksSubscriptionProductID(rawValue: productId) {
+                if let type = MenloworksSubscriptionProductID(rawValue: transaction.payment.productIdentifier) {
                     MenloworksAppEvents.onSubscriptionPurchaseCompleted(type)
                 }
-                purchaseHandler(.success)
+                
+                purchaseHandler(.success(transaction.payment.productIdentifier))
             case .failed:
                 guard let error = transaction.error else { break }
                 if let skError = error as? SKError.Code, skError == .paymentCancelled {
