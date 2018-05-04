@@ -24,7 +24,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.scrolliblePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
         viewController.scrolliblePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .delete, .sync, .download, .addToAlbum],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .sync, .addToAlbum, .delete],
                                                style: .default, tintColor: nil)
         
         let gridListTopBarConfig = GridListTopBarConfig(defaultGridListViewtype: .List,
