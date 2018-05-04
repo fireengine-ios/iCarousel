@@ -187,9 +187,17 @@ class EditinglBar: CustomTabBar {
     }
     
     override func setupItems(withImageToTitleNames names: [ImageNameToTitleTupple]) {
-        let items = names.map { CustomTabBarItem(title: $0.title,
-                                                image: UIImage(named: $0.imageName),
-                                                tag: 0)
+        let items = names.map { item -> CustomTabBarItem in
+            var image = UIImage(named: item.imageName)
+            
+            ///red 'delete' icon
+            if item.imageName == PreDetermendTypes.delete.0 {
+                image = image?.withRenderingMode(.alwaysOriginal)
+            }
+            
+            return CustomTabBarItem(title: item.title,
+                             image: image,
+                             tag: 0)
         }
         
         items.forEach { item in
