@@ -12,7 +12,7 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
     
     override func viewIsReady(collectionView: UICollectionView) {
         dataSource = PhotoSelectionDataSource()
-
+        dataSource.isHeaderless = true
         super.viewIsReady(collectionView: collectionView)
         
         dataSource.canReselect = false
@@ -95,8 +95,8 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
     }
     
     override func filesAppendedAndSorted() {
-        if let dataSource = dataSource as? PhotoSelectionDataSource {
-            dataSource.configurateWithArray(array: [dataSource.allMediaItems])
+        if let dataSource = dataSource as? PhotoSelectionDataSource, filters.contains(.localStatus(.local)) {
+            dataSource.tableDataMArray = [dataSource.allMediaItems]
         }
         super.filesAppendedAndSorted()
     }

@@ -419,7 +419,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
 
                 mediaItem.localFileID = assetIdentifier
-                mediaItem.trimmedLocalFileID = item.getTrimmedLocalID()//assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier
+                mediaItem.trimmedLocalFileID = assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier//item.getTrimmedLocalID()
                 mediaItem.syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
                 
                 CoreDataStack.default.saveDataForContext(context: context, savedCallBack: nil)
