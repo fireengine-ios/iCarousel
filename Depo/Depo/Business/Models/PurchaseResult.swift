@@ -9,7 +9,7 @@
 import Foundation
 
 enum PurchaseResult {
-    case success
+    case success(String)
     case canceled
     case error(Error)
 }

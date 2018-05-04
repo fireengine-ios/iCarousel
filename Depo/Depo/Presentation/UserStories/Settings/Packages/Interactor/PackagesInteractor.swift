@@ -188,9 +188,9 @@ extension PackagesInteractor: PackagesInteractorInput {
     func activate(offerApple: OfferApple) {
         iapManager.purchase(offerApple: offerApple) { [weak self] result in
             switch result {
-            case .success:
+            case .success(let identifier):
                 self?.analyticsService.trackInAppPurchase(product: offerApple.skProduct)
-                self?.validatePurchase(offersApple: [offerApple])
+                self?.validatePurchase(productId: identifier)
             case .canceled:
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.string(TextConstants.cancelPurchase))
@@ -203,32 +203,51 @@ extension PackagesInteractor: PackagesInteractorInput {
         }
     }
     
-    private func validatePurchase(offersApple: [OfferApple], restore: Bool = false) {
+    private func validatePurchase(productId: String) {
+        guard let receipt = iapManager.receipt else {
+            return
+        }
+        
+        offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
+            guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
+                return
+            }
+            
+            if status == .restored || status == .success {
+                self?.getActiveSubscriptions()
+            } else {
+                DispatchQueue.main.async {
+                    self?.output.failedUsage(with: ErrorResponse.string(status.description))
+                }
+            }
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.output.failedUsage(with: errorResponse)
+                }
+        })
+    }
+    
+    private func validateRestorePurchase(offersApple: [OfferApple]) {
+        guard let receipt = iapManager.receipt else {
+            return
+        }
+        
         let group = DispatchGroup()
         
         offersApple.forEach { offer in
             group.enter()
-            if let receipt = iapManager.receipt, let productId = offer.storeProductIdentifier {
-                offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
+            offersService.validateApplePurchase(with: receipt, productId: nil, success: { response in
+                group.leave()
+                guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
+                    return
+                }
+                if !(status == .restored || status == .success) {
+                    log.debug("validateRestorePurchaseFailed: \(status.description)")
+                }
+                }, fail: { errorResponse in
+                    log.debug("validateRestorePurchaseFailed: \(errorResponse.description)")
                     group.leave()
-                    guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
-                        return
-                    }
-                    
-                    if !restore && !(status == .restored || status == .success) {
-                        DispatchQueue.main.async {
-                            self?.output.failedUsage(with: ErrorResponse.string(status.description))
-                        }
-                    }
-                    }, fail: { [weak self] errorResponse in
-                        if !restore {
-                            DispatchQueue.main.async {
-                                self?.output.failedUsage(with: errorResponse)
-                            }
-                        }
-                        group.leave()
-                })
-            }
+            })
         }
         
         group.notify(queue: .main) { [weak self] in
@@ -362,7 +381,7 @@ extension PackagesInteractor: PackagesInteractorInput {
             switch result {
             case .success(let productIds):
                 let offers = productIds.map { OfferApple(productId: $0) }
-                self?.validatePurchase(offersApple: offers, restore: true)
+                self?.validateRestorePurchase(offersApple: offers)
 
             case .fail(let error):
                 DispatchQueue.main.async {
