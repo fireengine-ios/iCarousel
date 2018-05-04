@@ -70,8 +70,6 @@ class LoginInteractor: LoginInteractorInput {
                                       rememberMe: true, //rememberMe,
                                       attachedCaptcha: atachedCaptcha)
         
-        storageVars.currentUserID = login
-        
         authenticationService.login(user: user, sucess: { [weak self] headers in
             guard let `self` = self else {
                 return

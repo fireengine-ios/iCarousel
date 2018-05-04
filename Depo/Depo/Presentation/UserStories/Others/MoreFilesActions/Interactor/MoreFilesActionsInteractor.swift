@@ -397,9 +397,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         if let item = item as? [Item] {
             //FIXME: transform all to BaseDataSourceItem
             if let item = item.first,
-                item.fileType == .faceImage(.people) ||
-                item.fileType == .faceImage(.things) ||
-                item.fileType == .faceImage(.places) {
+                item.fileType.isFaceImageAlbum ||
+                    item.fileType.isFaceImageType {
                 downloadFaceImageAlbum(item: item)
             } else {
                 fileService.download(items: item, toPath: "",
@@ -601,7 +600,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 }, fail: { fail in
                     UIApplication.showErrorAlert(message: fail.description)
             })
-        } else if item.fileType == .faceImage(.things),
+        } else if item.fileType == .faceImageAlbum(.things),
             let id = item.id {
             thingsService.getThingsAlbum(id: Int(id), success: { [weak self] album in
                 let albumItem = AlbumItem(remote: album)
