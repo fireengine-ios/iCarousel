@@ -24,6 +24,16 @@ class FileInfoInteractor: FileInfoInteractorInput {
     }
     
     func onRename(newName: String) {
+        guard !newName.isEmpty else {
+            if let name = item?.name {
+                output.cancelSave(use: name)
+            } else {
+                output.updated()
+            }
+
+            return
+        }
+        
         if let file = item as? Item {
             let renameFile = RenameFile(uuid: file.uuid, newName: newName)
             FileService().rename(rename: renameFile, success: { [weak self] in

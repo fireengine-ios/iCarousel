@@ -12,4 +12,5 @@ protocol FileInfoViewInput: class, ActivityIndicator, ErrorPresenter {
     func goBack()
     func hideViews()
     func showViews()
+    func show(name: String)
 }

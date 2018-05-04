@@ -224,6 +224,10 @@ class FileInfoViewController: BaseViewController, FileInfoViewInput, UITextField
         output.onRename(newName: fileName.text!)
     }
     
+    func show(name: String) {
+        fileName.text = name
+    }
+    
     private func hideInfoDateLabels () {
         takenDateLabel.isHidden = true
         takenDateTitle.isHidden = true

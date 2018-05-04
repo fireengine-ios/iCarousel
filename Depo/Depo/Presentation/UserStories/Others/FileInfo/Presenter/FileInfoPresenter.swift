@@ -48,6 +48,11 @@ class FileInfoPresenter: BasePresenter, FileInfoModuleInput, FileInfoViewOutput,
         view.goBack()
     }
     
+    func cancelSave(use name: String) {
+        asyncOperationSucces()
+        view.show(name: name)
+    }
+    
     func failedUpdate(error: Error) {
         asyncOperationSucces()
         view.showErrorAlert(message: error.description)
