@@ -123,6 +123,6 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     private func isRedirectToSplash(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("captcha_required")
+        return errorResponse.description.contains("Captcha required")
     }
 }
