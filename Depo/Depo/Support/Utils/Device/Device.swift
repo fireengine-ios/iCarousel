@@ -15,10 +15,8 @@ class Device {
     static private let defaultLocale = "en"
     
     static func documentsFolderUrl(withComponent: String ) -> URL {
-        let documentsUrl = FileManager.default.urls(for: .documentDirectory,
-                                                   in: .userDomainMask).last
-        return documentsUrl!.appendingPathComponent(withComponent)
-
+        let documentsUrls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return documentsUrls[documentsUrls.endIndex - 1].appendingPathComponent(withComponent)
     }
 
     static func tmpFolderUrl(withComponent: String ) -> URL {
