@@ -14,7 +14,7 @@ import SDWebImage
 import XCGLogger
 
 // the global reference to logging mechanism to be available in all files
-var log: XCGLogger = {
+let log: XCGLogger = {
     let log = XCGLogger(identifier: XCGLogger.lifeboxAdvancedLoggerIdentifier, includeDefaultDestinations: false)
     
     let logPath = Device.documentsFolderUrl(withComponent: XCGLogger.lifeboxLogFileName)
