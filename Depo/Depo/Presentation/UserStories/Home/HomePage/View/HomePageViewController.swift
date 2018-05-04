@@ -168,7 +168,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
                 frame = CGRect(x: 0, y: topViewFrame.maxY, width: topViewFrame.width, height: collectionView.frame.height - topViewFrame.height)
                 completion(frame)
             }
-        case .movieCard, .albumCard, .collageCard, .animationCard, .filterCard:
+        case .movieCard, .albumCard, .collageCard, .filterCard: //.animationCard, 
             cellCoordinates(cellType: type.cellType, to: controller.contentView, completion: completion)
         }
     }
