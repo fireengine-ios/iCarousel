@@ -156,7 +156,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         var filteredItems = [WrapData]()
         if needShowEmptyMetaItems {
             items.forEach {
-                if $0.fileType == .image, !$0.isLocalItem, $0.metaData?.takenDate != nil {
+                if !$0.isLocalItem, $0.metaData?.takenDate != nil {
                    filteredItems.append($0)
                 } else {
                     emptyMetaItems.append($0)
