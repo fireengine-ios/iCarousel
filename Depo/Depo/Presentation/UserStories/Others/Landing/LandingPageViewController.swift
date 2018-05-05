@@ -15,7 +15,7 @@ class LandingPageViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet private weak var startUsingButton: BlueButtonWithWhiteText! {
         didSet {
-            startUsingButton.setTitle("!!sdfsfsfd!", for: .normal)
+            startUsingButton.setTitle(TextConstants.landingStartUsing, for: .normal)
         }
     }
     

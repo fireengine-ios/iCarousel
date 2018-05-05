@@ -606,3 +606,19 @@
 "error_passcode_message" = "Files app cannot be used with a passcode. If you would like to use Files app, please open lifebox and disable Passcode Lock";
 "error_passcode_title" = "Passcode Lock is enabled";
 "Successfully purchased" = "Successfully purchased";
+
+"START USING" = "START USING";
+"landingTitle0" = "Welcome!\nLet’s get started!";
+"landingSubTitle0" = "You can access everything about lifebox from home page. Start using your lifebox with our suggestions. You can swipe the cards that you don't like.";
+"landingTitle1" = "Auto-sync";
+"landingSubTitle1" = "Sizin için otomatik yedekliyoruz istediğin zaman web veya mobilden ulaş mesajı Üstelik 5Gb ücretsiz saklama alanı";
+"landingTitle2" = "Face / image";
+"landingSubTitle2" = "Anılarınız kolayca bulun: kişiye, nesneye yere göre arama yapın";
+"landingTitle3" = "Otomatik hikayeler";
+"landingSubTitle3" = "Size özel yarattığımız otomatik hikayelerle anılarınızı tekrar yaşayın";
+"landingTitle4" = "Free up space";
+"landingSubTitle4" = "Tek dokunuşlar anılarınıza yer açın";
+"landingTitle5" = "Contact sync";
+"landingSubTitle5" = "Tek dokunuşlar anılarınıza yer açın";
+"landingTitle6" = "Sosyal medya";
+"landingSubTitle6" = "Sosyal Medyadaki tüm arşivinizi kolayca lifebox’a tranfer edin.";

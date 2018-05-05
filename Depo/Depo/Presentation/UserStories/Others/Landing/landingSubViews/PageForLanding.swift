@@ -44,11 +44,56 @@ class PageForLanding: UIViewController {
             gradientView.isHidden = false
         }
         
+        titleLabel.text = getTitleForIndex(index: index)
+        subTitleLabel.text = getSubTitleForIndex(index: index)
+        
         let bgImageName = String(format: "LandingBG%d", index)
         bgImage.image = UIImage(named: bgImageName)
         
         let imageName = String(format: "LandingImage%d", index)
         imageView.image = UIImage(named: imageName)
+    }
+    
+    private func getTitleForIndex(index: Int) -> String{
+        switch index {
+        case 0:
+            return TextConstants.landingTitle0
+        case 1:
+            return TextConstants.landingTitle1
+        case 2:
+            return TextConstants.landingTitle2
+        case 3:
+            return TextConstants.landingTitle3
+        case 4:
+            return TextConstants.landingTitle4
+        case 5:
+            return TextConstants.landingTitle5
+        case 6:
+            return TextConstants.landingTitle6
+        default:
+            return ""
+        }
+    }
+    
+    private func getSubTitleForIndex(index: Int) -> String{
+        switch index {
+        case 0:
+            return TextConstants.landingSubTitle0
+        case 1:
+            return TextConstants.landingSubTitle1
+        case 2:
+            return TextConstants.landingSubTitle2
+        case 3:
+            return TextConstants.landingSubTitle3
+        case 4:
+            return TextConstants.landingSubTitle4
+        case 5:
+            return TextConstants.landingSubTitle5
+        case 6:
+            return TextConstants.landingSubTitle6
+        default:
+            return ""
+        }
     }
 
 }
