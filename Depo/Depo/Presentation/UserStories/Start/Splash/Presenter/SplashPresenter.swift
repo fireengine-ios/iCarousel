@@ -20,6 +20,16 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         interactor.clearAllPreviouslyStoredInfo()
         showPasscodeIfNeed()
         CoreDataStack.default.appendLocalMediaItems(completion: nil)
+        
+    }
+    
+    private func showLandingPagesIfNeeded() {
+        if storageVars.isNewAppVersionFirstLaunch {
+            storageVars.isNewAppVersionFirstLaunch = false
+            router.navigateToLandingPages()
+        } else {
+            router.navigateToOnboarding()
+        }
     }
     
     private func showPasscodeIfNeed() {
@@ -65,7 +75,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     func onFailLogin() {
-        router.navigateToOnboarding()
+        showLandingPagesIfNeeded()
         MenloworksAppEvents.onStartWithLogin(false)
     }
     

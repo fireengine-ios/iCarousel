@@ -544,6 +544,14 @@
 		7CED0B101F21ECDE0016CE0C /* BasicCollectionMultiFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CED0B0E1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.swift */; };
 		7CED0B111F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CED0B0F1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib */; };
 		7CED0B141F23931C0016CE0C /* WrapperedItemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CED0B131F23931C0016CE0C /* WrapperedItemUtil.swift */; };
+		7CEE271B209B537500EF6C79 /* LandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEE2719209B537500EF6C79 /* LandingPageViewController.swift */; };
+		7CEE271C209B537500EF6C79 /* LandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEE2719209B537500EF6C79 /* LandingPageViewController.swift */; };
+		7CEE271D209B537500EF6C79 /* LandingPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEE271A209B537500EF6C79 /* LandingPageViewController.xib */; };
+		7CEE271E209B537500EF6C79 /* LandingPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEE271A209B537500EF6C79 /* LandingPageViewController.xib */; };
+		7CEE2722209C560500EF6C79 /* PageForLanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEE2720209C560500EF6C79 /* PageForLanding.swift */; };
+		7CEE2723209C560500EF6C79 /* PageForLanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEE2720209C560500EF6C79 /* PageForLanding.swift */; };
+		7CEE2724209C560500EF6C79 /* PageForLanding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEE2721209C560500EF6C79 /* PageForLanding.xib */; };
+		7CEE2725209C560500EF6C79 /* PageForLanding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEE2721209C560500EF6C79 /* PageForLanding.xib */; };
 		7CEEC1BB1F33251800BD433F /* CreateStoryPhotosOrderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4988041F3320420039C5F2 /* CreateStoryPhotosOrderConfigurator.swift */; };
 		7CEEC1BD1F3326C900BD433F /* CreateStoryPhotosOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEEC1BC1F3326C900BD433F /* CreateStoryPhotosOrderViewController.xib */; };
 		7CEEC1C01F332B0000BD433F /* PhotosOrderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEC1BE1F332B0000BD433F /* PhotosOrderCollectionViewCell.swift */; };
@@ -4134,6 +4142,10 @@
 		7CED0B0E1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCollectionMultiFileCell.swift; sourceTree = "<group>"; };
 		7CED0B0F1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicCollectionMultiFileCell.xib; sourceTree = "<group>"; };
 		7CED0B131F23931C0016CE0C /* WrapperedItemUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapperedItemUtil.swift; sourceTree = "<group>"; };
+		7CEE2719209B537500EF6C79 /* LandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageViewController.swift; sourceTree = "<group>"; };
+		7CEE271A209B537500EF6C79 /* LandingPageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LandingPageViewController.xib; sourceTree = "<group>"; };
+		7CEE2720209C560500EF6C79 /* PageForLanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageForLanding.swift; sourceTree = "<group>"; };
+		7CEE2721209C560500EF6C79 /* PageForLanding.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageForLanding.xib; sourceTree = "<group>"; };
 		7CEEC1BC1F3326C900BD433F /* CreateStoryPhotosOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateStoryPhotosOrderViewController.xib; sourceTree = "<group>"; };
 		7CEEC1BE1F332B0000BD433F /* PhotosOrderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosOrderCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CEEC1BF1F332B0000BD433F /* PhotosOrderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotosOrderCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -8277,6 +8289,25 @@
 			path = WrapperedItemsUtils;
 			sourceTree = "<group>";
 		};
+		7CEE2718209B533C00EF6C79 /* Landing */ = {
+			isa = PBXGroup;
+			children = (
+				7CEE271F209C555B00EF6C79 /* landingSubViews */,
+				7CEE2719209B537500EF6C79 /* LandingPageViewController.swift */,
+				7CEE271A209B537500EF6C79 /* LandingPageViewController.xib */,
+			);
+			path = Landing;
+			sourceTree = "<group>";
+		};
+		7CEE271F209C555B00EF6C79 /* landingSubViews */ = {
+			isa = PBXGroup;
+			children = (
+				7CEE2720209C560500EF6C79 /* PageForLanding.swift */,
+				7CEE2721209C560500EF6C79 /* PageForLanding.xib */,
+			);
+			path = landingSubViews;
+			sourceTree = "<group>";
+		};
 		7CFE92E61F5D852C008A3B72 /* DropDovnView */ = {
 			isa = PBXGroup;
 			children = (
@@ -9955,6 +9986,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				7CEE2718209B533C00EF6C79 /* Landing */,
 				98A8677C2088C64D00D2D4F4 /* SpotlightViewController */,
 				CEB2734A205BE3E500E1AE9C /* EmailEnter */,
 				CE1353332004F0D20004CBBE /* TextEnter */,
@@ -12378,6 +12410,7 @@
 				8C06B09D2008AD71003D8E05 /* refresh@2x.png in Resources */,
 				8C06AED32008AD70003D8E05 /* beyaz_cerceve@3x.png in Resources */,
 				8C06B1432008AD72003D8E05 /* target@2x.png in Resources */,
+				7CEE271E209B537500EF6C79 /* LandingPageViewController.xib in Resources */,
 				8C06AFBD2008AD71003D8E05 /* geri@2x.png in Resources */,
 				8C06B0BB2008AD71003D8E05 /* rotation_secili.png in Resources */,
 				8C0E900D1FDEBDFF00789C91 /* TabBarView.xib in Resources */,
@@ -12552,6 +12585,7 @@
 				8C0E90411FDEBDFF00789C91 /* GridListTopBar.xib in Resources */,
 				8C06B1B72008AD72003D8E05 /* CRYShareViewController.nib in Resources */,
 				8C0E90421FDEBDFF00789C91 /* CollectionViewCellForPhoto.xib in Resources */,
+				7CEE2725209C560500EF6C79 /* PageForLanding.xib in Resources */,
 				8C06B1292008AD72003D8E05 /* t_kucuk_selected.png in Resources */,
 				8C06B16F2008AD72003D8E05 /* toolbar_sekil_icon@3x.png in Resources */,
 				8C06B1C52008AD72003D8E05 /* lookup_soft_elegance_2.png in Resources */,
@@ -13058,6 +13092,7 @@
 				7C203555201F4F8F00D84727 /* LatestUploadCardCell.xib in Resources */,
 				8C06B01A2008AD71003D8E05 /* kup_selected@2x.png in Resources */,
 				8C06AF662008AD70003D8E05 /* duz_cizgi@2x.png in Resources */,
+				7CEE271D209B537500EF6C79 /* LandingPageViewController.xib in Resources */,
 				CE51AE7B1EF90853005DCEE0 /* PhoneVereficationScreen~iphone.xib in Resources */,
 				CEF0C28B1FC594E300105C31 /* InstagramAuthViewController.xib in Resources */,
 				4A9B38F6201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */,
@@ -13145,6 +13180,7 @@
 				8C06B0C42008AD71003D8E05 /* sag_ok@3x.png in Resources */,
 				8C06AF0A2008AD70003D8E05 /* check-mark@3x.png in Resources */,
 				8C06B04E2008AD71003D8E05 /* parlaklik@2x.png in Resources */,
+				7CEE2724209C560500EF6C79 /* PageForLanding.xib in Resources */,
 				CEDEAB321FADA5D20046555F /* AlbumCell.xib in Resources */,
 				8C06AF722008AD70003D8E05 /* edit.png in Resources */,
 				8C06B0122008AD71003D8E05 /* kup.png in Resources */,
@@ -14285,6 +14321,7 @@
 				8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */,
 				8C0E8E221FDEBDFF00789C91 /* PasscodeSettingsModuleInput.swift in Sources */,
 				8C0E8E231FDEBDFF00789C91 /* DropDovnTableViewCell.swift in Sources */,
+				7CEE271C209B537500EF6C79 /* LandingPageViewController.swift in Sources */,
 				8C0E8E241FDEBDFF00789C91 /* ForgotPasswordPresenter.swift in Sources */,
 				8C0E8E251FDEBDFF00789C91 /* ActivityTimelineFileCell.swift in Sources */,
 				8C0E8E261FDEBDFF00789C91 /* CreateStoryNamePresenter.swift in Sources */,
@@ -14618,6 +14655,7 @@
 				8C0E8F581FDEBDFF00789C91 /* FileInfoInitializer.swift in Sources */,
 				8C0E8F591FDEBDFF00789C91 /* UsageInfoViewInput.swift in Sources */,
 				8C0E8F5A1FDEBDFF00789C91 /* CreateStoryPhotosOrderConfigurator.swift in Sources */,
+				7CEE2723209C560500EF6C79 /* PageForLanding.swift in Sources */,
 				8C0E8F5B1FDEBDFF00789C91 /* CreateStoryPhotosOrderInteractorInput.swift in Sources */,
 				CEF41E9D2035B2DF0008FCD5 /* PhotoVideoDetailCell.swift in Sources */,
 				8C0E8F5C1FDEBDFF00789C91 /* UploadFilesSelectionViewInput.swift in Sources */,
@@ -15438,6 +15476,7 @@
 				CE51ACFB1EF90853005DCEE0 /* ForgotPasswordInteractorInput.swift in Sources */,
 				CE51ACFC1EF90853005DCEE0 /* ForgotPasswordInteractorOutput.swift in Sources */,
 				CE51ACFD1EF90853005DCEE0 /* AutoSyncViewOutput.swift in Sources */,
+				7CEE271B209B537500EF6C79 /* LandingPageViewController.swift in Sources */,
 				98570AFE208F7558002CCEBA /* Spotlight.swift in Sources */,
 				CEF0C2861FC549C400105C31 /* ImportFromInstagramInteractor.swift in Sources */,
 				CE51ACFE1EF90853005DCEE0 /* ForgotPasswordInteractor.swift in Sources */,
@@ -15737,6 +15776,7 @@
 				98E792D8203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				780400F91FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift in Sources */,
 				CE40133B1FCFE4AF006F28FD /* PromoView.swift in Sources */,
+				7CEE2722209C560500EF6C79 /* PageForLanding.swift in Sources */,
 				66B07DFECFC39B41382FF00D /* FileInfoInteractorOutput.swift in Sources */,
 				23C013C53919B6111BA5B06C /* FileInfoInteractor.swift in Sources */,
 				8DCB217A1F3C8BE700BAFE1E /* SearchViewRouterInput.swift in Sources */,

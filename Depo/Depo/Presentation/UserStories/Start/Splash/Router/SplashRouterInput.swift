@@ -20,4 +20,6 @@ protocol SplashRouterInput {
     
     func goToSyncSettingsView()
     
+    func navigateToLandingPages()
+    
 }

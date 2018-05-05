@@ -20,6 +20,11 @@ class SplashRouter: SplashRouterInput {
         router.setNavigationController(controller: settings)
     }
     
+    func navigateToLandingPages() {
+        let landingVC = LandingPageViewController(nibName: "LandingPageViewController", bundle: nil)
+        router.setNavigationController(controller: landingVC)
+    }
+    
     func navigateToTermsAndService() {
         let temsAndServices = router.termsAndServicesScreen(login: true)
         router.setNavigationController(controller: router.onboardingScreen)

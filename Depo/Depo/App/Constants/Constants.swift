@@ -858,4 +858,21 @@ struct TextConstants {
     static let invalidCaptcha = NSLocalizedString("This text doesn't match. Please try again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let free = NSLocalizedString("Free", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    
+    //MARK: - Landing
+    static let landingStartUsing = NSLocalizedString("START USING", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingTitle0 = NSLocalizedString("landingTitle0", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingSubTitle0 = NSLocalizedString("landingSubTitle0", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingTitle1 = NSLocalizedString("landingTitle1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingSubTitle1 = NSLocalizedString("landingSubTitle1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingTitle2 = NSLocalizedString("landingTitle2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingSubTitle2 = NSLocalizedString("landingSubTitle2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingTitle3 = NSLocalizedString("landingTitle3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingSubTitle3 = NSLocalizedString("landingSubTitle3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingTitle4 = NSLocalizedString("landingTitle4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingSubTitle4 = NSLocalizedString("landingSubTitle4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingTitle5 = NSLocalizedString("landingTitle5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingSubTitle5 = NSLocalizedString("landingSubTitle5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingTitle6 = NSLocalizedString("landingTitle6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let landingSubTitle6 = NSLocalizedString("landingSubTitle6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

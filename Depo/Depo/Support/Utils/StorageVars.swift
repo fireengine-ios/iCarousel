@@ -19,6 +19,7 @@ protocol StorageVars: class {
     var smallFullOfQuotaPopUpCheckBox: Bool { get set }
     var periodicContactSyncSet: Bool { get set }
     var usersWhoUsedApp: [String: Any] { get set }
+    var isNewAppVersionFirstLaunch: Bool { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -28,6 +29,22 @@ final class UserDefaultsVars: StorageVars {
     var isAppFirstLaunch: Bool {
         get { return userDefaults.object(forKey: isAppFirstLaunchKey) as? Bool ?? true }
         set { userDefaults.set(newValue, forKey: isAppFirstLaunchKey) }
+    }
+    
+    private let isNewAppVersionFirstLaunchKey = "isNewAppVersionFirstLaunch%@"
+    var isNewAppVersionFirstLaunch: Bool {
+        get {
+            return userDefaults.object(forKey: String(format: isNewAppVersionFirstLaunchKey, getAppVersion())) as? Bool ?? true
+        }
+        set {
+            userDefaults.set(newValue, forKey: String(format: isNewAppVersionFirstLaunchKey, getAppVersion()))
+        }
+    }
+    private func getAppVersion() -> String {
+        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+            return ""
+        }
+        return version
     }
     
     private let currentUserIDKey = "CurrentUserIDKey"
