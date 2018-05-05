@@ -20,7 +20,9 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
     }
     
     @IBAction func onStartUsingButton() {
-        
+        let router = RouterVC()
+        let settings = router.onboardingScreen
+        router.setNavigationController(controller: settings)
     }
 
     override func viewDidLoad() {
