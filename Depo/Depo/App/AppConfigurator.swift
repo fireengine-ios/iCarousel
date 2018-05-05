@@ -43,7 +43,6 @@ final class AppConfigurator {
         if storageVars.isAppFirstLaunch {
             log.debug("isAppFirstLaunch")
             storageVars.isAppFirstLaunch = false
-            
             KeychainSwift().clear()
             /// call migrate after Keychain clear
             AppMigrator.migrateAll()
