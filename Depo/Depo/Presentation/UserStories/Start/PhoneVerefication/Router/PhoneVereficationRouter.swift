@@ -9,7 +9,11 @@
 class PhoneVereficationRouter: PhoneVereficationRouterInput {
     
     private func goToSplash() {
-        AuthenticationService().logout(success: nil)
+        AuthenticationService().logout(success: {
+            if let splash = RouterVC().splash {
+                RouterVC().pushViewController(viewController: splash)
+            }
+        })
     }
     
     func goAutoSync() {
