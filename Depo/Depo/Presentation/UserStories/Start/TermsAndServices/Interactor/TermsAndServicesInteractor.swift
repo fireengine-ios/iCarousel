@@ -27,7 +27,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         }
         self?.eula = eulaR
         DispatchQueue.main.async { [weak self] in
-            self?.output.showLoadedTermsAndUses(eula: eulaR.content!)
+            self?.output.showLoadedTermsAndUses(eula: eulaR.content ?? "")
         }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async { [weak self] in
