@@ -24,7 +24,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     private func showLandingPagesIfNeeded() {
-        if storageVars.isNewAppVersionFirstLaunch {
+        if !Device.isIpad, storageVars.isNewAppVersionFirstLaunch {
             storageVars.isNewAppVersionFirstLaunch = false
             router.navigateToLandingPages()
         } else {
@@ -100,9 +100,19 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
 
         if turkcellLogin {
             if storageVars.autoSyncSet {
-                router.navigateToApplication()
+                if !Device.isIpad, storageVars.isNewAppVersionFirstLaunch {
+                    storageVars.isNewAppVersionFirstLaunch = false
+                    router.navigateToLandingPages()
+                } else {
+                    router.navigateToApplication()
+                }
             } else {
-                router.goToSyncSettingsView()
+                if !Device.isIpad, storageVars.isNewAppVersionFirstLaunch {
+                    storageVars.isNewAppVersionFirstLaunch = false
+                    router.navigateToLandingPages()
+                } else {
+                    router.goToSyncSettingsView()
+                }
             }
         } else {
             router.navigateToApplication()
