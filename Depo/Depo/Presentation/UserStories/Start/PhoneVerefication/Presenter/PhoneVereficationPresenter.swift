@@ -87,7 +87,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     }
     
     func didRedirectToSplash() {
-        asyncOperationSucces()
+        completeAsyncOperationEnableScreen()
         router.showRedirectToSplash()
     }
     

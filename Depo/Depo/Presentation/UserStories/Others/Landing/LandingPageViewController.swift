@@ -21,10 +21,17 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
     
     @IBAction func onStartUsingButton() {
         let router = RouterVC()
-        let settings = router.onboardingScreen
-        router.setNavigationController(controller: settings)
+        if isTurkcell {
+            router.setNavigationController(controller: router.synchronyseScreen!)
+        } else {
+            let settings = router.onboardingScreen
+            router.setNavigationController(controller: settings)
+        }
+        
     }
 
+    var isTurkcell = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setStatusBarHiddenForLandscapeIfNeed(true)
