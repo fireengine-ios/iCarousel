@@ -29,9 +29,10 @@
                         <outlet property="delegate" destination="-1" id="hOK-kN-lfs"/>
                     </connections>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P4m-k9-Sk8" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="151" y="591" width="72" height="52"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P4m-k9-Sk8" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="87" y="591" width="200" height="52"/>
                     <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="KvX-5Z-g8k"/>
                         <constraint firstAttribute="height" constant="52" id="RVF-GA-dtb"/>
                     </constraints>
                     <state key="normal" title="Start usng"/>

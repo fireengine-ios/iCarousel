@@ -8,12 +8,12 @@
 
 import UIKit
 
-class LandingPageViewController: UIViewController, UIScrollViewDelegate {
+class LandingPageViewController: ViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControll: UIPageControl!
     
-    @IBOutlet private weak var startUsingButton: BlueButtonWithWhiteText! {
+    @IBOutlet private weak var startUsingButton: BlueButtonWithMediumWhiteText! {
         didSet {
             startUsingButton.setTitle(TextConstants.landingStartUsing, for: .normal)
         }
@@ -25,6 +25,7 @@ class LandingPageViewController: UIViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setStatusBarHiddenForLandscapeIfNeed(true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
