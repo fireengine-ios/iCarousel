@@ -20,6 +20,6 @@ protocol SplashRouterInput {
     
     func goToSyncSettingsView()
     
-    func navigateToLandingPages()
+    func navigateToLandingPages(isTurkCell: Bool)
     
 }

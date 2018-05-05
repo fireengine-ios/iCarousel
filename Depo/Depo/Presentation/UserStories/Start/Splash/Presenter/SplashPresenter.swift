@@ -26,7 +26,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     private func showLandingPagesIfNeeded() {
         if !Device.isIpad, storageVars.isNewAppVersionFirstLaunch {
             storageVars.isNewAppVersionFirstLaunch = false
-            router.navigateToLandingPages()
+            router.navigateToLandingPages(isTurkCell: false)
         } else {
             router.navigateToOnboarding()
         }
@@ -102,14 +102,14 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
             if storageVars.autoSyncSet {
                 if !Device.isIpad, storageVars.isNewAppVersionFirstLaunch {
                     storageVars.isNewAppVersionFirstLaunch = false
-                    router.navigateToLandingPages()
+                    router.navigateToLandingPages(isTurkCell: turkcellLogin)
                 } else {
                     router.navigateToApplication()
                 }
             } else {
                 if !Device.isIpad, storageVars.isNewAppVersionFirstLaunch {
                     storageVars.isNewAppVersionFirstLaunch = false
-                    router.navigateToLandingPages()
+                    router.navigateToLandingPages(isTurkCell: turkcellLogin)
                 } else {
                     router.goToSyncSettingsView()
                 }
