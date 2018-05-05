@@ -40,10 +40,10 @@ extension FaceImagePhotosRouter: FaceImagePhotosRouterInput {
         router.pushViewController(viewController: vc)
     }
     
-    func openAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?) {
+    func openAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?, isSearchItem: Bool) {
         let router = RouterVC()
         
-        let vc = router.faceImageAddName(item, moduleOutput: moduleOutput)
+        let vc = router.faceImageAddName(item, moduleOutput: moduleOutput, isSearchItem: isSearchItem)
         
         RouterVC().pushViewController(viewController: vc)
     }

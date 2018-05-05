@@ -14,7 +14,36 @@ import SDWebImage
 import XCGLogger
 
 // the global reference to logging mechanism to be available in all files
-var log = XCGLogger(identifier: "advancedLogger", includeDefaultDestinations: false)
+let log: XCGLogger = {
+    let log = XCGLogger(identifier: XCGLogger.lifeboxAdvancedLoggerIdentifier, includeDefaultDestinations: false)
+    
+    let logPath = Device.documentsFolderUrl(withComponent: XCGLogger.lifeboxLogFileName)
+    
+    let autoRotatingFileDestination = AutoRotatingFileDestination(owner: log,
+                                                                  writeToFile: logPath,
+                                                                  identifier: XCGLogger.lifeboxFileDestinationIdentifier,
+                                                                  shouldAppend: true,
+                                                                  appendMarker: XCGLogger.lifeboxAppendMarker,
+                                                                  attributes: [.protectionKey : FileProtectionType.completeUntilFirstUserAuthentication],
+                                                                  maxFileSize: NumericConstants.logMaxSize,
+                                                                  maxTimeInterval: NumericConstants.logDuration,
+                                                                  archiveSuffixDateFormatter: nil)
+    autoRotatingFileDestination.outputLevel = .debug
+    autoRotatingFileDestination.showLogIdentifier = true
+    autoRotatingFileDestination.showFunctionName = true
+    autoRotatingFileDestination.showThreadName = true
+    autoRotatingFileDestination.showLevel = true
+    autoRotatingFileDestination.showFileName = true
+    autoRotatingFileDestination.showLineNumber = true
+    autoRotatingFileDestination.showDate = true
+    autoRotatingFileDestination.logQueue = XCGLogger.logQueue
+    
+    log.add(destination: autoRotatingFileDestination)
+    
+    log.logAppDetails()
+    
+    return log
+}()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -61,7 +90,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        setupLog()
         MenloworksAppEvents.onAppLaunch()
         MenloworksTagsService.shared.passcodeStatus(!passcodeStorage.isEmpty)
         ContactSyncSDK.doPeriodicSync()
@@ -265,29 +293,4 @@ extension AppDelegate {
 
         MPush.applicationDidReceive(notification)
     }
-}
-
-private func setupLog() {
-    let documentDirectory: NSURL = {
-        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return urls[urls.endIndex - 1] as NSURL
-    }()
-    
-    if let logPath = documentDirectory.appendingPathComponent("app.log") as NSURL? {
-        UserDefaults.standard.set(logPath.path!, forKey: "app.log")
-        let fileDestination = AutoRotatingFileDestination(owner: log, writeToFile: logPath, identifier: "advancedLogger", shouldAppend: true)
-        fileDestination.outputLevel = .debug
-        fileDestination.showLogIdentifier = true
-        fileDestination.showFunctionName = true
-        fileDestination.showThreadName = true
-        fileDestination.showLevel = true
-        fileDestination.showFileName = true
-        fileDestination.showLineNumber = true
-        fileDestination.showDate = true
-        fileDestination.targetMaxFileSize = NumericConstants.logMaxSize
-        fileDestination.targetMaxTimeInterval = NumericConstants.logDuration
-        fileDestination.logQueue = XCGLogger.logQueue
-        log.add(destination: fileDestination)
-    }
-    
 }

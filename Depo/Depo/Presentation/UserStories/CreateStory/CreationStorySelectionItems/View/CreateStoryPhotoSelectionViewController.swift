@@ -47,6 +47,14 @@ class CreateStoryPhotoSelectionViewController: BaseFilesGreedViewController {
         navigationItem.leftBarButtonItem = leftBarButton
     }
     
+    override func selectedItemsCountChange(with count: Int) {
+        if count > 0 {
+            super.selectedItemsCountChange(with: count)
+        } else {
+            setTitle(withString: TextConstants.createStoryPhotosTitle)
+        }
+    }
+
     @objc func onContinueButton() {
         output.onNextButton()
     }

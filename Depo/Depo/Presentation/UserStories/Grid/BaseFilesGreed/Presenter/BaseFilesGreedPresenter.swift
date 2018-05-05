@@ -491,8 +491,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func updateThreeDotsButton() {
         if !(getRemoteItemsService() is AlbumDetailService),
             !(getRemoteItemsService() is PeopleItemsService),
-            view != nil //FIXME: we need solve memory leak, something holds presenter in memory
-        {
+            view != nil,
+            !dataSource.isSelectionStateActive {//FIXME: we need solve memory leak, something holds presenter in memory
             view.setThreeDotsMenu(active: !needShowNoFileView())
         }
     }

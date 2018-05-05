@@ -9,8 +9,15 @@
 final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
     
     var currentItem: WrapData?
+    var mergeItem: WrapData?
+    var isSearchItem: Bool
     
     weak var faceImagePhotosmoduleOutput: FaceImagePhotosModuleOutput?
+    
+    init(isSearchItem: Bool) {
+        self.isSearchItem = isSearchItem
+        super.init()
+    }
     
     override func viewIsReady(collectionView: UICollectionView) {
         dataSource = FaceImageAddNameDataSource()
@@ -40,6 +47,7 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
             let itemUrl = item.urlToFile {
             let yesHandler: VoidHandler = { [weak self] in
                 if let interactor = self?.interactor as? FaceImageAddNameInteractorInput {
+                    self?.mergeItem = item
                     self?.startAsyncOperation()
                     interactor.mergePeople(currentItem, otherPerson: item)
                 }
@@ -94,9 +102,15 @@ extension FaceImageAddNamePresenter: FaceImageAddNameInteractorOutput {
     
     func didMergePeople() {
         faceImagePhotosmoduleOutput?.didMergePeople()
-        
+
         if let router = router as? FaceImageAddNameRouter {
-            router.popToPeopleItems()
+            if let mergeItem = mergeItem,
+                isSearchItem {
+                faceImagePhotosmoduleOutput?.didMergeAfterSearch(item: mergeItem)
+                router.showBack()
+            } else {
+                router.popToPeopleItems()
+            }
         }
     }
 }

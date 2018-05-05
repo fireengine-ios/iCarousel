@@ -10,12 +10,12 @@ import Foundation
 
 enum SpotlightType: Int {
     case homePageIcon = 1
-    case homePageGeneral
-    case movieCard
-    case albumCard
-    case collageCard
-    case animationCard
-    case filterCard
+    case homePageGeneral = 2
+    case movieCard = 3
+    case albumCard = 4
+    case collageCard = 5
+//    case animationCard = 6
+    case filterCard = 7
     
     var title: String {
         switch self {
@@ -24,7 +24,7 @@ enum SpotlightType: Int {
         case .movieCard: return TextConstants.spotlightMovieCardText
         case .albumCard: return TextConstants.spotlightAlbumCard
         case .collageCard: return TextConstants.spotlightCollageCard
-        case .animationCard: return TextConstants.spotlightAnimationCard
+//        case .animationCard: return TextConstants.spotlightAnimationCard
         case .filterCard: return TextConstants.spotlightFilterCard
         }
     }
@@ -34,9 +34,25 @@ enum SpotlightType: Int {
         case .movieCard: return MovieCard.self
         case .albumCard: return AlbumCard.self
         case .collageCard: return CollageCard.self
-        case .animationCard: return AnimationCard.self
+//        case .animationCard: return AnimationCard.self
         case .filterCard: return FilterPhotoCard.self
         default: return BaseView.self
+        }
+    }
+    
+    init?(cardView: BaseView) {
+        if cardView is MovieCard {
+            self = .movieCard
+        } else if cardView is AlbumCard {
+            self = .albumCard
+        } else if cardView is CollageCard {
+            self = .collageCard
+//        } else if cardView is AnimationCard {
+//            self = .animationCard
+        } else if cardView is FilterPhotoCard {
+            self = .filterCard
+        } else {
+            return nil
         }
     }
 }
@@ -55,40 +71,42 @@ final class SpotlightManager {
     
     private lazy var storageVars: StorageVars = factory.resolve()
 
-    private let lastShownSpotlightKey = "lastShownSpotlightByUserID"
-    private var lastShownSpotlight: Int {
+    private let shownSpotlightsKey = "shownSpotlightsByUserID"
+    private var shownSpotlights: [Int] {
         get {
-            guard let userId = storageVars.currentUserID,
-                let dict = UserDefaults.standard.dictionary(forKey: lastShownSpotlightKey) as? [String: Int] else {
-                return 0
+            let userId = SingletonStorage.shared.uniqueUserID
+            guard let dict = UserDefaults.standard.dictionary(forKey: shownSpotlightsKey) as? [String: [Int]] else {
+                return []
             }
-            return dict[userId] ?? 0
+            return dict[userId] ?? []
         }
         set {
-            guard let userId = storageVars.currentUserID else {
-                return
-            }
-            var dict = UserDefaults.standard.dictionary(forKey: lastShownSpotlightKey) as? [String: Int] ?? [String: Int]()
+            let userId = SingletonStorage.shared.uniqueUserID
+            var dict = UserDefaults.standard.dictionary(forKey: shownSpotlightsKey) as? [String: [Int]] ?? [String: [Int]]()
             dict[userId] = newValue
             
-            UserDefaults.standard.set(dict, forKey: lastShownSpotlightKey)
+            UserDefaults.standard.set(dict, forKey: shownSpotlightsKey)
             UserDefaults.standard.synchronize()
         }
+        
     }
     
     func clear() {
-        lastShownSpotlight = 0
+        shownSpotlights = [Int]()
     }
     
-    func requestShowSpotlight() {
-        if lastShownSpotlight < SpotlightType.filterCard.rawValue,
-           let spotlight = SpotlightType(rawValue: lastShownSpotlight + 1) {
-            delegate?.needShowSpotlight(type: spotlight)
+    func requestShowSpotlight(for types: [SpotlightType]) {
+        let canShowTypes = Set(types.map { $0.rawValue })
+        if let needShowTypeRaw = canShowTypes.subtracting(Set(shownSpotlights)).min(),
+            let needShowType = SpotlightType(rawValue: needShowTypeRaw) {
+            delegate?.needShowSpotlight(type: needShowType)
         }
     }
     
     func shownSpotlight(type: SpotlightType) {
-        lastShownSpotlight = type.rawValue
+        if !shownSpotlights.contains(type.rawValue) {
+            shownSpotlights.append(type.rawValue)
+        }
     }
     
     func closedSpotlight(type: SpotlightType) {

@@ -15,8 +15,11 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     var coverPhoto: Item?
     var item: Item
     
-    init(item: Item) {
+    var isSearchItem: Bool
+    
+    init(item: Item, isSearchItem: Bool) {
         self.item = item
+        self.isSearchItem = isSearchItem
         super.init()
     }
     
@@ -137,7 +140,7 @@ extension FaceImagePhotosPresenter: FaceImagePhotosViewOutput {
     
     func openAddName() {
         if let router = router as? FaceImagePhotosRouter {
-            router.openAddName(item, moduleOutput: self)
+            router.openAddName(item, moduleOutput: self, isSearchItem: isSearchItem)
         }
     }
     
@@ -172,6 +175,19 @@ extension FaceImagePhotosPresenter: FaceImagePhotosModuleOutput {
         faceImageItemsModuleOutput?.didReloadData()
     }
     
+    func didMergeAfterSearch(item: Item) {
+        self.item = item
+        if let interactor = interactor as? FaceImagePhotosInteractorInput {
+            interactor.updateCurrentItem(item)
+        }
+        
+        if let view = view as? FaceImagePhotosViewInput,
+            let name = item.name {
+            view.reloadName(name)
+            view.setHeaderImage(with: item.patchToPreview)
+        }
+    }
+    
     func getSliderItmes(items: [SliderItem]) {
         if let view = view as? FaceImagePhotosViewInput {
             view.hiddenSlider(isHidden: items.count == 0)
@@ -194,6 +210,10 @@ extension FaceImagePhotosPresenter: FaceImagePhotosInteractorOutput {
         if let router = router as? FaceImagePhotosRouterInput {
             router.showRemoveFromAlbum(completion: completion)
         }
+    }
+    
+    func didReload() {
+        reloadData()
     }
     
 }

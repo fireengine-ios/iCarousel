@@ -83,7 +83,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
             navigationBarWithGradientStyle()
         }
         
-        output.viewDidAppear()
+        requestShowSpotlight()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -130,12 +130,23 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         present(popUpView, animated: true, completion: nil)
     }
     
+    private func requestShowSpotlight() {
+        var cardTypes: [SpotlightType] = [.homePageIcon, .homePageGeneral]
+        cardTypes.append(contentsOf: homePageDataSource.popUps.compactMap { SpotlightType(cardView: $0) })
+        output.requestShowSpotlight(for: cardTypes)
+    }
+    
     func needShowSpotlight(type: SpotlightType) {        
         guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
             return
         }
         
         frameForSpotlight(type: type, controller: tabBarVC) { [weak self] frame in
+            guard let navVC = tabBarVC.activeNavigationController,
+                navVC.topViewController is HomePageViewController else {
+                    return
+            }
+            
             if frame != .zero {
                 
                 let controller = SpotlightViewController.with(rect: frame, message: type.title, completion: { [weak self] in
@@ -163,7 +174,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
                 frame = CGRect(x: 0, y: topViewFrame.maxY, width: topViewFrame.width, height: collectionView.frame.height - topViewFrame.height)
                 completion(frame)
             }
-        case .movieCard, .albumCard, .collageCard, .animationCard, .filterCard:
+        case .movieCard, .albumCard, .collageCard, .filterCard: //.animationCard, 
             cellCoordinates(cellType: type.cellType, to: controller.contentView, completion: completion)
         }
     }
@@ -236,7 +247,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     }
     
     func didReloadCollectionView(_ collectionView: UICollectionView) {
-        output.didReloadCollectionView()
+        requestShowSpotlight()
     }
     
     // MARK: UICollectionViewDelegate

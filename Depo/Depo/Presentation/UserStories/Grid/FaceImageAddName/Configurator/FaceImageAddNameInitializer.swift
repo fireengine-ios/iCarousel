@@ -9,12 +9,12 @@
 import Foundation
 
 final class FaceImageAddNameInitializer: NSObject {
-    class func initializeViewController(with nibName: String, item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?) -> UIViewController {
+    class func initializeViewController(with nibName: String, item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?, isSearchItem: Bool) -> UIViewController {
         let viewController = FaceImageAddNameViewController(nibName: nibName, bundle: nil)
         
         let configurator = FaceImageAddNameConfigurator()
         
-        configurator.configure(viewController: viewController, item: item, moduleOutput: moduleOutput)
+        configurator.configure(viewController: viewController, item: item, moduleOutput: moduleOutput, isSearchItem: isSearchItem)
         
         return viewController
     }

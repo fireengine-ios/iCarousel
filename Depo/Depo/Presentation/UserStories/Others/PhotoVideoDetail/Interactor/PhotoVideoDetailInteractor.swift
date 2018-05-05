@@ -71,8 +71,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             }
             
             if !selectedItem.isLocalItem {
-                elementsConfig = elementsConfig + [.delete]
                 elementsConfig = elementsConfig + [.download]
+                elementsConfig = elementsConfig + [.delete]
             } else {
                 elementsConfig = elementsConfig + [.sync]
             }

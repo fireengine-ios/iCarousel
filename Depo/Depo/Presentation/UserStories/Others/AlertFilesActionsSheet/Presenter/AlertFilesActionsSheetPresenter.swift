@@ -71,9 +71,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                                   isLocalItem: item.isLocalItem)
             
             actions = constractActions(with: types, for: [album])
-        } else if item.fileType == .faceImage(.people) ||
-            item.fileType == .faceImage(.things) ||
-            item.fileType == .faceImage(.places) {
+        } else if item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
             let types: [ElementTypes] = [.shareAlbum, .albumDetails, .download]
             
             actions = constractActions(with: types, for: [item])

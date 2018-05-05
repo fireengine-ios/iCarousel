@@ -26,10 +26,6 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         spotlightManager.delegate = self
     }
     
-    func viewDidAppear() {
-        spotlightManager.requestShowSpotlight()
-    }
-    
     func homePagePresented() {
         interactor.homePagePresented()
     }
@@ -87,9 +83,9 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     func closedSpotlight(type: SpotlightType) {
         spotlightManager.closedSpotlight(type: type)
     }
-    
-    func didReloadCollectionView() {
-        spotlightManager.requestShowSpotlight()
+        
+    func requestShowSpotlight(for types: [SpotlightType]) {
+        spotlightManager.requestShowSpotlight(for: types)
     }
 }
 

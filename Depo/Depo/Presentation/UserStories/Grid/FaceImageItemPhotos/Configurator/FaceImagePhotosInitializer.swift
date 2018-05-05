@@ -9,12 +9,12 @@
 import UIKit
 
 final class FaceImagePhotosInitializer {
-    class func initializeController(with nibName: String, album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?) -> UIViewController {
+    class func initializeController(with nibName: String, album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool) -> UIViewController {
         let viewController = FaceImagePhotosViewController(nibName: nibName, bundle: nil)
         viewController.parentUUID = album.uuid
         
         let configurator = FaceImagePhotosConfigurator()
-        configurator.configure(viewController: viewController, album: album, item: item, moduleOutput: moduleOutput)
+        configurator.configure(viewController: viewController, album: album, item: item, moduleOutput: moduleOutput, isSearchItem: isSearchItem)
         
         return viewController
     }

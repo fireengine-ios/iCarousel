@@ -621,11 +621,12 @@ class RouterVC: NSObject {
     
     // MARK: Face Image Recognition Photos
     
-    func imageFacePhotosController(album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?) -> BaseFilesGreedChildrenViewController {
+    func imageFacePhotosController(album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
         let controller = FaceImagePhotosInitializer.initializeController(with: "FaceImagePhotosViewController",
                                                                          album: album,
                                                                          item: item,
-                                                                         moduleOutput: moduleOutput)
+                                                                         moduleOutput: moduleOutput,
+                                                                         isSearchItem: isSearchItem)
         return controller as! BaseFilesGreedChildrenViewController
     }
     
@@ -696,8 +697,8 @@ class RouterVC: NSObject {
     
     // MARK: Face image add name
     
-    func faceImageAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?) -> UIViewController {
-    let controller = FaceImageAddNameInitializer.initializeViewController(with: "FaceImageAddNameViewController", item: item, moduleOutput: moduleOutput)
+    func faceImageAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?, isSearchItem: Bool) -> UIViewController {
+        let controller = FaceImageAddNameInitializer.initializeViewController(with: "FaceImageAddNameViewController", item: item, moduleOutput: moduleOutput, isSearchItem: isSearchItem)
         return controller
     }
     
