@@ -126,7 +126,7 @@
                         <constraint firstItem="TYi-I0-oIL" firstAttribute="top" secondItem="i69-kg-6FH" secondAttribute="bottom" constant="20" id="arM-iU-PmC"/>
                         <constraint firstItem="kkP-qM-De4" firstAttribute="top" secondItem="TfM-YV-oKw" secondAttribute="top" id="avl-h5-u3i"/>
                         <constraint firstAttribute="trailing" secondItem="kkP-qM-De4" secondAttribute="trailing" id="bTb-Pw-Rqe"/>
-                        <constraint firstItem="pdV-lc-PZm" firstAttribute="top" secondItem="TYi-I0-oIL" secondAttribute="bottom" constant="80" id="kFc-BQ-Wr1"/>
+                        <constraint firstItem="pdV-lc-PZm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TYi-I0-oIL" secondAttribute="bottom" constant="80" id="kFc-BQ-Wr1"/>
                         <constraint firstAttribute="trailing" secondItem="5VP-G7-Jqt" secondAttribute="trailing" constant="30" id="mqY-GB-bmG"/>
                         <constraint firstItem="TYi-I0-oIL" firstAttribute="leading" secondItem="TfM-YV-oKw" secondAttribute="leading" id="uEt-1V-M0g">
                             <variation key="widthClass=regular" constant="126"/>
