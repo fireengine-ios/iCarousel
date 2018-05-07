@@ -57,9 +57,7 @@ class UserProfileViewController: ViewController, UserProfileViewInput, UITextFie
         
         gsmNumberTextField.textColor = ColorConstants.textGrayColor
         gsmNumberTextField.font = UIFont.TurkcellSaturaBolFont(size: 21)
-        
-        title = TextConstants.userProfileTitle
-        
+                
         let editButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
         editButton.setTitle(TextConstants.userProfileEditButton, for: .normal)
         editButton.addTarget(self, action: #selector(onEditButtonAction), for: .touchUpInside)
@@ -84,9 +82,15 @@ class UserProfileViewController: ViewController, UserProfileViewInput, UITextFie
         attributedText.addAttribute(NSAttributedStringKey.font, value: font1, range: r1)
         attributedText.addAttribute(NSAttributedStringKey.font, value: font2, range: r2)
         
-        backButtonForNavigationItem(title: TextConstants.backTitle)
+        configureNavBar()
         
         output.viewIsReady()
+    }
+    
+    private func configureNavBar() {
+        setTitle(withString: TextConstants.userProfileTitle)
+        
+        navigationController?.navigationItem.title = TextConstants.backTitle
     }
 
     // MARK: ViewInput
