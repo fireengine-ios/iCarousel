@@ -24,7 +24,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="722"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LandingBG0" translatesAutoresizingMaskIntoConstraints="NO" id="hL4-Cg-yae">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LandingBG2" translatesAutoresizingMaskIntoConstraints="NO" id="hL4-Cg-yae">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="722"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LandingColorBG0" translatesAutoresizingMaskIntoConstraints="NO" id="6pp-zB-NvN">
@@ -79,7 +79,7 @@
         </view>
     </objects>
     <resources>
-        <image name="LandingBG0" width="375" height="707"/>
+        <image name="LandingBG2" width="375" height="348"/>
         <image name="LandingColorBG0" width="375" height="707"/>
         <image name="LandingImage0" width="244" height="352"/>
     </resources>
