@@ -150,8 +150,8 @@
 "Download is complete" = "Download is complete";
 "Deleting is complete" = "Deleting is complete";
 "Downloading files" = "Downloading files";
-"Uploading files over" = "Uploading files over";
-"Syncing files over" = "Syncing files with";
+"Uploading files over" = "Uploading files over %@";
+"Syncing files over" = "Syncing files with %@";
 "(%ld of %ld)" = "(%ld of %ld)";
 "You need to specify your language preference so that we can serve you better." = "You need to specify your language preference so that we can serve you better.";
 "Please type your message" = "Please type your message";
