@@ -147,6 +147,10 @@ class FileInfoViewController: BaseViewController, FileInfoViewInput, UITextField
             if album.readOnly == true {
                 fileName.isEnabled = false
             }
+            
+            if album.fileType.isFaceImageAlbum {
+                checkCanEdit(item: object)
+            }
         }
         
         if let createdDate = object.creationDate {
