@@ -223,8 +223,8 @@ final class PushNotificationService {
     }
     
     private func openLoginSettings() {
-        if let userInfo = SingletonStorage.shared.accountInfo {
-            pushTo(router.userProfile(userInfo: userInfo))
+        if SingletonStorage.shared.accountInfo?.accountType == "TURKCELL" {
+            pushTo(router.turkcellSecurity)            
         }
     }
     
