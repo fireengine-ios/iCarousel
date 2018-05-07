@@ -155,6 +155,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func showPasscodeIfNeed() {
         let topVC = UIApplication.topController()
         
+        if let topVC = topVC as? PasscodeEnterViewController, topVC.passcodeManager.userCancelledBiometrics {
+            topVC.passcodeManager.finishBiometrics = false
+        }
+        
         /// don't show at all or new PasscodeEnterViewController
         if passcodeStorage.isEmpty || passcodeStorage.systemCallOnScreen || topVC is PasscodeEnterViewController {
             return
