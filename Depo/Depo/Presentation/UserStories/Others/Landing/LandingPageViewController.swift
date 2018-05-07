@@ -40,7 +40,6 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        scrollView.showsHorizontalScrollIndicator = true
         let count = 6
         for i in 0...count {
             let contr = PageForLanding(nibName: "PageForLanding", bundle: nil)

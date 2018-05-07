@@ -40,8 +40,10 @@ class PageForLanding: UIViewController {
             gradientView.isHidden = true
             titleLabel.textColor = ColorConstants.blackForLanding
             subTitleLabel.textColor = ColorConstants.blackForLanding
+            bgImage.contentMode = .scaleAspectFit
         } else {
             gradientView.isHidden = false
+            bgImage.contentMode = .scaleAspectFill
         }
         
         titleLabel.text = getTitleForIndex(index: index)
