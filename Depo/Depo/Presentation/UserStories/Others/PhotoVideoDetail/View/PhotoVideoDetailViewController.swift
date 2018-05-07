@@ -131,6 +131,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         collectionView.isHidden = false
+        setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
