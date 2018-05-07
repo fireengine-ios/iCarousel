@@ -1,7 +1,7 @@
 PODS:
-  - Adjust (4.12.3):
-    - Adjust/Core (= 4.12.3)
-  - Adjust/Core (4.12.3)
+  - Adjust (4.13.0):
+    - Adjust/Core (= 4.13.0)
+  - Adjust/Core (4.13.0)
   - Alamofire (4.7.2)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
@@ -13,12 +13,12 @@ PODS:
   - Crashlytics (3.10.1):
     - Fabric (~> 1.7.5)
   - Fabric (1.7.6)
-  - FBSDKCoreKit (4.32.0):
+  - FBSDKCoreKit (4.33.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.32.0):
+  - FBSDKLoginKit (4.33.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.32.0):
-    - FBSDKCoreKit (~> 4.32.0)
+  - FBSDKShareKit (4.33.0):
+    - FBSDKCoreKit (~> 4.33.0)
   - GoogleConversionTracking (3.4.0)
   - iCarousel (1.8.3)
   - JDStatusBarNotification (1.5.6)
@@ -107,15 +107,15 @@ CHECKOUT OPTIONS:
     :git: https://github.com/bonyadmitr/SimpleExif.git
 
 SPEC CHECKSUMS:
-  Adjust: 22d701f72be3457e9f4f7c18ad4aab9436e0ef56
+  Adjust: 8f204c1005d6635e7c931c6a2cb2f881965bf478
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   CircleProgressBar: 3920079be5224b62b3d9ed6eeb23ac01c835b681
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
-  FBSDKCoreKit: 55d7f2ac45d9c4b9b6119f4e43900fe84b9b7b1b
-  FBSDKLoginKit: 32ac05c2a59952c363c2e85aafa8f73ba93bcbad
-  FBSDKShareKit: 658780d0d108b8ad590a54afb5ac1427bdc8de28
+  FBSDKCoreKit: 572b047a7e029bc44542bcf8a59414e7ff2b543e
+  FBSDKLoginKit: 88cb456349cfb3b554427ce4f8b43729d85dfb40
+  FBSDKShareKit: b7b5002833a4104fbecad75e8e4e082e91c7a08a
   GoogleConversionTracking: ca8c89abda2bd28bb6472b316eeb4ece9264e279
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   JDStatusBarNotification: d5829a8f2f291b23b8a54b87fac8bf2549945a2f
