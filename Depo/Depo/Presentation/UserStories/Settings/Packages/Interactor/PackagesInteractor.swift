@@ -213,7 +213,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                 return
             }
             
-            if status == .restored || status == .success {
+            if status == .success {
                 self?.getActiveSubscriptions()
             } else {
                 DispatchQueue.main.async {

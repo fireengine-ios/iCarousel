@@ -71,7 +71,7 @@ final class IAPManager: NSObject {
         guard let receiptUrl = Bundle.main.appStoreReceiptURL,
             let receiptData = try? Data(contentsOf: receiptUrl)
             else { return nil }
-        return receiptData.base64EncodedString(options: .lineLength64Characters)
+        return receiptData.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
     }
 }
 
