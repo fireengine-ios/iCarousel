@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import UIKit
+
 class SettingsRouter: SettingsRouterInput {
     
     let router = RouterVC()
@@ -55,7 +57,7 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool) {
-        router.pushViewController(viewController: router.passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail))
+        router.pushViewControllerAndRemoveCurrentOnCompletion(router.passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail))
     }
     
     func closeEnterPasscode() {
@@ -65,8 +67,7 @@ class SettingsRouter: SettingsRouterInput {
     func openPasscode(handler: @escaping VoidHandler) {
         let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         
-        vc.success = { [weak self] in
-            self?.router.navigationController?.popViewController(animated: false)
+        vc.success = {
             handler()
         }
         router.pushViewController(viewController: vc)
