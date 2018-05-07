@@ -182,8 +182,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         compoundItems(pageItems: filteredItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] in
             DispatchQueue.main.async {
-                debugPrint("!!!! remotes items \(self!.allRemoteItems.count)")
-                debugPrint("!!!! all media items \(self!.allMediaItems.count)")
+                debugPrint("!!!! remotes items \(self?.allRemoteItems.count)")
+                debugPrint("!!!! all media items \(self?.allMediaItems.count)")
                 self?.collectionView?.reloadData()
                 self?.delegate?.filesAppendedAndSorted()
                 self?.isLocalFilesRequested = false
