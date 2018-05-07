@@ -299,7 +299,7 @@ extension CoreDataStack {
         
         let context = newChildBackgroundContext
         newChildBackgroundContext.perform { [weak self] in
-            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@) AND (syncStatusValue != \(SyncWrapperedStatus.synced.valueForCoreDataMapping()))", filesTypesArray, currentlyInLibriaryLocalIDs)
+            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@)", filesTypesArray, currentlyInLibriaryLocalIDs)
            completion(self?.executeRequest(predicate: predicate, context: context) ?? [])
         }
         
