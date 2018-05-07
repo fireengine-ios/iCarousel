@@ -42,7 +42,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O02-jH-Ujj" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O02-jH-Ujj" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
                     <rect key="frame" x="29" y="29" width="92" height="92"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="92" id="QMZ-GN-4Gs"/>
