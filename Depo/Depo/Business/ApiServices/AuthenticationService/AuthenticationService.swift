@@ -351,6 +351,7 @@ class AuthenticationService: BaseRequestService {
             RecentSearchesService.shared.clearAll()
             SyncServiceManager.shared.stopSync()
             AutoSyncDataStorage().clear()
+            storageVars.autoSyncSet = false
             SingletonStorage.shared.accountInfo = nil
             SyncSettings.shared().periodicBackup = SYNCPeriodic.none
             ItemOperationManager.default.clear()
