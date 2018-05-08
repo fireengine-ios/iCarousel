@@ -199,6 +199,10 @@ extension PackagesInteractor: PackagesInteractorInput {
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.error(error))
                 }
+            case .inProgress: 
+                DispatchQueue.main.async {
+                    self?.output.failedUsage(with: ErrorResponse.string(TextConstants.inProgressPurchase))
+                }
             }
         }
     }

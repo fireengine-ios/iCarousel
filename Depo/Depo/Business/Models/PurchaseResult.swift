@@ -12,4 +12,5 @@ enum PurchaseResult {
     case success(String)
     case canceled
     case error(Error)
+    case inProgress
 }
