@@ -1250,12 +1250,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return indexPath
     }
     
-    func getCellForLocalFile(objectTrimmedLocalID: String) -> CollectionViewCellForPhoto? {
-        guard let path = getIndexPathForLocalObject(objectTrimmedLocalID: objectTrimmedLocalID),
-            let cell = collectionView?.cellForItem(at: path) as? CollectionViewCellForPhoto else {
-                return nil
+    func getCellForLocalFile(objectTrimmedLocalID: String, completion: @escaping  (_ cell: CollectionViewCellForPhoto?)->Void) {
+        guard let path = getIndexPathForLocalObject(objectTrimmedLocalID: objectTrimmedLocalID) else {
+            completion(nil)
+            return
         }
-        return cell
+        
+        DispatchQueue.main.async {
+            completion(self.collectionView?.cellForItem(at: path) as? CollectionViewCellForPhoto)
+        }
     }
     //----
     
@@ -1264,8 +1267,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
         
-        if let cell = getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) {
-            cell.setProgressForObject(progress: 0, blurOn: true)
+        getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) { (cell) in
+            cell?.setProgressForObject(progress: 0, blurOn: true)
         }
     }
     
@@ -1274,8 +1277,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
         
-        if let cell = getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) {
-            cell.setProgressForObject(progress: progress, blurOn: true)
+        getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) { (cell) in
+            cell?.setProgressForObject(progress: progress, blurOn: true)
         }
     }
     

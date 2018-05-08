@@ -214,7 +214,7 @@ extension UploadOperations: OperationProgressServiceDelegate {
         guard isExecuting else {
             return
         }
-        
+
         if requestObject?.currentRequest?.url == url, let uploadType = uploadType {
             CardsManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: item)
             ItemOperationManager.default.setProgressForUploadingFile(file: item, progress: ratio)
