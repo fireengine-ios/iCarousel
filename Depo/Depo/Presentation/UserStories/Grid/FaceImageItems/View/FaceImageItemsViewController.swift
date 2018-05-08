@@ -34,8 +34,8 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     //configuration navigationBar will be after receipt items
     override func configurateNavigationBar() { }
     
-    override func stopSelection() {
-        if (isCanChangeVisibility) {
+    override func stopSelection() {        
+        if navigationItem.rightBarButtonItems != nil, isCanChangeVisibility {
             configurateFaceImagePeopleActions { [weak self] in
                 self?.configureDoneNavBarActions()
             }
