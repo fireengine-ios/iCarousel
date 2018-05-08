@@ -26,6 +26,9 @@ final class IAPManager: NSObject {
     private var offerAppleHandler: OfferAppleHandler = {_ in }
     private var purchaseHandler: PurchaseHandler = {_ in }
     
+    private var restoreInProgress = false
+    private var purchaseInProgress = false
+    
     var canMakePayments: Bool {
         return SKPaymentQueue.canMakePayments()
     }
@@ -54,8 +57,19 @@ final class IAPManager: NSObject {
     func purchase(offerApple: OfferApple, handler: @escaping PurchaseHandler) {
         log.debug("IAPManager purchase offer")
         
-        if !canMakePayments { return }
+        guard canMakePayments else {
+            log.debug("IAPManager can't make payments")
+            return
+        }
+        
+        guard purchaseInProgress else {
+            log.debug("IAPManager purchase in progress")
+            handler(PurchaseResult.inProgress)
+            return
+        }
+        
         purchaseHandler = handler
+        purchaseInProgress = true
         let payment = SKPayment(product: offerApple.skProduct)
         SKPaymentQueue.default().add(payment)
     }
@@ -64,6 +78,7 @@ final class IAPManager: NSObject {
         log.debug("IAPManager restorePurchases")
         
         restorePurchasesCallback = restoreCallBack
+        restoreInProgress = true
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
     
@@ -91,45 +106,20 @@ extension IAPManager: SKPaymentTransactionObserver {
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         log.debug("IAPManager paymentQueue updatedTransactions")
         
-        var restoredIds: Set<String> = []
-        var restoreError: Error? = nil
+        guard !restoreInProgress else {
+            return
+        }
         
         for transaction in transactions {
-
             switch transaction.transactionState {
-            case .purchased:
-                if let type = MenloworksSubscriptionProductID(rawValue: transaction.payment.productIdentifier) {
-                    MenloworksAppEvents.onSubscriptionPurchaseCompleted(type)
-                }
-                
-                purchaseHandler(.success(transaction.payment.productIdentifier))
-            case .failed:
-                guard let error = transaction.error else { break }
-                if let skError = error as? SKError.Code, skError == .paymentCancelled {
-                    purchaseHandler(.canceled)
-                } else {
-                    purchaseHandler(.error(error))
-                }
-            case .restored:
-                restoredIds.insert(transaction.payment.productIdentifier)
-                
-                if let error = transaction.error {
-                    restoreError = error
-                }
-            case .purchasing:
-                break
-            case .deferred:
-                break
+            case .purchased: completeTransaction(transaction)
+            case .failed: failedTransaction(transaction)
+            case .restored: restoreTransaction(transaction)
+            default: break
             }
-            
-            SKPaymentQueue.default().finishTransaction(transaction)
         }
         
-        if !restoredIds.isEmpty {
-            restorePurchasesCallback?(.success(restoredIds))
-        } else if let error = restoreError {
-            restorePurchasesCallback?(.fail(error))
-        }
+        purchaseInProgress = false
     }
     
     public func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
@@ -142,12 +132,50 @@ extension IAPManager: SKPaymentTransactionObserver {
             purchasedIDs.insert(productId)
             SKPaymentQueue.default().finishTransaction(transaction)
         }
+        restoreInProgress = false
         restorePurchasesCallback?(.success(purchasedIDs))
     }
     
     public func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
         log.debug("IAPManager paymentQueue restoreCompletedTransactionsFailedWithError")
-        debugPrint("- ", queue, error)
+        debugPrint("- restoreCompletedTransactionsFailedWithError", queue, error)
+        
+        restoreInProgress = false
         restorePurchasesCallback?(.fail(error))
+    }
+}
+
+extension IAPManager {
+    
+    private func completeTransaction(_ transaction: SKPaymentTransaction) {
+        log.debug("IAPManager completeTransaction...")
+        
+        if purchaseInProgress {
+            if let type = MenloworksSubscriptionProductID(rawValue: transaction.payment.productIdentifier) {
+                MenloworksAppEvents.onSubscriptionPurchaseCompleted(type)
+            }
+            purchaseHandler(.success(transaction.payment.productIdentifier))
+        }
+        
+        SKPaymentQueue.default().finishTransaction(transaction)
+    }
+    
+    private func failedTransaction(_ transaction: SKPaymentTransaction) {
+        log.debug("IAPManager failedTransaction...")
+        
+        if purchaseInProgress, let error = transaction.error {
+            if let skError = error as? SKError.Code, skError == .paymentCancelled {
+                purchaseHandler(.canceled)
+            } else {
+                purchaseHandler(.error(error))
+            }
+        }
+        SKPaymentQueue.default().finishTransaction(transaction)
+    }
+    
+    private func restoreTransaction(_ transaction: SKPaymentTransaction) {
+        log.debug("IAPManager restoreTransaction...")
+        
+        SKPaymentQueue.default().finishTransaction(transaction)
     }
 }
