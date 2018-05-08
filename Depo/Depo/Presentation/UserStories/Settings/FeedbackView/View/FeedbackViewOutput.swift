@@ -8,13 +8,7 @@
 
 protocol FeedbackViewOutput {
 
-    /**
-        @author Oleg
-        Notify presenter that view is ready
-    */
-
     func viewIsReady()
     
     func onSend(selectedLanguage: LanguageModel)
-    func onTextDidChange(text: String)
 }

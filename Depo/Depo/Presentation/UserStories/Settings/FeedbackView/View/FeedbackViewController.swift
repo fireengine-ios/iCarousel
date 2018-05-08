@@ -45,8 +45,6 @@ final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnV
         
         setupTexts()
         
-        sendButton.isEnabled = false
-        
         feedbackTextView.delegate = self
         feedbackSubView.layer.cornerRadius = 4
         feedbackTextView.layer.cornerRadius = 4
@@ -287,13 +285,6 @@ final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnV
 
 
 extension FeedbackViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        guard textView == feedbackTextView else {
-            return
-        }
-        
-        output.onTextDidChange(text: textView.text)
-    }
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         dropDovnView.hideViewIfNeeded()

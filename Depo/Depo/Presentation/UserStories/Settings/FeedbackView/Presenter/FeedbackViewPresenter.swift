@@ -19,11 +19,7 @@ class FeedbackViewPresenter: BasePresenter, FeedbackViewModuleInput, FeedbackVie
     func onSend(selectedLanguage: LanguageModel) {
         interactor.onSend(selectedLanguage: selectedLanguage)
     }
-    
-    func onTextDidChange(text: String) {
-        view.setSendButton(isEnabled: !text.isEmpty)
-    }
-    
+        
     //interactor output
     
     func fail(text: String) {
