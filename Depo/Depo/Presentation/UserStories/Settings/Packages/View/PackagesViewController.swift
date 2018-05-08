@@ -17,6 +17,12 @@ final class PackagesViewController: ViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var policyTextView: UITextView!
     
+    @IBOutlet private weak var subtitleLabel: UILabel! {
+        didSet {
+            subtitleLabel.text = TextConstants.packages
+        }
+    }
+    
     private lazy var activityManager = ActivityIndicatorManager()
     
     private var plans = [SubscriptionPlan]() {

@@ -44,7 +44,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVn-PT-4L8">
-                    <rect key="frame" x="29" y="61.5" width="326" height="48"/>
+                    <rect key="frame" x="29" y="61.5" width="326" height="64"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropox" translatesAutoresizingMaskIntoConstraints="NO" id="7VT-4i-z0z">
                             <rect key="frame" x="0.0" y="10.5" width="22" height="20"/>
@@ -55,21 +55,21 @@
                             <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkI-AE-Hu8">
-                            <rect key="frame" x="36" y="32" width="230" height="16"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label Label Label Label Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkI-AE-Hu8">
+                            <rect key="frame" x="36" y="32" width="230" height="32"/>
                             <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="14"/>
                             <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropbox_progress" translatesAutoresizingMaskIntoConstraints="NO" id="E8I-Td-65B" customClass="RotatingImageView" customModule="lifebox" customModuleProvider="target">
-                            <rect key="frame" x="275.5" y="-2" width="51" height="51"/>
+                            <rect key="frame" x="275.5" y="6.5" width="51" height="51"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="E8I-Td-65B" secondAttribute="height" id="KMt-vc-RY0"/>
                                 <constraint firstAttribute="width" constant="51" id="bjx-PK-rt9"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Tv-FM-W2Y">
-                            <rect key="frame" x="276" y="0.0" width="50" height="48"/>
+                            <rect key="frame" x="276" y="0.0" width="50" height="64"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="LmK-HV-BeZ"/>
                             </constraints>
@@ -98,7 +98,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eqk-Rd-19j">
-                    <rect key="frame" x="29" y="119.5" width="326" height="31"/>
+                    <rect key="frame" x="29" y="135.5" width="326" height="31"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="e1l-h0-sDt">
                             <rect key="frame" x="0.0" y="4.5" width="10" height="22"/>
@@ -129,7 +129,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lug-sc-2GG">
-                    <rect key="frame" x="29" y="172.5" width="326" height="31"/>
+                    <rect key="frame" x="29" y="188.5" width="326" height="31"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="27s-Lf-hqu">
                             <rect key="frame" x="0.0" y="4.5" width="22" height="22"/>
@@ -160,7 +160,7 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9py-wk-Ufk">
-                    <rect key="frame" x="29" y="225.5" width="326" height="31"/>
+                    <rect key="frame" x="29" y="241.5" width="326" height="31"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cropy" translatesAutoresizingMaskIntoConstraints="NO" id="wWT-6u-WhK">
                             <rect key="frame" x="0.0" y="4.5" width="22" height="22"/>

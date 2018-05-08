@@ -365,7 +365,7 @@ extension SyncServiceManager {
                                               message: TextConstants.syncOutOfSpaceAlertText,
                                               image: .none,
                                               firstButtonTitle: TextConstants.syncOutOfSpaceAlertCancel,
-                                              secondButtonTitle: TextConstants.syncOutOfSpaceAlertGoToSettings,
+                                              secondButtonTitle: TextConstants.upgrade,
                                               secondAction: { vc in
                                                 vc.close(completion: {
                                                     let router = RouterVC()

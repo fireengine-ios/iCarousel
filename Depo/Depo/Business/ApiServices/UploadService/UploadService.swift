@@ -567,7 +567,7 @@ extension UploadService {
                                               message: TextConstants.syncOutOfSpaceAlertText,
                                               image: .none,
                                               firstButtonTitle: TextConstants.syncOutOfSpaceAlertCancel,
-                                              secondButtonTitle: TextConstants.syncOutOfSpaceAlertGoToSettings,
+                                              secondButtonTitle: TextConstants.upgrade,
                                               firstAction: nil,
                                               secondAction: { vc in
                                                 vc.close(completion: {

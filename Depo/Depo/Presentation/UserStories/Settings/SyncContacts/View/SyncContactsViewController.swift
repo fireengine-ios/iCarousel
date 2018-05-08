@@ -25,7 +25,11 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     @IBOutlet weak var removedSubTitleLabel: UILabel!
     
     @IBOutlet weak var cancelButton: ButtonWithGrayCorner!
-    @IBOutlet weak var manageContactsButton: ButtonWithGrayCorner!
+    @IBOutlet weak var manageContactsButton: ButtonWithGrayCorner! {
+        didSet {
+            manageContactsButton.setTitle(TextConstants.manageContacts, for: .normal)
+        }
+    }
     
     @IBOutlet weak var operationButtonsStackView: UIStackView!
     @IBOutlet weak var deleteDuplicatedButton: BlueButtonWithMediumWhiteText!

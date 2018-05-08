@@ -51,6 +51,8 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         
         cancelButton.titleLabel?.lineBreakMode = .byWordWrapping
         
+        upgradeButton.setTitle(TextConstants.upgrade, for: .normal)
+        
         freeButton.setTitle(TextConstants.free, for: .normal)
         freeButton.layer.borderWidth = borderWidth
         freeButton.layer.borderColor = UIColor.lrTealishTwo.cgColor
