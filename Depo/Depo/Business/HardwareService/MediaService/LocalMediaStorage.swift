@@ -410,7 +410,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             wrapData.copyFileData(from: item)
             
             let context = CoreDataStack.default.newChildBackgroundContext
-            context.perform {
+            context.perform { [weak self] in
                 let mediaItem: MediaItem
                 if let existingMediaItem = CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
                     mediaItem = existingMediaItem
@@ -422,8 +422,20 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 mediaItem.trimmedLocalFileID = assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier//item.getTrimmedLocalID()
                 mediaItem.syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
                 
-                CoreDataStack.default.saveDataForContext(context: context, savedCallBack: nil)
-///WE might need this               CoreDataStack.default.updateSavedItems(savedItems: [mediaItem], remoteItems: [item], context: context)
+                var userObjectSyncStatus = Set<MediaItemsObjectSyncStatus>()
+                if let unwrapedSet = mediaItem.objectSyncStatus as? Set<MediaItemsObjectSyncStatus> {
+                    userObjectSyncStatus = unwrapedSet
+                }
+                SingletonStorage.shared.getUniqueUserID(success: {
+                    currentUserID in
+                    context.perform {
+                        mediaItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
+                        userObjectSyncStatus.insert(MediaItemsObjectSyncStatus(userID: currentUserID, context: context))
+                        CoreDataStack.default.saveDataForContext(context: context, savedCallBack: nil)
+                        }
+                    }, fail: {
+                        /// nothing, status not going to be saved
+                })
             }
             
         }
