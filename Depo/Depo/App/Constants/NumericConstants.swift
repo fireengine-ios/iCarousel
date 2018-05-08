@@ -54,7 +54,7 @@ struct NumericConstants {
     static let freeAppSpaceLimit = 0.2
     
     static let fourGigabytes: UInt64 = 4 * 1024 * 1024 * 1024
-    static let copyVideoBufferSize = 1024 * 1024
+    static let copyVideoBufferSize = 4096 //old 1024 * 1024
     
     static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     

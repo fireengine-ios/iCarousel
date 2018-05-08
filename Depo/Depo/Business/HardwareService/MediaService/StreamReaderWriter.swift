@@ -13,11 +13,13 @@ final class StreamReaderWriter {
     typealias ProgressCallBack = (_ copySize: Double, _ percent: Double) -> Void
     
     func copyFile(from fromURL: URL, to toURL: URL, progress: ProgressCallBack? = nil, completion: @escaping ResponseVoid) {
-        guard let copyOutput = OutputStream(url: toURL, append: false),
+        guard
+            let copyOutput = OutputStream(url: toURL, append: false),
             let fileInput = InputStream(url: fromURL),
-            let freeSpace = Device.getFreeDiskSpaceInBytes() else {
-                completion(ResponseResult.failed(CustomErrors.unknown))
-                return
+            let freeSpace = Device.getFreeDiskSpaceInBytes()
+        else {
+            completion(ResponseResult.failed(CustomErrors.unknown))
+            return
         }
         
         let fileSize: Int
@@ -52,10 +54,7 @@ final class StreamReaderWriter {
                 bytesWritten = copyOutput.write(buffer, maxLength: NumericConstants.copyVideoBufferSize)
                 
                 if bytesToWrite < 0 {
-                    print(fileInput.streamStatus.rawValue)
-                }
-                if bytesWritten == -1 {
-                    print(copyOutput.streamStatus.rawValue)
+                    debugPrint("bytesToWrite", fileInput.streamStatus.rawValue)
                 }
                 //move read pointer to next section
                 bytesToWrite -= bytesWritten
