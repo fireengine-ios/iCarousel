@@ -181,14 +181,11 @@ class CoreDataStack: NSObject {
     
     @objc func saveDataForContext(context: NSManagedObjectContext, saveAndWait: Bool = true,
                                   savedCallBack: VoidHandler?) {
-
-        log.debug("saveDataForContext()")
         let saveBlock: VoidHandler = { [weak self] in
             guard let `self` = self else {
                 return
             }
             do {
-                log.debug("saveDataForContext() save()")
                 try context.save()
             } catch {
                 log.debug("saveDataForContext() save() Error saving contex")
