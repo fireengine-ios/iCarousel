@@ -57,7 +57,7 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         }
         let allSelectedItemsTypes = selectedItems.map { $0.fileType }
         if allSelectedItemsTypes.contains(.image) {
-            let actionTypes = barConfig.elementsConfig + [.print]
+            let actionTypes = barConfig.elementsConfig
             
             barConfig = EditingBarConfig(elementsConfig: actionTypes,
                                          style: barConfig.style,

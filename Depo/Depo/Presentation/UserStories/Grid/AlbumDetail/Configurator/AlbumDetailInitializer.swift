@@ -21,7 +21,7 @@ class AlbumDetailModuleInitializer: NSObject {
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonUploadFromLifebox])
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .removeFromAlbum],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromAlbum],
                                                style: .default, tintColor: nil)
         
         let presenter = AlbumDetailPresenter()
