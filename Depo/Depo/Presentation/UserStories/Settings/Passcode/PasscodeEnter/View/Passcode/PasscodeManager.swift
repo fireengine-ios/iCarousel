@@ -17,6 +17,7 @@ protocol PasscodeManager: class {
     func authenticateWithBiometrics()
     var maximumInccorectPasscodeAttempts: Int { get }
     var finishBiometrics: Bool { get set }
+    var userCancelledBiometrics: Bool { get }
 }
 
 protocol PasscodeManagerDelegate: class {
@@ -30,8 +31,8 @@ final class PasscodeManagerImp {
     let storage: PasscodeStorage
     var state: PasscodeState
     let biometricsManager: BiometricsManager
-    var biometricsOnScreen: Bool = false
-    var finishBiometrics: Bool = false
+    var userCancelledBiometrics = false
+    var finishBiometrics = false
     
     weak var delegate: PasscodeManagerDelegate?
     
@@ -81,23 +82,31 @@ extension PasscodeManagerImp: PasscodeManager {
         
         view.resignResponder()
         
-        biometricsOnScreen = true
+        userCancelledBiometrics = false
         
-        biometricsManager.authenticate(reason: state.title) { success in
+        biometricsManager.authenticate(reason: state.title) { status in
             DispatchQueue.main.async {
-                if success {
+                switch status {
+                case .success:
                     self.view.passcodeInput.animatePasscodeFullEnter()
                     let passcode = self.storage.passcode
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         self.state.finish(with: passcode, manager: self)
                     }
-                } else {
+                    self.finishBiometrics = true
+                    
+                case .cancelledByUser:
+                    self.userCancelledBiometrics = true
+                    self.finishBiometrics = true
+                    
+                default: break
+                }
+                
+                if status != .success {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         self.view.becomeResponder()
                     }
                 }
-                self.biometricsOnScreen = false
-                self.finishBiometrics = true
             }
         }
     }
@@ -108,10 +117,8 @@ extension PasscodeManagerImp: PasscodeManager {
             return false
         }
         #endif
-        if biometricsOnScreen || finishBiometrics {
-            return false
-        }
-        return true
+        
+        return !finishBiometrics
     }
 }
 
