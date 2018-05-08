@@ -9,7 +9,7 @@
 import Foundation
 import LocalAuthentication
 
-typealias AuthenticateHandler = (Bool) -> Void
+typealias AuthenticateHandler = (BiometricsAuthenticateResult) -> Void
 
 protocol BiometricsManager {
     var isEnabled: Bool { get set }
@@ -17,6 +17,15 @@ protocol BiometricsManager {
     var biometricsTitle: String { get }
     var isAvailableFaceID: Bool { get }
     func authenticate(reason: String, handler: @escaping AuthenticateHandler)
+}
+
+enum BiometricsAuthenticateResult: Int {
+    case success = 0
+    case notAvailable = 1
+    case retryLimitReached = -1
+    case cancelledByUser = -2
+    case cancelledBySystem = -4
+    case sensorIsLocked = -8
 }
 
 enum BiometricsStatus {
@@ -84,12 +93,21 @@ final class BiometricsManagerImp: BiometricsManager {
     
     func authenticate(reason: String = TextConstants.passcodeBiometricsDefault, handler: @escaping AuthenticateHandler) {
         if status != .available || !isEnabled {
-            return handler(false)
+            return handler(.notAvailable)
         }
         
         LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
             DispatchQueue.main.async {
-                handler(success)
+                if success {
+                    handler(.success)
+                } else if let error = error as NSError? {
+                    print("Fingerprint validation failed: \(error.localizedDescription). Code: error.code")
+                    if let status = BiometricsAuthenticateResult(rawValue: error.code) {
+                        handler(status)
+                    } else {
+                        handler(.notAvailable)
+                    }
+                }
             }
         }
     }

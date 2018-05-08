@@ -231,13 +231,15 @@ extension CoreDataStack {
     }
     
     private func compareRemoteItems(with localItems: [WrapData], service: PhotoAndVideoService, fieldValue: FieldValue, handler:  @escaping (_ items: [WrapData]?, _ error: ErrorResponse?) -> Void ) {
-        guard let oldestItemDate = localItems.last?.metaDate else {
+        let sortedByDateItems = localItems.sorted { $0.metaDate > $1.metaDate }
+        guard let oldestItemDate = sortedByDateItems.last?.metaDate else {
             handler([], nil)
             return
         }
         log.debug("LocalMediaStorage compareRemoteItems")
         var localItems = localItems
         var localMd5s = localItems.map { $0.md5 }
+        var localIds = localItems.map { $0.getTrimmedLocalID() }
         
         var finished = false
         service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] items in
@@ -246,6 +248,8 @@ extension CoreDataStack {
                 return
             }
             self.privateQueue.async { [weak self] in
+                finished = (items.count < NumericConstants.numberOfElementsInSyncRequest)
+                
                 for item in items {
                     if item.metaDate < oldestItemDate {
                         finished = true
@@ -253,13 +257,15 @@ extension CoreDataStack {
                     }
                     
                     let serverObjectMD5 = item.md5
-                    if let index = localMd5s.index(of: serverObjectMD5) {
+                    let trimmedId = item.getTrimmedLocalID()
+                    if let index = localMd5s.index(of: serverObjectMD5) ?? localIds.index(where: { $0 == trimmedId }) {
                         let localItem = localItems[index]
                         localItem.setSyncStatusesAsSyncedForCurrentUser()
                         self?.updateLocalItemSyncStatus(item: localItem)
                         
                         localItems.remove(at: index)
                         localMd5s.remove(at: index)
+                        localIds.remove(at: index)
                         
                         if localItems.isEmpty {
                             finished = true
@@ -268,7 +274,7 @@ extension CoreDataStack {
                     }
                 }
                 
-                if !finished, items.count == NumericConstants.numberOfElementsInSyncRequest {
+                if !finished {
                     self?.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue, handler: handler)
                 } else {
                     handler(localItems, nil)

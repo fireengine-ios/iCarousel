@@ -74,7 +74,9 @@ import AVFoundation
         let picker = UIImagePickerController()
         picker.sourceType = type
         picker.delegate = cameraSupportedVC
-        picker.allowsEditing = true
+        
+        ///https://stackoverflow.com/a/40038752/5893286
+        picker.allowsEditing = !Device.isIpad
         
         DispatchQueue.main.async {
             sourceViewViewController.present(picker,

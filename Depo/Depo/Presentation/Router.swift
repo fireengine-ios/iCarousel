@@ -124,6 +124,21 @@ class RouterVC: NSObject {
         
     }
     
+    func pushViewControllerAndRemoveCurrentOnCompletion(_ viewController: UIViewController) {
+        if let viewController = viewController as? BaseViewController, !viewController.needShowTabBar {
+            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
+            NotificationCenter.default.post(name: notificationName, object: nil)
+        }
+        
+        navigationController?.pushViewControllerAndRemoveCurrentOnCompletion(viewController)
+        viewController.navigationController?.isNavigationBarHidden = false
+        
+        if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
+            tabBarViewController.setBGColor(color: baseView.getBacgroundColor())
+        }
+        
+    }
+    
     func setBacgroundColor(color: UIColor) {
         if let tabBarViewController = rootViewController as? TabBarViewController {
             tabBarViewController.setBGColor(color: color)

@@ -83,12 +83,12 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
         switch viewType {
         case .sync:
             operationLabel.text = ""
-            titleLabel.text = TextConstants.popUpSyncing + " " + networkType
+            titleLabel.text = String(format: TextConstants.popUpSyncing, networkType)
             imageView.image = iconImage
             
         case .upload:
             operationLabel.text = ""
-            titleLabel.text = TextConstants.popUpUploading + " " + networkType
+            titleLabel.text = String(format: TextConstants.popUpUploading, networkType)
             imageView.image = iconImage
             
         case .download:

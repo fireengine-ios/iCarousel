@@ -55,6 +55,7 @@ extension PasscodeEnterViewController: PasscodeManagerDelegate {
     }
     
     func passcodeLockDidSucceed(_ lock: PasscodeManager) {
+        passcodeManager.finishBiometrics = true
         lock.view.resignResponder()
         success?()
         if let unwrapedUserFlag = isTurkCellUser, unwrapedUserFlag {

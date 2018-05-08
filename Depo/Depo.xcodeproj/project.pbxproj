@@ -2704,6 +2704,7 @@
 		CE1458D12045734A00812544 /* Alamofire+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CE2045734200812544 /* Alamofire+Validate.swift */; };
 		CE1458D220458AFC00812544 /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
 		CE1458D520458D9100812544 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
+		CE15AFBE20A0846E00015874 /* UINavigationController+Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15AFBD20A0846E00015874 /* UINavigationController+Push.swift */; };
 		CE16C0461FF22F8F00BE5906 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
 		CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
 		CE18CC7D204E84DE00FA3F44 /* DocumentActionCustomizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC7C204E84DE00FA3F44 /* DocumentActionCustomizator.swift */; };
@@ -5146,6 +5147,7 @@
 		CE1353382004F1530004CBBE /* TextEnterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextEnterController.xib; sourceTree = "<group>"; };
 		CE1458CA2045633D00812544 /* ShareConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareConfigurator.swift; sourceTree = "<group>"; };
 		CE1458CE2045734200812544 /* Alamofire+Validate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+Validate.swift"; sourceTree = "<group>"; };
+		CE15AFBD20A0846E00015874 /* UINavigationController+Push.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Push.swift"; sourceTree = "<group>"; };
 		CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE16C0471FF22FA500BE5906 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CE18CC7C204E84DE00FA3F44 /* DocumentActionCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentActionCustomizator.swift; sourceTree = "<group>"; };
@@ -10519,6 +10521,7 @@
 				CE19CE00208F016600DB903E /* UIAlertController+Action.swift */,
 				CE49E8F92099BD71007F05A6 /* UIButton+Font.swift */,
 				B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */,
+				CE15AFBD20A0846E00015874 /* UINavigationController+Push.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -15219,6 +15222,7 @@
 				CE51AC4C1EF90853005DCEE0 /* CurioSettings.m in Sources */,
 				CE27C31F1EF9515800D4D156 /* RouteRequests.swift in Sources */,
 				CE2F56161F7552A900F49DA1 /* PackagesInitializer.swift in Sources */,
+				CE15AFBE20A0846E00015874 /* UINavigationController+Push.swift in Sources */,
 				CE51AC521EF90853005DCEE0 /* LoginDataStorage.swift in Sources */,
 				7859299920060E94003F8AB3 /* ManageContactsInteractor.swift in Sources */,
 				7C3A74391F04F4B800124DF5 /* BaseMediaContent.swift in Sources */,
