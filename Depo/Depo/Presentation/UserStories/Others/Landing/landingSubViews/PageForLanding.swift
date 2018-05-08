@@ -47,10 +47,15 @@ class PageForLanding: UIViewController {
         titleLabel.text = getTitleForIndex(index: index)
         subTitleLabel.text = getSubTitleForIndex(index: index)
         
+        var localizationPrefix = ""
+        if Device.supportedLocale == "tr" {
+            localizationPrefix = "TR"
+        }
+        
         let bgImageName = String(format: "LandingBG%d", index)
         bgImage.image = UIImage(named: bgImageName)
         
-        let imageName = String(format: "LandingImage%d", index)
+        let imageName = String(format: "LandingImage%@%d", localizationPrefix, index)
         imageView.image = UIImage(named: imageName)
     }
     
