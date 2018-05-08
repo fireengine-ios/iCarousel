@@ -25,6 +25,7 @@
                 <outlet property="policyTextView" destination="0Wh-5R-OYf" id="P0u-hw-Qtj"/>
                 <outlet property="promoView" destination="5bp-6o-N2u" id="9NB-9L-Bts"/>
                 <outlet property="scrollView" destination="TRR-B7-lJ8" id="V89-Ic-Tct"/>
+                <outlet property="subtitleLabel" destination="LS1-hD-FRu" id="00P-TY-Gbd"/>
                 <outlet property="view" destination="iN0-l3-epB" id="fj3-X7-Fa4"/>
             </connections>
         </placeholder>
