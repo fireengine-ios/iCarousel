@@ -27,7 +27,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     static let borderW: CGFloat = 3
     
-    private var visualEffectBlur = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    private let visualEffectBlur = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
     override func awakeFromNib() {
         super.awakeFromNib()

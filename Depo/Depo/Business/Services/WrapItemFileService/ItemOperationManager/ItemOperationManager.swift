@@ -145,11 +145,11 @@ class ItemOperationManager: NSObject {
     func startUploadFile(file: WrapData) {
         currentUploadingObject = file
         
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             for view in self.views {
                 view.startUploadFile(file: file)
             }
-        }
+//        }
     }
     
     func startUploadFilesToAlbum(files: [WrapData]) {
@@ -161,11 +161,11 @@ class ItemOperationManager: NSObject {
     }
     
     func setProgressForUploadingFile(file: WrapData, progress: Float) {
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             for view in self.views {
                 view.setProgressForUploadingFile(file: file, progress: progress)
             }
-        }
+//        }
         
         currentUploadingObject = file
         currentUploadProgress = progress
