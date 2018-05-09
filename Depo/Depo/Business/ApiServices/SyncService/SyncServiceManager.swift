@@ -136,18 +136,18 @@ class SyncServiceManager {
         }
 
         reachability.whenReachable = { reachability in
-            print("AUTOSYNC: is reachable")
+            debugPrint("AUTOSYNC: is reachable")
             self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
         }
         
         reachability.whenUnreachable = { reachability in
-            print("AUTOSYNC: is unreachable")
+            debugPrint("AUTOSYNC: is unreachable")
             self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
         }
     }
     
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
-        print("AUTOSYNC: checkReachabilityAndSettings")
+        debugPrint("AUTOSYNC: checkReachabilityAndSettings")
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 return

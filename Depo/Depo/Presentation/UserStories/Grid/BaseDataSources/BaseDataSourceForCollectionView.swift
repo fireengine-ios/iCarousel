@@ -1045,8 +1045,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
                 compoundItems(pageItems: [], pageNum: lastPage, complition: { [weak self] in
                     DispatchQueue.main.async {
-                        debugPrint("!!!! remotes items \(self!.allRemoteItems.count)")
-                        debugPrint("!!!! all media items \(self!.allMediaItems.count)")
                         self?.collectionView?.reloadData()
                         self?.delegate?.filesAppendedAndSorted()
                         self?.isLocalFilesRequested = false
@@ -1058,8 +1056,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
             compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] in
                 DispatchQueue.main.async {
-                    debugPrint("!!!! remotes items \(self!.allRemoteItems.count)")
-                    debugPrint("!!!! all media items \(self!.allMediaItems.count)")
                     self?.collectionView?.reloadData()
                     self?.delegate?.filesAppendedAndSorted()
                     self?.isLocalFilesRequested = false
