@@ -226,7 +226,7 @@ final class MediaPlayer: NSObject {
         /// find delete indexes
         for (i, item) in list.enumerated() {
             for deleteItem in listItems {
-                if deleteItem.urlToFile == item.urlToFile {
+                if deleteItem.uuid == item.uuid {
                     deleteIndexes.append(i)
                     break
                 }
