@@ -38,5 +38,8 @@ enum PushNotificationAction: String {
     case places = "places"
     case http = "http"
     case login = "login"
+    case search = "search"
+    case freeUpSpace = "freeUpSpace"
+    case home = "home"
 }
 

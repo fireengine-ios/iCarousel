@@ -53,7 +53,7 @@ final class PushNotificationService {
         }
         
         switch action {
-        case .main: openMain()
+        case .main, .home: openMain()
         case .syncSettings: openSyncSettings()
         case .floatingMenu: openFloatingMenu()
         case .packages: openPackages()
@@ -84,6 +84,8 @@ final class PushNotificationService {
         case .places: openPlaces()
         case .http: openURL(notificationActionURLString)
         case .login: openLogin()
+        case .search: openSearch()
+        case .freeUpSpace: break
         }
         notificationAction = nil
     }
@@ -251,6 +253,18 @@ final class PushNotificationService {
     
     private func openPlaces() {
         pushTo(router.placesListController())
+    }
+    
+    private func openSearch() {
+        let output = router.getViewControllerForPresent()
+        let controller = router.searchView(output: output as? SearchModuleOutput)
+        output?.navigationController?.delegate = controller as? BaseViewController
+        controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
+        pushTo(controller)
+    }
+    
+    private func openFreeUpSpace() {
+        pushTo(router.freeAppSpace())
     }
     
     private func openURL(_ path: String?) {
