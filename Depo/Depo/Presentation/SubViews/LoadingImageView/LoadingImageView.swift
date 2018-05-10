@@ -106,6 +106,8 @@ class LoadingImageView: UIImageView {
         })
     }
     
+    private let privateQueue = DispatchQueue.global(qos: .userInitiated)
+    
     func loadImageForItem(object: Item?, smooth: Bool = false) {
         if !smooth {
             self.image = nil
@@ -121,14 +123,16 @@ class LoadingImageView: UIImageView {
         if !smooth {
             activity.startAnimating()
         }
-        
-        path = object!.patchToPreview
-        
-        url = filesDataSource.getImage(patch: object!.patchToPreview) { [weak self] image in
-            if self?.path == object!.patchToPreview {
-                self?.finishImageLoading(image, withAnimation: smooth)
+        privateQueue.async { [weak self] in
+            self?.path = object?.patchToPreview
+            
+            self?.url = self?.filesDataSource.getImage(patch: object!.patchToPreview) { [weak self] image in
+                if self?.path == object?.patchToPreview {
+                    self?.finishImageLoading(image, withAnimation: smooth)
+                }
             }
         }
+        
     }
     
     func loadImageByPath(path_: PathForItem?) {
@@ -223,19 +227,22 @@ class LoadingImageView: UIImageView {
     }
     
     private func finishImageLoading(_ image: UIImage?, withAnimation: Bool = false) {
-        activity.stopAnimating()
-        if withAnimation {
-            UIView.transition(with: self,
-                              duration: NumericConstants.animationDuration,
-                              options: .transitionCrossDissolve,
-                              animations: { self.image = image },
-                              completion: nil)
-        } else {
-            self.image = image
+        DispatchQueue.main.async {
+            self.activity.stopAnimating()
+            if withAnimation {
+                UIView.transition(with: self,
+                                  duration: NumericConstants.animationDuration,
+                                  options: .transitionCrossDissolve,
+                                  animations: { self.image = image },
+                                  completion: nil)
+            } else {
+                self.image = image
+            }
+            self.path = nil
+            self.url = nil
+            self.delegate?.onImageLoaded(image: image)
         }
-        path = nil
-        url = nil
-        delegate?.onImageLoaded(image: image)
+        
     }
 
 }

@@ -304,11 +304,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     func getImage(asset: PHAsset, contentSize: CGSize, convertToSize: CGSize, image: @escaping FileDataSorceImg) {
         log.debug("LocalMediaStorage getImage")
         
-        let scalling: PhotoManagerCallBack = { input, dict in
-            let newImg = input?.resizeImage(rect: contentSize)
-            
-            DispatchQueue.main.async {
-                image(newImg)
+        let scalling: PhotoManagerCallBack = { [weak self] input, dict in
+            self?.dispatchQueue.async {
+                let newImg = input?.resizeImage(rect: contentSize)
+                    image(newImg)
+                
             }
         }
         
