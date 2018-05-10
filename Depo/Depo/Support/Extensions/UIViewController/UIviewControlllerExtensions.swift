@@ -50,7 +50,7 @@ extension UIViewController: Waiting {
     }
     
     func showSpiner() {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             _ = MBProgressHUD.showAdded(to: self.view, animated: true)
         }
     }
