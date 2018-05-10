@@ -25,6 +25,6 @@ class AutoSyncRouter: AutoSyncRouterInput {
                                                 vc.close(completion: okHandler)
                                                 
         })
-        router.presentViewController(controller: controller)
+        router.rootViewController?.present(controller, animated: true, completion: nil)
     }
 }
