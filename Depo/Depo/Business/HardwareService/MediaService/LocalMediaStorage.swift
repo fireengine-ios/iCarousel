@@ -72,6 +72,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
+    private lazy var coreDataStack = CoreDataStack.default
+    
     private lazy var streamReaderWrite = StreamReaderWriter()
     
     private let queue = OperationQueue()
@@ -226,7 +228,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 
                 [album, smartAlbum].forEach { album in
                     album.enumerateObjects { object, index, stop in
-                        if object.photosCount > 0 || object.videosCount > 0 {
+                        let count = self.numberOfItems(in: object)
+                        if count.value > 0 {
                             let item = AlbumItem(uuid: object.localIdentifier,
                                                  name: object.localizedTitle,
                                                  creationDate: nil,
@@ -234,8 +237,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                                  fileType: .photoAlbum,
                                                  syncStatus: .unknown,
                                                  isLocalItem: true)
-                            item.imageCount = object.photosCount + object.videosCount
-
+                            if count.fromCoreData {
+                                item.imageCount = count.value
+                            }
                             
                             let fetchOptions = PHFetchOptions()
                             fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -253,8 +257,20 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     completion(albums)
                 }
             }
-            
         }
+    }
+    
+    private func numberOfItems(in album: PHAssetCollection) -> (value: Int, fromCoreData: Bool) {
+        guard !coreDataStack.inProcessAppendingLocalFiles else {
+            return (album.photosCount + album.videosCount, false)
+        }
+        
+        let assets = PHAsset.fetchAssets(in: album, options: PHFetchOptions())
+        let array = assets.objects(at: IndexSet(0..<assets.count))
+        let context = coreDataStack.newChildBackgroundContext
+        let ids = coreDataStack.listAssetIdAlreadySaved(allList: array, context: context)
+        
+        return (ids.count, true)
     }
     
     // MARK: Image

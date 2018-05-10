@@ -175,7 +175,7 @@ extension CoreDataStack {
         return allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) }
     }
     
-    private func listAssetIdAlreadySaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
+    func listAssetIdAlreadySaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
         let currentlyInLibriaryIDs: [String] = allList.compactMap { $0.localIdentifier }
         
         let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)

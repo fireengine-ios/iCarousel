@@ -25,13 +25,13 @@ class LocalAlbumCollectionViewCell: BaseCollectionViewCell {
             return
         }
         
-        if let name = album.name,
-            let count = album.imageCount {
-            let photoCount = String(count)
-            nameLabel.text = name + " (\(photoCount))"
+        let name = album.name ?? ""
+        
+        if let count = album.imageCount, count > 0 {
+            nameLabel.text = "\(name) (\(count))"
+        } else {
+            nameLabel.text = name
         }
-        
-        
     }
 
 }
