@@ -127,7 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
         
         if tokenStorage.refreshToken != nil {
-            LocationManager.shared.startUpdateLocation()
+            LocationManager.shared.startUpdateLocationInBackground()
         }
         
         if !passcodeStorage.isEmpty {
