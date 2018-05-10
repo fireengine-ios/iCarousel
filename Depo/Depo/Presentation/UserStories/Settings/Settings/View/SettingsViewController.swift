@@ -25,7 +25,7 @@ protocol SettingsDelegate: class {
     
     func goToActivityTimeline()
     
-    func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool)
+    func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needPopPasscodeEnterVC: Bool)
 }
 
 class SettingsViewController: BaseViewController, SettingsViewInput, UITableViewDelegate, UITableViewDataSource {
@@ -250,21 +250,25 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     }
     
     private func showPasscodeOrPasscodeSettings() {
-        let routerBlock = { [weak self] in
-            if let settingsDelegate = self?.settingsDelegate {
-                settingsDelegate.goToPasscodeSettings(isTurkcell: self?.output.isTurkCellUser ?? false,
-                                                      inNeedOfMail: self?.output.inNeedOfMail ?? false)
-            } else {
-                self?.output.goToPasscodeSettings()
-            }
-        }
-        
         if output.isPasscodeEmpty {
-            routerBlock()
-            return
+            if let settingsDelegate = settingsDelegate {
+                settingsDelegate.goToPasscodeSettings(isTurkcell: output.isTurkCellUser,
+                                                      inNeedOfMail: output.inNeedOfMail,
+                                                      needPopPasscodeEnterVC: false)
+            } else {
+                output.goToPasscodeSettings(needReplaceOfCurrentController: false)
+            }
+        } else {
+            output.openPasscode(handler: { [weak self] in
+                if let settingsDelegate = self?.settingsDelegate {
+                    settingsDelegate.goToPasscodeSettings(isTurkcell: self?.output.isTurkCellUser ?? false,
+                                                          inNeedOfMail: self?.output.inNeedOfMail ?? false,
+                                                          needPopPasscodeEnterVC: true)
+                } else {
+                    self?.output.goToPasscodeSettings(needReplaceOfCurrentController: true)
+                }
+            })
         }
-        
-        output.openPasscode(handler: routerBlock)
     }
     
     func showPhotoAlertSheet() {

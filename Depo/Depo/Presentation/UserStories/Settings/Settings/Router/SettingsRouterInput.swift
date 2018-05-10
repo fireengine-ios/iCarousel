@@ -32,7 +32,7 @@ protocol SettingsRouterInput {
     
     func goToPackages()
     
-    func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool)
+    func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needReplaceOfCurrentController: Bool)
     
     func closeEnterPasscode()
     

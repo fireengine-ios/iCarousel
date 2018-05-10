@@ -18,7 +18,7 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
             if selectedItem.isLocalItem {
                 barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.sync], style: .black, tintColor: nil)
             } else {
-                barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.download], style: .black, tintColor: nil)
+                barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig, style: .black, tintColor: nil)
             }
             return barConfig
         case .application:

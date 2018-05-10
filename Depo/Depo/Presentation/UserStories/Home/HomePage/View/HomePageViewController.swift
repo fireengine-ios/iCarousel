@@ -224,6 +224,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
 
                     })
                 }
+                return
             }
         }
         completion (.zero)
