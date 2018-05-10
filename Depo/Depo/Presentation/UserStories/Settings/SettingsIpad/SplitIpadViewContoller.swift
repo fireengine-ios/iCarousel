@@ -88,7 +88,10 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
         configurateWithControllers(leftViewController: left, controllers: [RouterVC().vcActivityTimeline])
     }
     
-    func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool) {
+    func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needPopPasscodeEnterVC: Bool) {
+        if needPopPasscodeEnterVC {
+            RouterVC().popViewController()
+        }
         if let left = leftController {
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail)])
         }
