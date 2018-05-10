@@ -70,7 +70,6 @@ class SettingsInteractor: SettingsInteractorInput {
 
     func onLogout() {
         authService.logout { [weak self] in
-            self?.storageVars.autoSyncSet = false
             MenloworksEventsService.shared.onLoggedOut()
             self?.output.goToOnboarding()
         }

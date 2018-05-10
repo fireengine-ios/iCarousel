@@ -62,7 +62,7 @@ final class IAPManager: NSObject {
             return
         }
         
-        guard purchaseInProgress else {
+        guard !purchaseInProgress else {
             log.debug("IAPManager purchase in progress")
             handler(PurchaseResult.inProgress)
             return

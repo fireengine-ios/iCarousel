@@ -204,7 +204,7 @@ final class UploadService: BaseRequestService {
                 }
                 
                 if let error = error {
-                    print("AUTOSYNC: \(error.description)")
+                    debugPrint("AUTOSYNC: \(error.description)")
                     if !finishedOperation.isCancelled {
                         self.uploadOperations.removeIfExists(finishedOperation)
                     }
@@ -292,7 +292,7 @@ final class UploadService: BaseRequestService {
                 }
                 
                 if let error = error {
-                    print("AUTOSYNC: \(error.description)")
+                    debugPrint("AUTOSYNC: \(error.description)")
                     if finishedOperation.isCancelled {
                         //operation was cancelled - not an actual error
                         self.showUploadCardProgress()
@@ -350,7 +350,7 @@ final class UploadService: BaseRequestService {
             return nil
         }
         
-        print("AUTOSYNC: trying to add \(itemsToSync.count) item(s) of \(firstObject.fileType) type")
+        debugPrint("AUTOSYNC: trying to add \(itemsToSync.count) item(s) of \(firstObject.fileType) type")
         CardsManager.default.setProgressForOperationWith(type: .sync,
                                                          object: firstObject,
                                                          allOperations: allSyncOperationsCount + itemsToSync.count,
@@ -421,7 +421,7 @@ final class UploadService: BaseRequestService {
         
         uploadQueue.addOperations(operations, waitUntilFinished: false)
         log.debug("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
-        print("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
+        debugPrint("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
         
         return uploadOperations.filter({ $0.uploadType == .autoSync })
     }
@@ -443,7 +443,7 @@ final class UploadService: BaseRequestService {
         
         cancelAndRemove(operations: operationsToRemove)
         
-        print("AUTOSYNC: removed \(operationsToRemove.count) operations")
+        debugPrint("AUTOSYNC: removed \(operationsToRemove.count) operations")
         operationsToRemove.removeAll()
     }
     
@@ -456,16 +456,16 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelSyncOperations(photo: Bool, video: Bool) {
-        print("AUTOSYNC: cancelling sync operations for \(photo ? "photo" : "video")")
+        debugPrint("AUTOSYNC: cancelling sync operations for \(photo ? "photo" : "video")")
         let time = Date()
         var operationsToRemove = uploadOperations.filter({ $0.uploadType == .autoSync &&
             ((video && $0.item.fileType == .video) || (photo && $0.item.fileType == .image)) })
         
-        print("AUTOSYNC: found \(operationsToRemove.count) operations to remove in \(Date().timeIntervalSince(time)) secs")
+        debugPrint("AUTOSYNC: found \(operationsToRemove.count) operations to remove in \(Date().timeIntervalSince(time)) secs")
         
         cancelAndRemove(operations: operationsToRemove)
         
-        print("AUTOSYNC: removed \(operationsToRemove.count) operations in \(Date().timeIntervalSince(time)) secs")
+        debugPrint("AUTOSYNC: removed \(operationsToRemove.count) operations in \(Date().timeIntervalSince(time)) secs")
         operationsToRemove.removeAll()
         
         if photo {
@@ -492,7 +492,7 @@ final class UploadService: BaseRequestService {
         
         cancelAndRemove(operations: operationsToRemove)
         
-        print("AUTOSYNC: removed \(operationsToRemove.count) operations")
+        debugPrint("AUTOSYNC: removed \(operationsToRemove.count) operations")
         operationsToRemove.removeAll()
     }
     
@@ -516,7 +516,7 @@ final class UploadService: BaseRequestService {
     }
     
     private func clearSyncCounters() {
-        print("AUTOSYNC: clearing sync counters")
+        debugPrint("AUTOSYNC: clearing sync counters")
         finishedPhotoSyncOperationsCount = 0
         finishedVideoSyncOperationsCount = 0
     }

@@ -26,6 +26,7 @@ class SplashInteractor: SplashInteractorInput {
                 failLogin()
             } else {
                 authenticationService.turkcellAuth(success: { [weak self] in
+                    self?.tokenStorage.isRememberMe = true
                     self?.turkcellSuccessLogin()
                 }, fail: { [weak self] response in
                     self?.output.asyncOperationSucces()
