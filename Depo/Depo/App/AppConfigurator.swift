@@ -131,22 +131,48 @@ final class AppConfigurator {
     }
     
     private static func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        log.debug("AppConfigurator startMenloworks")
+        
+        MPush.setAppKey("TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd")
+        MPush.setServerURL("https://turkcell.menloworks.com")
+        
+        MPush.setDebugModeEnabled(true)
+        MPush.setShouldShowDebugLogs(true)
+        
+        MPush.registerMessageResponseHandler({(_ response: MMessageResponse) -> Void in
+            
+            log.debug("Payload: \(response.message.payload)")
+            switch response.action.type {
+                
+            case MActionType.click:
+                log.debug("Menlo Notif Clicked")
+                if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as! String)){
+                    PushNotificationService.shared.openActionScreen()
+                }
+                
+            case MActionType.dismiss:
+                log.debug("Menlo Notif Dismissed")
+                
+            case MActionType.present:
+                log.debug("Menlo Notif in Foreground")
+                if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as! String)){
+                    PushNotificationService.shared.openActionScreen()
+                }
+                
+            }
+        })
         
         DispatchQueue.main.async {
             MPush.applicationDidFinishLaunching(options: launchOptions)
+            log.debug("AppConfigurator startMenloworks")
         }
     }
     
     
     static func registerMenloworksForPushNotififcations() {
-        log.debug("AppConfigurator registerMenloworksForPushNotififcations")
-        
-        let types: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.sound, UIUserNotificationType.badge]
-        let notificationTypes = NSInteger(types.rawValue)
-        
         DispatchQueue.main.async {
-            MPush.register(forRemoteNotificationTypes: MNotificationType(rawValue: notificationTypes))
+            MPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
+            log.debug("AppConfigurator registerMenloworksForPushNotififcations")
+        
         }
     }
     
