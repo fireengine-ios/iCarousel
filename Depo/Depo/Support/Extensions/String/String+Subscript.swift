@@ -36,5 +36,13 @@ extension String {
     func removingWhiteSpaces() -> String {
         return components(separatedBy: .whitespaces).joined()
     }
+    
+    func fileName() -> String {
+        return NSURL(fileURLWithPath: self).deletingPathExtension?.lastPathComponent ?? ""
+    }
+    
+    func fileExtension() -> String {
+        return NSURL(fileURLWithPath: self).pathExtension ?? ""
+    }
 
 }
