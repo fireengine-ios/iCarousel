@@ -640,3 +640,8 @@
 "Daily" = "Daily";
 "Weekly" = "Weekly";
 "Monthly" = "Monthly";
+"LifeboxSmallPopUpTitle" = "LifeboxSmallPopUpTitle";
+"LifeboxSmallPopUpSubTitle" = "LifeboxSmallPopUpSubTitle";
+"LifeboxSmallPopUpCheckBoxTex" = "LifeboxSmallPopUpCheckBoxTex";
+"LifeboxSmallPopUpFirstButtonText" = "LifeboxSmallPopUpFirstButtonText";
+"LifeboxSmallPopUpSecondButtonText" = "LifeboxSmallPopUpSecondButtonText";
