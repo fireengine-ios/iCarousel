@@ -344,7 +344,7 @@
 "You’re skipping auto-sync setting turned off. You can activate this later in preferences." = "Ai omis setarea de încărcare automată. O poți activa mai târziu din setări.";
 "Skip setting Auto-Sync?" = "Vrei să omiți setarea de încărcare automată?";
 "Skip for now" = "Omite";
-"Let’s start using Lifebox" = "Crează Album Nou";
+"Let’s start using Lifebox" = "Hai să începem să utilizăm lifebox";
 "Select the items to sync with mobile data." = "Selectează elementele pentru sincronizare cu datele mobile";
 "Mobile Data" = "Datele Mobile";
 "Wi-fi" = "Wi-Fi";
@@ -601,3 +601,13 @@
 "landingSubTitle3" = "";
 "landingTitle6" = "";
 "landingSubTitle6" = "";
+"Add GSM Number" = "";
+"The videos larger than 4GB can not be uploaded to lifebox" = "";
+"You have not enough memory in your device" = "";
+"The purchase was canceled" = "";
+"The purchase in progress" = "";
+"You have no duplicated contacts!" = "";
+"Daily" = "";
+"Weekly" = "";
+"Monthly" = "";
+"Up to 5000 contacts can be backed up." = "";

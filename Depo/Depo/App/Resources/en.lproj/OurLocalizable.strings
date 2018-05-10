@@ -82,7 +82,7 @@
 "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080.";
 "%ld docs" = "%ld documents";
 "Quota info" = "Usage info";
-"%@ of %@ has remained" = "%@ of %@ has remained";
+"%@ of %@ has remained" = "%1$@ of %2$@ has remained";
 "%ld documents" = "%ld documents";
 "%ld songs" = "%ld songs";
 "%ld videos" = "%ld videos";
@@ -226,7 +226,7 @@
 "Back-Up" = "Back Up";
 "Your last back up was a few seconds ago." = "Your last back up was a few seconds ago.";
 "You never backed up your contacts" = "You don't have any contact information in your lifebox yet.";
-"You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "You can backup your contacts to lifebox. You can easily manage your contact list from any device and anywhere.";
+"You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "You can backup your contacts to lifebox. You can easily manage your contact\nlist from any device and anywhere.";
 "Backed up %d Contacts" = "Backed up %d Contacts";
 "Removed" = "Removed";
 "Updated" = "Updated";
@@ -266,7 +266,7 @@
 "Auto-login" = "Auto-login";
 "Logout" = "Logout";
 "Help & Support" = "FAQ";
-"Lifebox Touch ID and Passcode" = "Lifebox Touch ID and Passcode";
+"Lifebox Touch ID and Passcode" = "lifebox Touch ID and Passcode";
 "Usage Info and Packages" = "Usage Info and Packages";
 "Recently Deleted Files" = "Recently Deleted Files";
 "Auto Sync" = "Auto Sync";
@@ -280,7 +280,6 @@
 "You don’t have any music on your Lifebox yet." = "You don’t have any music in your lifebox yet.";
 "info" = "info";
 "Enable photo permissions in settings" = "Enable photo permissions in settings";
-"Missing Dates" = "Missing Dates";
 "Start adding your photos" = "Start adding your photos";
 "You don’t have anything on your photo roll." = "You don’t have any photo or video in your lifebox yet.";
 "View All Pictures" = "View All Photos";
@@ -288,7 +287,7 @@
 "%d Photos" = "%d Photos";
 "You’ve uploaded %@ two days ago!" = "You’ve uploaded %@ two days ago!";
 "Expand My Storage" = "Upgrade My Storage Plan";
-"You are using %85 of your disk space! It’s a great time to expand your storage." = "You are using %85 of your lifebox storage! It’s a great time to upgrade your storage.";
+"You are using %85 of your disk space! It’s a great time to expand your storage." = "You are using %85 of your lifebox qutoa! It’s a great time to upgrade your storage.";
 "Your storage is almost full!" = "Your lifebox storage is almost full!";
 "Change filter" = "Change filter";
 "Save this photo" = "Save";
@@ -345,7 +344,7 @@
 "The file isn't supported" = "The file isn't supported";
 "Maybe later" = "Maybe later";
 "Yes" = "Yes";
-"Nope" = "Nope";
+"Nope" = "No";
 
 /*for contact?*/
 "You have already a backup. Do you want to overwrite the existing one?" = "You have already a backup. Do you want to overwrite the existing one?";
@@ -367,7 +366,7 @@
 "You’re skipping auto-sync setting turned off. You can activate this later in preferences." = "You’re skipping auto-upload settings. You can activate this later in settings.";
 "Skip setting Auto-Sync?" = "Do you want to skip auto upload settings?";
 "Skip for now" = "Skip";
-"Let’s start using Lifebox" = "Let’s start using Lifebox";
+"Let’s start using Lifebox" = "Let’s start using lifebox";
 "Select the items to sync with mobile data." = "Select the items to sync with mobile data.";
 "Mobile Data" = "Mobile Data";
 "Wi-fi" = "Wi-Fi";
@@ -387,7 +386,6 @@
 "Please enter a valid GSM number." = "Please enter a valid phone number.";
 "Please enter a valid email address." = "Please enter a valid e-mail address.";
 "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications";
-"You have successfully registered, please log in with your credentials" = "You have successfully registered, please log in with your credentials";
 
 /*???*/
 "E-mail Usage Information" = "E-mail Usage Information";
@@ -463,7 +461,7 @@
 "Your storage is empty!" = "Your storage is empty!";
 
 /*free up spce card or storage full card? which one?*/
-"You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your disk space! It’s a great time to expand your storage.";
+"You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your lifebox quota! It’s a great time to upgrade your storage.";
 "You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "You didn't upload any file to your lifebox. Start uploading your memories on lifebox!";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "You are using %d%% of your device storage. It’s a great time to free up space on your device.";
 "Upload Files" = "Upload Files";
@@ -472,9 +470,6 @@
 "We have created a collage from your photos!" = "We have created a collage for you!";
 "Save Collage" = "Save Collage";
 "View" = "View";
-"Animation" = "Animation";
-"We have created an animation from your photos!" = "We have created an animation from your photos!";
-"Save Animation" = "Save Animation";
 "Album Card" = "Album Card";
 "We have created an album for you." = "We have created an album for you.";
 "Save Album" = "Save Album";
@@ -511,11 +506,6 @@
 "E-mail is already exist" = "E-mail already exists";
 "Please enter your GSM number" = "Please enter your GSM number";
 "GSM number" = "GSM number";
-"Add GSM Number" = "Add GSM Number";
-"The videos larger than 4GB can not be uploaded to lifebox" = "The videos larger than 4GB can not be uploaded to lifebox";
-"You have not enough memory in your device" = "You have not enough memory in your device";
-"The purchase was canceled" = "The purchase was canceled";
-"The purchase in progress" = "The purchase in progress";
 "Plus" = "Plus";
 "Close" = "Close";
 "Photos and videos" = "Photos and videos";
@@ -576,6 +566,11 @@
 "dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";
 "PackagesPolicyHeader" = "Auto-renewable subscription nature of the in-app purchase:";
 "PackagesPolicyText" = "Subsriptions are renewed on a monthly basis \nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik";
+"Missing Dates" = "Missing Dates";
+"You have successfully registered, please log in with your credentials" = "You have successfully registered, please log in with your credentials.";
+"Animation" = "Animation";
+"We have created an animation from your photos!" = "We have created a animation from your photos!";
+"Save Animation" = "Save Animation";
 "Delete Duplicated" = "Delete Duplicated";
 "Lifebox %@ and Passcode" = "Lifebox %@ and Passcode";
 "We make easier to manage your memories with homepage" = "We make easier to manage your memories with homepage";
@@ -591,51 +586,54 @@
 "Import fearture is totally free of charge and does not affect your internet package" = "Import fearture is totally free of charge and does not affect your internet package";
 "Your last backup was on %@" = "Your last backup was on %@";
 "Contacts Sync" = "Contacts Sync";
-"Sort By" = "Sort By";
-"LifeboxLargePopUpTitle100" = "LifeboxLargePopUpTitle100";
-"LifeboxLargePopUpTitle90" = "LifeboxLargePopUpTitle90";
-"LifeboxLargePopUpTitle80" = "LifeboxLargePopUpTitle80";
-"LifeboxLargePopUpSubTitle" = "LifeboxLargePopUpSubTitle";
-"LifeboxLargePopUpExpandButtonTitle" = "LifeboxLargePopUpExpandButtonTitle";
-"LifeboxLargePopUpSkipButtonTitle" = "LifeboxLargePopUpSkipButtonTitle";
-"Lifebox can sync your contacts automatically." = "Lifebox can sync your contacts automatically.";
-"error_login" = "error_login";
-"uploading" = "uploading";
+"Sort By" = "Sort by";
+"LifeboxLargePopUpTitle100" = "Your lifebox stoarge is full";
+"LifeboxLargePopUpTitle90" = "You are using 90% of lifebox stoarge";
+"LifeboxLargePopUpTitle80" = "You are using 80% of lifebox stoarge";
+"LifeboxLargePopUpSubTitle" = "Please take a look at the upgrading options to upgrade your storage.";
+"LifeboxLargePopUpExpandButtonTitle" = "Expand My Storage";
+"LifeboxLargePopUpSkipButtonTitle" = "Skip";
+"Lifebox can sync your contacts automatically." = "lifebox can sync your contacts automatically.";
+"error_login" = "You need to login to lifebox to upload files";
+"uploading" = "Uploading";
 "widgetBottomTitleLastSyncFormat" = "Last upload: %@";
-"widgetBottomTitleNewerSyncronized" = "never";
-"widgetTopTitleFinished" = "Photos are up-to-date";
-"widgetTopTitleInactive" = "Photo synchronization is inactive";
-"widgetTopTitleInProgress" = "Photo synchronization is in progress";
-"error_authentication_message" = "Please open lifebox app and sign in to continue";
-"error_authentication_title" = "Sign in to lifebox";
-"error_passcode_message" = "Files app cannot be used with a passcode. If you would like to use Files app, please open lifebox and disable Passcode Lock";
-"error_passcode_title" = "Passcode Lock is enabled";
+"widgetBottomTitleNewerSyncronized" = "You have never started auto synchronization";
+"widgetTopTitleFinished" = "Auto-Sync is finished";
+"widgetTopTitleInactive" = "Auto-Sync is inactive";
+"widgetTopTitleInProgress" = "Auto-Sync is in progress";
+"error_authentication_message" = "Please open app and login to continue";
+"error_authentication_title" = "Login to lifebox";
+"error_passcode_message" = "Files application can not be used with a passcode. Please open lifebox and disable passcode to continue";
+"error_passcode_title" = "Passcode lock is enabled";
 "Successfully purchased" = "Successfully purchased";
-"This text doesn't match. Please try again" = "This text doesn't match. Please try again";
 "Cancel Analyzing" = "Cancel Analyzing";
-"Delete all" = "Delete all";
+"Delete all" = "Delete All";
 "Keep" = "Keep";
 "Duplicated Contacts" = "Duplicated Contacts";
 "Free" = "Free";
 "%d%% Backed up…" = "%d%% Backed up…";
 "%d%% Restored…" = "%d%% Restored…";
 "%d%% Analyzed…" = "%d%% Analyzed…";
-
-"START USING" = "START USING";
-"landingTitle0" = "Welcome!\nLet’s get started!";
-"landingSubTitle0" = "You can access everything about lifebox from home page. Start using your lifebox with our suggestions. You can swipe the cards that you don't like.";
+"START USING" = "Get Started";
+"landingTitle0" = "Live, Collect, Remember";
+"landingSubTitle0" = "Collect your photos, videos, contacts and other files at lifebox! Access and remember whenever and wherever you are.";
 "landingTitle1" = "Auto-sync";
-"landingSubTitle1" = "Sizin için otomatik yedekliyoruz istediğin zaman web veya mobilden ulaş mesajı Üstelik 5Gb ücretsiz saklama alanı";
-"landingTitle2" = "Face / image";
-"landingSubTitle2" = "Anılarınız kolayca bulun: kişiye, nesneye yere göre arama yapın";
-"landingTitle5" = "Otomatik hikayeler";
-"landingSubTitle5" = "Size özel yarattığımız otomatik hikayelerle anılarınızı tekrar yaşayın";
+"landingSubTitle1" = "Back up all your photos and videos automatically and access them from everywhere.";
+"landingTitle2" = "Face/image recognition";
+"landingSubTitle2" = "Find your memories easily with smart albums";
+"landingTitle5" = "Automatic stories";
+"landingSubTitle5" = "Remember your memories with automatically created movies and collages";
 "landingTitle4" = "Free up space";
-"landingSubTitle4" = "Tek dokunuşlar anılarınıza yer açın";
-"landingTitle3" = "Contact sync";
-"landingSubTitle3" = "Tek dokunuşlar anılarınıza yer açın";
-"landingTitle6" = "Sosyal medya";
-"landingSubTitle6" = "Sosyal Medyadaki tüm arşivinizi kolayca lifebox’a tranfer edin.";
+"landingSubTitle4" = "Free up space from your device for new memories in just a tap";
+"landingTitle3" = "Contact-sync";
+"landingSubTitle3" = "Back up your contacts, never lose them";
+"landingTitle6" = "Social media";
+"landingSubTitle6" = "Transfer all your social meadia archives easily to lifebox";
+"Add GSM Number" = "Add GSM Number";
+"The videos larger than 4GB can not be uploaded to lifebox" = "The videos larger than 4GB can not be uploaded to lifebox";
+"You have not enough memory in your device" = "You have not enough memory in your device";
+"The purchase was canceled" = "The purchase was canceled";
+"The purchase in progress" = "The purchase in progress";
 "You have no duplicated contacts!" = "You have no duplicated contacts!";
 "Daily" = "Daily";
 "Weekly" = "Weekly";
