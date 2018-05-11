@@ -39,7 +39,7 @@ enum PushNotificationAction: String {
     case http = "http"
     case login = "login"
     case search = "search"
-    case freeUpSpace = "freeUpSpace"
-    case home = "home"
+    case freeUpSpace = "free_up_space" //TODO: check tag after implement on server
+    case home = "home_page"
 }
 
