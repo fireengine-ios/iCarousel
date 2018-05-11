@@ -269,14 +269,14 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func setProgress(ratio: Float, for operationType: OperationType, object: WrapData?) {
-        guard let popUp = viewsByType[operationType] as? ProgressPopUp else {
-            return
-        }
-        
-        popUp.setProgressBar(ratio: ratio)
-        if let object = object {
-            popUp.setImageForUploadingItem(item: object)
-        }
+//        guard let popUp = viewsByType[operationType] as? ProgressPopUp else {
+//            return
+//        }
+//        
+//        popUp.setProgressBar(ratio: ratio)
+//        if let object = object {
+//            popUp.setImageForUploadingItem(item: object)
+//        }
     }
     
     
