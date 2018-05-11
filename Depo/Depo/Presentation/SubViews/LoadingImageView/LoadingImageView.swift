@@ -70,13 +70,11 @@ class LoadingImageView: UIImageView {
     }
     
     func loadImage(with object: Item?, isOriginalImage: Bool) {
-        self.image = nil
         guard let object = object, path != object.patchToPreview else {
-            checkIsNeedCancelRequest()
-            activity.stopAnimating()
             return
         }
         
+        self.image = nil
         checkIsNeedCancelRequest()
         path = object.patchToPreview
         activity.startAnimating()

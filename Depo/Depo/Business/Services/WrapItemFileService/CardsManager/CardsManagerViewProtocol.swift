@@ -22,6 +22,8 @@ protocol CardsManagerViewProtocol {
     
     func stopOperationWithType(type: OperationType)
     
+    func stopOperationWithType(type: OperationType, serverObject: HomeCardResponse)
+    
     func isEqual(object: CardsManagerViewProtocol) -> Bool
     
     func addNotPermittedPopUpViewTypes(types: [OperationType])
