@@ -587,9 +587,9 @@
 "Your last backup was on %@" = "Your last backup was on %@";
 "Contacts Sync" = "Contacts Sync";
 "Sort By" = "Sort by";
-"LifeboxLargePopUpTitle100" = "Your lifebox stoarge is full";
-"LifeboxLargePopUpTitle90" = "You are using 90% of lifebox stoarge";
-"LifeboxLargePopUpTitle80" = "You are using 80% of lifebox stoarge";
+"LifeboxLargePopUpTitle100" = "Your lifebox storage is full";
+"LifeboxLargePopUpTitle90" = "You are using 90% of lifebox storage";
+"LifeboxLargePopUpTitle80" = "You are using 80% of lifebox storage";
 "LifeboxLargePopUpSubTitle" = "Please take a look at the upgrading options to upgrade your storage.";
 "LifeboxLargePopUpExpandButtonTitle" = "Expand My Storage";
 "LifeboxLargePopUpSkipButtonTitle" = "Skip";

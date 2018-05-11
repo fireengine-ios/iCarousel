@@ -611,3 +611,8 @@
 "Weekly" = "Wochentlich";
 "Monthly" = "Monatlich";
 "Up to 5000 contacts can be backed up." = "Bis zu 5000 Kontakte können gesichert werden.";
+"LifeboxSmallPopUpTitle" = "";
+"LifeboxSmallPopUpSubTitle" = "";
+"LifeboxSmallPopUpCheckBoxTex" = "";
+"LifeboxSmallPopUpFirstButtonText" = "";
+"LifeboxSmallPopUpSecondButtonText" = "";

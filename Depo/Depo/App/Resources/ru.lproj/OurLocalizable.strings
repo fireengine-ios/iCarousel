@@ -607,7 +607,12 @@
 "The purchase was canceled" = "";
 "The purchase in progress" = "";
 "You have no duplicated contacts!" = "";
-"Daily" = "";
-"Weekly" = "";
-"Monthly" = "";
-"Up to 5000 contacts can be backed up." = "";
+"Daily" = "1 раз в день";
+"Weekly" = "Неделя";
+"Monthly" = "Ежемесячно";
+"Up to 5000 contacts can be backed up." = "Вы можете создать резервную копию до 5000 контактов.";
+"LifeboxSmallPopUpTitle" = "";
+"LifeboxSmallPopUpSubTitle" = "";
+"LifeboxSmallPopUpCheckBoxTex" = "";
+"LifeboxSmallPopUpFirstButtonText" = "";
+"LifeboxSmallPopUpSecondButtonText" = "";
