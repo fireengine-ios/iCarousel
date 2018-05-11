@@ -326,7 +326,7 @@ class RouterVC: NSObject {
     
     // MARK: SynchronyseSettings
     
-    var synchronyseScreen: UIViewController? {
+    var synchronyseScreen: UIViewController {
         
         let inicializer = AutoSyncModuleInitializer()
         let controller = AutoSyncViewController(nibName: "AutoSyncViewController", bundle: nil)
