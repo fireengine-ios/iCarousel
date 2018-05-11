@@ -74,6 +74,7 @@ class LargeFullOfQuotaPopUp: UIViewController {
     @IBOutlet private weak var expandButton: BlueButtonWithWhiteText! {
         didSet {
             expandButton.setTitle(TextConstants.lifeboxLargePopUpExpandButtonTitle, for: .normal)
+            expandButton.adjustsFontSizeToFitWidth()
         }
     }
     
@@ -82,6 +83,7 @@ class LargeFullOfQuotaPopUp: UIViewController {
             skipButton.setTitle(TextConstants.lifeboxLargePopUpSkipButtonTitle, for: .normal)
             skipButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
             skipButton.setTitleColor(ColorConstants.grayTabBarButtonsColor, for: .normal)
+            skipButton.adjustsFontSizeToFitWidth()
         }
     }
     

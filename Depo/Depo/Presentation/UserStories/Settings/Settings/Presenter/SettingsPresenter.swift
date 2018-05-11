@@ -86,8 +86,8 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToPackages()
     }
     
-    func goToPasscodeSettings() {
-        router.goToPasscodeSettings(isTurkcell: interactor.isTurkcellUser, inNeedOfMail: inNeedOfMailVerefication())
+    func goToPasscodeSettings(needReplaceOfCurrentController: Bool) {
+        router.goToPasscodeSettings(isTurkcell: interactor.isTurkcellUser, inNeedOfMail: inNeedOfMailVerefication(), needReplaceOfCurrentController: needReplaceOfCurrentController)
     }
     
     func inNeedOfMailVerefication() -> Bool {

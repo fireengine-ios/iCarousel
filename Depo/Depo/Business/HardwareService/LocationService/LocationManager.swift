@@ -82,6 +82,22 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         })
     }
     
+    func startUpdateLocationInBackground() {
+        log.debug("LocationManager startUpdateLocationInBackground")
+        let settings = AutoSyncDataStorage().settings
+        
+        guard settings.isAutoSyncEnabled,
+            CLLocationManager.locationServicesEnabled(),
+            CLLocationManager.authorizationStatus() == .authorizedAlways
+        else {
+            return
+        }
+        
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.startMonitoringSignificantLocationChanges()
+        
+    }
+    
     func startUpdateLocation() {
         log.debug("LocationManager startUpdateLocation")
         let settings = AutoSyncDataStorage().settings

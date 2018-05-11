@@ -12,12 +12,21 @@ class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
     
     let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)
         cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
         cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(onLocalFilesHaveBeenLoaded),
+                                               name: Notification.Name.allLocalMediaItemsHaveBeenLoaded,
+                                               object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +50,10 @@ class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
     
     @objc func onCancelButton() {
         output.moveBack()
+    }
+    
+    @objc func onLocalFilesHaveBeenLoaded() {
+        output.onReloadData()
     }
     
 }

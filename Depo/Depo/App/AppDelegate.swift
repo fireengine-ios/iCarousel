@@ -12,6 +12,7 @@ import Crashlytics
 import FBSDKCoreKit
 import SDWebImage
 import XCGLogger
+import Adjust
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -101,6 +102,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// iOS 9+
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
+        Adjust.appWillOpen(url)
+        
+        if let urlHost = url.host {
+            if PushNotificationService.shared.assignDeepLink(innerLink: urlHost){
+                PushNotificationService.shared.openActionScreen()
+            }
+        }
+        
         if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options) {
             return true
         } else if dropboxManager.handleRedirect(url: url) {
@@ -127,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
         
         if tokenStorage.refreshToken != nil {
-            LocationManager.shared.startUpdateLocation()
+            LocationManager.shared.startUpdateLocationInBackground()
         }
         
         if !passcodeStorage.isEmpty {
@@ -286,15 +295,36 @@ extension AppDelegate {
         MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
         
         FBSDKAppEvents.logPushNotificationOpen(userInfo)
-        
-        if PushNotificationService.shared.assignNotificationActionBy(launchOptions: userInfo) {
-            PushNotificationService.shared.openActionScreen()
-        }
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         log.debug("AppDelegate didReceive")
 
         MPush.applicationDidReceive(notification)
+    }
+    
+    //MARK: Adjust
+    
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            if let url = userActivity.webpageURL {
+                
+                Adjust.appWillOpen(url)
+                
+                if let oldURL = Adjust.convertUniversalLink(url, scheme:"akillidepo") {
+                    if let host = oldURL.host {
+                        if PushNotificationService.shared.assignDeepLink(innerLink: host){
+                            PushNotificationService.shared.openActionScreen()
+                        }
+                    }
+                    log.debug("Adjust old path :\(oldURL.path)")
+                    
+                    
+                }
+            }
+        }
+        return true
     }
 }

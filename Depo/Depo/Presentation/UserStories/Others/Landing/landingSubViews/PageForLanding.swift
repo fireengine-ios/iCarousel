@@ -27,7 +27,6 @@ class PageForLanding: UIViewController {
     }
     
     @IBOutlet weak var bgImage: UIImageView!
-    @IBOutlet weak var gradientView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
 
     override func viewDidLoad() {
@@ -37,12 +36,10 @@ class PageForLanding: UIViewController {
     
     func configurateForIndex(index: Int) {
         if index != 0 {
-            gradientView.isHidden = true
             titleLabel.textColor = ColorConstants.blackForLanding
             subTitleLabel.textColor = ColorConstants.blackForLanding
             bgImage.contentMode = .scaleAspectFit
         } else {
-            gradientView.isHidden = false
             bgImage.contentMode = .scaleAspectFill
         }
         

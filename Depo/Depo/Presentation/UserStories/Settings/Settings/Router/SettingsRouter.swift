@@ -56,8 +56,13 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.packages)
     }
     
-    func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool) {
-        router.pushViewControllerAndRemoveCurrentOnCompletion(router.passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail))
+    func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needReplaceOfCurrentController: Bool) {
+        let vc = router.passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail)
+        if needReplaceOfCurrentController {
+            router.pushViewControllerAndRemoveCurrentOnCompletion(vc)
+        } else {
+            router.pushViewController(viewController: vc)
+        }
     }
     
     func closeEnterPasscode() {

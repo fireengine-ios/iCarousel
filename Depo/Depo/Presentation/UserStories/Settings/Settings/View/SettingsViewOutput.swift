@@ -41,7 +41,7 @@ protocol SettingsViewOutput {
     
     func goToPackages()
     
-    func goToPasscodeSettings()
+    func goToPasscodeSettings(needReplaceOfCurrentController: Bool)
     
     func openPasscode(handler: @escaping VoidHandler)
     

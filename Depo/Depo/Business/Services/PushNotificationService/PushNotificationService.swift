@@ -34,6 +34,15 @@ final class PushNotificationService {
         return notificationAction != nil
     }
     
+    func assignDeepLink(innerLink: String?) -> Bool {
+        guard let actionString = innerLink as String? else {
+            return false
+        }
+        
+        notificationAction = PushNotificationAction(rawValue: actionString)
+        return notificationAction != nil
+    }
+    
     func openActionScreen() {
         guard var action = notificationAction else {
             return

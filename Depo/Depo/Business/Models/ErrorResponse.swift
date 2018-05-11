@@ -51,7 +51,11 @@ extension ErrorResponse: LocalizedError {
         case .error(let recivedError):
             return recivedError.description
         case .httpCode(let code):
+            #if DEBUG
             return String(code)
+            #else
+            return TextConstants.errorServer
+            #endif
         }
     }
     

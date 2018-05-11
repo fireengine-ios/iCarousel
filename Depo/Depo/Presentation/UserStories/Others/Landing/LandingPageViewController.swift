@@ -24,7 +24,7 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
         storageVars.isNewAppVersionFirstLaunch = false
         let router = RouterVC()
         if isTurkcell {
-            router.setNavigationController(controller: router.synchronyseScreen!)
+            router.setNavigationController(controller: router.synchronyseScreen)
         } else {
             let settings = router.onboardingScreen
             router.setNavigationController(controller: settings)

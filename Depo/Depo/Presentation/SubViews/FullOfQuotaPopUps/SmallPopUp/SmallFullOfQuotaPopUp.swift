@@ -139,6 +139,7 @@ final class SmallFullOfQuotaPopUp: ViewController {
         button.setTitleColor(ColorConstants.blueColor.darker(by: 30), for: .highlighted)
         button.setBackgroundColor(ColorConstants.blueColor, for: .highlighted)
         button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        button.adjustsFontSizeToFitWidth()
     }
     
     // MARK: - Animation

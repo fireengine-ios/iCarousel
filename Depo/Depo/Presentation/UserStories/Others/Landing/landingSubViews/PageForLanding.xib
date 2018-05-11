@@ -12,7 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PageForLanding" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="bgImage" destination="hL4-Cg-yae" id="wPL-OX-3Yd"/>
-                <outlet property="gradientView" destination="6pp-zB-NvN" id="tqg-kN-Afs"/>
                 <outlet property="imageView" destination="Xqx-jn-KY5" id="n1s-Gx-mQl"/>
                 <outlet property="subTitleLabel" destination="55F-IG-bjm" id="L6L-NP-dmF"/>
                 <outlet property="titleLabel" destination="TiM-VN-MSe" id="CTO-qb-fFO"/>
@@ -25,9 +24,6 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LandingBG2" translatesAutoresizingMaskIntoConstraints="NO" id="hL4-Cg-yae">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="722"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LandingColorBG0" translatesAutoresizingMaskIntoConstraints="NO" id="6pp-zB-NvN">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="722"/>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" image="LandingImage0" translatesAutoresizingMaskIntoConstraints="NO" id="Xqx-jn-KY5">
@@ -56,22 +52,18 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="55F-IG-bjm" secondAttribute="bottom" constant="129" id="0y0-Lk-RQN"/>
-                <constraint firstItem="6pp-zB-NvN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6PW-nN-TpW"/>
                 <constraint firstItem="Xqx-jn-KY5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="87k-7m-jM2"/>
                 <constraint firstItem="hL4-Cg-yae" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="9ZZ-4v-Hqy"/>
                 <constraint firstItem="hL4-Cg-yae" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="KIq-JL-RCc"/>
                 <constraint firstAttribute="trailing" secondItem="TiM-VN-MSe" secondAttribute="trailing" constant="35" id="MSX-bL-e45"/>
-                <constraint firstItem="6pp-zB-NvN" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="Mwy-EA-AIO"/>
                 <constraint firstAttribute="trailing" secondItem="Xqx-jn-KY5" secondAttribute="trailing" constant="20" id="Rje-Ni-MSw"/>
                 <constraint firstItem="TiM-VN-MSe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="TfU-cb-HyS"/>
                 <constraint firstItem="TiM-VN-MSe" firstAttribute="top" secondItem="Xqx-jn-KY5" secondAttribute="bottom" constant="20" id="UAb-Dl-Mf3"/>
                 <constraint firstItem="hL4-Cg-yae" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="bDc-Pt-21l"/>
-                <constraint firstItem="6pp-zB-NvN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="beQ-mt-a2O"/>
                 <constraint firstAttribute="trailing" secondItem="55F-IG-bjm" secondAttribute="trailing" constant="35" id="gpA-G6-gmj"/>
                 <constraint firstItem="55F-IG-bjm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="jqX-bh-If5"/>
                 <constraint firstItem="hL4-Cg-yae" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="koH-xb-8bX"/>
                 <constraint firstItem="Xqx-jn-KY5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="nmd-s7-mJe"/>
-                <constraint firstItem="6pp-zB-NvN" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="qlA-85-w63"/>
                 <constraint firstItem="55F-IG-bjm" firstAttribute="top" secondItem="TiM-VN-MSe" secondAttribute="bottom" constant="13" id="s0r-Ky-Dp8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -80,7 +72,6 @@
     </objects>
     <resources>
         <image name="LandingBG2" width="375" height="348"/>
-        <image name="LandingColorBG0" width="375" height="707"/>
         <image name="LandingImage0" width="244" height="352"/>
     </resources>
 </document>
