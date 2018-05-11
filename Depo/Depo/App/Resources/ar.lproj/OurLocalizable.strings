@@ -619,7 +619,12 @@
 "The purchase was canceled" = "";
 "The purchase in progress" = "";
 "You have no duplicated contacts!" = "";
-"Daily" = "";
-"Weekly" = "";
-"Monthly" = "";
-"Up to 5000 contacts can be backed up." = "";
+"Daily" = "يومياً";
+"Weekly" = "أسبوعياً";
+"Monthly" = "شهريا";
+"Up to 5000 contacts can be backed up." = "يمكن إنشاء نسخة احتياطية لجهات الاتصال بحدّ أقصى قدره 5000 جهة اتصال.";
+"LifeboxSmallPopUpTitle" = "";
+"LifeboxSmallPopUpSubTitle" = "";
+"LifeboxSmallPopUpCheckBoxTex" = "";
+"LifeboxSmallPopUpFirstButtonText" = "";
+"LifeboxSmallPopUpSecondButtonText" = "";

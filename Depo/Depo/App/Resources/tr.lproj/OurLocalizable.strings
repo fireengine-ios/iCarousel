@@ -611,3 +611,8 @@
 "Weekly" = "Haftalık";
 "Monthly" = "Aylık";
 "Up to 5000 contacts can be backed up." = "5000’e kadar kişinin yedeği alınabilir.";
+"LifeboxSmallPopUpTitle" = "";
+"LifeboxSmallPopUpSubTitle" = "";
+"LifeboxSmallPopUpCheckBoxTex" = "";
+"LifeboxSmallPopUpFirstButtonText" = "";
+"LifeboxSmallPopUpSecondButtonText" = "";

@@ -607,7 +607,12 @@
 "The purchase was canceled" = "";
 "The purchase in progress" = "";
 "You have no duplicated contacts!" = "";
-"Daily" = "";
-"Weekly" = "";
-"Monthly" = "";
-"Up to 5000 contacts can be backed up." = "";
+"Daily" = "Diario";
+"Weekly" = "Semanal";
+"Monthly" = "Mensual";
+"Up to 5000 contacts can be backed up." = "Se pueden hacer copias de seguridad de hasta 5000 contactos.";
+"LifeboxSmallPopUpTitle" = "";
+"LifeboxSmallPopUpSubTitle" = "";
+"LifeboxSmallPopUpCheckBoxTex" = "";
+"LifeboxSmallPopUpFirstButtonText" = "";
+"LifeboxSmallPopUpSecondButtonText" = "";
