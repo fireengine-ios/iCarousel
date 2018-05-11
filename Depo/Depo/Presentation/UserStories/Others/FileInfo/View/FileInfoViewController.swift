@@ -226,8 +226,8 @@ class FileInfoViewController: BaseViewController, FileInfoViewInput, UITextField
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if let text = textField.text {
-            textField.text = text.fileName()
-            fileExtension = text.fileExtension()
+            textField.text = (text as NSString).deletingPathExtension
+            fileExtension = (text as NSString).pathExtension
         }
         
         return true
@@ -247,9 +247,7 @@ class FileInfoViewController: BaseViewController, FileInfoViewInput, UITextField
     @objc func onSave() {
         if var text = fileName.text,
             let fileExtension = fileExtension {
-            if !(text.fileExtension().count > 0) {
-                text = "\(text).\(fileExtension)"
-            }
+            text = "\((text as NSString).deletingPathExtension).\(fileExtension)"
             
             output.onRename(newName: text)
         }
