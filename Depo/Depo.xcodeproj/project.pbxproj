@@ -3328,6 +3328,7 @@
 		CEE9B4ED1F78FD85002DAF81 /* InternetDataUsageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE9B4EB1F78FD85002DAF81 /* InternetDataUsageCell.xib */; };
 		CEEB7A9820A4755B0070FDC2 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
 		CEEB7A9B20A5BC230070FDC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEEB7A9D20A5BC230070FDC2 /* InfoPlist.strings */; };
+		CEEB7AA620A5D5C80070FDC2 /* GradientOrangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7AA520A5D5C80070FDC2 /* GradientOrangeView.swift */; };
 		CEEF22AA2063D6E000CE3949 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
 		CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */; };
 		CEEFECC1200F735100E9A4FE /* UISearchBar+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */; };
@@ -5487,6 +5488,7 @@
 		CEEB7AA220A5BC3C0070FDC2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CEEB7AA320A5BC690070FDC2 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CEEB7AA420A5BC6A0070FDC2 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CEEB7AA520A5D5C80070FDC2 /* GradientOrangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientOrangeView.swift; sourceTree = "<group>"; };
 		CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
 		CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Cancel.swift"; sourceTree = "<group>"; };
@@ -7995,6 +7997,7 @@
 		7CA4A162207E3DC400F270C8 /* LargePopUp */ = {
 			isa = PBXGroup;
 			children = (
+				CEEB7AA520A5D5C80070FDC2 /* GradientOrangeView.swift */,
 				7CA4A163207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.swift */,
 				7CA4A164207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.xib */,
 			);
@@ -15915,6 +15918,7 @@
 				CE2F56321F7554A300F49DA1 /* OfferServiceResponse.swift in Sources */,
 				4A8CC317201A025C00C040C4 /* FaceImageIneractor.swift in Sources */,
 				CECD4E541FE1150B00978BE7 /* UIButton+Color.swift in Sources */,
+				CEEB7AA620A5D5C80070FDC2 /* GradientOrangeView.swift in Sources */,
 				CC5705DE3B84973A3C2928C7 /* AlbumDetailInteractor.swift in Sources */,
 				CEC3C2481FB99AF800C3D67F /* PasscodeSettingsInteractor.swift in Sources */,
 				227254E0DCD67B9CEB06CD58 /* AlbumDetailRouterInput.swift in Sources */,
