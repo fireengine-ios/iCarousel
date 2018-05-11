@@ -568,7 +568,7 @@
 "Lifebox can sync your contacts automatically." = "Lifebox kann Ihre Kontakte automatisch synchronisieren.";
 "error_login" = "Sie müssen sich in die Lifebox einloggen, um Dateien hochladen zu können";
 "uploading" = "Es wird hochgeladen…";
-"widgetBottomTitleLastSyncFormat" = "";
+"widgetBottomTitleLastSyncFormat" = "Letztes Uploads: %@";
 "widgetBottomTitleNewerSyncronized" = "Sie haben die automatische Synchronisierung noch nie gestartet";
 "widgetTopTitleFinished" = "Die Synchronisation ist beendet";
 "widgetTopTitleInactive" = "Die Synchronisation ist inaktiv";
@@ -607,7 +607,7 @@
 "The purchase was canceled" = "";
 "The purchase in progress" = "";
 "You have no duplicated contacts!" = "";
-"Daily" = "";
-"Weekly" = "";
-"Monthly" = "";
-"Up to 5000 contacts can be backed up." = "";
+"Daily" = "Täglich";
+"Weekly" = "Wochentlich";
+"Monthly" = "Monatlich";
+"Up to 5000 contacts can be backed up." = "Bis zu 5000 Kontakte können gesichert werden.";
