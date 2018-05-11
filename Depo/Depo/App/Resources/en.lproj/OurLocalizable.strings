@@ -644,3 +644,11 @@
 "LifeboxSmallPopUpCheckBoxTex" = "LifeboxSmallPopUpCheckBoxTex";
 "LifeboxSmallPopUpFirstButtonText" = "LifeboxSmallPopUpFirstButtonText";
 "LifeboxSmallPopUpSecondButtonText" = "LifeboxSmallPopUpSecondButtonText";
+"created" = "created";
+"uploaded" = "uploaded";
+"updated" = "updated";
+"deleted" = "deleted";
+"moved" = "moved";
+"renamed" = "renamed";
+"copied" = "copied";
+"marked as favourite" = "marked as favourite";
