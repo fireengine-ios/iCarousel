@@ -138,24 +138,26 @@ final class FilterPhotoCard: BaseView {
     
     private func getLastImageAssetAndShowImage() {
         imageManager.getLastImageAsset { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let asset):
-                    self?.showPhotoVideoDetail(with: asset)
-                case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
-                }
+            switch result {
+            case .success(let asset):
+                self?.showPhotoVideoDetail(with: asset)
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
             }
         }
     }
     
     private func showPhotoVideoDetail(with asset: PHAsset) {
-        let item = WrapData(asset: asset)
-        
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
-        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = NavigationController(rootViewController: controller)
-        RouterVC().presentViewController(controller: nController)
+        DispatchQueue.global().async {
+            let item = WrapData(asset: asset)
+            
+            let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
+            controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+            let nController = NavigationController(rootViewController: controller)
+            DispatchQueue.main.async {
+                RouterVC().presentViewController(controller: nController)
+            }
+        }
     }
     
     private func saveToDevice(image: UIImage) {
