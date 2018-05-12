@@ -98,6 +98,9 @@ extension PasscodeManagerImp: PasscodeManager {
                 case .cancelledByUser:
                     self.userCancelledBiometrics = true
                     self.finishBiometrics = true
+            
+                case .retryLimitReached:
+                    self.finishBiometrics = true
                     
                 default: break
                 }
