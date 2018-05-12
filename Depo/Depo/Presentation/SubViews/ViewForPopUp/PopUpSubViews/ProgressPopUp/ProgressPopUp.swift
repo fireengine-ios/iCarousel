@@ -21,7 +21,7 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     
     var wrapItem: WrapData?
     var typeOfOperation: OperationType?
-    
+    fileprivate let privateQueue = DispatchQueue(label: DispatchQueueLabels.privateConcurentQueue, qos: .userInitiated, attributes: .concurrent)
     override func configurateView() {
         super.configurateView()
         
@@ -108,10 +108,14 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
 
 extension ProgressPopUp: LoadingImageViewDelegate {
     func onImageLoaded(image: UIImage?) {
-        WidgetService.shared.notifyWidgetAbout(currentImage: image)
+        privateQueue.async {
+            WidgetService.shared.notifyWidgetAbout(currentImage: image)
+        }
     }
     
     func onLoadingImageCanceled() {
-        WidgetService.shared.notifyWidgetAbout(currentImage: nil)
+        privateQueue.async {
+            WidgetService.shared.notifyWidgetAbout(currentImage: nil)
+        }
     }
 }

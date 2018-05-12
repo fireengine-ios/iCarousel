@@ -60,12 +60,12 @@ final class UploadService: BaseRequestService {
         uploadQueue.maxConcurrentOperationCount = 1
         uploadQueue.qualityOfService = .userInteractive
         uploadQueue.underlyingQueue = dispatchQueue
-    
+        
         super.init()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateSyncSettings), name: autoSyncStatusDidChangeNotification, object: nil)
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -83,50 +83,62 @@ final class UploadService: BaseRequestService {
         }
     }
     
-    @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, isFromCamera: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
-        
-        trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
-    
-        guard let filteredItems = filter(items: items) else {
-            success()
-            return nil
-        }
-        
-        switch uploadType {
-        case .autoSync:
-            return self.syncFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: success, fail: fail)
-        case .syncToUse:
-            return self.syncToUseFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
-                self?.clearSyncToUseCounters()
-                self?.hideUploadCardIfNeeded()
+    func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, isFromCamera: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedUploadOperation: @escaping ([UploadOperations]?) -> Void) {
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                returnedUploadOperation(nil)
+                return
+            }
+            self.trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
+            
+            guard let filteredItems = self.filter(items: items) else {
                 success()
-                }, fail: { [weak self] errorResponse in
+                return
+            }
+            
+            switch uploadType {
+            case .autoSync:
+                self.syncFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: success, fail: fail, syncOperationsListCallBack: { syncOperations in
+                    returnedUploadOperation(syncOperations)
+                })
+            case .syncToUse:
+                
+                self.syncToUseFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
                     self?.clearSyncToUseCounters()
                     self?.hideUploadCardIfNeeded()
-                    
-                    if errorResponse.isOutOfSpaceError {
-                        self?.cancelSyncToUseOperations()
-                        self?.showOutOfSpaceAlert()
-                    }
-                    
-                    fail(errorResponse)
-            })
-        default:
-            return self.uploadFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
-                self?.clearUploadCounters()
-                self?.hideUploadCardIfNeeded()
-                success()
-                }, fail: { [weak self] errorResponse in
+                    success()
+                    }, fail: { [weak self] errorResponse in
+                        self?.clearSyncToUseCounters()
+                        self?.hideUploadCardIfNeeded()
+                        
+                        if errorResponse.isOutOfSpaceError {
+                            self?.cancelSyncToUseOperations()
+                            self?.showOutOfSpaceAlert()
+                        }
+                        
+                        fail(errorResponse)
+                    }, syncToUseFileListOperationsCallBack: { seyncOperations in
+                        returnedUploadOperation(seyncOperations)
+                })
+            default:
+                self.uploadFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
                     self?.clearUploadCounters()
                     self?.hideUploadCardIfNeeded()
-                    
-                    if errorResponse.isOutOfSpaceError {
-                        self?.cancelUploadOperations()
-                        self?.showOutOfSpaceAlert()
-                    }
-                    
-                    fail(errorResponse)
-            })
+                    success()
+                    }, fail: { [weak self] errorResponse in
+                        self?.clearUploadCounters()
+                        self?.hideUploadCardIfNeeded()
+                        
+                        if errorResponse.isOutOfSpaceError {
+                            self?.cancelUploadOperations()
+                            self?.showOutOfSpaceAlert()
+                        }
+                        
+                        fail(errorResponse)
+                    }, returnedOprations: { roperations in
+                        returnedUploadOperation(roperations)
+                })
+            }
         }
         
     }
@@ -163,267 +175,302 @@ final class UploadService: BaseRequestService {
                                                          completedOperations: currentUploadOperationNumber)
     }
     
-    @discardableResult private func syncToUseFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse ) -> [UploadOperations]? {
-        // filter all items which md5's are not in the uploadOperations
-        let itemsToUpload = items.filter { item -> Bool in
-            (self.uploadOperations.first(where: { operation -> Bool in
-                if operation.item.md5 == item.md5 && operation.uploadType?.isContained(in: [.autoSync, .fromHomePage]) ?? false {
-                    operation.cancel()
-                    self.uploadOperations.removeIfExists(operation)
-                    return false
-                }
-                return operation.item.md5 == item.md5
-            }) == nil)
-        }
-        
-        guard !itemsToUpload.isEmpty, let firstObject = itemsToUpload.first else {
-            return nil
-        }
-        
-        CardsManager.default.setProgressForOperationWith(type: .upload,
-                                                         object: firstObject,
-                                                         allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
-                                                         completedOperations: self.currentUploadOperationNumber)
-        
-        ItemOperationManager.default.startUploadFile(file: firstObject)
-        
-        logSyncSettings(state: "StartSyncToUseFileList")
-        
-        let operations: [UploadOperations] = itemsToUpload.compactMap {
-            let operation = UploadOperations(item: $0, uploadType: .syncToUse, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
-                guard let `self` = self else {
-                    return
-                }
-                
-                let checkIfFinished = {
-                    if self.uploadOperations.filter({ $0.uploadType == .syncToUse }).isEmpty {
-                        success()
-                        self.logSyncSettings(state: "FinishedSyncToUseFileList")
-                        return
+    private func syncToUseFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, syncToUseFileListOperationsCallBack:
+        @escaping ([UploadOperations]?)-> Void ) {
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                syncToUseFileListOperationsCallBack(nil)
+                return
+            }
+            
+            // filter all items which md5's are not in the uploadOperations
+            let itemsToUpload = items.filter { item -> Bool in
+                (self.uploadOperations.first(where: { operation -> Bool in
+                    if operation.item.md5 == item.md5 && operation.uploadType?.isContained(in: [.autoSync, .fromHomePage]) ?? false {
+                        operation.cancel()
+                        self.uploadOperations.removeIfExists(operation)
+                        return false
                     }
-                }
+                    return operation.item.md5 == item.md5
+                }) == nil)
+            }
+            
+            guard !itemsToUpload.isEmpty, let firstObject = itemsToUpload.first else {
+                syncToUseFileListOperationsCallBack(nil)
+                return
+            }
+            
+            CardsManager.default.setProgressForOperationWith(type: .upload,
+                                                             object: firstObject,
+                                                             allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
+                                                             completedOperations: self.currentUploadOperationNumber)
+            
+            ItemOperationManager.default.startUploadFile(file: firstObject)
+            
+            self.logSyncSettings(state: "StartSyncToUseFileList")
+            
+            let operations: [UploadOperations] = itemsToUpload.flatMap {
                 
-                if let error = error {
-                    debugPrint("AUTOSYNC: \(error.description)")
-                    if !finishedOperation.isCancelled {
+                let operation = UploadOperations(item: $0, uploadType: .syncToUse, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
+                    self?.dispatchQueue.async { [weak self] in
+                        guard let `self` = self else {
+                            syncToUseFileListOperationsCallBack(nil)
+                            return
+                        }
+                        
+                        let checkIfFinished = {
+                            if self.uploadOperations.filter({ $0.uploadType == .syncToUse }).isEmpty {
+                                success()
+                                self.logSyncSettings(state: "FinishedSyncToUseFileList")
+                                return
+                            }
+                        }
+                        
+                        if let error = error {
+                            print("AUTOSYNC: \(error.description)")
+                            if !finishedOperation.isCancelled {
+                                self.uploadOperations.removeIfExists(finishedOperation)
+                            }
+                            //                        //operation was cancelled - not an actual error
+                            //                        self.showUploadCardProgress()
+                            //                        checkIfFinished()
+                            //                    } else {
+                            //sync failed
+                            fail(.error(error))
+                            //                    }
+                            return
+                        }
+                        
+                        if let fileName = finishedOperation.item.name {
+                            self.logEvent("FinishUpload \(fileName)")
+                        }
+                        
                         self.uploadOperations.removeIfExists(finishedOperation)
-                    }
-                    //                        //operation was cancelled - not an actual error
-                    //                        self.showUploadCardProgress()
-                    //                        checkIfFinished()
-                    //                    } else {
-                    //sync failed
-                    fail(.error(error))
-                    //                    }
-                    return
-                }
-                
-                if let fileName = finishedOperation.item.name {
-                    self.logEvent("FinishUpload \(fileName)")
-                }
-                
-                self.uploadOperations.removeIfExists(finishedOperation)
-                
-                self.finishedSyncToUseOperationsCount += 1
-                
-                self.showUploadCardProgress()
-                
-                finishedOperation.item.syncStatus = .synced
-                finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
-                
-                CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
-                
-                ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
-                
-                checkIfFinished()
-            })
-            operation.queuePriority = .veryHigh
-            return operation
-        }
-        uploadOperations.append(operations)
-        
-        uploadQueue.addOperations(operations, waitUntilFinished: false)
-        log.debug("UPLOADING upload: \(operations.count) have been added to the upload queue")
-        print("UPLOADING upload: \(operations.count) have been added to the upload queue")
-        
-        return uploadOperations.filter({ $0.uploadType == .syncToUse })
-    }
-    
-    @discardableResult private func uploadFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
-        // filter all items which md5's are not in the uploadOperations
-        let itemsToUpload = items.filter { item -> Bool in
-            (self.uploadOperations.first(where: { operation -> Bool in
-                if operation.item.md5 == item.md5 && operation.uploadType == .autoSync && !operation.isExecuting {
-                    operation.cancel()
-                    self.uploadOperations.removeIfExists(operation)
-                    return false
-                }
-                return operation.item.md5 == item.md5
-            }) == nil)
-        }
-        
-        guard !itemsToUpload.isEmpty, let firstObject = itemsToUpload.first else {
-            return nil
-        }
-        
-        
-        CardsManager.default.setProgressForOperationWith(type: .upload,
-                                                         object: firstObject,
-                                                         allOperations: allSyncToUseOperationsCount + allUploadOperationsCount + itemsToUpload.count,
-                                                         completedOperations: currentUploadOperationNumber)
-        
-        ItemOperationManager.default.startUploadFile(file: firstObject)
-        
-        logSyncSettings(state: "StartUploadFileList")
-        
-        let operations: [UploadOperations] = itemsToUpload.compactMap {
-            let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
-                guard let `self` = self else {
-                    return
-                }
-                
-                let checkIfFinished = {
-                    if self.uploadOperations.filter({ $0.uploadType == .fromHomePage }).isEmpty {
-                        success()
-                        ItemOperationManager.default.syncFinished()
-                        self.logSyncSettings(state: "FinishedUploadFileList")
-                        return
-                    }
-                }
-                
-                if let error = error {
-                    debugPrint("AUTOSYNC: \(error.description)")
-                    if finishedOperation.isCancelled {
-                        //operation was cancelled - not an actual error
+                        
+                        self.finishedSyncToUseOperationsCount += 1
+                        
                         self.showUploadCardProgress()
+                        
+                        finishedOperation.item.syncStatus = .synced
+                        finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
+                        
+                        CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
+                        
+                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
+                        
                         checkIfFinished()
-                    } else {
-                        self.uploadOperations.removeIfExists(finishedOperation)
-                        if let fileName = finishedOperation.item.name {
-                            self.logEvent("FinishUpload \(fileName) FAIL: \(error.errorDescription ?? error.description)")
-                        }
-                        fail(error)
                     }
-                    return
-                }
-                
-                if let fileName = finishedOperation.item.name {
-                    self.logEvent("FinishUpload \(fileName)")
-                }
-                
-                self.uploadOperations.removeIfExists(finishedOperation)
-                
-                self.finishedUploadOperationsCount += 1
-                
-                self.showUploadCardProgress()
-                
-                finishedOperation.item.syncStatus = .synced
-                finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
-                
-                CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
-                
-                ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
-                
-                checkIfFinished()
-            })
-            operation.queuePriority = .high
-            return operation
+                })
+                operation.queuePriority = .veryHigh
+                return operation
+            }
+            self.uploadOperations.append(operations)
+            
+            self.uploadQueue.addOperations(operations, waitUntilFinished: false)
+            log.debug("UPLOADING upload: \(operations.count) have been added to the upload queue")
+            print("UPLOADING upload: \(operations.count) have been added to the upload queue")
+            
+            syncToUseFileListOperationsCallBack(self.uploadOperations.filter({ $0.uploadType == .syncToUse }))
         }
-        uploadOperations.append(operations)
-        
-        uploadQueue.addOperations(operations, waitUntilFinished: false)
-        log.debug("UPLOADING upload: \(operations.count) have been added to the upload queue")
-        print("UPLOADING upload: \(operations.count) have been added to the upload queue")
-        
-        return uploadOperations.filter({ $0.uploadType == .fromHomePage })
     }
     
-    @discardableResult private func syncFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
-        // filter all items which md5's are not in the uploadOperations
-        let itemsToSync = items.filter { item -> Bool in
-            (self.uploadOperations.first(where: { operation -> Bool in
-                return operation.item.md5 == item.md5
-            }) == nil)
-        }
+    private func uploadFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedOprations: @escaping ([UploadOperations]?) -> Void) {
         
-        guard !itemsToSync.isEmpty, let firstObject = itemsToSync.first else {
-            return nil
-        }
-        
-        debugPrint("AUTOSYNC: trying to add \(itemsToSync.count) item(s) of \(firstObject.fileType) type")
-        CardsManager.default.setProgressForOperationWith(type: .sync,
-                                                         object: firstObject,
-                                                         allOperations: allSyncOperationsCount + itemsToSync.count,
-                                                         completedOperations: currentSyncOperationNumber)
-        WidgetService.shared.notifyWidgetAbout(currentSyncOperationNumber, of: allSyncOperationsCount + itemsToSync.count)
-        
-        ItemOperationManager.default.startUploadFile(file: firstObject)
-        
-        logSyncSettings(state: "StartSyncFileList")
-        
-        var successHandled = false
-            
-        let operations: [UploadOperations] = itemsToSync.compactMap {
-            let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
-                guard let `self` = self else {
-                    return
-                }
-                
-                let checkIfFinished = {
-                    if !successHandled, self.uploadOperations.filter({ $0.uploadType == .autoSync && $0.item.fileType == finishedOperation.item.fileType }).isEmpty {
-                        successHandled = true
-                        success()
-                        self.logSyncSettings(state: "FinishedSyncFileList")
-                        return
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                returnedOprations(nil)
+                return
+            }
+            // filter all items which md5's are not in the uploadOperations
+            let itemsToUpload = items.filter { item -> Bool in
+                (self.uploadOperations.first(where: { operation -> Bool in
+                    if operation.item.md5 == item.md5 && operation.uploadType == .autoSync && !operation.isExecuting {
+                        operation.cancel()
+                        self.uploadOperations.removeIfExists(operation)
+                        return false
                     }
-                }
-                
-                if let error = error {
-                    if finishedOperation.isCancelled {
-                        if let fileName = finishedOperation.item.name {
-                            self.logEvent("FinishUpload \(fileName) Cancelled")
+                    return operation.item.md5 == item.md5
+                }) == nil)
+            }
+            
+            guard !itemsToUpload.isEmpty, let firstObject = itemsToUpload.first else {
+                returnedOprations(nil)
+                return
+            }
+            
+            
+            CardsManager.default.setProgressForOperationWith(type: .upload,
+                                                             object: firstObject,
+                                                             allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
+                                                             completedOperations: self.currentUploadOperationNumber)
+            
+            ItemOperationManager.default.startUploadFile(file: firstObject)
+            
+            self.logSyncSettings(state: "StartUploadFileList")
+            
+            let operations: [UploadOperations] = itemsToUpload.flatMap {
+                let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
+                    self?.dispatchQueue.async { [weak self] in
+                        guard let `self` = self else {
+                            returnedOprations(nil)
+                            return
                         }
-
-                        checkIfFinished()
-                    } else {
+                        
+                        let checkIfFinished = {
+                            if self.uploadOperations.filter({ $0.uploadType == .fromHomePage }).isEmpty {
+                                success()
+                                ItemOperationManager.default.syncFinished()
+                                self.logSyncSettings(state: "FinishedUploadFileList")
+                                return
+                            }
+                        }
+                        
+                        if let error = error {
+                            print("AUTOSYNC: \(error.description)")
+                            if finishedOperation.isCancelled {
+                                //operation was cancelled - not an actual error
+                                self.showUploadCardProgress()
+                                checkIfFinished()
+                            } else {
+                                self.uploadOperations.removeIfExists(finishedOperation)
+                                if let fileName = finishedOperation.item.name {
+                                    self.logEvent("FinishUpload \(fileName) FAIL: \(error.errorDescription ?? error.description)")
+                                }
+                                fail(error)
+                            }
+                            return
+                        }
+                        
                         if let fileName = finishedOperation.item.name {
-                            self.logEvent("FinishUpload \(fileName) FAIL: \(error.errorDescription ?? "")")
+                            self.logEvent("FinishUpload \(fileName)")
+                        }
+                        
+                        self.uploadOperations.removeIfExists(finishedOperation)
+                        
+                        self.finishedUploadOperationsCount += 1
+                        
+                        self.showUploadCardProgress()
+                        
+                        finishedOperation.item.syncStatus = .synced
+                        finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
+                        
+                        CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
+                        
+                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
+                        
+                        checkIfFinished()
+                    }
+                })
+                operation.queuePriority = .high
+                return operation
+            }
+            self.uploadOperations.append(operations)
+            
+            self.uploadQueue.addOperations(operations, waitUntilFinished: false)
+            log.debug("UPLOADING upload: \(operations.count) have been added to the upload queue")
+            print("UPLOADING upload: \(operations.count) have been added to the upload queue")
+            let oretiontoReturn = self.uploadOperations.filter({ $0.uploadType == .fromHomePage })
+            returnedOprations(oretiontoReturn)
+        }
+    }
+    
+    private func syncFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, syncOperationsListCallBack: @escaping ([UploadOperations]?) -> Void) {
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                syncOperationsListCallBack(nil)
+                return
+            }
+            // filter all items which md5's are not in the uploadOperations
+            let itemsToSync = items.filter { item -> Bool in
+                (self.uploadOperations.first(where: { operation -> Bool in
+                    return operation.item.md5 == item.md5
+                }) == nil)
+            }
+            
+            guard !itemsToSync.isEmpty, let firstObject = itemsToSync.first else {
+                syncOperationsListCallBack(nil)
+                return
+            }
+            
+            print("AUTOSYNC: trying to add \(itemsToSync.count) item(s) of \(firstObject.fileType) type")
+            CardsManager.default.setProgressForOperationWith(type: .sync,
+                                                             object: firstObject,
+                                                             allOperations: self.allSyncOperationsCount + itemsToSync.count,
+                                                             completedOperations: self.currentSyncOperationNumber)
+            WidgetService.shared.notifyWidgetAbout(self.currentSyncOperationNumber, of: self.allSyncOperationsCount + itemsToSync.count)
+            
+            ItemOperationManager.default.startUploadFile(file: firstObject)
+            
+            self.logSyncSettings(state: "StartSyncFileList")
+            
+            var successHandled = false
+            
+            let operations: [UploadOperations] = itemsToSync.flatMap {
+                
+                let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
+                    self?.dispatchQueue.async { [weak self] in
+                        guard let `self` = self else {
+                            syncOperationsListCallBack(nil)
+                            return
+                        }
+                        
+                        let checkIfFinished = {
+                            if !successHandled, self.uploadOperations.filter({ $0.uploadType == .autoSync && $0.item.fileType == finishedOperation.item.fileType }).isEmpty {
+                                successHandled = true
+                                success()
+                                self.logSyncSettings(state: "FinishedSyncFileList")
+                                return
+                            }
+                        }
+                        
+                        if let error = error {
+                            if finishedOperation.isCancelled {
+                                if let fileName = finishedOperation.item.name {
+                                    self.logEvent("FinishUpload \(fileName) Cancelled")
+                                }
+                                
+                                checkIfFinished()
+                            } else {
+                                if let fileName = finishedOperation.item.name {
+                                    self.logEvent("FinishUpload \(fileName) FAIL: \(error.errorDescription ?? "")")
+                                }
+                                self.uploadOperations.removeIfExists(finishedOperation)
+                                fail(error)
+                            }
+                            return
+                        }
+                        
+                        if let fileName = finishedOperation.item.name {
+                            self.logEvent("FinishUpload \(fileName)")
                         }
                         self.uploadOperations.removeIfExists(finishedOperation)
-                        fail(error)
+                        
+                        if finishedOperation.item.fileType == .image { self.finishedPhotoSyncOperationsCount += 1 } else if finishedOperation.item.fileType == .video { self.finishedVideoSyncOperationsCount += 1 }
+                        
+                        self.showSyncCardProgress()
+                        
+                        finishedOperation.item.syncStatus = .synced
+                        finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
+                        
+                        CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
+                        
+                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
+                        
+                        checkIfFinished()
                     }
-                    return
-                }
+                })
                 
-                if let fileName = finishedOperation.item.name {
-                    self.logEvent("FinishUpload \(fileName)")
-                }
-                self.uploadOperations.removeIfExists(finishedOperation)
-                
-                if finishedOperation.item.fileType == .image { self.finishedPhotoSyncOperationsCount += 1 } else if finishedOperation.item.fileType == .video { self.finishedVideoSyncOperationsCount += 1 }
-                
-                self.showSyncCardProgress()
-                
-                finishedOperation.item.syncStatus = .synced
-                finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
-                
-                CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
-                
-                ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
-                
-                checkIfFinished()
-            })
+                operation.queuePriority = firstObject.fileType == .image ? .normal : .low // start images sync first
+                return operation
+            }
+            self.uploadOperations.append(operations)
             
-            operation.queuePriority = firstObject.fileType == .image ? .normal : .low // start images sync first
-            return operation
+            self.uploadQueue.addOperations(operations, waitUntilFinished: false)
+            log.debug("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
+            print("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
+            
+            syncOperationsListCallBack(self.uploadOperations.filter({ $0.uploadType == .autoSync }))
         }
-        uploadOperations.append(operations)
-        
-        uploadQueue.addOperations(operations, waitUntilFinished: false)
-        log.debug("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
-        debugPrint("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
-        
-        return uploadOperations.filter({ $0.uploadType == .autoSync })
     }
     
     func cancelOperations() {
@@ -443,7 +490,7 @@ final class UploadService: BaseRequestService {
         
         cancelAndRemove(operations: operationsToRemove)
         
-        debugPrint("AUTOSYNC: removed \(operationsToRemove.count) operations")
+        print("AUTOSYNC: removed \(operationsToRemove.count) operations")
         operationsToRemove.removeAll()
     }
     
@@ -456,16 +503,16 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelSyncOperations(photo: Bool, video: Bool) {
-        debugPrint("AUTOSYNC: cancelling sync operations for \(photo ? "photo" : "video")")
+        print("AUTOSYNC: cancelling sync operations for \(photo ? "photo" : "video")")
         let time = Date()
         var operationsToRemove = uploadOperations.filter({ $0.uploadType == .autoSync &&
             ((video && $0.item.fileType == .video) || (photo && $0.item.fileType == .image)) })
         
-        debugPrint("AUTOSYNC: found \(operationsToRemove.count) operations to remove in \(Date().timeIntervalSince(time)) secs")
+        print("AUTOSYNC: found \(operationsToRemove.count) operations to remove in \(Date().timeIntervalSince(time)) secs")
         
         cancelAndRemove(operations: operationsToRemove)
         
-        debugPrint("AUTOSYNC: removed \(operationsToRemove.count) operations in \(Date().timeIntervalSince(time)) secs")
+        print("AUTOSYNC: removed \(operationsToRemove.count) operations in \(Date().timeIntervalSince(time)) secs")
         operationsToRemove.removeAll()
         
         if photo {
@@ -492,7 +539,7 @@ final class UploadService: BaseRequestService {
         
         cancelAndRemove(operations: operationsToRemove)
         
-        debugPrint("AUTOSYNC: removed \(operationsToRemove.count) operations")
+        print("AUTOSYNC: removed \(operationsToRemove.count) operations")
         operationsToRemove.removeAll()
     }
     
@@ -516,7 +563,7 @@ final class UploadService: BaseRequestService {
     }
     
     private func clearSyncCounters() {
-        debugPrint("AUTOSYNC: clearing sync counters")
+        print("AUTOSYNC: clearing sync counters")
         finishedPhotoSyncOperationsCount = 0
         finishedVideoSyncOperationsCount = 0
     }
@@ -635,7 +682,7 @@ extension UploadService {
 }
 
 extension UploadService {
-
+    
     fileprivate func logEvent(_ message: String) {
         DispatchQueue.main.async {
             if UIApplication.shared.applicationState == .background {

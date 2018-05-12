@@ -51,8 +51,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             MenloworksAppEvents.onShareClicked()
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareSmallSize(sourceRect: sourceRect)
-            }, cancel: {}, fail: { errorResponse in
-                UIApplication.showErrorAlert(message: errorResponse.description)
+                }, cancel: {}, fail: { errorResponse in
+                    UIApplication.showErrorAlert(message: errorResponse.description)
             })
         }
         
@@ -62,8 +62,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             MenloworksAppEvents.onShareClicked()
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareOrignalSize(sourceRect: sourceRect)
-            }, cancel: {}, fail: { errorResponse in
-                UIApplication.showErrorAlert(message: errorResponse.description)
+                }, cancel: {}, fail: { errorResponse in
+                    UIApplication.showErrorAlert(message: errorResponse.description)
             })
         }
         controler.addAction(originalAction)
@@ -72,8 +72,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             MenloworksAppEvents.onShareClicked()
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareViaLink(sourceRect: sourceRect)
-            }, cancel: {}, fail: { errorResponse in
-                UIApplication.showErrorAlert(message: errorResponse.description)
+                }, cancel: {}, fail: { errorResponse in
+                    UIApplication.showErrorAlert(message: errorResponse.description)
             })
         }
         controler.addAction(shareViaLinkAction)
@@ -108,25 +108,25 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         output?.operationStarted(type: .share)
         
         downloader.getFiles(filesForDownload: filesForDownload, response: { [weak self] fileURLs, directoryURL in
-                DispatchQueue.main.async {
-                    self?.output?.operationFinished(type: .share)
-                    
-                    let activityVC = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
-                    
-                    activityVC.completionWithItemsHandler = { _, _, _, _ in
-                        do {
-                            try FileManager.default.removeItem(at: directoryURL)
-                        } catch {
-                            print(error.description)
-                        }
+            DispatchQueue.main.async {
+                self?.output?.operationFinished(type: .share)
+                
+                let activityVC = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
+                
+                activityVC.completionWithItemsHandler = { _, _, _, _ in
+                    do {
+                        try FileManager.default.removeItem(at: directoryURL)
+                    } catch {
+                        print(error.description)
                     }
-                    
-                    if let tempoRect = sourceRect {//if ipad
-                        activityVC.popoverPresentationController?.sourceRect = tempoRect
-                    }
-
-                    self?.router.presentViewController(controller: activityVC)
                 }
+                
+                if let tempoRect = sourceRect {//if ipad
+                    activityVC.popoverPresentationController?.sourceRect = tempoRect
+                }
+                
+                self?.router.presentViewController(controller: activityVC)
+            }
             }, fail: { [weak self] errorMessage in
                 self?.output?.operationFailed(type: .share, message: errorMessage)
         })
@@ -158,7 +158,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 self?.router.presentViewController(controller: activityVC)
             }
             
-        }, fail: failAction(elementType: .share))
+            }, fail: failAction(elementType: .share))
     }
     
     func info(item: [BaseDataSourceItem], isRenameMode: Bool) {
@@ -186,10 +186,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 let `self` = self,
                 let image = image,
                 let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
-            else {
-                UIApplication.showErrorAlert(message: TextConstants.errorServer)
-                complition?()
-                return
+                else {
+                    UIApplication.showErrorAlert(message: TextConstants.errorServer)
+                    complition?()
+                    return
             }
             
             //vc.setShareEnabled(true)
@@ -220,10 +220,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     self?.output?.operationFinished(type: .completelyDeleteAlbums)
                     ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
                 }
-            }, fail: { [weak self] errorRespone in
-                DispatchQueue.main.async {
-                    self?.output?.operationFailed(type: .completelyDeleteAlbums, message: errorRespone.description)
-                }
+                }, fail: { [weak self] errorRespone in
+                    DispatchQueue.main.async {
+                        self?.output?.operationFailed(type: .completelyDeleteAlbums, message: errorRespone.description)
+                    }
             })
         }
         
@@ -265,18 +265,18 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private func deleteAlbumbs(albumbs: [AlbumItem]) {
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .removeFromAlbum)
-
+            
             self?.albumService.delete(albums: albumbs, success: { [weak self] deletedAlbums in
                 DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .removeAlbum)
                     ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
                 }
-            }, fail: { [weak self] errorRespone in
-                DispatchQueue.main.async {
-                    self?.output?.operationFailed(type: .removeAlbum, message: errorRespone.description)
-                }
+                }, fail: { [weak self] errorRespone in
+                    DispatchQueue.main.async {
+                        self?.output?.operationFailed(type: .removeAlbum, message: errorRespone.description)
+                    }
             })
-
+            
         }
         
         let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
@@ -295,7 +295,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let okHandler: VoidHandler = { [weak self] in
             guard let album = self?.router.getParentUUID(),
                 let items = items as? [Item] else {
-                return
+                    return
             }
             
             self?.output?.operationStarted(type: .removeFromAlbum)
@@ -352,7 +352,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                         ItemOperationManager.default.filesMoved(items: item, toFolder: folder)
                                     })
                                     
-            }, fail: self?.failAction(elementType: .move))
+                }, fail: self?.failAction(elementType: .move))
             
             }, cancel: { [weak self] in
                 self?.succesAction(elementType: ElementTypes.move)()
@@ -409,8 +409,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             
             photosAlbumService.loadItemsBy(albums: albums, success: {[weak self] itemsByAlbums in
                 self?.fileService.download(itemsByAlbums: itemsByAlbums,
-                                          success: self?.succesAction(elementType: .download),
-                                          fail: self?.failAction(elementType: .download))
+                                           success: self?.succesAction(elementType: .download),
+                                           fail: self?.failAction(elementType: .download))
             })
         }
     }
@@ -420,8 +420,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             DispatchQueue.main.async {
                 self?.router.createStoryName(items: items)
             }
-        }, cancel: {}, fail: { errorResponse in
-            UIApplication.showErrorAlert(message: errorResponse.description)
+            }, cancel: {}, fail: { errorResponse in
+                UIApplication.showErrorAlert(message: errorResponse.description)
         })
     }
     
@@ -452,8 +452,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     self?.router.pushOnPresentedView(viewController: vc)
                 }
             }
-        }, cancel: {}, fail: { errorResponse in
-            UIApplication.showErrorAlert(message: errorResponse.description)
+            }, cancel: {}, fail: { errorResponse in
+                UIApplication.showErrorAlert(message: errorResponse.description)
         })
     }
     
@@ -581,10 +581,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 fail?(errorResponse)
             }
         }
-        let operations = fileService.syncItemsIfNeeded(items, success: successClosure, fail: failClosure)
-        if operations != nil {
-            output?.startCancelableAsync(cancel: cancel)
-        }
+        fileService.syncItemsIfNeeded(items, success: successClosure, fail: failClosure, syncOperations: {[weak self] syncOperations in
+            let operations = syncOperations
+            if operations != nil {
+                self?.output?.startCancelableAsync(cancel: cancel)
+            }
+        })
+        
     }
     
     private func downloadFaceImageAlbum(item: Item) {

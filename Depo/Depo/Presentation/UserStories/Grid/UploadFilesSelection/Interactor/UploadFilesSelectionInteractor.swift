@@ -87,7 +87,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             DispatchQueue.main.async {
                 self?.uploadOutput?.addToUploadFailedWith(errorMessage: errorResponse.description)
             }
-        })
+            }, returnedUploadOperation: {_ in})
     }
     
     fileprivate func verify(items: [WrapData]) -> String? {

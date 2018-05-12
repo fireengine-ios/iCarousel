@@ -492,15 +492,14 @@ class DownLoadOperation: Operation {
         self.semaphore = DispatchSemaphore(value: 0)
         
         super.init()
-        
-        SingletonStorage.shared.progressDelegates.add(self)
+
     }
     
     override func main() {
         if isCancelled {
             return
         }
-        
+        SingletonStorage.shared.progressDelegates.add(self)
         FileService().downloadToCameraRoll(downloadParam: param, success: {
             log.debug("FileService download \(self.param.fileName) success")
             self.customSuccess()
@@ -508,6 +507,7 @@ class DownLoadOperation: Operation {
             log.debug("FileService download \(self.param.fileName) fail: \(error.errorDescription ?? "")")
             self.customFail(error)
         }
+        SingletonStorage.shared.progressDelegates.remove(self)
         semaphore.wait()
     }
     

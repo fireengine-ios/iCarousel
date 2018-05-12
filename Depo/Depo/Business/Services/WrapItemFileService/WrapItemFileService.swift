@@ -33,7 +33,7 @@ protocol  WrapItemFileOperations {
     func addToFavourite(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?)
     
     func removeFromFavourite(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?)
-
+    
 }
 
 class WrapItemFileService: WrapItemFileOperations {
@@ -114,32 +114,34 @@ class WrapItemFileService: WrapItemFileOperations {
                                      uploadStategy: .WithoutConflictControl,
                                      uploadTo: .MOBILE_UPLOAD,
                                      success: success,
-                                     fail: fail)
+                                     fail: fail, returnedUploadOperation: { _ in})
     }
     
-    func syncItemsIfNeeded(_ items: [WrapData], success: @escaping FileOperationSucces, fail: @escaping FailResponse) -> [UploadOperations]? {
+    func syncItemsIfNeeded(_ items: [WrapData], success: @escaping FileOperationSucces, fail: @escaping FailResponse, syncOperations: @escaping ([UploadOperations]?) -> Void) {
         let localFiles = localWrapedData(files: items)
         guard localFiles.count > 0 else {
             success()
-            return nil
+            return
         }
-
         
-        return uploadService.uploadFileList(items: localFiles,
-                                            uploadType: .syncToUse,
-                                            uploadStategy: .WithoutConflictControl,
-                                            uploadTo: .MOBILE_UPLOAD,
-                                            success: {
-                                                WrapItemFileService.waitItemsDetails(for: items,
-                                                                                     maxAttempts: NumericConstants.maxDetailsLoadingAttempts,
-                                                                                     success: success,
-                                                                                     fail: fail)
-                                            },
-                                            fail: { error in
-                                                if error.description == TextConstants.canceledOperationTextError {
-                                                    return
-                                                }
-                                                fail(error)
+        
+        uploadService.uploadFileList(items: localFiles,
+                                     uploadType: .syncToUse,
+                                     uploadStategy: .WithoutConflictControl,
+                                     uploadTo: .MOBILE_UPLOAD,
+                                     success: {
+                                        WrapItemFileService.waitItemsDetails(for: items,
+                                                                             maxAttempts: NumericConstants.maxDetailsLoadingAttempts,
+                                                                             success: success,
+                                                                             fail: fail)
+        },
+                                     fail: { error in
+                                        if error.description == TextConstants.canceledOperationTextError {
+                                            return
+                                        }
+                                        fail(error)
+        }, returnedUploadOperation: { operations in
+            syncOperations(operations)
         })
     }
     
@@ -217,7 +219,7 @@ class WrapItemFileService: WrapItemFileOperations {
         remoteFileService.medaDataRequest(param: param, success: success_, fail: fail)
     }
     
-
+    
     private func remoteWrapDataItems(files: [WrapData]) -> [WrapData] {
         let items = files.filter { !$0.isLocalItem }
         return items
@@ -236,10 +238,10 @@ class WrapItemFileService: WrapItemFileOperations {
     
     private func remoteItemsUUID(files: [BaseDataSourceItem]) -> [String] {
         let items: [String] = files.filter { !$0.isLocalItem }
-                                   .flatMap { $0.uuid }
+            .flatMap { $0.uuid }
         return items
     }
-
+    
     static private func waitItemsDetails(for items: [WrapData], currentAttempt: Int = 0, maxAttempts: Int, success: FileOperationSucces?, fail: FailResponse?) {
         let fileService = FileService()
         fileService.details(uuids: items.map({ $0.uuid }), success: { updatedItems in

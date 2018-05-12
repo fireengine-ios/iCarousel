@@ -27,6 +27,8 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     
     static let indent: CGFloat = 10
     
+    var isActive = false
+    
     let lock = NSLock()
     
     override init(frame: CGRect) {
@@ -217,6 +219,9 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ) {
+        guard isActive else {
+            return
+        }
         setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
     
@@ -234,6 +239,9 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     }
     
     func setProgress(ratio: Float, for operationType: OperationType, object: WrapData? ) {
+        guard isActive else {
+            return
+        }
         guard let popUp = viewsByType[operationType] as? ProgressPopUp else {
             return
         }
