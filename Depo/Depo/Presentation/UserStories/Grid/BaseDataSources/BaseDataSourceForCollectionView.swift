@@ -1247,13 +1247,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getCellForLocalFile(objectTrimmedLocalID: String, completion: @escaping  (_ cell: CollectionViewCellForPhoto?)->Void) {
-        guard let path = getIndexPathForLocalObject(objectTrimmedLocalID: objectTrimmedLocalID) else {
-            completion(nil)
-            return
-        }
-        
-        DispatchQueue.main.async {
-            completion(self.collectionView?.cellForItem(at: path) as? CollectionViewCellForPhoto)
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            guard let path = self.getIndexPathForLocalObject(objectTrimmedLocalID: objectTrimmedLocalID) else {
+                completion(nil)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                completion(self.collectionView?.cellForItem(at: path) as? CollectionViewCellForPhoto)
+            }
         }
     }
     //----
