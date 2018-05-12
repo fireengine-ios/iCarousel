@@ -22,21 +22,21 @@ extension ActivityType {
     var displayString: String {
         switch self {
         case .welcome:
-            return "created"
+            return TextConstants.created
         case .added:
-            return "uploaded"
+            return TextConstants.uploaded
         case .updated:
-            return "updated"
+            return TextConstants.updated
         case .deleted:
-            return "deleted"
+            return TextConstants.deleted
         case .moved:
-            return "moved"
+            return TextConstants.moved
         case .renamed:
-            return "renamed"
+            return TextConstants.renamed
         case .copied:
-            return "copied"
+            return TextConstants.copied
         case .favourite:
-            return "marked as favourite"
+            return TextConstants.markedAsFavourite
         }
     }
 }

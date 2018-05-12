@@ -20,10 +20,8 @@ final class BackButton: UIButton {
     private var action: VoidHandler?
     
     convenience init(action: @escaping VoidHandler) {
-//        let rect = CGRect(x: 0, y: 0, width: 80, height: 44)
         self.init()
         self.action = action
-        
     }
     
     override init(frame: CGRect) {

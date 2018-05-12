@@ -10,6 +10,8 @@ import UIKit
 
 class FileInfoViewController: BaseViewController, FileInfoViewInput, UITextFieldDelegate, ActivityIndicator, ErrorPresenter {
     
+    private var fileExtension: String?
+    
     @IBOutlet weak var fileNameTitle: UILabel!
     @IBOutlet weak var fileName: UITextField!
     @IBOutlet weak var fileInfoTitle: UILabel!
@@ -214,18 +216,41 @@ class FileInfoViewController: BaseViewController, FileInfoViewInput, UITextField
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        output.onRename(newName: textField.text!)
+        
+        if let text = textField.text {
+            output.onRename(newName: text)
+        }
+        
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if let text = textField.text {
+            textField.text = (text as NSString).deletingPathExtension
+            fileExtension = (text as NSString).pathExtension
+        }
+        
         return true
     }
     
     // MARK: Actions
     
     @IBAction func onHideKeyboard() {
+        if let text = fileName.text,
+            let fileExtension = fileExtension {
+            fileName.text = "\(text).\(fileExtension)"
+        }
+        
         fileName.resignFirstResponder()
     }
     
     @objc func onSave() {
-        output.onRename(newName: fileName.text!)
+        if var text = fileName.text,
+            let fileExtension = fileExtension {
+            text = "\((text as NSString).deletingPathExtension).\(fileExtension)"
+            
+            output.onRename(newName: text)
+        }
     }
     
     func show(name: String) {

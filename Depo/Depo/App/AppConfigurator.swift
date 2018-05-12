@@ -20,6 +20,8 @@ final class AppConfigurator {
     static let tokenStorage: TokenStorage = factory.resolve()
     
     static func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        DispatchQueue.setupMainQueue()
+        
         firstStart()
         emptyEmailUpIfNeed()
         clearTokensIfNeed()

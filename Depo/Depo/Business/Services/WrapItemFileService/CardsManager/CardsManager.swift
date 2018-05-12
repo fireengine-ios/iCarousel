@@ -191,6 +191,20 @@ class CardsManager: NSObject {
         }
     }
     
+    func stopOperationWithType(type: OperationType, serverObject: HomeCardResponse?) {
+        guard let object = serverObject else {
+            stopOperationWithType(type: type)
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.progresForOperation[type] = nil
+            for notificationView in self.foloversArray {
+                notificationView.stopOperationWithType(type: type, serverObject: object)
+            }
+        }
+    }
+    
     func manuallyDeleteCardsByType(type: OperationType, homeCardResponce: HomeCardResponse? = nil) {
         var typeForInsert: OperationType? = nil
         if let responce = homeCardResponce, !responce.actionable {
@@ -203,7 +217,7 @@ class CardsManager: NSObject {
             deletedCards.insert(type)
         }
         
-        stopOperationWithType(type: type)
+        stopOperationWithType(type: type, serverObject: homeCardResponce)
     }
     
     func stopAllOperations() {

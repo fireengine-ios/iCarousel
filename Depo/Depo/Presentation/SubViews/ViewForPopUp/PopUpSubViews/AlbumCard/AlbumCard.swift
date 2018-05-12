@@ -132,7 +132,7 @@ final class AlbumCard: BaseView {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .albumCard)
+        CardsManager.default.stopOperationWithType(type: .albumCard, serverObject: cardObject)
     }
     
     @IBAction private func actionAlbumViewButton(_ sender: UIButton) {
@@ -142,7 +142,7 @@ final class AlbumCard: BaseView {
     private func showAlbum() {
         guard let albumItem = albumItem else { return }
         let router = RouterVC()
-        let albumVC = router.albumDetailController(album: albumItem, type: .Grid, moduleOutput: nil)
+        let albumVC = router.albumDetailController(album: albumItem, type: .List, moduleOutput: nil)
         router.pushViewController(viewController: albumVC)
     }
     

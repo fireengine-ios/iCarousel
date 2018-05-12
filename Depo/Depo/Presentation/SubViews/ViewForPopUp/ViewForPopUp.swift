@@ -251,6 +251,10 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         }
     }
     
+    func stopOperationWithType(type: OperationType, serverObject: HomeCardResponse) {
+        stopOperationWithType(type: type)
+    }
+    
     func isEqual(object: CardsManagerViewProtocol) -> Bool {
         if let compairedView = object as? ViewForPopUp {
             return compairedView == self

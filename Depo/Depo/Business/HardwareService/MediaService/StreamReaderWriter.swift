@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// https://gist.github.com/mingsai/dddce65c98753ace216c
 final class StreamReaderWriter {
     
     typealias ProgressCallBack = (_ copySize: Double, _ percent: Double) -> Void

@@ -9,7 +9,11 @@
 import Foundation
 import SwiftyJSON
 
-final class HomeCardResponse {
+final class HomeCardResponse : Equatable {
+    static func == (lhs: HomeCardResponse, rhs: HomeCardResponse) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     var id: Int?
     var type: HomeCardTypes?
     var saved: Bool = false

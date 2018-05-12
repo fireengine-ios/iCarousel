@@ -47,7 +47,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UjI-IO-v9x">
                                     <rect key="frame" x="16.5" y="41.5" width="288" height="485"/>
                                     <subviews>
-                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwP-lA-H0d">
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwP-lA-H0d" customClass="GradientOrangeView" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="288.5" height="341"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FullOfQuotaImage" translatesAutoresizingMaskIntoConstraints="NO" id="0UO-3v-M7N">

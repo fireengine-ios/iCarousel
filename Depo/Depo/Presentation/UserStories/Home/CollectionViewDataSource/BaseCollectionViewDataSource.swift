@@ -23,7 +23,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     
     var delegate: BaseCollectionViewDataSourceDelegate?
     
-    var viewsByType = [OperationType: BaseView]()
+    var viewsByType = [OperationType: [BaseView]]()
     
     var popUps = [BaseView]()
     var notPermittedPopUpViewTypes = Set<String>()
@@ -155,10 +155,25 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         return CardsManager.popUpViewForOperaion(type: operation)
     }
     
+    func setViewByType(view: BaseView, operation: OperationType) {
+        var array = viewsByType[operation]
+        if array == nil {
+            array = [BaseView]()
+            array?.append(view)
+            viewsByType[operation] = array
+            return
+        }
+        if CardsManager.default.checkIsThisOperationStartedByDevice(operation: operation) && array!.isEmpty != false {
+            return
+        }
+        array?.append(view)
+        viewsByType[operation] = array
+    }
+    
     func startOperationWith(type: OperationType) {
         if viewsByType[type] == nil {
             let view = getViewForOperation(operation: type)
-            viewsByType[type] = view
+            setViewByType(view: view, operation: type)
             let index = 0
             
             print("insert at index ", index, type.rawValue)
@@ -176,12 +191,14 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         
         for object in serverObjects {
             if let type = object.getOperationType(){
-                if let view = viewsByType[type], CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
-                    view.removeFromSuperview()
-                    view.set(object: object)
-                    newPopUps.append(view)
-                    if let index = popUps.index(of: view){
-                        popUps.remove(at: index)
+                if let views = viewsByType[type], CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
+                    for view in views {
+                        view.removeFromSuperview()
+                        view.set(object: object)
+                        newPopUps.append(view)
+                        if let index = popUps.index(of: view){
+                            popUps.remove(at: index)
+                        }
                     }
                 } else {
                     if !checkIsThisIsPermittedType(type: type) {
@@ -192,8 +209,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                     }
                     if !CardsManager.default.checkIsThisOperationStartedByDevice(operation: type) {
                         let view = getViewForOperation(operation: type)
+                        view.set(object: object)
                         newPopUps.insert(view, at: 0)
-                        viewsByType[type] = view
+                        setViewByType(view: view, operation: type)
                     }
                 }
             }
@@ -238,7 +256,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 }
             }
             
-            viewsByType[type] = view
+            setViewByType(view: view, operation: type)
             let index = 0
             popUps.insert(view, at: index)
             popUps = popUps.sorted(by: { view1, view2 -> Bool in
@@ -256,7 +274,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int ) {
-        if let view = viewsByType[type] {
+        if let view = viewsByType[type]?.first {
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
                 if let item = object {
@@ -269,29 +287,50 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func setProgress(ratio: Float, for operationType: OperationType, object: WrapData?) {
-//        guard let popUp = viewsByType[operationType] as? ProgressPopUp else {
-//            return
-//        }
-//        
-//        popUp.setProgressBar(ratio: ratio)
-//        if let object = object {
-//            popUp.setImageForUploadingItem(item: object)
-//        }
+        guard let popUp = viewsByType[operationType]?.first as? ProgressPopUp else {
+            return
+        }
+        
+        popUp.setProgressBar(ratio: ratio)
+        if let object = object {
+            popUp.setImageForUploadingItem(item: object)
+        }
     }
     
     
     func stopOperationWithType(type: OperationType) {
-        if let view = self.viewsByType[type] {
+        if let views = self.viewsByType[type] {
             self.viewsByType[type] = nil
-            if let index = self.popUps.index(of: view) {
-                
-                print("delete at index ", index, type.rawValue)
-                
-                popUps.remove(at: index)
-                collectionView.reloadData()
-            } else {
-                
+            for view in views {
+                if let index = self.popUps.index(of: view) {
+                    popUps.remove(at: index)
+                    collectionView.reloadData()
+                }
             }
+        }
+    }
+    
+    func stopOperationWithType(type: OperationType, serverObject: HomeCardResponse) {
+        if let views = self.viewsByType[type] {
+            var newArray = [BaseView]()
+            
+            for view in views {
+                if let cardObject = view.cardObject, cardObject == serverObject {
+                    if let index = self.popUps.index(of: view) {
+                        popUps.remove(at: index)
+                    }
+                } else {
+                    newArray.append(view)
+                }
+            }
+            
+            if newArray.isEmpty {
+                self.viewsByType[type] = nil
+            } else {
+                self.viewsByType[type] = newArray
+            }
+            
+            collectionView.reloadData()
         }
     }
     

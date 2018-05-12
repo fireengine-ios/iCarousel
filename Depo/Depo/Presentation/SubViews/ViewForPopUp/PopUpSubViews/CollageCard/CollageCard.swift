@@ -90,7 +90,7 @@ final class CollageCard: BaseView {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .collage)
+        CardsManager.default.stopOperationWithType(type: .collage, serverObject: cardObject)
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
