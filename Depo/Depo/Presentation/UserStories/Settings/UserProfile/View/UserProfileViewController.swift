@@ -58,29 +58,19 @@ class UserProfileViewController: ViewController, UserProfileViewInput, UITextFie
         gsmNumberTextField.textColor = ColorConstants.textGrayColor
         gsmNumberTextField.font = UIFont.TurkcellSaturaBolFont(size: 21)
                 
-        let editButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
+        let editButton = UIButton()
+        //editButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19) ///maybe will be need
         editButton.setTitle(TextConstants.userProfileEditButton, for: .normal)
         editButton.addTarget(self, action: #selector(onEditButtonAction), for: .touchUpInside)
+        editButton.sizeToFit()
         self.editButton = UIBarButtonItem(customView: editButton)
         
-        let readyButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
+        let readyButton = UIButton()
+        //editButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19) ///maybe will be need
         readyButton.setTitle(TextConstants.userProfileDoneButton, for: .normal)
         readyButton.addTarget(self, action: #selector(onReadyButtonAction), for: .touchUpInside)
+        readyButton.sizeToFit()
         self.readyButton = UIBarButtonItem(customView: readyButton)
-        
-        let text = TextConstants.userProfileBottomLabelText1 + "\n\n" + TextConstants.userProfileBottomLabelText2
-        let string = text as NSString
-        let range = string.range(of: TextConstants.userProfileBottomLabelText2)
-        let attributedText = NSMutableAttributedString(string: text)
-        
-        let fontSize: CGFloat = 16
-        
-        let font1 = UIFont.TurkcellSaturaDemFont(size: fontSize)
-        let font2 = UIFont.TurkcellSaturaItaFont(size: fontSize)
-        let r1 = NSRange(location: 0, length: range.location)
-        let r2 = NSRange(location: range.location, length: range.length)
-        attributedText.addAttribute(NSAttributedStringKey.font, value: font1, range: r1)
-        attributedText.addAttribute(NSAttributedStringKey.font, value: font2, range: r2)
         
         configureNavBar()
         

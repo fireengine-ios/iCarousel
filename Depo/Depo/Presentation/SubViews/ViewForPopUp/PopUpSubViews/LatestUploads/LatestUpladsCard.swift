@@ -38,10 +38,12 @@ class LatestUpladsCard: BaseView {
         viewRecentActivitiesButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         viewRecentActivitiesButton.setTitle(TextConstants.homeLatestUploadsCardRecentActivitiesButton, for: .normal)
         viewRecentActivitiesButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+        viewRecentActivitiesButton.adjustsFontSizeToFitWidth()
         
         viewAllPhotosButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         viewAllPhotosButton.setTitle(TextConstants.homeLatestUploadsCardAllPhotosButtn, for: .normal)
         viewAllPhotosButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+        viewAllPhotosButton.adjustsFontSizeToFitWidth()
         
         collectionView.register(nibCell: LatestUploadCardCell.self)
         
