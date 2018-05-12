@@ -1063,7 +1063,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             })
         }
         
-        if let photoCell = cell_ as? CollectionViewCellForPhoto{
+        if let photoCell = cell_ as? CollectionViewCellForPhoto {
             let file = itemForIndexPath(indexPath: indexPath)
             if let `file` = file, uploadedObjectID.index(of: file.uuid) != nil{
                 photoCell.finishedUploadForObject()
@@ -1081,7 +1081,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         if let photoCell = cell_ as? CollectionViewCellForPhoto {
-            photoCell.finishedUploadForObject()
+            photoCell.cleanCell()
         }
         
         cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: false)

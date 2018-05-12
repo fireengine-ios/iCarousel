@@ -162,6 +162,14 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
     }
     
+    func cleanCell() {
+        DispatchQueue.main.async {
+            self.visualEffectBlur.isHidden = true
+            self.progressView.isHidden = true
+            self.cloudStatusImage.image = UIImage() 
+        }
+    }
+    
     func finishedDownloadForObject() {
         progressView.isHidden = true
     }
