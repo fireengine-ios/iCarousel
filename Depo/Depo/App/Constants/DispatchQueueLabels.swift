@@ -22,4 +22,5 @@ struct DispatchQueueLabels {
     static let syncronizedArray = "com.lifebox.SynchronizedArray"
     static let serialStopUpdateItemManager = "com.lifebox.serialStopUpdateItemManager"
     static let freeAppSpace = "com.lifebox.freeAppSpace"
+    static let privateConcurentQueue = "privateConcurentQueue"
 }
