@@ -64,7 +64,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateNavigationItemsState(state: true)
-        
+        homePageDataSource.isViewActive = true
         output.viewIsReady()
         
         if let searchController = navigationController?.topViewController as? SearchViewController {
@@ -87,7 +87,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        homePageDataSource.isActive = false
+        homePageDataSource.isViewActive = false
+        homePageDataSource.isActive = false///Do we need pretty much same flag?
     }
     
     deinit {

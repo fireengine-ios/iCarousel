@@ -29,6 +29,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     var notPermittedPopUpViewTypes = Set<String>()
     var isEnable: Bool = true
     var isActive: Bool = false
+    var isViewActive = false
     
     func configurateWith(collectionView: UICollectionView, viewController: UIViewController, delegate: BaseCollectionViewDataSourceDelegate?) {
         
@@ -270,10 +271,16 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ) {
+        guard isViewActive else {
+            return
+        }
         setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
     
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int ) {
+        guard isViewActive else {
+            return
+        }
         if let view = viewsByType[type]?.first {
             if let popUp = view as? ProgressPopUp {
                 popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
@@ -287,7 +294,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func setProgress(ratio: Float, for operationType: OperationType, object: WrapData?) {
-        guard let popUp = viewsByType[operationType]?.first as? ProgressPopUp else {
+        guard isViewActive, let popUp = viewsByType[operationType]?.first as? ProgressPopUp else {
             return
         }
         

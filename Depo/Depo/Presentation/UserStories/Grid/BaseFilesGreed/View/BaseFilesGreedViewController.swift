@@ -121,7 +121,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         if let searchController = navigationController?.topViewController as? SearchViewController {
             searchController.dismissController(animated: false)
         }
-        
+        scrolliblePopUpView.isActive = true
         output.needToReloadVisibleCells()
     }
     
@@ -130,6 +130,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         configurateNavigationBar()
         configurateViewForPopUp()
         output.updateThreeDotsButton()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        scrolliblePopUpView.isActive = false
+        super.viewDidDisappear(animated)
     }
     
     func configurateViewForPopUp() {
