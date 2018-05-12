@@ -166,7 +166,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             
             self.fail()
             
-        })
+            }, returnedUploadOperation: { _ in})
         
         status = .executing
     }

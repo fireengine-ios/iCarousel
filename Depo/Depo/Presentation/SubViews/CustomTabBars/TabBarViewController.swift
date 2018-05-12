@@ -70,7 +70,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate var folderBtn: SubPlussButtonView!
     fileprivate var albumBtn: SubPlussButtonView!
     fileprivate var uploadFromLifebox: SubPlussButtonView!
-
+    
     //    let musicBar = MusicBar.initFromXib()
     lazy var player: MediaPlayer = factory.resolve()
     let cameraService: CameraService = CameraService()
@@ -105,7 +105,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     var selectedIndex: NSInteger = 0 {
         willSet {
-            // will get crash 
+            // will get crash
             selectedViewController?.willMove(toParentViewController: nil)
             selectedViewController?.view.removeFromSuperview()
             selectedViewController?.removeFromParentViewController()
@@ -157,7 +157,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
         plussButton.accessibilityLabel = TextConstants.accessibilityPlus
     }
-       
+    
     override var childViewControllerForStatusBarStyle: UIViewController? {
         return activeNavigationController?.presentedViewController ?? activeNavigationController?.viewControllers.last
     }
@@ -249,7 +249,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         musicBarHeightConstraint.constant = 0
         mainContentView.layoutIfNeeded()
     }
-
+    
     private func changeVisibleStatus(hidden: Bool) {
         musicBar.isHidden = hidden
         musicBar.isUserInteractionEnabled = !hidden
@@ -350,11 +350,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                     router.videosScreen,
                     router.musics,
                     router.documents]
-        customNavigationControllers = list.compactMap { NavigationController(rootViewController: $0!) }
+        customNavigationControllers = list.flatMap { NavigationController(rootViewController: $0!) }
     }
     
     @objc func gearButtonAction(sender: Any) {
-       // output.gearButtonGotPressed()
+        // output.gearButtonGotPressed()
     }
     
     fileprivate func changeViewState(state: Bool) {
@@ -438,7 +438,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
         mainContentView.bringSubview(toFront: plussButton)
     }
-
+    
     func createSubButton(withText text: String, imageName: String, asLeft: Bool) -> SubPlussButtonView? {
         if let subButton = SubPlussButtonView.getFromNib(asLeft: asLeft, withImageName: imageName, labelText: text) {
             subButton.actionDelegate = self
@@ -608,7 +608,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     func frameForTabAtIndex(index: Int) -> CGRect {
-        var frames = tabBar.subviews.compactMap { view -> CGRect? in
+        var frames = tabBar.subviews.flatMap { view -> CGRect? in
             if let view = view as? UIControl {
                 return view.frame
             }
@@ -630,7 +630,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             
             if tabbarSelectedIndex == TabScreenIndex.photosScreenIndex.rawValue,
                 (lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue ||
-                lastPhotoVideoIndex == TabScreenIndex.videosScreenIndex.rawValue ) {
+                    lastPhotoVideoIndex == TabScreenIndex.videosScreenIndex.rawValue ) {
                 tabbarSelectedIndex = lastPhotoVideoIndex
                 tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
             } else {
@@ -674,7 +674,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             
         case uploadFromLifebox:
             action = .uploadFromLifeBox
-        
+            
         default:
             return
         }
@@ -701,7 +701,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         let wrapData = WrapData(imageData: data)
         
         UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: false, isFromCamera: true, success: {
-        }) { [weak self] error in
+        }, fail: { [weak self] error in
             DispatchQueue.main.async {
                 let vc = PopUpController.with(title: TextConstants.errorAlert,
                                               message: error.description,
@@ -709,6 +709,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
                                               buttonTitle: TextConstants.ok)
                 self?.present(vc, animated: true, completion: nil)
             }
+        }) { _ in
+            
         }
         
         picker.dismiss(animated: true, completion: nil)
@@ -755,7 +757,7 @@ extension TabBarViewController: TabBarActionHandler {
             
         case .upload:
             guard !checkReadOnlyPermission() else { return }
-
+            
             let controller = router.uploadPhotos()
             let navigation = NavigationController(rootViewController: controller)
             navigation.navigationBar.isHidden = false

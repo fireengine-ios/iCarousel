@@ -1264,82 +1264,91 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     //----
     
     func startUploadFile(file: WrapData) {
-        guard needShowProgressInCell, file.isLocalItem else {
-            return
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self, self.needShowProgressInCell, file.isLocalItem else {
+                return
+            }
+            
+            self.getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) { (cell) in
+                cell?.setProgressForObject(progress: 0, blurOn: true)
+            }
         }
         
-        getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) { (cell) in
-            cell?.setProgressForObject(progress: 0, blurOn: true)
-        }
     }
     
     func setProgressForUploadingFile(file: WrapData, progress: Float) {
-        guard needShowProgressInCell, file.isLocalItem else {
-            return
-        }
-        
-        getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) { (cell) in
-            cell?.setProgressForObject(progress: progress, blurOn: true)
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self, self.needShowProgressInCell, file.isLocalItem else {
+                return
+            }
+            
+            self.getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) { (cell) in
+                cell?.setProgressForObject(progress: progress, blurOn: true)
+            }
         }
     }
-    
+ 
     func finishedUploadFile(file: WrapData){
-        if let unwrapedFilters = originalFilters,
-            isAlbumDetail(filters: unwrapedFilters) {
-            return
-        }
-        
-        let uuid = file.getTrimmedLocalID()
-        
-        if uploadedObjectID.index(of: file.uuid) == nil {
-            uploadedObjectID.append(uuid)
-        }
-        
-        var localFinishedItemUUID: String?
-        
-        finished: for (section, array) in allItems.enumerated() {
-            for (row, object) in array.enumerated() {
-                if object.getTrimmedLocalID() == uuid {
-                    if object.isLocalItem {
-                        localFinishedItemUUID = object.uuid
-                        file.isLocalItem = false
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            if let unwrapedFilters = self.originalFilters,
+                self.isAlbumDetail(filters: unwrapedFilters) {
+                return
+            }
+            
+            let uuid = file.getTrimmedLocalID()
+            
+            if self.uploadedObjectID.index(of: file.uuid) == nil {
+                self.uploadedObjectID.append(uuid)
+            }
+            
+            var localFinishedItemUUID: String?
+            
+            finished: for (section, array) in self.allItems.enumerated() {
+                for (row, object) in array.enumerated() {
+                    if object.getTrimmedLocalID() == uuid {
+                        if object.isLocalItem {
+                            localFinishedItemUUID = object.uuid
+                            file.isLocalItem = false
+                        }
+                        self.allItems[section][row] = file
+                        break finished
                     }
-                    allItems[section][row] = file
-                    break finished
                 }
             }
-        }
-        
-        
-        for (index, object) in allMediaItems.enumerated(){
-            if object.uuid == file.uuid {
-                file.isLocalItem = false
-                allMediaItems[index] = file
-            }
-        }
-        
-        
-        guard needShowProgressInCell else {
-            return
-        }
-
-        DispatchQueue.main.async {
-            if localFinishedItemUUID != nil, let cell = self.getCellForFile(objectUUID: file.uuid) {
-                cell.finishedUploadForObject()
-            }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
-            if let `self` = self{
-                let cell = self.getCellForFile(objectUUID: file.uuid)
-                cell?.resetCloudImage()
-                
-                if let index = self.uploadedObjectID.index(of: uuid){
-                    self.uploadedObjectID.remove(at: index)
+            
+            
+            for (index, object) in self.allMediaItems.enumerated(){
+                if object.uuid == file.uuid {
+                    file.isLocalItem = false
+                    self.allMediaItems[index] = file
                 }
             }
-        })
-        
+            
+            
+            guard self.needShowProgressInCell else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                if localFinishedItemUUID != nil, let cell = self.getCellForFile(objectUUID: file.uuid) {
+                    cell.finishedUploadForObject()
+                }
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
+                if let `self` = self{
+                    let cell = self.getCellForFile(objectUUID: file.uuid)
+                    cell?.resetCloudImage()
+                    
+                    if let index = self.uploadedObjectID.index(of: uuid){
+                        self.uploadedObjectID.remove(at: index)
+                    }
+                }
+            })
+        }
     }
     
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {
@@ -1359,37 +1368,45 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func updateFavoritesCellStatus(items: [Item], isFavorites: Bool) {
-        var arrayOfPath = [IndexPath]()
-        
-        for item in items {
-//            if item.fileType != .folder
-            if let path = getIndexPathForObject(trimmedLocalID: item.getTrimmedLocalID()) {
-                arrayOfPath.append(path)
-            } else if let path = getIndexPathForObject(itemUUID: item.uuid) {
-                arrayOfPath.append(path)
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
             }
-        }
-        
-        if arrayOfPath.count > 0 {
-            var trimmedLocalIDs = items.map { $0.getTrimmedLocalID() }
-            let uuids = items.map { $0.uuid }
-            for array in allItems {
-                for arraysObject in array {
-                    if let index = trimmedLocalIDs.index(of: arraysObject.getTrimmedLocalID()) {
-                        arraysObject.favorites = isFavorites
-                        trimmedLocalIDs.remove(at: index)
-                    } else if let index = uuids.index(of: arraysObject.uuid)  {
-                        arraysObject.favorites = isFavorites
-                        trimmedLocalIDs.remove(at: index)
-                    }
+            var arrayOfPath = [IndexPath]()
+            
+            for item in items {
+                //            if item.fileType != .folder
+                if let path = self.getIndexPathForObject(trimmedLocalID: item.getTrimmedLocalID()) {
+                    arrayOfPath.append(path)
+                } else if let path = self.getIndexPathForObject(itemUUID: item.uuid) {
+                    arrayOfPath.append(path)
                 }
             }
             
-            collectionView?.performBatchUpdates({ [weak self] in
-                if let `self` = self{
-                    self.collectionView?.reloadItems(at: arrayOfPath)
+            if arrayOfPath.count > 0 {
+                var trimmedLocalIDs = items.map { $0.getTrimmedLocalID() }
+                let uuids = items.map { $0.uuid }
+                for array in self.allItems {
+                    for arraysObject in array {
+                        if let index = trimmedLocalIDs.index(of: arraysObject.getTrimmedLocalID()) {
+                            arraysObject.favorites = isFavorites
+                            trimmedLocalIDs.remove(at: index)
+                        } else if let index = uuids.index(of: arraysObject.uuid)  {
+                            arraysObject.favorites = isFavorites
+                            trimmedLocalIDs.remove(at: index)
+                        }
+                    }
                 }
-                }, completion: nil)
+                DispatchQueue.main.async {
+                    
+                    
+                    self.collectionView?.performBatchUpdates({ [weak self] in
+                        if let `self` = self{
+                            self.collectionView?.reloadItems(at: arrayOfPath)
+                        }
+                        }, completion: nil)
+                }
+            }
         }
     }
     
@@ -1411,89 +1428,95 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func deleteItems(items: [Item]) {
-        guard !items.isEmpty else {
-            return
-        }
-
-        var idsForRemove = [String]()
-        var objectsForReplaceDict = [String : Item]()
-        
-        if let unwrapedFilters = originalFilters,
-            !showOnlyRemotes(filters: unwrapedFilters) {
-            
-            var serverObjects = [Item]()
-            
-            var allItemsIDs = [String]()
-            for array in allItems {
-                for object in array {
-                    allItemsIDs.append(object.getTrimmedLocalID())
-                }
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            guard !items.isEmpty else {
+                return
             }
             
-            for object in items {
-                if object.isLocalItem {
-                    idsForRemove.append(object.uuid)
-                } else {
-                    serverObjects.append(object)
-                }
-            }
+            var idsForRemove = [String]()
+            var objectsForReplaceDict = [String : Item]()
             
-            let localIDs = serverObjects.map {
-                $0.getTrimmedLocalID()
-            }
-            let localObjectsForReplace = CoreDataStack.default.allLocalItems(trimmedLocalIds: localIDs)
-            
-            let foundedLocalID = localObjectsForReplace.map {
-                $0.getTrimmedLocalID()
-            }
-            for object in serverObjects {
-                let trimmedID = object.getTrimmedLocalID()
-                if let index = foundedLocalID.index(of: trimmedID) {
-                    let objForReplace = localObjectsForReplace[index]
-                    if let index = allItemsIDs.index(of: trimmedID){
-                        allItemsIDs.remove(at: index)
-                        if allItemsIDs.contains(trimmedID){
-                            idsForRemove.append(object.uuid)
-                        } else {
-                            objectsForReplaceDict[object.uuid] = objForReplace
-                        }
-                    }
-                } else {
-                    idsForRemove.append(object.uuid)
-                }
-            }
-        } else {
-            idsForRemove = items.map{
-                $0.uuid
-            }
-        }
-        
-        var newArray = [[WrapData]]()
-        
-        for array in allItems {
-            var newSectionArray = [WrapData]()
-            for object in array {
+            if let unwrapedFilters = self.originalFilters,
+                !self.showOnlyRemotes(filters: unwrapedFilters) {
                 
-                if let index = idsForRemove.index(of: object.uuid) {
-                    idsForRemove.remove(at: index)
-                    continue
+                var serverObjects = [Item]()
+                
+                var allItemsIDs = [String]()
+                for array in self.allItems {
+                    for object in array {
+                        allItemsIDs.append(object.getTrimmedLocalID())
+                    }
                 }
-                if let obj = objectsForReplaceDict[object.uuid]{
-                    newSectionArray.append(obj)
-                    continue
+                
+                for object in items {
+                    if object.isLocalItem {
+                        idsForRemove.append(object.uuid)
+                    } else {
+                        serverObjects.append(object)
+                    }
                 }
-                newSectionArray.append(object)
+                
+                let localIDs = serverObjects.map {
+                    $0.getTrimmedLocalID()
+                }
+                let localObjectsForReplace = CoreDataStack.default.allLocalItems(trimmedLocalIds: localIDs)
+                
+                let foundedLocalID = localObjectsForReplace.map {
+                    $0.getTrimmedLocalID()
+                }
+                for object in serverObjects {
+                    let trimmedID = object.getTrimmedLocalID()
+                    if let index = foundedLocalID.index(of: trimmedID) {
+                        let objForReplace = localObjectsForReplace[index]
+                        if let index = allItemsIDs.index(of: trimmedID){
+                            allItemsIDs.remove(at: index)
+                            if allItemsIDs.contains(trimmedID){
+                                idsForRemove.append(object.uuid)
+                            } else {
+                                objectsForReplaceDict[object.uuid] = objForReplace
+                            }
+                        }
+                    } else {
+                        idsForRemove.append(object.uuid)
+                    }
+                }
+            } else {
+                idsForRemove = items.map{
+                    $0.uuid
+                }
             }
-            if !newSectionArray.isEmpty{
-                newArray.append(newSectionArray)
+            
+            var newArray = [[WrapData]]()
+            
+            for array in self.allItems {
+                var newSectionArray = [WrapData]()
+                for object in array {
+                    
+                    if let index = idsForRemove.index(of: object.uuid) {
+                        idsForRemove.remove(at: index)
+                        continue
+                    }
+                    if let obj = objectsForReplaceDict[object.uuid]{
+                        newSectionArray.append(obj)
+                        continue
+                    }
+                    newSectionArray.append(object)
+                }
+                if !newSectionArray.isEmpty{
+                    newArray.append(newSectionArray)
+                }
+            }
+            self.allItems = newArray
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+                self.delegate?.didDelete(items: items)
+                
+                self.updateCoverPhoto()
             }
         }
-        
-        allItems = newArray
-        collectionView?.reloadData()
-        delegate?.didDelete(items: items)
-        
-        updateCoverPhoto()
     }
     
     private func updateCellsForObjects(objectsForDelete: [Item], objectsForUpdate:[Item]) {

@@ -53,7 +53,7 @@ protocol ItemOperationManagerViewProtocol: class {
     func filesMoved(items: [Item], toFolder folderUUID: String)
     
     func syncFinished()
-
+    
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool
     
 }
@@ -145,27 +145,27 @@ class ItemOperationManager: NSObject {
     func startUploadFile(file: WrapData) {
         currentUploadingObject = file
         
-//        DispatchQueue.main.async {
-            for view in self.views {
-                view.startUploadFile(file: file)
-            }
-//        }
+        //        DispatchQueue.main.async {
+        for view in self.views {
+            view.startUploadFile(file: file)
+        }
+        //        }
     }
     
     func startUploadFilesToAlbum(files: [WrapData]) {
-        DispatchQueue.main.async {
-            for view in self.views {
-                view.startUploadFilesToAlbum(files: files)
-            }
+        //        DispatchQueue.main.async {
+        for view in self.views {
+            view.startUploadFilesToAlbum(files: files)
         }
+        //        }
     }
     
     func setProgressForUploadingFile(file: WrapData, progress: Float) {
-//        DispatchQueue.main.async {
-            for view in self.views {
-                view.setProgressForUploadingFile(file: file, progress: progress)
-            }
-//        }
+        //        DispatchQueue.main.async {
+        for view in self.views {
+            view.setProgressForUploadingFile(file: file, progress: progress)
+        }
+        //        }
         
         currentUploadingObject = file
         currentUploadProgress = progress
@@ -173,11 +173,11 @@ class ItemOperationManager: NSObject {
     
     
     func finishedUploadFile(file: WrapData) {
-//        DispatchQueue.main.async {
-            for view in self.views {
-                view.finishedUploadFile(file: file)
-            }
-//        }
+        //        DispatchQueue.main.async {
+        for view in self.views {
+            view.finishedUploadFile(file: file)
+        }
+        //        }
         
         MenloworksAppEvents.onFileUploadedWithType(file.fileType)
         

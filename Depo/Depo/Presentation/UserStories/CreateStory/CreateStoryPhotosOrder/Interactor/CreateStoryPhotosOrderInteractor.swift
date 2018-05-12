@@ -7,7 +7,7 @@
 //
 
 class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
-
+    
     weak var output: CreateStoryPhotosOrderInteractorOutput!
     
     private lazy var fileService = WrapItemFileService()
@@ -15,7 +15,7 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
     var story: PhotoStory?
     
     var isRequestStarted = false
-
+    
     func viewIsReady() {
         if (story != nil) {
             output.showStory(story: story!)
@@ -87,22 +87,24 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
         output.goToAudioSelection(story: story_)
     }
     
-    private func sync(items: [Item]) {        
-        let operations = fileService.syncItemsIfNeeded(items, success: { [weak self] in
+    private func sync(items: [Item]) {
+        fileService.syncItemsIfNeeded(items, success: { [weak self] in
             self?.createStory(with: items)
-        }) { [weak self] error in
-            DispatchQueue.main.async {
-                self?.output.createdStoryFailed(with: error)
+            }, fail: { [weak self] error in
+                DispatchQueue.main.async {
+                    self?.output.createdStoryFailed(with: error)
+                }
+        }){ [weak self] syncOperations in
+            if syncOperations != nil, let output = self?.output as? BaseAsyncOperationInteractorOutput {
+                output.startCancelableAsync(cancel: { [weak self] in
+                    DispatchQueue.main.async {
+                        self?.output.createdStoryFailed(with: ErrorResponse.string(TextConstants.createStoryCancel))
+                    }
+                })
             }
         }
         
-        if operations != nil, let output = output as? BaseAsyncOperationInteractorOutput {
-            output.startCancelableAsync(cancel: { [weak self] in
-                DispatchQueue.main.async {
-                    self?.output.createdStoryFailed(with: ErrorResponse.string(TextConstants.createStoryCancel))
-                }
-            })
-        }
+        
     }
     
 }
