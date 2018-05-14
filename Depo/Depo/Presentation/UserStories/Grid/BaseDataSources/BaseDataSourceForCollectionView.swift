@@ -199,7 +199,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         switch response {
         case .success(let array):
             DispatchQueue.main.async {
-                if self.isDropedData {
+                if self.isDropedData || array.isEmpty {
                     self.collectionView?.reloadData()
                     self.delegate?.filesAppendedAndSorted()
                     self.isLocalFilesRequested = false
@@ -212,6 +212,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
                     }
                     
+                    collectionView.collectionViewLayout.invalidateLayout()
                     collectionView.performBatchUpdates({ [weak self] in
                         if let newSections = newSections {
                             self?.collectionView?.insertSections(newSections)
@@ -561,28 +562,27 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private func getHeaderText(indexPath: IndexPath) -> String {
         var headerText = ""
         
-        guard allItems.count > indexPath.section,
-            allItems[indexPath.section].count > indexPath.row else {
-                return headerText
+        guard let item = allItems[safe: indexPath.section]?.first else {
+            return headerText
         }
         
         switch currentSortType {
         case .timeUp, .timeUpWithoutSection, .timeDown, .timeDownWithoutSection:
-            if let date = allItems[indexPath.section].first?.creationDate {
+            if let date = item.creationDate {
                 headerText = date.getDateInTextForCollectionViewHeader()
             }
         case .lettersAZ, .albumlettersAZ, .lettersZA, .albumlettersZA:
-            if let character = allItems[indexPath.section].first?.name?.first {
+            if let character = item.name?.first {
                 headerText = String(describing: character).uppercased()
             }
         case .sizeAZ, .sizeZA:
             headerText = ""
         case .metaDataTimeUp, .metaDataTimeDown:
-            if let date = allItems[indexPath.section].first?.metaData?.takenDate {
+            if let date = item.metaData?.takenDate {
                 headerText = date.getDateInTextForCollectionViewHeader()
-            } else if needShowEmptyMetaItems && !emptyMetaItems.isEmpty && allItems[indexPath.section].first?.isLocalItem == false {
+            } else if needShowEmptyMetaItems && !emptyMetaItems.isEmpty && item.isLocalItem == false {
                 headerText = TextConstants.photosVideosViewMissingDatesHeaderText
-            } else if let date = allItems[indexPath.section].first?.creationDate {
+            } else if let date = item.creationDate {
                 headerText = date.getDateInTextForCollectionViewHeader()
             }
         }
