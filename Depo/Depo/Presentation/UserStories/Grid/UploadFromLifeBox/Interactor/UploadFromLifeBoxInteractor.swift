@@ -43,8 +43,8 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
                             return
                         }
                         out.uploadOperationSuccess()
+                        ItemOperationManager.default.filesUpload(count: itemsUUIDs.count, toFolder: self.rootFolderUUID)
                     }
-                    ItemOperationManager.default.filesUploadToFolder()
                 }
             }, fail: { [weak self] fail in
                 DispatchQueue.main.async {
