@@ -31,7 +31,7 @@ class PackagesPresenter {
                     return AccountType.cyprus
                 } else if plan.hasPrefix("moldcell") {
                     return AccountType.moldovian
-                }
+                } 
             }
             return AccountType.all
         }
@@ -125,7 +125,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     func optInReachedMaxAttempts(_ optInVC: OptInController) {
         optInVC.showResendButton()
         optInVC.dropTimer()
-        UIApplication.showErrorAlert(message: TextConstants.promocodeBlocked)
+        view?.display(error: ErrorResponse.string(TextConstants.promocodeBlocked))
     }
     
     func optInNavigationTitle() -> String {
