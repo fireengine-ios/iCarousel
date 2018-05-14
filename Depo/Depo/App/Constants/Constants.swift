@@ -653,6 +653,7 @@ struct TextConstants {
     static let usageInfoSongs = NSLocalizedString("%ld songs", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let usageInfoDocuments = NSLocalizedString("%ld documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let usageInfoBytesRemained = NSLocalizedString("%@ of %@ has remained", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let usageInfoBytesRemainedLifebox = NSLocalizedString("has_remained_lifebox_usage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let usageInfoQuotaInfo = NSLocalizedString("Quota info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let usageInfoDocs = NSLocalizedString("%ld docs", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
