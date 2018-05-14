@@ -13,4 +13,5 @@ protocol FileInfoViewInput: class, ActivityIndicator, ErrorPresenter {
     func hideViews()
     func showViews()
     func show(name: String)
+    func showValidateNameSuccess()
 }

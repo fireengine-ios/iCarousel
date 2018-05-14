@@ -6,13 +6,19 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class FileInfoInteractor: FileInfoInteractorInput {
+final class FileInfoInteractor {
     
     weak var output: FileInfoInteractorOutput!
     
     var item: BaseDataSourceItem?
     private lazy var albumService = PhotosAlbumService()
 
+}
+
+// MARK: FileInfoInteractorInput
+
+extension FileInfoInteractor: FileInfoInteractorInput {
+    
     func setObject(object: BaseDataSourceItem) {
         item = object
     }
@@ -30,7 +36,7 @@ class FileInfoInteractor: FileInfoInteractorInput {
             } else {
                 output.updated()
             }
-
+            
             return
         }
         
@@ -43,10 +49,10 @@ class FileInfoInteractor: FileInfoInteractorInput {
                         file.name = newName
                     }
                 }
-            }, fail: { [weak self] error in
-                DispatchQueue.main.async {
-                    self?.output.failedUpdate(error: error)
-                }
+                }, fail: { [weak self] error in
+                    DispatchQueue.main.async {
+                        self?.output.failedUpdate(error: error)
+                    }
             })
         }
         
@@ -59,10 +65,10 @@ class FileInfoInteractor: FileInfoInteractorInput {
                         file.name = newName
                     }
                 }
-            }, fail: { [weak self] error in
-                DispatchQueue.main.async {
-                    self?.output.updated()
-                }
+                }, fail: { [weak self] error in
+                    DispatchQueue.main.async {
+                        self?.output.updated()
+                    }
             })
         }
     }
@@ -79,4 +85,15 @@ class FileInfoInteractor: FileInfoInteractorInput {
             }
         }
     }
+    
+    func onValidateName(newName: String) {
+        if newName.isEmpty {
+            if let name = item?.name {
+                output.cancelSave(use: name)
+            }
+        } else {
+            output.didValidateNameSuccess()
+        }
+    }
+    
 }
