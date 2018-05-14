@@ -123,6 +123,10 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func updateThreeDotsButton() {
+        view.setThreeDotsMenu(active: true)
+    }
+    
     // MARK: - BaseDataSourceForCollectionViewDelegate
     
     override func didDelete(items: [BaseDataSourceItem]) {

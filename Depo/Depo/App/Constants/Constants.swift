@@ -784,6 +784,8 @@ struct TextConstants {
     static let cancelPurchase = NSLocalizedString("The purchase was canceled", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let inProgressPurchase = NSLocalizedString("The purchase in progress", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let renewalDate = NSLocalizedString("Renewal Date: %@", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     // MARK: - Navigation bar img names
     
     static let moreBtnImgName = "more"

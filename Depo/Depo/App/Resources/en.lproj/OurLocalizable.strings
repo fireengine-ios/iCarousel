@@ -634,6 +634,7 @@
 "You have not enough memory in your device" = "You have not enough memory in your device";
 "The purchase was canceled" = "The purchase was canceled";
 "The purchase in progress" = "The purchase in progress";
+"Renewal Date: %@" = "Renewal Date: %@";
 "You have no duplicated contacts!" = "You have no duplicated contacts!";
 "Daily" = "Daily";
 "Weekly" = "Weekly";

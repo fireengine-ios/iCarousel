@@ -29,6 +29,8 @@ final class IAPManager: NSObject {
     private var restoreInProgress = false
     private var purchaseInProgress = false
     
+    private var products: [SKProduct]?
+    
     var canMakePayments: Bool {
         return SKPaymentQueue.canMakePayments()
     }
@@ -88,11 +90,21 @@ final class IAPManager: NSObject {
             else { return nil }
         return receiptData.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
     }
+    
+    func product(for productId: String) -> SKProduct? {
+        guard let products = products else {
+            return nil
+        }
+        
+        return products.first(where: { $0.productIdentifier == productId })
+    }
 }
 
 extension IAPManager: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         log.debug("IAPManager productsRequest didReceive response")
+        
+        products = response.products
         
         let sortedOffers = response.products
             .map { OfferApple(skProduct: $0) }

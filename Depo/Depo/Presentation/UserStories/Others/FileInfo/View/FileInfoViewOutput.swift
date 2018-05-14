@@ -9,4 +9,5 @@
 protocol FileInfoViewOutput {
     func viewIsReady()
     func onRename(newName: String)
+    func validateName(newName: String)
 }
