@@ -23,7 +23,7 @@ class PackagesPresenter {
         if accountType == "TURKCELL" {
             return AccountType.turkcell
         } else {
-            let plans = subscriptionPlans.compactMap { $0.subscriptionPlanRole }
+            let plans = subscriptionPlans.flatMap { $0.subscriptionPlanRole }
             for plan in plans {
                 if plan.hasPrefix("lifebox") {
                     return AccountType.ukranian
