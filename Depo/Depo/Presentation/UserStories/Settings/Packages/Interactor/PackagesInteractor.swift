@@ -209,11 +209,13 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     private func validatePurchase(productId: String) {
         guard let receipt = iapManager.receipt else {
+            getActiveSubscriptions()
             return
         }
         
         offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
+                self?.getActiveSubscriptions()
                 return
             }
             
@@ -349,8 +351,16 @@ extension PackagesInteractor: PackagesInteractorInput {
                 return nil
             }
             
-            let currency = getCurrency(for: accountType)
-            let priceString = String(format: TextConstants.offersPrice, price, currency)
+            let priceString: String
+            
+            if let inAppPurchaseId = subscription.subscriptionPlanInAppPurchaseId,
+                let localizedPrice = iapManager.product(for: inAppPurchaseId)?.localizedPrice {
+                priceString = String(format: TextConstants.offersLocalizedPrice, localizedPrice)
+            } else {
+                let currency = getCurrency(for: subscription)
+                priceString = String(format: TextConstants.offersPrice, price, currency)
+            }
+            
             let type: SubscriptionPlanType = price == 0 ? .free : .current
             
             return subscriptionPlanWith(name: name, priceString: priceString, type: type, model: subscription)
@@ -434,5 +444,20 @@ extension PackagesInteractor: PackagesInteractorInput {
         case .all:
             return "$" /// temp
         }
+    }
+    
+    private func getCurrency(for subscription: SubscriptionPlanBaseResponse) -> String {
+        var type: AccountType = .turkcell
+        
+        if let role = subscription.subscriptionPlanRole {
+            if role.hasPrefix("lifebox") {
+                type = .ukranian
+            } else if role.hasPrefix("kktcell") {
+                type = .cyprus
+            } else if role.hasPrefix("moldcell") {
+                type = .moldovian
+            }
+        }
+        return getCurrency(for: type)
     }
 }

@@ -124,7 +124,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             editingTabBar.view.isHidden = true
         }
         
-        output.viewIsReady(view: viewForBottomBar)
+        
         statusBarColor = .black
     }
     
@@ -132,6 +132,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         super.viewDidAppear(animated)
         collectionView.isHidden = false
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+        output.viewIsReady(view: viewForBottomBar)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -178,7 +179,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         guard !objects.isEmpty, selectedIndex < objects.count else {
             return
         }
-        
         let indexPath = IndexPath(item: selectedIndex, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
     } 
@@ -223,6 +223,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     func onShowSelectedItem(at index: Int, from items: [Item]) {
         objects = items
         selectedIndex = index
+        collectionView.reloadData()
+        scrollToSelectedIndex()
     }
 
     @objc func onRightBarButtonItem(sender: UIButton) {

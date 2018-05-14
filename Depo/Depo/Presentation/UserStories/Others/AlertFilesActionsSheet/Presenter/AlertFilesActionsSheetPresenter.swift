@@ -362,7 +362,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     self.basePassingPresenter?.deSelectAll()
                 })
             case .print:
-                action = UIAlertAction(title: "Print", style: .default, handler: { _ in
+                action = UIAlertAction(title: TextConstants.tabBarPrintLabel, style: .default, handler: { _ in
                     MenloworksAppEvents.onPrintClicked()
                     self.basePassingPresenter?.printSelected()
                 })
