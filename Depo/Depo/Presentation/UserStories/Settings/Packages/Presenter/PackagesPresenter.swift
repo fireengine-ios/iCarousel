@@ -23,7 +23,7 @@ class PackagesPresenter {
         if accountType == "TURKCELL" {
             return AccountType.turkcell
         } else {
-            let plans = subscriptionPlans.flatMap { $0.subscriptionPlanRole }
+            let plans = subscriptionPlans.compactMap { $0.subscriptionPlanRole }
             for plan in plans {
                 if plan.hasPrefix("lifebox") {
                     return AccountType.ukranian
@@ -31,7 +31,7 @@ class PackagesPresenter {
                     return AccountType.cyprus
                 } else if plan.hasPrefix("moldcell") {
                     return AccountType.moldovian
-                }
+                } 
             }
             return AccountType.all
         }
@@ -125,7 +125,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     func optInReachedMaxAttempts(_ optInVC: OptInController) {
         optInVC.showResendButton()
         optInVC.dropTimer()
-        UIApplication.showErrorAlert(message: TextConstants.promocodeBlocked)
+        view?.display(error: ErrorResponse.string(TextConstants.promocodeBlocked))
     }
     
     func optInNavigationTitle() -> String {

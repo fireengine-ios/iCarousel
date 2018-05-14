@@ -100,7 +100,8 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
             if let model = plan.model as? SubscriptionPlanBaseResponse, let renewalDate = model.nextRenewalDate {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "dd MMM yy"
-                renewalDateLabel.text = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(renewalDate.intValue)))
+                let date = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(renewalDate.doubleValue/1000)))
+                renewalDateLabel.text = String(format: TextConstants.renewalDate, date)
                 
                 if let type = model.type {
                     storeLabel.text = type.description
