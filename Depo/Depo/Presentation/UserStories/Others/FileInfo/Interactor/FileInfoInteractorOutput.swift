@@ -15,4 +15,5 @@ protocol FileInfoInteractorOutput: class {
     func albumForUuidFailed(error: Error)
     func failedUpdate(error: Error)
     func cancelSave(use name: String)
+    func didValidateNameSuccess()
 }
