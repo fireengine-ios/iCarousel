@@ -264,6 +264,9 @@ class WrapItemFileService: WrapItemFileOperations {
                                  maxAttempts: maxAttempts,
                                  success: success,
                                  fail: fail)
+            } else {
+                log.debug("SyncToUse - Item details. Number of attempts is exhausted")
+                fail?(ErrorResponse.string(TextConstants.errorServer))
             }
         }, fail: fail)
     }
