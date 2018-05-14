@@ -77,6 +77,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         }
         statusBarColor = .white
         
+        if let topBarVc = UIApplication.topController() as? TabBarViewController {
+            topBarVc.statusBarStyle = .default
+        }
+        
         editingTabBar?.view.layoutIfNeeded()
         
         let allVisibleCells = collectionView.indexPathsForVisibleItems
