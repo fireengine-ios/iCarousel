@@ -40,7 +40,8 @@ class InternetDataUsageCell: UITableViewCell {
     func fill(with object: InternetDataUsage) {
         nameLabel.text = object.offerName
         dateLabel.text = object.expiryDate?.getDateInFormat(format: "dd MMM YYYY")
-        dataUsageLabel.text = "\(object.remainingString) of \(object.totalString) has remained (only for lifebox usage)"
+        
+        dataUsageLabel.text = String(format: TextConstants.usageInfoBytesRemainedLifebox, object.remainingString, object.totalString)
         progressBar.progress = Float(object.remaining ?? 1) / Float(object.total ?? 1)
     }
 }

@@ -83,6 +83,7 @@
 "%ld docs" = "%ld documents";
 "Quota info" = "Usage info";
 "%@ of %@ has remained" = "%1$@ of %2$@ has remained";
+"has_remained_lifebox_usage" = "%@ of %@ has remained (only for lifebox usage)";
 "%ld documents" = "%ld documents";
 "%ld songs" = "%ld songs";
 "%ld videos" = "%ld videos";
@@ -652,3 +653,4 @@
 "renamed" = "renamed";
 "copied" = "copied";
 "marked as favourite" = "marked as favourite";
+"Bad internet connection" = "Bad internet connection";
