@@ -160,6 +160,7 @@ class MenloworksTagsService {
     func onPhotosAndVideosOpen() {
         let tag = MenloworksTags.PhotosAndVideosOpen()
         hitTag(tag)
+        sendSubscriptionsStatus()
     }
     
     func onMusicOpen() {

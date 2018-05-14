@@ -109,10 +109,12 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
         let settings = dataSource.createAutoSyncSettings()
         
         if !settings.isAutoSyncEnabled {
+            MenloworksTagsService.shared.onAutosyncStatus(isOn: false)
             MenloworksEventsService.shared.onFirstAutosyncOff()
             storageVars.autoSyncSet = true
             output.change(settings: settings)
         } else {
+            MenloworksTagsService.shared.onAutosyncStatus(isOn: true)
             output.checkPermissions()
         }
     }
@@ -173,6 +175,7 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
             storageVars.autoSyncSet = true
             output.change(settings: settings)
         } else {
+            MenloworksTagsService.shared.onAutosyncStatus(isOn: true)
             analyticsService.track(event: .turnOnAutosync)
             dataSource.reloadTableView()
         }

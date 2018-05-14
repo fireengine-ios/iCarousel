@@ -78,6 +78,7 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func forceDisableAutoSync() {
+        MenloworksTagsService.shared.onAutosyncStatus(isOn: false)
         autoSyncSettings?.disableAutoSync()
         updateCells()
     }
