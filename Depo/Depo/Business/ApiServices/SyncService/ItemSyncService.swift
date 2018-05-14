@@ -166,9 +166,9 @@ class ItemSyncServiceImpl: ItemSyncService {
             
             self.fail()
             
-            }, returnedUploadOperation: { _ in})
-        
-        status = .executing
+            }, returnedUploadOperation: { [weak self] _ in
+                self?.status = .executing
+        })
     }
     
     private func appendNewUnsyncedItems() {
