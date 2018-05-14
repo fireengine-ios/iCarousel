@@ -233,12 +233,13 @@ final class MediaPlayer: NSObject {
             }
         }
         
+        let savedCurrentIndex = currentIndex
         deleteIndexes.reversed().forEach { i in
             list.remove(at: i)
             urls.remove(at: i)
             items.remove(at: i)
             
-            if i <= currentIndex, currentIndex != 0 {
+            if i < currentIndex, currentIndex != 0 {
                 currentIndex -= 1
             }
         }
@@ -246,8 +247,7 @@ final class MediaPlayer: NSObject {
         shuffleCurrentList()
         
         /// check current playing item for delete indexes
-        if deleteIndexes.contains(currentIndex) {
-            // TODO: CHECK ALL STATES
+        if deleteIndexes.contains(savedCurrentIndex) {
             if play(at: currentIndex) {
                 if deleteIndexes.count > 1, currentIndex > 0 {
                     currentIndex -= 1
