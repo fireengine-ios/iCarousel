@@ -159,6 +159,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func appendCollectionView(items: [WrapData], pageNum: Int) {
+        let containsEmptyMetaItems = !emptyMetaItems.isEmpty
+        
         var filteredItems = [WrapData]()
         if needShowEmptyMetaItems {
             items.forEach {
@@ -190,8 +192,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if let collectionView = collectionView {
             oldSectionNumbers = numberOfSections(in: collectionView)
         }
-        
-        let containsEmptyMetaItems = !emptyMetaItems.isEmpty
         
         compoundItems(pageItems: filteredItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] response in
             self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
