@@ -507,8 +507,8 @@ class DownLoadOperation: Operation {
             log.debug("FileService download \(self.param.fileName) fail: \(error.errorDescription ?? "")")
             self.customFail(error)
         }
-        SingletonStorage.shared.progressDelegates.remove(self)
         semaphore.wait()
+        SingletonStorage.shared.progressDelegates.remove(self)
     }
     
     func customSuccess() {
