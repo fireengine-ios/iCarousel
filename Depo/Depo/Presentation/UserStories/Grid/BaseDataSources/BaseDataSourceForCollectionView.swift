@@ -1353,6 +1353,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             localFinishedItemUUID = object.uuid
                             file.isLocalItem = false
                         }
+                        guard self.allItems.count > section,
+                            self.allItems[section].count > row else {
+                                return /// Collection was reloaded from different thread
+                        }
                         self.allItems[section][row] = file
                         break finished
                     }
