@@ -191,12 +191,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             oldSectionNumbers = numberOfSections(in: collectionView)
         }
         
+        let containsEmptyMetaItems = !emptyMetaItems.isEmpty
+        
         compoundItems(pageItems: filteredItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] response in
-            self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers)
+            self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
         })
     }
     
-    private func insertItems(with response: ResponseResult<[IndexPath]>, oldSectionNumbers: Int) {
+    private func insertItems(with response: ResponseResult<[IndexPath]>, oldSectionNumbers: Int, containsEmptyMetaItems: Bool) {
         guard let collectionView = collectionView else {
             return
         }
@@ -214,7 +216,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     
                     var newSections: IndexSet?
                     if newSectionNumbers > oldSectionNumbers {
-                        newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
+                        let needMoveSectionWithEmptyMetaItems = self.needShowEmptyMetaItems && self.currentSortType == .metaDataTimeUp && containsEmptyMetaItems
+                        
+                        if needMoveSectionWithEmptyMetaItems {
+                            newSections = IndexSet(oldSectionNumbers-1..<newSectionNumbers-1)                           
+                        } else {
+                            newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
+                        }
                     }
                     
                     collectionView.collectionViewLayout.invalidateLayout()
@@ -1085,6 +1093,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         let isLastCell = Bool((countRow - 1) == indexPath.row)
         
         let oldSectionNumbers = numberOfSections(in: collectionView)
+        let containsEmptyMetaItems = !emptyMetaItems.isEmpty
         
         if isLastCell, isLastSection, !isPaginationDidEnd {
             if pageLeftOvers.isEmpty, !isLocalFilesRequested {
@@ -1093,13 +1102,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 debugPrint("!!! page compunding for page \(lastPage)")
                 
                 compoundItems(pageItems: [], pageNum: lastPage, complition: { [weak self] response in
-                    self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers)
+                    self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
                     
                 })
             }
         } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
             compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
-               self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers)
+               self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
             })
         }
         
