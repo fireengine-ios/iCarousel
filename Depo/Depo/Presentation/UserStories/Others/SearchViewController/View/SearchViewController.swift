@@ -64,6 +64,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         subscribeToNotifications()
         configureNavigationBar()
         
+        if let topBarVc = UIApplication.topController() as? TabBarViewController {
+            topBarVc.statusBarStyle = .default
+        }
+        
         MenloworksTagsService.shared.onSearchOpen()
     }
     
