@@ -116,7 +116,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     }
     
     private func checkCanEdit(item: BaseDataSourceItem) {
-        if !item.isSynced() || item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
+        if item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
             navigationItem.rightBarButtonItem = nil
             fileName.isEnabled = false
         }
@@ -197,7 +197,7 @@ extension FileInfoViewController: FileInfoViewInput {
                 checkCanEdit(item: object)
             }
             
-            if let createdDate = obj.creationDate, object.isSynced() {
+            if let createdDate = obj.creationDate, !object.isLocalItem {
                 uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
                 if !obj.isLocalItem, let takenDate = obj.metaData?.takenDate, createdDate != takenDate {
                     takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
