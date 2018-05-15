@@ -17,6 +17,7 @@ protocol PasscodeManager: class {
     func authenticateWithBiometrics()
     var maximumInccorectPasscodeAttempts: Int { get }
     var finishBiometrics: Bool { get set }
+    var successFinishBiometrics: Bool { get }
     var userCancelledBiometrics: Bool { get }
 }
 
@@ -33,6 +34,7 @@ final class PasscodeManagerImp {
     let biometricsManager: BiometricsManager
     var userCancelledBiometrics = false
     var finishBiometrics = false
+    var successFinishBiometrics = false
     
     weak var delegate: PasscodeManagerDelegate?
     
@@ -83,6 +85,7 @@ extension PasscodeManagerImp: PasscodeManager {
         view.resignResponder()
         
         userCancelledBiometrics = false
+        successFinishBiometrics = false
         
         biometricsManager.authenticate(reason: state.title) { status in
             DispatchQueue.main.async {
@@ -94,6 +97,7 @@ extension PasscodeManagerImp: PasscodeManager {
                         self.state.finish(with: passcode, manager: self)
                     }
                     self.finishBiometrics = true
+                    self.successFinishBiometrics = true
                     
                 case .cancelledByUser:
                     self.userCancelledBiometrics = true

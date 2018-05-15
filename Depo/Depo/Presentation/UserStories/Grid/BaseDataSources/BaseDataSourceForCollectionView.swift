@@ -1431,9 +1431,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         if let index = trimmedLocalIDs.index(of: arraysObject.getTrimmedLocalID()) {
                             arraysObject.favorites = isFavorites
                             trimmedLocalIDs.remove(at: index)
-                        } else if let index = uuids.index(of: arraysObject.uuid)  {
+                        } else if uuids.contains(arraysObject.uuid) {
                             arraysObject.favorites = isFavorites
-                            trimmedLocalIDs.remove(at: index)
                         }
                     }
                 }
