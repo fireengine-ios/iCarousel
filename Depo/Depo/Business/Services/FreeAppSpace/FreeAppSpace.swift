@@ -286,20 +286,20 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                         let elementToAdd = self.localtemsArray[index] {
                         self.serverDuplicatesArray.append(item)
                         self.duplicatesArray.append(elementToAdd)
-                        //self_.localtemsArray.remove(at: index_)
-                        //self_.localMD5Array.remove(at: index_)
+                        self.localtemsArray.remove(at: index)
+                        self.localMD5Array.remove(at: index)
                         
-                        if (self.localtemsArray.count == 0) {
+                        if self.localtemsArray.isEmpty {
                             finished = true
                             break
                         }
                     }
                 }
                 
-                if (!finished) && (items.count == self.numberElementsInRequest) {
-                    self.getDuplicatesObjects(latestDate: latestDate, success: success, fail: fail)
-                } else {
+                if finished || items.count < self.numberElementsInRequest {
                     success()
+                } else {
+                    self.getDuplicatesObjects(latestDate: latestDate, success: success, fail: fail)
                 }
             }
         }, fail: {
