@@ -65,10 +65,42 @@ final class BiometricsManagerImp: BiometricsManager {
         /// may not be working for some devices.
         } else if error?.code == -5 || error?.code == -7 {
             return .notInitialized
-        } else {
+        } else { /// err.code == -6 no physical equipment
+            /// System locks Touch ID after 5 invalid tries.
+            /// It says: Biometry is locked out.
+            /// Will be locked until the user enters the passcode
+            /// Solution: Lock-unlock device by turn off screen and Touch ID will be available.
+            // TODO: check error?.code == -8
             return .notAvailable
         }
     }
+    
+    // TODO: it is work correct
+    // TODO: check without BoolHandler
+    // TODO: correct all text for Face ID
+    //func isBiometryReady() -> Bool {
+    //    let context = LAContext()
+    //    var error: NSError?
+    //    context.localizedFallbackTitle = ""
+    //    if #available(iOS 10.0, *) {
+    //        context.localizedCancelTitle = "Enter Using Passcode"
+    //    }
+    //    
+    //    if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+    //        return true
+    //    }
+    //    
+    //    var isBiometryReady = false
+    //    if error?.code == -8 {
+    //        let reason = "TouchID has been locked out due to few fail attemp. Enter iPhone passcode to enable touchID."
+    //        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason, reply: { success, error in
+    //            isBiometryReady = false                    
+    //        })
+    //        isBiometryReady = true
+    //    }
+    //    return isBiometryReady
+    //}
+
     
     lazy var biometricsTitle: String = {
         isAvailableFaceID ? TextConstants.passcodeFaceID : TextConstants.passcodeTouchID
