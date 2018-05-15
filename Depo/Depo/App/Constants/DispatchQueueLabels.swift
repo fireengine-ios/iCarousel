@@ -23,4 +23,5 @@ struct DispatchQueueLabels {
     static let serialStopUpdateItemManager = "com.lifebox.serialStopUpdateItemManager"
     static let freeAppSpace = "com.lifebox.freeAppSpace"
     static let privateConcurentQueue = "privateConcurentQueue"
+    static let requestService = "com.lifebox.requestService"
 }
