@@ -130,6 +130,7 @@ class WrapItemFileService: WrapItemFileOperations {
                                      uploadStategy: .WithoutConflictControl,
                                      uploadTo: .MOBILE_UPLOAD,
                                      success: {
+                                        log.debug("SyncToUse - Waiting for item details")
                                         WrapItemFileService.waitItemsDetails(for: items,
                                                                              maxAttempts: NumericConstants.maxDetailsLoadingAttempts,
                                                                              success: success,
@@ -257,11 +258,15 @@ class WrapItemFileService: WrapItemFileOperations {
                 success?()
             } else if currentAttempt < maxAttempts {
                 sleep(NumericConstants.detailsLoadingTimeAwait)
+                log.debug("SyncToUse - Item details. Attempt number \(currentAttempt)")
                 waitItemsDetails(for: items,
                                  currentAttempt: currentAttempt + 1,
                                  maxAttempts: maxAttempts,
                                  success: success,
                                  fail: fail)
+            } else {
+                log.debug("SyncToUse - Item details. Number of attempts is exhausted")
+                fail?(ErrorResponse.string(TextConstants.errorServer))
             }
         }, fail: fail)
     }

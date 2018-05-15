@@ -565,6 +565,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private func sync(items: [BaseDataSourceItem]?, action: @escaping VoidHandler, cancel: @escaping VoidHandler, fail: FailResponse?) {
         guard let items = items as? [WrapData] else { return }
         let successClosure = { [weak self] in
+            log.debug("SyncToUse - Success closure")
             DispatchQueue.main.async {
                 self?.output?.completeAsyncOperationEnableScreen()
                 action()
@@ -572,6 +573,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         let failClosure: FailResponse = { [weak self] errorResponse in
+            log.debug("SyncToUse - Fail closure")
             DispatchQueue.main.async {
                 self?.output?.completeAsyncOperationEnableScreen()
                 if errorResponse.errorDescription == TextConstants.canceledOperationTextError {

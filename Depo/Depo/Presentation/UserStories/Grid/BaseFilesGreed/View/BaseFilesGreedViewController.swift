@@ -122,6 +122,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             searchController.dismissController(animated: false)
         }
         scrolliblePopUpView.isActive = true
+        CardsManager.default.updateAllProgressesInCardsForView(view: scrolliblePopUpView)
         output.needToReloadVisibleCells()
     }
     

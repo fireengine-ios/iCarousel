@@ -65,6 +65,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         super.viewWillAppear(animated)
         updateNavigationItemsState(state: true)
         homePageDataSource.isViewActive = true
+        CardsManager.default.updateAllProgressesInCardsForView(view: homePageDataSource)
         output.viewIsReady()
         
         if let searchController = navigationController?.topViewController as? SearchViewController {
