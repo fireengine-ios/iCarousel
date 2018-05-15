@@ -129,7 +129,9 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     }
     
     func needPresentPopUp(popUpView: UIViewController) {
-        present(popUpView, animated: true, completion: nil)
+        DispatchQueue.toMain {
+            self.present(popUpView, animated: true, completion: nil)
+        }
     }
     
     private func requestShowSpotlight() {
