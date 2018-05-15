@@ -47,9 +47,9 @@ class RequestService {
         
         let sessionRequest = SessionManager.default.request(request)
             .customValidate()
-            .response(queue: privateQueue, completionHandler: { requestResponse in
+            .response { requestResponse in
                 response(requestResponse.data, requestResponse.response, requestResponse.error)
-            })
+            }
         return sessionRequest.task!
     }
     
