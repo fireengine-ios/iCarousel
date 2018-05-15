@@ -117,6 +117,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         output.viewWillDisappear()
         statusBarColor = .clear
         if goBack {
+            if let topBarVc = UIApplication.topController() as? TabBarViewController {
+                topBarVc.statusBarStyle = .lightContent
+            }
+            
             homePageNavigationBarStyle()
         }
         
