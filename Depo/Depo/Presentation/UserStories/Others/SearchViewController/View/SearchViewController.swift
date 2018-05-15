@@ -345,7 +345,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     func successWithSuggestList(list: [SuggestionObject]) {
         items[.suggestion] = Array(list.prefix(NumericConstants.maxSuggestions))
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             if self.collectionView.isHidden && self.noFilesView.isHidden {
                 self.suggestTableView.isHidden = self.isEmptyItems()
             }
@@ -359,7 +359,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             self.items[category] = list
         }
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.suggestTableView.reloadData()
         }
     }
