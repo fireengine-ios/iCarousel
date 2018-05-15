@@ -125,9 +125,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private var uploadedObjectID = [String]()
     private var uploadToAlbumItems = [String]()
     
-    var needShowProgressInCell: Bool = false
-    var needShowCloudIcon: Bool = true
-    var needShow3DotsInCell: Bool = true
+    var needShowProgressInCell = false
+    var needShowCloudIcon = true
+    var needShow3DotsInCell = true
+    var canShow3DotsInCell = true
     var needShowCustomScrollIndicator = false
     var needShowEmptyMetaItems = false
     
@@ -625,7 +626,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if selectionState {
             needShow3DotsInCell = false
         } else {
-            needShow3DotsInCell = true
+            needShow3DotsInCell = canShow3DotsInCell
             selectedItemsArray.removeAll()
         }
         
