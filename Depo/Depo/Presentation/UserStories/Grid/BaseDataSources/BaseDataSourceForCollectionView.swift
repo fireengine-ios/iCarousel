@@ -22,6 +22,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     
     func getCellSizeForList() -> CGSize
     
+    func getFolder() -> Item?
+    
     func onLongPressInCell()
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int)
@@ -56,6 +58,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
 }
 
 extension BaseDataSourceForCollectionViewDelegate {
+    
+    func getFolder() -> Item? { return nil }
     
     func onLongPressInCell() { }
     
@@ -1546,6 +1550,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
             }
             self.allItems = newArray
+            
+            //update folder items count
+            if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
+                self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
+            }
+            
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
                 self.delegate?.didDelete(items: items)
@@ -1665,11 +1675,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         updateCoverPhoto()
     }
     
-    func filesUploadToFolder() {
+    func filesUpload(count: Int, toFolder folderUUID: String) {
         if let unwrapedFilters = originalFilters,
             canUploadFromLifeBox(filters: unwrapedFilters) {
             delegate?.needReloadData()
         }
+        
+        updateItems(count: count, forFolder: folderUUID, increment: true)        
         updateCoverPhoto()
     }
     
@@ -1693,10 +1705,21 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         updateCoverPhoto()
     }
     
-    func filesMoved(items: [Item], toFolder folderUUID: String){
-        if let uuid = parentUUID, uuid != folderUUID{
+    func filesMoved(items: [Item], toFolder folderUUID: String) {
+        //update new folder items count
+        updateItems(count: items.count, forFolder: folderUUID, increment: true)
+        
+        //insert items to new folder
+        if let folder = delegate?.getFolder(), folder.uuid == folderUUID {
+            delegate?.needReloadData()
+        } else if delegate?.getFolder() == nil {
+            //root folder (all files)
+            delegate?.needReloadData()
+        }
+        
+        if let uuid = parentUUID, uuid != folderUUID {
             deleteItems(items: items)
-        }else if let unwrapedFilters = originalFilters,
+        } else if let unwrapedFilters = originalFilters,
             canShowFolderFilters(filters: unwrapedFilters) {
             deleteItems(items: items)
         }
@@ -1718,6 +1741,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func updateCoverPhoto() {
         delegate?.updateCoverPhotoIfNeeded()
+    }
+    
+    func updateItems(count: Int, forFolder folderUUID: String, increment: Bool) {
+        if let indexPath = getIndexPathForObject(itemUUID: folderUUID),
+            let item = itemForIndexPath(indexPath: indexPath) as? WrapData,
+            let childCount = item.childCount {
+            if increment {
+                item.childCount = childCount + Int64(count)
+            } else {
+                item.childCount = childCount - Int64(count)
+            }
+        }
     }
 }
 

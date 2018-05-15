@@ -46,7 +46,7 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func filesAddedToAlbum()
     
-    func filesUploadToFolder()
+    func filesUpload(count: Int, toFolder folderUUID: String)
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String)
     
@@ -95,7 +95,7 @@ extension ItemOperationManagerViewProtocol {
     
     func filesAddedToAlbum() {}
     
-    func filesUploadToFolder() {}
+    func filesUpload(count: Int, toFolder folderUUID: String) {}
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String) {}
     
@@ -307,10 +307,10 @@ class ItemOperationManager: NSObject {
         }
     }
     
-    func filesUploadToFolder() {
+    func filesUpload(count: Int, toFolder folderUUID: String) {
         DispatchQueue.main.async {
             for view in self.views {
-                view.filesUploadToFolder()
+                view.filesUpload(count: count, toFolder: folderUUID)
             }
         }
     }
