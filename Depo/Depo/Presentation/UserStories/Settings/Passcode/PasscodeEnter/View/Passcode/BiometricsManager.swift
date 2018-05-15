@@ -19,6 +19,23 @@ protocol BiometricsManager {
     func authenticate(reason: String, handler: @escaping AuthenticateHandler)
 }
 
+// TODO: rewrite to system codes
+//public var kLAErrorAuthenticationFailed: Int32 { get }
+//public var kLAErrorUserCancel: Int32 { get }
+//public var kLAErrorUserFallback: Int32 { get }
+//public var kLAErrorSystemCancel: Int32 { get }
+//public var kLAErrorPasscodeNotSet: Int32 { get }
+//public var kLAErrorTouchIDNotAvailable: Int32 { get }
+//public var kLAErrorTouchIDNotEnrolled: Int32 { get }
+//public var kLAErrorTouchIDLockout: Int32 { get }
+//public var kLAErrorAppCancel: Int32 { get }
+//public var kLAErrorInvalidContext: Int32 { get }
+//public var kLAErrorNotInteractive: Int32 { get }
+//
+//public var kLAErrorBiometryNotAvailable: Int32 { get }
+//public var kLAErrorBiometryNotEnrolled: Int32 { get }
+//public var kLAErrorBiometryLockout: Int32 { get }
+
 enum BiometricsAuthenticateResult: Int {
     case success = 0
     case notAvailable = 1
@@ -66,18 +83,21 @@ final class BiometricsManagerImp: BiometricsManager {
         } else if error?.code == -5 || error?.code == -7 {
             return .notInitialized
         } else { /// err.code == -6 no physical equipment
+            
             /// System locks Touch ID after 5 invalid tries.
-            /// It says: Biometry is locked out.
+            /// It says: Biometry is locked out. (error?.code == -8)
             /// Will be locked until the user enters the passcode
             /// Solution: Lock-unlock device by turn off screen and Touch ID will be available.
-            // TODO: check error?.code == -8
             return .notAvailable
         }
     }
     
+    /// maybe will be need
     // TODO: it is work correct
     // TODO: check without BoolHandler
     // TODO: correct all text for Face ID
+    /// https://stackoverflow.com/a/45613341/5893286
+    /// https://stackoverflow.com/a/40785158/5893286
     //func isBiometryReady() -> Bool {
     //    let context = LAContext()
     //    var error: NSError?
