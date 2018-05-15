@@ -100,6 +100,10 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
  
     }
     
+    override func updateThreeDotsButton() {
+        view.setThreeDotsMenu(active: true)
+    }
+    
     // MARK: - BaseDataSourceForCollectionViewDelegate
     
     override func updateCoverPhotoIfNeeded() {
