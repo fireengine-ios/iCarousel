@@ -12201,6 +12201,14 @@
 					};
 					8C0E8C611FDEBDFF00789C91 = {
 						DevelopmentTeam = 7A7F3AW7RP;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					B54BFF2F202B20250018AF82 = {
 						CreatedOnToolsVersion = 9.2;

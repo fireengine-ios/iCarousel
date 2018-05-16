@@ -11,6 +11,8 @@
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)by.come.life.Lifebox</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo.ent</string>
 	</array>
 </dict>
 </plist>
