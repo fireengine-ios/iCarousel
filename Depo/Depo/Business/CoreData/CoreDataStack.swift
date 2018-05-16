@@ -124,7 +124,7 @@ class CoreDataStack: NSObject {
                 return
             }
             var array = [Item]()
-            array = localDuplicatesMediaItems.compactMap { WrapData(mediaItem: $0) }
+            array = localDuplicatesMediaItems.flatMap { WrapData(mediaItem: $0) }
 
             duplicatesCallBack(array)
             
