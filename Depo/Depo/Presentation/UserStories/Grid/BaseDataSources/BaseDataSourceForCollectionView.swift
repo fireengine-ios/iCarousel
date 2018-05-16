@@ -738,11 +738,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func selectAll(isTrue: Bool){
         if (isTrue) {
             selectedItemsArray.removeAll()
-            let parsedItems = allItems.flatMap{ $0 }
-            guard let downcastedItems = parsedItems as? [BaseDataSourceItem] else {
-                return
-            }
-            selectedItemsArray.formUnion(downcastedItems) //<BaseDataSourceItem>(parsedItems)
+            let parsedItems: [BaseDataSourceItem] = allItems.flatMap{ $0 }
+            selectedItemsArray.formUnion(parsedItems) //<BaseDataSourceItem>(parsedItems)
             updateVisibleCells()
             for header in headers{
                 header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag),
