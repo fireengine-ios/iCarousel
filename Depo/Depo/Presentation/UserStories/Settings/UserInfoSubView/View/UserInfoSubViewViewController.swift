@@ -34,6 +34,8 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     
     var userInfo: AccountInfoResponse?
     
+    private var isPhotoLoaded = false
+    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,8 +114,9 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         userEmailLabel.text = userInfo.email
         userPhoneNumber.text = userInfo.phoneNumber
         
-        if let url = userInfo.urlForPhoto {
+        if let url = userInfo.urlForPhoto, !isPhotoLoaded {
             userIconImageView.sd_setImage(with: url) { [weak self] _, _, _, _ in
+                self?.isPhotoLoaded = true
                 self?.uplaodLabel.isHidden = true
             }
         }
