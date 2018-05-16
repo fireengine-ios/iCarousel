@@ -22,7 +22,7 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak fileprivate var songsCountLabel: UILabel!
     @IBOutlet weak fileprivate var docsCountLabel: UILabel!
     @IBOutlet weak fileprivate var priceLabel: UILabel!
-    @IBOutlet weak fileprivate var renewalDateLabel: UILabel!
+    @IBOutlet weak fileprivate var dateInfoLabel: UILabel!
     @IBOutlet weak fileprivate var storeLabel: UILabel!
     @IBOutlet weak fileprivate var freeButton: UIButton!
     @IBOutlet weak fileprivate var upgradeButton: UIButton!
@@ -60,7 +60,7 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
 
         checkmarkImageView.tintColor = ColorConstants.blueColor
         
-        renewalDateLabel.text = ""
+        dateInfoLabel.text = ""
         storeLabel.text = ""
     }
     
@@ -98,10 +98,8 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         
         if accountType == .all {
             if let model = plan.model as? SubscriptionPlanBaseResponse, let renewalDate = model.nextRenewalDate {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "dd MMM yy"
-                let date = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(renewalDate.doubleValue/1000)))
-                renewalDateLabel.text = String(format: TextConstants.renewalDate, date)
+                let date = dateString(from: renewalDate)
+                dateInfoLabel.text = String(format: TextConstants.renewalDate, date)
                 
                 if let type = model.type {
                     storeLabel.text = type.description
@@ -109,9 +107,19 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
             }
             priceHeightConstraint.constant = 18
         } else {
-            renewalDateLabel.isHidden = true
+            dateInfoLabel.isHidden = true
             storeLabel.isHidden = true
             priceHeightConstraint.constant = 30
+        }
+        
+        if let model = plan.model as? SubscriptionPlanBaseResponse, model.type == .promo {
+            cancelButton.isHidden = true
+            
+            if let subscriptionEndDate = model.subscriptionEndDate {
+                let date = dateString(from: subscriptionEndDate)
+                dateInfoLabel.text = String(format: TextConstants.subscriptionEndDate, date)
+                dateInfoLabel.isHidden = false
+            }
         }
     }
     
@@ -123,5 +131,13 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
     
     @IBAction fileprivate func actionCancelButtonClicked(_ sender: UIButton) {
         delegate?.didPressSubscriptionPlanButton(at: indexPath)
+    }
+    
+    // MARK: - Date Helper
+    
+    private func dateString(from dateInterval: NSNumber) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yy"
+        return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(dateInterval.doubleValue/1000)))
     }
 }
