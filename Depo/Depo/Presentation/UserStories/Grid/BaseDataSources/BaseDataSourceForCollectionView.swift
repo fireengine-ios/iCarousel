@@ -1484,6 +1484,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             guard let `self` = self else {
                 return
             }
+            if self.allItems.isEmpty {
+                return
+            }
             guard !items.isEmpty else {
                 return
             }
