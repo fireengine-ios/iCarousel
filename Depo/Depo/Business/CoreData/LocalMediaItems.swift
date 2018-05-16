@@ -153,7 +153,7 @@ extension CoreDataStack {
                 }
                 print("iCloud: updated iCloud in \(Date().timeIntervalSince(start)) secs")
                 context.perform {
-                    let invalidItems = info.filter { !$0.isValid }.flatMap { $0.asset.localIdentifier }
+                    let invalidItems = info.filter { !$0.isValid }.map { $0.asset.localIdentifier }
                     print("iCloud: removing \(invalidItems.count) items")
                     self.removeLocalMediaItems(with: invalidItems, completion: {})
                 }
