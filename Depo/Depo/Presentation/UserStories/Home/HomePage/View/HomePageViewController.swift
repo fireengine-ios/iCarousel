@@ -136,7 +136,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     private func requestShowSpotlight() {
         var cardTypes: [SpotlightType] = [.homePageIcon, .homePageGeneral]
-        cardTypes.append(contentsOf: homePageDataSource.popUps.compactMap { SpotlightType(cardView: $0) })
+        cardTypes.append(contentsOf: homePageDataSource.popUps.flatMap { SpotlightType(cardView: $0) })
         output.requestShowSpotlight(for: cardTypes)
     }
     

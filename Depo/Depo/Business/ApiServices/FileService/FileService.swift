@@ -310,11 +310,11 @@ class FileService: BaseRequestService {
 
         let allOperationsCount = items.count
         CardsManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
-        let downLoadRequests: [BaseDownloadRequestParametrs] = items.compactMap {
+        let downLoadRequests: [BaseDownloadRequestParametrs] = items.flatMap {
             BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name, item: $0)
         }
         var completedOperationsCount = 0
-        let operations = downLoadRequests.compactMap {
+        let operations = downLoadRequests.flatMap {
             DownLoadOperation(downloadParam: $0, success: {
                 completedOperationsCount = completedOperationsCount + 1
                 CardsManager.default.setProgressForOperationWith(type: .download,
@@ -429,7 +429,7 @@ class FileService: BaseRequestService {
                 return
             }
             
-            let list = resultResponse.compactMap { WrapData(remote: $0) }
+            let list = resultResponse.flatMap { WrapData(remote: $0) }
 //            CoreDataStack.default.appendOnlyNewItems(items: list)
             success?(list)
         }, fail: fail)

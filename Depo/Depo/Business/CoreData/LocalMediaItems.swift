@@ -153,7 +153,7 @@ extension CoreDataStack {
                 }
                 print("iCloud: updated iCloud in \(Date().timeIntervalSince(start)) secs")
                 context.perform {
-                    let invalidItems = info.filter { !$0.isValid }.compactMap { $0.asset.localIdentifier }
+                    let invalidItems = info.filter { !$0.isValid }.flatMap { $0.asset.localIdentifier }
                     print("iCloud: removing \(invalidItems.count) items")
                     self.removeLocalMediaItems(with: invalidItems, completion: {})
                 }
@@ -162,7 +162,7 @@ extension CoreDataStack {
     }
     
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
-        let currentlyInLibriaryIDs: [String] = allList.compactMap { $0.localIdentifier }
+        let currentlyInLibriaryIDs: [String] = allList.flatMap { $0.localIdentifier }
         
         checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs)
         
@@ -170,19 +170,19 @@ extension CoreDataStack {
 
         let alredySaved: [MediaItem] = executeRequest(predicate: predicate, context: context)
         
-        let alredySavedIDs = alredySaved.compactMap { $0.localFileID }
+        let alredySavedIDs = alredySaved.flatMap { $0.localFileID }
         
         return allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) }
     }
     
     func listAssetIdAlreadySaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
-        let currentlyInLibriaryIDs: [String] = allList.compactMap { $0.localIdentifier }
+        let currentlyInLibriaryIDs: [String] = allList.flatMap { $0.localIdentifier }
         
         let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
         
         let alredySaved: [MediaItem] = executeRequest(predicate: predicate, context: context)
         
-        let alredySavedIDs = alredySaved.compactMap { $0.localFileID }
+        let alredySavedIDs = alredySaved.flatMap { $0.localFileID }
         
         return allList.filter { alredySavedIDs.contains( $0.localIdentifier ) }
     }
@@ -207,7 +207,7 @@ extension CoreDataStack {
                 ///Appearantly after recovery local ID may change, so temporary soloution is to check all files all over. and in the future chenge DataBase behavior heavily
                 let assetsList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
                 
-                self?.checkLocalFilesExistence(actualPhotoLibItemsIDs: assetsList.compactMap{$0.localIdentifier}, complition: completion)
+                self?.checkLocalFilesExistence(actualPhotoLibItemsIDs: assetsList.flatMap{$0.localIdentifier}, complition: completion)
             })
         }
  
@@ -277,7 +277,7 @@ extension CoreDataStack {
             let sortedItems = items.sorted { $0.fileSizeValue < $1.fileSizeValue }
             SingletonStorage.shared.getUniqueUserID(success: { userId in
                 let filtredArray = sortedItems.filter { !$0.syncStatusesArray.contains(userId) }
-                completion(filtredArray.compactMap { $0.wrapedObject })
+                completion(filtredArray.flatMap { $0.wrapedObject })
             }, fail: {
                 completion([])
             })
@@ -287,7 +287,7 @@ extension CoreDataStack {
     
     private func getUnsyncsedMediaItems(video: Bool, image: Bool, completion: @escaping (_ items: [MediaItem]) -> Void) {
         let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
-        let currentlyInLibriaryLocalIDs: [String] = assetList.compactMap { $0.localIdentifier }
+        let currentlyInLibriaryLocalIDs: [String] = assetList.flatMap { $0.localIdentifier }
         
         var filesTypesArray = [Int16]()
         if (video) {
