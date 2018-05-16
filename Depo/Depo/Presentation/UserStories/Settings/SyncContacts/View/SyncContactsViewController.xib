@@ -89,10 +89,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iM8-Y4-P5K" customClass="ButtonWithGrayCorner" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="147" y="37.333333333333314" width="120" height="29"/>
+                                            <rect key="frame" x="146.66666666666666" y="37.333333333333314" width="120.99999999999997" height="29"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="29" id="Zm0-6y-rlt"/>
-                                                <constraint firstAttribute="width" constant="120" id="hRE-w6-A69"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="hRE-w6-A69"/>
                                             </constraints>
                                             <state key="normal" title="Manage Contacts"/>
                                             <connections>
