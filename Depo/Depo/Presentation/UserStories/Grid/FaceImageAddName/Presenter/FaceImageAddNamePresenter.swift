@@ -34,7 +34,7 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
     }
     
     override func getContentWithSuccess(items: [WrapData]) {
-        clearItems()
+        dataSource.dropData()
         super.getContentWithSuccess(items: items.filter { $0.id != currentItem?.id })
         asyncOperationSucces()
     }
@@ -56,15 +56,6 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
             router.showMerge(firstUrl: currentItemURL, secondUrl: itemUrl, completion: yesHandler)
         }
     }
-
-    // MARK: - Utility methods
-    
-    private func clearItems() {
-//        dataSource.allLocalItems = [WrapData]()
-        dataSource.allMediaItems = [WrapData]()
-        dataSource.allItems = [[WrapData]]()
-    }
-
 }
 
 // MARK: - FaceImageAddNameViewOutput
