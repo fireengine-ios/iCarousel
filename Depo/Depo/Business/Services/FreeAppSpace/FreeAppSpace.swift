@@ -390,11 +390,9 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 }
                 if !items.isEmpty {
                     for localObject in items {
-                        if self.localMD5Array.index(where: { $0 == localObject.md5 }) == nil {
-                            file.metaData?.takenDate = Date()
-                            self.duplicatesArray.append(localObject)
-                            self.localMD5Array.append(localObject.md5)
-                        }
+                        file.metaData?.takenDate = Date()
+                        self.duplicatesArray.append(localObject)
+                        self.localMD5Array.append(localObject.md5)
                     }
                     self.sortDuplicatesArray()
                 }
