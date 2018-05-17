@@ -11,6 +11,9 @@ protocol MoreFilesActionsInteractorOutput: class, BaseAsyncOperationInteractorOu
     func operationFailed(type: ElementTypes, message: String)
     func operationStarted(type: ElementTypes)
     func showWrongFolderPopup()
-    
     func dismiss(animated: Bool)
+    func showOutOfSpaceAlert(failedType type: ElementTypes)
+}
+extension MoreFilesActionsInteractorOutput {
+    func showOutOfSpaceAlert(failedType type: ElementTypes) {}
 }
