@@ -307,14 +307,20 @@ class FileService: BaseRequestService {
     
     func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail: FailResponse?) {
         log.debug("FileService download")
+        
+        let supportedItemsToDownload = items.filter { $0.hasSupportedExtension() }
+        
+        if supportedItemsToDownload.count != items.count {
+            //TODO: Show error popup
+        }
 
-        let allOperationsCount = items.count
+        let allOperationsCount = supportedItemsToDownload.count
         CardsManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
-        let downLoadRequests: [BaseDownloadRequestParametrs] = items.flatMap {
+        let downloadRequests: [BaseDownloadRequestParametrs] = supportedItemsToDownload.flatMap {
             BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name, item: $0)
         }
         var completedOperationsCount = 0
-        let operations = downLoadRequests.flatMap {
+        let operations = downloadRequests.flatMap {
             DownLoadOperation(downloadParam: $0, success: {
                 completedOperationsCount = completedOperationsCount + 1
                 CardsManager.default.setProgressForOperationWith(type: .download,
