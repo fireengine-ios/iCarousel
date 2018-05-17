@@ -34,6 +34,7 @@ final class FaceImagePhotosConfigurator {
         presenter.view = viewController
         presenter.router = router
         presenter.faceImageItemsModuleOutput = moduleOutput
+        presenter.needShowEmptyMetaItems = true
         
         let remoteServices = FaceImageDetailService(albumUUID: album.uuid, requestSize: RequestSizeConstant.faceImageItemsRequestSize)
         

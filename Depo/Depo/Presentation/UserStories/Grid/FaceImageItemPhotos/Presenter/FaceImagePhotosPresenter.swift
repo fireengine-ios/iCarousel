@@ -83,6 +83,14 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func filesAppendedAndSorted() {
+        super.filesAppendedAndSorted()
+        
+        if !dataSource.isPaginationDidEnd && dataSource.allItems.isEmpty {
+            getNextItems()
+        }
+    }
+    
     override func getSortTypeString() -> String {
         return ""
     }

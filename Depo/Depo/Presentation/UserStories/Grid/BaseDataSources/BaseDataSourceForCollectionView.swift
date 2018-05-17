@@ -163,14 +163,19 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         var filteredItems = [WrapData]()
         if needShowEmptyMetaItems {
-            items.forEach {
-                if !$0.isLocalItem, $0.metaData?.takenDate != nil {
-                   filteredItems.append($0)
-                } else {
-                    emptyMetaItems.append($0)
+            if let unwrapedFilters = self.originalFilters,
+                !self.showOnlyRemotes(filters: unwrapedFilters) {
+                items.forEach {
+                    if !$0.isLocalItem, $0.metaData?.takenDate != nil {
+                        filteredItems.append($0)
+                    } else {
+                        emptyMetaItems.append($0)
+                    }
                 }
+                pageCompounder.appendNotAllowedItems(items: emptyMetaItems)
+            } else {
+                filteredItems = items
             }
-            pageCompounder.appendNotAllowedItems(items: emptyMetaItems)
         } else {
             filteredItems = items.filter {
                 if $0.fileType == .image, !$0.isLocalItem {
@@ -787,12 +792,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return first < second
         })
         debugPrint("Reload updateDisplayngType")
-        collectionView?.reloadData()
-        if let firstVisibleIndexPath = firstVisibleIndexPath{
-            if firstVisibleIndexPath.row == 0, firstVisibleIndexPath.section == 0 {
-                collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .centeredVertically, animated: false)
-            }else{
-                collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .top, animated: false)
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+            if let firstVisibleIndexPath = firstVisibleIndexPath {
+                if firstVisibleIndexPath.row == 0, firstVisibleIndexPath.section == 0 {
+                    self.collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .centeredVertically, animated: false)
+                } else{
+                    self.collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .top, animated: false)
+                }
             }
         }
     }
@@ -1629,8 +1636,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 //FIXME: arrayOfPathForUpdate is never used
             }
         }
-
-        collectionView?.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+        }
     }
     
     func newFolderCreated(){
