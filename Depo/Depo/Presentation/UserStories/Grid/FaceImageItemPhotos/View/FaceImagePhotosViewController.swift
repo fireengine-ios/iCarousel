@@ -22,8 +22,6 @@ import UIKit
     private var albumsHeightConstraint: NSLayoutConstraint?
     private var headerImageHeightConstraint: NSLayoutConstraint?
     
-    private var sortType: SortedRules?
-        
     // MARK: - UIViewController lifecycle
     
     override func viewDidLayoutSubviews() {
@@ -49,13 +47,11 @@ import UIKit
         
         configureFaceImageItemsPhotoActions()
         
-        
         configureNavBarWithTouch()
     }
     
     override func changeSortingRepresentation(sortType type: SortedRules) {
         super.changeSortingRepresentation(sortType: type)
-        sortType = type
 
         configureNavBarWithTouch()
     }
@@ -67,14 +63,11 @@ import UIKit
     }
     
     private func configureTitleNavigationBar() {
-        if mainTitle.count == 0 {
+        if mainTitle.isEmpty {
             mainTitle = TextConstants.faceImageAddName
         }
         
-        if let output = output as? FaceImagePhotosViewOutput,
-            let type = output.faceImageType(), type == .people {
-            configureNavBarWithTouch()
-        }
+        configureNavBarWithTouch()
     }
 
     // MARK: - Header View Methods
@@ -155,11 +148,7 @@ import UIKit
     }
     
     private func configureNavBarWithTouch() {
-        if let sortType = sortType {
-            setTitle(withString: mainTitle, andSubTitle: sortType.descriptionForTitle)
-        } else {
-            setTouchableTitle(title: mainTitle)
-        }
+        setTitle(withString: mainTitle, andSubTitle: output.getCurrentSortRule().descriptionForTitle)
         
         if let output = output as? FaceImagePhotosViewOutput,
             let type = output.faceImageType(), type == .people {
