@@ -167,7 +167,7 @@ class MenloworksTags {
     
     class ContactSyncPageOpen: MenloworksTag {
         init() {
-            super.init(name: NameConstants.documentsOpen)
+            super.init(name: NameConstants.contactSyncPageOpen)
         }
     }
 
@@ -398,6 +398,7 @@ class MenloworksTags {
             super.init(name: NameConstants.favoritesPageClicked)
         }
     }
+    
 }
 
 class MenloworksTag {
