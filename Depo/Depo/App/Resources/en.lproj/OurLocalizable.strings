@@ -647,8 +647,6 @@
 "LifeboxSmallPopUpCheckBoxTex" = "LifeboxSmallPopUpCheckBoxTex";
 "LifeboxSmallPopUpFirstButtonText" = "LifeboxSmallPopUpFirstButtonText";
 "LifeboxSmallPopUpSecondButtonText" = "LifeboxSmallPopUpSecondButtonText";
-"has_remained_lifebox_usage" = "";
-"Renewal Date: %@" = "";
 "created" = "created";
 "uploaded" = "uploaded";
 "updated" = "updated";
