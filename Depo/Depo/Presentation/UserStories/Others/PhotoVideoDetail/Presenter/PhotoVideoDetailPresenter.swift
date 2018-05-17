@@ -43,6 +43,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
                                          style: barConfig.style,
                                          tintColor: barConfig.tintColor)
         }
+//        if let currentItem = item
         return barConfig
     }
     
