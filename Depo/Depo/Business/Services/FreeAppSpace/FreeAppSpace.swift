@@ -24,6 +24,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     private var localMD5Array = SynchronizedArray<String>()
     private var duplicatesArray = SynchronizedArray<WrapData>()
     private var serverDuplicatesArray = SynchronizedArray<WrapData>()
+    private var localTrimmedID = SynchronizedArray<String>()
     
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.freeAppSpace, attributes: .concurrent)
 
@@ -78,6 +79,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     func clear() {
         localtemsArray.removeAll()
         localMD5Array.removeAll()
+        localTrimmedID.removeAll()
         duplicatesArray.removeAll()
         serverDuplicatesArray.removeAll()
         isSearchRunning = false
@@ -216,6 +218,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         
         localtemsArray.removeAll()
         localMD5Array.removeAll()
+        localTrimmedID.removeAll()
         duplicatesArray.removeAll()
         serverDuplicatesArray.removeAll()
         
@@ -233,6 +236,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             })
             
             self.localMD5Array.append( self.localtemsArray.flatMap{ $0.md5 })
+            self.localTrimmedID.append( self.localtemsArray.flatMap{ $0.getTrimmedLocalID() })
             let latestDate = self.localtemsArray.last?.creationDate ?? Date()
             
             //need to check have we duplicates
@@ -268,6 +272,12 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
         var finished = false
         
+        print("local")
+        for md5 in localMD5Array.getArray() {
+            print(md5)
+        }
+        print("server")
+        
         service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] items in
             self?.dispatchQueue.async { [weak self] in
                 guard let `self` = self else {
@@ -277,6 +287,8 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 
                 
                 for item in items {
+                    print(item.md5)
+                    
                     if let date = item.creationDate, date < latestDate {
                         finished = true
                         break
@@ -288,6 +300,19 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                         self.duplicatesArray.append(elementToAdd)
                         self.localtemsArray.remove(at: index)
                         self.localMD5Array.remove(at: index)
+                        self.localTrimmedID.remove(at: index)
+                        
+                        if self.localtemsArray.isEmpty {
+                            finished = true
+                            break
+                        }
+                    }else if let index = self.localTrimmedID.index(where:{ $0 == item.getTrimmedLocalID() }),
+                        let elementToAdd = self.localtemsArray[index] {
+                        self.serverDuplicatesArray.append(item)
+                        self.duplicatesArray.append(elementToAdd)
+                        self.localtemsArray.remove(at: index)
+                        self.localMD5Array.remove(at: index)
+                        self.localTrimmedID.remove(at: index)
                         
                         if self.localtemsArray.isEmpty {
                             finished = true
@@ -341,6 +366,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 if self.localMD5Array.index(where: { $0 == file.md5 }) == nil {
                     file.metaData?.takenDate = Date()
                     self.localMD5Array.append(file.md5)
+                    self.localTrimmedID.append(file.getTrimmedLocalID())
                 }
                 self.duplicatesArray.append(file)
             } else {
@@ -369,6 +395,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     if self.localMD5Array.index(where: { $0 == localObject.md5 }) == nil {
                         file.metaData?.takenDate = Date()
                         self.localMD5Array.append(localObject.md5)
+                        self.localTrimmedID.append(localObject.getTrimmedLocalID())
                     }
                     self.duplicatesArray.append(localObject)
                 }
@@ -390,11 +417,10 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 }
                 if !items.isEmpty {
                     for localObject in items {
-                        if self.localMD5Array.index(where: { $0 == localObject.md5 }) == nil {
-                            file.metaData?.takenDate = Date()
-                            self.duplicatesArray.append(localObject)
-                            self.localMD5Array.append(localObject.md5)
-                        }
+                        file.metaData?.takenDate = Date()
+                        self.duplicatesArray.append(localObject)
+                        self.localMD5Array.append(localObject.md5)
+                        self.localTrimmedID.append(localObject.getTrimmedLocalID())
                     }
                     self.sortDuplicatesArray()
                 }
