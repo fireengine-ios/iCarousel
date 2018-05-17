@@ -341,6 +341,11 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
+    func onSocialMediaPageClicked() {
+        let tag = MenloworksTags.SocialMediaPageClicked()
+        hitTag(tag)
+    }
+    
     // MARK: - Accessory methods
     
     private func hitTag(_ tag: MenloworksTag) {

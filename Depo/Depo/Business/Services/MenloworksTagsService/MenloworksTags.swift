@@ -399,6 +399,12 @@ class MenloworksTags {
         }
     }
     
+    class SocialMediaPageClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.socialMediaPageClicked)
+        }
+    }
+    
 }
 
 class MenloworksTag {
