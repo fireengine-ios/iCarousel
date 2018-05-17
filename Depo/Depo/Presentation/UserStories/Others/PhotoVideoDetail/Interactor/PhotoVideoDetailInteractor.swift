@@ -75,11 +75,10 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 if let syncIndex = elementsConfig.index(of: .sync) {
                     elementsConfig[syncIndex] = .download
                 }
-            } else {
-                if let syncIndex = elementsConfig.index(of: .download) {
-                    elementsConfig[syncIndex] = .sync
-                }
+            } else if let syncIndex = elementsConfig.index(of: .download) {
+                elementsConfig[syncIndex] = .sync
             }
+            
             
             return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
         case .application:
