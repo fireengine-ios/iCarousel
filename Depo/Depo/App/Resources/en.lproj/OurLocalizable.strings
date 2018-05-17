@@ -83,7 +83,6 @@
 "%ld docs" = "%ld documents";
 "Quota info" = "Usage info";
 "%@ of %@ has remained" = "%1$@ of %2$@ has remained";
-"has_remained_lifebox_usage" = "%@ of %@ has remained (only for lifebox usage)";
 "%ld documents" = "%ld documents";
 "%ld songs" = "%ld songs";
 "%ld videos" = "%ld videos";
@@ -635,8 +634,6 @@
 "You have not enough memory in your device" = "You have not enough memory in your device";
 "The purchase was canceled" = "The purchase was canceled";
 "The purchase in progress" = "The purchase in progress";
-"Renewal Date: %@" = "Renewal Date: %@";
-"Expiration Date: %@" = "Expiration Date: %@";
 "You have no duplicated contacts!" = "You have no duplicated contacts!";
 "Daily" = "Daily";
 "Weekly" = "Weekly";
@@ -647,6 +644,8 @@
 "LifeboxSmallPopUpCheckBoxTex" = "LifeboxSmallPopUpCheckBoxTex";
 "LifeboxSmallPopUpFirstButtonText" = "LifeboxSmallPopUpFirstButtonText";
 "LifeboxSmallPopUpSecondButtonText" = "LifeboxSmallPopUpSecondButtonText";
+"has_remained_lifebox_usage" = "";
+"Renewal Date: %@" = "";
 "created" = "created";
 "uploaded" = "uploaded";
 "updated" = "updated";
