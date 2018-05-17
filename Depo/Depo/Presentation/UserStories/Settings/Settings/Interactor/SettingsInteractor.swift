@@ -49,22 +49,23 @@ class SettingsInteractor: SettingsInteractorInput {
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
                       TextConstants.settingsViewCellLogout]]
-        accountSerivese.info(success: { [weak self] responce in
+        
+        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
             guard let `self` = self else {
                 return
             }
             DispatchQueue.main.async {
-                self.userInfoResponse = responce as? AccountInfoResponse
+                self.userInfoResponse = response
                 if self.isTurkcellUser {
                     array[1].append(TextConstants.settingsViewCellLoginSettings)
                 }
                 self.output.cellsDataForSettings(array: array)
             }
-            
         }, fail: { [weak self] error in
             DispatchQueue.main.async {
                 self?.output.cellsDataForSettings(array: array)
             }
+
         })
     }
 
