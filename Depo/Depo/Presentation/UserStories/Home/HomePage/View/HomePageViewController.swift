@@ -296,6 +296,7 @@ extension HomePageViewController: HomeViewTopViewActions {
     }
     
     func favoritesButtonGotPressed() {
+        MenloworksTagsService.shared.onFavoritesPageClicked()
         output.favoritesPressed()
     }
     

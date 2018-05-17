@@ -336,6 +336,11 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
+    func onFavoritesPageClicked() {
+        let tag = MenloworksTags.FavoritesPageClicked()
+        hitTag(tag)
+    }
+    
     // MARK: - Accessory methods
     
     private func hitTag(_ tag: MenloworksTag) {

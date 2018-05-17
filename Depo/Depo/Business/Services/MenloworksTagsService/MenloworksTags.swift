@@ -392,6 +392,12 @@ class MenloworksTags {
             super.init(name: NameConstants.twoThousandFiveHundredGBPurchasedStatus)
         }
     }
+    
+    class FavoritesPageClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.favoritesPageClicked)
+        }
+    }
 }
 
 class MenloworksTag {
