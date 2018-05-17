@@ -54,7 +54,7 @@ class SettingsInteractor: SettingsInteractorInput {
             guard let `self` = self else {
                 return
             }
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self.userInfoResponse = response
                 if self.isTurkcellUser {
                     array[1].append(TextConstants.settingsViewCellLoginSettings)
@@ -62,7 +62,7 @@ class SettingsInteractor: SettingsInteractorInput {
                 self.output.cellsDataForSettings(array: array)
             }
         }, fail: { [weak self] error in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output.cellsDataForSettings(array: array)
             }
 
