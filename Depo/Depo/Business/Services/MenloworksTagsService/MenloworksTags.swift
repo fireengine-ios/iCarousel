@@ -20,12 +20,6 @@ class MenloworksTags {
         }
     }
     
-    class PhotoUpload: MenloworksBoolTag {
-        init(isWiFi: Bool) {
-            super.init(name: NameConstants.photoUpload, value: isWiFi, boolType: .wifiMobile)
-        }
-    }
-    
     class WiFi3G: MenloworksBoolTag {
         init(isWiFi: Bool) {
             super.init(name: NameConstants.wifi3g, value: isWiFi, boolType: .wifiMobile)
@@ -83,12 +77,6 @@ class MenloworksTags {
     class MusicUpload: MenloworksTag {
         init() {
             super.init(name: NameConstants.musicUpload)
-        }
-    }
-    
-    class VideoUpload: MenloworksTag {
-        init() {
-            super.init(name: NameConstants.videoUpload)
         }
     }
     
@@ -392,6 +380,43 @@ class MenloworksTags {
             super.init(name: NameConstants.twoThousandFiveHundredGBPurchasedStatus)
         }
     }
+    
+    class PhotoUploadAutosync: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.photoUploadAutosync)
+        }
+    }
+    
+    class PhotoUploadManual: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.photoUploadManual)
+        }
+    }
+    
+    class PhotoUploadBackground: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.photoUploadBackground)
+        }
+    }
+    
+    class VideoUploadAutosync: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.videoUploadAutosync)
+        }
+    }
+    
+    class VideoUploadManual: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.videoUploadManual)
+        }
+    }
+    
+    class VideoUploadBackground: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.videoUploadBackground)
+        }
+    }
+
 }
 
 class MenloworksTag {
