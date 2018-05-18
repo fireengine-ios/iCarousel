@@ -626,7 +626,7 @@ extension UploadService {
                                                 })
         })
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             RouterVC().tabBarVC?.present(controller, animated: false, completion: nil)
         }
     }
