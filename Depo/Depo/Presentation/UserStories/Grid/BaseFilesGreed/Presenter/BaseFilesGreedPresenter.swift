@@ -45,6 +45,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var needShowEmptyMetaItems = false
     
+    var ifNeedReloadData = true
+    
     private let semaphore = DispatchSemaphore(value: 0)
     
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreed)
@@ -378,7 +380,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func needReloadData() {
-        reloadData()
+        if ifNeedReloadData {
+            reloadData()
+        }
     }
     
     func filesAppendedAndSorted() {
