@@ -55,4 +55,6 @@ protocol BaseFilesGreedViewOutput {
     func updateThreeDotsButton()
     
     func updateNoFilesView()
+    
+    func showOnlySyncedItems(_ value: Bool)
 }

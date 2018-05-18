@@ -2542,6 +2542,10 @@
 		9826DB40207F60F900C00238 /* CustomScrollIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */; };
 		9826DB42207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
 		9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
+		9840C62220AEAD6B00A8634F /* CheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840C62120AEAD6B00A8634F /* CheckBoxView.xib */; };
+		9840C62320AEAD6B00A8634F /* CheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840C62120AEAD6B00A8634F /* CheckBoxView.xib */; };
+		9840C62520AEAD8100A8634F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9840C62420AEAD8100A8634F /* CheckBoxView.swift */; };
+		9840C62620AEAD8100A8634F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9840C62420AEAD8100A8634F /* CheckBoxView.swift */; };
 		984F8E7D200CDEA200D9D595 /* StoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */; };
 		984F8E7F200CE10100D9D595 /* StoriesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */; };
 		98570AFA208F7558002CCEBA /* SpotlightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98570AF7208F7556002CCEBA /* SpotlightViewController.swift */; };
@@ -5030,6 +5034,8 @@
 		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
 		9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollIndicator.swift; sourceTree = "<group>"; };
 		9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomScrollIndicator.xib; sourceTree = "<group>"; };
+		9840C62120AEAD6B00A8634F /* CheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBoxView.xib; sourceTree = "<group>"; };
+		9840C62420AEAD8100A8634F /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInteractor.swift; sourceTree = "<group>"; };
 		984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInitializer.swift; sourceTree = "<group>"; };
 		98570AF7208F7556002CCEBA /* SpotlightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightViewController.swift; sourceTree = "<group>"; };
@@ -7298,6 +7304,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				9840C62020AEAD1C00A8634F /* CheckBoxView */,
 				7CA4A160207E3D4E00F270C8 /* FullOfQuotaPopUps */,
 				9826DB3D207F60BC00C00238 /* CustomScrollIndicator */,
 				8CF6A9C0207C8CF8007DEF71 /* CollectionViewFooter */,
@@ -9772,6 +9779,15 @@
 				9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */,
 			);
 			path = CustomScrollIndicator;
+			sourceTree = "<group>";
+		};
+		9840C62020AEAD1C00A8634F /* CheckBoxView */ = {
+			isa = PBXGroup;
+			children = (
+				9840C62120AEAD6B00A8634F /* CheckBoxView.xib */,
+				9840C62420AEAD8100A8634F /* CheckBoxView.swift */,
+			);
+			path = CheckBoxView;
 			sourceTree = "<group>";
 		};
 		98A8677C2088C64D00D2D4F4 /* SpotlightViewController */ = {
@@ -12823,6 +12839,7 @@
 				8C06B00D2008AD71003D8E05 /* kucuk_ucgen.png in Resources */,
 				8C0E90611FDEBDFF00789C91 /* ActionsMenuTableViewCell.xib in Resources */,
 				8C06B0CF2008AD71003D8E05 /* sample_green.png in Resources */,
+				9840C62320AEAD6B00A8634F /* CheckBoxView.xib in Resources */,
 				8C06AF452008AD70003D8E05 /* crop_icon.png in Resources */,
 				8C06B0B32008AD71003D8E05 /* rotate@2x.png in Resources */,
 				7C4F60B4201C675F0033C58F /* MovieCard.xib in Resources */,
@@ -13431,6 +13448,7 @@
 				8C06AF922008AD71003D8E05 /* filtre@2x.png in Resources */,
 				7CA4A173207E49F200F270C8 /* SmallFullOfQuotaPopUp.xib in Resources */,
 				8C06AFB22008AD71003D8E05 /* frekans@3x.png in Resources */,
+				9840C62220AEAD6B00A8634F /* CheckBoxView.xib in Resources */,
 				8C06AED82008AD70003D8E05 /* bold@3x.png in Resources */,
 				8C06AEEC2008AD70003D8E05 /* Buyuk@3x.png in Resources */,
 				8C06B0582008AD71003D8E05 /* paylas_akilli_depo.png in Resources */,
@@ -14374,6 +14392,7 @@
 				8C0E8E2E1FDEBDFF00789C91 /* BottomSelectionTabBarViewOutput.swift in Sources */,
 				8C0E8E2F1FDEBDFF00789C91 /* ActivityTimelineServiceResponse.swift in Sources */,
 				8C0E8E311FDEBDFF00789C91 /* ImportFromInstagramPresenter.swift in Sources */,
+				9840C62620AEAD8100A8634F /* CheckBoxView.swift in Sources */,
 				8C0E8E321FDEBDFF00789C91 /* UsageInfoInteractorOutput.swift in Sources */,
 				8C0E8E331FDEBDFF00789C91 /* SyncServiceManager.swift in Sources */,
 				8C0E8E341FDEBDFF00789C91 /* UploadFromLifeBoxViewController.swift in Sources */,
@@ -15638,6 +15657,7 @@
 				8C7786A01F3F38EF005CB432 /* VisualMusicPlayerInteractorInput.swift in Sources */,
 				8CFF868A1F0F96E600520D18 /* ContactDevice.m in Sources */,
 				4A9B3902201F3513009FC572 /* FaceImageItemsPresenter.swift in Sources */,
+				9840C62520AEAD8100A8634F /* CheckBoxView.swift in Sources */,
 				8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
 				2EB5EE9DB087C1F0CEAF1343 /* BaseFilesGreedInteractor.swift in Sources */,
 				78D9BA3E2007E80600F2233F /* DuplicatedContactsPresenter.swift in Sources */,

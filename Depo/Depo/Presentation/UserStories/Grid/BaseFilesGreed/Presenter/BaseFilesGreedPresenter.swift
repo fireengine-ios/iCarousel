@@ -24,6 +24,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var filters: [GeneralFilesFiltrationType] = []
     
+    private var filtersByDefault: [GeneralFilesFiltrationType] = []
+    
     var bottomBarConfig: EditingBarConfig?
     
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
@@ -538,6 +540,25 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onMaxSelectionExeption() {
         
+    }
+    
+    func showOnlySyncedItems(_ value: Bool) {
+        if value {
+            filtersByDefault = filters
+            filters = filters.filter { type -> Bool in
+                switch type {
+                case .syncStatus(_):
+                    return false
+                default:
+                    return true
+                }
+            }
+            filters.append(.syncStatus(.synced))            
+        } else {
+            filters = filtersByDefault
+        }
+        dataSource.originalFilters = filters
+        reloadData()
     }
     
     // MARK: - MoreActionsViewDelegate
