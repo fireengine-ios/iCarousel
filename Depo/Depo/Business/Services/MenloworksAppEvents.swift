@@ -42,8 +42,8 @@ class MenloworksAppEvents {
         MenloworksTagsService.shared.onTutorial()
     }
     
-    static func onFileUploadedWithType(_ type: FileType) {
-        MenloworksTagsService.shared.onFileUploadedWithType(type)
+    static func onFileUploadedWithType(_ type: FileType, isAutosync: Bool) {
+        MenloworksTagsService.shared.onFileUploadedWithType(type, isAutoSync: isAutosync)
     }
     
     static func onLogin() {

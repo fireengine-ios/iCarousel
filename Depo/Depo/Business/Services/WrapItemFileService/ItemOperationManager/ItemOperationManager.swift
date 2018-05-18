@@ -172,14 +172,14 @@ class ItemOperationManager: NSObject {
     }
     
     
-    func finishedUploadFile(file: WrapData) {
+    func finishedUploadFile(file: WrapData, isAutoSync: Bool) {
         //        DispatchQueue.main.async {
         for view in self.views {
             view.finishedUploadFile(file: file)
         }
         //        }
         
-        MenloworksAppEvents.onFileUploadedWithType(file.fileType)
+        MenloworksAppEvents.onFileUploadedWithType(file.fileType, isAutosync: isAutoSync)
         
         currentUploadingObject = nil
         currentUploadProgress = 0

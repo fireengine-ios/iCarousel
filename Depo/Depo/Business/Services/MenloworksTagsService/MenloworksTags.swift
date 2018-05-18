@@ -20,12 +20,6 @@ class MenloworksTags {
         }
     }
     
-    class PhotoUpload: MenloworksBoolTag {
-        init(isWiFi: Bool) {
-            super.init(name: NameConstants.photoUpload, value: isWiFi, boolType: .wifiMobile)
-        }
-    }
-    
     class WiFi3G: MenloworksBoolTag {
         init(isWiFi: Bool) {
             super.init(name: NameConstants.wifi3g, value: isWiFi, boolType: .wifiMobile)
@@ -83,12 +77,6 @@ class MenloworksTags {
     class MusicUpload: MenloworksTag {
         init() {
             super.init(name: NameConstants.musicUpload)
-        }
-    }
-    
-    class VideoUpload: MenloworksTag {
-        init() {
-            super.init(name: NameConstants.videoUpload)
         }
     }
     
@@ -392,6 +380,43 @@ class MenloworksTags {
             super.init(name: NameConstants.twoThousandFiveHundredGBPurchasedStatus)
         }
     }
+    
+    class PhotoUploadAutosync: MenloworksBoolTag {
+        init(isWiFi: Bool) {
+            super.init(name: NameConstants.photoUploadAutosync, value: isWiFi, boolType: .wifiMobile)
+        }
+    }
+    
+    class PhotoUploadManual: MenloworksBoolTag {
+        init(isWiFi: Bool) {
+            super.init(name: NameConstants.photoUploadManual, value: isWiFi, boolType: .wifiMobile)
+        }
+    }
+    
+    class PhotoUploadBackground: MenloworksBoolTag {
+        init(isWiFi: Bool) {
+            super.init(name: NameConstants.photoUploadBackground, value: isWiFi, boolType: .wifiMobile)
+        }
+    }
+    
+    class VideoUploadAutosync: MenloworksBoolTag {
+        init(isWiFi: Bool) {
+            super.init(name: NameConstants.videoUploadAutosync, value: isWiFi, boolType: .wifiMobile)
+        }
+    }
+    
+    class VideoUploadManual: MenloworksBoolTag {
+        init(isWiFi: Bool) {
+            super.init(name: NameConstants.videoUploadManual, value: isWiFi, boolType: .wifiMobile)
+        }
+    }
+    
+    class VideoUploadBackground: MenloworksBoolTag {
+        init(isWiFi: Bool) {
+            super.init(name: NameConstants.videoUploadBackground, value: isWiFi, boolType: .wifiMobile)
+        }
+    }
+
 }
 
 class MenloworksTag {
