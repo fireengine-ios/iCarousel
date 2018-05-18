@@ -381,39 +381,39 @@ class MenloworksTags {
         }
     }
     
-    class PhotoUploadAutosync: MenloworksTag {
-        init() {
-            super.init(name: NameConstants.photoUploadAutosync)
+    class PhotoUploadAutosync: MenloworksBoolTag {
+        init(isWiFi: Bool) {
+            super.init(name: NameConstants.photoUploadAutosync, value: isWiFi, boolType: .wifiMobile)
         }
     }
     
-    class PhotoUploadManual: MenloworksTag {
-        init() {
-            super.init(name: NameConstants.photoUploadManual)
+    class PhotoUploadManual: MenloworksBoolTag {
+        init(isWiFi: Bool) {
+            super.init(name: NameConstants.photoUploadManual, value: isWiFi, boolType: .wifiMobile)
         }
     }
     
-    class PhotoUploadBackground: MenloworksTag {
-        init() {
-            super.init(name: NameConstants.photoUploadBackground)
+    class PhotoUploadBackground: MenloworksBoolTag {
+        init(isWiFi: Bool) {
+            super.init(name: NameConstants.photoUploadBackground, value: isWiFi, boolType: .wifiMobile)
         }
     }
     
-    class VideoUploadAutosync: MenloworksTag {
-        init() {
-            super.init(name: NameConstants.videoUploadAutosync)
+    class VideoUploadAutosync: MenloworksBoolTag {
+        init(isWiFi: Bool) {
+            super.init(name: NameConstants.videoUploadAutosync, value: isWiFi, boolType: .wifiMobile)
         }
     }
     
-    class VideoUploadManual: MenloworksTag {
-        init() {
-            super.init(name: NameConstants.videoUploadManual)
+    class VideoUploadManual: MenloworksBoolTag {
+        init(isWiFi: Bool) {
+            super.init(name: NameConstants.videoUploadManual, value: isWiFi, boolType: .wifiMobile)
         }
     }
     
-    class VideoUploadBackground: MenloworksTag {
-        init() {
-            super.init(name: NameConstants.videoUploadBackground)
+    class VideoUploadBackground: MenloworksBoolTag {
+        init(isWiFi: Bool) {
+            super.init(name: NameConstants.videoUploadBackground, value: isWiFi, boolType: .wifiMobile)
         }
     }
 

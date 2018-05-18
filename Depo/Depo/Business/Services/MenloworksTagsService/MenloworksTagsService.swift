@@ -38,24 +38,24 @@ class MenloworksTagsService {
         case .image:
             if notInBacground {
                 if isAutoSync {
-                    tag = MenloworksTags.PhotoUploadAutosync()
+                    tag = MenloworksTags.PhotoUploadAutosync(isWiFi: reachabilityService.isReachableViaWiFi)
                 } else {
-                    tag = MenloworksTags.PhotoUploadManual()
+                    tag = MenloworksTags.PhotoUploadManual(isWiFi: reachabilityService.isReachableViaWiFi)
                 }
             }else {
-                tag = MenloworksTags.PhotoUploadBackground()
+                tag = MenloworksTags.PhotoUploadBackground(isWiFi: reachabilityService.isReachableViaWiFi)
             }
         case .audio:
             tag = MenloworksTags.MusicUpload()
         case .video:
             if notInBacground {
                 if isAutoSync {
-                    tag = MenloworksTags.VideoUploadAutosync()
+                    tag = MenloworksTags.VideoUploadAutosync(isWiFi: reachabilityService.isReachableViaWiFi)
                 } else {
-                    tag = MenloworksTags.VideoUploadManual()
+                    tag = MenloworksTags.VideoUploadManual(isWiFi: reachabilityService.isReachableViaWiFi)
                 }
             }else {
-                tag = MenloworksTags.VideoUploadBackground()
+                tag = MenloworksTags.VideoUploadBackground(isWiFi: reachabilityService.isReachableViaWiFi)
             }
         case .allDocs, .unknown, .application:
             tag = MenloworksTags.FileUpload()
