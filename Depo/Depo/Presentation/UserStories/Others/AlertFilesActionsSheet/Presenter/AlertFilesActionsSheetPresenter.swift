@@ -334,6 +334,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .addToFavorites:
                 action = UIAlertAction(title: TextConstants.actionSheetAddToFavorites, style: .default, handler: { _ in
                     MenloworksEventsService.shared.onAddToFavoritesClicked()
+                    MenloworksTagsService.shared.onFavoritesOpen()
                     self.basePassingPresenter?.stopModeSelected()
                     self.interactor.addToFavorites(items: currentItems)
                 })

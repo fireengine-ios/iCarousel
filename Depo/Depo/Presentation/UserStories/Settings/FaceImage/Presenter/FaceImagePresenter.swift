@@ -32,6 +32,8 @@ extension FaceImagePresenter: FaceImageViewOutput {
         if isAllowed {
             router.showPopUp()
         }
+        
+        MenloworksTagsService.shared.faceImageRecognition(isOn: isAllowed)
     }
 }
 

@@ -372,6 +372,26 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
+    func editedPhotoSaved() {
+        let tag = MenloworksTags.EditedPhotoSaved()
+        hitTag(tag)
+    }
+    
+    func faceImageRecognition(isOn: Bool) {
+        let tag = MenloworksTags.FaceImageRecognitionStatus(isEnabled: isOn)
+        hitTag(tag)
+    }
+    
+    func instagramImport(isOn: Bool) {
+        let tag = MenloworksTags.InstagramImportStatus(isEnabled: isOn)
+        self.hitTag(tag)
+    }
+    
+    func facebookImport(isOn: Bool) {
+        let tag = MenloworksTags.FacebookImportStatus(isEnabled: isOn)
+        self.hitTag(tag)
+    }
+    
     // MARK: - Accessory methods
     
     private func hitTag(_ tag: MenloworksTag) {

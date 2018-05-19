@@ -79,6 +79,8 @@ extension MenloworksTags {
         static let twoThousandFiveHundredGBPurchasedStatus = "Satınalındı25TB"
         static let favoritesPageClicked = "favs"
         static let socialMediaPageClicked = "social_media"
+        static let periodicContactSync = "periodic_contact_sync"
+        static let editedPhotoSave = "photo_edit_save"
     }
     
     class ValueConstants {

@@ -147,16 +147,22 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
             
             if photoOption == .wifiAndCellular {
                 MenloworksTagsService.shared.onFirstAutosyncPhotosViaLte()
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: false)
             } else if photoOption == .wifiOnly {
                 MenloworksTagsService.shared.onFirstAutosyncPhotosViaWifi()
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: true)
             }
             
             if videoOption == .wifiAndCellular {
                 MenloworksTagsService.shared.onFirstAutosyncVideoViaLte()
+                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi:false)
             } else if videoOption == .wifiOnly {
                 MenloworksTagsService.shared.onFirstAutosyncVideoViaWifi()
+                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi:true)
             }
+            
         }
+        
     }
     
     @IBAction func onSkipButtn() {

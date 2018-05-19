@@ -434,6 +434,11 @@ class MenloworksTags {
             super.init(name: NameConstants.socialMediaPageClicked)
         }
     }
+    class EditedPhotoSaved: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.editedPhotoSave)
+        }
+    }
     
 }
 

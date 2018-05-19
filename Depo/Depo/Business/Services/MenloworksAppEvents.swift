@@ -149,7 +149,6 @@ class MenloworksAppEvents {
     }
     
     static func onFavoritesOpen() {
-        MenloworksTagsService.shared.onFavoritesOpen()
         MenloworksEventsService.shared.onFavoritesOpen()
     }
     

@@ -651,6 +651,7 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
     }
     
     private func save(image: UIImage) {
+        MenloworksTagsService.shared.editedPhotoSaved()
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }
