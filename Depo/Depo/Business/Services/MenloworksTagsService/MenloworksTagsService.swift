@@ -213,6 +213,26 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
+    func onFirstAutosyncVideoViaWifi() {
+        let tag = MenloworksTags.FirstAutoSyncVideosViaWifi()
+        hitTag(tag)
+    }
+    
+    func onFirstAutosyncVideoViaLte() {
+        let tag = MenloworksTags.FirstAutoSyncVideosViaLte()
+        hitTag(tag)
+    }
+    
+    func onFirstAutosyncPhotosViaWifi() {
+        let tag = MenloworksTags.FirstAutoSyncPhotosViaWifi()
+        hitTag(tag)
+    }
+    
+    func onFirstAutosyncPhotosViaLte() {
+        let tag = MenloworksTags.FirstAutoSyncPhotosViaLte()
+        hitTag(tag)
+    }
+    
     func onSignUp() {
         let tag = MenloworksTags.SignUpCompleted()
         hitTag(tag)
@@ -301,6 +321,12 @@ class MenloworksTagsService {
     func onAutosyncStatus(isOn: Bool) {
         let tag = MenloworksTags.AutosyncStatus(isOn: isOn)
         hitTag(tag)
+    }
+    
+    func onFirstAutoSyncOff() {
+        let tag = MenloworksTags.AutosyncFirstOff()
+        hitTag(tag)
+        
     }
     
     func onAutosyncPhotosStatusOff() {

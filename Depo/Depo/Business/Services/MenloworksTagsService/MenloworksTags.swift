@@ -195,9 +195,21 @@ class MenloworksTags {
         }
     }
     
+    class FirstAutoSyncVideosViaWifi: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.firstAutoSyncVideosViaWifi)
+        }
+    }
+    
     class AutoSyncVideosViaLte: MenloworksTag {
         init() {
             super.init(name: NameConstants.autoSyncVideosViaLte)
+        }
+    }
+    
+    class FirstAutoSyncVideosViaLte: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.firstAutoSyncVideosViaLte)
         }
     }
     
@@ -207,9 +219,21 @@ class MenloworksTags {
         }
     }
     
+    class FirstAutoSyncPhotosViaWifi: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.firstAutoSyncPhotosViaWifi)
+        }
+    }
+    
     class AutoSyncPhotosViaLte: MenloworksTag {
         init() {
             super.init(name: NameConstants.autoSyncPhotosViaLte)
+        }
+    }
+    
+    class FirstAutoSyncPhotosViaLte: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.firstAutoSyncPhotosViaLte)
         }
     }
     
@@ -360,6 +384,12 @@ class MenloworksTags {
     class AutosyncStatus: MenloworksBoolTag {
         init(isOn: Bool) {
             super.init(name: NameConstants.autosyncStatus, value: isOn, boolType: .onOff)
+        }
+    }
+    
+    class AutosyncFirstOff: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.firstAutoSyncOff)
         }
     }
     
