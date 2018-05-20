@@ -263,11 +263,8 @@ extension CoreDataStack {
     
     func hasLocalItemsForSync(video: Bool, image: Bool, completion: @escaping  (_ has: Bool) -> Void) {
         getUnsyncsedMediaItems(video: video, image: image, completion: { items in
-            let currentUserID = SingletonStorage.shared.uniqueUserID
-            
-            let filteredArray = items.filter { !$0.syncStatusesArray.contains(currentUserID) }
-            
-            completion(!filteredArray.isEmpty)
+            let wrappedItems = items.flatMap { $0.wrapedObject }
+            completion(!AppMigrator.migrateSyncStatus(for: wrappedItems).isEmpty)
         })
         
     }
@@ -275,13 +272,9 @@ extension CoreDataStack {
     func allLocalItemsForSync(video: Bool, image: Bool, completion: @escaping (_ items: [WrapData]) -> Void) {
         getUnsyncsedMediaItems(video: video, image: image, completion: { items in
             let sortedItems = items.sorted { $0.fileSizeValue < $1.fileSizeValue }
-            SingletonStorage.shared.getUniqueUserID(success: { userId in
-                let filtredArray = sortedItems.filter { !$0.syncStatusesArray.contains(userId) }
-                completion(filtredArray.flatMap { $0.wrapedObject })
-            }, fail: {
-                completion([])
-            })
+            let wrappedItems = sortedItems.flatMap { $0.wrapedObject }
             
+            completion(AppMigrator.migrateSyncStatus(for: wrappedItems))
         })
     }
     
@@ -299,7 +292,7 @@ extension CoreDataStack {
         
         let context = newChildBackgroundContext
         newChildBackgroundContext.perform { [weak self] in
-            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@)", filesTypesArray, currentlyInLibriaryLocalIDs)
+            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@) AND (SUBQUERY(objectSyncStatus, $x, $x.userID == %@).@count == 0)", filesTypesArray, currentlyInLibriaryLocalIDs, SingletonStorage.shared.uniqueUserID)
            completion(self?.executeRequest(predicate: predicate, context: context) ?? [])
         }
         

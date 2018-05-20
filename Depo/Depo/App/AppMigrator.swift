@@ -62,9 +62,15 @@ final class AppMigrator {
 //MARK: - Items sync status migration
 
 extension AppMigrator {
-    static func migrateSyncStatus(for wrapData: WrapData) {
+    
+    static func migrateSyncStatus(for wrapDataItems: [WrapData]) -> [WrapData] {
+        return wrapDataItems.filter { !migrateSyncStatus(for: $0) }
+    }
+    
+    @discardableResult
+    private static func migrateSyncStatus(for wrapData: WrapData) -> Bool {
         guard let fileExtension = wrapData.name?.components(separatedBy: ".").last?.uppercased() else {
-            return
+            return false
         }
         
         let deprecatedUrl = String(format: "assets-library://asset/asset.%@?id=%@&ext=%@", fileExtension, wrapData.getTrimmedLocalID(), fileExtension)
@@ -77,8 +83,10 @@ extension AppMigrator {
         
         if isSynced {
             wrapData.setSyncStatusesAsSyncedForCurrentUser()
+            CoreDataStack.default.updateLocalItemSyncStatus(item: wrapData)
         }
         debugPrint("\(wrapData.name) isSynced = \(isSynced) in UD: \(isInUserDefaultsHashes), in BD: \(isInDBHashes)")
+        return isSynced
     }
     
     private static func oldMD5(from deprecatedUrl: String) -> String {
