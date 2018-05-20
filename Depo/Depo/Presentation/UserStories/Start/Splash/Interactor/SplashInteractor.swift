@@ -27,33 +27,40 @@ class SplashInteractor: SplashInteractorInput {
             } else {
                 authenticationService.turkcellAuth(success: { [weak self] in
                     self?.tokenStorage.isRememberMe = true
-                    self?.turkcellSuccessLogin()
+                    SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
+                        self?.turkcellSuccessLogin()
+                    }, fail: { [weak self] error in
+                        self?.output.asyncOperationSucces()
+                        self?.output.onFailLogin()
+                    })
                 }, fail: { [weak self] response in
                     self?.output.asyncOperationSucces()
                     self?.output.onFailLogin()
                 })
             }
         } else {
-            successLogin()
+            SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
+                self?.successLogin()
+            }, fail: { [weak self] error in
+                self?.failLogin()
+            })
         }
     }
     
     func turkcellSuccessLogin() {
-        SingletonStorage.shared.updateAccountInfo()
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.output.onSuccessLoginTurkcell()
         }
     }
     
     func successLogin() {
-        SingletonStorage.shared.updateAccountInfo()
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.output.onSuccessLogin()
         }
     }
     
     func failLogin() {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.output.onFailLogin()
             if !ReachabilityService().isReachable {
                 self.output.onNetworkFail()
@@ -64,11 +71,11 @@ class SplashInteractor: SplashInteractorInput {
     func checkEULA() {
         let eulaService = EulaService()
         eulaService.eulaCheck(success: { [weak self] successResponce in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output.onSuccessEULA()
             }
         }) { [weak self] errorResponce in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 if case ErrorResponse.error(let error) = errorResponce, error.isNetworkError {
                     UIApplication.showErrorAlert(message: errorResponce.description)
                 } else {
@@ -80,7 +87,7 @@ class SplashInteractor: SplashInteractorInput {
     
     func checkEmptyEmail() {
         authService.checkEmptyEmail { [weak self] result in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 switch result {
                 case .success(let show):
                     self?.output.showEmptyEmail(show: show)
@@ -97,7 +104,7 @@ class SplashInteractor: SplashInteractorInput {
     
     func updateUserLanguage() {
         authService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 switch result {
                 case .success(_):
                     self?.output.updateUserLanguageSuccess()
