@@ -18,11 +18,15 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     }
     
     func operationFailed(type: ElementTypes, message: String) {
-        completeAsyncOperationEnableScreen()
-        basePassingPresenter?.operationFailed(withType: type)
+        operationFailed(with: type)
         if type != .deleteDeviceOriginal {
             UIApplication.showErrorAlert(message: message)
         }
+    }
+    
+    private func operationFailed(with type: ElementTypes) {
+        completeAsyncOperationEnableScreen()
+        basePassingPresenter?.operationFailed(withType: type)
     }
     
     func operationStarted(type: ElementTypes) {
@@ -39,5 +43,29 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     
     override func outputView() -> Waiting? {
         return RouterVC().rootViewController
+    }
+    
+    func showOutOfSpaceAlert(failedType type: ElementTypes) {
+        operationFailed(with: type)
+        
+        let controller = PopUpController.with(title: TextConstants.syncOutOfSpaceAlertTitle,
+                                              message: TextConstants.syncOutOfSpaceAlertText,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.syncOutOfSpaceAlertCancel,
+                                              secondButtonTitle: TextConstants.upgrade,
+                                              secondAction: { vc in
+                                                vc.close(completion: {
+                                                    let router = RouterVC()
+                                                    if router.navigationController?.presentedViewController != nil {
+                                                        router.pushOnPresentedView(viewController: router.packages)
+                                                    } else {
+                                                        router.pushViewController(viewController: router.packages)
+                                                    }
+                                                })
+        })
+        
+        DispatchQueue.main.async {
+            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        }
     }
 }

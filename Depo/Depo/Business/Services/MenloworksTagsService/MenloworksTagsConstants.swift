@@ -9,8 +9,6 @@
 extension MenloworksTags {
     class NameConstants {
         static let tutorial = "tutorial"
-        static let photoUpload = "photo_upload"
-        static let videoUpload = "video_uploaded"
         static let musicUpload = "music_uploaded"
         static let fileUpload = "file_uploaded"
         static let wifi3g = "wifi/3g"
@@ -81,6 +79,14 @@ extension MenloworksTags {
         static let socialMediaPageClicked = "social_media"
         static let periodicContactSync = "periodic_contact_sync"
         static let editedPhotoSave = "photo_edit_save"
+        
+        static let photoUploadAutosync = "photo_upload_autosync"
+        static let photoUploadManual = "photo_upload_manual"
+        static let photoUploadBackground = "photo_upload_background"
+        
+        static let videoUploadAutosync = "video_uploaded_autosync"
+        static let videoUploadManual = "video_upload_manual"
+        static let videoUploadBackground = "video_upload_background"
     }
     
     class ValueConstants {

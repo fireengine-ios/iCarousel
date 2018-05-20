@@ -556,7 +556,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let failResponse: FailResponse  = { [weak self] value in
             DispatchQueue.main.async {
-                self?.output?.operationFailed(type: elementType, message: value.description)
+                if value.isOutOfSpaceError {
+                    self?.output?.showOutOfSpaceAlert(failedType: elementType)
+                } else {
+                    self?.output?.operationFailed(type: elementType, message: value.description)
+                }
             }
         }
         return failResponse

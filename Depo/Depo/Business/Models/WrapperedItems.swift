@@ -561,6 +561,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return tmpDownloadUrl
     }
     
+    var mimeType: String?
+    
     var fileData: Data?
     
     var asset: PHAsset? {
@@ -573,17 +575,21 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     var uploadContentType: String {
+        if let contentType = mimeType {
+            return contentType
+        }
+        
         switch fileType {
         case .image:
             if let type = urlToFile?.pathExtension.lowercased(), !type.isEmpty {
-                return "image/\(type)"
+                return mimeType(from: type) ?? "image/\(type)"
             } else if let data = fileData {
                 return ImageFormat.get(from: data).contentType
             }
             return "image/jpg"
         case .video:
             if let type = urlToFile?.pathExtension.lowercased(), !type.isEmpty {
-                return "video/\(type)"
+                return mimeType(from: type) ?? "video/\(type)"
             }
             return "video/mp4"
         default:
@@ -749,6 +755,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         creationDate = remote.createdDate
         lastModifiDate = remote.lastModifiedDate
         fileType = FileType(type: remote.contentType, fileName: name)
+        mimeType = remote.contentType
         isFolder = remote.folder
         syncStatus = .synced
         setSyncStatusesAsSyncedForCurrentUser()
@@ -942,5 +949,26 @@ class WrapData: BaseDataSourceItem, Wrappered {
             tempoString.remove(at: tempoString.startIndex)
         }
         return tempoString
+    }
+}
+
+
+extension WrapData {
+    func hasSupportedExtension() -> Bool {
+        let type = (mimeType ?? uploadContentType) as CFString
+        if let preferredIdentifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, type, nil)?.takeUnretainedValue() {
+            return UTTypeIsDeclared(preferredIdentifier)
+        }
+        
+        return false
+    }
+    
+    func mimeType(from fileExtension: String) -> String? {
+        if let preferredIdentifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension as CFString, nil)?.takeUnretainedValue() {
+            let mime = UTTypeCopyPreferredTagWithClass(preferredIdentifier, kUTTagClassMIMEType)?.takeUnretainedValue() as String?
+            debugPrint("MIME: \(mime ?? "UNKNOWN")")
+            return mime
+        }
+        return nil
     }
 }

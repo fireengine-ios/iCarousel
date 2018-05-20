@@ -29,16 +29,34 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
-    func onFileUploadedWithType(_ type: FileType) {
+    func onFileUploadedWithType(_ type: FileType, isAutoSync: Bool) {
         var tag: MenloworksTag?
+        
+        let notInBacground = UIApplication.shared.applicationState == .active
         
         switch type {
         case .image:
-            tag = MenloworksTags.PhotoUpload(isWiFi: reachabilityService.isReachableViaWiFi)
+            if notInBacground {
+                if isAutoSync {
+                    tag = MenloworksTags.PhotoUploadAutosync(isWiFi: reachabilityService.isReachableViaWiFi)
+                } else {
+                    tag = MenloworksTags.PhotoUploadManual(isWiFi: reachabilityService.isReachableViaWiFi)
+                }
+            }else {
+                tag = MenloworksTags.PhotoUploadBackground(isWiFi: reachabilityService.isReachableViaWiFi)
+            }
         case .audio:
             tag = MenloworksTags.MusicUpload()
         case .video:
-            tag = MenloworksTags.VideoUpload()
+            if notInBacground {
+                if isAutoSync {
+                    tag = MenloworksTags.VideoUploadAutosync(isWiFi: reachabilityService.isReachableViaWiFi)
+                } else {
+                    tag = MenloworksTags.VideoUploadManual(isWiFi: reachabilityService.isReachableViaWiFi)
+                }
+            }else {
+                tag = MenloworksTags.VideoUploadBackground(isWiFi: reachabilityService.isReachableViaWiFi)
+            }
         case .allDocs, .unknown, .application:
             tag = MenloworksTags.FileUpload()
         default:
