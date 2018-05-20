@@ -74,6 +74,7 @@ class AlbumsModuleInitializer: NSObject {
                                                                                      selectionModeTypes: []),
                                topBarConfig: nil)
         
+        interactor.originalFilters = [.fileType(.photoAlbum)]
         viewController.mainTitle = TextConstants.albumsTitle
         
         return viewController

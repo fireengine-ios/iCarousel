@@ -284,6 +284,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .removeFromAlbum:
                 action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
                     MenloworksTagsService.shared.onRemoveFromAlbumClicked()
+                    MenloworksEventsService.shared.onRemoveFromAlbumClicked()
                     self.interactor.removeFromAlbum(items: currentItems)
                     self.basePassingPresenter?.stopModeSelected()
                 })
@@ -334,6 +335,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .addToFavorites:
                 action = UIAlertAction(title: TextConstants.actionSheetAddToFavorites, style: .default, handler: { _ in
                     MenloworksEventsService.shared.onAddToFavoritesClicked()
+                    MenloworksTagsService.shared.onFavoritesOpen()
                     self.basePassingPresenter?.stopModeSelected()
                     self.interactor.addToFavorites(items: currentItems)
                 })

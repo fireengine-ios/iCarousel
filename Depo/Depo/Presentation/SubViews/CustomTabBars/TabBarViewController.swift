@@ -576,7 +576,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         case .photosScreenIndex:
             MenloworksAppEvents.onPhotosAndVideosOpen()
             let settings = AutoSyncDataStorage().settings
-            MenloworksTagsService.shared.onAutosyncStatus(isOn: settings.isAutoSyncEnabled)
             
             if settings.isAutoSyncEnabled {
                 MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))

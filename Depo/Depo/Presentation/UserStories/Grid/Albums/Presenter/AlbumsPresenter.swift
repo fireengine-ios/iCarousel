@@ -13,6 +13,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     override func viewIsReady(collectionView: UICollectionView) {
         if (interactor.remoteItems is AlbumService) {
             dataSource = AlbumsDataSourceForCollectionView()
+            dataSource.originalFilters = interactor.originalFilesTypeFilter
         } else {
             dataSource = StoriesDataSourceForCollectionView()
         }

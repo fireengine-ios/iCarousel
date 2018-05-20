@@ -29,16 +29,34 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
-    func onFileUploadedWithType(_ type: FileType) {
+    func onFileUploadedWithType(_ type: FileType, isAutoSync: Bool) {
         var tag: MenloworksTag?
+        
+        let notInBacground = UIApplication.shared.applicationState == .active
         
         switch type {
         case .image:
-            tag = MenloworksTags.PhotoUpload(isWiFi: reachabilityService.isReachableViaWiFi)
+            if notInBacground {
+                if isAutoSync {
+                    tag = MenloworksTags.PhotoUploadAutosync(isWiFi: reachabilityService.isReachableViaWiFi)
+                } else {
+                    tag = MenloworksTags.PhotoUploadManual(isWiFi: reachabilityService.isReachableViaWiFi)
+                }
+            }else {
+                tag = MenloworksTags.PhotoUploadBackground(isWiFi: reachabilityService.isReachableViaWiFi)
+            }
         case .audio:
             tag = MenloworksTags.MusicUpload()
         case .video:
-            tag = MenloworksTags.VideoUpload()
+            if notInBacground {
+                if isAutoSync {
+                    tag = MenloworksTags.VideoUploadAutosync(isWiFi: reachabilityService.isReachableViaWiFi)
+                } else {
+                    tag = MenloworksTags.VideoUploadManual(isWiFi: reachabilityService.isReachableViaWiFi)
+                }
+            }else {
+                tag = MenloworksTags.VideoUploadBackground(isWiFi: reachabilityService.isReachableViaWiFi)
+            }
         case .allDocs, .unknown, .application:
             tag = MenloworksTags.FileUpload()
         default:
@@ -160,6 +178,7 @@ class MenloworksTagsService {
     func onPhotosAndVideosOpen() {
         let tag = MenloworksTags.PhotosAndVideosOpen()
         hitTag(tag)
+        sendSubscriptionsStatus()
     }
     
     func onMusicOpen() {
@@ -209,6 +228,26 @@ class MenloworksTagsService {
     
     func onAutosyncPhotosViaLte() {
         let tag = MenloworksTags.AutoSyncPhotosViaLte()
+        hitTag(tag)
+    }
+    
+    func onFirstAutosyncVideoViaWifi() {
+        let tag = MenloworksTags.FirstAutoSyncVideosViaWifi()
+        hitTag(tag)
+    }
+    
+    func onFirstAutosyncVideoViaLte() {
+        let tag = MenloworksTags.FirstAutoSyncVideosViaLte()
+        hitTag(tag)
+    }
+    
+    func onFirstAutosyncPhotosViaWifi() {
+        let tag = MenloworksTags.FirstAutoSyncPhotosViaWifi()
+        hitTag(tag)
+    }
+    
+    func onFirstAutosyncPhotosViaLte() {
+        let tag = MenloworksTags.FirstAutoSyncPhotosViaLte()
         hitTag(tag)
     }
     
@@ -302,6 +341,12 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
+    func onFirstAutoSyncOff() {
+        let tag = MenloworksTags.AutosyncFirstOff()
+        hitTag(tag)
+        
+    }
+    
     func onAutosyncPhotosStatusOff() {
         MPush.hitTag(MenloworksTags.NameConstants.autosyncPhotosStatus, withValue: MenloworksTags.ValueConstants.off)
     }
@@ -333,6 +378,36 @@ class MenloworksTagsService {
     func onTwoThousandFiveHundredGBPurchasedStatus() {
         let tag = MenloworksTags.TwoThousandFiveHundredGBPurchasedStatus()
         hitTag(tag)
+    }
+    
+    func onFavoritesPageClicked() {
+        let tag = MenloworksTags.FavoritesPageClicked()
+        hitTag(tag)
+    }
+    
+    func onSocialMediaPageClicked() {
+        let tag = MenloworksTags.SocialMediaPageClicked()
+        hitTag(tag)
+    }
+    
+    func editedPhotoSaved() {
+        let tag = MenloworksTags.EditedPhotoSaved()
+        hitTag(tag)
+    }
+    
+    func faceImageRecognition(isOn: Bool) {
+        let tag = MenloworksTags.FaceImageRecognitionStatus(isEnabled: isOn)
+        hitTag(tag)
+    }
+    
+    func instagramImport(isOn: Bool) {
+        let tag = MenloworksTags.InstagramImportStatus(isEnabled: isOn)
+        self.hitTag(tag)
+    }
+    
+    func facebookImport(isOn: Bool) {
+        let tag = MenloworksTags.FacebookImportStatus(isEnabled: isOn)
+        self.hitTag(tag)
     }
     
     // MARK: - Accessory methods

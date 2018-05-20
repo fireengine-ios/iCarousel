@@ -141,10 +141,12 @@ extension ImportPhotosViewController: ImportFromFBViewInput {
     func succeedFacebookStart() {
         MenloworksAppEvents.onFacebookConnected()
         MenloworksEventsService.shared.onFacebookTransfered()
+        MenloworksTagsService.shared.facebookImport(isOn: true)
         isFBConnected = true
     }
     
     func failedFacebookStart(errorMessage: String) {
+        MenloworksTagsService.shared.facebookImport(isOn: false)
         isFBConnected = false
         showErrorAlert(message: errorMessage)
     }
@@ -212,10 +214,12 @@ extension ImportPhotosViewController: ImportFromInstagramViewInput {
     
     func instagramStartSuccess() {
         MenloworksEventsService.shared.onInstagramTransfered()
+        MenloworksTagsService.shared.instagramImport(isOn: true)
         isInstagramConnected = true
     }
     
     func instagramStartFailure(errorMessage: String) {
+        MenloworksTagsService.shared.instagramImport(isOn: false)
         isInstagramConnected = false
         showErrorAlert(message: errorMessage)
     }

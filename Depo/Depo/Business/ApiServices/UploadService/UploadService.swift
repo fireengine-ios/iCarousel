@@ -255,7 +255,7 @@ final class UploadService: BaseRequestService {
                         
                         CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                         
-                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
+                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item, isAutoSync: false)
                         
                         checkIfFinished()
                     }
@@ -355,7 +355,7 @@ final class UploadService: BaseRequestService {
                         
                         CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                         
-                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
+                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item, isAutoSync: false)
                         
                         checkIfFinished()
                     }
@@ -453,7 +453,7 @@ final class UploadService: BaseRequestService {
                         
                         CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                         
-                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
+                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item, isAutoSync: true)
                         
                         checkIfFinished()
                     }
