@@ -265,12 +265,11 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     private func getDuplicatesObjects(latestDate: Date,
                                       success: @escaping ()-> Void,
                                       fail: @escaping ()-> Void) {
-
         guard let service = self.photoVideoService else {
             fail()
             return
         }
-        var finished = false
+        var isFinished = false
         
         print("local")
         for md5 in localMD5Array.getArray() {
@@ -285,43 +284,47 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                     return
                 }
                 
-                
                 for item in items {
-                    print(item.md5)
-                    
-                    if let date = item.creationDate, date < latestDate {
-                        finished = true
+                    if isFinished {
                         break
                     }
                     
-                    if let index = self.localMD5Array.index(where:{ $0 == item.md5 }),
-                        let elementToAdd = self.localtemsArray[index] {
-                        self.serverDuplicatesArray.append(item)
-                        self.duplicatesArray.append(elementToAdd)
-                        self.localtemsArray.remove(at: index)
-                        self.localMD5Array.remove(at: index)
-                        self.localTrimmedID.remove(at: index)
-                        
-                        if self.localtemsArray.isEmpty {
-                            finished = true
-                            break
+                    autoreleasepool {
+                        if let date = item.creationDate, date < latestDate {
+                            isFinished = true
                         }
-                    }else if let index = self.localTrimmedID.index(where:{ $0 == item.getTrimmedLocalID() }),
-                        let elementToAdd = self.localtemsArray[index] {
-                        self.serverDuplicatesArray.append(item)
-                        self.duplicatesArray.append(elementToAdd)
-                        self.localtemsArray.remove(at: index)
-                        self.localMD5Array.remove(at: index)
-                        self.localTrimmedID.remove(at: index)
                         
-                        if self.localtemsArray.isEmpty {
-                            finished = true
-                            break
+                        if let index = self.localMD5Array.index(where:{ $0 == item.md5 }),
+                            let elementToAdd = self.localtemsArray[index],
+                            !isFinished
+                        {
+                            self.serverDuplicatesArray.append(item)
+                            self.duplicatesArray.append(elementToAdd)
+                            self.localtemsArray.remove(at: index)
+                            self.localMD5Array.remove(at: index)
+                            self.localTrimmedID.remove(at: index)
+                            
+                            if self.localtemsArray.isEmpty {
+                                isFinished = true
+                            }
+                        } else if let index = self.localTrimmedID.index(where:{ $0 == item.getTrimmedLocalID() }),
+                            let elementToAdd = self.localtemsArray[index],
+                            !isFinished
+                        {
+                            self.serverDuplicatesArray.append(item)
+                            self.duplicatesArray.append(elementToAdd)
+                            self.localtemsArray.remove(at: index)
+                            self.localMD5Array.remove(at: index)
+                            self.localTrimmedID.remove(at: index)
+                            
+                            if self.localtemsArray.isEmpty {
+                                isFinished = true
+                            }
                         }
                     }
                 }
                 
-                if finished || items.count < self.numberElementsInRequest {
+                if isFinished || items.count < self.numberElementsInRequest {
                     success()
                 } else {
                     self.getDuplicatesObjects(latestDate: latestDate, success: success, fail: fail)
