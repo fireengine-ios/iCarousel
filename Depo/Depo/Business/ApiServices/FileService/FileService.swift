@@ -311,7 +311,7 @@ class FileService: BaseRequestService {
         let supportedItemsToDownload = items.filter { $0.hasSupportedExtension() }
         
         if supportedItemsToDownload.count != items.count {
-            //TODO: Show error popup
+            UIApplication.showErrorAlert(message: TextConstants.errorUnsupportedExtension)
         }
 
         let allOperationsCount = supportedItemsToDownload.count
@@ -327,7 +327,7 @@ class FileService: BaseRequestService {
                                                                             allOperations: allOperationsCount,
                                                                             completedOperations: completedOperationsCount)
             }, fail: { [weak self] error in
-                self?.error = error
+                self?.error = error.isUnknownError ? ErrorResponse.string(TextConstants.errorUnsupportedExtension) : error
                 /// HERE MUST BE ERROR HANDLER
             })
         }
@@ -338,6 +338,7 @@ class FileService: BaseRequestService {
             
             if let error = self.error {
                 fail?(error)
+                self.error = nil
             } else {
                 success?()
             }

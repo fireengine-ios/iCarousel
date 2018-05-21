@@ -65,6 +65,13 @@ extension ErrorResponse: LocalizedError {
         }
         return false
     }
+    
+    var isUnknownError: Bool {
+        if case let ErrorResponse.error(error) = self {
+            return error.isUnknownError
+        }
+        return false
+    }
 }
 
 extension Error {

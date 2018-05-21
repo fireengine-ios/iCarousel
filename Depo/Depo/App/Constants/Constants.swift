@@ -890,4 +890,5 @@ struct TextConstants {
     static let renamed = NSLocalizedString("renamed", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let copied = NSLocalizedString("copied", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let markedAsFavourite = NSLocalizedString("marked as favourite", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let errorUnsupportedExtension = NSLocalizedString("download_error_unsupported_extension", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
