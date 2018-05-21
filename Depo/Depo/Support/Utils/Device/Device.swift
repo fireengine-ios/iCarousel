@@ -65,17 +65,23 @@ class Device {
     }
     
     static func getFreeDiskSpaceInBytes() -> Int64? {
-        var freeSize: Int64?
+        var freeSize: Int?
         if #available(iOS 11.0, *) {
             let fileURL = URL(fileURLWithPath: Device.homeFolderString())
             do {
-                let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
-                freeSize = values.volumeAvailableCapacityForImportantUsage
+                let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityKey])
+                freeSize = values.volumeAvailableCapacity
             } catch {
                 print(error.localizedDescription)
             }
         }
-        return freeSize ?? getFreeDiskSpaceInBytesIOS10()
+        
+        if let freeSize = freeSize {
+            return Int64(freeSize)
+        } else if let freeSize = getFreeDiskSpaceInBytesIOS10() {
+            return Int64(freeSize)
+        }
+        return 0
     }
     
     static private func getFreeDiskSpaceInBytesIOS10() -> Int64? {
