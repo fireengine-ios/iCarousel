@@ -283,12 +283,13 @@ class AuthenticationService: BaseRequestService {
                             fail?(ErrorResponse.error(error))
                             return
                         }
-                        
-                        SingletonStorage.shared.updateAccountInfo()
-                        
-                        sucess?(headers)
-                        MenloworksAppEvents.onLogin()
-                        
+                        SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                            sucess?(headers)
+                            MenloworksAppEvents.onLogin()
+                        }, fail: { error in
+                            fail?(error)
+                        })
+
                     case .failure(let error):
                         fail?(ErrorResponse.error(error))
                     }
@@ -324,9 +325,11 @@ class AuthenticationService: BaseRequestService {
                 let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
-                SingletonStorage.shared.updateAccountInfo()
-                sucess?()
-                
+                SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                    sucess?()
+                }, fail: { error in
+                    fail?(error)
+                })
             } else {
                 let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                 fail?(ErrorResponse.error(error))

@@ -14,9 +14,14 @@ class Device {
     static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es"]
     static private let defaultLocale = "en"
     
-    static func documentsFolderUrl(withComponent: String ) -> URL {
+    static func documentsFolderUrl(withComponent: String) -> URL {
         let documentsUrls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return documentsUrls[documentsUrls.endIndex - 1].appendingPathComponent(withComponent)
+    }
+    
+    static func sharedContainerUrl(withComponent: String) -> URL? {
+        let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.come.life.Lifebox")
+        return container?.appendingPathComponent(withComponent)
     }
 
     static func tmpFolderUrl(withComponent: String ) -> URL {

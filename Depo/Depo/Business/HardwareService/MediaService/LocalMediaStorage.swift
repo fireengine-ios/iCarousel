@@ -170,6 +170,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             } else {
                 completion(true, status)
             }
+            MenloworksTagsService.shared.onGalleryPermissionChanged(true)
         case .notDetermined, .restricted:
             passcodeStorage.systemCallOnScreen = true
             PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
@@ -182,6 +183,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             completion(false, status)
             if redirectToSettings {
                 DispatchQueue.main.async {
+                    MenloworksTagsService.shared.onGalleryPermissionChanged(false)
                     self.showAccessAlert()
                 }
             }

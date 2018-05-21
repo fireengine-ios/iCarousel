@@ -27,7 +27,7 @@ class SingletonStorage {
             }, fail: { _ in } ) 
     }
     
-    func getAccountInfoForUser(success:@escaping (AccountInfoResponse) -> Void, fail: @escaping (ErrorResponse?) -> Void ) {
+    func getAccountInfoForUser(success:@escaping (AccountInfoResponse) -> Void, fail: @escaping (ErrorResponse) -> Void ) {
         if let info = accountInfo {
             success(info)
         } else {
@@ -36,17 +36,17 @@ class SingletonStorage {
                     self.accountInfo = resp
                     //remove user photo from cache on start application
                     ImageDownloder().removeImageFromCache(url: resp.urlForPhoto, completion: {
-                        DispatchQueue.main.async {
+                        DispatchQueue.toMain {
                             success(resp)
                         }
                     })
                 } else {
-                    DispatchQueue.main.async {
-                        fail(nil)
+                    DispatchQueue.toMain {
+                        fail(ErrorResponse.string(TextConstants.errorServer))
                     }
                 }
             }) { error in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     fail(error)
                 }
             }

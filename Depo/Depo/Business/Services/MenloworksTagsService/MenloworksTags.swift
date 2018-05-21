@@ -155,7 +155,7 @@ class MenloworksTags {
     
     class ContactSyncPageOpen: MenloworksTag {
         init() {
-            super.init(name: NameConstants.documentsOpen)
+            super.init(name: NameConstants.contactSyncPageOpen)
         }
     }
 
@@ -183,9 +183,21 @@ class MenloworksTags {
         }
     }
     
+    class FirstAutoSyncVideosViaWifi: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.firstAutoSyncVideosViaWifi)
+        }
+    }
+    
     class AutoSyncVideosViaLte: MenloworksTag {
         init() {
             super.init(name: NameConstants.autoSyncVideosViaLte)
+        }
+    }
+    
+    class FirstAutoSyncVideosViaLte: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.firstAutoSyncVideosViaLte)
         }
     }
     
@@ -195,9 +207,21 @@ class MenloworksTags {
         }
     }
     
+    class FirstAutoSyncPhotosViaWifi: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.firstAutoSyncPhotosViaWifi)
+        }
+    }
+    
     class AutoSyncPhotosViaLte: MenloworksTag {
         init() {
             super.init(name: NameConstants.autoSyncPhotosViaLte)
+        }
+    }
+    
+    class FirstAutoSyncPhotosViaLte: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.firstAutoSyncPhotosViaLte)
         }
     }
     
@@ -351,6 +375,12 @@ class MenloworksTags {
         }
     }
     
+    class AutosyncFirstOff: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.firstAutoSyncOff)
+        }
+    }
+    
     class AutosyncPhotosStatus: MenloworksBoolTag {
         init(isWifi: Bool) {
             super.init(name: NameConstants.autosyncPhotosStatus, value: isWifi, boolType: .wifiLTE)
@@ -378,6 +408,23 @@ class MenloworksTags {
     class TwoThousandFiveHundredGBPurchasedStatus: MenloworksTag {
         init() {
             super.init(name: NameConstants.twoThousandFiveHundredGBPurchasedStatus)
+        }
+    }
+    
+    class FavoritesPageClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.favoritesPageClicked)
+        }
+    }
+    
+    class SocialMediaPageClicked: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.socialMediaPageClicked)
+        }
+    }
+    class EditedPhotoSaved: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.editedPhotoSave)
         }
     }
     
@@ -416,6 +463,7 @@ class MenloworksTags {
             super.init(name: NameConstants.videoUploadBackground, value: isWiFi, boolType: .wifiMobile)
         }
     }
+
 
 }
 

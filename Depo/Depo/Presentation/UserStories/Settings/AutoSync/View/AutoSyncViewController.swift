@@ -94,7 +94,31 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
         
         if fromSettings {
             let settings = dataSource.createAutoSyncSettings()
+            let photoOption = settings.photoSetting.option
+            let videoOption = settings.videoSetting.option
+            
+            if photoOption == .wifiAndCellular {
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: false)
+            } else if photoOption == .wifiOnly {
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: true)
+            } else {
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
+            }
+            
+            if videoOption == .wifiAndCellular {
+                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi:false)
+            } else if videoOption == .wifiOnly {
+                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi:true)
+            } else {
+                MenloworksTagsService.shared.onAutosyncVideosStatusOff()
+            }
+            
+//            MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
+//            MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
+            
             output.save(settings: settings)
+            
+            
         }
     }
     
@@ -109,12 +133,36 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
         let settings = dataSource.createAutoSyncSettings()
         
         if !settings.isAutoSyncEnabled {
+            MenloworksTagsService.shared.onAutosyncStatus(isOn: false)
+            MenloworksTagsService.shared.onFirstAutoSyncOff()
             MenloworksEventsService.shared.onFirstAutosyncOff()
             storageVars.autoSyncSet = true
             output.change(settings: settings)
         } else {
+            MenloworksTagsService.shared.onAutosyncStatus(isOn: true)
             output.checkPermissions()
+            
+            let photoOption = settings.photoSetting.option
+            let videoOption = settings.videoSetting.option
+            
+            if photoOption == .wifiAndCellular {
+                MenloworksTagsService.shared.onFirstAutosyncPhotosViaLte()
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: false)
+            } else if photoOption == .wifiOnly {
+                MenloworksTagsService.shared.onFirstAutosyncPhotosViaWifi()
+                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: true)
+            }
+            
+            if videoOption == .wifiAndCellular {
+                MenloworksTagsService.shared.onFirstAutosyncVideoViaLte()
+                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi:false)
+            } else if videoOption == .wifiOnly {
+                MenloworksTagsService.shared.onFirstAutosyncVideoViaWifi()
+                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi:true)
+            }
+            
         }
+        
     }
     
     @IBAction func onSkipButtn() {
@@ -173,6 +221,7 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
             storageVars.autoSyncSet = true
             output.change(settings: settings)
         } else {
+            MenloworksTagsService.shared.onAutosyncStatus(isOn: true)
             analyticsService.track(event: .turnOnAutosync)
             dataSource.reloadTableView()
         }
