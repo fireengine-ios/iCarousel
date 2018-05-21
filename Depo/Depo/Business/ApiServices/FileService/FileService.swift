@@ -310,6 +310,11 @@ class FileService: BaseRequestService {
         
         let supportedItemsToDownload = items.filter { $0.hasSupportedExtension() }
         
+        guard !supportedItemsToDownload.isEmpty else {
+            fail?(ErrorResponse.string(TextConstants.errorUnsupportedExtension))
+            return
+        }
+        
         if supportedItemsToDownload.count != items.count {
             UIApplication.showErrorAlert(message: TextConstants.errorUnsupportedExtension)
         }
