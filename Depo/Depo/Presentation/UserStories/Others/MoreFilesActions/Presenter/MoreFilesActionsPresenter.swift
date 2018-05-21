@@ -64,7 +64,7 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
                                                 })
         })
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
         }
     }

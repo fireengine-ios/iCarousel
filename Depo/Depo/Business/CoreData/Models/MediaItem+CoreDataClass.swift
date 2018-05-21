@@ -66,8 +66,13 @@ public class MediaItem: NSManagedObject {
             MediaItemsAlbum(uuid: albumUuid, context: context)
         })
         self.albums = NSOrderedSet(array: albums ?? [])
-        
-        objectSyncStatus = NSSet(array: wrapData.syncStatuses)
+
+        let syncStatuses = convertToMediaItems(syncStatuses: wrapData.syncStatuses, context: context)
+        objectSyncStatus = syncStatuses
+    }
+    
+    private func convertToMediaItems(syncStatuses: [String], context: NSManagedObjectContext) -> NSSet {
+        return  NSSet(array: syncStatuses.flatMap { MediaItemsObjectSyncStatus(userID: $0, context: context) })
     }
     
     var wrapedObject: WrapData {
