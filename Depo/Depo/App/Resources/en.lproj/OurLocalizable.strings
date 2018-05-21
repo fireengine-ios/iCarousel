@@ -657,3 +657,4 @@
 "copied" = "copied";
 "marked as favourite" = "marked as favourite";
 "Bad internet connection" = "Bad internet connection";
+"download_error_unsupported_extension" = "Some of files from downloading queue are unsupported";

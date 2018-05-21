@@ -9,6 +9,11 @@
 import Foundation
 
 extension Error {
+    
+    var isUnknownError: Bool {
+        return self.urlErrorCode == .unknown
+    }
+    
     var isNetworkError: Bool {
         return self is URLError
     }
