@@ -21,7 +21,7 @@ final class AnalyticsService {
     // MARK: - Events
     func track(event: AnalyticsEvent) {
         logAdjustEvent(name: event.token)
-        logFacebookEvent(name: event.facebookEventName)
+        logFacebookEvent(name: FBSDKAppEventNameViewedContent, parameters: [FBSDKAppEventParameterNameContent: event.facebookEventName])
     }
     
     func trackInAppPurchase(product: SKProduct) {
@@ -55,7 +55,9 @@ final class AnalyticsService {
     private func logPurchase(event: AnalyticsEvent, price: String, currency: String = "TL") {
         logAdjustEvent(name: event.token, price: Double(price), currency: currency)
         //Facebook has automatic tracking in-app purchases. If this function is enabled in the web settings, then there will be duplicates
-        logFacebookEvent(name: event.facebookEventName, parameters: ["price": price, "currency": currency])
+        if let price = Double(price) {
+            FBSDKAppEvents.logPurchase(price, currency: currency, parameters: [FBSDKAppEventParameterNameContent: event.facebookEventName])
+        }
     }
     
     private func logAdjustEvent(name: String, price: Double? = nil, currency: String? = nil) {
@@ -70,8 +72,6 @@ final class AnalyticsService {
     private func logFacebookEvent(name: String, parameters: [AnyHashable: Any]? = nil) {
         if let parameters = parameters {
             FBSDKAppEvents.logEvent(name, parameters: parameters)
-        } else {
-            FBSDKAppEvents.logEvent(name)
         }
     }    
 }
