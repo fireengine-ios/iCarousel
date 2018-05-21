@@ -338,6 +338,7 @@ class FileService: BaseRequestService {
             
             if let error = self.error {
                 fail?(error)
+                self.error = nil
             } else {
                 success?()
             }
