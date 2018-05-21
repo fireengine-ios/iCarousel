@@ -149,12 +149,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        collectionView.performBatchUpdates(nil, completion: nil)
-        
-        if needToScrollAfterRotation {
-            needToScrollAfterRotation = false
-            scrollToSelectedIndex()
-        }
+        collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
+            guard let `self` = self else {
+                return
+            }
+            if self.needToScrollAfterRotation {
+                self.needToScrollAfterRotation = false
+                self.scrollToSelectedIndex()
+            }
+        })
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -223,8 +226,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
     func onShowSelectedItem(at index: Int, from items: [Item]) {
         objects = items
         selectedIndex = index
+        
         collectionView.reloadData()
-        scrollToSelectedIndex()
+        collectionView.performBatchUpdates(nil) { [weak self] _ in
+            self?.scrollToSelectedIndex()
+        }
     }
 
     @objc func onRightBarButtonItem(sender: UIButton) {
@@ -309,7 +315,10 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
     }
     
     func finishedUploadFile(file: WrapData) {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain { [weak self] in
+            guard let `self` = self else {
+                return
+            }
             self.output.setSelectedItemIndex(selectedIndex: self.selectedIndex)
             self.setupNavigationBar()
         }
