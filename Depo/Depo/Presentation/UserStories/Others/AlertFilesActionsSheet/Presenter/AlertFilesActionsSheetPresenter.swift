@@ -10,7 +10,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     
     private let semaphore = DispatchSemaphore(value: 0)
     
-    let rightButtonBox = CGRect(x: Device.winSize.width - 50, y: 64, width: 10, height: 10)
+    let rightButtonBox = CGRect(x: Device.winSize.width - 50, y: -30, width: 0, height: 0)
     // MARK: Module Input
     
     func showSelectionsAlertSheet() {
@@ -463,6 +463,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         } else if let _ = sender as? UIBarButtonItem {
             //FIXME: use actionSheetVC.popoverPresentationController?.barButtonItem instead
             actionSheetVC.popoverPresentationController?.sourceRect = rightButtonBox
+            actionSheetVC.popoverPresentationController?.permittedArrowDirections = []
         }
         vc.present(actionSheetVC, animated: true, completion: {})
     }
