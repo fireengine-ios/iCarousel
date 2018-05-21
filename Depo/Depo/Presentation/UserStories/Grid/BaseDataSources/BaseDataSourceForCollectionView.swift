@@ -161,19 +161,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func appendCollectionView(items: [WrapData], pageNum: Int) {
         let containsEmptyMetaItems = !emptyMetaItems.isEmpty
         
-        let pageItems: [WrapData]
-        
-        if let unwrapedFilters = self.originalFilters, showOnlySynced(filters: unwrapedFilters) {
-            pageItems = items.filter {$0.syncStatus == .synced}
-        } else {
-            pageItems = items
-        }
-
         var filteredItems = [WrapData]()
         if needShowEmptyMetaItems {
             if let unwrapedFilters = self.originalFilters,
                 !showOnlyRemotes(filters: unwrapedFilters) {
-                pageItems.forEach {
+                items.forEach {
                     if !$0.isLocalItem, $0.metaData?.takenDate != nil {
                         filteredItems.append($0)
                     } else {
@@ -182,10 +174,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
                 pageCompounder.appendNotAllowedItems(items: emptyMetaItems)
             } else {
-                filteredItems = pageItems
+                filteredItems = items
             }
         } else {
-            filteredItems = pageItems.filter {
+            filteredItems = items.filter {
                 if $0.fileType == .image, !$0.isLocalItem {
                     return ($0.metaData?.takenDate != nil)
                 }
@@ -341,11 +333,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     return
             }
             
-            var syncedOnly = false
-            if let unwrapedFilters = self.originalFilters, self.showOnlySynced(filters: unwrapedFilters) {
-                syncedOnly = true
-            }
-            
             switch specificFilters {
             case .video, .image:
                 guard !self.isLocalFilesRequested else {
@@ -368,7 +355,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     self.pageCompounder.compoundFirstPage(pageItems: pageTempoItems,
                                                           filesType: specificFilters,
                                                           sortType: self.currentSortType,
-                                                          syncedOnly: syncedOnly,
                                                           compoundedCallback:
                         { [weak self] (compoundedItems, lefovers) in
                             guard let `self` = self else {
@@ -396,7 +382,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     self.pageCompounder.compoundLastPage(pageItems: itemsToCompound,
                                                          filesType: specificFilters,
                                                          sortType: self.currentSortType,
-                                                         syncedOnly: syncedOnly,
                                                          dropFirst: needToDropFirstItem,
                                                          compoundedCallback:
                         { [weak self] (compoundedItems, lefovers) in
@@ -433,7 +418,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     self.pageCompounder.compoundMiddlePage(pageItems: itemsToCompound,
                                                            filesType: specificFilters,
                                                            sortType: self.currentSortType,
-                                                           syncedOnly: syncedOnly,
                         compoundedCallback:
                         { [weak self] (compoundedItems, lefovers) in
                             guard let `self` = self else {
@@ -542,18 +526,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         for filter in filters {
             switch filter {
             case .localStatus(.nonLocal):
-                return true
-            default:
-                break
-            }
-        }
-        return false
-    }
-    
-    private func showOnlySynced(filters: [GeneralFilesFiltrationType]) -> Bool {
-        for filter in filters {
-            switch filter {
-            case .syncStatus(.synced):
                 return true
             default:
                 break

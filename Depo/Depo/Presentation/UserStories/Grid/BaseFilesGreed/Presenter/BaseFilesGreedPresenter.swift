@@ -551,13 +551,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             filtersByDefault = filters
             filters = filters.filter { type -> Bool in
                 switch type {
-                case .syncStatus(_):
+                case .localStatus(_):
                     return false
                 default:
                     return true
                 }
             }
-            filters.append(.syncStatus(.synced))            
+            filters.append(.localStatus(.nonLocal))            
         } else {
             filters = filtersByDefault
         }

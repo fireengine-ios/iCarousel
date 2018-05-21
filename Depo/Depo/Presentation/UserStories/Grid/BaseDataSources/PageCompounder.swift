@@ -82,22 +82,12 @@ final class PageCompounder {
     func compoundFirstPage(pageItems: [WrapData],
                            filesType: FileType,
                            sortType: SortedRules,
-                           syncedOnly: Bool,
                            compoundedCallback: @escaping CompoundedPageCallback) {
         
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
-        var syncedOnlyPredicate: NSPredicate?
-        if syncedOnly {
-            syncedOnlyPredicate = NSPredicate(format: "syncStatusValue = %ui", SyncWrapperedStatus.synced.valueForCoreDataMapping())
-        }
         if let lastItem = getLastNonEmpty(items: pageItems, fileType: filesType) {
             let sortingTypePredicate = getSortingPredicateFirstPage(sortType: sortType, lastItem: lastItem)
-            let compundedPredicate: NSCompoundPredicate
-            if let syncedOnlyPredicate = syncedOnlyPredicate {
-                compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate, syncedOnlyPredicate])
-            } else {
-                compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
-            }
+            let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
             
             compoundItems(pageItems: pageItems,
                           sortType: sortType,
@@ -119,12 +109,8 @@ final class PageCompounder {
             })
             
         } else {
-            let compundedPredicate: NSCompoundPredicate
-            if let syncedOnlyPredicate = syncedOnlyPredicate {
-                compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, syncedOnlyPredicate])
-            } else {
-                compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate])
-            }
+            let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate])
+            
             compoundItems(pageItems: pageItems,
                           sortType: sortType,
                           predicate: compundedPredicate,
@@ -150,7 +136,6 @@ final class PageCompounder {
     func compoundMiddlePage(pageItems: [WrapData],
                             filesType: FileType,
                             sortType: SortedRules,
-                            syncedOnly: Bool,
                             compoundedCallback: @escaping CompoundedPageCallback) {
         guard let lastItem = pageItems.last, let firstItem = pageItems.first else {
             compoundedCallback(pageItems, [])
@@ -159,14 +144,8 @@ final class PageCompounder {
         let fileTypePredicate = NSPredicate(format: "fileTypeValue = %ui", filesType.valueForCoreDataMapping())
         let sortingTypePredicate = getSortingPredicateMidPage(sortType: sortType, firstItem: firstItem, lastItem: lastItem)
 
-        let compundedPredicate: NSCompoundPredicate
-        if syncedOnly {
-            let syncedOnlyPredicate = NSPredicate(format: "syncStatusValue = %ui", SyncWrapperedStatus.synced.valueForCoreDataMapping())
-            compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate, syncedOnlyPredicate])
-        } else {
-            compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
-        }
-
+        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
+        
         compoundItems(pageItems: pageItems,
                       sortType: sortType,
                       predicate: compundedPredicate,
@@ -179,16 +158,12 @@ final class PageCompounder {
                         } else {
                             compoundedCallback(compoundedPage, leftovers)
                         }
-                        
-                        
-        
         })
     }
     
     func compoundLastPage(pageItems: [WrapData],
                           filesType: FileType,
                           sortType: SortedRules,
-                          syncedOnly: Bool,
                           dropFirst: Bool = false,
                           compoundedCallback: @escaping CompoundedPageCallback) {
         
@@ -204,13 +179,7 @@ final class PageCompounder {
         
         let sortingTypePredicate = getSortingPredicateLastPage(sortType: sortType, firstItem: firstItem)
         
-        let compundedPredicate: NSCompoundPredicate
-        if syncedOnly {
-            let syncedOnlyPredicate = NSPredicate(format: "syncStatusValue = %ui", SyncWrapperedStatus.synced.valueForCoreDataMapping())
-            compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate, syncedOnlyPredicate])
-        } else {
-            compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
-        }
+        let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fileTypePredicate, sortingTypePredicate])
         
         compoundItems(pageItems: tempoArray,
                       sortType: sortType,
