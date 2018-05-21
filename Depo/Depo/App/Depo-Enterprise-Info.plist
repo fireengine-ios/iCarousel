@@ -149,5 +149,26 @@
 	<string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+    
+    <key>UTExportedTypeDeclarations</key>
+    <dict>
+        <key>UTTypeConformsTo</key>
+        <array>
+            <string>public.image</string>
+        </array>
+        <key>UTTypeIdentifier</key>
+        <string>image/heic</string>
+        <key>UTTypeTagSpecification</key>
+        <dict>
+            <key>com.apple.ostype</key>
+            <string>HEIC</string>
+            <key>public.filename-extension</key>
+            <array>
+                <string>heic</string>
+            </array>
+            <key>public.mime-type</key>
+            <string>image/heic</string>
+        </dict>
+    </dict>
 </dict>
 </plist>
