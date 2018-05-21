@@ -164,7 +164,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         var filteredItems = [WrapData]()
         if needShowEmptyMetaItems {
             if let unwrapedFilters = self.originalFilters,
-                !self.showOnlyRemotes(filters: unwrapedFilters) {
+                !showOnlyRemotes(filters: unwrapedFilters) {
                 items.forEach {
                     if !$0.isLocalItem, $0.metaData?.takenDate != nil {
                         filteredItems.append($0)
