@@ -13750,7 +13750,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 74412d8a38e9c5b44ca9993298b0ec4cba26289b 23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00";
 		};
 		8C679AF51FBC244F00B78873 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -13763,7 +13763,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 74412d8a38e9c5b44ca9993298b0ec4cba26289b 23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00";
 		};
 		BCA0868506E6C5E554B5F870 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -16454,6 +16454,7 @@
 		78B2D352204AA5F500D096DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16484,6 +16485,7 @@
 		78B2D353204AA5F500D096DC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16513,6 +16515,7 @@
 		78B2D354204AA5F500D096DC /* AppStore */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16542,6 +16545,7 @@
 		78B2D355204AA5F500D096DC /* Enterprise */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16785,6 +16789,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5CA25298A8872FA819D654BE /* Pods-autosync-widget.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16818,6 +16823,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 76B1160903EAC577E57F21A0 /* Pods-autosync-widget.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16851,6 +16857,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FFA713DFFEF8A0A618B462F5 /* Pods-autosync-widget.appstore.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16884,6 +16891,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A3E3BDF23BBE84B495BAA606 /* Pods-autosync-widget.enterprise.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16916,6 +16924,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DBB0E951C502D6894556ED12 /* Pods-LifeboxFileProvider.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16949,6 +16958,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8E6892DB1C0232B660C2CB3 /* Pods-LifeboxFileProvider.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16982,6 +16992,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3D010A878B7C0430091742F6 /* Pods-LifeboxFileProvider.appstore.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17015,6 +17026,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 13C1164C33CF7116F12CF1F9 /* Pods-LifeboxFileProvider.enterprise.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17047,6 +17059,7 @@
 		CE1BE942204831CE0074BDDC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17079,6 +17092,7 @@
 		CE1BE943204831CE0074BDDC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17111,6 +17125,7 @@
 		CE1BE944204831CE0074BDDC /* AppStore */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17143,6 +17158,7 @@
 		CE1BE945204831CE0074BDDC /* Enterprise */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17394,6 +17410,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C7EA8E62DD494F5240389C2E /* Pods-LifeboxShared.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17427,6 +17444,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 332BC9156196CAFE4CD77111 /* Pods-LifeboxShared.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17460,6 +17478,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 116F0D4A7EDE2EA38E1B57BC /* Pods-LifeboxShared.appstore.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17493,6 +17512,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 14B63501F537CEC2931A734D /* Pods-LifeboxShared.enterprise.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
