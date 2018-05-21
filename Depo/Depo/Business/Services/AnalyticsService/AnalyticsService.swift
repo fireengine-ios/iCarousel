@@ -56,8 +56,7 @@ final class AnalyticsService {
         logAdjustEvent(name: event.token, price: Double(price), currency: currency)
         //Facebook has automatic tracking in-app purchases. If this function is enabled in the web settings, then there will be duplicates
         if let price = Double(price) {
-            FBSDKAppEvents.logEvent( FBSDKAppEventNameAddedToCart, valueToSum: price, parameters: [FBSDKAppEventParameterNameCurrency: currency,
-                                                                                                   FBSDKAppEventParameterNameContent: event.facebookEventName])
+            FBSDKAppEvents.logPurchase(price, currency: currency, parameters: [FBSDKAppEventParameterNameContent: event.facebookEventName])
         }
     }
     
