@@ -79,7 +79,7 @@ class Device {
         if let freeSize = freeSize {
             return Int64(freeSize)
         } else if let freeSize = getFreeDiskSpaceInBytesIOS10() {
-            return Int64(freeSize)
+            return Int64(freeSize) - 104857600 // 100MB
         }
         return 0
     }
