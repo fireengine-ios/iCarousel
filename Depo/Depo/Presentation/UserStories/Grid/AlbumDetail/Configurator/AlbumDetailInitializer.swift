@@ -20,6 +20,8 @@ class AlbumDetailModuleInitializer: NSObject {
         viewController.album = album
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonUploadFromLifebox])
+        viewController.scrolliblePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
+        viewController.scrolliblePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromAlbum],
                                                style: .default, tintColor: nil)
