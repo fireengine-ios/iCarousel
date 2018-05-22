@@ -141,7 +141,7 @@ extension IAPManager: SKPaymentTransactionObserver {
             }
         }
         
-        purchaseInProgress = !isPurchasing
+        purchaseInProgress = isPurchasing
     }
     
     public func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
