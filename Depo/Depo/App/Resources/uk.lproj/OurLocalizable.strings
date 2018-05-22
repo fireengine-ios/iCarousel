@@ -272,7 +272,7 @@
 "You’ve uploaded %@ two days ago!" = "Ви завантажили %@ два дні тому!";
 "Expand My Storage" = "Оновіть свій план зберігання";
 "You are using %85 of your disk space! It’s a great time to expand your storage." = "Ви використовуєте %85 свого сховища lifebox! Це чудовий час для оновлення пам'яті.";
-"Your storage is almost full!" = "Сховище вашого пристрою майже заповнено!";
+"Your storage is almost full!" = "Ви досягли межі пам'яті lifebox.\nДавайте подивимось на варіанти оновлення!";
 "Change filter" = "Змінити фільтр";
 "Save this photo" = "Зберегти";
 "You can apply this filter and my more to your other picures as well" = "Ви також можете застосувати інші фільтри до своїх фотографій";
@@ -452,7 +452,7 @@
 "Your latest uploads" = "Ваші останні завантаження";
 "View Recent Activities" = "Переглянути останні дії";
 "View All Photos" = "Переглянути всі фотографії";
-"You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "Ви досягли межі пам'яті lifebox.\nДавайте подивимось на варіанти оновлення!";
+"You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "Сховище вашого пристрою майже заповнено!";
 "Error occurred while accessing your photos.\nPlease check your settings." = "Сталася помилка при доступі до ваших фотографій.\nПеревірте свої налаштування.";
 "localFilesBeingProcessed" = "Обробка локальних файлів.";
 "TurkcellSecurityPasscodeWarningText" = "Попередження: Ви вже активували функцію коду / сенсорний ідентифікатор. Щоб безпечно зберігати свої файли в lifebox за допомогою ідентифікаційних можливостей passcode / touch, ми рекомендуємо не активувати вхід за допомогою функції пароля Turkcell.";
@@ -610,7 +610,7 @@
 "Daily" = "Щодня";
 "Weekly" = "Щотижня";
 "Monthly" = "Щомісяця";
-"Up to 5000 contacts can be backed up." = "Можна резервувати до 5000 контактів.";
+"Up to 5000 contacts can be backed up." = "Можна резервувати до 15000 контактів.";
 "LifeboxSmallPopUpTitle" = "";
 "LifeboxSmallPopUpSubTitle" = "";
 "LifeboxSmallPopUpCheckBoxTex" = "";

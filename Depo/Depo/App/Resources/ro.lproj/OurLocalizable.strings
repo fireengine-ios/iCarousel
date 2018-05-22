@@ -272,7 +272,7 @@
 "You’ve uploaded %@ two days ago!" = "Ai încărcat %@ două zile în urmă!";
 "Expand My Storage" = "Actualizarea planului meu de stocare";
 "You are using %85 of your disk space! It’s a great time to expand your storage." = "Ai utilizat %85 din spațiul de stocare lifebox! E momentul potrivit pentru a-ți mări spațiul de stocare.";
-"Your storage is almost full!" = "Spațiul tău de stocare lifebox e aproape plin!";
+"Your storage is almost full!" = "Ai atins limita de memorie a lifebox-ului tău";
 "Change filter" = "Schimbă filtrul";
 "Save this photo" = "Salvează";
 "You can apply this filter and my more to your other picures as well" = "La fel poți aplica și alte filtre pentru fotografiile tale";
@@ -452,7 +452,7 @@
 "Your latest uploads" = "Ultimele tale încărcări";
 "View Recent Activities" = "Vezi Activitățile recente";
 "View All Photos" = "Vezi Toate Fotografiile";
-"You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "Ai atins limita de memorie a lifebox-ului tău";
+"You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "Spațiul tău de stocare lifebox e aproape plin!";
 "Error occurred while accessing your photos.\nPlease check your settings." = "A apărut o eroare la accesarea fotografiilor tale. Te rugăm să verifici setările.";
 "localFilesBeingProcessed" = "Procesarea fișierelor locale";
 "TurkcellSecurityPasscodeWarningText" = "Avertizare: Deja ai activat opțiunea parola/amprenta digitală. Pentru a-ți păstra fișierele din lifebox în siguranță, având această opțiune activată, îți recomandăm să nu activezi modalitatea de conectare cu parola Turkcell.";
@@ -610,7 +610,7 @@
 "Daily" = "Zilnic";
 "Weekly" = "Săptămânal";
 "Monthly" = "Lunar";
-"Up to 5000 contacts can be backed up." = "Peste 5000 contacte pot fi salvate";
+"Up to 5000 contacts can be backed up." = "Peste 15000 contacte pot fi salvate";
 "LifeboxSmallPopUpTitle" = "";
 "LifeboxSmallPopUpSubTitle" = "";
 "LifeboxSmallPopUpCheckBoxTex" = "";
