@@ -131,8 +131,9 @@ extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate, 
     }
     
     func phoneNumberChanged(toNumber number: String) {
+        let phoneNumber = number.count > 0 ? number : TextConstants.registrationCellPlaceholderPhone
         let oldPhoneModel = cells[0]
-        let newPhoneModel = BaseCellModel(withTitle: oldPhoneModel.title, initialText: number)
+        let newPhoneModel = BaseCellModel(withTitle: oldPhoneModel.title, initialText: phoneNumber)
         cells[0] = newPhoneModel
     }
     
