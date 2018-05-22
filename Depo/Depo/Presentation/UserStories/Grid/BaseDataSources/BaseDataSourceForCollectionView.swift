@@ -1559,6 +1559,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 for object in array {
                     
                     if let index = idsForRemove.index(of: object.uuid) {
+                        self.allMediaItems.remove(object)
                         idsForRemove.remove(at: index)
                         continue
                     }
