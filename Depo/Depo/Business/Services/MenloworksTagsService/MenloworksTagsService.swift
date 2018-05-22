@@ -30,41 +30,46 @@ class MenloworksTagsService {
     }
     
     func onFileUploadedWithType(_ type: FileType, isAutoSync: Bool) {
-        var tag: MenloworksTag?
-        
-        let notInBacground = UIApplication.shared.applicationState == .active
-        
-        switch type {
-        case .image:
-            if notInBacground {
-                if isAutoSync {
-                    tag = MenloworksTags.PhotoUploadAutosync(isWiFi: reachabilityService.isReachableViaWiFi)
+        DispatchQueue.toMain {
+            var tag: MenloworksTag?
+            
+            ///must be in the main queue
+            let notInBackground = UIApplication.shared.applicationState == .active
+            
+            switch type {
+            case .image:
+                let isWifi = self.reachabilityService.isReachableViaWiFi
+                if notInBackground {
+                    if isAutoSync {
+                        tag = MenloworksTags.PhotoUploadAutosync(isWiFi: isWifi)
+                    } else {
+                        tag = MenloworksTags.PhotoUploadManual(isWiFi: isWifi)
+                    }
                 } else {
-                    tag = MenloworksTags.PhotoUploadManual(isWiFi: reachabilityService.isReachableViaWiFi)
+                    tag = MenloworksTags.PhotoUploadBackground(isWiFi: isWifi)
                 }
-            }else {
-                tag = MenloworksTags.PhotoUploadBackground(isWiFi: reachabilityService.isReachableViaWiFi)
-            }
-        case .audio:
-            tag = MenloworksTags.MusicUpload()
-        case .video:
-            if notInBacground {
-                if isAutoSync {
-                    tag = MenloworksTags.VideoUploadAutosync(isWiFi: reachabilityService.isReachableViaWiFi)
+            case .audio:
+                tag = MenloworksTags.MusicUpload()
+            case .video:
+                let isWifi = self.reachabilityService.isReachableViaWiFi
+                if notInBackground {
+                    if isAutoSync {
+                        tag = MenloworksTags.VideoUploadAutosync(isWiFi: isWifi)
+                    } else {
+                        tag = MenloworksTags.VideoUploadManual(isWiFi: isWifi)
+                    }
                 } else {
-                    tag = MenloworksTags.VideoUploadManual(isWiFi: reachabilityService.isReachableViaWiFi)
+                    tag = MenloworksTags.VideoUploadBackground(isWiFi: isWifi)
                 }
-            }else {
-                tag = MenloworksTags.VideoUploadBackground(isWiFi: reachabilityService.isReachableViaWiFi)
+            case .allDocs, .unknown, .application:
+                tag = MenloworksTags.FileUpload()
+            default:
+                break
             }
-        case .allDocs, .unknown, .application:
-            tag = MenloworksTags.FileUpload()
-        default:
-            break
-        }
-        
-        if let tag = tag {
-            hitTag(tag)
+            
+            if let tag = tag {
+                self.hitTag(tag)
+            }
         }
     }
     
