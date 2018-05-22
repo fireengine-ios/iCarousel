@@ -35,10 +35,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         output.onShowSelectedItem(at: selectedIndex, from: array)
     }
     
-    func setSelectedItemIndex(selectedIndex: Int) {
-        self.selectedIndex = selectedIndex
-    }
-    
     var currentItemIndex: Int {
         return selectedIndex
     }

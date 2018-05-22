@@ -14,8 +14,6 @@ protocol PhotoVideoDetailInteractorInput: class {
     
     func onViewIsReady()
     
-    func setSelectedItemIndex(selectedIndex: Int)
-    
     var currentItemIndex: Int { get }
     
     var allItems: [Item] { get }

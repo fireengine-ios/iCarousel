@@ -61,7 +61,6 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             return
         }
         
-        interactor.setSelectedItemIndex(selectedIndex: selectedIndex)
         view.onItemSelected(at: selectedIndex, from: interactor.allItems)
         
         let selectedItems = [interactor.allItems[selectedIndex]]
