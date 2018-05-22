@@ -320,13 +320,20 @@ extension PackagesInteractor: PackagesInteractorInput {
         offersService.offersAllApple(
             success: { [weak self] response in
                 guard let offerResponse = response as? OfferAllAppleServiceResponse else { return }
-                self?.iapManager.loadProducts(productIds: offerResponse.list) { [weak self] offerAppleArray in
-                    DispatchQueue.main.async {
-                        self?.output.successed(offerApples: offerAppleArray)
+                self?.iapManager.loadProducts(productIds: offerResponse.list, handler: { [weak self] result in
+                    switch result {
+                    case .success(let array):
+                        DispatchQueue.toMain {
+                            self?.output.successed(offerApples: array)
+                        }
+                    case .failed(let error):
+                        DispatchQueue.toMain {
+                            self?.output.failedUsage(with: ErrorResponse.error(error))
+                        }
                     }
-                }
+                })
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })

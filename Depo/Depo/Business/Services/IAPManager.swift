@@ -19,7 +19,7 @@ final class IAPManager: NSObject {
     
     static let shared = IAPManager()
     
-    typealias OfferAppleHandler = ([OfferApple]) -> Void
+    typealias OfferAppleHandler = ResponseArrayHandler<OfferApple>
     typealias PurchaseHandler = (_ isSuccess: PurchaseResult) -> Void
     
     private var restorePurchasesCallback: RestoreHandler?
@@ -102,14 +102,20 @@ final class IAPManager: NSObject {
 
 extension IAPManager: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        log.debug("IAPManager productsRequest didReceive response")
+        log.debug("IAPManager Loaded list of products")
         
         products = response.products
         
         let sortedOffers = response.products
             .map { OfferApple(skProduct: $0) }
             .sorted { $0.rawPrice < $1.rawPrice }
-        offerAppleHandler(sortedOffers)
+        offerAppleHandler(.success(sortedOffers))
+    }
+    
+    func request(_ request: SKRequest, didFailWithError error: Error) {
+        log.debug("IAPManager Failed to load list of products")
+        
+        offerAppleHandler(.failed(error))
     }
 }
 
@@ -122,16 +128,20 @@ extension IAPManager: SKPaymentTransactionObserver {
             return
         }
         
+        var isPurchasing = false
+        
         for transaction in transactions {
+            log.debug("- transaction productIdentifier = \(transaction.payment.productIdentifier); state = \(transaction.transactionState)")
             switch transaction.transactionState {
             case .purchased: completeTransaction(transaction)
             case .failed: failedTransaction(transaction)
             case .restored: restoreTransaction(transaction)
+            case .purchasing: isPurchasing = true
             default: break
             }
         }
         
-        purchaseInProgress = false
+        purchaseInProgress = isPurchasing
     }
     
     public func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
