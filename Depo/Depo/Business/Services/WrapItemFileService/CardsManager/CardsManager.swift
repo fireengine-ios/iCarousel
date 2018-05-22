@@ -36,6 +36,8 @@ typealias BlockObject = VoidHandler
 class Progress {
     var allOperations: Int?
     var completedOperations: Int?
+    var percentProgress: Float?
+    var lastObject: Item?
 }
 
 class CardsManager: NSObject {
@@ -91,6 +93,14 @@ class CardsManager: NSObject {
         progress!.allOperations = allOperations
         progress!.completedOperations = completedOperations
         progresForOperation[operation] = progress
+    }
+    
+    func setPercentProgressForOperation(operation: OperationType, percent: Float, object: Item?) {
+        if let progress = progresForOperation[operation] {
+            progress.percentProgress = percent
+            progress.lastObject = object
+            progresForOperation[operation] = progress
+        }
     }
     
     // MARK: sending operation to registred subviews
@@ -172,13 +182,27 @@ class CardsManager: NSObject {
     }
     
     func setProgress(ratio: Float, operationType: OperationType, object: WrapData?) {
-//        DispatchQueue.main.async {
-            for notificationView in self.foloversArray {
-                notificationView.setProgress(ratio: ratio, for: operationType, object: object)
-            }
-//        }
+        setPercentProgressForOperation(operation: operationType, percent: ratio, object: object)
+        for notificationView in self.foloversArray {
+            notificationView.setProgress(ratio: ratio, for: operationType, object: object)
+        }
     }
     
+    func updateAllProgressesInCardsForView(view: CardsManagerViewProtocol){
+        for operation in progresForOperation.keys {
+            if let progress = progresForOperation[operation]{
+                
+                if let object = progress.lastObject, let percent = progress.percentProgress {
+                    view.setProgress(ratio: percent, for: operation, object: object)
+                }
+                
+                if let allOperation = progress.allOperations, let completedOperations = progress.completedOperations {
+                    view.setProgressForOperationWith(type: operation, allOperations: allOperation, completedOperations: completedOperations)
+                }
+            }
+        }
+    }
+
     func stopOperationWithType(type: OperationType) {
         
         print("operation stopped ", type.rawValue)

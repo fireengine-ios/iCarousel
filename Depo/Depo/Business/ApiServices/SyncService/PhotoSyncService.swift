@@ -18,15 +18,18 @@ final class PhotoSyncService: ItemSyncServiceImpl {
     
     override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
         CoreDataStack.default.getLocalUnsynced(fieldValue: .image, service: photoVideoService) { items in
-            completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by: { $0.metaDate > $1.metaDate }))
+            DispatchQueue.toBackground {
+                completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by: { $0.metaDate > $1.metaDate }))
+            }
         }
     }
     
     override func start(newItems: Bool) {
         super.start(newItems: newItems)
         
-        let isWiFi = ReachabilityService().isReachableViaWiFi
-        isWiFi ? MenloworksTagsService.shared.onAutosyncPhotosViaWifi() : MenloworksTagsService.shared.onAutosyncPhotosViaLte()
+        // This tag triggering when user changes autosync preferences
+//        let isWiFi = ReachabilityService().isReachableViaWiFi
+//        isWiFi ? MenloworksTagsService.shared.onAutosyncPhotosViaWifi() : MenloworksTagsService.shared.onAutosyncPhotosViaLte()
         
     }
     

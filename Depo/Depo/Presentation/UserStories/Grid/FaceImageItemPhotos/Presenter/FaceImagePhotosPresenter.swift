@@ -83,6 +83,14 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func filesAppendedAndSorted() {
+        super.filesAppendedAndSorted()
+        
+        if !dataSource.isPaginationDidEnd && dataSource.allItems.isEmpty {
+            getNextItems()
+        }
+    }
+    
     override func getSortTypeString() -> String {
         return ""
     }
@@ -98,6 +106,10 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
             view.setHeaderImage(with: path)
         }
  
+    }
+    
+    override func updateThreeDotsButton() {
+        view.setThreeDotsMenu(active: true)
     }
     
     // MARK: - BaseDataSourceForCollectionViewDelegate

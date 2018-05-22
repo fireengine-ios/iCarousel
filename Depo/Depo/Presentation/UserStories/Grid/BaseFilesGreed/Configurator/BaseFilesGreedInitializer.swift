@@ -41,7 +41,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
 
         configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
                                fileFilters: [.fileType(screenFilterType.convertToFileType())],
-                               bottomBarConfig: bottomBarConfig, visibleSlider: true,
+                               bottomBarConfig: bottomBarConfig, visibleSlider: true, visibleSyncItemsCheckBox: true,
                                topBarConfig: gridListTopBarConfig,
                                alertSheetConfig: alertSheetConfig)
         viewController.mainTitle = ""

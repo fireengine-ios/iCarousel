@@ -32,8 +32,6 @@ class GridListTopBar: ViewController {
     
     weak var delegate: GridListTopBarDelegate?
     
-    let sortButtonImageInset = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: -20)
-    
     var selectedIndex = -1
     
     class func initFromXib() -> GridListTopBar {
@@ -53,9 +51,9 @@ class GridListTopBar: ViewController {
     
     private func setupInitialState() {
         sortByButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 14)
-        sortByButton.titleLabel?.textColor = UIColor.darkGray
-        sortByButton.imageEdgeInsets = sortButtonImageInset
+        sortByButton.titleLabel?.textColor = UIColor.darkGray        
         segmentFilter.tintColor = ColorConstants.darcBlueColor
+        sortByButton.forceImageToRightSide()
     }
     
     func setupWithConfig(config: GridListTopBarConfig) {

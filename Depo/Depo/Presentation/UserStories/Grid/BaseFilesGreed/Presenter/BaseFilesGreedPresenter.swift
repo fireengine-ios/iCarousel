@@ -24,6 +24,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var filters: [GeneralFilesFiltrationType] = []
     
+    private var filtersByDefault: [GeneralFilesFiltrationType] = []
+    
     var bottomBarConfig: EditingBarConfig?
     
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
@@ -44,6 +46,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     var needShowScrollIndicator = false
     
     var needShowEmptyMetaItems = false
+    
+    var ifNeedReloadData = true
     
     private let semaphore = DispatchSemaphore(value: 0)
     
@@ -378,7 +382,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func needReloadData() {
-        reloadData()
+        if ifNeedReloadData {
+            reloadData()
+        }
     }
     
     func filesAppendedAndSorted() {
@@ -538,6 +544,25 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onMaxSelectionExeption() {
         
+    }
+    
+    func showOnlySyncedItems(_ value: Bool) {
+        if value {
+            filtersByDefault = filters
+            filters = filters.filter { type -> Bool in
+                switch type {
+                case .localStatus(_):
+                    return false
+                default:
+                    return true
+                }
+            }
+            filters.append(.localStatus(.nonLocal))            
+        } else {
+            filters = filtersByDefault
+        }
+        dataSource.originalFilters = filters
+        reloadData()
     }
     
     // MARK: - MoreActionsViewDelegate

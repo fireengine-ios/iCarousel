@@ -30,7 +30,7 @@ final class UploadQueueService {
                       didStartUpload: ShareDataHandler? = nil,
                       complition: @escaping ResponseVoid) {
         
-        let operations: [Operation] = shareDataArray.compactMap { shareData in
+        let operations: [Operation] = shareDataArray.flatMap { shareData in
             
             UploadOperation(url: shareData.url, contentType: shareData.contentType, progressHandler: progress, didStartUpload: {
                 didStartUpload?(shareData)

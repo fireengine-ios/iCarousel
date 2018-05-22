@@ -40,12 +40,18 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
             debugPrint("NOT AlbumDetailService")
             return
         }
+        
         albumService.currentPage = 0
         nextItems(sortBy: sortBy, sortOrder: sortOrder, newFieldValue: newFieldValue)
     }
     
     override func nextItems(_ searchText: String! = nil, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
         log.debug("AlbumDetailInteractor nextItems")
+        
+        guard isUpdating == false else {
+            return
+        }
+        isUpdating = true
         
         guard let albumService = remoteItems as? AlbumDetailService, let unwrapedAlbumUUID = album?.uuid else {
             debugPrint("NOT AlbumDetailService")
@@ -54,7 +60,9 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
         albumService.nextItems(albumUUID: unwrapedAlbumUUID, sortBy: sortBy, sortOrder: sortOrder,
                                success: { [weak self] items in
                                 log.debug("AlbumDetailInteractor nextItems AlbumDetailService nextItems success")
-
+                                
+                                self?.isUpdating = false
+                                
                                 DispatchQueue.main.async {
                                     if items.count == 0 {
                                         self?.output.getContentWithSuccessEnd()
@@ -64,6 +72,7 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
                                 }
             }, fail: { [weak self] in
                 log.debug("AlbumDetailInteractor nextItems AlbumDetailService nextItems fail")
+                self?.isUpdating = false
 
                 self?.output.asyncOperationFail(errorMessage: nil)
         })

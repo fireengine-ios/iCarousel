@@ -65,6 +65,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         super.viewWillAppear(animated)
         updateNavigationItemsState(state: true)
         homePageDataSource.isViewActive = true
+        CardsManager.default.updateAllProgressesInCardsForView(view: homePageDataSource)
         output.viewIsReady()
         
         if let searchController = navigationController?.topViewController as? SearchViewController {
@@ -128,12 +129,14 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     }
     
     func needPresentPopUp(popUpView: UIViewController) {
-        present(popUpView, animated: true, completion: nil)
+        DispatchQueue.toMain {
+            self.present(popUpView, animated: true, completion: nil)
+        }
     }
     
     private func requestShowSpotlight() {
         var cardTypes: [SpotlightType] = [.homePageIcon, .homePageGeneral]
-        cardTypes.append(contentsOf: homePageDataSource.popUps.compactMap { SpotlightType(cardView: $0) })
+        cardTypes.append(contentsOf: homePageDataSource.popUps.flatMap { SpotlightType(cardView: $0) })
         output.requestShowSpotlight(for: cardTypes)
     }
     
@@ -296,6 +299,7 @@ extension HomePageViewController: HomeViewTopViewActions {
     }
     
     func favoritesButtonGotPressed() {
+        MenloworksTagsService.shared.onFavoritesPageClicked()
         output.favoritesPressed()
     }
     

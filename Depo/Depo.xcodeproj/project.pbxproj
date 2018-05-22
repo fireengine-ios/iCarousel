@@ -2479,6 +2479,9 @@
 		8CD84C471FDEC68A005CD3B8 /* UploadFilesSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743AB461FDA8AB0005B3589 /* UploadFilesSelectionDataSource.swift */; };
 		8CD8F4F41F1E202600F1257B /* GradientLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */; };
 		8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */; };
+		8CDB21EA20AC0FB700739700 /* UINavigationController+Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15AFBD20A0846E00015874 /* UINavigationController+Push.swift */; };
+		8CDB21EB20AC10B100739700 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
+		8CDB21EC20AC11B600739700 /* UIButton+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1620AAC3150070FDC2 /* UIButton+Image.swift */; };
 		8CE20071207CD12900EF3483 /* ServerMessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A8F1620737E230001EB54 /* ServerMessageError.swift */; };
 		8CF6A9BE207C8C32007DEF71 /* PageCompounder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6A9BD207C8C32007DEF71 /* PageCompounder.swift */; };
 		8CF6A9BF207C8C32007DEF71 /* PageCompounder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6A9BD207C8C32007DEF71 /* PageCompounder.swift */; };
@@ -2539,6 +2542,10 @@
 		9826DB40207F60F900C00238 /* CustomScrollIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */; };
 		9826DB42207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
 		9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
+		9840C62220AEAD6B00A8634F /* CheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840C62120AEAD6B00A8634F /* CheckBoxView.xib */; };
+		9840C62320AEAD6B00A8634F /* CheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840C62120AEAD6B00A8634F /* CheckBoxView.xib */; };
+		9840C62520AEAD8100A8634F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9840C62420AEAD8100A8634F /* CheckBoxView.swift */; };
+		9840C62620AEAD8100A8634F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9840C62420AEAD8100A8634F /* CheckBoxView.swift */; };
 		984F8E7D200CDEA200D9D595 /* StoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */; };
 		984F8E7F200CE10100D9D595 /* StoriesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */; };
 		98570AFA208F7558002CCEBA /* SpotlightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98570AF7208F7556002CCEBA /* SpotlightViewController.swift */; };
@@ -3329,6 +3336,7 @@
 		CEEB7A9820A4755B0070FDC2 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
 		CEEB7A9B20A5BC230070FDC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEEB7A9D20A5BC230070FDC2 /* InfoPlist.strings */; };
 		CEEB7AA620A5D5C80070FDC2 /* GradientOrangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7AA520A5D5C80070FDC2 /* GradientOrangeView.swift */; };
+		CEEB7B1720AAC3160070FDC2 /* UIButton+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1620AAC3150070FDC2 /* UIButton+Image.swift */; };
 		CEEF22AA2063D6E000CE3949 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
 		CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */; };
 		CEEFECC1200F735100E9A4FE /* UISearchBar+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */; };
@@ -5026,6 +5034,8 @@
 		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
 		9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollIndicator.swift; sourceTree = "<group>"; };
 		9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomScrollIndicator.xib; sourceTree = "<group>"; };
+		9840C62120AEAD6B00A8634F /* CheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBoxView.xib; sourceTree = "<group>"; };
+		9840C62420AEAD8100A8634F /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInteractor.swift; sourceTree = "<group>"; };
 		984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInitializer.swift; sourceTree = "<group>"; };
 		98570AF7208F7556002CCEBA /* SpotlightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightViewController.swift; sourceTree = "<group>"; };
@@ -5489,6 +5499,7 @@
 		CEEB7AA320A5BC690070FDC2 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CEEB7AA420A5BC6A0070FDC2 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CEEB7AA520A5D5C80070FDC2 /* GradientOrangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientOrangeView.swift; sourceTree = "<group>"; };
+		CEEB7B1620AAC3150070FDC2 /* UIButton+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Image.swift"; sourceTree = "<group>"; };
 		CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
 		CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Cancel.swift"; sourceTree = "<group>"; };
@@ -7293,6 +7304,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				9840C62020AEAD1C00A8634F /* CheckBoxView */,
 				7CA4A160207E3D4E00F270C8 /* FullOfQuotaPopUps */,
 				9826DB3D207F60BC00C00238 /* CustomScrollIndicator */,
 				8CF6A9C0207C8CF8007DEF71 /* CollectionViewFooter */,
@@ -9769,6 +9781,15 @@
 			path = CustomScrollIndicator;
 			sourceTree = "<group>";
 		};
+		9840C62020AEAD1C00A8634F /* CheckBoxView */ = {
+			isa = PBXGroup;
+			children = (
+				9840C62120AEAD6B00A8634F /* CheckBoxView.xib */,
+				9840C62420AEAD8100A8634F /* CheckBoxView.swift */,
+			);
+			path = CheckBoxView;
+			sourceTree = "<group>";
+		};
 		98A8677C2088C64D00D2D4F4 /* SpotlightViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -10537,6 +10558,7 @@
 				B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */,
 				CE15AFBD20A0846E00015874 /* UINavigationController+Push.swift */,
 				CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */,
+				CEEB7B1620AAC3150070FDC2 /* UIButton+Image.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -12195,6 +12217,14 @@
 					};
 					8C0E8C611FDEBDFF00789C91 = {
 						DevelopmentTeam = 7A7F3AW7RP;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					B54BFF2F202B20250018AF82 = {
 						CreatedOnToolsVersion = 9.2;
@@ -12809,6 +12839,7 @@
 				8C06B00D2008AD71003D8E05 /* kucuk_ucgen.png in Resources */,
 				8C0E90611FDEBDFF00789C91 /* ActionsMenuTableViewCell.xib in Resources */,
 				8C06B0CF2008AD71003D8E05 /* sample_green.png in Resources */,
+				9840C62320AEAD6B00A8634F /* CheckBoxView.xib in Resources */,
 				8C06AF452008AD70003D8E05 /* crop_icon.png in Resources */,
 				8C06B0B32008AD71003D8E05 /* rotate@2x.png in Resources */,
 				7C4F60B4201C675F0033C58F /* MovieCard.xib in Resources */,
@@ -13417,6 +13448,7 @@
 				8C06AF922008AD71003D8E05 /* filtre@2x.png in Resources */,
 				7CA4A173207E49F200F270C8 /* SmallFullOfQuotaPopUp.xib in Resources */,
 				8C06AFB22008AD71003D8E05 /* frekans@3x.png in Resources */,
+				9840C62220AEAD6B00A8634F /* CheckBoxView.xib in Resources */,
 				8C06AED82008AD70003D8E05 /* bold@3x.png in Resources */,
 				8C06AEEC2008AD70003D8E05 /* Buyuk@3x.png in Resources */,
 				8C06B0582008AD71003D8E05 /* paylas_akilli_depo.png in Resources */,
@@ -13592,6 +13624,7 @@
 				"${BUILT_PRODUCTS_DIR}/ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleExif/SimpleExif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
@@ -13617,6 +13650,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectiveDropboxOfficial.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleExif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
@@ -13683,6 +13717,7 @@
 				"${BUILT_PRODUCTS_DIR}/ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleExif/SimpleExif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
@@ -13708,6 +13743,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectiveDropboxOfficial.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleExif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
@@ -13732,7 +13768,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 74412d8a38e9c5b44ca9993298b0ec4cba26289b 23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00";
 		};
 		8C679AF51FBC244F00B78873 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -13745,7 +13781,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 74412d8a38e9c5b44ca9993298b0ec4cba26289b 23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00";
 		};
 		BCA0868506E6C5E554B5F870 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -13807,6 +13843,7 @@
 				8C0E8C691FDEBDFF00789C91 /* CreateStoryPreviewModuleInput.swift in Sources */,
 				8C0E8C6A1FDEBDFF00789C91 /* CreateStoryPhotosOrderViewController.swift in Sources */,
 				8C0E8C6B1FDEBDFF00789C91 /* UserProfilePresenter.swift in Sources */,
+				8CDB21EB20AC10B100739700 /* DispatchQueue+Main.swift in Sources */,
 				8C0E8C6C1FDEBDFF00789C91 /* SyncAdapter.m in Sources */,
 				8C0E8C6D1FDEBDFF00789C91 /* PasscodeSettingsPresenter.swift in Sources */,
 				8C0E8C6E1FDEBDFF00789C91 /* Router.swift in Sources */,
@@ -14047,6 +14084,7 @@
 				8C0E8D2D1FDEBDFF00789C91 /* VisualMusicPlayerViewOutput.swift in Sources */,
 				8C0E8D2E1FDEBDFF00789C91 /* UIAlertViewCustom.m in Sources */,
 				8C0E8D2F1FDEBDFF00789C91 /* UpdaterController.m in Sources */,
+				8CDB21EA20AC0FB700739700 /* UINavigationController+Push.swift in Sources */,
 				8C0E8D301FDEBDFF00789C91 /* LocalAlbumPresenter.swift in Sources */,
 				8C0E8D311FDEBDFF00789C91 /* CaptchaViewController.swift in Sources */,
 				8C0E8D321FDEBDFF00789C91 /* CollectionSortingRules.swift in Sources */,
@@ -14274,6 +14312,7 @@
 				8C0E8DEF1FDEBDFF00789C91 /* PhotoStory.swift in Sources */,
 				8C0E8DF01FDEBDFF00789C91 /* IntroduceConfigurator.swift in Sources */,
 				8C0E8DF11FDEBDFF00789C91 /* PasscodeStorage.swift in Sources */,
+				8CDB21EC20AC11B600739700 /* UIButton+Image.swift in Sources */,
 				78DDEF9D201908CB00E3530B /* String+CyrillicCompare.swift in Sources */,
 				8C0E8DF21FDEBDFF00789C91 /* AlertFilesActionsSheetInteractor.swift in Sources */,
 				4A0AC1482087375B00032CC7 /* PeriodicContactSyncViewInput.swift in Sources */,
@@ -14357,6 +14396,7 @@
 				8C0E8E2E1FDEBDFF00789C91 /* BottomSelectionTabBarViewOutput.swift in Sources */,
 				8C0E8E2F1FDEBDFF00789C91 /* ActivityTimelineServiceResponse.swift in Sources */,
 				8C0E8E311FDEBDFF00789C91 /* ImportFromInstagramPresenter.swift in Sources */,
+				9840C62620AEAD8100A8634F /* CheckBoxView.swift in Sources */,
 				8C0E8E321FDEBDFF00789C91 /* UsageInfoInteractorOutput.swift in Sources */,
 				8C0E8E331FDEBDFF00789C91 /* SyncServiceManager.swift in Sources */,
 				8C0E8E341FDEBDFF00789C91 /* UploadFromLifeBoxViewController.swift in Sources */,
@@ -15384,6 +15424,7 @@
 				CE51ACD41EF90853005DCEE0 /* LoginInteractorInput.swift in Sources */,
 				7C4988181F3320420039C5F2 /* CreateStoryPhotosOrderInteractorOutput.swift in Sources */,
 				B520000C202492A90096D036 /* SynchronizedArray.swift in Sources */,
+				CEEB7B1720AAC3160070FDC2 /* UIButton+Image.swift in Sources */,
 				7C6E2F8F1F31E4F800536DB6 /* CreateStoryNameInitializer.swift in Sources */,
 				7C6E2FA31F32FCD900536DB6 /* AudioSelectionCollectionViewCell.swift in Sources */,
 				CE51ACD51EF90853005DCEE0 /* TermsAndServicesPresenter.swift in Sources */,
@@ -15620,6 +15661,7 @@
 				8C7786A01F3F38EF005CB432 /* VisualMusicPlayerInteractorInput.swift in Sources */,
 				8CFF868A1F0F96E600520D18 /* ContactDevice.m in Sources */,
 				4A9B3902201F3513009FC572 /* FaceImageItemsPresenter.swift in Sources */,
+				9840C62520AEAD8100A8634F /* CheckBoxView.swift in Sources */,
 				8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
 				2EB5EE9DB087C1F0CEAF1343 /* BaseFilesGreedInteractor.swift in Sources */,
 				78D9BA3E2007E80600F2233F /* DuplicatedContactsPresenter.swift in Sources */,
@@ -16432,6 +16474,7 @@
 		78B2D352204AA5F500D096DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16462,6 +16505,7 @@
 		78B2D353204AA5F500D096DC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16491,6 +16535,7 @@
 		78B2D354204AA5F500D096DC /* AppStore */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16520,6 +16565,7 @@
 		78B2D355204AA5F500D096DC /* Enterprise */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16695,8 +16741,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox;
-				PROVISIONING_PROFILE = "c7326830-eaca-4f1e-9bbb-765e70c0d2fc";
-				PROVISIONING_PROFILE_SPECIFIER = "8c40575c-decc-4227-ac97-05bfd2184acb";
+				PROVISIONING_PROFILE = "7021771e-04e2-4105-afa4-9b1546616781";
+				PROVISIONING_PROFILE_SPECIFIER = "7021771e-04e2-4105-afa4-9b1546616781";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -16763,6 +16809,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5CA25298A8872FA819D654BE /* Pods-autosync-widget.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16796,6 +16843,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 76B1160903EAC577E57F21A0 /* Pods-autosync-widget.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16829,6 +16877,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FFA713DFFEF8A0A618B462F5 /* Pods-autosync-widget.appstore.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16862,6 +16911,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A3E3BDF23BBE84B495BAA606 /* Pods-autosync-widget.enterprise.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16894,6 +16944,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DBB0E951C502D6894556ED12 /* Pods-LifeboxFileProvider.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16927,6 +16978,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8E6892DB1C0232B660C2CB3 /* Pods-LifeboxFileProvider.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16960,6 +17012,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3D010A878B7C0430091742F6 /* Pods-LifeboxFileProvider.appstore.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16993,6 +17046,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 13C1164C33CF7116F12CF1F9 /* Pods-LifeboxFileProvider.enterprise.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17025,6 +17079,7 @@
 		CE1BE942204831CE0074BDDC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17057,6 +17112,7 @@
 		CE1BE943204831CE0074BDDC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17089,6 +17145,7 @@
 		CE1BE944204831CE0074BDDC /* AppStore */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17121,6 +17178,7 @@
 		CE1BE945204831CE0074BDDC /* Enterprise */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17196,7 +17254,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox;
 				PRODUCT_NAME = lifebox;
-				PROVISIONING_PROFILE = "85d83443-9582-4c9b-9c0c-24c88c6a5e91";
+				PROVISIONING_PROFILE = "44c66040-9dab-41c6-a80f-38c74d400c45";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxForTurkcell;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -17372,6 +17430,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C7EA8E62DD494F5240389C2E /* Pods-LifeboxShared.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17405,6 +17464,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 332BC9156196CAFE4CD77111 /* Pods-LifeboxShared.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17438,6 +17498,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 116F0D4A7EDE2EA38E1B57BC /* Pods-LifeboxShared.appstore.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -17471,6 +17532,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 14B63501F537CEC2931A734D /* Pods-LifeboxShared.enterprise.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

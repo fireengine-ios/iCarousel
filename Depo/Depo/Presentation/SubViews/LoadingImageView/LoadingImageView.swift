@@ -225,6 +225,8 @@ class LoadingImageView: UIImageView {
     }
     
     private func finishImageLoading(_ image: UIImage?, withAnimation: Bool = false) {
+        self.path = nil
+        self.url = nil
         DispatchQueue.main.async {
             self.activity.stopAnimating()
             if withAnimation {
@@ -236,8 +238,6 @@ class LoadingImageView: UIImageView {
             } else {
                 self.image = image
             }
-            self.path = nil
-            self.url = nil
             self.delegate?.onImageLoaded(image: image)
         }
         

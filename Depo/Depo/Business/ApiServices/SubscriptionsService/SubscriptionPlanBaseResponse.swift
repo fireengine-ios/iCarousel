@@ -12,6 +12,7 @@ enum SubscriptionType: String {
     case free = "FREE_OF_CHARGE"
     case google = "INAPP_PURCHASE_GOOGLE"
     case apple = "INAPP_PURCHASE_APPLE"
+    case promo = "PROMO_CODE"
     
     var description: String {
         switch self {

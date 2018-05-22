@@ -124,7 +124,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             editingTabBar.view.isHidden = true
         }
         
-        output.viewIsReady(view: viewForBottomBar)
+        
         statusBarColor = .black
     }
     
@@ -132,6 +132,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         super.viewDidAppear(animated)
         collectionView.isHidden = false
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+        output.viewIsReady(view: viewForBottomBar)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -148,12 +149,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        collectionView.performBatchUpdates(nil, completion: nil)
-        
-        if needToScrollAfterRotation {
-            needToScrollAfterRotation = false
-            scrollToSelectedIndex()
-        }
+        collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
+            guard let `self` = self else {
+                return
+            }
+            if self.needToScrollAfterRotation {
+                self.needToScrollAfterRotation = false
+                self.scrollToSelectedIndex()
+            }
+        })
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -178,7 +182,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         guard !objects.isEmpty, selectedIndex < objects.count else {
             return
         }
-        
         let indexPath = IndexPath(item: selectedIndex, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
     } 
@@ -223,6 +226,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
     func onShowSelectedItem(at index: Int, from items: [Item]) {
         objects = items
         selectedIndex = index
+        
+        collectionView.reloadData()
+        collectionView.performBatchUpdates(nil) { [weak self] _ in
+            self?.scrollToSelectedIndex()
+        }
     }
 
     @objc func onRightBarButtonItem(sender: UIButton) {
@@ -307,7 +315,10 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
     }
     
     func finishedUploadFile(file: WrapData) {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain { [weak self] in
+            guard let `self` = self else {
+                return
+            }
             self.output.setSelectedItemIndex(selectedIndex: self.selectedIndex)
             self.setupNavigationBar()
         }

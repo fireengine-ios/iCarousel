@@ -9,8 +9,6 @@
 extension MenloworksTags {
     class NameConstants {
         static let tutorial = "tutorial"
-        static let photoUpload = "photo_upload"
-        static let videoUpload = "video_uploaded"
         static let musicUpload = "music_uploaded"
         static let fileUpload = "file_uploaded"
         static let wifi3g = "wifi/3g"
@@ -42,6 +40,10 @@ extension MenloworksTags {
         static let autoSyncVideosViaLte = "autosyncvideoslte"
         static let autoSyncPhotosViaWifi = "autosyncphotoswifi"
         static let autoSyncPhotosViaLte = "autosyncphotoslte"
+        static let firstAutoSyncVideosViaWifi = "first_autosyncwifiVideos"
+        static let firstAutoSyncVideosViaLte = "first_autosynclteVideos"
+        static let firstAutoSyncPhotosViaWifi = "first_autosyncwifiPhotos"
+        static let firstAutoSyncPhotosViaLte = "first_autosyncltePhotos"
         static let packagesOpen = "packages"
         static let preferencesOpen = "preferences"
         static let storyPageOpen = "story_page"
@@ -67,11 +69,24 @@ extension MenloworksTags {
         static let fileDeleted = "deleted"
         static let quotaStatus = "quota_status"
         static let autosyncStatus = "autosync"
+        static let firstAutoSyncOff = "first_autosyncoff"
         static let autosyncPhotosStatus = "autosyncPhotos"
         static let autosyncVideosStatus = "autosyncVideos"
         static let fiftyGBPurchasedStatus = "Satınalındı50GB"
         static let fiveHundredGBPurchasedStatus = "Satınalındı500GB"
         static let twoThousandFiveHundredGBPurchasedStatus = "Satınalındı25TB"
+        static let favoritesPageClicked = "favs"
+        static let socialMediaPageClicked = "social_media"
+        static let periodicContactSync = "periodic_contact_sync"
+        static let editedPhotoSave = "photo_edit_save"
+        
+        static let photoUploadAutosync = "photo_upload_autosync"
+        static let photoUploadManual = "photo_upload_manual"
+        static let photoUploadBackground = "photo_upload_background"
+        
+        static let videoUploadAutosync = "video_uploaded_autosync"
+        static let videoUploadManual = "video_upload_manual"
+        static let videoUploadBackground = "video_upload_background"
     }
     
     class ValueConstants {

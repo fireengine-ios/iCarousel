@@ -20,10 +20,12 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func viewWillBecomeActive() {
+        startAsyncOperation()
         interactor.getCellsData()
     }
     
     func cellsDataForSettings(array: [[String]]) {
+        asyncOperationSucces()
         view.showCellsData(array: array)
     }
     

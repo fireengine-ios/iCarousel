@@ -616,3 +616,15 @@
 "LifeboxSmallPopUpCheckBoxTex" = "";
 "LifeboxSmallPopUpFirstButtonText" = "";
 "LifeboxSmallPopUpSecondButtonText" = "";
+"has_remained_lifebox_usage" = "";
+"Renewal Date: %@" = "";
+"created" = "";
+"uploaded" = "";
+"updated" = "";
+"deleted" = "";
+"moved" = "";
+"renamed" = "";
+"copied" = "";
+"marked as favourite" = "";
+"Bad internet connection" = "";
+"download_error_unsupported_extension" = "";

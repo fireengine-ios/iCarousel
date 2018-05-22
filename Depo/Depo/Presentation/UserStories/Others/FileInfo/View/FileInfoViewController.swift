@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FileInfoViewController: BaseViewController, FileInfoViewInput, UITextFieldDelegate, ActivityIndicator, ErrorPresenter {
+final class FileInfoViewController: BaseViewController, ActivityIndicator, ErrorPresenter {
     
     private var fileExtension: String?
     
@@ -89,7 +89,83 @@ class FileInfoViewController: BaseViewController, FileInfoViewInput, UITextField
         navigationBarWithGradientStyle()
         setTitle(withString: "")
     }
-        
+
+    private func addReturnIfNeed(string: inout String) {
+        if !string.isEmpty {
+            string.append("\n")
+        }
+    }
+    
+    private func configurateAudioMethadataFor(object: Item) {
+        if let musickMethadata = object.metaData {
+            var string = ""
+            if let album = musickMethadata.album {
+                string += TextConstants.fileInfoAlbumTitle + ": " + album
+            }
+            if let artist = musickMethadata.artist {
+                addReturnIfNeed(string: &string)
+                string += TextConstants.fileInfoArtistTitle + ": " + artist
+            }
+            if let title = musickMethadata.title {
+                addReturnIfNeed(string: &string)
+                string += TextConstants.fileInfoTitleTitle + ": " + title
+            }
+            
+            moreFileInfoLabel.text = string
+        }
+    }
+    
+    private func checkCanEdit(item: BaseDataSourceItem) {
+        if item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
+            navigationItem.rightBarButtonItem = nil
+            fileName.isEnabled = false
+        }
+    }
+    
+    private func hideInfoDateLabels () {
+        takenDateLabel.isHidden = true
+        takenDateTitle.isHidden = true
+        uploadDateLabel.isHidden = true
+        uploadDateTitle.isHidden = true
+    }
+    
+    // MARK: Actions
+    
+    @IBAction func onHideKeyboard() {
+        if let text = fileName.text {
+            output.validateName(newName: text)
+        }
+    }
+    
+    @objc func onSave() {
+        if var text = fileName.text,
+            let fileExtension = fileExtension {
+            if fileExtension.count > 0,
+                text.count > 0 {
+                text = "\((text as NSString).deletingPathExtension).\(fileExtension)"
+            }
+            
+            output.onRename(newName: text)
+        }
+    }
+    
+}
+
+// MARK: FileInfoViewInput
+
+extension FileInfoViewController: FileInfoViewInput {
+    
+    func startRenaming() {
+        if fileName == nil {
+            _ = view
+        }
+        fileName.becomeFirstResponder()
+    }
+    
+    func goBack() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     func setObject(object: BaseDataSourceItem) {
         
         fileName.text = object.name
@@ -121,7 +197,7 @@ class FileInfoViewController: BaseViewController, FileInfoViewInput, UITextField
                 checkCanEdit(item: object)
             }
             
-            if let createdDate = obj.creationDate, object.isSynced() {
+            if let createdDate = obj.creationDate, !object.isLocalItem {
                 uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
                 if !obj.isLocalItem, let takenDate = obj.metaData?.takenDate, createdDate != takenDate {
                     takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
@@ -166,53 +242,41 @@ class FileInfoViewController: BaseViewController, FileInfoViewInput, UITextField
         durationH.constant = 0
         view.layoutIfNeeded()
     }
+    
+    func show(name: String) {
+        fileExtension = (name as NSString).pathExtension
+        
+        if fileName.isFirstResponder {
+            fileName.text = (name as NSString).deletingPathExtension
+        } else {
+            fileName.text = name
+        }
+    }
+    
+    func showValidateNameSuccess() {
+        fileName.resignFirstResponder()
+        
+        if let text = fileName.text,
+            text.count > 0,
+            let fileExtension = fileExtension,
+            fileExtension.count > 0 {
+            fileName.text = "\((text as NSString).deletingPathExtension).\(fileExtension)"
+        }
+    }
+    
+    func hideViews() {
+        view.subviews.forEach { $0.isHidden = true }
+    }
+    
+    func showViews() {
+        view.subviews.forEach { $0.isHidden = false }
+    }
+    
+}
 
-    func addReturnIfNeed(string: inout String) {
-        if !string.isEmpty {
-            string.append("\n")
-        }
-    }
-    
-    func configurateAudioMethadataFor(object: Item) {
-        if let musickMethadata = object.metaData {
-            var string = ""
-            if let album = musickMethadata.album {
-                string += TextConstants.fileInfoAlbumTitle + ": " + album
-            }
-            if let artist = musickMethadata.artist {
-                addReturnIfNeed(string: &string)
-                string += TextConstants.fileInfoArtistTitle + ": " + artist
-            }
-            if let title = musickMethadata.title {
-                addReturnIfNeed(string: &string)
-                string += TextConstants.fileInfoTitleTitle + ": " + title
-            }
-            
-            moreFileInfoLabel.text = string
-        }
-    }
-    
-    private func checkCanEdit(item: BaseDataSourceItem) {
-        if !item.isSynced() || item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
-            navigationItem.rightBarButtonItem = nil
-            fileName.isEnabled = false
-        }
-    }
-    
-    // MARK: FileInfoViewInput
-    
-    func startRenaming() {
-        if fileName == nil {
-            _ = view
-        }
-        fileName.becomeFirstResponder()
-    }
-    
-    func goBack() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    // MARK: UITextFieldDelegate
+// MARK: UITextFieldDelegate
+
+extension FileInfoViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -227,48 +291,12 @@ class FileInfoViewController: BaseViewController, FileInfoViewInput, UITextField
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if let text = textField.text {
             textField.text = (text as NSString).deletingPathExtension
-            fileExtension = (text as NSString).pathExtension
+            if fileExtension == nil {
+                fileExtension = (text as NSString).pathExtension
+            }
         }
         
         return true
     }
     
-    // MARK: Actions
-    
-    @IBAction func onHideKeyboard() {
-        if let text = fileName.text,
-            let fileExtension = fileExtension {
-            fileName.text = "\(text).\(fileExtension)"
-        }
-        
-        fileName.resignFirstResponder()
-    }
-    
-    @objc func onSave() {
-        if var text = fileName.text,
-            let fileExtension = fileExtension {
-            text = "\((text as NSString).deletingPathExtension).\(fileExtension)"
-            
-            output.onRename(newName: text)
-        }
-    }
-    
-    func show(name: String) {
-        fileName.text = name
-    }
-    
-    private func hideInfoDateLabels () {
-        takenDateLabel.isHidden = true
-        takenDateTitle.isHidden = true
-        uploadDateLabel.isHidden = true
-        uploadDateTitle.isHidden = true
-    }
-    
-    func hideViews() {
-        view.subviews.forEach { $0.isHidden = true }
-    }
-    
-    func showViews() {
-        view.subviews.forEach { $0.isHidden = false }
-    }
 }

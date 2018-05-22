@@ -8,12 +8,7 @@
 
 class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlayerViewOutput, VisualMusicPlayerInteractorOutput, BaseItemInputPassingProtocol {
 
-    func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type == .delete {
-            view.player.playNext()
-        }
-    }
-    
+    func operationFinished(withType type: ElementTypes, response: Any?) {}
     func operationFailed(withType type: ElementTypes) {}
     func changeCover() {}
     func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }

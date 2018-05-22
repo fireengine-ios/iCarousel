@@ -175,8 +175,7 @@ final class UploadService: BaseRequestService {
                                                          completedOperations: currentUploadOperationNumber)
     }
     
-    private func syncToUseFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, syncToUseFileListOperationsCallBack:
-        @escaping ([UploadOperations]?)-> Void ) {
+    private func syncToUseFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, syncToUseFileListOperationsCallBack: @escaping ([UploadOperations]?)-> Void ) {
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 syncToUseFileListOperationsCallBack(nil)
@@ -256,7 +255,7 @@ final class UploadService: BaseRequestService {
                         
                         CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                         
-                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
+                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item, isAutoSync: false)
                         
                         checkIfFinished()
                     }
@@ -356,7 +355,7 @@ final class UploadService: BaseRequestService {
                         
                         CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                         
-                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
+                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item, isAutoSync: false)
                         
                         checkIfFinished()
                     }
@@ -454,7 +453,7 @@ final class UploadService: BaseRequestService {
                         
                         CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
                         
-                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item)
+                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item, isAutoSync: true)
                         
                         checkIfFinished()
                     }
@@ -627,7 +626,7 @@ extension UploadService {
                                                 })
         })
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             RouterVC().tabBarVC?.present(controller, animated: false, completion: nil)
         }
     }

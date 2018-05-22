@@ -76,7 +76,7 @@
 "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Lifecell aboneleri için özel fiyatlar! lifebox 50GB paketini 30 gün için 24,99 UAH karşılığında aktifleştirmek için 50VKL yazarak, lifebox 500GB paketini 30 gün için 52,99 UAH karşılığında aktifleştirmek için 500VKL yazarak 8080’e SMS gönderin.";
 "%ld docs" = "%ld belge";
 "Quota info" = "Kullanım bilgisi";
-"%@ of %@ has remained" = "%2@’nin %1@'si kaldı";
+"%@ of %@ has remained" = "%2$@’nin %1$@'si kaldı";
 "%ld documents" = "%ld belge";
 "%ld songs" = "%ld şarkı";
 "%ld videos" = "%ld video";
@@ -116,7 +116,7 @@
 "Copy" = "Kopyala";
 "Create a Story" = "Hikaye Oluştur";
 "Share Via Link" = "Bağlantı yoluyla paylaş";
-"Original Size" = "Örijinal Boyut";
+"Original Size" = "Orijinal Boyut";
 "Small Size" = "Küçük Boyut";
 "Download" = "İndir";
 "Sync" = "Yedekle";
@@ -125,8 +125,8 @@
 "Share" = "Paylaş";
 "Wait for a Wi-Fi Connection" = "Wi-Fi bağlantısı bekleniyor";
 "Auto Sync Preparation" = "Otomatik Yedekleme Hazırlanıyor...";
-"Sync with data plan" = "Yedekleme için hücresel veri kullan";
-"Waiting for Wi-Fi connection to auto-sync" = "Auto-sync için Wi-Fi bağlantısı bekleniyor";
+"Sync with data plan" = "Yedekleme için hücresel veri kullanılacak?";
+"Waiting for Wi-Fi connection to auto-sync" = "Otomatik yedekleme için Wi-Fi bekleniyor";
 "Auto Upload is off.\nGo to setting to auto sync." = "Otomatik yedekeleme kapalı.\nOtomatik yedekleme ayarlarına gidin.";
 "LTE" = "LTE";
 "4G" = "Mobil Veri";
@@ -140,8 +140,8 @@
 "Download is complete" = "İndirme tamamlandı";
 "Deleting is complete" = "Slime işlemi tamamlandı.";
 "Downloading files" = "Dosyalar indiriliyor";
-"Uploading files over" = "Üzerinden dosyalar upload ediliyor";
-"Syncing files over" = "ile dosyalar yedekleniyor";
+"Uploading files over" = "%@ ile dosyalar yedekleniyor";
+"Syncing files over" = "%@ ile dosyalar yedekleniyor";
 "(%ld of %ld)" = "(%ld / %ld)";
 "You need to specify your language preference so that we can serve you better." = "Sana daha iyi hizmet verebilmem için dil tercihini belirtebilir misin?";
 "Please type your message" = "Lütfen mesajını yaz";
@@ -206,7 +206,7 @@
 "SAVE" = "Kaydet";
 "Name" = "Isim";
 "Create a Name" = "Hikayene bir isim ver";
-"Delete device original" = "Orijinali cihazdan silin";
+"Delete device original" = "Orijinalini cihazdan silin";
 "Add to favorites" = "Sık kullanılanlara ekle";
 "Restore" = "Telefona Aktar";
 "Back-Up" = "Yedekle";
@@ -223,7 +223,7 @@
 "Title" = "Adı";
 "Artist" = "Sanatçı";
 "Album" = "Albüm";
-"Taken date" = "Alma Tarihi";
+"Taken date" = "Çekim tarihi";
 "Upload date" = "Yükleme tarihi";
 "Date modified" = "Değiştirilme Tarihi";
 "Duration" = "Süre";
@@ -280,7 +280,7 @@
 "Take a Photo" = "Fotoğraf Çek";
 "You don’t have a profile picture, let’s upload a pretty photo!" = "Bir profil fotoğrafın yok, hadi güzel bir fotoğraf yükleyelim!";
 "Your profile looks empty" = "Profilin boş görünüyor";
-"Sync with Data Plan Now" = "Yedekleme için hücresel veri kullan?";
+"Sync with Data Plan Now" = "Yedekleme için mobil veri kullanılacak?";
 "Waiting for Wi-Fi to auto sync 14 items" = "14 öğenin otomatik yedeklenmesi için Wi-Fi bekleniyor";
 "No" = "Hayır";
 "Access to Gallery is denied. Please change it from the settings menu of the device" = "Galeriye erişim reddedildi. Lütfen cihazın ayarlar menüsünden erişim izni verin.";
@@ -337,9 +337,9 @@
 "Send password reset link" = "Şifre sıfırlama linki gönder";
 "Forgot My Password" = "Şifremi unuttum";
 "Sign Up" = "Kaydol";
-"Turn-on Sync" = "Sync’i açın";
+"Turn-on Sync" = "Kullan";
 "Syncing files using cellular data could incur data charges" = "Dosyalar yedeklenirken mobil verilerin kullanılması veri ücretlerine neden olabilir.";
-"Sync over data plan?" = "Yedekleme için hücresel veri kullan?";
+"Sync over data plan?" = "Yedekleme için mobil veri kullanılacak?";
 "Skip Auto-Sync" = "Otomatik yedeklemeyi atla";
 "You’re skipping auto-sync setting turned off. You can activate this later in preferences." = "Otomatik yedekleme ayarlarını atlıyorsunuz. Daha sonra ayarlar/ otomatik yedekleme kısmından ayarlarınızı değştirebilirsiniz.";
 "Skip setting Auto-Sync?" = "Otomatik Yedekleme ayarlarını atlamak ister misin?";
@@ -383,7 +383,7 @@
 "I have an account, let me log in" = "Giriş Yap";
 "Start using Lifebox now!" = "Yeni hesap oluştur";
 "E-mail field is invalid" = "E-posta alanı geçersiz";
-"Delete Device Original" = "Cihazın Orijinal ayarlarını silin";
+"Delete Device Original" = "Orijinalini cihazdan silin";
 "Please check your internet connection is active and Mobile Data is ON." = "Lütfen internet bağlantınızın aktif ve mobil verinin açık olduğunu kontrol edin.";
 "cancelled" = "Iptal edildi";
 "The network connection was lost." = "Ağ bağlantısı kaybedildi";
@@ -555,7 +555,7 @@
 "You have reached your lifebox memory limit" = "lifebox depolama alanın neredeyse doldu !";
 "Error occurred while accessing your contacts.\nPlease check your settings." = "Kontaklarına ulaşamadık. Lütfen ayarlarını kontrol et";
 "Manage Contacts" = "Kişileri yönet";
-"Import fearture is totally free of charge and does not affect your internet package" = "Transfer özelliği tamamen ücretsiz olup internet paketinizden yemeyecektir.";
+"Import fearture is totally free of charge and does not affect your internet package" = "Transfer özelliği tamamen ücretsiz olup internet paketinizden veri harcamayacaktır.";
 "Your last backup was on %@" = "Son yedekleme tarihi: %@";
 "Contacts Sync" = "Kişileri senkronize et";
 "Sort By" = "Sırala";
@@ -587,7 +587,7 @@
 "%d%% Restored…" = "%d%% indiriliyor";
 "%d%% Analyzed…" = "%d%% analiz ediliyor";
 "START USING" = "Başla";
-"landingTitle0" = "Hoşgeldin!\n";
+"landingTitle0" = "Yaşa, Biriktir, Hatırla\n";
 "landingSubTitle0" = "Tüm anılarını, kontaklarını ve dosyalarını lifebox'a güvenle yedekle! \nDilediğin zaman dilediğin yerden eriş..";
 "landingTitle1" = "Otomatik Yedekleme";
 "landingSubTitle1" = "Fotoğraf ve videolarını otomatik yedekle ve istediğin yerden eriş";
@@ -616,3 +616,15 @@
 "LifeboxSmallPopUpCheckBoxTex" = "";
 "LifeboxSmallPopUpFirstButtonText" = "";
 "LifeboxSmallPopUpSecondButtonText" = "";
+"has_remained_lifebox_usage" = "";
+"Renewal Date: %@" = "";
+"created" = "";
+"uploaded" = "";
+"updated" = "";
+"deleted" = "";
+"moved" = "";
+"renamed" = "";
+"copied" = "";
+"marked as favourite" = "";
+"Bad internet connection" = "";
+"download_error_unsupported_extension" = "";

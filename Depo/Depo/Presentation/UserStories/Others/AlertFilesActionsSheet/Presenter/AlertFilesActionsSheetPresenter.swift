@@ -10,7 +10,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     
     private let semaphore = DispatchSemaphore(value: 0)
     
-    let rightButtonBox = CGRect(x: Device.winSize.width - 50, y: 64, width: 10, height: 10)
+    let rightButtonBox = CGRect(x: Device.winSize.width - 45, y: -15, width: 0, height: 0)
     // MARK: Module Input
     
     func showSelectionsAlertSheet() {
@@ -284,6 +284,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .removeFromAlbum:
                 action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
                     MenloworksTagsService.shared.onRemoveFromAlbumClicked()
+                    MenloworksEventsService.shared.onRemoveFromAlbumClicked()
                     self.interactor.removeFromAlbum(items: currentItems)
                     self.basePassingPresenter?.stopModeSelected()
                 })
@@ -334,6 +335,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .addToFavorites:
                 action = UIAlertAction(title: TextConstants.actionSheetAddToFavorites, style: .default, handler: { _ in
                     MenloworksEventsService.shared.onAddToFavoritesClicked()
+                    MenloworksTagsService.shared.onFavoritesOpen()
                     self.basePassingPresenter?.stopModeSelected()
                     self.interactor.addToFavorites(items: currentItems)
                 })
@@ -362,7 +364,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     self.basePassingPresenter?.deSelectAll()
                 })
             case .print:
-                action = UIAlertAction(title: "Print", style: .default, handler: { _ in
+                action = UIAlertAction(title: TextConstants.tabBarPrintLabel, style: .default, handler: { _ in
                     MenloworksAppEvents.onPrintClicked()
                     self.basePassingPresenter?.printSelected()
                 })
@@ -461,6 +463,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         } else if let _ = sender as? UIBarButtonItem {
             //FIXME: use actionSheetVC.popoverPresentationController?.barButtonItem instead
             actionSheetVC.popoverPresentationController?.sourceRect = rightButtonBox
+            actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up 
         }
         vc.present(actionSheetVC, animated: true, completion: {})
     }

@@ -555,8 +555,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func failAction(elementType: ElementTypes) -> FailResponse {
         
         let failResponse: FailResponse  = { [weak self] value in
-            DispatchQueue.main.async {
-                self?.output?.operationFailed(type: elementType, message: value.description)
+            DispatchQueue.toMain {
+                if value.isOutOfSpaceError {
+                    self?.output?.showOutOfSpaceAlert(failedType: elementType)
+                } else {
+                    self?.output?.operationFailed(type: elementType, message: value.description)
+                }
             }
         }
         return failResponse
@@ -565,6 +569,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private func sync(items: [BaseDataSourceItem]?, action: @escaping VoidHandler, cancel: @escaping VoidHandler, fail: FailResponse?) {
         guard let items = items as? [WrapData] else { return }
         let successClosure = { [weak self] in
+            log.debug("SyncToUse - Success closure")
             DispatchQueue.main.async {
                 self?.output?.completeAsyncOperationEnableScreen()
                 action()
@@ -572,6 +577,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         let failClosure: FailResponse = { [weak self] errorResponse in
+            log.debug("SyncToUse - Fail closure")
             DispatchQueue.main.async {
                 self?.output?.completeAsyncOperationEnableScreen()
                 if errorResponse.errorDescription == TextConstants.canceledOperationTextError {
@@ -651,6 +657,7 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
     }
     
     private func save(image: UIImage) {
+        MenloworksTagsService.shared.editedPhotoSaved()
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }

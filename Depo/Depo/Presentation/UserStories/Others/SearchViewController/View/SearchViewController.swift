@@ -64,6 +64,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         subscribeToNotifications()
         configureNavigationBar()
         
+        if let topBarVc = UIApplication.topController() as? TabBarViewController {
+            topBarVc.statusBarStyle = .default
+        }
+        
         MenloworksTagsService.shared.onSearchOpen()
     }
     
@@ -76,6 +80,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             defaultNavBarStyle()
         }
         statusBarColor = .white
+        
+        if let topBarVc = UIApplication.topController() as? TabBarViewController {
+            topBarVc.statusBarStyle = .default
+        }
         
         editingTabBar?.view.layoutIfNeeded()
         
@@ -109,6 +117,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         output.viewWillDisappear()
         statusBarColor = .clear
         if goBack {
+            if let topBarVc = UIApplication.topController() as? TabBarViewController {
+                topBarVc.statusBarStyle = .lightContent
+            }
+            
             homePageNavigationBarStyle()
         }
         
@@ -336,17 +348,24 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     func successWithSuggestList(list: [SuggestionObject]) {
         items[.suggestion] = Array(list.prefix(NumericConstants.maxSuggestions))
-        if collectionView.isHidden && noFilesView.isHidden {
-            suggestTableView.isHidden = isEmptyItems()
+        
+        DispatchQueue.toMain {
+            if self.collectionView.isHidden && self.noFilesView.isHidden {
+                self.suggestTableView.isHidden = self.isEmptyItems()
+            }
+            
+            self.suggestTableView.reloadData()
         }
-        suggestTableView.reloadData()
     }
     
     func setRecentSearches(_ recentSearches: [SearchCategory: [SuggestionObject]]) {
         recentSearches.forEach { category, list in
             self.items[category] = list
         }
-        suggestTableView.reloadData()
+        
+        DispatchQueue.toMain {
+            self.suggestTableView.reloadData()
+        }
     }
     
     private func isEmptyItems() -> Bool {

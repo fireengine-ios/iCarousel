@@ -179,20 +179,21 @@ final class NextPageOperation: Operation {
     
     override func main() {
         requestTask = searchService.searchByField(param: requestParam, success: { [weak self] response  in
-            guard let `self` = self else {
-                return
-            }
-            
-            guard let resultResponse = (response as? SearchResponse)?.list else {
-                self.fail?()
+            DispatchQueue.toBackground { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                
+                guard let resultResponse = (response as? SearchResponse)?.list else {
+                    self.fail?()
+                    self.semaphore.signal()
+                    return
+                }
+                
+                let list = resultResponse.flatMap { WrapData(remote: $0) }
+                self.success?(list)
                 self.semaphore.signal()
-                return
             }
-            
-            let list = resultResponse.flatMap { WrapData(remote: $0) }
-            self.success?(list)
-            self.semaphore.signal()
-            
         }, fail: { [weak self] errorResponce in
             
             /// temp error handling
@@ -360,7 +361,6 @@ class FaceImageDetailService: AlbumDetailService {
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue?) {
         nextItems(albumUUID: albumUUID, sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] items in
-            self?.currentPage += 1
             success?(items)
 
         }, fail: fail)

@@ -83,6 +83,7 @@
 "%ld docs" = "%ld documents";
 "Quota info" = "Usage info";
 "%@ of %@ has remained" = "%1$@ of %2$@ has remained";
+"has_remained_lifebox_usage" = "%@ of %@ has remained (only for lifebox usage)";
 "%ld documents" = "%ld documents";
 "%ld songs" = "%ld songs";
 "%ld videos" = "%ld videos";
@@ -567,6 +568,7 @@
 "PackagesPolicyHeader" = "Auto-renewable subscription nature of the in-app purchase:";
 "PackagesPolicyText" = "Subsriptions are renewed on a monthly basis \nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik";
 "Missing Dates" = "Missing Dates";
+"Show only synced items" = "Show only synced items";
 "You have successfully registered, please log in with your credentials" = "You have successfully registered, please log in with your credentials.";
 "Animation" = "Animation";
 "We have created an animation from your photos!" = "We have created a animation from your photos!";
@@ -635,6 +637,7 @@
 "The purchase was canceled" = "The purchase was canceled";
 "The purchase in progress" = "The purchase in progress";
 "Renewal Date: %@" = "Renewal Date: %@";
+"Expiration Date: %@" = "Expiration Date: %@";
 "You have no duplicated contacts!" = "You have no duplicated contacts!";
 "Daily" = "Daily";
 "Weekly" = "Weekly";
@@ -653,3 +656,5 @@
 "renamed" = "renamed";
 "copied" = "copied";
 "marked as favourite" = "marked as favourite";
+"Bad internet connection" = "Bad internet connection";
+"download_error_unsupported_extension" = "Some of files from downloading queue are unsupported";

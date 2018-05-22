@@ -205,7 +205,7 @@ class ContactsSyncService: BaseRequestService {
     func deleteRemoteContacts(_ contacts: [RemoteContact], success: SuccessResponse?, fail: FailResponse?) {
         log.debug("ContactsSyncService deleteRemoteContacts")
         
-        let param = DeleteContacts(contactIDs: contacts.compactMap{ $0.id })
+        let param = DeleteContacts(contactIDs: contacts.flatMap{ $0.id })
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeDeleteRequest(param: param, handler: handler)
     }

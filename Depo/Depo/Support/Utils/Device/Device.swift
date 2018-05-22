@@ -14,9 +14,14 @@ class Device {
     static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es"]
     static private let defaultLocale = "en"
     
-    static func documentsFolderUrl(withComponent: String ) -> URL {
+    static func documentsFolderUrl(withComponent: String) -> URL {
         let documentsUrls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return documentsUrls[documentsUrls.endIndex - 1].appendingPathComponent(withComponent)
+    }
+    
+    static func sharedContainerUrl(withComponent: String) -> URL? {
+        let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.come.life.Lifebox")
+        return container?.appendingPathComponent(withComponent)
     }
 
     static func tmpFolderUrl(withComponent: String ) -> URL {
@@ -60,17 +65,23 @@ class Device {
     }
     
     static func getFreeDiskSpaceInBytes() -> Int64? {
-        var freeSize: Int64?
+        var freeSize: Int?
         if #available(iOS 11.0, *) {
             let fileURL = URL(fileURLWithPath: Device.homeFolderString())
             do {
-                let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
-                freeSize = values.volumeAvailableCapacityForImportantUsage
+                let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityKey])
+                freeSize = values.volumeAvailableCapacity
             } catch {
                 print(error.localizedDescription)
             }
         }
-        return freeSize ?? getFreeDiskSpaceInBytesIOS10()
+        
+        if let freeSize = freeSize {
+            return Int64(freeSize)
+        } else if let freeSize = getFreeDiskSpaceInBytesIOS10() {
+            return Int64(freeSize) - 104857600 // 100MB
+        }
+        return 0
     }
     
     static private func getFreeDiskSpaceInBytesIOS10() -> Int64? {

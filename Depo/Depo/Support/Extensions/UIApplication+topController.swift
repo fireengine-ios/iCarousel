@@ -27,7 +27,9 @@ extension UIApplication {
     
     static func showOnTabBar(errorMessage: String) {
         let errorPopUpVC = PopUpController.with(errorMessage: errorMessage)
-        RouterVC().tabBarVC?.present(errorPopUpVC, animated: false, completion: nil)
+        DispatchQueue.toMain {
+            RouterVC().tabBarVC?.present(errorPopUpVC, animated: false, completion: nil)
+        }
     }
     
     static func showErrorAlert(message: String) {
@@ -39,12 +41,16 @@ extension UIApplication {
             return
         }
         let vc = PopUpController.with(title: TextConstants.errorAlert, message: message, image: .error, buttonTitle: TextConstants.ok)
-        controller?.present(vc, animated: false, completion: nil)
+        DispatchQueue.toMain {
+            controller?.present(vc, animated: false, completion: nil)
+        }
     }
     
     static func showSuccessAlert(message: String) {
         let vc = PopUpController.with(title: TextConstants.success, message: message, image: .success, buttonTitle: TextConstants.ok)
-        topController()?.present(vc, animated: false, completion: nil)
+        DispatchQueue.toMain {
+            topController()?.present(vc, animated: false, completion: nil)
+        }
     }
     
     var statusBarView: UIView? {

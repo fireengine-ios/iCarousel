@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.17.0.10</string>
+	<string>1.0.18.0.4</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -145,5 +145,26 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+    
+    <key>UTExportedTypeDeclarations</key>
+        <dict>
+            <key>UTTypeConformsTo</key>
+            <array>
+                <string>public.image</string>
+            </array>
+            <key>UTTypeIdentifier</key>
+            <string>image/heic</string>
+            <key>UTTypeTagSpecification</key>
+            <dict>
+                <key>com.apple.ostype</key>
+                <string>HEIC</string>
+                <key>public.filename-extension</key>
+                <array>
+                    <string>heic</string>
+                </array>
+                <key>public.mime-type</key>
+                <string>image/heic</string>
+            </dict>
+        </dict>
 </dict>
 </plist>

@@ -423,7 +423,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
 //                    self.interactor.selectAll(items: <#T##[Item]#>)??? //TODO: select and select all pass to grid's presenter
                 })
             case .print:
-                    action = UIAlertAction(title: "Print", style: .default, handler: { _ in
+                    action = UIAlertAction(title: TextConstants.tabBarPrintLabel, style: .default, handler: { _ in
                         MenloworksAppEvents.onPrintClicked()
                       //TODO: will be implemented in the next package
                     })

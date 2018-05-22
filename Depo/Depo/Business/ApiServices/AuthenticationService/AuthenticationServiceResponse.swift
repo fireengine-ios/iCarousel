@@ -124,8 +124,12 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
                 
                 switch expectedDataFormat {
                     case .JSONFormat, .DataFormat:
-                        let sucessObj = SuceesObj(json: data, headerResponse: httpResponse)
-                        success?(sucessObj)
+                        DispatchQueue.toBackground { [weak self] in
+                            let sucessObj = SuceesObj(json: data, headerResponse: httpResponse)
+                            DispatchQueue.toMain {
+                                self?.success?(sucessObj)
+                            }
+                        }
                         return
                     case .NoneFormat: break
                 }

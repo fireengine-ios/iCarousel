@@ -182,6 +182,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
                     output.goToContactSync()
                 }
             case 1: // import photos
+                MenloworksTagsService.shared.onSocialMediaPageClicked()
                 if (settingsDelegate != nil) {
                     settingsDelegate?.goToIportPhotos()
                 } else {

@@ -6,15 +6,41 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class FileInfoPresenter: BasePresenter, FileInfoModuleInput, FileInfoViewOutput, FileInfoInteractorOutput {
+final class FileInfoPresenter: BasePresenter {
 
     weak var view: FileInfoViewInput!
     var interactor: FileInfoInteractorInput!
     var router: FileInfoRouterInput!
+    
+    // MARK : BasePresenter
+    
+    override func outputView() -> Waiting? {
+        return view as? Waiting
+    }
+}
 
+// MARK: FileInfoViewOutput
+
+extension FileInfoPresenter: FileInfoViewOutput {
+    
     func viewIsReady() {
         interactor.viewIsReady()
     }
+    
+    func validateName(newName: String) {
+        interactor.onValidateName(newName: newName)
+    }
+    
+    func onRename(newName: String) {
+        startAsyncOperation()
+        interactor.onRename(newName: newName)
+    }
+    
+}
+
+// MARK: FileInfoInteractorOutput
+
+extension FileInfoPresenter: FileInfoInteractorOutput {
     
     func setObject(object: BaseDataSourceItem) {
         if object.fileType == .photoAlbum {
@@ -24,6 +50,11 @@ class FileInfoPresenter: BasePresenter, FileInfoModuleInput, FileInfoViewOutput,
         } else {
             view.setObject(object: object)
         }
+    }
+    
+    func updated() {
+        asyncOperationSucces()
+        view.goBack()
     }
     
     func albumForUuidSuccessed(album: AlbumServiceResponse) {
@@ -37,17 +68,7 @@ class FileInfoPresenter: BasePresenter, FileInfoModuleInput, FileInfoViewOutput,
         view.stopActivityIndicator()
         view.showErrorAlert(message: error.description)
     }
-    
-    func onRename(newName: String) {
-        startAsyncOperation()
-        interactor.onRename(newName: newName)
-    }
-    
-    func updated() {
-        asyncOperationSucces()
-        view.goBack()
-    }
-    
+
     func cancelSave(use name: String) {
         asyncOperationSucces()
         view.show(name: name)
@@ -58,9 +79,16 @@ class FileInfoPresenter: BasePresenter, FileInfoModuleInput, FileInfoViewOutput,
         view.showErrorAlert(message: error.description)
     }
     
-    //MARK : BasePresenter
-    
-    override func outputView() -> Waiting? {
-        return view as? Waiting
+    func didValidateNameSuccess() {
+        view.showValidateNameSuccess()
     }
+    
 }
+
+// MARK: FileInfoModuleInput
+
+extension FileInfoPresenter: FileInfoModuleInput {
+
+}
+
+

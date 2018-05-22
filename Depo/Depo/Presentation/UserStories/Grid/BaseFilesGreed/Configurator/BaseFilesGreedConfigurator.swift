@@ -15,7 +15,9 @@ class BaseFilesGreedModuleConfigurator {
                    remoteServices: RemoteItemsService,
                    fileFilters: [GeneralFilesFiltrationType],
                    bottomBarConfig: EditingBarConfig?,
-                   visibleSlider: Bool = false, topBarConfig: GridListTopBarConfig?,
+                   visibleSlider: Bool = false,
+                   visibleSyncItemsCheckBox: Bool = false,
+                   topBarConfig: GridListTopBarConfig?,
                    alertSheetConfig: AlertFilesActionsSheetInitialConfig?,
                    alertSheetExcludeTypes: [ElementTypes]? = nil) {
         
@@ -27,6 +29,7 @@ class BaseFilesGreedModuleConfigurator {
             presenter?.needShowProgressInCells = true
             presenter?.needShowScrollIndicator = true
             presenter?.needShowEmptyMetaItems = true
+            presenter?.ifNeedReloadData = false
         } else {
             presenter = DocumentsGreedPresenter()
             presenter?.sortedRule = .timeUpWithoutSection
@@ -57,6 +60,9 @@ class BaseFilesGreedModuleConfigurator {
             viewController.contentSlider = sliderVC
             presenter?.sliderModule = sliderPresenter
             sliderPresenter.baseGreedPresenterModule = presenter
+        }
+        if visibleSyncItemsCheckBox {
+            viewController.showOnlySyncItemsCheckBox = CheckBoxView.initFromXib()
         }
         if let underNavBarBarConfig = topBarConfig {
             presenter?.topBarConfig = underNavBarBarConfig

@@ -340,7 +340,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func convertToSubscriptionPlans(offers: [OfferServiceResponse], accountType: AccountType) -> [SubscriptionPlan] {
-        return offers.compactMap { offer in
+        return offers.flatMap { offer in
             guard let price = offer.price, let name = offer.quota?.bytesString else {
                 return nil
             }
@@ -353,7 +353,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse], accountType: AccountType) -> [SubscriptionPlan] {
-        return activeSubscriptionList.compactMap { subscription in
+        return activeSubscriptionList.flatMap { subscription in
             guard let price = subscription.subscriptionPlanPrice, let name = subscription.subscriptionPlanQuota?.bytesString else {
                 return nil
             }
@@ -375,7 +375,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func convertToSubscriptionPlans(offerApples: [OfferApple]) -> [SubscriptionPlan] {
-        return offerApples.compactMap { offer in
+        return offerApples.flatMap { offer in
             guard let name = offer.name else {
                 return nil
             }

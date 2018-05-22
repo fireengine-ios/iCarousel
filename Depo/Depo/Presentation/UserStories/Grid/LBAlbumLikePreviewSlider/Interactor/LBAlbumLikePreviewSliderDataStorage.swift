@@ -80,14 +80,14 @@ class SliderItem {
     
     init(withAlbumItems items: [AlbumItem]?) {
         if let items = items {
-            previewItems = Array(items.prefix(NumericConstants.myStreamSliderThumbnailsCount).compactMap { $0.preview?.patchToPreview })
+            previewItems = Array(items.prefix(NumericConstants.myStreamSliderThumbnailsCount).flatMap { $0.preview?.patchToPreview })
         }
         setType(.albums)
     }
     
     init(withStoriesItems items: [Item]?) {
         if let items = items {
-            previewItems = Array(items.prefix(NumericConstants.myStreamSliderThumbnailsCount).compactMap { $0.patchToPreview })
+            previewItems = Array(items.prefix(NumericConstants.myStreamSliderThumbnailsCount).flatMap { $0.patchToPreview })
         }
         setType(.story)
     }
@@ -100,7 +100,7 @@ class SliderItem {
     }
     
     init(withThumbnails items: [URL?], type: MyStreamType) {
-        previewItems = items.compactMap { PathForItem.remoteUrl($0) }
+        previewItems = items.flatMap { PathForItem.remoteUrl($0) }
         setType(type)
     }
     

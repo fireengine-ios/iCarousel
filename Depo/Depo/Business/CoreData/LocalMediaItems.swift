@@ -78,7 +78,7 @@ extension CoreDataStack {
             NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
             return
         }
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             JDStatusBarNotification.show(withStatus: "LOCAL FILES BEING POCCESSED", styleName: "JDStatusBarStyleWarning")
             JDStatusBarNotification.showActivityIndicator(true, indicatorStyle: .gray)
         }
@@ -86,7 +86,7 @@ extension CoreDataStack {
         print("All local files started  \((start)) seconds")
         nonCloudAlreadySavedAssets.dropAll()
         save(items: notSaved, context: backgroundContext) { [weak self] in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 JDStatusBarNotification.show(withStatus: "ALL DONE", styleName: "JDStatusBarStyleSuccess")
                 JDStatusBarNotification.dismiss(animated: true)
             }
@@ -153,7 +153,7 @@ extension CoreDataStack {
                 }
                 print("iCloud: updated iCloud in \(Date().timeIntervalSince(start)) secs")
                 context.perform {
-                    let invalidItems = info.filter { !$0.isValid }.compactMap { $0.asset.localIdentifier }
+                    let invalidItems = info.filter { !$0.isValid }.map { $0.asset.localIdentifier }
                     print("iCloud: removing \(invalidItems.count) items")
                     self.removeLocalMediaItems(with: invalidItems, completion: {})
                 }
@@ -162,7 +162,7 @@ extension CoreDataStack {
     }
     
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
-        let currentlyInLibriaryIDs: [String] = allList.compactMap { $0.localIdentifier }
+        let currentlyInLibriaryIDs: [String] = allList.flatMap { $0.localIdentifier }
         
         checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs)
         
@@ -170,19 +170,19 @@ extension CoreDataStack {
 
         let alredySaved: [MediaItem] = executeRequest(predicate: predicate, context: context)
         
-        let alredySavedIDs = alredySaved.compactMap { $0.localFileID }
+        let alredySavedIDs = alredySaved.flatMap { $0.localFileID }
         
         return allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) }
     }
     
     func listAssetIdAlreadySaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
-        let currentlyInLibriaryIDs: [String] = allList.compactMap { $0.localIdentifier }
+        let currentlyInLibriaryIDs: [String] = allList.flatMap { $0.localIdentifier }
         
         let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
         
         let alredySaved: [MediaItem] = executeRequest(predicate: predicate, context: context)
         
-        let alredySavedIDs = alredySaved.compactMap { $0.localFileID }
+        let alredySavedIDs = alredySaved.flatMap { $0.localFileID }
         
         return allList.filter { alredySavedIDs.contains( $0.localIdentifier ) }
     }
@@ -207,7 +207,7 @@ extension CoreDataStack {
                 ///Appearantly after recovery local ID may change, so temporary soloution is to check all files all over. and in the future chenge DataBase behavior heavily
                 let assetsList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
                 
-                self?.checkLocalFilesExistence(actualPhotoLibItemsIDs: assetsList.compactMap{$0.localIdentifier}, complition: completion)
+                self?.checkLocalFilesExistence(actualPhotoLibItemsIDs: assetsList.flatMap{$0.localIdentifier}, complition: completion)
             })
         }
  
@@ -263,11 +263,8 @@ extension CoreDataStack {
     
     func hasLocalItemsForSync(video: Bool, image: Bool, completion: @escaping  (_ has: Bool) -> Void) {
         getUnsyncsedMediaItems(video: video, image: image, completion: { items in
-            let currentUserID = SingletonStorage.shared.uniqueUserID
-            
-            let filteredArray = items.filter { !$0.syncStatusesArray.contains(currentUserID) }
-            
-            completion(!filteredArray.isEmpty)
+            let wrappedItems = items.flatMap { $0.wrapedObject }
+            completion(!AppMigrator.migrateSyncStatus(for: wrappedItems).isEmpty)
         })
         
     }
@@ -275,19 +272,15 @@ extension CoreDataStack {
     func allLocalItemsForSync(video: Bool, image: Bool, completion: @escaping (_ items: [WrapData]) -> Void) {
         getUnsyncsedMediaItems(video: video, image: image, completion: { items in
             let sortedItems = items.sorted { $0.fileSizeValue < $1.fileSizeValue }
-            SingletonStorage.shared.getUniqueUserID(success: { userId in
-                let filtredArray = sortedItems.filter { !$0.syncStatusesArray.contains(userId) }
-                completion(filtredArray.compactMap { $0.wrapedObject })
-            }, fail: {
-                completion([])
-            })
+            let wrappedItems = sortedItems.flatMap { $0.wrapedObject }
             
+            completion(AppMigrator.migrateSyncStatus(for: wrappedItems))
         })
     }
     
     private func getUnsyncsedMediaItems(video: Bool, image: Bool, completion: @escaping (_ items: [MediaItem]) -> Void) {
         let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
-        let currentlyInLibriaryLocalIDs: [String] = assetList.compactMap { $0.localIdentifier }
+        let currentlyInLibriaryLocalIDs: [String] = assetList.flatMap { $0.localIdentifier }
         
         var filesTypesArray = [Int16]()
         if (video) {
@@ -299,7 +292,7 @@ extension CoreDataStack {
         
         let context = newChildBackgroundContext
         newChildBackgroundContext.perform { [weak self] in
-            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@)", filesTypesArray, currentlyInLibriaryLocalIDs)
+            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@) AND (SUBQUERY(objectSyncStatus, $x, $x.userID == %@).@count == 0)", filesTypesArray, currentlyInLibriaryLocalIDs, SingletonStorage.shared.uniqueUserID)
            completion(self?.executeRequest(predicate: predicate, context: context) ?? [])
         }
         

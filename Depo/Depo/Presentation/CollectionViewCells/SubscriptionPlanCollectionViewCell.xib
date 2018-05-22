@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -292,13 +292,13 @@
             <connections>
                 <outlet property="cancelButton" destination="6nz-Ll-Gfk" id="Fgh-YU-hsU"/>
                 <outlet property="checkmarkImageView" destination="Rr9-VH-Jut" id="AIG-D2-yoK"/>
+                <outlet property="dateInfoLabel" destination="Hbm-0x-VOq" id="4Ms-fC-fmH"/>
                 <outlet property="docsCountLabel" destination="cJF-4m-cRK" id="0Re-sn-djL"/>
                 <outlet property="freeButton" destination="evq-vg-PZs" id="YCf-kb-uhQ"/>
                 <outlet property="photosCountLabel" destination="9ZQ-WQ-OC0" id="ny0-9J-HeZ"/>
                 <outlet property="planeNameLabel" destination="9aw-2Z-Vhj" id="tLb-Wb-ezB"/>
                 <outlet property="priceHeightConstraint" destination="mH9-b9-5vN" id="fLz-bR-isQ"/>
                 <outlet property="priceLabel" destination="sip-qD-wbP" id="nkC-id-u0M"/>
-                <outlet property="renewalDateLabel" destination="Hbm-0x-VOq" id="wvd-gr-t5t"/>
                 <outlet property="songsCountLabel" destination="w0I-oj-OoQ" id="7Kc-gT-d6Z"/>
                 <outlet property="storeLabel" destination="vd1-I7-SyL" id="npx-4t-Nsm"/>
                 <outlet property="upgradeButton" destination="ZBi-AK-SBO" id="JO4-7l-V4B"/>

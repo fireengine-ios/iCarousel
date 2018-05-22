@@ -46,7 +46,7 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func filesAddedToAlbum()
     
-    func filesUploadToFolder()
+    func filesUpload(count: Int, toFolder folderUUID: String)
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String)
     
@@ -95,7 +95,7 @@ extension ItemOperationManagerViewProtocol {
     
     func filesAddedToAlbum() {}
     
-    func filesUploadToFolder() {}
+    func filesUpload(count: Int, toFolder folderUUID: String) {}
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String) {}
     
@@ -172,14 +172,14 @@ class ItemOperationManager: NSObject {
     }
     
     
-    func finishedUploadFile(file: WrapData) {
+    func finishedUploadFile(file: WrapData, isAutoSync: Bool) {
         //        DispatchQueue.main.async {
         for view in self.views {
             view.finishedUploadFile(file: file)
         }
         //        }
         
-        MenloworksAppEvents.onFileUploadedWithType(file.fileType)
+        MenloworksAppEvents.onFileUploadedWithType(file.fileType, isAutosync: isAutoSync)
         
         currentUploadingObject = nil
         currentUploadProgress = 0
@@ -307,10 +307,10 @@ class ItemOperationManager: NSObject {
         }
     }
     
-    func filesUploadToFolder() {
+    func filesUpload(count: Int, toFolder folderUUID: String) {
         DispatchQueue.main.async {
             for view in self.views {
-                view.filesUploadToFolder()
+                view.filesUpload(count: count, toFolder: folderUUID)
             }
         }
     }

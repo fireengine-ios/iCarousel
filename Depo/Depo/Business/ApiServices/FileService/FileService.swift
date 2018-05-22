@@ -307,21 +307,32 @@ class FileService: BaseRequestService {
     
     func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail: FailResponse?) {
         log.debug("FileService download")
+        
+        let supportedItemsToDownload = items.filter { $0.hasSupportedExtension() }
+        
+        guard !supportedItemsToDownload.isEmpty else {
+            fail?(ErrorResponse.string(TextConstants.errorUnsupportedExtension))
+            return
+        }
+        
+        if supportedItemsToDownload.count != items.count {
+            UIApplication.showErrorAlert(message: TextConstants.errorUnsupportedExtension)
+        }
 
-        let allOperationsCount = items.count
+        let allOperationsCount = supportedItemsToDownload.count
         CardsManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
-        let downLoadRequests: [BaseDownloadRequestParametrs] = items.compactMap {
+        let downloadRequests: [BaseDownloadRequestParametrs] = supportedItemsToDownload.flatMap {
             BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name, item: $0)
         }
         var completedOperationsCount = 0
-        let operations = downLoadRequests.compactMap {
+        let operations = downloadRequests.flatMap {
             DownLoadOperation(downloadParam: $0, success: {
                 completedOperationsCount = completedOperationsCount + 1
                 CardsManager.default.setProgressForOperationWith(type: .download,
                                                                             allOperations: allOperationsCount,
                                                                             completedOperations: completedOperationsCount)
             }, fail: { [weak self] error in
-                self?.error = error
+                self?.error = error.isUnknownError ? ErrorResponse.string(TextConstants.errorUnsupportedExtension) : error
                 /// HERE MUST BE ERROR HANDLER
             })
         }
@@ -332,6 +343,7 @@ class FileService: BaseRequestService {
             
             if let error = self.error {
                 fail?(error)
+                self.error = nil
             } else {
                 success?()
             }
@@ -429,7 +441,7 @@ class FileService: BaseRequestService {
                 return
             }
             
-            let list = resultResponse.compactMap { WrapData(remote: $0) }
+            let list = resultResponse.flatMap { WrapData(remote: $0) }
 //            CoreDataStack.default.appendOnlyNewItems(items: list)
             success?(list)
         }, fail: fail)
@@ -507,8 +519,8 @@ class DownLoadOperation: Operation {
             log.debug("FileService download \(self.param.fileName) fail: \(error.errorDescription ?? "")")
             self.customFail(error)
         }
-        SingletonStorage.shared.progressDelegates.remove(self)
         semaphore.wait()
+        SingletonStorage.shared.progressDelegates.remove(self)
     }
     
     func customSuccess() {

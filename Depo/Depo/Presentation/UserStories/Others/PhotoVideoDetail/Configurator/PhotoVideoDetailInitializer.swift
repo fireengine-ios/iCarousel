@@ -13,7 +13,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     class func initializeViewController(with nibName: String, selectedItem: Item, allItems: [Item], hideActions: Bool = false) -> UIViewController {
         var photoVideoBottomBarConfig = EditingBarConfig.init(elementsConfig: [], style: .blackOpaque, tintColor: nil)
         
-        if selectedItem.isSynced() {
+        if !selectedItem.isLocalItem {
             photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .print],
                                                              style: .blackOpaque, tintColor: nil)
         } else {

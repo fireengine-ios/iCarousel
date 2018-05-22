@@ -26,6 +26,9 @@ class RequestService {
     
     static let `default` = RequestService()
     
+    private let privateQueue = DispatchQueue(label: DispatchQueueLabels.requestService, qos: .default , attributes: .concurrent)
+    
+    
     public func requestTask(patch: URL,
                             headerParametrs: RequestHeaderParametrs,
                             body: Data?,
@@ -46,7 +49,7 @@ class RequestService {
             .customValidate()
             .response { requestResponse in
                 response(requestResponse.data, requestResponse.response, requestResponse.error)
-        }
+            }
         return sessionRequest.task!
     }
     

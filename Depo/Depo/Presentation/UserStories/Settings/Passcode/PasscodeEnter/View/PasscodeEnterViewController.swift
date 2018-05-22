@@ -55,6 +55,7 @@ extension PasscodeEnterViewController: PasscodeManagerDelegate {
     }
     
     func passcodeLockDidSucceed(_ lock: PasscodeManager) {
+//        MenloworksTagsService.shared.passcodeStatus(isEnabled: true)
         passcodeManager.finishBiometrics = true
         lock.view.resignResponder()
         success?()
