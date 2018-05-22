@@ -186,7 +186,9 @@ extension ImportPhotosViewController: ImportFromDropboxViewInput {
     // MARK: Start
     
     /// nothing. maybe will be toast message
-    func dbStartSuccessCallback() {}
+    func dbStartSuccessCallback() {
+        MenloworksEventsService.shared.onDropboxTransfered()
+    }
     
     func failedDropboxStart(errorMessage: String) {
         let isDropboxAuthorisationError = errorMessage.contains("invalid_access_token") 
