@@ -36,9 +36,9 @@ PODS:
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
   - SimpleExif (0.0.1)
-  - SQLite.swift (0.11.5):
-    - SQLite.swift/standard (= 0.11.5)
-  - SQLite.swift/standard (0.11.5)
+  - SQLite.swift (0.11.4):
+    - SQLite.swift/standard (= 0.11.4)
+  - SQLite.swift/standard (0.11.4)
   - SwiftyJSON (3.1.4)
   - Typist (1.1.0)
   - UIImage-Categories (1.0.0)
@@ -67,7 +67,7 @@ DEPENDENCIES:
   - ReachabilitySwift
   - SDWebImage
   - SimpleExif (from `https://github.com/bonyadmitr/SimpleExif.git`)
-  - SQLite.swift (~> 0.11.5)
+  - SQLite.swift (= 0.11.4)
   - SwiftyJSON (~> 3)
   - Typist (~> 1.1.0)
   - UIImage-Categories
@@ -75,7 +75,7 @@ DEPENDENCIES:
   - XYPieChart
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Adjust
     - Alamofire
     - Bolts
@@ -132,13 +132,13 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SimpleExif: c7537d53f8a3854af0235ea41759a58ffc8afa11
-  SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
+  SQLite.swift: 3e3bee21da701b5b9f87c4a672cb54f233505692
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   Typist: 31a3eb9d6b97ea28e0e247bb8b14ed23fe624170
   UIImage-Categories: a0593f6a7991c99016b9ecadfbd38b3717ff1a73
   XCGLogger: c9601cae9a8912de34a58666ba931ed3d624dd31
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
 
-PODFILE CHECKSUM: bb31a0940963191f559511b6b0fa46436c70f023
+PODFILE CHECKSUM: 43412f5081586c7acc7e1ddfd9360ed077cf45c1
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2

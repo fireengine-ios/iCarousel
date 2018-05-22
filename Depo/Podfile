@@ -46,7 +46,7 @@ def core_pods
   pod 'MMWormhole', '~> 2.0.0'
   
   #migration
-  pod 'SQLite.swift', '~> 0.11.5'
+  pod 'SQLite.swift', '0.11.4'
 
 end
 
