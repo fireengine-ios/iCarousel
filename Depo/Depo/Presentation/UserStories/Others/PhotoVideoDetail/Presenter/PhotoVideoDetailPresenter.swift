@@ -24,9 +24,9 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         bottomBarPresenter?.show(animated: false, onView: view)
     }
     
-    func prepareBarConfigForFileTypes(fileTypes: [FileType]) -> EditingBarConfig {
+    func prepareBarConfigForFileTypes(fileTypes: [FileType], selectedIndex: Int) -> EditingBarConfig {
         
-        var barConfig = interactor.bottomBarConfig
+        var barConfig = interactor.bottomBarConfig(for: selectedIndex)
         var actionTypes = barConfig.elementsConfig
         
         if !fileTypes.contains(.image) {
@@ -51,7 +51,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 
         let allSelectedItemsTypes = selectedItems.map { $0.fileType }
 
-        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes)
+        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: index)
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
         view.onItemSelected(at: index, from: items)
     }
@@ -66,7 +66,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         let selectedItems = [interactor.allItems[selectedIndex]]
         let allSelectedItemsTypes = selectedItems.map { $0.fileType }
         
-        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes)
+        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: selectedIndex)
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
     }
     

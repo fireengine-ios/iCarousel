@@ -130,7 +130,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        collectionView.isHidden = false
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         output.viewIsReady(view: viewForBottomBar)
     }
@@ -184,6 +183,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         let indexPath = IndexPath(item: selectedIndex, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        collectionView.isHidden = false
     } 
     
     /// FIXME: temp logic of deinit. ItemOperationManager holds "self" strong
