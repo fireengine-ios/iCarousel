@@ -19,6 +19,7 @@ final class TodayViewController: UIViewController {
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
     private let widgetService = WidgetService.shared
+    private let mainAppResponsivnessService = AppResponsivenessService.shared
     
     
     override func viewDidLoad() {
@@ -63,30 +64,43 @@ extension TodayViewController: NCWidgetProviding {
     }
     
     private func updateFields() {
+        guard mainAppResponsivnessService.isMainAppResponsive() else {
+            showAsStopped()
+            return
+        }
+        
         switch widgetService.syncStatus {
         case .executing :
-            updateCurrentImage()
-            topLabel.text = L10n.widgetTopTitleInProgress
-            bottomLabel.text = "\(widgetService.finishedCount) / \(widgetService.totalCount)"
-            successImage.isHidden = true
-            currentImage.isHidden = false
-            activityIndicator.isHidden = (currentImage.image != nil)
-            activityIndicator.startAnimating()
+            showAsExecuting()
         default:
-            if WidgetService.shared.lastSyncedDate.isEmpty {
-                topLabel.text = L10n.widgetTopTitleInactive
-                bottomLabel.text = L10n.widgetBottomTitleLastSyncFormat(L10n.widgetBottomTitleNewerSyncronized)
-            } else {
-                topLabel.text = L10n.widgetTopTitleFinished
-                bottomLabel.text = L10n.widgetBottomTitleLastSyncFormat(widgetService.lastSyncedDate)
-            }
-            
-            activityIndicator.isHidden = true
-            successImage.isHidden = false
-            currentImage.isHidden = true
-            currentImage.image = nil
-            activityIndicator.stopAnimating()
+            showAsStopped()
         }
+    }
+    
+    private func showAsExecuting() {
+        updateCurrentImage()
+        topLabel.text = L10n.widgetTopTitleInProgress
+        bottomLabel.text = "\(widgetService.finishedCount) / \(widgetService.totalCount)"
+        successImage.isHidden = true
+        currentImage.isHidden = false
+        activityIndicator.isHidden = (currentImage.image != nil)
+        activityIndicator.startAnimating()
+    }
+    
+    private func showAsStopped() {
+        if WidgetService.shared.lastSyncedDate.isEmpty {
+            topLabel.text = L10n.widgetTopTitleInactive
+            bottomLabel.text = L10n.widgetBottomTitleLastSyncFormat(L10n.widgetBottomTitleNewerSyncronized)
+        } else {
+            topLabel.text = L10n.widgetTopTitleFinished
+            bottomLabel.text = L10n.widgetBottomTitleLastSyncFormat(widgetService.lastSyncedDate)
+        }
+        
+        activityIndicator.isHidden = true
+        successImage.isHidden = false
+        currentImage.isHidden = true
+        currentImage.image = nil
+        activityIndicator.stopAnimating()
     }
     
     private func updateCurrentImage() {
