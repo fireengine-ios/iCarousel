@@ -63,7 +63,7 @@ final class UploadService: BaseRequestService {
         
         super.init()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateSyncSettings), name: autoSyncStatusDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateSyncSettings), name: .autoSyncStatusDidChange, object: nil)
     }
     
     deinit {
