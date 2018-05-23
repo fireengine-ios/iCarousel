@@ -236,7 +236,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @objc func onRightBarButtonItem(sender: UIButton) {
         let stackCountViews = navigationController?.viewControllers.count ?? 0
         let inAlbumState = stackCountViews > 1 && navigationController?.viewControllers[stackCountViews - 2] is AlbumDetailViewController
-        output.moreButtonPressed(sender: sender, inAlbumState: inAlbumState)   
+        output.moreButtonPressed(sender: sender, inAlbumState: inAlbumState, object: objects[selectedIndex], selectedIndex: selectedIndex)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -319,7 +319,8 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
             guard let `self` = self else {
                 return
             }
-            self.output.setSelectedItemIndex(selectedIndex: self.selectedIndex)
+            
+            self.output.updateBars()
             self.setupNavigationBar()
         }
     }
