@@ -150,6 +150,7 @@ final class AppConfigurator {
                 log.debug("Menlo Notif Clicked")
                 if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as! String)){
                     PushNotificationService.shared.openActionScreen()
+                    storageVars.deepLink = response.message.payload["action"] as! String
                 }
                 
             case MActionType.dismiss:

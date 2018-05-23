@@ -94,9 +94,20 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         interactor.updateUserLanguage()
     }
     
+    func openLink() {
+        log.debug("Open Link on Splash Presenter")
+        if let deepLink = storageVars.deepLink {
+            if PushNotificationService.shared.assignDeepLink(innerLink: deepLink){
+                log.debug("Open Link after Router navigates to home")
+                PushNotificationService.shared.openActionScreen()
+                storageVars.deepLink = nil
+            }
+        }
+    }
+    
     private func openApp() {
         storageVars.emptyEmailUp = false
-
+        
         if turkcellLogin {
             if storageVars.autoSyncSet {
                 if !Device.isIpad, storageVars.isNewAppVersionFirstLaunch {
@@ -104,6 +115,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
                     router.navigateToLandingPages(isTurkCell: turkcellLogin)
                 } else {
                     router.navigateToApplication()
+                    openLink()
                 }
             } else {
                 if !Device.isIpad, storageVars.isNewAppVersionFirstLaunch {
@@ -116,6 +128,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         } else {
             if storageVars.autoSyncSet {
                 router.navigateToApplication()
+                openLink()
             } else {
                 router.goToSyncSettingsView(fromSplash: true)
             }
