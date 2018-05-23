@@ -8,9 +8,6 @@
 
 import UIKit
 
-extension Notification.Name {
-    public static let changeFaceImageStatus = Notification.Name("changeFaceImageStatus")
-}
 
 final class FaceImageViewController: ViewController {
     

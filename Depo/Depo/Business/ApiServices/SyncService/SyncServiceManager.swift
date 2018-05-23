@@ -248,22 +248,22 @@ extension SyncServiceManager {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
                                        selector: #selector(onPhotoLibraryDidChange(notification:)),
-                                       name: LocalMediaStorage.notificationPhotoLibraryDidChange,
+                                       name: .notificationPhotoLibraryDidChange,
                                        object: nil)
         
         notificationCenter.addObserver(self,
                                        selector: #selector(onAutoSyncStatusDidChange),
-                                       name: autoSyncStatusDidChangeNotification,
+                                       name: .autoSyncStatusDidChange,
                                        object: nil)
         
         notificationCenter.addObserver(self,
                                        selector: #selector(onAPIReachabilityDidChange),
-                                       name: APIReachabilityService.APIReachabilityDidChangeName,
+                                       name: .apiReachabilityDidChange,
                                        object: nil)
         
         notificationCenter.addObserver(self,
                                        selector: #selector(onLocalFilesHaveBeenLoaded),
-                                       name: Notification.Name.allLocalMediaItemsHaveBeenLoaded,
+                                       name: .allLocalMediaItemsHaveBeenLoaded,
                                        object: nil)
     }
     

@@ -28,7 +28,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
             var phChanges = [PhotoLibraryChangeType: [PHAsset]]()
   
             func notify() {
-                NotificationCenter.default.post(name: LocalMediaStorage.notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
+                NotificationCenter.default.post(name: .notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
             }
             
             func checkDeleteIndexes() {
