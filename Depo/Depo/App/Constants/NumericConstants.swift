@@ -87,6 +87,8 @@ struct NumericConstants {
     static let myStreamSliderThumbnailsCount: Int = 4
     
     static let intervalInSecondsBetweenAutoSyncItemsAppending = 8.0
+    
+    static let intervalInSecondsBetweenAppResponsivenessUpdate: TimeInterval = 3 * 60
 }
 
 struct RequestSizeConstant {

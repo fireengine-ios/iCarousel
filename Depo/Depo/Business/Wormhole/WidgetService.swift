@@ -19,6 +19,11 @@ final class WidgetService {
     private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
     
     
+    var mainAppResponsivenessDate: Date? {
+        get { return defaults?.object(forKey: SharedConstants.mainAppSchemeResponsivenessDateKey) as? Date}
+        set { defaults?.set(newValue, forKey: SharedConstants.mainAppSchemeResponsivenessDateKey)}
+    }
+    
     private (set) var totalCount: Int {
         get { return defaults?.integer(forKey: SharedConstants.totalAutoSyncCountKey) ?? 0 }
         set { defaults?.set(newValue, forKey: SharedConstants.totalAutoSyncCountKey) }
@@ -88,4 +93,5 @@ final class WidgetService {
         
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)
     }
+
 }
