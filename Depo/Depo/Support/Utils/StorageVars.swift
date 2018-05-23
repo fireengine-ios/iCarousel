@@ -23,7 +23,9 @@ protocol StorageVars: class {
 }
 
 final class UserDefaultsVars: StorageVars {
+    
     private let userDefaults = UserDefaults.standard
+    
     
     private let isAppFirstLaunchKey = "isAppFirstLaunchKey"
     var isAppFirstLaunch: Bool {
