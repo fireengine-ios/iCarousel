@@ -16,12 +16,12 @@ final class AppResponsivenessService {
     private let widgetService = WidgetService()
     private let updateInterval = NumericConstants.intervalInSecondsBetweenAppResponsivenessUpdate
     
-    private lazy var timer =
-        Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(saveMainAppLastUpdateDate), userInfo: nil, repeats: true)
+    
+    private lazy var timer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(saveMainAppLastUpdateDate), userInfo: nil, repeats: true)
 
+    
     #if MAIN_APP
     func startMainAppUpdate() {
-        saveMainAppLastUpdateDate()
         timer.fire()
     }
     #endif
