@@ -9,7 +9,22 @@
 import Foundation
 import UIKit
 
+
 class Device {
+    
+    #if APPSTORE
+    static let groupIdentifier = "group.com.turkcell.akillidepo"
+    
+    #elseif ENTERPRISE
+    static let groupIdentifier = "group.com.turkcell.akillideponew.ent"
+    
+    #elseif DEBUG
+    static let groupIdentifier = "group.come.life.Lifebox"
+    
+    #else
+    static let groupIdentifier = "group.come.life.Lifebox"
+    #endif
+    
     
     static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es"]
     static private let defaultLocale = "en"
@@ -20,13 +35,13 @@ class Device {
     }
     
     static func sharedContainerUrl(withComponent: String) -> URL? {
-        let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.come.life.Lifebox")
+        let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupIdentifier)
         return container?.appendingPathComponent(withComponent)
     }
 
     static func tmpFolderUrl(withComponent: String ) -> URL {
         let url = Device.tmpFolderString().appending("/").appending(withComponent)
-        return URL(fileURLWithPath: url )
+        return URL(fileURLWithPath: url)
     }
     
     static func tmpFolderString() -> String {
