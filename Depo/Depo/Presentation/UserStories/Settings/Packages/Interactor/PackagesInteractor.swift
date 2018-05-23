@@ -90,11 +90,13 @@ extension PackagesInteractor: PackagesInteractorInput {
     func getActiveSubscriptions() {
         subscriptionsService.activeSubscriptions(
             success: { [weak self] response in
+                log.debug("getActiveSubscriptions response \(response.debugDescription)")
                 guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else { return }
                 DispatchQueue.main.async {
                     self?.output.successed(activeSubscriptions: subscriptionsResponce.list)
                 }
             }, fail: { [weak self] errorResponse in
+                log.debug("getActiveSubscriptions errorResponse \(errorResponse)")
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: errorResponse)
                 }
@@ -145,6 +147,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         
         offersService.verifyOffer(otp: otp, referenceToken: token,
             success: { [weak self] response in
+                log.debug("verifyOffer response \(response.debugDescription)")
                 /// maybe will be need
                 //guard let offerResponse = response as? VerifyOfferResponse else { return }
                 
@@ -157,6 +160,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                     self?.output.successedVerifyOffer()
                 }
             }, fail: { [weak self] errorResponse in
+                log.debug("verifyOffer errorResponse \(errorResponse)")
                 DispatchQueue.main.async {
                     self?.output.failedVerifyOffer()
                 }
@@ -214,6 +218,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         }
         
         offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
+            log.debug("validatePurchase response \(response.debugDescription)")
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
                 self?.getActiveSubscriptions()
                 return
@@ -227,6 +232,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                 }
             }
             }, fail: { [weak self] errorResponse in
+                log.debug("validatePurchase errorResponse \(errorResponse)")
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: errorResponse)
                 }
@@ -244,6 +250,7 @@ extension PackagesInteractor: PackagesInteractorInput {
             group.enter()
             offersService.validateApplePurchase(with: receipt, productId: nil, success: { response in
                 group.leave()
+                log.debug("validateRestorePurchase response \(response.debugDescription)")
                 guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
                     return
                 }
@@ -319,6 +326,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     func getOfferApples() {
         offersService.offersAllApple(
             success: { [weak self] response in
+                log.debug("getOfferApples response \(response.debugDescription)")
                 guard let offerResponse = response as? OfferAllAppleServiceResponse else { return }
                 self?.iapManager.loadProducts(productIds: offerResponse.list, handler: { [weak self] result in
                     switch result {
@@ -399,6 +407,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         }
         
         iapManager.restorePurchases { [weak self] result in
+            log.debug("restorePurchases response \(result)")
             switch result {
             case .success(let productIds):
                 let offers = productIds.map { OfferApple(productId: $0) }

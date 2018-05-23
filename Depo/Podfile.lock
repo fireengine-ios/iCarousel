@@ -75,7 +75,7 @@ DEPENDENCIES:
   - XYPieChart
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Adjust
     - Alamofire
     - Bolts
@@ -141,4 +141,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 43412f5081586c7acc7e1ddfd9360ed077cf45c1
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2
