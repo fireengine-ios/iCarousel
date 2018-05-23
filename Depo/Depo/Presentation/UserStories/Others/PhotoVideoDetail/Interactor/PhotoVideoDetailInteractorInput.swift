@@ -18,7 +18,7 @@ protocol PhotoVideoDetailInteractorInput: class {
     
     var allItems: [Item] { get }
 
-    var bottomBarConfig: EditingBarConfig { get }
+    func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig
 
     func deleteSelectedItem(type: ElementTypes)
     

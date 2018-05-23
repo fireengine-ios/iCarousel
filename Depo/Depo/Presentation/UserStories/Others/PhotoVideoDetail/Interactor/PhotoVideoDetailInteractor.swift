@@ -43,7 +43,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         return array
     }
 
-    var bottomBarConfig: EditingBarConfig {
+    func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig {
         let selectedItem = array[selectedIndex]
         switch selectedItem.fileType {
         case .image, .video:
