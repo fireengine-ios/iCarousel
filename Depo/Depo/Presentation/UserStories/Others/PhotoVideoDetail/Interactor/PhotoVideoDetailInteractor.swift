@@ -36,7 +36,12 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     }
     
     var currentItemIndex: Int {
-        return selectedIndex
+        get {
+            return selectedIndex
+        }
+        set {
+            selectedIndex = newValue
+        }
     }
     
     var allItems: [Item] {

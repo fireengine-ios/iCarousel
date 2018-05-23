@@ -20,7 +20,7 @@ final class ItemSyncOperation: Operation {
         super.init()
         self.service = service
         self.newItems = newItems
-        NotificationCenter.default.addObserver(self, selector: #selector(itemStatusChanged), name: autoSyncStatusDidChangeNotification, object: service)
+        NotificationCenter.default.addObserver(self, selector: #selector(itemStatusChanged), name: .autoSyncStatusDidChange, object: service)
     }
     
     override func cancel() {

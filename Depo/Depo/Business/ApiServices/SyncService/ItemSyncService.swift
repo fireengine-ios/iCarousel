@@ -9,8 +9,6 @@
 import Foundation
 
 
-public let autoSyncStatusDidChangeNotification = NSNotification.Name("AutoSyncStatusChangedNotification")
-
 protocol ItemSyncService: class {
     var status: AutoSyncStatus { get }
     weak var delegate: ItemSyncServiceDelegate? { get set }
@@ -166,8 +164,12 @@ class ItemSyncServiceImpl: ItemSyncService {
             
             self.fail()
             
-            }, returnedUploadOperation: { [weak self] _ in
-                self?.status = .executing
+            }, returnedUploadOperation: { [weak self] operations in
+                if let operations = operations, !operations.isEmpty {
+                    self?.status = .executing
+                } else {
+                    self?.status = .synced
+                }
         })
     }
     
@@ -191,7 +193,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     private func postNotification() {
         DispatchQueue.main.async {
-            NotificationCenter.default.post(name: autoSyncStatusDidChangeNotification, object: self)
+            NotificationCenter.default.post(name: .autoSyncStatusDidChange, object: self)
         }
     }
     
