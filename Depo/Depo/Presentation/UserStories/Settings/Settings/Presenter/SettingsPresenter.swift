@@ -12,6 +12,8 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     var interactor: SettingsInteractorInput!
     var router: SettingsRouterInput!
     
+    private let cameraService = CameraService()
+    
     var isPasscodeEmpty: Bool {
         return interactor.isPasscodeEmpty
     }
@@ -39,6 +41,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
                                                 vc.close { [weak self] in
                                                     self?.startAsyncOperation()
                                                     self?.interactor.checkConnectedToNetwork()
+                                                    MenloworksTagsService.shared.onStartWithLogin(false)
                                                 }
         })
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
@@ -127,11 +130,11 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func onChooseFromPhotoLibriary(onViewController viewController: UIViewController) {
-        CameraService().showImagesPicker(onViewController: viewController)
+        cameraService.showImagesPicker(onViewController: viewController)
     }
     
     func onChooseFromPhotoCamera(onViewController viewController: UIViewController) {
-        CameraService().showCamera(onViewController: viewController)
+        cameraService.showCamera(onViewController: viewController)
     }
     
     // MARK: - interactor output PhotoRelated
