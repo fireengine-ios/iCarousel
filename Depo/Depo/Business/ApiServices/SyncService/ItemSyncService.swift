@@ -166,8 +166,12 @@ class ItemSyncServiceImpl: ItemSyncService {
             
             self.fail()
             
-            }, returnedUploadOperation: { [weak self] _ in
-                self?.status = .executing
+            }, returnedUploadOperation: { [weak self] operations in
+                if let operations = operations, !operations.isEmpty {
+                    self?.status = .executing
+                } else {
+                    self?.status = .synced
+                }
         })
     }
     
