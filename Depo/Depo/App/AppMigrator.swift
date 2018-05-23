@@ -85,8 +85,20 @@ extension AppMigrator {
             wrapData.setSyncStatusesAsSyncedForCurrentUser()
             CoreDataStack.default.updateLocalItemSyncStatus(item: wrapData)
         }
+        
+        removeFromSources(metaSummary: metaSummary)
         debugPrint("\(wrapData.name) isSynced = \(isSynced) in UD: \(isInUserDefaultsHashes), in BD: \(isInDBHashes)")
         return isSynced
+    }
+    
+    private static func removeFromSources(metaSummary: MetaFileSummary) {
+        do {
+            let syncedItems = Table("HashSum")
+            let itemsToRemove = syncedItems.filter(MetaFileSummary.name == metaSummary.fileName && MetaFileSummary.bytes == metaSummary.fileSize)
+            try syncedItemsDBConnection?.run(itemsToRemove.delete())
+        } catch {
+            return
+        }
     }
     
     private static func oldMD5(from deprecatedUrl: String) -> String {
@@ -173,8 +185,8 @@ extension AppMigrator {
 
         let syncedItems = Table("HashSum")
         do {
-            var allSummaries = Array<MetaFileSummary>()
-             for item in try connection.prepare(syncedItems) {
+            var allSummaries = [MetaFileSummary]()
+            for item in try connection.prepare(syncedItems) {
                 let meta = MetaFileSummary(with: item[MetaFileSummary.name], bytes: item[MetaFileSummary.bytes])
                 allSummaries.append(meta)
             }
