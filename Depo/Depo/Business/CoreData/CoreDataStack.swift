@@ -10,10 +10,6 @@ import Foundation
 import CoreData
 import Photos
 
-extension Notification.Name {
-    public static let allLocalMediaItemsHaveBeenLoaded = Notification.Name("allLocalMediaItemsHaveBeenLoaded")
-}
-
 class CoreDataStack: NSObject {
     
     typealias AppendingLocaclItemsFinishCallback = () -> Void

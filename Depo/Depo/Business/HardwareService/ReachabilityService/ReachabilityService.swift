@@ -62,8 +62,6 @@ typealias APIReachabilityHandler = (_ isAvailable: Bool) -> Void
 
 class APIReachabilityService {
     
-    static let APIReachabilityDidChangeName = NSNotification.Name("APIReachabilityServiceReachabilityDidChangeName")
-    
     enum Connection {
         case unreachable
         case reachable
@@ -106,7 +104,7 @@ class APIReachabilityService {
     }
     
     private func notify() {
-        NotificationCenter.default.post(name: APIReachabilityService.APIReachabilityDidChangeName, object: nil)
+        NotificationCenter.default.post(name: .apiReachabilityDidChange, object: nil)
     }
     
     

@@ -45,6 +45,7 @@ struct AssetInfo {
 }
 
 
+
 protocol LocalMediaStorageProtocol {
     
     func getPreviewImage(asset: PHAsset, image: @escaping FileDataSorceImg)
@@ -81,8 +82,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     private let getDetailQueue = OperationQueue()
     
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.localMediaStorage, attributes: .concurrent)
-    
-    static let notificationPhotoLibraryDidChange = NSNotification.Name(rawValue: "notificationPhotoLibraryDidChange")
     
     static let defaultUrl = URL(string: "http://Not.url.com")!
     
