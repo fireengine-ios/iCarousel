@@ -21,6 +21,8 @@ protocol PhotoVideoDetailViewOutput {
     func startCreatingAVAsset()
     func stopCreatingAVAsset()
 
-    func moreButtonPressed(sender: Any?, inAlbumState: Bool)
+    func moreButtonPressed(sender: Any?, inAlbumState: Bool, object: Item, selectedIndex: Int)
+    
+    func updateBars()
     
 }
