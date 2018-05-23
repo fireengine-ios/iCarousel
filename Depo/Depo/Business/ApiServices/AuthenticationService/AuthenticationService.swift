@@ -261,9 +261,6 @@ class AuthenticationService: BaseRequestService {
                             fail?(ErrorResponse.error(error))
                             return
                         }
-                        #if MAIN_APP
-                        log.debug("login user response = \(response),\n headers = \(headers)")
-                        #endif
                         if let accessToken = headers[HeaderConstant.AuthToken] as? String {
                             self?.tokenStorage.accessToken = accessToken
                         }
