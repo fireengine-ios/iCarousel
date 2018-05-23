@@ -63,7 +63,7 @@ final class UploadService: BaseRequestService {
         
         super.init()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateSyncSettings), name: autoSyncStatusDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateSyncSettings), name: .autoSyncStatusDidChange, object: nil)
     }
     
     deinit {
@@ -91,10 +91,7 @@ final class UploadService: BaseRequestService {
             }
             self.trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
             
-            guard let filteredItems = self.filter(items: items) else {
-                success()
-                return
-            }
+            let filteredItems = self.filter(items: items)
             
             switch uploadType {
             case .autoSync:
@@ -631,22 +628,22 @@ extension UploadService {
         }
     }
     
-    fileprivate func filter(items: [WrapData]) -> [WrapData]? {
+    fileprivate func filter(items: [WrapData]) -> [WrapData] {
         guard !items.isEmpty else {
-            return nil
+            return []
         }
         
         var result = items.filter { $0.fileSize < NumericConstants.fourGigabytes }
         guard !result.isEmpty else {
             UIApplication.showErrorAlert(message: TextConstants.syncFourGbVideo)
-            return nil
+            return []
         }
         
         let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes() ?? 0
         result = result.filter { $0.fileSize < freeDiskSpaceInBytes }
         guard !result.isEmpty else {
             UIApplication.showErrorAlert(message: TextConstants.syncNotEnoughMemory)
-            return nil
+            return []
         }
         
         return result

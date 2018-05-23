@@ -14,15 +14,19 @@ final class ImageScrollView: UIScrollView {
     
     var image: UIImage? {
         didSet {
+            /// clear current values
+            imageView.image = nil
+            imageView.frame = .zero
+            contentSize = .zero
+            maximumZoomScale = 1
+            minimumZoomScale = 1
+            zoomScale = 1
+            
             guard let image = image else {
-                imageView.image = nil
-                imageView.frame = .zero
-                contentSize = .zero
-                maximumZoomScale = 1
-                minimumZoomScale = 1
-                zoomScale = 1
                 return
             }
+            
+            /// setup new ones
             imageView.image = image
             imageView.frame.origin = .zero
             imageView.frame.size = image.size

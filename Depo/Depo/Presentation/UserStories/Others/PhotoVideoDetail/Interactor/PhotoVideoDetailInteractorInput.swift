@@ -14,11 +14,11 @@ protocol PhotoVideoDetailInteractorInput: class {
     
     func onViewIsReady()
     
-    var currentItemIndex: Int { get }
+    var currentItemIndex: Int { get set }
     
     var allItems: [Item] { get }
 
-    var bottomBarConfig: EditingBarConfig { get }
+    func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig
 
     func deleteSelectedItem(type: ElementTypes)
     

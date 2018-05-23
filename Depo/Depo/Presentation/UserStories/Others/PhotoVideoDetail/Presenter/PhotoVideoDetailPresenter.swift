@@ -24,9 +24,9 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         bottomBarPresenter?.show(animated: false, onView: view)
     }
     
-    func prepareBarConfigForFileTypes(fileTypes: [FileType]) -> EditingBarConfig {
+    func prepareBarConfigForFileTypes(fileTypes: [FileType], selectedIndex: Int) -> EditingBarConfig {
         
-        var barConfig = interactor.bottomBarConfig
+        var barConfig = interactor.bottomBarConfig(for: selectedIndex)
         var actionTypes = barConfig.elementsConfig
         
         if !fileTypes.contains(.image) {
@@ -51,7 +51,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 
         let allSelectedItemsTypes = selectedItems.map { $0.fileType }
 
-        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes)
+        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: index)
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
         view.onItemSelected(at: index, from: items)
     }
@@ -66,7 +66,22 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         let selectedItems = [interactor.allItems[selectedIndex]]
         let allSelectedItemsTypes = selectedItems.map { $0.fileType }
         
-        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes)
+        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: selectedIndex)
+        bottomBarPresenter?.setupTabBarWith(config: barConfig)
+        interactor.currentItemIndex = selectedIndex
+    }
+    
+    func updateBars() {
+        if interactor.allItems.isEmpty {
+            return
+        }
+        
+        view.onItemSelected(at: interactor.currentItemIndex, from: interactor.allItems)
+        
+        let selectedItems = [interactor.allItems[interactor.currentItemIndex]]
+        let allSelectedItemsTypes = selectedItems.map { $0.fileType }
+        
+        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: interactor.currentItemIndex)
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
     }
     
@@ -90,11 +105,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         asyncOperationSucces()
     }
 
-    func moreButtonPressed(sender: Any?, inAlbumState: Bool) {
-        let currentItem = interactor.allItems[interactor.currentItemIndex]
+    func moreButtonPressed(sender: Any?, inAlbumState: Bool, object: Item, selectedIndex: Int) {
+        //let currentItem = interactor.allItems[interactor.currentItemIndex]
         var actions = [ElementTypes]()
         
-        switch currentItem.fileType {
+        switch object.fileType {
         case .audio, .video, .image:
             actions = interactor.setupedMoreMenuConfig//ActionSheetPredetermendConfigs.photoVideoDetailActions
         case .allDocs:
@@ -103,7 +118,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             break
         }
         alertSheetModule?.showAlertSheet(with: actions,
-                                         items: [currentItem],
+                                         items: [object],
                                          presentedBy: sender,
                                          onSourceView: nil,
                                          excludeTypes: alertSheetExcludeTypes)

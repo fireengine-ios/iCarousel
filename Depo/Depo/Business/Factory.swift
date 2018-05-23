@@ -23,7 +23,7 @@ protocol Factory: SharedFactory {
 }
 
 final class FactoryMain: FactoryBase, Factory {
-    
+
     private static let mediaPlayer = MediaPlayer()
     func resolve() -> MediaPlayer {
         return FactoryMain.mediaPlayer

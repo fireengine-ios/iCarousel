@@ -10,7 +10,7 @@ import UIKit
 
 class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
     
-    override var bottomBarConfig: EditingBarConfig {
+    override func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig {
         let selectedItem = array[selectedIndex]
         switch selectedItem.fileType {
         case .image, .video:

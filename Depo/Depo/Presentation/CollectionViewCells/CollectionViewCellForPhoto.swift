@@ -166,7 +166,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         DispatchQueue.main.async {
             self.visualEffectBlur.isHidden = true
             self.progressView.isHidden = true
-            self.cloudStatusImage.image = UIImage() 
         }
     }
     

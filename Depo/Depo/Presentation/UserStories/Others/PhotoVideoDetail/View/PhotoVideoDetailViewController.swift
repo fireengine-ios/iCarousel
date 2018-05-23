@@ -130,7 +130,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        collectionView.isHidden = false
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         output.viewIsReady(view: viewForBottomBar)
     }
@@ -184,6 +183,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         let indexPath = IndexPath(item: selectedIndex, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        collectionView.isHidden = false
     } 
     
     /// FIXME: temp logic of deinit. ItemOperationManager holds "self" strong
@@ -236,7 +236,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @objc func onRightBarButtonItem(sender: UIButton) {
         let stackCountViews = navigationController?.viewControllers.count ?? 0
         let inAlbumState = stackCountViews > 1 && navigationController?.viewControllers[stackCountViews - 2] is AlbumDetailViewController
-        output.moreButtonPressed(sender: sender, inAlbumState: inAlbumState)   
+        output.moreButtonPressed(sender: sender, inAlbumState: inAlbumState, object: objects[selectedIndex], selectedIndex: selectedIndex)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -319,7 +319,8 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
             guard let `self` = self else {
                 return
             }
-            self.output.setSelectedItemIndex(selectedIndex: self.selectedIndex)
+            
+            self.output.updateBars()
             self.setupNavigationBar()
         }
     }

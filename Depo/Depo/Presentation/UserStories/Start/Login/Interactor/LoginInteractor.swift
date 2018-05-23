@@ -218,9 +218,11 @@ class LoginInteractor: LoginInteractorInput {
     func findCoutryPhoneCode(plus: Bool) {
         let telephonyService = CoreTelephonyService()
         var phoneCode = telephonyService.callingCountryCode()
-        if phoneCode == "" {
+        
+        if phoneCode == "" || UIDevice.current.modelName == "iPad Pro 12.9 Inch 2. Generation" || UIDevice.current.modelName == "iPad Pro 10.5 Inch" || UIDevice.current.modelName == "iPad Pro 9.7 Inch"{
             phoneCode = telephonyService.countryCodeByLang()
         }
+        
         phoneCode.insert("(", at: phoneCode.index(after: phoneCode.startIndex))
         phoneCode.insert(")", at: phoneCode.endIndex)
         output?.foundCoutryPhoneCode(code: phoneCode, plus: plus)

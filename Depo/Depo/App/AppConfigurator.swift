@@ -22,6 +22,7 @@ final class AppConfigurator {
     static func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         DispatchQueue.setupMainQueue()
         
+        AppResponsivenessService.shared.startMainAppUpdate()
         firstStart()
         emptyEmailUpIfNeed()
         clearTokensIfNeed()
