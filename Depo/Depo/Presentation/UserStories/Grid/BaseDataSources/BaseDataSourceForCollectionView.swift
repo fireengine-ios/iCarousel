@@ -105,7 +105,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private var headers = Set([CollectionViewSimpleHeaderWithText]())
     
-    var enableSelectionOnHeader = true
+    var enableSelectionOnHeader = false
     
     var maxSelectionCount: Int = -1
     
