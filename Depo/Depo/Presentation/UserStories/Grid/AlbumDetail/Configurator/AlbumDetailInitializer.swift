@@ -31,6 +31,12 @@ class AlbumDetailModuleInitializer: NSObject {
         
         let interactor = AlbumDetailInteractor(remoteItems: AlbumDetailService(requestSize: 140))
         interactor.album = album
+        
+        // FIXME: need to change folder property to uuid in base class
+        let item = Item(imageData: Data()) /// some empty item to pass uuid
+        item.uuid = album.uuid
+        interactor.folder = item
+        
         viewController.parentUUID = album.uuid
         
         let gridListTopBarConfig = GridListTopBarConfig(

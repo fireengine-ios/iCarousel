@@ -14,14 +14,16 @@ final class VideoSyncService: ItemSyncServiceImpl {
         super.init()
         
         self.fileType = .video
+        self.getUnsyncedOperationQueue.maxConcurrentOperationCount = 1
     }
 
     override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
-        CoreDataStack.default.getLocalUnsynced(fieldValue: .video, service: photoVideoService) { items in
+        let operation = LocalUnsyncedOperation(service: photoVideoService, fieldValue: .video) { items in
             DispatchQueue.toBackground {
                 completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by: { $0.fileSize < $1.fileSize }))
             }
         }
+        getUnsyncedOperationQueue.addOperation(operation)
     }
     
     override func start(newItems: Bool) {
@@ -51,6 +53,7 @@ final class VideoSyncService: ItemSyncServiceImpl {
             return
         }
         
+        getUnsyncedOperationQueue.cancelAllOperations()
         photoVideoService.stopAllOperations()
         UploadService.default.cancelSyncOperations(photo: false, video: true)
     }

@@ -132,11 +132,15 @@ final class MediaPlayer: NSObject {
             if items.count <= index || index < 0 {
                 return
             }
-            let duration = Float(CMTimeGetSeconds(items[index].asset.duration))
-            
-            self.duration = duration
+        
             currentItem = list[index]
-            
+            if let duration = list[index].durationValue {
+                self.duration = Float(duration)
+            } else {
+                let duration = Float(CMTimeGetSeconds(items[index].asset.duration))
+                self.duration = duration
+            }
+
             delegates.invoke { delegate in
                 delegate.mediaPlayer(self, didStartItemWith: duration)
             }
@@ -302,6 +306,7 @@ final class MediaPlayer: NSObject {
                 delegate.mediaPlayer(self, didStartItemWith: duration)
             }
         } else {
+            player.replaceCurrentItem(with: nil)
             player.replaceCurrentItem(with: item)
         }
         

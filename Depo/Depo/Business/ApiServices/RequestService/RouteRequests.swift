@@ -110,7 +110,7 @@ struct RouteRequests {
     static let share = "/api/share/%@"
     
     //MARK : Faq 
-    static let faqContentUrl = "http://mylifebox.life.com.by/faq/?lang=%@"
+    static let faqContentUrl = "http://mylifebox.com/faq/?lang=%@"
 
     // MARK: - Contacts
     static let getContacts = "contact?sortField=firstname&sortOrder=ASC&maxResult=32&currentPage=%d"

@@ -428,6 +428,13 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
     
+    func onlyPresentAlertSheet(with elements: [ElementTypes], for objects:[Item]) {
+        let actions = constractActions(with: elements, for: objects)
+        DispatchQueue.main.async { [weak self] in
+            self?.presentAlertSheet(with: actions, presentedBy: nil)
+        }
+    }
+    
     private func presentAlertSheet(with actions: [UIAlertAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil, viewController: UIViewController? = nil) {
         let vc: UIViewController
         

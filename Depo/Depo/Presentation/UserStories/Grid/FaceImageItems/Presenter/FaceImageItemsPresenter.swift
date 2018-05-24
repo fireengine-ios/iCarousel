@@ -54,18 +54,22 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             interactor.changeCheckPhotosState(isCheckPhotos: false)
         }
         
+        let filteredItems: [WrapData]
         if faceImageType == .people && !isChangeVisibilityMode, let peopleItems = items as? [PeopleItem] {
-            allItems = peopleItems.filter { $0.urlToFile != nil && $0.responseObject.visible == true }
+            filteredItems = peopleItems.filter { $0.urlToFile != nil && $0.responseObject.visible == true }
             if !containsInvisibleItems && peopleItems.first(where: { $0.urlToFile != nil && $0.responseObject.visible == false }) != nil {
                 containsInvisibleItems = true
             }
         } else {
-            allItems = items.filter { $0.urlToFile != nil }
+            filteredItems = items.filter { $0.urlToFile != nil }
         }
         
-        super.getContentWithSuccess(items: allItems)
+        super.getContentWithSuccess(items: filteredItems)
         
-        if allItems.isEmpty && !items.isEmpty {
+        print("filteredItems count = \(filteredItems.count)")
+        print("items count = \(items.count)")
+        
+        if filteredItems.isEmpty && !items.isEmpty {
             dataSource.isPaginationDidEnd = false
             dataSource.delegate?.getNextItems()
         }

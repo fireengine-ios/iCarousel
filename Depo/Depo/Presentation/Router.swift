@@ -763,7 +763,7 @@ class RouterVC: NSObject {
     }
     // MARK: - Packages
     
-    var packages: UIViewController {
+    var packages: PackagesViewController {
         return PackagesModuleInitializer.viewController
     }
     
