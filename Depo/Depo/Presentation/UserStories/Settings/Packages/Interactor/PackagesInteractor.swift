@@ -240,7 +240,8 @@ extension PackagesInteractor: PackagesInteractorInput {
         
         let group = DispatchGroup()
         
-        offersApple.forEach { offer in
+        //just sending reciept
+//        offersApple.forEach { _ in
             group.enter()
             offersService.validateApplePurchase(with: receipt, productId: nil, success: { response in
                 group.leave()
@@ -254,7 +255,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                     log.debug("validateRestorePurchaseFailed: \(errorResponse.description)")
                     group.leave()
             })
-        }
+//        }
         
         group.notify(queue: .main) { [weak self] in
             self?.getActiveSubscriptions()
@@ -400,9 +401,9 @@ extension PackagesInteractor: PackagesInteractorInput {
         
         iapManager.restorePurchases { [weak self] result in
             switch result {
-            case .success(let productIds):
-                let offers = productIds.map { OfferApple(productId: $0) }
-                self?.validateRestorePurchase(offersApple: offers)
+            case .success(let _):
+//                let offers = productIds.map { OfferApple(productId: $0) } ///Backend dont need this for now
+                self?.validateRestorePurchase(offersApple: [])
 
             case .fail(let error):
                 DispatchQueue.main.async {
