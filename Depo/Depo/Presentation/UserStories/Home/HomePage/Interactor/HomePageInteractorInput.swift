@@ -16,4 +16,6 @@ protocol HomePageInteractorInput {
     
     func needRefresh()
     
+    func needCheckQuota()
+    
 }

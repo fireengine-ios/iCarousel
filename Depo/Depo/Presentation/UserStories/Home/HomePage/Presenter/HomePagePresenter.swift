@@ -87,6 +87,9 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     func requestShowSpotlight(for types: [SpotlightType]) {
         spotlightManager.requestShowSpotlight(for: types)
     }
+    func needCheckQuota() {
+        interactor.needCheckQuota()
+    }
 }
 
 extension HomePagePresenter: SpotlightManagerDelegate {
