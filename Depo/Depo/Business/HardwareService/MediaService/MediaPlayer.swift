@@ -102,13 +102,20 @@ final class MediaPlayer: NSObject {
         playerTimeObserver = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) {
             [weak self] time in
             
-            guard let guardSelf = self else { return }
-            let currentTime = Float(CMTimeGetSeconds(time))
-            
-            guardSelf.delegates.invoke { delegate in
-                delegate.mediaPlayer(guardSelf, changedCurrentTime: currentTime)
+            guard let `self` = self else {
+                return
             }
-            guardSelf.updateNowPlayingInfoCenter(with: currentTime)
+            let currentTime = Float(CMTimeGetSeconds(self.player.currentTime()))
+            let newTime = Float(CMTimeGetSeconds(time))
+            
+            guard abs(currentTime - newTime) < 2 else {
+                return
+            }
+        
+            self.delegates.invoke { delegate in
+                delegate.mediaPlayer(self, changedCurrentTime: newTime)
+            }
+            self.updateNowPlayingInfoCenter(with: newTime)
         }
     }
     
