@@ -547,7 +547,7 @@
 "Start adding your files" = "Start adding your files";
 "Suggestions" = "Suggestions";
 "Recent Searches" = "Recent Searches";
-"Lifebox can sync your files automatically." = "lifebox can sync your files automatically.";
+"Lifebox can sync your files automatically." = "lifebox can sync your files photos and videos automatically.";
 "Get Started" = "Get Started";
 "I have read and accepted terms of use" = "I have read and accepted terms of use";
 "Welcome to Lifebox!" = "Welcome to lifebox!";
@@ -655,4 +655,4 @@
 "copied" = "copied";
 "marked as favourite" = "marked as favourite";
 "Bad internet connection" = "Bad internet connection";
-"download_error_unsupported_extension" = "Some of files from downloading queue are unsupported";
+"download_error_unsupported_extension" = "Downloading is not supported for this type of file";
