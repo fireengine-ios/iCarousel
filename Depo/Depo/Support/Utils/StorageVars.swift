@@ -20,6 +20,7 @@ protocol StorageVars: class {
     var periodicContactSyncSet: Bool { get set }
     var usersWhoUsedApp: [String: Any] { get set }
     var isNewAppVersionFirstLaunch: Bool { get set }
+    var deepLink: String? {get set}
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -105,5 +106,11 @@ final class UserDefaultsVars: StorageVars {
     var smallFullOfQuotaPopUpCheckBox: Bool {
         get { return userDefaults.bool(forKey: smallFullOfQuotaPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
         set { userDefaults.set(newValue, forKey: smallFullOfQuotaPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let deepLinkKey = "deepLinkKey"
+    var deepLink: String? {
+        get { return userDefaults.object(forKey: deepLinkKey) as? String}
+        set { userDefaults.set(newValue, forKey: deepLinkKey)}
     }
 }
