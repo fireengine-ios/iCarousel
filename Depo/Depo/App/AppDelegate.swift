@@ -60,6 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     var window: UIWindow?
     
@@ -316,13 +317,14 @@ extension AppDelegate {
                 
                 if let oldURL = Adjust.convertUniversalLink(url, scheme:"akillidepo") {
                     if let host = oldURL.host {
+                        log.debug("Adjust old host :\(oldURL.host)")
                         if PushNotificationService.shared.assignDeepLink(innerLink: host){
+                            log.debug("Should open Action Screen")
                             PushNotificationService.shared.openActionScreen()
+                            storageVars.deepLink = host
                         }
                     }
                     log.debug("Adjust old path :\(oldURL.path)")
-                    
-                    
                 }
             }
         }
