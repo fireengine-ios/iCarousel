@@ -46,6 +46,8 @@ class ItemSyncServiceImpl: ItemSyncService {
         return PhotoAndVideoService(requestSize: NumericConstants.numberOfElementsInSyncRequest, type: fieldValue)
     }
     
+    var getUnsyncedOperationQueue = OperationQueue()
+    
     weak var delegate: ItemSyncServiceDelegate?
     
     
@@ -204,32 +206,62 @@ class ItemSyncServiceImpl: ItemSyncService {
 
 }
 
-
-extension CoreDataStack {
-    func getLocalUnsynced(fieldValue: FieldValue, service: PhotoAndVideoService, completion: @escaping (_ items: [WrapData]) -> Void) {
-        backgroundContext.perform { [weak self] in
-            guard let `self` = self else {
-                completion([])
-                return
-            }
-            self.allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image, completion: {[weak self] items in
-                guard let `self` = self else {
-                    completion([])
-                    return
-                }
-                self.compareRemoteItems(with: items, service: service, fieldValue: fieldValue) { items, error in
-                    guard error == nil, let unsyncedItems = items else {
-                        print(error!.description)
-                        completion([])
-                        return
-                    }
-                    
-                    completion(unsyncedItems)
-                }
-            })
-            
+final class GetLocalUnsyncedOperation: Operation {
+    
+    typealias UnsyncedItemsCompletion = ([WrapData]) -> Void
+    
+    
+    private var service: PhotoAndVideoService?
+    private var fieldValue: FieldValue?
+    private var completion: UnsyncedItemsCompletion?
+    
+    private let coreDataStack = CoreDataStack.default
+    private let semaphore = DispatchSemaphore(value: 0)
+    private let privateQueue = DispatchQueue(label: DispatchQueueLabels.privateConcurentQueue)
+    
+    
+    init(service: PhotoAndVideoService, fieldValue: FieldValue, completion: @escaping UnsyncedItemsCompletion) {
+        self.service = service
+        self.fieldValue = fieldValue
+        self.completion = completion
+    }
+    
+    override func cancel() {
+        super.cancel()
+        
+        service?.stopAllOperations()
+        
+        completion?([])
+        semaphore.signal()
+    }
+    
+    override func main() {
+        guard let field = fieldValue, let service = service, let completion = completion else {
+            return
         }
         
+        coreDataStack.allLocalItemsForSync(video: field == .video, image: field == .image, completion: { [weak self] items in
+            guard let `self` = self, self.isExecuting else {
+                return
+            }
+            
+            self.compareRemoteItems(with: items, service: service, fieldValue: field) { [weak self] items, error in
+                guard let `self` = self else {
+                    return
+                }
+                
+                guard error == nil, let unsyncedItems = items, self.isExecuting else {
+                    completion([])
+                    self.semaphore.signal()
+                    return
+                }
+                
+                completion(unsyncedItems)
+                self.semaphore.signal()
+            }
+        })
+        
+        semaphore.wait()
     }
     
     private func compareRemoteItems(with localItems: [WrapData], service: PhotoAndVideoService, fieldValue: FieldValue, handler:  @escaping (_ items: [WrapData]?, _ error: ErrorResponse?) -> Void ) {
@@ -265,7 +297,7 @@ extension CoreDataStack {
                         if let index = localMd5s.index(of: serverObjectMD5) ?? localIds.index(where: { $0 == trimmedId }) {
                             let localItem = localItems[index]
                             localItem.setSyncStatusesAsSyncedForCurrentUser()
-                            self.updateLocalItemSyncStatus(item: localItem)
+                            self.coreDataStack.updateLocalItemSyncStatus(item: localItem)
                             
                             localItems.remove(at: index)
                             localMd5s.remove(at: index)
@@ -290,3 +322,4 @@ extension CoreDataStack {
         }
     }
 }
+
