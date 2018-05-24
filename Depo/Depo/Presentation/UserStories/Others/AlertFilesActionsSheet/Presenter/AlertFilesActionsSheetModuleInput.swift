@@ -20,4 +20,6 @@ protocol AlertFilesActionsSheetModuleInput: class {
     func showSpecifiedAlertSheet(with item: BaseDataSourceItem, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?)
     
     func showSpecifiedMusicAlertSheet(with item: WrapData, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?)
+    
+    func onlyPresentAlertSheet(with elements: [ElementTypes], for objects:[Item])
 }
