@@ -97,6 +97,7 @@ extension AppMigrator {
             let itemsToRemove = syncedItems.filter(MetaFileSummary.name == metaSummary.fileName && MetaFileSummary.bytes == metaSummary.fileSize)
             try syncedItemsDBConnection?.run(itemsToRemove.delete())
         } catch {
+            log.debug("can't removeFromSources")
             return
         }
     }
@@ -150,9 +151,11 @@ extension AppMigrator {
         
         do {
             debugPrint("DB PATH FOR SYNCED: \(path)")
-            let db = try Connection(path, readonly: true)
+            log.debug("DB PATH FOR SYNCED: \(path)")
+            let db = try Connection(path, readonly: false)
             return db
         } catch {
+            log.debug("can't open syncedItemsDBConnection")
             return nil
         }
     }()
@@ -192,6 +195,7 @@ extension AppMigrator {
             }
             return Set(allSummaries)
         } catch {
+            log.debug("can't read syncedFromDB")
             return []
         }
     }()
