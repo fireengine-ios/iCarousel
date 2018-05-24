@@ -54,7 +54,7 @@ class HomePageInteractor: HomePageInteractorInput {
             storageVars.homePageFirstTimeLogin = true
         }
         AccountService().quotaInfo(success: { [weak self] response in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 if let qresponce = response as? QuotaInfoResponse {
                     guard let quotaBytes = qresponce.bytes, let usedBytes = qresponce.bytesUsed else { return }
                     let usagePercent = Float(usedBytes) / Float(quotaBytes)
