@@ -549,6 +549,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var duration: String?
     
+    var durationValue: TimeInterval?
+    
     var albums: [String]?
 
     var metaData: BaseMetaData?
@@ -699,6 +701,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         patchToPreview = .localMediaContent(tmp)
         tmpDownloadUrl = baseModel.urlToFile
         duration = WrapData.getDuration(duration: baseModel.asset.duration)
+        durationValue = baseModel.asset.duration
             
         favorites = false
         status = .unknown
@@ -772,6 +775,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         switch fileType { //Do we even need this????
         case .image, .audio, .video:
             duration = WrapData.getDuration(duration: remote.metadata?.duration)
+            durationValue = remote.metadata?.duration
             switch previewIconSize {
             case .little : url = remote.metadata?.smalURl
             case .medium : url = remote.metadata?.mediumUrl
@@ -878,6 +882,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         fileType = FileType(value: mediaItem.fileTypeValue)
         isFolder = mediaItem.isFolder
         duration = WrapData.getDuration(duration:assetDuration)
+        durationValue = assetDuration
 
 //        syncStatuses.append(contentsOf: mediaItem.syncStatusesArray)
         

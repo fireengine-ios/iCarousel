@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class PackagesViewController: ViewController {
+final class PackagesViewController: BaseViewController {
     var output: PackagesViewOutput!
     
     @IBOutlet weak private var collectionView: ResizableCollectionView!

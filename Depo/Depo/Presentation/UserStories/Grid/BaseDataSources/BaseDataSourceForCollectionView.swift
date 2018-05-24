@@ -105,7 +105,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private var headers = Set([CollectionViewSimpleHeaderWithText]())
     
-    var enableSelectionOnHeader = true
+    var enableSelectionOnHeader = false
     
     var maxSelectionCount: Int = -1
     
@@ -788,12 +788,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func updateDisplayngType(type: BaseDataSourceDisplayingType) {
         displayingType = type
-        let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
-            return first < second
-        })
+        
         debugPrint("Reload updateDisplayngType")
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
+            let firstVisibleIndexPath = self.self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
+                return first < second
+            })
+
             if let firstVisibleIndexPath = firstVisibleIndexPath {
                 if firstVisibleIndexPath.row == 0, firstVisibleIndexPath.section == 0 {
                     self.collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .centeredVertically, animated: false)
