@@ -22,6 +22,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private var containsInvisibleItems = false
     
+    private var forceLoadNextItems = false
+    
     override func viewIsReady(collectionView: UICollectionView) {        
         super.viewIsReady(collectionView: collectionView)
         
@@ -69,10 +71,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         print("filteredItems count = \(filteredItems.count)")
         print("items count = \(items.count)")
         
-        if filteredItems.isEmpty && !items.isEmpty {
-            dataSource.isPaginationDidEnd = false
-            dataSource.delegate?.getNextItems()
-        }
+        forceLoadNextItems = filteredItems.isEmpty && !items.isEmpty
         
         dataSource.isHeaderless = true
         updateThreeDotsButton()
@@ -101,6 +100,11 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         if let view = view as? FaceImageItemsViewInput {
             let needShow = !dataSource.allMediaItems.isEmpty || (dataSource.allMediaItems.isEmpty && containsInvisibleItems)
             view.updateShowHideButton(isShow: needShow)
+        }
+        
+        if forceLoadNextItems {
+            dataSource.isPaginationDidEnd = false
+            dataSource.delegate?.getNextItems()
         }
     }
     
