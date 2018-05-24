@@ -451,7 +451,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return pseudoPageArray
     }
     
-    private func setupOneSectionMediaItemsArray(items: [WrapData]) {
+    func setupOneSectionMediaItemsArray(items: [WrapData]) {
         allItems.removeAll()
         allItems.append(items)
     }

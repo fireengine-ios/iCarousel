@@ -8,11 +8,6 @@
 
 import Foundation
 
-
-//func testMD5() {
-//    let string = "soroush khanlou"
-//    XCTAssertEqual(string.md5, "954d741d14b14002d1ba88f600eee635")
-//}
 /// in Bridging-Header.h need
 /// #import <CommonCrypto/CommonCrypto.h>
 final class MD5 {
@@ -35,6 +30,11 @@ final class MD5 {
             return nil
         }
         self.init(data: data)
+    }
+}
+extension MD5 {
+    static func from(_ string: String) -> String? {
+        return MD5(string: string)?.hex.uppercased()
     }
 }
 

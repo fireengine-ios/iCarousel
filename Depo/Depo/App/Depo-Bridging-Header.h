@@ -13,7 +13,6 @@
 #import "SyncSettings.h"
 #import "SyncStatus.h"
 #import "AppRater.h"
-#import "MD5.h"
 #import "CropySDK.h"
 #import "CRYConfiguration.h"
 #import <CommonCrypto/CommonCrypto.h>

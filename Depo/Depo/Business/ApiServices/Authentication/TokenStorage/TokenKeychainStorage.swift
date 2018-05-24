@@ -27,9 +27,6 @@ final class TokenKeychainStorage: TokenStorage {
             return token
         }
         set {
-            #if MAIN_APP
-            log.debug("new accessToken: \(newValue ?? "nil")")
-            #endif
             keychain.set(newValue, forKey: accessTokenKey, withAccess: .accessibleAlways)
         }
     }
@@ -43,9 +40,6 @@ final class TokenKeychainStorage: TokenStorage {
             return token
         }
         set {
-            #if MAIN_APP
-            log.debug("new refreshToken: \(newValue ?? "nil")")
-            #endif
             keychain.set(newValue, forKey: refreshTokenKey, withAccess: .accessibleAlways)
         }
     }
@@ -61,9 +55,6 @@ final class TokenKeychainStorage: TokenStorage {
     }
     
     func clearTokens() {
-        #if MAIN_APP
-        log.debug("clearTokens")
-        #endif
         accessToken = nil
         refreshToken = nil
         isRememberMe = false
