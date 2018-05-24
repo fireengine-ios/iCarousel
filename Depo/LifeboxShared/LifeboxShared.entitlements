@@ -11,6 +11,9 @@
 		<string>$(AppIdentifierPrefix)by.come.life.Lifebox</string>
 		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo</string>
 		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo.ent</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo.shareextension</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.akillideponew.ent.shareextension</string>
+		<string>$(AppIdentifierPrefix)by.come.life.Lifebox.LifeboxShared</string>
 	</array>
 </dict>
 </plist>

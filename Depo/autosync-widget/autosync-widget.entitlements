@@ -11,6 +11,9 @@
 		<string>$(AppIdentifierPrefix)by.come.life.Lifebox</string>
 		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo</string>
 		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo.ent</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo.todayextension</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.akillideponew.ent.todayextension</string>
+		<string>$(AppIdentifierPrefix)by.come.life.Lifebox.autosync-widget</string>
 	</array>
 </dict>
 </plist>
