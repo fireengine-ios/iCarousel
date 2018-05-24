@@ -241,21 +241,19 @@ extension PackagesInteractor: PackagesInteractorInput {
         let group = DispatchGroup()
         
         //just sending reciept
-//        offersApple.forEach { _ in
-            group.enter()
-            offersService.validateApplePurchase(with: receipt, productId: nil, success: { response in
-                group.leave()
-                guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
-                    return
-                }
-                if !(status == .restored || status == .success) {
-                    log.debug("validateRestorePurchaseFailed: \(status.description)")
-                }
-                }, fail: { errorResponse in
-                    log.debug("validateRestorePurchaseFailed: \(errorResponse.description)")
-                    group.leave()
-            })
-//        }
+        group.enter()
+        offersService.validateApplePurchase(with: receipt, productId: nil, success: { response in
+            group.leave()
+            guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
+                return
+            }
+            if !(status == .restored || status == .success) {
+                log.debug("validateRestorePurchaseFailed: \(status.description)")
+            }
+        }, fail: { errorResponse in
+            log.debug("validateRestorePurchaseFailed: \(errorResponse.description)")
+            group.leave()
+        })
         
         group.notify(queue: .main) { [weak self] in
             self?.getActiveSubscriptions()
