@@ -86,17 +86,21 @@ extension AppMigrator {
             CoreDataStack.default.updateLocalItemSyncStatus(item: wrapData)
         }
         
-        removeFromSources(metaSummary: metaSummary)
+        removeFromSources(metaSummary: metaSummary, md5: deprecatedMD5)
         debugPrint("\(wrapData.name) isSynced = \(isSynced) in UD: \(isInUserDefaultsHashes), in BD: \(isInDBHashes)")
         return isSynced
     }
     
-    private static func removeFromSources(metaSummary: MetaFileSummary) {
+    private static func removeFromSources(metaSummary: MetaFileSummary, md5: String) {
+        syncedRemotesHash.remove(md5)
+        syncedLocalsHash.remove(md5)
+        
         do {
             let syncedItems = Table("HashSum")
             let itemsToRemove = syncedItems.filter(MetaFileSummary.name == metaSummary.fileName && MetaFileSummary.bytes == metaSummary.fileSize)
             try syncedItemsDBConnection?.run(itemsToRemove.delete())
         } catch {
+            log.debug("can't removeFromSources")
             return
         }
     }
@@ -109,27 +113,41 @@ extension AppMigrator {
         return md5.hex.uppercased()
     }
     
-    private static let syncedRemotesHash: Set<String> = {
-        let syncedRemoteHashesKey = "SYNCED_REMOTE_HASHES_KEY_AUTH_\(SingletonStorage.shared.uniqueUserID)"
-        guard let oldSyncedHashes = UserDefaults.standard.data(forKey: syncedRemoteHashesKey),
-            let unarchivedOldSyncedHashes = NSKeyedUnarchiver.unarchiveObject(with: oldSyncedHashes) as? Array<String>
-        else {
-            return []
+    private static var syncedRemotesHash: Set<String> {
+        get {
+            let syncedRemoteHashesKey = "SYNCED_REMOTE_HASHES_KEY_AUTH_\(SingletonStorage.shared.uniqueUserID)"
+            guard let oldSyncedHashes = UserDefaults.standard.data(forKey: syncedRemoteHashesKey),
+                let unarchivedOldSyncedHashes = NSKeyedUnarchiver.unarchiveObject(with: oldSyncedHashes) as? Array<String>
+                else {
+                    return []
+            }
+            
+            return Set(unarchivedOldSyncedHashes)
         }
-        
-        return Set(unarchivedOldSyncedHashes)
-    }()
+        set {
+            let syncedRemoteHashesKey = "SYNCED_REMOTE_HASHES_KEY_AUTH_\(SingletonStorage.shared.uniqueUserID)"
+            let data = NSKeyedArchiver.archivedData(withRootObject: newValue)
+            UserDefaults.standard.set(data, forKey: syncedRemoteHashesKey)
+        }
+    }
     
-    private static let syncedLocalsHash: Set<String> = {
-        let syncedLocalHashesKey = "SYNCED_LOCAL_HASHES_KEY_AUTH_\(SingletonStorage.shared.uniqueUserID)"
-        guard let oldSyncedHashes = UserDefaults.standard.data(forKey: syncedLocalHashesKey),
-            let unarchivedOldSyncedHashes = NSKeyedUnarchiver.unarchiveObject(with: oldSyncedHashes) as? Array<String>
-            else {
-                return []
+    private static var syncedLocalsHash: Set<String> {
+        get {
+            let syncedLocalHashesKey = "SYNCED_LOCAL_HASHES_KEY_AUTH_\(SingletonStorage.shared.uniqueUserID)"
+            guard let oldSyncedHashes = UserDefaults.standard.data(forKey: syncedLocalHashesKey),
+                let unarchivedOldSyncedHashes = NSKeyedUnarchiver.unarchiveObject(with: oldSyncedHashes) as? Array<String>
+                else {
+                    return []
+            }
+            
+            return Set(unarchivedOldSyncedHashes)
         }
-        
-        return Set(unarchivedOldSyncedHashes)
-    }()
+        set {
+            let syncedLocalHashesKey = "SYNCED_LOCAL_HASHES_KEY_AUTH_\(SingletonStorage.shared.uniqueUserID)"
+            let data = NSKeyedArchiver.archivedData(withRootObject: newValue)
+            UserDefaults.standard.set(data, forKey: syncedLocalHashesKey)
+        }
+    }
     
 //    private static let removedItemsDBConnection: Connection? = {
 //        do {
@@ -150,9 +168,11 @@ extension AppMigrator {
         
         do {
             debugPrint("DB PATH FOR SYNCED: \(path)")
-            let db = try Connection(path, readonly: true)
+            log.debug("DB PATH FOR SYNCED: \(path)")
+            let db = try Connection(path, readonly: false)
             return db
         } catch {
+            log.debug("can't open syncedItemsDBConnection")
             return nil
         }
     }()
@@ -192,6 +212,7 @@ extension AppMigrator {
             }
             return Set(allSummaries)
         } catch {
+            log.debug("can't read syncedFromDB")
             return []
         }
     }()
