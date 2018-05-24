@@ -32,6 +32,11 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         tableDataMArray = items
     }
     
+    override func setupOneSectionMediaItemsArray(items: [WrapData]) {
+        tableDataMArray.removeAll()
+        tableDataMArray.append(items)
+    }
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return tableDataMArray.count
     }

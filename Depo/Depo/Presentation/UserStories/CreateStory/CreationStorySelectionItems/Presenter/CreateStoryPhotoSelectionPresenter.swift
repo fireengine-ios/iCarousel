@@ -12,9 +12,10 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
     
     override func viewIsReady(collectionView: UICollectionView) {
         dataSource = PhotoSelectionDataSource()
-        dataSource.isHeaderless = true
+        
         super.viewIsReady(collectionView: collectionView)
         
+        dataSource.isHeaderless = true
         dataSource.canReselect = false
         dataSource.maxSelectionCount = NumericConstants.maxNumberPhotosInStory
         dataSource.enableSelectionOnHeader = false
