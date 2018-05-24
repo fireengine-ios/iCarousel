@@ -190,6 +190,12 @@ final class NextPageOperation: Operation {
                     return
                 }
                 
+                guard self.isExecuting else {
+                    self.success?([])
+                    self.semaphore.signal()
+                    return
+                }
+                
                 let list = resultResponse.flatMap { WrapData(remote: $0) }
                 self.success?(list)
                 self.semaphore.signal()

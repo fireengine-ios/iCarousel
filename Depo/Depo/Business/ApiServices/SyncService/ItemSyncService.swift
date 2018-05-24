@@ -46,6 +46,8 @@ class ItemSyncServiceImpl: ItemSyncService {
         return PhotoAndVideoService(requestSize: NumericConstants.numberOfElementsInSyncRequest, type: fieldValue)
     }
     
+    var getUnsyncedOperationQueue = OperationQueue()
+    
     weak var delegate: ItemSyncServiceDelegate?
     
     
@@ -202,91 +204,4 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {}
 
-}
-
-
-extension CoreDataStack {
-    func getLocalUnsynced(fieldValue: FieldValue, service: PhotoAndVideoService, completion: @escaping (_ items: [WrapData]) -> Void) {
-        backgroundContext.perform { [weak self] in
-            guard let `self` = self else {
-                completion([])
-                return
-            }
-            self.allLocalItemsForSync(video: fieldValue == .video, image: fieldValue == .image, completion: {[weak self] items in
-                guard let `self` = self else {
-                    completion([])
-                    return
-                }
-                self.compareRemoteItems(with: items, service: service, fieldValue: fieldValue) { items, error in
-                    guard error == nil, let unsyncedItems = items else {
-                        print(error!.description)
-                        completion([])
-                        return
-                    }
-                    
-                    completion(unsyncedItems)
-                }
-            })
-            
-        }
-        
-    }
-    
-    private func compareRemoteItems(with localItems: [WrapData], service: PhotoAndVideoService, fieldValue: FieldValue, handler:  @escaping (_ items: [WrapData]?, _ error: ErrorResponse?) -> Void ) {
-        privateQueue.async {
-            let sortedByDateItems = localItems.sorted { $0.metaDate > $1.metaDate }
-            guard let oldestItemDate = sortedByDateItems.last?.metaDate else {
-                handler([], nil)
-                return
-            }
-            log.debug("LocalMediaStorage compareRemoteItems")
-            var localItems = localItems
-            var localMd5s = localItems.map { $0.md5 }
-            var localIds = localItems.map { $0.getTrimmedLocalID() }
-            
-            var finished = false
-            service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] items in
-                self?.privateQueue.async { [weak self] in
-                    guard let `self` = self else {
-                        handler(nil, ErrorResponse.string(TextConstants.commonServiceError))
-                        return
-                    }
-                    
-                    finished = (items.count < NumericConstants.numberOfElementsInSyncRequest)
-                    
-                    for item in items {
-                        if item.metaDate < oldestItemDate {
-                            finished = true
-                            break
-                        }
-                        
-                        let serverObjectMD5 = item.md5
-                        let trimmedId = item.getTrimmedLocalID()
-                        if let index = localMd5s.index(of: serverObjectMD5) ?? localIds.index(where: { $0 == trimmedId }) {
-                            let localItem = localItems[index]
-                            localItem.setSyncStatusesAsSyncedForCurrentUser()
-                            self.updateLocalItemSyncStatus(item: localItem)
-                            
-                            localItems.remove(at: index)
-                            localMd5s.remove(at: index)
-                            localIds.remove(at: index)
-                            
-                            if localItems.isEmpty {
-                                finished = true
-                                break
-                            }
-                        }
-                    }
-                    
-                    if !finished {
-                        self.compareRemoteItems(with: localItems, service: service, fieldValue: fieldValue, handler: handler)
-                    } else {
-                        handler(localItems, nil)
-                    }
-                }
-                }, fail: {
-                    handler(nil, ErrorResponse.string(TextConstants.commonServiceError))
-            }, newFieldValue: fieldValue)
-        }
-    }
 }
