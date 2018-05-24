@@ -18,7 +18,7 @@ final class VideoSyncService: ItemSyncServiceImpl {
     }
 
     override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
-        let operation = GetLocalUnsyncedOperation(service: photoVideoService, fieldValue: .video) { items in
+        let operation = LocalUnsyncedOperation(service: photoVideoService, fieldValue: .video) { items in
             DispatchQueue.toBackground {
                 completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by: { $0.fileSize < $1.fileSize }))
             }

@@ -24,4 +24,5 @@ struct DispatchQueueLabels {
     static let freeAppSpace = "com.lifebox.freeAppSpace"
     static let privateConcurentQueue = "privateConcurentQueue"
     static let requestService = "com.lifebox.requestService"
+    static let localUnsyncedOperationQueue = "localUnsyncedOperationQueue"
 }
