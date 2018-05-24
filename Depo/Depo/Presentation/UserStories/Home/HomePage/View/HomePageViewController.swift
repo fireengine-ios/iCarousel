@@ -85,6 +85,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         }
         
         requestShowSpotlight()
+        output.needCheckQuota()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
