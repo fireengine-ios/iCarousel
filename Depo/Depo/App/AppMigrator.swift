@@ -89,10 +89,11 @@ extension AppMigrator {
         if isSynced {
             wrapData.setSyncStatusesAsSyncedForCurrentUser()
             CoreDataStack.default.updateLocalItemSyncStatus(item: wrapData)
+            debugPrint("\(wrapData.name) isSynced: in UD: \(isInUserDefaultsHashes), in BD: \(isInDBHashes)")
         }
         
         removeFromSources(metaSummary: metaSummary, md5: deprecatedMD5)
-        debugPrint("\(wrapData.name) isSynced = \(isSynced) in UD: \(isInUserDefaultsHashes), in BD: \(isInDBHashes)")
+//        debugPrint("\(wrapData.name) isSynced = \(isSynced) in UD: \(isInUserDefaultsHashes), in BD: \(isInDBHashes)")
         return isSynced
     }
     

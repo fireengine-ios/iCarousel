@@ -59,7 +59,6 @@ final class UploadService: BaseRequestService {
     override init() {
         uploadQueue.maxConcurrentOperationCount = 1
         uploadQueue.qualityOfService = .userInteractive
-        uploadQueue.underlyingQueue = dispatchQueue
         
         super.init()
         
@@ -99,7 +98,6 @@ final class UploadService: BaseRequestService {
                     returnedUploadOperation(syncOperations)
                 })
             case .syncToUse:
-                
                 self.syncToUseFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
                     self?.clearSyncToUseCounters()
                     self?.hideUploadCardIfNeeded()
@@ -137,7 +135,6 @@ final class UploadService: BaseRequestService {
                 })
             }
         }
-        
     }
     
     private func hideUploadCardIfNeeded() {
@@ -173,12 +170,12 @@ final class UploadService: BaseRequestService {
     }
     
     private func syncToUseFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, syncToUseFileListOperationsCallBack: @escaping ([UploadOperations]?)-> Void ) {
-        dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
-                syncToUseFileListOperationsCallBack(nil)
-                return
-            }
-            
+//        dispatchQueue.async { [weak self] in
+//            guard let `self` = self else {
+//                syncToUseFileListOperationsCallBack(nil)
+//                return
+//            }
+        
             // filter all items which md5's are not in the uploadOperations
             let itemsToUpload = items.filter { item -> Bool in
                 (self.uploadOperations.first(where: { operation -> Bool in
@@ -267,16 +264,16 @@ final class UploadService: BaseRequestService {
             print("UPLOADING upload: \(operations.count) have been added to the upload queue")
             
             syncToUseFileListOperationsCallBack(self.uploadOperations.filter({ $0.uploadType == .syncToUse }))
-        }
+//        }
     }
     
     private func uploadFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedOprations: @escaping ([UploadOperations]?) -> Void) {
         
-        dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
-                returnedOprations(nil)
-                return
-            }
+//        dispatchQueue.async { [weak self] in
+//            guard let `self` = self else {
+//                returnedOprations(nil)
+//                return
+//            }
             // filter all items which md5's are not in the uploadOperations
             let itemsToUpload = items.filter { item -> Bool in
                 (self.uploadOperations.first(where: { operation -> Bool in
@@ -367,15 +364,15 @@ final class UploadService: BaseRequestService {
             print("UPLOADING upload: \(operations.count) have been added to the upload queue")
             let oretiontoReturn = self.uploadOperations.filter({ $0.uploadType == .fromHomePage })
             returnedOprations(oretiontoReturn)
-        }
+//        }
     }
     
     private func syncFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, syncOperationsListCallBack: @escaping ([UploadOperations]?) -> Void) {
-        dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
-                syncOperationsListCallBack(nil)
-                return
-            }
+//        dispatchQueue.async { [weak self] in
+//            guard let `self` = self else {
+//                syncOperationsListCallBack(nil)
+//                return
+//            }
             // filter all items which md5's are not in the uploadOperations
             let itemsToSync = items.filter { item -> Bool in
                 (self.uploadOperations.first(where: { operation -> Bool in
@@ -402,7 +399,6 @@ final class UploadService: BaseRequestService {
             var successHandled = false
             
             let operations: [UploadOperations] = itemsToSync.flatMap {
-                
                 let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
                     self?.dispatchQueue.async { [weak self] in
                         guard let `self` = self else {
@@ -466,7 +462,7 @@ final class UploadService: BaseRequestService {
             print("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
             
             syncOperationsListCallBack(self.uploadOperations.filter({ $0.uploadType == .autoSync }))
-        }
+//        }
     }
     
     func cancelOperations() {
@@ -544,7 +540,7 @@ final class UploadService: BaseRequestService {
             uploadOperations.removeIfExists(operation)
         }
         
-        operations.forEach { operation in
+        operations.reversed().forEach { operation in
             operation.cancel()
         }
     }
