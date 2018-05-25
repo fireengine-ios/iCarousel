@@ -60,4 +60,14 @@ final class FreeUpSpacePopUp: BaseView {
         }
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let bottomSpace : CGFloat = 7.0
+        let h = freeAppSpaceButton.frame.origin.y + freeAppSpaceButton.frame.size.height + bottomSpace
+        if calculatedH != h {
+            calculatedH = h
+            layoutIfNeeded()
+        }
+    }
+    
 }

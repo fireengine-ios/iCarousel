@@ -103,6 +103,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
         
         if forceLoadNextItems {
+            forceLoadNextItems = false
             dataSource.isPaginationDidEnd = false
             dataSource.delegate?.getNextItems()
         }
