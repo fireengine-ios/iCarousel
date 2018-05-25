@@ -65,7 +65,7 @@ final class PushNotificationService {
         case .music: openMusic()
         case .documents: openDocuments()
         case .contactSync: openContactSync()
-        case .periodicContactSync: openContactSync()
+        case .periodicContactSync: openPeriodicContactSync()
         case .favorites: openFavorites()
         case .createStory: openCreateStory()
         case .contactUs: openContactUs()
