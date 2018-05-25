@@ -157,7 +157,6 @@ class CoreDataStack: NSObject {
         if mainContext.hasChanges {
             mainContext.performAndWait{
                 do {
-//                    log.debug("mainContext.save()")
                     try mainContext.save()
                     
                     privateQueue.async {
