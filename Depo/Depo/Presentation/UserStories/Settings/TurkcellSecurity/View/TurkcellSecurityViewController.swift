@@ -30,6 +30,11 @@ class TurkcellSecurityViewController: ViewController {
   
         output.viewIsReady()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationBarWithGradientStyle()
+    }
 }
 
 // MARK: TurkcellSecurityViewInput

@@ -218,5 +218,7 @@ extension AutoSyncSettings {
                 videoSetting.option = .wifiOnly
             }
         }
+        
+        storageVars.autoSyncSet = true
     }
 }

@@ -16,6 +16,7 @@ final class AppMigrator {
         migrateTokens()
         migratePasscode()
         migratePasscodeTouchID()
+        migrateSyncSettings()
     }
     
     static func migrateTokens() {
@@ -55,6 +56,10 @@ final class AppMigrator {
             var biometricsManager: BiometricsManager = factory.resolve()
             biometricsManager.isEnabled = true
         }
+    }
+
+    static func migrateSyncSettings() {
+        _ = AutoSyncDataStorage().settings
     }
 }
 

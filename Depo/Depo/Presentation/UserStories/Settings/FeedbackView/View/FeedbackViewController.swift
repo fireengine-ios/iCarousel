@@ -66,6 +66,7 @@ final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        navigationBarWithGradientStyle()
         bottomConstraint.constant = (view.frame.height - allertView.frame.height) * 0.5
         view.layoutIfNeeded()
         animateView()
