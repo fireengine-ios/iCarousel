@@ -320,8 +320,8 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
     private func setupInitialtGSMCode() {
         let telephonyService = CoreTelephonyService()
         let phoneCode = telephonyService.callingCountryCode()
-        if phoneCode == "" {
-            dataSource.currentGSMCode = telephonyService.countryCodeByLang()
+        if phoneCode == "" || UIDevice.current.modelName == "iPad Pro 12.9 Inch 2. Generation" || UIDevice.current.modelName == "iPad Pro 10.5 Inch" || UIDevice.current.modelName == "iPad Pro 9.7 Inch"{
+            self.dataSource.currentGSMCode = telephonyService.countryCodeByLang()
         }
     }
     
