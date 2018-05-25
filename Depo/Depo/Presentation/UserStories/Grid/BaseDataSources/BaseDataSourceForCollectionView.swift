@@ -1438,30 +1438,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             var arrayOfPath = [IndexPath]()
             
             for item in items {
-                //            if item.fileType != .folder
-                if let path = self.getIndexPathForObject(trimmedLocalID: item.getTrimmedLocalID()) {
-                    arrayOfPath.append(path)
-                } else if let path = self.getIndexPathForObject(itemUUID: item.uuid) {
+                if let path = self.getIndexPathForObject(itemUUID: item.uuid) {
                     arrayOfPath.append(path)
                 }
             }
             
             if arrayOfPath.count > 0 {
-                var trimmedLocalIDs = items.map { $0.getTrimmedLocalID() }
                 let uuids = items.map { $0.uuid }
                 for array in self.allItems {
                     for arraysObject in array {
-                        if let index = trimmedLocalIDs.index(of: arraysObject.getTrimmedLocalID()) {
-                            arraysObject.favorites = isFavorites
-                            trimmedLocalIDs.remove(at: index)
-                        } else if uuids.contains(arraysObject.uuid) {
+                        if uuids.contains(arraysObject.uuid) {
                             arraysObject.favorites = isFavorites
                         }
                     }
                 }
+                
                 DispatchQueue.main.async {
-                    
-                    
                     self.collectionView?.performBatchUpdates({ [weak self] in
                         if let `self` = self{
                             self.collectionView?.reloadItems(at: arrayOfPath)
