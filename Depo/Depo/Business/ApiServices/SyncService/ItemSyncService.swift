@@ -167,7 +167,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             self.fail()
             
             }, returnedUploadOperation: { [weak self] operations in
-                if let operations = operations, !operations.isEmpty {
+                if let operations = operations, !operations.isEmpty, self?.status == .prepairing {
                     self?.status = .executing
                 } else {
                     self?.status = .synced

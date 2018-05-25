@@ -273,7 +273,8 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         
         print("local")
         for md5 in localMD5Array.getArray() {
-            print(md5)
+            /// pleasse uncomment it only if if you need it
+//            print(md5)
         }
         print("server")
         
