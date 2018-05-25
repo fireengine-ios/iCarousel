@@ -11,11 +11,11 @@ import SwiftyJSON
 
 class ContactBackupOld: BaseView {
 
-    @IBOutlet weak var headerLabel: UILabel?
-    @IBOutlet weak var titleLabel: UILabel?
-    @IBOutlet weak var subTitle: UILabel?
-    @IBOutlet weak var bacupButton: UIButton?
-    @IBOutlet weak var lastUpdateLabel: UILabel?
+    @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitle: UILabel!
+    @IBOutlet weak var bacupButton: UIButton!
+    @IBOutlet weak var lastUpdateLabel: UILabel!
     
     class func isContactInfoObjectEmpty(object: JSON?) -> Bool {
         if object?["lastBackupDate"].date != nil {
@@ -90,6 +90,16 @@ class ContactBackupOld: BaseView {
         let router = RouterVC()
         let controller = router.syncContacts
         router.pushViewController(viewController: controller)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let bottomSpace : CGFloat = 0.0
+        let h = bacupButton.frame.origin.y + bacupButton.frame.size.height + bottomSpace
+        if calculatedH != h{
+            calculatedH = h
+            layoutIfNeeded()
+        }
     }
     
 }
