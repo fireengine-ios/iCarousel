@@ -33,6 +33,11 @@ class ManageContactsViewController: BaseViewController, ManageContactsViewInput 
         configureSearchBar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationBarWithGradientStyle()
+    }
+    
     private func configureSearchBar() {
         
         var searchBarHeight: CGFloat = 44
