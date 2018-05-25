@@ -29,6 +29,7 @@ final class TodayViewController: UIViewController {
         
         setupWormhole()
         setupTagGesture()
+        showAsStopped()
     }
     
     private func setupWormhole() {

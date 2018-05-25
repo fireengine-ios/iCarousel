@@ -10,7 +10,7 @@
 	<array>
 		<string>$(AppIdentifierPrefix)by.come.life.Lifebox</string>
 		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo</string>
-		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo.ent</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.akillideponew.ent</string>
 	</array>
 </dict>
 </plist>

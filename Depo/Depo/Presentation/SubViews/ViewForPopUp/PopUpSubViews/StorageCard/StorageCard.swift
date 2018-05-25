@@ -86,6 +86,8 @@ class StorageCard: BaseView {
             
             bottomButton.setTitle(TextConstants.homeStorageCardCloudBottomButtonTitle, for: .normal)
             bottomButton.setTitleColor(ColorConstants.orangeGradientEnd, for: .normal)
+            
+            subTileLabel.text = ""
             break
         case .emptyStorage:
             setGradient(colorTop: ColorConstants.greenGradientStart, colorBottom: ColorConstants.greenGradientEnd)
@@ -137,6 +139,16 @@ class StorageCard: BaseView {
         gradient.frame = backgroundView.frame
         backgroundView.layer.insertSublayer(gradient, at: 0)
         self.gradient = gradient
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let bottomSpace : CGFloat = 0.0
+        let h = bottomButton.frame.origin.y + bottomButton.frame.size.height + bottomSpace
+        if calculatedH != h{
+            calculatedH = h
+            layoutIfNeeded()
+        }
     }
 
 }
