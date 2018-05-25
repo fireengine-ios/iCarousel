@@ -469,7 +469,14 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             actionSheetVC.popoverPresentationController?.sourceRect = sourceRectFrame
         } else if let _ = sender as? UIBarButtonItem {
             //FIXME: use actionSheetVC.popoverPresentationController?.barButtonItem instead
-            actionSheetVC.popoverPresentationController?.sourceRect = rightButtonBox
+            if vc.navigationController?.navigationBar.isTranslucent == true {
+                var frame = rightButtonBox
+                frame.origin.y = 44
+                actionSheetVC.popoverPresentationController?.sourceRect = frame
+            } else {
+                actionSheetVC.popoverPresentationController?.sourceRect = rightButtonBox
+            }
+            
             actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up 
         }
         vc.present(actionSheetVC, animated: true, completion: {})
