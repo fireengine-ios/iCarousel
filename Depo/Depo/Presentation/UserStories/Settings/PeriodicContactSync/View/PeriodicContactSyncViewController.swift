@@ -41,6 +41,11 @@ final class PeriodicContactSyncViewController: ViewController {
         output.viewIsReady(tableView: tableView)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationBarWithGradientStyle()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         

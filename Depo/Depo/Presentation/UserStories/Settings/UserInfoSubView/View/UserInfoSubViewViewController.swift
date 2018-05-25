@@ -76,6 +76,11 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         userIconImageView.sd_setShowActivityIndicatorView(true)
         userIconImageView.sd_setIndicatorStyle(.gray)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationBarWithGradientStyle()
+    }
         
     func reloadUserInfo() {
         output.reloadUserInfoRequired()

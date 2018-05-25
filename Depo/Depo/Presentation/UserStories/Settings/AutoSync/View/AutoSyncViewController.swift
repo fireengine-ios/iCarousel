@@ -57,6 +57,7 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
         output.viewIsReady()
     }
     
+    
     private func setupTapHandler() {
         let tapHandler = UITapGestureRecognizer(target: self, action: #selector(handle(tap:)))
         tapHandler.numberOfTapsRequired = 1
@@ -77,6 +78,7 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
         startButton.isHidden = fromSettings
         bacgroundImage.isHidden = fromSettings
         dataSource.isFromSettings = fromSettings
+        
         
         if fromSettings {
             view.backgroundColor = ColorConstants.whiteColor

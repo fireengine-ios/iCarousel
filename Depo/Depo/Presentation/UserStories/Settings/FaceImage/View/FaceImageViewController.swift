@@ -32,6 +32,11 @@ final class FaceImageViewController: ViewController {
         output.viewIsReady()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationBarWithGradientStyle()
+    }
+    
     private func configureNavBar() {
         setTitle(withString: TextConstants.faceAndImageGrouping)
 
