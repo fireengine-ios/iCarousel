@@ -38,6 +38,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramViewOutput {
     func stopInstagram() {
         view?.startActivityIndicator()
         view?.startActivityIndicator()
+        MenloworksTagsService.shared.instagramImport(isOn: false)
         interactor.setAsync(status: false)
         interactor.cancelUpload()
     }

@@ -90,6 +90,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func succesLogin() {
+        MenloworksTagsService.shared.onStartWithLogin(true)
         interactor.checkEULA()
     }
     

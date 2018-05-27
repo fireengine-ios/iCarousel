@@ -12,6 +12,7 @@ class MenloworksTagsService {
     private init() { }
     
     static let shared = MenloworksTagsService()
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
     // MARK: - Event methods
     
@@ -118,12 +119,17 @@ class MenloworksTagsService {
         let tag = MenloworksTags.LoggedIn(isLoggedIn: isLoggedIn)
         hitTag(tag)
         
+        onTurkcellPasswordSettingsChanged(passcodeStorage.turkcellPasscodeOn)
+        onAutoLoginSettingsChanged(passcodeStorage.autoLoginOn)
+        
         if isLoggedIn {
             sendInstagramImportStatus()
             sendFacebookImportStatus()
             sendFIRStatus()
             sendSubscriptionsStatus()
         }
+        
+        passcodeStatus(!passcodeStorage.isEmpty)
     }
     
     func onNotificationPermissionChanged(_ isEnabled: Bool) {
@@ -140,8 +146,13 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
-    func onLocationPermissionChanged(_ isEnabled: Bool) {
-        let tag = MenloworksTags.LocationPermissionStatus(isEnabled: isEnabled)
+    func onLocationPermissionChanged(_ authorization: String) {
+        let tag = MenloworksTags.LocationPermissionStatus(authorization: authorization)
+        hitTag(tag)
+    }
+    
+    func onPeriodicContactSync(_ periodicContactSync: String) {
+        let tag = MenloworksTags.PeriodicContactSync(periodicContactSync: periodicContactSync)
         hitTag(tag)
     }
     
@@ -183,7 +194,6 @@ class MenloworksTagsService {
     func onPhotosAndVideosOpen() {
         let tag = MenloworksTags.PhotosAndVideosOpen()
         hitTag(tag)
-        sendSubscriptionsStatus()
     }
     
     func onMusicOpen() {

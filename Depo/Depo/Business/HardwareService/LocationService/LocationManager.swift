@@ -143,12 +143,17 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 
         passcodeStorage.systemCallOnScreen = false
         
-        var isAuthorized = false
         if status == .authorizedAlways || status == .authorizedWhenInUse {
-            isAuthorized = true
             startUpdateLocation()
         }
-        MenloworksTagsService.shared.onLocationPermissionChanged(isAuthorized)
+        
+        if status == .authorizedAlways {
+            MenloworksTagsService.shared.onLocationPermissionChanged("always")
+        } else if status == .authorizedWhenInUse {
+            MenloworksTagsService.shared.onLocationPermissionChanged("in use")
+        } else if status == .denied {
+            MenloworksTagsService.shared.onLocationPermissionChanged("denied")
+        }
         
         if status != .notDetermined, let handler = requestAuthorizationStatusHandler {
             handler(status)
