@@ -44,6 +44,10 @@ class BaseViewController: ViewController {
         RouterVC().setBacgroundColor(color: getBacgroundColor())
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func getMainYForView(view: UIView) -> CGFloat {
         if (view.superview == self.view) {
             return view.frame.origin.y
