@@ -115,6 +115,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         ItemOperationManager.default.stopUpdateView(view: dataSource)
     }
     
