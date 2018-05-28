@@ -107,6 +107,9 @@ class APIReachabilityService {
         NotificationCenter.default.post(name: .apiReachabilityDidChange, object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     @objc private func checkAPI() {
         requestService.sendPingRequest { [weak self] isReachable in

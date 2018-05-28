@@ -610,13 +610,13 @@
 "Daily" = "1 раз в день";
 "Weekly" = "Неделя";
 "Monthly" = "Ежемесячно";
-"Up to 5000 contacts can be backed up." = "Вы можете создать резервную копию до 15000 контактов.";
-"LifeboxSmallPopUpTitle" = "";
-"LifeboxSmallPopUpSubTitle" = "";
-"LifeboxSmallPopUpCheckBoxTex" = "";
-"LifeboxSmallPopUpFirstButtonText" = "";
-"LifeboxSmallPopUpSecondButtonText" = "";
-"has_remained_lifebox_usage" = "";
+"Up to 5000 contacts can be backed up." = "Ошибка резервного копирования контактов, так как у вас больше контактов, чем поддерживаемых верхних пределов.";
+"LifeboxSmallPopUpTitle" = "Ваше хранилище почти заполнено!";
+"LifeboxSmallPopUpSubTitle" = "Давайте взглянём на обновлённые опции!";
+"LifeboxSmallPopUpCheckBoxTex" = "Больше не показывать";
+"LifeboxSmallPopUpFirstButtonText" = "ОК";
+"LifeboxSmallPopUpSecondButtonText" = "ОБНОВИТЬ";
+"has_remained_lifebox_usage" = "%@ из %@ осталось (только для lifebox)";
 "Renewal Date: %@" = "Дата продления: %@";
 "created" = "создано";
 "uploaded" = "загружено";
@@ -627,4 +627,7 @@
 "copied" = "скопировано";
 "marked as favourite" = "отмечен как избранное";
 "Bad internet connection" = "Плохое интернет соединение";
-"download_error_unsupported_extension" = "";
+"download_error_unsupported_extension" = "Некоторые файлы недоступны для скачивания.";
+
+/*Show only synced items*/
+"Show only synced items" = "";

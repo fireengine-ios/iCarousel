@@ -610,7 +610,7 @@
 "Daily" = "Täglich";
 "Weekly" = "Wochentlich";
 "Monthly" = "Monatlich";
-"Up to 5000 contacts can be backed up." = "Bis zu 15000 Kontakte können gesichert werden.";
+"Up to 5000 contacts can be backed up." = "Die Kontaktsicherung ist fehlgeschlagen, da Sie mehr Kontakte als die unterstützte Obergrenze haben.";
 "LifeboxSmallPopUpTitle" = "Ihr Speicher ist fast voll!";
 "LifeboxSmallPopUpSubTitle" = "Werfen wir einen Blick auf Upgrade-Optionen!";
 "LifeboxSmallPopUpCheckBoxTex" = "Nie wieder zeigen";
@@ -627,4 +627,7 @@
 "copied" = "Kopiert";
 "marked as favourite" = "favourited";
 "Bad internet connection" = "Schlechte Internetverbindung";
-"download_error_unsupported_extension" = "";
+"download_error_unsupported_extension" = "Das Herunterladen wird für diesen Dateityp nicht unterstützt";
+
+/*Show only synced items*/
+"Show only synced items" = "";
