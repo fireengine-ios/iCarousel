@@ -237,8 +237,11 @@ typealias FileOperation = () -> Void
 
 class FileService: BaseRequestService {
     
+    static let shared = FileService()
     let downloadOperation = OperationQueue()
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.download)
+    var allOperationsCount : Int = 0
+    var completedOperationsCount : Int = 0
     
     override init() {
         super.init()
@@ -318,34 +321,48 @@ class FileService: BaseRequestService {
         if supportedItemsToDownload.count != items.count {
             UIApplication.showErrorAlert(message: TextConstants.errorUnsupportedExtension)
         }
-
-        let allOperationsCount = supportedItemsToDownload.count
+        
+        allOperationsCount = allOperationsCount + supportedItemsToDownload.count
         CardsManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
         let downloadRequests: [BaseDownloadRequestParametrs] = supportedItemsToDownload.flatMap {
             BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name, item: $0)
         }
-        var completedOperationsCount = 0
+        //var completedOperationsCount = 0
         let operations = downloadRequests.flatMap {
-            DownLoadOperation(downloadParam: $0, success: {
-                completedOperationsCount = completedOperationsCount + 1
+            DownLoadOperation(downloadParam: $0, success: { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                self.completedOperationsCount = self.completedOperationsCount + 1
                 CardsManager.default.setProgressForOperationWith(type: .download,
-                                                                            allOperations: allOperationsCount,
-                                                                            completedOperations: completedOperationsCount)
+                                                                            allOperations: self.allOperationsCount,
+                                                                            completedOperations: self.completedOperationsCount)
             }, fail: { [weak self] error in
                 self?.error = error.isUnknownError ? ErrorResponse.string(TextConstants.errorUnsupportedExtension) : error
                 /// HERE MUST BE ERROR HANDLER
             })
         }
         
-        dispatchQueue.async {
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
             self.downloadOperation.addOperations(operations, waitUntilFinished: true)
-            CardsManager.default.stopOperationWithType(type: .download)
+            
+            if self.allOperationsCount == self.completedOperationsCount {
+                CardsManager.default.stopOperationWithType(type: .download)
+            }
             
             if let error = self.error {
                 fail?(error)
                 self.error = nil
             } else {
-                success?()
+                if self.allOperationsCount == self.completedOperationsCount {
+                    self.allOperationsCount = 0
+                    self.completedOperationsCount = 0
+                    success?()
+                }
             }
         }
     }
@@ -512,7 +529,7 @@ class DownLoadOperation: Operation {
             return
         }
         SingletonStorage.shared.progressDelegates.add(self)
-        FileService().downloadToCameraRoll(downloadParam: param, success: {
+        FileService.shared.downloadToCameraRoll(downloadParam: param, success: {
             log.debug("FileService download \(self.param.fileName) success")
             self.customSuccess()
         }) { error in
