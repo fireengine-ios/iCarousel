@@ -10,7 +10,6 @@ import UIKit
 
 protocol AutoSyncDataSourceDelegate: class {
     func enableAutoSync()
-    func mobileDataEnabledFor(model: AutoSyncModel)
 }
 
 
