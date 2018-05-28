@@ -89,11 +89,14 @@ extension AppMigrator {
         if isSynced {
             wrapData.setSyncStatusesAsSyncedForCurrentUser()
             CoreDataStack.default.updateLocalItemSyncStatus(item: wrapData)
-            debugPrint("\(wrapData.name) isSynced: in UD: \(isInUserDefaultsHashes), in BD: \(isInDBHashes)")
         }
         
         removeFromSources(metaSummary: metaSummary, md5: deprecatedMD5)
-//        debugPrint("\(wrapData.name) isSynced = \(isSynced) in UD: \(isInUserDefaultsHashes), in BD: \(isInDBHashes)")
+
+        let debugString = "\(wrapData.name) isSynced: \(isSynced) in UD: \(isInUserDefaultsHashes), in BD: \(isInDBHashes)"
+        log.debug(debugString)
+        debugPrint(debugString)
+        
         return isSynced
     }
     
@@ -216,7 +219,9 @@ extension AppMigrator {
                 let meta = MetaFileSummary(with: item[MetaFileSummary.name], bytes: item[MetaFileSummary.bytes])
                 allSummaries.append(meta)
             }
-            return Set(allSummaries)
+            let result = Set(allSummaries)
+            log.debug("DB migration: \(result)")
+            return result
         } catch {
             log.debug("can't read syncedFromDB")
             return []
