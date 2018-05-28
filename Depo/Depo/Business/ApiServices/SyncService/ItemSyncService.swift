@@ -84,8 +84,15 @@ class ItemSyncServiceImpl: ItemSyncService {
         
         lastSyncedMD5s.removeAll()
         
+        status = .waitingForWifi
         CoreDataStack.default.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image, completion: { [weak self] hasItemsToSync in
-            self?.status = hasItemsToSync ? .waitingForWifi : .stoped
+            guard let `self` = self else {
+                return
+            }
+            
+            if self.status == .waitingForWifi {
+                self.status = hasItemsToSync ? .waitingForWifi : .stoped
+            }
         })
         
        
