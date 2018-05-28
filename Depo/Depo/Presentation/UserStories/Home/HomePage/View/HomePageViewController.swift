@@ -53,6 +53,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
         showSpiner()
         output.homePagePresented()
+        
+        output.needCheckQuota()
     }
     
     private func configurateRefreshControl() {
@@ -85,7 +87,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         }
         
         requestShowSpotlight()
-        output.needCheckQuota()
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
