@@ -34,18 +34,8 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     
     func change(settings: AutoSyncSettings) {
         if !fromSettings {
-            let photoOption = settings.photoSetting.option
-            let videoOption = settings.videoSetting.option
-            let dataSyncEnabled = settings.isAutoSyncOptionEnabled && (photoOption == .wifiAndCellular || videoOption == .wifiAndCellular)
-            if dataSyncEnabled {
-                router.showSyncOverPopUp(okHandler: {[weak self] in
-                    self?.router.routNextVC()
-                    self?.interactor.onSave(settings: settings)
-                })
-            } else {
-                router.routNextVC()
-                save(settings: settings)
-            }
+            router.routNextVC()
+            save(settings: settings)
         } else {
             save(settings: settings)
         }
