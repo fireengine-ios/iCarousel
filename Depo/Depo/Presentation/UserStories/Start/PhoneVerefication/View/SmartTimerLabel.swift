@@ -45,12 +45,13 @@ class SmartTimerLabel: UILabel {
     }
     
     func dropTimer() {
-        timerCycle = lifeLimit
-        
+        timerCycle = lifeLimit   
     }
     
+    private var notificationToken: NSObjectProtocol?
+    
     private func setupObserver() {
-        NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [weak self] _ in
+         notificationToken = NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [weak self] _ in
             guard let `self` = self, let startDateUnwraped = self.startDate else {
                 return
             }
@@ -63,6 +64,12 @@ class SmartTimerLabel: UILabel {
             }
             self.timerCycle = Int(timeIntervalFromStartCurrentDate)
             
+        }
+    }
+    
+    deinit {
+        if let notificationToken = notificationToken {
+            NotificationCenter.default.removeObserver(notificationToken)
         }
     }
     

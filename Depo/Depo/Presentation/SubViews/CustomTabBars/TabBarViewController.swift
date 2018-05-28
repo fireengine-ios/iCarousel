@@ -167,6 +167,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         player.delegates.remove(self)
     }
     

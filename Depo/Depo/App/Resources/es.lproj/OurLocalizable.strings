@@ -610,7 +610,7 @@
 "Daily" = "Diario";
 "Weekly" = "Semanal";
 "Monthly" = "Mensual";
-"Up to 5000 contacts can be backed up." = "Se pueden hacer copias de seguridad de hasta 15000 contactos.";
+"Up to 5000 contacts can be backed up." = "La copia de seguridad de contacto falló debido a que tiene más contactos que el límite superior admitido.";
 "LifeboxSmallPopUpTitle" = "¡Su almacenamiento de Lifebox está casi lleno!";
 "LifeboxSmallPopUpSubTitle" = "Echemos un vistazo a las opciones de actualización";
 "LifeboxSmallPopUpCheckBoxTex" = "No mostrar de nuevo";
@@ -627,4 +627,7 @@
 "copied" = "Copiado";
 "marked as favourite" = "Favourited";
 "Bad internet connection" = "Mala conexión de Internet";
-"download_error_unsupported_extension" = "";
+"download_error_unsupported_extension" = "La descarga no es compatible con este tipo de archivo";
+
+/*Show only synced items*/
+"Show only synced items" = "";

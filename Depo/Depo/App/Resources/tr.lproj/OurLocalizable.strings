@@ -1,5 +1,5 @@
 "Welcome1Info" = "Yaşa, Biriktir, Hatırla";
-"Welcome1SubInfo" = "Tüm anılarını, kontaklarını ve dosyalarını lifebox'a güvenle yedekle! \nDilediğin zaman dilediğin yerden eriş.";
+"Welcome1SubInfo" = "Tüm anılarını, dosyalarını ve kontaklarını lifebox'a güvenle yedekle!";
 "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Cihaz ayarlarındaki konum servisleri devre dışı durumda. Arka planda lifebox’un otomatik yedekleme özelliğini kullanmak için “Ayarlar – Gizlilik – Konum Servisleri” üzerinden konum servislerini etkinleştirmen gerek.";
 "This file will be removed only from your album. You can access this file from Photos tab" = "Bu dosya sadece albümünden kaldırılacak. Fotoğraflar sekmesi üzerinden bu dosyaya erişebilirsin. Çıkarmak istediğine emin misin?";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Bu albümü sildiğinde albümün içindeki dosyalar lifebox'ından kalmaya devam edecek. Dosyalarına Fotoğraflar sekmesinden ulaşabilirsin. Silmek istdiğine emin misin?";
@@ -278,7 +278,7 @@
 "You’ve uploaded %@ two days ago!" = "İki gün önce %@ upload ettiniz!";
 "Expand My Storage" = "Depolama Alanımı Yükselt";
 "You are using %85 of your disk space! It’s a great time to expand your storage." = "lifebox saklama alanının %85’ini kullanıyorsun! Alanını genişletmek için harika bir zaman.";
-"Your storage is almost full!" = "lifebox kota sınırına ulaştın. Hadi yükseltme seçeneklerine bir göz atalım!";
+"Your storage is almost full!" = "Cihazının depolama alanı dolmak üzere!";
 "Change filter" = "Filter değiştir";
 "Save this photo" = "Kaydet";
 "You can apply this filter and my more to your other picures as well" = "Fotoğrafların için diğer filtreleri de uygulayabilirsiniz.";
@@ -350,7 +350,7 @@
 "You’re skipping auto-sync setting turned off. You can activate this later in preferences." = "Otomatik yedekleme ayarlarını atlıyorsunuz. Daha sonra ayarlar/ otomatik yedekleme kısmından ayarlarınızı değştirebilirsiniz.";
 "Skip setting Auto-Sync?" = "Otomatik Yedekleme ayarlarını atlamak ister misin?";
 "Skip for now" = "Atla";
-"Let’s start using Lifebox" = " Kullanmaya Başla";
+"Let’s start using Lifebox" = "Başla";
 "Select the items to sync with mobile data." = "Mobil verilerle yedeklenecek öğeleri seçin";
 "Mobile Data" = "Mobil Veri";
 "Wi-fi" = "Wi-Fi";
@@ -575,9 +575,9 @@
 "error_login" = "Yükleme yapabilmek için önce lifebox'a login olmalısın.";
 "uploading" = "Yükleniyor";
 "widgetBottomTitleLastSyncFormat" = "Son Yedekleme: %@";
-"widgetBottomTitleNewerSyncronized" = "Henüz hiç otomatik yükleme yapmadın.";
+"widgetBottomTitleNewerSyncronized" = "Henüz yapmadın";
 "widgetTopTitleFinished" = "Yükleme tamamlandı.";
-"widgetTopTitleInactive" = "Yükleme aktif değil.";
+"widgetTopTitleInactive" = "Otomatik yükleme aktif değil";
 "widgetTopTitleInProgress" = "Yükleme devam ediyor...";
 "error_authentication_message" = "Devam edebilmek için lütfen uygulamayı açıp giriş yapın.";
 "error_authentication_title" = "lifebox'a giriş yapın.";
@@ -596,7 +596,7 @@
 "%d%% Analyzed…" = "%d%% analiz ediliyor";
 "START USING" = "Başla";
 "landingTitle0" = "Yaşa, Biriktir, Hatırla\n";
-"landingSubTitle0" = "Tüm anılarını, kontaklarını ve dosyalarını lifebox'a güvenle yedekle! \nDilediğin zaman dilediğin yerden eriş..";
+"landingSubTitle0" = "Tüm anılarını, dosyalarını ve kontaklarını lifebox'a güvenle yedekle!";
 "landingTitle1" = "Otomatik Yedekleme";
 "landingSubTitle1" = "Fotoğraf ve videoların anında lifebox'ta!";
 "landingTitle2" = "Yüz ve Nesne Tanıma";
@@ -618,7 +618,7 @@
 "Daily" = "Günlük";
 "Weekly" = "Haftalık";
 "Monthly" = "Aylık";
-"Up to 5000 contacts can be backed up." = "15000’e kadar kişinin yedeği alınabilir.";
+"Up to 5000 contacts can be backed up." = "Rehberindeki kişi sayısı üst sınırın üzerinde olduğu için yedekleme yapılamamıştır.";
 "LifeboxSmallPopUpTitle" = "lifebox kotan neredeyse dolu!";
 "LifeboxSmallPopUpSubTitle" = "Yükseltme seçeneklerine bakalım!";
 "LifeboxSmallPopUpCheckBoxTex" = "Bir daha gösterme";
@@ -636,3 +636,6 @@
 "marked as favourite" = "favorilendi";
 "Bad internet connection" = "Internet bağlantı sorunu";
 "download_error_unsupported_extension" = "Bu dosya tipi için indirme özelliği desteklenmiyor.";
+
+/*Show only synced items*/
+"Show only synced items" = "";
