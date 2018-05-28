@@ -73,10 +73,19 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             
             if !selectedItem.isLocalItem {
                 elementsConfig.insert(.edit, at: 2)
-                elementsConfig.append(.delete)
+                
                 if let syncIndex = elementsConfig.index(of: .sync) {
                     elementsConfig[syncIndex] = .download
                 }
+                
+                if let infoIndex = elementsConfig.index(of: .info) {
+                    elementsConfig.remove(at: infoIndex)
+                }
+                if !elementsConfig.contains(.print) {
+                    elementsConfig.append(.print)
+                }
+                elementsConfig.append(.delete)
+                
             } else if let syncIndex = elementsConfig.index(of: .download) {
                 elementsConfig[syncIndex] = .sync
             }
