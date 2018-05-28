@@ -133,7 +133,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     private func upload(items: [WrapData]) {
         log.debug("ItemSyncServiceImpl upload")
 
-        guard !items.isEmpty else {
+        guard !items.isEmpty, status != .stoped else {
             return
         }
         
