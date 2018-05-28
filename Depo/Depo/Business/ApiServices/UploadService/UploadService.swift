@@ -146,7 +146,7 @@ final class UploadService: BaseRequestService {
     private func showSyncCardProgress() {
         WidgetService.shared.notifyWidgetAbout(currentSyncOperationNumber, of: allSyncOperationsCount)
         
-        guard allSyncOperationsCount != 0, allSyncOperationsCount != finishedSyncOperationsCount else {
+        guard allSyncOperationsCount != 0, allSyncOperationsCount != finishedSyncOperationsCount, autoSyncStorage.settings.isAutoSyncEnabled else {
             clearSyncCounters()
             return
         }
@@ -542,7 +542,7 @@ final class UploadService: BaseRequestService {
     }
     
     private func cancelAndRemove(operations: [UploadOperations]) {
-        operations.forEach { operation in
+        operations.reversed().forEach { operation in
             uploadOperations.removeIfExists(operation)
         }
         

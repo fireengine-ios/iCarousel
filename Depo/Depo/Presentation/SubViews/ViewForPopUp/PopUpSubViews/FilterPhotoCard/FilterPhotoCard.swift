@@ -74,7 +74,6 @@ final class FilterPhotoCard: BaseView {
         let item = WrapData(remote: searchItem)
         originalItem = item
         /// check DB here
-        debugPrint("item md5 \(item.md5)")
         CoreDataStack.default.getLocalFilteredItem(remoteOriginalItem: item) { [weak self] localSavedItem in
             guard let `self` = self else {
                 return
@@ -98,7 +97,7 @@ final class FilterPhotoCard: BaseView {
     
     private func set(image: UIImage, isSaved: Bool) {
         cardType = isSaved ? .display : .save
-        photoImageView.image = image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
+        photoImageView.image = isSaved ? image : image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {
@@ -120,6 +119,7 @@ final class FilterPhotoCard: BaseView {
     }
     
     private func displayNotSavedPhoto() {
+        
         guard let image = photoImageView.image else { return }
         let vc = PVViewerController.initFromNib()
         vc.image = image
@@ -129,6 +129,7 @@ final class FilterPhotoCard: BaseView {
 
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
+        
         guard let image = photoImageView.image else { return }
         
         switch cardType {
@@ -178,24 +179,9 @@ final class FilterPhotoCard: BaseView {
             return
         }
         
-        bottomButton.isEnabled = false
-
+//        bottomButton.isEnabled = false
         LocalMediaStorage.default.saveFilteredImage(filteredImage: image, originalImage: originalItemUnwraped)
-        self.cardType = .display
-        
-        
-        //        imageManager.saveToDevice(image: image) { [weak self] result in
-//            DispatchQueue.main.async {
-//                self?.bottomButton.isEnabled = true
-//
-//                switch result {
-//                case .success(_):
-//                    self?.cardType = .display
-//                case .failed(let error):
-//                    UIApplication.showErrorAlert(message: error.description)
-//                }
-//            }
-//        }
+        cardType = .display
     }
     
     override func spotlightHeight() -> CGFloat {
