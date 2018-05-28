@@ -98,7 +98,7 @@ final class FilterPhotoCard: BaseView {
     
     private func set(image: UIImage, isSaved: Bool) {
         cardType = isSaved ? .display : .save
-        photoImageView.image = image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
+        photoImageView.image = isSaved ? image : image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {
