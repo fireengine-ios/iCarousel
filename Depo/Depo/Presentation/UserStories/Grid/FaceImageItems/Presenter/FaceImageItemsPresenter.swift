@@ -165,6 +165,11 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
         self.isChangeVisibilityMode = isChangeVisibilityMode
         dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
+        
+        if let view = view as? FaceImageItemsViewInput {
+            view.hideUgglaView()
+        }
+        
         reloadData()
     }
     
@@ -213,10 +218,6 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         asyncOperationSucces()
         
         view.stopSelection()
-        
-        if let view = view as? FaceImageItemsViewInput {
-            view.hideUgglaView()
-        }
         
         albumSliderModuleOutput?.reload(type: .people)
         reloadData()
