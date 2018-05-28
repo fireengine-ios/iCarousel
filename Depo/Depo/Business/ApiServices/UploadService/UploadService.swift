@@ -495,26 +495,32 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelSyncOperations(photo: Bool, video: Bool) {
-        print("AUTOSYNC: cancelling sync operations for \(photo ? "photo" : "video")")
-        let time = Date()
-        var operationsToRemove = uploadOperations.filter({ $0.uploadType == .autoSync &&
-            ((video && $0.item.fileType == .video) || (photo && $0.item.fileType == .image)) })
-        
-        print("AUTOSYNC: found \(operationsToRemove.count) operations to remove in \(Date().timeIntervalSince(time)) secs")
-        
-        cancelAndRemove(operations: operationsToRemove)
-        
-        print("AUTOSYNC: removed \(operationsToRemove.count) operations in \(Date().timeIntervalSince(time)) secs")
-        operationsToRemove.removeAll()
-        
-        if photo {
-            finishedPhotoSyncOperationsCount = 0
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            print("AUTOSYNC: cancelling sync operations for \(photo ? "photo" : "video")")
+            let time = Date()
+            var operationsToRemove = self.uploadOperations.filter({ $0.uploadType == .autoSync &&
+                ((video && $0.item.fileType == .video) || (photo && $0.item.fileType == .image)) })
+            
+            print("AUTOSYNC: found \(operationsToRemove.count) operations to remove in \(Date().timeIntervalSince(time)) secs")
+            
+            self.cancelAndRemove(operations: operationsToRemove)
+            
+            print("AUTOSYNC: removed \(operationsToRemove.count) operations in \(Date().timeIntervalSince(time)) secs")
+            operationsToRemove.removeAll()
+            
+            if photo {
+                self.finishedPhotoSyncOperationsCount = 0
+            }
+            if video {
+                self.finishedVideoSyncOperationsCount = 0
+            }
+            
+            self.showSyncCardProgress()
         }
-        if video {
-            finishedVideoSyncOperationsCount = 0
-        }
-        
-        showSyncCardProgress()
     }
     
     func cancelOperations(with assets: [PHAsset]?) {
@@ -687,7 +693,9 @@ extension UploadService {
     
     fileprivate func logSyncSettings(state: String) {
         let settings = autoSyncStorage.settings
-        var logString = "Auto Sync Settings: PHOTOS: \(settings.photoSetting.option.localizedText) + VIDEOS: \(settings.videoSetting.option.localizedText)"
+        let photoSetting = autoSyncStorage.settings.isAutoSyncEnabled ? settings.photoSetting.option.localizedText : AutoSyncOption.never.localizedText
+        let videoSetting = autoSyncStorage.settings.isAutoSyncEnabled ? settings.videoSetting.option.localizedText : AutoSyncOption.never.localizedText
+        var logString = "Auto Sync Settings: PHOTOS: \(photoSetting) + VIDEOS: \(videoSetting)"
         logString += "; DEVICE NETWORK: \(reachabilityService.status)"
         logString += " --> \(state)"
         log.debug(logString)
