@@ -34,12 +34,12 @@ class LoadingImageView: UIImageView {
         super.awakeFromNib()
         
         if (cornerView == nil) {
-            cornerView = UIView()
-            cornerView?.translatesAutoresizingMaskIntoConstraints = false
-            
-            cornerView!.backgroundColor = UIColor.clear
-            cornerView!.layer.borderColor = ColorConstants.darcBlueColor.cgColor
-            cornerView!.layer.borderWidth = 2
+            let newCornerView = UIView()
+            newCornerView.translatesAutoresizingMaskIntoConstraints = false
+            newCornerView.backgroundColor = UIColor.clear
+            newCornerView.layer.borderColor = ColorConstants.darcBlueColor.cgColor
+            newCornerView.layer.borderWidth = 2
+            cornerView = newCornerView
         }
         
         addSubview(activity)
@@ -111,10 +111,9 @@ class LoadingImageView: UIImageView {
             self.image = nil
         }
         
-        if (object == nil) {
+        guard let object = object else {
             checkIsNeedCancelRequest()
             activity.stopAnimating()
-            
             return
         }
         
@@ -122,10 +121,10 @@ class LoadingImageView: UIImageView {
             activity.startAnimating()
         }
         privateQueue.async { [weak self] in
-            self?.path = object?.patchToPreview
+            self?.path = object.patchToPreview
             
-            self?.url = self?.filesDataSource.getImage(patch: object!.patchToPreview) { [weak self] image in
-                if self?.path == object?.patchToPreview {
+            self?.url = self?.filesDataSource.getImage(patch: object.patchToPreview) { [weak self] image in
+                if self?.path == object.patchToPreview {
                     self?.finishImageLoading(image, withAnimation: smooth)
                 }
             }
@@ -220,21 +219,26 @@ class LoadingImageView: UIImageView {
             cornerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
             cornerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         } else {
-            cornerView!.removeFromSuperview()
+            cornerView?.removeFromSuperview()
         }
     }
     
     private func finishImageLoading(_ image: UIImage?, withAnimation: Bool = false) {
         self.path = nil
         self.url = nil
-        DispatchQueue.main.async {
+        DispatchQueue.toMain { [weak self] in
+            guard let `self` = self else {
+                return
+            }
             self.activity.stopAnimating()
             if withAnimation {
-                UIView.transition(with: self,
-                                  duration: NumericConstants.animationDuration,
-                                  options: .transitionCrossDissolve,
-                                  animations: { self.image = image },
-                                  completion: nil)
+                UIView.transition(
+                    with: self,
+                    duration: NumericConstants.animationDuration,
+                    options: .transitionCrossDissolve,
+                    animations: { [weak self] in
+                        self?.image = image  
+                    }, completion: nil)
             } else {
                 self.image = image
             }
