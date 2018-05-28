@@ -305,7 +305,7 @@ class StoryService: RemoteItemsService {
 class FolderService: RemoteItemsService {
     
     let rootFolder: String
-    let fileService = FileService()
+    let fileService = FileService.shared
 
     var foldersOnly: Bool
     
@@ -328,7 +328,7 @@ class FolderService: RemoteItemsService {
 class FilesFromFolderService: RemoteItemsService {
     
     let rootFolder: String
-    let fileService = FileService()
+    let fileService = FileService.shared
     
     init(requestSize: Int, rootFolder: String = "") {
         self.rootFolder = rootFolder
@@ -345,7 +345,7 @@ class FilesFromFolderService: RemoteItemsService {
 
 class AllFilesService: RemoteItemsService {
     
-    let fileService = FileService()
+    let fileService = FileService.shared
     
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .imageAndVideo)

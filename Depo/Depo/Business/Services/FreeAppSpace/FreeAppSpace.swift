@@ -28,6 +28,10 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.freeAppSpace, attributes: .concurrent)
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func getDuplicatesObjects() -> [WrapData] {
         return duplicatesArray.getArray()
     }

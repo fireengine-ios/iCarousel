@@ -18,6 +18,8 @@ protocol PasscodeStorage: class {
     func clearPasscode()
     var passcode: Passcode { get }
     var numberOfTries: Int { get set }
+    var turkcellPasscodeOn: Bool {get set}
+    var autoLoginOn: Bool {get set}
 }
 
 final class PasscodeStorageDefaults {
@@ -40,6 +42,16 @@ final class PasscodeStorageDefaults {
     var systemCallOnScreen: Bool {
         get { return defaults?.bool(forKey: PasscodeStorageDefaults.systemCallOnScreen) ?? false }
         set { defaults?.set(newValue, forKey: PasscodeStorageDefaults.systemCallOnScreen) }
+    }
+    static let turkcellPasscodeOn = "turkcellPasscodeOn"
+    var turkcellPasscodeOn: Bool {
+        get { return defaults?.bool(forKey: "turkcellPasscodeOn") ?? false }
+        set { defaults?.set(newValue, forKey: "turkcellPasscodeOn") }
+    }
+    static let autoLoginOn = "autoLoginOn"
+    var autoLoginOn: Bool {
+        get { return defaults?.bool(forKey: "autoLoginOn") ?? false }
+        set { defaults?.set(newValue, forKey: "autoLoginOn") }
     }
 }
 extension PasscodeStorageDefaults: PasscodeStorage {

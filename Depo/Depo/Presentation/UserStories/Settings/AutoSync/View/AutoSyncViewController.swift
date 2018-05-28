@@ -9,13 +9,11 @@
 import UIKit
 
 class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSourceDelegate {
-
     var output: AutoSyncViewOutput!
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var startButton: WhiteButtonWithRoundedCorner!
-    @IBOutlet weak var skipButton: ButtonWithCorner!
     @IBOutlet weak var bacgroundImage: UIImageView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
@@ -47,7 +45,6 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
         titleLabel.textColor = fromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
         
         startButton.setTitle(TextConstants.autoSyncStartUsingLifebox, for: .normal)
-        skipButton.setTitle(TextConstants.autoSyncskipForNowButton, for: .normal)
         
         dataSource.setup(table: tableView)
         dataSource.delegate = self
@@ -167,13 +164,6 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
         
     }
     
-    @IBAction func onSkipButtn() {
-        output.skipForNowPressed(onSyncDisabled: { [weak self] in
-            self?.storageVars.autoSyncSet = true
-            self?.disableAutoSync()
-        })
-    }
-    
     
     // MARK: AutoSyncViewInput
     func setupInitialState() {
@@ -195,25 +185,6 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
     
     func enableAutoSync() {
         output.checkPermissions()
-    }
-    
-    func mobileDataEnabledFor(model: AutoSyncModel) {
-        if fromSettings, isFirstTime {
-            isFirstTime = false
-            
-            let router = RouterVC()
-            let controller = PopUpController.with(title: TextConstants.autoSyncSyncOverTitle,
-                                                  message: TextConstants.autoSyncSyncOverMessage,
-                                                  image: .none,
-                                                  firstButtonTitle: TextConstants.cancel,
-                                                  secondButtonTitle: TextConstants.autoSyncSyncOverOn,
-                                                  firstAction: { vc in
-                                                    model.isSelected = false
-                                                    self.tableView.reloadData()
-                                                    vc.close()
-            })
-            router.presentViewController(controller: controller)
-        }
     }
     
     func checkPermissionsSuccessed() {

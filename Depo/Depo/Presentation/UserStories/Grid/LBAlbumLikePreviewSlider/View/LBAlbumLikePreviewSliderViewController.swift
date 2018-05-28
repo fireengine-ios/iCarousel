@@ -30,6 +30,10 @@ final class LBAlbumLikePreviewSliderViewController: ViewController {
                                                object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     @objc func labelTouchRecognition(_ sender: Any) {
         output.sliderTitlePressed()
     }

@@ -13,6 +13,7 @@ final class FilterPhotoCard: BaseView {
     
     private lazy var imageManager = ImageManager()
     private lazy var filesDataSource = FilesDataSource()
+    private var originalItem: WrapData?
     
     @IBOutlet private weak var headerLabel: UILabel! {
         didSet {
@@ -71,20 +72,32 @@ final class FilterPhotoCard: BaseView {
     private func set(details object: JSON) {
         let searchItem = SearchItemResponse(withJSON: object)
         let item = WrapData(remote: searchItem)
-        loadImage(from: item)
-    }
-    
-    private func loadImage(from item: WrapData) {
-        filesDataSource.getImage(for: item, isOriginal: true) { [weak self] image in
-            DispatchQueue.main.async {
-                guard let image = image else { return }
-                self?.set(image: image)
+        originalItem = item
+        /// check DB here
+        debugPrint("item md5 \(item.md5)")
+        CoreDataStack.default.getLocalFilteredItem(remoteOriginalItem: item) { [weak self] localSavedItem in
+            guard let `self` = self else {
+                return
+            }
+            if let savedItem = localSavedItem {
+                self.loadImage(from: savedItem, isSaved: true)
+            } else {
+                self.loadImage(from: item, isSaved: false)
             }
         }
     }
     
-    private func set(image: UIImage) {
-        cardType = .save
+    private func loadImage(from item: WrapData, isSaved: Bool) {
+        filesDataSource.getImage(for: item, isOriginal: true) { [weak self] image in
+            DispatchQueue.main.async {
+                guard let image = image else { return }
+                self?.set(image: image, isSaved: isSaved)
+            }
+        }
+    }
+    
+    private func set(image: UIImage, isSaved: Bool) {
+        cardType = isSaved ? .display : .save
         photoImageView.image = image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
     }
     
@@ -161,20 +174,28 @@ final class FilterPhotoCard: BaseView {
     }
     
     private func saveToDevice(image: UIImage) {
-        bottomButton.isEnabled = false
-        
-        imageManager.saveToDevice(image: image) { [weak self] result in
-            DispatchQueue.main.async {
-                self?.bottomButton.isEnabled = true
-                
-                switch result {
-                case .success(_):
-                    self?.cardType = .display
-                case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
-                }
-            }
+        guard let originalItemUnwraped = originalItem else {
+            return
         }
+        
+        bottomButton.isEnabled = false
+
+        LocalMediaStorage.default.saveFilteredImage(filteredImage: image, originalImage: originalItemUnwraped)
+        self.cardType = .display
+        
+        
+        //        imageManager.saveToDevice(image: image) { [weak self] result in
+//            DispatchQueue.main.async {
+//                self?.bottomButton.isEnabled = true
+//
+//                switch result {
+//                case .success(_):
+//                    self?.cardType = .display
+//                case .failed(let error):
+//                    UIApplication.showErrorAlert(message: error.description)
+//                }
+//            }
+//        }
     }
     
     override func spotlightHeight() -> CGFloat {

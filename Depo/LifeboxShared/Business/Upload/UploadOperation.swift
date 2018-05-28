@@ -38,6 +38,10 @@ final class UploadOperation: Operation {
         super.init()
     }
     
+    // TODO: add with right handlers
+//    if isCancelled {
+//        return
+//    }
     override func main() {
         didStartUpload?()
         upload()
