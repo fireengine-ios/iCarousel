@@ -327,19 +327,19 @@ class FileService: BaseRequestService {
         let downloadRequests: [BaseDownloadRequestParametrs] = supportedItemsToDownload.flatMap {
             BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name, item: $0)
         }
-        //var completedOperationsCount = 0
         let operations = downloadRequests.flatMap {
             DownLoadOperation(downloadParam: $0, success: { [weak self] in
                 guard let `self` = self else {
                     return
                 }
-                self.completedOperationsCount = self.completedOperationsCount + 1
+                self.completedOperationsCount += 1
                 CardsManager.default.setProgressForOperationWith(type: .download,
                                                                             allOperations: self.allOperationsCount,
                                                                             completedOperations: self.completedOperationsCount)
             }, fail: { [weak self] error in
                 self?.error = error.isUnknownError ? ErrorResponse.string(TextConstants.errorUnsupportedExtension) : error
                 /// HERE MUST BE ERROR HANDLER
+                self?.completedOperationsCount += 1
             })
         }
         
