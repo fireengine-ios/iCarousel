@@ -2456,8 +2456,6 @@
 		8CB293331F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */; };
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
 		8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */; };
-		8CC163D320B6F7C7006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D120B6F7C6006B8F88 /* Info-AppStore.plist */; };
-		8CC163D420B6F7C7006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D220B6F7C7006B8F88 /* Info-Enterprise.plist */; };
 		8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */; };
 		8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
 		8CD2B3A91FE7B21C00280547 /* BaseFilesGreedModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8734DA0C1FD846DF00977752 /* BaseFilesGreedModuleOutput.swift */; };
@@ -4969,8 +4967,6 @@
 		8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetPresenterModuleInitialiser.swift; sourceTree = "<group>"; };
 		8CBA3E931EF5D0B100072983 /* ValidationResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResults.swift; sourceTree = "<group>"; };
 		8CBA3E9D1EF6C79500072983 /* RegistrationUserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationUserInfoModel.swift; sourceTree = "<group>"; };
-		8CC163D120B6F7C6006B8F88 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
-		8CC163D220B6F7C7006B8F88 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
 		8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
 		8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
@@ -10864,8 +10860,6 @@
 				CE1458CC2045645000812544 /* Presentation */,
 				CE1458CD2045645F00812544 /* Business */,
 				CE58FAF620444493007F3F54 /* Info.plist */,
-				8CC163D120B6F7C6006B8F88 /* Info-AppStore.plist */,
-				8CC163D220B6F7C7006B8F88 /* Info-Enterprise.plist */,
 				CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */,
 				7A3E0BFC20626B7100F79A1C /* LifeboxShared-appstore.entitlements */,
 				7A3E0BFD20626B7100F79A1C /* LifeboxShared-enterprise.entitlements */,
@@ -13553,9 +13547,7 @@
 				CEBDB1DC20444E50007EE1AE /* TurkcellSaturaBol.ttf in Resources */,
 				CEBDB1DD20444E50007EE1AE /* TurkcellSaturaBolIta.ttf in Resources */,
 				CEBDB1DE20444E50007EE1AE /* TurkcellSaturaDem.ttf in Resources */,
-				8CC163D420B6F7C7006B8F88 /* Info-Enterprise.plist in Resources */,
 				CE4D281D207E23F7003AE4FB /* PasscodeEnterViewController.xib in Resources */,
-				8CC163D320B6F7C7006B8F88 /* Info-AppStore.plist in Resources */,
 				CE4D2813207E0997003AE4FB /* PasscodeViewImp.xib in Resources */,
 				CEBDB1DF20444E50007EE1AE /* TurkcellSaturaDemIta.ttf in Resources */,
 				CEBDB1E020444E50007EE1AE /* TurkcellSaturaIta.ttf in Resources */,
@@ -17549,7 +17541,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxShared/Info-AppStore.plist";
+				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -17583,7 +17575,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxShared/Info-Enterprise.plist";
+				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
