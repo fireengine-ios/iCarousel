@@ -629,4 +629,4 @@
 "Bad internet connection" = "Conexiune proastă la Internet";
 "download_error_unsupported_extension" = "Descărcarea acestui tip de fișier nu e posibilă";
 "Show only synced items" = "Arată doar alticolele sincronizate";
-"Your lifebox storage is almost full!" = "";
+"Your lifebox storage is almost full!" = "Ai atins limita de memorie lifebox.";
