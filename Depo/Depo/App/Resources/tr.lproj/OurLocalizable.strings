@@ -637,4 +637,4 @@
 "Bad internet connection" = "Internet bağlantı sorunu";
 "download_error_unsupported_extension" = "Bu dosya tipi için indirme özelliği desteklenmiyor.";
 "Show only synced items" = "Sadece yedeklenmiş öğeleri göster";
-"Your lifebox storage is almost full!" = "";
+"Your lifebox storage is almost full!" = "lifebox depolama alanın neredeyse dolu!";

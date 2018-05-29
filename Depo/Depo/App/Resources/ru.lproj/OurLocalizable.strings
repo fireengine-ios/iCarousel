@@ -629,4 +629,4 @@
 "Bad internet connection" = "Плохое интернет соединение";
 "download_error_unsupported_extension" = "Некоторые файлы недоступны для скачивания.";
 "Show only synced items" = "Показать только синхронизированные элементы.";
-"Your lifebox storage is almost full!" = "";
+"Your lifebox storage is almost full!" = "Вы достигли лимита памяти в вашем lifebox.";
