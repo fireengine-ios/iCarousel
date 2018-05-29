@@ -112,9 +112,9 @@
 "Remove from album" = "Albümden kaldır";
 "Back Up" = "Yedekle";
 "Add to album" = "Albüme ekle";
-"Remove from Favorites" = "Sık kullanılanlardan kaldır";
+"Remove from Favorites" = "Favorilerden çıkar";
 "Remove" = "Kaldır";
-"Add to Favorites" = "Sık kullanılanlara ekle";
+"Add to Favorites" = "Favorilere ekle";
 "Copy" = "Kopyala";
 "Create a Story" = "Hikaye Oluştur";
 "Share Via Link" = "Bağlantı yoluyla paylaş";
@@ -211,7 +211,7 @@
 "Name" = "Isim";
 "Create a Name" = "Hikayene bir isim ver";
 "Delete device original" = "Orijinalini cihazdan sil";
-"Add to favorites" = "Sık kullanılanlara ekle";
+"Add to favorites" = "Favorilere ekle";
 "Restore" = "Sosyal Medya Transfer";
 "Back-Up" = "Yedekle";
 "Your last back up was a few seconds ago." = "Son yedeklemen birkaç saniye önce gerçekleşti.";
@@ -278,7 +278,7 @@
 "You’ve uploaded %@ two days ago!" = "İki gün önce %@ upload ettiniz!";
 "Expand My Storage" = "Depolama Alanımı Yükselt";
 "You are using %85 of your disk space! It’s a great time to expand your storage." = "lifebox saklama alanının %85’ini kullanıyorsun! Alanını genişletmek için harika bir zaman.";
-"Your storage is almost full!" = "Cihazının depolama alanı dolmak üzere!";
+"Your storage is almost full!" = "lifebox depolama alanın dolmak üzere!";
 "Change filter" = "Filter değiştir";
 "Save this photo" = "Kaydet";
 "You can apply this filter and my more to your other picures as well" = "Fotoğrafların için diğer filtreleri de uygulayabilirsiniz.";
@@ -296,7 +296,7 @@
 "Videos" = "Videolar";
 "Folder" = "Klasör";
 "Docs" = "Belgeler";
-"Video" = "Video";
+"Video" = "Hikaye";
 "Sorted by Size" = "Boyuta göre sıralandı";
 "Sorted by Time" = "Tarihe göre sıralandı";
 "Alphabetically Sorted" = "Alfabetik olarak sıralandı";
@@ -321,7 +321,7 @@
 "more" = "Daha fazla bilgi";
 "Create album" = "Albüm Oluştur";
 "Sync Contacts" = "Kontak Yedekleme";
-"Favorites" = "Sık kullanılanlar";
+"Favorites" = "Favoriler";
 "All Files" = "Tüm Dosyalar";
 "Choose" = "Seç";
 "Hide" = "Gizle";
@@ -420,7 +420,7 @@
 "%%%d Backed up…" = "%%%d yedeklendi…";
 "Restored %d Contacts" = "%d Kişiler eski durumuna getirildi.";
 "%d Duplicated Contacts Deleted" = "%d Kopyalanmış kişiler silindi.";
-"You have %d numbers on your contacts backup." = "Kişi listenizdeki yedeklemede %d numaran var.";
+"You have %d numbers on your contacts backup." = "lifebox'ında %d kişi var.";
 "This contact will be deleted from your contacts." = "Bu kişi kontak listenden silinecek.";
 "Upgrade" = "Yükselt";
 "Creation date" = "Oluşturulma tarihi";
@@ -636,6 +636,5 @@
 "marked as favourite" = "favorilendi";
 "Bad internet connection" = "Internet bağlantı sorunu";
 "download_error_unsupported_extension" = "Bu dosya tipi için indirme özelliği desteklenmiyor.";
-
-/*Show only synced items*/
-"Show only synced items" = "";
+"Show only synced items" = "Sadece yedeklenmiş öğeleri göster";
+"Your lifebox storage is almost full!" = "";
