@@ -234,7 +234,7 @@ struct TextConstants {
     
     
     // MARK: Home Storage card
-    static let homeStorageCardCloudTitle = NSLocalizedString("Your storage is almost full!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let homeStorageCardCloudTitle = NSLocalizedString("Your lifebox storage is almost full!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeStorageCardEmptyTitle = NSLocalizedString("Your storage is empty!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeStorageCardLocalTitle = NSLocalizedString("Your storage is almost full!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeStorageCardCloudSubTitle = NSLocalizedString("You are using %f of your disk space! It’s a great time to expand your storage.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
