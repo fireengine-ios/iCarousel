@@ -38,15 +38,14 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         var quotaUsed: Int64 = 0
         var subscriptions: [SubscriptionPlanBaseResponse] = []
         
-        AccountService().info(success: {responce in
-            let userInfoResponse = responce as? AccountInfoResponse
-            if let phone = userInfoResponse?.phoneNumber {
+        SingletonStorage.shared.getAccountInfoForUser(success: { userInfoResponse in
+            if let phone = userInfoResponse.phoneNumber {
                 phoneString = phone
             }
             group.leave()
-        }) { error in
+        }, fail: { error in
             group.leave()
-        }
+        })
         
         AccountService().quotaInfo(success: {respoce in
             let quotaInfoResponse = respoce as? QuotaInfoResponse

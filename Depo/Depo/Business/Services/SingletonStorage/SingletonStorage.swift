@@ -19,14 +19,6 @@ class SingletonStorage {
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
     
-    func updateAccountInfo() {
-        AccountService().info(success: { [weak self] accountInfoResponce in
-            if let resp = accountInfoResponce as? AccountInfoResponse {
-                self?.accountInfo = resp
-            }
-            }, fail: { _ in } ) 
-    }
-    
     func getAccountInfoForUser(success:@escaping (AccountInfoResponse) -> Void, fail: @escaping (ErrorResponse) -> Void ) {
         if let info = accountInfo {
             success(info)
