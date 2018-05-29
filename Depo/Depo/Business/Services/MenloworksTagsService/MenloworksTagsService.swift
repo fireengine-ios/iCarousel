@@ -119,6 +119,10 @@ class MenloworksTagsService {
         let tag = MenloworksTags.LoggedIn(isLoggedIn: isLoggedIn)
         hitTag(tag)
         
+        guard factory.resolve().accessToken != nil else {
+            return
+        }
+        
         checkTurkcellSecuritySettings()
         
         if isLoggedIn {
