@@ -11,6 +11,7 @@ import UIKit
 class TurkcellSecurityViewController: ViewController {
 
     var output: TurkcellSecurityViewOutput!
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -93,6 +94,9 @@ extension TurkcellSecurityViewController: SettingsTableViewSwitchCellDelegate {
             let securityAutoLoginCell = tableView.cellForRow(at: turkCellSecurityAutologinCellIndex) as? SettingsTableViewSwitchCell else {
                 return
         }
+        passcodeStorage.autoLoginOn = securityAutoLoginCell.stateSwitch.isOn
+        passcodeStorage.turkcellPasscodeOn = securityPasscodeCell.stateSwitch.isOn
+        
         output.securityChanged(passcode: securityPasscodeCell.stateSwitch.isOn,
                                autoLogin: securityAutoLoginCell.stateSwitch.isOn,
                                title: cell.titleLabel.text!)

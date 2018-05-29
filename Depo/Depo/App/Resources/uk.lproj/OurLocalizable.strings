@@ -309,7 +309,7 @@
 "View Type" = "Вид типу";
 "Sync Type" = "Тип синхронізації";
 "searchIcon" = "значок пошуку";
-"DeleteShareButton" = "";
+"DeleteShareButton" = "..";
 "search" = "пошук";
 "cog" = "гвинт";
 "more" = "більше";
@@ -333,7 +333,7 @@
 "Overwrite backup?" = "Перезаписати резервну копію?";
 "Verification code is invalid. Please try again." = "Код підтвердження недійсний. Будь ласка спробуйте ще раз.";
 "Type the text" = "Введіть текст, показаний на зображенні";
-"E-MAIL" = "";
+"E-MAIL" = "E-mail";
 "Send password reset link" = "Надіслати посилання для зміни пароля";
 "Forgot My Password" = "Забули свій пароль";
 "Sign Up" = "Зареєструватися";
@@ -357,7 +357,7 @@
 "I can't login" = "Я забув свій пароль";
 "Register to lifebox and get a 5 GB of storage for free!" = "Зареєструйтеся в lifebox та отримайте безкоштовно 5 Гб пам'яті!";
 "Login" = "Увійти";
-"<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>" = "";
+"<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>" = "..";
 "Accept  Terms" = "Я прочитав і прийняв умови користування";
 "Password fields do not match" = "Паролі не збігаються";
 "Please enter your password" = "Будь ласка, введіть свій пароль";
@@ -611,20 +611,23 @@
 "Weekly" = "Щотижня";
 "Monthly" = "Щомісяця";
 "Up to 5000 contacts can be backed up." = "Можна резервувати до 15000 контактів.";
-"LifeboxSmallPopUpTitle" = "";
-"LifeboxSmallPopUpSubTitle" = "";
-"LifeboxSmallPopUpCheckBoxTex" = "";
-"LifeboxSmallPopUpFirstButtonText" = "";
-"LifeboxSmallPopUpSecondButtonText" = "";
-"has_remained_lifebox_usage" = "";
-"Renewal Date: %@" = "";
-"created" = "";
-"uploaded" = "";
-"updated" = "";
-"deleted" = "";
-"moved" = "";
-"renamed" = "";
-"copied" = "";
-"marked as favourite" = "";
-"Bad internet connection" = "";
-"download_error_unsupported_extension" = "";
+"LifeboxSmallPopUpTitle" = "Ви досягли межі пам'яті lifebox.";
+"LifeboxSmallPopUpSubTitle" = "Давайте подивимось на варіанти оновлення!";
+"LifeboxSmallPopUpCheckBoxTex" = "Ніколи не показувати знову";
+"LifeboxSmallPopUpFirstButtonText" = "OK";
+"LifeboxSmallPopUpSecondButtonText" = "Покращити";
+"has_remained_lifebox_usage" = "% @ з% @ залишилося (тільки для використання lifebox)";
+"Renewal Date: %@" = "Дата поновлення:% @";
+"created" = "Створено";
+"uploaded" = "Завантажено";
+"updated" = "оновлено";
+"deleted" = "Видалено";
+"moved" = "Переїхав";
+"renamed" = "Перейменовано";
+"copied" = "Скопійовано";
+"marked as favourite" = "позначено як улюблений";
+"Bad internet connection" = "Погане інтернет-з'єднання";
+"download_error_unsupported_extension" = "Завантаження не підтримується для цього типу файлу";
+
+/*Show only synced items*/
+"Show only synced items" = "";

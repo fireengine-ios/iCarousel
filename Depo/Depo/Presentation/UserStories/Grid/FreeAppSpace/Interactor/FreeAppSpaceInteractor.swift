@@ -10,7 +10,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     
     var isDeleteRequestRunning = false
     
-    private let fileService = FileService()
+    private let fileService = FileService.shared
     
     func onDeleteSelectedItems(selectedItems: [WrapData]) {
         if (isDeleteRequestRunning) {

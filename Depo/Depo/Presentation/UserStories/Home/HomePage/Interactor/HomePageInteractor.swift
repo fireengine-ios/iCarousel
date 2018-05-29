@@ -75,7 +75,9 @@ class HomePageInteractor: HomePageInteractorInput {
                     }
                     
                     if let popUpView = viewForPresent {
-                        self?.output.needPresentPopUp(popUpView: popUpView)
+                        
+                        RouterVC().tabBarVC?.present(popUpView, animated: true, completion: nil)
+//                        self?.output.needPresentPopUp(popUpView: popUpView)
                     }
                     
                 }

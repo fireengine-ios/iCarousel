@@ -35,6 +35,14 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func onReloadData() {
+        super.onReloadData()
+        
+        if let view = view as? FaceImageItemsViewInput {
+            view.hideUgglaView()
+        }
+    }
+
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         if let interactor = interactor as? FaceImageItemsInteractor {
             interactor.loadItem(item)
@@ -165,6 +173,11 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
         self.isChangeVisibilityMode = isChangeVisibilityMode
         dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
+        
+        if let view = view as? FaceImageItemsViewInput {
+            view.hideUgglaView()
+        }
+        
         reloadData()
     }
     
@@ -213,10 +226,6 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         asyncOperationSucces()
         
         view.stopSelection()
-        
-        if let view = view as? FaceImageItemsViewInput {
-            view.hideUgglaView()
-        }
         
         albumSliderModuleOutput?.reload(type: .people)
         reloadData()

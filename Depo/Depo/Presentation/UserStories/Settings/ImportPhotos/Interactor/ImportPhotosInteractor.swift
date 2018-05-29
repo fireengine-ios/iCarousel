@@ -78,6 +78,7 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
     func requestStop() {
         fbService.requestStop(success: { [weak self] _ in
             DispatchQueue.main.async {
+                MenloworksTagsService.shared.facebookImport(isOn: false)
                 self?.output?.stopSuccessCallback()
             }
             

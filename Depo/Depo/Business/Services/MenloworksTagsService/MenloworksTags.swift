@@ -38,9 +38,21 @@ class MenloworksTags {
         }
     }
     
-    class LocationPermissionStatus: MenloworksBoolTag {
-        init(isEnabled: Bool) {
-            super.init(name: NameConstants.locationPermissionStatus, value: isEnabled, boolType: .permission)
+//    class LocationPermissionStatus: MenloworksBoolTag {
+//        init(isEnabled: Bool) {
+//            super.init(name: NameConstants.locationPermissionStatus, value: isEnabled, boolType: .permission)
+//        }
+//    }
+    
+    class LocationPermissionStatus: MenloworksTag {
+        init(authorization: String) {
+            super.init(name: NameConstants.locationPermissionStatus, value: authorization)
+        }
+    }
+    
+    class PeriodicContactSync: MenloworksTag {
+        init(periodicContactSync: String) {
+            super.init(name: NameConstants.periodicContactSync, value: periodicContactSync)
         }
     }
     
@@ -52,7 +64,7 @@ class MenloworksTags {
     
     class AutoLoginChanged: MenloworksBoolTag {
         init(isEnabled: Bool) {
-            super.init(name: NameConstants.autoLoginChanged, value: isEnabled, boolType: .yesNo)
+            super.init(name: NameConstants.autoLoginChanged, value: isEnabled, boolType: .trueFalse)
         }
     }
     
