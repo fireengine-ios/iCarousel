@@ -200,7 +200,11 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
         
         if isCellSelected, !isBigSize() {
-            setSelectionSmallSelectionImageView(isSelected, isHidden: !isImageOrVideoType(wrappered.fileType))
+            var isHidden = !isImageOrVideoType(wrappered.fileType)
+            if wrappered.fileType == .audio, smallContentImageView.configured {
+                isHidden = !isSelected
+            }
+            setSelectionSmallSelectionImageView(isSelected, isHidden: isHidden)
         }
     }
     
@@ -264,10 +268,13 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         
         bgView.backgroundColor = bgColor
         
-        if let item = itemModel,
-            isCellSelected,
-            !isBigSize() {
-            setSelectionSmallSelectionImageView(isSelected, isHidden: !isImageOrVideoType(item.fileType))
+        if let item = itemModel, isCellSelected, !isBigSize() {
+            var isHidden = !isImageOrVideoType(item.fileType)
+            if item.fileType == .audio, smallContentImageView.configured {
+                //we need show small selection icon for audio items if load image
+                isHidden = !isSelected
+            }
+            setSelectionSmallSelectionImageView(isSelected, isHidden: isHidden)
         }
     }
     

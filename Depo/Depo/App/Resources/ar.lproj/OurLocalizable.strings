@@ -640,6 +640,5 @@
 "marked as favourite" = "وضعت كمفضل";
 "Bad internet connection" = "اتصال انترنت سيئ";
 "download_error_unsupported_extension" = "التنزيل غير معتمد لهذا النوع من الملفات";
-
-/*Show only synced items*/
-"Show only synced items" = "";
+"Show only synced items" = "إظهار العناصر التي تمت مزامنتها فقط";
+"Your lifebox storage is almost full!" = "";
