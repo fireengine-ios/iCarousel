@@ -201,7 +201,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         
         if isCellSelected, !isBigSize() {
             var isHidden = !isImageOrVideoType(wrappered.fileType)
-            if wrappered.fileType == .audio, smallContentImageView.image != nil {
+            if wrappered.fileType == .audio, smallContentImageView.configured {
                 isHidden = !isSelected
             }
             setSelectionSmallSelectionImageView(isSelected, isHidden: isHidden)
@@ -270,7 +270,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         
         if let item = itemModel, isCellSelected, !isBigSize() {
             var isHidden = !isImageOrVideoType(item.fileType)
-            if item.fileType == .audio, smallContentImageView.image != nil {
+            if item.fileType == .audio, smallContentImageView.configured {
                 //we need show small selection icon for audio items if load image
                 isHidden = !isSelected
             }
