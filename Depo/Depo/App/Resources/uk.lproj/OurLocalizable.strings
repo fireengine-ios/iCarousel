@@ -628,6 +628,5 @@
 "marked as favourite" = "позначено як улюблений";
 "Bad internet connection" = "Погане інтернет-з'єднання";
 "download_error_unsupported_extension" = "Завантаження не підтримується для цього типу файлу";
-
-/*Show only synced items*/
-"Show only synced items" = "";
+"Show only synced items" = "Показати лише синхронізовані елементи";
+"Your lifebox storage is almost full!" = "";
