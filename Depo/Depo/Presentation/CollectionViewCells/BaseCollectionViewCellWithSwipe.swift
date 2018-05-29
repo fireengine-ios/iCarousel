@@ -110,5 +110,13 @@ class BaseCollectionViewCellWithSwipe: UICollectionViewCell {
         }
         calculateEnd(touches)
     }
+    
+    func willDisplay() {
+        
+    }
+    
+    func didEndDisplay() {
+        
+    }
 
 }

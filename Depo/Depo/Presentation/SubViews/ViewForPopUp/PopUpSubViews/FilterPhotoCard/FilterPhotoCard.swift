@@ -74,17 +74,32 @@ final class FilterPhotoCard: BaseView {
         let item = WrapData(remote: searchItem)
         originalItem = item
         /// check DB here
-        CoreDataStack.default.getLocalFilteredItem(remoteOriginalItem: item) { [weak self] localSavedItem in
-            guard let `self` = self else {
-                return
-            }
-            if let savedItem = localSavedItem {
-                self.loadImage(from: savedItem, isSaved: true)
-            } else {
-                self.loadImage(from: item, isSaved: false)
+        
+    }
+    
+    override func viewWillShow() {
+        guard let originalItem = originalItem else {
+            return
+        }
+        DispatchQueue.toBackground {
+            CoreDataStack.default.getLocalFilteredItem(remoteOriginalItem: originalItem) { [weak self] localSavedItem in
+                guard let `self` = self else {
+                    return
+                }
+                if let savedItem = localSavedItem {
+                    self.loadImage(from: savedItem, isSaved: true)
+                } else {
+                    self.loadImage(from: originalItem, isSaved: false)
+                }
             }
         }
     }
+    
+    override func viewDidEndShow() {
+        photoImageView.image = nil
+        photoImageView.checkIsNeedCancelRequest()
+    }
+
     
     private func loadImage(from item: WrapData, isSaved: Bool) {
         filesDataSource.getImage(for: item, isOriginal: true) { [weak self] image in
@@ -96,8 +111,16 @@ final class FilterPhotoCard: BaseView {
     }
     
     private func set(image: UIImage, isSaved: Bool) {
-        cardType = isSaved ? .display : .save
-        photoImageView.image = isSaved ? image : image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
+        
+        DispatchQueue.toBackground { [weak self] in
+            //let filtresdImage = isSaved ? image : image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
+            DispatchQueue.toMain {
+//                self?.photoImageView.image = filtresdImage
+//                self?.cardType = isSaved ? .display : .save
+                
+                self?.photoImageView.image = image
+            }
+        }
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {

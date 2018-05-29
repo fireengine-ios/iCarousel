@@ -92,10 +92,10 @@ final class AlbumCard: BaseView {
             albumItem = AlbumItem(remote: album)
         }
         
-        if let searchItem = album?.coverPhoto {
-            let item = WrapData(remote: searchItem)
-            previewImageView.loadImage(with: item, isOriginalImage: true)
-        }
+//        if let searchItem = album?.coverPhoto {
+//            let item = WrapData(remote: searchItem)
+//            //previewImageView.loadImage(with: item, isOriginalImage: true)
+//        }
         
         let photosJson = object[AlbumDetailJsonKey.albumDetailFiles].array
         
@@ -108,6 +108,24 @@ final class AlbumCard: BaseView {
         //    let searchItem = SearchItemResponse(withJSON: $0)
         //    return WrapData(remote: searchItem)
         //}
+    }
+    
+    override func viewWillShow() {
+        //previewImageView.loadImage(with: item, isOriginalImage: true)
+        
+        if let album = album {
+            albumItem = AlbumItem(remote: album)
+        }
+        
+        if let searchItem = album?.coverPhoto {
+            let item = WrapData(remote: searchItem)
+            previewImageView.loadImage(with: item, isOriginalImage: true)
+        }
+    }
+    
+    override func viewDidEndShow() {
+        previewImageView.image = nil
+        previewImageView.checkIsNeedCancelRequest()
     }
     
     private func setupAlbumDescriptionWith(albumName: String, photosCount: Int) {

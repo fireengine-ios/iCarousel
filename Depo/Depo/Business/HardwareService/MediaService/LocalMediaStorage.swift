@@ -913,6 +913,8 @@ class GetImageOperation: Operation {
     
     let targetSize: CGSize
     
+    var requestID: PHImageRequestID?
+    
     init(photoManager: PHImageManager, asset: PHAsset, targetSize: CGSize, callback: @escaping PhotoManagerCallBack) {
         
         self.photoManager = photoManager
@@ -934,11 +936,18 @@ class GetImageOperation: Operation {
         options.deliveryMode = .highQualityFormat
         options.isSynchronous = false
         
-        photoManager.requestImage(for: asset,
+        requestID = photoManager.requestImage(for: asset,
                                   targetSize: targetSize,
                                   contentMode: .aspectFit,
                                   options: options,
                                   resultHandler: callback)
+    }
+    
+    override func cancel() {
+        super.cancel()
+        if let requestID = requestID {
+            photoManager.cancelImageRequest(requestID)
+        }
     }
 }
 

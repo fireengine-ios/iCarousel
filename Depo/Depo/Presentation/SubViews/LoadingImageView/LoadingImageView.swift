@@ -55,7 +55,7 @@ class LoadingImageView: UIImageView {
         
     }
     
-    fileprivate func checkIsNeedCancelRequest() {
+    func checkIsNeedCancelRequest() {
         if let path = path {
             if let url = url {
                 filesDataSource.cancelRequest(url: url)
