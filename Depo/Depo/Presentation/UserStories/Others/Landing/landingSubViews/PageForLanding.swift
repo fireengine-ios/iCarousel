@@ -27,6 +27,7 @@ class PageForLanding: UIViewController {
     }
     
     @IBOutlet weak var bgImage: UIImageView!
+    @IBOutlet weak var bgImageSmall: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
 
     override func viewDidLoad() {
@@ -35,14 +36,6 @@ class PageForLanding: UIViewController {
     }
     
     func configurateForIndex(index: Int) {
-        if index != 0 {
-            titleLabel.textColor = ColorConstants.blackForLanding
-            subTitleLabel.textColor = ColorConstants.blackForLanding
-            bgImage.contentMode = .scaleAspectFit
-        } else {
-            bgImage.contentMode = .scaleAspectFill
-        }
-        
         titleLabel.text = getTitleForIndex(index: index)
         subTitleLabel.text = getSubTitleForIndex(index: index)
         
@@ -52,7 +45,19 @@ class PageForLanding: UIViewController {
         }
         
         let bgImageName = String(format: "LandingBG%d", index)
-        bgImage.image = UIImage(named: bgImageName)
+        if index == 0 {
+            bgImage.image = UIImage(named: bgImageName)
+            bgImageSmall.image = nil
+        } else {
+            bgImage.image = nil
+            bgImageSmall.image = UIImage(named: bgImageName)
+            titleLabel.textColor = ColorConstants.blackForLanding
+            subTitleLabel.textColor = ColorConstants.blackForLanding
+            
+            if Device.isIpad {
+                bgImageSmall.contentMode = .scaleAspectFit
+            }
+        }        
         
         let imageName = String(format: "LandingImage%@%d", localizationPrefix, index)
         imageView.image = UIImage(named: imageName)

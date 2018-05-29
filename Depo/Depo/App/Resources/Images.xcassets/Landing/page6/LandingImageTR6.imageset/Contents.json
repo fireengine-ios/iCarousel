@@ -1,17 +1,27 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "1x"
     },
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "2x"
     },
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "filename" : "LandingImageTR6.png",
       "scale" : "3x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "group15.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "group15@2x.png",
+      "scale" : "2x"
     }
   ],
   "info" : {
