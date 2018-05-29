@@ -23,7 +23,13 @@ struct AssetInfo {
     var name = ""
     var md5: String {
         if !name.isEmpty && size > 0 {
-            return "\(name)\(size)"//String(format: "%@%i", name, size)
+            if name.contains("(") {
+                let fileExtension = (name as NSString).pathExtension
+                let extentioneslessName = String(name.split(separator: "(").first ?? "")
+                return "\(extentioneslessName).\(fileExtension)\(size)"
+            } else {
+                return "\(name)\(size)"//String(format: "%@%i", name, size)
+            }
         }
         return LocalMediaStorage.noneMD5
     }
@@ -870,6 +876,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 if let dataValue = data {
                     if let name = asset.originalFilename {
                         assetInfo.name = name
+                        let fileExtension = (name as NSString).pathExtension
+                        
                     }
                     if let unwrapedUrl = dict["PHImageFileURLKey"] as? URL {
                         assetInfo.url = unwrapedUrl

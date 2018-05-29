@@ -801,7 +801,14 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         favorites = remote.metadata?.favourite ?? false
         if let fileName = name {
-            md5 = "\(WrapData.removeFirstSlash(text: fileName))\(fileSize)"
+            if fileName.contains("(") {
+                let fileExtension = (fileName as NSString).pathExtension
+                let extentioneslessName = String(WrapData.removeFirstSlash(text: fileName).split(separator: "(").first ?? "")
+                md5 = "\(extentioneslessName).\(fileExtension)\(fileSize)"
+            } else {
+                md5 = "\(WrapData.removeFirstSlash(text: fileName))\(fileSize)"
+            }
+            
         }
         
         patchToPreview = .remoteUrl(url)
