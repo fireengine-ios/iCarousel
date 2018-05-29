@@ -182,10 +182,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
             return
         }
         let indexPath = IndexPath(item: selectedIndex, section: 0)
-        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) { 
-            self.collectionView.isHidden = false
-        }
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        self.collectionView.isHidden = false
     } 
     
     /// FIXME: temp logic of deinit. ItemOperationManager holds "self" strong
