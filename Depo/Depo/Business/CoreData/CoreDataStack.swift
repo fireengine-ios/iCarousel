@@ -127,6 +127,24 @@ class CoreDataStack: NSObject {
         }
     }
 
+    func getLocalFilteredItem(remoteOriginalItem: Item, localFilteredPhotosCallBack: @escaping (Item?) -> Void) {
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
+        fetchRequest.predicate = NSPredicate(format: "(md5Value = %@) AND (isFiltered == true)", remoteOriginalItem.md5, remoteOriginalItem.getTrimmedLocalID())
+        
+        let context = CoreDataStack.default.newChildBackgroundContext
+        context.perform {
+            guard let localDuplicatesMediaItems = (try? context.fetch(fetchRequest)) as? [MediaItem] else {
+                localFilteredPhotosCallBack(nil)
+                return
+            }
+            var array = [Item]()
+            array = localDuplicatesMediaItems.flatMap { WrapData(mediaItem: $0) }
+            localFilteredPhotosCallBack(array.first)
+        }
+        
+    }
+    
     private func deleteObjects(fromFetches fetchRequests: [NSFetchRequest<NSFetchRequestResult>]) {
         for fetchRequest in fetchRequests {
             self.deleteObjects(fromFetch: fetchRequest)

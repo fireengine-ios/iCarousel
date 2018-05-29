@@ -37,6 +37,7 @@ extension MediaItem {
     @NSManaged public var metadata: MediaItemsMetaData?
     @NSManaged public var isFolder: Bool
     @NSManaged public var objectSyncStatus: NSSet?
+    @NSManaged public var isFiltered: Bool
 }
 
 

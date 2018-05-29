@@ -38,7 +38,7 @@ protocol  WrapItemFileOperations {
 
 class WrapItemFileService: WrapItemFileOperations {
     
-    let remoteFileService = FileService()
+    let remoteFileService = FileService.shared
     
     let sharedFileService = SharedService()
     
@@ -244,7 +244,7 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     static private func waitItemsDetails(for items: [WrapData], currentAttempt: Int = 0, maxAttempts: Int, success: FileOperationSucces?, fail: FailResponse?) {
-        let fileService = FileService()
+        let fileService = FileService.shared
         fileService.details(uuids: items.map({ $0.uuid }), success: { updatedItems in
             for item in updatedItems {
                 if let itemToUpdate = items.filter({ $0.uuid == item.uuid }).first {

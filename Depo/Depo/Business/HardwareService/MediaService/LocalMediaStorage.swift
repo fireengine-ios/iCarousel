@@ -419,8 +419,21 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return queue
     }()
     
-    private func merge(asset assetIdentifier: String, with item: WrapData) {
-
+    func saveFilteredImage(filteredImage: UIImage, originalImage: Item) {
+        var localTempoID = ""
+        PHPhotoLibrary.shared().performChanges({
+            let request = PHAssetChangeRequest.creationRequestForAsset(from: filteredImage)
+            guard let localID = request.placeholderForCreatedAsset?.localIdentifier else {
+                return
+            }
+            localTempoID = localID
+        }, completionHandler: { [weak self] status, error in
+            self?.merge(asset: localTempoID, with: originalImage, isFilteredItem: true)
+        })
+        
+    }
+    
+    private func merge(asset assetIdentifier: String, with item: WrapData, isFilteredItem: Bool = false) {
         if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
             LocalMediaStorage.default.assetsCache.append(list: [asset])
             let wrapData = WrapData(asset: asset)
@@ -438,6 +451,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 mediaItem.localFileID = assetIdentifier
                 mediaItem.trimmedLocalFileID = assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier//item.getTrimmedLocalID()
                 mediaItem.syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
+                
+                if isFilteredItem {
+                   mediaItem.isFiltered = true
+                }
                 
                 var userObjectSyncStatus = Set<MediaItemsObjectSyncStatus>()
                 if let unwrapedSet = mediaItem.objectSyncStatus as? Set<MediaItemsObjectSyncStatus> {

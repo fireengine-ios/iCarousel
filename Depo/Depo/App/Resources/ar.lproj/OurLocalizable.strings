@@ -53,7 +53,7 @@
 "Phone number is in an invalid format." = "تنسيق رقم الهاتف غير صحيح.";
 
 /*Can you clarify this sentence, please?*/
-"Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation." = "";
+"Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation." = "..";
 "This e-mail address is already registered. Please enter another e-mail address." = "عنوان البريد الإلكتروني هذا مسجل لدينا من قبل. فيرجى إدخال عنوان بريد إلكتروني آخر.";
 "E-mail address is in an invalid format." = "تنسيق عنوان البريد الإلكتروني غير صحيح.";
 "Specifies that the phone number parameter is sent  blank." = "يرجى إدخال رقم الهاتف";
@@ -312,10 +312,10 @@
 "Sync Type" = "نوع المزامنة";
 
 /*What does this one mean?*/
-"searchIcon" = "";
+"searchIcon" = "..";
 
 /*What does this one mean?*/
-"DeleteShareButton" = "";
+"DeleteShareButton" = "..";
 "search" = "بحث";
 "cog" = "تحكم ثانوي";
 "more" = "مزيد";
@@ -365,7 +365,7 @@
 "Login" = "تسجيل الدخول";
 
 /*Is this a code? All of it, I mean.*/
-"<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>" = "";
+"<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>" = "..";
 "Accept  Terms" = "قرأتُ شروط الاستعمال وأوافق عليها.";
 "Password fields do not match" = "كلمتا المرور غير متطابقتين";
 "Please enter your password" = "يرجى إدخال كلمة المرور";
@@ -513,7 +513,7 @@
 "Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "إن الاشتراك المتعلق بهذا الشراء مُنشَّط من قبل باسم مستخدم آخر للايف بوكس. يرجى الانتباه إلى أن استعمال حسابات لايف بوكس مختلفة بعرّفات Apple/Google نفسها قد يسبب الوضع الحالي.";
 
 /*Please revise this sentence.*/
-"Shows that a response operation is done for the given receipt." = "";
+"Shows that a response operation is done for the given receipt." = "..";
 "Auto Upload is off." = "التحميل التلقائي متوقف.";
 "Photos and videos waiting to be synced" = "تنتظر الصور ومقاطع الفيديو مزامنتها تلقائياً";
 "Wi-Fi and Cellular" = "Wi-Fi وبيانات شبكة الجوّال";
@@ -556,7 +556,7 @@
 "We have created an animation from your photos!" = "تم إنشاء رسم متحرك من صورك!";
 "Save Animation" = "حفظ";
 "Delete Duplicated" = "حذف المكرر";
-"Lifebox %@ and Passcode" = "";
+"Lifebox %@ and Passcode" = "Lifebox ٪ @ ورمز المرور";
 "We make easier to manage your memories with homepage" = "يمكنك إدارة ذكرياتك بسهولة من الصفحة الرئيسية";
 "You can reach your recent activites and suggestions that are special for you from this page" = "يمكن رؤية الأنشطة الحديثة والاقتراحات المخصصة لك من هذه الصفحة.";
 "Discover your first story" = "اطّلع على أول عرض لشرائح الفيديو";
@@ -565,32 +565,32 @@
 "Discover your first animation" = "اطّلع على أول رسم متحرك";
 "Discover your first filtered photo" = "اطّلع على أول صورة مصفّاة";
 "You have reached your lifebox memory limit" = "تم بلوغ الحد الأقصى لذاكرة لايف بوكس.";
-"Error occurred while accessing your contacts.\nPlease check your settings." = "";
+"Error occurred while accessing your contacts.\nPlease check your settings." = "حدث خطأ أثناء الوصول إلى جهات الاتصال الخاصة بك.";
 "Manage Contacts" = "إدارة جهات الاتصال";
 "Import fearture is totally free of charge and does not affect your internet package" = "ميزة الاستيراد مجانية ولا تؤثر في حزمة الإنترنت";
 "Your last backup was on %@" = "آخر نسخة احتياطية:@%";
 "Contacts Sync" = "مزامنة جهات الاتصال";
 "Sort By" = "ترتيب حسب";
-"LifeboxLargePopUpTitle100" = "";
-"LifeboxLargePopUpTitle90" = "";
-"LifeboxLargePopUpTitle80" = "";
+"LifeboxLargePopUpTitle100" = "سعة تخزينك ممتلئة";
+"LifeboxLargePopUpTitle90" = "أنت تستخدم 90٪ من سعة التخزين لديك";
+"LifeboxLargePopUpTitle80" = "أنت تستخدم 80٪ من سعة التخزين لديك";
 "LifeboxLargePopUpSubTitle" = "يرجى الاطلاع على خيارات الترقية لترقية مساحة التخزين.";
 "LifeboxLargePopUpExpandButtonTitle" = "توسيع مساحة التخزين";
 "LifeboxLargePopUpSkipButtonTitle" = "تخطّي";
-"Lifebox can sync your contacts automatically." = "";
-"error_login" = "";
+"Lifebox can sync your contacts automatically." = "يمكن للايف بوكس مزامنة جهات الاتصال تلقائياً";
+"error_login" = "تحتاج إلى تسجيل الدخول إلى lifebox لتحميل الملفات";
 "uploading" = "جاري التحميل";
 "widgetBottomTitleLastSyncFormat" = "آخر تحميل:٪ @";
-"widgetBottomTitleNewerSyncronized" = "";
-"widgetTopTitleFinished" = "";
-"widgetTopTitleInactive" = "";
-"widgetTopTitleInProgress" = "";
-"error_authentication_message" = "";
-"error_authentication_title" = "";
-"error_passcode_message" = "";
+"widgetBottomTitleNewerSyncronized" = "لا يتم أبدًا استخدام المزامنة التلقائية";
+"widgetTopTitleFinished" = "تم الانتهاء من المزامنة التلقائية";
+"widgetTopTitleInactive" = "المزامنة التلقائية غير نشطة";
+"widgetTopTitleInProgress" = "المزامنة الآلية قيد التقدم";
+"error_authentication_message" = "يرجى فتح التطبيق وتسجيل الدخول للمتابعة";
+"error_authentication_title" = "تسجيل الدخول";
+"error_passcode_message" = "الرجاء فتح lifebox وتعطيل رمز المرور للمتابعة";
 "error_passcode_title" = "تم تمكين قفل رمز المرور";
 "Successfully purchased" = "تم الشراء بنجاح";
-"Cancel Analyzing" = "";
+"Cancel Analyzing" = "إلغاء";
 "Delete all" = "حذف الكل";
 "Keep" = "احتفاظ";
 "Duplicated Contacts" = "جهات الاتصال المكررة";
@@ -613,23 +613,23 @@
 "landingSubTitle3" = "انسخ جهات اتصالك نسخاً احتياطياً بكل ثقة";
 "landingTitle6" = "وسائل التواصل الاجتماعي";
 "landingSubTitle6" = "يمكنك نقل كل أرشيفات حساباتك على الوسائط الاجتماعية إلى لايف بوكس.";
-"Add GSM Number" = "";
-"The videos larger than 4GB can not be uploaded to lifebox" = "";
-"You have not enough memory in your device" = "";
-"The purchase was canceled" = "";
-"The purchase in progress" = "";
-"You have no duplicated contacts!" = "";
+"Add GSM Number" = "إضافة رقم GSM";
+"The videos larger than 4GB can not be uploaded to lifebox" = "لا يمكن تحميل مقاطع الفيديو التي يزيد حجمها عن 4 غيغابايت إلى قائمة التشغيل";
+"You have not enough memory in your device" = "ليس لديك ذاكرة كافية في جهازك";
+"The purchase was canceled" = "تم إلغاء الشراء";
+"The purchase in progress" = "الشراء قيد التقدم";
+"You have no duplicated contacts!" = "ليس لديك أي جهات اتصال مكررة!";
 "Daily" = "يومياً";
 "Weekly" = "أسبوعياً";
 "Monthly" = "شهريا";
 "Up to 5000 contacts can be backed up." = "يمكن إنشاء نسخة احتياطية لجهات الاتصال بحدّ أقصى قدره 15000جهة اتصال.";
 "LifeboxSmallPopUpTitle" = "أوشكت مساحة التخزين على الامتلاء!";
-"LifeboxSmallPopUpSubTitle" = "";
-"LifeboxSmallPopUpCheckBoxTex" = "";
+"LifeboxSmallPopUpSubTitle" = "دعونا نلقي نظرة على خيارات الترقية!";
+"LifeboxSmallPopUpCheckBoxTex" = "لا تظهر مرة أخرى";
 "LifeboxSmallPopUpFirstButtonText" = "موافق";
 "LifeboxSmallPopUpSecondButtonText" = "ترقية";
-"has_remained_lifebox_usage" = "";
-"Renewal Date: %@" = "";
+"has_remained_lifebox_usage" = "٪ @ of٪ @ بقيت (فقط لاستخدام Lifebox)";
+"Renewal Date: %@" = "تاريخ التجديد: ٪@";
 "created" = "تم الإنشاء";
 "uploaded" = "تم التحميل";
 "updated" = "تم التحديث";
@@ -637,6 +637,9 @@
 "moved" = "تم النقل";
 "renamed" = "إعادة التسمية";
 "copied" = "تم النسخ";
-"marked as favourite" = "";
-"Bad internet connection" = "";
-"download_error_unsupported_extension" = "";
+"marked as favourite" = "وضعت كمفضل";
+"Bad internet connection" = "اتصال انترنت سيئ";
+"download_error_unsupported_extension" = "التنزيل غير معتمد لهذا النوع من الملفات";
+
+/*Show only synced items*/
+"Show only synced items" = "";

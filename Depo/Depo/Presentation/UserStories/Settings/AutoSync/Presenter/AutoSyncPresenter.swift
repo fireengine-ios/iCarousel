@@ -32,33 +32,10 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         view.prepaire(syncSettings: syncSettings)
     }
     
-    func skipForNowPressed(onSyncDisabled: @escaping VoidHandler) {
-        let controller = PopUpController.with(title: TextConstants.autoSyncAlertTitle,
-                                              message: TextConstants.autoSyncAlertText,
-                                              image: .none,
-                                              firstButtonTitle: TextConstants.autoSyncAlertNo,
-                                              secondButtonTitle: TextConstants.autoSyncAlertYes,
-                                              secondAction: { [weak self] vc in
-                                                onSyncDisabled()
-                                                self?.router.routNextVC()
-        })
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
-    }
-    
     func change(settings: AutoSyncSettings) {
         if !fromSettings {
-            let photoOption = settings.photoSetting.option
-            let videoOption = settings.videoSetting.option
-            let dataSyncEnabled = settings.isAutoSyncOptionEnabled && (photoOption == .wifiAndCellular || videoOption == .wifiAndCellular)
-            if dataSyncEnabled {
-                router.showSyncOverPopUp(okHandler: {[weak self] in
-                    self?.router.routNextVC()
-                    self?.interactor.onSave(settings: settings)
-                })
-            } else {
-                router.routNextVC()
-                save(settings: settings)
-            }
+            router.routNextVC()
+            save(settings: settings)
         } else {
             save(settings: settings)
         }
