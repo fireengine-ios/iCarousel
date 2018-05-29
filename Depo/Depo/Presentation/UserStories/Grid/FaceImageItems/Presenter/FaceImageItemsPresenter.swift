@@ -35,6 +35,14 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func onReloadData() {
+        super.onReloadData()
+        
+        if let view = view as? FaceImageItemsViewInput {
+            view.hideUgglaView()
+        }
+    }
+
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         if let interactor = interactor as? FaceImageItemsInteractor {
             interactor.loadItem(item)
