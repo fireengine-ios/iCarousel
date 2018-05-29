@@ -119,8 +119,7 @@ class MenloworksTagsService {
         let tag = MenloworksTags.LoggedIn(isLoggedIn: isLoggedIn)
         hitTag(tag)
         
-        onTurkcellPasswordSettingsChanged(passcodeStorage.turkcellPasscodeOn)
-        onAutoLoginSettingsChanged(passcodeStorage.autoLoginOn)
+        checkTurkcellSecuritySettings()
         
         if isLoggedIn {
             sendInstagramImportStatus()
@@ -130,6 +129,24 @@ class MenloworksTagsService {
         }
         
         passcodeStatus(!passcodeStorage.isEmpty)
+    }
+    
+    func checkTurkcellSecuritySettings() {
+        AccountService().securitySettingsInfo(success: { [weak self] response in
+            guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
+                let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
+                let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled else {
+                    return
+            }
+            
+            DispatchQueue.main.async {
+                self?.onTurkcellPasswordSettingsChanged(turkCellPasswordOn)
+                self?.onAutoLoginSettingsChanged(turkCellAutoLogin)
+            }
+            
+        }) { [weak self] error in
+            log.debug("Error from Turkcell Security: \(error)")
+        }
     }
     
     func onNotificationPermissionChanged(_ isEnabled: Bool) {
