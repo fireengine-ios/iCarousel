@@ -75,7 +75,7 @@ class LoginInteractor: LoginInteractorInput {
                 return
             }
             
-            self.getAccountInfo()
+            self.setContactSettingsForUser()
             
             self.emptyEmailCheck(for: headers)
             
@@ -118,15 +118,6 @@ class LoginInteractor: LoginInteractorInput {
                     self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 }
             }
-        })
-    }
-    
-    private func getAccountInfo() {
-        SingletonStorage.shared.getAccountInfoForUser(success: {  [weak self] response in
-            SingletonStorage.shared.accountInfo = response
-            
-            self?.setContactSettingsForUser()
-            }, fail: { error in
         })
     }
     
