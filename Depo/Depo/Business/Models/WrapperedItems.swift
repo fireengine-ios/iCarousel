@@ -710,9 +710,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         name = baseModel.originalName
         
-        if let fileName = name {
-            md5 = "\(WrapData.removeFirstSlash(text: fileName))\(fileSize)"
-        }
+//        if let fileName = name {
+//            md5 = "\(WrapData.removeFirstSlash(text: fileName))\(fileSize)"
+//        }
         
         fileType = baseModel.fileType
         isLocalItem = true
@@ -801,14 +801,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         favorites = remote.metadata?.favourite ?? false
         if let fileName = name {
-            if fileName.contains("(") {
-                let fileExtension = (fileName as NSString).pathExtension
-                let extentioneslessName = String(WrapData.removeFirstSlash(text: fileName).split(separator: "(").first ?? "")
-                md5 = "\(extentioneslessName).\(fileExtension)\(fileSize)"
-            } else {
-                md5 = "\(WrapData.removeFirstSlash(text: fileName))\(fileSize)"
-            }
-            
+            md5 = "\(fileName.removeAllPreFileExtentionBracketValues())\(fileSize)"
+            debugPrint(md5)
         }
         
         patchToPreview = .remoteUrl(url)
