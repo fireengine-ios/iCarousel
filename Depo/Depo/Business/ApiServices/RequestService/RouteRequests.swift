@@ -13,10 +13,10 @@ struct RouteRequests {
     // MARK: Authentication
     
     /// prod
-//    static let BaseUrl = URL(string: "https://adepo.turkcell.com.tr/")!
+    static let BaseUrl = URL(string: "https://adepo.turkcell.com.tr/")!
     
     /// pre-prod
-    static let BaseUrl = URL(string: "https://adepotest.turkcell.com.tr/")!
+//    static let BaseUrl = URL(string: "https://adepotest.turkcell.com.tr/")!
     
     static let baseApi = BaseUrl +/ "api"
     static let BaseContactsUrl = URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!

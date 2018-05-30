@@ -112,8 +112,8 @@ final class FilterPhotoCard: BaseView {
     }
     
     private func set(image: UIImage, isSaved: Bool) {
+        photoImageView.image = image
         if isSaved {
-            photoImageView.image = image
             cardType = .display
             bottomButton.isHidden = false
             return
@@ -129,16 +129,6 @@ final class FilterPhotoCard: BaseView {
                 self?.photoImageView.image = image
             }
         }
-        
-//        DispatchQueue.toBackground { [weak self] in
-//            //let filtresdImage = isSaved ? image : image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
-//            DispatchQueue.toMain {
-////                self?.photoImageView.image = filtresdImage
-////                self?.cardType = isSaved ? .display : .save
-//
-//                self?.photoImageView.image = image
-//            }
-//        }
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {

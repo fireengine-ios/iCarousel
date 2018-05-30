@@ -55,6 +55,14 @@ class LoadingImageView: UIImageView {
         
     }
     
+    override func startAnimating() {
+        activity.startAnimating()
+    }
+    
+    override func stopAnimating() {
+        activity.stopAnimating()
+    }
+    
     func checkIsNeedCancelRequest() {
         if let path = path {
             if let url = url {
