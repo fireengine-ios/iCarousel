@@ -104,7 +104,6 @@ class UserProfileInteractor: UserProfileInteractorInput {
             let parameters = UserPhoneNumberParameters(phoneNumber: number)
             AccountService().updateUserPhone(parameters: parameters,
                                              success: { [weak self] responce in
-                                                self?.userInfo?.phoneNumber = number
                                                 if let resp = responce as? SignUpSuccessResponse {
                                                     self?.needSendOTP(responce: resp)
                                                 } else {
