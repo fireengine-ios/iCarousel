@@ -47,13 +47,26 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
         DispatchQueue.main.async {
             self.contentView.addSubview(controllersView)
             controllersView.frame = self.contentView.bounds
-
+            if let baseView = controllersView as? BaseView {
+                baseView.viewWillShow()
+            }
         }
     }
     
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
+    }
+    
+    override func willDisplay() {
+        super.willDisplay()
+    }
+    
+    override func didEndDisplay() {
+        super.didEndDisplay()
+        if let controllersView = self.contentView.subviews.first as? BaseView {
+            controllersView.viewDidEndShow()
+        }
     }
     
 }

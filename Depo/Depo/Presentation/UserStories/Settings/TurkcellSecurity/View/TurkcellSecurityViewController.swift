@@ -94,8 +94,6 @@ extension TurkcellSecurityViewController: SettingsTableViewSwitchCellDelegate {
             let securityAutoLoginCell = tableView.cellForRow(at: turkCellSecurityAutologinCellIndex) as? SettingsTableViewSwitchCell else {
                 return
         }
-        passcodeStorage.autoLoginOn = securityAutoLoginCell.stateSwitch.isOn
-        passcodeStorage.turkcellPasscodeOn = securityPasscodeCell.stateSwitch.isOn
         
         output.securityChanged(passcode: securityPasscodeCell.stateSwitch.isOn,
                                autoLogin: securityAutoLoginCell.stateSwitch.isOn,

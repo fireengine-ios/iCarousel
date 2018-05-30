@@ -81,7 +81,16 @@ final class CollageCard: BaseView {
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
+        
+    }
+    
+    override func viewWillShow() {
         photoImageView.loadImage(with: item, isOriginalImage: true)
+    }
+    
+    override func viewDidEndShow() {
+        photoImageView.image = nil
+        photoImageView.checkIsNeedCancelRequest()
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {
