@@ -160,18 +160,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func appendCollectionView(items: [WrapData], pageNum: Int) {
         let containsEmptyMetaItems = !emptyMetaItems.isEmpty
-        
+        var tempoEmptyItems = [WrapData]()
         var filteredItems = [WrapData]()
         if needShowEmptyMetaItems {
             if let unwrapedFilters = self.originalFilters,
                 !showOnlyRemotes(filters: unwrapedFilters) {
+                
                 items.forEach {
                     if !$0.isLocalItem, $0.metaData?.takenDate != nil {
                         filteredItems.append($0)
                     } else {
-                        emptyMetaItems.append($0)
+                        tempoEmptyItems.append($0)
                     }
                 }
+                emptyMetaItems.append(contentsOf: tempoEmptyItems)
                 pageCompounder.appendNotAllowedItems(items: emptyMetaItems)
             } else {
                 filteredItems = items
@@ -185,7 +187,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        if filteredItems.isEmpty {
+        if tempoEmptyItems.count >= pageCompounder.pageSize {
+            delegate?.getNextItems()
+            return
+        }
+        
+        if filteredItems.isEmpty, tempoEmptyItems.isEmpty {
             isPaginationDidEnd = true
         }
         lastPage = pageNum

@@ -91,17 +91,16 @@ extension PackagesPresenter: PackagesViewOutput {
     func buy(offer: OfferServiceResponse) {
         view?.startActivityIndicator()
         
-        AccountService().info(success: { [weak self] responce in
-            guard let userInfoResponse = responce as? AccountInfoResponse else { return }
+        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] userInfoResponse in
             self?.userPhone = userInfoResponse.fullPhoneNumber
             self?.offerToBuy = offer
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.view?.startActivityIndicator()
                 self?.interactor.getToken(for: offer)
                 self?.view?.stopActivityIndicator()
             }
         }, fail: { [weak self] failResponse in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.view?.stopActivityIndicator()
             }
         })

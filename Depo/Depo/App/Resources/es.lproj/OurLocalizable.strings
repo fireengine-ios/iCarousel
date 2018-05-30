@@ -628,6 +628,5 @@
 "marked as favourite" = "Favourited";
 "Bad internet connection" = "Mala conexión de Internet";
 "download_error_unsupported_extension" = "La descarga no es compatible con este tipo de archivo";
-
-/*Show only synced items*/
-"Show only synced items" = "";
+"Show only synced items" = "Mostrar solo elementos sincronizados";
+"Your lifebox storage is almost full!" = "Ha alcanzado el límite de memoria de su lifebox.";
