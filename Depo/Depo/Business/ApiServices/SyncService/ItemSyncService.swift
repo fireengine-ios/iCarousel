@@ -174,7 +174,13 @@ class ItemSyncServiceImpl: ItemSyncService {
             self.fail()
             
             }, returnedUploadOperation: { [weak self] operations in
-                if let operations = operations, !operations.isEmpty, self?.status == .prepairing {
+                guard self?.status != .executing else {
+                    /// status == .executing
+                    /// means that uploading is already in progress and we've just appended new items
+                    return
+                }
+                
+                if let operations = operations, !operations.isEmpty {
                     self?.status = .executing
                 } else {
                     self?.status = .synced
