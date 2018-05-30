@@ -111,10 +111,19 @@ final class FilterPhotoCard: BaseView {
     }
     
     private func set(image: UIImage, isSaved: Bool) {
+        if isSaved {
+            photoImageView.image = image
+            cardType = .display
+            return
+        }
         
+        photoImageView.startAnimating()
+        bottomButton.isHidden = true
         MaskService.shared.generateImageWithMask(image: image) { [weak self] (image) in
             DispatchQueue.toMain {
-                self?.cardType = isSaved ? .display : .save
+                self?.bottomButton.isHidden = false
+                self?.cardType = .save
+                self?.photoImageView.stopAnimating()
                 self?.photoImageView.image = image
             }
         }
