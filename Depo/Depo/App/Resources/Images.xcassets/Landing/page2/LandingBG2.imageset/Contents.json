@@ -15,12 +15,11 @@
     },
     {
       "idiom" : "ipad",
-      "filename" : "bitmapCopy.png",
       "scale" : "1x"
     },
     {
       "idiom" : "ipad",
-      "filename" : "bitmapCopy@2x.png",
+      "filename" : "landing3@2x.png",
       "scale" : "2x"
     }
   ],

@@ -53,11 +53,7 @@ class PageForLanding: UIViewController {
             bgImageSmall.image = UIImage(named: bgImageName)
             titleLabel.textColor = ColorConstants.blackForLanding
             subTitleLabel.textColor = ColorConstants.blackForLanding
-            
-            if Device.isIpad {
-                bgImageSmall.contentMode = .scaleAspectFit
-            }
-        }        
+        }
         
         let imageName = String(format: "LandingImage%@%d", localizationPrefix, index)
         imageView.image = UIImage(named: imageName)
