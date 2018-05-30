@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -27,14 +27,19 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LandingBG2" translatesAutoresizingMaskIntoConstraints="NO" id="hL4-Cg-yae">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="722"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PCb-1h-Gdf">
-                    <rect key="frame" x="0.0" y="30" width="375" height="352"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PCb-1h-Gdf">
+                    <rect key="frame" x="0.0" y="30" width="375" height="460"/>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" image="LandingImage0" translatesAutoresizingMaskIntoConstraints="NO" id="Xqx-jn-KY5">
-                    <rect key="frame" x="20" y="30" width="335" height="352"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="LandingImage0" translatesAutoresizingMaskIntoConstraints="NO" id="Xqx-jn-KY5">
+                    <rect key="frame" x="20" y="30" width="335" height="335"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="335" id="g4M-V4-0jl">
+                            <variation key="heightClass=regular-widthClass=regular" constant="422"/>
+                        </constraint>
+                    </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TiM-VN-MSe">
-                    <rect key="frame" x="35" y="402" width="305" height="122"/>
+                    <rect key="frame" x="35" y="385" width="305" height="122"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="4im-4q-YQC"/>
                     </constraints>
@@ -44,7 +49,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55F-IG-bjm">
-                    <rect key="frame" x="35" y="537" width="305" height="56"/>
+                    <rect key="frame" x="35" y="520" width="305" height="73"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20.5" id="pxE-Zz-mnP"/>
                     </constraints>
@@ -55,7 +60,10 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="55F-IG-bjm" secondAttribute="bottom" constant="129" id="0y0-Lk-RQN"/>
+                <constraint firstAttribute="bottom" secondItem="55F-IG-bjm" secondAttribute="bottom" constant="129" id="0y0-Lk-RQN">
+                    <variation key="heightClass=regular-widthClass=regular" constant="189"/>
+                </constraint>
+                <constraint firstItem="55F-IG-bjm" firstAttribute="top" secondItem="PCb-1h-Gdf" secondAttribute="bottom" constant="30" id="5ZG-9i-QVV"/>
                 <constraint firstItem="Xqx-jn-KY5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="87k-7m-jM2"/>
                 <constraint firstItem="hL4-Cg-yae" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="9ZZ-4v-Hqy"/>
                 <constraint firstItem="PCb-1h-Gdf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="K0Z-Pm-Brp"/>
