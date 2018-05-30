@@ -226,9 +226,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
                     searchTextField?.textColor = ColorConstants.darcBlueColor
                     searchTextField?.keyboardAppearance = .dark
                 }
-                if subview is UIButton {
-                    (subview as! UIButton).titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
-                    (subview as! UIButton).isEnabled = true
+                if let button = subview as? UIButton {
+                    button.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
+                    button.isEnabled = true
+                    button.adjustsFontSizeToFitWidth()
                 }
             })
         }
