@@ -81,6 +81,7 @@ final class FilterPhotoCard: BaseView {
         guard let originalItem = originalItem else {
             return
         }
+        bottomButton.isHidden = true
         DispatchQueue.toBackground {
             CoreDataStack.default.getLocalFilteredItem(remoteOriginalItem: originalItem) { [weak self] localSavedItem in
                 guard let `self` = self else {
@@ -114,11 +115,12 @@ final class FilterPhotoCard: BaseView {
         if isSaved {
             photoImageView.image = image
             cardType = .display
+            bottomButton.isHidden = false
             return
         }
         
         photoImageView.startAnimating()
-        bottomButton.isHidden = true
+        
         MaskService.shared.generateImageWithMask(image: image) { [weak self] (image) in
             DispatchQueue.toMain {
                 self?.bottomButton.isHidden = false
