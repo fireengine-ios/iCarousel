@@ -44,4 +44,14 @@ final class AutoUploadIsOffPopUp: BaseView {
         router.pushViewController(viewController: router.autoUpload)
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let bottomSpace : CGFloat = 6.0
+        let h = settingsButton.frame.origin.y + settingsButton.frame.size.height + bottomSpace
+        if calculatedH != h{
+            calculatedH = h
+            layoutIfNeeded()
+        }
+    }
+    
 }
