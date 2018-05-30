@@ -23,7 +23,7 @@ struct AssetInfo {
     var name = ""
     var md5: String {
         if !name.isEmpty && size > 0 {
-            return "\(name)\(size)"//String(format: "%@%i", name, size)
+            return "\(name.removeAllPreFileExtentionBracketValues())\(size)"
         }
         return LocalMediaStorage.noneMD5
     }
