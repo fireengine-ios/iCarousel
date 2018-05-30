@@ -92,11 +92,6 @@ final class AlbumCard: BaseView {
             albumItem = AlbumItem(remote: album)
         }
         
-//        if let searchItem = album?.coverPhoto {
-//            let item = WrapData(remote: searchItem)
-//            //previewImageView.loadImage(with: item, isOriginalImage: true)
-//        }
-        
         let photosJson = object[AlbumDetailJsonKey.albumDetailFiles].array
         
         if let albumName = albumItem?.name, let photosCount = photosJson?.count {
@@ -111,8 +106,6 @@ final class AlbumCard: BaseView {
     }
     
     override func viewWillShow() {
-        //previewImageView.loadImage(with: item, isOriginalImage: true)
-        
         if let album = album {
             albumItem = AlbumItem(remote: album)
         }
