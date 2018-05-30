@@ -556,7 +556,7 @@
 "Error occurred while accessing your contacts.\nPlease check your settings." = "Возникла ошибка при получении доступа к вашим контактам.\nПожалуйста, проверьте ваши настройки.";
 "Manage Contacts" = "Управление контактами";
 "Import fearture is totally free of charge and does not affect your internet package" = "Функция импорта является бесплатной и не повлияет на трафик из вашего интернет пакет";
-"Your last backup was on %@" = "Последняя резервная копия создавалась %1$s";
+"Your last backup was on %@" = "Последняя резервная копия создавалась %@";
 "Contacts Sync" = "Синхронизация контактов";
 "Sort By" = "Сортировать";
 "LifeboxLargePopUpTitle100" = "Ваше хранилище в lifebox заполнено";
