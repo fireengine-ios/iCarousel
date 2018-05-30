@@ -940,7 +940,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
           
             let object = itemForIndexPath(indexPath: indexPath_)
             guard let unwrapedObject = object else {
-                return
+                continue
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
             cell_.confireWithWrapperd(wrappedObj: unwrapedObject)

@@ -37,4 +37,17 @@ extension String {
         return components(separatedBy: .whitespaces).joined()
     }
 
+    func removeAllPreFileExtentionBracketValues() -> String {
+        var finalString = self
+        var trimmedString = finalString
+        while true {
+            trimmedString = trimmedString.replacingOccurrences(of: "(?!^)(\\s{1}\\([\\d]+\\))+(?=\\.[\\w\\d]+$)", with: "", options: .regularExpression)
+            if trimmedString == finalString {
+                break
+            }
+            finalString = trimmedString
+        }
+        return finalString
+    }
+    
 }

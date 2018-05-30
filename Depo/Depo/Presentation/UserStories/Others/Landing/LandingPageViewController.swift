@@ -34,6 +34,8 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
 
     var isTurkcell = false
     
+    private var currentPage = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setStatusBarHiddenForLandscapeIfNeed(true)
@@ -60,6 +62,7 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
         let positionX = scrollView.contentOffset.x
         let page = Int(positionX/scrollView.frame.size.width)
         pageControll.currentPage = page
+        currentPage = page
         if page == 0 {
             pageControll.pageIndicatorTintColor = ColorConstants.whiteColor
             pageControll.currentPageIndicatorTintColor = ColorConstants.lightGrayColor
@@ -69,4 +72,12 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
         }
     }
 
+    @IBAction func pageControlChangeValue(_ sender: UIPageControl) {
+        currentPage = sender.currentPage
+        scrollToPage(currentPage)
+    }
+
+    private func scrollToPage(_ page: Int) {
+        scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(currentPage), y: 0), animated: true)
+    }
 }

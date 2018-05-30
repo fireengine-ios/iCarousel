@@ -317,6 +317,9 @@
 		7C04350B1F4EF3DA00193C75 /* AlbumDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350A1F4EF3DA00193C75 /* AlbumDetailService.swift */; };
 		7C04350D1F4F17E800193C75 /* AlbumDetailResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350C1F4F17E800193C75 /* AlbumDetailResponce.swift */; };
 		7C04350F1F50B6E200193C75 /* AlbumSelectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350E1F50B6E200193C75 /* AlbumSelectionPresenter.swift */; };
+		7C0750F620BD83A800FD1FA2 /* MaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0750F520BD83A800FD1FA2 /* MaskService.swift */; };
+		7C0750F720BD83A800FD1FA2 /* MaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0750F520BD83A800FD1FA2 /* MaskService.swift */; };
+		7C0750F820BEAC7700FD1FA2 /* GradientOrangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7AA520A5D5C80070FDC2 /* GradientOrangeView.swift */; };
 		7C0D5DF2202F108900DE953F /* CreateStoryAudioSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0D5DF1202F108900DE953F /* CreateStoryAudioSelectionViewController.xib */; };
 		7C0D5DF3202F108900DE953F /* CreateStoryAudioSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0D5DF1202F108900DE953F /* CreateStoryAudioSelectionViewController.xib */; };
 		7C0DBC311F2F2CE000F90590 /* SelectionImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0DBC301F2F2CE000F90590 /* SelectionImageView.swift */; };
@@ -3952,6 +3955,7 @@
 		7C04350A1F4EF3DA00193C75 /* AlbumDetailService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailService.swift; sourceTree = "<group>"; };
 		7C04350C1F4F17E800193C75 /* AlbumDetailResponce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailResponce.swift; sourceTree = "<group>"; };
 		7C04350E1F50B6E200193C75 /* AlbumSelectionPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumSelectionPresenter.swift; sourceTree = "<group>"; };
+		7C0750F520BD83A800FD1FA2 /* MaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskService.swift; sourceTree = "<group>"; };
 		7C0D5DF1202F108900DE953F /* CreateStoryAudioSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateStoryAudioSelectionViewController.xib; sourceTree = "<group>"; };
 		7C0DBC301F2F2CE000F90590 /* SelectionImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionImageView.swift; sourceTree = "<group>"; };
 		7C0EBCFF1F4C5B5100283ECF /* BaseDataSourceItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDataSourceItem.swift; sourceTree = "<group>"; };
@@ -7375,6 +7379,14 @@
 				7C04350C1F4F17E800193C75 /* AlbumDetailResponce.swift */,
 			);
 			path = AlbumDetailService;
+			sourceTree = "<group>";
+		};
+		7C0750F420BD835A00FD1FA2 /* MaskService */ = {
+			isa = PBXGroup;
+			children = (
+				7C0750F520BD83A800FD1FA2 /* MaskService.swift */,
+			);
+			path = MaskService;
 			sourceTree = "<group>";
 		};
 		7C0DBC2F1F2F2CA700F90590 /* SelectionImageView */ = {
@@ -11443,6 +11455,7 @@
 		CED5E81D1EF7E81D009649EB /* HardwareService */ = {
 			isa = PBXGroup;
 			children = (
+				7C0750F420BD835A00FD1FA2 /* MaskService */,
 				98EAC9402080CBFF00AAD5B6 /* ContactService */,
 				CE24FB891F0B117B00C55188 /* CameraService */,
 				CE3AF7721F01D9D7002AD17C /* ReachabilityService */,
@@ -14311,6 +14324,7 @@
 				4A8CC30C201A018000C040C4 /* FaceImageViewOutput.swift in Sources */,
 				8C0E8DE01FDEBDFF00789C91 /* IntroduceViewOutput.swift in Sources */,
 				8C0E8DE11FDEBDFF00789C91 /* IntroduceViewController.swift in Sources */,
+				7C0750F820BEAC7700FD1FA2 /* GradientOrangeView.swift in Sources */,
 				7CA4A166207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.swift in Sources */,
 				8C0E8DE21FDEBDFF00789C91 /* IntroduceModuleInput.swift in Sources */,
 				CE827586203FEC6600067724 /* UIWebView+Gesture.swift in Sources */,
@@ -14740,6 +14754,7 @@
 				7CEE2723209C560500EF6C79 /* PageForLanding.swift in Sources */,
 				8C0E8F5B1FDEBDFF00789C91 /* CreateStoryPhotosOrderInteractorInput.swift in Sources */,
 				CEF41E9D2035B2DF0008FCD5 /* PhotoVideoDetailCell.swift in Sources */,
+				7C0750F720BD83A800FD1FA2 /* MaskService.swift in Sources */,
 				8C0E8F5C1FDEBDFF00789C91 /* UploadFilesSelectionViewInput.swift in Sources */,
 				8C0E8F5D1FDEBDFF00789C91 /* UploadFilesSelectionViewOutput.swift in Sources */,
 				8CD2B3B31FE7B41E00280547 /* PrepareToAutoSync.swift in Sources */,
@@ -15409,6 +15424,7 @@
 				CE51ACC91EF90853005DCEE0 /* RegistrationInteractorInput.swift in Sources */,
 				9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */,
 				CE51ACCA1EF90853005DCEE0 /* RegistrationInteractorOutput.swift in Sources */,
+				7C0750F620BD83A800FD1FA2 /* MaskService.swift in Sources */,
 				7CFD0D201F8F44CA002B1FB5 /* ArrayDataSourceForCollectionView.swift in Sources */,
 				7C4988161F3320420039C5F2 /* CreateStoryPhotosOrderInteractor.swift in Sources */,
 				D498865B1F3EFBE200F50C95 /* ImportPhotosInteractorOutput.swift in Sources */,
