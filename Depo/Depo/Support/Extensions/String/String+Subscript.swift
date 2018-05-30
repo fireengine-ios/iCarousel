@@ -41,7 +41,7 @@ extension String {
         var finalString = self
         var trimmedString = finalString
         while true {
-            trimmedString = trimmedString.replacingOccurrences(of: "(\\([\\d]+\\))+(?=\\.[\\w\\d]+$)", with: "", options: .regularExpression)
+            trimmedString = trimmedString.replacingOccurrences(of: "(?!^)(\\([\\d]+\\))+(?=\\.[\\w\\d]+$)", with: "", options: .regularExpression)
             if trimmedString == finalString {
                 break
             }
