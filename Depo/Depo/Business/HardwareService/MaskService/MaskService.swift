@@ -16,11 +16,13 @@ class MaskService {
     
     init() {
         queue.maxConcurrentOperationCount = 1
-        queue.qualityOfService = .userInteractive
+        queue.qualityOfService = .background
     }
     
-    func generateImageWithMask(image: UIImage, sucess: (UIImage) -> Void){
-        
+    func generateImageWithMask(image: UIImage, sucess: @escaping (UIImage?) -> Void){
+        let operation = MaskServiceOperation(image: image, sucessBlock: sucess)
+        queue.addOperation(operation)
+        //queue.waitUntilAllOperationsAreFinished()
     }
 
 }
@@ -28,15 +30,17 @@ class MaskService {
 class MaskServiceOperation: Operation {
     
     let image: UIImage
-    let sucessBlock: (UIImage) -> Void
+    let sucessBlock: (UIImage?) -> Void
     
-    init(image: UIImage, sucessBlock: ()) {
+    init(image: UIImage, sucessBlock: @escaping (UIImage?) -> Void) {
         self.image = image
+        self.sucessBlock = sucessBlock
         super.init()
     }
     
     override func main() {
-        let filtresdImage = image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
+        let filtredImage = image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
+        sucessBlock(filtredImage)
     }
     
     override func cancel() {

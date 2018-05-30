@@ -112,15 +112,22 @@ final class FilterPhotoCard: BaseView {
     
     private func set(image: UIImage, isSaved: Bool) {
         
-        DispatchQueue.toBackground { [weak self] in
-            //let filtresdImage = isSaved ? image : image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
+        MaskService.shared.generateImageWithMask(image: image) { [weak self] (image) in
             DispatchQueue.toMain {
-//                self?.photoImageView.image = filtresdImage
-//                self?.cardType = isSaved ? .display : .save
-                
+                self?.cardType = isSaved ? .display : .save
                 self?.photoImageView.image = image
             }
         }
+        
+//        DispatchQueue.toBackground { [weak self] in
+//            //let filtresdImage = isSaved ? image : image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
+//            DispatchQueue.toMain {
+////                self?.photoImageView.image = filtresdImage
+////                self?.cardType = isSaved ? .display : .save
+//
+//                self?.photoImageView.image = image
+//            }
+//        }
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {
