@@ -317,6 +317,7 @@
 		7C04350B1F4EF3DA00193C75 /* AlbumDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350A1F4EF3DA00193C75 /* AlbumDetailService.swift */; };
 		7C04350D1F4F17E800193C75 /* AlbumDetailResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350C1F4F17E800193C75 /* AlbumDetailResponce.swift */; };
 		7C04350F1F50B6E200193C75 /* AlbumSelectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350E1F50B6E200193C75 /* AlbumSelectionPresenter.swift */; };
+		7C0750F820BEAC7700FD1FA2 /* GradientOrangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7AA520A5D5C80070FDC2 /* GradientOrangeView.swift */; };
 		7C0D5DF2202F108900DE953F /* CreateStoryAudioSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0D5DF1202F108900DE953F /* CreateStoryAudioSelectionViewController.xib */; };
 		7C0D5DF3202F108900DE953F /* CreateStoryAudioSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0D5DF1202F108900DE953F /* CreateStoryAudioSelectionViewController.xib */; };
 		7C0DBC311F2F2CE000F90590 /* SelectionImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0DBC301F2F2CE000F90590 /* SelectionImageView.swift */; };
@@ -14323,6 +14324,7 @@
 				4A8CC30C201A018000C040C4 /* FaceImageViewOutput.swift in Sources */,
 				8C0E8DE01FDEBDFF00789C91 /* IntroduceViewOutput.swift in Sources */,
 				8C0E8DE11FDEBDFF00789C91 /* IntroduceViewController.swift in Sources */,
+				7C0750F820BEAC7700FD1FA2 /* GradientOrangeView.swift in Sources */,
 				7CA4A166207E3E2B00F270C8 /* LargeFullOfQuotaPopUp.swift in Sources */,
 				8C0E8DE21FDEBDFF00789C91 /* IntroduceModuleInput.swift in Sources */,
 				CE827586203FEC6600067724 /* UIWebView+Gesture.swift in Sources */,
