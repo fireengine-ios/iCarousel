@@ -630,3 +630,8 @@
 "download_error_unsupported_extension" = "Завантаження не підтримується для цього типу файлу";
 "Show only synced items" = "Показати лише синхронізовані елементи";
 "Your lifebox storage is almost full!" = "Ви досягли межі пам'яті lifebox.";
+"This edited photo will be saved as a new photo in your device gallery" = "";
+"We couldn’t find any place on your Lifebox yet." = "";
+"*Average figure. Total number of documents depends on the size of each document." = "";
+"We couldn’t find anything on your Lifebox yet." = "";
+"Expiration Date: %@" = "";

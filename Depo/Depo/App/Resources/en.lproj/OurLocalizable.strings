@@ -146,9 +146,9 @@
 "There are some duplicated items both in your device and lifebox" = "There are some duplicated items both in your device and lifebox";
 
 /*which operation??*/
-"Operation is complete" = "Operation is complete";
-"Download is complete" = "Download is complete";
-"Deleting is complete" = "Deleting is complete";
+"Operation is complete" = "Operation completed";
+"Download is complete" = "Download completed";
+"Deleting is complete" = "Deleting completed";
 "Downloading files" = "Downloading files";
 "Uploading files over" = "Uploading files over %@";
 "Syncing files over" = "Syncing files with %@";
@@ -210,7 +210,7 @@
 "You did not choose music for your story" = "You did not choose music for your story";
 "Fail while adding to album" = "Fail while adding to album";
 "Story not created" = "Story not created";
-"Story created" = "Story created";
+"Story created" = "We are preparing your story. Once it is finished, you can access it from Videos Album.";
 "Sorry, but story photos should not be empty" = "Please choose at least one photo or video";
 "Please choose %d files at most" = "Please choose %d photos or videos at most";
 "Continue" = "Continue";
@@ -372,7 +372,7 @@
 "Wi-fi" = "Wi-Fi";
 "Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifebox can sync your photos and videos automatically. Would you like to enable auto upload feature now?";
 "You have to fill in a password" = "You have to fill in your password";
-"You have to fill in your mail or GSM Number" = "You have to fill in your e-mail or Phone Number";
+"You have to fill in your mail or GSM Number" = "Fill in your e-mail or GSM Number";
 "Password" = "Password";
 "E-Mail or GSM Number" = "E-mail or Phone Number";
 "Remember my credentials" = "Remember my password";
@@ -658,3 +658,8 @@
 "download_error_unsupported_extension" = "Downloading is not supported for this type of file";
 "Show only synced items" = "Show only synced items";
 "Your lifebox storage is almost full!" = "Your lifebox storage is almost full!";
+"This edited photo will be saved as a new photo in your device gallery" = "";
+"We couldn’t find any place on your Lifebox yet." = "";
+"*Average figure. Total number of documents depends on the size of each document." = "";
+"We couldn’t find anything on your Lifebox yet." = "";
+"Expiration Date: %@" = "";
