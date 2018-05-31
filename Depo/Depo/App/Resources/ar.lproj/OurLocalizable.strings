@@ -556,7 +556,7 @@
 "We have created an animation from your photos!" = "تم إنشاء رسم متحرك من صورك!";
 "Save Animation" = "حفظ";
 "Delete Duplicated" = "حذف المكرر";
-"Lifebox %@ and Passcode" = "Lifebox ٪ @ ورمز المرور";
+"Lifebox %@ and Passcode" = "Touch ID ورمز مرور لايف بوكس";
 "We make easier to manage your memories with homepage" = "يمكنك إدارة ذكرياتك بسهولة من الصفحة الرئيسية";
 "You can reach your recent activites and suggestions that are special for you from this page" = "يمكن رؤية الأنشطة الحديثة والاقتراحات المخصصة لك من هذه الصفحة.";
 "Discover your first story" = "اطّلع على أول عرض لشرائح الفيديو";
@@ -641,4 +641,4 @@
 "Bad internet connection" = "اتصال انترنت سيئ";
 "download_error_unsupported_extension" = "التنزيل غير معتمد لهذا النوع من الملفات";
 "Show only synced items" = "إظهار العناصر التي تمت مزامنتها فقط";
-"Your lifebox storage is almost full!" = "";
+"Your lifebox storage is almost full!" = "أوشكت مساحة التخزين على الامتلاء!";
