@@ -7,6 +7,7 @@
 //
 
 struct MenloworksEventsConstants {
+    private init() {}
     static let firstsession = "Firstsession"
     static let newsession = "Newsession"
     static let signupCompleted = "Signup_completed"
