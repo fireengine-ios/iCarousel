@@ -58,6 +58,19 @@ class PhotoSelectionDataSource: ArrayDataSourceForCollectionView {
         collectionView?.reloadData()
     }
     
+    override func setupOneSectionMediaItemsArray(items: [WrapData]) {
+        tableDataMArray.append(items)
+    }
+    
+    override func allObjectIsEmpty() -> Bool {
+        for array in tableDataMArray {
+            if !array.isEmpty {
+                return false
+            }
+        }
+        return true
+    }
+    
     override func dropData() {
         tableDataMArray.removeAll()
         super.dropData()
