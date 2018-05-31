@@ -13,8 +13,13 @@ import StoreKit
 final class AnalyticsService {
     
     func start() {
-        //TODO: In production need ADJEnvironmentProduction
-        let adjustConfig = ADJConfig(appToken: "hlqdgtbmrdb9", environment: ADJEnvironmentSandbox)
+        #if DEBUG
+            let environment = ADJEnvironmentSandbox
+        #else
+            let environment = ADJEnvironmentProduction
+        #endif
+        
+        let adjustConfig = ADJConfig(appToken: "hlqdgtbmrdb9", environment: environment)
         Adjust.appDidLaunch(adjustConfig)
     }
     
