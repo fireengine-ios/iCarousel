@@ -630,8 +630,8 @@
 "download_error_unsupported_extension" = "Некоторые файлы недоступны для скачивания.";
 "Show only synced items" = "Показать только синхронизированные элементы";
 "Your lifebox storage is almost full!" = "Хранилище lifebox практически заполнено";
-"This edited photo will be saved as a new photo in your device gallery" = "";
-"We couldn’t find any place on your Lifebox yet." = "";
-"*Average figure. Total number of documents depends on the size of each document." = "";
-"We couldn’t find anything on your Lifebox yet." = "";
-"Expiration Date: %@" = "";
+"This edited photo will be saved as a new photo in your device gallery" = "Отредактированные фото будут сохранены как новые в галерее на вашем устройстве";
+"We couldn’t find any place on your Lifebox yet." = "Мы пока не смогли найти ни одного места в вашем lifebox.";
+"*Average figure. Total number of documents depends on the size of each document." = "Среднее значение. Общее количество документов зависит от размера каждого документа.";
+"We couldn’t find anything on your Lifebox yet." = "Мы пока не смогли найти ни одного предмета в вашем lifebox.";
+"Expiration Date: %@" = "Срок истекает: %@";

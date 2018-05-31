@@ -638,8 +638,8 @@
 "download_error_unsupported_extension" = "Bu dosya tipi için indirme özelliği desteklenmiyor.";
 "Show only synced items" = "Sadece yedeklenmiş öğeleri göster";
 "Your lifebox storage is almost full!" = "lifebox depolama alanın neredeyse dolu!";
-"This edited photo will be saved as a new photo in your device gallery" = "";
-"We couldn’t find any place on your Lifebox yet." = "";
-"*Average figure. Total number of documents depends on the size of each document." = "";
-"We couldn’t find anything on your Lifebox yet." = "";
-"Expiration Date: %@" = "";
+"This edited photo will be saved as a new photo in your device gallery" = "Düzenlediğiniz fotoğraf, cihaz galerinize yeni bir fotoğraf olarak kaydedilecektir.";
+"We couldn’t find any place on your Lifebox yet." = "Henüz bir yer bulamadık";
+"*Average figure. Total number of documents depends on the size of each document." = "*Ortalama rakam. Belgelerin toplam sayısı her belgenin büyüklüğüne bağlıdır.";
+"We couldn’t find anything on your Lifebox yet." = "Henüz bir nesne bulamadık";
+"Expiration Date: %@" = "Bitiş Tarihi: %@";
