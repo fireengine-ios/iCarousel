@@ -45,7 +45,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                     self_.isDeleteRequestRunning = false
                     if let presenter = self_.output as? FreeAppSpacePresenter {
                             DispatchQueue.main.async {
-                                presenter.onItemDeleted()
+                                presenter.onItemDeleted(count: array.count)
                                 if FreeAppSpace.default.getDuplicatesObjects().count == 0 {
                                     CardsManager.default.stopOperationWithType(type: .freeAppSpace)
                                     CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
