@@ -57,7 +57,10 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
         }
     }
     
-    override func updateThreeDotsButton() { }
+    //done button need always enabled
+    override func updateThreeDotsButton() {
+        view.setThreeDotsMenu(active: true)
+    }
 }
 
 // MARK: - FaceImageAddNameViewOutput
