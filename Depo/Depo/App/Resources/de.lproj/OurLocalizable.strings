@@ -630,3 +630,8 @@
 "download_error_unsupported_extension" = "Das Herunterladen wird für diesen Dateityp nicht unterstützt";
 "Show only synced items" = "Nur synchronisierte Elemente anzeigen";
 "Your lifebox storage is almost full!" = "Ihr Lifebox-Speicher ist fast voll!";
+"This edited photo will be saved as a new photo in your device gallery" = "";
+"We couldn’t find any place on your Lifebox yet." = "";
+"*Average figure. Total number of documents depends on the size of each document." = "";
+"We couldn’t find anything on your Lifebox yet." = "";
+"Expiration Date: %@" = "";
