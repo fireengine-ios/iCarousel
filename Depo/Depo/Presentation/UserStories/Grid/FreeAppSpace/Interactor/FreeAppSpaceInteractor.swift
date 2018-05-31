@@ -31,9 +31,9 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                         return
                     }
                 }
-                
+                let array = FreeAppSpace.default.getLocalFiesComaredWithServerObjectsAndClearFreeAppSpace(serverObjects: objects, localObjects: selectedItems)
                 let fileService = WrapItemFileService()
-                fileService.deleteLocalFiles(deleteFiles: selectedItems, success: {
+                fileService.deleteLocalFiles(deleteFiles: array, success: {
                     
                     guard let self_ = self else {
                         return

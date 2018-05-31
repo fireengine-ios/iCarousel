@@ -344,18 +344,21 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         return CoreDataStack.default.allLocalItems()
     }
     
-///Might be needed
-//    func getLocalFiesComaredWithServerObjects(serverObjects: [WrapData], localObjects: [WrapData]) -> [WrapData] {
-//        var comparedFiles = [WrapData]()
-//
-//        let serverObjectMD5Array = serverObjects.map { $0.md5 }
-//        for localObject in localObjects {
-//            if serverObjectMD5Array.index(of: localObject.md5) != nil {
-//                comparedFiles.append(localObject)
-//            }
-//        }
-//        return comparedFiles
-//    }
+
+    func getLocalFiesComaredWithServerObjectsAndClearFreeAppSpace(serverObjects: [WrapData], localObjects: [WrapData]) -> [WrapData] {
+        var comparedFiles = [WrapData]()
+        var objectsForRemove = [WrapData]()
+        let serverObjectMD5Array = serverObjects.map { $0.md5 }
+        for localObject in localObjects {
+            if serverObjectMD5Array.index(of: localObject.md5) != nil {
+                comparedFiles.append(localObject)
+            } else {
+                objectsForRemove.append(localObject)
+            }
+        }
+        deleteDeletedLocalPhotos(deletedPhotos: objectsForRemove)
+        return comparedFiles
+    }
     
     // MARK: UploadNotificationManagerProtocol
     
