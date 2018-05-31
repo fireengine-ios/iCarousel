@@ -16,6 +16,7 @@ def core_pods
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
+  pod 'Curio_iOS_SDK', '~> 1.2.4'
 
   pod 'SDWebImage'
   pod 'GoogleConversionTracking'

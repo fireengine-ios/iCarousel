@@ -12,6 +12,7 @@ PODS:
   - CircleProgressBar (0.32)
   - Crashlytics (3.10.1):
     - Fabric (~> 1.7.5)
+  - Curio_iOS_SDK (1.2.4)
   - Fabric (1.7.6)
   - FBSDKCoreKit (4.33.0):
     - Bolts (~> 1.7)
@@ -53,6 +54,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.5)
   - CircleProgressBar (~> 0.32)
   - Crashlytics
+  - Curio_iOS_SDK (~> 1.2.4)
   - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -81,6 +83,7 @@ SPEC REPOS:
     - Bolts
     - CircleProgressBar
     - Crashlytics
+    - Curio_iOS_SDK
     - Fabric
     - FBSDKCoreKit
     - FBSDKLoginKit
@@ -117,6 +120,7 @@ SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   CircleProgressBar: 3920079be5224b62b3d9ed6eeb23ac01c835b681
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Curio_iOS_SDK: 94a9f2cdf5630c1924a44b15832abb6fdc4a7a98
   Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
   FBSDKCoreKit: 572b047a7e029bc44542bcf8a59414e7ff2b543e
   FBSDKLoginKit: 88cb456349cfb3b554427ce4f8b43729d85dfb40
@@ -139,6 +143,6 @@ SPEC CHECKSUMS:
   XCGLogger: c9601cae9a8912de34a58666ba931ed3d624dd31
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
 
-PODFILE CHECKSUM: 43412f5081586c7acc7e1ddfd9360ed077cf45c1
+PODFILE CHECKSUM: cfe3d78bbb9bb6bfefd8f7ad99bd50900873dbdd
 
 COCOAPODS: 1.5.2
