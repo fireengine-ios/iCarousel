@@ -21,6 +21,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PackagesViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="YAO-ir-hJp" id="1Vf-KB-ZSS"/>
+                <outlet property="descriptionLabel" destination="X3N-5r-5TB" id="Dv5-tS-hAH"/>
                 <outlet property="keyboardHideManager" destination="2I8-Re-xUl" id="aFr-EU-UJX"/>
                 <outlet property="policyTextView" destination="0Wh-5R-OYf" id="P0u-hw-Qtj"/>
                 <outlet property="promoView" destination="5bp-6o-N2u" id="9NB-9L-Bts"/>
