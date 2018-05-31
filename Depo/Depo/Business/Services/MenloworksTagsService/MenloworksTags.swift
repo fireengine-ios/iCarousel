@@ -237,6 +237,18 @@ class MenloworksTags {
         }
     }
     
+    class AutoSyncPhotosOff: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.autoSyncPhotosOff)
+        }
+    }
+    
+    class AutoSyncVideosOff: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.autoSyncVideosOff)
+        }
+    }
+    
     class ContactUploaded: MenloworksTag {
         init() {
             super.init(name: NameConstants.contactUploaded)

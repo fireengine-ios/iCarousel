@@ -257,6 +257,16 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
+    func onAutosyncVideosOff() {
+        let tag = MenloworksTags.AutoSyncVideosOff()
+        hitTag(tag)
+    }
+    
+    func onAutosyncPhotosOff() {
+        let tag = MenloworksTags.AutoSyncPhotosOff()
+        hitTag(tag)
+    }
+    
     func onAutosyncPhotosViaWifi() {
         let tag = MenloworksTags.AutoSyncPhotosViaWifi()
         hitTag(tag)
