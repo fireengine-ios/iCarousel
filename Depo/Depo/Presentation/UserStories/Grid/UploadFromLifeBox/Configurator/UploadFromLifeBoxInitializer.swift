@@ -10,7 +10,7 @@ import UIKit
 
 class UploadFromLifeBoxModuleInitializer: NSObject {
 
-    class func initializePhotoVideosViewController(with nibName: String, albumUUID: String) -> UIViewController {
+    class func initializePhotoVideosViewController(with nibName: String, albumUUID: String, sortedRule: SortedRules = .timeUp) -> UIViewController {
         let viewController = UploadFromLifeBoxViewController(nibName: nibName, bundle: nil)
         //viewController.needShowTabBar = true
         //viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
@@ -19,6 +19,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
                                                style: .default, tintColor: nil)
         
         let presenter: BaseFilesGreedPresenter = UploadFromLifeBoxPhotosPresenter()
+        presenter.sortedRule = sortedRule
         let interactor = UploadFromLifeBoxInteractor(remoteItems: PhotoAndVideoService(requestSize: 100))
         interactor.rootFolderUUID = albumUUID
         

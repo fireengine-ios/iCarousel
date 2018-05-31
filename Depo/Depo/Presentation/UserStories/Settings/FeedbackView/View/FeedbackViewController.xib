@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -58,7 +58,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aff-mw-B7R">
                             <rect key="frame" x="33" y="49" width="309" height="440"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmK-aX-QZ4">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UmK-aX-QZ4">
                                     <rect key="frame" x="18" y="70" width="273" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="hlY-Oe-YfP"/>
@@ -189,7 +189,6 @@
                                     <rect key="frame" x="18" y="343" width="107" height="32"/>
                                     <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="220" id="4t3-Zq-fiN"/>
                                         <constraint firstAttribute="height" constant="32" id="Kig-IM-Yit"/>
                                         <constraint firstAttribute="width" priority="250" constant="107" id="ty1-uI-8Dw"/>
                                     </constraints>
@@ -221,6 +220,7 @@
                                 <constraint firstItem="mLm-Hf-o7Y" firstAttribute="leading" secondItem="yNf-ey-3Kc" secondAttribute="trailing" constant="15" id="g91-dH-dxf"/>
                                 <constraint firstAttribute="trailing" secondItem="mLm-Hf-o7Y" secondAttribute="trailing" constant="18" id="goi-gF-xxx"/>
                                 <constraint firstItem="zta-Hi-65l" firstAttribute="leading" secondItem="Aff-mw-B7R" secondAttribute="leading" constant="18" id="jfL-tw-kD9"/>
+                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zta-Hi-65l" secondAttribute="trailing" constant="18" id="nXr-c7-Omj"/>
                                 <constraint firstAttribute="trailing" secondItem="6Ca-Dq-eYH" secondAttribute="trailing" id="ow7-FB-CZ6"/>
                                 <constraint firstItem="6Ca-Dq-eYH" firstAttribute="leading" secondItem="Aff-mw-B7R" secondAttribute="leading" id="qL5-BP-E9h"/>
                                 <constraint firstItem="3HH-2a-5f1" firstAttribute="leading" secondItem="Aff-mw-B7R" secondAttribute="leading" id="sHP-c0-0Ri"/>

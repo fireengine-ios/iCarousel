@@ -163,6 +163,6 @@ extension ImportFromInstagramPresenter: InstagramAuthViewControllerDelegate {
     }
     
     func instagramAuthCancel() {
-        view?.instagramStartFailure(errorMessage: "Canceled")
+        view?.instagramStartFailure(errorMessage: TextConstants.NotLocalized.instagramLoginCanceled)
     }
 }

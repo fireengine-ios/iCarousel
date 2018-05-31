@@ -22,6 +22,9 @@ final class AppConfigurator {
     static func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         DispatchQueue.setupMainQueue()
         
+        /// force arabic language left to right
+        UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        
         AppResponsivenessService.shared.startMainAppUpdate()
         firstStart()
         emptyEmailUpIfNeed()
@@ -148,17 +151,19 @@ final class AppConfigurator {
                 
             case MActionType.click:
                 log.debug("Menlo Notif Clicked")
-                if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as! String)){
+                
+                if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
                     PushNotificationService.shared.openActionScreen()
                     storageVars.deepLink = response.message.payload["action"] as? String
                 }
+                
                 
             case MActionType.dismiss:
                 log.debug("Menlo Notif Dismissed")
                 
             case MActionType.present:
                 log.debug("Menlo Notif in Foreground")
-                if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as! String)){
+                if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
                     PushNotificationService.shared.openActionScreen()
                 }
                 

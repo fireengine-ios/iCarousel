@@ -233,7 +233,9 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     
     func didShowPopUp() {        
         if let router = router as? FaceImageItemsRouterInput {
-            router.showPopUp()
+            DispatchQueue.toMain {
+                router.showPopUp()
+            }
         }
     }
     

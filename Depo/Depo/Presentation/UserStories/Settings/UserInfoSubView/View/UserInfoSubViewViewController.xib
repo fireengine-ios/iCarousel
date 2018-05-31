@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -36,8 +36,8 @@
                         <constraint firstAttribute="width" constant="110" id="MEy-ve-foK"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnv-u5-zWS" userLabel="uloadlabel">
-                    <rect key="frame" x="54" y="85.5" width="42" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pnv-u5-zWS" userLabel="uloadlabel">
+                    <rect key="frame" x="54" y="86" width="42" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -160,6 +160,7 @@
                 <constraint firstItem="kwu-pj-lHl" firstAttribute="top" secondItem="lsG-5I-zeN" secondAttribute="bottom" id="me7-d9-jhy"/>
                 <constraint firstAttribute="bottom" secondItem="3Qn-i2-0sL" secondAttribute="bottom" id="pNu-Eu-RSV"/>
                 <constraint firstItem="geQ-Zk-cbM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="s8E-Ja-Z4s"/>
+                <constraint firstItem="Pnv-u5-zWS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" id="wlH-D7-WDU"/>
                 <constraint firstItem="lsG-5I-zeN" firstAttribute="leading" secondItem="fAZ-EG-CYK" secondAttribute="leading" id="ycN-ap-m6h"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

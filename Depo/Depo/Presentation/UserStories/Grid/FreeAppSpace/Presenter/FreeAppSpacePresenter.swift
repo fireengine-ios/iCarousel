@@ -63,13 +63,11 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
         }
     }
     
-    func onItemDeleted() {
-        let count = dataSource.selectedItemsArray.count
-        dataSource.selectedItemsArray.removeAll()
-        dataSource.updateSelectionCount()
-        
-        let text = String(format: TextConstants.freeAppSpaceAlertSuccesTitle, count)
-        UIApplication.showSuccessAlert(message: text)
+    func onItemDeleted(count: Int) {
+        if count > 0 {
+            let text = String(format: TextConstants.freeAppSpaceAlertSuccesTitle, count)
+            UIApplication.showSuccessAlert(message: text)
+        }
         
         if let view = view as? BaseFilesGreedViewController {
             view.requestStopped()
