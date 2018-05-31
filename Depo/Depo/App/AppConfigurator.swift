@@ -22,6 +22,9 @@ final class AppConfigurator {
     static func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         DispatchQueue.setupMainQueue()
         
+        /// force arabic language left to right
+        UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        
         AppResponsivenessService.shared.startMainAppUpdate()
         firstStart()
         emptyEmailUpIfNeed()

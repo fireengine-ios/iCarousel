@@ -85,6 +85,11 @@ class ImportPhotosViewController: ViewController, ErrorPresenter {
         importFacebookLabel.text = TextConstants.importFromFB
         importInstagramLabel.text = TextConstants.importFromInstagram
         importCropyLabel.text = TextConstants.importFromCropy
+        
+        importDropboxLabel.adjustsFontSizeToFitWidth()
+        importFacebookLabel.adjustsFontSizeToFitWidth()
+        importInstagramLabel.adjustsFontSizeToFitWidth()
+        importCropyLabel.adjustsFontSizeToFitWidth()
     }
     
     fileprivate func configureSwitches() {
@@ -223,7 +228,9 @@ extension ImportPhotosViewController: ImportFromInstagramViewInput {
     func instagramStartFailure(errorMessage: String) {
         MenloworksTagsService.shared.instagramImport(isOn: false)
         isInstagramConnected = false
-        showErrorAlert(message: errorMessage)
+        if errorMessage != TextConstants.NotLocalized.instagramLoginCanceled {
+            showErrorAlert(message: errorMessage)
+        }
     }
     
     // MARK: Stop

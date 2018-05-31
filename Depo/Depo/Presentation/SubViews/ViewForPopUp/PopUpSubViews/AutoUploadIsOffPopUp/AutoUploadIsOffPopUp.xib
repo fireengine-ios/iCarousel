@@ -22,8 +22,8 @@
                         <constraint firstAttribute="height" constant="20" id="tpm-wJ-TxJ"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Upload is off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eea-6V-l1X">
-                    <rect key="frame" x="55" y="9" width="229" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Upload is off" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eea-6V-l1X">
+                    <rect key="frame" x="55" y="9" width="229" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -45,10 +45,10 @@
                         <action selector="onSettingsButton" destination="i5M-Pr-FkT" eventType="touchUpInside" id="z8j-Vl-s3E"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go to setting to auto sync." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llh-MA-kwD">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go to setting to auto sync." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llh-MA-kwD">
                     <rect key="frame" x="27" y="46" width="258" height="16"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="16" id="FoX-d7-GlP"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="FoX-d7-GlP"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <nil key="textColor"/>
@@ -58,11 +58,11 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Eea-6V-l1X" secondAttribute="trailing" constant="16" id="1jc-iL-teg"/>
-                <constraint firstItem="Nap-ZB-xd9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="37" id="3D4-xr-d1p"/>
+                <constraint firstItem="Nap-ZB-xd9" firstAttribute="top" secondItem="Eea-6V-l1X" secondAttribute="bottom" constant="7.5" id="4Zl-L4-Kln"/>
                 <constraint firstItem="Eea-6V-l1X" firstAttribute="leading" secondItem="Olb-Sa-Ujd" secondAttribute="trailing" constant="16" id="8pg-6P-gHD"/>
                 <constraint firstItem="Olb-Sa-Ujd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="7" id="EgZ-RV-zUS"/>
+                <constraint firstItem="R4F-J3-y81" firstAttribute="top" secondItem="llh-MA-kwD" secondAttribute="bottom" constant="2" id="HF2-Q6-b9g"/>
                 <constraint firstAttribute="trailing" secondItem="R4F-J3-y81" secondAttribute="trailing" constant="15" id="IJM-g4-I3j"/>
-                <constraint firstAttribute="bottom" secondItem="R4F-J3-y81" secondAttribute="bottom" constant="6" id="JDR-Es-cfL"/>
                 <constraint firstItem="Nap-ZB-xd9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NDc-uP-ru9"/>
                 <constraint firstAttribute="trailing" secondItem="Nap-ZB-xd9" secondAttribute="trailing" id="bKO-gY-RZH"/>
                 <constraint firstItem="llh-MA-kwD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="27" id="eV1-k2-zZ0"/>

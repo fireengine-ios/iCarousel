@@ -19,6 +19,7 @@ class GridListTopBar: ViewController {
     @IBOutlet fileprivate weak var sortByButton: UIButton! {
         didSet {
             sortByButton.setTitle(TextConstants.sortby, for: .normal)
+            sortByButton.adjustsFontSizeToFitWidth()
         }
     }
     
