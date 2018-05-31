@@ -554,7 +554,7 @@
 "You need to confirm the User Agreement to continue." = "You need to confirm the User Agreement to continue.";
 "PhotosAndViedos" = "Photos and Videos";
 "Are these the same person?" = "Are these the same person?";
-"We couldn't find anybody on your Lifebox yet." = "We couldn't find anybody on your lifebox yet.";
+"We couldn't find anybody on your Lifebox yet." = "We couldn't find anybody in your lifebox yet.";
 "Grouping of your photos will take some time. Please wait and then check the albums." = "Grouping of your photos will take some time. Please wait and then check the albums.";
 "Never" = "Never";
 "Approve" = "Approve";
@@ -658,8 +658,8 @@
 "download_error_unsupported_extension" = "Downloading is not supported for this type of file";
 "Show only synced items" = "Show only synced items";
 "Your lifebox storage is almost full!" = "Your lifebox storage is almost full!";
-"This edited photo will be saved as a new photo in your device gallery" = "";
-"We couldn’t find any place on your Lifebox yet." = "";
-"*Average figure. Total number of documents depends on the size of each document." = "";
-"We couldn’t find anything on your Lifebox yet." = "";
-"Expiration Date: %@" = "";
+"This edited photo will be saved as a new photo in your device gallery" = "This edited photo will be saved as a new photo in your device gallery";
+"We couldn’t find any place on your Lifebox yet." = "We couldn’t find any places in your lifebox yet.";
+"*Average figure. Total number of documents depends on the size of each document." = "\n    *Average figure. Total number of documents depends on the size of each document.\n  ";
+"We couldn’t find anything on your Lifebox yet." = "We couldn’t find any things in your lifebox yet.";
+"Expiration Date: %@" = "Expiration Date: %@";
