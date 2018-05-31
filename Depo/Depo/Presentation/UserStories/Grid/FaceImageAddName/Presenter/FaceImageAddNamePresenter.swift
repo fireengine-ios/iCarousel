@@ -56,6 +56,8 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
             router.showMerge(firstUrl: currentItemURL, secondUrl: itemUrl, completion: yesHandler)
         }
     }
+    
+    override func updateThreeDotsButton() { }
 }
 
 // MARK: - FaceImageAddNameViewOutput
