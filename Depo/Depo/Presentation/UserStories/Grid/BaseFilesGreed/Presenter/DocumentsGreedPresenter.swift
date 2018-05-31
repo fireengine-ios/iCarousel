@@ -19,6 +19,9 @@ class DocumentsGreedPresenter: BaseFilesGreedPresenter {
     }
     
     override func getCellSizeForList() -> CGSize {
+        guard view != nil else {
+            return .zero
+        }
         return CGSize(width: view.getCollectionViewWidth(), height: 65)
     }
     
