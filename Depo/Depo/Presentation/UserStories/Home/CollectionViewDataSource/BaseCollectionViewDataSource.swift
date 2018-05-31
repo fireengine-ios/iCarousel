@@ -16,7 +16,7 @@ protocol BaseCollectionViewDataSourceDelegate {
     func didReloadCollectionView(_ collectionView: UICollectionView)
 }
 
-class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, CollectionViewLayoutDelegate, BaseCollectionViewCellWithSwipeDelegate, CardsManagerViewProtocol {
+class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, CollectionViewLayoutDelegate, BaseCollectionViewCellWithSwipeDelegate, CardsManagerViewProtocol, UICollectionViewDelegate {
     
     var collectionView: UICollectionView!
     var viewController: UIViewController!
@@ -34,6 +34,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     func configurateWith(collectionView: UICollectionView, viewController: UIViewController, delegate: BaseCollectionViewDataSourceDelegate?) {
         
         self.collectionView = collectionView
+        self.collectionView.delegate = self
         collectionView.dataSource = self
         self.delegate = delegate
         
@@ -98,7 +99,15 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         let popUpView = popUps[indexPath.row]
         baseCell.addViewOnCell(controllersView: popUpView, withShadow: true)
         popUpView.viewWillShow()
+        baseCell.willDisplay()
         return baseCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let baseCell = cell as? CollectionViewCellForController else {
+            return
+        }
+        baseCell.didEndDisplay()
     }
     
     // MARK: BaseCollectionViewCellWithSwipeDelegate
@@ -189,6 +198,12 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     
     func startOperationsWith(serverObjects: [HomeCardResponse]) {
         var newPopUps = [BaseView]()
+        
+        for key in viewsByType.keys {
+            if !CardsManager.default.checkIsThisOperationStartedByDevice(operation: key) {
+                viewsByType[key] = nil
+            }
+        }
         
         for object in serverObjects {
             if let type = object.getOperationType(){

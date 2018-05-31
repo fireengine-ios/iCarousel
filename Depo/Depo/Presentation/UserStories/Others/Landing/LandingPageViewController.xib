@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -40,9 +40,15 @@
                         <action selector="onStartUsingButton" destination="-1" eventType="touchUpInside" id="Ove-ZV-1Jw"/>
                     </connections>
                 </button>
-                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="QK5-jM-UnF">
-                    <rect key="frame" x="16" y="533" width="343" height="37"/>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" translatesAutoresizingMaskIntoConstraints="NO" id="QK5-jM-UnF">
+                    <rect key="frame" x="122.5" y="533" width="130" height="37"/>
                     <color key="tintColor" red="0.2666666667" green="0.80000000000000004" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="130" id="ceT-MW-1Ga"/>
+                    </constraints>
+                    <connections>
+                        <action selector="pageControlChangeValue:" destination="-1" eventType="valueChanged" id="sLd-hL-iiL"/>
+                    </connections>
                 </pageControl>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="landingNavBar" translatesAutoresizingMaskIntoConstraints="NO" id="DjE-a6-N47">
                     <rect key="frame" x="0.0" y="64" width="375" height="56"/>
@@ -62,16 +68,15 @@
             <constraints>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="top" secondItem="DjE-a6-N47" secondAttribute="bottom" id="3uG-jW-qf9"/>
                 <constraint firstItem="DjE-a6-N47" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5o0-fi-cYW"/>
-                <constraint firstItem="QK5-jM-UnF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ByP-3X-ZaP"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="QK5-jM-UnF" secondAttribute="bottom" constant="97" id="G4c-RD-HfW"/>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Kb9-Xb-jRy"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QK5-jM-UnF" secondAttribute="trailing" constant="16" id="LBo-aF-d7A"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="P4m-k9-Sk8" secondAttribute="bottom" constant="24" id="PZM-hy-aRr"/>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="TSN-SD-CPH"/>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="U5f-uk-hTQ"/>
                 <constraint firstItem="P4m-k9-Sk8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UEZ-h9-qYh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P4m-k9-Sk8" secondAttribute="trailing" constant="20" id="Uws-nX-iHn"/>
                 <constraint firstItem="DjE-a6-N47" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="XZ3-BS-ofi"/>
+                <constraint firstItem="QK5-jM-UnF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="eAv-62-E5u"/>
                 <constraint firstItem="DjE-a6-N47" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="l9h-zo-fM9"/>
                 <constraint firstItem="59M-2r-LsT" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="pmI-4O-wj6"/>
                 <constraint firstItem="59M-2r-LsT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qf7-Ju-Rrf"/>

@@ -212,7 +212,7 @@
 "Create a Name" = "Hikayene bir isim ver";
 "Delete device original" = "Orijinalini cihazdan sil";
 "Add to favorites" = "Favorilere ekle";
-"Restore" = "Sosyal Medya Transfer";
+"Restore" = "Telefona Aktar";
 "Back-Up" = "Yedekle";
 "Your last back up was a few seconds ago." = "Son yedeklemen birkaç saniye önce gerçekleşti.";
 "You never backed up your contacts" = "lifebox’ında henüz yedeklenmiş hiçbir kontak bulunmamaktadır.";
@@ -278,7 +278,7 @@
 "You’ve uploaded %@ two days ago!" = "İki gün önce %@ upload ettiniz!";
 "Expand My Storage" = "Depolama Alanımı Yükselt";
 "You are using %85 of your disk space! It’s a great time to expand your storage." = "lifebox saklama alanının %85’ini kullanıyorsun! Alanını genişletmek için harika bir zaman.";
-"Your storage is almost full!" = "lifebox depolama alanın dolmak üzere!";
+"Your storage is almost full!" = "Cihaz depolama alanın dolmak üzere!";
 "Change filter" = "Filter değiştir";
 "Save this photo" = "Kaydet";
 "You can apply this filter and my more to your other picures as well" = "Fotoğrafların için diğer filtreleri de uygulayabilirsiniz.";

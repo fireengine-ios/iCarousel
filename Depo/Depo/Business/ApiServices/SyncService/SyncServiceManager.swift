@@ -282,14 +282,14 @@ extension SyncServiceManager {
     }
     
     private func checkItemsToAppend() {
-        guard let lastChangeTime = lastTimeNewItemsAppended else {
+        guard let lastChangeTime = lastTimeNewItemsAppended, !newItemsToAppend.isEmpty else {
             return
         }
         
         let timeInterval = Date().timeIntervalSince(lastChangeTime)
         
         if timeInterval > NumericConstants.intervalInSecondsBetweenAutoSyncItemsAppending {
-            checkReachabilityAndSettings(reachabilityChanged: false, newItems: !newItemsToAppend.isEmpty)
+            checkReachabilityAndSettings(reachabilityChanged: false, newItems: true)
             newItemsToAppend.removeAll()
         } else {
             let intervalToSyncAfter = Int(NumericConstants.intervalInSecondsBetweenAutoSyncItemsAppending - timeInterval)

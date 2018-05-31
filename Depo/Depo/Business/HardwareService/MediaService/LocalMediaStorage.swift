@@ -23,7 +23,7 @@ struct AssetInfo {
     var name = ""
     var md5: String {
         if !name.isEmpty && size > 0 {
-            return "\(name)\(size)"//String(format: "%@%i", name, size)
+            return "\(name.removeAllPreFileExtentionBracketValues())\(size)"
         }
         return LocalMediaStorage.noneMD5
     }
@@ -913,6 +913,8 @@ class GetImageOperation: Operation {
     
     let targetSize: CGSize
     
+    var requestID: PHImageRequestID?
+    
     init(photoManager: PHImageManager, asset: PHAsset, targetSize: CGSize, callback: @escaping PhotoManagerCallBack) {
         
         self.photoManager = photoManager
@@ -934,11 +936,18 @@ class GetImageOperation: Operation {
         options.deliveryMode = .highQualityFormat
         options.isSynchronous = false
         
-        photoManager.requestImage(for: asset,
+        requestID = photoManager.requestImage(for: asset,
                                   targetSize: targetSize,
                                   contentMode: .aspectFit,
                                   options: options,
                                   resultHandler: callback)
+    }
+    
+    override func cancel() {
+        super.cancel()
+        if let requestID = requestID {
+            photoManager.cancelImageRequest(requestID)
+        }
     }
 }
 
