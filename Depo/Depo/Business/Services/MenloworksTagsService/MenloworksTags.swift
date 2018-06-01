@@ -213,6 +213,12 @@ class MenloworksTags {
         }
     }
     
+    class FirstAutoSyncVideosOff: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.firstAutoSyncVideosOff)
+        }
+    }
+    
     class AutoSyncPhotosViaWifi: MenloworksTag {
         init() {
             super.init(name: NameConstants.autoSyncPhotosViaWifi)
@@ -237,6 +243,12 @@ class MenloworksTags {
         }
     }
     
+    class FirstAutoSyncPhotosOff: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.firstAutoSyncPhotosOff)
+        }
+    }
+    
     class AutoSyncPhotosOff: MenloworksTag {
         init() {
             super.init(name: NameConstants.autoSyncPhotosOff)
@@ -246,6 +258,12 @@ class MenloworksTags {
     class AutoSyncVideosOff: MenloworksTag {
         init() {
             super.init(name: NameConstants.autoSyncVideosOff)
+        }
+    }
+    
+    class AutoSyncOff: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.autoSyncOff)
         }
     }
     

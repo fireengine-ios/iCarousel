@@ -65,7 +65,7 @@ class MenloworksAppEvents {
                 let quotaBytes = quotoInfo.bytes,
                 let usedBytes = quotoInfo.bytesUsed else { return }
             
-            let busyStorage = 1 - Float(usedBytes) / Float(quotaBytes)
+            let busyStorage = Float(usedBytes) / Float(quotaBytes)
             
             MenloworksTagsService.shared.onQuotaStatus(percentageValue: Int(busyStorage * 100))
             

@@ -13,6 +13,7 @@ class MenloworksTagsService {
     
     static let shared = MenloworksTagsService()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
     
     // MARK: - Event methods
     
@@ -131,6 +132,10 @@ class MenloworksTagsService {
             sendFIRStatus()
             sendSubscriptionsStatus()
         }
+        if let isEnabled = defaults?.object(forKey: "isEnabledKey") as? Bool {
+            onTouchIDSettingsChanged(isEnabled)
+        }
+//        onTouchIDSettingsChanged(((defaults?.object(forKey: "isEnabledKey")) != nil))
         
         passcodeStatus(!passcodeStorage.isEmpty)
     }
@@ -287,6 +292,11 @@ class MenloworksTagsService {
         hitTag(tag)
     }
     
+    func onFirstAutosyncVideoOff() {
+        let tag = MenloworksTags.FirstAutoSyncVideosOff()
+        hitTag(tag)
+    }
+    
     func onFirstAutosyncPhotosViaWifi() {
         let tag = MenloworksTags.FirstAutoSyncPhotosViaWifi()
         hitTag(tag)
@@ -294,6 +304,16 @@ class MenloworksTagsService {
     
     func onFirstAutosyncPhotosViaLte() {
         let tag = MenloworksTags.FirstAutoSyncPhotosViaLte()
+        hitTag(tag)
+    }
+    
+    func onFirstAutosyncPhotoOff() {
+        let tag = MenloworksTags.FirstAutoSyncPhotosOff()
+        hitTag(tag)
+    }
+    
+    func onAutoSyncOff() {
+        let tag = MenloworksTags.AutoSyncOff()
         hitTag(tag)
     }
     
