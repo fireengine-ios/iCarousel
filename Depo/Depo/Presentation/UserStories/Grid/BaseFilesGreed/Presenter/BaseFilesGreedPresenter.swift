@@ -206,6 +206,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func getContentWithFail(errorString: String?) {
         view?.stopRefresher()
         dataSource.isPaginationDidEnd = false
+        dataSource.hideLoadingFooter()
+        
         debugPrint("???getContentWithFail()")
         log.debug("BaseFilesGreedPresenter getContentWithFail")
         asyncOperationFail(errorMessage: errorString)

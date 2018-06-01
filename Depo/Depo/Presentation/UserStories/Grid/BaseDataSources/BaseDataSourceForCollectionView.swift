@@ -1141,6 +1141,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
+    func hideLoadingFooter() {
+        guard let footerView =
+            collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: allItems.count - 1)) as? CollectionViewSpinnerFooter else {
+            return
+        }
+        
+        footerView.stopSpinner()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell_ = cell as? CollectionViewCellDataProtocol else {
                 return
