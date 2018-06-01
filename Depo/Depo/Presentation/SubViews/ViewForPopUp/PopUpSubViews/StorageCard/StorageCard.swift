@@ -15,6 +15,8 @@ class StorageCard: BaseView {
     @IBOutlet weak var bottomButton: UIButton!
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var bigButton1: UIButton!
+    @IBOutlet weak var bigButton2: UIButton!
     
     var operationType: OperationType?
     
@@ -60,6 +62,11 @@ class StorageCard: BaseView {
             default:
                 return
             }
+        }
+    }
+    @IBAction func onBigButton() {
+        if let operationType = operationType, operationType == .freeAppSpaceLocalWarning {
+            onBottomButton()
         }
     }
     
