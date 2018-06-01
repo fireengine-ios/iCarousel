@@ -68,11 +68,14 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         
         group.notify(queue: queue) {[weak self] in
             DispatchQueue.main.async {
-                let versionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
-                let packages = subscriptions
+                let versionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
+                var packages: String = ""
+                if subscriptions.count > 0 {
+                    packages = subscriptions
                     .flatMap { $0.subscriptionPlanDisplayName }
                     .joined(separator: ", ")
-                let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "", UIDevice.current.model, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN", "\(quota)", "\(quotaUsed)", packages)
+                }
+                let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "", UIDevice.current.model, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN", quota, quotaUsed, packages)
                 
                 self?.output.asyncOperationSucces()
                 self?.output.languageRequestSended(text: userInfoString)
