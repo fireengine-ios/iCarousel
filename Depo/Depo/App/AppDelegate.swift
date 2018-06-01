@@ -93,7 +93,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         MenloworksAppEvents.onAppLaunch()
-        MenloworksTagsService.shared.passcodeStatus(!passcodeStorage.isEmpty)
         ContactSyncSDK.doPeriodicSync()
         passcodeStorage.systemCallOnScreen = false
         
@@ -241,6 +240,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         log.debug("AppDelegate applicationWillTerminate")
+        
+        AppConfigurator.stopCurio()
         
         if !tokenStorage.isRememberMe {
             SyncServiceManager.shared.stopSync()

@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.18.1.9</string>
+	<string>1.0.18.2.1</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -84,6 +84,13 @@
 				<true/>
 				<key>NSIncludesSubdomains</key>
 				<true/>
+			</dict>
+			<key>http://curio.turkcell.com.tr/api/v2</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
 			</dict>
 		</dict>
 	</dict>

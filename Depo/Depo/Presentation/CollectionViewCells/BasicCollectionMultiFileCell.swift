@@ -126,9 +126,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             switch wrappered.fileType {
             case .folder:
                 if let itemCount = wrappered.childCount {
-                    detailsLabelText = "\(itemCount) \(TextConstants.folderItemsText)"
+                    
+                    detailsLabelText = String(format: TextConstants.folderItemsText, itemCount)
                 } else {
-                    detailsLabelText = "0 \(TextConstants.folderItemsText)"
+                    detailsLabelText = String(format: TextConstants.folderItemsText, 0)
                 }
             case .audio, .video:
                 if let duration = wrappered.duration {

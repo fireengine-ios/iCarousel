@@ -6,237 +6,259 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+//FIXME: Menloworks and Curio should be added to the AnalyticsService
+import Curio_iOS_SDK
+
+
 class MenloworksEventsService {
 
     private init() { }
     
     static let shared = MenloworksEventsService()
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
     // MARK: - Event methods
+    
+    private func mergedHit(event: String) {
+        MPush.hitEvent(event)
+        CurioSDK.shared().sendEvent(event, eventValue: "")
+    }
     
     func onFirstLaunch() {
         let launchedBefore = UserDefaults.standard.bool(forKey: "LifeboxLaunchedBeforeEvent")
         if !launchedBefore {
             UserDefaults.standard.set(true, forKey: "LifeboxLaunchedBeforeEvent")
-            MPush.hitEvent(MenloworksEventsConstants.firstsession)
+            mergedHit(event: MenloworksEventsConstants.firstsession)
         }
     }
     
     func onLaunch() {
-        MPush.hitEvent(MenloworksEventsConstants.newsession)
+        mergedHit(event: MenloworksEventsConstants.newsession)
     }
     
     func onSignUp() {
-        MPush.hitEvent(MenloworksEventsConstants.signupCompleted)
+        mergedHit(event: MenloworksEventsConstants.signupCompleted)
     }
     
     func onLogin() {
-        MPush.hitEvent(MenloworksEventsConstants.loggedinCompleted)
+        onPasscodeSet()
+        mergedHit(event: MenloworksEventsConstants.loggedinCompleted)
     }
     
     func onFirstAutosyncOff() {
-        MPush.hitEvent(MenloworksEventsConstants.firstAutosyncOFF)
+        mergedHit(event: MenloworksEventsConstants.firstAutosyncOFF)
     }
     
     func onAutosyncOff() {
-        MPush.hitEvent(MenloworksEventsConstants.autosyncOFF)
+        mergedHit(event: MenloworksEventsConstants.autosyncOFF)
     }
     
     func onAllFilesOpen() {
-        MPush.hitEvent(MenloworksEventsConstants.allFilesOpen)
+        mergedHit(event: MenloworksEventsConstants.allFilesOpen)
     }
     
     func onPhotosAndVideosOpen() {
-        MPush.hitEvent(MenloworksEventsConstants.photosAndVideosOpen)
+        mergedHit(event: MenloworksEventsConstants.photosAndVideosOpen)
     }
     
     func onMusicOpen() {
-        MPush.hitEvent(MenloworksEventsConstants.musicOpen)
+        mergedHit(event: MenloworksEventsConstants.musicOpen)
     }
     
     func onDocumentsOpen() {
-        MPush.hitEvent(MenloworksEventsConstants.documentsOpen)
+        mergedHit(event: MenloworksEventsConstants.documentsOpen)
     }
     
     func onContactSyncPageOpen() {
-        MPush.hitEvent(MenloworksEventsConstants.contactSyncPageOpen)
+        mergedHit(event: MenloworksEventsConstants.contactSyncPageOpen)
     }
     
     func onContactDownloaded() {
-        MPush.hitEvent(MenloworksEventsConstants.contactDownloaded)
+        mergedHit(event: MenloworksEventsConstants.contactDownloaded)
     }
     
     func onContactUploaded() {
-        MPush.hitEvent(MenloworksEventsConstants.contactUploaded)
+        mergedHit(event: MenloworksEventsConstants.contactUploaded)
     }
     
     func onFavoritesOpen() {
-        MPush.hitEvent(MenloworksEventsConstants.favoritesOpen)
+        mergedHit(event: MenloworksEventsConstants.favoritesOpen)
     }
     
     func onStoryPageOpen() {
-        MPush.hitEvent(MenloworksEventsConstants.storyPageOpen)
+        mergedHit(event: MenloworksEventsConstants.storyPageOpen)
     }
     
     func onStoryCreated() {
-        MPush.hitEvent(MenloworksEventsConstants.storyCreated)
+        mergedHit(event: MenloworksEventsConstants.storyCreated)
     }
     
     func onPackagesOpen() {
-        MPush.hitEvent(MenloworksEventsConstants.packagesOpen)
+        mergedHit(event: MenloworksEventsConstants.packagesOpen)
     }
     
     func onPreferencesOpen() {
-        MPush.hitEvent(MenloworksEventsConstants.preferencesOpen)
+        mergedHit(event: MenloworksEventsConstants.preferencesOpen)
     }
     
     func onSubscriptionClicked(_ type: MenloworksSubscriptionStorage) {
         switch type {
         case .fiftyGB:
-            MPush.hitEvent(MenloworksEventsConstants.fiftyGBClicked)
+            mergedHit(event: MenloworksEventsConstants.fiftyGBClicked)
         case .fiveHundredGB:
-            MPush.hitEvent(MenloworksEventsConstants.fiveHundredGBClicked)
+            mergedHit(event: MenloworksEventsConstants.fiveHundredGBClicked)
         case .twoThousandFiveHundredGB:
-            MPush.hitEvent(MenloworksEventsConstants.twoThousandFiveHundredGBClicked)
+            mergedHit(event: MenloworksEventsConstants.twoThousandFiveHundredGBClicked)
         }
     }
     
     func onSubscriptionPurchaseCompleted(_ type: MenloworksSubscriptionProductID) {
         switch type {
         case .fiftyGbID:
-            MPush.hitEvent(MenloworksEventsConstants.fiftyGBPurchasedStatus)
+            mergedHit(event: MenloworksEventsConstants.fiftyGBPurchasedStatus)
         case .fiveHundredGbID:
-            MPush.hitEvent(MenloworksEventsConstants.fiveHundredGBPurchasedStatus)
+            mergedHit(event: MenloworksEventsConstants.fiveHundredGBPurchasedStatus)
         case .twoThousandFiveHundredGbID:
-            MPush.hitEvent(MenloworksEventsConstants.twoThousandFiveHundredGBPurchasedStatus)
+            mergedHit(event: MenloworksEventsConstants.twoThousandFiveHundredGBPurchasedStatus)
         }
     }
     
     func onFileDeleted() {
-        MPush.hitEvent(MenloworksEventsConstants.fileDeleted)
+        mergedHit(event: MenloworksEventsConstants.fileDeleted)
     }
     
     func onPromocodeActivated() {
-        MPush.hitEvent(MenloworksEventsConstants.promocodeActivated)
+        mergedHit(event: MenloworksEventsConstants.promocodeActivated)
     }
     
     func onSocialMediaPageOpen() {
-        MPush.hitEvent(MenloworksEventsConstants.socialMediaPageOpen)
+        mergedHit(event: MenloworksEventsConstants.socialMediaPageOpen)
     }
     
     func onInstagramConnected() {
-        MPush.hitEvent(MenloworksEventsConstants.instagramConnected)
+        mergedHit(event: MenloworksEventsConstants.instagramConnected)
     }
     
     func onFacebookConnected() {
-        MPush.hitEvent(MenloworksEventsConstants.facebookConnected)
+        mergedHit(event: MenloworksEventsConstants.facebookConnected)
     }
     
     func onLoggedOut() {
-        MPush.hitEvent(MenloworksEventsConstants.loggedOut)
+        mergedHit(event: MenloworksEventsConstants.loggedOut)
     }
     
     func onFaceImageRecognitionOn() {
-        MPush.hitEvent(MenloworksEventsConstants.faceImageRecognitionOn)
+        mergedHit(event: MenloworksEventsConstants.faceImageRecognitionOn)
     }
     
     func onFaceImageRecognitionOff() {
-        MPush.hitEvent(MenloworksEventsConstants.faceImageRecognitionOff)
+        mergedHit(event: MenloworksEventsConstants.faceImageRecognitionOff)
     }
     
     func onPasscodeSet() {
-        MPush.hitEvent(MenloworksEventsConstants.passcodeSet)
+        mergedHit(event: MenloworksEventsConstants.passcodeSet)
     }
     
     func onTouchIDSet() {
-        MPush.hitEvent(MenloworksEventsConstants.touchIDSet)
+        mergedHit(event: MenloworksEventsConstants.touchIDSet)
     }
     
     func onTurkcellPasswordSet() {
-        MPush.hitEvent(MenloworksEventsConstants.turkcellPasswordSet)
+        mergedHit(event: MenloworksEventsConstants.turkcellPasswordSet)
     }
     
     func onAutoLoginSet() {
-        MPush.hitEvent(MenloworksEventsConstants.autoLoginSet)
+        mergedHit(event: MenloworksEventsConstants.autoLoginSet)
     }
     
     func onRemoveFromAlbumClicked() {
-        MPush.hitEvent(MenloworksEventsConstants.removeFromAlbumClicked)
+        mergedHit(event: MenloworksEventsConstants.removeFromAlbumClicked)
     }
     
     func onPrintClicked() {
-        MPush.hitEvent(MenloworksEventsConstants.cellographClicked)
+        mergedHit(event: MenloworksEventsConstants.cellographClicked)
     }
     
     func onSyncClicked() {
-        MPush.hitEvent(MenloworksEventsConstants.syncClicked)
+        mergedHit(event: MenloworksEventsConstants.syncClicked)
     }
     
     func onDownloadClicked() {
-        MPush.hitEvent(MenloworksEventsConstants.downloadClicked)
+        mergedHit(event: MenloworksEventsConstants.downloadClicked)
     }
     
     func onDeleteClicked() {
-        MPush.hitEvent(MenloworksEventsConstants.deleteClicked)
+        mergedHit(event: MenloworksEventsConstants.deleteClicked)
     }
     
     func onShareClicked() {
-        MPush.hitEvent(MenloworksEventsConstants.shareClicked)
+        mergedHit(event: MenloworksEventsConstants.shareClicked)
     }
     
     func onAddToFavoritesClicked() {
-        MPush.hitEvent(MenloworksEventsConstants.addToFavoritesClicked)
+        mergedHit(event: MenloworksEventsConstants.addToFavoritesClicked)
     }
     
     func onApporveEulaPageClicked() {
-        MPush.hitEvent(MenloworksEventsConstants.apporvedEulaPage)
+        mergedHit(event: MenloworksEventsConstants.apporvedEulaPage)
     }
     
     func onEmailChanged() {
-        MPush.hitEvent(MenloworksEventsConstants.emailChanged)
+        mergedHit(event: MenloworksEventsConstants.emailChanged)
     }
     
     func onFacebookTransfered() {
-        MPush.hitEvent(MenloworksEventsConstants.facebookTransfered)
+        mergedHit(event: MenloworksEventsConstants.facebookTransfered)
     }
     
     func onInstagramTransfered() {
-        MPush.hitEvent(MenloworksEventsConstants.instagramTransfered)
+        mergedHit(event: MenloworksEventsConstants.instagramTransfered)
     }
     
     func onDropboxTransfered() {
-        MPush.hitEvent(MenloworksEventsConstants.dropboxTransfered)
+        mergedHit(event: MenloworksEventsConstants.dropboxTransfered)
     }
     
     func onDeviceStorageExceeded80PercStatus() {
-        MPush.hitEvent(MenloworksEventsConstants.deviceStorageExceeded80Perc)
+        mergedHit(event: MenloworksEventsConstants.deviceStorageExceeded80Perc)
     }
     
     func onDeviceStorageExceeded90PercStatus() {
-        MPush.hitEvent(MenloworksEventsConstants.deviceStorageExceeded90Perc)
+        mergedHit(event: MenloworksEventsConstants.deviceStorageExceeded90Perc)
     }
     
     func onQuotaExceeded80PercStatus() {
-        MPush.hitEvent(MenloworksEventsConstants.quotaExceeded80PercStatus)
+        mergedHit(event: MenloworksEventsConstants.quotaExceeded80PercStatus)
     }
     
     func onQuotaExceeded90PercStatus() {
-        MPush.hitEvent(MenloworksEventsConstants.quotaExceeded90PercStatus)
+        mergedHit(event: MenloworksEventsConstants.quotaExceeded90PercStatus)
     }
     
     func onQuotaFullStatus() {
-        MPush.hitEvent(MenloworksEventsConstants.quotaFullStatus)
+        mergedHit(event: MenloworksEventsConstants.quotaFullStatus)
     }
     
     func onFiftyGBPurchasedStatus() {
-        MPush.hitEvent(MenloworksEventsConstants.fiftyGBPurchasedStatus)
+        mergedHit(event: MenloworksEventsConstants.fiftyGBPurchasedStatus)
     }
     
     func onFiveHundredGBPurchasedStatus() {
-        MPush.hitEvent(MenloworksEventsConstants.fiveHundredGBPurchasedStatus)
+        mergedHit(event: MenloworksEventsConstants.fiveHundredGBPurchasedStatus)
     }
     
     func onTwoThousandFiveHundredGBPurchasedStatus() {
-        MPush.hitEvent(MenloworksEventsConstants.twoThousandFiveHundredGBPurchasedStatus)
+        mergedHit(event: MenloworksEventsConstants.twoThousandFiveHundredGBPurchasedStatus)
+    }
+    
+    func onDownloadItem(with type: String, success: Bool) {
+        let eventName = String(format: MenloworksEventsConstants.downloadedItemFormat, type)
+        CurioSDK.shared().sendEvent(eventName, eventValue: success ? "Success" : "Fail")
+    }
+    
+    func onShareItem(with type: FileType, toApp: String) {
+        let itemType = (type == .image) ? "Photo" : "Video"
+        let eventName = String(format: MenloworksEventsConstants.sharedItemFormat, itemType, toApp)
+        CurioSDK.shared().sendEvent(eventName, eventValue: "Success")
     }
 }

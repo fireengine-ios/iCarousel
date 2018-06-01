@@ -12,10 +12,12 @@ class CollectionViewSpinnerFooter: UICollectionReusableView {
     
     func startSpinner() {
         spinner.startAnimating()
+        self.isHidden = false
     }
     
     func stopSpinner() {
         spinner.stopAnimating()
+        self.isHidden = true
     }
     
 }

@@ -22,6 +22,10 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     
     var isUpdating: Bool = false
     
+    private var getNextPageRetryCounter: Int = 0
+    
+    private let numberOfRetries: Int = 3
+    
     init(remoteItems: RemoteItemsService) {
         self.remoteItems = remoteItems
     }
@@ -41,7 +45,9 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             return
         }
         isUpdating = true
+        getNextPageRetryCounter += 1
         remoteItems.reloadItems(sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] items in
+            self?.getNextPageRetryCounter = 0
             DispatchQueue.main.async {
                 log.debug("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems success")
                 
@@ -63,9 +69,19 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             }
             }, fail: { [weak self] in
                 log.debug("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems fail")
+                guard let `self` = self else {
+                    return
+                }
+                if self.getNextPageRetryCounter >= self.numberOfRetries {
+                    self.getNextPageRetryCounter = 0
+                    self.isUpdating = false
+                    self.output.getContentWithFail(errorString: nil)
+                } else {
+                    self.isUpdating = false
+                    self.remoteItems.cancellAllRequests()
+                    self.reloadItems(searchText, sortBy: sortBy, sortOrder: sortOrder, newFieldValue: newFieldValue)
+                }
 
-                self?.isUpdating = false
-                self?.output.getContentWithFail(errorString: nil)//asyncOperationFail(errorMessage: nil)
             },
                newFieldValue: newFieldValue)
     }
@@ -77,9 +93,11 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             return
         }
         isUpdating = true
+        getNextPageRetryCounter += 1
         remoteItems.nextItems(sortBy: sortBy,
                               sortOrder: sortOrder,
                               success: { [weak self] items in
+                self?.getNextPageRetryCounter = 0
                 DispatchQueue.main.async {
                     log.debug("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems success")
 
@@ -96,9 +114,18 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                 }
             }, fail: { [weak self] in
                 log.debug("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems fail")
-
-                self?.isUpdating = false
-                self?.output.asyncOperationFail(errorMessage: nil)
+                guard let `self` = self else {
+                    return
+                }
+                if self.getNextPageRetryCounter >= self.numberOfRetries {
+                    self.getNextPageRetryCounter = 0
+                    self.isUpdating = false
+                    self.output.getContentWithFail(errorString: nil)
+                } else {
+                    self.isUpdating = false
+                    self.remoteItems.cancellAllRequests()
+                    self.nextItems(sortBy: sortBy, sortOrder: sortOrder, newFieldValue: newFieldValue)
+                }
         }, newFieldValue: newFieldValue)
     }
     

@@ -106,14 +106,23 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private func shareFiles(filesForDownload: [FileForDownload], sourceRect: CGRect?) {
         let downloader = FilesDownloader()
         output?.operationStarted(type: .share)
-        
         downloader.getFiles(filesForDownload: filesForDownload, response: { [weak self] fileURLs, directoryURL in
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: .share)
                 
                 let activityVC = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
                 
-                activityVC.completionWithItemsHandler = { _, _, _, _ in
+                activityVC.completionWithItemsHandler = { activityType, completed, _, _ in
+                    guard
+                        completed,
+                        let activityTypeString = (activityType as NSString?) as String?,
+                        let fileType = filesForDownload.first?.type
+                        else {
+                            return
+                    }
+                    
+                    MenloworksEventsService.shared.onShareItem(with: fileType, toApp: activityTypeString.knownAppName())
+                    
                     do {
                         try FileManager.default.removeItem(at: directoryURL)
                     } catch {
@@ -144,13 +153,24 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func shareViaLink(sourceRect: CGRect?) {
         output?.operationStarted(type: .share)
+        let fileType = sharingItems.first?.fileType
         fileService.share(sharedFiles: sharingItems, success: { [weak self] url in
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: .share)
                 
                 let objectsToShare = [url]
                 let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                activityVC.completionWithItemsHandler = { activityType, completed, _, _ in
+                    guard
+                        completed,
+                        let activityTypeString = (activityType as NSString?) as String?,
+                        let fileType = fileType
+                    else {
+                        return
+                    }
                 
+                    MenloworksEventsService.shared.onShareItem(with: fileType, toApp: activityTypeString.knownAppName())
+                }
                 if let tempoRect = sourceRect {//if ipad
                     activityVC.popoverPresentationController?.sourceRect = tempoRect
                 }

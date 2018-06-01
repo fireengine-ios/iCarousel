@@ -158,7 +158,6 @@ class SyncServiceManager {
             guard self.settings.isAutoSyncEnabled else {
                 self.stopSync()
                 CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
-                MenloworksEventsService.shared.onAutosyncOff()
                 return
             }
             

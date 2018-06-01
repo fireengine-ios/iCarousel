@@ -153,12 +153,16 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
 extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
     func onValueChanged(model: AutoSyncModel) {
         cellModels[model.cellType] = model
+        
+        
 
         if model.cellType == .headerSlider {
             if model.isSelected {
                 autoSyncSettings?.isAutoSyncOptionEnabled = true
                 delegate?.enableAutoSync()
             } else {
+                MenloworksTagsService.shared.onAutoSyncOff()
+                MenloworksEventsService.shared.onAutosyncOff()
                 forceDisableAutoSync()
                 reloadTableView()
             }
@@ -176,12 +180,16 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
                 MenloworksTagsService.shared.onAutosyncPhotosViaWifi()
             } else if setting.option == .wifiAndCellular {
                 MenloworksTagsService.shared.onAutosyncPhotosViaLte()
+            } else if setting.option == .never {
+                MenloworksTagsService.shared.onAutosyncPhotosOff()
             }
         } else {
             if setting.option == .wifiOnly {
                 MenloworksTagsService.shared.onAutosyncVideoViaWifi()
             } else if setting.option == .wifiAndCellular {
                 MenloworksTagsService.shared.onAutosyncVideoViaLte()
+            } else if setting.option == .never {
+                MenloworksTagsService.shared.onAutosyncVideosOff()
             }
         }
     

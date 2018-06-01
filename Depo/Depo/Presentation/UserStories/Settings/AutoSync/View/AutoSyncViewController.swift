@@ -150,6 +150,8 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
             } else if photoOption == .wifiOnly {
                 MenloworksTagsService.shared.onFirstAutosyncPhotosViaWifi()
                 MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: true)
+            } else if photoOption == .never {
+                MenloworksTagsService.shared.onFirstAutosyncPhotoOff()
             }
             
             if videoOption == .wifiAndCellular {
@@ -158,12 +160,11 @@ class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSou
             } else if videoOption == .wifiOnly {
                 MenloworksTagsService.shared.onFirstAutosyncVideoViaWifi()
                 MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi:true)
+            } else if videoOption == .never {
+                MenloworksTagsService.shared.onFirstAutosyncVideoOff()
             }
-            
         }
-        
     }
-    
     
     // MARK: AutoSyncViewInput
     func setupInitialState() {
