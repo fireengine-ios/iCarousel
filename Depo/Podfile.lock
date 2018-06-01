@@ -12,6 +12,7 @@ PODS:
   - CircleProgressBar (0.32)
   - Crashlytics (3.10.1):
     - Fabric (~> 1.7.5)
+  - Curio_iOS_SDK (1.2.4)
   - Fabric (1.7.6)
   - FBSDKCoreKit (4.33.0):
     - Bolts (~> 1.7)
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.5)
   - CircleProgressBar (~> 0.32)
   - Crashlytics
+  - Curio_iOS_SDK (from `https://github.com/KonstDevelop/Curio_iOS_SDK.git`, branch `pod-issue`)
   - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -100,10 +102,16 @@ SPEC REPOS:
     - XYPieChart
 
 EXTERNAL SOURCES:
+  Curio_iOS_SDK:
+    :branch: pod-issue
+    :git: https://github.com/KonstDevelop/Curio_iOS_SDK.git
   SimpleExif:
     :git: https://github.com/bonyadmitr/SimpleExif.git
 
 CHECKOUT OPTIONS:
+  Curio_iOS_SDK:
+    :commit: 2f2d60dab8974284f02f1864e0fa75e26ae7b864
+    :git: https://github.com/KonstDevelop/Curio_iOS_SDK.git
   SimpleExif:
     :commit: ce65163d7bb61a3fe866b701f3464698f37208cf
     :git: https://github.com/bonyadmitr/SimpleExif.git
@@ -114,6 +122,7 @@ SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   CircleProgressBar: 3920079be5224b62b3d9ed6eeb23ac01c835b681
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Curio_iOS_SDK: 5d2231a8abab8f8c3f076c33a4eee5d3b6072c0c
   Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
   FBSDKCoreKit: 572b047a7e029bc44542bcf8a59414e7ff2b543e
   FBSDKLoginKit: 88cb456349cfb3b554427ce4f8b43729d85dfb40
@@ -135,6 +144,6 @@ SPEC CHECKSUMS:
   XCGLogger: c9601cae9a8912de34a58666ba931ed3d624dd31
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
 
-PODFILE CHECKSUM: d20535fd022f610d6781b3bfae4f5a8d61c977ce
+PODFILE CHECKSUM: 471d488f8859f684c6eff0c6bc41cd93d1620301
 
 COCOAPODS: 1.5.2
