@@ -450,7 +450,7 @@
 "Turkcell Password" = "Turkcell Password";
 "Login Settings" = "Login Settings";
 "Folder is Empty" = "Folder is Empty";
-"Folder Items" = "Items";
+"Folder Items" = "Items: %d";
 "Contact Backup" = "Contact Backup";
 "Your last contact update was %@ months ago!" = "Your last contact update was %@ months ago!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts.";
