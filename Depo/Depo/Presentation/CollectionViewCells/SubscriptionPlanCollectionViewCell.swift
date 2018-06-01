@@ -39,7 +39,7 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         if type == .all {
             return 255
         } else {
-            return 220
+            return 240
         }
     }
     
