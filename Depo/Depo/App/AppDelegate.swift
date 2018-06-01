@@ -242,6 +242,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         log.debug("AppDelegate applicationWillTerminate")
         
+        AppConfigurator.stopCurio()
+        
         if !tokenStorage.isRememberMe {
             SyncServiceManager.shared.stopSync()
             AutoSyncDataStorage().clear()

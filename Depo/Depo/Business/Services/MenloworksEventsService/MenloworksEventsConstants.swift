@@ -7,6 +7,7 @@
 //
 
 struct MenloworksEventsConstants {
+    private init() {}
     static let firstsession = "Firstsession"
     static let newsession = "Newsession"
     static let signupCompleted = "Signup_completed"
@@ -60,4 +61,6 @@ struct MenloworksEventsConstants {
     static let fiftyGBPurchasedStatus = "Satınalındı50GB"
     static let fiveHundredGBPurchasedStatus = "Satınalındı500GB"
     static let twoThousandFiveHundredGBPurchasedStatus = "Satınalındı25TB"
+    static let downloadedItemFormat = "Download>%@"
+    static let sharedItemFormat = "Share>%@>%@"
 }

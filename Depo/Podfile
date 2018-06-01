@@ -16,6 +16,7 @@ def core_pods
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
+  pod 'Curio_iOS_SDK', :git => 'https://github.com/KonstDevelop/Curio_iOS_SDK.git', :branch => 'pod-issue'
 
   pod 'SDWebImage'
   pod 'GoogleConversionTracking'
