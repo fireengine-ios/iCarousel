@@ -24,7 +24,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     private func showLandingPagesIfNeeded() {
-        if !Device.isIpad, storageVars.isNewAppVersionFirstLaunch {
+        if storageVars.isNewAppVersionFirstLaunch {
             router.navigateToLandingPages(isTurkCell: false)
         } else {
             router.navigateToOnboarding()

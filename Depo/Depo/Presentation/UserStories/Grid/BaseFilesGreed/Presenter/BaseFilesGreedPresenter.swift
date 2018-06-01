@@ -206,6 +206,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func getContentWithFail(errorString: String?) {
         view?.stopRefresher()
         dataSource.isPaginationDidEnd = false
+        dataSource.hideLoadingFooter()
+        
         debugPrint("???getContentWithFail()")
         log.debug("BaseFilesGreedPresenter getContentWithFail")
         asyncOperationFail(errorMessage: errorString)
@@ -496,9 +498,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func updateThreeDotsButton() {
-        if !(getRemoteItemsService() is AlbumDetailService),
-            !(getRemoteItemsService() is PeopleItemsService),
-            view != nil,
+        if view != nil,
             !dataSource.isSelectionStateActive {//FIXME: we need solve memory leak, something holds presenter in memory
             view.setThreeDotsMenu(active: !needShowNoFileView())
         }

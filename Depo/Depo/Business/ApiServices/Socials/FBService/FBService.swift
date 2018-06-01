@@ -32,7 +32,7 @@ class FBService: BaseRequestService {
                 fail?(.error(error))
             } else if let result = result {
                 if result.isCancelled {
-                    fail?(.string("FB Login canceled"))
+                    fail?(.string(TextConstants.NotLocalized.facebookLoginCanceled))
                 } else {
                     success?(result.token.tokenString)
                 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98Q-sx-Vlb">
-                    <rect key="frame" x="150" y="14" width="18" height="18"/>
+                    <rect key="frame" x="150.5" y="14" width="18" height="18"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="18" id="fzX-kt-3ec"/>
                         <constraint firstAttribute="height" constant="18" id="yzu-3e-xcu"/>
@@ -27,8 +27,8 @@
                         <action selector="onCheckBox:" destination="iN0-l3-epB" eventType="touchUpInside" id="hAA-4p-f6S"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show only synced items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rh4-n8-JyH">
-                    <rect key="frame" x="176" y="12" width="185" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show only synced items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rh4-n8-JyH">
+                    <rect key="frame" x="176.5" y="12" width="184.5" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -39,6 +39,7 @@
                 <constraint firstAttribute="trailing" secondItem="rh4-n8-JyH" secondAttribute="trailing" constant="14" id="7VS-MH-uuK"/>
                 <constraint firstItem="rh4-n8-JyH" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="EP5-dm-XXF"/>
                 <constraint firstItem="rh4-n8-JyH" firstAttribute="centerY" secondItem="98Q-sx-Vlb" secondAttribute="centerY" id="bI5-mD-Vh3"/>
+                <constraint firstItem="98Q-sx-Vlb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="o7b-ch-fXS"/>
                 <constraint firstItem="rh4-n8-JyH" firstAttribute="leading" secondItem="98Q-sx-Vlb" secondAttribute="trailing" constant="8" id="zAb-YY-Xhd"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

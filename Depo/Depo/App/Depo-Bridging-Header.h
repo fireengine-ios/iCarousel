@@ -4,7 +4,6 @@
 
 #if MAIN_APP
 
-#import <JDStatusBarNotification/JDStatusBarNotification.h>
 #import <MPush/MPush.h>
 
 #endif

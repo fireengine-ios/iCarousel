@@ -11,6 +11,8 @@ import UIKit
 final class PackagesViewController: BaseViewController {
     var output: PackagesViewOutput!
     
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
     @IBOutlet weak private var collectionView: ResizableCollectionView!
     @IBOutlet weak private var promoView: PromoView!
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
@@ -47,6 +49,8 @@ final class PackagesViewController: BaseViewController {
         policyTextView.text = ""
         
         output.viewIsReady()
+        
+        descriptionLabel.text = TextConstants.descriptionLabelText
         
         MenloworksAppEvents.onPackagesOpen()
     }

@@ -82,12 +82,12 @@
 "%ld documents" = "%ld belge";
 "%ld songs" = "%ld şarkı";
 "%ld videos" = "%ld video";
-"%ld photos" = "%ld foroğraf";
+"%ld photos" = "%ld fotoğraf";
 "Failed" = "Başarısız oldu";
 "Refreshing..." = "Yenileniyor...";
 "Release to refresh" = "Yenilemek için bırak";
 "My Activity Timeline" = "Son Aktiviteler";
-"file(s)" = "Dosya(lar)";
+"file(s)" = "öğe";
 "My Stream" = "Akıllı Albümlerim";
 "You have free space for %d more items." = "Cihazının depolama alanını boşaltmak için cihazından %d öğe silindi";
 "Delete" = "Sil";
@@ -140,7 +140,7 @@
 "There are some duplicated items both in your device and lifebox" = "Hem cihazında, hem de lifebox’ında yer alan öğelerin var. Cihazında olanları silerek yeni anılarına yer aç!  ";
 "Operation is complete" = "İşlem tamamlandı";
 "Download is complete" = "İndirme tamamlandı";
-"Deleting is complete" = "Slime işlemi tamamlandı.";
+"Deleting is complete" = "Silme işlemi tamamlandı.";
 "Downloading files" = "Dosyalar indiriliyor";
 "Uploading files over" = "%@ ile dosyalar yedekleniyor";
 "Syncing files over" = "%@ ile dosyalar yedekleniyor";
@@ -202,7 +202,7 @@
 "You did not choose music for your story" = "Hikayen için müzik seçmedin";
 "Fail while adding to album" = "Albüme eklerken hata meydana geldi";
 "Story not created" = "Hikaye oluşturulamadı.";
-"Story created" = "Hikaye oluşturuldu.";
+"Story created" = "Hikayeni hazırlıyoruz. Hazır olduğunda Videolar albümünde bulabilirsin.";
 "Sorry, but story photos should not be empty" = "Lütfen en az bir fotoğraf veya video seçin";
 "Please choose %d files at most" = "Lütfen en fazla %d fotoğraf veya video seçin";
 "Continue" = "Devam et";
@@ -305,7 +305,7 @@
 "Size" = "Boyutlandır";
 "Newest" = "En yeni";
 "Oldest" = "En eski";
-"Name (Z-A)" = "Adı (Z-A)";
+"Name (Z-A)" = "İsim (Z-A)";
 "Name (A-Z)" = "İsim (A-Z)";
 "Grid" = "Izgara";
 "List" = "Liste";
@@ -355,8 +355,8 @@
 "Mobile Data" = "Mobil Veri";
 "Wi-fi" = "Wi-Fi";
 "Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifebox, fotoğraf ve videolarını otomatik olarak güvenle yedekler. Fotoğraf ve videolarını anında güvene almak için bu özelliği aktif hale getirmek ister misin?";
-"You have to fill in a password" = "Şifrenizi girmeniz gerekiyor";
-"You have to fill in your mail or GSM Number" = "e-mail adresinizi veya telefon numaranızı girmeniz gerekiyor";
+"You have to fill in a password" = "Şifreni girmelisin";
+"You have to fill in your mail or GSM Number" = "e-mailini veya telefon numaranı girmelisin";
 "Password" = "Şifre";
 "E-Mail or GSM Number" = "E-Posta veya Telefon Numarası";
 "Remember my credentials" = "Şifremi hatırla";
@@ -638,3 +638,8 @@
 "download_error_unsupported_extension" = "Bu dosya tipi için indirme özelliği desteklenmiyor.";
 "Show only synced items" = "Sadece yedeklenmiş öğeleri göster";
 "Your lifebox storage is almost full!" = "lifebox depolama alanın neredeyse dolu!";
+"This edited photo will be saved as a new photo in your device gallery" = "Düzenlediğiniz fotoğraf, cihaz galerinize yeni bir fotoğraf olarak kaydedilecektir.";
+"We couldn’t find any place on your Lifebox yet." = "Henüz bir yer bulamadık";
+"*Average figure. Total number of documents depends on the size of each document." = "*Ortalama rakam. Belgelerin toplam sayısı her belgenin büyüklüğüne bağlıdır.";
+"We couldn’t find anything on your Lifebox yet." = "Henüz bir nesne bulamadık";
+"Expiration Date: %@" = "Bitiş Tarihi: %@";

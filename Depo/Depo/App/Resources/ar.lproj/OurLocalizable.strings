@@ -642,3 +642,8 @@
 "download_error_unsupported_extension" = "التنزيل غير معتمد لهذا النوع من الملفات";
 "Show only synced items" = "إظهار العناصر التي تمت مزامنتها فقط";
 "Your lifebox storage is almost full!" = "أوشكت مساحة التخزين على الامتلاء!";
+"This edited photo will be saved as a new photo in your device gallery" = "سيتم حفظ هذه الصورة التي تم تعديلها كصورة جديدة في معرض جهازك.";
+"We couldn’t find any place on your Lifebox yet." = "لم يتم العثور بعد على أي مكان في لايف بوكس";
+"*Average figure. Total number of documents depends on the size of each document." = "يعتمد العدد الإجمالي للمستندات على حجم كل منها.";
+"We couldn’t find anything on your Lifebox yet." = "لم يتم العثور بعد على أي شيء في لايف بوكس";
+"Expiration Date: %@" = "تاريخ إنتهاء الصلاحية: %@";

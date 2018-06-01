@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -27,7 +27,7 @@
                 <outlet property="importFacebookLabel" destination="VPI-Qd-fe0" id="5qC-iX-FXu"/>
                 <outlet property="importFacebookSwitch" destination="hcd-ne-ugE" id="tW0-TB-7eP"/>
                 <outlet property="importInstagramLabel" destination="LyN-rW-KDA" id="QUM-IQ-XYm"/>
-                <outlet property="importInstagramSwitch" destination="KXA-kD-OLy" id="IJc-Dw-VRy"/>
+                <outlet property="importInstagramSwitch" destination="ZSf-EF-Ucn" id="ywC-z5-Cqb"/>
                 <outlet property="subtitleLabel" destination="Zfm-OS-iBM" id="PEp-jP-tlr"/>
                 <outlet property="view" destination="iN0-l3-epB" id="dnh-F2-y1c"/>
             </connections>
@@ -131,8 +131,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lug-sc-2GG">
                     <rect key="frame" x="29" y="188.5" width="326" height="31"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="27s-Lf-hqu">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="27s-Lf-hqu">
                             <rect key="frame" x="0.0" y="4.5" width="22" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import From Instagram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyN-rW-KDA">
                             <rect key="frame" x="36" y="5" width="231" height="21"/>
@@ -140,23 +141,21 @@
                             <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KXA-kD-OLy">
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZSf-EF-Ucn">
                             <rect key="frame" x="277" y="0.0" width="51" height="31"/>
                             <connections>
-                                <action selector="importFromInstagramSwitchValueChanged:" destination="-1" eventType="valueChanged" id="nEO-X4-HbT"/>
+                                <action selector="importFromInstagramSwitchValueChanged:" destination="-1" eventType="touchUpInside" id="l3V-Th-2M5"/>
                             </connections>
                         </switch>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="KXA-kD-OLy" firstAttribute="leading" secondItem="LyN-rW-KDA" secondAttribute="trailing" constant="10" id="9BR-PZ-LE3"/>
-                        <constraint firstItem="27s-Lf-hqu" firstAttribute="centerY" secondItem="lug-sc-2GG" secondAttribute="centerY" id="BB2-Q0-KzC"/>
-                        <constraint firstAttribute="height" constant="31" id="E1q-L9-ejB"/>
-                        <constraint firstAttribute="trailing" secondItem="KXA-kD-OLy" secondAttribute="trailing" id="GpJ-yN-tHl"/>
-                        <constraint firstItem="KXA-kD-OLy" firstAttribute="centerY" secondItem="lug-sc-2GG" secondAttribute="centerY" id="g4H-06-oHa"/>
-                        <constraint firstItem="LyN-rW-KDA" firstAttribute="leading" secondItem="lug-sc-2GG" secondAttribute="leading" constant="36" id="pzz-oe-K2g"/>
-                        <constraint firstItem="LyN-rW-KDA" firstAttribute="centerY" secondItem="lug-sc-2GG" secondAttribute="centerY" id="tfQ-I8-XcG"/>
-                        <constraint firstItem="27s-Lf-hqu" firstAttribute="leading" secondItem="lug-sc-2GG" secondAttribute="leading" id="vfg-4J-mFQ"/>
+                        <constraint firstItem="ZSf-EF-Ucn" firstAttribute="top" secondItem="lug-sc-2GG" secondAttribute="top" id="2pR-Cx-DJG"/>
+                        <constraint firstAttribute="bottom" secondItem="ZSf-EF-Ucn" secondAttribute="bottom" id="UNq-gi-Lwa"/>
+                        <constraint firstItem="LyN-rW-KDA" firstAttribute="centerY" secondItem="lug-sc-2GG" secondAttribute="centerY" id="YQ9-aW-e5C"/>
+                        <constraint firstAttribute="trailing" secondItem="ZSf-EF-Ucn" secondAttribute="trailing" id="rf7-iM-mow"/>
+                        <constraint firstItem="LyN-rW-KDA" firstAttribute="leading" secondItem="lug-sc-2GG" secondAttribute="leading" constant="36" id="u7l-cv-smU"/>
+                        <constraint firstItem="ZSf-EF-Ucn" firstAttribute="leading" secondItem="LyN-rW-KDA" secondAttribute="trailing" constant="10" id="yA5-tJ-W02"/>
+                        <constraint firstAttribute="height" constant="31" id="yhe-ss-bNk"/>
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9py-wk-Ufk">
@@ -194,20 +193,20 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="9py-wk-Ufk" firstAttribute="trailing" secondItem="ZVn-PT-4L8" secondAttribute="trailing" id="022-iO-dJ7"/>
-                <constraint firstItem="Eqk-Rd-19j" firstAttribute="trailing" secondItem="ZVn-PT-4L8" secondAttribute="trailing" id="4Xv-PB-3Jx"/>
                 <constraint firstAttribute="trailing" secondItem="Zfm-OS-iBM" secondAttribute="trailing" constant="20" id="8K6-5q-Ch6"/>
-                <constraint firstItem="lug-sc-2GG" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" id="9IC-dG-CNi"/>
                 <constraint firstItem="Zfm-OS-iBM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="A2M-Ei-0Wr"/>
-                <constraint firstItem="lug-sc-2GG" firstAttribute="top" secondItem="Eqk-Rd-19j" secondAttribute="bottom" constant="22" id="AVw-Oy-VjU"/>
-                <constraint firstItem="Eqk-Rd-19j" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" id="Mqp-7I-T0p"/>
                 <constraint firstItem="Eqk-Rd-19j" firstAttribute="top" secondItem="ZVn-PT-4L8" secondAttribute="bottom" constant="10" id="NHY-ta-dr5"/>
-                <constraint firstItem="lug-sc-2GG" firstAttribute="trailing" secondItem="ZVn-PT-4L8" secondAttribute="trailing" id="QUR-9N-8cg"/>
+                <constraint firstItem="Eqk-Rd-19j" firstAttribute="trailing" secondItem="ZVn-PT-4L8" secondAttribute="trailing" id="Ok6-5E-3mB"/>
+                <constraint firstItem="Eqk-Rd-19j" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" id="QIs-6d-5bA"/>
                 <constraint firstItem="Zfm-OS-iBM" firstAttribute="top" secondItem="ChP-yJ-OMc" secondAttribute="top" constant="20" id="SdZ-tq-Uwo"/>
+                <constraint firstItem="lug-sc-2GG" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" id="TBx-cF-3Tm"/>
+                <constraint firstItem="9py-wk-Ufk" firstAttribute="top" secondItem="lug-sc-2GG" secondAttribute="bottom" constant="22" id="cIJ-xa-lLA"/>
                 <constraint firstItem="9py-wk-Ufk" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" id="cwa-tx-oy9"/>
                 <constraint firstAttribute="trailing" secondItem="ZVn-PT-4L8" secondAttribute="trailing" constant="20" id="fRP-Wg-1BZ"/>
+                <constraint firstItem="lug-sc-2GG" firstAttribute="trailing" secondItem="ZVn-PT-4L8" secondAttribute="trailing" id="gMf-dG-VxO"/>
                 <constraint firstItem="ZVn-PT-4L8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="29" id="nla-WD-dnv"/>
+                <constraint firstItem="lug-sc-2GG" firstAttribute="top" secondItem="Eqk-Rd-19j" secondAttribute="bottom" constant="22" id="npL-p3-onv"/>
                 <constraint firstItem="ZVn-PT-4L8" firstAttribute="top" secondItem="Zfm-OS-iBM" secondAttribute="bottom" constant="23" id="o8f-oV-uAb"/>
-                <constraint firstItem="9py-wk-Ufk" firstAttribute="top" secondItem="lug-sc-2GG" secondAttribute="bottom" constant="22" id="piy-Jz-ewZ"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <viewLayoutGuide key="safeArea" id="ChP-yJ-OMc"/>

@@ -15,6 +15,8 @@ class StorageCard: BaseView {
     @IBOutlet weak var bottomButton: UIButton!
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var bigButton1: UIButton!
+    @IBOutlet weak var bigButton2: UIButton!
     
     var operationType: OperationType?
     
@@ -62,6 +64,11 @@ class StorageCard: BaseView {
             }
         }
     }
+    @IBAction func onBigButton() {
+        if let operationType = operationType, operationType == .freeAppSpaceLocalWarning {
+            onBottomButton()
+        }
+    }
     
     @IBAction func onCloseButton() {
         deleteCard()
@@ -88,7 +95,7 @@ class StorageCard: BaseView {
             bottomButton.setTitleColor(ColorConstants.orangeGradientEnd, for: .normal)
             
             subTileLabel.text = ""
-            break
+            
         case .emptyStorage:
             setGradient(colorTop: ColorConstants.greenGradientStart, colorBottom: ColorConstants.greenGradientEnd)
             iconView.image = UIImage(named: "CardIconFolder")
@@ -98,7 +105,7 @@ class StorageCard: BaseView {
             
             bottomButton.setTitle(TextConstants.homeStorageCardEmptyBottomButtonTitle, for: .normal)
             bottomButton.setTitleColor(ColorConstants.greenGradientEnd, for: .normal)
-            break
+            
         case .freeAppSpaceLocalWarning:
             setGradient(colorTop: ColorConstants.redGradientStart, colorBottom: ColorConstants.redGradientEnd)
             iconView.image = UIImage(named: "CardIconLamp")
@@ -110,12 +117,10 @@ class StorageCard: BaseView {
             
             bottomButton.setTitle(TextConstants.homeStorageCardLocalBottomButtonTitle, for: .normal)
             bottomButton.setTitleColor(ColorConstants.redGradientEnd, for: .normal)
-            break
-        default:
             
-            return
+        default:
+            break
         }
-        
     }
     
     override func set(object: HomeCardResponse?) {

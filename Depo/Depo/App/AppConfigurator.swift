@@ -11,6 +11,7 @@ import SDWebImage
 import Alamofire
 import Adjust
 import KeychainSwift
+import Curio_iOS_SDK
 
 final class AppConfigurator {
     
@@ -22,6 +23,9 @@ final class AppConfigurator {
     static func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         DispatchQueue.setupMainQueue()
         
+        /// force arabic language left to right
+        UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        
         AppResponsivenessService.shared.startMainAppUpdate()
         firstStart()
         emptyEmailUpIfNeed()
@@ -32,6 +36,7 @@ final class AppConfigurator {
         configureSDWebImage()
         setupCropy()
         
+        startCurio(with: launchOptions)
         startMenloworks(with: launchOptions)
         dropboxManager.start()
         analyticsManager.start()
@@ -133,6 +138,23 @@ final class AppConfigurator {
         UserDefaults.standard.set(build, forKey: "build_preference")
     }
     
+    private static func startCurio(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        guard let appLaunchOptions = launchOptions else {
+            return
+        }
+        
+        let serverURL = "http://curio.turkcell.com.tr/api/v2"
+        let apiKey = "8fb5c84a549711e881e1d5b6432746d5"
+        let trackingCode = "20AWWG1M"
+        //FIXME: change trackingCode to 20AW4ELA before publishing app to store
+        
+        CurioSDK.shared().startSession(serverURL, apiKey: apiKey, trackingCode: trackingCode, sessionTimeout: 30, periodicDispatchEnabled: true, dispatchPeriod: 5, maxCachedActivitiyCount: 10, loggingEnabled: false, logLevel: 0, fetchLocationEnabled: false, maxValidLocationTimeInterval: 600, appLaunchOptions: appLaunchOptions)
+    }
+    
+    static func stopCurio() {
+        CurioSDK.shared().endSession()
+    }
+    
     private static func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         
         MPush.setAppKey("TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd")
@@ -148,17 +170,19 @@ final class AppConfigurator {
                 
             case MActionType.click:
                 log.debug("Menlo Notif Clicked")
-                if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as! String)){
+                
+                if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
                     PushNotificationService.shared.openActionScreen()
                     storageVars.deepLink = response.message.payload["action"] as? String
                 }
+                
                 
             case MActionType.dismiss:
                 log.debug("Menlo Notif Dismissed")
                 
             case MActionType.present:
                 log.debug("Menlo Notif in Foreground")
-                if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as! String)){
+                if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
                     PushNotificationService.shared.openActionScreen()
                 }
                 

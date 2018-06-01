@@ -108,6 +108,9 @@ class RemoteItemsService {
         nextItems(with: serchParam, success: success, fail: fail)
     }
     
+    func cancellAllRequests() {
+        queueOperations.cancelAllOperations()
+    }
     
     fileprivate func nextItems(with searchParameters: SearchByFieldParameters, success: ListRemoveItems?, fail: FailRemoteItems?) {
         log.debug("RemoteItemsService nextItems")
@@ -120,7 +123,7 @@ class RemoteItemsService {
         }
         
         let nextPageOperation = NextPageOperation(requestParam: searchParameters, success: { list in
-            self.currentPage = self.currentPage + 1
+            self.currentPage += 1
             print("Current page \(self): \(self.currentPage)")
             log.debug("Current page \(self): \(self.currentPage)")
             success?(list)

@@ -100,6 +100,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 return
             }
             let serverHash = self.serverDuplicatesArray.flatMap { $0.md5 }
+            let serverUUID = self.serverDuplicatesArray.flatMap{ $0.getTrimmedLocalID() }
             var array = [String]()
             
             for item in itemsArray {
@@ -107,7 +108,12 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 if let index_ = index, let serverObject = self.serverDuplicatesArray[index_] {
                     array.append(serverObject.uuid)
                 } else {
-                    array.append(item.uuid)
+                    let index = serverUUID.index(of: item.getUUIDAsLocal())
+                    if let index_ = index, let serverObject = self.serverDuplicatesArray[index_] {
+                        array.append(serverObject.uuid)
+                    } else {
+                        array.append(item.uuid)
+                    }
                 }
             }
             uuidsCallback(array)
@@ -205,6 +211,9 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 if let index = self.duplicatesArray.index(where: { $0.md5 == object.md5 }) {
                     self.duplicatesArray.remove(at: index)
                     self.analyticsService.track(event: .freeUpSpace)
+                } else if let index = self.duplicatesArray.index(where: { $0.getTrimmedLocalID() == object.getTrimmedLocalID() }) {
+                    self.duplicatesArray.remove(at: index)
+                    self.analyticsService.track(event: .freeUpSpace)
                 }
             }
         }
@@ -275,13 +284,6 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
         var isFinished = false
         
-        print("local")
-        for md5 in localMD5Array.getArray() {
-            /// pleasse uncomment it only if if you need it
-//            print(md5)
-        }
-        print("server")
-        
         service.nextItemsMinified(sortBy: .date, sortOrder: .desc, success: { [weak self] items in
             self?.dispatchQueue.async { [weak self] in
                 guard let `self` = self else {
@@ -344,18 +346,26 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         return CoreDataStack.default.allLocalItems()
     }
     
-///Might be needed
-//    func getLocalFiesComaredWithServerObjects(serverObjects: [WrapData], localObjects: [WrapData]) -> [WrapData] {
-//        var comparedFiles = [WrapData]()
-//
-//        let serverObjectMD5Array = serverObjects.map { $0.md5 }
-//        for localObject in localObjects {
-//            if serverObjectMD5Array.index(of: localObject.md5) != nil {
-//                comparedFiles.append(localObject)
-//            }
-//        }
-//        return comparedFiles
-//    }
+
+    func getLocalFiesComaredWithServerObjectsAndClearFreeAppSpace(serverObjects: [WrapData], localObjects: [WrapData]) -> [WrapData] {
+        var comparedFiles = [WrapData]()
+        var objectsForRemove = [WrapData]()
+        let serverObjectMD5Array = serverObjects.map { $0.md5 }
+        let serverObjectsUUIDArray = serverObjects.map { $0.getTrimmedLocalID() }
+        for localObject in localObjects {
+            if serverObjectMD5Array.index(of: localObject.md5) != nil {
+                comparedFiles.append(localObject)
+            } else {
+                if serverObjectsUUIDArray.index(of: localObject.getTrimmedLocalID()) != nil {
+                    comparedFiles.append(localObject)
+                } else {
+                    objectsForRemove.append(localObject)
+                }
+            }
+        }
+        deleteDeletedLocalPhotos(deletedPhotos: objectsForRemove)
+        return comparedFiles
+    }
     
     // MARK: UploadNotificationManagerProtocol
     

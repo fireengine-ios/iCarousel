@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -31,18 +31,21 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 GB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aw-2Z-Vhj">
                         <rect key="frame" x="57" y="10" width="26.5" height="22.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22.5" id="m7r-KC-F31"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="15"/>
                         <color key="textColor" red="0.019607843140000001" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xBU-hF-SK6">
-                        <rect key="frame" x="24" y="45.5" width="93.5" height="97"/>
+                        <rect key="frame" x="23.5" y="45.5" width="93.5" height="97"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPN-Ro-kbt" userLabel="Photos View">
                                 <rect key="frame" x="0.0" y="0.0" width="93.5" height="16"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="usageinfo_photos" translatesAutoresizingMaskIntoConstraints="NO" id="QN2-5s-gZq">
-                                        <rect key="frame" x="0.0" y="-0.5" width="16" height="16"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="AQK-f8-GwU"/>
                                             <constraint firstAttribute="width" constant="16" id="ihV-i9-6fO"/>
@@ -70,7 +73,7 @@
                                 <rect key="frame" x="0.0" y="27" width="93.5" height="16"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="usageinfo_videos" translatesAutoresizingMaskIntoConstraints="NO" id="VEH-Ts-Zl9">
-                                        <rect key="frame" x="0.0" y="-0.5" width="16" height="16"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="o7C-zd-Por"/>
                                             <constraint firstAttribute="width" constant="16" id="pKc-Wz-Oay"/>
@@ -98,7 +101,7 @@
                                 <rect key="frame" x="0.0" y="54" width="93.5" height="16"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="usageinfo_songs" translatesAutoresizingMaskIntoConstraints="NO" id="bHP-Ll-k4u">
-                                        <rect key="frame" x="0.0" y="-0.5" width="16" height="16"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="FTa-Jl-fqN"/>
                                             <constraint firstAttribute="width" constant="16" id="GCJ-2y-JHi"/>
@@ -126,7 +129,7 @@
                                 <rect key="frame" x="0.0" y="81" width="93.5" height="16"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="usageinfo_docs" translatesAutoresizingMaskIntoConstraints="NO" id="vct-zL-NtW">
-                                        <rect key="frame" x="0.0" y="-0.5" width="16" height="16"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="16" id="3Dc-23-CUy"/>
                                             <constraint firstAttribute="height" constant="16" id="sIG-Pb-qrR"/>
