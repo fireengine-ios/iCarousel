@@ -15,6 +15,7 @@ class MenloworksEventsService {
     private init() { }
     
     static let shared = MenloworksEventsService()
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
     // MARK: - Event methods
     
@@ -40,6 +41,7 @@ class MenloworksEventsService {
     }
     
     func onLogin() {
+        onPasscodeSet()
         mergedHit(event: MenloworksEventsConstants.loggedinCompleted)
     }
     
