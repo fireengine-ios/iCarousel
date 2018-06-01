@@ -69,7 +69,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         group.notify(queue: queue) {[weak self] in
             DispatchQueue.main.async {
                 let versionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
-                var packages: String = ""
+                var packages = ""
                 if subscriptions.count > 0 {
                     packages = subscriptions
                     .flatMap { $0.subscriptionPlanDisplayName }
