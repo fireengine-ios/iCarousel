@@ -2597,7 +2597,6 @@
 		B54BFF4D202C73790018AF82 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		B54BFF4F202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
 		B54BFF50202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
-		B54BFF5A202C86F30018AF82 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		B54BFF5B202C8E180018AF82 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		B5513AF9205BAED70016C344 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
 		B56BE2B51FE2732F007DC1BC /* ItemSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */; };
@@ -2730,7 +2729,6 @@
 		CE18CC92204E894100FA3F44 /* ErrorIdentificators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */; };
 		CE18CC93204E895D00FA3F44 /* ErrorIdentificators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */; };
 		CE18CC95204E8AC000FA3F44 /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
-		CE18CC96204E8DC900FA3F44 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */; };
 		CE19CE01208F016600DB903E /* UIAlertController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CE00208F016600DB903E /* UIAlertController+Action.swift */; };
 		CE19CE02208F017200DB903E /* UIAlertController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CE00208F016600DB903E /* UIAlertController+Action.swift */; };
@@ -3244,7 +3242,6 @@
 		CEBBDE0E1F01E69B00CDF527 /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
 		CEBDB1D720444C73007EE1AE /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */; };
 		CEBDB1D920444D97007EE1AE /* ShareCustomizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDB1D820444D97007EE1AE /* ShareCustomizator.swift */; };
-		CEBDB1DB20444DEE007EE1AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		CEBDB1DC20444E50007EE1AE /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
 		CEBDB1DD20444E50007EE1AE /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
 		CEBDB1DE20444E50007EE1AE /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */; };
@@ -12878,7 +12875,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B54BFF5A202C86F30018AF82 /* Images.xcassets in Resources */,
 				CE4D27FD207E0479003AE4FB /* TurkcellSaturaBol.ttf in Resources */,
 				CE4D27FF207E0479003AE4FB /* TurkcellSaturaDem.ttf in Resources */,
 				B54BFF37202B20250018AF82 /* MainInterface.storyboard in Resources */,
@@ -12909,7 +12905,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AFAB37D2073AE3200C54C9B /* InfoEnterprise.plist in Resources */,
-				CE18CC96204E8DC900FA3F44 /* Images.xcassets in Resources */,
 				CE18CC7F204E85DC00FA3F44 /* TurkcellSaturaBol.ttf in Resources */,
 				CE18CC80204E85DC00FA3F44 /* TurkcellSaturaBolIta.ttf in Resources */,
 				CE4D27F3207E00D4003AE4FB /* OurLocalizable.strings in Resources */,
@@ -13497,7 +13492,6 @@
 				CEBDB1E120444E50007EE1AE /* TurkcellSaturaMed.ttf in Resources */,
 				CEBDB1E220444E50007EE1AE /* TurkcellSaturaMedIta.ttf in Resources */,
 				CEBDB1E320444E50007EE1AE /* TurkcellSaturaReg.ttf in Resources */,
-				CEBDB1DB20444DEE007EE1AE /* Images.xcassets in Resources */,
 				CE58FAF520444493007F3F54 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
