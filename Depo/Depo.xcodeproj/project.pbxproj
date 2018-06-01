@@ -1486,9 +1486,9 @@
 		8C0B91B220170F4D00A5BA81 /* ContactSyncResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */; };
 		8C0B91B320170F5B00A5BA81 /* ContactSyncParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */; };
 		8C0B91B42017103600A5BA81 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
-		8C0B91B52017103900A5BA81 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		8C0B91B62017103D00A5BA81 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		8C0B91B82017104100A5BA81 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		8C0B91B52017103900A5BA81 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C0B91B62017103D00A5BA81 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C0B91B82017104100A5BA81 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C0B91B92017104300A5BA81 /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
 		8C0B91BA2017104500A5BA81 /* AuthorizationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */; };
 		8C0B91BB2017104800A5BA81 /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
@@ -2606,6 +2606,8 @@
 		B56E0DDD20B45EE80082044D /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
 		B56E0DE920B5644D0082044D /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DE820B5644D0082044D /* NotificationName+Extensions.swift */; };
 		B56E0DEA20B5644D0082044D /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DE820B5644D0082044D /* NotificationName+Extensions.swift */; };
+		B5711DFF20C13F4200E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
+		B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
 		B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E8181FE288A500F47B0A /* PhotoSyncService.swift */; };
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
 		B5BA98762066827900CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
@@ -5054,6 +5056,7 @@
 		B56E0DD620B414510082044D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppResponsivenessService.swift; sourceTree = "<group>"; };
 		B56E0DE820B5644D0082044D /* NotificationName+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extensions.swift"; sourceTree = "<group>"; };
+		B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ShareActivity.swift"; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
 		B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+JPEG.swift"; sourceTree = "<group>"; };
@@ -11449,6 +11452,7 @@
 				CEE9A5FA1F23308800ED8610 /* String+Int.swift */,
 				87AD15E31FD678B800DE97DB /* String+Subscript.swift */,
 				78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */,
+				B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -13779,7 +13783,7 @@
 				B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
 				CE46402920B6E28800EFC1AE /* LocalUnsyncedOperation.swift in Sources */,
 				8C0E8C661FDEBDFF00789C91 /* ActivityFileType.swift in Sources */,
-				8C0B91B62017103D00A5BA81 /* BuildFile in Sources */,
+				8C0B91B62017103D00A5BA81 /* (null) in Sources */,
 				8C0E8C671FDEBDFF00789C91 /* ActivityType.swift in Sources */,
 				CE1B7625204D347D00B5E12A /* Error+Network.swift in Sources */,
 				4A9886F520443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
@@ -14350,7 +14354,7 @@
 				8C06AC1D20066641003D8E05 /* TurkcellSecurityViewIO.swift in Sources */,
 				8C0E8E4A1FDEBDFF00789C91 /* SyncDBUtils.m in Sources */,
 				8C0E8E4B1FDEBDFF00789C91 /* CreateStoryNameViewOutput.swift in Sources */,
-				8C0B91B52017103900A5BA81 /* BuildFile in Sources */,
+				8C0B91B52017103900A5BA81 /* (null) in Sources */,
 				4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */,
 				8C0E8E501FDEBDFF00789C91 /* LocalAlbumRouter.swift in Sources */,
 				CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */,
@@ -14703,6 +14707,7 @@
 				8C0E8F821FDEBDFF00789C91 /* SelectNameRouterInput.swift in Sources */,
 				8C0E8F831FDEBDFF00789C91 /* PackagesRouterInput.swift in Sources */,
 				4A56D5BC202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
+				B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */,
 				8C0E8F841FDEBDFF00789C91 /* SelectNameRouter.swift in Sources */,
 				C62239A3204972160043ED44 /* MenloworksTagsService.swift in Sources */,
 				8CD2B3B11FE7B3BD00280547 /* UIButton+Color.swift in Sources */,
@@ -14723,7 +14728,7 @@
 				4A8CC31B201A027400C040C4 /* FaceImageInteractorInput.swift in Sources */,
 				8C0E8F8E1FDEBDFF00789C91 /* DropboxStatusValue.swift in Sources */,
 				8C0E8F8F1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
-				8C0B91B82017104100A5BA81 /* BuildFile in Sources */,
+				8C0B91B82017104100A5BA81 /* (null) in Sources */,
 				8C0E8F901FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				8C0E8F911FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				8C0E8F921FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
@@ -15865,6 +15870,7 @@
 				CE2F56171F7552A900F49DA1 /* PackagesInteractor.swift in Sources */,
 				85AAD0E4BD93A160437B1236 /* AlbumSelectionViewController.swift in Sources */,
 				7C529688203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */,
+				B5711DFF20C13F4200E72A9D /* String+ShareActivity.swift in Sources */,
 				64E35594735C9449EB20343F /* AlbumsPresenter.swift in Sources */,
 				EB0329F2FE28E1F8F2F7ABAE /* AlbumsInteractor.swift in Sources */,
 				8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */,

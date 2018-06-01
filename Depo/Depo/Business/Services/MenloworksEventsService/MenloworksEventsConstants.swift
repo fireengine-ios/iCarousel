@@ -61,4 +61,6 @@ struct MenloworksEventsConstants {
     static let fiftyGBPurchasedStatus = "Satınalındı50GB"
     static let fiveHundredGBPurchasedStatus = "Satınalındı500GB"
     static let twoThousandFiveHundredGBPurchasedStatus = "Satınalındı25TB"
+    static let downloadedItemFormat = "Download>%@"
+    static let sharedItemFormat = "Share>%@>%@"
 }

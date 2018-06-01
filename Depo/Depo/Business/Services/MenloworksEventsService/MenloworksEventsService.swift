@@ -249,4 +249,14 @@ class MenloworksEventsService {
         mergedHit(event: MenloworksEventsConstants.twoThousandFiveHundredGBPurchasedStatus)
     }
     
+    func onDownloadItem(with type: String, success: Bool) {
+        let eventName = String(format: MenloworksEventsConstants.downloadedItemFormat, type)
+        CurioSDK.shared().sendEvent(eventName, eventValue: success ? "Success" : "Fail")
+    }
+    
+    func onShareItem(with type: FileType, toApp: String) {
+        let itemType = (type == .image) ? "Photo" : "Video"
+        let eventName = String(format: MenloworksEventsConstants.sharedItemFormat, itemType, toApp)
+        CurioSDK.shared().sendEvent(eventName, eventValue: "Success")
+    }
 }
