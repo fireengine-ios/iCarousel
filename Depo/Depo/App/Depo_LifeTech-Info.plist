@@ -85,6 +85,13 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
+			<key>http://curio.turkcell.com.tr/api/v2</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
+			</dict>
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>

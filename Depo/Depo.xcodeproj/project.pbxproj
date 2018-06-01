@@ -565,6 +565,7 @@
 		7CF6BDE41F0BA1E10066709E /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF6BDE31F0BA1E10066709E /* AVKit.framework */; };
 		7CF9A9F51FA2279500242FDD /* ImageForDowload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9A9F41FA2279500242FDD /* ImageForDowload.swift */; };
 		7CFBB6DB1F28A40F009C32D5 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFBB6DA1F28A40F009C32D5 /* BaseCollectionViewCell.swift */; };
+		7CFCD1D520C15865001BDDC4 /* UILabel+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47155E20BFEDD3001DF164 /* UILabel+Font.swift */; };
 		7CFD0D201F8F44CA002B1FB5 /* ArrayDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD0D1F1F8F44CA002B1FB5 /* ArrayDataSourceForCollectionView.swift */; };
 		7CFE92E81F5D85A5008A3B72 /* DropDovnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92E71F5D85A5008A3B72 /* DropDovnView.swift */; };
 		7CFE92EB1F5E7DEC008A3B72 /* DropDovnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92E91F5E7DEC008A3B72 /* DropDovnTableViewCell.swift */; };
@@ -1516,7 +1517,6 @@
 		8C0E8C6F1FDEBDFF00789C91 /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A9380F1AF6AE9100AE2892 /* Filter.m */; };
 		8C0E8C701FDEBDFF00789C91 /* ValidationResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E931EF5D0B100072983 /* ValidationResults.swift */; };
 		8C0E8C721FDEBDFF00789C91 /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
-		8C0E8C731FDEBDFF00789C91 /* CurioLocationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6091DDDD0F600FFE63E /* CurioLocationData.m */; };
 		8C0E8C741FDEBDFF00789C91 /* HomePageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA41EFD4F0D00A405B2 /* HomePageInteractorOutput.swift */; };
 		8C0E8C761FDEBDFF00789C91 /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
 		8C0E8C771FDEBDFF00789C91 /* LocalMediaItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0056D1F7A75EE004FA8DE /* LocalMediaItems.swift */; };
@@ -1529,7 +1529,6 @@
 		8C0E8C7F1FDEBDFF00789C91 /* SKProduct+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37FF041F7BD42100EF5FF1 /* SKProduct+Localized.swift */; };
 		8C0E8C801FDEBDFF00789C91 /* PasscodeSettingsInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C23D1FB99AF800C3D67F /* PasscodeSettingsInteractorIO.swift */; };
 		8C0E8C811FDEBDFF00789C91 /* UsageInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E81F3F18FA00EFDC6D /* UsageInfoPresenter.swift */; };
-		8C0E8C831FDEBDFF00789C91 /* CurioSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6191DDDD0F600FFE63E /* CurioSDK.m */; };
 		8C0E8C841FDEBDFF00789C91 /* PasscodeEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2081FB9961900C3D67F /* PasscodeEnterViewController.swift */; };
 		8C0E8C851FDEBDFF00789C91 /* CreateStoryPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66E8A71F979C3300D98F27 /* CreateStoryPreviewViewController.swift */; };
 		8C0E8C861FDEBDFF00789C91 /* FullyLoaded.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A938131AF6AE9100AE2892 /* FullyLoaded.m */; };
@@ -1547,7 +1546,6 @@
 		8C0E8C921FDEBDFF00789C91 /* AutoSyncSwitcherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8146B1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.swift */; };
 		8C0E8C931FDEBDFF00789C91 /* PasscodeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2371FB99AF800C3D67F /* PasscodeSettingsViewController.swift */; };
 		8C0E8C941FDEBDFF00789C91 /* HomePageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FAF1EFD4F0D00A405B2 /* HomePageViewOutput.swift */; };
-		8C0E8C951FDEBDFF00789C91 /* CurioConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6031DDDD0F600FFE63E /* CurioConstants.m */; };
 		8C0E8C961FDEBDFF00789C91 /* ContactSyncModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF792AA1F10C65E00007719 /* ContactSyncModels.swift */; };
 		8C0E8C971FDEBDFF00789C91 /* SubscriptionPlanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47864031F3F330A00EFDC6D /* SubscriptionPlanCollectionViewCell.swift */; };
 		8C0E8C991FDEBDFF00789C91 /* CollectionViewCellDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAB66DC1F0CFB85005B26F1 /* CollectionViewCellDataProtocol.swift */; };
@@ -1555,7 +1553,6 @@
 		8C0E8C9B1FDEBDFF00789C91 /* UploadFromLifeBoxInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCB1FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift */; };
 		8C0E8C9C1FDEBDFF00789C91 /* CreateStoryPhotosOrderViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4988121F3320420039C5F2 /* CreateStoryPhotosOrderViewInput.swift */; };
 		8C0E8C9D1FDEBDFF00789C91 /* SeacrhViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21771F3C8BC000BAFE1E /* SeacrhViewRouter.swift */; };
-		8C0E8C9E1FDEBDFF00789C91 /* CurioNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D60D1DDDD0F600FFE63E /* CurioNetwork.m */; };
 		8C0E8C9F1FDEBDFF00789C91 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */; };
 		8C0E8CA01FDEBDFF00789C91 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD011F1E3A6300C8CC16 /* UserProfileViewController.swift */; };
 		8C0E8CA11FDEBDFF00789C91 /* SearchViewInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21721F3C86D700BAFE1E /* SearchViewInteractorInput.swift */; };
@@ -1565,7 +1562,6 @@
 		8C0E8CA91FDEBDFF00789C91 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE907A2E1F94D49800D2F8CE /* MulticastDelegate.swift */; };
 		8C0E8CAA1FDEBDFF00789C91 /* PopUpSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */; };
 		8C0E8CAB1FDEBDFF00789C91 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C771EEE8E7F0086DA84 /* LoginPresenter.swift */; };
-		8C0E8CAC1FDEBDFF00789C91 /* CurioLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D60B1DDDD0F600FFE63E /* CurioLocationManager.m */; };
 		8C0E8CAD1FDEBDFF00789C91 /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */; };
 		8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814661EF7A93E001DFCF0 /* AutoSyncViewInput.swift */; };
 		8C0E8CB01FDEBDFF00789C91 /* VisualMusicPlayerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786961F3F38EF005CB432 /* VisualMusicPlayerRouter.swift */; };
@@ -1582,7 +1578,6 @@
 		8C0E8CBD1FDEBDFF00789C91 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E621F0123E0003B004C /* CollectionViewLayout.swift */; };
 		8C0E8CBE1FDEBDFF00789C91 /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86821F0F96E600520D18 /* SyncLogger.m */; };
 		8C0E8CBF1FDEBDFF00789C91 /* LoginViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7E1EEE8E7F0086DA84 /* LoginViewInput.swift */; };
-		8C0E8CC01FDEBDFF00789C91 /* CurioPostOffice.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6111DDDD0F600FFE63E /* CurioPostOffice.m */; };
 		8C0E8CC11FDEBDFF00789C91 /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86841F0F96E600520D18 /* SyncRecord.m */; };
 		8C0E8CC21FDEBDFF00789C91 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
 		8C0E8CC31FDEBDFF00789C91 /* ActivityTimelineParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44EE1F6ABB540062C2E0 /* ActivityTimelineParameters.swift */; };
@@ -1599,7 +1594,6 @@
 		8C0E8CCE1FDEBDFF00789C91 /* ImportPhotosInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D498864B1F3EFBE200F50C95 /* ImportPhotosInteractorInput.swift */; };
 		8C0E8CCF1FDEBDFF00789C91 /* AlbumSelectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350E1F50B6E200193C75 /* AlbumSelectionPresenter.swift */; };
 		8C0E8CD01FDEBDFF00789C91 /* PrintInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */; };
-		8C0E8CD11FDEBDFF00789C91 /* CurioResourceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6171DDDD0F600FFE63E /* CurioResourceUtil.m */; };
 		8C0E8CD21FDEBDFF00789C91 /* MoreActionsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB67C1F0B9F7600B552A3 /* MoreActionsConfig.swift */; };
 		8C0E8CD31FDEBDFF00789C91 /* ServerValueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7466FE1FD6B35400D0885D /* ServerValueError.swift */; };
 		8C0E8CD41FDEBDFF00789C91 /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF867E1F0F96E600520D18 /* SyncDB.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -1615,7 +1609,6 @@
 		8C0E8CDE1FDEBDFF00789C91 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1EC1F714DDB0008F4CF /* CoreDataStack.swift */; };
 		8C0E8CDF1FDEBDFF00789C91 /* AutoSyncInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145B1EF7A93E001DFCF0 /* AutoSyncInteractorOutput.swift */; };
 		8C0E8CE11FDEBDFF00789C91 /* AlbumDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350A1F4EF3DA00193C75 /* AlbumDetailService.swift */; };
-		8C0E8CE21FDEBDFF00789C91 /* CurioDBToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6071DDDD0F600FFE63E /* CurioDBToolkit.m */; };
 		8C0E8CE31FDEBDFF00789C91 /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33DFFE1F0296C000706C40 /* RequestHeader.swift */; };
 		8C0E8CE41FDEBDFF00789C91 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86711F0F96E600520D18 /* Contact.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8C0E8CE51FDEBDFF00789C91 /* CreateStoryNameViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F8C1F31E4F800536DB6 /* CreateStoryNameViewInput.swift */; };
@@ -1667,7 +1660,6 @@
 		8C0E8D181FDEBDFF00789C91 /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF619EB1F79222600BECF03 /* AccountType.swift */; };
 		8C0E8D191FDEBDFF00789C91 /* InfoButtonCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */; };
 		8C0E8D1A1FDEBDFF00789C91 /* Mail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92F91F601E36008A3B72 /* Mail.swift */; };
-		8C0E8D1B1FDEBDFF00789C91 /* CurioAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D5FF1DDDD0F600FFE63E /* CurioAction.m */; };
 		8C0E8D1C1FDEBDFF00789C91 /* UIApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84C221F7CE8F7009B0769 /* UIApplication+Settings.swift */; };
 		8C0E8D1D1FDEBDFF00789C91 /* LoginRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7A1EEE8E7F0086DA84 /* LoginRouterInput.swift */; };
 		8C0E8D1E1FDEBDFF00789C91 /* AlbumDetailResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C04350C1F4F17E800193C75 /* AlbumDetailResponce.swift */; };
@@ -1681,7 +1673,6 @@
 		8C0E8D271FDEBDFF00789C91 /* HelpAndSupportConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED351F516736002F923A /* HelpAndSupportConfigurator.swift */; };
 		8C0E8D281FDEBDFF00789C91 /* AutoSyncInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814591EF7A93E001DFCF0 /* AutoSyncInteractor.swift */; };
 		8C0E8D291FDEBDFF00789C91 /* FilesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74431F05371B00124DF5 /* FilesDataSource.swift */; };
-		8C0E8D2A1FDEBDFF00789C91 /* CurioActionToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6011DDDD0F600FFE63E /* CurioActionToolkit.m */; };
 		8C0E8D2B1FDEBDFF00789C91 /* UploadFromLifeBoxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCA1FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift */; };
 		8C0E8D2C1FDEBDFF00789C91 /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */; };
 		8C0E8D2D1FDEBDFF00789C91 /* VisualMusicPlayerViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */; };
@@ -1702,23 +1693,19 @@
 		8C0E8D3D1FDEBDFF00789C91 /* BaseCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C355E601F01226B003B004C /* BaseCollectionViewDataSource.swift */; };
 		8C0E8D3E1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74501F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift */; };
 		8C0E8D3F1FDEBDFF00789C91 /* HomeViewTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FD41EFD500B00A405B2 /* HomeViewTopView.swift */; };
-		8C0E8D401FDEBDFF00789C91 /* CurioDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6051DDDD0F600FFE63E /* CurioDB.m */; };
 		8C0E8D411FDEBDFF00789C91 /* NavBarConfugurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */; };
 		8C0E8D431FDEBDFF00789C91 /* SwiftyJSONExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1CEA91F21E11200C9DD8F /* SwiftyJSONExtension.swift */; };
 		8C0E8D441FDEBDFF00789C91 /* RemoteDownloder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA95941F1610590054BDC0 /* RemoteDownloder.swift */; };
 		8C0E8D451FDEBDFF00789C91 /* BlueButtonWithWhiteText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C634F9E1F0E6E7E00B5B93D /* BlueButtonWithWhiteText.swift */; };
 		8C0E8D471FDEBDFF00789C91 /* String+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9A5FA1F23308800ED8610 /* String+Int.swift */; };
-		8C0E8D481FDEBDFF00789C91 /* CurioUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D61D1DDDD0F600FFE63E /* CurioUtil.m */; };
 		8C0E8D491FDEBDFF00789C91 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB6971F0B9F8400B552A3 /* CustomTabBar.swift */; };
 		8C0E8D4B1FDEBDFF00789C91 /* BottomSelectionTabBarInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8661F348B5C002AC795 /* BottomSelectionTabBarInteractorInput.swift */; };
 		8C0E8D4D1FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
-		8C0E8D4E1FDEBDFF00789C91 /* CurioReachabilityEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6151DDDD0F600FFE63E /* CurioReachabilityEx.m */; };
 		8C0E8D4F1FDEBDFF00789C91 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
 		8C0E8D511FDEBDFF00789C91 /* UploadFromLifeBoxInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */; };
 		8C0E8D521FDEBDFF00789C91 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C601EED63BC0086DA84 /* DataStorage.swift */; };
 		8C0E8D531FDEBDFF00789C91 /* BaseUserInputCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */; };
 		8C0E8D541FDEBDFF00789C91 /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C6F1EEE8E7F0086DA84 /* LoginConfigurator.swift */; };
-		8C0E8D551FDEBDFF00789C91 /* CurioSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D61B1DDDD0F600FFE63E /* CurioSettings.m */; };
 		8C0E8D561FDEBDFF00789C91 /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
 		8C0E8D571FDEBDFF00789C91 /* PackagesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56021F7552A900F49DA1 /* PackagesInitializer.swift */; };
 		8C0E8D581FDEBDFF00789C91 /* LoginDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */; };
@@ -1726,11 +1713,9 @@
 		8C0E8D5A1FDEBDFF00789C91 /* IntroduceSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B7C1EEEB792006532C8 /* IntroduceSubView.swift */; };
 		8C0E8D5C1FDEBDFF00789C91 /* LoginInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C741EEE8E7F0086DA84 /* LoginInteractorOutput.swift */; };
 		8C0E8D5D1FDEBDFF00789C91 /* UsageInfoInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E11F3F18FA00EFDC6D /* UsageInfoInitializer.swift */; };
-		8C0E8D5E1FDEBDFF00789C91 /* CurioNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D60F1DDDD0F600FFE63E /* CurioNotificationManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8C0E8D601FDEBDFF00789C91 /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86881F0F96E600520D18 /* SyncStatus.m */; };
 		8C0E8D611FDEBDFF00789C91 /* PhoneVereficationDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC05B691F05399100332EBA /* PhoneVereficationDataStorage.swift */; };
 		8C0E8D621FDEBDFF00789C91 /* AlertFilesActionsSheetModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0097191F6BDAD900FA069C /* AlertFilesActionsSheetModuleInput.swift */; };
-		8C0E8D631FDEBDFF00789C91 /* CurioPushData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6131DDDD0F600FFE63E /* CurioPushData.m */; };
 		8C0E8D641FDEBDFF00789C91 /* BottomSelectionTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8721F348B5C002AC795 /* BottomSelectionTabBarViewController.swift */; };
 		8C0E8D651FDEBDFF00789C91 /* BaseDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74351F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift */; };
 		8C0E8D661FDEBDFF00789C91 /* AutoSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814641EF7A93E001DFCF0 /* AutoSyncViewController.swift */; };
@@ -2360,6 +2345,7 @@
 		8C0E90491FDEBDFF00789C91 /* EditinglBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6EF88B1F348B77002AC795 /* EditinglBar.xib */; };
 		8C0E904A1FDEBDFF00789C91 /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */; };
 		8C0E904B1FDEBDFF00789C91 /* CustomNavBar~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FE31EFD517300A405B2 /* CustomNavBar~ipad.xib */; };
+		8C0E904C1FDEBDFF00789C91 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		8C0E904D1FDEBDFF00789C91 /* IntroduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B711EEE9509006532C8 /* IntroduceViewController.xib */; };
 		8C0E904E1FDEBDFF00789C91 /* FileInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CDABD121F1E434100C8CC16 /* FileInfoViewController.xib */; };
 		8C0E904F1FDEBDFF00789C91 /* ImportPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D49886541F3EFBE200F50C95 /* ImportPhotosViewController.xib */; };
@@ -2611,6 +2597,7 @@
 		B54BFF4D202C73790018AF82 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		B54BFF4F202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
 		B54BFF50202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
+		B54BFF5A202C86F30018AF82 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		B54BFF5B202C8E180018AF82 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		B5513AF9205BAED70016C344 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
 		B56BE2B51FE2732F007DC1BC /* ItemSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */; };
@@ -2621,9 +2608,8 @@
 		B56E0DDD20B45EE80082044D /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
 		B56E0DE920B5644D0082044D /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DE820B5644D0082044D /* NotificationName+Extensions.swift */; };
 		B56E0DEA20B5644D0082044D /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DE820B5644D0082044D /* NotificationName+Extensions.swift */; };
-		B5711E0320C16DC300E72A9D /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5711E0220C16DC300E72A9D /* images.xcassets */; };
-		B5711E0620C16EC500E72A9D /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5711E0520C16EC500E72A9D /* images.xcassets */; };
-		B5711E0820C16F6F00E72A9D /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5711E0720C16F6F00E72A9D /* images.xcassets */; };
+		B5711DFF20C13F4200E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
+		B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
 		B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E8181FE288A500F47B0A /* PhotoSyncService.swift */; };
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
 		B5BA98762066827900CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
@@ -2744,6 +2730,7 @@
 		CE18CC92204E894100FA3F44 /* ErrorIdentificators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */; };
 		CE18CC93204E895D00FA3F44 /* ErrorIdentificators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */; };
 		CE18CC95204E8AC000FA3F44 /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
+		CE18CC96204E8DC900FA3F44 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */; };
 		CE19CE01208F016600DB903E /* UIAlertController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CE00208F016600DB903E /* UIAlertController+Action.swift */; };
 		CE19CE02208F017200DB903E /* UIAlertController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CE00208F016600DB903E /* UIAlertController+Action.swift */; };
@@ -2951,31 +2938,23 @@
 		CE51AB051EF90853005DCEE0 /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A9380F1AF6AE9100AE2892 /* Filter.m */; };
 		CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E931EF5D0B100072983 /* ValidationResults.swift */; };
 		CE51AB121EF90853005DCEE0 /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
-		CE51AB161EF90853005DCEE0 /* CurioLocationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6091DDDD0F600FFE63E /* CurioLocationData.m */; };
 		CE51AB201EF90853005DCEE0 /* LoginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */; };
 		CE51AB221EF90853005DCEE0 /* UpdateCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A9381C1AF6AE9100AE2892 /* UpdateCheck.m */; };
 		CE51AB231EF90853005DCEE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
-		CE51AB261EF90853005DCEE0 /* CurioSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6191DDDD0F600FFE63E /* CurioSDK.m */; };
 		CE51AB281EF90853005DCEE0 /* FullyLoaded.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A938131AF6AE9100AE2892 /* FullyLoaded.m */; };
 		CE51AB361EF90853005DCEE0 /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A9380D1AF6AE9100AE2892 /* CustomIOS7AlertView.m */; };
 		CE51AB3A1EF90853005DCEE0 /* AutoSyncSwitcherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8146B1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.swift */; };
-		CE51AB3D1EF90853005DCEE0 /* CurioConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6031DDDD0F600FFE63E /* CurioConstants.m */; };
-		CE51AB531EF90853005DCEE0 /* CurioNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D60D1DDDD0F600FFE63E /* CurioNetwork.m */; };
 		CE51AB5B1EF90853005DCEE0 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */; };
 		CE51AB6C1EF90853005DCEE0 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C771EEE8E7F0086DA84 /* LoginPresenter.swift */; };
-		CE51AB6E1EF90853005DCEE0 /* CurioLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D60B1DDDD0F600FFE63E /* CurioLocationManager.m */; };
 		CE51AB701EF90853005DCEE0 /* AutoSyncViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814661EF7A93E001DFCF0 /* AutoSyncViewInput.swift */; };
 		CE51AB801EF90853005DCEE0 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C791EEE8E7F0086DA84 /* LoginRouter.swift */; };
 		CE51AB811EF90853005DCEE0 /* LoginModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C761EEE8E7F0086DA84 /* LoginModuleInput.swift */; };
 		CE51AB871EF90853005DCEE0 /* LoginViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7E1EEE8E7F0086DA84 /* LoginViewInput.swift */; };
-		CE51AB901EF90853005DCEE0 /* CurioPostOffice.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6111DDDD0F600FFE63E /* CurioPostOffice.m */; };
 		CE51AB951EF90853005DCEE0 /* IntroduceDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B731EEEAE8C006532C8 /* IntroduceDataSource.swift */; };
-		CE51ABA11EF90853005DCEE0 /* CurioResourceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6171DDDD0F600FFE63E /* CurioResourceUtil.m */; };
 		CE51ABAA1EF90853005DCEE0 /* GSMCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183B1EF0089A00AF236E /* GSMCodeModel.swift */; };
 		CE51ABAD1EF90853005DCEE0 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A938091AF6AE9100AE2892 /* Configuration.m */; };
 		CE51ABB31EF90853005DCEE0 /* AutoSyncModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145D1EF7A93E001DFCF0 /* AutoSyncModuleInput.swift */; };
 		CE51ABB51EF90853005DCEE0 /* AutoSyncInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145B1EF7A93E001DFCF0 /* AutoSyncInteractorOutput.swift */; };
-		CE51ABBB1EF90853005DCEE0 /* CurioDBToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6071DDDD0F600FFE63E /* CurioDBToolkit.m */; };
 		CE51ABBD1EF90853005DCEE0 /* LoginViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7F1EEE8E7F0086DA84 /* LoginViewOutput.swift */; };
 		CE51ABC61EF90853005DCEE0 /* AutoSyncModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814561EF7A93E001DFCF0 /* AutoSyncModel.swift */; };
 		CE51ABCA1EF90853005DCEE0 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A938151AF6AE9100AE2892 /* Message.m */; };
@@ -2987,28 +2966,20 @@
 		CE51ABE91EF90853005DCEE0 /* AutoSyncDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814581EF7A93E001DFCF0 /* AutoSyncDataStorage.swift */; };
 		CE51ABEA1EF90853005DCEE0 /* BaseCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C5A1EEC83420086DA84 /* BaseCellModel.swift */; };
 		CE51ABF91EF90853005DCEE0 /* IntroduceDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B791EEEB198006532C8 /* IntroduceDataStorage.swift */; };
-		CE51ABFC1EF90853005DCEE0 /* CurioAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D5FF1DDDD0F600FFE63E /* CurioAction.m */; };
 		CE51ABFD1EF90853005DCEE0 /* LoginRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7A1EEE8E7F0086DA84 /* LoginRouterInput.swift */; };
 		CE51AC041EF90853005DCEE0 /* CountiesGSMCodeCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */; };
 		CE51AC091EF90853005DCEE0 /* AutoSyncInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814591EF7A93E001DFCF0 /* AutoSyncInteractor.swift */; };
-		CE51AC0C1EF90853005DCEE0 /* CurioActionToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6011DDDD0F600FFE63E /* CurioActionToolkit.m */; };
 		CE51AC0D1EF90853005DCEE0 /* UIAlertViewCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A9381A1AF6AE9100AE2892 /* UIAlertViewCustom.m */; };
 		CE51AC151EF90853005DCEE0 /* UpdaterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A938201AF6AE9100AE2892 /* UpdaterController.m */; };
 		CE51AC1E1EF90853005DCEE0 /* RegistrationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C571EEC7DC60086DA84 /* RegistrationDataSource.swift */; };
 		CE51AC221EF90853005DCEE0 /* CellsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */; };
 		CE51AC2D1EF90853005DCEE0 /* ProtoInputTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B2F251EF314C200706DC0 /* ProtoInputTextCell.swift */; };
-		CE51AC351EF90853005DCEE0 /* CurioDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6051DDDD0F600FFE63E /* CurioDB.m */; };
-		CE51AC3C1EF90853005DCEE0 /* CurioUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D61D1DDDD0F600FFE63E /* CurioUtil.m */; };
-		CE51AC461EF90853005DCEE0 /* CurioReachabilityEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6151DDDD0F600FFE63E /* CurioReachabilityEx.m */; };
 		CE51AC471EF90853005DCEE0 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C601EED63BC0086DA84 /* DataStorage.swift */; };
 		CE51AC481EF90853005DCEE0 /* BaseUserInputCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */; };
 		CE51AC4A1EF90853005DCEE0 /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C6F1EEE8E7F0086DA84 /* LoginConfigurator.swift */; };
-		CE51AC4C1EF90853005DCEE0 /* CurioSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D61B1DDDD0F600FFE63E /* CurioSettings.m */; };
 		CE51AC521EF90853005DCEE0 /* LoginDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */; };
 		CE51AC591EF90853005DCEE0 /* IntroduceSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B7C1EEEB792006532C8 /* IntroduceSubView.swift */; };
 		CE51AC641EF90853005DCEE0 /* LoginInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C741EEE8E7F0086DA84 /* LoginInteractorOutput.swift */; };
-		CE51AC681EF90853005DCEE0 /* CurioNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D60F1DDDD0F600FFE63E /* CurioNotificationManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		CE51AC6C1EF90853005DCEE0 /* CurioPushData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6131DDDD0F600FFE63E /* CurioPushData.m */; };
 		CE51AC6E1EF90853005DCEE0 /* AutoSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814641EF7A93E001DFCF0 /* AutoSyncViewController.swift */; };
 		CE51AC7E1EF90853005DCEE0 /* LoginInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C701EEE8E7F0086DA84 /* LoginInitializer.swift */; };
 		CE51AC871EF90853005DCEE0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7C1EEE8E7F0086DA84 /* LoginViewController.swift */; };
@@ -3273,6 +3244,7 @@
 		CEBBDE0E1F01E69B00CDF527 /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
 		CEBDB1D720444C73007EE1AE /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */; };
 		CEBDB1D920444D97007EE1AE /* ShareCustomizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDB1D820444D97007EE1AE /* ShareCustomizator.swift */; };
+		CEBDB1DB20444DEE007EE1AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */; };
 		CEBDB1DC20444E50007EE1AE /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
 		CEBDB1DD20444E50007EE1AE /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
 		CEBDB1DE20444E50007EE1AE /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */; };
@@ -3790,38 +3762,6 @@
 		5047D2D77F166BBE66169F8E /* PhotoVideoDetailInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInteractorOutput.swift; sourceTree = "<group>"; };
 		510085838E04ED18218A9E98 /* Pods-TC_Depo_LifeTech.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech.appstore.xcconfig"; sourceTree = "<group>"; };
 		51B73FE0148359D56DBAC42C /* SplashViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashViewOutput.swift; sourceTree = "<group>"; };
-		5247D5FE1DDDD0F600FFE63E /* CurioAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioAction.h; sourceTree = "<group>"; };
-		5247D5FF1DDDD0F600FFE63E /* CurioAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioAction.m; sourceTree = "<group>"; };
-		5247D6001DDDD0F600FFE63E /* CurioActionToolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioActionToolkit.h; sourceTree = "<group>"; };
-		5247D6011DDDD0F600FFE63E /* CurioActionToolkit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioActionToolkit.m; sourceTree = "<group>"; };
-		5247D6021DDDD0F600FFE63E /* CurioConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioConstants.h; sourceTree = "<group>"; };
-		5247D6031DDDD0F600FFE63E /* CurioConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioConstants.m; sourceTree = "<group>"; };
-		5247D6041DDDD0F600FFE63E /* CurioDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioDB.h; sourceTree = "<group>"; };
-		5247D6051DDDD0F600FFE63E /* CurioDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioDB.m; sourceTree = "<group>"; };
-		5247D6061DDDD0F600FFE63E /* CurioDBToolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioDBToolkit.h; sourceTree = "<group>"; };
-		5247D6071DDDD0F600FFE63E /* CurioDBToolkit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioDBToolkit.m; sourceTree = "<group>"; };
-		5247D6081DDDD0F600FFE63E /* CurioLocationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioLocationData.h; sourceTree = "<group>"; };
-		5247D6091DDDD0F600FFE63E /* CurioLocationData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioLocationData.m; sourceTree = "<group>"; };
-		5247D60A1DDDD0F600FFE63E /* CurioLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioLocationManager.h; sourceTree = "<group>"; };
-		5247D60B1DDDD0F600FFE63E /* CurioLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioLocationManager.m; sourceTree = "<group>"; };
-		5247D60C1DDDD0F600FFE63E /* CurioNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioNetwork.h; sourceTree = "<group>"; };
-		5247D60D1DDDD0F600FFE63E /* CurioNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioNetwork.m; sourceTree = "<group>"; };
-		5247D60E1DDDD0F600FFE63E /* CurioNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioNotificationManager.h; sourceTree = "<group>"; };
-		5247D60F1DDDD0F600FFE63E /* CurioNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioNotificationManager.m; sourceTree = "<group>"; };
-		5247D6101DDDD0F600FFE63E /* CurioPostOffice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioPostOffice.h; sourceTree = "<group>"; };
-		5247D6111DDDD0F600FFE63E /* CurioPostOffice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioPostOffice.m; sourceTree = "<group>"; };
-		5247D6121DDDD0F600FFE63E /* CurioPushData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioPushData.h; sourceTree = "<group>"; };
-		5247D6131DDDD0F600FFE63E /* CurioPushData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioPushData.m; sourceTree = "<group>"; };
-		5247D6141DDDD0F600FFE63E /* CurioReachabilityEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioReachabilityEx.h; sourceTree = "<group>"; };
-		5247D6151DDDD0F600FFE63E /* CurioReachabilityEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioReachabilityEx.m; sourceTree = "<group>"; };
-		5247D6161DDDD0F600FFE63E /* CurioResourceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioResourceUtil.h; sourceTree = "<group>"; };
-		5247D6171DDDD0F600FFE63E /* CurioResourceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioResourceUtil.m; sourceTree = "<group>"; };
-		5247D6181DDDD0F600FFE63E /* CurioSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioSDK.h; sourceTree = "<group>"; };
-		5247D6191DDDD0F600FFE63E /* CurioSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioSDK.m; sourceTree = "<group>"; };
-		5247D61A1DDDD0F600FFE63E /* CurioSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioSettings.h; sourceTree = "<group>"; };
-		5247D61B1DDDD0F600FFE63E /* CurioSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioSettings.m; sourceTree = "<group>"; };
-		5247D61C1DDDD0F600FFE63E /* CurioUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioUtil.h; sourceTree = "<group>"; };
-		5247D61D1DDDD0F600FFE63E /* CurioUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioUtil.m; sourceTree = "<group>"; };
 		536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		5570CF3888592E7C4D788AA3 /* ActivityTimelineViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineViewOutput.swift; sourceTree = "<group>"; };
 		57753712CB7D976990B18D89 /* SplashRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
@@ -5124,9 +5064,7 @@
 		B56E0DD620B414510082044D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppResponsivenessService.swift; sourceTree = "<group>"; };
 		B56E0DE820B5644D0082044D /* NotificationName+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extensions.swift"; sourceTree = "<group>"; };
-		B5711E0220C16DC300E72A9D /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
-		B5711E0520C16EC500E72A9D /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
-		B5711E0720C16F6F00E72A9D /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
+		B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ShareActivity.swift"; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
 		B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+JPEG.swift"; sourceTree = "<group>"; };
@@ -6753,45 +6691,6 @@
 				8AE369B2C07D755F2883043F /* RegistrationRouter.swift */,
 			);
 			path = Router;
-			sourceTree = "<group>";
-		};
-		562FB3D71AA48C4400F9EFBD /* CurioSDK */ = {
-			isa = PBXGroup;
-			children = (
-				5247D5FE1DDDD0F600FFE63E /* CurioAction.h */,
-				5247D5FF1DDDD0F600FFE63E /* CurioAction.m */,
-				5247D6001DDDD0F600FFE63E /* CurioActionToolkit.h */,
-				5247D6011DDDD0F600FFE63E /* CurioActionToolkit.m */,
-				5247D6021DDDD0F600FFE63E /* CurioConstants.h */,
-				5247D6031DDDD0F600FFE63E /* CurioConstants.m */,
-				5247D6041DDDD0F600FFE63E /* CurioDB.h */,
-				5247D6051DDDD0F600FFE63E /* CurioDB.m */,
-				5247D6061DDDD0F600FFE63E /* CurioDBToolkit.h */,
-				5247D6071DDDD0F600FFE63E /* CurioDBToolkit.m */,
-				5247D6081DDDD0F600FFE63E /* CurioLocationData.h */,
-				5247D6091DDDD0F600FFE63E /* CurioLocationData.m */,
-				5247D60A1DDDD0F600FFE63E /* CurioLocationManager.h */,
-				5247D60B1DDDD0F600FFE63E /* CurioLocationManager.m */,
-				5247D60C1DDDD0F600FFE63E /* CurioNetwork.h */,
-				5247D60D1DDDD0F600FFE63E /* CurioNetwork.m */,
-				5247D60E1DDDD0F600FFE63E /* CurioNotificationManager.h */,
-				5247D60F1DDDD0F600FFE63E /* CurioNotificationManager.m */,
-				5247D6101DDDD0F600FFE63E /* CurioPostOffice.h */,
-				5247D6111DDDD0F600FFE63E /* CurioPostOffice.m */,
-				5247D6121DDDD0F600FFE63E /* CurioPushData.h */,
-				5247D6131DDDD0F600FFE63E /* CurioPushData.m */,
-				5247D6141DDDD0F600FFE63E /* CurioReachabilityEx.h */,
-				5247D6151DDDD0F600FFE63E /* CurioReachabilityEx.m */,
-				5247D6161DDDD0F600FFE63E /* CurioResourceUtil.h */,
-				5247D6171DDDD0F600FFE63E /* CurioResourceUtil.m */,
-				5247D6181DDDD0F600FFE63E /* CurioSDK.h */,
-				5247D6191DDDD0F600FFE63E /* CurioSDK.m */,
-				5247D61A1DDDD0F600FFE63E /* CurioSettings.h */,
-				5247D61B1DDDD0F600FFE63E /* CurioSettings.m */,
-				5247D61C1DDDD0F600FFE63E /* CurioUtil.h */,
-				5247D61D1DDDD0F600FFE63E /* CurioUtil.m */,
-			);
-			path = CurioSDK;
 			sourceTree = "<group>";
 		};
 		56B9E92B1DED750600DE1011 /* AppRater */ = {
@@ -9647,7 +9546,6 @@
 				8CFF866F1F0F96E600520D18 /* ContactSyncSDK */,
 				56B9E92B1DED750600DE1011 /* AppRater */,
 				05A938071AF6AE7C00AE2892 /* TurkcellUpdaterSDK */,
-				562FB3D71AA48C4400F9EFBD /* CurioSDK */,
 			);
 			path = VendorsFrameworks;
 			sourceTree = "<group>";
@@ -10037,7 +9935,6 @@
 				B54BFF35202B20250018AF82 /* MainInterface.storyboard */,
 				B54BFF38202B20250018AF82 /* Info.plist */,
 				B5513AF8205BAED70016C344 /* L10n.swift */,
-				B5711E0220C16DC300E72A9D /* images.xcassets */,
 			);
 			path = "autosync-widget";
 			sourceTree = "<group>";
@@ -10282,7 +10179,6 @@
 				7AFAB37A2073AE2B00C54C9B /* InfoAppStore.plist */,
 				7AFAB37C2073AE3200C54C9B /* InfoEnterprise.plist */,
 				CE18CC8F204E87CE00FA3F44 /* L10n.swift */,
-				B5711E0720C16F6F00E72A9D /* images.xcassets */,
 			);
 			path = LifeboxFileProviderUI;
 			sourceTree = "<group>";
@@ -10900,7 +10796,6 @@
 				CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */,
 				7A3E0BFC20626B7100F79A1C /* LifeboxShared-appstore.entitlements */,
 				7A3E0BFD20626B7100F79A1C /* LifeboxShared-enterprise.entitlements */,
-				B5711E0520C16EC500E72A9D /* images.xcassets */,
 			);
 			path = LifeboxShared;
 			sourceTree = "<group>";
@@ -11573,6 +11468,7 @@
 				CEE9A5FA1F23308800ED8610 /* String+Int.swift */,
 				87AD15E31FD678B800DE97DB /* String+Subscript.swift */,
 				78DDEF9B201908C100E3530B /* String+CyrillicCompare.swift */,
+				B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -12753,6 +12649,7 @@
 				8C06B0372008AD71003D8E05 /* Orta@2x.png in Resources */,
 				8C0E904B1FDEBDFF00789C91 /* CustomNavBar~ipad.xib in Resources */,
 				8C06B0832008AD71003D8E05 /* paylas_mail.png in Resources */,
+				8C0E904C1FDEBDFF00789C91 /* Images.xcassets in Resources */,
 				8C0E904D1FDEBDFF00789C91 /* IntroduceViewController.xib in Resources */,
 				8C06AF9B2008AD71003D8E05 /* filtre_selected@3x.png in Resources */,
 				8C06B0452008AD71003D8E05 /* oval_beyaz@3x.png in Resources */,
@@ -12981,9 +12878,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B54BFF5A202C86F30018AF82 /* Images.xcassets in Resources */,
 				CE4D27FD207E0479003AE4FB /* TurkcellSaturaBol.ttf in Resources */,
 				CE4D27FF207E0479003AE4FB /* TurkcellSaturaDem.ttf in Resources */,
-				B5711E0320C16DC300E72A9D /* images.xcassets in Resources */,
 				B54BFF37202B20250018AF82 /* MainInterface.storyboard in Resources */,
 				8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */,
 				8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */,
@@ -13012,8 +12909,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AFAB37D2073AE3200C54C9B /* InfoEnterprise.plist in Resources */,
+				CE18CC96204E8DC900FA3F44 /* Images.xcassets in Resources */,
 				CE18CC7F204E85DC00FA3F44 /* TurkcellSaturaBol.ttf in Resources */,
-				B5711E0820C16F6F00E72A9D /* images.xcassets in Resources */,
 				CE18CC80204E85DC00FA3F44 /* TurkcellSaturaBolIta.ttf in Resources */,
 				CE4D27F3207E00D4003AE4FB /* OurLocalizable.strings in Resources */,
 				CE18CC81204E85DC00FA3F44 /* TurkcellSaturaDem.ttf in Resources */,
@@ -13596,11 +13493,11 @@
 				CE4D2813207E0997003AE4FB /* PasscodeViewImp.xib in Resources */,
 				CEBDB1DF20444E50007EE1AE /* TurkcellSaturaDemIta.ttf in Resources */,
 				CEBDB1E020444E50007EE1AE /* TurkcellSaturaIta.ttf in Resources */,
-				B5711E0620C16EC500E72A9D /* images.xcassets in Resources */,
 				CE4D27F2207E00D3003AE4FB /* OurLocalizable.strings in Resources */,
 				CEBDB1E120444E50007EE1AE /* TurkcellSaturaMed.ttf in Resources */,
 				CEBDB1E220444E50007EE1AE /* TurkcellSaturaMedIta.ttf in Resources */,
 				CEBDB1E320444E50007EE1AE /* TurkcellSaturaReg.ttf in Resources */,
+				CEBDB1DB20444DEE007EE1AE /* Images.xcassets in Resources */,
 				CE58FAF520444493007F3F54 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -13698,6 +13595,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CircleProgressBar/CircleProgressBar.framework",
+				"${BUILT_PRODUCTS_DIR}/Curio_iOS_SDK/Curio_iOS_SDK.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
@@ -13723,6 +13621,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curio_iOS_SDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
@@ -13789,6 +13688,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CircleProgressBar/CircleProgressBar.framework",
+				"${BUILT_PRODUCTS_DIR}/Curio_iOS_SDK/Curio_iOS_SDK.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
@@ -13814,6 +13714,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curio_iOS_SDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
@@ -13934,7 +13835,6 @@
 				8C0E8C6F1FDEBDFF00789C91 /* Filter.m in Sources */,
 				8C0E8C701FDEBDFF00789C91 /* ValidationResults.swift in Sources */,
 				8C0E8C721FDEBDFF00789C91 /* GSMUserInputCell.swift in Sources */,
-				8C0E8C731FDEBDFF00789C91 /* CurioLocationData.m in Sources */,
 				8C0E8C741FDEBDFF00789C91 /* HomePageInteractorOutput.swift in Sources */,
 				8C0E8C761FDEBDFF00789C91 /* PackagesPresenter.swift in Sources */,
 				8C0E8C771FDEBDFF00789C91 /* LocalMediaItems.swift in Sources */,
@@ -13953,7 +13853,6 @@
 				8CD2B3AB1FE7B23E00280547 /* PopUpController.swift in Sources */,
 				8C0E8C801FDEBDFF00789C91 /* PasscodeSettingsInteractorIO.swift in Sources */,
 				8C0E8C811FDEBDFF00789C91 /* UsageInfoPresenter.swift in Sources */,
-				8C0E8C831FDEBDFF00789C91 /* CurioSDK.m in Sources */,
 				8C0E8C841FDEBDFF00789C91 /* PasscodeEnterViewController.swift in Sources */,
 				8C0E8C851FDEBDFF00789C91 /* CreateStoryPreviewViewController.swift in Sources */,
 				8C0E8C861FDEBDFF00789C91 /* FullyLoaded.m in Sources */,
@@ -13980,7 +13879,6 @@
 				8C0E8C921FDEBDFF00789C91 /* AutoSyncSwitcherTableViewCell.swift in Sources */,
 				8C0E8C931FDEBDFF00789C91 /* PasscodeSettingsViewController.swift in Sources */,
 				8C0E8C941FDEBDFF00789C91 /* HomePageViewOutput.swift in Sources */,
-				8C0E8C951FDEBDFF00789C91 /* CurioConstants.m in Sources */,
 				8C0E8C961FDEBDFF00789C91 /* ContactSyncModels.swift in Sources */,
 				8C0E8C971FDEBDFF00789C91 /* SubscriptionPlanCollectionViewCell.swift in Sources */,
 				8CD2B3AE1FE7B37100280547 /* PhotoSyncService.swift in Sources */,
@@ -13989,7 +13887,6 @@
 				8C0E8C9B1FDEBDFF00789C91 /* UploadFromLifeBoxInteractorIO.swift in Sources */,
 				8C0E8C9C1FDEBDFF00789C91 /* CreateStoryPhotosOrderViewInput.swift in Sources */,
 				8C0E8C9D1FDEBDFF00789C91 /* SeacrhViewRouter.swift in Sources */,
-				8C0E8C9E1FDEBDFF00789C91 /* CurioNetwork.m in Sources */,
 				8C0E8C9F1FDEBDFF00789C91 /* ValidationService.swift in Sources */,
 				8C0E8CA01FDEBDFF00789C91 /* UserProfileViewController.swift in Sources */,
 				8C0E8CA11FDEBDFF00789C91 /* SearchViewInteractorInput.swift in Sources */,
@@ -14001,7 +13898,6 @@
 				8C0E8CA91FDEBDFF00789C91 /* MulticastDelegate.swift in Sources */,
 				8C0E8CAA1FDEBDFF00789C91 /* PopUpSwipeCell.swift in Sources */,
 				8C0E8CAB1FDEBDFF00789C91 /* LoginPresenter.swift in Sources */,
-				8C0E8CAC1FDEBDFF00789C91 /* CurioLocationManager.m in Sources */,
 				8C0E8CAD1FDEBDFF00789C91 /* LifeBoxModel.xcdatamodeld in Sources */,
 				8C0E8CAE1FDEBDFF00789C91 /* AutoSyncViewInput.swift in Sources */,
 				8C0E8CB01FDEBDFF00789C91 /* VisualMusicPlayerRouter.swift in Sources */,
@@ -14022,7 +13918,6 @@
 				8C0E8CBD1FDEBDFF00789C91 /* CollectionViewLayout.swift in Sources */,
 				8C0E8CBE1FDEBDFF00789C91 /* SyncLogger.m in Sources */,
 				8C0E8CBF1FDEBDFF00789C91 /* LoginViewInput.swift in Sources */,
-				8C0E8CC01FDEBDFF00789C91 /* CurioPostOffice.m in Sources */,
 				8C0E8CC11FDEBDFF00789C91 /* SyncRecord.m in Sources */,
 				8C0E8CC21FDEBDFF00789C91 /* Device.swift in Sources */,
 				8C0E8CC31FDEBDFF00789C91 /* ActivityTimelineParameters.swift in Sources */,
@@ -14042,7 +13937,6 @@
 				8C0E8CCE1FDEBDFF00789C91 /* ImportPhotosInteractorInput.swift in Sources */,
 				8C0E8CCF1FDEBDFF00789C91 /* AlbumSelectionPresenter.swift in Sources */,
 				8C0E8CD01FDEBDFF00789C91 /* PrintInteractorOutput.swift in Sources */,
-				8C0E8CD11FDEBDFF00789C91 /* CurioResourceUtil.m in Sources */,
 				8C0E8CD21FDEBDFF00789C91 /* MoreActionsConfig.swift in Sources */,
 				8C0E8CD31FDEBDFF00789C91 /* ServerValueError.swift in Sources */,
 				8C0E8CD41FDEBDFF00789C91 /* SyncDB.m in Sources */,
@@ -14067,7 +13961,6 @@
 				8C0E8CDF1FDEBDFF00789C91 /* AutoSyncInteractorOutput.swift in Sources */,
 				8CD2B3AF1FE7B37600280547 /* VideoSyncService.swift in Sources */,
 				8C0E8CE11FDEBDFF00789C91 /* AlbumDetailService.swift in Sources */,
-				8C0E8CE21FDEBDFF00789C91 /* CurioDBToolkit.m in Sources */,
 				8C0B91B92017104300A5BA81 /* AuthorizationURLs.swift in Sources */,
 				8C0E8CE31FDEBDFF00789C91 /* RequestHeader.swift in Sources */,
 				8C0B91BD2017108100A5BA81 /* Validator.swift in Sources */,
@@ -14141,7 +14034,6 @@
 				8C0E8D191FDEBDFF00789C91 /* InfoButtonCellProtocol.swift in Sources */,
 				8C0E8D1A1FDEBDFF00789C91 /* Mail.swift in Sources */,
 				CE92456A206E0910000C7791 /* InfinityRotater.swift in Sources */,
-				8C0E8D1B1FDEBDFF00789C91 /* CurioAction.m in Sources */,
 				4A56D5CE202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */,
 				8C0E8D1C1FDEBDFF00789C91 /* UIApplication+Settings.swift in Sources */,
 				8C0E8D1D1FDEBDFF00789C91 /* LoginRouterInput.swift in Sources */,
@@ -14160,7 +14052,6 @@
 				8C06AC1F2008AAC4003D8E05 /* FileForDownload.swift in Sources */,
 				8C0E8D281FDEBDFF00789C91 /* AutoSyncInteractor.swift in Sources */,
 				8C0E8D291FDEBDFF00789C91 /* FilesDataSource.swift in Sources */,
-				8C0E8D2A1FDEBDFF00789C91 /* CurioActionToolkit.m in Sources */,
 				8C0E8D2B1FDEBDFF00789C91 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				8C0E8D2C1FDEBDFF00789C91 /* UIApplication+topController.swift in Sources */,
 				8C0E8D2D1FDEBDFF00789C91 /* VisualMusicPlayerViewOutput.swift in Sources */,
@@ -14187,7 +14078,6 @@
 				8C0E8D3E1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CEF371A720887774007AD36E /* AppConfigurator.swift in Sources */,
 				8C0E8D3F1FDEBDFF00789C91 /* HomeViewTopView.swift in Sources */,
-				8C0E8D401FDEBDFF00789C91 /* CurioDB.m in Sources */,
 				C62239B7204976E80043ED44 /* FaceImagePhotosPresenter.swift in Sources */,
 				8C0E8D411FDEBDFF00789C91 /* NavBarConfugurator.swift in Sources */,
 				8C0B91A720170EAB00A5BA81 /* ManageContactsViewOutput.swift in Sources */,
@@ -14198,11 +14088,9 @@
 				8C0E8D451FDEBDFF00789C91 /* BlueButtonWithWhiteText.swift in Sources */,
 				8C0B91BE201710EB00A5BA81 /* TitleView.swift in Sources */,
 				8C0E8D471FDEBDFF00789C91 /* String+Int.swift in Sources */,
-				8C0E8D481FDEBDFF00789C91 /* CurioUtil.m in Sources */,
 				8C0E8D491FDEBDFF00789C91 /* CustomTabBar.swift in Sources */,
 				8C0E8D4B1FDEBDFF00789C91 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
 				8C0E8D4D1FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.swift in Sources */,
-				8C0E8D4E1FDEBDFF00789C91 /* CurioReachabilityEx.m in Sources */,
 				8C0E8D4F1FDEBDFF00789C91 /* FreeAppSpace.swift in Sources */,
 				4A9B3906201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
 				FA793D8A201872E200A02B46 /* PlacesService.swift in Sources */,
@@ -14210,7 +14098,6 @@
 				8C0E8D521FDEBDFF00789C91 /* DataStorage.swift in Sources */,
 				8C0E8D531FDEBDFF00789C91 /* BaseUserInputCellView.swift in Sources */,
 				8C0E8D541FDEBDFF00789C91 /* LoginConfigurator.swift in Sources */,
-				8C0E8D551FDEBDFF00789C91 /* CurioSettings.m in Sources */,
 				8C0E8D561FDEBDFF00789C91 /* RouteRequests.swift in Sources */,
 				8C0E8D571FDEBDFF00789C91 /* PackagesInitializer.swift in Sources */,
 				8C0E8D581FDEBDFF00789C91 /* LoginDataStorage.swift in Sources */,
@@ -14218,11 +14105,9 @@
 				8C0E8D5A1FDEBDFF00789C91 /* IntroduceSubView.swift in Sources */,
 				8C0E8D5C1FDEBDFF00789C91 /* LoginInteractorOutput.swift in Sources */,
 				8C0E8D5D1FDEBDFF00789C91 /* UsageInfoInitializer.swift in Sources */,
-				8C0E8D5E1FDEBDFF00789C91 /* CurioNotificationManager.m in Sources */,
 				8C0E8D601FDEBDFF00789C91 /* SyncStatus.m in Sources */,
 				8C0E8D611FDEBDFF00789C91 /* PhoneVereficationDataStorage.swift in Sources */,
 				8C0E8D621FDEBDFF00789C91 /* AlertFilesActionsSheetModuleInput.swift in Sources */,
-				8C0E8D631FDEBDFF00789C91 /* CurioPushData.m in Sources */,
 				C62239BD2049774B0043ED44 /* PeopleAlbumSliderInteractor.swift in Sources */,
 				8C0E8D641FDEBDFF00789C91 /* BottomSelectionTabBarViewController.swift in Sources */,
 				8C0E8D651FDEBDFF00789C91 /* BaseDataSourceForCollectionView.swift in Sources */,
@@ -14837,6 +14722,7 @@
 				8C0E8F731FDEBDFF00789C91 /* VisualMusicPlayerInteractor.swift in Sources */,
 				8C0E8F741FDEBDFF00789C91 /* SelectNameViewInput.swift in Sources */,
 				8C06AC252008AB85003D8E05 /* FreeAppSpaceInitializer.swift in Sources */,
+				7CFCD1D520C15865001BDDC4 /* UILabel+Font.swift in Sources */,
 				C62239BC204977120043ED44 /* FaceImagePhotosConfigurator.swift in Sources */,
 				8C0E8F751FDEBDFF00789C91 /* AccountParameters.swift in Sources */,
 				7C379F40202C364F0050C055 /* CardActionType.swift in Sources */,
@@ -14857,6 +14743,7 @@
 				8C0E8F821FDEBDFF00789C91 /* SelectNameRouterInput.swift in Sources */,
 				8C0E8F831FDEBDFF00789C91 /* PackagesRouterInput.swift in Sources */,
 				4A56D5BC202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
+				B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */,
 				8C0E8F841FDEBDFF00789C91 /* SelectNameRouter.swift in Sources */,
 				C62239A3204972160043ED44 /* MenloworksTagsService.swift in Sources */,
 				8CD2B3B11FE7B3BD00280547 /* UIButton+Color.swift in Sources */,
@@ -15085,7 +14972,6 @@
 				CE51AB051EF90853005DCEE0 /* Filter.m in Sources */,
 				CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */,
 				CE51AB121EF90853005DCEE0 /* GSMUserInputCell.swift in Sources */,
-				CE51AB161EF90853005DCEE0 /* CurioLocationData.m in Sources */,
 				CE3E4D0D201B696500173045 /* UIButton+Properties.swift in Sources */,
 				CEAE3FB41EFD4F0D00A405B2 /* HomePageInteractorOutput.swift in Sources */,
 				CE2F561B1F7552A900F49DA1 /* PackagesPresenter.swift in Sources */,
@@ -15105,7 +14991,6 @@
 				CE99AC78201CB778003DD3B7 /* CardActionType.swift in Sources */,
 				CEC3C2491FB99AF800C3D67F /* PasscodeSettingsInteractorIO.swift in Sources */,
 				D47863F71F3F18FA00EFDC6D /* UsageInfoPresenter.swift in Sources */,
-				CE51AB261EF90853005DCEE0 /* CurioSDK.m in Sources */,
 				CEC3C21E1FB9961900C3D67F /* PasscodeEnterViewController.swift in Sources */,
 				7C66E8B11F979C3300D98F27 /* CreateStoryPreviewViewController.swift in Sources */,
 				CE51AB281EF90853005DCEE0 /* FullyLoaded.m in Sources */,
@@ -15128,7 +15013,6 @@
 				CE51AB3A1EF90853005DCEE0 /* AutoSyncSwitcherTableViewCell.swift in Sources */,
 				CEC3C2451FB99AF800C3D67F /* PasscodeSettingsViewController.swift in Sources */,
 				CEAE3FBC1EFD4F0D00A405B2 /* HomePageViewOutput.swift in Sources */,
-				CE51AB3D1EF90853005DCEE0 /* CurioConstants.m in Sources */,
 				CEB76EB01FE9094700B679EB /* UIScrollView+Refresh.swift in Sources */,
 				8CF792AB1F10C65E00007719 /* ContactSyncModels.swift in Sources */,
 				D47864041F3F330A00EFDC6D /* SubscriptionPlanCollectionViewCell.swift in Sources */,
@@ -15138,7 +15022,6 @@
 				7C233CD61FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift in Sources */,
 				7C49881E1F3320420039C5F2 /* CreateStoryPhotosOrderViewInput.swift in Sources */,
 				8DCB21781F3C8BC000BAFE1E /* SeacrhViewRouter.swift in Sources */,
-				CE51AB531EF90853005DCEE0 /* CurioNetwork.m in Sources */,
 				CE51AB5B1EF90853005DCEE0 /* ValidationService.swift in Sources */,
 				7CDABD0E1F1E3A6300C8CC16 /* UserProfileViewController.swift in Sources */,
 				986B20622077684C00E04B96 /* StreamReaderWriter.swift in Sources */,
@@ -15153,7 +15036,6 @@
 				CE23A0F2205FF4E00048267D /* ErrorPresenter.swift in Sources */,
 				CE51AB6C1EF90853005DCEE0 /* LoginPresenter.swift in Sources */,
 				7C6945E720039F4A00152344 /* FreeAppSpaceConfigurator.swift in Sources */,
-				CE51AB6E1EF90853005DCEE0 /* CurioLocationManager.m in Sources */,
 				CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */,
 				CECD4E511FE10C7700978BE7 /* UIColor+Adjust.swift in Sources */,
 				B56E0DDA20B44AFC0082044D /* AppResponsivenessService.swift in Sources */,
@@ -15177,7 +15059,6 @@
 				7C355E631F0123E0003B004C /* CollectionViewLayout.swift in Sources */,
 				8CFF86911F0F96E600520D18 /* SyncLogger.m in Sources */,
 				CE51AB871EF90853005DCEE0 /* LoginViewInput.swift in Sources */,
-				CE51AB901EF90853005DCEE0 /* CurioPostOffice.m in Sources */,
 				8CFF86921F0F96E600520D18 /* SyncRecord.m in Sources */,
 				CE3318E11EFCF9D600E25989 /* Device.swift in Sources */,
 				CE8F44EF1F6ABB540062C2E0 /* ActivityTimelineParameters.swift in Sources */,
@@ -15199,7 +15080,6 @@
 				D498865A1F3EFBE200F50C95 /* ImportPhotosInteractorInput.swift in Sources */,
 				7C04350F1F50B6E200193C75 /* AlbumSelectionPresenter.swift in Sources */,
 				EFA74FB61FBF378F00CF946E /* PrintInteractorOutput.swift in Sources */,
-				CE51ABA11EF90853005DCEE0 /* CurioResourceUtil.m in Sources */,
 				8C6FB6901F0B9F7600B552A3 /* MoreActionsConfig.swift in Sources */,
 				CE7466FF1FD6B35400D0885D /* ServerValueError.swift in Sources */,
 				8CFF868F1F0F96E600520D18 /* SyncDB.m in Sources */,
@@ -15220,7 +15100,6 @@
 				CEE1D1FE1F714F300008F4CF /* CoreDataStack.swift in Sources */,
 				CE51ABB51EF90853005DCEE0 /* AutoSyncInteractorOutput.swift in Sources */,
 				7C04350B1F4EF3DA00193C75 /* AlbumDetailService.swift in Sources */,
-				CE51ABBB1EF90853005DCEE0 /* CurioDBToolkit.m in Sources */,
 				CE33DFFF1F0296C000706C40 /* RequestHeader.swift in Sources */,
 				8CFF86891F0F96E600520D18 /* Contact.m in Sources */,
 				7C6E2F991F31E4F800536DB6 /* CreateStoryNameViewInput.swift in Sources */,
@@ -15293,7 +15172,6 @@
 				FA793D842018725400A02B46 /* ThingsService.swift in Sources */,
 				8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */,
 				7CFE92FA1F601E36008A3B72 /* Mail.swift in Sources */,
-				CE51ABFC1EF90853005DCEE0 /* CurioAction.m in Sources */,
 				CEA84C231F7CE8F7009B0769 /* UIApplication+Settings.swift in Sources */,
 				CE51ABFD1EF90853005DCEE0 /* LoginRouterInput.swift in Sources */,
 				7C04350D1F4F17E800193C75 /* AlbumDetailResponce.swift in Sources */,
@@ -15311,7 +15189,6 @@
 				CE51AC091EF90853005DCEE0 /* AutoSyncInteractor.swift in Sources */,
 				8CF6A9BE207C8C32007DEF71 /* PageCompounder.swift in Sources */,
 				7C3A74441F05371B00124DF5 /* FilesDataSource.swift in Sources */,
-				CE51AC0C1EF90853005DCEE0 /* CurioActionToolkit.m in Sources */,
 				7C233CD51FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */,
 				8C7786A91F3F38F0005CB432 /* VisualMusicPlayerViewOutput.swift in Sources */,
@@ -15340,7 +15217,6 @@
 				CE58FB0020444525007F3F54 /* SharedFactory.swift in Sources */,
 				B5C4C8A7204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
 				CEAE3FDD1EFD500B00A405B2 /* HomeViewTopView.swift in Sources */,
-				CE51AC351EF90853005DCEE0 /* CurioDB.m in Sources */,
 				CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */,
 				78D9BA392007E7F100F2233F /* DuplicatedContactsInteractor.swift in Sources */,
 				CEF3719B20873673007AD36E /* UIViewController+NavBar.swift in Sources */,
@@ -15353,12 +15229,10 @@
 				CE1E26E120174D7500F49E41 /* ResponseParser.swift in Sources */,
 				CEBB2DD61F76550A00D725F0 /* String+Int.swift in Sources */,
 				78D9BA412007E81200F2233F /* DuplicatedContactsRouterInput.swift in Sources */,
-				CE51AC3C1EF90853005DCEE0 /* CurioUtil.m in Sources */,
 				8C6FB6981F0B9F8400B552A3 /* CustomTabBar.swift in Sources */,
 				8C6EF8791F348B5C002AC795 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
 				4A8CC314201A023000C040C4 /* FaceImagePresenter.swift in Sources */,
 				7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */,
-				CE51AC461EF90853005DCEE0 /* CurioReachabilityEx.m in Sources */,
 				7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */,
 				7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				CE46402820B6E28500EFC1AE /* LocalUnsyncedOperation.swift in Sources */,
@@ -15367,7 +15241,6 @@
 				4A56D5B2202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */,
 				CE51AC481EF90853005DCEE0 /* BaseUserInputCellView.swift in Sources */,
 				CE51AC4A1EF90853005DCEE0 /* LoginConfigurator.swift in Sources */,
-				CE51AC4C1EF90853005DCEE0 /* CurioSettings.m in Sources */,
 				CE27C31F1EF9515800D4D156 /* RouteRequests.swift in Sources */,
 				CE2F56161F7552A900F49DA1 /* PackagesInitializer.swift in Sources */,
 				CE15AFBE20A0846E00015874 /* UINavigationController+Push.swift in Sources */,
@@ -15379,13 +15252,11 @@
 				CE51AC641EF90853005DCEE0 /* LoginInteractorOutput.swift in Sources */,
 				CE0596F320385E950083D6FC /* ImageFormat.swift in Sources */,
 				D47863F21F3F18FA00EFDC6D /* UsageInfoInitializer.swift in Sources */,
-				CE51AC681EF90853005DCEE0 /* CurioNotificationManager.m in Sources */,
 				8CFF86941F0F96E600520D18 /* SyncStatus.m in Sources */,
 				CEC05B6A1F05399100332EBA /* PhoneVereficationDataStorage.swift in Sources */,
 				78E8E2B22023196B00A979AB /* FaceImagePhotosConfigurator.swift in Sources */,
 				8C00971A1F6BDAD900FA069C /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				CEF41E9B2035B2BF0008FCD5 /* PreventCollectionView.swift in Sources */,
-				CE51AC6C1EF90853005DCEE0 /* CurioPushData.m in Sources */,
 				8C6EF8811F348B5C002AC795 /* BottomSelectionTabBarViewController.swift in Sources */,
 				7C3A74361F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift in Sources */,
 				CE51AC6E1EF90853005DCEE0 /* AutoSyncViewController.swift in Sources */,
@@ -16036,6 +15907,7 @@
 				CE2F56171F7552A900F49DA1 /* PackagesInteractor.swift in Sources */,
 				85AAD0E4BD93A160437B1236 /* AlbumSelectionViewController.swift in Sources */,
 				7C529688203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */,
+				B5711DFF20C13F4200E72A9D /* String+ShareActivity.swift in Sources */,
 				64E35594735C9449EB20343F /* AlbumsPresenter.swift in Sources */,
 				EB0329F2FE28E1F8F2F7ABAE /* AlbumsInteractor.swift in Sources */,
 				8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */,
