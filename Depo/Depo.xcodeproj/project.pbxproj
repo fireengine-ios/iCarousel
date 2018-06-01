@@ -1486,9 +1486,9 @@
 		8C0B91B220170F4D00A5BA81 /* ContactSyncResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBC200D1AD500D11CD2 /* ContactSyncResponse.swift */; };
 		8C0B91B320170F5B00A5BA81 /* ContactSyncParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B02CBE200D1B0300D11CD2 /* ContactSyncParametrs.swift */; };
 		8C0B91B42017103600A5BA81 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
-		8C0B91B52017103900A5BA81 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		8C0B91B62017103D00A5BA81 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		8C0B91B82017104100A5BA81 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C0B91B52017103900A5BA81 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		8C0B91B62017103D00A5BA81 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		8C0B91B82017104100A5BA81 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		8C0B91B92017104300A5BA81 /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
 		8C0B91BA2017104500A5BA81 /* AuthorizationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */; };
 		8C0B91BB2017104800A5BA81 /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
@@ -2864,6 +2864,7 @@
 		CE4516A91F7D2EF1008B1F9A /* ServerStatusError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4516A81F7D2EF1008B1F9A /* ServerStatusError.swift */; };
 		CE46402820B6E28500EFC1AE /* LocalUnsyncedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46402720B6E28400EFC1AE /* LocalUnsyncedOperation.swift */; };
 		CE46402920B6E28800EFC1AE /* LocalUnsyncedOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46402720B6E28400EFC1AE /* LocalUnsyncedOperation.swift */; };
+		CE47155F20BFEDD3001DF164 /* UILabel+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47155E20BFEDD3001DF164 /* UILabel+Font.swift */; };
 		CE47D1FC1FD147BA00888D2E /* InsetsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */; };
 		CE4851ED2018B029006B8854 /* FilterPhotoCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4851EC2018B029006B8854 /* FilterPhotoCard.xib */; };
 		CE4851EE2018B029006B8854 /* FilterPhotoCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4851EC2018B029006B8854 /* FilterPhotoCard.xib */; };
@@ -5234,6 +5235,7 @@
 		CE44714D1F6962F00017B4F0 /* ActivityTimelineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityTimelineViewController.xib; sourceTree = "<group>"; };
 		CE4516A81F7D2EF1008B1F9A /* ServerStatusError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerStatusError.swift; sourceTree = "<group>"; };
 		CE46402720B6E28400EFC1AE /* LocalUnsyncedOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUnsyncedOperation.swift; sourceTree = "<group>"; };
+		CE47155E20BFEDD3001DF164 /* UILabel+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Font.swift"; sourceTree = "<group>"; };
 		CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetsTextField.swift; sourceTree = "<group>"; };
 		CE4851EC2018B029006B8854 /* FilterPhotoCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterPhotoCard.xib; sourceTree = "<group>"; };
 		CE4851EF2018B03A006B8854 /* FilterPhotoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPhotoCard.swift; sourceTree = "<group>"; };
@@ -10495,6 +10497,7 @@
 				CE5FE967208B2C260065AC7E /* NSFileCoordinator+Coordinate.swift */,
 				CE19CE00208F016600DB903E /* UIAlertController+Action.swift */,
 				CE49E8F92099BD71007F05A6 /* UIButton+Font.swift */,
+				CE47155E20BFEDD3001DF164 /* UILabel+Font.swift */,
 				B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */,
 				CE15AFBD20A0846E00015874 /* UINavigationController+Push.swift */,
 				CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */,
@@ -13560,7 +13563,6 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-				"${BUILT_PRODUCTS_DIR}/JDStatusBarNotification/JDStatusBarNotification.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
@@ -13587,7 +13589,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDStatusBarNotification.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
@@ -13655,7 +13656,6 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-				"${BUILT_PRODUCTS_DIR}/JDStatusBarNotification/JDStatusBarNotification.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
@@ -13682,7 +13682,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDStatusBarNotification.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
@@ -13783,7 +13782,7 @@
 				B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
 				CE46402920B6E28800EFC1AE /* LocalUnsyncedOperation.swift in Sources */,
 				8C0E8C661FDEBDFF00789C91 /* ActivityFileType.swift in Sources */,
-				8C0B91B62017103D00A5BA81 /* (null) in Sources */,
+				8C0B91B62017103D00A5BA81 /* BuildFile in Sources */,
 				8C0E8C671FDEBDFF00789C91 /* ActivityType.swift in Sources */,
 				CE1B7625204D347D00B5E12A /* Error+Network.swift in Sources */,
 				4A9886F520443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
@@ -14354,7 +14353,7 @@
 				8C06AC1D20066641003D8E05 /* TurkcellSecurityViewIO.swift in Sources */,
 				8C0E8E4A1FDEBDFF00789C91 /* SyncDBUtils.m in Sources */,
 				8C0E8E4B1FDEBDFF00789C91 /* CreateStoryNameViewOutput.swift in Sources */,
-				8C0B91B52017103900A5BA81 /* (null) in Sources */,
+				8C0B91B52017103900A5BA81 /* BuildFile in Sources */,
 				4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */,
 				8C0E8E501FDEBDFF00789C91 /* LocalAlbumRouter.swift in Sources */,
 				CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */,
@@ -14728,7 +14727,7 @@
 				4A8CC31B201A027400C040C4 /* FaceImageInteractorInput.swift in Sources */,
 				8C0E8F8E1FDEBDFF00789C91 /* DropboxStatusValue.swift in Sources */,
 				8C0E8F8F1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
-				8C0B91B82017104100A5BA81 /* (null) in Sources */,
+				8C0B91B82017104100A5BA81 /* BuildFile in Sources */,
 				8C0E8F901FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				8C0E8F911FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				8C0E8F921FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
@@ -15484,6 +15483,7 @@
 				CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */,
 				7CAC23BC1F45718700607660 /* RemoteService.swift in Sources */,
 				D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */,
+				CE47155F20BFEDD3001DF164 /* UILabel+Font.swift in Sources */,
 				CE51AD001EF90853005DCEE0 /* ForgotPasswordRouterInput.swift in Sources */,
 				7CFE92F81F5EDDE4008A3B72 /* LanguageModel.swift in Sources */,
 				CE274D611FB4806400CD53D7 /* Equatable+Contains.swift in Sources */,

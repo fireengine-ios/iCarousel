@@ -30,7 +30,9 @@ extension FaceImagePresenter: FaceImageViewOutput {
         interactor.changeFaceImageStatus(isAllowed)
         
         if isAllowed {
-            router.showPopUp()
+            DispatchQueue.toMain {
+                self.router.showPopUp()
+            }
         }
         
         MenloworksTagsService.shared.faceImageRecognition(isOn: isAllowed)

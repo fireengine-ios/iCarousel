@@ -31,9 +31,9 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                         return
                     }
                 }
-                
+                let array = FreeAppSpace.default.getLocalFiesComaredWithServerObjectsAndClearFreeAppSpace(serverObjects: objects, localObjects: selectedItems)
                 let fileService = WrapItemFileService()
-                fileService.deleteLocalFiles(deleteFiles: selectedItems, success: {
+                fileService.deleteLocalFiles(deleteFiles: array, success: {
                     
                     guard let self_ = self else {
                         return
@@ -45,7 +45,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                     self_.isDeleteRequestRunning = false
                     if let presenter = self_.output as? FreeAppSpacePresenter {
                             DispatchQueue.main.async {
-                                presenter.onItemDeleted()
+                                presenter.onItemDeleted(count: array.count)
                                 if FreeAppSpace.default.getDuplicatesObjects().count == 0 {
                                     CardsManager.default.stopOperationWithType(type: .freeAppSpace)
                                     CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)

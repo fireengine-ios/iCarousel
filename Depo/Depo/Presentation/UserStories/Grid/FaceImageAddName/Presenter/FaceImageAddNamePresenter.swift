@@ -56,6 +56,11 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
             router.showMerge(firstUrl: currentItemURL, secondUrl: itemUrl, completion: yesHandler)
         }
     }
+    
+    //done button need always enabled
+    override func updateThreeDotsButton() {
+        view.setThreeDotsMenu(active: true)
+    }
 }
 
 // MARK: - FaceImageAddNameViewOutput

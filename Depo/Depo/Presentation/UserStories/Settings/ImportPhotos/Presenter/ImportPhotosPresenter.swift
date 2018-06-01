@@ -125,7 +125,9 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
     }
     
     func tokenFailureCallback(errorMessage: String) {
-        view?.failedFacebookStart(errorMessage: errorMessage)
+        if errorMessage != TextConstants.NotLocalized.facebookLoginCanceled {
+            view?.failedFacebookStart(errorMessage: errorMessage)
+        }
         interactor.requestStatus()
     }
     

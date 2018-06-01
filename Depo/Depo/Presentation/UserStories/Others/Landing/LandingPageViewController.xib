@@ -68,9 +68,11 @@
             <constraints>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="top" secondItem="DjE-a6-N47" secondAttribute="bottom" id="3uG-jW-qf9"/>
                 <constraint firstItem="DjE-a6-N47" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5o0-fi-cYW"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="QK5-jM-UnF" secondAttribute="bottom" constant="97" id="G4c-RD-HfW"/>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Kb9-Xb-jRy"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="P4m-k9-Sk8" secondAttribute="bottom" constant="24" id="PZM-hy-aRr"/>
+                <constraint firstItem="P4m-k9-Sk8" firstAttribute="top" secondItem="QK5-jM-UnF" secondAttribute="bottom" constant="21" id="Ohb-Pq-qwF"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="P4m-k9-Sk8" secondAttribute="bottom" constant="24" id="PZM-hy-aRr">
+                    <variation key="heightClass=regular-widthClass=regular" constant="83"/>
+                </constraint>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="TSN-SD-CPH"/>
                 <constraint firstItem="T2S-xG-IEs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="U5f-uk-hTQ"/>
                 <constraint firstItem="P4m-k9-Sk8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UEZ-h9-qYh"/>

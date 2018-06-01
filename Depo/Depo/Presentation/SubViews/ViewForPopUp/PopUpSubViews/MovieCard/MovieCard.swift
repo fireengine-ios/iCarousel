@@ -135,4 +135,15 @@ final class MovieCard: BaseView {
     override func spotlightHeight() -> CGFloat {
         return subTitleLabel.frame.maxY
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let bottomSpace : CGFloat = 0.0
+        let h = bottomButton.frame.origin.y + bottomButton.frame.size.height + bottomSpace
+        if calculatedH != h{
+            calculatedH = h
+            layoutIfNeeded()
+        }
+    }
+    
 }
