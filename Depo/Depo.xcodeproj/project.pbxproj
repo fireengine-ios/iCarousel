@@ -2833,6 +2833,8 @@
 		CE37FF071F7BEB5B00EF5FF1 /* OfferApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37FF061F7BEB5B00EF5FF1 /* OfferApple.swift */; };
 		CE37FF091F7BEB7600EF5FF1 /* PurchaseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37FF081F7BEB7600EF5FF1 /* PurchaseResult.swift */; };
 		CE394B621F6FFA8200128324 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE394B611F6FFA8200128324 /* Array+Safe.swift */; };
+		CE39615120C29B5E00D145E0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
+		CE39615220C29B6400D145E0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
 		CE3A3003200F4B030028C900 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A3002200F4B030028C900 /* Validator.swift */; };
 		CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3AA9AE1F4D686D000157AF /* CoreData.framework */; };
 		CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */; };
@@ -5607,18 +5609,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C0E8FE11FDEBDFF00789C91 /* CoreBluetooth.framework in Frameworks */,
-				8C0E8FE21FDEBDFF00789C91 /* Security.framework in Frameworks */,
-				8C0E8FE41FDEBDFF00789C91 /* AssetsLibrary.framework in Frameworks */,
-				8C0E8FE51FDEBDFF00789C91 /* CoreLocation.framework in Frameworks */,
+				CE39615220C29B6400D145E0 /* SystemConfiguration.framework in Frameworks */,
+				CE39615120C29B5E00D145E0 /* Social.framework in Frameworks */,
 				8C0E8FE61FDEBDFF00789C91 /* MessageUI.framework in Frameworks */,
+				8C0E8FE11FDEBDFF00789C91 /* CoreBluetooth.framework in Frameworks */,
+				8C0E8FE41FDEBDFF00789C91 /* AssetsLibrary.framework in Frameworks */,
+				8C0E8FE21FDEBDFF00789C91 /* Security.framework in Frameworks */,
+				8C0E8FE51FDEBDFF00789C91 /* CoreLocation.framework in Frameworks */,
 				C3C2356D20B6DA1B00F3FB6D /* MPush.framework in Frameworks */,
 				8C0E8FE71FDEBDFF00789C91 /* CoreData.framework in Frameworks */,
 				8C0E8FE81FDEBDFF00789C91 /* AVKit.framework in Frameworks */,
 				8C0E8FE91FDEBDFF00789C91 /* Photos.framework in Frameworks */,
+				8C0E8FEC1FDEBDFF00789C91 /* CFNetwork.framework in Frameworks */,
 				8C0E8FEA1FDEBDFF00789C91 /* AdSupport.framework in Frameworks */,
 				8C0E8FEB1FDEBDFF00789C91 /* iAd.framework in Frameworks */,
-				8C0E8FEC1FDEBDFF00789C91 /* CFNetwork.framework in Frameworks */,
 				8C0E8FED1FDEBDFF00789C91 /* Foundation.framework in Frameworks */,
 				8C0E8FEE1FDEBDFF00789C91 /* UIKit.framework in Frameworks */,
 				B56E0DD820B414580082044D /* StoreKit.framework in Frameworks */,
