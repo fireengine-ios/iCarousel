@@ -78,12 +78,12 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
         
         authService.updateEmail(emailUpdateParameters: EmailUpdate(mail: email),
             sucess: { [weak self] response in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.hideSpiner()
                     self?.showEmailConfirmation(for: email)
                 }
             }, fail: { [weak self] error in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.showErrorAlert(message: error.description)
                     self?.hideSpiner()
                 }

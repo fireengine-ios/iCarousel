@@ -126,7 +126,7 @@ final class CollageCard: BaseView {
         }
         bottomButton.isEnabled = false
         homeCardsService.save(with: id) { [weak self] result in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.bottomButton.isEnabled = true
                 
                 switch result {

@@ -15,7 +15,7 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
     override func shareViaLink(sourceRect: CGRect?) {
         output?.operationStarted(type: .share)
         fileService.share(sharedFiles: sharingItems, success: {[weak self] url in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
     
                     self?.output?.operationFinished(type: .share)                
                     if let output_ = self?.output as? BottomSelectionTabBarInteractorOutput {

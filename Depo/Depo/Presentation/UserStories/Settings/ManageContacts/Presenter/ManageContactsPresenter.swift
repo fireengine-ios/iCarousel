@@ -44,7 +44,7 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
     
     func didLoadContacts(_ contacts: [RemoteContact]) {
         let sortedContacts = sortContacts(contacts)
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.view.showContacts(sortedContacts)
         }
     }

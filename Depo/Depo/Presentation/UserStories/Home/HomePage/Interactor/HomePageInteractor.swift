@@ -29,7 +29,7 @@ class HomePageInteractor: HomePageInteractorInput {
     
     func getAllCardsForHomePage() {
         homeCardsService.all { [weak self] result in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output.stopRefresh()
                 switch result {
                 case .success(let array):

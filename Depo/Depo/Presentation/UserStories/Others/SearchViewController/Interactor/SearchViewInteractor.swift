@@ -56,7 +56,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
              success: { [weak self] items in
                 guard let `self` = self else { return }
                 self.items(items: items)
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     if let searchItem = item {
                         self.recentSearches.addSearch(item: searchItem)
                     } else {
@@ -81,14 +81,14 @@ class SearchViewInteractor: SearchViewInteractorInput {
                     self.output?.endSearchRequestWith(text: searchText)
                 }
             }, fail: { [weak self] in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output?.failedSearch()
                 }
         })
     }
     
     private func items(items: [Item]) {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.toMain { [weak self] in
             if let wraperdOutput = self?.output {
                 wraperdOutput.getContentWithSuccess(items: items)
             }
@@ -126,7 +126,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     func getSuggetion(text: String) {
         remoteItems.getSuggestion(text: text, success: { [weak self] suggestList in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.faceImageAllowed { [weak self] result in
                     guard let `self` = self else { return }
                     let filteredItems = self.filterSuggetion(items: suggestList, faceImageAllowed: result)
@@ -208,12 +208,12 @@ class SearchViewInteractor: SearchViewInteractorInput {
                 peopleItemResponse.name = item.info?.name ?? ""
                 peopleItemResponse.thumbnail = item.info?.thumbnail
                 
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output?.getAlbum(albumItem: AlbumItem(remote: albumResponse),
                                            forItem: PeopleItem(response: peopleItemResponse))
                 }
                 }, fail: { [weak self] fail in
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         self?.output?.failedGetAlbum()
                     }
             })
@@ -224,12 +224,12 @@ class SearchViewInteractor: SearchViewInteractorInput {
                 thingItemResponse.id = id
                 thingItemResponse.name = item.info?.name ?? ""
                 
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output?.getAlbum(albumItem: AlbumItem(remote: albumResponse),
                                            forItem: ThingsItem(response: thingItemResponse))
                 }
                 }, fail: { [weak self] fail in
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         self?.output?.failedGetAlbum()
                     }
             })
@@ -240,12 +240,12 @@ class SearchViewInteractor: SearchViewInteractorInput {
                 placeItemResponse.id = id
                 placeItemResponse.name = item.info?.name ?? ""
                 
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output?.getAlbum(albumItem: AlbumItem(remote: albumResponse),
                                            forItem: PlacesItem(response: placeItemResponse))
                 }
                 }, fail: { [weak self] fail in
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         self?.output?.failedGetAlbum()
                     }
             })

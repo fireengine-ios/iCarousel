@@ -83,14 +83,14 @@ class SelectNameInteractor: SelectNameInteractorInput {
     private func onCreateAlbumWithName(name: String) {
         let createAlbumParams = CreatesAlbum(albumName: name)
         PhotosAlbumService().createAlbum(createAlbum: createAlbumParams, success: { [weak self] in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 if let self_ = self {
                     self_.output.operationSucces(operation: self_.moduleType)
                     ItemOperationManager.default.newAlbumCreated()
                 }
             }
         }) { error in
-            DispatchQueue.main.async {[weak self] in
+            DispatchQueue.toMain {[weak self] in
                 self?.output.operationFaildWithError(errorMessage: error.description)
             }
         }
@@ -107,14 +107,14 @@ class SelectNameInteractor: SelectNameInteractorInput {
         
         WrapItemFileService().createsFolder(createFolder: createfolderParam,
             success: { [weak self] in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     if let self_ = self {
                         self_.output.operationSucces(operation: self_.moduleType)
                         ItemOperationManager.default.newFolderCreated()
                     }
                 }
             }, fail: {[weak self] error in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.operationFaildWithError(errorMessage: error.description)
                 }
         })

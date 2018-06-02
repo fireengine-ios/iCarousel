@@ -42,12 +42,12 @@ class OTPViewInteractor: PhoneVereficationInteractor {
         
         let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: responce!.referenceToken ?? "")
         AccountService().verifyPhoneNumber(parameters: parameters, success: {[weak self] responce in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.userInfo?.phoneNumber = self?.phoneNumber
                 self?.output.verificationSucces()
             }
         }) { [weak self] errorRespose in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 guard let `self` = self else {
                     return
                 }
@@ -71,11 +71,11 @@ class OTPViewInteractor: PhoneVereficationInteractor {
                 if let responce = responce as? SignUpSuccessResponse {
                     self?.responce = responce
                 }
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.resendCodeRequestSuccesed()
                 }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.resendCodeRequestFailed(with: errorResponse)
                 }
         })

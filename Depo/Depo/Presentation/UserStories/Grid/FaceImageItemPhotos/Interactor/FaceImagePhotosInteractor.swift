@@ -66,7 +66,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                 PeopleService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
                     ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
                     
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
@@ -91,7 +91,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                 ThingsService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
                     ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
                     
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
@@ -116,7 +116,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                 PlacesService().deletePhotosFromAlbum(uuid: uuid, photos: items, success: { [weak self] in
                     ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
                     
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }

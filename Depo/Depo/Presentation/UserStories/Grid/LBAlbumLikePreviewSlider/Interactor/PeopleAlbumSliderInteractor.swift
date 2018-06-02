@@ -25,7 +25,7 @@ class PeopleAlbumSliderInteractor: LBAlbumLikePreviewSliderInteractor {
             self?.currentItems = albums.flatMap { SliderItem(withAlbum: AlbumItem(remote: $0)) }
             
             if let currentItems = self?.currentItems {
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output?.operationSuccessed(withItems: currentItems)
                 }
             }

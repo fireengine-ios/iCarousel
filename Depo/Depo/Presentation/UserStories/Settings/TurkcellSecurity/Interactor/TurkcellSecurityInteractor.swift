@@ -40,12 +40,12 @@ extension TurkcellSecurityInteractor: TurkcellSecurityInteractorInput {
             }
             self?.turkcellPassword = turkCellPasswordOn
             self?.turkcellLogin = turkCellAutoLogin
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output?.acquiredTurkcellSecurityState(passcode: turkCellPasswordOn, autoLogin: turkCellAutoLogin)
             }
             
         }) { [weak self] error in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output?.failedToAcquireTurkcellSecurityState()
             }
         }
@@ -58,14 +58,14 @@ extension TurkcellSecurityInteractor: TurkcellSecurityInteractorInput {
                 let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled else {
                     return
             }
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.turkcellPassword = turkCellPasswordOn
                 self?.turkcellLogin = turkCellAutoLogin
                 self?.output?.acquiredTurkcellSecurityState(passcode: turkCellPasswordOn, autoLogin: turkCellAutoLogin)
             }
             debugPrint("response")
         }) { [weak self] error in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output?.changeTurkcellSecurityFailed(error: error)
             }
         }

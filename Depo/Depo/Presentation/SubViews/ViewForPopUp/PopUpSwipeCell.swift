@@ -69,7 +69,7 @@ class PopUpSwipeCell: UITableViewCell {
         }
         
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.contentView.addSubview(subView)
         }
     }

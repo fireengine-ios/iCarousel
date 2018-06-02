@@ -146,7 +146,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     func setProgressForObject(progress: Float, blurOn: Bool = false) {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.visualEffectBlur.isHidden = !blurOn
         
             self.progressView.isHidden = false
@@ -155,7 +155,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     func finishedUploadForObject() {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.visualEffectBlur.isHidden = true
             self.progressView.isHidden = true
             self.cloudStatusImage.image = UIImage(named: "objectInCloud")
@@ -163,7 +163,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     func cleanCell() {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.visualEffectBlur.isHidden = true
             self.progressView.isHidden = true
         }
