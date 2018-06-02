@@ -91,11 +91,11 @@ extension PackagesInteractor: PackagesInteractorInput {
         subscriptionsService.activeSubscriptions(
             success: { [weak self] response in
                 guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else { return }
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.successed(activeSubscriptions: subscriptionsResponce.list)
                 }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })
@@ -106,11 +106,11 @@ extension PackagesInteractor: PackagesInteractorInput {
             success: { [weak self] response in
                 guard let response = response as? AccountInfoResponse,
                     let accountType = response.accountType else { return }
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.successed(accountTypeString: accountType)
                 }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })
@@ -122,16 +122,16 @@ extension PackagesInteractor: PackagesInteractorInput {
                 guard let offerResponse = response as? InitOfferResponse,
                     let token = offerResponse.referenceToken
                 else {
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         self?.output.failedUsage(with: ErrorResponse.string("token nil"))
                     }
                     return
                 }            
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.successed(tokenForOffer: token)
                 }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })
@@ -157,7 +157,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                     self?.output.successedVerifyOffer()
                 }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedVerifyOffer()
                 }
         })
@@ -169,17 +169,17 @@ extension PackagesInteractor: PackagesInteractorInput {
                 guard let offerResponse = response as? InitOfferResponse,
                     let token = offerResponse.referenceToken
                     else {
-                        DispatchQueue.main.async {
+                        DispatchQueue.toMain {
                             self?.output.failedUsage(with: ErrorResponse.string("token nil"))
                         }
                         return
                 }
                 
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.successed(tokenForResend: token)
                 }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })
@@ -192,15 +192,15 @@ extension PackagesInteractor: PackagesInteractorInput {
                 self?.analyticsService.trackInAppPurchase(product: offerApple.skProduct)
                 self?.validatePurchase(productId: identifier)
             case .canceled:
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: ErrorResponse.string(TextConstants.cancelPurchase))
                 }
             case .error(let error):
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: ErrorResponse.error(error))
                 }
             case .inProgress: 
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: ErrorResponse.string(TextConstants.inProgressPurchase))
                 }
             }
@@ -222,12 +222,12 @@ extension PackagesInteractor: PackagesInteractorInput {
             if status == .success {
                 self?.getActiveSubscriptions()
             } else {
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: ErrorResponse.string(status.description))
                 }
             }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })
@@ -264,11 +264,11 @@ extension PackagesInteractor: PackagesInteractorInput {
         offersService.offersAll(
             success: { [weak self] response in
                 guard let offerResponse = response as? OfferAllResponse else { return }
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.successed(offers: offerResponse.list)
                 }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })
@@ -280,11 +280,11 @@ extension PackagesInteractor: PackagesInteractorInput {
                 guard let jobResponse = response as? JobExistsResponse,
                     let isJobExists = jobResponse.isJobExists
                     else { return }
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.successedJobExists(isJobExists: isJobExists)
                 }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })
@@ -292,7 +292,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     func submit(promocode: String) {
         if promocode.isEmpty {
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self.output.failedPromocode(with: TextConstants.promocodeEmpty)
             }
             return
@@ -301,11 +301,11 @@ extension PackagesInteractor: PackagesInteractorInput {
              success: { [weak self] response in
                 /// maybe will be need
                 ///guard let response = response as? SubmitPromocodeResponse else { return }
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.successedPromocode()
                 }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     if case ErrorResponse.httpCode(500) = errorResponse {
                         self?.output.failedPromocode(with: TextConstants.promocodeError)
                     } else {
@@ -404,7 +404,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                 self?.validateRestorePurchase(offersApple: [])
 
             case .fail(let error):
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: ErrorResponse.error(error))
                 }
             }
@@ -424,13 +424,13 @@ extension PackagesInteractor: PackagesInteractorInput {
             if status == .restored || status == .success {
                 self?.getActiveSubscriptions()
             } else {
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: ErrorResponse.string(status.description))
                 }
             }
             
         }, fail: { [weak self] errorResponse in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output.failedUsage(with: errorResponse)
             }
         })

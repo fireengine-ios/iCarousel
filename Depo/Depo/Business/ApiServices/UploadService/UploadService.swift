@@ -682,7 +682,7 @@ extension UploadService {
 extension UploadService {
     
     fileprivate func logEvent(_ message: String) {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             if UIApplication.shared.applicationState == .background {
                 log.debug("Upload Service Background sync \(message)")
             } else {

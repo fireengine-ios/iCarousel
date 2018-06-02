@@ -134,7 +134,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private func updateUgglaViewIfNeed() {
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 view.updateUgglaViewPosition()
             }
         }

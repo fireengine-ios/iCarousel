@@ -15,11 +15,11 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         
         let parameter = SelectedLanguage(selectedLanguage: selectedLanguage)
         FeedbackService().sendSelectedLanguage(selectedLanguageParameter: parameter, succes: {[weak self] success in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.getUserInfoString(with: selectedLanguage.displayLanguage ?? "")
             }
             }, fail: { [weak self] fail in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.fail(text: fail.description)
                 }
         })
@@ -67,7 +67,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         })
         
         group.notify(queue: queue) {[weak self] in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 let versionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
                 var packages = ""
                 if subscriptions.count > 0 {

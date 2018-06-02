@@ -377,7 +377,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
                 DispatchQueue.global(qos: .default).async { [weak self] in
                     PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
                         
-                        DispatchQueue.main.async {
+                        DispatchQueue.toMain {
                             self?.output.stopCreatingAVAsset()
                             let playerItem = AVPlayerItem(asset: asset!)
                             self?.play(item: playerItem)

@@ -80,7 +80,7 @@ class WrapItemFileService: WrapItemFileOperations {
             LocalMediaStorage.default.removeAssets(deleteAsset: localAssetsW, success: {
                 
                 let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
-                //                DispatchQueue.main.async {
+                //                DispatchQueue.toMain {
                 CoreDataStack.default.removeLocalMediaItems(with: list, completion: {})
                 ItemOperationManager.default.deleteItems(items: deleteFiles)
                 //                }

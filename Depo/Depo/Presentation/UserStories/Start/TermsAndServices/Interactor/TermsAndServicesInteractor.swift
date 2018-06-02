@@ -26,11 +26,11 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             return
         }
         self?.eula = eulaR
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.toMain { [weak self] in
             self?.output.showLoadedTermsAndUses(eula: eulaR.content ?? "")
         }
         }, fail: { [weak self] errorResponse in
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.toMain { [weak self] in
                 self?.output.failLoadTermsAndUses(errorString: errorResponse.description)
             }
     })
@@ -63,7 +63,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         let signUpUser = SignUpUser(phone: sigUpInfo.phone, mail: sigUpInfo.mail, password: sigUpInfo.password, eulaId: eulaId)
         
         authenticationService.signUp(user: signUpUser, sucess: { [weak self] result in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 guard let t = result as? SignUpSuccessResponse else {
                     return
                 }
@@ -76,7 +76,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                 self?.output.signUpSuccessed()
             }
         }, fail: { [weak self] errorResponce in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output.signupFailed(errorResponce: errorResponce)
             }
         })
@@ -88,11 +88,11 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         }
         
         eulaService.eulaApprove(eulaId: eulaID, sucess: { [weak self] successResponce in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output.eulaApplied()
             }
         }, fail: { [weak self] errorResponce in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output.applyEulaFaild(errorResponce: errorResponce)
             }
         })

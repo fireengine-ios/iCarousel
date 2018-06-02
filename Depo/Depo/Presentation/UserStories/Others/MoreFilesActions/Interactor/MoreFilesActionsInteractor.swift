@@ -107,7 +107,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let downloader = FilesDownloader()
         output?.operationStarted(type: .share)
         downloader.getFiles(filesForDownload: filesForDownload, response: { [weak self] fileURLs, directoryURL in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output?.operationFinished(type: .share)
                 
                 let activityVC = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
@@ -155,7 +155,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         output?.operationStarted(type: .share)
         let fileType = sharingItems.first?.fileType
         fileService.share(sharedFiles: sharingItems, success: { [weak self] url in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output?.operationFinished(type: .share)
                 
                 let objectsToShare = [url]
@@ -236,12 +236,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.output?.operationStarted(type: .completelyDeleteAlbums)
             let albumService = PhotosAlbumService()
             albumService.completelyDelete(albums: albums, success: { [weak self] deletedAlbums in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output?.operationFinished(type: .completelyDeleteAlbums)
                     ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
                 }
                 }, fail: { [weak self] errorRespone in
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         self?.output?.operationFailed(type: .completelyDeleteAlbums, message: errorRespone.description)
                     }
             })
@@ -287,12 +287,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.output?.operationStarted(type: .removeFromAlbum)
             
             self?.albumService.delete(albums: albumbs, success: { [weak self] deletedAlbums in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output?.operationFinished(type: .removeAlbum)
                     ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
                 }
                 }, fail: { [weak self] errorRespone in
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         self?.output?.operationFailed(type: .removeAlbum, message: errorRespone.description)
                     }
             })
@@ -323,11 +323,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             let parameters = DeletePhotosFromAlbum(albumUUID: album, photos: items)
             PhotosAlbumService().deletePhotosFromAlbum(parameters: parameters, success: { [weak self] in
                 ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: album)
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output?.operationFinished(type: .removeFromAlbum)
                 }
             }) { [weak self] errorRespone in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output?.operationFailed(type: .removeFromAlbum, message: errorRespone.description)
                 }
             }
@@ -437,7 +437,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func createStory(items: [BaseDataSourceItem]) {
         sync(items: items, action: { [weak self] in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.router.createStoryName(items: items)
             }
             }, cancel: {}, fail: { errorResponse in
@@ -468,7 +468,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func addToAlbum(items: [BaseDataSourceItem]) {
         sync(items: items, action: { [weak self] in
             if let vc = self?.router.addPhotosToAlbum(photos: items) {
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.router.pushOnPresentedView(viewController: vc)
                 }
             }
@@ -553,7 +553,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func succesAction(elementType: ElementTypes) -> FileOperation {
         let success: FileOperation = { [weak self] in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output?.operationFinished(type: elementType)
                 
                 let text: String
@@ -590,7 +590,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         guard let items = items as? [WrapData] else { return }
         let successClosure = { [weak self] in
             log.debug("SyncToUse - Success closure")
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output?.completeAsyncOperationEnableScreen()
                 action()
             }
@@ -598,7 +598,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let failClosure: FailResponse = { [weak self] errorResponse in
             log.debug("SyncToUse - Fail closure")
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output?.completeAsyncOperationEnableScreen()
                 if errorResponse.errorDescription == TextConstants.canceledOperationTextError {
                     cancel()

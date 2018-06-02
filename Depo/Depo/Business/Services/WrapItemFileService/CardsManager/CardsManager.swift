@@ -128,7 +128,7 @@ class CardsManager: NSObject {
     }
     
     private func showHomeCards() {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             for notificationView in self.foloversArray {
                 notificationView.startOperationsWith(serverObjects: self.homeCardsObjects)
             }
@@ -140,7 +140,7 @@ class CardsManager: NSObject {
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             if (!self.canShowPopUpByDepends(type: type)) {
                 return
             }
@@ -166,7 +166,7 @@ class CardsManager: NSObject {
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int) {
         hidePopUpsByDepends(type: type)
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
             
             for notificationView in self.foloversArray {
@@ -207,7 +207,7 @@ class CardsManager: NSObject {
         
         print("operation stopped ", type.rawValue)
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.progresForOperation[type] = nil
             for notificationView in self.foloversArray {
                 notificationView.stopOperationWithType(type: type)
@@ -221,7 +221,7 @@ class CardsManager: NSObject {
             return
         }
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.progresForOperation[type] = nil
             for notificationView in self.foloversArray {
                 notificationView.stopOperationWithType(type: type, serverObject: object)

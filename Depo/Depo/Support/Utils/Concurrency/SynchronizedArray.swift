@@ -180,7 +180,7 @@ public extension SynchronizedArray {
         queue.async(flags: .barrier) {
             let element = self.array.remove(at: index)
             
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 completion?(element)
             }
         }
@@ -196,7 +196,7 @@ public extension SynchronizedArray {
             guard let index = self.array.index(where: predicate) else { return }
             let element = self.array.remove(at: index)
             
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 completion?(element)
             }
         }
@@ -210,7 +210,7 @@ public extension SynchronizedArray {
             let elements = self.array
             self.array.removeAll()
             
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 completion?(elements)
             }
         }

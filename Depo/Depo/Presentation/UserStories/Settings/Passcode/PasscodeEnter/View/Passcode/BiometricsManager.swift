@@ -149,7 +149,7 @@ final class BiometricsManagerImp: BiometricsManager {
         }
         
         LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 if success {
                     handler(.success)
                 } else if let error = error as NSError? {

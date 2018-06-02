@@ -48,7 +48,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         getNextPageRetryCounter += 1
         remoteItems.reloadItems(sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] items in
             self?.getNextPageRetryCounter = 0
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 log.debug("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems success")
                 
                 var isArrayPresenter = false
@@ -98,7 +98,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                               sortOrder: sortOrder,
                               success: { [weak self] items in
                 self?.getNextPageRetryCounter = 0
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     log.debug("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems success")
 
                     self?.isUpdating = false

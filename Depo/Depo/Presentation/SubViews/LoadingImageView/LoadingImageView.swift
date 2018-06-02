@@ -169,7 +169,7 @@ class LoadingImageView: UIImageView {
             do {
                 let data = try Data(contentsOf: url)
                 self?.downloadedGifImage = UIImage.sd_animatedGIF(with: data)
-                DispatchQueue.main.async { [weak self] in
+                DispatchQueue.toMain { [weak self] in
                     if let `self` = self{
                         self.image = self.downloadedGifImage
                     }
@@ -182,7 +182,7 @@ class LoadingImageView: UIImageView {
             
             
 //            let gif = UIImage.gifImageWithURL(gifUrl: url.absoluteString)
-//            DispatchQueue.main.async { [weak self] in
+//            DispatchQueue.toMain { [weak self] in
 //                self?.image = gif
 //            }
         }
