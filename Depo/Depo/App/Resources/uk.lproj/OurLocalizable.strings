@@ -106,7 +106,7 @@
 "iCloud Drive" = "iCloud Drive";
 "Photos" = "Фотографії";
 "Choose From Library" = "Виберіть з галереї пристроїв";
-"Take Photo" = "Використовуйте камеру";
+"Take Photo" = "Камера";
 "Remove from album" = "Видалити з альбому";
 "Back Up" = "Назад";
 "Add to album" = "Додати до альбому";
@@ -177,7 +177,7 @@
 "Music" = "Музика";
 "Photos & Videos" = "Фото та відео";
 "Home" = "Будинок";
-"Choose a destination folder" = "Виберіть папку призначення";
+"Choose a destination folder" = "Виберіть папку";
 "Ok" = "Добре";
 "Need to select folder" = "Потрібно вибрати папку";
 "Back" = "Назад";
@@ -217,7 +217,7 @@
 "Removed" = "Вилучено";
 "Updated" = "Оновлено";
 "New Contact" = "Новий контакт";
-"Back Up My Contacts" = "Створити резервну копію своїх контактів";
+"Back Up My Contacts" = "Резервування контактів";
 "UPGRADE" = "ОНОВЛЕННЯ";
 "Album Info" = "Інформація про альбом";
 "Title" = "Назва";
@@ -251,7 +251,7 @@
 "Logout" = "Вийти";
 "Help & Support" = "FAQ";
 "Lifebox Touch ID and Passcode" = "Ідентифікатор Lifebox Touch ID та Пароль";
-"Usage Info and Packages" = "Інформація про використання та пакети";
+"Usage Info and Packages" = "Об'єм сховища та пакети";
 "Recently Deleted Files" = "Нещодавно видалені файли";
 "Auto Sync" = "Автоматична синхронізація";
 "Back-up my contacts" = "Резервне копіювання моїх контактів";
@@ -349,8 +349,8 @@
 "Mobile Data" = "Мобільні дані";
 "Wi-fi" = "Wi-Fi";
 "Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifebox може синхронізувати ваші фотографії та відеоролики автоматично. Ви хотіли б активувати функцію автозавантаження зараз?";
-"You have to fill in a password" = "Ви повинні заповнити свій пароль";
-"You have to fill in your mail or GSM Number" = "Ви повинні заповнити свій адрес електронної пошти або номер телефону";
+"You have to fill in a password" = "Заповніть пароль";
+"You have to fill in your mail or GSM Number" = "Введіть електронну пошту або номер телефону";
 "Password" = "Пароль";
 "E-Mail or GSM Number" = "Електронна пошта або номер телефону";
 "Remember my credentials" = "Пам'ятай мій пароль";
@@ -376,9 +376,9 @@
 "Verify Your Email" = "Підтвердьте свій e-mail";
 "Verify Your Phone Number" = "Перевірте свій номер телефону";
 "Verify Your Purchase" = "Підтвердьте свою покупку";
-" You have to fill in a password" = "Ви повинні заповнити свій пароль";
+" You have to fill in a password" = "Заповніть пароль";
 "Please enter valid Email" = "Будь ласка, введіть дійсну електронну адресу";
-" You have to fill in your mail" = "Ви повинні заповнити свою електронну адресу";
+" You have to fill in your mail" = "Заповніть електронну пошту";
 "Re-Enter Password" = "Повторно введіть пароль";
 "I have an account, let me log in" = "У мене є акаунт, дозвольте мені увійти";
 "Start using Lifebox now!" = "Створити новий акаунт";
@@ -400,7 +400,7 @@
 "Things" = "Речі";
 "Places" = "Місця";
 "Musics" = "Музика";
-"Your Uploads" = "Ваші завантаження";
+"Your Uploads" = "Завантаження";
 "Create a story" = "Створіть історію";
 "Please Choose 20 files at most" = "Виберіть максимум 20 файлів";
 "You need to enable access to Contacts to continue" = "Щоб продовжити, потрібно ввімкнути доступ до Контактів";
@@ -474,7 +474,7 @@
 "You don't have any lifebox account. Please signup before using the application" = "У вас немає облікового запису lifebox. Будь-ласка, зареєструйтесь перед використанням програми";
 "This text doesn't match. Please try again." = "Цей текст не збігається. Будь ласка спробуйте ще раз.";
 "Email field is invalid" = "Email поле є недійсним";
-" You have to fill in GSM number" = "Ви повинні заповнити номер GSM";
+" You have to fill in GSM number" = "Заповніть GSM номер";
 "E-mail is already exist" = "E-mail вже існує";
 "Please enter your GSM number" = "Будь ласка, введіть свій номер GSM";
 "GSM number" = "Номер GSM";
