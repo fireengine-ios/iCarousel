@@ -153,8 +153,6 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
 extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
     func onValueChanged(model: AutoSyncModel) {
         cellModels[model.cellType] = model
-        
-        
 
         if model.cellType == .headerSlider {
             if model.isSelected {
@@ -162,6 +160,8 @@ extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
                 delegate?.enableAutoSync()
             } else {
                 MenloworksTagsService.shared.onAutoSyncOff()
+                MenloworksTagsService.shared.onAutosyncPhotosOff()
+                MenloworksTagsService.shared.onAutosyncVideosOff()
                 MenloworksEventsService.shared.onAutosyncOff()
                 forceDisableAutoSync()
                 reloadTableView()
