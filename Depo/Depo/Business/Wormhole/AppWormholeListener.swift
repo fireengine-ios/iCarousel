@@ -26,7 +26,7 @@ final class AppWormholeListener {
     private func listenLogout() {
         wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeLogout) { [weak self] _ in
             self?.authtService.logout {
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     if let vc = UIApplication.topController() as? PasscodeEnterViewController {
                         vc.view.endEditing(true)
                     }

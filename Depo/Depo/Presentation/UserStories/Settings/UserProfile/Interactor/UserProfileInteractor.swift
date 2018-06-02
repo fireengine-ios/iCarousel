@@ -119,7 +119,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     func needSendOTP(responce: SignUpSuccessResponse) {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.toMain { [weak self] in
             if let info = self?.userInfo {
                 self?.output?.stopNetworkOperation()
                 self?.output?.needSendOTP(responce: responce, userInfo: info)
@@ -128,14 +128,14 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     func allUpdated() {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.toMain { [weak self] in
             self?.output.dataWasUpdate()
             self?.output.stopNetworkOperation()
         }
     }
     
     func fail(error: String) {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.toMain { [weak self] in
             self?.output.stopNetworkOperation()
             self?.output.showError(error: error)
         }

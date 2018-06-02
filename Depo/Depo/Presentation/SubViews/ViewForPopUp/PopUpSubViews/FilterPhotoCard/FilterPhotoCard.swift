@@ -104,7 +104,7 @@ final class FilterPhotoCard: BaseView {
     
     private func loadImage(from item: WrapData, isSaved: Bool) {
         filesDataSource.getImage(for: item, isOriginal: true) { [weak self] image in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 guard let image = image else { return }
                 self?.set(image: image, isSaved: isSaved)
             }
@@ -199,7 +199,7 @@ final class FilterPhotoCard: BaseView {
             let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
             controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
             let nController = NavigationController(rootViewController: controller)
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 RouterVC().presentViewController(controller: nController)
             }
         }

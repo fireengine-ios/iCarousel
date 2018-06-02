@@ -105,7 +105,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func needToReloadVisibleCells() {
         log.debug("BaseFilesGreedPresenter needToReloadVisibleCells")
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.dataSource.updateVisibleCells()
         }
     }
@@ -325,7 +325,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     @objc private func updateThreeDots(_ sender: Any) {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.updateThreeDotsButton()
         }
     }
@@ -391,7 +391,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func filesAppendedAndSorted() {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.view.stopRefresher()
             self.updateNoFilesView()
             self.asyncOperationSucces()

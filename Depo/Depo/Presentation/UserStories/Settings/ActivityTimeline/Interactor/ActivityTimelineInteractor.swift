@@ -37,12 +37,12 @@ extension ActivityTimelineInteractor: ActivityTimelineInteractorInput {
         activityTimelineService.timelineActivities(page: page, size: size,
            success: { [weak self] response in
             guard let response = response as? ActivityTimelineResponse else { return }
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     successBlock(response)
                     self?.page += 1
                 }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedTimelineActivities(with: errorResponse)
                 }
         })

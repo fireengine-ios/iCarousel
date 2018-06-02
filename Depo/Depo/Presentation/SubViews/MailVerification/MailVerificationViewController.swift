@@ -90,13 +90,13 @@ class MailVerificationViewController: BaseViewController {
         showSpiner()
         authService.updateEmail(emailUpdateParameters: EmailUpdate(mail: email),
             sucess: { [weak self] response in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.actionDelegate?.mailVerified(mail: email)
                     self?.hideSpiner()
                     self?.dismiss(animated: true, completion: nil)
                 }
             }, fail: { [weak self] error in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.actionDelegate?.mailVerificationFailed()
                     self?.hideSpiner()
                     UIApplication.showErrorAlert(message: error.description)

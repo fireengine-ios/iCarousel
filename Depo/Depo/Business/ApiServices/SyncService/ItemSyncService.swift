@@ -207,7 +207,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func postNotification() {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             NotificationCenter.default.post(name: .autoSyncStatusDidChange, object: self)
         }
     }

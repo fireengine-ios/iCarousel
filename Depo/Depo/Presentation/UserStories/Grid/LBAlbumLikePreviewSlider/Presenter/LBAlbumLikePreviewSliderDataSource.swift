@@ -32,7 +32,7 @@ class LBAlbumLikePreviewSliderDataSource: NSObject, UICollectionViewDataSource, 
     }
     
     func reloadData() {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.collectionView?.reloadData()
         }
     }

@@ -40,7 +40,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         onSourceView sourceView: UIView?,
                         excludeTypes: [ElementTypes]) {
         constractSpecifiedActions(with: types, for: items) {[weak self] (actions) in
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.toMain { [weak self] in
                 self?.presentAlertSheet(with: actions, presentedBy: sender)
             }
         }
@@ -430,7 +430,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     
     func onlyPresentAlertSheet(with elements: [ElementTypes], for objects:[Item]) {
         let actions = constractActions(with: elements, for: objects)
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.toMain { [weak self] in
             self?.presentAlertSheet(with: actions, presentedBy: nil)
         }
     }

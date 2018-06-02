@@ -217,7 +217,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         switch response {
         case .success(let array):
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 if self.isDropedData || array.isEmpty {
                     self.collectionView?.reloadData()
                     self.delegate?.filesAppendedAndSorted()
@@ -769,7 +769,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func reloadData() {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.toMain { [weak self] in
             
             guard let `self` = self, let collectionView = self.collectionView else {
                 return
@@ -797,7 +797,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         displayingType = type
         
         debugPrint("Reload updateDisplayngType")
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.collectionView?.reloadData()
             let firstVisibleIndexPath = self.self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
                 return first < second
@@ -1088,7 +1088,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         case .localMediaContent(let local):
             cell_.setAssetId(local.asset.localIdentifier)
             self.filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
                         cell_.setImage(image: image, animated:  false)
                     } else {
@@ -1331,7 +1331,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return
             }
             
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 completion(self.collectionView?.cellForItem(at: path) as? CollectionViewCellForPhoto)
             }
         }
@@ -1411,7 +1411,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return
             }
             
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 if localFinishedItemUUID != nil, let cell = self.getCellForFile(objectUUID: file.uuid) {
                     cell.finishedUploadForObject()
                 }
@@ -1469,7 +1469,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     }
                 }
                 
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self.collectionView?.performBatchUpdates({ [weak self] in
                         if let `self` = self{
                             self.collectionView?.reloadItems(at: arrayOfPath)
@@ -1590,7 +1590,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
             }
             
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self.collectionView?.reloadData()
                 self.delegate?.didDelete(items: items)
                 
@@ -1647,7 +1647,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 //FIXME: arrayOfPathForUpdate is never used
             }
         }
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.collectionView?.reloadData()
         }
     }

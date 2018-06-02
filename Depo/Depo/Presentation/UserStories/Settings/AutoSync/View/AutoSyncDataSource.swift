@@ -136,7 +136,7 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
 
     func reloadTableView() {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.tableView?.reloadData()
         }
     }

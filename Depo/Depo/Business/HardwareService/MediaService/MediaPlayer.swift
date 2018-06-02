@@ -177,7 +177,7 @@ final class MediaPlayer: NSObject {
         
         switch changeReason {
         case .oldDeviceUnavailable:
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self.pause()
             }
         default:

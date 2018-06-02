@@ -44,7 +44,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                                    eulaId: 0) /// 0 is server logic
         
         authenticationService.signUp(user: sigUpUser, sucess: { [weak self] result in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 guard let t = result as? SignUpSuccessResponse,
                     let userRegistrationInfo = self?.dataStorage.userRegistrationInfo  else {
                         return
@@ -53,7 +53,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 self?.output.signUpSucces(withResult: t, userInfo: userRegistrationInfo)
             }
             }, fail: { [weak self] result in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.signUpFailed(withResult: result.description)
                 }
         })

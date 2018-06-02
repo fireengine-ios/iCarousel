@@ -25,7 +25,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                         return
                     }
                     if let presenter = self_.output as? FreeAppSpacePresenter {
-                        DispatchQueue.main.async {
+                        DispatchQueue.toMain {
                             presenter.goBack()
                         }
                         return
@@ -44,7 +44,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                     }
                     self_.isDeleteRequestRunning = false
                     if let presenter = self_.output as? FreeAppSpacePresenter {
-                            DispatchQueue.main.async {
+                            DispatchQueue.toMain {
                                 presenter.onItemDeleted(count: array.count)
                                 if FreeAppSpace.default.getDuplicatesObjects().count == 0 {
                                     CardsManager.default.stopOperationWithType(type: .freeAppSpace)
@@ -56,7 +56,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                     }, fail: { [weak self] error in
                         self?.isDeleteRequestRunning = false
                         if let presenter = self?.output as? FreeAppSpacePresenter {
-                            DispatchQueue.main.async {
+                            DispatchQueue.toMain {
                                 presenter.canceled()
                             }
                         }
@@ -64,7 +64,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                 }, fail: { [weak self] error in
                     self?.isDeleteRequestRunning = false
                     if let presenter = self?.output as? FreeAppSpacePresenter {
-                        DispatchQueue.main.async {
+                        DispatchQueue.toMain {
                             presenter.canceled()
                         }
                     }

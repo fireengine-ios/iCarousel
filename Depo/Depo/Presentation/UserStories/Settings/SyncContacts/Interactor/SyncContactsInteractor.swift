@@ -57,22 +57,22 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         
         if contactsCount < NumericConstants.limitContactsForBackUp {
             contactsSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, type in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output?.showProggress(progress: progressPercentage, count: 0, forOperation: type)
                 }
                 }, finishCallback: { [weak self] result, type in
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         self?.output?.success(response: result, forOperation: type)
                         CardsManager.default.stopOperationWithType(type: .contactBacupOld)
                         CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
                     }
                 }, errorCallback: { [weak self] errorType, type in
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         self?.output?.showError(errorType: errorType)
                     }
             })
         } else {
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self.output?.showPopUpWithManyContacts()
             }
         }
@@ -91,16 +91,16 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     
     private func analyze() {
         contactsSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output?.showProggress(progress: progressPercentage, count: count, forOperation: type)
             }
         }, successCallback: { [weak self] response in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output?.analyzeSuccess(response: response)
             }
         }, cancelCallback: nil,
            errorCallback: { [weak self] errorType, type in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 self?.output?.showError(errorType: errorType)
             }
         })

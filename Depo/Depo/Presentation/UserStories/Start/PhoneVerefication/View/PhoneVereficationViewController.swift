@@ -142,7 +142,7 @@ extension PhoneVereficationViewController: UITextFieldDelegate, SmartTimerLabelD
 
             output.vereficationCodeEntered(code: resultStr ?? "")
             
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.toMain { [weak self] in
                 self?.codeVereficationField.resignFirstResponder()
             }
         } else if ((resultStr as String?)?.count)! > inputTextLimit {

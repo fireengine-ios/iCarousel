@@ -43,14 +43,14 @@ extension FileInfoInteractor: FileInfoInteractorInput {
         if let file = item as? Item {
             let renameFile = RenameFile(uuid: file.uuid, newName: newName)
             FileService().rename(rename: renameFile, success: { [weak self] in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.updated()
                     if let file = self?.item {
                         file.name = newName
                     }
                 }
                 }, fail: { [weak self] error in
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         self?.output.failedUpdate(error: error)
                     }
             })
@@ -59,14 +59,14 @@ extension FileInfoInteractor: FileInfoInteractorInput {
         if let album = item as? AlbumItem {
             let renameAlbum = RenameAlbum(albumUUID: album.uuid, newName: newName)
             PhotosAlbumService().renameAlbum(parameters: renameAlbum, success: { [weak self] in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.updated()
                     if let file = self?.item {
                         file.name = newName
                     }
                 }
                 }, fail: { [weak self] error in
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         self?.output.updated()
                     }
             })
@@ -75,7 +75,7 @@ extension FileInfoInteractor: FileInfoInteractorInput {
     
     func getAlbum(for item: BaseDataSourceItem) {
         albumService.getAlbum(for: item.uuid) { [weak self] result in
-            DispatchQueue.main.async {
+            DispatchQueue.toMain {
                 switch result {
                 case .success(let album):
                     self?.output.albumForUuidSuccessed(album: album)

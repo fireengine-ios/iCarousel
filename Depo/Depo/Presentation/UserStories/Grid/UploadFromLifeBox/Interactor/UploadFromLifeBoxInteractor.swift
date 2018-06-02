@@ -15,7 +15,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
         if router.isRootViewControllerAlbumDetail() {
             let parameter = AddPhotosToAlbum(albumUUID: rootFolderUUID, photos: items)
             PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: { [weak self] in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     if let `self` = self {
                         self.output.asyncOperationSucces()
                         guard let out = self.output as? UploadFromLifeBoxInteractorOutput else {
@@ -26,7 +26,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
                     ItemOperationManager.default.filesAddedToAlbum()
                 }
             }, fail: { [weak self] error in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     if let `self` = self {
                         self.output.asyncOperationFail(errorMessage: TextConstants.failWhileAddingToAlbum)
                     }
@@ -36,7 +36,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
             let itemsUUIDs = items.map({ $0.uuid })
             let parametr = CopyFiles(items: itemsUUIDs, path: rootFolderUUID)
             FileService().copy(copyparam: parametr, success: { [weak self] in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     if let `self` = self {
                         self.output.asyncOperationSucces()
                         guard let out = self.output as? UploadFromLifeBoxInteractorOutput else {
@@ -47,7 +47,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
                     }
                 }
             }, fail: { [weak self] fail in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     if let `self` = self {
                         guard let out = self.output as? UploadFromLifeBoxInteractorOutput else {
                             self.output.asyncOperationFail(errorMessage: fail.description)
