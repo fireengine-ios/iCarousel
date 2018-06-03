@@ -276,7 +276,7 @@ class AuthenticationService: BaseRequestService {
                                      "password": user.password,
                                      "deviceInfo": Device.deviceInfo]
         
-        SessionManager.default.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
+        SessionManager.shared.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
                 .responseString { [weak self] response in
                     switch response.result {
                     case .success(_):
@@ -324,7 +324,7 @@ class AuthenticationService: BaseRequestService {
         let user = AuthenticationUserByToken()
         let params: [String: Any] = ["deviceInfo": Device.deviceInfo]
         
-        SessionManager.default.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
+        SessionManager.shared.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
             .responseString { [weak self] response in
                 self?.loginHandler(response, sucess, fail)
         }
@@ -333,7 +333,7 @@ class AuthenticationService: BaseRequestService {
     func turkcellAutification(user: Authentication3G, sucess: SuccessLogin?, fail: FailResponse?) {
         log.debug("AuthenticationService turkcellAutification")
         
-        SessionManager.default.request(user.patch, method: .post, parameters: Device.deviceInfo, encoding: JSONEncoding.prettyPrinted)
+        SessionManager.shared.request(user.patch, method: .post, parameters: Device.deviceInfo, encoding: JSONEncoding.prettyPrinted)
             .responseString { [weak self] response in
                 self?.loginHandler(response, sucess, fail)
         }
@@ -408,7 +408,7 @@ class AuthenticationService: BaseRequestService {
     }
     
     func cancellAllRequests() {
-        SessionManager.default.cancellAllRequests()
+        SessionManager.shared.cancellAllRequests()
     }
     
     func signUp(user: SignUpUser, sucess: SuccessResponse?, fail: FailResponse?) {
@@ -493,7 +493,7 @@ class AuthenticationService: BaseRequestService {
     }
     
     func updateUserLanguage(_ language: String, handler: @escaping ResponseVoid) {
-        SessionManager.default
+        SessionManager.shared
             .request(RouteRequests.updateLanguage, method: .post, encoding: language)
             .customValidate()
             .responseVoid(handler)
