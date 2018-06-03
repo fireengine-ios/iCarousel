@@ -57,10 +57,11 @@ platform :ios do
       #output_directory: "path/to/dir", # Destination directory. Defaults to current directory.
       #output_name: "my-app.ipa",       # specify the name of the .ipa file to generate (including file extension)
       export_options: {
-        method: "ad-hoc",
-        provisioningProfiles: { 
-          "#{BUNDLE_ID}" => "ADHOC_LifeboxForTurkcell"
-        }
+        method: "ad-hoc"
+        # ,
+        # provisioningProfiles: { 
+        #   "#{BUNDLE_ID}" => "ADHOC_LifeboxForTurkcell"
+        # }
       }
 
     )
