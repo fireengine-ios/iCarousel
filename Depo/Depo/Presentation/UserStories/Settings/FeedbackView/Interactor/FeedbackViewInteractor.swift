@@ -28,7 +28,6 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
     
     func getUserInfoString(with languageName: String) {
         let group = DispatchGroup()
-        let queue = DispatchQueue(label: DispatchQueueLabels.getUserInfo)
         group.enter()
         group.enter()
         group.enter()
@@ -66,20 +65,18 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
             group.leave()
         })
         
-        group.notify(queue: queue) {[weak self] in
-            DispatchQueue.toMain {
-                let versionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
-                var packages = ""
-                if subscriptions.count > 0 {
-                    packages = subscriptions
-                    .flatMap { $0.subscriptionPlanDisplayName }
-                    .joined(separator: ", ")
-                }
-                let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "", UIDevice.current.model, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN", quota, quotaUsed, packages)
-                
-                self?.output.asyncOperationSucces()
-                self?.output.languageRequestSended(text: userInfoString)
+        group.notify(queue: .main) {[weak self] in
+            let versionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
+            var packages = ""
+            if subscriptions.count > 0 {
+                packages = subscriptions
+                .flatMap { $0.subscriptionPlanDisplayName }
+                .joined(separator: ", ")
             }
+            let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "", UIDevice.current.model, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN", quota, quotaUsed, packages)
+            
+            self?.output.asyncOperationSucces()
+            self?.output.languageRequestSended(text: userInfoString)
         }
 
     }
