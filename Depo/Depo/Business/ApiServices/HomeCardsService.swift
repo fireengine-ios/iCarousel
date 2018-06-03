@@ -18,7 +18,7 @@ protocol HomeCardsService {
 final class HomeCardsServiceImp {
     let sessionManager: SessionManager
     
-    init(sessionManager: SessionManager = SessionManager.shared) {
+    init(sessionManager: SessionManager = SessionManager.customDefault) {
         self.sessionManager = sessionManager
     }
 }

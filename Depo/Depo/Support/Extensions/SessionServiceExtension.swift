@@ -9,7 +9,7 @@ import Alamofire
 
 public extension SessionManager {
     ///This calss is basicaly the same as Alamofire SessionManager  but for User-Agent, which is requered different for this project, by Backend developer
-    static let `shared`: SessionManager = {
+    static let customDefault: SessionManager = {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = SessionManager.defaultCustomHTTPHeaders
 
