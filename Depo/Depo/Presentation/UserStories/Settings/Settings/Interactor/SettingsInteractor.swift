@@ -70,7 +70,9 @@ class SettingsInteractor: SettingsInteractorInput {
     }
 
     func onLogout() {
+        output.asyncOperationStarted()
         authService.serverLogout(complition: { [weak self] in
+            self?.output.asyncOperationStoped()
             self?.authService.logout { [weak self] in
                 MenloworksEventsService.shared.onLoggedOut()
                 self?.output.goToOnboarding()

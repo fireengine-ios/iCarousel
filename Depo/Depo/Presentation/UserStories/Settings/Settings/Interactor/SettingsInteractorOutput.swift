@@ -20,5 +20,7 @@ protocol SettingsInteractorOutput: class {
     func profilePhotoUploadFailed(error: Error)
     
     func connectToNetworkFailed()
+    func asyncOperationStarted()
+    func asyncOperationStoped()
     
 }

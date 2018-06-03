@@ -47,6 +47,14 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
+    func asyncOperationStarted() {
+        startAsyncOperation()
+    }
+    
+    func asyncOperationStoped() {
+        asyncOperationSucces()
+    }
+    
     func goToOnboarding() {
         router.goToOnboarding()
     }
