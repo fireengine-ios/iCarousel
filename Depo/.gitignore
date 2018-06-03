@@ -18,3 +18,16 @@ DerivedData
 
 Pods/
 Templates/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+Preview.html
+fastlane/test_output
+# fastlane screenshots
+# It is recommended to not store the screenshots in the git repo.
+# Instead, use fastlane to re-generate the screenshots whenever they are needed.
+fastlane/screenshots/screenshots.html
+fastlane/screenshots/**/*.png
+!fastlane/screenshots/background.png
+builds/
