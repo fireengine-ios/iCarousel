@@ -400,7 +400,7 @@ class AuthenticationService: BaseRequestService {
         }
     }
     
-    func serverLogout(complition: VoidHandler) {
+    func serverLogout(complition: @escaping VoidHandler) {
         let requestParametrs = SigngOutParametes(authToken: self.tokenStorage.accessToken ?? "", rememberMeToken: self.tokenStorage.refreshToken ?? "")
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { response in
             complition()
