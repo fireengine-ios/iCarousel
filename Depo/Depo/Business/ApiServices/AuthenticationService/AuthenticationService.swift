@@ -66,6 +66,31 @@ class Authentication3G: BaseRequestParametrs {
     }
 }
 
+class SigngOutParametes: BaseRequestParametrs {
+    let authToken: String
+    let rememberMeToken: String
+    
+    init(authToken: String, rememberMeToken: String) {
+        self.authToken = authToken
+        self.rememberMeToken = rememberMeToken
+        super.init()
+    }
+
+    override var requestParametrs: Any {
+        return [
+            HeaderConstant.AuthToken: authToken,
+            HeaderConstant.RememberMeToken: rememberMeToken,
+            HeaderConstant.Accept: HeaderConstant.ApplicationJson
+        ]
+    }
+    
+    override var patch: URL {
+        let patch = RouteRequests.logout
+        return URL(string: patch,
+                   relativeTo: super.patch)!
+    }
+}
+
 class AuthenticationUserByToken: BaseRequestParametrs {
     
     override var requestParametrs: Any {
@@ -370,6 +395,16 @@ class AuthenticationService: BaseRequestService {
         } else {
             logout()
         }
+    }
+    
+    func serverLogout() {
+        let requestParametrs = SigngOutParametes(authToken: self.tokenStorage.accessToken ?? "", rememberMeToken: self.tokenStorage.refreshToken ?? "")
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { response in
+            debugPrint("success")
+        }, fail: { failresponse in
+            debugPrint("FAILED")
+        })
+        executePostRequest(param: requestParametrs, handler: handler)
     }
     
     func cancellAllRequests() {
