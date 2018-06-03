@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AutoSyncViewController: ViewController, AutoSyncViewInput, AutoSyncDataSourceDelegate {
+class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDataSourceDelegate {
     var output: AutoSyncViewOutput!
     
     @IBOutlet weak var titleLabel: UILabel!
