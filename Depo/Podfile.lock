@@ -10,10 +10,10 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
   - CircleProgressBar (0.32)
-  - Crashlytics (3.10.1):
-    - Fabric (~> 1.7.5)
+  - Crashlytics (3.10.2):
+    - Fabric (~> 1.7.7)
   - Curio_iOS_SDK (1.2.4)
-  - Fabric (1.7.6)
+  - Fabric (1.7.7)
   - FBSDKCoreKit (4.33.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.33.0):
@@ -30,11 +30,11 @@ PODS:
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
-  - ObjectiveDropboxOfficial (3.9.0)
+  - ObjectiveDropboxOfficial (3.9.1)
   - ReachabilitySwift (4.1.0)
-  - SDWebImage (4.3.3):
-    - SDWebImage/Core (= 4.3.3)
-  - SDWebImage/Core (4.3.3)
+  - SDWebImage (4.4.0):
+    - SDWebImage/Core (= 4.4.0)
+  - SDWebImage/Core (4.4.0)
   - SimpleExif (0.0.1)
   - SQLite.swift (0.11.4):
     - SQLite.swift/standard (= 0.11.4)
@@ -121,9 +121,9 @@ SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   CircleProgressBar: 3920079be5224b62b3d9ed6eeb23ac01c835b681
-  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Crashlytics: 0360624eea1c978a743feddb2fb1ef8b37fb7a0d
   Curio_iOS_SDK: 5d2231a8abab8f8c3f076c33a4eee5d3b6072c0c
-  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
+  Fabric: bda89e242bce1b7b8ab264248cf3407774ce0095
   FBSDKCoreKit: 572b047a7e029bc44542bcf8a59414e7ff2b543e
   FBSDKLoginKit: 88cb456349cfb3b554427ce4f8b43729d85dfb40
   FBSDKShareKit: 1869cb24db2cea90666a50cb9d568deb38e2d16e
@@ -133,9 +133,9 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
-  ObjectiveDropboxOfficial: 64a809a85744ce58866bf98066f98be5d4c0582e
+  ObjectiveDropboxOfficial: 274ce69d66286c94416daf1da5237c55e105e8c0
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
-  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  SDWebImage: b534502786e43dde36dfcaee89356fe6df30e203
   SimpleExif: c7537d53f8a3854af0235ea41759a58ffc8afa11
   SQLite.swift: 3e3bee21da701b5b9f87c4a672cb54f233505692
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220

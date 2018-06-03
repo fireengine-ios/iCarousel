@@ -76,7 +76,10 @@ class SigngOutParametes: BaseRequestParametrs {
         super.init()
     }
 
-    override var requestParametrs: Any {
+//    override var requestParametrs: Any {
+//
+//    }
+    override var header: RequestHeaderParametrs {
         return [
             HeaderConstant.AuthToken: authToken,
             HeaderConstant.RememberMeToken: rememberMeToken,
@@ -469,7 +472,7 @@ class AuthenticationService: BaseRequestService {
     
     private let sessionManagerWithoutToken: SessionManager = {
         let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
+        configuration.httpAdditionalHeaders = SessionManager.defaultCustomHTTPHeaders
         return SessionManager(configuration: configuration)
     }()
     
