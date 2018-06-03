@@ -952,15 +952,19 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     @objc func onHeaderTap(_ sender: UITapGestureRecognizer){
-        if (!enableSelectionOnHeader ||
-            !isSelectionStateActive ) {
+        if !enableSelectionOnHeader || !isSelectionStateActive {
             return
         }
         
-        let section = sender.view?.tag
-        selectSectionAt(section: section!)
-        let textHeader = sender.view?.superview as! CollectionViewSimpleHeaderWithText
-        textHeader.setSelectedState(selected: isHeaderSelected(section: section!), activateSelectionState: isSelectionStateActive)
+        guard
+            let section = sender.view?.tag,
+            let textHeader = sender.view?.superview as? CollectionViewSimpleHeaderWithText
+        else {
+            return    
+        }
+        
+        selectSectionAt(section: section)
+        textHeader.setSelectedState(selected: isHeaderSelected(section: section), activateSelectionState: isSelectionStateActive)
     }
     
     func morebuttonGotPressed(sender: Any, itemModel: Item?) {
