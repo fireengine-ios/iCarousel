@@ -144,8 +144,8 @@ final class AppConfigurator {
         }
         
         let serverURL = "http://curio.turkcell.com.tr/api/v2"
-        let apiKey = "8fb5c84a549711e881e1d5b6432746d5"
-        let trackingCode = "20AWWG1M"
+        let apiKey = "8fb5c84a549711e881e1d5b6432746d5" //"cab314f33df2514764664e5544def586" // old app
+        let trackingCode = "20AWWG1M" //"KL2XNFIE" // old app
         //FIXME: change trackingCode to 20AW4ELA before publishing app to store
         
         CurioSDK.shared().startSession(serverURL, apiKey: apiKey, trackingCode: trackingCode, sessionTimeout: 30, periodicDispatchEnabled: true, dispatchPeriod: 5, maxCachedActivitiyCount: 10, loggingEnabled: false, logLevel: 0, fetchLocationEnabled: false, maxValidLocationTimeInterval: 600, appLaunchOptions: appLaunchOptions)
