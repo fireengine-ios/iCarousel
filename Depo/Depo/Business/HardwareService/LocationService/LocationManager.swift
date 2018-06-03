@@ -73,7 +73,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         self.checkDoWeNeedShowLocationPermissionAllert(yesWeNeed: {
             let controller = UIAlertController.init(title: "", message: TextConstants.locationServiceDisable, preferredStyle: .alert)
             let okAction = UIAlertAction(title: TextConstants.ok, style: .default, handler: { action in
-                UIApplication.shared.openGlobalSettings()
+                UIApplication.shared.openSettings()
             })
             let cancelAction = UIAlertAction(title: TextConstants.cancel, style: .cancel, handler: nil)
             controller.addAction(okAction)
