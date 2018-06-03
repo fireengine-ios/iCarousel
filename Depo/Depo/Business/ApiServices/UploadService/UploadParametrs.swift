@@ -85,6 +85,7 @@ class Upload: UploadRequestParametrs {
         header = header + [
             HeaderConstant.ContentType           : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
+            HeaderConstant.objecMetaDevice       : AppConfigurator.getWorkaroundUUID(),
 //            HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
