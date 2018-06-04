@@ -2442,10 +2442,18 @@
 		8CB293331F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */; };
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
 		8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */; };
-		8CC163D320B6F7C7006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D120B6F7C6006B8F88 /* Info-AppStore.plist */; };
-		8CC163D420B6F7C7006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D220B6F7C7006B8F88 /* Info-Enterprise.plist */; };
 		8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */; };
 		8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
+		8CCA070520C4412800558AB0 /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
+		8CCA070620C4412800558AB0 /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
+		8CCA070B20C455DB00558AB0 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
+		8CCA070C20C455DC00558AB0 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
+		8CCA070D20C455FE00558AB0 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
+		8CCA070E20C4639500558AB0 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
+		8CCA070F20C4639600558AB0 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
+		8CCA071020C4639700558AB0 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
+		8CCA071520C46C7400558AB0 /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
+		8CCA071620C46CDB00558AB0 /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
 		8CD2B3A91FE7B21C00280547 /* BaseFilesGreedModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8734DA0C1FD846DF00977752 /* BaseFilesGreedModuleOutput.swift */; };
 		8CD2B3AA1FE7B22900280547 /* ItemSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */; };
 		8CD2B3AB1FE7B23E00280547 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E4C1FDFD69400978BE7 /* PopUpController.swift */; };
@@ -2835,6 +2843,14 @@
 		CE394B621F6FFA8200128324 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE394B611F6FFA8200128324 /* Array+Safe.swift */; };
 		CE39615120C29B5E00D145E0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
 		CE39615220C29B6400D145E0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
+		CE39615720C2AEAD00D145E0 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
+		CE39615820C2AEAE00D145E0 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
+		CE39615920C2AEAE00D145E0 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
+		CE39615A20C2AEAF00D145E0 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
+		CE39615B20C2AEB400D145E0 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
+		CE39615C20C2AED700D145E0 /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
+		CE39615D20C2AED800D145E0 /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
+		CE39615E20C2AEDC00D145E0 /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
 		CE3A3003200F4B030028C900 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A3002200F4B030028C900 /* Validator.swift */; };
 		CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3AA9AE1F4D686D000157AF /* CoreData.framework */; };
 		CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */; };
@@ -4916,10 +4932,9 @@
 		8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetPresenterModuleInitialiser.swift; sourceTree = "<group>"; };
 		8CBA3E931EF5D0B100072983 /* ValidationResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResults.swift; sourceTree = "<group>"; };
 		8CBA3E9D1EF6C79500072983 /* RegistrationUserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationUserInfoModel.swift; sourceTree = "<group>"; };
-		8CC163D120B6F7C6006B8F88 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
-		8CC163D220B6F7C7006B8F88 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
 		8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
 		8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
+		8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionServiceExtension.swift; sourceTree = "<group>"; };
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
 		8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyContainerNavVC.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
@@ -10459,6 +10474,7 @@
 		CE34718A1F03689C00B97AC3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */,
 				8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */,
 				CECD4E521FE114FC00978BE7 /* Color */,
 				873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */,
@@ -10792,8 +10808,6 @@
 				CE1458CC2045645000812544 /* Presentation */,
 				CE1458CD2045645F00812544 /* Business */,
 				CE58FAF620444493007F3F54 /* Info.plist */,
-				8CC163D120B6F7C6006B8F88 /* Info-AppStore.plist */,
-				8CC163D220B6F7C7006B8F88 /* Info-Enterprise.plist */,
 				CE61D1BA2045961C001D01DC /* LifeboxShared.entitlements */,
 				7A3E0BFC20626B7100F79A1C /* LifeboxShared-appstore.entitlements */,
 				7A3E0BFD20626B7100F79A1C /* LifeboxShared-enterprise.entitlements */,
@@ -13488,9 +13502,7 @@
 				CEBDB1DC20444E50007EE1AE /* TurkcellSaturaBol.ttf in Resources */,
 				CEBDB1DD20444E50007EE1AE /* TurkcellSaturaBolIta.ttf in Resources */,
 				CEBDB1DE20444E50007EE1AE /* TurkcellSaturaDem.ttf in Resources */,
-				8CC163D420B6F7C7006B8F88 /* Info-Enterprise.plist in Resources */,
 				CE4D281D207E23F7003AE4FB /* PasscodeEnterViewController.xib in Resources */,
-				8CC163D320B6F7C7006B8F88 /* Info-AppStore.plist in Resources */,
 				CE4D2813207E0997003AE4FB /* PasscodeViewImp.xib in Resources */,
 				CEBDB1DF20444E50007EE1AE /* TurkcellSaturaDemIta.ttf in Resources */,
 				CEBDB1E020444E50007EE1AE /* TurkcellSaturaIta.ttf in Resources */,
@@ -14417,6 +14429,7 @@
 				8C0E8E6B1FDEBDFF00789C91 /* InstagramAuthViewController.swift in Sources */,
 				8C0E8E711FDEBDFF00789C91 /* FromNib.swift in Sources */,
 				CE4ECA7620889B6400AB91C6 /* KeychainSwift+Optional.swift in Sources */,
+				8CCA070620C4412800558AB0 /* SessionServiceExtension.swift in Sources */,
 				8C0E8E731FDEBDFF00789C91 /* PackagesViewOutput.swift in Sources */,
 				8C0E8E761FDEBDFF00789C91 /* LoadingImageView.swift in Sources */,
 				8C0E8E771FDEBDFF00789C91 /* PasscodeSettingsViewIO.swift in Sources */,
@@ -14896,6 +14909,8 @@
 				CE4D27F7207E024A003AE4FB /* Constants.swift in Sources */,
 				CE18CC93204E895D00FA3F44 /* ErrorIdentificators.swift in Sources */,
 				CEF3719D20873B11007AD36E /* TitleView.swift in Sources */,
+				8CCA071620C46CDB00558AB0 /* SessionServiceExtension.swift in Sources */,
+				8CCA070C20C455DC00558AB0 /* Keys.swift in Sources */,
 				CE98F6DB204E71E300433915 /* String+UTType.swift in Sources */,
 				CE1BE95120492CCE0074BDDC /* Dictionary.swift in Sources */,
 				CE4ECA722088976200AB91C6 /* InsetsLabel.swift in Sources */,
@@ -14921,6 +14936,7 @@
 				CE1BE94A20492C5E0074BDDC /* SharedConstants.swift in Sources */,
 				CE1BE94B20492C800074BDDC /* ShareConfigurator.swift in Sources */,
 				CE1BE95020492CB70074BDDC /* RouteRequests.swift in Sources */,
+				8CCA070F20C4639600558AB0 /* DeviceExtension.swift in Sources */,
 				CE1BE94F20492CA60074BDDC /* ResponseResult.swift in Sources */,
 				CE1BE929204831CE0074BDDC /* FileProviderEnumerator.swift in Sources */,
 				CE1B7621204D335300B5E12A /* Error+Network.swift in Sources */,
@@ -14933,6 +14949,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE18CC90204E87CE00FA3F44 /* L10n.swift in Sources */,
+				8CCA070D20C455FE00558AB0 /* Keys.swift in Sources */,
 				CE4D2807207E086D003AE4FB /* NumericConstants.swift in Sources */,
 				CE4ECA732088976300AB91C6 /* InsetsLabel.swift in Sources */,
 				CE1BE933204831CE0074BDDC /* DocumentActionViewController.swift in Sources */,
@@ -14940,6 +14957,7 @@
 				CE125176204E83DC00886F8D /* ColorConstants.swift in Sources */,
 				CE18CC7D204E84DE00FA3F44 /* DocumentActionCustomizator.swift in Sources */,
 				CEF371A120873B42007AD36E /* UIViewController+NavBar.swift in Sources */,
+				8CCA071020C4639700558AB0 /* DeviceExtension.swift in Sources */,
 				CEF371B020887DAC007AD36E /* MD5.swift in Sources */,
 				CE4D2817207E0A2B003AE4FB /* FromNib.swift in Sources */,
 				CE18CC92204E894100FA3F44 /* ErrorIdentificators.swift in Sources */,
@@ -15559,6 +15577,7 @@
 				CEC3C22F1FB997A600C3D67F /* FromNib.swift in Sources */,
 				486F7B53208CFD4E009EB73F /* PeriodicContactSyncSettingsOptionView.swift in Sources */,
 				CE2F56211F7552A900F49DA1 /* PackagesViewOutput.swift in Sources */,
+				8CCA070520C4412800558AB0 /* SessionServiceExtension.swift in Sources */,
 				7859299520060E8B003F8AB3 /* ManageContactsModuleInput.swift in Sources */,
 				7CAC23BF1F4ABD3100607660 /* LoadingImageView.swift in Sources */,
 				CEC3C2431FB99AF800C3D67F /* PasscodeSettingsViewIO.swift in Sources */,
@@ -16013,6 +16032,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE4D2812207E0997003AE4FB /* PasscodeView.swift in Sources */,
+				8CCA070B20C455DB00558AB0 /* Keys.swift in Sources */,
 				CE61D1BB20459718001D01DC /* ImageFormat.swift in Sources */,
 				CE4ECA712088976100AB91C6 /* InsetsLabel.swift in Sources */,
 				CE98F6D9204E6BD800433915 /* UIImageView+Scale.swift in Sources */,
@@ -16061,6 +16081,7 @@
 				CE654FB62045613A00232025 /* AuthorizationRepository.swift in Sources */,
 				CE1458CB2045633D00812544 /* ShareConfigurator.swift in Sources */,
 				CE5FE962208B1C9E0065AC7E /* UploadHelpers.swift in Sources */,
+				8CCA070E20C4639500558AB0 /* DeviceExtension.swift in Sources */,
 				CE1458C82045619500812544 /* RequestHeader.swift in Sources */,
 				CEE3017F2049520C007E70CE /* Mapping.swift in Sources */,
 				CEBDB1D720444C73007EE1AE /* UIColor+Adjust.swift in Sources */,
@@ -16074,6 +16095,7 @@
 				CEBDB1E520452F6E007EE1AE /* ImageColCell.swift in Sources */,
 				CE23A0FC205FF5F80048267D /* Images.swift in Sources */,
 				CEBDB1D920444D97007EE1AE /* ShareCustomizator.swift in Sources */,
+				8CCA071520C46C7400558AB0 /* SessionServiceExtension.swift in Sources */,
 				CE654FB72045613F00232025 /* AuthorizationURLs.swift in Sources */,
 				CE4D2819207E0A5A003AE4FB /* Device.swift in Sources */,
 				8C73CFD6208265D200B66E64 /* String+Subscript.swift in Sources */,
@@ -17478,7 +17500,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxShared/Info-AppStore.plist";
+				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -17512,7 +17534,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxShared/Info-Enterprise.plist";
+				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;

@@ -30,6 +30,10 @@ open class AuthorizationRepositoryImp: AuthorizationRepository {
     private var isRefreshing = false
     private var requestsToRetry: [RequestRetryCompletion] = []
     
+    let uuid = "uuid"
+    let name = "name"
+    let deviceType = "deviceType"
+    
     // MARK: - Open properties for customization (by override)
     
     open var accessTokenKey: String {
@@ -129,7 +133,6 @@ extension AuthorizationRepositoryImp: RequestRetrier {
     // MARK: - Private - Refresh Tokens
     
     fileprivate typealias RefreshCompletion = (_ succeeded: Bool, _ accessToken: String?) -> Void
-    
     fileprivate func refreshTokens(completion: @escaping RefreshCompletion) {
         
         /// guard refresh retry
@@ -146,7 +149,8 @@ extension AuthorizationRepositoryImp: RequestRetrier {
         let headers = [refreshTokenKey: tokenStorage.refreshToken ?? ""]
         
         sessionManager
-            .request(urls.refreshAccessToken, method: .post, parameters: [:], encoding: JSONEncoding.default, headers: headers)
+            .request(urls.refreshAccessToken, method: .post, parameters: [uuid: UIDevice.current.identifierForVendor?.uuidString ?? "", name: UIDevice.current.name, deviceType: Device.isIpad ? "IPAD" : "IPHONE"],
+                     encoding: JSONEncoding.default, headers: headers)
             .responseJSON { [weak self] response in
                 guard let strongSelf = self else { return }
                 debugPrint(response)

@@ -70,10 +70,14 @@ class SettingsInteractor: SettingsInteractorInput {
     }
 
     func onLogout() {
-        authService.logout { [weak self] in
-            MenloworksEventsService.shared.onLoggedOut()
-            self?.output.goToOnboarding()
-        }
+        output.asyncOperationStarted()
+        authService.serverLogout(complition: { [weak self] in
+            self?.output.asyncOperationStoped()
+            self?.authService.logout { [weak self] in
+                MenloworksEventsService.shared.onLoggedOut()
+                self?.output.goToOnboarding()
+            }
+        })
     }
     
     func uploadPhoto(withPhoto photo: Data) {

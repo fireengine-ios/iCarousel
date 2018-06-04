@@ -66,6 +66,34 @@ class Authentication3G: BaseRequestParametrs {
     }
 }
 
+class SigngOutParametes: BaseRequestParametrs {
+    let authToken: String
+    let rememberMeToken: String
+    
+    init(authToken: String, rememberMeToken: String) {
+        self.authToken = authToken
+        self.rememberMeToken = rememberMeToken
+        super.init()
+    }
+
+//    override var requestParametrs: Any {
+//
+//    }
+    override var header: RequestHeaderParametrs {
+        return [
+            HeaderConstant.AuthToken: authToken,
+            HeaderConstant.RememberMeToken: rememberMeToken,
+            HeaderConstant.Accept: HeaderConstant.ApplicationJson
+        ]
+    }
+    
+    override var patch: URL {
+        let patch = RouteRequests.logout
+        return URL(string: patch,
+                   relativeTo: super.patch)!
+    }
+}
+
 class AuthenticationUserByToken: BaseRequestParametrs {
     
     override var requestParametrs: Any {
@@ -251,7 +279,7 @@ class AuthenticationService: BaseRequestService {
                                      "password": user.password,
                                      "deviceInfo": Device.deviceInfo]
         
-        SessionManager.default.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
+        SessionManager.customDefault.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
                 .responseString { [weak self] response in
                     switch response.result {
                     case .success(_):
@@ -299,7 +327,7 @@ class AuthenticationService: BaseRequestService {
         let user = AuthenticationUserByToken()
         let params: [String: Any] = ["deviceInfo": Device.deviceInfo]
         
-        SessionManager.default.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
+        SessionManager.customDefault.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
             .responseString { [weak self] response in
                 self?.loginHandler(response, sucess, fail)
         }
@@ -308,7 +336,7 @@ class AuthenticationService: BaseRequestService {
     func turkcellAutification(user: Authentication3G, sucess: SuccessLogin?, fail: FailResponse?) {
         log.debug("AuthenticationService turkcellAutification")
         
-        SessionManager.default.request(user.patch, method: .post, parameters: Device.deviceInfo, encoding: JSONEncoding.prettyPrinted)
+        SessionManager.customDefault.request(user.patch, method: .post, parameters: Device.deviceInfo, encoding: JSONEncoding.prettyPrinted)
             .responseString { [weak self] response in
                 self?.loginHandler(response, sucess, fail)
         }
@@ -372,8 +400,18 @@ class AuthenticationService: BaseRequestService {
         }
     }
     
+    func serverLogout(complition: @escaping VoidHandler) {
+        let requestParametrs = SigngOutParametes(authToken: self.tokenStorage.accessToken ?? "", rememberMeToken: self.tokenStorage.refreshToken ?? "")
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { response in
+            complition()
+        }, fail: { failresponse in
+            complition()
+        })
+        executePostRequest(param: requestParametrs, handler: handler)
+    }
+    
     func cancellAllRequests() {
-        SessionManager.default.cancellAllRequests()
+        SessionManager.customDefault.cancellAllRequests()
     }
     
     func signUp(user: SignUpUser, sucess: SuccessResponse?, fail: FailResponse?) {
@@ -434,7 +472,7 @@ class AuthenticationService: BaseRequestService {
     
     private let sessionManagerWithoutToken: SessionManager = {
         let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
+        configuration.httpAdditionalHeaders = SessionManager.defaultCustomHTTPHeaders
         return SessionManager(configuration: configuration)
     }()
     
@@ -458,7 +496,7 @@ class AuthenticationService: BaseRequestService {
     }
     
     func updateUserLanguage(_ language: String, handler: @escaping ResponseVoid) {
-        SessionManager.default
+        SessionManager.customDefault
             .request(RouteRequests.updateLanguage, method: .post, encoding: language)
             .customValidate()
             .responseVoid(handler)

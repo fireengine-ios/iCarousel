@@ -154,7 +154,9 @@
 "Suggestion" = "Совет";
 "Feedback Form" = "Чтобы получить совет или оставить жалобу, пожалуйста, свяжитесь с нами:";
 "Thanks for leaving a comment!" = "Спасибо за ваш комментарий!";
-"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Пожалуйста, не удаляйте следующую информацию. Данная информация будет использован для отправки сообщения о проблеме\n\nВерсия приложения: %@\nНомер телефона: %@\nОператор: %@\nУстройство: %@\nЯзык: %@\nПредпочтительный язык: %@\nСтатус сети: %@\nОбщий объём хранилища: %@\nИспользованный объём хранилища: %@\nПакеты: %@";
+
+/*Fuzzy*/
+"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Пожалуйста, не удаляйте следующую информацию. Данная информация будет использован для отправки сообщения о проблеме\n\nВерсия приложения: %@\nНомер телефона: %@\nОператор: %@\nУстройство: %@\nОперационная система: %@\nЯзык: %@\nПредпочтительный язык: %@\nСтатус сети: %@\nОбщий объём хранилища: %@\nИспользованный объём хранилища: %@\nПакеты: %@";
 "Upload Photos" = "Загрузить фотографии";
 "Add" = "Добавить";
 "Albums" = "Альбомы";
@@ -410,7 +412,7 @@
 "Are you sure you want to delete?" = "Вы уверены, что хотите удалить дубликаты?";
 "This duplicated contacts will be deleted from your contacts." = "Данные дубликаты будут удалены из вашего списка контактов.";
 "%%%d Restored…" = "%d%% восстановлено";
-"%%%d Analyzed…" = "%d%% Проанализировано…";
+"%%%d Analyzed…" = "%%%d Проанализировано…";
 "%%%d Backed up…" = "Резервное копирование...";
 "Restored %d Contacts" = "Восстановлено %d контактов";
 "%d Duplicated Contacts Deleted" = "%d дубликатов удалено";

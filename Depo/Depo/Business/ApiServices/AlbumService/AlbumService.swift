@@ -311,7 +311,7 @@ class PhotosAlbumService: BaseRequestService {
     
     func getAlbum(for uuid: String, handler: @escaping ResponseHandler<AlbumServiceResponse>) {
         let url = RouteRequests.BaseUrl +/ "api/album/\(uuid)"
-        SessionManager.default
+        SessionManager.customDefault
             .request(url)
             .responseObject(handler)
     }

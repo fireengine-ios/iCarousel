@@ -124,9 +124,8 @@ class MenloworksTagsService {
             return
         }
         
-        checkTurkcellSecuritySettings()
-        
         if isLoggedIn {
+            checkTurkcellSecuritySettings()
             sendInstagramImportStatus()
             sendFacebookImportStatus()
             sendFIRStatus()
