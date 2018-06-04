@@ -79,12 +79,16 @@ class Upload: UploadRequestParametrs {
     var requestParametrs: Any {
         return Data()
     }
+    
+   
+    
     var header: RequestHeaderParametrs {
         var header = RequestHeaders.authification()
         
         header = header + [
             HeaderConstant.ContentType           : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
+            HeaderConstant.objecMetaDevice       : Device.workaroundUUID,
 //            HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
