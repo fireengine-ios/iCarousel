@@ -34,7 +34,7 @@ protocol BaseItemOuputPassingProtocol: class {
 
 extension BaseItemInputPassingProtocol {
     func showAlert(with message: String) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             UIApplication.showErrorAlert(message: message)
         }
     }

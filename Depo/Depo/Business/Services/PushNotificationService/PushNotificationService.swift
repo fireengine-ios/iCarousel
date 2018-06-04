@@ -97,7 +97,7 @@ final class PushNotificationService {
             return
         }
         
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             if self.router.navigationController?.presentedViewController != nil {
                 self.router.pushOnPresentedView(viewController: controller)
             } else {

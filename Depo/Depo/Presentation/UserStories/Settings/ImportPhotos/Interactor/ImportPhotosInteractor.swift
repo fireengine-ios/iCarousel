@@ -16,11 +16,11 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
     func requestPermissions() {
         fbService.requestPermissions(success: { [weak self] responseObject in
             let fbPermissions = responseObject as! FBPermissionsObject
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.permissionsSuccessCallback(permissions: fbPermissions)
             }
         }) { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.permissionsFailureCallback(errorMessage: error.description)
             }
         }
@@ -28,11 +28,11 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
     
     func requestToken(permissions: [String]) {
         fbService.requestToken(permissions: permissions, success: { [weak self] token in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.tokenSuccessCallback(token: token)
             }
         }) { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.tokenFailureCallback(errorMessage: error.description)
             }
         }
@@ -40,11 +40,11 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
     
     func requestConnect(withToken token: String) {
         fbService.requestConnect(withToken: token, success: { [weak self] _ in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.connectSuccessCallback()
             }
         }) { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.connectFailureCallback(errorMessage: error.description)
             }
         }
@@ -53,11 +53,11 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
     func requestStatus() {
         fbService.requestStatus(success: { [weak self] responseObject in
             let fbStatus = responseObject as! FBStatusObject
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.statusSuccessCallback(status: fbStatus)
             }
         }) { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.statusFailureCallback(errorMessage: error.description)
             }
         }
@@ -65,11 +65,11 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
     
     func requestStart() {
         fbService.requestStart(success: { [weak self] _ in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.startSuccessCallback()
             }
         }) { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.startFailureCallback(errorMessage: error.description)
             }
         }
@@ -77,13 +77,13 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
     
     func requestStop() {
         fbService.requestStop(success: { [weak self] _ in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 MenloworksTagsService.shared.facebookImport(isOn: false)
                 self?.output?.stopSuccessCallback()
             }
             
         }) { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.stopFailureCallback(errorMessage: error.description)
             }
         }

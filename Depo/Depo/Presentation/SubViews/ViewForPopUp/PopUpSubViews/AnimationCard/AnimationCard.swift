@@ -121,7 +121,7 @@ class AnimationCard: BaseView {
         }
         bottomButton.isEnabled = false
         homeCardsService.save(with: id) { [weak self] result in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.bottomButton.isEnabled = true
                 
                 switch result {

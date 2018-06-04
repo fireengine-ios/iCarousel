@@ -28,7 +28,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
             return
         }
         remote.allAlbums(sortBy: sortBy.sortingRules, sortOrder: sortBy.sortOder, success: { [weak self]  albumbs in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 log.debug("AlbumsInteractor getAllItems AlbumService allAlbums success")
 
                 var array = [[BaseDataSourceItem]]()
@@ -38,7 +38,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
         }, fail: { [weak self] in
             log.debug("AlbumsInteractor getAllItems AlbumService allAlbums fail")
 
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.asyncOperationFail(errorMessage: "Failed to get albums")
             }
         })
@@ -52,7 +52,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
         PhotosAlbumService().addPhotosToAlbum(parameters: parameters, success: { [weak self] in
             log.debug("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum success")
 
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 print("success")
                 self?.output.asyncOperationSucces()
                 
@@ -64,7 +64,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
         }) { [weak self] error in
             log.debug("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum error")
 
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.asyncOperationFail(errorMessage: error.description)
             }
         }

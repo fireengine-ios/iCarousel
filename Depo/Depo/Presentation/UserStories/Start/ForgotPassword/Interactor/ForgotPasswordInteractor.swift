@@ -13,21 +13,21 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
     
     func sendForgotPasswordRequest(with mail: String, enteredCaptcha: String, captchaUDID: String) {
         guard !mail.isEmpty else {
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self.output.requestFailed(withError: TextConstants.forgotPasswordEmptyEmailText)
             }
             return
         }
         
         guard Validator.isValid(email: mail) else {
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self.output.requestFailed(withError: TextConstants.forgotPasswordErrorEmailFormatText)
             }
             return
         }
         
         guard !enteredCaptcha.isEmpty else {
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self.output.requestFailed(withError: TextConstants.forgotPasswordErrorCaptchaFormatText)
             }
             return
@@ -36,11 +36,11 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
         let captcha = CaptchaParametrAnswer(uuid: captchaUDID, answer: enteredCaptcha)
         let forgotPassword = ForgotPassword(email: mail, attachedCaptcha: captcha)
         authenticationService.fogotPassword(forgotPassword: forgotPassword, success: { [weak self] _ in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.requestSucceed()
             }
         }, fail: { [weak self] response in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 let errorMessage = self?.checkErrorService(withErrorResponse: response.description) ?? response.description
                 self?.output.requestFailed(withError: errorMessage)
             }

@@ -50,7 +50,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                         return firstDate > secondDate
                     }
                     
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         self?.output.getContentWithSuccess(array: [items])
                     }
                 }
@@ -79,12 +79,12 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         UploadService.default.uploadFileList(items: uploadItems, uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
             log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList success")
 
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.uploadOutput?.addToUploadSuccessed()
             }
         }, fail: { [weak self] errorResponse in
             log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList fail")
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.uploadOutput?.addToUploadFailedWith(errorMessage: errorResponse.description)
             }
             }, returnedUploadOperation: {_ in})

@@ -242,7 +242,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func stopRefresher() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             self.refresher.endRefreshing()
         }
     }

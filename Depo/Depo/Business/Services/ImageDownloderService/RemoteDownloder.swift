@@ -22,7 +22,7 @@ class ImageDownloder {
     func getImage(patch: URL?, completeImage:@escaping RemoteImage) {
         
         if (patch == nil) {
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 completeImage(nil)
             }
         }
@@ -33,7 +33,7 @@ class ImageDownloder {
         }
         
         if let image = SDWebImageManager.shared().imageCache?.imageFromCache(forKey: cachePath) {
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 completeImage(image)
             }
             return

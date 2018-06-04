@@ -181,7 +181,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         case .denied:
             completion(false, status)
             if redirectToSettings {
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     MenloworksTagsService.shared.onGalleryPermissionChanged(false)
                     self.showAccessAlert()
                 }
@@ -254,7 +254,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                         }
                     }
                 }
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     completion(albums)
                 }
             }
@@ -324,7 +324,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         log.debug("LocalMediaStorage getImage")
 
         let callBack: PhotoManagerCallBack = { newImg, _ in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 image(newImg)
             }
         }

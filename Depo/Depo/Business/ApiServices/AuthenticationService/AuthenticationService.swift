@@ -364,7 +364,7 @@ class AuthenticationService: BaseRequestService {
             success?()
         }
         if async {
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 logout()
             }   
         } else {

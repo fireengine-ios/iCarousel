@@ -57,7 +57,7 @@ class BaseView: UIView, NibInit {
         }
         
         homeCardsService.delete(with: id) { result in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 switch result {
                 case .success(_):
                     return

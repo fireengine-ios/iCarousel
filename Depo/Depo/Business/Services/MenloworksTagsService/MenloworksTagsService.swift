@@ -148,7 +148,7 @@ class MenloworksTagsService {
                     return
             }
             
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.onTurkcellPasswordSettingsChanged(turkCellPasswordOn)
                 self?.onAutoLoginSettingsChanged(turkCellAutoLogin)
             }
