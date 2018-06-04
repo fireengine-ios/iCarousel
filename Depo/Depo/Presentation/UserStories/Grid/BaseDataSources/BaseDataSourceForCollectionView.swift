@@ -251,8 +251,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                 }
                                 self.delegate?.filesAppendedAndSorted()
                                 self.isLocalFilesRequested = false
+                                self.dispatchQueue.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                                    guard let `self` = self else {
+                                        return
+                                    }
+                                    if !self.isPaginationDidEnd,
+                                        array.count < self.pageCompounder.pageSize {
+                                        debugPrint("!!! TRY TO GET NEW PAGE")
+                                        self.delegate?.getNextItems()
+                                    }
+//                                    insertItems
+                                }
                         })
                     }
+                    
                 
             }
         case .failed(_):
@@ -379,10 +391,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             
                              complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
-                            if !self.isPaginationDidEnd,
-                                compoundedItems.count < self.pageCompounder.pageSize {
-                                self.delegate?.getNextItems()
-                            }
+//                            if !self.isPaginationDidEnd,
+//                                compoundedItems.count < self.pageCompounder.pageSize {
+//                                self.delegate?.getNextItems()
+//                            }
                             
                     })
                 } else if self.isPaginationDidEnd {
@@ -419,10 +431,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
-                            if !self.isPaginationDidEnd,
-                                compoundedItems.count < self.pageCompounder.pageSize {
-                                self.delegate?.getNextItems()
-                            }
+//                            if !self.isPaginationDidEnd,
+//                                compoundedItems.count < self.pageCompounder.pageSize {
+//                                self.delegate?.getNextItems()
+//                            }
                     })
                 } else if !self.isPaginationDidEnd { ///Middle page
                     //check lefovers here
@@ -452,10 +464,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
-                            if !self.isPaginationDidEnd,
-                                compoundedItems.count < self.pageCompounder.pageSize {
-                                self.delegate?.getNextItems()
-                            }
+//                            if !self.isPaginationDidEnd,
+//                                compoundedItems.count < self.pageCompounder.pageSize {
+//                                self.delegate?.getNextItems()
+//                            }
                     })
                 }
                 
