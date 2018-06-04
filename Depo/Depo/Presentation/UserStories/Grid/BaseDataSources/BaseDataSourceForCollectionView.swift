@@ -251,6 +251,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                 }
                                 self.delegate?.filesAppendedAndSorted()
                                 self.isLocalFilesRequested = false
+                                //FIXME: part of appending+ incerting should be rewitten or trigger for new page
                                 self.dispatchQueue.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                                     guard let `self` = self else {
                                         return
