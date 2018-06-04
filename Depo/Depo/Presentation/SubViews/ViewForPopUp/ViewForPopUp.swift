@@ -60,7 +60,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     }
 
     func addPopUpSubView(popUp: BaseView) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             
             self.lock.lock()
             self.viewsArray.insert(popUp, at: 0)
@@ -75,7 +75,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     }
     
     func deletePopUpSubView(popUp: BaseView) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             if let index = self.viewsArray.index(of: popUp) {
                 self.lock.lock()
                 let path = IndexPath(row: index, section: 0)

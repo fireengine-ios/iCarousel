@@ -71,7 +71,7 @@ final class PeriodicContactSyncDataSource: NSObject {
     }
     
      func reloadTableView() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             self.tableView?.reloadData()
         }
     }

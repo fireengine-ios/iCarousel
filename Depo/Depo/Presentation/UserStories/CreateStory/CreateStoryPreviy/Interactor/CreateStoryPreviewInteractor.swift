@@ -39,13 +39,13 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
         isRequestStarted = true
         
         CreateStoryService().createStory(createStory: parameter, success: {[weak self] in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.storyCreated()
                 ItemOperationManager.default.newStoryCreated()
             }
             
             }, fail: {[weak self] error in
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.output?.storyCreatedWithError()
                     self?.isRequestStarted = false
                 }

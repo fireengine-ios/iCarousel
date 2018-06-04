@@ -63,7 +63,7 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
                                 
                                 self?.isUpdating = false
                                 
-                                DispatchQueue.toMain {
+                                DispatchQueue.main.async {
                                     if items.count == 0 {
                                         self?.output.getContentWithSuccessEnd()
                                     } else {

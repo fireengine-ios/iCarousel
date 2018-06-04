@@ -55,17 +55,17 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     func performOperation(forType type: SYNCMode) {
         // TODO: clear NumericConstants.limitContactsForBackUp
         contactsSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, type in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.showProggress(progress: progressPercentage, count: 0, forOperation: type)
             }
         }, finishCallback: { [weak self] result, type in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.success(response: result, forOperation: type)
                 CardsManager.default.stopOperationWithType(type: .contactBacupOld)
                 CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
             }
         }, errorCallback: { [weak self] errorType, type in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.showError(errorType: errorType)
             }
         })
@@ -84,16 +84,16 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     
     private func analyze() {
         contactsSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.showProggress(progress: progressPercentage, count: count, forOperation: type)
             }
         }, successCallback: { [weak self] response in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.analyzeSuccess(response: response)
             }
         }, cancelCallback: nil,
            errorCallback: { [weak self] errorType, type in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.showError(errorType: errorType)
             }
         })

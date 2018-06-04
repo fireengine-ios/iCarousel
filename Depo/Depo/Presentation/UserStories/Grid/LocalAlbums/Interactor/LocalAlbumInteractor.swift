@@ -17,7 +17,7 @@ class LocalAlbumInteractor: BaseFilesGreedInteractor {
         localStorage.getAllAlbums { [weak self] albums in
             log.debug("LocalAlbumInteractor getAllItems success")
 
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.getContentWithSuccess(array: [albums])
             }            
         }

@@ -145,7 +145,7 @@ class ItemOperationManager: NSObject {
     func startUploadFile(file: WrapData) {
         currentUploadingObject = file
         
-        //        DispatchQueue.toMain {
+        //        DispatchQueue.main.async {
         for view in self.views {
             view.startUploadFile(file: file)
         }
@@ -153,7 +153,7 @@ class ItemOperationManager: NSObject {
     }
     
     func startUploadFilesToAlbum(files: [WrapData]) {
-        //        DispatchQueue.toMain {
+        //        DispatchQueue.main.async {
         for view in self.views {
             view.startUploadFilesToAlbum(files: files)
         }
@@ -161,7 +161,7 @@ class ItemOperationManager: NSObject {
     }
     
     func setProgressForUploadingFile(file: WrapData, progress: Float) {
-        //        DispatchQueue.toMain {
+        //        DispatchQueue.main.async {
         for view in self.views {
             view.setProgressForUploadingFile(file: file, progress: progress)
         }
@@ -173,7 +173,7 @@ class ItemOperationManager: NSObject {
     
     
     func finishedUploadFile(file: WrapData, isAutoSync: Bool) {
-        //        DispatchQueue.toMain {
+        //        DispatchQueue.main.async {
         for view in self.views {
             view.finishedUploadFile(file: file)
         }
@@ -186,7 +186,7 @@ class ItemOperationManager: NSObject {
     }
     
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.setProgressForDownloadingFile(file: file, progress: progress)
             }
@@ -197,7 +197,7 @@ class ItemOperationManager: NSObject {
     }
     
     func finishedDowloadFile(file: WrapData) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.finishedDownloadFile(file: file)
             }
@@ -208,7 +208,7 @@ class ItemOperationManager: NSObject {
     }
     
     func addFilesToFavorites(items: [Item]) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.addFilesToFavorites(items: items)
             }
@@ -216,7 +216,7 @@ class ItemOperationManager: NSObject {
     }
     
     func removeFileFromFavorites(items: [Item]) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.removeFileFromFavorites(items: items)
             }
@@ -228,7 +228,7 @@ class ItemOperationManager: NSObject {
             return
         }
         
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.deleteItems(items: items)
             }
@@ -240,7 +240,7 @@ class ItemOperationManager: NSObject {
             return
         }
         
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.deleteStories(items: items)
             }
@@ -252,7 +252,7 @@ class ItemOperationManager: NSObject {
             return
         }
         
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.addedLocalFiles(items: items)
             }
@@ -260,7 +260,7 @@ class ItemOperationManager: NSObject {
     }
     
     func newFolderCreated() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.newFolderCreated()
             }
@@ -268,7 +268,7 @@ class ItemOperationManager: NSObject {
     }
     
     func newAlbumCreated() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.newAlbumCreated()
             }
@@ -276,7 +276,7 @@ class ItemOperationManager: NSObject {
     }
     
     func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.updatedAlbumCoverPhoto(item: item)
             }
@@ -284,7 +284,7 @@ class ItemOperationManager: NSObject {
     }
     
     func albumsDeleted(albums: [AlbumItem]) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.albumsDeleted(albums: albums)
             }
@@ -292,7 +292,7 @@ class ItemOperationManager: NSObject {
     }
     
     func filesAddedToAlbum() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.filesAddedToAlbum()
             }
@@ -300,7 +300,7 @@ class ItemOperationManager: NSObject {
     }
     
     func fileAddedToAlbum(item: WrapData, error: Bool = false) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.fileAddedToAlbum(item: item, error: error)
             }
@@ -308,7 +308,7 @@ class ItemOperationManager: NSObject {
     }
     
     func filesUpload(count: Int, toFolder folderUUID: String) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.filesUpload(count: count, toFolder: folderUUID)
             }
@@ -316,7 +316,7 @@ class ItemOperationManager: NSObject {
     }
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.filesRomovedFromAlbum(items: items, albumUUID: albumUUID)
             }
@@ -324,7 +324,7 @@ class ItemOperationManager: NSObject {
     }
     
     func filesMoved(items: [Item], toFolder folderUUID: String) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.filesMoved(items: items, toFolder: folderUUID)
             }
@@ -332,7 +332,7 @@ class ItemOperationManager: NSObject {
     }
     
     func syncFinished() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.syncFinished()
             }
@@ -340,7 +340,7 @@ class ItemOperationManager: NSObject {
     }
     
     func newStoryCreated() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             for view in self.views {
                 view.newStoryCreated()
             }

@@ -78,7 +78,7 @@ import AVFoundation
         ///https://stackoverflow.com/a/40038752/5893286
         picker.allowsEditing = !Device.isIpad
         
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             sourceViewViewController.present(picker,
                                              animated: true,
                                              completion: nil)

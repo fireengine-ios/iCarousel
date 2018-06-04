@@ -168,7 +168,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
             CNContactStore().requestAccess(for: .contacts) { [weak self] granted, error in
                 guard let `self` = self else { return }
                 self.passcodeStorage.systemCallOnScreen = false
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     if granted {
                         completionHandler(true)
                     } else {
