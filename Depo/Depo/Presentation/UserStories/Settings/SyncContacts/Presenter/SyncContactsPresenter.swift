@@ -53,7 +53,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
             // TODO: Error handling
             break
         }
-        view.setStateWithoutBackUp()
+        view.setStateWithBackUp()
         contactSyncResponse = nil
     }
     
@@ -121,7 +121,6 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     fileprivate func updateContactsStatus() {
         if let contactSyncResponse = contactSyncResponse {
             view.success(response: contactSyncResponse, forOperation: .getBackUpStatus)
-            view.setStateWithBackUp()
         } else {
             view.setStateWithoutBackUp()
         }

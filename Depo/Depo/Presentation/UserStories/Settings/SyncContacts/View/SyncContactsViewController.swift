@@ -42,6 +42,8 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     
     @IBOutlet weak var gradientLoaderIndicator: GradientLoadingIndicator!
     
+    private var titleLabelAttributedTextBeforeBackup: NSAttributedString?
+    
     var output: SyncContactsViewOutput!
     
     // MARK: Life cycle
@@ -115,6 +117,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     // MARK: buttons action
     
     @IBAction func onBackUpButton() {
+        titleLabelAttributedTextBeforeBackup = titleLabel.attributedText
         output.startOperation(operationType: .backup)
     }
     
@@ -157,6 +160,9 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     }
     
     func setStateWithBackUp() {
+        gradientLoaderIndicator.resetProgress()
+        titleLabel.attributedText = titleLabelAttributedTextBeforeBackup
+        viewForInformationAfterBackUp.setSubviewsHidden(false)
         cancelButton.isHidden = true
         restoreButton.isHidden = false
         backUpButton.isHidden = false
@@ -208,6 +214,9 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
         setLastBackUpDate(response.date)
+        
+        
+        /// run it here before set new attributedText to titleLabel.attributedText
         setStateWithBackUp()
         
         let template: String
@@ -233,7 +242,6 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         attributedText.addAttribute(NSAttributedStringKey.font, value: font, range: r)
         
         titleLabel.attributedText = attributedText
-        viewForInformationAfterBackUp.setSubviewsHidden(false)
         
         newContactCountLabel.text = String(response.newContactsNumber)
         duplicatedCountLabel.text = String(response.duplicatesNumber)
