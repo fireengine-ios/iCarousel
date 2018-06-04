@@ -42,7 +42,14 @@ class SplashInteractor: SplashInteractorInput {
             SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                 self?.successLogin()
             }, fail: { [weak self] error in
-                self?.failLogin()
+                /// we don't need logout here
+                /// only internet error
+                //self?.failLogin()
+                DispatchQueue.toMain {
+                    if !ReachabilityService().isReachable {
+                        self?.output.onNetworkFail()
+                    }
+                }
             })
         }
     }
