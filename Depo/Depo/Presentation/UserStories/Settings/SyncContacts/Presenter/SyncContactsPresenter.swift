@@ -45,8 +45,10 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     func showError(errorType: SyncOperationErrors) {
         switch errorType {
-        case .networkError, .remoteServerError:
+        case .networkError:
             view.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+        case .remoteServerError:
+            view.showErrorAlert(message: TextConstants.errorManyContactsToBackUp)
         default:
             // TODO: Error handling
             break
