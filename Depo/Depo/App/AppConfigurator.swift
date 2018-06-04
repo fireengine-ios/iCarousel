@@ -71,7 +71,7 @@ final class AppConfigurator {
     static func logout() {
         /// there is no retain circle bcz of singleton
         AuthenticationService().logout {
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 let router = RouterVC()
                 router.setNavigationController(controller: router.onboardingScreen)
             }
@@ -193,7 +193,7 @@ final class AppConfigurator {
             }
         })
         
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             MPush.applicationDidFinishLaunching(options: launchOptions)
             log.debug("AppConfigurator startMenloworks")
         }
@@ -201,7 +201,7 @@ final class AppConfigurator {
     
     
     static func registerMenloworksForPushNotififcations() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             MPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
             log.debug("AppConfigurator registerMenloworksForPushNotififcations")
         

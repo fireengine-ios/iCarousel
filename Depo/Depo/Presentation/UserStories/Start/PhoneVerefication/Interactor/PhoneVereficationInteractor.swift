@@ -45,12 +45,12 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     func resendCode() {
         attempts = 0
         authenticationService.resendVerificationSMS(resendVerification: ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken!), sucess: { [weak self] _ in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.resendCodeRequestSuccesed()
                 
             }
         }, fail: { [weak self] errorResponse in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.resendCodeRequestFailed(with: errorResponse)
             }
         })
@@ -58,13 +58,13 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     
     func verifyCode(code: String) {
         authenticationService.verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification(token: dataStorage.signUpResponse.referenceToken ?? "", otp: code, processPersonalData: true), sucess: { [weak self]  _ in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.verificationSucces()
                 
             }
             
         }, fail: { [weak self] errorRespose in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 guard let `self` = self else {
                     return
                 }
@@ -99,7 +99,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
         authenticationService.login(user: user, sucess: { [weak self] _ in
             self?.tokenStorage.isRememberMe = true
             self?.analyticsService.track(event: .login)
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.succesLogin()
             }
         }, fail: { [weak self] errorResponse  in
@@ -111,7 +111,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
             if (incorrectCredentioal) {
                 self.attempts += 1
             }
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
 
                 if self.isRedirectToSplash(forResponse: errorResponse) {
                     self.output.didRedirectToSplash()

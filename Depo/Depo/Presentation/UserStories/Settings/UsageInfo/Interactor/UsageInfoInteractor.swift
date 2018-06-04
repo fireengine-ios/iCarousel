@@ -21,11 +21,11 @@ extension UsageInfoInteractor: UsageInfoInteractorInput {
         accountService.usage(
             success: { [weak self] response in
                 guard let usage = response as? UsageResponse else { return }
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.output.successed(usage: usage)
                 }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })

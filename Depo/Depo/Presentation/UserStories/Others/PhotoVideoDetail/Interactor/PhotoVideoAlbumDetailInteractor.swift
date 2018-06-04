@@ -34,13 +34,13 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
                 self?.output.startAsyncOperation()
 
                 PeopleService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
                 }) { [weak self] error in
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFailed(withType: .removeFromFaceImageAlbum)
                         }
@@ -58,13 +58,13 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
                 self?.output.startAsyncOperation()
 
                 ThingsService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
                 }) { [weak self] error in
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFailed(withType: .removeFromFaceImageAlbum)
                         }
@@ -82,13 +82,13 @@ class PhotoVideoAlbumDetailInteractor: PhotoVideoDetailInteractor {
                 self?.output.startAsyncOperation()
                 
                 PlacesService().deletePhotosFromAlbum(uuid: uuid, photos: items, success: { [weak self] in
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
                         }
                     }
                 }) { [weak self] error in
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         if let output = self?.output as? BaseItemInputPassingProtocol {
                             output.operationFailed(withType: .removeFromFaceImageAlbum)
                         }

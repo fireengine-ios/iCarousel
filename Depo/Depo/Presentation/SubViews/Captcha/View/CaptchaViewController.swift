@@ -79,7 +79,7 @@ final class CaptchaViewController: ViewController {
     private func getImageCaptcha() {
         captchaService.getCaptcha(uuid: nil, type: .image, sucess: { [weak self] response in
             
-            DispatchQueue.toMain { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 if let captchaResponse = response as? CaptchaResponse,
                     let _ = captchaResponse.type,
                     let captchaData = captchaResponse.data {
@@ -88,7 +88,7 @@ final class CaptchaViewController: ViewController {
             }
             
         }, fail: { error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 UIApplication.showErrorAlert(message: error.description)
             }
         })
@@ -99,7 +99,7 @@ final class CaptchaViewController: ViewController {
     private func getAudioCaptcha() {
         captchaService.getCaptcha(uuid: currentCaptchaID, type: .audio, sucess: { [weak self] response in
             
-            DispatchQueue.toMain { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 if let captchaResponse = response as? CaptchaResponse,
                     let _ = captchaResponse.type,
                     let captchaData = captchaResponse.data {
@@ -108,7 +108,7 @@ final class CaptchaViewController: ViewController {
             }
             
         }, fail: { error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 UIApplication.showErrorAlert(message: error.description)
             }
         })

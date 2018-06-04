@@ -28,7 +28,7 @@ final class FaceImageInteractor {
     }
     
     private func fail(error: String) {
-        DispatchQueue.toMain { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.output.operationFinished()
             self?.output.showError(error: error)
         }
@@ -40,7 +40,7 @@ final class FaceImageInteractor {
 extension FaceImageInteractor: FaceImageInteractorInput {
     func getFaceImageStatus() {
         faceImageAllowed { [weak self] result in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.didFaceImageStatus(result)
             }
         }
@@ -50,7 +50,7 @@ extension FaceImageInteractor: FaceImageInteractorInput {
         let accountService = AccountService()
         let parameters = FaceImageAllowedParameters(allowed: isAllowed)
         accountService.switchFaceImageAllowed(parameters: parameters, success: { [weak self] response in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 if isAllowed {
                     MenloworksEventsService.shared.onFaceImageRecognitionOn()
                 } else {
@@ -60,7 +60,7 @@ extension FaceImageInteractor: FaceImageInteractorInput {
             }
 
         }, fail: { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.failedChangeFaceImageStatus(error: error.description)
             }
         })

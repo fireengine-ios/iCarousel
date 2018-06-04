@@ -83,13 +83,13 @@ class SettingsInteractor: SettingsInteractorInput {
     func uploadPhoto(withPhoto photo: Data) {
         accountSerivese.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] response in
             ImageDownloder().removeImageFromCache(url: self?.userInfoResponse?.urlForPhoto, completion: {
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.output.profilePhotoUploadSuccessed(image: UIImage(data: photo))
                 }
             })
             
         }, fail: { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.profilePhotoUploadFailed(error: error)
             }
                 
