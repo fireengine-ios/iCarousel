@@ -217,9 +217,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         switch response {
         case .success(let array):
-            DispatchQueue.toMain {
+            
                 if self.isDropedData || array.isEmpty {
-                    self.collectionView?.reloadData()
+                    DispatchQueue.toMain {
+                        self.collectionView?.reloadData()
+                    }
                     self.delegate?.filesAppendedAndSorted()
                     self.isLocalFilesRequested = false
                     self.isDropedData = false
@@ -236,18 +238,35 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
                         }
                     }
+                    DispatchQueue.toMain {
+                        collectionView.collectionViewLayout.invalidateLayout()
+                        collectionView.performBatchUpdates({ [weak self] in
+                            if let newSections = newSections {
+                                self?.collectionView?.insertSections(newSections)
+                            }
+                            self?.collectionView?.insertItems(at: array)
+                            }, completion: { [weak self] _ in
+                                guard let `self` = self else {
+                                    return
+                                }
+                                self.delegate?.filesAppendedAndSorted()
+                                self.isLocalFilesRequested = false
+                                //FIXME: part of appending+ incerting should be rewitten or trigger for new page
+                                self.dispatchQueue.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                                    guard let `self` = self else {
+                                        return
+                                    }
+                                    if !self.isPaginationDidEnd,
+                                        array.count < self.pageCompounder.pageSize {
+                                        debugPrint("!!! TRY TO GET NEW PAGE")
+                                        self.delegate?.getNextItems()
+                                    }
+//                                    insertItems
+                                }
+                        })
+                    }
                     
-                    collectionView.collectionViewLayout.invalidateLayout()
-                    collectionView.performBatchUpdates({ [weak self] in
-                        if let newSections = newSections {
-                            self?.collectionView?.insertSections(newSections)
-                        }
-                        self?.collectionView?.insertItems(at: array)
-                        }, completion: { [weak self] _ in
-                            self?.delegate?.filesAppendedAndSorted()
-                            self?.isLocalFilesRequested = false
-                    })
-                }
+                
             }
         case .failed(_):
             delegate?.filesAppendedAndSorted()
@@ -371,7 +390,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             self.pageLeftOvers.append(contentsOf: lefovers)
                             self.allMediaItems.append(contentsOf: compoundedItems)
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
-                            complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
+                            
+                             complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
+//                            if !self.isPaginationDidEnd,
+//                                compoundedItems.count < self.pageCompounder.pageSize {
+//                                self.delegate?.getNextItems()
+//                            }
                             
                     })
                 } else if self.isPaginationDidEnd {
@@ -408,6 +432,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
+//                            if !self.isPaginationDidEnd,
+//                                compoundedItems.count < self.pageCompounder.pageSize {
+//                                self.delegate?.getNextItems()
+//                            }
                     })
                 } else if !self.isPaginationDidEnd { ///Middle page
                     //check lefovers here
@@ -437,6 +465,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
+//                            if !self.isPaginationDidEnd,
+//                                compoundedItems.count < self.pageCompounder.pageSize {
+//                                self.delegate?.getNextItems()
+//                            }
                     })
                 }
                 
@@ -952,15 +984,19 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     @objc func onHeaderTap(_ sender: UITapGestureRecognizer){
-        if (!enableSelectionOnHeader ||
-            !isSelectionStateActive ) {
+        if !enableSelectionOnHeader || !isSelectionStateActive {
             return
         }
         
-        let section = sender.view?.tag
-        selectSectionAt(section: section!)
-        let textHeader = sender.view?.superview as! CollectionViewSimpleHeaderWithText
-        textHeader.setSelectedState(selected: isHeaderSelected(section: section!), activateSelectionState: isSelectionStateActive)
+        guard
+            let section = sender.view?.tag,
+            let textHeader = sender.view?.superview as? CollectionViewSimpleHeaderWithText
+        else {
+            return    
+        }
+        
+        selectSectionAt(section: section)
+        textHeader.setSelectedState(selected: isHeaderSelected(section: section), activateSelectionState: isSelectionStateActive)
     }
     
     func morebuttonGotPressed(sender: Any, itemModel: Item?) {
@@ -1122,9 +1158,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
                     
                 })
-            } else {
-                delegate?.getNextItems()
             }
+//            else {
+//                delegate?.getNextItems()
+//            }
         } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
             compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
                self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)

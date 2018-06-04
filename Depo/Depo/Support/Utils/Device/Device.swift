@@ -159,4 +159,20 @@ class Device {
     }
     
     static var winSize = UIScreen.main.bounds
+    
+    static var workaroundUUID: String = {
+        var UUID = ""
+        if let storedUUID = UserDefaults.standard.object(forKey: Keys.fakeUUID) as? String {
+            UUID = storedUUID
+        } else {
+            let newUUID = CFUUIDCreate(kCFAllocatorDefault)
+            guard let tempoString = CFUUIDCreateString(kCFAllocatorDefault, newUUID) else {
+                return UUID
+            }
+            UUID = String(tempoString).replacingOccurrences(of: "-", with: "")
+            UserDefaults.standard.set(UUID, forKey: Keys.fakeUUID)
+        }
+        return UUID
+        
+    }()
 }

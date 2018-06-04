@@ -1,0 +1,86 @@
+# usefull commands
+
+## to get list of all actions
+#fastlane actions
+
+## to get list of parameters of action
+#fastlane action ANY-ACTION
+# example: fastlane action match
+
+
+# USERNAME = ''
+BUNDLE_ID = 'by.come.life.Lifebox'
+APP_NAME = 'lifebox-LIFE'
+SCHEME = "Depo_LifeTech"
+BUILD_FOLDER_NAME = "builds"
+# TEAM_ID = ""
+# DEV_NAME = "" #mayby need Team Name
+
+TYPES = ["development", "appstore", "adhoc"]
+CONFIGS = ["debug", "release", "adhoc"]
+
+# If you want to automatically update fastlane if a new version is available:
+#update_fastlane
+
+# This is the minimum version number required.
+fastlane_version "2.19.1"
+
+default_platform :ios
+
+platform :ios do
+
+  lane :beta do
+    my_gym(config: "adhoc")
+    diawi
+  end
+
+
+  #--------------- build ipa ---------------
+
+  desc "Create ipa"
+  lane :my_gym do |options|
+    
+    config = options[:config]
+
+    if !CONFIGS.include?(config)
+      raise("config can be debug, release or adhoc")
+      exit
+    end
+
+    gym(
+      # configuration: config, #"Adhoc", # Defaults to 'Release'
+      scheme: SCHEME,
+      silent: true, # Hide all information that's not necessary while building
+      clean: false,
+      output_directory: "./#{BUILD_FOLDER_NAME}",    # store the ipa in this folder
+      output_name: "#{APP_NAME}.ipa",
+      #output_directory: "path/to/dir", # Destination directory. Defaults to current directory.
+      #output_name: "my-app.ipa",       # specify the name of the .ipa file to generate (including file extension)
+      export_options: {
+        method: "ad-hoc"
+        # ,
+        # provisioningProfiles: { 
+        #   "#{BUNDLE_ID}" => "ADHOC_LifeboxForTurkcell"
+        # }
+      }
+
+    )
+  end
+
+  # https://dashboard.diawi.com/docs/apis/upload
+  lane :diawi do
+    ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
+    # time = Time.new
+    diawiToken = 'rvA4lMxATOqmygUZmMgM7n5vchCnDkb5TJuZnVSibZ'
+    filePath = "#{File.expand_path("..", Dir.pwd)}/#{BUILD_FOLDER_NAME}/#{APP_NAME}.ipa" # cd .. &&
+    sh(
+      "curl -X POST https://upload.diawi.com/"\
+      " -F \"token=#{diawiToken}\""\
+      " -F \"file=@#{filePath}\""\
+      " -F \"find_by_udid=0\""\
+      " -F \"wall_of_apps=0\""\
+      " -F \"callback_emails=zdaecq@gmail.com\""
+    )
+  end
+
+end
