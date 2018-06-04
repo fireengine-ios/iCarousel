@@ -24,7 +24,7 @@ open class FactoryBase: SharedFactory {
     }
     
     func resolve() -> SessionManager {
-        return SessionManager.default
+        return SessionManager.customDefault
     }
     
     private static let passcodeStorage = PasscodeStorageDefaults()

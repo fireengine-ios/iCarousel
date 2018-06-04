@@ -99,7 +99,7 @@ final class AppConfigurator {
         var auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)
         auth.refreshFailedHandler = logout
         
-        let sessionManager = SessionManager.default
+        let sessionManager = SessionManager.customDefault
         sessionManager.retrier = auth
         sessionManager.adapter = auth
     }

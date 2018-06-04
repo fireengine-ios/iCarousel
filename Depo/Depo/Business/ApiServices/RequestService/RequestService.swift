@@ -45,7 +45,7 @@ class RequestService {
         
         debugPrint("REQUEST: \(request)")
         
-        let sessionRequest = SessionManager.default.request(request)
+        let sessionRequest = SessionManager.customDefault.request(request)
             .customValidate()
             .response { requestResponse in
                 response(requestResponse.data, requestResponse.response, requestResponse.error)
@@ -66,7 +66,7 @@ class RequestService {
             request.httpMethod = method.rawValue
             request.httpBody = body
             request.allHTTPHeaderFields = headerParametrs
-        let sessionRequest = SessionManager.default.upload(body!, with: request)
+        let sessionRequest = SessionManager.customDefault.upload(body!, with: request)
             .customValidate()
             .response { requestResponse in
                 response(requestResponse.data, requestResponse.response, requestResponse.error)
@@ -99,7 +99,7 @@ class RequestService {
             return (file, [.createIntermediateDirectories, .removePreviousFile])
         }
         
-        let sessionRequest = SessionManager.default.download(request, to: destination)
+        let sessionRequest = SessionManager.customDefault.download(request, to: destination)
             .customValidate()
             .response { requestResponse in
                 response(requestResponse.destinationURL, requestResponse.response, requestResponse.error)
@@ -125,7 +125,7 @@ class RequestService {
         
         debugPrint("REQUEST: \(request)")
         
-        let sessionRequest = SessionManager.default.upload(fromFile, with: request)
+        let sessionRequest = SessionManager.customDefault.upload(fromFile, with: request)
             .customValidate()
             .response { requestResponse in
                 response(requestResponse.data, requestResponse.response, requestResponse.error)
@@ -151,7 +151,7 @@ class RequestService {
         
         debugPrint("REQUEST: \(request)")
         
-        let sessionRequest = SessionManager.default.upload(fileData, with: request)
+        let sessionRequest = SessionManager.customDefault.upload(fileData, with: request)
             .customValidate()
             .response { requestResponse in
                 response(requestResponse.data, requestResponse.response, requestResponse.error)
@@ -176,7 +176,7 @@ class RequestService {
         
         debugPrint("REQUEST: \(request)")
         
-        let sessionRequest = SessionManager.default.request(request)
+        let sessionRequest = SessionManager.customDefault.request(request)
             .customValidate()
             .response { requestResponse in
                 response(requestResponse.data, requestResponse.response, requestResponse.error)
