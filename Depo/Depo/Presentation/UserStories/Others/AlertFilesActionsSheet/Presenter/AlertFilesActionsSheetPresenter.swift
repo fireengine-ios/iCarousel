@@ -15,11 +15,18 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     
     func showSelectionsAlertSheet() {
         let actions = constractActions(with: [.select, .selectAll], for: nil)
-        presentAlertSheet(with: actions, presentedBy: nil)
+        DispatchQueue.main.async { [weak self] in
+            self?.presentAlertSheet(with: actions, presentedBy: nil)
+        }
     }
     
     func showAlertSheet(with types: [ElementTypes], presentedBy sender: Any?, onSourceView sourceView: UIView?) {
-        presentAlertSheet(with: constractActions(with: types, for: nil), presentedBy: sender)
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else { /// main thread - no need for weak, but just in case
+                return
+            }
+            self.presentAlertSheet(with: self.constractActions(with: types, for: nil), presentedBy: sender)
+        }
     }
     
     func showAlertSheet(with items: [BaseDataSourceItem], presentedBy sender: Any?, onSourceView sourceView: UIView?) {
@@ -27,7 +34,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             return
         }
         let actions = constractActions(with: adjastActionTypes(for: items), for: nil)
-        presentAlertSheet(with: actions, presentedBy: sender)
+        DispatchQueue.main.async { [weak self] in
+            self?.presentAlertSheet(with: actions, presentedBy: sender)
+        }
     }
     
     func showAlertSheet(with types: [ElementTypes], items: [BaseDataSourceItem], presentedBy sender: Any?, onSourceView sourceView: UIView?) {
@@ -87,8 +96,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             
             actions = constractActions(with: types, for: [item])
         }
-        
-        presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
+        DispatchQueue.main.async { [weak self] in
+            self?.presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
+        }
     }
     
     func showSpecifiedMusicAlertSheet(with item: WrapData, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?) {
@@ -97,8 +107,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
         
         let actions = constractActions(with: types, for: [item])
-        
-        presentAlertSheet(with: actions, presentedBy: sender, viewController: viewController)
+        DispatchQueue.main.async { [weak self] in
+            self?.presentAlertSheet(with: actions, presentedBy: sender, viewController: viewController)
+        }
     }
     
     private func adjastActionTypes(for items: [Item]) -> [ElementTypes] {
