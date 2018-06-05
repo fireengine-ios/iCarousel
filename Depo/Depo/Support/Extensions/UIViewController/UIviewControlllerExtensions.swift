@@ -32,14 +32,14 @@ protocol Waiting {
 extension UIViewController: Waiting {
     
     func showSpinerWithCancelClosure(_ cancel: @escaping VoidHandler) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)
             hud.backgroundView.color = ColorConstants.whiteColor.withAlphaComponent(0.88)
             let oldColor = self.statusBarColor
             self.statusBarColor = .clear
             let gestureRecognizer = TapGestureRecognizerWithClosure(closure: { [weak self] in
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     cancel()
                     self?.hideSpinerIncludeNavigatinBar()
                     self?.statusBarColor = oldColor
@@ -56,13 +56,13 @@ extension UIViewController: Waiting {
     }
     
     func showSpinnerOnView(_ view: UIView) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             _ = MBProgressHUD.showAdded(to: view, animated: true)
         }
     }
     
     func showSpinerIncludeNavigatinBar() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)
             window.addSubview(hud)
@@ -70,20 +70,20 @@ extension UIViewController: Waiting {
     }
     
     func hideSpinerIncludeNavigatinBar() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             MBProgressHUD.hideAllHUDs(for: window, animated: true)
         }
     }
     
     func hideSpiner() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
         }
     }
     
     func hideSpinerForView(_ view: UIView) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             MBProgressHUD.hide(for: view, animated: true)
         }
     }

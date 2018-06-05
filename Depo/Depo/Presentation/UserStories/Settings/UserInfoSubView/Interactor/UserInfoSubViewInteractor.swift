@@ -33,7 +33,7 @@ class UserInfoSubViewInteractor: UserInfoSubViewInteractorInput {
 
         
         AccountService().quotaInfo(success: { [weak self] response in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.setQuotaInfo(quotoInfo: response as! QuotaInfoResponse)
             }
             group.leave()

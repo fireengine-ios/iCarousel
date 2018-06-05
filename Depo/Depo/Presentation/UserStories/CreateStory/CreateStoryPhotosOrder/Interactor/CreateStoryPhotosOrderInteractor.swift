@@ -63,14 +63,14 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
             CreateStoryService().getPreview(preview: t, success: { [weak self] responce in
                 if let `self` = self {
                     self.isRequestStarted = false
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         self.output.goToStoryPreview(story: story, responce: responce)
                     }
                 }
                 }, fail: { [weak self] fail in
                     if let `self` = self {
                         self.isRequestStarted = false
-                        DispatchQueue.toMain {
+                        DispatchQueue.main.async {
                             self.output.createdStoryFailed(with: fail)
                         }
                     }
@@ -91,13 +91,13 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
         fileService.syncItemsIfNeeded(items, success: { [weak self] in
             self?.createStory(with: items)
             }, fail: { [weak self] error in
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.output.createdStoryFailed(with: error)
                 }
         }){ [weak self] syncOperations in
             if syncOperations != nil, let output = self?.output as? BaseAsyncOperationInteractorOutput {
                 output.startCancelableAsync(cancel: { [weak self] in
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         self?.output.createdStoryFailed(with: ErrorResponse.string(TextConstants.createStoryCancel))
                     }
                 })

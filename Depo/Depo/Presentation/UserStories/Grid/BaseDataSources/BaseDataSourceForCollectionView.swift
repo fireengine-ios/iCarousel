@@ -217,54 +217,53 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         switch response {
         case .success(let array):
-            
-                if self.isDropedData || array.isEmpty {
-                    DispatchQueue.toMain {
-                        self.collectionView?.reloadData()
-                    }
-                    self.delegate?.filesAppendedAndSorted()
-                    self.isLocalFilesRequested = false
-                    self.isDropedData = false
-                } else {
-                    let newSectionNumbers = self.numberOfSections(in: collectionView)
+            if self.isDropedData || array.isEmpty {
+                DispatchQueue.main.async {
+                    self.collectionView?.reloadData()
+                }
+                self.delegate?.filesAppendedAndSorted()
+                self.isLocalFilesRequested = false
+                self.isDropedData = false
+            } else {
+                let newSectionNumbers = self.numberOfSections(in: collectionView)
+                
+                var newSections: IndexSet?
+                if newSectionNumbers > oldSectionNumbers {
+                    let needMoveSectionWithEmptyMetaItems = self.needShowEmptyMetaItems && self.currentSortType == .metaDataTimeUp && containsEmptyMetaItems
                     
-                    var newSections: IndexSet?
-                    if newSectionNumbers > oldSectionNumbers {
-                        let needMoveSectionWithEmptyMetaItems = self.needShowEmptyMetaItems && self.currentSortType == .metaDataTimeUp && containsEmptyMetaItems
-                        
-                        if needMoveSectionWithEmptyMetaItems {
-                            newSections = IndexSet(oldSectionNumbers-1..<newSectionNumbers-1)                           
-                        } else {
-                            newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
-                        }
+                    if needMoveSectionWithEmptyMetaItems {
+                        newSections = IndexSet(oldSectionNumbers-1..<newSectionNumbers-1)                           
+                    } else {
+                        newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
                     }
-                    DispatchQueue.toMain {
-                        collectionView.collectionViewLayout.invalidateLayout()
-                        collectionView.performBatchUpdates({ [weak self] in
-                            if let newSections = newSections {
-                                self?.collectionView?.insertSections(newSections)
+                }
+                DispatchQueue.main.async {
+                    collectionView.collectionViewLayout.invalidateLayout()
+                    collectionView.performBatchUpdates({ [weak self] in
+                        if let newSections = newSections {
+                            self?.collectionView?.insertSections(newSections)
+                        }
+                        self?.collectionView?.insertItems(at: array)
+                        }, completion: { [weak self] _ in
+                            guard let `self` = self else {
+                                return
                             }
-                            self?.collectionView?.insertItems(at: array)
-                            }, completion: { [weak self] _ in
+                            self.delegate?.filesAppendedAndSorted()
+                            self.isLocalFilesRequested = false
+                            //FIXME: part of appending+ incerting should be rewitten or trigger for new page
+                            self.dispatchQueue.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                                 guard let `self` = self else {
                                     return
                                 }
-                                self.delegate?.filesAppendedAndSorted()
-                                self.isLocalFilesRequested = false
-                                //FIXME: part of appending+ incerting should be rewitten or trigger for new page
-                                self.dispatchQueue.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-                                    guard let `self` = self else {
-                                        return
-                                    }
-                                    if !self.isPaginationDidEnd,
-                                        array.count < self.pageCompounder.pageSize {
-                                        debugPrint("!!! TRY TO GET NEW PAGE")
-                                        self.delegate?.getNextItems()
-                                    }
-//                                    insertItems
+                                if !self.isPaginationDidEnd,
+                                    array.count < self.pageCompounder.pageSize {
+                                    debugPrint("!!! TRY TO GET NEW PAGE")
+                                    self.delegate?.getNextItems()
                                 }
-                        })
-                    }
+//                                    insertItems
+                            }
+                    })
+                }
                     
                 
             }
@@ -801,7 +800,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func reloadData() {
-        DispatchQueue.toMain { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             
             guard let `self` = self, let collectionView = self.collectionView else {
                 return
@@ -829,7 +828,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         displayingType = type
         
         debugPrint("Reload updateDisplayngType")
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             self.collectionView?.reloadData()
             let firstVisibleIndexPath = self.self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
                 return first < second
@@ -1124,7 +1123,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         case .localMediaContent(let local):
             cell_.setAssetId(local.asset.localIdentifier)
             self.filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
                         cell_.setImage(image: image, animated:  false)
                     } else {
@@ -1277,7 +1276,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID, for: indexPath)
             
-            let textHeader = headerView as! CollectionViewSimpleHeaderWithText
+            guard let textHeader = headerView as? CollectionViewSimpleHeaderWithText else {
+                return headerView
+            }
             
             let title = getHeaderText(indexPath: indexPath)
             
@@ -1370,7 +1371,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return
             }
             
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 completion(self.collectionView?.cellForItem(at: path) as? CollectionViewCellForPhoto)
             }
         }
@@ -1450,7 +1451,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return
             }
             
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 if localFinishedItemUUID != nil, let cell = self.getCellForFile(objectUUID: file.uuid) {
                     cell.finishedUploadForObject()
                 }
@@ -1508,7 +1509,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     }
                 }
                 
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self.collectionView?.performBatchUpdates({ [weak self] in
                         if let `self` = self{
                             self.collectionView?.reloadItems(at: arrayOfPath)
@@ -1629,7 +1630,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
             }
             
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self.collectionView?.reloadData()
                 self.delegate?.didDelete(items: items)
                 
@@ -1686,7 +1687,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 //FIXME: arrayOfPathForUpdate is never used
             }
         }
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             self.collectionView?.reloadData()
         }
     }

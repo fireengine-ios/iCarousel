@@ -88,12 +88,12 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         group.enter()
         let albumService = AlbumService(requestSize: 4)
         albumService.allAlbums(sortBy: .date, sortOrder: .desc, success: { [weak self] albums in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.dataStorage.addNew(item: SliderItem(withAlbumItems: albums))
                 group.leave()
             }
             }, fail: { [weak self] in
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.output.operationFailed()
                     group.leave()
                 }
@@ -104,12 +104,12 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         group.enter()
         let storiesService = StoryService(requestSize: 4)
         storiesService.allStories(success: { [weak self] stories in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.dataStorage.addNew(item: SliderItem(withStoriesItems: stories))
                 group.leave()
             }
             }, fail: { [weak self] in
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.output.operationFailed()
                     group.leave()
                 }
@@ -126,7 +126,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
             }
             
         }, fail: { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.operationFailed()
                 completion(false)
             }
@@ -145,7 +145,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
                 item = SliderItem(withThumbnails: [], type: type.myStreamType)
             }
 
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.dataStorage.addNew(item: item)
                 group.leave()
             }
@@ -153,7 +153,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
             }, fail: { [weak self] error in
                 log.debug("FaceImageService \(type.description) Thumbnails fail")
                 
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.output.operationFailed()
                     group.leave()
                 }
@@ -186,7 +186,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
             return type1.rawValue < type2.rawValue
         })
         
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             self.output.operationSuccessed(withItems: items)
         }
     }

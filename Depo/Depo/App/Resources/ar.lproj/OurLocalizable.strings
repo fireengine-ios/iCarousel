@@ -622,7 +622,7 @@
 "Daily" = "يومياً";
 "Weekly" = "أسبوعياً";
 "Monthly" = "شهريا";
-"Up to 5000 contacts can be backed up." = "يمكن إنشاء نسخة احتياطية لجهات الاتصال بحدّ أقصى قدره 15000جهة اتصال.";
+"Up to 5000 contacts can be backed up." = "فشل النسخ الاحتياطي لجهة الاتصال نظرًا لأن لديك جهات اتصال أكثر من الحد الأقصى المدعوم.";
 "LifeboxSmallPopUpTitle" = "أوشكت مساحة التخزين على الامتلاء!";
 "LifeboxSmallPopUpSubTitle" = "دعونا نلقي نظرة على خيارات الترقية!";
 "LifeboxSmallPopUpCheckBoxTex" = "لا تظهر مرة أخرى";

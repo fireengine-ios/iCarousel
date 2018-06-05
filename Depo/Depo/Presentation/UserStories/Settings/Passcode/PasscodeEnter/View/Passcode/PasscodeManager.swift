@@ -88,7 +88,7 @@ extension PasscodeManagerImp: PasscodeManager {
         successFinishBiometrics = false
         
         biometricsManager.authenticate(reason: state.title) { status in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 switch status {
                 case .success:
                     self.view.passcodeInput.animatePasscodeFullEnter()

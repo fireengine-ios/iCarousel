@@ -110,10 +110,10 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             view.updateShowHideButton(isShow: needShow)
         }
         
-        if forceLoadNextItems {
+        if forceLoadNextItems, !dataSource.isPaginationDidEnd {///FIXME: Do we need it now?
             forceLoadNextItems = false
             dataSource.isPaginationDidEnd = false
-            dataSource.delegate?.getNextItems()
+            getNextItems()
         }
     }
     
@@ -134,7 +134,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private func updateUgglaViewIfNeed() {
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 view.updateUgglaViewPosition()
             }
         }

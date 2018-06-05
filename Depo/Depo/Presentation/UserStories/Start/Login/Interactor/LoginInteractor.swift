@@ -82,11 +82,11 @@ class LoginInteractor: LoginInteractorInput {
             log.debug("login isRememberMe \(self.rememberMe)")
             self.tokenStorage.isRememberMe = self.rememberMe
             self.analyticsService.track(event: .login)
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self.output?.succesLogin()
             }
         }, fail: { [weak self] errorResponse  in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 guard let `self` = self else {
                     return
                 }
@@ -221,11 +221,11 @@ class LoginInteractor: LoginInteractorInput {
     
     func checkEULA() {
         eulaService.eulaCheck(success: { [weak self] succesResponce in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.onSuccessEULA()
             }
         }) { [weak self] failResponce in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 //TODO: what do we do on other errors?
                 ///https://wiki.life.com.by/pages/viewpage.action?pageId=62456128
                 if failResponce.description == "EULA_APPROVE_REQUIRED" {
@@ -257,11 +257,11 @@ class LoginInteractor: LoginInteractorInput {
             guard let signUpResponce = responce as? SignUpSuccessResponse else {
                 return
             }
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.successed(tokenUpdatePhone: signUpResponce)
             }
         }, fail: { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.failedUpdatePhone(errorResponse: error)
             }
         })
@@ -273,11 +273,11 @@ class LoginInteractor: LoginInteractorInput {
             guard let signUpResponce = responce as? SignUpSuccessResponse else {
                 return
             }
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.successed(resendUpdatePhone: signUpResponce)
             }
             }, fail: { [weak self] error in
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.output?.failedResendUpdatePhone(errorResponse: error)
                 }
         })
@@ -286,11 +286,11 @@ class LoginInteractor: LoginInteractorInput {
     func verifyPhoneNumber(token: String, code: String) {
         let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: token)
         accountService.verifyPhoneNumber(parameters: parameters, success: { [weak self] responce in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.successedVerifyPhone()
             }
         }) { [weak self] errorRespose in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.failedVerifyPhone(errorString: TextConstants.phoneVereficationNonValidCodeErrorText)
             }
         }
@@ -298,7 +298,7 @@ class LoginInteractor: LoginInteractorInput {
     
     func updateUserLanguage() {
         authService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 switch result {
                 case .success(_):
                     self?.output?.updateUserLanguageSuccess()

@@ -45,13 +45,15 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     func showError(errorType: SyncOperationErrors) {
         switch errorType {
-        case .networkError, .remoteServerError:
+        case .networkError:
             view.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+        case .remoteServerError:
+            view.showErrorAlert(message: TextConstants.errorManyContactsToBackUp)
         default:
             // TODO: Error handling
             break
         }
-        view.setStateWithoutBackUp()
+        view.setStateWithBackUp()
         contactSyncResponse = nil
     }
     
@@ -119,7 +121,6 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     fileprivate func updateContactsStatus() {
         if let contactSyncResponse = contactSyncResponse {
             view.success(response: contactSyncResponse, forOperation: .getBackUpStatus)
-            view.setStateWithBackUp()
         } else {
             view.setStateWithoutBackUp()
         }
@@ -167,7 +168,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
             CNContactStore().requestAccess(for: .contacts) { [weak self] granted, error in
                 guard let `self` = self else { return }
                 self.passcodeStorage.systemCallOnScreen = false
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     if granted {
                         completionHandler(true)
                     } else {

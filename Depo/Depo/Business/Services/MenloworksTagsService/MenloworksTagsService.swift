@@ -124,9 +124,8 @@ class MenloworksTagsService {
             return
         }
         
-        checkTurkcellSecuritySettings()
-        
         if isLoggedIn {
+            checkTurkcellSecuritySettings()
             sendInstagramImportStatus()
             sendFacebookImportStatus()
             sendFIRStatus()
@@ -148,7 +147,7 @@ class MenloworksTagsService {
                     return
             }
             
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.onTurkcellPasswordSettingsChanged(turkCellPasswordOn)
                 self?.onAutoLoginSettingsChanged(turkCellAutoLogin)
             }

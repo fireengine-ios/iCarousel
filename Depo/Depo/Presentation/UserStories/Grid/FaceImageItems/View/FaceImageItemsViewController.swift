@@ -130,8 +130,10 @@ extension FaceImageItemsViewController: FaceImageItemsViewInput {
         if isCanChangeVisibility,
             isShow,
             navigationItem.rightBarButtonItems == nil {
-            configurateFaceImagePeopleActions { [weak self] in
-                self?.configureDoneNavBarActions()
+            DispatchQueue.toMain {
+                self.configurateFaceImagePeopleActions { [weak self] in
+                    self?.configureDoneNavBarActions()
+                }
             }
         }
     }

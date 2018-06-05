@@ -19,7 +19,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
     
     func requestStatus() {
         requestStatusBaseRequest { [weak self] result in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 switch result {
                 case .success(let status):
                     self?.output?.statusSuccessCallback(status: status)
@@ -33,7 +33,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
     
     func login() {
         dropboxManager.login { [weak self] result in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 switch result {
                 case .success(let token):
                     self?.output?.loginSuccessCallback(token: token)
@@ -48,11 +48,11 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
     
     func requestConnect(withToken token: String) {
         dbService.requestConnect(withToken: token, success: { [weak self] _ in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.connectSuccessCallback()
             }
         }, fail: { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.dropboxManager.logout()
                 self?.login()
                 self?.output?.connectFailureCallback(errorMessage: error.description)
@@ -62,7 +62,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
     
     func requestStatusForStart() {
         requestStatusBaseRequest { [weak self] result in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 switch result {
                 case .success(let status):
                     self?.output?.statusForStartSuccessCallback(status: status)
@@ -81,11 +81,11 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
     
     func requestStart() {
         dbService.requestStart(success: { [weak self] _ in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.startSuccessCallback()
             }
         }, fail: { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output?.startFailureCallback(errorMessage: error.description)
             }
         })
@@ -93,7 +93,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
     
     func requestStatusForCompletion() {
         requestStatusBaseRequest { [weak self] result in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 switch result {
                 case .success(let status):
                     self?.output?.statusForCompletionSuccessCallback(dropboxStatus: status)

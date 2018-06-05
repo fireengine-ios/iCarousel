@@ -19,7 +19,7 @@ class StoriesInteractor: BaseFilesGreedInteractor {
         remote.allStories(sortBy: sortBy.sortingRules, sortOrder: sortBy.sortOder, success: { [weak self] stories in
             log.debug("StoriesInteractor getAllItems StoryService allStories success")
             
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 var array = [[BaseDataSourceItem]]()
                 array.append(stories)
                 self?.output.getContentWithSuccess(array: array)
@@ -27,7 +27,7 @@ class StoriesInteractor: BaseFilesGreedInteractor {
             }, fail: { [weak self] in
                 log.debug("StoriesInteractor getAllItems StoryService allStories fail")
                 
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.output.asyncOperationFail(errorMessage: "fail")
                 }
         })
