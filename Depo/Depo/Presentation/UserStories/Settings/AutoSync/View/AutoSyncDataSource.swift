@@ -77,10 +77,6 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func forceDisableAutoSync() {
-        MenloworksTagsService.shared.onAutosyncStatus(isOn: false)
-        MenloworksTagsService.shared.onAutosyncVideosStatusOff()
-        MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
-        
         autoSyncSettings?.disableAutoSync()
         updateCells()
     }
@@ -159,9 +155,6 @@ extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
                 autoSyncSettings?.isAutoSyncOptionEnabled = true
                 delegate?.enableAutoSync()
             } else {
-                MenloworksTagsService.shared.onAutoSyncOff()
-                MenloworksTagsService.shared.onAutosyncPhotosOff()
-                MenloworksTagsService.shared.onAutosyncVideosOff()
                 MenloworksEventsService.shared.onAutosyncOff()
                 forceDisableAutoSync()
                 reloadTableView()
@@ -175,24 +168,6 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
     func didChange(setting: AutoSyncSetting) {
         autoSyncSettings?.set(setting: setting)
         
-        if setting.syncItemType == .photo {
-            if setting.option == .wifiOnly {
-                MenloworksTagsService.shared.onAutosyncPhotosViaWifi()
-            } else if setting.option == .wifiAndCellular {
-                MenloworksTagsService.shared.onAutosyncPhotosViaLte()
-            } else if setting.option == .never {
-                MenloworksTagsService.shared.onAutosyncPhotosOff()
-            }
-        } else {
-            if setting.option == .wifiOnly {
-                MenloworksTagsService.shared.onAutosyncVideoViaWifi()
-            } else if setting.option == .wifiAndCellular {
-                MenloworksTagsService.shared.onAutosyncVideoViaLte()
-            } else if setting.option == .never {
-                MenloworksTagsService.shared.onAutosyncVideosOff()
-            }
-        }
-    
         if autoSyncSettings?.photoSetting.option == .never, autoSyncSettings?.videoSetting.option == .never {
             forceDisableAutoSync()
         }
