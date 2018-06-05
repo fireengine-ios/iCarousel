@@ -108,13 +108,13 @@
 "Choose From Library" = "Виберіть з галереї пристроїв";
 "Take Photo" = "Камера";
 "Remove from album" = "Видалити з альбому";
-"Back Up" = "Назад";
+"Back Up" = "Копіювати";
 "Add to album" = "Додати до альбому";
 "Remove from Favorites" = "Видалити з обраного";
 "Remove" = "Видалити";
 "Add to Favorites" = "Додати в обране";
 "Copy" = "Copy";
-"Create a Story" = "Скопіювати";
+"Create a Story" = "Створіть історію";
 "Share Via Link" = "Поділитися через посилання";
 "Original Size" = "Оригінальний розмір";
 "Small Size" = "Маленький розмір";
@@ -209,7 +209,7 @@
 "Delete device original" = "Видалити оригінал з пристрою";
 "Add to favorites" = "Додати в обране";
 "Restore" = "Відновлення";
-"Back-Up" = "Назад";
+"Back-Up" = "Копіювати";
 "Your last back up was a few seconds ago." = "Ваше останнє резервне копіювання було кілька секунд тому.";
 "You never backed up your contacts" = "У вас ще немає контактної інформації у вашому lifebox.";
 "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "Ви можете зробити резервну копію ваших контактів у lifebox. Ви можете легко керувати своїм контактом\nсписок з будь-якого пристрою і в будь-якому місці.";
@@ -450,8 +450,8 @@
 "Save This Story" = "Зберегти цю історію";
 "Latest Uploads" = "Останні завантаження";
 "Your latest uploads" = "Ваші останні завантаження";
-"View Recent Activities" = "Переглянути останні дії";
-"View All Photos" = "Переглянути всі фотографії";
+"View Recent Activities" = "Останні дії";
+"View All Photos" = "Усі фотографії";
 "You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "Сховище вашого пристрою майже заповнено!";
 "Error occurred while accessing your photos.\nPlease check your settings." = "Сталася помилка при доступі до ваших фотографій.\nПеревірте свої налаштування.";
 "localFilesBeingProcessed" = "Обробка локальних файлів.";
@@ -502,7 +502,7 @@
 "A temporary error has occurred due to technical reasons." = "Тимчасова помилка сталася через технічні причини.";
 "Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Підписка пов'язана з цією покупкою вже активована для іншого користувача lifebox. Зверніть увагу, що в цій ситуації можуть бути використані різні облікові записи lifebox з таким самим Apple або Google ID.";
 "Shows that a response operation is done for the given receipt." = "Показує, що операція відповіді виконана для даної квитанції.";
-"Auto Upload is off." = "Автозавантаження вимкнено.";
+"Auto Upload is off." = "Автозавантаження вимкнено";
 "Photos and videos waiting to be synced" = "Фото та відео, які очікують на синхронізацію";
 "Wi-Fi and Cellular" = "Wi-Fi та Cellular";
 "Video album is automatically created, therefore cannot be deleted" = "Відео альбом автоматично створюється, тому його не можна видалити";
@@ -543,7 +543,7 @@
 "Animation" = "Анімація";
 "We have created an animation from your photos!" = "Ми створили анімацію з ваших фотографій!";
 "Save Animation" = "Зберегти анімацію";
-"Delete Duplicated" = "Видалити дублікат";
+"Delete Duplicated" = "Дублікати";
 "Lifebox %@ and Passcode" = "Lifebox %@ та пароль";
 "We make easier to manage your memories with homepage" = "Ми полегшуємо керування вашими спогадами за допомогою домашньої сторінки";
 "You can reach your recent activites and suggestions that are special for you from this page" = "Ви можете отримати доступ до нещодавніх заходів та пропозицій, які вам потрібні на цій сторінці";
@@ -610,7 +610,7 @@
 "Daily" = "Щодня";
 "Weekly" = "Щотижня";
 "Monthly" = "Щомісяця";
-"Up to 5000 contacts can be backed up." = "Можна резервувати до 15000 контактів.";
+"Up to 5000 contacts can be backed up." = "Помилка контакту резервного копіювання, оскільки у вас більше контактів, ніж підтримується верхня межа.";
 "LifeboxSmallPopUpTitle" = "Ви досягли межі пам'яті lifebox.";
 "LifeboxSmallPopUpSubTitle" = "Давайте подивимось на варіанти оновлення!";
 "LifeboxSmallPopUpCheckBoxTex" = "Ніколи не показувати знову";
