@@ -54,8 +54,15 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     }
     
     class func initializeFaceImageAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, hideActions: Bool = false) -> UIViewController {
-        let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .edit, .removeFromFaceImageAlbum],
+        var photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .edit, .removeFromFaceImageAlbum],
                                                          style: .blackOpaque, tintColor: nil)
+        
+        let langCode = Device.locale
+        if langCode != "tr" || langCode != "en" {
+            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .edit, .removeFromFaceImageAlbum],
+                                                             style: .blackOpaque, tintColor: nil)
+        }
+
         let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .removeFromFaceImageAlbum],
                                                         style: .blackOpaque, tintColor: nil)
         
