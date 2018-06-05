@@ -162,6 +162,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         let containsEmptyMetaItems = !emptyMetaItems.isEmpty
         var tempoEmptyItems = [WrapData]()
         var filteredItems = [WrapData]()
+
         if needShowEmptyMetaItems {
             if let unwrapedFilters = self.originalFilters,
                 !showOnlyRemotes(filters: unwrapedFilters) {
@@ -188,11 +189,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         if tempoEmptyItems.count >= pageCompounder.pageSize {
-            delegate?.getNextItems()
+//            delegate?.getNextItems()
+//            DISPATCH QUEUE???
+            self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+            var oldSectionNumbers = 1
+            if let collectionView = collectionView {
+                oldSectionNumbers = numberOfSections(in: collectionView)
+            }
+            self.insertItems(with: ResponseResult.success(self.getIndexPathsForItems([])), oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
             return
         }
         
-        if filteredItems.isEmpty, tempoEmptyItems.isEmpty {
+        if filteredItems.isEmpty {//, tempoEmptyItems.isEmpty {
             isPaginationDidEnd = true
         }
         lastPage = pageNum
@@ -210,6 +218,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         })
     }
     
+    func reloadLastSection() {
+        DispatchQueue.main.async {
+            let lastSection = (self.collectionView?.numberOfSections ?? 0) - 1
+            self.collectionView?.reloadSections(IndexSet(integersIn: lastSection...lastSection))
+        }
+    }
+    
     private func insertItems(with response: ResponseResult<[IndexPath]>, oldSectionNumbers: Int, containsEmptyMetaItems: Bool) {
         guard let collectionView = collectionView else {
             return
@@ -221,8 +236,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 DispatchQueue.main.async {
                     self.collectionView?.reloadData()
                 }
-                self.delegate?.filesAppendedAndSorted()
                 self.isLocalFilesRequested = false
+                self.delegate?.filesAppendedAndSorted()
                 self.isDropedData = false
             } else {
                 let newSectionNumbers = self.numberOfSections(in: collectionView)
@@ -248,14 +263,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             guard let `self` = self else {
                                 return
                             }
-                            self.delegate?.filesAppendedAndSorted()
                             self.isLocalFilesRequested = false
+                            self.delegate?.filesAppendedAndSorted()
                             //FIXME: part of appending+ incerting should be rewitten or trigger for new page
-                            self.dispatchQueue.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                            self.dispatchQueue.async { [weak self] in
                                 guard let `self` = self else {
                                     return
                                 }
                                 if !self.isPaginationDidEnd,
+                                    self.isLocalPaginationOn,
+                                    !self.isLocalFilesRequested,
                                     array.count < self.pageCompounder.pageSize {
                                     debugPrint("!!! TRY TO GET NEW PAGE")
                                     self.delegate?.getNextItems()
@@ -444,6 +461,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     ///self.transformedLeftOvers() in case for only remotes
                     if pageTempoItems.isEmpty, itemsToCompound.isEmpty//self.transformedLeftOvers().isEmpty
                         /**isEmptyLeftOvers*/ {
+                        self.isLocalFilesRequested = false
                         self.delegate?.getNextItems()
                         //DO I need callback here?
                         return
