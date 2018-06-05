@@ -211,8 +211,16 @@ final class FilterPhotoCard: BaseView {
         }
         
 //        bottomButton.isEnabled = false
-        LocalMediaStorage.default.saveFilteredImage(filteredImage: image, originalImage: originalItemUnwraped)
-        cardType = .display
+        LocalMediaStorage.default.saveFilteredImage(filteredImage: image, originalImage: originalItemUnwraped, success: { [weak self] in
+            self?.cardType = .display
+        }, fail: {
+            ///PH access popup
+            LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: true, completion: { granted,_  in
+                debugPrint("granted \(granted)")
+                ///For now nothing
+            })
+        })
+        
     }
     
     override func spotlightHeight() -> CGFloat {

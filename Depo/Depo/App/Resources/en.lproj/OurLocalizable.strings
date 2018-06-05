@@ -135,7 +135,7 @@
 "Auto Sync Preparation" = "Auto Sync Preparation";
 "Sync with data plan" = "Sync with data plan";
 "Waiting for Wi-Fi connection to auto-sync" = "Waiting for Wi-Fi connection to auto-sync";
-"Auto Upload is off.\nGo to setting to auto sync." = "Auto sync is off.\nGo to setting to auto sync.";
+"Auto Upload is off.\nGo to setting to auto sync." = "Auto sync is off.\nGo to setting to auto sync";
 "LTE" = "LTE";
 "4G" = "Mobile Data";
 "3G" = "Mobile Data";
@@ -450,7 +450,7 @@
 "Turkcell Password" = "Turkcell Password";
 "Login Settings" = "Login Settings";
 "Folder is Empty" = "Folder is Empty";
-"Folder Items" = "Items: %d";
+"Folder Items" = "Items";
 "Contact Backup" = "Contact Backup";
 "Your last contact update was %@ months ago!" = "Your last contact update was %@ months ago!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts.";
@@ -530,7 +530,7 @@
 "A temporary error has occurred due to technical reasons." = "A temporary error has occurred due to technical reasons.";
 "Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation.";
 "Shows that a response operation is done for the given receipt." = "Shows that a response operation is done for the given receipt.";
-"Auto Upload is off." = "Auto Upload is off.";
+"Auto Upload is off." = "Auto Upload is off";
 "Photos and videos waiting to be synced" = "Photos and videos waiting to be synced";
 "Wi-Fi and Cellular" = "Wi-Fi and Cellular";
 "Video album is automatically created, therefore cannot be deleted" = "Video album is automatically created, therefore cannot be deleted";

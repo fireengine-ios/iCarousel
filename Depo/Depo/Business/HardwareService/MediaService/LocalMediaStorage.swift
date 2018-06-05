@@ -419,21 +419,36 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return queue
     }()
     
-    func saveFilteredImage(filteredImage: UIImage, originalImage: Item) {
+    func saveFilteredImage(filteredImage: UIImage, originalImage: Item, success: VoidHandler?, fail: VoidHandler?) {
+        guard photoLibraryIsAvailible() else {
+            fail?()
+            return
+        }
         var localTempoID = ""
         PHPhotoLibrary.shared().performChanges({
             let request = PHAssetChangeRequest.creationRequestForAsset(from: filteredImage)
             guard let localID = request.placeholderForCreatedAsset?.localIdentifier else {
+                fail?()
                 return
             }
             localTempoID = localID
         }, completionHandler: { [weak self] status, error in
-            self?.merge(asset: localTempoID, with: originalImage, isFilteredItem: true)
+            self?.merge(asset: localTempoID, with: originalImage, isFilteredItem: true,
+            success: {
+                success?()
+            }, fail: {
+                fail?()
+            })
+            
         })
         
     }
     
-    private func merge(asset assetIdentifier: String, with item: WrapData, isFilteredItem: Bool = false) {
+    private func merge(asset assetIdentifier: String, with item: WrapData, isFilteredItem: Bool = false, success: VoidHandler? = nil, fail: VoidHandler? = nil) {
+        guard photoLibraryIsAvailible() else {
+            fail?()
+            return
+        }
         if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
             LocalMediaStorage.default.assetsCache.append(list: [asset])
             let wrapData = WrapData(asset: asset)
@@ -465,9 +480,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     context.perform {
                         mediaItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
                         userObjectSyncStatus.insert(MediaItemsObjectSyncStatus(userID: currentUserID, context: context))
-                        CoreDataStack.default.saveDataForContext(context: context, savedCallBack: nil)
+                        CoreDataStack.default.saveDataForContext(context: context, savedCallBack: {
+                            success?()
+                        })
                         }
                     }, fail: {
+                        fail?()
                         /// nothing, status not going to be saved
                 })
             }
@@ -498,6 +516,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     fileprivate func add(asset assetIdentifier: String, to collection: PHAssetCollection) {
+        guard photoLibraryIsAvailible() else {
+            return
+        }
         passcodeStorage.systemCallOnScreen = true
         let assetRequest = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil)
         PHPhotoLibrary.shared().performChanges({ [weak self] in
@@ -510,6 +531,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     typealias AssetCollectionCompletion = (_ collection: PHAssetCollection?) -> Void
     
     func createAlbum(_ name: String, completion: @escaping AssetCollectionCompletion) {
+        guard photoLibraryIsAvailible() else {
+            completion(nil)
+            return
+        }
         log.debug("LocalMediaStorage createAlbum")
 
         passcodeStorage.systemCallOnScreen = true
@@ -532,7 +557,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     func loadAlbum(_ name: String) -> PHAssetCollection? {
         log.debug("LocalMediaStorage loadAlbum")
-
+        guard photoLibraryIsAvailible() else {
+            return nil
+        }
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = NSPredicate(format: "title = %@", name)
         let fetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
