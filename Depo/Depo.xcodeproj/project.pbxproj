@@ -2843,14 +2843,6 @@
 		CE394B621F6FFA8200128324 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE394B611F6FFA8200128324 /* Array+Safe.swift */; };
 		CE39615120C29B5E00D145E0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
 		CE39615220C29B6400D145E0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
-		CE39615720C2AEAD00D145E0 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
-		CE39615820C2AEAE00D145E0 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
-		CE39615920C2AEAE00D145E0 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
-		CE39615A20C2AEAF00D145E0 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
-		CE39615B20C2AEB400D145E0 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
-		CE39615C20C2AED700D145E0 /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
-		CE39615D20C2AED800D145E0 /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
-		CE39615E20C2AEDC00D145E0 /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
 		CE3A3003200F4B030028C900 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A3002200F4B030028C900 /* Validator.swift */; };
 		CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3AA9AE1F4D686D000157AF /* CoreData.framework */; };
 		CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */; };
