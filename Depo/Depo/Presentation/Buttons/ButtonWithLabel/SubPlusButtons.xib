@@ -34,9 +34,9 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create A stroy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dPF-wR-CiT">
-                            <rect key="frame" x="12" y="47" width="90" height="17"/>
+                            <rect key="frame" x="17" y="47" width="80" height="17"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="90" id="Ykg-iV-g4q"/>
+                                <constraint firstAttribute="width" constant="80" id="Ykg-iV-g4q"/>
                                 <constraint firstAttribute="height" constant="17" id="nST-Ph-g0Z"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="14"/>
