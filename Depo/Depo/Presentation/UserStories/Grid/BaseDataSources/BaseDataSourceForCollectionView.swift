@@ -1276,7 +1276,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID, for: indexPath)
             
-            let textHeader = headerView as! CollectionViewSimpleHeaderWithText
+            guard let textHeader = headerView as? CollectionViewSimpleHeaderWithText else {
+                return headerView
+            }
             
             let title = getHeaderText(indexPath: indexPath)
             
