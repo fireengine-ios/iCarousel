@@ -200,7 +200,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
         
-        if filteredItems.isEmpty, tempoEmptyItems.isEmpty {
+        if filteredItems.isEmpty {//, tempoEmptyItems.isEmpty {
             isPaginationDidEnd = true
         }
         lastPage = pageNum
