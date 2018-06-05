@@ -17,8 +17,8 @@
 "Success" = "Успіх";
 "Apply" = "Застосувати";
 "Invalid passcode. %@ attempts left. Please try again" = "Неправильний пароль. %@ спроб залишилось. Будь ласка спробуйте ще раз";
-"Touch ID" = "Торкніться ідентифікатора";
-"Face ID" = "Ідентифікатор особи";
+"Touch ID" = "Touch ID";
+"Face ID" = "Face ID";
 "Enable" = "Увімкнути";
 "Please activate %@ from your device settings to use this feature" = "Для використання цієї функції, будь ласка, активуйте %@ із налаштувань вашого пристрою";
 "To enter passcode" = "Введіть код доступу lifebox";
@@ -80,7 +80,7 @@
 "%ld documents" = "%ld документи";
 "%ld songs" = "%ld пісні";
 "%ld videos" = "%ld відео";
-"%ld photos" = "%ld фотографії";
+"%ld photos" = "%ld фото";
 "Failed" = "Помилка";
 "Refreshing..." = "Оновлення ...";
 "Release to refresh" = "Відпустіть, щоб оновити";
@@ -109,7 +109,7 @@
 "Take Photo" = "Камера";
 "Remove from album" = "Видалити з альбому";
 "Back Up" = "Копіювати";
-"Add to album" = "Додати до альбому";
+"Add to album" = "До альбому";
 "Remove from Favorites" = "Видалити з обраного";
 "Remove" = "Видалити";
 "Add to Favorites" = "Додати в обране";
@@ -170,7 +170,7 @@
 "New Folder" = "Нова папка";
 "Print" = "Друк";
 "Make album cover" = "Зробити обкладинку альбому";
-"Add To Album" = "Додати до альбому";
+"Add To Album" = "До альбому";
 "Remove From Album" = "Видалити з альбому";
 "Remove Album" = "Видалити альбом";
 "Documents" = "Документи";
@@ -395,7 +395,7 @@
 "Change cover photo" = "Змінити обкладинку";
 "Photo uploaded" = "Фото завантажено";
 "Please select a language option" = "Будь ласка, виберіть мову";
-"My Stories" = "Мої оповідання";
+"My Stories" = "Оповідання";
 "People" = "Люди";
 "Things" = "Речі";
 "Places" = "Місця";
