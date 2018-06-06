@@ -607,10 +607,12 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         }, completion: nil)
     }
     
-    func frameForTabAtIndex(index: Int) -> CGRect {
+    func boundsForTabAtIndex(index: Int) -> CGRect {
+        view.layoutIfNeeded()
+        
         var frames = tabBar.subviews.flatMap { view -> CGRect? in
             if let view = view as? UIControl {
-                return view.frame
+                return view.bounds
             }
             return nil
         }
