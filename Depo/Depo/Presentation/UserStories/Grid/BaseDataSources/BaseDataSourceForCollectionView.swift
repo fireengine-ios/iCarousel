@@ -196,7 +196,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             if let collectionView = collectionView {
                 oldSectionNumbers = numberOfSections(in: collectionView)
             }
-            self.insertItems(with: ResponseResult.success(self.getIndexPathsForItems([])), oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+            self.insertItems(with: ResponseResult.success(self.getIndexPathsForItems([])), emptyItems: tempoEmptyItems, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
             return
         }
         
@@ -214,7 +214,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         compoundItems(pageItems: filteredItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] response in
-            self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+            self?.insertItems(with: response, emptyItems: tempoEmptyItems, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
         })
     }
     
@@ -225,7 +225,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    private func insertItems(with response: ResponseResult<[IndexPath]>, oldSectionNumbers: Int, containsEmptyMetaItems: Bool) {
+    private func insertItems(with response: ResponseResult<[IndexPath]>, emptyItems: [Item], oldSectionNumbers: Int, containsEmptyMetaItems: Bool) {
         guard let collectionView = collectionView else {
             return
         }
@@ -241,7 +241,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 self.isDropedData = false
             } else {
                 let newSectionNumbers = self.numberOfSections(in: collectionView)
-                
+                let emptyItemsArray = getIndexPathsForItems(emptyItems)
                 var newSections: IndexSet?
                 if newSectionNumbers > oldSectionNumbers {
                     let needMoveSectionWithEmptyMetaItems = self.needShowEmptyMetaItems && self.currentSortType == .metaDataTimeUp && containsEmptyMetaItems
@@ -258,7 +258,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         if let newSections = newSections {
                             self?.collectionView?.insertSections(newSections)
                         }
-                        self?.collectionView?.insertItems(at: array)
+                        
+                        self?.collectionView?.insertItems(at: array + emptyItemsArray)
+                        
                         }, completion: { [weak self] _ in
                             guard let `self` = self else {
                                 return
@@ -482,6 +484,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
+                            ////// maybe change index
 //                            if !self.isPaginationDidEnd,
 //                                compoundedItems.count < self.pageCompounder.pageSize {
 //                                self.delegate?.getNextItems()
@@ -1172,7 +1175,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 debugPrint("!!! page compunding for page \(lastPage)")
                 
                 compoundItems(pageItems: [], pageNum: lastPage, complition: { [weak self] response in
-                    self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+                    self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
                     
                 })
             }
@@ -1181,7 +1184,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 //            }
         } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
             compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
-               self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+                self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
             })
         }
         
