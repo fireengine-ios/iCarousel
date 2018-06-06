@@ -484,7 +484,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     private func getIndexPathsForItems(_ items: [Item]) -> [IndexPath] {
-        return items.compactMap { self.getIndexPathForObject(itemUUID: $0.uuid) }
+        return items.flatMap { self.getIndexPathForObject(itemUUID: $0.uuid) }
     }
     
     private func transformedLeftOvers() -> [WrapData] {
