@@ -86,11 +86,11 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
                 }
             }
             
-            alertSheetModule?.onlyPresentAlertSheet(with: actionTypes, for: [Item]())
+            alertSheetModule?.onlyPresentAlertSheet(with: actionTypes, for: [Item](), sender: sender)
         } else {
             let actionTypes = interactor.alerSheetMoreActionsConfig?.initialTypes ?? []
 
-            alertSheetModule?.onlyPresentAlertSheet(with: actionTypes, for: [Item]())
+            alertSheetModule?.onlyPresentAlertSheet(with: actionTypes, for: [Item](), sender: sender)
         }
         
     }
