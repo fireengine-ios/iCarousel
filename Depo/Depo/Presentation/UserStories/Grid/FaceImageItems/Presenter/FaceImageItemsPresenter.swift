@@ -91,7 +91,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         super.getContentWithSuccessEnd()
         
         updateNoFilesView()
-
+    
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
             view.showUgglaView()
         }
@@ -115,8 +115,15 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             forceLoadNextItems = false
             dataSource.isPaginationDidEnd = false
             dataSource.delegate?.getNextItems()
-        } else {
-            dataSource.needReloadData = true
+        } else {            
+            if !isChangeVisibilityMode {
+                DispatchQueue.toMain {
+                    self.dataSource.collectionView?.collectionViewLayout.invalidateLayout()
+                    self.dataSource.collectionView?.performBatchUpdates({
+                        self.dataSource.collectionView?.reloadData()
+                    }, completion: nil)
+                }
+            }
         }
     }
     
@@ -174,6 +181,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     // MARK: - Utility methods
     
     private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
+        dataSource.needReloadData = isChangeVisibilityMode
         self.isChangeVisibilityMode = isChangeVisibilityMode
         dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
         
@@ -256,7 +264,7 @@ extension FaceImageItemsPresenter: FaceImageItemsViewOutput {
         if let interactor = interactor as? FaceImageItemsInteractor,
             !selectedItems.isEmpty {
             
-            let peopleItems = selectedItems.compactMap { $0 as? PeopleItem }
+            let peopleItems = selectedItems.flatMap { $0 as? PeopleItem }
             interactor.onSaveVisibilityChanges(peopleItems)
             
         } else {
