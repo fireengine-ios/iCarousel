@@ -136,6 +136,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var canShow3DotsInCell = true
     var needShowCustomScrollIndicator = false
     var needShowEmptyMetaItems = false
+    var needReloadData = true
     
     var parentUUID: String?
     
@@ -219,7 +220,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         case .success(let array):
             if self.isDropedData || array.isEmpty {
                 DispatchQueue.main.async {
-                    self.collectionView?.reloadData()
+                    if self.needReloadData {
+                        self.collectionView?.reloadData()
+                    }
                 }
                 self.delegate?.filesAppendedAndSorted()
                 self.isLocalFilesRequested = false
@@ -481,7 +484,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     private func getIndexPathsForItems(_ items: [Item]) -> [IndexPath] {
-        return items.flatMap { self.getIndexPathForObject(itemUUID: $0.uuid) }
+        return items.compactMap { self.getIndexPathForObject(itemUUID: $0.uuid) }
     }
     
     private func transformedLeftOvers() -> [WrapData] {

@@ -110,10 +110,13 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             view.updateShowHideButton(isShow: needShow)
         }
         
-        if forceLoadNextItems, !dataSource.isPaginationDidEnd {///FIXME: Do we need it now?
+        if forceLoadNextItems {
+            dataSource.needReloadData = false
             forceLoadNextItems = false
             dataSource.isPaginationDidEnd = false
-            getNextItems()
+            dataSource.delegate?.getNextItems()
+        } else {
+            dataSource.needReloadData = true
         }
     }
     
@@ -253,7 +256,7 @@ extension FaceImageItemsPresenter: FaceImageItemsViewOutput {
         if let interactor = interactor as? FaceImageItemsInteractor,
             !selectedItems.isEmpty {
             
-            let peopleItems = selectedItems.flatMap { $0 as? PeopleItem }
+            let peopleItems = selectedItems.compactMap { $0 as? PeopleItem }
             interactor.onSaveVisibilityChanges(peopleItems)
             
         } else {
