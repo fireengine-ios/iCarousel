@@ -11,12 +11,12 @@ import UIKit
 class BlueButtonWithWhiteText: WhiteButtonWithRoundedCorner {
 
     override func configurate() {
-        setCornerRadius()
+        super.configurate()
+
         setBackgroundColor(ColorConstants.darcBlueColor, for: .normal)
         setBackgroundColor(ColorConstants.darcBlueColor.lighter(by: 30.0), for: .disabled)
         setTitleColor(ColorConstants.whiteColor, for: .normal)
         setTitleColor(ColorConstants.lightGrayColor, for: .disabled)
-        titleLabel?.font = ApplicationPalette.bigRoundButtonFont
     }
 }
 
@@ -24,17 +24,18 @@ final class BlueButtonWithMediumWhiteText: BlueButtonWithWhiteText {
     
     override func configurate() {
         super.configurate()
+
         titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
-        titleLabel?.numberOfLines = 0
+        titleLabel?.numberOfLines = 1
         titleLabel?.textAlignment = .center
     }
-
 }
 
 final class BlueButtonWithNoFilesWhiteText: BlueButtonWithWhiteText {
     
     override func configurate() {
         super.configurate()
+
         titleLabel?.font = ApplicationPalette.noFilesRoundButtonFont
         titleLabel?.numberOfLines = 0
         titleLabel?.textAlignment = .center
