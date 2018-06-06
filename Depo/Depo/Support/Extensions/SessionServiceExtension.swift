@@ -68,7 +68,7 @@ public extension SessionManager {
                 }()
                 let deviceType = UIDevice.current.modelName
                 let locale = Device.locale
-                return "lifebox/{\(appVersion)} ({\(deviceType)}; build/{\(appBuild)}; {\(osNameVersion.0)} {\(osNameVersion.1)}; {\(locale)}) {Alamofire}/{\(alamofireVersion)}"
+                return "lifebox/\(appVersion) (\(deviceType); build/\(appBuild); \(osNameVersion.0) \(osNameVersion.1); \(locale)) {Alamofire}/\(alamofireVersion)"
             }
 
             return "Alamofire"
