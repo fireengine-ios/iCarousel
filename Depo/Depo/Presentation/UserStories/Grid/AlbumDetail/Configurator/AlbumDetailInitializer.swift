@@ -23,8 +23,15 @@ class AlbumDetailModuleInitializer: NSObject {
         viewController.scrolliblePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.scrolliblePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromAlbum],
+        
+        var bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromAlbum],
                                                style: .default, tintColor: nil)
+        
+        let langCode = Device.locale
+        if langCode != "tr", langCode != "en" {
+            bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .removeFromAlbum],
+                                               style: .default, tintColor: nil)
+        }
         
         let presenter = AlbumDetailPresenter()
         presenter.moduleOutput = moduleOutput
