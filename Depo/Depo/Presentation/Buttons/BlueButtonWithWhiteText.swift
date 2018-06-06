@@ -37,7 +37,7 @@ final class BlueButtonWithNoFilesWhiteText: BlueButtonWithWhiteText {
         super.configurate()
 
         titleLabel?.font = ApplicationPalette.noFilesRoundButtonFont
-        titleLabel?.numberOfLines = 0
+        titleLabel?.numberOfLines = 1
         titleLabel?.textAlignment = .center
     }
 }
