@@ -1,10 +1,10 @@
 "Welcome1Info" = "Leben, Sammeln, Erinnern";
-"Welcome1SubInfo" = "Sammeln Sie Ihre Fotos, Videos und Dateien auf der Liverbox! Greifen Sie zu und erinnern Sie sich, wann und wo immer Sie sind.";
+"Welcome1SubInfo" = "Sammeln Sie Ihre Fotos, Videos und Dateien auf der Lifebox! Greifen Sie zu und erinnern Sie sich, wann und wo immer Sie sind.";
 "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Standortdienste sind in Ihren Geräteeinstellungen deaktiviert. Um die Hintergrundsynchronisierungsfunktion der Lifebox nutzen zu können, müssen Sie die Standortdienste unter \"Einstellungen - Datenschutz - Standortdienste\" aktivieren.";
 "This file will be removed only from your album. You can access this file from Photos tab" = "Diese Datei wird nur aus Ihrem Album entfernt. Sie können auf diese Datei über die Registerkarte Fotos zugreifen";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Durch das Löschen dieses Albums werden die Dateien aus der Lifebox nicht gelöscht. Sie können auf diese Dateien über die Registerkarte Fotos zugreifen. Sind Sie sicher, dass Sie löschen möchten?";
-"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Durch das Löschen dieser Datei werden sie aus der Liverbox entfernt. Sie können nicht mehr auf sie zugreifen, sobald sie gelöscht wurden. Sind Sie sicher, dass Sie löschen möchten?";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Wenn Sie diese Dateien löschen, werden sie aus der Liverbox entfernt. Sie können nicht mehr auf sie zugreifen, sobald sie gelöscht wurden";
+"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Durch das Löschen dieser Datei werden sie aus der Lifebox entfernt. Sie können nicht mehr auf sie zugreifen, sobald sie gelöscht wurden. Sind Sie sicher, dass Sie löschen möchten?";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Wenn Sie diese Dateien löschen, werden sie aus der Lifebox entfernt. Sie können nicht mehr auf sie zugreifen, sobald sie gelöscht wurden";
 "Purchase" = "Kauf";
 "Packages" = "Pakete";
 "Verification code is blocked.\nPlease request a new code" = "Der Bestätigungscode ist blockiert. Bitte fordern Sie einen neuen Code an.";
@@ -27,7 +27,7 @@
 "You successfully set your passcode" = "Sie haben Ihren Zugangscode erfolgreich vergeben";
 "Passcode is changed successfully" = "Der Passcode wurde erfolgreich geändert";
 "Please repeate your new lifebox passcode" = "Bitte geben Sie Ihren neuen Lifebox-Zugangscode erneut ein";
-"Please enter your lifebox passcode" = "Bitte geben Sie Ihren Liverbox-Zugangscode ein";
+"Please enter your lifebox passcode" = "Bitte geben Sie Ihren Lifebox-Zugangscode ein";
 "lifebox Passcode" = "Lifebox-Passwort";
 "Change Passcode" = "Kennwort ändern";
 "Passcode" = "Passwort";
@@ -285,7 +285,7 @@
 "No" = "Nein";
 "Access to Gallery is denied. Please change it from the settings menu of the device" = "Der Zugriff auf die Galerie wird verweigert. Bitte ändern Sie es über das Einstellungsmenü des Geräts";
 "Caution!" = "Vorsicht!";
-"You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. " = "Sie können alles über die Liverbox von der Homepage aus aufrufen. Nutzen Sie Ihre Lifebox mit unseren Vorschlägen. Sie können die Karten wischen, die Ihnen nicht gefallen.";
+"You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. " = "Sie können alles über die Lifebox von der Homepage aus aufrufen. Nutzen Sie Ihre Lifebox mit unseren Vorschlägen. Sie können die Karten wischen, die Ihnen nicht gefallen.";
 "Welcome! Let’s get you started!" = "Herzlich willkommen! Lass uns anfangen!";
 "Videos" = "Videos";
 "Folder" = "Mappe";
@@ -396,9 +396,9 @@
 "Photo uploaded" = "Foto hochgeladen";
 "Please select a language option" = "Bitte wählen Sie eine Sprachoption";
 "My Stories" = "Meine Geschichten";
-"People" = "Menschen";
+"People" = "Personen";
 "Things" = "Dinge";
-"Places" = "Setzt";
+"Places" = "Orte";
 "Musics" = "Musik";
 "Your Uploads" = "Ihre Uploads";
 "Create a story" = "Erstelle eine Geschichte";
@@ -456,7 +456,7 @@
 "Error occurred while accessing your photos.\nPlease check your settings." = "Beim Zugriff auf Ihre Fotos ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Einstellungen.";
 "localFilesBeingProcessed" = "Lokale Dateien verarbeiten";
 "TurkcellSecurityPasscodeWarningText" = "Warnung: Sie haben die Passcode / Touch-ID-Funktion bereits aktiviert. Um Ihre Dateien in der Lifebox sicher mit Passcode- / Touch-ID-Funktionen zu erhalten, empfehlen wir, die Anmeldung mit der Turkcell-Passwortfunktion nicht zu aktivieren.";
-"TurkcellSecurityAutologinText" = "Warnung: Sie haben die Passcode / Touch-ID-Funktion bereits aktiviert. Um Ihre Dateien in der Liverbox sicher mit Passcode- / Touch-ID-Funktionen zu erhalten, empfehlen wir, die automatische Anmeldung mit der 3G / LTE-Funktion nicht zu aktivieren.";
+"TurkcellSecurityAutologinText" = "Warnung: Sie haben die Passcode / Touch-ID-Funktion bereits aktiviert. Um Ihre Dateien in der Lifebox sicher mit Passcode- / Touch-ID-Funktionen zu erhalten, empfehlen wir, die automatische Anmeldung mit der 3G / LTE-Funktion nicht zu aktivieren.";
 "PasscodeActivationWhileTurkcellActivated" = "Die automatische Anmeldung bei der Lifebox mit 3G / LTE wurde deaktiviert, damit Sie die Funktionen des Lifebox-Passcodes und der Touch-ID sicher verwenden können. Sie können die Login-Einstellungen jederzeit wieder aktivieren.";
 "Error Handling Under Constraction" = "Fehlerbehandlung unter Constraction";
 "This e-mail address is not registered. Please try again" = "Diese Email-Adresse ist nicht registriert. Bitte versuche es erneut";
