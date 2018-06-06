@@ -63,7 +63,7 @@ class SyncServiceManager {
         return (photoSyncService.status == .failed || videoSyncService.status == .failed)
     }
     
-    private var newItemsToAppend = [PHAsset]()
+    private var newItemsToAppend = SynchronizedArray<PHAsset>()//[PHAsset]()
     private var lastTimeNewItemsAppended: Date?
     
     
@@ -269,10 +269,10 @@ extension SyncServiceManager {
     @objc private func onPhotoLibraryDidChange(notification: Notification) {
         if let phChanges = notification.userInfo {
             if let addedAssets = phChanges[PhotoLibraryChangeType.added] as? [PHAsset] {
-                newItemsToAppend.append(contentsOf: addedAssets)
+                newItemsToAppend.append(addedAssets)
             } else if let removedAssets = phChanges[PhotoLibraryChangeType.removed] as? [PHAsset] {
                 for asset in removedAssets {
-                    newItemsToAppend.remove(asset)
+                    newItemsToAppend.remove(where: {$0.localIdentifier == asset.localIdentifier})
                 }
             }
             lastTimeNewItemsAppended = Date()
