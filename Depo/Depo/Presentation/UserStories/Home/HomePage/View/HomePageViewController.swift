@@ -172,12 +172,12 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
         switch type {
         case .homePageIcon:
-            let buttonFrame = controller.frameForTabAtIndex(index: 0)
-            frame = controller.tabBar.convert(buttonFrame, to: controller.contentView)
+            let buttonBounds = controller.boundsForTabAtIndex(index: 0)
+            frame = controller.tabBar.convert(buttonBounds, to: controller.contentView)
             completion(frame)
         case .homePageGeneral:
             if let topView = topView {
-                let topViewFrame = topView.convert(topView.frame, to: controller.contentView)
+                let topViewFrame = topView.convert(topView.bounds, to: controller.contentView)
                 frame = CGRect(x: 0, y: topViewFrame.maxY, width: topViewFrame.width, height: collectionView.frame.height - topViewFrame.height)
                 completion(frame)
             }
@@ -201,7 +201,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
                         collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
                     }
                     
-                    var frame = popupView.convert(popupView.frame, to: to)
+                    var frame = popupView.convert(popupView.bounds, to: to)
                     frame.origin.y = max(0, frame.origin.y)
                     frame.size.height = popupView.spotlightHeight()
                     completion(frame)
@@ -224,7 +224,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
                              self.collectionView.setContentOffset(CGPoint(x: 0, y: offset - 50), animated: false)
                         }
                     }, completion: { _ in
-                        var frame = popupView.convert(popupView.frame, to: to)
+                        var frame = popupView.convert(popupView.bounds, to: to)
                         frame.origin.y = max(0, frame.origin.y)
                         frame.size.height = popupView.spotlightHeight()
                         completion(frame)

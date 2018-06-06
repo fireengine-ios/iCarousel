@@ -136,6 +136,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var canShow3DotsInCell = true
     var needShowCustomScrollIndicator = false
     var needShowEmptyMetaItems = false
+    var needReloadData = true
     
     var parentUUID: String?
     
@@ -234,7 +235,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         case .success(let array):
             if self.isDropedData || array.isEmpty {
                 DispatchQueue.main.async {
-                    self.collectionView?.reloadData()
+                    if self.needReloadData {
+                        self.collectionView?.reloadData()
+                    }
                 }
                 self.isLocalFilesRequested = false
                 self.delegate?.filesAppendedAndSorted()

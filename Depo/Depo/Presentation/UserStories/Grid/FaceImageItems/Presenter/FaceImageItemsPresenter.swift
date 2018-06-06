@@ -91,7 +91,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         super.getContentWithSuccessEnd()
         
         updateNoFilesView()
-
+    
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
             view.showUgglaView()
         }
@@ -110,10 +110,20 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             view.updateShowHideButton(isShow: needShow)
         }
         
-        if forceLoadNextItems, !dataSource.isPaginationDidEnd {///FIXME: Do we need it now?
+        if forceLoadNextItems {
+            dataSource.needReloadData = false
             forceLoadNextItems = false
             dataSource.isPaginationDidEnd = false
-            getNextItems()
+            dataSource.delegate?.getNextItems()
+        } else {            
+            if !isChangeVisibilityMode {
+                DispatchQueue.toMain {
+                    self.dataSource.collectionView?.collectionViewLayout.invalidateLayout()
+                    self.dataSource.collectionView?.performBatchUpdates({
+                        self.dataSource.collectionView?.reloadData()
+                    }, completion: nil)
+                }
+            }
         }
     }
     
@@ -171,6 +181,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     // MARK: - Utility methods
     
     private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
+        dataSource.needReloadData = isChangeVisibilityMode
         self.isChangeVisibilityMode = isChangeVisibilityMode
         dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
         
