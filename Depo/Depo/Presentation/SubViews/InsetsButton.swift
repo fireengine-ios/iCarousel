@@ -47,6 +47,10 @@ class InsetsButton: UIButton {
             size.width += insets.left + insets.right
             size.height += insets.top + insets.bottom
         }
+
+        size.width = ceil(size.width)
+        size.height = ceil(size.height)
+
         return size
     }
 }

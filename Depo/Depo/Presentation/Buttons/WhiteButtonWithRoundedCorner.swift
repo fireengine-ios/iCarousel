@@ -25,22 +25,33 @@ class WhiteButtonWithRoundedCorner: InsetsButton {
         
         setCornerRadius()
     }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        setCornerRadius()
+    }
     
     func configurate() {
         backgroundColor = ColorConstants.whiteColor
         setTitleColor(ColorConstants.blueColor, for: UIControlState.normal)
         titleLabel?.font = ApplicationPalette.bigRoundButtonFont
         layer.masksToBounds = true
+
         setCornerRadius()
         adjustsFontSizeToFitWidth()
     }
     
     func setCornerRadius() {
-        layer.cornerRadius = frame.height * 0.5
+        layer.cornerRadius = bounds.height * 0.5
         
+        setInsets()
+    }
+
+    func setInsets() {
         let inset = frame.height * 0.3
         let isAddedImaged = image(for: .normal) != nil
-        let leftInset: CGFloat = isAddedImaged ? 0 : inset
-        insets = UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: inset)
+        let leftInset: CGFloat = isAddedImaged ? 0.0 : inset
+        insets = UIEdgeInsets(top: 0.0, left: leftInset, bottom: 0.0, right: inset)
     }
 }
