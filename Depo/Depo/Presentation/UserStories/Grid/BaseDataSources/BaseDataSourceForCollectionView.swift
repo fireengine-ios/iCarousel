@@ -1584,7 +1584,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
                 for object in items {
                     if object.isLocalItem {
-                        idsForRemove.append(object.uuid)
+                        idsForRemove.append(object.getTrimmedLocalID())
                     } else {
                         serverObjects.append(object)
                     }
@@ -1626,7 +1626,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 var newSectionArray = [WrapData]()
                 for object in array {
                     
-                    if let index = idsForRemove.index(of: object.uuid) {
+                    if let index = idsForRemove.index(of: object.getTrimmedLocalID()) {
                         self.allMediaItems.remove(object)
                         idsForRemove.remove(at: index)
                         continue
