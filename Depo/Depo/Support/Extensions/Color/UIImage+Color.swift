@@ -11,7 +11,7 @@ import UIKit
 extension UIImage {
     convenience init?(color: UIColor) {
         let rect = CGRect(origin: .zero, size: CGSize(width: 1, height: 1))
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, UIScreen.main.scale)
         color.setFill()
         UIRectFill(rect)
         let image = UIGraphicsGetImageFromCurrentImageContext()

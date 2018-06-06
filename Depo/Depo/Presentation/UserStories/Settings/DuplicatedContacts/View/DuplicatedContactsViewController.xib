@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,40 +29,69 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7z-te-2rn" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="176" y="1250" width="160" height="56"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="mbh-qK-bLC">
+                    <rect key="frame" x="45" y="1250" width="934" height="56"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s0X-G8-z06">
+                            <rect key="frame" x="0.0" y="0.0" width="467" height="56"/>
+                            <subviews>
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7z-te-2rn" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="153" y="0.0" width="160" height="56"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="324.5" id="ngk-Ci-mYE">
+                                            <variation key="widthClass=regular" constant="160"/>
+                                        </constraint>
+                                    </constraints>
+                                    <state key="normal" title="Delete All"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="ngk-Ci-mYE"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="widthClass=regular">
+                                        <mask key="constraints">
+                                            <include reference="ngk-Ci-mYE"/>
+                                        </mask>
+                                    </variation>
+                                    <connections>
+                                        <action selector="onDeleteAllTapped:" destination="-1" eventType="touchUpInside" id="aZz-tx-D3m"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="P7z-te-2rn" secondAttribute="bottom" id="AEl-UM-aYa"/>
+                                <constraint firstItem="P7z-te-2rn" firstAttribute="centerX" secondItem="s0X-G8-z06" secondAttribute="centerX" id="bg8-3g-4gn"/>
+                                <constraint firstItem="P7z-te-2rn" firstAttribute="top" secondItem="s0X-G8-z06" secondAttribute="top" id="ySs-Ka-Agl"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKT-dS-xQB">
+                            <rect key="frame" x="467" y="0.0" width="467" height="56"/>
+                            <subviews>
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFU-Lz-2ek" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="153" y="0.0" width="160" height="56"/>
+                                    <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="onKeepTapped:" destination="-1" eventType="touchUpInside" id="1t1-2l-K6c"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="TFU-Lz-2ek" firstAttribute="top" secondItem="xKT-dS-xQB" secondAttribute="top" id="47M-22-6Ag"/>
+                                <constraint firstItem="TFU-Lz-2ek" firstAttribute="centerX" secondItem="xKT-dS-xQB" secondAttribute="centerX" id="CTO-fj-cgh"/>
+                                <constraint firstAttribute="bottom" secondItem="TFU-Lz-2ek" secondAttribute="bottom" id="D3F-R2-2Q3"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="324.5" id="ngk-Ci-mYE">
-                            <variation key="widthClass=regular" constant="160"/>
-                        </constraint>
-                        <constraint firstAttribute="height" constant="46" id="zod-7D-TV5">
-                            <variation key="heightClass=regular-widthClass=regular" constant="56"/>
-                        </constraint>
+                        <constraint firstItem="TFU-Lz-2ek" firstAttribute="width" secondItem="P7z-te-2rn" secondAttribute="width" id="uqR-K9-1m9"/>
+                        <constraint firstAttribute="height" constant="56" id="zu0-BU-r1X"/>
                     </constraints>
-                    <state key="normal" title="Delete All"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="ngk-Ci-mYE"/>
-                        </mask>
-                    </variation>
-                    <variation key="widthClass=regular">
-                        <mask key="constraints">
-                            <include reference="ngk-Ci-mYE"/>
-                        </mask>
-                    </variation>
-                    <connections>
-                        <action selector="onDeleteAllTapped:" destination="-1" eventType="touchUpInside" id="aZz-tx-D3m"/>
-                    </connections>
-                </button>
-                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFU-Lz-2ek" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="688" y="1250" width="160" height="56"/>
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="onKeepTapped:" destination="-1" eventType="touchUpInside" id="1t1-2l-K6c"/>
-                    </connections>
-                </button>
+                </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="There are 20 duplicated contacts." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgS-mi-6YC">
-                    <rect key="frame" x="22" y="255.5" width="980" height="22"/>
+                    <rect key="frame" x="22" y="256" width="980" height="21.5"/>
                     <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="19"/>
                     <color key="textColor" red="0.38714492321014404" green="0.38746166229248047" blue="0.38719403743743896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -77,43 +106,19 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="P7z-te-2rn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="0.5" id="0yO-tx-XNL"/>
-                <constraint firstItem="TFU-Lz-2ek" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="1.5" priority="750" id="3IQ-nD-ATH"/>
-                <constraint firstItem="TFU-Lz-2ek" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="1.5" id="4dE-Ir-Mhb"/>
-                <constraint firstItem="TFU-Lz-2ek" firstAttribute="trailing" secondItem="l1M-6Z-A1n" secondAttribute="trailing" priority="750" constant="-19" id="5nH-1o-0bR"/>
                 <constraint firstAttribute="trailing" secondItem="l1M-6Z-A1n" secondAttribute="trailing" constant="40" id="7IY-0b-TcW"/>
                 <constraint firstItem="fgS-mi-6YC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="B7h-Q6-aS0"/>
                 <constraint firstItem="l1M-6Z-A1n" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.45" id="HnO-FI-NRF"/>
-                <constraint firstItem="P7z-te-2rn" firstAttribute="width" secondItem="TFU-Lz-2ek" secondAttribute="width" id="Ljn-4V-Mp6"/>
+                <constraint firstAttribute="bottom" secondItem="mbh-qK-bLC" secondAttribute="bottom" constant="60" id="PNO-lN-weg"/>
                 <constraint firstItem="fgS-mi-6YC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.39" id="Vie-Gw-v2u"/>
-                <constraint firstItem="TFU-Lz-2ek" firstAttribute="leading" secondItem="P7z-te-2rn" secondAttribute="trailing" priority="750" constant="15" id="cXf-SI-Vm1"/>
+                <constraint firstItem="mbh-qK-bLC" firstAttribute="leading" secondItem="l1M-6Z-A1n" secondAttribute="leading" constant="5" id="Yns-2X-EyM"/>
                 <constraint firstAttribute="trailing" secondItem="fgS-mi-6YC" secondAttribute="trailing" constant="22" id="elD-R1-sHl"/>
                 <constraint firstItem="l1M-6Z-A1n" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.58" id="iO8-vB-d7x"/>
-                <constraint firstItem="P7z-te-2rn" firstAttribute="centerY" secondItem="TFU-Lz-2ek" secondAttribute="centerY" id="ixE-HZ-r64"/>
                 <constraint firstItem="l1M-6Z-A1n" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="jsx-gj-Qld"/>
-                <constraint firstAttribute="bottom" secondItem="P7z-te-2rn" secondAttribute="bottom" constant="60" id="oND-Rg-6VH"/>
-                <constraint firstItem="P7z-te-2rn" firstAttribute="leading" secondItem="l1M-6Z-A1n" secondAttribute="leading" priority="750" constant="5" id="qd8-lX-hGv"/>
-                <constraint firstItem="TFU-Lz-2ek" firstAttribute="height" secondItem="P7z-te-2rn" secondAttribute="height" id="r99-cx-SJK"/>
-                <constraint firstItem="P7z-te-2rn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="0.5" priority="750" id="vbk-CC-qnO"/>
+                <constraint firstItem="mbh-qK-bLC" firstAttribute="trailing" secondItem="l1M-6Z-A1n" secondAttribute="trailing" constant="-5" id="s5h-fN-htl"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="0yO-tx-XNL"/>
-                    <exclude reference="vbk-CC-qnO"/>
-                    <exclude reference="3IQ-nD-ATH"/>
-                    <exclude reference="4dE-Ir-Mhb"/>
-                </mask>
-            </variation>
-            <variation key="heightClass=regular-widthClass=regular">
-                <mask key="constraints">
-                    <include reference="0yO-tx-XNL"/>
-                    <exclude reference="vbk-CC-qnO"/>
-                    <exclude reference="3IQ-nD-ATH"/>
-                    <include reference="4dE-Ir-Mhb"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="32" y="53"/>
         </view>
     </objects>

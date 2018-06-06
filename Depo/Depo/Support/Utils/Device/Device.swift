@@ -160,7 +160,7 @@ class Device {
     
     static var winSize = UIScreen.main.bounds
     
-    static var workaroundUUID: String = {
+    static var workaroundUUID: String = { //Currently unused
         var UUID = ""
         if let storedUUID = UserDefaults.standard.object(forKey: Keys.fakeUUID) as? String {
             UUID = storedUUID

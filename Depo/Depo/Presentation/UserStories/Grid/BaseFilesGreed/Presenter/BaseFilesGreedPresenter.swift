@@ -230,14 +230,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             }
             self.dataSource.appendCollectionView(items: [], pageNum: self.interactor.requestPageNum)
         }
-//        dataSource.reloadData()
-//        updateNoFilesView()
-//=======
-//        dataSource.appendCollectionView(items: [])
-//        dataSource.reloadData()
-//        updateNoFilesView()
-//        updateThreeDotsButton()
-//>>>>>>> develop
     }
     
     func getContentWithSuccess(items: [WrapData]) {
@@ -246,7 +238,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if (view == nil) {
             return
         }
-        
+        debugPrint("!!! page \(self.interactor.requestPageNum)")
         updateThreeDotsButton()
 //        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
         dispatchQueue.async { [weak self] in
@@ -255,18 +247,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             }
            self.dataSource.appendCollectionView(items: items, pageNum: self.interactor.requestPageNum)
         }
-        
-
-
-//        dataSource.reloadData()
-//        updateNoFilesView()
-//=======
-//        dataSource.appendCollectionView(items: items)
-//
-//        dataSource.reloadData()
-//        updateNoFilesView()
-//        updateThreeDotsButton()
-//>>>>>>> develop
     }
     
     func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
@@ -293,8 +273,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func getNextItems() {
-        //        interactor.nextItems(nil, sortBy: .name,
-        //                             sortOrder: .asc, newFieldValue: <#FieldValue?#>)
         compoundAllFiltersAndNextItems()
     }
     
@@ -392,6 +370,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func filesAppendedAndSorted() {
         DispatchQueue.main.async {
+            if self.dataSource.isPaginationDidEnd {
+                debugPrint("SORTED")
+            }
             self.view.stopRefresher()
             self.updateNoFilesView()
             self.asyncOperationSucces()

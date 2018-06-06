@@ -15,7 +15,13 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         
         if !selectedItem.isLocalItem {
             photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print],
+                                                         style: .blackOpaque, tintColor: nil)
+            
+            let langCode = Device.locale
+            if langCode != "tr", langCode != "en" {
+                photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download],
                                                              style: .blackOpaque, tintColor: nil)
+            }
         } else {
             photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .sync, .info],
                                                          style: .blackOpaque, tintColor: nil)
@@ -35,8 +41,15 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     }
     
     class func initializeAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, hideActions: Bool = false) -> UIViewController {
-        let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .print, .removeFromAlbum],
+        var photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .print, .removeFromAlbum],
                                                          style: .blackOpaque, tintColor: nil)
+        
+        let langCode = Device.locale
+        if langCode != "tr", langCode != "en" {
+            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .removeFromAlbum],
+                                                         style: .blackOpaque, tintColor: nil)
+        }
+        
         let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .removeFromAlbum],
                                                         style: .blackOpaque, tintColor: nil)
         
