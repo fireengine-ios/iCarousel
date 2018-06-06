@@ -439,10 +439,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
     
-    func onlyPresentAlertSheet(with elements: [ElementTypes], for objects:[Item]) {
+    func onlyPresentAlertSheet(with elements: [ElementTypes], for objects:[Item], sender: Any?) {
         let actions = constractActions(with: elements, for: objects)
         DispatchQueue.main.async { [weak self] in
-            self?.presentAlertSheet(with: actions, presentedBy: nil)
+            self?.presentAlertSheet(with: actions, presentedBy: sender)
         }
     }
     
