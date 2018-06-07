@@ -116,17 +116,10 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             dataSource.isPaginationDidEnd = false
             dataSource.delegate?.getNextItems()
         } else {            
-            if !isChangeVisibilityMode {
-                DispatchQueue.toMain {
-                    self.dataSource.collectionView?.collectionViewLayout.invalidateLayout()
-                    self.dataSource.collectionView?.performBatchUpdates({
-                        self.dataSource.collectionView?.reloadData()
-                    }, completion: nil)
-                }
-            }
+            dataSource.needReloadData = true
         }
     }
-    
+   
     override func getContentWithFail(errorString: String?) {
         super.getContentWithFail(errorString: errorString)
         updateThreeDotsButton()
@@ -181,7 +174,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     // MARK: - Utility methods
     
     private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
-        dataSource.needReloadData = isChangeVisibilityMode
         self.isChangeVisibilityMode = isChangeVisibilityMode
         dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
         
