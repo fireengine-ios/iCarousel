@@ -76,9 +76,9 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
         takenDateLabel.textColor = ColorConstants.textGrayColor
         takenDateLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
-        let saveButton = UIBarButtonItem(title: TextConstants.fileInfoSave, style: .done, target: self, action: #selector(onSave))
-        
-        navigationItem.setRightBarButton(saveButton, animated: false)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.fileInfoSave,
+                                                            target: self,
+                                                            selector: #selector(onSave))
         
         output.viewIsReady()
     }

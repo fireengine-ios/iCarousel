@@ -10,13 +10,9 @@ import UIKit
 
 class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, UploadFromLifeBoxViewInput {
     
-    let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)
-        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -26,22 +22,19 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if navigationItem.leftBarButtonItem == nil && navigationController?.viewControllers.count == 1 {
-            let barButtonLeft = UIBarButtonItem(customView: cancelButton)
-            navigationItem.leftBarButtonItem = barButtonLeft
+        if navigationItem.leftBarButtonItem == nil, navigationController?.viewControllers.count == 1 {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.selectFolderCancelButton,
+                                                               target: self,
+                                                               selector: #selector(onCancelButton))
         }
     }
     
     override func configureNavBarActions(isSelecting: Bool = false) {
         setTitle(withString: TextConstants.uploadFromLifeBoxTitle)
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
-        button.setTitle(TextConstants.uploadFromLifeBoxNextButton, for: .normal)
-        button.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        button.addTarget(self, action: #selector(onNextButton), for: .touchUpInside)
         
-        let barButton = UIBarButtonItem(customView: button)
-        
-        navigationItem.rightBarButtonItem = barButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.uploadFromLifeBoxNextButton,
+                                                            target: self,
+                                                            selector: #selector(onNextButton))
     }
     
     /// don't remove
@@ -67,9 +60,11 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
         super.stopSelection()
         
         setTitle(withString: TextConstants.uploadFromLifeBoxTitle)
-        if navigationItem.leftBarButtonItem == nil && navigationController?.viewControllers.count == 1 {
-            let barButtonLeft = UIBarButtonItem(customView: cancelButton)
-            navigationItem.leftBarButtonItem = barButtonLeft
+        if navigationItem.leftBarButtonItem == nil, navigationController?.viewControllers.count == 1 {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                title: TextConstants.selectFolderCancelButton,
+                target: self,
+                selector: #selector(onCancelButton))
         }
     }
     

@@ -39,13 +39,15 @@ final class GSMUserInputCell: BaseUserInputCellView {
         let toolBar = UIToolbar()
         toolBar.barStyle = .default
         toolBar.isTranslucent = true
-        toolBar.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: 50)
+        toolBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 50)
         toolBar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: TextConstants.nextTitle, style: .plain, target: self, action: #selector(nextButtonPressed(sender:)))
+
+        let doneButton = UIBarButtonItem(title: TextConstants.nextTitle,
+                                         target: self,
+                                         selector: #selector(nextButtonPressed(sender:)))
         
         let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        
-        
+
         toolBar.setItems([flex, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         textInputField.inputAccessoryView = toolBar
@@ -69,7 +71,7 @@ final class GSMUserInputCell: BaseUserInputCellView {
     func setup(style: GSMUserInputCellStyle) {
         switch style {
         case .registration:
-            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            titleLabel.font = .TurkcellSaturaBolFont(size: 16)
             gsmCountryCodeLabel.textColor = UIColor.white.lighter(by: 10)
             titleLabel.textColor = .white
             textInputField.textColor = .white
@@ -78,7 +80,7 @@ final class GSMUserInputCell: BaseUserInputCellView {
             }
             defaultTitleHightlightColor = .white
         case .textEnter:
-            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            titleLabel.font = .TurkcellSaturaBolFont(size: 14)
             titleLabel.textColor = ColorConstants.textGrayColor
             gsmCountryCodeLabel.textColor = ColorConstants.textGrayColor            
             textInputField.textColor = ColorConstants.textGrayColor
