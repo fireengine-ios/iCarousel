@@ -123,6 +123,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
+    private var recentlyDeletedIndexes = [IndexPath]()
     private var pageLeftOvers = [WrapData]()
     private var emptyMetaItems = [WrapData]()
     
@@ -255,11 +256,17 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 DispatchQueue.main.async {
                     collectionView.collectionViewLayout.invalidateLayout()
                     collectionView.performBatchUpdates({ [weak self] in
-                        if let newSections = newSections {
-                            self?.collectionView?.insertSections(newSections)
+                        guard let `self` = self else {
+                            return
                         }
-                        
-                        self?.collectionView?.insertItems(at: array + emptyItemsArray)
+                        if let newSections = newSections {
+                            self.collectionView?.insertSections(newSections)
+                        }
+                        if !self.recentlyDeletedIndexes.isEmpty {///Also should add check for deleted sections
+                            self.collectionView?.deleteItems(at: self.recentlyDeletedIndexes)
+                            self.recentlyDeletedIndexes.removeAll()
+                        }
+                        self.collectionView?.insertItems(at: array + emptyItemsArray)
                         
                         }, completion: { [weak self] _ in
                             guard let `self` = self else {
@@ -1632,6 +1639,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     if let index = idsForRemove.index(of: object.getTrimmedLocalID()) {
                         self.allMediaItems.remove(object)
                         idsForRemove.remove(at: index)
+                        self.recentlyDeletedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))///FOR now like that, in future = it should be called after with whole array
                         continue
                     }
                     if let obj = objectsForReplaceDict[object.uuid]{
