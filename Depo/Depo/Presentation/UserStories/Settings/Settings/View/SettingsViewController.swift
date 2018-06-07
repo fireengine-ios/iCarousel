@@ -97,7 +97,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         
         if let version = UserDefaults.standard.string(forKey: AppConfigurator.SettingsBundleKeys.AppVersionKey),
             let build = UserDefaults.standard.string(forKey: AppConfigurator.SettingsBundleKeys.BuildVersionKey) {
-            versionLabel.text = "\(version)_\(build)_lifetech"
+            versionLabel.text = "\(version)_\(build)"
         }
     }
     
