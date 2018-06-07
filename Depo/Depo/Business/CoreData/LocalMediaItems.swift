@@ -194,7 +194,13 @@ extension CoreDataStack {
             
             items.forEach { context.delete($0) }
             let deletedItems = items.map{ WrapData(mediaItem: $0) }
-            ItemOperationManager.default.deleteItems(items: deletedItems)
+//            ItemOperationManager.default.deleteItems(items: deletedItems)
+//            Masha [3:36 PM]
+//            теперь синхронизированные фотки пропадают при удалении фоток с девайса
+//            
+//            после рефреша - появляются
+//            и это не только фриапа касается
+//            если просто удалить фотку из галереи - та же фигня
             
             self.saveDataForContext(context: context, savedCallBack: { [weak self] in
                 ///Appearantly after recovery local ID may change, so temporary soloution is to check all files all over. and in the future chenge DataBase behavior heavily
