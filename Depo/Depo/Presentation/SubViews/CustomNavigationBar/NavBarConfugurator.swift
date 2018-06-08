@@ -27,22 +27,22 @@ class NavigationBarList {
     
     init() {
         settings = UIBarButtonItem(image: UIImage(named: TextConstants.cogBtnImgName),
-                             style: .plain,
-                             target: nil,
-                             action: nil )
+                                   style: .plain,
+                                   target: nil,
+                                   action: nil)
         
         settings.accessibilityLabel = TextConstants.accessibilitySettings
         
         search = UIBarButtonItem(image: UIImage(named: TextConstants.searchBtnImgName),
-                        style: .plain,
-                        target: nil,
-                        action: nil )
+                                 style: .plain,
+                                 target: nil,
+                                 action: nil )
         search.accessibilityLabel = TextConstants.accessibilitySearch
 
         more = UIBarButtonItem(image: UIImage(named: TextConstants.moreBtnImgName),
-                        style: .plain,
-                        target: nil,
-                        action: nil)
+                               style: .plain,
+                               target: nil,
+                               action: nil)
         more.accessibilityLabel = TextConstants.accessibilityMore
         
         delete = UIBarButtonItem(image: UIImage(named: TextConstants.deleteBtnImgName),
@@ -52,15 +52,14 @@ class NavigationBarList {
         delete.accessibilityLabel = TextConstants.accessibilityDelete
         
         showHide = UIBarButtonItem.init(title: TextConstants.showHideBtnTitleName,
-                                        style: .plain,
                                         target: nil,
-                                        action: nil)
+                                        selector: nil)
         showHide.accessibilityLabel = TextConstants.accessibilityshowHide
         
         done = UIBarButtonItem(title: TextConstants.faceImageDone,
-                                style: .plain,
-                                target: nil,
-                                action: nil)
+                               style: .plain,
+                               target: nil,
+                               selector: nil)
         
         done.accessibilityLabel = TextConstants.accessibilityDone
         
@@ -68,7 +67,6 @@ class NavigationBarList {
         // create
         // add
         // edit
-        
     }
 }
 
@@ -92,7 +90,7 @@ class NavigationBarConfigurator {
     private var left: [NavBarWithAction]?
     
     var rightItems: [UIBarButtonItem]? {
-         return self.right?.flatMap { $0.navItem }
+        return self.right?.flatMap { $0.navItem }
     }
     
     func configure(right: [NavBarWithAction]?, left: [NavBarWithAction]?) {

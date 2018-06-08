@@ -41,14 +41,12 @@ class CreateStoryPhotosOrderViewController: BaseViewController, CreateStoryPhoto
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewStoryReorderView)
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongGesture))
-        self.collectionView.addGestureRecognizer(longPressGesture)
+        collectionView.addGestureRecognizer(longPressGesture)
         
-        let createButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
-        createButton.setTitle(TextConstants.createStoryPhotosOrderNextButton, for: .normal)
-        createButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        createButton.addTarget(self, action: #selector(onNextButton), for: .touchUpInside)
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: createButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: TextConstants.createStoryPhotosOrderNextButton,
+            target: self,
+            selector: #selector(onNextButton))
         
         output.viewIsReady()
     }

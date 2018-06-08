@@ -22,7 +22,6 @@ class PrintViewController: BaseViewController, ErrorPresenter {
         let backButton = UIBarButtonItem()
         backButton.title = TextConstants.backPrintTitle
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-
     }
     
     override func viewWillAppear(_ animated: Bool) {

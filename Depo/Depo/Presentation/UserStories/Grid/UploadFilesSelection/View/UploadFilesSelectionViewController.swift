@@ -14,17 +14,11 @@ class UploadFilesSelectionViewController: BaseFilesGreedChildrenViewController, 
         super.viewWillAppear(animated)
         
         navigationItem.rightBarButtonItems = NavigationBarConfigurator().rightItems
-        
-        
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
-        button.setTitle(TextConstants.uploadFilesNextButton, for: .normal)
-        button.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        button.addTarget(self, action: #selector(onNextButton), for: .touchUpInside)
-        
-        let barButton = UIBarButtonItem(customView: button)
-        navigationItem.rightBarButtonItem = barButton
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.uploadFilesNextButton,
+                                                            target: self,
+                                                            selector: #selector(onNextButton))
     }
-    
     
     override func selectedItemsCountChange(with count: Int) {
         super.selectedItemsCountChange(with: count)

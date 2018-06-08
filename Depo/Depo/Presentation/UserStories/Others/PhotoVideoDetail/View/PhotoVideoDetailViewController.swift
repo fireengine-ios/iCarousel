@@ -99,9 +99,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isHidden = true
         
-        navigationItem.leftBarButtonItem = BackButtonItem(action: { [weak self] in 
+        navigationItem.leftBarButtonItem = BackButtonItem { [weak self] in
             self?.hideView()
-        })
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
     }
@@ -206,8 +206,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     private func setupMoreButton() {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
-        let image = UIImage(named: "more")
-        button.setImage(image, for: .normal)
+        button.setImage(#imageLiteral(resourceName: "more"), for: .normal)
         button.addTarget(self, action: #selector(onRightBarButtonItem(sender:)), for: .touchUpInside)
         let barButton = UIBarButtonItem(customView: button)
         

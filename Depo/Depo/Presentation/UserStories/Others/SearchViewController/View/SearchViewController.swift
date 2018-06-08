@@ -241,23 +241,28 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     private func setupNavigationBarForSelectionState(state: Bool) {
         if state {
             navigationItem.titleView = nil
-            
-            let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 56))
-            cancelButton.addTarget(self, action: #selector(onCancelSelectionButton), for: .touchUpInside)
-            cancelButton.setTitle(TextConstants.cancelSelectionButtonTitle, for: .normal)
-            cancelButton.setTitleColor(ColorConstants.darcBlueColor, for: .normal)
-            cancelButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 19)
-            
-            let moreButton = UIBarButtonItem(image: UIImage(named: TextConstants.moreBtnImgName), style: .plain, target: self, action: #selector(onMoreButton(_:)))
+
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
+                                                               font: .TurkcellSaturaDemFont(size: 19.0),
+                                                               tintColor: ColorConstants.darcBlueColor,
+                                                               target: self,
+                                                               selector: #selector(onCancelSelectionButton))
+
+            let moreButton = UIBarButtonItem(image: UIImage(named: TextConstants.moreBtnImgName),
+                                             style: .plain,
+                                             target: self,
+                                             action: #selector(onMoreButton(_:)))
             moreButton.tintColor = ColorConstants.darcBlueColor
             moreButton.accessibilityLabel = TextConstants.accessibilityMore
 
-            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
             navigationItem.rightBarButtonItem = moreButton
         } else {
             if Device.isIpad {
-                navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.cancel, style: .plain, target: self, action: #selector(searchBarCancelButtonClicked(_:)))
-                navigationItem.rightBarButtonItem?.tintColor = ColorConstants.darcBlueColor
+                navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    title: TextConstants.cancel,
+                    tintColor: ColorConstants.darcBlueColor,
+                    target: self,
+                    selector: #selector(searchBarCancelButtonClicked(_:)))
             } else {
                 navigationItem.rightBarButtonItem = nil
             }
