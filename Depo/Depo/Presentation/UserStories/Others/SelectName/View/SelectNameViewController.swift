@@ -9,13 +9,11 @@
 import UIKit
 
 class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextFieldDelegate {
-
+    
     var output: SelectNameViewOutput!
     
-    let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
-    
     @IBOutlet weak var textField: UITextField!
-
+    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,18 +21,10 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
         navigationItem.title = output.getTitle()
         textField.placeholder = output.getPlaceholderText()
         
-        let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
-        rightButton.setTitle(output.getNextButtonText(), for: .normal)
-        rightButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        rightButton.addTarget(self, action: #selector(onNextButton), for: .touchUpInside)
-        rightButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        let barButton = UIBarButtonItem(customView: rightButton)
-        navigationItem.rightBarButtonItem = barButton
-        
-        cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)
-        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: output.getNextButtonText(),
+                                                            font: .TurkcellSaturaRegFont(size: 19.0),
+                                                            target: self,
+                                                            selector: #selector(onNextButton))
         
         output.viewIsReady()
     }
@@ -44,9 +34,10 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
         
         navigationBarWithGradientStyle()
         
-        if navigationItem.leftBarButtonItem == nil && navigationController?.viewControllers.count == 1 {
-            let barButtonLeft = UIBarButtonItem(customView: cancelButton)
-            navigationItem.leftBarButtonItem = barButtonLeft
+        if navigationItem.leftBarButtonItem == nil, navigationController?.viewControllers.count == 1 {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.selectFolderCancelButton,
+                                                               target: self,
+                                                               selector: #selector(onCancelButton))
         }
     }
     
@@ -65,7 +56,7 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
             
         }
     }
-
+    
     // MARK: SelectNameViewInput
     func setupInitialState() {
         navigationItem.rightBarButtonItem?.isEnabled = true

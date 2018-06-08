@@ -41,7 +41,10 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
         
         emailTextField.becomeFirstResponder()
         title = TextConstants.emptyEmailTitle
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.exitWhite, style: .plain, target: self, action: #selector(actionCloseButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.exitWhite,
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(actionCloseButton))
     }
     
     override func viewWillAppear(_ animated: Bool) {

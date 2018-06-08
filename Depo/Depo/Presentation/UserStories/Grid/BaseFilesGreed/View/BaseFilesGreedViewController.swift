@@ -79,21 +79,15 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         refresher.addTarget(self, action: #selector(loadData), for: .valueChanged)
         collectionView!.addSubview(refresher)
         
-        let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
-        cancelButton.addTarget(self, action: #selector(onCancelSelectionButton), for: .touchUpInside)
-        cancelButton.setTitle(TextConstants.cancelSelectionButtonTitle, for: .normal)
-        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        cancelButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 19)
-        
-        cancelSelectionButton = UIBarButtonItem(customView: cancelButton)
-        
-        let cancelBackButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
-        cancelBackButton.addTarget(self, action: #selector(onBackButton), for: .touchUpInside)
-        cancelBackButton.setTitle(TextConstants.cancelSelectionButtonTitle, for: .normal)
-        cancelBackButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        cancelBackButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 19)
-        
-        backAsCancelBarButton = UIBarButtonItem(customView: cancelBackButton)
+        cancelSelectionButton = UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
+                                                font: .TurkcellSaturaDemFont(size: 19.0),
+                                                target: self,
+                                                selector: #selector(onCancelSelectionButton))
+
+        backAsCancelBarButton = UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
+                                                font: .TurkcellSaturaDemFont(size: 19.0),
+                                                target: self,
+                                                selector: #selector(onBackButton))
         
         noFilesLabel.text = TextConstants.photosVideosViewNoPhotoTitleText
         noFilesLabel.textColor = ColorConstants.textGrayColor
@@ -175,13 +169,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func configurateFreeAppSpaceActions(deleteAction: @escaping VoidHandler) {
-        let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { _ in
+        let delete = NavBarWithAction(navItem: NavigationBarList().delete) { _ in
             deleteAction()
-        })
+        }
         
-        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
+        let more = NavBarWithAction(navItem: NavigationBarList().more) { [weak self] _ in
             self?.output.moreActionsPressed(sender: NavigationBarList().more)
-        })
+        }
         
         navBarConfigurator.configure(right: [more, delete], left: [])
         

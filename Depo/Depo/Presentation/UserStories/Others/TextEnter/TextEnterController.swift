@@ -83,9 +83,8 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
         tableView.delegate = dataSource
         
         let doneButton = UIBarButtonItem(title: TextConstants.chooseTitle,
-                                         style: .plain,
                                          target: self,
-                                         action: #selector(donePicker))
+                                         selector: #selector(donePicker))
         let pickerToolBar = barButtonItemsWithRitht(button: doneButton)
         pickerContainer.addSubview(pickerToolBar)
         pickerView.dataSource = dataSource

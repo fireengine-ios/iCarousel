@@ -31,9 +31,9 @@ final class PVViewerController: BaseViewController, NibInit {
             automaticallyAdjustsScrollViewInsets = false
         }
          
-        navigationItem.leftBarButtonItem = BackButtonItem(action: { [weak self] in 
+        navigationItem.leftBarButtonItem = BackButtonItem { [weak self] in
             self?.hideView()
-        })
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
