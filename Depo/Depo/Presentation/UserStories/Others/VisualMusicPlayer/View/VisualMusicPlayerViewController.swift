@@ -83,11 +83,14 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
     }
     
     private func setupNavigationBar() {
-        navigationItem.leftBarButtonItem = BackButtonItem(action: { [weak self] in
+        navigationItem.leftBarButtonItem = BackButtonItem { [weak self] in
             self?.dismiss(animated: true, completion: nil)
-        })
+        }
         
-        let moreButton = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(actionMoreButton(_:)))
+        let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"),
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(actionMoreButton(_:)))
         moreButton.tintColor = UIColor.white
         navigationItem.rightBarButtonItem = moreButton
     }

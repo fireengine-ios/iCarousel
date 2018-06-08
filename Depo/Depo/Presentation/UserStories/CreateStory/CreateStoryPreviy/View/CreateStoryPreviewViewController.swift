@@ -48,13 +48,10 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     override func viewDidLoad() {
         super.viewDidLoad()
         blackNavigationBarStyle()
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
-        button.setTitle(TextConstants.createStorySave, for: .normal)
-        button.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        button.addTarget(self, action: #selector(onSaveButton), for: .touchUpInside)
-        let barButton = UIBarButtonItem(customView: button)
         
-        navigationItem.rightBarButtonItem = barButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.createStorySave,
+                                                            target: self,
+                                                            selector: #selector(onSaveButton))
         
         output.viewIsReady()
     }

@@ -10,19 +10,13 @@ import UIKit
 
 class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
     
-    let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
-    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)
-        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
-        
+
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(onLocalFilesHaveBeenLoaded),
                                                name: Notification.Name.allLocalMediaItemsHaveBeenLoaded,
@@ -38,8 +32,9 @@ class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
         visibleNavigationBarStyle()
         setNavigationTitle(title: mainTitle)
 
-        let barButtonLeft = UIBarButtonItem(customView: cancelButton)
-        navigationItem.leftBarButtonItem = barButtonLeft
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.selectFolderCancelButton,
+                                                           target: self,
+                                                           selector: #selector(onCancelButton))
         navigationItem.rightBarButtonItems = nil
     }
     

@@ -66,13 +66,15 @@ final class PackagesViewController: BaseViewController {
     
     
     private func setupPolicy() {
-        let attributedString = NSMutableAttributedString(string: TextConstants.packagesPolicyHeader,
-                                                         attributes: [.foregroundColor: ColorConstants.textGrayColor,
-                                                                      .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)])
+        let attributedString = NSMutableAttributedString(
+            string: TextConstants.packagesPolicyHeader,
+            attributes: [.foregroundColor: ColorConstants.textGrayColor,
+                         .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)])
         
-        let policyAttributedString = NSMutableAttributedString(string: "\n\n" + TextConstants.packagesPolicyText,
-                                                               attributes: [.foregroundColor: ColorConstants.textGrayColor,
-                                                                            .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
+        let policyAttributedString = NSMutableAttributedString(
+            string: "\n\n" + TextConstants.packagesPolicyText,
+            attributes: [.foregroundColor: ColorConstants.textGrayColor,
+                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
         attributedString.append(policyAttributedString)
         
         policyTextView.attributedText = attributedString
@@ -85,10 +87,9 @@ final class PackagesViewController: BaseViewController {
 
     func showRestoreButton() {
         //IF THE USER NON CELL USER
-        let moreButton = UIBarButtonItem(image: UIImage(named: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
+        let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
         moreButton.tintColor = UIColor.white
         navigationItem.rightBarButtonItem = moreButton
-
     }
     
     func showInAppPolicy() {

@@ -9,10 +9,6 @@
 import UIKit
 
 class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewController {
-    
-    let cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
-    let selectButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
-    
     @IBOutlet weak var segmentControll: UISegmentedControl!
     @IBOutlet weak var topIOS10Contraint: NSLayoutConstraint!
     
@@ -39,23 +35,14 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
     override func configureNavBarActions(isSelecting: Bool = false) {
         navigationBarWithGradientStyle()
         setTitle(withString: TextConstants.createStoryAudioSelected)
-        
-        navigationItem.leftBarButtonItem = nil
-        navigationItem.rightBarButtonItems = nil
-        
-        cancelButton.setTitle(TextConstants.selectFolderCancelButton, for: .normal)
-        cancelButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        cancelButton.addTarget(self, action: #selector(onCancelButton), for: .touchUpInside)
-        
-        selectButton.setTitle(TextConstants.createStorySelectAudioButton, for: .normal)
-        selectButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        selectButton.addTarget(self, action: #selector(onNextButton), for: .touchUpInside)
-        
-        let barButtonRight = UIBarButtonItem(customView: selectButton)
-        let barButtonLeft = UIBarButtonItem(customView: cancelButton)
-        
-        navigationItem.rightBarButtonItem = barButtonRight
-        navigationItem.leftBarButtonItem = barButtonLeft
+                
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.createStorySelectAudioButton,
+                                                            target: self,
+                                                            selector: #selector(onNextButton))
+
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.selectFolderCancelButton,
+                                                           target: self,
+                                                           selector: #selector(onCancelButton))
     }
     
     @objc func onNextButton() {

@@ -64,11 +64,9 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
 
         
         let doneButton = UIBarButtonItem(title: TextConstants.chooseTitle,
-                                         style: .plain,
                                          target: self,
-                                         action: #selector(donePicker(sender:)))
+                                         selector: #selector(donePicker(sender:)))
         let pickerToolBar = barButtonItemsWithRitht(button: doneButton)
-        
         
         pickerContainer.addSubview(pickerToolBar)
 
