@@ -66,6 +66,7 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
         let doneButton = UIBarButtonItem(title: TextConstants.chooseTitle,
                                          target: self,
                                          selector: #selector(donePicker(sender:)))
+        doneButton.tintColor = UIColor.blue
         let pickerToolBar = barButtonItemsWithRitht(button: doneButton)
         
         pickerContainer.addSubview(pickerToolBar)
