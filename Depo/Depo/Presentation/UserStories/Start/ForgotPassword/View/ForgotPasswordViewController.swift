@@ -152,6 +152,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput, UIT
     
     func showCapcha() {
         captchaModuleView.refreshCapthcha()
+        captchaModuleView.inputTextField.text = ""
 //        UIView.animate(withDuration: NumericConstants.animationDuration) {
 //            let dyTop = CGFloat(100.0)
 //            var dyBottom = CGFloat(0.0)
