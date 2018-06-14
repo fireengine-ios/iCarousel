@@ -109,15 +109,15 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         editButton.isHidden = false
         var string = ""
         if let name_ = userInfo.name {
-            string = string + name_
+            string = name_
         }
-        
-        if let surName_ = userInfo.surname {
-            if (string.count > 0) {
-                string = string + " "
-            }
-            string = string + surName_
-        }
+///changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
+//        if let surName_ = userInfo.surname {
+//            if !string.isEmpty {
+//                string = string + " "
+//            }
+//            string = string + surName_
+//        }
         userNameLabel.text = string
         
         userEmailLabel.text = userInfo.email
