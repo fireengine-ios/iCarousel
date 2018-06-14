@@ -125,9 +125,6 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             
             switch wrappered.fileType {
             case .folder:
-                guard Device.locale == "en" else {
-                    break
-                }
                 if let itemCount = wrappered.childCount {
                     detailsLabelText = String(format: TextConstants.folderItemsText, itemCount)
                 } else {

@@ -424,7 +424,7 @@
 "Turkcell Password" = "Turkcell Пароль";
 "Login Settings" = "Налаштування входу";
 "Folder is Empty" = "Папка порожня";
-"Folder Items" = "Елементи";
+"Folder Items" = "Файлов %d";
 "Contact Backup" = "Зв'язатися з резервною копією";
 "Your last contact update was %@ months ago!" = "Ваше останнє оновлення контактів було %@ місяців тому!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "З тих пір, як ви останній раз оновлювали свої контакти, %@ місяць було оновлено, щоб ніколи не втрачати жодного з ваших контактів.";

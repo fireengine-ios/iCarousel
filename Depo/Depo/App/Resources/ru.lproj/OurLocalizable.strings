@@ -426,7 +426,7 @@
 "Turkcell Password" = "Пароль Туркселл";
 "Login Settings" = "Настройки входа";
 "Folder is Empty" = "Папка пуста";
-"Folder Items" = "Элементы";
+"Folder Items" = "Файлов %d";
 "Contact Backup" = "Создать резервную копию контактов";
 "Your last contact update was %@ months ago!" = "Вы обновляли данные о контактах %d месяца(-ев) назад!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Прошло %d месяца(-ев) с момента, когда вы последний раз обновляли контакты. Обновите их сейчас, чтобы никогда не потерять.";

@@ -424,7 +424,7 @@
 "Turkcell Password" = "Parola Turkcell";
 "Login Settings" = "Setări de conectare";
 "Folder is Empty" = "Mapa e goală";
-"Folder Items" = "Articole";
+"Folder Items" = "Articole %d";
 "Contact Backup" = "Copie de rezervă a contactelor";
 "Your last contact update was %@ months ago!" = "Ultima actualizare a copiei de rezervă a contactelor a fost acum %@ luni!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Au trecut %@ luni de când ai actualizat ultima dată contactele tale. Actualizează-le acum pentru a nu le mai pierde niciodată. ";
