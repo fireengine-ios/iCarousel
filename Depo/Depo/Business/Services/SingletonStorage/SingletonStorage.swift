@@ -19,14 +19,14 @@ class SingletonStorage {
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
     
-    func getAccountInfoForUser(success:@escaping (AccountInfoResponse) -> Void, fail: @escaping (ErrorResponse) -> Void ) {
-        if let info = accountInfo {
+    func getAccountInfoForUser(forceReload: Bool = false, success:@escaping (AccountInfoResponse) -> Void, fail: @escaping (ErrorResponse) -> Void ) {
+        if let info = accountInfo, !forceReload {
             success(info)
         } else {
             AccountService().info(success: { accountInfoResponce in
                 if let resp = accountInfoResponce as? AccountInfoResponse {
                     self.accountInfo = resp
-                    //remove user photo from cache on start application
+                    ///remove user photo from cache on start application
                     ImageDownloder().removeImageFromCache(url: resp.urlForPhoto, completion: {
                         DispatchQueue.toMain {
                             success(resp)

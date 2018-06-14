@@ -26,33 +26,12 @@ class UserProfileInteractor: UserProfileInteractorInput {
         output.configurateUserInfo(userInfo: userInfo_)
     }
     
-    private func isNameChanged(name: String) -> Bool {
-        let array = name.components(separatedBy: " ")
-        let name_ = array[0]
-        var surname_ = ""
-        if (array.count > 1) {
-            surname_ = array [1]
-        }
-        
-        return (name_ != userInfo?.name) || (surname_ != userInfo?.surname)
-    }
-    
     private func isEmailChanged(email: String) -> Bool {
         return (email != userInfo?.email)
     }
     
     private func isPhoneChanged(phone: String) -> Bool {
         return (phone != userInfo?.phoneNumber)
-    }
-    
-    private func getSepareteName(nameString: String) -> (name: String, surName: String) {
-        let array = nameString.components(separatedBy: " ")
-        let name_ = array[0]
-        var surname_ = ""
-        if (array.count > 1) {
-            surname_ = array [1]
-        }
-        return (name_, surname_)
     }
     
     func changeTo(name: String, email: String, number: String) {
@@ -68,9 +47,9 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     func updateNameIfNeed(name: String, email: String, number: String) {
-        if (isNameChanged(name: name)) {
-            let names = getSepareteName(nameString: name)
-            let parameters = UserNameParameters(userName: names.name, userSurName: names.surName)
+        if name != userInfo?.name {
+///changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
+            let parameters = UserNameParameters(userName: name, userSurName: "")
             AccountService().updateUserProfile(parameters: parameters,
                                                success: {[weak self] responce in
                 self?.userInfo?.name = name

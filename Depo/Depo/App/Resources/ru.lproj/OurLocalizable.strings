@@ -5,7 +5,7 @@
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Удаление альбома не повлечёт за собой удаление из lifebox файлов, хранящихся в нём. Файлы останутся доступны на вкладках \"Фото\" и \"Видео\".\nВы уверены, что хотите удалить альбом?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Удаление альбома приведёт к удалению из lifebox файлов, хранящихся в нём. После этого вы не сможете получить к ним доступ.\nВы уверены, что хотите удалить альбом?";
 "Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Выбранные элементы будут удалены из хранилища lifebox. После этого вы не сможете получить к ним доступ.";
-"Purchase" = "Покупки";
+"Purchase" = "Купить";
 "Packages" = "Пакеты";
 "Verification code is blocked.\nPlease request a new code" = "Код подтверждения заблокирован. \nПожалуйста, запросите новый.";
 "Verification code is invalid.\nPlease try again" = "Код подтверждения не действителен. \nПожалуйста, попробуйте снова.";
@@ -111,7 +111,7 @@
 "Back Up" = "Резервное копирование";
 "Add to album" = "Добавить в альбом";
 "Remove from Favorites" = "Удалить из избранного";
-"Remove" = "Удалить";
+"Remove" = "Удалить только альбом";
 "Add to Favorites" = "Добавить в избранное";
 "Copy" = "Копиовать";
 "Create a Story" = "Новая история";
@@ -140,8 +140,8 @@
 "Download is complete" = "Скачивание завершено";
 "Deleting is complete" = "Удаление завершено";
 "Downloading files" = "Скачивание файлов";
-"Uploading files over" = "Загрузка файлов через %@";
-"Syncing files over" = "Синхронизация файлов через %@";
+"Uploading files over" = "Загрузка через %@";
+"Syncing files over" = "Синхронизация через %@";
 "(%ld of %ld)" = "(%ld of %ld)";
 "You need to specify your language preference so that we can serve you better." = "Пожалуйста, укажите предпочтительный для вас язык общения.";
 "Please type your message" = "Нельзя отправить пустой отзыв";
@@ -158,6 +158,7 @@
 /*Fuzzy*/
 "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Пожалуйста, не удаляйте следующую информацию. Данная информация будет использована для отправки сообщения о проблеме:\n\nВерсия приложения: %@\nНомер телефона: %@\nОператор: %@\nУстройство: %@\nОперационная система: %@\nЯзык: %@\nПредпочтительный язык: %@\nСтатус сети: %@\nОбщий объём хранилища: %lld\nИспользованный объём хранилища: %lld\nПакеты: %@";
 "Upload Photos" = "Загрузить фотографии";
+"Upload Photos" = "Загрузить фото";
 "Add" = "Добавить";
 "Albums" = "Альбомы";
 "Sorry, but play list name should not be empty" = "Извините, название плейлиста не должно быть пустым";
@@ -268,6 +269,7 @@
 "Enable photo permissions in settings" = "Разрешить доступ к фото в настройках";
 "Start adding your photos" = "Добавить фото или видео";
 "You don’t have anything on your photo roll." = "У вас еще нет фото или видео в Lifebox.";
+"You don’t have anything on your photo roll." = "У вас еще нет фото или видео в lifebox.";
 "View All Pictures" = "Посмотреть все картинки";
 "View All My Stream" = "Посмотреть все потоки";
 "%d Photos" = " фото ";
@@ -416,7 +418,7 @@
 "%%%d Backed up…" = "Резервное копирование...";
 "Restored %d Contacts" = "Восстановлено %d контактов";
 "%d Duplicated Contacts Deleted" = "%d дубликатов удалено";
-"You have %d numbers on your contacts backup." = "У вас %d контакта(-ов) в lifebox";
+"You have %d numbers on your contacts backup." = "У вас %d контакт(-а, -ов) в lifebox";
 "This contact will be deleted from your contacts." = "Данный контакт будет удалён из вашего списка контактов.";
 "Upgrade" = "Улучшить";
 "Creation date" = "Дата создания";
@@ -430,6 +432,10 @@
 "Contact Backup" = "Резервная копию контактов";
 "Your last contact update was %@ months ago!" = "Вы обновляли данные о контактах %d месяца(-ев) назад!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Прошло %d месяца(-ев) с момента, когда вы последний раз обновляли контакты. Обновите их сейчас, чтобы никогда не потерять.";
+"Folder Items" = "Файлов: %d";
+"Contact Backup" = "Резервная копия контактов";
+"Your last contact update was %@ months ago!" = "Вы обновляли данные о контактах %d месяц(-а, -ев) назад!";
+"It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Прошло %d месяц(-а, -ев) с момента, когда вы последний раз обновляли контакты. Обновите их сейчас, чтобы никогда не потерять.";
 "Your contact list looks empty" = "Ваш список контактов пуст.";
 "You don’t have any contacts in your profile, backup your contacts now!" = "В вашем профиле нет контактов. Создайте резервную копию сейчас!";
 "Backup" = "Копировать";
@@ -438,7 +444,7 @@
 "You are using %f of your disk space! It’s a great time to expand your storage." = "Вы использовали %d%% пространства lifebox!  Подходящее время, чтобы его увеличить.";
 "You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "У вас нет загруженных файлов. Начните загружать ваши воспоминания в lifebox!";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "Вы использовали %d%% памяти на вашем устройстве! Подходящее время, чтобы освободить место.";
-"Upload Files" = "Загруженные файлы";
+"Upload Files" = "Добавить файлы";
 "Free Up Space" = "Освободить место";
 "Collage" = "Коллаж";
 "We have created a collage from your photos!" = "Мы создали коллаж для вас!";
@@ -508,7 +514,7 @@
 "Photos and videos waiting to be synced" = "Фото и видео ожидают синхронизации";
 "Wi-Fi and Cellular" = "Wi-Fi и мобильный Интернет";
 "Video album is automatically created, therefore cannot be deleted" = "Видео альбом создан автоматически и поэтому не может быть удалён.";
-"You cannot upload any video to auto generated video album" = "Вы не можете загрузить видео в альбом, который создан автоматически.";
+"You cannot upload any video to auto generated video album" = "Вы не можете загрузить файл в альбом, который создан автоматически.";
 "You have no any files" = "У вас нет файлов";
 "You don’t have any albums on your Lifebox yet." = "У вас нет ещё альбомов в lifebox.";
 "Start creating albums" = "Создать альбом";
@@ -528,8 +534,8 @@
 "You need to confirm the User Agreement to continue." = "Вам необходимо принять пользовательское соглашение, чтобы продолжить.";
 "PhotosAndViedos" = "Фото и видео";
 "Are these the same person?" = "Это один и тот же человек?";
-"We couldn't find anybody on your Lifebox yet." = "Мы никого не нашли в вашем lifebox.";
-"Grouping of your photos will take some time. Please wait and then check the albums." = "Группировки ваших фото займёт некоторое время. Пожалуйста, подождите и проверьте альбомы.";
+"We couldn't find anybody on your Lifebox yet." = "Мы пока не смогли найти ни одного человека в вашем lifebox.";
+"Grouping of your photos will take some time. Please wait and then check the albums." = "Группировка ваших фото займёт некоторое время. Пожалуйста, подождите и проверьте альбомы.";
 "Never" = "Никогда";
 "Approve" = "Подтвердить";
 "infomationEmptyEmail" = "Наличие электронного адреса в вашей учётной записи - это самый лёгкий и надёжный способ сохранить вашу учётную запись в безопасности и иметь к ней доступ. Пожалуйста, добавьте ваш адрес электронной почты.";
@@ -537,7 +543,7 @@
 "Importing files" = "Загрузка файлов";
 "Dropbox authorisation error" = "Ошибка авторизации через Dropbox";
 "dropboxLastUpdatedFile" = "Обновлено последний раз %@ - %d файл";
-"dropboxLastUpdatedFiles" = "Обновлено последний раз %@ - %d файлов";
+"dropboxLastUpdatedFiles" = "Обновлено последний раз %@ - %d файл(-а, -ов)";
 "PackagesPolicyHeader" = "Автоматическое возобновление подписки на in-app покупку:";
 "PackagesPolicyText" = "Подписка продлевается каждый месяц.\nПри подтверждении покупки оплата взимается с вашей учётной записи iTunes.\nПодписка продлевается автоматически, если функция автоматического продления не выключена по крайней мере за 24 часа до окончания текущего периода.\nЗа продление подписки с вашего счёта будут списаны средства в течение 24-х часов до окончания текущего периода. Плата отображается как плата на экране покупок в приложении.\nПользователь может управлять своими подписками, после совершения покупки функция автоматического продления подписки может быть выключена в меню \"Настройки» учётной записи пользователя.\nЛюбая неиспользованная часть подписки в течение бесплатного пробного периода, если таковая имеется, будет прервана, как только пользователь оформит подписку, где это применимо.\nПолитика конфиденциальности: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik";
 "Missing Dates" = "Дата отсутствует";
@@ -557,7 +563,7 @@
 "You have reached your lifebox memory limit" = "Вы достигли лимита памяти в вашем lifebox.";
 "Error occurred while accessing your contacts.\nPlease check your settings." = "Возникла ошибка при получении доступа к вашим контактам.\nПожалуйста, проверьте ваши настройки.";
 "Manage Contacts" = "Управление контактами";
-"Import fearture is totally free of charge and does not affect your internet package" = "Функция импорта является бесплатной и не повлияет на трафик из вашего интернет-пакета";
+"Import fearture is totally free of charge and does not affect your internet package" = "Функция импорта является бесплатной и не влияет на расход трафика из вашего интернет-пакета";
 "Your last backup was on %@" = "Последняя резервная копия: %@";
 "Contacts Sync" = "Синхронизация контактов";
 "Sort By" = "Сортировать";
@@ -635,5 +641,6 @@
 "This edited photo will be saved as a new photo in your device gallery" = "Отредактированное фото будет сохранено в виде нового файла в галерее вашего устройства.";
 "We couldn’t find any place on your Lifebox yet." = "Мы пока не смогли найти ни одного места в вашем lifebox.";
 "*Average figure. Total number of documents depends on the size of each document." = "* Среднее значение. Общее количество документов зависит от размера каждого документа.";
+"*Average figure. Total number of documents depends on the size of each document." = "* Среднее значение. Общее количество файлов зависит от размера каждого файла.";
 "We couldn’t find anything on your Lifebox yet." = "Мы пока не смогли найти ни одного предмета в вашем lifebox.";
 "Expiration Date: %@" = "Срок истекает: %@";

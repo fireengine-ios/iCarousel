@@ -21,6 +21,7 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     var cells: [BaseCellModel] = []
     var gsmModels: [GSMCodeModel] = []
     var currentGSMCode = CoreTelephonyService().callingCountryCode()
+    var currentPhoneNumber = ""
     
     func setupCells(withModels models: [BaseCellModel]) {
         
@@ -103,7 +104,7 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
             if let cell = cell as? GSMUserInputCell {
                 cell.delegate = self
                 cell.setupGSMCode(code: currentGSMCode)
-                
+                cell.inputTextField?.text = currentPhoneNumber //model.inputText
                 #if DEBUG
                     cell.inputTextField?.text = "259092538"
                     cell.gsmCountryCodeLabel.text = "+375"
@@ -131,10 +132,11 @@ extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate, 
     }
     
     func phoneNumberChanged(toNumber number: String) {
-        let phoneNumber = number.count > 0 ? number : TextConstants.registrationCellPlaceholderPhone
-        let oldPhoneModel = cells[0]
-        let newPhoneModel = BaseCellModel(withTitle: oldPhoneModel.title, initialText: phoneNumber)
-        cells[0] = newPhoneModel
+//        let phoneNumber = number.count > 0 ? number : TextConstants.registrationCellPlaceholderPhone
+//        let oldPhoneModel = cells[0]
+//        let newPhoneModel = BaseCellModel(withTitle: oldPhoneModel.title, initialText: phoneNumber)
+//        cells[0] = newPhoneModel
+        currentPhoneNumber = number
     }
     
     func textFinishedEditing(withCell cell: ProtoInputTextCell) {

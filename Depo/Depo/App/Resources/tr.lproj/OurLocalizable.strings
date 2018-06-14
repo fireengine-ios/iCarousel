@@ -430,7 +430,7 @@
 "Turkcell Password" = "Turkcell Şifre";
 "Login Settings" = "Uygulamaya Giriş Ayarları";
 "Folder is Empty" = "Klasör Boş";
-"Folder Items" = "Öğeler";
+"Folder Items" = "%d Öğeler";
 "Contact Backup" = "Kontak Yedekleme";
 "Your last contact update was %@ months ago!" = "Konraklarını en son%@ ay önce yedekledin!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Kontak listenizi en son güncellediğiniz tarihten bu yana %@ ay oldu. Kontaklarını hiçbir zaman kaybetmemek için şimdi yeniden yedekle.";
