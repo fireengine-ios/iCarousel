@@ -88,6 +88,10 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     
     func updatePhoto(image: UIImage) {
         userIconImageView.image = image
+        if let url = userInfo?.urlForPhoto {
+            SDImageCache.shared().removeImage(forKey: url.absoluteString, withCompletion: nil)
+        }
+        
         dismissLoadingSpinner()
         uplaodLabel.isHidden = true
     }
