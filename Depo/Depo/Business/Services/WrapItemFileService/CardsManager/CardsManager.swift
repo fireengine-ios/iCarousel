@@ -259,7 +259,7 @@ class CardsManager: NSObject {
             stopOperationWithType(type: .freeAppSpace)
             stopOperationWithType(type: .autoUploadIsOff)
         case .upload:
-            stopOperationWithType(type: .prepareToAutoSync)
+//            stopOperationWithType(type: .prepareToAutoSync)
             stopOperationWithType(type: .waitingForWiFi)
             stopOperationWithType(type: .freeAppSpaceLocalWarning)
             stopOperationWithType(type: .freeAppSpace)
