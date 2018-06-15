@@ -68,6 +68,12 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
         }
     }
     
+    override func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
+        super.showNoFilesWith(text: text, image: image, createFilesButtonText: createFilesButtonText, needHideTopBar: needHideTopBar)
+        
+        startCreatingFilesButton.isHidden = true
+    }
+    
     func getNavigationController() -> UINavigationController? {
         return navigationController
     }
