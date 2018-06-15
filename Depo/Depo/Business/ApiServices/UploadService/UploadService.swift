@@ -119,6 +119,10 @@ final class UploadService: BaseRequestService {
                 self.uploadFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
                     self?.clearUploadCounters()
                     self?.hideUploadCardIfNeeded()
+                    if !AutoSyncDataStorage().settings.isAutoSyncEnabled {
+                        CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
+                        return
+                    }
                     success()
                     }, fail: { [weak self] errorResponse in
                         self?.clearUploadCounters()
