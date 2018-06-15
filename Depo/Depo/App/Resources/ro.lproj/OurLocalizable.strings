@@ -635,3 +635,4 @@
 "*Average figure. Total number of documents depends on the size of each document." = "*Cifra medie. Numărul total de documente depinde de dimensiunea fiecărui document.";
 "We couldn’t find anything on your Lifebox yet." = "Încă nu am găsit nimic în lifebox-ul tău.";
 "Expiration Date: %@" = "Data expirării: %@";
+"Failed to get albums" = "Failed to get albums";

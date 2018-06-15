@@ -39,7 +39,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
             log.debug("AlbumsInteractor getAllItems AlbumService allAlbums fail")
 
             DispatchQueue.main.async {
-                self?.output.asyncOperationFail(errorMessage: "Failed to get albums")
+                self?.output.asyncOperationFail(errorMessage: TextConstants.errorErrorToGetAlbums)
             }
         })
     }
