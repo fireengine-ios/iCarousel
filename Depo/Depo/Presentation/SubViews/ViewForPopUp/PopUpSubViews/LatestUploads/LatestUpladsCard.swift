@@ -103,8 +103,14 @@ class LatestUpladsCard: BaseView {
         let router = RouterVC()
         let controller = router.vcActivityTimeline
         router.pushViewController(viewController: controller)
+        hideTabBar()
     }
 
+    private func hideTabBar() {
+         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationHidePlusTabBar), object: nil, userInfo: nil)
+         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar), object: nil, userInfo: nil)
+    }
+    
     @IBAction func onViewAllPhotosButton() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen), object: nil, userInfo: nil)
     }
