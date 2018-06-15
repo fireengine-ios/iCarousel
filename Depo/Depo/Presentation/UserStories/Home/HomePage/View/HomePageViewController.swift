@@ -172,12 +172,12 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
         switch type {
         case .homePageIcon:
-            let buttonBounds = controller.boundsForTabAtIndex(index: 0)
-            frame = controller.tabBar.convert(buttonBounds, to: controller.contentView)
+            let frameBounds = controller.frameForTabAtIndex(index: 0)
+            frame = controller.tabBar.convert(frameBounds, to: controller.contentView)
             completion(frame)
         case .homePageGeneral:
             if let topView = topView {
-                let topViewFrame = topView.convert(topView.bounds, to: controller.contentView)
+                let topViewFrame = topView.convert(topView.frame, to: controller.contentView)
                 frame = CGRect(x: 0, y: topViewFrame.maxY, width: topViewFrame.width, height: collectionView.frame.height - topViewFrame.height)
                 completion(frame)
             }
