@@ -126,7 +126,6 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             switch wrappered.fileType {
             case .folder:
                 if let itemCount = wrappered.childCount {
-                    
                     detailsLabelText = String(format: TextConstants.folderItemsText, itemCount)
                 } else {
                     detailsLabelText = String(format: TextConstants.folderItemsText, 0)

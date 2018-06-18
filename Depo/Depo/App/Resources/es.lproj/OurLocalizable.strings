@@ -424,7 +424,7 @@
 "Turkcell Password" = "Contraseña de Turkcell";
 "Login Settings" = "Configuración de acceso";
 "Folder is Empty" = "La carpeta está vacía";
-"Folder Items" = "Elementos";
+"Folder Items" = "Elementos %d";
 "Contact Backup" = "Copia de seguridad de contactos";
 "Your last contact update was %@ months ago!" = "¡Su última actualización de contacto fue hace %@ meses!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Han pasado% @ meses desde la última vez que actualizó sus contactos, realice la actualización ya para no perder ninguno de sus contactos.";

@@ -20,7 +20,8 @@ class UserInfoSubViewInteractor: UserInfoSubViewInteractorInput {
         group.enter()
         group.enter()
         
-        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] userInfo in
+        ///now we always ask for most recent info from backend
+        SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: { [weak self] userInfo in
             self?.userInfoResponse = userInfo
             DispatchQueue.toMain {
                 self?.output.setUserInfo(userInfo: userInfo)
