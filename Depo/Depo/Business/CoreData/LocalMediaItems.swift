@@ -51,6 +51,7 @@ extension CoreDataStack {
     
     func remove(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
         removeLocalMediaItems(with: localMediaItems.map { $0.localIdentifier }, completion: completion)
+        
     }
 
     func insertFromGallery(completion: VoidHandler?) {
@@ -192,16 +193,12 @@ extension CoreDataStack {
             let items = self.executeRequest(predicate: predicate, context: context)
             
             
-            items.forEach { context.delete($0) }
-            let deletedItems = items.map{ WrapData(mediaItem: $0) }
-            ItemOperationManager.default.deleteItems(items: deletedItems)
-//            Masha [3:36 PM]
-//            теперь синхронизированные фотки пропадают при удалении фоток с девайса
-//            
-//            после рефреша - появляются
-//            и это не только фриапа касается
-//            если просто удалить фотку из галереи - та же фигня
             
+            let deletedItems = items.map{ WrapData(mediaItem: $0) }
+            LocalMediaStorage.default.assetsCache.remove(identifiers: assetIdList)
+            ItemOperationManager.default.deleteItems(items: deletedItems)
+            items.forEach { context.delete($0) }
+
             self.saveDataForContext(context: context, savedCallBack: { [weak self] in
                 ///Appearantly after recovery local ID may change, so temporary soloution is to check all files all over. and in the future chenge DataBase behavior heavily
                 let assetsList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
