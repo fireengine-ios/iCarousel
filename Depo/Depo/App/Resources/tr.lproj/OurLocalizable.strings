@@ -643,3 +643,4 @@
 "*Average figure. Total number of documents depends on the size of each document." = "*Ortalama rakam. Belgelerin toplam sayısı her belgenin büyüklüğüne bağlıdır.";
 "We couldn’t find anything on your Lifebox yet." = "Henüz bir nesne bulamadık";
 "Expiration Date: %@" = "Bitiş Tarihi: %@";
+"Failed to get albums" = "Failed to get albums";

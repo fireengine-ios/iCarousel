@@ -180,6 +180,7 @@ class SyncServiceManager {
                     (reachability.connection == .cellular && videoOption == .wifiAndCellular)
                 
                 let photoServiceWaitingForWiFi = reachability.connection == .cellular && photoOption == .wifiOnly
+                //                itemsSortedToUpload if 0 then no
                 let videoServiceWaitingForWiFi = reachability.connection == .cellular && videoOption == .wifiOnly
                 
                 let shoudStopPhotoSync = !photoEnabled && !photoServiceWaitingForWiFi
@@ -331,7 +332,7 @@ extension SyncServiceManager {
         ItemOperationManager.default.syncFinished()
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
-        if hasWaitingForWiFiSync {
+        guard !hasWaitingForWiFiSync, CoreDataStack.default.inProcessAppendingLocalFiles else {
             CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
             return
         }

@@ -635,3 +635,4 @@
 "*Average figure. Total number of documents depends on the size of each document." = "*Durchschnittszahl. Die Gesamtanzahl der Dokumente hängt von der Größe jedes Dokuments ab.";
 "We couldn’t find anything on your Lifebox yet." = "Wir konnten noch keine Dinge auf Ihrem lifebox finden.";
 "Expiration Date: %@" = "Haltbarkeitsdatum: %@";
+"Failed to get albums" = "Failed to get albums";

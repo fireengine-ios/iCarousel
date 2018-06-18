@@ -424,7 +424,7 @@
 "Turkcell Password" = "Turkcell Пароль";
 "Login Settings" = "Налаштування входу";
 "Folder is Empty" = "Папка порожня";
-"Folder Items" = "файлів: %d";
+"Folder Items" = "Файлів: %d";
 "Contact Backup" = "Зв'язатися з резервною копією";
 "Your last contact update was %@ months ago!" = "Ваше останнє оновлення контактів було %@ місяців тому!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "З тих пір, як ви останній раз оновлювали свої контакти, %@ місяць було оновлено, щоб ніколи не втрачати жодного з ваших контактів.";
@@ -635,3 +635,4 @@
 "*Average figure. Total number of documents depends on the size of each document." = "Середнє значення. Загальна кількість документів залежить від розміру кожного документа.";
 "We couldn’t find anything on your Lifebox yet." = "Ми не знайшли жодних речей у вашому Lifebox. ";
 "Expiration Date: %@" = "Термін придатності: %@";
+"Failed to get albums" = "Failed to get albums";

@@ -647,3 +647,4 @@
 "*Average figure. Total number of documents depends on the size of each document." = "يعتمد العدد الإجمالي للمستندات على حجم كل منها.";
 "We couldn’t find anything on your Lifebox yet." = "لم يتم العثور بعد على أي شيء في لايف بوكس";
 "Expiration Date: %@" = "تاريخ إنتهاء الصلاحية: %@";
+"Failed to get albums" = "Failed to get albums";

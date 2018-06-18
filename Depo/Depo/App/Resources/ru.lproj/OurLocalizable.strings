@@ -644,3 +644,4 @@
 "*Average figure. Total number of documents depends on the size of each document." = "* Среднее значение. Общее количество файлов зависит от размера каждого файла.";
 "We couldn’t find anything on your Lifebox yet." = "Мы пока не смогли найти ни одного предмета в вашем lifebox.";
 "Expiration Date: %@" = "Срок истекает: %@";
+"Failed to get albums" = "Failed to get albums";
