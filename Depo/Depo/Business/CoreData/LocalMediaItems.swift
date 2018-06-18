@@ -194,7 +194,7 @@ extension CoreDataStack {
             
             items.forEach { context.delete($0) }
             let deletedItems = items.map{ WrapData(mediaItem: $0) }
-//            ItemOperationManager.default.deleteItems(items: deletedItems)
+            ItemOperationManager.default.deleteItems(items: deletedItems)
 //            Masha [3:36 PM]
 //            теперь синхронизированные фотки пропадают при удалении фоток с девайса
 //            
