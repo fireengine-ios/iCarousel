@@ -63,7 +63,7 @@ class SyncServiceManager {
         return (photoSyncService.status == .failed || videoSyncService.status == .failed)
     }
     
-    private var newItemsToAppend = [PHAsset]()
+    private var newItemsToAppend = SynchronizedArray<PHAsset>()//[PHAsset]()
     private var lastTimeNewItemsAppended: Date?
     
     
@@ -86,13 +86,13 @@ class SyncServiceManager {
         subscribeForNotifications()
         
         settings = syncSettings
-    
+        
         checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
     }
     
     func updateImmediately() {
         log.debug("SyncServiceManager updateImmediately")
-
+        
         subscribeForNotifications()
         
         lastAutoSyncTime = NSDate().timeIntervalSince1970
@@ -102,7 +102,7 @@ class SyncServiceManager {
     
     func updateInBackground() {
         log.debug("SyncServiceManager updateInBackground")
-
+        
         let time = NSDate().timeIntervalSince1970
         if time - lastAutoSyncTime > timeIntervalBetweenSyncsInBackground {
             BackgroundTaskService.shared.beginBackgroundTask()
@@ -130,11 +130,11 @@ class SyncServiceManager {
         }
         
         do {
-           try reachability.startNotifier()
+            try reachability.startNotifier()
         } catch {
             print("\(#function): can't start reachability notifier")
         }
-
+        
         reachability.whenReachable = { reachability in
             debugPrint("AUTOSYNC: is reachable")
             self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
@@ -199,7 +199,7 @@ class SyncServiceManager {
     }
     
     // MARK: Flow
-
+    
     //start to sync
     private func start(photo: Bool, video: Bool, newItems: Bool) {
         if photo || video {
@@ -269,10 +269,10 @@ extension SyncServiceManager {
     @objc private func onPhotoLibraryDidChange(notification: Notification) {
         if let phChanges = notification.userInfo {
             if let addedAssets = phChanges[PhotoLibraryChangeType.added] as? [PHAsset] {
-                newItemsToAppend.append(contentsOf: addedAssets)
+                newItemsToAppend.append(addedAssets)
             } else if let removedAssets = phChanges[PhotoLibraryChangeType.removed] as? [PHAsset] {
                 for asset in removedAssets {
-                    newItemsToAppend.remove(asset)
+                    newItemsToAppend.remove(where: {$0.localIdentifier == asset.localIdentifier})
                 }
             }
             lastTimeNewItemsAppended = Date()
@@ -313,7 +313,7 @@ extension SyncServiceManager {
             WidgetService.shared.notifyWidgetAbout(status: .executing)
             return
         }
-    
+        
         CardsManager.default.stopOperationWithType(type: .sync)
         
         ItemOperationManager.default.syncFinished()

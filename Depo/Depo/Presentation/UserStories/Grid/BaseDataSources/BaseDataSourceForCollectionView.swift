@@ -123,6 +123,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
+    private var recentlyDeletedIndexes = [IndexPath]()
     private var pageLeftOvers = [WrapData]()
     private var emptyMetaItems = [WrapData]()
     
@@ -163,6 +164,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         let containsEmptyMetaItems = !emptyMetaItems.isEmpty
         var tempoEmptyItems = [WrapData]()
         var filteredItems = [WrapData]()
+
         if needShowEmptyMetaItems {
             if let unwrapedFilters = self.originalFilters,
                 !showOnlyRemotes(filters: unwrapedFilters) {
@@ -189,7 +191,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         if tempoEmptyItems.count >= pageCompounder.pageSize {
-            delegate?.getNextItems()
+//            delegate?.getNextItems()
+//            DISPATCH QUEUE???
+            self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+            var oldSectionNumbers = 1
+            if let collectionView = collectionView {
+                oldSectionNumbers = numberOfSections(in: collectionView)
+            }
+            self.insertItems(with: ResponseResult.success(self.getIndexPathsForItems([])), emptyItems: tempoEmptyItems, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
             return
         }
         
@@ -207,11 +216,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         compoundItems(pageItems: filteredItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] response in
-            self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+            self?.insertItems(with: response, emptyItems: tempoEmptyItems, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
         })
     }
     
-    private func insertItems(with response: ResponseResult<[IndexPath]>, oldSectionNumbers: Int, containsEmptyMetaItems: Bool) {
+    func reloadLastSection() {
+        DispatchQueue.main.async {
+            let lastSection = (self.collectionView?.numberOfSections ?? 0) - 1
+            self.collectionView?.reloadSections(IndexSet(integersIn: lastSection...lastSection))
+        }
+    }
+    
+    private func insertItems(with response: ResponseResult<[IndexPath]>, emptyItems: [Item], oldSectionNumbers: Int, containsEmptyMetaItems: Bool) {
         guard let collectionView = collectionView else {
             return
         }
@@ -224,12 +240,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         self.collectionView?.reloadData()
                     }
                 }
-                self.delegate?.filesAppendedAndSorted()
                 self.isLocalFilesRequested = false
+                self.delegate?.filesAppendedAndSorted()
                 self.isDropedData = false
             } else {
                 let newSectionNumbers = self.numberOfSections(in: collectionView)
-                
+                let emptyItemsArray = getIndexPathsForItems(emptyItems)
                 var newSections: IndexSet?
                 if newSectionNumbers > oldSectionNumbers {
                     let needMoveSectionWithEmptyMetaItems = self.needShowEmptyMetaItems && self.currentSortType == .metaDataTimeUp && containsEmptyMetaItems
@@ -243,22 +259,32 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 DispatchQueue.main.async {
                     collectionView.collectionViewLayout.invalidateLayout()
                     collectionView.performBatchUpdates({ [weak self] in
-                        if let newSections = newSections {
-                            self?.collectionView?.insertSections(newSections)
+                        guard let `self` = self else {
+                            return
                         }
-                        self?.collectionView?.insertItems(at: array)
+                        if let newSections = newSections {
+                            self.collectionView?.insertSections(newSections)
+                        }
+                        if !self.recentlyDeletedIndexes.isEmpty {///Also should add check for deleted sections
+                            self.collectionView?.deleteItems(at: self.recentlyDeletedIndexes)
+                            self.recentlyDeletedIndexes.removeAll()
+                        }
+                        self.collectionView?.insertItems(at: array + emptyItemsArray)
+                        
                         }, completion: { [weak self] _ in
                             guard let `self` = self else {
                                 return
                             }
-                            self.delegate?.filesAppendedAndSorted()
                             self.isLocalFilesRequested = false
+                            self.delegate?.filesAppendedAndSorted()
                             //FIXME: part of appending+ incerting should be rewitten or trigger for new page
-                            self.dispatchQueue.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                            self.dispatchQueue.async { [weak self] in
                                 guard let `self` = self else {
                                     return
                                 }
                                 if !self.isPaginationDidEnd,
+                                    self.isLocalPaginationOn,
+                                    !self.isLocalFilesRequested,
                                     array.count < self.pageCompounder.pageSize {
                                     debugPrint("!!! TRY TO GET NEW PAGE")
                                     self.delegate?.getNextItems()
@@ -447,6 +473,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     ///self.transformedLeftOvers() in case for only remotes
                     if pageTempoItems.isEmpty, itemsToCompound.isEmpty//self.transformedLeftOvers().isEmpty
                         /**isEmptyLeftOvers*/ {
+                        self.isLocalFilesRequested = false
                         self.delegate?.getNextItems()
                         //DO I need callback here?
                         return
@@ -467,6 +494,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
+                            ////// maybe change index
 //                            if !self.isPaginationDidEnd,
 //                                compoundedItems.count < self.pageCompounder.pageSize {
 //                                self.delegate?.getNextItems()
@@ -1157,7 +1185,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 debugPrint("!!! page compunding for page \(lastPage)")
                 
                 compoundItems(pageItems: [], pageNum: lastPage, complition: { [weak self] response in
-                    self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+                    self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
                     
                 })
             }
@@ -1166,7 +1194,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 //            }
         } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
             compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
-               self?.insertItems(with: response, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+                self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
             })
         }
         
@@ -1569,7 +1597,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
                 for object in items {
                     if object.isLocalItem {
-                        idsForRemove.append(object.uuid)
+                        idsForRemove.append(object.getTrimmedLocalID())
                     } else {
                         serverObjects.append(object)
                     }
@@ -1611,9 +1639,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 var newSectionArray = [WrapData]()
                 for object in array {
                     
-                    if let index = idsForRemove.index(of: object.uuid) {
+                    if let index = idsForRemove.index(of: object.getTrimmedLocalID()) {
                         self.allMediaItems.remove(object)
                         idsForRemove.remove(at: index)
+                        self.recentlyDeletedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))///FOR now like that, in future = it should be called after with whole array
                         continue
                     }
                     if let obj = objectsForReplaceDict[object.uuid]{
