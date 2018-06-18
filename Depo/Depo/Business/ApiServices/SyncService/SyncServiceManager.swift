@@ -275,6 +275,9 @@ extension SyncServiceManager {
                 for asset in removedAssets {
                     newItemsToAppend.remove(where: {$0.localIdentifier == asset.localIdentifier})
                 }
+                if newItemsToAppend.isEmpty {
+                    checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+                }
             }
             lastTimeNewItemsAppended = Date()
             checkItemsToAppend()
@@ -332,7 +335,7 @@ extension SyncServiceManager {
         ItemOperationManager.default.syncFinished()
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
-        guard !hasWaitingForWiFiSync, CoreDataStack.default.inProcessAppendingLocalFiles else {
+        guard !hasWaitingForWiFiSync, !CoreDataStack.default.inProcessAppendingLocalFiles else {
             CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
             return
         }
