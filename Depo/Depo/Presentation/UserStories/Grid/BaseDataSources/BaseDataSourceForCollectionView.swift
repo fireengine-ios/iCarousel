@@ -1597,7 +1597,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
                 for object in items {
                     if object.isLocalItem {
-                        idsForRemove.append(object.getTrimmedLocalID())
+                        idsForRemove.append(object.getLocalID())
                     } else {
                         serverObjects.append(object)
                     }
@@ -1617,7 +1617,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         let objForReplace = localObjectsForReplace[index]
                         if let index = allItemsIDs.index(of: trimmedID){
                             allItemsIDs.remove(at: index)
-                            if allItemsIDs.contains(trimmedID){
+                            if allItemsIDs.contains(trimmedID) {
                                 idsForRemove.append(object.uuid)
                             } else {
                                 objectsForReplaceDict[object.uuid] = objForReplace
@@ -1639,19 +1639,19 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 var newSectionArray = [WrapData]()
                 for object in array {
                     
-                    if let index = idsForRemove.index(of: object.getTrimmedLocalID()) {
+                    if let index = idsForRemove.index(of: object.getLocalID()) {
                         self.allMediaItems.remove(object)
                         idsForRemove.remove(at: index)
                         self.recentlyDeletedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))///FOR now like that, in future = it should be called after with whole array
                         continue
                     }
-                    if let obj = objectsForReplaceDict[object.uuid]{
+                    if let obj = objectsForReplaceDict[object.uuid] {
                         newSectionArray.append(obj)
                         continue
                     }
                     newSectionArray.append(object)
                 }
-                if !newSectionArray.isEmpty{
+                if !newSectionArray.isEmpty {
                     newArray.append(newSectionArray)
                 }
             }

@@ -36,9 +36,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                     let removedAssets = previosFetch.objects(at: removedIndexes)
                     phChanges[.removed] = removedAssets
                     
-                    LocalMediaStorage.default.assetsCache.remove(list: removedAssets)
                     UploadService.default.cancelOperations(with: removedAssets)
-                    
                     CoreDataStack.default.remove(localMediaItems: removedAssets) { 
                         notify()
                     }

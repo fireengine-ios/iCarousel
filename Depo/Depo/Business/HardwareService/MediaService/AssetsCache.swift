@@ -92,6 +92,14 @@ class AssetsCache {
         }
     }
     
+    func remove(identifiers: [String]) {
+        dispatchQueue.sync {
+            identifiers.forEach {
+                storage.removeValue(forKey: $0)
+            }
+        }
+    }
+    
     func assetBy(identifier: String) -> PHAsset? {
         return storage[identifier]
     }
