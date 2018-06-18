@@ -16,12 +16,13 @@ final class StreamReaderWriter {
     func copyFile(from fromURL: URL, to toURL: URL, progress: ProgressCallBack? = nil, completion: @escaping ResponseVoid) {
         guard
             let copyOutput = OutputStream(url: toURL, append: false),
-            let fileInput = InputStream(url: fromURL),
-            let freeSpace = Device.getFreeDiskSpaceInBytes()
+            let fileInput = InputStream(url: fromURL)
         else {
             completion(ResponseResult.failed(CustomErrors.unknown))
             return
         }
+        
+        let freeSpace = Device.getFreeDiskSpaceInBytes()
         
         let fileSize: Int
         do {
