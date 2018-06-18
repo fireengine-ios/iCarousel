@@ -332,25 +332,8 @@ extension SyncServiceManager {
         ItemOperationManager.default.syncFinished()
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
-        if hasWaitingForWiFiSync, !CoreDataStack.default.inProcessAppendingLocalFiles {
-            ////Blinking
-//            if let videoServie = videoSyncService as? VideoSyncService,
-//                let photoService = photoSyncService as? PhotoSyncService {
-//                videoServie.itemsSortedToUpload { [weak self] videosItems in
-//                    guard !videosItems.isEmpty else {
-//                        photoService.itemsSortedToUpload(completion: { photoItems in
-//                            guard !photoItems.isEmpty else {
-//                                CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
-//                                return
-//                            }
-//                            CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
-//
-//                        })
-//                        return
-//                    }
-                    CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
-//                }
-//            }
+        guard !hasWaitingForWiFiSync, CoreDataStack.default.inProcessAppendingLocalFiles else {
+            CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
             return
         }
         
