@@ -496,16 +496,13 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     private func getSourceRect(sender: Any?, controller: ViewController?) -> CGRect {
         var newSourceRect = CGRect()
         
-        
         let sourceController: UIViewController
         if let unwrapedVC = controller {
-            sourceController = unwrapedVC
-            
-        } else {
-            guard let rootVC = RouterVC().getViewControllerForPresent() else {
-                return newSourceRect
-            }
+            sourceController = unwrapedVC 
+        } else if let rootVC = RouterVC().getViewControllerForPresent() {
             sourceController = rootVC
+        } else {
+            return newSourceRect
         }
         
         if let pressedBarButton = sender as? UIButton {
