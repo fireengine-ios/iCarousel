@@ -239,24 +239,33 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     if self.needReloadData {
                         self.collectionView?.reloadData()
                     }
+                    self.isLocalFilesRequested = false
+                    self.delegate?.filesAppendedAndSorted()
+                    self.isDropedData = false
                 }
-                self.isLocalFilesRequested = false
-                self.delegate?.filesAppendedAndSorted()
-                self.isDropedData = false
+                
             } else {
-                let newSectionNumbers = self.numberOfSections(in: collectionView)
-                let emptyItemsArray = getIndexPathsForItems(emptyItems)
-                var newSections: IndexSet?
-                if newSectionNumbers > oldSectionNumbers {
-                    let needMoveSectionWithEmptyMetaItems = self.needShowEmptyMetaItems && self.currentSortType == .metaDataTimeUp && containsEmptyMetaItems
-                    
-                    if needMoveSectionWithEmptyMetaItems {
-                        newSections = IndexSet(oldSectionNumbers-1..<newSectionNumbers-1)                           
-                    } else {
-                        newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
-                    }
-                }
                 DispatchQueue.main.async {
+                    let oldSectionNumbers = collectionView.numberOfSections
+                    let newSectionNumbers = self.numberOfSections(in: collectionView)
+                    let emptyItemsArray = self.getIndexPathsForItems(emptyItems)
+                    var newSections: IndexSet?
+                    if newSectionNumbers > oldSectionNumbers {
+                        let needMoveSectionWithEmptyMetaItems = self.needShowEmptyMetaItems && self.currentSortType == .metaDataTimeUp && containsEmptyMetaItems
+                        
+                        if needMoveSectionWithEmptyMetaItems {
+                            debugPrint("!!! needMoveSectionWithEmptyMetaItems 1")
+                            newSections = IndexSet(oldSectionNumbers-1..<newSectionNumbers-1)                           
+                        } else {
+                            debugPrint("!!! needMoveSectionWithEmptyMetaItems 2")
+                            newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
+                        }
+                    } else if newSectionNumbers < oldSectionNumbers{
+                        return
+                        /// here add section deletion
+                    }///error ocure when was appending to same action but the data was just dropped - recieved and droped
+               
+                
                     collectionView.collectionViewLayout.invalidateLayout()
                     collectionView.performBatchUpdates({ [weak self] in
                         guard let `self` = self else {
