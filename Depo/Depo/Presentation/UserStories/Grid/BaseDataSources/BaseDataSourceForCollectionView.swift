@@ -1663,6 +1663,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             
             DispatchQueue.main.async {
+                self.recentlyDeletedIndexes.removeAll()
                 self.collectionView?.reloadData()
                 self.delegate?.didDelete(items: items)
                 
