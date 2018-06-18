@@ -100,7 +100,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             return TextConstants.syncFourGbVideo
         }
         
-        let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes() ?? 0
+        let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes()
         filteredItems = filteredItems.filter { $0.fileSize < freeDiskSpaceInBytes }
         guard !filteredItems.isEmpty else {
             return TextConstants.syncNotEnoughMemory
