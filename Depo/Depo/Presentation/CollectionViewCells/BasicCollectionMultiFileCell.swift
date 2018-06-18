@@ -147,16 +147,17 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         bigContentImageView.image = WrapperedItemUtil.getPreviewImageForWrapperedObject(fileType: wrappered.fileType)
         if isBigSize() {
             smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
+            smallContentImageView.contentMode = .scaleAspectFit
         } else {
             if isCellSelectionEnabled {
                 smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(fileType: wrappered.fileType)
             } else {
                 smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
             }
+            smallContentImageView.contentMode = .center
         }
         
         bigContentImageView.contentMode = .scaleAspectFill
-        smallContentImageView.contentMode = .center
         
         separatorView.isHidden = isBigSize()
         barView.backgroundColor = isBigSize() ? ColorConstants.fileGreedCellColor : UIColor.white
