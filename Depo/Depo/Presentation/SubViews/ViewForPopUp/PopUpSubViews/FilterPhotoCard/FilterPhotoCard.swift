@@ -52,11 +52,13 @@ final class FilterPhotoCard: BaseView {
     
     private var cardType = CardActionType.save {
         didSet {
-            switch cardType {
-            case .save:
-                bottomButton.setTitle(TextConstants.homeLikeFilterSavePhotoButton, for: .normal)
-            case .display:
-                bottomButton.setTitle(TextConstants.homeLikeFilterViewPhoto, for: .normal)
+            DispatchQueue.toMain {
+                switch self.cardType {
+                case .save:
+                    self.bottomButton.setTitle(TextConstants.homeLikeFilterSavePhotoButton, for: .normal)
+                case .display:
+                    self.bottomButton.setTitle(TextConstants.homeLikeFilterViewPhoto, for: .normal)
+                }
             }
         }
     }
@@ -97,7 +99,7 @@ final class FilterPhotoCard: BaseView {
     }
     
     override func viewDidEndShow() {
-        photoImageView.image = nil
+//        photoImageView.image = nil
         photoImageView.checkIsNeedCancelRequest()
     }
 

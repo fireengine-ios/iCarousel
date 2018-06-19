@@ -434,7 +434,7 @@
 "Turkcell Password" = "كلمة مرور تركسل";
 "Login Settings" = "إعدادات تسجيل الدخول";
 "Folder is Empty" = "المجلد فارغ";
-"Folder Items" = "العناصر";
+"Folder Items" = "%d العناصر";
 "Contact Backup" = "نسخة احتياطية لجهات الاتصال";
 "Your last contact update was %@ months ago!" = "لم يتم تحديث جهات الاتصال منذ %@ أشهر!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "لم يتم تحديث جهات الاتصال منذ %@ شهر. يرجى التحديث الآن حتى لا تضيع أي جهة اتصال.";
@@ -647,3 +647,4 @@
 "*Average figure. Total number of documents depends on the size of each document." = "يعتمد العدد الإجمالي للمستندات على حجم كل منها.";
 "We couldn’t find anything on your Lifebox yet." = "لم يتم العثور بعد على أي شيء في لايف بوكس";
 "Expiration Date: %@" = "تاريخ إنتهاء الصلاحية: %@";
+"Failed to get albums" = "Failed to get albums";

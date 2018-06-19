@@ -239,24 +239,33 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     if self.needReloadData {
                         self.collectionView?.reloadData()
                     }
+                    self.isLocalFilesRequested = false
+                    self.delegate?.filesAppendedAndSorted()
+                    self.isDropedData = false
                 }
-                self.isLocalFilesRequested = false
-                self.delegate?.filesAppendedAndSorted()
-                self.isDropedData = false
+                
             } else {
-                let newSectionNumbers = self.numberOfSections(in: collectionView)
-                let emptyItemsArray = getIndexPathsForItems(emptyItems)
-                var newSections: IndexSet?
-                if newSectionNumbers > oldSectionNumbers {
-                    let needMoveSectionWithEmptyMetaItems = self.needShowEmptyMetaItems && self.currentSortType == .metaDataTimeUp && containsEmptyMetaItems
-                    
-                    if needMoveSectionWithEmptyMetaItems {
-                        newSections = IndexSet(oldSectionNumbers-1..<newSectionNumbers-1)                           
-                    } else {
-                        newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
-                    }
-                }
                 DispatchQueue.main.async {
+                    let oldSectionNumbers = collectionView.numberOfSections
+                    let newSectionNumbers = self.numberOfSections(in: collectionView)
+                    let emptyItemsArray = self.getIndexPathsForItems(emptyItems)
+                    var newSections: IndexSet?
+                    if newSectionNumbers > oldSectionNumbers {
+                        let needMoveSectionWithEmptyMetaItems = self.needShowEmptyMetaItems && self.currentSortType == .metaDataTimeUp && containsEmptyMetaItems
+                        
+                        if needMoveSectionWithEmptyMetaItems {
+                            debugPrint("!!! needMoveSectionWithEmptyMetaItems 1")
+                            newSections = IndexSet(oldSectionNumbers-1..<newSectionNumbers-1)                           
+                        } else {
+                            debugPrint("!!! needMoveSectionWithEmptyMetaItems 2")
+                            newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
+                        }
+                    } else if newSectionNumbers < oldSectionNumbers{
+                        return
+                        /// here add section deletion
+                    }///error ocure when was appending to same action but the data was just dropped - recieved and droped
+               
+                
                     collectionView.collectionViewLayout.invalidateLayout()
                     collectionView.performBatchUpdates({ [weak self] in
                         guard let `self` = self else {
@@ -1597,7 +1606,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
                 for object in items {
                     if object.isLocalItem {
-                        idsForRemove.append(object.getTrimmedLocalID())
+                        idsForRemove.append(object.getLocalID())
                     } else {
                         serverObjects.append(object)
                     }
@@ -1617,7 +1626,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         let objForReplace = localObjectsForReplace[index]
                         if let index = allItemsIDs.index(of: trimmedID){
                             allItemsIDs.remove(at: index)
-                            if allItemsIDs.contains(trimmedID){
+                            if allItemsIDs.contains(trimmedID) {
                                 idsForRemove.append(object.uuid)
                             } else {
                                 objectsForReplaceDict[object.uuid] = objForReplace
@@ -1639,19 +1648,19 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 var newSectionArray = [WrapData]()
                 for object in array {
                     
-                    if let index = idsForRemove.index(of: object.getTrimmedLocalID()) {
+                    if let index = idsForRemove.index(of: object.getLocalID()) {
                         self.allMediaItems.remove(object)
                         idsForRemove.remove(at: index)
                         self.recentlyDeletedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))///FOR now like that, in future = it should be called after with whole array
                         continue
                     }
-                    if let obj = objectsForReplaceDict[object.uuid]{
+                    if let obj = objectsForReplaceDict[object.uuid] {
                         newSectionArray.append(obj)
                         continue
                     }
                     newSectionArray.append(object)
                 }
-                if !newSectionArray.isEmpty{
+                if !newSectionArray.isEmpty {
                     newArray.append(newSectionArray)
                 }
             }
@@ -1663,6 +1672,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             
             DispatchQueue.main.async {
+                self.recentlyDeletedIndexes.removeAll()
                 self.collectionView?.reloadData()
                 self.delegate?.didDelete(items: items)
                 

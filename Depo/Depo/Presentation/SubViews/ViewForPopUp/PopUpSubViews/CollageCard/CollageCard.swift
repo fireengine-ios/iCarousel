@@ -89,7 +89,7 @@ final class CollageCard: BaseView {
     }
     
     override func viewDidEndShow() {
-        photoImageView.image = nil
+//        photoImageView.image = nil
         photoImageView.checkIsNeedCancelRequest()
     }
     

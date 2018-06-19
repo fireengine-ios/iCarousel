@@ -946,6 +946,13 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return uuid
     }
     
+    func getLocalID() -> String {
+        if isLocalItem, let localID = asset?.localIdentifier {
+            return localID
+        }
+        return uuid
+    }
+    
     /**
      Need this beacase old app shares name with slash
     */

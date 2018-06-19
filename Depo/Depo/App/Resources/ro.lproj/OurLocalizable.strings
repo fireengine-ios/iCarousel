@@ -258,20 +258,20 @@
 "Leave feedback" = "Contactează-ne";
 "Upload Photo" = "Încarcă Fotografia";
 "Back to Lifebox" = "Înapoi la lifebox";
-"Start adding your documents" = "Începe adăugarea documentelor tale";
+"Start adding your documents" = "Adaugă documente";
 "You don’t have any documents on your Lifebox yet." = "Încă nu ai documente în lifebox-ul tău.";
-"Start adding your music" = "Începe adăugarea muzicii tale";
+"Start adding your music" = "Adaugă melodii";
 "You don’t have any music on your Lifebox yet." = "Încă nu ai muzică în lifebox-ul tău.";
 "info" = "info";
 "Enable photo permissions in settings" = "Activează permisiuni fotografii în setări";
-"Start adding your photos" = "Începe adăugarea pozelor tale";
+"Start adding your photos" = "Adaugă fotografii";
 "You don’t have anything on your photo roll." = "Încă nu ai fotografii și nici videoclipuri în lifebox-ul tău.";
 "View All Pictures" = "Vezi Toate Fotografiile";
 "View All My Stream" = "Vezi toate Fluxurile mele";
 "%d Photos" = "%d Fotografii";
 "You’ve uploaded %@ two days ago!" = "Ai încărcat %@ două zile în urmă!";
 "Expand My Storage" = "Actualizarea planului meu de stocare";
-"You are using %85 of your disk space! It’s a great time to expand your storage." = "Ai utilizat %85 din spațiul de stocare lifebox! E momentul potrivit pentru a-ți mări spațiul de stocare.";
+"You are using %85 of your disk space! It’s a great time to expand your storage." = "Ai utilizat 85% din spațiul de stocare lifebox! E momentul potrivit pentru a-ți mări volumul spațiului de stocare.";
 "Your storage is almost full!" = "Ai atins limita de memorie a lifebox-ului tău";
 "Change filter" = "Schimbă filtrul";
 "Save this photo" = "Salvează";
@@ -344,7 +344,7 @@
 "You’re skipping auto-sync setting turned off. You can activate this later in preferences." = "Ai omis setarea de încărcare automată. O poți activa mai târziu din setări.";
 "Skip setting Auto-Sync?" = "Vrei să omiți setarea de încărcare automată?";
 "Skip for now" = "Omite";
-"Let’s start using Lifebox" = "Hai să începem să utilizăm lifebox";
+"Let’s start using Lifebox" = "Hai să începem utilizarea lifebox-ului";
 "Select the items to sync with mobile data." = "Selectează elementele pentru sincronizare cu datele mobile";
 "Mobile Data" = "Datele Mobile";
 "Wi-fi" = "Wi-Fi";
@@ -424,7 +424,7 @@
 "Turkcell Password" = "Parola Turkcell";
 "Login Settings" = "Setări de conectare";
 "Folder is Empty" = "Mapa e goală";
-"Folder Items" = "Articole";
+"Folder Items" = "Articole: %d";
 "Contact Backup" = "Copie de rezervă a contactelor";
 "Your last contact update was %@ months ago!" = "Ultima actualizare a copiei de rezervă a contactelor a fost acum %@ luni!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Au trecut %@ luni de când ai actualizat ultima dată contactele tale. Actualizează-le acum pentru a nu le mai pierde niciodată. ";
@@ -516,7 +516,7 @@
 "Album is Empty" = "Albumul este gol";
 "You don’t have any files on your Lifebox yet." = "Încă nu ai nici un fișier în lifebox-ul tău.";
 "You don’t have any favorited files on your Lifebox yet." = "Încă nu ai nici un fișier preferat în lifebox-ul tău.";
-"Start adding your files" = "Începe adăugarea fișierelor tale";
+"Start adding your files" = "Adaugă fișiere";
 "Suggestions" = "Sugestii";
 "Recent Searches" = "Căutări recente";
 "Lifebox can sync your files automatically." = "lifebox poate sincroniza fișierele tale automat.";
@@ -591,7 +591,7 @@
 "landingSubTitle0" = "Adună fotografiile tale, clipurile video, contactele și alte tipuri de fișiere în lifebox! Accesează-le și bucură-te de amintiri oricând și oriunde te-ai afla.";
 "landingTitle1" = "Auto-sincronizare";
 "landingSubTitle1" = "Salvează toate fotografiile și fișierele video automat și le vei putea accesa de oriunde.";
-"landingTitle2" = "Recunoașterea feței/imaginei";
+"landingTitle2" = "Recunoașterea feței/imaginii";
 "landingSubTitle2" = "Găsește-ți amintirile cu ușurință cu ajutorul \"albumelor inteligente\"";
 "landingTitle5" = "Povești Automate";
 "landingSubTitle5" = "Bucură-te de amintirile tale cu filmulețele și colajele create automat";
@@ -635,3 +635,4 @@
 "*Average figure. Total number of documents depends on the size of each document." = "*Cifra medie. Numărul total de documente depinde de dimensiunea fiecărui document.";
 "We couldn’t find anything on your Lifebox yet." = "Încă nu am găsit nimic în lifebox-ul tău.";
 "Expiration Date: %@" = "Data expirării: %@";
+"Failed to get albums" = "Failed to get albums";

@@ -641,7 +641,7 @@ extension UploadService {
             return []
         }
         
-        let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes() ?? 0
+        let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes()
         result = result.filter { $0.fileSize < freeDiskSpaceInBytes }
         guard !result.isEmpty else {
             UIApplication.showErrorAlert(message: TextConstants.syncNotEnoughMemory)

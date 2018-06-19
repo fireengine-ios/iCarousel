@@ -24,7 +24,7 @@ class PopUpService {
     }
     
     func checkIsNeedShowUploadOffPopUp() {
-        SingletonStorage.shared.getAccountInfoForUser(success: { success in
+        SingletonStorage.shared.getAccountInfoForUser(success: { _ in
             CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
         }, fail: { _ in })
     }

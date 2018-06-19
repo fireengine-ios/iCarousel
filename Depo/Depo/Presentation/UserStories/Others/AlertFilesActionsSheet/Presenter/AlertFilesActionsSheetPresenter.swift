@@ -94,7 +94,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 types.append(.download)
             }
             
-            actions = constractActions(with: types, for: [item])
+            actions = constractActions(with: types, for: [item], sender: sender)
         }
         DispatchQueue.main.async { [weak self] in
             self?.presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
@@ -211,7 +211,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     }
     
     private func constractActions(with types: [ElementTypes],
-                                  for items: [BaseDataSourceItem]?) -> [UIAlertAction] {
+                                  for items: [BaseDataSourceItem]?, sender: Any? = nil) -> [UIAlertAction] {
         
         var filteredTypes = types
         let langCode = Device.locale
@@ -264,7 +264,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .share:
                 action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
                     MenloworksAppEvents.onShareClicked()
-                    self.interactor.share(item: currentItems, sourceRect: nil)
+                    self.interactor.share(item: currentItems, sourceRect: self.getSourceRect(sender: sender, controller: nil))
                 })
             //Photos and albumbs
             case .photos:
@@ -491,5 +491,35 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up 
         }
         vc.present(actionSheetVC, animated: true, completion: {})
+    }
+    
+    private func getSourceRect(sender: Any?, controller: ViewController?) -> CGRect {
+        var newSourceRect = CGRect()
+        
+        let sourceController: UIViewController
+        if let unwrapedVC = controller {
+            sourceController = unwrapedVC 
+        } else if let rootVC = RouterVC().getViewControllerForPresent() {
+            sourceController = rootVC
+        } else {
+            return newSourceRect
+        }
+        
+        if let pressedBarButton = sender as? UIButton {
+            var sourceRectFrame = pressedBarButton.convert(pressedBarButton.frame, to: sourceController.view)
+            if sourceRectFrame.origin.x > sourceController.view.bounds.width {
+                sourceRectFrame = CGRect(origin: CGPoint(x: pressedBarButton.frame.origin.x, y: pressedBarButton.frame.origin.y + 20), size: pressedBarButton.frame.size)
+            }
+            newSourceRect = sourceRectFrame
+        } else if let _ = sender as? UIBarButtonItem {
+            if sourceController.navigationController?.navigationBar.isTranslucent == true {
+                var frame = rightButtonBox
+                frame.origin.y = 44
+               newSourceRect = frame
+            } else {
+                newSourceRect = rightButtonBox
+            }
+        }
+        return newSourceRect
     }
 }
