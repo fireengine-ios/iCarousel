@@ -117,6 +117,18 @@ class WrapItemFileService: WrapItemFileOperations {
                                      fail: fail, returnedUploadOperation: { _ in})
     }
     
+    func cancellableUpload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedUploadOperations: @escaping ([UploadOperations]?) -> Void) {
+        let localFiles = localWrapedData(files: items)
+        
+        uploadService.uploadFileList(items: localFiles,
+                                     uploadType: .fromHomePage,
+                                     uploadStategy: .WithoutConflictControl,
+                                     uploadTo: .MOBILE_UPLOAD,
+                                     success: success,
+                                     fail: fail,
+                                     returnedUploadOperation: returnedUploadOperations)
+    }
+    
     func syncItemsIfNeeded(_ items: [WrapData], success: @escaping FileOperationSucces, fail: @escaping FailResponse, syncOperations: @escaping ([UploadOperations]?) -> Void) {
         let localFiles = localWrapedData(files: items)
         guard localFiles.count > 0 else {

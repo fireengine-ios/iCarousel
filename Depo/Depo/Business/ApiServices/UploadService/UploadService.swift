@@ -494,6 +494,10 @@ final class UploadService: BaseRequestService {
         operationsToRemove.removeAll()
     }
     
+    func cancelUploadOperations(operations: [UploadOperations]) {
+        cancelAndRemove(operations: operations)
+    }
+    
     func cancelSyncOperations(photo: Bool, video: Bool) {
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
