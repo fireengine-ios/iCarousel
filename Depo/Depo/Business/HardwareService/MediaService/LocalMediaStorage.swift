@@ -93,6 +93,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         queue.maxConcurrentOperationCount = 1
         
         super.init()
+        guard photoLibraryIsAvailible() else {
+            return
+        }
         self.photoLibrary.register(self)
     }
     
