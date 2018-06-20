@@ -148,7 +148,7 @@ final class AppConfigurator {
         //let apiKey = "8fb5c84a549711e881e1d5b6432746d5" /// another test
         let apiKey = "cab314f33df2514764664e5544def586"
 
-        #if APPSTORE
+        #if DEBUG
         let trackingCode = "20AW4ELA"
 
         #else
