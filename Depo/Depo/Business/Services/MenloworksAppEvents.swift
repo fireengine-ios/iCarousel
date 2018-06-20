@@ -65,19 +65,21 @@ class MenloworksAppEvents {
                 let quotaBytes = quotoInfo.bytes,
                 let usedBytes = quotoInfo.bytesUsed else { return }
             
-            let busyStorage = Float(usedBytes) / Float(quotaBytes)
-            
-            MenloworksTagsService.shared.onQuotaStatus(percentageValue: Int(busyStorage * 100))
-            
-            if busyStorage > 0.99 {
-                MenloworksEventsService.shared.onQuotaFullStatus()
+            if Float(quotaBytes) != 0 {
+                let busyStorage = Float(usedBytes) / Float(quotaBytes)
                 
-            }
-            
-            if busyStorage > 0.9 {
-                MenloworksEventsService.shared.onQuotaExceeded90PercStatus()
-            } else if busyStorage > 0.8 {
-                MenloworksEventsService.shared.onQuotaExceeded80PercStatus()
+                MenloworksTagsService.shared.onQuotaStatus(percentageValue: Int(busyStorage * 100))
+                
+                if busyStorage > 0.99 {
+                    MenloworksEventsService.shared.onQuotaFullStatus()
+                    
+                }
+                
+                if busyStorage > 0.9 {
+                    MenloworksEventsService.shared.onQuotaExceeded90PercStatus()
+                } else if busyStorage > 0.8 {
+                    MenloworksEventsService.shared.onQuotaExceeded80PercStatus()
+                }
             }
 
             }, fail: { _ in })
