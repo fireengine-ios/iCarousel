@@ -139,17 +139,19 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         }
         
         if isBackUpAvailable, operationType == .backup {
-            let controller = PopUpController.with(title: TextConstants.errorAlerTitleBackupAlreadyExist,
-                                                  message: TextConstants.errorAlertTextBackupAlreadyExist,
-                                                  image: .error,
-                                                  firstButtonTitle: TextConstants.errorAlertNopeBtnBackupAlreadyExist,
-                                                  secondButtonTitle: TextConstants.errorAlertYesBtnBackupAlreadyExist,
-                                                  secondAction: { [weak self] vc in
-                                                    vc.close { [weak self] in
-                                                        self?.sendOperationToOutputs(operationType)
-                                                    }
-            })
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+            sendOperationToOutputs(operationType)
+            ///LR-5831 request to remove this pop-up. // Just in case we will save it(for now)
+//            let controller = PopUpController.with(title: TextConstants.errorAlerTitleBackupAlreadyExist,
+//                                                  message: TextConstants.errorAlertTextBackupAlreadyExist,
+//                                                  image: .error,
+//                                                  firstButtonTitle: TextConstants.errorAlertNopeBtnBackupAlreadyExist,
+//                                                  secondButtonTitle: TextConstants.errorAlertYesBtnBackupAlreadyExist,
+//                                                  secondAction: { [weak self] vc in
+//                                                    vc.close { [weak self] in
+//                                                        self?.sendOperationToOutputs(operationType)
+//                                                    }
+//            })
+//            UIApplication.topController()?.present(controller, animated: false, completion: nil)
             
         } else {
             sendOperationToOutputs(operationType)
