@@ -70,7 +70,7 @@ final class StreamReaderWriter {
             } while bytesToWrite > 0
             
             counter += 1
-            if counter % 10 == 0 {
+            if counter.remainderReportingOverflow(dividingBy: 10).partialValue == 0 {
                 let percent = Double(copySize * 100/fileSize)
                 progress?(Double(copySize), percent)
             }
