@@ -66,10 +66,13 @@ import AVFoundation
         log.debug("CameraService showPickerController")
 
         guard let cameraSupportedVC = sourceViewViewController as?
-            (UIImagePickerControllerDelegate & UINavigationControllerDelegate) else {
-                debugPrint("this VC does not support camera picker delegate")
-                return
+            (UIImagePickerControllerDelegate & UINavigationControllerDelegate),
+            UIImagePickerController.isSourceTypeAvailable(type)
+        else {
+            debugPrint("this VC does not support camera picker delegate")
+            return
         }
+
         
         let picker = UIImagePickerController()
         picker.sourceType = type
@@ -98,6 +101,8 @@ import AVFoundation
                                                     UIApplication.shared.openSettings()
                                                 }
         })
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        DispatchQueue.toMain {
+            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        }
     }
 }
