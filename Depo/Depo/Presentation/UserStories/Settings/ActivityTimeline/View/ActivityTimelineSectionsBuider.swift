@@ -116,14 +116,17 @@ class ActivityTimelineSectionsBuider {
                 break
             }
         }
-        return timelineActivities[safe: indexPath.section]?.object(at: objectIndex)
+        guard let activitiesItemsSection = timelineActivities[safe: indexPath.section] else {
+            return  nil
+        }
+        return activitiesItemsSection.object(at: objectIndex)
     }
     
     func cell(for tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
         
         if let minutesSectionIndex = isMinutesSection(for: indexPath) {
             let cell = tableView.dequeue(reusable: ActivityTimelineTimeCell.self, for: indexPath)
-            if let activity = timelineActivities[safe: indexPath.section]?.list[safe: minutesSectionIndex] {
+            if let activitySection = timelineActivities[safe: indexPath.section], let activity = activitySection.list[safe: minutesSectionIndex] {
                 cell.timeLabel.text = timeDateFormater.string(from: activity.date)
                 cell.fileTypeLabel.text = "\(timelineActivities[indexPath.section].list[minutesSectionIndex].list.count) \(TextConstants.activityTimelineFiles) \(activity.type.displayString)"
             }
@@ -148,8 +151,8 @@ class ActivityTimelineSectionsBuider {
     
     func header(for tableView: UITableView, viewForHeaderInSection section: Int) -> UIView {
         let header = tableView.dequeue(reusableHeaderFooterView: ActivityTimelineHeader.self)
-        guard let date = timelineActivities[safe: section]?.date else { return header }
-        header.dayLabel.text = dayDateFormater.string(from: date)
+        guard let datesSection = timelineActivities[safe: section] else { return header }
+        header.dayLabel.text = dayDateFormater.string(from: datesSection.date)
         return header
     }
 }

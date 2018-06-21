@@ -242,6 +242,9 @@ class SyncServiceManager {
 // MARK: - Notifications
 extension SyncServiceManager {
     private func subscribeForNotifications() {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return
+        }
         setupReachability()
         setupAPIReachability()
         

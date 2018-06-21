@@ -63,9 +63,17 @@ class MenloworksAppEvents {
         AccountService().quotaInfo(success: { response in
             guard let quotoInfo = response as? QuotaInfoResponse,
                 let quotaBytes = quotoInfo.bytes,
-                let usedBytes = quotoInfo.bytesUsed else { return }
+                let usedBytes = quotoInfo.bytesUsed
+            else { return }
             
-            let busyStorage = Float(usedBytes) / Float(quotaBytes)
+            let quotaBytesConverted = Double(quotaBytes)
+            let usedBytesConverted = Double(usedBytes)
+            
+            guard quotaBytesConverted != 0 else {
+                return
+            }
+            
+            let busyStorage = usedBytesConverted / quotaBytesConverted
             
             MenloworksTagsService.shared.onQuotaStatus(percentageValue: Int(busyStorage * 100))
             
@@ -79,6 +87,7 @@ class MenloworksAppEvents {
             } else if busyStorage > 0.8 {
                 MenloworksEventsService.shared.onQuotaExceeded80PercStatus()
             }
+            
 
             }, fail: { _ in })
     }

@@ -369,6 +369,9 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
             
             switch file.patchToPreview {
             case let .localMediaContent(local):
+                guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+                    return 
+                }
                 let option = PHVideoRequestOptions()
                 
                 output.startCreatingAVAsset()

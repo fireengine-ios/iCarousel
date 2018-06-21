@@ -658,7 +658,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private func getHeaderText(indexPath: IndexPath) -> String {
         var headerText = ""
         
-        guard let item = allItems[safe: indexPath.section]?.first else {
+        guard let itemsInSection = allItems[safe: indexPath.section], let item = itemsInSection.first else {
             return headerText
         }
         
@@ -1094,7 +1094,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     //MARK: collectionViewDataSource
     
     func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
-        return allItems[safe: indexPath.section]?[safe: indexPath.row]
+        guard let sectionItems = allItems[safe: indexPath.section] else {
+            return nil
+        }
+        return sectionItems[safe: indexPath.row]
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -1889,6 +1892,10 @@ extension BaseDataSourceForCollectionView {
             view.window != nil,
             !allItems.isEmpty
         else {
+            return
+        }
+        
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             return
         }
         

@@ -98,6 +98,8 @@ import AVFoundation
                                                     UIApplication.shared.openSettings()
                                                 }
         })
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        DispatchQueue.toMain {
+            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        }
     }
 }
