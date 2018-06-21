@@ -381,7 +381,10 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
                         
                         DispatchQueue.main.async {
                             self?.output.stopCreatingAVAsset()
-                            let playerItem = AVPlayerItem(asset: asset!)
+                            guard let asset = asset else {
+                                return
+                            }
+                            let playerItem = AVPlayerItem(asset: asset)
                             self?.play(item: playerItem)
                         }   
                     }
