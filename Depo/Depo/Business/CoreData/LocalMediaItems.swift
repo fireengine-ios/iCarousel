@@ -27,6 +27,10 @@ extension CoreDataStack {
     }
     
     func append(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            completion()
+            return
+        }
         privateQueue.async { [weak self] in
             guard let `self` = self else {
                 completion()
@@ -50,11 +54,19 @@ extension CoreDataStack {
     }
     
     func remove(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            completion()
+            return
+        }
         removeLocalMediaItems(with: localMediaItems.map { $0.localIdentifier }, completion: completion)
         
     }
 
     func insertFromGallery(completion: VoidHandler?) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            completion?()
+            return
+        }
         guard !inProcessAppendingLocalFiles else {
             return
         }
@@ -93,6 +105,10 @@ extension CoreDataStack {
     }
     
     private func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping VoidHandler ) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            completion()
+            return
+        }
         guard !items.isEmpty else {
             print("LOCAL_ITEMS: no files to add")
             completion()
@@ -132,6 +148,9 @@ extension CoreDataStack {
     }
     
     private func updateICloudStatus(for assets: [PHAsset], context: NSManagedObjectContext) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return
+        }
         privateQueue.async { [weak self] in
             guard let `self` = self else {
                 return
@@ -154,7 +173,10 @@ extension CoreDataStack {
     }
     
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
-        let currentlyInLibriaryIDs: [String] = allList.flatMap { $0.localIdentifier }
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return []
+        }
+        let currentlyInLibriaryIDs: [String] = allList.map { $0.localIdentifier }
         
         checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs)
         
@@ -168,7 +190,10 @@ extension CoreDataStack {
     }
     
     func listAssetIdAlreadySaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
-        let currentlyInLibriaryIDs: [String] = allList.flatMap { $0.localIdentifier }
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return []
+        }
+        let currentlyInLibriaryIDs: [String] = allList.map { $0.localIdentifier }
         
         let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
         
@@ -224,6 +249,9 @@ extension CoreDataStack {
     }
     
     func allLocalItems(with assets: [PHAsset]) -> [WrapData] {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return []
+        }
         let context = newChildBackgroundContext
         
         let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", assets.map { $0.localIdentifier })
