@@ -308,9 +308,30 @@ class FileService: BaseRequestService {
     
     private var error: ErrorResponse?
     
+    private func showAccessAlert() {
+        log.debug("CameraService showAccessAlert")
+        DispatchQueue.main.async {
+            let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
+                                                  message: TextConstants.cameraAccessAlertText,
+                                                  image: .none,
+                                                  firstButtonTitle: TextConstants.cameraAccessAlertNo,
+                                                  secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
+                                                  secondAction: { vc in
+                                                    vc.close {
+                                                        UIApplication.shared.openSettings()
+                                                    }
+            })
+            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        }
+    }
+    
     func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail: FailResponse?) {
         log.debug("FileService download")
-        
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            showAccessAlert()
+            success?()
+            return
+        }
         let supportedItemsToDownload = items.filter { $0.hasSupportedExtension() }
         
         guard !supportedItemsToDownload.isEmpty else {
@@ -369,6 +390,11 @@ class FileService: BaseRequestService {
     
     func downloadToCameraRoll(downloadParam: BaseDownloadRequestParametrs, success: FileOperation?, fail: FailResponse?) {
         log.debug("FileService downloadToCameraRoll \(downloadParam.fileName)")
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            showAccessAlert()
+            success?()
+            return
+        }
         executeDownloadRequest(param: downloadParam) { url, urlResponse, error in
             
             if let err = error {
