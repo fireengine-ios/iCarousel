@@ -414,6 +414,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func download(item: [BaseDataSourceItem]) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            showAccessAlert()
+            return
+        }
         if let item = item as? [Item] {
             //FIXME: transform all to BaseDataSourceItem
             if let item = item.first,
