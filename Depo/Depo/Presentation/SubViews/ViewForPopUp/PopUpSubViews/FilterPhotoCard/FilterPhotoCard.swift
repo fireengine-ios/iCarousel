@@ -195,6 +195,9 @@ final class FilterPhotoCard: BaseView {
     }
     
     private func showPhotoVideoDetail(with asset: PHAsset) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return
+        }
         DispatchQueue.global().async {
             let item = WrapData(asset: asset)
             

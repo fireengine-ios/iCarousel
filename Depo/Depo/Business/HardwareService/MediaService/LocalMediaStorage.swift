@@ -93,6 +93,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         queue.maxConcurrentOperationCount = 1
         
         super.init()
+        guard photoLibraryIsAvailible() else {
+            return
+        }
         self.photoLibrary.register(self)
     }
     
@@ -952,7 +955,10 @@ class GetImageOperation: Operation {
     }
     
     override func main() {
-        
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            callback(nil, nil)
+            return
+        }
         if isCancelled {
             return
         }
@@ -996,7 +1002,10 @@ class GetOriginalImageOperation: Operation {
     }
     
     override func main() {
-        
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            callback(nil, nil, .down, nil)
+            return
+        }
         if isCancelled {
             return
         }
@@ -1027,7 +1036,10 @@ class GetOriginalVideoOperation: Operation {
     }
     
     override func main() {
-        
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            callback(nil,nil,nil)
+            return
+        }
         if isCancelled {
             return
         }
@@ -1056,7 +1068,10 @@ class GetCompactImageOperation: Operation {
     }
     
     override func main() {
-        
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            callback(nil, nil, .down, nil)
+            return
+        }
         if isCancelled {
             return
         }
@@ -1086,7 +1101,10 @@ class GetCompactVideoOperation: Operation {
     }
     
     override func main() {
-        
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            callback(nil, nil, nil)
+            return
+        }
         if isCancelled {
             return
         }
@@ -1111,6 +1129,10 @@ class AddAssetToCollectionOperation: AsyncOperation {
     }
     
     override func workItem() {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            markFinished()
+            return
+        }
         if let collection = mediaStorage.loadAlbum(albumName) {
             mediaStorage.add(asset: assetIdentifier, to: collection)
             markFinished()

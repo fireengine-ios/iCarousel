@@ -11,6 +11,9 @@ import Photos
 extension PHAsset {
     
     var resource: PHAssetResource? {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return nil
+        }
         return PHAssetResource.assetResources(for: self).first
     }
     
@@ -22,7 +25,7 @@ extension PHAsset {
         }
     }
     
-    /// MAYBE WILL BE NEED
+    /// MAYBE WILL BE NEEDed
 //    var uniformTypeIdentifier: String? {
 //        if #available(iOS 9.0, *) {
 //            return resource?.uniformTypeIdentifier
