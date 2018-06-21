@@ -540,7 +540,27 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func downloadToCmeraRoll(items: [BaseDataSourceItem]) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            showAccessAlert()
+            return
+        }
         download(item: items)
+    }
+    
+    private func showAccessAlert() {
+        log.debug("CameraService showAccessAlert")
+        
+        let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
+                                              message: TextConstants.cameraAccessAlertText,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.cameraAccessAlertNo,
+                                              secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
+                                              secondAction: { vc in
+                                                vc.close {
+                                                    UIApplication.shared.openSettings()
+                                                }
+        })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
     func deleteDeviceOriginal(items: [BaseDataSourceItem]) {

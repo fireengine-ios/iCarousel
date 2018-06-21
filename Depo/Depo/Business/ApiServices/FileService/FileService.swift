@@ -369,10 +369,6 @@ class FileService: BaseRequestService {
     
     func downloadToCameraRoll(downloadParam: BaseDownloadRequestParametrs, success: FileOperation?, fail: FailResponse?) {
         log.debug("FileService downloadToCameraRoll \(downloadParam.fileName)")
-        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-            fail?(ErrorResponse.string(""))
-            return
-        }
         executeDownloadRequest(param: downloadParam) { url, urlResponse, error in
             
             if let err = error {
