@@ -142,20 +142,41 @@ class LoadingImageView: UIImageView {
     
     func loadImageByPath(path_: PathForItem?) {
         self.image = nil
-        if (path_ == nil) {
+        
+        guard let unwrapedPath = path_ else {
             checkIsNeedCancelRequest()
             activity.stopAnimating()
-            
             return
         }
-        
         activity.startAnimating()
-        path = path_
-        url = filesDataSource.getImage(patch: path_!) { [weak self] image in
-            if self?.path == path_ {
-                self?.finishImageLoading(image)
+        path = unwrapedPath
+        switch unwrapedPath {
+        case .remoteUrl(let url):
+//            let dateStart = Date()
+            self.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
+                guard let `self` = self else {
+                    return
+                }
+                
+                guard error == nil else {
+                    print("SD_WebImage_setImage error: \(error!.description)")
+                    return
+                }
+                
+//                let isImageLoadedNotQuickly = dateStart.timeIntervalSinceNow < -0.2
+                self.image = image
+                self.finishImageLoading(image)
+//                self.setImage(image: image, animated: isImageLoadedNotQuickly)
             }
+        default:
+            self.image = nil
         }
+//        self.finishImageLoading(image)
+//        url = filesDataSource.getImage(patch: unwrapedPath) { [weak self] image in
+//            if self?.path == unwrapedPath {
+//                self?.finishImageLoading(image)
+//            }
+//        }
     }
     
     func loadGifImageFromURL(url: URL?) {
@@ -245,8 +266,10 @@ class LoadingImageView: UIImageView {
                     duration: NumericConstants.animationDuration,
                     options: .transitionCrossDissolve,
                     animations: { [weak self] in
-                        self?.image = image  
-                    }, completion: nil)
+//                        self?.image = image
+                    }, completion: { [weak self] _ in
+                        self?.image = image
+                })
             } else {
                 self.image = image
             }
