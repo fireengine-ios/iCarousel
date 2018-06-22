@@ -164,6 +164,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
         case .authorized:
+            photoLibrary.register(self)
             if (Device.operationSystemVersionLessThen(10)) {
                 PHPhotoLibrary.requestAuthorization({ authStatus in
                     let isAuthorized = authStatus == .authorized
@@ -176,8 +177,15 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         case .notDetermined, .restricted:
             passcodeStorage.systemCallOnScreen = true
             PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
-                self?.passcodeStorage.systemCallOnScreen = false
+                guard let `self` = self else {
+                    return
+                }
+                
+                self.passcodeStorage.systemCallOnScreen = false
                 let isAuthorized = authStatus == .authorized
+                if isAuthorized {
+                    self.photoLibrary.register(self)
+                }
                 MenloworksTagsService.shared.onGalleryPermissionChanged(isAuthorized)
                 completion(isAuthorized, authStatus)
             })
