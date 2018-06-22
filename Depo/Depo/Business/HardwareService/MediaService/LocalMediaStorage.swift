@@ -164,6 +164,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
         case .authorized:
+            self.photoLibrary.register(self)
             if (Device.operationSystemVersionLessThen(10)) {
                 PHPhotoLibrary.requestAuthorization({ authStatus in
                     let isAuthorized = authStatus == .authorized
