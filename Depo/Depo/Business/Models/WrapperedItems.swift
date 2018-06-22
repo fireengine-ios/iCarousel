@@ -790,7 +790,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
             } else if let smallUrl = remote.metadata?.smalURl {
                 url = smallUrl
             } else {
-                url = remote.tempDownloadURL
+                url = nil//remote.tempDownloadURL
             }            
         default:
             break
