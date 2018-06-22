@@ -79,53 +79,79 @@ class Device {
         return ProcessInfo().operatingSystemVersion.majorVersion < version
     }
     
-    static func getFreeDiskSpaceInBytes() -> Int64? {
-        var freeSize: Int?
+    static func getFreeDiskSpaceInBytes() -> Int64 {
         if #available(iOS 11.0, *) {
-            let fileURL = URL(fileURLWithPath: Device.homeFolderString())
-            do {
-                let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityKey])
-                freeSize = values.volumeAvailableCapacity
-            } catch {
-                print(error.localizedDescription)
-            }
+            return getFreeDiskSpaceInBytesIOS11()
+        } else {
+            return getFreeDiskSpaceInBytesIOS10()
         }
-        
-        if let freeSize = freeSize {
-            return Int64(freeSize)
-        } else if let freeSize = getFreeDiskSpaceInBytesIOS10() {
-            return Int64(freeSize) - 209715200 // 200MB - reserved system
+    }
+    
+    @available(iOS 11.0, *)
+    static func getFreeDiskSpaceInBytesIOS11() -> Int64 {
+        let fileURL = URL(fileURLWithPath: Device.homeFolderString())
+        do {
+            let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityKey])
+            if let availableCapacity = values.volumeAvailableCapacity {
+                return Int64(availableCapacity)
+            }
+        } catch {
+            print(error.localizedDescription)
         }
         return 0
     }
     
-    static private func getFreeDiskSpaceInBytesIOS10() -> Int64? {
-        var freeSize: NSNumber?
+    static private func getFreeDiskSpaceInBytesIOS10() -> Int64 {
         do {
             let systemAttributes = try FileManager.default.attributesOfFileSystem(forPath: Device.homeFolderString())
-            freeSize = systemAttributes[.systemFreeSize] as? NSNumber
+            if let freeSize = (systemAttributes[.systemFreeSize] as? NSNumber)?.int64Value {
+                return freeSize - 209715200 // 200MB - reserved system
+            }
         } catch {
             print(error.localizedDescription)
         }
-        return freeSize?.int64Value
+        return 0
     }
     
     static func getTotalDiskSpace() -> Int64? {
-        var totalSpace: NSNumber?
+        if #available(iOS 11.0, *) {
+            return getTotalDiskSpaceIOS11()
+        } else {
+            return getTotalDiskSpaceIOS10()
+        }
+    }
+    
+    static func getTotalDiskSpaceIOS10() -> Int64? {
         do {
             let dict = try FileManager.default.attributesOfFileSystem(forPath: Device.homeFolderString())
-            totalSpace = dict[.systemSize] as? NSNumber
+            return (dict[.systemSize] as? NSNumber)?.int64Value
         } catch {
             print(error.localizedDescription)
         }
-        return totalSpace?.int64Value
+        return nil
+    }
+    
+    @available(iOS 11.0, *)
+    static func getTotalDiskSpaceIOS11() -> Int64? {
+        let fileURL = URL(fileURLWithPath: Device.homeFolderString())
+        do {
+            let values = try fileURL.resourceValues(forKeys: [.volumeTotalCapacityKey])
+            if let totalCapacity = values.volumeTotalCapacity {
+                return Int64(totalCapacity)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        return 0
     }
     
     static var getFreeDiskSpaceInPercent: Double {
-        guard let freeSpace = getFreeDiskSpaceInBytes(),
-            let totalSpace = getTotalDiskSpace() else {
+        guard let totalSpace = getTotalDiskSpace() else {
             return 0
         }
+        
+        let freeSpace = getFreeDiskSpaceInBytes()
+        
         return Double(freeSpace)/Double(totalSpace)
     }
     

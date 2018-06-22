@@ -13,6 +13,10 @@ typealias ResponseAsset = (ResponseResult<PHAsset>) -> Void
 final class ImageManager: NSObject {
     
     func getLastImageAsset(handler: @escaping ResponseAsset) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            handler(ResponseResult.failed(ErrorResponse.string("")))
+            return
+        }
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         fetchOptions.fetchLimit = 1

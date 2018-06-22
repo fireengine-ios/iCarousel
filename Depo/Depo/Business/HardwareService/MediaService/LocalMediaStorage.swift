@@ -93,6 +93,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         queue.maxConcurrentOperationCount = 1
         
         super.init()
+        guard photoLibraryIsAvailible() else {
+            return
+        }
         self.photoLibrary.register(self)
     }
     
@@ -161,6 +164,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
         case .authorized:
+            photoLibrary.register(self)
             if (Device.operationSystemVersionLessThen(10)) {
                 PHPhotoLibrary.requestAuthorization({ authStatus in
                     let isAuthorized = authStatus == .authorized
@@ -173,8 +177,15 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         case .notDetermined, .restricted:
             passcodeStorage.systemCallOnScreen = true
             PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
-                self?.passcodeStorage.systemCallOnScreen = false
+                guard let `self` = self else {
+                    return
+                }
+                
+                self.passcodeStorage.systemCallOnScreen = false
                 let isAuthorized = authStatus == .authorized
+                if isAuthorized {
+                    self.photoLibrary.register(self)
+                }
                 MenloworksTagsService.shared.onGalleryPermissionChanged(isAuthorized)
                 completion(isAuthorized, authStatus)
             })
@@ -952,7 +963,10 @@ class GetImageOperation: Operation {
     }
     
     override func main() {
-        
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            callback(nil, nil)
+            return
+        }
         if isCancelled {
             return
         }
@@ -996,7 +1010,10 @@ class GetOriginalImageOperation: Operation {
     }
     
     override func main() {
-        
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            callback(nil, nil, .down, nil)
+            return
+        }
         if isCancelled {
             return
         }
@@ -1027,7 +1044,10 @@ class GetOriginalVideoOperation: Operation {
     }
     
     override func main() {
-        
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            callback(nil,nil,nil)
+            return
+        }
         if isCancelled {
             return
         }
@@ -1056,7 +1076,10 @@ class GetCompactImageOperation: Operation {
     }
     
     override func main() {
-        
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            callback(nil, nil, .down, nil)
+            return
+        }
         if isCancelled {
             return
         }
@@ -1086,7 +1109,10 @@ class GetCompactVideoOperation: Operation {
     }
     
     override func main() {
-        
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            callback(nil, nil, nil)
+            return
+        }
         if isCancelled {
             return
         }
@@ -1111,6 +1137,10 @@ class AddAssetToCollectionOperation: AsyncOperation {
     }
     
     override func workItem() {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            markFinished()
+            return
+        }
         if let collection = mediaStorage.loadAlbum(albumName) {
             mediaStorage.add(asset: assetIdentifier, to: collection)
             markFinished()

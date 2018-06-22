@@ -27,6 +27,10 @@ extension CoreDataStack {
     }
     
     func append(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            completion()
+            return
+        }
         privateQueue.async { [weak self] in
             guard let `self` = self else {
                 completion()
@@ -50,10 +54,19 @@ extension CoreDataStack {
     }
     
     func remove(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            completion()
+            return
+        }
         removeLocalMediaItems(with: localMediaItems.map { $0.localIdentifier }, completion: completion)
+        
     }
 
     func insertFromGallery(completion: VoidHandler?) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            completion?()
+            return
+        }
         guard !inProcessAppendingLocalFiles else {
             return
         }
@@ -92,6 +105,10 @@ extension CoreDataStack {
     }
     
     private func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping VoidHandler ) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            completion()
+            return
+        }
         guard !items.isEmpty else {
             print("LOCAL_ITEMS: no files to add")
             completion()
@@ -131,6 +148,9 @@ extension CoreDataStack {
     }
     
     private func updateICloudStatus(for assets: [PHAsset], context: NSManagedObjectContext) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return
+        }
         privateQueue.async { [weak self] in
             guard let `self` = self else {
                 return
@@ -153,7 +173,10 @@ extension CoreDataStack {
     }
     
     private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
-        let currentlyInLibriaryIDs: [String] = allList.flatMap { $0.localIdentifier }
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return []
+        }
+        let currentlyInLibriaryIDs: [String] = allList.map { $0.localIdentifier }
         
         checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs)
         
@@ -167,7 +190,10 @@ extension CoreDataStack {
     }
     
     func listAssetIdAlreadySaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
-        let currentlyInLibriaryIDs: [String] = allList.flatMap { $0.localIdentifier }
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return []
+        }
+        let currentlyInLibriaryIDs: [String] = allList.map { $0.localIdentifier }
         
         let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
         
@@ -192,16 +218,12 @@ extension CoreDataStack {
             let items = self.executeRequest(predicate: predicate, context: context)
             
             
-            items.forEach { context.delete($0) }
-            let deletedItems = items.map{ WrapData(mediaItem: $0) }
-//            ItemOperationManager.default.deleteItems(items: deletedItems)
-//            Masha [3:36 PM]
-//            теперь синхронизированные фотки пропадают при удалении фоток с девайса
-//            
-//            после рефреша - появляются
-//            и это не только фриапа касается
-//            если просто удалить фотку из галереи - та же фигня
             
+            let deletedItems = items.map{ WrapData(mediaItem: $0) }
+            LocalMediaStorage.default.assetsCache.remove(identifiers: assetIdList)
+            ItemOperationManager.default.deleteItems(items: deletedItems)
+            items.forEach { context.delete($0) }
+
             self.saveDataForContext(context: context, savedCallBack: { [weak self] in
                 ///Appearantly after recovery local ID may change, so temporary soloution is to check all files all over. and in the future chenge DataBase behavior heavily
                 let assetsList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
@@ -227,6 +249,9 @@ extension CoreDataStack {
     }
     
     func allLocalItems(with assets: [PHAsset]) -> [WrapData] {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return []
+        }
         let context = newChildBackgroundContext
         
         let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", assets.map { $0.localIdentifier })

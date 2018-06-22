@@ -242,6 +242,9 @@ class SyncServiceManager {
 // MARK: - Notifications
 extension SyncServiceManager {
     private func subscribeForNotifications() {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return
+        }
         setupReachability()
         setupAPIReachability()
         
@@ -274,6 +277,9 @@ extension SyncServiceManager {
             } else if let removedAssets = phChanges[PhotoLibraryChangeType.removed] as? [PHAsset] {
                 for asset in removedAssets {
                     newItemsToAppend.remove(where: {$0.localIdentifier == asset.localIdentifier})
+                }
+                if newItemsToAppend.isEmpty {
+                    checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
                 }
             }
             lastTimeNewItemsAppended = Date()
@@ -332,7 +338,7 @@ extension SyncServiceManager {
         ItemOperationManager.default.syncFinished()
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
-        guard !hasWaitingForWiFiSync, CoreDataStack.default.inProcessAppendingLocalFiles else {
+        if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, !CoreDataStack.default.inProcessAppendingLocalFiles {
             CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
             return
         }

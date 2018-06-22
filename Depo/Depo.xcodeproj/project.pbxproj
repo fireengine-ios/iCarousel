@@ -2437,8 +2437,8 @@
 		8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */; };
 		8C9EA13F20B593E600FED3A2 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
 		8C9EA14020B593E600FED3A2 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
+		8CA2913D20CA885C0014379E /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */; };
 		8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */; };
-		8CAEB15120D7C8480000529B /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */; };
 		8CAFBF0220825E720046E881 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		8CB293331F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */; };
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
@@ -14721,7 +14721,7 @@
 				8C0E8F6C1FDEBDFF00789C91 /* UploadFilesSelectionRouter.swift in Sources */,
 				8C0E8F6D1FDEBDFF00789C91 /* UploadFilesSelectionInitializer.swift in Sources */,
 				8CD2B3B01FE7B3BA00280547 /* UIColor+Adjust.swift in Sources */,
-				8CAEB15120D7C8480000529B /* UIBarButtonItem+Extensions.swift in Sources */,
+				8CA2913D20CA885C0014379E /* UIBarButtonItem+Extensions.swift in Sources */,
 				8C0E8F6E1FDEBDFF00789C91 /* SelectFolderViewController.swift in Sources */,
 				8C0E8F6F1FDEBDFF00789C91 /* SelectFolderPresenter.swift in Sources */,
 				8C0E8F701FDEBDFF00789C91 /* AlbumCollectionViewCell.swift in Sources */,
@@ -16602,7 +16602,7 @@
 					"MAIN_APP=1",
 				);
 				INFOPLIST_FILE = "Depo/App/Depo_LifeTech-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -16656,7 +16656,7 @@
 					"MAIN_APP=1",
 				);
 				INFOPLIST_FILE = "Depo_LifeTech copy-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -16708,7 +16708,7 @@
 					"MAIN_APP=1",
 				);
 				INFOPLIST_FILE = "Depo/App/Depo-AppStore-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -16761,7 +16761,7 @@
 					"MAIN_APP=1",
 				);
 				INFOPLIST_FILE = "Depo/App/Depo-Enterprise-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -17225,7 +17225,7 @@
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Depo/App/Depo_LifeTech-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -17280,7 +17280,7 @@
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Depo/App/Depo_LifeTech-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -17333,7 +17333,7 @@
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Depo/App/Depo_LifeTech-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -17387,7 +17387,7 @@
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Depo/App/Depo_LifeTech-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

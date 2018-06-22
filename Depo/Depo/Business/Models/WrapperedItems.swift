@@ -848,7 +848,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if let assetId = mediaItem.localFileID,
            let url = mediaItem.urlToFileValue {
             
-            if let asset = asset ?? LocalMediaStorage.default.assetsCache.assetBy(identifier: assetId) ?? PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject,
+            if LocalMediaStorage.default.photoLibraryIsAvailible(),
+             let asset = asset ?? LocalMediaStorage.default.assetsCache.assetBy(identifier: assetId) ?? PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject,
                 let urlToFile = URL(string: url) {
                 let tmp = LocalMediaContent(asset: asset, urlToFile: urlToFile)
                 assetDuration = asset.duration
@@ -942,6 +943,13 @@ class WrapData: BaseDataSourceItem, Wrappered {
             return  localID.components(separatedBy: "/").first ?? localID
         } else if uuid.contains("~"){
             return uuid.components(separatedBy: "~").first ?? uuid
+        }
+        return uuid
+    }
+    
+    func getLocalID() -> String {
+        if isLocalItem, let localID = asset?.localIdentifier {
+            return localID
         }
         return uuid
     }
