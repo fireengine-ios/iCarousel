@@ -96,6 +96,11 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     @IBAction private func onPlayVideoButton() {
         delegate?.tapOnSelectedItem()
     }
+    
+    deinit {
+        webView.delegate = nil
+        webView.stopLoading()
+    }
 }
 
 extension PhotoVideoDetailCell: UIScrollViewDelegate {

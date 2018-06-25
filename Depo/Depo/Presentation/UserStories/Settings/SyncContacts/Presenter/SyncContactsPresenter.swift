@@ -107,13 +107,6 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         outputView()?.hideSpiner()
     }
     
-    func showPopUpWithManyContacts() {
-        view.showErrorAlert(message: TextConstants.errorManyContactsToBackUp)
-        
-        view.setStateWithoutBackUp()
-        contactSyncResponse = nil
-    }
-    
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
