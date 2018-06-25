@@ -29,13 +29,8 @@ class ActivityTimelineViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        hideTabBar()
         navigationBarWithGradientStyle()
     }
-    
-//    private func hideTabBar() {
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar), object: nil, userInfo: nil)
-//    }
     
     private func setupTableView() {
         tableView.register(nibHeaderFooter: ActivityTimelineHeader.self)
