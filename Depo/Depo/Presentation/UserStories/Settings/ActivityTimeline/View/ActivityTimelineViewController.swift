@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivityTimelineViewController: ViewController {
+class ActivityTimelineViewController: BaseViewController {
     var output: ActivityTimelineViewOutput!
     
     @IBOutlet weak var tableView: UITableView!
@@ -29,12 +29,7 @@ class ActivityTimelineViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        hideTabBar()
         navigationBarWithGradientStyle()
-    }
-    
-    private func hideTabBar() {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar), object: nil, userInfo: nil)
     }
     
     private func setupTableView() {
