@@ -17,5 +17,4 @@ protocol SyncContactsInteractorOutput: class {
     func showNoBackUp()
     func asyncOperationStarted()
     func asyncOperationFinished()
-    func showPopUpWithManyContacts()
 }

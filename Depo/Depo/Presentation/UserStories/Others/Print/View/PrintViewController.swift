@@ -28,6 +28,11 @@ class PrintViewController: BaseViewController, ErrorPresenter {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
     }
+    
+    deinit {
+        webView.delegate = nil
+        webView.stopLoading()
+    }
 }
 
 // MARK: - PrintInteractorOutput

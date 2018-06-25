@@ -52,6 +52,11 @@ class InstagramAuthViewController: ViewController {
             delegate?.instagramAuthCancel()
         }
     }
+    
+    deinit {
+        webView.delegate = nil
+        webView.stopLoading()
+    }
 }
 
 extension InstagramAuthViewController: UIWebViewDelegate {
