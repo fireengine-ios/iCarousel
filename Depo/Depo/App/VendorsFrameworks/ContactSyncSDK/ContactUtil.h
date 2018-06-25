@@ -20,6 +20,7 @@
 - (void)deleteContacts:(NSMutableArray*) contacts;
 - (void)save:(Contact*)contact;
 - (NSMutableArray *)applyContacts:(NSInteger)syncRound;
+- (NSMutableArray*)fetchLocalContacts;
 - (NSMutableArray*)fetchContacts;
 - (NSInteger)getContactCount;
 - (Contact*)findContactById:(NSNumber*)objectId;
