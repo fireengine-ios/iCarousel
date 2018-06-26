@@ -13,4 +13,5 @@ protocol AutoSyncViewInput: class {
     func disableAutoSync()
     func checkPermissionsSuccessed()
     func checkPermissionsFailedWith(error: String)
+    func showLocationPermissionPopup(completion: @escaping VoidHandler)
 }
