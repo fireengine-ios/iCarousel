@@ -172,17 +172,15 @@ class CoreDataStack: NSObject {
     
     func saveMainContext(savedMainCallBack: VoidHandler?) {
         if mainContext.hasChanges {
-            mainContext.performAndWait{ [weak self] in
-                do {
-                    try self?.mainContext.save()
-                    
-                    self?.privateQueue.async {
-                        savedMainCallBack?()
-                    }
-                } catch {
-                    log.debug("Error saving context mainContext.save()()")
-                    print("Error saving context ___ ")
+            do {
+                try mainContext.save()
+                
+                privateQueue.async {
+                    savedMainCallBack?()
                 }
+            } catch {
+                log.debug("Error saving context mainContext.save()()")
+                print("Error saving context ___ ")
             }
         } else {
             privateQueue.async {
