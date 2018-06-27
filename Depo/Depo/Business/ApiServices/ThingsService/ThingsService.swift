@@ -11,21 +11,21 @@ import UIKit
 final class ThingsService: BaseRequestService {
 
 //    func getThingsList(param: ThingsParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
-//        log.debug("SearchService suggestion")
+//        debugLog("SearchService suggestion")
 //        
 //        let handler = BaseResponseHandler<ThingsServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
 //        executeGetRequest(param: param, handler: handler)
 //    }
     
     func getThingsPage(param: ThingsPageParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
-        log.debug("ThingsService getThingsPage")
+        debugLog("ThingsService getThingsPage")
         
         let handler = BaseResponseHandler<ThingsPageResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func getThingsAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
-        log.debug("ThingsService getThingsAlbumWithID")
+        debugLog("ThingsService getThingsAlbumWithID")
         
         let param = ThingsAlbumParameters(id: id)
         
@@ -41,12 +41,12 @@ final class ThingsService: BaseRequestService {
     }
     
     func deletePhotosFromAlbum(id: Int64, photos: [Item], success: PhotosAlbumOperation?, fail: FailResponse?) {
-        log.debug("ThingsService deletePhotosFromAlbum")
+        debugLog("ThingsService deletePhotosFromAlbum")
         
         let parameters = DeletePhotosFromThingsAlbum(id: id, photos: photos)
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("ThingsService deletePhotosFromAlbum success")
+            debugLog("ThingsService deletePhotosFromAlbum success")
             
             success?()
         }, fail: fail)

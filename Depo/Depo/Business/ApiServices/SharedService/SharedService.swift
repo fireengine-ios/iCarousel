@@ -85,15 +85,15 @@ class SharedService: BaseRequestService {
     
     
     func share(param: SharedServiceParam, success: SuccessShared?, fail: FailResponse?) {
-        log.debug("SharedService share")
+        debugLog("SharedService share")
         
         let handler = BaseResponseHandler<SharedServiceResponse, ObjectRequestResponse>(success: { tmp  in
             if let url = (tmp as? SharedServiceResponse)?.url {
-                log.debug("SharedService share success")
+                debugLog("SharedService share success")
 
                 success?(url)
             } else {
-                log.debug("SharedService share fail(Not url from server)")
+                debugLog("SharedService share fail(Not url from server)")
 
                 fail?(.string("Not url from server"))
             }

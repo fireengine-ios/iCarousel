@@ -28,14 +28,14 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
     }
     
     override func onMaxSelectionExeption() {
-        log.debug("UploadFromLifeBoxPhotosPresenter onMaxSelectionExeption")
+        debugLog("UploadFromLifeBoxPhotosPresenter onMaxSelectionExeption")
 
         let text = String(format: TextConstants.createStoryPhotosMaxCountAllert, NumericConstants.maxNumberPhotosInStory)
         UIApplication.showErrorAlert(message: text)
     }
     
     override func onNextButton() {
-        log.debug("UploadFromLifeBoxPhotosPresenter onNextButton")
+        debugLog("UploadFromLifeBoxPhotosPresenter onNextButton")
 
         let array = dataSource.getSelectedItems()
         if (array.isEmpty) {
@@ -67,7 +67,7 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
     }
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
-        log.debug("UploadFromLifeBoxPhotosPresenter onItemSelected")
+        debugLog("UploadFromLifeBoxPhotosPresenter onItemSelected")
 
         guard let wrapDataItem = item as? WrapData, let isFolder = wrapDataItem.isFolder else {
             super.onItemSelected(item: item, from: data)
@@ -84,7 +84,7 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
     }
     
     func uploadOperationSuccess() {
-        log.debug("UploadFromLifeBoxPhotosPresenter uploadOperationSuccess")
+        debugLog("UploadFromLifeBoxPhotosPresenter uploadOperationSuccess")
         dataSource.setSelectionState(selectionState: false)
         stopModeSelected()
         guard let uploadView = view as? UploadFromLifeBoxViewInput else {

@@ -136,7 +136,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     private func getThumbnails(forType type: FaceImageType, group: DispatchGroup) {
         group.enter()
         faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: type), success: { [weak self] response in
-            log.debug("FaceImageService \(type.description) Thumbnails success")
+            debugLog("FaceImageService \(type.description) Thumbnails success")
             
             let item: SliderItem
             if let thumbnails = (response as? FaceImageThumbnailsResponse)?.list {
@@ -151,7 +151,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
             }
             
             }, fail: { [weak self] error in
-                log.debug("FaceImageService \(type.description) Thumbnails fail")
+                debugLog("FaceImageService \(type.description) Thumbnails fail")
                 
                 DispatchQueue.main.async {
                     self?.output.operationFailed()

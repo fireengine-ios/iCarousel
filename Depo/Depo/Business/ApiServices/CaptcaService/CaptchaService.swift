@@ -80,7 +80,7 @@ final class CaptchaResponse: ObjectRequestResponse {
     }
     
     required init(withJSON: JSON?) {
-        log.debug("CaptchaResponse init(withJSON:) has not been implemented")
+        debugLog("CaptchaResponse init(withJSON:) has not been implemented")
         fatalError("init(withJSON:) has not been implemented")
     }
 }
@@ -91,7 +91,7 @@ final class CaptchaService: BaseRequestService {
     private(set) var uuid: String = UUID().uuidString
     
     func getCaptcha(uuid: String? = nil, type: CaptchaType = .image, sucess: SuccessResponse?, fail: FailResponse?   ) {
-        log.debug("CaptchaService getCaptcha")
+        debugLog("CaptchaService getCaptcha")
         
         if let uuid = uuid {
             self.uuid = uuid

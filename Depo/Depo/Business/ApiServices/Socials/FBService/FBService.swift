@@ -23,7 +23,7 @@ public enum FBStatusValue: String {
 
 class FBService: BaseRequestService {
     func requestToken(permissions: [String], success: ((String) -> Void)?, fail: FailResponse?) {
-        log.debug("FBService requestToken")
+        debugLog("FBService requestToken")
 
         let vc = (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController!
         
@@ -41,7 +41,7 @@ class FBService: BaseRequestService {
     }
     
     func requestPermissions(success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("FBService requestPermissions")
+        debugLog("FBService requestPermissions")
 
         let fb = FBPermissions()
         let handler = BaseResponseHandler<FBPermissionsObject, ObjectRequestResponse>(success: success, fail: fail)
@@ -49,7 +49,7 @@ class FBService: BaseRequestService {
     }
     
     func requestConnect(withToken token: String, success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("FBService requestConnect")
+        debugLog("FBService requestConnect")
 
         let fb = FBConnect(withToken: token)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -57,7 +57,7 @@ class FBService: BaseRequestService {
     }
     
     func requestStatus(success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("FBService requestStatus")
+        debugLog("FBService requestStatus")
 
         let fb = FBStatus()
         let handler = BaseResponseHandler<FBStatusObject, ObjectRequestResponse>(success: success, fail: fail)
@@ -65,7 +65,7 @@ class FBService: BaseRequestService {
     }
     
     func requestStart(success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("FBService requestStart")
+        debugLog("FBService requestStart")
 
         let fb = FBStart()
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -73,7 +73,7 @@ class FBService: BaseRequestService {
     }
     
     func requestStop(success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("FBService requestStop")
+        debugLog("FBService requestStop")
 
         let fb = FBStop()
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)

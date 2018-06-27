@@ -11,14 +11,14 @@ import Foundation
 final class InstagramService: BaseRequestService {
     
     func socialStatus(success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("InstagramService socialStatus")
+        debugLog("InstagramService socialStatus")
         let params = SocialStatusParametrs()
         let handler = BaseResponseHandler<SocialStatusResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: params, handler: handler)
     }
     
     func getInstagramConfig(success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("InstagramService getInstagramConfig")
+        debugLog("InstagramService getInstagramConfig")
 
         let parameters = InstagramConfigParametrs()
         let handler = BaseResponseHandler<InstagramConfigResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -26,7 +26,7 @@ final class InstagramService: BaseRequestService {
     }
     
     func getSyncStatus(success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("InstagramService getSyncStatus")
+        debugLog("InstagramService getSyncStatus")
 
         let parameters = SocialSyncStatusGetParametrs()
         let handler = BaseResponseHandler<SocialSyncStatusResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -34,14 +34,14 @@ final class InstagramService: BaseRequestService {
     }
     
     func setSyncStatus(param: SocialSyncStatusParametrs, success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("InstagramService setSyncStatus")
+        debugLog("InstagramService setSyncStatus")
 
         let handler = BaseResponseHandler<SendSocialSyncStatusResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: param, handler: handler)
     }
     
     func createMigration(success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("InstagramService createMigration")
+        debugLog("InstagramService createMigration")
 
         let parameters = CreateMigrationParametrs()
         let handler = BaseResponseHandler<CreateMigrationResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -49,7 +49,7 @@ final class InstagramService: BaseRequestService {
     }
     
     func cancelMigration(success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("InstagramService cancelMigration")
+        debugLog("InstagramService cancelMigration")
 
         let parameters = CancelMigrationParametrs()
         let handler = BaseResponseHandler<CancelMigrationResponse, ObjectRequestResponse>(success: success, fail: fail)

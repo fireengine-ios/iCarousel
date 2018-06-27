@@ -271,7 +271,7 @@ class AuthenticationService: BaseRequestService {
     // MARK: - Login
     
     func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?) {
-        log.debug("AuthenticationService loginUser")
+        debugLog("AuthenticationService loginUser")
         
         storageVars.currentUserID = user.login
         
@@ -322,7 +322,7 @@ class AuthenticationService: BaseRequestService {
     }
     
     func autificationByToken(sucess: SuccessLogin?, fail: FailResponse?) {
-        log.debug("AuthenticationService autificationByToken")
+        debugLog("AuthenticationService autificationByToken")
         
         let user = AuthenticationUserByToken()
         let params: [String: Any] = ["deviceInfo": Device.deviceInfo]
@@ -334,7 +334,7 @@ class AuthenticationService: BaseRequestService {
     }
     
     func turkcellAutification(user: Authentication3G, sucess: SuccessLogin?, fail: FailResponse?) {
-        log.debug("AuthenticationService turkcellAutification")
+        debugLog("AuthenticationService turkcellAutification")
         
         SessionManager.customDefault.request(user.patch, method: .post, parameters: Device.deviceInfo, encoding: JSONEncoding.prettyPrinted)
             .responseString { [weak self] response in
@@ -368,7 +368,7 @@ class AuthenticationService: BaseRequestService {
 
     func logout(async: Bool = true, success: SuccessLogout?) {
         func logout() {
-            log.debug("AuthenticationService logout")
+            debugLog("AuthenticationService logout")
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
@@ -415,7 +415,7 @@ class AuthenticationService: BaseRequestService {
     }
     
     func signUp(user: SignUpUser, sucess: SuccessResponse?, fail: FailResponse?) {
-        log.debug("AuthenticationService signUp")
+        debugLog("AuthenticationService signUp")
         
         let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: { value in
             MenloworksAppEvents.onSignUp()
@@ -425,35 +425,35 @@ class AuthenticationService: BaseRequestService {
     }
     
     func verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification, sucess: SuccessResponse?, fail: FailResponse?) {
-        log.debug("AuthenticationService verificationPhoneNumber")
+        debugLog("AuthenticationService verificationPhoneNumber")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: phoveVerification, handler: handler)
     }
     
     func resendVerificationSMS(resendVerification: ResendVerificationSMS, sucess: SuccessResponse?, fail: FailResponse?) {
-        log.debug("AuthenticationService resendVerificationSMS")
+        debugLog("AuthenticationService resendVerificationSMS")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: resendVerification, handler: handler)
     }
     
     func updateEmail(emailUpdateParameters: EmailUpdate, sucess: SuccessResponse?, fail: FailResponse?) {
-        log.debug("AuthenticationService updateEmail")
+        debugLog("AuthenticationService updateEmail")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: emailUpdateParameters, handler: handler)
     }
     
     func verificationEmail(emailVerification: EmailVerification, sucess: SuccessResponse?, fail: FailResponse?) {
-        log.debug("AuthenticationService verificationEmail")
+        debugLog("AuthenticationService verificationEmail")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: emailVerification, handler: handler)
     }
     
     func fogotPassword(forgotPassword: ForgotPassword, success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("AuthenticationService fogotPassword")
+        debugLog("AuthenticationService fogotPassword")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: forgotPassword, handler: handler)
@@ -461,7 +461,7 @@ class AuthenticationService: BaseRequestService {
 
     func turkcellAuth(success: SuccessLogin?, fail: FailResponse?) {
         let user = Authentication3G()
-        log.debug("Authentication3G")
+        debugLog("Authentication3G")
         self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
             self?.autificationByToken(sucess: success, fail: fail)
         })

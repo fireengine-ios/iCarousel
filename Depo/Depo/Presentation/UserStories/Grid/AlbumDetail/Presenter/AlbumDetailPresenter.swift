@@ -15,21 +15,21 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     }
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
-        log.debug("AlbumDetailPresenter operationFinished")
+        debugLog("AlbumDetailPresenter operationFinished")
 
         guard let router = self.router as? AlbumDetailRouter else { return }
         switch type {
         case .removeFromAlbum:
-            log.debug("AlbumDetailPresenter operationFinished type == removeFromAlbum")
+            debugLog("AlbumDetailPresenter operationFinished type == removeFromAlbum")
 
             //onReloadData()
         case .completelyDeleteAlbums:
-            log.debug("AlbumDetailPresenter operationFinished type == completelyDeleteAlbums")
+            debugLog("AlbumDetailPresenter operationFinished type == completelyDeleteAlbums")
 
             router.back()
             albumDetailModuleOutput?.onAlbumDeleted()
         case .removeAlbum:
-            log.debug("AlbumDetailPresenter operationFinished type == removeAlbum")
+            debugLog("AlbumDetailPresenter operationFinished type == removeAlbum")
 
             router.back()
             albumDetailModuleOutput?.onAlbumRemoved()
@@ -39,7 +39,7 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     }
     
     override var selectedItems: [BaseDataSourceItem] {
-        log.debug("AlbumDetailPresenter operationFinished")
+        debugLog("AlbumDetailPresenter operationFinished")
 
         let selectedItems = super.selectedItems
         if selectedItems.count > 0 {
@@ -74,15 +74,15 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     }
     
     override func viewAppearanceChanged(asGrid: Bool) {
-        log.debug("AlbumDetailPresenter viewAppearanceChanged")
+        debugLog("AlbumDetailPresenter viewAppearanceChanged")
         
         if  asGrid {
-            log.debug("AlbumDetailPresenter viewAppearanceChanged Grid")
+            debugLog("AlbumDetailPresenter viewAppearanceChanged Grid")
             
             dataSource.updateDisplayngType(type: .greed)
             type = .List
         } else {
-            log.debug("AlbumDetailPresenter viewAppearanceChanged List")
+            debugLog("AlbumDetailPresenter viewAppearanceChanged List")
             
             dataSource.updateDisplayngType(type: .list)
             type = .Grid
@@ -90,7 +90,7 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     }
     
     override func sortedPushed(with rule: SortedRules) {
-        log.debug("AlbumDetailPresenter sortedPushed")
+        debugLog("AlbumDetailPresenter sortedPushed")
         
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)

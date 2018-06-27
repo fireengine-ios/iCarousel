@@ -19,7 +19,7 @@ protocol SubscriptionsService {
 class SubscriptionsServiceIml: BaseRequestService, SubscriptionsService {
     
     func activeSubscriptions(success: SuccessResponse?, fail: @escaping FailResponse) {
-        log.debug("SubscriptionsServiceIml activeSubscriptions")
+        debugLog("SubscriptionsServiceIml activeSubscriptions")
         
         let param = ActiveSubscriptionParameters()
         let handler = BaseResponseHandler<ActiveSubscriptionResponse, ObjectRequestResponse>(success: success, fail: fail)

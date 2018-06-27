@@ -179,7 +179,7 @@ final class CoreDataStack: NSObject {
                     savedMainCallBack?()
                 }
             } catch {
-                log.debug("Error saving context mainContext.save()()")
+                debugLog("Error saving context mainContext.save()()")
                 print("Error saving context ___ ")
             }
         } else {
@@ -198,7 +198,7 @@ final class CoreDataStack: NSObject {
             do {
                 try context.save()
             } catch {
-                log.debug("saveDataForContext() save() Error saving contex")
+                debugLog("saveDataForContext() save() Error saving contex")
                 print("Error saving context ___ ")
             }
             

@@ -246,7 +246,7 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
     }
     
     private func showAccessAlert(message: String) {
-        log.debug("AutoSyncViewController showAccessAlert")
+        debugLog("AutoSyncViewController showAccessAlert")
     
         let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
                                               message: message,

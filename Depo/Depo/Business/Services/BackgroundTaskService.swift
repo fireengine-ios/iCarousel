@@ -26,13 +26,13 @@ final class BackgroundTaskService {
             self?.endBackgroundTask()
         })
 
-        log.debug("beginBackgroundTask \(self.backgroundTaskId)")
+        debugLog("beginBackgroundTask \(self.backgroundTaskId)")
     }
     
     private func endBackgroundTask() {
         if self.backgroundTaskId != UIBackgroundTaskInvalid {
             UIApplication.shared.endBackgroundTask(backgroundTaskId)
-            log.debug("endBackgroundTask \(backgroundTaskId)")
+            debugLog("endBackgroundTask \(backgroundTaskId)")
             backgroundTaskId = UIBackgroundTaskInvalid
         }
     }
