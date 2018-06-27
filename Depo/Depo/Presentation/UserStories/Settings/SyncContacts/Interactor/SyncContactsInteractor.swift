@@ -59,12 +59,14 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 self?.output?.showProggress(progress: progressPercentage, count: 0, forOperation: type)
             }
         }, finishCallback: { [weak self] result, type in
+            log.debug("contactsSyncService.executeOperation finishCallback: \(result)")
             DispatchQueue.main.async {
                 self?.output?.success(response: result, forOperation: type)
                 CardsManager.default.stopOperationWithType(type: .contactBacupOld)
                 CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
             }
         }, errorCallback: { [weak self] errorType, type in
+            log.debug("contactsSyncService.executeOperation errorCallback: \(errorType)")
             DispatchQueue.main.async {
                 self?.output?.showError(errorType: errorType)
             }
@@ -74,9 +76,11 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     private func loadLastBackUp() {
         output?.asyncOperationStarted()
         contactsSyncService.getBackUpStatus(completion: { [weak self] model in
+            log.debug("loadLastBackUp completion")
             self?.output?.success(response: model, forOperation: .getBackUpStatus)
             self?.output?.asyncOperationFinished()
         }, fail: { [weak self] in
+            log.debug("loadLastBackUp fail")
             self?.output?.showNoBackUp()
             self?.output?.asyncOperationFinished()
         })
@@ -88,11 +92,13 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 self?.output?.showProggress(progress: progressPercentage, count: count, forOperation: type)
             }
         }, successCallback: { [weak self] response in
+            log.debug("contactsSyncService.analyze successCallback")
             DispatchQueue.main.async {
                 self?.output?.analyzeSuccess(response: response)
             }
         }, cancelCallback: nil,
            errorCallback: { [weak self] errorType, type in
+            log.debug("contactsSyncService.analyze errorCallback")
             DispatchQueue.main.async {
                 self?.output?.showError(errorType: errorType)
             }
