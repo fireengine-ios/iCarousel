@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,10 +32,6 @@
                             <action selector="onPlayVideoButton" destination="gTV-IL-0wX" eventType="touchUpInside" id="eED-3r-bCN"/>
                         </connections>
                     </button>
-                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2m8-Lr-SFe">
-                        <rect key="frame" x="0.0" y="0.0" width="269" height="250"/>
-                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </webView>
                 </subviews>
             </view>
             <constraints>
@@ -44,13 +40,9 @@
                 <constraint firstAttribute="bottom" secondItem="slB-Qr-paR" secondAttribute="bottom" id="Gow-81-ter"/>
                 <constraint firstItem="vGW-xm-Jy7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="JVq-N4-FDW"/>
                 <constraint firstAttribute="bottom" secondItem="vGW-xm-Jy7" secondAttribute="bottom" id="Ppj-jx-2QC"/>
-                <constraint firstAttribute="trailing" secondItem="2m8-Lr-SFe" secondAttribute="trailing" id="QtW-4L-5cs"/>
                 <constraint firstAttribute="trailing" secondItem="vGW-xm-Jy7" secondAttribute="trailing" id="TTN-TF-VwY"/>
                 <constraint firstItem="slB-Qr-paR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Unx-kw-eNP"/>
                 <constraint firstItem="JVY-Sc-8sq" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="aYa-9y-9oN"/>
-                <constraint firstAttribute="bottom" secondItem="2m8-Lr-SFe" secondAttribute="bottom" id="bxC-nf-Z0z"/>
-                <constraint firstItem="2m8-Lr-SFe" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jh6-lG-3RJ"/>
-                <constraint firstItem="2m8-Lr-SFe" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="m1Y-QS-8M2"/>
                 <constraint firstItem="JVY-Sc-8sq" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="off-Ep-f2O"/>
                 <constraint firstItem="slB-Qr-paR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zAM-58-59d"/>
             </constraints>
@@ -60,7 +52,6 @@
                 <outlet property="activity" destination="JVY-Sc-8sq" id="nRu-oT-LPY"/>
                 <outlet property="imageScrollView" destination="vGW-xm-Jy7" id="zw5-gl-tsP"/>
                 <outlet property="playVideoButton" destination="slB-Qr-paR" id="G49-3u-rfr"/>
-                <outlet property="webView" destination="2m8-Lr-SFe" id="U4U-T5-fzh"/>
             </connections>
             <point key="canvasLocation" x="143.5" y="154"/>
         </collectionViewCell>
