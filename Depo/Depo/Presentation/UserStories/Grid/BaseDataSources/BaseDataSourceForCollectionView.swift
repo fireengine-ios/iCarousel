@@ -885,7 +885,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getSelectedItems() -> [BaseDataSourceItem] {
-        return Array(selectedItemsArray)
+        return selectedItemsArray.map{$0}
     }
     
     
