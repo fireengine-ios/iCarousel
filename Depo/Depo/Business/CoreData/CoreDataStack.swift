@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import Photos
 
-class CoreDataStack: NSObject {
+final class CoreDataStack: NSObject {
     
     typealias AppendingLocaclItemsFinishCallback = () -> Void
     typealias AppendingLocaclItemsProgressCallback = (Float) -> Void
@@ -170,20 +170,17 @@ class CoreDataStack: NSObject {
         }
     }
     
-    func saveMainContext(savedMainCallBack: VoidHandler?) {
-        mainContext.processPendingChanges()
+    private func saveMainContext(savedMainCallBack: VoidHandler?) {
         if mainContext.hasChanges {
-            mainContext.performAndWait{
-                do {
-                    try mainContext.save()
-                    
-                    privateQueue.async {
-                        savedMainCallBack?()
-                    }
-                } catch {
-                    log.debug("Error saving context mainContext.save()()")
-                    print("Error saving context ___ ")
+            do {
+                try mainContext.save()
+                
+                privateQueue.async {
+                    savedMainCallBack?()
                 }
+            } catch {
+                log.debug("Error saving context mainContext.save()()")
+                print("Error saving context ___ ")
             }
         } else {
             privateQueue.async {
