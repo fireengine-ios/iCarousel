@@ -7,12 +7,20 @@
 //
 
 import UIKit
+import WebKit
 
 class PrintViewController: BaseViewController, ErrorPresenter {
     
-    @IBOutlet private weak var webView: UIWebView!
+    private lazy var webView = WKWebView(frame: .zero)
 
     var output: PrintViewOutput!
+    
+    override func loadView() {
+        super.loadView()
+        
+        webView.navigationDelegate = self
+        view = webView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +38,7 @@ class PrintViewController: BaseViewController, ErrorPresenter {
     }
     
     deinit {
-        webView.delegate = nil
+        webView.navigationDelegate = nil
         webView.stopLoading()
     }
 }
@@ -40,26 +48,26 @@ class PrintViewController: BaseViewController, ErrorPresenter {
 extension PrintViewController: PrintViewInput {
     
     func loadUrl(_ urlRequest: URLRequest) {
-        webView.loadRequest(urlRequest)
+        webView.load(urlRequest)
     }
 
 }
 
 // MARK: - PrintInteractorOutput
 
-extension PrintViewController: UIWebViewDelegate {
-   
-    func webViewDidStartLoad(_ webView: UIWebView) {
-        output.didStartLoad()
-    }
-
-    func webViewDidFinishLoad(_ webView: UIWebView) {
+extension PrintViewController: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         output.didEndLoad()
     }
     
-    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         output.didEndLoad()
         showErrorAlert(message: error.description)
+    }
+    
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        output.didStartLoad()
     }
     
 }
