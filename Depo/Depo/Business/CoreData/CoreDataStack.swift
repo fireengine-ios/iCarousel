@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreData
-import Photos
 
 final class CoreDataStack: NSObject {
     

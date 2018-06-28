@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Photos
 
 struct FilePatch {
     static let fileList = "/api/filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
