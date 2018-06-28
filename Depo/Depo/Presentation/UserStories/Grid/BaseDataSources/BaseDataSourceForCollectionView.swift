@@ -1645,6 +1645,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
             }
             
+            self.emptyMetaItems = self.emptyMetaItems.filter { !idsForRemove.contains($0.uuid) }
+
             var newArray = [[WrapData]]()
             
             for array in self.allItems {
