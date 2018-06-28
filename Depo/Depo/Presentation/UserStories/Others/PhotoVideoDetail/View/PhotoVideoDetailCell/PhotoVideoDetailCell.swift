@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import WebKit
+
 
 protocol PhotoVideoDetailCellDelegate: class {
     func tapOnSelectedItem()
@@ -18,7 +20,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     @IBOutlet private weak var imageScrollView: ImageScrollView!
     @IBOutlet private weak var activity: UIActivityIndicatorView!
     @IBOutlet private weak var playVideoButton: UIButton!
-    @IBOutlet private weak var webView: UIWebView!
+    
+    private lazy var webView = WKWebView(frame: .zero)
     
     weak var delegate: PhotoVideoDetailCellDelegate?
     
@@ -34,13 +37,14 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        contentView.addSubview(webView)
+        
         if #available(iOS 11.0, *) {
             imageScrollView.contentInsetAdjustmentBehavior = .never
             webView.scrollView.contentInsetAdjustmentBehavior = .never
         }
         
         backgroundColor = UIColor.clear
-        webView.scalesPageToFit = true /// enable zoom
         imageScrollView.delegate = self
         imageScrollView.imageView.delegate = self
         
@@ -64,6 +68,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             oldFrame = frame
             super.layoutSubviews()
             layoutIfNeeded()
+            webView.frame = contentView.frame
             imageScrollView.updateZoom()
         }
     }
@@ -82,13 +87,12 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             imageScrollView.imageView.isHidden = true
             webView.isHidden = false
             webView.clearPage()
-            
             if object.fileType.isDocument, let preview = object.metaData?.documentPreviewURL {
-                webView.delegate = self
-                webView.loadRequest(URLRequest(url: preview))
+                webView.navigationDelegate = self
+                webView.load(URLRequest(url: preview))
             } else if let url = object.urlToFile {
-                webView.delegate = self
-                webView.loadRequest(URLRequest(url: url))
+                webView.navigationDelegate = self
+                webView.load(URLRequest(url: url))
             }
         }
     }
@@ -98,7 +102,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     }
     
     deinit {
-        webView.delegate = nil
+        webView.navigationDelegate = nil
         webView.stopLoading()
     }
 }
@@ -121,8 +125,8 @@ extension PhotoVideoDetailCell: UIScrollViewDelegate {
     }
 }
 
-extension PhotoVideoDetailCell: UIWebViewDelegate {
-    func webViewDidFinishLoad(_ webView: UIWebView) {
+extension PhotoVideoDetailCell: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.scrollView.delegate = self
     }
 }

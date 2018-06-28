@@ -66,8 +66,19 @@ protocol LocalMediaStorageProtocol {
 class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     static let `default` = LocalMediaStorage()
+    
+    /// if PHImageManager had been inited once (e.g. by "PHImageManager.default()")
+    /// when user denied access to photos ("PHPhotoLibrary.authorizationStatus() == .authorized")
+    /// than app will crash when application will receive memory warning
+    /// (can be tested in simulator by "Debug - Simulate Memory Warning")
+    /// with message "This application is not allowed to access Photo data"
+    private var photoManager: PHImageManager? = {
+        guard PHPhotoLibrary.authorizationStatus() == .authorized else {
+            return nil
+        }
         
-    private let photoManger = PHImageManager.default()
+        return PHImageManager.default()
+    }()
     
     private let photoLibrary = PHPhotoLibrary.shared()
     
@@ -316,6 +327,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     func getImage(asset: PHAsset, contentSize: CGSize, convertToSize: CGSize, image: @escaping FileDataSorceImg) {
         debugLog("LocalMediaStorage getImage")
         
+        guard let photoManager = photoManager else {
+            image(nil)
+            return
+        }
+        
         let scalling: PhotoManagerCallBack = { [weak self] input, dict in
             self?.dispatchQueue.async {
                 let newImg = input?.resizeImage(rect: contentSize)
@@ -324,7 +340,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             }
         }
         
-        let operation = GetImageOperation(photoManager: photoManger,
+        let operation = GetImageOperation(photoManager: photoManager,
                                           asset: asset,
                                           targetSize: convertToSize,
                                           callback: scalling)
@@ -333,13 +349,18 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     func getImage(asset: PHAsset, contentSize: CGSize, image: @escaping FileDataSorceImg) {
         debugLog("LocalMediaStorage getImage")
+        
+        guard let photoManager = photoManager else {
+            image(nil)
+            return
+        }
 
         let callBack: PhotoManagerCallBack = { newImg, _ in
             DispatchQueue.main.async {
                 image(newImg)
             }
         }
-        let operation = GetImageOperation(photoManager: photoManger,
+        let operation = GetImageOperation(photoManager: photoManager,
                                           asset: asset,
                                           targetSize: contentSize,
                                           callback: callBack)
@@ -598,9 +619,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         debugLog("LocalMediaStorage copyVideoAsset")
 
         var url = LocalMediaStorage.defaultUrl
+        
+        guard let photoManager = photoManager else {
+            return url
+        }
+        
         let semaphore = DispatchSemaphore(value: 0)
         
-        let operation = GetOriginalVideoOperation(photoManager: self.photoManger,
+        let operation = GetOriginalVideoOperation(photoManager: photoManager,
                                                   asset: asset) { avAsset, aVAudioMix, Dict in
                                                     
                                                     if let urlToFile = (avAsset as? AVURLAsset)?.url {
@@ -629,9 +655,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         debugLog("LocalMediaStorage copyImageAsset")
         
         var url = LocalMediaStorage.defaultUrl
+        
+        guard let photoManager = photoManager else {
+            return url
+        }
+        
         let semaphore = DispatchSemaphore(value: 0)
         
-        let operation = GetOriginalImageOperation(photoManager: self.photoManger,
+        let operation = GetOriginalImageOperation(photoManager: photoManager,
                                                   asset: asset) { data, string, orientation, dict in
                                                     let file = UUID().uuidString
                                                     url = Device.tmpFolderUrl(withComponent: file)
@@ -682,9 +713,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     private func compactInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
         
         var assetInfo = AssetInfo(libraryAsset: asset)
+        
+        guard let photoManager = photoManager else {
+            return assetInfo
+        }
+        
         let semaphore = DispatchSemaphore(value: 0)
         
-        let operation = GetCompactVideoOperation(photoManager: self.photoManger, asset: asset) { avAsset, aVAudioMix, dict in
+        let operation = GetCompactVideoOperation(photoManager: photoManager, asset: asset) { avAsset, aVAudioMix, dict in
             
             self.dispatchQueue.async {
                 let failCompletion = {
@@ -750,8 +786,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         var assetInfo = AssetInfo(libraryAsset: asset)
         
+        guard let photoManager = photoManager else {
+            return assetInfo
+        }
+        
         let semaphore = DispatchSemaphore(value: 0)
-        let operation = GetCompactImageOperation(photoManager: self.photoManger, asset: asset) { data, string, orientation, dict in
+        let operation = GetCompactImageOperation(photoManager: photoManager, asset: asset) { data, string, orientation, dict in
             self.dispatchQueue.async {
                 let failCompletion = {
                     print("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
@@ -807,9 +847,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     func fullInfoAboutVideoAsset(asset: PHAsset) -> AssetInfo {
         
         var assetInfo = AssetInfo(libraryAsset: asset)
+        
+        guard let photoManager = photoManager else {
+            return assetInfo
+        }
+        
         let semaphore = DispatchSemaphore(value: 0)
         
-        let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { avAsset, aVAudioMix, dict in
+        let operation = GetOriginalVideoOperation(photoManager: photoManager, asset: asset) { avAsset, aVAudioMix, dict in
             
             self.dispatchQueue.async {
                 let failCompletion = {
@@ -873,8 +918,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         var assetInfo = AssetInfo(libraryAsset: asset)
         
+        guard let photoManager = photoManager else {
+            return assetInfo
+        }
+        
         let semaphore = DispatchSemaphore(value: 0)
-        let operation = GetOriginalImageOperation(photoManager: self.photoManger, asset: asset) { data, string, orientation, dict in
+        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset) { data, string, orientation, dict in
             self.dispatchQueue.async {
                 let failCompletion = {
                     print("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
