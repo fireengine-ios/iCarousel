@@ -132,7 +132,7 @@ final class MediaPlayer: NSObject {
 //            return super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
 //        }
         
-        if keyPath == #keyPath(AVPlayer.status) {
+        if keyPath == #keyPath(AVPlayer.status), isPlaying {
             play()
         } else if keyPath == #keyPath(AVPlayer.currentItem) {
             let index = chooseIndex(for: currentIndex)
@@ -152,10 +152,12 @@ final class MediaPlayer: NSObject {
                 delegate.mediaPlayer(self, didStartItemWith: duration)
             }
             
-            play()
+            if isPlaying {
+                play()
+            }
         } else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackLikelyToKeepUp), player.currentItem?.status == .readyToPlay, isPlaying {
             play()
-        } else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackBufferEmpty), player.currentItem?.status == .readyToPlay {
+        } else if keyPath == #keyPath(AVPlayer.currentItem.isPlaybackBufferEmpty), player.currentItem?.status == .readyToPlay, isPlaying {
             play()
         }
     }
