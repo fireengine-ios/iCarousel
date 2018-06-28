@@ -100,7 +100,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func photoLibraryIsAvailible() -> Bool {
-
         let status = PHPhotoLibrary.authorizationStatus()
         return status == .authorized
     }

@@ -6,8 +6,6 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-import Photos
-
 class LocalAlbumInteractor: BaseFilesGreedInteractor {
         
     var localStorage = LocalMediaStorage.default
