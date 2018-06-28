@@ -48,7 +48,7 @@ final class IAPManager: NSObject {
     }
     
     func loadProducts(productIds: [String], handler: @escaping OfferAppleHandler) {
-        log.debug("IAPManager loadProductsWithProductIds")
+        debugLog("IAPManager loadProductsWithProductIds")
         
         offerAppleHandler = handler
         let request = SKProductsRequest(productIdentifiers: Set(productIds))
@@ -57,15 +57,15 @@ final class IAPManager: NSObject {
     }
     
     func purchase(offerApple: OfferApple, handler: @escaping PurchaseHandler) {
-        log.debug("IAPManager purchase offer")
+        debugLog("IAPManager purchase offer")
         
         guard canMakePayments else {
-            log.debug("IAPManager can't make payments")
+            debugLog("IAPManager can't make payments")
             return
         }
         
         guard !purchaseInProgress else {
-            log.debug("IAPManager purchase in progress")
+            debugLog("IAPManager purchase in progress")
             handler(PurchaseResult.inProgress)
             return
         }
@@ -77,7 +77,7 @@ final class IAPManager: NSObject {
     }
     
     func restorePurchases(restoreCallBack: @escaping RestoreHandler) {
-        log.debug("IAPManager restorePurchases")
+        debugLog("IAPManager restorePurchases")
         
         restorePurchasesCallback = restoreCallBack
         restoreInProgress = true
@@ -102,7 +102,7 @@ final class IAPManager: NSObject {
 
 extension IAPManager: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        log.debug("IAPManager Loaded list of products")
+        debugLog("IAPManager Loaded list of products")
         
         products = response.products
         
@@ -113,7 +113,7 @@ extension IAPManager: SKProductsRequestDelegate {
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
-        log.debug("IAPManager Failed to load list of products")
+        debugLog("IAPManager Failed to load list of products")
         
         offerAppleHandler(.failed(error))
     }
@@ -122,7 +122,7 @@ extension IAPManager: SKProductsRequestDelegate {
 extension IAPManager: SKPaymentTransactionObserver {
     
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        log.debug("IAPManager paymentQueue updatedTransactions")
+        debugLog("IAPManager paymentQueue updatedTransactions")
         
         guard !restoreInProgress else {
             return
@@ -131,7 +131,7 @@ extension IAPManager: SKPaymentTransactionObserver {
         var isPurchasing = false
         
         for transaction in transactions {
-            log.debug("- transaction productIdentifier = \(transaction.payment.productIdentifier); state = \(transaction.transactionState)")
+            debugLog("- transaction productIdentifier = \(transaction.payment.productIdentifier); state = \(transaction.transactionState)")
             switch transaction.transactionState {
             case .purchased: completeTransaction(transaction)
             case .failed: failedTransaction(transaction)
@@ -145,7 +145,7 @@ extension IAPManager: SKPaymentTransactionObserver {
     }
     
     public func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
-        log.debug("IAPManager paymentQueueRestoreCompletedTransactionsFinished")
+        debugLog("IAPManager paymentQueueRestoreCompletedTransactionsFinished")
         debugPrint("- paymentQueueRestoreCompletedTransactionsFinished", queue)
         
         var purchasedIDs: Set<String> = []
@@ -159,7 +159,7 @@ extension IAPManager: SKPaymentTransactionObserver {
     }
     
     public func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
-        log.debug("IAPManager paymentQueue restoreCompletedTransactionsFailedWithError")
+        debugLog("IAPManager paymentQueue restoreCompletedTransactionsFailedWithError")
         debugPrint("- restoreCompletedTransactionsFailedWithError", queue, error)
         
         restoreInProgress = false
@@ -170,7 +170,7 @@ extension IAPManager: SKPaymentTransactionObserver {
 extension IAPManager {
     
     private func completeTransaction(_ transaction: SKPaymentTransaction) {
-        log.debug("IAPManager completeTransaction...")
+        debugLog("IAPManager completeTransaction...")
         
         if purchaseInProgress {
             if let type = MenloworksSubscriptionProductID(rawValue: transaction.payment.productIdentifier) {
@@ -183,7 +183,7 @@ extension IAPManager {
     }
     
     private func failedTransaction(_ transaction: SKPaymentTransaction) {
-        log.debug("IAPManager failedTransaction...")
+        debugLog("IAPManager failedTransaction...")
         
         if purchaseInProgress, let error = transaction.error {
             if let skError = error as? SKError.Code, skError == .paymentCancelled {
@@ -196,7 +196,7 @@ extension IAPManager {
     }
     
     private func restoreTransaction(_ transaction: SKPaymentTransaction) {
-        log.debug("IAPManager restoreTransaction...")
+        debugLog("IAPManager restoreTransaction...")
         
         SKPaymentQueue.default().finishTransaction(transaction)
     }

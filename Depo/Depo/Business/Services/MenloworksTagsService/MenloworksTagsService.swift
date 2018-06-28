@@ -153,7 +153,7 @@ class MenloworksTagsService {
             }
             
         }) { [weak self] error in
-            log.debug("Error from Turkcell Security: \(error)")
+            debugLog("Error from Turkcell Security: \(error)")
         }
     }
     

@@ -39,7 +39,7 @@ enum FaceImageType {
 final class FaceImageService: BaseRequestService {
     
     func getThumbnails(param: FaceImageThumbnailsParameters, success: @escaping SuccessResponse, fail: @escaping FailResponse) {
-        log.debug("FaceImageService Thumbnails")
+        debugLog("FaceImageService Thumbnails")
         
         let handler = BaseResponseHandler<FaceImageThumbnailsResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
@@ -71,21 +71,21 @@ final class FaceImageThumbnailsParameters: BaseRequestParametrs {
 final class PeopleService: BaseRequestService {
     
     func getPeopleList(param: PeopleParameters, success: @escaping SuccessResponse, fail: @escaping FailResponse) {
-        log.debug("PeopleService getPeopleList")
+        debugLog("PeopleService getPeopleList")
         
         let handler = BaseResponseHandler<PeopleServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func getPeoplePage(param: PeoplePageParameters, success: @escaping SuccessResponse, fail: @escaping FailResponse) {
-        log.debug("PeopleService getPeoplePage")
+        debugLog("PeopleService getPeoplePage")
         
         let handler = BaseResponseHandler<PeoplePageResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func getPeopleAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
-        log.debug("PeopleService getPeopleAlbumWithID")
+        debugLog("PeopleService getPeopleAlbumWithID")
         
         let param = PeopleAlbumParameters(id: id)
         
@@ -101,7 +101,7 @@ final class PeopleService: BaseRequestService {
     }
     
     func getAlbumsForPeopleItemWithID(_ id: Int, success: @escaping (_ albums: [AlbumServiceResponse]) -> Void, fail: @escaping FailResponse) {
-        log.debug("PeopleService getAlbumsForPeopleItemWithID")
+        debugLog("PeopleService getAlbumsForPeopleItemWithID")
         
         let param = PeopleAlbumsParameters(id: id)
         
@@ -117,7 +117,7 @@ final class PeopleService: BaseRequestService {
     }
     
     func searchPeople(text: String, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
-        log.debug("PeopleService searchPeople")
+        debugLog("PeopleService searchPeople")
         
         let param = PeopleSearchParameters(text: text)
         
@@ -126,7 +126,7 @@ final class PeopleService: BaseRequestService {
     }
     
     func changePeopleVisibility(peoples: [PeopleItem], success:@escaping SuccessResponse, fail:@escaping FailResponse) {
-        log.debug("PeopleService changePeopleVisibility")
+        debugLog("PeopleService changePeopleVisibility")
         
         let param = PeopleChangeVisibilityParameters(peoples: peoples)
         
@@ -135,7 +135,7 @@ final class PeopleService: BaseRequestService {
     }
     
     func mergePeople(personId: Int64, targetPersonId: Int64, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
-        log.debug("PeopleService mergePeople")
+        debugLog("PeopleService mergePeople")
         
         let param = PeopleMergeParameters(personId: personId, targetPersonId: targetPersonId)
 
@@ -144,7 +144,7 @@ final class PeopleService: BaseRequestService {
     }
     
     func changePeopleName(personId: Int64, name: String, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
-        log.debug("PeopleService changePeopleName")
+        debugLog("PeopleService changePeopleName")
         
         let param = PeopleChangeNameParameters(personId: personId, name: name)
         
@@ -153,12 +153,12 @@ final class PeopleService: BaseRequestService {
     }
     
     func deletePhotosFromAlbum(id: Int64, photos: [Item], success: PhotosAlbumOperation?, fail: FailResponse?) {
-        log.debug("PeopleService deletePhotosFromAlbum")
+        debugLog("PeopleService deletePhotosFromAlbum")
         
         let parameters = DeletePhotosFromPeopleAlbum(id: id, photos: photos)
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("PeopleService deletePhotosFromAlbum success")
+            debugLog("PeopleService deletePhotosFromAlbum success")
             
             success?()
         }, fail: fail)

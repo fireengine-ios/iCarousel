@@ -248,10 +248,10 @@ extension PackagesInteractor: PackagesInteractorInput {
                 return
             }
             if !(status == .restored || status == .success) {
-                log.debug("validateRestorePurchaseFailed: \(status.description)")
+                debugLog("validateRestorePurchaseFailed: \(status.description)")
             }
         }, fail: { errorResponse in
-            log.debug("validateRestorePurchaseFailed: \(errorResponse.description)")
+            debugLog("validateRestorePurchaseFailed: \(errorResponse.description)")
             group.leave()
         })
         

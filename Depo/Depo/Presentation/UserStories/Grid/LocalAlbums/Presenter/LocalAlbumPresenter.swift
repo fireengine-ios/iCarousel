@@ -9,7 +9,7 @@
 class LocalAlbumPresenter: BaseFilesGreedPresenter {
         
     override func viewIsReady(collectionView: UICollectionView) {
-        log.debug("LocalAlbumPresenter viewIsReady")
+        debugLog("LocalAlbumPresenter viewIsReady")
 
         dataSource = ArrayDataSourceForCollectionView()
         interactor.viewIsReady()

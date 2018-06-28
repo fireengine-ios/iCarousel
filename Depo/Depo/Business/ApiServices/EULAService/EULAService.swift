@@ -104,7 +104,7 @@ class EulaService: BaseRequestService {
 
 
     func eulaGet(sucess: SuccessResponse?, fail: FailResponse? ) {
-        log.debug("EulaService eulaGet")
+        debugLog("EulaService eulaGet")
 
         let eula = EULAGet()
         let handler = BaseResponseHandler<Eula, ObjectRequestResponse>(success: sucess, fail: fail)
@@ -112,7 +112,7 @@ class EulaService: BaseRequestService {
     }
     
     func eulaCheck(success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("EulaService eulaCheck")
+        debugLog("EulaService eulaCheck")
 
         let eula = EULACheck()
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -120,7 +120,7 @@ class EulaService: BaseRequestService {
     }
 
     func eulaApprove(eulaId: Int, sucess: SuccessResponse?, fail: FailResponse? ) {
-        log.debug("EulaService eulaApprove")
+        debugLog("EulaService eulaApprove")
         
         let eula = EULAApprove(id: eulaId)
         

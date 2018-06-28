@@ -14,7 +14,7 @@ protocol ActivityTimelineService {
 
 class ActivityTimelineServiceIml: BaseRequestService, ActivityTimelineService {
     func timelineActivities(page: Int, size: Int, success: @escaping SuccessResponse, fail: @escaping FailResponse) {
-        log.debug("ActivityTimelineServiceIml timelineActivities")
+        debugLog("ActivityTimelineServiceIml timelineActivities")
 
         let params = ActivityTimelineParameters(sortBy: .name, sortOrder: .asc, page: page, size: size)
         let handler = BaseResponseHandler<ActivityTimelineResponse, ObjectRequestResponse>(success: success, fail: fail)

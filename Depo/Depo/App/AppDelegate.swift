@@ -46,6 +46,11 @@ let log: XCGLogger = {
     return log
 }()
 
+func debugLog(_ string: String) {
+    log.debug(string)
+    CLSLogv("%@", getVaList([string]))
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -65,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        log.debug("AppDelegate didFinishLaunchingWithOptions")
+        debugLog("AppDelegate didFinishLaunchingWithOptions")
         
         AppConfigurator.applicationStarted(with: launchOptions)
         
@@ -88,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             } else {
-                log.debug("Received error while fetching deferred app link \(String(describing: error))")
+                debugLog("Received error while fetching deferred app link \(String(describing: error))")
             }
         }
         
@@ -130,7 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var firstResponder: UIResponder?
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        log.debug("AppDelegate applicationDidEnterBackground")
+        debugLog("AppDelegate applicationDidEnterBackground")
 
         firstResponder = application.firstResponder
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
@@ -156,7 +161,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        log.debug("AppDelegate applicationWillEnterForeground")
+        debugLog("AppDelegate applicationWillEnterForeground")
         
         ContactSyncSDK.doPeriodicSync()
     }
@@ -226,20 +231,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        log.debug("AppDelegate applicationWillResignActive")
+        debugLog("AppDelegate applicationWillResignActive")
         
         showPasscodeIfNeed()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        log.debug("AppDelegate applicationDidBecomeActive")
+        debugLog("AppDelegate applicationDidBecomeActive")
         
         checkPasscodeIfNeed()
         FBSDKAppEvents.activateApp()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        log.debug("AppDelegate applicationWillTerminate")
+        debugLog("AppDelegate applicationWillTerminate")
         
         AppConfigurator.stopCurio()
         
@@ -255,7 +260,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        log.debug("AppDelegate applicationDidReceiveMemoryWarning")
+        debugLog("AppDelegate applicationDidReceiveMemoryWarning")
 
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
     }
@@ -274,14 +279,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        log.debug("AppDelegate didRegisterForRemoteNotificationsWithDeviceToken")
+        debugLog("AppDelegate didRegisterForRemoteNotificationsWithDeviceToken")
         MenloworksTagsService.shared.onNotificationPermissionChanged(true)
         
         MPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        log.debug("AppDelegate didFailToRegisterForRemoteNotificationsWithError")
+        debugLog("AppDelegate didFailToRegisterForRemoteNotificationsWithError")
         MenloworksTagsService.shared.onNotificationPermissionChanged(false)
 
         MPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
@@ -293,14 +298,14 @@ extension AppDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        log.debug("AppDelegate didReceiveRemoteNotification")
+        debugLog("AppDelegate didReceiveRemoteNotification")
         MPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
         
         FBSDKAppEvents.logPushNotificationOpen(userInfo)
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        log.debug("AppDelegate didReceive")
+        debugLog("AppDelegate didReceive")
 
         MPush.applicationDidReceive(notification)
     }
@@ -317,14 +322,14 @@ extension AppDelegate {
                 
                 if let oldURL = Adjust.convertUniversalLink(url, scheme:"akillidepo") {
                     if let host = oldURL.host {
-                        log.debug("Adjust old host :\(oldURL.host)")
+                        debugLog("Adjust old host :\(oldURL.host)")
                         if PushNotificationService.shared.assignDeepLink(innerLink: host){
-                            log.debug("Should open Action Screen")
+                            debugLog("Should open Action Screen")
                             PushNotificationService.shared.openActionScreen()
                             storageVars.deepLink = host
                         }
                     }
-                    log.debug("Adjust old path :\(oldURL.path)")
+                    debugLog("Adjust old path :\(oldURL.path)")
                 }
             }
         }

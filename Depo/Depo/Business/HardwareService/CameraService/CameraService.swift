@@ -19,7 +19,7 @@ import AVFoundation
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
     func cameraIsAvalible (cameraGranted: @escaping CameraGranted) {
-        log.debug("CameraService cameraIsAvalible")
+        debugLog("CameraService cameraIsAvalible")
 
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
@@ -39,7 +39,7 @@ import AVFoundation
     }
     
     func showCamera(onViewController sourceViewViewController: UIViewController) {
-        log.debug("CameraService showCamera")
+        debugLog("CameraService showCamera")
 
         cameraIsAvalible { [weak self] accessGranted in
             guard let `self` = self else {
@@ -56,14 +56,14 @@ import AVFoundation
     }
     
     func showImagesPicker(onViewController sourceViewViewController: UIViewController) {
-        log.debug("CameraService showImagesPicker")
+        debugLog("CameraService showImagesPicker")
 
         self.showPickerController(type: .photoLibrary, onViewController: sourceViewViewController)
     }
     
     private func showPickerController(type: UIImagePickerControllerSourceType,
                                       onViewController sourceViewViewController: UIViewController) {
-        log.debug("CameraService showPickerController")
+        debugLog("CameraService showPickerController")
 
         guard let cameraSupportedVC = sourceViewViewController as?
             (UIImagePickerControllerDelegate & UINavigationControllerDelegate),
@@ -89,7 +89,7 @@ import AVFoundation
     }
     
     private func showAccessAlert() {
-        log.debug("CameraService showAccessAlert")
+        debugLog("CameraService showAccessAlert")
 
         let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
                                               message: TextConstants.cameraAccessAlertText,
