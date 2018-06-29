@@ -299,12 +299,70 @@
     return SYNC_DATE_AS_NUMBER(lastModif);
 }
 
+- (NSMutableArray*)getDefaultSources
+{
+    NSMutableArray *resp = [NSMutableArray new];
+    
+    ABRecordRef defaultSourceRef = ABAddressBookCopyDefaultSource(_addressBook);
+    NSString *defaultSourceName = (__bridge NSString *)(ABRecordCopyValue(defaultSourceRef, kABSourceNameProperty));
+    SYNC_Log(@"Default - Source name: %@ ", defaultSourceName);
+    [resp addObject:(__bridge id _Nonnull)(defaultSourceRef)];
+    NSArray *sources = (__bridge NSArray *)(ABAddressBookCopyArrayOfAllSources(_addressBook));
+    for (id source in sources) {
+        ABRecordRef sourceRef = (__bridge ABRecordRef)(source);
+        NSString *sourceName = (__bridge NSString *)(ABRecordCopyValue(sourceRef, kABSourceNameProperty));
+        NSNumber *sourceTypeRef = (__bridge NSNumber *)(ABRecordCopyValue(sourceRef, kABSourceTypeProperty));
+        int sourceType = [sourceTypeRef intValue];
+        if ((sourceType == kABSourceTypeLocal || sourceType == kABSourceTypeCardDAV) && ![sourceName isEqualToString: defaultSourceName]) {
+            SYNC_Log(@"Add - Source name: %@ Source type: %@ ", sourceName, sourceTypeRef);
+            [resp addObject:source];
+        }else{
+            SYNC_Log(@"Ignore - Source name: %@ Source type: %@ ", sourceName, sourceTypeRef);
+        }
+    }
+    return resp;
+}
+
+- (NSMutableArray*)fetchLocalContacts
+{
+    NSMutableArray *ret = [NSMutableArray new];
+    for(id source in [self getDefaultSources]){
+        CFArrayRef sourceContacts = (ABAddressBookCopyArrayOfAllPeopleInSource(_addressBook, (__bridge ABRecordRef)(source)));
+        NSString *sourceName = (__bridge NSString *)(ABRecordCopyValue((__bridge ABRecordRef)(source), kABSourceNameProperty));
+        CFIndex contactLength = CFArrayGetCount(sourceContacts);
+        
+        SYNC_Log(@"Source name: %@ Count: %ld ", sourceName, (long)contactLength);
+        for ( int i = 0; i < contactLength; i++ )
+        {
+            ABRecordRef ref = CFArrayGetValueAtIndex( sourceContacts, i );
+            Contact *contact = [[Contact alloc] initWithRecordRef:ref];
+            
+            NSString *displayName = contact.generateDisplayName;
+            if(!SYNC_STRING_IS_NULL_OR_EMPTY(displayName) && displayName.length > 1000){
+                continue;
+            }
+            
+            if (!SYNC_STRING_IS_NULL_OR_EMPTY(contact.firstName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.middleName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.lastName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.nickName)){
+                contact.hasName = YES;
+            } else {
+                contact.hasName = NO;
+            }
+            
+            [ret addObject:contact];
+        }
+        
+        if (sourceContacts!=nil)
+            CFRelease(sourceContacts);
+    }
+    return ret;
+}
+
 - (NSMutableArray*)fetchContacts
 {
     NSMutableArray *ret = [NSMutableArray new];
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( _addressBook );
     CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
-    
+
     for ( int i = 0; i < nPeople; i++ )
     {
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );

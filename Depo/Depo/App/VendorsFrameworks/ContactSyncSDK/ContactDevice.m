@@ -142,6 +142,8 @@
             }
             else if([type isEqualToString:@"OTHER"]){
                 self.type = CDEVICE_OTHER;
+            }else{
+                self.type = CDEVICE_OTHER;
             }
         
         }
@@ -222,6 +224,8 @@
                 self.type = CDEVICE_WORK;
             }
             else if([type isEqualToString:@"OTHER"]){
+                self.type = CDEVICE_OTHER;
+            }else{
                 self.type = CDEVICE_OTHER;
             }
             

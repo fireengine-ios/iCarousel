@@ -225,7 +225,7 @@
 
     [self notifyProgress:ANALYZE_STEP_FIND_DUPLICATES progress:@(0)];
 
-    NSMutableArray *contacts = [[ContactUtil shared] fetchContacts];
+    NSMutableArray *contacts = [[ContactUtil shared] fetchLocalContacts];
     self.initialContactCount = [contacts count];
 
     if (!SYNC_IS_NULL(contacts) && [contacts count]>0){
@@ -1610,25 +1610,6 @@ static bool syncing = false;
             return NO;
         }
     }
-    
-    /// test logic for periods
-//    if (SYNC_IS_NULL(lastPeriodicBackup) && period != SYNCNone) {
-//        return YES;
-//    } else {
-//        //Date difference between last periodic backup to this moment in second
-//        NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:lastPeriodicBackup];
-//        //86400:seconds in a day
-//        int minutes = secondsBetween / 60;
-//        if (period == SYNCDaily && minutes > 3) {
-//            return YES;
-//        } else if (period == SYNCEvery7 && minutes > 5) {
-//            return YES;
-//        } else if (period == SYNCEvery30 && minutes > 7) {
-//            return YES;
-//        } else {
-//            return NO;
-//        }
-//    }
 }
 
 + (BOOL)isRunning
