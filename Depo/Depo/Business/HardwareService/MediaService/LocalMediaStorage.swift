@@ -73,7 +73,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     /// (can be tested in simulator by "Debug - Simulate Memory Warning")
     /// with message "This application is not allowed to access Photo data"
     /// https://stackoverflow.com/a/50663778/5893286
-    private var photoManager: PHImageManager? = {
+    private lazy var photoManager: PHImageManager? = {
         guard PHPhotoLibrary.authorizationStatus() == .authorized else {
             return nil
         }
