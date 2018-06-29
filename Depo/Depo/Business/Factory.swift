@@ -14,11 +14,10 @@ protocol Factory: SharedFactory {
     func resolve() -> MediaPlayer
     func resolve() -> DropboxManager
     func resolve() -> PasscodeStorage
+    func resolve() -> StorageVars
+    func resolve() -> AuthorizationRepository
     
     func resolve() -> HomeCardsService
-    
-    func resolve() -> StorageVars
-    
     func resolve() -> AnalyticsService
 }
 
@@ -37,6 +36,14 @@ final class FactoryMain: FactoryBase, Factory {
     private static let storageVars = UserDefaultsVars()
     func resolve() -> StorageVars {
         return FactoryMain.storageVars
+    }
+    
+    private static let authorizationRepository: AuthorizationRepository = {
+        let urls: AuthorizationURLs = AuthorizationURLsImp()
+        return AuthorizationRepositoryImp(urls: urls, tokenStorage: factory.resolve())
+    }()
+    func resolve() -> AuthorizationRepository {
+        return FactoryMain.authorizationRepository
     }
 }
 

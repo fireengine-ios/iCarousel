@@ -94,9 +94,7 @@ final class AppConfigurator {
     }
     
     private static func prepareSessionManager() {
-        let urls: AuthorizationURLs = AuthorizationURLsImp()
-        
-        var auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)
+        var auth: AuthorizationRepository = factory.resolve()
         auth.refreshFailedHandler = logout
         
         let sessionManager = SessionManager.customDefault

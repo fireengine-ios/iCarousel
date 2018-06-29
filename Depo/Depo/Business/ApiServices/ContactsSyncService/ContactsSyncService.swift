@@ -272,9 +272,13 @@ class ContactsSyncService: BaseRequestService {
         return finalContacts
     }
     
-    private func setup() {
+    func updateAccessToken() {
         let tokenStorage: TokenStorage = factory.resolve()
         SyncSettings.shared().token = tokenStorage.accessToken
+    }
+    
+    private func setup() {
+        updateAccessToken()
         SyncSettings.shared().url = ContactsSyncServiceConstant.webProdURL
         SyncSettings.shared().environment = .productionEnvironment//.developmentEnvironment
     }
