@@ -125,7 +125,7 @@ class AlbumService: RemoteItemsService {
     }
     
     func nextItems(sortBy: SortType, sortOrder: SortOrder, success: @escaping ListRemoveAlbums, fail:@escaping FailRemoteItems ) {
-        log.debug("AlbumService nextItems")
+        debugLog("AlbumService nextItems")
 
         let serchParam = AlbumParameters(fieldName: contentType,
                                          sortBy: sortBy,
@@ -135,19 +135,19 @@ class AlbumService: RemoteItemsService {
         
         remote.searchAlbums(param: serchParam, success: { [weak self] response in
             guard let resultResponse = response as? AlbumResponse else {
-                log.debug("AlbumService remote searchAlbums fail")
+                debugLog("AlbumService remote searchAlbums fail")
 
                 return fail()
             }
             
-            log.debug("AlbumService remote searchAlbums success")
+            debugLog("AlbumService remote searchAlbums success")
             
             self?.currentPage += 1
             let list = resultResponse.list.flatMap { AlbumItem(remote: $0) }
             success(list)
         }, fail: { errorResponse in
             errorResponse.showInternetErrorGlobal()
-            log.debug("AlbumService remote searchAlbums fail")
+            debugLog("AlbumService remote searchAlbums fail")
 
             fail()
         })
@@ -164,10 +164,10 @@ typealias PhotosByAlbumsOperation = (_ items: [AlbumItem: [Item]]) -> Void
 class PhotosAlbumService: BaseRequestService {
     
     func createAlbum(createAlbum: CreatesAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
-        log.debug("PhotosAlbumService createAlbum")
+        debugLog("PhotosAlbumService createAlbum")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("PhotosAlbumService createAlbum success")
+            debugLog("PhotosAlbumService createAlbum success")
 
             success?()
         }, fail: fail)
@@ -175,7 +175,7 @@ class PhotosAlbumService: BaseRequestService {
     }
     
     func delete(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
-        log.debug("PhotosAlbumService deleteAlbums")
+        debugLog("PhotosAlbumService deleteAlbums")
 
         let deleteAlbums = albums.filter { $0.readOnly == nil || $0.readOnly! == false }
         guard !deleteAlbums.isEmpty else {
@@ -185,7 +185,7 @@ class PhotosAlbumService: BaseRequestService {
         
         let params = DeleteAlbums(albums: deleteAlbums)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("PhotosAlbumService deleteAlbums success")
+            debugLog("PhotosAlbumService deleteAlbums success")
 
             success?(deleteAlbums)
         }, fail: fail)
@@ -193,7 +193,7 @@ class PhotosAlbumService: BaseRequestService {
     }
     
     func completelyDelete(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
-        log.debug("PhotosAlbumService completelyDelete")
+        debugLog("PhotosAlbumService completelyDelete")
         
         let deleteAlbums = albums.filter { $0.readOnly == nil || $0.readOnly! == false }
         guard !deleteAlbums.isEmpty else {
@@ -202,7 +202,7 @@ class PhotosAlbumService: BaseRequestService {
         }
         
         loadAllItemsFrom(albums: deleteAlbums) { items in
-            log.debug("PhotosAlbumService loadAllItemsFrom")
+            debugLog("PhotosAlbumService loadAllItemsFrom")
 
             let fileService = WrapItemFileService()
             fileService.delete(deleteFiles: items, success: nil, fail: nil)
@@ -211,10 +211,10 @@ class PhotosAlbumService: BaseRequestService {
     }
     
     func addPhotosToAlbum(parameters: AddPhotosToAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
-        log.debug("PhotosAlbumService addPhotosToAlbum")
+        debugLog("PhotosAlbumService addPhotosToAlbum")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("PhotosAlbumService addPhotosToAlbum success")
+            debugLog("PhotosAlbumService addPhotosToAlbum success")
 
             success?()
         }, fail: fail)
@@ -223,10 +223,10 @@ class PhotosAlbumService: BaseRequestService {
     }
     
     func deletePhotosFromAlbum(parameters: DeletePhotosFromAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
-        log.debug("PhotosAlbumService deletePhotosFromAlbum")
+        debugLog("PhotosAlbumService deletePhotosFromAlbum")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("PhotosAlbumService deletePhotosFromAlbum success")
+            debugLog("PhotosAlbumService deletePhotosFromAlbum success")
 
             success?()
         }, fail: fail)
@@ -234,7 +234,7 @@ class PhotosAlbumService: BaseRequestService {
     }
     
     func changeCoverPhoto(parameters: ChangeCoverPhoto, success: PhotosAlbumOperation?, fail: FailResponse?) {
-        log.debug("PhotosAlbumService changeCoverPhoto")
+        debugLog("PhotosAlbumService changeCoverPhoto")
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { response  in
             success?()
@@ -243,10 +243,10 @@ class PhotosAlbumService: BaseRequestService {
     }
     
     func renameAlbum(parameters: RenameAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
-        log.debug("PhotosAlbumService renameAlbum")
+        debugLog("PhotosAlbumService renameAlbum")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("PhotosAlbumService renameAlbum success")
+            debugLog("PhotosAlbumService renameAlbum success")
 
             success?()
         }, fail: fail)
@@ -254,7 +254,7 @@ class PhotosAlbumService: BaseRequestService {
     }
     
     func loadAllItemsFrom(albums: [AlbumItem], success: PhotosFromAlbumsOperation?) {
-        log.debug("PhotosAlbumService loadAllItemsFrom")
+        debugLog("PhotosAlbumService loadAllItemsFrom")
 
         guard albums.count > 0 else { success?([Item]()); return }
         let group = DispatchGroup()
@@ -263,25 +263,25 @@ class PhotosAlbumService: BaseRequestService {
             group.enter()
             let albumService = AlbumDetailService(requestSize: 100)
             albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { items in
-                log.debug("PhotosAlbumService loadAllItemsFrom albumService allItems success")
+                debugLog("PhotosAlbumService loadAllItemsFrom albumService allItems success")
 
                 allItems.append(contentsOf: items)
                 group.leave()
             }, fail: {
-                log.debug("PhotosAlbumService loadAllItemsFrom AlbumDetailService allItems fail")
+                debugLog("PhotosAlbumService loadAllItemsFrom AlbumDetailService allItems fail")
 
                 group.leave()
             })
         }
         group.notify(queue: DispatchQueue.main) {
-            log.debug("PhotosAlbumService loadAllItemsFrom success")
+            debugLog("PhotosAlbumService loadAllItemsFrom success")
 
             success?(allItems)
         }
     }
     
     func loadItemsBy(albums: [AlbumItem], success: PhotosByAlbumsOperation?) {
-        log.debug("PhotosAlbumService loadItemsBy")
+        debugLog("PhotosAlbumService loadItemsBy")
 
         guard !albums.isEmpty else {
             success?([AlbumItem: [Item]]())
@@ -294,12 +294,12 @@ class PhotosAlbumService: BaseRequestService {
             group.enter()
             let albumService = AlbumDetailService(requestSize: 100)
             albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { items in
-                log.debug("PhotosAlbumService loadItemsBy AlbumDetailService allItems success")
+                debugLog("PhotosAlbumService loadItemsBy AlbumDetailService allItems success")
 
                 allItems[album] = items
                 group.leave()
             }, fail: {
-                log.debug("PhotosAlbumService loadItemsBy AlbumDetailService allItems fail")
+                debugLog("PhotosAlbumService loadItemsBy AlbumDetailService allItems fail")
 
                 group.leave()
             })

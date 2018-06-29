@@ -206,7 +206,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             isPaginationDidEnd = true
         }
         lastPage = pageNum
-        log.debug("BaseDataSourceForCollectionView appendCollectionView \(filteredItems.count)")
+        debugLog("BaseDataSourceForCollectionView appendCollectionView \(filteredItems.count)")
         
         allRemoteItems.append(contentsOf: filteredItems)
   
@@ -690,7 +690,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func dropData() {
-        log.debug("BaseDataSourceForCollectionViewDelegate dropData()")
+        debugLog("BaseDataSourceForCollectionViewDelegate dropData()")
         
         emptyMetaItems.removeAll()
         allRemoteItems.removeAll()
@@ -846,7 +846,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return
             }
             
-            log.debug("BaseDataSourceForCollectionViewDelegate reloadData")
+            debugLog("BaseDataSourceForCollectionViewDelegate reloadData")
             debugPrint("BaseDataSourceForCollectionViewDelegate reloadData")
             
             collectionView.reloadData()
@@ -885,7 +885,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getSelectedItems() -> [BaseDataSourceItem] {
-        return Array(selectedItemsArray)
+        return selectedItemsArray.map{$0}
     }
     
     
@@ -1130,7 +1130,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         // ---------------------=======
         if cellReUseID == nil {
-            log.debug("BaseDataSourceForCollectionViewDelegate cellForItemAt cellReUseID == nil")
+            debugLog("BaseDataSourceForCollectionViewDelegate cellForItemAt cellReUseID == nil")
             cellReUseID = CollectionViewCellsIdsConstant.cellForImage// ---------------------=======
         }
         // ---------------------=======
@@ -1645,6 +1645,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
             }
             
+            self.emptyMetaItems = self.emptyMetaItems.filter { !idsForRemove.contains($0.uuid) }
+
             var newArray = [[WrapData]]()
             
             for array in self.allItems {

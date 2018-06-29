@@ -99,11 +99,11 @@ extension AuthorizationRepositoryImp: RequestRetrier {
         
         #if MAIN_APP
         if let url = request.request?.url?.absoluteString {
-            log.debug("401 for \(url)")
+            debugLog("401 for \(url)")
         } else {
-            log.debug("request.request?.url?.absoluteString is nil")
+            debugLog("request.request?.url?.absoluteString is nil")
         }
-        log.debug(request)
+        debugLog(request.description)
         #endif
         
         /// save request
@@ -157,7 +157,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                 /// if tokenStorage.refreshToken is invalid
                 if response.response?.statusCode == 401 {
                     #if MAIN_APP
-                    log.debug("failed refreshAccessToken")
+                    debugLog("failed refreshAccessToken")
 
                     #endif
                     strongSelf.refreshFailedHandler()

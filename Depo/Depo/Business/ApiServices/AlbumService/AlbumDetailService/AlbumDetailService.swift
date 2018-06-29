@@ -14,7 +14,7 @@ class AlbumDetailService: RemoteItemsService {
     }
     
     func allItems(albumUUID: String, sortBy: SortType, sortOrder: SortOrder, success: @escaping ListRemoveItems, fail:@escaping FailRemoteItems) {
-        log.debug("AlbumDetailService allItems")
+        debugLog("AlbumDetailService allItems")
 
         currentPage = 0
         requestSize = 90000
@@ -22,7 +22,7 @@ class AlbumDetailService: RemoteItemsService {
     }
     
     func nextItems(albumUUID: String, sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?) {
-        log.debug("AlbumDetailService nextItems")
+        debugLog("AlbumDetailService nextItems")
 
         let serchParam = AlbumDetalParameters (albumUuid: albumUUID, sortBy: sortBy, sortOrder: sortOrder, page: currentPage, size: requestSize)
         
@@ -31,20 +31,20 @@ class AlbumDetailService: RemoteItemsService {
                 fail?()
                 return
             }
-            log.debug("AlbumDetailService nextItems SearchService searchContentAlbum success")
+            debugLog("AlbumDetailService nextItems SearchService searchContentAlbum success")
 
             let list = resultResponse.flatMap { WrapData(remote: $0) }
             self.currentPage = self.currentPage + 1
             success?(list)
         }, fail: { error in
-            log.debug("AlbumDetailService nextItems SearchService searchContentAlbum fail")
+            debugLog("AlbumDetailService nextItems SearchService searchContentAlbum fail")
             error.showInternetErrorGlobal()
             fail?()
         })
     }
     
     func albumCoverPhoto(albumUUID: String, sortBy: SortType, sortOrder: SortOrder, success: @escaping AlbumCoverPhoto, fail:@escaping FailRemoteItems) {
-        log.debug("AlbumDetailService albumFirstItem")
+        debugLog("AlbumDetailService albumFirstItem")
         
         currentPage = 0
         requestSize = 1
@@ -55,11 +55,11 @@ class AlbumDetailService: RemoteItemsService {
                 fail()
                 return
             }
-            log.debug("AlbumDetailService albumCoverPhoto success")
+            debugLog("AlbumDetailService albumCoverPhoto success")
 
             success(WrapData(remote: coverPhoto))
         }, fail: { error in
-            log.debug("AlbumDetailService albumCoverPhoto fail")
+            debugLog("AlbumDetailService albumCoverPhoto fail")
             error.showInternetErrorGlobal()
             fail()
         })

@@ -49,13 +49,13 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     override func uploadData(_ searchText: String! = nil) {
-        log.debug("UploadFilesSelectionPresenter uploadData")
+        debugLog("UploadFilesSelectionPresenter uploadData")
 
         debugPrint("upload uploadData presenter override")
     }
     
     override func getNextItems() {
-        log.debug("UploadFilesSelectionPresenter getNextItems")
+        debugLog("UploadFilesSelectionPresenter getNextItems")
 
         debugPrint("upload getNextItems presenter override")
     }
@@ -67,13 +67,13 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     //MARK: - UploadFilesSelectionInteractorOutput
     
     func networkOperationStopped() {
-        log.debug("UploadFilesSelectionPresenter networkOperationStopped")
+        debugLog("UploadFilesSelectionPresenter networkOperationStopped")
 
         asyncOperationSucces()
     }
     
     func addToUploadSuccessed() {
-        log.debug("UploadFilesSelectionPresenter addToUploadSuccessed")
+        debugLog("UploadFilesSelectionPresenter addToUploadSuccessed")
         
         asyncOperationSucces()
         if let uploadVC = view as? UploadFilesSelectionViewInput {
@@ -83,7 +83,7 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     func addToUploadFailedWith(errorMessage: String) {
-        log.debug("UploadFilesSelectionPresenter addToUploadFailedWithError: \(errorMessage)")
+        debugLog("UploadFilesSelectionPresenter addToUploadFailedWithError: \(errorMessage)")
         
         asyncOperationFail(errorMessage: errorMessage)
     }

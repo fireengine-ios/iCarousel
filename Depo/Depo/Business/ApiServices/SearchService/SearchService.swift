@@ -295,42 +295,42 @@ class SearchService: BaseRequestService {
     
     @discardableResult
     func searchByField(param: SearchByFieldParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) -> URLSessionTask {
-        log.debug("SearchService searchByField")
+        debugLog("SearchService searchByField")
 
         let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: success, fail: fail)
         return executeGetRequest(param: param, handler: handler)
     }
     
     func searchByName(param: AdvancedSearchParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
-        log.debug("SearchService searchByName")
+        debugLog("SearchService searchByName")
 
         let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func searchAlbums(param: AlbumParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
-        log.debug("SearchService searchAlbums")
+        debugLog("SearchService searchAlbums")
 
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func searchContentAlbum(param: AlbumDetalParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
-        log.debug("SearchService searchContentAlbum")
+        debugLog("SearchService searchContentAlbum")
 
         let handler = BaseResponseHandler<AlbumDetailResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func unifiedSearch(param: UnifiedSearchParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
-        log.debug("SearchService unifiedSearch")
+        debugLog("SearchService unifiedSearch")
 
         let handler = BaseResponseHandler<UnifiedSearchResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func suggestion(param: SuggestionParametrs, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
-        log.debug("SearchService suggestion")
+        debugLog("SearchService suggestion")
 
         let handler = BaseResponseHandler<SuggestionResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)

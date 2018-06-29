@@ -134,12 +134,12 @@ class CreateStoryMusicService: RemoteItemsService {
     }
     
     func allItems(success: ListRemoveItems?, fail: FailRemoteItems?) {
-        log.debug("CreateStoryMusicService allItems")
+        debugLog("CreateStoryMusicService allItems")
      
         let requestService = BaseRequestService()
         let  handler = BaseResponseHandler< CreateStoryMusicListResponse, ObjectRequestResponse>(success: {  resp  in
             if self.isGotAll {
-                log.debug("CreateStoryMusicService allItems success with empty result")
+                debugLog("CreateStoryMusicService allItems success with empty result")
 
                 success?([])
                 return
@@ -150,14 +150,14 @@ class CreateStoryMusicService: RemoteItemsService {
                 self.isGotAll = true
                 success?(result)
                 
-                log.debug("CreateStoryMusicService allItems success")
+                debugLog("CreateStoryMusicService allItems success")
             } else {
-                log.debug("CreateStoryMusicService allItems fail")
+                debugLog("CreateStoryMusicService allItems fail")
 
                 fail?()
             }
         }, fail: { errorResponse  in
-            log.debug("CreateStoryMusicService allItems fail")
+            debugLog("CreateStoryMusicService allItems fail")
             errorResponse.showInternetErrorGlobal()
             fail?()
         })
@@ -166,7 +166,7 @@ class CreateStoryMusicService: RemoteItemsService {
     }
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
-        log.debug("CreateStoryMusicService nextItems")
+        debugLog("CreateStoryMusicService nextItems")
 
         allItems(success: success, fail: fail)
     }
@@ -180,17 +180,17 @@ class CreateStoryService: BaseRequestService {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     func createStory(createStory: CreateStory, success: CreateStorSuccess?, fail: FailResponse?) {
-        log.debug("CreateStoryMusicService createStory")
+        debugLog("CreateStoryMusicService createStory")
 
         let  handler = BaseResponseHandler< CreateResponse, ObjectRequestResponse>(success: { [weak self] resp in
             if let created = resp as? CreateResponse,
                 created.isOkStatus {
-                log.debug("CreateStoryMusicServic createStory success")
+                debugLog("CreateStoryMusicServic createStory success")
 
                 self?.analyticsService.track(event: .createStory)
                 success?()
             } else {
-                log.debug("CreateStoryMusicService createStory fail")
+                debugLog("CreateStoryMusicService createStory fail")
                 fail?(ErrorResponse.string(TextConstants.errorUnknown))
             }
         }, fail: fail)
@@ -198,19 +198,19 @@ class CreateStoryService: BaseRequestService {
     }
     
     func getPreview(preview: CreateStoryPreview, success: @escaping GetPreviewStorrySyccess, fail: @escaping FailResponse ) {
-        log.debug("CreateStoryMusicService getPreview fail")
+        debugLog("CreateStoryMusicService getPreview fail")
 
         let  handler = BaseResponseHandler<CreateStoryResponce, ObjectRequestResponse>(success: {  resp  in
             if let responce = resp as? CreateStoryResponce {
-                log.debug("CreateStoryMusicService getPreview success")
+                debugLog("CreateStoryMusicService getPreview success")
 
                 success(responce)
             } else {
-                log.debug("CreateStoryMusicService getPreview fail")
+                debugLog("CreateStoryMusicService getPreview fail")
                 fail(ErrorResponse.string(TextConstants.errorUnknown))
             }
         }, fail: { errorResponse  in
-            log.debug("CreateStoryMusicService getPreview fail")
+            debugLog("CreateStoryMusicService getPreview fail")
             fail(errorResponse)
         })
         executePostRequest(param: preview, handler: handler)

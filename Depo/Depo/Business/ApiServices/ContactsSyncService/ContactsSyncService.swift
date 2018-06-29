@@ -32,7 +32,7 @@ class ContactsSyncService: BaseRequestService {
 
     func executeOperation(type: SYNCMode, progress: ProgressCallback?, finishCallback: FinishCallback?, errorCallback: ErrorCallback?) {
         let typeString = type == .backup ? "Backup" : "Restore"
-        log.debug("ContactsSyncService executeOperation \(typeString)")
+        debugLog("ContactsSyncService executeOperation \(typeString)")
         
         guard !ContactSyncSDK.isRunning() else {
             return
@@ -56,7 +56,7 @@ class ContactsSyncService: BaseRequestService {
     }
     
     func getBackUpStatus(completion: @escaping (ContactSync.SyncResponse) -> Void, fail: @escaping VoidHandler) {
-        log.debug("ContactsSyncService getBackUpStatus")
+        debugLog("ContactsSyncService getBackUpStatus")
         
         ContactSyncSDK.getBackupStatus { response in
             guard let response = response as? [String: Any],
@@ -183,7 +183,7 @@ class ContactsSyncService: BaseRequestService {
     }
     
     func deleteDuplicates() {
-        log.debug("ContactsSyncService deleteDuplicates")
+        debugLog("ContactsSyncService deleteDuplicates")
         
         if AnalyzeStatus.shared().analyzeStep == AnalyzeStep.ANALYZE_STEP_PROCESS_DUPLICATES {
             ContactSyncSDK.continueAnalyze()
@@ -191,7 +191,7 @@ class ContactsSyncService: BaseRequestService {
     }
     
     func searchRemoteContacts(with query: String, page: Int, success: ContactsOperation?, fail: FailResponse?) {
-        log.debug("ContactsSyncService searchRemoteContacts")
+        debugLog("ContactsSyncService searchRemoteContacts")
         
         let handler = BaseResponseHandler<ContactsResponse, ObjectRequestResponse>(success: { response  in
             guard let response = response as? ContactsResponse else {
@@ -203,7 +203,7 @@ class ContactsSyncService: BaseRequestService {
     }
     
     func deleteRemoteContacts(_ contacts: [RemoteContact], success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("ContactsSyncService deleteRemoteContacts")
+        debugLog("ContactsSyncService deleteRemoteContacts")
         
         let param = DeleteContacts(contactIDs: contacts.flatMap{ $0.id })
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -211,7 +211,7 @@ class ContactsSyncService: BaseRequestService {
     }
     
     func getContacts(with page: Int, success: ContactsOperation?, fail: FailResponse?) {
-        log.debug("ContactsSyncService getContacts")
+        debugLog("ContactsSyncService getContacts")
         
         let handler = BaseResponseHandler<ContactsResponse, ObjectRequestResponse>(success: { response  in
             guard let response = response as? ContactsResponse else {

@@ -8,7 +8,6 @@
 
 import UIKit
 import SDWebImage
-import Photos
 
 class CollectionViewCellForPhoto: BaseCollectionViewCell {
     @IBOutlet weak var favoriteIcon: UIImageView!

@@ -29,7 +29,7 @@ final class ContactService {
     }
     
     func askPermissionForContactsFramework(redirectToSettings: Bool, completion: @escaping ContactsLibraryGranted) {
-        log.debug("ContactService showAccessAlert")
+        debugLog("ContactService showAccessAlert")
         
         let store = CNContactStore()
         switch CNContactStore.authorizationStatus(for: .contacts) {

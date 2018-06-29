@@ -38,8 +38,8 @@ extension HomeCardsServiceImp: HomeCardsService {
                     handler(ResponseResult.success(array))
                 case .failure(let error):
                     
-                    log.debug("HomeCardsService all response: \(response)")
-                    log.debug("HomeCardsService all statusCode: \(response.response?.statusCode ?? -1111)")
+                    debugLog("HomeCardsService all response: \(response)")
+                    debugLog("HomeCardsService all statusCode: \(response.response?.statusCode ?? -1111)")
                     
                     let backendError = ResponseParser.getBackendError(data: response.data,
                                                                       response: response.response)

@@ -232,15 +232,15 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
         setupNewBottomBarConfig()
-        log.debug("SearchViewPresenter onChangeSelectedItemsCount")
+        debugLog("SearchViewPresenter onChangeSelectedItemsCount")
         
         if (selectedItemsCount == 0) {
-            log.debug("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
+            debugLog("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
             
             bottomBarPresenter?.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         } else {
-            log.debug("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
+            debugLog("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
             
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
@@ -263,7 +263,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         guard let item = ofItem else {
             return
         }
-        log.debug("SearchViewPresenter onMoreActions")
+        debugLog("SearchViewPresenter onMoreActions")
         
         dataSource.moreActionItem = item
         
@@ -454,19 +454,19 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func operationFinished(withType type: ElementTypes, response: Any?) {
-        log.debug("SearchViewPresenter operationFinished")
+        debugLog("SearchViewPresenter operationFinished")
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
     }
     
     func operationFailed(withType type: ElementTypes) {
-        log.debug("SearchViewPresenter operationFailed")
+        debugLog("SearchViewPresenter operationFailed")
         debugPrint("failed")
         dataSource.setSelectionState(selectionState: false)
     }
     
     func selectModeSelected() {
-        log.debug("SearchViewPresenter selectModeSelected")
+        debugLog("SearchViewPresenter selectModeSelected")
         
         startEditing()
     }

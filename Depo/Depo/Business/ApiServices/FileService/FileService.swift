@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Photos
 
 struct FilePatch {
     static let fileList = "/api/filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
@@ -249,10 +248,10 @@ class FileService: BaseRequestService {
     }
     
     func move(moveFiles: MoveFiles, success: FileOperation?, fail: FailResponse?) {
-        log.debug("FileService moveFiles: \(moveFiles.items.joined(separator: ", "))")
+        debugLog("FileService moveFiles: \(moveFiles.items.joined(separator: ", "))")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("FileService move success")
+            debugLog("FileService move success")
 
             success?()
         }, fail: fail)
@@ -260,10 +259,10 @@ class FileService: BaseRequestService {
     }
     
     func copy(copyparam: CopyFiles, success: FileOperation?, fail: FailResponse?) {
-        log.debug("FileService copyFiles: \(copyparam.items.joined(separator: ", "))")
+        debugLog("FileService copyFiles: \(copyparam.items.joined(separator: ", "))")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("FileService copy success")
+            debugLog("FileService copy success")
 
             success?()
         }, fail: fail)
@@ -271,10 +270,10 @@ class FileService: BaseRequestService {
     }
     
     func delete(deleteFiles: DeleteFiles, success: FileOperation?, fail: FailResponse?) {
-        log.debug("FileService deleteFiles: \(deleteFiles.items.joined(separator: ", "))")
+        debugLog("FileService deleteFiles: \(deleteFiles.items.joined(separator: ", "))")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("FileService delete success")
+            debugLog("FileService delete success")
 
             success?()
         }, fail: fail)
@@ -282,10 +281,10 @@ class FileService: BaseRequestService {
     }
     
     func createsFolder(createFolder: CreatesFolder, success: FileOperation?, fail: FailResponse?) {
-        log.debug("FileService createFolder \(createFolder.folderName)")
+        debugLog("FileService createFolder \(createFolder.folderName)")
         
         let handler = BaseResponseHandler<CreateFolderResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("FileService createFolder success")
+            debugLog("FileService createFolder success")
 
             success?()
         }, fail: fail)
@@ -293,10 +292,10 @@ class FileService: BaseRequestService {
     }
     
     func rename(rename: RenameFile, success: FileOperation?, fail: FailResponse?) {
-        log.debug("FileService rename \(rename.newName)")
+        debugLog("FileService rename \(rename.newName)")
         
         let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { y  in
-            log.debug("FileService rename success")
+            debugLog("FileService rename success")
 
             success?()
         }, fail: fail)
@@ -309,7 +308,7 @@ class FileService: BaseRequestService {
     private var error: ErrorResponse?
     
     private func showAccessAlert() {
-        log.debug("CameraService showAccessAlert")
+        debugLog("CameraService showAccessAlert")
         DispatchQueue.main.async {
             let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
                                                   message: TextConstants.cameraAccessAlertText,
@@ -326,7 +325,7 @@ class FileService: BaseRequestService {
     }
     
     func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail: FailResponse?) {
-        log.debug("FileService download")
+        debugLog("FileService download")
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             showAccessAlert()
             success?()
@@ -389,7 +388,7 @@ class FileService: BaseRequestService {
     }
     
     func downloadToCameraRoll(downloadParam: BaseDownloadRequestParametrs, success: FileOperation?, fail: FailResponse?) {
-        log.debug("FileService downloadToCameraRoll \(downloadParam.fileName)")
+        debugLog("FileService downloadToCameraRoll \(downloadParam.fileName)")
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             showAccessAlert()
             success?()
@@ -555,10 +554,10 @@ class DownLoadOperation: Operation {
         }
         SingletonStorage.shared.progressDelegates.add(self)
         FileService.shared.downloadToCameraRoll(downloadParam: param, success: {
-            log.debug("FileService download \(self.param.fileName) success")
+            debugLog("FileService download \(self.param.fileName) success")
             self.customSuccess()
         }) { error in
-            log.debug("FileService download \(self.param.fileName) fail: \(error.errorDescription ?? "")")
+            debugLog("FileService download \(self.param.fileName) fail: \(error.errorDescription ?? "")")
             self.customFail(error)
         }
         semaphore.wait()

@@ -260,7 +260,7 @@ final class UploadService: BaseRequestService {
             self.uploadOperations.append(operations)
             
             self.uploadQueue.addOperations(operations, waitUntilFinished: false)
-            log.debug("UPLOADING upload: \(operations.count) have been added to the upload queue")
+            debugLog("UPLOADING upload: \(operations.count) have been added to the upload queue")
             print("UPLOADING upload: \(operations.count) have been added to the upload queue")
             
             syncToUseFileListOperationsCallBack(self.uploadOperations.filter({ $0.uploadType == .syncToUse }))
@@ -360,7 +360,7 @@ final class UploadService: BaseRequestService {
             self.uploadOperations.append(operations)
             
             self.uploadQueue.addOperations(operations, waitUntilFinished: false)
-            log.debug("UPLOADING upload: \(operations.count) have been added to the upload queue")
+            debugLog("UPLOADING upload: \(operations.count) have been added to the upload queue")
             print("UPLOADING upload: \(operations.count) have been added to the upload queue")
             let oretiontoReturn = self.uploadOperations.filter({ $0.uploadType == .fromHomePage })
             returnedOprations(oretiontoReturn)
@@ -458,7 +458,7 @@ final class UploadService: BaseRequestService {
             self.uploadOperations.append(operations)
             
             self.uploadQueue.addOperations(operations, waitUntilFinished: false)
-            log.debug("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
+            debugLog("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
             print("AUTOSYNC: \(operations.count) \(firstObject.fileType)(s) have been added to the sync queue")
             
             syncOperationsListCallBack(self.uploadOperations.filter({ $0.uploadType == .autoSync }))
@@ -684,9 +684,9 @@ extension UploadService {
     fileprivate func logEvent(_ message: String) {
         DispatchQueue.main.async {
             if UIApplication.shared.applicationState == .background {
-                log.debug("Upload Service Background sync \(message)")
+                debugLog("Upload Service Background sync \(message)")
             } else {
-                log.debug("Upload Service \(message)")
+                debugLog("Upload Service \(message)")
             }
         }
     }
@@ -698,7 +698,7 @@ extension UploadService {
         var logString = "Auto Sync Settings: PHOTOS: \(photoSetting) + VIDEOS: \(videoSetting)"
         logString += "; DEVICE NETWORK: \(reachabilityService.status)"
         logString += " --> \(state)"
-        log.debug(logString)
+        debugLog(logString)
     }
     
     @objc fileprivate func updateSyncSettings() {

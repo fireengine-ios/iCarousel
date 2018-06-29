@@ -16,14 +16,14 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
     let localMediaStorage = LocalMediaStorage.default
     
     override func getAllItems(sortBy: SortedRules) {
-        log.debug("UploadFilesSelectionInteractor getAllItems")
+        debugLog("UploadFilesSelectionInteractor getAllItems")
 
         guard let uuid = rootUIID else {
             return
         }
         
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) {[weak self] accessGranted, _ in
-            log.debug("UploadFilesSelectionInteractor getAllItems LocalMediaStorage askPermissionForPhotoFramework")
+            debugLog("UploadFilesSelectionInteractor getAllItems LocalMediaStorage askPermissionForPhotoFramework")
             guard accessGranted else {
                 return
             }
@@ -59,7 +59,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
     }
     
     func addToUploadOnDemandItems(items: [BaseDataSourceItem]) {
-        log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems")
+        debugLog("UploadFilesSelectionInteractor addToUploadOnDemandItems")
 
         let uploadItems = items as! [WrapData]
         let router = RouterVC()
@@ -77,13 +77,13 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         }
         
         UploadService.default.uploadFileList(items: uploadItems, uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
-            log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList success")
+            debugLog("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList success")
 
             DispatchQueue.main.async {
                 self?.uploadOutput?.addToUploadSuccessed()
             }
         }, fail: { [weak self] errorResponse in
-            log.debug("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList fail")
+            debugLog("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList fail")
             DispatchQueue.main.async {
                 self?.uploadOutput?.addToUploadFailedWith(errorMessage: errorResponse.description)
             }

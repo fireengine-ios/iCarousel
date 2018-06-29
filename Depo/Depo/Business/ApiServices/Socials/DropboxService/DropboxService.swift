@@ -26,7 +26,7 @@ final class DropboxManager {
     }
     
     func handleRedirect(url: URL) -> Bool {
-        log.debug("DropboxManager handleRedirect")
+        debugLog("DropboxManager handleRedirect")
 
         guard let dbResult = DBClientsManager.handleRedirectURL(url) else {
             return false
@@ -35,13 +35,13 @@ final class DropboxManager {
         print(dbResult)
         if dbResult.isSuccess() {
             handler?(.success(token: dbResult.accessToken.accessToken))
-            log.debug("DropboxManager User is logged into Dropbox.")
+            debugLog("DropboxManager User is logged into Dropbox.")
         } else if dbResult.isCancel() {
             handler?(.cancel)
-            log.debug("DropboxManager Authorization flow was manually canceled by user!")
+            debugLog("DropboxManager Authorization flow was manually canceled by user!")
         } else if dbResult.isError() {
             handler?(.failed(dbResult.description()))
-            log.debug("DropboxManager Error: \(dbResult)")
+            debugLog("DropboxManager Error: \(dbResult)")
             print("Error: \(dbResult)")
         }
         
@@ -55,7 +55,7 @@ final class DropboxManager {
     }
     
     func loginIfNeed(handler: @escaping DropboxLoginHandler) {
-        log.debug("DropboxManager login")
+        debugLog("DropboxManager login")
         if let token = token {
             handler(.success(token: token))
             return
@@ -64,7 +64,7 @@ final class DropboxManager {
     }
     
     func login(handler: @escaping DropboxLoginHandler) {
-        log.debug("DropboxManager login")
+        debugLog("DropboxManager login")
         
         self.handler = handler
         guard let vc = (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController else {
@@ -76,7 +76,7 @@ final class DropboxManager {
     }
     
     func logout() {
-        log.debug("DropboxManager logout")
+        debugLog("DropboxManager logout")
 
         DBOAuthManager.shared()?.clearStoredAccessTokens()
     }
@@ -85,7 +85,7 @@ final class DropboxManager {
 class DropboxService: BaseRequestService {
     
     func requestToken(withCurrentToken currentToken: String, withConsumerKey consumerKey: String, withAppSecret appSecret: String, withAuthTokenSecret authTokenSecret: String, success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("DropboxService requestToken")
+        debugLog("DropboxService requestToken")
 
         let dropbox = DropboxAuth(withCurrentToken: currentToken, withConsumerKey: consumerKey, withAppSecret: appSecret, withAuthTokenSecret: authTokenSecret)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -93,7 +93,7 @@ class DropboxService: BaseRequestService {
     }
     
     func requestConnect(withToken token: String, success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("DropboxService requestConnect")
+        debugLog("DropboxService requestConnect")
 
         let dropbox = DropboxConnect(withToken: token)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -101,7 +101,7 @@ class DropboxService: BaseRequestService {
     }
     
     func requestStatus(success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("DropboxService requestStatus")
+        debugLog("DropboxService requestStatus")
 
         let dropbox = DropboxStatus()
         let handler = BaseResponseHandler<DropboxStatusObject, ObjectRequestResponse>(success: success, fail: fail)
@@ -109,7 +109,7 @@ class DropboxService: BaseRequestService {
     }
     
     func requestStart(success: SuccessResponse?, fail: FailResponse?) {
-        log.debug("DropboxService requestStart")
+        debugLog("DropboxService requestStart")
 
         let dropbox = DropboxStart()
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)

@@ -35,7 +35,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     }
 
     override func uploadData(_ searchText: String! = nil) {
-        log.debug("AlbumsPresenter uploadData")
+        debugLog("AlbumsPresenter uploadData")
 
         interactor.getAllItems(sortBy: sortedRule)
     }
@@ -60,7 +60,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     }
     
     override func sortedPushed(with rule: SortedRules) {
-        log.debug("AlbumsPresenter sortedPushed")
+        debugLog("AlbumsPresenter sortedPushed")
         
         sortedRule = rule
         interactor.getAllItems(sortBy: rule)
@@ -68,7 +68,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     }
     
     override func reloadData() {
-        log.debug("BaseFilesGreedPresenter reloadData")
+        debugLog("BaseFilesGreedPresenter reloadData")
         debugPrint("BaseFilesGreedPresenter reloadData")
         
         dataSource.dropData()
@@ -111,7 +111,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     }
     
     override func onStartCreatingPhotoAndVideos() {
-        log.debug("AlbumsPresenter onStartCreatingPhotoAndVideos")
+        debugLog("AlbumsPresenter onStartCreatingPhotoAndVideos")
         
         if let router = router as? AlbumsRouter {
             if interactor is AlbumsInteractor {

@@ -51,7 +51,7 @@ final class VolumeSlider: UIView {
     
     fileprivate func getVolumeSlider() -> UISlider {
         guard let slider = volumeView.subviews.first as? UISlider else {
-            log.debug("VolumeSlider getVolumeSlider ERROR: something went wrong with MPVolumeView volume slider")
+            debugLog("VolumeSlider getVolumeSlider ERROR: something went wrong with MPVolumeView volume slider")
             print("ERROR: something went wrong with MPVolumeView volume slider")
             return UISlider()
         }

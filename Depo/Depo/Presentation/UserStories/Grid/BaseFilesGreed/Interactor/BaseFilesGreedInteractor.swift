@@ -39,7 +39,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     }
     
     func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
-        log.debug("BaseFilesGreedInteractor reloadItems")
+        debugLog("BaseFilesGreedInteractor reloadItems")
         
         guard isUpdating == false else {
             return
@@ -49,7 +49,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         remoteItems.reloadItems(sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] items in
             self?.getNextPageRetryCounter = 0
             DispatchQueue.main.async {
-                log.debug("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems success")
+                debugLog("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems success")
                 
                 var isArrayPresenter = false
                 if let presenter = self?.output as? BaseFilesGreedPresenter {
@@ -68,7 +68,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                 }
             }
             }, fail: { [weak self] in
-                log.debug("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems fail")
+                debugLog("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems fail")
                 guard let `self` = self else {
                     return
                 }
@@ -87,7 +87,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     }
     
     func nextItems(_ searchText: String! = nil, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
-        log.debug("BaseFilesGreedInteractor nextItems")
+        debugLog("BaseFilesGreedInteractor nextItems")
 
         guard isUpdating == false else {
             return
@@ -99,7 +99,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                               success: { [weak self] items in
                 self?.getNextPageRetryCounter = 0
                 DispatchQueue.main.async {
-                    log.debug("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems success")
+                    debugLog("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems success")
 
                     self?.isUpdating = false
                     if items.count == 0 {
@@ -113,7 +113,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                     }
                 }
             }, fail: { [weak self] in
-                log.debug("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems fail")
+                debugLog("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems fail")
                 guard let `self` = self else {
                     return
                 }

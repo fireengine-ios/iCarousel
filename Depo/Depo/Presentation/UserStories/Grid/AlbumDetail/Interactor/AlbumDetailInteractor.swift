@@ -11,7 +11,7 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
     var album: AlbumItem?
     
     func allItems(_ searchText: String! = nil, sortBy: SortType, sortOrder: SortOrder) {
-        log.debug("AlbumDetailInteractor allItems")
+        debugLog("AlbumDetailInteractor allItems")
         
         guard let remote = remoteItems as? AlbumDetailService else {
             return
@@ -22,20 +22,20 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
         
         remote.allItems(albumUUID: albumObject.uuid,
                         sortBy: sortBy, sortOrder: sortOrder, success: { albums in
-                            log.debug("AlbumDetailInteractor allItems AlbumDetailService allItems success")
+                            debugLog("AlbumDetailInteractor allItems AlbumDetailService allItems success")
 
 //            self?.items(items: albums)
             }, fail: {
-                log.debug("AlbumDetailInteractor allItems AlbumDetailService allItems fail")
+                debugLog("AlbumDetailInteractor allItems AlbumDetailService allItems fail")
         })
         
     }
     
     override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
-        log.debug("AlbumDetailInteractor reloadItems")
+        debugLog("AlbumDetailInteractor reloadItems")
 
         guard let albumService = remoteItems as? AlbumDetailService else {
-            log.debug("AlbumDetailInteractor reloadItems NOT AlbumDetailService")
+            debugLog("AlbumDetailInteractor reloadItems NOT AlbumDetailService")
 
             debugPrint("NOT AlbumDetailService")
             return
@@ -46,7 +46,7 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
     }
     
     override func nextItems(_ searchText: String! = nil, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
-        log.debug("AlbumDetailInteractor nextItems")
+        debugLog("AlbumDetailInteractor nextItems")
         
         guard isUpdating == false else {
             return
@@ -59,7 +59,7 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
         }
         albumService.nextItems(albumUUID: unwrapedAlbumUUID, sortBy: sortBy, sortOrder: sortOrder,
                                success: { [weak self] items in
-                                log.debug("AlbumDetailInteractor nextItems AlbumDetailService nextItems success")
+                                debugLog("AlbumDetailInteractor nextItems AlbumDetailService nextItems success")
                                 
                                 self?.isUpdating = false
                                 
@@ -71,7 +71,7 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
                                     }
                                 }
             }, fail: { [weak self] in
-                log.debug("AlbumDetailInteractor nextItems AlbumDetailService nextItems fail")
+                debugLog("AlbumDetailInteractor nextItems AlbumDetailService nextItems fail")
                 self?.isUpdating = false
 
                 self?.output.asyncOperationFail(errorMessage: nil)

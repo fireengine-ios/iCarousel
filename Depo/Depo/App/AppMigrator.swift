@@ -24,7 +24,7 @@ final class AppMigrator {
             return
         }
         
-        log.debug("migrateTokens")
+        debugLog("migrateTokens")
         
         let tokenStorage: TokenStorage = factory.resolve()
         tokenStorage.refreshToken = token
@@ -40,7 +40,7 @@ final class AppMigrator {
             return
         }
         
-        log.debug("migratePasscode")
+        debugLog("migratePasscode")
         
         let passcodeStorage: PasscodeStorage = factory.resolve()
         passcodeStorage.save(passcode: passcodeMD5)
@@ -50,7 +50,7 @@ final class AppMigrator {
         let passcodeSetting = UserDefaults.standard.integer(forKey: "PassCodeSetting")
         let passcodeSettingOnWithTouchID = 2
         
-        log.debug("migratePasscodeTouchID")
+        debugLog("migratePasscodeTouchID")
         
         if passcodeSetting == passcodeSettingOnWithTouchID {
             var biometricsManager: BiometricsManager = factory.resolve()
@@ -94,7 +94,7 @@ extension AppMigrator {
         removeFromSources(metaSummary: metaSummary, md5: deprecatedMD5)
 
         let debugString = "\(wrapData.name) isSynced: \(isSynced) in UD: \(isInUserDefaultsHashes), in BD: \(isInDBHashes)"
-        log.debug(debugString)
+        debugLog(debugString)
         debugPrint(debugString)
         
         return isSynced
@@ -109,7 +109,6 @@ extension AppMigrator {
             let itemsToRemove = syncedItems.filter(MetaFileSummary.name == metaSummary.fileName && MetaFileSummary.bytes == metaSummary.fileSize)
             try syncedItemsDBConnection?.run(itemsToRemove.delete())
         } catch {
-            log.debug("can't removeFromSources")
             return
         }
     }
@@ -177,11 +176,11 @@ extension AppMigrator {
         
         do {
             debugPrint("DB PATH FOR SYNCED: \(path)")
-            log.debug("DB PATH FOR SYNCED: \(path)")
+            debugLog("DB PATH FOR SYNCED: \(path)")
             let db = try Connection(path, readonly: false)
             return db
         } catch {
-            log.debug("can't open syncedItemsDBConnection")
+            debugLog("can't open syncedItemsDBConnection")
             return nil
         }
     }()
@@ -220,10 +219,10 @@ extension AppMigrator {
                 allSummaries.append(meta)
             }
             let result = Set(allSummaries)
-            log.debug("DB migration: \(result)")
+            debugLog("DB migration: \(result)")
             return result
         } catch {
-            log.debug("can't read syncedFromDB")
+            debugLog("can't read syncedFromDB")
             return []
         }
     }()
