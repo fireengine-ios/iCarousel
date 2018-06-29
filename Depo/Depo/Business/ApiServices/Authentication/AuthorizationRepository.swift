@@ -8,10 +8,13 @@
 
 import Alamofire
 
+typealias RefreshCompletion = (_ succeeded: Bool, _ accessToken: String?) -> Void
+
 // TODO: Need to test refresh token request for no internet connection and timed out
 
 protocol AuthorizationRepository: RequestAdapter, RequestRetrier {
     var refreshFailedHandler: VoidHandler { get set }
+    func refreshTokens(completion: @escaping RefreshCompletion)
 }
 
 open class AuthorizationRepositoryImp: AuthorizationRepository {
@@ -130,10 +133,9 @@ extension AuthorizationRepositoryImp: RequestRetrier {
     }
     
     
-    // MARK: - Private - Refresh Tokens
+    // MARK: - Refresh Tokens
     
-    fileprivate typealias RefreshCompletion = (_ succeeded: Bool, _ accessToken: String?) -> Void
-    fileprivate func refreshTokens(completion: @escaping RefreshCompletion) {
+    func refreshTokens(completion: @escaping RefreshCompletion) {
         
         /// guard refresh retry
         if isRefreshing {
@@ -149,7 +151,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
         let headers = [refreshTokenKey: tokenStorage.refreshToken ?? ""]
         
         sessionManager
-            .request(urls.refreshAccessToken, method: .post, parameters: [uuid: UIDevice.current.identifierForVendor?.uuidString ?? "", name: UIDevice.current.name, deviceType: Device.isIpad ? "IPAD" : "IPHONE"],
+            .request(urls.refreshAccessToken, method: .post, parameters: [uuid: UIDevice.current.identifierForVendor?.uuidString ?? "", name: UIDevice.current.name, deviceType: Device.deviceType],
                      encoding: JSONEncoding.default, headers: headers)
             .responseJSON { [weak self] response in
                 guard let strongSelf = self else { return }
@@ -158,7 +160,6 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                 if response.response?.statusCode == 401 {
                     #if MAIN_APP
                     debugLog("failed refreshAccessToken")
-
                     #endif
                     strongSelf.refreshFailedHandler()
                     completion(false, nil)
