@@ -2568,6 +2568,32 @@
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
 		B53DCDC220E3A75400400DBA /* WKWebView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */; };
 		B53DCDC320E3A75400400DBA /* WKWebView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */; };
+		B53DCDE020EB553B00400DBA /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDC620EB553A00400DBA /* Contact.m */; };
+		B53DCDE120EB553B00400DBA /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDC620EB553A00400DBA /* Contact.m */; };
+		B53DCDE220EB553B00400DBA /* AnalyzeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDCA20EB553A00400DBA /* AnalyzeStatus.m */; };
+		B53DCDE320EB553B00400DBA /* AnalyzeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDCA20EB553A00400DBA /* AnalyzeStatus.m */; };
+		B53DCDE420EB553B00400DBA /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDCB20EB553A00400DBA /* SyncRecord.m */; };
+		B53DCDE520EB553B00400DBA /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDCB20EB553A00400DBA /* SyncRecord.m */; };
+		B53DCDE620EB553B00400DBA /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDCC20EB553A00400DBA /* SyncDB.m */; };
+		B53DCDE720EB553B00400DBA /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDCC20EB553A00400DBA /* SyncDB.m */; };
+		B53DCDE820EB553B00400DBA /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDCE20EB553A00400DBA /* SyncStatus.m */; };
+		B53DCDE920EB553B00400DBA /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDCE20EB553A00400DBA /* SyncStatus.m */; };
+		B53DCDEA20EB553B00400DBA /* ContactSyncSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDD020EB553A00400DBA /* ContactSyncSDK.m */; };
+		B53DCDEB20EB553B00400DBA /* ContactSyncSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDD020EB553A00400DBA /* ContactSyncSDK.m */; };
+		B53DCDEC20EB553B00400DBA /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDD420EB553A00400DBA /* GZIP.m */; };
+		B53DCDED20EB553B00400DBA /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDD420EB553A00400DBA /* GZIP.m */; };
+		B53DCDEE20EB553B00400DBA /* ContactUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDD820EB553A00400DBA /* ContactUtil.m */; };
+		B53DCDEF20EB553B00400DBA /* ContactUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDD820EB553A00400DBA /* ContactUtil.m */; };
+		B53DCDF020EB553B00400DBA /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDD920EB553A00400DBA /* SyncLogger.m */; };
+		B53DCDF120EB553B00400DBA /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDD920EB553A00400DBA /* SyncLogger.m */; };
+		B53DCDF220EB553B00400DBA /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDDA20EB553A00400DBA /* SyncSettings.m */; };
+		B53DCDF320EB553B00400DBA /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDDA20EB553A00400DBA /* SyncSettings.m */; };
+		B53DCDF420EB553B00400DBA /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDDC20EB553A00400DBA /* SyncDBUtils.m */; };
+		B53DCDF520EB553B00400DBA /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDDC20EB553A00400DBA /* SyncDBUtils.m */; };
+		B53DCDF620EB553B00400DBA /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDDE20EB553A00400DBA /* ContactDevice.m */; };
+		B53DCDF720EB553B00400DBA /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDDE20EB553A00400DBA /* ContactDevice.m */; };
+		B53DCDF820EB553B00400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDDF20EB553A00400DBA /* SyncAdapter.m */; };
+		B53DCDF920EB553B00400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDDF20EB553A00400DBA /* SyncAdapter.m */; };
 		B54844C0209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54844C1209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54BFF31202B20250018AF82 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C850A21ACD63F700F976DE /* NotificationCenter.framework */; };
@@ -2593,32 +2619,6 @@
 		B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
 		B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E8181FE288A500F47B0A /* PhotoSyncService.swift */; };
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
-		B582BD3120E0C52B00F14D4A /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD1720E0C52A00F14D4A /* Contact.m */; };
-		B582BD3220E0C52B00F14D4A /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD1720E0C52A00F14D4A /* Contact.m */; };
-		B582BD3320E0C52B00F14D4A /* AnalyzeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD1B20E0C52A00F14D4A /* AnalyzeStatus.m */; };
-		B582BD3420E0C52B00F14D4A /* AnalyzeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD1B20E0C52A00F14D4A /* AnalyzeStatus.m */; };
-		B582BD3520E0C52B00F14D4A /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD1C20E0C52A00F14D4A /* SyncRecord.m */; };
-		B582BD3620E0C52B00F14D4A /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD1C20E0C52A00F14D4A /* SyncRecord.m */; };
-		B582BD3720E0C52B00F14D4A /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD1D20E0C52A00F14D4A /* SyncDB.m */; };
-		B582BD3820E0C52B00F14D4A /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD1D20E0C52A00F14D4A /* SyncDB.m */; };
-		B582BD3920E0C52B00F14D4A /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD1F20E0C52A00F14D4A /* SyncStatus.m */; };
-		B582BD3A20E0C52B00F14D4A /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD1F20E0C52A00F14D4A /* SyncStatus.m */; };
-		B582BD3B20E0C52B00F14D4A /* ContactSyncSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2120E0C52A00F14D4A /* ContactSyncSDK.m */; };
-		B582BD3C20E0C52B00F14D4A /* ContactSyncSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2120E0C52A00F14D4A /* ContactSyncSDK.m */; };
-		B582BD3D20E0C52B00F14D4A /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2520E0C52A00F14D4A /* GZIP.m */; };
-		B582BD3E20E0C52B00F14D4A /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2520E0C52A00F14D4A /* GZIP.m */; };
-		B582BD3F20E0C52B00F14D4A /* ContactUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2920E0C52A00F14D4A /* ContactUtil.m */; };
-		B582BD4020E0C52B00F14D4A /* ContactUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2920E0C52A00F14D4A /* ContactUtil.m */; };
-		B582BD4120E0C52B00F14D4A /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2A20E0C52A00F14D4A /* SyncLogger.m */; };
-		B582BD4220E0C52B00F14D4A /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2A20E0C52A00F14D4A /* SyncLogger.m */; };
-		B582BD4320E0C52B00F14D4A /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2B20E0C52A00F14D4A /* SyncSettings.m */; };
-		B582BD4420E0C52B00F14D4A /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2B20E0C52A00F14D4A /* SyncSettings.m */; };
-		B582BD4520E0C52B00F14D4A /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2D20E0C52A00F14D4A /* SyncDBUtils.m */; };
-		B582BD4620E0C52B00F14D4A /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2D20E0C52A00F14D4A /* SyncDBUtils.m */; };
-		B582BD4720E0C52B00F14D4A /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2F20E0C52A00F14D4A /* ContactDevice.m */; };
-		B582BD4820E0C52B00F14D4A /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD2F20E0C52A00F14D4A /* ContactDevice.m */; };
-		B582BD4920E0C52B00F14D4A /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD3020E0C52A00F14D4A /* SyncAdapter.m */; };
-		B582BD4A20E0C52B00F14D4A /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B582BD3020E0C52A00F14D4A /* SyncAdapter.m */; };
 		B5BA98762066827900CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
 		B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
 		B5BA98792066830A00CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
@@ -5034,6 +5034,33 @@
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
 		B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncOperation.swift; sourceTree = "<group>"; };
 		B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebView+Extensions.swift"; sourceTree = "<group>"; };
+		B53DCDC520EB553A00400DBA /* GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GZIP.h; sourceTree = "<group>"; };
+		B53DCDC620EB553A00400DBA /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		B53DCDC720EB553A00400DBA /* SyncConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncConstants.h; sourceTree = "<group>"; };
+		B53DCDC820EB553A00400DBA /* SyncLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncLogger.h; sourceTree = "<group>"; };
+		B53DCDC920EB553A00400DBA /* ContactUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUtil.h; sourceTree = "<group>"; };
+		B53DCDCA20EB553A00400DBA /* AnalyzeStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeStatus.m; sourceTree = "<group>"; };
+		B53DCDCB20EB553A00400DBA /* SyncRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncRecord.m; sourceTree = "<group>"; };
+		B53DCDCC20EB553A00400DBA /* SyncDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncDB.m; sourceTree = "<group>"; };
+		B53DCDCD20EB553A00400DBA /* ContactDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDevice.h; sourceTree = "<group>"; };
+		B53DCDCE20EB553A00400DBA /* SyncStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncStatus.m; sourceTree = "<group>"; };
+		B53DCDCF20EB553A00400DBA /* SyncDBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncDBUtils.h; sourceTree = "<group>"; };
+		B53DCDD020EB553A00400DBA /* ContactSyncSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncSDK.m; sourceTree = "<group>"; };
+		B53DCDD120EB553A00400DBA /* SyncSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncSettings.h; sourceTree = "<group>"; };
+		B53DCDD220EB553A00400DBA /* SyncAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncAdapter.h; sourceTree = "<group>"; };
+		B53DCDD320EB553A00400DBA /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		B53DCDD420EB553A00400DBA /* GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GZIP.m; sourceTree = "<group>"; };
+		B53DCDD520EB553A00400DBA /* SyncDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncDB.h; sourceTree = "<group>"; };
+		B53DCDD620EB553A00400DBA /* SyncRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncRecord.h; sourceTree = "<group>"; };
+		B53DCDD720EB553A00400DBA /* AnalyzeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeStatus.h; sourceTree = "<group>"; };
+		B53DCDD820EB553A00400DBA /* ContactUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtil.m; sourceTree = "<group>"; };
+		B53DCDD920EB553A00400DBA /* SyncLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncLogger.m; sourceTree = "<group>"; };
+		B53DCDDA20EB553A00400DBA /* SyncSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncSettings.m; sourceTree = "<group>"; };
+		B53DCDDB20EB553A00400DBA /* ContactSyncSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncSDK.h; sourceTree = "<group>"; };
+		B53DCDDC20EB553A00400DBA /* SyncDBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncDBUtils.m; sourceTree = "<group>"; };
+		B53DCDDD20EB553A00400DBA /* SyncStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncStatus.h; sourceTree = "<group>"; };
+		B53DCDDE20EB553A00400DBA /* ContactDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDevice.m; sourceTree = "<group>"; };
+		B53DCDDF20EB553A00400DBA /* SyncAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncAdapter.m; sourceTree = "<group>"; };
 		B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCGLogger+Extension.swift"; sourceTree = "<group>"; };
 		B54BFF30202B20250018AF82 /* autosync-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "autosync-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54BFF33202B20250018AF82 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -5051,33 +5078,6 @@
 		B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ShareActivity.swift"; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
-		B582BD1620E0C52A00F14D4A /* GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GZIP.h; sourceTree = "<group>"; };
-		B582BD1720E0C52A00F14D4A /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
-		B582BD1820E0C52A00F14D4A /* SyncConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncConstants.h; sourceTree = "<group>"; };
-		B582BD1920E0C52A00F14D4A /* SyncLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncLogger.h; sourceTree = "<group>"; };
-		B582BD1A20E0C52A00F14D4A /* ContactUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUtil.h; sourceTree = "<group>"; };
-		B582BD1B20E0C52A00F14D4A /* AnalyzeStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeStatus.m; sourceTree = "<group>"; };
-		B582BD1C20E0C52A00F14D4A /* SyncRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncRecord.m; sourceTree = "<group>"; };
-		B582BD1D20E0C52A00F14D4A /* SyncDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncDB.m; sourceTree = "<group>"; };
-		B582BD1E20E0C52A00F14D4A /* ContactDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDevice.h; sourceTree = "<group>"; };
-		B582BD1F20E0C52A00F14D4A /* SyncStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncStatus.m; sourceTree = "<group>"; };
-		B582BD2020E0C52A00F14D4A /* SyncDBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncDBUtils.h; sourceTree = "<group>"; };
-		B582BD2120E0C52A00F14D4A /* ContactSyncSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncSDK.m; sourceTree = "<group>"; };
-		B582BD2220E0C52A00F14D4A /* SyncSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncSettings.h; sourceTree = "<group>"; };
-		B582BD2320E0C52A00F14D4A /* SyncAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncAdapter.h; sourceTree = "<group>"; };
-		B582BD2420E0C52A00F14D4A /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
-		B582BD2520E0C52A00F14D4A /* GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GZIP.m; sourceTree = "<group>"; };
-		B582BD2620E0C52A00F14D4A /* SyncDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncDB.h; sourceTree = "<group>"; };
-		B582BD2720E0C52A00F14D4A /* SyncRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncRecord.h; sourceTree = "<group>"; };
-		B582BD2820E0C52A00F14D4A /* AnalyzeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeStatus.h; sourceTree = "<group>"; };
-		B582BD2920E0C52A00F14D4A /* ContactUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtil.m; sourceTree = "<group>"; };
-		B582BD2A20E0C52A00F14D4A /* SyncLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncLogger.m; sourceTree = "<group>"; };
-		B582BD2B20E0C52A00F14D4A /* SyncSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncSettings.m; sourceTree = "<group>"; };
-		B582BD2C20E0C52A00F14D4A /* ContactSyncSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncSDK.h; sourceTree = "<group>"; };
-		B582BD2D20E0C52A00F14D4A /* SyncDBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncDBUtils.m; sourceTree = "<group>"; };
-		B582BD2E20E0C52A00F14D4A /* SyncStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncStatus.h; sourceTree = "<group>"; };
-		B582BD2F20E0C52A00F14D4A /* ContactDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDevice.m; sourceTree = "<group>"; };
-		B582BD3020E0C52A00F14D4A /* SyncAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncAdapter.m; sourceTree = "<group>"; };
 		B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+JPEG.swift"; sourceTree = "<group>"; };
 		B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsTableViewCell.swift; sourceTree = "<group>"; };
 		B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncSettingsTableViewCell.xib; sourceTree = "<group>"; };
@@ -9555,7 +9555,7 @@
 		8CFF866E1F0F96D100520D18 /* VendorsFrameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B582BD1520E0C52A00F14D4A /* ContactSyncSDK */,
+				B53DCDC420EB553A00400DBA /* ContactSyncSDK */,
 				78B2D343204A94E000D096DC /* MPush.framework */,
 				8C06AC2E2008AD6F003D8E05 /* CropySDK */,
 				56B9E92B1DED750600DE1011 /* AppRater */,
@@ -9903,6 +9903,40 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		B53DCDC420EB553A00400DBA /* ContactSyncSDK */ = {
+			isa = PBXGroup;
+			children = (
+				B53DCDC520EB553A00400DBA /* GZIP.h */,
+				B53DCDC620EB553A00400DBA /* Contact.m */,
+				B53DCDC720EB553A00400DBA /* SyncConstants.h */,
+				B53DCDC820EB553A00400DBA /* SyncLogger.h */,
+				B53DCDC920EB553A00400DBA /* ContactUtil.h */,
+				B53DCDCA20EB553A00400DBA /* AnalyzeStatus.m */,
+				B53DCDCB20EB553A00400DBA /* SyncRecord.m */,
+				B53DCDCC20EB553A00400DBA /* SyncDB.m */,
+				B53DCDCD20EB553A00400DBA /* ContactDevice.h */,
+				B53DCDCE20EB553A00400DBA /* SyncStatus.m */,
+				B53DCDCF20EB553A00400DBA /* SyncDBUtils.h */,
+				B53DCDD020EB553A00400DBA /* ContactSyncSDK.m */,
+				B53DCDD120EB553A00400DBA /* SyncSettings.h */,
+				B53DCDD220EB553A00400DBA /* SyncAdapter.h */,
+				B53DCDD320EB553A00400DBA /* Contact.h */,
+				B53DCDD420EB553A00400DBA /* GZIP.m */,
+				B53DCDD520EB553A00400DBA /* SyncDB.h */,
+				B53DCDD620EB553A00400DBA /* SyncRecord.h */,
+				B53DCDD720EB553A00400DBA /* AnalyzeStatus.h */,
+				B53DCDD820EB553A00400DBA /* ContactUtil.m */,
+				B53DCDD920EB553A00400DBA /* SyncLogger.m */,
+				B53DCDDA20EB553A00400DBA /* SyncSettings.m */,
+				B53DCDDB20EB553A00400DBA /* ContactSyncSDK.h */,
+				B53DCDDC20EB553A00400DBA /* SyncDBUtils.m */,
+				B53DCDDD20EB553A00400DBA /* SyncStatus.h */,
+				B53DCDDE20EB553A00400DBA /* ContactDevice.m */,
+				B53DCDDF20EB553A00400DBA /* SyncAdapter.m */,
+			);
+			path = ContactSyncSDK;
+			sourceTree = "<group>";
+		};
 		B54BFF32202B20250018AF82 /* autosync-widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -9935,40 +9969,6 @@
 				66EA238C411DE4D11DBC9837 /* LBAlbumLikePreviewSliderRouter.swift */,
 			);
 			path = Router;
-			sourceTree = "<group>";
-		};
-		B582BD1520E0C52A00F14D4A /* ContactSyncSDK */ = {
-			isa = PBXGroup;
-			children = (
-				B582BD1620E0C52A00F14D4A /* GZIP.h */,
-				B582BD1720E0C52A00F14D4A /* Contact.m */,
-				B582BD1820E0C52A00F14D4A /* SyncConstants.h */,
-				B582BD1920E0C52A00F14D4A /* SyncLogger.h */,
-				B582BD1A20E0C52A00F14D4A /* ContactUtil.h */,
-				B582BD1B20E0C52A00F14D4A /* AnalyzeStatus.m */,
-				B582BD1C20E0C52A00F14D4A /* SyncRecord.m */,
-				B582BD1D20E0C52A00F14D4A /* SyncDB.m */,
-				B582BD1E20E0C52A00F14D4A /* ContactDevice.h */,
-				B582BD1F20E0C52A00F14D4A /* SyncStatus.m */,
-				B582BD2020E0C52A00F14D4A /* SyncDBUtils.h */,
-				B582BD2120E0C52A00F14D4A /* ContactSyncSDK.m */,
-				B582BD2220E0C52A00F14D4A /* SyncSettings.h */,
-				B582BD2320E0C52A00F14D4A /* SyncAdapter.h */,
-				B582BD2420E0C52A00F14D4A /* Contact.h */,
-				B582BD2520E0C52A00F14D4A /* GZIP.m */,
-				B582BD2620E0C52A00F14D4A /* SyncDB.h */,
-				B582BD2720E0C52A00F14D4A /* SyncRecord.h */,
-				B582BD2820E0C52A00F14D4A /* AnalyzeStatus.h */,
-				B582BD2920E0C52A00F14D4A /* ContactUtil.m */,
-				B582BD2A20E0C52A00F14D4A /* SyncLogger.m */,
-				B582BD2B20E0C52A00F14D4A /* SyncSettings.m */,
-				B582BD2C20E0C52A00F14D4A /* ContactSyncSDK.h */,
-				B582BD2D20E0C52A00F14D4A /* SyncDBUtils.m */,
-				B582BD2E20E0C52A00F14D4A /* SyncStatus.h */,
-				B582BD2F20E0C52A00F14D4A /* ContactDevice.m */,
-				B582BD3020E0C52A00F14D4A /* SyncAdapter.m */,
-			);
-			path = ContactSyncSDK;
 			sourceTree = "<group>";
 		};
 		B5FB65741FDE6F3E00A02FD7 /* OperationProgressService */ = {
@@ -13834,7 +13834,6 @@
 				CE1B7625204D347D00B5E12A /* Error+Network.swift in Sources */,
 				4A9886F520443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
 				8C0E8C681FDEBDFF00789C91 /* FileServiceResponse.swift in Sources */,
-				B582BD4020E0C52B00F14D4A /* ContactUtil.m in Sources */,
 				8C0E8C691FDEBDFF00789C91 /* CreateStoryPreviewModuleInput.swift in Sources */,
 				8C0E8C6A1FDEBDFF00789C91 /* CreateStoryPhotosOrderViewController.swift in Sources */,
 				8C0E8C6B1FDEBDFF00789C91 /* UserProfilePresenter.swift in Sources */,
@@ -13903,7 +13902,6 @@
 				8C0E8CA11FDEBDFF00789C91 /* SearchViewInteractorInput.swift in Sources */,
 				C62239A1204972120043ED44 /* MenloworksTagsConstants.swift in Sources */,
 				8C0E8CA61FDEBDFF00789C91 /* UITableView+Extensions.swift in Sources */,
-				B582BD4620E0C52B00F14D4A /* SyncDBUtils.m in Sources */,
 				8C0E8CA71FDEBDFF00789C91 /* RequestService.swift in Sources */,
 				8C0E8CA81FDEBDFF00789C91 /* InsetsTextField.swift in Sources */,
 				4AC68937202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift in Sources */,
@@ -13943,7 +13941,6 @@
 				8C0E8CCA1FDEBDFF00789C91 /* HomePagePresenter.swift in Sources */,
 				8C0E8CCB1FDEBDFF00789C91 /* SearchViewInteractor.swift in Sources */,
 				8C0E8CCC1FDEBDFF00789C91 /* CaptchaService.swift in Sources */,
-				B582BD3420E0C52B00F14D4A /* AnalyzeStatus.m in Sources */,
 				8C0E8CCD1FDEBDFF00789C91 /* CreateStoryNameViewController.swift in Sources */,
 				8C0E8CCE1FDEBDFF00789C91 /* ImportPhotosInteractorInput.swift in Sources */,
 				8C0E8CCF1FDEBDFF00789C91 /* AlbumSelectionPresenter.swift in Sources */,
@@ -13982,13 +13979,13 @@
 				8C0E8CE81FDEBDFF00789C91 /* SettingsTableViewCell.swift in Sources */,
 				B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */,
 				8C0E8CE91FDEBDFF00789C91 /* HelpAndSupportModuleInput.swift in Sources */,
-				B582BD3C20E0C52B00F14D4A /* ContactSyncSDK.m in Sources */,
 				CE49E8FB2099BD83007F05A6 /* UIButton+Font.swift in Sources */,
 				8C0E8CEA1FDEBDFF00789C91 /* BaseFilesGreedChildrenViewController.swift in Sources */,
 				8C0E8CEC1FDEBDFF00789C91 /* CreateStoryAudioSelectionViewController.swift in Sources */,
 				8C0E8CED1FDEBDFF00789C91 /* CustomSwitch.swift in Sources */,
 				8C0B91A620170EA800A5BA81 /* ManageContactsViewInput.swift in Sources */,
 				8C0E8CEE1FDEBDFF00789C91 /* MediaItemsAlbum+CoreDataClass.swift in Sources */,
+				B53DCDE320EB553B00400DBA /* AnalyzeStatus.m in Sources */,
 				8C0E8CEF1FDEBDFF00789C91 /* AutoSyncModel.swift in Sources */,
 				8C0E8CF01FDEBDFF00789C91 /* Message.m in Sources */,
 				8C0E8CF11FDEBDFF00789C91 /* MediaPlayer.swift in Sources */,
@@ -14086,6 +14083,7 @@
 				8C0E8D3E1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CEF371A720887774007AD36E /* AppConfigurator.swift in Sources */,
 				8C0E8D3F1FDEBDFF00789C91 /* HomeViewTopView.swift in Sources */,
+				B53DCDF720EB553B00400DBA /* ContactDevice.m in Sources */,
 				C62239B7204976E80043ED44 /* FaceImagePhotosPresenter.swift in Sources */,
 				8C0E8D411FDEBDFF00789C91 /* NavBarConfugurator.swift in Sources */,
 				8C0B91A720170EAB00A5BA81 /* ManageContactsViewOutput.swift in Sources */,
@@ -14094,6 +14092,7 @@
 				8C0E8D441FDEBDFF00789C91 /* RemoteDownloder.swift in Sources */,
 				C62239AB204973240043ED44 /* FaceImageChangeCoverConfigurator.swift in Sources */,
 				8C0E8D451FDEBDFF00789C91 /* BlueButtonWithWhiteText.swift in Sources */,
+				B53DCDF520EB553B00400DBA /* SyncDBUtils.m in Sources */,
 				8C0B91BE201710EB00A5BA81 /* TitleView.swift in Sources */,
 				8C0E8D471FDEBDFF00789C91 /* String+Int.swift in Sources */,
 				8C0E8D491FDEBDFF00789C91 /* CustomTabBar.swift in Sources */,
@@ -14137,9 +14136,9 @@
 				8C0E8D781FDEBDFF00789C91 /* HomePageRouterInput.swift in Sources */,
 				8C0E8D791FDEBDFF00789C91 /* MediaItem+CoreDataProperties.swift in Sources */,
 				8C0E8D7A1FDEBDFF00789C91 /* AuthenticationService.swift in Sources */,
-				B582BD3620E0C52B00F14D4A /* SyncRecord.m in Sources */,
 				8C0E8D7B1FDEBDFF00789C91 /* LoginViewController.swift in Sources */,
 				8C0E8D7C1FDEBDFF00789C91 /* ReachabilityService.swift in Sources */,
+				B53DCDE120EB553B00400DBA /* Contact.m in Sources */,
 				8C06AC1520066641003D8E05 /* TurkcellSecurityRouter.swift in Sources */,
 				8C0E8D7E1FDEBDFF00789C91 /* AutoNextEditingRowPasser.swift in Sources */,
 				C62239B5204976DD0043ED44 /* FaceImagePhotosViewController.swift in Sources */,
@@ -14168,6 +14167,7 @@
 				8C0E8D951FDEBDFF00789C91 /* UploadResponse.swift in Sources */,
 				8C0E8D961FDEBDFF00789C91 /* UsageInfoInteractorInput.swift in Sources */,
 				C62239BB2049770C0043ED44 /* FaceImagePhotosRouterInput.swift in Sources */,
+				B53DCDED20EB553B00400DBA /* GZIP.m in Sources */,
 				8C0E8D971FDEBDFF00789C91 /* ResponseResult.swift in Sources */,
 				8C0E8D981FDEBDFF00789C91 /* CreateStorySelectionInitializer.swift in Sources */,
 				8C0E8D991FDEBDFF00789C91 /* CoreTelephonyService.swift in Sources */,
@@ -14196,7 +14196,6 @@
 				8C0E8DAA1FDEBDFF00789C91 /* HelpAndSupportRouter.swift in Sources */,
 				8C0E8DAB1FDEBDFF00789C91 /* CreateStoryAudioSelectionPresenter.swift in Sources */,
 				8C0E8DAC1FDEBDFF00789C91 /* SearchServiceResponse.swift in Sources */,
-				B582BD3220E0C52B00F14D4A /* Contact.m in Sources */,
 				8C0E8DAD1FDEBDFF00789C91 /* RegistrationModuleInput.swift in Sources */,
 				8C0E8DAE1FDEBDFF00789C91 /* RegistrationPresenter.swift in Sources */,
 				4A8CC304201A00D400C040C4 /* FaceImageViewController.swift in Sources */,
@@ -14273,6 +14272,7 @@
 				8C0E8DE31FDEBDFF00789C91 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
 				8C0E8DE41FDEBDFF00789C91 /* UserProfileInteractorOutput.swift in Sources */,
 				8C0E8DE51FDEBDFF00789C91 /* IntroducePresenter.swift in Sources */,
+				B53DCDF320EB553B00400DBA /* SyncSettings.m in Sources */,
 				8C0E8DE61FDEBDFF00789C91 /* CreateStoryService.swift in Sources */,
 				CE23A0F7205FF5320048267D /* EmailEnterController.swift in Sources */,
 				C62239AA204973200043ED44 /* FaceImageChangeCoverInteractorOutput.swift in Sources */,
@@ -14306,6 +14306,7 @@
 				8C0E8DFB1FDEBDFF00789C91 /* GridListTopBarSortingTableView.swift in Sources */,
 				C62239A92049731D0043ED44 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
 				8C0E8DFC1FDEBDFF00789C91 /* PHAssetCollection.swift in Sources */,
+				B53DCDE520EB553B00400DBA /* SyncRecord.m in Sources */,
 				CE055F4020383A3400E6BFE8 /* PHAsset+Properties.swift in Sources */,
 				8C0E8DFD1FDEBDFF00789C91 /* HomePageInteractor.swift in Sources */,
 				CE61D1C420468759001D01DC /* URL+Video.swift in Sources */,
@@ -14354,7 +14355,6 @@
 				8C0E8E1F1FDEBDFF00789C91 /* EditingBarConfig.swift in Sources */,
 				7C203554201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */,
 				8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */,
-				B582BD3820E0C52B00F14D4A /* SyncDB.m in Sources */,
 				8C0E8E221FDEBDFF00789C91 /* PasscodeSettingsModuleInput.swift in Sources */,
 				8C0E8E231FDEBDFF00789C91 /* DropDovnTableViewCell.swift in Sources */,
 				7CEE271C209B537500EF6C79 /* LandingPageViewController.swift in Sources */,
@@ -14371,7 +14371,6 @@
 				C62239B4204973CC0043ED44 /* FaceImagePhotosInitializer.swift in Sources */,
 				8C0E8E2D1FDEBDFF00789C91 /* LocalMediaStorage.swift in Sources */,
 				8C0E8E2E1FDEBDFF00789C91 /* BottomSelectionTabBarViewOutput.swift in Sources */,
-				B582BD3A20E0C52B00F14D4A /* SyncStatus.m in Sources */,
 				8C0E8E2F1FDEBDFF00789C91 /* ActivityTimelineServiceResponse.swift in Sources */,
 				8C0E8E311FDEBDFF00789C91 /* ImportFromInstagramPresenter.swift in Sources */,
 				9840C62620AEAD8100A8634F /* CheckBoxView.swift in Sources */,
@@ -14525,7 +14524,6 @@
 				8C0E8EDD1FDEBDFF00789C91 /* PhotoVideoDetailViewInput.swift in Sources */,
 				8C0E8EDE1FDEBDFF00789C91 /* PhotoVideoDetailViewOutput.swift in Sources */,
 				8C0E8EDF1FDEBDFF00789C91 /* PhotoVideoDetailViewController.swift in Sources */,
-				B582BD4220E0C52B00F14D4A /* SyncLogger.m in Sources */,
 				8C0E8EE01FDEBDFF00789C91 /* ImportPhotosInitializer.swift in Sources */,
 				8C0E8EE11FDEBDFF00789C91 /* PhotoVideoDetailModuleInput.swift in Sources */,
 				8C0E8EE21FDEBDFF00789C91 /* PhotoVideoDetailPresenter.swift in Sources */,
@@ -14563,6 +14561,7 @@
 				8C0E8EF91FDEBDFF00789C91 /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				8C0E8EFA1FDEBDFF00789C91 /* UserInfoSubViewInteractor.swift in Sources */,
 				8C0E8EFB1FDEBDFF00789C91 /* UserInfoSubViewRouterInput.swift in Sources */,
+				B53DCDE920EB553B00400DBA /* SyncStatus.m in Sources */,
 				8C0E8EFC1FDEBDFF00789C91 /* UserInfoSubViewRouter.swift in Sources */,
 				8C0E8EFD1FDEBDFF00789C91 /* UserInfoSubViewConfigurator.swift in Sources */,
 				8C0E8EFF1FDEBDFF00789C91 /* UserInfoSubViewInitializer.swift in Sources */,
@@ -14595,6 +14594,7 @@
 				486F7B5B208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift in Sources */,
 				8C06AC0F20066641003D8E05 /* TurkcellSecurityInteractorIO.swift in Sources */,
 				8C0E8F121FDEBDFF00789C91 /* SyncContactsRouterInput.swift in Sources */,
+				B53DCDEF20EB553B00400DBA /* ContactUtil.m in Sources */,
 				CED4B0262017505300D06CA9 /* ResponseParser.swift in Sources */,
 				8C0E8F131FDEBDFF00789C91 /* SearchViewConfigurator.swift in Sources */,
 				8C06AC2C2008ABB9003D8E05 /* RecentSearchesService.swift in Sources */,
@@ -14606,6 +14606,7 @@
 				8C0E8F161FDEBDFF00789C91 /* PrintInteractorInput.swift in Sources */,
 				8C0E8F171FDEBDFF00789C91 /* ImportPhotosViewInput.swift in Sources */,
 				4A8CC321201A02A600C040C4 /* FaceImageConfigurator.swift in Sources */,
+				B53DCDF120EB553B00400DBA /* SyncLogger.m in Sources */,
 				8C0E8F181FDEBDFF00789C91 /* MoreFilesActionsModuleInput.swift in Sources */,
 				8C0E8F191FDEBDFF00789C91 /* SyncContactsRouter.swift in Sources */,
 				8C0E8F1A1FDEBDFF00789C91 /* SyncContactsConfigurator.swift in Sources */,
@@ -14698,6 +14699,7 @@
 				8C0E8F5B1FDEBDFF00789C91 /* CreateStoryPhotosOrderInteractorInput.swift in Sources */,
 				CEF41E9D2035B2DF0008FCD5 /* PhotoVideoDetailCell.swift in Sources */,
 				7C0750F720BD83A800FD1FA2 /* MaskService.swift in Sources */,
+				B53DCDF920EB553B00400DBA /* SyncAdapter.m in Sources */,
 				8C0E8F5C1FDEBDFF00789C91 /* UploadFilesSelectionViewInput.swift in Sources */,
 				8C0E8F5D1FDEBDFF00789C91 /* UploadFilesSelectionViewOutput.swift in Sources */,
 				8CD2B3B31FE7B41E00280547 /* PrepareToAutoSync.swift in Sources */,
@@ -14738,6 +14740,7 @@
 				8C0E8F761FDEBDFF00789C91 /* PrintViewOutput.swift in Sources */,
 				8C0E8F771FDEBDFF00789C91 /* PackagesViewInput.swift in Sources */,
 				8C0E8F781FDEBDFF00789C91 /* SelectNameViewOutput.swift in Sources */,
+				B53DCDEB20EB553B00400DBA /* ContactSyncSDK.m in Sources */,
 				8C0E8F791FDEBDFF00789C91 /* SelectNameViewController.swift in Sources */,
 				8C0E8F7A1FDEBDFF00789C91 /* SelectNameModuleInput.swift in Sources */,
 				8C0E8F7B1FDEBDFF00789C91 /* SelectNamePresenter.swift in Sources */,
@@ -14754,7 +14757,6 @@
 				4A56D5BC202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */,
 				8C0E8F841FDEBDFF00789C91 /* SelectNameRouter.swift in Sources */,
-				B582BD4A20E0C52B00F14D4A /* SyncAdapter.m in Sources */,
 				C62239A3204972160043ED44 /* MenloworksTagsService.swift in Sources */,
 				8CD2B3B11FE7B3BD00280547 /* UIButton+Color.swift in Sources */,
 				8C0E8F851FDEBDFF00789C91 /* SelectNameConfigurator.swift in Sources */,
@@ -14799,7 +14801,6 @@
 				CE23A0F9205FF5320048267D /* UnderlineTextField.swift in Sources */,
 				8C0E8FA11FDEBDFF00789C91 /* AlbumDetailViewController.swift in Sources */,
 				8C0B919D20170E6400A5BA81 /* DuplicatedContactsInteractor.swift in Sources */,
-				B582BD4420E0C52B00F14D4A /* SyncSettings.m in Sources */,
 				8C0E8FA21FDEBDFF00789C91 /* SingletonStorage.swift in Sources */,
 				CE0596F420385E950083D6FC /* ImageFormat.swift in Sources */,
 				98EAC9432080CBFF00AAD5B6 /* ContactService.swift in Sources */,
@@ -14808,7 +14809,6 @@
 				8C0E8FA51FDEBDFF00789C91 /* OfferServiceResponse.swift in Sources */,
 				98570AFB208F7558002CCEBA /* SpotlightViewController.swift in Sources */,
 				8C0E8FA61FDEBDFF00789C91 /* AlbumDetailInteractor.swift in Sources */,
-				B582BD3E20E0C52B00F14D4A /* GZIP.m in Sources */,
 				8C0E8FA71FDEBDFF00789C91 /* PasscodeSettingsInteractor.swift in Sources */,
 				8C0E8FA81FDEBDFF00789C91 /* AlbumDetailRouterInput.swift in Sources */,
 				8C0E8FA91FDEBDFF00789C91 /* PackagesRouter.swift in Sources */,
@@ -14848,6 +14848,7 @@
 				8C0E8FC11FDEBDFF00789C91 /* ActivityTimelineModuleInput.swift in Sources */,
 				8C0E8FC21FDEBDFF00789C91 /* ActivityTimelinePresenter.swift in Sources */,
 				8C0E8FC31FDEBDFF00789C91 /* ActivityTimelineInteractorInput.swift in Sources */,
+				B53DCDE720EB553B00400DBA /* SyncDB.m in Sources */,
 				8C0E8FC41FDEBDFF00789C91 /* ActivityTimelineInteractorOutput.swift in Sources */,
 				8C0E8FC51FDEBDFF00789C91 /* ActivityTimelineInteractor.swift in Sources */,
 				8C0E8FC61FDEBDFF00789C91 /* ActivityTimelineRouterInput.swift in Sources */,
@@ -14876,7 +14877,6 @@
 				8C0E8FD71FDEBDFF00789C91 /* OTPViewInitializer.swift in Sources */,
 				8C0E8FD81FDEBDFF00789C91 /* UploadFromLifeBoxModuleInput.swift in Sources */,
 				8C0E8FDE1FDEBDFF00789C91 /* OptInController.swift in Sources */,
-				B582BD4820E0C52B00F14D4A /* ContactDevice.m in Sources */,
 				4A8CC324201A02D900C040C4 /* FaceImageInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -14984,7 +14984,6 @@
 				7C49881D1F3320420039C5F2 /* CreateStoryPhotosOrderViewController.swift in Sources */,
 				7CDABD0B1F1E3A6300C8CC16 /* UserProfilePresenter.swift in Sources */,
 				CEC3C2421FB99AF800C3D67F /* PasscodeSettingsPresenter.swift in Sources */,
-				B582BD3F20E0C52B00F14D4A /* ContactUtil.m in Sources */,
 				7CD1F8D51F014F150028F51A /* Router.swift in Sources */,
 				CE51AB051EF90853005DCEE0 /* Filter.m in Sources */,
 				CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */,
@@ -15053,7 +15052,6 @@
 				CE23A0F2205FF4E00048267D /* ErrorPresenter.swift in Sources */,
 				CE51AB6C1EF90853005DCEE0 /* LoginPresenter.swift in Sources */,
 				7C6945E720039F4A00152344 /* FreeAppSpaceConfigurator.swift in Sources */,
-				B582BD4520E0C52B00F14D4A /* SyncDBUtils.m in Sources */,
 				CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */,
 				CECD4E511FE10C7700978BE7 /* UIColor+Adjust.swift in Sources */,
 				B56E0DDA20B44AFC0082044D /* AppResponsivenessService.swift in Sources */,
@@ -15093,7 +15091,6 @@
 				8DCB21711F3C864900BAFE1E /* SearchViewInteractor.swift in Sources */,
 				CE27C3201EF9515C00D4D156 /* CaptchaService.swift in Sources */,
 				7C6E2F971F31E4F800536DB6 /* CreateStoryNameViewController.swift in Sources */,
-				B582BD3320E0C52B00F14D4A /* AnalyzeStatus.m in Sources */,
 				D498865A1F3EFBE200F50C95 /* ImportPhotosInteractorInput.swift in Sources */,
 				7C04350F1F50B6E200193C75 /* AlbumSelectionPresenter.swift in Sources */,
 				EFA74FB61FBF378F00CF946E /* PrintInteractorOutput.swift in Sources */,
@@ -15132,13 +15129,13 @@
 				CE23A0FA205FF5AE0048267D /* Images.swift in Sources */,
 				CE51ABCA1EF90853005DCEE0 /* Message.m in Sources */,
 				CE907A331F94D49900D2F8CE /* MediaPlayer.swift in Sources */,
-				B582BD3B20E0C52B00F14D4A /* ContactSyncSDK.m in Sources */,
 				B5BA98762066827900CA3BF9 /* UIImage+JPEG.swift in Sources */,
 				8C6EF87A1F348B5C002AC795 /* BottomSelectionTabBarInteractorOutput.swift in Sources */,
 				7859298B20060E7D003F8AB3 /* ManageContactsViewOutput.swift in Sources */,
 				7C66E8AB1F979C3300D98F27 /* CreateStoryPreviewInteractor.swift in Sources */,
 				CE6FBFBC1FB2DC3F008FC18C /* AppDelegate.swift in Sources */,
 				7C355E1A1F00E920003B004C /* CollectionViewCellForController.swift in Sources */,
+				B53DCDE220EB553B00400DBA /* AnalyzeStatus.m in Sources */,
 				CE2F55FD1F7551CD00F49DA1 /* AccountResponse.swift in Sources */,
 				7CF6BDE11F0B97050066709E /* CollectionViewCellForAudio.swift in Sources */,
 				CE6DE7601FCC44F800C23CBD /* KeyboardLayoutConstraint.swift in Sources */,
@@ -15236,6 +15233,7 @@
 				78D9BA392007E7F100F2233F /* DuplicatedContactsInteractor.swift in Sources */,
 				CEF3719B20873673007AD36E /* UIViewController+NavBar.swift in Sources */,
 				CEB1CEAA1F21E11200C9DD8F /* SwiftyJSONExtension.swift in Sources */,
+				B53DCDF620EB553B00400DBA /* ContactDevice.m in Sources */,
 				CE23A0F0205FE5B60048267D /* UserDefaultsForUserID.swift in Sources */,
 				CECA95951F1610590054BDC0 /* RemoteDownloder.swift in Sources */,
 				7C849211201CB979007C502A /* LatestUpladsCard.swift in Sources */,
@@ -15244,6 +15242,7 @@
 				CE1E26E120174D7500F49E41 /* ResponseParser.swift in Sources */,
 				CEBB2DD61F76550A00D725F0 /* String+Int.swift in Sources */,
 				78D9BA412007E81200F2233F /* DuplicatedContactsRouterInput.swift in Sources */,
+				B53DCDF420EB553B00400DBA /* SyncDBUtils.m in Sources */,
 				8C6FB6981F0B9F8400B552A3 /* CustomTabBar.swift in Sources */,
 				8C6EF8791F348B5C002AC795 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
 				4A8CC314201A023000C040C4 /* FaceImagePresenter.swift in Sources */,
@@ -15287,9 +15286,9 @@
 				7C121F00208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
 				78D9BA342007E7E200F2233F /* DuplicatedContactsInitializer.swift in Sources */,
 				CE51AC7E1EF90853005DCEE0 /* LoginInitializer.swift in Sources */,
-				B582BD3520E0C52B00F14D4A /* SyncRecord.m in Sources */,
 				4A9B3908201F3533009FC572 /* FaceImageItemsRouter.swift in Sources */,
 				CEAD6BDE1F94EF320085FF30 /* Factory.swift in Sources */,
+				B53DCDE020EB553B00400DBA /* Contact.m in Sources */,
 				7C233CD31FD51E290013CCA0 /* UploadFromLifeBoxRouterInput.swift in Sources */,
 				CE95ED511F516736002F923A /* HelpAndSupportInteractorOutput.swift in Sources */,
 				986B2065207C9C4100E04B96 /* TextEnterDataSource.swift in Sources */,
@@ -15318,6 +15317,7 @@
 				CECA95971F163CC80054BDC0 /* WrapperedItems.swift in Sources */,
 				CE61DA562015D66A00BB1E59 /* HomeCardsService.swift in Sources */,
 				781839861FE9140E0046D73C /* FileForDownload.swift in Sources */,
+				B53DCDEC20EB553B00400DBA /* GZIP.m in Sources */,
 				CEDFECAF1F11C294003D1A75 /* SearchService.swift in Sources */,
 				CEE1D1F91F714DFE0008F4CF /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
 				CE51ACA91EF90853005DCEE0 /* AutoSyncInteractorInput.swift in Sources */,
@@ -15346,7 +15346,6 @@
 				CE51ACC41EF90853005DCEE0 /* RegistrationViewInput.swift in Sources */,
 				CE51ACC51EF90853005DCEE0 /* RegistrationViewOutput.swift in Sources */,
 				CE51ACC61EF90853005DCEE0 /* RegistrationViewController.swift in Sources */,
-				B582BD3120E0C52B00F14D4A /* Contact.m in Sources */,
 				7C4F60A92019E2AE0033C58F /* AlbumCard.swift in Sources */,
 				CE95ED541F516736002F923A /* HelpAndSupportRouter.swift in Sources */,
 				7C6E2F9E1F31E7C000536DB6 /* CreateStoryAudioSelectionPresenter.swift in Sources */,
@@ -15423,6 +15422,7 @@
 				CE51ACE01EF90853005DCEE0 /* IntroduceModuleInput.swift in Sources */,
 				7C6945E420039F4A00152344 /* FreeAppSpaceViewController.swift in Sources */,
 				8C7786A11F3F38EF005CB432 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
+				B53DCDF220EB553B00400DBA /* SyncSettings.m in Sources */,
 				7CDABD091F1E3A6300C8CC16 /* UserProfileInteractorOutput.swift in Sources */,
 				CE51ACE11EF90853005DCEE0 /* IntroducePresenter.swift in Sources */,
 				CEDA44D9207CA9E600E653DD /* NumericConstants.swift in Sources */,
@@ -15456,6 +15456,7 @@
 				873204F31FCC3ADA004DEB31 /* PHAssetCollection.swift in Sources */,
 				CEAE3FB21EFD4F0D00A405B2 /* HomePageInteractor.swift in Sources */,
 				CE51ACE91EF90853005DCEE0 /* PhoneVereficationViewInput.swift in Sources */,
+				B53DCDE420EB553B00400DBA /* SyncRecord.m in Sources */,
 				7C4485091F10FE09003AF631 /* SplitIpadViewContoller.swift in Sources */,
 				CE6DE7551FCBE84100C23CBD /* InstagramService.swift in Sources */,
 				7CDB43301F8658A000789FA6 /* LocationManager.swift in Sources */,
@@ -15504,7 +15505,6 @@
 				CE51ACF81EF90853005DCEE0 /* ForgotPasswordViewController.swift in Sources */,
 				CE51ACF91EF90853005DCEE0 /* ForgotPasswordModuleInput.swift in Sources */,
 				8C6EF88F1F348B77002AC795 /* EditingBarConfig.swift in Sources */,
-				B582BD3720E0C52B00F14D4A /* SyncDB.m in Sources */,
 				8C9EA13F20B593E600FED3A2 /* DeviceExtension.swift in Sources */,
 				B5C4C8A22049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				CE2F561E1F7552A900F49DA1 /* PackagesViewController.swift in Sources */,
@@ -15521,7 +15521,6 @@
 				98570AFE208F7558002CCEBA /* Spotlight.swift in Sources */,
 				CEF0C2861FC549C400105C31 /* ImportFromInstagramInteractor.swift in Sources */,
 				CE51ACFE1EF90853005DCEE0 /* ForgotPasswordInteractor.swift in Sources */,
-				B582BD3920E0C52B00F14D4A /* SyncStatus.m in Sources */,
 				CE2F56331F7554A600F49DA1 /* OffersService.swift in Sources */,
 				7CA2A7B01F14CE3F00F37E2C /* LocalMediaStorage.swift in Sources */,
 				2BA37C342028379400660394 /* FaceImageChangeCoverPresenter.swift in Sources */,
@@ -15675,7 +15674,6 @@
 				2BA37C3E202837C800660394 /* FaceImageChangeCoverConfigurator.swift in Sources */,
 				7C18D75D1F9F461A00F8679D /* ShadowView.swift in Sources */,
 				7C6E2F921F31E4F800536DB6 /* CreateStoryNameInteractorOutput.swift in Sources */,
-				B582BD4120E0C52B00F14D4A /* SyncLogger.m in Sources */,
 				7C5549FF1F6C11C300067F99 /* CollectionViewStoryReorderView.swift in Sources */,
 				8DCB215F1F3C6AE700BAFE1E /* SearchViewController.swift in Sources */,
 				7CED0B101F21ECDE0016CE0C /* BasicCollectionMultiFileCell.swift in Sources */,
@@ -15713,6 +15711,7 @@
 				7C0EBD001F4C5B5100283ECF /* BaseDataSourceItem.swift in Sources */,
 				67539B0A8267DB7EEB08948D /* UserInfoSubViewPresenter.swift in Sources */,
 				09D1D10783F4E47C7E8089AA /* UserInfoSubViewInteractorInput.swift in Sources */,
+				B53DCDE820EB553B00400DBA /* SyncStatus.m in Sources */,
 				7859299E20060E9C003F8AB3 /* ManageContactsInitializer.swift in Sources */,
 				205A9C8FDC29F8AABB22940E /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				011111224BABABC38EFD0DAD /* UserInfoSubViewInteractor.swift in Sources */,
@@ -15745,6 +15744,7 @@
 				8DCB21651F3C6FCF00BAFE1E /* SearchViewConfigurator.swift in Sources */,
 				8C77869E1F3F38EF005CB432 /* VisualMusicPlayerInitializer.swift in Sources */,
 				CE95ED581F516736002F923A /* HelpAndSupportViewInput.swift in Sources */,
+				B53DCDEE20EB553B00400DBA /* ContactUtil.m in Sources */,
 				EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */,
 				98570AFA208F7558002CCEBA /* SpotlightViewController.swift in Sources */,
 				D49886611F3EFBE200F50C95 /* ImportPhotosViewInput.swift in Sources */,
@@ -15756,6 +15756,7 @@
 				7859298C20060E7D003F8AB3 /* ManageContactsViewInput.swift in Sources */,
 				41AFB14EB1A012B62DF71C13 /* SyncContactsInitializer.swift in Sources */,
 				80C205BAFDB776C2537BF66F /* SettingsViewInput.swift in Sources */,
+				B53DCDF020EB553B00400DBA /* SyncLogger.m in Sources */,
 				CE6DE7521FCBE84100C23CBD /* DropboxService.swift in Sources */,
 				8C6EF87C1F348B5C002AC795 /* BaseItemPassingProtocol.swift in Sources */,
 				2B5261513879D04FFE1D241C /* SettingsViewOutput.swift in Sources */,
@@ -15848,6 +15849,7 @@
 				DAC81A65DF324B39D22D480E /* UploadFilesSelectionModuleInput.swift in Sources */,
 				001F64B2FEA10A0FC9BC0AB3 /* UploadFilesSelectionPresenter.swift in Sources */,
 				CE6BD9CC1FBEF8D5008FA8A1 /* InsetsLabel.swift in Sources */,
+				B53DCDF820EB553B00400DBA /* SyncAdapter.m in Sources */,
 				86593D52883EC28AF112A281 /* UploadFilesSelectionInteractorInput.swift in Sources */,
 				46B520DE479BE70DB31104C9 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
 				7C203553201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */,
@@ -15888,6 +15890,7 @@
 				E197FC956A2CBF90DCEB2E3D /* SelectNameInteractorOutput.swift in Sources */,
 				463A9A904E22B54222190099 /* SelectNameInteractor.swift in Sources */,
 				9807260D203468D9004E1505 /* SearchDataSource.swift in Sources */,
+				B53DCDEA20EB553B00400DBA /* ContactSyncSDK.m in Sources */,
 				CEB27350205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift in Sources */,
 				54702BD5C12348C54DF56381 /* SelectNameRouterInput.swift in Sources */,
 				CE2F561D1F7552A900F49DA1 /* PackagesRouterInput.swift in Sources */,
@@ -15904,7 +15907,6 @@
 				8743AB471FDA8AB0005B3589 /* UploadFilesSelectionDataSource.swift in Sources */,
 				8C5408471F62AD6400D4717A /* GridListTopBarSortingTableCell.swift in Sources */,
 				F80A68F35B5CBF5C9E6E0288 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */,
-				B582BD4920E0C52B00F14D4A /* SyncAdapter.m in Sources */,
 				CE6DE7501FCBE84100C23CBD /* DropboxStatusValue.swift in Sources */,
 				B89728CAE994F4F93C31E016 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				4A9B38FF201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */,
@@ -15949,7 +15951,6 @@
 				CE2F561C1F7552A900F49DA1 /* PackagesRouter.swift in Sources */,
 				2B45A3B6B6A0554F1589EB54 /* AlbumDetailRouter.swift in Sources */,
 				78E3D518203FF9D600FA3478 /* MenloworksTagsService.swift in Sources */,
-				B582BD4320E0C52B00F14D4A /* SyncSettings.m in Sources */,
 				81E0ADA871598E31E25ABC23 /* AlbumDetailInitializer.swift in Sources */,
 				CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */,
 				4A56D5B5202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
@@ -15958,7 +15959,6 @@
 				98E65A292029AAEF00597226 /* StoriesDataSourceForCollectionView.swift in Sources */,
 				2B2BF4C237C2D4869CCB8F24 /* FeedbackViewInput.swift in Sources */,
 				4A9B390E201F3969009FC572 /* FaceImageItemsInitializer.swift in Sources */,
-				B582BD3D20E0C52B00F14D4A /* GZIP.m in Sources */,
 				CE2F56301F75548500F49DA1 /* SubscriptionsService.swift in Sources */,
 				B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */,
 				9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */,
@@ -15998,6 +15998,7 @@
 				78624ADA201C8A3A00C969D3 /* ManageContactsModuleOutput.swift in Sources */,
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
+				B53DCDE620EB553B00400DBA /* SyncDB.m in Sources */,
 				CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */,
 				CEF69DE11FB5851E00FCE6AB /* UploadParametrs.swift in Sources */,
 				CEC9F4AC1FB46D7000362B8C /* ImportFromDropboxPresenter.swift in Sources */,
@@ -16026,7 +16027,6 @@
 				CE6DE75C1FCC3ECF00C23CBD /* OptInController.swift in Sources */,
 				7CD92DC12076027D00010BFA /* iOSDevCenters+GIF.swift in Sources */,
 				78A76020200898F10023D52B /* DuplicatedContactsModuleOutput.swift in Sources */,
-				B582BD4720E0C52B00F14D4A /* ContactDevice.m in Sources */,
 				2BA37C39202837B400660394 /* FaceImageChangeCoverInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -168,7 +168,7 @@
             SYNC_Log(@"Msisdn: %@", [[SyncSettings shared] msisdn]);
             [self findNameDuplicateContacts];
         } else {
-            [self endOfAnalyzeCycle:ANALYZE_RESULT_ERROR_NETWORK];
+            [self endOfAnalyzeCycleError:ANALYZE_RESULT_ERROR_NETWORK response:response];
         }
     }];
 }
@@ -368,6 +368,15 @@
     return deviceDiff;
 }
 
+- (void)endOfAnalyzeCycleError:(AnalyzeResultType)result response:(id) response
+{
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    if (response[@"error"] != nil){
+        [array addObject:response[@"error"]];
+    }
+    [self endOfAnalyzeCycle:result messages:array];
+}
+
 - (void)endOfAnalyzeCycle:(AnalyzeResultType)result
 {
     [self endOfAnalyzeCycle:result messages:nil];
@@ -471,15 +480,19 @@ static bool syncing = false;
      * MSISDN value should be defined here. checkStatus request msisdn value.
      */
     [SyncAdapter checkStatus:@"x" callback:^(id response, BOOL isSuccess) {
-        SYNC_Log(@"Msisdn: %@", [[SyncSettings shared] msisdn]);
-
-        self.lastSync = [[ContactSyncSDK lastSyncTime] longLongValue];
-
-        if(_mode == SYNCRestore){
-            [self fetchLocalContactsForRestore];
+        if (isSuccess){
+            SYNC_Log(@"Msisdn: %@", [[SyncSettings shared] msisdn]);
+            
+            self.lastSync = [[ContactSyncSDK lastSyncTime] longLongValue];
+            
+            if(_mode == SYNCRestore){
+                [self fetchLocalContactsForRestore];
+            }
+            else
+                [self getUpdatedContactsFromServerForBackup];
+        }else{
+            [self endOfSyncCycleError:SYNC_RESULT_ERROR_REMOTE_SERVER response: response];
         }
-        else
-            [self getUpdatedContactsFromServerForBackup];
     }];
 
 }
@@ -1091,11 +1104,10 @@ static bool syncing = false;
             }
         } else {
             if (response==nil){
-                SYNC_Log(@"%@", @"We got NULL response");
-                [self endOfSyncCycle:SYNC_RESULT_ERROR_REMOTE_SERVER];
-            } else {
-                SYNC_Log(@"%@", @"Possible network error");
+                SYNC_Log(@"%@", @"We got NULL response Possible network error");
                 [self endOfSyncCycle:SYNC_RESULT_ERROR_NETWORK];
+            } else {
+                [self endOfSyncCycleError:SYNC_RESULT_ERROR_REMOTE_SERVER response:response];
             }
             
         }
@@ -1255,9 +1267,13 @@ static bool syncing = false;
                         }
                         
                         NSInteger size = [objectIds count];
-                        NSInteger firstIndex = (size - SYNC_RESTORE_THRESHOLD)<= 0 ? 0 : [objectIds count] - SYNC_RESTORE_THRESHOLD;
-                        NSInteger lastIndex =  firstIndex + SYNC_RESTORE_THRESHOLD > resultSize ? resultSize: firstIndex + SYNC_RESTORE_THRESHOLD;
-                        
+                        NSInteger firstIndex = (size - SYNC_RESTORE_THRESHOLD)<= 0 ? 0 : ([objectIds count] - SYNC_RESTORE_THRESHOLD);
+                        NSInteger lastIndex =  firstIndex + SYNC_RESTORE_THRESHOLD > resultSize ? resultSize: (firstIndex + SYNC_RESTORE_THRESHOLD);
+                        if (lastIndex > size + 1){
+                            SYNC_Log(@"Check error logs. Probably addressbook cannot save lastIndex: %ld, size: %ld firstIndex: %ld resultSize: %ld", lastIndex, size, firstIndex, resultSize)
+                            [self endOfSyncCycle:SYNC_RESULT_ERROR_INTERNAL];
+                            return;
+                        }
                         for (NSUInteger i=firstIndex; i<lastIndex; i++){
                             SyncRecord *record = newRecords[i];
                             NSString *objectId = objectIds[i];
@@ -1384,6 +1400,14 @@ static bool syncing = false;
             }
         }
     }];
+}
+- (void)endOfSyncCycleError:(SYNCResultType)result response:(id) response
+{
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    if (response[@"error"] != nil){
+        [array addObject:response[@"error"]];
+    }
+    [self endOfSyncCycle:result messages:array];
 }
 
 - (void)endOfSyncCycle:(SYNCResultType)result

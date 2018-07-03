@@ -68,6 +68,30 @@
     }
 }
 
+-(void)fetchAddressBookRef{
+    SYNC_Log(@"%@", @"Get AddressBookRef");
+    CFErrorRef error = nil;
+    
+    // Request authorization to Address Book
+    _addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+    
+    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+        ABAddressBookRequestAccessWithCompletion(_addressBook, ^(bool granted, CFErrorRef error) {
+            if (granted) {
+                SYNC_Log(@"%@", @"AddressBookRef granted");
+            } else {
+                SYNC_Log(@"%@", @"AddressBookRef not granted");
+            }
+        });
+    }
+    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+        SYNC_Log(@"%@", @"AddressBookRef kABAuthorizationStatusAuthorized");
+    }
+    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied){
+        SYNC_Log(@"%@", @"AddressBookRef kABAuthorizationStatusDenied");
+    }
+}
+
 - (void)deleteContacts:(NSMutableArray<Contact*>*) contacts{
     for (Contact *contact in contacts) {
         if (SYNC_NUMBER_IS_NULL_OR_ZERO(contact.objectId)){
@@ -301,6 +325,7 @@
 
 - (NSMutableArray*)getDefaultSources
 {
+    [self fetchAddressBookRef];
     NSMutableArray *resp = [NSMutableArray new];
     
     ABRecordRef defaultSourceRef = ABAddressBookCopyDefaultSource(_addressBook);
@@ -359,7 +384,9 @@
 
 - (NSMutableArray*)fetchContacts
 {
+    [self fetchAddressBookRef];
     NSMutableArray *ret = [NSMutableArray new];
+    
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( _addressBook );
     CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
 
@@ -387,12 +414,14 @@
 
 - (NSInteger)getContactCount
 {
+    [self fetchAddressBookRef];
     CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
     return nPeople;
 }
 
 - (void)printContacts
 {
+    [self fetchAddressBookRef];
     if (!SYNC_Log_Enabled) {
         return;
     }
