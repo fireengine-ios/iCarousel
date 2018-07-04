@@ -306,7 +306,12 @@
                 }
             }
         } else {
-            fail(nil, error);
+            if (data!=nil){
+                NSString *responseBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                responseObject = [NSJSONSerialization JSONObjectWithData: [responseBody dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &error];
+            }
+            fail(responseObject, error);
+            return;
         }
         
         if (isSuccess && responseObject!=nil){
@@ -323,7 +328,7 @@
                     fail(responseObject, nil);
             }
         } else {
-            fail(nil, error);
+            fail(responseObject, error);
         }
     }];
 }
