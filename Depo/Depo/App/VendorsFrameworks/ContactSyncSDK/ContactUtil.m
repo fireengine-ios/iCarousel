@@ -330,15 +330,16 @@
     
     ABRecordRef defaultSourceRef = ABAddressBookCopyDefaultSource(_addressBook);
     NSString *defaultSourceName = (__bridge NSString *)(ABRecordCopyValue(defaultSourceRef, kABSourceNameProperty));
-    SYNC_Log(@"Default - Source name: %@ ", defaultSourceName);
-    [resp addObject:(__bridge id _Nonnull)(defaultSourceRef)];
+    NSNumber *defaultSourceTypeRef = (__bridge NSNumber *)(ABRecordCopyValue(defaultSourceRef, kABSourceTypeProperty));
+    SYNC_Log(@"Default - Source name: %@ Source type: %@", defaultSourceName, defaultSourceTypeRef);
+    
     NSArray *sources = (__bridge NSArray *)(ABAddressBookCopyArrayOfAllSources(_addressBook));
     for (id source in sources) {
         ABRecordRef sourceRef = (__bridge ABRecordRef)(source);
         NSString *sourceName = (__bridge NSString *)(ABRecordCopyValue(sourceRef, kABSourceNameProperty));
         NSNumber *sourceTypeRef = (__bridge NSNumber *)(ABRecordCopyValue(sourceRef, kABSourceTypeProperty));
         int sourceType = [sourceTypeRef intValue];
-        if ((sourceType == kABSourceTypeLocal || sourceType == kABSourceTypeCardDAV) && ![sourceName isEqualToString: defaultSourceName]) {
+        if (sourceType == kABSourceTypeLocal || sourceType == kABSourceTypeCardDAV) {
             SYNC_Log(@"Add - Source name: %@ Source type: %@ ", sourceName, sourceTypeRef);
             [resp addObject:source];
         }else{
