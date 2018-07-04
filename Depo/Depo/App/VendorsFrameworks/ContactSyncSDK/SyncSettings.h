@@ -78,13 +78,13 @@ typedef NS_ENUM(NSUInteger, SYNCType) {
 
 @property (nonatomic, copy) void (^callback)(id data);
 
-@property (nonatomic, copy) void (^progressCallback)(void);
+@property (nonatomic, copy) void (^progressCallback)();
 
 @property (nonatomic, copy) void (^analyzeNotifyCallback)(NSMutableDictionary<NSString*, NSNumber*>*, NSMutableArray<NSString*>*);
 
-@property (nonatomic, copy) void (^analyzeCompleteCallback)(void);
+@property (nonatomic, copy) void (^analyzeCompleteCallback)();
 
-@property (nonatomic, copy) void (^analyzeProgressCallback)(void);
+@property (nonatomic, copy) void (^analyzeProgressCallback)();
 
 + (SYNC_INSTANCETYPE) shared;
 
