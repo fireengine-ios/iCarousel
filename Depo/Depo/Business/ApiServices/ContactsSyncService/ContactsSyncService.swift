@@ -157,7 +157,7 @@ class ContactsSyncService: BaseRequestService {
             let parsedContactsToDelete = ContactsSyncService.parseContactsToDelete(contactsToDelete)
             
             if parsedContactsToDelete.count > 0 {
-                self.lastToDeleteContactsValue = parsedContactsToDelete.count
+                self.lastToDeleteContactsValue = parsedContactsToDelete.reduce(0) { $0 + $1.numberOfErrors }
             }
             
             let response = ContactsSyncService.mergeContacts(parsedContactsToMerge, with: parsedContactsToDelete)
