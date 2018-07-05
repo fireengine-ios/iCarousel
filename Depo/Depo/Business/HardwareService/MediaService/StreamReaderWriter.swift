@@ -45,7 +45,7 @@ final class StreamReaderWriter {
         var bytesToWrite = 0
         var bytesWritten = 0
         var counter = 0
-        var copySize = 0
+        var copySize: Int64 = 0
         
         fileInput.open()
         copyOutput.open()
@@ -60,7 +60,7 @@ final class StreamReaderWriter {
                 }
                 //move read pointer to next section
                 bytesToWrite -= bytesWritten
-                copySize += bytesWritten
+                copySize += Int64(bytesWritten)
                 
                 if bytesToWrite > 0 {
                     //move block of memory
