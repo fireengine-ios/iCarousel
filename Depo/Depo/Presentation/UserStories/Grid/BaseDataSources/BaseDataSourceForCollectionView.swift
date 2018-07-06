@@ -246,7 +246,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
             } else {
                 DispatchQueue.main.async {
-                    let oldSectionNumbers = collectionView.numberOfSections
+//                    let oldSectionNumbers = collectionView.numberOfSections
                     let newSectionNumbers = self.numberOfSections(in: collectionView)
                     let emptyItemsArray = self.getIndexPathsForItems(emptyItems)
                     var newSections: IndexSet?
@@ -260,27 +260,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             debugPrint("!!! needMoveSectionWithEmptyMetaItems 2")
                             newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
                         }
-                    } else if newSectionNumbers < oldSectionNumbers{
+                    } else if newSectionNumbers < oldSectionNumbers {
                         return
                         /// here add section deletion
                     }///error ocure when was appending to same action but the data was just dropped - recieved and droped
                
                 
                     collectionView.collectionViewLayout.invalidateLayout()
-                    collectionView.performBatchUpdates({ [weak self] in
-                        guard let `self` = self else {
-                            return
-                        }
-                        if let newSections = newSections {
-                            self.collectionView?.insertSections(newSections)
-                        }
-                        if !self.recentlyDeletedIndexes.isEmpty {///Also should add check for deleted sections
-                            self.collectionView?.deleteItems(at: self.recentlyDeletedIndexes)
-                            self.recentlyDeletedIndexes.removeAll()
-                        }
-                        self.collectionView?.insertItems(at: array + emptyItemsArray)
-                        
-                        }, completion: { [weak self] _ in
+                    collectionView.reloadData()
+                    collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
                             guard let `self` = self else {
                                 return
                             }
@@ -627,7 +615,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
             lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth(),
-            !allItems.isEmpty{
+            !allItems.isEmpty {
             
             allItems[allItems.count - 1].append(newItem)
             
@@ -640,7 +628,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if let lastItemNameChar = lastItem.name?.first,
             let newItemNameChar = newItem.name?.first {
             
-            if String(lastItemNameChar).uppercased() == String(newItemNameChar).uppercased() {
+            if String(lastItemNameChar).uppercased() == String(newItemNameChar).uppercased(), !allItems.isEmpty {
                 allItems[allItems.count - 1].append(newItem)
             } else {
                 allItems.append([newItem])
@@ -652,7 +640,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     private func addBySize(lastItem: WrapData, newItem: WrapData) {
-        allItems[allItems.count-1].append(newItem)
+        if !allItems.isEmpty {
+            allItems[allItems.count - 1].append(newItem)
+        }
     }
     
     private func getHeaderText(indexPath: IndexPath) -> String {
@@ -815,7 +805,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func setAllItems(items: [[BaseDataSourceItem]]) {
-        allItems = items as! [[WrapData]]
+        DispatchQueue.toMain {
+            if items is [[WrapData]] {
+                self.allItems = items as! [[WrapData]]
+            }
+        }
     }
     
     func selectAll(isTrue: Bool){
@@ -953,10 +947,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func isHeaderSelected(section: Int) -> Bool {
-        guard section < allItems.count else {
+        guard let items = allItems[safe: section] else {
             return false
         }
-        let arrayOfObjectsInSection: [BaseDataSourceItem] = allItems[section]
+        let arrayOfObjectsInSection: [BaseDataSourceItem] = items
         let subSet = Set<BaseDataSourceItem>(arrayOfObjectsInSection)
         
         return subSet.isSubset(of: selectedItemsArray)
@@ -964,8 +958,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func selectSectionAt(section: Int){
+        guard let items = allItems[safe: section] else {
+            return
+        }
         
-        let objectsArray: [BaseDataSourceItem] = allItems[section]
+        let objectsArray: [BaseDataSourceItem] = items
         
         if (isHeaderSelected(section: section)){
             for obj in objectsArray {
@@ -1105,10 +1102,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard section < allItems.count else {
+        guard let sectionItems = allItems[safe: section] else {
             return 0
         }
-        return allItems[section].count
+        return sectionItems.count
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
@@ -1669,14 +1666,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     newArray.append(newSectionArray)
                 }
             }
-            self.allItems = newArray
-            
-            //update folder items count
-            if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
-                self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
-            }
             
             DispatchQueue.main.async {
+                self.allItems = newArray
+                
+                //update folder items count
+                if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
+                    self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
+                }
+                
                 self.recentlyDeletedIndexes.removeAll()
                 self.collectionView?.reloadData()
                 self.delegate?.didDelete(items: items)
