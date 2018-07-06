@@ -259,8 +259,8 @@
                 SYNC_Log(@"Contact: %@ is null.", [contact.objectId stringValue]);
             }
         }
-        [self analyzeDuplicateContacts];
     }
+    [self analyzeDuplicateContacts];
 }
 
 - (void)analyzeDuplicateContacts{
