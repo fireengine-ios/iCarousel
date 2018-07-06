@@ -947,22 +947,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func isHeaderSelected(section: Int) -> Bool {
-        guard let items = allItems[safe: section] else {
+        guard section < allItems.count else {
             return false
         }
-        let arrayOfObjectsInSection: [BaseDataSourceItem] = items
+        let arrayOfObjectsInSection: [BaseDataSourceItem] = allItems[section]
         let subSet = Set<BaseDataSourceItem>(arrayOfObjectsInSection)
         
         return subSet.isSubset(of: selectedItemsArray)
         
     }
     
-    func selectSectionAt(section: Int){
-        guard let items = allItems[safe: section] else {
+    func selectSectionAt(section: Int) {
+        guard section < allItems.count else {
             return
         }
         
-        let objectsArray: [BaseDataSourceItem] = items
+        let objectsArray: [BaseDataSourceItem] = allItems[section]
         
         if (isHeaderSelected(section: section)){
             for obj in objectsArray {
@@ -1091,10 +1091,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     //MARK: collectionViewDataSource
     
     func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
-        guard let sectionItems = allItems[safe: indexPath.section] else {
+        guard allItems.count > indexPath.section, allItems[indexPath.section].count > indexPath.row else {
             return nil
         }
-        return sectionItems[safe: indexPath.row]
+        return allItems[safe: indexPath.section]?[safe: indexPath.row]
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -1102,10 +1102,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let sectionItems = allItems[safe: section] else {
+        guard section < allItems.count else {
             return 0
         }
-        return sectionItems.count
+        return allItems[section].count
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
@@ -1468,8 +1468,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             localFinishedItemUUID = object.uuid
                             file.isLocalItem = false
                         }
-                        guard self.allItems.count > section,
-                            self.allItems[section].count > row else {
+                        guard section < self.allItems.count,
+                            row < self.allItems[section].count else {
                                 return /// Collection was reloaded from different thread
                         }
                         self.allItems[section][row] = file
