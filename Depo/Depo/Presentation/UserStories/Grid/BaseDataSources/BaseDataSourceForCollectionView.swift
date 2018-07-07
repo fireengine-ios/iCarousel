@@ -127,7 +127,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private var pageLeftOvers = [WrapData]()
     private var emptyMetaItems = [WrapData]()
     
-    private var allRemoteItems = [WrapData]()
     private var uploadedObjectID = [String]()
     private var uploadToAlbumItems = [String]()
     
@@ -207,8 +206,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         lastPage = pageNum
         debugLog("BaseDataSourceForCollectionView appendCollectionView \(filteredItems.count)")
-        
-        allRemoteItems.append(contentsOf: filteredItems)
   
         var oldSectionNumbers = 1
         if let collectionView = collectionView {
@@ -246,19 +243,19 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
             } else {
                 DispatchQueue.main.async {
-//                    let oldSectionNumbers = collectionView.numberOfSections
+                    let oldSectionNumbers = collectionView.numberOfSections
                     let newSectionNumbers = self.numberOfSections(in: collectionView)
-                    let emptyItemsArray = self.getIndexPathsForItems(emptyItems)
-                    var newSections: IndexSet?
+//                    let emptyItemsArray = self.getIndexPathsForItems(emptyItems)
+//                    var newSections: IndexSet?
                     if newSectionNumbers > oldSectionNumbers {
                         let needMoveSectionWithEmptyMetaItems = self.needShowEmptyMetaItems && self.currentSortType == .metaDataTimeUp && containsEmptyMetaItems
                         
                         if needMoveSectionWithEmptyMetaItems {
                             debugPrint("!!! needMoveSectionWithEmptyMetaItems 1")
-                            newSections = IndexSet(oldSectionNumbers-1..<newSectionNumbers-1)                           
+//                            newSections = IndexSet(oldSectionNumbers-1..<newSectionNumbers-1)
                         } else {
                             debugPrint("!!! needMoveSectionWithEmptyMetaItems 2")
-                            newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
+//                            newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
                         }
                     } else if newSectionNumbers < oldSectionNumbers {
                         return
@@ -683,7 +680,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         debugLog("BaseDataSourceForCollectionViewDelegate dropData()")
         
         emptyMetaItems.removeAll()
-        allRemoteItems.removeAll()
         allItems.removeAll()
         pageLeftOvers.removeAll()
         allMediaItems.removeAll()
