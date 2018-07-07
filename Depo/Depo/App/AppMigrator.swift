@@ -94,7 +94,7 @@ extension AppMigrator {
         removeFromSources(metaSummary: metaSummary, md5: deprecatedMD5)
 
         let debugString = "\(wrapData.name) isSynced: \(isSynced) in UD: \(isInUserDefaultsHashes), in BD: \(isInDBHashes)"
-        debugLog(debugString)
+//        debugLog(debugString)
         debugPrint(debugString)
         
         return isSynced
