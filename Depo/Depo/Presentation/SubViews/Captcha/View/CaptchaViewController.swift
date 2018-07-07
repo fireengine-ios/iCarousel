@@ -24,7 +24,7 @@ final class CaptchaViewController: ViewController {
             activityIndicator.stopAnimating()
             activityIndicator.isHidden = true
             image.backgroundColor = UIColor.clear
-            image.image = captchaImage!
+            image.image = captchaImage
         }
     }
     
