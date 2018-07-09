@@ -24,7 +24,21 @@ final class VideoSyncService: ItemSyncServiceImpl {
 
     override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
         let operation = LocalUnsyncedOperation(service: photoVideoService, fieldValue: .video) { items in
-            completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by: { $0.fileSize < $1.fileSize }))
+            let isMobileData = ReachabilityService().isReachableViaWWAN
+            let fileSizeLimit = isMobileData ? NumericConstants.hundredMegabytes : NumericConstants.fourGigabytes
+            
+            completion(items.filter { item in
+                guard item.fileSize < fileSizeLimit else {
+                    return false
+                }
+                
+                if isMobileData {
+                     return !self.lastInterruptedItemsUUIDs.contains(item.getTrimmedLocalID())
+                }
+
+                ///is WIFI
+                return true
+            }.sorted(by: { $0.fileSize < $1.fileSize }))
         }
         getUnsyncedOperationQueue.addOperation(operation)
     }
@@ -75,7 +89,7 @@ extension VideoSyncService: BackgroundTaskServiceDelegate {
 
 extension VideoSyncService: ItemOperationManagerViewProtocol {
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
-        return object is VideoSyncService
+        return true
     }
     
     func finishedUploadFile(file: WrapData) {
