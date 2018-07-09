@@ -27,6 +27,8 @@ final class TokenKeychainStorage: TokenStorage {
             return token
         }
         set {
+            // TODO: change acces to the accessibleAfterFirstUnlock
+            /// accessibleWhenUnlocked is default for KeychainSwift
             keychain.set(newValue, forKey: accessTokenKey, withAccess: .accessibleAlways)
         }
     }
