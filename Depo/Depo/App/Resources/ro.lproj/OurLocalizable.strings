@@ -424,7 +424,7 @@
 "Turkcell Password" = "Parola Turkcell";
 "Login Settings" = "Setări de conectare";
 "Folder is Empty" = "Mapa e goală";
-"Folder Items" = "Articole: %d";
+"Folder Items" = "Articole %d";
 "Contact Backup" = "Copie de rezervă a contactelor";
 "Your last contact update was %@ months ago!" = "Ultima actualizare a copiei de rezervă a contactelor a fost acum %@ luni!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Au trecut %@ luni de când ai actualizat ultima dată contactele tale. Actualizează-le acum pentru a nu le mai pierde niciodată. ";
@@ -635,4 +635,4 @@
 "*Average figure. Total number of documents depends on the size of each document." = "*Cifra medie. Numărul total de documente depinde de dimensiunea fiecărui document.";
 "We couldn’t find anything on your Lifebox yet." = "Încă nu am găsit nimic în lifebox-ul tău.";
 "Expiration Date: %@" = "Data expirării: %@";
-"Failed to get albums" = "Failed to get albums";
+"Failed to get albums" = "nu a reușit să obțină albume";
