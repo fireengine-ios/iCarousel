@@ -413,13 +413,13 @@
 "Cancel BackUp" = "Yedeklemeyi iptal et";
 "Clear BackUp" = "Yedeklemeyi temizle";
 "There are %d duplicated contacts." = "%d kopyalanmış kişi mevcut.";
-"Are you sure you want to delete?" = "Kopyalanmış kişileri silmek istediğine emin misin?";
+"Are you sure you want to delete?" = "Silmek istediğine emin misin?";
 "This duplicated contacts will be deleted from your contacts." = "Bu kopyalanmış kişiler kişi listenizden silinecek.";
 "%%%d Restored…" = "%%%d Geri yüklendi…";
 "%%%d Analyzed…" = "%%%d Analiz edildi…";
 "%%%d Backed up…" = "%%%d yedeklendi…";
 "Restored %d Contacts" = "%d Kişiler eski durumuna getirildi.";
-"%d Duplicated Contacts Deleted" = "%d Kopyalanmış kişiler silindi.";
+"%d Duplicated Contacts Deleted" = "%d kopyalanmış kişi silindi.";
 "You have %d numbers on your contacts backup." = "lifebox'ında %d kişi var.";
 "This contact will be deleted from your contacts." = "Bu kişi kontak listenden silinecek.";
 "Upgrade" = "Yükselt";
@@ -432,7 +432,7 @@
 "Folder is Empty" = "Klasör Boş";
 "Folder Items" = "%d Öğeler";
 "Contact Backup" = "Kontak Yedekleme";
-"Your last contact update was %@ months ago!" = "Konraklarını en son%@ ay önce yedekledin!";
+"Your last contact update was %@ months ago!" = "Kontaklarını en son%@ ay önce yedekledin!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Kontak listenizi en son güncellediğiniz tarihten bu yana %@ ay oldu. Kontaklarını hiçbir zaman kaybetmemek için şimdi yeniden yedekle.";
 "Your contact list looks empty" = "Kişi listen boş görünüyor";
 "You don’t have any contacts in your profile, backup your contacts now!" = "Hesabında hiçbir kontak bulunmuyor, kontaklarını hemen yedekle!";
@@ -498,7 +498,7 @@
 "They will be merged together" = "Bu kişiler birleştirilecek";
 "Not selected" = "Seçilmedi";
 "E-mail is empty" = "E-posta adresi boş";
-"Filter Card" = "Filter Kartı";
+"Filter Card" = "Filtre Kartı";
 "photos" = "Fotoğraflar";
 "Destination folder can not be the same folder" = "Hedef klasör aynı klasör olamaz";
 "Google Play Store" = "Google Play Store";
@@ -643,4 +643,4 @@
 "*Average figure. Total number of documents depends on the size of each document." = "*Ortalama rakam. Belgelerin toplam sayısı her belgenin büyüklüğüne bağlıdır.";
 "We couldn’t find anything on your Lifebox yet." = "Henüz bir nesne bulamadık";
 "Expiration Date: %@" = "Bitiş Tarihi: %@";
-"Failed to get albums" = "Failed to get albums";
+"Failed to get albums" = "no pudo obtener álbumes";

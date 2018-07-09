@@ -635,4 +635,4 @@
 "*Average figure. Total number of documents depends on the size of each document." = "Середнє значення. Загальна кількість документів залежить від розміру кожного документа.";
 "We couldn’t find anything on your Lifebox yet." = "Ми не знайшли жодних речей у вашому Lifebox. ";
 "Expiration Date: %@" = "Термін придатності: %@";
-"Failed to get albums" = "Failed to get albums";
+"Failed to get albums" = "не вдалося отримати альбоми";
