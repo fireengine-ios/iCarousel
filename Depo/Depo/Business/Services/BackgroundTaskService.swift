@@ -8,11 +8,16 @@
 
 import Foundation
 
+protocol BackgroundTaskServiceDelegate: class {
+    func backgroundTaskWillExpire()
+}
 
 
 final class BackgroundTaskService {
     
     static let shared = BackgroundTaskService()
+    
+    var expirationDelegates = MulticastDelegate<BackgroundTaskServiceDelegate>()
     
     private var backgroundTaskId = UIBackgroundTaskInvalid
     
@@ -23,6 +28,9 @@ final class BackgroundTaskService {
         }
         
         self.backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: UUID().uuidString, expirationHandler: { [weak self] in
+            self?.expirationDelegates.invoke(invocation: { delegate in
+                delegate.backgroundTaskWillExpire()
+            })
             self?.endBackgroundTask()
         })
 

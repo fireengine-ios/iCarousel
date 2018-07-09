@@ -21,6 +21,7 @@ protocol StorageVars: class {
     var usersWhoUsedApp: [String: Any] { get set }
     var isNewAppVersionFirstLaunch: Bool { get set }
     var deepLink: String? {get set}
+    var interruptedSyncVideoQueueItems: [String] { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -112,5 +113,11 @@ final class UserDefaultsVars: StorageVars {
     var deepLink: String? {
         get { return userDefaults.object(forKey: deepLinkKey) as? String}
         set { userDefaults.set(newValue, forKey: deepLinkKey)}
+    }
+    
+    private let interruptedSyncVideoQueueItemsKey = "interruptedSyncVideoQueueItemsKey"
+    var interruptedSyncVideoQueueItems: [String] {
+        get { return userDefaults.object(forKey: interruptedSyncVideoQueueItemsKey) as? [String] ?? []}
+        set { userDefaults.set(newValue, forKey: interruptedSyncVideoQueueItemsKey)}
     }
 }

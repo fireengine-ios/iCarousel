@@ -10,9 +10,14 @@ import Foundation
 
 
 final class VideoSyncService: ItemSyncServiceImpl {
+    private let backgroundTaskService = BackgroundTaskService.shared
+    
+    
     override init() {
         super.init()
         
+        ItemOperationManager.default.startUpdateView(view: self)
+        self.backgroundTaskService.expirationDelegates.add(self)
         self.fileType = .video
         self.getUnsyncedOperationQueue.maxConcurrentOperationCount = 1
     }
@@ -54,5 +59,26 @@ final class VideoSyncService: ItemSyncServiceImpl {
         getUnsyncedOperationQueue.cancelAllOperations()
         photoVideoService.stopAllOperations()
         UploadService.default.cancelSyncOperations(photo: false, video: true)
+    }
+}
+
+
+extension VideoSyncService: BackgroundTaskServiceDelegate {
+    func backgroundTaskWillExpire() {
+        if status == .executing, ReachabilityService().isReachableViaWWAN {
+            debugLog("interrupted_queue_items")
+            storageVars.interruptedSyncVideoQueueItems = lastInterruptedItemsUUIDs
+        }
+    }
+}
+
+
+extension VideoSyncService: ItemOperationManagerViewProtocol {
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        return object is VideoSyncService
+    }
+    
+    func finishedUploadFile(file: WrapData) {
+        lastInterruptedItemsUUIDs.remove(file.getTrimmedLocalID())
     }
 }
