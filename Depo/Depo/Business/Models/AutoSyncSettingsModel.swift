@@ -86,7 +86,9 @@ final class AutoSyncSettings {
         isAutoSyncOptionEnabled = dictionary[SettingsKeys.isAutoSyncEnabledKey] ?? true
         
         let mobileDataPhotos = dictionary[SettingsKeys.mobileDataPhotosKey] ?? true
-        let mobileDataVideo = dictionary[SettingsKeys.mobileDataVideoKey] ?? false
+        
+        ///Because of interrupted sync via mobile network in the background
+        let mobileDataVideo = false//dictionary[SettingsKeys.mobileDataVideoKey] ?? false
         
         let wifiPhotos = dictionary[SettingsKeys.wifiPhotosKey] ?? false
         let wifiVideo = dictionary[SettingsKeys.wifiVideoKey] ?? true
@@ -105,13 +107,13 @@ final class AutoSyncSettings {
         //setup video setting
         
         if mobileDataVideo {
+            ///Because of interrupted sync via mobile network in the background
             videoSetting.option = .wifiAndCellular
         } else if wifiVideo {
             videoSetting.option = .wifiOnly
         } else {
             videoSetting.option = .never
         }
-    
     }
     
     func disableAutoSync() {
@@ -140,7 +142,9 @@ final class AutoSyncSettings {
     func asDictionary() -> [String: Bool] {
         return [SettingsKeys.isAutoSyncEnabledKey: isAutoSyncOptionEnabled,
                 SettingsKeys.mobileDataPhotosKey: (photoSetting.option == .wifiAndCellular),
-                SettingsKeys.mobileDataVideoKey: (videoSetting.option == .wifiAndCellular),
+                ///Because of interrupted sync via mobile network in the background
+//                SettingsKeys.mobileDataVideoKey: (videoSetting.option == .wifiAndCellular),
+                SettingsKeys.mobileDataVideoKey: false,
                 SettingsKeys.wifiPhotosKey: (photoSetting.option == .wifiOnly),
                 SettingsKeys.wifiVideoKey: (videoSetting.option == .wifiOnly)]
     }
@@ -209,10 +213,14 @@ extension AutoSyncSettings {
                 videoSetting.option = .wifiOnly
             case .videos:
                 photoSetting.option = .wifiOnly
-                videoSetting.option = .wifiAndCellular
+                videoSetting.option = .wifiOnly
+                ///Because of interrupted sync via mobile network in the background
+//                videoSetting.option = .wifiAndCellular
             case .all:
                 photoSetting.option = .wifiAndCellular
-                videoSetting.option = .wifiAndCellular
+                videoSetting.option = .wifiOnly
+                ///Because of interrupted sync via mobile network in the background
+//                videoSetting.option = .wifiAndCellular
             case .none:
                 photoSetting.option = .wifiOnly
                 videoSetting.option = .wifiOnly
