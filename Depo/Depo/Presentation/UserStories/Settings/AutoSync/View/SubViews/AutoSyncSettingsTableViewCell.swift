@@ -99,6 +99,9 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
         let isSelected = autoSyncModel?.isSelected ?? false
         
         for (option, view) in zip(options, optionsViews) {
+            if autoSyncSetting.syncItemType == .video, option == .wifiAndCellular {
+                view.isHidden = true
+            }
             view.setup(with: option, isSelected: autoSyncSetting.option == option)
             view.delegate = self
         }
