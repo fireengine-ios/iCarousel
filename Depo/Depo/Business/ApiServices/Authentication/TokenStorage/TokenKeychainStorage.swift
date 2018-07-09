@@ -27,9 +27,10 @@ final class TokenKeychainStorage: TokenStorage {
             return token
         }
         set {
-            // TODO: change acces to the accessibleAfterFirstUnlock
             /// accessibleWhenUnlocked is default for KeychainSwift
-            keychain.set(newValue, forKey: accessTokenKey, withAccess: .accessibleAlways)
+            /// You can use .accessibleAfterFirstUnlock if you need your app to access the keychain item while in the background. Note that it is less secure than the .accessibleWhenUnlocked option
+            /// https://github.com/evgenyneu/keychain-swift#keychain_item_access
+            keychain.set(newValue, forKey: accessTokenKey, withAccess: .accessibleAfterFirstUnlock)
         }
     }
     
@@ -42,18 +43,18 @@ final class TokenKeychainStorage: TokenStorage {
             return token
         }
         set {
-            keychain.set(newValue, forKey: refreshTokenKey, withAccess: .accessibleAlways)
+            keychain.set(newValue, forKey: refreshTokenKey, withAccess: .accessibleAfterFirstUnlock)
         }
     }
     
     var isRememberMe: Bool {
         get { return keychain.getBool(isRememberMeKey) ?? false }
-        set { keychain.set(newValue, forKey: isRememberMeKey, withAccess: .accessibleAlways) }
+        set { keychain.set(newValue, forKey: isRememberMeKey, withAccess: .accessibleAfterFirstUnlock) }
     }
     
     var isClearTokens: Bool {
         get { return keychain.getBool(isClearTokensKey) ?? false }
-        set { keychain.set(newValue, forKey: isClearTokensKey, withAccess: .accessibleAlways) }
+        set { keychain.set(newValue, forKey: isClearTokensKey, withAccess: .accessibleAfterFirstUnlock) }
     }
     
     func clearTokens() {
