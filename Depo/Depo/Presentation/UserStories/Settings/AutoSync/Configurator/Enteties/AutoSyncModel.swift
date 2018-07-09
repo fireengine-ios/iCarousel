@@ -24,8 +24,13 @@ class AutoSyncModel {
     var isSelected: Bool
     var height: CGFloat {
         if cellType != .headerSlider {
+            if cellType == .videoSetting {
+                return isSelected ? 168 : 68
+            }
+            
             return isSelected ? 228 : 68
         }
+        
         return 44
     }
     
