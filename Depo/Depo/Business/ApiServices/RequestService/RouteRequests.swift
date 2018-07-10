@@ -13,103 +13,107 @@ struct RouteRequests {
     // MARK: Authentication
     
     /// prod
-    static let BaseUrl = URL(string: "https://adepo.turkcell.com.tr/")!
-    static let BaseContactsUrl = URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
+//    static let BaseUrl = URL(string: "https://adepo.turkcell.com.tr/api/")!
+//    static let httpAuthification = "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
+//    static let BaseContactsUrl = URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
     
     /// pre-prod
-//    static let BaseUrl = URL(string: "https://adepotest.turkcell.com.tr/")!
+//    static let BaseUrl = URL(string: "https://adepotest.turkcell.com.tr/api/")!
+//    static let httpAuthification = "http://adepotest.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
 //    static let BaseContactsUrl = URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
     
-    static let baseApi = BaseUrl +/ "api"
+    /// test
+    static let BaseUrl = URL(string: "https://tcloudstb.turkcell.com.tr/api/")!
+    static let httpAuthification = "http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
+    static let BaseContactsUrl = URL(string: "https://tcloudstb.turkcell.com.tr/ttyapi/")!
     
-//    static let NewURL = URL(string: "https://mylifebox.com/")!
     
-    static let httpAuthification = "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
-    static let httpsAuthification = "/api/auth/token?rememberMe=%@"
-    static let authificationByRememberMe = "/api/auth/rememberMe"
-    static let authificationByToken = "/api/auth/token"
-    static let signUp = "/api/signup"
-    static let logout = "/api/auth/logout"
     
-    static let phoneVerification = "/api/verify/phoneNumber"
-    static let resendVerificationSMS = "api/verify/sendVerificationSMS"
+    static let httpsAuthification = "auth/token?rememberMe=%@"
+    static let authificationByRememberMe = "auth/rememberMe"
+    static let authificationByToken = "auth/token"
+    static let signUp = "signup"
+    static let logout = "auth/logout"
     
-    static let forgotPassword = "/api/account/forgotPassword"
-    static let mailVerefication = "/api/verify/sendVerificationEmail"
-    static let mailUpdate = "/api/account/email"
+    static let phoneVerification = "verify/phoneNumber"
+    static let resendVerificationSMS = "verify/sendVerificationSMS"
+    
+    static let forgotPassword = "account/forgotPassword"
+    static let mailVerefication = "verify/sendVerificationEmail"
+    static let mailUpdate = "account/email"
     
     // MARK: EULA 
-    static let eulaGet     = "api/eula/get/%@"
-    static let eulaCheck   = "api/eula/check/%@"
-    static let eulaApprove = "api/eula/approve/%i"
+    static let eulaGet     = "eula/get/%@"
+    static let eulaCheck   = "eula/check/%@"
+    static let eulaApprove = "eula/approve/%i"
     
     // MARK: Dropbox
     
     static let dropboxAuthUrl: URL = URL(string: "https://api.dropboxapi.com/1/oauth2/token_from_oauth1")!
-    static let dropboxConnect = "api/migration/dropbox/connect?accessToken=%@"
-    static let dropboxStatus  = "api/migration/dropbox/status"
-    static let dropboxStart   = "api/migration/dropbox/start"
+    static let dropboxConnect = "migration/dropbox/connect?accessToken=%@"
+    static let dropboxStatus  = "migration/dropbox/status"
+    static let dropboxStart   = "migration/dropbox/start"
     
     // MARK: - FB
-    static let fbPermissions = "api/migration/facebook/permissions"
-    static let fbConnect     = "api/migration/facebook/connect?accessToken=%@"
-    static let fbStatus      = "api/migration/facebook/status"
-    static let fbStart       = "api/migration/facebook/start"
-    static let fbStop        = "api/migration/facebook/stop"
+    static let fbPermissions = "migration/facebook/permissions"
+    static let fbConnect     = "migration/facebook/connect?accessToken=%@"
+    static let fbStatus      = "migration/facebook/status"
+    static let fbStart       = "migration/facebook/start"
+    static let fbStop        = "migration/facebook/stop"
     
     // MARK: - Instagram
-    static let socialStatus = "/api/share/social/status"
-    static let instagramConfig = "/api/share/social/instagram/config"
-    static let instagramSyncStatus = "/api/share/social/instagram/syncStatus"
-    static let instagramCreateMigration = "/api/share/social/instagram/migration/create"
-    static let instagramCancelMigration = "/api/share/social/instagram/migration/cancel"
+    static let socialStatus = "share/social/status"
+    static let instagramConfig = "share/social/instagram/config"
+    static let instagramSyncStatus = "share/social/instagram/syncStatus"
+    static let instagramCreateMigration = "share/social/instagram/migration/create"
+    static let instagramCancelMigration = "share/social/instagram/migration/cancel"
     
     // MARK: Captcha
     
-    static let captcha = "/api/captcha/%@/%@"
+    static let captcha = "captcha/%@/%@"
     
     
     // MARK: Search
     
-    static let search = "/api/search/byField?fieldName=%@&fieldValue=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@"
+    static let search = "search/byField?fieldName=%@&fieldValue=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@"
     
-    static let advanceSearch = "/api/search/unified?text=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
-    static let unifiedSearch = "/api/search/unified?text=%@&category=%@&page=%@&size=%@"
-    static let unifiedSearchWithoutCategory = "/api/search/unified?text=%@&page=%@&size=%@"
-    static let suggestion    = "/api/search/unified/suggest?text=%@"
+    static let advanceSearch = "search/unified?text=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
+    static let unifiedSearch = "search/unified?text=%@&category=%@&page=%@&size=%@"
+    static let unifiedSearchWithoutCategory = "search/unified?text=%@&page=%@&size=%@"
+    static let suggestion    = "search/unified/suggest?text=%@"
     
     // MARK: Album
     
-    static let albumList    = "/api/album?contentType=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@"
-    static let details      = "/api/album/%@?page=%@&size=%@&sortBy=%@&sortOrder=%@"
+    static let albumList    = "album?contentType=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@"
+    static let details      = "album/%@?page=%@&size=%@&sortBy=%@&sortOrder=%@"
     
     // MARK: My Streams
     
-    static let people = "/api/person/"
-    static let peopleThumbnails = "/api/person/thumbnails"
-    static let peoplePage = "/api/person/page?pageSize=%d&pageNumber=%d"
-    static let peopleAlbum = "/api/album?contentType=album/person&sortBy=createdDate&sortOrder=DESC&page=0&size=1&personInfoId=%d"
-    static let peopleAlbums = "/api/person/relatedAlbums/%d"
-    static let personVisibility = "api/person/visibility/"
-    static let peopleSearch = "/api/person/label/%@"
-    static let peopleMerge = "/api/person/%d"
-    static let peopleChangeName = "/api/person/label/%d"
-    static let peopleDeletePhotos = "/api/person/photo/delete/%d"
+    static let people = "person/"
+    static let peopleThumbnails = "person/thumbnails"
+    static let peoplePage = "person/page?pageSize=%d&pageNumber=%d"
+    static let peopleAlbum = "album?contentType=album/person&sortBy=createdDate&sortOrder=DESC&page=0&size=1&personInfoId=%d"
+    static let peopleAlbums = "person/relatedAlbums/%d"
+    static let personVisibility = "person/visibility/"
+    static let peopleSearch = "person/label/%@"
+    static let peopleMerge = "person/%d"
+    static let peopleChangeName = "person/label/%d"
+    static let peopleDeletePhotos = "person/photo/delete/%d"
 //    static let peopleDeletePhoto = "/person/photo/%d/%d"
-    static let things = "/api/object/"
-    static let thingsThumbnails = "/api/object/thumbnails"
-    static let thingsPage = "/api/object/page?pageSize=%d&pageNumber=%d"
-    static let thingsAlbum = "/api/album?contentType=album/object&sortBy=createdDate&sortOrder=DESC&page=0&size=1&objectInfoId=%d"
-    static let thingsDeletePhotos = "/api/object/photo/%d"
-//    static let thingsDeletePhoto = "/api/object/photo/%d/%d"
-    static let places = "/api/location/"
-    static let placesThumbnails = "/api/location/thumbnails"
-    static let placesPage = "/api/location/page?pageSize=%d&pageNumber=%d"
-    static let placesAlbum = "/api/album?contentType=album/location&sortBy=createdDate&sortOrder=DESC&page=0&size=1&locationInfoId=%d"
-//    static let placesDeletePhotos = "/api/location/%d"
+    static let things = "object/"
+    static let thingsThumbnails = "object/thumbnails"
+    static let thingsPage = "object/page?pageSize=%d&pageNumber=%d"
+    static let thingsAlbum = "album?contentType=album/object&sortBy=createdDate&sortOrder=DESC&page=0&size=1&objectInfoId=%d"
+    static let thingsDeletePhotos = "object/photo/%d"
+//    static let thingsDeletePhoto = "object/photo/%d/%d"
+    static let places = "location/"
+    static let placesThumbnails = "location/thumbnails"
+    static let placesPage = "location/page?pageSize=%d&pageNumber=%d"
+    static let placesAlbum = "album?contentType=album/location&sortBy=createdDate&sortOrder=DESC&page=0&size=1&locationInfoId=%d"
+//    static let placesDeletePhotos = "location/%d"
     
     //MARK : Share
-    static let share = "/api/share/%@"
+    static let share = "share/%@"
     
     //MARK : Faq 
     static let faqContentUrl = "http://mylifebox.com/faq/?lang=%@"
@@ -121,16 +125,15 @@ struct RouteRequests {
     
     
     struct HomeCards {
-        static let all = BaseUrl +/ "api/assistant/v1"
-        //static let all = BasePreProdUrl +/ "api/assistant/v1"
+        static let all = BaseUrl +/ "assistant/v1"
         static func card(with id: Int) -> URL {
             return all +/ String(id)
         }
     }
     
     /// upload
-    static let uploadContainer = baseApi +/ "container/baseUrl"
-    static let uploadNotify = "/api/notification/onFileUpload?parentFolderUuid=%@&fileName=%@"
+    static let uploadContainer = BaseUrl +/ "container/baseUrl"
+    static let uploadNotify = "notification/onFileUpload?parentFolderUuid=%@&fileName=%@"
     
-    static let updateLanguage = baseApi +/ "account/language"
+    static let updateLanguage = BaseUrl +/ "account/language"
 }
