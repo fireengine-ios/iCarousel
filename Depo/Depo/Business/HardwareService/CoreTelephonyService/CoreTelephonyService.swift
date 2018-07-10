@@ -69,7 +69,8 @@ import CoreTelephony
         let localCode = Device.locale
         
         switch localCode {
-        case "uk", "ru": return "+380"
+        case "ru": return "+375"
+        case "uk": return "+380"
         case "de": return "+49"
         case "ar": return "+966"
         case "ro": return "+373"
