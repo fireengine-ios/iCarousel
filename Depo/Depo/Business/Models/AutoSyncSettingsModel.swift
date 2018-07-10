@@ -86,9 +86,7 @@ final class AutoSyncSettings {
         isAutoSyncOptionEnabled = dictionary[SettingsKeys.isAutoSyncEnabledKey] ?? true
         
         let mobileDataPhotos = dictionary[SettingsKeys.mobileDataPhotosKey] ?? true
-        
-        ///Because of interrupted sync via mobile network in the background
-        let mobileDataVideo = false//dictionary[SettingsKeys.mobileDataVideoKey] ?? false
+        let mobileDataVideo = dictionary[SettingsKeys.mobileDataVideoKey] ?? false
         
         let wifiPhotos = dictionary[SettingsKeys.wifiPhotosKey] ?? false
         let wifiVideo = dictionary[SettingsKeys.wifiVideoKey] ?? true
@@ -108,7 +106,7 @@ final class AutoSyncSettings {
         
         if mobileDataVideo {
             ///Because of interrupted sync via mobile network in the background
-            videoSetting.option = .wifiAndCellular
+            videoSetting.option = .wifiOnly
         } else if wifiVideo {
             videoSetting.option = .wifiOnly
         } else {
