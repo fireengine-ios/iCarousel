@@ -19,6 +19,7 @@ class CounrtiesGSMCodeCompositor {
         
         let coreTelephonyService = CoreTelephonyService()
         let countryCodes = coreTelephonyService.callingCodeMap()
+        let lifeCountryCodes = coreTelephonyService.lifeOrderedCallingCountryCodes()
         let isoCodes = NSLocale.isoCountryCodes
         let locale = NSLocale(localeIdentifier: Device.supportedLocale)
         
@@ -36,10 +37,20 @@ class CounrtiesGSMCodeCompositor {
                                 withGSMCode: phoneCode)
         }
         
-        resulArray = resulArray.sorted(by: { firt, second -> Bool in
-            return firt.countryName < second.countryName
-        })
+        let isNeededToShowLifeCountriesFirst = true//(Device.locale == "ru")
         
+        resulArray = resulArray.sorted(by: { first, second -> Bool in
+            if isNeededToShowLifeCountriesFirst {
+                switch (lifeCountryCodes.index(of: first.countryCode), lifeCountryCodes.index(of: second.countryCode)) {
+                case let (index1, index2) where (index1 != nil && index2 != nil): return index1! < index2!
+                case let (index1, _) where index1 != nil: return true
+                case let (_, index2) where index2 != nil: return false
+                default: break
+                }
+            }
+            return first.countryName < second.countryName
+        })
+
         return resulArray
     }
 }
