@@ -21,19 +21,21 @@ class PackagesPresenter {
     
     private func getAccountType(for accountType: String, subscriptionPlans: [SubscriptionPlanBaseResponse]) -> AccountType {
         if accountType == "TURKCELL" {
-            return AccountType.turkcell
+            return .turkcell
         } else {
             let plans = subscriptionPlans.flatMap { $0.subscriptionPlanRole }
             for plan in plans {
                 if plan.hasPrefix("lifebox") {
-                    return AccountType.ukranian
+                    return .ukranian
                 } else if plan.hasPrefix("kktcell") {
-                    return AccountType.cyprus
+                    return .cyprus
                 } else if plan.hasPrefix("moldcell") {
-                    return AccountType.moldovian
-                } 
+                    return .moldovian
+                } else if plan.hasPrefix("life") {
+                    return .life
+                }
             }
-            return AccountType.all
+            return .all
         }
     }
     
@@ -78,6 +80,8 @@ extension PackagesPresenter: PackagesViewOutput {
             view?.showCancelOfferAlert(with: TextConstants.offersCancelCyprus)
         case .moldovian:
             view?.showCancelOfferAlert(with: TextConstants.offersCancelMoldcell)
+        case .life:
+            view?.showCancelOfferAlert(with: TextConstants.offersCancelLife)
         case .all:
             if let offer = plan.model as? OfferApple {
                 view?.startActivityIndicator()
@@ -218,6 +222,8 @@ extension PackagesPresenter: PackagesInteractorOutput {
         case .cyprus:
             view?.showSubTurkcellOpenAlert(with: TextConstants.offersActivateCyprus)
         case .moldovian:
+            break
+        case .life:
             break
         case .all:
             //show restore
