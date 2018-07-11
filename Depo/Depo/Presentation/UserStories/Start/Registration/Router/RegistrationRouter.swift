@@ -9,20 +9,21 @@
 import UIKit
 
 class RegistrationRouter: RegistrationRouterInput {
+    let router = RouterVC()
     
     func phoneVerification(sigUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
         
-        let router = RouterVC()
         let phoneVerification = router.phoneVereficationScreen(withSignUpSuccessResponse: sigUpResponse, userInfo: userInfo)
         router.pushViewController(viewController: phoneVerification)
     }
     
     func termsAndServices(with delegate: RegistrationViewDelegate?, email: String) {
         
-        let okHandler: VoidHandler = {
-            let router = RouterVC()
-            let termsAndServices = router.termsAndServicesScreen(login: false, delegate: delegate)
-            router.pushViewController(viewController: termsAndServices)
+        let okHandler: VoidHandler = { [weak self] in
+            guard let termsAndServices = self?.router.termsAndServicesScreen(login: false, delegate: delegate) else {
+                return
+            }
+            self?.router.pushViewController(viewController: termsAndServices)
         }
         
         let message = String(format: TextConstants.registrationEmailPopupMessage, email)
@@ -35,5 +36,10 @@ class RegistrationRouter: RegistrationRouterInput {
                                                 vc.close(completion: okHandler)
         })
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
+    }
+    
+    func getCapcha() -> CaptchaViewController {
+        let capcha = router.capcha
+        return capcha as! CaptchaViewController
     }
 }

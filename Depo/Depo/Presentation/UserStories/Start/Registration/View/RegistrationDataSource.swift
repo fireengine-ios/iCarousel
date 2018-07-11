@@ -24,7 +24,6 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     var currentPhoneNumber = ""
     
     func setupCells(withModels models: [BaseCellModel]) {
-        
         cells.removeAll()
         cells.append(contentsOf: models)
     }
@@ -106,7 +105,7 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
                 cell.setupGSMCode(code: currentGSMCode)
                 cell.inputTextField?.text = currentPhoneNumber //model.inputText
                 #if DEBUG
-                    cell.inputTextField?.text = "259092538"
+                    cell.inputTextField?.text = "259091520"
                     cell.gsmCountryCodeLabel.text = "+375"
                     currentGSMCode = "+375"
                 #endif

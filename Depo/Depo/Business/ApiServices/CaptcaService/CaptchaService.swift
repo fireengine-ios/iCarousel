@@ -37,6 +37,27 @@ struct CaptchaParametr: RequestParametrs {
     }
 }
 
+struct CaptchaSignUpRequrementParametr: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+    
+    var requestParametrs: Any {
+        let dict: [String: Any] = [:]
+        return dict
+    }
+    
+    var patch: URL {
+        let patch_: String = String(format: RouteRequests.captchaRequred)
+        return URL(string: patch_, relativeTo: RouteRequests.BaseUrl)!
+    }
+    
+    var header: RequestHeaderParametrs {
+        return [:]
+    }
+    
+}
+
 struct CaptchaParametrAnswer: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
@@ -85,12 +106,34 @@ final class CaptchaResponse: ObjectRequestResponse {
     }
 }
 
+final class CaptchaSignUpRequrementResponse: ObjectRequestResponse {
+    
+    var data: Data?
+    var captchaRequred: Bool = false
+
+    private let captchaRequredJsonKey = "captchaRequired"
+    
+    required init(json: Data?, headerResponse: HTTPURLResponse?) {
+        self.data = json
+        super.init(json: json, headerResponse: headerResponse)
+    }
+    
+    override func mapping() {
+        captchaRequred = json?[captchaRequredJsonKey].boolValue ?? false
+//        "captchaRequired" 
+    }
+    
+    required init(withJSON: JSON?) {
+        debugLog("CaptchaResponse init(withJSON:) has not been implemented")
+        fatalError("init(withJSON:) has not been implemented")
+    }
+}
 
 final class CaptchaService: BaseRequestService {
     
     private(set) var uuid: String = UUID().uuidString
     
-    func getCaptcha(uuid: String? = nil, type: CaptchaType = .image, sucess: SuccessResponse?, fail: FailResponse?   ) {
+    func getCaptcha(uuid: String? = nil, type: CaptchaType = .image, sucess: SuccessResponse?, fail: FailResponse?) {
         debugLog("CaptchaService getCaptcha")
         
         if let uuid = uuid {
@@ -102,6 +145,11 @@ final class CaptchaService: BaseRequestService {
         let param = CaptchaParametr(uuid: self.uuid, type: type.rawValue)
         let handler = BaseResponseHandler<CaptchaResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat: .DataFormat)
         executeGetRequest(param: param, handler: handler)
+    }
+    
+    func getSignUpCaptchaRequrement(sucess: SuccessResponse?, fail: FailResponse?) {
+        let handler = BaseResponseHandler<CaptchaSignUpRequrementResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat: .DataFormat)
+        executeGetRequest(param: CaptchaSignUpRequrementParametr(), handler: handler)
     }
     
 }

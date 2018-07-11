@@ -21,5 +21,7 @@ protocol RegistrationViewInput: RegistrationViewDelegate, Waiting {
     func showInfoButton(forType type: UserValidationResults)
     
     func showErrorTitle(withText: String)
+    
+    func setupCaptchaVC(captchaVC: CaptchaViewController)
 
 }

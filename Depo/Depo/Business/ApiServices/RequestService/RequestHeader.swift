@@ -73,6 +73,10 @@ class RequestHeaders {
         return result 
     }
     
+    static func authificationWithCaptcha(id: String, answer: String)  -> RequestHeaderParametrs {
+        return RequestHeaders.authification() + RequestHeaders.captchaHeader(id: id, answer: answer)
+    }
+    
     static func authificationByRememberMe() -> RequestHeaderParametrs {
         var result = base()
         #if MAIN_APP
