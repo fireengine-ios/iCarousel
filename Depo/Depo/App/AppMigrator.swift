@@ -219,7 +219,6 @@ extension AppMigrator {
                 allSummaries.append(meta)
             }
             let result = Set(allSummaries)
-            debugLog("DB migration: \(result)")
             return result
         } catch {
             debugLog("can't read syncedFromDB")
