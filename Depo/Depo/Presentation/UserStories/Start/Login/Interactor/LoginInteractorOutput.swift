@@ -48,4 +48,7 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func updateUserLanguageSuccess()
     func updateUserLanguageFailed(error: Error)
+    
+    func captchaRequred(requred: Bool)
+    func captchaRequredFailed()
 }

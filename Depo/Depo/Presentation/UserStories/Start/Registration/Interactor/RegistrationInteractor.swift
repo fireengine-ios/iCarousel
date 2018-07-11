@@ -41,11 +41,12 @@ class RegistrationInteractor: RegistrationInteractorInput {
     func checkCaptchaRequerement() {
         captchaService.getSignUpCaptchaRequrement(sucess: { [weak self] succesResponse in
             guard let succesResponse = succesResponse as? CaptchaSignUpRequrementResponse else {
+                self?.output.captchaRequredFailed()
                 return
             }
             self?.output.captchaRequred(requred: succesResponse.captchaRequred)
             debugLog("something")
-        }) { [weak self] ErrorResponse in
+        }) { [weak self] errorResponse in
             self?.output.captchaRequredFailed()
         }
     }

@@ -27,6 +27,7 @@ class LoginInteractor: LoginInteractorInput {
     private var login: String?
     private var password: String?
     private var atachedCaptcha: CaptchaParametrAnswer?
+    private lazy var captchaService = CaptchaService()
     
     var isShowEmptyEmail = false
     
@@ -306,6 +307,19 @@ class LoginInteractor: LoginInteractorInput {
                     self?.output?.updateUserLanguageFailed(error: error)
                 }
             }
+        }
+    }
+    
+    func checkCaptchaRequerement() {
+        captchaService.getSignUpCaptchaRequrement(sucess: { [weak self] succesResponse in
+            guard let succesResponse = succesResponse as? CaptchaSignUpRequrementResponse else {
+                self?.output?.captchaRequredFailed()
+                return
+            }
+            self?.output?.captchaRequred(requred: succesResponse.captchaRequred)
+            debugLog("something")
+        }) { [weak self] errorResponse in
+            self?.output?.captchaRequredFailed()
         }
     }
 }

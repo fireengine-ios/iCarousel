@@ -75,6 +75,7 @@ class LoginViewController: ViewController, LoginViewInput, LoginDataSourceAction
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        view.layoutSubviews()
         output.viewAppeared()
     }
     

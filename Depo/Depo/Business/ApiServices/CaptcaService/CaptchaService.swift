@@ -120,7 +120,6 @@ final class CaptchaSignUpRequrementResponse: ObjectRequestResponse {
     
     override func mapping() {
         captchaRequred = json?[captchaRequredJsonKey].boolValue ?? false
-//        "captchaRequired" 
     }
     
     required init(withJSON: JSON?) {
