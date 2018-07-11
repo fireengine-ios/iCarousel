@@ -38,28 +38,6 @@ class RegistrationInteractor: RegistrationInteractorInput {
         }
     }
     
-    func signUPUser(email: String, phone: String, password: String, captchaID: String?, captchaAnswer: String?) {
-        let sigUpUser = SignUpUser(phone: phone,
-                                   mail: email,
-                                   password: password,
-                                   eulaId: 0) /// 0 is server logic
-        
-        authenticationService.signUp(user: sigUpUser, sucess: { [weak self] result in
-            DispatchQueue.main.async {
-                guard let t = result as? SignUpSuccessResponse,
-                    let userRegistrationInfo = self?.dataStorage.userRegistrationInfo  else {
-                        return
-                }
-                self?.analyticsService.track(event: .signUp)
-                self?.output.signUpSucces(withResult: t, userInfo: userRegistrationInfo)
-            }
-            }, fail: { [weak self] result in
-                DispatchQueue.main.async {
-                    self?.output.signUpFailed(withResult: result.description)
-                }
-        })
-    }
-    
     func checkCaptchaRequerement() {
         captchaService.getSignUpCaptchaRequrement(sucess: { [weak self] succesResponse in
             guard let succesResponse = succesResponse as? CaptchaSignUpRequrementResponse else {

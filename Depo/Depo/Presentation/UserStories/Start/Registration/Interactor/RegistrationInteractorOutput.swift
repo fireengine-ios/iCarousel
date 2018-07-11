@@ -14,9 +14,6 @@ protocol RegistrationInteractorOutput: class {
     func userValid(email: String, phone: String, passpword: String, captchaID: String?, captchaAnswer: String?)
     func userInvalid(withResult result: [UserValidationResults])
     
-    func signUpFailed(withResult result: String?)
-    func signUpSucces(withResult result: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel)
-    
     func captchaRequred(requred: Bool)
     func captchaRequredFailed()
 }

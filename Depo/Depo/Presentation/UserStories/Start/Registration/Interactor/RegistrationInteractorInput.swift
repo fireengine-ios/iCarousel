@@ -16,7 +16,5 @@ protocol RegistrationInteractorInput {
     
     func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?)
     
-    func signUPUser(email: String, phone: String, password: String, captchaID: String?, captchaAnswer: String?)
-    
     func checkCaptchaRequerement()
 }
