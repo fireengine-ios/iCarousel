@@ -14,4 +14,5 @@ enum AccountType {
     case ukranian
     case cyprus
     case moldovian
+    case life
 }
