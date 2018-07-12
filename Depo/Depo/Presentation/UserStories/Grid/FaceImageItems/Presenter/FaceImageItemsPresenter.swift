@@ -91,6 +91,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         super.getContentWithSuccessEnd()
         
         updateNoFilesView()
+        dataSource.hideLoadingFooter()
     
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
             view.showUgglaView()
