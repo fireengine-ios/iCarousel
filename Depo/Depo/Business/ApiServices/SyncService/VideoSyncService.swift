@@ -79,7 +79,7 @@ final class VideoSyncService: ItemSyncServiceImpl {
 
 extension VideoSyncService: BackgroundTaskServiceDelegate {
     func backgroundTaskWillExpire() {
-        if status == .executing, ReachabilityService().isReachableViaWWAN {
+        if status == .executing, ReachabilityService().isReachableViaWWAN, !lastInterruptedItemsUUIDs.isEmpty {
             debugLog("interrupted_queue_items")
             storageVars.interruptedSyncVideoQueueItems = lastInterruptedItemsUUIDs
             stop()
