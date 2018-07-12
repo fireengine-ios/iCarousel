@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import Alamofire
 
 enum CaptchaType: String {
     case audio = "AUDIO"
@@ -35,6 +36,43 @@ struct CaptchaParametr: RequestParametrs {
     var header: RequestHeaderParametrs {
         return [:]
     }
+}
+
+final class CaptchaSignUpRequrementService {
+    let sessionManager: SessionManager
+    
+    init(sessionManager: SessionManager = SessionManager.customDefault) {
+        self.sessionManager = sessionManager
+    }
+    
+    public func getCaptchaRequrement(handler: @escaping ResponseBool) {
+        guard let requestURL = URL(string: RouteRequests.captchaRequred, relativeTo: RouteRequests.BaseUrl) else {
+            handler(ResponseResult.failed(CustomErrors.unknown))
+            return
+        }
+        sessionManager
+            .request(requestURL)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    guard let captchaSignUp = CaptchaSignUpRequirementResponse(json: JSON(data: data)) else {
+                            handler(ResponseResult.failed(MappingError(data: data)))
+                            return
+                    }
+                    handler(ResponseResult.success(captchaSignUp.captchaRequired))
+                case .failure(let error):
+                    
+                    debugLog("HomeCardsService all response: \(response)")
+                    debugLog("HomeCardsService all statusCode: \(response.response?.statusCode ?? -1111)")
+                    
+                    let backendError = ResponseParser.getBackendError(data: response.data,
+                                                                      response: response.response)
+                    handler(ResponseResult.failed(backendError ?? error))
+                }
+        }
+    }
+     
 }
 
 struct CaptchaSignUpRequrementParametr: RequestParametrs {
