@@ -42,10 +42,7 @@ struct CaptchaSignUpRequrementParametr: RequestParametrs {
         return NumericConstants.defaultTimeout
     }
     
-    var requestParametrs: Any {
-        let dict: [String: Any] = [:]
-        return dict
-    }
+    var requestParametrs: Any = [String: Any]()
     
     var patch: URL {
         let patch_: String = String(format: RouteRequests.captchaRequred)
@@ -123,8 +120,7 @@ final class CaptchaSignUpRequrementResponse: ObjectRequestResponse {
     }
     
     required init(withJSON: JSON?) {
-        debugLog("CaptchaResponse init(withJSON:) has not been implemented")
-        fatalError("init(withJSON:) has not been implemented")
+        super.init(withJSON: withJSON)
     }
 }
 

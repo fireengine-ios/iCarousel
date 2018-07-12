@@ -109,8 +109,6 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
         interactor.requestGSMCountryCodes()
         if requred {
             view.setupCaptchaVC(captchaVC: router.getCapcha())
-        } else {
-            
         }
         asyncOperationSucces()
     }

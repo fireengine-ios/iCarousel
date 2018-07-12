@@ -317,7 +317,6 @@ class LoginInteractor: LoginInteractorInput {
                 return
             }
             self?.output?.captchaRequred(requred: succesResponse.captchaRequred)
-            debugLog("something")
         }) { [weak self] errorResponse in
             self?.output?.captchaRequredFailed()
         }
