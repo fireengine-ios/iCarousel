@@ -82,6 +82,7 @@ extension VideoSyncService: BackgroundTaskServiceDelegate {
         if status == .executing, ReachabilityService().isReachableViaWWAN {
             debugLog("interrupted_queue_items")
             storageVars.interruptedSyncVideoQueueItems = lastInterruptedItemsUUIDs
+            stop()
         }
     }
 }
