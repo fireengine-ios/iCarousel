@@ -24,15 +24,8 @@ class AutoSyncModel {
     var isSelected: Bool
     var height: CGFloat {
         if cellType != .headerSlider {
-            if cellType == .videoSetting {
-                ///Because of interrupted sync via mobile network in the background
-                ///show 2 options instead of 3
-                return isSelected ? 168 : 68
-            }
-            
             return isSelected ? 228 : 68
         }
-        
         return 44
     }
     

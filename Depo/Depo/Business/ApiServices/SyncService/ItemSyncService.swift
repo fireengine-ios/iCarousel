@@ -40,6 +40,8 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     var localItems: [WrapData] = []
     var lastSyncedMD5s: [String] = []
+    var storageVars: StorageVars = factory.resolve()
+    lazy var lastInterruptedItemsUUIDs: [String] = storageVars.interruptedSyncVideoQueueItems
     
     var photoVideoService: PhotoAndVideoService {
         let fieldValue: FieldValue = (fileType == .image) ? .image : .video
@@ -74,6 +76,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl stop")
         
         lastSyncedMD5s.removeAll()
+        
         if status != .synced {
             status = .stoped
         }
@@ -125,6 +128,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             if self.status == .prepairing {
                 self.localItems = items
                 self.lastSyncedMD5s = self.localItems.map { $0.md5 }
+                self.lastInterruptedItemsUUIDs.append(contentsOf: self.localItems.map { $0.getTrimmedLocalID() })
                 
                 guard !self.localItems.isEmpty else {
                     self.status = .synced
