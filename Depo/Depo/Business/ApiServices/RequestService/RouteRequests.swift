@@ -10,8 +10,49 @@ import Foundation
 
 struct RouteRequests {
     
-    // MARK: Authentication
+    private enum ServerEnvironment {
+        case test
+        case preProduction
+        case production
+        
+        private static var currentEnvironment: ServerEnvironment {
+            if UserDefaults.standard.bool(forKey: "TEST_ENV") {
+                return .test
+            } else if UserDefaults.standard.bool(forKey: "PRE_PROD_ENV") {
+                return .preProduction
+            }
+            
+            return .production
+        }
+        
+        static var baseUrl: URL = {
+            switch ServerEnvironment.currentEnvironment {
+            case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/api/")!
+            case .preProduction: return URL(string: "https://adepotest.turkcell.com.tr/api/")!
+            case .production: return URL(string: "https://adepo.turkcell.com.tr/api/")!
+            }
+        }()
+        
+        static var unsecuredAuthenticationUrl: String = {
+            switch ServerEnvironment.currentEnvironment {
+            case .test: return "http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
+            case .preProduction: return "http://adepotest.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
+            case .production: return "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
+            }
+        }()
+        
+        static var baseContactsUrl: URL = {
+            switch ServerEnvironment.currentEnvironment {
+            case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/ttyapi/")!
+            case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
+            case .production: return URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
+            }
+        }()
+    }
+
     
+    // MARK: Authentication
+
     /// prod
 //    static let BaseUrl = URL(string: "https://adepo.turkcell.com.tr/api/")!
 //    static let httpAuthification = "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
