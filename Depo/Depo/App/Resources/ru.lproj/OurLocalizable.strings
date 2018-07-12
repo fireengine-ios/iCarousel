@@ -157,7 +157,6 @@
 
 /*Fuzzy*/
 "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Пожалуйста, не удаляйте следующую информацию. Данная информация будет использована для отправки сообщения о проблеме:\n\nВерсия приложения: %@\nНомер телефона: %@\nОператор: %@\nУстройство: %@\nОперационная система: %@\nЯзык: %@\nПредпочтительный язык: %@\nСтатус сети: %@\nОбщий объём хранилища: %lld\nИспользованный объём хранилища: %lld\nПакеты: %@";
-"Upload Photos" = "Загрузить фотографии";
 "Upload Photos" = "Загрузить фото";
 "Add" = "Добавить";
 "Albums" = "Альбомы";
@@ -268,7 +267,6 @@
 "info" = "Информация";
 "Enable photo permissions in settings" = "Разрешить доступ к фото в настройках";
 "Start adding your photos" = "Добавить фото или видео";
-"You don’t have anything on your photo roll." = "У вас еще нет фото или видео в Lifebox.";
 "You don’t have anything on your photo roll." = "У вас еще нет фото или видео в lifebox.";
 "View All Pictures" = "Посмотреть все картинки";
 "View All My Stream" = "Посмотреть все потоки";
@@ -428,10 +426,6 @@
 "Turkcell Password" = "Пароль Туркселл";
 "Login Settings" = "Настройки входа";
 "Folder is Empty" = "Папка пуста";
-"Folder Items" = "Элементы";
-"Contact Backup" = "Резервная копию контактов";
-"Your last contact update was %@ months ago!" = "Вы обновляли данные о контактах %d месяца(-ев) назад!";
-"It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Прошло %d месяца(-ев) с момента, когда вы последний раз обновляли контакты. Обновите их сейчас, чтобы никогда не потерять.";
 "Folder Items" = "Файлов: %d";
 "Contact Backup" = "Резервная копия контактов";
 "Your last contact update was %@ months ago!" = "Вы обновляли данные о контактах %d месяц(-а, -ев) назад!";
@@ -640,8 +634,7 @@
 "Your lifebox storage is almost full!" = "Хранилище lifebox практически заполнено";
 "This edited photo will be saved as a new photo in your device gallery" = "Отредактированное фото будет сохранено в виде нового файла в галерее вашего устройства.";
 "We couldn’t find any place on your Lifebox yet." = "Мы пока не смогли найти ни одного места в вашем lifebox.";
-"*Average figure. Total number of documents depends on the size of each document." = "* Среднее значение. Общее количество документов зависит от размера каждого документа.";
 "*Average figure. Total number of documents depends on the size of each document." = "* Среднее значение. Общее количество файлов зависит от размера каждого файла.";
 "We couldn’t find anything on your Lifebox yet." = "Мы пока не смогли найти ни одного предмета в вашем lifebox.";
 "Expiration Date: %@" = "Срок истекает: %@";
-"Failed to get albums" = "Failed to get albums";
+"Failed to get albums" = "не удалось получить альбомы";
