@@ -12,5 +12,5 @@ protocol RegistrationRouterInput {
     func phoneVerification(sigUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel)
     func termsAndServices(with delegate: RegistrationViewDelegate?, email: String)
     
-    func getCapcha() -> CaptchaViewController
+    func getCapcha() -> CaptchaViewController?
 }

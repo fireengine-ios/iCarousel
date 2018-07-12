@@ -107,8 +107,8 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     func captchaRequred(requred: Bool) {
         interactor.prepareModels()
         interactor.requestGSMCountryCodes()
-        if requred {
-            view.setupCaptchaVC(captchaVC: router.getCapcha())
+        if requred, let captchaVC = router.getCapcha() {
+            view.setupCaptchaVC(captchaVC: captchaVC)
         }
         asyncOperationSucces()
     }

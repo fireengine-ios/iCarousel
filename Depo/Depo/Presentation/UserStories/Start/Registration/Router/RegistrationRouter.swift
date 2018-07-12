@@ -38,8 +38,8 @@ class RegistrationRouter: RegistrationRouterInput {
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func getCapcha() -> CaptchaViewController {
+    func getCapcha() -> CaptchaViewController? {
         let capcha = router.capcha
-        return capcha as! CaptchaViewController
+        return capcha
     }
 }
