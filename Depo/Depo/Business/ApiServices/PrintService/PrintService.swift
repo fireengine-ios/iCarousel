@@ -21,7 +21,7 @@ class PrintService: NSObject {
         let print = PrintServiceData.Print(dateCreated: Date(), dateSend: Date(),
                                            photos: photos, requestId: UUID().uuidString,
                                            totalPhotos: data.count,
-                                           uid: RouteRequests.BaseUrl.absoluteString)
+                                           uid: RouteRequests.baseUrl.absoluteString)
 
         let jsonEncoder = JSONEncoder()
         let formatter = DateFormatter()

@@ -126,7 +126,7 @@ class APIReachabilityService {
 
 class APIHostReachabilityRequestParameters: BaseRequestParametrs {
     override var patch: URL {
-        return RouteRequests.BaseUrl
+        return RouteRequests.baseUrl
     }
 }
 

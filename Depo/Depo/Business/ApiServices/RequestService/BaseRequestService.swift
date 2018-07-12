@@ -78,7 +78,7 @@ class BaseRequestParametrs: RequestParametrs {
     }
     
     var patch: URL {
-        return RouteRequests.BaseUrl
+        return RouteRequests.baseUrl
     }
     
     var header: RequestHeaderParametrs {

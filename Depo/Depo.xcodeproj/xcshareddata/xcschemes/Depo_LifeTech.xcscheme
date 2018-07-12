@@ -78,7 +78,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-PRE_PROD_ENV YES"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <EnvironmentVariables>

@@ -15,7 +15,7 @@ struct RouteRequests {
         case preProduction
         case production
         
-        private static var currentEnvironment: ServerEnvironment {
+        static var currentEnvironment: ServerEnvironment {
             if UserDefaults.standard.bool(forKey: "TEST_ENV") {
                 return .test
             } else if UserDefaults.standard.bool(forKey: "PRE_PROD_ENV") {
@@ -25,50 +25,40 @@ struct RouteRequests {
             return .production
         }
         
-        static var baseUrl: URL = {
-            switch ServerEnvironment.currentEnvironment {
+        var baseUrl: URL {
+            switch self {
             case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/api/")!
             case .preProduction: return URL(string: "https://adepotest.turkcell.com.tr/api/")!
             case .production: return URL(string: "https://adepo.turkcell.com.tr/api/")!
             }
-        }()
+        }
         
-        static var unsecuredAuthenticationUrl: String = {
-            switch ServerEnvironment.currentEnvironment {
+        var unsecuredAuthenticationUrl: String {
+            switch self {
             case .test: return "http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
             case .preProduction: return "http://adepotest.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
             case .production: return "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
             }
-        }()
+        }
         
-        static var baseContactsUrl: URL = {
+        var baseContactsUrl: URL {
             switch ServerEnvironment.currentEnvironment {
             case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/ttyapi/")!
             case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
             case .production: return URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
             }
-        }()
+        }
     }
 
+    // MARK: Base API URLs
+    
+    private static let currentEnvironment = ServerEnvironment.currentEnvironment
+    static let baseUrl = currentEnvironment.baseUrl
+    static let unsecuredAuthenticationUrl = currentEnvironment.unsecuredAuthenticationUrl
+    static let baseContactsUrl = currentEnvironment.baseContactsUrl
+    
     
     // MARK: Authentication
-
-    /// prod
-//    static let BaseUrl = URL(string: "https://adepo.turkcell.com.tr/api/")!
-//    static let httpAuthification = "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
-//    static let BaseContactsUrl = URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
-    
-    /// pre-prod
-//    static let BaseUrl = URL(string: "https://adepotest.turkcell.com.tr/api/")!
-//    static let httpAuthification = "http://adepotest.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
-//    static let BaseContactsUrl = URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
-    
-    /// test
-    static let BaseUrl = URL(string: "https://tcloudstb.turkcell.com.tr/api/")!
-    static let httpAuthification = "http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
-    static let BaseContactsUrl = URL(string: "https://tcloudstb.turkcell.com.tr/ttyapi/")!
-    
-    
     
     static let httpsAuthification = "auth/token?rememberMe=%@"
     static let authificationByRememberMe = "auth/rememberMe"
@@ -166,15 +156,15 @@ struct RouteRequests {
     
     
     struct HomeCards {
-        static let all = BaseUrl +/ "assistant/v1"
+        static let all = baseUrl +/ "assistant/v1"
         static func card(with id: Int) -> URL {
             return all +/ String(id)
         }
     }
     
     /// upload
-    static let uploadContainer = BaseUrl +/ "container/baseUrl"
+    static let uploadContainer = baseUrl +/ "container/baseUrl"
     static let uploadNotify = "notification/onFileUpload?parentFolderUuid=%@&fileName=%@"
     
-    static let updateLanguage = BaseUrl +/ "account/language"
+    static let updateLanguage = baseUrl +/ "account/language"
 }

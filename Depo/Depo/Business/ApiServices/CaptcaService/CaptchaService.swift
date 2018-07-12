@@ -29,7 +29,7 @@ struct CaptchaParametr: RequestParametrs {
     
     var patch: URL {
         let patch_: String = String(format: RouteRequests.captcha, type, uuid)
-        return URL(string: patch_, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: patch_, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -52,7 +52,7 @@ struct CaptchaParametrAnswer: RequestParametrs {
     
     var patch: URL {
         let patch_: String = String(format: RouteRequests.captcha, answer, uuid)
-        return URL(string: patch_, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: patch_, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {

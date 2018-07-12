@@ -53,7 +53,7 @@ struct SharedServiceParam: RequestParametrs {
     
     var patch: URL {
         let sharedPath = String(format: RouteRequests.share, sharedType.description )
-        return URL(string: sharedPath, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: sharedPath, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {
