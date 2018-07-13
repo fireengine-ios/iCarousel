@@ -37,7 +37,7 @@ class CounrtiesGSMCodeCompositor {
                                 withGSMCode: phoneCode)
         }
         
-        let isNeededToShowLifeCountriesFirst = true//(Device.locale == "ru")
+        let isNeededToShowLifeCountriesFirst = (Device.locale == "ru")
         
         resulArray = resulArray.sorted(by: { first, second -> Bool in
             if isNeededToShowLifeCountriesFirst {
