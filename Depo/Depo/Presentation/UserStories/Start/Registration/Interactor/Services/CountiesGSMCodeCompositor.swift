@@ -15,7 +15,7 @@ class CounrtiesGSMCodeCompositor {
     }
     
     private func getLocals() -> [GSMCodeModel] {
-        var resulArray: [GSMCodeModel] = []
+        var resultArray: [GSMCodeModel] = []
         
         let coreTelephonyService = CoreTelephonyService()
         let countryCodes = coreTelephonyService.callingCodeMap()
@@ -23,7 +23,7 @@ class CounrtiesGSMCodeCompositor {
         let isoCodes = NSLocale.isoCountryCodes
         let locale = NSLocale(localeIdentifier: Device.supportedLocale)
         
-        resulArray = isoCodes.flatMap {
+        resultArray = isoCodes.flatMap {
             
             let countryCode: String = $0
             let contryName = locale.displayName(forKey: NSLocale.Key.countryCode, value: countryCode)
@@ -32,6 +32,7 @@ class CounrtiesGSMCodeCompositor {
             else {
                 return nil
             }
+            
             return GSMCodeModel(withCountry: unwrapedcontryName,
                                 withCountryCode: countryCode,
                                 withGSMCode: phoneCode)
@@ -39,18 +40,22 @@ class CounrtiesGSMCodeCompositor {
         
         let isNeededToShowLifeCountriesFirst = (Device.locale == "ru")
         
-        resulArray = resulArray.sorted(by: { first, second -> Bool in
-            if isNeededToShowLifeCountriesFirst {
-                switch (lifeCountryCodes.index(of: first.countryCode), lifeCountryCodes.index(of: second.countryCode)) {
-                case let (index1, index2) where (index1 != nil && index2 != nil): return index1! < index2!
-                case let (index1, _) where index1 != nil: return true
-                case let (_, index2) where index2 != nil: return false
-                default: break
-                }
-            }
+        resultArray = resultArray.sorted(by: { first, second -> Bool in
             return first.countryName < second.countryName
         })
+        
+        if isNeededToShowLifeCountriesFirst {
+            ///put 'life' countries at the top of the result array
+            var gsmModels = [GSMCodeModel]()
+            for countryCode in lifeCountryCodes {
+                if let index = resultArray.index(where: { $0.countryCode == countryCode }) {
+                    let model = resultArray.remove(at: index)
+                    gsmModels.append(model)
+                }
+            }
+            resultArray = gsmModels + resultArray
+        }
 
-        return resulArray
+        return resultArray
     }
 }
