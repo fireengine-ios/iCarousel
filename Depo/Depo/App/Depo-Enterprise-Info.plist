@@ -93,6 +93,20 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>http://tcloudstb.turkcell.com.tr</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+			</dict>
+			<key>http://adepotest.turkcell.com.tr</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+			</dict>
 			<key>http://adepo.turkcell.com.tr/api/auth/gsm/login</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
@@ -109,7 +123,7 @@
 			</dict>
 		</dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<false/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string></string>
