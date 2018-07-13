@@ -78,6 +78,13 @@
 		<false/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>http://cropyioslifebox.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+			</dict>
 			<key>http://adepotest.turkcell.com.tr</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
