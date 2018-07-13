@@ -53,6 +53,8 @@ final class CaptchaViewController: ViewController {
         getImageCaptcha()
         captchaPlaceholderLabel.text = TextConstants.captchaPlaceholder
         imageBackground.layer.cornerRadius = 5
+        inputTextField.autocorrectionType = .no
+        inputTextField.tag = 33
     }
     
     // MARK: Actions
@@ -67,6 +69,14 @@ final class CaptchaViewController: ViewController {
     
     func refreshCapthcha() {
         getNewCaptcha()
+    }
+    
+    public func getCaptchaID() -> String {
+        return currentCaptchaID
+    }
+    
+    public func getCaptchaAnswer() -> String {
+        return inputTextField.text ?? ""
     }
     
     private func getNewCaptcha() {

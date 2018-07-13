@@ -20,9 +20,9 @@ class LoginRouter: LoginRouterInput {
         router.setNavigationController(controller: homePage)
     }
     
-    func getCapcha() -> CaptchaViewController {
+    func getCapcha() -> CaptchaViewController? {
         let capcha = router.capcha
-        return capcha as! CaptchaViewController
+        return capcha
     }
     
     func goToTermsAndServices() {

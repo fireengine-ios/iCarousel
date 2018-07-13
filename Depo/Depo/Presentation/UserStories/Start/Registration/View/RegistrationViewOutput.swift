@@ -14,7 +14,7 @@ protocol RegistrationViewOutput {
     
     func nextButtonPressed()
     
-    func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String)
+    func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?)
     
     func infoButtonGotPressed(with type: UserValidationResults)
 }

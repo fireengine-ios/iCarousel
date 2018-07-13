@@ -33,4 +33,6 @@ protocol LoginInteractorInput {
     var isShowEmptyEmail: Bool { get }
     
     func updateUserLanguage()
+    
+    func checkCaptchaRequerement()
 }
