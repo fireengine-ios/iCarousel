@@ -14,8 +14,8 @@ struct RouteRequests {
         case test
         case preProduction
         case production
-        
-        static var currentEnvironment: ServerEnvironment {
+
+        static var currentEnvironment: ServerEnvironment = {
             if UserDefaults.standard.bool(forKey: "TEST_ENV") {
                 return .test
             } else if UserDefaults.standard.bool(forKey: "PRE_PROD_ENV") {
@@ -23,7 +23,7 @@ struct RouteRequests {
             }
             
             return .production
-        }
+        }()
         
         var baseUrl: URL {
             switch self {
@@ -53,6 +53,7 @@ struct RouteRequests {
     // MARK: Base API URLs
     
     private static let currentEnvironment = ServerEnvironment.currentEnvironment
+    
     static let baseUrl = currentEnvironment.baseUrl
     static let unsecuredAuthenticationUrl = currentEnvironment.unsecuredAuthenticationUrl
     static let baseContactsUrl = currentEnvironment.baseContactsUrl
