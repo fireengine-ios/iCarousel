@@ -53,7 +53,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     private func onLogin() {
         view.hideErrorMessage()
         view.dehighlightTitles()
-        startAsyncOperation()
+        startAsyncOperationDisableScreen()
     }
     
     func loginFieldIsEmpty() {
