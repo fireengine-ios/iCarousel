@@ -338,7 +338,7 @@ class RouterVC: NSObject {
     
     // MARK: Capcha
     
-    var capcha: UIViewController? {
+    var capcha: CaptchaViewController? {
         return CaptchaViewController.initFromXib()
     }
     

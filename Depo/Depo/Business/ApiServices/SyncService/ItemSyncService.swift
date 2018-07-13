@@ -41,7 +41,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     var localItems: [WrapData] = []
     var lastSyncedMD5s: [String] = []
     var storageVars: StorageVars = factory.resolve()
-    lazy var lastInterruptedItemsUUIDs: [String] = storageVars.interruptedSyncVideoQueueItems
+    var lastInterruptedItemsUUIDs = [String]()
     
     var photoVideoService: PhotoAndVideoService {
         let fieldValue: FieldValue = (fileType == .image) ? .image : .video
@@ -76,6 +76,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl stop")
         
         lastSyncedMD5s.removeAll()
+        lastInterruptedItemsUUIDs.removeAll()
         
         if status != .synced {
             status = .stoped
@@ -86,6 +87,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl waitForWiFi")
         
         lastSyncedMD5s.removeAll()
+        lastInterruptedItemsUUIDs.removeAll()
         
         status = .waitingForWifi
         CoreDataStack.default.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image, completion: { [weak self] hasItemsToSync in
@@ -105,6 +107,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl fail")
         
         lastSyncedMD5s.removeAll()
+        lastInterruptedItemsUUIDs.removeAll()
         status = .failed
     }
     
@@ -120,6 +123,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         status = .prepairing
         
         localItems.removeAll()
+        lastInterruptedItemsUUIDs = self.storageVars.interruptedSyncVideoQueueItems
         itemsSortedToUpload { [weak self] items in
             guard let `self` = self else {
                 return

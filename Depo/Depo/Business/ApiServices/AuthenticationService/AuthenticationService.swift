@@ -118,6 +118,8 @@ class SignUpUser: BaseRequestParametrs {
     let mail: String
     let password: String
     let eulaId: Int
+    let captchaID: String?
+    let captchaAnswer: String?
     
     override var requestParametrs: Any {
         return [
@@ -129,15 +131,25 @@ class SignUpUser: BaseRequestParametrs {
         ]
     }
 
+    override var header: RequestHeaderParametrs {
+        guard let unwrapedCaptchaID = captchaID,
+            let unwrapedCaptchaAnswer = captchaAnswer else {
+              return RequestHeaders.authification()
+        }
+        return RequestHeaders.authificationWithCaptcha(id: unwrapedCaptchaID, answer: unwrapedCaptchaAnswer)
+    }
+    
     override var patch: URL {
         return URL(string: RouteRequests.signUp, relativeTo: super.patch)!
     }
 
-    init(phone: String, mail: String, password: String, eulaId: Int) {
+    init(phone: String, mail: String, password: String, eulaId: Int, captchaID: String? = nil, captchaAnswer: String? = nil) {
         self.phone = phone
         self.mail = mail
         self.password = password
         self.eulaId = eulaId
+        self.captchaID = captchaID
+        self.captchaAnswer = captchaAnswer
     }
 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import Alamofire
 
 enum CaptchaType: String {
     case audio = "AUDIO"
@@ -35,6 +36,61 @@ struct CaptchaParametr: RequestParametrs {
     var header: RequestHeaderParametrs {
         return [:]
     }
+}
+
+final class CaptchaSignUpRequrementService {
+    let sessionManager: SessionManager
+    
+    init(sessionManager: SessionManager = SessionManager.customDefault) {
+        self.sessionManager = sessionManager
+    }
+    
+    public func getCaptchaRequrement(handler: @escaping ResponseBool) {
+        guard let requestURL = URL(string: RouteRequests.captchaRequred, relativeTo: RouteRequests.BaseUrl) else {
+            handler(ResponseResult.failed(CustomErrors.unknown))
+            return
+        }
+        sessionManager
+            .request(requestURL)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    guard let captchaSignUp = CaptchaSignUpRequirementResponse(json: JSON(data: data)) else {
+                            handler(ResponseResult.failed(MappingError(data: data)))
+                            return
+                    }
+                    handler(ResponseResult.success(captchaSignUp.captchaRequired))
+                case .failure(let error):
+                    
+                    debugLog("HomeCardsService all response: \(response)")
+                    debugLog("HomeCardsService all statusCode: \(response.response?.statusCode ?? -1111)")
+                    
+                    let backendError = ResponseParser.getBackendError(data: response.data,
+                                                                      response: response.response)
+                    handler(ResponseResult.failed(backendError ?? error))
+                }
+        }
+    }
+     
+}
+
+struct CaptchaSignUpRequrementParametr: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+    
+    var requestParametrs: Any = [String: Any]()
+    
+    var patch: URL {
+        let patch_: String = String(format: RouteRequests.captchaRequred)
+        return URL(string: patch_, relativeTo: RouteRequests.BaseUrl)!
+    }
+    
+    var header: RequestHeaderParametrs {
+        return [:]
+    }
+    
 }
 
 struct CaptchaParametrAnswer: RequestParametrs {
@@ -85,12 +141,32 @@ final class CaptchaResponse: ObjectRequestResponse {
     }
 }
 
+final class CaptchaSignUpRequrementResponse: ObjectRequestResponse {
+    
+    var data: Data?
+    var captchaRequred: Bool = false
+
+    private let captchaRequredJsonKey = "captchaRequired"
+    
+    required init(json: Data?, headerResponse: HTTPURLResponse?) {
+        self.data = json
+        super.init(json: json, headerResponse: headerResponse)
+    }
+    
+    override func mapping() {
+        captchaRequred = json?[captchaRequredJsonKey].boolValue ?? false
+    }
+    
+    required init(withJSON: JSON?) {
+        super.init(withJSON: withJSON)
+    }
+}
 
 final class CaptchaService: BaseRequestService {
     
     private(set) var uuid: String = UUID().uuidString
     
-    func getCaptcha(uuid: String? = nil, type: CaptchaType = .image, sucess: SuccessResponse?, fail: FailResponse?   ) {
+    func getCaptcha(uuid: String? = nil, type: CaptchaType = .image, sucess: SuccessResponse?, fail: FailResponse?) {
         debugLog("CaptchaService getCaptcha")
         
         if let uuid = uuid {
@@ -102,6 +178,11 @@ final class CaptchaService: BaseRequestService {
         let param = CaptchaParametr(uuid: self.uuid, type: type.rawValue)
         let handler = BaseResponseHandler<CaptchaResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat: .DataFormat)
         executeGetRequest(param: param, handler: handler)
+    }
+    
+    func getSignUpCaptchaRequrement(sucess: SuccessResponse?, fail: FailResponse?) {
+        let handler = BaseResponseHandler<CaptchaSignUpRequrementResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat: .DataFormat)
+        executeGetRequest(param: CaptchaSignUpRequrementParametr(), handler: handler)
     }
     
 }
