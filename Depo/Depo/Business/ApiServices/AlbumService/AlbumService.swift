@@ -9,12 +9,12 @@
 import Alamofire
 
 struct AlbumsPatch {
-    static let album =  "/api/album"
+    static let album =  "album"
 //    static let deleteAlbumss =  "/api/album"
-    static let addPhotosToAlbum = "/api/album/addFiles/%@"
-    static let deletePhotosFromAlbum = "/api/album/removeFiles/%@"
-    static let renameAlbum = "/api/album/rename/%@?newLabel=%@"
-    static let changeCoverPhoto = "/api/album/coverPhoto/%@?coverPhotoUuid=%@"
+    static let addPhotosToAlbum = "album/addFiles/%@"
+    static let deletePhotosFromAlbum = "album/removeFiles/%@"
+    static let renameAlbum = "album/rename/%@?newLabel=%@"
+    static let changeCoverPhoto = "album/coverPhoto/%@?coverPhotoUuid=%@"
 }
 
 class CreatesAlbum: BaseRequestParametrs {
@@ -310,7 +310,7 @@ class PhotosAlbumService: BaseRequestService {
     }
     
     func getAlbum(for uuid: String, handler: @escaping ResponseHandler<AlbumServiceResponse>) {
-        let url = RouteRequests.baseUrl +/ "api/album/\(uuid)"
+        let url = RouteRequests.baseUrl +/ "album/\(uuid)"
         SessionManager.customDefault
             .request(url)
             .responseObject(handler)

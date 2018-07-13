@@ -11,11 +11,11 @@ import SwiftyJSON
 
 struct CreateStoryPath {
     
-    static let createStory  = "/api/slideshow/create"
+    static let createStory  = "slideshow/create"
     
-    static let preview      = "/api/slideshow/previewUrl"
+    static let preview      = "slideshow/previewUrl"
     
-    static let audioList    = "api/slideshow/audio/list?language=%@"
+    static let audioList    = "slideshow/audio/list?language=%@"
     
 }
 
