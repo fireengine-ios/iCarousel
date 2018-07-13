@@ -230,9 +230,24 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
         showAccessAlert(message: error)
     }
     
-    private func showAccessAlert(message: String) {
-        log.debug("AutoSyncViewController showAccessAlert")
+    func showLocationPermissionPopup(completion: @escaping VoidHandler) {
+        let controller = PopUpController.with(title: TextConstants.errorAlert,
+                                              message: TextConstants.locationServiceDisable,
+                                              image: .error,
+                                              buttonTitle: TextConstants.ok) { (vc) in
+                                                vc.close {
+                                                    completion()
+                                                }
+        }
+        DispatchQueue.toMain {
+            self.present(controller, animated: true, completion: nil)
+        }
         
+    }
+    
+    private func showAccessAlert(message: String) {
+        debugLog("AutoSyncViewController showAccessAlert")
+    
         let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
                                               message: message,
                                               image: .none,
@@ -240,13 +255,11 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
                                               secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
                                               secondAction: { vc in
                                                 vc.close {
-                                                    if message.contains("photos") {
-                                                        UIApplication.shared.openSettings()
-                                                    } else {
-                                                        UIApplication.shared.openLocationSettings()
-                                                    }
+                                                    UIApplication.shared.openSettings()
                                                 }
         })
-        present(controller, animated: true, completion: nil)
+        DispatchQueue.toMain {
+           self.present(controller, animated: true, completion: nil)
+        }
     }
 }

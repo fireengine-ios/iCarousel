@@ -75,7 +75,7 @@ final class LocalUnsyncedOperation: Operation {
                 handler([], nil)
                 return
             }
-            log.debug("LocalMediaStorage compareRemoteItems")
+            debugLog("LocalMediaStorage compareRemoteItems")
             var localItems = localItems
             var localMd5s = localItems.map { $0.md5 }
             var localIds = localItems.map { $0.getTrimmedLocalID() }

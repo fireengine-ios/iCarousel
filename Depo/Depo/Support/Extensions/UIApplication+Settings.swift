@@ -15,12 +15,4 @@ extension UIApplication {
             else { return }
         UIApplication.shared.openURL(settingsUrl)
     }
-    
-    func openGlobalSettings() {
-        UIApplication.shared.openURL(URL(string: "App-Prefs:root")!)
-    }
-    
-    func openLocationSettings() {
-        UIApplication.shared.openURL(URL(string: "App-Prefs:root=LOCATION_SERVICES")!)
-    }
 }

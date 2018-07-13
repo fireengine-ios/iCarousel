@@ -433,13 +433,13 @@
 "Cancel BackUp" = "Cancel BackUp";
 "Clear BackUp" = "Clear BackUp";
 "There are %d duplicated contacts." = "There are %d duplicated contacts.";
-"Are you sure you want to delete?" = "Are you sure you want to delete duplicated contacts?";
+"Are you sure you want to delete?" = "Are you sure you want to delete?";
 "This duplicated contacts will be deleted from your contacts." = "This duplicated contacts will be deleted from your contacts.";
 "%%%d Restored…" = "%%%d Restored…";
 "%%%d Analyzed…" = "%%%d Analyzed…";
 "%%%d Backed up…" = "%%%d Backed up…";
 "Restored %d Contacts" = "Restored %d Contacts";
-"%d Duplicated Contacts Deleted" = "%d Duplicated Contacts Deleted";
+"%d Duplicated Contacts Deleted" = "%d Duplicated Contact(s) Deleted";
 "You have %d numbers on your contacts backup." = "You have %d contacts in your lifebox";
 "This contact will be deleted from your contacts." = "This contact will be deleted from your contacts.";
 "Upgrade" = "Upgrade";
@@ -664,3 +664,4 @@
 "We couldn’t find anything on your Lifebox yet." = "We couldn’t find any things in your lifebox yet.";
 "Expiration Date: %@" = "Expiration Date: %@";
 "Failed to get albums" = "Failed to get albums";
+"To deactivate lifebox 25GB please send SMS with the text \"Stop1\", for lifebox 100GB please send SMS with the text \"Stop2\", for lifebox 500GB please send SMS with the text \"Stop3\" to the number 6767" = "To deactivate lifebox 25GB please send SMS with the text \"Stop1\", for lifebox 100GB please send SMS with the text \"Stop2\", for lifebox 500GB please send SMS with the text \"Stop3\" to the number 6767";

@@ -140,6 +140,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     // MARK: SyncContactsViewInput
     
     func setInitialState() {
+        debugLog("SyncContactsViewController setInitialState")
         viewForInformationAfterBackUp.setSubviewsHidden(true)
         cancelButton.isHidden = true
         operationButtonsStackView.isHidden = true
@@ -147,6 +148,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     }
     
     func setStateWithoutBackUp() {
+        debugLog("SyncContactsViewController setStateWithoutBackUp")
         titleLabel.text = TextConstants.settingsBackUpNeverDidIt
         backupDateLabel.text = TextConstants.settingsBackUpNewer
         viewForInformationAfterBackUp.setSubviewsHidden(true)
@@ -160,6 +162,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     }
     
     func setStateWithBackUp() {
+        debugLog("SyncContactsViewController setStateWithBackUp")
         gradientLoaderIndicator.resetProgress()
         titleLabel.attributedText = titleLabelAttributedTextBeforeBackup
         viewForInformationAfterBackUp.setSubviewsHidden(false)

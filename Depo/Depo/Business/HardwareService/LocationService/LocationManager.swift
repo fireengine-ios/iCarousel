@@ -53,7 +53,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func checkDoWeNeedShowLocationPermissionAllert(yesWeNeed:@escaping VoidHandler) {
-        log.debug("LocationManager checkDoWeNeedShowLocationPermissionAllert")
+        debugLog("LocationManager checkDoWeNeedShowLocationPermissionAllert")
         SingletonStorage.shared.getUniqueUserID(success: { uniqueUserID in
             let key = uniqueUserID + "locationPermission"
             let permission = UserDefaults.standard.integer(forKey: key)
@@ -68,22 +68,22 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func showIfNeedLocationPermissionAllert() {
-        log.debug("LocationManager showIfNeedLocationPermissionAllert")
+        debugLog("LocationManager showIfNeedLocationPermissionAllert")
 
         self.checkDoWeNeedShowLocationPermissionAllert(yesWeNeed: {
             let controller = UIAlertController.init(title: "", message: TextConstants.locationServiceDisable, preferredStyle: .alert)
             let okAction = UIAlertAction(title: TextConstants.ok, style: .default, handler: { action in
-                UIApplication.shared.openSettings()
+//                UIApplication.shared.openSettings()
             })
-            let cancelAction = UIAlertAction(title: TextConstants.cancel, style: .cancel, handler: nil)
+//            let cancelAction = UIAlertAction(title: TextConstants.cancel, style: .cancel, handler: nil)
             controller.addAction(okAction)
-            controller.addAction(cancelAction)
+//            controller.addAction(cancelAction)
             RouterVC().presentViewController(controller: controller)
         })
     }
     
     func startUpdateLocationInBackground() {
-        log.debug("LocationManager startUpdateLocationInBackground")
+        debugLog("LocationManager startUpdateLocationInBackground")
         let settings = AutoSyncDataStorage().settings
         
         guard settings.isAutoSyncEnabled,
@@ -99,7 +99,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func startUpdateLocation() {
-        log.debug("LocationManager startUpdateLocation")
+        debugLog("LocationManager startUpdateLocation")
         let settings = AutoSyncDataStorage().settings
         
         if settings.isAutoSyncEnabled {
@@ -118,14 +118,14 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
  
     func stopUpdateLocation() {
-        log.debug("LocationManager stopUpdateLocation")
+        debugLog("LocationManager stopUpdateLocation")
 
         locationManager.stopMonitoringSignificantLocationChanges()
     }
     
     // CLLocationManager delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        log.debug("LocationManager locationManager")
+        debugLog("LocationManager locationManager")
         
         guard tokenStorage.accessToken != nil else {
             return
@@ -135,11 +135,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        log.debug("LocationManager didFailWithError: \(error.localizedDescription)")
+        debugLog("LocationManager didFailWithError: \(error.localizedDescription)")
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        log.debug("LocationManager locationManager")
+        debugLog("LocationManager locationManager")
 
         passcodeStorage.systemCallOnScreen = false
         

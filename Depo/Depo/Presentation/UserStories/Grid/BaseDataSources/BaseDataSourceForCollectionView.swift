@@ -127,7 +127,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private var pageLeftOvers = [WrapData]()
     private var emptyMetaItems = [WrapData]()
     
-    private var allRemoteItems = [WrapData]()
     private var uploadedObjectID = [String]()
     private var uploadToAlbumItems = [String]()
     
@@ -206,9 +205,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             isPaginationDidEnd = true
         }
         lastPage = pageNum
-        log.debug("BaseDataSourceForCollectionView appendCollectionView \(filteredItems.count)")
-        
-        allRemoteItems.append(contentsOf: filteredItems)
+        debugLog("BaseDataSourceForCollectionView appendCollectionView \(filteredItems.count)")
   
         var oldSectionNumbers = 1
         if let collectionView = collectionView {
@@ -248,39 +245,27 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 DispatchQueue.main.async {
                     let oldSectionNumbers = collectionView.numberOfSections
                     let newSectionNumbers = self.numberOfSections(in: collectionView)
-                    let emptyItemsArray = self.getIndexPathsForItems(emptyItems)
-                    var newSections: IndexSet?
+//                    let emptyItemsArray = self.getIndexPathsForItems(emptyItems)
+//                    var newSections: IndexSet?
                     if newSectionNumbers > oldSectionNumbers {
                         let needMoveSectionWithEmptyMetaItems = self.needShowEmptyMetaItems && self.currentSortType == .metaDataTimeUp && containsEmptyMetaItems
                         
                         if needMoveSectionWithEmptyMetaItems {
                             debugPrint("!!! needMoveSectionWithEmptyMetaItems 1")
-                            newSections = IndexSet(oldSectionNumbers-1..<newSectionNumbers-1)                           
+//                            newSections = IndexSet(oldSectionNumbers-1..<newSectionNumbers-1)
                         } else {
                             debugPrint("!!! needMoveSectionWithEmptyMetaItems 2")
-                            newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
+//                            newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
                         }
-                    } else if newSectionNumbers < oldSectionNumbers{
+                    } else if newSectionNumbers < oldSectionNumbers {
                         return
                         /// here add section deletion
                     }///error ocure when was appending to same action but the data was just dropped - recieved and droped
                
                 
                     collectionView.collectionViewLayout.invalidateLayout()
-                    collectionView.performBatchUpdates({ [weak self] in
-                        guard let `self` = self else {
-                            return
-                        }
-                        if let newSections = newSections {
-                            self.collectionView?.insertSections(newSections)
-                        }
-                        if !self.recentlyDeletedIndexes.isEmpty {///Also should add check for deleted sections
-                            self.collectionView?.deleteItems(at: self.recentlyDeletedIndexes)
-                            self.recentlyDeletedIndexes.removeAll()
-                        }
-                        self.collectionView?.insertItems(at: array + emptyItemsArray)
-                        
-                        }, completion: { [weak self] _ in
+                    collectionView.reloadData()
+                    collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
                             guard let `self` = self else {
                                 return
                             }
@@ -627,7 +612,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
             lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth(),
-            !allItems.isEmpty{
+            !allItems.isEmpty {
             
             allItems[allItems.count - 1].append(newItem)
             
@@ -640,7 +625,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if let lastItemNameChar = lastItem.name?.first,
             let newItemNameChar = newItem.name?.first {
             
-            if String(lastItemNameChar).uppercased() == String(newItemNameChar).uppercased() {
+            if String(lastItemNameChar).uppercased() == String(newItemNameChar).uppercased(), !allItems.isEmpty {
                 allItems[allItems.count - 1].append(newItem)
             } else {
                 allItems.append([newItem])
@@ -652,7 +637,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     private func addBySize(lastItem: WrapData, newItem: WrapData) {
-        allItems[allItems.count-1].append(newItem)
+        if !allItems.isEmpty {
+            allItems[allItems.count - 1].append(newItem)
+        }
     }
     
     private func getHeaderText(indexPath: IndexPath) -> String {
@@ -690,10 +677,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func dropData() {
-        log.debug("BaseDataSourceForCollectionViewDelegate dropData()")
+        debugLog("BaseDataSourceForCollectionViewDelegate dropData()")
         
         emptyMetaItems.removeAll()
-        allRemoteItems.removeAll()
         allItems.removeAll()
         pageLeftOvers.removeAll()
         allMediaItems.removeAll()
@@ -815,7 +801,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func setAllItems(items: [[BaseDataSourceItem]]) {
-        allItems = items as! [[WrapData]]
+        DispatchQueue.toMain {
+            if items is [[WrapData]] {
+                self.allItems = items as! [[WrapData]]
+            }
+        }
     }
     
     func selectAll(isTrue: Bool){
@@ -846,7 +836,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return
             }
             
-            log.debug("BaseDataSourceForCollectionViewDelegate reloadData")
+            debugLog("BaseDataSourceForCollectionViewDelegate reloadData")
             debugPrint("BaseDataSourceForCollectionViewDelegate reloadData")
             
             collectionView.reloadData()
@@ -885,7 +875,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getSelectedItems() -> [BaseDataSourceItem] {
-        return Array(selectedItemsArray)
+        return selectedItemsArray.map{$0}
     }
     
     
@@ -963,7 +953,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
-    func selectSectionAt(section: Int){
+    func selectSectionAt(section: Int) {
+        guard section < allItems.count else {
+            return
+        }
         
         let objectsArray: [BaseDataSourceItem] = allItems[section]
         
@@ -1094,10 +1087,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     //MARK: collectionViewDataSource
     
     func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
-        guard let sectionItems = allItems[safe: indexPath.section] else {
+        guard allItems.count > indexPath.section, allItems[indexPath.section].count > indexPath.row else {
             return nil
         }
-        return sectionItems[safe: indexPath.row]
+        return allItems[safe: indexPath.section]?[safe: indexPath.row]
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -1130,7 +1123,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         // ---------------------=======
         if cellReUseID == nil {
-            log.debug("BaseDataSourceForCollectionViewDelegate cellForItemAt cellReUseID == nil")
+            debugLog("BaseDataSourceForCollectionViewDelegate cellForItemAt cellReUseID == nil")
             cellReUseID = CollectionViewCellsIdsConstant.cellForImage// ---------------------=======
         }
         // ---------------------=======
@@ -1471,8 +1464,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             localFinishedItemUUID = object.uuid
                             file.isLocalItem = false
                         }
-                        guard self.allItems.count > section,
-                            self.allItems[section].count > row else {
+                        guard section < self.allItems.count,
+                            row < self.allItems[section].count else {
                                 return /// Collection was reloaded from different thread
                         }
                         self.allItems[section][row] = file
@@ -1645,6 +1638,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
             }
             
+            self.emptyMetaItems = self.emptyMetaItems.filter { !idsForRemove.contains($0.uuid) }
+
             var newArray = [[WrapData]]()
             
             for array in self.allItems {
@@ -1667,14 +1662,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     newArray.append(newSectionArray)
                 }
             }
-            self.allItems = newArray
-            
-            //update folder items count
-            if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
-                self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
-            }
             
             DispatchQueue.main.async {
+                self.allItems = newArray
+                
+                //update folder items count
+                if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
+                    self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
+                }
+                
                 self.recentlyDeletedIndexes.removeAll()
                 self.collectionView?.reloadData()
                 self.delegate?.didDelete(items: items)

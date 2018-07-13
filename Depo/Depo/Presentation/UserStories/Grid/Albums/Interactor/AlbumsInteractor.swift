@@ -22,21 +22,21 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
     }
     
     override func getAllItems(sortBy: SortedRules) {
-        log.debug("AlbumsInteractor getAllItems")
+        debugLog("AlbumsInteractor getAllItems")
 
         guard let remote = remoteItems as? AlbumService else {
             return
         }
         remote.allAlbums(sortBy: sortBy.sortingRules, sortOrder: sortBy.sortOder, success: { [weak self]  albumbs in
             DispatchQueue.main.async {
-                log.debug("AlbumsInteractor getAllItems AlbumService allAlbums success")
+                debugLog("AlbumsInteractor getAllItems AlbumService allAlbums success")
 
                 var array = [[BaseDataSourceItem]]()
                 array.append(albumbs)
                 self?.output.getContentWithSuccess(array: array)
             }
         }, fail: { [weak self] in
-            log.debug("AlbumsInteractor getAllItems AlbumService allAlbums fail")
+            debugLog("AlbumsInteractor getAllItems AlbumService allAlbums fail")
 
             DispatchQueue.main.async {
                 self?.output.asyncOperationFail(errorMessage: TextConstants.errorErrorToGetAlbums)
@@ -45,12 +45,12 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
     }
     
     func onAddPhotosToAlbum(selectedAlbumUUID: String) {
-        log.debug("AlbumsInteractor onAddPhotosToAlbum")
+        debugLog("AlbumsInteractor onAddPhotosToAlbum")
 
         output.startAsyncOperation()
         let parameters = AddPhotosToAlbum(albumUUID: selectedAlbumUUID, photos: photos as! [Item])
         PhotosAlbumService().addPhotosToAlbum(parameters: parameters, success: { [weak self] in
-            log.debug("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum success")
+            debugLog("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum success")
 
             DispatchQueue.main.async {
                 print("success")
@@ -62,7 +62,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
                 ItemOperationManager.default.filesAddedToAlbum()
             }
         }) { [weak self] error in
-            log.debug("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum error")
+            debugLog("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum error")
 
             DispatchQueue.main.async {
                 self?.output.asyncOperationFail(errorMessage: error.description)

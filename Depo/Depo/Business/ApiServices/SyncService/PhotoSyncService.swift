@@ -37,11 +37,11 @@ final class PhotoSyncService: ItemSyncServiceImpl {
         stopAllOperations()
         super.stop()
         
-        log.debug("PhotoSyncService stop")
+        debugLog("PhotoSyncService stop")
     }
     
     override func waitForWiFi() {
-        log.debug("PhotoSyncService waitForWiFi")
+        debugLog("PhotoSyncService waitForWiFi")
         
         stopAllOperations()
         super.waitForWiFi()

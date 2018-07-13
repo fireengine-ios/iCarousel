@@ -81,7 +81,7 @@ class SyncServiceManager {
     
     // MARK: - Public
     func update(syncSettings: AutoSyncSettings) {
-        log.debug("SyncServiceManager updateSyncSettings")
+        debugLog("SyncServiceManager updateSyncSettings")
         
         subscribeForNotifications()
         
@@ -91,7 +91,7 @@ class SyncServiceManager {
     }
     
     func updateImmediately() {
-        log.debug("SyncServiceManager updateImmediately")
+        debugLog("SyncServiceManager updateImmediately")
         
         subscribeForNotifications()
         
@@ -101,13 +101,13 @@ class SyncServiceManager {
     }
     
     func updateInBackground() {
-        log.debug("SyncServiceManager updateInBackground")
+        debugLog("SyncServiceManager updateInBackground")
         
         let time = NSDate().timeIntervalSince1970
         if time - lastAutoSyncTime > timeIntervalBetweenSyncsInBackground {
             BackgroundTaskService.shared.beginBackgroundTask()
             lastAutoSyncTime = time
-            log.debug("Sync should start in background")
+            debugLog("Sync should start in background")
             checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
         }
     }
@@ -212,6 +212,10 @@ class SyncServiceManager {
             }
             
             if video {
+                ///we need to stop video sync every time
+                ///to prevent autosync if it was interrupted in the background
+                ///and if network was changed from wifi to cellular
+                videoSyncService.stop()
                 let operation = ItemSyncOperation(service: videoSyncService, newItems: newItems)
                 operationQueue.addOperation(operation)
             }

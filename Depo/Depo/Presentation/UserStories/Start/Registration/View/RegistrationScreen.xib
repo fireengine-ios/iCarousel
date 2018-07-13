@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -17,6 +17,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegistrationViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="bottomConstraint" destination="2gx-QT-P6F" id="bua-Im-WLu"/>
+                <outlet property="captchaContainer" destination="xFM-pY-4tC" id="fSG-nt-6S1"/>
+                <outlet property="captchaContainerHeightConstraint" destination="LXh-qI-0vK" id="FQv-UN-qA9"/>
                 <outlet property="errorLabel" destination="i69-kg-6FH" id="O38-wt-SBH"/>
                 <outlet property="iPadTitleLabel" destination="5VP-G7-Jqt" id="489-ch-hCy"/>
                 <outlet property="nextBtn" destination="pdV-lc-PZm" id="dFy-WB-W6I"/>
@@ -25,7 +27,7 @@
                 <outlet property="pickerView" destination="h68-Mh-k1S" id="ZKd-tA-hSg"/>
                 <outlet property="scrollView" destination="TfM-YV-oKw" id="idY-yd-XJA"/>
                 <outlet property="shadowView" destination="Rmp-60-G1Z" id="SKk-Rp-dmr"/>
-                <outlet property="spaceBetweenNextButtonAndTable" destination="kFc-BQ-Wr1" id="vSL-ih-ccv"/>
+                <outlet property="spaceBetweenNextButtonAndTable" destination="MlG-af-2JY" id="2bm-ok-EQn"/>
                 <outlet property="userRegistrationTable" destination="TYi-I0-oIL" id="vtv-3a-7kt"/>
                 <outlet property="view" destination="iN0-l3-epB" id="lpg-ri-NHJ"/>
             </connections>
@@ -75,6 +77,13 @@
                                 <constraint firstAttribute="height" constant="369" id="tgp-Hr-Ih2"/>
                             </constraints>
                         </tableView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xFM-pY-4tC" userLabel="captchaContainer">
+                            <rect key="frame" x="0.0" y="458.5" width="375" height="0.0"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" id="LXh-qI-0vK"/>
+                            </constraints>
+                        </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Error label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i69-kg-6FH" userLabel="ErrorLabel">
                             <rect key="frame" x="30" y="48" width="317" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -114,19 +123,22 @@
                         <constraint firstItem="5VP-G7-Jqt" firstAttribute="top" secondItem="TfM-YV-oKw" secondAttribute="top" constant="30" id="4TQ-t8-9pT"/>
                         <constraint firstItem="kkP-qM-De4" firstAttribute="height" secondItem="TfM-YV-oKw" secondAttribute="height" priority="750" id="9Cj-WO-e2a"/>
                         <constraint firstAttribute="width" secondItem="kkP-qM-De4" secondAttribute="width" id="Dco-th-CPI"/>
+                        <constraint firstItem="xFM-pY-4tC" firstAttribute="top" secondItem="TYi-I0-oIL" secondAttribute="bottom" id="DeV-Jx-lri"/>
                         <constraint firstItem="TYi-I0-oIL" firstAttribute="trailing" secondItem="i69-kg-6FH" secondAttribute="trailing" constant="28" id="Dtn-gb-Frc"/>
                         <constraint firstItem="kkP-qM-De4" firstAttribute="leading" secondItem="TfM-YV-oKw" secondAttribute="leading" id="HWA-nc-sAG"/>
                         <constraint firstItem="i69-kg-6FH" firstAttribute="leading" secondItem="TYi-I0-oIL" secondAttribute="leading" constant="30" id="JBH-2s-0xh"/>
                         <constraint firstAttribute="trailing" secondItem="TYi-I0-oIL" secondAttribute="trailing" id="L0f-Fh-mMu">
                             <variation key="widthClass=regular" constant="126"/>
                         </constraint>
+                        <constraint firstItem="pdV-lc-PZm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xFM-pY-4tC" secondAttribute="bottom" constant="80" id="MlG-af-2JY"/>
+                        <constraint firstItem="xFM-pY-4tC" firstAttribute="leading" secondItem="TfM-YV-oKw" secondAttribute="leading" id="QwJ-Vd-h8T"/>
                         <constraint firstAttribute="bottom" secondItem="kkP-qM-De4" secondAttribute="bottom" id="S39-B2-efQ"/>
                         <constraint firstItem="5VP-G7-Jqt" firstAttribute="leading" secondItem="TfM-YV-oKw" secondAttribute="leading" constant="30" id="Z5P-vK-vgq"/>
                         <constraint firstItem="pdV-lc-PZm" firstAttribute="centerX" secondItem="TfM-YV-oKw" secondAttribute="centerX" id="aQp-Xh-6PQ"/>
                         <constraint firstItem="TYi-I0-oIL" firstAttribute="top" secondItem="i69-kg-6FH" secondAttribute="bottom" constant="20" id="arM-iU-PmC"/>
                         <constraint firstItem="kkP-qM-De4" firstAttribute="top" secondItem="TfM-YV-oKw" secondAttribute="top" id="avl-h5-u3i"/>
                         <constraint firstAttribute="trailing" secondItem="kkP-qM-De4" secondAttribute="trailing" id="bTb-Pw-Rqe"/>
-                        <constraint firstItem="pdV-lc-PZm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TYi-I0-oIL" secondAttribute="bottom" constant="80" id="kFc-BQ-Wr1"/>
+                        <constraint firstAttribute="trailing" secondItem="xFM-pY-4tC" secondAttribute="trailing" id="i9K-t1-1No"/>
                         <constraint firstAttribute="trailing" secondItem="5VP-G7-Jqt" secondAttribute="trailing" constant="30" id="mqY-GB-bmG"/>
                         <constraint firstItem="TYi-I0-oIL" firstAttribute="leading" secondItem="TfM-YV-oKw" secondAttribute="leading" id="uEt-1V-M0g">
                             <variation key="widthClass=regular" constant="126"/>
@@ -179,7 +191,7 @@
                 <constraint firstItem="4l6-KR-Kcg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sKw-9T-CWo"/>
                 <constraint firstAttribute="bottom" secondItem="Rmp-60-G1Z" secondAttribute="bottom" id="zSU-nu-LPT"/>
             </constraints>
-            <point key="canvasLocation" x="26" y="51"/>
+            <point key="canvasLocation" x="25.5" y="50.5"/>
         </view>
     </objects>
     <resources>

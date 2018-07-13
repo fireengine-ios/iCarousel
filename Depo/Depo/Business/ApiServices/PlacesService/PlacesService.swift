@@ -11,21 +11,21 @@ import UIKit
 final class PlacesService: BaseRequestService {
 
 //    func getPlacesList(param: PlacesParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
-//        log.debug("SearchService suggestion")
+//        debugLog("SearchService suggestion")
 //
 //        let handler = BaseResponseHandler<PlacesServiceResponse, ObjectRequestResponse>(success: success, fail: fail)
 //        executeGetRequest(param: param, handler: handler)
 //    }
     
     func getPlacesPage(param: PlacesPageParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
-        log.debug("PlacesService getPlacesPage")
+        debugLog("PlacesService getPlacesPage")
         
         let handler = BaseResponseHandler<PlacesPageResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
     
     func getPlacesAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
-        log.debug("PlacesService getPlacesAlbumWithID")
+        debugLog("PlacesService getPlacesAlbumWithID")
         
         let param = PlacesAlbumParameters(id: id)
         
@@ -41,12 +41,12 @@ final class PlacesService: BaseRequestService {
     }
     
     func deletePhotosFromAlbum(uuid: String, photos: [Item], success: PhotosAlbumOperation?, fail: FailResponse?) {
-        log.debug("PeopleService deletePhotosFromAlbum")
+        debugLog("PeopleService deletePhotosFromAlbum")
         
         let parameters = DeletePhotosFromPlacesAlbum(albumUUID: uuid, photos: photos)
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            log.debug("PeopleService deletePhotosFromAlbum success")
+            debugLog("PeopleService deletePhotosFromAlbum success")
             
             success?()
         }, fail: fail)

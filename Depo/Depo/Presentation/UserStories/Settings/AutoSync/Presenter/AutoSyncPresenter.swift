@@ -61,10 +61,12 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         }
         
         if !locationAccessGranted {
-            view.checkPermissionsFailedWith(error: TextConstants.locationServiceDisable)
+            view.showLocationPermissionPopup { [weak self] in
+                self?.view.checkPermissionsSuccessed()
+            }
+        } else {
+            view.checkPermissionsSuccessed()
         }
-        
-        view.checkPermissionsSuccessed()
     }
         
     //MARK : BasePresenter

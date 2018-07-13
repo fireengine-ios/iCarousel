@@ -11,13 +11,13 @@ import UIKit
 class StoriesInteractor: BaseFilesGreedInteractor {
 
     override func getAllItems(sortBy: SortedRules) {
-        log.debug("StoriesInteractor getAllItems")
+        debugLog("StoriesInteractor getAllItems")
         
         guard let remote = remoteItems as? StoryService else {
             return
         }
         remote.allStories(sortBy: sortBy.sortingRules, sortOrder: sortBy.sortOder, success: { [weak self] stories in
-            log.debug("StoriesInteractor getAllItems StoryService allStories success")
+            debugLog("StoriesInteractor getAllItems StoryService allStories success")
             
             DispatchQueue.main.async {
                 var array = [[BaseDataSourceItem]]()
@@ -25,7 +25,7 @@ class StoriesInteractor: BaseFilesGreedInteractor {
                 self?.output.getContentWithSuccess(array: array)
             }
             }, fail: { [weak self] in
-                log.debug("StoriesInteractor getAllItems StoryService allStories fail")
+                debugLog("StoriesInteractor getAllItems StoryService allStories fail")
                 
                 DispatchQueue.main.async {
                     self?.output.asyncOperationFail(errorMessage: "fail")

@@ -49,7 +49,7 @@ final class AppConfigurator {
     
     private static func firstStart() {
         if storageVars.isAppFirstLaunch {
-            log.debug("isAppFirstLaunch")
+            debugLog("isAppFirstLaunch")
             storageVars.isAppFirstLaunch = false
             KeychainSwift().clear()
             /// call migrate after Keychain clear
@@ -59,7 +59,7 @@ final class AppConfigurator {
     
     private static func emptyEmailUpIfNeed() {
         if storageVars.emptyEmailUp {
-            log.debug("emptyEmailUpIfNeed")
+            debugLog("emptyEmailUpIfNeed")
             storageVars.emptyEmailUp = false
             let attemptsCounter = SavingAttemptsCounterByUnigueUserID.emptyEmailCounter
             attemptsCounter.up(limitHandler: {
@@ -80,7 +80,7 @@ final class AppConfigurator {
     
     private static func clearTokensIfNeed() {
         if tokenStorage.isClearTokens {
-            log.debug("clearTokensIfNeed")
+            debugLog("clearTokensIfNeed")
             tokenStorage.isClearTokens = false
             tokenStorage.clearTokens()
         }
@@ -88,15 +88,13 @@ final class AppConfigurator {
     
     private static func logoutIfNeed() {
         if !tokenStorage.isRememberMe {
-            log.debug("logoutIfNeed isRememberMe false")
+            debugLog("logoutIfNeed isRememberMe false")
             AuthenticationService().logout(async: false, success: nil)
         }
     }
     
     private static func prepareSessionManager() {
-        let urls: AuthorizationURLs = AuthorizationURLsImp()
-        
-        var auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)
+        var auth: AuthorizationRepository = factory.resolve()
         auth.refreshFailedHandler = logout
         
         let sessionManager = SessionManager.customDefault
@@ -173,11 +171,11 @@ final class AppConfigurator {
         
         MPush.registerMessageResponseHandler({(_ response: MMessageResponse) -> Void in
             
-            log.debug("Payload: \(response.message.payload)")
+            debugLog("Payload: \(response.message.payload)")
             switch response.action.type {
                 
             case MActionType.click:
-                log.debug("Menlo Notif Clicked")
+                debugLog("Menlo Notif Clicked")
                 
                 if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
                     PushNotificationService.shared.openActionScreen()
@@ -186,10 +184,10 @@ final class AppConfigurator {
                 
                 
             case MActionType.dismiss:
-                log.debug("Menlo Notif Dismissed")
+                debugLog("Menlo Notif Dismissed")
                 
             case MActionType.present:
-                log.debug("Menlo Notif in Foreground")
+                debugLog("Menlo Notif in Foreground")
                 if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
                     PushNotificationService.shared.openActionScreen()
                 }
@@ -199,7 +197,7 @@ final class AppConfigurator {
         
         DispatchQueue.main.async {
             MPush.applicationDidFinishLaunching(options: launchOptions)
-            log.debug("AppConfigurator startMenloworks")
+            debugLog("AppConfigurator startMenloworks")
         }
     }
     
@@ -207,7 +205,7 @@ final class AppConfigurator {
     static func registerMenloworksForPushNotififcations() {
         DispatchQueue.main.async {
             MPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
-            log.debug("AppConfigurator registerMenloworksForPushNotififcations")
+            debugLog("AppConfigurator registerMenloworksForPushNotififcations")
         
         }
     }

@@ -8,10 +8,13 @@
 
 import Alamofire
 
+typealias RefreshCompletion = (_ succeeded: Bool, _ accessToken: String?) -> Void
+
 // TODO: Need to test refresh token request for no internet connection and timed out
 
 protocol AuthorizationRepository: RequestAdapter, RequestRetrier {
     var refreshFailedHandler: VoidHandler { get set }
+    func refreshTokens(completion: @escaping RefreshCompletion)
 }
 
 open class AuthorizationRepositoryImp: AuthorizationRepository {
@@ -99,11 +102,11 @@ extension AuthorizationRepositoryImp: RequestRetrier {
         
         #if MAIN_APP
         if let url = request.request?.url?.absoluteString {
-            log.debug("401 for \(url)")
+            debugLog("401 for \(url)")
         } else {
-            log.debug("request.request?.url?.absoluteString is nil")
+            debugLog("request.request?.url?.absoluteString is nil")
         }
-        log.debug(request)
+        debugLog(request.description)
         #endif
         
         /// save request
@@ -130,10 +133,9 @@ extension AuthorizationRepositoryImp: RequestRetrier {
     }
     
     
-    // MARK: - Private - Refresh Tokens
+    // MARK: - Refresh Tokens
     
-    fileprivate typealias RefreshCompletion = (_ succeeded: Bool, _ accessToken: String?) -> Void
-    fileprivate func refreshTokens(completion: @escaping RefreshCompletion) {
+    func refreshTokens(completion: @escaping RefreshCompletion) {
         
         /// guard refresh retry
         if isRefreshing {
@@ -149,7 +151,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
         let headers = [refreshTokenKey: tokenStorage.refreshToken ?? ""]
         
         sessionManager
-            .request(urls.refreshAccessToken, method: .post, parameters: [uuid: UIDevice.current.identifierForVendor?.uuidString ?? "", name: UIDevice.current.name, deviceType: Device.isIpad ? "IPAD" : "IPHONE"],
+            .request(urls.refreshAccessToken, method: .post, parameters: [uuid: UIDevice.current.identifierForVendor?.uuidString ?? "", name: UIDevice.current.name, deviceType: Device.deviceType],
                      encoding: JSONEncoding.default, headers: headers)
             .responseJSON { [weak self] response in
                 guard let strongSelf = self else { return }
@@ -157,8 +159,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                 /// if tokenStorage.refreshToken is invalid
                 if response.response?.statusCode == 401 {
                     #if MAIN_APP
-                    log.debug("failed refreshAccessToken")
-
+                    debugLog("failed refreshAccessToken")
                     #endif
                     strongSelf.refreshFailedHandler()
                     completion(false, nil)

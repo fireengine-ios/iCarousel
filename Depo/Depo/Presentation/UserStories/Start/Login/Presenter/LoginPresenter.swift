@@ -27,6 +27,8 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func viewIsReady() {
         interactor.prepareModels()
+        startAsyncOperation()
+        interactor.checkCaptchaRequerement()
     }
     
     func models(models: [BaseCellModel]) {
@@ -77,6 +79,18 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func viewAppeared() {}
+    
+    func captchaRequred(requred: Bool) {
+        asyncOperationSucces()
+        if requred {
+            captchaShowed = true
+            view.showCapcha()
+        }
+    }
+    
+    func captchaRequredFailed() {
+        asyncOperationSucces()
+    }
     
     func needShowCaptcha() {
         completeAsyncOperationEnableScreen()

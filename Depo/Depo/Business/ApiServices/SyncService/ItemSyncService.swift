@@ -40,6 +40,8 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     var localItems: [WrapData] = []
     var lastSyncedMD5s: [String] = []
+    var storageVars: StorageVars = factory.resolve()
+    var lastInterruptedItemsUUIDs = [String]()
     
     var photoVideoService: PhotoAndVideoService {
         let fieldValue: FieldValue = (fileType == .image) ? .image : .video
@@ -54,7 +56,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     // MARK: - Public ItemSyncService functions
     
     func start(newItems: Bool) {
-        log.debug("ItemSyncServiceImpl start")
+        debugLog("ItemSyncServiceImpl start")
         
         guard !CoreDataStack.default.inProcessAppendingLocalFiles else {
             /// don't need to change status because it's fake preparation until CoreData processing is done
@@ -71,18 +73,21 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     func stop() {
-        log.debug("ItemSyncServiceImpl stop")
+        debugLog("ItemSyncServiceImpl stop")
         
         lastSyncedMD5s.removeAll()
+        lastInterruptedItemsUUIDs.removeAll()
+        
         if status != .synced {
             status = .stoped
         }
     }
     
     func waitForWiFi() {
-        log.debug("ItemSyncServiceImpl waitForWiFi")
+        debugLog("ItemSyncServiceImpl waitForWiFi")
         
         lastSyncedMD5s.removeAll()
+        lastInterruptedItemsUUIDs.removeAll()
         
         status = .waitingForWifi
         CoreDataStack.default.hasLocalItemsForSync(video: fileType == .video, image: fileType == .image, completion: { [weak self] hasItemsToSync in
@@ -99,16 +104,17 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     func fail() {
-        log.debug("ItemSyncServiceImpl fail")
+        debugLog("ItemSyncServiceImpl fail")
         
         lastSyncedMD5s.removeAll()
+        lastInterruptedItemsUUIDs.removeAll()
         status = .failed
     }
     
     // MARK: - Private
     
     private func sync() {
-        log.debug("ItemSyncServiceImpl sync")
+        debugLog("ItemSyncServiceImpl sync")
 
         guard !status.isContained(in: [.executing, .prepairing]) else {
             return
@@ -117,6 +123,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         status = .prepairing
         
         localItems.removeAll()
+        lastInterruptedItemsUUIDs = self.storageVars.interruptedSyncVideoQueueItems
         itemsSortedToUpload { [weak self] items in
             guard let `self` = self else {
                 return
@@ -125,6 +132,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             if self.status == .prepairing {
                 self.localItems = items
                 self.lastSyncedMD5s = self.localItems.map { $0.md5 }
+                self.lastInterruptedItemsUUIDs.append(contentsOf: self.localItems.map { $0.getTrimmedLocalID() })
                 
                 guard !self.localItems.isEmpty else {
                     self.status = .synced
@@ -138,7 +146,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     }
     
     private func upload(items: [WrapData]) {
-        log.debug("ItemSyncServiceImpl upload")
+        debugLog("ItemSyncServiceImpl upload")
 
         guard !items.isEmpty, status != .stoped else {
             return
@@ -149,7 +157,7 @@ class ItemSyncServiceImpl: ItemSyncService {
                                              uploadStategy: .WithoutConflictControl,
                                              uploadTo: .MOBILE_UPLOAD,
                                              success: { [weak self] in
-                                                log.debug("ItemSyncServiceImpl upload UploadService uploadFileList success")
+                                                debugLog("ItemSyncServiceImpl upload UploadService uploadFileList success")
                                                 if self?.status == .executing {
                                                     self?.status = .synced
                                                 }
@@ -159,7 +167,7 @@ class ItemSyncServiceImpl: ItemSyncService {
                 return
             }
             
-            log.debug("ItemSyncServiceImpl upload UploadService uploadFileList fail")
+            debugLog("ItemSyncServiceImpl upload UploadService uploadFileList fail")
             
             if error.description == TextConstants.canceledOperationTextError || error.description == TextConstants.networkConnectionLostTextError {
                 return

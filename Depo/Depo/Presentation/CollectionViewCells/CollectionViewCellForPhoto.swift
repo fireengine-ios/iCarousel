@@ -8,7 +8,6 @@
 
 import UIKit
 import SDWebImage
-import Photos
 
 class CollectionViewCellForPhoto: BaseCollectionViewCell {
     @IBOutlet weak var favoriteIcon: UIImageView!
@@ -51,14 +50,10 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
-        guard let wrappered = wrappedObj as? WrapData else {
+        guard let wrappered = wrappedObj as? WrapData, !isAlreadyConfigured else {
             return
         }
-        
-        if (isAlreadyConfigured) {
-            return
-        }
-        
+
         progressView.isHidden = true
         
         if let item = wrappedObj as? Item {
@@ -110,8 +105,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
 
     override func setImage(with url: URL) {
         self.imageView.contentMode = .center
-        let dateStart = Date()
-        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
+        imageView.sd_setImage(with: url, placeholderImage: nil, options:[.queryDiskSync, .avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
             guard let `self` = self else {
                 return
             }
@@ -121,8 +115,8 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
                 return
             }
             
-            let isImageLoadedNotQuickly = dateStart.timeIntervalSinceNow < -0.2
-            self.setImage(image: image, animated: isImageLoadedNotQuickly)
+            let shouldAnimate = (cacheType == .none)
+            self.setImage(image: image, animated: shouldAnimate)
         }
         
         isAlreadyConfigured = true

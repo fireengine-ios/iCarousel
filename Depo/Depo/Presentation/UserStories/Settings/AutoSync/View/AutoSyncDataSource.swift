@@ -60,7 +60,7 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     private func setupCells(with settings: AutoSyncSettings) {
         let headerModel = AutoSyncModel(title: TextConstants.autoSyncNavigationTitle, subTitle: "", type: .headerSlider, setting: settings.photoSetting, selected: settings.isAutoSyncOptionEnabled)
         let photoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .photoSetting, setting: settings.photoSetting, selected: false)
-        let videoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellPhotos, subTitle: "", type: .videoSetting, setting: settings.videoSetting, selected: false)
+        let videoSettingModel = AutoSyncModel(title: TextConstants.autoSyncCellVideos, subTitle: "", type: .videoSetting, setting: settings.videoSetting, selected: false)
         
         cellModels = [.headerSlider : headerModel,
                       .photoSetting : photoSettingModel,

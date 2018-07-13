@@ -248,10 +248,10 @@ extension PackagesInteractor: PackagesInteractorInput {
                 return
             }
             if !(status == .restored || status == .success) {
-                log.debug("validateRestorePurchaseFailed: \(status.description)")
+                debugLog("validateRestorePurchaseFailed: \(status.description)")
             }
         }, fail: { errorResponse in
-            log.debug("validateRestorePurchaseFailed: \(errorResponse.description)")
+            debugLog("validateRestorePurchaseFailed: \(errorResponse.description)")
             group.leave()
         })
         
@@ -447,6 +447,8 @@ extension PackagesInteractor: PackagesInteractorInput {
             return "UAH"
         case .moldovian:
             return "MDL"
+        case .life:
+            return "BYN"
         case .all:
             return "$" /// temp
         }
@@ -462,6 +464,8 @@ extension PackagesInteractor: PackagesInteractorInput {
                 type = .cyprus
             } else if role.hasPrefix("moldcell") {
                 type = .moldovian
+            } else if role.hasPrefix("life") {
+                type = .life
             }
         }
         return getCurrency(for: type)
