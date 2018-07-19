@@ -9,21 +9,45 @@
 import Adjust
 import FBSDKCoreKit
 import StoreKit
+import Firebase
 
 final class AnalyticsService {
     
     func start() {
+        setupAdjust()
+        configureFireBase()
+    }
+    
+    // MARK: - Setup
+    
+    private func setupAdjust() {
         #if DEBUG
-            let environment = ADJEnvironmentSandbox
+        let environment = ADJEnvironmentSandbox
         #else
-            let environment = ADJEnvironmentProduction
+        let environment = ADJEnvironmentProduction
         #endif
         
         let adjustConfig = ADJConfig(appToken: "hlqdgtbmrdb9", environment: environment)
         Adjust.appDidLaunch(adjustConfig)
     }
     
+    private func configureFireBase() {
+        var filePath: String?
+        #if ENTERPRISE
+        filePath = Bundle.main.path(forResource: "GoogleService-Info-ent", ofType: "plist")
+        #elseif APPSTORE
+        filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
+        #endif
+        guard let filePathUnwraped = filePath,
+            let options = FirebaseOptions(contentsOfFile: filePathUnwraped) else {
+                FirebaseApp.configure()
+                return
+        }
+        FirebaseApp.configure(options: options)
+    }
+    
     // MARK: - Events
+    
     func track(event: AnalyticsEvent) {
         logAdjustEvent(name: event.token)
         logFacebookEvent(name: FBSDKAppEventNameViewedContent, parameters: [FBSDKAppEventParameterNameContent: event.facebookEventName])

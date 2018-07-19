@@ -81,3 +81,65 @@ enum AnalyticsEvent {
         }
     }
 }
+
+enum AnalyticsAppScreens {
+    ///authorization
+    case splashScreen
+    case welcomeScreen
+    case tutorial
+    case loginScreen
+    case signUpScreen
+    case termsAndServices
+    case phoneVerefication
+    case autosyncSettings
+    ///Main Screens
+    case homePage
+    case photosAndVideos
+    case music
+    case documents
+    ///HomePage cards And adjusted Screens
+    case freeAppSpace
+    case filterCard
+    case allFiles
+    case favorites
+    case contactSync
+    case useCamera
+    case upload
+    case createStory ///do we need every step?
+    case newFolder
+    case search
+    case uploadFromLifeBox
+    case allFilesFolder
+    ///Albums
+    case albums
+    case myStories
+    case album(String)///specific album
+    ///FaceImageRecognition
+    case peopleFIR
+    case thingsFIR
+    case placesFIR
+    case FIR(String)///specific album
+    ///Settings
+    case importPhotos
+    case settingsFIR
+    case activityTimeline
+    case usageInfo
+    case packages
+    case lifeBoxTouchId
+    case turkcellSecurity
+    case FAQ
+    case contactUS
+    case profileEdit
+    ///Previews
+    case photoPreview
+    case videoPreview
+    case musicPlayerFull
+    case documentPreview
+    ///Misc
+    case info//some information about the file?
+    
+    case share//???? or it should be other enum
+    
+    case move//some information about the file?
+    
+}
