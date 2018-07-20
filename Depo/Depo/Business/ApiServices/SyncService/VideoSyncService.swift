@@ -90,7 +90,7 @@ extension VideoSyncService: BackgroundTaskServiceDelegate {
 
 extension VideoSyncService: ItemOperationManagerViewProtocol {
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
-        return true
+        return object is VideoSyncService
     }
     
     func finishedUploadFile(file: WrapData) {
