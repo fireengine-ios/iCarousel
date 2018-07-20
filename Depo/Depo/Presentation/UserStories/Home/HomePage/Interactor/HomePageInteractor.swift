@@ -19,10 +19,10 @@ class HomePageInteractor: HomePageInteractorInput {
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
-        getAllCardsForHomePage()   
+        getAllCardsForHomePage()
     }
     
-    func setupAutoSyncTriggering() {
+    private func setupAutoSyncTriggering() {
         SyncServiceManager.shared.updateImmediately()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(checkAutoSync),
@@ -30,7 +30,7 @@ class HomePageInteractor: HomePageInteractorInput {
                                                object: nil)
     }
     
-    @objc func checkAutoSync() {
+    @objc private func checkAutoSync() {
         SyncServiceManager.shared.updateImmediately()
     }
     
