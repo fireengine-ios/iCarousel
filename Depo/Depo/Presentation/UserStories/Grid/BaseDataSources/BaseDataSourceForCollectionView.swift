@@ -1670,13 +1670,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             
             DispatchQueue.toMain {
+                ///change performBatchUpdates to the reladData() in case of crash
                 self.collectionView?.performBatchUpdates({
                     self.allItems = newArray
                     self.collectionView?.reloadItems(at: recentlyUpdatedIndexes)
                     self.collectionView?.deleteItems(at: recentlyDeletedIndexes)
                     self.collectionView?.deleteSections(recentlyDeletedSections)
                     
-                }, completion: { finished in
+                }, completion: { _ in
                     //update folder items count
                     if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
                         self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
