@@ -30,10 +30,7 @@ protocol BaseAsyncOperationInteractorOutput {
 class BasePresenter: BaseAsyncOperationInteractorOutput {
     
     func startCancelableAsync(cancel: @escaping VoidHandler) {
-        outputView()?.showSpinerWithCancelClosure {
-            UploadService.default.cancelSyncToUseOperations()
-            cancel()
-        }
+        outputView()?.showSpinerWithCancelClosure(cancel)
     }
     
     func outputView() -> Waiting? {
