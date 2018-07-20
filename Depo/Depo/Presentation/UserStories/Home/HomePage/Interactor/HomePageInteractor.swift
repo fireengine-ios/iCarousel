@@ -19,9 +19,7 @@ class HomePageInteractor: HomePageInteractorInput {
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
-        getAllCardsForHomePage()
-        
-        
+        getAllCardsForHomePage()   
     }
     
     func setupAutoSyncTriggering() {
