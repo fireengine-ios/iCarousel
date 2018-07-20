@@ -123,7 +123,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
-    private var recentlyDeletedIndexes = [IndexPath]()
     private var pageLeftOvers = [WrapData]()
     private var emptyMetaItems = [WrapData]()
     
@@ -1642,40 +1641,56 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 
             var newArray = [[WrapData]]()
             
-            for array in self.allItems {
+            var recentlyUpdatedIndexes = [IndexPath]()
+            var recentlyDeletedIndexes = [IndexPath]()
+            var recentlyDeletedSections =  IndexSet()
+            
+            for (index, array) in self.allItems.enumerated() {
                 var newSectionArray = [WrapData]()
                 for object in array {
                     
                     if let index = idsForRemove.index(of: object.getLocalID()) {
                         self.allMediaItems.remove(object)
                         idsForRemove.remove(at: index)
-                        self.recentlyDeletedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))///FOR now like that, in future = it should be called after with whole array
+                        recentlyDeletedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))///FOR now like that, in future = it should be called after with whole array
                         continue
                     }
                     if let obj = objectsForReplaceDict[object.uuid] {
                         newSectionArray.append(obj)
+                        recentlyUpdatedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))
                         continue
                     }
                     newSectionArray.append(object)
                 }
                 if !newSectionArray.isEmpty {
                     newArray.append(newSectionArray)
+                } else {
+                    recentlyDeletedSections.insert(index)
                 }
             }
             
-            DispatchQueue.main.async {
-                self.allItems = newArray
-                
-                //update folder items count
-                if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
-                    self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
-                }
-                
-                self.recentlyDeletedIndexes.removeAll()
-                self.collectionView?.reloadData()
-                self.delegate?.didDelete(items: items)
-                
-                self.updateCoverPhoto()
+            DispatchQueue.toMain {
+                ///change performBatchUpdates to the reladData() in case of crash
+                self.collectionView?.performBatchUpdates({
+                    self.allItems = newArray
+                    self.collectionView?.reloadItems(at: recentlyUpdatedIndexes)
+                    self.collectionView?.deleteItems(at: recentlyDeletedIndexes)
+                    self.collectionView?.deleteSections(recentlyDeletedSections)
+                    
+                }, completion: { _ in
+                    //update folder items count
+                    if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
+                        self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
+                    }
+                    
+                    recentlyDeletedIndexes.removeAll()
+                    recentlyDeletedSections.removeAll()
+                    recentlyUpdatedIndexes.removeAll()
+                    
+                    self.delegate?.didDelete(items: items)
+                    
+                    self.updateCoverPhoto()
+                })
             }
         }
     }
