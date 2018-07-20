@@ -408,26 +408,28 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        fileService.cancellableUpload(items: items,
-                                      toPath: "",
-                                      success: succesAction(elementType: .sync),
-                                      fail: failAction(elementType: .sync),
-                                      returnedUploadOperations: { [weak self] (operations) in
-                                        guard let operations = operations, !operations.isEmpty else {
-                                            return
-                                        }
-                                        self?.output?.startCancelableAsync {
-                                            UploadService.default.cancelUploadOperations(operations: operations)
-                                            DispatchQueue.toMain {
-                                                self?.output?.completeAsyncOperationEnableScreen()
+        if router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+            fileService.cancellableUpload(items: items,
+                                          toPath: "",
+                                          success: succesAction(elementType: .sync),
+                                          fail: failAction(elementType: .sync),
+                                          returnedUploadOperations: { [weak self] (operations) in
+                                            guard let operations = operations, !operations.isEmpty else {
+                                                return
                                             }
-                                        }
-                                        
-        })
-    
-//        fileService.upload(items: item, toPath: "",
-//                           success: succesAction(elementType: .sync),
-//                           fail: failAction(elementType: .sync))
+                                            self?.output?.startCancelableAsync {
+                                                UploadService.default.cancelUploadOperations(operations: operations)
+                                                DispatchQueue.toMain {
+                                                    self?.output?.completeAsyncOperationEnableScreen()
+                                                }
+                                            }
+                                            
+            })
+        } else {
+            fileService.upload(items: items, toPath: "",
+                               success: succesAction(elementType: .sync),
+                               fail: failAction(elementType: .sync))
+        }
     }
     
     func download(item: [BaseDataSourceItem]) {
