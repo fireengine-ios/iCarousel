@@ -404,13 +404,32 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func sync(item: [BaseDataSourceItem]) {
-        guard let item = item as? [Item] else { //FIXME: transform all to BaseDataSourceItem
+        guard let items = item as? [Item] else { //FIXME: transform all to BaseDataSourceItem
             return
         }
         
-        fileService.upload(items: item, toPath: "",
-                           success: succesAction(elementType: .sync),
-                           fail: failAction(elementType: .sync))
+        if router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+            fileService.cancellableUpload(items: items,
+                                          toPath: "",
+                                          success: succesAction(elementType: .sync),
+                                          fail: failAction(elementType: .sync),
+                                          returnedUploadOperations: { [weak self] (operations) in
+                                            guard let operations = operations, !operations.isEmpty else {
+                                                return
+                                            }
+                                            self?.output?.startCancelableAsync {
+                                                UploadService.default.cancelUploadOperations(operations: operations)
+                                                DispatchQueue.toMain {
+                                                    self?.output?.completeAsyncOperationEnableScreen()
+                                                }
+                                            }
+                                            
+            })
+        } else {
+            fileService.upload(items: items, toPath: "",
+                               success: succesAction(elementType: .sync),
+                               fail: failAction(elementType: .sync))
+        }
     }
     
     func download(item: [BaseDataSourceItem]) {
@@ -635,7 +654,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         fileService.syncItemsIfNeeded(items, success: successClosure, fail: failClosure, syncOperations: {[weak self] syncOperations in
             let operations = syncOperations
             if operations != nil {
-                self?.output?.startCancelableAsync(cancel: cancel)
+                self?.output?.startCancelableAsync {
+                    UploadService.default.cancelSyncToUseOperations()
+                    cancel()
+                }
             }
         })
         

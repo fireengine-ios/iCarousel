@@ -664,3 +664,4 @@
 "We couldn’t find anything on your Lifebox yet." = "We couldn’t find any things in your lifebox yet.";
 "Expiration Date: %@" = "Expiration Date: %@";
 "Failed to get albums" = "Failed to get albums";
+"To deactivate lifebox 25GB please send SMS with the text \"Stop1\", for lifebox 100GB please send SMS with the text \"Stop2\", for lifebox 500GB please send SMS with the text \"Stop3\" to the number 6767" = "To deactivate lifebox 25GB please send SMS with the text \"Stop1\", for lifebox 100GB please send SMS with the text \"Stop2\", for lifebox 500GB please send SMS with the text \"Stop3\" to the number 6767";

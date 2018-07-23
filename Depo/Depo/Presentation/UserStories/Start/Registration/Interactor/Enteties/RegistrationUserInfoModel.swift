@@ -10,4 +10,6 @@ struct RegistrationUserInfoModel {
     let mail: String
     let phone: String
     let password: String
+    let captchaID: String?
+    let captchaAnswer: String?
 }

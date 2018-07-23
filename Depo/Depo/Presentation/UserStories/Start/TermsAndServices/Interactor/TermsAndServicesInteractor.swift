@@ -60,7 +60,12 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             let eulaId = eula?.id
             else { return }
         
-        let signUpUser = SignUpUser(phone: sigUpInfo.phone, mail: sigUpInfo.mail, password: sigUpInfo.password, eulaId: eulaId)
+        let signUpUser = SignUpUser(phone: sigUpInfo.phone,
+                                    mail: sigUpInfo.mail,
+                                    password: sigUpInfo.password,
+                                    eulaId: eulaId,
+                                    captchaID: sigUpInfo.captchaID,
+                                    captchaAnswer: sigUpInfo.captchaAnswer)
         
         authenticationService.signUp(user: signUpUser, sucess: { [weak self] result in
             DispatchQueue.main.async {

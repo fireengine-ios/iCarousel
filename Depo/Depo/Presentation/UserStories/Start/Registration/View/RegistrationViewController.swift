@@ -34,10 +34,18 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
     
     @IBOutlet weak var errorLabel: UILabel!
 
+    @IBOutlet weak var captchaContainer: UIView!
+    
+    @IBOutlet weak var captchaContainerHeightConstraint: NSLayoutConstraint!
+    
+    private var captchaController: CaptchaViewController?
+    
     private var originBottomH: CGFloat = -1
     private var originSpaceBetweenNextButtonAndTable: CGFloat = -1
     
     private let erroredSpaceBetweenNextButtonAndTable: CGFloat = 20
+    
+    private let captchaContainerHeight: CGFloat = 150
     
     // MARK: Life cycle
     
@@ -106,10 +114,24 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
                                                selector: #selector(hideKeyboard),
                                                name: NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
+        view.layoutSubviews()
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
         return .clear
+    }
+    
+    func setupCaptchaVC(captchaVC: CaptchaViewController) {
+        captchaContainerHeightConstraint.constant = captchaContainerHeight
+        captchaController = captchaVC
+        captchaContainer.addSubview(captchaVC.view)
+        
+        
+        setupConstraintsForCaptchaVC()
+    }
+    
+    private func setupConstraintsForCaptchaVC() {
+        captchaController?.view.frame = captchaContainer.bounds
     }
     
     func showErrorTitle(withText: String) {
@@ -125,10 +147,6 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
     func changeErrorLabelAppearance(status: Bool) {
         if status {
             hideKeyboardAndPicker()
-//            spaceBetweenNextButtonAndTable.constant = erroredSpaceBetweenNextButtonAndTable
-            
-//            let point = CGPoint(x: 0, y: 0)
-//            scrollView.setContentOffset(point, animated: true)
         } else {
             errorLabel.text = ""
         }
@@ -335,7 +353,7 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
     }
     
     func collectInputedUserInfo() {
-        output.collectedUserInfo(email: getTextFieldValue(forRow: 1), code: dataSource.currentGSMCode, phone: getTextFieldValue(forRow: 0), password: getTextFieldValue(forRow: 2), repassword: getTextFieldValue(forRow: 3))
+        output.collectedUserInfo(email: getTextFieldValue(forRow: 1), code: dataSource.currentGSMCode, phone: getTextFieldValue(forRow: 0), password: getTextFieldValue(forRow: 2), repassword: getTextFieldValue(forRow: 3), captchaID: captchaController?.getCaptchaID(), captchaAnswer: captchaController?.getCaptchaAnswer())
     }
     
     

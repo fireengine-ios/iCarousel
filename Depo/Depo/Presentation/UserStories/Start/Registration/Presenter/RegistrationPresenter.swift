@@ -17,16 +17,19 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     // MARK: - View output
     func viewIsReady() {
         //request info here
-        interactor.prepareModels()
-        interactor.requestGSMCountryCodes()
+        startAsyncOperation()
+        interactor.checkCaptchaRequerement()
     }
 
     func nextButtonPressed() {
         view.collectInputedUserInfo()
     }
     
-    func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String) {
-        interactor.validateUserInfo(email: email.replacingOccurrences(of: " ", with: ""), code: code, phone: phone, password: password, repassword: repassword)
+    func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?) {
+        interactor.validateUserInfo(email: email.replacingOccurrences(of: " ", with: ""),
+                                    code: code, phone: phone,
+                                    password: password, repassword: repassword,
+                                    captchaID: captchaID, captchaAnswer: captchaAnswer)
     }
     
     func infoButtonGotPressed(with type: UserValidationResults) {
@@ -42,7 +45,7 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
         view.setupPicker(withModels: models)
     }
     
-    func userValid(email: String, phone: String, passpword: String) {
+    func userValid(email: String, phone: String, passpword: String, captchaID: String?, captchaAnswer: String?) {
         router.termsAndServices(with: view, email: email)
     }
     
@@ -99,6 +102,19 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
             return
         }
         UIApplication.showErrorAlert(message: text)
+    }
+    
+    func captchaRequred(requred: Bool) {
+        interactor.prepareModels()
+        interactor.requestGSMCountryCodes()
+        if requred, let captchaVC = router.getCapcha() {
+            view.setupCaptchaVC(captchaVC: captchaVC)
+        }
+        asyncOperationSucces()
+    }
+    
+    func captchaRequredFailed() {
+        asyncOperationSucces()
     }
     
     // MARK: BasePresenter

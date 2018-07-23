@@ -14,7 +14,7 @@ protocol LoginRouterInput {
     
     func goToHomePage()
     
-    func getCapcha() -> CaptchaViewController
+    func getCapcha() -> CaptchaViewController?
     
     func goToTermsAndServices()
     

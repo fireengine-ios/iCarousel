@@ -12,6 +12,8 @@
 BUNDLE_ID = 'by.come.life.Lifebox'
 APP_NAME = 'lifebox-LIFE'
 SCHEME = "Depo_LifeTech"
+PROJECT = "Depo.xcodeproj"
+TARGET = "Depo_LifeTech"
 BUILD_FOLDER_NAME = "builds"
 # TEAM_ID = ""
 # DEV_NAME = "" #mayby need Team Name
@@ -20,7 +22,7 @@ TYPES = ["development", "appstore", "adhoc"]
 CONFIGS = ["debug", "release", "adhoc"]
 
 # If you want to automatically update fastlane if a new version is available:
-#update_fastlane
+# update_fastlane
 
 # This is the minimum version number required.
 fastlane_version "2.19.1"
@@ -29,9 +31,16 @@ default_platform :ios
 
 platform :ios do
 
-  lane :beta do
+  lane :beta_diawi do
     my_gym(config: "adhoc")
     diawi
+  end
+
+  lane :beta_fabric do
+    my_gym(config: "adhoc")
+    fabric
+    slack_post
+    notify_about_completion
   end
 
 
@@ -67,6 +76,9 @@ platform :ios do
     )
   end
 
+  
+  #--------------- distribute ---------------
+
   # https://dashboard.diawi.com/docs/apis/upload
   lane :diawi do
     ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
@@ -81,6 +93,45 @@ platform :ios do
       " -F \"wall_of_apps=0\""\
       " -F \"callback_emails=zdaecq@gmail.com\""
     )
+  end
+
+  desc "Distribute build via Fabric"
+  lane :fabric do
+    ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
+    filePath = "#{File.expand_path("..", Dir.pwd)}/#{BUILD_FOLDER_NAME}/#{APP_NAME}.ipa"
+
+    crashlytics(
+      api_token: "74412d8a38e9c5b44ca9993298b0ec4cba26289b",
+      build_secret: "23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388",
+      ipa_path: filePath,
+      emails: ["lifetechqa@icloud.com",
+          "lifetechqa2@gmail.com",
+          "lifetechqa4@icloud.com",
+          "lifetechqa5@icloud.com", 
+          "6257515test@gmail.com"]
+    )
+  end
+
+
+  #--------------- notify ---------------
+
+  desc "Post message to the #lifebox-ios-firengine slack channel"
+  lane :slack_post do
+    version = get_build_number_from_plist(xcodeproj: PROJECT, target: TARGET)
+    slack(
+      message: "Build #{version} successfully released!",
+      success: true,
+      slack_url: "https://hooks.slack.com/services/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", #lifebox-ios-firengine
+      payload: { 
+        "Build Date" => Time.new.to_s
+      },
+      default_payloads: []
+    )
+  end
+
+  lane :notify_about_completion do
+    version = get_build_number_from_plist(xcodeproj: PROJECT, target: TARGET)
+    notification(subtitle: "Build distribution is finished", message: "#{version}")
   end
 
 end
