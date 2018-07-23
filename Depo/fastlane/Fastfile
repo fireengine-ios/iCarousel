@@ -98,8 +98,6 @@ platform :ios do
   desc "Distribute build via Fabric"
   lane :fabric do
     ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
-    # time = Time.new
-    diawiToken = 'rvA4lMxATOqmygUZmMgM7n5vchCnDkb5TJuZnVSibZ'
     filePath = "#{File.expand_path("..", Dir.pwd)}/#{BUILD_FOLDER_NAME}/#{APP_NAME}.ipa"
 
     crashlytics(

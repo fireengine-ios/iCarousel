@@ -80,8 +80,10 @@ final class VideoSyncService: ItemSyncServiceImpl {
 extension VideoSyncService: BackgroundTaskServiceDelegate {
     func backgroundTaskWillExpire() {
         if status == .executing, ReachabilityService().isReachableViaWWAN, !lastInterruptedItemsUUIDs.isEmpty {
-            debugLog("interrupted_queue_items")
             storageVars.interruptedSyncVideoQueueItems = lastInterruptedItemsUUIDs
+            debugLog("Interrupted autosync queue:")
+            CoreDataStack.default.allLocalItems(trimmedLocalIds: lastInterruptedItemsUUIDs)
+                .forEach { debugLog($0.name ?? "") }
             stop()
         }
     }
