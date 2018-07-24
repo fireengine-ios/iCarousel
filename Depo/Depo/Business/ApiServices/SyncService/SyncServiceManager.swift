@@ -95,13 +95,13 @@ class SyncServiceManager {
         
         subscribeForNotifications()
         
-        lastAutoSyncTime = NSDate().timeIntervalSince1970
+        lastAutoSyncTime = Date().timeIntervalSince1970
     }
     
     func updateImmediately() {
         debugLog("SyncServiceManager updateImmediately")
         
-        lastAutoSyncTime = NSDate().timeIntervalSince1970
+        lastAutoSyncTime = Date().timeIntervalSince1970
         if !hasExecutingSync, !hasPrepairingSync {
             checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
         }
@@ -110,7 +110,7 @@ class SyncServiceManager {
     func updateInBackground() {
         debugLog("SyncServiceManager updateInBackground")
         
-        let time = NSDate().timeIntervalSince1970
+        let time = Date().timeIntervalSince1970
         if time - lastAutoSyncTime > timeIntervalBetweenSyncsInBackground {
             BackgroundTaskService.shared.beginBackgroundTask()
             lastAutoSyncTime = time
