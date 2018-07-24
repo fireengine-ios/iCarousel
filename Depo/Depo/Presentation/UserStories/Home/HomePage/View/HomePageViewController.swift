@@ -97,6 +97,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     
     deinit {
         CardsManager.default.removeViewForNotification(view: homePageDataSource)
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - SearchBarButtonPressed

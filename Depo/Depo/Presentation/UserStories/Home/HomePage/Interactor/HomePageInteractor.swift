@@ -16,10 +16,23 @@ class HomePageInteractor: HomePageInteractorInput {
     
     func homePagePresented() {
         FreeAppSpace.default.checkFreeAppSpace()
-        SyncServiceManager.shared.updateImmediately()
+        setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
         getAllCardsForHomePage()
+    }
+    
+    private func setupAutoSyncTriggering() {
+        SyncServiceManager.shared.setupAutosync()
+        SyncServiceManager.shared.updateImmediately()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(checkAutoSync),
+                                               name: .UIApplicationWillEnterForeground,
+                                               object: nil)
+    }
+    
+    @objc private func checkAutoSync() {
+        SyncServiceManager.shared.updateImmediately()
     }
     
     func needRefresh() {

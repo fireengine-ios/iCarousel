@@ -16,9 +16,14 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios beta
+### ios beta_diawi
 ```
-fastlane ios beta
+fastlane ios beta_diawi
+```
+
+### ios beta_fabric
+```
+fastlane ios beta_fabric
 ```
 
 ### ios my_gym
@@ -29,6 +34,21 @@ Create ipa
 ### ios diawi
 ```
 fastlane ios diawi
+```
+
+### ios fabric
+```
+fastlane ios fabric
+```
+Distribute build via Fabric
+### ios slack_post
+```
+fastlane ios slack_post
+```
+Post message to the #lifebox-ios-firengine slack channel
+### ios notify_about_completion
+```
+fastlane ios notify_about_completion
 ```
 
 
