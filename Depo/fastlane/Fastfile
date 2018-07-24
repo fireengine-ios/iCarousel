@@ -107,7 +107,8 @@ platform :ios do
       emails: ["lifetechqa@icloud.com",
           "lifetechqa2@gmail.com",
           "lifetechqa4@icloud.com",
-          "lifetechqa5@icloud.com", 
+          "lifetechqa5@icloud.com",
+          "lifetechqa6@icloud.com", 
           "6257515test@gmail.com"]
     )
   end

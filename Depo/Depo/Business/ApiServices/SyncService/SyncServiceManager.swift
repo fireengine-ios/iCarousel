@@ -90,14 +90,21 @@ class SyncServiceManager {
         checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
     }
     
-    func updateImmediately() {
-        debugLog("SyncServiceManager updateImmediately")
+    func setupAutosync() {
+        debugLog("SyncServiceManager setupAutosync")
         
         subscribeForNotifications()
         
         lastAutoSyncTime = NSDate().timeIntervalSince1970
+    }
+    
+    func updateImmediately() {
+        debugLog("SyncServiceManager updateImmediately")
         
-        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+        lastAutoSyncTime = NSDate().timeIntervalSince1970
+        if !hasExecutingSync, !hasPrepairingSync {
+            checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+        }
     }
     
     func updateInBackground() {
