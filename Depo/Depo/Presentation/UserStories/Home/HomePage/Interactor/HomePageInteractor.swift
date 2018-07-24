@@ -23,6 +23,7 @@ class HomePageInteractor: HomePageInteractorInput {
     }
     
     private func setupAutoSyncTriggering() {
+        SyncServiceManager.shared.setupAutosync()
         SyncServiceManager.shared.updateImmediately()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(checkAutoSync),
