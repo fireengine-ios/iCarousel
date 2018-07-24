@@ -2366,6 +2366,12 @@
 		8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */; };
 		8C2924C3205A4B1B005E40C9 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
 		8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
+		8C3930EF2100668300C1D82D /* GoogleService-Info-ent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */; };
+		8C3930F02100668300C1D82D /* GoogleService-Info-ent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */; };
+		8C3930F12100668300C1D82D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EE2100668300C1D82D /* GoogleService-Info.plist */; };
+		8C3930F22100668300C1D82D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EE2100668300C1D82D /* GoogleService-Info.plist */; };
+		8C3930F42100845A00C1D82D /* GTM-PQHPKGM.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930F32100845A00C1D82D /* GTM-PQHPKGM.json */; };
+		8C3930F52100845A00C1D82D /* GTM-PQHPKGM.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930F32100845A00C1D82D /* GTM-PQHPKGM.json */; };
 		8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */; };
 		8C4E8D041FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */; };
 		8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54083E1F61C03B00D4717A /* GridListTopBar.swift */; };
@@ -4870,6 +4876,9 @@
 		8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUserInputCellView.swift; sourceTree = "<group>"; };
 		8C28D27B1FC59C260098FE89 /* Depo_LifeTech copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Depo_LifeTech copy-Info.plist"; path = "/Users/aleksandr_life/Repos/stash/lifebox-ios-new/Depo/Depo_LifeTech copy-Info.plist"; sourceTree = "<absolute>"; };
 		8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPhoneMailCell.xib; sourceTree = "<group>"; };
+		8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-ent.plist"; sourceTree = "<group>"; };
+		8C3930EE2100668300C1D82D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8C3930F32100845A00C1D82D /* GTM-PQHPKGM.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "GTM-PQHPKGM.json"; sourceTree = "<group>"; };
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
 		8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewSwitchCell.swift; sourceTree = "<group>"; };
 		8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewSwitchCell.xib; sourceTree = "<group>"; };
@@ -5833,6 +5842,7 @@
 		051E1DFD19CAC2F900FD1E03 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				8C3930EA2100668300C1D82D /* googleAnalytics */,
 				CE6FBFBB1FB2DC3F008FC18C /* AppDelegate.swift */,
 				7CDB43341F86678D00789FA6 /* AppConfigurator.swift */,
 				7C121F0A20874BCE00AA585F /* AppMigrator.swift */,
@@ -9274,6 +9284,32 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		8C3930EA2100668300C1D82D /* googleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				8C3930F32100845A00C1D82D /* GTM-PQHPKGM.json */,
+				8C3930EB2100668300C1D82D /* Ent_iOS */,
+				8C3930ED2100668300C1D82D /* Store_iOS */,
+			);
+			path = googleAnalytics;
+			sourceTree = "<group>";
+		};
+		8C3930EB2100668300C1D82D /* Ent_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */,
+			);
+			path = Ent_iOS;
+			sourceTree = "<group>";
+		};
+		8C3930ED2100668300C1D82D /* Store_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8C3930EE2100668300C1D82D /* GoogleService-Info.plist */,
+			);
+			path = Store_iOS;
+			sourceTree = "<group>";
+		};
 		8C54083D1F61C00400D4717A /* TopBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -12670,6 +12706,7 @@
 				8C06B0372008AD71003D8E05 /* Orta@2x.png in Resources */,
 				8C0E904B1FDEBDFF00789C91 /* CustomNavBar~ipad.xib in Resources */,
 				8C06B0832008AD71003D8E05 /* paylas_mail.png in Resources */,
+				8C3930F02100668300C1D82D /* GoogleService-Info-ent.plist in Resources */,
 				8C0E904C1FDEBDFF00789C91 /* Images.xcassets in Resources */,
 				8C0E904D1FDEBDFF00789C91 /* IntroduceViewController.xib in Resources */,
 				8C06AF9B2008AD71003D8E05 /* filtre_selected@3x.png in Resources */,
@@ -12691,6 +12728,7 @@
 				8C0E904F1FDEBDFF00789C91 /* ImportPhotosViewController.xib in Resources */,
 				8C06B1632008AD72003D8E05 /* toolbar_ciz_icon@3x.png in Resources */,
 				8C06B1752008AD72003D8E05 /* toolbar_undo_icon@3x.png in Resources */,
+				8C3930F52100845A00C1D82D /* GTM-PQHPKGM.json in Resources */,
 				8C06B19F2008AD72003D8E05 /* yesil@2x.png in Resources */,
 				8C06B08F2008AD71003D8E05 /* paylas_whatsapp.png in Resources */,
 				C62239B6204976E40043ED44 /* FaceImagePhotosViewController.xib in Resources */,
@@ -12752,6 +12790,7 @@
 				8C06B0B72008AD71003D8E05 /* rotation.png in Resources */,
 				8C06B0192008AD71003D8E05 /* kup_selected.png in Resources */,
 				8C06AF712008AD70003D8E05 /* duz_siyah.png in Resources */,
+				8C3930F22100668300C1D82D /* GoogleService-Info.plist in Resources */,
 				8C06AF552008AD70003D8E05 /* cropy_icon@3x.png in Resources */,
 				8C06B08D2008AD71003D8E05 /* paylas_twitter@3x.png in Resources */,
 				8C06B0492008AD71003D8E05 /* oval_siyah@2x.png in Resources */,
@@ -13274,6 +13313,7 @@
 				7C257B3A20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */,
 				8C06AFF22008AD71003D8E05 /* kirmizi@2x.png in Resources */,
 				8C06B07E2008AD71003D8E05 /* paylas_linkedin@2x.png in Resources */,
+				8C3930EF2100668300C1D82D /* GoogleService-Info-ent.plist in Resources */,
 				8C06AFF42008AD71003D8E05 /* kirmizi@3x.png in Resources */,
 				8C06B1D42008AD72003D8E05 /* Turkcell_Satura_Bold.ttf in Resources */,
 				CEAE3FEE1EFD517300A405B2 /* CustomNavBar~ipad.xib in Resources */,
@@ -13295,6 +13335,7 @@
 				8C06B0E82008AD72003D8E05 /* sample_yellow@3x.png in Resources */,
 				CECD4E4D1FDFD69500978BE7 /* PopUpController.xib in Resources */,
 				8C06B0C22008AD71003D8E05 /* sag_ok@2x.png in Resources */,
+				8C3930F42100845A00C1D82D /* GTM-PQHPKGM.json in Resources */,
 				8C06AF702008AD70003D8E05 /* duz_siyah.png in Resources */,
 				8C06AFFE2008AD71003D8E05 /* kontrast_secili@3x.png in Resources */,
 				8C06AF9C2008AD71003D8E05 /* focus.png in Resources */,
@@ -13356,6 +13397,7 @@
 				8C06B0722008AD71003D8E05 /* paylas_fb@2x.png in Resources */,
 				CE2F561F1F7552A900F49DA1 /* PackagesViewController.xib in Resources */,
 				8C06B0F22008AD72003D8E05 /* serbest_cizgi_selected.png in Resources */,
+				8C3930F12100668300C1D82D /* GoogleService-Info.plist in Resources */,
 				8C06AFA22008AD71003D8E05 /* frame.png in Resources */,
 				873204F11FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib in Resources */,
 				8C06AF062008AD70003D8E05 /* check-mark.png in Resources */,
@@ -13615,6 +13657,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
@@ -13630,6 +13673,7 @@
 				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/XYPieChart/XYPieChart.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -13641,6 +13685,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
@@ -13656,6 +13701,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XYPieChart.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -13708,6 +13754,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
@@ -13723,6 +13770,7 @@
 				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/XYPieChart/XYPieChart.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -13734,6 +13782,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
@@ -13749,6 +13798,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XYPieChart.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

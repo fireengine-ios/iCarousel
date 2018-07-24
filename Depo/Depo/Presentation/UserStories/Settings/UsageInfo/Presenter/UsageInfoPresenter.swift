@@ -20,6 +20,7 @@ class UsageInfoPresenter: BasePresenter {
 // MARK: - UsageInfoViewOutput
 extension UsageInfoPresenter: UsageInfoViewOutput {
     func viewIsReady() {
+        interactor.trackScreen()
     }
     
     func viewWillAppear() {

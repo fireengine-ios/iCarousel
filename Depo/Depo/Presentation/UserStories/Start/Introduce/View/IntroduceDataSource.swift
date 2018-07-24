@@ -8,10 +8,15 @@
 
 import UIKit
 
+protocol IntroduceDataSourceEventsDelegate: class {
+    func pageChanged(page: Int)
+}
+
 class IntroduceDataSource: NSObject, UIScrollViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControll: UIPageControl!
+    weak var delegate: IntroduceDataSourceEventsDelegate?
     
     func configurateScrollViewWithModels(models: [IntroduceModel]) {
         let w = scrollView.frame.size.width
@@ -47,6 +52,7 @@ class IntroduceDataSource: NSObject, UIScrollViewDelegate {
     }
     
     @objc func valueChanged() {
+        delegate?.pageChanged(page: pageControll.currentPage)
         let page = pageControll.currentPage
         let x = CGFloat(page) * scrollView.frame.size.width
         let rect = CGRect(x: x, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)

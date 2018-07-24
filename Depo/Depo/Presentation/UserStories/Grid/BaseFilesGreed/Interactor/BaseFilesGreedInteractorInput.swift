@@ -34,6 +34,8 @@ protocol BaseFilesGreedInteractorInput {
     
     func getFolder() -> Item?
     
+    func trackScreen()
+    
     var bottomBarConfig: EditingBarConfig? { get set }
     
     var alerSheetMoreActionsConfig: AlertFilesActionsSheetInitialConfig? { get }

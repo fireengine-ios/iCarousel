@@ -15,6 +15,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     private lazy var customProgressHUD = CustomProgressHUD()
     
     func viewIsReady() {
+        interactor.trackScreen()
         view.setupInitialState()
         configure()
         view.setupButtonsInitialState()

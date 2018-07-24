@@ -11,5 +11,5 @@ import Foundation
 protocol IntroduceInteractorInput {
     
     func PrepareModels()
-
+    func trackScreen(pageNum: Int)
 }

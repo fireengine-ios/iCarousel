@@ -17,6 +17,10 @@ class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput, IntroduceIn
         PushNotificationService.shared.openActionScreen()
     }
     
+    func pageChanged(page: Int) {
+        interactor.trackScreen(pageNum: page)
+    }
+    
     func models(models: [IntroduceModel]) {
         view.setupInitialState(models: models)
     }

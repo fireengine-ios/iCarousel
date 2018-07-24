@@ -11,6 +11,7 @@ class PasscodeSettingsInteractor {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
+    private let analyticsManager: AnalyticsService = factory.resolve()
     
     var isEmptyMail: Bool?
     var isTurkcellUser: Bool?
@@ -22,7 +23,11 @@ extension PasscodeSettingsInteractor: PasscodeSettingsInteractorInput {
         biometricsManager.isEnabled = false
         passcodeStorage.clearPasscode()
     }
-        
+    
+    func trackScreen() {
+        analyticsManager.logScreen(screen: .lifeBoxTouchIdPasscode)
+    }
+    
     var biometricsStatus: BiometricsStatus {
         return biometricsManager.status
     }

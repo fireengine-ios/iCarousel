@@ -50,10 +50,10 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
         dataSource.delegate = self
         
         setupTapHandler()
+        analyticsService.logScreen(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
         
         output.viewIsReady()
     }
-    
     
     private func setupTapHandler() {
         let tapHandler = UITapGestureRecognizer(target: self, action: #selector(handle(tap:)))

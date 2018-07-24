@@ -10,9 +10,13 @@ class IntroduceInteractor: IntroduceInteractorInput {
 
     weak var output: IntroduceInteractorOutput!
     let introduceDataStorage = IntroduceDataStorage()
+    private let analyticsManager: AnalyticsService = factory.resolve()
     
     func PrepareModels() {
         output.models(models: self.introduceDataStorage.getModels())
     }
     
+    func trackScreen(pageNum: Int) {
+        analyticsManager.logScreen(screen: .welcomePage(pageNum))
+    }
 }

@@ -21,4 +21,8 @@ class LocalAlbumInteractor: BaseFilesGreedInteractor {
         }
     }
     
+    override func trackScreen() {
+        analyticsManager.logScreen(screen: .upload)
+    }
+    
 }

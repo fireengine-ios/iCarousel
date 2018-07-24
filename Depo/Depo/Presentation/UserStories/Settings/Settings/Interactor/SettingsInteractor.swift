@@ -19,6 +19,8 @@ class SettingsInteractor: SettingsInteractorInput {
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
     
+    private let analyticsManager: AnalyticsService = factory.resolve()
+    
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
@@ -100,5 +102,13 @@ class SettingsInteractor: SettingsInteractorInput {
         let reachability = ReachabilityService()
         let isWiFi = reachability.isReachable
         isWiFi ? onLogout() : output.connectToNetworkFailed()
+    }
+    
+    func trackScreen() {
+        analyticsManager.logScreen(screen: .settings)
+    }
+    
+    func trackPhotoEdit() {
+        analyticsManager.logScreen(screen: .settingsPhotoEdit)
     }
 }

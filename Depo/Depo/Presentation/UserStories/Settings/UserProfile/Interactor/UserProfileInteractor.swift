@@ -12,6 +12,8 @@ class UserProfileInteractor: UserProfileInteractorInput {
     
     weak var userInfo: AccountInfoResponse?
     
+    private let analyticsManager: AnalyticsService = factory.resolve()
+    
     var isTurkcellUser: Bool = false
 
     var statusTurkcellUser: Bool {
@@ -20,6 +22,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
 
     
     func viewIsReady() {
+        analyticsManager.logScreen(screen: .profileEdit)
         guard let userInfo_ = userInfo else {
             return
         }

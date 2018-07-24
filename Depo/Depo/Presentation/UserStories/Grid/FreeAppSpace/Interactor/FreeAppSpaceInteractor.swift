@@ -73,6 +73,10 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
         }
     }
     
+    override func trackScreen() {
+        analyticsManager.logScreen(screen: .freeAppSpace)
+    }
+    
     override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
         if let remoteItems = remoteItems as? FreeAppService {
             remoteItems.clear()

@@ -22,7 +22,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     private let peopleService = PeopleService()
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
-    
+    private let analyticsManager: AnalyticsService = factory.resolve()
     private let accountService = AccountService()
     
     init(remoteItems: RemoteSearchService, recentSearches: RecentSearchesService) {
@@ -191,6 +191,10 @@ class SearchViewInteractor: SearchViewInteractorInput {
     func saveSearch(item: SuggestionObject) {
         recentSearches.addSearch(item: item)
         output?.setRecentSearches(recentSearches.searches)
+    }
+    
+    func trackScreen() {
+        analyticsManager.logScreen(screen: .search)
     }
     
     private func getAlbumItem(forSearchItem item: SuggestionObject) {

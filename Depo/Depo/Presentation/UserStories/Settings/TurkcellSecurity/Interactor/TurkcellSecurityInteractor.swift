@@ -9,6 +9,7 @@
 class TurkcellSecurityInteractor {
     weak var output: TurkcellSecurityInteractorOutput?
     
+    private let analyticsManager: AnalyticsService = factory.resolve()
     var turkcellPassword: Bool?
     var turkcellLogin: Bool?
     
@@ -69,6 +70,10 @@ extension TurkcellSecurityInteractor: TurkcellSecurityInteractorInput {
                 self?.output?.changeTurkcellSecurityFailed(error: error)
             }
         }
+    }
+    
+    func trackScreen() {
+        analyticsManager.logScreen(screen: .turkcellSecurity)
     }
     
     var turkcellPasswordOn: Bool {

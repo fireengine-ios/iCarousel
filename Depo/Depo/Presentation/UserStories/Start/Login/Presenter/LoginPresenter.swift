@@ -27,6 +27,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func viewIsReady() {
         interactor.prepareModels()
+        interactor.trackScreen()
         startAsyncOperation()
         interactor.checkCaptchaRequerement()
     }

@@ -63,6 +63,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func viewIsReady(collectionView: UICollectionView) {
         debugLog("BaseFilesGreedPresenter viewIsReady")
+        interactor.trackScreen()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.updateThreeDots(_:)),

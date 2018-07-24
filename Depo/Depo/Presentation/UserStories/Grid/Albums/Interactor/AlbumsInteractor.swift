@@ -44,6 +44,10 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
         })
     }
     
+    override func trackScreen() {
+        analyticsManager.logScreen(screen: .albums)
+    }
+    
     func onAddPhotosToAlbum(selectedAlbumUUID: String) {
         debugLog("AlbumsInteractor onAddPhotosToAlbum")
 

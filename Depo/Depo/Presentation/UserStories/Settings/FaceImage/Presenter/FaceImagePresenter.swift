@@ -21,6 +21,8 @@ extension FaceImagePresenter: FaceImageViewOutput {
     func viewIsReady() {
         view?.startActivityIndicator()
         
+        interactor.trackScreen()
+        
         interactor.getFaceImageStatus()
     }
     

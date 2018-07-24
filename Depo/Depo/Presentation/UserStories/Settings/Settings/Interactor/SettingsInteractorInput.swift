@@ -18,4 +18,7 @@ protocol SettingsInteractorInput {
     var isTurkcellUser: Bool { get }
     var isEmptyMail: Bool { get }
     func updateUserInfo(mail: String)
+    
+    func trackScreen()
+    func trackPhotoEdit()
 }

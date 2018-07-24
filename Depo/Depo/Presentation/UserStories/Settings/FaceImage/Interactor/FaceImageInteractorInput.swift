@@ -12,4 +12,6 @@ protocol FaceImageInteractorInput: class {
     func getFaceImageStatus()
 
     func changeFaceImageStatus(_ isAllowed: Bool)
+    
+    func trackScreen()
 }
