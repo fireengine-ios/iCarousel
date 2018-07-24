@@ -97,6 +97,7 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
         }){ [weak self] syncOperations in
             if syncOperations != nil, let output = self?.output as? BaseAsyncOperationInteractorOutput {
                 output.startCancelableAsync(cancel: { [weak self] in
+                    UploadService.default.cancelSyncToUseOperations()
                     DispatchQueue.main.async {
                         self?.output.createdStoryFailed(with: ErrorResponse.string(TextConstants.createStoryCancel))
                     }

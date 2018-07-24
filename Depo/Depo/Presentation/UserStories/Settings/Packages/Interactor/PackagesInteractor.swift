@@ -361,13 +361,19 @@ extension PackagesInteractor: PackagesInteractorInput {
                 return nil
             }
             
+            let currency: String
             let priceString: String
             
             if let inAppPurchaseId = subscription.subscriptionPlanInAppPurchaseId,
                 let localizedPrice = iapManager.product(for: inAppPurchaseId)?.localizedPrice {
                 priceString = String(format: TextConstants.offersLocalizedPrice, localizedPrice)
             } else {
-                let currency = getCurrency(for: subscription)
+                if let subscriptionType = subscription.type, subscriptionType == .free {
+                    ///free subscription should have the same currency as account type has
+                    currency = getCurrency(for: accountType)
+                } else {
+                    currency = getCurrency(for: subscription)
+                }
                 priceString = String(format: TextConstants.offersPrice, price, currency)
             }
             

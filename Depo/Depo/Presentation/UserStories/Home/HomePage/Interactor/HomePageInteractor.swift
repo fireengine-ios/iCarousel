@@ -17,7 +17,7 @@ class HomePageInteractor: HomePageInteractorInput {
     
     func homePagePresented() {
         FreeAppSpace.default.checkFreeAppSpace()
-        SyncServiceManager.shared.updateImmediately()
+        setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
         getAllCardsForHomePage()
@@ -25,6 +25,19 @@ class HomePageInteractor: HomePageInteractorInput {
     
     func trackScreen() {
         analyticsService.logScreen(screen: .homePage)
+    }
+    
+    private func setupAutoSyncTriggering() {
+        SyncServiceManager.shared.setupAutosync()
+        SyncServiceManager.shared.updateImmediately()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(checkAutoSync),
+                                               name: .UIApplicationWillEnterForeground,
+                                               object: nil)
+    }
+    
+    @objc private func checkAutoSync() {
+        SyncServiceManager.shared.updateImmediately()
     }
     
     func needRefresh() {
