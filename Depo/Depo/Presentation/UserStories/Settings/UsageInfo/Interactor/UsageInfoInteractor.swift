@@ -8,7 +8,7 @@
 
 class UsageInfoInteractor {
     weak var output: UsageInfoInteractorOutput!
-    fileprivate let analyticsManager: AnalyticsService = factory.resolve()
+    private let analyticsManager: AnalyticsService = factory.resolve()
     private let accountService: AccountServicePrl
 
     init(accountService: AccountServicePrl = AccountService()) {

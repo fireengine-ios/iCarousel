@@ -9,7 +9,7 @@
 class ActivityTimelineInteractor {
     
     weak var output: ActivityTimelineInteractorOutput!
-    fileprivate let analyticsManager: AnalyticsService = factory.resolve()
+    private let analyticsManager: AnalyticsService = factory.resolve()
     private let activityTimelineService: ActivityTimelineService
     private var page = 0
     private let size: Int

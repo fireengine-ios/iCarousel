@@ -249,8 +249,6 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                     analyticsManager.logScreen(screen: .allFiles)
 
                 }
-//                AllFilesService
-//.localStatus(.nonLocal),
             default:
                 break
             }

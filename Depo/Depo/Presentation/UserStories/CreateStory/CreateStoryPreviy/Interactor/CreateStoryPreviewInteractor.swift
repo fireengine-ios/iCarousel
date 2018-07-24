@@ -11,7 +11,7 @@ class CreateStoryPreviewInteractor {
     var story: PhotoStory?
     var responce: CreateStoryResponce?
     var isRequestStarted = false
-    fileprivate let analyticsManager: AnalyticsService = factory.resolve()
+    private let analyticsManager: AnalyticsService = factory.resolve()
 }
 
 // MARK: CreateStoryPreviewInteractorInput

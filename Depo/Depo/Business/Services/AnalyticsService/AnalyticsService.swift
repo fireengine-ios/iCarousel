@@ -33,11 +33,13 @@ final class AnalyticsService {
     
     private func configureFireBase() {
         var filePath: String?
+        
         #if ENTERPRISE
-        filePath = Bundle.main.path(forResource: "GoogleService-Info-ent", ofType: "plist")
+            filePath = Bundle.main.path(forResource: "GoogleService-Info-ent", ofType: "plist")
         #elseif APPSTORE
-        filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
+            filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
         #endif
+        
         guard let filePathUnwraped = filePath,
             let options = FirebaseOptions(contentsOfFile: filePathUnwraped) else {
                 FirebaseApp.configure()

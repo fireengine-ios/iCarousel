@@ -9,7 +9,7 @@
 class TurkcellSecurityInteractor {
     weak var output: TurkcellSecurityInteractorOutput?
     
-    fileprivate let analyticsManager: AnalyticsService = factory.resolve()
+    private let analyticsManager: AnalyticsService = factory.resolve()
     var turkcellPassword: Bool?
     var turkcellLogin: Bool?
     

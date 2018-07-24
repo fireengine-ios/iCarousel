@@ -11,7 +11,7 @@ class PasscodeSettingsInteractor {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
-    fileprivate let analyticsManager: AnalyticsService = factory.resolve()
+    private let analyticsManager: AnalyticsService = factory.resolve()
     
     var isEmptyMail: Bool?
     var isTurkcellUser: Bool?

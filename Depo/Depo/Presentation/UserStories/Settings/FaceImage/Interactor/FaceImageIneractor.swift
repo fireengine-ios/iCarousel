@@ -13,7 +13,7 @@ final class FaceImageInteractor {
     
     private let accountService = AccountService()
 
-    fileprivate let analyticsManager: AnalyticsService = factory.resolve()
+    private let analyticsManager: AnalyticsService = factory.resolve()
     
     private func faceImageAllowed(completion: @escaping (_ result: Bool) -> Void) {
         accountService.faceImageAllowed(success: { [weak self] response in
