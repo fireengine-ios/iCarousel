@@ -13,7 +13,8 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     private var dataStorage = AutoSyncDataStorage()
     private let localMediaStorage = LocalMediaStorage.default
     private lazy var locationManager = LocationManager.shared
-
+    private let analyticsManager: AnalyticsService = factory.resolve()
+    
     func prepareCellModels() {
         let settings = dataStorage.settings
         output.prepaire(syncSettings: settings)
@@ -38,5 +39,9 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
                 self?.output.onCheckPermissions(photoAccessGranted: photoAccessGranted, locationAccessGranted: locationAccessGranted)
             }
         }
+    }
+    
+    func trackScreen() {
+        analyticsManager.logScreen(screen: .autoSyncSettings)
     }
 }

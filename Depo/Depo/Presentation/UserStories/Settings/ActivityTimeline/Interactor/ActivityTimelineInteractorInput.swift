@@ -11,4 +11,5 @@ import Foundation
 protocol ActivityTimelineInteractorInput {
     func refreshTimelineActivities()
     func loadMoreActivities()
+    func trackScreen()
 }

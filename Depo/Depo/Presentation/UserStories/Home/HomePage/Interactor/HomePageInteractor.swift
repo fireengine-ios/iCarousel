@@ -13,6 +13,7 @@ class HomePageInteractor: HomePageInteractorInput {
     
     private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
     private(set) var homeCardsLoaded = false
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     func homePagePresented() {
         FreeAppSpace.default.checkFreeAppSpace()
@@ -20,6 +21,10 @@ class HomePageInteractor: HomePageInteractorInput {
         PushNotificationService.shared.openActionScreen()
         
         getAllCardsForHomePage()
+    }
+    
+    func trackScreen() {
+        analyticsService.logScreen(screen: .homePage)
     }
     
     func needRefresh() {

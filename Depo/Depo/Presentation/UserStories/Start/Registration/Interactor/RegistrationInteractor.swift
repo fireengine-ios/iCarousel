@@ -15,6 +15,10 @@ class RegistrationInteractor: RegistrationInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var captchaService = CaptchaService()
     
+    func trackScreen() {
+        analyticsService.logScreen(screen: .signUpScreen)
+    }
+    
     func prepareModels() {
         output.prepearedModels(models: dataStorage.getModels())
     }

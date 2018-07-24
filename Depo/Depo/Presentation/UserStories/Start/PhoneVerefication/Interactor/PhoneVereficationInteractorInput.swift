@@ -17,6 +17,8 @@ protocol PhoneVereficationInteractorInput {
     
     func authificate(atachedCaptcha: CaptchaParametrAnswer?)
     
+    func trackScreen()
+    
     var remainingTimeInMinutes: Int { get }
     
     var expectedInputLength: Int? { get }

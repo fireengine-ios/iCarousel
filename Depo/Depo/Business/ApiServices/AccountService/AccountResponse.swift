@@ -27,6 +27,7 @@ struct AccountJSONConstants {
     static let url = "url"
     static let otp = "otp"
     static let referenceToken = "referenceToken"
+    static let gapID = "gapId"
     
     static let quotaBytes = "quotaBytes"
     static let quotaExceeded = "quotaExceeded"
@@ -57,6 +58,7 @@ class AccountInfoResponse: ObjectRequestResponse {
     var dob: String?
     var urlForPhoto: URL?
     var projectID: String?
+    var gapId: String?
     
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
@@ -71,7 +73,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         isFavouriteTagAvailable = json?[AccountJSONConstants.isFavouriteTagAvailable].bool
         cellografId = json?[AccountJSONConstants.cellografId].string
         name = json?[AccountJSONConstants.name].string
-        
+        gapId = json?[AccountJSONConstants.gapID].string
         
         ///---changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
         if let actualSurNaame = json?[AccountJSONConstants.surname].string,

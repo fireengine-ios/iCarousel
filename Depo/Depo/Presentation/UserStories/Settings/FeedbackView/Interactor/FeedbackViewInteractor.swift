@@ -9,7 +9,7 @@
 class FeedbackViewInteractor: FeedbackViewInteractorInput {
 
     weak var output: FeedbackViewInteractorOutput!
-        
+    private let analyticsManager: AnalyticsService = factory.resolve()
     func onSend(selectedLanguage: LanguageModel) {
         output.startAsyncOperation()
         
@@ -79,6 +79,10 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
             self?.output.languageRequestSended(text: userInfoString)
         }
 
+    }
+    
+    func trackScreen() {
+        analyticsManager.logScreen(screen: .contactUS)
     }
 
 }

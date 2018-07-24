@@ -14,7 +14,7 @@ class PackagesInteractor {
     private let offersService: OffersService
     private let subscriptionsService: SubscriptionsService
     private let accountService: AccountServicePrl
-    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    fileprivate lazy var analyticsService: AnalyticsService = factory.resolve()
     
     init(offersService: OffersService = OffersServiceIml(),
          subscriptionsService: SubscriptionsService = SubscriptionsServiceIml(),
@@ -99,6 +99,10 @@ extension PackagesInteractor: PackagesInteractorInput {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })
+    }
+    
+    func trackScreen() {
+        analyticsService.logScreen(screen: .packages)
     }
     
     func getAccountType() {

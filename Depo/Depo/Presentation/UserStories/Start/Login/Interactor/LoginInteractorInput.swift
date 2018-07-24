@@ -35,4 +35,6 @@ protocol LoginInteractorInput {
     func updateUserLanguage()
     
     func checkCaptchaRequerement()
+    
+    func trackScreen()
 }

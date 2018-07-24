@@ -53,6 +53,13 @@ final class AnalyticsService {
         logFacebookEvent(name: FBSDKAppEventNameViewedContent, parameters: [FBSDKAppEventParameterNameContent: event.facebookEventName])
     }
     
+    func logScreen(screen: AnalyticsAppScreens) {
+        Analytics.logEvent("screenView", parameters: [
+            "screenName": screen.name,
+            "userId": SingletonStorage.shared.accountInfo?.gapId
+            ])
+    }
+    
     func trackInAppPurchase(product: SKProduct) {
         let name = product.localizedTitle
         let price = product.localizedPrice

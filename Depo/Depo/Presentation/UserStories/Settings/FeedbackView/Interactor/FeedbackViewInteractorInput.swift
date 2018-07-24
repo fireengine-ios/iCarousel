@@ -11,5 +11,5 @@ import Foundation
 protocol FeedbackViewInteractorInput {
 
     func onSend(selectedLanguage: LanguageModel)
-    
+    func trackScreen()
 }

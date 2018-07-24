@@ -23,6 +23,7 @@ class ActivityTimelinePresenter: BasePresenter, ActivityTimelineModuleInput {
 }
 extension ActivityTimelinePresenter: ActivityTimelineViewOutput {
     func viewIsReady() {
+        interactor.trackScreen()
         startAsyncOperation()
         updateForPullToRefresh()
     }

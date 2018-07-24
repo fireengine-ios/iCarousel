@@ -22,4 +22,6 @@ protocol SearchViewInteractorInput {
     func openFaceImageForSuggest(item: SuggestionObject)
     func openFaceImageForSearch(item: BaseDataSourceItem?)
     func saveSearch(item: SuggestionObject)
+    
+    func trackScreen()
 }

@@ -41,6 +41,10 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         dataStorage.signUpUserInfo = userInfo
     }
     
+    func trackScreen() {
+        analyticsService.logScreen(screen: .termsAndServices)
+    }
+    
     var signUpSuccessResponse: SignUpSuccessResponse {
     
         return dataStorage.signUpResponse

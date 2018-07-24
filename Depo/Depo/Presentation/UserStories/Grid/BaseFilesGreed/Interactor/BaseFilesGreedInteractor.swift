@@ -22,6 +22,8 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     
     var isUpdating: Bool = false
     
+    let analyticsManager: AnalyticsService = factory.resolve()
+    
     private var getNextPageRetryCounter: Int = 0
     
     private let numberOfRetries: Int = 3
@@ -216,6 +218,49 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     
     func getFolder() -> Item? {
         return folder
+    }
+    
+    func trackScreen() {
+        guard let originalFilters = originalFilters else {
+            return
+        }
+        for filter in originalFilters {
+            switch filter {
+            case .fileType(let fileType):
+                switch fileType {
+                case .image:
+                    trackPhotoOrVideo(photo: true)
+                case .video:
+                    trackPhotoOrVideo(photo: false)
+                case .audio:
+                    analyticsManager.logScreen(screen: .music)
+                case .allDocs:
+                    analyticsManager.logScreen(screen: .documents)
+                default:
+                    break
+                }
+            case .favoriteStatus(let favoriteStatus):
+                if favoriteStatus == .favorites {
+                    analyticsManager.logScreen(screen: .favorites)
+                }
+            case .localStatus(let localStatus):
+                if localStatus == .nonLocal,
+                    remoteItems is AllFilesService {
+                    analyticsManager.logScreen(screen: .allFiles)
+
+                }
+//                AllFilesService
+//.localStatus(.nonLocal),
+            default:
+                break
+            }
+        }
+    }
+    
+    private func trackPhotoOrVideo(photo: Bool) {
+        if remoteItems is PhotoAndVideoService {
+            analyticsManager.logScreen(screen: photo ? .photos : .videos)
+        }
     }
     
     var bottomBarConfig: EditingBarConfig? {

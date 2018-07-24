@@ -18,4 +18,6 @@ protocol HomePageInteractorInput {
     
     func needCheckQuota()
     
+    func trackScreen()
+    
 }
