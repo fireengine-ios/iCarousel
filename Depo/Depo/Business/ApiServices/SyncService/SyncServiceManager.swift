@@ -222,7 +222,7 @@ class SyncServiceManager {
                 ///we need to stop video sync every time
                 ///to prevent autosync if it was interrupted in the background
                 ///and if network was changed from wifi to cellular
-                videoSyncService.stop()
+//                videoSyncService.stop()
                 let operation = ItemSyncOperation(service: videoSyncService, newItems: newItems)
                 operationQueue.addOperation(operation)
             }

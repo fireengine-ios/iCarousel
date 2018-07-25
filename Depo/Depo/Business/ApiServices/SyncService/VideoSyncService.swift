@@ -24,17 +24,19 @@ final class VideoSyncService: ItemSyncServiceImpl {
 
     override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
         let operation = LocalUnsyncedOperation(service: photoVideoService, fieldValue: .video) { items in
-            let isMobileData = ReachabilityService().isReachableViaWWAN
-            let fileSizeLimit = isMobileData ? NumericConstants.hundredMegabytes : NumericConstants.fourGigabytes
+            ///reversed video sync interruption fix
+//            let isMobileData = ReachabilityService().isReachableViaWWAN
+            let fileSizeLimit = NumericConstants.fourGigabytes //isMobileData ? NumericConstants.hundredMegabytes : NumericConstants.fourGigabytes
             
             completion(items.filter { item in
                 guard item.fileSize < fileSizeLimit else {
                     return false
                 }
                 
-                if isMobileData {
-                     return !self.lastInterruptedItemsUUIDs.contains(item.getTrimmedLocalID())
-                }
+                ///reversed video sync interruption fix
+//                if isMobileData {
+//                     return !self.lastInterruptedItemsUUIDs.contains(item.getTrimmedLocalID())
+//                }
 
                 ///is WIFI
                 return true
