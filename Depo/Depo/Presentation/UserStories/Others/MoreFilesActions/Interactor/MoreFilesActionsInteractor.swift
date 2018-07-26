@@ -408,7 +408,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        if router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+        ///logic is appliable for a ONE syncing item only
+        if let firstItem = items.first, router.getViewControllerForPresent() is PhotoVideoDetailViewController {
             
             let hideHUD = {
                 DispatchQueue.toMain {
@@ -416,7 +417,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 }
             }
             
-            fileService.cancellableUpload(items: items, toPath: "",
+            fileService.cancellableUpload(items: [firstItem], toPath: "",
                                           success: { [weak self] in
                                             hideHUD()
                                             self?.succesAction(elementType: .sync)()
@@ -430,6 +431,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                             }
                                             self?.output?.startCancelableAsync(with: TextConstants.uploading, cancel: {
                                                 UploadService.default.cancelUploadOperations(operations: operations)
+                                                ItemOperationManager.default.cancelledUpload(file: firstItem)
                                             })
                                         })
         } else {
