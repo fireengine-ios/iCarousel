@@ -28,7 +28,7 @@ enum AnalyticsEvent {
     case freeUpSpace
     case setPasscode
     case createStory
-
+    
     var token: String {
         switch self {
         case .signUp: return "ese4q4"
@@ -78,6 +78,168 @@ enum AnalyticsEvent {
         case .freeUpSpace: return "FREE_UP_SPACE"
         case .setPasscode: return "PASSCODE_SET"
         case .createStory: return "CREATE_STORY"
+        }
+    }
+}
+
+enum AnalyticsAppScreens {
+    ///authorization
+    case loginScreen
+    case signUpScreen
+    case forgotPassword
+    case termsAndServices
+    case signUpOTP
+    case doubleOTP
+    case autosyncSettingsFirst
+    ///Main Screens
+    case homePage
+    case photos
+    case videos
+    case music
+    case documents
+    ///HomePage cards And adjusted Screens
+    case freeAppSpace
+    case allFiles
+    case favorites
+    case upload
+    case search
+    ///Create Story
+    case createStoryName
+    case createStoryPhotosSelection
+    case createStoryMusicSelection
+    case createStoryPreview
+    ///Albums
+    case albums
+    case myStories
+    ///FaceImageRecognition
+    case peopleFIR
+    case thingsFIR
+    case placesFIR
+    ///Settings
+    case settings
+    case importPhotos
+    case settingsFIR
+    case activityTimeline
+    case usageInfo
+    case packages
+    case lifeBoxTouchIdPasscode
+    case turkcellSecurity
+    case FAQ
+    case contactUS
+    case profileEdit
+    case settingsPhotoEdit
+    case autoSyncSettings
+    ///contactSync
+    case contacSyncDeleteDuplicates
+    case contactSyncBackUp
+    case contactSyncGeneral
+    ///Previews
+//    case photoPreview
+//    case videoPreview
+//    case musicPlayerFull
+//    case documentPreview
+    ///Misc
+    case nativeGalleryShare
+    case welcomePage(Int)
+    
+    var name: String {
+        switch self {
+        ///authorization
+        case .welcomePage(let welcomeNumber):
+            return "Welcome Page -\(welcomeNumber)"
+        case .loginScreen:
+            return "Login"
+        case .signUpScreen:
+            return "Signup"
+        case .forgotPassword:
+            return "Forget Password"
+        case .termsAndServices:
+            return "Eula"
+        case .signUpOTP:
+            return "OTP - Signup"
+        case .doubleOTP:
+            return "OTP - DoubleOptIn"
+        case .autosyncSettingsFirst:
+            return "First Auto Sync Screen"
+        case .autoSyncSettings:
+            return "Auto Sync"
+        ///Main Screens
+        case .homePage:
+            return "Home Page"
+        case .photos:
+            return "Photos"
+        case .videos:
+            return "Videos"
+        case .music:
+            return "Music"
+        case .documents:
+            return "Documents"
+        ///HomePage cards And adjusted Screens
+        case .freeAppSpace:
+            return "Free Up Space"
+        case .allFiles:
+            return "All Files"
+        case .favorites:
+            return "Favorites"
+        case .contacSyncDeleteDuplicates:
+            return "Delete Duplicate"
+        case .contactSyncBackUp:
+            return "Contact Back Up"
+        case .contactSyncGeneral:
+            return "Contacts Sync"
+        case .upload:
+            return "Manual Upload"
+        case .search:
+            return "Search"
+        ///Create Story
+        case .createStoryName:
+            return "Create Story - Name"
+        case .createStoryPhotosSelection:
+            return "Create Story - Photo Selection"
+        case .createStoryMusicSelection:
+            return "Create Story - Music Selection"
+        case .createStoryPreview:
+            return "Create Story - Preview"
+        ///Albums
+        case .albums:
+            return "Albums"
+        case .myStories:
+            return "Stories"
+        ///FaceImageRecognition
+        case .peopleFIR:
+            return "People"
+        case .thingsFIR:
+            return "Things"
+        case .placesFIR:
+            return "Places"
+        ///Settings
+        case .settings:
+            return "Settings"
+        case .importPhotos:
+            return "Import Photos"
+        case .settingsFIR:
+            return "Face & Image Grouping"
+        case .activityTimeline:
+            return "Activitiy Timeline"
+        case .usageInfo:
+            return "Usage Info"
+        case .packages:
+            return "Packages"
+        case .lifeBoxTouchIdPasscode:
+            return "Passcode"
+        case .turkcellSecurity:
+            return "Login Settings"
+        case .FAQ:
+            return "FAQ"
+        case .contactUS:
+            return "Contact Us"
+        case .profileEdit:
+            return "Profile Edit"
+        case .settingsPhotoEdit:
+            return "Photo Edit"
+        ///Misc
+        case .nativeGalleryShare:
+            return "Native Share from Gallery"
         }
     }
 }

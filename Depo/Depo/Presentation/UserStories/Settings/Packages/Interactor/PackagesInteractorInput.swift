@@ -24,6 +24,7 @@ protocol PackagesInteractorInput {
     func convertToSubscriptionPlans(offerApples: [OfferApple]) -> [SubscriptionPlan]
     
     func restorePurchases()
+    func trackScreen()
     /// MAYBE WILL BE NEED
     //func getCurrentSubscription()
 }

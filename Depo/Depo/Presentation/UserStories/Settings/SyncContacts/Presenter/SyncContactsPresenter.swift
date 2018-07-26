@@ -25,7 +25,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     // MARK: view out
     func viewIsReady() {
         view.setInitialState()
-        
+        interactor.trackScreen()
         self.startOperation(operationType: .getBackUpStatus)
     }
     

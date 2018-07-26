@@ -16,6 +16,7 @@ class PasscodeSettingsPresenter {
 extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     
     func viewIsReady() {
+        interactor.trackScreen()
     }
     
     func changePasscode() {

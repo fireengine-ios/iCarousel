@@ -14,4 +14,5 @@ protocol AutoSyncInteractorInput {
     func onSave(settings: AutoSyncSettings)
     
     func checkPermissions()
+    func trackScreen()
 }

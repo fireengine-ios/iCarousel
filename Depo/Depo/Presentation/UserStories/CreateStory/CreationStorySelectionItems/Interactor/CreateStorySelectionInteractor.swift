@@ -19,6 +19,14 @@ class CreateStorySelectionInteractor: BaseFilesGreedInteractor {
         }
     }
     
+    override func trackScreen() {
+        if remoteItems is CreateStoryMusicService {
+            analyticsManager.logScreen(screen: .createStoryMusicSelection)
+        } else {
+            analyticsManager.logScreen(screen: .createStoryPhotosSelection)
+        }
+    }
+    
     func onChangeSorce(isYourUpload: Bool) {
         if isYourUpload {
             remoteItems = MusicService(requestSize: 100)

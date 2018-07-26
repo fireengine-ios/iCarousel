@@ -17,6 +17,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
 
     // MARK: IN
     func viewIsReady() {
+        interactor.trackScreen()
         startAsyncOperationDisableScreen()
         interactor.loadTermsAndUses()
     }

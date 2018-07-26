@@ -61,6 +61,7 @@ extension PackagesPresenter: PackagesViewOutput {
     }
     
     func viewIsReady() {
+        interactor.trackScreen()
         view?.startActivityIndicator()
         interactor.getActiveSubscriptions()
     }

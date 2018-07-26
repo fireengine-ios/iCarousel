@@ -10,4 +10,5 @@ import Foundation
 
 protocol UsageInfoInteractorInput {
     func getUsage()
+    func trackScreen()
 }

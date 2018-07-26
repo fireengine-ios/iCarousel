@@ -36,11 +36,11 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             guard let `self` = self else {
                 return
             }
-            
             switch operationType {
             case .backup:
                 MenloworksAppEvents.onContactUploaded()
                 self.analyticsService.track(event: .contactBackup)
+                self.analyticsService.logScreen(screen: .contactSyncBackUp)
                 self.performOperation(forType: .backup)
             case .restore:
                 MenloworksAppEvents.onContactDownloaded()
@@ -53,9 +53,14 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             case .analyze:
                 self.analyze()
             case .deleteDuplicated:
+                self.analyticsService.logScreen(screen: .contacSyncDeleteDuplicates)
                 self.deleteDuplicated()
             }
         }
+    }
+    
+    func trackScreen() {
+        analyticsService.logScreen(screen: .contactSyncGeneral)
     }
     
     private func updateAccessToken(complition: @escaping VoidHandler) {
@@ -67,8 +72,10 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             complition()
         }
     }
-    
     func performOperation(forType type: SYNCMode) {
+        if type == .backup {
+            analyticsService.logScreen(screen: .contactSyncBackUp)
+        }
         // TODO: clear NumericConstants.limitContactsForBackUp
         contactsSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, type in
             DispatchQueue.main.async {
@@ -122,6 +129,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     private func deleteDuplicated() {
+        analyticsService.logScreen(screen: .contacSyncDeleteDuplicates)
         contactsSyncService.deleteDuplicates()
     }
     

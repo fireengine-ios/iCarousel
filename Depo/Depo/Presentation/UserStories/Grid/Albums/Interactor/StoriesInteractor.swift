@@ -33,4 +33,7 @@ class StoriesInteractor: BaseFilesGreedInteractor {
         })
     }
     
+    override func trackScreen() {
+        analyticsManager.logScreen(screen: .myStories)
+    }
 }

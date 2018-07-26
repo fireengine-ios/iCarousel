@@ -9,7 +9,7 @@
 class ActivityTimelineInteractor {
     
     weak var output: ActivityTimelineInteractorOutput!
-    
+    private let analyticsManager: AnalyticsService = factory.resolve()
     private let activityTimelineService: ActivityTimelineService
     private var page = 0
     private let size: Int
@@ -25,6 +25,10 @@ extension ActivityTimelineInteractor: ActivityTimelineInteractorInput {
         loadActivities { [weak self] response in
             self?.output.refreshTimelineActivities(with: response.list)
         }
+    }
+    
+    func trackScreen() {
+        analyticsManager.logScreen(screen: .activityTimeline)
     }
     
     func loadMoreActivities() {

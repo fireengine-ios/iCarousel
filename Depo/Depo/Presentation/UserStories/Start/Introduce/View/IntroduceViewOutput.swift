@@ -11,5 +11,5 @@ protocol IntroduceViewOutput {
     func viewIsReady()
     func onStartUsingLifeBox()
     func onLoginButton()
-    
+    func pageChanged(page: Int)
 }

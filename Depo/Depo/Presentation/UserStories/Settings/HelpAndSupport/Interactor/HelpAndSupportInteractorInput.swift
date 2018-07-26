@@ -9,5 +9,5 @@
 import Foundation
 
 protocol HelpAndSupportInteractorInput {
-
+    func trackScreen()
 }

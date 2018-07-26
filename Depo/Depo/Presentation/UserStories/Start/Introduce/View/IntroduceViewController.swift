@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class IntroduceViewController: ViewController, IntroduceViewInput {
+class IntroduceViewController: ViewController, IntroduceViewInput, IntroduceDataSourceEventsDelegate {
 
     var output: IntroduceViewOutput!
     var dataSource = IntroduceDataSource()
@@ -25,6 +25,7 @@ class IntroduceViewController: ViewController, IntroduceViewInput {
         scrollView.delegate = dataSource
         dataSource.scrollView = scrollView
         dataSource.pageControll = pageControll
+        dataSource.delegate = self
         configurateView()
         output.viewIsReady()
         MenloworksAppEvents.onTutorial()
@@ -54,6 +55,10 @@ class IntroduceViewController: ViewController, IntroduceViewInput {
     
     @IBAction func onHaveAccountButton() {
         output.onLoginButton()
+    }
+    
+    func pageChanged(page: Int) {
+        output.pageChanged(page: page)
     }
     
 }

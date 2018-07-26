@@ -29,6 +29,16 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
         return UIImage()
     }
     
+    override func trackScreen() {
+        if remoteItems is PeopleItemsService {
+            analyticsManager.logScreen(screen: .peopleFIR)
+        } else if remoteItems is ThingsItemsService {
+            analyticsManager.logScreen(screen: .thingsFIR)
+        } else if remoteItems is PlacesItemsService {
+            analyticsManager.logScreen(screen: .placesFIR)
+        }
+    }
+    
     override func textForNoFileLbel() -> String {
         if remoteItems is PeopleItemsService {
             return TextConstants.faceImageNoPhotos

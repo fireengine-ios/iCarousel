@@ -10,6 +10,7 @@ import Foundation
 
 protocol PasscodeSettingsInteractorInput: class {
     func clearPasscode()
+    func trackScreen()
     var isPasscodeEmpty: Bool { get }
     var biometricsStatus: BiometricsStatus { get }
     var isBiometricsEnabled: Bool { get set }
