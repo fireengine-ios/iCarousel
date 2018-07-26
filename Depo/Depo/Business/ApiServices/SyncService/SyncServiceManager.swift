@@ -247,15 +247,18 @@ class SyncServiceManager {
             if video { videoSyncService.stop() }
         }
     }
+    
+    private var isSubscribeForNotifications = false
 }
 
 
 // MARK: - Notifications
 extension SyncServiceManager {
     private func subscribeForNotifications() {
-        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible(), !isSubscribeForNotifications else {
             return
         }
+        isSubscribeForNotifications = true
         setupReachability()
         setupAPIReachability()
         

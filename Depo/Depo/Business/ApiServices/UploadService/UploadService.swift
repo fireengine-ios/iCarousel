@@ -417,10 +417,7 @@ final class UploadService: BaseRequestService {
                         
                         if let error = error {
                             if finishedOperation.isCancelled {
-                                if let fileName = finishedOperation.item.name {
-                                    self.logEvent("FinishUpload \(fileName) Cancelled")
-                                }
-                                
+                                /// don't call main thread here due a lot of cancel operations
                                 checkIfFinished()
                             } else {
                                 if let fileName = finishedOperation.item.name {
