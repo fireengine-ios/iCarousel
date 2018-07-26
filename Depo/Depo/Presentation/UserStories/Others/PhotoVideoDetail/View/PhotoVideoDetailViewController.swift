@@ -319,6 +319,7 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
                 return
             }
             
+            self.output.markAsNonLocalItem(with: file.getTrimmedLocalID())
             self.output.updateBars()
             self.setupNavigationBar()
         }
