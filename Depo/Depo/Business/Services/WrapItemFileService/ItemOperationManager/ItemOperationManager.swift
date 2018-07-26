@@ -18,6 +18,9 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func finishedUploadFile(file: WrapData)
     
+    ///cancelled by user
+    func cancelledUpload(file: WrapData)
+    
     func setProgressForDownloadingFile(file: WrapData, progress: Float)
     
     func finishedDownloadFile(file: WrapData)
@@ -66,6 +69,8 @@ extension ItemOperationManagerViewProtocol {
     func setProgressForUploadingFile(file: WrapData, progress: Float) {}
     
     func finishedUploadFile(file: WrapData) {}
+    
+    func cancelledUpload(file: WrapData) {}
     
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {}
     
@@ -185,6 +190,15 @@ class ItemOperationManager: NSObject {
         currentUploadProgress = 0
     }
     
+    func cancelledUpload(file: WrapData) {
+        for view in self.views {
+            view.cancelledUpload(file: file)
+        }
+        
+        currentUploadingObject = nil
+        currentUploadProgress = 0
+    }
+
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {
         DispatchQueue.main.async {
             for view in self.views {

@@ -1505,6 +1505,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
+    func cancelledUpload(file: WrapData) {
+        if !needShowProgressInCell{
+            return
+        }
+        
+        if let cell = getCellForFile(objectUUID: file.uuid){
+            cell.cancelledUploadForObject()
+        }
+    }
+    
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {
         if !needShowProgressInCell{
             return
