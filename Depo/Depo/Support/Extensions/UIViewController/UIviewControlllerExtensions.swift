@@ -21,6 +21,7 @@ protocol Waiting {
     func showSpinerIncludeNavigatinBar()
     
     func showSpinerWithCancelClosure(_ cancel: @escaping VoidHandler)
+    func showFullscreenHUD(with text: String?, and cancelHandler: @escaping VoidHandler)
     
     func hideSpinerIncludeNavigatinBar()
     
@@ -30,6 +31,24 @@ protocol Waiting {
 }
 
 extension UIViewController: Waiting {
+    
+    func showFullscreenHUD(with text: String?, and cancelHandler: @escaping VoidHandler) {
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
+            
+            let hud = MBProgressHUD.showAdded(to: window, animated: true)
+            hud.mode = MBProgressHUDMode.indeterminate
+            hud.label.text = text
+            hud.backgroundView.color = UIColor.lightGray.withAlphaComponent(0.88)
+            let gestureRecognizer = TapGestureRecognizerWithClosure(closure: { [weak self] in
+                DispatchQueue.main.async {
+                    cancelHandler()
+                    self?.hideSpinerIncludeNavigatinBar()
+                }
+            })
+            hud.backgroundView.addGestureRecognizer(gestureRecognizer)
+        }
+    }
     
     func showSpinerWithCancelClosure(_ cancel: @escaping VoidHandler) {
         DispatchQueue.main.async {
