@@ -58,7 +58,7 @@ final class AnalyticsService {
     func logScreen(screen: AnalyticsAppScreens) {
         Analytics.logEvent("screenView", parameters: [
             "screenName": screen.name,
-            "userId": SingletonStorage.shared.accountInfo?.gapId
+            "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
             ])
     }
     
@@ -89,7 +89,11 @@ final class AnalyticsService {
             logPurchase(event: .purchaseTurkcell2500, price: String(price))
         }
     }
-    
+     
+    func trackProductEvents(product: AnalyticsPackageProductObject) {
+        
+    }
+
     private func logPurchase(event: AnalyticsEvent, price: String, currency: String = "TL") {
         logAdjustEvent(name: event.token, price: Double(price), currency: currency)
         //Facebook has automatic tracking in-app purchases. If this function is enabled in the web settings, then there will be duplicates
