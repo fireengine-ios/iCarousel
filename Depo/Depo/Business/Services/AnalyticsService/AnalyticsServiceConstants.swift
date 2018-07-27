@@ -243,3 +243,35 @@ enum AnalyticsAppScreens {
         }
     }
 }
+
+enum AnalyticsPackageProductParametrs {
+    case itemName
+    case itemID
+    case price
+    case itemBrand
+    case itemCategory
+    case itemVariant
+    case index
+    case quantity
+    
+    var text: String {
+        switch self {
+        case .itemName:
+            return "AnalyticsParameterItemName"
+        case .itemID:
+            return "AnalyticsParameterItemID"
+        case .price:
+            return "AnalyticsParameterPrice"
+        case .itemBrand:
+            return "AnalyticsParameterItemBrand"
+        case .itemCategory:
+            return "AnalyticsParameterItemCategory"
+        case .itemVariant:
+            return "AnalyticsParameterItemVariant"
+        case .index:
+            return "AnalyticsParameterIndex"
+        case .quantity:
+            return "AnalyticsParameterQuantity"
+        }
+    }
+}
