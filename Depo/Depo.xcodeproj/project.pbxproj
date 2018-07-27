@@ -2363,6 +2363,10 @@
 		8C0E90721FDEBDFF00789C91 /* VisualMusicPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C77869A1F3F38EF005CB432 /* VisualMusicPlayerViewController.xib */; };
 		8C0E90731FDEBDFF00789C91 /* CreateStoryPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C66E8B31F979C6800D98F27 /* CreateStoryPreviewViewController.xib */; };
 		8C11C42E1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */; };
+		8C13C301210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
+		8C13C302210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
+		8C13C305210B128B0047AD67 /* GTM-PQHPKGM.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C13C304210B128B0047AD67 /* GTM-PQHPKGM.json */; };
+		8C13C306210B128B0047AD67 /* GTM-PQHPKGM.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C13C304210B128B0047AD67 /* GTM-PQHPKGM.json */; };
 		8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */; };
 		8C2924C3205A4B1B005E40C9 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
 		8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
@@ -2370,8 +2374,6 @@
 		8C3930F02100668300C1D82D /* GoogleService-Info-ent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */; };
 		8C3930F12100668300C1D82D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EE2100668300C1D82D /* GoogleService-Info.plist */; };
 		8C3930F22100668300C1D82D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EE2100668300C1D82D /* GoogleService-Info.plist */; };
-		8C3930F42100845A00C1D82D /* GTM-PQHPKGM.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930F32100845A00C1D82D /* GTM-PQHPKGM.json */; };
-		8C3930F52100845A00C1D82D /* GTM-PQHPKGM.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930F32100845A00C1D82D /* GTM-PQHPKGM.json */; };
 		8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */; };
 		8C4E8D041FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */; };
 		8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54083E1F61C03B00D4717A /* GridListTopBar.swift */; };
@@ -4872,13 +4874,14 @@
 		8C0B918F2013221400A5BA81 /* CustomProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressHUD.swift; sourceTree = "<group>"; };
 		8C0E907E1FDEBE0000789C91 /* lifebox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lifebox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetPredetermendConfigs.swift; sourceTree = "<group>"; };
+		8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPackageProductObject.swift; sourceTree = "<group>"; };
+		8C13C304210B128B0047AD67 /* GTM-PQHPKGM.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "GTM-PQHPKGM.json"; sourceTree = "<group>"; };
 		8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoButtonCellProtocol.swift; sourceTree = "<group>"; };
 		8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUserInputCellView.swift; sourceTree = "<group>"; };
 		8C28D27B1FC59C260098FE89 /* Depo_LifeTech copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Depo_LifeTech copy-Info.plist"; path = "/Users/aleksandr_life/Repos/stash/lifebox-ios-new/Depo/Depo_LifeTech copy-Info.plist"; sourceTree = "<absolute>"; };
 		8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPhoneMailCell.xib; sourceTree = "<group>"; };
 		8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-ent.plist"; sourceTree = "<group>"; };
 		8C3930EE2100668300C1D82D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8C3930F32100845A00C1D82D /* GTM-PQHPKGM.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "GTM-PQHPKGM.json"; sourceTree = "<group>"; };
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
 		8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewSwitchCell.swift; sourceTree = "<group>"; };
 		8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewSwitchCell.xib; sourceTree = "<group>"; };
@@ -5831,6 +5834,7 @@
 		051E1DFC19CAC2F900FD1E03 /* Depo */ = {
 			isa = PBXGroup;
 			children = (
+				8C13C303210B128B0047AD67 /* container */,
 				051E1DFD19CAC2F900FD1E03 /* App */,
 				CE2BA7C91FC7075900AA3EBE /* Presentation */,
 				CE2BA7CA1FC7077500AA3EBE /* Business */,
@@ -9274,6 +9278,14 @@
 			path = CustomProgressHud;
 			sourceTree = "<group>";
 		};
+		8C13C303210B128B0047AD67 /* container */ = {
+			isa = PBXGroup;
+			children = (
+				8C13C304210B128B0047AD67 /* GTM-PQHPKGM.json */,
+			);
+			path = container;
+			sourceTree = SOURCE_ROOT;
+		};
 		8C2044601EEA7A3B00642627 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -9287,7 +9299,6 @@
 		8C3930EA2100668300C1D82D /* googleAnalytics */ = {
 			isa = PBXGroup;
 			children = (
-				8C3930F32100845A00C1D82D /* GTM-PQHPKGM.json */,
 				8C3930EB2100668300C1D82D /* Ent_iOS */,
 				8C3930ED2100668300C1D82D /* Store_iOS */,
 			);
@@ -9775,6 +9786,7 @@
 			children = (
 				98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */,
 				98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */,
+				8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */,
 			);
 			path = AnalyticsService;
 			sourceTree = "<group>";
@@ -12728,7 +12740,7 @@
 				8C0E904F1FDEBDFF00789C91 /* ImportPhotosViewController.xib in Resources */,
 				8C06B1632008AD72003D8E05 /* toolbar_ciz_icon@3x.png in Resources */,
 				8C06B1752008AD72003D8E05 /* toolbar_undo_icon@3x.png in Resources */,
-				8C3930F52100845A00C1D82D /* GTM-PQHPKGM.json in Resources */,
+				8C13C306210B128B0047AD67 /* GTM-PQHPKGM.json in Resources */,
 				8C06B19F2008AD72003D8E05 /* yesil@2x.png in Resources */,
 				8C06B08F2008AD71003D8E05 /* paylas_whatsapp.png in Resources */,
 				C62239B6204976E40043ED44 /* FaceImagePhotosViewController.xib in Resources */,
@@ -13335,7 +13347,7 @@
 				8C06B0E82008AD72003D8E05 /* sample_yellow@3x.png in Resources */,
 				CECD4E4D1FDFD69500978BE7 /* PopUpController.xib in Resources */,
 				8C06B0C22008AD71003D8E05 /* sag_ok@2x.png in Resources */,
-				8C3930F42100845A00C1D82D /* GTM-PQHPKGM.json in Resources */,
+				8C13C305210B128B0047AD67 /* GTM-PQHPKGM.json in Resources */,
 				8C06AF702008AD70003D8E05 /* duz_siyah.png in Resources */,
 				8C06AFFE2008AD71003D8E05 /* kontrast_secili@3x.png in Resources */,
 				8C06AF9C2008AD71003D8E05 /* focus.png in Resources */,
@@ -14371,6 +14383,7 @@
 				7C257B3820174D2500CB56F8 /* ContactBackupOld.swift in Sources */,
 				8C0E8E021FDEBDFF00789C91 /* PrintService.swift in Sources */,
 				8CD84C451FDEC5E2005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
+				8C13C302210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */,
 				8C0E8E031FDEBDFF00789C91 /* WrapperedItemUtil.swift in Sources */,
 				8C06AC1920066641003D8E05 /* TurkcellSecurityViewController.swift in Sources */,
 				8C0E8E041FDEBDFF00789C91 /* CreateStorySelectionRouter.swift in Sources */,
@@ -15522,6 +15535,7 @@
 				CE19CE01208F016600DB903E /* UIAlertController+Action.swift in Sources */,
 				CE51ACEA1EF90853005DCEE0 /* PhoneVereficationViewOutput.swift in Sources */,
 				CE51ACEB1EF90853005DCEE0 /* PhoneVereficationViewController.swift in Sources */,
+				8C13C301210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */,
 				CE51ACEC1EF90853005DCEE0 /* PhoneVereficationModuleInput.swift in Sources */,
 				CED4B02A2017731400D06CA9 /* Alamofire+Response.swift in Sources */,
 				CE51ACED1EF90853005DCEE0 /* PhoneVereficationPresenter.swift in Sources */,
