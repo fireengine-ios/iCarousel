@@ -6,6 +6,8 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+import Firebase
+
 struct AnalyticsPackageProductObject {
     let itemName: String
     let itemID: String
@@ -18,14 +20,14 @@ struct AnalyticsPackageProductObject {
     
     var productParametrs: [String: Any] {
         return [
-            AnalyticsPackageProductParametrs.itemName.text : itemName,
-            AnalyticsPackageProductParametrs.itemID.text : itemID,
-            AnalyticsPackageProductParametrs.price.text : price,
-            AnalyticsPackageProductParametrs.itemBrand.text : itemBrand,
-            AnalyticsPackageProductParametrs.itemCategory.text : itemCategory,
-            AnalyticsPackageProductParametrs.itemVariant.text : itemVariant,
-            AnalyticsPackageProductParametrs.index.text : index,
-            AnalyticsPackageProductParametrs.quantity.text : quantity
+            AnalyticsParameterItemName : itemName,
+            AnalyticsParameterItemID : itemID,
+            AnalyticsParameterPrice : price,
+            AnalyticsParameterItemBrand : itemBrand,
+            AnalyticsParameterItemCategory : itemCategory,
+            AnalyticsParameterItemVariant : itemVariant,
+            AnalyticsParameterIndex : index,
+            AnalyticsParameterQuantity : quantity
         ]
     }
 }
@@ -41,19 +43,12 @@ struct AnalyticsEcommerce {
     var ecommerceParametrs: [String: Any] {
         return [
             AnalyticsPackageEcommerce.items.text : items.map{$0.productParametrs},
-            AnalyticsPackageEcommerce.itemList.text : itemList,
-            AnalyticsPackageEcommerce.transactionID.text : transactionID,
-            AnalyticsPackageEcommerce.tax.text : tax,
-            AnalyticsPackageEcommerce.priceValue.text : priceValue,
-            AnalyticsPackageEcommerce.shipping.text : shipping
+            AnalyticsParameterItemList : itemList,
+            AnalyticsParameterTransactionID : transactionID,
+            AnalyticsParameterTax : tax,
+            AnalyticsParameterValue : priceValue,
+            AnalyticsParameterShipping : shipping
         ]
     }
 }
-//'AnalyticsParameterItemName': '50GB', // Product Name
-//'AnalyticsParameterItemID': 'sku1234', // Product ID
-//'AnalyticsParameterPrice': '117.00',
-//'AnalyticsParameterItemBrand': 'Lifebox',
-//'AnalyticsParameterItemCategory': 'Saklama Alanı', // Product Category
-//'AnalyticsParameterItemVariant': '',
-//'AnalyticsParameterIndex': 1 //Position number of the product in the list its shown.
-//'AnalyticsParameterQuantity': 1
+

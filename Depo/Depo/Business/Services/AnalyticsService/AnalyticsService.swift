@@ -101,24 +101,10 @@ final class AnalyticsService {
         }
         
         let product =  AnalyticsPackageProductObject(itemName: offer.name ?? "", itemID: itemID, price: price, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
-      
-        //        When user successfully purchases a package this code block should be triggered.
-        //
-        //
-        //        let items = [{{product}},{{product}}]
-        //
-        let ecommerce = [
-            "items" : [product.productParametrs],
-            AnalyticsParameterItemList : "Sarı Kuru İndirimi",
-            AnalyticsParameterTransactionID : "T12345",
-            AnalyticsParameterTax : "0",
-            AnalyticsParameterValue : price,
-            AnalyticsParameterShipping : "0"
-            
-            ] as [String : Any]
-        //
-        //        Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce)
-//        Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce)
+        let ecommerce = AnalyticsEcommerce(items: [product], itemList: analyticasItemList,
+                                            transactionID: "", tax: "0",
+                                            priceValue: price, shipping: "0")
+        Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs)
     }
 
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int) {

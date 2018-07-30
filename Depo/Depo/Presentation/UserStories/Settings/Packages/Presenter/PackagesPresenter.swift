@@ -17,6 +17,7 @@ class PackagesPresenter {
     private var referenceToken = ""
     private var userPhone = ""
     private var offerToBuy: OfferServiceResponse?
+    private var offerIndex: Int = 0
     private var optInVC: OptInController?
     
     private func getAccountType(for accountType: String, subscriptionPlans: [SubscriptionPlanBaseResponse]) -> AccountType {
@@ -44,6 +45,7 @@ class PackagesPresenter {
         referenceToken = ""
         userPhone = ""
         offerToBuy = nil
+        offerIndex = 0
         optInVC = nil
         view?.reloadPackages()
     }
@@ -102,6 +104,7 @@ extension PackagesPresenter: PackagesViewOutput {
         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] userInfoResponse in
             self?.userPhone = userInfoResponse.fullPhoneNumber
             self?.offerToBuy = offer
+            self?.offerIndex = planIndex
             DispatchQueue.toMain {
                 self?.view?.startActivityIndicator()
                 self?.interactor.getToken(for: offer)
@@ -142,7 +145,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     func optIn(_ optInVC: OptInController, didEnterCode code: String) {
         optInVC.startActivityIndicator()
         self.optInVC = optInVC
-        interactor.verifyOffer(offerToBuy, planIndex: <#Int#>, token: referenceToken, otp: code)
+        interactor.verifyOffer(offerToBuy, planIndex: offerIndex, token: referenceToken, otp: code)
     }
 }
 
