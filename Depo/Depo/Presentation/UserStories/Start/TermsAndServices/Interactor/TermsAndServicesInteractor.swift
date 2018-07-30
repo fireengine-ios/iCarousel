@@ -20,20 +20,19 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     var eula: Eula?
     
     func loadTermsAndUses() {
-        
-    eulaService.eulaGet(sucess: { [weak self] eula in
-        guard let eulaR = eula as? Eula else {
-            return
-        }
-        self?.eula = eulaR
-        DispatchQueue.main.async { [weak self] in
-            self?.output.showLoadedTermsAndUses(eula: eulaR.content ?? "")
-        }
-        }, fail: { [weak self] errorResponse in
-            DispatchQueue.main.async { [weak self] in
-                self?.output.failLoadTermsAndUses(errorString: errorResponse.description)
+        eulaService.eulaGet(sucess: { [weak self] eula in
+            guard let eulaR = eula as? Eula else {
+                return
             }
-    })
+            self?.eula = eulaR
+            DispatchQueue.toMain {
+                self?.output.showLoadedTermsAndUses(eula: eulaR.content ?? "")
+            }
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.toMain {
+                    self?.output.failLoadTermsAndUses(errorString: errorResponse.description)
+                }
+        })
     }
     
     func saveSignUpResponse(withResponse response: SignUpSuccessResponse, andUserInfo userInfo: RegistrationUserInfoModel) {
