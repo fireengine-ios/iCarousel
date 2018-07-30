@@ -275,3 +275,29 @@ enum AnalyticsPackageProductParametrs {
         }
     }
 }
+
+enum AnalyticsPackageEcommerce {
+    case items
+    case itemList
+    case transactionID
+    case tax
+    case priceValue
+    case shipping
+    
+    var text: String {
+        switch self {
+        case .items:
+            return "items"
+        case .itemList:
+            return "AnalyticsParameterItemList"
+        case .transactionID:
+            return "AnalyticsParameterTransactionID"
+        case .tax:
+            return "AnalyticsParameterTax"
+        case .priceValue:
+            return "AnalyticsParameterValue"
+        case .shipping:
+            return "AnalyticsParameterShipping"
+        }
+    }
+}

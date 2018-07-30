@@ -9,7 +9,7 @@
 protocol PackagesViewInput: class, ActivityIndicator {
     func display(subscriptionPlans array: [SubscriptionPlan], append: Bool)
     func display(error: ErrorResponse)
-    func showActivateOfferAlert(for offer: OfferServiceResponse)
+    func showActivateOfferAlert(for offer: OfferServiceResponse, planIndex: Int)
     func showCancelOfferAlert(with text: String)
     func showCancelOfferApple()
     func show(promocodeError: String)

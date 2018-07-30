@@ -28,13 +28,32 @@ struct AnalyticsPackageProductObject {
             AnalyticsPackageProductParametrs.quantity.text : quantity
         ]
     }
-    ///should be something like this:
-//        'AnalyticsParameterItemName': '50GB', // Product Name
-//        'AnalyticsParameterItemID': 'sku1234', // Product ID
-//        'AnalyticsParameterPrice': '117.00',
-//        'AnalyticsParameterItemBrand': 'Lifebox',
-//        'AnalyticsParameterItemCategory': 'Saklama Alanı', // Product Category
-//        'AnalyticsParameterItemVariant': '',
-//        'AnalyticsParameterIndex': 1 //Position number of the product in the list its shown.
-//        'AnalyticsParameterQuantity': 1 //Information on how many pieces are purchased. Sepete Add will fill in Checkout and Purchase actions.
 }
+
+struct AnalyticsEcommerce {
+    let items: [AnalyticsPackageProductObject]
+    let itemList: String
+    let transactionID: String
+    let tax: String
+    let priceValue: String
+    let shipping: String
+    
+    var ecommerceParametrs: [String: Any] {
+        return [
+            AnalyticsPackageEcommerce.items.text : items.map{$0.productParametrs},
+            AnalyticsPackageEcommerce.itemList.text : itemList,
+            AnalyticsPackageEcommerce.transactionID.text : transactionID,
+            AnalyticsPackageEcommerce.tax.text : tax,
+            AnalyticsPackageEcommerce.priceValue.text : priceValue,
+            AnalyticsPackageEcommerce.shipping.text : shipping
+        ]
+    }
+}
+//'AnalyticsParameterItemName': '50GB', // Product Name
+//'AnalyticsParameterItemID': 'sku1234', // Product ID
+//'AnalyticsParameterPrice': '117.00',
+//'AnalyticsParameterItemBrand': 'Lifebox',
+//'AnalyticsParameterItemCategory': 'Saklama Alanı', // Product Category
+//'AnalyticsParameterItemVariant': '',
+//'AnalyticsParameterIndex': 1 //Position number of the product in the list its shown.
+//'AnalyticsParameterQuantity': 1

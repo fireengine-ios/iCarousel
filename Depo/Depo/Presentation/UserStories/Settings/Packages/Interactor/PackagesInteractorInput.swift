@@ -14,8 +14,8 @@ protocol PackagesInteractorInput {
     func getOfferApples()
     func getToken(for offer: OfferServiceResponse)
     func getResendToken(for offer: OfferServiceResponse)
-    func activate(offerApple: OfferApple)
-    func verifyOffer(_ offer: OfferServiceResponse?, token: String, otp: String)
+    func activate(offerApple: OfferApple, planIndex: Int)
+    func verifyOffer(_ offer: OfferServiceResponse?, planIndex: Int, token: String, otp: String)
     func submit(promocode: String)
     func getActiveSubscriptions()
     func getAccountType()
@@ -25,6 +25,7 @@ protocol PackagesInteractorInput {
     
     func restorePurchases()
     func trackScreen()
+    func trackPackageClick(plan: SubscriptionPlan, planIndex: Int)
     /// MAYBE WILL BE NEED
     //func getCurrentSubscription()
 }

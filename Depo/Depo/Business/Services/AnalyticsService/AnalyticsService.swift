@@ -90,8 +90,57 @@ final class AnalyticsService {
         }
     }
      
-    func trackProductEvents(product: AnalyticsPackageProductObject) {
+    func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int) {
         
+        let analyticasItemList = "Turkcell Package"
+        var itemID = ""
+        var price = ""
+        if let offerIDUnwraped = offer.offerId, let unwrapedPrice = offer.price {
+            itemID = "\(offerIDUnwraped)"
+            price = "\(unwrapedPrice)"
+        }
+        
+        let product =  AnalyticsPackageProductObject(itemName: offer.name ?? "", itemID: itemID, price: price, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
+      
+        //        When user successfully purchases a package this code block should be triggered.
+        //
+        //
+        //        let items = [{{product}},{{product}}]
+        //
+        let ecommerce = [
+            "items" : [product.productParametrs],
+            AnalyticsParameterItemList : "Sarı Kuru İndirimi",
+            AnalyticsParameterTransactionID : "T12345",
+            AnalyticsParameterTax : "0",
+            AnalyticsParameterValue : price,
+            AnalyticsParameterShipping : "0"
+            
+            ] as [String : Any]
+        //
+        //        Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce)
+//        Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce)
+    }
+
+    func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int) {
+        
+//        Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce)
+    }
+    
+    func trackPackageClick(package: SubscriptionPlan, packageIndex: Int) {
+        
+        var analyticasItemList = "İndirimdeki Paketler"
+        var itemID = ""
+        if let offer = package.model as? OfferServiceResponse, let offerID = offer.offerId {
+            itemID = "\(offerID)"
+            analyticasItemList = "Turkcell Package"
+        } else if let offer = package.model as? OfferApple, let offerID = offer.storeProductIdentifier {
+            itemID = offerID
+            analyticasItemList = "In App Package"
+        }
+        let product =  AnalyticsPackageProductObject(itemName: package.name, itemID: itemID, price: package.priceString, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
+        let ecommerce: [String : Any] = ["items" : [product.productParametrs],
+                                         AnalyticsParameterItemList : analyticasItemList]
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: ecommerce)
     }
 
     private func logPurchase(event: AnalyticsEvent, price: String, currency: String = "TL") {
