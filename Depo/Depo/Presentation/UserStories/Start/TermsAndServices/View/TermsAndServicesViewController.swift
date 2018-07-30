@@ -164,13 +164,7 @@ extension TermsAndServicesViewController: WKNavigationDelegate {
         
         switch navigationAction.navigationType {
         case .linkActivated:
-            if let url = navigationAction.request.url, UIApplication.shared.canOpenURL(url) {
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(url)
-                } else {
-                    UIApplication.shared.openURL(url)
-                }
-            }
+            UIApplication.shared.openSafely(navigationAction.request.url)
             decisionHandler(.cancel)
         default:
             decisionHandler(.allow)
