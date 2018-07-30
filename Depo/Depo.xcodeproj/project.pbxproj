@@ -3201,6 +3201,7 @@
 		CE98F6DB204E71E300433915 /* String+UTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6DA204E71E300433915 /* String+UTType.swift */; };
 		CE98F6DD204E721200433915 /* FilesExistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6DC204E721200433915 /* FilesExistManager.swift */; };
 		CE99AC78201CB778003DD3B7 /* CardActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99AC77201CB778003DD3B7 /* CardActionType.swift */; };
+		CE9CB666210F2D7500342EEE /* FixedAVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CB665210F2D7500342EEE /* FixedAVPlayerViewController.swift */; };
 		CEA524BA2046C95E0036FCEA /* UploadQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524B92046C95E0036FCEA /* UploadQueueService.swift */; };
 		CEA524BC2046D6A10036FCEA /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BB2046D6A10036FCEA /* UploadOperation.swift */; };
 		CEA524BE2046EB860036FCEA /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
@@ -5365,6 +5366,7 @@
 		CE98F6DA204E71E300433915 /* String+UTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UTType.swift"; sourceTree = "<group>"; };
 		CE98F6DC204E721200433915 /* FilesExistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesExistManager.swift; sourceTree = "<group>"; };
 		CE99AC77201CB778003DD3B7 /* CardActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActionType.swift; sourceTree = "<group>"; };
+		CE9CB665210F2D7500342EEE /* FixedAVPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedAVPlayerViewController.swift; sourceTree = "<group>"; };
 		CEA524B92046C95E0036FCEA /* UploadQueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadQueueService.swift; sourceTree = "<group>"; };
 		CEA524BB2046D6A10036FCEA /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		CEA524BD2046EB860036FCEA /* Error+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Network.swift"; sourceTree = "<group>"; };
@@ -7966,6 +7968,7 @@
 				CED6442D2060E776009AFC12 /* StorageVars.swift */,
 				CEB2734F205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift */,
 				CEF371AB20887BAC007AD36E /* MD5.swift */,
+				CE9CB665210F2D7500342EEE /* FixedAVPlayerViewController.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -15186,6 +15189,7 @@
 				CEAE3FBA1EFD4F0D00A405B2 /* HomePageViewController.swift in Sources */,
 				FA793D852018725400A02B46 /* ThingsServiceResponse.swift in Sources */,
 				CE51ABBD1EF90853005DCEE0 /* LoginViewOutput.swift in Sources */,
+				CE9CB666210F2D7500342EEE /* FixedAVPlayerViewController.swift in Sources */,
 				7C634FAA1F0F936700B5B93D /* SettingsTableViewCell.swift in Sources */,
 				CE95ED521F516736002F923A /* HelpAndSupportModuleInput.swift in Sources */,
 				CEAFCF661F2AD7DE00ECA8D1 /* BaseFilesGreedChildrenViewController.swift in Sources */,
