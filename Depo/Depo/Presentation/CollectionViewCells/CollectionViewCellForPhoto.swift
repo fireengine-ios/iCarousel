@@ -156,6 +156,13 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
     }
     
+    func cancelledUploadForObject() {
+        DispatchQueue.main.async {
+            self.visualEffectBlur.isHidden = true
+            self.progressView.isHidden = true
+        }
+    }
+    
     func cleanCell() {
         DispatchQueue.main.async {
             self.visualEffectBlur.isHidden = true

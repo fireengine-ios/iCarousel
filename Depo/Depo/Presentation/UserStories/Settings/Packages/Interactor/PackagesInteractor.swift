@@ -101,6 +101,10 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
     
+    func trackScreen() {
+        analyticsService.logScreen(screen: .packages)
+    }
+    
     func getAccountType() {
         accountService.info(
             success: { [weak self] response in

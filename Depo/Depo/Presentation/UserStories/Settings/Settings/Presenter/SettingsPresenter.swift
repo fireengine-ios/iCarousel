@@ -19,6 +19,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func viewIsReady() {
+        interactor.trackScreen()
     }
     
     func viewWillBecomeActive() {
@@ -134,6 +135,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         interactor.uploadPhoto(withPhoto: data)
     }
     func onChangeUserPhoto() {
+        interactor.trackPhotoEdit()
         view.showPhotoAlertSheet()
     }
     

@@ -9,5 +9,10 @@
 class HelpAndSupportInteractor: HelpAndSupportInteractorInput {
 
     weak var output: HelpAndSupportInteractorOutput!
-
+    
+    private let analyticsManager: AnalyticsService = factory.resolve()
+    
+    func trackScreen() {
+        analyticsManager.logScreen(screen: .FAQ)
+    }
 }

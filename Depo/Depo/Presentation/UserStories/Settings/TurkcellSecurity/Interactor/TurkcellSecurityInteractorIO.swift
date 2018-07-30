@@ -11,6 +11,7 @@ import Foundation
 protocol TurkcellSecurityInteractorInput: class {
     func requestTurkcellSecurityState()
     func changeTurkcellSecurity(passcode: Bool, autoLogin: Bool)
+    func trackScreen()
     
     var turkcellPasswordOn: Bool { get }
     var turkcellAutoLoginOn: Bool { get }

@@ -24,6 +24,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     
     func viewIsReady() {
         spotlightManager.delegate = self
+        interactor.trackScreen()
     }
     
     func homePagePresented() {

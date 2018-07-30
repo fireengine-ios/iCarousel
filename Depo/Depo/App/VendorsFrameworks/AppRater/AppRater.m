@@ -414,7 +414,7 @@
     if (bundle == nil) {
         bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"AppRater" ofType:@"bundle"]];
     }
-    NSString *systemLocale = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSString *systemLocale = [[[NSLocale preferredLanguages] objectAtIndex: 0] substringToIndex: 2];
     
     static NSBundle *languageBundle = nil;
     
@@ -428,8 +428,15 @@
             systemLocale = preferredLanguage;
         }
     }
+    
+
 
     languageBundle = [NSBundle bundleWithPath:[bundle pathForResource:systemLocale ofType:@"lproj"]];
+    
+    if (!languageBundle) {
+        languageBundle = [NSBundle bundleWithPath:[bundle pathForResource:@"en" ofType:@"lproj"]];
+    }
+    
     return [languageBundle localizedStringForKey:key value:@"" table:nil];
 }
 

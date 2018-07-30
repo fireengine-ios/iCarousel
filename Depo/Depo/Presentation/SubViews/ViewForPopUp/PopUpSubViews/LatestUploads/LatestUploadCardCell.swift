@@ -12,6 +12,12 @@ class LatestUploadCardCell: UICollectionViewCell {
     
     @IBOutlet weak var iconImageView: LoadingImageView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        backgroundColor = ColorConstants.fileGreedCellColor
+    }
+    
     func setImage(image: Item) {
         iconImageView.loadImageForItem(object: image)
     }

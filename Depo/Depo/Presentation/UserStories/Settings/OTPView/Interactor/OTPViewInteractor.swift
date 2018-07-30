@@ -20,6 +20,10 @@ class OTPViewInteractor: PhoneVereficationInteractor {
         return 1
     }
     
+    override func trackScreen() {
+        analyticsService.logScreen(screen: .doubleOTP)
+    }
+    
     override var expectedInputLength: Int? {
         if let resp = responce {
             return resp.expectedInputLength ?? 1

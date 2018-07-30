@@ -9,10 +9,10 @@
 class PhoneVereficationInteractor: PhoneVereficationInteractorInput {    
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
-    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private let dataStorage: PhoneVereficationDataStorage = PhoneVereficationDataStorage()    
-    private lazy var authenticationService = AuthenticationService()
+    lazy var authenticationService = AuthenticationService()
     
     
     weak var output: PhoneVereficationInteractorOutput!
@@ -24,6 +24,10 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     func saveSignUpResponse(withResponse response: SignUpSuccessResponse, andUserInfo userInfo: RegistrationUserInfoModel) {
         dataStorage.signUpResponse = response
         dataStorage.signUpUserInfo = userInfo
+    }
+    
+    func trackScreen() {
+        analyticsService.logScreen(screen: .signUpOTP)
     }
     
     var remainingTimeInMinutes: Int {

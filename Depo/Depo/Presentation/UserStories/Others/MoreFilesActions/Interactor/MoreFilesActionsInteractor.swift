@@ -408,23 +408,32 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        if router.getViewControllerForPresent() is PhotoVideoDetailViewController {
-            fileService.cancellableUpload(items: items,
-                                          toPath: "",
-                                          success: succesAction(elementType: .sync),
-                                          fail: failAction(elementType: .sync),
-                                          returnedUploadOperations: { [weak self] (operations) in
+        ///logic is appliable for a ONE syncing item only
+        if let firstItem = items.first, router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+            
+            let hideHUD = {
+                DispatchQueue.toMain {
+                    self.output?.completeAsyncOperationEnableScreen()
+                }
+            }
+            
+            fileService.cancellableUpload(items: [firstItem], toPath: "",
+                                          success: { [weak self] in
+                                            hideHUD()
+                                            self?.succesAction(elementType: .sync)()
+                                        }, fail: { [weak self] response in
+                                            hideHUD()
+                                            let handler = self?.failAction(elementType: .sync)
+                                            handler?(response)
+                                        }, returnedUploadOperations: { [weak self] (operations) in
                                             guard let operations = operations, !operations.isEmpty else {
                                                 return
                                             }
-                                            self?.output?.startCancelableAsync {
+                                            self?.output?.startCancelableAsync(with: TextConstants.uploading, cancel: {
                                                 UploadService.default.cancelUploadOperations(operations: operations)
-                                                DispatchQueue.toMain {
-                                                    self?.output?.completeAsyncOperationEnableScreen()
-                                                }
-                                            }
-                                            
-            })
+                                                ItemOperationManager.default.cancelledUpload(file: firstItem)
+                                            })
+                                        })
         } else {
             fileService.upload(items: items, toPath: "",
                                success: succesAction(elementType: .sync),

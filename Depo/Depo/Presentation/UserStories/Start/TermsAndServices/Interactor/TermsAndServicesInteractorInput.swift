@@ -21,4 +21,5 @@ protocol TermsAndServicesInteractorInput {
     
     func applyEula()
     
+    func trackScreen()
 }

@@ -8,7 +8,7 @@
 
 class UsageInfoInteractor {
     weak var output: UsageInfoInteractorOutput!
-    
+    private let analyticsManager: AnalyticsService = factory.resolve()
     private let accountService: AccountServicePrl
 
     init(accountService: AccountServicePrl = AccountService()) {
@@ -29,5 +29,9 @@ extension UsageInfoInteractor: UsageInfoInteractorInput {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })
+    }
+    
+    func trackScreen() {
+        analyticsManager.logScreen(screen: .usageInfo)
     }
 }

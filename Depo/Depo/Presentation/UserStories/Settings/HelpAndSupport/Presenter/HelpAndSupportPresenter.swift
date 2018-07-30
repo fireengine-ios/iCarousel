@@ -13,6 +13,6 @@ class HelpAndSupportPresenter: HelpAndSupportModuleInput, HelpAndSupportViewOutp
     var router: HelpAndSupportRouterInput!
 
     func viewIsReady() {
-
+        interactor.trackScreen()
     }
 }

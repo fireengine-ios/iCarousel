@@ -20,6 +20,9 @@ def core_pods
 
   pod 'SDWebImage'
   pod 'GoogleConversionTracking'
+  pod 'GoogleAnalytics'
+  pod 'Firebase/Core'
+  pod 'GoogleTagManager'
   pod 'Adjust'
   #pod 'ActiveLabel'
 
@@ -37,7 +40,7 @@ def core_pods
   pod 'iCarousel'
 
   pod 'ReachabilitySwift'
-  pod 'MBProgressHUD', '~> 1.0.0'
+  pod 'MBProgressHUD', '~> 1.1.0'
 
   #logger
   pod 'XCGLogger', '~> 6.0'

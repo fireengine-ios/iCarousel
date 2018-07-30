@@ -13,6 +13,8 @@ class CreateStoryNameInteractor: CreateStoryNameInteractorInput {
     var needSelectionItems: Bool = false
     var isFavorites: Bool = false
     
+    private let analyticsManager: AnalyticsService = factory.resolve()
+    
     func onCreateStory(storyName: String) {
         let story = PhotoStory(name: storyName)
         if (isFavorites) {
@@ -43,5 +45,9 @@ class CreateStoryNameInteractor: CreateStoryNameInteractorInput {
         } else {
             output.goToPhotosOrderForStory(story: story)
         }
+    }
+    
+    func trackScreen() {
+        analyticsManager.logScreen(screen: .createStoryName)
     }
 }

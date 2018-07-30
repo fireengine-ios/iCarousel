@@ -122,6 +122,10 @@ class LoginInteractor: LoginInteractorInput {
         })
     }
     
+    func trackScreen() {
+        analyticsService.logScreen(screen: .loginScreen)
+    }
+    
     private func setContactSettingsForUser() {
         guard let contactSettings = storageVars.usersWhoUsedApp[SingletonStorage.shared.uniqueUserID] as? [String: Bool] else {
             return
