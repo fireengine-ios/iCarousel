@@ -24,5 +24,5 @@ protocol PhotoVideoDetailViewOutput {
     func moreButtonPressed(sender: Any?, inAlbumState: Bool, object: Item, selectedIndex: Int)
     
     func updateBars()
-    func markAsNonLocalItem(with uuid: String)
+    func replaceUploaded(_ item: WrapData)
 }

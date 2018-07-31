@@ -29,5 +29,5 @@ protocol PhotoVideoDetailInteractorInput: class {
     func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], uuid: String)
     
     
-    func markAsNonLocalItem(with uuid: String)
+    func replaceUploaded(_ item: WrapData)
 }
