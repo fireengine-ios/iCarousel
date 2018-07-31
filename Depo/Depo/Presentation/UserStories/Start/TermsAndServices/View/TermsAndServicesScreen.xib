@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,6 @@
                 <outlet property="checkboxButton" destination="pmJ-vl-JLz" id="Kgf-be-X1L"/>
                 <outlet property="checkboxLabel" destination="iS3-vB-bOP" id="0VY-c2-Tge"/>
                 <outlet property="contentView" destination="aLj-Qo-ocB" id="vmZ-Wx-V8R"/>
-                <outlet property="textView" destination="ufs-jz-WHE" id="pWQ-l6-bM2"/>
                 <outlet property="topContraintIOS10" destination="WpD-kj-ClX" id="671-Iu-QVs"/>
                 <outlet property="topContraintIOS11" destination="ezh-vD-O0c" id="IJ3-te-37Y"/>
                 <outlet property="view" destination="iN0-l3-epB" id="dBd-vg-Lh5"/>
@@ -43,32 +42,19 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLj-Qo-ocB">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLj-Qo-ocB">
                             <rect key="frame" x="23" y="56" width="330" height="377"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NavigationBarBackground" translatesAutoresizingMaskIntoConstraints="NO" id="tQP-Dq-V3d">
                                     <rect key="frame" x="0.0" y="0.0" width="330" height="377"/>
                                 </imageView>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ufs-jz-WHE">
-                                    <rect key="frame" x="10" y="0.0" width="320" height="367"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="-1" id="riY-RE-mdb"/>
-                                    </connections>
-                                </textView>
                             </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="tQP-Dq-V3d" firstAttribute="leading" secondItem="aLj-Qo-ocB" secondAttribute="leading" id="7Al-4L-WTV"/>
-                                <constraint firstAttribute="bottom" secondItem="ufs-jz-WHE" secondAttribute="bottom" constant="10" id="Gyt-nf-eXt"/>
                                 <constraint firstAttribute="bottom" secondItem="tQP-Dq-V3d" secondAttribute="bottom" id="LQY-dZ-vZE"/>
-                                <constraint firstItem="ufs-jz-WHE" firstAttribute="leading" secondItem="aLj-Qo-ocB" secondAttribute="leading" constant="10" id="T1j-XX-KEF"/>
                                 <constraint firstAttribute="trailing" secondItem="tQP-Dq-V3d" secondAttribute="trailing" id="Y2S-vp-erA"/>
-                                <constraint firstItem="ufs-jz-WHE" firstAttribute="top" secondItem="aLj-Qo-ocB" secondAttribute="top" id="gOd-zI-bUX"/>
                                 <constraint firstItem="tQP-Dq-V3d" firstAttribute="top" secondItem="aLj-Qo-ocB" secondAttribute="top" id="lEc-dT-75U"/>
-                                <constraint firstAttribute="trailing" secondItem="ufs-jz-WHE" secondAttribute="trailing" id="s6h-11-hSb"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkM-36-uGV" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">

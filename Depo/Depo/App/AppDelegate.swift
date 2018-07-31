@@ -85,13 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FBSDKAppLinkUtility.fetchDeferredAppLink { url, error in
             if let url = url {
-                if UIApplication.shared.canOpenURL(url) {
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    } else {
-                        UIApplication.shared.openURL(url)
-                    }
-                }
+                UIApplication.shared.openSafely(url)
             } else {
                 debugLog("Received error while fetching deferred app link \(String(describing: error))")
             }
