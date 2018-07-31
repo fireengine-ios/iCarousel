@@ -166,15 +166,19 @@ final class AppConfigurator {
         MPush.setAppKey("TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd")
         MPush.setServerURL("https://turkcell.menloworks.com")
         
-        MPush.setDebugModeEnabled(true)
-        MPush.setShouldShowDebugLogs(true)
+        
+        #if DEBUG
+            MPush.setSandboxModeEnabled(true)
+            MPush.setDebugModeEnabled(true)
+            MPush.setShouldShowDebugLogs(true)
+        #endif
         
         MPush.registerMessageResponseHandler({(_ response: MMessageResponse) -> Void in
             
             debugLog("Payload: \(response.message.payload)")
             switch response.action.type {
                 
-            case MActionType.click:
+            case .click:
                 debugLog("Menlo Notif Clicked")
                 
                 if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
@@ -183,10 +187,10 @@ final class AppConfigurator {
                 }
                 
                 
-            case MActionType.dismiss:
+            case .dismiss:
                 debugLog("Menlo Notif Dismissed")
                 
-            case MActionType.present:
+            case .present:
                 debugLog("Menlo Notif in Foreground")
                 if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
                     PushNotificationService.shared.openActionScreen()
@@ -195,19 +199,12 @@ final class AppConfigurator {
             }
         })
         
-        DispatchQueue.main.async {
-            MPush.applicationDidFinishLaunching(options: launchOptions)
-            debugLog("AppConfigurator startMenloworks")
-        }
-    }
-    
-    
-    static func registerMenloworksForPushNotififcations() {
-        DispatchQueue.main.async {
-            MPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
-            debugLog("AppConfigurator registerMenloworksForPushNotififcations")
-        
-        }
+        //        DispatchQueue.main.async {
+        MPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
+        debugLog("AppConfigurator registerMenloworksForPushNotififcations")
+        MPush.applicationDidFinishLaunching(options: launchOptions)
+        debugLog("AppConfigurator startMenloworks")
+        //        }
     }
     
     private static func startUpdateLocation(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
