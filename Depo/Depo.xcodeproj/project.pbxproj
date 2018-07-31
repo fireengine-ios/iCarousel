@@ -2465,9 +2465,9 @@
 		8CD2B3B61FE7B43800280547 /* PrepareToAutoSync.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */; };
 		8CD2B3B71FE7B43D00280547 /* WaitingForWiFiPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAD1FE276DC00AF022D /* WaitingForWiFiPopUp.swift */; };
 		8CD2B3B81FE7B44000280547 /* WaitingForWiFiPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */; };
-		8CD7D8D5211053250019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8D4211053240019B4F3 /* container */; };
-		8CD7D8D6211053250019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8D4211053240019B4F3 /* container */; };
 		8CD7D8D721107CE10019B4F3 /* FixedAVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CB665210F2D7500342EEE /* FixedAVPlayerViewController.swift */; };
+		8CD7D8D921109B260019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8D821109B250019B4F3 /* container */; };
+		8CD7D8DA21109B260019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8D821109B250019B4F3 /* container */; };
 		8CD84C441FDEC570005CD3B8 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
 		8CD84C451FDEC5E2005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */; };
 		8CD84C461FDEC5E7005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */; };
@@ -4943,7 +4943,7 @@
 		8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
 		8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
 		8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionServiceExtension.swift; sourceTree = "<group>"; };
-		8CD7D8D4211053240019B4F3 /* container */ = {isa = PBXFileReference; lastKnownFileType = folder; path = container; sourceTree = "<group>"; };
+		8CD7D8D821109B250019B4F3 /* container */ = {isa = PBXFileReference; lastKnownFileType = folder; path = container; sourceTree = "<group>"; };
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
 		8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyContainerNavVC.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
@@ -5755,6 +5755,7 @@
 		051E1DEA19CAC2F900FD1E03 = {
 			isa = PBXGroup;
 			children = (
+				8CD7D8D821109B250019B4F3 /* container */,
 				051E1DFC19CAC2F900FD1E03 /* Depo */,
 				CE79E4A61F695DA200C1F151 /* Depo_LifeTechUITests */,
 				B54BFF4A202C734C0018AF82 /* Shared */,
@@ -5834,7 +5835,6 @@
 		051E1DFC19CAC2F900FD1E03 /* Depo */ = {
 			isa = PBXGroup;
 			children = (
-				8CD7D8D4211053240019B4F3 /* container */,
 				051E1DFD19CAC2F900FD1E03 /* App */,
 				CE2BA7C91FC7075900AA3EBE /* Presentation */,
 				CE2BA7CA1FC7077500AA3EBE /* Business */,
@@ -12467,7 +12467,7 @@
 				8C06AC1B20066641003D8E05 /* TurkcellSecurityViewController.xib in Resources */,
 				8C06B1A32008AD72003D8E05 /* TOCropViewControllerLocalizable.strings in Resources */,
 				8C06B1872008AD72003D8E05 /* underline@2x.png in Resources */,
-				8CD7D8D6211053250019B4F3 /* container in Resources */,
+				8CD7D8DA21109B260019B4F3 /* container in Resources */,
 				8C0E90081FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				8C06B1A52008AD72003D8E05 /* Localizable.strings in Resources */,
 				8C06B18D2008AD72003D8E05 /* underline_sari@2x.png in Resources */,
@@ -13074,7 +13074,7 @@
 				B5C4C8A42049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */,
 				CE51AE371EF90853005DCEE0 /* TermsAndServicesScreen.xib in Resources */,
 				7C634FA31F0F81EA00B5B93D /* SyncContactsViewController.xib in Resources */,
-				8CD7D8D5211053250019B4F3 /* container in Resources */,
+				8CD7D8D921109B260019B4F3 /* container in Resources */,
 				8C06B0222008AD71003D8E05 /* ok.png in Resources */,
 				8C06B1322008AD72003D8E05 /* t_orta@3x.png in Resources */,
 				8C06AFA62008AD71003D8E05 /* frame@3x.png in Resources */,
