@@ -2365,8 +2365,6 @@
 		8C11C42E1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */; };
 		8C13C301210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
 		8C13C302210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
-		8C13C305210B128B0047AD67 /* GTM-PQHPKGM.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C13C304210B128B0047AD67 /* GTM-PQHPKGM.json */; };
-		8C13C306210B128B0047AD67 /* GTM-PQHPKGM.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C13C304210B128B0047AD67 /* GTM-PQHPKGM.json */; };
 		8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */; };
 		8C2924C3205A4B1B005E40C9 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
 		8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
@@ -2467,6 +2465,8 @@
 		8CD2B3B61FE7B43800280547 /* PrepareToAutoSync.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */; };
 		8CD2B3B71FE7B43D00280547 /* WaitingForWiFiPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAD1FE276DC00AF022D /* WaitingForWiFiPopUp.swift */; };
 		8CD2B3B81FE7B44000280547 /* WaitingForWiFiPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */; };
+		8CD7D8D5211053250019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8D4211053240019B4F3 /* container */; };
+		8CD7D8D6211053250019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8D4211053240019B4F3 /* container */; };
 		8CD84C441FDEC570005CD3B8 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
 		8CD84C451FDEC5E2005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */; };
 		8CD84C461FDEC5E7005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */; };
@@ -4875,7 +4875,6 @@
 		8C0E907E1FDEBE0000789C91 /* lifebox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lifebox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetPredetermendConfigs.swift; sourceTree = "<group>"; };
 		8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPackageProductObject.swift; sourceTree = "<group>"; };
-		8C13C304210B128B0047AD67 /* GTM-PQHPKGM.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "GTM-PQHPKGM.json"; sourceTree = "<group>"; };
 		8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoButtonCellProtocol.swift; sourceTree = "<group>"; };
 		8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUserInputCellView.swift; sourceTree = "<group>"; };
 		8C28D27B1FC59C260098FE89 /* Depo_LifeTech copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Depo_LifeTech copy-Info.plist"; path = "/Users/aleksandr_life/Repos/stash/lifebox-ios-new/Depo/Depo_LifeTech copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -4944,6 +4943,7 @@
 		8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
 		8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
 		8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionServiceExtension.swift; sourceTree = "<group>"; };
+		8CD7D8D4211053240019B4F3 /* container */ = {isa = PBXFileReference; lastKnownFileType = folder; path = container; sourceTree = "<group>"; };
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
 		8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyContainerNavVC.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
@@ -5834,7 +5834,7 @@
 		051E1DFC19CAC2F900FD1E03 /* Depo */ = {
 			isa = PBXGroup;
 			children = (
-				8C13C303210B128B0047AD67 /* container */,
+				8CD7D8D4211053240019B4F3 /* container */,
 				051E1DFD19CAC2F900FD1E03 /* App */,
 				CE2BA7C91FC7075900AA3EBE /* Presentation */,
 				CE2BA7CA1FC7077500AA3EBE /* Business */,
@@ -9278,14 +9278,6 @@
 			path = CustomProgressHud;
 			sourceTree = "<group>";
 		};
-		8C13C303210B128B0047AD67 /* container */ = {
-			isa = PBXGroup;
-			children = (
-				8C13C304210B128B0047AD67 /* GTM-PQHPKGM.json */,
-			);
-			path = container;
-			sourceTree = SOURCE_ROOT;
-		};
 		8C2044601EEA7A3B00642627 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -12475,6 +12467,7 @@
 				8C06AC1B20066641003D8E05 /* TurkcellSecurityViewController.xib in Resources */,
 				8C06B1A32008AD72003D8E05 /* TOCropViewControllerLocalizable.strings in Resources */,
 				8C06B1872008AD72003D8E05 /* underline@2x.png in Resources */,
+				8CD7D8D6211053250019B4F3 /* container in Resources */,
 				8C0E90081FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				8C06B1A52008AD72003D8E05 /* Localizable.strings in Resources */,
 				8C06B18D2008AD72003D8E05 /* underline_sari@2x.png in Resources */,
@@ -12740,7 +12733,6 @@
 				8C0E904F1FDEBDFF00789C91 /* ImportPhotosViewController.xib in Resources */,
 				8C06B1632008AD72003D8E05 /* toolbar_ciz_icon@3x.png in Resources */,
 				8C06B1752008AD72003D8E05 /* toolbar_undo_icon@3x.png in Resources */,
-				8C13C306210B128B0047AD67 /* GTM-PQHPKGM.json in Resources */,
 				8C06B19F2008AD72003D8E05 /* yesil@2x.png in Resources */,
 				8C06B08F2008AD71003D8E05 /* paylas_whatsapp.png in Resources */,
 				C62239B6204976E40043ED44 /* FaceImagePhotosViewController.xib in Resources */,
@@ -13082,6 +13074,7 @@
 				B5C4C8A42049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */,
 				CE51AE371EF90853005DCEE0 /* TermsAndServicesScreen.xib in Resources */,
 				7C634FA31F0F81EA00B5B93D /* SyncContactsViewController.xib in Resources */,
+				8CD7D8D5211053250019B4F3 /* container in Resources */,
 				8C06B0222008AD71003D8E05 /* ok.png in Resources */,
 				8C06B1322008AD72003D8E05 /* t_orta@3x.png in Resources */,
 				8C06AFA62008AD71003D8E05 /* frame@3x.png in Resources */,
@@ -13347,7 +13340,6 @@
 				8C06B0E82008AD72003D8E05 /* sample_yellow@3x.png in Resources */,
 				CECD4E4D1FDFD69500978BE7 /* PopUpController.xib in Resources */,
 				8C06B0C22008AD71003D8E05 /* sag_ok@2x.png in Resources */,
-				8C13C305210B128B0047AD67 /* GTM-PQHPKGM.json in Resources */,
 				8C06AF702008AD70003D8E05 /* duz_siyah.png in Resources */,
 				8C06AFFE2008AD71003D8E05 /* kontrast_secili@3x.png in Resources */,
 				8C06AF9C2008AD71003D8E05 /* focus.png in Resources */,
