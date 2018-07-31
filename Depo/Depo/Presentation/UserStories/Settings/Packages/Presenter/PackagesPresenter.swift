@@ -17,6 +17,7 @@ class PackagesPresenter {
     private var referenceToken = ""
     private var userPhone = ""
     private var offerToBuy: OfferServiceResponse?
+    private var offerIndex: Int = 0
     private var optInVC: OptInController?
     
     private func getAccountType(for accountType: String, subscriptionPlans: [SubscriptionPlanBaseResponse]) -> AccountType {
@@ -44,6 +45,7 @@ class PackagesPresenter {
         referenceToken = ""
         userPhone = ""
         offerToBuy = nil
+        offerIndex = 0
         optInVC = nil
         view?.reloadPackages()
     }
@@ -66,11 +68,14 @@ extension PackagesPresenter: PackagesViewOutput {
         interactor.getActiveSubscriptions()
     }
     
-    func didPressOn(plan: SubscriptionPlan) {
+    func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
+
+        interactor.trackPackageClick(plan: plan, planIndex: planIndex)
+        
         switch accountType {
         case .turkcell:
             if let offer = plan.model as? OfferServiceResponse { /// purchase, from active subscription list
-                view?.showActivateOfferAlert(for: offer)
+                view?.showActivateOfferAlert(for: offer, planIndex: planIndex)
             } else if let quota = (plan.model as? SubscriptionPlanBaseResponse)?.subscriptionPlanQuota { /// cancel
                 let message = String(format: TextConstants.offersCancelTurkcell, quota.bytesString)
                 view?.showCancelOfferAlert(with: message)
@@ -86,19 +91,20 @@ extension PackagesPresenter: PackagesViewOutput {
         case .all:
             if let offer = plan.model as? OfferApple {
                 view?.startActivityIndicator()
-                interactor.activate(offerApple: offer)
+                interactor.activate(offerApple: offer, planIndex: planIndex)
             } else {
                 view?.showCancelOfferApple()
             }
         }
     }
     
-    func buy(offer: OfferServiceResponse) {
+    func buy(offer: OfferServiceResponse, planIndex: Int) {
         view?.startActivityIndicator()
         
         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] userInfoResponse in
             self?.userPhone = userInfoResponse.fullPhoneNumber
             self?.offerToBuy = offer
+            self?.offerIndex = planIndex
             DispatchQueue.toMain {
                 self?.view?.startActivityIndicator()
                 self?.interactor.getToken(for: offer)
@@ -139,7 +145,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     func optIn(_ optInVC: OptInController, didEnterCode code: String) {
         optInVC.startActivityIndicator()
         self.optInVC = optInVC
-        interactor.verifyOffer(offerToBuy, token: referenceToken, otp: code)
+        interactor.verifyOffer(offerToBuy, planIndex: offerIndex, token: referenceToken, otp: code)
     }
 }
 

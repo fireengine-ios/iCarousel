@@ -141,19 +141,20 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
     
-    func verifyOffer(_ offer: OfferServiceResponse?, token: String, otp: String) {
+    func verifyOffer(_ offer: OfferServiceResponse?, planIndex: Int, token: String, otp: String) {
         /// to test success without buying package
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//            self.output.successedVerifyOffer()
-//        }
+///        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+///            self.output.successedVerifyOffer()
+///        }
         
         offersService.verifyOffer(otp: otp, referenceToken: token,
             success: { [weak self] response in
-                /// maybe will be need
+                /// maybe will be needed
                 //guard let offerResponse = response as? VerifyOfferResponse else { return }
                 
                 if let offer = offer {
                     self?.analyticsService.trackInnerPurchase(offer)
+                    self?.analyticsService.trackProductPurchasedInnerGA(offer: offer, packageIndex: planIndex)
                 }
 
                 /// delay stay for server perform request (android logic)
@@ -189,11 +190,12 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
     
-    func activate(offerApple: OfferApple) {
+    func activate(offerApple: OfferApple, planIndex: Int) {
         iapManager.purchase(offerApple: offerApple) { [weak self] result in
             switch result {
             case .success(let identifier):
                 self?.analyticsService.trackInAppPurchase(product: offerApple.skProduct)
+                self?.analyticsService.trackProductInAppPurchaseGA(product: offerApple.skProduct, packageIndex: planIndex)
                 self?.validatePurchase(productId: identifier)
             case .canceled:
                 DispatchQueue.main.async {
@@ -419,6 +421,11 @@ extension PackagesInteractor: PackagesInteractorInput {
                 }
             }
         }
+    }
+    
+    func trackPackageClick(plan packages: SubscriptionPlan, planIndex: Int) {
+        analyticsService.trackPackageClick(package:
+            packages, packageIndex: planIndex)
     }
     
     private func sendReciept() -> Bool {

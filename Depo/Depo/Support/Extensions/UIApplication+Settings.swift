@@ -10,9 +10,6 @@ import UIKit
 
 extension UIApplication {
     func openSettings() {
-        guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString),
-            UIApplication.shared.canOpenURL(settingsUrl)
-            else { return }
-        UIApplication.shared.openURL(settingsUrl)
+        UIApplication.shared.openSafely(URL(string: UIApplicationOpenSettingsURLString))
     }
 }

@@ -139,4 +139,12 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64) { }
     
     func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], uuid: String) { }
+    
+    func markAsNonLocalItem(with uuid: String) {
+        array.forEach { item in
+            if item.getTrimmedLocalID() == uuid {
+                item.isLocalItem = false
+            }
+        }
+    }
 }

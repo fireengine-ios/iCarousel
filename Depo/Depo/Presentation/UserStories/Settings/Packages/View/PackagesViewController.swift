@@ -143,12 +143,12 @@ extension PackagesViewController: PackagesViewInput {
         }
     }
     
-    func showActivateOfferAlert(for offer: OfferServiceResponse) {
+    func showActivateOfferAlert(for offer: OfferServiceResponse, planIndex: Int) {
         let bodyText = "\(offer.period ?? "") \(offer.price ?? 0)"
         
         let vc = DarkPopUpController.with(title: offer.name, message: bodyText, buttonTitle: TextConstants.purchase) { [weak self] vc in
             vc.close()
-            self?.output.buy(offer: offer)
+            self?.output.buy(offer: offer, planIndex: planIndex)
         }
         present(vc, animated: false, completion: nil)
     }
@@ -202,7 +202,7 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
         if let tag = MenloworksSubscriptionStorage(rawValue: plan.name) {
             MenloworksAppEvents.onSubscriptionClicked(tag)
         }
-        output.didPressOn(plan: plan)
+        output.didPressOn(plan: plan, planIndex: indexPath.row)
     }
 }
 

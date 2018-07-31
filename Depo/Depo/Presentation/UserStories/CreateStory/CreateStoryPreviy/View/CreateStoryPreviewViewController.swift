@@ -43,7 +43,7 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     }
     
     var player: AVPlayer?
-    var playerController: AVPlayerViewController?
+    var playerController: FixedAVPlayerViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +65,7 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     }
     
     func playVideoByURLString(urlSting: String?) {
-        playerController = AVPlayerViewController()
+        playerController = FixedAVPlayerViewController()
         playerController?.player = player
         self.present(playerController!, animated: true) { [weak self] in
             self?.playerController?.player!.play()

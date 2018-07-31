@@ -17,6 +17,7 @@ protocol BaseAsyncOperationInteractorOutput {
     func startAsyncOperationDisableScreen()
     
     func startCancelableAsync(cancel: @escaping VoidHandler)
+    func startCancelableAsync(with text: String, cancel: @escaping VoidHandler)
     
     func completeAsyncOperationEnableScreen(errorMessage: String?)
     
@@ -31,6 +32,10 @@ class BasePresenter: BaseAsyncOperationInteractorOutput {
     
     func startCancelableAsync(cancel: @escaping VoidHandler) {
         outputView()?.showSpinerWithCancelClosure(cancel)
+    }
+    
+    func startCancelableAsync(with text: String, cancel: @escaping VoidHandler) {
+        outputView()?.showFullscreenHUD(with: text, and: cancel)
     }
     
     func outputView() -> Waiting? {

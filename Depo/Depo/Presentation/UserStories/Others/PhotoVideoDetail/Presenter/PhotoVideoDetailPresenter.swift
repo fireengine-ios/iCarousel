@@ -124,6 +124,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
                                          excludeTypes: alertSheetExcludeTypes)
     }
     
+    func markAsNonLocalItem(with uuid: String) {
+        interactor.markAsNonLocalItem(with: uuid)
+    }
+    
+    
     // MARK: presenter output
     
     var selectedItems: [BaseDataSourceItem] {
