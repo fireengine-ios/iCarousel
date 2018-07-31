@@ -55,13 +55,6 @@ final class AnalyticsService {
         logFacebookEvent(name: FBSDKAppEventNameViewedContent, parameters: [FBSDKAppEventParameterNameContent: event.facebookEventName])
     }
     
-    func logScreen(screen: AnalyticsAppScreens) {
-        Analytics.logEvent("screenView", parameters: [
-            "screenName": screen.name,
-            "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
-            ])
-    }
-    
     func trackInAppPurchase(product: SKProduct) {
         let name = product.localizedTitle
         let price = product.localizedPrice
@@ -89,45 +82,6 @@ final class AnalyticsService {
             logPurchase(event: .purchaseTurkcell2500, price: String(price))
         }
     }
-     
-    func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int) {
-        
-        let analyticasItemList = "Turkcell Package"
-        var itemID = ""
-        var price = ""
-        if let offerIDUnwraped = offer.offerId, let unwrapedPrice = offer.price {
-            itemID = "\(offerIDUnwraped)"
-            price = "\(unwrapedPrice)"
-        }
-        
-        let product =  AnalyticsPackageProductObject(itemName: offer.name ?? "", itemID: itemID, price: price, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
-        let ecommerce = AnalyticsEcommerce(items: [product], itemList: analyticasItemList,
-                                            transactionID: "", tax: "0",
-                                            priceValue: price, shipping: "0")
-        Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs)
-    }
-
-    func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int) {
-        
-//        Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce)
-    }
-    
-    func trackPackageClick(package: SubscriptionPlan, packageIndex: Int) {
-        
-        var analyticasItemList = "İndirimdeki Paketler"
-        var itemID = ""
-        if let offer = package.model as? OfferServiceResponse, let offerID = offer.offerId {
-            itemID = "\(offerID)"
-            analyticasItemList = "Turkcell Package"
-        } else if let offer = package.model as? OfferApple, let offerID = offer.storeProductIdentifier {
-            itemID = offerID
-            analyticasItemList = "In App Package"
-        }
-        let product =  AnalyticsPackageProductObject(itemName: package.name, itemID: itemID, price: package.priceString, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
-        let ecommerce: [String : Any] = ["items" : [product.productParametrs],
-                                         AnalyticsParameterItemList : analyticasItemList]
-        Analytics.logEvent(AnalyticsEventSelectContent, parameters: ecommerce)
-    }
 
     private func logPurchase(event: AnalyticsEvent, price: String, currency: String = "TL") {
         logAdjustEvent(name: event.token, price: Double(price), currency: currency)
@@ -151,4 +105,90 @@ final class AnalyticsService {
             FBSDKAppEvents.logEvent(name, parameters: parameters)
         }
     }    
+}
+
+protocol AnalyticsGA {
+    func logScreen(screen: AnalyticsAppScreens)
+    func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int)
+    func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int)
+    func trackCustomGAEvent()
+    func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
+}
+
+extension AnalyticsService: AnalyticsGA {
+    
+    func logScreen(screen: AnalyticsAppScreens) {
+        Analytics.logEvent("screenView", parameters: [
+            "screenName": screen.name,
+            "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
+            ])
+    }
+    
+    func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int) {
+        let analyticasItemList = "Turkcell Package"
+        var itemID = ""
+        var price = ""
+        if let offerIDUnwraped = offer.offerId, let unwrapedPrice = offer.price {
+            itemID = "\(offerIDUnwraped)"
+            price = "\(unwrapedPrice)"
+        }
+        
+        let product =  AnalyticsPackageProductObject(itemName: offer.name ?? "", itemID: itemID, price: price, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
+        let ecommerce = AnalyticsEcommerce(items: [product], itemList: analyticasItemList,
+                                           transactionID: "", tax: "0",
+                                           priceValue: price, shipping: "0")
+        Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs)
+    }
+    
+    func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int) {
+        let analyticasItemList = "In App Package"
+        let itemID = product.productIdentifier
+        let price = product.localizedPrice
+        let product =  AnalyticsPackageProductObject(itemName: product.localizedTitle, itemID: itemID, price: price, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
+        let ecommerce = AnalyticsEcommerce(items: [product], itemList: analyticasItemList,
+                                           transactionID: "", tax: "0",
+                                           priceValue: price, shipping: "0")
+        Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs)
+    }
+    
+    func trackCustomGAEvent() {
+        //        Analytics.logEvent("GAEvent", parameters: [
+        //            "eventCategory": User Actions,
+        //            "eventAction": Register,
+        //            "eventLabel": ,
+        //            "eventValue": ,
+        //            ])
+        //        Sample Code Block - iOS:
+        //        Analytics.logEvent("GAEvent", parameters: [
+        //        "eventCategory": Functions,
+        //        "eventAction": Login,
+        //        "eventLabel": True,
+        //        "eventValue": ,
+        //        ])
+        ///DIMENTION
+        //        Analytics.logEvent("screenView", parameters: [
+        //            "screenName": “Name of the Screen is put here”
+        //            "pageType": “HomePage”
+        //            "sourceType": “Music”
+        //            ])
+        
+        
+    }
+    
+    func trackPackageClick(package: SubscriptionPlan, packageIndex: Int) {
+        
+        var analyticasItemList = "İndirimdeki Paketler"
+        var itemID = ""
+        if let offer = package.model as? OfferServiceResponse, let offerID = offer.offerId {
+            itemID = "\(offerID)"
+            analyticasItemList = "Turkcell Package"
+        } else if let offer = package.model as? OfferApple, let offerID = offer.storeProductIdentifier {
+            itemID = offerID
+            analyticasItemList = "In App Package"
+        }
+        let product =  AnalyticsPackageProductObject(itemName: package.name, itemID: itemID, price: package.priceString, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
+        let ecommerce: [String : Any] = ["items" : [product.productParametrs],
+                                         AnalyticsParameterItemList : analyticasItemList]
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: ecommerce)
+    }
 }

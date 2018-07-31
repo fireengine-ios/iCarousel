@@ -143,13 +143,13 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     func verifyOffer(_ offer: OfferServiceResponse?, planIndex: Int, token: String, otp: String) {
         /// to test success without buying package
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//            self.output.successedVerifyOffer()
-//        }
+///        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+///            self.output.successedVerifyOffer()
+///        }
         
         offersService.verifyOffer(otp: otp, referenceToken: token,
             success: { [weak self] response in
-                /// maybe will be need
+                /// maybe will be needed
                 //guard let offerResponse = response as? VerifyOfferResponse else { return }
                 
                 if let offer = offer {
