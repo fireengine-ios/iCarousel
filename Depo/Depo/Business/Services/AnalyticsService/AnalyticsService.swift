@@ -107,7 +107,7 @@ final class AnalyticsService {
     }    
 }
 
-protocol AnalyticsGA {
+protocol AnalyticsGA {///GA = GoogleAnalytics
     func logScreen(screen: AnalyticsAppScreens)
     func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int)
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int)
