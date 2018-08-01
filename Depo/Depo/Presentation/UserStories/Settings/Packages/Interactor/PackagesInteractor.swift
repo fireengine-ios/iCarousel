@@ -155,6 +155,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                 if let offer = offer {
                     self?.analyticsService.trackInnerPurchase(offer)
                     self?.analyticsService.trackProductPurchasedInnerGA(offer: offer, packageIndex: planIndex)
+                    self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseSuccess)
                 }
 
                 /// delay stay for server perform request (android logic)
@@ -162,6 +163,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                     self?.output.successedVerifyOffer()
                 }
             }, fail: { [weak self] errorResponse in
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseFailure)
                 DispatchQueue.main.async {
                     self?.output.failedVerifyOffer()
                 }
@@ -196,12 +198,15 @@ extension PackagesInteractor: PackagesInteractorInput {
             case .success(let identifier):
                 self?.analyticsService.trackInAppPurchase(product: offerApple.skProduct)
                 self?.analyticsService.trackProductInAppPurchaseGA(product: offerApple.skProduct, packageIndex: planIndex)
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseSuccess)
                 self?.validatePurchase(productId: identifier)
             case .canceled:
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseFailure)
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.string(TextConstants.cancelPurchase))
                 }
             case .error(let error):
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseFailure)
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.error(error))
                 }

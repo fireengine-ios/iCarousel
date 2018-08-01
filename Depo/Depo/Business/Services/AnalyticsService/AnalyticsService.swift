@@ -160,27 +160,6 @@ extension AnalyticsService: AnalyticsGA {
             "eventLabel" : eventLabel.text,
             "eventValue" : ""
             ])
-        //        Analytics.logEvent("GAEvent", parameters: [
-        //            "eventCategory": User Actions,
-        //            "eventAction": Register,
-        //            "eventLabel": ,
-        //            "eventValue": ,
-        //            ])
-        //        Sample Code Block - iOS:
-        //        Analytics.logEvent("GAEvent", parameters: [
-        //        "eventCategory": Functions,
-        //        "eventAction": Login,
-        //        "eventLabel": True,
-        //        "eventValue": ,
-        //        ])
-        ///DIMENTION
-        //        Analytics.logEvent("screenView", parameters: [
-        //            "screenName": “Name of the Screen is put here”
-        //            "pageType": “HomePage”
-        //            "sourceType": “Music”
-        //            ])
-        
-        
     }
     
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int) {
