@@ -499,6 +499,7 @@ enum GAEventLabel {
             }
         }
     }
+    case empty
     
     case purchaseSuccess
     case purchaseFailure
@@ -524,7 +525,13 @@ enum GAEventLabel {
     case importInstagram
     //
     case uploadFile(FileType)
+    //
+    case crateStory(StoryEvent)
+    //
     case faceRecognition(Bool)
+    //
+    case profilePhotoClick
+    case profilePhotoUpload
     //
     case recognitionFace
     case recognitionObject
@@ -540,6 +547,8 @@ enum GAEventLabel {
     
     var text: String {
         switch self {
+        case .empty:
+            return ""
         case .purchaseSuccess:
             return "Success"
         case .purchaseFailure:
@@ -568,56 +577,68 @@ enum GAEventLabel {
             return "Read"
         case .sort(let sortRule):
             switch sortRule {
-            case .lettersAZ:
+            case .lettersAZ, .albumlettersAZ:
                 return "A-Z"
-            case .lettersZA:
+            case .lettersZA, .albumlettersZA:
                 return "Z-A"
-                
+            case .sizeAZ:
+                return "smallest-first"
+            case .sizeZA:
+                return "largest-first"
+            case .timeUp, .metaDataTimeUp, .timeUpWithoutSection:
+                return "newest-first"
+            case .timeDown, .metaDataTimeDown, .timeDownWithoutSection:
+                return "oldest-first"
             }
-//            MoreActionsConfig {
-//SortRullesType
-            return ""
         case .search(let searchText): ///searched word
             return searchText
         case .clickOtherTurkcellServices: ///This event should be sent after each login (just send after login)
-            return ""
+            return "lifebox"
         case .phoneBookBackUp:
-            return ""
+            return "Backup"
         case .phoneRestore:
-            return ""
+            return "Restore"
         //
         case .importDropbox:
-            return ""
+            return "Dropbox"
         case .importFacebook:
-            return ""
+            return "Facebook"
         case .importInstagram:
-            return ""
+            return "Instagram"
         //
-        case .uploadFile(FileType):
-            return ""
-        case .faceRecognition(Bool):
-            return ""
+        case .uploadFile(let fileType):
+            return fileType.text
+        //
+        case .crateStory(let storyEvent):
+            return storyEvent.text
+        //
+        case .faceRecognition(let isOn):
+            return "\(isOn)"
+        //
+        case .profilePhotoClick:
+            return "Click"
+        case .profilePhotoUpload:
+            return "Upload"
         //
         case .recognitionFace:
-            return ""
+            return "Face"
         case .recognitionObject:
-            return ""
+            return "Object"
         case .recognitionPlace:
-            return ""
+            return "Place"
         //
         case .contactDelete:
-            return ""
+            return "Delete"
         //
         case .videoStartVideo:
-            return ""
+            return "video"
         case .videoStartStroy:
-            return ""
+            return "story"
         //
-        case .serviceError(String):
-            return ""
-        case .paymentError(String):
-            return ""
-
+        case .serviceError(let errorCode):
+            return "Server error \(errorCode)"
+        case .paymentError(let paymentError):
+            return "Definition(\(paymentError)"
         }
     }
 }

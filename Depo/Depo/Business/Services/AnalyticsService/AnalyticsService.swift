@@ -113,7 +113,7 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func logScreen(screen: AnalyticsAppScreens)
     func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int)
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int)
-    func trackCustomGAEvent()
+    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel)
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
 }
 
@@ -153,7 +153,13 @@ extension AnalyticsService: AnalyticsGA {
         Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs)
     }
     
-    func trackCustomGAEvent() {
+    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty) {
+        Analytics.logEvent("GAEvent", parameters: [
+            "eventCategory" : eventCategory.text,
+            "eventAction" : eventActions.text,
+            "eventLabel" : eventLabel.text,
+            "eventValue" : ""
+            ])
         //        Analytics.logEvent("GAEvent", parameters: [
         //            "eventCategory": User Actions,
         //            "eventAction": Register,
