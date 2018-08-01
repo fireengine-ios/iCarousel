@@ -301,3 +301,314 @@ enum AnalyticsPackageEcommerce {
         }
     }
 }
+
+enum GAEventCantegory {
+    case enhancedEcommerce
+    case functions
+    case videoAnalytics
+    case errors
+    
+    var text: String {
+        switch self {
+        case .enhancedEcommerce:
+            return "Enhanced E-Commerce"
+        case .functions:
+            return "FUNCTIONS"
+        case .videoAnalytics:
+            return "VIDEO ANALYTICS"
+        case .errors:
+            return "ERRORS"
+        }
+    }
+}
+
+enum GAEventAction {
+    enum FavoriteLikeStatus {
+        case favorite
+        case like
+        var text: String {
+            switch self {
+            case .like:
+                return "Like"
+            case .favorite:
+                return "Favorite"
+            }
+        }
+    }
+    case purchase
+    case login
+    case logout
+    case register
+    case removefavorites
+    case favoriteLike(FavoriteLikeStatus)
+    case feedbackForm
+    case download
+    case share
+    case quota
+    case delete
+    case click
+    case notification
+    case sort
+    case search
+    case newFolder
+    case clickOtherTurkcellServices
+    case phonebook
+    case photoEdit
+    case importFrom
+    case print
+    case uploadFile
+    case story
+    case freeUpSpace
+    case faceRecognition
+    case profilePhoto
+    case sync
+    case recognition
+    case contact
+    case startVideo ///or story
+    case everyMinuteVideo
+    case serviceError
+    case paymentErrors
+    
+    var text: String {
+        switch self {
+        case .purchase:
+            return "Purchase"
+        case .login:
+            return "Login"
+        case .logout:
+            return "Logout"
+        case .register:
+            return "Register"
+        case .removefavorites:
+            return "remove favorites"
+        case .favoriteLike(let status):
+            return status.text /// original name - Favorite/Like
+        case .feedbackForm:
+            return "Feedback Form"
+        case .download:
+            return "Download"
+        case .share:
+            return "Share"
+        case .quota:
+            return "Quota"
+        case .delete:
+            return "Delete"
+        case .click:
+            return "Click"
+        case .notification:
+            return "Notification"
+        case .sort:
+            return "Sort"
+        case .search:
+            return "Search"
+        case .newFolder:
+            return "New Folder"
+        case .clickOtherTurkcellServices:
+            return "Click Other Turkcell Services"
+        case .phonebook:
+            return "Phonebook"
+        case .photoEdit:
+            return "Photo Edit"
+        case .importFrom:
+            return "Import"
+        case .print:
+            return "Print"
+        case .uploadFile:
+            return "Upload File"
+        case .story:
+            return "Story"
+        case .freeUpSpace:
+            return "Free Up Space"
+        case .faceRecognition:
+            return "Face Recognition"
+        case .profilePhoto:
+            return "Profile Photo"
+        case .sync:
+            return "Sync"
+        case .recognition:
+            return "Recognition"
+        case .contact:
+            return "Contact"
+        case .startVideo: ///or story
+            return "Start"
+        case .everyMinuteVideo:
+            return "Every Minute"
+        case .serviceError:
+            return "Service Errors"
+        case .paymentErrors:
+            return "Payment Errors"
+        }
+    }
+}
+
+enum GAEventLabel {
+    enum FileType {
+        case music
+        case video
+        case photo
+        case document
+        
+        var text: String {
+            switch self {
+            case .music:
+                return "Music"
+            case .video:
+                return "Video"
+            case .photo:
+                return "Photo"
+            case .document:
+                return "Document"
+            }
+        }
+    }
+    enum ShareType {
+        case facebook
+        case twitter
+        case eMail
+        
+        var text: String {
+            switch self {
+            case .facebook:
+                return "Facebook"
+            case .twitter:
+                return "Twitter"
+            case .eMail:
+                return "e - mail"
+            }
+        }
+    }
+    
+    enum StoryEvent {
+        case click
+        case name
+        case photoSelect
+        case musicSelect
+        case save
+        var text: String {
+            switch self {
+            case .click:
+                return "Click"
+            case .name:
+                return "Name"
+            case .photoSelect:
+                return "Photo Select"
+            case .musicSelect:
+                return "Music Select"
+            case .save:
+                return "Save"
+            }
+        }
+    }
+    
+    case purchaseSuccess
+    case purchaseFailure
+    case trueLogin
+    case falseLogin
+    case feedbackOpen
+    case feedbackSend
+    case download(FileType)
+    case share(ShareType)
+    case quotaUsed(Int)
+    case clickPhoto
+    case clickVideo
+    case notificationRecieved
+    case notificationRead
+    case sort(SortedRules)
+    case search(String) ///searched word
+    case clickOtherTurkcellServices ///This event should be sent after each login (just send after login)
+    case phoneBookBackUp
+    case phoneRestore
+    //
+    case importDropbox
+    case importFacebook
+    case importInstagram
+    //
+    case uploadFile(FileType)
+    case faceRecognition(Bool)
+    //
+    case recognitionFace
+    case recognitionObject
+    case recognitionPlace
+    //
+    case contactDelete
+    //
+    case videoStartVideo
+    case videoStartStroy
+    //
+    case serviceError(String)
+    case paymentError(String)
+    
+//    var text: String {
+//        switch self {
+//        case .purchaseSuccess:
+//            return "Success"
+//        case .purchaseFailure:
+//            return "Failure"
+//        case .trueLogin:
+//            return "True"
+//        case .falseLogin:
+//            return "False"
+//        case .feedbackOpen:
+//            return "Open"
+//        case .feedbackSend:
+//            return "Send"
+//        case .download(FileType):
+//            return ""
+//        case .share(ShareType):
+//            return ""
+//        case .quotaUsed(Int):
+//            return ""
+//        case .clickPhoto:
+//            return ""
+//        case .clickVideo:
+//            return ""
+//        case .notificationRecieved:
+//            return ""
+//        case .notificationRead:
+//            return ""
+//        case .sort(SortedRules):
+//            return ""
+//        case .search(String): ///searched word
+//            return ""
+//        case .clickOtherTurkcellServices: ///This event should be sent after each login (just send after login)
+//            return ""
+//        case .phoneBookBackUp:
+//            return ""
+//        case .phoneRestore:
+//            return ""
+//        //
+//        case .importDropbox:
+//            return ""
+//        case .importFacebook:
+//            return ""
+//        case .importInstagram:
+//            return ""
+//        //
+//        case .uploadFile(FileType):
+//            return ""
+//        case .faceRecognition(Bool):
+//            return ""
+//        //
+//        case .recognitionFace:
+//            return ""
+//        case .recognitionObject:
+//            return ""
+//        case .recognitionPlace:
+//            return ""
+//        //
+//        case .contactDelete:
+//            return ""
+//        //
+//        case .videoStartVideo:
+//            return ""
+//        case .videoStartStroy:
+//            return ""
+//        //
+//        case .serviceError(String):
+//            return ""
+//        case .paymentError(String):
+//            return ""
+//
+//        }
+//    }
+}
