@@ -16,7 +16,6 @@ extension CoreDataStack {
     @objc func appendLocalMediaItems(completion: VoidHandler?) {
         let localMediaStorage = LocalMediaStorage.default
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
-            AppConfigurator.registerMenloworksForPushNotififcations()
             if authorized {
                 self.insertFromGallery(completion: completion)
             }

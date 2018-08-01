@@ -274,6 +274,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         debugLog("AppDelegate didRegisterForRemoteNotificationsWithDeviceToken")
+        CoreDataStack.default.appendLocalMediaItems(completion: nil)
         MenloworksTagsService.shared.onNotificationPermissionChanged(true)
         
         MPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
@@ -281,6 +282,7 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         debugLog("AppDelegate didFailToRegisterForRemoteNotificationsWithError")
+        CoreDataStack.default.appendLocalMediaItems(completion: nil)
         MenloworksTagsService.shared.onNotificationPermissionChanged(false)
 
         MPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
