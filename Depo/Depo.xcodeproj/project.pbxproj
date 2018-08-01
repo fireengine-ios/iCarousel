@@ -2467,9 +2467,9 @@
 		8CD2B3B81FE7B44000280547 /* WaitingForWiFiPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */; };
 		8CD7D8E9211193C00019B4F3 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8E8211193C00019B4F3 /* GoogleService-Info-debug.plist */; };
 		8CD7D8EA211193C00019B4F3 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8E8211193C00019B4F3 /* GoogleService-Info-debug.plist */; };
-		8CD7D8F621119BB20019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8F521119BB10019B4F3 /* container */; };
-		8CD7D8F721119BB20019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8F521119BB10019B4F3 /* container */; };
 		8CD7D8F82111AACC0019B4F3 /* FixedAVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CB665210F2D7500342EEE /* FixedAVPlayerViewController.swift */; };
+		8CD7D8FB2111C9800019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8FA2111C97F0019B4F3 /* container */; };
+		8CD7D8FC2111C9800019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8FA2111C97F0019B4F3 /* container */; };
 		8CD84C441FDEC570005CD3B8 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
 		8CD84C451FDEC5E2005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */; };
 		8CD84C461FDEC5E7005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */; };
@@ -4946,7 +4946,7 @@
 		8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
 		8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionServiceExtension.swift; sourceTree = "<group>"; };
 		8CD7D8E8211193C00019B4F3 /* GoogleService-Info-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-debug.plist"; sourceTree = "<group>"; };
-		8CD7D8F521119BB10019B4F3 /* container */ = {isa = PBXFileReference; lastKnownFileType = folder; path = container; sourceTree = "<group>"; };
+		8CD7D8FA2111C97F0019B4F3 /* container */ = {isa = PBXFileReference; lastKnownFileType = folder; path = container; sourceTree = "<group>"; };
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
 		8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyContainerNavVC.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
@@ -5837,7 +5837,7 @@
 		051E1DFC19CAC2F900FD1E03 /* Depo */ = {
 			isa = PBXGroup;
 			children = (
-				8CD7D8F521119BB10019B4F3 /* container */,
+				8CD7D8FA2111C97F0019B4F3 /* container */,
 				051E1DFD19CAC2F900FD1E03 /* App */,
 				CE2BA7C91FC7075900AA3EBE /* Presentation */,
 				CE2BA7CA1FC7077500AA3EBE /* Business */,
@@ -12681,7 +12681,7 @@
 				8C06AEF92008AD70003D8E05 /* cancel_buton@3x.png in Resources */,
 				8C06B1472008AD72003D8E05 /* target_secili.png in Resources */,
 				8C06B1452008AD72003D8E05 /* target@3x.png in Resources */,
-				8CD7D8F721119BB20019B4F3 /* container in Resources */,
+				8CD7D8FC2111C9800019B4F3 /* container in Resources */,
 				8C06AEBF2008AD70003D8E05 /* alt_cizgili@2x.png in Resources */,
 				8C06AFBF2008AD71003D8E05 /* geri@3x.png in Resources */,
 				8CD2B3B61FE7B43800280547 /* PrepareToAutoSync.xib in Resources */,
@@ -13289,7 +13289,7 @@
 				8C06B1C62008AD72003D8E05 /* sticker_close.png in Resources */,
 				98072619203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */,
 				8C06B1D02008AD72003D8E05 /* sticker_resize@3x.png in Resources */,
-				8CD7D8F621119BB20019B4F3 /* container in Resources */,
+				8CD7D8FB2111C9800019B4F3 /* container in Resources */,
 				8C5408411F61C0E000D4717A /* GridListTopBar.xib in Resources */,
 				8C06B0362008AD71003D8E05 /* Orta@2x.png in Resources */,
 				8C06B09E2008AD71003D8E05 /* refresh@3x.png in Resources */,
