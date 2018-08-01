@@ -537,4 +537,78 @@ enum GAEventLabel {
     //
     case serviceError(String)
     case paymentError(String)
+    
+//    var text: String {
+//        switch self {
+//        case .purchaseSuccess:
+//            return "Success"
+//        case .purchaseFailure:
+//            return "Failure"
+//        case .trueLogin:
+//            return "True"
+//        case .falseLogin:
+//            return "False"
+//        case .feedbackOpen:
+//            return "Open"
+//        case .feedbackSend:
+//            return "Send"
+//        case .download(FileType):
+//            return ""
+//        case .share(ShareType):
+//            return ""
+//        case .quotaUsed(Int):
+//            return ""
+//        case .clickPhoto:
+//            return ""
+//        case .clickVideo:
+//            return ""
+//        case .notificationRecieved:
+//            return ""
+//        case .notificationRead:
+//            return ""
+//        case .sort(SortedRules):
+//            return ""
+//        case .search(String): ///searched word
+//            return ""
+//        case .clickOtherTurkcellServices: ///This event should be sent after each login (just send after login)
+//            return ""
+//        case .phoneBookBackUp:
+//            return ""
+//        case .phoneRestore:
+//            return ""
+//        //
+//        case .importDropbox:
+//            return ""
+//        case .importFacebook:
+//            return ""
+//        case .importInstagram:
+//            return ""
+//        //
+//        case .uploadFile(FileType):
+//            return ""
+//        case .faceRecognition(Bool):
+//            return ""
+//        //
+//        case .recognitionFace:
+//            return ""
+//        case .recognitionObject:
+//            return ""
+//        case .recognitionPlace:
+//            return ""
+//        //
+//        case .contactDelete:
+//            return ""
+//        //
+//        case .videoStartVideo:
+//            return ""
+//        case .videoStartStroy:
+//            return ""
+//        //
+//        case .serviceError(String):
+//            return ""
+//        case .paymentError(String):
+//            return ""
+//
+//        }
+//    }
 }
