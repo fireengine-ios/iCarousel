@@ -20,7 +20,6 @@ def core_pods
 
   pod 'SDWebImage'
   pod 'GoogleConversionTracking'
-  pod 'GoogleAnalytics'
   pod 'Firebase/Core'
   pod 'GoogleTagManager'
   pod 'Adjust'

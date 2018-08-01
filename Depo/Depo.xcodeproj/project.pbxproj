@@ -2465,8 +2465,10 @@
 		8CD2B3B61FE7B43800280547 /* PrepareToAutoSync.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */; };
 		8CD2B3B71FE7B43D00280547 /* WaitingForWiFiPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAD1FE276DC00AF022D /* WaitingForWiFiPopUp.swift */; };
 		8CD2B3B81FE7B44000280547 /* WaitingForWiFiPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */; };
-		8CD7D8D5211053250019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8D4211053240019B4F3 /* container */; };
-		8CD7D8D6211053250019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8D4211053240019B4F3 /* container */; };
+		8CD7D8E9211193C00019B4F3 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8E8211193C00019B4F3 /* GoogleService-Info-debug.plist */; };
+		8CD7D8EA211193C00019B4F3 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8E8211193C00019B4F3 /* GoogleService-Info-debug.plist */; };
+		8CD7D8F621119BB20019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8F521119BB10019B4F3 /* container */; };
+		8CD7D8F721119BB20019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8F521119BB10019B4F3 /* container */; };
 		8CD84C441FDEC570005CD3B8 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
 		8CD84C451FDEC5E2005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */; };
 		8CD84C461FDEC5E7005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */; };
@@ -4942,7 +4944,8 @@
 		8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
 		8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
 		8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionServiceExtension.swift; sourceTree = "<group>"; };
-		8CD7D8D4211053240019B4F3 /* container */ = {isa = PBXFileReference; lastKnownFileType = folder; path = container; sourceTree = "<group>"; };
+		8CD7D8E8211193C00019B4F3 /* GoogleService-Info-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-debug.plist"; sourceTree = "<group>"; };
+		8CD7D8F521119BB10019B4F3 /* container */ = {isa = PBXFileReference; lastKnownFileType = folder; path = container; sourceTree = "<group>"; };
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
 		8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyContainerNavVC.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
@@ -5636,6 +5639,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C0E8FEA1FDEBDFF00789C91 /* AdSupport.framework in Frameworks */,
 				CE39615220C29B6400D145E0 /* SystemConfiguration.framework in Frameworks */,
 				CE39615120C29B5E00D145E0 /* Social.framework in Frameworks */,
 				8C0E8FE61FDEBDFF00789C91 /* MessageUI.framework in Frameworks */,
@@ -5648,7 +5652,6 @@
 				8C0E8FE81FDEBDFF00789C91 /* AVKit.framework in Frameworks */,
 				8C0E8FE91FDEBDFF00789C91 /* Photos.framework in Frameworks */,
 				8C0E8FEC1FDEBDFF00789C91 /* CFNetwork.framework in Frameworks */,
-				8C0E8FEA1FDEBDFF00789C91 /* AdSupport.framework in Frameworks */,
 				8C0E8FEB1FDEBDFF00789C91 /* iAd.framework in Frameworks */,
 				8C0E8FED1FDEBDFF00789C91 /* Foundation.framework in Frameworks */,
 				8C0E8FEE1FDEBDFF00789C91 /* UIKit.framework in Frameworks */,
@@ -5699,6 +5702,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE3318D91EFBDDC700E25989 /* AdSupport.framework in Frameworks */,
 				CE3318DB1EFBDE0100E25989 /* Photos.framework in Frameworks */,
 				CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */,
 				C3C2356C20B6DA1B00F3FB6D /* MPush.framework in Frameworks */,
@@ -5710,7 +5714,6 @@
 				7CFE92F11F5EC666008A3B72 /* MessageUI.framework in Frameworks */,
 				CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */,
 				7CF6BDE41F0BA1E10066709E /* AVKit.framework in Frameworks */,
-				CE3318D91EFBDDC700E25989 /* AdSupport.framework in Frameworks */,
 				CE3318D71EFBDDB600E25989 /* iAd.framework in Frameworks */,
 				CE3318D51EFBDDA200E25989 /* CFNetwork.framework in Frameworks */,
 				CE3318D31EFBDD8400E25989 /* Foundation.framework in Frameworks */,
@@ -5833,7 +5836,7 @@
 		051E1DFC19CAC2F900FD1E03 /* Depo */ = {
 			isa = PBXGroup;
 			children = (
-				8CD7D8D4211053240019B4F3 /* container */,
+				8CD7D8F521119BB10019B4F3 /* container */,
 				051E1DFD19CAC2F900FD1E03 /* App */,
 				CE2BA7C91FC7075900AA3EBE /* Presentation */,
 				CE2BA7CA1FC7077500AA3EBE /* Business */,
@@ -9291,6 +9294,7 @@
 		8C3930EA2100668300C1D82D /* googleAnalytics */ = {
 			isa = PBXGroup;
 			children = (
+				8CD7D8E7211193C00019B4F3 /* debug_iOS */,
 				8C3930EB2100668300C1D82D /* Ent_iOS */,
 				8C3930ED2100668300C1D82D /* Store_iOS */,
 			);
@@ -9521,6 +9525,14 @@
 				8CBA3E931EF5D0B100072983 /* ValidationResults.swift */,
 			);
 			path = Validation;
+			sourceTree = "<group>";
+		};
+		8CD7D8E7211193C00019B4F3 /* debug_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8CD7D8E8211193C00019B4F3 /* GoogleService-Info-debug.plist */,
+			);
+			path = debug_iOS;
 			sourceTree = "<group>";
 		};
 		8CD8F4EF1F1CC3C100F1257B /* FloatingView */ = {
@@ -12081,6 +12093,7 @@
 				8C0E90751FDEBDFF00789C91 /* [CP] Embed Pods Frameworks */,
 				8C0E90771FDEBDFF00789C91 /* ShellScript */,
 				8C0E90781FDEBDFF00789C91 /* Embed App Extensions */,
+				AD5485B92003DB16415CED11 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -12161,6 +12174,7 @@
 				82B2D76F0D1B2CE153F470BD /* [CP] Embed Pods Frameworks */,
 				8C679AF51FBC244F00B78873 /* ShellScript */,
 				B51FD6381FD13C93000344BD /* Embed App Extensions */,
+				8669CB1C4E4A3903FDCFE854 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -12466,7 +12480,6 @@
 				8C06AC1B20066641003D8E05 /* TurkcellSecurityViewController.xib in Resources */,
 				8C06B1A32008AD72003D8E05 /* TOCropViewControllerLocalizable.strings in Resources */,
 				8C06B1872008AD72003D8E05 /* underline@2x.png in Resources */,
-				8CD7D8D6211053250019B4F3 /* container in Resources */,
 				8C0E90081FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				8C06B1A52008AD72003D8E05 /* Localizable.strings in Resources */,
 				8C06B18D2008AD72003D8E05 /* underline_sari@2x.png in Resources */,
@@ -12499,6 +12512,7 @@
 				8C06B1852008AD72003D8E05 /* underline.png in Resources */,
 				8C06B0112008AD71003D8E05 /* kucuk_ucgen@3x.png in Resources */,
 				8C06B0792008AD71003D8E05 /* paylas_kaydet@2x.png in Resources */,
+				8CD7D8EA211193C00019B4F3 /* GoogleService-Info-debug.plist in Resources */,
 				8C0E90141FDEBDFF00789C91 /* HomePage.xib in Resources */,
 				8C06B0CB2008AD71003D8E05 /* sample_bw@2x.png in Resources */,
 				8C06AFCD2008AD71003D8E05 /* info_icon.png in Resources */,
@@ -12666,6 +12680,7 @@
 				8C06AEF92008AD70003D8E05 /* cancel_buton@3x.png in Resources */,
 				8C06B1472008AD72003D8E05 /* target_secili.png in Resources */,
 				8C06B1452008AD72003D8E05 /* target@3x.png in Resources */,
+				8CD7D8F721119BB20019B4F3 /* container in Resources */,
 				8C06AEBF2008AD70003D8E05 /* alt_cizgili@2x.png in Resources */,
 				8C06AFBF2008AD71003D8E05 /* geri@3x.png in Resources */,
 				8CD2B3B61FE7B43800280547 /* PrepareToAutoSync.xib in Resources */,
@@ -13073,7 +13088,6 @@
 				B5C4C8A42049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */,
 				CE51AE371EF90853005DCEE0 /* TermsAndServicesScreen.xib in Resources */,
 				7C634FA31F0F81EA00B5B93D /* SyncContactsViewController.xib in Resources */,
-				8CD7D8D5211053250019B4F3 /* container in Resources */,
 				8C06B0222008AD71003D8E05 /* ok.png in Resources */,
 				8C06B1322008AD72003D8E05 /* t_orta@3x.png in Resources */,
 				8C06AFA62008AD71003D8E05 /* frame@3x.png in Resources */,
@@ -13106,6 +13120,7 @@
 				8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */,
 				8C06AF442008AD70003D8E05 /* crop_icon.png in Resources */,
 				8C06B0942008AD71003D8E05 /* polaroid_yeni.png in Resources */,
+				8CD7D8E9211193C00019B4F3 /* GoogleService-Info-debug.plist in Resources */,
 				8C06B19C2008AD72003D8E05 /* yesil.png in Resources */,
 				8C06AEF22008AD70003D8E05 /* Buyuk_Selected@3x.png in Resources */,
 				EFA74FB11FBF378F00CF946E /* PrintViewController.xib in Resources */,
@@ -13273,6 +13288,7 @@
 				8C06B1C62008AD72003D8E05 /* sticker_close.png in Resources */,
 				98072619203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */,
 				8C06B1D02008AD72003D8E05 /* sticker_resize@3x.png in Resources */,
+				8CD7D8F621119BB20019B4F3 /* container in Resources */,
 				8C5408411F61C0E000D4717A /* GridListTopBar.xib in Resources */,
 				8C06B0362008AD71003D8E05 /* Orta@2x.png in Resources */,
 				8C06B09E2008AD71003D8E05 /* refresh@3x.png in Resources */,
@@ -13711,6 +13727,24 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8669CB1C4E4A3903FDCFE854 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
+				"${PODS_ROOT}/GoogleTagManager/Frameworks/frameworks/GoogleTagManager.framework/Resources/TagManagerResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TagManagerResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8C0E8C621FDEBDFF00789C91 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -13833,6 +13867,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 74412d8a38e9c5b44ca9993298b0ec4cba26289b 23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388";
+		};
+		AD5485B92003DB16415CED11 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
+				"${PODS_ROOT}/GoogleTagManager/Frameworks/frameworks/GoogleTagManager.framework/Resources/TagManagerResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TagManagerResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		BCA0868506E6C5E554B5F870 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

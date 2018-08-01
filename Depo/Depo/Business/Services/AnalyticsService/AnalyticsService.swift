@@ -38,6 +38,8 @@ final class AnalyticsService {
             filePath = Bundle.main.path(forResource: "GoogleService-Info-ent", ofType: "plist")
         #elseif APPSTORE
             filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
+        #elseif DEBUG
+            filePath = Bundle.main.path(forResource: "GoogleService-Info-debug", ofType: "plist")
         #endif
         
         guard let filePathUnwraped = filePath,
@@ -107,7 +109,7 @@ final class AnalyticsService {
     }    
 }
 
-protocol AnalyticsGA {
+protocol AnalyticsGA {///GA = GoogleAnalytics
     func logScreen(screen: AnalyticsAppScreens)
     func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int)
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int)
