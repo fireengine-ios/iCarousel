@@ -153,12 +153,17 @@ extension AnalyticsService: AnalyticsGA {
         Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs)
     }
     
-    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty) {
+    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty) {//, eventValue: Int? = nil
+        let eventTempoValue = ""
+        ///migt be needed in the future
+//        if let unwrapedEventValue = eventValue {
+//            eventTempoValue = "\(unwrapedEventValue)"
+//        }
         Analytics.logEvent("GAEvent", parameters: [
             "eventCategory" : eventCategory.text,
             "eventAction" : eventActions.text,
             "eventLabel" : eventLabel.text,
-            "eventValue" : ""
+            "eventValue" : eventTempoValue
             ])
     }
     

@@ -255,10 +255,22 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         }
     }
     
+    func trackClickOnPhotoOrVideo(isPhoto: Bool) {
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: isPhoto ? .clickPhoto : .clickVideo)
+    }
+    
+    func trackSortingChange(sortRule: SortedRules) {
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .sort, eventLabel: .sort(sortRule))
+    }
+    
     private func trackPhotoOrVideo(photo: Bool) {
         if remoteItems is PhotoAndVideoService {
             analyticsManager.logScreen(screen: photo ? .photos : .videos)
         }
+    }
+    
+    func trackFolderCreated() {
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .newFolder)
     }
     
     var bottomBarConfig: EditingBarConfig? {

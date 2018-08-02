@@ -52,6 +52,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     }
     
     func searchItems(by searchText: String, item: SuggestionObject?, sortBy: SortType, sortOrder: SortOrder) {
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .search, eventLabel: .search(searchText))
         remoteItems.allItems(searchText, sortBy: sortBy, sortOrder: sortOrder,
              success: { [weak self] items in
                 guard let `self` = self else { return }
