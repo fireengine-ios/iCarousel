@@ -99,6 +99,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     static let noneMD5 = "NONE MD5"
     
+    private (set) var isWaitingForPhotoPermission = false
+    
     var assetsCache = AssetsCache()
     
     private override init() {
@@ -171,7 +173,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func askPermissionForPhotoFramework(redirectToSettings: Bool, completion: @escaping PhotoLibraryGranted) {
-
+        isWaitingForPhotoPermission = true
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
         case .authorized:
@@ -179,9 +181,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             if (Device.operationSystemVersionLessThen(10)) {
                 PHPhotoLibrary.requestAuthorization({ authStatus in
                     let isAuthorized = authStatus == .authorized
+                    self.isWaitingForPhotoPermission = false
                     completion(isAuthorized, authStatus)
                 })
             } else {
+                isWaitingForPhotoPermission = false
                 completion(true, status)
             }
             MenloworksTagsService.shared.onGalleryPermissionChanged(true)
@@ -198,9 +202,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     self.photoLibrary.register(self)
                 }
                 MenloworksTagsService.shared.onGalleryPermissionChanged(isAuthorized)
+                self.isWaitingForPhotoPermission = false
                 completion(isAuthorized, authStatus)
             })
         case .denied:
+            isWaitingForPhotoPermission = false
             completion(false, status)
             if redirectToSettings {
                 DispatchQueue.main.async {
