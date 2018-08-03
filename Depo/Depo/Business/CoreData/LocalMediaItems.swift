@@ -15,6 +15,10 @@ extension CoreDataStack {
 
     @objc func appendLocalMediaItems(completion: VoidHandler?) {
         let localMediaStorage = LocalMediaStorage.default
+        
+        guard !localMediaStorage.isWaitingForPhotoPermission else {
+            return
+        }
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { (authorized, status) in
             if authorized {
                 self.insertFromGallery(completion: completion)
@@ -69,7 +73,6 @@ extension CoreDataStack {
         guard !inProcessAppendingLocalFiles else {
             return
         }
-        
         inProcessAppendingLocalFiles = true
         
         let localMediaStorage = LocalMediaStorage.default
