@@ -47,7 +47,7 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
     private let erroredSpaceBetweenNextButtonAndTable: CGFloat = 20
     
     private let captchaContainerHeight: CGFloat = 150
-    private var isCaptchaVisiable = false
+    private var isCaptchaVisible = false
     
     // MARK: Life cycle
     
@@ -124,11 +124,10 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
     }
     
     func setupCaptchaVC(captchaVC: CaptchaViewController) {
-        if isCaptchaVisiable {
-//            refreshCapthcha()
+        if isCaptchaVisible {
             return
         }
-        isCaptchaVisiable = true
+        isCaptchaVisible = true
         
         captchaContainerHeightConstraint.constant = captchaContainerHeight
         captchaController = captchaVC
@@ -137,7 +136,7 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
         setupConstraintsForCaptchaVC()
     }
     
-    private func refreshCapthcha() {
+    private func refreshCaptcha() {
         captchaController?.refreshCapthcha()
         captchaController?.inputTextField.text = ""
     }
@@ -155,8 +154,8 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
 //          errorLabelHeight.constant = errorLabelConstraintOriginalHeight * 1.5
 //        }
         
-        if isCaptchaVisiable {
-            refreshCapthcha()
+        if isCaptchaVisible {
+            refreshCaptcha()
         }
     }
     
