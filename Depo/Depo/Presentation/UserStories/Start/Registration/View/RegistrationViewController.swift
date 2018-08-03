@@ -125,7 +125,7 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
     
     func setupCaptchaVC(captchaVC: CaptchaViewController) {
         if isCaptchaVisiable {
-            refreshCapthcha()
+//            refreshCapthcha()
             return
         }
         isCaptchaVisiable = true

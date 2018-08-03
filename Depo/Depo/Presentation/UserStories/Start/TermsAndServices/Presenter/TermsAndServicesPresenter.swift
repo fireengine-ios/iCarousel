@@ -70,9 +70,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     }
     
     func signupFailedCaptchaRequired() {
-        completeAsyncOperationEnableScreen()
         delegate?.showCaptcha()
-        router.closeModule()
     }
     
     func eulaApplied() {

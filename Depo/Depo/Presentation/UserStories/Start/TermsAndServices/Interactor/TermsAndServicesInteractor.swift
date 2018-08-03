@@ -87,6 +87,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             DispatchQueue.main.async {
                 if self?.isRedirectToSplash(forResponse: errorResponce) == true {
                     self?.output.signupFailedCaptchaRequired()
+                    self?.output.signupFailed(errorResponce: errorResponce)
                 } else {
                     self?.output.signupFailed(errorResponce: errorResponce)
                 }
