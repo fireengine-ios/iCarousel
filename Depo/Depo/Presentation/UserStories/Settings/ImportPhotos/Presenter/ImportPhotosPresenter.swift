@@ -65,6 +65,7 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
         if status.connected == true, status.syncEnabled == true {
             view?.succeedFacebookStart()
             analyticsService.track(event: .importFacebook)
+            interactor.trackImportActivationFB()
         } else {
             view?.succeedFacebookStop()
         }
@@ -80,6 +81,7 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
     
     func startSuccessCallback() {
         view?.succeedFacebookStart()
+        interactor.trackImportActivationFB()
         analyticsService.track(event: .importFacebook)
     }
     

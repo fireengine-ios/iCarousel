@@ -311,6 +311,7 @@ final class UploadService: BaseRequestService {
                         
                         let checkIfFinished = {
                             if self.uploadOperations.filter({ $0.uploadType == .fromHomePage }).isEmpty {
+                                self.trackUploadItemsFinished(items: itemsToUpload)
                                 success()
                                 ItemOperationManager.default.syncFinished()
                                 self.logSyncSettings(state: "FinishedUploadFileList")
@@ -460,6 +461,26 @@ final class UploadService: BaseRequestService {
             
             syncOperationsListCallBack(self.uploadOperations.filter({ $0.uploadType == .autoSync }))
 //        }
+    }
+    
+    private func trackUploadItemsFinished(items: [WrapData]) {
+        var typesUploaded = [FileType]()
+        items.forEach {
+            if !typesUploaded.contains($0.fileType) {
+                typesUploaded.append($0.fileType)
+            }
+        }
+        typesUploaded.forEach {
+            switch $0 {
+                ///In the future there might be doc upload available, but for now its only photos and videos
+            case .image:
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .uploadFile, eventLabel: .uploadFile(.photo))
+            case .video:
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .uploadFile, eventLabel: .uploadFile(.video))
+            default:
+                break
+            }
+        }
     }
     
     func cancelOperations() {

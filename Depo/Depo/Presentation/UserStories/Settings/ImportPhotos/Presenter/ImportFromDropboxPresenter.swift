@@ -139,6 +139,7 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
         view?.startDropboxStatus()
         interactor.requestStatusForCompletion()
         analyticsService.track(event: .importDropbox)
+        interactor.trackImportActivationDropBox()
     }
     
     func startFailureCallback(errorMessage: String) {

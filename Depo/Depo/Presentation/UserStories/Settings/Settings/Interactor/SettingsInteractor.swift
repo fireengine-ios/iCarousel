@@ -85,6 +85,7 @@ class SettingsInteractor: SettingsInteractorInput {
     
     func uploadPhoto(withPhoto photo: Data) {
         accountSerivese.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] response in
+            self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .photoEdit)
             ImageDownloder().removeImageFromCache(url: self?.userInfoResponse?.urlForPhoto, completion: {
                 DispatchQueue.main.async {
                     self?.output.profilePhotoUploadSuccessed(image: UIImage(data: photo))

@@ -41,8 +41,10 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 MenloworksAppEvents.onContactUploaded()
                 self.analyticsService.track(event: .contactBackup)
                 self.analyticsService.logScreen(screen: .contactSyncBackUp)
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .phonebook, eventLabel: .phoneBookBackUp)
                 self.performOperation(forType: .backup)
             case .restore:
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .phonebook, eventLabel: .phoneRestore)
                 MenloworksAppEvents.onContactDownloaded()
                 self.performOperation(forType: .restore)
             case .cancel:

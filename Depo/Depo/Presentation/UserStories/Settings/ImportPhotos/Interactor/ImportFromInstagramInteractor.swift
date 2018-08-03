@@ -11,6 +11,7 @@ import Foundation
 class ImportFromInstagramInteractor {
     weak var instOutput: ImportFromInstagramInteractorOutput?
     private let instService = InstagramService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
 }
 
 extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
@@ -124,5 +125,9 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
                 self?.instOutput?.cancelUploadFailure(errorMessage: errorResponse.description)
             }
         })
+    }
+    
+    func trackImportActivationInstagram() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .importFrom, eventLabel: .importInstagram)
     }
 }

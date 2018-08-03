@@ -11,6 +11,7 @@ import Foundation
 class ImportFromFBInteractor: ImportFromFBInteractorInput {
     weak var output: ImportFromFBInteractorOutput?
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     private let fbService = FBService()
     
     func requestPermissions() {
@@ -87,5 +88,9 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
                 self?.output?.stopFailureCallback(errorMessage: error.description)
             }
         }
+    }
+    
+    func trackImportActivationFB() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .importFrom, eventLabel: .importFacebook)
     }
 }

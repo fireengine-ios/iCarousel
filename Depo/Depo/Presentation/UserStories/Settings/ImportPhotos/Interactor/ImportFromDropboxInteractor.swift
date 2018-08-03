@@ -13,6 +13,7 @@ class ImportFromDropboxInteractor {
     
     private var dbService = DropboxService()
     private lazy var dropboxManager: DropboxManager = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
 }
 
 extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
@@ -115,5 +116,9 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
         }, fail: { errorResponse in
             handler(ResponseResult.failed(errorResponse))
         })
+    }
+    
+    func trackImportActivationDropBox() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .importFrom, eventLabel: .importDropbox)
     }
 }
