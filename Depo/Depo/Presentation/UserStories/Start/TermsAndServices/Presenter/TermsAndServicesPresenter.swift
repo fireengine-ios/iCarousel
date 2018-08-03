@@ -69,6 +69,12 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         router.closeModule()
     }
     
+    func signupFailedCaptchaRequired() {
+        completeAsyncOperationEnableScreen()
+        delegate?.showCaptcha()
+        router.closeModule()
+    }
+    
     func eulaApplied() {
         MenloworksEventsService.shared.onApporveEulaPageClicked()
          completeAsyncOperationEnableScreen()

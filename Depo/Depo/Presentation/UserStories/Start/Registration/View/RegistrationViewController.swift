@@ -10,6 +10,7 @@ import UIKit
 
 protocol RegistrationViewDelegate: class {
     func show(errorString: String)
+    func showCaptcha()
 }
 
 class RegistrationViewController: ViewController, RegistrationViewInput, DataSourceOutput {
@@ -46,6 +47,7 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
     private let erroredSpaceBetweenNextButtonAndTable: CGFloat = 20
     
     private let captchaContainerHeight: CGFloat = 150
+    private var isCaptchaVisiable = false
     
     // MARK: Life cycle
     
@@ -122,12 +124,22 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
     }
     
     func setupCaptchaVC(captchaVC: CaptchaViewController) {
+        if isCaptchaVisiable {
+            refreshCapthcha()
+            return
+        }
+        isCaptchaVisiable = true
+        
         captchaContainerHeightConstraint.constant = captchaContainerHeight
         captchaController = captchaVC
         captchaContainer.addSubview(captchaVC.view)
         
-        
         setupConstraintsForCaptchaVC()
+    }
+    
+    private func refreshCapthcha() {
+        captchaController?.refreshCapthcha()
+        captchaController?.inputTextField.text = ""
     }
     
     private func setupConstraintsForCaptchaVC() {
@@ -142,6 +154,10 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
 //        if (Device.isIpad){
 //          errorLabelHeight.constant = errorLabelConstraintOriginalHeight * 1.5
 //        }
+        
+        if isCaptchaVisiable {
+            refreshCapthcha()
+        }
     }
     
     func changeErrorLabelAppearance(status: Bool) {
@@ -386,5 +402,8 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
 extension RegistrationViewController: RegistrationViewDelegate {
     func show(errorString: String) {
         showErrorTitle(withText: errorString)
+    }
+    func showCaptcha() {
+        output.captchaRequred(requred: true)
     }
 }
