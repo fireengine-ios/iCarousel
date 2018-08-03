@@ -79,9 +79,10 @@
  *  @return self
  */
 -(AppRater *)init {
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground)
-                                                     name:UIApplicationWillEnterForegroundNotification object:nil];
+
+    /// fixed LR-6197: foreground/background appear several times
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground)
+//                                                     name:UIApplicationWillEnterForegroundNotification object:nil];
     
     return self;
 }

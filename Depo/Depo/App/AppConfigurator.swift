@@ -12,6 +12,8 @@ import Alamofire
 import Adjust
 import KeychainSwift
 import Curio_iOS_SDK
+import Fabric
+import Crashlytics
 
 final class AppConfigurator {
     
@@ -22,6 +24,8 @@ final class AppConfigurator {
     
     static func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         DispatchQueue.setupMainQueue()
+        
+        Fabric.with([Crashlytics.self])
         
         /// force arabic language left to right
         UIView.appearance().semanticContentAttribute = .forceLeftToRight
@@ -34,12 +38,13 @@ final class AppConfigurator {
         prepareSessionManager()
         setVersionAndBuildNumber()
         configureSDWebImage()
-        setupCropy()
         
-        startCurio(with: launchOptions)
         startMenloworks(with: launchOptions)
+        setupCropy()
+        startCurio(with: launchOptions)
         dropboxManager.start()
         analyticsManager.start()
+        
         AppWormholeListener.shared.startListen()
         _ = PushNotificationService.shared.assignNotificationActionBy(launchOptions: launchOptions)
         LocalMediaStorage.default.clearTemporaryFolder()
@@ -162,49 +167,64 @@ final class AppConfigurator {
     }
     
     private static func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        
-        MPush.setAppKey("TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd")
-        MPush.setServerURL("https://turkcell.menloworks.com")
-        
-        
-        #if DEBUG
-            MPush.setSandboxModeEnabled(true)
-            MPush.setDebugModeEnabled(true)
-            MPush.setShouldShowDebugLogs(true)
-        #endif
-        
-        MPush.registerMessageResponseHandler({(_ response: MMessageResponse) -> Void in
-            
-            debugLog("Payload: \(response.message.payload)")
-            switch response.action.type {
-                
-            case .click:
-                debugLog("Menlo Notif Clicked")
-                
-                if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
-                    PushNotificationService.shared.openActionScreen()
-                    storageVars.deepLink = response.message.payload["action"] as? String
-                }
+        func setupMenloworks() {
+            DispatchQueue.toMain {
+                MPush.setAppKey("TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd")
+                MPush.setServerURL("https://turkcell.menloworks.com")
                 
                 
-            case .dismiss:
-                debugLog("Menlo Notif Dismissed")
+                #if DEBUG
+                MPush.setSandboxModeEnabled(true)
+                MPush.setDebugModeEnabled(true)
+                MPush.setShouldShowDebugLogs(true)
+                #endif
                 
-            case .present:
-                debugLog("Menlo Notif in Foreground")
-                if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
-                    PushNotificationService.shared.openActionScreen()
-                }
+                MPush.registerMessageResponseHandler({(_ response: MMessageResponse) -> Void in
+                    
+                    debugLog("Payload: \(response.message.payload)")
+                    switch response.action.type {
+                        
+                    case .click:
+                        debugLog("Menlo Notif Clicked")
+                        
+                        if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
+                            PushNotificationService.shared.openActionScreen()
+                            storageVars.deepLink = response.message.payload["action"] as? String
+                        }
+                        
+                        
+                    case .dismiss:
+                        debugLog("Menlo Notif Dismissed")
+                        
+                    case .present:
+                        debugLog("Menlo Notif in Foreground")
+                        if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
+                            PushNotificationService.shared.openActionScreen()
+                        }
+                        
+                    }
+                })
                 
+                MPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
+                debugLog("AppConfigurator registerMenloworksForPushNotififcations")
+                MPush.applicationDidFinishLaunching(options: launchOptions)
+                debugLog("AppConfigurator startMenloworks")
             }
-        })
+        }
         
-        //        DispatchQueue.main.async {
-        MPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
-        debugLog("AppConfigurator registerMenloworksForPushNotififcations")
-        MPush.applicationDidFinishLaunching(options: launchOptions)
-        debugLog("AppConfigurator startMenloworks")
-        //        }
+        if #available(iOS 10, *) {
+            let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+            UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
+                setupMenloworks()
+                ///call appendLocalMediaItems either here or in the AppDelegate
+                ///application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings)
+                ///it depends on iOS version
+                CoreDataStack.default.appendLocalMediaItems(completion: nil)
+            }
+        } else {
+            setupMenloworks()
+        }
+        
     }
     
     private static func startUpdateLocation(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
