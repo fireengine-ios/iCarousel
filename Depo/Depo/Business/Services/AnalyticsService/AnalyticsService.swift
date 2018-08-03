@@ -13,6 +13,8 @@ import Firebase
 
 final class AnalyticsService {
     
+    private var innerTimer: Timer?
+    
     func start() {
         setupAdjust()
         configureFireBase()
@@ -183,4 +185,38 @@ extension AnalyticsService: AnalyticsGA {
                                          AnalyticsParameterItemList : analyticasItemList]
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: ecommerce)
     }
+    
+    func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, timeInterval: Float = 1.0) {
+        innerTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeInterval), target: self, selector: #selector(timerStep(sender:)), userInfo:
+            [
+                GACustomEventKeys.category.key: eventCategory,
+             GACustomEventKeys.action.key: eventActions,
+             GACustomEventKeys.label.key: eventLabel
+            ],
+                                          repeats: true)
+    }
+    
+    @objc func timerStep(sender: Timer) {
+        guard let unwrapedUserInfo = sender.userInfo as? [String: Any],
+            let eventCategory = unwrapedUserInfo[GACustomEventKeys.category.key] as? GAEventCantegory,
+        let eventActions = unwrapedUserInfo[GACustomEventKeys.action.key] as? GAEventAction,
+            let eventLabel = unwrapedUserInfo[GACustomEventKeys.label.key] as? GAEventLabel else {
+            return
+        }
+        trackCustomGAEvent(eventCategory: eventCategory, eventActions: eventActions, eventLabel: eventLabel)
+    }
+    
+    func stopTimelyTracking() {
+        guard let curTimer = innerTimer else {
+            return
+        }
+        if curTimer.isValid {
+            curTimer.invalidate()
+            innerTimer = nil
+        }
+    }
+//in future we migt need more then 1 timer, in case this calss become songleton
+//    func stopAllTimelyTracking() {
+//
+//    }
 }

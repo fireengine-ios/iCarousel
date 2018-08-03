@@ -398,7 +398,8 @@ final class UploadService: BaseRequestService {
             self.logSyncSettings(state: "StartSyncFileList")
             
             var successHandled = false
-            
+        //ignore green text below
+//            analyticsService.trackEventTimely(eventCategory: .functions, eventActions: .sync, eventLabel: .eve, timeInterval: 1.0)
             let operations: [UploadOperations] = itemsToSync.flatMap {
                 let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
                     self?.dispatchQueue.async { [weak self] in
@@ -468,17 +469,15 @@ final class UploadService: BaseRequestService {
         items.forEach {
             if !typesUploaded.contains($0.fileType) {
                 typesUploaded.append($0.fileType)
-            }
-        }
-        typesUploaded.forEach {
-            switch $0 {
+                switch $0.fileType {
                 ///In the future there might be doc upload available, but for now its only photos and videos
-            case .image:
-                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .uploadFile, eventLabel: .uploadFile(.photo))
-            case .video:
-                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .uploadFile, eventLabel: .uploadFile(.video))
-            default:
-                break
+                case .image:
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .uploadFile, eventLabel: .uploadFile(.photo))
+                case .video:
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .uploadFile, eventLabel: .uploadFile(.video))
+                default:
+                    break
+                }
             }
         }
     }

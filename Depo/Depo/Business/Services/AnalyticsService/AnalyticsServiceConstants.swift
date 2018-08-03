@@ -302,6 +302,23 @@ enum AnalyticsPackageEcommerce {
     }
 }
 
+enum GACustomEventKeys {
+    case category
+    case action
+    case label
+    
+    var key: String {
+        switch self {
+        case .category:
+            return "GAeventCategory"
+        case .action:
+            return "GAeventActions"
+        case .label:
+            return "GAeventLabel"
+        }
+    }
+}
+
 enum GAEventCantegory {
     case enhancedEcommerce
     case functions

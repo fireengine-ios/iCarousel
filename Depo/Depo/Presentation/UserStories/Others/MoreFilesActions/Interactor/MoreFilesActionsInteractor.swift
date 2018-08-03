@@ -740,6 +740,15 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             })
         }
     }
+    
+    func trackEvent(elementType: ElementTypes) {
+        switch elementType {
+        case .print:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
+        default:
+            break
+        }
+    }
 }
 
 
