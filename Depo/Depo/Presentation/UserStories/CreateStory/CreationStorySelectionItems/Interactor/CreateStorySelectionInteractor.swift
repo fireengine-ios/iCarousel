@@ -36,4 +36,10 @@ class CreateStorySelectionInteractor: BaseFilesGreedInteractor {
         
     }
 
+    override func trackItemsSelected() {
+       
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .story, eventLabel: .crateStory(.musicSelect))
+        
+    }
+    
 }

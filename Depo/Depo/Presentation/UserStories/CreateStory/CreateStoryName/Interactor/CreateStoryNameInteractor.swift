@@ -50,4 +50,8 @@ class CreateStoryNameInteractor: CreateStoryNameInteractorInput {
     func trackScreen() {
         analyticsManager.logScreen(screen: .createStoryName)
     }
+    
+    func trackStoryNameGiven() {
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .story, eventLabel: .crateStory(.name))
+    }
 }

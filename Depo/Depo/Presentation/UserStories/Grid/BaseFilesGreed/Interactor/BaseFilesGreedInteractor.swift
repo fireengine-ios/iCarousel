@@ -273,6 +273,10 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .newFolder)
     }
     
+    func trackItemsSelected() {
+        ///nothing here, need to override in create story interactor
+    }
+    
     var bottomBarConfig: EditingBarConfig? {
         set {
             bottomBarOriginalConfig = newValue
