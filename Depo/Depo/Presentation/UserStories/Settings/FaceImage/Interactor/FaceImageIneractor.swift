@@ -49,6 +49,7 @@ extension FaceImageInteractor: FaceImageInteractorInput {
     }
     
     func changeFaceImageStatus(_ isAllowed: Bool) {
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .faceRecognition, eventLabel: .faceRecognition(isAllowed))
         let accountService = AccountService()
         let parameters = FaceImageAllowedParameters(allowed: isAllowed)
         accountService.switchFaceImageAllowed(parameters: parameters, success: { [weak self] response in

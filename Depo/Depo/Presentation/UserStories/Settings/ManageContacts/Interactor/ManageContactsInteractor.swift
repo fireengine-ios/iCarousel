@@ -16,6 +16,7 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
     weak var output: ManageContactsInteractorOutput!
 
     private let contactsSyncService = ContactsSyncService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var currentPage = 1
     private var numberOfPages = Int.max
@@ -103,6 +104,7 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
                 guard let `self` = self, let index = self.contacts.index(where: { $0.id == contact.id }) else {
                     return
                 }
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .contact, eventLabel: .contactDelete)
                 self.contacts.remove(at: index)
                 self.output.didLoadContacts(self.contacts)
                 self.output.asyncOperationFinished()

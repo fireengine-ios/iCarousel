@@ -87,6 +87,7 @@ class SettingsInteractor: SettingsInteractorInput {
         accountSerivese.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] response in
             self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .photoEdit)
             ImageDownloder().removeImageFromCache(url: self?.userInfoResponse?.urlForPhoto, completion: {
+                self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .profilePhoto, eventLabel: .profilePhotoUpload)
                 DispatchQueue.main.async {
                     self?.output.profilePhotoUploadSuccessed(image: UIImage(data: photo))
                 }
@@ -112,5 +113,6 @@ class SettingsInteractor: SettingsInteractorInput {
     
     func trackPhotoEdit() {
         analyticsManager.logScreen(screen: .settingsPhotoEdit)
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .profilePhoto, eventLabel: .profilePhotoClick)
     }
 }
