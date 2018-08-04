@@ -665,3 +665,64 @@ enum GAEventLabel {
         }
     }
 }
+
+enum GADementionsFields {
+    case screenName
+    case pageType
+    case sourceType
+    case loginStatus
+    case platform
+    case networkFixWifi
+    case service
+    case developmentVersion
+    case paymentMethod
+    case userID
+    case operatorSystem ///Carrier Name should be sent for every page click.
+    case faceImageStatus
+    case userPackage
+    
+    var text: String {
+        switch self {
+        case .screenName:
+            return "screenName"
+        case .pageType:
+            return "pageType"
+        case .sourceType:
+            return "sourceType"
+        case .loginStatus:
+            return "loginStatus"
+        case .platform:
+            return "platform"
+        case .networkFixWifi:
+            return "isWifi"
+        case .service:
+            return "service"
+        case .developmentVersion:
+            return "developmentVersion"
+        case .paymentMethod:
+            return "paymentMethod"
+        case .userID:
+            return "userId"
+        case .operatorSystem:
+            return "operatorSystem"
+        case .faceImageStatus:
+            return "facialRecognition"
+        case .userPackage:
+            return "userPackage"
+        }
+    }
+    
+}
+
+enum GAMetrics {
+    case countOfUpload //After uploading of all files in the upload queue finihes, send the count of uploaded files
+    case countOfDownload //After downloading finishes, send the count of downloaded files
+    var text: String {
+        switch self {
+        case .countOfUpload:
+            return "countOfUpload"
+        case .countOfDownload:
+            return "countOfDownload"
+        }
+    }
+}

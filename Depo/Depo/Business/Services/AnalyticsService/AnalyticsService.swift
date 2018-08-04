@@ -117,6 +117,10 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int)
     func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, eventValue: String?)
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
+    func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Float)
+    func stopTimelyTracking()
+    func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens)
+    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
 }
 
 extension AnalyticsService: AnalyticsGA {
@@ -127,6 +131,17 @@ extension AnalyticsService: AnalyticsGA {
             "screenName": screen.name,
             "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
             ])
+    }
+    
+    func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens){
+        Analytics.logEvent("screenView", parameters: [
+            "screenName": screen.name,
+            "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
+            ])
+    }
+    
+    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool) {
+        
     }
     
     func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int) {
