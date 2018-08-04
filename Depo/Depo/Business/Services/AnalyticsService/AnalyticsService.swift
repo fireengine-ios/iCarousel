@@ -115,11 +115,12 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func logScreen(screen: AnalyticsAppScreens)
     func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int)
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int)
-    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel)
+    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, eventValue: String?)
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
 }
 
 extension AnalyticsService: AnalyticsGA {
+    
     
     func logScreen(screen: AnalyticsAppScreens) {
         Analytics.logEvent("screenView", parameters: [
@@ -155,8 +156,8 @@ extension AnalyticsService: AnalyticsGA {
         Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs)
     }
     
-    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty) {//, eventValue: Int? = nil
-        let eventTempoValue = ""
+    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, eventValue: String? = nil ) {
+        let eventTempoValue = eventValue ?? ""
         ///migt be needed in the future
 //        if let unwrapedEventValue = eventValue {
 //            eventTempoValue = "\(unwrapedEventValue)"
@@ -187,6 +188,9 @@ extension AnalyticsService: AnalyticsGA {
     }
     
     func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, timeInterval: Float = 1.0) {
+        if innerTimer != nil {
+            stopTimelyTracking()
+        }
         innerTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeInterval), target: self, selector: #selector(timerStep(sender:)), userInfo:
             [
                 GACustomEventKeys.category.key: eventCategory,

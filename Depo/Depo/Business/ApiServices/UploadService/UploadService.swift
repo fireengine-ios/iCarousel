@@ -88,21 +88,25 @@ final class UploadService: BaseRequestService {
                 returnedUploadOperation(nil)
                 return
             }
+            
             self.trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
             
             let filteredItems = self.filter(items: items)
             
             switch uploadType {
             case .autoSync:
-                self.syncFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: success, fail: fail, syncOperationsListCallBack: { syncOperations in
+                self.syncFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: success, fail: fail, syncOperationsListCallBack: { [weak self] syncOperations in
+                    self?.stopTracking()
                     returnedUploadOperation(syncOperations)
                 })
             case .syncToUse:
                 self.syncToUseFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
+                    self?.stopTracking()
                     self?.clearSyncToUseCounters()
                     self?.hideUploadCardIfNeeded()
                     success()
                     }, fail: { [weak self] errorResponse in
+                        self?.stopTracking()
                         self?.clearSyncToUseCounters()
                         self?.hideUploadCardIfNeeded()
                         
@@ -117,10 +121,12 @@ final class UploadService: BaseRequestService {
                 })
             default:
                 self.uploadFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
+                    self?.stopTracking()
                     self?.clearUploadCounters()
                     self?.hideUploadCardIfNeeded()
                     success()
                     }, fail: { [weak self] errorResponse in
+                        self?.stopTracking()
                         self?.clearUploadCounters()
                         self?.hideUploadCardIfNeeded()
                         
@@ -135,6 +141,20 @@ final class UploadService: BaseRequestService {
                 })
             }
         }
+    }
+    
+    private func startSyncTracking() {
+        guard uploadOperations.isEmpty else {
+            return
+        }
+        analyticsService.trackEventTimely(eventCategory: .functions, eventActions: .sync, eventLabel: .syncEveryMinute)
+    }
+    
+    private func stopTracking() {
+        guard uploadOperations.isEmpty else {
+            return
+        }
+        analyticsService.stopTimelyTracking()
     }
     
     private func hideUploadCardIfNeeded() {
@@ -398,8 +418,7 @@ final class UploadService: BaseRequestService {
             self.logSyncSettings(state: "StartSyncFileList")
             
             var successHandled = false
-        //ignore green text below
-//            analyticsService.trackEventTimely(eventCategory: .functions, eventActions: .sync, eventLabel: .eve, timeInterval: 1.0)
+
             let operations: [UploadOperations] = itemsToSync.flatMap {
                 let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
                     self?.dispatchQueue.async { [weak self] in
@@ -676,6 +695,8 @@ extension UploadService {
 extension UploadService {
     
     fileprivate func trackAnalyticsFor(items: [WrapData], isFromCamera: Bool) {
+        
+        startSyncTracking()
         
         guard !isFromCamera else {
             analyticsService.track(event: .uploadFromCamera)

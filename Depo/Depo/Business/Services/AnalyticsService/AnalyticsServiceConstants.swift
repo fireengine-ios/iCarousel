@@ -516,6 +516,7 @@ enum GAEventLabel {
             }
         }
     }
+    
     case empty
     
     case purchaseSuccess
@@ -556,10 +557,12 @@ enum GAEventLabel {
     //
     case contactDelete
     //
+    case syncEveryMinute
+    //
     case videoStartVideo
     case videoStartStroy
     //
-    case serviceError(String)
+    case serviceError
     case paymentError(String)
     
     var text: String {
@@ -647,13 +650,16 @@ enum GAEventLabel {
         case .contactDelete:
             return "Delete"
         //
+        case .syncEveryMinute:
+            return "Every Minute"
+        //
         case .videoStartVideo:
             return "video"
         case .videoStartStroy:
             return "story"
         //
-        case .serviceError(let errorCode):
-            return "Server error \(errorCode)"
+        case .serviceError:
+            return "Server error"// \(errorCode)"
         case .paymentError(let paymentError):
             return "Definition(\(paymentError)"
         }
