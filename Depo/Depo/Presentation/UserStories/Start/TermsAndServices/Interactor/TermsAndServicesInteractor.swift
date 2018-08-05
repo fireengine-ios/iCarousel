@@ -85,7 +85,12 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             }
         }, fail: { [weak self] errorResponce in
             DispatchQueue.main.async {
-                self?.output.signupFailed(errorResponce: errorResponce)
+                if self?.isRedirectToSplash(forResponse: errorResponce) == true {
+                    self?.output.signupFailedCaptchaRequired()
+                    self?.output.signupFailed(errorResponce: errorResponce)
+                } else {
+                    self?.output.signupFailed(errorResponce: errorResponce)
+                }
             }
         })
     }
@@ -104,5 +109,15 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                 self?.output.applyEulaFaild(errorResponce: errorResponce)
             }
         })
+    }
+    
+    private func isRedirectToSplash(forResponse errorResponse: ErrorResponse) -> Bool {
+        if case ErrorResponse.error(let error) = errorResponse,
+            let serverError = error as? ServerValueError,
+            serverError.value.contains("Captcha required.") || serverError.value.contains("Invalid captcha.")
+        {
+            return true
+        }
+        return false
     }
 }
