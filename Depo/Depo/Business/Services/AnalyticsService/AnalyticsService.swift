@@ -119,7 +119,8 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
     func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Float)
     func stopTimelyTracking()
-    func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens)
+    func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int?,
+    uploadsMetrics: Int?, isPaymentMethodNative: Bool?)
     func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
 }
 
@@ -133,11 +134,28 @@ extension AnalyticsService: AnalyticsGA {
             ])
     }
     
-    func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens){
-        Analytics.logEvent("screenView", parameters: [
-            "screenName": screen.name,
-            "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
-            ])
+    func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int? = nil,
+                                     uploadsMetrics: Int? = nil, isPaymentMethodNative: Bool? = nil) {
+        let loginStatus = SingletonStorage.shared.referenceToken != nil
+        let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+        var payment: String?
+        
+        if let unwrapedisNativePayment = isPaymentMethodNative {
+            payment = "\(unwrapedisNativePayment)"
+        }
+        
+        let activeSubscriptionNames = SingletonStorage.shared.activeUserSubscriptionList.map {
+            return ($0.subscriptionPlanName ?? "") + "|"
+        }
+        let parametrs = AnalyticsDementsonObject(screenName: screen.name, pageType: screen, sourceType: screen.name, loginStatus: "\(loginStatus)",
+            platform: "iOS", isWifi: ReachabilityService().isReachableViaWiFi,
+            service: "lifebox", developmentVersion: version,
+            paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
+            operatorSystem: Device.deviceType, facialRecognition: SingletonStorage.shared.isFaceImageRecognitionON,
+            userPackagesNames: activeSubscriptionNames, countOfUploadMetric: uploadsMetrics,
+            countOfDownloadMetric: downloadsMetrics).productParametrs
+        
+        Analytics.logEvent("screenView", parameters: parametrs)
     }
     
     func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool) {

@@ -88,7 +88,7 @@ final class UploadService: BaseRequestService {
                 returnedUploadOperation(nil)
                 return
             }
-            
+            self.analyticsService.trackDimentionsEveryClickGA(screen: .upload, downloadsMetrics: nil, uploadsMetrics: items.count)
             self.trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
             
             let filteredItems = self.filter(items: items)
@@ -492,8 +492,10 @@ final class UploadService: BaseRequestService {
                 ///In the future there might be doc upload available, but for now its only photos and videos
                 case .image:
                     self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .uploadFile, eventLabel: .uploadFile(.photo))
+                    self.analyticsService.trackDimentionsEveryClickGA(screen: .photos, downloadsMetrics: nil, uploadsMetrics: items.count, isPaymentMethodNative: nil)
                 case .video:
                     self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .uploadFile, eventLabel: .uploadFile(.video))
+                    self.analyticsService.trackDimentionsEveryClickGA(screen: .videos, downloadsMetrics: nil, uploadsMetrics: items.count, isPaymentMethodNative: nil)
                 default:
                     break
                 }

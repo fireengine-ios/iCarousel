@@ -393,6 +393,7 @@ class FileService: BaseRequestService {
             self.downloadOperation.addOperations(operations, waitUntilFinished: true)
             
             if self.allOperationsCount == self.completedOperationsCount {
+                self.trackDownloaded(lastQueueItems: items)
                 CardsManager.default.stopOperationWithType(type: .download)
             }
             
@@ -430,7 +431,7 @@ class FileService: BaseRequestService {
                     let destination = Device.documentsFolderUrl(withComponent: downloadParam.fileName)
                     
                     let removeDestinationFile: () -> Void = {
-                        
+
                         do {
                             try FileManager.default.removeItem(at: destination)
                         } catch { }
@@ -482,6 +483,12 @@ class FileService: BaseRequestService {
                 fail?(.string("Incorrect response  "))
                 return
             }
+        }
+    }
+    
+    private func trackDownloaded(lastQueueItems: [Item]) {
+        if self.allOperationsCount == self.completedOperationsCount {
+            analyticsService.trackDimentionsEveryClickGA(screen: .allFiles, downloadsMetrics: lastQueueItems.count, uploadsMetrics: nil, isPaymentMethodNative: nil)
         }
     }
     

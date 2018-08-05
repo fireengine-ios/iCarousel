@@ -42,6 +42,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     func trackScreen() {
         analyticsService.logScreen(screen: .termsAndServices)
+        analyticsService.trackDimentionsEveryClickGA(screen: .termsAndServices)
     }
     
     var signUpSuccessResponse: SignUpSuccessResponse {

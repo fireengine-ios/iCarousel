@@ -63,7 +63,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func viewIsReady(collectionView: UICollectionView) {
         debugLog("BaseFilesGreedPresenter viewIsReady")
-        interactor.trackScreen()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.updateThreeDots(_:)),
@@ -613,6 +612,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func viewWillAppear() {
+        interactor.trackScreen()
         if dataSource.selectedItemsArray.count > 0 {
             bottomBarPresenter?.show(animated: true, onView: nil)
         }

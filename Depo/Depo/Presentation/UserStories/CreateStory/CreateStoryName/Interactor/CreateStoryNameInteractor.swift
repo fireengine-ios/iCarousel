@@ -49,6 +49,7 @@ class CreateStoryNameInteractor: CreateStoryNameInteractorInput {
     
     func trackScreen() {
         analyticsManager.logScreen(screen: .createStoryName)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .createStoryName)
     }
     
     func trackStoryNameGiven() {

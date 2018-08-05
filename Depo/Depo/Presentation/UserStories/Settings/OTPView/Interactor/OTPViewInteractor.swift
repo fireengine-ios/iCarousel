@@ -22,6 +22,7 @@ class OTPViewInteractor: PhoneVereficationInteractor {
     
     override func trackScreen() {
         analyticsService.logScreen(screen: .doubleOTP)
+        analyticsService.trackDimentionsEveryClickGA(screen: .doubleOTP)
     }
     
     override var expectedInputLength: Int? {

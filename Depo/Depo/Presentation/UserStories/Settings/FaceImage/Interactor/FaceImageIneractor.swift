@@ -53,6 +53,11 @@ extension FaceImageInteractor: FaceImageInteractorInput {
         let accountService = AccountService()
         let parameters = FaceImageAllowedParameters(allowed: isAllowed)
         accountService.switchFaceImageAllowed(parameters: parameters, success: { [weak self] response in
+            
+            if let response = response as? FaceImageAllowedResponse {
+                SingletonStorage.shared.faceImageSettings = response
+            }
+           
             DispatchQueue.main.async {
                 if isAllowed {
                     MenloworksEventsService.shared.onFaceImageRecognitionOn()
@@ -71,6 +76,7 @@ extension FaceImageInteractor: FaceImageInteractorInput {
     
     func trackScreen() {
         analyticsManager.logScreen(screen: .settingsFIR)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .settingsFIR)
     }
     
 }

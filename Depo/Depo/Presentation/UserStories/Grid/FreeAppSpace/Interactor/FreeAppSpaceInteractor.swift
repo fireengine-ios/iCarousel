@@ -75,6 +75,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     
     override func trackScreen() {
         analyticsManager.logScreen(screen: .freeAppSpace)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .freeAppSpace)
     }
     
     override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {

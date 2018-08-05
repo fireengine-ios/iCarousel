@@ -25,9 +25,9 @@ struct AnalyticsDementsonObject {
     let service: String
     let developmentVersion: String
     let paymentMethod: String? //Should be sent after package purchase. Value is Turkcell or inApp
-    let userId: String
+    let userId: Any
     let operatorSystem: String
-    let facialRecognition: Bool
+    let facialRecognition: Any//not bool in case of Null
     let userPackagesNames: [String] //Pacakage names that the user owns should be sent with every page click. Pacakage names should be seperated with pipe "|"
     let countOfUploadMetric: Int?
     let countOfDownloadMetric: Int?

@@ -25,6 +25,7 @@ class HomePageInteractor: HomePageInteractorInput {
     
     func trackScreen() {
         analyticsService.logScreen(screen: .homePage)
+        analyticsService.trackDimentionsEveryClickGA(screen: .homePage)
     }
     
     private func setupAutoSyncTriggering() {

@@ -23,6 +23,7 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
         }
         output?.startShowVideoFromResponce(responce: resp)
         analyticsManager.logScreen(screen: .createStoryPreview)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .createStoryPreview)
     }
     
     func onSaveStory() {

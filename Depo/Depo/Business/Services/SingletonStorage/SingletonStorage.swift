@@ -14,7 +14,9 @@ class SingletonStorage {
     
     var isAppraterInited: Bool = false
     var accountInfo: AccountInfoResponse?
+    var faceImageSettings: FaceImageAllowedResponse?
     var signUpInfo: RegistrationUserInfoModel?
+    var activeUserSubscription: ActiveSubscriptionResponse?
     var referenceToken: String?
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
@@ -62,4 +64,55 @@ class SingletonStorage {
         }
     }
     
+    private func getFaceImageRecognitionSettingsForUser(completion: @escaping (_ result: FaceImageAllowedResponse) -> Void, fail: @escaping (ErrorResponse) -> Void) {
+        if let unwrapedFIRStatus = faceImageSettings {
+            completion(unwrapedFIRStatus)
+            return
+        }
+        let accountService = AccountService()
+        accountService.faceImageAllowed(success: { [weak self] response in
+            if let response = response as? FaceImageAllowedResponse {
+                self?.faceImageSettings = response
+                completion(response)
+            } else {
+                fail(ErrorResponse.string(TextConstants.errorUnknown))
+            }
+            }, fail: { error in
+                fail(error)
+        })
+    }
+    
+    func getFaceImageSettingsStatus(success: @escaping (_ result: Bool) -> Void,
+                                     fail: @escaping (ErrorResponse) -> Void) {
+        
+        getFaceImageRecognitionSettingsForUser(completion: { firStatus in
+            guard let status = firStatus.allowed else {
+                fail(ErrorResponse.string(TextConstants.errorUnknown))
+                return
+            }
+            success(status)
+        }, fail: fail)
+    }
+    
+    var isFaceImageRecognitionON : Any {//Bool {
+            return faceImageSettings?.allowed ?? NSNull()
+    }
+    
+    //MARK: - subscriptions
+    
+    func getActiveSubscriptionsList(success: @escaping (_ result: ActiveSubscriptionResponse) -> Void,
+                                    fail: @escaping (ErrorResponse) -> Void) {
+        SubscriptionsServiceIml().activeSubscriptions(
+            success: { [weak self] response in
+                guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else { return }
+                self?.activeUserSubscription = subscriptionsResponce
+                success(subscriptionsResponce)
+            }, fail: { errorResponse in
+                fail(errorResponse)
+        })
+    }
+    
+    var activeUserSubscriptionList: [SubscriptionPlanBaseResponse] {
+        return activeUserSubscription?.list ?? []
+    }
 }

@@ -83,6 +83,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
     
     func trackScreen() {
         analyticsManager.logScreen(screen: .contactUS)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .contactUS)
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .feedbackForm, eventLabel: .feedbackOpen)
     }
 

@@ -196,6 +196,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     
     func trackScreen() {
         analyticsManager.logScreen(screen: .search)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .search)
     }
     
     private func getAlbumItem(forSearchItem item: SuggestionObject) {

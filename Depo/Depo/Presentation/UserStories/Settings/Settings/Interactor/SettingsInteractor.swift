@@ -109,10 +109,12 @@ class SettingsInteractor: SettingsInteractorInput {
     
     func trackScreen() {
         analyticsManager.logScreen(screen: .settings)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .settings)
     }
     
     func trackPhotoEdit() {
         analyticsManager.logScreen(screen: .settingsPhotoEdit)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .settingsPhotoEdit)
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .profilePhoto, eventLabel: .profilePhotoClick)
     }
 }
