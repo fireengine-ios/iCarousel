@@ -23,6 +23,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     
     func viewIsReady() {
         analyticsManager.logScreen(screen: .profileEdit)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .profileEdit)
         guard let userInfo_ = userInfo else {
             return
         }

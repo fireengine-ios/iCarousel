@@ -25,6 +25,7 @@ class HomePageInteractor: HomePageInteractorInput {
     
     func trackScreen() {
         analyticsService.logScreen(screen: .homePage)
+        analyticsService.trackDimentionsEveryClickGA(screen: .homePage)
     }
     
     private func setupAutoSyncTriggering() {
@@ -77,7 +78,7 @@ class HomePageInteractor: HomePageInteractorInput {
                     guard let quotaBytes = qresponce.bytes, let usedBytes = qresponce.bytesUsed else { return }
                     let usagePercent = Float(usedBytes) / Float(quotaBytes)
                     var viewForPresent: UIViewController? = nil
-                    
+                    self?.trackQuota(quotaPercentage: usagePercent)
                     if isFirstTime {
                         if 0.8 <= usagePercent && usagePercent < 0.9 {
                             viewForPresent = LargeFullOfQuotaPopUp.popUp(type: .LargeFullOfQuotaPopUpType80)
@@ -107,4 +108,20 @@ class HomePageInteractor: HomePageInteractorInput {
         })
     }
 
+    func trackQuota(quotaPercentage: Float) {
+        var quotaUsed: Int = 80
+        if 0.8 <= quotaPercentage && quotaPercentage < 0.9 {
+            quotaUsed = 80
+        } else if 0.9 <= quotaPercentage && quotaPercentage < 0.95 {
+            quotaUsed = 90
+        } else if 0.95 <= quotaPercentage && quotaPercentage < 1.0 {
+            quotaUsed = 95
+        } else if quotaPercentage >= 1.0 {
+            quotaUsed = 100
+        } else {
+            return
+        }
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .quota, eventLabel: .quotaUsed(quotaUsed))
+    }
+    
 }

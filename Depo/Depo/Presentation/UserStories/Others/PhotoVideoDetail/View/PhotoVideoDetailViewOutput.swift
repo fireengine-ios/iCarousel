@@ -25,4 +25,7 @@ protocol PhotoVideoDetailViewOutput {
     
     func updateBars()
     func markAsNonLocalItem(with uuid: String)
+    
+    func videoStarted()
+    func videoStoped()
 }

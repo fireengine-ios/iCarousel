@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Fabric
 import Crashlytics
 import FBSDKCoreKit
 import SDWebImage
@@ -70,16 +69,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        debugLog("AppDelegate didFinishLaunchingWithOptions")
         
         AppConfigurator.applicationStarted(with: launchOptions)
+        
+        ///call debugLog only if the Crashlytics is already initialized
+        debugLog("AppDelegate didFinishLaunchingWithOptions")
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = RouterVC().vcForCurrentState()
         window?.makeKeyAndVisible()
-        
-
-        Fabric.with([Crashlytics.self])
             
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
@@ -91,9 +89,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        MenloworksAppEvents.onAppLaunch()
         ContactSyncSDK.doPeriodicSync()
         passcodeStorage.systemCallOnScreen = false
+        
+        MenloworksAppEvents.onAppLaunch()
         
         return true
     }
@@ -272,9 +271,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //Notifications
 
 extension AppDelegate {
+    
+    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
+        debugLog("AppDelegate didRegister notificationSettings")
+        if #available(iOS 10, *) {
+            ///deprecated
+            ///call appendLocalMediaItems in the AppConfigurator
+            return
+        }
+        CoreDataStack.default.appendLocalMediaItems(completion: nil)
+    }
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         debugLog("AppDelegate didRegisterForRemoteNotificationsWithDeviceToken")
-        CoreDataStack.default.appendLocalMediaItems(completion: nil)
         MenloworksTagsService.shared.onNotificationPermissionChanged(true)
         
         MPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
@@ -282,7 +291,6 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         debugLog("AppDelegate didFailToRegisterForRemoteNotificationsWithError")
-        CoreDataStack.default.appendLocalMediaItems(completion: nil)
         MenloworksTagsService.shared.onNotificationPermissionChanged(false)
 
         MPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)

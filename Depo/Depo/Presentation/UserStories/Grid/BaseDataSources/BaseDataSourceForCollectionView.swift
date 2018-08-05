@@ -55,6 +55,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+    
+    func newFolderCreated()
 }
 
 extension BaseDataSourceForCollectionViewDelegate {
@@ -1759,6 +1761,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func newFolderCreated(){
+        delegate?.newFolderCreated()
         if let unwrapedFilters = originalFilters,
             canShowFolderFilters(filters: unwrapedFilters) {
             delegate?.needReloadData()

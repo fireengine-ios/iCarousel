@@ -302,6 +302,23 @@ enum AnalyticsPackageEcommerce {
     }
 }
 
+enum GACustomEventKeys {
+    case category
+    case action
+    case label
+    
+    var key: String {
+        switch self {
+        case .category:
+            return "GAeventCategory"
+        case .action:
+            return "GAeventActions"
+        case .label:
+            return "GAeventLabel"
+        }
+    }
+}
+
 enum GAEventCantegory {
     case enhancedEcommerce
     case functions
@@ -500,6 +517,8 @@ enum GAEventLabel {
         }
     }
     
+    case empty
+    
     case purchaseSuccess
     case purchaseFailure
     case trueLogin
@@ -524,7 +543,13 @@ enum GAEventLabel {
     case importInstagram
     //
     case uploadFile(FileType)
+    //
+    case crateStory(StoryEvent)
+    //
     case faceRecognition(Bool)
+    //
+    case profilePhotoClick
+    case profilePhotoUpload
     //
     case recognitionFace
     case recognitionObject
@@ -532,83 +557,172 @@ enum GAEventLabel {
     //
     case contactDelete
     //
+    case syncEveryMinute
+    //
     case videoStartVideo
     case videoStartStroy
     //
-    case serviceError(String)
+    case serviceError
     case paymentError(String)
     
-//    var text: String {
-//        switch self {
-//        case .purchaseSuccess:
-//            return "Success"
-//        case .purchaseFailure:
-//            return "Failure"
-//        case .trueLogin:
-//            return "True"
-//        case .falseLogin:
-//            return "False"
-//        case .feedbackOpen:
-//            return "Open"
-//        case .feedbackSend:
-//            return "Send"
-//        case .download(FileType):
-//            return ""
-//        case .share(ShareType):
-//            return ""
-//        case .quotaUsed(Int):
-//            return ""
-//        case .clickPhoto:
-//            return ""
-//        case .clickVideo:
-//            return ""
-//        case .notificationRecieved:
-//            return ""
-//        case .notificationRead:
-//            return ""
-//        case .sort(SortedRules):
-//            return ""
-//        case .search(String): ///searched word
-//            return ""
-//        case .clickOtherTurkcellServices: ///This event should be sent after each login (just send after login)
-//            return ""
-//        case .phoneBookBackUp:
-//            return ""
-//        case .phoneRestore:
-//            return ""
-//        //
-//        case .importDropbox:
-//            return ""
-//        case .importFacebook:
-//            return ""
-//        case .importInstagram:
-//            return ""
-//        //
-//        case .uploadFile(FileType):
-//            return ""
-//        case .faceRecognition(Bool):
-//            return ""
-//        //
-//        case .recognitionFace:
-//            return ""
-//        case .recognitionObject:
-//            return ""
-//        case .recognitionPlace:
-//            return ""
-//        //
-//        case .contactDelete:
-//            return ""
-//        //
-//        case .videoStartVideo:
-//            return ""
-//        case .videoStartStroy:
-//            return ""
-//        //
-//        case .serviceError(String):
-//            return ""
-//        case .paymentError(String):
-//            return ""
-//
-//        }
-//    }
+    var text: String {
+        switch self {
+        case .empty:
+            return ""
+        case .purchaseSuccess:
+            return "Success"
+        case .purchaseFailure:
+            return "Failure"
+        case .trueLogin:
+            return "True"
+        case .falseLogin:
+            return "False"
+        case .feedbackOpen:
+            return "Open"
+        case .feedbackSend:
+            return "Send"
+        case .download(let fileType):
+            return fileType.text
+        case .share(let shareType):
+            return shareType.text
+        case .quotaUsed(let quota): ///80 90 95 100
+            return "\(quota)"
+        case .clickPhoto:
+            return "Photo"
+        case .clickVideo:
+            return "Video"
+        case .notificationRecieved:
+            return "Received"
+        case .notificationRead:
+            return "Read"
+        case .sort(let sortRule):
+            switch sortRule {
+            case .lettersAZ, .albumlettersAZ:
+                return "A-Z"
+            case .lettersZA, .albumlettersZA:
+                return "Z-A"
+            case .sizeAZ:
+                return "smallest-first"
+            case .sizeZA:
+                return "largest-first"
+            case .timeUp, .metaDataTimeUp, .timeUpWithoutSection:
+                return "newest-first"
+            case .timeDown, .metaDataTimeDown, .timeDownWithoutSection:
+                return "oldest-first"
+            }
+        case .search(let searchText): ///searched word
+            return searchText
+        case .clickOtherTurkcellServices: ///This event should be sent after each login (just send after login)
+            return "lifebox"
+        case .phoneBookBackUp:
+            return "Backup"
+        case .phoneRestore:
+            return "Restore"
+        //
+        case .importDropbox:
+            return "Dropbox"
+        case .importFacebook:
+            return "Facebook"
+        case .importInstagram:
+            return "Instagram"
+        //
+        case .uploadFile(let fileType):
+            return fileType.text
+        //
+        case .crateStory(let storyEvent):
+            return storyEvent.text
+        //
+        case .faceRecognition(let isOn):
+            return "\(isOn)"
+        //
+        case .profilePhotoClick:
+            return "Click"
+        case .profilePhotoUpload:
+            return "Upload"
+        //
+        case .recognitionFace:
+            return "Face"
+        case .recognitionObject:
+            return "Object"
+        case .recognitionPlace:
+            return "Place"
+        //
+        case .contactDelete:
+            return "Delete"
+        //
+        case .syncEveryMinute:
+            return "Every Minute"
+        //
+        case .videoStartVideo:
+            return "video"
+        case .videoStartStroy:
+            return "story"
+        //
+        case .serviceError:
+            return "Server error"// \(errorCode)"
+        case .paymentError(let paymentError):
+            return "Definition(\(paymentError)"
+        }
+    }
+}
+
+enum GADementionsFields {
+    case screenName
+    case pageType
+    case sourceType
+    case loginStatus
+    case platform
+    case networkFixWifi
+    case service
+    case developmentVersion
+    case paymentMethod
+    case userID
+    case operatorSystem ///Carrier Name should be sent for every page click.
+    case faceImageStatus
+    case userPackage
+    
+    var text: String {
+        switch self {
+        case .screenName:
+            return "screenName"
+        case .pageType:
+            return "pageType"
+        case .sourceType:
+            return "sourceType"
+        case .loginStatus:
+            return "loginStatus"
+        case .platform:
+            return "platform"
+        case .networkFixWifi:
+            return "isWifi"
+        case .service:
+            return "service"
+        case .developmentVersion:
+            return "developmentVersion"
+        case .paymentMethod:
+            return "paymentMethod"
+        case .userID:
+            return "userId"
+        case .operatorSystem:
+            return "operatorSystem"
+        case .faceImageStatus:
+            return "facialRecognition"
+        case .userPackage:
+            return "userPackage"
+        }
+    }
+    
+}
+
+enum GAMetrics {
+    case countOfUpload //After uploading of all files in the upload queue finihes, send the count of uploaded files
+    case countOfDownload //After downloading finishes, send the count of downloaded files
+    var text: String {
+        switch self {
+        case .countOfUpload:
+            return "countOfUpload"
+        case .countOfDownload:
+            return "countOfDownload"
+        }
+    }
 }

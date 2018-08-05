@@ -30,6 +30,7 @@ final class ServerValueError {
         static let PROMO_NOT_ALLOWED_FOR_MULTIPLE_USE = "PROMO_NOT_ALLOWED_FOR_MULTIPLE_USE"
         static let PROMO_IS_INACTIVE = "PROMO_IS_INACTIVE"
         static let invalidCaptcha = "Invalid captcha."
+        static let captchaRequired = "Captcha required."
     }
 }
 extension ServerValueError: LocalizedError {
@@ -67,8 +68,13 @@ extension ServerValueError: LocalizedError {
             
         case ErrorKeys.PROMO_IS_INACTIVE:
             return TextConstants.PROMO_IS_INACTIVE
+            
         case ErrorKeys.invalidCaptcha:
             return TextConstants.invalidCaptcha
+            
+        case ErrorKeys.captchaRequired:
+            return TextConstants.captchaRequired
+            
         default:
             /// maybe will be need
             /// TextConstants.promocodeError

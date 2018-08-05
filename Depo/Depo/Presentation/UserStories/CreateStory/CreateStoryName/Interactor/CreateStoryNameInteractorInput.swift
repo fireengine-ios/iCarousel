@@ -17,4 +17,5 @@ protocol CreateStoryNameInteractorInput {
     func onCreateStory(storyName: String, items: [BaseDataSourceItem])
     
     func trackScreen()
+    func trackStoryNameGiven()
 }

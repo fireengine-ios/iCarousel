@@ -21,6 +21,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     var moreMenuConfig = [ElementTypes]()
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     var setupedMoreMenuConfig: [ElementTypes] {
         return moreMenuConfig
     }
@@ -146,5 +148,14 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 item.isLocalItem = false
             }
         }
+    }
+    
+    func trackVideoStart() {
+        analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .startVideo)
+        analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .everyMinuteVideo)
+    }
+    
+    func trackVideoStop() {
+        analyticsService.stopTimelyTracking()
     }
 }

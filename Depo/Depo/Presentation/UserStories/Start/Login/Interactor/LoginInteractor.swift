@@ -83,6 +83,8 @@ class LoginInteractor: LoginInteractorInput {
             debugLog("login isRememberMe \(self.rememberMe)")
             self.tokenStorage.isRememberMe = self.rememberMe
             self.analyticsService.track(event: .login)
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
             DispatchQueue.main.async {
                 self.output?.succesLogin()
             }
@@ -91,6 +93,8 @@ class LoginInteractor: LoginInteractorInput {
                 guard let `self` = self else {
                     return
                 }
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .falseLogin)
+                
                 if self.isBlockError(forResponse: errorResponse) {
                     self.output?.failedBlockError()
                     return
@@ -124,6 +128,7 @@ class LoginInteractor: LoginInteractorInput {
     
     func trackScreen() {
         analyticsService.logScreen(screen: .loginScreen)
+        analyticsService.trackDimentionsEveryClickGA(screen: .loginScreen)
     }
     
     private func setContactSettingsForUser() {

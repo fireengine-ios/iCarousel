@@ -234,20 +234,23 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                     trackPhotoOrVideo(photo: false)
                 case .audio:
                     analyticsManager.logScreen(screen: .music)
+                    analyticsManager.trackDimentionsEveryClickGA(screen: .music)
                 case .allDocs:
                     analyticsManager.logScreen(screen: .documents)
+                    analyticsManager.trackDimentionsEveryClickGA(screen: .documents)
                 default:
                     break
                 }
             case .favoriteStatus(let favoriteStatus):
                 if favoriteStatus == .favorites {
                     analyticsManager.logScreen(screen: .favorites)
+                    analyticsManager.trackDimentionsEveryClickGA(screen: .favorites)
                 }
             case .localStatus(let localStatus):
                 if localStatus == .nonLocal,
                     remoteItems is AllFilesService {
                     analyticsManager.logScreen(screen: .allFiles)
-
+                    analyticsManager.trackDimentionsEveryClickGA(screen: .allFiles)
                 }
             default:
                 break
@@ -255,10 +258,27 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         }
     }
     
+    func trackClickOnPhotoOrVideo(isPhoto: Bool) {
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: isPhoto ? .clickPhoto : .clickVideo)
+    }
+    
+    func trackSortingChange(sortRule: SortedRules) {
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .sort, eventLabel: .sort(sortRule))
+    }
+    
     private func trackPhotoOrVideo(photo: Bool) {
         if remoteItems is PhotoAndVideoService {
             analyticsManager.logScreen(screen: photo ? .photos : .videos)
+            analyticsManager.trackDimentionsEveryClickGA(screen: photo ? .photos : .videos)
         }
+    }
+    
+    func trackFolderCreated() {
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .newFolder)
+    }
+    
+    func trackItemsSelected() {
+        ///nothing here, need to override in create story interactor
     }
     
     var bottomBarConfig: EditingBarConfig? {

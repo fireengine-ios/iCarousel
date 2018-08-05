@@ -74,6 +74,7 @@ extension TurkcellSecurityInteractor: TurkcellSecurityInteractorInput {
     
     func trackScreen() {
         analyticsManager.logScreen(screen: .turkcellSecurity)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .turkcellSecurity)
     }
     
     var turkcellPasswordOn: Bool {
