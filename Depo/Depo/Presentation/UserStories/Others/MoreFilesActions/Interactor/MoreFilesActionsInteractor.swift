@@ -20,6 +20,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private let peopleService = PeopleService()
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
@@ -112,7 +113,17 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 
                 let activityVC = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
                 
-                activityVC.completionWithItemsHandler = { activityType, completed, _, _ in
+                activityVC.completionWithItemsHandler = { [weak self] activityType, completed, _, _ in
+                    guard let activityType = activityType else {
+                        return
+                    }
+                    if activityType == .postToFacebook {
+                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .share, eventLabel: .share(.facebook))
+                    } else if activityType == .postToTwitter {
+                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .share, eventLabel: .share(.twitter))
+                    } else if activityType == .mail {
+                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .share, eventLabel: .share(.eMail))
+                    }
                     guard
                         completed,
                         let activityTypeString = (activityType as NSString?) as String?,
@@ -606,6 +617,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func succesAction(elementType: ElementTypes) -> FileOperation {
         let success: FileOperation = { [weak self] in
+            self?.trackSuccessEvent(elementType: elementType)
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: elementType)
                 
@@ -623,6 +635,21 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }
         }
         return success
+    }
+    
+    private func trackSuccessEvent(elementType: ElementTypes) {
+        switch elementType {
+        case .addToFavorites:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .favoriteLike(.favorite))
+        case .removeFromFavorites:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .removefavorites)
+        case .delete, .deleteDeviceOriginal, .deleteFaceImage:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete)
+        case .print:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
+        default:
+            break
+        }
     }
     
     func failAction(elementType: ElementTypes) -> FailResponse {
@@ -711,6 +738,15 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 }, fail: { fail in
                     UIApplication.showErrorAlert(message: fail.description)
             })
+        }
+    }
+    
+    func trackEvent(elementType: ElementTypes) {
+        switch elementType {
+        case .print:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
+        default:
+            break
         }
     }
 }

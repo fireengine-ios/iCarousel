@@ -75,6 +75,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
 
     }
     
+    func newFolderCreated() {} /// confirms to BaseDataSourceForCollectionViewDelegate protocol
+    
     //MARK: - UnderNavBarBar/TopBar
     
     private func setupTopBar() {

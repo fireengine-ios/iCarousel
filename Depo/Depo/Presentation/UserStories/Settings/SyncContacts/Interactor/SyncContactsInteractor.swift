@@ -41,8 +41,11 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 MenloworksAppEvents.onContactUploaded()
                 self.analyticsService.track(event: .contactBackup)
                 self.analyticsService.logScreen(screen: .contactSyncBackUp)
+                self.analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .phonebook, eventLabel: .phoneBookBackUp)
                 self.performOperation(forType: .backup)
             case .restore:
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .phonebook, eventLabel: .phoneRestore)
                 MenloworksAppEvents.onContactDownloaded()
                 self.performOperation(forType: .restore)
             case .cancel:
@@ -54,6 +57,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 self.analyze()
             case .deleteDuplicated:
                 self.analyticsService.logScreen(screen: .contacSyncDeleteDuplicates)
+                self.analyticsService.trackDimentionsEveryClickGA(screen: .contacSyncDeleteDuplicates)
                 self.deleteDuplicated()
             }
         }
@@ -61,6 +65,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     
     func trackScreen() {
         analyticsService.logScreen(screen: .contactSyncGeneral)
+        analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncGeneral)
     }
     
     private func updateAccessToken(complition: @escaping VoidHandler) {
@@ -75,6 +80,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     func performOperation(forType type: SYNCMode) {
         if type == .backup {
             analyticsService.logScreen(screen: .contactSyncBackUp)
+            analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
         }
         // TODO: clear NumericConstants.limitContactsForBackUp
         contactsSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, type in
@@ -130,6 +136,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     
     private func deleteDuplicated() {
         analyticsService.logScreen(screen: .contacSyncDeleteDuplicates)
+        analyticsService.trackDimentionsEveryClickGA(screen: .contacSyncDeleteDuplicates)
         contactsSyncService.deleteDuplicates()
     }
     

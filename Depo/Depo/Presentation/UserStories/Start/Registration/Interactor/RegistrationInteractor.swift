@@ -17,6 +17,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
     
     func trackScreen() {
         analyticsService.logScreen(screen: .signUpScreen)
+        analyticsService.trackDimentionsEveryClickGA(screen: .signUpScreen)
     }
     
     func prepareModels() {

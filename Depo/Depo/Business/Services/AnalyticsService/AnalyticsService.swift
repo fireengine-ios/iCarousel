@@ -13,6 +13,8 @@ import Firebase
 
 final class AnalyticsService {
     
+    private var innerTimer: Timer?
+    
     func start() {
         setupAdjust()
         configureFireBase()
@@ -113,17 +115,51 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func logScreen(screen: AnalyticsAppScreens)
     func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int)
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int)
-    func trackCustomGAEvent()
+    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, eventValue: String?)
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
+    func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Float)
+    func stopTimelyTracking()
+    func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int?,
+    uploadsMetrics: Int?, isPaymentMethodNative: Bool?)
+    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
 }
 
 extension AnalyticsService: AnalyticsGA {
+    
     
     func logScreen(screen: AnalyticsAppScreens) {
         Analytics.logEvent("screenView", parameters: [
             "screenName": screen.name,
             "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
             ])
+    }
+    
+    func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int? = nil,
+                                     uploadsMetrics: Int? = nil, isPaymentMethodNative: Bool? = nil) {
+        let loginStatus = SingletonStorage.shared.referenceToken != nil
+        let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+        var payment: String?
+        
+        if let unwrapedisNativePayment = isPaymentMethodNative {
+            payment = "\(unwrapedisNativePayment)"
+        }
+        
+        let activeSubscriptionNames = SingletonStorage.shared.activeUserSubscriptionList.map {
+            return ($0.subscriptionPlanName ?? "") + "|"
+        }
+        let parametrs = AnalyticsDementsonObject(screenName: screen.name, pageType: screen, sourceType: screen.name, loginStatus: "\(loginStatus)",
+            platform: "iOS", isWifi: ReachabilityService().isReachableViaWiFi,
+            service: "lifebox", developmentVersion: version,
+            paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
+            operatorSystem: Device.deviceType, facialRecognition: SingletonStorage.shared.isFaceImageRecognitionON,
+            userPackagesNames: activeSubscriptionNames, countOfUploadMetric: uploadsMetrics,
+            countOfDownloadMetric: downloadsMetrics).productParametrs
+        
+        Analytics.logEvent("screenView", parameters: parametrs)
+    }
+    
+    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool) {
+        
     }
     
     func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int) {
@@ -153,28 +189,18 @@ extension AnalyticsService: AnalyticsGA {
         Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs)
     }
     
-    func trackCustomGAEvent() {
-        //        Analytics.logEvent("GAEvent", parameters: [
-        //            "eventCategory": User Actions,
-        //            "eventAction": Register,
-        //            "eventLabel": ,
-        //            "eventValue": ,
-        //            ])
-        //        Sample Code Block - iOS:
-        //        Analytics.logEvent("GAEvent", parameters: [
-        //        "eventCategory": Functions,
-        //        "eventAction": Login,
-        //        "eventLabel": True,
-        //        "eventValue": ,
-        //        ])
-        ///DIMENTION
-        //        Analytics.logEvent("screenView", parameters: [
-        //            "screenName": “Name of the Screen is put here”
-        //            "pageType": “HomePage”
-        //            "sourceType": “Music”
-        //            ])
-        
-        
+    func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, eventValue: String? = nil ) {
+        let eventTempoValue = eventValue ?? ""
+        ///migt be needed in the future
+//        if let unwrapedEventValue = eventValue {
+//            eventTempoValue = "\(unwrapedEventValue)"
+//        }
+        Analytics.logEvent("GAEvent", parameters: [
+            "eventCategory" : eventCategory.text,
+            "eventAction" : eventActions.text,
+            "eventLabel" : eventLabel.text,
+            "eventValue" : eventTempoValue
+            ])
     }
     
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int) {
@@ -193,4 +219,41 @@ extension AnalyticsService: AnalyticsGA {
                                          AnalyticsParameterItemList : analyticasItemList]
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: ecommerce)
     }
+    
+    func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, timeInterval: Float = 1.0) {
+        if innerTimer != nil {
+            stopTimelyTracking()
+        }
+        innerTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeInterval), target: self, selector: #selector(timerStep(sender:)), userInfo:
+            [
+                GACustomEventKeys.category.key: eventCategory,
+             GACustomEventKeys.action.key: eventActions,
+             GACustomEventKeys.label.key: eventLabel
+            ],
+                                          repeats: true)
+    }
+    
+    @objc func timerStep(sender: Timer) {
+        guard let unwrapedUserInfo = sender.userInfo as? [String: Any],
+            let eventCategory = unwrapedUserInfo[GACustomEventKeys.category.key] as? GAEventCantegory,
+        let eventActions = unwrapedUserInfo[GACustomEventKeys.action.key] as? GAEventAction,
+            let eventLabel = unwrapedUserInfo[GACustomEventKeys.label.key] as? GAEventLabel else {
+            return
+        }
+        trackCustomGAEvent(eventCategory: eventCategory, eventActions: eventActions, eventLabel: eventLabel)
+    }
+    
+    func stopTimelyTracking() {
+        guard let curTimer = innerTimer else {
+            return
+        }
+        if curTimer.isValid {
+            curTimer.invalidate()
+            innerTimer = nil
+        }
+    }
+//in future we migt need more then 1 timer, in case this calss become songleton
+//    func stopAllTimelyTracking() {
+//
+//    }
 }

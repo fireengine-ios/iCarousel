@@ -91,6 +91,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         subscriptionsService.activeSubscriptions(
             success: { [weak self] response in
                 guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else { return }
+                SingletonStorage.shared.activeUserSubscription = subscriptionsResponce
                 DispatchQueue.main.async {
                     self?.output.successed(activeSubscriptions: subscriptionsResponce.list)
                 }
@@ -103,6 +104,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     func trackScreen() {
         analyticsService.logScreen(screen: .packages)
+        analyticsService.trackDimentionsEveryClickGA(screen: .packages)
     }
     
     func getAccountType() {
@@ -155,6 +157,8 @@ extension PackagesInteractor: PackagesInteractorInput {
                 if let offer = offer {
                     self?.analyticsService.trackInnerPurchase(offer)
                     self?.analyticsService.trackProductPurchasedInnerGA(offer: offer, packageIndex: planIndex)
+                    self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: false)
+                    self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseSuccess)
                 }
 
                 /// delay stay for server perform request (android logic)
@@ -162,6 +166,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                     self?.output.successedVerifyOffer()
                 }
             }, fail: { [weak self] errorResponse in
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseFailure)
                 DispatchQueue.main.async {
                     self?.output.failedVerifyOffer()
                 }
@@ -196,12 +201,18 @@ extension PackagesInteractor: PackagesInteractorInput {
             case .success(let identifier):
                 self?.analyticsService.trackInAppPurchase(product: offerApple.skProduct)
                 self?.analyticsService.trackProductInAppPurchaseGA(product: offerApple.skProduct, packageIndex: planIndex)
+                self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true)
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseSuccess)
                 self?.validatePurchase(productId: identifier)
             case .canceled:
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("transaction canceled"))
+               self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseFailure)
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.string(TextConstants.cancelPurchase))
                 }
             case .error(let error):
+                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("\(error.description)"))
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseFailure)
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.error(error))
                 }

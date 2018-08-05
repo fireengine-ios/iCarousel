@@ -48,6 +48,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramViewOutput {
         view?.startActivityIndicator()
         interactor.setAsync(status: true)
         interactor.uploadCurrent()
+        interactor.trackImportActivationInstagram()
     }
 }
 

@@ -14,5 +14,6 @@ class HelpAndSupportInteractor: HelpAndSupportInteractorInput {
     
     func trackScreen() {
         analyticsManager.logScreen(screen: .FAQ)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .FAQ)
     }
 }

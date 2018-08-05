@@ -70,6 +70,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate var folderBtn: SubPlussButtonView!
     fileprivate var albumBtn: SubPlussButtonView!
     fileprivate var uploadFromLifebox: SubPlussButtonView!
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     //    let musicBar = MusicBar.initFromXib()
     lazy var player: MediaPlayer = factory.resolve()
@@ -755,6 +756,7 @@ extension TabBarViewController: TabBarActionHandler {
             router.presentViewController(controller: nController)
             
         case .createStory:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .story, eventLabel: .crateStory(.click))
             let isFavorites = router.isOnFavoritesView()
             router.createStoryName(items: nil, needSelectionItems: false, isFavorites: isFavorites)
             

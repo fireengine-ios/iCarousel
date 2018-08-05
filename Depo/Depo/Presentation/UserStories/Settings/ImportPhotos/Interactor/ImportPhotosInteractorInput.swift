@@ -17,6 +17,7 @@ protocol ImportFromFBInteractorInput {
     func requestStatus()
     func requestStart()
     func requestStop()
+    func trackImportActivationFB()
 }
 
 // MARK: - Dropbox
@@ -28,6 +29,7 @@ protocol ImportFromDropboxInteractorInput {
     func requestConnect(withToken token: String)
     func requestStart()
     func requestStatusForCompletion()
+    func trackImportActivationDropBox()
 }
 
 // MARK: - Instagram
@@ -39,4 +41,5 @@ protocol ImportFromInstagramInteractorInput {
     func setAsync(status: Bool)
     func uploadCurrent()
     func cancelUpload()
+    func trackImportActivationInstagram()
 }

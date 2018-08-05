@@ -75,6 +75,7 @@ class SettingsInteractor: SettingsInteractorInput {
         output.asyncOperationStarted()
         authService.serverLogout(complition: { [weak self] in
             self?.output.asyncOperationStoped()
+            self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .logout)
             self?.authService.logout { [weak self] in
                 MenloworksEventsService.shared.onLoggedOut()
                 self?.output.goToOnboarding()
@@ -84,7 +85,9 @@ class SettingsInteractor: SettingsInteractorInput {
     
     func uploadPhoto(withPhoto photo: Data) {
         accountSerivese.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] response in
+            self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .photoEdit)
             ImageDownloder().removeImageFromCache(url: self?.userInfoResponse?.urlForPhoto, completion: {
+                self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .profilePhoto, eventLabel: .profilePhotoUpload)
                 DispatchQueue.main.async {
                     self?.output.profilePhotoUploadSuccessed(image: UIImage(data: photo))
                 }
@@ -106,9 +109,12 @@ class SettingsInteractor: SettingsInteractorInput {
     
     func trackScreen() {
         analyticsManager.logScreen(screen: .settings)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .settings)
     }
     
     func trackPhotoEdit() {
         analyticsManager.logScreen(screen: .settingsPhotoEdit)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .settingsPhotoEdit)
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .profilePhoto, eventLabel: .profilePhotoClick)
     }
 }

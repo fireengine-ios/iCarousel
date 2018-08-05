@@ -57,7 +57,7 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
                 return
             }
             story.storyPhotos = wrapArray
-            
+            interactor.trackItemsSelected()
             if let rout = router as? CreateStorySelectionRouter {
                 rout.goToSelectionOrderPhotosFor(story: story)
             }

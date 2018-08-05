@@ -23,6 +23,7 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
         }
         output?.startShowVideoFromResponce(responce: resp)
         analyticsManager.logScreen(screen: .createStoryPreview)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .createStoryPreview)
     }
     
     func onSaveStory() {
@@ -42,6 +43,7 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
         
         CreateStoryService().createStory(createStory: parameter, success: {[weak self] in
             DispatchQueue.main.async {
+                self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .story, eventLabel: .crateStory(.save))
                 self?.output?.storyCreated()
                 ItemOperationManager.default.newStoryCreated()
             }
