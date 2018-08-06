@@ -15,16 +15,22 @@ struct RouteRequests {
     /// prod
     static let BaseUrl = URL(string: "https://adepo.turkcell.com.tr/")!
     static let BaseContactsUrl = URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
+    static let httpAuthification = "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
     
     /// pre-prod
 //    static let BaseUrl = URL(string: "https://adepotest.turkcell.com.tr/")!
 //    static let BaseContactsUrl = URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
+//    static let httpAuthification = "http://adepotest.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
+    
+    /// test
+//    static let BaseUrl = URL(string: "https://tcloudstb.turkcell.com.tr/")!
+//    static let BaseContactsUrl = URL(string: "https://tcloudstb-contactsync.turkcell.com.tr/ttyapi/")!
+//    static let httpAuthification = "http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
     
     static let baseApi = BaseUrl +/ "api"
     
 //    static let NewURL = URL(string: "https://mylifebox.com/")!
     
-    static let httpAuthification = "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
     static let httpsAuthification = "/api/auth/token?rememberMe=%@"
     static let authificationByRememberMe = "/api/auth/rememberMe"
     static let authificationByToken = "/api/auth/token"
