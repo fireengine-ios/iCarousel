@@ -38,7 +38,7 @@ final class AppConfigurator {
         prepareSessionManager()
         setVersionAndBuildNumber()
         configureSDWebImage()
-        setupIAPandObserver()
+        setupIAPObserver()
         startMenloworks(with: launchOptions)
         setupCropy()
         startCurio(with: launchOptions)
