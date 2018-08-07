@@ -52,7 +52,7 @@ final class AppConfigurator {
         startUpdateLocation(with: launchOptions)
     }
     
-    private static func setupIAPandObserver() {
+    private static func setupIAPObserver() {
         let _ = IAPManager.shared ///setup observer on the didLaunch, as apple suggest
     }
     
