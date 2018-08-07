@@ -38,7 +38,7 @@ final class AppConfigurator {
         prepareSessionManager()
         setVersionAndBuildNumber()
         configureSDWebImage()
-        
+        setupIAPandObserver()
         startMenloworks(with: launchOptions)
         setupCropy()
         startCurio(with: launchOptions)
@@ -50,6 +50,10 @@ final class AppConfigurator {
         LocalMediaStorage.default.clearTemporaryFolder()
         
         startUpdateLocation(with: launchOptions)
+    }
+    
+    private static func setupIAPandObserver() {
+        let _ = IAPManager.shared ///setup observer on the didLaunch, as apple suggest
     }
     
     private static func firstStart() {
