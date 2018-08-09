@@ -261,4 +261,12 @@ class MenloworksEventsService {
         let eventName = String(format: MenloworksEventsConstants.sharedItemFormat, itemType, toApp)
         CurioSDK.shared().sendEvent(eventName, eventValue: "Success")
     }
+    
+    func profileName(isEmpty: Bool) {
+        if isEmpty {
+            mergedHit(event: MenloworksEventsConstants.profileNameEmpty)
+        } else {
+            mergedHit(event: MenloworksEventsConstants.profileNameFull)
+        }
+    }
 }

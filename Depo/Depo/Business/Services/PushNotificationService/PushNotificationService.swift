@@ -86,6 +86,8 @@ final class PushNotificationService {
         case .login: openLogin()
         case .search: openSearch()
         case .freeUpSpace: break
+        case .settings: openSettings()
+        case .profileEdit: openProfileEdit()
         }
         notificationAction = nil
     }
@@ -273,5 +275,18 @@ final class PushNotificationService {
         }
         
         UIApplication.shared.openSafely(url)
+    }
+    
+    private func openSettings() {
+        pushTo(router.settings)
+    }
+    
+    private func openProfileEdit() {
+        SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: { [weak self] response in
+            let vc = self?.router.userProfile(userInfo: response)
+            self?.pushTo(vc)
+            /// we don't need error handling here
+        }, fail: {_ in})
+        
     }
 }
