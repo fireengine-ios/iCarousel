@@ -56,6 +56,8 @@ class UserProfileInteractor: UserProfileInteractorInput {
             let parameters = UserNameParameters(userName: name, userSurName: "")
             AccountService().updateUserProfile(parameters: parameters,
                                                success: {[weak self] responce in
+                MenloworksTagsService.shared.onProfileNameChanged(name: name)
+                MenloworksEventsService.shared.profileName(isEmpty: name.isEmpty)
                 self?.userInfo?.name = name
                 self?.updateEmailIfNeed(email: email, number: number)
             }, fail: { [weak self] error in

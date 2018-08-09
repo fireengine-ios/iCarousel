@@ -506,7 +506,23 @@ class MenloworksTags {
         }
     }
 
-
+    class ProfileName: MenloworksTag {
+        init(name: String) {
+            super.init(name: NameConstants.profileName, value: name)
+        }
+    }
+    
+    class ProfileNameEmpty: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.profileNameEmpty)
+        }
+    }
+    
+    class ProfileNameFull: MenloworksTag {
+        init() {
+            super.init(name: NameConstants.profileNameFull)
+        }
+    }
 }
 
 class MenloworksTag {

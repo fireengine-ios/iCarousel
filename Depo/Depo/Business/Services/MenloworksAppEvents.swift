@@ -27,6 +27,19 @@ class MenloworksAppEvents {
         MenloworksEventsService.shared.onLaunch()
         
         onDiskStorageStatus()
+        
+        sendProfileName()
+    }
+    
+    static func sendProfileName() {
+        AccountService().info(success: { response in
+            guard let response = response as? AccountInfoResponse, let name = response.name else {
+                return
+            }
+            MenloworksTagsService.shared.onProfileNameChanged(name: name)
+            MenloworksEventsService.shared.profileName(isEmpty: name.isEmpty)
+            /// we don't need error handling
+        }, fail: {_ in })
     }
     
     static func onDiskStorageStatus() {
