@@ -991,7 +991,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func updateVisibleCells(){
+    func updateVisibleCells() {
         let array = collectionView?.visibleCells ?? [UICollectionViewCell]()
         for cell in array {
             guard let cell_ = cell as? CollectionViewCellDataProtocol else{
@@ -1008,6 +1008,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 continue
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+            cell_.set(name: unwrapedObject.name)
+            ///TODO: confireWithWrapperd call may be meaningless because of isAlreadyConfigured flag inside
             cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
             
             if let cell = cell as? BasicCollectionMultiFileCell {
