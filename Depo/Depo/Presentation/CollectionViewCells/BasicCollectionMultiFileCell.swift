@@ -313,6 +313,13 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         setSelectionSmallSelectionImageView(false, isHidden: true)
     }
     
+    override func set(name: String?) {
+        super.set(name: name)
+        DispatchQueue.toMain {
+            self.fileNameLabel.text = name
+        }
+    }
+    
     @IBAction func moreButtonAction(_ sender: Any) {
         actionDelegate?.morebuttonGotPressed(sender: sender, itemModel: itemModel)
     }
