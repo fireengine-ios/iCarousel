@@ -32,8 +32,8 @@ class MenloworksAppEvents {
     }
     
     static func sendProfileName() {
-        AccountService().info(success: { response in
-            guard let response = response as? AccountInfoResponse, let name = response.name else {
+        SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: { response in
+            guard let name = response.name else {
                 return
             }
             MenloworksTagsService.shared.onProfileNameChanged(name: name)
