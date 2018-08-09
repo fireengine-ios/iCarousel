@@ -157,6 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         debugLog("AppDelegate applicationWillEnterForeground")
         
         ContactSyncSDK.doPeriodicSync()
+        MenloworksAppEvents.sendProfileName()
     }
     
     private func showPasscodeIfNeed() {

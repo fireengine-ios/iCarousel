@@ -92,6 +92,10 @@ extension MenloworksTags {
         static let videoUploadAutosync = "video_uploaded_autosync"
         static let videoUploadManual = "video_upload_manual"
         static let videoUploadBackground = "video_upload_background"
+        
+        static let profileNameEmpty = "profile_name_empty"
+        static let profileNameFull = "profile_name_full"
+        static let profileName = "profile_name"
     }
     
     class ValueConstants {
