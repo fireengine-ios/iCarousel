@@ -38,7 +38,7 @@ class MenloworksAppEvents {
             }
             MenloworksTagsService.shared.onProfileNameChanged(name: name)
             MenloworksEventsService.shared.profileName(isEmpty: name.isEmpty)
-            /// we don't need error handling
+            /// we don't need error handling here
         }, fail: {_ in })
     }
     

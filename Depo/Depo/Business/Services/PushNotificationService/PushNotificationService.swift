@@ -86,6 +86,8 @@ final class PushNotificationService {
         case .login: openLogin()
         case .search: openSearch()
         case .freeUpSpace: break
+        case .settings: openSettings()
+        case .profileEdit: openProfileEdit()
         }
         notificationAction = nil
     }
@@ -273,5 +275,21 @@ final class PushNotificationService {
         }
         
         UIApplication.shared.openSafely(url)
+    }
+    
+    private func openSettings() {
+        pushTo(router.settings)
+    }
+    
+    private func openProfileEdit() {
+        AccountService().info(success: { [weak self] response in
+            guard let response = response as? AccountInfoResponse else {
+                return
+            }
+            let vc = self?.router.userProfile(userInfo: response)
+            self?.pushTo(vc)
+            /// we don't need error handling here
+        }, fail: {_ in})
+        
     }
 }
