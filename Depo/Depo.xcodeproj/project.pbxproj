@@ -2469,9 +2469,9 @@
 		8CD2B3B81FE7B44000280547 /* WaitingForWiFiPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */; };
 		8CD7D8E9211193C00019B4F3 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8E8211193C00019B4F3 /* GoogleService-Info-debug.plist */; };
 		8CD7D8EA211193C00019B4F3 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8E8211193C00019B4F3 /* GoogleService-Info-debug.plist */; };
-		8CD7D8F82111AACC0019B4F3 /* FixedAVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CB665210F2D7500342EEE /* FixedAVPlayerViewController.swift */; };
-		8CD7D8FB2111C9800019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8FA2111C97F0019B4F3 /* container */; };
-		8CD7D8FC2111C9800019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8FA2111C97F0019B4F3 /* container */; };
+		8CD7D8F621119BB20019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8F521119BB10019B4F3 /* container */; };
+		8CD7D8F721119BB20019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8F521119BB10019B4F3 /* container */; };
+		8CD7D8F92111ABA00019B4F3 /* FixedAVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CB665210F2D7500342EEE /* FixedAVPlayerViewController.swift */; };
 		8CD84C441FDEC570005CD3B8 /* AlbumDetailModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787F4B211FDAC2A700378F73 /* AlbumDetailModuleOutput.swift */; };
 		8CD84C451FDEC5E2005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5301FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift */; };
 		8CD84C461FDEC5E7005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */; };
@@ -4949,7 +4949,7 @@
 		8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
 		8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionServiceExtension.swift; sourceTree = "<group>"; };
 		8CD7D8E8211193C00019B4F3 /* GoogleService-Info-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-debug.plist"; sourceTree = "<group>"; };
-		8CD7D8FA2111C97F0019B4F3 /* container */ = {isa = PBXFileReference; lastKnownFileType = folder; path = container; sourceTree = "<group>"; };
+		8CD7D8F521119BB10019B4F3 /* container */ = {isa = PBXFileReference; lastKnownFileType = folder; path = container; sourceTree = "<group>"; };
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
 		8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyContainerNavVC.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
@@ -5840,7 +5840,7 @@
 		051E1DFC19CAC2F900FD1E03 /* Depo */ = {
 			isa = PBXGroup;
 			children = (
-				8CD7D8FA2111C97F0019B4F3 /* container */,
+				8CD7D8F521119BB10019B4F3 /* container */,
 				051E1DFD19CAC2F900FD1E03 /* App */,
 				CE2BA7C91FC7075900AA3EBE /* Presentation */,
 				CE2BA7CA1FC7077500AA3EBE /* Business */,
@@ -12685,7 +12685,7 @@
 				8C06AEF92008AD70003D8E05 /* cancel_buton@3x.png in Resources */,
 				8C06B1472008AD72003D8E05 /* target_secili.png in Resources */,
 				8C06B1452008AD72003D8E05 /* target@3x.png in Resources */,
-				8CD7D8FC2111C9800019B4F3 /* container in Resources */,
+				8CD7D8F721119BB20019B4F3 /* container in Resources */,
 				8C06AEBF2008AD70003D8E05 /* alt_cizgili@2x.png in Resources */,
 				8C06AFBF2008AD71003D8E05 /* geri@3x.png in Resources */,
 				8CD2B3B61FE7B43800280547 /* PrepareToAutoSync.xib in Resources */,
@@ -13293,7 +13293,7 @@
 				8C06B1C62008AD72003D8E05 /* sticker_close.png in Resources */,
 				98072619203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */,
 				8C06B1D02008AD72003D8E05 /* sticker_resize@3x.png in Resources */,
-				8CD7D8FB2111C9800019B4F3 /* container in Resources */,
+				8CD7D8F621119BB20019B4F3 /* container in Resources */,
 				8C5408411F61C0E000D4717A /* GridListTopBar.xib in Resources */,
 				8C06B0362008AD71003D8E05 /* Orta@2x.png in Resources */,
 				8C06B09E2008AD71003D8E05 /* refresh@3x.png in Resources */,
@@ -14915,7 +14915,7 @@
 				486F7B58208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift in Sources */,
 				8C0E8FA01FDEBDFF00789C91 /* AlbumsInitializer.swift in Sources */,
 				CE23A0F9205FF5320048267D /* UnderlineTextField.swift in Sources */,
-				8CD7D8F82111AACC0019B4F3 /* FixedAVPlayerViewController.swift in Sources */,
+				8CD7D8F92111ABA00019B4F3 /* FixedAVPlayerViewController.swift in Sources */,
 				8C0E8FA11FDEBDFF00789C91 /* AlbumDetailViewController.swift in Sources */,
 				8C0B919D20170E6400A5BA81 /* DuplicatedContactsInteractor.swift in Sources */,
 				8C0E8FA21FDEBDFF00789C91 /* SingletonStorage.swift in Sources */,
@@ -16849,8 +16849,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox;
-				PROVISIONING_PROFILE = "747cf355-57c7-4d05-ae4a-3c51cc5d7147";
-				PROVISIONING_PROFILE_SPECIFIER = "747cf355-57c7-4d05-ae4a-3c51cc5d7147";
+				PROVISIONING_PROFILE = "7021771e-04e2-4105-afa4-9b1546616781";
+				PROVISIONING_PROFILE_SPECIFIER = "7021771e-04e2-4105-afa4-9b1546616781";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -17006,8 +17006,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fb23dfaa-fe5e-437d-8680-af383d142dfd";
-				PROVISIONING_PROFILE_SPECIFIER = "fb23dfaa-fe5e-437d-8680-af383d142dfd";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "5b73e404-cb1d-4942-92af-c48837a959dd";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_VERSION = 4.0;
@@ -17140,8 +17140,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
-				PROVISIONING_PROFILE_SPECIFIER = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
+				PROVISIONING_PROFILE = "e08aaa4b-10f2-43a0-aff1-9f673534c521";
+				PROVISIONING_PROFILE_SPECIFIER = "0b145cc5-5ce1-4554-aada-7a1342f2e58f";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -17276,8 +17276,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8195c797-2345-4b62-bc99-9cda2b33d902";
-				PROVISIONING_PROFILE_SPECIFIER = "8195c797-2345-4b62-bc99-9cda2b33d902";
+				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";
+				PROVISIONING_PROFILE_SPECIFIER = "2d292b2c-d757-4771-b7ba-185ec4f6f6a7";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -17630,8 +17630,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
-				PROVISIONING_PROFILE_SPECIFIER = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
+				PROVISIONING_PROFILE = "ac34d57b-b255-48a2-8713-09581185070e";
+				PROVISIONING_PROFILE_SPECIFIER = "ac34d57b-b255-48a2-8713-09581185070e";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
