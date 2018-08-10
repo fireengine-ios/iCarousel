@@ -33,7 +33,6 @@ PODS:
   - FirebaseInstanceID (2.0.10):
     - FirebaseCore (~> 4.0)
   - GoogleAnalytics (3.17.0)
-  - GoogleConversionTracking (3.4.0)
   - GoogleSymbolUtilities (1.1.2)
   - GoogleTagManager (6.0.0):
     - FirebaseAnalytics (~> 4.0)
@@ -87,7 +86,6 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - Firebase/Core
-  - GoogleConversionTracking
   - GoogleTagManager
   - iCarousel
   - KeychainSwift (~> 11.0)
@@ -120,7 +118,6 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseInstanceID
     - GoogleAnalytics
-    - GoogleConversionTracking
     - GoogleSymbolUtilities
     - GoogleTagManager
     - GoogleToolboxForMac
@@ -172,7 +169,6 @@ SPEC CHECKSUMS:
   FirebaseCore: 90cb1c53d69b556f112a1bf72b5fcfaad7650790
   FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
-  GoogleConversionTracking: ca8c89abda2bd28bb6472b316eeb4ece9264e279
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleTagManager: 07acea48abe73aac17550b81bbf52a37db2d7dd6
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
@@ -194,6 +190,6 @@ SPEC CHECKSUMS:
   XCGLogger: c9601cae9a8912de34a58666ba931ed3d624dd31
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
 
-PODFILE CHECKSUM: d308b9937fdd12d35768165e1f66993632260fb9
+PODFILE CHECKSUM: ee243292f04d5a4089468bf3fcec489fe17cb5ac
 
 COCOAPODS: 1.5.2

@@ -30,7 +30,6 @@
 		1C8FDD0A3C795F7711BC5822 /* FeedbackViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFFF80AD607CB90108A1537 /* FeedbackViewRouterInput.swift */; };
 		205A9C8FDC29F8AABB22940E /* UserInfoSubViewInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF703F8C0F19668138D30BD /* UserInfoSubViewInteractorOutput.swift */; };
 		2108C2EF8209265F3A1A5B4D /* SelectNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */; };
-		210ECD22B11B1C77459DF555 /* Pods_Depo_LifeTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AFA8FA7D2C811BEDE72C8C /* Pods_Depo_LifeTech.framework */; };
 		227254E0DCD67B9CEB06CD58 /* AlbumDetailRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE4791A4280C1ADF5C180FB /* AlbumDetailRouterInput.swift */; };
 		228C4DD0339279189CC9619C /* BaseFilesGreedViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC2716CA43EB44D104F6F6 /* BaseFilesGreedViewOutput.swift */; };
 		2364F4A40D0899837114AB2A /* ActivityTimelineInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30889CD8C0EE339E19DF61B6 /* ActivityTimelineInteractorOutput.swift */; };
@@ -230,7 +229,6 @@
 		6F1E64C890D98AD859149D80 /* UploadFilesSelectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD57D30BE3EDADF17A957953 /* UploadFilesSelectionRouter.swift */; };
 		6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */; };
 		709E10958B04F9A7C42CA5DE /* UploadFilesSelectionRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B058307B0EC6FCD52BCCAEDE /* UploadFilesSelectionRouterInput.swift */; };
-		70A2E1D0FA17BCF1F0AAD62F /* Pods_Depo_LifeTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AFA8FA7D2C811BEDE72C8C /* Pods_Depo_LifeTech.framework */; };
 		759BB6DB00ECA61DBDBBB0B9 /* OTPViewInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7C949A95C197C80ACC503C /* OTPViewInteractorIO.swift */; };
 		766F7C491E77AB6EAA0B0AF1 /* Pods_LifeboxFileProviderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B5E1D20C146FE00D91112 /* Pods_LifeboxFileProviderUI.framework */; };
 		7764E006C922DEA29D9C0744 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5BEC48C5ED3B8650FB2FB3 /* SettingsViewController.swift */; };
@@ -2609,6 +2607,7 @@
 		B53DCE9920EF634900400DBA /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8020EF634800400DBA /* ContactDevice.m */; };
 		B53DCE9A20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
 		B53DCE9B20EF634900400DBA /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B53DCE8120EF634800400DBA /* SyncAdapter.m */; };
+		B543FB0E211C847C00E009C4 /* Pods_Depo_LifeTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AFA8FA7D2C811BEDE72C8C /* Pods_Depo_LifeTech.framework */; };
 		B54844C0209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54844C1209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */; };
 		B54BFF31202B20250018AF82 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C850A21ACD63F700F976DE /* NotificationCenter.framework */; };
@@ -2647,6 +2646,10 @@
 		B5C4C8A52049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */; };
 		B5C4C8A7204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */; };
 		B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */; };
+		B5C7C57F211C699F006E94DB /* AugumentRealityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C57E211C699F006E94DB /* AugumentRealityDetailViewController.swift */; };
+		B5C7C580211C699F006E94DB /* AugumentRealityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C57E211C699F006E94DB /* AugumentRealityDetailViewController.swift */; };
+		B5C7C582211C6A21006E94DB /* AugumentRealityDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C581211C6A21006E94DB /* AugumentRealityDetailItem.swift */; };
+		B5C7C583211C6A21006E94DB /* AugumentRealityDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C581211C6A21006E94DB /* AugumentRealityDetailItem.swift */; };
 		B5E74798208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E74799208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
@@ -5104,6 +5107,8 @@
 		B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsTableViewCell.swift; sourceTree = "<group>"; };
 		B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncSettingsTableViewCell.xib; sourceTree = "<group>"; };
 		B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsOptionView.swift; sourceTree = "<group>"; };
+		B5C7C57E211C699F006E94DB /* AugumentRealityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugumentRealityDetailViewController.swift; sourceTree = "<group>"; };
+		B5C7C581211C6A21006E94DB /* AugumentRealityDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugumentRealityDetailItem.swift; sourceTree = "<group>"; };
 		B5E74797208B3736003A7110 /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTaskService.swift; sourceTree = "<group>"; };
 		B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsModel.swift; sourceTree = "<group>"; };
@@ -5706,6 +5711,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B543FB0E211C847C00E009C4 /* Pods_Depo_LifeTech.framework in Frameworks */,
 				CE3318D91EFBDDC700E25989 /* AdSupport.framework in Frameworks */,
 				CE3318DB1EFBDE0100E25989 /* Photos.framework in Frameworks */,
 				CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */,
@@ -5735,8 +5741,6 @@
 				CE51AD171EF90853005DCEE0 /* libz.dylib in Frameworks */,
 				B56E0DD720B414510082044D /* StoreKit.framework in Frameworks */,
 				CE51AD1A1EF90853005DCEE0 /* CoreGraphics.framework in Frameworks */,
-				70A2E1D0FA17BCF1F0AAD62F /* Pods_Depo_LifeTech.framework in Frameworks */,
-				210ECD22B11B1C77459DF555 /* Pods_Depo_LifeTech.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10031,6 +10035,15 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		B5C7C57D211C6958006E94DB /* AugumentRealityDetail */ = {
+			isa = PBXGroup;
+			children = (
+				B5C7C57E211C699F006E94DB /* AugumentRealityDetailViewController.swift */,
+				B5C7C581211C6A21006E94DB /* AugumentRealityDetailItem.swift */,
+			);
+			path = AugumentRealityDetail;
+			sourceTree = "<group>";
+		};
 		B5FB65741FDE6F3E00A02FD7 /* OperationProgressService */ = {
 			isa = PBXGroup;
 			children = (
@@ -10051,6 +10064,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				B5C7C57D211C6958006E94DB /* AugumentRealityDetail */,
 				7CEE2718209B533C00EF6C79 /* Landing */,
 				98A8677C2088C64D00D2D4F4 /* SpotlightViewController */,
 				CEB2734A205BE3E500E1AE9C /* EmailEnter */,
@@ -13949,6 +13963,7 @@
 				4A9886F520443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
 				8C0E8C681FDEBDFF00789C91 /* FileServiceResponse.swift in Sources */,
 				8C0E8C691FDEBDFF00789C91 /* CreateStoryPreviewModuleInput.swift in Sources */,
+				B5C7C583211C6A21006E94DB /* AugumentRealityDetailItem.swift in Sources */,
 				8C0E8C6A1FDEBDFF00789C91 /* CreateStoryPhotosOrderViewController.swift in Sources */,
 				8C0E8C6B1FDEBDFF00789C91 /* UserProfilePresenter.swift in Sources */,
 				8CDB21EB20AC10B100739700 /* DispatchQueue+Main.swift in Sources */,
@@ -13987,6 +14002,7 @@
 				CE1458D02045734900812544 /* Alamofire+Validate.swift in Sources */,
 				7C529689203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */,
 				8C0E8C871FDEBDFF00789C91 /* UIImageView.swift in Sources */,
+				B5C7C580211C699F006E94DB /* AugumentRealityDetailViewController.swift in Sources */,
 				8C0E8C881FDEBDFF00789C91 /* PHPhotoLibraryChangeObserver.swift in Sources */,
 				8C0E8C891FDEBDFF00789C91 /* UserProfileModuleInput.swift in Sources */,
 				8C0E8C8A1FDEBDFF00789C91 /* CustomIOS7AlertView.m in Sources */,
@@ -15102,6 +15118,7 @@
 				7CDABD0B1F1E3A6300C8CC16 /* UserProfilePresenter.swift in Sources */,
 				CEC3C2421FB99AF800C3D67F /* PasscodeSettingsPresenter.swift in Sources */,
 				7CD1F8D51F014F150028F51A /* Router.swift in Sources */,
+				B5C7C582211C6A21006E94DB /* AugumentRealityDetailItem.swift in Sources */,
 				CE51AB051EF90853005DCEE0 /* Filter.m in Sources */,
 				CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */,
 				CE51AB121EF90853005DCEE0 /* GSMUserInputCell.swift in Sources */,
@@ -15140,6 +15157,7 @@
 				CEAE3FF21EFD517300A405B2 /* CustomTabBarItem.swift in Sources */,
 				8C6EF8901F348B77002AC795 /* EditinglBar.swift in Sources */,
 				B56E0DE920B5644D0082044D /* NotificationName+Extensions.swift in Sources */,
+				B5C7C57F211C699F006E94DB /* AugumentRealityDetailViewController.swift in Sources */,
 				CEAE3F941EFD4D7C00A405B2 /* SubPlussButtonView.swift in Sources */,
 				8C7786A61F3F38F0005CB432 /* VisualMusicPlayerViewController.swift in Sources */,
 				CE51AB3A1EF90853005DCEE0 /* AutoSyncSwitcherTableViewCell.swift in Sources */,
@@ -16720,6 +16738,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -16775,6 +16794,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -16827,6 +16847,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -16880,6 +16901,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -17342,6 +17364,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -17398,6 +17421,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -17451,6 +17475,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -17505,6 +17530,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
 				);
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/App/Depo-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
