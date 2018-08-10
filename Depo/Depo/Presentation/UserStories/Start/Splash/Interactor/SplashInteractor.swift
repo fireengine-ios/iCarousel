@@ -15,6 +15,7 @@ class SplashInteractor: SplashInteractorInput {
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
@@ -23,17 +24,22 @@ class SplashInteractor: SplashInteractorInput {
     func startLoginInBackroung() {
         if tokenStorage.accessToken == nil {
             if ReachabilityService().isReachableViaWiFi {
+                analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .falseLogin)
                 failLogin()
             } else {
                 authenticationService.turkcellAuth(success: { [weak self] in
                     self?.tokenStorage.isRememberMe = true
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
+                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
+                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
                         self?.turkcellSuccessLogin()
                     }, fail: { [weak self] error in
+                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .falseLogin)
                         self?.output.asyncOperationSucces()
                         self?.output.onFailLogin()
                     })
                 }, fail: { [weak self] response in
+                    self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .falseLogin)
                     self?.output.asyncOperationSucces()
                     self?.output.onFailLogin()
                 })
@@ -55,18 +61,23 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func turkcellSuccessLogin() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
         DispatchQueue.toMain {
             self.output.onSuccessLoginTurkcell()
         }
     }
     
     func successLogin() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
         DispatchQueue.toMain {
             self.output.onSuccessLogin()
         }
     }
     
     func failLogin() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .falseLogin)
         DispatchQueue.toMain {
             self.output.onFailLogin()
             if !ReachabilityService().isReachable {

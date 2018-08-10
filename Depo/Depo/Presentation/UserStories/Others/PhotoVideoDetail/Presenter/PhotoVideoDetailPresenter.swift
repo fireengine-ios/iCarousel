@@ -24,6 +24,14 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         bottomBarPresenter?.show(animated: false, onView: view)
     }
     
+    func videoStarted() {
+        interactor.trackVideoStart()
+    }
+    
+    func videoStoped() {
+        interactor.trackVideoStop()
+    }
+    
     func prepareBarConfigForFileTypes(fileTypes: [FileType], selectedIndex: Int) -> EditingBarConfig {
         
         var barConfig = interactor.bottomBarConfig(for: selectedIndex)

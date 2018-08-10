@@ -42,6 +42,7 @@ class CreateStoryNamePresenter: CreateStoryNameModuleInput, CreateStoryNameViewO
         if (text.isEmpty) {
             showEmptyNamePopup()
         } else {
+            interactor.trackStoryNameGiven()
             if let items = items {
                 interactor.onCreateStory(storyName: text, items: items)
             } else {

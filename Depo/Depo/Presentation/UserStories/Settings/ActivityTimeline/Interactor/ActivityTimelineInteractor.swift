@@ -29,6 +29,7 @@ extension ActivityTimelineInteractor: ActivityTimelineInteractorInput {
     
     func trackScreen() {
         analyticsManager.logScreen(screen: .activityTimeline)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .activityTimeline)
     }
     
     func loadMoreActivities() {

@@ -1,9 +1,9 @@
 {
 
-"fingerprint":"Mw$0",
+"fingerprint":"NQ$0",
 
 "resource": {
-  "version":"3",
+  "version":"5",
   "macros":[{
       "function":"__e",
       "instance_name":"Event Name"
@@ -55,6 +55,12 @@
       "vtp_setDefaultValue":false,
       "vtp_eventType":"CUSTOM",
       "vtp_key":"inviteFriend"
+    },{
+      "function":"__md",
+      "instance_name":"facialRecognationNumber",
+      "vtp_setDefaultValue":false,
+      "vtp_eventType":"CUSTOM",
+      "vtp_key":"facialRecognationNumber"
     },{
       "function":"__md",
       "instance_name":"loginStatus",
@@ -140,6 +146,12 @@
       "vtp_eventType":"CUSTOM",
       "vtp_key":"errorType"
     },{
+      "function":"__md",
+      "instance_name":"operatorSystem",
+      "vtp_setDefaultValue":false,
+      "vtp_eventType":"CUSTOM",
+      "vtp_key":"operatorSystem"
+    },{
       "function":"__c",
       "instance_name":"GA-Tracking Id",
       "vtp_value":"UA-88879405-4"
@@ -148,9 +160,9 @@
       "instance_name":"GA-DSS Test Account",
       "vtp_fieldsToSet":["list",["map","fieldName","screenName","value",["macro",2]]],
       "vtp_collectAdid":false,
-      "vtp_metric":["list",["map","index","6","metric",["macro",3]],["map","index","7","metric",["macro",4]],["map","index","8","metric",["macro",5]],["map","index","9","metric",["macro",6]],["map","index","10","metric",["macro",7]],["map","index","22","metric",["macro",8]]],
-      "vtp_dimension":["list",["map","index","6","dimension",["macro",9]],["map","index","53","dimension",["macro",10]],["map","index","54","dimension",["macro",11]],["map","index","55","dimension",["macro",12]],["map","index","64","dimension",["macro",13]],["map","index","61","dimension",["macro",14]],["map","index","56","dimension",["macro",15]],["map","index","1","dimension",["macro",16]],["map","index","68","dimension",["macro",17]],["map","index","72","dimension",["macro",18]],["map","index","73","dimension",["macro",19]],["map","index","81","dimension",["macro",20]],["map","index","82","dimension",["macro",21]],["map","index","94","dimension",["macro",22]]],
-      "vtp_trackingId":["macro",23],
+      "vtp_metric":["list",["map","index","6","metric",["macro",3]],["map","index","7","metric",["macro",4]],["map","index","8","metric",["macro",5]],["map","index","9","metric",["macro",6]],["map","index","10","metric",["macro",7]],["map","index","22","metric",["macro",8]],["map","index","33","metric",["macro",9]]],
+      "vtp_dimension":["list",["map","index","6","dimension",["macro",10]],["map","index","53","dimension",["macro",11]],["map","index","54","dimension",["macro",12]],["map","index","55","dimension",["macro",13]],["map","index","64","dimension",["macro",14]],["map","index","61","dimension",["macro",15]],["map","index","56","dimension",["macro",16]],["map","index","1","dimension",["macro",17]],["map","index","68","dimension",["macro",18]],["map","index","72","dimension",["macro",19]],["map","index","73","dimension",["macro",20]],["map","index","81","dimension",["macro",21]],["map","index","82","dimension",["macro",22]],["map","index","94","dimension",["macro",23]],["map","index","5","dimension",["macro",24]]],
+      "vtp_trackingId":["macro",25],
       "vtp_enableUaRlsa":false,
       "vtp_enableUseInternalVersion":false,
       "vtp_enableFirebaseEcommerce":false
@@ -183,10 +195,10 @@
       "vtp_overrideGaSettings":false,
       "vtp_eventCategory":["macro",1],
       "vtp_trackType":"TRACK_EVENT",
-      "vtp_gaSettings":["macro",24],
+      "vtp_gaSettings":["macro",26],
       "vtp_sendFirebaseCampaignData":true,
-      "vtp_eventAction":["macro",25],
-      "vtp_eventLabel":["macro",26],
+      "vtp_eventAction":["macro",27],
+      "vtp_eventLabel":["macro",28],
       "vtp_enableUaRlsa":false,
       "vtp_enableUseInternalVersion":false,
       "vtp_enableFirebaseCampaignData":true,
@@ -198,7 +210,7 @@
       "once_per_event":true,
       "vtp_overrideGaSettings":false,
       "vtp_trackType":"TRACK_SCREENVIEW",
-      "vtp_gaSettings":["macro",24],
+      "vtp_gaSettings":["macro",26],
       "vtp_enableUaRlsa":false,
       "vtp_enableUseInternalVersion":false,
       "vtp_enableFirebaseCampaignData":true,
@@ -212,10 +224,10 @@
       "vtp_eventCategory":["macro",1],
       "vtp_trackType":"TRACK_EVENT",
       "vtp_readDataFrom":"FIREBASE_EVENT_DATA",
-      "vtp_gaSettings":["macro",24],
+      "vtp_gaSettings":["macro",26],
       "vtp_sendFirebaseCampaignData":true,
-      "vtp_eventAction":["macro",25],
-      "vtp_eventLabel":["macro",26],
+      "vtp_eventAction":["macro",27],
+      "vtp_eventLabel":["macro",28],
       "vtp_enableEcommerce":true,
       "vtp_enableUaRlsa":false,
       "vtp_enableUseInternalVersion":false,
@@ -232,10 +244,10 @@
       "vtp_eventCategory":["macro",1],
       "vtp_trackType":"TRACK_EVENT",
       "vtp_readDataFrom":"FIREBASE_EVENT_DATA",
-      "vtp_gaSettings":["macro",24],
+      "vtp_gaSettings":["macro",26],
       "vtp_sendFirebaseCampaignData":true,
-      "vtp_eventAction":["macro",25],
-      "vtp_eventLabel":["macro",26],
+      "vtp_eventAction":["macro",27],
+      "vtp_eventLabel":["macro",28],
       "vtp_enableEcommerce":true,
       "vtp_enableUaRlsa":false,
       "vtp_enableUseInternalVersion":false,

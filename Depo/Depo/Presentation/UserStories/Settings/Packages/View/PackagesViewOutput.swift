@@ -8,8 +8,8 @@
 
 protocol PackagesViewOutput {
     func viewIsReady()
-    func didPressOn(plan: SubscriptionPlan)
-    func buy(offer: OfferServiceResponse)
+    func didPressOn(plan: SubscriptionPlan, planIndex: Int)
+    func buy(offer: OfferServiceResponse, planIndex: Int)
     func submit(promocode: String)
     func restorePurchasesPressed()
     

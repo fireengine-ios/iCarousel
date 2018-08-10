@@ -12,7 +12,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
     private let analyticsManager: AnalyticsService = factory.resolve()
     func onSend(selectedLanguage: LanguageModel) {
         output.startAsyncOperation()
-        
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .feedbackForm, eventLabel: .feedbackSend)
         let parameter = SelectedLanguage(selectedLanguage: selectedLanguage)
         FeedbackService().sendSelectedLanguage(selectedLanguageParameter: parameter, succes: {[weak self] success in
             DispatchQueue.main.async {
@@ -83,6 +83,8 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
     
     func trackScreen() {
         analyticsManager.logScreen(screen: .contactUS)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .contactUS)
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .feedbackForm, eventLabel: .feedbackOpen)
     }
 
 }

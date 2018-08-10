@@ -39,6 +39,7 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
         }
         if let music = dataSource.selectedItemsArray.first as? Item {
             story.music = music
+            interactor.trackItemsSelected()
             if let viewController = view as? CreateStoryAudioSelectionViewController {
                viewController.hideView()
             }

@@ -7,14 +7,14 @@
 //
 
 import UIKit
+import WebKit
 
-class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput, UITextViewDelegate {
+class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput {
 
     var output: TermsAndServicesViewOutput!
 
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var checkboxButton: UIButton!
     @IBOutlet weak var checkboxLabel: UILabel!
     @IBOutlet weak var acceptButton: BlueButtonWithWhiteText!
@@ -22,8 +22,50 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput,
     @IBOutlet weak var topContraintIOS10: NSLayoutConstraint!
     @IBOutlet weak var topContraintIOS11: NSLayoutConstraint!
     
-    // MARK: Life cycle
+    private var userWebContentController: WKUserContentController {
+        let contentController = WKUserContentController()
+        let scriptSource = "document.body.style.color = 'white'; document.body.style.webkitTextSizeAdjust = 'auto';"
+        let script = WKUserScript(source: scriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        contentController.addUserScript(script)
+        
+        return contentController
+    }
+    
+    private var webViewConfiguration: WKWebViewConfiguration {
+        let webConfig = WKWebViewConfiguration()
+        webConfig.userContentController = self.userWebContentController
+        if #available(iOS 10.0, *) {
+            webConfig.dataDetectorTypes = [.phoneNumber, .link]
+        }
+        
+        return webConfig
+    }
+    
+    private lazy var webView: WKWebView = {
+        let web = WKWebView(frame: .zero, configuration: self.webViewConfiguration)
+        web.isOpaque = false
+        web.backgroundColor = .clear
+        web.scrollView.backgroundColor = .clear
 
+        web.navigationDelegate = self
+        return web
+    }()
+    
+    
+    // MARK: Life cycle
+    
+    override func loadView() {
+        super.loadView()
+
+        contentView.addSubview(webView)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        webView.frame = contentView.bounds
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -64,15 +106,12 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput,
         
         acceptButton.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
         
-        textView.textContainerInset.right = 10
-        textView.text = ""
-        textView.dataDetectorTypes = [.phoneNumber, .link]
-        textView.indicatorStyle = .white
+        webView.clearPage()
         
         contentView.clipsToBounds = true
         contentView.layer.cornerRadius = 10
     }
-    
+
     // MARK: Buttons action
     
     @IBAction func onStartUsing(_ sender: Any) {
@@ -94,20 +133,11 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput,
     }
     
     func showLoadedTermsAndUses(eula: String) {
-        guard let htmlData = eula.data(using: String.Encoding.utf8) else {
+        guard !eula.isEmpty else {
             return
         }
         
-        do {
-            let string = try NSMutableAttributedString(data: htmlData,
-                                                       options: [.documentType: NSAttributedString.DocumentType.html,
-                                                                 .characterEncoding: String.Encoding.utf8.rawValue],
-                                                       documentAttributes: nil)
-            string.addAttributes([.foregroundColor: ColorConstants.whiteColor], range: NSRange(location: 0, length: string.length))
-            textView.attributedText = string
-        } catch {
-            print("error: ", error)
-        }
+        webView.loadHTMLString(eula, baseURL: nil)
     }
     
     func noConfirmAgreements(errorString: String) {
@@ -120,5 +150,24 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput,
     
     func popNavigationVC() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    deinit {
+        webView.navigationDelegate = nil
+        webView.stopLoading()
+    }
+}
+
+
+extension TermsAndServicesViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        switch navigationAction.navigationType {
+        case .linkActivated:
+            UIApplication.shared.openSafely(navigationAction.request.url)
+            decisionHandler(.cancel)
+        default:
+            decisionHandler(.allow)
+        }
     }
 }

@@ -14,6 +14,7 @@ class FeedbackViewPresenter: BasePresenter, FeedbackViewModuleInput, FeedbackVie
 
     func viewIsReady() {
         view.languagesUploaded(lanuages: LanguageModel.availableLanguages())
+        interactor.trackScreen()
     }
     
     func onSend(selectedLanguage: LanguageModel) {

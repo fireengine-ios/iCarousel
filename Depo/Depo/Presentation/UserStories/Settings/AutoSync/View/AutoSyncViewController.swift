@@ -51,7 +51,7 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
         
         setupTapHandler()
         analyticsService.logScreen(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
-        
+        analyticsService.trackDimentionsEveryClickGA(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
         output.viewIsReady()
     }
     

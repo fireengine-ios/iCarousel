@@ -28,6 +28,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     
     func trackScreen() {
         analyticsService.logScreen(screen: .signUpOTP)
+        analyticsService.trackDimentionsEveryClickGA(screen: .signUpOTP)
     }
     
     var remainingTimeInMinutes: Int {

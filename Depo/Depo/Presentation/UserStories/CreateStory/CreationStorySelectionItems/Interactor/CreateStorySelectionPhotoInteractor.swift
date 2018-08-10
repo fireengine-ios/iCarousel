@@ -29,4 +29,11 @@ class CreateStorySelectionPhotoInteractor: CreateStorySelectionInteractor {
             super.nextItems(searchText, sortBy: sortBy, sortOrder: sortOrder, newFieldValue: newFieldValue)
         }
     }
+    
+    override func trackItemsSelected() {
+        if remoteItems is PhotoAndVideoService || remoteItems is FavouritesService {
+            analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .story, eventLabel: .crateStory(.photoSelect))
+        }
+    }
+    
 }

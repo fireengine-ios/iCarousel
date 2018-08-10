@@ -241,6 +241,7 @@ class FileService: BaseRequestService {
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.download)
     var allOperationsCount : Int = 0
     var completedOperationsCount : Int = 0
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     override init() {
         super.init()
@@ -347,11 +348,32 @@ class FileService: BaseRequestService {
         let downloadRequests: [BaseDownloadRequestParametrs] = supportedItemsToDownload.flatMap {
             BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name, item: $0)
         }
-        let operations = downloadRequests.flatMap {
-            DownLoadOperation(downloadParam: $0, success: { [weak self] in
+        
+        let operations = downloadRequests.flatMap { baseDownloadRequest in
+            DownLoadOperation(downloadParam: baseDownloadRequest, success: { [weak self] in
                 guard let `self` = self else {
                     return
                 }
+                if let unwrapItem = baseDownloadRequest.item {
+                    switch unwrapItem.fileType {
+                    case .video:
+                        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.video))
+                    case .image:
+                        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.photo))
+                    case .audio:
+                        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.music))
+                    case .application(let applicationType):
+                        switch applicationType {
+                        case .pdf, .ppt, .xls, .txt, .doc :
+                           self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.document))
+                        default:
+                            break
+                        }
+                    default:
+                        break
+                    }
+                }
+
                 self.completedOperationsCount += 1
                 CardsManager.default.setProgressForOperationWith(type: .download,
                                                                             allOperations: self.allOperationsCount,
@@ -371,6 +393,7 @@ class FileService: BaseRequestService {
             self.downloadOperation.addOperations(operations, waitUntilFinished: true)
             
             if self.allOperationsCount == self.completedOperationsCount {
+                self.trackDownloaded(lastQueueItems: items)
                 CardsManager.default.stopOperationWithType(type: .download)
             }
             
@@ -408,7 +431,7 @@ class FileService: BaseRequestService {
                     let destination = Device.documentsFolderUrl(withComponent: downloadParam.fileName)
                     
                     let removeDestinationFile: () -> Void = {
-                        
+
                         do {
                             try FileManager.default.removeItem(at: destination)
                         } catch { }
@@ -460,6 +483,12 @@ class FileService: BaseRequestService {
                 fail?(.string("Incorrect response  "))
                 return
             }
+        }
+    }
+    
+    private func trackDownloaded(lastQueueItems: [Item]) {
+        if self.allOperationsCount == self.completedOperationsCount {
+            analyticsService.trackDimentionsEveryClickGA(screen: .allFiles, downloadsMetrics: lastQueueItems.count, uploadsMetrics: nil, isPaymentMethodNative: nil)
         }
     }
     

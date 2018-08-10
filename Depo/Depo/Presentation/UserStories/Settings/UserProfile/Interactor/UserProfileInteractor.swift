@@ -23,6 +23,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     
     func viewIsReady() {
         analyticsManager.logScreen(screen: .profileEdit)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .profileEdit)
         guard let userInfo_ = userInfo else {
             return
         }
@@ -54,7 +55,10 @@ class UserProfileInteractor: UserProfileInteractorInput {
 ///changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
             let parameters = UserNameParameters(userName: name, userSurName: "")
             AccountService().updateUserProfile(parameters: parameters,
-                                               success: {[weak self] responce in
+                                               success: { [weak self] responce in
+                let nameIsEmpty = name.isEmpty
+                MenloworksTagsService.shared.onProfileNameChanged(isEmpty: nameIsEmpty)
+                MenloworksEventsService.shared.profileName(isEmpty: nameIsEmpty)
                 self?.userInfo?.name = name
                 self?.updateEmailIfNeed(email: email, number: number)
             }, fail: { [weak self] error in

@@ -43,5 +43,6 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     
     func trackScreen() {
         analyticsManager.logScreen(screen: .autoSyncSettings)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .autoSyncSettings)
     }
 }
