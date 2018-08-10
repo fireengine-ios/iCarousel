@@ -507,8 +507,13 @@ class MenloworksTags {
     }
 
     class ProfileName: MenloworksTag {
-        init(name: String) {
-            super.init(name: NameConstants.profileName, value: name)
+        init(isEmpty: Bool) {
+            if isEmpty {
+                super.init(name: NameConstants.profileName, value: "empty")
+            } else {
+                super.init(name: NameConstants.profileName, value: "full")
+            }
+            
         }
     }
     
