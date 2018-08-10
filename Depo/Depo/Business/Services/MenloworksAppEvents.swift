@@ -32,6 +32,10 @@ class MenloworksAppEvents {
     }
     
     static func sendProfileName() {
+        let tokenStorage: TokenStorage = factory.resolve()
+        if tokenStorage.refreshToken == nil {
+            return
+        }
         SingletonStorage.shared.getAccountInfoForUser(forceReload: false, success: { response in
             guard let name = response.name else {
                 return
