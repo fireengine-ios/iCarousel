@@ -547,13 +547,13 @@ class MenloworksTagsService {
         }) { _ in }
     }
     
-    func onProfileNameChanged(name: String) {        
-        let profileNameChangedTag = MenloworksTags.ProfileName(isEmpty: name.isEmpty)
+    func onProfileNameChanged(isEmpty: Bool) {        
+        let profileNameChangedTag = MenloworksTags.ProfileName(isEmpty: isEmpty)
         hitTag(profileNameChangedTag)
         
         let profileNameIsEmptyTag: MenloworksTag
         
-        if name.isEmpty {
+        if isEmpty {
             profileNameIsEmptyTag = MenloworksTags.ProfileNameEmpty()
         } else {
             profileNameIsEmptyTag = MenloworksTags.ProfileNameFull()
