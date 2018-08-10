@@ -3204,6 +3204,7 @@
 		CE98F6DB204E71E300433915 /* String+UTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6DA204E71E300433915 /* String+UTType.swift */; };
 		CE98F6DD204E721200433915 /* FilesExistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6DC204E721200433915 /* FilesExistManager.swift */; };
 		CE99AC78201CB778003DD3B7 /* CardActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99AC77201CB778003DD3B7 /* CardActionType.swift */; };
+		CE9AFAD1211D73D0006AF836 /* FaceImageDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */; };
 		CE9CB666210F2D7500342EEE /* FixedAVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CB665210F2D7500342EEE /* FixedAVPlayerViewController.swift */; };
 		CEA524BA2046C95E0036FCEA /* UploadQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524B92046C95E0036FCEA /* UploadQueueService.swift */; };
 		CEA524BC2046D6A10036FCEA /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BB2046D6A10036FCEA /* UploadOperation.swift */; };
@@ -5370,6 +5371,7 @@
 		CE98F6DA204E71E300433915 /* String+UTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UTType.swift"; sourceTree = "<group>"; };
 		CE98F6DC204E721200433915 /* FilesExistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesExistManager.swift; sourceTree = "<group>"; };
 		CE99AC77201CB778003DD3B7 /* CardActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActionType.swift; sourceTree = "<group>"; };
+		CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageDisplayManager.swift; sourceTree = "<group>"; };
 		CE9CB665210F2D7500342EEE /* FixedAVPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedAVPlayerViewController.swift; sourceTree = "<group>"; };
 		CEA524B92046C95E0036FCEA /* UploadQueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadQueueService.swift; sourceTree = "<group>"; };
 		CEA524BB2046D6A10036FCEA /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
@@ -6616,8 +6618,9 @@
 		4A8CC2F9201A004300C040C4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4A8CC301201A00D400C040C4 /* FaceImageViewController.swift */,
 				4A8CC302201A00D400C040C4 /* FaceImageViewController.xib */,
+				4A8CC301201A00D400C040C4 /* FaceImageViewController.swift */,
+				CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */,
 				4A8CC307201A016F00C040C4 /* FaceImageViewInput.swift */,
 				4A8CC30A201A018000C040C4 /* FaceImageViewOutput.swift */,
 			);
@@ -15155,6 +15158,7 @@
 				7C49881E1F3320420039C5F2 /* CreateStoryPhotosOrderViewInput.swift in Sources */,
 				8DCB21781F3C8BC000BAFE1E /* SeacrhViewRouter.swift in Sources */,
 				CE51AB5B1EF90853005DCEE0 /* ValidationService.swift in Sources */,
+				CE9AFAD1211D73D0006AF836 /* FaceImageDisplayManager.swift in Sources */,
 				7CDABD0E1F1E3A6300C8CC16 /* UserProfileViewController.swift in Sources */,
 				986B20622077684C00E04B96 /* StreamReaderWriter.swift in Sources */,
 				8DCB21731F3C86D700BAFE1E /* SearchViewInteractorInput.swift in Sources */,
