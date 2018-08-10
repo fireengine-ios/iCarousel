@@ -32,7 +32,7 @@ class MenloworksAppEvents {
     }
     
     static func sendProfileName() {
-        SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: { response in
+        SingletonStorage.shared.getAccountInfoForUser(forceReload: false, success: { response in
             guard let name = response.name else {
                 return
             }

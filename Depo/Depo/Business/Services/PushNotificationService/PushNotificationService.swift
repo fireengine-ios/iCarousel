@@ -282,7 +282,7 @@ final class PushNotificationService {
     }
     
     private func openProfileEdit() {
-        SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: { [weak self] response in
+        SingletonStorage.shared.getAccountInfoForUser(forceReload: false, success: { [weak self] response in
             let vc = self?.router.userProfile(userInfo: response)
             self?.pushTo(vc)
             /// we don't need error handling here
