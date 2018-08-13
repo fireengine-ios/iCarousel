@@ -648,3 +648,7 @@
 "We couldn’t find anything on your Lifebox yet." = "لم يتم العثور بعد على أي شيء في لايف بوكس";
 "Expiration Date: %@" = "تاريخ إنتهاء الصلاحية: %@";
 "Failed to get albums" = "فشل في الحصول على ألبومات";
+"termsAndUseEtkCheckboxText" = "termsanduse";
+"offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
+"Please enter a valid login." = "رُفِضَ تسجيل الدخول. يرجى التحقق من بيانات الاعتماد.";
+"Please enter the text below" = "يرجى إدخال النص أدناه";

@@ -636,3 +636,7 @@
 "We couldn’t find anything on your Lifebox yet." = "Ми не знайшли жодних речей у вашому Lifebox. ";
 "Expiration Date: %@" = "Термін придатності: %@";
 "Failed to get albums" = "не вдалося отримати альбоми";
+"termsAndUseEtkCheckboxText" = "termsAndUseEtkCheckboxText";
+"offersCancelLife" = "25ГБ, будь ласка, відправте СМС з текстом «Stop1», деактивувати lifebox  100ГБ – СМС з текстом «Stop2», деактивувати lifebox  500ГБ – СМС з текстом «Stop3» на номер 6767";
+"Please enter a valid login." = "Невірний логін. Будь ласка, перевірте ваші персональні дані";
+"Please enter the text below" = "Будь ласка, введіть текст";
