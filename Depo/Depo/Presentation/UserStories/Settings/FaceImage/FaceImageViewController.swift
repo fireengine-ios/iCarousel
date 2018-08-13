@@ -44,14 +44,7 @@ final class FaceImageViewController: ViewController, NibInit {
     }
     
     @IBAction private func faceImageSwitchValueChanged(_ sender: UISwitch) {
-        changeFaceImageAllowed(isAllowed: sender.isOn, completion: { [weak self] in
-            
-            /// we need to allow facebookTags even it was disabled
-            if sender.isOn {
-                self?.facebookTagsAllowedSwitch.setOn(true, animated: false)
-                self?.changeFacebookTagsAllowed(isAllowed: true)
-            }
-        })
+        changeFaceImageAllowed(isAllowed: sender.isOn)
     }
     
     @IBAction private func facebookSwitchValueChanged(_ sender: UISwitch) {
@@ -80,7 +73,7 @@ final class FaceImageViewController: ViewController, NibInit {
     
     // MARK: - face image
     
-    private func changeFaceImageAllowed(isAllowed: Bool, completion: VoidHandler? = nil) {
+    private func changeFaceImageAllowed(isAllowed: Bool,  completion: VoidHandler? = nil) {
         activityManager.start()
         accountService.changeFaceImageAllowed(isAllowed: isAllowed) { [weak self] result in
             DispatchQueue.toMain {
@@ -90,7 +83,9 @@ final class FaceImageViewController: ViewController, NibInit {
                     self?.sendAnaliticsForFaceImageAllowed(isAllowed: isAllowed)
                     
                     if isAllowed {
-                        self?.checkFacebookTagsIsAllowed(completion: completion)
+                        ///self?.checkFacebookTagsIsAllowed(completion: completion)
+                        self?.facebookTagsAllowedSwitch.setOn(true, animated: false)
+                        self?.changeFacebookTagsAllowed(isAllowed: true)
                         
                         /// popup
                         let popUp = PopUpController.with(title: nil, message: TextConstants.faceImageWaitAlbum, image: .none, buttonTitle: TextConstants.ok)
