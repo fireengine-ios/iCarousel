@@ -8,47 +8,11 @@
 
 import UIKit
 
-//struct FaceImageVisibleConfiguration {
-//    let isHiddenFacebookView: Bool
-//    let isHiddenLabelsStackView: Bool
-//    let isHiddenFacebookImportButton: Bool
-//    let isHiddenFirstFacebookLabel: Bool
-//    let isHiddenSecondFacebookLabel: Bool
-//}
-//extension FaceImageVisibleConfiguration {
-//    static var initial: FaceImageVisibleConfiguration {
-//        return FaceImageVisibleConfiguration(
-//            isHiddenFacebookView: true,
-//            isHiddenLabelsStackView: true,
-//            isHiddenFacebookImportButton: true,
-//            isHiddenFirstFacebookLabel: true,
-//            isHiddenSecondFacebookLabel: true)
-//    }
-//}
-
 enum FaceImageDisplayConfigurations {
-    case initial
-}
-
-protocol FaceImageDisplayConfiguration {
-    func applyFor(facebookView: UIView,
-                  labelsStackView: UIStackView,
-                  facebookImportButton: UIButton,
-                  firstFacebookLabel: UILabel,
-                  secondFacebookLabel: UILabel)
-}
-
-final class FaceImageDisplayConfigurationInitial: FaceImageDisplayConfiguration {
-    func applyFor(facebookView: UIView,
-                  labelsStackView: UIStackView,
-                  facebookImportButton: UIButton,
-                  firstFacebookLabel: UILabel,
-                  secondFacebookLabel: UILabel) {
-        
-        labelsStackView.isHidden = true
-        facebookView.isHidden = true
-        facebookImportButton.isHidden = true
-    }
+    case initial /// faceImageOff
+    case facebookTagsOff
+    case facebookImportOff
+    case facebookImportOn
 }
 
 final class FaceImageDisplayManager: NSObject {
@@ -59,26 +23,44 @@ final class FaceImageDisplayManager: NSObject {
     @IBOutlet private weak var firstFacebookLabel: UILabel!
     @IBOutlet private weak var secondFacebookLabel: UILabel!
     
-//    func applyVisibleConfiguration(_ configuration: FaceImageVisibleConfiguration) {
-//        facebookView.isHidden = configuration.isHiddenFacebookView
-//        labelsStackView.isHidden = configuration.isHiddenLabelsStackView
-//        facebookImportButton.isHidden = configuration.isHiddenFacebookImportButton
-//        firstFacebookLabel.isHidden = configuration.isHiddenFirstFacebookLabel
-//        secondFacebookLabel.isHidden = configuration.isHiddenSecondFacebookLabel
-//    }
-    
-    func applyConfiguration(_ configuration: FaceImageDisplayConfiguration) {
-        configuration.applyFor(facebookView: facebookView,
-                               labelsStackView: labelsStackView,
-                               facebookImportButton: facebookImportButton,
-                               firstFacebookLabel: firstFacebookLabel,
-                               secondFacebookLabel: secondFacebookLabel)
-    }
-    
     func applyConfiguration(_ configuration: FaceImageDisplayConfigurations) {
         switch configuration {
         case .initial:
-            applyConfiguration(FaceImageDisplayConfigurationInitial())
+            labelsStackView.isHidden = true
+            facebookView.isHidden = true
+            facebookImportButton.isHidden = true
+            /// face image switch is off
+            /// hide all
+            
+        case .facebookTagsOff:
+            labelsStackView.isHidden = false
+            facebookView.isHidden = false
+            facebookImportButton.isHidden = true
+            firstFacebookLabel.text = "505"
+            secondFacebookLabel.isHidden = true
+            /// facebook switch is off
+            /// show one texts
+            
+        case .facebookImportOff:
+            labelsStackView.isHidden = false
+            facebookView.isHidden = false
+            facebookImportButton.isHidden = false
+            firstFacebookLabel.text = "503"
+            secondFacebookLabel.isHidden = false
+            secondFacebookLabel.text = "504"
+            /// face image switch is on
+            /// facebook switch is on
+            /// show button and two texts
+            
+        case .facebookImportOn:
+            labelsStackView.isHidden = false
+            facebookView.isHidden = false
+            facebookImportButton.isHidden = true
+            firstFacebookLabel.text = "503"
+            secondFacebookLabel.isHidden = true
+            /// face image switch is on
+            /// facebook switch is on
+            /// hide button and second text
         }
     }
 }

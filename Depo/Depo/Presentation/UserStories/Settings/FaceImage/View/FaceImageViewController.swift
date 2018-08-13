@@ -24,6 +24,10 @@ final class FaceImageViewController: ViewController {
         super.viewDidLoad()
         
         displayManager.applyConfiguration(.initial)
+        displayManager.applyConfiguration(.facebookTagsOff)
+        displayManager.applyConfiguration(.facebookImportOff)
+        displayManager.applyConfiguration(.facebookImportOn)
+        displayManager.applyConfiguration(.initial)
                 
         activityManager.delegate = self
         
