@@ -40,7 +40,7 @@
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hp4-RT-NAP">
                             <rect key="frame" x="286" y="0.0" width="51" height="31"/>
                             <connections>
-                                <action selector="faceImageSwitchValueChanged:" destination="-1" eventType="valueChanged" id="3zo-kg-2Tf"/>
+                                <action selector="faceImageSwitchValueChanged:" destination="-1" eventType="touchUpInside" id="Wco-YD-54M"/>
                             </connections>
                         </switch>
                     </subviews>
@@ -68,7 +68,7 @@
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xcD-4y-ueg">
                             <rect key="frame" x="286" y="0.5" width="51" height="31"/>
                             <connections>
-                                <action selector="faceImageSwitchValueChanged:" destination="-1" eventType="valueChanged" id="scv-yx-4Mj"/>
+                                <action selector="facebookSwitchValueChanged:" destination="-1" eventType="touchUpInside" id="YYW-Co-aAI"/>
                             </connections>
                         </switch>
                     </subviews>

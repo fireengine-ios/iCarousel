@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
@@ -140,5 +141,53 @@ class AccountService: BaseRequestService, AccountServicePrl {
 
         let handler = BaseResponseHandler<FaceImageAllowedResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePutRequest(param: parameters, handler: handler)
+    }
+    
+    private lazy var sessionManager: SessionManager = factory.resolve()
+    
+    func isAllowedFaceImage(handler: @escaping ResponseBool) {
+        debugLog("AccountService faceImageIsAllowed")
+        
+        sessionManager
+            .request(RouteRequests.Account.Settings.faceImageAllowed)
+            .customValidate()
+            .responseString { response in
+                switch response.result {    
+                case .success(let text):
+                    if text == "true" {
+                        handler(.success(true))
+                    } else if text == "false" {
+                        handler(.success(false))
+                    } else {
+                        let error = CustomErrors.serverError(text)
+                        handler(.failed(error))
+                    }
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+     
+    func changeFaceImageAllowed(isAllowed: Bool, handler: @escaping ResponseVoid) {
+        debugLog("AccountService changeFaceImageAllowed")
+        
+        sessionManager
+            .request(RouteRequests.Account.Settings.faceImageAllowed,
+                     method: .put,
+                     encoding: String(isAllowed))
+            .customValidate()
+            .responseString { response in
+                switch response.result {    
+                case .success(let text):
+                    if text == "\"OK\"" {
+                        handler(.success(()))
+                    } else {
+                        let error = CustomErrors.serverError(text)
+                        handler(.failed(error))
+                    }
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
     }
 }

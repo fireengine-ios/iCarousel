@@ -12,12 +12,12 @@ final class FaceImageConfigurator {
     
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
         
-        if let viewController = viewInput as? FaceImageViewController {
+        if let viewController = viewInput as? FaceImageViewController2 {
             configure(viewController: viewController)
         }
     }
     
-    private func configure(viewController: FaceImageViewController) {
+    private func configure(viewController: FaceImageViewController2) {
         
         let router = FaceImageRouter()
         
