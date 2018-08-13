@@ -8,7 +8,6 @@
 
 import UIKit
 
-/// on stop NotificationCenter.default.post(name: .changeFaceImageStatus, object: self)
 final class FaceImageViewController: ViewController, NibInit {
     
     @IBOutlet private var displayManager: FaceImageDisplayManager!
@@ -233,91 +232,5 @@ extension FaceImageViewController: ActivityIndicator {
 extension FaceImageViewController: AnalyticsScreen {
     var analyticsScreen: AnalyticsAppScreens {
         return .settingsFIR
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// --------------------- old ---------------------
-
-final class FaceImageViewController2: ViewController {
-    
-    var output: FaceImageViewOutput!
-    
-    @IBOutlet var displayManager: FaceImageDisplayManager!
-    @IBOutlet private weak var faceImageAllowedLabel: UILabel!
-    @IBOutlet private weak var faceImageAllowedSwitch: UISwitch!
-    
-    private lazy var activityManager = ActivityIndicatorManager()
-
-    // MARK: - LifeCicle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        displayManager.applyConfiguration(.initial)
-                
-        activityManager.delegate = self
-        
-        faceImageAllowedLabel.text = TextConstants.faceImageGrouping
-
-        configureNavBar()
-
-        output.viewIsReady()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
-    }
-    
-    private func configureNavBar() {
-        setTitle(withString: TextConstants.faceAndImageGrouping)
-
-        navigationController?.navigationItem.title = TextConstants.backTitle
-    }
-    
-    // MARK: UISwitch Action
-    
-    @IBAction private func faceImageSwitchValueChanged(_ sender: UISwitch) {
-        output.changeFaceImageStatus(sender.isOn)
-    }
-}
-
-// MARK: - ActivityIndicator
-
-extension FaceImageViewController2: ActivityIndicator {
-    func startActivityIndicator() {
-        activityManager.start()
-    }
-    
-    func stopActivityIndicator() {
-        NotificationCenter.default.post(name: .changeFaceImageStatus, object: self)
-        activityManager.stop()
-    }
-}
-
-// MARK: - FaceImageViewInput
-
-extension FaceImageViewController2: FaceImageViewInput {
-    func showFaceImageStatus(_ isFaceImageAllowed: Bool) {
-        faceImageAllowedSwitch.setOn(isFaceImageAllowed, animated: false)
-    }
-    
-    func showfailedChangeFaceImageStatus() {
-        faceImageAllowedSwitch.setOn(!faceImageAllowedSwitch.isOn, animated: true)
     }
 }
