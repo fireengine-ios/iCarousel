@@ -84,7 +84,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             playVideoButton.isHidden = (object.fileType != .video)
             tapGesture.isEnabled = (object.fileType != .video)
             
-        } else if object.fileType != .audio, object.fileType.isUnSupportedOpenType {
+        } else if object.fileType != .audio, object.fileType.isSupportedOpenType {
             imageScrollView.imageView.isHidden = true
             webView.isHidden = false
             webView.clearPage()

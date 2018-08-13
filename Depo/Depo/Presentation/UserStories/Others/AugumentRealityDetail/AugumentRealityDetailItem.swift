@@ -21,12 +21,14 @@ class AugumentRealityDetailItem: NSObject {
             return
         }
         
-        switch item.patchToPreview {
-        case let .localMediaContent(path):
-            url = path.urlToFile
-        case let .remoteUrl(remoteUrlToFile):
-            url = remoteUrlToFile
-        }
+        url = item.tmpDownloadUrl
+        
+//        switch item.patchToPreview {
+//        case let .localMediaContent(path):
+//            url = path.urlToFile
+//        case let .remoteUrl(remoteUrlToFile):
+//            url = remoteUrlToFile
+//        }
     }
 }
 

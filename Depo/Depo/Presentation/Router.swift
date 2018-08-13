@@ -555,6 +555,12 @@ class RouterVC: NSObject {
         return controller
     }
     
+    func augumentRealityDetailViewController(fileObject: WrapData) -> UIViewController {
+        let controller = AugumentRealityDetailViewController.initialize(with: fileObject)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        return controller
+    }
+    
     func filesDetailViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
                                                                                     selectedItem: fileObject,

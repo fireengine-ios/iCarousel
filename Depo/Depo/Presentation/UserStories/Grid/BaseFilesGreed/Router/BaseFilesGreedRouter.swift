@@ -41,6 +41,25 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             router.pushViewControllertoTableViewNavBar(viewController: controller)
         case .audio:
             player.play(list: wrapperedArray, startAt: wrapperedArray.index(of: wrapperedItem) ?? 0)
+        case .application(.usdz):
+            guard let file = FileForDownload(forOriginalURL: wrapperedItem) else {
+                return
+            }
+            let rootController = router.getViewControllerForPresent()
+            rootController?.showSpiner()
+            FilesDownloader().getFiles(filesForDownload: [file], response: { [weak self] localUrls, tempUrl in
+                rootController?.hideSpiner()
+                
+                guard let `self` = self else {
+                    return
+                }
+                wrapperedItem.tmpDownloadUrl = localUrls.first
+                let controller = self.router.augumentRealityDetailViewController(fileObject: wrapperedItem)
+                self.router.presentViewController(controller: controller)
+            }) { (error) in
+                rootController?.hideSpiner()
+                print(error)
+            }
         default:
             let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray)
             let nController = NavigationController(rootViewController: controller)
