@@ -18,7 +18,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FaceImageViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="displayManager" destination="E6W-gA-F3l" id="0Vp-XR-hbf"/>
-                <outlet property="faceImageAllowedLabel" destination="h4B-P5-Rce" id="dSz-qL-2et"/>
                 <outlet property="faceImageAllowedSwitch" destination="hp4-RT-NAP" id="LES-kR-BQz"/>
                 <outlet property="facebookTagsAllowedSwitch" destination="xcD-4y-ueg" id="f88-P1-SAA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -153,6 +152,15 @@
                 <outlet property="firstFacebookLabel" destination="tU6-ga-vMe" id="RXi-t6-Rkx"/>
                 <outlet property="labelsStackView" destination="yKZ-qH-VVG" id="wqO-m5-jX3"/>
                 <outlet property="secondFacebookLabel" destination="rhq-SJ-P4C" id="ShG-XD-pO8"/>
+            </connections>
+        </customObject>
+        <customObject id="pu3-QY-bUD" customClass="FaceImageDesigner" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="faceImageAllowedLabel" destination="h4B-P5-Rce" id="2b9-fd-bFp"/>
+                <outlet property="facebookImportButton" destination="rTe-cC-LX9" id="lDV-Xp-JyP"/>
+                <outlet property="facebookTagsAllowedLabel" destination="WSp-nP-Yha" id="9z5-3O-D5U"/>
+                <outlet property="firstFacebookLabel" destination="tU6-ga-vMe" id="XMU-z0-7OR"/>
+                <outlet property="secondFacebookLabel" destination="rhq-SJ-P4C" id="YXK-YY-ajr"/>
             </connections>
         </customObject>
     </objects>

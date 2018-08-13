@@ -11,7 +11,7 @@ import UIKit
 final class FaceImageViewController: ViewController, NibInit {
     
     @IBOutlet private var displayManager: FaceImageDisplayManager!
-    @IBOutlet private weak var faceImageAllowedLabel: UILabel!
+    @IBOutlet private var designer: FaceImageDesigner!
     @IBOutlet private weak var faceImageAllowedSwitch: UISwitch!
     @IBOutlet private weak var facebookTagsAllowedSwitch: UISwitch!
     
@@ -24,13 +24,11 @@ final class FaceImageViewController: ViewController, NibInit {
         super.viewDidLoad()
         
         displayManager.applyConfiguration(.initial)
-        faceImageAllowedLabel.text = TextConstants.faceImageGrouping
         
         setTitle(withString: TextConstants.faceAndImageGrouping)
         navigationController?.navigationItem.title = TextConstants.backTitle
         
         activityManager.delegate = self
-        
         analyticsManager.trackScreen(self)
         
         checkFaceImageIsAllowed()

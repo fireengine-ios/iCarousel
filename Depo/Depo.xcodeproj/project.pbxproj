@@ -3277,6 +3277,7 @@
 		CEC3C24A1FB99AF800C3D67F /* PasscodeSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C23F1FB99AF800C3D67F /* PasscodeSettingsRouter.swift */; };
 		CEC3C24B1FB99AF800C3D67F /* PasscodeSettingsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2401FB99AF800C3D67F /* PasscodeSettingsRouterInput.swift */; };
 		CEC9F4AC1FB46D7000362B8C /* ImportFromDropboxPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9F4AB1FB46D7000362B8C /* ImportFromDropboxPresenter.swift */; };
+		CECA164D2121CA1E006D96A5 /* FaceImageDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA164C2121CA1E006D96A5 /* FaceImageDesigner.swift */; };
 		CECA331A1F73DA660093CB3C /* CollectionSortingRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */; };
 		CECA95951F1610590054BDC0 /* RemoteDownloder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA95941F1610590054BDC0 /* RemoteDownloder.swift */; };
 		CECA95971F163CC80054BDC0 /* WrapperedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA95961F163CC80054BDC0 /* WrapperedItems.swift */; };
@@ -5427,6 +5428,7 @@
 		CEC3C23F1FB99AF800C3D67F /* PasscodeSettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeSettingsRouter.swift; sourceTree = "<group>"; };
 		CEC3C2401FB99AF800C3D67F /* PasscodeSettingsRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeSettingsRouterInput.swift; sourceTree = "<group>"; };
 		CEC9F4AB1FB46D7000362B8C /* ImportFromDropboxPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxPresenter.swift; sourceTree = "<group>"; };
+		CECA164C2121CA1E006D96A5 /* FaceImageDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageDesigner.swift; sourceTree = "<group>"; };
 		CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSortingRules.swift; sourceTree = "<group>"; };
 		CECA95941F1610590054BDC0 /* RemoteDownloder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteDownloder.swift; sourceTree = "<group>"; };
 		CECA95961F163CC80054BDC0 /* WrapperedItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapperedItems.swift; sourceTree = "<group>"; };
@@ -6542,6 +6544,7 @@
 			children = (
 				4A8CC302201A00D400C040C4 /* FaceImageViewController.xib */,
 				4A8CC301201A00D400C040C4 /* FaceImageViewController.swift */,
+				CECA164C2121CA1E006D96A5 /* FaceImageDesigner.swift */,
 				CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */,
 			);
 			path = FaceImage;
@@ -15334,6 +15337,7 @@
 				CE394B621F6FFA8200128324 /* Array+Safe.swift in Sources */,
 				CE51AC931EF90853005DCEE0 /* AutoSyncRouter.swift in Sources */,
 				CE51AC941EF90853005DCEE0 /* Controller.m in Sources */,
+				CECA164D2121CA1E006D96A5 /* FaceImageDesigner.swift in Sources */,
 				CE4ECA7520889B5400AB91C6 /* KeychainSwift+Optional.swift in Sources */,
 				CEAE3FB01EFD4F0D00A405B2 /* HomePageConfigurator.swift in Sources */,
 				78E8E2AA2023189F00A979AB /* FaceImagePhotosPresenter.swift in Sources */,
