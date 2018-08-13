@@ -23,7 +23,11 @@ final class FaceImageDisplayManager: NSObject {
     @IBOutlet private weak var firstFacebookLabel: UILabel!
     @IBOutlet private weak var secondFacebookLabel: UILabel!
     
+    var configuration = FaceImageDisplayConfigurations.initial
+    
     func applyConfiguration(_ configuration: FaceImageDisplayConfigurations) {
+        self.configuration = configuration
+        
         switch configuration {
         case .initial:
             labelsStackView.isHidden = true

@@ -148,6 +148,7 @@ struct RouteRequests {
             static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
             
             static let faceImageAllowed = settingsApi +/ "faceImageAllowed"
+            static let facebookTaggingEnabled = settingsApi +/ "facebookTaggingEnabled"
         }
     }
 }
