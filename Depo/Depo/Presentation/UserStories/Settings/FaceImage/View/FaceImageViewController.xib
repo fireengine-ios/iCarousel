@@ -17,6 +17,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FaceImageViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="displayManager" destination="E6W-gA-F3l" id="0Vp-XR-hbf"/>
                 <outlet property="faceImageAllowedLabel" destination="h4B-P5-Rce" id="dSz-qL-2et"/>
                 <outlet property="faceImageAllowedSwitch" destination="hp4-RT-NAP" id="LES-kR-BQz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -84,7 +85,7 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yKZ-qH-VVG">
-                    <rect key="frame" x="20" y="108.5" width="335" height="103"/>
+                    <rect key="frame" x="20" y="113.5" width="335" height="103"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label Label Label Label Label " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tU6-ga-vMe">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="41"/>
@@ -108,7 +109,7 @@
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTe-cC-LX9">
-                    <rect key="frame" x="20" y="231.5" width="335" height="30"/>
+                    <rect key="frame" x="20" y="236.5" width="335" height="30"/>
                     <state key="normal" title="Button"/>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Idq-Q9-sbe" userLabel="line View">
@@ -125,7 +126,7 @@
                 <constraint firstItem="cgP-Cu-WBb" firstAttribute="trailing" secondItem="vcu-gc-WA6" secondAttribute="trailing" constant="20" id="8BU-g5-aV4"/>
                 <constraint firstItem="Idq-Q9-sbe" firstAttribute="top" secondItem="hNw-Pj-QXr" secondAttribute="bottom" constant="10" id="C0D-n9-ez1"/>
                 <constraint firstItem="cgP-Cu-WBb" firstAttribute="trailing" secondItem="rTe-cC-LX9" secondAttribute="trailing" constant="20" id="GMf-UI-uLb"/>
-                <constraint firstItem="yKZ-qH-VVG" firstAttribute="top" secondItem="vcu-gc-WA6" secondAttribute="bottom" constant="5" id="Lh8-pY-bS5"/>
+                <constraint firstItem="yKZ-qH-VVG" firstAttribute="top" secondItem="vcu-gc-WA6" secondAttribute="bottom" constant="10" id="Lh8-pY-bS5"/>
                 <constraint firstItem="cgP-Cu-WBb" firstAttribute="trailing" secondItem="hNw-Pj-QXr" secondAttribute="trailing" constant="20" id="NSb-Fi-wY4"/>
                 <constraint firstItem="vcu-gc-WA6" firstAttribute="leading" secondItem="cgP-Cu-WBb" secondAttribute="leading" constant="20" id="WVE-Js-Pbf"/>
                 <constraint firstItem="vcu-gc-WA6" firstAttribute="top" secondItem="Idq-Q9-sbe" secondAttribute="bottom" constant="10" id="cxQ-zz-WqP"/>

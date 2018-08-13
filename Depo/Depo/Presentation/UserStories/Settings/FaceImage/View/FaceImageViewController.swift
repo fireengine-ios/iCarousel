@@ -12,6 +12,7 @@ final class FaceImageViewController: ViewController {
     
     var output: FaceImageViewOutput!
     
+    @IBOutlet var displayManager: FaceImageDisplayManager!
     @IBOutlet private weak var faceImageAllowedLabel: UILabel!
     @IBOutlet private weak var faceImageAllowedSwitch: UISwitch!
     
@@ -21,6 +22,8 @@ final class FaceImageViewController: ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        displayManager.applyConfiguration(.initial)
                 
         activityManager.delegate = self
         
