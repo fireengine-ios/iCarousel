@@ -80,7 +80,7 @@ final class FaceImageViewController: ViewController, NibInit {
                     
                     /// revert state
                     if let isOn = self?.faceImageAllowedSwitch.isOn {
-                        self?.faceImageAllowedSwitch.isOn = !isOn
+                        self?.faceImageAllowedSwitch.setOn(!isOn, animated: true)
                     }
                 }
                 self?.stopActivityIndicator()
@@ -94,8 +94,9 @@ final class FaceImageViewController: ViewController, NibInit {
             DispatchQueue.toMain {
                 switch result {
                 case .success(let isAllowed):
+                    self?.faceImageAllowedSwitch.setOn(isAllowed, animated: true)
                     if isAllowed {
-                        
+                        // TODO: next check
                     } else {
                         self?.displayManager.applyConfiguration(.initial)
                     }
@@ -128,6 +129,21 @@ extension FaceImageViewController: AnalyticsScreen {
         return .settingsFIR
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // --------------------- old ---------------------
 
