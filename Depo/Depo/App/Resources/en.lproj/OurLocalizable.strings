@@ -565,8 +565,7 @@
 "dropboxLastUpdatedFile" = "Last updated on %@ - %d file";
 "dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";
 "PackagesPolicyHeader" = "Auto-renewable subscription nature of the in-app purchase:";
-"PackagesPolicyText" = "Subsriptions are renewed on a monthly basis \nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nTerms of use: ";
-"TermsOfUseLinkText" = "TurkcellTermsOfUse";
+"PackagesPolicyText" = "Subsriptions are renewed on a monthly basis \\nPayment will be charged to iTunes Account at confirmation of purchase \\nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \\nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \\nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \\nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \\nPrivacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\\n Terms of Use: ";
 "Missing Dates" = "Missing Dates";
 "You have successfully registered, please log in with your credentials" = "You have successfully registered, please log in with your credentials.";
 "Animation" = "Animation";
@@ -669,3 +668,8 @@
 "offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "Please enter a valid login." = "Login denied. Please check your credentials.";
 "Please enter the text below" = "Please enter the text below";
+"facebook_photo_tags" = "Facebook Photo Tags";
+"facebook_tags_on" = "You will get your Facebook tags to lifebox when you enable this option";
+"facebook_tags_off" = "You will get your Facebook tags to lifebox when you enable this option";
+"facebook_tags_import" = "Please enable \\\"Facebook Import\\\" option to use \\\"Facebook Tag Transfer\\\" feature";
+"TermsOfUseLinkText" = "TapHere";
