@@ -537,7 +537,7 @@
 "dropboxLastUpdatedFile" = "Zuletzt aktualisiert am %@ - %d Datei";
 "dropboxLastUpdatedFiles" = "Zuletzt aktualisiert am %@ - %d Dateien";
 "PackagesPolicyHeader" = "Abonnement-Art des In-App-Kaufs mit automatischer Verlängerung:";
-"PackagesPolicyText" = "Die Abonnements werden monatlich erneuert. Die Zahlung wird dem iTunes-Konto bei der Kaufbestätigung belastet. Das Abonnement verlängert sich automatisch, wenn die automatische Verlängerung nicht mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums deaktiviert wird\nDas Konto wird für die Verlängerung innerhalb von 24 Stunden vor Ablauf des aktuellen Zeitraums belastet. Die Gebühren werden so wiedergegeben, wie sie auf dem In-App-Kaufbildschirm angezeigt werden.\nAbonnements können vom Benutzer verwaltet werden und die automatische Verlängerung kann deaktiviert werden, indem Sie nach dem Kauf zu den Kontoeinstellungen des Benutzers wechseln\nJeder nicht genutzte Teil eines kostenlosen Testzeitraums, falls angeboten, verfällt, wenn der Nutzer ein Abonnement für diese Veröffentlichung erwirbt, sofern zutreffend Datenschutzbestimmungen: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik";
+"PackagesPolicyText" = "Die Abonnements werden monatlich erneuert. Die Zahlung wird dem iTunes-Konto bei der Kaufbestätigung belastet. Das Abonnement verlängert sich automatisch, wenn die automatische Verlängerung nicht mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums deaktiviert wird\nDas Konto wird für die Verlängerung innerhalb von 24 Stunden vor Ablauf des aktuellen Zeitraums belastet. Die Gebühren werden so wiedergegeben, wie sie auf dem In-App-Kaufbildschirm angezeigt werden.\nAbonnements können vom Benutzer verwaltet werden und die automatische Verlängerung kann deaktiviert werden, indem Sie nach dem Kauf zu den Kontoeinstellungen des Benutzers wechseln\nJeder nicht genutzte Teil eines kostenlosen Testzeitraums, falls angeboten, verfällt, wenn der Nutzer ein Abonnement für diese Veröffentlichung erwirbt, sofern zutreffend Datenschutzbestimmungen: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nNutzungsbedingungen: ";
 "Missing Dates" = "Fehlende Daten";
 "You have successfully registered, please log in with your credentials" = "Sie haben sich erfolgreich registriert, melden Sie sich mit Ihren Zugangsdaten an";
 "Animation" = "Animation";
@@ -640,3 +640,8 @@
 "offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "Please enter a valid login." = "Anmeldung abgelehnt. Bitte überprüfen Sie Ihre Zugangsdaten.";
 "Please enter the text below" = "Bitte geben Sie den folgenden Text ein";
+"facebook_photo_tags" = "";
+"facebook_tags_on" = "";
+"facebook_tags_off" = "";
+"facebook_tags_import" = "";
+"TermsOfUseLinkText" = "klicken";
