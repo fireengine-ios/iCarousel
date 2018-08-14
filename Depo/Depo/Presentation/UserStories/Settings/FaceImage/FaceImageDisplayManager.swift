@@ -43,7 +43,7 @@ final class FaceImageDisplayManager: NSObject {
             firstFacebookLabel.text = TextConstants.facebookTagsOff
             secondFacebookLabel.isHidden = true
             /// facebook switch is off
-            /// show one texts
+            /// show one text
             
         case .facebookImportOff:
             labelsStackView.isHidden = false

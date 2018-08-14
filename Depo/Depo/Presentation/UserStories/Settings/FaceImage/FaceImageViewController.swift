@@ -31,16 +31,15 @@ final class FaceImageViewController: ViewController, NibInit {
         activityManager.delegate = self
         analyticsManager.trackScreen(self)
         
+        /// start requests
         checkFaceImageIsAllowed()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
         
-        if displayManager.configuration == .facebookImportOff {
-            checkFacebookImportStatus()
-        }
+        navigationBarWithGradientStyle()
+        updateFacebookImportIfNeed()
     }
     
     @IBAction private func faceImageSwitchValueChanged(_ sender: UISwitch) {
@@ -53,6 +52,14 @@ final class FaceImageViewController: ViewController, NibInit {
     
     @IBAction private func showFacebookImport(_ sender: UIButton) {
         goToImportPhotos()
+    }
+    
+    // MARK: - functions
+    
+    private func updateFacebookImportIfNeed() {
+        if displayManager.configuration == .facebookImportOff {
+            checkFacebookImportStatus()
+        }
     }
     
     private func goToImportPhotos() {
@@ -190,7 +197,7 @@ final class FaceImageViewController: ViewController, NibInit {
         }
     }
     
-    func checkFacebookImportStatus(completion: VoidHandler? = nil) {
+    private func checkFacebookImportStatus(completion: VoidHandler? = nil) {
         activityManager.start()
         facebookService.requestStatus { [weak self] result in
             DispatchQueue.toMain {
