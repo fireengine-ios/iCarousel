@@ -11,10 +11,38 @@ final class CacheManager {///adding files TO DB // managing cache
     var allRemotesAdded = false
     var allLocalAdded = false
     
+    private static let pageSize: Int = 1000
+    private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
+                                                         type: .imageAndVideo)
+//    private var photoVideosPageCounter: Int = 0
+    
     //TODO: place added blocks here?
-    //
-    func startAppendingAllRemotes(remoteItems: [Item]) {// we save remotes everytime, no metter if acces to PH libriary denied
+    var remotePageAdded: VoidHandler?
+    
+    
+    func startAppendingAllRemotes() {// we save remotes everytime, no metter if acces to PH libriary denied
         
+        addNextRemoteItemsPage {
+            
+        }
+
+    }
+    
+    private func addNextRemoteItemsPage(completion: @escaping VoidHandler) {
+        photoVideoService.nextItems(fileType: .imageAndVideo, sortBy: .imageDate, sortOrder: .asc, success: { [weak self] remoteItems in
+            CoreDataStack.default.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
+                self?.remotePageAdded?()
+                if remoteItems.count < CacheManager.pageSize {
+                    completion()
+                }
+            }
+            if remoteItems.count >= CacheManager.pageSize {
+                self?.addNextRemoteItemsPage(completion: completion)
+            }
+            
+        }) {
+            completion()///// create some kind of system where we wait till the internet is back and send request again
+        }
     }
     
     func startAppendingAllLocals() {
@@ -23,9 +51,7 @@ final class CacheManager {///adding files TO DB // managing cache
             self?.allLocalAdded = true
         }
     }
-    
-    
-    
+
 }
 
 //class <#name#>: <#super class#> {
@@ -72,15 +98,16 @@ extension CoreDataStack {
 //    self?.pageAppendedCallBack?([])
 //    completion?()
 //    }
-    func appendRemoteMediaItems(remoteItems: [Item], complition: VoidHandler) {
-//        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-//            completion()
-//            return
-//        }
-//        guard !items.isEmpty else {
-//            print("LOCAL_ITEMS: no files to add")
-//            completion()
-//            return
+    func appendRemoteMediaItems(remoteItems: [Item], completion: @escaping VoidHandler) {
+        let context = backgroundContext
+        ///TODO: add check on existing files?
+        // OR should we mark sync status and etc here. And also affect free app?
+        
+        guard !remoteItems.isEmpty else {
+            print("REMOTE_ITEMS: no files to add")
+            completion()
+            return
+        }
 //        }
 //
 //        print("LOCAL_ITEMS: \(items.count) local files to add")
