@@ -13,6 +13,7 @@ struct TextConstants {
     struct NotLocalized {
         static let facebookLoginCanceled = "FB Login canceled"
         static let instagramLoginCanceled = "Instagram Login canceled"
+        static let termsOfUseLink = "termsOfUseLink"
     }
     
     static let itroViewGoToRegisterButtonText = NSLocalizedString("Start using Lifebox now!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
