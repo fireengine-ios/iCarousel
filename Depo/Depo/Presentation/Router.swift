@@ -706,8 +706,7 @@ class RouterVC: NSObject {
     // MARK: Face image
     
     var faceImage: UIViewController {
-        let controller = FaceImageInitializer.initializeViewController(with: "FaceImageViewController")
-        return controller
+        return FaceImageViewController.initFromNib()
     }
     
     // MARK: Face image add name
