@@ -27,6 +27,7 @@ final class UploadOperations: Operation {
     private var attemptsCount = 0
     private let semaphore: DispatchSemaphore
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.uploadOperation)
+    private var clearingActions: VoidHandler?
     
     
     //MARK: - Init
@@ -67,7 +68,19 @@ final class UploadOperations: Operation {
         attempmtUpload()
         
         semaphore.wait()
+        
+        clearingActions?()
         SingletonStorage.shared.progressDelegates.remove(self)
+    }
+    
+    private func removeTemporaryFile(at localURL: URL?) {
+        if let localURL = localURL {
+            do {
+                try FileManager.default.removeItem(at: localURL)
+            } catch {
+                print(error.description)
+            }
+        }
     }
     
     private func attempmtUpload() {
@@ -116,6 +129,10 @@ final class UploadOperations: Operation {
                                          rootFolder: self.folder,
                                          isFavorite: self.isFavorites)
                 
+                self.clearingActions = { [weak self] in
+                    self?.removeTemporaryFile(at: uploadParam.urlToLocalFile)
+                }
+                
                 self.requestObject = self.upload(uploadParam: uploadParam, success: { [weak self] in
                     
                     let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
@@ -127,14 +144,6 @@ final class UploadOperations: Operation {
                         self?.dispatchQueue.async { [weak self] in
                             guard let `self` = self else {
                                 return
-                            }
-                            
-                            if let localURL = uploadParam.urlToLocalFile {
-                                do {
-                                    try FileManager.default.removeItem(at: localURL)
-                                } catch {
-                                    print(error.description)
-                                }
                             }
                             
                             if let response = baseurlResponse as? SearchItemResponse {
