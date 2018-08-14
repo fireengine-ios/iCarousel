@@ -14,7 +14,5 @@ final class TermsOfUseRouter {
 }
 
 extension TermsOfUseRouter: TermsOfUseRouterInput {
-    func closeModule() {
-        routerVC.popViewController()
-    }
+
 }
