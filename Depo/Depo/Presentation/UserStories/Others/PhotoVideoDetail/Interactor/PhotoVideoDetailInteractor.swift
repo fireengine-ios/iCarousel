@@ -142,11 +142,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], uuid: String) { }
     
-    func markAsNonLocalItem(with uuid: String) {
-        array.forEach { item in
-            if item.getTrimmedLocalID() == uuid {
-                item.isLocalItem = false
-            }
+    func replaceUploaded(_ item: WrapData) {
+        if let indexToChange = array.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {
+            array[indexToChange] = item
         }
     }
     
