@@ -636,3 +636,7 @@
 "We couldn’t find anything on your Lifebox yet." = "Wir konnten noch keine Dinge auf Ihrem lifebox finden.";
 "Expiration Date: %@" = "Haltbarkeitsdatum: %@";
 "Failed to get albums" = "konnte keine Alben erhalten";
+"termsAndUseEtkCheckboxText" = "termsAndUseEtkCheckboxText";
+"offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
+"Please enter a valid login." = "Anmeldung abgelehnt. Bitte überprüfen Sie Ihre Zugangsdaten.";
+"Please enter the text below" = "Bitte geben Sie den folgenden Text ein";
