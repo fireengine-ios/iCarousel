@@ -638,3 +638,7 @@
 "We couldn’t find anything on your Lifebox yet." = "Мы пока не смогли найти ни одного предмета в вашем lifebox.";
 "Expiration Date: %@" = "Срок истекает: %@";
 "Failed to get albums" = "не удалось получить альбомы";
+"termsAndUseEtkCheckboxText" = "termsAndUseEtkCheckboxText";
+"offersCancelLife" = "Чтобы отменить подписку на пакет \"lifebox 25GB\", пожалуйста, отправьте SMS с текстом “Stop1” на короткий номер 6767, на пакет \"lifebox 100GB\" - SMS с текстом “Stop2”, на пакет \"lifebox 500GB\" - SMS с текстом “Stop3”";
+"Please enter a valid login." = "Неверный логин. Пожалуйста, проверьте логин или пароль";
+"Please enter the text below" = "Пожалуйста, введите символы, показанные ниже";
