@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import FBSDKLoginKit
+import Alamofire
 
 public enum FBStatusValue: String {
     case pending = "PENDING"
@@ -78,5 +79,36 @@ class FBService: BaseRequestService {
         let fb = FBStop()
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: fb, handler: handler)
+    }
+    
+    private lazy var sessionManager: SessionManager = factory.resolve()
+    
+    func requestStatus(handler: @escaping ResponseBool) {
+        let url = RouteRequests.BaseUrl +/ RouteRequests.fbStatus
+        sessionManager
+            .request(url)
+            .customValidate()
+            .responseData { response in
+                switch response.result {    
+                case .success(let data):
+                    
+                    let fbStatus = FBStatusObject(json: data, headerResponse: nil)
+                    
+                    guard let isConnected = fbStatus.connected, let isSyncEnabled = fbStatus.syncEnabled else {
+                        let debugText = String(data: data, encoding: .utf8) ?? String(data.count)
+                        let error = CustomErrors.serverError(debugText)
+                        handler(.failed(error))
+                        return
+                    }
+                    
+                    if isConnected, isSyncEnabled {
+                        handler(.success(true))
+                    } else {
+                        handler(.success(false))
+                    }
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
     }
 }

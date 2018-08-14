@@ -31,5 +31,5 @@ protocol PhotoVideoDetailInteractorInput: class {
     func trackVideoStart()
     func trackVideoStop()
     
-    func markAsNonLocalItem(with uuid: String)
+    func replaceUploaded(_ item: WrapData)
 }
