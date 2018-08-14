@@ -40,7 +40,7 @@ final class FaceImageDisplayManager: NSObject {
             labelsStackView.isHidden = false
             facebookView.isHidden = false
             facebookImportButton.isHidden = true
-            firstFacebookLabel.text = "505"
+            firstFacebookLabel.text = TextConstants.facebookTagsOff
             secondFacebookLabel.isHidden = true
             /// facebook switch is off
             /// show one texts
@@ -49,9 +49,9 @@ final class FaceImageDisplayManager: NSObject {
             labelsStackView.isHidden = false
             facebookView.isHidden = false
             facebookImportButton.isHidden = false
-            firstFacebookLabel.text = "503"
+            firstFacebookLabel.text = TextConstants.facebookTagsOn
             secondFacebookLabel.isHidden = false
-            secondFacebookLabel.text = "504"
+            secondFacebookLabel.text = TextConstants.facebookTagsImport
             /// face image switch is on
             /// facebook switch is on
             /// show button and two texts
@@ -60,7 +60,7 @@ final class FaceImageDisplayManager: NSObject {
             labelsStackView.isHidden = false
             facebookView.isHidden = false
             facebookImportButton.isHidden = true
-            firstFacebookLabel.text = "503"
+            firstFacebookLabel.text = TextConstants.facebookTagsOn
             secondFacebookLabel.isHidden = true
             /// face image switch is on
             /// facebook switch is on
