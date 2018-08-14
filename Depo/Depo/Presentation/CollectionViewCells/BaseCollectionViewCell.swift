@@ -14,7 +14,6 @@ protocol LBCellsDelegate: class {
 }
 
 class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate, CollectionViewCellDataProtocol {
-    
     internal weak var delegate: LBCellsDelegate?
     var isCellSelected: Bool = false
     var isCellSelectionEnabled: Bool = false
@@ -102,4 +101,6 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     func updating() {
         isAlreadyConfigured = false
     }
+    
+    func set(name: String?) { }
 }

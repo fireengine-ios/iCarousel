@@ -38,7 +38,7 @@ final class AppConfigurator {
         prepareSessionManager()
         setVersionAndBuildNumber()
         configureSDWebImage()
-        
+        setupIAPObserver()
         startMenloworks(with: launchOptions)
         setupCropy()
         startCurio(with: launchOptions)
@@ -50,6 +50,10 @@ final class AppConfigurator {
         LocalMediaStorage.default.clearTemporaryFolder()
         
         startUpdateLocation(with: launchOptions)
+    }
+    
+    private static func setupIAPObserver() {
+        let _ = IAPManager.shared ///setup observer on the didLaunch, as apple suggest
     }
     
     private static func firstStart() {
@@ -181,27 +185,28 @@ final class AppConfigurator {
                 
                 MPush.registerMessageResponseHandler({(_ response: MMessageResponse) -> Void in
                     
-                    debugLog("Payload: \(response.message.payload)")
+                    let payload = response.message.payload
+                    let payloadAction = payload["action"] as? String
+                    
+                    debugLog("Payload: \(payload)")
                     switch response.action.type {
                         
                     case .click:
                         debugLog("Menlo Notif Clicked")
                         
-                        if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
+                        if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction) {
                             PushNotificationService.shared.openActionScreen()
-                            storageVars.deepLink = response.message.payload["action"] as? String
+                            storageVars.deepLink = payloadAction
                         }
-                        
                         
                     case .dismiss:
                         debugLog("Menlo Notif Dismissed")
                         
                     case .present:
                         debugLog("Menlo Notif in Foreground")
-                        if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
+                        if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction) {
                             PushNotificationService.shared.openActionScreen()
                         }
-                        
                     }
                 })
                 

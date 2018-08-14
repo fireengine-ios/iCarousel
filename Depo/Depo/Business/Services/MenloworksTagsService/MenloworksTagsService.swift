@@ -546,4 +546,19 @@ class MenloworksTagsService {
             }
         }) { _ in }
     }
+    
+    func onProfileNameChanged(isEmpty: Bool) {        
+        let profileNameChangedTag = MenloworksTags.ProfileName(isEmpty: isEmpty)
+        hitTag(profileNameChangedTag)
+        
+        let profileNameIsEmptyTag: MenloworksTag
+        
+        if isEmpty {
+            profileNameIsEmptyTag = MenloworksTags.ProfileNameEmpty()
+        } else {
+            profileNameIsEmptyTag = MenloworksTags.ProfileNameFull()
+        }
+        
+        hitTag(profileNameIsEmptyTag)
+    }
 }
