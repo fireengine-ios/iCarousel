@@ -27,7 +27,7 @@ final class UploadOperations: Operation {
     private var attemptsCount = 0
     private let semaphore: DispatchSemaphore
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.uploadOperation)
-    private var clearingActions: VoidHandler?
+    private var clearingAction: VoidHandler?
     
     
     //MARK: - Init
@@ -69,7 +69,7 @@ final class UploadOperations: Operation {
         
         semaphore.wait()
         
-        clearingActions?()
+        clearingAction?()
         SingletonStorage.shared.progressDelegates.remove(self)
     }
     
@@ -129,7 +129,7 @@ final class UploadOperations: Operation {
                                          rootFolder: self.folder,
                                          isFavorite: self.isFavorites)
                 
-                self.clearingActions = { [weak self] in
+                self.clearingAction = { [weak self] in
                     self?.removeTemporaryFile(at: uploadParam.urlToLocalFile)
                 }
                 
