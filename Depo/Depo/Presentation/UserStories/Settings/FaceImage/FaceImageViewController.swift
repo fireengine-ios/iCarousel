@@ -83,16 +83,11 @@ final class FaceImageViewController: ViewController, NibInit {
                     self?.sendAnaliticsForFaceImageAllowed(isAllowed: isAllowed)
                     
                     if isAllowed {
-                        ///self?.checkFacebookTagsIsAllowed(completion: completion)
                         self?.facebookTagsAllowedSwitch.setOn(true, animated: false)
                         self?.changeFacebookTagsAllowed(isAllowed: true)
-                        
-                        /// popup
-                        let popUp = PopUpController.with(title: nil, message: TextConstants.faceImageWaitAlbum, image: .none, buttonTitle: TextConstants.ok)
-                        RouterVC().presentViewController(controller: popUp)
+                        self?.showFaceImageWaitAlert()
                     } else {
                         self?.displayManager.applyConfiguration(.initial)
-                        completion?()
                     }
                     
                 case .failed(let error):
@@ -102,11 +97,16 @@ final class FaceImageViewController: ViewController, NibInit {
                     if let isOn = self?.faceImageAllowedSwitch.isOn {
                         self?.faceImageAllowedSwitch.setOn(!isOn, animated: true)
                     }
-                    completion?()
                 }
-                self?.stopActivityIndicator()
+                self?.activityManager.stop()
+                completion?()
             }
         }
+    }
+    
+    private func showFaceImageWaitAlert() {
+        let popUp = PopUpController.with(title: nil, message: TextConstants.faceImageWaitAlbum, image: .none, buttonTitle: TextConstants.ok)
+        RouterVC().presentViewController(controller: popUp)
     }
     
     private func checkFaceImageIsAllowed(completion: VoidHandler? = nil)  {
@@ -128,7 +128,7 @@ final class FaceImageViewController: ViewController, NibInit {
                     UIApplication.showErrorAlert(message: error.description)
                     completion?()
                 }
-                self?.stopActivityIndicator()
+                self?.activityManager.stop()
             }
         }
     }
@@ -153,7 +153,8 @@ final class FaceImageViewController: ViewController, NibInit {
                     UIApplication.showErrorAlert(message: error.description)
                     completion?()
                 }
-                self?.stopActivityIndicator()
+                
+                self?.activityManager.stop()
             }
         }
     }
@@ -181,7 +182,7 @@ final class FaceImageViewController: ViewController, NibInit {
                     }
                     completion?()
                 }
-                self?.stopActivityIndicator()
+                self?.activityManager.stop()
             }
         }
     }
@@ -201,22 +202,10 @@ final class FaceImageViewController: ViewController, NibInit {
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)
                 }
-                self?.stopActivityIndicator()
+                self?.activityManager.stop()
                 completion?()
             }
         }
-    }
-}
-
-// MARK: - ActivityIndicator
-
-extension FaceImageViewController: ActivityIndicator {
-    func startActivityIndicator() {
-        activityManager.start()
-    }
-    
-    func stopActivityIndicator() {
-        activityManager.stop()
     }
 }
 
