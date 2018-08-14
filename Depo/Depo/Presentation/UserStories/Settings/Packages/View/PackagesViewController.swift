@@ -79,7 +79,7 @@ final class PackagesViewController: BaseViewController {
 
         let termsAttributedString = NSMutableAttributedString(
             string: TextConstants.termsOfUseLinkText,
-            attributes: [.link: TextConstants.termsOfUseLinkText,
+            attributes: [.link: TextConstants.NotLocalized.termsOfUseLink,
                          .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
         attributedString.append(termsAttributedString)
         
@@ -237,7 +237,7 @@ extension PackagesViewController: UITextViewDelegate {
     
     @available(iOS 10.0, *)
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        if URL.absoluteString == TextConstants.termsOfUseLinkText {
+        if URL.absoluteString == TextConstants.NotLocalized.termsOfUseLink {
             DispatchQueue.toMain {
                 self.output.openTermsOfUseScreen()
             }
