@@ -323,6 +323,10 @@ class RouterVC: NSObject {
         return viewController
     }
     
+    // MARK: Clean EULA
+    
+    lazy var termsOfUseScreen = TermsOfUseInitializer.viewController
+    
     
     // MARK: SynchronyseSettings
     
