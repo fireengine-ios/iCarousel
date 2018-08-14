@@ -18,6 +18,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FaceImageViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="designer" destination="pu3-QY-bUD" id="A3M-rA-mNB"/>
                 <outlet property="displayManager" destination="E6W-gA-F3l" id="0Vp-XR-hbf"/>
                 <outlet property="faceImageAllowedSwitch" destination="hp4-RT-NAP" id="LES-kR-BQz"/>
                 <outlet property="facebookTagsAllowedSwitch" destination="xcD-4y-ueg" id="f88-P1-SAA"/>

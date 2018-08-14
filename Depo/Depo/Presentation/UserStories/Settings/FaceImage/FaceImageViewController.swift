@@ -55,7 +55,7 @@ final class FaceImageViewController: ViewController, NibInit {
         goToImportPhotos()
     }
     
-    func goToImportPhotos() {
+    private func goToImportPhotos() {
         let router = RouterVC()
         router.pushViewController(viewController: router.importPhotos!)
     }
@@ -71,6 +71,11 @@ final class FaceImageViewController: ViewController, NibInit {
         }
     }
     
+    private func showFaceImageWaitAlert() {
+        let popUp = PopUpController.with(title: nil, message: TextConstants.faceImageWaitAlbum, image: .none, buttonTitle: TextConstants.ok)
+        RouterVC().presentViewController(controller: popUp)
+    }
+    
     // MARK: - face image
     
     private func changeFaceImageAllowed(isAllowed: Bool,  completion: VoidHandler? = nil) {
@@ -84,8 +89,9 @@ final class FaceImageViewController: ViewController, NibInit {
                     
                     if isAllowed {
                         self?.facebookTagsAllowedSwitch.setOn(true, animated: false)
-                        self?.changeFacebookTagsAllowed(isAllowed: true)
                         self?.showFaceImageWaitAlert()
+                        /// next request
+                        self?.changeFacebookTagsAllowed(isAllowed: true)
                     } else {
                         self?.displayManager.applyConfiguration(.initial)
                     }
@@ -104,11 +110,6 @@ final class FaceImageViewController: ViewController, NibInit {
         }
     }
     
-    private func showFaceImageWaitAlert() {
-        let popUp = PopUpController.with(title: nil, message: TextConstants.faceImageWaitAlbum, image: .none, buttonTitle: TextConstants.ok)
-        RouterVC().presentViewController(controller: popUp)
-    }
-    
     private func checkFaceImageIsAllowed(completion: VoidHandler? = nil)  {
         activityManager.start()
         accountService.isAllowedFaceImage { [weak self] result in
@@ -117,7 +118,7 @@ final class FaceImageViewController: ViewController, NibInit {
                 case .success(let isAllowed):
                     self?.faceImageAllowedSwitch.setOn(isAllowed, animated: true)
                     if isAllowed {
-                        /// next check
+                        /// next request
                         self?.checkFacebookTagsIsAllowed(completion: completion)
                     } else {
                         self?.displayManager.applyConfiguration(.initial)
@@ -143,6 +144,7 @@ final class FaceImageViewController: ViewController, NibInit {
                 case .success(let isAllowed):
                     self?.facebookTagsAllowedSwitch.setOn(isAllowed, animated: true)
                     if isAllowed {
+                        /// next request
                         self?.checkFacebookImportStatus(completion: completion)
                     } else {
                         self?.displayManager.applyConfiguration(.facebookTagsOff)
@@ -167,6 +169,7 @@ final class FaceImageViewController: ViewController, NibInit {
                 switch result {
                 case .success(_):
                     if isAllowed {
+                        /// next request
                         self?.checkFacebookImportStatus(completion: completion)
                     } else {
                         self?.displayManager.applyConfiguration(.facebookTagsOff)
