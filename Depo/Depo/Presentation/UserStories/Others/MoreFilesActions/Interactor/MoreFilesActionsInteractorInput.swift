@@ -70,4 +70,6 @@ protocol MoreFilesActionsInteractorInput {
     func downloadToCmeraRoll(items: [BaseDataSourceItem])
     
     func deleteDeviceOriginal(items: [BaseDataSourceItem])
+    
+    func trackEvent(elementType: ElementTypes)
 }

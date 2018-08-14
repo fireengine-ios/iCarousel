@@ -41,5 +41,7 @@ enum PushNotificationAction: String {
     case search = "search"
     case freeUpSpace = "free_up_space" //TODO: check tag after implement on server
     case home = "home_page"
+    case settings = "settings"
+    case profileEdit = "profile_edit"
 }
 

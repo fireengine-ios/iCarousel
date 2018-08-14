@@ -52,6 +52,7 @@ struct TextConstants {
     static let registrationEmailPopupTitle = NSLocalizedString("E-mail Usage Information", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationEmailPopupMessage = NSLocalizedString("You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let authificateCaptchaRequired = NSLocalizedString("You have successfully registered, please log in with your credentials", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let captchaRequired = NSLocalizedString("Please enter the text below", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     
     // MARK: - Registration Error Messages

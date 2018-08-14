@@ -42,6 +42,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     func trackScreen() {
         analyticsService.logScreen(screen: .termsAndServices)
+        analyticsService.trackDimentionsEveryClickGA(screen: .termsAndServices)
     }
     
     var signUpSuccessResponse: SignUpSuccessResponse {
@@ -71,6 +72,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                                     captchaAnswer: sigUpInfo.captchaAnswer)
         
         authenticationService.signUp(user: signUpUser, sucess: { [weak self] result in
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .register)
             DispatchQueue.main.async {
                 guard let t = result as? SignUpSuccessResponse else {
                     return
@@ -85,7 +87,12 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             }
         }, fail: { [weak self] errorResponce in
             DispatchQueue.main.async {
-                self?.output.signupFailed(errorResponce: errorResponce)
+                if self?.isRedirectToSplash(forResponse: errorResponce) == true {
+                    self?.output.signupFailedCaptchaRequired()
+                    self?.output.signupFailed(errorResponce: errorResponce)
+                } else {
+                    self?.output.signupFailed(errorResponce: errorResponce)
+                }
             }
         })
     }
@@ -104,5 +111,15 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                 self?.output.applyEulaFaild(errorResponce: errorResponce)
             }
         })
+    }
+    
+    private func isRedirectToSplash(forResponse errorResponse: ErrorResponse) -> Bool {
+        if case ErrorResponse.error(let error) = errorResponse,
+            let serverError = error as? ServerValueError,
+            serverError.value.contains("Captcha required.") || serverError.value.contains("Invalid captcha.")
+        {
+            return true
+        }
+        return false
     }
 }

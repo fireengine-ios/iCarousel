@@ -33,5 +33,6 @@ extension UsageInfoInteractor: UsageInfoInteractorInput {
     
     func trackScreen() {
         analyticsManager.logScreen(screen: .usageInfo)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .usageInfo)
     }
 }

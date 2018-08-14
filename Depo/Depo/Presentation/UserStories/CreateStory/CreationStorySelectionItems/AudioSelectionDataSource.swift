@@ -11,6 +11,21 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
     lazy var player: MediaPlayer = factory.resolve()
     private lazy var smallPlayer: MediaPlayer = MediaPlayer()
     
+    init() {
+        super.init()
+        
+        /// didn't find the way to disable background for player, only manual stop
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: .UIApplicationWillResignActive, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func applicationWillResignActive(_ notification: NSNotification) {
+        smallPlayer.stop()
+    }
+    
     override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?) {
         super.setupCollectionView(collectionView: collectionView, filters: filters)
         collectionView.register(nibCell: AudioSelectionCollectionViewCell.self)

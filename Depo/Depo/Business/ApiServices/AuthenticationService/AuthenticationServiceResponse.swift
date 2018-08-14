@@ -107,6 +107,7 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
     private var success: SuccessResponse?
     private var fail: FailResponse?
     private let expectedDataFormat: ExpectedDataFormat
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     lazy var wrapRequestResponse: RequestResponse = { data, response, error in
         self.handleResponse(data: data, response: response, error: error)
@@ -135,6 +136,8 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
                 }
 
             } else if let data = data {
+                trackServerError(httpResponse: httpResponse, error: error)
+                
                 if let value = JSON(data: data)["value"].string {
                     let error = ServerValueError(value: value, code: httpResponse.statusCode)
                     fail?(.error(error))
@@ -156,10 +159,28 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
                     #endif
                 }
             } else {
+                trackServerError(httpResponse: httpResponse, error: error)
                 fail?(.httpCode(httpResponse.statusCode))
             }
         } else if let error = error {
+            trackServerError(httpResponse: nil, error: error)
             fail?(.error(error))
         }
     }
+
+    private func trackServerError(httpResponse: HTTPURLResponse?, error: Error?) {
+        
+        guard let httpResponse = httpResponse else {
+            return
+        }
+        if httpResponse.statusCode == 401, let url = httpResponse.url?.absoluteString,
+                !url.contains("http://adepo.turkcell.com.tr/api/auth/gsm/login"),
+                !url.contains(RouteRequests.authificationByRememberMe),
+                !url.contains(RouteRequests.authificationByToken) {
+            return
+        } else {
+            analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .serviceError, eventLabel: .serviceError, eventValue: "\(httpResponse.statusCode) \(error?.description ?? "")")
+        }
+    }
+    
 }

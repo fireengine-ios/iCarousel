@@ -25,4 +25,7 @@ protocol PhotoVideoDetailViewOutput {
     
     func updateBars()
     func replaceUploaded(_ item: WrapData)
+    
+    func videoStarted()
+    func videoStoped()
 }

@@ -148,35 +148,18 @@ class LoadingImageView: UIImageView {
             activity.stopAnimating()
             return
         }
+        
         activity.startAnimating()
         path = unwrapedPath
+        
         switch unwrapedPath {
         case .remoteUrl(let url):
-//            let dateStart = Date()
             self.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
-                guard let `self` = self else {
-                    return
-                }
-                
-                guard error == nil else {
-                    print("SD_WebImage_setImage error: \(error!.description)")
-                    return
-                }
-                
-//                let isImageLoadedNotQuickly = dateStart.timeIntervalSinceNow < -0.2
-                self.image = image
-                self.finishImageLoading(image)
-//                self.setImage(image: image, animated: isImageLoadedNotQuickly)
+                self?.finishImageLoading(image)
             }
         default:
-            self.image = nil
+            finishImageLoading(nil)
         }
-//        self.finishImageLoading(image)
-//        url = filesDataSource.getImage(patch: unwrapedPath) { [weak self] image in
-//            if self?.path == unwrapedPath {
-//                self?.finishImageLoading(image)
-//            }
-//        }
     }
     
     func loadGifImageFromURL(url: URL?) {

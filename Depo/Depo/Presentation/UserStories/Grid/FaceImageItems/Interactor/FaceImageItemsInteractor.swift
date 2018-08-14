@@ -28,14 +28,20 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
         
         return UIImage()
     }
-    
+
     override func trackScreen() {
         if remoteItems is PeopleItemsService {
             analyticsManager.logScreen(screen: .peopleFIR)
+            analyticsManager.trackDimentionsEveryClickGA(screen: .peopleFIR)
+            analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .recognition, eventLabel: .recognitionFace)
         } else if remoteItems is ThingsItemsService {
             analyticsManager.logScreen(screen: .thingsFIR)
+            analyticsManager.trackDimentionsEveryClickGA(screen: .thingsFIR)
+            analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .recognition, eventLabel: .recognitionObject)
         } else if remoteItems is PlacesItemsService {
             analyticsManager.logScreen(screen: .placesFIR)
+            analyticsManager.trackDimentionsEveryClickGA(screen: .placesFIR)
+            analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .recognition, eventLabel: .recognitionPlace)
         }
     }
     

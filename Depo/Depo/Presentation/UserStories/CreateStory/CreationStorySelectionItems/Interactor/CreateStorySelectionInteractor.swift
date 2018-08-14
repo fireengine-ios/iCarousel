@@ -22,8 +22,10 @@ class CreateStorySelectionInteractor: BaseFilesGreedInteractor {
     override func trackScreen() {
         if remoteItems is CreateStoryMusicService {
             analyticsManager.logScreen(screen: .createStoryMusicSelection)
+            analyticsManager.trackDimentionsEveryClickGA(screen: .createStoryMusicSelection)
         } else {
             analyticsManager.logScreen(screen: .createStoryPhotosSelection)
+            analyticsManager.trackDimentionsEveryClickGA(screen: .createStoryPhotosSelection)
         }
     }
     
@@ -36,4 +38,10 @@ class CreateStorySelectionInteractor: BaseFilesGreedInteractor {
         
     }
 
+    override func trackItemsSelected() {
+       
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .story, eventLabel: .crateStory(.musicSelect))
+        
+    }
+    
 }

@@ -16,7 +16,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
         if (isDeleteRequestRunning) {
             return
         }
-        
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .freeUpSpace)
         isDeleteRequestRunning = true
         FreeAppSpace.default.getUIDSForObjects(itemsArray: selectedItems){ [weak self] uuids in
             self?.fileService.details(uuids: uuids, success: { [weak self] objects in
@@ -75,6 +75,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     
     override func trackScreen() {
         analyticsManager.logScreen(screen: .freeAppSpace)
+        analyticsManager.trackDimentionsEveryClickGA(screen: .freeAppSpace)
     }
     
     override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {

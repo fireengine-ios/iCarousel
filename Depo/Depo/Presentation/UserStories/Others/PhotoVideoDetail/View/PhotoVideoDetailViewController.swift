@@ -283,6 +283,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         playerController?.player = localPlayer
         present(playerController!, animated: true) { [weak self] in
             self?.playerController?.player?.play()
+            self?.output.videoStarted()
             if Device.operationSystemVersionLessThen(11) {
                 self?.statusBarHidden = true
             }
@@ -290,6 +291,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func onStopPlay() {
+        output.videoStoped()
         if Device.operationSystemVersionLessThen(11) {
             statusBarHidden = false
         }

@@ -6,6 +6,8 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+import Firebase
+
 struct AnalyticsPackageProductObject {
     let itemName: String
     let itemID: String
@@ -18,23 +20,35 @@ struct AnalyticsPackageProductObject {
     
     var productParametrs: [String: Any] {
         return [
-            AnalyticsPackageProductParametrs.itemName.text : itemName,
-            AnalyticsPackageProductParametrs.itemID.text : itemID,
-            AnalyticsPackageProductParametrs.price.text : price,
-            AnalyticsPackageProductParametrs.itemBrand.text : itemBrand,
-            AnalyticsPackageProductParametrs.itemCategory.text : itemCategory,
-            AnalyticsPackageProductParametrs.itemVariant.text : itemVariant,
-            AnalyticsPackageProductParametrs.index.text : index,
-            AnalyticsPackageProductParametrs.quantity.text : quantity
+            AnalyticsParameterItemName : itemName,
+            AnalyticsParameterItemID : itemID,
+            AnalyticsParameterPrice : price,
+            AnalyticsParameterItemBrand : itemBrand,
+            AnalyticsParameterItemCategory : itemCategory,
+            AnalyticsParameterItemVariant : itemVariant,
+            AnalyticsParameterIndex : index,
+            AnalyticsParameterQuantity : quantity
         ]
     }
-    ///should be something like this:
-//        'AnalyticsParameterItemName': '50GB', // Product Name
-//        'AnalyticsParameterItemID': 'sku1234', // Product ID
-//        'AnalyticsParameterPrice': '117.00',
-//        'AnalyticsParameterItemBrand': 'Lifebox',
-//        'AnalyticsParameterItemCategory': 'Saklama Alanı', // Product Category
-//        'AnalyticsParameterItemVariant': '',
-//        'AnalyticsParameterIndex': 1 //Position number of the product in the list its shown.
-//        'AnalyticsParameterQuantity': 1 //Information on how many pieces are purchased. Sepete Add will fill in Checkout and Purchase actions.
 }
+
+struct AnalyticsEcommerce {
+    let items: [AnalyticsPackageProductObject]
+    let itemList: String
+    let transactionID: String
+    let tax: String
+    let priceValue: String
+    let shipping: String
+    
+    var ecommerceParametrs: [String: Any] {
+        return [
+            AnalyticsPackageEcommerce.items.text : items.map{$0.productParametrs},
+            AnalyticsParameterItemList : itemList,
+            AnalyticsParameterTransactionID : transactionID,
+            AnalyticsParameterTax : tax,
+            AnalyticsParameterValue : priceValue,
+            AnalyticsParameterShipping : shipping
+        ]
+    }
+}
+

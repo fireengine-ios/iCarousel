@@ -28,6 +28,8 @@ protocol PhotoVideoDetailInteractorInput: class {
     func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64)
     func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], uuid: String)
     
+    func trackVideoStart()
+    func trackVideoStop()
     
     func replaceUploaded(_ item: WrapData)
 }

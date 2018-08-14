@@ -27,6 +27,24 @@ class MenloworksAppEvents {
         MenloworksEventsService.shared.onLaunch()
         
         onDiskStorageStatus()
+        
+        sendProfileName()
+    }
+    
+    static func sendProfileName() {
+        let tokenStorage: TokenStorage = factory.resolve()
+        if tokenStorage.refreshToken == nil {
+            return
+        }
+        SingletonStorage.shared.getAccountInfoForUser(forceReload: false, success: { response in
+            guard let name = response.name else {
+                return
+            }
+            let nameIsEmpty = name.isEmpty
+            MenloworksTagsService.shared.onProfileNameChanged(isEmpty: nameIsEmpty)
+            MenloworksEventsService.shared.profileName(isEmpty: nameIsEmpty)
+            /// we don't need error handling here
+        }, fail: {_ in })
     }
     
     static func onDiskStorageStatus() {

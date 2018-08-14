@@ -63,7 +63,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func viewIsReady(collectionView: UICollectionView) {
         debugLog("BaseFilesGreedPresenter viewIsReady")
-        interactor.trackScreen()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.updateThreeDots(_:)),
@@ -321,6 +320,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         debugLog("BaseFilesGreedPresenter onItemSelected")
 
+        if item.fileType == .video {
+            interactor.trackClickOnPhotoOrVideo(isPhoto: false)
+        } else if item.fileType == .image {
+            interactor.trackClickOnPhotoOrVideo(isPhoto: true)
+        }
+        
         if item.fileType.isUnSupportedOpenType {
             let sameTypeFiles = getSameTypeItems(item: item, items: data)
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles,
@@ -367,6 +372,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if ifNeedReloadData {
             reloadData()
         }
+    }
+    
+    func newFolderCreated() {
+        interactor.trackFolderCreated()
     }
     
     func filesAppendedAndSorted() {
@@ -570,7 +579,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func sortedPushed(with rule: SortedRules) {
         debugLog("BaseFilesGreedPresenter sortedPushed")
-
+        interactor.trackSortingChange(sortRule: rule)
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)
         dataSource.currentSortType = rule
@@ -603,6 +612,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func viewWillAppear() {
+        interactor.trackScreen()
         if dataSource.selectedItemsArray.count > 0 {
             bottomBarPresenter?.show(animated: true, onView: nil)
         }

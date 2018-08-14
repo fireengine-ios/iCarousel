@@ -18,9 +18,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     func viewIsReady() {
         interactor.clearAllPreviouslyStoredInfo()
-        showPasscodeIfNeed()
-        CoreDataStack.default.appendLocalMediaItems(completion: nil)
-        
+        showPasscodeIfNeed()   
     }
     
     private func showLandingPagesIfNeeded() {

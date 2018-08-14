@@ -179,6 +179,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         case .addToAlbum:
             interactor.addToAlbum(items: selectedItems)
         case .print:
+            interactor.trackEvent(elementType: .print)
             MenloworksAppEvents.onPrintClicked()
             router.showPrint(items: selectedItems)
         case .removeAlbum:

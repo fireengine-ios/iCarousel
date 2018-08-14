@@ -434,7 +434,7 @@
 "Clear BackUp" = "Clear BackUp";
 "There are %d duplicated contacts." = "There are %d duplicated contacts.";
 "Are you sure you want to delete?" = "Are you sure you want to delete?";
-"This duplicated contacts will be deleted from your contacts." = "This duplicated contacts will be deleted from your contacts.";
+"This duplicated contacts will be deleted from your contacts." = "These duplicated contacts will be deleted from your contacts.";
 "%%%d Restored…" = "%%%d Restored…";
 "%%%d Analyzed…" = "%%%d Analyzed…";
 "%%%d Backed up…" = "%%%d Backed up…";
@@ -462,7 +462,7 @@
 
 /*free up spce card or storage full card? which one?*/
 "You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your lifebox quota! It’s a great time to upgrade your storage.";
-"You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "You didn't upload any file to your lifebox. Start uploading your memories on lifebox!";
+"You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "You don't have any file in your lifebox, yet. Start uploading your memories on lifebox!";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "You are using %d%% of your device storage. It’s a great time to free up space on your device.";
 "Upload Files" = "Upload Files";
 "Free Up Space" = "Free Up Space";
@@ -496,7 +496,7 @@
 "Your password is sent to your e-mail address" = "Your password is sent to your e-mail address";
 "Please enter a valid email adress" = "Please enter a valid email adress";
 "Please type the text" = "Please type the text";
-"You have performed too many attempts. Please try again later." = "You have performed too many attempts. Please try again later.";
+"You have performed too many attempts. Please try again later." = "You have performed too many attempts. Account blocked. Please, try again later.";
 "The Internet connection appears to be offline." = "The Internet connection appears to be offline.";
 "Authentication with Turkcell Password is disabled for the account" = "You can not login to lifebox with your Turkcell password because you have deactivated login with Turkcell password feature. Please, try to login with your lifebox password.";
 "You don't have any lifebox account. Please signup before using the application" = "You don't have any lifebox account. Please signup before using the application";
@@ -660,8 +660,11 @@
 "Your lifebox storage is almost full!" = "Your lifebox storage is almost full!";
 "This edited photo will be saved as a new photo in your device gallery" = "This edited photo will be saved as a new photo in your device gallery";
 "We couldn’t find any place on your Lifebox yet." = "We couldn’t find any places in your lifebox yet.";
-"*Average figure. Total number of documents depends on the size of each document." = "\n    *Average figure. Total number of documents depends on the size of each document.\n  ";
+"*Average figure. Total number of documents depends on the size of each document." = "*Average figure. Total number of documents depends on the size of each document.";
 "We couldn’t find anything on your Lifebox yet." = "We couldn’t find any things in your lifebox yet.";
 "Expiration Date: %@" = "Expiration Date: %@";
 "Failed to get albums" = "Failed to get albums";
-"To deactivate lifebox 25GB please send SMS with the text \"Stop1\", for lifebox 100GB please send SMS with the text \"Stop2\", for lifebox 500GB please send SMS with the text \"Stop3\" to the number 6767" = "To deactivate lifebox 25GB please send SMS with the text \"Stop1\", for lifebox 100GB please send SMS with the text \"Stop2\", for lifebox 500GB please send SMS with the text \"Stop3\" to the number 6767";
+"termsAndUseEtkCheckboxText" = "termsAndUseEtkCheckboxText";
+"offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
+"Please enter a valid login." = "Login denied. Please check your credentials.";
+"Please enter the text below" = "Please enter the text below";
