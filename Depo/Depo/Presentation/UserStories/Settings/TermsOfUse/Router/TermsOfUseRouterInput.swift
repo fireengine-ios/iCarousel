@@ -9,5 +9,5 @@
 import Foundation
 
 protocol TermsOfUseRouterInput {
-    func closeModule()
+
 }

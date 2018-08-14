@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TermsOfUseModuleConfigurator {
+final class TermsOfUseModuleConfigurator {
     
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
         if let viewController = viewInput as? TermsOfUseViewController {
