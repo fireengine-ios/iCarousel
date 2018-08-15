@@ -17,6 +17,7 @@ protocol AuthorizationRepository: RequestAdapter, RequestRetrier {
     func refreshTokens(completion: @escaping RefreshCompletion)
 }
 
+/// https://github.com/Alamofire/Alamofire/blob/master/Documentation/AdvancedUsage.md#adapting-and-retrying-requests
 open class AuthorizationRepositoryImp: AuthorizationRepository {
     
     private let sessionManager: SessionManager = {
