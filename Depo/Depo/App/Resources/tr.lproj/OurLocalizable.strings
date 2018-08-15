@@ -62,7 +62,7 @@
 "Enter the verification code\nsent to your number %@" = "%@ telefon numarana gönderilen doğrulama kodunu gir.";
 "Resend" = "Tekrar Gönder";
 "Next" = "İleri";
-"%.2f %@ / month" = "%.2f %@ / ay";
+"%.2f %@ / month" = "%.2f %@ / Ay";
 "Settings" = "Ayarlar";
 "OK" = "Tamam";
 "Buy" = "Satınalma";
@@ -474,7 +474,7 @@
 "Your password is sent to your e-mail address" = "Şifren e-posta adresine gönderilmiştir";
 "Please enter a valid email adress" = "Lütfen geçerli bir e-posta adresi girin.";
 "Please type the text" = "Lütfen yazıyı girin";
-"You have performed too many attempts. Please try again later." = "Çok fazla girişimde bulundun. Lütfen daha sonra tekrar deneyin.";
+"You have performed too many attempts. Please try again later." = "Çok fazla girişimde bulundun. Hesap bloke edildi. Lütfen daha sonra tekrar deneyin.";
 "The Internet connection appears to be offline." = "İnternet bağlantısı çevrimdışı görünüyor.";
 "Authentication with Turkcell Password is disabled for the account" = "Turkcell şifre ile lifebox'a giriş yapma özelliğini kapattığın için Turkcell şifrenle lifebox’a giriş yapamıyorsun. Lütfen lifebox şifreniz ile giriş yapmayı deneyin ya da şifremi unuttum butonu ile yeni bir şifre alın.";
 "You don't have any lifebox account. Please signup before using the application" = "Herhangi bir lifebox hesabın bulunmamaktadır. Lütfen uygulamayı kullanmadan önce kaydolun.";
@@ -543,7 +543,7 @@
 "dropboxLastUpdatedFile" = "Son güncelleme: %@ - %d dosya";
 "dropboxLastUpdatedFiles" = "Son güncelleme: %@ - %d dosya";
 "PackagesPolicyHeader" = "Uygulama içi satın alım için otomatik yenilebilir abonelik:";
-"PackagesPolicyText" = "Abonelikler aylık bazda yenilenmekte ve ödeme, satın alma onayından sonra iTunes hesabına faturalandırılmaktadır. \nOtomatik yenileme mevcut dönemin sona ermesinden en az 24 saat önce kapatılmazsa abonelik otomatik olarak yenilenir. \nHesap, mevcut dönemin sona ermesine 24 saat kala yenileme işlemi doğrultusunda ücretlendirilecektir. Ücretler uygulama içi satın alma ekranında gösterildiği gibi yansıtılacaktır.\nAbonelikler kullanıcı tarafından yönetilebilir ve otomatik yenileme, satın alma işleminden sonra kullanıcının Hesap Ayarlarına giderek kapatılabilir. \nGizlilik ve Güvenlik: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik";
+"PackagesPolicyText" = "Abonelikler aylık bazda yenilenmekte ve ödeme, satın alma onayından sonra iTunes hesabına faturalandırılmaktadır. \nOtomatik yenileme mevcut dönemin sona ermesinden en az 24 saat önce kapatılmazsa abonelik otomatik olarak yenilenir. \nHesap, mevcut dönemin sona ermesine 24 saat kala yenileme işlemi doğrultusunda ücretlendirilecektir. Ücretler uygulama içi satın alma ekranında gösterildiği gibi yansıtılacaktır.\nAbonelikler kullanıcı tarafından yönetilebilir ve otomatik yenileme, satın alma işleminden sonra kullanıcının Hesap Ayarlarına giderek kapatılabilir. \nGizlilik ve Güvenlik: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nKullanım Şartları: ";
 "Missing Dates" = "Eksik günler";
 "You have successfully registered, please log in with your credentials" = "Başarılı bir şekilde kaydoldun, telefon numaran / e-posta adresin ve şifren ile giriş yapabilirsin.";
 "Animation" = "Animasyon";
@@ -643,4 +643,13 @@
 "*Average figure. Total number of documents depends on the size of each document." = "*Ortalama rakam. Belgelerin toplam sayısı her belgenin büyüklüğüne bağlıdır.";
 "We couldn’t find anything on your Lifebox yet." = "Henüz bir nesne bulamadık";
 "Expiration Date: %@" = "Bitiş Tarihi: %@";
-"Failed to get albums" = "no pudo obtener álbumes";
+"Failed to get albums" = "Albümlerine ulaşamadık.";
+"termsAndUseEtkCheckboxText" = "Size uygun avantajlı ürün ve hizmetlerimize ilişkin bilgi verebilmek için abonelik sözleşmenizden sonra da reddetme hakkınızı kullanıncaya kadar geçerli olmak kaydıyla tarafınıza ticari elektronik ileti göndermek için izninizi istiyoruz.";
+"offersCancelLife" = "lifebox 25GB paketini iptal etmek için lütfen “Stop1” metnini kullanarak,  lifebox 100GB paketini iptal etmek için lütfen “Stop2” metnini kullanarak, lifebox 500GB paketini iptal etmek için lütfen “Stop3” metnini kullanarak, 6767'ye SMS atın.";
+"Please enter a valid login." = "Giriş reddedildi. Lütfen giriş bilgilerini kontrol et.";
+"Please enter the text below" = "Lütfen aşağıdaki metni giriniz.";
+"facebook_photo_tags" = "";
+"facebook_tags_on" = "";
+"facebook_tags_off" = "";
+"facebook_tags_import" = "";
+"TermsOfUseLinkText" = "Tıklayın";

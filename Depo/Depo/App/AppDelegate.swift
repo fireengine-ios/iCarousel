@@ -45,8 +45,8 @@ let log: XCGLogger = {
     return log
 }()
 
-func debugLog(_ string: String) {
-    log.debug(string)
+func debugLog(_ string: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+    log.debug(string, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     CLSLogv("%@", getVaList([string]))
 }
 
@@ -280,7 +280,8 @@ extension AppDelegate {
             ///call appendLocalMediaItems in the AppConfigurator
             return
         }
-        CoreDataStack.default.appendLocalMediaItems(completion: nil)
+        /// start photos logic after notification permission
+        MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

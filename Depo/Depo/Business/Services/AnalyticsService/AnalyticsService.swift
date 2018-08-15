@@ -11,6 +11,10 @@ import FBSDKCoreKit
 import StoreKit
 import Firebase
 
+protocol AnalyticsScreen {
+    var analyticsScreen: AnalyticsAppScreens { get }
+}
+
 final class AnalyticsService {
     
     private var innerTimer: Timer?
@@ -18,6 +22,11 @@ final class AnalyticsService {
     func start() {
         setupAdjust()
         configureFireBase()
+    }
+    
+    func trackScreen(_ screen: AnalyticsScreen) {
+        logScreen(screen: screen.analyticsScreen)
+        trackDimentionsEveryClickGA(screen: screen.analyticsScreen)
     }
     
     // MARK: - Setup

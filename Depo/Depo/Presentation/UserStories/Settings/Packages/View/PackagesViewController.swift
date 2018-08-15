@@ -76,6 +76,12 @@ final class PackagesViewController: BaseViewController {
             attributes: [.foregroundColor: ColorConstants.textGrayColor,
                          .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
         attributedString.append(policyAttributedString)
+
+        let termsAttributedString = NSMutableAttributedString(
+            string: TextConstants.termsOfUseLinkText,
+            attributes: [.link: TextConstants.NotLocalized.termsOfUseLink,
+                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
+        attributedString.append(termsAttributedString)
         
         policyTextView.attributedText = attributedString
         policyTextView.clipsToBounds = true
@@ -231,6 +237,12 @@ extension PackagesViewController: UITextViewDelegate {
     
     @available(iOS 10.0, *)
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        if URL.absoluteString == TextConstants.NotLocalized.termsOfUseLink {
+            DispatchQueue.toMain {
+                self.output.openTermsOfUseScreen()
+            }
+            return true
+        }
         UIApplication.shared.open(URL, options: [:], completionHandler: nil)
         return true
     }

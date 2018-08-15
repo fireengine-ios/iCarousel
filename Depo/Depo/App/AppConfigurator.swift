@@ -185,27 +185,28 @@ final class AppConfigurator {
                 
                 MPush.registerMessageResponseHandler({(_ response: MMessageResponse) -> Void in
                     
-                    debugLog("Payload: \(response.message.payload)")
+                    let payload = response.message.payload
+                    let payloadAction = payload["action"] as? String
+                    
+                    debugLog("Payload: \(payload)")
                     switch response.action.type {
                         
                     case .click:
                         debugLog("Menlo Notif Clicked")
                         
-                        if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
+                        if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction) {
                             PushNotificationService.shared.openActionScreen()
-                            storageVars.deepLink = response.message.payload["action"] as? String
+                            storageVars.deepLink = payloadAction
                         }
-                        
                         
                     case .dismiss:
                         debugLog("Menlo Notif Dismissed")
                         
                     case .present:
                         debugLog("Menlo Notif in Foreground")
-                        if PushNotificationService.shared.assignDeepLink(innerLink: (response.message.payload["action"] as? String)){
+                        if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction) {
                             PushNotificationService.shared.openActionScreen()
                         }
-                        
                     }
                 })
                 
@@ -223,7 +224,9 @@ final class AppConfigurator {
                 ///call appendLocalMediaItems either here or in the AppDelegate
                 ///application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings)
                 ///it depends on iOS version
-                CoreDataStack.default.appendLocalMediaItems(completion: nil)
+                
+                /// start photos logic after notification permission
+                MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
             }
         } else {
             setupMenloworks()

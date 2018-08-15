@@ -453,7 +453,7 @@ class FileService: BaseRequestService {
                         default     : break
                     }
                     
-                    if let item = downloadParam.item, let mediaItem = CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
+                    if let item = downloadParam.item, let mediaItem = MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
                         ///For now we do not update local files by remotes
 //                        CoreDataStack.default.updateSavedItems(savedItems: [mediaItem],
 //                                                               remoteItems: [item],

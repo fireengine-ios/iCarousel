@@ -549,7 +549,7 @@
 "dropboxLastUpdatedFile" = "تم آخر تحديث في %@ - %d ملف";
 "dropboxLastUpdatedFiles" = "تم آخر تحديث في %@ - %d من الملفات";
 "PackagesPolicyHeader" = "معلومات عن الاشتراك ذي التجديد التلقائي للشراء داخل التطبيق:";
-"PackagesPolicyText" = "تُجدَّد الاشتراكات شهرياً.\nويُحمَّل حسابك في iTunes الرسوم عند تأكيد الشراء.\nوتُجدَّد الاشتراكات تلقائياً ما لم يُوقَف تشغيل خيار التجديد التلقائي قبل 24 ساعة على الأقل من وقت انتهاء الاشتراك في حينه.\nتخصم تكلفة التجديد من الحساب في خلال 24 ساعة قبل تاريخ تجديد الاشتراك. وتكون الرسوم كما هي في نافذة الشراء داخل التطبيق.\nيمكن للمستخدم بعد الشراء إدارة الاشتراك وإلغائه وخيار التجديد التلقائي وإيقافه من \"إعدادات الحساب\".\nيُصادر أي جزء متبقٍ من مدة التجربة المجانية -إن مُنحت- عند دفع المستخدم ثمن الاشتراك، وذلك حسب مقتضى الحال.\nنهج الخصوصية: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik";
+"PackagesPolicyText" = "تُجدَّد الاشتراكات شهرياً.\nويُحمَّل حسابك في iTunes الرسوم عند تأكيد الشراء.\nوتُجدَّد الاشتراكات تلقائياً ما لم يُوقَف تشغيل خيار التجديد التلقائي قبل 24 ساعة على الأقل من وقت انتهاء الاشتراك في حينه.\nتخصم تكلفة التجديد من الحساب في خلال 24 ساعة قبل تاريخ تجديد الاشتراك. وتكون الرسوم كما هي في نافذة الشراء داخل التطبيق.\nيمكن للمستخدم بعد الشراء إدارة الاشتراك وإلغائه وخيار التجديد التلقائي وإيقافه من \"إعدادات الحساب\".\nيُصادر أي جزء متبقٍ من مدة التجربة المجانية -إن مُنحت- عند دفع المستخدم ثمن الاشتراك، وذلك حسب مقتضى الحال.\nنهج الخصوصية: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nتعليمات الاستخدام: ";
 "Missing Dates" = "التواريخ مفقودة";
 "You have successfully registered, please log in with your credentials" = "لقد أتممت عملية التسجيل بنجاح. يرجى تسجيل الدخول بكتابة بيانات الاعتماد.";
 "Animation" = "رسم متحرك";
@@ -648,3 +648,12 @@
 "We couldn’t find anything on your Lifebox yet." = "لم يتم العثور بعد على أي شيء في لايف بوكس";
 "Expiration Date: %@" = "تاريخ إنتهاء الصلاحية: %@";
 "Failed to get albums" = "فشل في الحصول على ألبومات";
+"termsAndUseEtkCheckboxText" = "termsanduse";
+"offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
+"Please enter a valid login." = "رُفِضَ تسجيل الدخول. يرجى التحقق من بيانات الاعتماد.";
+"Please enter the text below" = "يرجى إدخال النص أدناه";
+"facebook_photo_tags" = "";
+"facebook_tags_on" = "";
+"facebook_tags_off" = "";
+"facebook_tags_import" = "";
+"TermsOfUseLinkText" = "انقر";

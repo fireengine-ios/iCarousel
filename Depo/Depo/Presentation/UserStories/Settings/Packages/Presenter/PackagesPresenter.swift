@@ -53,7 +53,7 @@ class PackagesPresenter {
 
 // MARK: PackagesViewOutput
 extension PackagesPresenter: PackagesViewOutput {
-    
+
     func getAccountType() -> AccountType {
         return accountType
     }
@@ -119,6 +119,10 @@ extension PackagesPresenter: PackagesViewOutput {
     
     func restorePurchasesPressed() {
         interactor.restorePurchases()
+    }
+    
+    func openTermsOfUseScreen() {
+        router.openTermsOfUse()
     }
 }
 

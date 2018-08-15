@@ -32,12 +32,17 @@ class MenloworksAppEvents {
     }
     
     static func sendProfileName() {
-        SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: { response in
+        let tokenStorage: TokenStorage = factory.resolve()
+        if tokenStorage.refreshToken == nil {
+            return
+        }
+        SingletonStorage.shared.getAccountInfoForUser(forceReload: false, success: { response in
             guard let name = response.name else {
                 return
             }
-            MenloworksTagsService.shared.onProfileNameChanged(name: name)
-            MenloworksEventsService.shared.profileName(isEmpty: name.isEmpty)
+            let nameIsEmpty = name.isEmpty
+            MenloworksTagsService.shared.onProfileNameChanged(isEmpty: nameIsEmpty)
+            MenloworksEventsService.shared.profileName(isEmpty: nameIsEmpty)
             /// we don't need error handling here
         }, fail: {_ in })
     }

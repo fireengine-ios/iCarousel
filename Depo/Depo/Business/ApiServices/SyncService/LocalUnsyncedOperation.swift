@@ -17,7 +17,7 @@ final class LocalUnsyncedOperation: Operation {
     private let fieldValue: FieldValue
     private let completion: UnsyncedItemsCompletion
     
-    private let coreDataStack = CoreDataStack.default
+    private let coreDataStack = MediaItemOperationsService.shared
     private let semaphore = DispatchSemaphore(value: 0)
     private let privateQueue = DispatchQueue(label: DispatchQueueLabels.localUnsyncedOperationQueue)
     
