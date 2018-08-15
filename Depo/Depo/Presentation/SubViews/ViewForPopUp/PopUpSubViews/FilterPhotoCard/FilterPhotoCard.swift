@@ -85,7 +85,7 @@ final class FilterPhotoCard: BaseView {
         }
         bottomButton.isHidden = true
         DispatchQueue.toBackground {
-            CoreDataStack.default.getLocalFilteredItem(remoteOriginalItem: originalItem) { [weak self] localSavedItem in
+            MediaItemOperationsService.shared.getLocalFilteredItem(remoteOriginalItem: originalItem) { [weak self] localSavedItem in
                 guard let `self` = self else {
                     return
                 }

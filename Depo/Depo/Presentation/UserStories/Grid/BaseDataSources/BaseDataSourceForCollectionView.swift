@@ -1621,7 +1621,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 let localIDs = serverObjects.map {
                     $0.getTrimmedLocalID()
                 }
-                let localObjectsForReplace = CoreDataStack.default.allLocalItems(trimmedLocalIds: localIDs)
+                let localObjectsForReplace = MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: localIDs)
                 
                 let foundedLocalID = localObjectsForReplace.map {
                     $0.getTrimmedLocalID()

@@ -117,7 +117,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func clearAllPreviouslyStoredInfo() {
-        CoreDataStack.default.clearDataBase()
+        MediaItemOperationsService.shared.clearDataBase()
     }
     
     func updateUserLanguage() {

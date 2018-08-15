@@ -88,7 +88,7 @@ extension AppMigrator {
         
         if isSynced {
             wrapData.setSyncStatusesAsSyncedForCurrentUser()
-            CoreDataStack.default.updateLocalItemSyncStatus(item: wrapData)
+            MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: wrapData)
         }
         
         removeFromSources(metaSummary: metaSummary, md5: deprecatedMD5)

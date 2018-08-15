@@ -85,7 +85,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
-    private lazy var coreDataStack = CoreDataStack.default
+    private lazy var coreDataStack = MediaItemOperationsService.shared
     
     private lazy var streamReaderWrite = StreamReaderWriter()
     
@@ -296,7 +296,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         let assets = PHAsset.fetchAssets(in: album, options: PHFetchOptions())
         let array = assets.objects(at: IndexSet(0..<assets.count))
-        let context = coreDataStack.newChildBackgroundContext
+        let context = CoreDataStack.default.newChildBackgroundContext
         let ids = coreDataStack.listAssetIdAlreadySaved(allList: array, context: context)
         
         return (ids.count, true)
@@ -495,7 +495,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             let context = CoreDataStack.default.newChildBackgroundContext
             context.perform { [weak self] in
                 let mediaItem: MediaItem
-                if let existingMediaItem = CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
+                if let existingMediaItem = MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
                     mediaItem = existingMediaItem
                 } else {
                     mediaItem = MediaItem(wrapData: wrapData, context: context)

@@ -280,7 +280,7 @@ extension AppDelegate {
             ///call appendLocalMediaItems in the AppConfigurator
             return
         }
-        CoreDataStack.default.appendLocalMediaItems(completion: nil)
+        MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
