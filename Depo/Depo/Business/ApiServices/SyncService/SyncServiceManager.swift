@@ -352,7 +352,7 @@ extension SyncServiceManager {
         ItemOperationManager.default.syncFinished()
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
-        if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, !CoreDataStack.default.inProcessAppendingLocalFiles {
+        if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, !MediaItemOperationsService.shared.inProcessAppendingLocalFiles {
             CardsManager.default.startOperationWith(type: .waitingForWiFi, allOperations: nil, completedOperations: nil)
             return
         }

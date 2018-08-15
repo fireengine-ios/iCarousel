@@ -41,7 +41,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             guard let `self` = self else {
                 return
             }
-            CoreDataStack.default.getLocalDuplicates(remoteItems: self.getDuplicatesObjects(), duplicatesCallBack: { [weak self] items in
+            MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: self.getDuplicatesObjects(), duplicatesCallBack: { [weak self] items in
                 self?.dispatchQueue.async { [weak self] in
                     guard let `self` = self else {
                         checkedArray([])
@@ -149,7 +149,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     func checkFreeAppSpace() {
-        if CoreDataStack.default.inProcessAppendingLocalFiles {
+        if MediaItemOperationsService.shared.inProcessAppendingLocalFiles {
             NotificationCenter.default.addObserver(self,
                                                    selector: #selector(onLocalFilesHaveBeenLoaded),
                                                    name: Notification.Name.allLocalMediaItemsHaveBeenLoaded,
@@ -343,7 +343,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     private func allLocalItems() -> [WrapData] {
-        return CoreDataStack.default.allLocalItems()
+        return MediaItemOperationsService.shared.allLocalItems()
     }
     
 
@@ -429,7 +429,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
     func finishedDownloadFile(file: WrapData) {
         if !file.isLocalItem {
-            CoreDataStack.default.getLocalDuplicates(remoteItems: [file], duplicatesCallBack: { [weak self] items in
+            MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: [file], duplicatesCallBack: { [weak self] items in
                 guard let `self` = self else {
                     return
                 }
@@ -504,7 +504,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 }
                 networksObjects = networksObjectsForDelete
                 
-                CoreDataStack.default.getLocalDuplicates(remoteItems: networksObjects, duplicatesCallBack: { [weak self] items in
+                MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: networksObjects, duplicatesCallBack: { [weak self] items in
                     guard let `self` = self else {
                         return
                     }

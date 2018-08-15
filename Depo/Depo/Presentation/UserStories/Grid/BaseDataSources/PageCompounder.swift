@@ -21,7 +21,7 @@ final class PageCompounder {
     
     var pageSize: Int = NumericConstants.numberOfLocalItemsOnPage
     
-    private let coreData = CoreDataStack.default
+    private let coreData = MediaItemOperationsService.shared
     
     private func compoundItems(pageItems: [WrapData],
                                sortType: SortedRules,
@@ -35,7 +35,7 @@ final class PageCompounder {
         
         let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filterPredicate, predicate])
         
-        let requestContext = coreData.newChildBackgroundContext
+        let requestContext = CoreDataStack.default.newChildBackgroundContext
         
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,

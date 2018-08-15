@@ -655,7 +655,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                     if serverObjects.isEmpty {
                         actionTypes.remove(at: deleteOriginalIndex)
                     } else if selectedItems is [Item] {
-                        CoreDataStack.default.getLocalDuplicates(remoteItems: selectedItems as! [Item], duplicatesCallBack: { [weak self] items in
+                        MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: selectedItems as! [Item], duplicatesCallBack: { [weak self] items in
                             if items.count == 0 {
                                 //selectedItems = localDuplicates
                                 actionTypes.remove(at: deleteOriginalIndex)

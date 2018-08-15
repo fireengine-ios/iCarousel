@@ -384,7 +384,7 @@ class AuthenticationService: BaseRequestService {
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
-            CoreDataStack.default.clearDataBase()
+            MediaItemOperationsService.shared.clearDataBase()
             FreeAppSpace.default.clear()
             CardsManager.default.stopAllOperations()
             CardsManager.default.clear()

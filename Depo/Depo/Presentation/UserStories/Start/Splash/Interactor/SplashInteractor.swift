@@ -116,10 +116,6 @@ class SplashInteractor: SplashInteractorInput {
         }
     }
     
-    func clearAllPreviouslyStoredInfo() {
-        CoreDataStack.default.clearDataBase()
-    }
-    
     func updateUserLanguage() {
         authService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
             DispatchQueue.toMain {

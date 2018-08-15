@@ -280,7 +280,8 @@ extension AppDelegate {
             ///call appendLocalMediaItems in the AppConfigurator
             return
         }
-        CoreDataStack.default.appendLocalMediaItems(completion: nil)
+        /// start photos logic after notification permission
+        MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

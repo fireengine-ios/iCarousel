@@ -37,7 +37,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                         assets.append(asset)
                     })
                     
-                    var items = CoreDataStack.default.allLocalItems(with: assets)
+                    var items = MediaItemOperationsService.shared.allLocalItems(with: assets)
                     
                     items.sort {
                         guard let firstDate = $0.creationDate else {

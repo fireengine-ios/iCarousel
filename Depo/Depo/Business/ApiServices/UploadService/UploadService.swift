@@ -267,7 +267,7 @@ final class UploadService: BaseRequestService {
                         finishedOperation.item.syncStatus = .synced
                         finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
                         
-                        CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
+                        MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: finishedOperation.item)
                         
                         ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item, isAutoSync: false)
                         
@@ -368,7 +368,7 @@ final class UploadService: BaseRequestService {
                         finishedOperation.item.syncStatus = .synced
                         finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
                         
-                        CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
+                        MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: finishedOperation.item)
                         
                         ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item, isAutoSync: false)
                         
@@ -462,7 +462,7 @@ final class UploadService: BaseRequestService {
                         finishedOperation.item.syncStatus = .synced
                         finishedOperation.item.setSyncStatusesAsSyncedForCurrentUser()
                         
-                        CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)
+                        MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: finishedOperation.item)
                         
                         ItemOperationManager.default.finishedUploadFile(file: finishedOperation.item, isAutoSync: true)
                         

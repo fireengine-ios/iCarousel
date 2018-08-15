@@ -12,7 +12,7 @@ struct DispatchQueueLabels {
     static let myStreamAlbums = "GetMyStreamData"
     static let faceImageItemsUpdate = "UpdateFaceImageItems"
     static let getUserInfo = "GetUserInfo"
-    static let coreDataStack = "com.lifebox.CoreDataStack"
+    static let mediaItemOperationsService = "com.lifebox.mediaItemOperationsService"
     static let autosync = "com.lifebox.autosync"
     static let upload = "com.lifebox.upload"
     static let uploadOperation = "com.lifebox.upload_operation"
