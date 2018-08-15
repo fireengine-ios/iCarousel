@@ -2402,8 +2402,8 @@
 		8C6EF88F1F348B77002AC795 /* EditingBarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8891F348B77002AC795 /* EditingBarConfig.swift */; };
 		8C6EF8901F348B77002AC795 /* EditinglBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF88A1F348B77002AC795 /* EditinglBar.swift */; };
 		8C6EF8911F348B77002AC795 /* EditinglBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6EF88B1F348B77002AC795 /* EditinglBar.xib */; };
-		8C6F1864211D8365009E474F /* RemoteMediaItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6F1863211D8365009E474F /* RemoteMediaItems.swift */; };
-		8C6F1865211D8365009E474F /* RemoteMediaItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6F1863211D8365009E474F /* RemoteMediaItems.swift */; };
+		8C6F1864211D8365009E474F /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6F1863211D8365009E474F /* CacheManager.swift */; };
+		8C6F1865211D8365009E474F /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6F1863211D8365009E474F /* CacheManager.swift */; };
 		8C6FB6901F0B9F7600B552A3 /* MoreActionsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB67C1F0B9F7600B552A3 /* MoreActionsConfig.swift */; };
 		8C6FB6981F0B9F8400B552A3 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB6971F0B9F8400B552A3 /* CustomTabBar.swift */; };
 		8C73CFD6208265D200B66E64 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
@@ -4917,7 +4917,7 @@
 		8C6EF8891F348B77002AC795 /* EditingBarConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingBarConfig.swift; sourceTree = "<group>"; };
 		8C6EF88A1F348B77002AC795 /* EditinglBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditinglBar.swift; sourceTree = "<group>"; };
 		8C6EF88B1F348B77002AC795 /* EditinglBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditinglBar.xib; sourceTree = "<group>"; };
-		8C6F1863211D8365009E474F /* RemoteMediaItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMediaItems.swift; sourceTree = "<group>"; };
+		8C6F1863211D8365009E474F /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		8C6FB67C1F0B9F7600B552A3 /* MoreActionsConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreActionsConfig.swift; sourceTree = "<group>"; };
 		8C6FB6971F0B9F8400B552A3 /* CustomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -10605,7 +10605,7 @@
 				CEE1D1EE1F714DEA0008F4CF /* PredicateRules.swift */,
 				CEE1D1ED1F714DE30008F4CF /* MediaItemOperations.swift */,
 				CEE0056D1F7A75EE004FA8DE /* LocalMediaItems.swift */,
-				8C6F1863211D8365009E474F /* RemoteMediaItems.swift */,
+				8C6F1863211D8365009E474F /* CacheManager.swift */,
 				CEE1D1EC1F714DDB0008F4CF /* CoreDataStack.swift */,
 				CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */,
 				CE3AA9B21F4D6B44000157AF /* Models */,
@@ -14326,7 +14326,7 @@
 				8C0E8DB61FDEBDFF00789C91 /* LoginPhoneMailCell.swift in Sources */,
 				7C379F3F202C35F00050C055 /* ManageContactsModuleOutput.swift in Sources */,
 				8CD2B3AD1FE7B2A500280547 /* PopUpService.swift in Sources */,
-				8C6F1865211D8365009E474F /* RemoteMediaItems.swift in Sources */,
+				8C6F1865211D8365009E474F /* CacheManager.swift in Sources */,
 				8C0E8DB81FDEBDFF00789C91 /* GradientLoadingIndicator.swift in Sources */,
 				8C0B91B220170F4D00A5BA81 /* ContactSyncResponse.swift in Sources */,
 				8C0E8DB91FDEBDFF00789C91 /* VisualMusicPlayerPresenter.swift in Sources */,
@@ -15480,7 +15480,7 @@
 				78D9BA3A2007E7F100F2233F /* DuplicatedContactsInteractorInput.swift in Sources */,
 				CE51ACC91EF90853005DCEE0 /* RegistrationInteractorInput.swift in Sources */,
 				9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */,
-				8C6F1864211D8365009E474F /* RemoteMediaItems.swift in Sources */,
+				8C6F1864211D8365009E474F /* CacheManager.swift in Sources */,
 				CE51ACCA1EF90853005DCEE0 /* RegistrationInteractorOutput.swift in Sources */,
 				7C0750F620BD83A800FD1FA2 /* MaskService.swift in Sources */,
 				7CFD0D201F8F44CA002B1FB5 /* ArrayDataSourceForCollectionView.swift in Sources */,

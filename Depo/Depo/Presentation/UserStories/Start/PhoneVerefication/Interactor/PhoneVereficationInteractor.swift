@@ -104,6 +104,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
         authenticationService.login(user: user, sucess: { [weak self] _ in
             self?.tokenStorage.isRememberMe = true
             self?.analyticsService.track(event: .login)
+            CacheManager.shared.startAppendingAllRemotes()
             DispatchQueue.main.async {
                 self?.output.succesLogin()
             }
