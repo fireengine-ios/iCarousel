@@ -64,6 +64,7 @@ open class AuthorizationRepositoryImp: AuthorizationRepository {
     
     private var refreshAttempts = 0
     private var maxRefreshAttempts = 3
+    private var refreshTokensCompletions = [RefreshCompletion]()
 }
 
 extension AuthorizationRepositoryImp: RequestAdapter {
@@ -136,9 +137,9 @@ extension AuthorizationRepositoryImp: RequestRetrier {
     // MARK: - Refresh Tokens
     
     func refreshTokens(completion: @escaping RefreshCompletion) {
-        
         /// guard refresh retry
         if isRefreshing {
+            refreshTokensCompletions.append(completion)
             return
         }
         
@@ -154,7 +155,15 @@ extension AuthorizationRepositoryImp: RequestRetrier {
             .request(urls.refreshAccessToken, method: .post, parameters: [uuid: UIDevice.current.identifierForVendor?.uuidString ?? "", name: UIDevice.current.name, deviceType: Device.deviceType],
                      encoding: JSONEncoding.default, headers: headers)
             .responseJSON { [weak self] response in
-                guard let strongSelf = self else { return }
+                
+                guard let strongSelf = self else {
+                    /// must execute never
+                    completion(false, nil)
+                    self?.refreshTokensCompletions.forEach { $0(false, nil) }
+                    self?.refreshTokensCompletions.removeAll()
+                    return
+                }
+                
                 debugPrint(response)
                 /// if tokenStorage.refreshToken is invalid
                 if response.response?.statusCode == 401 {
@@ -163,11 +172,15 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                     #endif
                     strongSelf.refreshFailedHandler()
                     completion(false, nil)
+                    self?.refreshTokensCompletions.forEach { $0(false, nil) }
+                    self?.refreshTokensCompletions.removeAll()
                 
                 /// mapping accessToken for completion handler
                 } else if let headers = response.response?.allHeaderFields as? [String: Any],
                     let accessToken = headers[strongSelf.accessTokenKey] as? String {
                     completion(true, accessToken)
+                    self?.refreshTokensCompletions.forEach { $0(true, accessToken) }
+                    self?.refreshTokensCompletions.removeAll()
                     
                 /// retry refreshTokens request only for bad internet
                 } else if strongSelf.refreshAttempts < strongSelf.maxRefreshAttempts {
@@ -179,6 +192,8 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                     return
                 } else {  
                     completion(false, nil)
+                    self?.refreshTokensCompletions.forEach { $0(false, nil) }
+                    self?.refreshTokensCompletions.removeAll()
                 }
                 
                 /// end refresh status
