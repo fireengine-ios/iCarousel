@@ -224,6 +224,8 @@ final class AppConfigurator {
                 ///call appendLocalMediaItems either here or in the AppDelegate
                 ///application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings)
                 ///it depends on iOS version
+                
+                /// start photos logic after notification permission
                 MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
             }
         } else {

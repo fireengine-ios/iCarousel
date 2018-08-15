@@ -17,7 +17,6 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     private lazy var storageVars: StorageVars = factory.resolve()
     
     func viewIsReady() {
-        interactor.clearAllPreviouslyStoredInfo()
         showPasscodeIfNeed()   
     }
     
