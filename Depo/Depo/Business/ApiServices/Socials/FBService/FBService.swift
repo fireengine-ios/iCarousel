@@ -27,8 +27,10 @@ class FBService: BaseRequestService {
         debugLog("FBService requestToken")
 
         let vc = (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController!
-        
-        FBSDKLoginManager().logIn(withReadPermissions: permissions, from: vc) { result, error in
+
+        let fbManager = FBSDKLoginManager()
+        fbManager.logOut()
+        fbManager.logIn(withReadPermissions: permissions, from: vc) { result, error in
             if let error = error {
                 fail?(.error(error))
             } else if let result = result {
