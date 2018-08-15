@@ -11,7 +11,7 @@ import CoreData
 
 final class CoreDataStack: NSObject {
     
-    @objc static let `default` = CoreDataStack()
+    static let `default` = CoreDataStack()
     
     
     private override init() {
