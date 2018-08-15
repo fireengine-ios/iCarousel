@@ -19,7 +19,7 @@ final class MediaItemOperationsService {
     
     static let shared = MediaItemOperationsService()
     
-    let privateQueue = DispatchQueue(label: DispatchQueueLabels.coreDataStack, attributes: .concurrent)
+    let privateQueue = DispatchQueue(label: DispatchQueueLabels.mediaItemOperationsService, attributes: .concurrent)
     
     var pageAppendedCallBack: AppendingLocalItemsPageAppended?
     
