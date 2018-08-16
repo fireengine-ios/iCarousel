@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SegmentedController" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="contanerView" destination="4lj-gp-jGo" id="oaw-sv-Tk6"/>
+                <outlet property="segmentedControl" destination="Wqq-Fa-bXg" id="t1O-86-jSR"/>
+                <outlet property="view" destination="yd4-Dp-2zG" id="pbh-ID-ovT"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4lj-gp-jGo">
+                    <rect key="frame" x="0.0" y="70" width="320" height="410"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yd4-Dp-2zG">
+                    <rect key="frame" x="0.0" y="20" width="320" height="50"/>
+                    <subviews>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Wqq-Fa-bXg">
+                            <rect key="frame" x="80" y="11.5" width="160" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="tDM-LQ-6dq"/>
+                            </constraints>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentDidChange:" destination="-1" eventType="valueChanged" id="mTa-gA-ZYx"/>
+                            </connections>
+                        </segmentedControl>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="WAZ-RM-5q1"/>
+                        <constraint firstItem="Wqq-Fa-bXg" firstAttribute="centerX" secondItem="yd4-Dp-2zG" secondAttribute="centerX" id="poC-5O-OSW"/>
+                        <constraint firstItem="Wqq-Fa-bXg" firstAttribute="centerY" secondItem="yd4-Dp-2zG" secondAttribute="centerY" id="rPh-GF-a4D"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="4lj-gp-jGo" secondAttribute="trailing" id="593-fP-rPN"/>
+                <constraint firstItem="yd4-Dp-2zG" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="FbR-Ga-QlG"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="4lj-gp-jGo" secondAttribute="bottom" id="SND-xX-ZVQ"/>
+                <constraint firstItem="yd4-Dp-2zG" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="hoY-cj-fau"/>
+                <constraint firstItem="yd4-Dp-2zG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="mNa-PJ-I8o"/>
+                <constraint firstItem="4lj-gp-jGo" firstAttribute="top" secondItem="yd4-Dp-2zG" secondAttribute="bottom" id="r3I-l7-xjo"/>
+                <constraint firstItem="4lj-gp-jGo" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ro0-KZ-nqw"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+</document>

@@ -3390,6 +3390,10 @@
 		CEF6906521241B280013075F /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6905F21241B280013075F /* NSManagedObjectContext+Extensions.swift */; };
 		CEF690672124203D0013075F /* MediaItemOperationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF690662124203D0013075F /* MediaItemOperationsService.swift */; };
 		CEF690682124203D0013075F /* MediaItemOperationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF690662124203D0013075F /* MediaItemOperationsService.swift */; };
+		CEF6906A212565890013075F /* SegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69069212565890013075F /* SegmentedController.swift */; };
+		CEF6906B212565890013075F /* SegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69069212565890013075F /* SegmentedController.swift */; };
+		CEF6906D212565EA0013075F /* SegmentedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF6906C212565EA0013075F /* SegmentedController.xib */; };
+		CEF6906E212565EA0013075F /* SegmentedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF6906C212565EA0013075F /* SegmentedController.xib */; };
 		CEF69DDD1FB584CD00FCE6AB /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
 		CEF69DDF1FB584F700FCE6AB /* UploadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */; };
 		CEF69DE11FB5851E00FCE6AB /* UploadParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE01FB5851E00FCE6AB /* UploadParametrs.swift */; };
@@ -5537,6 +5541,8 @@
 		CEF6905E21241B280013075F /* NSManagedObject+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extensions.swift"; sourceTree = "<group>"; };
 		CEF6905F21241B280013075F /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
 		CEF690662124203D0013075F /* MediaItemOperationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemOperationsService.swift; sourceTree = "<group>"; };
+		CEF69069212565890013075F /* SegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedController.swift; sourceTree = "<group>"; };
+		CEF6906C212565EA0013075F /* SegmentedController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SegmentedController.xib; sourceTree = "<group>"; };
 		CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseResult.swift; sourceTree = "<group>"; };
 		CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadResponse.swift; sourceTree = "<group>"; };
 		CEF69DE01FB5851E00FCE6AB /* UploadParametrs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadParametrs.swift; sourceTree = "<group>"; };
@@ -11308,6 +11314,8 @@
 				CEAE3FE91EFD517300A405B2 /* TabBarView.xib */,
 				CEAE3FEA1EFD517300A405B2 /* TabBarViewController.swift */,
 				78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */,
+				CEF69069212565890013075F /* SegmentedController.swift */,
+				CEF6906C212565EA0013075F /* SegmentedController.xib */,
 			);
 			path = CustomTabBars;
 			sourceTree = "<group>";
@@ -12712,6 +12720,7 @@
 				8C0E90421FDEBDFF00789C91 /* CollectionViewCellForPhoto.xib in Resources */,
 				7CEE2725209C560500EF6C79 /* PageForLanding.xib in Resources */,
 				8C06B1292008AD72003D8E05 /* t_kucuk_selected.png in Resources */,
+				CEF6906E212565EA0013075F /* SegmentedController.xib in Resources */,
 				8C06B16F2008AD72003D8E05 /* toolbar_sekil_icon@3x.png in Resources */,
 				8C06B1C52008AD72003D8E05 /* lookup_soft_elegance_2.png in Resources */,
 				8C06AFA32008AD71003D8E05 /* frame.png in Resources */,
@@ -13321,6 +13330,7 @@
 				8C06B07C2008AD71003D8E05 /* paylas_linkedin.png in Resources */,
 				8C06B0782008AD71003D8E05 /* paylas_kaydet@2x.png in Resources */,
 				8C06AFF82008AD71003D8E05 /* kontrast@2x.png in Resources */,
+				CEF6906D212565EA0013075F /* SegmentedController.xib in Resources */,
 				8C06B1AE2008AD72003D8E05 /* CRYPopupViewController.nib in Resources */,
 				8C06B0FC2008AD72003D8E05 /* share_icon@3x.png in Resources */,
 				8C06AF1A2008AD70003D8E05 /* cizgi_1_selected.png in Resources */,
@@ -14107,6 +14117,7 @@
 				CE827588203FEC7800067724 /* UIScrollView+Scroll.swift in Sources */,
 				8C0E8CD91FDEBDFF00789C91 /* SearchViewInitializer.swift in Sources */,
 				8C0E8CDA1FDEBDFF00789C91 /* Configuration.m in Sources */,
+				CEF6906B212565890013075F /* SegmentedController.swift in Sources */,
 				8C0B919520170E3E00A5BA81 /* DuplicatedContactTableViewCell.swift in Sources */,
 				8C0E8CDB1FDEBDFF00789C91 /* FetchService.swift in Sources */,
 				8C0E8CDC1FDEBDFF00789C91 /* VisualMusicPlayerViewInput.swift in Sources */,
@@ -15273,6 +15284,7 @@
 				CE33DFFF1F0296C000706C40 /* RequestHeader.swift in Sources */,
 				7C6E2F991F31E4F800536DB6 /* CreateStoryNameViewInput.swift in Sources */,
 				CEAE3FBA1EFD4F0D00A405B2 /* HomePageViewController.swift in Sources */,
+				CEF6906A212565890013075F /* SegmentedController.swift in Sources */,
 				FA793D852018725400A02B46 /* ThingsServiceResponse.swift in Sources */,
 				CE51ABBD1EF90853005DCEE0 /* LoginViewOutput.swift in Sources */,
 				CE9CB666210F2D7500342EEE /* FixedAVPlayerViewController.swift in Sources */,
