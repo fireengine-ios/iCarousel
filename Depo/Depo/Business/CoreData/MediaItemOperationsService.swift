@@ -246,7 +246,7 @@ final class MediaItemOperationsService {
     }
 
     func getAllRemotesMediaItem() -> [MediaItem] {
-        let predicate = NSPredicate(format: "isLocalItemValue = true")
+        let predicate = NSPredicate(format: "isLocalItemValue = false")
         return executeRequest(predicate: predicate, context: CoreDataStack.default.newChildBackgroundContext)
     }
     
