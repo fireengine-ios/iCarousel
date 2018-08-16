@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EmptyDataView" customModule="lifebox" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="283" height="220"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k9C-uC-RPN">
+                    <rect key="frame" x="93.5" y="0.0" width="96" height="96.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="96" id="ZMx-Yw-9uC"/>
+                        <constraint firstAttribute="height" constant="96" id="mx5-Mg-t2T"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyd-0Z-8Lz" userLabel="message label">
+                    <rect key="frame" x="0.0" y="112.5" width="283" height="57.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s1K-vc-udV" customClass="BlueButtonWithNoFilesWhiteText" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="46.5" y="181" width="190" height="39"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="190" id="LEc-gf-11N">
+                            <variation key="widthClass=regular" constant="258"/>
+                        </constraint>
+                        <constraint firstAttribute="height" constant="39" id="yW1-y6-iLT"/>
+                    </constraints>
+                    <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                    <state key="normal" title="button"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="top" secondItem="k9C-uC-RPN" secondAttribute="bottom" constant="-96" id="5RD-ez-z3q"/>
+                <constraint firstAttribute="trailing" secondItem="iyd-0Z-8Lz" secondAttribute="trailing" id="7dW-uv-eTO"/>
+                <constraint firstItem="s1K-vc-udV" firstAttribute="top" secondItem="iyd-0Z-8Lz" secondAttribute="bottom" constant="11" id="8h4-UQ-csN"/>
+                <constraint firstItem="k9C-uC-RPN" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="C4y-3s-OXu"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="s1K-vc-udV" secondAttribute="bottom" id="KNN-JO-9w9"/>
+                <constraint firstItem="iyd-0Z-8Lz" firstAttribute="top" secondItem="k9C-uC-RPN" secondAttribute="bottom" constant="16" id="TT8-N0-Mfa"/>
+                <constraint firstItem="iyd-0Z-8Lz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XbS-p0-HXU"/>
+                <constraint firstItem="s1K-vc-udV" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="gZe-UX-1WJ"/>
+                <constraint firstItem="k9C-uC-RPN" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="ySZ-Rb-Q0A"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="actionButton" destination="s1K-vc-udV" id="UWv-1J-ceS"/>
+                <outlet property="iconImageView" destination="k9C-uC-RPN" id="FnI-RX-bW0"/>
+                <outlet property="messageLabel" destination="iyd-0Z-8Lz" id="lPj-xe-eeL"/>
+            </connections>
+            <point key="canvasLocation" x="17.5" y="-170"/>
+        </view>
+    </objects>
+</document>
