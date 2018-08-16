@@ -120,8 +120,8 @@ final class PushNotificationService {
                 tabBarVC.selectedIndex = index.rawValue
             case .photosScreenIndex:
                 tabBarVC.showPhotosScreen(self)
-            case .videosScreenIndex:
-                tabBarVC.showVideosScreen(self)
+//            case .videosScreenIndex:
+//                tabBarVC.showVideosScreen(self)
             }
         }
     }
@@ -157,7 +157,7 @@ final class PushNotificationService {
     }
     
     private func openVideos() {
-        openTabBarItem(index: .videosScreenIndex)
+//        openTabBarItem(index: .videosScreenIndex)
     }
     
     private func openAlbums() {

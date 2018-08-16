@@ -371,6 +371,10 @@ class RouterVC: NSObject {
         return controller
     }
     
+    func segmentedController(with controllers: [UIViewController]) -> SegmentedController {
+        return SegmentedController.initWithControllers(controllers)
+    }
+    
     
     // MARK: Photos and Videos
     

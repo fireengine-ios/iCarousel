@@ -21,12 +21,19 @@ final class SegmentedController: UIViewController, NibInit {
     
     private var viewControllers: [UIViewController] = []
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationBarWithGradientStyle()
+//        needShowTabBar = true
+        
+        add(childController: viewControllers[segmentedControl.selectedSegmentIndex])
+    }
+    
     private func setup(with controllers: [UIViewController]) {
         guard !controllers.isEmpty else {
             return
         }
         viewControllers = controllers
-        add(childController: controllers[segmentedControl.selectedSegmentIndex])
     }
     
     @IBAction private func segmentDidChange(_ sender: UISegmentedControl) {
