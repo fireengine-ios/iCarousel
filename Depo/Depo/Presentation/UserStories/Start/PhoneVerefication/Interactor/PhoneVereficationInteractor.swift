@@ -13,7 +13,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     
     private let dataStorage: PhoneVereficationDataStorage = PhoneVereficationDataStorage()    
     lazy var authenticationService = AuthenticationService()
-    
+    private let cacheManager = CacheManager()
     
     weak var output: PhoneVereficationInteractorOutput!
     
@@ -104,7 +104,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
         authenticationService.login(user: user, sucess: { [weak self] _ in
             self?.tokenStorage.isRememberMe = true
             self?.analyticsService.track(event: .login)
-            CacheManager.shared.startAppendingAllRemotes()
+            self?.cacheManager.startAppendingAllRemotes()
             DispatchQueue.main.async {
                 self?.output.succesLogin()
             }

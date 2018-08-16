@@ -8,7 +8,7 @@
 
 final class CacheManager {///adding files TO DB // managing cache
     
-    static let shared = CacheManager()
+//    static let shared = CacheManager()
     
     var allRemotesAdded = false
     var allLocalAdded = false
@@ -24,7 +24,9 @@ final class CacheManager {///adding files TO DB // managing cache
     
     
     func startAppendingAllRemotes() {// we save remotes everytime, no metter if acces to PH libriary denied
-        guard !processingRemoteItems else {
+        
+        guard !MediaItemOperationsService.shared.isNoRemotesInDB(),
+            !processingRemoteItems else {
             return
         }
         processingRemoteItems = true
@@ -45,7 +47,7 @@ final class CacheManager {///adding files TO DB // managing cache
 //                
 //            }
             
-            CoreDataStack.default.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
+            MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
                 self?.remotePageAdded?()
                 if remoteItems.count < CacheManager.pageSize {
                     completion()
@@ -62,39 +64,9 @@ final class CacheManager {///adding files TO DB // managing cache
     
     func startAppendingAllLocals() {
         allLocalAdded = false
-        CoreDataStack.default.appendLocalMediaItems { [weak self] in
+        MediaItemOperationsService.shared.appendLocalMediaItems { [weak self] in
             self?.allLocalAdded = true
         }
     }
 
-}
-
-extension CoreDataStack {//Remote items protocol here?
-    
-    func appendRemoteMediaItems(remoteItems: [Item], completion: @escaping VoidHandler) {
-        let context = backgroundContext
-        ///TODO: add check on existing files?
-        // OR should we mark sync status and etc here. And also affect free app?
-        
-        guard !remoteItems.isEmpty else {
-            debugPrint("REMOTE_ITEMS: no files to add")
-            completion()
-            return
-        }
-        debugPrint("REMOTE_ITEMS: \(remoteItems.count) remote files to add")
-        
-        context.perform { [weak self] in
-            remoteItems.forEach { item in
-                autoreleasepool {
-                 
-                    _ = MediaItem(wrapData: item, context: context)
-                    
-                }
-            }
-            self?.saveDataForContext(context: context, savedCallBack: completion)
-        }
-//      ItemOperationManager.default.addedLocalFiles(items: addedObjects)
-        //WARNING:- DO we need notify ItemOperationManager here???
-    }
-    
 }

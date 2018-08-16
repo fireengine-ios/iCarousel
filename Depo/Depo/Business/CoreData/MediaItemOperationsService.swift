@@ -219,6 +219,41 @@ final class MediaItemOperationsService {
         return result
     }
     
+    // MARK: - Remote Items
+    
+    func appendRemoteMediaItems(remoteItems: [Item], completion: @escaping VoidHandler) {
+        let context = CoreDataStack.default.newChildBackgroundContext
+        ///TODO: add check on existing files?
+        // OR should we mark sync status and etc here. And also affect free app?
+        
+        guard !remoteItems.isEmpty else {
+            debugPrint("REMOTE_ITEMS: no files to add")
+            completion()
+            return
+        }
+        debugPrint("REMOTE_ITEMS: \(remoteItems.count) remote files to add")
+        
+        context.perform { 
+            remoteItems.forEach { item in
+                autoreleasepool {
+                    _ = MediaItem(wrapData: item, context: context)
+                }
+            }
+            CoreDataStack.default.saveDataForContext(context: context, savedCallBack: completion)
+        }
+        //      ItemOperationManager.default.addedLocalFiles(items: addedObjects)
+        //WARNING:- DO we need notify ItemOperationManager here???
+    }
+
+    func getAllRemotesMediaItem() -> [MediaItem] {
+        let predicate = NSPredicate(format: "isLocalItemValue = true")
+        return executeRequest(predicate: predicate, context: CoreDataStack.default.newChildBackgroundContext)
+    }
+    
+    func isNoRemotesInDB() -> Bool {
+        return getAllRemotesMediaItem().isEmpty
+    }
+    
     // MARK: - LocalMediaItems
     
     @objc func appendLocalMediaItems(completion: VoidHandler?) {

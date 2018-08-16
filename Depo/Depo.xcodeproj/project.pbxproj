@@ -2410,6 +2410,8 @@
 		8C9EA13F20B593E600FED3A2 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
 		8C9EA14020B593E600FED3A2 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
 		8CA2913D20CA885C0014379E /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */; };
+		8CA6C0872124664200DFDBD3 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6C0862124664100DFDBD3 /* CacheManager.swift */; };
+		8CA6C0882124664200DFDBD3 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6C0862124664100DFDBD3 /* CacheManager.swift */; };
 		8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */; };
 		8CAFBF0220825E720046E881 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		8CB293331F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */; };
@@ -4940,6 +4942,7 @@
 		8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailVerificationViewController.swift; sourceTree = "<group>"; };
 		8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MailVerificationViewController.xib; sourceTree = "<group>"; };
 		8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceExtension.swift; sourceTree = "<group>"; };
+		8CA6C0862124664100DFDBD3 /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndServicesDataStorage.swift; sourceTree = "<group>"; };
 		8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetInitialConfig.swift; sourceTree = "<group>"; };
 		8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaSignUpRequrementResponse.swift; sourceTree = "<group>"; };
@@ -10629,6 +10632,7 @@
 		CE3AA9831F4D648C000157AF /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				8CA6C0862124664100DFDBD3 /* CacheManager.swift */,
 				CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */,
 				CEE1D1EE1F714DEA0008F4CF /* PredicateRules.swift */,
 				CEF6905E21241B280013075F /* NSManagedObject+Extensions.swift */,
@@ -15033,6 +15037,7 @@
 				8C0E8FD61FDEBDFF00789C91 /* OTPViewConfigurator.swift in Sources */,
 				4A2039C82087ACBC004850ED /* AutoSyncRouterInput.swift in Sources */,
 				8C0E8FD71FDEBDFF00789C91 /* OTPViewInitializer.swift in Sources */,
+				8CA6C0882124664200DFDBD3 /* CacheManager.swift in Sources */,
 				8C0E8FD81FDEBDFF00789C91 /* UploadFromLifeBoxModuleInput.swift in Sources */,
 				8C0E8FDE1FDEBDFF00789C91 /* OptInController.swift in Sources */,
 			);
@@ -15176,6 +15181,7 @@
 				78E8E2B62023638E00A979AB /* FaceImageItemsInteractorOutput.swift in Sources */,
 				CE8F44F71F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.swift in Sources */,
 				78D9BA422007E81200F2233F /* DuplicatedContactsRouter.swift in Sources */,
+				8CA6C0872124664200DFDBD3 /* CacheManager.swift in Sources */,
 				8C7786881F3F38D9005CB432 /* MusicBar.swift in Sources */,
 				CEAE3FF21EFD517300A405B2 /* CustomTabBarItem.swift in Sources */,
 				8C6EF8901F348B77002AC795 /* EditinglBar.swift in Sources */,

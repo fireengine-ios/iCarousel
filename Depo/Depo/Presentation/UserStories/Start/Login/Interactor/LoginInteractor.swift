@@ -28,6 +28,7 @@ class LoginInteractor: LoginInteractorInput {
     private var password: String?
     private var atachedCaptcha: CaptchaParametrAnswer?
     private lazy var captchaService = CaptchaService()
+    private let cacheManager = CacheManager()
     
     var isShowEmptyEmail = false
     
@@ -85,7 +86,7 @@ class LoginInteractor: LoginInteractorInput {
             self.analyticsService.track(event: .login)
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
-            CacheManager.shared.startAppendingAllRemotes()
+            self.cacheManager.startAppendingAllRemotes()
             DispatchQueue.main.async {
                 self.output?.succesLogin()
             }
