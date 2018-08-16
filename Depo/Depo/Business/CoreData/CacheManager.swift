@@ -25,7 +25,7 @@ final class CacheManager {///adding files TO DB // managing cache
     
     func startAppendingAllRemotes() {// we save remotes everytime, no metter if acces to PH libriary denied
         
-        guard !MediaItemOperationsService.shared.isNoRemotesInDB(),
+        guard MediaItemOperationsService.shared.isNoRemotesInDB(),
             !processingRemoteItems else {
             return
         }
