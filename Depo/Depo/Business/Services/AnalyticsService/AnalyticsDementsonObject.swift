@@ -26,7 +26,7 @@ struct AnalyticsDementsonObject {
     let developmentVersion: String
     let paymentMethod: String? //Should be sent after package purchase. Value is Turkcell or inApp
     let userId: Any
-    let operatorSystem: String
+    let operatorSystem: Any//should be String if everything ok
     let facialRecognition: Any//not bool in case of Null
     let userPackagesNames: [String] //Pacakage names that the user owns should be sent with every page click. Pacakage names should be seperated with pipe "|"
     let countOfUploadMetric: Int?
@@ -46,7 +46,8 @@ struct AnalyticsDementsonObject {
             GADementionsFields.sourceType.text : sourceType,
             GADementionsFields.loginStatus.text : loginStatus,
             GADementionsFields.platform.text : platform,
-            GADementionsFields.networkFixWifi.text : "\(isWifi)",
+            GADementionsFields.networkFixWifi.text : isWifi ? "True" : "False",
+            ///index54=isWifi:  is sent as “TRUE". It should be “True”. Only first letter should be capital.
             GADementionsFields.service.text : service,
             GADementionsFields.developmentVersion.text : developmentVersion,
             GADementionsFields.userID.text : userId,

@@ -15,6 +15,8 @@ final class AnalyticsService {
     
     private var innerTimer: Timer?
     
+    private let privateQueue = DispatchQueue(label: DispatchQueueLabels.analyticsPrivateQueue)
+    
     func start() {
         setupAdjust()
         configureFireBase()
@@ -121,11 +123,10 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func stopTimelyTracking()
     func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int?,
     uploadsMetrics: Int?, isPaymentMethodNative: Bool?)
-    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
+//    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
 }
 
 extension AnalyticsService: AnalyticsGA {
-    
     
     func logScreen(screen: AnalyticsAppScreens) {
         Analytics.logEvent("screenView", parameters: [
@@ -136,6 +137,37 @@ extension AnalyticsService: AnalyticsGA {
     
     func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int? = nil,
                                      uploadsMetrics: Int? = nil, isPaymentMethodNative: Bool? = nil) {
+//        let loginStatus = SingletonStorage.shared.referenceToken != nil
+//        let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+//        var payment: String?
+//        
+//        if let unwrapedisNativePayment = isPaymentMethodNative {
+//            payment = "\(unwrapedisNativePayment)"
+//        }
+//        
+//        let activeSubscriptionNames = SingletonStorage.shared.activeUserSubscriptionList.map {
+//            return ($0.subscriptionPlanName ?? "") + "|"
+//        }
+//        
+        prepareDimentionsParametrs(screen: screen, downloadsMetrics: downloadsMetrics, uploadsMetrics: uploadsMetrics, isPaymentMethodNative: isPaymentMethodNative) { parametrs in
+            Analytics.logEvent("screenView", parameters: parametrs)
+        }
+//        let parametrs = AnalyticsDementsonObject(screenName: screen.name, pageType: screen, sourceType: screen.name, loginStatus: "\(loginStatus)",
+//            platform: "iOS", isWifi: ReachabilityService().isReachableViaWiFi,
+//            service: "lifebox", developmentVersion: version,
+//            paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
+//            operatorSystem: CoreTelephonyService().carrierName ?? NSNull(), facialRecognition: SingletonStorage.shared.isFaceImageRecognitionON,
+//            userPackagesNames: activeSubscriptionNames, countOfUploadMetric: uploadsMetrics,
+//            countOfDownloadMetric: downloadsMetrics).productParametrs
+        
+//        Analytics.logEvent("screenView", parameters: parametrs)
+    }
+    
+    private func prepareDimentionsParametrs(screen: AnalyticsAppScreens,
+                                            downloadsMetrics: Int? = nil,
+                                            uploadsMetrics: Int? = nil,
+                                            isPaymentMethodNative: Bool? = nil,
+                                            parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         let loginStatus = SingletonStorage.shared.referenceToken != nil
         let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
         var payment: String?
@@ -143,23 +175,30 @@ extension AnalyticsService: AnalyticsGA {
         if let unwrapedisNativePayment = isPaymentMethodNative {
             payment = "\(unwrapedisNativePayment)"
         }
-        
+
+        let group = DispatchGroup()
+
+        group.enter()
+        let facialRecognitionStatus = SingletonStorage.shared.getFaceImageSettingsStatus(success: { isFIROn in
+            group.leave()
+        }, fail: { error in
+            group.leave()
+        }) //isFaceImageRecognitionON
+        group.enter()
         let activeSubscriptionNames = SingletonStorage.shared.activeUserSubscriptionList.map {
             return ($0.subscriptionPlanName ?? "") + "|"
         }
-        let parametrs = AnalyticsDementsonObject(screenName: screen.name, pageType: screen, sourceType: screen.name, loginStatus: "\(loginStatus)",
-            platform: "iOS", isWifi: ReachabilityService().isReachableViaWiFi,
-            service: "lifebox", developmentVersion: version,
-            paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
-            operatorSystem: Device.deviceType, facialRecognition: SingletonStorage.shared.isFaceImageRecognitionON,
-            userPackagesNames: activeSubscriptionNames, countOfUploadMetric: uploadsMetrics,
-            countOfDownloadMetric: downloadsMetrics).productParametrs
-        
-        Analytics.logEvent("screenView", parameters: parametrs)
-    }
-    
-    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool) {
-        
+
+        group.notify(queue: privateQueue) { 
+            parametrsCallback(AnalyticsDementsonObject(screenName: screen.name, pageType: screen, sourceType: screen.name, loginStatus: "\(loginStatus)",
+                platform: "iOS", isWifi: ReachabilityService().isReachableViaWiFi,
+                service: "lifebox", developmentVersion: version,
+                paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
+                operatorSystem: CoreTelephonyService().carrierName ?? NSNull(),
+                facialRecognition: facialRecognitionStatus,
+                userPackagesNames: activeSubscriptionNames, countOfUploadMetric: uploadsMetrics,
+                countOfDownloadMetric: downloadsMetrics).productParametrs)
+        }
     }
     
     func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int) {
@@ -191,7 +230,7 @@ extension AnalyticsService: AnalyticsGA {
     
     func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, eventValue: String? = nil ) {
         let eventTempoValue = eventValue ?? ""
-        ///migt be needed in the future
+        ///might be needed in the future
 //        if let unwrapedEventValue = eventValue {
 //            eventTempoValue = "\(unwrapedEventValue)"
 //        }
