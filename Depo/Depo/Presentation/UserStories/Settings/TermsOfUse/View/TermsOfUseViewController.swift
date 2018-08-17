@@ -37,8 +37,7 @@ final class TermsOfUseViewController: BaseViewController {
     // MARK: Life cycle
     
     override func loadView() {
-        super.loadView()
-
+//        super.loadView()
         view = webView
     }
 

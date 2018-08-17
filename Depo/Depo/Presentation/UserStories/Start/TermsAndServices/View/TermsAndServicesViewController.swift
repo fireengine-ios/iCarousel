@@ -55,8 +55,6 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     // MARK: Life cycle
     
     override func loadView() {
-        super.loadView()
-
         contentView.addSubview(webView)
     }
     
