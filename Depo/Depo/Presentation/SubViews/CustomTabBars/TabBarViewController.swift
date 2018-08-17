@@ -646,6 +646,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             if tabbarSelectedIndex == selectedIndex && arrayOfIndexesOfViewsThatShouldntBeRefreshed.contains(tabbarSelectedIndex) {
                 return
             }
+            
+            if tabbarSelectedIndex > 2 {
+                tabbarSelectedIndex -= 1
+            }
+            
             selectedIndex = tabbarSelectedIndex
             
             if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
