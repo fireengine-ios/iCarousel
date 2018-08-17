@@ -18,8 +18,12 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     // MARK: IN
     func viewIsReady() {
         interactor.trackScreen()
+        if interactor.cameFromLogin {
+            view.hideBackButton()
+        }
         startAsyncOperationDisableScreen()
         interactor.loadTermsAndUses()
+        
     }
     
     func startUsing() {
