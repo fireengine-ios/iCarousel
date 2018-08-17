@@ -230,6 +230,10 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     func checkEULA() {
+        ///REMOVE ME
+        output?.onFailEULA()
+        return
+        ///REMOVE ME
         eulaService.eulaCheck(success: { [weak self] succesResponce in
             DispatchQueue.main.async {
                 self?.output?.onSuccessEULA()
