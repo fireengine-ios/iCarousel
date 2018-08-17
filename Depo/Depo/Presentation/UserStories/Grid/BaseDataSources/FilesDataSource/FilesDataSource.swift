@@ -142,4 +142,10 @@ extension FilesDataSource {
             completion(image, indexPath)
         })
     }
+    
+    func getAssetThumbnail(asset: PHAsset, completion: @escaping (_ image: UIImage?) -> Void) {
+        assetCache?.requestImage(for: asset, targetSize: targetSize, contentMode: .default, options: defaultImageRequestOptions, resultHandler: { image, _ in
+            completion(image)
+        })
+    }
 }

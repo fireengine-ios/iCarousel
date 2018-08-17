@@ -3402,6 +3402,10 @@
 		CEF690A121259C4C0013075F /* EmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF6909F21259C4C0013075F /* EmptyDataView.xib */; };
 		CEF690A321259C540013075F /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF690A221259C540013075F /* EmptyDataView.swift */; };
 		CEF690A421259C540013075F /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF690A221259C540013075F /* EmptyDataView.swift */; };
+		CEF690A72126B4530013075F /* PhotoVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF690A52126B4530013075F /* PhotoVideoCell.swift */; };
+		CEF690A82126B4530013075F /* PhotoVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF690A52126B4530013075F /* PhotoVideoCell.swift */; };
+		CEF690A92126B4530013075F /* PhotoVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF690A62126B4530013075F /* PhotoVideoCell.xib */; };
+		CEF690AA2126B4530013075F /* PhotoVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF690A62126B4530013075F /* PhotoVideoCell.xib */; };
 		CEF69DDD1FB584CD00FCE6AB /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
 		CEF69DDF1FB584F700FCE6AB /* UploadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */; };
 		CEF69DE11FB5851E00FCE6AB /* UploadParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE01FB5851E00FCE6AB /* UploadParametrs.swift */; };
@@ -5555,6 +5559,8 @@
 		CEF6909A21258D8F0013075F /* PhotoVideoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoVideoController.xib; sourceTree = "<group>"; };
 		CEF6909F21259C4C0013075F /* EmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyDataView.xib; sourceTree = "<group>"; };
 		CEF690A221259C540013075F /* EmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDataView.swift; sourceTree = "<group>"; };
+		CEF690A52126B4530013075F /* PhotoVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoCell.swift; sourceTree = "<group>"; };
+		CEF690A62126B4530013075F /* PhotoVideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoVideoCell.xib; sourceTree = "<group>"; };
 		CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseResult.swift; sourceTree = "<group>"; };
 		CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadResponse.swift; sourceTree = "<group>"; };
 		CEF69DE01FB5851E00FCE6AB /* UploadParametrs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadParametrs.swift; sourceTree = "<group>"; };
@@ -11332,6 +11338,8 @@
 				CEF6909A21258D8F0013075F /* PhotoVideoController.xib */,
 				CEF6909F21259C4C0013075F /* EmptyDataView.xib */,
 				CEF690A221259C540013075F /* EmptyDataView.swift */,
+				CEF690A52126B4530013075F /* PhotoVideoCell.swift */,
+				CEF690A62126B4530013075F /* PhotoVideoCell.xib */,
 			);
 			path = CustomTabBars;
 			sourceTree = "<group>";
@@ -12931,6 +12939,7 @@
 				8C06AFAD2008AD71003D8E05 /* frame_selected@3x.png in Resources */,
 				8C06B1BD2008AD72003D8E05 /* lookup.png in Resources */,
 				8CD2B3B81FE7B44000280547 /* WaitingForWiFiPopUp.xib in Resources */,
+				CEF690AA2126B4530013075F /* PhotoVideoCell.xib in Resources */,
 				8C06B0ED2008AD72003D8E05 /* serbest_cizgi.png in Resources */,
 				8C0E90601FDEBDFF00789C91 /* SearchView.xib in Resources */,
 				8C06B1812008AD72003D8E05 /* turuncu@2x.png in Resources */,
@@ -13543,6 +13552,7 @@
 				8C06B1862008AD72003D8E05 /* underline@2x.png in Resources */,
 				8C06B01E2008AD71003D8E05 /* lifebox.png in Resources */,
 				8C06AF802008AD70003D8E05 /* error_icon@2x.png in Resources */,
+				CEF690A92126B4530013075F /* PhotoVideoCell.xib in Resources */,
 				8C06B0622008AD71003D8E05 /* paylas_bip@3x.png in Resources */,
 				8C06B1D62008AD72003D8E05 /* Turkcell_Satura_Regular.ttf in Resources */,
 				CEE9B4ED1F78FD85002DAF81 /* InternetDataUsageCell.xib in Resources */,
@@ -14193,6 +14203,7 @@
 				8C0E8D001FDEBDFF00789C91 /* LoginInteractor.swift in Sources */,
 				FA33A7E3209451B1008F946C /* NavigationBarStyle.swift in Sources */,
 				8C0E8D011FDEBDFF00789C91 /* MessageView.m in Sources */,
+				CEF690A82126B4530013075F /* PhotoVideoCell.swift in Sources */,
 				8C0E8D021FDEBDFF00789C91 /* FLImageView.m in Sources */,
 				C62239AE204973300043ED44 /* FaceImageChangeCoverRouterInput.swift in Sources */,
 				C62239A82049731B0043ED44 /* FaceImageChangeCoverInteractor.swift in Sources */,
@@ -15507,6 +15518,7 @@
 				7C6E2F961F31E4F800536DB6 /* CreateStoryNameRouterInput.swift in Sources */,
 				7CCAC5331FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
 				CE51AC951EF90853005DCEE0 /* AutoSyncConfigurator.swift in Sources */,
+				CEF690A72126B4530013075F /* PhotoVideoCell.swift in Sources */,
 				7C4988151F3320420039C5F2 /* CreateStoryPhotosOrderInitializer.swift in Sources */,
 				CEAE3FEB1EFD517300A405B2 /* BasicCustomNavBarViewController.swift in Sources */,
 				CECA95971F163CC80054BDC0 /* WrapperedItems.swift in Sources */,

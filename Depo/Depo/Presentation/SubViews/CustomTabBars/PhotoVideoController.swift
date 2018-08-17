@@ -8,6 +8,13 @@
 
 import UIKit
 
+// TODO: selectedIndexPaths NSFetchedResultsController changes
+final class PhotoVideoDataSource {
+    var isSelectingMode = false
+    var selectedIndexPaths = Set<IndexPath>()
+}
+
+
 final class PhotoVideoController: UIViewController, NibInit {
 
     @IBOutlet private weak var collectionView: UICollectionView! {
@@ -27,9 +34,11 @@ final class PhotoVideoController: UIViewController, NibInit {
     
     var editingTabBar: BottomSelectionTabBarViewController?
     
+    private var dataSource = PhotoVideoDataSource()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupEdittingBar()
         setupPullToRefresh()
 //        collectionView.alwaysBounceVertical = true
@@ -43,7 +52,21 @@ final class PhotoVideoController: UIViewController, NibInit {
         collectionView.reloadData()
         
 //        CollectionViewCellsIdsConstant.cellForImage
-        collectionView.register(nibCell: CollectionViewCellForPhoto.self)
+        collectionView.register(nibCell: PhotoVideoCell.self)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        updateCellSize()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateCellSize()
+    }
+    
+    private func updateCellSize() {
+        _ = collectionView.saveAndGetItemSize(for: 4)
     }
     
     private func setupEdittingBar() {
@@ -66,7 +89,10 @@ final class PhotoVideoController: UIViewController, NibInit {
     } 
     
     @objc private func onCancelSelectionButton() {
-        
+        parent?.navigationItem.leftBarButtonItem = nil
+        dataSource.isSelectingMode = false
+        dataSource.selectedIndexPaths.removeAll()
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
     }
     
     private lazy var sectionChanges = [() -> Void]()
@@ -98,36 +124,62 @@ extension PhotoVideoController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        let cell = collectionView.dequeue(cell: PhotoVideoCell.self, for: indexPath)
+        cell.delegate = self
+        cell.indexPath = indexPath
+        return cell
+    }
+}
 
-        let cell_ = collectionView.dequeue(cell: CollectionViewCellForPhoto.self, for: indexPath)
-        let object = fetchedResultsController.object(at: indexPath)
-        let wraped = WrapData(mediaItem: object)
-        
-        switch wraped.patchToPreview {
-        case .localMediaContent(let local):
-            cell_.setAssetId(local.asset.localIdentifier)
-            FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
-                DispatchQueue.main.async {
-                    if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
-                        cell_.setImage(image: image, animated:  false)
-                    } else {
-                        cell_.setPlaceholderImage(fileType: wraped.fileType)
-                    }
-                }
-            })
-
-        default:
-            break
+extension PhotoVideoController: PhotoVideoCellDelegate {
+    func photoVideoCellOnLongPressBegan(at indexPath: IndexPath) {
+        guard !dataSource.isSelectingMode else {
+            return
         }
-        
-        return cell_
+        parent?.navigationItem.leftBarButtonItem = cancelSelectionButton
+        dataSource.isSelectingMode = true
+        dataSource.selectedIndexPaths.insert(indexPath)
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
     }
 }
 
 extension PhotoVideoController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: 200)
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? PhotoVideoCell else {
+            return
+        }
+        
+        let object = fetchedResultsController.object(at: indexPath)
+        let wraped = WrapData(mediaItem: object)
+        cell.setup(with: wraped)
+        
+        let isSelectedCell = dataSource.selectedIndexPaths.contains(indexPath)
+        cell.set(isSelected: isSelectedCell, isSelectionMode: dataSource.isSelectingMode, animated: true)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoCell else {
+            return
+        }
+        
+        guard dataSource.isSelectingMode else {
+            return
+        }
+        
+        let isSelectedCell = dataSource.selectedIndexPaths.contains(indexPath)
+        
+        if isSelectedCell {
+            dataSource.selectedIndexPaths.remove(indexPath)
+        } else {
+            dataSource.selectedIndexPaths.insert(indexPath)
+        }
+        
+        cell.set(isSelected: !isSelectedCell, isSelectionMode: dataSource.isSelectingMode, animated: true)
+    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        
+//        return CGSize(width: 200, height: 200)
+//    }
 }
 
 /// https://github.com/jessesquires/JSQDataSourcesKit/blob/develop/Source/FetchedResultsDelegate.swift
@@ -205,4 +257,25 @@ extension PhotoVideoController: NSFetchedResultsControllerDelegate {
         }
     }
 
+}
+
+extension UICollectionView {
+    @discardableResult
+    func saveAndGetItemSize(for columnsNumber: Int) -> CGSize {
+        
+        let viewWidth = UIScreen.main.bounds.width
+        
+        let desiredItemWidth: CGFloat = 100
+        let columns: CGFloat = max(floor(viewWidth / desiredItemWidth), CGFloat(columnsNumber))
+        let padding: CGFloat = 1
+        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
+        let itemSize = CGSize(width: itemWidth, height: itemWidth)
+        
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = itemSize
+            layout.minimumInteritemSpacing = padding
+            layout.minimumLineSpacing = padding
+        }
+        return itemSize
+    }
 }
