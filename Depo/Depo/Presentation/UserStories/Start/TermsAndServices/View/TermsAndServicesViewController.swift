@@ -54,10 +54,6 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     
     // MARK: Life cycle
     
-    override func loadView() {
-        contentView.addSubview(webView)
-    }
-    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -73,6 +69,8 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        contentView.addSubview(webView)
         
         if !Device.isIpad {
             setNavigationTitle(title: TextConstants.termsAndUsesTitile)
