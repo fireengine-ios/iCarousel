@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol SegmentedControllerDelegate: class {
+    func segmentedControllerEndEditMode()
+}
+
 final class SegmentedController: UIViewController, NibInit {
     
     static func initWithControllers(_ controllers: [UIViewController]) -> SegmentedController {
@@ -20,6 +24,18 @@ final class SegmentedController: UIViewController, NibInit {
     @IBOutlet private weak var segmentedControl: UISegmentedControl!
     
     private var viewControllers: [UIViewController] = []
+    
+    weak var delegate: SegmentedControllerDelegate?
+    
+    private lazy var cancelSelectionButton = UIBarButtonItem(
+        title: TextConstants.cancelSelectionButtonTitle,
+        font: .TurkcellSaturaDemFont(size: 19.0),
+        target: self,
+        selector: #selector(onCancelSelectionButton))
+    
+    @objc private func onCancelSelectionButton() {
+        delegate?.segmentedControllerEndEditMode()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +70,16 @@ final class SegmentedController: UIViewController, NibInit {
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         contanerView.addSubview(childController.view)
         childController.didMove(toParentViewController: self)
+    }
+}
+
+extension SegmentedController: PhotoVideoDataSourceDelegate {
+    func selectedModeDidChange(_ selectingMode: Bool) {
+        if selectingMode {
+            navigationItem.leftBarButtonItem = cancelSelectionButton
+        } else {
+            navigationItem.leftBarButtonItem = nil
+        }
     }
 }
 

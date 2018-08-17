@@ -8,10 +8,19 @@
 
 import UIKit
 
+protocol PhotoVideoDataSourceDelegate: class {
+    func selectedModeDidChange(_ selectingMode: Bool)
+}
+
 // TODO: selectedIndexPaths NSFetchedResultsController changes
 final class PhotoVideoDataSource {
-    var isSelectingMode = false
+    var isSelectingMode = false {
+        didSet {
+            delegate?.selectedModeDidChange(isSelectingMode)
+        }
+    }
     var selectedIndexPaths = Set<IndexPath>()
+    weak var delegate: PhotoVideoDataSourceDelegate?
 }
 
 
@@ -25,12 +34,6 @@ final class PhotoVideoController: UIViewController, NibInit {
     }
     
     private let refresher = UIRefreshControl()
-    
-    lazy var cancelSelectionButton = UIBarButtonItem(
-        title: TextConstants.cancelSelectionButtonTitle,
-        font: .TurkcellSaturaDemFont(size: 19.0),
-        target: self,
-        selector: #selector(onCancelSelectionButton))
     
     var editingTabBar: BottomSelectionTabBarViewController?
     
@@ -53,6 +56,11 @@ final class PhotoVideoController: UIViewController, NibInit {
         
 //        CollectionViewCellsIdsConstant.cellForImage
         collectionView.register(nibCell: PhotoVideoCell.self)
+        
+        if let segmentedController = parent as? SegmentedController {
+            dataSource.delegate = segmentedController
+            segmentedController.delegate = self
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -87,13 +95,6 @@ final class PhotoVideoController: UIViewController, NibInit {
     @objc private func refreshData() {
         
     } 
-    
-    @objc private func onCancelSelectionButton() {
-        parent?.navigationItem.leftBarButtonItem = nil
-        dataSource.isSelectingMode = false
-        dataSource.selectedIndexPaths.removeAll()
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
-    }
     
     private lazy var sectionChanges = [() -> Void]()
     private lazy var objectChanges = [() -> Void]()
@@ -136,7 +137,7 @@ extension PhotoVideoController: PhotoVideoCellDelegate {
         guard !dataSource.isSelectingMode else {
             return
         }
-        parent?.navigationItem.leftBarButtonItem = cancelSelectionButton
+//        parent?.navigationItem.leftBarButtonItem = cancelSelectionButton
         dataSource.isSelectingMode = true
         dataSource.selectedIndexPaths.insert(indexPath)
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
@@ -257,6 +258,14 @@ extension PhotoVideoController: NSFetchedResultsControllerDelegate {
         }
     }
 
+}
+
+extension PhotoVideoController: SegmentedControllerDelegate {
+    func segmentedControllerEndEditMode() {
+        dataSource.isSelectingMode = false
+        dataSource.selectedIndexPaths.removeAll()
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+    }
 }
 
 extension UICollectionView {
