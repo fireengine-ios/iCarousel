@@ -81,7 +81,11 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         MenloworksEventsService.shared.onApporveEulaPageClicked()
          completeAsyncOperationEnableScreen()
         //theoreticaly we should add coredata update/append here also
-        router.goToAutoSync()
+        if interactor.cameFromLogin {
+            router.goToHomePage()
+        } else {
+            router.goToAutoSync()
+        }
     }
     
     func applyEulaFaild(errorResponce: ErrorResponse) {
