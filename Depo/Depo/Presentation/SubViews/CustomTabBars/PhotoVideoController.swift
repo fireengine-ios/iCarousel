@@ -10,13 +10,13 @@ import UIKit
 
 // TODO: items storage with remotes
 
-// TODO: selection count in title
 // TODO: slider with albums
 // TODO: sync cards
 // TODO: action without selection mode
 // TODO: items operations (progress)
+// TODO: 3 dots
 // TODO: clear code
-final class PhotoVideoController: UIViewController, NibInit {
+final class PhotoVideoController: UIViewController, NibInit, SegmentedChildController {
 
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
@@ -50,10 +50,10 @@ final class PhotoVideoController: UIViewController, NibInit {
         collectionView.register(nibCell: PhotoVideoCell.self)
         collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)
         
-        if let segmentedController = parent as? SegmentedController {
-            dataSource.delegate = segmentedController
-            segmentedController.delegate = self
-        }
+//        if let segmentedController = parent as? SegmentedController {
+//            dataSource.delegate = segmentedController
+//            segmentedController.delegate = self
+//        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -72,6 +72,16 @@ final class PhotoVideoController: UIViewController, NibInit {
     }
     
     
+    
+    private lazy var cancelSelectionButton = UIBarButtonItem(
+        title: TextConstants.cancelSelectionButtonTitle,
+        font: .TurkcellSaturaDemFont(size: 19.0),
+        target: self,
+        selector: #selector(onCancelSelectionButton))
+
+    @objc private func onCancelSelectionButton() {
+        stopEditingMode()
+    }
     
     
     
@@ -134,6 +144,7 @@ final class PhotoVideoController: UIViewController, NibInit {
         dataSource.selectedIndexPaths.insert(indexPath)
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
         onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
+        setLeftBarButtonItems([cancelSelectionButton], animated: true)
     }
     
     private func stopEditingMode() {
@@ -141,6 +152,8 @@ final class PhotoVideoController: UIViewController, NibInit {
         dataSource.selectedIndexPaths.removeAll()
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
         dismissBottomBar(animated: true)
+        setLeftBarButtonItems(nil, animated: true)
+        setTitle("")
     }
     
     private func setupNewBottomBarConfig() {
@@ -156,7 +169,7 @@ final class PhotoVideoController: UIViewController, NibInit {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
     }
     
-    func onChangeSelectedItemsCount(selectedItemsCount: Int) {
+    private func onChangeSelectedItemsCount(selectedItemsCount: Int) {
         setupNewBottomBarConfig()
 //        debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount")
         
@@ -170,6 +183,7 @@ final class PhotoVideoController: UIViewController, NibInit {
             bottomBarPresenter.show(animated: true, onView: nil)
         }
         
+        setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)")
         
 //        view.setThreeDotsMenu(active: canShow3DotsButton())
 //        self.view.selectedItemsCountChange(with: selectedItemsCount)
@@ -185,11 +199,7 @@ extension PhotoVideoController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeue(cell: PhotoVideoCell.self, for: indexPath)
-        cell.delegate = self
-        cell.indexPath = indexPath
-        return cell
+        return collectionView.dequeue(cell: PhotoVideoCell.self, for: indexPath)
     }
 }
 
@@ -204,6 +214,8 @@ extension PhotoVideoController: UICollectionViewDelegate, UICollectionViewDelega
         guard let cell = cell as? PhotoVideoCell else {
             return
         }
+        cell.delegate = self
+        cell.indexPath = indexPath
         
         let object = fetchedResultsController.object(at: indexPath)
         let wraped = WrapData(mediaItem: object)
@@ -337,11 +349,11 @@ extension PhotoVideoController: NSFetchedResultsControllerDelegate {
 
 }
 
-extension PhotoVideoController: SegmentedControllerDelegate {
-    func segmentedControllerEndEditMode() {
-        stopEditingMode()
-    }
-}
+//extension PhotoVideoController: SegmentedControllerDelegate {
+//    func segmentedControllerEndEditMode() {
+//        stopEditingMode()
+//    }
+//}
 
 extension PhotoVideoController: BaseItemInputPassingProtocol {
     func operationFinished(withType type: ElementTypes, response: Any?) {

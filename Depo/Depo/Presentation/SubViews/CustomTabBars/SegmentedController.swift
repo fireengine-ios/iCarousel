@@ -8,9 +8,33 @@
 
 import Foundation
 
-protocol SegmentedControllerDelegate: class {
-    func segmentedControllerEndEditMode()
+protocol SegmentedChildController: class {
+    func setTitle(_ title: String)
+    func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
+    func setRightBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
 }
+extension SegmentedChildController where Self: UIViewController {
+    
+    private var parentVC: SegmentedController? {
+        return parent as? SegmentedController
+    }
+    
+    func setTitle(_ title: String) {
+        parentVC?.navigationItem.title = title
+    }
+    
+    func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
+        parentVC?.navigationItem.setLeftBarButtonItems(items, animated: animated)
+    }
+    
+    func setRightBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
+        parentVC?.navigationItem.setRightBarButtonItems(items, animated: animated)
+    }
+}
+
+//protocol SegmentedControllerDelegate: class {
+//    func segmentedControllerEndEditMode()
+//}
 
 final class SegmentedController: UIViewController, NibInit {
     
@@ -25,17 +49,17 @@ final class SegmentedController: UIViewController, NibInit {
     
     private var viewControllers: [UIViewController] = []
     
-    weak var delegate: SegmentedControllerDelegate?
+//    weak var delegate: SegmentedControllerDelegate?
     
-    private lazy var cancelSelectionButton = UIBarButtonItem(
-        title: TextConstants.cancelSelectionButtonTitle,
-        font: .TurkcellSaturaDemFont(size: 19.0),
-        target: self,
-        selector: #selector(onCancelSelectionButton))
+//    private lazy var cancelSelectionButton = UIBarButtonItem(
+//        title: TextConstants.cancelSelectionButtonTitle,
+//        font: .TurkcellSaturaDemFont(size: 19.0),
+//        target: self,
+//        selector: #selector(onCancelSelectionButton))
     
-    @objc private func onCancelSelectionButton() {
-        delegate?.segmentedControllerEndEditMode()
-    }
+//    @objc private func onCancelSelectionButton() {
+//        delegate?.segmentedControllerEndEditMode()
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,15 +97,15 @@ final class SegmentedController: UIViewController, NibInit {
     }
 }
 
-extension SegmentedController: PhotoVideoDataSourceDelegate {
-    func selectedModeDidChange(_ selectingMode: Bool) {
-        if selectingMode {
-            navigationItem.leftBarButtonItem = cancelSelectionButton
-        } else {
-            navigationItem.leftBarButtonItem = nil
-        }
-    }
-}
+//extension SegmentedController: PhotoVideoDataSourceDelegate {
+//    func selectedModeDidChange(_ selectingMode: Bool) {
+//        if selectingMode {
+//            navigationItem.leftBarButtonItem = cancelSelectionButton
+//        } else {
+//            navigationItem.leftBarButtonItem = nil
+//        }
+//    }
+//}
 
 extension UIViewController {
     
