@@ -117,6 +117,22 @@ final class PhotoVideoController: UIViewController, NibInit {
         let context = CoreDataStack.default.mainContext
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: #keyPath(MediaItem.creationDateValue), cacheName: nil)
     }()
+    
+    private func startEditingMode(at indexPath: IndexPath) {
+        guard !dataSource.isSelectingMode else {
+            return
+        }
+        ///history: parent?.navigationItem.leftBarButtonItem = cancelSelectionButton
+        dataSource.isSelectingMode = true
+        dataSource.selectedIndexPaths.insert(indexPath)
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+    }
+    
+    private func stopEditingMode() {
+        dataSource.isSelectingMode = false
+        dataSource.selectedIndexPaths.removeAll()
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+    }
 }
 
 extension PhotoVideoController: UICollectionViewDataSource {
@@ -139,13 +155,7 @@ extension PhotoVideoController: UICollectionViewDataSource {
 
 extension PhotoVideoController: PhotoVideoCellDelegate {
     func photoVideoCellOnLongPressBegan(at indexPath: IndexPath) {
-        guard !dataSource.isSelectingMode else {
-            return
-        }
-//        parent?.navigationItem.leftBarButtonItem = cancelSelectionButton
-        dataSource.isSelectingMode = true
-        dataSource.selectedIndexPaths.insert(indexPath)
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        startEditingMode(at: indexPath)
     }
 }
 
@@ -288,9 +298,7 @@ extension PhotoVideoController: NSFetchedResultsControllerDelegate {
 
 extension PhotoVideoController: SegmentedControllerDelegate {
     func segmentedControllerEndEditMode() {
-        dataSource.isSelectingMode = false
-        dataSource.selectedIndexPaths.removeAll()
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        stopEditingMode()
     }
 }
 
