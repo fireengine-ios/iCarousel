@@ -56,6 +56,7 @@ final class PhotoVideoController: UIViewController, NibInit {
         
 //        CollectionViewCellsIdsConstant.cellForImage
         collectionView.register(nibCell: PhotoVideoCell.self)
+        collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)
         
         if let segmentedController = parent as? SegmentedController {
             dataSource.delegate = segmentedController
@@ -114,11 +115,15 @@ final class PhotoVideoController: UIViewController, NibInit {
         
         //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
         let context = CoreDataStack.default.mainContext
-        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: #keyPath(MediaItem.creationDateValue), cacheName: nil)
     }()
 }
 
 extension PhotoVideoController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        print("--- fetchedResultsController.sections?.count", fetchedResultsController.sections?.count ?? 0)
+        return fetchedResultsController.sections?.count ?? 0
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
@@ -181,6 +186,27 @@ extension PhotoVideoController: UICollectionViewDelegate, UICollectionViewDelega
 //        
 //        return CGSize(width: 200, height: 200)
 //    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+       let view = collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
+        
+        let object = fetchedResultsController.object(at: indexPath)
+        if let date = object.creationDateValue as Date? {
+            let df = DateFormatter()
+            df.dateStyle = .medium
+            let title = df.string(from: date)
+            view.setText(text: title)
+        } else {
+            view.setText(text: "nil")
+        }
+        
+        return view
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        ///return CGSize(width: collectionView.contentSize.width, height: 50)
+        return CGSize(width: 0, height: 50)
+    }
 }
 
 /// https://github.com/jessesquires/JSQDataSourcesKit/blob/develop/Source/FetchedResultsDelegate.swift
