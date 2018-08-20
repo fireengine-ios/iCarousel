@@ -96,6 +96,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         view.hideBar(animated: animated)
     }
     
+    func dismissWithNotification() {
+        dismiss(animated: true)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+    }
+    
     func show(animated: Bool, onView sourceView: UIView?) {
         let router = RouterVC()
         guard let rootVC = router.rootViewController else {
