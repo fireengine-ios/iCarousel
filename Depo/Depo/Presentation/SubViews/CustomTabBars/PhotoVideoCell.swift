@@ -105,14 +105,7 @@ final class PhotoVideoCell: UICollectionViewCell {
         }
     }
     
-//    private var isSelectedState = false
-    
     func set(isSelected: Bool, isSelectionMode: Bool, animated: Bool) {
-//        guard isSelectedState != isSelected else {
-//            return
-//        }
-//        isSelectedState = isSelected
-        
         checkmarkImageView.isHidden = !isSelectionMode
         checkmarkImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
         

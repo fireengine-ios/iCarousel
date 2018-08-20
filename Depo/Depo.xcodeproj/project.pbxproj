@@ -3354,6 +3354,10 @@
 		CEEB7A9B20A5BC230070FDC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEEB7A9D20A5BC230070FDC2 /* InfoPlist.strings */; };
 		CEEB7AA620A5D5C80070FDC2 /* GradientOrangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7AA520A5D5C80070FDC2 /* GradientOrangeView.swift */; };
 		CEEB7B1720AAC3160070FDC2 /* UIButton+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1620AAC3150070FDC2 /* UIButton+Image.swift */; };
+		CEEDC6F2212AD73D00F605CF /* UICollectionView+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F1212AD73D00F605CF /* UICollectionView+Item.swift */; };
+		CEEDC6F3212AD74A00F605CF /* UICollectionView+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F1212AD73D00F605CF /* UICollectionView+Item.swift */; };
+		CEEDC6F5212AD80800F605CF /* PhotoVideoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */; };
+		CEEDC6F6212AD82900F605CF /* PhotoVideoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */; };
 		CEEF22AA2063D6E000CE3949 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
 		CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */; };
 		CEEFECC1200F735100E9A4FE /* UISearchBar+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */; };
@@ -5538,6 +5542,8 @@
 		CEEB7AA420A5BC6A0070FDC2 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CEEB7AA520A5D5C80070FDC2 /* GradientOrangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientOrangeView.swift; sourceTree = "<group>"; };
 		CEEB7B1620AAC3150070FDC2 /* UIButton+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Image.swift"; sourceTree = "<group>"; };
+		CEEDC6F1212AD73D00F605CF /* UICollectionView+Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Item.swift"; sourceTree = "<group>"; };
+		CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDataSource.swift; sourceTree = "<group>"; };
 		CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
 		CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Cancel.swift"; sourceTree = "<group>"; };
@@ -10646,6 +10652,7 @@
 				B56E0DE820B5644D0082044D /* NotificationName+Extensions.swift */,
 				B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */,
 				B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */,
+				CEEDC6F1212AD73D00F605CF /* UICollectionView+Item.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -11336,6 +11343,7 @@
 				CEF6906C212565EA0013075F /* SegmentedController.xib */,
 				CEF6909921258D8F0013075F /* PhotoVideoController.swift */,
 				CEF6909A21258D8F0013075F /* PhotoVideoController.xib */,
+				CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */,
 				CEF6909F21259C4C0013075F /* EmptyDataView.xib */,
 				CEF690A221259C540013075F /* EmptyDataView.swift */,
 				CEF690A52126B4530013075F /* PhotoVideoCell.swift */,
@@ -14293,6 +14301,7 @@
 				8C0B91BE201710EB00A5BA81 /* TitleView.swift in Sources */,
 				8C0E8D471FDEBDFF00789C91 /* String+Int.swift in Sources */,
 				8C0E8D491FDEBDFF00789C91 /* CustomTabBar.swift in Sources */,
+				CEEDC6F3212AD74A00F605CF /* UICollectionView+Item.swift in Sources */,
 				8C0E8D4B1FDEBDFF00789C91 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
 				8C0E8D4D1FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				8C0E8D4F1FDEBDFF00789C91 /* FreeAppSpace.swift in Sources */,
@@ -14941,6 +14950,7 @@
 				8C0E8F781FDEBDFF00789C91 /* SelectNameViewOutput.swift in Sources */,
 				B53DCE8D20EF634900400DBA /* ContactSyncSDK.m in Sources */,
 				8C0E8F791FDEBDFF00789C91 /* SelectNameViewController.swift in Sources */,
+				CEEDC6F6212AD82900F605CF /* PhotoVideoDataSource.swift in Sources */,
 				8C0E8F7A1FDEBDFF00789C91 /* SelectNameModuleInput.swift in Sources */,
 				8C0E8F7B1FDEBDFF00789C91 /* SelectNamePresenter.swift in Sources */,
 				C62239A6204972F40043ED44 /* FaceImageItemsInteractorOutput.swift in Sources */,
@@ -15357,6 +15367,7 @@
 				782E40B31FE7D0B9007F7838 /* RecentSearchesService.swift in Sources */,
 				CE51ABDC1EF90853005DCEE0 /* LoginInteractor.swift in Sources */,
 				B56FBB1F2122C3D9004F4A59 /* TermsOfUseInitializer.swift in Sources */,
+				CEEDC6F5212AD80800F605CF /* PhotoVideoDataSource.swift in Sources */,
 				CE51ABE21EF90853005DCEE0 /* MessageView.m in Sources */,
 				CE51ABE41EF90853005DCEE0 /* FLImageView.m in Sources */,
 				7C1CB8F61F724E54000768E8 /* ProgressPopUpProtocol.swift in Sources */,
@@ -15707,6 +15718,7 @@
 				2BA37C3A202837B400660394 /* FaceImageChangeCoverInteractorOutput.swift in Sources */,
 				4A9F8E5320875A4300622A6C /* PeriodicContactSyncSettingsTableViewCell.swift in Sources */,
 				CE51ACF41EF90853005DCEE0 /* PhoneVereficationConfigurator.swift in Sources */,
+				CEEDC6F2212AD73D00F605CF /* UICollectionView+Item.swift in Sources */,
 				CE51ACF51EF90853005DCEE0 /* PhoneVereficationInitializer.swift in Sources */,
 				CE95ED571F516736002F923A /* HelpAndSupportViewController.swift in Sources */,
 				8C77869D1F3F38EF005CB432 /* VisualMusicPlayerConfigurator.swift in Sources */,

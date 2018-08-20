@@ -8,22 +8,14 @@
 
 import UIKit
 
-protocol PhotoVideoDataSourceDelegate: class {
-    func selectedModeDidChange(_ selectingMode: Bool)
-}
+// TODO: items storage with remotes
 
-// TODO: selectedIndexPaths NSFetchedResultsController changes
-final class PhotoVideoDataSource {
-    var isSelectingMode = false {
-        didSet {
-            delegate?.selectedModeDidChange(isSelectingMode)
-        }
-    }
-    var selectedIndexPaths = Set<IndexPath>()
-    weak var delegate: PhotoVideoDataSourceDelegate?
-}
-
-
+// TODO: selection count in title
+// TODO: slider with albums
+// TODO: sync cards
+// TODO: action without selection mode
+// TODO: items operations (progress)
+// TODO: clear code
 final class PhotoVideoController: UIViewController, NibInit {
 
     @IBOutlet private weak var collectionView: UICollectionView! {
@@ -394,29 +386,5 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
             return WrapData(mediaItem: object)
         }
         return array
-    }
-}
-
-
-
-
-extension UICollectionView {
-    @discardableResult
-    func saveAndGetItemSize(for columnsNumber: Int) -> CGSize {
-        
-        let viewWidth = UIScreen.main.bounds.width
-        
-        let desiredItemWidth: CGFloat = 100
-        let columns: CGFloat = max(floor(viewWidth / desiredItemWidth), CGFloat(columnsNumber))
-        let padding: CGFloat = 1
-        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
-        let itemSize = CGSize(width: itemWidth, height: itemWidth)
-        
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = itemSize
-            layout.minimumInteritemSpacing = padding
-            layout.minimumLineSpacing = padding
-        }
-        return itemSize
     }
 }
