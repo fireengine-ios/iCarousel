@@ -14,7 +14,8 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     weak var delegate: RegistrationViewDelegate?
     private var confirmAgreements = false
-
+    private lazy var storageVars: StorageVars = factory.resolve()
+    
     // MARK: IN
     func viewIsReady() {
         interactor.trackScreen()
@@ -81,7 +82,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         MenloworksEventsService.shared.onApporveEulaPageClicked()
          completeAsyncOperationEnableScreen()
         //theoreticaly we should add coredata update/append here also
-        if interactor.cameFromLogin {
+        if interactor.cameFromLogin, storageVars.autoSyncSet {
             router.goToHomePage()
         } else {
             router.goToAutoSync()

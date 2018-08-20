@@ -233,6 +233,7 @@ class LoginInteractor: LoginInteractorInput {
         ///REMOVE ME
         output?.onFailEULA()
         return
+        return
         ///REMOVE ME
         eulaService.eulaCheck(success: { [weak self] succesResponce in
             DispatchQueue.main.async {
