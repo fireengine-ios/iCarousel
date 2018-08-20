@@ -72,20 +72,34 @@ final class PhotoVideoController: UIViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateCellSize()
+        editingTabBar?.view.layoutIfNeeded()
     }
     
     private func updateCellSize() {
         _ = collectionView.saveAndGetItemSize(for: 4)
     }
     
+    
+    
+    
+    
+    
+    private let bottomBarPresenter = BottomSelectionTabBarPresenter()
+    
+    let photoVideoBottomBarConfig = EditingBarConfig(
+        elementsConfig:  [.share, .download, .sync, .addToAlbum, .delete], 
+        style: .blackOpaque, tintColor: nil)
+    
     private func setupEdittingBar() {
-        let photoVideoBottomBarConfig = EditingBarConfig(
-            elementsConfig:  [.share, .download, .sync, .addToAlbum, .delete], 
-            style: .blackOpaque, tintColor: nil)
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
-        let botvarBarVC = bottomBarVCmodule.setupModule(config: photoVideoBottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
+        bottomBarPresenter.basePassingPresenter = self
+        let botvarBarVC = bottomBarVCmodule.setupModule(config: photoVideoBottomBarConfig, settablePresenter: bottomBarPresenter)
         self.editingTabBar = botvarBarVC
     }
+    
+    
+    
+    
     
     private func setupPullToRefresh() {
         //refresher.tintColor = ColorConstants.whiteColor
@@ -103,8 +117,9 @@ final class PhotoVideoController: UIViewController, NibInit {
     
     lazy var fetchedResultsController: NSFetchedResultsController<MediaItem> = {
         let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
-        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.creationDateValue), ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor2]
+        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.creationDateValue), ascending: false)
+//        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.nameValue), ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor1]
         
         // TODO: device isIpad
         if UI_USER_INTERFACE_IDIOM() == .pad {
@@ -115,7 +130,7 @@ final class PhotoVideoController: UIViewController, NibInit {
         
         //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
         let context = CoreDataStack.default.mainContext
-        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: #keyPath(MediaItem.creationDateValue), cacheName: nil)
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: #keyPath(MediaItem.monthValue), cacheName: nil)
     }()
     
     private func startEditingMode(at indexPath: IndexPath) {
@@ -126,18 +141,51 @@ final class PhotoVideoController: UIViewController, NibInit {
         dataSource.isSelectingMode = true
         dataSource.selectedIndexPaths.insert(indexPath)
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
     }
     
     private func stopEditingMode() {
         dataSource.isSelectingMode = false
         dataSource.selectedIndexPaths.removeAll()
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        dismissBottomBar(animated: true)
+    }
+    
+    private func setupNewBottomBarConfig() {
+        let array: [WrapData] = dataSource.selectedIndexPaths.map { indexPath in
+            let object = fetchedResultsController.object(at: indexPath)
+            return WrapData(mediaItem: object)
+        }
+        bottomBarPresenter.setupTabBarWith(items: array, originalConfig: photoVideoBottomBarConfig)
+    }
+    
+    private func dismissBottomBar(animated: Bool) {
+        bottomBarPresenter.dismiss(animated: animated)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+    }
+    
+    func onChangeSelectedItemsCount(selectedItemsCount: Int) {
+        setupNewBottomBarConfig()
+//        debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount")
+        
+        if selectedItemsCount == 0 {
+//            debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
+            
+            dismissBottomBar(animated: true)
+        } else {
+//            debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
+            
+            bottomBarPresenter.show(animated: true, onView: nil)
+        }
+        
+        
+//        view.setThreeDotsMenu(active: canShow3DotsButton())
+//        self.view.selectedItemsCountChange(with: selectedItemsCount)
     }
 }
 
 extension PhotoVideoController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        print("--- fetchedResultsController.sections?.count", fetchedResultsController.sections?.count ?? 0)
         return fetchedResultsController.sections?.count ?? 0
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -191,6 +239,7 @@ extension PhotoVideoController: UICollectionViewDelegate, UICollectionViewDelega
         }
         
         cell.set(isSelected: !isSelectedCell, isSelectionMode: dataSource.isSelectingMode, animated: true)
+        onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
     }
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        
@@ -301,6 +350,55 @@ extension PhotoVideoController: SegmentedControllerDelegate {
         stopEditingMode()
     }
 }
+
+extension PhotoVideoController: BaseItemInputPassingProtocol {
+    func operationFinished(withType type: ElementTypes, response: Any?) {
+        
+    }
+    
+    func operationFailed(withType type: ElementTypes) {
+        
+    }
+    
+    func selectModeSelected() {
+        
+    }
+    
+    func selectAllModeSelected() {
+        
+    }
+    
+    func deSelectAll() {
+        
+    }
+    
+    func stopModeSelected() {
+        stopEditingMode()
+    }
+    
+    func printSelected() {
+        
+    }
+    
+    func changeCover() {
+        
+    }
+    
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {
+        
+    }
+    
+    var selectedItems: [BaseDataSourceItem] {
+        let array: [WrapData] = dataSource.selectedIndexPaths.map { indexPath in
+            let object = fetchedResultsController.object(at: indexPath)
+            return WrapData(mediaItem: object)
+        }
+        return array
+    }
+}
+
+
+
 
 extension UICollectionView {
     @discardableResult
