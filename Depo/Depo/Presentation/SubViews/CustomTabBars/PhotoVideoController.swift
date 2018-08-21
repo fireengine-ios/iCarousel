@@ -12,8 +12,6 @@ import UIKit
 
 // TODO: CheckBoxViewDelegate
 // TODO: video controller
-// TODO: slider with albums
-// TODO: sync cards
 // TODO: navigation bar appear (we have "setTitle("")" )
 // TODO: items operations (progress)
 // TODO: clear code -
