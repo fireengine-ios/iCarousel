@@ -91,6 +91,12 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
         }
     }
     
+    private var fetchedObjects: [WrapData] {
+        return fetchedResultsController.fetchedObjects?.map { object in
+            return WrapData(mediaItem: object)
+        } ?? []
+    }
+    
     // MARK: - life cycle
     
     override func viewDidLoad() {
@@ -225,13 +231,29 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
         }
         
         setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)")
-        
-//        view.setThreeDotsMenu(active: canShow3DotsButton())
-//        self.view.selectedItemsCountChange(with: selectedItemsCount)
     }
     
     private func setupNewBottomBarConfig() {
         bottomBarPresenter.setupTabBarWith(items: selectedObjects, originalConfig: photoVideoBottomBarConfig)
+    }
+    
+    private func showDetail(at indexPath: IndexPath) {
+        // TODO: - trackClickOnPhotoOrVideo(isPhoto: false) -
+        trackClickOnPhotoOrVideo(isPhoto: true)
+        
+        let currentMediaItem = fetchedResultsController.object(at: indexPath)
+        let currentObject = WrapData(mediaItem: currentMediaItem)
+        
+        let router = RouterVC()
+        let controller = router.filesDetailViewController(fileObject: currentObject, items: fetchedObjects)
+        let nController = NavigationController(rootViewController: controller)
+        router.presentViewController(controller: nController)
+    }
+    
+    
+    let analyticsManager: AnalyticsService = factory.resolve()
+    func trackClickOnPhotoOrVideo(isPhoto: Bool) {
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: isPhoto ? .clickPhoto : .clickVideo)
     }
 }
 
@@ -280,6 +302,7 @@ extension PhotoVideoController: UICollectionViewDelegate {
         }
         
         guard dataSource.isSelectingMode else {
+            showDetail(at: indexPath)
             return
         }
         
