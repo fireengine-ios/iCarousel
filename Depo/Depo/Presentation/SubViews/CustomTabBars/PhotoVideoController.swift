@@ -219,14 +219,11 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
     
     private func onChangeSelectedItemsCount(selectedItemsCount: Int) {
         setupNewBottomBarConfig()
-//        debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount")
         
         if selectedItemsCount == 0 {
-//            debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
             threeDotsButton.isEnabled = false
             bottomBarPresenter.dismissWithNotification()
         } else {
-//            debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
             threeDotsButton.isEnabled = true
             bottomBarPresenter.show(animated: true, onView: nil)
         }
