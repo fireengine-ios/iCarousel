@@ -31,7 +31,9 @@ protocol BaseAsyncOperationInteractorOutput {
 class BasePresenter: BaseAsyncOperationInteractorOutput {
     
     func startCancelableAsync(cancel: @escaping VoidHandler) {
-        outputView()?.showSpinerWithCancelClosure(cancel)
+        DispatchQueue.toMain {
+            self.outputView()?.showSpinerWithCancelClosure(cancel)
+        }
     }
     
     func startCancelableAsync(with text: String, cancel: @escaping VoidHandler) {

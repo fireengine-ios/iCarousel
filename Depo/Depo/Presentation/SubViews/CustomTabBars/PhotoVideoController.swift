@@ -12,7 +12,7 @@ import UIKit
 
 // TODO: slider with albums
 // TODO: sync cards
-// TODO: action without selection mode
+// TODO: navigation bar appear
 // TODO: items operations (progress)
 // TODO: clear code
 final class PhotoVideoController: UIViewController, NibInit, SegmentedChildController {
