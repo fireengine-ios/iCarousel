@@ -10,12 +10,15 @@ import UIKit
 
 // TODO: items storage with remotes
 
+// TODO: CheckBoxViewDelegate
+// TODO: video controller
 // TODO: slider with albums
 // TODO: sync cards
-// TODO: navigation bar appear
+// TODO: navigation bar appear (we have "setTitle("")" )
 // TODO: items operations (progress)
-// TODO: clear code
-final class PhotoVideoController: UIViewController, NibInit, SegmentedChildController {
+// TODO: clear code -
+
+final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildController {
 
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
@@ -23,6 +26,19 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
             collectionView.delegate = self
         }
     }
+    
+    private weak var contentSliderTopY: NSLayoutConstraint?
+    private weak var contentSliderH: NSLayoutConstraint?
+    private var refresherY: CGFloat = 0
+    
+    private let scrolliblePopUpView = ViewForPopUp()
+    
+    private let contentSlider: LBAlbumLikePreviewSliderViewController = {
+        let sliderModuleConfigurator = LBAlbumLikePreviewSliderModuleInitializer()
+        let sliderPresenter = LBAlbumLikePreviewSliderPresenter()
+        sliderModuleConfigurator.initialise(inputPresenter: sliderPresenter)
+        return sliderModuleConfigurator.lbAlbumLikeSliderVC
+    }()
     
     private let refresher = UIRefreshControl()
     
@@ -108,7 +124,21 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
         setupCollectionView()
         performFetch()
         
+        setupViewForPopUp()
+        setupSlider()
+        
         setRightBarButtonItems([threeDotsButton, searchButton], animated: false)
+        
+        CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
+        CardsManager.default.updateAllProgressesInCardsForView(view: scrolliblePopUpView)
+        
+        
+        
+        
+        needShowTabBar = true
+        floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonCreateAlbum])
+        scrolliblePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
+        scrolliblePopUpView.isEnable = true
     }
     
     override func viewWillLayoutSubviews() {
@@ -120,7 +150,18 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
         super.viewWillAppear(animated)
         updateCellSize()
         editingTabBar?.view.layoutIfNeeded()
+        scrolliblePopUpView.isActive = true
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        scrolliblePopUpView.isActive = false
+    }
+    
+    deinit {
+        CardsManager.default.removeViewForNotification(view: scrolliblePopUpView)
+    }
+
     
     // MARK: - setup
     
@@ -147,16 +188,85 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
     private func performFetch() {
         try? fetchedResultsController.performFetch()
         collectionView.reloadData()
+        contentSlider.reloadAllData()
     }
     
     private func updateCellSize() {
         _ = collectionView.saveAndGetItemSize(for: 4)
     }
     
+    private func setupViewForPopUp() {
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
+        collectionView.addSubview(scrolliblePopUpView)
+        
+        scrolliblePopUpView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraintsArray = [NSLayoutConstraint]()
+        contentSliderTopY = NSLayoutConstraint(item: scrolliblePopUpView, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: 0)
+        constraintsArray.append(contentSliderTopY!)
+        constraintsArray.append(NSLayoutConstraint(item: scrolliblePopUpView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: scrolliblePopUpView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
+        contentSliderH = NSLayoutConstraint(item: scrolliblePopUpView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
+        constraintsArray.append(contentSliderH!)
+        
+        NSLayoutConstraint.activate(constraintsArray)
+        scrolliblePopUpView.delegate = self
+    }
+    
+    private func setupSlider() {
+        let sliderController = contentSlider
+        
+        let height = scrolliblePopUpView.frame.height + BaseFilesGreedViewController.sliderH
+        
+        // TODO: - showOnlySyncItemsCheckBox -
+//        if showOnlySyncItemsCheckBox != nil {
+//            height += showOnlySyncItemsCheckBoxHeight
+//        }
+        
+        let subView = UIView(frame: CGRect(x: 0, y: -height, width: collectionView.frame.width, height: BaseFilesGreedViewController.sliderH))
+        subView.addSubview(sliderController.view)
+        
+        if let yConstr = self.contentSliderTopY {
+            yConstr.constant = -height
+        }
+        collectionView.updateConstraints()
+        
+        collectionView.contentInset = UIEdgeInsets(top: height, left: 0, bottom: 25, right: 0)
+        collectionView.addSubview(subView)
+        sliderController.view.frame = subView.bounds
+        
+        subView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // TODO: - showOnlySyncItemsCheckBox -
+//        let relatedView = showOnlySyncItemsCheckBox ?? scrolliblePopUpView
+        let relatedView = scrolliblePopUpView
+        
+        var constraintsArray = [NSLayoutConstraint]()
+        constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .top, relatedBy: .equal, toItem: relatedView, attribute: .bottom, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: BaseFilesGreedViewController.sliderH))
+        
+        constraintsArray.append(NSLayoutConstraint(item: sliderController.view, attribute: .left, relatedBy: .equal, toItem: subView, attribute: .left, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: sliderController.view, attribute: .top, relatedBy: .equal, toItem: subView, attribute: .top, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: sliderController.view, attribute: .right, relatedBy: .equal, toItem: subView, attribute: .right, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: sliderController.view, attribute: .bottom, relatedBy: .equal, toItem: subView, attribute: .bottom, multiplier: 1, constant: 0))
+        
+        NSLayoutConstraint.activate(constraintsArray)
+        
+        refresherY =  -height + 30
+        updateRefresher()
+        
+//        noFilesViewCenterOffsetConstraint.constant = BaseFilesGreedViewController.sliderH / 2
+    }
+    
     // MARK: - Selectors
     
     @objc private func refreshData() {
-        
+        performFetch()
+        refresher.endRefreshing()
     } 
     
     @objc private func onCancelSelectionButton() {
@@ -263,6 +373,13 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
     
     private func trackClickOnPhotoOrVideo(isPhoto: Bool) {
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: isPhoto ? .clickPhoto : .clickVideo)
+    }
+    
+    func updateRefresher() {
+        guard let refresherView = refresher.subviews.first else {
+            return
+        }
+        refresherView.center = CGPoint(x: refresherView.center.x, y: refresherY)
     }
 }
 
@@ -450,4 +567,44 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
     func printSelected() {}
     func changeCover() {}
     func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {}
+}
+
+// MARK: - ViewForPopUpDelegate
+extension PhotoVideoController: ViewForPopUpDelegate {
+    func onUpdateViewForPopUpH(h: CGFloat) {
+        let originalPoint = collectionView.contentOffset
+        let sliderH = contentSlider.view.frame.height
+        let checkBoxH: CGFloat = 0
+        // TODO: - showOnlySyncItemsCheckBox -
+//        if let checkBox = showOnlySyncItemsCheckBox {
+//            checkBoxH = checkBox.frame.height
+//        }
+        
+        let calculatedH = h + sliderH + checkBoxH
+        
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            if let yConstr = self.contentSliderTopY {
+                yConstr.constant = -calculatedH
+            }
+            if let hConstr = self.contentSliderH {
+                hConstr.constant = h
+            }
+            
+            self.view.layoutIfNeeded()
+            self.collectionView.contentInset = UIEdgeInsets(top: calculatedH, left: 0, bottom: 25, right: 0)
+        }) { [weak self] (flag) in
+            guard let `self` = self else {
+                return
+            }
+            
+            if originalPoint.y > 1.0{
+                self.collectionView.contentOffset = originalPoint
+            } else {
+                self.collectionView.contentOffset = CGPoint(x: 0.0, y: -self.collectionView.contentInset.top)
+            }
+        }
+        
+        refresherY = -calculatedH + 30
+        updateRefresher()
+    }
 }

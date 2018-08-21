@@ -49,6 +49,11 @@ final class SegmentedController: UIViewController, NibInit {
     
     private var viewControllers: [UIViewController] = []
     
+    // TODO: - make safe -
+    var currentController: UIViewController {
+        return viewControllers[segmentedControl.selectedSegmentIndex]
+    }
+    
 //    weak var delegate: SegmentedControllerDelegate?
     
 //    private lazy var cancelSelectionButton = UIBarButtonItem(
