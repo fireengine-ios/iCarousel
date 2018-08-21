@@ -14,7 +14,6 @@ import UIKit
 // TODO: sync cards
 // TODO: action without selection mode
 // TODO: items operations (progress)
-// TODO: 3 dots
 // TODO: clear code
 final class PhotoVideoController: UIViewController, NibInit, SegmentedChildController {
 
@@ -36,6 +35,25 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
         font: .TurkcellSaturaDemFont(size: 19.0),
         target: self,
         selector: #selector(onCancelSelectionButton))
+    
+    private lazy var threeDotsButton = UIBarButtonItem(
+        image: Images.threeDots,
+        style: .plain,
+        target: self,
+        action: #selector(onThreeDotsButton))
+    
+    private lazy var searchButton = UIBarButtonItem(
+        image: Images.search,
+        style: .plain,
+        target: self,
+        action: #selector(onSearchButton))
+    
+    private lazy var alert: AlertFilesActionsSheetPresenter = {
+        let alert = AlertFilesActionsSheetPresenterModuleInitialiser().createModule()
+        alert.basePassingPresenter = self
+        return alert
+    }()
+    
     
     private let bottomBarPresenter = BottomSelectionTabBarPresenter()
     
@@ -66,6 +84,13 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
         return frController
     }()
     
+    private var selectedObjects: [WrapData] {
+        return dataSource.selectedIndexPaths.map { indexPath in
+            let object = fetchedResultsController.object(at: indexPath)
+            return WrapData(mediaItem: object)
+        }
+    }
+    
     // MARK: - life cycle
     
     override func viewDidLoad() {
@@ -75,6 +100,8 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
         setupPullToRefresh()
         setupCollectionView()
         performFetch()
+        
+        setRightBarButtonItems([threeDotsButton, searchButton], animated: false)
     }
     
     override func viewWillLayoutSubviews() {
@@ -129,18 +156,46 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
         stopEditingMode()
     }
     
+    // TODO: - optmize -
+    @objc private func onThreeDotsButton() {
+        if dataSource.isSelectingMode {
+            let items = selectedObjects
+            ThreeDotMenuManager.actionsForImageItems(items) { [weak self] types in
+                // TODO: - check on iPad without sender -
+                self?.alert.show(with: types, for: items, presentedBy: nil, onSourceView: nil, viewController: self)
+            }
+        } else {
+            self.alert.show(with: [.select], for: [], presentedBy: nil, onSourceView: nil, viewController: self)
+        }
+    }
+    
+    @objc private func onSearchButton() {
+        showSearchScreen(output: self)
+    }
+    
+    private func showSearchScreen(output: UIViewController?) {
+        let router = RouterVC()
+        let controller = router.searchView(output: output as? SearchModuleOutput)
+        output?.navigationController?.delegate = controller as? BaseViewController
+        controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
+        router.pushViewController(viewController: controller)
+    }
+    
     // MARK: - Editing Mode
     
-    private func startEditingMode(at indexPath: IndexPath) {
+    private func startEditingMode(at indexPath: IndexPath?) {
         guard !dataSource.isSelectingMode else {
             return
         }
         ///history: parent?.navigationItem.leftBarButtonItem = cancelSelectionButton
         dataSource.isSelectingMode = true
-        dataSource.selectedIndexPaths.insert(indexPath)
+        if let indexPath = indexPath {
+            dataSource.selectedIndexPaths.insert(indexPath)
+        }
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
         onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
         setLeftBarButtonItems([cancelSelectionButton], animated: true)
+        setRightBarButtonItems([threeDotsButton], animated: true)
     }
     
     private func stopEditingMode() {
@@ -150,6 +205,7 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
         bottomBarPresenter.dismissWithNotification()
         setLeftBarButtonItems(nil, animated: true)
         setTitle("")
+        setRightBarButtonItems([threeDotsButton, searchButton], animated: true)
     }
     
     // MARK: - helpers
@@ -160,11 +216,11 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
         
         if selectedItemsCount == 0 {
 //            debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
-            
+            threeDotsButton.isEnabled = false
             bottomBarPresenter.dismissWithNotification()
         } else {
 //            debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
-            
+            threeDotsButton.isEnabled = true
             bottomBarPresenter.show(animated: true, onView: nil)
         }
         
@@ -175,11 +231,7 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
     }
     
     private func setupNewBottomBarConfig() {
-        let array: [WrapData] = dataSource.selectedIndexPaths.map { indexPath in
-            let object = fetchedResultsController.object(at: indexPath)
-            return WrapData(mediaItem: object)
-        }
-        bottomBarPresenter.setupTabBarWith(items: array, originalConfig: photoVideoBottomBarConfig)
+        bottomBarPresenter.setupTabBarWith(items: selectedObjects, originalConfig: photoVideoBottomBarConfig)
     }
 }
 
@@ -358,20 +410,19 @@ extension PhotoVideoController: NSFetchedResultsControllerDelegate {
 extension PhotoVideoController: BaseItemInputPassingProtocol {
     
     var selectedItems: [BaseDataSourceItem] {
-        let array: [WrapData] = dataSource.selectedIndexPaths.map { indexPath in
-            let object = fetchedResultsController.object(at: indexPath)
-            return WrapData(mediaItem: object)
-        }
-        return array
+        return selectedObjects
     }
     
     func stopModeSelected() {
         stopEditingMode()
     }
     
+    func selectModeSelected() {
+        startEditingMode(at: nil)
+    }
+    
     func operationFinished(withType type: ElementTypes, response: Any?) {}
     func operationFailed(withType type: ElementTypes) {}
-    func selectModeSelected() {}
     func selectAllModeSelected() {}
     func deSelectAll() {}
     func printSelected() {}

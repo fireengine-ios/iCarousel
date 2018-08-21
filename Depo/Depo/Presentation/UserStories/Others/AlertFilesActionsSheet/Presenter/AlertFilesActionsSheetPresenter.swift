@@ -112,6 +112,13 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
     
+    func show(with types: [ElementTypes], for items: [WrapData], presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?) {
+        let actions = constractActions(with: types, for: items)
+        DispatchQueue.main.async {
+            self.presentAlertSheet(with: actions, presentedBy: sender, viewController: viewController)
+        }
+    }
+    
     private func adjastActionTypes(for items: [Item]) -> [ElementTypes] {
         var actionTypes: [ElementTypes] = []
         if items.count == 1, let item = items.first {

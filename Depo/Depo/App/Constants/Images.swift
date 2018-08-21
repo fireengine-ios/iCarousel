@@ -11,4 +11,6 @@ import UIKit
 enum Images {
     static var noDocuments: UIImage { return #imageLiteral(resourceName: "ImageNoDocuments") }
     static var exitWhite: UIImage { return #imageLiteral(resourceName: "CloseCardIconWhite") }
+    static var threeDots: UIImage { return #imageLiteral(resourceName: "more") }
+    static var search: UIImage { return #imageLiteral(resourceName: "search") }
 }
