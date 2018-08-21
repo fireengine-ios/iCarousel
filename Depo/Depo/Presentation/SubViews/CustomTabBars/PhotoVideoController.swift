@@ -56,6 +56,7 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
     
     
     private let bottomBarPresenter = BottomSelectionTabBarPresenter()
+    private let analyticsManager: AnalyticsService = factory.resolve()
     
     private let photoVideoBottomBarConfig = EditingBarConfig(
         elementsConfig:  [.share, .download, .sync, .addToAlbum, .delete], 
@@ -250,9 +251,20 @@ final class PhotoVideoController: UIViewController, NibInit, SegmentedChildContr
         router.presentViewController(controller: nController)
     }
     
+    private func select(cell: PhotoVideoCell, at indexPath: IndexPath) {
+        let isSelectedCell = dataSource.selectedIndexPaths.contains(indexPath)
+        
+        if isSelectedCell {
+            dataSource.selectedIndexPaths.remove(indexPath)
+        } else {
+            dataSource.selectedIndexPaths.insert(indexPath)
+        }
+        
+        cell.set(isSelected: !isSelectedCell, isSelectionMode: dataSource.isSelectingMode, animated: true)
+        onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
+    }
     
-    let analyticsManager: AnalyticsService = factory.resolve()
-    func trackClickOnPhotoOrVideo(isPhoto: Bool) {
+    private func trackClickOnPhotoOrVideo(isPhoto: Bool) {
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: isPhoto ? .clickPhoto : .clickVideo)
     }
 }
@@ -301,21 +313,11 @@ extension PhotoVideoController: UICollectionViewDelegate {
             return
         }
         
-        guard dataSource.isSelectingMode else {
-            showDetail(at: indexPath)
-            return
-        }
-        
-        let isSelectedCell = dataSource.selectedIndexPaths.contains(indexPath)
-        
-        if isSelectedCell {
-            dataSource.selectedIndexPaths.remove(indexPath)
+        if dataSource.isSelectingMode {
+            select(cell: cell, at: indexPath)
         } else {
-            dataSource.selectedIndexPaths.insert(indexPath)
+            showDetail(at: indexPath)
         }
-        
-        cell.set(isSelected: !isSelectedCell, isSelectionMode: dataSource.isSelectingMode, animated: true)
-        onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
