@@ -560,7 +560,7 @@ class RouterVC: NSObject {
     }
     
     func augumentRealityDetailViewController(fileObject: WrapData) -> UIViewController {
-        let controller = AugumentRealityDetailViewController.initialize(with: fileObject)
+        let controller = AugmentedRealityInitializer.initializeController(with: fileObject)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         return controller
     }

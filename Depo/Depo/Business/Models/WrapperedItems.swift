@@ -573,6 +573,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var status: Status
     
+    var localFileUrl: URL?
+    
     var tmpDownloadUrl: URL?
     
     var urlToFile: URL? {

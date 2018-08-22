@@ -2601,6 +2601,8 @@
 		B54BFF50202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
 		B54BFF5B202C8E180018AF82 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		B5513AF9205BAED70016C344 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
+		B5624791212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
+		B5624792212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
 		B56BE2B51FE2732F007DC1BC /* ItemSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */; };
 		B56E0DD720B414510082044D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56E0DD620B414510082044D /* StoreKit.framework */; };
 		B56E0DD820B414580082044D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56E0DD620B414510082044D /* StoreKit.framework */; };
@@ -2641,6 +2643,8 @@
 		B5781BD1210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */; };
 		B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E8181FE288A500F47B0A /* PhotoSyncService.swift */; };
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
+		B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
+		B57FE7FE212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B5BA98762066827900CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
 		B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
 		B5BA98792066830A00CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
@@ -2652,10 +2656,10 @@
 		B5C4C8A52049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */; };
 		B5C4C8A7204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */; };
 		B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */; };
-		B5C7C57F211C699F006E94DB /* AugumentRealityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C57E211C699F006E94DB /* AugumentRealityDetailViewController.swift */; };
-		B5C7C580211C699F006E94DB /* AugumentRealityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C57E211C699F006E94DB /* AugumentRealityDetailViewController.swift */; };
-		B5C7C582211C6A21006E94DB /* AugumentRealityDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C581211C6A21006E94DB /* AugumentRealityDetailItem.swift */; };
-		B5C7C583211C6A21006E94DB /* AugumentRealityDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C581211C6A21006E94DB /* AugumentRealityDetailItem.swift */; };
+		B5C7C57F211C699F006E94DB /* AugmentedRealityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C57E211C699F006E94DB /* AugmentedRealityController.swift */; };
+		B5C7C580211C699F006E94DB /* AugmentedRealityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C57E211C699F006E94DB /* AugmentedRealityController.swift */; };
+		B5C7C582211C6A21006E94DB /* AugmentedRealityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C581211C6A21006E94DB /* AugmentedRealityItem.swift */; };
+		B5C7C583211C6A21006E94DB /* AugmentedRealityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C7C581211C6A21006E94DB /* AugmentedRealityItem.swift */; };
 		B5E74798208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E74799208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
@@ -5093,6 +5097,7 @@
 		B54BFF4B202C73790018AF82 /* SharedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
 		B54BFF4E202C74090018AF82 /* SharedEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedEnums.swift; sourceTree = "<group>"; };
 		B5513AF8205BAED70016C344 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
+		B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AugmentedRealityDataSource.swift; sourceTree = "<group>"; };
 		B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncService.swift; sourceTree = "<group>"; };
 		B56E0DD620B414510082044D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppResponsivenessService.swift; sourceTree = "<group>"; };
@@ -5114,12 +5119,13 @@
 		B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+OpenURL.swift"; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
+		B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityInitializer.swift; sourceTree = "<group>"; };
 		B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+JPEG.swift"; sourceTree = "<group>"; };
 		B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsTableViewCell.swift; sourceTree = "<group>"; };
 		B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncSettingsTableViewCell.xib; sourceTree = "<group>"; };
 		B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsOptionView.swift; sourceTree = "<group>"; };
-		B5C7C57E211C699F006E94DB /* AugumentRealityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugumentRealityDetailViewController.swift; sourceTree = "<group>"; };
-		B5C7C581211C6A21006E94DB /* AugumentRealityDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugumentRealityDetailItem.swift; sourceTree = "<group>"; };
+		B5C7C57E211C699F006E94DB /* AugmentedRealityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityController.swift; sourceTree = "<group>"; };
+		B5C7C581211C6A21006E94DB /* AugmentedRealityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityItem.swift; sourceTree = "<group>"; };
 		B5E74797208B3736003A7110 /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTaskService.swift; sourceTree = "<group>"; };
 		B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsModel.swift; sourceTree = "<group>"; };
@@ -10060,13 +10066,15 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
-		B5C7C57D211C6958006E94DB /* AugumentRealityDetail */ = {
+		B5C7C57D211C6958006E94DB /* AugmentedReality */ = {
 			isa = PBXGroup;
 			children = (
-				B5C7C57E211C699F006E94DB /* AugumentRealityDetailViewController.swift */,
-				B5C7C581211C6A21006E94DB /* AugumentRealityDetailItem.swift */,
+				B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */,
+				B5C7C57E211C699F006E94DB /* AugmentedRealityController.swift */,
+				B5C7C581211C6A21006E94DB /* AugmentedRealityItem.swift */,
+				B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */,
 			);
-			path = AugumentRealityDetail;
+			path = AugmentedReality;
 			sourceTree = "<group>";
 		};
 		B5FB65741FDE6F3E00A02FD7 /* OperationProgressService */ = {
@@ -10089,7 +10097,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				B5C7C57D211C6958006E94DB /* AugumentRealityDetail */,
+				B5C7C57D211C6958006E94DB /* AugmentedReality */,
 				7CEE2718209B533C00EF6C79 /* Landing */,
 				98A8677C2088C64D00D2D4F4 /* SpotlightViewController */,
 				CEB2734A205BE3E500E1AE9C /* EmailEnter */,
@@ -13991,7 +13999,7 @@
 				4A9886F520443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
 				8C0E8C681FDEBDFF00789C91 /* FileServiceResponse.swift in Sources */,
 				8C0E8C691FDEBDFF00789C91 /* CreateStoryPreviewModuleInput.swift in Sources */,
-				B5C7C583211C6A21006E94DB /* AugumentRealityDetailItem.swift in Sources */,
+				B5C7C583211C6A21006E94DB /* AugmentedRealityItem.swift in Sources */,
 				8C0E8C6A1FDEBDFF00789C91 /* CreateStoryPhotosOrderViewController.swift in Sources */,
 				8C0E8C6B1FDEBDFF00789C91 /* UserProfilePresenter.swift in Sources */,
 				8CDB21EB20AC10B100739700 /* DispatchQueue+Main.swift in Sources */,
@@ -14031,7 +14039,7 @@
 				CE1458D02045734900812544 /* Alamofire+Validate.swift in Sources */,
 				7C529689203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */,
 				8C0E8C871FDEBDFF00789C91 /* UIImageView.swift in Sources */,
-				B5C7C580211C699F006E94DB /* AugumentRealityDetailViewController.swift in Sources */,
+				B5C7C580211C699F006E94DB /* AugmentedRealityController.swift in Sources */,
 				8C0E8C881FDEBDFF00789C91 /* PHPhotoLibraryChangeObserver.swift in Sources */,
 				8C0E8C891FDEBDFF00789C91 /* UserProfileModuleInput.swift in Sources */,
 				8C0E8C8A1FDEBDFF00789C91 /* CustomIOS7AlertView.m in Sources */,
@@ -14421,6 +14429,7 @@
 				8C0E8DDB1FDEBDFF00789C91 /* RingView.swift in Sources */,
 				8C0E8DDC1FDEBDFF00789C91 /* TermsAndServicesRouter.swift in Sources */,
 				8C0E8DDD1FDEBDFF00789C91 /* TermsAndServicesConfigurator.swift in Sources */,
+				B57FE7FE212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */,
 				8C0E8DDE1FDEBDFF00789C91 /* TermsAndServicesInitializer.swift in Sources */,
 				CEF41E9C2035B2DB0008FCD5 /* PreventCollectionView.swift in Sources */,
 				8C0E8DDF1FDEBDFF00789C91 /* IntroduceViewInput.swift in Sources */,
@@ -15017,6 +15026,7 @@
 				8C0E8FC51FDEBDFF00789C91 /* ActivityTimelineInteractor.swift in Sources */,
 				8C0E8FC61FDEBDFF00789C91 /* ActivityTimelineRouterInput.swift in Sources */,
 				4ADE0873202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */,
+				B5624792212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */,
 				98C878272074E1C100374177 /* NavigationController.swift in Sources */,
 				98570AFF208F7558002CCEBA /* Spotlight.swift in Sources */,
 				8C0E8FC71FDEBDFF00789C91 /* ActivityTimelineRouter.swift in Sources */,
@@ -15148,7 +15158,7 @@
 				7CDABD0B1F1E3A6300C8CC16 /* UserProfilePresenter.swift in Sources */,
 				CEC3C2421FB99AF800C3D67F /* PasscodeSettingsPresenter.swift in Sources */,
 				7CD1F8D51F014F150028F51A /* Router.swift in Sources */,
-				B5C7C582211C6A21006E94DB /* AugumentRealityDetailItem.swift in Sources */,
+				B5C7C582211C6A21006E94DB /* AugmentedRealityItem.swift in Sources */,
 				CE51AB051EF90853005DCEE0 /* Filter.m in Sources */,
 				CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */,
 				CE51AB121EF90853005DCEE0 /* GSMUserInputCell.swift in Sources */,
@@ -15188,7 +15198,7 @@
 				CEAE3FF21EFD517300A405B2 /* CustomTabBarItem.swift in Sources */,
 				8C6EF8901F348B77002AC795 /* EditinglBar.swift in Sources */,
 				B56E0DE920B5644D0082044D /* NotificationName+Extensions.swift in Sources */,
-				B5C7C57F211C699F006E94DB /* AugumentRealityDetailViewController.swift in Sources */,
+				B5C7C57F211C699F006E94DB /* AugmentedRealityController.swift in Sources */,
 				CEAE3F941EFD4D7C00A405B2 /* SubPlussButtonView.swift in Sources */,
 				8C7786A61F3F38F0005CB432 /* VisualMusicPlayerViewController.swift in Sources */,
 				CE51AB3A1EF90853005DCEE0 /* AutoSyncSwitcherTableViewCell.swift in Sources */,
@@ -15664,6 +15674,7 @@
 				CE51ACF31EF90853005DCEE0 /* PhoneVereficationRouter.swift in Sources */,
 				2BA37C3A202837B400660394 /* FaceImageChangeCoverInteractorOutput.swift in Sources */,
 				4A9F8E5320875A4300622A6C /* PeriodicContactSyncSettingsTableViewCell.swift in Sources */,
+				B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */,
 				CE51ACF41EF90853005DCEE0 /* PhoneVereficationConfigurator.swift in Sources */,
 				CE51ACF51EF90853005DCEE0 /* PhoneVereficationInitializer.swift in Sources */,
 				CE95ED571F516736002F923A /* HelpAndSupportViewController.swift in Sources */,
@@ -15776,6 +15787,7 @@
 				FA475ACC203EAFB9008D79C2 /* PushPopAnimator.swift in Sources */,
 				CED4B02C201858D500D06CA9 /* HomeCardResponse.swift in Sources */,
 				CE228D542017338B0082BA14 /* Alamofire+Request.swift in Sources */,
+				B5624791212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */,
 				CE08BDE61FC8403C00440CA0 /* AuthorizationURLs.swift in Sources */,
 				7CEA863D1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift in Sources */,
 				7C5526131F7B9CCD00A21F3C /* CardsManager.swift in Sources */,

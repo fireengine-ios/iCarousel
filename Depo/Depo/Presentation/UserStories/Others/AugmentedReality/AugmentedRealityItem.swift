@@ -2,14 +2,14 @@
 //  AugumentRealityDetailItem.swift
 //  Depo
 //
-//  Created by Konstantin on 8/9/18.
+//  Created by Konstantin on 8/22/18.
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
 import QuickLook
-import UIKit
 
-class AugumentRealityDetailItem: NSObject {
+
+final class AugmentedRealityItem: NSObject {
     
     private var url: URL?
     
@@ -21,7 +21,7 @@ class AugumentRealityDetailItem: NSObject {
             return
         }
         
-        url = item.tmpDownloadUrl
+        url = item.localFileUrl
         
 //        switch item.patchToPreview {
 //        case let .localMediaContent(path):
@@ -33,7 +33,7 @@ class AugumentRealityDetailItem: NSObject {
 }
 
 
-extension AugumentRealityDetailItem: QLPreviewItem {
+extension AugmentedRealityItem: QLPreviewItem {
     var previewItemURL: URL? {
         return url
     }
