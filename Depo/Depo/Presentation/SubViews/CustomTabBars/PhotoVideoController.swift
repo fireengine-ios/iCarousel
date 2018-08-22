@@ -131,17 +131,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         /// call only after setupShowOnlySyncItemsCheckBox()
         setupSlider()
         
-        
         setRightBarButtonItems([threeDotsButton, searchButton], animated: false)
         
-        CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
-        CardsManager.default.updateAllProgressesInCardsForView(view: scrolliblePopUpView)
-        
-        
-        
-        
         needShowTabBar = true
-        floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonCreateAlbum])
+        floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto,
+                                                 .floatingButtonUpload,
+                                                 .floatingButtonCreateAStory,
+                                                 .floatingButtonCreateAlbum])
     }
     
     override func viewWillLayoutSubviews() {
@@ -199,8 +195,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func setupViewForPopUp() {
+        CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
+        CardsManager.default.updateAllProgressesInCardsForView(view: scrolliblePopUpView)
+        
         scrolliblePopUpView.delegate = self
         scrolliblePopUpView.isEnable = true
+        
         scrolliblePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
         
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -281,7 +281,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     @objc private func refreshData() {
         performFetch()
         refresher.endRefreshing()
-    } 
+    }
     
     @objc private func onCancelSelectionButton() {
         stopEditingMode()
