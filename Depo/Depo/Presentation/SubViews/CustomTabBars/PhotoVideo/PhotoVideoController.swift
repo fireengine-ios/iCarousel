@@ -207,19 +207,11 @@ extension PhotoVideoController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension PhotoVideoController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         ///return CGSize(width: collectionView.contentSize.width, height: 50)
         return CGSize(width: 0, height: 50)
     }
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    //        
-    //        return CGSize(width: 200, height: 200)
-    //    }
 }
-
-//extension PhotoVideoController: SegmentedControllerDelegate {
-//}
 
 // MARK: - BaseItemInputPassingProtocol 
 /// using: bottomBarPresenter.basePassingPresenter = self, PhotoVideoThreeDotMenuManager(delegate: self)
@@ -289,3 +281,6 @@ extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
         //        reloadData()
     }
 }
+
+//extension PhotoVideoController: SegmentedControllerDelegate {
+//}
