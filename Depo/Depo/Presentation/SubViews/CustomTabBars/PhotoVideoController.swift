@@ -28,19 +28,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private lazy var navBarManager = PhotoVideoNavBarManager(delegate: self)
     private lazy var collectionViewManager = PhotoVideoCollectionViewManager(collectionView: self.collectionView)
+    private lazy var threeDotMenuManager = PhotoVideoThreeDotMenuManager(delegate: self)
     
     private let scrolliblePopUpView = ViewForPopUp()
     private let showOnlySyncItemsCheckBox = CheckBoxView.initFromXib()
     
     private var editingTabBar: BottomSelectionTabBarViewController?
     private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView)
-    
-    private lazy var alert: AlertFilesActionsSheetPresenter = {
-        let alert = AlertFilesActionsSheetPresenterModuleInitialiser().createModule()
-        alert.basePassingPresenter = self
-        return alert
-    }()
-    
     
     private let bottomBarPresenter = BottomSelectionTabBarPresenter()
     private let analyticsManager: AnalyticsService = factory.resolve()
@@ -150,7 +144,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func showDetail(at indexPath: IndexPath) {
-        // TODO: - trackClickOnPhotoOrVideo(isPhoto: false) -
+        // TODO: trackClickOnPhotoOrVideo(isPhoto: false)
         trackClickOnPhotoOrVideo(isPhoto: true)
         
         let currentMediaItem = dataSource.object(at: indexPath)
@@ -258,7 +252,8 @@ extension PhotoVideoController: UICollectionViewDelegateFlowLayout {
 //extension PhotoVideoController: SegmentedControllerDelegate {
 //}
 
-// MARK: - BaseItemInputPassingProtocol
+// MARK: - BaseItemInputPassingProtocol 
+/// using: bottomBarPresenter.basePassingPresenter = self, PhotoVideoThreeDotMenuManager(delegate: self)
 extension PhotoVideoController: BaseItemInputPassingProtocol {
     
     var selectedItems: [BaseDataSourceItem] {
@@ -289,17 +284,8 @@ extension PhotoVideoController: PhotoVideoNavBarManagerDelegate {
         stopEditingMode()
     }
     
-    // TODO: optmize
     func onThreeDotsButton() {
-        if dataSource.isSelectingMode {
-            let items = dataSource.selectedObjects
-            ThreeDotMenuManager.actionsForImageItems(items) { [weak self] types in
-                // TODO: - check on iPad without sender -
-                self?.alert.show(with: types, for: items, presentedBy: nil, onSourceView: nil, viewController: self)
-            }
-        } else {
-            self.alert.show(with: [.select], for: [], presentedBy: nil, onSourceView: nil, viewController: self)
-        }
+        threeDotMenuManager.showActions(for: dataSource.selectedObjects, isSelectingMode: dataSource.isSelectingMode)
     }
     
     func onSearchButton() {

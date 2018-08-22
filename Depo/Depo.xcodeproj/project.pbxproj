@@ -3206,7 +3206,7 @@
 		CE95ED591F516736002F923A /* HelpAndSupportViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED481F516736002F923A /* HelpAndSupportViewOutput.swift */; };
 		CE966CDC212D7AAC00901295 /* PhotoVideoNavBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CDB212D7AAC00901295 /* PhotoVideoNavBarManager.swift */; };
 		CE966CDE212D7EE900901295 /* PhotoVideoCollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CDD212D7EE900901295 /* PhotoVideoCollectionViewManager.swift */; };
-		CE966CDF212D7F2700901295 /* ThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F7212B00E000F605CF /* ThreeDotMenuManager.swift */; };
+		CE966CDF212D7F2700901295 /* PhotoVideoThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F7212B00E000F605CF /* PhotoVideoThreeDotMenuManager.swift */; };
 		CE966CE0212D7F2B00901295 /* PhotoVideoCollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CDD212D7EE900901295 /* PhotoVideoCollectionViewManager.swift */; };
 		CE966CE1212D7F2E00901295 /* PhotoVideoNavBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CDB212D7AAC00901295 /* PhotoVideoNavBarManager.swift */; };
 		CE98F6D9204E6BD800433915 /* UIImageView+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6D8204E6BD800433915 /* UIImageView+Scale.swift */; };
@@ -3363,7 +3363,7 @@
 		CEEDC6F3212AD74A00F605CF /* UICollectionView+Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F1212AD73D00F605CF /* UICollectionView+Item.swift */; };
 		CEEDC6F5212AD80800F605CF /* PhotoVideoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */; };
 		CEEDC6F6212AD82900F605CF /* PhotoVideoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */; };
-		CEEDC6F8212B00E000F605CF /* ThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F7212B00E000F605CF /* ThreeDotMenuManager.swift */; };
+		CEEDC6F8212B00E000F605CF /* PhotoVideoThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F7212B00E000F605CF /* PhotoVideoThreeDotMenuManager.swift */; };
 		CEEF22AA2063D6E000CE3949 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
 		CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */; };
 		CEEFECC1200F735100E9A4FE /* UISearchBar+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */; };
@@ -5552,7 +5552,7 @@
 		CEEB7B1620AAC3150070FDC2 /* UIButton+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Image.swift"; sourceTree = "<group>"; };
 		CEEDC6F1212AD73D00F605CF /* UICollectionView+Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Item.swift"; sourceTree = "<group>"; };
 		CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDataSource.swift; sourceTree = "<group>"; };
-		CEEDC6F7212B00E000F605CF /* ThreeDotMenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDotMenuManager.swift; sourceTree = "<group>"; };
+		CEEDC6F7212B00E000F605CF /* PhotoVideoThreeDotMenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoThreeDotMenuManager.swift; sourceTree = "<group>"; };
 		CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
 		CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Cancel.swift"; sourceTree = "<group>"; };
@@ -11354,7 +11354,7 @@
 				CEF6909921258D8F0013075F /* PhotoVideoController.swift */,
 				CE966CDB212D7AAC00901295 /* PhotoVideoNavBarManager.swift */,
 				CE966CDD212D7EE900901295 /* PhotoVideoCollectionViewManager.swift */,
-				CEEDC6F7212B00E000F605CF /* ThreeDotMenuManager.swift */,
+				CEEDC6F7212B00E000F605CF /* PhotoVideoThreeDotMenuManager.swift */,
 				CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */,
 				CEF6909F21259C4C0013075F /* EmptyDataView.xib */,
 				CEF690A221259C540013075F /* EmptyDataView.swift */,
@@ -14960,7 +14960,7 @@
 				8C0E8F751FDEBDFF00789C91 /* AccountParameters.swift in Sources */,
 				7C379F40202C364F0050C055 /* CardActionType.swift in Sources */,
 				8C0E8F761FDEBDFF00789C91 /* PrintViewOutput.swift in Sources */,
-				CE966CDF212D7F2700901295 /* ThreeDotMenuManager.swift in Sources */,
+				CE966CDF212D7F2700901295 /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				8C0E8F771FDEBDFF00789C91 /* PackagesViewInput.swift in Sources */,
 				8C0E8F781FDEBDFF00789C91 /* SelectNameViewOutput.swift in Sources */,
 				B53DCE8D20EF634900400DBA /* ContactSyncSDK.m in Sources */,
@@ -15687,7 +15687,7 @@
 				CEDFECA71F10C77E003D1A75 /* UINavigationBarExtension.swift in Sources */,
 				D47863FD1F3F18FA00EFDC6D /* UsageInfoViewOutput.swift in Sources */,
 				CE51ACE81EF90853005DCEE0 /* IntroduceInitializer.swift in Sources */,
-				CEEDC6F8212B00E000F605CF /* ThreeDotMenuManager.swift in Sources */,
+				CEEDC6F8212B00E000F605CF /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				D49886621F3EFBE200F50C95 /* ImportPhotosViewOutput.swift in Sources */,
 				4A9886F420443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
 				CE2F55FC1F7551CD00F49DA1 /* AccountService.swift in Sources */,
