@@ -29,13 +29,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private lazy var navBarManager = PhotoVideoNavBarManager(delegate: self)
     private lazy var collectionViewManager = PhotoVideoCollectionViewManager(collectionView: self.collectionView)
     
-    private let contentSlider: LBAlbumLikePreviewSliderViewController = {
-        let sliderModuleConfigurator = LBAlbumLikePreviewSliderModuleInitializer()
-        let sliderPresenter = LBAlbumLikePreviewSliderPresenter()
-        sliderModuleConfigurator.initialise(inputPresenter: sliderPresenter)
-        return sliderModuleConfigurator.lbAlbumLikeSliderVC
-    }()
-    
     private let scrolliblePopUpView = ViewForPopUp()
     private let showOnlySyncItemsCheckBox = CheckBoxView.initFromXib()
     
@@ -144,7 +137,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private func performFetch() {
         try? fetchedResultsController.performFetch()
         collectionView.reloadData()
-        contentSlider.reloadAllData()
+        collectionViewManager.reloadAlbumsSlider()
     }
     
     private func updateCellSize() {

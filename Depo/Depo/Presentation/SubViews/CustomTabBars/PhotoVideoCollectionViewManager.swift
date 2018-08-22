@@ -46,6 +46,10 @@ final class PhotoVideoCollectionViewManager {
         refresher.endRefreshing()
     }
     
+    func reloadAlbumsSlider() {
+        contentSlider.reloadAllData()
+    }
+    
     func setup() {
         
         setupCollectionView()
