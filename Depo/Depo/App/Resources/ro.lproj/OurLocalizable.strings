@@ -537,7 +537,7 @@
 "dropboxLastUpdatedFile" = "Ultima actualizare pe %@ - %d fișier";
 "dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";
 "PackagesPolicyHeader" = "Abonament pentru aplicație cu caracter de auto-reînnoire a achiziției:";
-"PackagesPolicyText" = "Abonamentele sunt reînnoite lunar.  Plata va fi preluată de pe contul iTunes la confirmarea achiziției.\nAbonamentul se reînnoiește automat, cu excepția cazului în care opțiunea de auto-reînnoire este oprită cu cel puțin 24 de ore înainte de expirarea perioadei curente.\nPlata se va extrage cu 24 de ore înainte de sfârșitul perioadei curente. Taxele se reflectă pe măsură ce sunt afișate în ecranul de achiziție al aplicației.\nAbonamentele pot fi gestionate de utilizator și reînnoirea automată poate fi oprită din setări.\nDacă utilizatorul achiziționează abonamentul în perioada de testare gratuită, partea neutilizată a acestei perioade - se pierde.\nPolitica de confidențialitate: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\n";
+"PackagesPolicyText" = "Abonamentele sunt reînnoite lunar.  Plata va fi preluată de pe contul iTunes la confirmarea achiziției.\nAbonamentul se reînnoiește automat, cu excepția cazului în care opțiunea de auto-reînnoire este oprită cu cel puțin 24 de ore înainte de expirarea perioadei curente.\nPlata se va extrage cu 24 de ore înainte de sfârșitul perioadei curente. Taxele se reflectă pe măsură ce sunt afișate în ecranul de achiziție al aplicației.\nAbonamentele pot fi gestionate de utilizator și reînnoirea automată poate fi oprită din setări.\nDacă utilizatorul achiziționează abonamentul în perioada de testare gratuită, partea neutilizată a acestei perioade - se pierde.\nPolitica de confidențialitate: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nTermeni de utilizare: ";
 "Missing Dates" = "Date lipsă";
 "You have successfully registered, please log in with your credentials" = "Te-ai înregistrat cu succes, te rugăm să te conectezi cu datele tale";
 "Animation" = "Animaţie";
@@ -636,3 +636,12 @@
 "We couldn’t find anything on your Lifebox yet." = "Încă nu am găsit nimic în lifebox-ul tău.";
 "Expiration Date: %@" = "Data expirării: %@";
 "Failed to get albums" = "nu a reușit să obțină albume";
+"termsAndUseEtkCheckboxText" = "termsAndUseEtkCheckboxText";
+"offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
+"Please enter a valid login." = "Introduceți textul de mai jos";
+"Please enter the text below" = "Por favor ingrese el texto a continuación";
+"facebook_photo_tags" = "";
+"facebook_tags_on" = "";
+"facebook_tags_off" = "";
+"facebook_tags_import" = "";
+"TermsOfUseLinkText" = "clic";

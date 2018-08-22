@@ -991,7 +991,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func updateVisibleCells(){
+    func updateVisibleCells() {
         let array = collectionView?.visibleCells ?? [UICollectionViewCell]()
         for cell in array {
             guard let cell_ = cell as? CollectionViewCellDataProtocol else{
@@ -1008,6 +1008,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 continue
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+            cell_.set(name: unwrapedObject.name)
+            ///TODO: confireWithWrapperd call may be meaningless because of isAlreadyConfigured flag inside
             cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
             
             if let cell = cell as? BasicCollectionMultiFileCell {
@@ -1456,25 +1458,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 self.uploadedObjectID.append(uuid)
             }
             
-            var localFinishedItemUUID: String?
-            
             finished: for (section, array) in self.allItems.enumerated() {
                 for (row, object) in array.enumerated() {
-                    if object.getTrimmedLocalID() == uuid {
-                        if object.isLocalItem {
-                            localFinishedItemUUID = object.uuid
-                            file.isLocalItem = false
+                    if object.getTrimmedLocalID() == uuid, object.isLocalItem {
+                        file.isLocalItem = false
+                        
+                        guard section < self.allItems.count, row < self.allItems[section].count else {
+                            /// Collection was reloaded from different thread
+                            return
                         }
-                        guard section < self.allItems.count,
-                            row < self.allItems[section].count else {
-                                return /// Collection was reloaded from different thread
-                        }
+                        
                         self.allItems[section][row] = file
+                        
                         break finished
                     }
                 }
             }
-            
             
             for (index, object) in self.allMediaItems.enumerated(){
                 if object.uuid == file.uuid {
@@ -1489,13 +1488,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             
             DispatchQueue.main.async {
-                if localFinishedItemUUID != nil, let cell = self.getCellForFile(objectUUID: file.uuid) {
+                if let cell = self.getCellForFile(objectUUID: file.uuid) {
                     cell.finishedUploadForObject()
                 }
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
-                if let `self` = self{
+                if let `self` = self {
                     let cell = self.getCellForFile(objectUUID: file.uuid)
                     cell?.resetCloudImage()
                     
