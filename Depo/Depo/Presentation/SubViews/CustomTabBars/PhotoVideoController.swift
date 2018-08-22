@@ -130,7 +130,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         dataSource.selectedIndexPaths.removeAll()
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
         bottomBarPresenter.dismissWithNotification()
-        setLeftBarButtonItems(nil, animated: true)
+        navBarManager.setDefaultMode()
     }
     
     // MARK: - helpers
