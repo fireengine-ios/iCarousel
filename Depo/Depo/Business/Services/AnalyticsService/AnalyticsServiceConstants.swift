@@ -330,11 +330,11 @@ enum GAEventCantegory {
         case .enhancedEcommerce:
             return "Enhanced E-Commerce"
         case .functions:
-            return "FUNCTIONS"
+            return "Functions"
         case .videoAnalytics:
-            return "VIDEO ANALYTICS"
+            return "Video Analytics"
         case .errors:
-            return "ERRORS"
+            return "Errors"
         }
     }
 }
@@ -562,7 +562,7 @@ enum GAEventLabel {
     case videoStartVideo
     case videoStartStroy
     //
-    case serviceError
+    case serverError
     case paymentError(String)
     
     var text: String {
@@ -658,7 +658,7 @@ enum GAEventLabel {
         case .videoStartStroy:
             return "story"
         //
-        case .serviceError:
+        case .serverError:
             return "Server error"// \(errorCode)"
         case .paymentError(let paymentError):
             return "Definition(\(paymentError)"
