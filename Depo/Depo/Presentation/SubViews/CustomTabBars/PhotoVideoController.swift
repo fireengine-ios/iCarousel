@@ -10,10 +10,11 @@ import UIKit
 
 // TODO: items storage with remotes
 
-// TODO: CheckBoxViewDelegate
+// TODO: CheckBoxViewDelegate logic
 // TODO: video controller
 // TODO: navigation bar appear (we have "setTitle("")" )
 // TODO: items operations (progress)
+// TODO: todos in file
 // TODO: clear code -
 
 final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildController {
