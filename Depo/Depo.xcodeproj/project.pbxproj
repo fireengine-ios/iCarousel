@@ -11153,6 +11153,21 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		CE966CE2212D8EAF00901295 /* PhotoVideo */ = {
+			isa = PBXGroup;
+			children = (
+				CEF6909A21258D8F0013075F /* PhotoVideoController.xib */,
+				CEF6909921258D8F0013075F /* PhotoVideoController.swift */,
+				CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */,
+				CE966CDD212D7EE900901295 /* PhotoVideoCollectionViewManager.swift */,
+				CE966CDB212D7AAC00901295 /* PhotoVideoNavBarManager.swift */,
+				CEEDC6F7212B00E000F605CF /* PhotoVideoThreeDotMenuManager.swift */,
+				CEF690A62126B4530013075F /* PhotoVideoCell.xib */,
+				CEF690A52126B4530013075F /* PhotoVideoCell.swift */,
+			);
+			path = PhotoVideo;
+			sourceTree = "<group>";
+		};
 		CEACBEA61F6C1134003BE328 /* ActivityTimelineTableBackView */ = {
 			isa = PBXGroup;
 			children = (
@@ -11348,18 +11363,11 @@
 				CEAE3FE91EFD517300A405B2 /* TabBarView.xib */,
 				CEAE3FEA1EFD517300A405B2 /* TabBarViewController.swift */,
 				78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */,
+				CE966CE2212D8EAF00901295 /* PhotoVideo */,
 				CEF6906C212565EA0013075F /* SegmentedController.xib */,
 				CEF69069212565890013075F /* SegmentedController.swift */,
-				CEF6909A21258D8F0013075F /* PhotoVideoController.xib */,
-				CEF6909921258D8F0013075F /* PhotoVideoController.swift */,
-				CE966CDB212D7AAC00901295 /* PhotoVideoNavBarManager.swift */,
-				CE966CDD212D7EE900901295 /* PhotoVideoCollectionViewManager.swift */,
-				CEEDC6F7212B00E000F605CF /* PhotoVideoThreeDotMenuManager.swift */,
-				CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */,
 				CEF6909F21259C4C0013075F /* EmptyDataView.xib */,
 				CEF690A221259C540013075F /* EmptyDataView.swift */,
-				CEF690A62126B4530013075F /* PhotoVideoCell.xib */,
-				CEF690A52126B4530013075F /* PhotoVideoCell.swift */,
 			);
 			path = CustomTabBars;
 			sourceTree = "<group>";
