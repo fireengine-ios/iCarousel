@@ -22,13 +22,6 @@ final class AugmentedRealityItem: NSObject {
         }
         
         url = item.localFileUrl
-        
-//        switch item.patchToPreview {
-//        case let .localMediaContent(path):
-//            url = path.urlToFile
-//        case let .remoteUrl(remoteUrlToFile):
-//            url = remoteUrlToFile
-//        }
     }
 }
 

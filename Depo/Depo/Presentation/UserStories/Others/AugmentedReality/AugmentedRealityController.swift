@@ -11,10 +11,13 @@ import QuickLook
 
 final class AugmentedRealityController: QLPreviewController {
     
+    var source: AugmentedRealityDataSource!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dataSource = source
     }
-
 }
-
 
