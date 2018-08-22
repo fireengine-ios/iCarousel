@@ -26,6 +26,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         }
     }
     
+    private lazy var navBarManager = PhotoVideoNavBarManager(delegate: self)
+    
     private weak var contentSliderTopY: NSLayoutConstraint?
     private weak var contentSliderH: NSLayoutConstraint?
     private var refresherY: CGFloat = 0
@@ -45,24 +47,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private let refresher = UIRefreshControl()
     private var editingTabBar: BottomSelectionTabBarViewController?
     private var dataSource = PhotoVideoDataSource()
-    
-    private lazy var cancelSelectionButton = UIBarButtonItem(
-        title: TextConstants.cancelSelectionButtonTitle,
-        font: .TurkcellSaturaDemFont(size: 19.0),
-        target: self,
-        selector: #selector(onCancelSelectionButton))
-    
-    private lazy var threeDotsButton = UIBarButtonItem(
-        image: Images.threeDots,
-        style: .plain,
-        target: self,
-        action: #selector(onThreeDotsButton))
-    
-    private lazy var searchButton = UIBarButtonItem(
-        image: Images.search,
-        style: .plain,
-        target: self,
-        action: #selector(onSearchButton))
     
     private lazy var alert: AlertFilesActionsSheetPresenter = {
         let alert = AlertFilesActionsSheetPresenterModuleInitialiser().createModule()
@@ -131,7 +115,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         /// call only after setupShowOnlySyncItemsCheckBox()
         setupSlider()
         
-        setRightBarButtonItems([threeDotsButton, searchButton], animated: false)
+        navBarManager.setDefaultMode()
         
         needShowTabBar = true
         floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto,
@@ -283,27 +267,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         refresher.endRefreshing()
     }
     
-    @objc private func onCancelSelectionButton() {
-        stopEditingMode()
-    }
-    
-    // TODO: - optmize -
-    @objc private func onThreeDotsButton() {
-        if dataSource.isSelectingMode {
-            let items = selectedObjects
-            ThreeDotMenuManager.actionsForImageItems(items) { [weak self] types in
-                // TODO: - check on iPad without sender -
-                self?.alert.show(with: types, for: items, presentedBy: nil, onSourceView: nil, viewController: self)
-            }
-        } else {
-            self.alert.show(with: [.select], for: [], presentedBy: nil, onSourceView: nil, viewController: self)
-        }
-    }
-    
-    @objc private func onSearchButton() {
-        showSearchScreen(output: self)
-    }
-    
     // MARK: - Editing Mode
     
     private func startEditingMode(at indexPath: IndexPath?) {
@@ -317,8 +280,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         }
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
         onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
-        setLeftBarButtonItems([cancelSelectionButton], animated: true)
-        setRightBarButtonItems([threeDotsButton], animated: true)
+        navBarManager.setSelectionMode()
     }
     
     private func stopEditingMode() {
@@ -327,8 +289,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
         bottomBarPresenter.dismissWithNotification()
         setLeftBarButtonItems(nil, animated: true)
-        setTitle("")
-        setRightBarButtonItems([threeDotsButton, searchButton], animated: true)
     }
     
     // MARK: - helpers
@@ -337,10 +297,10 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         setupNewBottomBarConfig()
         
         if selectedItemsCount == 0 {
-            threeDotsButton.isEnabled = false
+            navBarManager.threeDotsButton.isEnabled = false
             bottomBarPresenter.dismissWithNotification()
         } else {
-            threeDotsButton.isEnabled = true
+            navBarManager.threeDotsButton.isEnabled = true
             bottomBarPresenter.show(animated: true, onView: nil)
         }
         
@@ -637,5 +597,30 @@ extension PhotoVideoController: CheckBoxViewDelegate {
 //        }
 //        dataSource.originalFilters = filters
 //        reloadData()
+    }
+}
+
+// MARK: - PhotoVideoNavBarManagerDelegate
+extension PhotoVideoController: PhotoVideoNavBarManagerDelegate {
+    
+    func onCancelSelectionButton() {
+        stopEditingMode()
+    }
+    
+    // TODO: - optmize -
+    func onThreeDotsButton() {
+        if dataSource.isSelectingMode {
+            let items = selectedObjects
+            ThreeDotMenuManager.actionsForImageItems(items) { [weak self] types in
+                // TODO: - check on iPad without sender -
+                self?.alert.show(with: types, for: items, presentedBy: nil, onSourceView: nil, viewController: self)
+            }
+        } else {
+            self.alert.show(with: [.select], for: [], presentedBy: nil, onSourceView: nil, viewController: self)
+        }
+    }
+    
+    func onSearchButton() {
+        showSearchScreen(output: self)
     }
 }
