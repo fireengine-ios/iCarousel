@@ -28,8 +28,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private weak var contentSliderTopY: NSLayoutConstraint?
     private weak var contentSliderH: NSLayoutConstraint?
     private var refresherY: CGFloat = 0
+    private let showOnlySyncItemsCheckBoxHeight: CGFloat = 44
     
-    private let scrolliblePopUpView = ViewForPopUp()
     
     private let contentSlider: LBAlbumLikePreviewSliderViewController = {
         let sliderModuleConfigurator = LBAlbumLikePreviewSliderModuleInitializer()
@@ -38,10 +38,11 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         return sliderModuleConfigurator.lbAlbumLikeSliderVC
     }()
     
+    private let scrolliblePopUpView = ViewForPopUp()
+    private let showOnlySyncItemsCheckBox = CheckBoxView.initFromXib()
+    
     private let refresher = UIRefreshControl()
-    
     private var editingTabBar: BottomSelectionTabBarViewController?
-    
     private var dataSource = PhotoVideoDataSource()
     
     private lazy var cancelSelectionButton = UIBarButtonItem(
@@ -123,7 +124,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         performFetch()
         
         setupViewForPopUp()
+        
+        /// call only after setupViewForPopUp()
+        setupShowOnlySyncItemsCheckBox()
+        
+        /// call only after setupShowOnlySyncItemsCheckBox()
         setupSlider()
+        
         
         setRightBarButtonItems([threeDotsButton, searchButton], animated: false)
         
@@ -135,8 +142,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         
         needShowTabBar = true
         floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonCreateAlbum])
-        scrolliblePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
-        scrolliblePopUpView.isEnable = true
     }
     
     override func viewWillLayoutSubviews() {
@@ -194,6 +199,10 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func setupViewForPopUp() {
+        scrolliblePopUpView.delegate = self
+        scrolliblePopUpView.isEnable = true
+        scrolliblePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
+        
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(scrolliblePopUpView)
         
@@ -209,18 +218,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         constraintsArray.append(contentSliderH!)
         
         NSLayoutConstraint.activate(constraintsArray)
-        scrolliblePopUpView.delegate = self
     }
     
     private func setupSlider() {
         let sliderController = contentSlider
         
-        let height = scrolliblePopUpView.frame.height + BaseFilesGreedViewController.sliderH
-        
-        // TODO: - showOnlySyncItemsCheckBox -
-//        if showOnlySyncItemsCheckBox != nil {
-//            height += showOnlySyncItemsCheckBoxHeight
-//        }
+        let height = scrolliblePopUpView.frame.height + BaseFilesGreedViewController.sliderH + showOnlySyncItemsCheckBoxHeight
         
         let subView = UIView(frame: CGRect(x: 0, y: -height, width: collectionView.frame.width, height: BaseFilesGreedViewController.sliderH))
         subView.addSubview(sliderController.view)
@@ -237,9 +240,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         subView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        // TODO: - showOnlySyncItemsCheckBox -
-//        let relatedView = showOnlySyncItemsCheckBox ?? scrolliblePopUpView
-        let relatedView = scrolliblePopUpView
+        let relatedView = showOnlySyncItemsCheckBox
         
         var constraintsArray = [NSLayoutConstraint]()
         constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .top, relatedBy: .equal, toItem: relatedView, attribute: .bottom, multiplier: 1, constant: 0))
@@ -254,10 +255,25 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         
         NSLayoutConstraint.activate(constraintsArray)
         
-        refresherY =  -height + 30
+        refresherY = -height + 30
         updateRefresher()
+    }
+    
+    private func setupShowOnlySyncItemsCheckBox() {
+        let checkBox = showOnlySyncItemsCheckBox
+        checkBox.delegate = self
+        collectionView.addSubview(checkBox)
         
-//        noFilesViewCenterOffsetConstraint.constant = BaseFilesGreedViewController.sliderH / 2
+        checkBox.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraintsArray = [NSLayoutConstraint]()
+        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .top, relatedBy: .equal, toItem: scrolliblePopUpView, attribute: .bottom, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: showOnlySyncItemsCheckBoxHeight))
+        
+        NSLayoutConstraint.activate(constraintsArray)
     }
     
     // MARK: - Selectors
@@ -572,12 +588,7 @@ extension PhotoVideoController: ViewForPopUpDelegate {
     func onUpdateViewForPopUpH(h: CGFloat) {
         let originalPoint = collectionView.contentOffset
         let sliderH = contentSlider.view.frame.height
-        let checkBoxH: CGFloat = 0
-        // TODO: - showOnlySyncItemsCheckBox -
-//        if let checkBox = showOnlySyncItemsCheckBox {
-//            checkBoxH = checkBox.frame.height
-//        }
-        
+        let checkBoxH = showOnlySyncItemsCheckBox.frame.height
         let calculatedH = h + sliderH + checkBoxH
         
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
@@ -604,5 +615,27 @@ extension PhotoVideoController: ViewForPopUpDelegate {
         
         refresherY = -calculatedH + 30
         updateRefresher()
+    }
+}
+
+// MARK: - CheckBoxViewDelegate
+extension PhotoVideoController: CheckBoxViewDelegate {
+    func checkBoxViewDidChangeValue(_ value: Bool) {
+//        if value {
+//            filtersByDefault = filters
+//            filters = filters.filter { type -> Bool in
+//                switch type {
+//                case .localStatus(_):
+//                    return false
+//                default:
+//                    return true
+//                }
+//            }
+//            filters.append(.localStatus(.nonLocal))            
+//        } else {
+//            filters = filtersByDefault
+//        }
+//        dataSource.originalFilters = filters
+//        reloadData()
     }
 }
