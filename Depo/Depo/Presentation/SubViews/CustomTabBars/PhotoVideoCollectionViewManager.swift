@@ -34,6 +34,10 @@ final class PhotoVideoCollectionViewManager {
         self.collectionView = collectionView
     }
     
+    deinit {
+        CardsManager.default.removeViewForNotification(view: scrolliblePopUpView)
+    }
+    
     private func updateRefresher() {
         guard let refresherView = refresher.subviews.first else {
             return

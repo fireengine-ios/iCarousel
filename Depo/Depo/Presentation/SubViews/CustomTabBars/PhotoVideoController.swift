@@ -84,10 +84,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         super.viewDidDisappear(animated)
         scrolliblePopUpView.isActive = false
     }
-    
-    deinit {
-        CardsManager.default.removeViewForNotification(view: scrolliblePopUpView)
-    }
 
     
     // MARK: - setup
