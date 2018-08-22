@@ -87,10 +87,6 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func checkEULA() {
-        ///REMOVE ME
-        output.onFailEULA()
-        return
-        ///REMOVE ME
         let eulaService = EulaService()
         eulaService.eulaCheck(success: { [weak self] successResponce in
             DispatchQueue.toMain {
