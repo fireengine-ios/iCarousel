@@ -43,12 +43,13 @@ final class PhotoVideoNavBarManager {
     
     func setSelectionMode() {
         delegate?.setLeftBarButtonItems([cancelSelectionButton], animated: true)
-        delegate?.setRightBarButtonItems([threeDotsButton], animated: true)
+        delegate?.setRightBarButtonItems([threeDotsButton], animated: false)
     }
     
     func setDefaultMode() {
         delegate?.setTitle("")
-        delegate?.setRightBarButtonItems([threeDotsButton, searchButton], animated: true)
+        delegate?.setRightBarButtonItems([threeDotsButton, searchButton], animated: false)
+        delegate?.setLeftBarButtonItems(nil, animated: true)
     }
     
     @objc private func onCancelSelectionButton() {

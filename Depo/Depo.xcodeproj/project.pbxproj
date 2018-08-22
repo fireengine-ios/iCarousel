@@ -3209,6 +3209,7 @@
 		CE966CDF212D7F2700901295 /* PhotoVideoThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F7212B00E000F605CF /* PhotoVideoThreeDotMenuManager.swift */; };
 		CE966CE0212D7F2B00901295 /* PhotoVideoCollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CDD212D7EE900901295 /* PhotoVideoCollectionViewManager.swift */; };
 		CE966CE1212D7F2E00901295 /* PhotoVideoNavBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CDB212D7AAC00901295 /* PhotoVideoNavBarManager.swift */; };
+		CE966CE4212D90E400901295 /* PhotoVideoBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CE3212D90E400901295 /* PhotoVideoBottomBarManager.swift */; };
 		CE98F6D9204E6BD800433915 /* UIImageView+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6D8204E6BD800433915 /* UIImageView+Scale.swift */; };
 		CE98F6DB204E71E300433915 /* String+UTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6DA204E71E300433915 /* String+UTType.swift */; };
 		CE98F6DD204E721200433915 /* FilesExistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6DC204E721200433915 /* FilesExistManager.swift */; };
@@ -5409,6 +5410,7 @@
 		CE95ED481F516736002F923A /* HelpAndSupportViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportViewOutput.swift; sourceTree = "<group>"; };
 		CE966CDB212D7AAC00901295 /* PhotoVideoNavBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoNavBarManager.swift; sourceTree = "<group>"; };
 		CE966CDD212D7EE900901295 /* PhotoVideoCollectionViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoCollectionViewManager.swift; sourceTree = "<group>"; };
+		CE966CE3212D90E400901295 /* PhotoVideoBottomBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoBottomBarManager.swift; sourceTree = "<group>"; };
 		CE98F6D8204E6BD800433915 /* UIImageView+Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Scale.swift"; sourceTree = "<group>"; };
 		CE98F6DA204E71E300433915 /* String+UTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UTType.swift"; sourceTree = "<group>"; };
 		CE98F6DC204E721200433915 /* FilesExistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesExistManager.swift; sourceTree = "<group>"; };
@@ -11161,6 +11163,7 @@
 				CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */,
 				CE966CDD212D7EE900901295 /* PhotoVideoCollectionViewManager.swift */,
 				CE966CDB212D7AAC00901295 /* PhotoVideoNavBarManager.swift */,
+				CE966CE3212D90E400901295 /* PhotoVideoBottomBarManager.swift */,
 				CEEDC6F7212B00E000F605CF /* PhotoVideoThreeDotMenuManager.swift */,
 				CEF690A62126B4530013075F /* PhotoVideoCell.xib */,
 				CEF690A52126B4530013075F /* PhotoVideoCell.swift */,
@@ -15223,6 +15226,7 @@
 				CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */,
 				CE51AB121EF90853005DCEE0 /* GSMUserInputCell.swift in Sources */,
 				CE3E4D0D201B696500173045 /* UIButton+Properties.swift in Sources */,
+				CE966CE4212D90E400901295 /* PhotoVideoBottomBarManager.swift in Sources */,
 				CEAE3FB41EFD4F0D00A405B2 /* HomePageInteractorOutput.swift in Sources */,
 				CE2F561B1F7552A900F49DA1 /* PackagesPresenter.swift in Sources */,
 				984F8E7F200CE10100D9D595 /* StoriesInitializer.swift in Sources */,

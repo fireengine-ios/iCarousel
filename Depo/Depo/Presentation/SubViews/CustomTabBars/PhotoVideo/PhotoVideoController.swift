@@ -29,26 +29,17 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private lazy var navBarManager = PhotoVideoNavBarManager(delegate: self)
     private lazy var collectionViewManager = PhotoVideoCollectionViewManager(collectionView: self.collectionView)
     private lazy var threeDotMenuManager = PhotoVideoThreeDotMenuManager(delegate: self)
-    
-    private let scrolliblePopUpView = ViewForPopUp()
-    private let showOnlySyncItemsCheckBox = CheckBoxView.initFromXib()
-    
-    private var editingTabBar: BottomSelectionTabBarViewController?
+    private lazy var bottomBarManager = PhotoVideoBottomBarManager(delegate: self)
     private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView)
     
-    private let bottomBarPresenter = BottomSelectionTabBarPresenter()
     private let analyticsManager: AnalyticsService = factory.resolve()
-    
-    private let photoVideoBottomBarConfig = EditingBarConfig(
-        elementsConfig:  [.share, .download, .sync, .addToAlbum, .delete], 
-        style: .blackOpaque, tintColor: nil)
     
     // MARK: - life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupEdittingBar()
+        bottomBarManager.setup()
         collectionViewManager.setup()
         navBarManager.setDefaultMode()
         
@@ -70,24 +61,17 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         super.viewWillAppear(animated)
         updateCellSize()
         // TODO: need layoutIfNeeded?
-        editingTabBar?.view.layoutIfNeeded()
-        scrolliblePopUpView.isActive = true
+        bottomBarManager.editingTabBar?.view.layoutIfNeeded()
+        collectionViewManager.scrolliblePopUpView.isActive = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        scrolliblePopUpView.isActive = false
+        collectionViewManager.scrolliblePopUpView.isActive = false
     }
 
     
     // MARK: - setup
-    
-    private func setupEdittingBar() {
-        let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
-        bottomBarPresenter.basePassingPresenter = self
-        let botvarBarVC = bottomBarVCmodule.setupModule(config: photoVideoBottomBarConfig, settablePresenter: bottomBarPresenter)
-        self.editingTabBar = botvarBarVC
-    }
     
     private func performFetch() {
         dataSource.performFetch()
@@ -96,7 +80,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func updateCellSize() {
-        _ = collectionView.saveAndGetItemSize(for: 4)
+        let columnsNumber = 4
+        _ = collectionView.saveAndGetItemSize(for: columnsNumber)
     }
     
     // MARK: - Editing Mode
@@ -105,7 +90,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         guard !dataSource.isSelectingMode else {
             return
         }
-        ///history: parent?.navigationItem.leftBarButtonItem = cancelSelectionButton
         dataSource.isSelectingMode = true
         if let indexPath = indexPath {
             dataSource.selectedIndexPaths.insert(indexPath)
@@ -119,28 +103,24 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         dataSource.isSelectingMode = false
         dataSource.selectedIndexPaths.removeAll()
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
-        bottomBarPresenter.dismissWithNotification()
+        bottomBarManager.hide()
         navBarManager.setDefaultMode()
     }
     
     // MARK: - helpers
     
     private func onChangeSelectedItemsCount(selectedItemsCount: Int) {
-        setupNewBottomBarConfig()
+        bottomBarManager.update(for: dataSource.selectedObjects)
         
         if selectedItemsCount == 0 {
             navBarManager.threeDotsButton.isEnabled = false
-            bottomBarPresenter.dismissWithNotification()
+            bottomBarManager.hide()
         } else {
             navBarManager.threeDotsButton.isEnabled = true
-            bottomBarPresenter.show(animated: true, onView: nil)
+            bottomBarManager.show()
         }
         
         setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)")
-    }
-    
-    private func setupNewBottomBarConfig() {
-        bottomBarPresenter.setupTabBarWith(items: dataSource.selectedObjects, originalConfig: photoVideoBottomBarConfig)
     }
     
     private func showDetail(at indexPath: IndexPath) {

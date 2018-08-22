@@ -24,7 +24,7 @@ final class PhotoVideoCollectionViewManager {
         return sliderModuleConfigurator.lbAlbumLikeSliderVC
     }()
     
-    private let scrolliblePopUpView = ViewForPopUp()
+    let scrolliblePopUpView = ViewForPopUp()
     private let showOnlySyncItemsCheckBox = CheckBoxView.initFromXib()
     
     private weak var collectionView: UICollectionView!
