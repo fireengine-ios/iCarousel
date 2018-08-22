@@ -103,4 +103,5 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     }
     
     func set(name: String?) { }
+
 }

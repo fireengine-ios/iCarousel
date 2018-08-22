@@ -2363,6 +2363,8 @@
 		8C5408471F62AD6400D4717A /* GridListTopBarSortingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5408461F62AD6400D4717A /* GridListTopBarSortingTableCell.swift */; };
 		8C5408491F62AD9100D4717A /* GridListTopBarSortingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C5408481F62AD9100D4717A /* GridListTopBarSortingTableCell.xib */; };
 		8C54084C1F62C77200D4717A /* FloatingContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54084B1F62C77200D4717A /* FloatingContainerVC.swift */; };
+		8C6A9161212D9C6300246F32 /* FaceImageDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA164C2121CA1E006D96A5 /* FaceImageDesigner.swift */; };
+		8C6A9162212D9C6900246F32 /* FaceImageDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */; };
 		8C6CC55E1F879A72007D49C6 /* GeneralFilesFiltration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CC55D1F879A72007D49C6 /* GeneralFilesFiltration.swift */; };
 		8C6EF8761F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8621F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift */; };
 		8C6EF8771F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8631F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift */; };
@@ -14702,6 +14704,7 @@
 				8C0E8EF31FDEBDFF00789C91 /* UserInfoSubViewViewController.swift in Sources */,
 				8C0E8EF41FDEBDFF00789C91 /* UserInfoSubViewModuleInput.swift in Sources */,
 				8C0E8EF51FDEBDFF00789C91 /* MoreFilesActionsInteractor.swift in Sources */,
+				8C6A9162212D9C6900246F32 /* FaceImageDisplayManager.swift in Sources */,
 				8C0E8EF61FDEBDFF00789C91 /* BaseDataSourceItem.swift in Sources */,
 				8C0E8EF71FDEBDFF00789C91 /* UserInfoSubViewPresenter.swift in Sources */,
 				8C0E8EF81FDEBDFF00789C91 /* UserInfoSubViewInteractorInput.swift in Sources */,
@@ -14938,6 +14941,7 @@
 				8C0E8F9B1FDEBDFF00789C91 /* AlbumsPresenter.swift in Sources */,
 				8C0E8F9C1FDEBDFF00789C91 /* AlbumsInteractor.swift in Sources */,
 				CE19CE02208F017200DB903E /* UIAlertController+Action.swift in Sources */,
+				8C6A9161212D9C6300246F32 /* FaceImageDesigner.swift in Sources */,
 				4A0AC136208736F100032CC7 /* PeriodicContactSyncViewController.swift in Sources */,
 				8C0E8F9D1FDEBDFF00789C91 /* GridListTopBar.swift in Sources */,
 				8C0E8F9E1FDEBDFF00789C91 /* AlbumsRouter.swift in Sources */,
@@ -16883,8 +16887,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox;
-				PROVISIONING_PROFILE = "7021771e-04e2-4105-afa4-9b1546616781";
-				PROVISIONING_PROFILE_SPECIFIER = "7021771e-04e2-4105-afa4-9b1546616781";
+				PROVISIONING_PROFILE = "747cf355-57c7-4d05-ae4a-3c51cc5d7147";
+				PROVISIONING_PROFILE_SPECIFIER = "747cf355-57c7-4d05-ae4a-3c51cc5d7147";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -17041,7 +17045,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "5b73e404-cb1d-4942-92af-c48837a959dd";
+				PROVISIONING_PROFILE_SPECIFIER = "fb23dfaa-fe5e-437d-8680-af383d142dfd";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_VERSION = 4.0;
@@ -17174,8 +17178,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e08aaa4b-10f2-43a0-aff1-9f673534c521";
-				PROVISIONING_PROFILE_SPECIFIER = "0b145cc5-5ce1-4554-aada-7a1342f2e58f";
+				PROVISIONING_PROFILE = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
+				PROVISIONING_PROFILE_SPECIFIER = "077337b0-23a4-4a57-8d84-7b4e2ccbbd8b";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -17310,8 +17314,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5686f420-8fa9-481c-b26d-e55190803751";
-				PROVISIONING_PROFILE_SPECIFIER = "2d292b2c-d757-4771-b7ba-185ec4f6f6a7";
+				PROVISIONING_PROFILE = "8195c797-2345-4b62-bc99-9cda2b33d902";
+				PROVISIONING_PROFILE_SPECIFIER = "8195c797-2345-4b62-bc99-9cda2b33d902";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -17664,8 +17668,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ac34d57b-b255-48a2-8713-09581185070e";
-				PROVISIONING_PROFILE_SPECIFIER = "ac34d57b-b255-48a2-8713-09581185070e";
+				PROVISIONING_PROFILE = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
+				PROVISIONING_PROFILE_SPECIFIER = "21d4297a-f50d-47a2-ab5b-6be0516ea80b";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
