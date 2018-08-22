@@ -190,7 +190,6 @@ extension PhotoVideoController: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoCell else {
             return
         }
-        
         if dataSource.isSelectingMode {
             select(cell: cell, at: indexPath)
         } else {
@@ -200,17 +199,8 @@ extension PhotoVideoController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
        let view = collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
-        
-        let object = dataSource.object(at: indexPath)
-        if let date = object.creationDateValue as Date? {
-            let df = DateFormatter()
-            df.dateStyle = .medium
-            let title = df.string(from: date)
-            view.setText(text: title)
-        } else {
-            view.setText(text: "nil")
-        }
-        
+        let mediaItem = dataSource.object(at: indexPath)
+        view.setup(with: mediaItem)
         return view
     }
 }
