@@ -2645,6 +2645,9 @@
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
 		B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B57FE7FE212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
+		B5A84523212DA315007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84522212DA314007EA795 /* images.xcassets */; };
+		B5A84525212DA326007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84524212DA325007EA795 /* images.xcassets */; };
+		B5A84527212DA339007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84526212DA339007EA795 /* images.xcassets */; };
 		B5BA98762066827900CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
 		B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
 		B5BA98792066830A00CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
@@ -5120,6 +5123,9 @@
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
 		B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityInitializer.swift; sourceTree = "<group>"; };
+		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
+		B5A84524212DA325007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
+		B5A84526212DA339007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+JPEG.swift"; sourceTree = "<group>"; };
 		B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsTableViewCell.swift; sourceTree = "<group>"; };
 		B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncSettingsTableViewCell.xib; sourceTree = "<group>"; };
@@ -9975,6 +9981,7 @@
 		B54BFF32202B20250018AF82 /* autosync-widget */ = {
 			isa = PBXGroup;
 			children = (
+				B5A84524212DA325007EA795 /* images.xcassets */,
 				8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */,
 				8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */,
 				B54BFF48202B45490018AF82 /* autosync-widget.entitlements */,
@@ -10292,6 +10299,7 @@
 		CE1BE931204831CE0074BDDC /* LifeboxFileProviderUI */ = {
 			isa = PBXGroup;
 			children = (
+				B5A84526212DA339007EA795 /* images.xcassets */,
 				CE18CC7E204E858000FA3F44 /* Presentation */,
 				CE125175204E74CE00886F8D /* LifeboxFileProviderUI.entitlements */,
 				7A3E0C0020626B8C00F79A1C /* LifeboxFileProviderUI-appstore.entitlements */,
@@ -10912,6 +10920,7 @@
 		CE58FAF020444493007F3F54 /* LifeboxShared */ = {
 			isa = PBXGroup;
 			children = (
+				B5A84522212DA314007EA795 /* images.xcassets */,
 				CE1458CC2045645000812544 /* Presentation */,
 				CE1458CD2045645F00812544 /* Business */,
 				CE58FAF620444493007F3F54 /* Info.plist */,
@@ -13012,6 +13021,7 @@
 			files = (
 				CE4D27FD207E0479003AE4FB /* TurkcellSaturaBol.ttf in Resources */,
 				CE4D27FF207E0479003AE4FB /* TurkcellSaturaDem.ttf in Resources */,
+				B5A84525212DA326007EA795 /* images.xcassets in Resources */,
 				B54BFF37202B20250018AF82 /* MainInterface.storyboard in Resources */,
 				8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */,
 				8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */,
@@ -13041,6 +13051,7 @@
 			files = (
 				7AFAB37D2073AE3200C54C9B /* InfoEnterprise.plist in Resources */,
 				CE18CC7F204E85DC00FA3F44 /* TurkcellSaturaBol.ttf in Resources */,
+				B5A84527212DA339007EA795 /* images.xcassets in Resources */,
 				CE18CC80204E85DC00FA3F44 /* TurkcellSaturaBolIta.ttf in Resources */,
 				CE4D27F3207E00D4003AE4FB /* OurLocalizable.strings in Resources */,
 				CE18CC81204E85DC00FA3F44 /* TurkcellSaturaDem.ttf in Resources */,
@@ -13621,6 +13632,7 @@
 			files = (
 				CEBDB1DC20444E50007EE1AE /* TurkcellSaturaBol.ttf in Resources */,
 				CEBDB1DD20444E50007EE1AE /* TurkcellSaturaBolIta.ttf in Resources */,
+				B5A84523212DA315007EA795 /* images.xcassets in Resources */,
 				CEBDB1DE20444E50007EE1AE /* TurkcellSaturaDem.ttf in Resources */,
 				CE4D281D207E23F7003AE4FB /* PasscodeEnterViewController.xib in Resources */,
 				CE4D2813207E0997003AE4FB /* PasscodeViewImp.xib in Resources */,
