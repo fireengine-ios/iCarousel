@@ -21,7 +21,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
 
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
-            collectionView.dataSource = self
+            collectionView.dataSource = dataSource
             collectionView.delegate = self
         }
     }
@@ -33,7 +33,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private let showOnlySyncItemsCheckBox = CheckBoxView.initFromXib()
     
     private var editingTabBar: BottomSelectionTabBarViewController?
-    private var dataSource = PhotoVideoDataSource()
+    private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView)
     
     private lazy var alert: AlertFilesActionsSheetPresenter = {
         let alert = AlertFilesActionsSheetPresenterModuleInitialiser().createModule()
@@ -48,41 +48,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private let photoVideoBottomBarConfig = EditingBarConfig(
         elementsConfig:  [.share, .download, .sync, .addToAlbum, .delete], 
         style: .blackOpaque, tintColor: nil)
-    
-    private lazy var sectionChanges = [() -> Void]()
-    private lazy var objectChanges = [() -> Void]()
-    
-    private lazy var fetchedResultsController: NSFetchedResultsController<MediaItem> = {
-        let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
-        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.creationDateValue), ascending: false)
-        //        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.nameValue), ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor1]
-        
-        if Device.isIpad {
-            fetchRequest.fetchBatchSize = 50
-        } else {
-            fetchRequest.fetchBatchSize = 20
-        }
-        
-        //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
-        let context = CoreDataStack.default.mainContext
-        let frController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: #keyPath(MediaItem.monthValue), cacheName: nil)
-        frController.delegate = self
-        return frController
-    }()
-    
-    private var selectedObjects: [WrapData] {
-        return dataSource.selectedIndexPaths.map { indexPath in
-            let object = fetchedResultsController.object(at: indexPath)
-            return WrapData(mediaItem: object)
-        }
-    }
-    
-    private var fetchedObjects: [WrapData] {
-        return fetchedResultsController.fetchedObjects?.map { object in
-            return WrapData(mediaItem: object)
-        } ?? []
-    }
     
     // MARK: - life cycle
     
@@ -135,7 +100,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func performFetch() {
-        try? fetchedResultsController.performFetch()
+        dataSource.performFetch()
         collectionView.reloadData()
         collectionViewManager.reloadAlbumsSlider()
     }
@@ -185,18 +150,18 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func setupNewBottomBarConfig() {
-        bottomBarPresenter.setupTabBarWith(items: selectedObjects, originalConfig: photoVideoBottomBarConfig)
+        bottomBarPresenter.setupTabBarWith(items: dataSource.selectedObjects, originalConfig: photoVideoBottomBarConfig)
     }
     
     private func showDetail(at indexPath: IndexPath) {
         // TODO: - trackClickOnPhotoOrVideo(isPhoto: false) -
         trackClickOnPhotoOrVideo(isPhoto: true)
         
-        let currentMediaItem = fetchedResultsController.object(at: indexPath)
+        let currentMediaItem = dataSource.object(at: indexPath)
         let currentObject = WrapData(mediaItem: currentMediaItem)
         
         let router = RouterVC()
-        let controller = router.filesDetailViewController(fileObject: currentObject, items: fetchedObjects)
+        let controller = router.filesDetailViewController(fileObject: currentObject, items: dataSource.fetchedObjects)
         let nController = NavigationController(rootViewController: controller)
         router.presentViewController(controller: nController)
     }
@@ -227,20 +192,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
 }
 
-// MARK: - UICollectionViewDataSource
-extension PhotoVideoController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
-    }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeue(cell: PhotoVideoCell.self, for: indexPath)
-    }
-}
-
 // MARK: - PhotoVideoCellDelegate
 extension PhotoVideoController: PhotoVideoCellDelegate {
     func photoVideoCellOnLongPressBegan(at indexPath: IndexPath) {
@@ -258,7 +209,7 @@ extension PhotoVideoController: UICollectionViewDelegate {
         cell.delegate = self
         cell.indexPath = indexPath
         
-        let object = fetchedResultsController.object(at: indexPath)
+        let object = dataSource.object(at: indexPath)
         let wraped = WrapData(mediaItem: object)
         cell.setup(with: wraped)
         
@@ -281,7 +232,7 @@ extension PhotoVideoController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
        let view = collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
         
-        let object = fetchedResultsController.object(at: indexPath)
+        let object = dataSource.object(at: indexPath)
         if let date = object.creationDateValue as Date? {
             let df = DateFormatter()
             df.dateStyle = .medium
@@ -308,84 +259,6 @@ extension PhotoVideoController: UICollectionViewDelegateFlowLayout {
     //    }
 }
 
-// MARK: - NSFetchedResultsControllerDelegate
-/// https://github.com/jessesquires/JSQDataSourcesKit/blob/develop/Source/FetchedResultsDelegate.swift
-/// https://gist.github.com/nor0x/c48463e429ba7b053fff6e277c72f8ec
-extension PhotoVideoController: NSFetchedResultsControllerDelegate {
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        sectionChanges.removeAll()
-        objectChanges.removeAll()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        
-        let section = IndexSet(integer: sectionIndex)
-        
-        sectionChanges.append { [unowned self] in
-            switch type {
-            case .insert:
-                self.collectionView.insertSections(section)
-            case .delete:
-                self.collectionView.deleteSections(section)
-            default:
-                break
-            }
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
-        switch type {
-        case .insert:
-            if let indexPath = newIndexPath {
-                self.objectChanges.append { [unowned self] in
-                    self.collectionView.insertItems(at: [indexPath])
-                }
-            }
-        case .delete:
-            if let indexPath = indexPath {
-                self.objectChanges.append { [unowned self] in
-                    self.collectionView.deleteItems(at: [indexPath])
-                }
-            }
-        case .update:
-            if let indexPath = indexPath {
-                self.objectChanges.append { [unowned self] in
-                    self.collectionView.reloadItems(at: [indexPath])
-                }
-            }
-        case .move:
-            if let indexPath = indexPath, let newIndexPath = newIndexPath {
-                self.objectChanges.append { [unowned self] in
-                    self.collectionView.moveItem(at: indexPath, to: newIndexPath)
-                }
-            }
-        }
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        collectionView.performBatchUpdates({ [weak self] in  
-            self?.objectChanges.forEach { $0() }
-            ///check: self?.sectionChanges.forEach { $0() }
-        }, completion: { [weak self] _ in
-            
-            self?.collectionView.performBatchUpdates({
-                self?.sectionChanges.forEach { $0() }
-            }, completion: { _ in 
-                self?.reloadSupplementaryViewsIfNeeded()
-            })
-        })
-    }
-    
-    private func reloadSupplementaryViewsIfNeeded() {
-        if !sectionChanges.isEmpty {
-            collectionView.reloadData()
-        }
-    }
-
-}
-
 //extension PhotoVideoController: SegmentedControllerDelegate {
 //}
 
@@ -393,7 +266,7 @@ extension PhotoVideoController: NSFetchedResultsControllerDelegate {
 extension PhotoVideoController: BaseItemInputPassingProtocol {
     
     var selectedItems: [BaseDataSourceItem] {
-        return selectedObjects
+        return dataSource.selectedObjects
     }
     
     func stopModeSelected() {
@@ -423,7 +296,7 @@ extension PhotoVideoController: PhotoVideoNavBarManagerDelegate {
     // TODO: optmize
     func onThreeDotsButton() {
         if dataSource.isSelectingMode {
-            let items = selectedObjects
+            let items = dataSource.selectedObjects
             ThreeDotMenuManager.actionsForImageItems(items) { [weak self] types in
                 // TODO: - check on iPad without sender -
                 self?.alert.show(with: types, for: items, presentedBy: nil, onSourceView: nil, viewController: self)
