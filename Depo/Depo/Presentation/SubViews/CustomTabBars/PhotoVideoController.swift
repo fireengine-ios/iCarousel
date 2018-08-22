@@ -304,14 +304,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         showSearchScreen(output: self)
     }
     
-    private func showSearchScreen(output: UIViewController?) {
-        let router = RouterVC()
-        let controller = router.searchView(output: output as? SearchModuleOutput)
-        output?.navigationController?.delegate = controller as? BaseViewController
-        controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
-        router.pushViewController(viewController: controller)
-    }
-    
     // MARK: - Editing Mode
     
     private func startEditingMode(at indexPath: IndexPath?) {
@@ -389,11 +381,19 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: isPhoto ? .clickPhoto : .clickVideo)
     }
     
-    func updateRefresher() {
+    private func updateRefresher() {
         guard let refresherView = refresher.subviews.first else {
             return
         }
         refresherView.center = CGPoint(x: refresherView.center.x, y: refresherY)
+    }
+    
+    private func showSearchScreen(output: UIViewController?) {
+        let router = RouterVC()
+        let controller = router.searchView(output: output as? SearchModuleOutput)
+        output?.navigationController?.delegate = controller as? BaseViewController
+        controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
+        router.pushViewController(viewController: controller)
     }
 }
 
