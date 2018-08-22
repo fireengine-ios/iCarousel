@@ -87,8 +87,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         //        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.nameValue), ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor1]
         
-        // TODO: device isIpad
-        if UI_USER_INTERFACE_IDIOM() == .pad {
+        if Device.isIpad {
             fetchRequest.fetchBatchSize = 50
         } else {
             fetchRequest.fetchBatchSize = 20
