@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol PhotoVideoCollectionViewManagerDelegate: class {
+    func refreshData(refresher: UIRefreshControl)
+    func showOnlySyncItemsCheckBoxDidChangeValue(_ value: Bool)
+}
+
 final class PhotoVideoCollectionViewManager {
     
     private weak var contentSliderTopY: NSLayoutConstraint?
@@ -28,10 +33,11 @@ final class PhotoVideoCollectionViewManager {
     private let showOnlySyncItemsCheckBox = CheckBoxView.initFromXib()
     
     private weak var collectionView: UICollectionView!
+    private weak var delegate: PhotoVideoCollectionViewManagerDelegate?
     
-    
-    init(collectionView: UICollectionView) {
+    init(collectionView: UICollectionView, delegate: PhotoVideoCollectionViewManagerDelegate) {
         self.collectionView = collectionView
+        self.delegate = delegate
     }
     
     deinit {
@@ -46,6 +52,7 @@ final class PhotoVideoCollectionViewManager {
     }
     
     @objc private func refreshData() {
+        delegate?.refreshData(refresher: refresher)
         //        performFetch()
         refresher.endRefreshing()
     }
@@ -204,21 +211,6 @@ extension PhotoVideoCollectionViewManager: ViewForPopUpDelegate {
 // MARK: - CheckBoxViewDelegate checkBox.delegate
 extension PhotoVideoCollectionViewManager: CheckBoxViewDelegate {
     func checkBoxViewDidChangeValue(_ value: Bool) {
-        //        if value {
-        //            filtersByDefault = filters
-        //            filters = filters.filter { type -> Bool in
-        //                switch type {
-        //                case .localStatus(_):
-        //                    return false
-        //                default:
-        //                    return true
-        //                }
-        //            }
-        //            filters.append(.localStatus(.nonLocal))            
-        //        } else {
-        //            filters = filtersByDefault
-        //        }
-        //        dataSource.originalFilters = filters
-        //        reloadData()
+        delegate?.showOnlySyncItemsCheckBoxDidChangeValue(value)
     }
 }

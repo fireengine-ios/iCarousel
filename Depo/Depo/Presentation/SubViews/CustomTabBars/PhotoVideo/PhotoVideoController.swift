@@ -27,12 +27,11 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private lazy var navBarManager = PhotoVideoNavBarManager(delegate: self)
-    private lazy var collectionViewManager = PhotoVideoCollectionViewManager(collectionView: self.collectionView)
+    private lazy var collectionViewManager = PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
     private lazy var threeDotMenuManager = PhotoVideoThreeDotMenuManager(delegate: self)
     private lazy var bottomBarManager = PhotoVideoBottomBarManager(delegate: self)
     private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView)
-    
-    private let analyticsManager: AnalyticsService = factory.resolve()
+    private lazy var analyticsManager: AnalyticsService = factory.resolve()
     
     // MARK: - life cycle
     
@@ -270,5 +269,33 @@ extension PhotoVideoController: PhotoVideoNavBarManagerDelegate {
     
     func onSearchButton() {
         showSearchScreen(output: self)
+    }
+}
+
+// MARK: - PhotoVideoCollectionViewManagerDelegate
+/// using: PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
+extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
+    func refreshData(refresher: UIRefreshControl) {
+        performFetch()
+        refresher.endRefreshing()
+    }
+    
+    func showOnlySyncItemsCheckBoxDidChangeValue(_ value: Bool) {
+        //        if value {
+        //            filtersByDefault = filters
+        //            filters = filters.filter { type -> Bool in
+        //                switch type {
+        //                case .localStatus(_):
+        //                    return false
+        //                default:
+        //                    return true
+        //                }
+        //            }
+        //            filters.append(.localStatus(.nonLocal))            
+        //        } else {
+        //            filters = filtersByDefault
+        //        }
+        //        dataSource.originalFilters = filters
+        //        reloadData()
     }
 }
