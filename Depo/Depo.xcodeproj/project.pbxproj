@@ -3205,6 +3205,10 @@
 		CE95ED581F516736002F923A /* HelpAndSupportViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED471F516736002F923A /* HelpAndSupportViewInput.swift */; };
 		CE95ED591F516736002F923A /* HelpAndSupportViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95ED481F516736002F923A /* HelpAndSupportViewOutput.swift */; };
 		CE966CDC212D7AAC00901295 /* PhotoVideoNavBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CDB212D7AAC00901295 /* PhotoVideoNavBarManager.swift */; };
+		CE966CDE212D7EE900901295 /* PhotoVideoCollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CDD212D7EE900901295 /* PhotoVideoCollectionViewManager.swift */; };
+		CE966CDF212D7F2700901295 /* ThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F7212B00E000F605CF /* ThreeDotMenuManager.swift */; };
+		CE966CE0212D7F2B00901295 /* PhotoVideoCollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CDD212D7EE900901295 /* PhotoVideoCollectionViewManager.swift */; };
+		CE966CE1212D7F2E00901295 /* PhotoVideoNavBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CDB212D7AAC00901295 /* PhotoVideoNavBarManager.swift */; };
 		CE98F6D9204E6BD800433915 /* UIImageView+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6D8204E6BD800433915 /* UIImageView+Scale.swift */; };
 		CE98F6DB204E71E300433915 /* String+UTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6DA204E71E300433915 /* String+UTType.swift */; };
 		CE98F6DD204E721200433915 /* FilesExistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE98F6DC204E721200433915 /* FilesExistManager.swift */; };
@@ -5404,6 +5408,7 @@
 		CE95ED471F516736002F923A /* HelpAndSupportViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportViewInput.swift; sourceTree = "<group>"; };
 		CE95ED481F516736002F923A /* HelpAndSupportViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAndSupportViewOutput.swift; sourceTree = "<group>"; };
 		CE966CDB212D7AAC00901295 /* PhotoVideoNavBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoNavBarManager.swift; sourceTree = "<group>"; };
+		CE966CDD212D7EE900901295 /* PhotoVideoCollectionViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoCollectionViewManager.swift; sourceTree = "<group>"; };
 		CE98F6D8204E6BD800433915 /* UIImageView+Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Scale.swift"; sourceTree = "<group>"; };
 		CE98F6DA204E71E300433915 /* String+UTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UTType.swift"; sourceTree = "<group>"; };
 		CE98F6DC204E721200433915 /* FilesExistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesExistManager.swift; sourceTree = "<group>"; };
@@ -11347,6 +11352,7 @@
 				CEF6906C212565EA0013075F /* SegmentedController.xib */,
 				CEF6909921258D8F0013075F /* PhotoVideoController.swift */,
 				CE966CDB212D7AAC00901295 /* PhotoVideoNavBarManager.swift */,
+				CE966CDD212D7EE900901295 /* PhotoVideoCollectionViewManager.swift */,
 				CEF6909A21258D8F0013075F /* PhotoVideoController.xib */,
 				CEEDC6F7212B00E000F605CF /* ThreeDotMenuManager.swift */,
 				CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */,
@@ -14402,6 +14408,7 @@
 				8C0E8DA71FDEBDFF00789C91 /* RegistrationViewInput.swift in Sources */,
 				CE3E4D0F201B699F00173045 /* ImageScrollView.swift in Sources */,
 				98A867782080DCBC00D2D4F4 /* ArrayExtension.swift in Sources */,
+				CE966CE1212D7F2E00901295 /* PhotoVideoNavBarManager.swift in Sources */,
 				8C0E8DA81FDEBDFF00789C91 /* RegistrationViewOutput.swift in Sources */,
 				8C0332982115F42D00E75EBC /* AnalyticsDementsonObject.swift in Sources */,
 				8C0E8DA91FDEBDFF00789C91 /* RegistrationViewController.swift in Sources */,
@@ -14684,6 +14691,7 @@
 				8C0E8EB41FDEBDFF00789C91 /* CreateStoryPhotosOrderViewOutput.swift in Sources */,
 				CEF371AD20887BC3007AD36E /* MD5.swift in Sources */,
 				8C0E8EB51FDEBDFF00789C91 /* KeyboardHideManager.swift in Sources */,
+				CE966CE0212D7F2B00901295 /* PhotoVideoCollectionViewManager.swift in Sources */,
 				8C0E8EB61FDEBDFF00789C91 /* BaseFilesGreedPresenter.swift in Sources */,
 				8C0E8EB71FDEBDFF00789C91 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				8C0E8EB81FDEBDFF00789C91 /* BaseFilesGreedInteractorOutput.swift in Sources */,
@@ -14952,6 +14960,7 @@
 				8C0E8F751FDEBDFF00789C91 /* AccountParameters.swift in Sources */,
 				7C379F40202C364F0050C055 /* CardActionType.swift in Sources */,
 				8C0E8F761FDEBDFF00789C91 /* PrintViewOutput.swift in Sources */,
+				CE966CDF212D7F2700901295 /* ThreeDotMenuManager.swift in Sources */,
 				8C0E8F771FDEBDFF00789C91 /* PackagesViewInput.swift in Sources */,
 				8C0E8F781FDEBDFF00789C91 /* SelectNameViewOutput.swift in Sources */,
 				B53DCE8D20EF634900400DBA /* ContactSyncSDK.m in Sources */,
@@ -16173,6 +16182,7 @@
 				7C00FE1C1F5958380041D041 /* SingletonStorage.swift in Sources */,
 				CE95ED591F516736002F923A /* HelpAndSupportViewOutput.swift in Sources */,
 				98C878232074B78A00374177 /* ViewController.swift in Sources */,
+				CE966CDE212D7EE900901295 /* PhotoVideoCollectionViewManager.swift in Sources */,
 				C7055CAC94DC0C09FAC5F608 /* AlbumDetailPresenter.swift in Sources */,
 				CE2F56321F7554A300F49DA1 /* OfferServiceResponse.swift in Sources */,
 				CECD4E541FE1150B00978BE7 /* UIButton+Color.swift in Sources */,
