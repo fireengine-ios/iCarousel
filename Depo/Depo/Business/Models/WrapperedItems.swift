@@ -833,7 +833,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     init(mediaItem: MediaItem, asset: PHAsset? = nil) {
-//        coreDataObject = mediaItem
+        coreDataObject = mediaItem
         fileSize = mediaItem.fileSizeValue
         favorites = mediaItem.favoritesValue
         status = .unknown

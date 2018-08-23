@@ -36,12 +36,6 @@
                             <constraint firstAttribute="height" constant="14" id="ef2-ST-o1D"/>
                         </constraints>
                     </imageView>
-                    <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3QP-J6-7Bi">
-                        <rect key="frame" x="2" y="160" width="182" height="2"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="2" id="DiB-MH-3al"/>
-                        </constraints>
-                    </progressView>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favoriteStar" translatesAutoresizingMaskIntoConstraints="NO" id="2HJ-NZ-h8K">
                         <rect key="frame" x="4" y="4" width="13" height="12"/>
                         <constraints>
@@ -57,6 +51,12 @@
                         </view>
                         <blurEffect style="light"/>
                     </visualEffectView>
+                    <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3QP-J6-7Bi">
+                        <rect key="frame" x="2" y="160" width="182" height="2"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="DiB-MH-3al"/>
+                        </constraints>
+                    </progressView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rtp-Ce-5Aw">
                         <rect key="frame" x="0.0" y="0.0" width="186" height="165"/>
                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>

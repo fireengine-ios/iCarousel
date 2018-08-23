@@ -70,6 +70,10 @@ final class PhotoVideoDataSource: NSObject {
         return fetchedResultsController.object(at: indexPath)
     }
     
+    func indexPath(forObject object: MediaItem) -> IndexPath? {
+        return fetchedResultsController.indexPath(forObject: object)
+    }
+    
     func performFetch() {
         try? fetchedResultsController.performFetch()
     }
@@ -87,6 +91,10 @@ extension PhotoVideoDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeue(cell: PhotoVideoCell.self, for: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        return collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
     }
 }
 

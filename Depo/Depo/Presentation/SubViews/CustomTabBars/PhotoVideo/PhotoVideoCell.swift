@@ -149,4 +149,8 @@ final class PhotoVideoCell: UICollectionViewCell {
             self.progressView.isHidden = true
         }
     }
+    
+    func resetCloudImage() {
+        cloudStatusImageView.image = nil
+    }
 }
