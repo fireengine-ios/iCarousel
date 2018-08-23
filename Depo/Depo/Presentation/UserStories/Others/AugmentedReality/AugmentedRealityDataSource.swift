@@ -9,13 +9,39 @@
 import QuickLook
 
 
+protocol AugmentedRealityDataSourceDelegate: class {
+    func didUpdateARItem()
+    func didFailToUpdateARItem(with errorMessage: String?)
+}
+
+
 final class AugmentedRealityDataSource: QLPreviewControllerDataSource {
     
-    private var item: AugmentedRealityItem
+    weak var delegate: AugmentedRealityDataSourceDelegate?
+    
+    private var item: WrapData
+    private var arItem: AugmentedRealityItem
+    private var fileProvider = AugmentedRealityFileProvider()
     
     
-    init(with arItem: AugmentedRealityItem) {
-        item = arItem
+    init(with item: WrapData) {
+        self.item = item
+        arItem = AugmentedRealityItem(with: item.localFileUrl, title: item.name)
+    }
+    
+    
+    func updateARItem() {
+        guard arItem.previewItemURL == nil else {
+            delegate?.didUpdateARItem()
+            return
+        }
+        
+        fileProvider.downloadFile(item: item, success: { [weak self] localUrl in
+            self?.arItem.previewItemURL = localUrl
+            self?.delegate?.didUpdateARItem()
+        }, fail: { [weak self] error in
+            self?.delegate?.didFailToUpdateARItem(with: error)
+        })
     }
     
 
@@ -25,7 +51,7 @@ final class AugmentedRealityDataSource: QLPreviewControllerDataSource {
     }
     
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-        return item
+        return arItem
     }
     
 }

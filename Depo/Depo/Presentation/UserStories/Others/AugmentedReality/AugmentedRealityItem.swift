@@ -9,31 +9,15 @@
 import QuickLook
 
 
-final class AugmentedRealityItem: NSObject {
+final class AugmentedRealityItem: NSObject, QLPreviewItem {
+    var previewItemURL: URL?
+    var previewItemTitle: String?
     
-    private var url: URL?
-    private var title: String?
     
-    
-    init(with item: WrapData?) {
+    init(with url: URL?, title: String?) {
         super.init()
         
-        guard let item = item else {
-            return
-        }
-        
-        url = item.localFileUrl
-        title = item.name
-    }
-}
-
-
-extension AugmentedRealityItem: QLPreviewItem {
-    var previewItemURL: URL? {
-        return url
-    }
-    
-    var previewItemTitle: String? {
-        return title
+        previewItemURL = url
+        previewItemTitle = title
     }
 }

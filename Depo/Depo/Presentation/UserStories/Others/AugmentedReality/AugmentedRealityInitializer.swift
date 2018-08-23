@@ -11,15 +11,9 @@ final class AugmentedRealityInitializer {
     
     static func initializeController(with item: WrapData) -> AugmentedRealityController {
         let vc = AugmentedRealityController()
-        
-        configure(controller: vc, with: item)
+        let dataSource = AugmentedRealityDataSource(with: item)
+        vc.source = dataSource
         
         return vc
-    }
-    
-    static func configure(controller: AugmentedRealityController, with item: WrapData) {
-        let arItem = AugmentedRealityItem(with: item)
-        let dataSource = AugmentedRealityDataSource(with: arItem)
-        controller.source = dataSource
     }
 }

@@ -2603,6 +2603,8 @@
 		B5513AF9205BAED70016C344 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
 		B5624791212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
 		B5624792212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
+		B56B97B4212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */; };
+		B56B97B5212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */; };
 		B56BE2B51FE2732F007DC1BC /* ItemSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */; };
 		B56E0DD720B414510082044D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56E0DD620B414510082044D /* StoreKit.framework */; };
 		B56E0DD820B414580082044D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56E0DD620B414510082044D /* StoreKit.framework */; };
@@ -5101,6 +5103,7 @@
 		B54BFF4E202C74090018AF82 /* SharedEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedEnums.swift; sourceTree = "<group>"; };
 		B5513AF8205BAED70016C344 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AugmentedRealityDataSource.swift; sourceTree = "<group>"; };
+		B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityFileProvider.swift; sourceTree = "<group>"; };
 		B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncService.swift; sourceTree = "<group>"; };
 		B56E0DD620B414510082044D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppResponsivenessService.swift; sourceTree = "<group>"; };
@@ -10080,6 +10083,7 @@
 				B5C7C57E211C699F006E94DB /* AugmentedRealityController.swift */,
 				B5C7C581211C6A21006E94DB /* AugmentedRealityItem.swift */,
 				B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */,
+				B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */,
 			);
 			path = AugmentedReality;
 			sourceTree = "<group>";
@@ -14954,6 +14958,7 @@
 				8C0E8F8B1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewController.swift in Sources */,
 				8C0B91A220170E7B00A5BA81 /* ManageContactTableViewCell.swift in Sources */,
 				8C0E8F8C1FDEBDFF00789C91 /* GridListTopBarSortingTableCell.swift in Sources */,
+				B56B97B5212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */,
 				7CD92DC22076027D00010BFA /* iOSDevCenters+GIF.swift in Sources */,
 				8C0E8F8D1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */,
 				8C0E8F8E1FDEBDFF00789C91 /* DropboxStatusValue.swift in Sources */,
@@ -15542,6 +15547,7 @@
 				7C6E2F9E1F31E7C000536DB6 /* CreateStoryAudioSelectionPresenter.swift in Sources */,
 				CEDFECBB1F11F86B003D1A75 /* SearchServiceResponse.swift in Sources */,
 				B56FBB3D2122C9B9004F4A59 /* TermsOfUseViewOutput.swift in Sources */,
+				B56B97B4212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */,
 				984F8E7D200CDEA200D9D595 /* StoriesInteractor.swift in Sources */,
 				CE51ACC71EF90853005DCEE0 /* RegistrationModuleInput.swift in Sources */,
 				CE51ACC81EF90853005DCEE0 /* RegistrationPresenter.swift in Sources */,

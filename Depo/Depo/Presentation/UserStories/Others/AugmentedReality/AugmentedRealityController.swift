@@ -11,13 +11,40 @@ import QuickLook
 
 final class AugmentedRealityController: QLPreviewController {
     
-    var source: AugmentedRealityDataSource!
+    var source: AugmentedRealityDataSource?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupSource()
+        udpateARItem()
+    }
+    
+    
+    private func setupSource() {
+        source?.delegate = self
         dataSource = source
+    }
+    
+    private func udpateARItem() {
+        showSpinerWithCancelClosure {
+            self.dismiss(animated: true, completion: nil)
+        }
+        source?.updateARItem()
     }
 }
 
+
+extension AugmentedRealityController: AugmentedRealityDataSourceDelegate {
+    func didUpdateARItem() {
+        hideSpinerIncludeNavigatinBar()
+        DispatchQueue.toMain {
+            self.reloadData()
+        }
+    }
+    
+    func didFailToUpdateARItem(with errorMessage: String?) {
+        hideSpinerIncludeNavigatinBar()
+    }
+}
