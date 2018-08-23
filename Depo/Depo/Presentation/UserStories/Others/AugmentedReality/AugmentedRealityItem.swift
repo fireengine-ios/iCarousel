@@ -12,6 +12,7 @@ import QuickLook
 final class AugmentedRealityItem: NSObject {
     
     private var url: URL?
+    private var title: String?
     
     
     init(with item: WrapData?) {
@@ -22,6 +23,7 @@ final class AugmentedRealityItem: NSObject {
         }
         
         url = item.localFileUrl
+        title = item.name
     }
 }
 
@@ -29,5 +31,9 @@ final class AugmentedRealityItem: NSObject {
 extension AugmentedRealityItem: QLPreviewItem {
     var previewItemURL: URL? {
         return url
+    }
+    
+    var previewItemTitle: String? {
+        return title
     }
 }
