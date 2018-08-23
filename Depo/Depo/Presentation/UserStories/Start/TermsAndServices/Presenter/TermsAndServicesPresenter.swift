@@ -14,12 +14,17 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     weak var delegate: RegistrationViewDelegate?
     private var confirmAgreements = false
-
+    private lazy var storageVars: StorageVars = factory.resolve()
+    
     // MARK: IN
     func viewIsReady() {
         interactor.trackScreen()
+        if interactor.cameFromLogin {
+            view.hideBackButton()
+        }
         startAsyncOperationDisableScreen()
         interactor.loadTermsAndUses()
+        
     }
     
     func startUsing() {
@@ -77,7 +82,11 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         MenloworksEventsService.shared.onApporveEulaPageClicked()
          completeAsyncOperationEnableScreen()
         //theoreticaly we should add coredata update/append here also
-        router.goToAutoSync()
+        if interactor.cameFromLogin, storageVars.autoSyncSet {
+            router.goToHomePage()
+        } else {
+            router.goToAutoSync()
+        }
     }
     
     func applyEulaFaild(errorResponce: ErrorResponse) {

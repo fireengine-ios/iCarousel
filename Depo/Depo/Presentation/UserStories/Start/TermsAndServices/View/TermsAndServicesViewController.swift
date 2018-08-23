@@ -136,6 +136,10 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         webView.loadHTMLString(eula, baseURL: nil)
     }
     
+    func hideBackButton() {
+        navigationItem.setHidesBackButton(true, animated: false)
+    }
+    
     func noConfirmAgreements(errorString: String) {
         UIApplication.showErrorAlert(message: errorString)
     }
