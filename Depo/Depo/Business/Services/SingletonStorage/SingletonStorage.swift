@@ -47,6 +47,10 @@ class SingletonStorage {
         }
     }
     
+    var isTurkcellUser: Bool {
+        return accountInfo?.accountType == "TURKCELL"
+    }
+    
     var uniqueUserID: String {
         return accountInfo?.projectID ?? ""
     }

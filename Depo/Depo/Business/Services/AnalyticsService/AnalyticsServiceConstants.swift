@@ -395,7 +395,7 @@ enum GAEventAction {
         case .logout:
             return "Logout"
         case .register:
-            return "Register"
+            return "MSISDN"//FE-55 "Register"
         case .removefavorites:
             return "remove favorites"
         case .favoriteLike(let status):
@@ -425,7 +425,7 @@ enum GAEventAction {
         case .phonebook:
             return "Phonebook"
         case .photoEdit:
-            return "Photo Edit"
+            return "Photo Rename"
         case .importFrom:
             return "Import"
         case .print:
@@ -633,7 +633,7 @@ enum GAEventLabel {
             return storyEvent.text
         //
         case .faceRecognition(let isOn):
-            return "\(isOn)"
+            return isOn ? "True" : "False"
         //
         case .profilePhotoClick:
             return "Click"
@@ -680,6 +680,7 @@ enum GADementionsFields {
     case operatorSystem ///Carrier Name should be sent for every page click.
     case faceImageStatus
     case userPackage
+    case gsmOperatorType
     
     var text: String {
         switch self {
@@ -709,6 +710,8 @@ enum GADementionsFields {
             return "facialRecognition"
         case .userPackage:
             return "userPackage"
+        case .gsmOperatorType:
+            return "gsmOperatorType"
         }
     }
     

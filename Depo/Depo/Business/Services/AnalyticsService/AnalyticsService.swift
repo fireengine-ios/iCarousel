@@ -129,10 +129,13 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
 extension AnalyticsService: AnalyticsGA {
     
     func logScreen(screen: AnalyticsAppScreens) {
-        Analytics.logEvent("screenView", parameters: [
-            "screenName": screen.name,
-            "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
-            ])
+        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+            let logScreenParametrs: [String: Any] = [
+                "screenName": screen.name,
+                "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
+            ]
+            Analytics.logEvent("screenView", parameters: logScreenParametrs + dimentionParametrs)
+        }
     }
     
     func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int? = nil,
@@ -142,15 +145,15 @@ extension AnalyticsService: AnalyticsGA {
         }
     }
     
-    private func prepareDimentionsParametrs(screen: AnalyticsAppScreens,
+    private func prepareDimentionsParametrs(screen: AnalyticsAppScreens?,
                                             downloadsMetrics: Int? = nil,
                                             uploadsMetrics: Int? = nil,
                                             isPaymentMethodNative: Bool? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
+        
         let loginStatus = SingletonStorage.shared.referenceToken != nil
         let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
         var payment: String?
-        
         if let unwrapedisNativePayment = isPaymentMethodNative {
             payment = "\(unwrapedisNativePayment)"
         }
@@ -165,6 +168,7 @@ extension AnalyticsService: AnalyticsGA {
         }, fail: { error in
             group.leave()
         })
+        
         group.enter()
         var activeSubscriptionNames = [String]()
         SingletonStorage.shared.getActiveSubscriptionsList(success: { response in
@@ -175,17 +179,20 @@ extension AnalyticsService: AnalyticsGA {
         }, fail: { errorResponse in
             group.leave()
         })
-
+        
+        let screenName: Any = screen?.name ?? NSNull()
+        
         group.notify(queue: privateQueue) { 
-            parametrsCallback(AnalyticsDementsonObject(screenName: screen.name, pageType: screen, sourceType: screen.name, loginStatus: "\(loginStatus)",
+            parametrsCallback(AnalyticsDementsonObject(screenName: screenName, pageType: screenName, sourceType: screenName, loginStatus: "\(loginStatus)",
                 platform: "iOS", isWifi: ReachabilityService().isReachableViaWiFi,
-                service: "lifebox", developmentVersion: version,
+                service: "Lifebox", developmentVersion: version,
                 paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
                 operatorSystem: CoreTelephonyService().carrierName ?? NSNull(),
                 facialRecognition: facialRecognitionStatus,
                 userPackagesNames: activeSubscriptionNames,
                 countOfUploadMetric: uploadsMetrics,
-                countOfDownloadMetric: downloadsMetrics).productParametrs)
+                countOfDownloadMetric: downloadsMetrics,
+                gsmOperatorType: SingletonStorage.shared.accountInfo?.accountType ?? "").productParametrs)
         }
     }
     
@@ -202,7 +209,10 @@ extension AnalyticsService: AnalyticsGA {
         let ecommerce = AnalyticsEcommerce(items: [product], itemList: analyticasItemList,
                                            transactionID: "", tax: "0",
                                            priceValue: price, shipping: "0")
-        Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs)
+        
+        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+            Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
+        }
     }
     
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int) {
@@ -213,21 +223,28 @@ extension AnalyticsService: AnalyticsGA {
         let ecommerce = AnalyticsEcommerce(items: [product], itemList: analyticasItemList,
                                            transactionID: "", tax: "0",
                                            priceValue: price, shipping: "0")
-        Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs)
+        
+        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+            Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
+        }
     }
     
     func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, eventValue: String? = nil ) {
         let eventTempoValue = eventValue ?? ""
-        ///might be needed in the future
+///       might be needed in the future
 //        if let unwrapedEventValue = eventValue {
 //            eventTempoValue = "\(unwrapedEventValue)"
 //        }
-        Analytics.logEvent("GAEvent", parameters: [
-            "eventCategory" : eventCategory.text,
-            "eventAction" : eventActions.text,
-            "eventLabel" : eventLabel.text,
-            "eventValue" : eventTempoValue
-            ])
+        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+            let parametrs: [String: Any] = [
+                "eventCategory" : eventCategory.text,
+                "eventAction" : eventActions.text,
+                "eventLabel" : eventLabel.text,
+                "eventValue" : eventTempoValue
+            ]
+            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+        }
+       
     }
     
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int) {
@@ -244,10 +261,14 @@ extension AnalyticsService: AnalyticsGA {
         let product =  AnalyticsPackageProductObject(itemName: package.name, itemID: itemID, price: package.priceString, itemBrand: "Lifebox", itemCategory: "Storage", itemVariant: "", index: "\(packageIndex)", quantity: "1")
         let ecommerce: [String : Any] = ["items" : [product.productParametrs],
                                          AnalyticsParameterItemList : analyticasItemList]
-        Analytics.logEvent(AnalyticsEventSelectContent, parameters: ecommerce)
+        
+        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: ecommerce + dimentionParametrs)
+        } 
     }
     
-    func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, timeInterval: Float = 1.0) {
+    func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, timeInterval: Float = 60.0) {
+        ///every minute by default
         if innerTimer != nil {
             stopTimelyTracking()
         }
