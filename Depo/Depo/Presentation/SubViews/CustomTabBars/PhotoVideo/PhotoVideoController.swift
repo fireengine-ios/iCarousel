@@ -329,26 +329,6 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         }
     }
     
-    func getCellForLocalFile(objectTrimmedLocalID: String, completion: @escaping  (_ cell: PhotoVideoCell?)->Void) {
-            guard let path = self.getIndexPathForLocalObject(objectTrimmedLocalID: objectTrimmedLocalID) else {
-                completion(nil)
-                return
-            }
-            completion(self.collectionView?.cellForItem(at: path) as? PhotoVideoCell)
-    }
-    
-    func getIndexPathForLocalObject(objectTrimmedLocalID: String) -> IndexPath? {
-        let findedObject = dataSource.fetchedObjects.first { object in
-            return object.getTrimmedLocalID() == objectTrimmedLocalID && object.isLocalItem
-        }
-        guard let mediaItem = findedObject?.coreDataObject else {
-            return nil
-        }
-        return dataSource.indexPath(forObject: mediaItem)
-    }
-    
-    //------
-    
     func startUploadFile(file: WrapData) {
         let progress: Float = 0
         let id = file.getTrimmedLocalID()
@@ -421,18 +401,14 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
 //        }
     }
     
-    func getCellForFile(objectUUID: String) -> PhotoVideoCell? {
-        guard
-            let path = getIndexPathForObject(itemUUID: objectUUID),
+    private func getCellForFile(objectUUID: String) -> PhotoVideoCell? {
+        guard let path = getIndexPathForObject(itemUUID: objectUUID),
             let cell = collectionView?.cellForItem(at: path) as? PhotoVideoCell
-        else {
-            return nil
-        }
+            else { return nil }
         return cell
     }
     
-    func getIndexPathForObject(itemUUID: String) -> IndexPath? {
-        
+    private func getIndexPathForObject(itemUUID: String) -> IndexPath? {
         let findedObject = dataSource.fetchedObjects.first { object in
             return object.getTrimmedLocalID() == itemUUID
         }
@@ -442,4 +418,21 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         return dataSource.indexPath(forObject: mediaItem)
     }
     
+    private func getCellForLocalFile(objectTrimmedLocalID: String, completion: @escaping  (_ cell: PhotoVideoCell?)->Void) {
+        guard let path = self.getIndexPathForLocalObject(objectTrimmedLocalID: objectTrimmedLocalID) else {
+            completion(nil)
+            return
+        }
+        completion(self.collectionView?.cellForItem(at: path) as? PhotoVideoCell)
+    }
+    
+    private func getIndexPathForLocalObject(objectTrimmedLocalID: String) -> IndexPath? {
+        let findedObject = dataSource.fetchedObjects.first { object in
+            return object.getTrimmedLocalID() == objectTrimmedLocalID && object.isLocalItem
+        }
+        guard let mediaItem = findedObject?.coreDataObject else {
+            return nil
+        }
+        return dataSource.indexPath(forObject: mediaItem)
+    }
 }
