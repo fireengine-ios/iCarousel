@@ -203,6 +203,8 @@ extension PhotoVideoController: UICollectionViewDelegate {
         
         if uploadedObjectID.index(of: wraped.uuid) != nil {
             cell.finishedUploadForObject()
+        } else {
+            cell.resetCloudImage()
         }
     }
     
@@ -346,6 +348,15 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
     
     //------
+    
+    func startUploadFile(file: WrapData) {
+        DispatchQueue.toMain {
+            self.getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) { cell in
+                cell?.setProgressForObject(progress: 0, blurOn: true)
+            }
+        }
+        
+    }
     
     func finishedUploadFile(file: WrapData){
 //        dispatchQueue.async { [weak self] in
