@@ -102,8 +102,8 @@ class SingletonStorage {
         }, fail: fail)
     }
     
-    var isFaceImageRecognitionON : Any {//Bool {
-            return faceImageSettings?.allowed ?? NSNull()
+    var isFaceImageRecognitionON : Any {
+        return faceImageSettings?.allowed ?? NSNull()
     }
     
     //MARK: - subscriptions

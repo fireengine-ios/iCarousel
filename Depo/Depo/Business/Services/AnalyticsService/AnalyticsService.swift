@@ -137,30 +137,9 @@ extension AnalyticsService: AnalyticsGA {
     
     func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int? = nil,
                                      uploadsMetrics: Int? = nil, isPaymentMethodNative: Bool? = nil) {
-//        let loginStatus = SingletonStorage.shared.referenceToken != nil
-//        let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
-//        var payment: String?
-//        
-//        if let unwrapedisNativePayment = isPaymentMethodNative {
-//            payment = "\(unwrapedisNativePayment)"
-//        }
-//        
-//        let activeSubscriptionNames = SingletonStorage.shared.activeUserSubscriptionList.map {
-//            return ($0.subscriptionPlanName ?? "") + "|"
-//        }
-//        
         prepareDimentionsParametrs(screen: screen, downloadsMetrics: downloadsMetrics, uploadsMetrics: uploadsMetrics, isPaymentMethodNative: isPaymentMethodNative) { parametrs in
             Analytics.logEvent("screenView", parameters: parametrs)
         }
-//        let parametrs = AnalyticsDementsonObject(screenName: screen.name, pageType: screen, sourceType: screen.name, loginStatus: "\(loginStatus)",
-//            platform: "iOS", isWifi: ReachabilityService().isReachableViaWiFi,
-//            service: "lifebox", developmentVersion: version,
-//            paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
-//            operatorSystem: CoreTelephonyService().carrierName ?? NSNull(), facialRecognition: SingletonStorage.shared.isFaceImageRecognitionON,
-//            userPackagesNames: activeSubscriptionNames, countOfUploadMetric: uploadsMetrics,
-//            countOfDownloadMetric: downloadsMetrics).productParametrs
-        
-//        Analytics.logEvent("screenView", parameters: parametrs)
     }
     
     private func prepareDimentionsParametrs(screen: AnalyticsAppScreens,
@@ -179,15 +158,23 @@ extension AnalyticsService: AnalyticsGA {
         let group = DispatchGroup()
 
         group.enter()
-        let facialRecognitionStatus = SingletonStorage.shared.getFaceImageSettingsStatus(success: { isFIROn in
+        var facialRecognitionStatus: Any = NSNull()
+        SingletonStorage.shared.getFaceImageSettingsStatus(success: { isFIROn in
+            facialRecognitionStatus = isFIROn
             group.leave()
         }, fail: { error in
             group.leave()
-        }) //isFaceImageRecognitionON
+        })
         group.enter()
-        let activeSubscriptionNames = SingletonStorage.shared.activeUserSubscriptionList.map {
-            return ($0.subscriptionPlanName ?? "") + "|"
-        }
+        var activeSubscriptionNames = [String]()
+        SingletonStorage.shared.getActiveSubscriptionsList(success: { response in
+            activeSubscriptionNames = SingletonStorage.shared.activeUserSubscriptionList.map {
+                return ($0.subscriptionPlanName ?? "") + "|"
+            }
+            group.leave()
+        }, fail: { errorResponse in
+            group.leave()
+        })
 
         group.notify(queue: privateQueue) { 
             parametrsCallback(AnalyticsDementsonObject(screenName: screen.name, pageType: screen, sourceType: screen.name, loginStatus: "\(loginStatus)",
@@ -196,7 +183,8 @@ extension AnalyticsService: AnalyticsGA {
                 paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
                 operatorSystem: CoreTelephonyService().carrierName ?? NSNull(),
                 facialRecognition: facialRecognitionStatus,
-                userPackagesNames: activeSubscriptionNames, countOfUploadMetric: uploadsMetrics,
+                userPackagesNames: activeSubscriptionNames,
+                countOfUploadMetric: uploadsMetrics,
                 countOfDownloadMetric: downloadsMetrics).productParametrs)
         }
     }
