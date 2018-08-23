@@ -350,9 +350,12 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     //------
     
     func startUploadFile(file: WrapData) {
+        let progress: Float = 0
+        let id = file.getTrimmedLocalID()
+        uploadProgress[id] = progress
         DispatchQueue.toMain {
             self.getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) { cell in
-                cell?.setProgressForObject(progress: 0, blurOn: true)
+                cell?.setProgressForObject(progress: progress, blurOn: true)
             }
         }
         
@@ -398,12 +401,7 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
 //                    self.allMediaItems[index] = file
 //                }
 //            }
-//            
-//            
-//            guard self.needShowProgressInCell else {
-//                return
-//            }
-//            
+        
             DispatchQueue.toMain {
                 self.uploadProgress.removeValue(forKey: uuid)
                 if let cell = self.getCellForFile(objectUUID: uuid) {
