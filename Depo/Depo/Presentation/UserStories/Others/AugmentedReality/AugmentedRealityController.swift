@@ -24,6 +24,8 @@ final class AugmentedRealityController: QLPreviewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         source?.removeLocalFile()
     }
     
