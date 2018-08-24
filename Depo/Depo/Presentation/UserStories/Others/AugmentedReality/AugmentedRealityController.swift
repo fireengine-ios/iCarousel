@@ -14,11 +14,17 @@ final class AugmentedRealityController: QLPreviewController {
     var source: AugmentedRealityDataSource?
     
     
+    //MARK: - life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupSource()
         udpateARItem()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        source?.removeLocalFile()
     }
     
     
@@ -29,7 +35,6 @@ final class AugmentedRealityController: QLPreviewController {
     
     private func udpateARItem() {
         showSpinerWithCancelClosure {
-            self.source?.removeLocalFile()
             self.dismiss(animated: true, completion: nil)
         }
         source?.updateARItem()

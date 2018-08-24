@@ -57,6 +57,7 @@ final class AugmentedRealityDataSource: QLPreviewControllerDataSource {
     
     
     //MARK: - QLPreviewControllerDataSource
+    
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         //always return 1 for an usdz item
         return 1

@@ -14,7 +14,6 @@ final class AugmentedRealityFileProvider {
     typealias FileDownloadingSuccess = (_ localURL: URL) -> Void
     typealias FileDownloadingFail = (_ errorMessage: String?) -> Void
     
-    init() {}
     
     func downloadFile(item: WrapData, success: @escaping FileDownloadingSuccess, fail: @escaping FileDownloadingFail) {
         guard let file = FileForDownload(forOriginalURL: item) else {
@@ -28,7 +27,6 @@ final class AugmentedRealityFileProvider {
                 return
             }
             
-            item.localFileUrl = localUrl
             success(localUrl)
         }) { error in
             fail(error)
