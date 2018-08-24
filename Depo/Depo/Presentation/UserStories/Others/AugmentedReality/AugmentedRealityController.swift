@@ -29,6 +29,7 @@ final class AugmentedRealityController: QLPreviewController {
     
     private func udpateARItem() {
         showSpinerWithCancelClosure {
+            self.source?.removeLocalFile()
             self.dismiss(animated: true, completion: nil)
         }
         source?.updateARItem()

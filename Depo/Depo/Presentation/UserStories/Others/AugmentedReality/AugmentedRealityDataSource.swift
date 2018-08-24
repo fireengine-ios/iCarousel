@@ -30,21 +30,33 @@ final class AugmentedRealityDataSource: QLPreviewControllerDataSource {
     }
     
     
+    //MARK: - ar local file
+    
     func updateARItem() {
-        guard arItem.previewItemURL == nil else {
-            delegate?.didUpdateARItem()
+        removeLocalFile()
+        downloadToLocalFile()
+    }
+    
+    func removeLocalFile() {
+        guard let localUrl = item.localFileUrl else {
             return
         }
         
+        fileProvider.removeLocalFile(at: localUrl)
+        item.localFileUrl = nil
+    }
+    
+    private func downloadToLocalFile() {
         fileProvider.downloadFile(item: item, success: { [weak self] localUrl in
             self?.arItem.previewItemURL = localUrl
             self?.delegate?.didUpdateARItem()
-        }, fail: { [weak self] error in
-            self?.delegate?.didFailToUpdateARItem(with: error)
+            }, fail: { [weak self] error in
+                self?.delegate?.didFailToUpdateARItem(with: error)
         })
     }
     
-
+    
+    //MARK: - QLPreviewControllerDataSource
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         //always return 1 for an usdz item
         return 1

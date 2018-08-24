@@ -11,8 +11,8 @@ import Foundation
 
 final class AugmentedRealityFileProvider {
     
-    typealias FileDownloadingSuccess = (_ localURL: URL)->Void
-    typealias FileDownloadingFail = (_ errorMessage: String?)->Void
+    typealias FileDownloadingSuccess = (_ localURL: URL) -> Void
+    typealias FileDownloadingFail = (_ errorMessage: String?) -> Void
     
     init() {}
     
@@ -32,6 +32,14 @@ final class AugmentedRealityFileProvider {
             success(localUrl)
         }) { error in
             fail(error)
+        }
+    }
+    
+    func removeLocalFile(at localURL: URL) {
+        do {
+            try FileManager.default.removeItem(at: localURL)
+        } catch {
+            print(error.description)
         }
     }
 }
