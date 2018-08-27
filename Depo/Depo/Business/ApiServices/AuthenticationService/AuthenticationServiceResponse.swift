@@ -179,7 +179,7 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
                 !url.contains(RouteRequests.authificationByToken) {
             return
         } else {
-            analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .serviceError, eventLabel: .serviceError, eventValue: "\(httpResponse.statusCode) \(error?.description ?? "")")
+            analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .serviceError, eventLabel: .serverError, eventValue: "\(httpResponse.statusCode) \(error?.description ?? "")")
         }
     }
     

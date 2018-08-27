@@ -6,19 +6,10 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-//Analytics.logEvent("screenView", parameters: [
-//    "screenName": “Name of the Screen is put here”
-//    "pageType": “HomePage”
-//    "sourceType": “Music”
-//    ])
-//    ...
-//"countOfUpload": “15”
-//...
-
 struct AnalyticsDementsonObject {
-    let screenName: String
-    let pageType: AnalyticsAppScreens
-    let sourceType: String
+    let screenName: Any//String
+    let pageType: Any//used to be AnalyticsAppScreens, now just string
+    let sourceType: Any//String
     let loginStatus: String
     let platform: String
     let isWifi: Bool
@@ -26,11 +17,12 @@ struct AnalyticsDementsonObject {
     let developmentVersion: String
     let paymentMethod: String? //Should be sent after package purchase. Value is Turkcell or inApp
     let userId: Any
-    let operatorSystem: String
+    let operatorSystem: Any//should be String if everything ok
     let facialRecognition: Any//not bool in case of Null
     let userPackagesNames: [String] //Pacakage names that the user owns should be sent with every page click. Pacakage names should be seperated with pipe "|"
     let countOfUploadMetric: Int?
     let countOfDownloadMetric: Int?
+    let gsmOperatorType: String
     
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
@@ -42,17 +34,19 @@ struct AnalyticsDementsonObject {
         }
         var dimesionDictionary: [String: Any] = [
             GADementionsFields.screenName.text : screenName,
-            GADementionsFields.pageType.text : pageType.name,
+            GADementionsFields.pageType.text : pageType,//.name,
             GADementionsFields.sourceType.text : sourceType,
             GADementionsFields.loginStatus.text : loginStatus,
             GADementionsFields.platform.text : platform,
-            GADementionsFields.networkFixWifi.text : "\(isWifi)",
+            GADementionsFields.networkFixWifi.text : isWifi ? "True" : "False",
+            ///index54=isWifi:  is sent as “TRUE". It should be “True”. Only first letter should be capital.
             GADementionsFields.service.text : service,
             GADementionsFields.developmentVersion.text : developmentVersion,
             GADementionsFields.userID.text : userId,
             GADementionsFields.operatorSystem.text : operatorSystem,
             GADementionsFields.faceImageStatus.text : "\(facialRecognition)",
-            GADementionsFields.userPackage.text : userOwnedPackages
+            GADementionsFields.userPackage.text : userOwnedPackages,
+            GADementionsFields.gsmOperatorType.text : gsmOperatorType
         ]
         if let paymentMethodUnwraped = paymentMethod {
             dimesionDictionary[GADementionsFields.paymentMethod.text] = paymentMethodUnwraped
@@ -66,7 +60,3 @@ struct AnalyticsDementsonObject {
         return dimesionDictionary
     }
 }
-
-//struct AnalyticsDementsonWithMetricsObject {
-//
-//}
