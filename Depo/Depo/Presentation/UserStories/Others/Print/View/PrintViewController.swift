@@ -16,8 +16,6 @@ class PrintViewController: BaseViewController, ErrorPresenter {
     var output: PrintViewOutput!
     
     override func loadView() {
-        super.loadView()
-        
         webView.navigationDelegate = self
         view = webView
     }

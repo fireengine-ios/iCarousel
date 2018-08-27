@@ -21,11 +21,11 @@ extension TermsOfUseInteractor: TermsOfUseInteractorInput {
     func getEulaHTML() {
         DispatchQueue.toBackground { [weak self] in
             self?.eulaService.eulaGet(sucess: { [weak self] eula in
-                guard let eula = eula as? Eula else {
+                guard let eula = eula as? Eula, let eulaHtml = eula.content, !eulaHtml.isEmpty else {
                     return
                 }
                 DispatchQueue.toMain {
-                    self?.output.showLoaded(eulaHTML: eula.content ?? "")
+                    self?.output.showLoaded(eulaHTML: eulaHtml)
                 }
                 }, fail: { [weak self] errorResponse in
                     DispatchQueue.toMain {

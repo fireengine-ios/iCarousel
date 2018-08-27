@@ -32,8 +32,6 @@ class InstagramAuthViewController: ViewController {
     }
     
     override func loadView() {
-        super.loadView()
-        
         webView.navigationDelegate = self
         view = webView
     }

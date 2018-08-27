@@ -904,4 +904,9 @@ struct TextConstants {
     static let copied = NSLocalizedString("copied", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let markedAsFavourite = NSLocalizedString("marked as favourite", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorUnsupportedExtension = NSLocalizedString("download_error_unsupported_extension", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let facebookPhotoTags = NSLocalizedString("facebook_photo_tags", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let facebookTagsOn = NSLocalizedString("facebook_tags_on", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let facebookTagsOff = NSLocalizedString("facebook_tags_off", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let facebookTagsImport = NSLocalizedString("facebook_tags_import", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
