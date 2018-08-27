@@ -57,6 +57,9 @@ final class PhotoVideoCell: UICollectionViewCell {
         
         thumbnailImageView.contentMode = .scaleAspectFill
         backgroundColor = ColorConstants.fileGreedCellColor
+        
+        isAccessibilityElement = true
+        accessibilityTraits = UIAccessibilityTraitImage
     }
     
     private func setupLongPressRecognizer() {
@@ -67,6 +70,16 @@ final class PhotoVideoCell: UICollectionViewCell {
     }
     
     func setup(with wraped: WrapData) {
+        
+        accessibilityLabel = wraped.name
+        favoriteImageView.isHidden = !wraped.favorites
+        
+        if wraped.isLocalItem, wraped.fileSize < NumericConstants.fourGigabytes {
+            cloudStatusImageView.image = UIImage(named: "objectNotInCloud")
+        } else {
+            cloudStatusImageView.image = nil
+        }
+        
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
             cellId = local.asset.localIdentifier
@@ -77,9 +90,10 @@ final class PhotoVideoCell: UICollectionViewCell {
                     }
                 }
             }
-            
-        default:
-            break
+        case let .remoteUrl(url):
+            if let url = url {
+                setImage(with: url)
+            }
         }
     }
     
@@ -92,6 +106,18 @@ final class PhotoVideoCell: UICollectionViewCell {
             }
         } else {
             thumbnailImageView.image = image
+        }
+    }
+    
+    private func setImage(with url: URL) {
+        thumbnailImageView.sd_setImage(with: url, placeholderImage: nil, options:[.queryDiskSync, .avoidAutoSetImage]) { [weak self] image, error, cacheType, url in
+            
+            guard let `self` = self, let image = image else {
+                return
+            }
+            
+            let shouldAnimate = (cacheType == .none)
+            self.setImage(image: image, animated: shouldAnimate)
         }
     }
     

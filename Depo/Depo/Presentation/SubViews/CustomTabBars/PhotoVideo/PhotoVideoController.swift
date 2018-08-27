@@ -203,9 +203,10 @@ extension PhotoVideoController: UICollectionViewDelegate {
         
         if uploadedObjectID.index(of: wraped.uuid) != nil {
             cell.finishedUploadForObject()
-        } else {
-            cell.resetCloudImage()
         }
+//        else {
+//            cell.resetCloudImage()
+//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

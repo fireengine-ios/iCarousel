@@ -35,7 +35,7 @@ final class PhotoVideoThreeDotMenuManager {
     
     private func actionsForImageItems(_ items: [WrapData], completion: @escaping ([ElementTypes]) -> Void) {
         
-        let remoteItems = items.filter { !$0.isLocalItem}
+        let remoteItems = items.filter { !$0.isLocalItem }
         
         var actionTypes: [ElementTypes]
         
@@ -48,11 +48,13 @@ final class PhotoVideoThreeDotMenuManager {
         } else {
             actionTypes = [.createStory, .print, .deleteDeviceOriginal, .addToFavorites]
             
+            /// remove .removeFromFavorites if need
             let thereIsFavorite = (remoteItems.first(where: { $0.favorites }) != nil)
             if thereIsFavorite {
                 actionTypes.append(.removeFromFavorites)
             }
             
+            /// remove .deleteDeviceOriginal if need
             MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems) { duplicates in
                 if duplicates.isEmpty, let deleteDeviceOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
                     actionTypes.remove(at: deleteDeviceOriginalIndex)
