@@ -13,7 +13,7 @@ protocol LBCellsDelegate: class {
     func onLongPress(cell: UICollectionViewCell)
 }
 
-class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate, CollectionViewCellDataProtocol {
+class BaseCollectionViewCell: UICollectionViewCell, CollectionViewCellDataProtocol {
     internal weak var delegate: LBCellsDelegate?
     var isCellSelected: Bool = false
     var isCellSelectionEnabled: Bool = false
@@ -31,7 +31,7 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         let lpgr: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         
         lpgr.minimumPressDuration = BaseCollectionViewCell.durationOfSelection
-        lpgr.delegate = self
+//        lpgr.delegate = self
         lpgr.delaysTouchesBegan = true
         addGestureRecognizer(lpgr)
         

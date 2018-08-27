@@ -144,20 +144,21 @@ class CreateStoryPhotosOrderViewController: BaseViewController, CreateStoryPhoto
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        guard let cell_ = cell as? PhotosOrderCollectionViewCell else {
+        guard let cell = cell as? PhotosOrderCollectionViewCell else {
             return
         }
         
         let object = collectionViewData[indexPath.row]
-        cell_.setPosition(position: indexPath.row + 1)
+        cell.setPosition(position: indexPath.row + 1)
         fileDataSource.getImage(patch: object.patchToPreview) { [weak self] image in
-            
-            let contains = self?.collectionView.indexPathsForVisibleItems.contains(indexPath)
-            if let value = contains,
-                value == true {
-                cell_.configurateWith(image: image)
-                return
+            DispatchQueue.toMain {
+                let contains = self?.collectionView.indexPathsForVisibleItems.contains(indexPath)
+                if let value = contains, value == true {
+                    cell.configurateWith(image: image)
+                    return
+                }
             }
+
         }
     }
     
