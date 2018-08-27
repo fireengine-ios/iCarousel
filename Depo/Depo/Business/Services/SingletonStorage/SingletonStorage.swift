@@ -89,7 +89,8 @@ class SingletonStorage {
     func getFaceImageSettingsStatus(success: @escaping (_ result: Bool) -> Void,
                                      fail: @escaping (ErrorResponse) -> Void,
                                      foreceReload: Bool = false) {
-        guard foreceReload || faceImageSettings == nil else {
+        guard foreceReload || faceImageSettings == nil,
+        accountInfo != nil else {
             if let faceImageSettingsUnwraped  = faceImageSettings {
                 success(faceImageSettingsUnwraped.allowed ?? false)
             } else {
@@ -116,7 +117,8 @@ class SingletonStorage {
                                     fail: @escaping (ErrorResponse) -> Void,
                                     foreceReload: Bool = false) {
         
-        guard foreceReload || activeUserSubscription == nil else {
+        guard foreceReload || activeUserSubscription == nil,
+            accountInfo != nil else {
             if let activeSubsUnwraped  = activeUserSubscription {
                 success(activeSubsUnwraped)
             } else {
