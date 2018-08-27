@@ -61,6 +61,7 @@ enum ApplicationType: String {
     case xls = "xls"
     case pdf = "pdf"
     case ppt = "ppt"
+    case usdz = "usdz"
     
 //    func bigIconImage() -> UIImage? {
 //        switch self {
@@ -158,15 +159,13 @@ enum FileType: Equatable {
     }
     
     var isDocument: Bool {
-        return self == .application(.doc) ||
-                self == .application(.txt) ||
-                self == .application(.html) ||
-                self == .application(.xls) ||
-                self == .application(.pdf) ||
-                self == .application(.ppt)
+        guard case let FileType.application(applicationType) = self else {
+            return false
+        }
+        return applicationType.isContained(in: [.doc, .txt, .html, .xls, .pdf, .ppt, .usdz])
     }
     
-    var  isUnSupportedOpenType: Bool {
+    var  isSupportedOpenType: Bool {
         
         return  self != .application(.zip) &&
                 self != .application(.rar) &&
@@ -246,6 +245,20 @@ enum FileType: Equatable {
                 return
             }
             
+            if wrapType.hasPrefix("model") {
+                guard let prefix = wrapType.components(separatedBy: "/").last else {
+                    self = .application(.unknown)
+                    return
+                }
+                
+                switch prefix {
+                case "vnd.pixar.usd", "usd":
+                    self = .application(.usdz)
+                default:
+                    self = .application(.unknown)
+                }
+            }
+            
             if (wrapType.hasPrefix("application")) {
                 
                 guard let prefix = wrapType.components(separatedBy: "/").last else {
@@ -289,6 +302,9 @@ enum FileType: Equatable {
                         return
                     case "rar":
                         self = .application(.rar)
+                        return
+                    case "usdz":
+                        self = .application(.usdz)
                         return
                     default:
                         self = .application(.unknown)
@@ -556,6 +572,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     var metaData: BaseMetaData?
     
     var status: Status
+    
+    var localFileUrl: URL?
     
     var tmpDownloadUrl: URL?
     
