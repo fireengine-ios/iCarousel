@@ -347,11 +347,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     func setupCustomNavControllers() {
         let router = RouterVC()
         
-        let vc = UIViewController()
-        vc.view.backgroundColor = .red
-        
         let list = [router.homePageScreen,
-                    router.segmentedController(with: [PhotoVideoController.initFromNib(), vc]),
+                    router.segmentedController(with: [PhotoVideoController.initPhotoFromNib(), PhotoVideoController.initVideoFromNib()]),
                     router.musics,
                     router.documents]
         customNavigationControllers = list.flatMap { NavigationController(rootViewController: $0!) }

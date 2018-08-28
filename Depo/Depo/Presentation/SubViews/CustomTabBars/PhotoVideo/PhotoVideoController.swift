@@ -13,6 +13,7 @@ import UIKit
 // TODO: CheckBoxViewDelegate logic
 // TODO: video controller
 // TODO: navigation bar with logo
+// TODO: duplicated files correct representation on collection
 // TODO: items operations (progress)
 // TODO: todos in file
 // TODO: clear code -
@@ -25,6 +26,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             collectionView.delegate = self
         }
     }
+    
+    var isPhoto = true
     
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
     private var uploadedObjectID = [String]()
@@ -83,6 +86,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     // MARK: - setup
     
     private func performFetch() {
+        dataSource.setupOriginalFilter(isPhotos: isPhoto)
         dataSource.performFetch()
         collectionView.reloadData()
         collectionViewManager.reloadAlbumsSlider()
@@ -286,6 +290,8 @@ extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
     }
     
     func showOnlySyncItemsCheckBoxDidChangeValue(_ value: Bool) {
+        dataSource.changeSourceFilter(syncOnly: value)
+        collectionView.reloadData()
         //        if value {
         //            filtersByDefault = filters
         //            filters = filters.filter { type -> Bool in
@@ -434,5 +440,19 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             return nil
         }
         return dataSource.indexPath(forObject: mediaItem)
+    }
+}
+
+extension PhotoVideoController {
+    static func initPhotoFromNib() -> PhotoVideoController {
+        let photoController = PhotoVideoController.initFromNib()
+        photoController.isPhoto = true
+        return photoController
+    }
+    
+    static func initVideoFromNib() -> PhotoVideoController {
+        let videoController = PhotoVideoController.initFromNib()
+        videoController.isPhoto = false
+        return videoController
     }
 }
