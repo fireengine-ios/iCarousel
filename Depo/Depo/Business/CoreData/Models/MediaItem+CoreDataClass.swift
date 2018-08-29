@@ -33,7 +33,8 @@ public class MediaItem: NSManagedObject {
         syncStatusValue = wrapData.syncStatus.valueForCoreDataMapping()
         favoritesValue = wrapData.favorites
         isLocalItemValue = wrapData.isLocalItem
-        creationDateValue = wrapData.creationDate as NSDate?
+        creationDateValue = wrapData.metaDate as NSDate?//wrapData.creationDate as NSDate?
+        ///need to discuss that, we might use creation date after all.
         lastModifiDateValue = wrapData.lastModifiDate as NSDate?
         urlToFileValue = wrapData.urlToFile?.absoluteString
         
@@ -47,11 +48,12 @@ public class MediaItem: NSManagedObject {
         case let .localMediaContent(assetContent):
             let localID = assetContent.asset.localIdentifier
             localFileID = localID
-            trimmedLocalFileID = localID.components(separatedBy: "/").first ?? localID
+//            trimmedLocalFileID = localID.components(separatedBy: "/").first ?? localID need to test this
             patchToPreviewValue = nil
         }
         
         md5Value = wrapData.md5
+        trimmedLocalFileID = wrapData.getTrimmedLocalID()
         
         let dateValue = self.creationDateValue as Date?
         
