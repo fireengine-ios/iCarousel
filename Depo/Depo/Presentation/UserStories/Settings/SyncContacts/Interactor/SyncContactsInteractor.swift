@@ -121,6 +121,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     private func analyze() {
+        output?.showProggress(progress: 0, count: 0, forOperation: .analyze)
         contactsSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
             DispatchQueue.main.async {
                 self?.output?.showProggress(progress: progressPercentage, count: count, forOperation: type)
