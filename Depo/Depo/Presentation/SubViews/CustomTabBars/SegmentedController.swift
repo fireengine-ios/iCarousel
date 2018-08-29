@@ -68,7 +68,8 @@ final class SegmentedController: UIViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationBarWithGradientStyle()
+        homePageNavigationBarStyle()//without refactor
+//        navigationBarWithGradientStyle()
 //        needShowTabBar = true
         
         add(childController: viewControllers[segmentedControl.selectedSegmentIndex])
