@@ -44,8 +44,13 @@ final class PhotoVideoDataSource: NSObject {
     private lazy var sectionChanges = [() -> Void]()
     private lazy var objectChanges = [() -> Void]()
     
+//    private lazy var
+    
     private lazy var fetchedResultsController: NSFetchedResultsController<MediaItem> = {
         let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
+        
+        
+
 //        fetchRequest.predicate = NSPredicate(format: "isLocalItemValue = true AND ", [])
 //        NSCompoundPredicate(andPredicateWithSubpredicates:
         let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.creationDateValue), ascending: false)
@@ -103,6 +108,15 @@ final class PhotoVideoDataSource: NSObject {
     }
     
 }
+
+// MARK: - DATA BASE
+
+private func setupDuplicationPredicate() {
+    //        fetchRequest.predicate = NSPredicate(format: "isLocalItemValue = true AND ", [])
+    //        NSCompoundPredicate(andPredicateWithSubpredicates:
+    let
+}
+
 
 // MARK: - UICollectionViewDataSource
 extension PhotoVideoDataSource: UICollectionViewDataSource {
