@@ -143,7 +143,6 @@ class ContactsSyncService: BaseRequestService {
     }
     
     func analyze(progressCallback: ProgressCallback?, successCallback: AnalyzeFinishCallback?, cancelCallback: Callback?, errorCallback: ErrorCallback?) {
-        ContactSyncSDK.doAnalyze(true)
         
         SyncSettings.shared().analyzeNotifyCallback = { contactsToMerge, contactsToDelete in
             progressCallback?(100, contactsToDelete?.count ?? 0, AnalyzeStatus.shared().analyzeStep == .ANALYZE_STEP_CLEAR_DUPLICATES ? .deleteDuplicated : .analyze)
@@ -161,7 +160,7 @@ class ContactsSyncService: BaseRequestService {
             }
             
             let response = ContactsSyncService.mergeContacts(parsedContactsToMerge, with: parsedContactsToDelete)
-            
+            ContactSyncSDK.cancelAnalyze()
             successCallback?(response)
         }
         
@@ -180,6 +179,8 @@ class ContactsSyncService: BaseRequestService {
                 return
             }
         }
+        
+        ContactSyncSDK.doAnalyze(true)
     }
     
     func deleteDuplicates() {
