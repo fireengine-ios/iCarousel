@@ -16,5 +16,7 @@ protocol TermsAndServicesViewInput: class, Waiting {
     
     func noConfirmAgreements(errorString: String)
     
+    func hideBackButton()
+    
     func popNavigationVC()
 }

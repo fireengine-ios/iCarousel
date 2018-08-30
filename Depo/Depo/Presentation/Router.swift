@@ -323,6 +323,10 @@ class RouterVC: NSObject {
         return viewController
     }
     
+    // MARK: Clean EULA
+    
+    lazy var termsOfUseScreen = TermsOfUseInitializer.viewController
+    
     
     // MARK: SynchronyseSettings
     
@@ -555,6 +559,12 @@ class RouterVC: NSObject {
         return controller
     }
     
+    func augumentRealityDetailViewController(fileObject: WrapData) -> UIViewController {
+        let controller = AugmentedRealityInitializer.initializeController(with: fileObject)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        return controller
+    }
+    
     func filesDetailViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
                                                                                     selectedItem: fileObject,
@@ -706,8 +716,7 @@ class RouterVC: NSObject {
     // MARK: Face image
     
     var faceImage: UIViewController {
-        let controller = FaceImageInitializer.initializeViewController(with: "FaceImageViewController")
-        return controller
+        return FaceImageViewController.initFromNib()
     }
     
     // MARK: Face image add name

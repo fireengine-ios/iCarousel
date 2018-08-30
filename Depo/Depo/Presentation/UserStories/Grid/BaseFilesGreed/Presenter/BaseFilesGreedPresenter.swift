@@ -326,7 +326,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             interactor.trackClickOnPhotoOrVideo(isPhoto: true)
         }
         
-        if item.fileType.isUnSupportedOpenType {
+        if item.fileType.isSupportedOpenType {
             let sameTypeFiles = getSameTypeItems(item: item, items: data)
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles,
                                   type: type, sortType: sortedType, moduleOutput: self)

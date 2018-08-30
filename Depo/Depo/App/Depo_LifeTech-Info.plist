@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.20.0.37</string>
+	<string>2.0.1</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -192,6 +192,55 @@
 				</array>
 				<key>public.mime-type</key>
 				<string>image/heic</string>
+			</dict>
+		</dict>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>.usdz</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>augument reality object</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>model/vnd.pixar.usd</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<string>USDZ</string>
+				<key>public.filename-extension</key>
+				<array>
+					<string>.usdz</string>
+				</array>
+				<key>public.mime-type</key>
+				<string>model/vnd.pixar.usd</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>usdz</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>augument reality object</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>model/usd</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<string>USDZ</string>
+				<key>public.filename-extension</key>
+				<array>
+					<string>usdz</string>
+				</array>
+				<key>public.mime-type</key>
+				<string>model/usd</string>
 			</dict>
 		</dict>
 	</array>

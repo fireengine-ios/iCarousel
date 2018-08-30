@@ -7,10 +7,13 @@
 //
 
 class PackagesRouter {
-    
+    private let router = RouterVC()
 }
 
 // MARK: PackagesRouterInput
 extension PackagesRouter: PackagesRouterInput {
-
+    
+    func openTermsOfUse() {
+        router.pushViewController(viewController: router.termsOfUseScreen)
+    }
 }

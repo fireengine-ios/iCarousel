@@ -17,6 +17,10 @@ import CoreTelephony
         return networkInfo.subscriberCellularProvider
     }
     
+    var carrierName: String? {
+        return carrier?.carrierName
+    }
+    
     var mnc: String? {
         return carrier?.mobileNetworkCode
     }

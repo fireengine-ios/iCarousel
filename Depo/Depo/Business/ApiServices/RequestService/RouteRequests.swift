@@ -169,4 +169,16 @@ struct RouteRequests {
     static let uploadNotify = "notification/onFileUpload?parentFolderUuid=%@&fileName=%@"
     
     static let updateLanguage = baseUrl +/ "account/language"
+    
+    enum Account {
+        static let accountApi = baseUrl +/ "account"
+        
+        enum Settings {
+            static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
+            
+            static let faceImageAllowed = settingsApi +/ "faceImageAllowed"
+            static let facebookTaggingEnabled = settingsApi +/ "facebookTaggingEnabled"
+        }
+    }
+
 }

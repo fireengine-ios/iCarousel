@@ -10,6 +10,7 @@ import Foundation
 
 enum CustomErrors {
     case unknown
+    case serverError(CustomStringConvertible)
     case text(String)
 }
 extension CustomErrors: LocalizedError {
@@ -19,6 +20,12 @@ extension CustomErrors: LocalizedError {
             return "Unknown error"
         case .text(let str):
             return str
+        case .serverError(let text):
+            #if DEBUG
+                return TextConstants.errorServer + ": " + text.description 
+            #else
+                return TextConstants.errorServer
+            #endif
         }
     }
 }

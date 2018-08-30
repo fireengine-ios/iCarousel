@@ -11,7 +11,7 @@
 # USERNAME = ''
 BUNDLE_ID = 'by.come.life.Lifebox'
 APP_NAME = 'lifebox-LIFE'
-SCHEME = "Depo_LifeTech"
+# SCHEME = "Depo_LifeTech"
 PROJECT = "Depo.xcodeproj"
 TARGET = "Depo_LifeTech"
 BUILD_FOLDER_NAME = "builds"
@@ -20,6 +20,7 @@ BUILD_FOLDER_NAME = "builds"
 
 TYPES = ["development", "appstore", "adhoc"]
 CONFIGS = ["debug", "release", "adhoc"]
+SCHEMES = ["PROD", "PREPROD", "TEST"]
 
 # If you want to automatically update fastlane if a new version is available:
 # update_fastlane
@@ -30,35 +31,73 @@ fastlane_version "2.19.1"
 default_platform :ios
 
 platform :ios do
+	lane :beta_jenkins do
+		begin
+			jenkins_build()
+		rescue => exception
+			on_error(exception)
+		end
+	end
 
-  lane :beta_diawi do
-    my_gym(config: "adhoc")
-    diawi
-  end
+	lane :beta_jenkins_preprod do
+		begin
+			jenkins_build_preprod()
+		rescue => exception
+			on_error(exception)
+		end
+	end
 
-  lane :beta_fabric do
-    my_gym(config: "adhoc")
-    fabric
-    slack_post
-    notify_about_completion
-  end
+	def jenkins_build
+		xcode_select "/Applications/Xcode.app"
+		setup_jenkins
+		bundle_install
+		cocoapods
+		my_gym(scheme: "PROD")
+		fabric
+		slack_post
+	end
+
+	def jenkins_build_preprod
+		xcode_select "/Applications/Xcode.app"
+		setup_jenkins
+		bundle_install
+		cocoapods
+		my_gym(scheme: "PREPROD")
+		fabric
+		slack_post
+	end
+
+
+	lane :beta_diawi do
+		setup_jenkins
+		my_gym(scheme: "PROD")
+		diawi
+	end
+
+	lane :beta_fabric do
+		my_gym(scheme: "PROD")
+		fabric
+		slack_post
+		notify_about_completion
+	end
 
 
   #--------------- build ipa ---------------
 
   desc "Create ipa"
   lane :my_gym do |options|
-    
-    config = options[:config]
+  	
+    scheme = options[:scheme]
 
-    if !CONFIGS.include?(config)
-      raise("config can be debug, release or adhoc")
-      exit
+    if !SCHEMES.include?(scheme)
+      # raise("scheme can be PROD, PREPROD or TEST")
+      UI.user_error!("scheme can be PROD, PREPROD or TEST")
+      # exit
     end
 
     gym(
       # configuration: config, #"Adhoc", # Defaults to 'Release'
-      scheme: SCHEME,
+      scheme: "Depo_LifeTech_" + scheme,
       silent: true, # Hide all information that's not necessary while building
       clean: false,
       output_directory: "./#{BUILD_FOLDER_NAME}",    # store the ipa in this folder
@@ -66,7 +105,7 @@ platform :ios do
       #output_directory: "path/to/dir", # Destination directory. Defaults to current directory.
       #output_name: "my-app.ipa",       # specify the name of the .ipa file to generate (including file extension)
       export_options: {
-        method: "ad-hoc"
+      	method: "ad-hoc"
         # ,
         # provisioningProfiles: { 
         #   "#{BUNDLE_ID}" => "ADHOC_LifeboxForTurkcell"
@@ -76,41 +115,41 @@ platform :ios do
     )
   end
 
-  
+
   #--------------- distribute ---------------
 
   # https://dashboard.diawi.com/docs/apis/upload
   lane :diawi do
-    ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
+  	ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
     # time = Time.new
     diawiToken = 'rvA4lMxATOqmygUZmMgM7n5vchCnDkb5TJuZnVSibZ'
     filePath = "#{File.expand_path("..", Dir.pwd)}/#{BUILD_FOLDER_NAME}/#{APP_NAME}.ipa" # cd .. &&
     sh(
-      "curl -X POST https://upload.diawi.com/"\
-      " -F \"token=#{diawiToken}\""\
-      " -F \"file=@#{filePath}\""\
-      " -F \"find_by_udid=0\""\
-      " -F \"wall_of_apps=0\""\
-      " -F \"callback_emails=zdaecq@gmail.com\""
+    	"curl -X POST https://upload.diawi.com/"\
+    	" -F \"token=#{diawiToken}\""\
+    	" -F \"file=@#{filePath}\""\
+    	" -F \"find_by_udid=0\""\
+    	" -F \"wall_of_apps=0\""\
+    	" -F \"callback_emails=zdaecq@gmail.com\""
     )
   end
 
   desc "Distribute build via Fabric"
   lane :fabric do
-    ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
-    filePath = "#{File.expand_path("..", Dir.pwd)}/#{BUILD_FOLDER_NAME}/#{APP_NAME}.ipa"
+  	ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
+  	filePath = "#{File.expand_path("..", Dir.pwd)}/#{BUILD_FOLDER_NAME}/#{APP_NAME}.ipa"
 
-    crashlytics(
-      api_token: "74412d8a38e9c5b44ca9993298b0ec4cba26289b",
-      build_secret: "23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388",
-      ipa_path: filePath,
-      emails: ["lifetechqa@icloud.com",
-          "lifetechqa2@gmail.com",
-          "lifetechqa4@icloud.com",
-          "lifetechqa5@icloud.com",
-          "lifetechqa6@icloud.com", 
-          "6257515test@gmail.com"]
-    )
+  	crashlytics(
+  		api_token: "74412d8a38e9c5b44ca9993298b0ec4cba26289b",
+  		build_secret: "23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388",
+  		ipa_path: filePath,
+  		emails: ["lifetechqa@icloud.com",
+  			"lifetechqa2@gmail.com",
+  			"lifetechqa4@icloud.com",
+  			"lifetechqa5@icloud.com",
+  			"lifetechqa6@icloud.com", 
+  			"6257515test@gmail.com"]
+  	)
   end
 
 
@@ -118,21 +157,35 @@ platform :ios do
 
   desc "Post message to the #lifebox-ios-firengine slack channel"
   lane :slack_post do
-    version = get_build_number_from_plist(xcodeproj: PROJECT, target: TARGET)
-    slack(
-      message: "Build #{version} successfully released!",
-      success: true,
-      slack_url: "https://hooks.slack.com/services/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", #lifebox-ios-firengine
+  	version = get_build_number_from_plist(xcodeproj: PROJECT, target: TARGET)
+  	slack(
+  		message: "Build #{version} successfully released!",
+  		success: true,
+  		slack_url: "https://hooks.slack.com/services/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",
+      # slack_url: "https://hooks.slack.com/services/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", #lifebox-ios-firengine
       payload: { 
-        "Build Date" => Time.new.to_s
+      	"Build Date" => Time.new.to_s
       },
       default_payloads: []
     )
   end
 
   lane :notify_about_completion do
-    version = get_build_number_from_plist(xcodeproj: PROJECT, target: TARGET)
-    notification(subtitle: "Build distribution is finished", message: "#{version}")
+  	version = get_build_number_from_plist(xcodeproj: PROJECT, target: TARGET)
+  	notification(subtitle: "Build distribution is finished", message: "#{version}")
+  end
+
+  def on_error(exception)
+  	UI.user_error!("Build failed with exception : #{exception}")
+  	slack(
+  		message: "Build failed with exception : #{exception}",
+  		success: false,
+  		slack_url: "https://hooks.slack.com/services/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",
+  		payload: { 
+  			"Build Date" => Time.new.to_s
+  		},
+  		default_payloads: []
+  	)
   end
 
 end

@@ -60,6 +60,11 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 self.analyticsService.trackDimentionsEveryClickGA(screen: .contacSyncDeleteDuplicates)
                 self.deleteDuplicated()
             }
+            
+            /// workaround of bug that asyncOperationStarted not working in loadLastBackUp
+            if operationType != .getBackUpStatus {
+                self.output?.asyncOperationFinished()
+            }
         }
     }
     
@@ -70,6 +75,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     
     private func updateAccessToken(complition: @escaping VoidHandler) {
         let auth: AuthorizationRepository = factory.resolve()
+        output?.asyncOperationStarted()
         auth.refreshTokens { [weak self] _, accessToken in
             let tokenStorage: TokenStorage = factory.resolve()
             tokenStorage.accessToken = accessToken
@@ -103,7 +109,6 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     private func loadLastBackUp() {
-        output?.asyncOperationStarted()
         contactsSyncService.getBackUpStatus(completion: { [weak self] model in
             debugLog("loadLastBackUp completion")
             self?.output?.success(response: model, forOperation: .getBackUpStatus)
@@ -116,6 +121,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     private func analyze() {
+        output?.showProggress(progress: 0, count: 0, forOperation: .analyze)
         contactsSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
             DispatchQueue.main.async {
                 self?.output?.showProggress(progress: progressPercentage, count: count, forOperation: type)

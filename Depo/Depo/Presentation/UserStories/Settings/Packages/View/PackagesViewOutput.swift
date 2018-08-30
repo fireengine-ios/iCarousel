@@ -14,4 +14,6 @@ protocol PackagesViewOutput {
     func restorePurchasesPressed()
     
     func getAccountType() -> AccountType
+    
+    func openTermsOfUseScreen()
 }
