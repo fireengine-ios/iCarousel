@@ -111,11 +111,11 @@ final class PhotoVideoDataSource: NSObject {
 
 // MARK: - DATA BASE
 
-private func setupDuplicationPredicate() {
-    //        fetchRequest.predicate = NSPredicate(format: "isLocalItemValue = true AND ", [])
-    //        NSCompoundPredicate(andPredicateWithSubpredicates:
-    let
-}
+//private func setupDuplicationPredicate() {
+//    //        fetchRequest.predicate = NSPredicate(format: "isLocalItemValue = true AND ", [])
+//    //        NSCompoundPredicate(andPredicateWithSubpredicates:
+////    let
+//}
 
 
 // MARK: - UICollectionViewDataSource
