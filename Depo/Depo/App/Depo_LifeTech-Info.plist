@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2.0.1</string>
+	<string>2.2.2</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -78,27 +78,6 @@
 		<false/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>http://cropyioslifebox.com</key>
-			<dict>
-				<key>NSIncludesSubdomains</key>
-				<string>YES</string>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<string>YES</string>
-			</dict>
-			<key>http://adepotest.turkcell.com.tr</key>
-			<dict>
-				<key>NSIncludesSubdomains</key>
-				<string>YES</string>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<string>YES</string>
-			</dict>
-			<key>http://tcloudstb.turkcell.com.tr</key>
-			<dict>
-				<key>NSIncludesSubdomains</key>
-				<string>YES</string>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<string>YES</string>
-			</dict>
 			<key>http://adepo.turkcell.com.tr/api/auth/gsm/login</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
@@ -106,7 +85,28 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
+			<key>http://adepotest.turkcell.com.tr</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
+			</dict>
+			<key>http://cropyioslifebox.com</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
+			</dict>
 			<key>http://curio.turkcell.com.tr/api/v2</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
+			</dict>
+			<key>http://tcloudstb.turkcell.com.tr</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<string>YES</string>
