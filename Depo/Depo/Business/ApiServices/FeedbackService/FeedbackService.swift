@@ -11,8 +11,8 @@
 
 struct FeedbackPatch {
     
-    static let languageList =  "/api/account/language/list"
-    static let sendSelectedLanguage = "/api/account/language"
+    static let languageList =  "account/language/list"
+    static let sendSelectedLanguage = "account/language"
     
 }
 

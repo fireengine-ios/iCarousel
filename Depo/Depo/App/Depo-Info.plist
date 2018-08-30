@@ -62,23 +62,22 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 		<string>fb531658366898592</string>
-        
-        <string>linkedin</string>
-        <string>bip</string>
-        <string>whatsapp</string>
-        <string>fbapi</string>
-        <string>fbapi20130214</string>
-        <string>fbapi20130410</string>
-        <string>fbapi20130702</string>
-        <string>fbapi20131010</string>
-        <string>fbapi20131219</string>
-        <string>fbapi20140410</string>
-        <string>fbapi20140116</string>
-        <string>fbapi20150313</string>
-        <string>fbapi20150629</string>
-        <string>fbauth</string>
-        <string>fbauth2</string>
-        <string>fb-messenger-api20140430</string>
+		<string>linkedin</string>
+		<string>bip</string>
+		<string>whatsapp</string>
+		<string>fbapi</string>
+		<string>fbapi20130214</string>
+		<string>fbapi20130410</string>
+		<string>fbapi20130702</string>
+		<string>fbapi20131010</string>
+		<string>fbapi20131219</string>
+		<string>fbapi20140410</string>
+		<string>fbapi20140116</string>
+		<string>fbapi20150313</string>
+		<string>fbapi20150629</string>
+		<string>fbauth</string>
+		<string>fbauth2</string>
+		<string>fb-messenger-api20140430</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -92,8 +91,43 @@
 	<string>https://turkcell.menloworks.com</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>http://cropyioslifebox.com</key>
+		<dict>
+			<key>NSIncludesSubdomains</key>
+			<string>YES</string>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<string>YES</string>
+		</dict>
+		<key>http://adepotest.turkcell.com.tr</key>
+		<dict>
+			<key>NSIncludesSubdomains</key>
+			<string>YES</string>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<string>YES</string>
+		</dict>
+		<key>http://curio.turkcell.com.tr/api/v2</key>
+		<dict>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<string>YES</string>
+			<key>NSIncludesSubdomains</key>
+			<string>YES</string>
+		</dict>
+		<key>http://adepo.turkcell.com.tr/api/auth/gsm/login</key>
+		<dict>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<true/>
+			<key>NSIncludesSubdomains</key>
+			<true/>
+		</dict>
+		<key>http://tcloudstb.turkcell.com.tr</key>
+		<dict>
+			<key>NSIncludesSubdomains</key>
+			<string>YES</string>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<string>YES</string>
+		</dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<false/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
@@ -142,28 +176,27 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-    
-    <key>UTExportedTypeDeclarations</key>
-    <array>
-    <dict>
-        <key>UTTypeConformsTo</key>
-        <array>
-            <string>public.image</string>
-        </array>
-        <key>UTTypeIdentifier</key>
-        <string>image/heic</string>
-        <key>UTTypeTagSpecification</key>
-        <dict>
-            <key>com.apple.ostype</key>
-            <string>HEIC</string>
-            <key>public.filename-extension</key>
-            <array>
-                <string>heic</string>
-            </array>
-            <key>public.mime-type</key>
-            <string>image/heic</string>
-        </dict>
-    </dict>
-    </array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.image</string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string>image/heic</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<string>HEIC</string>
+				<key>public.filename-extension</key>
+				<array>
+					<string>heic</string>
+				</array>
+				<key>public.mime-type</key>
+				<string>image/heic</string>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

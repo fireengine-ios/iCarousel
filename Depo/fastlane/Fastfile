@@ -11,7 +11,7 @@
 # USERNAME = ''
 BUNDLE_ID = 'by.come.life.Lifebox'
 APP_NAME = 'lifebox-LIFE'
-SCHEME = "Depo_LifeTech"
+# SCHEME = "Depo_LifeTech"
 PROJECT = "Depo.xcodeproj"
 TARGET = "Depo_LifeTech"
 BUILD_FOLDER_NAME = "builds"
@@ -20,6 +20,7 @@ BUILD_FOLDER_NAME = "builds"
 
 TYPES = ["development", "appstore", "adhoc"]
 CONFIGS = ["debug", "release", "adhoc"]
+SCHEMES = ["PROD", "PREPROD", "TEST"]
 
 # If you want to automatically update fastlane if a new version is available:
 # update_fastlane
@@ -38,24 +39,43 @@ platform :ios do
 		end
 	end
 
+	lane :beta_jenkins_preprod do
+		begin
+			jenkins_build_preprod()
+		rescue => exception
+			on_error(exception)
+		end
+	end
+
 	def jenkins_build
 		xcode_select "/Applications/Xcode.app"
 		setup_jenkins
-		my_gym(config: "adhoc")
+		bundle_install
+		cocoapods
+		my_gym(scheme: "PROD")
+		fabric
+		slack_post
+	end
+
+	def jenkins_build_preprod
+		xcode_select "/Applications/Xcode.app"
+		setup_jenkins
+		bundle_install
+		cocoapods
+		my_gym(scheme: "PREPROD")
 		fabric
 		slack_post
 	end
 
 
-
 	lane :beta_diawi do
 		setup_jenkins
-		my_gym(config: "adhoc")
+		my_gym(scheme: "PROD")
 		diawi
 	end
 
 	lane :beta_fabric do
-		my_gym(config: "adhoc")
+		my_gym(scheme: "PROD")
 		fabric
 		slack_post
 		notify_about_completion
@@ -67,16 +87,17 @@ platform :ios do
   desc "Create ipa"
   lane :my_gym do |options|
   	
-    # config = options[:config]
+    scheme = options[:scheme]
 
-    # if !CONFIGS.include?(config)
-    #   raise("config can be debug, release or adhoc")
-    #   exit
-    # end
+    if !SCHEMES.include?(scheme)
+      # raise("scheme can be PROD, PREPROD or TEST")
+      UI.user_error!("scheme can be PROD, PREPROD or TEST")
+      # exit
+    end
 
     gym(
       # configuration: config, #"Adhoc", # Defaults to 'Release'
-      scheme: SCHEME,
+      scheme: "Depo_LifeTech_" + scheme,
       silent: true, # Hide all information that's not necessary while building
       clean: false,
       output_directory: "./#{BUILD_FOLDER_NAME}",    # store the ipa in this folder
@@ -155,6 +176,7 @@ platform :ios do
   end
 
   def on_error(exception)
+  	UI.user_error!("Build failed with exception : #{exception}")
   	slack(
   		message: "Build failed with exception : #{exception}",
   		success: false,

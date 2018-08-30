@@ -18,7 +18,7 @@ class GetContacts: BaseRequestParametrs {
     
     override var patch: URL {
         let path = String(format: RouteRequests.getContacts, page)
-        return URL(string: path, relativeTo: RouteRequests.BaseContactsUrl)!
+        return URL(string: path, relativeTo: RouteRequests.baseContactsUrl)!
     }
 }
 
@@ -34,7 +34,7 @@ class SearchContacts: BaseRequestParametrs {
     
     override var patch: URL {
         let path = String(format: RouteRequests.searchContacts, query, page)
-        return URL.encodingURL(string: path, relativeTo: RouteRequests.BaseContactsUrl)!
+        return URL.encodingURL(string: path, relativeTo: RouteRequests.baseContactsUrl)!
     }
 }
 
@@ -47,7 +47,7 @@ class DeleteContacts: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: RouteRequests.deleteContacts, relativeTo: RouteRequests.BaseContactsUrl)!
+        return URL(string: RouteRequests.deleteContacts, relativeTo: RouteRequests.baseContactsUrl)!
     }
     
     override var requestParametrs: Any {

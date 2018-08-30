@@ -126,7 +126,11 @@ class APIReachabilityService {
 
 class APIHostReachabilityRequestParameters: BaseRequestParametrs {
     override var patch: URL {
-        return RouteRequests.BaseUrl
+        return URL(string: "https://adepo.turkcell.com.tr/")!
+    }
+    
+    override var header: RequestHeaderParametrs {
+        return [:]
     }
 }
 
@@ -137,7 +141,6 @@ class APIReachabilityRequestService: BaseRequestService {
             handler(true)
         }, fail: { _ in
             handler(false)
-            
         })
         executeHeadRequest(param: parameters, handler: responseHandler)
     }

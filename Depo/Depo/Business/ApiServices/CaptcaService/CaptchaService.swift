@@ -30,7 +30,7 @@ struct CaptchaParametr: RequestParametrs {
     
     var patch: URL {
         let patch_: String = String(format: RouteRequests.captcha, type, uuid)
-        return URL(string: patch_, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: patch_, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -46,7 +46,7 @@ final class CaptchaSignUpRequrementService {
     }
     
     public func getCaptchaRequrement(handler: @escaping ResponseBool) {
-        guard let requestURL = URL(string: RouteRequests.captchaRequred, relativeTo: RouteRequests.BaseUrl) else {
+        guard let requestURL = URL(string: RouteRequests.captchaRequred, relativeTo: RouteRequests.baseUrl) else {
             handler(ResponseResult.failed(CustomErrors.unknown))
             return
         }
@@ -84,7 +84,7 @@ struct CaptchaSignUpRequrementParametr: RequestParametrs {
     
     var patch: URL {
         let patch_: String = String(format: RouteRequests.captchaRequred)
-        return URL(string: patch_, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: patch_, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -108,7 +108,7 @@ struct CaptchaParametrAnswer: RequestParametrs {
     
     var patch: URL {
         let patch_: String = String(format: RouteRequests.captcha, answer, uuid)
-        return URL(string: patch_, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: patch_, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {

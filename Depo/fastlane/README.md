@@ -21,6 +21,11 @@ or alternatively using `brew cask install fastlane`
 fastlane ios beta_jenkins
 ```
 
+### ios beta_jenkins_preprod
+```
+fastlane ios beta_jenkins_preprod
+```
+
 ### ios beta_diawi
 ```
 fastlane ios beta_diawi

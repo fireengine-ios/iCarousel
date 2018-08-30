@@ -9,7 +9,7 @@
 import Foundation
 
 struct SubscriptionPath {
-    static let activeSubscription = "/api/account/activeSubscriptionList"
+    static let activeSubscription = "account/activeSubscriptionList"
 //    static let currentSubscription = "/api/account/currentSubscription" /// MAYBE WILL BE NEED
 //    static let cancelSubscription = "/api/account/cancelSubscription" /// MAYBE WILL BE NEED
 }
