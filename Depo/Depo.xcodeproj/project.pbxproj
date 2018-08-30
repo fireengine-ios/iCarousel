@@ -2898,6 +2898,8 @@
 		CE3E4D14201C7B6600173045 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D12201C70A100173045 /* ImageManager.swift */; };
 		CE3F33AF1F34881800EE37E7 /* SharedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F33AE1F34881800EE37E7 /* SharedService.swift */; };
 		CE40133B1FCFE4AF006F28FD /* PromoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40133A1FCFE4AF006F28FD /* PromoView.swift */; };
+		CE40EACF2136BEEB0038ABAC /* LaunchCampaignCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40EACE2136BEEB0038ABAC /* LaunchCampaignCard.swift */; };
+		CE40EAD12136BEF30038ABAC /* LaunchCampaignCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE40EAD02136BEF30038ABAC /* LaunchCampaignCard.xib */; };
 		CE4140621F0A5F6D001924E1 /* CaptchaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4140551F0A5F6D001924E1 /* CaptchaViewController.xib */; };
 		CE4140631F0A5F6D001924E1 /* CaptchaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4140561F0A5F6D001924E1 /* CaptchaViewController.swift */; };
 		CE4363411F6FC43F004724BF /* ActivitiesByDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633D1F6FC3D3004724BF /* ActivitiesByDay.swift */; };
@@ -5297,6 +5299,8 @@
 		CE3E4D12201C70A100173045 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		CE3F33AE1F34881800EE37E7 /* SharedService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedService.swift; sourceTree = "<group>"; };
 		CE40133A1FCFE4AF006F28FD /* PromoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoView.swift; sourceTree = "<group>"; };
+		CE40EACE2136BEEB0038ABAC /* LaunchCampaignCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCampaignCard.swift; sourceTree = "<group>"; };
+		CE40EAD02136BEF30038ABAC /* LaunchCampaignCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchCampaignCard.xib; sourceTree = "<group>"; };
 		CE4140551F0A5F6D001924E1 /* CaptchaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptchaViewController.xib; sourceTree = "<group>"; };
 		CE4140561F0A5F6D001924E1 /* CaptchaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptchaViewController.swift; sourceTree = "<group>"; };
 		CE43633D1F6FC3D3004724BF /* ActivitiesByDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesByDay.swift; sourceTree = "<group>"; };
@@ -8262,6 +8266,7 @@
 				7CE825B91F823CDE00356AD2 /* FreeUpSpacePopUp */,
 				7C1F89861F6FFC0D00740177 /* ProgressPopUp */,
 				CE4851F22018B13A006B8854 /* FilterPhotoCard */,
+				CE40EAD22136BF080038ABAC /* LaunchCampaignCard */,
 			);
 			path = PopUpSubViews;
 			sourceTree = "<group>";
@@ -10811,6 +10816,15 @@
 			path = SharedService;
 			sourceTree = "<group>";
 		};
+		CE40EAD22136BF080038ABAC /* LaunchCampaignCard */ = {
+			isa = PBXGroup;
+			children = (
+				CE40EAD02136BEF30038ABAC /* LaunchCampaignCard.xib */,
+				CE40EACE2136BEEB0038ABAC /* LaunchCampaignCard.swift */,
+			);
+			path = LaunchCampaignCard;
+			sourceTree = "<group>";
+		};
 		CE4140461F0A5F6D001924E1 /* Captcha */ = {
 			isa = PBXGroup;
 			children = (
@@ -13238,6 +13252,7 @@
 				8C06AF562008AD70003D8E05 /* daire.png in Resources */,
 				CEBBDE0E1F01E69B00CDF527 /* TurkcellSaturaReg.ttf in Resources */,
 				8C06B1B62008AD72003D8E05 /* CRYShareViewController.nib in Resources */,
+				CE40EAD12136BEF30038ABAC /* LaunchCampaignCard.xib in Resources */,
 				8C06AFCE2008AD71003D8E05 /* info_icon@2x.png in Resources */,
 				8C06B08E2008AD71003D8E05 /* paylas_whatsapp.png in Resources */,
 				8C06B1742008AD72003D8E05 /* toolbar_undo_icon@3x.png in Resources */,
@@ -15635,6 +15650,7 @@
 				CE51ACE61EF90853005DCEE0 /* IntroduceRouter.swift in Sources */,
 				8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */,
 				7C6E2F541F31BD2200536DB6 /* PhotoStory.swift in Sources */,
+				CE40EACF2136BEEB0038ABAC /* LaunchCampaignCard.swift in Sources */,
 				CE51ACE71EF90853005DCEE0 /* IntroduceConfigurator.swift in Sources */,
 				CE57DFA81FDE663C0065B688 /* DarkPopUpController.swift in Sources */,
 				CE0ED9761FBC0F5A00487632 /* PasscodeStorage.swift in Sources */,
