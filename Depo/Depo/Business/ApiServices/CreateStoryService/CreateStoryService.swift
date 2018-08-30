@@ -72,7 +72,7 @@ class CreateStoryPreview: CreateStory {
     }
     
     override var patch: URL {
-        return URL(string: CreateStoryPath.preview, relativeTo: super.patch)!
+        return RouteRequests.baseUrl +/ CreateStoryPath.preview
     }
     
 }
