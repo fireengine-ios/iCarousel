@@ -14,7 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LaunchCampaignCard" customModule="lifebox" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="340" height="511"/>
+            <rect key="frame" x="0.0" y="0.0" width="340" height="549"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2D-rk-kD8">
@@ -58,7 +58,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNl-Iv-elD">
-                    <rect key="frame" x="25" y="449.5" width="46" height="61.5"/>
+                    <rect key="frame" x="25" y="449.5" width="46" height="99.5"/>
                     <state key="normal" title="Button"/>
                     <connections>
                         <action selector="onActionButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="yqa-Ir-b95"/>
@@ -98,7 +98,7 @@
                 <outlet property="titleLabel" destination="841-M9-ENc" id="arX-Fl-Lbm"/>
                 <outlet property="titleView" destination="u2D-rk-kD8" id="5JJ-bn-9gE"/>
             </connections>
-            <point key="canvasLocation" x="16" y="10.5"/>
+            <point key="canvasLocation" x="16" y="29.5"/>
         </view>
     </objects>
     <resources>
