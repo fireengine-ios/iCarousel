@@ -111,6 +111,11 @@ class CardsManager: NSObject {
         homeCardsObjects.removeAll()
         homeCardsObjects.append(contentsOf: sortedArray)
         
+        /// to test launchCampaign
+//        let q = HomeCardResponse()
+//        q.type = .launchCampaign
+//        homeCardsObjects.append(q)
+        
         homeCardsObjects = homeCardsObjects.filter {
             if let type = $0.getOperationType() {
                 ///LR-5518 need remove when gif format will work corectly for all application

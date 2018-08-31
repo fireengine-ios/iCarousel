@@ -69,7 +69,7 @@ final class LaunchCampaignCard: BaseView {
     }
     
     override func deleteCard() {
-        super.deleteCard()
+        /// we don't need: super.deleteCard()
         CardsManager.default.stopOperationWithType(type: .launchCampaign, serverObject: cardObject)
     }
     
