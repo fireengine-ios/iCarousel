@@ -61,6 +61,11 @@ Post message to the #lifebox-ios-firengine slack channel
 fastlane ios notify_about_completion
 ```
 
+### ios test_get_build_number
+```
+fastlane ios test_get_build_number
+```
+
 
 ----
 
