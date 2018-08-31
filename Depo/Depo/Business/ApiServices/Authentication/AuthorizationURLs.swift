@@ -14,6 +14,6 @@ protocol AuthorizationURLs {
 }
 
 final class AuthorizationURLsImp: AuthorizationURLs {
-    let baseUrl = RouteRequests.BaseUrl
-    let refreshAccessToken = RouteRequests.BaseUrl +/ RouteRequests.authificationByRememberMe
+    let baseUrl = RouteRequests.baseUrl
+    let refreshAccessToken = RouteRequests.baseUrl +/ RouteRequests.authificationByRememberMe
 }

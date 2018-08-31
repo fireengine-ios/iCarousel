@@ -173,7 +173,7 @@ struct AdvancedSearchParameters: RequestParametrs {
                                      sortBy.description,
                                      sortOrder.description)
         
-        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -212,7 +212,7 @@ class UnifiedSearchParameters: BaseRequestParametrs {
 //                                     text, category.rawValue,
 //                                     page.description, size.description)
         
-        return URL.encodingURL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
+        return URL.encodingURL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
     
 }
@@ -227,7 +227,7 @@ class SuggestionParametrs: BaseRequestParametrs {
 
     override var patch: URL {
         let suggestionParameters = String(format: RouteRequests.suggestion, text)
-        return URL.encodingURL(string: suggestionParameters, relativeTo: RouteRequests.BaseUrl)!
+        return URL.encodingURL(string: suggestionParameters, relativeTo: RouteRequests.baseUrl)!
     }
 }
 
@@ -258,7 +258,7 @@ class AlbumParameters: BaseRequestParametrs {
                                      sortOrder.description
                                      )
         
-        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }
 
@@ -287,7 +287,7 @@ class AlbumDetalParameters: BaseRequestParametrs {
                                      sortOrder.description
         )
         
-        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }
 

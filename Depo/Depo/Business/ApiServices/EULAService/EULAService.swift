@@ -51,7 +51,7 @@ struct EULAGet: RequestParametrs {
     
     var patch: URL {
         let patch = String(format: RouteRequests.eulaGet, Device.locale)
-        return URL(string: patch, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: patch, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -70,7 +70,7 @@ struct EULACheck: RequestParametrs {
     
     var patch: URL {
         let patch = String(format: RouteRequests.eulaCheck, Device.locale)
-        return URL(string: patch, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: patch, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -91,7 +91,7 @@ struct  EULAApprove: RequestParametrs {
     
     var patch: URL {
         let patch = String(format: RouteRequests.eulaApprove, id )
-        return URL(string: patch, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: patch, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {

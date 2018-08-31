@@ -10,15 +10,15 @@ import Foundation
 
 
 private struct OfferPath {
-    static let offers = "/api/account/offers"
-    static let activateOffer = "/api/account/activateOffer"
-    static let allAccessOffers = "/api/account/allAccessOffers/APPLE"
-    static let validateApplePurchase = "/api/inapppurchase/apple/validatePurchase"
+    static let offers = "account/offers"
+    static let activateOffer = "account/activateOffer"
+    static let allAccessOffers = "account/allAccessOffers/APPLE"
+    static let validateApplePurchase = "inapppurchase/apple/validatePurchase"
     
-    static let initOffer = "/api/account/initOfferPurchase"
-    static let verifyOffer = "/api/account/verifyOfferPurchase"
+    static let initOffer = "account/initOfferPurchase"
+    static let verifyOffer = "account/verifyOfferPurchase"
     
-    static let jobExists = "/api/account/isSubscriptionJobExists"
+    static let jobExists = "account/isSubscriptionJobExists"
     
     static let submitPromocode = "https://mylifebox.com/api/promo/activate"
 }

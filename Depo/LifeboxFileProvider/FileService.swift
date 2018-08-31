@@ -18,12 +18,12 @@ final class FileService {
         ShareConfigurator().setup()
     }
     
-    let fileListUrl = "https://adepo.turkcell.com.tr/api/filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
+    let fileListUrl = RouteRequests.baseUrl +/ "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
     
     //DataRequest
     func getFiles(folderUUID: String, page: Int, handler: @escaping ResponseHandler<[FileProviderItem]>) {
         
-        let url = String(format: fileListUrl, folderUUID, "name", "ASC", page, 100)
+        let url = String(format: fileListUrl.absoluteString, folderUUID, "name", "ASC", page, 100)
         
         sessionManager
             .request(url)

@@ -82,7 +82,7 @@ final class PlacesParameters: BaseRequestParametrs {
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.places)
         
-        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }
 
@@ -95,7 +95,7 @@ final class PlacesAlbumParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.placesAlbum, id)
-        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }
 
@@ -110,7 +110,7 @@ final class PlacesPageParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.placesPage, pageSize, pageNumber)
-        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }
 
