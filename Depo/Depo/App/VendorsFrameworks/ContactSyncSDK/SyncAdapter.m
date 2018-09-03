@@ -29,7 +29,11 @@
     [SyncAdapter request:[self buildURL:@"getUpdatedContacts"] params:dict headers:nil method:GET callback:callback];
 }
 
-+ (void)sendStats:(NSString*)key start:(NSInteger)start result:(NSInteger)result created:(NSInteger)created updated:(NSInteger)updated deleted:(NSInteger)deleted  status:(NSInteger)status errorCode:(NSString*)errorCode errorMsg:(NSString*)errorMsg
++ (void)sendStats:(NSString*)key start:(NSInteger)start result:(NSInteger)result created:(NSInteger)created updated:(NSInteger)updated deleted:(NSInteger)deleted  status:(NSInteger)status errorCode:(NSString*)errorCode errorMsg:(NSString*)errorMsg {
+    [self sendStats:key start:start result:result created:created updated:updated deleted:deleted status:status errorCode:errorCode errorMsg:errorMsg operation:nil];
+}
+
++ (void)sendStats:(NSString*)key start:(NSInteger)start result:(NSInteger)result created:(NSInteger)created updated:(NSInteger)updated deleted:(NSInteger)deleted  status:(NSInteger)status errorCode:(NSString*)errorCode errorMsg:(NSString*)errorMsg operation:(NSString*) operation
 {
     if (SYNC_IS_NULL(key)){
         return;
@@ -45,6 +49,9 @@
     }
     if(errorMsg != nil){
         [mutableData setObject:errorMsg forKey:@"errorMsg"];
+    }
+    if(operation != nil){
+        [mutableData setObject:operation forKey:@"operation"];
     }
 
     [SyncAdapter request:[self buildURL:@"stats"] params:mutableData headers:nil method:POST callback:nil];

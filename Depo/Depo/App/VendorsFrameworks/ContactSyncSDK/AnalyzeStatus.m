@@ -94,4 +94,37 @@
     _progress = 0;
 }
 
+
+- (NSString*) resultTypeToString:(AnalyzeResultType) type {
+    NSString *result = nil;
+    
+    switch(type) {
+        case INITIAL:
+            result = @"INITIAL";
+            break;
+        case ANALYZE:
+            result = @"ANALYZE";
+            break;
+        case CANCELLED:
+            result = @"CANCELLED";
+            break;
+        case SUCCESS:
+            result = @"SUCCESS";
+            break;
+        case INTERNAL_ERROR:
+            result = @"INTERNAL_ERROR";
+            break;
+        case ANALYZE_RESULT_ERROR_PERMISSION_ADDRESS_BOOK:
+            result = @"ANALYZE_RESULT_ERROR_PERMISSION_ADDRESS_BOOK";
+            break;
+        case ANALYZE_RESULT_ERROR_NETWORK:
+            result = @"ANALYZE_RESULT_ERROR_NETWORK";
+            break;
+        default:
+            result = @"";
+    }
+    
+    return result;
+}
+
 @end
