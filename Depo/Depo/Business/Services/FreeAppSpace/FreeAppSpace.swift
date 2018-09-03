@@ -235,11 +235,11 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         duplicatesArray.removeAll()
         serverDuplicatesArray.removeAll()
         
-        dispatchQueue.async { [weak self] in
+        MediaItemOperationsService.shared.allLocalItems() { [weak self] localItems in
             guard let `self` = self else {
                 return
             }
-            self.localtemsArray.append(self.allLocalItems().sorted { item1, item2 -> Bool in
+            self.localtemsArray.append(localItems.sorted { item1, item2 -> Bool in
                 if let date1 = item1.creationDate, let date2 = item2.creationDate {
                     if (date1 > date2) {
                         return true
@@ -341,11 +341,6 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             fail()
         }, newFieldValue: nil)
     }
-    
-    private func allLocalItems() -> [WrapData] {
-        return MediaItemOperationsService.shared.allLocalItems()
-    }
-    
 
     func getLocalFiesComaredWithServerObjectsAndClearFreeAppSpace(serverObjects: [WrapData], localObjects: [WrapData]) -> [WrapData] {
         var comparedFiles = [WrapData]()
@@ -548,7 +543,7 @@ class FreeAppService: RemoteItemsService {
         super.init(requestSize: 9999, fieldValue: .audio)
     }
     
-    func allItems(success: ListRemoveItems?, fail: FailRemoteItems?) {
+    func allItems(success: ListRemoteItems?, fail: FailRemoteItems?) {
         if self.isGotAll {
             success?([])
             return
@@ -560,7 +555,7 @@ class FreeAppService: RemoteItemsService {
         }
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         allItems(success: success, fail: fail)
     }
     

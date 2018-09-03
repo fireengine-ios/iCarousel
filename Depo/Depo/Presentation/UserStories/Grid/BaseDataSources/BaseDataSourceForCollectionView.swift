@@ -1621,27 +1621,27 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 let localIDs = serverObjects.map {
                     $0.getTrimmedLocalID()
                 }
-                let localObjectsForReplace = MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: localIDs)
-                
-                let foundedLocalID = localObjectsForReplace.map {
-                    $0.getTrimmedLocalID()
-                }
-                for object in serverObjects {
-                    let trimmedID = object.getTrimmedLocalID()
-                    if let index = foundedLocalID.index(of: trimmedID) {
-                        let objForReplace = localObjectsForReplace[index]
-                        if let index = allItemsIDs.index(of: trimmedID){
-                            allItemsIDs.remove(at: index)
-                            if allItemsIDs.contains(trimmedID) {
-                                idsForRemove.append(object.uuid)
-                            } else {
-                                objectsForReplaceDict[object.uuid] = objForReplace
-                            }
-                        }
-                    } else {
-                        idsForRemove.append(object.uuid)
+                MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: localIDs) { localObjectsForReplace in
+                    let foundedLocalID = localObjectsForReplace.map {
+                        $0.getTrimmedLocalID()
                     }
-                }
+                    for object in serverObjects {
+                        let trimmedID = object.getTrimmedLocalID()
+                        if let index = foundedLocalID.index(of: trimmedID) {
+                            let objForReplace = localObjectsForReplace[index]
+                            if let index = allItemsIDs.index(of: trimmedID){
+                                allItemsIDs.remove(at: index)
+                                if allItemsIDs.contains(trimmedID) {
+                                    idsForRemove.append(object.uuid)
+                                } else {
+                                    objectsForReplaceDict[object.uuid] = objForReplace
+                                }
+                            }
+                        } else {
+                            idsForRemove.append(object.uuid)
+                        }
+                    }
+                }  
             } else {
                 idsForRemove = items.map{
                     $0.uuid

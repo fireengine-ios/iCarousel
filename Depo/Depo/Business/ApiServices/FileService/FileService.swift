@@ -453,28 +453,34 @@ class FileService: BaseRequestService {
                         default     : break
                     }
                     
-                    if let item = downloadParam.item, let mediaItem = MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
+                    if let downloadItem = downloadParam.item {
+                        MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS: [downloadItem.getTrimmedLocalID()]) { mediaItems in
+                            if mediaItems.first != nil {
+                                removeDestinationFile()
+                                success?()
+                            } else {
+                                LocalMediaStorage.default.appendToAlboum(fileUrl: destination,
+                                                                         type: type,
+                                                                         album: downloadParam.albumName,
+                                                                         item: downloadParam.item,
+                                                                         success: {
+                                                                            removeDestinationFile()
+                                                                            success?()
+                                }, fail: { error in
+                                    removeDestinationFile()
+                                    fail?(error)
+                                })
+                            }
+                        }
+                        
                         ///For now we do not update local files by remotes
 //                        CoreDataStack.default.updateSavedItems(savedItems: [mediaItem],
 //                                                               remoteItems: [item],
 //                                                               context: CoreDataStack.default.newChildBackgroundContext)
-                        removeDestinationFile()
-                        success?()
+                        
                     } else {
-                        LocalMediaStorage.default.appendToAlboum(fileUrl: destination,
-                                                                 type: type,
-                                                                 album: downloadParam.albumName,
-                                                                 item: downloadParam.item,
-                        success: {
-                            removeDestinationFile()
-                            success?()
-                        }, fail: { error in
-                            removeDestinationFile()
-                            fail?(error)
-                        })
+                      fail?(.string("Incorrect response "))
                     }
-                    
-
                 } else {
                     fail?(.string("Incorrect response "))
                     return
@@ -501,7 +507,7 @@ class FileService: BaseRequestService {
                         handler: handler)
     }
     
-    func details(uuids: [String], success: ListRemoveItems?, fail: FailResponse?) {
+    func details(uuids: [String], success: ListRemoteItems?, fail: FailResponse?) {
         
         let param = FileDetails(uuids: uuids)
         let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { responce in
@@ -534,7 +540,7 @@ class FileService: BaseRequestService {
     
     func filesList(rootFolder: String = "", sortBy: SortType, sortOrder: SortOrder,
                    folderOnly: Bool = false, remoteServicePage: Int,
-                   success: ListRemoveItems?, fail: FailRemoteItems?) {
+                   success: ListRemoteItems?, fail: FailRemoteItems?) {
         page = remoteServicePage
         let requestParam = FileList(rootDir: rootFolder,
                                     sortBy: sortBy,

@@ -85,9 +85,10 @@ extension VideoSyncService: BackgroundTaskServiceDelegate {
             storageVars.interruptedSyncVideoQueueItems = lastInterruptedItemsUUIDs
             debugLog("Interrupted autosync queue:")
             
-            MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: lastInterruptedItemsUUIDs)
-                .forEach { debugLog($0.name ?? "") }
-            stop()
+            MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: lastInterruptedItemsUUIDs) { [weak self] mediaItems in
+                mediaItems.forEach { debugLog($0.name ?? "") }
+                self?.stop()
+            }
         }
     }
 }

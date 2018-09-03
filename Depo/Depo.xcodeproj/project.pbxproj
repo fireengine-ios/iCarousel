@@ -2342,6 +2342,9 @@
 		8C0E90711FDEBDFF00789C91 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
 		8C0E90721FDEBDFF00789C91 /* VisualMusicPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C77869A1F3F38EF005CB432 /* VisualMusicPlayerViewController.xib */; };
 		8C0E90731FDEBDFF00789C91 /* CreateStoryPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C66E8B31F979C6800D98F27 /* CreateStoryPreviewViewController.xib */; };
+		8C112800213D651E00385FB5 /* FaceImageDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */; };
+		8C112801213D655400385FB5 /* FaceImageDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA164C2121CA1E006D96A5 /* FaceImageDesigner.swift */; };
+		8C112802213D65AD00385FB5 /* PhotoVideoBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CE3212D90E400901295 /* PhotoVideoBottomBarManager.swift */; };
 		8C11C42E1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */; };
 		8C13C301210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
 		8C13C302210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
@@ -14319,6 +14322,7 @@
 				C62239B7204976E80043ED44 /* FaceImagePhotosPresenter.swift in Sources */,
 				8C0E8D411FDEBDFF00789C91 /* NavBarConfugurator.swift in Sources */,
 				8C0B91A720170EAB00A5BA81 /* ManageContactsViewOutput.swift in Sources */,
+				8C112801213D655400385FB5 /* FaceImageDesigner.swift in Sources */,
 				CE23A0F5205FF52B0048267D /* UserDefaultsForUserID.swift in Sources */,
 				8C0E8D431FDEBDFF00789C91 /* SwiftyJSONExtension.swift in Sources */,
 				8C0E8D441FDEBDFF00789C91 /* RemoteDownloder.swift in Sources */,
@@ -14547,6 +14551,7 @@
 				8C0E8DFE1FDEBDFF00789C91 /* PhoneVereficationViewInput.swift in Sources */,
 				8C0E8DFF1FDEBDFF00789C91 /* SplitIpadViewContoller.swift in Sources */,
 				8C0E8E001FDEBDFF00789C91 /* InstagramService.swift in Sources */,
+				8C112802213D65AD00385FB5 /* PhotoVideoBottomBarManager.swift in Sources */,
 				8C0E8E011FDEBDFF00789C91 /* LocationManager.swift in Sources */,
 				7C257B3820174D2500CB56F8 /* ContactBackupOld.swift in Sources */,
 				8C0E8E021FDEBDFF00789C91 /* PrintService.swift in Sources */,
@@ -14696,6 +14701,7 @@
 				8C0B91C3201714CC00A5BA81 /* StoriesInteractor.swift in Sources */,
 				8C0E8EAE1FDEBDFF00789C91 /* BaseFilesGreedViewInput.swift in Sources */,
 				8CD84C441FDEC570005CD3B8 /* AlbumDetailModuleOutput.swift in Sources */,
+				8C112800213D651E00385FB5 /* FaceImageDisplayManager.swift in Sources */,
 				8C0E8EAF1FDEBDFF00789C91 /* BaseFilesGreedViewOutput.swift in Sources */,
 				8C0E8EB01FDEBDFF00789C91 /* SubscriptionPlan.swift in Sources */,
 				B56FBB232122C3E7004F4A59 /* TermsOfUseConfigurator.swift in Sources */,

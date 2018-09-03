@@ -40,6 +40,7 @@ final class PhotoVideoDataSource: NSObject {
     private weak var collectionView: UICollectionView!
     
     private var originalFilterPredicate = NSPredicate() //maybe there is some sence to setup it every time from controller, and not here
+    private var duplicationPredicate = NSPredicate()//TODO: move all work with predicates into another class
     
     private lazy var sectionChanges = [() -> Void]()
     private lazy var objectChanges = [() -> Void]()
@@ -50,7 +51,7 @@ final class PhotoVideoDataSource: NSObject {
         let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
         
         
-
+    
 //        fetchRequest.predicate = NSPredicate(format: "isLocalItemValue = true AND ", [])
 //        NSCompoundPredicate(andPredicateWithSubpredicates:
         let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.creationDateValue), ascending: false)
@@ -94,6 +95,8 @@ final class PhotoVideoDataSource: NSObject {
         let filetPredicate = NSPredicate(format: predicateFormat)
         originalFilterPredicate = filetPredicate
        fetchedResultsController.fetchRequest.predicate = originalFilterPredicate
+        
+        setupDuplicationPredicate()
     }
     
     func changeSourceFilter(syncOnly: Bool) {
@@ -111,12 +114,45 @@ final class PhotoVideoDataSource: NSObject {
 
 // MARK: - DATA BASE
 
-//private func setupDuplicationPredicate() {
-//    //        fetchRequest.predicate = NSPredicate(format: "isLocalItemValue = true AND ", [])
-//    //        NSCompoundPredicate(andPredicateWithSubpredicates:
-////    let
-//}
-
+extension PhotoVideoDataSource {
+    private func setupDuplicationPredicate() {
+        //        fetchRequest.predicate = NSPredicate(format: "isLocalItemValue = true AND ", [])
+        //        NSCompoundPredicate(andPredicateWithSubpredicates:
+        createPredicate(createdPredicateCallback: {[weak self] predicate in
+            //TODO: compound predicate
+            debugPrint("!!! PREDICATE SETUPED")
+            DispatchQueue.main.async {
+                self?.fetchedResultsController.fetchRequest.predicate = predicate
+                self?.performFetch()////also need to reload here
+            }
+        })
+    }
+    
+    private func createPredicate(createdPredicateCallback: @escaping (_ predicate: NSPredicate) -> Void) {
+        guard !CacheManager.shared.processingRemoteItems else {
+            CacheManager.shared.remotePageAdded = { [weak self] in
+                self?.createPredicate(createdPredicateCallback: createdPredicateCallback)
+            }
+            return
+        }
+        MediaItemOperationsService.shared.getAllRemotesMediaItem(allRemotes: { allRemotes in
+            var remoteMD5s = [String]()
+            var remoteLocalIDs = [String]()
+            allRemotes.forEach {
+                remoteMD5s.append($0.md5Value ?? "")
+                remoteLocalIDs.append($0.trimmedLocalFileID ?? "")
+            }
+            //REMOVE ME
+            //        let locals = MediaItemOperationsService.shared.allLocalItems()
+            //REMOVE ME
+            let duplicationPredicate = NSPredicate(format: "isLocalItemValue == TRUE AND NOT md5Value IN \(remoteMD5s)")/*  AND NOT (trimmedLocalFileID IN \(remoteLocalIDs))) OR isLocalItemValue == FALSE"*/
+            /// ///PREDICATE HERE
+            createdPredicateCallback(duplicationPredicate)
+        })
+    }
+//    private func compundPredicates()
+    
+}
 
 // MARK: - UICollectionViewDataSource
 extension PhotoVideoDataSource: UICollectionViewDataSource {
