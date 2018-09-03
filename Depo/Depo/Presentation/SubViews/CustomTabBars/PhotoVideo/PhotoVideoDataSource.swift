@@ -118,14 +118,14 @@ extension PhotoVideoDataSource {
     private func setupDuplicationPredicate() {
         //        fetchRequest.predicate = NSPredicate(format: "isLocalItemValue = true AND ", [])
         //        NSCompoundPredicate(andPredicateWithSubpredicates:
-        createPredicate(createdPredicateCallback: {[weak self] predicate in
-            //TODO: compound predicate
-            debugPrint("!!! PREDICATE SETUPED")
-            DispatchQueue.main.async {
-                self?.fetchedResultsController.fetchRequest.predicate = predicate
-                self?.performFetch()////also need to reload here
-            }
-        })
+//        createPredicate(createdPredicateCallback: {[weak self] predicate in
+//            //TODO: compound predicate
+//            debugPrint("!!! PREDICATE SETUPED")
+//            DispatchQueue.main.async {
+//                self?.fetchedResultsController.fetchRequest.predicate = predicate
+//                self?.performFetch()////also need to reload here
+//            }
+//        })
     }
     
     private func createPredicate(createdPredicateCallback: @escaping (_ predicate: NSPredicate) -> Void) {
@@ -145,7 +145,7 @@ extension PhotoVideoDataSource {
             //REMOVE ME
             //        let locals = MediaItemOperationsService.shared.allLocalItems()
             //REMOVE ME
-            let duplicationPredicate = NSPredicate(format: "isLocalItemValue == TRUE AND NOT md5Value IN \(remoteMD5s)")/*  AND NOT (trimmedLocalFileID IN \(remoteLocalIDs))) OR isLocalItemValue == FALSE"*/
+            let duplicationPredicate = NSPredicate(format: "isLocalItemValue == true AND NOT (md5Value IN %@)", remoteMD5s)/*  AND NOT (trimmedLocalFileID IN \(remoteLocalIDs))) OR isLocalItemValue == FALSE"*/
             /// ///PREDICATE HERE
             createdPredicateCallback(duplicationPredicate)
         })
