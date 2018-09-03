@@ -216,7 +216,6 @@ platform :ios do
 
 
   lane :poeditor_download do
-    install_plugins
     for language in ["en", "uk", "tr", "ru", "ro", "es", "de", "ar"]
       poeditor_export(
         api_token: "be344da1ca0b150bafc6a74019ecaa12",
