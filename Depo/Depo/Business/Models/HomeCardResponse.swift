@@ -53,6 +53,8 @@ final class HomeCardResponse : Equatable {
             return .freeAppSpace
         case .animation:
             return .animationCard
+        case .launchCampaign:
+            return .launchCampaign
         }
         
     }
@@ -86,4 +88,5 @@ enum HomeCardTypes: String {
     case freeUpSpace = "FREE_UP_SPACE"
     //case rating = "RATING"
     case animation = "ANIMATION"
+    case launchCampaign = "LAUNCH_CAMPAIGN"
 }

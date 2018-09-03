@@ -29,6 +29,8 @@ enum OperationType: String {
     case stylizedPhoto              = "stylizedPhoto"
     case movieCard                  = "movieCard"
     case animationCard              = "animation"
+    
+    case launchCampaign             = "launchCampaign"
 }
 
 typealias BlockObject = VoidHandler
@@ -50,9 +52,7 @@ class CardsManager: NSObject {
     private var deletedCards = Set<OperationType>()
     
     var cardsThatStartedByDevice: [OperationType] {
-        get {
-            return [.upload, .sync, .download, .prepareToAutoSync, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
-        }
+        return [.upload, .sync, .download, .prepareToAutoSync, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
     }
     
     func clear() {
@@ -110,6 +110,11 @@ class CardsManager: NSObject {
         }
         homeCardsObjects.removeAll()
         homeCardsObjects.append(contentsOf: sortedArray)
+        
+        /// to test launchCampaign
+//        let q = HomeCardResponse()
+//        q.type = .launchCampaign
+//        homeCardsObjects.append(q)
         
         homeCardsObjects = homeCardsObjects.filter {
             if let type = $0.getOperationType() {
@@ -354,6 +359,8 @@ class CardsManager: NSObject {
             cardView = MovieCard.initFromNib()
         case .animationCard:
             cardView = AnimationCard.initFromNib()
+        case .launchCampaign:
+            cardView = LaunchCampaignCard.initFromNib()
         }
         
         cardView.set(object: serverObject)

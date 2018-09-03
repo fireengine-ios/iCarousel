@@ -673,3 +673,6 @@
 "facebook_tags_off" = "You will get your Facebook tags to lifebox when you enable this option";
 "facebook_tags_import" = "Please enable \\\"Facebook Import\\\" option to use \\\"Facebook Tag Transfer\\\" feature";
 "TermsOfUseLinkText" = "TapHere";
+"launch_campaign_card_detail" = "Details";
+"launch_campaign_card_title" = "Prague Campaign";
+"launch_campaign_card_message" = "Prague is waiting for you! Start exploring lifebox right now and be one of the 10 lucky couples";

@@ -181,4 +181,5 @@ struct RouteRequests {
         }
     }
 
+    static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
 }
