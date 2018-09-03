@@ -66,6 +66,11 @@ fastlane ios notify_about_completion
 fastlane ios test_get_build_number
 ```
 
+### ios test_get_build_number_my
+```
+fastlane ios test_get_build_number_my
+```
+
 
 ----
 
