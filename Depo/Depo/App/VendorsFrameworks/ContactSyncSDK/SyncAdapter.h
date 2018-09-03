@@ -27,6 +27,7 @@ typedef enum {
 + (void)getServerTime:(void (^)(id, BOOL))callback;
 + (void)checkStatus:(NSString*)contactId callback:(void (^)(id, BOOL))callback;
 + (void)sendStats:(NSString*)key start:(NSInteger)start result:(NSInteger)result created:(NSInteger)created updated:(NSInteger)updated deleted:(NSInteger)deleted status:(NSInteger)status errorCode:(NSString*)errorCode errorMsg:(NSString*)errorMsg;
++ (void)sendStats:(NSString*)key start:(NSInteger)start result:(NSInteger)result created:(NSInteger)created updated:(NSInteger)updated deleted:(NSInteger)deleted status:(NSInteger)status errorCode:(NSString*)errorCode errorMsg:(NSString*)errorMsg operation:(NSString*)operation;
 
 + (void)sendLog:(NSData*)data file:(NSString*)file;
 
