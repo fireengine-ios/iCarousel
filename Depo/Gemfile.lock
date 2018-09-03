@@ -104,6 +104,7 @@ GEM
       xcodeproj (>= 1.5.7, < 2.0.0)
       xcpretty (~> 0.2.8)
       xcpretty-travis-formatter (>= 0.0.3)
+    fastlane-plugin-poeditor_export (0.3.0)
     fastlane-plugin-versioning (0.3.4)
     fourflusher (2.0.1)
     fuzzy_match (2.0.4)
@@ -206,6 +207,7 @@ PLATFORMS
 DEPENDENCIES
   cocoapods
   fastlane
+  fastlane-plugin-poeditor_export
   fastlane-plugin-versioning
   synx
   xcode-install

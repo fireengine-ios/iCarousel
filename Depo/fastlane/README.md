@@ -36,6 +36,11 @@ fastlane ios beta_diawi
 fastlane ios beta_fabric
 ```
 
+### ios beta_fabric_preprod
+```
+fastlane ios beta_fabric_preprod
+```
+
 ### ios my_gym
 ```
 fastlane ios my_gym
@@ -59,6 +64,11 @@ Post message to the #lifebox-ios-firengine slack channel
 ### ios notify_about_completion
 ```
 fastlane ios notify_about_completion
+```
+
+### ios poeditor_download
+```
+fastlane ios poeditor_download
 ```
 
 ### ios test_get_build_number

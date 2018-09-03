@@ -47,11 +47,17 @@ platform :ios do
 		end
 	end
 
+  def update_fastlane_plugins
+    sh("fastlane update_plugins")
+  end
+
 	def jenkins_build
 		xcode_select "/Applications/Xcode.app"
 		setup_jenkins
 		bundle_install
 		cocoapods
+    update_fastlane_plugins()
+    poeditor_download
 		my_gym(scheme: "PROD")
 		fabric
 		slack_post
@@ -62,15 +68,17 @@ platform :ios do
 		setup_jenkins
 		bundle_install
 		cocoapods
+    update_fastlane_plugins()
+    poeditor_download
 
-    build_number = get_build_number(xcodeproj: ".", target: "Depo_LifeTech")
-    set_build_number(xcodeproj: ".", target: "Depo_LifeTech", new_number: build_number + "_preprod")
+    build_number = get_build_number(xcodeproj: ".", target: TARGET)
+    set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number + "_preprod")
 
 		my_gym(scheme: "PREPROD")
 		fabric
 		slack_post
 
-    set_build_number(xcodeproj: ".", target: "Depo_LifeTech", new_number: build_number)
+    set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number)
 	end
 
 
@@ -86,6 +94,18 @@ platform :ios do
 		slack_post
 		notify_about_completion
 	end
+
+  lane :beta_fabric_preprod do
+    ## should be set localy(build lane), not in my_gym lane. slack_post could
+    build_number = get_build_number(xcodeproj: ".", target: TARGET)
+    set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number + "_preprod")
+
+    my_gym(scheme: "PREPROD")
+    fabric
+    slack_post
+    notify_about_completion
+    set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number)
+  end
 
 
   #--------------- build ipa ---------------
@@ -195,7 +215,18 @@ platform :ios do
   end
 
 
-
+  lane :poeditor_download do
+    install_plugins
+    for language in ["en", "uk", "tr", "ru", "ro", "es", "de", "ar"]
+      poeditor_export(
+        api_token: "be344da1ca0b150bafc6a74019ecaa12",
+        project_id: "113239",
+        export_format: "apple_strings",
+        language: language,
+        output_path: "./Depo/App/Resources/#{language}.lproj/OurLocalizable.strings"
+      )
+    end
+  end
 
 
 #--------------------- build_number functions ---------------------
@@ -211,12 +242,12 @@ platform :ios do
   end
 
   lane :test_get_build_number_my do
-    build_number = get_build_number(xcodeproj: ".", target: "Depo_LifeTech")
+    build_number = get_build_number(xcodeproj: ".", target: TARGET)
     puts "version: #{build_number}"
 
-    set_build_number(xcodeproj: ".", target: "Depo_LifeTech", new_number: build_number + "_preprod")
+    set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number + "_preprod")
 
-    build_number = get_build_number(xcodeproj: ".", target: "Depo_LifeTech")
+    build_number = get_build_number(xcodeproj: ".", target: TARGET)
     puts "new version: #{build_number}"
   end
 
