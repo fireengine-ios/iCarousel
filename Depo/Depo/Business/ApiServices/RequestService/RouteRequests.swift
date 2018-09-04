@@ -10,18 +10,17 @@ import Foundation
 
 struct RouteRequests {
     
-    private enum ServerEnvironment {
+    enum ServerEnvironment {
         case test
         case preProduction
         case production
 
-        static var currentEnvironment: ServerEnvironment = {
+        static let currentEnvironment: ServerEnvironment = {
             if UserDefaults.standard.bool(forKey: "TEST_ENV") {
                 return .test
             } else if UserDefaults.standard.bool(forKey: "PRE_PROD_ENV") {
                 return .preProduction
             }
-            
             return .production
         }()
         
@@ -52,7 +51,7 @@ struct RouteRequests {
 
     // MARK: Base API URLs
     
-    private static let currentEnvironment = ServerEnvironment.currentEnvironment
+    static let currentEnvironment = ServerEnvironment.currentEnvironment
     
     static let baseUrl = currentEnvironment.baseUrl
     static let unsecuredAuthenticationUrl = currentEnvironment.unsecuredAuthenticationUrl
@@ -182,4 +181,15 @@ struct RouteRequests {
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
+    
+    static let launchCampaignDetail: URL? = {
+        switch RouteRequests.currentEnvironment {
+        case .test:
+            return URL(string: "https://prv.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
+        case .preProduction:
+            return URL(string: "https://prv.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
+        case .production:
+            return URL(string: "https://www.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
+        }
+    }()
 }
