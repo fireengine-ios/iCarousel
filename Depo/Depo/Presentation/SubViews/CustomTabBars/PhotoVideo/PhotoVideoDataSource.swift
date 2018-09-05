@@ -100,9 +100,11 @@ final class PhotoVideoDataSource: NSObject {
         
         setupDuplicationPredicate(duplicationPredicateCallback: { [weak self] duplicatesPredicate in
             let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filetPredicate, duplicatesPredicate])
-            self?.originalPredicate = duplicatesPredicate
+            self?.originalPredicate = compundedPredicate
             self?.fetchedResultsController.fetchRequest.predicate = self?.originalPredicate
-            predicateSetupedCallback()
+//            DispatchQueue.main.async {
+                predicateSetupedCallback()
+//            }
         })
     }
     
@@ -122,15 +124,17 @@ final class PhotoVideoDataSource: NSObject {
 // MARK: - DATA BASE
 
 extension PhotoVideoDataSource {
-    private func setupDuplicationPredicate(duplicationPredicateCallback: (_ predicate: NSPredicate) -> Void) {
-        createPredicate(createdPredicateCallback: {[weak self] predicate in
-            //TODO: compound predicate
-            debugPrint("!!! PREDICATE SETUPED")
-            DispatchQueue.main.async {
-                self?.fetchedResultsController.fetchRequest.predicate = predicate
-                
-            }
-        })
+    private func setupDuplicationPredicate(duplicationPredicateCallback: @escaping (_ predicate: NSPredicate) -> Void) {
+        createPredicate(createdPredicateCallback: duplicationPredicateCallback)
+//            {[weak self] predicate in
+//            //TODO: compound predicate
+//            debugPrint("!!! PREDICATE SETUPED")
+//            duplicationPredicateCallback()
+////            DispatchQueue.main.async {
+////                self?.fetchedResultsController.fetchRequest.predicate = predicate
+////
+////            }
+//        })
     }
     
     private func createPredicate(createdPredicateCallback: @escaping (_ predicate: NSPredicate) -> Void) {
@@ -140,7 +144,7 @@ extension PhotoVideoDataSource {
             }
             return
         }
-        MediaItemOperationsService.shared.getAllRemotesMediaItem(allRemotes: { [weak self] allRemotes in
+        MediaItemOperationsService.shared.getAllRemotesMediaItem(allRemotes: { allRemotes in
             var remoteMD5s = [String]()
             var remoteLocalIDs = [String]()
             allRemotes.forEach {
@@ -150,7 +154,7 @@ extension PhotoVideoDataSource {
             //REMOVE ME
             //        let locals = MediaItemOperationsService.shared.allLocalItems()
             //REMOVE ME
-            let duplicationPredicateTmp = NSPredicate(format: "isLocalItemValue == true AND NOT (md5Value IN %@)", remoteMD5s)/*  AND NOT (trimmedLocalFileID IN \(remoteLocalIDs))) OR isLocalItemValue == FALSE"*/
+            let duplicationPredicateTmp = NSPredicate(format: "(isLocalItemValue == true AND NOT (md5Value IN %@) AND NOT (trimmedLocalFileID IN %@)) OR isLocalItemValue == FALSE", remoteMD5s, remoteLocalIDs)/*  AND NOT (trimmedLocalFileID IN \(remoteLocalIDs))) OR isLocalItemValue == FALSE"*/
             /// ///PREDICATE HERE
             //self?.duplicationPredicate = duplicationPredicateTmp
             createdPredicateCallback(duplicationPredicateTmp)

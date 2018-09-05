@@ -55,6 +55,7 @@ final class CacheManager {///adding files TO DB // managing cache
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
                 self?.remotePageAdded?()
                 if remoteItems.count < CacheManager.pageSize {
+                    self?.photoVideoService.currentPage = 0
                     completion()
                 }
             }
