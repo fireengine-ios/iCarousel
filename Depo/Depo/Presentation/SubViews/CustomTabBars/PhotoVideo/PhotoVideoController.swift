@@ -86,10 +86,11 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     // MARK: - setup
     
     private func performFetch() {
-        dataSource.setupOriginalFilter(isPhotos: isPhoto)
-        dataSource.performFetch()
-        collectionView.reloadData()
-        collectionViewManager.reloadAlbumsSlider()
+        dataSource.setupOriginalPredicates(isPhotos: isPhoto) { [weak self] in
+            self?.dataSource.performFetch()
+            self?.collectionView.reloadData()
+            self?.collectionViewManager.reloadAlbumsSlider()
+        }
     }
     
     private func updateCellSize() {

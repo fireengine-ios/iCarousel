@@ -10,6 +10,7 @@ import UIKit
 
 protocol PhotoVideoDataSourceDelegate: class {
     func selectedModeDidChange(_ selectingMode: Bool)
+    func fetchPredicateCreated()
 }
 
 // TODO: selectedIndexPaths NSFetchedResultsController changes
@@ -88,13 +89,13 @@ final class PhotoVideoDataSource: NSObject {
         try? fetchedResultsController.performFetch()
     }
     
-    func setupOriginalFilter(isPhotos: Bool) {
+    func setupOriginalPredicates(isPhotos: Bool, predicateSetupedCallback: @escaping VoidHandler) {
         let type = isPhotos ? FileType.image.valueForCoreDataMapping() :
         FileType.video.valueForCoreDataMapping()
         let predicateFormat = "fileTypeValue == \(type)"
         let filetPredicate = NSPredicate(format: predicateFormat)
         originalFilterPredicate = filetPredicate
-       fetchedResultsController.fetchRequest.predicate = originalFilterPredicate
+        fetchedResultsController.fetchRequest.predicate = originalFilterPredicate
         
         setupDuplicationPredicate()
     }
@@ -115,17 +116,15 @@ final class PhotoVideoDataSource: NSObject {
 // MARK: - DATA BASE
 
 extension PhotoVideoDataSource {
-    private func setupDuplicationPredicate() {
-        //        fetchRequest.predicate = NSPredicate(format: "isLocalItemValue = true AND ", [])
-        //        NSCompoundPredicate(andPredicateWithSubpredicates:
-//        createPredicate(createdPredicateCallback: {[weak self] predicate in
-//            //TODO: compound predicate
-//            debugPrint("!!! PREDICATE SETUPED")
-//            DispatchQueue.main.async {
-//                self?.fetchedResultsController.fetchRequest.predicate = predicate
-//                self?.performFetch()////also need to reload here
-//            }
-//        })
+    private func setupDuplicationPredicate(duplicationPredicateCallback: (_ predicate: NSPredicate) -> Void) {
+        createPredicate(createdPredicateCallback: {[weak self] predicate in
+            //TODO: compound predicate
+            debugPrint("!!! PREDICATE SETUPED")
+            DispatchQueue.main.async {
+                self?.fetchedResultsController.fetchRequest.predicate = predicate
+                
+            }
+        })
     }
     
     private func createPredicate(createdPredicateCallback: @escaping (_ predicate: NSPredicate) -> Void) {
@@ -135,7 +134,7 @@ extension PhotoVideoDataSource {
             }
             return
         }
-        MediaItemOperationsService.shared.getAllRemotesMediaItem(allRemotes: { allRemotes in
+        MediaItemOperationsService.shared.getAllRemotesMediaItem(allRemotes: { [weak self] allRemotes in
             var remoteMD5s = [String]()
             var remoteLocalIDs = [String]()
             allRemotes.forEach {
@@ -145,9 +144,10 @@ extension PhotoVideoDataSource {
             //REMOVE ME
             //        let locals = MediaItemOperationsService.shared.allLocalItems()
             //REMOVE ME
-            let duplicationPredicate = NSPredicate(format: "isLocalItemValue == true AND NOT (md5Value IN %@)", remoteMD5s)/*  AND NOT (trimmedLocalFileID IN \(remoteLocalIDs))) OR isLocalItemValue == FALSE"*/
+            let duplicationPredicateTmp = NSPredicate(format: "isLocalItemValue == true AND NOT (md5Value IN %@)", remoteMD5s)/*  AND NOT (trimmedLocalFileID IN \(remoteLocalIDs))) OR isLocalItemValue == FALSE"*/
             /// ///PREDICATE HERE
-            createdPredicateCallback(duplicationPredicate)
+            self?.duplicationPredicate = duplicationPredicateTmp
+            createdPredicateCallback(duplicationPredicateTmp)
         })
     }
 //    private func compundPredicates()
