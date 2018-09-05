@@ -71,6 +71,16 @@ fastlane ios notify_about_completion
 fastlane ios poeditor_download
 ```
 
+### ios switch_to_preprod
+```
+fastlane ios switch_to_preprod
+```
+
+### ios switch_to_prod
+```
+fastlane ios switch_to_prod
+```
+
 ### ios test_get_build_number
 ```
 fastlane ios test_get_build_number

@@ -89,14 +89,6 @@ final class LaunchCampaignCard: BaseView {
     }
     
     private func openLaunchCampaignUrl() {
-        let url: URL?
-        if UserDefaults.standard.bool(forKey: "TEST_ENV") {
-            url = URL(string: "https://www.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
-        } else if UserDefaults.standard.bool(forKey: "PRE_PROD_ENV") {
-            url = URL(string: "https://prv.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
-        } else { /// prod
-            url = URL(string: "https://www.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
-        }
-        UIApplication.shared.openSafely(url)
+        UIApplication.shared.openSafely(RouteRequests.launchCampaignDetail)
     }
 }
