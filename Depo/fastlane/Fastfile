@@ -28,9 +28,15 @@ SCHEMES = ["PROD", "PREPROD", "TEST"]
 # This is the minimum version number required.
 # fastlane_version "2.19.1"
 
-default_platform :ios
+# default_platform :ios
+
 
 platform :ios do
+
+  error do |lane, exception|
+    switch_to_prod
+  end
+
 	lane :beta_jenkins do
 		begin
 			jenkins_build()
@@ -71,15 +77,12 @@ platform :ios do
     update_fastlane_plugins()
     poeditor_download
 
-    build_number = get_build_number(xcodeproj: ".", target: TARGET)
-    set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number + "_preprod")
     switch_to_preprod
 
 		my_gym
 		fabric
 		slack_post
 
-    set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number)
     switch_to_prod
 	end
 
@@ -97,9 +100,6 @@ platform :ios do
 	end
 
   lane :beta_fabric_preprod do
-    ## should be set localy(build lane), not in my_gym lane. slack_post could
-    build_number = get_build_number(xcodeproj: ".", target: TARGET)
-    set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number + "_preprod")
     switch_to_preprod
 
     my_gym
@@ -107,7 +107,6 @@ platform :ios do
     slack_post
     notify_about_completion
 
-    set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number)
     switch_to_prod
   end
 
@@ -132,6 +131,7 @@ platform :ios do
       clean: false,
       output_directory: "./#{BUILD_FOLDER_NAME}",    # store the ipa in this folder
       output_name: "#{APP_NAME}.ipa",
+      # suppress_xcode_output: true,
       #output_directory: "path/to/dir", # Destination directory. Defaults to current directory.
       #output_name: "my-app.ipa",       # specify the name of the .ipa file to generate (including file extension)
       export_options: {
@@ -150,7 +150,7 @@ platform :ios do
 
   # https://dashboard.diawi.com/docs/apis/upload
   lane :diawi do
-  	ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
+  	# ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
     # time = Time.new
     diawiToken = 'rvA4lMxATOqmygUZmMgM7n5vchCnDkb5TJuZnVSibZ'
     filePath = "#{File.expand_path("..", Dir.pwd)}/#{BUILD_FOLDER_NAME}/#{APP_NAME}.ipa" # cd .. &&
@@ -166,7 +166,7 @@ platform :ios do
 
   desc "Distribute build via Fabric"
   lane :fabric do
-  	ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
+  	# ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
   	filePath = "#{File.expand_path("..", Dir.pwd)}/#{BUILD_FOLDER_NAME}/#{APP_NAME}.ipa"
 
   	crashlytics(
@@ -233,9 +233,7 @@ platform :ios do
 
 
   lane :switch_to_preprod do
-    # file_path = File.absolute_path("#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift")
-    # puts file_path
-    # puts ENV['PWD']
+    set_build_number(xcodeproj: ".", target: TARGET, new_number: BUILD_NUMBER + "_preprod")
     replace_text_in_file(
       file_path: "#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift",
       old_text: "private static let currentServerEnvironment = ServerEnvironment.production",
@@ -244,6 +242,7 @@ platform :ios do
   end
 
   lane :switch_to_prod do
+    set_build_number(xcodeproj: ".", target: TARGET, new_number: BUILD_NUMBER)
     replace_text_in_file(
       file_path: "#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift",
       old_text: "private static let currentServerEnvironment = ServerEnvironment.preProduction",
@@ -276,16 +275,16 @@ platform :ios do
   end
 
   lane :test_get_build_number_my do
-    build_number = get_build_number(xcodeproj: ".", target: TARGET)
+    build_number = get_build_number_my(xcodeproj: ".", target: TARGET)
     puts "version: #{build_number}"
 
     set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number + "_preprod")
 
-    build_number = get_build_number(xcodeproj: ".", target: TARGET)
+    build_number = get_build_number_my(xcodeproj: ".", target: TARGET)
     puts "new version: #{build_number}"
   end
 
-  def get_build_number(params)
+  def get_build_number_my(params)
     folder = params[:xcodeproj] ? File.join(params[:xcodeproj], '..') : '.'
     target_name = params[:target]
     configuration = params[:configuration]
@@ -297,7 +296,7 @@ platform :ios do
     version_number = get_version_number!(plist_file)
 
     # Store the number in the shared hash
-    Actions.lane_context[SharedValues::VERSION_NUMBER] = version_number
+    Actions.lane_context[SharedValues::BUILD_NUMBER] = version_number
 
     # Return the version number because Swift might need this return value
     return version_number
@@ -316,7 +315,7 @@ platform :ios do
     save_version_number!(plist_file, new_number)
 
     # Store the number in the shared hash
-    Actions.lane_context[SharedValues::VERSION_NUMBER] = new_number
+    Actions.lane_context[SharedValues::BUILD_NUMBER] = new_number
   end
 
   def self.get_project!(folder)
@@ -401,4 +400,7 @@ platform :ios do
     plist["CFBundleVersion"] = new_number
     Xcodeproj::Plist.write_to_path(plist, plist_file)
   end
+
+  BUILD_NUMBER = get_build_number_my(xcodeproj: ".", target: TARGET)
+  
 end
