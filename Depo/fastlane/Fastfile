@@ -26,7 +26,7 @@ SCHEMES = ["PROD", "PREPROD", "TEST"]
 # update_fastlane
 
 # This is the minimum version number required.
-fastlane_version "2.19.1"
+# fastlane_version "2.19.1"
 
 default_platform :ios
 
@@ -58,7 +58,7 @@ platform :ios do
 		cocoapods
     update_fastlane_plugins()
     poeditor_download
-		my_gym(scheme: "PROD")
+		my_gym
 		fabric
 		slack_post
 	end
@@ -73,23 +73,24 @@ platform :ios do
 
     build_number = get_build_number(xcodeproj: ".", target: TARGET)
     set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number + "_preprod")
+    switch_to_preprod
 
-		my_gym(scheme: "PREPROD")
+		my_gym
 		fabric
 		slack_post
 
     set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number)
+    switch_to_prod
 	end
-
 
 	lane :beta_diawi do
 		setup_jenkins
-		my_gym(scheme: "PROD")
+		my_gym
 		diawi
 	end
 
 	lane :beta_fabric do
-		my_gym(scheme: "PROD")
+		my_gym
 		fabric
 		slack_post
 		notify_about_completion
@@ -99,31 +100,34 @@ platform :ios do
     ## should be set localy(build lane), not in my_gym lane. slack_post could
     build_number = get_build_number(xcodeproj: ".", target: TARGET)
     set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number + "_preprod")
+    switch_to_preprod
 
-    my_gym(scheme: "PREPROD")
+    my_gym
     fabric
     slack_post
     notify_about_completion
+
     set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number)
+    switch_to_prod
   end
 
 
   #--------------- build ipa ---------------
 
   desc "Create ipa"
-  lane :my_gym do |options|
+  lane :my_gym do # |options|
   	
-    scheme = options[:scheme]
+    # scheme = options[:scheme]
 
-    if !SCHEMES.include?(scheme)
-      # raise("scheme can be PROD, PREPROD or TEST")
-      UI.user_error!("scheme can be PROD, PREPROD or TEST")
-      # exit
-    end
+    # if !SCHEMES.include?(scheme)
+    #   # raise("scheme can be PROD, PREPROD or TEST")
+    #   UI.user_error!("scheme can be PROD, PREPROD or TEST")
+    #   # exit
+    # end
 
     gym(
       # configuration: config, #"Adhoc", # Defaults to 'Release'
-      scheme: "Depo_LifeTech_" + scheme,
+      scheme: "Depo_LifeTech_PROD",
       silent: true, # Hide all information that's not necessary while building
       clean: false,
       output_directory: "./#{BUILD_FOLDER_NAME}",    # store the ipa in this folder
@@ -228,6 +232,37 @@ platform :ios do
   end
 
 
+  lane :switch_to_preprod do
+    # file_path = File.absolute_path("#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift")
+    # puts file_path
+    # puts ENV['PWD']
+    replace_text_in_file(
+      file_path: "#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift",
+      old_text: "private static let currentServerEnvironment = ServerEnvironment.production",
+      new_text: "private static let currentServerEnvironment = ServerEnvironment.preProduction"
+    )
+  end
+
+  lane :switch_to_prod do
+    replace_text_in_file(
+      file_path: "#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift",
+      old_text: "private static let currentServerEnvironment = ServerEnvironment.preProduction",
+      new_text: "private static let currentServerEnvironment = ServerEnvironment.production"
+    )
+  end
+
+  def replace_text_in_file(params)
+    file_path = params[:file_path]
+    old_text = params[:old_text]
+    new_text = params[:new_text]
+
+    text = File.read(file_path)
+    new_contents = text.gsub(/#{old_text}/, new_text)
+    File.write(file_path, new_contents)
+    # To write changes to the file, use:
+    # File.open(file_name, "w") { |file| file.puts new_contents }
+  end
+
 #--------------------- build_number functions ---------------------
 
   lane :test_get_build_number do
@@ -285,7 +320,7 @@ platform :ios do
   end
 
   def self.get_project!(folder)
-    require 'xcodeproj'
+    # require 'xcodeproj'
     project_path = Dir.glob("#{folder}/*.xcodeproj").first
     if project_path
       return Xcodeproj::Project.open(project_path)
