@@ -10,53 +10,50 @@ import Foundation
 
 struct RouteRequests {
     
-    enum ServerEnvironment {
+    private enum ServerEnvironment {
         case test
         case preProduction
         case production
-
-        static let currentEnvironment: ServerEnvironment = {
-            if UserDefaults.standard.bool(forKey: "TEST_ENV") {
-                return .test
-            } else if UserDefaults.standard.bool(forKey: "PRE_PROD_ENV") {
-                return .preProduction
-            }
-            return .production
-        }()
-        
-        var baseUrl: URL {
-            switch self {
-            case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/api/")!
-            case .preProduction: return URL(string: "https://adepotest.turkcell.com.tr/api/")!
-            case .production: return URL(string: "https://adepo.turkcell.com.tr/api/")!
-            }
-        }
-        
-        var unsecuredAuthenticationUrl: String {
-            switch self {
-            case .test: return "http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
-            case .preProduction: return "http://adepotest.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
-            case .production: return "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
-            }
-        }
-        
-        var baseContactsUrl: URL {
-            switch ServerEnvironment.currentEnvironment {
-            case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/ttyapi/")!
-            case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
-            case .production: return URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
-            }
-        }
     }
-
-    // MARK: Base API URLs
     
-    static let currentEnvironment = ServerEnvironment.currentEnvironment
+    // MARK: Environment
     
-    static let baseUrl = currentEnvironment.baseUrl
-    static let unsecuredAuthenticationUrl = currentEnvironment.unsecuredAuthenticationUrl
-    static let baseContactsUrl = currentEnvironment.baseContactsUrl
+    private static let currentServerEnvironment = ServerEnvironment.production
     
+    static let baseUrl: URL = {
+        switch currentServerEnvironment {
+        case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/api/")!
+        case .preProduction: return URL(string: "https://adepotest.turkcell.com.tr/api/")!
+        case .production: return URL(string: "https://adepo.turkcell.com.tr/api/")!
+        }
+    }()
+    
+    static let unsecuredAuthenticationUrl: String = {
+        switch currentServerEnvironment {
+        case .test: return "http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
+        case .preProduction: return "http://adepotest.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
+        case .production: return "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
+        }
+    }()
+    
+    static let baseContactsUrl: URL = {
+        switch currentServerEnvironment {
+        case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/ttyapi/")!
+        case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
+        case .production: return URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
+        }
+    }()
+    
+    static let launchCampaignDetail: URL? = {
+        switch currentServerEnvironment {
+        case .test:
+            return URL(string: "https://prv.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
+        case .preProduction:
+            return URL(string: "https://prv.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
+        case .production:
+            return URL(string: "https://www.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
+        }
+    }()
     
     // MARK: Authentication
     
@@ -181,15 +178,4 @@ struct RouteRequests {
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
-    
-    static let launchCampaignDetail: URL? = {
-        switch RouteRequests.currentEnvironment {
-        case .test:
-            return URL(string: "https://prv.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
-        case .preProduction:
-            return URL(string: "https://prv.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
-        case .production:
-            return URL(string: "https://www.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
-        }
-    }()
 }
