@@ -40,8 +40,9 @@ final class PhotoVideoDataSource: NSObject {
     private weak var delegate: PhotoVideoDataSourceDelegate?
     private weak var collectionView: UICollectionView!
     
-    private var originalFilterPredicate = NSPredicate() //maybe there is some sence to setup it every time from controller, and not here
-    private var duplicationPredicate = NSPredicate()//TODO: move all work with predicates into another class
+    private var originalPredicate = NSPredicate() //maybe there is some sence to setup it every time from controller, and not here
+//    private var duplicationPredicate = NSPredicate()
+    //TODO: move all work with predicates into another class
     
     private lazy var sectionChanges = [() -> Void]()
     private lazy var objectChanges = [() -> Void]()
@@ -94,19 +95,24 @@ final class PhotoVideoDataSource: NSObject {
         FileType.video.valueForCoreDataMapping()
         let predicateFormat = "fileTypeValue == \(type)"
         let filetPredicate = NSPredicate(format: predicateFormat)
-        originalFilterPredicate = filetPredicate
-        fetchedResultsController.fetchRequest.predicate = originalFilterPredicate
         
-        setupDuplicationPredicate()
+        
+        
+        setupDuplicationPredicate(duplicationPredicateCallback: { [weak self] duplicatesPredicate in
+            let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filetPredicate, duplicatesPredicate])
+            self?.originalPredicate = duplicatesPredicate
+            self?.fetchedResultsController.fetchRequest.predicate = self?.originalPredicate
+            predicateSetupedCallback()
+        })
     }
     
     func changeSourceFilter(syncOnly: Bool) {
         if syncOnly {
             fetchedResultsController.fetchRequest.predicate =
-                NSCompoundPredicate(andPredicateWithSubpredicates: [originalFilterPredicate, NSPredicate(format: "isLocalItemValue != \(syncOnly)")])
+                NSCompoundPredicate(andPredicateWithSubpredicates: [originalPredicate, NSPredicate(format: "isLocalItemValue != \(syncOnly)")])
 //                 ///most likely we need to incer ANDpredicate here = previous + local status
         } else {
-            fetchedResultsController.fetchRequest.predicate = originalFilterPredicate///Previous predicate here
+            fetchedResultsController.fetchRequest.predicate = originalPredicate///Previous predicate here
         }
         performFetch()
     }
@@ -146,7 +152,7 @@ extension PhotoVideoDataSource {
             //REMOVE ME
             let duplicationPredicateTmp = NSPredicate(format: "isLocalItemValue == true AND NOT (md5Value IN %@)", remoteMD5s)/*  AND NOT (trimmedLocalFileID IN \(remoteLocalIDs))) OR isLocalItemValue == FALSE"*/
             /// ///PREDICATE HERE
-            self?.duplicationPredicate = duplicationPredicateTmp
+            //self?.duplicationPredicate = duplicationPredicateTmp
             createdPredicateCallback(duplicationPredicateTmp)
         })
     }
