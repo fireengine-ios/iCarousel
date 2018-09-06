@@ -9,13 +9,13 @@
 import UIKit
 
 enum FloatingButtonsType {
-    case floatingButtonTakeAPhoto
-    case floatingButtonUpload
-    case floatingButtonCreateAStory
-    case floatingButtonNewFolder
-    case floatingButtonCreateAlbum
-    case floatingButtonUploadFromLifebox
-    case floatingButtonUploadFromLifeboxFavorites
+    case takePhoto
+    case upload
+    case createAStory
+    case newFolder
+    case createAlbum
+    case uploadFromLifebox
+    case uploadFromLifeboxFavorites
 }
 
 enum TabScreenIndex: Int {
@@ -476,19 +476,19 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         var buttonsArray = [SubPlussButtonView]()
         for type in array {
             switch type {
-            case .floatingButtonCreateAlbum:
+            case .createAlbum:
                 buttonsArray.append(albumBtn)
-            case .floatingButtonCreateAStory:
+            case .createAStory:
                 buttonsArray.append(storyBtn)
-            case .floatingButtonNewFolder:
+            case .newFolder:
                 buttonsArray.append(folderBtn)
-            case .floatingButtonTakeAPhoto:
+            case .takePhoto:
                 buttonsArray.append(photoBtn)
-            case .floatingButtonUpload:
+            case .upload:
                 buttonsArray.append(uploadBtn)
-            case .floatingButtonUploadFromLifebox:
+            case .uploadFromLifebox:
                 buttonsArray.append(uploadFromLifebox)
-            case .floatingButtonUploadFromLifeboxFavorites:
+            case .uploadFromLifeboxFavorites:
                 buttonsArray.append(uploadFromLifeboxFavorites)
             }
         }
