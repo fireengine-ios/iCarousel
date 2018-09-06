@@ -88,11 +88,15 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private func performFetch() {
         dataSource.setupOriginalPredicates(isPhotos: isPhoto) { [weak self] in
             DispatchQueue.main.async {
-                self?.dataSource.performFetch()
-                self?.collectionView.reloadData()
+                self?.fetchAndReload()
                 self?.collectionViewManager.reloadAlbumsSlider()
             }
         }
+    }
+    
+    private func fetchAndReload() {
+        dataSource.performFetch()
+        collectionView.reloadData()
     }
     
     private func updateCellSize() {
@@ -293,25 +297,11 @@ extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
     }
     
     func showOnlySyncItemsCheckBoxDidChangeValue(_ value: Bool) {
-        dataSource.changeSourceFilter(syncOnly: value)
-        dataSource.performFetch()
-        collectionView.reloadData()
-        //        if value {
-        //            filtersByDefault = filters
-        //            filters = filters.filter { type -> Bool in
-        //                switch type {
-        //                case .localStatus(_):
-        //                    return false
-        //                default:
-        //                    return true
-        //                }
-        //            }
-        //            filters.append(.localStatus(.nonLocal))            
-        //        } else {
-        //            filters = filtersByDefault
-        //        }
-        //        dataSource.originalFilters = filters
-        //        reloadData()
+        dataSource.changeSourceFilter(syncOnly: value, isPhotos: isPhoto, newPredicateSetupedCallback: { [weak self] in
+            DispatchQueue.main.async {
+                self?.fetchAndReload()
+            }
+        })
     }
 }
 

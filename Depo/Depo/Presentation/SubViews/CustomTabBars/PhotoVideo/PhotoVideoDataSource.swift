@@ -42,10 +42,6 @@ final class PhotoVideoDataSource: NSObject {
     
     private let predicateManager = PhotoVideoPredicateManager()
     
-//    private var originalPredicate = NSPredicate() //maybe there is some sence to setup it every time from controller, and not here
-//    private var duplicationPredicate = NSPredicate()
-    //TODO: move all work with predicates into another class
-    
     private lazy var sectionChanges = [() -> Void]()
     private lazy var objectChanges = [() -> Void]()
     
@@ -88,31 +84,22 @@ final class PhotoVideoDataSource: NSObject {
     
     func setupOriginalPredicates(isPhotos: Bool, predicateSetupedCallback: @escaping VoidHandler) {
         
-        
-        let type = isPhotos ? FileType.image.valueForCoreDataMapping() :
-        FileType.video.valueForCoreDataMapping()
-        let predicateFormat = "fileTypeValue == \(type)"
-        let filetPredicate = NSPredicate(format: predicateFormat)
-          
-        setupDuplicationPredicate(duplicationPredicateCallback: { [weak self] duplicatesPredicate in
-            let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filetPredicate, duplicatesPredicate])
-            self?.originalPredicate = compundedPredicate
-            self?.fetchedResultsController.fetchRequest.predicate = self?.originalPredicate
-//            DispatchQueue.main.async {
-                predicateSetupedCallback()
-//            }
-        })
+        predicateManager.getMainCompoundedPredicate(isPhotos: isPhotos) { [weak self] compoundedPredicate in
+            self?.fetchedResultsController.fetchRequest.predicate = compoundedPredicate
+            predicateSetupedCallback()
+        }
     }
     
-    func changeSourceFilter(syncOnly: Bool) {
+    func changeSourceFilter(syncOnly: Bool, isPhotos: Bool, newPredicateSetupedCallback: @escaping VoidHandler) {
         if syncOnly {
-            fetchedResultsController.fetchRequest.predicate =
-                NSCompoundPredicate(andPredicateWithSubpredicates: [originalPredicate, NSPredicate(format: "isLocalItemValue != \(syncOnly)")])
-//                 ///most likely we need to incer ANDpredicate here = previous + local status
+            fetchedResultsController.fetchRequest.predicate = predicateManager.getSyncPredicate(isPhotos: isPhotos)
+            newPredicateSetupedCallback()
         } else {
-            fetchedResultsController.fetchRequest.predicate = originalPredicate///Previous predicate here
+            predicateManager.getMainCompoundedPredicate(isPhotos: isPhotos) { [weak self] compundedPredicate in
+                self?.fetchedResultsController.fetchRequest.predicate = compundedPredicate
+                newPredicateSetupedCallback()
+            }
         }
-//        performFetch()
     }
 }
 
