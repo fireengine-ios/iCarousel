@@ -778,15 +778,18 @@ extension TabBarViewController: TabBarActionHandler {
             router.presentViewController(controller: nController)
             
         case .uploadFromLifeBox:
-            guard !checkReadOnlyPermission() else { return }
-            
+            guard !checkReadOnlyPermission() else {
+                return
+            }
             let parentFolder = router.getParentUUID()
+            
             let controller: UIViewController
             if let currentVC = currentViewController as? BaseFilesGreedViewController {
                 controller = router.uploadFromLifeBox(folderUUID: parentFolder, soorceUUID: "", sortRule: currentVC.getCurrentSortRule())
             } else {
                 controller = router.uploadFromLifeBox(folderUUID: parentFolder)
             }
+            
             let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
@@ -794,15 +797,18 @@ extension TabBarViewController: TabBarActionHandler {
             
             // TODO: !!! uploadFromLifeboxFavorites
         case .uploadFromLifeboxFavorites:
-            guard !checkReadOnlyPermission() else { return }
-            
+            guard !checkReadOnlyPermission() else {
+                return
+            }
             let parentFolder = router.getParentUUID()
+            
             let controller: UIViewController
             if let currentVC = currentViewController as? BaseFilesGreedViewController {
                 controller = router.uploadFromLifeBox(folderUUID: parentFolder, soorceUUID: "", sortRule: currentVC.getCurrentSortRule())
             } else {
                 controller = router.uploadFromLifeBox(folderUUID: parentFolder)
             }
+            
             let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)

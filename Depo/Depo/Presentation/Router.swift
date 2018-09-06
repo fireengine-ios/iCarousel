@@ -539,14 +539,13 @@ class RouterVC: NSObject {
     
     func uploadFromLifeBox(folderUUID: String, soorceUUID: String = "", sortRule: SortedRules = .timeUp) -> UIViewController {
         if isRootViewControllerAlbumDetail() {
-            let controller = UploadFromLifeBoxModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", albumUUID: folderUUID)
-            return controller
+            return UploadFromLifeBoxModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", albumUUID: folderUUID)
         } else {
-            let controller = UploadFromLifeBoxModuleInitializer.initializeFilesForFolderViewController(with: "BaseFilesGreedViewController",
-                                                                                                       destinationFolderUUID: folderUUID,
-                                                                                                       outputFolderUUID: soorceUUID,
-                                                                                                       sortRule: sortRule)
-            return controller
+            return UploadFromLifeBoxModuleInitializer
+                .initializeFilesForFolderViewController(with: "BaseFilesGreedViewController",
+                                                        destinationFolderUUID: folderUUID,
+                                                        outputFolderUUID: soorceUUID,
+                                                        sortRule: sortRule)
         }
     }
     
