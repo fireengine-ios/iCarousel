@@ -236,7 +236,7 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
 
 
   lane :switch_to_preprod do
-    set_build_number(xcodeproj: ".", target: TARGET, new_number: BUILD_NUMBER + "_preprod")
+    VersionManager.set_build_number(xcodeproj: ".", target: TARGET, new_number: BUILD_NUMBER + "_preprod")
     replace_text_in_file(
       file_path: "#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift",
       old_text: "private static let currentServerEnvironment = ServerEnvironment.production",
@@ -245,7 +245,7 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
   end
 
   lane :switch_to_prod do
-    set_build_number(xcodeproj: ".", target: TARGET, new_number: BUILD_NUMBER)
+    VersionManager.set_build_number(xcodeproj: ".", target: TARGET, new_number: BUILD_NUMBER)
     replace_text_in_file(
       file_path: "#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift",
       old_text: "private static let currentServerEnvironment = ServerEnvironment.preProduction",
