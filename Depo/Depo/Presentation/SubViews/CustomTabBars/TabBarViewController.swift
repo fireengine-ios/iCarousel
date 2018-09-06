@@ -437,6 +437,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         uploadFromLifebox = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "NewFolder", asLeft: false)
         uploadFromLifebox?.changeVisability(toHidden: true)
         
+        uploadFromLifeboxFavorites = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "NewFolder", asLeft: false)
+        uploadFromLifeboxFavorites?.changeVisability(toHidden: true)
+        
         albumBtn = createSubButton(withText: TextConstants.createAlbum, imageName: "NewFolder", asLeft: false)
         albumBtn?.changeVisability(toHidden: true)
         
@@ -508,6 +511,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         buttonsArray.append(photoBtn)
         buttonsArray.append(uploadBtn)
         buttonsArray.append(uploadFromLifebox)
+        buttonsArray.append(uploadFromLifeboxFavorites)
         return buttonsArray
     }
     
