@@ -1480,6 +1480,8 @@
 		8C0B91C12017148E00A5BA81 /* CollectionViewHeaderWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9824FED720061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift */; };
 		8C0B91C22017149600A5BA81 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
 		8C0B91C3201714CC00A5BA81 /* StoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */; };
+		8C0CE59221406EAF0017D6D4 /* PhotoVideoPredicateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0CE59121406EAF0017D6D4 /* PhotoVideoPredicateManager.swift */; };
+		8C0CE59321406EAF0017D6D4 /* PhotoVideoPredicateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0CE59121406EAF0017D6D4 /* PhotoVideoPredicateManager.swift */; };
 		8C0E8C641FDEBDFF00789C91 /* ActivitiesByDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633D1F6FC3D3004724BF /* ActivitiesByDay.swift */; };
 		8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633E1F6FC3D3004724BF /* ActivitiesByMinutesAndType.swift */; };
 		8C0E8C661FDEBDFF00789C91 /* ActivityFileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633F1F6FC3D3004724BF /* ActivityFileType.swift */; };
@@ -4911,6 +4913,7 @@
 		8C0B2F251EF314C200706DC0 /* ProtoInputTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtoInputTextCell.swift; sourceTree = "<group>"; };
 		8C0B2F271EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoNextEditingRowPasser.swift; sourceTree = "<group>"; };
 		8C0B918F2013221400A5BA81 /* CustomProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressHUD.swift; sourceTree = "<group>"; };
+		8C0CE59121406EAF0017D6D4 /* PhotoVideoPredicateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoPredicateManager.swift; sourceTree = "<group>"; };
 		8C0E907E1FDEBE0000789C91 /* lifebox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lifebox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetPredetermendConfigs.swift; sourceTree = "<group>"; };
 		8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPackageProductObject.swift; sourceTree = "<group>"; };
@@ -11168,6 +11171,7 @@
 				CEF6909A21258D8F0013075F /* PhotoVideoController.xib */,
 				CEF6909921258D8F0013075F /* PhotoVideoController.swift */,
 				CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */,
+				8C0CE59121406EAF0017D6D4 /* PhotoVideoPredicateManager.swift */,
 				CE966CDD212D7EE900901295 /* PhotoVideoCollectionViewManager.swift */,
 				CE966CDB212D7AAC00901295 /* PhotoVideoNavBarManager.swift */,
 				CE966CE3212D90E400901295 /* PhotoVideoBottomBarManager.swift */,
@@ -14843,6 +14847,7 @@
 				8C06AC2C2008ABB9003D8E05 /* RecentSearchesService.swift in Sources */,
 				8C0E8F141FDEBDFF00789C91 /* VisualMusicPlayerInitializer.swift in Sources */,
 				8C0B91B120170ED100A5BA81 /* ManageContactsInitializer.swift in Sources */,
+				8C0CE59321406EAF0017D6D4 /* PhotoVideoPredicateManager.swift in Sources */,
 				8C0E8F151FDEBDFF00789C91 /* HelpAndSupportViewInput.swift in Sources */,
 				8C0B919220170E0500A5BA81 /* DuplicatedContactsModuleOutput.swift in Sources */,
 				7CA4A177207F3F7E00F270C8 /* CustomCheckBox.swift in Sources */,
@@ -16013,6 +16018,7 @@
 				CE95ED581F516736002F923A /* HelpAndSupportViewInput.swift in Sources */,
 				B53DCE9020EF634900400DBA /* ContactUtil.m in Sources */,
 				EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */,
+				8C0CE59221406EAF0017D6D4 /* PhotoVideoPredicateManager.swift in Sources */,
 				98570AFA208F7558002CCEBA /* SpotlightViewController.swift in Sources */,
 				D49886611F3EFBE200F50C95 /* ImportPhotosViewInput.swift in Sources */,
 				8C0097161F6BDA8B00FA069C /* MoreFilesActionsModuleInput.swift in Sources */,

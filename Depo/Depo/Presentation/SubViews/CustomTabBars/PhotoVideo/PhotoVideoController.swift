@@ -294,6 +294,7 @@ extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
     
     func showOnlySyncItemsCheckBoxDidChangeValue(_ value: Bool) {
         dataSource.changeSourceFilter(syncOnly: value)
+        dataSource.performFetch()
         collectionView.reloadData()
         //        if value {
         //            filtersByDefault = filters
