@@ -61,3 +61,26 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
     }
     
 }
+
+final class UploadFromLifeBoxFavoritesInteractor: UploadFromLifeBoxInteractor {
+    
+    private lazy var fileService = WrapItemFileService()
+    
+    override func onUploadItems(items: [Item]) {
+        fileService.addToFavourite(files: items, success: { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self?.output.asyncOperationSucces()
+                guard let output = self?.output as? UploadFromLifeBoxInteractorOutput else {
+                    return
+                }
+                output.uploadOperationSuccess()
+                ItemOperationManager.default.addFilesToFavorites(items: items)
+            }
+        }, fail: { [weak self] error in
+            DispatchQueue.main.async {
+                self?.output.asyncOperationFail(errorMessage: error.description)
+            }
+        })
+    }
+    
+}
