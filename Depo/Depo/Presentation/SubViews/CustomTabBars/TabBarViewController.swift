@@ -795,7 +795,18 @@ extension TabBarViewController: TabBarActionHandler {
             router.presentViewController(controller: navigationController)
             
         case .uploadFromLifeboxFavorites:
-            let controller = router.uploadFromLifeBoxFavorites
+            guard !checkReadOnlyPermission() else {
+                return
+            }
+            let parentFolder = router.getParentUUID()
+            
+            let controller: UIViewController
+            if let currentVC = currentViewController as? BaseFilesGreedViewController {
+                controller = router.uploadFromLifeBoxFavorites(folderUUID: parentFolder, soorceUUID: "", sortRule: currentVC.getCurrentSortRule())
+            } else {
+                controller = router.uploadFromLifeBoxFavorites(folderUUID: parentFolder)
+            }
+            
             let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
