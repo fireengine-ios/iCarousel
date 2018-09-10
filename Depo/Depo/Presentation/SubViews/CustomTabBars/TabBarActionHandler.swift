@@ -19,6 +19,6 @@ protocol TabBarActionHandlerContainer: class {
 
 extension TabBarViewController {
     enum Action {
-        case takePhoto, createFolder, createStory, upload, createAlbum, uploadFromLifeBox
+        case takePhoto, createFolder, createStory, upload, createAlbum, uploadFromLifeBox, uploadFromLifeboxFavorites
     }
 }

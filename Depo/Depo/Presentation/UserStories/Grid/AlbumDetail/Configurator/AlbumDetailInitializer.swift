@@ -19,7 +19,7 @@ class AlbumDetailModuleInitializer: NSObject {
         let viewController = AlbumDetailViewController(nibName: nibName, bundle: nil)
         viewController.album = album
         viewController.needShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonUploadFromLifebox])
+        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .uploadFromLifebox])
         viewController.scrolliblePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.scrolliblePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()

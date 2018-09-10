@@ -71,4 +71,35 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         return viewController
     }
     
+    class func initializeUploadFromLifeBoxFavoritesController() -> UIViewController {
+        let viewController = UploadFromLifeBoxViewController(nibName: "BaseFilesGreedViewController", bundle: nil)
+        //        viewController.parentUUID = destinationFolderUUID
+        //viewController.needShowTabBar = true
+        //viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
+        let configurator = BaseFilesGreedModuleConfigurator()
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [],
+                                               style: .default, tintColor: nil)
+        
+        let presenter: BaseFilesGreedPresenter = UploadFromLifeBoxAllFilesPresenter()
+        presenter.sortedRule = .timeUp
+        
+        let fileService: RemoteItemsService = AllFilesService(requestSize: 100)
+        let interactor = UploadFromLifeBoxFavoritesInteractor(remoteItems: fileService)
+        
+        //        interactor.rootFolderUUID = destinationFolderUUID
+        
+        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.image), .fileType(.video), .favoriteStatus(.notFavorites)],
+                               bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
+                               presenter: presenter, interactor: interactor,
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
+                                                                                     selectionModeTypes: []),
+                               topBarConfig: nil)
+        //viewController.mainTitle = folder.name
+        
+        let router: BaseFilesGreedRouter = UploadFromLifeBoxRouter()
+        presenter.router = router
+        router.presenter = presenter
+        
+        return viewController
+    }
 }

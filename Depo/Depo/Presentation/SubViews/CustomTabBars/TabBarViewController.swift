@@ -8,13 +8,14 @@
 
 import UIKit
 
-enum FloatingButtonsType: String {
-    case floatingButtonTakeAPhoto = "Take a Photo"
-    case floatingButtonUpload = "Upload"
-    case floatingButtonCreateAStory = "Create a Story"
-    case floatingButtonNewFolder = "New Folder"
-    case floatingButtonCreateAlbum = "Create album"
-    case floatingButtonUploadFromLifebox = "Upload from lifebox"
+enum FloatingButtonsType {
+    case takePhoto
+    case upload
+    case createAStory
+    case newFolder
+    case createAlbum
+    case uploadFromLifebox
+    case uploadFromLifeboxFavorites
 }
 
 enum TabScreenIndex: Int {
@@ -70,6 +71,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate var folderBtn: SubPlussButtonView!
     fileprivate var albumBtn: SubPlussButtonView!
     fileprivate var uploadFromLifebox: SubPlussButtonView!
+    fileprivate var uploadFromLifeboxFavorites: SubPlussButtonView!
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     //    let musicBar = MusicBar.initFromXib()
@@ -435,6 +437,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         uploadFromLifebox = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "NewFolder", asLeft: false)
         uploadFromLifebox?.changeVisability(toHidden: true)
         
+        uploadFromLifeboxFavorites = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "NewFolder", asLeft: false)
+        uploadFromLifeboxFavorites?.changeVisability(toHidden: true)
+        
         albumBtn = createSubButton(withText: TextConstants.createAlbum, imageName: "NewFolder", asLeft: false)
         albumBtn?.changeVisability(toHidden: true)
         
@@ -474,18 +479,20 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         var buttonsArray = [SubPlussButtonView]()
         for type in array {
             switch type {
-            case .floatingButtonCreateAlbum:
+            case .createAlbum:
                 buttonsArray.append(albumBtn)
-            case .floatingButtonCreateAStory:
+            case .createAStory:
                 buttonsArray.append(storyBtn)
-            case .floatingButtonNewFolder:
+            case .newFolder:
                 buttonsArray.append(folderBtn)
-            case .floatingButtonTakeAPhoto:
+            case .takePhoto:
                 buttonsArray.append(photoBtn)
-            case .floatingButtonUpload:
+            case .upload:
                 buttonsArray.append(uploadBtn)
-            case .floatingButtonUploadFromLifebox:
+            case .uploadFromLifebox:
                 buttonsArray.append(uploadFromLifebox)
+            case .uploadFromLifeboxFavorites:
+                buttonsArray.append(uploadFromLifeboxFavorites)
             }
         }
         
@@ -504,6 +511,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         buttonsArray.append(photoBtn)
         buttonsArray.append(uploadBtn)
         buttonsArray.append(uploadFromLifebox)
+        buttonsArray.append(uploadFromLifeboxFavorites)
         return buttonsArray
     }
     
@@ -657,27 +665,23 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
     
     func buttonGotPressed(button: SubPlussButtonView) {
         changeViewState(state: false)
-        
         let action: Action
+        
         switch button {
         case photoBtn:
             action = .takePhoto
-            
         case folderBtn:
             action = .createFolder
-            
         case storyBtn:
             action = .createStory
-            
         case uploadBtn:
             action = .upload
-            
         case albumBtn:
             action = .createAlbum
-            
         case uploadFromLifebox:
             action = .uploadFromLifeBox
-            
+        case uploadFromLifeboxFavorites:
+            action = .uploadFromLifeboxFavorites
         default:
             return
         }
@@ -774,15 +778,24 @@ extension TabBarViewController: TabBarActionHandler {
             router.presentViewController(controller: nController)
             
         case .uploadFromLifeBox:
-            guard !checkReadOnlyPermission() else { return }
-            
+            guard !checkReadOnlyPermission() else {
+                return
+            }
             let parentFolder = router.getParentUUID()
+            
             let controller: UIViewController
             if let currentVC = currentViewController as? BaseFilesGreedViewController {
                 controller = router.uploadFromLifeBox(folderUUID: parentFolder, soorceUUID: "", sortRule: currentVC.getCurrentSortRule())
             } else {
                 controller = router.uploadFromLifeBox(folderUUID: parentFolder)
             }
+            
+            let navigationController = NavigationController(rootViewController: controller)
+            navigationController.navigationBar.isHidden = false
+            router.presentViewController(controller: navigationController)
+            
+        case .uploadFromLifeboxFavorites:
+            let controller = router.uploadFromLifeBoxFavorites
             let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
