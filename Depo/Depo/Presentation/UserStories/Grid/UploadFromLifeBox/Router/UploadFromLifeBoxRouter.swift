@@ -27,7 +27,7 @@ class UploadFromLifeBoxRouterFavorites: BaseFilesGreedRouter {
 extension UploadFromLifeBoxRouterFavorites: UploadFromLifeBoxRouterInput {
     
     func goToFolder(destinationFolderUUID: String, outputFolderUUID: String, nController: UINavigationController) {
-        let viewController = RouterVC().uploadFromLifeBoxFavorites(folderUUID: destinationFolderUUID, soorceUUID: outputFolderUUID, sortRule: presenter.sortedRule)
+        let viewController = RouterVC().uploadFromLifeBoxFavorites(folderUUID: destinationFolderUUID, soorceUUID: outputFolderUUID, sortRule: presenter.sortedRule, isPhotoVideoOnly: false)
         nController.pushViewController(viewController, animated: true)
     }
 }

@@ -549,11 +549,12 @@ class RouterVC: NSObject {
         }
     }
     
-    func uploadFromLifeBoxFavorites(folderUUID: String, soorceUUID: String = "", sortRule: SortedRules = .timeUp) -> UIViewController {
+    func uploadFromLifeBoxFavorites(folderUUID: String, soorceUUID: String = "", sortRule: SortedRules = .timeUp, isPhotoVideoOnly: Bool) -> UIViewController {
         return UploadFromLifeBoxModuleInitializer
             .initializeUploadFromLifeBoxFavoritesController(destinationFolderUUID: folderUUID,
                                                             outputFolderUUID: soorceUUID,
-                                                            sortRule: sortRule)
+                                                            sortRule: sortRule,
+                                                            isPhotoVideoOnly: isPhotoVideoOnly)
     }
     
     // MARK: Select Folder view controller
