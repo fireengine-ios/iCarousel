@@ -71,9 +71,9 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeUploadFromLifeBoxFavoritesController() -> UIViewController {
+    class func initializeUploadFromLifeBoxFavoritesController(destinationFolderUUID: String, outputFolderUUID: String = "", sortRule: SortedRules) -> UIViewController {
         let viewController = UploadFromLifeBoxViewController(nibName: "BaseFilesGreedViewController", bundle: nil)
-        //        viewController.parentUUID = destinationFolderUUID
+        viewController.parentUUID = destinationFolderUUID
         //viewController.needShowTabBar = true
         //viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
         let configurator = BaseFilesGreedModuleConfigurator()
@@ -81,12 +81,18 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
                                                style: .default, tintColor: nil)
         
         let presenter: BaseFilesGreedPresenter = UploadFromLifeBoxAllFilesPresenter()
-        presenter.sortedRule = .timeUp
+        presenter.sortedRule = sortRule
         
-        let fileService: RemoteItemsService = AllFilesService(requestSize: 100)
+        let fileService: RemoteItemsService
+        if !outputFolderUUID.isEmpty {
+            fileService = FilesFromFolderService(requestSize: 100, rootFolder: outputFolderUUID)
+        } else {
+            fileService = AllFilesService(requestSize: 100)
+        }
+        
         let interactor = UploadFromLifeBoxFavoritesInteractor(remoteItems: fileService)
         
-        //        interactor.rootFolderUUID = destinationFolderUUID
+        interactor.rootFolderUUID = destinationFolderUUID
         
         configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.image), .fileType(.video), .favoriteStatus(.notFavorites)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
@@ -96,7 +102,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
                                topBarConfig: nil)
         //viewController.mainTitle = folder.name
         
-        let router: BaseFilesGreedRouter = UploadFromLifeBoxRouter()
+        let router: BaseFilesGreedRouter = UploadFromLifeBoxRouterFavorites()
         presenter.router = router
         router.presenter = presenter
         
