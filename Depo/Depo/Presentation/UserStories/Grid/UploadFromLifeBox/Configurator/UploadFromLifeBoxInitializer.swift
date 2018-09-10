@@ -71,7 +71,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeUploadFromLifeBoxFavoritesController(destinationFolderUUID: String, outputFolderUUID: String = "", sortRule: SortedRules) -> UIViewController {
+    class func initializeUploadFromLifeBoxFavoritesController(destinationFolderUUID: String, outputFolderUUID: String = "", sortRule: SortedRules, isPhotoVideoOnly: Bool) -> UIViewController {
         let viewController = UploadFromLifeBoxViewController(nibName: "BaseFilesGreedViewController", bundle: nil)
         viewController.parentUUID = destinationFolderUUID
         //viewController.needShowTabBar = true
@@ -80,21 +80,27 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         let bottomBarConfig = EditingBarConfig(elementsConfig: [],
                                                style: .default, tintColor: nil)
         
-        let presenter: BaseFilesGreedPresenter = UploadFromLifeBoxAllFilesPresenter()
-        presenter.sortedRule = sortRule
-        
+        let presenter: BaseFilesGreedPresenter
         let fileService: RemoteItemsService
-        if !outputFolderUUID.isEmpty {
+        
+        if isPhotoVideoOnly {
+            fileService = PhotoAndVideoService(requestSize: 100)
+            presenter = UploadFromLifeBoxPhotosPresenter()
+        } else if !outputFolderUUID.isEmpty {
             fileService = FilesFromFolderService(requestSize: 100, rootFolder: outputFolderUUID)
+            presenter = UploadFromLifeBoxAllFilesPresenter()
         } else {
             fileService = AllFilesService(requestSize: 100)
+            presenter = UploadFromLifeBoxAllFilesPresenter()
         }
         
-        let interactor = UploadFromLifeBoxFavoritesInteractor(remoteItems: fileService)
+        presenter.sortedRule = sortRule
         
+        let interactor = UploadFromLifeBoxFavoritesInteractor(remoteItems: fileService)
+
         interactor.rootFolderUUID = destinationFolderUUID
         
-        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.image), .fileType(.video), .favoriteStatus(.notFavorites)],
+        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.image), .fileType(.video)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
