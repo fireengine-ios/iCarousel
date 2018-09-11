@@ -1482,6 +1482,10 @@
 		8C0B91C3201714CC00A5BA81 /* StoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */; };
 		8C0CE59221406EAF0017D6D4 /* PhotoVideoPredicateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0CE59121406EAF0017D6D4 /* PhotoVideoPredicateManager.swift */; };
 		8C0CE59321406EAF0017D6D4 /* PhotoVideoPredicateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0CE59121406EAF0017D6D4 /* PhotoVideoPredicateManager.swift */; };
+		8C0CE597214264250017D6D4 /* QuickScrollService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0CE596214264250017D6D4 /* QuickScrollService.swift */; };
+		8C0CE598214264250017D6D4 /* QuickScrollService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0CE596214264250017D6D4 /* QuickScrollService.swift */; };
+		8C0CE59A2147A9FB0017D6D4 /* QuickScrollItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0CE5992147A9FB0017D6D4 /* QuickScrollItems.swift */; };
+		8C0CE59B2147A9FB0017D6D4 /* QuickScrollItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0CE5992147A9FB0017D6D4 /* QuickScrollItems.swift */; };
 		8C0E8C641FDEBDFF00789C91 /* ActivitiesByDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633D1F6FC3D3004724BF /* ActivitiesByDay.swift */; };
 		8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633E1F6FC3D3004724BF /* ActivitiesByMinutesAndType.swift */; };
 		8C0E8C661FDEBDFF00789C91 /* ActivityFileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE43633F1F6FC3D3004724BF /* ActivityFileType.swift */; };
@@ -4914,6 +4918,8 @@
 		8C0B2F271EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoNextEditingRowPasser.swift; sourceTree = "<group>"; };
 		8C0B918F2013221400A5BA81 /* CustomProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressHUD.swift; sourceTree = "<group>"; };
 		8C0CE59121406EAF0017D6D4 /* PhotoVideoPredicateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoPredicateManager.swift; sourceTree = "<group>"; };
+		8C0CE596214264250017D6D4 /* QuickScrollService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScrollService.swift; sourceTree = "<group>"; };
+		8C0CE5992147A9FB0017D6D4 /* QuickScrollItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScrollItems.swift; sourceTree = "<group>"; };
 		8C0E907E1FDEBE0000789C91 /* lifebox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lifebox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetPredetermendConfigs.swift; sourceTree = "<group>"; };
 		8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPackageProductObject.swift; sourceTree = "<group>"; };
@@ -8029,6 +8035,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8C0CE595214264090017D6D4 /* QuickScrollService */,
 				486F7B55208D10A8009EB73F /* PeriodicContactSyncDataStorage */,
 				98B01C74206BCD4A00DD78C7 /* AnalyticsService */,
 				9808A05C206A88090022376D /* PushNotificationService */,
@@ -9304,6 +9311,15 @@
 				8C0B918F2013221400A5BA81 /* CustomProgressHUD.swift */,
 			);
 			path = CustomProgressHud;
+			sourceTree = "<group>";
+		};
+		8C0CE595214264090017D6D4 /* QuickScrollService */ = {
+			isa = PBXGroup;
+			children = (
+				8C0CE596214264250017D6D4 /* QuickScrollService.swift */,
+				8C0CE5992147A9FB0017D6D4 /* QuickScrollItems.swift */,
+			);
+			path = QuickScrollService;
 			sourceTree = "<group>";
 		};
 		8C2044601EEA7A3B00642627 /* Services */ = {
@@ -14738,6 +14754,7 @@
 				8C0E8EC61FDEBDFF00789C91 /* SearchViewPresenter.swift in Sources */,
 				CEF6909C21258D8F0013075F /* PhotoVideoController.swift in Sources */,
 				8C0E8EC71FDEBDFF00789C91 /* InternetDataUsageCell.swift in Sources */,
+				8C0CE598214264250017D6D4 /* QuickScrollService.swift in Sources */,
 				8C0E8EC81FDEBDFF00789C91 /* ImportPhotosViewController.swift in Sources */,
 				8C0E8EC91FDEBDFF00789C91 /* UIviewControlllerExtensions.swift in Sources */,
 				8C0E8ECA1FDEBDFF00789C91 /* Dictionary.swift in Sources */,
@@ -15103,6 +15120,7 @@
 				8C0E8FC31FDEBDFF00789C91 /* ActivityTimelineInteractorInput.swift in Sources */,
 				B53DCE8920EF634900400DBA /* SyncDB.m in Sources */,
 				8C0E8FC41FDEBDFF00789C91 /* ActivityTimelineInteractorOutput.swift in Sources */,
+				8C0CE59B2147A9FB0017D6D4 /* QuickScrollItems.swift in Sources */,
 				8C0E8FC51FDEBDFF00789C91 /* ActivityTimelineInteractor.swift in Sources */,
 				8C0E8FC61FDEBDFF00789C91 /* ActivityTimelineRouterInput.swift in Sources */,
 				4ADE0873202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */,
@@ -15909,6 +15927,7 @@
 				CE4851F02018B03A006B8854 /* FilterPhotoCard.swift in Sources */,
 				8C7786A01F3F38EF005CB432 /* VisualMusicPlayerInteractorInput.swift in Sources */,
 				4A9B3902201F3513009FC572 /* FaceImageItemsPresenter.swift in Sources */,
+				8C0CE597214264250017D6D4 /* QuickScrollService.swift in Sources */,
 				9840C62520AEAD8100A8634F /* CheckBoxView.swift in Sources */,
 				8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
 				2EB5EE9DB087C1F0CEAF1343 /* BaseFilesGreedInteractor.swift in Sources */,
@@ -16274,6 +16293,7 @@
 				78624ADA201C8A3A00C969D3 /* ManageContactsModuleOutput.swift in Sources */,
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
+				8C0CE59A2147A9FB0017D6D4 /* QuickScrollItems.swift in Sources */,
 				B53DCE8820EF634900400DBA /* SyncDB.m in Sources */,
 				CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */,
 				CEF69DE11FB5851E00FCE6AB /* UploadParametrs.swift in Sources */,
