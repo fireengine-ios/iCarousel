@@ -37,21 +37,22 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                         assets.append(asset)
                     })
                     
-                    var items = MediaItemOperationsService.shared.allLocalItems(with: assets)
-                    
-                    items.sort {
-                        guard let firstDate = $0.creationDate else {
-                            return false
-                        }
-                        guard let secondDate = $1.creationDate else {
-                            return true
+                    MediaItemOperationsService.shared.allLocalItems(with: assets) { mediaItems in
+                        var items = mediaItems
+                        items.sort {
+                            guard let firstDate = $0.creationDate else {
+                                return false
+                            }
+                            guard let secondDate = $1.creationDate else {
+                                return true
+                            }
+                            
+                            return firstDate > secondDate
                         }
                         
-                        return firstDate > secondDate
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self?.output.getContentWithSuccess(array: [items])
+                        DispatchQueue.main.async {
+                            self?.output.getContentWithSuccess(array: [items])
+                        }
                     }
                 }
             }

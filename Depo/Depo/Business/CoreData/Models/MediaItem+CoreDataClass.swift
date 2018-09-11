@@ -55,6 +55,15 @@ public class MediaItem: NSManagedObject {
         md5Value = wrapData.md5
         trimmedLocalFileID = wrapData.getTrimmedLocalID()
         
+        if !isLocalItemValue {
+            debugPrint("!!! REMOTE ITEM MD5 \(md5Value) AND LOCAL ID \(trimmedLocalFileID)")
+        }
+        
+        if !isLocalItemValue, let md5 = md5Value, let trimmedID = trimmedLocalFileID,
+            (md5.isEmpty || trimmedID.isEmpty) {
+            debugPrint("!!! REMOTE ITEM MD5 EMPY \(md5Value) AND LOCAL ID \(trimmedLocalFileID)")
+        }
+        
         let dateValue = self.creationDateValue as Date?
         
         monthValue = dateValue?.getDateForSortingOfCollectionView()

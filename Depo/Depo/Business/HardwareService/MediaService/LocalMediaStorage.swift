@@ -255,51 +255,57 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 
                 var albums = [AlbumItem]()
                 
+                let dispatchGroup = DispatchGroup()
+                
                 [album, smartAlbum].forEach { album in
                     album.enumerateObjects { object, index, stop in
-                        let count = self.numberOfItems(in: object)
-                        if count.value > 0 {
-                            let item = AlbumItem(uuid: object.localIdentifier,
-                                                 name: object.localizedTitle,
-                                                 creationDate: nil,
-                                                 lastModifiDate: nil,
-                                                 fileType: .photoAlbum,
-                                                 syncStatus: .unknown,
-                                                 isLocalItem: true)
-                            if count.fromCoreData {
-                                item.imageCount = count.value
-                            }
-                            
-                            let fetchOptions = PHFetchOptions()
-                            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-                            fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-                            
-                            if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject {
+                        dispatchGroup.enter()
+                        self.numberOfItems(in: object) { itemsCount, fromCoreData  in
+                            if itemsCount > 0 {
+                                let item = AlbumItem(uuid: object.localIdentifier,
+                                                     name: object.localizedTitle,
+                                                     creationDate: nil,
+                                                     lastModifiDate: nil,
+                                                     fileType: .photoAlbum,
+                                                     syncStatus: .unknown,
+                                                     isLocalItem: true)
+                                if fromCoreData {
+                                    item.imageCount = itemsCount
+                                }
                                 
-                                item.preview = WrapData(asset: asset)
+                                let fetchOptions = PHFetchOptions()
+                                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                                fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
+                                
+                                if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject {
+                                    
+                                    item.preview = WrapData(asset: asset)
+                                }
+                                albums.append(item)
                             }
-                            albums.append(item)
+                            dispatchGroup.leave()
                         }
+                        
                     }
                 }
-                DispatchQueue.main.async {
+                dispatchGroup.notify(queue: .main) {
                     completion(albums)
                 }
             }
         }
     }
     
-    private func numberOfItems(in album: PHAssetCollection) -> (value: Int, fromCoreData: Bool) {
+    private func numberOfItems(in album: PHAssetCollection, callBack: @escaping (_ value: Int, _ fromCoreData: Bool) -> Void) {
         guard !coreDataStack.inProcessAppendingLocalFiles else {
-            return (album.photosCount + album.videosCount, false)
+            callBack(album.photosCount + album.videosCount, false)
+            return
         }
-        
         let assets = PHAsset.fetchAssets(in: album, options: PHFetchOptions())
         let array = assets.objects(at: IndexSet(0..<assets.count))
         let context = CoreDataStack.default.newChildBackgroundContext
-        let ids = coreDataStack.listAssetIdAlreadySaved(allList: array, context: context)
-        
-        return (ids.count, true)
+        coreDataStack.listAssetIdAlreadySaved(allList: array, context: context, assetCallback: { ids in
+            callBack(ids.count, true)
+        })
     }
     
     // MARK: Image
@@ -493,20 +499,21 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             wrapData.copyFileData(from: item)
             
             let context = CoreDataStack.default.newChildBackgroundContext
-            context.perform { [weak self] in
+            
+            MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS:  [item.getTrimmedLocalID()], context: context) { fetchedMediaItems in
                 let mediaItem: MediaItem
-                if let existingMediaItem = MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
+                if let existingMediaItem = fetchedMediaItems.first {//(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
                     mediaItem = existingMediaItem
                 } else {
                     mediaItem = MediaItem(wrapData: wrapData, context: context)
                 }
-
+                
                 mediaItem.localFileID = assetIdentifier
                 mediaItem.trimmedLocalFileID = assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier//item.getTrimmedLocalID()
                 mediaItem.syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
                 
                 if isFilteredItem {
-                   mediaItem.isFiltered = true
+                    mediaItem.isFiltered = true
                 }
                 
                 var userObjectSyncStatus = Set<MediaItemsObjectSyncStatus>()
@@ -521,14 +528,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                         CoreDataStack.default.saveDataForContext(context: context, savedCallBack: {
                             success?()
                         })
-                        }
-                    }, fail: {
-                        fail?()
-                        /// nothing, status not going to be saved
+                    }
+                }, fail: {
+                    fail?()
+                    /// nothing, status not going to be saved
                 })
             }
-            
         }
+        
     }
     
     fileprivate func add(asset assetIdentifier: String, to album: String) {

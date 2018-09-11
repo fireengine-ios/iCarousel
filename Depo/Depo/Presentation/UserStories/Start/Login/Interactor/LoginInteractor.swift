@@ -28,7 +28,7 @@ class LoginInteractor: LoginInteractorInput {
     private var password: String?
     private var atachedCaptcha: CaptchaParametrAnswer?
     private lazy var captchaService = CaptchaService()
-    private let cacheManager = CacheManager()
+    private let cacheManager = CacheManager.shared
     
     var isShowEmptyEmail = false
     

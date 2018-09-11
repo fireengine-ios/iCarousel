@@ -8,15 +8,14 @@
 
 final class CacheManager {///adding files TO DB // managing cache
     
-//    static let shared = CacheManager()
+    static let shared = CacheManager()
     
-    var allRemotesAdded = false
     var allLocalAdded = false
     
     private static let pageSize: Int = 1000
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
                                                          type: .imageAndVideo)
-    private var processingRemoteItems = false
+    var processingRemoteItems = false
 //    private var photoVideosPageCounter: Int = 0
     
     //TODO: place  blocks here?
@@ -24,16 +23,22 @@ final class CacheManager {///adding files TO DB // managing cache
     
     
     func startAppendingAllRemotes() {// we save remotes everytime, no metter if acces to PH libriary denied
+        MediaItemOperationsService.shared.isNoRemotesInDB(result: { [weak self] isNoRemotes in
+            guard let `self` = self else {
+                return
+            }
+            
+            guard !self.processingRemoteItems else {
+                return
+            }
+            self.processingRemoteItems = true
+            self.addNextRemoteItemsPage { [weak self] in
+                self?.processingRemoteItems = false
+                self?.remotePageAdded?()
+            }
+            
+        })
         
-        guard MediaItemOperationsService.shared.isNoRemotesInDB(),
-            !processingRemoteItems else {
-            return
-        }
-        processingRemoteItems = true
-        addNextRemoteItemsPage { [weak self] in
-            self?.processingRemoteItems = false
-            self?.remotePageAdded?()
-        }
 
     }
     
@@ -50,6 +55,7 @@ final class CacheManager {///adding files TO DB // managing cache
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
                 self?.remotePageAdded?()
                 if remoteItems.count < CacheManager.pageSize {
+                    self?.photoVideoService.currentPage = 0
                     completion()
                 }
             }

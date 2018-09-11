@@ -8,9 +8,9 @@
 
 import Foundation
 
-typealias ListRemoveItems = ( [WrapData] ) -> Void
+typealias ListRemoteItems = ( [WrapData] ) -> Void
 
-typealias ListRemoveAlbums = ( [AlbumItem] ) -> Void
+typealias ListRemoteAlbums = ( [AlbumItem] ) -> Void
 
 typealias AlbumCoverPhoto = ( Item ) -> Void
 
@@ -55,7 +55,7 @@ class RemoteItemsService {
         queueOperations.maxConcurrentOperationCount = 1
     }
     
-    func reloadItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    func reloadItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         debugLog("RemoteItemsService reloadItems")
 
         currentPage = 0
@@ -65,7 +65,7 @@ class RemoteItemsService {
         nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail, newFieldValue: newFieldValue)
     }
     
-    func nextItems(fileType: FieldValue, sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems? ) {
+    func nextItems(fileType: FieldValue, sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems? ) {
         debugLog("RemoteItemsService nextItems")
 
         self.fieldValue = fileType
@@ -73,7 +73,7 @@ class RemoteItemsService {
     }
     
     
-    func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         debugLog("RemoteItemsService nextItems")
 
         if let unwrapedFieldValue = newFieldValue {
@@ -90,7 +90,7 @@ class RemoteItemsService {
         nextItems(with: serchParam, success: success, fail: fail)
     }
     
-    func nextItemsMinified(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    func nextItemsMinified(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         debugLog("RemoteItemsService nextItemsMinified")
 
         if let unwrapedFieldValue = newFieldValue {
@@ -112,7 +112,7 @@ class RemoteItemsService {
         queueOperations.cancelAllOperations()
     }
     
-    fileprivate func nextItems(with searchParameters: SearchByFieldParameters, success: ListRemoveItems?, fail: FailRemoteItems?) {
+    fileprivate func nextItems(with searchParameters: SearchByFieldParameters, success: ListRemoteItems?, fail: FailRemoteItems?) {
         debugLog("RemoteItemsService nextItems")
 
         let executingOrWaitingOperations = queueOperations.operations.filter {
@@ -160,12 +160,12 @@ final class NextPageOperation: Operation {
     
     let requestParam: SearchByFieldParameters
     
-    private let success: ListRemoveItems?
+    private let success: ListRemoteItems?
     private let fail: FailRemoteItems?
     private let semaphore = DispatchSemaphore(value: 0)
 
     
-    init(requestParam: SearchByFieldParameters, success: ListRemoveItems?, fail: FailRemoteItems?) {
+    init(requestParam: SearchByFieldParameters, success: ListRemoteItems?, fail: FailRemoteItems?) {
         self.searchService = SearchService()
         self.requestParam = requestParam
         self.fail = fail
@@ -270,12 +270,12 @@ class StoryService: RemoteItemsService {
         super.init(requestSize: requestSize, fieldValue: .story)
     }
     
-    func allStories(sortBy: SortType = .date, sortOrder: SortOrder = .desc, success: ListRemoveItems?, fail: FailRemoteItems?) {
+    func allStories(sortBy: SortType = .date, sortOrder: SortOrder = .desc, success: ListRemoteItems?, fail: FailRemoteItems?) {
         currentPage = 0
         nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         debugLog("StoryService nextItems")
         
         let searchParam = SearchByFieldParameters(fieldName: .story,
@@ -318,7 +318,7 @@ class FolderService: RemoteItemsService {
         super.init(requestSize: requestSize, fieldValue: .document)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         debugLog("FilesFromFolderService nextItems")
 
         fileService.filesList(rootFolder: rootFolder, sortBy: sortBy, sortOrder: sortOrder,
@@ -338,7 +338,7 @@ class FilesFromFolderService: RemoteItemsService {
         super.init(requestSize: requestSize, fieldValue: .document)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         debugLog("AllFilesService nextItems")
 
         fileService.filesList(rootFolder: rootFolder, sortBy: sortBy, sortOrder: sortOrder, remoteServicePage: currentPage, success: success, fail: fail)
@@ -354,7 +354,7 @@ class AllFilesService: RemoteItemsService {
         super.init(requestSize: requestSize, fieldValue: .imageAndVideo)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         fileService.filesList(sortBy: sortBy, sortOrder: sortOrder, remoteServicePage: currentPage, success: success, fail: fail)
         currentPage += 1
     }
@@ -368,7 +368,7 @@ class FaceImageDetailService: AlbumDetailService {
         super.init(requestSize: requestSize)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue?) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue?) {
         nextItems(albumUUID: albumUUID, sortBy: sortBy, sortOrder: sortOrder, success: { items in
             success?(items)
 

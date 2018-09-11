@@ -10,6 +10,7 @@ import UIKit
 
 protocol PhotoVideoDataSourceDelegate: class {
     func selectedModeDidChange(_ selectingMode: Bool)
+    func fetchPredicateCreated()
 }
 
 // TODO: selectedIndexPaths NSFetchedResultsController changes
@@ -39,20 +40,14 @@ final class PhotoVideoDataSource: NSObject {
     private weak var delegate: PhotoVideoDataSourceDelegate?
     private weak var collectionView: UICollectionView!
     
-    private var originalFilterPredicate = NSPredicate() //maybe there is some sence to setup it every time from controller, and not here
+    private let predicateManager = PhotoVideoPredicateManager()
     
     private lazy var sectionChanges = [() -> Void]()
     private lazy var objectChanges = [() -> Void]()
     
-//    private lazy var
-    
     private lazy var fetchedResultsController: NSFetchedResultsController<MediaItem> = {
         let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
         
-        
-
-//        fetchRequest.predicate = NSPredicate(format: "isLocalItemValue = true AND ", [])
-//        NSCompoundPredicate(andPredicateWithSubpredicates:
         let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.creationDateValue), ascending: false)
         //        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.nameValue), ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor1]
@@ -87,36 +82,26 @@ final class PhotoVideoDataSource: NSObject {
         try? fetchedResultsController.performFetch()
     }
     
-    func setupOriginalFilter(isPhotos: Bool) {
-        let type = isPhotos ? FileType.image.valueForCoreDataMapping() :
-        FileType.video.valueForCoreDataMapping()
-        let predicateFormat = "fileTypeValue == \(type)"
-        let filetPredicate = NSPredicate(format: predicateFormat)
-        originalFilterPredicate = filetPredicate
-       fetchedResultsController.fetchRequest.predicate = originalFilterPredicate
-    }
-    
-    func changeSourceFilter(syncOnly: Bool) {
-        if syncOnly {
-            fetchedResultsController.fetchRequest.predicate =
-                NSCompoundPredicate(andPredicateWithSubpredicates: [originalFilterPredicate, NSPredicate(format: "isLocalItemValue != \(syncOnly)")])
-//                 ///most likely we need to incer ANDpredicate here = previous + local status
-        } else {
-            fetchedResultsController.fetchRequest.predicate = originalFilterPredicate///Previous predicate here
+    func setupOriginalPredicates(isPhotos: Bool, predicateSetupedCallback: @escaping VoidHandler) {
+        
+        predicateManager.getMainCompoundedPredicate(isPhotos: isPhotos) { [weak self] compoundedPredicate in
+            self?.fetchedResultsController.fetchRequest.predicate = compoundedPredicate
+            predicateSetupedCallback()
         }
-        performFetch()
     }
     
+    func changeSourceFilter(syncOnly: Bool, isPhotos: Bool, newPredicateSetupedCallback: @escaping VoidHandler) {
+        if syncOnly {
+            fetchedResultsController.fetchRequest.predicate = predicateManager.getSyncPredicate(isPhotos: isPhotos)
+            newPredicateSetupedCallback()
+        } else {
+            predicateManager.getMainCompoundedPredicate(isPhotos: isPhotos) { [weak self] compundedPredicate in
+                self?.fetchedResultsController.fetchRequest.predicate = compundedPredicate
+                newPredicateSetupedCallback()
+            }
+        }
+    }
 }
-
-// MARK: - DATA BASE
-
-//private func setupDuplicationPredicate() {
-//    //        fetchRequest.predicate = NSPredicate(format: "isLocalItemValue = true AND ", [])
-//    //        NSCompoundPredicate(andPredicateWithSubpredicates:
-////    let
-//}
-
 
 // MARK: - UICollectionViewDataSource
 extension PhotoVideoDataSource: UICollectionViewDataSource {
