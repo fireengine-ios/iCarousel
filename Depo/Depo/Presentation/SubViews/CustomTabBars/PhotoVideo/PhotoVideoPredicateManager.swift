@@ -13,11 +13,11 @@ final class PhotoVideoPredicateManager {
     private var filtrationPredicate: NSPredicate?
     private var duplicationPredicate: NSPredicate?
     
-    private var lastCompundedPredicate: NSPredicate?
+    private var lastCompoundedPredicate: NSPredicate?
     
     func getMainCompoundedPredicate(isPhotos: Bool, createdPredicateCallback: @escaping PredicateCallback) {
         
-        if let unwrapedLastCompundedPredicate = lastCompundedPredicate {
+        if let unwrapedLastCompundedPredicate = lastCompoundedPredicate {
             createdPredicateCallback(unwrapedLastCompundedPredicate)
             return
         }
@@ -25,10 +25,10 @@ final class PhotoVideoPredicateManager {
         let filtrationPredicateTmp = getFiltrationPredicate(isPhotos: isPhotos)
         
         getDuplicationPredicate(isPhotos: isPhotos) { [weak self] createdDuplicationPredicate in
-            let compundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filtrationPredicateTmp, createdDuplicationPredicate])
-            self?.lastCompundedPredicate = compundedPredicate
+            let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filtrationPredicateTmp, createdDuplicationPredicate])
+            self?.lastCompoundedPredicate = compoundedPredicate
             
-            createdPredicateCallback(compundedPredicate)
+            createdPredicateCallback(compoundedPredicate)
             
         }
         

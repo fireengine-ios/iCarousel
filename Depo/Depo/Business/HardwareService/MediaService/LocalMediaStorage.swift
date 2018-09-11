@@ -260,7 +260,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 [album, smartAlbum].forEach { album in
                     album.enumerateObjects { object, index, stop in
                         dispatchGroup.enter()
-                        self.numberOfItems(in: object) { [weak self] itemsCount, fromCoreData  in
+                        self.numberOfItems(in: object) { itemsCount, fromCoreData  in
                             if itemsCount > 0 {
                                 let item = AlbumItem(uuid: object.localIdentifier,
                                                      name: object.localizedTitle,
@@ -282,8 +282,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                     item.preview = WrapData(asset: asset)
                                 }
                                 albums.append(item)
-                                dispatchGroup.leave()
                             }
+                            dispatchGroup.leave()
                         }
                         
                     }
