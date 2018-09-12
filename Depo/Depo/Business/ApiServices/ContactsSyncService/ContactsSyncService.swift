@@ -160,7 +160,11 @@ class ContactsSyncService: BaseRequestService {
             }
             
             let response = ContactsSyncService.mergeContacts(parsedContactsToMerge, with: parsedContactsToDelete)
+            
+            let savedAnalyzeStep = AnalyzeStatus.shared().analyzeStep
             ContactSyncSDK.cancelAnalyze()
+            AnalyzeStatus.shared().analyzeStep = savedAnalyzeStep
+            
             successCallback?(response)
         }
         
