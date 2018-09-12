@@ -33,6 +33,9 @@ final class CacheManager {///adding files TO DB // managing cache
             }
             self.processingRemoteItems = true
             self.addNextRemoteItemsPage { [weak self] in
+                ///As soon as all remotes added - start adding locals
+                self?.startAppendingAllLocals()
+//                MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
                 self?.processingRemoteItems = false
                 self?.remotePageAdded?()
             }
