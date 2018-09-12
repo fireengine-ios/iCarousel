@@ -1,4 +1,6 @@
-# usefull commands
+require './Helpers/version_manager'
+## same
+# require_relative 'Helpers/version_manager'
 
 ## to get list of all actions
 #fastlane actions
@@ -6,6 +8,11 @@
 ## to get list of parameters of action
 #fastlane action ANY-ACTION
 # example: fastlane action match
+
+## To install plugins:
+# fastlane install_plugins
+## To update plugins:
+# fastlane update_plugins
 
 
 # USERNAME = ''
@@ -18,28 +25,39 @@ BUILD_FOLDER_NAME = "builds"
 # TEAM_ID = ""
 # DEV_NAME = "" #mayby need Team Name
 
-TYPES = ["development", "appstore", "adhoc"]
-CONFIGS = ["debug", "release", "adhoc"]
-SCHEMES = ["PROD", "PREPROD", "TEST"]
+# TYPES = ["development", "appstore", "adhoc"]
+# CONFIGS = ["debug", "release", "adhoc"]
+# SCHEMES = ["PROD", "PREPROD", "TEST"]
 
-# If you want to automatically update fastlane if a new version is available:
+BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET)
+
+## If you want to automatically update fastlane if a new version is available:
 # update_fastlane
 
-# This is the minimum version number required.
+## This is the minimum version number required.
 # fastlane_version "2.19.1"
 
-default_platform :ios
+# default_platform :ios
 
-
-platform :ios do
+# platform :ios do
 
   error do |lane, exception|
     switch_to_prod
   end
 
+  #--------------- beta uploads ---------------
+
 	lane :beta_jenkins do
 		begin
-			jenkins_build()
+		  xcode_select "/Applications/Xcode.app"
+      setup_jenkins
+      bundle_install
+      cocoapods
+      update_fastlane_plugins()
+      poeditor_download
+      my_gym
+      fabric
+      slack_post
 		rescue => exception
 			on_error(exception)
 		end
@@ -47,7 +65,20 @@ platform :ios do
 
 	lane :beta_jenkins_preprod do
 		begin
-			jenkins_build_preprod()
+		  xcode_select "/Applications/Xcode.app"
+      setup_jenkins
+      bundle_install
+      cocoapods
+      update_fastlane_plugins()
+      poeditor_download
+
+      switch_to_preprod
+
+      my_gym
+      fabric
+      slack_post
+
+      switch_to_prod
 		rescue => exception
 			on_error(exception)
 		end
@@ -56,35 +87,6 @@ platform :ios do
   def update_fastlane_plugins
     sh("fastlane update_plugins")
   end
-
-	def jenkins_build
-		xcode_select "/Applications/Xcode.app"
-		setup_jenkins
-		bundle_install
-		cocoapods
-    update_fastlane_plugins()
-    poeditor_download
-		my_gym
-		fabric
-		slack_post
-	end
-
-	def jenkins_build_preprod
-		xcode_select "/Applications/Xcode.app"
-		setup_jenkins
-		bundle_install
-		cocoapods
-    update_fastlane_plugins()
-    poeditor_download
-
-    switch_to_preprod
-
-		my_gym
-		fabric
-		slack_post
-
-    switch_to_prod
-	end
 
 	lane :beta_diawi do
 		setup_jenkins
@@ -191,7 +193,7 @@ platform :ios do
   	slack(
   		message: "Build #{version} successfully released!",
   		success: true,
-  		slack_url: "https://hooks.slack.com/services/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",
+  		slack_url: "https://hooks.slack.com/services/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", #lifebox-ios-builds
       # slack_url: "https://hooks.slack.com/services/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", #lifebox-ios-firengine
       payload: { 
       	"Build Date" => Time.new.to_s
@@ -218,6 +220,7 @@ platform :ios do
   	)
   end
 
+  #--------------- helpers ---------------
 
   lane :poeditor_download do
     for language in ["en", "uk", "tr", "ru", "ro", "es", "de", "ar"]
@@ -233,7 +236,7 @@ platform :ios do
 
 
   lane :switch_to_preprod do
-    set_build_number(xcodeproj: ".", target: TARGET, new_number: BUILD_NUMBER + "_preprod")
+    VersionManager.set_build_number(xcodeproj: ".", target: TARGET, new_number: BUILD_NUMBER + "_preprod")
     replace_text_in_file(
       file_path: "#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift",
       old_text: "private static let currentServerEnvironment = ServerEnvironment.production",
@@ -242,7 +245,7 @@ platform :ios do
   end
 
   lane :switch_to_prod do
-    set_build_number(xcodeproj: ".", target: TARGET, new_number: BUILD_NUMBER)
+    VersionManager.set_build_number(xcodeproj: ".", target: TARGET, new_number: BUILD_NUMBER)
     replace_text_in_file(
       file_path: "#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift",
       old_text: "private static let currentServerEnvironment = ServerEnvironment.preProduction",
@@ -264,6 +267,7 @@ platform :ios do
 
 #--------------------- build_number functions ---------------------
 
+  desc "fastlane-plugin-versioning required. also it needs more time that my class"
   lane :test_get_build_number do
     build_number = get_build_number_from_plist(xcodeproj: "Depo.xcodeproj", scheme: "Depo_LifeTech_PROD")
     puts "version: #{build_number}"
@@ -275,132 +279,13 @@ platform :ios do
   end
 
   lane :test_get_build_number_my do
-    build_number = get_build_number_my(xcodeproj: ".", target: TARGET)
+    build_number = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET)
     puts "version: #{build_number}"
 
-    set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number + "_preprod")
+    VersionManager.set_build_number(xcodeproj: ".", target: TARGET, new_number: build_number + "_preprod")
 
-    build_number = get_build_number_my(xcodeproj: ".", target: TARGET)
+    build_number = Fastlane::VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET)
     puts "new version: #{build_number}"
   end
-
-  def get_build_number_my(params)
-    folder = params[:xcodeproj] ? File.join(params[:xcodeproj], '..') : '.'
-    target_name = params[:target]
-    configuration = params[:configuration]
-
-    # Get version_number
-    project = get_project!(folder)
-    target = get_target!(project, target_name)
-    plist_file = get_plist!(folder, target, configuration)
-    version_number = get_version_number!(plist_file)
-
-    # Store the number in the shared hash
-    Actions.lane_context[SharedValues::BUILD_NUMBER] = version_number
-
-    # Return the version number because Swift might need this return value
-    return version_number
-  end
-
-  def set_build_number(params)
-    folder = params[:xcodeproj] ? File.join(params[:xcodeproj], '..') : '.'
-    target_name = params[:target]
-    configuration = params[:configuration]
-    new_number = params[:new_number]
-
-    # Get version_number
-    project = get_project!(folder)
-    target = get_target!(project, target_name)
-    plist_file = get_plist!(folder, target, configuration)
-    save_version_number!(plist_file, new_number)
-
-    # Store the number in the shared hash
-    Actions.lane_context[SharedValues::BUILD_NUMBER] = new_number
-  end
-
-  def self.get_project!(folder)
-    # require 'xcodeproj'
-    project_path = Dir.glob("#{folder}/*.xcodeproj").first
-    if project_path
-      return Xcodeproj::Project.open(project_path)
-    else
-      UI.user_error!("Unable to find Xcode project in folder: #{folder}")
-    end
-  end
-
-  def self.get_target!(project, target_name)
-    targets = project.targets
-
-    # Prompt targets if no name
-    unless target_name
-
-      # Gets non-test targets
-      non_test_targets = targets.reject do |t|
-        # Not all targets respond to `test_target_type?`
-        t.respond_to?(:test_target_type?) && t.test_target_type?
-      end
-
-      # Returns if only one non-test target
-      if non_test_targets.count == 1
-        return targets.first
-      end
-
-      options = targets.map(&:name)
-      target_name = UI.select("What target would you like to use?", options)
-    end
-
-    # Find target
-    target = targets.find do |t|
-      t.name == target_name
-    end
-    UI.user_error!("Cannot find target named '#{target_name}'") unless target
-
-    target
-  end
-
-  def self.get_plist!(folder, target, configuration = nil)
-    plist_files = target.resolved_build_setting("INFOPLIST_FILE")
-    plist_files_count = plist_files.values.compact.uniq.count
-
-    # Get plist file for specified configuration
-    # Or: Prompt for configuration if plist has different files in each configurations
-    # Else: Get first(only) plist value
-    if configuration
-      plist_file = plist_files[configuration]
-    elsif plist_files_count > 1
-      options = plist_files.keys
-      selected = UI.select("What build configuration would you like to use?", options)
-      plist_file = plist_files[selected]
-    else
-      plist_file = plist_files.values.first
-    end
-
-    # $(SRCROOT) is the path of where the XcodeProject is
-    # We can just set this as empty string since we join with `folder` below
-    if plist_file.include?("$(SRCROOT)/")
-      plist_file.gsub!("$(SRCROOT)/", "")
-    end
-
-    plist_file = File.absolute_path(File.join(folder, plist_file))
-    UI.user_error!("Cannot find plist file: #{plist_file}") unless File.exist?(plist_file)
-
-    plist_file
-  end
-
-  def self.get_version_number!(plist_file)
-    plist = Xcodeproj::Plist.read_from_path(plist_file)
-    UI.user_error!("Unable to read plist: #{plist_file}") unless plist
-    return plist["CFBundleVersion"]
-  end
-
-  def self.save_version_number!(plist_file, new_number)
-    plist = Xcodeproj::Plist.read_from_path(plist_file)
-    UI.user_error!("Unable to read plist: #{plist_file}") unless plist
-
-    plist["CFBundleVersion"] = new_number
-    Xcodeproj::Plist.write_to_path(plist, plist_file)
-  end
-
-  BUILD_NUMBER = get_build_number_my(xcodeproj: ".", target: TARGET)
   
-end
+# end
