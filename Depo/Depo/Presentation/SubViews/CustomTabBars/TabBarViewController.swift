@@ -802,9 +802,9 @@ extension TabBarViewController: TabBarActionHandler {
             
             let controller: UIViewController
             if let currentVC = currentViewController as? BaseFilesGreedViewController {
-                controller = router.uploadFromLifeBoxFavorites(folderUUID: parentFolder, soorceUUID: "", sortRule: currentVC.getCurrentSortRule(), isPhotoVideoOnly: false)
+                controller = router.uploadFromLifeBoxFavorites(folderUUID: parentFolder, soorceUUID: "", sortRule: currentVC.getCurrentSortRule(), isPhotoVideoOnly: true)
             } else {
-                controller = router.uploadFromLifeBoxFavorites(folderUUID: parentFolder, isPhotoVideoOnly: false)
+                controller = router.uploadFromLifeBoxFavorites(folderUUID: parentFolder, isPhotoVideoOnly: true)
             }
             
             let navigationController = NavigationController(rootViewController: controller)
