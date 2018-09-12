@@ -23,7 +23,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         let interactor = UploadFromLifeBoxInteractor(remoteItems: PhotoAndVideoService(requestSize: 100))
         interactor.rootFolderUUID = albumUUID
         
-        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.image), .fileType(.video)],
+        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.imageAndVideo)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
@@ -56,7 +56,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         
         interactor.rootFolderUUID = destinationFolderUUID
         
-        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.image), .fileType(.video)],
+        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.imageAndVideo)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
@@ -100,7 +100,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
 
         interactor.rootFolderUUID = destinationFolderUUID
         
-        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.image), .fileType(.video)],
+        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.imageAndVideo)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
