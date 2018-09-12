@@ -19,8 +19,6 @@ class UploadFromLifeBoxPhotosPresenter: BaseFilesGreedPresenter, UploadFromLifeB
         dataSource.enableSelectionOnHeader = false
         dataSource.setSelectionState(selectionState: true)
         dataSource.updateDisplayngType(type: .greed)
-        dataSource.preferedCellReUseID = CollectionViewCellsIdsConstant.cellForImage
-        
     }
     
     override func viewWillDisappear() {
