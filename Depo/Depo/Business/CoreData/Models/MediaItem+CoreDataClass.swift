@@ -24,9 +24,8 @@ public class MediaItem: NSManagedObject {
 
         nameValue = wrapData.name
 
-        let char: Character = nameValue?.first ?? " "
-        
-        fileNameFirstChar = String(describing: char).uppercased()
+//        let char: Character = nameValue?.first ?? " "
+//        fileNameFirstChar = String(describing: char).uppercased()
         
         fileTypeValue = wrapData.fileType.valueForCoreDataMapping()
         fileSizeValue = wrapData.fileSize

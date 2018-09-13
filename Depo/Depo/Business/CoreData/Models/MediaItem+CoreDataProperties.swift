@@ -18,7 +18,7 @@ extension MediaItem {
 
     @NSManaged public var creationDateValue: NSDate?
     @NSManaged public var favoritesValue: Bool
-    @NSManaged public var fileNameFirstChar: String?
+//    @NSManaged public var fileNameFirstChar: String?
     @NSManaged public var fileSizeValue: Int64
     @NSManaged public var fileTypeValue: Int16
     @NSManaged public var idValue: Int64
@@ -38,6 +38,9 @@ extension MediaItem {
     @NSManaged public var isFolder: Bool
     @NSManaged public var objectSyncStatus: NSSet?
     @NSManaged public var isFiltered: Bool
+    @NSManaged public var relatedLocal: MediaItem?
+    @NSManaged public var relatedRemotes: NSSet?
+    @NSManaged public var session: Session?
 }
 
 
@@ -56,8 +59,25 @@ extension MediaItem {
 }
 
 // MARK: Generated accessors for albums
-
 extension MediaItem {
+    
+    @objc(insertObject:inAlbumsAtIndex:)
+    @NSManaged public func insertIntoAlbums(_ value: MediaItemsAlbum, at idx: Int)
+    
+    @objc(removeObjectFromAlbumsAtIndex:)
+    @NSManaged public func removeFromAlbums(at idx: Int)
+    
+    @objc(insertAlbums:atIndexes:)
+    @NSManaged public func insertIntoAlbums(_ values: [MediaItemsAlbum], at indexes: NSIndexSet)
+    
+    @objc(removeAlbumsAtIndexes:)
+    @NSManaged public func removeFromAlbums(at indexes: NSIndexSet)
+    
+    @objc(replaceObjectInAlbumsAtIndex:withObject:)
+    @NSManaged public func replaceAlbums(at idx: Int, with value: MediaItemsAlbum)
+    
+    @objc(replaceAlbumsAtIndexes:withAlbums:)
+    @NSManaged public func replaceAlbums(at indexes: NSIndexSet, with values: [MediaItemsAlbum])
     
     @objc(addAlbumsObject:)
     @NSManaged public func addToAlbums(_ value: MediaItemsAlbum)
@@ -66,11 +86,15 @@ extension MediaItem {
     @NSManaged public func removeFromAlbums(_ value: MediaItemsAlbum)
     
     @objc(addAlbums:)
-    @NSManaged public func addToAlbums(_ values: NSSet)
+    @NSManaged public func addToAlbums(_ values: NSOrderedSet)
     
     @objc(removeAlbums:)
-    @NSManaged public func removeFromAlbums(_ values: NSSet)
+    @NSManaged public func removeFromAlbums(_ values: NSOrderedSet)
     
+}
+
+// MARK: Generated accessors for objectSyncStatus
+extension MediaItem {
     
     @objc(addObjectSyncStatusObject:)
     @NSManaged public func addToObjectSyncStatus(_ value: MediaItemsObjectSyncStatus)
@@ -83,5 +107,22 @@ extension MediaItem {
     
     @objc(removeObjectSyncStatus:)
     @NSManaged public func removeFromObjectSyncStatus(_ values: NSSet)
+    
+}
+
+// MARK: Generated accessors for relatedRemotes
+extension MediaItem {
+    
+    @objc(addRelatedRemotesObject:)
+    @NSManaged public func addToRelatedRemotes(_ value: MediaItem)
+    
+    @objc(removeRelatedRemotesObject:)
+    @NSManaged public func removeFromRelatedRemotes(_ value: MediaItem)
+    
+    @objc(addRelatedRemotes:)
+    @NSManaged public func addToRelatedRemotes(_ values: NSSet)
+    
+    @objc(removeRelatedRemotes:)
+    @NSManaged public func removeFromRelatedRemotes(_ values: NSSet)
     
 }

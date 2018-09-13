@@ -226,7 +226,8 @@ final class AppConfigurator {
                 ///it depends on iOS version
                 
                 /// start photos logic after notification permission
-                MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
+                ///MOVED TO CACHE MANAGER TO BE TRIGGERED AFTER ALL REMOTES ARE ADDED
+//                MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
             }
         } else {
             setupMenloworks()
