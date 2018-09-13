@@ -537,7 +537,7 @@
 "dropboxLastUpdatedFile" = "Última actualización en %@ - %d archivo";
 "dropboxLastUpdatedFiles" = "Última actualización en %@ - %d archivos";
 "PackagesPolicyHeader" = "Explicación de la renovación automática de la suscripción en la app de compra:";
-"PackagesPolicyText" = "Las suscripciones se renuevan mensualmente. El pago se cargará a la cuenta de iTunes en la confirmación de compra. La suscripción se renueva automáticamente a menos que se deshabilite la opción de la renovación automática al menos 24 horas antes del final del período actual.\nLa cuenta se cobrará por la renovación dentro de las 24 horas anteriores al final del período actual. Las tarifas se reflejan tal como se muestran en la pantalla de compra en la aplicación.\nLas suscripciones pueden ser administradas por el usuario y la renovación automática se puede desactivar yendo a la configuración de la cuenta del usuario después de la compra.\nCualquier porción no utilizada de un período de prueba gratuito, si se ofrece, se perderá cuando el usuario compre una suscripción a esa publicación, cuando corresponda en la Política de Privacidad: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nTérminos de Uso: ";
+"PackagesPolicyText" = "Las suscripciones se renuevan mensualmente. El pago se cargará a la cuenta de iTunes en la confirmación de compra. La suscripción se renueva automáticamente a menos que se deshabilite la opción de la renovación automática al menos 24 horas antes del final del período actual.\nLa cuenta se cobrará por la renovación dentro de las 24 horas anteriores al final del período actual. Las tarifas se reflejan tal como se muestran en la pantalla de compra en la aplicación.\nLas suscripciones pueden ser administradas por el usuario y la renovación automática se puede desactivar yendo a la configuración de la cuenta del usuario después de la compra.\nCualquier porción no utilizada de un período de prueba gratuito, si se ofrece, se perderá cuando el usuario compre una suscripción a esa publicación, cuando corresponda en la Política de Privacidad: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nTérminos de Uso:";
 "Missing Dates" = "Fechas faltantes";
 "You have successfully registered, please log in with your credentials" = "Se ha registrado exitosamente, por favor inicie sesión con sus credenciales";
 "Animation" = "Animación";
@@ -640,8 +640,12 @@
 "offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "Please enter a valid login." = "Inicio de sesión denegado Por favor revise sus credenciales";
 "Please enter the text below" = "Por favor ingrese el texto a continuación";
-"facebook_photo_tags" = "";
-"facebook_tags_on" = "";
-"facebook_tags_off" = "";
-"facebook_tags_import" = "";
+"facebook_photo_tags" = "Facebook Photo Tags";
+"facebook_tags_on" = "You will get your Facebook tags to lifebox when you enable this option";
+"facebook_tags_off" = "\n You will get your Facebook tags to lifebox when you enable this option";
+"facebook_tags_import" = "Please enable \\\"Import from Facebook\\\" option to use \\\"Facebook Tag Transfer\\\" feature";
 "TermsOfUseLinkText" = "clic";
+"launch_campaign_card_detail" = "Detalles";
+"launch_campaign_card_title" = "Campaña de Praga";
+"launch_campaign_card_message" = "¡Praga te está esperando! Empieza a explorar lifebox ahora y sé una de las 10 parejas afortunadas";
+"%d same contacts" = "";
