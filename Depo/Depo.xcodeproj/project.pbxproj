@@ -2460,6 +2460,8 @@
 		8CDB21EB20AC10B100739700 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
 		8CDB21EC20AC11B600739700 /* UIButton+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1620AAC3150070FDC2 /* UIButton+Image.swift */; };
 		8CE20071207CD12900EF3483 /* ServerMessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A8F1620737E230001EB54 /* ServerMessageError.swift */; };
+		8CEE8D25214A472B00150996 /* FaceImageDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */; };
+		8CEE8D26214A473200150996 /* FaceImageDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA164C2121CA1E006D96A5 /* FaceImageDesigner.swift */; };
 		8CF6A9BE207C8C32007DEF71 /* PageCompounder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6A9BD207C8C32007DEF71 /* PageCompounder.swift */; };
 		8CF6A9BF207C8C32007DEF71 /* PageCompounder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6A9BD207C8C32007DEF71 /* PageCompounder.swift */; };
 		8CF6A9C3207C8CF9007DEF71 /* CollectionViewSpinnerFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CF6A9C1207C8CF8007DEF71 /* CollectionViewSpinnerFooter.xib */; };
@@ -14250,6 +14252,7 @@
 				8C0E8D201FDEBDFF00789C91 /* CountiesGSMCodeCompositor.swift in Sources */,
 				4A0AC15D20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */,
 				B56FBB292122C4BA004F4A59 /* TermsOfUseRouterInput.swift in Sources */,
+				8CEE8D26214A473200150996 /* FaceImageDesigner.swift in Sources */,
 				8C0E8D211FDEBDFF00789C91 /* HomePageInteractorInput.swift in Sources */,
 				8C0E8D221FDEBDFF00789C91 /* BaseCollectionViewCellWithSwipe.swift in Sources */,
 				8C0E8D231FDEBDFF00789C91 /* ViewForPopUp.swift in Sources */,
@@ -14670,6 +14673,7 @@
 				8C0E8EB01FDEBDFF00789C91 /* SubscriptionPlan.swift in Sources */,
 				B56FBB232122C3E7004F4A59 /* TermsOfUseConfigurator.swift in Sources */,
 				8C0E8EB11FDEBDFF00789C91 /* BaseFilesGreedViewController.swift in Sources */,
+				8CEE8D25214A472B00150996 /* FaceImageDisplayManager.swift in Sources */,
 				4A56D5BF202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */,
 				8C0E8EB21FDEBDFF00789C91 /* ImportFromDropboxInteractor.swift in Sources */,
 				8C0E8EB31FDEBDFF00789C91 /* BaseFilesGreedModuleInput.swift in Sources */,
