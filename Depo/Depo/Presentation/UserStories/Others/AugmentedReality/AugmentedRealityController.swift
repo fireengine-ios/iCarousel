@@ -29,9 +29,6 @@ final class AugmentedRealityController: QLPreviewController {
         source?.removeLocalFile()
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
     
     private func setupSource() {
         source?.delegate = self
