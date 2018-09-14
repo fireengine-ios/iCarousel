@@ -112,7 +112,7 @@
 			</dict>
 		</dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<false/>
+		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>To save lifebox photos to your device</string>
