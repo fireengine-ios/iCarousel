@@ -39,7 +39,7 @@ extension MediaItem {
     @NSManaged public var objectSyncStatus: NSSet?
     @NSManaged public var isFiltered: Bool
     @NSManaged public var relatedLocal: MediaItem?
-    @NSManaged public var relatedRemotes: NSSet?
+    @NSManaged public var relatedRemotes: NSSet
     @NSManaged public var session: Session?
 }
 

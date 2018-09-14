@@ -23,7 +23,7 @@
         <relationship name="metadata" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MediaItemsMetaData" inverseName="item" inverseEntity="MediaItemsMetaData" syncable="YES"/>
         <relationship name="objectSyncStatus" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MediaItemsObjectSyncStatus" inverseName="item" inverseEntity="MediaItemsObjectSyncStatus" syncable="YES"/>
         <relationship name="relatedLocal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MediaItem" syncable="YES"/>
-        <relationship name="relatedRemotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MediaItem" syncable="YES"/>
+        <relationship name="relatedRemotes" toMany="YES" deletionRule="Nullify" destinationEntity="MediaItem" syncable="YES"/>
         <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="items" inverseEntity="Session" syncable="YES"/>
     </entity>
     <entity name="MediaItemsAlbum" representedClassName=".MediaItemsAlbum" syncable="YES">
