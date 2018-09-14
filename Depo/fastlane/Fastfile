@@ -112,6 +112,15 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
     switch_to_prod
   end
 
+  desc "run tests"
+  lane :my_scan do
+    scan(
+      scheme: "LifeboxUnitTests",
+      code_coverage: true,
+      devices: ["iPhone 8 Plus (11.4)"],
+      test_without_building: true
+    )
+  end
 
   #--------------- build ipa ---------------
 

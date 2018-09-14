@@ -2544,6 +2544,7 @@
 		98EAC9422080CBFF00AAD5B6 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EAC9412080CBFF00AAD5B6 /* ContactService.swift */; };
 		98EAC9432080CBFF00AAD5B6 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EAC9412080CBFF00AAD5B6 /* ContactService.swift */; };
 		9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FC663D1385AB04CA228302 /* FeedbackViewOutput.swift */; };
+		9AF440D5735AC4AC7F93EE0A /* Pods_LifeboxUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1C34FCAA83DC0B9AC57D06 /* Pods_LifeboxUnitTests.framework */; };
 		9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CCDE3B214014B82E82994E /* FileInfoModuleInput.swift */; };
 		9BBF662583E415D3BC0ED486 /* PhotoVideoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40655AE864D2491AF9B181A /* PhotoVideoDetailPresenter.swift */; };
 		9E4E918E6877B531674D260E /* SettingsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F4E84C509D07D9BC4F909 /* SettingsConfigurator.swift */; };
@@ -3280,6 +3281,7 @@
 		CEB27350205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734F205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift */; };
 		CEB76EB01FE9094700B679EB /* UIScrollView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB76EAF1FE9094600B679EB /* UIScrollView+Refresh.swift */; };
 		CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB996CE1F0770470074E264 /* RequestsKey.swift */; };
+		CEBA0943214BCC63007A0CE3 /* LifeboxUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBA0942214BCC63007A0CE3 /* LifeboxUnitTests.swift */; };
 		CEBAB15B2094803C002824C6 /* InsetsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBAB15A2094803C002824C6 /* InsetsButton.swift */; };
 		CEBAB15C2094806C002824C6 /* InsetsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBAB15A2094803C002824C6 /* InsetsButton.swift */; };
 		CEBB2DD61F76550A00D725F0 /* String+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9A5FA1F23308800ED8610 /* String+Int.swift */; };
@@ -3573,6 +3575,13 @@
 			remoteGlobalIDString = CE51AAF51EF90853005DCEE0;
 			remoteInfo = Depo_LifeTech;
 		};
+		CEBA0945214BCC63007A0CE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE51AAF51EF90853005DCEE0;
+			remoteInfo = Depo_LifeTech;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -3732,6 +3741,7 @@
 		3C0817D19161BF904D94191B /* RegistrationModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationModuleInput.swift; sourceTree = "<group>"; };
 		3D010A878B7C0430091742F6 /* Pods-LifeboxFileProvider.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProvider.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider.appstore.xcconfig"; sourceTree = "<group>"; };
 		3D263784A01AEA819EB5CA24 /* SplashRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashRouterInput.swift; sourceTree = "<group>"; };
+		3D7560201BC3CD6F36DCBD55 /* Pods-LifeboxUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		412F2AB0A215CE40568819D5 /* FileInfoPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoPresenter.swift; sourceTree = "<group>"; };
 		41CCDE3B214014B82E82994E /* FileInfoModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoModuleInput.swift; sourceTree = "<group>"; };
 		4483DD5CFB766196E8A1ADB3 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
@@ -3812,6 +3822,7 @@
 		5A790A17A1745A0D85ECB596 /* FileInfoConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoConfigurator.swift; sourceTree = "<group>"; };
 		5AAEBE1A76149DDF9869754A /* Pods-Depo_LifeTech-autosync-widget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech-autosync-widget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech-autosync-widget/Pods-Depo_LifeTech-autosync-widget.appstore.xcconfig"; sourceTree = "<group>"; };
 		5B17E6F8BC6EF2FCF5C768A7 /* SyncContactsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsViewInput.swift; sourceTree = "<group>"; };
+		5BAD821E7B8A7A4BEDB93ED5 /* Pods-LifeboxUnitTests.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.appstore.xcconfig"; sourceTree = "<group>"; };
 		5C1481F6939E81618738C7DE /* ForgotPasswordViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewInput.swift; sourceTree = "<group>"; };
 		5C58EB76B3E755EF8CB5B029 /* SplashInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashInteractorOutput.swift; sourceTree = "<group>"; };
 		5CA25298A8872FA819D654BE /* Pods-autosync-widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-autosync-widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-autosync-widget/Pods-autosync-widget.debug.xcconfig"; sourceTree = "<group>"; };
@@ -5158,6 +5169,7 @@
 		BBC08749C42535A16BE62A26 /* SyncContactsInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsInteractorOutput.swift; sourceTree = "<group>"; };
 		BC29E5867A0B1232EF8B56B8 /* ActionsMenuViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuViewInput.swift; sourceTree = "<group>"; };
 		BDC8E61911303EB96B2BA99C /* SyncContactsConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsConfigurator.swift; sourceTree = "<group>"; };
+		BDD32A1C9ACDD7741231E880 /* Pods-LifeboxUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		C025086696F56A3B76A70336 /* SettingsModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsModuleInput.swift; sourceTree = "<group>"; };
 		C088E9D4D411FE756F92A449 /* SelectNameInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameInitializer.swift; sourceTree = "<group>"; };
 		C0C7CC7BE6988DA598BF0BE9 /* ForgotPasswordModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordModuleInput.swift; sourceTree = "<group>"; };
@@ -5461,6 +5473,9 @@
 		CEB2734F205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAttemptsCounterByUnigueUserID.swift; sourceTree = "<group>"; };
 		CEB76EAF1FE9094600B679EB /* UIScrollView+Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Refresh.swift"; sourceTree = "<group>"; };
 		CEB996CE1F0770470074E264 /* RequestsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsKey.swift; sourceTree = "<group>"; };
+		CEBA0940214BCC63007A0CE3 /* LifeboxUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeboxUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEBA0942214BCC63007A0CE3 /* LifeboxUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeboxUnitTests.swift; sourceTree = "<group>"; };
+		CEBA0944214BCC63007A0CE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEBAB15420945AE2002824C6 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
 		CEBAB15520945C0D002824C6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
 		CEBAB15620945C33002824C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
@@ -5568,6 +5583,7 @@
 		CEF69DE81FB5A26D00FCE6AB /* UIImage+Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Orientation.swift"; sourceTree = "<group>"; };
 		CEF73B9C1FCEAC30004C3ADF /* KeyboardHideManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHideManager.swift; sourceTree = "<group>"; };
 		CEFC14152059609F002DE803 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		CFC97990A9F9F470648ADD6B /* Pods-LifeboxUnitTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.enterprise.xcconfig"; sourceTree = "<group>"; };
 		D07372B64C00468A227C63A7 /* TermsAndServicesConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesConfigurator.swift; sourceTree = "<group>"; };
 		D329B3047AEFF11E8E02E7A9 /* Pods-TC_Depo_LifeTech.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech.enterprise.xcconfig"; sourceTree = "<group>"; };
 		D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
@@ -5666,6 +5682,7 @@
 		FB7C949A95C197C80ACC503C /* OTPViewInteractorIO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewInteractorIO.swift; sourceTree = "<group>"; };
 		FBB01CDF10CB058E76558146 /* IntroduceInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInteractor.swift; sourceTree = "<group>"; };
 		FBF703F8C0F19668138D30BD /* UserInfoSubViewInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewInteractorOutput.swift; sourceTree = "<group>"; };
+		FC1C34FCAA83DC0B9AC57D06 /* Pods_LifeboxUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD5BEC48C5ED3B8650FB2FB3 /* SettingsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FD733F7347C546BBBAE9DF7D /* TermsAndServicesModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesModuleInput.swift; sourceTree = "<group>"; };
 		FF3D38F0C7EEF61373827F8A /* RegistrationInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationInteractorInput.swift; sourceTree = "<group>"; };
@@ -5795,6 +5812,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CEBA093D214BCC63007A0CE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AF440D5735AC4AC7F93EE0A /* Pods_LifeboxUnitTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -5809,6 +5834,7 @@
 				CE1BE923204831CE0074BDDC /* LifeboxFileProvider */,
 				CE1BE931204831CE0074BDDC /* LifeboxFileProviderUI */,
 				78B2D34B204AA5F500D096DC /* NotificationService */,
+				CEBA0941214BCC63007A0CE3 /* LifeboxUnitTests */,
 				051E1DF519CAC2F900FD1E03 /* Frameworks */,
 				051E1DF419CAC2F900FD1E03 /* Products */,
 				FA9ABBCB19DCF3FFE7B413C8 /* Pods */,
@@ -5827,6 +5853,7 @@
 				CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */,
 				CE1BE930204831CE0074BDDC /* LifeboxFileProviderUI.appex */,
 				78B2D34A204AA5F500D096DC /* NotificationService.appex */,
+				CEBA0940214BCC63007A0CE3 /* LifeboxUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5873,6 +5900,7 @@
 				9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */,
 				FA34640A7E6FCBDBE92CF11C /* Pods_LifeboxFileProvider.framework */,
 				8E88FF64676BA040D2DC438A /* Pods_LifeboxFileProviderUI.framework */,
+				FC1C34FCAA83DC0B9AC57D06 /* Pods_LifeboxUnitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -11376,6 +11404,15 @@
 			path = EmailEnter;
 			sourceTree = "<group>";
 		};
+		CEBA0941214BCC63007A0CE3 /* LifeboxUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				CEBA0942214BCC63007A0CE3 /* LifeboxUnitTests.swift */,
+				CEBA0944214BCC63007A0CE3 /* Info.plist */,
+			);
+			path = LifeboxUnitTests;
+			sourceTree = "<group>";
+		};
 		CEBBDDD91F01E4CF00CDF527 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -12141,6 +12178,10 @@
 				765A3AC8A1667BD2BB5D2EED /* Pods-LifeboxFileProviderUI.release.xcconfig */,
 				9A108CE3C564FBAC6AF195A4 /* Pods-LifeboxFileProviderUI.appstore.xcconfig */,
 				59A6486A06A972F2D8B0349D /* Pods-LifeboxFileProviderUI.enterprise.xcconfig */,
+				3D7560201BC3CD6F36DCBD55 /* Pods-LifeboxUnitTests.debug.xcconfig */,
+				BDD32A1C9ACDD7741231E880 /* Pods-LifeboxUnitTests.release.xcconfig */,
+				5BAD821E7B8A7A4BEDB93ED5 /* Pods-LifeboxUnitTests.appstore.xcconfig */,
+				CFC97990A9F9F470648ADD6B /* Pods-LifeboxUnitTests.enterprise.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -12309,13 +12350,34 @@
 			productReference = CE79E4A51F695DA200C1F151 /* Depo_LifeTechUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		CEBA093F214BCC63007A0CE3 /* LifeboxUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEBA094B214BCC63007A0CE3 /* Build configuration list for PBXNativeTarget "LifeboxUnitTests" */;
+			buildPhases = (
+				D5C963CD9D99F1A9B08F55B3 /* [CP] Check Pods Manifest.lock */,
+				CEBA093C214BCC63007A0CE3 /* Sources */,
+				CEBA093D214BCC63007A0CE3 /* Frameworks */,
+				CEBA093E214BCC63007A0CE3 /* Resources */,
+				5930B6CC43B126BDF44E0556 /* [CP] Embed Pods Frameworks */,
+				DAE5B9ADC293F73918BA44AA /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEBA0946214BCC63007A0CE3 /* PBXTargetDependency */,
+			);
+			name = LifeboxUnitTests;
+			productName = LifeboxUnitTests;
+			productReference = CEBA0940214BCC63007A0CE3 /* LifeboxUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		051E1DEB19CAC2F900FD1E03 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = LifeTech;
 				TargetAttributes = {
@@ -12421,6 +12483,11 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = CE51AAF51EF90853005DCEE0;
 					};
+					CEBA093F214BCC63007A0CE3 = {
+						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = CE51AAF51EF90853005DCEE0;
+					};
 				};
 			};
 			buildConfigurationList = 051E1DEE19CAC2F900FD1E03 /* Build configuration list for PBXProject "Depo" */;
@@ -12464,6 +12531,7 @@
 				CE1BE921204831CD0074BDDC /* LifeboxFileProvider */,
 				CE1BE92F204831CE0074BDDC /* LifeboxFileProviderUI */,
 				78B2D349204AA5F500D096DC /* NotificationService */,
+				CEBA093F214BCC63007A0CE3 /* LifeboxUnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -13677,6 +13745,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CEBA093E214BCC63007A0CE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -13732,6 +13807,76 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5930B6CC43B126BDF44E0556 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CircleProgressBar/CircleProgressBar.framework",
+				"${BUILT_PRODUCTS_DIR}/Curio_iOS_SDK/Curio_iOS_SDK.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
+				"${BUILT_PRODUCTS_DIR}/SimpleExif/SimpleExif.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
+				"${BUILT_PRODUCTS_DIR}/UIImage-Categories/UIImage_Categories.framework",
+				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
+				"${BUILT_PRODUCTS_DIR}/XYPieChart/XYPieChart.framework",
+				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curio_iOS_SDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectiveDropboxOfficial.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleExif.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIImage_Categories.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XYPieChart.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7745E7DF35170131924746B7 /* [CP] Check Pods Manifest.lock */ = {
@@ -14007,6 +14152,50 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#./Fabric.framework/run e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00";
+		};
+		D5C963CD9D99F1A9B08F55B3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LifeboxUnitTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DAE5B9ADC293F73918BA44AA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
+				"${PODS_ROOT}/GoogleTagManager/Frameworks/frameworks/GoogleTagManager.framework/Resources/TagManagerResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TagManagerResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -16341,6 +16530,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CEBA093C214BCC63007A0CE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEBA0943214BCC63007A0CE3 /* LifeboxUnitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -16388,6 +16585,11 @@
 			isa = PBXTargetDependency;
 			target = CE51AAF51EF90853005DCEE0 /* Depo_LifeTech */;
 			targetProxy = CE79E4AA1F695DA200C1F151 /* PBXContainerItemProxy */;
+		};
+		CEBA0946214BCC63007A0CE3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE51AAF51EF90853005DCEE0 /* Depo_LifeTech */;
+			targetProxy = CEBA0945214BCC63007A0CE3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -17885,6 +18087,127 @@
 			};
 			name = Enterprise;
 		};
+		CEBA0947214BCC63007A0CE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D7560201BC3CD6F36DCBD55 /* Pods-LifeboxUnitTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.by.LifeboxUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/lifebox.app/lifebox";
+			};
+			name = Debug;
+		};
+		CEBA0948214BCC63007A0CE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDD32A1C9ACDD7741231E880 /* Pods-LifeboxUnitTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.by.LifeboxUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/lifebox.app/lifebox";
+			};
+			name = Release;
+		};
+		CEBA0949214BCC63007A0CE3 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5BAD821E7B8A7A4BEDB93ED5 /* Pods-LifeboxUnitTests.appstore.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.by.LifeboxUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/lifebox.app/lifebox";
+			};
+			name = AppStore;
+		};
+		CEBA094A214BCC63007A0CE3 /* Enterprise */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CFC97990A9F9F470648ADD6B /* Pods-LifeboxUnitTests.enterprise.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.by.LifeboxUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/lifebox.app/lifebox";
+			};
+			name = Enterprise;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -17983,6 +18306,17 @@
 				CE79E4AE1F695DA200C1F151 /* Release */,
 				CE79E4AF1F695DA200C1F151 /* AppStore */,
 				CE79E4B01F695DA200C1F151 /* Enterprise */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEBA094B214BCC63007A0CE3 /* Build configuration list for PBXNativeTarget "LifeboxUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEBA0947214BCC63007A0CE3 /* Debug */,
+				CEBA0948214BCC63007A0CE3 /* Release */,
+				CEBA0949214BCC63007A0CE3 /* AppStore */,
+				CEBA094A214BCC63007A0CE3 /* Enterprise */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
