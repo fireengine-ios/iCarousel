@@ -77,6 +77,10 @@ target 'TC_Depo_LifeTech' do
 	core_pods
 end
 
+target 'LifeboxUnitTests' do
+	core_pods
+end
+
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|
