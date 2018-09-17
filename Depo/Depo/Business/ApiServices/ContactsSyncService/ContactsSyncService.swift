@@ -157,14 +157,13 @@ class ContactsSyncService: BaseRequestService {
             
             if parsedContactsToDelete.count > 0 {
                 self.lastToDeleteContactsValue = parsedContactsToDelete.reduce(0) { $0 + $1.numberOfErrors }
+            } else {
+                let savedAnalyzeStep = AnalyzeStatus.shared().analyzeStep
+                ContactSyncSDK.cancelAnalyze()
+                AnalyzeStatus.shared().analyzeStep = savedAnalyzeStep
             }
             
             let response = ContactsSyncService.mergeContacts(parsedContactsToMerge, with: parsedContactsToDelete)
-            
-            let savedAnalyzeStep = AnalyzeStatus.shared().analyzeStep
-            ContactSyncSDK.cancelAnalyze()
-            AnalyzeStatus.shared().analyzeStep = savedAnalyzeStep
-            
             successCallback?(response)
         }
         

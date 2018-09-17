@@ -40,6 +40,11 @@ fastlane beta_fabric
 fastlane beta_fabric_preprod
 ```
 
+### my_scan
+```
+fastlane my_scan
+```
+run tests
 ### my_gym
 ```
 fastlane my_gym

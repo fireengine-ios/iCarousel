@@ -56,8 +56,6 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             case .analyze:
                 self.analyze()
             case .deleteDuplicated:
-                self.analyticsService.logScreen(screen: .contacSyncDeleteDuplicates)
-                self.analyticsService.trackDimentionsEveryClickGA(screen: .contacSyncDeleteDuplicates)
                 self.deleteDuplicated()
             }
             
