@@ -103,7 +103,7 @@ extension MediaItem {
     ///This staus setup only works when all remotes added beforehand
     private func getAllRelatedRemotes(wrapItem: WrapData, context: NSManagedObjectContext) -> [MediaItem] {
         let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
-        request.predicate = NSPredicate(format: "isLocalItemValue == FALSE AND trimmedLocalFileID in %@", wrapItem.getTrimmedLocalID())
+        request.predicate = NSPredicate(format: "isLocalItemValue == FALSE AND trimmedLocalFileID == %@", wrapItem.getTrimmedLocalID())///TODO: MD5
         let relatedRemotes = try? context.fetch(request)
         return relatedRemotes ?? []
     }
