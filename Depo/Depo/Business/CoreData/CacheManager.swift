@@ -41,8 +41,6 @@ final class CacheManager {///adding files TO DB // managing cache
             }
             
         })
-        
-
     }
     
     private func addNextRemoteItemsPage(completion: @escaping VoidHandler) {
