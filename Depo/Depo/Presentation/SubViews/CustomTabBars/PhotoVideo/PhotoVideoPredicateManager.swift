@@ -31,8 +31,6 @@ final class PhotoVideoPredicateManager {
             createdPredicateCallback(compoundedPredicate)
             
         }
-        
-        
     }
     
     func getDuplicationPredicate(isPhotos: Bool, createdPredicateCallback: @escaping PredicateCallback) {

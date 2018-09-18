@@ -282,6 +282,9 @@ extension AppDelegate {
         }
         /// start photos logic after notification permission///MOVED TO CACHE MANAGER, when all remotes are added.
 //        MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
+        LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
+            
+        }
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

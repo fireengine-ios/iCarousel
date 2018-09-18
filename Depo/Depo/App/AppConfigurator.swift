@@ -228,6 +228,9 @@ final class AppConfigurator {
                 /// start photos logic after notification permission
                 ///MOVED TO CACHE MANAGER TO BE TRIGGERED AFTER ALL REMOTES ARE ADDED
 //                MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
+                LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
+                    
+                }
             }
         } else {
             setupMenloworks()
