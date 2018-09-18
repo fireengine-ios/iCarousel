@@ -178,16 +178,11 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        collectionView.performBatchUpdates({ [weak self] in  
+        collectionView.performBatchUpdates({ [weak self] in
+            self?.sectionChanges.forEach { $0() }
             self?.objectChanges.forEach { $0() }
-            ///check: self?.sectionChanges.forEach { $0() }
             }, completion: { [weak self] _ in
-                
-                self?.collectionView.performBatchUpdates({
-                    self?.sectionChanges.forEach { $0() }
-                }, completion: { _ in 
-                    self?.reloadSupplementaryViewsIfNeeded()
-                })
+                self?.reloadSupplementaryViewsIfNeeded()
         })
     }
     
