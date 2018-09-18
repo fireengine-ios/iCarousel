@@ -22,6 +22,14 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ha8-dW-lGP">
                         <rect key="frame" x="0.0" y="0.0" width="186" height="165"/>
                     </imageView>
+                    <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LrF-OZ-70O">
+                        <rect key="frame" x="0.0" y="0.0" width="186" height="165"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gXr-ST-V2P">
+                            <rect key="frame" x="0.0" y="0.0" width="186" height="165"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <blurEffect style="light"/>
+                    </visualEffectView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5aj-uE-NFD">
                         <rect key="frame" x="160" y="4" width="22" height="22"/>
                         <constraints>
@@ -43,14 +51,6 @@
                             <constraint firstAttribute="height" constant="12" id="NZD-Y5-VIb"/>
                         </constraints>
                     </imageView>
-                    <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LrF-OZ-70O">
-                        <rect key="frame" x="0.0" y="0.0" width="186" height="165"/>
-                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gXr-ST-V2P">
-                            <rect key="frame" x="0.0" y="0.0" width="186" height="165"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        </view>
-                        <blurEffect style="light"/>
-                    </visualEffectView>
                     <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3QP-J6-7Bi">
                         <rect key="frame" x="2" y="160" width="182" height="2"/>
                         <constraints>
