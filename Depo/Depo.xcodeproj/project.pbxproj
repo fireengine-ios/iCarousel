@@ -4914,6 +4914,7 @@
 		8C0B2F271EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoNextEditingRowPasser.swift; sourceTree = "<group>"; };
 		8C0B918F2013221400A5BA81 /* CustomProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressHUD.swift; sourceTree = "<group>"; };
 		8C0CE59121406EAF0017D6D4 /* PhotoVideoPredicateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoPredicateManager.swift; sourceTree = "<group>"; };
+		8C0CE59C2147FAD60017D6D4 /* LifeBoxModel_2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LifeBoxModel_2.xcdatamodel; sourceTree = "<group>"; };
 		8C0E907E1FDEBE0000789C91 /* lifebox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lifebox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetPredetermendConfigs.swift; sourceTree = "<group>"; };
 		8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPackageProductObject.swift; sourceTree = "<group>"; };
@@ -18033,9 +18034,10 @@
 		CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				8C0CE59C2147FAD60017D6D4 /* LifeBoxModel_2.xcdatamodel */,
 				CE3AA9C21F4D860F000157AF /* LifeBoxModel.xcdatamodel */,
 			);
-			currentVersion = CE3AA9C21F4D860F000157AF /* LifeBoxModel.xcdatamodel */;
+			currentVersion = 8C0CE59C2147FAD60017D6D4 /* LifeBoxModel_2.xcdatamodel */;
 			path = LifeBoxModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

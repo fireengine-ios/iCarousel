@@ -31,8 +31,6 @@ final class PhotoVideoPredicateManager {
             createdPredicateCallback(compoundedPredicate)
             
         }
-        
-        
     }
     
     func getDuplicationPredicate(isPhotos: Bool, createdPredicateCallback: @escaping PredicateCallback) {
@@ -41,24 +39,10 @@ final class PhotoVideoPredicateManager {
             createdPredicateCallback(unwrapedDuplicationPredicate)
             return
         }
-        
-        guard !CacheManager.shared.processingRemoteItems else {
-            CacheManager.shared.remotePageAdded = { [weak self] in
-                self?.getDuplicationPredicate(isPhotos: isPhotos, createdPredicateCallback: createdPredicateCallback)
-            }
-            return
-        }
-        MediaItemOperationsService.shared.getAllRemotesMediaItem(allRemotes: { [weak self] allRemotes in
-            var remoteMD5s = [String]()
-            var remoteLocalIDs = [String]()
-            allRemotes.forEach {
-                remoteMD5s.append($0.md5Value ?? "")
-                remoteLocalIDs.append($0.trimmedLocalFileID ?? "")
-            }
-            let duplicationPredicateTmp = NSPredicate(format: "(isLocalItemValue == true AND NOT (md5Value IN %@) AND NOT (trimmedLocalFileID IN %@)) OR isLocalItemValue == FALSE", remoteMD5s, remoteLocalIDs)
-            self?.duplicationPredicate = duplicationPredicateTmp
-            createdPredicateCallback(duplicationPredicateTmp)
-        })
+        ///This Predicate based on assomption that all remotes will be downloaded before all remotes
+        let duplicationPredicateTmp = NSPredicate(format: "(isLocalItemValue == true AND relatedRemotes.@count == 0) OR isLocalItemValue == FALSE")
+        duplicationPredicate = duplicationPredicateTmp
+        createdPredicateCallback(duplicationPredicateTmp)
     }
 
     func getSyncPredicate(isPhotos: Bool) -> NSPredicate {

@@ -33,13 +33,15 @@ final class CacheManager {///adding files TO DB // managing cache
             }
             self.processingRemoteItems = true
             self.addNextRemoteItemsPage { [weak self] in
+//                self?.showPopUp(text: "All remotes are added")
+                ///As soon as all remotes added - start adding locals
+                self?.startAppendingAllLocals()
+//                MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
                 self?.processingRemoteItems = false
                 self?.remotePageAdded?()
             }
             
         })
-        
-
     }
     
     private func addNextRemoteItemsPage(completion: @escaping VoidHandler) {
@@ -71,8 +73,17 @@ final class CacheManager {///adding files TO DB // managing cache
     func startAppendingAllLocals() {
         allLocalAdded = false
         MediaItemOperationsService.shared.appendLocalMediaItems { [weak self] in
+//            self?.showPopUp(text: "All locals are added")
             self?.allLocalAdded = true
         }
     }
 
+    private func showPopUp(text: String) {
+        DispatchQueue.main.async {
+            let alertView = UIAlertView(title: "!~TEST~!", message: text, delegate: nil, cancelButtonTitle: "Cancel")
+            alertView.alertViewStyle = .default
+            alertView.show()
+        }
+    }
+    
 }
