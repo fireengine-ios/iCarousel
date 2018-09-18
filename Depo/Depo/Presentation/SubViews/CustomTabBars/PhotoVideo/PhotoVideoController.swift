@@ -208,6 +208,10 @@ extension PhotoVideoController: UIScrollViewDelegate {
         handleScrollEnd(with: scrollView.contentOffset)
     }
     
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        handleScrollEnd(with: scrollView.contentOffset)
+    }
+    
     /// if scroll programmatically
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         handleScrollEnd(with: scrollView.contentOffset)
