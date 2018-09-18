@@ -253,9 +253,10 @@ extension PhotoVideoController: UICollectionViewDelegate {
         
         if uploadedObjectID.index(of: wraped.uuid) != nil {
             cell.finishedUploadForObject()
-        } else {
-            cell.resetCloudImage()
         }
+//        else {
+//            cell.resetCloudImage()
+//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -348,6 +349,8 @@ extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
 //}
 
 
+// MARK: - ItemOperationManagerViewProtocol
+/// using: ItemOperationManager.default.startUpdateView(view:
 extension PhotoVideoController: ItemOperationManagerViewProtocol {
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         if let compairedView = object as? PhotoVideoController {
@@ -421,8 +424,9 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
 //                }
 //            }
         
+            uploadProgress.removeValue(forKey: uuid)
+        
             DispatchQueue.toMain {
-                self.uploadProgress.removeValue(forKey: uuid)
                 if let cell = self.getCellForFile(objectUUID: uuid) {
                     cell.finishedUploadForObject()
                 }
@@ -438,6 +442,17 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
                 }
             })
 //        }
+    }
+    
+    func cancelledUpload(file: WrapData) {
+        let uuid = file.getTrimmedLocalID()
+        uploadProgress.removeValue(forKey: uuid)
+        
+        DispatchQueue.toMain {
+            if let cell = self.getCellForFile(objectUUID: uuid) {
+                cell.cancelledUploadForObject()
+            }
+        }
     }
     
     private func getCellForFile(objectUUID: String) -> PhotoVideoCell? {
