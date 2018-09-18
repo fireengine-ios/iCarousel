@@ -23,9 +23,6 @@ public class MediaItem: NSManagedObject {
         idValue = wrapData.id ?? -1
 
         nameValue = wrapData.name
-
-//        let char: Character = nameValue?.first ?? " "
-//        fileNameFirstChar = String(describing: char).uppercased()
         
         fileTypeValue = wrapData.fileType.valueForCoreDataMapping()
         fileSizeValue = wrapData.fileSize
@@ -47,7 +44,6 @@ public class MediaItem: NSManagedObject {
         case let .localMediaContent(assetContent):
             let localID = assetContent.asset.localIdentifier
             localFileID = localID
-//            trimmedLocalFileID = localID.components(separatedBy: "/").first ?? localID need to test this
             patchToPreviewValue = nil
         }
         
@@ -103,7 +99,7 @@ extension MediaItem {
     ///This staus setup only works when all remotes added beforehand
     private func getAllRelatedRemotes(wrapItem: WrapData, context: NSManagedObjectContext) -> [MediaItem] {
         let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
-        request.predicate = NSPredicate(format: "isLocalItemValue == FALSE AND (trimmedLocalFileID == %@ OR md5Value == %@)", wrapItem.getTrimmedLocalID(), wrapItem.md5)///TODO: MD5
+        request.predicate = NSPredicate(format: "isLocalItemValue == FALSE AND (trimmedLocalFileID == %@ OR md5Value == %@)", wrapItem.getTrimmedLocalID(), wrapItem.md5)
         let relatedRemotes = try? context.fetch(request)
         return relatedRemotes ?? []
     }

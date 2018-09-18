@@ -18,7 +18,6 @@ extension MediaItem {
 
     @NSManaged public var creationDateValue: NSDate?
     @NSManaged public var favoritesValue: Bool
-//    @NSManaged public var fileNameFirstChar: String?
     @NSManaged public var fileSizeValue: Int64
     @NSManaged public var fileTypeValue: Int16
     @NSManaged public var idValue: Int64
