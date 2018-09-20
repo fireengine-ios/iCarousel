@@ -84,7 +84,7 @@ final class QuickScrollService {
         var body: [String: Any] = [startDateBodyKey: "\(startDate.millisecondsSince1970)",
                                     endDateBodyKey: "",
                                     categoryBodyKey: category.text,
-                                    sizeBodyKey: "\(size)",
+                                    sizeBodyKey: "\(pageSize)",
                                     startFileIdKey: startID,
                                     endFileIdKey: ""]
         if let unwrapedEndDate = endDate {
