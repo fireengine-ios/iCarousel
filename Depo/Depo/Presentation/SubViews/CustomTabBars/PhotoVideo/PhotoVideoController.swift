@@ -44,12 +44,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //REMOVE ME
-        QuickScrollService().requestListOfDateRange(startDate: Date(), endDate: nil, category: .photosAndVideos, size: 20) { (response) in
-            debugPrint("something")
-        }
-        
-        //REMOVE ME
+
         bottomBarManager.setup()
         collectionViewManager.setup()
         navBarManager.setDefaultMode()

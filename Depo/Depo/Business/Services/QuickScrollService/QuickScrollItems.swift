@@ -88,11 +88,17 @@ final class QuickScrollGroupsListItem {
 }
 
 final class QuickScrollRangeListItem {
-    let startDate: Date?
-    let endDate: Date?
+//    let startDate: Date?
+//    let endDate: Date?
     let size: Int
     let category: QuickScrollCategory?
-    var files = [BaseDataSourceItem]()///check the type
+    var files = [WrapData]()///check the type
+    ///NOW:
+//        ▿ {
+//            "total" : 128
+//            "files" : []
+//            "group": "photos_and_videos
+    ///USED TO BE:
     //    "group": "photos_and_videos:3",
     //    "start": 0,
     //    "end": 1526971205110,
@@ -106,11 +112,12 @@ final class QuickScrollRangeListItem {
     private let filesJsonKey = "files"
     
     init(json: JSON) {
-        startDate = json[startDateJsonKey].date
-        endDate = json[endDateJsonKey].date
+//        startDate = json[startDateJsonKey].date ///Seems like Volcan removed these
+//        endDate = json[endDateJsonKey].date
         size = json[sizeJsonKey].intValue
         category = QuickScrollCategory.transfromFromString(text: json[categotyJsonKey].stringValue)
-        var items = json[filesJsonKey]
-        //        files
+        let itemsJson: [JSON] = json[filesJsonKey].array ?? []
+        files = itemsJson.map{WrapData(searchResponse: $0)}
+        debugPrint("all created")
     }
 }

@@ -15,6 +15,8 @@ final class QuickScrollService {
     private let endDateBodyKey = "endDate"
     private let categoryBodyKey = "category"
     private let sizeBodyKey = "size"
+    private let startFileIdKey = "startFileId"
+    private let endFileIdKey = "endFileId"
     
     let sessionManager: SessionManager
     
@@ -69,9 +71,11 @@ final class QuickScrollService {
         }
     }
 
-    func requestListOfDateRange(startDate: Date, endDate: Date?,
-                                category: QuickScrollCategory, size: Int,
-                                handler: @escaping ResponseArrayHandler<QuickScrollRangeListItem>) {
+    func requestListOfDateRange(startDate: Date, endDate: Date? = nil,
+                                startID: Int64, endID: Int64? = nil,
+                                category: QuickScrollCategory, pageSize: Int,
+                                handler: @escaping ResponseHandler<QuickScrollRangeListItem>) {
+        
         guard let requestURL = URL(string: RouteRequests.quickScrollRangeList, relativeTo: RouteRequests.BaseUrl) else {
             handler(ResponseResult.failed(CustomErrors.unknown))
             return
@@ -80,20 +84,24 @@ final class QuickScrollService {
         var body: [String: Any] = [startDateBodyKey: "\(startDate.millisecondsSince1970)",
                                     endDateBodyKey: "",
                                     categoryBodyKey: category.text,
-                                    sizeBodyKey: "\(size)"]
+                                    sizeBodyKey: "\(size)",
+                                    startFileIdKey: startID,
+                                    endFileIdKey: ""]
         if let unwrapedEndDate = endDate {
             body[endDateBodyKey] = "\(unwrapedEndDate.millisecondsSince1970)"
         }
-        
+        if let unwrapedEndId = endID {
+            body[endFileIdKey] = unwrapedEndId
+        }
         sessionManager
                 .request(requestURL,
-                         method: .post,
+                         method: .get,
                          parameters: body)
             .customValidate()
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    handler(ResponseResult.success(JSON(data: data).arrayValue.map { QuickScrollRangeListItem(json: $0) }))
+                    handler(ResponseResult.success(QuickScrollRangeListItem(json: JSON(data: data))))
                 case .failure(let error):
                     handler(ResponseResult.failed(error))
                 }
