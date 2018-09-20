@@ -39,6 +39,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private lazy var bottomBarManager = PhotoVideoBottomBarManager(delegate: self)
     private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView)
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
+    private lazy var scrollDirectionManager = PhotoVideoScrollDirectionManager()
     
     // MARK: - life cycle
     
@@ -189,9 +190,47 @@ extension PhotoVideoController: PhotoVideoCellDelegate {
     }
 }
 
+
+// MARK: - UIScrollViewDelegate
+extension PhotoVideoController: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollDirectionManager.handleScrollBegin(with: scrollView.contentOffset)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            handleScrollEnd(with: scrollView.contentOffset)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        handleScrollEnd(with: scrollView.contentOffset)
+    }
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        handleScrollEnd(with: scrollView.contentOffset)
+    }
+    
+    /// if scroll programmatically
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        handleScrollEnd(with: scrollView.contentOffset)
+    }
+    
+    private func handleScrollEnd(with offset: CGPoint) {
+        scrollDirectionManager.handleScrollEnd(with: offset)
+        updateDB()
+    }
+    
+    private func updateDB() {
+        print("updateDB with direction: \(scrollDirectionManager.scrollDirection)")
+    }
+    
+}
+
 // MARK: - UICollectionViewDelegate
 extension PhotoVideoController: UICollectionViewDelegate {
-    
+
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? PhotoVideoCell else {
             return
