@@ -10,7 +10,7 @@ import Foundation
 
 struct RouteRequests {
     
-    // MARK: Authentication
+    // MARK: - Authentication
     
     /// prod
     static let BaseUrl = URL(string: "https://adepo.turkcell.com.tr/")!
@@ -44,12 +44,12 @@ struct RouteRequests {
     static let mailVerefication = "/api/verify/sendVerificationEmail"
     static let mailUpdate = "/api/account/email"
     
-    // MARK: EULA 
+    // MARK: - EULA
     static let eulaGet     = "api/eula/get/%@"
     static let eulaCheck   = "api/eula/check/%@"
     static let eulaApprove = "api/eula/approve/%i"
     
-    // MARK: Dropbox
+    // MARK: - Dropbox
     
     static let dropboxAuthUrl: URL = URL(string: "https://api.dropboxapi.com/1/oauth2/token_from_oauth1")!
     static let dropboxConnect = "api/migration/dropbox/connect?accessToken=%@"
@@ -70,13 +70,13 @@ struct RouteRequests {
     static let instagramCreateMigration = "/api/share/social/instagram/migration/create"
     static let instagramCancelMigration = "/api/share/social/instagram/migration/cancel"
     
-    // MARK: Captcha
+    // MARK: - Captcha
     
     static let captcha = "/api/captcha/%@/%@"
     
     static let captchaRequred = "/api/captcha/required"
     
-    // MARK: Search
+    // MARK: - Search
     
     static let search = "/api/search/byField?fieldName=%@&fieldValue=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@"
     
@@ -85,12 +85,18 @@ struct RouteRequests {
     static let unifiedSearchWithoutCategory = "/api/search/unified?text=%@&page=%@&size=%@"
     static let suggestion    = "/api/search/unified/suggest?text=%@"
     
-    // MARK: Album
+    // MARK: - Quick Scroll
+    
+    static let quickScrollGroups = "/api/scroll/groups"
+    static let quickScrollGroupsList = "/api/scroll/groups/list"
+    static let quickScrollRangeList = "/api/scroll/range/list"
+    
+    // MARK: - Album
     
     static let albumList    = "/api/album?contentType=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@"
     static let details      = "/api/album/%@?page=%@&size=%@&sortBy=%@&sortOrder=%@"
     
-    // MARK: My Streams
+    // MARK: - My Streams
     
     static let people = "/api/person/"
     static let peopleThumbnails = "/api/person/thumbnails"

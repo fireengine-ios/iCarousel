@@ -58,7 +58,7 @@ final class MediaItemOperationsService {
         self.deleteObjects(fromFetch: fetchRequest)
         
     }
-    
+    //TODO: check the usefullness of it/or need of refactor
     func getLocalDuplicates(remoteItems: [Item], duplicatesCallBack: @escaping ([Item]) -> Void) {
         var remoteMd5s = [String]()
         var trimmedIDs = [String]()
@@ -86,7 +86,7 @@ final class MediaItemOperationsService {
             
         }
     }
-    
+    //TODO: check the usefullness of it/or need of refactor
     func getLocalFilteredItem(remoteOriginalItem: Item, localFilteredPhotosCallBack: @escaping (Item?) -> Void) {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
@@ -171,7 +171,7 @@ final class MediaItemOperationsService {
 //            CoreDataStack.default.saveDataForContext(context: context, savedCallBack: nil)
 //        }
 //    }
-    
+    //TODO: check the usefullness of it/or need of refactor
     func updateLocalItemSyncStatus(item: Item) {
         CoreDataStack.default.performBackgroundTask { [weak self] context in
             guard let `self` = self else {

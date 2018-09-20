@@ -45,7 +45,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         bottomBarManager.setup()
         collectionViewManager.setup()
         navBarManager.setDefaultMode()

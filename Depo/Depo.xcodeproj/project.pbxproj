@@ -2366,6 +2366,10 @@
 		8C5408471F62AD6400D4717A /* GridListTopBarSortingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5408461F62AD6400D4717A /* GridListTopBarSortingTableCell.swift */; };
 		8C5408491F62AD9100D4717A /* GridListTopBarSortingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C5408481F62AD9100D4717A /* GridListTopBarSortingTableCell.xib */; };
 		8C54084C1F62C77200D4717A /* FloatingContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54084B1F62C77200D4717A /* FloatingContainerVC.swift */; };
+		8C580B5E21512AD500A9F158 /* QuickScrollService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C580B5C21512AD500A9F158 /* QuickScrollService.swift */; };
+		8C580B5F21512AD500A9F158 /* QuickScrollService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C580B5C21512AD500A9F158 /* QuickScrollService.swift */; };
+		8C580B6021512AD500A9F158 /* QuickScrollItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C580B5D21512AD500A9F158 /* QuickScrollItems.swift */; };
+		8C580B6121512AD500A9F158 /* QuickScrollItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C580B5D21512AD500A9F158 /* QuickScrollItems.swift */; };
 		8C6CC55E1F879A72007D49C6 /* GeneralFilesFiltration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CC55D1F879A72007D49C6 /* GeneralFilesFiltration.swift */; };
 		8C6EF8761F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8621F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift */; };
 		8C6EF8771F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8631F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift */; };
@@ -4936,6 +4940,8 @@
 		8C5408461F62AD6400D4717A /* GridListTopBarSortingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridListTopBarSortingTableCell.swift; sourceTree = "<group>"; };
 		8C5408481F62AD9100D4717A /* GridListTopBarSortingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridListTopBarSortingTableCell.xib; sourceTree = "<group>"; };
 		8C54084B1F62C77200D4717A /* FloatingContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingContainerVC.swift; sourceTree = "<group>"; };
+		8C580B5C21512AD500A9F158 /* QuickScrollService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickScrollService.swift; sourceTree = "<group>"; };
+		8C580B5D21512AD500A9F158 /* QuickScrollItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickScrollItems.swift; sourceTree = "<group>"; };
 		8C6CC55D1F879A72007D49C6 /* GeneralFilesFiltration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralFilesFiltration.swift; sourceTree = "<group>"; };
 		8C6EF8621F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSelectionTabBarConfigurator.swift; sourceTree = "<group>"; };
 		8C6EF8631F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSelectionTabBarInitializer.swift; sourceTree = "<group>"; };
@@ -8033,6 +8039,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8C580B5B21512AD500A9F158 /* QuickScrollService */,
 				486F7B55208D10A8009EB73F /* PeriodicContactSyncDataStorage */,
 				98B01C74206BCD4A00DD78C7 /* AnalyticsService */,
 				9808A05C206A88090022376D /* PushNotificationService */,
@@ -9357,6 +9364,15 @@
 				8C5408481F62AD9100D4717A /* GridListTopBarSortingTableCell.xib */,
 			);
 			path = TopBar;
+			sourceTree = "<group>";
+		};
+		8C580B5B21512AD500A9F158 /* QuickScrollService */ = {
+			isa = PBXGroup;
+			children = (
+				8C580B5C21512AD500A9F158 /* QuickScrollService.swift */,
+				8C580B5D21512AD500A9F158 /* QuickScrollItems.swift */,
+			);
+			path = QuickScrollService;
 			sourceTree = "<group>";
 		};
 		8C6EF8601F348B5C002AC795 /* BottomSelectionTabBar */ = {
@@ -14744,6 +14760,7 @@
 				8C0E8EC61FDEBDFF00789C91 /* SearchViewPresenter.swift in Sources */,
 				CEF6909C21258D8F0013075F /* PhotoVideoController.swift in Sources */,
 				8C0E8EC71FDEBDFF00789C91 /* InternetDataUsageCell.swift in Sources */,
+				8C580B5F21512AD500A9F158 /* QuickScrollService.swift in Sources */,
 				8C0E8EC81FDEBDFF00789C91 /* ImportPhotosViewController.swift in Sources */,
 				8C0E8EC91FDEBDFF00789C91 /* UIviewControlllerExtensions.swift in Sources */,
 				8C0E8ECA1FDEBDFF00789C91 /* Dictionary.swift in Sources */,
@@ -15109,6 +15126,7 @@
 				8C0E8FC31FDEBDFF00789C91 /* ActivityTimelineInteractorInput.swift in Sources */,
 				B53DCE8920EF634900400DBA /* SyncDB.m in Sources */,
 				8C0E8FC41FDEBDFF00789C91 /* ActivityTimelineInteractorOutput.swift in Sources */,
+				8C580B6121512AD500A9F158 /* QuickScrollItems.swift in Sources */,
 				8C0E8FC51FDEBDFF00789C91 /* ActivityTimelineInteractor.swift in Sources */,
 				8C0E8FC61FDEBDFF00789C91 /* ActivityTimelineRouterInput.swift in Sources */,
 				4ADE0873202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */,
@@ -15916,6 +15934,7 @@
 				CE4851F02018B03A006B8854 /* FilterPhotoCard.swift in Sources */,
 				8C7786A01F3F38EF005CB432 /* VisualMusicPlayerInteractorInput.swift in Sources */,
 				4A9B3902201F3513009FC572 /* FaceImageItemsPresenter.swift in Sources */,
+				8C580B5E21512AD500A9F158 /* QuickScrollService.swift in Sources */,
 				9840C62520AEAD8100A8634F /* CheckBoxView.swift in Sources */,
 				8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
 				2EB5EE9DB087C1F0CEAF1343 /* BaseFilesGreedInteractor.swift in Sources */,
@@ -16281,6 +16300,7 @@
 				78624ADA201C8A3A00C969D3 /* ManageContactsModuleOutput.swift in Sources */,
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
+				8C580B6021512AD500A9F158 /* QuickScrollItems.swift in Sources */,
 				B53DCE8820EF634900400DBA /* SyncDB.m in Sources */,
 				CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */,
 				CEF69DE11FB5851E00FCE6AB /* UploadParametrs.swift in Sources */,
