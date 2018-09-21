@@ -2651,6 +2651,10 @@
 		B5781BD1210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */; };
 		B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E8181FE288A500F47B0A /* PhotoSyncService.swift */; };
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
+		B59554932154E0B200208E79 /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59554912154E0B200208E79 /* PrepareQuickScroll.swift */; };
+		B59554942154E0B200208E79 /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59554912154E0B200208E79 /* PrepareQuickScroll.swift */; };
+		B59554952154E0B200208E79 /* PrepareQuickScroll.xib in Resources */ = {isa = PBXBuildFile; fileRef = B59554922154E0B200208E79 /* PrepareQuickScroll.xib */; };
+		B59554962154E0B200208E79 /* PrepareQuickScroll.xib in Resources */ = {isa = PBXBuildFile; fileRef = B59554922154E0B200208E79 /* PrepareQuickScroll.xib */; };
 		B5AD70C2214FA3450022F1FD /* PhotoVideoScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD70C1214FA3450022F1FD /* PhotoVideoScrollDirectionManager.swift */; };
 		B5AD70C3214FA3450022F1FD /* PhotoVideoScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD70C1214FA3450022F1FD /* PhotoVideoScrollDirectionManager.swift */; };
 		B5BA98762066827900CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
@@ -5160,6 +5164,8 @@
 		B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+OpenURL.swift"; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
+		B59554912154E0B200208E79 /* PrepareQuickScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrepareQuickScroll.swift; sourceTree = "<group>"; };
+		B59554922154E0B200208E79 /* PrepareQuickScroll.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrepareQuickScroll.xib; sourceTree = "<group>"; };
 		B5AD70C1214FA3450022F1FD /* PhotoVideoScrollDirectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoScrollDirectionManager.swift; sourceTree = "<group>"; };
 		B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+JPEG.swift"; sourceTree = "<group>"; };
 		B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -8296,6 +8302,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				B59554902154E0B200208E79 /* PrepareToQuickScroll */,
 				7CD92DB6207509F000010BFA /* AnimationCard */,
 				7C84920F201CB8EF007C502A /* LatestUploads */,
 				7C4F60AE201C65E90033C58F /* MovieCard */,
@@ -10130,6 +10137,15 @@
 				66EA238C411DE4D11DBC9837 /* LBAlbumLikePreviewSliderRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		B59554902154E0B200208E79 /* PrepareToQuickScroll */ = {
+			isa = PBXGroup;
+			children = (
+				B59554912154E0B200208E79 /* PrepareQuickScroll.swift */,
+				B59554922154E0B200208E79 /* PrepareQuickScroll.xib */,
+			);
+			path = PrepareToQuickScroll;
 			sourceTree = "<group>";
 		};
 		B5FB65741FDE6F3E00A02FD7 /* OperationProgressService */ = {
@@ -12624,6 +12640,7 @@
 				8C06AFC32008AD71003D8E05 /* gonder_btn@2x.png in Resources */,
 				8C06AF572008AD70003D8E05 /* daire.png in Resources */,
 				8C06B01B2008AD71003D8E05 /* kup_selected@2x.png in Resources */,
+				B59554962154E0B200208E79 /* PrepareQuickScroll.xib in Resources */,
 				8C0E900C1FDEBDFF00789C91 /* SettingsTableViewSwitchCell.xib in Resources */,
 				8C06B09D2008AD71003D8E05 /* refresh@2x.png in Resources */,
 				8C06AED32008AD70003D8E05 /* beyaz_cerceve@3x.png in Resources */,
@@ -13237,6 +13254,7 @@
 				8C06AF6C2008AD70003D8E05 /* duz_cizgi_selected@2x.png in Resources */,
 				8C06AEBA2008AD70003D8E05 /* akilli_depo_beyaz@3x.png in Resources */,
 				7C355E1C1F00E949003B004C /* CollectionViewCellForController.xib in Resources */,
+				B59554952154E0B200208E79 /* PrepareQuickScroll.xib in Resources */,
 				8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */,
 				7C6E2FA41F32FCD900536DB6 /* AudioSelectionCollectionViewCell.xib in Resources */,
 				D47864021F3F330200EFDC6D /* SubscriptionPlanCollectionViewCell.xib in Resources */,
@@ -14114,6 +14132,7 @@
 				7C257B3E20174D7700CB56F8 /* ContactBackupEmpty.swift in Sources */,
 				8C0E8C7F1FDEBDFF00789C91 /* SKProduct+Localized.swift in Sources */,
 				8CD2B3AB1FE7B23E00280547 /* PopUpController.swift in Sources */,
+				B59554942154E0B200208E79 /* PrepareQuickScroll.swift in Sources */,
 				8C0E8C801FDEBDFF00789C91 /* PasscodeSettingsInteractorIO.swift in Sources */,
 				8C0E8C811FDEBDFF00789C91 /* UsageInfoPresenter.swift in Sources */,
 				8C0E8C841FDEBDFF00789C91 /* PasscodeEnterViewController.swift in Sources */,
@@ -15288,6 +15307,7 @@
 				CEC3C21E1FB9961900C3D67F /* PasscodeEnterViewController.swift in Sources */,
 				7C66E8B11F979C3300D98F27 /* CreateStoryPreviewViewController.swift in Sources */,
 				CE51AB281EF90853005DCEE0 /* FullyLoaded.m in Sources */,
+				B59554932154E0B200208E79 /* PrepareQuickScroll.swift in Sources */,
 				CEE04E141F471AFE00D74FA1 /* UIImageView.swift in Sources */,
 				CEE005761F7B846C004FA8DE /* PHPhotoLibraryChangeObserver.swift in Sources */,
 				7CDABD0A1F1E3A6300C8CC16 /* UserProfileModuleInput.swift in Sources */,
