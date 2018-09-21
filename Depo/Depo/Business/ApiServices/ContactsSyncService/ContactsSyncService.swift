@@ -179,12 +179,16 @@ class ContactsSyncService: BaseRequestService {
         }
         
         SyncSettings.shared().analyzeCompleteCallback = {
-            if AnalyzeStatus.shared().status == .CANCELLED &&
-                AnalyzeStatus.shared().analyzeStep != .ANALYZE_STEP_CLEAR_DUPLICATES {
+            if AnalyzeStatus.shared().status == .CANCELLED,
+                AnalyzeStatus.shared().analyzeStep != .ANALYZE_STEP_CLEAR_DUPLICATES
+            {
                 SyncSettings.shared().analyzeNotifyCallback = nil
                 SyncSettings.shared().analyzeProgressCallback = nil
                 cancelCallback?()
-                return
+                
+                /// delete duplicates complete callback
+            } else if AnalyzeStatus.shared().status == .SUCCESS, AnalyzeStatus.shared().analyzeStep == .ANALYZE_STEP_CLEAR_DUPLICATES {
+                progressCallback?(0, self.lastToDeleteContactsValue, .deleteDuplicated)
             }
         }
         
