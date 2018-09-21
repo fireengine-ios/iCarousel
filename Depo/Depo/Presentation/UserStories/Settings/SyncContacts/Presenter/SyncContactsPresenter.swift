@@ -24,9 +24,20 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     // MARK: view out
     func viewIsReady() {
-        view.setInitialState()
         interactor.trackScreen()
-        self.startOperation(operationType: .getBackUpStatus)
+        
+        if ContactSyncSDK.isRunning() {
+            print("---", AnalyzeStatus.shared().analyzeStep.rawValue)
+            if AnalyzeStatus.shared().analyzeStep == AnalyzeStep.ANALYZE_STEP_INITAL {
+                interactor.performOperation(forType: SyncSettings.shared().mode)
+            } else {
+                view.setInitialState()
+                startOperation(operationType: .getBackUpStatus)
+            }
+        } else {
+            view.setInitialState()
+            startOperation(operationType: .getBackUpStatus)
+        }
     }
     
     func startOperation(operationType: SyncOperationType) {
@@ -80,7 +91,8 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     func cancelSuccess() {
         guard let _ = view else { return }
-        updateContactsStatus()
+        startOperation(operationType: .getBackUpStatus)
+//        updateContactsStatus()
     }
     
     func onManageContacts() {

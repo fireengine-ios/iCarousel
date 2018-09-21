@@ -34,9 +34,6 @@ class ContactsSyncService: BaseRequestService {
         let typeString = type == .backup ? "Backup" : "Restore"
         debugLog("ContactsSyncService executeOperation \(typeString)")
         
-        guard !ContactSyncSDK.isRunning() else {
-            return
-        }
         
         SyncSettings.shared().callback = { [weak self] response in
             self?.checkStatus(with: errorCallback, finishCallback: finishCallback)
@@ -51,8 +48,17 @@ class ContactsSyncService: BaseRequestService {
             progress?(Int(truncating: progressPerecentage), 0, status)
         }
         
-        SyncSettings.shared().mode = type
-        ContactSyncSDK.doSync(type)
+        if ContactSyncSDK.isRunning() {
+            let status = getCurrentOperationType()
+            print("---", SyncStatus.shared().progress ?? 0)
+            let progressPerecentage = SyncStatus.shared().progress ?? 0
+            progress?(Int(truncating: progressPerecentage), 0, status)
+        } else {
+            /// ContactSyncSDK there is guard for running but it is not good
+            /// but anyway we can call doSync everytime
+            SyncSettings.shared().mode = type
+            ContactSyncSDK.doSync(type)
+        }
     }
     
     func getBackUpStatus(completion: @escaping (ContactSync.SyncResponse) -> Void, fail: @escaping VoidHandler) {
@@ -138,7 +144,7 @@ class ContactsSyncService: BaseRequestService {
         }
     }
     
-    func cancel() {
+    func cancelAnalyze() {
         ContactSyncSDK.cancelAnalyze()
     }
     
