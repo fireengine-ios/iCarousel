@@ -585,6 +585,7 @@ struct TextConstants {
     static let waitingForWiFiPopUpTitle = NSLocalizedString("Waiting for Wi-Fi connection to auto-sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let waitingForWiFiPopUpSettingsButton = NSLocalizedString("Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let prepareToAutoSunc = NSLocalizedString("Auto Sync Preparation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let prepareQuickScroll = NSLocalizedString("Quick Scroll Preparation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - ActionSheet
     static let actionSheetDeleteDeviceOriginal = NSLocalizedString("Delete Device Original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

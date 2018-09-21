@@ -27,6 +27,7 @@ class HomePageModuleInitializer: NSObject {
     class func initializeViewController(with nibName: String) -> UIViewController {
         let viewController = HomePageViewController(nibName: nibName, bundle: nil)
         viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonNewFolder])
+        viewController.homePageDataSource.addNotPermittedPopUpViewTypes(types: [.prepareQuickScroll])
         let configurator = HomePageModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)
         return viewController

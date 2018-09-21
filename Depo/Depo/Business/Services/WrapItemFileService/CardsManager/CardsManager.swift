@@ -29,6 +29,7 @@ enum OperationType: String {
     case stylizedPhoto              = "stylizedPhoto"
     case movieCard                  = "movieCard"
     case animationCard              = "animation"
+    case prepareQuickScroll         = "prepareQuickScroll"
 }
 
 typealias BlockObject = VoidHandler
@@ -51,7 +52,7 @@ class CardsManager: NSObject {
     
     var cardsThatStartedByDevice: [OperationType] {
         get {
-            return [.upload, .sync, .download, .prepareToAutoSync, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
+            return [.upload, .sync, .download, .prepareToAutoSync, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning, .prepareQuickScroll]
         }
     }
     
@@ -354,6 +355,8 @@ class CardsManager: NSObject {
             cardView = MovieCard.initFromNib()
         case .animationCard:
             cardView = AnimationCard.initFromNib()
+        case .prepareQuickScroll:
+            cardView = PrepareQuickScroll.initFromNib()
         }
         
         cardView.set(object: serverObject)
