@@ -50,7 +50,6 @@ class ContactsSyncService: BaseRequestService {
         
         if ContactSyncSDK.isRunning() {
             let status = getCurrentOperationType()
-            print("---", SyncStatus.shared().progress ?? 0)
             let progressPerecentage = SyncStatus.shared().progress ?? 0
             progress?(Int(truncating: progressPerecentage), 0, status)
         } else {

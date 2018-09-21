@@ -27,7 +27,6 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         interactor.trackScreen()
         
         if ContactSyncSDK.isRunning() {
-            print("---", AnalyzeStatus.shared().analyzeStep.rawValue)
             if AnalyzeStatus.shared().analyzeStep == AnalyzeStep.ANALYZE_STEP_INITAL {
                 interactor.performOperation(forType: SyncSettings.shared().mode)
             } else {
@@ -209,7 +208,7 @@ extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
     }
     
     func cancelDeletingDuplicatedContacts() {
-        interactor.startOperation(operationType: .cancel)
+        //interactor.startOperation(operationType: .cancel)
     }
     
     func deleteDuplicatedContacts() {

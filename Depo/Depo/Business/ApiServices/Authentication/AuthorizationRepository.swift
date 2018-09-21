@@ -160,6 +160,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                 guard let strongSelf = self else {
                     /// must execute never
                     completion(false, nil)
+                    self?.isRefreshing = false
                     self?.refreshTokensCompletions.forEach { $0(false, nil) }
                     self?.refreshTokensCompletions.removeAll()
                     return
@@ -173,15 +174,17 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                     #endif
                     strongSelf.refreshFailedHandler()
                     completion(false, nil)
-                    self?.refreshTokensCompletions.forEach { $0(false, nil) }
-                    self?.refreshTokensCompletions.removeAll()
+                    strongSelf.isRefreshing = false
+                    strongSelf.refreshTokensCompletions.forEach { $0(false, nil) }
+                    strongSelf.refreshTokensCompletions.removeAll()
                 
                 /// mapping accessToken for completion handler
                 } else if let headers = response.response?.allHeaderFields as? [String: Any],
                     let accessToken = headers[strongSelf.accessTokenKey] as? String {
                     completion(true, accessToken)
-                    self?.refreshTokensCompletions.forEach { $0(true, accessToken) }
-                    self?.refreshTokensCompletions.removeAll()
+                    strongSelf.isRefreshing = false
+                    strongSelf.refreshTokensCompletions.forEach { $0(true, accessToken) }
+                    strongSelf.refreshTokensCompletions.removeAll()
                     
                 /// retry refreshTokens request only for bad internet
                 } else if strongSelf.refreshAttempts < strongSelf.maxRefreshAttempts {
@@ -190,15 +193,16 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                         strongSelf.isRefreshing = false
                         strongSelf.refreshTokens(completion: completion)
                     }
-                    return
+//                    return
                 } else {  
                     completion(false, nil)
-                    self?.refreshTokensCompletions.forEach { $0(false, nil) }
-                    self?.refreshTokensCompletions.removeAll()
+                    strongSelf.isRefreshing = false
+                    strongSelf.refreshTokensCompletions.forEach { $0(false, nil) }
+                    strongSelf.refreshTokensCompletions.removeAll()
                 }
                 
                 /// end refresh status
-                strongSelf.isRefreshing = false
+//                strongSelf.isRefreshing = false
         }
     }
 }
