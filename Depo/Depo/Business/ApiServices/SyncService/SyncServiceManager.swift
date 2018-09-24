@@ -75,6 +75,7 @@ class SyncServiceManager {
     }
     
     deinit {
+        reachabilityService?.stopNotifier()
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -255,6 +256,7 @@ class SyncServiceManager {
 // MARK: - Notifications
 extension SyncServiceManager {
     private func subscribeForNotifications() {
+        
         guard LocalMediaStorage.default.photoLibraryIsAvailible(), !isSubscribeForNotifications else {
             return
         }

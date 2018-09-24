@@ -34,9 +34,6 @@ class ContactsSyncService: BaseRequestService {
         let typeString = type == .backup ? "Backup" : "Restore"
         debugLog("ContactsSyncService executeOperation \(typeString)")
         
-        guard !ContactSyncSDK.isRunning() else {
-            return
-        }
         
         SyncSettings.shared().callback = { [weak self] response in
             self?.checkStatus(with: errorCallback, finishCallback: finishCallback)
@@ -51,8 +48,16 @@ class ContactsSyncService: BaseRequestService {
             progress?(Int(truncating: progressPerecentage), 0, status)
         }
         
-        SyncSettings.shared().mode = type
-        ContactSyncSDK.doSync(type)
+        if ContactSyncSDK.isRunning() {
+            let status = getCurrentOperationType()
+            let progressPerecentage = SyncStatus.shared().progress ?? 0
+            progress?(Int(truncating: progressPerecentage), 0, status)
+        } else {
+            /// ContactSyncSDK there is guard for running but it is not good
+            /// but anyway we can call doSync everytime
+            SyncSettings.shared().mode = type
+            ContactSyncSDK.doSync(type)
+        }
     }
     
     func getBackUpStatus(completion: @escaping (ContactSync.SyncResponse) -> Void, fail: @escaping VoidHandler) {
@@ -138,7 +143,7 @@ class ContactsSyncService: BaseRequestService {
         }
     }
     
-    func cancel() {
+    func cancelAnalyze() {
         ContactSyncSDK.cancelAnalyze()
     }
     
@@ -174,12 +179,16 @@ class ContactsSyncService: BaseRequestService {
         }
         
         SyncSettings.shared().analyzeCompleteCallback = {
-            if AnalyzeStatus.shared().status == .CANCELLED &&
-                AnalyzeStatus.shared().analyzeStep != .ANALYZE_STEP_CLEAR_DUPLICATES {
+            if AnalyzeStatus.shared().status == .CANCELLED,
+                AnalyzeStatus.shared().analyzeStep != .ANALYZE_STEP_CLEAR_DUPLICATES
+            {
                 SyncSettings.shared().analyzeNotifyCallback = nil
                 SyncSettings.shared().analyzeProgressCallback = nil
                 cancelCallback?()
-                return
+                
+                /// delete duplicates complete callback
+            } else if AnalyzeStatus.shared().status == .SUCCESS, AnalyzeStatus.shared().analyzeStep == .ANALYZE_STEP_CLEAR_DUPLICATES {
+                progressCallback?(0, self.lastToDeleteContactsValue, .deleteDuplicated)
             }
         }
         

@@ -189,7 +189,9 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
   			"lifetechqa4@icloud.com",
   			"lifetechqa5@icloud.com",
   			"lifetechqa6@icloud.com", 
-  			"6257515test@gmail.com"]
+  			"6257515test@gmail.com",
+  			"buse.kaya@consultant.turkcell.com.tr",
+  			"can.kucukakdag@turkcell.com.tr"]
   	)
   end
 
