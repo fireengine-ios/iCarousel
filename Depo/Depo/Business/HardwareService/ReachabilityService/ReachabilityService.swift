@@ -21,38 +21,43 @@ protocol ReachabilityProtocol {
 
 class ReachabilityService: ReachabilityProtocol {
     
-    private let reachability = Reachability()!
+    private let reachability = Reachability()
     
     var isReachableViaWiFi: Bool {
-        return self.reachability.connection == .wifi
+        return self.reachability?.connection == .wifi
     }
     
     var isReachableViaWWAN: Bool {
-        return self.reachability.connection == .cellular
+        return self.reachability?.connection == .cellular
     }
     
     var isReachable: Bool {
-        return self.reachability.connection != .none
+        return self.reachability?.connection != .none
     }
     
     var status: String {
-        return self.reachability.connection.description    
+        return self.reachability?.connection.description ?? Reachability.Connection.none.description
     }
     
     init() {
-        self.reachability.whenReachable = { Reachability in
-            //
-        }
-        
-        self.reachability.whenUnreachable = { Reachability in
-            //
-        }
+        ///DO WE NEED THIS?
+//        self.reachability?.whenReachable = { Reachability in
+//            //
+//        }
+//
+//        self.reachability?.whenUnreachable = { Reachability in
+//            //
+//        }
         
         do {
-            try self.reachability.startNotifier()
+            try self.reachability?.startNotifier()
         } catch {
             print("Can't start REACHABILITY_NOTIFIER")
         }
+    }
+    
+    deinit {
+        self.reachability?.stopNotifier()
     }
 }
 
