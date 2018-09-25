@@ -2655,6 +2655,8 @@
 		B59554942154E0B200208E79 /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59554912154E0B200208E79 /* PrepareQuickScroll.swift */; };
 		B59554952154E0B200208E79 /* PrepareQuickScroll.xib in Resources */ = {isa = PBXBuildFile; fileRef = B59554922154E0B200208E79 /* PrepareQuickScroll.xib */; };
 		B59554962154E0B200208E79 /* PrepareQuickScroll.xib in Resources */ = {isa = PBXBuildFile; fileRef = B59554922154E0B200208E79 /* PrepareQuickScroll.xib */; };
+		B5955498215A33E500208E79 /* AssetFileCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5955497215A33E500208E79 /* AssetFileCacheManager.swift */; };
+		B5955499215A33E500208E79 /* AssetFileCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5955497215A33E500208E79 /* AssetFileCacheManager.swift */; };
 		B5AD70C2214FA3450022F1FD /* PhotoVideoScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD70C1214FA3450022F1FD /* PhotoVideoScrollDirectionManager.swift */; };
 		B5AD70C3214FA3450022F1FD /* PhotoVideoScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD70C1214FA3450022F1FD /* PhotoVideoScrollDirectionManager.swift */; };
 		B5BA98762066827900CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
@@ -5166,6 +5168,7 @@
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
 		B59554912154E0B200208E79 /* PrepareQuickScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrepareQuickScroll.swift; sourceTree = "<group>"; };
 		B59554922154E0B200208E79 /* PrepareQuickScroll.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrepareQuickScroll.xib; sourceTree = "<group>"; };
+		B5955497215A33E500208E79 /* AssetFileCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetFileCacheManager.swift; sourceTree = "<group>"; };
 		B5AD70C1214FA3450022F1FD /* PhotoVideoScrollDirectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoScrollDirectionManager.swift; sourceTree = "<group>"; };
 		B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+JPEG.swift"; sourceTree = "<group>"; };
 		B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -11215,6 +11218,7 @@
 				CEF690A62126B4530013075F /* PhotoVideoCell.xib */,
 				CEF690A52126B4530013075F /* PhotoVideoCell.swift */,
 				B5AD70C1214FA3450022F1FD /* PhotoVideoScrollDirectionManager.swift */,
+				B5955497215A33E500208E79 /* AssetFileCacheManager.swift */,
 			);
 			path = PhotoVideo;
 			sourceTree = "<group>";
@@ -14420,6 +14424,7 @@
 				8C0E8D7B1FDEBDFF00789C91 /* LoginViewController.swift in Sources */,
 				8C0E8D7C1FDEBDFF00789C91 /* ReachabilityService.swift in Sources */,
 				B53DCE8320EF634900400DBA /* Contact.m in Sources */,
+				B5955499215A33E500208E79 /* AssetFileCacheManager.swift in Sources */,
 				8C06AC1520066641003D8E05 /* TurkcellSecurityRouter.swift in Sources */,
 				8C0E8D7E1FDEBDFF00789C91 /* AutoNextEditingRowPasser.swift in Sources */,
 				C62239B5204976DD0043ED44 /* FaceImagePhotosViewController.swift in Sources */,
@@ -15595,6 +15600,7 @@
 				CEAD6BDE1F94EF320085FF30 /* Factory.swift in Sources */,
 				B53DCE8220EF634900400DBA /* Contact.m in Sources */,
 				7C233CD31FD51E290013CCA0 /* UploadFromLifeBoxRouterInput.swift in Sources */,
+				B5955498215A33E500208E79 /* AssetFileCacheManager.swift in Sources */,
 				CE95ED511F516736002F923A /* HelpAndSupportInteractorOutput.swift in Sources */,
 				986B2065207C9C4100E04B96 /* TextEnterDataSource.swift in Sources */,
 				CE83A3E3206A8D6F00AC247E /* InfinityRotater.swift in Sources */,
