@@ -213,11 +213,15 @@ final class MediaItemOperationsService {
     }
     
     func executeRequest(predicate: NSPredicate, context: NSManagedObjectContext, mediaItemsCallBack: @escaping MediaItemsCallBack) {
+        let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
+        request.predicate = predicate
+        execute(request: request, context: context, mediaItemsCallBack: mediaItemsCallBack)
+    }
+    
+    func execute(request: NSFetchRequest<MediaItem>, context: NSManagedObjectContext, mediaItemsCallBack: @escaping MediaItemsCallBack) {
         context.perform {
             var result: [MediaItem] = []
             do {
-                let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
-                request.predicate = predicate
                 result = try context.fetch(request)
             } catch {
                 print("context.fetch failed with:", error.localizedDescription)
@@ -259,9 +263,14 @@ final class MediaItemOperationsService {
     }
     
     func isNoRemotesInDB(result: @escaping (_ noRemotes: Bool) -> Void) {
-        getAllRemotesMediaItem(allRemotes: { remotes in
-            result(remotes.isEmpty)
-        })
+        let predicate = NSPredicate(format: "isLocalItemValue = false")
+        let fetchRequest = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = predicate
+        
+        execute(request: fetchRequest, context: CoreDataStack.default.newChildBackgroundContext) { items in
+            result(items.isEmpty)
+        }
     }
     
     // MARK: - LocalMediaItems
