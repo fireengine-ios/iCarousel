@@ -269,4 +269,8 @@ class MenloworksEventsService {
             mergedHit(event: MenloworksEventsConstants.profileNameFull)
         }
     }
+    
+    func onBackgroundSync() {
+        mergedHit(event: MenloworksEventsConstants.backgroundSync)
+    }
 }
