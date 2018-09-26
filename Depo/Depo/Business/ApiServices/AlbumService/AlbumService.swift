@@ -93,7 +93,7 @@ class ChangeCoverPhoto: BaseRequestParametrs {
 class DeletePhotosFromAlbum: AddPhotosToAlbum {
     override var patch: URL {
         let path: String = String(format: AlbumsPatch.deletePhotosFromAlbum, albumUUID)
-        return URL(string: path, relativeTo: super.patch)!
+        return URL(string: path, relativeTo: RouteRequests.baseUrl)!
     }
 }
 
