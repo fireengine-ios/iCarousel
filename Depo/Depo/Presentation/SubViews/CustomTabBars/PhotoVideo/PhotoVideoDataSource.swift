@@ -37,6 +37,8 @@ final class PhotoVideoDataSource: NSObject {
         } ?? []
     }
     
+    var lastFetchedObjects: [WrapData]?
+    
     private weak var delegate: PhotoVideoDataSourceDelegate?
     private weak var collectionView: UICollectionView!
     
@@ -183,6 +185,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
             self?.objectChanges.forEach { $0() }
             }, completion: { [weak self] _ in
                 self?.reloadSupplementaryViewsIfNeeded()
+                self?.lastFetchedObjects = self?.fetchedObjects
         })
     }
     
