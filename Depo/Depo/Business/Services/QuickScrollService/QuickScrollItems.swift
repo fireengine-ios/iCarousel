@@ -88,16 +88,12 @@ final class QuickScrollGroupsListItem {
 }
 
 final class QuickScrollRangeListItem {
-//    let startDate: Date?
-//    let endDate: Date?
-    let size: Int
-    let category: QuickScrollCategory?
-    var files = [WrapData]()///check the type
+    ///*----
     ///NOW:
-//        ▿ {
-//            "total" : 128
-//            "files" : []
-//            "group": "photos_and_videos
+    //        ▿ {
+    //            "total" : 128
+    //            "files" : []
+    //            "group": "photos_and_videos
     ///USED TO BE:
     //    "group": "photos_and_videos:3",
     //    "start": 0,
@@ -105,6 +101,13 @@ final class QuickScrollRangeListItem {
     //    "total": 4,
     //    "files": [
     //    List of FileInfo for the files found in range]
+    ///----*
+//    let startDate: Date?
+//    let endDate: Date?
+    let size: Int
+    let category: QuickScrollCategory?
+    var files = [WrapData]()///check the type
+
     private let startDateJsonKey = "startDate"
     private let endDateJsonKey = "endDate"
     private let sizeJsonKey = "total"
@@ -120,4 +123,12 @@ final class QuickScrollRangeListItem {
         files = itemsJson.map{WrapData(searchResponse: $0)}
         debugPrint("all created")
     }
+    
+//    init(json: JSON, context: NSManagedObjectContext) {
+//        size = json[sizeJsonKey].intValue
+//        category = QuickScrollCategory.transfromFromString(text: json[categotyJsonKey].stringValue)
+//        let itemsJson: [JSON] = json[filesJsonKey].array ?? []
+//        files = itemsJson.map{MediaItem(json: $0, context: context)}
+//        debugPrint("all created")
+//    }
 }

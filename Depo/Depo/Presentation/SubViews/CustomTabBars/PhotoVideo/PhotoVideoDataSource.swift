@@ -31,6 +31,10 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
+    var fetchedOriginalObhects: [MediaItem] {
+        return fetchedResultsController.fetchedObjects ?? []
+    }
+    
     var fetchedObjects: [WrapData] {
         return fetchedResultsController.fetchedObjects?.map { object in
             return WrapData(mediaItem: object)

@@ -13,14 +13,14 @@ struct RouteRequests {
     // MARK: - Authentication
     
     /// prod
-    static let BaseUrl = URL(string: "https://adepo.turkcell.com.tr/")!
-    static let BaseContactsUrl = URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
-    static let httpAuthification = "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
+//    static let BaseUrl = URL(string: "https://adepo.turkcell.com.tr/")!
+//    static let BaseContactsUrl = URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
+//    static let httpAuthification = "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
     
     /// pre-prod
-//    static let BaseUrl = URL(string: "https://adepotest.turkcell.com.tr/")!
-//    static let BaseContactsUrl = URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
-//    static let httpAuthification = "http://adepotest.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
+    static let BaseUrl = URL(string: "https://adepotest.turkcell.com.tr/")!
+    static let BaseContactsUrl = URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
+    static let httpAuthification = "http://adepotest.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
     
     /// test
 //    static let BaseUrl = URL(string: "https://tcloudstb.turkcell.com.tr/")!

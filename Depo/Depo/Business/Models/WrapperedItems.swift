@@ -818,7 +818,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         status = Status(string:searchResponse[SearchJsonKey.status].string)
         super.init(uuid: fileUUID)
         
-        self.creationDate = searchResponse[SearchJsonKey.createdDate].date
+        creationDate = searchResponse[SearchJsonKey.createdDate].date
         lastModifiDate = searchResponse[SearchJsonKey.lastModifiedDate].date
         id = searchResponse[SearchJsonKey.id].int64
         md5 = searchResponse[SearchJsonKey.hash].string ?? "not hash"

@@ -226,7 +226,26 @@ extension PhotoVideoController: UIScrollViewDelegate {
     
     private func updateDB() {
         print("updateDB with direction: \(scrollDirectionManager.scrollDirection)")
+        guard !CacheManager.shared.processingRemoteItems else {
+            return
+        }
         
+        guard let firstVisibleObject = collectionView.visibleCells.first,
+            let firstVisibleObjectIndex = collectionView.indexPath(for: firstVisibleObject)
+        else {
+            return
+        }
+        let firstVisibleMediaItem = dataSource.object(at: firstVisibleObjectIndex)
+        let category: QuickScrollCategory = isPhoto ? .photos : .videos
+        quickScrollService.requestListOfDateRange(startDate: (firstVisibleMediaItem.creationDateValue as Date?) ?? Date(), startID: 99999, category: category, pageSize: 100) { response in
+            switch response {
+            case .success(let quckScrollResponse):
+                ///Success callback handles In newChildBackground Context
+                debugPrint("items num ")
+            case .failed(let error):
+                break
+            }
+        }
     }
     
 }

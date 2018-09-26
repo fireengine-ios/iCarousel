@@ -232,7 +232,8 @@ final class MediaItemOperationsService {
         let context = CoreDataStack.default.newChildBackgroundContext
         ///TODO: add check on existing files?
         // OR should we mark sync status and etc here. And also affect free app?
-        
+
+        ///TODO: check if files exist
         guard !remoteItems.isEmpty else {
             debugPrint("REMOTE_ITEMS: no files to add")
             completion()
@@ -248,10 +249,58 @@ final class MediaItemOperationsService {
             }
             CoreDataStack.default.saveDataForContext(context: context, savedCallBack: completion)
         }
+        
+        ///TODO: relations mech??
+        
         //      ItemOperationManager.default.addedLocalFiles(items: addedObjects)
         //WARNING:- DO we need notify ItemOperationManager here???
     }
 
+    func appendAndUpdate(remoteItems: [WrapData], complition: @escaping VoidHandler) {
+        guard let firstRemote = remoteItems.first, let lastRemote = remoteItems.last,
+        let lastItemID = lastRemote.id else {
+            complition()
+            return
+        }
+        
+        firstRemote.metaDate
+        lastRemote.metaDate
+        let firstItemID = firstRemote.id ?? 0
+        
+        
+        let context = CoreDataStack.default.newChildBackgroundContext
+        
+        var remoteMd5s = [String]()
+        var remoteTrimmedIDs = [String]()
+        remoteItems.forEach{
+            remoteMd5s.append($0.md5)
+            remoteTrimmedIDs.append($0.getTrimmedLocalID())
+        }
+        
+        //*--------
+        ///first option, kill all in range
+        let allRemoteItemsInRangePredicate = NSPredicate(foramt:"isLocalItemValue = false AND ")
+        executeRequest(predicate: <#T##NSPredicate#>, context: <#T##NSManagedObjectContext#>, mediaItemsCallBack: <#T##MediaItemsCallBack##MediaItemsCallBack##([MediaItem]) -> Void#>)
+        //---------*
+        context.perform { [weak self] in
+            
+        
+        }
+        
+    }
+    
+    func updateRelations(remoteItems: [WrapData], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
+
+    }
+    
+    private func getRelatedLocals(remoteItems: [WrapData], context: NSManagedObjectContext, relatedLocals: @escaping MediaItemsCallBack) {
+
+//        let predicate = NSPredicate(format: "")
+//        
+//        executeRequest(predicate: <#T##NSPredicate#>, context: <#T##NSManagedObjectContext#>, mediaItemsCallBack: <#T##MediaItemsCallBack##MediaItemsCallBack##([MediaItem]) -> Void#>)
+        
+    }
+    
     func getAllRemotesMediaItem(allRemotes: @escaping MediaItemsCallBack) {
         let predicate = NSPredicate(format: "isLocalItemValue = false")
         executeRequest(predicate: predicate, context: CoreDataStack.default.newChildBackgroundContext, mediaItemsCallBack: allRemotes)

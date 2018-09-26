@@ -36,7 +36,8 @@ extension MediaItem {
     @NSManaged public var metadata: MediaItemsMetaData?
     @NSManaged public var isFolder: Bool
     @NSManaged public var objectSyncStatus: NSSet?
-    @NSManaged public var isFiltered: Bool
+    @NSManaged public var isFiltered: Bool///on that photo was applied filter From Home page
+    @NSManaged public var isICloud: Bool
     @NSManaged public var relatedLocal: MediaItem?
     @NSManaged public var relatedRemotes: NSSet
     @NSManaged public var session: Session?
