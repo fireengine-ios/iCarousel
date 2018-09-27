@@ -186,11 +186,11 @@ final class ScrollBarView: UIView {
             contentInset = scrollView.contentInset
         }
         
-        scrollViewFrame.size.height -= contentInset.top + contentInset.bottom
+//        scrollViewFrame.size.height -= contentInset.top + contentInset.bottom
         
         let largeTitleDelta: CGFloat
         if isInsetForLargeTitles {
-            largeTitleDelta = abs(min(contentInset.top + scrollView.contentOffset.y, 0))
+            largeTitleDelta = 0//abs(min(contentInset.top + scrollView.contentOffset.y, 0))
         } else {
             largeTitleDelta = 0
         }
@@ -215,7 +215,7 @@ final class ScrollBarView: UIView {
             frame.origin.y = originalYOffset
         } else {
             frame.origin.y = verticalInset.top
-            frame.origin.y += contentInset.top
+//            frame.origin.y += contentInset.top
             frame.origin.y += largeTitleDelta
         }
         
