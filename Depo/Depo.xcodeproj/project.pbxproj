@@ -3384,6 +3384,8 @@
 		CEEDC6F5212AD80800F605CF /* PhotoVideoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */; };
 		CEEDC6F6212AD82900F605CF /* PhotoVideoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */; };
 		CEEDC6F8212B00E000F605CF /* PhotoVideoThreeDotMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDC6F7212B00E000F605CF /* PhotoVideoThreeDotMenuManager.swift */; };
+		CEEEB776215CC28F003C5BD8 /* ScrollBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB775215CC28F003C5BD8 /* ScrollBarView.swift */; };
+		CEEEB777215CC297003C5BD8 /* ScrollBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB775215CC28F003C5BD8 /* ScrollBarView.swift */; };
 		CEEF22AA2063D6E000CE3949 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
 		CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */; };
 		CEEFECC1200F735100E9A4FE /* UISearchBar+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */; };
@@ -5583,6 +5585,7 @@
 		CEEDC6F1212AD73D00F605CF /* UICollectionView+Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Item.swift"; sourceTree = "<group>"; };
 		CEEDC6F4212AD80800F605CF /* PhotoVideoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDataSource.swift; sourceTree = "<group>"; };
 		CEEDC6F7212B00E000F605CF /* PhotoVideoThreeDotMenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoThreeDotMenuManager.swift; sourceTree = "<group>"; };
+		CEEEB775215CC28F003C5BD8 /* ScrollBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollBarView.swift; sourceTree = "<group>"; };
 		CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
 		CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Cancel.swift"; sourceTree = "<group>"; };
@@ -11219,6 +11222,7 @@
 				CEF690A52126B4530013075F /* PhotoVideoCell.swift */,
 				B5AD70C1214FA3450022F1FD /* PhotoVideoScrollDirectionManager.swift */,
 				B5955497215A33E500208E79 /* AssetFileCacheManager.swift */,
+				CEEEB775215CC28F003C5BD8 /* ScrollBarView.swift */,
 			);
 			path = PhotoVideo;
 			sourceTree = "<group>";
@@ -14843,6 +14847,7 @@
 				8CD2B3AA1FE7B22900280547 /* ItemSyncService.swift in Sources */,
 				8C0E8EF01FDEBDFF00789C91 /* UserInfoSubViewViewInput.swift in Sources */,
 				8C0E8EF11FDEBDFF00789C91 /* UserInfoSubViewViewOutput.swift in Sources */,
+				CEEEB777215CC297003C5BD8 /* ScrollBarView.swift in Sources */,
 				CE3E4D10201B69A200173045 /* PVViewerController.swift in Sources */,
 				8C0E8EF21FDEBDFF00789C91 /* IAPManager.swift in Sources */,
 				CE23A0FB205FF5AF0048267D /* Images.swift in Sources */,
@@ -16019,6 +16024,7 @@
 				C65DCBDE204683820083A965 /* MenloworksEventsService.swift in Sources */,
 				B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */,
 				A1CEB018812ED0593B7A063B /* PhotoVideoDetailInteractorOutput.swift in Sources */,
+				CEEEB776215CC28F003C5BD8 /* ScrollBarView.swift in Sources */,
 				7809A32D1FED09EF00954A5F /* AsyncOperation.swift in Sources */,
 				473D8B8C69D964CD050C891A /* PhotoVideoDetailInteractor.swift in Sources */,
 				CE2F561A1F7552A900F49DA1 /* PackagesModuleInput.swift in Sources */,

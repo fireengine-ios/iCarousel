@@ -13,4 +13,5 @@ enum Images {
     static var exitWhite: UIImage { return #imageLiteral(resourceName: "CloseCardIconWhite") }
     static var threeDots: UIImage { return #imageLiteral(resourceName: "more") }
     static var search: UIImage { return #imageLiteral(resourceName: "search") }
+    static var scrollBarHandle: UIImage { return #imageLiteral(resourceName: "scroll_bar_handle") }
 }
