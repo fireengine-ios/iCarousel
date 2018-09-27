@@ -40,8 +40,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView)
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
     private lazy var scrollDirectionManager = PhotoVideoScrollDirectionManager()
+
     private lazy var assetsFileCacheManager = AssetFileCacheManager()
+
     private let scrollBar = ScrollBarView()
+
+    private lazy var quickScrollService = QuickScrollService()
     
     
     // MARK: - life cycle
@@ -233,6 +237,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
     
     private func updateDB() {
         print("updateDB with direction: \(scrollDirectionManager.scrollDirection)")
+        
     }
     
 }
