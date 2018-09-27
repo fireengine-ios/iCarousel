@@ -237,11 +237,14 @@ extension PhotoVideoController: UIScrollViewDelegate {
         }
         let firstVisibleMediaItem = dataSource.object(at: firstVisibleObjectIndex)
         let category: QuickScrollCategory = isPhoto ? .photos : .videos
-        quickScrollService.requestListOfDateRange(startDate: (firstVisibleMediaItem.creationDateValue as Date?) ?? Date(), startID: 99999, category: category, pageSize: 100) { response in
+        quickScrollService.requestListOfDateRange(startDate: (firstVisibleMediaItem.creationDateValue as Date?) ?? Date(), startID: firstVisibleMediaItem.idValue, category: category, pageSize: 20) { response in
             switch response {
             case .success(let quckScrollResponse):
+                MediaItemOperationsService.shared.appendAndUpdate(remoteItems: quckScrollResponse.files, complition: {
+                    debugPrint("appended and updated")
+                })
                 ///Success callback handles In newChildBackground Context
-                debugPrint("items num ")
+                
             case .failed(let error):
                 break
             }

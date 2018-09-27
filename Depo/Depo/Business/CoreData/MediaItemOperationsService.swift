@@ -272,26 +272,48 @@ final class MediaItemOperationsService {
         
         var remoteMd5s = [String]()
         var remoteTrimmedIDs = [String]()
+        var remoteIds = [Int64]()
         remoteItems.forEach{
             remoteMd5s.append($0.md5)
             remoteTrimmedIDs.append($0.getTrimmedLocalID())
+            remoteIds.append($0.id ?? 0)
         }
         
         //*--------
         ///first option, kill all in range
-        let allRemoteItemsInRangePredicate = NSPredicate(foramt:"isLocalItemValue = false AND ")
-        executeRequest(predicate: <#T##NSPredicate#>, context: <#T##NSManagedObjectContext#>, mediaItemsCallBack: <#T##MediaItemsCallBack##MediaItemsCallBack##([MediaItem]) -> Void#>)
-        //---------*
-        context.perform { [weak self] in
+// AND (idValue <= \(firstItemID) AND idValue >= \(lastItemID))
+        let allRemoteItemsInRangePredicate = NSPredicate(format:"isLocalItemValue = false AND (creationDateValue <= %@ AND creationDateValue >= %@) AND idValue IN %@", firstRemote.metaDate as NSDate, lastRemote.metaDate as NSDate, remoteIds)
+        executeRequest(predicate: allRemoteItemsInRangePredicate, context: context) { [weak self] savedRemoteItems in
             
-        
+            debugPrint("--- remotes count \(remoteItems.count)")
+            debugPrint("--- count of already saed \(savedRemoteItems.count)")
+            savedRemoteItems.forEach {
+                context.delete($0)
+            }
+            remoteItems.forEach {
+                let remoteMediaItem = MediaItem(wrapData: $0, context: context)
+                self?.updateItemRelations(remoteItem: remoteMediaItem, context: context, completion: {
+                    debugPrint("relation updated")
+                })
+            }
+            ///Setup Relations here
+            
+            context.saveAsync(completion: { status in
+                complition()
+            })
         }
+        //---------*
+        //*--------
+        ///second option: update already existed, kill all others in that remote items range
+        ///FOR NOW WE NEED TO TEST FIRST ONE
+        //---------*
+    }
+    private func updateItemRelations(remoteItem: MediaItem, context: NSManagedObjectContext, completion: @escaping VoidHandler) {
         
     }
-    
-    func updateRelations(remoteItems: [WrapData], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
-
-    }
+//    func updateRelations(remoteItems: [MediaItem], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
+//
+//    }
     
     private func getRelatedLocals(remoteItems: [WrapData], context: NSManagedObjectContext, relatedLocals: @escaping MediaItemsCallBack) {
 

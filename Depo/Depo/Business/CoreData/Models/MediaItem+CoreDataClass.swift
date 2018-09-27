@@ -92,9 +92,15 @@ public class MediaItem: NSManagedObject {
         
         if isLocalItemValue {
             ///This staus setup only works when all remotes added beforehand
-            let relatedTothisItemsRemotes = getAllRelatedRemotes(wrapItem: wrapData, context: context)
+            let relatedTothisItemsRemotes = getAllRelatedItems(wrapItem: wrapData, findRelatedLocals: !isLocalItemValue, context: context)
             relatedRemotes = NSSet(array: relatedTothisItemsRemotes)
             updateLocalRelated(remotesMediaItems: relatedTothisItemsRemotes)
+        }
+            //TODO:CODE BELOW NEED TO BE TESTED
+        else {
+            let relatedTothisItemsLocals = getAllRelatedItems(wrapItem: wrapData, findRelatedLocals: isLocalItemValue, context: context)
+            relatedLocal = relatedTothisItemsLocals.first
+            updateRemoteRelated(localMediaItems: relatedTothisItemsLocals)
         }
         
         if !isLocalItemValue, let md5 = md5Value, let trimmedID = trimmedLocalFileID,
@@ -145,17 +151,33 @@ public class MediaItem: NSManagedObject {
 //MARK: - relations
 extension MediaItem {
     ///This staus setup only works when all remotes added beforehand
-    private func getAllRelatedRemotes(wrapItem: WrapData, context: NSManagedObjectContext) -> [MediaItem] {
-        let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
-        request.predicate = NSPredicate(format: "isLocalItemValue == FALSE AND (trimmedLocalFileID == %@ OR md5Value == %@)", wrapItem.getTrimmedLocalID(), wrapItem.md5)
-        let relatedRemotes = try? context.fetch(request)
-        return relatedRemotes ?? []
-    }
+//    private func getAllRelatedRemotes(wrapItem: WrapData, context: NSManagedObjectContext) -> [MediaItem] {
+//        let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
+//        request.predicate = getRelatedPredicate(item: wrapItem, locals: false)// NSPredicate(format: "isLocalItemValue == FALSE AND (trimmedLocalFileID == %@ OR md5Value == %@)", wrapItem.getTrimmedLocalID(), wrapItem.md5)
+//        let relatedRemotes = try? context.fetch(request)
+//        return relatedRemotes ?? []
+//    }
 
+    private func getRelatedPredicate(item: WrapData, findRelatedLocals: Bool) -> NSPredicate {
+        return NSPredicate(format: "isLocalItemValue == \(findRelatedLocals) AND (trimmedLocalFileID == %@ OR md5Value == %@)", item.getTrimmedLocalID())
+    }
+    
+    func getAllRelatedItems(wrapItem: WrapData, findRelatedLocals: Bool, context: NSManagedObjectContext)  -> [MediaItem] {
+        let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
+        request.predicate = getRelatedPredicate(item: wrapItem, findRelatedLocals: findRelatedLocals)
+        let relatedLocals = try? context.fetch(request)
+        return relatedLocals ?? []
+    }
+    
     private func updateLocalRelated(remotesMediaItems: [MediaItem]) {
         remotesMediaItems.forEach {
             $0.relatedLocal = self
         }
     }
     
+    private func updateRemoteRelated(localMediaItems: [MediaItem]) {
+        localMediaItems.forEach {
+            $0.relatedRemotes.adding(self)
+        }
+    }
 }

@@ -104,7 +104,7 @@ final class QuickScrollService {
 //                    ///Not the best thing, that we call core date from this service, but its the only way to get media Items
 //                    let context = CoreDataStack.default.newChildBackgroundContext
 //                    context.perform {
-                    handler(ResponseResult.success(QuickScrollRangeListItem(json: JSON(data: data)))
+                    handler(ResponseResult.success(QuickScrollRangeListItem(json: JSON(data: data))))
 //                    }
                 case .failure(let error):
                     handler(ResponseResult.failed(error))
