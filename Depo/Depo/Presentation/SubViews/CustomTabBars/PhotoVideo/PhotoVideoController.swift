@@ -40,6 +40,9 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView)
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
     private lazy var scrollDirectionManager = PhotoVideoScrollDirectionManager()
+
+    private lazy var assetsFileCacheManager = AssetFileCacheManager()
+
     private lazy var quickScrollService = QuickScrollService()
     
     
@@ -98,6 +101,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func fetchAndReload() {
+        assetsFileCacheManager.resetCachedAssets()
         dataSource.performFetch()
         collectionView.reloadData()
     }
@@ -195,6 +199,10 @@ extension PhotoVideoController: PhotoVideoCellDelegate {
 
 // MARK: - UIScrollViewDelegate
 extension PhotoVideoController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        assetsFileCacheManager.updateCachedAssets(on: collectionView, items: dataSource.lastFetchedObjects)
+    }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollDirectionManager.handleScrollBegin(with: scrollView.contentOffset)
@@ -529,3 +537,4 @@ extension PhotoVideoController {
         return videoController
     }
 }
+
