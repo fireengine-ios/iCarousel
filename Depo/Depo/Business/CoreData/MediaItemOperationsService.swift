@@ -254,8 +254,6 @@ final class MediaItemOperationsService {
             CoreDataStack.default.saveDataForContext(context: context, savedCallBack: completion)
         }
         
-        ///TODO: relations mech??
-        
         //      ItemOperationManager.default.addedLocalFiles(items: addedObjects)
         //WARNING:- DO we need notify ItemOperationManager here???
     }
@@ -266,11 +264,7 @@ final class MediaItemOperationsService {
             complition()
             return
         }
-        
-        firstRemote.metaDate
-        lastRemote.metaDate
         let firstItemID = firstRemote.id ?? 0
-        
         
         let context = CoreDataStack.default.newChildBackgroundContext
         
@@ -286,7 +280,7 @@ final class MediaItemOperationsService {
         //*--------
         ///first option, kill all in range
         let allRemoteItemsInRangePredicate = NSPredicate(format:"isLocalItemValue = false AND (creationDateValue <= %@ AND creationDateValue >= %@) AND idValue IN %@", firstRemote.metaDate as NSDate, lastRemote.metaDate as NSDate, remoteIds)
-        executeRequest(predicate: allRemoteItemsInRangePredicate, context: context) { [weak self] savedRemoteItems in
+        executeRequest(predicate: allRemoteItemsInRangePredicate, context: context) { savedRemoteItems in
             
             debugPrint("--- remotes count \(remoteItems.count)")
             debugPrint("--- count of already saed \(savedRemoteItems.count)")
@@ -294,12 +288,9 @@ final class MediaItemOperationsService {
                 context.delete($0)
             }
             remoteItems.forEach {
-                let remoteMediaItem = MediaItem(wrapData: $0, context: context)
-                self?.updateItemRelations(remoteItem: remoteMediaItem, context: context, completion: {
-                    debugPrint("relation updated")
-                })
+                ///Relations being setuped in the MediaItem init
+                _ = MediaItem(wrapData: $0, context: context)
             }
-            ///Setup Relations here
             
             context.saveAsync(completion: { status in
                 complition()

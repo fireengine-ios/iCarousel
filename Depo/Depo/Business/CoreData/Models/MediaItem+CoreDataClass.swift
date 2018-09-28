@@ -14,46 +14,6 @@ public class MediaItem: NSManagedObject {
     
     static let Identifier = "MediaItem"
     
-    convenience init(json: JSON, context: NSManagedObjectContext) {
-///Fields that not filled
-//        @NSManaged public var localFileID: String?
-//        @NSManaged public var relatedLocal: MediaItem?
-//        @NSManaged public var relatedRemotes: NSSet
-//        @NSManaged public var session: Session?
-
-        let entityDescr = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
-                                                     in: context) ?? NSEntityDescription()
-        self.init(entity: entityDescr, insertInto: context)
-//        let fileUUID = json[SearchJsonKey.uuid].string ?? ""
-        let metaData = BaseMetaData(withJSON: json[SearchJsonKey.metadata])
-        fileSizeValue = json[SearchJsonKey.bytes].int64 ?? 0
-        favoritesValue = metaData.favourite ?? false
-        trimmedLocalFileID = getRemoteTrimmedID(json: json)
-        isICloud = false
-        ///Currently we use creation date Value as sorting value, for remotes its takenDate.
-        creationDateValue = metaData.takenDate as NSDate? //= json[SearchJsonKey.createdDate].date
-        monthValue = metaData.takenDate?.getDateForSortingOfCollectionView()
-        lastModifiDateValue = json[SearchJsonKey.lastModifiedDate].date as NSDate?
-        idValue = json[SearchJsonKey.id].int64 ?? 0
-        nameValue = json[SearchJsonKey.name].string
-        fileTypeValue = FileType(type: json[SearchJsonKey.content_type].string,
-                                 fileName: nameValue).valueForCoreDataMapping()
-        metadata = MediaItemsMetaData(metadata: metaData,///TODO: change to json init
-            context: context)
-        isFolder = json[SearchJsonKey.folder].bool ?? false
-        parent = json[SearchJsonKey.parent].string
-        urlToFileValue = json[SearchJsonKey.tempDownloadURL].url?.absoluteString
-        albums = NSOrderedSet(array: json[SearchJsonKey.album].array?.flatMap { $0.string } ?? [])
-        isLocalItemValue = false
-        syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
-        objectSyncStatus = convertToMediaItems(syncStatuses: [SingletonStorage.shared.uniqueUserID], context: context)
-        patchToPreviewValue = metaData.mediumUrl?.absoluteString
-        //            md5Value = (nameValue ?? "") + "\(fileSizeValue)"
-        if let fileName = nameValue {
-            md5Value = "\(fileName.removeAllPreFileExtentionBracketValues())\(fileSizeValue)"
-        }
-    }
-    
     convenience init(wrapData: WrapData, context: NSManagedObjectContext) {
         
         let entityDescr = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,

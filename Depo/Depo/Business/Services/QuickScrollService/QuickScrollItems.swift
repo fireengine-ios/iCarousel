@@ -123,12 +123,5 @@ final class QuickScrollRangeListItem {
         files = itemsJson.map{WrapData(searchResponse: $0)}
         debugPrint("all created")
     }
-    
-//    init(json: JSON, context: NSManagedObjectContext) {
-//        size = json[sizeJsonKey].intValue
-//        category = QuickScrollCategory.transfromFromString(text: json[categotyJsonKey].stringValue)
-//        let itemsJson: [JSON] = json[filesJsonKey].array ?? []
-//        files = itemsJson.map{MediaItem(json: $0, context: context)}
-//        debugPrint("all created")
-//    }
+
 }
