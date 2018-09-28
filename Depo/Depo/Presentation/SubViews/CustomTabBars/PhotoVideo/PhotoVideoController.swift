@@ -157,11 +157,15 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         // TODO: trackClickOnPhotoOrVideo(isPhoto: false)
         trackClickOnPhotoOrVideo(isPhoto: true)
         
+        guard let allObjects = dataSource.lastFetchedObjects else {
+            return
+        }
+        
         let currentMediaItem = dataSource.object(at: indexPath)
         let currentObject = WrapData(mediaItem: currentMediaItem)
         
         let router = RouterVC()
-        let controller = router.filesDetailViewController(fileObject: currentObject, items: dataSource.fetchedObjects)
+        let controller = router.filesDetailViewController(fileObject: currentObject, items: allObjects)
         let nController = NavigationController(rootViewController: controller)
         router.presentViewController(controller: nController)
     }
@@ -190,6 +194,26 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
         router.pushViewController(viewController: controller)
     }
+    
+    private func updateScrollBarTextIfNeed() {
+        guard scrollBar.isDragging else {
+            return
+        }
+        updateScrollBarText()
+    }
+    
+    // TODO: add this method when will be need to show scrollBar (end of adding files to DB)
+    private func updateScrollBarText() {
+        guard let indexPath = collectionView.indexPathsForVisibleItems.min(by: <) else {
+            return
+        }
+        let mediaItem = dataSource.object(at: indexPath)
+        guard let creationDate = mediaItem.creationDateValue as Date? else {
+            return
+        }
+        let title = creationDate.getDateInTextForCollectionViewHeader()
+        scrollBar.setText(title)
+    }
 }
 
 // MARK: - PhotoVideoCellDelegate
@@ -205,6 +229,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         assetsFileCacheManager.updateCachedAssets(on: collectionView, itemProviderClosure: itemProviderClosure)
+        updateScrollBarTextIfNeed()
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
