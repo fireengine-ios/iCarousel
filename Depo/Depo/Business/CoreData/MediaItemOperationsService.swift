@@ -258,13 +258,11 @@ final class MediaItemOperationsService {
         //WARNING:- DO we need notify ItemOperationManager here???
     }
 
-    func appendAndUpdate(remoteItems: [WrapData], complition: @escaping VoidHandler) {
-        guard let firstRemote = remoteItems.first, let lastRemote = remoteItems.last,
-        let lastItemID = lastRemote.id else {
+    func updateRemoteItems(remoteItems: [WrapData], complition: @escaping VoidHandler) {
+        guard let firstRemote = remoteItems.first, let lastRemote = remoteItems.last else {
             complition()
             return
         }
-        let firstItemID = firstRemote.id ?? 0
         
         let context = CoreDataStack.default.newChildBackgroundContext
         

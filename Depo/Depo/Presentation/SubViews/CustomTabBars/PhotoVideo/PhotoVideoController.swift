@@ -43,6 +43,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
 
     private lazy var assetsFileCacheManager = AssetFileCacheManager()
 
+    private let scrollBar = ScrollBarView()
+
     private lazy var quickScrollService = QuickScrollService()
     
     
@@ -64,6 +66,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         ItemOperationManager.default.startUpdateView(view: self)
         
         performFetch()
+        scrollBar.add(to: collectionView)
     }
     
     deinit {
@@ -248,7 +251,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
         quickScrollService.requestListOfDateRange(startDate: (firstVisibleMediaItem.creationDateValue as Date?) ?? Date(), startID: firstVisibleMediaItem.idValue, category: category, pageSize: 20) { response in
             switch response {
             case .success(let quckScrollResponse):
-                MediaItemOperationsService.shared.appendAndUpdate(remoteItems: quckScrollResponse.files, complition: {
+                MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, complition: {
                     debugPrint("appended and updated")
                 })
             case .failed(let error):
@@ -302,6 +305,11 @@ extension PhotoVideoController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        /// fixing iOS11 UICollectionSectionHeader clipping scroll indicator
+        /// https://stackoverflow.com/a/46930410/5893286
+        if #available(iOS 11.0, *), elementKind == UICollectionElementKindSectionHeader {
+            view.layer.zPosition = 0
+        }
         guard let view = view as? CollectionViewSimpleHeaderWithText else {
             return
         }
