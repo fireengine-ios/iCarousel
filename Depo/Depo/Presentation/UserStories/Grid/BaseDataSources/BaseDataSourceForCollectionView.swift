@@ -1050,7 +1050,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidScroll(scrollView: scrollView)
         
-        assetFilesCacheManager.updateCachedAssets(on: collectionView, items: allItems.flatMap {$0})
+        assetFilesCacheManager.updateCachedAssets(on: collectionView, itemProviderClosure: itemProviderClosure)
         
         if needShowCustomScrollIndicator {
             let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
@@ -1898,6 +1898,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             } else {
                 item.childCount = childCount - Int64(count)
             }
+        }
+    }
+}
+
+
+extension BaseDataSourceForCollectionView {
+    
+    private var itemProviderClosure: ItemProviderClosure {
+        return { [weak self] indexPath in
+            return self?.itemForIndexPath(indexPath: indexPath) as? Item
         }
     }
 }

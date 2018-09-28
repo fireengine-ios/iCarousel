@@ -228,7 +228,7 @@ extension PhotoVideoController: PhotoVideoCellDelegate {
 extension PhotoVideoController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        assetsFileCacheManager.updateCachedAssets(on: collectionView, items: dataSource.lastFetchedObjects)
+        assetsFileCacheManager.updateCachedAssets(on: collectionView, itemProviderClosure: itemProviderClosure)
         updateScrollBarTextIfNeed()
     }
     
@@ -569,3 +569,14 @@ extension PhotoVideoController {
     }
 }
 
+
+extension PhotoVideoController {
+    private var itemProviderClosure: ItemProviderClosure {
+        return { [weak self] indexPath in
+            if let mediaItem = self?.dataSource.object(at: indexPath) {
+                return WrapData(mediaItem: mediaItem)
+            }
+            return nil
+        }
+    }
+}
