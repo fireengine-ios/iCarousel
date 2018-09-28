@@ -22,7 +22,7 @@ final class ScrollBarView: UIView {
     
     private let edgeInset: CGFloat = scrollBarHandleImage.size.width * 0.5
     
-    private var isDragging = false
+    var isDragging = false
     
     
     /// The amount of padding above and below the scroll bar (Only top and bottom values are counted.)
@@ -90,6 +90,11 @@ final class ScrollBarView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
+    }
+    
+    func setText(_ text: String) {
+        insetsLabel.text = text
+        insetsLabel.center.x = -insetsLabel.frame.width * 0.5 /// +- constant for inset from handle view
     }
     
     private func hideLabelAnimated() {

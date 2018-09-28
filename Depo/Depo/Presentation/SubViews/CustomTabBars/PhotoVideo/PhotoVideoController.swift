@@ -194,6 +194,26 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
         router.pushViewController(viewController: controller)
     }
+    
+    private func updateScrollBarTextIfNeed() {
+        guard scrollBar.isDragging else {
+            return
+        }
+        updateScrollBarText()
+    }
+    
+    // TODO: add this method when will be need to show scrollBar (end of adding files to DB)
+    private func updateScrollBarText() {
+        guard let indexPath = collectionView.indexPathsForVisibleItems.min(by: <) else {
+            return
+        }
+        let mediaItem = dataSource.object(at: indexPath)
+        guard let creationDate = mediaItem.creationDateValue as Date? else {
+            return
+        }
+        let title = creationDate.getDateInTextForCollectionViewHeader()
+        scrollBar.setText(title)
+    }
 }
 
 // MARK: - PhotoVideoCellDelegate
@@ -209,6 +229,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         assetsFileCacheManager.updateCachedAssets(on: collectionView, items: dataSource.lastFetchedObjects)
+        updateScrollBarTextIfNeed()
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
