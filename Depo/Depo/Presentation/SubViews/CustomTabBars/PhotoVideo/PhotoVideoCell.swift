@@ -152,6 +152,8 @@ final class PhotoVideoCell: UICollectionViewCell {
         thumbnailImageView.image = nil
         thumbnailImageView.sd_cancelCurrentImageLoad()
         cancelledUploadForObject()
+        indexPath = nil
+        cellId = ""
     }
     
     func setProgressForObject(progress: Float, blurOn: Bool = false) {
