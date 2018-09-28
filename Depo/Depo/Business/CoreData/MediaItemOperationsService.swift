@@ -285,7 +285,6 @@ final class MediaItemOperationsService {
         
         //*--------
         ///first option, kill all in range
-// AND (idValue <= \(firstItemID) AND idValue >= \(lastItemID))
         let allRemoteItemsInRangePredicate = NSPredicate(format:"isLocalItemValue = false AND (creationDateValue <= %@ AND creationDateValue >= %@) AND idValue IN %@", firstRemote.metaDate as NSDate, lastRemote.metaDate as NSDate, remoteIds)
         executeRequest(predicate: allRemoteItemsInRangePredicate, context: context) { [weak self] savedRemoteItems in
             
@@ -311,20 +310,6 @@ final class MediaItemOperationsService {
         ///second option: update already existed, kill all others in that remote items range
         ///FOR NOW WE NEED TO TEST FIRST ONE
         //---------*
-    }
-    private func updateItemRelations(remoteItem: MediaItem, context: NSManagedObjectContext, completion: @escaping VoidHandler) {
-        
-    }
-//    func updateRelations(remoteItems: [MediaItem], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
-//
-//    }
-    
-    private func getRelatedLocals(remoteItems: [WrapData], context: NSManagedObjectContext, relatedLocals: @escaping MediaItemsCallBack) {
-
-//        let predicate = NSPredicate(format: "")
-//        
-//        executeRequest(predicate: <#T##NSPredicate#>, context: <#T##NSManagedObjectContext#>, mediaItemsCallBack: <#T##MediaItemsCallBack##MediaItemsCallBack##([MediaItem]) -> Void#>)
-        
     }
     
     func getAllRemotesMediaItem(allRemotes: @escaping MediaItemsCallBack) {

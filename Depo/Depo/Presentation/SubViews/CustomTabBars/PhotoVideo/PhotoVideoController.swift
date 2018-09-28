@@ -251,10 +251,8 @@ extension PhotoVideoController: UIScrollViewDelegate {
                 MediaItemOperationsService.shared.appendAndUpdate(remoteItems: quckScrollResponse.files, complition: {
                     debugPrint("appended and updated")
                 })
-                ///Success callback handles In newChildBackground Context
-                
             case .failed(let error):
-                break
+                break///TODO: popup here?
             }
         }
     }
