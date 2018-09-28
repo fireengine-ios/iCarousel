@@ -8,6 +8,9 @@
 
 import Foundation
 
+
+typealias ItemProviderClosure = ((_ indexPath: IndexPath)->Item?)
+
 class AssetFileCacheManager {
     
     private var filesDataSource = FilesDataSource()
@@ -19,15 +22,13 @@ class AssetFileCacheManager {
         previousPreheatRect = .zero
     }
     
-    func updateCachedAssets(on collectionView: UICollectionView?, items: [WrapData]?) {
+    func updateCachedAssets(on collectionView: UICollectionView?, itemProviderClosure: ItemProviderClosure) {
         // Update only if the view is visible.
         guard
             let collectionView = collectionView,
             let view = collectionView.superview,
-            view.window != nil,
-            let items = items,
-            !items.isEmpty
-            else {
+            view.window != nil
+        else {
                 return
         }
         
@@ -49,7 +50,8 @@ class AssetFileCacheManager {
             .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
             .flatMap { (indexPath) -> PHAsset? in
                 var asset: PHAsset?
-                if let item = items[safe: indexPath.item] {//itemForIndexPath(indexPath: indexPath) as? Item {
+                
+                if let item = itemProviderClosure(indexPath) {
                     if case let PathForItem.localMediaContent(local) = item.patchToPreview {
                         asset = local.asset
                     }
@@ -60,7 +62,7 @@ class AssetFileCacheManager {
             .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
             .flatMap {  (indexPath) -> PHAsset? in
                 var asset: PHAsset?
-                if let item = items[safe: indexPath.item] {//itemForIndexPath(indexPath: indexPath) as? Item {
+                if let item = itemProviderClosure(indexPath) {
                     if case let PathForItem.localMediaContent(local) = item.patchToPreview {
                         asset = local.asset
                     }
