@@ -258,9 +258,9 @@ final class MediaItemOperationsService {
         //WARNING:- DO we need notify ItemOperationManager here???
     }
 
-    func updateRemoteItems(remoteItems: [WrapData], complition: @escaping VoidHandler) {
+    func updateRemoteItems(remoteItems: [WrapData], completion: @escaping VoidHandler) {
         guard let firstRemote = remoteItems.first, let lastRemote = remoteItems.last else {
-            complition()
+            completion()
             return
         }
         
@@ -291,7 +291,7 @@ final class MediaItemOperationsService {
             }
             
             context.saveAsync(completion: { status in
-                complition()
+                completion()
             })
         }
         //---------*
