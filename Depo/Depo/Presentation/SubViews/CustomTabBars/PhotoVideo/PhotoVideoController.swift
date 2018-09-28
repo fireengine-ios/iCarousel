@@ -204,7 +204,7 @@ extension PhotoVideoController: PhotoVideoCellDelegate {
 extension PhotoVideoController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        assetsFileCacheManager.updateCachedAssets(on: collectionView, itemProviderClosure: itemProviderClosure())
+        assetsFileCacheManager.updateCachedAssets(on: collectionView, itemProviderClosure: itemProviderClosure)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -546,7 +546,7 @@ extension PhotoVideoController {
 
 
 extension PhotoVideoController {
-    func itemProviderClosure() -> ItemProviderClosure {
+    private var itemProviderClosure: ItemProviderClosure {
         return { [weak self] indexPath in
             if let mediaItem = self?.dataSource.object(at: indexPath) {
                 return WrapData(mediaItem: mediaItem)
