@@ -157,11 +157,15 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         // TODO: trackClickOnPhotoOrVideo(isPhoto: false)
         trackClickOnPhotoOrVideo(isPhoto: true)
         
+        guard let allObjects = dataSource.lastFetchedObjects else {
+            return
+        }
+        
         let currentMediaItem = dataSource.object(at: indexPath)
         let currentObject = WrapData(mediaItem: currentMediaItem)
         
         let router = RouterVC()
-        let controller = router.filesDetailViewController(fileObject: currentObject, items: dataSource.fetchedObjects)
+        let controller = router.filesDetailViewController(fileObject: currentObject, items: allObjects)
         let nController = NavigationController(rootViewController: controller)
         router.presentViewController(controller: nController)
     }
