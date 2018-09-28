@@ -41,6 +41,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
     private lazy var scrollDirectionManager = PhotoVideoScrollDirectionManager()
     private lazy var assetsFileCacheManager = AssetFileCacheManager()
+    private let scrollBar = ScrollBarView()
     
     
     // MARK: - life cycle
@@ -61,6 +62,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         ItemOperationManager.default.startUpdateView(view: self)
         
         performFetch()
+        scrollBar.add(to: collectionView)
     }
     
     deinit {
@@ -278,6 +280,11 @@ extension PhotoVideoController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        /// fixing iOS11 UICollectionSectionHeader clipping scroll indicator
+        /// https://stackoverflow.com/a/46930410/5893286
+        if #available(iOS 11.0, *), elementKind == UICollectionElementKindSectionHeader {
+            view.layer.zPosition = 0
+        }
         guard let view = view as? CollectionViewSimpleHeaderWithText else {
             return
         }
