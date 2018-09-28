@@ -40,8 +40,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView)
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
     private lazy var scrollDirectionManager = PhotoVideoScrollDirectionManager()
+
     private lazy var assetsFileCacheManager = AssetFileCacheManager()
+
     private let scrollBar = ScrollBarView()
+
+    private lazy var quickScrollService = QuickScrollService()
     
     
     // MARK: - life cycle
@@ -233,6 +237,27 @@ extension PhotoVideoController: UIScrollViewDelegate {
     
     private func updateDB() {
         print("updateDB with direction: \(scrollDirectionManager.scrollDirection)")
+        guard !CacheManager.shared.processingRemoteItems else {
+            return
+        }
+        
+        guard let firstVisibleObject = collectionView.visibleCells.first,
+            let firstVisibleObjectIndex = collectionView.indexPath(for: firstVisibleObject)
+        else {
+            return
+        }
+        let firstVisibleMediaItem = dataSource.object(at: firstVisibleObjectIndex)
+        let category: QuickScrollCategory = isPhoto ? .photos : .videos
+        quickScrollService.requestListOfDateRange(startDate: (firstVisibleMediaItem.creationDateValue as Date?) ?? Date(), startID: firstVisibleMediaItem.idValue, category: category, pageSize: 20) { response in
+            switch response {
+            case .success(let quckScrollResponse):
+                MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, completion: {
+                    debugPrint("appended and updated")
+                })
+            case .failed(let error):
+                break///TODO: popup here?
+            }
+        }
     }
     
 }

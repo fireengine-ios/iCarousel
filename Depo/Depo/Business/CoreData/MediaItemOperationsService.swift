@@ -236,7 +236,8 @@ final class MediaItemOperationsService {
         let context = CoreDataStack.default.newChildBackgroundContext
         ///TODO: add check on existing files?
         // OR should we mark sync status and etc here. And also affect free app?
-        
+
+        ///TODO: check if files exist
         guard !remoteItems.isEmpty else {
             debugPrint("REMOTE_ITEMS: no files to add")
             completion()
@@ -252,10 +253,54 @@ final class MediaItemOperationsService {
             }
             CoreDataStack.default.saveDataForContext(context: context, savedCallBack: completion)
         }
+        
         //      ItemOperationManager.default.addedLocalFiles(items: addedObjects)
         //WARNING:- DO we need notify ItemOperationManager here???
     }
 
+    func updateRemoteItems(remoteItems: [WrapData], completion: @escaping VoidHandler) {
+        guard let firstRemote = remoteItems.first, let lastRemote = remoteItems.last else {
+            completion()
+            return
+        }
+        
+        let context = CoreDataStack.default.newChildBackgroundContext
+        
+        var remoteMd5s = [String]()
+        var remoteTrimmedIDs = [String]()
+        var remoteIds = [Int64]()
+        remoteItems.forEach{
+            remoteMd5s.append($0.md5)
+            remoteTrimmedIDs.append($0.getTrimmedLocalID())
+            remoteIds.append($0.id ?? 0)
+        }
+        
+        //*--------
+        ///first option, kill all in range
+        let allRemoteItemsInRangePredicate = NSPredicate(format:"isLocalItemValue = false AND (creationDateValue <= %@ AND creationDateValue >= %@) AND idValue IN %@", firstRemote.metaDate as NSDate, lastRemote.metaDate as NSDate, remoteIds)
+        executeRequest(predicate: allRemoteItemsInRangePredicate, context: context) { savedRemoteItems in
+            
+            debugPrint("--- remotes count \(remoteItems.count)")
+            debugPrint("--- count of already saed \(savedRemoteItems.count)")
+            savedRemoteItems.forEach {
+                context.delete($0)
+            }
+            remoteItems.forEach {
+                ///Relations being setuped in the MediaItem init
+                _ = MediaItem(wrapData: $0, context: context)
+            }
+            
+            context.saveAsync(completion: { status in
+                completion()
+            })
+        }
+        //---------*
+        //*--------
+        ///second option: update already existed, kill all others in that remote items range
+        ///FOR NOW WE NEED TO TEST FIRST ONE
+        //---------*
+    }
+    
     func getAllRemotesMediaItem(allRemotes: @escaping MediaItemsCallBack) {
         let predicate = NSPredicate(format: "isLocalItemValue = false")
         executeRequest(predicate: predicate, context: CoreDataStack.default.newChildBackgroundContext, mediaItemsCallBack: allRemotes)

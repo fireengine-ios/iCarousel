@@ -31,6 +31,10 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
+    var fetchedOriginalObhects: [MediaItem] {
+        return fetchedResultsController.fetchedObjects ?? []
+    }
+    
     var fetchedObjects: [WrapData] {
         return fetchedResultsController.fetchedObjects?.map { object in
             return WrapData(mediaItem: object)
@@ -51,8 +55,8 @@ final class PhotoVideoDataSource: NSObject {
         let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
         
         let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.creationDateValue), ascending: false)
-        //        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.nameValue), ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor1]
+        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.idValue), ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
         
         if Device.isIpad {
             fetchRequest.fetchBatchSize = 50

@@ -45,14 +45,8 @@ final class CacheManager {///adding files TO DB // managing cache
     }
     
     private func addNextRemoteItemsPage(completion: @escaping VoidHandler) {
+        //TODO: create new service method that returns MediaItems
         photoVideoService.nextItems(fileType: .imageAndVideo, sortBy: .imageDate, sortOrder: .asc, success: { [weak self] remoteItems in
-            
-//            var itemsToAppend = [Item]()
-//            var itemsToUpdate = [Item]()
-//            
-//            remoteItems.forEach {
-//                
-//            }
             
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
                 self?.remotePageAdded?()
