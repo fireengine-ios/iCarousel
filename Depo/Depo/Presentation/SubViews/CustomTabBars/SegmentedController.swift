@@ -45,7 +45,12 @@ final class SegmentedController: UIViewController, NibInit {
     } 
     
     @IBOutlet private weak var contanerView: UIView!
-    @IBOutlet private weak var segmentedControl: UISegmentedControl!
+    
+    @IBOutlet private weak var segmentedControl: UISegmentedControl! {
+        willSet {
+            newValue.tintColor = ColorConstants.darcBlueColor
+        }
+    }
     
     private var viewControllers: [UIViewController] = []
     
@@ -73,6 +78,10 @@ final class SegmentedController: UIViewController, NibInit {
 //        needShowTabBar = true
         
         add(childController: viewControllers[segmentedControl.selectedSegmentIndex])
+        
+        for (index, controller) in viewControllers.enumerated() {
+            segmentedControl.setTitle(controller.title, forSegmentAt: index)
+        }
     }
     
     private func setup(with controllers: [UIViewController]) {

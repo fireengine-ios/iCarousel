@@ -559,12 +559,14 @@ extension PhotoVideoController {
     static func initPhotoFromNib() -> PhotoVideoController {
         let photoController = PhotoVideoController.initFromNib()
         photoController.isPhoto = true
+        photoController.title = TextConstants.topBarPhotosFilter
         return photoController
     }
     
     static func initVideoFromNib() -> PhotoVideoController {
         let videoController = PhotoVideoController.initFromNib()
         videoController.isPhoto = false
+        videoController.title = TextConstants.topBarVideosFilter
         return videoController
     }
 }
