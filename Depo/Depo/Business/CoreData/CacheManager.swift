@@ -29,6 +29,9 @@ final class CacheManager {///adding files TO DB // managing cache
             }
             
             guard !self.processingRemoteItems else {
+                //TODO: put prepareQuickScroll into some kind of AllItemsAppended handler when it's done
+                self.allLocalAdded = true // sincce we don't call startAppendingAllLocals()
+                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
                 return
             }
             self.processingRemoteItems = true
@@ -69,6 +72,8 @@ final class CacheManager {///adding files TO DB // managing cache
         MediaItemOperationsService.shared.appendLocalMediaItems { [weak self] in
 //            self?.showPopUp(text: "All locals are added")
             self?.allLocalAdded = true
+            //TODO: put prepareQuickScroll into some kind of AllItemsAppended handler when it's done
+            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
         }
     }
 

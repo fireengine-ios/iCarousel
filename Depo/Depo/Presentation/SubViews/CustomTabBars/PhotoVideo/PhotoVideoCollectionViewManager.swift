@@ -91,6 +91,9 @@ final class PhotoVideoCollectionViewManager {
     private func setupViewForPopUp() {
         CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
         CardsManager.default.updateAllProgressesInCardsForView(view: scrolliblePopUpView)
+        if !CacheManager.shared.allLocalAdded {
+            CardsManager.default.startOperationWith(type: .prepareQuickScroll)
+        }
         
         scrolliblePopUpView.delegate = self
         scrolliblePopUpView.isEnable = true
