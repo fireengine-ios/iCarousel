@@ -136,7 +136,7 @@ class CardsManager: NSObject {
         }
     }
     
-    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
+    func startOperationWith(type: OperationType, allOperations: Int? = nil, completedOperations: Int? = nil) {
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
     
