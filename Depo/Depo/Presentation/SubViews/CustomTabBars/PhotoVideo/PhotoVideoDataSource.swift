@@ -16,6 +16,8 @@ protocol PhotoVideoDataSourceDelegate: class {
 // TODO: selectedIndexPaths NSFetchedResultsController changes
 final class PhotoVideoDataSource: NSObject {
     
+    private var thresholdService = ThresholdBlockService(threshold: 0.1)
+    
     var isSelectingMode = false {
         didSet {
             delegate?.selectedModeDidChange(isSelectingMode)
@@ -42,6 +44,7 @@ final class PhotoVideoDataSource: NSObject {
     }
     
     var lastFetchedObjects: [WrapData]?
+    var canUpdateLastFecthed = true
     
     private weak var delegate: PhotoVideoDataSourceDelegate?
     private weak var collectionView: UICollectionView!
@@ -189,8 +192,14 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
             self?.objectChanges.forEach { $0() }
             }, completion: { [weak self] _ in
                 self?.reloadSupplementaryViewsIfNeeded()
-                self?.lastFetchedObjects = self?.fetchedObjects
+                self?.updateLastFetchedObjects()
         })
+    }
+    
+    private func updateLastFetchedObjects() {
+        thresholdService.execute { [weak self] in
+            self?.lastFetchedObjects = self?.fetchedObjects
+        }
     }
     
     private func reloadSupplementaryViewsIfNeeded() {
