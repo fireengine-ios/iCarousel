@@ -32,6 +32,7 @@ class SplashInteractor: SplashInteractorInput {
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                         self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
                         self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
+                        _ = LocalMediaStorage.default.getAllImagesAndVideoAssets()
                         self?.turkcellSuccessLogin()
                     }, fail: { [weak self] error in
                         self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .falseLogin)
@@ -46,6 +47,7 @@ class SplashInteractor: SplashInteractorInput {
             }
         } else {
             SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
+                _ = LocalMediaStorage.default.getAllImagesAndVideoAssets()
                 self?.successLogin()
             }, fail: { [weak self] error in
                 /// we don't need logout here
