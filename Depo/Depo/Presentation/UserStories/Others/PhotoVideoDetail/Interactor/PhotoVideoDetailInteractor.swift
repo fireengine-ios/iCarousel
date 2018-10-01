@@ -45,7 +45,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             }
         } else {
             for (index, item) in items.enumerated() {
-                let id = fileObject.id!
+                guard let id = fileObject.id else {
+                    continue
+                }
                 if id == item.id {
                     selectedIndex = index
                     break
