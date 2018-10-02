@@ -280,6 +280,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
                     debugPrint("appended and updated")
                 })
             case .failed(let error):
+                ///may be canceled request
                 break///TODO: popup here?
             }
         }

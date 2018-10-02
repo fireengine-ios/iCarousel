@@ -71,6 +71,7 @@ final class QuickScrollService {
         }
     }
 
+    private var currentDataRequest: DataRequest?
     func requestListOfDateRange(startDate: Date, endDate: Date? = nil,
                                 startID: Int64, endID: Int64? = nil,
                                 category: QuickScrollCategory, pageSize: Int,
@@ -81,6 +82,8 @@ final class QuickScrollService {
             return
         }
 
+        currentDataRequest?.cancel()
+        
         var body: [String: Any] = [startDateBodyKey: "\(startDate.millisecondsSince1970)",
                                     endDateBodyKey: "",
                                     categoryBodyKey: category.text,
@@ -93,7 +96,7 @@ final class QuickScrollService {
         if let unwrapedEndId = endID {
             body[endFileIdKey] = unwrapedEndId
         }
-        sessionManager
+        currentDataRequest = sessionManager
                 .request(requestURL,
                          method: .get,
                          parameters: body)
