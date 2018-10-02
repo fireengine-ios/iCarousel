@@ -20,16 +20,16 @@ final class CacheManager {///adding files TO DB // managing cache
     
     //TODO: place  blocks here?
     var remotePageAdded: VoidHandler?
-    
-    func actualizeCache(completion: @escaping VoidHandler) {
-        MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
-            if isNoRemotes {
-                self?.startAppendingAllRemotes() ///COMPLETION NEEDED
-            } else {
-                self?.startAppendingAllLocals() ///COMPLETION NEEDED
-            }
-        }
-    }
+    //this one in mid work state
+//    func actualizeCache(completion: @escaping VoidHandler) {
+//        MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
+//            if isNoRemotes {
+//                self?.startAppendingAllRemotes() ///COMPLETION NEEDED
+//            } else {
+//                self?.startAppendingAllLocals() ///COMPLETION NEEDED
+//            }
+//        }
+//    }
     
     func startAppendingAllRemotes() {// we save remotes everytime, no metter if acces to PH libriary denied
         MediaItemOperationsService.shared.isNoRemotesInDB(result: { [weak self] isNoRemotes in
@@ -78,8 +78,6 @@ final class CacheManager {///adding files TO DB // managing cache
     
     func startAppendingAllLocals() {
         allLocalAdded = false
-        ///I guess we need to start here card operation
-//        CardsManager.default.startOperationWith(type: .prepareQuickScroll)
         MediaItemOperationsService.shared.appendLocalMediaItems { [weak self] in
 //            self?.showPopUp(text: "All locals are added")
             self?.allLocalAdded = true
