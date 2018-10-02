@@ -20,7 +20,16 @@ final class CacheManager {///adding files TO DB // managing cache
     
     //TODO: place  blocks here?
     var remotePageAdded: VoidHandler?
-    
+    //this one in mid work state
+//    func actualizeCache(completion: @escaping VoidHandler) {
+//        MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
+//            if isNoRemotes {
+//                self?.startAppendingAllRemotes() ///COMPLETION NEEDED
+//            } else {
+//                self?.startAppendingAllLocals() ///COMPLETION NEEDED
+//            }
+//        }
+//    }
     
     func startAppendingAllRemotes() {// we save remotes everytime, no metter if acces to PH libriary denied
         MediaItemOperationsService.shared.isNoRemotesInDB(result: { [weak self] isNoRemotes in
@@ -76,7 +85,7 @@ final class CacheManager {///adding files TO DB // managing cache
             CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
         }
     }
-
+    //TODO: move method of QS DB update here.
     private func showPopUp(text: String) {
         DispatchQueue.main.async {
             let alertView = UIAlertView(title: "!~TEST~!", message: text, delegate: nil, cancelButtonTitle: "Cancel")
