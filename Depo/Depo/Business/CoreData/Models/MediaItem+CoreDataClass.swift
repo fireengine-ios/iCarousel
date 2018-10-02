@@ -119,7 +119,7 @@ extension MediaItem {
 //    }
 
     private func getRelatedPredicate(item: WrapData, findRelatedLocals: Bool) -> NSPredicate {
-        return NSPredicate(format: "isLocalItemValue == \(findRelatedLocals) AND (trimmedLocalFileID == %@ OR md5Value == %@)", item.getTrimmedLocalID())
+        return NSPredicate(format: "isLocalItemValue == \(findRelatedLocals) AND (trimmedLocalFileID == %@ OR md5Value == %@)", item.getTrimmedLocalID(), item.md5)
     }
     
     func getAllRelatedItems(wrapItem: WrapData, findRelatedLocals: Bool, context: NSManagedObjectContext)  -> [MediaItem] {
