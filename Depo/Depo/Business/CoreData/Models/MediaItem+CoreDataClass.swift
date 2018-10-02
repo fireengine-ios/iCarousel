@@ -96,7 +96,7 @@ public class MediaItem: NSManagedObject {
     }
     
     private func convertToMediaItems(syncStatuses: [String], context: NSManagedObjectContext) -> NSSet {
-        return  NSSet(array: syncStatuses.flatMap { MediaItemsObjectSyncStatus(userID: $0, context: context) })
+        return NSSet(array: syncStatuses.flatMap { MediaItemsObjectSyncStatus(userID: $0, context: context) })
     }
 
     var wrapedObject: WrapData {
@@ -119,7 +119,7 @@ extension MediaItem {
 //    }
 
     private func getRelatedPredicate(item: WrapData, findRelatedLocals: Bool) -> NSPredicate {
-        return NSPredicate(format: "isLocalItemValue == \(findRelatedLocals) AND (trimmedLocalFileID == %@ OR md5Value == %@)", item.getTrimmedLocalID(), item.md5)
+        return NSPredicate(format: "isLocalItemValue == %@ AND (trimmedLocalFileID == %@ OR md5Value == %@)", String(findRelatedLocals), item.getTrimmedLocalID(), item.md5)
     }
     
     func getAllRelatedItems(wrapItem: WrapData, findRelatedLocals: Bool, context: NSManagedObjectContext)  -> [MediaItem] {

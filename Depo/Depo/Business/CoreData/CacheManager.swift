@@ -10,54 +10,49 @@ final class CacheManager {///adding files TO DB // managing cache
     
     static let shared = CacheManager()
     
-    var allLocalAdded = false
+
     
+//    private static let firstPageSize: Int = 100
     private static let pageSize: Int = 1000
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
                                                          type: .imageAndVideo)
     var processingRemoteItems = false
-//    private var photoVideosPageCounter: Int = 0
+    var allLocalAdded = false
     
     //TODO: place  blocks here?
     var remotePageAdded: VoidHandler?
-    //this one in mid work state
-//    func actualizeCache(completion: @escaping VoidHandler) {
-//        MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
-//            if isNoRemotes {
-//                self?.startAppendingAllRemotes() ///COMPLETION NEEDED
-//            } else {
-//                self?.startAppendingAllLocals() ///COMPLETION NEEDED
-//            }
-//        }
-//    }
     
-    func startAppendingAllRemotes() {// we save remotes everytime, no metter if acces to PH libriary denied
-        MediaItemOperationsService.shared.isNoRemotesInDB(result: { [weak self] isNoRemotes in
-            guard let `self` = self else {
-                return
+    func actualizeCache(completion: VoidHandler?) {
+        MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
+            if isNoRemotes {
+                self?.startAppendingAllRemotes(completion: { [weak self] in
+                    self?.startAppendingAllLocals(completion: {
+                        completion?()
+                    })
+                })
+            } else {
+                self?.startAppendingAllLocals(completion: {
+                    completion?()
+                })
             }
-            
+        }
+    }
+    
+    func startAppendingAllRemotes(completion: @escaping VoidHandler) {
+        /// we save remotes everytime, no metter if acces to PH libriary denied
             guard !self.processingRemoteItems else {
-                //TODO: put prepareQuickScroll into some kind of AllItemsAppended handler when it's done
-                self.allLocalAdded = true // sincce we don't call startAppendingAllLocals()
-                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+                //completion()
                 return
             }
             self.processingRemoteItems = true
             self.addNextRemoteItemsPage { [weak self] in
-//                self?.showPopUp(text: "All remotes are added")
-                ///As soon as all remotes added - start adding locals
-                self?.startAppendingAllLocals()
-//                MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
                 self?.processingRemoteItems = false
                 self?.remotePageAdded?()
+                completion()
             }
-            
-        })
     }
     
     private func addNextRemoteItemsPage(completion: @escaping VoidHandler) {
-        //TODO: create new service method that returns MediaItems
         photoVideoService.nextItems(fileType: .imageAndVideo, sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remoteItems in
             
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
@@ -76,22 +71,15 @@ final class CacheManager {///adding files TO DB // managing cache
         }
     }
     
-    func startAppendingAllLocals() {
+    func startAppendingAllLocals(completion: @escaping VoidHandler) {
         allLocalAdded = false
         MediaItemOperationsService.shared.appendLocalMediaItems { [weak self] in
-//            self?.showPopUp(text: "All locals are added")
             self?.allLocalAdded = true
-            //TODO: put prepareQuickScroll into some kind of AllItemsAppended handler when it's done
             CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+            completion()
         }
     }
     //TODO: move method of QS DB update here.
-    private func showPopUp(text: String) {
-        DispatchQueue.main.async {
-            let alertView = UIAlertView(title: "!~TEST~!", message: text, delegate: nil, cancelButtonTitle: "Cancel")
-            alertView.alertViewStyle = .default
-            alertView.show()
-        }
-    }
+
     
 }
