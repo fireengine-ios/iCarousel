@@ -79,7 +79,7 @@ final class CacheManager {///adding files TO DB // managing cache
     func startAppendingAllLocals() {
         allLocalAdded = false
         ///I guess we need to start here card operation
-        CardsManager.default.startOperationWith(type: .prepareQuickScroll)
+//        CardsManager.default.startOperationWith(type: .prepareQuickScroll)
         MediaItemOperationsService.shared.appendLocalMediaItems { [weak self] in
 //            self?.showPopUp(text: "All locals are added")
             self?.allLocalAdded = true
