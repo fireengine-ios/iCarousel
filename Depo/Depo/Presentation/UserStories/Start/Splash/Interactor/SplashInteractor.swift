@@ -32,7 +32,7 @@ class SplashInteractor: SplashInteractorInput {
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                         self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
                         self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
-                        _ = LocalMediaStorage.default.getAllImagesAndVideoAssets()
+                        CacheManager.shared.actualizeCache(completion: nil)
                         self?.turkcellSuccessLogin()
                     }, fail: { [weak self] error in
                         self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .falseLogin)
@@ -47,7 +47,7 @@ class SplashInteractor: SplashInteractorInput {
             }
         } else {
             SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                _ = LocalMediaStorage.default.getAllImagesAndVideoAssets()
+                CacheManager.shared.actualizeCache(completion: nil)
                 self?.successLogin()
             }, fail: { [weak self] error in
                 /// we don't need logout here
@@ -63,7 +63,6 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func turkcellSuccessLogin() {
-        CacheManager.shared.actualizeCache(completion: nil)
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
         DispatchQueue.toMain {
@@ -72,7 +71,6 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func successLogin() {
-        CacheManager.shared.actualizeCache(completion: nil)
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
         DispatchQueue.toMain {
