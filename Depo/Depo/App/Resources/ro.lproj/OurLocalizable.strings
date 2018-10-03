@@ -640,12 +640,12 @@
 "offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "Please enter a valid login." = "Introduceți textul de mai jos";
 "Please enter the text below" = "Por favor ingrese el texto a continuación";
-"facebook_photo_tags" = "Facebook Photo Tags";
-"facebook_tags_on" = "You will get your Facebook tags to lifebox when you enable this option";
-"facebook_tags_off" = "You will get your Facebook tags to lifebox when you enable this option";
-"facebook_tags_import" = "Please enable \\\"Import from Facebook\\\" option to use \\\"Facebook Tag Transfer\\\" feature";
+"facebook_photo_tags" = "Etichete pe poza facebook";
+"facebook_tags_on" = "După ce activezi această opțiune, vei primi etichetele tale Facebook în lifebox";
+"facebook_tags_off" = "După ce activezi această opțiune, vei primi etichetele tale Facebook în lifebox";
+"facebook_tags_import" = "Activează opțiunea \"Importă din Facebook\" pentru a putea utiliza funcția \"Transfer de Etichetă Facebook\"";
 "TermsOfUseLinkText" = "clic";
 "launch_campaign_card_detail" = "Detalii";
 "launch_campaign_card_title" = "Campanie Praga";
 "launch_campaign_card_message" = "Praga vă așteaptă! Începeți să explorați acum Lifebox și să fiți unul dintre cele 10 cupluri norocoase";
-"%d same contacts" = "";
+"%d same contacts" = "%d aceleași contacte";

@@ -640,12 +640,12 @@
 "offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "Please enter a valid login." = "Inicio de sesión denegado Por favor revise sus credenciales";
 "Please enter the text below" = "Por favor ingrese el texto a continuación";
-"facebook_photo_tags" = "Facebook Photo Tags";
-"facebook_tags_on" = "You will get your Facebook tags to lifebox when you enable this option";
-"facebook_tags_off" = "\n You will get your Facebook tags to lifebox when you enable this option";
-"facebook_tags_import" = "Please enable \\\"Import from Facebook\\\" option to use \\\"Facebook Tag Transfer\\\" feature";
+"facebook_photo_tags" = "Etiquetas de fotos de Facebook";
+"facebook_tags_on" = "Obtendrá sus etiquetas de Facebook en Lifebox cuando habilite esta opción";
+"facebook_tags_off" = "Obtendrá sus etiquetas de Facebook en Lifebox cuando habilite esta opción";
+"facebook_tags_import" = "Habilita la opción \"Importar desde Facebook\" para usar la función \"Transferencia de etiquetas de Facebook\"";
 "TermsOfUseLinkText" = "clic";
 "launch_campaign_card_detail" = "Detalles";
 "launch_campaign_card_title" = "Campaña de Praga";
 "launch_campaign_card_message" = "¡Praga te está esperando! Empieza a explorar lifebox ahora y sé una de las 10 parejas afortunadas";
-"%d same contacts" = "";
+"%d same contacts" = "%d mismos contactos";
