@@ -321,7 +321,7 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                            _ = LocalMediaStorage.default.getAllImagesAndVideoAssets()
+                            CacheManager.shared.actualizeCache(completion: nil)
                             sucess?(headers)
                             MenloworksAppEvents.onLogin()
                         }, fail: { error in
@@ -364,7 +364,7 @@ class AuthenticationService: BaseRequestService {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                    _ = LocalMediaStorage.default.getAllImagesAndVideoAssets()
+                    CacheManager.shared.actualizeCache(completion: nil)
                     sucess?()
                 }, fail: { error in
                     fail?(error)
