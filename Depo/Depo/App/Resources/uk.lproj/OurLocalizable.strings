@@ -640,10 +640,10 @@
 "offersCancelLife" = "25ГБ, будь ласка, відправте СМС з текстом «Stop1», деактивувати lifebox  100ГБ – СМС з текстом «Stop2», деактивувати lifebox  500ГБ – СМС з текстом «Stop3» на номер 6767";
 "Please enter a valid login." = "Невірний логін. Будь ласка, перевірте ваші персональні дані";
 "Please enter the text below" = "Будь ласка, введіть текст";
-"facebook_photo_tags" = "Facebook Photo Tags";
-"facebook_tags_on" = "You will get your Facebook tags to lifebox when you enable this option";
-"facebook_tags_off" = "You will get your Facebook tags to lifebox when you enable this option";
-"facebook_tags_import" = "Please enable \\\"Import from Facebook\\\" option to use \\\"Facebook Tag Transfer\\\" feature";
+"facebook_photo_tags" = "Фото позначки Facebook";
+"facebook_tags_on" = "Ви побачите ваші Facebook позначки у lifebox, коли активуєте цей параметр";
+"facebook_tags_off" = "Ви побачите ваші Facebook позначки у lifebox, коли активуєте цей параметр";
+"facebook_tags_import" = "Будь ласка, активуйте параметр «Імпорт з Facebook», щоб скористатися опцією «Передача Facebook позначок»";
 "TermsOfUseLinkText" = "клацніть";
 "launch_campaign_card_detail" = "Подробиці";
 "launch_campaign_card_title" = "Празька кампанія";

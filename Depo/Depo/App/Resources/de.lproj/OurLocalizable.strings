@@ -640,12 +640,12 @@
 "offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "Please enter a valid login." = "Anmeldung abgelehnt. Bitte überprüfen Sie Ihre Zugangsdaten.";
 "Please enter the text below" = "Bitte geben Sie den folgenden Text ein";
-"facebook_photo_tags" = "\n Facebook Photo Tags";
-"facebook_tags_on" = "\n You will get your Facebook tags to lifebox when you enable this option";
-"facebook_tags_off" = "\n You will get your Facebook tags to lifebox when you enable this option";
-"facebook_tags_import" = "Please enable \\\"Import from Facebook\\\" option to use \\\"Facebook Tag Transfer\\\" feature";
+"facebook_photo_tags" = "Facebook-Fototags";
+"facebook_tags_on" = "Wenn Sie diese Option aktivieren, erhalten Sie Ihre Facebook-Tags in die Lifebox";
+"facebook_tags_off" = "Wenn Sie diese Option aktivieren, erhalten Sie Ihre Facebook-Tags in die Lifebox";
+"facebook_tags_import" = "Bitte aktivieren Sie die Option \"Von Facebook importieren\", um die Funktion \"Facebook Tag Transfer\" zu verwenden";
 "TermsOfUseLinkText" = "klicken";
 "launch_campaign_card_detail" = "Einzelheiten";
 "launch_campaign_card_title" = "Prag Kampagne";
 "launch_campaign_card_message" = "Prag wartet auf Sie! Beginne jetzt mit der Erforschung der lifebox und gehöre zu den 10 glücklichen Paaren";
-"%d same contacts" = "";
+"%d same contacts" = "%d gleiche Kontakte";

@@ -649,11 +649,11 @@
 "Please enter a valid login." = "Giriş reddedildi. Lütfen giriş bilgilerini kontrol et.";
 "Please enter the text below" = "Lütfen aşağıdaki metni giriniz.";
 "facebook_photo_tags" = "Facebook Fotoğraf Etiketleri";
-"facebook_tags_on" = "You will get your Facebook tags to lifebox when you enable this option";
-"facebook_tags_off" = "You will get your Facebook tags to lifebox when you enable this option";
-"facebook_tags_import" = "Please enable \\\"Import from Facebook\\\" option to use \\\"Facebook Tag Transfer\\\" feature";
+"facebook_tags_on" = "Bu özelliği aktif hale getirdiğinde Facebook’taki kişi etiketlerin lifebox’ta da gözükecek.";
+"facebook_tags_off" = "Bu özelliği aktif hale getirdiğinde Facebook’taki kişi etiketlerin lifebox’ta da gözükecek.";
+"facebook_tags_import" = "Facebook fotoğraf etiketlerinin lifebox’ta da gözükmesi için “Facebook’tan Taşı” özelliğini aktif hale getirmelisin.";
 "TermsOfUseLinkText" = "Tıklayın";
 "launch_campaign_card_detail" = "Detaylar";
 "launch_campaign_card_title" = "Prag Kampanyası";
 "launch_campaign_card_message" = "Prag seyahati lifebox’la seni bekliyor! Sen de hemen lifebox’ı keşfetmeye başla, çekilişle belirlenecek 10 şanslı çiftten biri ol!";
-"%d same contacts" = "";
+"%d same contacts" = "%d aynı kişi";

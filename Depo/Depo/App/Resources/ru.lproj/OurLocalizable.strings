@@ -645,7 +645,7 @@
 "facebook_photo_tags" = "Фотометки Facebook";
 "facebook_tags_on" = "После включения данной опции фотометки из Facebook будут проставлены на ваших фотографиях";
 "facebook_tags_off" = "После включения данной опции фотометки из Facebook будут проставлены на ваших фотографиях";
-"facebook_tags_import" = "Чтобы использовать функцию \\\"Фотометки Facebook\\\", пожалуйста, включите функцию \\\"Импортировать из Facebook\\\".";
+"facebook_tags_import" = "Чтобы использовать функцию \"Фотометки Facebook\", пожалуйста, включите функцию \"Импортировать из Facebook\".";
 "TermsOfUseLinkText" = "Нажмите";
 "launch_campaign_card_detail" = "Детали";
 "launch_campaign_card_title" = "Пражская кампания";
