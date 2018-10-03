@@ -155,6 +155,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private var lastPage: Int = 0
     
+    private let scrollBar = ScrollBarView()
+    
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
         super.init()
@@ -215,6 +217,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         compoundItems(pageItems: filteredItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] response in
             self?.insertItems(with: response, emptyItems: tempoEmptyItems, oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+            
         })
     }
     
@@ -240,6 +243,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     self.isLocalFilesRequested = false
                     self.delegate?.filesAppendedAndSorted()
                     self.isDropedData = false
+                    self.delegate?.getNextItems()
                 }
                 
             } else {
@@ -277,10 +281,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                 guard let `self` = self else {
                                     return
                                 }
+                                print("BATCH: \(!self.isPaginationDidEnd), \(self.isLocalPaginationOn), \(!self.isLocalFilesRequested)")
                                 if !self.isPaginationDidEnd,
                                     self.isLocalPaginationOn,
-                                    !self.isLocalFilesRequested,
-                                    array.count < self.pageCompounder.pageSize {
+                                    !self.isLocalFilesRequested {
                                     debugPrint("!!! TRY TO GET NEW PAGE")
                                     self.delegate?.getNextItems()
                                 }
@@ -700,6 +704,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         registerHeaders()
         registerFooters()
         registerCells()
+        
+        scrollBar.add(to: collectionView)
     }
     
     private func registerCells() {
@@ -1064,6 +1070,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             let headerText = getHeaderText(indexPath: indexPath)
             delegate?.didChangeTopHeader(text: headerText)
+            scrollBar.setText(headerText)
         }
     }
     
@@ -1179,32 +1186,32 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
-        let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
-        let isLastCell = Bool((countRow - 1) == indexPath.row)
-        
-        let oldSectionNumbers = numberOfSections(in: collectionView)
-        let containsEmptyMetaItems = !emptyMetaItems.isEmpty
-        
-        if isLastCell, isLastSection, !isPaginationDidEnd {
-            if pageLeftOvers.isEmpty, !isLocalFilesRequested {
-                delegate?.getNextItems()
-            } else if !pageLeftOvers.isEmpty, !isLocalFilesRequested {
-                debugPrint("!!! page compunding for page \(lastPage)")
-                
-                compoundItems(pageItems: [], pageNum: lastPage, complition: { [weak self] response in
-                    self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
-                    
-                })
-            }
-//            else {
+//        let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
+//        let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
+//        let isLastCell = Bool((countRow - 1) == indexPath.row)
+//        
+//        let oldSectionNumbers = numberOfSections(in: collectionView)
+//        let containsEmptyMetaItems = !emptyMetaItems.isEmpty
+//        
+//        if isLastCell, isLastSection, !isPaginationDidEnd {
+//            if pageLeftOvers.isEmpty, !isLocalFilesRequested {
 //                delegate?.getNextItems()
+//            } else if !pageLeftOvers.isEmpty, !isLocalFilesRequested {
+//                debugPrint("!!! page compunding for page \(lastPage)")
+//                
+//                compoundItems(pageItems: [], pageNum: lastPage, complition: { [weak self] response in
+//                    self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+//                    
+//                })
 //            }
-        } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
-            compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
-                self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
-            })
-        }
+////            else {
+////                delegate?.getNextItems()
+////            }
+//        } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
+//            compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
+//                self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+//            })
+//        }
         
         if let photoCell = cell_ as? CollectionViewCellForPhoto {
             let file = itemForIndexPath(indexPath: indexPath)
