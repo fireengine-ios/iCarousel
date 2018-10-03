@@ -96,7 +96,7 @@ public class MediaItem: NSManagedObject {
     }
     
     private func convertToMediaItems(syncStatuses: [String], context: NSManagedObjectContext) -> NSSet {
-        return  NSSet(array: syncStatuses.flatMap { MediaItemsObjectSyncStatus(userID: $0, context: context) })
+        return NSSet(array: syncStatuses.flatMap { MediaItemsObjectSyncStatus(userID: $0, context: context) })
     }
 
     var wrapedObject: WrapData {
@@ -110,16 +110,9 @@ public class MediaItem: NSManagedObject {
 
 //MARK: - relations
 extension MediaItem {
-    ///This staus setup only works when all remotes added beforehand
-//    private func getAllRelatedRemotes(wrapItem: WrapData, context: NSManagedObjectContext) -> [MediaItem] {
-//        let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
-//        request.predicate = getRelatedPredicate(item: wrapItem, locals: false)// NSPredicate(format: "isLocalItemValue == FALSE AND (trimmedLocalFileID == %@ OR md5Value == %@)", wrapItem.getTrimmedLocalID(), wrapItem.md5)
-//        let relatedRemotes = try? context.fetch(request)
-//        return relatedRemotes ?? []
-//    }
 
     private func getRelatedPredicate(item: WrapData, findRelatedLocals: Bool) -> NSPredicate {
-        return NSPredicate(format: "isLocalItemValue == \(findRelatedLocals) AND (trimmedLocalFileID == %@ OR md5Value == %@)", item.getTrimmedLocalID(), item.md5)
+        return NSPredicate(format: "isLocalItemValue == %@ AND (trimmedLocalFileID == %@ OR md5Value == %@)", NSNumber(value: findRelatedLocals), item.getTrimmedLocalID(), item.md5)
     }
     
     func getAllRelatedItems(wrapItem: WrapData, findRelatedLocals: Bool, context: NSManagedObjectContext)  -> [MediaItem] {

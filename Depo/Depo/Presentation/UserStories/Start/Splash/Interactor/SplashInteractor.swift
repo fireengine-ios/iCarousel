@@ -63,6 +63,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func turkcellSuccessLogin() {
+        CacheManager.shared.actualizeCache(completion: nil)
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
         DispatchQueue.toMain {
@@ -71,6 +72,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func successLogin() {
+        CacheManager.shared.actualizeCache(completion: nil)
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
         DispatchQueue.toMain {
