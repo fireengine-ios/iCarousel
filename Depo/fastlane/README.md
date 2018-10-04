@@ -15,40 +15,84 @@ Install _fastlane_ using
 or alternatively using `brew cask install fastlane`
 
 # Available Actions
-## iOS
-### ios beta_diawi
+### beta_jenkins
 ```
-fastlane ios beta_diawi
-```
-
-### ios beta_fabric
-```
-fastlane ios beta_fabric
+fastlane beta_jenkins
 ```
 
-### ios my_gym
+### beta_jenkins_preprod
 ```
-fastlane ios my_gym
+fastlane beta_jenkins_preprod
+```
+
+### beta_diawi
+```
+fastlane beta_diawi
+```
+
+### beta_fabric
+```
+fastlane beta_fabric
+```
+
+### beta_fabric_preprod
+```
+fastlane beta_fabric_preprod
+```
+
+### my_scan
+```
+fastlane my_scan
+```
+run tests
+### my_gym
+```
+fastlane my_gym
 ```
 Create ipa
-### ios diawi
+### diawi
 ```
-fastlane ios diawi
+fastlane diawi
 ```
 
-### ios fabric
+### fabric
 ```
-fastlane ios fabric
+fastlane fabric
 ```
 Distribute build via Fabric
-### ios slack_post
+### slack_post
 ```
-fastlane ios slack_post
+fastlane slack_post
 ```
 Post message to the #lifebox-ios-firengine slack channel
-### ios notify_about_completion
+### notify_about_completion
 ```
-fastlane ios notify_about_completion
+fastlane notify_about_completion
+```
+
+### poeditor_download
+```
+fastlane poeditor_download
+```
+
+### switch_to_preprod
+```
+fastlane switch_to_preprod
+```
+
+### switch_to_prod
+```
+fastlane switch_to_prod
+```
+
+### test_get_build_number
+```
+fastlane test_get_build_number
+```
+fastlane-plugin-versioning required. also it needs more time that my class
+### test_get_build_number_my
+```
+fastlane test_get_build_number_my
 ```
 
 

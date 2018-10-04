@@ -11,4 +11,6 @@ import Foundation
 protocol SyncContactsInteractorInput {
     func startOperation(operationType: SyncOperationType)
     func trackScreen()
+    func analyze()
+    func performOperation(forType type: SYNCMode)
 }

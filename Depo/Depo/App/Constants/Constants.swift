@@ -910,4 +910,8 @@ struct TextConstants {
     static let facebookTagsOn = NSLocalizedString("facebook_tags_on", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let facebookTagsOff = NSLocalizedString("facebook_tags_off", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let facebookTagsImport = NSLocalizedString("facebook_tags_import", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let launchCampaignCardDetail = NSLocalizedString("launch_campaign_card_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let launchCampaignCardTitle = NSLocalizedString("launch_campaign_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let launchCampaignCardMessage = NSLocalizedString("launch_campaign_card_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

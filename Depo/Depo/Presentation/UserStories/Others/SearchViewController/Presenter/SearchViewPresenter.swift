@@ -187,7 +187,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             openFaceImage(item: item)
         } else if item.fileType.isFaceImageAlbum || item.fileType == .photoAlbum {
             openAlbum(item: item)
-        } else if item.fileType.isUnSupportedOpenType {
+        } else if item.fileType.isSupportedOpenType {
             let sameTypeFiles = getSameTypeItems(item: item, items: data)
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles)
             moduleOutput?.previewSearchResultsHide()

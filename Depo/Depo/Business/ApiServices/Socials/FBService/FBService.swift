@@ -86,7 +86,7 @@ class FBService: BaseRequestService {
     private lazy var sessionManager: SessionManager = factory.resolve()
     
     func requestStatus(handler: @escaping ResponseBool) {
-        let url = RouteRequests.BaseUrl +/ RouteRequests.fbStatus
+        let url = RouteRequests.baseUrl +/ RouteRequests.fbStatus
         sessionManager
             .request(url)
             .customValidate()

@@ -47,6 +47,10 @@ class SingletonStorage {
         }
     }
     
+    var isTurkcellUser: Bool {
+        return accountInfo?.accountType == "TURKCELL"
+    }
+    
     var uniqueUserID: String {
         return accountInfo?.projectID ?? ""
     }
@@ -83,8 +87,17 @@ class SingletonStorage {
     }
     
     func getFaceImageSettingsStatus(success: @escaping (_ result: Bool) -> Void,
-                                     fail: @escaping (ErrorResponse) -> Void) {
-        
+                                     fail: @escaping (ErrorResponse) -> Void,
+                                     foreceReload: Bool = false) {
+        guard foreceReload || faceImageSettings == nil,
+        accountInfo != nil else {
+            if let faceImageSettingsUnwraped  = faceImageSettings {
+                success(faceImageSettingsUnwraped.allowed ?? false)
+            } else {
+                fail(.string(TextConstants.errorUnknown))
+            }
+            return
+        }
         getFaceImageRecognitionSettingsForUser(completion: { firStatus in
             guard let status = firStatus.allowed else {
                 fail(ErrorResponse.string(TextConstants.errorUnknown))
@@ -94,14 +107,25 @@ class SingletonStorage {
         }, fail: fail)
     }
     
-    var isFaceImageRecognitionON : Any {//Bool {
-            return faceImageSettings?.allowed ?? NSNull()
+    var isFaceImageRecognitionON : Any {
+        return faceImageSettings?.allowed ?? NSNull()
     }
     
     //MARK: - subscriptions
     
     func getActiveSubscriptionsList(success: @escaping (_ result: ActiveSubscriptionResponse) -> Void,
-                                    fail: @escaping (ErrorResponse) -> Void) {
+                                    fail: @escaping (ErrorResponse) -> Void,
+                                    foreceReload: Bool = false) {
+        
+        guard foreceReload || activeUserSubscription == nil,
+            accountInfo != nil else {
+            if let activeSubsUnwraped  = activeUserSubscription {
+                success(activeSubsUnwraped)
+            } else {
+                fail(.string(TextConstants.errorUnknown))
+            }
+            return
+        }
         SubscriptionsServiceIml().activeSubscriptions(
             success: { [weak self] response in
                 guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else { return }

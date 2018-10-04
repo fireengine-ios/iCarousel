@@ -56,4 +56,6 @@ typedef NS_ENUM(NSUInteger, AnalyzeStep) {
 + (ANALYZE_INSTANCETYPE) shared;
 + (void)handleNSError:(NSError*)error;
 - (void)reset;
+
+- (NSString*)resultTypeToString:(AnalyzeResultType) type;
 @end

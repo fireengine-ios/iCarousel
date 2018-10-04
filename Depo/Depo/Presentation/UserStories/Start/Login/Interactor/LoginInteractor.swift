@@ -85,7 +85,7 @@ class LoginInteractor: LoginInteractorInput {
             self.tokenStorage.isRememberMe = self.rememberMe
             self.analyticsService.track(event: .login)
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
-            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
+//            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
             DispatchQueue.main.async {
                 self.output?.succesLogin()
             }

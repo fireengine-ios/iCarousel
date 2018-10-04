@@ -75,6 +75,7 @@ class SyncServiceManager {
     }
     
     deinit {
+        reachabilityService?.stopNotifier()
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -113,6 +114,7 @@ class SyncServiceManager {
         let time = Date().timeIntervalSince1970
         if time - lastAutoSyncTime > timeIntervalBetweenSyncsInBackground {
             BackgroundTaskService.shared.beginBackgroundTask()
+            MenloworksEventsService.shared.onBackgroundSync()
             lastAutoSyncTime = time
             debugLog("Sync should start in background")
             checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
@@ -255,6 +257,7 @@ class SyncServiceManager {
 // MARK: - Notifications
 extension SyncServiceManager {
     private func subscribeForNotifications() {
+        
         guard LocalMediaStorage.default.photoLibraryIsAvailible(), !isSubscribeForNotifications else {
             return
         }

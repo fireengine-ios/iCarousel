@@ -90,7 +90,7 @@
                         <constraint firstAttribute="height" constant="56" id="zu0-BU-r1X"/>
                     </constraints>
                 </stackView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="There are 20 duplicated contacts." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgS-mi-6YC">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="There are 20 duplicated contacts." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgS-mi-6YC">
                     <rect key="frame" x="22" y="256" width="980" height="21.5"/>
                     <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="19"/>
                     <color key="textColor" red="0.38714492321014404" green="0.38746166229248047" blue="0.38719403743743896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

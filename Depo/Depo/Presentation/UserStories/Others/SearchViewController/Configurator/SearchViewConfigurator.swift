@@ -62,6 +62,6 @@ class SearchViewConfigurator {
         viewController.output = presenter
         
         viewController.needShowTabBar = false
-        viewController.floatingButtonsArray = [.floatingButtonTakeAPhoto, .floatingButtonCreateAStory]
+        viewController.floatingButtonsArray = [.takePhoto, .createAStory]
     }
 }

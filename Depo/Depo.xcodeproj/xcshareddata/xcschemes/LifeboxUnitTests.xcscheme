@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0900"
+   LastUpgradeVersion = "0940"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -9,14 +9,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CE51AAF51EF90853005DCEE0"
-               BuildableName = "lifebox.app"
-               BlueprintName = "Depo_LifeTech"
+               BlueprintIdentifier = "CEBA093F214BCC63007A0CE3"
+               BuildableName = "LifeboxUnitTests.xctest"
+               BlueprintName = "LifeboxUnitTests"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,22 +32,13 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CE79E4A41F695DA200C1F151"
-               BuildableName = "Depo_LifeTechUITests.xctest"
-               BlueprintName = "Depo_LifeTechUITests"
+               BlueprintIdentifier = "CEBA093F214BCC63007A0CE3"
+               BuildableName = "LifeboxUnitTests.xctest"
+               BlueprintName = "LifeboxUnitTests"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE51AAF51EF90853005DCEE0"
-            BuildableName = "lifebox.app"
-            BlueprintName = "Depo_LifeTech"
-            ReferencedContainer = "container:Depo.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -61,33 +52,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE51AAF51EF90853005DCEE0"
-            BuildableName = "lifebox.app"
-            BlueprintName = "Depo_LifeTech"
+            BlueprintIdentifier = "CEBA093F214BCC63007A0CE3"
+            BuildableName = "LifeboxUnitTests.xctest"
+            BlueprintName = "LifeboxUnitTests"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-FIRAnalyticsDebugEnabled"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-FIRDebugEnabled"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "OS_ACTIVITY_MODE"
-            value = "disable"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -97,16 +70,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE51AAF51EF90853005DCEE0"
-            BuildableName = "lifebox.app"
-            BlueprintName = "Depo_LifeTech"
+            BlueprintIdentifier = "CEBA093F214BCC63007A0CE3"
+            BuildableName = "LifeboxUnitTests.xctest"
+            BlueprintName = "LifeboxUnitTests"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -11,7 +11,7 @@ import Foundation
 class ActivityTimelineParameters: BaseRequestParametrs {
     
     private struct ActivityTimelinePath {
-        static let pagedGet = "/api/filesystem/activityFeed?sortBy=%@&sortOrder=%@&page=%d&size=%d"
+        static let pagedGet = "filesystem/activityFeed?sortBy=%@&sortOrder=%@&page=%d&size=%d"
     }
     
     let sortBy: SortType

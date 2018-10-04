@@ -34,7 +34,8 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.20.0.45</string>
+	<string>2.2.11
+</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -85,7 +86,28 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
+			<key>http://adepotest.turkcell.com.tr</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
+			</dict>
+			<key>http://cropyioslifebox.com</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
+			</dict>
 			<key>http://curio.turkcell.com.tr/api/v2</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
+			</dict>
+			<key>http://tcloudstb.turkcell.com.tr</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<string>YES</string>
@@ -171,6 +193,55 @@
 				</array>
 				<key>public.mime-type</key>
 				<string>image/heic</string>
+			</dict>
+		</dict>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>.usdz</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>augument reality object</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>model/vnd.pixar.usd</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<string>USDZ</string>
+				<key>public.filename-extension</key>
+				<array>
+					<string>.usdz</string>
+				</array>
+				<key>public.mime-type</key>
+				<string>model/vnd.pixar.usd</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>usdz</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>augument reality object</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>model/usd</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<string>USDZ</string>
+				<key>public.filename-extension</key>
+				<array>
+					<string>usdz</string>
+				</array>
+				<key>public.mime-type</key>
+				<string>model/usd</string>
 			</dict>
 		</dict>
 	</array>

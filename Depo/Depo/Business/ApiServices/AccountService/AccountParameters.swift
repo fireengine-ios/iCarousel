@@ -9,7 +9,7 @@
 import Foundation
 
 struct AccountPath {
-    static let accountBase = "/api/account/"
+    static let accountBase = "account/"
     
     static let info = accountBase + "info"
     static let quota = accountBase + "quotaInfo"
@@ -23,7 +23,7 @@ struct AccountPath {
     static let updateUserEmail = accountBase + "email"
     static let updatePhoneNumber = accountBase + "updatePhoneNumber"
     static let verifyPhoneNumber = accountBase + "verifyPhoneNumberToUpdate"
-    static let securitySettings = "/api/auth/settings"
+    static let securitySettings = "auth/settings"
     static let faceImageAllowed = accountBase + "setting/faceImageAllowed"
     
     static let updateLanguage = accountBase + "language"

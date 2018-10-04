@@ -59,7 +59,7 @@ final class ThingsService: BaseRequestService {
 //    override var patch: URL {
 //        let searchWithParam = String(format: RouteRequests.things)
 //        
-//        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
+//        return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
 //    }
 //}
 
@@ -105,7 +105,7 @@ final class ThingsAlbumParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.thingsAlbum, id)
-        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }
 
@@ -120,7 +120,7 @@ final class ThingsPageParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.thingsPage, pageSize, pageNumber)
-        return URL(string: searchWithParam, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }
 

@@ -43,21 +43,22 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 self.analyticsService.logScreen(screen: .contactSyncBackUp)
                 self.analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
                 self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .phonebook, eventLabel: .phoneBookBackUp)
+                self.contactsSyncService.cancelAnalyze()
                 self.performOperation(forType: .backup)
             case .restore:
                 self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .phonebook, eventLabel: .phoneRestore)
                 MenloworksAppEvents.onContactDownloaded()
+                self.contactsSyncService.cancelAnalyze()
                 self.performOperation(forType: .restore)
             case .cancel:
-                self.contactsSyncService.cancel()
+                self.contactsSyncService.cancelAnalyze()
                 self.output?.cancelSuccess()
             case .getBackUpStatus:
                 self.loadLastBackUp()
             case .analyze:
+                self.contactsSyncService.cancelAnalyze()
                 self.analyze()
             case .deleteDuplicated:
-                self.analyticsService.logScreen(screen: .contacSyncDeleteDuplicates)
-                self.analyticsService.trackDimentionsEveryClickGA(screen: .contacSyncDeleteDuplicates)
                 self.deleteDuplicated()
             }
             
@@ -120,7 +121,8 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         })
     }
     
-    private func analyze() {
+    func analyze() {
+        output?.showProggress(progress: 0, count: 0, forOperation: .analyze)
         contactsSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
             DispatchQueue.main.async {
                 self?.output?.showProggress(progress: progressPercentage, count: count, forOperation: type)
