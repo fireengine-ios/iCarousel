@@ -2522,6 +2522,22 @@
 		8C449D2F216638310060785C /* UICollectionView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449C86216632950060785C /* UICollectionView+Layout.swift */; };
 		8C449D30216638500060785C /* Error+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449C4C216632950060785C /* Error+Alamofire.swift */; };
 		8C449D31216638590060785C /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449C80216632950060785C /* String+Subscript.swift */; };
+		8C449D3521663AAF0060785C /* NSManagedObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D3221663AAA0060785C /* NSManagedObject+Extensions.swift */; };
+		8C449D3621663AAF0060785C /* NSManagedObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D3221663AAA0060785C /* NSManagedObject+Extensions.swift */; };
+		8C449D3721663AAF0060785C /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D3321663AAA0060785C /* NSManagedObjectContext+Extensions.swift */; };
+		8C449D3821663AAF0060785C /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D3321663AAA0060785C /* NSManagedObjectContext+Extensions.swift */; };
+		8C449D3921663AAF0060785C /* NSPersistentStoreCoordinator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D3421663AAC0060785C /* NSPersistentStoreCoordinator+Extensions.swift */; };
+		8C449D3A21663AAF0060785C /* NSPersistentStoreCoordinator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D3421663AAC0060785C /* NSPersistentStoreCoordinator+Extensions.swift */; };
+		8C449D3C21663B0F0060785C /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D3B21663B0E0060785C /* CacheManager.swift */; };
+		8C449D3D21663B0F0060785C /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D3B21663B0E0060785C /* CacheManager.swift */; };
+		8C449D4221663B8A0060785C /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D4021663B890060785C /* PrepareQuickScroll.swift */; };
+		8C449D4321663B8A0060785C /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D4021663B890060785C /* PrepareQuickScroll.swift */; };
+		8C449D4421663B8A0060785C /* PrepareQuickScroll.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D4121663B890060785C /* PrepareQuickScroll.xib */; };
+		8C449D4521663B8A0060785C /* PrepareQuickScroll.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D4121663B890060785C /* PrepareQuickScroll.xib */; };
+		8C449D4921663CA10060785C /* QuickScrollService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D4721663CA00060785C /* QuickScrollService.swift */; };
+		8C449D4A21663CA10060785C /* QuickScrollService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D4721663CA00060785C /* QuickScrollService.swift */; };
+		8C449D4B21663CA10060785C /* QuickScrollItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D4821663CA00060785C /* QuickScrollItems.swift */; };
+		8C449D4C21663CA10060785C /* QuickScrollItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449D4821663CA00060785C /* QuickScrollItems.swift */; };
 		8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */; };
 		8C4E8D041FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */; };
 		8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54083E1F61C03B00D4717A /* GridListTopBar.swift */; };
@@ -5031,6 +5047,14 @@
 		8C449C8B216632950060785C /* Equatable+Contains.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Equatable+Contains.swift"; sourceTree = "<group>"; };
 		8C449C8C216632950060785C /* InfinityRotater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfinityRotater.swift; sourceTree = "<group>"; };
 		8C449C8D216632950060785C /* UIImage+JPEG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+JPEG.swift"; sourceTree = "<group>"; };
+		8C449D3221663AAA0060785C /* NSManagedObject+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extensions.swift"; sourceTree = "<group>"; };
+		8C449D3321663AAA0060785C /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
+		8C449D3421663AAC0060785C /* NSPersistentStoreCoordinator+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPersistentStoreCoordinator+Extensions.swift"; sourceTree = "<group>"; };
+		8C449D3B21663B0E0060785C /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		8C449D4021663B890060785C /* PrepareQuickScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrepareQuickScroll.swift; sourceTree = "<group>"; };
+		8C449D4121663B890060785C /* PrepareQuickScroll.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrepareQuickScroll.xib; sourceTree = "<group>"; };
+		8C449D4721663CA00060785C /* QuickScrollService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickScrollService.swift; sourceTree = "<group>"; };
+		8C449D4821663CA00060785C /* QuickScrollItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickScrollItems.swift; sourceTree = "<group>"; };
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
 		8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewSwitchCell.swift; sourceTree = "<group>"; };
 		8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewSwitchCell.xib; sourceTree = "<group>"; };
@@ -8082,6 +8106,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8C449D4621663CA00060785C /* QuickScrollService */,
 				486F7B55208D10A8009EB73F /* PeriodicContactSyncDataStorage */,
 				98B01C74206BCD4A00DD78C7 /* AnalyticsService */,
 				9808A05C206A88090022376D /* PushNotificationService */,
@@ -8338,6 +8363,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				8C449D3F21663B890060785C /* PrepareToQuickScroll */,
 				7CD92DB6207509F000010BFA /* AnimationCard */,
 				7C84920F201CB8EF007C502A /* LatestUploads */,
 				7C4F60AE201C65E90033C58F /* MovieCard */,
@@ -9561,6 +9587,34 @@
 				8C449C84216632950060785C /* BasePresentor.swift */,
 			);
 			path = BasePresentor;
+			sourceTree = "<group>";
+		};
+		8C449D3E21663B190060785C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8C449D3221663AAA0060785C /* NSManagedObject+Extensions.swift */,
+				8C449D3321663AAA0060785C /* NSManagedObjectContext+Extensions.swift */,
+				8C449D3421663AAC0060785C /* NSPersistentStoreCoordinator+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8C449D3F21663B890060785C /* PrepareToQuickScroll */ = {
+			isa = PBXGroup;
+			children = (
+				8C449D4021663B890060785C /* PrepareQuickScroll.swift */,
+				8C449D4121663B890060785C /* PrepareQuickScroll.xib */,
+			);
+			path = PrepareToQuickScroll;
+			sourceTree = "<group>";
+		};
+		8C449D4621663CA00060785C /* QuickScrollService */ = {
+			isa = PBXGroup;
+			children = (
+				8C449D4721663CA00060785C /* QuickScrollService.swift */,
+				8C449D4821663CA00060785C /* QuickScrollItems.swift */,
+			);
+			path = QuickScrollService;
 			sourceTree = "<group>";
 		};
 		8C54083D1F61C00400D4717A /* TopBar */ = {
@@ -10849,6 +10903,8 @@
 		CE3AA9831F4D648C000157AF /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				8C449D3E21663B190060785C /* Extensions */,
+				8C449D3B21663B0E0060785C /* CacheManager.swift */,
 				CECA33191F73DA660093CB3C /* CollectionSortingRules.swift */,
 				CEE1D1EE1F714DEA0008F4CF /* PredicateRules.swift */,
 				8C449C072166258A0060785C /* MediaItemOperationsService.swift */,
@@ -12758,6 +12814,7 @@
 				8C0E90171FDEBDFF00789C91 /* SyncContactsViewController.xib in Resources */,
 				8C0E90181FDEBDFF00789C91 /* CollectionViewCellForController.xib in Resources */,
 				8C06AFF52008AD71003D8E05 /* kirmizi@3x.png in Resources */,
+				8C449D4521663B8A0060785C /* PrepareQuickScroll.xib in Resources */,
 				8C06B14B2008AD72003D8E05 /* target_secili@3x.png in Resources */,
 				8C0E90191FDEBDFF00789C91 /* LoginPhoneMailCell.xib in Resources */,
 				8C06B0712008AD71003D8E05 /* paylas_fb.png in Resources */,
@@ -13374,6 +13431,7 @@
 				8C06AFD02008AD71003D8E05 /* info_icon@3x.png in Resources */,
 				8C06B0B02008AD71003D8E05 /* rotate.png in Resources */,
 				8C06AF942008AD71003D8E05 /* filtre@3x.png in Resources */,
+				8C449D4421663B8A0060785C /* PrepareQuickScroll.xib in Resources */,
 				7CEEC1BD1F3326C900BD433F /* CreateStoryPhotosOrderViewController.xib in Resources */,
 				8C06AF0C2008AD70003D8E05 /* checkbox@2x.png in Resources */,
 				78E8E2A82023186C00A979AB /* FaceImagePhotosViewController.xib in Resources */,
@@ -14514,6 +14572,7 @@
 				8C0E8D191FDEBDFF00789C91 /* InfoButtonCellProtocol.swift in Sources */,
 				8C0E8D1A1FDEBDFF00789C91 /* Mail.swift in Sources */,
 				4A56D5CE202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */,
+				8C449D3D21663B0F0060785C /* CacheManager.swift in Sources */,
 				8C0E8D1D1FDEBDFF00789C91 /* LoginRouterInput.swift in Sources */,
 				98B01C7A206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */,
 				8C0E8D1E1FDEBDFF00789C91 /* AlbumDetailResponce.swift in Sources */,
@@ -14718,6 +14777,7 @@
 				8C0E8DC91FDEBDFF00789C91 /* WhiteButtonWithRoundedCorner.swift in Sources */,
 				8C0E8DCA1FDEBDFF00789C91 /* AlbumService.swift in Sources */,
 				8C0E8DCB1FDEBDFF00789C91 /* TermsAndServicesViewOutput.swift in Sources */,
+				8C449D3621663AAF0060785C /* NSManagedObject+Extensions.swift in Sources */,
 				8C449C9D216632950060785C /* UIApplication+Settings.swift in Sources */,
 				8C0E8DCC1FDEBDFF00789C91 /* ImportPhotosConfigurator.swift in Sources */,
 				8C0E8DCD1FDEBDFF00789C91 /* PackagesInteractorOutput.swift in Sources */,
@@ -14851,6 +14911,7 @@
 				8C0E8E261FDEBDFF00789C91 /* CreateStoryNamePresenter.swift in Sources */,
 				8C0E8E271FDEBDFF00789C91 /* ForgotPasswordInteractorInput.swift in Sources */,
 				8C0E8E281FDEBDFF00789C91 /* ForgotPasswordInteractorOutput.swift in Sources */,
+				8C449D3821663AAF0060785C /* NSManagedObjectContext+Extensions.swift in Sources */,
 				8C0E8E291FDEBDFF00789C91 /* AutoSyncViewOutput.swift in Sources */,
 				8C449C222166282B0060785C /* PhotoVideoDataSource.swift in Sources */,
 				8C0E8E2A1FDEBDFF00789C91 /* ImportFromInstagramInteractor.swift in Sources */,
@@ -14863,6 +14924,7 @@
 				8C0E8E2F1FDEBDFF00789C91 /* ActivityTimelineServiceResponse.swift in Sources */,
 				8C0E8E311FDEBDFF00789C91 /* ImportFromInstagramPresenter.swift in Sources */,
 				9840C62620AEAD8100A8634F /* CheckBoxView.swift in Sources */,
+				8C449D4321663B8A0060785C /* PrepareQuickScroll.swift in Sources */,
 				8C0E8E321FDEBDFF00789C91 /* UsageInfoInteractorOutput.swift in Sources */,
 				8C0E8E331FDEBDFF00789C91 /* SyncServiceManager.swift in Sources */,
 				8C0E8E341FDEBDFF00789C91 /* UploadFromLifeBoxViewController.swift in Sources */,
@@ -14932,6 +14994,7 @@
 				8C0E8E8E1FDEBDFF00789C91 /* CreateStoryNameInteractor.swift in Sources */,
 				8C0E8E8F1FDEBDFF00789C91 /* CustomErrors.swift in Sources */,
 				8C449CF1216632960060785C /* FirstResponder.swift in Sources */,
+				8C449D3A21663AAF0060785C /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
 				8C0E8E921FDEBDFF00789C91 /* CircleYellowButton.swift in Sources */,
 				4A56D5B0202AF51D003A4624 /* FaceImageAddNameViewController.swift in Sources */,
 				4A0AC1512087378F00032CC7 /* PeriodicContactSyncInteractorInput.swift in Sources */,
@@ -15262,7 +15325,9 @@
 				8C0B91A220170E7B00A5BA81 /* ManageContactTableViewCell.swift in Sources */,
 				8C0E8F8C1FDEBDFF00789C91 /* GridListTopBarSortingTableCell.swift in Sources */,
 				B56B97B5212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */,
+				8C449D4C21663CA10060785C /* QuickScrollItems.swift in Sources */,
 				8C0E8F8D1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */,
+				8C449D4A21663CA10060785C /* QuickScrollService.swift in Sources */,
 				8C0E8F8E1FDEBDFF00789C91 /* DropboxStatusValue.swift in Sources */,
 				8C0E8F8F1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				8C0E8F901FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
@@ -15688,6 +15753,7 @@
 				CE51AC041EF90853005DCEE0 /* CountiesGSMCodeCompositor.swift in Sources */,
 				CEAE3FB31EFD4F0D00A405B2 /* HomePageInteractorInput.swift in Sources */,
 				CEAE3FD61EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.swift in Sources */,
+				8C449D3C21663B0F0060785C /* CacheManager.swift in Sources */,
 				7C1F89921F70FFDF00740177 /* ViewForPopUp.swift in Sources */,
 				7C66E8AE1F979C3300D98F27 /* CreateStoryPreviewPresenter.swift in Sources */,
 				CE6DE7561FCBE84100C23CBD /* InstagramParametrs.swift in Sources */,
@@ -15892,6 +15958,7 @@
 				78E3D51C204006FA00FA3478 /* MenloworksTagsConstants.swift in Sources */,
 				7C66E8B21F979C3300D98F27 /* CreateStoryPreviewViewIO.swift in Sources */,
 				CEAE3F981EFD4E6900A405B2 /* WhiteButtonWithRoundedCorner.swift in Sources */,
+				8C449D3521663AAF0060785C /* NSManagedObject+Extensions.swift in Sources */,
 				8C449C9C216632950060785C /* UIApplication+Settings.swift in Sources */,
 				7CBF50241F44723D00D67BF3 /* AlbumService.swift in Sources */,
 				CE51ACD11EF90853005DCEE0 /* TermsAndServicesViewOutput.swift in Sources */,
@@ -16025,6 +16092,7 @@
 				8C449C212166282B0060785C /* PhotoVideoDataSource.swift in Sources */,
 				7C6E2F941F31E4F800536DB6 /* CreateStoryNamePresenter.swift in Sources */,
 				8C449C3D2166282B0060785C /* SegmentedController.swift in Sources */,
+				8C449D3721663AAF0060785C /* NSManagedObjectContext+Extensions.swift in Sources */,
 				CE51ACFB1EF90853005DCEE0 /* ForgotPasswordInteractorInput.swift in Sources */,
 				CE51ACFC1EF90853005DCEE0 /* ForgotPasswordInteractorOutput.swift in Sources */,
 				CE51ACFD1EF90853005DCEE0 /* AutoSyncViewOutput.swift in Sources */,
@@ -16037,6 +16105,7 @@
 				2BA37C342028379400660394 /* FaceImageChangeCoverPresenter.swift in Sources */,
 				8C6EF8841F348B5C002AC795 /* BottomSelectionTabBarViewOutput.swift in Sources */,
 				7CA4A176207F3F7E00F270C8 /* CustomCheckBox.swift in Sources */,
+				8C449D4221663B8A0060785C /* PrepareQuickScroll.swift in Sources */,
 				98C878262074E1C100374177 /* NavigationController.swift in Sources */,
 				CE8F44E81F6AB5CB0062C2E0 /* ActivityTimelineServiceResponse.swift in Sources */,
 				CEF0C2841FC5493200105C31 /* ImportFromInstagramPresenter.swift in Sources */,
@@ -16106,6 +16175,7 @@
 				CE6DE7531FCBE84100C23CBD /* DropboxParametrs.swift in Sources */,
 				7C6E2F901F31E4F800536DB6 /* CreateStoryNameInteractor.swift in Sources */,
 				8C449CF0216632960060785C /* FirstResponder.swift in Sources */,
+				8C449D3921663AAF0060785C /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
 				CEF69DE31FB585E800FCE6AB /* CustomErrors.swift in Sources */,
 				7C7ED4DD1F84C8C400DC5D33 /* CircleYellowButton.swift in Sources */,
 				FA475ACC203EAFB9008D79C2 /* PushPopAnimator.swift in Sources */,
@@ -16436,7 +16506,9 @@
 				4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				016636E0593FCDC66B6F5CD0 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
 				7C6945E820039F4A00152344 /* FreeAppSpaceInteractor.swift in Sources */,
+				8C449D4B21663CA10060785C /* QuickScrollItems.swift in Sources */,
 				CE95ED4C1F516736002F923A /* HelpAndSupportInitializer.swift in Sources */,
+				8C449D4921663CA10060785C /* QuickScrollService.swift in Sources */,
 				F7482D621455E6693DAF8873 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				07BD09833626CA46F3CE945C /* LBAlbumLikePreviewSliderRouter.swift in Sources */,
 				8C0097121F6BDA5000FA069C /* MoreFilesActionsInteractorInput.swift in Sources */,
