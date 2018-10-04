@@ -5115,6 +5115,7 @@
 		8CBA3E9D1EF6C79500072983 /* RegistrationUserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationUserInfoModel.swift; sourceTree = "<group>"; };
 		8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
 		8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
+		8CCFF3C821664B80002A923D /* LifeBoxModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "LifeBoxModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		8CD7D8E8211193C00019B4F3 /* GoogleService-Info-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-debug.plist"; sourceTree = "<group>"; };
 		8CD7D8F521119BB10019B4F3 /* container */ = {isa = PBXFileReference; lastKnownFileType = folder; path = container; sourceTree = "<group>"; };
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
@@ -18503,9 +18504,10 @@
 		CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				8CCFF3C821664B80002A923D /* LifeBoxModel 2.xcdatamodel */,
 				CE3AA9C21F4D860F000157AF /* LifeBoxModel.xcdatamodel */,
 			);
-			currentVersion = CE3AA9C21F4D860F000157AF /* LifeBoxModel.xcdatamodel */;
+			currentVersion = 8CCFF3C821664B80002A923D /* LifeBoxModel 2.xcdatamodel */;
 			path = LifeBoxModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
