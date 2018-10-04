@@ -111,6 +111,12 @@ struct RouteRequests {
     static let unifiedSearchWithoutCategory = "search/unified?text=%@&page=%@&size=%@"
     static let suggestion    = "search/unified/suggest?text=%@"
     
+    // MARK: - Quick Scroll
+    
+    static let quickScrollGroups = "scroll/groups"
+    static let quickScrollGroupsList = "scroll/groups/list"
+    static let quickScrollRangeList = "scroll/range/list"
+    
     // MARK: Album
     
     static let albumList    = "album?contentType=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@"

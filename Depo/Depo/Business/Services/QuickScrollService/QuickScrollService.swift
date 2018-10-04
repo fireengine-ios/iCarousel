@@ -25,7 +25,7 @@ final class QuickScrollService {
     }
     
     func requestGroups(handler: @escaping ResponseArrayHandler<QuickScrollGroupItem>) {
-        guard let requestURL = URL(string: RouteRequests.quickScrollGroups, relativeTo: RouteRequests.BaseUrl) else {
+        guard let requestURL = URL(string: RouteRequests.quickScrollGroups, relativeTo: RouteRequests.baseUrl) else {
             handler(ResponseResult.failed(CustomErrors.unknown))
             return
         }
@@ -45,7 +45,7 @@ final class QuickScrollService {
     }
     
     func requestListOfGroups(reuststListGroupItems: [GroupsListRequestItem], handler: @escaping ResponseArrayHandler<QuickScrollGroupsListItem>) {
-        guard let requestURL = URL(string: RouteRequests.quickScrollGroupsList, relativeTo: RouteRequests.BaseUrl) else {
+        guard let requestURL = URL(string: RouteRequests.quickScrollGroupsList, relativeTo: RouteRequests.baseUrl) else {
             handler(ResponseResult.failed(CustomErrors.unknown))
             return
         }
@@ -77,7 +77,7 @@ final class QuickScrollService {
                                 category: QuickScrollCategory, pageSize: Int,
                                 handler: @escaping ResponseHandler<QuickScrollRangeListItem>) {
         
-        guard let requestURL = URL(string: RouteRequests.quickScrollRangeList, relativeTo: RouteRequests.BaseUrl) else {
+        guard let requestURL = URL(string: RouteRequests.quickScrollRangeList, relativeTo: RouteRequests.baseUrl) else {
             handler(ResponseResult.failed(CustomErrors.unknown))
             return
         }

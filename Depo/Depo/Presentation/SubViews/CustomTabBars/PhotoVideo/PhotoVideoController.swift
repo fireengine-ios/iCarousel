@@ -58,11 +58,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         navBarManager.setDefaultMode()
         
         needShowTabBar = true
-        floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto,
-                                                 .floatingButtonUpload,
-                                                 .floatingButtonCreateAStory,
-                                                 .floatingButtonCreateAlbum])
-        
+        floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto])
+//        .floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonCreateAlbum
         ItemOperationManager.default.startUpdateView(view: self)
         
         performFetch()
