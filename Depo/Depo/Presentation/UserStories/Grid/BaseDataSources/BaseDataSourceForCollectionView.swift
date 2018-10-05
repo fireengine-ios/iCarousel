@@ -120,13 +120,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var isHeaderless = false
     
     private var isLocalPaginationOn = false // ---------------------=======
-    private var isLocalFilesRequested = false // -----------------------=========
+    var isLocalFilesRequested = false // -----------------------=========
     private var isDropedData = true
     
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
     private var pageLeftOvers = [WrapData]()
-    private var emptyMetaItems = [WrapData]()
+    var emptyMetaItems = [WrapData]()
     
     private var uploadedObjectID = [String]()
     private var uploadToAlbumItems = [String]()
@@ -243,7 +243,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     self.isLocalFilesRequested = false
                     self.delegate?.filesAppendedAndSorted()
                     self.isDropedData = false
-                    self.delegate?.getNextItems()
+//                    self.delegate?.getNextItems()
                 }
                 
             } else {
@@ -284,7 +284,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                 print("BATCH: \(!self.isPaginationDidEnd), \(self.isLocalPaginationOn), \(!self.isLocalFilesRequested)")
                                 if !self.isPaginationDidEnd,
                                     self.isLocalPaginationOn,
-                                    !self.isLocalFilesRequested {
+                                    !self.isLocalFilesRequested {// array.count < self.pageCompounder.pageSize {
                                     debugPrint("!!! TRY TO GET NEW PAGE")
                                     self.delegate?.getNextItems()
                                 }
@@ -1186,32 +1186,32 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-//        let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
-//        let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
-//        let isLastCell = Bool((countRow - 1) == indexPath.row)
-//        
-//        let oldSectionNumbers = numberOfSections(in: collectionView)
-//        let containsEmptyMetaItems = !emptyMetaItems.isEmpty
-//        
-//        if isLastCell, isLastSection, !isPaginationDidEnd {
-//            if pageLeftOvers.isEmpty, !isLocalFilesRequested {
+        let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
+        let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
+        let isLastCell = Bool((countRow - 1) == indexPath.row)
+        
+        let oldSectionNumbers = numberOfSections(in: collectionView)
+        let containsEmptyMetaItems = !emptyMetaItems.isEmpty
+        
+        if isLastCell, isLastSection, !isPaginationDidEnd {
+            if pageLeftOvers.isEmpty, !isLocalFilesRequested {
+                delegate?.getNextItems()
+            } else if !pageLeftOvers.isEmpty, !isLocalFilesRequested {
+                debugPrint("!!! page compunding for page \(lastPage)")
+                
+                compoundItems(pageItems: [], pageNum: lastPage, complition: { [weak self] response in
+                    self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+                    
+                })
+            }
+//            else {
 //                delegate?.getNextItems()
-//            } else if !pageLeftOvers.isEmpty, !isLocalFilesRequested {
-//                debugPrint("!!! page compunding for page \(lastPage)")
-//                
-//                compoundItems(pageItems: [], pageNum: lastPage, complition: { [weak self] response in
-//                    self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
-//                    
-//                })
 //            }
-////            else {
-////                delegate?.getNextItems()
-////            }
-//        } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
-//            compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
-//                self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
-//            })
-//        }
+        } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
+            compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
+                self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+            })
+        }
         
         if let photoCell = cell_ as? CollectionViewCellForPhoto {
             let file = itemForIndexPath(indexPath: indexPath)

@@ -51,7 +51,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private let semaphore = DispatchSemaphore(value: 0)
     
-    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreed)
+    let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreed)
     
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
@@ -162,7 +162,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         //        uploadData()
     }
     
-    private func getFileFilter() -> FieldValue {
+    func getFileFilter() -> FieldValue {
         for type in self.filters {
             switch type {
             case .fileType(let type):
@@ -310,7 +310,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return dataSource.isSelectionStateActive
     }
     
-    @objc private func updateThreeDots(_ sender: Any) {
+    @objc func updateThreeDots(_ sender: Any) {
         DispatchQueue.main.async {
             self.updateThreeDotsButton()
         }
@@ -441,7 +441,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     // MARK: - UnderNavBarBar/TopBar
     
-    private func setupTopBar() {
+    func setupTopBar() {
         guard let unwrapedConfig = topBarConfig else {
             return
         }
