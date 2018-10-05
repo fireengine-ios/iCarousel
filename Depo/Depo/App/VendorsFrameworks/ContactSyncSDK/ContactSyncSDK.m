@@ -393,6 +393,31 @@
     NSInteger finalCount = [[ContactUtil shared] getContactCount];
     SYNC_Log(@"Final Contact count => %ld", (long)finalCount);
 
+    NSMutableArray *localContacts = [[ContactUtil shared] fetchLocalContacts];
+    NSInteger finalLocalCount = [localContacts count];
+    SYNC_Log(@"Final Local Contact count => %ld", (long)finalLocalCount);
+    
+    NSString *errorCode = nil;
+    for (id item in messages)
+    {
+        errorCode = item[@"code"];
+    }
+    
+    if (result != CANCELLED){
+        NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+        NSString *intervalString = [NSString stringWithFormat:@"%f", timeStamp];
+        NSString *key = [[NSString alloc] initWithFormat:@"%@-%@", intervalString, self.deviceId];
+        [SyncAdapter sendStats:key start:self.initialContactCount
+                        result:finalLocalCount
+                       created:0
+                       updated:[self.mergeMap count]
+                       deleted:[self.willDelete count]
+                        status: (result == SUCCESS ? 1 : 0)
+                     errorCode: errorCode
+                      errorMsg: (result == SUCCESS ? nil : [[AnalyzeStatus shared] resultTypeToString:result])
+                     operation: @"ANALYZE"];
+    }
+    
     [[SyncLogger shared] stopLogging];
 
 }

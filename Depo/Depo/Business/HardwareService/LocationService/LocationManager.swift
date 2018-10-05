@@ -131,8 +131,10 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             return
         }
         
-        SyncServiceManager.shared.updateInBackground()
-    }
+        if UIApplication.shared.applicationState == .background {
+            SyncServiceManager.shared.updateInBackground()
+        }
+    }   
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         debugLog("LocationManager didFailWithError: \(error.localizedDescription)")

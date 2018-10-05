@@ -65,4 +65,5 @@ struct MenloworksEventsConstants {
     static let sharedItemFormat = "Share>%@>%@"
     static let profileNameEmpty = "profile_name_empty"
     static let profileNameFull = "profile_name_full"
+    static let backgroundSync = "BackgroundSync"
 }

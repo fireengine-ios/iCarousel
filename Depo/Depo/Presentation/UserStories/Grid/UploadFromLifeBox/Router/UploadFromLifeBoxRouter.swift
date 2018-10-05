@@ -18,3 +18,16 @@ extension UploadFromLifeBoxRouter: UploadFromLifeBoxRouterInput {
         nController.pushViewController(viewController, animated: true)
     }
 }
+
+class UploadFromLifeBoxRouterFavorites: BaseFilesGreedRouter {
+    
+}
+
+// MARK: UploadFromLifeBoxRouterInput
+extension UploadFromLifeBoxRouterFavorites: UploadFromLifeBoxRouterInput {
+    
+    func goToFolder(destinationFolderUUID: String, outputFolderUUID: String, nController: UINavigationController) {
+        let viewController = RouterVC().uploadFromLifeBoxFavorites(folderUUID: destinationFolderUUID, soorceUUID: outputFolderUUID, sortRule: presenter.sortedRule, isPhotoVideoOnly: false)
+        nController.pushViewController(viewController, animated: true)
+    }
+}

@@ -138,8 +138,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugLog("BaseFilesGreedPresenter onStartCreatingPhotoAndVideos")
 
         let service = interactor.getRemoteItemsService()
-        if service is AllFilesService ||
-            service is FavouritesService ||
+        
+        if service is FavouritesService {
+            let router = RouterVC()
+            let parentFolder = router.getParentUUID()
+            let viewController = router.uploadFromLifeBoxFavorites(folderUUID: parentFolder, soorceUUID: "", sortRule: .timeUp, isPhotoVideoOnly: true)
+            let navigation = NavigationController(rootViewController: viewController)
+            navigation.navigationBar.isHidden = false
+            router.presentViewController(controller: navigation)
+            
+        } else if service is AllFilesService ||
             service is PhotoAndVideoService ||
             service is ThingsItemsService ||
             service is PlacesItemsService ||
@@ -326,7 +334,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             interactor.trackClickOnPhotoOrVideo(isPhoto: true)
         }
         
-        if item.fileType.isUnSupportedOpenType {
+        if item.fileType.isSupportedOpenType {
             let sameTypeFiles = getSameTypeItems(item: item, items: data)
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles,
                                   type: type, sortType: sortedType, moduleOutput: self)

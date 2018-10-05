@@ -436,6 +436,7 @@
 "There are %d duplicated contacts." = "There are %d duplicated contacts.";
 "Are you sure you want to delete?" = "Are you sure you want to delete?";
 "This duplicated contacts will be deleted from your contacts." = "These duplicated contacts will be deleted from your contacts.";
+"This duplicated contacts will be deleted from your contacts." = "These duplicated contacts will be removed from your contact list of your device";
 "%%%d Restored…" = "%%%d Restored…";
 "%%%d Analyzed…" = "%%%d Analyzed…";
 "%%%d Backed up…" = "%%%d Backed up…";
@@ -674,3 +675,6 @@
 "facebook_tags_off" = "You will get your Facebook tags to lifebox when you enable this option";
 "facebook_tags_import" = "Please enable \"Facebook Import\\\" option to use \\\"Facebook Tag Transfer\\\" feature";
 "TermsOfUseLinkText" = "TapHere";
+"launch_campaign_card_detail" = "Details";
+"launch_campaign_card_title" = "Prague Campaign";
+"launch_campaign_card_message" = "Prague is waiting for you! Start exploring lifebox right now and be one of the 10 lucky couples";

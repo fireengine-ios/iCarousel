@@ -23,7 +23,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         let interactor = UploadFromLifeBoxInteractor(remoteItems: PhotoAndVideoService(requestSize: 100))
         interactor.rootFolderUUID = albumUUID
         
-        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.image), .fileType(.video)],
+        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.imageAndVideo)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
@@ -56,7 +56,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         
         interactor.rootFolderUUID = destinationFolderUUID
         
-        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.image), .fileType(.video)],
+        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.imageAndVideo)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
@@ -71,4 +71,47 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         return viewController
     }
     
+    class func initializeUploadFromLifeBoxFavoritesController(destinationFolderUUID: String, outputFolderUUID: String = "", sortRule: SortedRules, isPhotoVideoOnly: Bool) -> UIViewController {
+        let viewController = UploadFromLifeBoxViewController(nibName: "BaseFilesGreedViewController", bundle: nil)
+        viewController.parentUUID = destinationFolderUUID
+        //viewController.needShowTabBar = true
+        //viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
+        let configurator = BaseFilesGreedModuleConfigurator()
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [],
+                                               style: .default, tintColor: nil)
+        
+        let presenter: BaseFilesGreedPresenter
+        let fileService: RemoteItemsService
+        
+        if isPhotoVideoOnly {
+            fileService = PhotoAndVideoService(requestSize: 100)
+            presenter = UploadFromLifeBoxPhotosPresenter()
+        } else if !outputFolderUUID.isEmpty {
+            fileService = FilesFromFolderService(requestSize: 100, rootFolder: outputFolderUUID)
+            presenter = UploadFromLifeBoxAllFilesPresenter()
+        } else {
+            fileService = AllFilesService(requestSize: 100)
+            presenter = UploadFromLifeBoxAllFilesPresenter()
+        }
+        
+        presenter.sortedRule = sortRule
+        
+        let interactor = UploadFromLifeBoxFavoritesInteractor(remoteItems: fileService)
+
+        interactor.rootFolderUUID = destinationFolderUUID
+        
+        configurator.configure(viewController: viewController, fileFilters: [.localStatus(.nonLocal), .fileType(.imageAndVideo)],
+                               bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
+                               presenter: presenter, interactor: interactor,
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
+                                                                                     selectionModeTypes: []),
+                               topBarConfig: nil)
+        //viewController.mainTitle = folder.name
+        
+        let router: BaseFilesGreedRouter = UploadFromLifeBoxRouterFavorites()
+        presenter.router = router
+        router.presenter = presenter
+        
+        return viewController
+    }
 }

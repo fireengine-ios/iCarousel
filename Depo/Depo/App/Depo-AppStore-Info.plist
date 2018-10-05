@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>20.140</string>
+	<string>20.152</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -89,6 +89,13 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>http://cropyioslifebox.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<string>YES</string>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<string>YES</string>
+			</dict>
 			<key>http://adepo.turkcell.com.tr/api/auth/gsm/login</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>

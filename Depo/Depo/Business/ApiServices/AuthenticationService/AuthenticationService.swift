@@ -60,7 +60,7 @@ class Authentication3G: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let patch = String(format: RouteRequests.httpAuthification, LbRequestkeys.on)
+        let patch = String(format: RouteRequests.unsecuredAuthenticationUrl, LbRequestkeys.on)
         return URL(string: patch,
                    relativeTo: super.patch)!
     }
@@ -170,7 +170,7 @@ struct SignUpUserPhoveVerification: RequestParametrs {
     }
     
     var patch: URL {
-        return URL(string: RouteRequests.phoneVerification, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: RouteRequests.phoneVerification, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -193,7 +193,7 @@ struct  ForgotPassword: RequestParametrs {
     }
     
     var patch: URL {
-        return URL(string: RouteRequests.forgotPassword, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: RouteRequests.forgotPassword, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -258,7 +258,7 @@ struct ResendVerificationSMS: RequestParametrs {
     }
     
     var patch: URL {
-        return URL(string: RouteRequests.resendVerificationSMS, relativeTo: RouteRequests.BaseUrl)!
+        return URL(string: RouteRequests.resendVerificationSMS, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -492,7 +492,7 @@ class AuthenticationService: BaseRequestService {
     
     func checkEmptyEmail(handler: @escaping ResponseBool) {
         let headers = [HeaderConstant.RememberMeToken: tokenStorage.refreshToken ?? ""]
-        let refreshAccessTokenUrl = RouteRequests.BaseUrl +/ RouteRequests.authificationByRememberMe
+        let refreshAccessTokenUrl = RouteRequests.baseUrl +/ RouteRequests.authificationByRememberMe
         
         sessionManagerWithoutToken
             .request(refreshAccessTokenUrl, method: .post, parameters: [:], encoding: JSONEncoding.default, headers: headers)

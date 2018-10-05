@@ -549,15 +549,22 @@ class RouterVC: NSObject {
     
     func uploadFromLifeBox(folderUUID: String, soorceUUID: String = "", sortRule: SortedRules = .timeUp) -> UIViewController {
         if isRootViewControllerAlbumDetail() {
-            let controller = UploadFromLifeBoxModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", albumUUID: folderUUID)
-            return controller
+            return UploadFromLifeBoxModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", albumUUID: folderUUID)
         } else {
-            let controller = UploadFromLifeBoxModuleInitializer.initializeFilesForFolderViewController(with: "BaseFilesGreedViewController",
-                                                                                                       destinationFolderUUID: folderUUID,
-                                                                                                       outputFolderUUID: soorceUUID,
-                                                                                                       sortRule: sortRule)
-            return controller
+            return UploadFromLifeBoxModuleInitializer
+                .initializeFilesForFolderViewController(with: "BaseFilesGreedViewController",
+                                                        destinationFolderUUID: folderUUID,
+                                                        outputFolderUUID: soorceUUID,
+                                                        sortRule: sortRule)
         }
+    }
+    
+    func uploadFromLifeBoxFavorites(folderUUID: String, soorceUUID: String = "", sortRule: SortedRules = .timeUp, isPhotoVideoOnly: Bool) -> UIViewController {
+        return UploadFromLifeBoxModuleInitializer
+            .initializeUploadFromLifeBoxFavoritesController(destinationFolderUUID: folderUUID,
+                                                            outputFolderUUID: soorceUUID,
+                                                            sortRule: sortRule,
+                                                            isPhotoVideoOnly: isPhotoVideoOnly)
     }
     
     // MARK: Select Folder view controller
@@ -566,6 +573,12 @@ class RouterVC: NSObject {
         let controller = SelectFolderModuleInitializer.initializeSelectFolderViewController(with: "BaseFilesGreedViewController",
                                                                                             folder: folder,
                                                                                             sortRule: sortRule)
+        return controller
+    }
+    
+    func augumentRealityDetailViewController(fileObject: WrapData) -> UIViewController {
+        let controller = AugmentedRealityInitializer.initializeController(with: fileObject)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         return controller
     }
     

@@ -30,6 +30,7 @@ enum OperationType: String {
     case movieCard                  = "movieCard"
     case animationCard              = "animation"
     case prepareQuickScroll         = "prepareQuickScroll"
+    case launchCampaign             = "launchCampaign"
 }
 
 typealias BlockObject = VoidHandler
@@ -111,6 +112,11 @@ class CardsManager: NSObject {
         }
         homeCardsObjects.removeAll()
         homeCardsObjects.append(contentsOf: sortedArray)
+        
+        /// to test launchCampaign
+//        let q = HomeCardResponse()
+//        q.type = .launchCampaign
+//        homeCardsObjects.append(q)
         
         homeCardsObjects = homeCardsObjects.filter {
             if let type = $0.getOperationType() {
@@ -357,6 +363,8 @@ class CardsManager: NSObject {
             cardView = AnimationCard.initFromNib()
         case .prepareQuickScroll:
             cardView = PrepareQuickScroll.initFromNib()
+        case .launchCampaign:
+            cardView = LaunchCampaignCard.initFromNib()
         }
         
         cardView.set(object: serverObject)

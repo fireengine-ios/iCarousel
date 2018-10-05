@@ -12,7 +12,6 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
         //dataSource = PhotoSelectionDataSource()
         
         super.viewIsReady(collectionView: collectionView)
-        
         dataSource.canReselect = true
         dataSource.enableSelectionOnHeader = false
         dataSource.setSelectionState(selectionState: false)
@@ -21,6 +20,7 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
         dataSource.updateDisplayngType(type: .greed)
         dataSource.preferedCellReUseID = CollectionViewCellsIdsConstant.baseMultiFileCell
         
+//        ItemOperationManager.default.startUpdateView(view: self)
     }
     
     override func viewWillDisappear() {
@@ -107,3 +107,16 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
         }
     }
 }
+
+//extension UploadFromLifeBoxAllFilesPresenter: ItemOperationManagerViewProtocol {
+//    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+//        if let compairedView = object as? UploadFromLifeBoxAllFilesPresenter {
+//            return compairedView === self
+//        }
+//        return false 
+//    }
+//    
+//    func addFilesToFavorites(items: [Item]) { 
+//        dataSource.reloadData()
+//    }
+//}

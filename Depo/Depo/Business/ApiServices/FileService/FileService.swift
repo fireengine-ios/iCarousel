@@ -9,16 +9,16 @@
 import Foundation
 
 struct FilePatch {
-    static let fileList = "/api/filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
-    static let create = "/api/filesystem/createFolder?parentFolderUuid=%@"
-    static let delete = "/api/filesystem/delete"
-    static let rename = "/api/filesystem/rename/%@"
-    static let move =   "/api/filesystem/move?targetFolderUuid=%@"
-    static let copy =   "/api/filesystem/copy?targetFolderUuid=%@"
-    static let details = "/api/filesystem/details?minified=true"
-    static let detail =  "/api/filesystem/detail/%@"
+    static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
+    static let create = "filesystem/createFolder?parentFolderUuid=%@"
+    static let delete = "filesystem/delete"
+    static let rename = "filesystem/rename/%@"
+    static let move =   "filesystem/move?targetFolderUuid=%@"
+    static let copy =   "filesystem/copy?targetFolderUuid=%@"
+    static let details = "filesystem/details?minified=true"
+    static let detail =  "filesystem/detail/%@"
     
-    static let metaData = "/api/filesystem/metadata"
+    static let metaData = "filesystem/metadata"
 }
 
 
