@@ -132,10 +132,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             let numberOfColumns = Int(Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone)
             let cellHeight = delegate?.getCellSizeForList().height ?? 0
+            let dates = allItems.flatMap({ $0 }).flatMap({ $0.metaData?.takenDate})
+            yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
             
-            let dates = allItems.flatMap({ $0 }).flatMap({ $0.creationDate})
-            self.yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
-            self.yearsView.update(by: dates)
+            if !emptyMetaItems.isEmpty {
+                yearsView.update(sectionsWithCount: [(TextConstants.photosVideosViewMissingDatesHeaderText, emptyMetaItems.count)])
+            }
+            
+            yearsView.update(by: dates)
         }
     }
     private var pageLeftOvers = [WrapData]()

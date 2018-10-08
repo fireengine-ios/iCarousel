@@ -171,6 +171,12 @@ final class YearsView: UIView {
 //        cellHeaderRatio = headerHeight / cellHeight
 //        cellSpaceRatio = 1 / cellHeight
     }
+    
+    private var sectionsWithCount: [(name: String, count: Int)] = []
+    
+    func update(sectionsWithCount: [(name: String, count: Int)]) {
+        self.sectionsWithCount = sectionsWithCount
+    }
 
     
     private func getYearsArray(from dates: [Date]) -> YearsArray {
@@ -253,8 +259,12 @@ final class YearsView: UIView {
             sum + arg.value.monthNumber
         }
         
+        let totalSectionsWithCount = sectionsWithCount.reduce(0) { sum, arg in
+            sum + arg.count
+        }
+        
 //        let totalSpace = CGFloat(totalLines) + cellHeaderRatio * CGFloat(totalMonthes) + cellSpaceRatio * CGFloat(totalLines + totalMonthes)
-        let totalSpace = CGFloat(totalLines) * cellHeight + headerHeight * CGFloat(totalMonthes) + cellSpaceHeight * CGFloat(totalLines + totalMonthes)
+        let totalSpace = CGFloat(totalLines + totalSectionsWithCount) * cellHeight + headerHeight * CGFloat(totalMonthes + sectionsWithCount.count) + cellSpaceHeight * CGFloat(totalLines + totalMonthes + sectionsWithCount.count)
         
         
 //        var newYearsArray = yearsArray
@@ -329,6 +339,22 @@ final class YearsView: UIView {
             labelsOffsetRatio.append(yearContentRatio)
             
         }
+        
+        for section in sectionsWithCount {
+            let addtionalLine = (section.count % numberOfColumns == 0) ? 0 : 1 
+            let linesCount = section.count / numberOfColumns + addtionalLine
+            
+            let yearCellSpaceRatio = cellSpaceHeight * CGFloat(linesCount)
+            let yearHeaderRatio = headerHeight
+            let linesRatio = CGFloat(linesCount) * cellHeight
+            let yearRatio = (linesRatio + yearHeaderRatio + yearCellSpaceRatio) / totalSpace
+            
+            let yearContentRatio = yearRatio + previusOffsetRation
+            
+            previusOffsetRation = yearContentRatio
+            labelsOffsetRatio.append(yearContentRatio)
+        } 
+        
 //        return newYearsArray
         return yearsArray
     }
@@ -341,6 +367,22 @@ final class YearsView: UIView {
             for year in yearsArray {
                 let label = TextInsetsLabel()
                 label.text = "\(year.key)"
+                label.textAlignment = .center
+                label.font = UIFont.systemFont(ofSize: 8) //UIFont.TurkcellSaturaDemFont(size: 8)
+                label.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+                label.textColor = .red
+                label.textInsets = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
+                label.sizeToFit()
+                label.layer.cornerRadius = label.frame.height * 0.5
+                label.layer.masksToBounds = true
+                
+                self.addSubview(label)
+                self.labels.append(label)
+            }
+            
+            for section in self.sectionsWithCount {
+                let label = TextInsetsLabel()
+                label.text = section.name
                 label.textAlignment = .center
                 label.font = UIFont.systemFont(ofSize: 8) //UIFont.TurkcellSaturaDemFont(size: 8)
                 label.backgroundColor = UIColor.white.withAlphaComponent(0.7)
