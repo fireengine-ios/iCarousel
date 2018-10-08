@@ -100,9 +100,12 @@ final class YearsView: UIView {
     }
     
     
+    private let lock = NSLock()
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+        lock.lock()
+        defer { lock.unlock() }
         
         //        guard let scrollView = scrollView else {
         //            assertionFailure()
@@ -361,6 +364,9 @@ final class YearsView: UIView {
     
     private func udpateLabels(from yearsArray: YearsArray) {
         DispatchQueue.main.async {
+            self.lock.lock()
+            defer { self.lock.unlock() }
+            
             self.labels.forEach { $0.removeFromSuperview() }
             self.labels.removeAll()
             
