@@ -725,6 +725,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         yearsView.add(to: collectionView)
         scrollBar.add(to: collectionView)
+        scrollBar.deleagte = self
     }
     
     private func registerCells() {
@@ -1071,9 +1072,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidScroll(scrollView: scrollView)
-        
         updateCachedAssets()
-        
+        updateScrollBarTextIfNeed()
+    }
+    
+    private func updateScrollBarTextIfNeed() {
         if needShowCustomScrollIndicator {
             let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
                 return first < second
@@ -2019,4 +2022,11 @@ extension BaseDataSourceForCollectionView {
         }
     }
 
+}
+
+
+extension BaseDataSourceForCollectionView: ScrollBarViewDelegate {
+    func scrollBarViewDidEndDraggin() {
+        updateScrollBarTextIfNeed()
+    }
 }

@@ -8,9 +8,14 @@
 
 import UIKit
 
-/// https://github.com/TimOliver/TOScrollBar
+protocol ScrollBarViewDelegate: class {
+    func scrollBarViewDidEndDraggin()
+}
 
+/// https://github.com/TimOliver/TOScrollBar
 final class ScrollBarView: UIView {    
+    
+    weak var deleagte: ScrollBarViewDelegate?
     
     private static let scrollBarHandleImage = Images.scrollBarHandle
     
@@ -298,10 +303,11 @@ final class ScrollBarView: UIView {
             showLabelAnimated()
         case .changed:
             gestureMoved(to: touchPoint)
-        case .ended, .cancelled:
+        case .ended, .cancelled, .failed:
             gestureEnded()
             hideLabelAnimated()
-        case .possible, .failed:
+            deleagte?.scrollBarViewDidEndDraggin()
+        case .possible:
             break
         }
     }
