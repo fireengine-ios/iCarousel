@@ -15,7 +15,7 @@ protocol ScrollBarViewDelegate: class {
 /// https://github.com/TimOliver/TOScrollBar
 final class ScrollBarView: UIView {    
     
-    weak var deleagte: ScrollBarViewDelegate?
+    weak var delegate: ScrollBarViewDelegate?
     
     private static let scrollBarHandleImage = Images.scrollBarHandle
     
@@ -306,7 +306,7 @@ final class ScrollBarView: UIView {
         case .ended, .cancelled, .failed:
             gestureEnded()
             hideLabelAnimated()
-            deleagte?.scrollBarViewDidEndDraggin()
+            delegate?.scrollBarViewDidEndDraggin()
         case .possible:
             break
         }

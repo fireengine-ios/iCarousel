@@ -726,7 +726,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         yearsView.add(to: collectionView)
         scrollBar.add(to: collectionView)
-        scrollBar.deleagte = self
+        scrollBar.delegate = self
     }
     
     private func registerCells() {
