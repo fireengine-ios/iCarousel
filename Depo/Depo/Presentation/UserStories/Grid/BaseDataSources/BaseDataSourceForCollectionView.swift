@@ -124,7 +124,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private var isDropedData = true
     
     var allMediaItems = [WrapData]()
-    var allItems = [[WrapData]]()
+    var allItems = [[WrapData]]() {
+        didSet {
+            if allItems.isEmpty {
+                return
+            }
+            
+            let numberOfColumns = Int(Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone)
+            let cellHeight = delegate?.getCellSizeForList().height ?? 0
+            
+            let dates = allItems.flatMap({ $0 }).flatMap({ $0.creationDate})
+            self.yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
+            self.yearsView.update(by: dates)
+        }
+    }
     private var pageLeftOvers = [WrapData]()
     private var emptyMetaItems = [WrapData]()
     
@@ -156,6 +169,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private var lastPage: Int = 0
     
     private let scrollBar = ScrollBarView()
+    private let yearsView = YearsView()
     
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
@@ -705,6 +719,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         registerFooters()
         registerCells()
         
+        yearsView.add(to: collectionView)
         scrollBar.add(to: collectionView)
     }
     
