@@ -371,37 +371,33 @@ final class YearsView: UIView {
             self.labels.removeAll()
             
             for year in yearsArray {
-                let label = TextInsetsLabel()
-                label.text = "\(year.key)"
-                label.textAlignment = .center
-                label.font = UIFont.systemFont(ofSize: 8) //UIFont.TurkcellSaturaDemFont(size: 8)
-                label.backgroundColor = UIColor.white.withAlphaComponent(0.7)
-                label.textColor = .red
-                label.textInsets = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
-                label.sizeToFit()
-                label.layer.cornerRadius = label.frame.height * 0.5
-                label.layer.masksToBounds = true
-                
+                let label = self.createLabel(for: "\(year.key)")
                 self.addSubview(label)
                 self.labels.append(label)
             }
             
             for section in self.sectionsWithCount {
-                let label = TextInsetsLabel()
-                label.text = section.name
-                label.textAlignment = .center
-                label.font = UIFont.systemFont(ofSize: 8) //UIFont.TurkcellSaturaDemFont(size: 8)
-                label.backgroundColor = UIColor.white.withAlphaComponent(0.7)
-                label.textColor = .red
-                label.textInsets = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
-                label.sizeToFit()
-                label.layer.cornerRadius = label.frame.height * 0.5
-                label.layer.masksToBounds = true
-                
+                let label = self.createLabel(for: section.name)
                 self.addSubview(label)
                 self.labels.append(label)
             }
         }
         
+    }
+    
+    private func createLabel(for text: String) -> UILabel {
+        let label = TextInsetsLabel()
+        label.text = text
+        label.textAlignment = .center
+        //label.font = UIFont.systemFont(ofSize: 8)
+        label.font = UIFont.TurkcellSaturaDemFont(size: 8)
+        label.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+        //label.textColor = .red
+        label.textColor = UIColor.lrTealishTwo
+        label.textInsets = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
+        label.sizeToFit()
+        label.layer.cornerRadius = label.frame.height * 0.5
+        label.layer.masksToBounds = true
+        return label
     }
 }

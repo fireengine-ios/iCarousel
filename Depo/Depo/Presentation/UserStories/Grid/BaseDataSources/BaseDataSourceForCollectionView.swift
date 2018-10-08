@@ -131,6 +131,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             
             let numberOfColumns = Int(Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone)
+            // TODO: getCellSizeForList must be called in main queue
             let cellHeight = delegate?.getCellSizeForList().height ?? 0
             let dates = allItems.flatMap({ $0 }).flatMap({ $0.metaData?.takenDate})
             yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
