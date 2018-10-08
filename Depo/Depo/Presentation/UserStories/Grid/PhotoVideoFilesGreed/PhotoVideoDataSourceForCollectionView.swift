@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionView {
+final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionView {
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
@@ -56,10 +56,10 @@ class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionView {
 //                delegate?.getNextItems()
 //            } else if !pageLeftOvers.isEmpty, !isLocalFilesRequested {
 //                debugPrint("!!! page compunding for page \(lastPage)")
-//                
+//
 //                compoundItems(pageItems: [], pageNum: lastPage, complition: { [weak self] response in
 //                    self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
-//                    
+//
 //                })
 //            }
 //            //            else {
@@ -70,7 +70,7 @@ class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionView {
 //                self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
 //            })
 //        }
-//        
+//
 //        if let photoCell = cell_ as? CollectionViewCellForPhoto {
 //            let file = itemForIndexPath(indexPath: indexPath)
 //            if let `file` = file, uploadedObjectID.index(of: file.uuid) != nil {

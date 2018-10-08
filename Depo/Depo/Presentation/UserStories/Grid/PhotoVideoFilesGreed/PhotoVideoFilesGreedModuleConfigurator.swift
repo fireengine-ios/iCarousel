@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-class PhotoVideoFilesGreedModuleConfigurator {
+final class PhotoVideoFilesGreedModuleConfigurator {
     func configure(viewController: BaseFilesGreedViewController,
                    moduleOutput: BaseFilesGreedModuleOutput? = nil,
                    remoteServices: RemoteItemsService,

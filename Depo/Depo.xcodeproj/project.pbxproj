@@ -6443,7 +6443,6 @@
 			isa = PBXGroup;
 			children = (
 				7A7ECB6D4F000A77B89C5008 /* BaseFilesGreedConfigurator.swift */,
-				8C353D982167988400B1C85C /* PhotoVideoFilesGreedModuleConfigurator.swift */,
 				BB3D81D8F4441B332E687B17 /* BaseFilesGreedInitializer.swift */,
 			);
 			path = Configurator;
@@ -6471,7 +6470,6 @@
 			children = (
 				AAB4FE9A3DE9EE69A1D9C29B /* BaseFilesGreedModuleInput.swift */,
 				9009A5FDA48558656AEA0B43 /* BaseFilesGreedPresenter.swift */,
-				8C353D9521678BB800B1C85C /* PhotoVideosFilesGreedPresenter.swift */,
 				7CED0B0C1F21DE3B0016CE0C /* DocumentsGreedPresenter.swift */,
 				8734DA0C1FD846DF00977752 /* BaseFilesGreedModuleOutput.swift */,
 			);
@@ -7546,7 +7544,6 @@
 				7C3A743E1F05293800124DF5 /* FilesDataSource */,
 				7C0EBCFF1F4C5B5100283ECF /* BaseDataSourceItem.swift */,
 				7C3A74351F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift */,
-				8C353D922167887D00B1C85C /* PhotoVideoDataSourceForCollectionView.swift */,
 				7CFD0D1F1F8F44CA002B1FB5 /* ArrayDataSourceForCollectionView.swift */,
 			);
 			path = BaseDataSources;
@@ -9336,6 +9333,16 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		8C353D9B216B36F300B1C85C /* PhotoVideoFilesGreed */ = {
+			isa = PBXGroup;
+			children = (
+				8C353D982167988400B1C85C /* PhotoVideoFilesGreedModuleConfigurator.swift */,
+				8C353D9521678BB800B1C85C /* PhotoVideosFilesGreedPresenter.swift */,
+				8C353D922167887D00B1C85C /* PhotoVideoDataSourceForCollectionView.swift */,
+			);
+			path = PhotoVideoFilesGreed;
+			sourceTree = "<group>";
+		};
 		8C3930EA2100668300C1D82D /* googleAnalytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -10824,14 +10831,15 @@
 		CE3EB30E1FC7F6A0000B70D6 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				7C3A74341F04DE2800124DF5 /* BaseDataSources */,
+				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
+				8C353D9B216B36F300B1C85C /* PhotoVideoFilesGreed */,
 				4A56D5A4202AF467003A4624 /* FaceImageAddName */,
 				2BA37C24202831BA00660394 /* FaceImageChangeCover */,
 				78E8E29F202317A300A979AB /* FaceImageItemPhotos */,
 				4A9B38F8201F3189009FC572 /* FaceImageItems */,
 				7C6945D620039F4A00152344 /* FreeAppSpace */,
 				7C233CA61FD18DDA0013CCA0 /* UploadFromLifeBox */,
-				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
-				7C3A74341F04DE2800124DF5 /* BaseDataSources */,
 				3C9A2005A04679D300893C3E /* UploadFilesSelection */,
 				218D03D551C55699103C7754 /* SelectFolder */,
 				A981DAC5F519E2A31F7DC6B4 /* Albums */,

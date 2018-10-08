@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
+final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
     
     override init(sortedRule: SortedRules = .timeDown) {
         super.init()
@@ -18,14 +18,12 @@ class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
     }
     
     override func viewIsReady(collectionView: UICollectionView) {
-        debugLog("BaseFilesGreedPresenter viewIsReady")
-        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.updateThreeDots(_:)),
                                                name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots),
                                                object: nil)
         
-        interactor.viewIsReady()
+        
         if let unwrapedFilters = interactor.originalFilesTypeFilter {
             filters = unwrapedFilters
         }
@@ -36,7 +34,7 @@ class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         dataSource.needShowProgressInCell = needShowProgressInCells
         dataSource.needShowCustomScrollIndicator = needShowScrollIndicator
         dataSource.needShowEmptyMetaItems = needShowEmptyMetaItems
-        dataSource.parentUUID = interactor.getFolder()?.uuid
+        
         if let albumInteractor = interactor as? AlbumDetailInteractor {
             dataSource.parentUUID = albumInteractor.album?.uuid
         }
@@ -68,6 +66,7 @@ class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         dataSource.reloadData()
         startAsyncOperation()
         dataSource.isPaginationDidEnd = false
+        
         interactor.reloadItems(nil,
                                sortBy: sortedRule.sortingRules,
                                sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
@@ -78,8 +77,6 @@ class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
             switch type {
             case .fileType(let type):
                 return type.convertedToSearchFieldValue
-            case .favoriteStatus(.favorites):
-                return .favorite
             default:
                 break
             }
@@ -91,15 +88,10 @@ class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         view?.stopRefresher()
         dataSource.isPaginationDidEnd = false
         dataSource.hideLoadingFooter()
-        
-        debugPrint("???getContentWithFail()")
-        debugLog("BaseFilesGreedPresenter getContentWithFail")
+
         asyncOperationFail(errorMessage: errorString)
     }
     override func getContentWithSuccessEnd() {
-        debugLog("BaseFilesGreedPresenter getContentWithSuccessEnd")
-        debugPrint("???getContentWithSuccessEnd()")
-        //        asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
         updateThreeDotsButton()
@@ -112,14 +104,11 @@ class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
     }
     
     override func getContentWithSuccess(items: [WrapData]) {
-        debugLog("BaseFilesGreedPresenter getContentWithSuccess")
-        
         if (view == nil) {
             return
         }
         debugPrint("!!! page \(self.interactor.requestPageNum)")
         updateThreeDotsButton()
-        //        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 return
@@ -129,14 +118,11 @@ class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
     }
     
     override func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
-        debugLog("BaseFilesGreedPresenter getContentWithSuccess")
-        
         if (view == nil) {
             return
         }
         debugPrint("???getContentWithSuccessEnd()")
         asyncOperationSucces()
-        //        view.stopRefresher()
         if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView {
             
             dataSourceForArray.configurateWithArray(array: array)
