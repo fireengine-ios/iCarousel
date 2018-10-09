@@ -43,9 +43,14 @@ final class CellImageManager {
         guard let url = url else {
             return nil
         }
-        let instance = instances[url] ?? CellImageManager()
-        instances[url] = instance
-        return instance
+        
+        if let instance = instances[url] {
+            return instance
+        }
+        
+        let newInstance = CellImageManager()
+        instances[url] = newInstance
+        return newInstance
     }
     
     static func clear() {

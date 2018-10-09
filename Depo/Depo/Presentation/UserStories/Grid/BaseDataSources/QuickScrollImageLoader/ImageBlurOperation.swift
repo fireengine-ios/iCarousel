@@ -55,9 +55,10 @@ final class ImageBlurOperation: Operation, DataTransferrableOperation {
         ///TODO: check what is wrong, I had crashes on context.createCGImage
         ///the algorithm above works without crashes so far
         
-//        EAGLContext.setCurrent(nil)
+        
 //        ///https://stackoverflow.com/questions/27632618/cicontext-bad-access-crash
-//        ///to prevent createCGImage bad_access crash
+//        /// EAGLContext.setCurrent(nil) was used to prevent createCGImage bad_access crash (no guarantee)
+//        EAGLContext.setCurrent(nil)
 //
 //        let context = CIContext(options: nil)
 //        currentFilter.setValue(inputImage, forKey: kCIInputImageKey)
