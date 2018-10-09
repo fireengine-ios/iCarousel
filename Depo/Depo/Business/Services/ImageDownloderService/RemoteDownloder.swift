@@ -11,8 +11,6 @@ import SDWebImage
 
 class ImageDownloder {
     
-//    static let shared = ImageDownloder()
-    
     private let downloder: SDWebImageDownloader
     
     private var tokenList = [URL : SDWebImageDownloadToken]()

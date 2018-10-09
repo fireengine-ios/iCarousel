@@ -72,7 +72,7 @@ final class CellImageManager {
     
     //MARK: - Interface
     
-    func prepare(thumbnailUrl: URL?, url: URL?, thumbnail: @escaping CellImageManagerOperationsFinished, medium: @escaping CellImageManagerOperationsFinished) {
+    func loadImage(thumbnailUrl: URL?, url: URL?, thumbnail: @escaping CellImageManagerOperationsFinished, medium: @escaping CellImageManagerOperationsFinished) {
         dispatchQueue.async { [weak self] in
             self?.thumbnailDoneBlock = thumbnail
             self?.mediumDoneBlock = medium
@@ -80,7 +80,7 @@ final class CellImageManager {
         }
     }
     
-    func cancelPreparation() {
+    func cancelImageLoading() {
         dispatchQueue.async { [weak self] in
             self?.myOperationsOrdered.forEach { $0.cancel() }
             self?.myOperationsOrdered.removeAll()
@@ -122,7 +122,7 @@ final class CellImageManager {
                     self?.processingState = .thumbnailReady
                     self?.thumbnailDoneBlock?(outputImage, false)
                 } else {
-                    self?.cancelPreparation()
+                    self?.cancelImageLoading()
                 }
             }
         }

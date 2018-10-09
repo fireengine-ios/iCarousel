@@ -64,10 +64,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             favoriteIcon.isHidden = !item.favorites
         }
 
-        cellImageManager?.cancelPreparation()
-        cellImageManager = nil
-        imageView.image = nil
-        uuid = nil
+        reset()
 
         if wrappered.isLocalItem && wrappered.fileSize < NumericConstants.fourGigabytes {
             cloudStatusImage.image = UIImage(named: "objectNotInCloud")
@@ -83,10 +80,8 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        cellImageManager?.cancelPreparation()
-        cellImageManager = nil
-        imageView.image = nil
-        uuid = nil
+        reset()
+        
         isAlreadyConfigured = false
     }
     
@@ -127,7 +122,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             }
         }
 
-        cellImageManager?.prepare(thumbnailUrl: metaData.smalURl, url: metaData.mediumUrl, thumbnail: imageSetBlock, medium: imageSetBlock)
+        cellImageManager?.loadImage(thumbnailUrl: metaData.smalURl, url: metaData.mediumUrl, thumbnail: imageSetBlock, medium: imageSetBlock)
 
         isAlreadyConfigured = true
     }
@@ -173,7 +168,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     func cleanCell() {
-        cellImageManager?.cancelPreparation()
+        cellImageManager?.cancelImageLoading()
         
         DispatchQueue.main.async {
             self.visualEffectBlur.isHidden = true
@@ -187,6 +182,13 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     func resetCloudImage() {
         cloudStatusImage.image = UIImage()
+    }
+    
+    private func reset() {
+        cellImageManager?.cancelImageLoading()
+        cellImageManager = nil
+        imageView.image = nil
+        uuid = nil
     }
 
 }
