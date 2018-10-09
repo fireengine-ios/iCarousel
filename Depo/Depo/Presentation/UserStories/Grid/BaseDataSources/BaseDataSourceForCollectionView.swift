@@ -119,16 +119,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var isHeaderless = false
     
-    private var isLocalPaginationOn = false // ---------------------=======
-    var isLocalFilesRequested = false // -----------------------=========
-    private var isDropedData = true
+    var isLocalPaginationOn = false
+    var isLocalFilesRequested = false
+    var isDropedData = true
     
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
-    private var pageLeftOvers = [WrapData]()
+    var pageLeftOvers = [WrapData]()
     var emptyMetaItems = [WrapData]()
     
-    private var uploadedObjectID = [String]()
+    var uploadedObjectID = [String]()
     private var uploadToAlbumItems = [String]()
     
     var needShowProgressInCell = false
@@ -147,13 +147,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private var sortingRules: SortedRules
     
-    private let pageCompounder = PageCompounder()
+    let pageCompounder = PageCompounder()
     
-    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
+    let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
     
     private var currentTopSection: Int?
     
-    private var lastPage: Int = 0
+    var lastPage: Int = 0
     
     private let scrollBar = ScrollBarView()
     
@@ -228,7 +228,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    private func insertItems(with response: ResponseResult<[IndexPath]>, emptyItems: [Item], oldSectionNumbers: Int, containsEmptyMetaItems: Bool) {
+    func insertItems(with response: ResponseResult<[IndexPath]>, emptyItems: [Item], oldSectionNumbers: Int, containsEmptyMetaItems: Bool) {
         guard let collectionView = collectionView else {
             return
         }
@@ -367,7 +367,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return false
     }
     
-    fileprivate func compoundItems(pageItems: [WrapData], pageNum: Int, originalRemotes: Bool = false, complition: @escaping ResponseArrayHandler<IndexPath>) {
+    func compoundItems(pageItems: [WrapData], pageNum: Int, originalRemotes: Bool = false, complition: @escaping ResponseArrayHandler<IndexPath>) {
         
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
@@ -510,11 +510,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    private func getIndexPathsForItems(_ items: [Item]) -> [IndexPath] {
+    func getIndexPathsForItems(_ items: [Item]) -> [IndexPath] {
         return items.flatMap { self.getIndexPathForObject(itemUUID: $0.uuid) }
     }
     
-    private func transformedLeftOvers() -> [WrapData] {
+    func transformedLeftOvers() -> [WrapData] {
         let pseudoPageArray = pageLeftOvers.filter{!$0.isLocalItem}
         return pseudoPageArray
     }
@@ -539,7 +539,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return false
     }
     
-    private func breakItemsIntoSections(breakingArray: [WrapData]) {
+    func breakItemsIntoSections(breakingArray: [WrapData]) {
         allItems.removeAll()
         
         let needShowEmptyMetaDataItems = needShowEmptyMetaItems && (currentSortType == .metaDataTimeUp || currentSortType == .metaDataTimeDown)
@@ -576,7 +576,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    private func getFileFilterType(filters: [GeneralFilesFiltrationType]) -> FileType? {
+    func getFileFilterType(filters: [GeneralFilesFiltrationType]) -> FileType? {
         for filter in filters {
             switch filter {
             case  .fileType(.image):
@@ -1204,9 +1204,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     
                 })
             }
-//            else {
-//                delegate?.getNextItems()
-//            }
         } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
             compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
                 self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)

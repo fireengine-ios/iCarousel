@@ -51,7 +51,7 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         
         view.setupInitialState()
         setupTopBar()
-        getContent()
+        
         reloadData()
         subscribeDataSource()
     }
@@ -107,7 +107,7 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         if (view == nil) {
             return
         }
-        debugPrint("!!! page \(self.interactor.requestPageNum)")
+        
         updateThreeDotsButton()
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {

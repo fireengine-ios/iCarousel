@@ -388,9 +388,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func filesAppendedAndSorted() {
         DispatchQueue.toMain {
-            if self.dataSource.isPaginationDidEnd {
-                debugPrint("SORTED")
-            }
             self.view.stopRefresher()
             self.updateNoFilesView()
             self.asyncOperationSucces()
