@@ -78,6 +78,10 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         
     }
     
+    func setImage(with metaData: BaseMetaData) {
+        
+    }
+    
     func setPlaceholderImage(fileType: FileType) {
 
     }

@@ -238,6 +238,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             if self.isDropedData || array.isEmpty {
                 DispatchQueue.main.async {
                     if self.needReloadData {
+                        CellImageManager.clear()
                         self.collectionView?.reloadData()
                     }
                     self.isLocalFilesRequested = false
@@ -269,6 +270,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                
                 
                     collectionView.collectionViewLayout.invalidateLayout()
+                    CellImageManager.clear()
                     collectionView.reloadData()
                     collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
                             guard let `self` = self else {
@@ -846,6 +848,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             debugLog("BaseDataSourceForCollectionViewDelegate reloadData")
             debugPrint("BaseDataSourceForCollectionViewDelegate reloadData")
             
+            CellImageManager.clear()
             collectionView.reloadData()
             
             if self.numberOfSections(in: collectionView) == 0 {
@@ -866,6 +869,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         debugPrint("Reload updateDisplayngType")
         DispatchQueue.main.async {
+            CellImageManager.clear()
             self.collectionView?.reloadData()
             let firstVisibleIndexPath = self.self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
                 return first < second
@@ -1178,9 +1182,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
             })
             
-        case let .remoteUrl(url):
-            if let url = url {
-                cell_.setImage(with: url)
+        default:
+            if let meta = wraped.metaData {
+                cell_.setImage(with: meta)
             } else {
                 cell_.setPlaceholderImage(fileType: wraped.fileType)
             }
@@ -1224,6 +1228,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             cell.moreButton.isHidden = !needShow3DotsInCell
         }
     }
+    
+    
+    
     
     func hideLoadingFooter() {
         guard let footerView =
@@ -1689,6 +1696,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             DispatchQueue.toMain {
                 self.allItems = newArray
+                CellImageManager.clear()
                 self.collectionView?.reloadData()
                 ///change performBatchUpdates to the reladData() in case of crash
                 self.collectionView?.performBatchUpdates({
@@ -1764,6 +1772,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         DispatchQueue.main.async {
+            CellImageManager.clear()
             self.collectionView?.reloadData()
         }
     }
