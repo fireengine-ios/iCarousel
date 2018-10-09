@@ -56,9 +56,22 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         }
     }
     
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        let isLastSection = (section == allItems.count - 1)
+        
+        let height: CGFloat
+        if !isLastSection || (isPaginationDidEnd && !isLocalPaginationOn) {
+            height = 0
+        } else {
+            height = 50
+        }
+        return CGSize(width: collectionView.contentSize.width, height: height)
+    }
+    
     override func appendCollectionView(items: [WrapData], pageNum: Int) {
        debugPrint("---APPEND page num is %i", pageNum)
         guard !isPaginationDidEnd else {
+//            reloadData()
             delegate?.filesAppendedAndSorted()
             return
         }
@@ -118,7 +131,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             let pageTempoItems = self.pageLeftOvers + pageItems
             
             self.isLocalFilesRequested = true
-            self.isLocalPaginationOn = true//////???????
+            self.isLocalPaginationOn = true
             
             if pageNum == 1 {
                 if self.isPaginationDidEnd, !pageTempoItems.isEmpty  {
@@ -224,72 +237,41 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 }
                 
             } else {
+                
                 DispatchQueue.main.async {
-//                    let oldSectionNumbers = collectionView.numberOfSections
-//                    let newSectionNumbers = self.numberOfSections(in: collectionView)
-//
-//                    if newSectionNumbers > oldSectionNumbers {
-//                        let needMoveSectionWithEmptyMetaItems = self.needShowEmptyMetaItems && self.currentSortType == .metaDataTimeUp && containsEmptyMetaItems
-//
-//                        if needMoveSectionWithEmptyMetaItems {
-//                            debugPrint("!!! needMoveSectionWithEmptyMetaItems 1")
-//                            //                            newSections = IndexSet(oldSectionNumbers-1..<newSectionNumbers-1)
-//                        } else {
-//                            debugPrint("!!! needMoveSectionWithEmptyMetaItems 2")
-//                            //                            newSections = IndexSet(oldSectionNumbers..<newSectionNumbers)
-//                        }
-//                    } else if newSectionNumbers < oldSectionNumbers {
-//                        return
-//                        /// here add section deletion
-//                    }///error ocure when was appending to same action but the data was just dropped - recieved and droped
-//
-//
-//                    collectionView.collectionViewLayout.invalidateLayout()
-                    self.delegate?.filesAppendedAndSorted()
-                    self.collectionView?.reloadData()
-//                    collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
-//                        guard let `self` = self else {
-//                            return
-//                        }
-                        self.isLocalFilesRequested = false//////dont need it now?
-//                        self.delegate?.filesAppendedAndSorted()
-//                        //FIXME: part of appending+ incerting should be rewitten or trigger for new page
-//                        self.dispatchQueue.async { [weak self] in
-//                            guard let `self` = self else {
-//                                return
-//                            }
-//                            print("BATCH: \(!self.isPaginationDidEnd), \(self.isLocalPaginationOn), \(!self.isLocalFilesRequested)")
-//                            if !self.isPaginationDidEnd,
-//                                self.isLocalPaginationOn,
-//                                !self.isLocalFilesRequested {// array.count < self.pageCompounder.pageSize {
-//                                debugPrint("!!! TRY TO GET NEW PAGE")
-                   
-                    
-                    
-                    
-                    ///----------------------////
-                    if !self.isPaginationDidEnd {
-                        if self.pageLeftOvers.isEmpty {
-                            self.delegate?.getNextItems()
-                        } else if !self.pageLeftOvers.isEmpty{
-                            self.compoundItems(pageItems: [], pageNum: self.lastPage, complition: { [weak self] response in
-                                self?.batchInsertItems(newIndexes: response, emptyItems: [])
-                            })
+                    var biggestNewSection: Int = 0
+                    array.forEach{
+                        if $0.section > collectionView.numberOfSections-1, $0.section > biggestNewSection {
+                            biggestNewSection = $0.section
                         }
-                    } else if self.isPaginationDidEnd, self.isLocalPaginationOn {
-                        self.compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
-                            self?.batchInsertItems(newIndexes: response, emptyItems: [])
-                        })
                     }
-                    
-//                    if !self.isPaginationDidEnd {
-//                        self.delegate?.getNextItems()
-//                    }
-                    //////
-                    
-//                            }
-//                        }
-//                    })
+                    collectionView.performBatchUpdates({
+                        if biggestNewSection > collectionView.numberOfSections-1 {
+                            collectionView.insertSections(IndexSet(integersIn: Range(collectionView.numberOfSections-1..<biggestNewSection)))
+                        }
+                        collectionView.insertItems(at: array)
+                    }, completion: { status in
+                        self.delegate?.filesAppendedAndSorted()
+                        self.isLocalFilesRequested = false
+                        self.dispatchQueue.async { [weak self] in
+                            guard let `self` = self else {
+                                return
+                            }
+                            if !self.isPaginationDidEnd {
+                                if self.pageLeftOvers.isEmpty {
+                                    self.delegate?.getNextItems()
+                                } else if !self.pageLeftOvers.isEmpty{
+                                    self.compoundItems(pageItems: [], pageNum: self.lastPage, complition: { [weak self] response in
+                                        self?.batchInsertItems(newIndexes: response, emptyItems: [])
+                                    })
+                                }
+                            } else if self.isPaginationDidEnd, self.isLocalPaginationOn {
+                                self.compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
+                                    self?.batchInsertItems(newIndexes: response, emptyItems: [])
+                                })
+                            }
+                        }
+                    })
                 }
             }
         case .failed(_):
@@ -297,42 +279,4 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             isLocalFilesRequested = false
         }
     }
-    
-    ///dunno if I need it
-//    override func breakItemsIntoSections(breakingArray: [WrapData]) {
-//        allItems.removeAll()
-//
-//        let needShowEmptyMetaDataItems = needShowEmptyMetaItems && (currentSortType == .metaDataTimeUp || currentSortType == .metaDataTimeDown)
-//
-//        for item in breakingArray {
-//            autoreleasepool {
-//                if !allItems.isEmpty,
-//                    let lastItem = allItems.last?.last {
-//                    switch currentSortType {
-//                    case .timeUp, .timeDown:
-//                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: false)
-//                    case .lettersAZ, .lettersZA, .albumlettersAZ, .albumlettersZA:
-//                        addByName(lastItem: lastItem, newItem: item)
-//                    case .sizeAZ, .sizeZA:
-//                        addBySize(lastItem: lastItem, newItem: item)
-//                    case .timeUpWithoutSection, .timeDownWithoutSection:
-//                        allItems.append(contentsOf: [breakingArray])
-//                        return
-//                    case .metaDataTimeUp, .metaDataTimeDown:
-//                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: true)
-//                    }
-//                } else {
-//                    allItems.append([item])
-//                }
-//            }
-//        }
-//        
-//        if needShowEmptyMetaDataItems && !emptyMetaItems.isEmpty {
-//            if currentSortType == .metaDataTimeUp {
-//                allItems.append(emptyMetaItems)
-//            } else if currentSortType == .metaDataTimeDown {
-//                allItems.insert(emptyMetaItems, at: 0)
-//            }
-//        }
-//    }
 }
