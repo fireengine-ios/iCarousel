@@ -159,7 +159,7 @@ extension CellImageManager {
         }
         
         //TODO: maybe it's better to use [safe:]
-        for i in 0..<ordered.count-1 {
+        for i in 0...ordered.count-2 {
             let firstOp = ordered[i]
             let secondOp = ordered[i+1]
             secondOp.addDependency(firstOp)
