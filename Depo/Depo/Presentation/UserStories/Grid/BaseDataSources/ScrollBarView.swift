@@ -9,6 +9,7 @@
 import UIKit
 
 protocol ScrollBarViewDelegate: class {
+    func scrollBarViewBeganDraggin()
     func scrollBarViewDidEndDraggin()
 }
 
@@ -301,6 +302,7 @@ final class ScrollBarView: UIView {
         case .began:
             gestureBegan(at: touchPoint)
             showLabelAnimated()
+            delegate?.scrollBarViewBeganDraggin()
         case .changed:
             gestureMoved(to: touchPoint)
         case .ended, .cancelled, .failed:

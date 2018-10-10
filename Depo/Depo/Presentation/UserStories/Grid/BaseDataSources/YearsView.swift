@@ -18,14 +18,33 @@ final class YearsView: UIView {
     
     private var labels = [UILabel]()
     private var labelsOffsetRatio = [CGFloat]()
-    private let selfWidth: CGFloat = 100
+    private let selfWidth: CGFloat = 85
     
     private var cellHeight: CGFloat = 1
     private var headerHeight: CGFloat = 1
     private var lineSpaceHeight: CGFloat = 1
     private var numberOfColumns = 1
     
+    private var additionalSections: [(name: String, count: Int)] = []
+    
     private let lock = NSLock()
+    
+    private let animationDuration = 0.3
+    private let hideAnimationDelay = 1.0
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        alpha = 0 /// intial state is hidden
+    }
     
     // MARK: - UIScrollView
     
@@ -106,9 +125,25 @@ final class YearsView: UIView {
         }
     }
     
+    func hideAnimated() {
+        UIView.animate(withDuration: animationDuration, delay: hideAnimationDelay, animations: { 
+            self.alpha = 0
+        }, completion: nil)
+    }
+    
+    func showAnimated() {
+        UIView.animate(withDuration: self.animationDuration) { 
+            self.alpha = 1
+        }
+    }
+    
     // MARK: - Dates
     
     func update(by dates: [Date]) {
+        lock.lock()
+        defer { lock.unlock() }
+        let dates = dates /// guard for dates changing 
+        
         if dates.isEmpty {
             return
         }
@@ -124,8 +159,6 @@ final class YearsView: UIView {
         self.headerHeight = headerHeight
         self.numberOfColumns = numberOfColumns
     }
-    
-    private var additionalSections: [(name: String, count: Int)] = []
     
     func update(additionalSections: [(name: String, count: Int)]) {
         self.additionalSections = additionalSections
@@ -226,7 +259,6 @@ final class YearsView: UIView {
     private func udpateLabels(from yearsArray: YearsArray) {
         DispatchQueue.main.async {
             self.lock.lock()
-            defer { self.lock.unlock() }
             
             self.labels.forEach { $0.removeFromSuperview() }
             self.labels.removeAll()
@@ -242,6 +274,8 @@ final class YearsView: UIView {
                 self.addSubview(label)
                 self.labels.append(label)
             }
+            
+            self.lock.unlock()
         }
     }
     

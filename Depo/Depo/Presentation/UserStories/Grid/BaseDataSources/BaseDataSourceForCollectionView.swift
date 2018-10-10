@@ -2037,7 +2037,11 @@ extension BaseDataSourceForCollectionView {
 
 
 extension BaseDataSourceForCollectionView: ScrollBarViewDelegate {
+    func scrollBarViewBeganDraggin() {
+        yearsView.showAnimated()
+    }
     func scrollBarViewDidEndDraggin() {
         updateScrollBarTextIfNeed()
+        yearsView.hideAnimated()
     }
 }
