@@ -101,6 +101,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         
         compoundItems(pageItems: filteredItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] response in
             debugPrint("---BATH page num is %i", pageNum)
+
             self?.batchInsertItems(newIndexes: response, emptyItems: tempoEmptyItems)
             
         })
@@ -237,18 +238,19 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 }
                 
             } else {
-                
+                guard let lastIndex = array.last else {
+                    return
+                }
                 DispatchQueue.main.async {
-                    var biggestNewSection: Int = 0
-                    array.forEach{
-                        if $0.section > collectionView.numberOfSections-1, $0.section > biggestNewSection {
-                            biggestNewSection = $0.section
-                        }
+                    let biggestNewSectionNum = lastIndex.section + (emptyItems.isEmpty ? 1 : 2) 
+                    let oldSectionNum = collectionView.numberOfSections
+
+                    var newArray = IndexSet()
+                    if biggestNewSectionNum > oldSectionNum {
+                        newArray = IndexSet(integersIn: Range(oldSectionNum..<biggestNewSectionNum))
                     }
                     collectionView.performBatchUpdates({
-                        if biggestNewSection > collectionView.numberOfSections-1 {
-                            collectionView.insertSections(IndexSet(integersIn: Range(collectionView.numberOfSections-1..<biggestNewSection)))
-                        }
+                        collectionView.insertSections(newArray)
                         collectionView.insertItems(at: array)
                     }, completion: { status in
                         self.delegate?.filesAppendedAndSorted()
