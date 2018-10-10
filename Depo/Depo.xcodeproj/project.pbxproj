@@ -2895,6 +2895,8 @@
 		CE394B621F6FFA8200128324 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE394B611F6FFA8200128324 /* Array+Safe.swift */; };
 		CE39615120C29B5E00D145E0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
 		CE39615220C29B6400D145E0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
+		CE39D3E6216B756E004AB6D7 /* YearsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39D3E5216B756D004AB6D7 /* YearsView.swift */; };
+		CE39D3E7216B756E004AB6D7 /* YearsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39D3E5216B756D004AB6D7 /* YearsView.swift */; };
 		CE3A3003200F4B030028C900 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A3002200F4B030028C900 /* Validator.swift */; };
 		CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3AA9AE1F4D686D000157AF /* CoreData.framework */; };
 		CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */; };
@@ -5318,6 +5320,7 @@
 		CE37FF061F7BEB5B00EF5FF1 /* OfferApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferApple.swift; sourceTree = "<group>"; };
 		CE37FF081F7BEB7600EF5FF1 /* PurchaseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseResult.swift; sourceTree = "<group>"; };
 		CE394B611F6FFA8200128324 /* Array+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Safe.swift"; sourceTree = "<group>"; };
+		CE39D3E5216B756D004AB6D7 /* YearsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YearsView.swift; sourceTree = "<group>"; };
 		CE3A3002200F4B030028C900 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		CE3AA9AE1F4D686D000157AF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		CE3AA9C21F4D860F000157AF /* LifeBoxModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LifeBoxModel.xcdatamodel; sourceTree = "<group>"; };
@@ -7544,6 +7547,7 @@
 				B5390D7D2165F4F500A02002 /* QuickScrollImageLoader */,
 				B5390D7A2164F2C600A02002 /* TextInsetsLabel.swift */,
 				B5390D772164F0F700A02002 /* ScrollBarView.swift */,
+				CE39D3E5216B756D004AB6D7 /* YearsView.swift */,
 				8CF6A9BD207C8C32007DEF71 /* PageCompounder.swift */,
 				7C3A743E1F05293800124DF5 /* FilesDataSource */,
 				7C0EBCFF1F4C5B5100283ECF /* BaseDataSourceItem.swift */,
@@ -14666,6 +14670,7 @@
 				8C0E8DD21FDEBDFF00789C91 /* CreateStoryNameInitializer.swift in Sources */,
 				8C0E8DD31FDEBDFF00789C91 /* AudioSelectionCollectionViewCell.swift in Sources */,
 				8C0E8DD41FDEBDFF00789C91 /* TermsAndServicesPresenter.swift in Sources */,
+				CE39D3E7216B756E004AB6D7 /* YearsView.swift in Sources */,
 				9807261D203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */,
 				8C0E8DD51FDEBDFF00789C91 /* TermsAndServicesInteractorInput.swift in Sources */,
 				CED4B0282017505300D06CA9 /* Mapping.swift in Sources */,
@@ -15835,6 +15840,7 @@
 				8C06AC0820066641003D8E05 /* TurkcellSecurityConfigurator.swift in Sources */,
 				CE51ACD31EF90853005DCEE0 /* TermsAndServicesModuleInput.swift in Sources */,
 				CE51ACD41EF90853005DCEE0 /* LoginInteractorInput.swift in Sources */,
+				CE39D3E6216B756E004AB6D7 /* YearsView.swift in Sources */,
 				7C4988181F3320420039C5F2 /* CreateStoryPhotosOrderInteractorOutput.swift in Sources */,
 				B520000C202492A90096D036 /* SynchronizedArray.swift in Sources */,
 				CEEB7B1720AAC3160070FDC2 /* UIButton+Image.swift in Sources */,

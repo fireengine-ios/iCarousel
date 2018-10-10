@@ -8,9 +8,14 @@
 
 import UIKit
 
-/// https://github.com/TimOliver/TOScrollBar
+protocol ScrollBarViewDelegate: class {
+    func scrollBarViewDidEndDraggin()
+}
 
+/// https://github.com/TimOliver/TOScrollBar
 final class ScrollBarView: UIView {    
+    
+    weak var delegate: ScrollBarViewDelegate?
     
     private static let scrollBarHandleImage = Images.scrollBarHandle
     
@@ -267,13 +272,14 @@ final class ScrollBarView: UIView {
     }
     
     var heightOfHandleForContentSize: CGFloat {
-        guard let scrollView = scrollView else {
-            return scrollBarHandleMinHeight
-        }
-        
-        let heightRatio = scrollView.frame.height / scrollView.contentSize.height
-        let height = frame.height * heightRatio
-        return max(floor(height), scrollBarHandleMinHeight)
+        return scrollBarHandleMinHeight
+        //        guard let scrollView = scrollView else {
+        //            return scrollBarHandleMinHeight
+        //        }
+        //        
+        //        let heightRatio = scrollView.frame.height / scrollView.contentSize.height
+        //        let height = frame.height * heightRatio
+        //        return max(floor(height), scrollBarHandleMinHeight)
     }
     
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
@@ -297,10 +303,11 @@ final class ScrollBarView: UIView {
             showLabelAnimated()
         case .changed:
             gestureMoved(to: touchPoint)
-        case .ended, .cancelled:
+        case .ended, .cancelled, .failed:
             gestureEnded()
             hideLabelAnimated()
-        case .possible, .failed:
+            delegate?.scrollBarViewDidEndDraggin()
+        case .possible:
             break
         }
     }
