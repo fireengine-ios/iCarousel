@@ -244,9 +244,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     self.isLocalFilesRequested = false
                     self.delegate?.filesAppendedAndSorted()
                     self.isDropedData = false
-                    if !self.isPaginationDidEnd {
-                        self.delegate?.getNextItems()
-                    }
+                    self.delegate?.getNextItems()
                 }
                 
             } else {
@@ -1183,7 +1181,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     }
                 }
             })
-        case .remoteUrl(_) :
+            
+        default:
             if let meta = wraped.metaData {
                 cell_.setImage(with: meta)
             } else {

@@ -105,7 +105,6 @@ final class CellImageManager {
         let doneMediumOperation = BlockOperation { [weak self, unowned downloadMediumOperation] in
             if let outputImage = downloadMediumOperation.outputData as? UIImage {
                 if downloadMediumOperation.name == self?.uniqueId {
-                    self?.lastSavedImage = outputImage
                     self?.processingState = .mediumReady
                     self?.mediumDoneBlock?(outputImage, true)
                 }
@@ -125,7 +124,6 @@ final class CellImageManager {
         let doneThumbnailOperation = BlockOperation { [weak self, unowned blurOperation] in
             if let outputImage = blurOperation.outputData as? UIImage {
                 if blurOperation.name == self?.uniqueId {
-                    self?.lastSavedImage = outputImage
                     self?.processingState = .thumbnailReady
                     self?.thumbnailDoneBlock?(outputImage, false)
                 } else {
