@@ -18,7 +18,7 @@ final class YearsView: UIView {
     
     private var labels = [UILabel]()
     private var labelsOffsetRatio = [CGFloat]()
-    private let selfWidth: CGFloat = 100
+    private let selfWidth: CGFloat = 85
     
     private var cellHeight: CGFloat = 1
     private var headerHeight: CGFloat = 1
@@ -140,6 +140,10 @@ final class YearsView: UIView {
     // MARK: - Dates
     
     func update(by dates: [Date]) {
+        lock.lock()
+        defer { lock.unlock() }
+        let dates = dates /// guard for dates changing 
+        
         if dates.isEmpty {
             return
         }
@@ -255,7 +259,6 @@ final class YearsView: UIView {
     private func udpateLabels(from yearsArray: YearsArray) {
         DispatchQueue.main.async {
             self.lock.lock()
-            defer { self.lock.unlock() }
             
             self.labels.forEach { $0.removeFromSuperview() }
             self.labels.removeAll()
@@ -271,6 +274,8 @@ final class YearsView: UIView {
                 self.addSubview(label)
                 self.labels.append(label)
             }
+            
+            self.lock.unlock()
         }
     }
     
