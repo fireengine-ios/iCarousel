@@ -7,7 +7,6 @@
 //
 
 final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionView {
-//    var isLocalPaginationOn = false
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
