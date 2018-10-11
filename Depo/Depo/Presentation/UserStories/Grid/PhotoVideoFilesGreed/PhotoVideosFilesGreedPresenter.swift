@@ -29,7 +29,7 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         }
         dataSource.setupCollectionView(collectionView: collectionView,
                                        filters: interactor.originalFilesTypeFilter)
-        
+        dataSource.isLocalPaginationOn = true
         dataSource.delegate = self
         dataSource.needShowProgressInCell = needShowProgressInCells
         dataSource.needShowCustomScrollIndicator = needShowScrollIndicator

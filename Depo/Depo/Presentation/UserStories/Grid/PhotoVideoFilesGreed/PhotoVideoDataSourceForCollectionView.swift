@@ -7,6 +7,7 @@
 //
 
 final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionView {
+//    var isLocalPaginationOn = false
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
@@ -70,9 +71,11 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     
     override func appendCollectionView(items: [WrapData], pageNum: Int) {
        debugPrint("---APPEND page num is %i", pageNum)
-        guard !isPaginationDidEnd else {
-//            reloadData()
+        if isPaginationDidEnd, !isLocalPaginationOn {
             delegate?.filesAppendedAndSorted()
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+            }
             return
         }
         var tempoEmptyItems = [WrapData]()
