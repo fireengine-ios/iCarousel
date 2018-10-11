@@ -304,6 +304,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                     return
                 }
                 DispatchQueue.main.async {
+                    ///(emptyItems.isEmpty ? 1 : 2) we need this part to check if need new sections for missing dated
                     let biggestNewSectionNum = lastIndex.section + (emptyItems.isEmpty ? 1 : 2) 
                     let oldSectionNum = collectionView.numberOfSections
 
@@ -329,7 +330,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                                         self?.batchInsertItems(newIndexes: response, emptyItems: [])
                                     })
                                 }
-                            } else if self.isPaginationDidEnd, self.isLocalPaginationOn {
+                            } else if self.isLocalPaginationOn {
                                 self.compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
                                     self?.batchInsertItems(newIndexes: response, emptyItems: [])
                                 })
