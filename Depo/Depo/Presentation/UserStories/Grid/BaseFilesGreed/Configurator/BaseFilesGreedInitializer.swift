@@ -23,7 +23,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
         viewController.scrolliblePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
         viewController.scrolliblePopUpView.isEnable = true
-        let configurator = BaseFilesGreedModuleConfigurator()
+        let configurator = PhotoVideoFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .sync, .addToAlbum, .delete],
                                                style: .default, tintColor: nil)
         

@@ -2348,6 +2348,12 @@
 		8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */; };
 		8C2924C3205A4B1B005E40C9 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
 		8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
+		8C353D932167887E00B1C85C /* PhotoVideoDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C353D922167887D00B1C85C /* PhotoVideoDataSourceForCollectionView.swift */; };
+		8C353D942167887E00B1C85C /* PhotoVideoDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C353D922167887D00B1C85C /* PhotoVideoDataSourceForCollectionView.swift */; };
+		8C353D9621678BB800B1C85C /* PhotoVideosFilesGreedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C353D9521678BB800B1C85C /* PhotoVideosFilesGreedPresenter.swift */; };
+		8C353D9721678BB800B1C85C /* PhotoVideosFilesGreedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C353D9521678BB800B1C85C /* PhotoVideosFilesGreedPresenter.swift */; };
+		8C353D992167988400B1C85C /* PhotoVideoFilesGreedModuleConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C353D982167988400B1C85C /* PhotoVideoFilesGreedModuleConfigurator.swift */; };
+		8C353D9A2167988400B1C85C /* PhotoVideoFilesGreedModuleConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C353D982167988400B1C85C /* PhotoVideoFilesGreedModuleConfigurator.swift */; };
 		8C3930EF2100668300C1D82D /* GoogleService-Info-ent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */; };
 		8C3930F02100668300C1D82D /* GoogleService-Info-ent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */; };
 		8C3930F12100668300C1D82D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EE2100668300C1D82D /* GoogleService-Info.plist */; };
@@ -4925,6 +4931,9 @@
 		8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUserInputCellView.swift; sourceTree = "<group>"; };
 		8C28D27B1FC59C260098FE89 /* Depo_LifeTech copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Depo_LifeTech copy-Info.plist"; path = "/Users/aleksandr_life/Repos/stash/lifebox-ios-new/Depo/Depo_LifeTech copy-Info.plist"; sourceTree = "<absolute>"; };
 		8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPhoneMailCell.xib; sourceTree = "<group>"; };
+		8C353D922167887D00B1C85C /* PhotoVideoDataSourceForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDataSourceForCollectionView.swift; sourceTree = "<group>"; };
+		8C353D9521678BB800B1C85C /* PhotoVideosFilesGreedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideosFilesGreedPresenter.swift; sourceTree = "<group>"; };
+		8C353D982167988400B1C85C /* PhotoVideoFilesGreedModuleConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoFilesGreedModuleConfigurator.swift; sourceTree = "<group>"; };
 		8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-ent.plist"; sourceTree = "<group>"; };
 		8C3930EE2100668300C1D82D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
@@ -9341,6 +9350,16 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		8C353D9B216B36F300B1C85C /* PhotoVideoFilesGreed */ = {
+			isa = PBXGroup;
+			children = (
+				8C353D982167988400B1C85C /* PhotoVideoFilesGreedModuleConfigurator.swift */,
+				8C353D9521678BB800B1C85C /* PhotoVideosFilesGreedPresenter.swift */,
+				8C353D922167887D00B1C85C /* PhotoVideoDataSourceForCollectionView.swift */,
+			);
+			path = PhotoVideoFilesGreed;
+			sourceTree = "<group>";
+		};
 		8C3930EA2100668300C1D82D /* googleAnalytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -10840,14 +10859,15 @@
 		CE3EB30E1FC7F6A0000B70D6 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				7C3A74341F04DE2800124DF5 /* BaseDataSources */,
+				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
+				8C353D9B216B36F300B1C85C /* PhotoVideoFilesGreed */,
 				4A56D5A4202AF467003A4624 /* FaceImageAddName */,
 				2BA37C24202831BA00660394 /* FaceImageChangeCover */,
 				78E8E29F202317A300A979AB /* FaceImageItemPhotos */,
 				4A9B38F8201F3189009FC572 /* FaceImageItems */,
 				7C6945D620039F4A00152344 /* FreeAppSpace */,
 				7C233CA61FD18DDA0013CCA0 /* UploadFromLifeBox */,
-				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
-				7C3A74341F04DE2800124DF5 /* BaseDataSources */,
 				3C9A2005A04679D300893C3E /* UploadFilesSelection */,
 				218D03D551C55699103C7754 /* SelectFolder */,
 				A981DAC5F519E2A31F7DC6B4 /* Albums */,
@@ -14373,6 +14393,7 @@
 				8C0E8CD91FDEBDFF00789C91 /* SearchViewInitializer.swift in Sources */,
 				8C0E8CDA1FDEBDFF00789C91 /* Configuration.m in Sources */,
 				8C0B919520170E3E00A5BA81 /* DuplicatedContactTableViewCell.swift in Sources */,
+				8C353D942167887E00B1C85C /* PhotoVideoDataSourceForCollectionView.swift in Sources */,
 				8C0E8CDB1FDEBDFF00789C91 /* FetchService.swift in Sources */,
 				8C0E8CDC1FDEBDFF00789C91 /* VisualMusicPlayerViewInput.swift in Sources */,
 				8CF6A9C9207C8DD3007DEF71 /* AssetsCache.swift in Sources */,
@@ -14416,6 +14437,7 @@
 				8C0E8CF81FDEBDFF00789C91 /* KeyboardLayoutConstraint.swift in Sources */,
 				C62239B8204976F20043ED44 /* FaceImagePhotosViewInput.swift in Sources */,
 				8C0E8CF91FDEBDFF00789C91 /* AutoSyncInitializer.swift in Sources */,
+				8C353D9721678BB800B1C85C /* PhotoVideosFilesGreedPresenter.swift in Sources */,
 				8C0E8CFA1FDEBDFF00789C91 /* CreateStoryPhotosOrderRouter.swift in Sources */,
 				8C0E8CFB1FDEBDFF00789C91 /* UpdateServerIntegration.m in Sources */,
 				B56FBB202122C3D9004F4A59 /* TermsOfUseInitializer.swift in Sources */,
@@ -14538,6 +14560,7 @@
 				C62239BD2049774B0043ED44 /* PeopleAlbumSliderInteractor.swift in Sources */,
 				8C0E8D641FDEBDFF00789C91 /* BottomSelectionTabBarViewController.swift in Sources */,
 				8C0E8D651FDEBDFF00789C91 /* BaseDataSourceForCollectionView.swift in Sources */,
+				8C353D9A2167988400B1C85C /* PhotoVideoFilesGreedModuleConfigurator.swift in Sources */,
 				8C0E8D661FDEBDFF00789C91 /* AutoSyncViewController.swift in Sources */,
 				8CD2B3B41FE7B42500280547 /* AutoUploadIsOffPopUp.swift in Sources */,
 				8C0E8D681FDEBDFF00789C91 /* AlertFilesActionsSheetInteractorInput.swift in Sources */,
@@ -15543,6 +15566,7 @@
 				CE51ABAD1EF90853005DCEE0 /* Configuration.m in Sources */,
 				B5FB65761FDE6F6900A02FD7 /* OperationProgressService.swift in Sources */,
 				CE680BC5203186E6001A8DF6 /* PhotoVideoDetailCell.swift in Sources */,
+				8C353D932167887E00B1C85C /* PhotoVideoDataSourceForCollectionView.swift in Sources */,
 				CE3AA9D91F4EB153000157AF /* FetchService.swift in Sources */,
 				8C7786A81F3F38F0005CB432 /* VisualMusicPlayerViewInput.swift in Sources */,
 				CE51ABB31EF90853005DCEE0 /* AutoSyncModuleInput.swift in Sources */,
@@ -15586,6 +15610,7 @@
 				4A9B38F4201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */,
 				CEAE3FED1EFD517300A405B2 /* CustomNavBarView.swift in Sources */,
 				7C3A74491F07927200124DF5 /* CollectionViewCellForPhoto.swift in Sources */,
+				8C353D9621678BB800B1C85C /* PhotoVideosFilesGreedPresenter.swift in Sources */,
 				2BA37C3D202837C800660394 /* FaceImageChangeCoverInitializer.swift in Sources */,
 				782E40B31FE7D0B9007F7838 /* RecentSearchesService.swift in Sources */,
 				CE51ABDC1EF90853005DCEE0 /* LoginInteractor.swift in Sources */,
@@ -15708,6 +15733,7 @@
 				CEC05B6A1F05399100332EBA /* PhoneVereficationDataStorage.swift in Sources */,
 				78E8E2B22023196B00A979AB /* FaceImagePhotosConfigurator.swift in Sources */,
 				8C00971A1F6BDAD900FA069C /* AlertFilesActionsSheetModuleInput.swift in Sources */,
+				8C353D992167988400B1C85C /* PhotoVideoFilesGreedModuleConfigurator.swift in Sources */,
 				CEF41E9B2035B2BF0008FCD5 /* PreventCollectionView.swift in Sources */,
 				8C6EF8811F348B5C002AC795 /* BottomSelectionTabBarViewController.swift in Sources */,
 				7C3A74361F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift in Sources */,

@@ -119,34 +119,17 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var isHeaderless = false
     
-    private var isLocalPaginationOn = false // ---------------------=======
-    private var isLocalFilesRequested = false // -----------------------=========
-    private var isDropedData = true
+    var isLocalPaginationOn = false
+    var isLocalFilesRequested = false
+    var isDropedData = true
     
     var allMediaItems = [WrapData]()
-    var allItems = [[WrapData]]() {
-        didSet {
-            if allItems.isEmpty {
-                return
-            }
-            
-            let numberOfColumns = Int(Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone)
-            // TODO: getCellSizeForList must be called in main queue. for a while it is woking without it
-            let cellHeight = delegate?.getCellSizeForList().height ?? 0
-            let dates = allItems.flatMap({ $0 }).flatMap({ $0.metaData?.takenDate})
-            yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
-            
-            if !emptyMetaItems.isEmpty {
-                yearsView.update(additionalSections: [(TextConstants.photosVideosViewMissingDatesHeaderText, emptyMetaItems.count)])
-            }
-            
-            yearsView.update(by: dates)
-        }
-    }
-    private var pageLeftOvers = [WrapData]()
-    private var emptyMetaItems = [WrapData]()
+
+    var allItems = [[WrapData]]()
+    var pageLeftOvers = [WrapData]()
+    var emptyMetaItems = [WrapData]()
     
-    private var uploadedObjectID = [String]()
+    var uploadedObjectID = [String]()
     private var uploadToAlbumItems = [String]()
     
     var needShowProgressInCell = false
@@ -165,16 +148,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     private var sortingRules: SortedRules
     
-    private let pageCompounder = PageCompounder()
+    let pageCompounder = PageCompounder()
     
-    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
+    let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
     
-    private var currentTopSection: Int?
+    var currentTopSection: Int?
     
-    private var lastPage: Int = 0
-    
-    private let scrollBar = ScrollBarView()
-    private let yearsView = YearsView()
+    var lastPage: Int = 0
     
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
@@ -247,7 +227,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    private func insertItems(with response: ResponseResult<[IndexPath]>, emptyItems: [Item], oldSectionNumbers: Int, containsEmptyMetaItems: Bool) {
+    func insertItems(with response: ResponseResult<[IndexPath]>, emptyItems: [Item], oldSectionNumbers: Int, containsEmptyMetaItems: Bool) {
         guard let collectionView = collectionView else {
             return
         }
@@ -263,9 +243,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     self.isLocalFilesRequested = false
                     self.delegate?.filesAppendedAndSorted()
                     self.isDropedData = false
-                    if !self.isPaginationDidEnd {
-                        self.delegate?.getNextItems()
-                    }
                 }
                 
             } else {
@@ -307,7 +284,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                 print("BATCH: \(!self.isPaginationDidEnd), \(self.isLocalPaginationOn), \(!self.isLocalFilesRequested)")
                                 if !self.isPaginationDidEnd,
                                     self.isLocalPaginationOn,
-                                    !self.isLocalFilesRequested {
+                                    !self.isLocalFilesRequested {// array.count < self.pageCompounder.pageSize {
                                     debugPrint("!!! TRY TO GET NEW PAGE")
                                     self.delegate?.getNextItems()
                                 }
@@ -390,7 +367,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return false
     }
     
-    fileprivate func compoundItems(pageItems: [WrapData], pageNum: Int, originalRemotes: Bool = false, complition: @escaping ResponseArrayHandler<IndexPath>) {
+    func compoundItems(pageItems: [WrapData], pageNum: Int, originalRemotes: Bool = false, complition: @escaping ResponseArrayHandler<IndexPath>) {
         
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
@@ -533,11 +510,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    private func getIndexPathsForItems(_ items: [Item]) -> [IndexPath] {
+    func getIndexPathsForItems(_ items: [Item]) -> [IndexPath] {
         return items.flatMap { self.getIndexPathForObject(itemUUID: $0.uuid) }
     }
     
-    private func transformedLeftOvers() -> [WrapData] {
+    func transformedLeftOvers() -> [WrapData] {
         let pseudoPageArray = pageLeftOvers.filter{!$0.isLocalItem}
         return pseudoPageArray
     }
@@ -562,7 +539,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return false
     }
     
-    private func breakItemsIntoSections(breakingArray: [WrapData]) {
+    func breakItemsIntoSections(breakingArray: [WrapData]) {
         allItems.removeAll()
         
         let needShowEmptyMetaDataItems = needShowEmptyMetaItems && (currentSortType == .metaDataTimeUp || currentSortType == .metaDataTimeDown)
@@ -599,7 +576,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    private func getFileFilterType(filters: [GeneralFilesFiltrationType]) -> FileType? {
+    func getFileFilterType(filters: [GeneralFilesFiltrationType]) -> FileType? {
         for filter in filters {
             switch filter {
             case  .fileType(.image):
@@ -670,7 +647,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    private func getHeaderText(indexPath: IndexPath) -> String {
+    func getHeaderText(indexPath: IndexPath) -> String {
         var headerText = ""
         
         guard let itemsInSection = allItems[safe: indexPath.section], let item = itemsInSection.first else {
@@ -727,13 +704,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         registerHeaders()
         registerFooters()
         registerCells()
-        
-        yearsView.add(to: collectionView)
-        scrollBar.add(to: collectionView)
-        scrollBar.delegate = self
     }
     
-    private func registerCells() {
+    func registerCells() {
         let registreList = [CollectionViewCellsIdsConstant.cellForImage,
                             CollectionViewCellsIdsConstant.cellForStoryImage,
                             CollectionViewCellsIdsConstant.cellForVideo,
@@ -754,7 +727,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
-    private func registerHeaders() {
+    func registerHeaders() {
         let headerNib = UINib(nibName: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID,
                               bundle: nil)
         collectionView?.register(headerNib,
@@ -763,7 +736,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
-    private func registerFooters() {
+    func registerFooters() {
         let headerNib = UINib(nibName: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter,
                               bundle: nil)
         collectionView?.register(headerNib,
@@ -1083,7 +1056,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         updateScrollBarTextIfNeed()
     }
     
-    private func updateScrollBarTextIfNeed() {
+    func updateScrollBarTextIfNeed() {
         if needShowCustomScrollIndicator {
             let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
                 return first < second
@@ -1099,7 +1072,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             let headerText = getHeaderText(indexPath: indexPath)
             delegate?.didChangeTopHeader(text: headerText)
-            scrollBar.setText(headerText)
         }
     }
     
@@ -1214,32 +1186,29 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-//        let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
-//        let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
-//        let isLastCell = Bool((countRow - 1) == indexPath.row)
-//        
-//        let oldSectionNumbers = numberOfSections(in: collectionView)
-//        let containsEmptyMetaItems = !emptyMetaItems.isEmpty
-//        
-//        if isLastCell, isLastSection, !isPaginationDidEnd {
-//            if pageLeftOvers.isEmpty, !isLocalFilesRequested {
-//                delegate?.getNextItems()
-//            } else if !pageLeftOvers.isEmpty, !isLocalFilesRequested {
-//                debugPrint("!!! page compunding for page \(lastPage)")
-//                
-//                compoundItems(pageItems: [], pageNum: lastPage, complition: { [weak self] response in
-//                    self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
-//                    
-//                })
-//            }
-////            else {
-////                delegate?.getNextItems()
-////            }
-//        } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
-//            compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
-//                self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
-//            })
-//        }
+        let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
+        let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
+        let isLastCell = Bool((countRow - 1) == indexPath.row)
+        
+        let oldSectionNumbers = numberOfSections(in: collectionView)
+        let containsEmptyMetaItems = !emptyMetaItems.isEmpty
+        
+        if isLastCell, isLastSection, !isPaginationDidEnd {
+            if pageLeftOvers.isEmpty, !isLocalFilesRequested {
+                delegate?.getNextItems()
+            } else if !pageLeftOvers.isEmpty, !isLocalFilesRequested {
+                debugPrint("!!! page compunding for page \(lastPage)")
+                
+                compoundItems(pageItems: [], pageNum: lastPage, complition: { [weak self] response in
+                    self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+                    
+                })
+            }
+        } else if isLastCell, isLastSection, isPaginationDidEnd, isLocalPaginationOn, !isLocalFilesRequested {
+            compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
+                self?.insertItems(with: response, emptyItems: [], oldSectionNumbers: oldSectionNumbers, containsEmptyMetaItems: containsEmptyMetaItems)
+            })
+        }
         
         if let photoCell = cell_ as? CollectionViewCellForPhoto {
             let file = itemForIndexPath(indexPath: indexPath)
@@ -2035,13 +2004,3 @@ extension BaseDataSourceForCollectionView {
 
 }
 
-
-extension BaseDataSourceForCollectionView: ScrollBarViewDelegate {
-    func scrollBarViewBeganDraggin() {
-        yearsView.showAnimated()
-    }
-    func scrollBarViewDidEndDraggin() {
-        updateScrollBarTextIfNeed()
-        yearsView.hideAnimated()
-    }
-}
