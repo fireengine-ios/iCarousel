@@ -111,12 +111,12 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     override func setImage(with metaData: BaseMetaData) {
         cellImageManager = CellImageManager.instance(by: metaData.mediumUrl?.byTrimmingQuery)
         uuid = cellImageManager?.uniqueId
-        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached in
-            guard let image = image, let uniqueId = self?.uuid, self?.cellImageManager?.uniqueId == uniqueId else {
-                return
-            }
-
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
             DispatchQueue.toMain {
+                guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
+                    return
+                }
+                
                 let needAnimate = !cached && (self?.imageView.image == nil)
                 self?.setImage(image: image, animated: needAnimate)
             }
@@ -189,6 +189,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         cellImageManager = nil
         imageView.image = nil
         uuid = nil
+        setAssetId(nil)
     }
 
 }

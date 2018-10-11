@@ -9,7 +9,7 @@
 import Foundation
 
 
-typealias CellImageManagerOperationsFinished = (_ image: UIImage?, _ cached: Bool)->Void
+typealias CellImageManagerOperationsFinished = (_ image: UIImage?, _ cached: Bool, _ uuid: String?)->Void
 
 
 protocol DataTransferrableOperation: class {
@@ -97,23 +97,23 @@ final class CellImageManager {
     
     private func setupOperations(thumbnail: URL?, url: URL?) {
         guard processingState != .mediumReady else {
-            mediumDoneBlock?(lastSavedImage, true)
+            mediumDoneBlock?(lastSavedImage, true, uniqueId)
             return
         }
         
         let downloadMediumOperation = ImageDownloadOperation(url: url)
         let doneMediumOperation = BlockOperation { [weak self, unowned downloadMediumOperation] in
-            if let outputImage = downloadMediumOperation.outputData as? UIImage {
+            if let uuid = self?.uniqueId, let outputImage = downloadMediumOperation.outputData as? UIImage {
                 if downloadMediumOperation.name == self?.uniqueId {
                     self?.lastSavedImage = outputImage
                     self?.processingState = .mediumReady
-                    self?.mediumDoneBlock?(outputImage, true)
+                    self?.mediumDoneBlock?(outputImage, true, uuid)
                 }
             }
         }
         
         guard processingState != .thumbnailReady else {
-            thumbnailDoneBlock?(lastSavedImage, true)
+            thumbnailDoneBlock?(lastSavedImage, true, uniqueId)
             myOperationsOrdered = [downloadMediumOperation, doneMediumOperation]
             startOperations()
             return
@@ -124,10 +124,10 @@ final class CellImageManager {
         let adapter = generateAdapterBlockOperation(dependent: blurOperation, dependency: downloadThumbnailOperation)
         let doneThumbnailOperation = BlockOperation { [weak self, unowned blurOperation] in
             if let outputImage = blurOperation.outputData as? UIImage {
-                if blurOperation.name == self?.uniqueId {
+                if let uuid = self?.uniqueId, blurOperation.name == self?.uniqueId {
                     self?.lastSavedImage = outputImage
                     self?.processingState = .thumbnailReady
-                    self?.thumbnailDoneBlock?(outputImage, false)
+                    self?.thumbnailDoneBlock?(outputImage, false, uuid)
                 } else {
                     self?.cancelImageLoading()
                 }
