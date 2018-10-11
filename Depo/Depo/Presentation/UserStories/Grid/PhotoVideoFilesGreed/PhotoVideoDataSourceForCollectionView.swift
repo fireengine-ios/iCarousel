@@ -59,9 +59,9 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 }
             })
             
-        case let .remoteUrl(url):
-            if let url = url {
-                cell_.setImage(with: url)
+        case let .remoteUrl(_):
+            if let meta = wraped.metaData {
+                cell_.setImage(with: meta)
             } else {
                 cell_.setPlaceholderImage(fileType: wraped.fileType)
             }
