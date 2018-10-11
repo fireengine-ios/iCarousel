@@ -8,6 +8,32 @@
 
 final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionView {
     
+    private let scrollBar = ScrollBarView()
+    private let yearsView = YearsView()
+    //=======
+    override var allItems: [[WrapData]] {
+            didSet {
+                if allItems.isEmpty {
+                    return
+                }
+    
+//                let numberOfColumns = Int(Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone)
+//                // TODO: getCellSizeForList must be called in main queue. for a while it is woking without it
+//                let cellHeight = delegate?.getCellSizeForList().height ?? 0
+//                let dates = allItems.flatMap({ $0 }).flatMap({ $0.metaData?.takenDate})
+//                yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
+//
+//                if !emptyMetaItems.isEmpty {
+//                    yearsView.update(additionalSections: [(TextConstants.photosVideosViewMissingDatesHeaderText, emptyMetaItems.count)])
+//                }
+//
+//                yearsView.update(by: dates)
+            }
+        }
+    //    private var pageLeftOvers = [WrapData]()
+    //    private var emptyMetaItems = [WrapData]()
+    //>>>>>>> quickscroll-plan-a-develop
+    
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
             let cell_ = cell as? CollectionViewCellDataProtocol else {
@@ -66,6 +92,43 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             height = 50
         }
         return CGSize(width: collectionView.contentSize.width, height: height)
+    }
+    
+    override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]? = nil){
+        
+        originalFilters = filters
+        
+        self.collectionView = collectionView
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        registerHeaders()
+        registerFooters()
+        registerCells()
+        
+        yearsView.add(to: collectionView)
+        scrollBar.add(to: collectionView)
+        scrollBar.delegate = self
+    }
+    
+    override func updateScrollBarTextIfNeed() {
+        if needShowCustomScrollIndicator {
+            let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
+                return first < second
+            })
+            
+            guard let indexPath = firstVisibleIndexPath else {
+                return
+            }
+            
+            if let currentTopSection = currentTopSection, currentTopSection == indexPath.section {
+                return
+            }
+            
+            let headerText = getHeaderText(indexPath: indexPath)
+            delegate?.didChangeTopHeader(text: headerText)
+            scrollBar.setText(headerText)
+        }
     }
     
     override func appendCollectionView(items: [WrapData], pageNum: Int) {
@@ -284,3 +347,14 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         }
     }
 }
+
+ extension PhotoVideoDataSourceForCollectionView: ScrollBarViewDelegate {
+    func scrollBarViewBeganDraggin() {
+        yearsView.showAnimated()
+    }
+    func scrollBarViewDidEndDraggin() {
+        updateScrollBarTextIfNeed()
+        yearsView.hideAnimated()
+    }
+ }
+ 

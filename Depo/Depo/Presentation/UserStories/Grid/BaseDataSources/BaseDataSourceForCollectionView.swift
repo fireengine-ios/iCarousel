@@ -124,6 +124,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var isDropedData = true
     
     var allMediaItems = [WrapData]()
+
     var allItems = [[WrapData]]()
     var pageLeftOvers = [WrapData]()
     var emptyMetaItems = [WrapData]()
@@ -151,11 +152,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
     
-    private var currentTopSection: Int?
+    var currentTopSection: Int?
     
     var lastPage: Int = 0
-    
-    private let scrollBar = ScrollBarView()
     
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
@@ -238,12 +237,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             if self.isDropedData || array.isEmpty {
                 DispatchQueue.main.async {
                     if self.needReloadData {
+                        CellImageManager.clear()
                         self.collectionView?.reloadData()
                     }
                     self.isLocalFilesRequested = false
                     self.delegate?.filesAppendedAndSorted()
                     self.isDropedData = false
-//                    self.delegate?.getNextItems()
                 }
                 
             } else {
@@ -269,6 +268,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                
                 
                     collectionView.collectionViewLayout.invalidateLayout()
+                    CellImageManager.clear()
                     collectionView.reloadData()
                     collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
                             guard let `self` = self else {
@@ -647,7 +647,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    private func getHeaderText(indexPath: IndexPath) -> String {
+    func getHeaderText(indexPath: IndexPath) -> String {
         var headerText = ""
         
         guard let itemsInSection = allItems[safe: indexPath.section], let item = itemsInSection.first else {
@@ -704,11 +704,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         registerHeaders()
         registerFooters()
         registerCells()
-        
-        scrollBar.add(to: collectionView)
     }
     
-    private func registerCells() {
+    func registerCells() {
         let registreList = [CollectionViewCellsIdsConstant.cellForImage,
                             CollectionViewCellsIdsConstant.cellForStoryImage,
                             CollectionViewCellsIdsConstant.cellForVideo,
@@ -729,7 +727,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
-    private func registerHeaders() {
+    func registerHeaders() {
         let headerNib = UINib(nibName: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID,
                               bundle: nil)
         collectionView?.register(headerNib,
@@ -738,7 +736,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
-    private func registerFooters() {
+    func registerFooters() {
         let headerNib = UINib(nibName: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter,
                               bundle: nil)
         collectionView?.register(headerNib,
@@ -846,6 +844,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             debugLog("BaseDataSourceForCollectionViewDelegate reloadData")
             debugPrint("BaseDataSourceForCollectionViewDelegate reloadData")
             
+            CellImageManager.clear()
             collectionView.reloadData()
             
             if self.numberOfSections(in: collectionView) == 0 {
@@ -866,6 +865,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         debugPrint("Reload updateDisplayngType")
         DispatchQueue.main.async {
+            CellImageManager.clear()
             self.collectionView?.reloadData()
             let firstVisibleIndexPath = self.self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
                 return first < second
@@ -1052,9 +1052,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidScroll(scrollView: scrollView)
-        
         updateCachedAssets()
-        
+        updateScrollBarTextIfNeed()
+    }
+    
+    func updateScrollBarTextIfNeed() {
         if needShowCustomScrollIndicator {
             let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
                 return first < second
@@ -1070,7 +1072,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             let headerText = getHeaderText(indexPath: indexPath)
             delegate?.didChangeTopHeader(text: headerText)
-            scrollBar.setText(headerText)
         }
     }
     
@@ -1177,10 +1178,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     }
                 }
             })
-            
-        case let .remoteUrl(url):
-            if let url = url {
-                cell_.setImage(with: url)
+        case .remoteUrl(_) :
+            if let meta = wraped.metaData {
+                cell_.setImage(with: meta)
             } else {
                 cell_.setPlaceholderImage(fileType: wraped.fileType)
             }
@@ -1221,6 +1221,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             cell.moreButton.isHidden = !needShow3DotsInCell
         }
     }
+    
+    
+    
     
     func hideLoadingFooter() {
         guard let footerView =
@@ -1686,6 +1689,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             DispatchQueue.toMain {
                 self.allItems = newArray
+                CellImageManager.clear()
                 self.collectionView?.reloadData()
                 ///change performBatchUpdates to the reladData() in case of crash
                 self.collectionView?.performBatchUpdates({
@@ -1761,6 +1765,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         DispatchQueue.main.async {
+            CellImageManager.clear()
             self.collectionView?.reloadData()
         }
     }
@@ -1998,3 +2003,4 @@ extension BaseDataSourceForCollectionView {
     }
 
 }
+

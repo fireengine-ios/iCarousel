@@ -21,17 +21,14 @@ class ImageDownloder {
     
     func getImage(patch: URL?, completeImage:@escaping RemoteImage) {
         
-        if (patch == nil) {
+        guard let path = patch, let cachePath = path.byTrimmingQuery?.absoluteString else {
             DispatchQueue.main.async {
                 completeImage(nil)
             }
+            return
         }
-        
-        var cachePath: String?
-        if let path = patch?.absoluteString, let query = patch?.query {
-            cachePath = path.replacingOccurrences(of: "?"+query, with: "")
-        }
-        
+
+
         if let image = SDWebImageManager.shared().imageCache?.imageFromCache(forKey: cachePath) {
             DispatchQueue.main.async {
                 completeImage(image)
@@ -39,18 +36,19 @@ class ImageDownloder {
             return
         }
         
+        
         let item = downloder.downloadImage(with: patch,
                                            options: [.lowPriority/*,.useNSURLCache*/],
                                            progress: nil) { image, data, error, bool in
-                                            
                                             SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
                                             completeImage(image)
         }
         
-        guard let it = item else {
+        guard let downloadItem = item else {
             return
         }
-        tokenList = tokenList + [patch! : it]
+        
+        tokenList = tokenList + [path : downloadItem]
         
     }
     

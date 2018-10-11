@@ -14,6 +14,8 @@ protocol CollectionViewCellDataProtocol {
     
     func setImage(with url: URL)
     
+    func setImage(with metaData: BaseMetaData)
+    
     func setPlaceholderImage(fileType: FileType)
     
     func setSelection(isSelectionActive: Bool, isSelected: Bool)
