@@ -331,6 +331,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                                     })
                                 }
                             } else if self.isLocalPaginationOn {
+                                ///PageNum: 2 beacause we need to compound page applying middle page rules.
                                 self.compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
                                     self?.batchInsertItems(newIndexes: response, emptyItems: [])
                                 })

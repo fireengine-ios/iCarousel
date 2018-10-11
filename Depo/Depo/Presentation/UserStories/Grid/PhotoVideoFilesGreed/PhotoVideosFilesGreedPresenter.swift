@@ -104,7 +104,7 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
     }
     
     override func getContentWithSuccess(items: [WrapData]) {
-        if (view == nil) {
+        guard view != nil else {
             return
         }
         
@@ -118,7 +118,7 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
     }
     
     override func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
-        if (view == nil) {
+        guard view != nil else {
             return
         }
         debugPrint("???getContentWithSuccessEnd()")
