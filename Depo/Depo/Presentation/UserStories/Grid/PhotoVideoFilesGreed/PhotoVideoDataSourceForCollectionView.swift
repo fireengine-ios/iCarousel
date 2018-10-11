@@ -12,24 +12,24 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     private let yearsView = YearsView()
 
     override var allItems: [[WrapData]] {
-            didSet {
-                if allItems.isEmpty {
-                    return
-                }
-    
-                let numberOfColumns = Int(Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone)
-                // TODO: getCellSizeForList must be called in main queue. for a while it is woking without it
-                let cellHeight = delegate?.getCellSizeForList().height ?? 0
-                let dates = allItems.flatMap({ $0 }).flatMap({ $0.metaData?.takenDate})
-                yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
-
-                if !emptyMetaItems.isEmpty {
-                    yearsView.update(additionalSections: [(TextConstants.photosVideosViewMissingDatesHeaderText, emptyMetaItems.count)])
-                }
-
-                yearsView.update(by: dates)
+        didSet {
+            if allItems.isEmpty {
+                return
             }
+            
+            let numberOfColumns = Int(Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone)
+            // TODO: getCellSizeForList must be called in main queue. for a while it is woking without it
+            let cellHeight = delegate?.getCellSizeForList().height ?? 0
+            let dates = allItems.flatMap({ $0 }).flatMap({ $0.metaData?.takenDate})
+            yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
+            
+            if !emptyMetaItems.isEmpty {
+                yearsView.update(additionalSections: [(TextConstants.photosVideosViewMissingDatesHeaderText, emptyMetaItems.count)])
+            }
+            
+            yearsView.update(by: dates)
         }
+    }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
