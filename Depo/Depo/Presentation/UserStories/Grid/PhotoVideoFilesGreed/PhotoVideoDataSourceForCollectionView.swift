@@ -8,6 +8,16 @@
 
 final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionView {
     
+    override var isPaginationDidEnd: Bool {
+        willSet {
+            if !newValue {
+                CardsManager.default.startOperationWith(type: .prepareQuickScroll)
+            }  else {
+                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+            }
+        }
+    }
+    
     private let scrollBar = ScrollBarView()
     private let yearsView = YearsView()
     
@@ -106,6 +116,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     
     private func filesAppendedAndSorted() {
         delegate?.filesAppendedAndSorted()
+        CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
         addScrollBar()
         updateYearsView()
         DispatchQueue.main.async {

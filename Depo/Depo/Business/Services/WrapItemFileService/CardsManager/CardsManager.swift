@@ -13,6 +13,7 @@ enum OperationType: String {
     case sync                       = "Sync"
     case download                   = "Download"
     case prepareToAutoSync          = "prepareToAutoSync"
+    case prepareQuickScroll         = "prepareQuickScroll"
     case autoUploadIsOff            = "autoUploadIsOff"
     case waitingForWiFi             = "waitingForWiFi"
     
@@ -52,7 +53,7 @@ class CardsManager: NSObject {
     private var deletedCards = Set<OperationType>()
     
     var cardsThatStartedByDevice: [OperationType] {
-        return [.upload, .sync, .download, .prepareToAutoSync, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
+        return [.upload, .sync, .download, .prepareToAutoSync, .prepareQuickScroll, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
     }
     
     func clear() {
@@ -140,7 +141,7 @@ class CardsManager: NSObject {
         }
     }
     
-    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
+    func startOperationWith(type: OperationType, allOperations: Int? = nil, completedOperations: Int? = nil) {
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
     
@@ -339,6 +340,8 @@ class CardsManager: NSObject {
             cardView = popUp
         case .prepareToAutoSync:
             cardView = PrepareToAutoSync.initFromNib()
+        case .prepareQuickScroll:
+            cardView = PrepareQuickScroll.initFromNib()
         case .autoUploadIsOff:
             cardView = AutoUploadIsOffPopUp.initFromNib()
         case .waitingForWiFi:
