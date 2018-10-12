@@ -853,9 +853,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return
             }
             
-            collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
-                self?.updateVisibleCells()
-            })
+//            collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
+            self.updateVisibleCells()
+//            })
             self.resetCachedAssets()
         }
     }
