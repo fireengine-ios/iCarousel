@@ -35,6 +35,8 @@ final class PrepareQuickScroll: BaseView {
     
     private var timer: Timer?
     
+    private let progressStep: Float = 0.02
+    
     
     override func configurateView() {
         super.configurateView()
@@ -57,8 +59,6 @@ final class PrepareQuickScroll: BaseView {
     }
     
     @objc private func animateProgress() {
-        let progressStep: Float = 0.02
-
         let currentProgress = progressView.progress
         let newProgress = currentProgress < 1 ? currentProgress + progressStep : 0
         progressView.progress = newProgress
