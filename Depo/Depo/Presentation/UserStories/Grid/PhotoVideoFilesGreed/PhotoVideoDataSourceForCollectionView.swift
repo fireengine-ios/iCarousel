@@ -312,13 +312,16 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                     if biggestNewSectionNum > oldSectionNum {
                         newArray = IndexSet(integersIn: Range(oldSectionNum..<biggestNewSectionNum))
                     }
-                    guard !self.allItems.isEmpty else {
-                        return
-                    }
                     collectionView.performBatchUpdates({
+                        guard !self.allItems.isEmpty else {
+                            return
+                        }
                         collectionView.insertSections(newArray)
                         collectionView.insertItems(at: array)
                     }, completion: { status in
+                        guard !self.isDropedData else {
+                            return
+                        }
                         self.delegate?.filesAppendedAndSorted()
                         self.isLocalFilesRequested = false
                         self.dispatchQueue.async { [weak self] in
