@@ -30,6 +30,7 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         dataSource.setupCollectionView(collectionView: collectionView,
                                        filters: interactor.originalFilesTypeFilter)
         dataSource.isLocalPaginationOn = true
+        
         dataSource.delegate = self
         dataSource.needShowProgressInCell = needShowProgressInCells
         dataSource.needShowCustomScrollIndicator = needShowScrollIndicator
@@ -56,10 +57,21 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         subscribeDataSource()
     }
     
+    override func onReloadData() {
+        debugLog("BaseFilesGreedPresenter onReloadData")
+        
+        if dataSource.isLocalPaginationOn, !dataSource.isPaginationDidEnd {
+            return
+        }
+        //        dataSource.dropData()
+        view?.setThreeDotsMenu(active: false)
+        reloadData()
+    }
+    
     override func reloadData() {
         debugLog("BaseFilesGreedPresenter reloadData")
         debugPrint("BaseFilesGreedPresenter reloadData")
-        
+
         dataSource.dropData()
         dataSource.currentSortType = sortedRule
         dataSource.isHeaderless = (sortedRule == .sizeAZ || sortedRule == .sizeZA)
