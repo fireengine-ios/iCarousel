@@ -82,10 +82,6 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         registerHeaders()
         registerFooters()
         registerCells()
-        
-        yearsView.add(to: collectionView)
-        scrollBar.add(to: collectionView)
-        scrollBar.delegate = self
     }
     
     override func updateScrollBarTextIfNeed() {
@@ -110,10 +106,23 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     
     private func filesAppendedAndSorted() {
         delegate?.filesAppendedAndSorted()
+        addScrollBar()
         updateYearsView()
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
         }
+    }
+    
+    private var isScrollBarAdded = false
+    
+    private func addScrollBar() {
+        guard !isScrollBarAdded, let collectionView = collectionView else {
+            return
+        }
+        isScrollBarAdded = true
+        yearsView.add(to: collectionView)
+        scrollBar.add(to: collectionView)
+        scrollBar.delegate = self
     }
     
     private func updateYearsView() {
