@@ -60,6 +60,10 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         debugLog("BaseFilesGreedPresenter reloadData")
         debugPrint("BaseFilesGreedPresenter reloadData")
         
+        guard !dataSource.isLocalPaginationOn, dataSource.isPaginationDidEnd else {
+            return
+        }
+        
         dataSource.dropData()
         dataSource.currentSortType = sortedRule
         dataSource.isHeaderless = (sortedRule == .sizeAZ || sortedRule == .sizeZA)
