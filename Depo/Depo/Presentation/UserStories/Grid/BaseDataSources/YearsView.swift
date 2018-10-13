@@ -55,9 +55,11 @@ final class YearsView: UIView {
         
         restore(scrollView: self.scrollView)
         self.scrollView = scrollView
+        
         config(scrollView: scrollView)
         scrollView.addSubview(self)
         layoutInScrollView()
+        
     }
     
     private func config(scrollView: UIScrollView?) {
