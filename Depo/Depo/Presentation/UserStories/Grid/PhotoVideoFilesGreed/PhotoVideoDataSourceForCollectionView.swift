@@ -117,9 +117,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     private func filesAppendedAndSorted() {
         delegate?.filesAppendedAndSorted()
         CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-        addScrollBar()
-        updateYearsView()
+       
         DispatchQueue.main.async {
+            self.addScrollBar()
+            self.updateYearsView()
             CellImageManager.clear()
             self.collectionView?.reloadData()
         }

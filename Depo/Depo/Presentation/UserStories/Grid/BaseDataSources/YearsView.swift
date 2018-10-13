@@ -55,11 +55,11 @@ final class YearsView: UIView {
         
         restore(scrollView: self.scrollView)
         self.scrollView = scrollView
-        DispatchQueue.toMain {
-            self.config(scrollView: scrollView)
-            scrollView.addSubview(self)
-            self.layoutInScrollView()
-        }
+        
+        config(scrollView: scrollView)
+        scrollView.addSubview(self)
+        layoutInScrollView()
+        
     }
     
     private func config(scrollView: UIScrollView?) {
