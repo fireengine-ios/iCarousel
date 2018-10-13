@@ -27,7 +27,7 @@ final class CellImageManager {
     }
     
     //MARK: - Static vars
-    private static let maxConcurrentOperations = 16
+    private static let maxConcurrentOperations = 32
     private static let globalDispatchQueue = DispatchQueue(label: DispatchQueueLabels.cellImageManagerQueue)
     
     private static let globalOperationQueue: OperationQueue = {
