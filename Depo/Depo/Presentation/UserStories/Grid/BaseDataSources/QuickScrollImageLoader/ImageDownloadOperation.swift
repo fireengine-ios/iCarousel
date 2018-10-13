@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SDWebImage
 
 
 final class ImageDownloadOperation: Operation, DataTransferrableOperation {
@@ -16,7 +17,8 @@ final class ImageDownloadOperation: Operation, DataTransferrableOperation {
     
     private let semaphore = DispatchSemaphore(value: 0)
     private var url: URL?
-    private let downloader = ImageDownloder()
+    private var task: URLSessionTask?
+    private var imageCache = SDWebImageManager.shared().imageCache
     
     
     init(url: URL?) {
@@ -29,22 +31,47 @@ final class ImageDownloadOperation: Operation, DataTransferrableOperation {
     override func cancel() {
         super.cancel()
         
-        if let url = url {
-            downloader.cancelRequest(path: url)
-        }
+        task?.cancel()
         semaphore.signal()
     }
     
     override func main() {
-        guard !isCancelled, let url = url else {
+        guard !isCancelled, let url = url, let cacheKey = url.byTrimmingQuery?.absoluteString else {
             return
         }
 
-        downloader.getImage(patch: url) { [weak self] image in
-            self?.outputData = image
+        if let image = imageCache?.imageFromCache(forKey: cacheKey) {
+            outputData = image
+            return
+        }
+        
+        guard !isCancelled else {
+            return
+        }
+        
+        task = URLSession.sharedCustom.dataTask(with: url) { [weak self] data, response, error in
+            if let data = data, let image = UIImage(data: data), let `self` = self {
+                self.outputData = image
+                
+                self.imageCache?.store(image, forKey: cacheKey, completion: nil)
+            }
+            
             self?.semaphore.signal()
         }
         
+        task?.resume()
+        
         semaphore.wait()
     }
+}
+
+
+extension URLSession {
+    static let sharedCustom: URLSession = {
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        config.urlCache = nil
+        
+        return URLSession(configuration: config)
+    }()
 }
