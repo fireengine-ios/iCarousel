@@ -27,6 +27,8 @@ final class ImageDownloadOperation: Operation, DataTransferrableOperation {
     
     
     override func cancel() {
+        super.cancel()
+        
         if let url = url {
             downloader.cancelRequest(path: url)
         }
@@ -34,10 +36,10 @@ final class ImageDownloadOperation: Operation, DataTransferrableOperation {
     }
     
     override func main() {
-        if isCancelled {
+        guard !isCancelled, let url = url else {
             return
         }
-        
+
         downloader.getImage(patch: url) { [weak self] image in
             self?.outputData = image
             self?.semaphore.signal()
