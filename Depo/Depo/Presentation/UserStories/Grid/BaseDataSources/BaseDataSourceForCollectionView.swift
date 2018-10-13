@@ -1178,9 +1178,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     }
                 }
             })
-        case .remoteUrl(_) :
-            if let meta = wraped.metaData {
-                cell_.setImage(with: meta)
+        case .remoteUrl(let url) :
+            if let url = url {
+                cell_.setImage(with: url)
             } else {
                 cell_.setPlaceholderImage(fileType: wraped.fileType)
             }

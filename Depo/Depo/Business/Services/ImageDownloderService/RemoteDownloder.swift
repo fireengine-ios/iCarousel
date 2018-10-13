@@ -39,8 +39,11 @@ class ImageDownloder {
         
         let item = downloder.downloadImage(with: patch,
                                            options: [.lowPriority/*,.useNSURLCache*/],
-                                           progress: nil) { image, data, error, bool in
-                                            SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
+                                           progress: nil) { image, data, error, bool in 
+                                            if let image = image {
+                                                SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
+                                            }
+                                            
                                             completeImage(image)
         }
         
