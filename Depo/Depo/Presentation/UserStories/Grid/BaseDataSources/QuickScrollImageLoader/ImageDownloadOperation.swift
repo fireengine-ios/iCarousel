@@ -66,7 +66,7 @@ final class ImageDownloadOperation: Operation, DataTransferrableOperation {
 }
 
 
-extension URLSession {
+private extension URLSession {
     static let sharedCustom: URLSession = {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
