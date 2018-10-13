@@ -611,7 +611,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return items.last
     }
     
-    private func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
+    func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
         let lastItemCreatedDate =  isMetaDate ? lastItem.metaDate : lastItem.creationDate!
         let newItemCreationDate = isMetaDate ? newItem.metaDate : newItem.creationDate!
         
@@ -626,7 +626,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    private func addByName(lastItem: WrapData, newItem: WrapData) {
+    func addByName(lastItem: WrapData, newItem: WrapData) {
         if let lastItemNameChar = lastItem.name?.first,
             let newItemNameChar = newItem.name?.first {
             
@@ -641,7 +641,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    private func addBySize(lastItem: WrapData, newItem: WrapData) {
+    func addBySize(lastItem: WrapData, newItem: WrapData) {
         if !allItems.isEmpty {
             allItems[allItems.count - 1].append(newItem)
         }
