@@ -157,6 +157,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     override func appendCollectionView(items: [WrapData], pageNum: Int) {
        debugPrint("---APPEND page num is %i", pageNum)
         if isPaginationDidEnd, !isLocalPaginationOn {
+            ///appending missing dates section when all other items are represented
+            allItems.append(emptyMetaItems)
+            self.batchInsertItems(newIndexes: ResponseResult.success(self.getIndexPathsForItems(emptyMetaItems)))
+            
             filesAppendedAndSorted()
             return
         }
@@ -176,7 +180,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
 
         if tempoEmptyItems.count >= pageCompounder.pageSize {
             self.breakItemsIntoSections(breakingArray: self.allMediaItems)
-            self.batchInsertItems(newIndexes: ResponseResult.success([]), emptyItems: tempoEmptyItems)
+            self.batchInsertItems(newIndexes: ResponseResult.success([]))
             return
         }
         
@@ -185,10 +189,11 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         }
         
         compoundItems(pageItems: filteredItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] response in
-            debugPrint("---BATH page num is %i", pageNum)
-
-            self?.batchInsertItems(newIndexes: response, emptyItems: tempoEmptyItems)
-            
+            guard let `self` = self else {
+                return
+            }
+        
+            self.batchInsertItems(newIndexes: response)
         })
     }
     
@@ -303,7 +308,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         }
     }
     
-    func batchInsertItems(newIndexes: ResponseResult<[IndexPath]>, emptyItems: [Item]) {
+    func batchInsertItems(newIndexes: ResponseResult<[IndexPath]>) {
         //completion: VoidHandler
         guard let collectionView = collectionView else {
             return
@@ -327,14 +332,14 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                     return
                 }
                 DispatchQueue.main.async {
-                    ///(emptyItems.isEmpty ? 1 : 2) we need this part to check if need new sections for missing dated
-                    let biggestNewSectionNum = lastIndex.section + (emptyItems.isEmpty ? 1 : 2) 
+                    let newSectionNum = lastIndex.section + 1
                     let oldSectionNum = collectionView.numberOfSections
-
+                    
                     var newArray = IndexSet()
-                    if biggestNewSectionNum > oldSectionNum {
-                        newArray = IndexSet(integersIn: Range(oldSectionNum..<biggestNewSectionNum))
+                    if newSectionNum > oldSectionNum {
+                        newArray = IndexSet(integersIn: Range(oldSectionNum..<newSectionNum))
                     }
+
                     collectionView.performBatchUpdates({
                         guard !self.allItems.isEmpty else {
                             return
@@ -356,13 +361,14 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                                     self.delegate?.getNextItems()
                                 } else if !self.pageLeftOvers.isEmpty{
                                     self.compoundItems(pageItems: [], pageNum: self.lastPage, complition: { [weak self] response in
-                                        self?.batchInsertItems(newIndexes: response, emptyItems: [])
+                                        self?.batchInsertItems(newIndexes: response)
                                     })
                                 }
                             } else if self.isLocalPaginationOn {
                                 ///PageNum: 2 beacause we need to compound page applying middle page rules.
                                 self.compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
-                                    self?.batchInsertItems(newIndexes: response, emptyItems: [])
+                                    
+                                    self?.batchInsertItems(newIndexes: response)
                                 })
                             }
                         }
@@ -374,6 +380,44 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             isLocalFilesRequested = false
         }
     }
+    
+    override func breakItemsIntoSections(breakingArray: [WrapData]) {
+        allItems.removeAll()
+        
+        let needShowEmptyMetaDataItems = needShowEmptyMetaItems && (currentSortType == .metaDataTimeUp || currentSortType == .metaDataTimeDown)
+        
+        for item in breakingArray {
+            autoreleasepool {
+                if !allItems.isEmpty,
+                    let lastItem = allItems.last?.last {
+                    switch currentSortType {
+                    case .timeUp, .timeDown:
+                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: false)
+                    case .lettersAZ, .lettersZA, .albumlettersAZ, .albumlettersZA:
+                        addByName(lastItem: lastItem, newItem: item)
+                    case .sizeAZ, .sizeZA:
+                        addBySize(lastItem: lastItem, newItem: item)
+                    case .timeUpWithoutSection, .timeDownWithoutSection:
+                        allItems.append(contentsOf: [breakingArray])
+                        return
+                    case .metaDataTimeUp, .metaDataTimeDown:
+                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: true)
+                    }
+                } else {
+                    allItems.append([item])
+                }
+            }
+        }
+       //// currently we add missing dates after all collection is presented, (at the very end)
+//        if needShowEmptyMetaDataItems && !emptyMetaItems.isEmpty {
+//            if currentSortType == .metaDataTimeUp {
+//                allItems.append(emptyMetaItems)
+//            } else if currentSortType == .metaDataTimeDown {
+//                allItems.insert(emptyMetaItems, at: 0)
+//            }
+//        }
+    }
+    
 }
 
  extension PhotoVideoDataSourceForCollectionView: ScrollBarViewDelegate {
