@@ -64,8 +64,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             favoriteIcon.isHidden = !item.favorites
         }
 
-        reset()
-
         if wrappered.isLocalItem && wrappered.fileSize < NumericConstants.fourGigabytes {
             cloudStatusImage.image = UIImage(named: "objectNotInCloud")
         } else {
