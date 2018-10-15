@@ -353,6 +353,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                         newArray = IndexSet(integersIn: Range(oldSectionNum..<newSectionNum))
                     }
 
+                    collectionView.collectionViewLayout.invalidateLayout()
                     collectionView.performBatchUpdates({
                         guard !self.allItems.isEmpty else {
                             return
