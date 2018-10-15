@@ -62,8 +62,7 @@ final class CellImageManager {
     
     //MARK: - Instance vars
     
-    private var thumbnailDoneBlock: CellImageManagerOperationsFinished?
-    private var mediumDoneBlock: CellImageManagerOperationsFinished?
+    private var completionBlock: CellImageManagerOperationsFinished?
 
     private lazy var operationQueue = CellImageManager.globalOperationQueue
     private lazy var dispatchQueue = CellImageManager.globalDispatchQueue
@@ -77,10 +76,9 @@ final class CellImageManager {
     
     //MARK: - Interface
     
-    func loadImage(thumbnailUrl: URL?, url: URL?, thumbnail: @escaping CellImageManagerOperationsFinished, medium: @escaping CellImageManagerOperationsFinished) {
+    func loadImage(thumbnailUrl: URL?, url: URL?, completionBlock: @escaping CellImageManagerOperationsFinished) {
         dispatchQueue.async { [weak self] in
-            self?.thumbnailDoneBlock = thumbnail
-            self?.mediumDoneBlock = medium
+            self?.completionBlock = completionBlock
             self?.setupOperations(thumbnail: thumbnailUrl, url: url)
         }
     }
@@ -97,7 +95,7 @@ final class CellImageManager {
     
     private func setupOperations(thumbnail: URL?, url: URL?) {
         guard processingState != .mediumReady else {
-            mediumDoneBlock?(lastSavedImage, true, uniqueId)
+            completionBlock?(lastSavedImage, true, uniqueId)
             return
         }
         
@@ -107,13 +105,13 @@ final class CellImageManager {
                 if downloadMediumOperation.name == self?.uniqueId {
                     self?.lastSavedImage = outputImage
                     self?.processingState = .mediumReady
-                    self?.mediumDoneBlock?(outputImage, true, uuid)
+                    self?.completionBlock?(outputImage, true, uuid)
                 }
             }
         }
         
         guard processingState != .thumbnailReady else {
-            thumbnailDoneBlock?(lastSavedImage, true, uniqueId)
+            completionBlock?(lastSavedImage, true, uniqueId)
             myOperationsOrdered = [downloadMediumOperation, doneMediumOperation]
             startOperations()
             return
@@ -127,7 +125,7 @@ final class CellImageManager {
                 if let uuid = self?.uniqueId, blurOperation.name == self?.uniqueId {
                     self?.lastSavedImage = outputImage
                     self?.processingState = .thumbnailReady
-                    self?.thumbnailDoneBlock?(outputImage, false, uuid)
+                    self?.completionBlock?(outputImage, false, uuid)
                 } else {
                     self?.cancelImageLoading()
                 }
@@ -165,7 +163,6 @@ extension CellImageManager {
             return
         }
         
-        //TODO: maybe it's better to use [safe:]
         for i in 0...ordered.count-2 {
             let firstOp = ordered[i]
             let secondOp = ordered[i+1]
