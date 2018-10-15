@@ -160,8 +160,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
        debugPrint("---APPEND page num is %i", pageNum)
         if isPaginationDidEnd, !isLocalPaginationOn {
             ///appending missing dates section when all other items are represented
-            allItems.append(emptyMetaItems)
-            self.batchInsertItems(newIndexes: ResponseResult.success(self.getIndexPathsForItems(emptyMetaItems)))
+            if !emptyMetaItems.isEmpty {
+                allItems.append(emptyMetaItems)
+                self.batchInsertItems(newIndexes: ResponseResult.success(self.getIndexPathsForItems(emptyMetaItems)))
+            }
             
             filesAppendedAndSorted()
             return
