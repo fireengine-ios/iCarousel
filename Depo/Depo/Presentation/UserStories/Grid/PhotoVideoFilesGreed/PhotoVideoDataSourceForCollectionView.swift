@@ -122,7 +122,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             self.addScrollBar()
             self.updateYearsView()
             CellImageManager.clear()
-            self.collectionView?.reloadData()
+//            self.collectionView?.reloadData()
         }
     }
     
@@ -322,6 +322,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 DispatchQueue.main.async {
                     if self.needReloadData {
                         CellImageManager.clear()
+                        self.needReloadData = false
                         self.collectionView?.reloadData()
                     }
                     self.isLocalFilesRequested = false
