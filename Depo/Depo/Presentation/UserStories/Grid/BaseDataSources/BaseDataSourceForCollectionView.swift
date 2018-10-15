@@ -1052,7 +1052,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidScroll(scrollView: scrollView)
-        updateCachedAssets()
+//        updateCachedAssets()
         updateScrollBarTextIfNeed()
     }
     
@@ -1241,6 +1241,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         if let photoCell = cell_ as? CollectionViewCellForPhoto {
             photoCell.cleanCell()
+            
+            if let unwrapedObject = itemForIndexPath(indexPath: indexPath) as? WrapData,
+                case let .localMediaContent(local) = unwrapedObject.patchToPreview
+            {
+                filesDataSource.stopCahcingImages(for: [local.asset])
+            }
+            
         }
         
         cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: false)
