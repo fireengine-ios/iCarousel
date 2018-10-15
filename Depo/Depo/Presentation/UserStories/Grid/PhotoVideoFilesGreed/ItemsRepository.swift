@@ -29,6 +29,8 @@ class ItemsRepository {
     
     func updateCache() {
         ///check if there is a need to update or just download
+        
+        /// if something stored flags isAllPhotosDownloaded are true
 
         downloadPhotos() { [weak self] in //FIXME: implement as one method by providing different searchFilds value
             if let `self` = self, self.isAllRemotesDownloaded {
@@ -42,12 +44,27 @@ class ItemsRepository {
         }
     }
     
-    func getNextStoredPhotosPage(storedRemotes: @escaping ItemsCallback) {
-        
+    func getNextStoredPhotosPage(range: CountableRange<Int>, storedRemotes: @escaping ItemsCallback) {
+        ///in range numberOfLocalItemsOnPage
+        let arrayInRange = Array(allRemotePhotos[range])
+        if arrayInRange.isEmpty, !isAllPhotosDownloaded {
+            lastAddedPhotoPageCallback = { [weak self] in
+                self?.getNextStoredPhotosPage(range: range, storedRemotes: storedRemotes)
+            }
+            return
+        }
+        storedRemotes(arrayInRange)
     }
     
-    func getNextStoredVideosPage(storedRemotes: @escaping ItemsCallback) {
-        
+    func getNextStoredVideosPage(range: CountableRange<Int>, storedRemotes: @escaping ItemsCallback) {
+        let arrayInRange = Array(allRemoteVideos[range])
+        if arrayInRange.isEmpty, !isAllVideosDownloaded {
+            lastAddedVideoPageCallback = { [weak self] in
+                self?.getNextStoredVideosPage(range: range, storedRemotes: storedRemotes)
+            }
+            return
+        }
+        storedRemotes(arrayInRange)
     }
     
     ///Download will be separated into download for photos pnly and videos only.
