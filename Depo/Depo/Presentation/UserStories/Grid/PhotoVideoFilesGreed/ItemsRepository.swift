@@ -13,11 +13,14 @@ class ItemsRepository {
     private var isAllRemotesDownloaded = false
     private var allRemotePhotos = [WrapData]()
     private var allRemoteVideos = [WrapData]()
+    
+    ///array of delegates
+    
     func updateCache() {
         ///check if there is a need to update or just download
-        downloadNextRemoteItems(){ [weak self] in
-            
-        }
+//        downloadNextRemoteItems(){ [weak self] in
+//
+//        }
     }
     
     func getAllPhotos() {
@@ -67,26 +70,26 @@ class ItemsDownloader {
     }
     
     func downloadNextRemoteItems(finished: @escaping ItemsCallback) {
-        searchPhotoVideoService.nextItems(sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remoteItems in
-            guard let `self` = self else {
-                return
-            }
-            
-            self.allRemoteItems.append(contentsOf: remoteItems)
-            
-            if  remoteItems.count < self.searchAPIPageSize {
-                self.isAllRemotesDownloaded = true
-                finished()
-                return
-            }
-            self.downloadNextRemoteItems(finished: finished)
-            
-            }, fail: { [weak self] in
-                ///check reachability?
-                //if ok - try once more? or just retry counter
-                self?.searchPhotoVideoService.currentPage -= 1
-                self?.downloadNextRemoteItems(finished: finished)
-            }, newFieldValue: .imageAndVideo)
+//        searchPhotoVideoService.nextItems(sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remoteItems in
+//            guard let `self` = self else {
+//                return
+//            }
+//            
+//            self.allRemoteItems.append(contentsOf: remoteItems)
+//            
+//            if  remoteItems.count < self.searchAPIPageSize {
+//                self.isAllRemotesDownloaded = true
+//                finished()
+//                return
+//            }
+//            self.downloadNextRemoteItems(finished: finished)
+//            
+//            }, fail: { [weak self] in
+//                ///check reachability?
+//                //if ok - try once more? or just retry counter
+//                self?.searchPhotoVideoService.currentPage -= 1
+//                self?.downloadNextRemoteItems(finished: finished)
+//            }, newFieldValue: .imageAndVideo)
     }
     
 }
