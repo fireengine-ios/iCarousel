@@ -10,36 +10,87 @@ class ItemsRepository {
     
     static let shared = ItemsRepository()
     
-    private var isAllRemotesDownloaded = false
+    var isAllRemotesDownloaded: Bool {
+        return isAllPhotosDownloaded && isAllVideosDownloaded
+    }
+    private var isAllPhotosDownloaded = false
+    private var isAllVideosDownloaded = false
     private var allRemotePhotos = [WrapData]()
     private var allRemoteVideos = [WrapData]()
+    
+    private var searchPhotoService: PhotoAndVideoService?
+    private var searchVideoService: PhotoAndVideoService?
+    
+    var lastAddedPhotoPageCallback: VoidHandler?
+    var lastAddedVideoPageCallback: VoidHandler?
+    var allFilesDownloadedCallback: VoidHandler?
     
     ///array of delegates
     
     func updateCache() {
         ///check if there is a need to update or just download
-//        downloadNextRemoteItems(){ [weak self] in
-//
-//        }
+
+        downloadPhotos() { [weak self] in //FIXME: implement as one method by providing different searchFilds value
+            if let `self` = self, self.isAllRemotesDownloaded {
+                self.allFilesDownloadedCallback?()
+            }
+        }
+        downloadVideos() { [weak self] in
+            if let `self` = self, self.isAllRemotesDownloaded {
+                self.allFilesDownloadedCallback?()
+            }
+        }
     }
     
-    func getAllPhotos() {
+    func getNextStoredPhotosPage(storedRemotes: @escaping ItemsCallback) {
         
     }
     
-    func getAllVideos() {
+    func getNextStoredVideosPage(storedRemotes: @escaping ItemsCallback) {
         
     }
     
     ///Download will be separated into download for photos pnly and videos only.
     ///just To help speed up page loading on the first launc
-    private func downloadPhotos() {
-        let searchPhotoVideoService = PhotoAndVideoService(requestSize: NumericConstants.itemProviderSearchRequest, type: .image)
+    private func downloadPhotos(finished: @escaping VoidHandler) {
+        if searchPhotoService == nil {
+            searchPhotoService = PhotoAndVideoService(requestSize: NumericConstants.itemProviderSearchRequest, type: .image)
+        }
+        searchPhotoService?.nextItems(sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remotes in
+            self?.allRemotePhotos.append(contentsOf: remotes)
+            self?.lastAddedPhotoPageCallback?()
+            if remotes.count < NumericConstants.itemProviderSearchRequest {
+                self?.isAllPhotosDownloaded = true
+                finished()
+                self?.searchPhotoService = nil
+                return
+            }
+            self?.downloadPhotos(finished: finished)
+        }, fail: { [weak self] in
+            self?.searchPhotoService?.currentPage -= 1
+            self?.downloadPhotos(finished: finished)
+        })
         
     }
     
-    private func downloadVideos() {
-    
+    private func downloadVideos(finished: @escaping VoidHandler) {
+        if searchVideoService == nil {
+            searchVideoService = PhotoAndVideoService(requestSize: NumericConstants.itemProviderSearchRequest, type: .video)
+        }
+        searchVideoService?.nextItems(sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remotes in
+            self?.allRemoteVideos.append(contentsOf: remotes)
+            self?.lastAddedVideoPageCallback?()
+            if remotes.count < NumericConstants.itemProviderSearchRequest {
+                self?.isAllVideosDownloaded = true
+                finished()
+                self?.searchVideoService = nil
+                return
+            }
+            self?.downloadVideos(finished: finished)
+            }, fail: { [weak self] in
+                self?.searchVideoService?.currentPage -= 1
+                self?.downloadVideos(finished: finished)
+        })
     }
         
     private func getSavedItems() {
