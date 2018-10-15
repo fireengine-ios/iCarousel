@@ -107,7 +107,8 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     override func setImage(with metaData: BaseMetaData) {
-        cellImageManager = CellImageManager.instance(by: metaData.mediumUrl?.byTrimmingQuery)
+        let cacheKey = metaData.mediumUrl?.byTrimmingQuery
+        cellImageManager = CellImageManager.instance(by: cacheKey)
         uuid = cellImageManager?.uniqueId
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
             DispatchQueue.toMain {
@@ -120,7 +121,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             }
         }
 
-        cellImageManager?.loadImage(thumbnailUrl: metaData.smalURl, url: metaData.mediumUrl, thumbnail: imageSetBlock, medium: imageSetBlock)
+        cellImageManager?.loadImage(thumbnailUrl: metaData.smalURl, url: metaData.mediumUrl, completionBlock: imageSetBlock)
 
         isAlreadyConfigured = true
     }
@@ -166,7 +167,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     func cleanCell() {
-        cellImageManager?.cancelImageLoading()
+        reset()
         
         DispatchQueue.main.async {
             self.visualEffectBlur.isHidden = true
@@ -183,11 +184,17 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     private func reset() {
-        cellImageManager?.cancelImageLoading()
-        cellImageManager = nil
+        if let imageManager = cellImageManager {
+            imageManager.cancelImageLoading()
+            cellImageManager = nil
+        }
         imageView.image = nil
         uuid = nil
         setAssetId(nil)
+    }
+    
+    deinit {
+        cellImageManager?.cancelImageLoading()
     }
 
 }
