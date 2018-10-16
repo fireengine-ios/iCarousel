@@ -95,23 +95,20 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     }
     
     override func updateScrollBarTextIfNeed() {
-        if needShowCustomScrollIndicator {
-            let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
-                return first < second
-            })
-            
-            guard let indexPath = firstVisibleIndexPath else {
-                return
-            }
-            
-            if let currentTopSection = currentTopSection, currentTopSection == indexPath.section {
-                return
-            }
-            
-            let headerText = getHeaderText(indexPath: indexPath)
-            delegate?.didChangeTopHeader(text: headerText)
-            scrollBar.setText(headerText)
+        let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
+            return first < second
+        })
+        
+        guard let indexPath = firstVisibleIndexPath else {
+            return
         }
+        
+        if let currentTopSection = currentTopSection, currentTopSection == indexPath.section {
+            return
+        }
+        
+        let headerText = getHeaderText(indexPath: indexPath, shortForm: true)
+        scrollBar.setText(headerText)
     }
     
     private func filesAppendedAndSorted() {

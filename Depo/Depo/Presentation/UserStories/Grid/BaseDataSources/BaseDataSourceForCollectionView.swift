@@ -647,7 +647,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func getHeaderText(indexPath: IndexPath) -> String {
+    func getHeaderText(indexPath: IndexPath, shortForm: Bool = false) -> String {
         var headerText = ""
         
         guard let itemsInSection = allItems[safe: indexPath.section], let item = itemsInSection.first else {
@@ -657,7 +657,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         switch currentSortType {
         case .timeUp, .timeUpWithoutSection, .timeDown, .timeDownWithoutSection:
             if let date = item.creationDate {
-                headerText = date.getDateInTextForCollectionViewHeader()
+                if shortForm {
+                    headerText = date.getDateInTextForScrollBar()
+                } else {
+                    headerText = date.getDateInTextForCollectionViewHeader()
+                }
             }
         case .lettersAZ, .albumlettersAZ, .lettersZA, .albumlettersZA:
             if let character = item.name?.first {
@@ -667,11 +671,19 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             headerText = ""
         case .metaDataTimeUp, .metaDataTimeDown:
             if let date = item.metaData?.takenDate {
-                headerText = date.getDateInTextForCollectionViewHeader()
+                if shortForm {
+                    headerText = date.getDateInTextForScrollBar()
+                } else {
+                    headerText = date.getDateInTextForCollectionViewHeader()
+                }
             } else if needShowEmptyMetaItems && !emptyMetaItems.isEmpty && item.isLocalItem == false {
                 headerText = TextConstants.photosVideosViewMissingDatesHeaderText
             } else if let date = item.creationDate {
-                headerText = date.getDateInTextForCollectionViewHeader()
+                if shortForm {
+                    headerText = date.getDateInTextForScrollBar()
+                } else {
+                    headerText = date.getDateInTextForCollectionViewHeader()
+                }
             }
         }
         return headerText

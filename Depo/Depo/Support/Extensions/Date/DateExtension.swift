@@ -35,6 +35,12 @@ extension Date: Components {
         return formatter.string(from: self)
     }
     
+    func getDateInTextForScrollBar() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "LLL yyyy"
+        return formatter.string(from: self)
+    }
+    
     func getDateForSortingOfCollectionView() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy MM"
