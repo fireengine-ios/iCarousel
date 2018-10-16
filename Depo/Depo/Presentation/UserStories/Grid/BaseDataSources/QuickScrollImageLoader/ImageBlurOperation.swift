@@ -25,6 +25,13 @@ final class ImageBlurOperation: Operation, DataTransferrableOperation {
     
     
     private func blurEffect(image: UIImage) -> UIImage? {
+        /// if isSimulator
+        /// #if targetEnvironment(simulator)
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+        return image
+        #else
+        
+        
         
         guard let gaussianFilter = CIFilter(name: "CIGaussianBlur"),
             let cropFilter = CIFilter(name: "CICrop"),
@@ -50,7 +57,7 @@ final class ImageBlurOperation: Operation, DataTransferrableOperation {
         }
         
         return UIImage(ciImage: croppedImage)
-        
+        #endif
 
         ///TODO: check what is wrong, I had crashes on context.createCGImage
         ///the algorithm above works without crashes so far
