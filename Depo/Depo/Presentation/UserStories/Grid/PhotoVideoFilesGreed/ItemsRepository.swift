@@ -56,7 +56,6 @@ class ItemsRepository {
             }
             return
         }
-
         storedRemotes(arrayInRange)
     }
     
