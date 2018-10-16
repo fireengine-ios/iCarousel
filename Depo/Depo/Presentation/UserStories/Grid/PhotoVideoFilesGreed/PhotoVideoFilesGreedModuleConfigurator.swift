@@ -23,7 +23,7 @@ final class PhotoVideoFilesGreedModuleConfigurator {
         
         let presenter = PhotoVideosFilesGreedPresenter()
         presenter.needShowProgressInCells = true
-        presenter.needShowScrollIndicator = true
+        presenter.needShowScrollIndicator = false
         presenter.needShowEmptyMetaItems = true
         presenter.ifNeedReloadData = false
         
