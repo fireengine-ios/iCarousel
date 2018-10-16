@@ -46,13 +46,17 @@ class ItemsRepository {
     
     func getNextStoredPhotosPage(range: CountableRange<Int>, storedRemotes: @escaping ItemsCallback) {
         ///in range numberOfLocalItemsOnPage
-        let arrayInRange = Array(allRemotePhotos[range])
-        if arrayInRange.isEmpty, !isAllPhotosDownloaded {
+        
+        if range.endIndex > allRemotePhotos.count, !isAllPhotosDownloaded {
             lastAddedPhotoPageCallback = { [weak self] in
                 self?.getNextStoredPhotosPage(range: range, storedRemotes: storedRemotes)
             }
             return
+        } else if range.endIndex > allRemotePhotos.count {
+            storedRemotes?()
+            return
         }
+        let arrayInRange = Array(allRemotePhotos[range])
         storedRemotes(arrayInRange)
     }
     
