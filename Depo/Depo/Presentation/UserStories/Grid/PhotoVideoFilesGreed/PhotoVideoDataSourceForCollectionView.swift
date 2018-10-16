@@ -119,7 +119,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             self.addScrollBar()
             self.updateYearsView()
             CellImageManager.clear()
-            self.collectionView?.reloadData()
+//            self.collectionView?.reloadData()
         }
     }
     
@@ -143,7 +143,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         let numberOfColumns = Int(Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone)
         // TODO: getCellSizeForList must be called in main queue. for a while it is woking without it
         let cellHeight = delegate?.getCellSizeForList().height ?? 0
-        let dates = allItems.flatMap({ $0 }).flatMap({ $0.metaData?.takenDate})
+        let dates = allItems.flatMap({ $0 }).flatMap({ $0.metaDate })
         yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
         
         if !emptyMetaItems.isEmpty {
