@@ -424,6 +424,19 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
 //        }
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        super.scrollViewDidScroll(scrollView)
+        updateScrollBarTextIfNeed()
+        hideScrollBarIfNeed(for: scrollView.contentOffset.y)
+    }
+    
+    private func hideScrollBarIfNeed(for contentOffsetY: CGFloat) {
+        if contentOffsetY < 0 {
+            scrollBar.alpha = 0
+        } else {
+            scrollBar.alpha = 1
+        }
+    }
 }
 
  extension PhotoVideoDataSourceForCollectionView: ScrollBarViewDelegate {

@@ -1053,7 +1053,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidScroll(scrollView: scrollView)
         updateCachedAssets()
-        updateScrollBarTextIfNeed()
     }
     
     func updateScrollBarTextIfNeed() {
