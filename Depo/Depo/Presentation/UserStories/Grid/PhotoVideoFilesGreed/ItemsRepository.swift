@@ -44,6 +44,10 @@ class ItemsRepository {
         }
     }
     
+    func dropCache() {
+        
+    }
+    
     func getNextStoredPhotosPage(range: CountableRange<Int>, storedRemotes: @escaping ItemsCallback) {
         guard range.startIndex >= 0, range.startIndex < range.endIndex else {
             storedRemotes([])
