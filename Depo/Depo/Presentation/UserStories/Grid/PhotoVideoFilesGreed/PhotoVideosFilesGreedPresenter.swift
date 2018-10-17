@@ -115,6 +115,14 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func filesAppendedAndSorted() {
+        DispatchQueue.toMain {
+            self.updateNoFilesView()
+            self.asyncOperationSucces()
+            self.updateThreeDotsButton()
+        }
+    }
+    
     override func getContentWithSuccess(items: [WrapData]) {
         guard view != nil else {
             return
