@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 
 class CollectionViewCellForPhoto: BaseCollectionViewCell {
@@ -106,6 +107,25 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         isAlreadyConfigured = true
     }
     
+    override func setImage(with url: URL) {
+        self.imageView.contentMode = .center
+        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
+            guard let `self` = self else {
+                return
+            }
+            
+            guard error == nil else {
+                print("SD_WebImage_setImage error: \(error!.description)")
+                return
+            }
+            
+            self.setImage(image: image, animated: true)
+        }
+        
+        isAlreadyConfigured = true
+        self.backgroundColor = ColorConstants.fileGreedCellColor
+    }
+    
     override func setImage(with metaData: BaseMetaData) {
         let cacheKey = metaData.mediumUrl?.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
@@ -184,6 +204,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     private func reset() {
+        imageView.sd_cancelCurrentImageLoad()
         if let imageManager = cellImageManager {
             imageManager.cancelImageLoading()
             cellImageManager = nil
