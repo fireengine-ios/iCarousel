@@ -70,7 +70,7 @@ final class ScrollBarView: UIView {
     
     private let insetsLabel: TextInsetsLabel = {
         let insetsLabel = TextInsetsLabel()
-        insetsLabel.text = "Apr 2018"
+        insetsLabel.text = "Apr 2018" /// template text
         insetsLabel.textAlignment = .center
         insetsLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
         insetsLabel.backgroundColor = ColorConstants.activityTimelineDraws
@@ -86,7 +86,7 @@ final class ScrollBarView: UIView {
     
     private let animationDuration = 0.3
     private let hideAnimationDelay = 1.0
-
+    private var cellWidth: CGFloat = 100
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -100,7 +100,11 @@ final class ScrollBarView: UIView {
     
     func setText(_ text: String) {
         insetsLabel.text = text
-        insetsLabel.center.x = -insetsLabel.frame.width * 0.5 /// +- constant for inset from handle view
+        insetsLabel.center.x = frame.width - cellWidth - insetsLabel.textInsets.left * 0.25
+    }
+    
+    func updateLayout(by cellWidth: CGFloat) {
+        self.cellWidth = cellWidth
     }
     
     private func hideLabelAnimated() {

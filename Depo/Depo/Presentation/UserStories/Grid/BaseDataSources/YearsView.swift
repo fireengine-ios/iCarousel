@@ -18,7 +18,7 @@ final class YearsView: UIView {
     
     private var labels = [UILabel]()
     private var labelsOffsetRatio = [CGFloat]()
-    private let selfWidth: CGFloat = 85
+    private var selfWidth: CGFloat = 85
     
     private var cellHeight: CGFloat = 1
     private var headerHeight: CGFloat = 1
@@ -160,6 +160,7 @@ final class YearsView: UIView {
         self.cellHeight = cellHeight
         self.headerHeight = headerHeight
         self.numberOfColumns = numberOfColumns
+        selfWidth = cellHeight
     }
     
     func update(additionalSections: [(name: String, count: Int)]) {
