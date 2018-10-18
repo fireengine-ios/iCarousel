@@ -152,6 +152,10 @@ struct RouteRequests {
     static let searchContacts = "search?sortField=firstname&sortOrder=ASC&maxResult=16&query=%@&currentPage=%d"
     static let deleteContacts = "contact"
     
+    //MARK: - Turkcell Updater
+    
+    static let updaterUrl = "https://adepo.turkcell.com.tr/download/update_ios.json"
+    
     
     struct HomeCards {
         static let all = baseUrl +/ "assistant/v1"
