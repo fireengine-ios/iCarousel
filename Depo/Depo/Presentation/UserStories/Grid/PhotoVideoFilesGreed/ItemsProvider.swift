@@ -15,7 +15,7 @@ class ItemsProvider {///Maybe create also something like ItemsDownloader
     private var allRemoteItems = [WrapData]()
     ///var previousRemoteItems
     let itemsRepository = ItemsRepository.shared
-    var databasePageSize: Int = NumericConstants.numberOfLocalItemsOnPage
+    var databasePageSize = NumericConstants.numberOfLocalItemsOnPage
     private var currentDataBasePage: Int = 0
 
     //private let quickSearchService
@@ -37,7 +37,7 @@ class ItemsProvider {///Maybe create also something like ItemsDownloader
     }
     ///dlya photo And Videos
     func getNextItems(callback: @escaping ItemsCallback) {
-         currentDataBasePage += 1
+        currentDataBasePage += 1
         let nextPageRange = currentDataBasePage*databasePageSize..<(currentDataBasePage + 1)*databasePageSize
         switch fieldValue {
         case .image://FIXME just call one method with field value
@@ -47,7 +47,7 @@ class ItemsProvider {///Maybe create also something like ItemsDownloader
             }
         case .video:
             itemsRepository.getNextStoredVideosPage(range: nextPageRange) { [weak self] remoteItems in
-//                self?.currentDataBasePage += 1
+                //                self?.currentDataBasePage += 1
                 self?.allRemoteItems.append(contentsOf: remoteItems)
                 callback(remoteItems)
             }

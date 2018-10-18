@@ -83,7 +83,7 @@ class ItemsRepository {
         searchPhotoService?.nextItems(sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remotes in
             self?.allRemotePhotos.append(contentsOf: remotes)
             self?.lastAddedPhotoPageCallback?()
-            if remotes.count < NumericConstants.itemProviderSearchRequest {
+            guard remotes.count >= NumericConstants.itemProviderSearchRequest else {
                 self?.isAllPhotosDownloaded = true
                 finished()
                 self?.searchPhotoService = nil
@@ -104,7 +104,7 @@ class ItemsRepository {
         searchVideoService?.nextItems(sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remotes in
             self?.allRemoteVideos.append(contentsOf: remotes)
             self?.lastAddedVideoPageCallback?()
-            if remotes.count < NumericConstants.itemProviderSearchRequest {
+            guard remotes.count >= NumericConstants.itemProviderSearchRequest else {
                 self?.isAllVideosDownloaded = true
                 finished()
                 self?.searchVideoService = nil
