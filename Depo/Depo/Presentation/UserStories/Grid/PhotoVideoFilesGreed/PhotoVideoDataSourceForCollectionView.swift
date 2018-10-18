@@ -459,7 +459,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     
     private func startTimerToHideScrollBar() {
         hideScrollBarAnimatedTimer?.invalidate()
-        hideScrollBarAnimatedTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(hideScrollBarAnimated), userInfo: nil, repeats: false)
+        hideScrollBarAnimatedTimer = Timer.scheduledTimer(timeInterval: scrollBarHiddingDelay, target: self, selector: #selector(hideScrollBarAnimated), userInfo: nil, repeats: false)
     }
     
     @objc private func hideScrollBarAnimated() {
