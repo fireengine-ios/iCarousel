@@ -100,6 +100,8 @@ final class ScrollBarView: UIView {
     
     func setText(_ text: String) {
         insetsLabel.text = text
+        
+        /// we need to attach label center to line between last two columns
         insetsLabel.center.x = frame.width - cellWidth - insetsLabel.textInsets.left * 0.25
     }
     

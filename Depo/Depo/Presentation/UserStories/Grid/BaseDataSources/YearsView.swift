@@ -160,6 +160,8 @@ final class YearsView: UIView {
         self.cellHeight = cellHeight
         self.headerHeight = headerHeight
         self.numberOfColumns = numberOfColumns
+        
+        /// we need to attach labels to the left side of last column
         selfWidth = cellHeight
     }
     
