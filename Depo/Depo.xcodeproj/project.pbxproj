@@ -2345,6 +2345,10 @@
 		8C11C42E1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */; };
 		8C13C301210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
 		8C13C302210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
+		8C157B7F2173CD8A00313F2B /* ItemsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C157B7E2173CD8A00313F2B /* ItemsProvider.swift */; };
+		8C157B802173CD8A00313F2B /* ItemsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C157B7E2173CD8A00313F2B /* ItemsProvider.swift */; };
+		8C157B82217477AB00313F2B /* ItemsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C157B81217477AB00313F2B /* ItemsRepository.swift */; };
+		8C157B83217477AB00313F2B /* ItemsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C157B81217477AB00313F2B /* ItemsRepository.swift */; };
 		8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */; };
 		8C2924C3205A4B1B005E40C9 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
 		8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
@@ -4931,6 +4935,8 @@
 		8C0E907E1FDEBE0000789C91 /* lifebox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lifebox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetPredetermendConfigs.swift; sourceTree = "<group>"; };
 		8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPackageProductObject.swift; sourceTree = "<group>"; };
+		8C157B7E2173CD8A00313F2B /* ItemsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsProvider.swift; sourceTree = "<group>"; };
+		8C157B81217477AB00313F2B /* ItemsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsRepository.swift; sourceTree = "<group>"; };
 		8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoButtonCellProtocol.swift; sourceTree = "<group>"; };
 		8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUserInputCellView.swift; sourceTree = "<group>"; };
 		8C28D27B1FC59C260098FE89 /* Depo_LifeTech copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Depo_LifeTech copy-Info.plist"; path = "/Users/aleksandr_life/Repos/stash/lifebox-ios-new/Depo/Depo_LifeTech copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -9363,6 +9369,8 @@
 				8C353D982167988400B1C85C /* PhotoVideoFilesGreedModuleConfigurator.swift */,
 				8C353D9521678BB800B1C85C /* PhotoVideosFilesGreedPresenter.swift */,
 				8C353D922167887D00B1C85C /* PhotoVideoDataSourceForCollectionView.swift */,
+				8C157B7E2173CD8A00313F2B /* ItemsProvider.swift */,
+				8C157B81217477AB00313F2B /* ItemsRepository.swift */,
 			);
 			path = PhotoVideoFilesGreed;
 			sourceTree = "<group>";
@@ -14837,6 +14845,7 @@
 				8C0E8E2B1FDEBDFF00789C91 /* ForgotPasswordInteractor.swift in Sources */,
 				8C0E8E2C1FDEBDFF00789C91 /* OffersService.swift in Sources */,
 				C62239B4204973CC0043ED44 /* FaceImagePhotosInitializer.swift in Sources */,
+				8C157B802173CD8A00313F2B /* ItemsProvider.swift in Sources */,
 				8C0E8E2D1FDEBDFF00789C91 /* LocalMediaStorage.swift in Sources */,
 				8C0E8E2E1FDEBDFF00789C91 /* BottomSelectionTabBarViewOutput.swift in Sources */,
 				8C0E8E2F1FDEBDFF00789C91 /* ActivityTimelineServiceResponse.swift in Sources */,
@@ -14898,6 +14907,7 @@
 				8C0E8E761FDEBDFF00789C91 /* LoadingImageView.swift in Sources */,
 				8C0E8E771FDEBDFF00789C91 /* PasscodeSettingsViewIO.swift in Sources */,
 				CE4851F12018B03A006B8854 /* FilterPhotoCard.swift in Sources */,
+				8C157B83217477AB00313F2B /* ItemsRepository.swift in Sources */,
 				4AC68931202C5153003400D0 /* FaceImageAddNameViewOutput.swift in Sources */,
 				8C0E8E791FDEBDFF00789C91 /* PrintViewController.swift in Sources */,
 				8C0E8E7C1FDEBDFF00789C91 /* GridListTopBarConfig.swift in Sources */,
@@ -16011,6 +16021,7 @@
 				CE51ACFB1EF90853005DCEE0 /* ForgotPasswordInteractorInput.swift in Sources */,
 				CE51ACFC1EF90853005DCEE0 /* ForgotPasswordInteractorOutput.swift in Sources */,
 				CE51ACFD1EF90853005DCEE0 /* AutoSyncViewOutput.swift in Sources */,
+				8C157B7F2173CD8A00313F2B /* ItemsProvider.swift in Sources */,
 				7CEE271B209B537500EF6C79 /* LandingPageViewController.swift in Sources */,
 				98570AFE208F7558002CCEBA /* Spotlight.swift in Sources */,
 				CEF0C2861FC549C400105C31 /* ImportFromInstagramInteractor.swift in Sources */,
@@ -16072,6 +16083,7 @@
 				CE2F56211F7552A900F49DA1 /* PackagesViewOutput.swift in Sources */,
 				8CCA070520C4412800558AB0 /* SessionServiceExtension.swift in Sources */,
 				7859299520060E8B003F8AB3 /* ManageContactsModuleInput.swift in Sources */,
+				8C157B82217477AB00313F2B /* ItemsRepository.swift in Sources */,
 				7CAC23BF1F4ABD3100607660 /* LoadingImageView.swift in Sources */,
 				CEC3C2431FB99AF800C3D67F /* PasscodeSettingsViewIO.swift in Sources */,
 				9808A05E206A88580022376D /* PushNotificationService.swift in Sources */,

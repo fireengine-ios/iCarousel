@@ -395,6 +395,7 @@ class AuthenticationService: BaseRequestService {
             SingletonStorage.shared.accountInfo = nil
             SyncSettings.shared().periodicBackup = SYNCPeriodic.none
             ItemOperationManager.default.clear()
+            ItemsRepository.shared.dropCache()
             self.player.stop()
             self.cancellAllRequests()
             
