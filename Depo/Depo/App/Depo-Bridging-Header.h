@@ -15,3 +15,4 @@
 #import "CropySDK.h"
 #import "CRYConfiguration.h"
 #import <CommonCrypto/CommonCrypto.h>
+#import "UpdaterController.h"

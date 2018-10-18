@@ -16,27 +16,19 @@
  *  
  *******************************************************************************/
 //
-//  UpdaterController.h
+//  UIAlertViewCustom.h
 //  TurkcellUpdaterSampleApp
 //
-//  Created by Sonat Karakas on 1/14/13.
+//  Created by Sonat Karakas on 1/11/13.
 //  Copyright (c) 2013 Turkcell. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "UpdaterControllerDelegate.h"
 
-@interface UpdaterController : UIView <UIAlertViewDelegate>
+@interface UIAlertViewCustom : UIAlertController
 
-@property (nonatomic, retain) NSString *updateServerURL;
-@property (nonatomic, assign) id<UpdaterControllerDelegate> updaterControllerDelegate;
-@property (nonatomic, assign) BOOL postProperties;
-
-+ (UpdaterController *) initWithUpdateURL:(NSString *)URL
-								 delegate:(id<UpdaterControllerDelegate>)delegate
-                           postProperties:(BOOL)postProperties;
-
-- (void) getUpdateInformation;
+@property (nonatomic, retain) NSString *targetPackageURL;
+@property (nonatomic, retain) NSString *forceUpdate;
+@property (nonatomic, retain) NSString *forceExit;
 
 @end
-
