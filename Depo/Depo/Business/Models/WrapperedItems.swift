@@ -538,8 +538,81 @@ protocol  Wrappered {
     
     var albums: [String]? { get set }
 }
-
-class WrapData: BaseDataSourceItem, Wrappered {
+//struct WrapDataEncodeKeys {
+//    static let key1 = "Key1"
+//    static let keyUuid = "UUID"
+//
+//
+//
+//    var name: String?
+//
+//
+//
+//    var creationDate: Date?
+//
+//
+//
+//    var lastModifiDate: Date?
+//
+//
+//
+//    var fileType: FileType = .application(.unknown)
+//
+//
+//
+//    var syncStatus: SyncWrapperedStatus = .notSynced
+//
+//
+//
+//    var syncStatuses = [String]()
+//
+//
+//
+//    var isLocalItem: Bool
+//
+//
+//
+//    var md5: String = ""
+//
+//
+//
+//    var parent: String?
+//
+//
+//
+//    ////-----
+//
+//
+//
+//    var id: Int64?
+//
+//    var fileSize: Int64
+//
+//    var favorites: Bool
+//
+//    var patchToPreview: PathForItem
+//
+//    var duration: String?
+//
+//    var durationValue: TimeInterval?
+//
+//    var albums: [String]?
+//
+//    var metaData: BaseMetaData?
+//
+//    var status: Status
+//
+//    var localFileUrl: URL?
+//
+//    var tmpDownloadUrl: URL?
+//
+//
+//    var isFolder: Bool?
+//
+//    var childCount: Int64?
+//}
+class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
+    
     enum Status: String {
         case active = "ACTIVE"
         case uploaded = "UPLOADED"
@@ -643,6 +716,64 @@ class WrapData: BaseDataSourceItem, Wrappered {
         let baseModel = BaseMediaContent(curentAsset: info.asset, generalInfo: info)
         self.init(baseModel: baseModel)
     }
+    
+    //MARK:- WrapdData Coding
+    
+    required init?(coder aDecoder: NSCoder) {
+        guard let decodedUUID = aDecoder.decodeObject(forKey:SearchJsonKey.uuid) as? String else {
+            return nil
+        }
+        fileSize = aDecoder.decodeInt64(forKey: SearchJsonKey.bytes)
+        metaData = aDecoder.decodeObject(forKey: SearchJsonKey.metadata) as? BaseMetaData
+        favorites = metaData?.favourite ?? false
+        patchToPreview = .remoteUrl(URL(string: ""))//TODO: Change to medium by default
+        status = Status(string:aDecoder.decodeObject(forKey: SearchJsonKey.status) as? String)
+        super.init(uuid: decodedUUID)
+        uuid = decodedUUID
+        
+        creationDate = aDecoder.decodeObject(forKey: SearchJsonKey.createdDate) as? Date
+        //json?[SearchJsonKey.createdDate].date
+//
+//        lastModifiedDate = json?[SearchJsonKey.lastModifiedDate].date
+//
+//        id = json?[SearchJsonKey.id].int64
+//
+//        hash = json?[SearchJsonKey.hash].string
+//
+//        name = json?[SearchJsonKey.name].string
+//
+
+//
+//        bytes = json?[SearchJsonKey.bytes].int64
+//
+//        contentType = json?[SearchJsonKey.content_type].string
+//
+//        metadata = BaseMetaData(withJSON: json?[SearchJsonKey.metadata])
+//
+//        folder = json?[SearchJsonKey.folder].bool
+//
+//        uploaderDeviceType = json?[SearchJsonKey.uploaderDeviceType].string
+//
+//        parent = json?[SearchJsonKey.parent].string
+//
+//        tempDownloadURL = json?[SearchJsonKey.tempDownloadURL].url
+//
+//        status = json?[SearchJsonKey.status].string
+//
+//        subordinates = json?[SearchJsonKey.subordinates].array
+//
+//        albums = json?[SearchJsonKey.album].array?.flatMap { $0.string }
+//
+//        childCount = json?[SearchJsonKey.ChildCount].int64
+        
+        
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        
+    }
+    
+    //MARK:-
     
     init(musicForCreateStory: CreateStoryMusicItem) {
         id = musicForCreateStory.id
@@ -925,7 +1056,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         metaData?.duration = (assetDuration == nil) ? mediaItem.metadata?.duration : assetDuration
         
         metaData?.genre = mediaItem.metadata?.genre ?? []
-        metaData?.height = mediaItem.metadata?.height
+        metaData?.height = Int(mediaItem.metadata?.height ?? 0)
         metaData?.title = mediaItem.metadata?.title
         
         if let largeUrl = mediaItem.metadata?.largeUrl {

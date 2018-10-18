@@ -78,13 +78,14 @@ struct SearchJsonKey {
     static let objectInfo = "objectInfo"
 }
 
-final class BaseMetaData: ObjectRequestResponse {
+//MARK:- BaseMetaData
+final class BaseMetaData: ObjectRequestResponse, NSCoding {
     
     var favourite: Bool?
     
     // photo and video
-    var height: Int16?
-    var width: Int16?
+    var height: Int?
+    var width: Int?
     var takenDate: Date?
     var largeUrl: URL?
     var mediumUrl: URL?
@@ -121,8 +122,8 @@ final class BaseMetaData: ObjectRequestResponse {
     override func mapping() {
         favourite = json?[SearchJsonKey.favourite].boolFromString ?? false
         
-        height = json?[SearchJsonKey.ImageHeight].int16
-        width = json?[SearchJsonKey.ImageWidth].int16
+        height = json?[SearchJsonKey.ImageHeight].int
+        width = json?[SearchJsonKey.ImageWidth].int
         takenDate = json?[SearchJsonKey.ImageDateTime].date
         largeUrl = json?[SearchJsonKey.ThumbnailLarge].url
         mediumUrl = json?[SearchJsonKey.Thumbnail_Medium].url
@@ -148,8 +149,50 @@ final class BaseMetaData: ObjectRequestResponse {
         
         videoHLSPreview = json?[SearchJsonKey.VideoHLSPreview].url
     }
+    
+    //MARK:- BaseMetaData - Coding
+    required init?(coder aDecoder: NSCoder) {
+        super.init()
+        favourite = aDecoder.decodeBool(forKey: SearchJsonKey.favourite)
+        height = aDecoder.decodeInteger(forKey: SearchJsonKey.ImageHeight)
+        width = aDecoder.decodeInteger(forKey:SearchJsonKey.ImageWidth)
+        takenDate = aDecoder.decodeObject(forKey: SearchJsonKey.ImageDateTime) as? Date
+        largeUrl = aDecoder.decodeObject(forKey: SearchJsonKey.ThumbnailLarge) as? URL
+        ///Maybe store string and then make URL from it?
+        mediumUrl = aDecoder.decodeObject(forKey: SearchJsonKey.Thumbnail_Medium) as? URL
+        smalURl = aDecoder.decodeObject(forKey: SearchJsonKey.ThumbnailSmall) as? URL
+        videoPreviewURL = aDecoder.decodeObject(forKey: SearchJsonKey.VideoPreview) as? URL
+        documentPreviewURL = aDecoder.decodeObject(forKey: SearchJsonKey.DocumentPreview) as? URL
+        artist = aDecoder.decodeObject(forKey:SearchJsonKey.Artist) as? String
+        album = aDecoder.decodeObject(forKey:SearchJsonKey.Album) as? String
+        title = aDecoder.decodeObject(forKey:SearchJsonKey.Title) as? String
+        duration = aDecoder.decodeObject(forKey:SearchJsonKey.Duration) as? Double
+        genre = aDecoder.decodeObject(forKey:SearchJsonKey.Genre) as? [String] ?? []
+        videoSlideshow = aDecoder.decodeBool(forKey: SearchJsonKey.VideoSlideshow)
+        videoHLSPreview = aDecoder.decodeObject(forKey:SearchJsonKey.VideoHLSPreview) as? URL
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(favourite, forKey: SearchJsonKey.favourite)
+        aCoder.encode(height, forKey: SearchJsonKey.ImageHeight)
+        aCoder.encode(width, forKey: SearchJsonKey.ImageWidth)
+        aCoder.encode(takenDate, forKey: SearchJsonKey.ImageDateTime)
+        aCoder.encode(largeUrl, forKey: SearchJsonKey.ThumbnailLarge)
+        aCoder.encode(mediumUrl, forKey: SearchJsonKey.Thumbnail_Medium)
+        aCoder.encode(smalURl, forKey:  SearchJsonKey.ThumbnailSmall)
+        aCoder.encode(videoPreviewURL, forKey: SearchJsonKey.VideoPreview)
+        aCoder.encode(documentPreviewURL, forKey: SearchJsonKey.DocumentPreview)
+        aCoder.encode(artist, forKey: SearchJsonKey.Artist)
+        aCoder.encode(album, forKey: SearchJsonKey.Album)
+        aCoder.encode(title, forKey: SearchJsonKey.Title)
+        aCoder.encode(duration, forKey: SearchJsonKey.Duration)
+        aCoder.encode(genre, forKey: SearchJsonKey.Genre)
+        aCoder.encode(videoSlideshow, forKey: SearchJsonKey.VideoSlideshow)
+        aCoder.encode(videoHLSPreview, forKey: SearchJsonKey.VideoHLSPreview)
+    }
 }
 
+//MARK:- SearchItemResponse
 final class SearchItemResponse: ObjectRequestResponse {
     
     var createdDate: Date?

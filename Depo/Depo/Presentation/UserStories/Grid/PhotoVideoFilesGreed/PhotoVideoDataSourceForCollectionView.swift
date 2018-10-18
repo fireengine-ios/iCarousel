@@ -342,19 +342,24 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                     return
                 }
                 DispatchQueue.main.async {
-                    let newSectionNum = lastIndex.section + 1
-                    let oldSectionNum = collectionView.numberOfSections
-                    
-                    var newArray = IndexSet()
-                    if newSectionNum > oldSectionNum {
-                        newArray = IndexSet(integersIn: Range(oldSectionNum..<newSectionNum))
-                    }
-
+                    ///--
+                    ///Original place of new Indexes calculation
+                    ///--
                     collectionView.collectionViewLayout.invalidateLayout()
                     collectionView.performBatchUpdates({
                         guard !self.allItems.isEmpty else {
                             return
                         }
+                        ///---
+                        ///While Array of arrays is not safe we will add it here, so there should be no crashes on incert
+                        let newSectionNum = lastIndex.section + 1
+                        let oldSectionNum = collectionView.numberOfSections
+                        
+                        var newArray = IndexSet()
+                        if newSectionNum > oldSectionNum {
+                            newArray = IndexSet(integersIn: Range(oldSectionNum..<newSectionNum))
+                        }
+                        ///---
                         collectionView.insertSections(newArray)
                         collectionView.insertItems(at: array)
                     }, completion: { status in

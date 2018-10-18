@@ -362,4 +362,8 @@ final class PeopleItem: Item {
         responseObject = response
         super.init(peopleItemResponse: response)
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        return nil
+    }
 }
