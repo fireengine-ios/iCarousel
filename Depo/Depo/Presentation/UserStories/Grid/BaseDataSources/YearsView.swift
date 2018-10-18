@@ -285,10 +285,10 @@ final class YearsView: UIView {
         let label = TextInsetsLabel()
         label.text = text
         label.textAlignment = .center
-        label.font = UIFont.TurkcellSaturaDemFont(size: 9)
+        label.font = UIFont.TurkcellSaturaDemFont(size: 12)
         label.backgroundColor = UIColor.white.withAlphaComponent(0.7)
         label.textColor = UIColor.lrTealishTwo
-        label.textInsets = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
+        label.textInsets = UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 10)
         label.sizeToFit()
         label.layer.cornerRadius = label.frame.height * 0.5
         label.layer.masksToBounds = true

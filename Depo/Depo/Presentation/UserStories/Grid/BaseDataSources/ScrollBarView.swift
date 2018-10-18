@@ -72,7 +72,7 @@ final class ScrollBarView: UIView {
         let insetsLabel = TextInsetsLabel()
         insetsLabel.text = "Apr 2018"
         insetsLabel.textAlignment = .center
-        insetsLabel.font = UIFont.TurkcellSaturaDemFont(size: 11)
+        insetsLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
         insetsLabel.backgroundColor = ColorConstants.activityTimelineDraws
         insetsLabel.textColor = UIColor.white
         insetsLabel.center.x -= 60
