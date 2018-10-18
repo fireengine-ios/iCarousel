@@ -22,6 +22,9 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     private let yearsView = YearsView()
     private let itemProvider = ItemsProvider(fieldValue: .image)//FIXME: pass actual flag here or setup from setup method
     
+    private let scrollBarHiddingDelay: TimeInterval = 3
+    private var hideScrollBarAnimatedTimer: Timer?
+    
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
             let cell_ = cell as? CollectionViewCellDataProtocol else {
@@ -436,6 +439,9 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         super.scrollViewDidScroll(scrollView)
         updateScrollBarTextIfNeed()
         hideScrollBarIfNeed(for: scrollView.contentOffset.y)
+        
+        hideScrollBarAnimatedTimer?.invalidate()
+        hideScrollBarAnimatedTimer = nil
     }
     
     private func hideScrollBarIfNeed(for contentOffsetY: CGFloat) {
@@ -443,6 +449,35 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             scrollBar.alpha = 0
         } else {
             scrollBar.alpha = 1
+        }
+    }
+    
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        super.scrollViewDidEndDecelerating(scrollView)
+        stoppedScrolling()
+    }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        super.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
+        if !decelerate {
+            stoppedScrolling()
+        }
+    }
+    
+    private func stoppedScrolling() {
+        startTimerToHideScrollBar()
+    }
+    
+    private func startTimerToHideScrollBar() {
+        hideScrollBarAnimatedTimer?.invalidate()
+        hideScrollBarAnimatedTimer = Timer.scheduledTimer(timeInterval: scrollBarHiddingDelay, target: self, selector: #selector(hideScrollBarAnimated), userInfo: nil, repeats: false)
+    }
+    
+    @objc private func hideScrollBarAnimated() {
+        hideScrollBarAnimatedTimer?.invalidate()
+        hideScrollBarAnimatedTimer = nil
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.scrollBar.alpha = 0
         }
     }
 }
@@ -454,6 +489,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     func scrollBarViewDidEndDraggin() {
         updateScrollBarTextIfNeed()
         yearsView.hideAnimated()
+        stoppedScrolling()
     }
  }
  
