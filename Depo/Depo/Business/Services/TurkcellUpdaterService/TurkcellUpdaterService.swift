@@ -12,7 +12,7 @@ import Foundation
 final class TurkcellUpdaterService {
     
     func startUpdater(controller: UIViewController?, completion: @escaping VoidHandler) {
-        UpdaterController.sharedInstance()?.checkUpdateURL(RouteRequests.updaterUrl, preferredLanguageForTitles: nil, parentViewController: controller, completionHandler: { action in
+        UpdaterController.sharedInstance()?.checkUpdateURL(RouteRequests.updaterUrl(), preferredLanguageForTitles: nil, parentViewController: controller, completionHandler: { action in
             debugLog("UpdaterController: \(action)")
             switch action {
             case .none:
