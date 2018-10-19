@@ -17,8 +17,10 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     private lazy var storageVars: StorageVars = factory.resolve()
     
     func viewIsReady() {
-        interactor.clearAllPreviouslyStoredInfo()
-        showPasscodeIfNeed()   
+        TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] in
+            self?.interactor.clearAllPreviouslyStoredInfo()
+            self?.showPasscodeIfNeed()
+        }
     }
     
     private func showLandingPagesIfNeeded() {

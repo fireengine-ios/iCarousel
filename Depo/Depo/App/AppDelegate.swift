@@ -75,8 +75,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ///call debugLog only if the Crashlytics is already initialized
         debugLog("AppDelegate didFinishLaunchingWithOptions")
         
+        let router = RouterVC()
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = RouterVC().vcForCurrentState()
+        window?.rootViewController = router.vcForCurrentState()
         window?.makeKeyAndVisible()
             
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
