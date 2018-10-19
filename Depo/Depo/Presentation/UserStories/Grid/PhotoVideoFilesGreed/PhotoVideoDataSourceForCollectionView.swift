@@ -20,6 +20,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     
     private let scrollBar = ScrollBarView()
     private let yearsView = YearsView()
+    private let itemProvider = ItemsProvider(fieldValue: .image)//FIXME: pass actual flag here or setup from setup method
+    
+    private let scrollBarHiddingDelay: TimeInterval = 3
+    private var hideScrollBarAnimatedTimer: Timer?
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
@@ -142,8 +146,9 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         
         let numberOfColumns = Int(Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone)
         // TODO: getCellSizeForList must be called in main queue. for a while it is woking without it
-        let cellHeight = delegate?.getCellSizeForList().height ?? 0
+        let cellHeight = delegate?.getCellSizeForGreed().height ?? 0
         let dates = allItems.flatMap({ $0 }).flatMap({ $0.metaDate })
+        scrollBar.updateLayout(by: cellHeight)
         yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
         
         if !emptyMetaItems.isEmpty {
@@ -285,7 +290,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 let itemsToCompound = isEmptyLeftOvers ? pageTempoItems : self.pageLeftOvers
                 if pageTempoItems.isEmpty, itemsToCompound.isEmpty {
                     self.isLocalFilesRequested = false
-                    self.delegate?.getNextItems()
+//                    self.delegate?.getNextItems()
+                    self.itemProvider.getNextItems(callback: { [weak self] remotes in
+                        self?.appendCollectionView(items: remotes, pageNum: self?.itemProvider.currentPage ?? 0)
+                    })
                     return
                 }
                 
@@ -321,12 +329,16 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 DispatchQueue.main.async {
                     if self.needReloadData {
                         CellImageManager.clear()
+                        self.needReloadData = false
                         self.collectionView?.reloadData()
                     }
                     self.isLocalFilesRequested = false
                     self.delegate?.filesAppendedAndSorted()
                     self.isDropedData = false
-                    self.delegate?.getNextItems()
+                    self.itemProvider.getNextItems(callback: { [weak self] remotes in
+                        self?.appendCollectionView(items: remotes, pageNum: self?.itemProvider.currentPage ?? 0)
+                    })
+//                    self.delegate?.getNextItems()
                 }
                 
             } else {
@@ -361,7 +373,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                             }
                             if !self.isPaginationDidEnd {
                                 if self.pageLeftOvers.isEmpty {
-                                    self.delegate?.getNextItems()
+                                    self.itemProvider.getNextItems(callback: { [weak self] remotes in
+                                        self?.appendCollectionView(items: remotes, pageNum: self?.itemProvider.currentPage ?? 0)
+                                    })
+//                                    self.delegate?.getNextItems()
                                 } else if !self.pageLeftOvers.isEmpty{
                                     self.compoundItems(pageItems: [], pageNum: self.lastPage, complition: { [weak self] response in
                                         self?.batchInsertItems(newIndexes: response)
@@ -425,6 +440,9 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         super.scrollViewDidScroll(scrollView)
         updateScrollBarTextIfNeed()
         hideScrollBarIfNeed(for: scrollView.contentOffset.y)
+        
+        hideScrollBarAnimatedTimer?.invalidate()
+        hideScrollBarAnimatedTimer = nil
     }
     
     private func hideScrollBarIfNeed(for contentOffsetY: CGFloat) {
@@ -432,6 +450,35 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             scrollBar.alpha = 0
         } else {
             scrollBar.alpha = 1
+        }
+    }
+    
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        super.scrollViewDidEndDecelerating(scrollView)
+        stoppedScrolling()
+    }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        super.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
+        if !decelerate {
+            stoppedScrolling()
+        }
+    }
+    
+    private func stoppedScrolling() {
+        startTimerToHideScrollBar()
+    }
+    
+    private func startTimerToHideScrollBar() {
+        hideScrollBarAnimatedTimer?.invalidate()
+        hideScrollBarAnimatedTimer = Timer.scheduledTimer(timeInterval: scrollBarHiddingDelay, target: self, selector: #selector(hideScrollBarAnimated), userInfo: nil, repeats: false)
+    }
+    
+    @objc private func hideScrollBarAnimated() {
+        hideScrollBarAnimatedTimer?.invalidate()
+        hideScrollBarAnimatedTimer = nil
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.scrollBar.alpha = 0
         }
     }
 }
@@ -443,6 +490,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     func scrollBarViewDidEndDraggin() {
         updateScrollBarTextIfNeed()
         yearsView.hideAnimated()
+        stoppedScrolling()
     }
  }
  
