@@ -76,7 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         debugLog("AppDelegate didFinishLaunchingWithOptions")
         
         let router = RouterVC()
-        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = router.vcForCurrentState()
         window?.makeKeyAndVisible()
@@ -95,8 +94,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         passcodeStorage.systemCallOnScreen = false
         
         MenloworksAppEvents.onAppLaunch()
-    
-        router.showTurkcellUpdater()
         
         return true
     }

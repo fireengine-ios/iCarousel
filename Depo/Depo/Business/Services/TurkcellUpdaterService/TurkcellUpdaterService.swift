@@ -1,25 +1,18 @@
 //
-//  TurkcellUpdaterViewController.swift
+//  TurkcellUpdaterService.swift
 //  Depo
 //
-//  Created by Konstantin on 10/18/18.
+//  Created by Konstantin on 10/19/18.
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
 import Foundation
-import UIKit
 
 
-final class TurkcellUpdaterViewController: UIViewController {
+final class TurkcellUpdaterService {
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        startUpdater()
-    }
-    
-    private func startUpdater() {
-        UpdaterController.sharedInstance()?.checkUpdateURL(RouteRequests.updaterUrl, preferredLanguageForTitles: nil, parentViewController: self, completionHandler: { action in
+    func startUpdater(controller: UIViewController?, completion: @escaping VoidHandler) {
+        UpdaterController.sharedInstance()?.checkUpdateURL(RouteRequests.updaterUrl, preferredLanguageForTitles: nil, parentViewController: controller, completionHandler: { action in
             debugLog("UpdaterController: \(action)")
             switch action {
             case .none:
@@ -37,6 +30,9 @@ final class TurkcellUpdaterViewController: UIViewController {
                 ///Cancelled or not found or failed
                 print("UpdaterController: updateCheckCompleted")
             }
+            
+            completion()
         })
     }
+    
 }
