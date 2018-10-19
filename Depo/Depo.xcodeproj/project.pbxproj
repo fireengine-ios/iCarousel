@@ -2695,8 +2695,8 @@
 		B5CDB33F21787FEF006CFA50 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32D21787FEF006CFA50 /* Configuration.m */; };
 		B5CDB34021787FEF006CFA50 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32F21787FEF006CFA50 /* Message.m */; };
 		B5CDB34121787FEF006CFA50 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32F21787FEF006CFA50 /* Message.m */; };
-		B5CDB3482178A74A006CFA50 /* TurkcellUpdaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3472178A74A006CFA50 /* TurkcellUpdaterViewController.swift */; };
-		B5CDB3492178A74B006CFA50 /* TurkcellUpdaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3472178A74A006CFA50 /* TurkcellUpdaterViewController.swift */; };
+		B5CDB3542179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */; };
+		B5CDB3552179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */; };
 		B5E74798208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E74799208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
@@ -5173,7 +5173,7 @@
 		B5CDB32D21787FEF006CFA50 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
 		B5CDB32E21787FEF006CFA50 /* UIAlertViewCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertViewCustom.h; sourceTree = "<group>"; };
 		B5CDB32F21787FEF006CFA50 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
-		B5CDB3472178A74A006CFA50 /* TurkcellUpdaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellUpdaterViewController.swift; sourceTree = "<group>"; };
+		B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellUpdaterService.swift; sourceTree = "<group>"; };
 		B5E74797208B3736003A7110 /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTaskService.swift; sourceTree = "<group>"; };
 		B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsModel.swift; sourceTree = "<group>"; };
@@ -10177,7 +10177,7 @@
 		B5CDB34321788536006CFA50 /* TurkcellUpdaterService */ = {
 			isa = PBXGroup;
 			children = (
-				B5CDB3472178A74A006CFA50 /* TurkcellUpdaterViewController.swift */,
+				B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */,
 			);
 			path = TurkcellUpdaterService;
 			sourceTree = "<group>";
@@ -14303,7 +14303,6 @@
 				8C0E8C811FDEBDFF00789C91 /* UsageInfoPresenter.swift in Sources */,
 				8C0E8C841FDEBDFF00789C91 /* PasscodeEnterViewController.swift in Sources */,
 				8C0E8C851FDEBDFF00789C91 /* CreateStoryPreviewViewController.swift in Sources */,
-				B5CDB3492178A74B006CFA50 /* TurkcellUpdaterViewController.swift in Sources */,
 				C62239B32049738F0043ED44 /* FaceImageItemsRouterInput.swift in Sources */,
 				B5E74799208B3736003A7110 /* UploadOperation.swift in Sources */,
 				C62239AF204973330043ED44 /* FaceImageChangeCoverViewController.swift in Sources */,
@@ -14765,6 +14764,7 @@
 				8CD84C451FDEC5E2005CD3B8 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
 				B5CDB33D21787FEF006CFA50 /* Filter.m in Sources */,
 				8C13C302210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */,
+				B5CDB3552179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */,
 				8C0E8E031FDEBDFF00789C91 /* WrapperedItemUtil.swift in Sources */,
 				8C06AC1920066641003D8E05 /* TurkcellSecurityViewController.swift in Sources */,
 				8C0E8E041FDEBDFF00789C91 /* CreateStorySelectionRouter.swift in Sources */,
@@ -15474,7 +15474,6 @@
 				CEF371AC20887BAC007AD36E /* MD5.swift in Sources */,
 				EF1B60481FCEF38400662CBC /* BottomSelectionMusicTabBarRouter.swift in Sources */,
 				78E8E2B62023638E00A979AB /* FaceImageItemsInteractorOutput.swift in Sources */,
-				B5CDB3482178A74A006CFA50 /* TurkcellUpdaterViewController.swift in Sources */,
 				CE8F44F71F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.swift in Sources */,
 				78D9BA422007E81200F2233F /* DuplicatedContactsRouter.swift in Sources */,
 				8C7786881F3F38D9005CB432 /* MusicBar.swift in Sources */,
@@ -15936,6 +15935,7 @@
 				CE19CE01208F016600DB903E /* UIAlertController+Action.swift in Sources */,
 				B5CDB33C21787FEF006CFA50 /* Filter.m in Sources */,
 				CE51ACEA1EF90853005DCEE0 /* PhoneVereficationViewOutput.swift in Sources */,
+				B5CDB3542179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */,
 				CE51ACEB1EF90853005DCEE0 /* PhoneVereficationViewController.swift in Sources */,
 				8C13C301210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */,
 				CE51ACEC1EF90853005DCEE0 /* PhoneVereficationModuleInput.swift in Sources */,

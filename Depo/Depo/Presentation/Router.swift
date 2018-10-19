@@ -760,9 +760,10 @@ class RouterVC: NSObject {
         UIApplication.topController()?.present(controller, animated: true, completion: nil)
     }
     
-    @objc func vcForCurrentState() -> UIViewController? {
+    func vcForCurrentState() -> UIViewController? {
         return splash
     }
+    
     
     // MARK: - Activity Timeline
     
@@ -788,13 +789,5 @@ class RouterVC: NSObject {
     func passcodeSettings(isTurkcell: Bool, inNeedOfMail: Bool) -> UIViewController {
         return PasscodeSettingsModuleInitializer.setupModule(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail)
     }
-    
-    //MARK: - TurkcellUpdater
-    
-    func showTurkcellUpdater() {
-        let controller = TurkcellUpdaterViewController()
-        controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        UIApplication.topController()?.present(controller, animated: true, completion: nil)
-    }
+
 }
