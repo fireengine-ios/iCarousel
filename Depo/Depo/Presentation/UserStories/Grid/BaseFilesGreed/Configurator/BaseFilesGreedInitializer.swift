@@ -18,7 +18,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     }
     
     class func initializePhotoVideosViewController(with nibName: String, screenFilterType: MoreActionsConfig.MoreActionsFileType) -> UIViewController {
-        let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
+        let viewController = PhotoVideoController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
         viewController.scrolliblePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
