@@ -16,29 +16,17 @@
  *  
  *******************************************************************************/
 //
-//  MesssageView.h
-//  TurkcellUpdater
+//  UIAlertViewCustom.m
+//  TurkcellUpdaterSampleApp
 //
-//  Created by Sonat Karakas on 3/26/13.
+//  Created by Sonat Karakas on 1/11/13.
 //  Copyright (c) 2013 Turkcell. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import "MessageViewDelegate.h"
+#import "UIAlertViewCustom.h"
 
-@interface MessageView : NSObject
+@implementation UIAlertViewCustom
 
-@property (nonatomic, retain) NSString *targetWebsiteUrl;
-@property (nonatomic, retain) UIView *view;
-@property (nonatomic, retain) id<MessageViewDelegate> delegate;
-
-+ (MessageView *) initWithTitle:(NSString *)title
-                         message:(NSString *)message
-                        imageUrl:(NSString *)imageUrl
-                targetWebsiteUrl:(NSString *)targetWebsiteUrl
-                       delegate:(id<MessageViewDelegate>)delegate;
-
-- (void) showOnView:(UIView *)parentView;
+@synthesize targetPackageURL, forceUpdate, forceExit;
 
 @end
