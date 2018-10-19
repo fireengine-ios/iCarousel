@@ -81,6 +81,7 @@ struct NumericConstants {
     static let logMaxSize: UInt64 = 5_242_880
     
     static let numberOfLocalItemsOnPage: Int = 100
+    static let itemProviderSearchRequest: Int = 1000
     
     static let limitContactsForBackUp: Int = 5000
     static let defaultCustomScrollIndicatorOffset: CGFloat = 50

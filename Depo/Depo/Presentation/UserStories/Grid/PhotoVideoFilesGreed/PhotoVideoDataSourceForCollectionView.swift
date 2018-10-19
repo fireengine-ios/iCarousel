@@ -19,6 +19,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     }
     
     private let scrollBarManager = PhotoVideoScrollBarManager()
+    private let itemProvider = ItemsProvider(fieldValue: .image)//FIXME: pass actual flag here or setup from setup method
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
@@ -251,7 +252,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 let itemsToCompound = isEmptyLeftOvers ? pageTempoItems : self.pageLeftOvers
                 if pageTempoItems.isEmpty, itemsToCompound.isEmpty {
                     self.isLocalFilesRequested = false
-                    self.delegate?.getNextItems()
+//                    self.delegate?.getNextItems()
+                    self.itemProvider.getNextItems(callback: { [weak self] remotes in
+                        self?.appendCollectionView(items: remotes, pageNum: self?.itemProvider.currentPage ?? 0)
+                    })
                     return
                 }
                 
@@ -287,12 +291,16 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 DispatchQueue.main.async {
                     if self.needReloadData {
                         CellImageManager.clear()
+                        self.needReloadData = false
                         self.collectionView?.reloadData()
                     }
                     self.isLocalFilesRequested = false
                     self.delegate?.filesAppendedAndSorted()
                     self.isDropedData = false
-                    self.delegate?.getNextItems()
+                    self.itemProvider.getNextItems(callback: { [weak self] remotes in
+                        self?.appendCollectionView(items: remotes, pageNum: self?.itemProvider.currentPage ?? 0)
+                    })
+//                    self.delegate?.getNextItems()
                 }
                 
             } else {
@@ -327,7 +335,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                             }
                             if !self.isPaginationDidEnd {
                                 if self.pageLeftOvers.isEmpty {
-                                    self.delegate?.getNextItems()
+                                    self.itemProvider.getNextItems(callback: { [weak self] remotes in
+                                        self?.appendCollectionView(items: remotes, pageNum: self?.itemProvider.currentPage ?? 0)
+                                    })
+//                                    self.delegate?.getNextItems()
                                 } else if !self.pageLeftOvers.isEmpty{
                                     self.compoundItems(pageItems: [], pageNum: self.lastPage, complition: { [weak self] response in
                                         self?.batchInsertItems(newIndexes: response)
