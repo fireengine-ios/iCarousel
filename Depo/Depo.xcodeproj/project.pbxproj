@@ -3402,6 +3402,7 @@
 		CEE3017F2049520C007E70CE /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
 		CEE9B4EC1F78FD85002DAF81 /* InternetDataUsageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9B4EA1F78FD85002DAF81 /* InternetDataUsageCell.swift */; };
 		CEE9B4ED1F78FD85002DAF81 /* InternetDataUsageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE9B4EB1F78FD85002DAF81 /* InternetDataUsageCell.xib */; };
+		CEEA3C572179C093000C3FBC /* PhotoVideoScrollBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA3C562179C093000C3FBC /* PhotoVideoScrollBarManager.swift */; };
 		CEEB7A9820A4755B0070FDC2 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
 		CEEB7A9B20A5BC230070FDC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEEB7A9D20A5BC230070FDC2 /* InfoPlist.strings */; };
 		CEEB7AA620A5D5C80070FDC2 /* GradientOrangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7AA520A5D5C80070FDC2 /* GradientOrangeView.swift */; };
@@ -5594,6 +5595,7 @@
 		CEE9A5FA1F23308800ED8610 /* String+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Int.swift"; sourceTree = "<group>"; };
 		CEE9B4EA1F78FD85002DAF81 /* InternetDataUsageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetDataUsageCell.swift; sourceTree = "<group>"; };
 		CEE9B4EB1F78FD85002DAF81 /* InternetDataUsageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InternetDataUsageCell.xib; sourceTree = "<group>"; };
+		CEEA3C562179C093000C3FBC /* PhotoVideoScrollBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoScrollBarManager.swift; sourceTree = "<group>"; };
 		CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Main.swift"; sourceTree = "<group>"; };
 		CEEB7A9C20A5BC230070FDC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CEEB7A9E20A5BC290070FDC2 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -9369,6 +9371,7 @@
 				8C353D982167988400B1C85C /* PhotoVideoFilesGreedModuleConfigurator.swift */,
 				8C353D9521678BB800B1C85C /* PhotoVideosFilesGreedPresenter.swift */,
 				8C353D922167887D00B1C85C /* PhotoVideoDataSourceForCollectionView.swift */,
+				CEEA3C562179C093000C3FBC /* PhotoVideoScrollBarManager.swift */,
 				8C157B7E2173CD8A00313F2B /* ItemsProvider.swift */,
 				8C157B81217477AB00313F2B /* ItemsRepository.swift */,
 			);
@@ -16538,6 +16541,7 @@
 				CE6DE75C1FCC3ECF00C23CBD /* OptInController.swift in Sources */,
 				7CD92DC12076027D00010BFA /* iOSDevCenters+GIF.swift in Sources */,
 				78A76020200898F10023D52B /* DuplicatedContactsModuleOutput.swift in Sources */,
+				CEEA3C572179C093000C3FBC /* PhotoVideoScrollBarManager.swift in Sources */,
 				2BA37C39202837B400660394 /* FaceImageChangeCoverInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
