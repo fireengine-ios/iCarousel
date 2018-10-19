@@ -538,79 +538,7 @@ protocol  Wrappered {
     
     var albums: [String]? { get set }
 }
-//struct WrapDataEncodeKeys {
-//    static let key1 = "Key1"
-//    static let keyUuid = "UUID"
-//
-//
-//
-//    var name: String?
-//
-//
-//
-//    var creationDate: Date?
-//
-//
-//
-//    var lastModifiDate: Date?
-//
-//
-//
-//    var fileType: FileType = .application(.unknown)
-//
-//
-//
-//    var syncStatus: SyncWrapperedStatus = .notSynced
-//
-//
-//
-//    var syncStatuses = [String]()
-//
-//
-//
-//    var isLocalItem: Bool
-//
-//
-//
-//    var md5: String = ""
-//
-//
-//
-//    var parent: String?
-//
-//
-//
-//    ////-----
-//
-//
-//
-//    var id: Int64?
-//
-//    var fileSize: Int64
-//
-//    var favorites: Bool
-//
-//    var patchToPreview: PathForItem
-//
-//    var duration: String?
-//
-//    var durationValue: TimeInterval?
-//
-//    var albums: [String]?
-//
-//    var metaData: BaseMetaData?
-//
-//    var status: Status
-//
-//    var localFileUrl: URL?
-//
-//    var tmpDownloadUrl: URL?
-//
-//
-//    var isFolder: Bool?
-//
-//    var childCount: Int64?
-//}
+
 class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
     
     enum Status: String {
@@ -729,48 +657,67 @@ class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
         patchToPreview = .remoteUrl(URL(string: ""))//TODO: Change to medium by default
         status = Status(string:aDecoder.decodeObject(forKey: SearchJsonKey.status) as? String)
         super.init(uuid: decodedUUID)
-        uuid = decodedUUID
+        uuid = decodedUUID    
         
+        ///URL
+        tmpDownloadUrl = aDecoder.decodeObject(forKey: SearchJsonKey.tempDownloadURL) as? URL
+        
+        id = aDecoder.decodeInt64(forKey: SearchJsonKey.id)
+        md5 = aDecoder.decodeObject(forKey: SearchJsonKey.hash) as? String ?? "No MD5"
+        albums = aDecoder.decodeObject(forKey: SearchJsonKey.album) as? [String]
+        name = aDecoder.decodeObject(forKey: SearchJsonKey.name) as? String
         creationDate = aDecoder.decodeObject(forKey: SearchJsonKey.createdDate) as? Date
-        //json?[SearchJsonKey.createdDate].date
-//
-//        lastModifiedDate = json?[SearchJsonKey.lastModifiedDate].date
-//
-//        id = json?[SearchJsonKey.id].int64
-//
-//        hash = json?[SearchJsonKey.hash].string
-//
-//        name = json?[SearchJsonKey.name].string
-//
+        lastModifiDate = aDecoder.decodeObject(forKey: SearchJsonKey.lastModifiedDate) as? Date
+        
+        fileType = FileType(value: Int16(aDecoder.decodeInteger(forKey: SearchJsonKey.content_type)))//valueForCoreDataMapping()
+        
+        mimeType = aDecoder.decodeObject(forKey: SearchJsonKey.content_type) as? String
+        isFolder = aDecoder.decodeBool(forKey: SearchJsonKey.folder)
 
-//
-//        bytes = json?[SearchJsonKey.bytes].int64
-//
-//        contentType = json?[SearchJsonKey.content_type].string
-//
-//        metadata = BaseMetaData(withJSON: json?[SearchJsonKey.metadata])
-//
-//        folder = json?[SearchJsonKey.folder].bool
-//
-//        uploaderDeviceType = json?[SearchJsonKey.uploaderDeviceType].string
-//
-//        parent = json?[SearchJsonKey.parent].string
-//
-//        tempDownloadURL = json?[SearchJsonKey.tempDownloadURL].url
-//
-//        status = json?[SearchJsonKey.status].string
-//
-//        subordinates = json?[SearchJsonKey.subordinates].array
-//
-//        albums = json?[SearchJsonKey.album].array?.flatMap { $0.string }
-//
-//        childCount = json?[SearchJsonKey.ChildCount].int64
+        ///---
+        ///FOR NOW WE CODE AND DECODE ONLY REMOTES
+        isLocalItem = false
+        syncStatus = .synced
+        //setSyncStatusesAsSyncedForCurrentUser()
+        ///---
         
-        
+        parent = aDecoder.decodeObject(forKey: SearchJsonKey.parent) as? String
+        childCount = aDecoder.decodeInt64(forKey:SearchJsonKey.ChildCount)
+
+        switch fileType {
+        case .image, .audio, .video:
+            duration = WrapData.getDuration(duration: metaData?.duration)
+            durationValue = metaData?.duration
+            patchToPreview = .remoteUrl(metaData?.mediumUrl)
+        default:
+            break
+        }
     }
     
     func encode(with aCoder: NSCoder) {
-        
+        aCoder.encode(uuid, forKey: SearchJsonKey.uuid)
+        aCoder.encode(fileSize, forKey: SearchJsonKey.bytes)
+        aCoder.encode(metaData, forKey: SearchJsonKey.metadata)
+        aCoder.encode(status, forKey: SearchJsonKey.status)
+        ///URL
+        aCoder.encode(tmpDownloadUrl, forKey: SearchJsonKey.tempDownloadURL)
+        aCoder.encode(id, forKey: SearchJsonKey.id)
+        aCoder.encode(md5, forKey: SearchJsonKey.hash)
+        aCoder.encode(albums, forKey: SearchJsonKey.album)
+        aCoder.encode(name, forKey: SearchJsonKey.name)
+        aCoder.encode(creationDate, forKey: SearchJsonKey.createdDate)
+        aCoder.encode(lastModifiDate, forKey: SearchJsonKey.lastModifiedDate)
+        aCoder.encode(fileType.valueForCoreDataMapping(), forKey: SearchJsonKey.content_type)
+        aCoder.encode(mimeType, forKey: SearchJsonKey.content_type)
+        aCoder.encode(isFolder, forKey: SearchJsonKey.folder)
+        ///---
+        ///FOR NOW WE CODE AND DECODE ONLY REMOTES
+//        isLocalItem = false
+//        syncStatus = .synced
+        //setSyncStatusesAsSyncedForCurrentUser()
+        ///---
+        aCoder.encode(parent, forKey: SearchJsonKey.parent)
+        aCoder.encode(childCount, forKey: SearchJsonKey.ChildCount)
     }
     
     //MARK:-
