@@ -153,9 +153,9 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
     //MARK:- BaseMetaData - Coding
     required init?(coder aDecoder: NSCoder) {
         super.init()
-        favourite = aDecoder.decodeBool(forKey: SearchJsonKey.favourite)
-        height = aDecoder.decodeInteger(forKey: SearchJsonKey.ImageHeight)
-        width = aDecoder.decodeInteger(forKey:SearchJsonKey.ImageWidth)
+        favourite = aDecoder.decodeObject(forKey: SearchJsonKey.favourite) as? Bool//aDecoder.decodeBool(forKey: SearchJsonKey.favourite)
+        height = aDecoder.decodeObject(forKey: SearchJsonKey.ImageHeight) as? Int
+        width = aDecoder.decodeObject(forKey:SearchJsonKey.ImageWidth) as? Int
         takenDate = aDecoder.decodeObject(forKey: SearchJsonKey.ImageDateTime) as? Date
         largeUrl = aDecoder.decodeObject(forKey: SearchJsonKey.ThumbnailLarge) as? URL
         ///Maybe store string and then make URL from it?
@@ -168,7 +168,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         title = aDecoder.decodeObject(forKey:SearchJsonKey.Title) as? String
         duration = aDecoder.decodeObject(forKey:SearchJsonKey.Duration) as? Double
         genre = aDecoder.decodeObject(forKey:SearchJsonKey.Genre) as? [String] ?? []
-        videoSlideshow = aDecoder.decodeBool(forKey: SearchJsonKey.VideoSlideshow)
+        videoSlideshow = aDecoder.decodeObject(forKey: SearchJsonKey.VideoSlideshow) as? Bool
         videoHLSPreview = aDecoder.decodeObject(forKey:SearchJsonKey.VideoHLSPreview) as? URL
     }
     
@@ -198,7 +198,7 @@ final class SearchItemResponse: ObjectRequestResponse {
     var createdDate: Date?
     var lastModifiedDate: Date?
     var id: Int64?
-    var hash: String?
+    var itemHash: String?
     var name: String?
     var uuid: String?
     var bytes: Int64?
@@ -219,7 +219,7 @@ final class SearchItemResponse: ObjectRequestResponse {
         createdDate = json?[SearchJsonKey.createdDate].date
         lastModifiedDate = json?[SearchJsonKey.lastModifiedDate].date
         id = json?[SearchJsonKey.id].int64
-        hash = json?[SearchJsonKey.hash].string
+        itemHash = json?[SearchJsonKey.hash].string
         name = json?[SearchJsonKey.name].string
         uuid = json?[SearchJsonKey.uuid].string
         bytes = json?[SearchJsonKey.bytes].int64

@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-class ItemsRepository {
+class ItemsRepository {//}: NSKeyedArchiverDelegate {
     
     static let shared = ItemsRepository()
     
@@ -29,17 +29,32 @@ class ItemsRepository {
     
     func updateCache() {
         ///check if there is a need to update or just download
-        
-        /// if something stored flags isAllPhotosDownloaded are true
-
-        downloadPhotos() { [weak self] in //FIXME: implement as one method by providing different searchFilds value
+        loadItems() { [weak self] response in
+            switch response {
+            case .success(_):
+                self?.isAllPhotosDownloaded = true
+                self?.isAllVideosDownloaded = true
+                self?.allFilesDownloadedCallback?()
+                debugPrint("LALALA")
+            case .failed(_):
+                self?.downloadAllFiles() { [weak self] in
+                    self?.saveItems()
+                    self?.allFilesDownloadedCallback?()
+                }
+            }
+        }
+    }
+    
+    private func downloadAllFiles(completion: @escaping VoidHandler) {
+        downloadPhotos() { [weak self] in
+            //FIXME: implement as one method by providing different searchFilds value
             if let `self` = self, self.isAllRemotesDownloaded {
-                self.allFilesDownloadedCallback?()
+                completion()
             }
         }
         downloadVideos() { [weak self] in
             if let `self` = self, self.isAllRemotesDownloaded {
-                self.allFilesDownloadedCallback?()
+                completion()
             }
         }
     }
@@ -122,10 +137,80 @@ class ItemsRepository {
     }
     
     private func saveItems() {
+        ///OPTION 1:
+        guard let pathPhoto = filePathPhoto,
+            let pathVideo = filePathVideo else {
+            return
+        }
+
+        NSKeyedArchiver.archiveRootObject(allRemotePhotos, toFile: pathPhoto)
+        NSKeyedArchiver.archiveRootObject( allRemoteVideos, toFile: pathVideo)
+        ///OPTION 2:
+//        let data = NSKeyedArchiver.archivedDataWithRootObject(books)
+//        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "books")
+    }
+
+    
+    
+    private func loadItems(callBack: @escaping ResponseVoid) {
+        FileManager.default.fileExists(atPath: filePathPhoto!)
+        //TODO: If there is no videos - start downloading onl them,
+        //if there is no photos - start downlading only photos
+        guard let pathPhoto = filePathPhoto,
+            let pathVideo = filePathVideo,
+            let savedPhotos = NSKeyedUnarchiver.unarchiveObject(withFile: pathPhoto) as? [WrapData?]
+            ,
+            let savedVideos = NSKeyedUnarchiver.unarchiveObject(withFile: pathVideo) as? [WrapData?]
+            else {
+                callBack(ResponseResult.failed(CustomErrors.unknown))
+                return
+        }
+        
+        allRemotePhotos = savedPhotos.flatMap{return $0}
+        allRemoteVideos = savedVideos.flatMap{return $0}
+        callBack(ResponseResult.success(()))
         
     }
     
-    private func loadItems() {
-        
+//    var filePath : String {
+//        let manager = NSFileManager.defaultManager()
+//        let url = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first as! NSURL
+//        return url.URLByAppendingPathComponent("objectsArray").path!
+//    }
+    let pathToMetaDataComponent = "MetaData"
+    let pathToPhotoComponent = "StoragePhoto"
+    //    let pathToPhotoMetaDataComponent = "StoragePhotoMetaData"
+    let pathToVideoComponent = "StorageVideo"
+    //    let pathToVideoMetaDataComponent = "StorageVideoMetaData"
+    
+    private var filePathURL: URL? {
+        let manager = FileManager.default
+        return manager.urls(for: .documentDirectory, in: .userDomainMask).first
     }
+    
+    private var filePathPhoto: String? {
+        return getPath(component: pathToPhotoComponent)
+    }
+    
+    private var filePathVideo: String? {
+        return getPath(component: pathToVideoComponent)
+    }
+    
+
+    
+    func getPath(component: String) -> String? {
+         return filePathURL?.appendingPathComponent(component).path
+    }
+    
+    func archiveObject(object: NSCoding?, path: String) {
+        guard let unwrapedObj = object else {
+            return
+        }
+        NSKeyedArchiver.archiveRootObject(unwrapedObj, toFile: path)
+    }
+    
+    func deArchiveObject(path: String) -> Any? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: path)
+    }
+    
 }
