@@ -154,7 +154,16 @@ struct RouteRequests {
     
     //MARK: - Turkcell Updater
     
-    static let updaterUrl = "https://adepo.turkcell.com.tr/download/update_ios.json"
+    static func updaterUrl() -> String {
+        switch currentServerEnvironment {
+        case .preProduction:
+            return "https://adepotest.turkcell.com.tr/download/update_ios.json"
+        case .production:
+            return "https://adepo.turkcell.com.tr/download/update_ios.json"
+        case .test:
+            return "https://tcloudstb.turkcell.com.tr/download/update_ios.json"
+        }
+    }
     
     
     struct HomeCards {
