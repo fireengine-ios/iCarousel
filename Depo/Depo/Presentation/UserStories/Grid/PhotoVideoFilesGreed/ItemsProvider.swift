@@ -50,7 +50,6 @@ class ItemsProvider {
             }
         case .video:
             itemsRepository.getNextStoredVideosPage(range: nextPageRange) { [weak self] remoteItems in
-                //                self?.currentDataBasePage += 1
                 self?.allRemoteItems.append(contentsOf: remoteItems)
                 callback(remoteItems)
             }

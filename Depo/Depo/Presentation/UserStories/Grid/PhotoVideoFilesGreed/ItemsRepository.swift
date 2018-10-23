@@ -10,6 +10,10 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
     
     static let shared = ItemsRepository()
     
+    let pathToMetaDataComponent = "MetaData"
+    let pathToPhotoComponent = "StoragePhoto"
+    let pathToVideoComponent = "StorageVideo"
+    
     var isAllRemotesDownloaded: Bool {
         return isAllPhotosDownloaded && isAllVideosDownloaded
     }
@@ -109,7 +113,11 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
     }
     
     func getNextStoredVideosPage(range: CountableRange<Int>, storedRemotes: @escaping ItemsCallback) {
-        let arrayInRange = Array(allRemoteVideos[range])
+        guard range.startIndex >= 0, range.startIndex < range.endIndex else {
+            storedRemotes([])
+            return
+        }
+        let arrayInRange = Array(allRemoteVideos.dropFirst(range.startIndex).prefix(range.endIndex - range.startIndex))
         if arrayInRange.isEmpty, !isAllVideosDownloaded {
             lastAddedVideoPageCallback = { [weak self] in
                 self?.getNextStoredVideosPage(range: range, storedRemotes: storedRemotes)
@@ -165,6 +173,8 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
     private func saveItems() {
         guard let pathPhoto = filePathPhoto,
             let pathVideo = filePathVideo else {
+                isAllPhotosDownloaded = false
+                isAllVideosDownloaded = false
             return
         }
         NSKeyedArchiver.archiveRootObject(allRemotePhotos, toFile: pathPhoto)
@@ -182,15 +192,10 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
                 callBack(ResponseResult.failed(CustomErrors.unknown))
                 return
         }
-        
         allRemotePhotos = savedPhotos.flatMap{return $0}
         allRemoteVideos = savedVideos.flatMap{return $0}
         callBack(ResponseResult.success(()))
     }
-    
-    let pathToMetaDataComponent = "MetaData"
-    let pathToPhotoComponent = "StoragePhoto"
-    let pathToVideoComponent = "StorageVideo"
     
     private var filePathURL: URL? {
         let manager = FileManager.default
@@ -216,7 +221,7 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
         NSKeyedArchiver.archiveRootObject(unwrapedObj, toFile: path)
     }
     
-    func deArchiveObject(path: String) -> Any? {
+    func unarchiveObject(path: String) -> Any? {
         return NSKeyedUnarchiver.unarchiveObject(withFile: path)
     }
     

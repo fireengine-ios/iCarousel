@@ -113,12 +113,14 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         delegate?.filesAppendedAndSorted()
         CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
        
-        DispatchQueue.main.async {
+        DispatchQueue.main.async
+            {
             self.scrollBarManager.addScrollBar(to: self.collectionView, delegate: self)
-            
             let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
             self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
             CellImageManager.clear()
+            self.collectionView?.reloadData() ///Check if we can just reload one supplementary view
+
         }
     }
     

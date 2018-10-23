@@ -651,10 +651,10 @@ class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
         guard let decodedUUID = aDecoder.decodeObject(forKey:SearchJsonKey.uuid) as? String else {
             return nil
         }
-        fileSize = aDecoder.decodeInt64(forKey: SearchJsonKey.bytes)
+        fileSize = aDecoder.decodeObject(forKey: SearchJsonKey.bytes) as? Int64 ?? 0
         id = aDecoder.decodeObject(forKey: SearchJsonKey.id) as? Int64
         let metaDataPath = (ItemsRepository.shared.getPath(component: ItemsRepository.shared.pathToMetaDataComponent) ?? "") + "\(id ?? 0)"
-        metaData = ItemsRepository.shared.deArchiveObject(path: metaDataPath) as? BaseMetaData
+        metaData = ItemsRepository.shared.unarchiveObject(path: metaDataPath) as? BaseMetaData
         favorites = metaData?.favourite ?? false
         patchToPreview = .remoteUrl(URL(string: ""))//TODO: Change to medium by default
         status = Status(string:aDecoder.decodeObject(forKey: SearchJsonKey.status) as? String)
@@ -666,7 +666,8 @@ class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
         name = aDecoder.decodeObject(forKey: SearchJsonKey.name) as? String
         creationDate = aDecoder.decodeObject(forKey: SearchJsonKey.createdDate) as? Date
         lastModifiDate = aDecoder.decodeObject(forKey: SearchJsonKey.lastModifiedDate) as? Date
-        fileType = FileType(value: aDecoder.decodeObject(forKey: SearchJsonKey.content_type) as? Int16 ?? 0)
+        let fileTypeArchived = aDecoder.decodeObject(forKey: fileTypeKey) as? Int16
+        fileType = FileType(value: fileTypeArchived ?? 0)
         mimeType = aDecoder.decodeObject(forKey: SearchJsonKey.content_type) as? String
         isFolder = aDecoder.decodeObject(forKey: SearchJsonKey.folder) as? Bool
         ///---
@@ -687,6 +688,8 @@ class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
         }
     }
     
+    private let fileTypeKey = "fileTypeKey"
+    
     func encode(with aCoder: NSCoder) {
         aCoder.encode(uuid, forKey: SearchJsonKey.uuid)
         aCoder.encode(fileSize, forKey: SearchJsonKey.bytes)
@@ -700,7 +703,7 @@ class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
         aCoder.encode(name, forKey: SearchJsonKey.name)
         aCoder.encode(creationDate, forKey: SearchJsonKey.createdDate)
         aCoder.encode(lastModifiDate, forKey: SearchJsonKey.lastModifiedDate)
-        aCoder.encode(fileType.valueForCoreDataMapping(), forKey: SearchJsonKey.content_type)
+        aCoder.encode(fileType.valueForCoreDataMapping(), forKey: fileTypeKey)
         aCoder.encode(mimeType, forKey: SearchJsonKey.content_type)
         aCoder.encode(isFolder, forKey: SearchJsonKey.folder)
         ///---
