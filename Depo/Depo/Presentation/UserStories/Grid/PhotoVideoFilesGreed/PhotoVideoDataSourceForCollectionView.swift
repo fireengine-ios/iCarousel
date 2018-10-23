@@ -369,31 +369,29 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     }
     
     override func breakItemsIntoSections(breakingArray: [WrapData]) {
-        allItems.removeAll()
-        
-        //let needShowEmptyMetaDataItems = needShowEmptyMetaItems && (currentSortType == .metaDataTimeUp || currentSortType == .metaDataTimeDown)
+        var newAllItems = [[WrapData]]()
         
         for item in breakingArray {
             autoreleasepool {
-                if !allItems.isEmpty,
-                    let lastItem = allItems.last?.last {
-                    switch currentSortType {
-                    case .timeUp, .timeDown:
-                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: false)
-                    case .lettersAZ, .lettersZA, .albumlettersAZ, .albumlettersZA:
-                        addByName(lastItem: lastItem, newItem: item)
-                    case .sizeAZ, .sizeZA:
-                        addBySize(lastItem: lastItem, newItem: item)
-                    case .timeUpWithoutSection, .timeDownWithoutSection:
-                        allItems.append(contentsOf: [breakingArray])
-                        return
-                    case .metaDataTimeUp, .metaDataTimeDown:
-                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: true)
+                if !newAllItems.isEmpty, let lastItem = newAllItems.last?.last {
+                    let lastItemCreatedDate = lastItem.metaDate
+                    let newItemCreationDate = item.metaDate
+                    
+                    if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
+                        lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth()
+                    {
+                        newAllItems[newAllItems.count - 1].append(item)
+                    } else {
+                        newAllItems.append([item])
                     }
                 } else {
-                    allItems.append([item])
+                    newAllItems.append([item])
                 }
             }
+        }
+        
+        DispatchQueue.toMain {
+            self.allItems = newAllItems
         }
        //// currently we add missing dates after all collection is presented, (at the very end)
 //        if needShowEmptyMetaDataItems && !emptyMetaItems.isEmpty {
