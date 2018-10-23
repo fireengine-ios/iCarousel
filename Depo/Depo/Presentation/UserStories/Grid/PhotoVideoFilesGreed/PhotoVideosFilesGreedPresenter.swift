@@ -8,10 +8,10 @@
 
 final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
     
-    override init(sortedRule: SortedRules = .timeDown) {
+    init(sortedRule: SortedRules = .timeDown, fieldType: FieldValue) {
         super.init()
         self.sortedRule = sortedRule
-        self.dataSource = PhotoVideoDataSourceForCollectionView(sortingRules: sortedRule)
+        self.dataSource = PhotoVideoDataSourceForCollectionView(sortingRules: sortedRule, fieldValue: fieldType)
         type = .Grid
         sortedType = .TimeNewOld
         

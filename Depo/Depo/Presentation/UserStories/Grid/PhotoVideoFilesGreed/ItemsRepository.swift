@@ -6,9 +6,13 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-class ItemsRepository {
+class ItemsRepository {//}: NSKeyedArchiverDelegate {
     
     static let shared = ItemsRepository()
+    
+    let pathToMetaDataComponent = "MetaData"
+    let pathToPhotoComponent = "StoragePhoto"
+    let pathToVideoComponent = "StorageVideo"
     
     var isAllRemotesDownloaded: Bool {
         return isAllPhotosDownloaded && isAllVideosDownloaded
@@ -25,28 +29,73 @@ class ItemsRepository {
     var lastAddedVideoPageCallback: VoidHandler?
     var allFilesDownloadedCallback: VoidHandler?
     
-    ///array of delegates
+    ///array of delegates would be better then one callback (or array of callbacks??)
     
     func updateCache() {
         ///check if there is a need to update or just download
-        
-        /// if something stored flags isAllPhotosDownloaded are true
-
-        downloadPhotos() { [weak self] in //FIXME: implement as one method by providing different searchFilds value
+        loadItems() { [weak self] response in
+            switch response {
+            case .success(_):
+                self?.isAllPhotosDownloaded = true
+                self?.isAllVideosDownloaded = true
+                self?.allFilesDownloadedCallback?()
+            case .failed(_):
+                self?.downloadAllFiles() { [weak self] in
+                    self?.saveItems()
+                    self?.allFilesDownloadedCallback?()
+                }
+            }
+        }
+    }
+    
+    private func downloadAllFiles(completion: @escaping VoidHandler) {
+        downloadPhotos() { [weak self] in
+            //FIXME: implement as one method by providing different searchFilds value
             if let `self` = self, self.isAllRemotesDownloaded {
-                self.allFilesDownloadedCallback?()
+                completion()
             }
         }
         downloadVideos() { [weak self] in
             if let `self` = self, self.isAllRemotesDownloaded {
-                self.allFilesDownloadedCallback?()
+                completion()
             }
         }
     }
     
     func dropCache() {
-        
+        guard let pathPhoto = filePathPhoto,
+            let pathVideo = filePathVideo else {
+                return
+        }
+        dropItem(path: pathPhoto)
+        dropItem(path: pathVideo)
+        isAllPhotosDownloaded = false
+        isAllVideosDownloaded = false
     }
+    
+    private func dropItem(path: String) {
+        if FileManager.default.fileExists(atPath: path) {
+            try? FileManager.default.removeItem(atPath: path)
+        }
+    }
+    
+    func getSavedAllSavedItems(fieldType: FieldValue, itemsCallback: @escaping ItemsCallback) {
+        ///TODO: its better to add here the callback when all added then call the method again,
+        ///BUT for that to happen we need array of callbacks or delegates
+//        guard isAllRemotesDownloaded else {
+//
+//            return
+//        }
+        switch fieldType {
+        case .image:
+            itemsCallback(allRemotePhotos)
+        case .video:
+            itemsCallback(allRemoteVideos)
+        default:
+            break
+        }
+    }
+    
     
     func getNextStoredPhotosPage(range: CountableRange<Int>, storedRemotes: @escaping ItemsCallback) {
         guard range.startIndex >= 0, range.startIndex < range.endIndex else {
@@ -64,7 +113,11 @@ class ItemsRepository {
     }
     
     func getNextStoredVideosPage(range: CountableRange<Int>, storedRemotes: @escaping ItemsCallback) {
-        let arrayInRange = Array(allRemoteVideos[range])
+        guard range.startIndex >= 0, range.startIndex < range.endIndex else {
+            storedRemotes([])
+            return
+        }
+        let arrayInRange = Array(allRemoteVideos.dropFirst(range.startIndex).prefix(range.endIndex - range.startIndex))
         if arrayInRange.isEmpty, !isAllVideosDownloaded {
             lastAddedVideoPageCallback = { [weak self] in
                 self?.getNextStoredVideosPage(range: range, storedRemotes: storedRemotes)
@@ -116,16 +169,60 @@ class ItemsRepository {
                 self?.downloadVideos(finished: finished)
         })
     }
-        
-    private func getSavedItems() {
-        
-    }
     
     private func saveItems() {
-        
+        guard let pathPhoto = filePathPhoto,
+            let pathVideo = filePathVideo else {
+                isAllPhotosDownloaded = false
+                isAllVideosDownloaded = false
+            return
+        }
+        NSKeyedArchiver.archiveRootObject(allRemotePhotos, toFile: pathPhoto)
+        NSKeyedArchiver.archiveRootObject( allRemoteVideos, toFile: pathVideo)
+    }
+
+    private func loadItems(callBack: @escaping ResponseVoid) {
+        //TODO: If there is no videos - start downloading onl them,
+        //if there is no photos - start downlading only photos
+        guard let pathPhoto = filePathPhoto,
+            let pathVideo = filePathVideo,
+            let savedPhotos = NSKeyedUnarchiver.unarchiveObject(withFile: pathPhoto) as? [WrapData?],
+            let savedVideos = NSKeyedUnarchiver.unarchiveObject(withFile: pathVideo) as? [WrapData?]
+            else {
+                callBack(ResponseResult.failed(CustomErrors.unknown))
+                return
+        }
+        allRemotePhotos = savedPhotos.flatMap{return $0}
+        allRemoteVideos = savedVideos.flatMap{return $0}
+        callBack(ResponseResult.success(()))
     }
     
-    private func loadItems() {
-        
+    private var filePathURL: URL? {
+        let manager = FileManager.default
+        return manager.urls(for: .documentDirectory, in: .userDomainMask).first
     }
+    
+    private var filePathPhoto: String? {
+        return getPath(component: pathToPhotoComponent)
+    }
+    
+    private var filePathVideo: String? {
+        return getPath(component: pathToVideoComponent)
+    }
+    
+    func getPath(component: String) -> String? {
+         return filePathURL?.appendingPathComponent(component).path
+    }
+    
+    func archiveObject(object: NSCoding?, path: String) {
+        guard let unwrapedObj = object else {
+            return
+        }
+        NSKeyedArchiver.archiveRootObject(unwrapedObj, toFile: path)
+    }
+    
+    func unarchiveObject(path: String) -> Any? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: path)
+    }
+    
 }

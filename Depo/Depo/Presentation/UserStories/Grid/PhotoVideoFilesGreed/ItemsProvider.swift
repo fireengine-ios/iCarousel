@@ -8,16 +8,18 @@
 
 typealias ItemsCallback = (_ items: [WrapData])->Void
 
-class ItemsProvider {///Maybe create also something like ItemsDownloader
+class ItemsProvider {
     
     private let fieldValue: FieldValue
-    
     private var allRemoteItems = [WrapData]()
-    ///var previousRemoteItems
     let itemsRepository = ItemsRepository.shared
     var databasePageSize = NumericConstants.numberOfLocalItemsOnPage
     private var currentDataBasePage: Int = 0
 
+    var isAllFilesDownloaded: Bool {
+        return itemsRepository.isAllRemotesDownloaded
+    }
+    
     //private let quickSearchService
     
     init(fieldValue: FieldValue) {
@@ -35,7 +37,8 @@ class ItemsProvider {///Maybe create also something like ItemsDownloader
     func reloadItems(callback: ItemsCallback) { ///Will be inactive after quickScroll API implementation
 
     }
-    ///dlya photo And Videos
+    
+    ///for photo And Videos while items being downloaded
     func getNextItems(callback: @escaping ItemsCallback) {
         currentDataBasePage += 1
         let nextPageRange = currentDataBasePage*databasePageSize..<(currentDataBasePage + 1)*databasePageSize
@@ -47,20 +50,17 @@ class ItemsProvider {///Maybe create also something like ItemsDownloader
             }
         case .video:
             itemsRepository.getNextStoredVideosPage(range: nextPageRange) { [weak self] remoteItems in
-                //                self?.currentDataBasePage += 1
                 self?.allRemoteItems.append(contentsOf: remoteItems)
                 callback(remoteItems)
             }
         default:
             break
         }
-//        itemsRepository
     }
-    
-    private func getItems(pageNum: Int, pageSize: Int, callback: ItemsCallback) {
-//        currentSearchAPIPage += 1
+
+    func getAllFieldRelatedSavedRemoteItems(itemsCallback: @escaping ItemsCallback) {
+        //TODO: additional safety in ItemsRepository
+        itemsRepository.getSavedAllSavedItems(fieldType: fieldValue, itemsCallback: itemsCallback)
     }
-    
-    
     
 }

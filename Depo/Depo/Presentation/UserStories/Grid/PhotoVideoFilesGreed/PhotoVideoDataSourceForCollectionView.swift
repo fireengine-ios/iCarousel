@@ -8,19 +8,14 @@
 
 final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionView {
     
-    override var isPaginationDidEnd: Bool {
-        willSet {
-            if !newValue {
-                CardsManager.default.startOperationWith(type: .prepareQuickScroll)
-            }  else {
-                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-            }
-        }
-    }
-    
+    private let itemProvider: ItemsProvider
     private let scrollBarManager = PhotoVideoScrollBarManager()
-    private let itemProvider = ItemsProvider(fieldValue: .image)//FIXME: pass actual flag here or setup from setup method
-    
+
+    init(sortingRules: SortedRules, fieldValue: FieldValue) {
+        self.itemProvider = ItemsProvider(fieldValue: fieldValue)
+        super.init(sortingRules: sortingRules)
+    }
+
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
             let cell_ = cell as? CollectionViewCellDataProtocol else {
@@ -81,7 +76,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         return CGSize(width: collectionView.contentSize.width, height: height)
     }
     
-    override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]? = nil){
+    override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]? = nil) {
         
         originalFilters = filters
         
@@ -92,6 +87,13 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         registerHeaders()
         registerFooters()
         registerCells()
+        
+        if !ItemsRepository.shared.isAllRemotesDownloaded {
+            CardsManager.default.startOperationWith(type: .prepareQuickScroll)
+            ItemsRepository.shared.allFilesDownloadedCallback = {
+                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+            }
+        }
     }
     
     func updateScrollBarTextIfNeed() {
@@ -111,16 +113,19 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         delegate?.filesAppendedAndSorted()
         CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
        
-        DispatchQueue.main.async {
+        DispatchQueue.main.async
+            {
             self.scrollBarManager.addScrollBar(to: self.collectionView, delegate: self)
-            
             let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
             self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
             CellImageManager.clear()
+            self.collectionView?.reloadData() ///Check if we can just reload one supplementary view
+
         }
     }
     
     override func appendCollectionView(items: [WrapData], pageNum: Int) {
+        
        debugPrint("---APPEND page num is %i", pageNum)
         if isPaginationDidEnd, !isLocalPaginationOn {
             ///appending missing dates section when all other items are represented
@@ -252,7 +257,6 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 let itemsToCompound = isEmptyLeftOvers ? pageTempoItems : self.pageLeftOvers
                 if pageTempoItems.isEmpty, itemsToCompound.isEmpty {
                     self.isLocalFilesRequested = false
-//                    self.delegate?.getNextItems()
                     self.itemProvider.getNextItems(callback: { [weak self] remotes in
                         self?.appendCollectionView(items: remotes, pageNum: self?.itemProvider.currentPage ?? 0)
                     })
@@ -308,19 +312,24 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                     return
                 }
                 DispatchQueue.main.async {
-                    let newSectionNum = lastIndex.section + 1
-                    let oldSectionNum = collectionView.numberOfSections
-                    
-                    var newArray = IndexSet()
-                    if newSectionNum > oldSectionNum {
-                        newArray = IndexSet(integersIn: Range(oldSectionNum..<newSectionNum))
-                    }
-
+                    ///--
+                    ///Original place of new Indexes calculation
+                    ///--
                     collectionView.collectionViewLayout.invalidateLayout()
                     collectionView.performBatchUpdates({
                         guard !self.allItems.isEmpty else {
                             return
                         }
+                        ///---
+                        ///While Array of arrays is not safe we will add it here, so there should be no crashes on incert
+                        let newSectionNum = lastIndex.section + 1
+                        let oldSectionNum = collectionView.numberOfSections
+                        
+                        var newArray = IndexSet()
+                        if newSectionNum > oldSectionNum {
+                            newArray = IndexSet(integersIn: Range(oldSectionNum..<newSectionNum))
+                        }
+                        ///---
                         collectionView.insertSections(newArray)
                         collectionView.insertItems(at: array)
                     }, completion: { status in

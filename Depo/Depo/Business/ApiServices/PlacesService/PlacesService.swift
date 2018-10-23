@@ -121,4 +121,8 @@ final class PlacesItem: Item {
         responseObject = response
         super.init(placesItemResponse: response)
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        return nil
+    }
 }

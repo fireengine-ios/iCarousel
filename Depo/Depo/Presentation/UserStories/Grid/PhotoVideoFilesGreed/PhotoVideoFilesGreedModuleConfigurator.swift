@@ -16,12 +16,13 @@ final class PhotoVideoFilesGreedModuleConfigurator {
                    visibleSyncItemsCheckBox: Bool = false,
                    topBarConfig: GridListTopBarConfig?,
                    alertSheetConfig: AlertFilesActionsSheetInitialConfig?,
-                   alertSheetExcludeTypes: [ElementTypes]? = nil) {
+                   alertSheetExcludeTypes: [ElementTypes]? = nil,
+                   filedType: FieldValue) {
         
         let router = BaseFilesGreedRouter()
         
         
-        let presenter = PhotoVideosFilesGreedPresenter()
+        let presenter = PhotoVideosFilesGreedPresenter(fieldType: filedType)
         presenter.needShowProgressInCells = true
         presenter.needShowScrollIndicator = false
         presenter.needShowEmptyMetaItems = true
