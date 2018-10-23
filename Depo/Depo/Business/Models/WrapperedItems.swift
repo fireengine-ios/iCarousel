@@ -652,43 +652,31 @@ class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
             return nil
         }
         fileSize = aDecoder.decodeInt64(forKey: SearchJsonKey.bytes)
-        
-        
-        id = aDecoder.decodeObject(forKey: SearchJsonKey.id) as? Int64//aDecoder.decodeInt64(forKey: SearchJsonKey.id)
-        
+        id = aDecoder.decodeObject(forKey: SearchJsonKey.id) as? Int64
         let metaDataPath = (ItemsRepository.shared.getPath(component: ItemsRepository.shared.pathToMetaDataComponent) ?? "") + "\(id ?? 0)"
-        metaData = ItemsRepository.shared.deArchiveObject(path: metaDataPath) as? BaseMetaData//archiveObject(object: metaData, path: metaDataPath)
-//        metaData = aDecoder.decodeObject(forKey: SearchJsonKey.metadata) as? BaseMetaData
+        metaData = ItemsRepository.shared.deArchiveObject(path: metaDataPath) as? BaseMetaData
         favorites = metaData?.favourite ?? false
         patchToPreview = .remoteUrl(URL(string: ""))//TODO: Change to medium by default
         status = Status(string:aDecoder.decodeObject(forKey: SearchJsonKey.status) as? String)
         super.init(uuid: decodedUUID)
-        uuid = decodedUUID    
-        
-        ///URL
+        uuid = decodedUUID
         tmpDownloadUrl = aDecoder.decodeObject(forKey: SearchJsonKey.tempDownloadURL) as? URL
-        
         md5 = aDecoder.decodeObject(forKey: SearchJsonKey.hash) as? String ?? "No MD5"
         albums = aDecoder.decodeObject(forKey: SearchJsonKey.album) as? [String]
         name = aDecoder.decodeObject(forKey: SearchJsonKey.name) as? String
         creationDate = aDecoder.decodeObject(forKey: SearchJsonKey.createdDate) as? Date
         lastModifiDate = aDecoder.decodeObject(forKey: SearchJsonKey.lastModifiedDate) as? Date
-        
-        fileType = FileType(value: aDecoder.decodeObject(forKey: SearchJsonKey.content_type) as? Int16 ?? 0)//valueForCoreDataMapping()
-        
+        fileType = FileType(value: aDecoder.decodeObject(forKey: SearchJsonKey.content_type) as? Int16 ?? 0)
         mimeType = aDecoder.decodeObject(forKey: SearchJsonKey.content_type) as? String
         isFolder = aDecoder.decodeObject(forKey: SearchJsonKey.folder) as? Bool
-
         ///---
         ///FOR NOW WE CODE AND DECODE ONLY REMOTES
         isLocalItem = false
         syncStatus = .synced
         //setSyncStatusesAsSyncedForCurrentUser()
         ///---
-        
         parent = aDecoder.decodeObject(forKey: SearchJsonKey.parent) as? String
         childCount = aDecoder.decodeObject(forKey:SearchJsonKey.ChildCount) as? Int64
-
         switch fileType {
         case .image, .audio, .video:
             duration = WrapData.getDuration(duration: metaData?.duration)
@@ -703,18 +691,10 @@ class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
         aCoder.encode(uuid, forKey: SearchJsonKey.uuid)
         aCoder.encode(fileSize, forKey: SearchJsonKey.bytes)
         aCoder.encode(id, forKey: SearchJsonKey.id)
-//        metaData?.encode(with: aCoder)
-//        aCoder.encodeRootObject(<#T##rootObject: Any##Any#>)
-//        aCoder.encode(metaData, forKey: SearchJsonKey.metadata)
-        
         let metaDataPath = (ItemsRepository.shared.getPath(component: ItemsRepository.shared.pathToMetaDataComponent) ?? "") + "\(id ?? 0)"
         ItemsRepository.shared.archiveObject(object: metaData, path: metaDataPath)
-        
-        
         aCoder.encode(status.hashValue, forKey: SearchJsonKey.status)
-        ///URL
         aCoder.encode(tmpDownloadUrl, forKey: SearchJsonKey.tempDownloadURL)
-        
         aCoder.encode(md5, forKey: SearchJsonKey.hash)
         aCoder.encode(albums, forKey: SearchJsonKey.album)
         aCoder.encode(name, forKey: SearchJsonKey.name)
@@ -731,7 +711,6 @@ class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
         ///---
         aCoder.encode(parent, forKey: SearchJsonKey.parent)
         aCoder.encode(childCount, forKey: SearchJsonKey.ChildCount)
-        debugPrint("!-ENCODED")
     }
     
     //MARK:-

@@ -25,7 +25,7 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
     var lastAddedVideoPageCallback: VoidHandler?
     var allFilesDownloadedCallback: VoidHandler?
     
-    ///array of delegates
+    ///array of delegates would be better then one callback (or array of callbacks??)
     
     func updateCache() {
         ///check if there is a need to update or just download
@@ -35,7 +35,6 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
                 self?.isAllPhotosDownloaded = true
                 self?.isAllVideosDownloaded = true
                 self?.allFilesDownloadedCallback?()
-                debugPrint("LALALA")
             case .failed(_):
                 self?.downloadAllFiles() { [weak self] in
                     self?.saveItems()
@@ -60,8 +59,39 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
     }
     
     func dropCache() {
-        
+        guard let pathPhoto = filePathPhoto,
+            let pathVideo = filePathVideo else {
+                return
+        }
+        dropItem(path: pathPhoto)
+        dropItem(path: pathVideo)
+        isAllPhotosDownloaded = false
+        isAllVideosDownloaded = false
     }
+    
+    private func dropItem(path: String) {
+        if FileManager.default.fileExists(atPath: path) {
+            try? FileManager.default.removeItem(atPath: path)
+        }
+    }
+    
+    func getSavedAllSavedItems(fieldType: FieldValue, itemsCallback: @escaping ItemsCallback) {
+        ///TODO: its better to add here the callback when all added then call the method again,
+        ///BUT for that to happen we need array of callbacks or delegates
+//        guard isAllRemotesDownloaded else {
+//
+//            return
+//        }
+        switch fieldType {
+        case .image:
+            itemsCallback(allRemotePhotos)
+        case .video:
+            itemsCallback(allRemoteVideos)
+        default:
+            break
+        }
+    }
+    
     
     func getNextStoredPhotosPage(range: CountableRange<Int>, storedRemotes: @escaping ItemsCallback) {
         guard range.startIndex >= 0, range.startIndex < range.endIndex else {
@@ -131,35 +161,22 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
                 self?.downloadVideos(finished: finished)
         })
     }
-        
-    private func getSavedItems() {
-        
-    }
     
     private func saveItems() {
-        ///OPTION 1:
         guard let pathPhoto = filePathPhoto,
             let pathVideo = filePathVideo else {
             return
         }
-
         NSKeyedArchiver.archiveRootObject(allRemotePhotos, toFile: pathPhoto)
         NSKeyedArchiver.archiveRootObject( allRemoteVideos, toFile: pathVideo)
-        ///OPTION 2:
-//        let data = NSKeyedArchiver.archivedDataWithRootObject(books)
-//        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "books")
     }
 
-    
-    
     private func loadItems(callBack: @escaping ResponseVoid) {
-        FileManager.default.fileExists(atPath: filePathPhoto!)
         //TODO: If there is no videos - start downloading onl them,
         //if there is no photos - start downlading only photos
         guard let pathPhoto = filePathPhoto,
             let pathVideo = filePathVideo,
-            let savedPhotos = NSKeyedUnarchiver.unarchiveObject(withFile: pathPhoto) as? [WrapData?]
-            ,
+            let savedPhotos = NSKeyedUnarchiver.unarchiveObject(withFile: pathPhoto) as? [WrapData?],
             let savedVideos = NSKeyedUnarchiver.unarchiveObject(withFile: pathVideo) as? [WrapData?]
             else {
                 callBack(ResponseResult.failed(CustomErrors.unknown))
@@ -169,19 +186,11 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
         allRemotePhotos = savedPhotos.flatMap{return $0}
         allRemoteVideos = savedVideos.flatMap{return $0}
         callBack(ResponseResult.success(()))
-        
     }
     
-//    var filePath : String {
-//        let manager = NSFileManager.defaultManager()
-//        let url = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first as! NSURL
-//        return url.URLByAppendingPathComponent("objectsArray").path!
-//    }
     let pathToMetaDataComponent = "MetaData"
     let pathToPhotoComponent = "StoragePhoto"
-    //    let pathToPhotoMetaDataComponent = "StoragePhotoMetaData"
     let pathToVideoComponent = "StorageVideo"
-    //    let pathToVideoMetaDataComponent = "StorageVideoMetaData"
     
     private var filePathURL: URL? {
         let manager = FileManager.default
@@ -195,8 +204,6 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
     private var filePathVideo: String? {
         return getPath(component: pathToVideoComponent)
     }
-    
-
     
     func getPath(component: String) -> String? {
          return filePathURL?.appendingPathComponent(component).path

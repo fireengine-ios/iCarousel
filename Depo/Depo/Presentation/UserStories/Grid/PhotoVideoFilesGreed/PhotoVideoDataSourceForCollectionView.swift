@@ -8,16 +8,6 @@
 
 final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionView {
     
-    override var isPaginationDidEnd: Bool {
-        willSet {
-            if !newValue {
-                CardsManager.default.startOperationWith(type: .prepareQuickScroll)
-            }  else {
-                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-            }
-        }
-    }
-    
     private let scrollBar = ScrollBarView()
     private let yearsView = YearsView()
     private let itemProvider = ItemsProvider(fieldValue: .image)//FIXME: pass actual flag here or setup from setup method
@@ -82,7 +72,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         return CGSize(width: collectionView.contentSize.width, height: height)
     }
     
-    override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]? = nil){
+    override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]? = nil) {
         
         originalFilters = filters
         
@@ -93,6 +83,13 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         registerHeaders()
         registerFooters()
         registerCells()
+        
+        if !ItemsRepository.shared.isAllRemotesDownloaded {
+            CardsManager.default.startOperationWith(type: .prepareQuickScroll)
+            ItemsRepository.shared.allFilesDownloadedCallback = {
+                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+            }
+        }
     }
     
     override func updateScrollBarTextIfNeed() {
@@ -155,6 +152,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     }
     
     override func appendCollectionView(items: [WrapData], pageNum: Int) {
+        
        debugPrint("---APPEND page num is %i", pageNum)
         if isPaginationDidEnd, !isLocalPaginationOn {
             ///appending missing dates section when all other items are represented
@@ -286,7 +284,6 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 let itemsToCompound = isEmptyLeftOvers ? pageTempoItems : self.pageLeftOvers
                 if pageTempoItems.isEmpty, itemsToCompound.isEmpty {
                     self.isLocalFilesRequested = false
-//                    self.delegate?.getNextItems()
                     self.itemProvider.getNextItems(callback: { [weak self] remotes in
                         self?.appendCollectionView(items: remotes, pageNum: self?.itemProvider.currentPage ?? 0)
                     })

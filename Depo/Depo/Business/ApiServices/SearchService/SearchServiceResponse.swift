@@ -121,7 +121,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
     
     override func mapping() {
         favourite = json?[SearchJsonKey.favourite].boolFromString ?? false
-        
+
         height = json?[SearchJsonKey.ImageHeight].int
         width = json?[SearchJsonKey.ImageWidth].int
         takenDate = json?[SearchJsonKey.ImageDateTime].date
@@ -153,12 +153,11 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
     //MARK:- BaseMetaData - Coding
     required init?(coder aDecoder: NSCoder) {
         super.init()
-        favourite = aDecoder.decodeObject(forKey: SearchJsonKey.favourite) as? Bool//aDecoder.decodeBool(forKey: SearchJsonKey.favourite)
+        favourite = aDecoder.decodeObject(forKey: SearchJsonKey.favourite) as? Bool
         height = aDecoder.decodeObject(forKey: SearchJsonKey.ImageHeight) as? Int
         width = aDecoder.decodeObject(forKey:SearchJsonKey.ImageWidth) as? Int
         takenDate = aDecoder.decodeObject(forKey: SearchJsonKey.ImageDateTime) as? Date
         largeUrl = aDecoder.decodeObject(forKey: SearchJsonKey.ThumbnailLarge) as? URL
-        ///Maybe store string and then make URL from it?
         mediumUrl = aDecoder.decodeObject(forKey: SearchJsonKey.Thumbnail_Medium) as? URL
         smalURl = aDecoder.decodeObject(forKey: SearchJsonKey.ThumbnailSmall) as? URL
         videoPreviewURL = aDecoder.decodeObject(forKey: SearchJsonKey.VideoPreview) as? URL
