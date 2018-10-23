@@ -10,7 +10,12 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     
     private let scrollBar = ScrollBarView()
     private let yearsView = YearsView()
-    private let itemProvider = ItemsProvider(fieldValue: .image)//FIXME: pass actual flag here or setup from setup method
+    private let itemProvider: ItemsProvider
+    
+    init(sortingRules: SortedRules, fieldValue: FieldValue) {
+        self.itemProvider = ItemsProvider(fieldValue: fieldValue)
+        super.init(sortingRules: sortingRules)
+    }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),

@@ -21,7 +21,7 @@ final class PhotoVideoFilesGreedModuleConfigurator {
         let router = BaseFilesGreedRouter()
         
         
-        let presenter = PhotoVideosFilesGreedPresenter()
+        let presenter = PhotoVideosFilesGreedPresenter(fieldType: remoteServices.fieldValue)
         presenter.needShowProgressInCells = true
         presenter.needShowScrollIndicator = false
         presenter.needShowEmptyMetaItems = true
