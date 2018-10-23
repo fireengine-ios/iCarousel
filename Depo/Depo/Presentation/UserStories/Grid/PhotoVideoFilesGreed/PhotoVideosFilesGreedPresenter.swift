@@ -153,6 +153,25 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         updateThreeDotsButton()
     }
     
+    override func showOnlySyncedItems(_ value: Bool) {
+//        if value {
+//            filtersByDefault = filters
+//            filters = filters.filter { type -> Bool in
+//                switch type {
+//                case .localStatus(_):
+//                    return false
+//                default:
+//                    return true
+//                }
+//            }
+//            filters.append(.localStatus(.nonLocal))
+//        } else {
+//            filters = filtersByDefault
+//        }
+//        dataSource.originalFilters = filters
+//        reloadData()
+    }
+    
 //    override func getNextItems() {
 //        compoundAllFiltersAndNextItems()
 //    }
