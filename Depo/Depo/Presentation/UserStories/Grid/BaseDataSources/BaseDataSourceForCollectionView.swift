@@ -152,8 +152,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
     
-    var currentTopSection: Int?
-    
     var lastPage: Int = 0
     
     init(sortingRules: SortedRules = .timeUp) {
@@ -1065,26 +1063,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidScroll(scrollView: scrollView)
 //        updateCachedAssets()
-        updateScrollBarTextIfNeed()
-    }
-    
-    func updateScrollBarTextIfNeed() {
-        if needShowCustomScrollIndicator {
-            let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
-                return first < second
-            })
-            
-            guard let indexPath = firstVisibleIndexPath else {
-                return
-            }
-            
-            if let currentTopSection = currentTopSection, currentTopSection == indexPath.section {
-                return
-            }
-            
-            let headerText = getHeaderText(indexPath: indexPath)
-            delegate?.didChangeTopHeader(text: headerText)
-        }
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

@@ -8,15 +8,14 @@
 
 final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionView {
     
-    private let scrollBar = ScrollBarView()
-    private let yearsView = YearsView()
     private let itemProvider: ItemsProvider
-    
+    private let scrollBarManager = PhotoVideoScrollBarManager()
+
     init(sortingRules: SortedRules, fieldValue: FieldValue) {
         self.itemProvider = ItemsProvider(fieldValue: fieldValue)
         super.init(sortingRules: sortingRules)
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
             let cell_ = cell as? CollectionViewCellDataProtocol else {
@@ -97,7 +96,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         }
     }
     
-    override func updateScrollBarTextIfNeed() {
+    func updateScrollBarTextIfNeed() {
         let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
             return first < second
         })
@@ -106,12 +105,8 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             return
         }
         
-        if let currentTopSection = currentTopSection, currentTopSection == indexPath.section {
-            return
-        }
-        
         let headerText = getHeaderText(indexPath: indexPath, shortForm: true)
-        scrollBar.setText(headerText)
+        scrollBarManager.scrollBar.setText(headerText)
     }
     
     private func filesAppendedAndSorted() {
@@ -119,41 +114,12 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
        
         DispatchQueue.main.async {
-            self.addScrollBar()
-            self.updateYearsView()
+            self.scrollBarManager.addScrollBar(to: self.collectionView, delegate: self)
+            
+            let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
+            self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
             CellImageManager.clear()
-//            self.collectionView?.reloadData()
         }
-    }
-    
-    private var isScrollBarAdded = false
-    
-    private func addScrollBar() {
-        guard !isScrollBarAdded, let collectionView = collectionView else {
-            return
-        }
-        isScrollBarAdded = true
-        yearsView.add(to: collectionView)
-        scrollBar.add(to: collectionView)
-        scrollBar.delegate = self
-    }
-    
-    private func updateYearsView() {
-        if allItems.isEmpty {
-            return
-        }
-        
-        let numberOfColumns = Int(Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone)
-        // TODO: getCellSizeForList must be called in main queue. for a while it is woking without it
-        let cellHeight = delegate?.getCellSizeForList().height ?? 0
-        let dates = allItems.flatMap({ $0 }).flatMap({ $0.metaDate })
-        yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
-        
-        if !emptyMetaItems.isEmpty {
-            yearsView.update(additionalSections: [(TextConstants.photosVideosViewMissingDatesHeaderText, emptyMetaItems.count)])
-        }
-        
-        yearsView.update(by: dates)
     }
     
     override func appendCollectionView(items: [WrapData], pageNum: Int) {
@@ -405,7 +371,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     override func breakItemsIntoSections(breakingArray: [WrapData]) {
         allItems.removeAll()
         
-        let needShowEmptyMetaDataItems = needShowEmptyMetaItems && (currentSortType == .metaDataTimeUp || currentSortType == .metaDataTimeDown)
+        //let needShowEmptyMetaDataItems = needShowEmptyMetaItems && (currentSortType == .metaDataTimeUp || currentSortType == .metaDataTimeDown)
         
         for item in breakingArray {
             autoreleasepool {
@@ -442,25 +408,34 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         updateScrollBarTextIfNeed()
-        hideScrollBarIfNeed(for: scrollView.contentOffset.y)
+        scrollBarManager.scrollViewDidScroll()
+        scrollBarManager.hideScrollBarIfNeed(for: scrollView.contentOffset.y)
     }
     
-    private func hideScrollBarIfNeed(for contentOffsetY: CGFloat) {
-        if contentOffsetY < 0 {
-            scrollBar.alpha = 0
-        } else {
-            scrollBar.alpha = 1
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        super.scrollViewDidEndDecelerating(scrollView)
+        stoppedScrolling()
+    }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        super.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
+        if !decelerate {
+            stoppedScrolling()
         }
+    }
+    
+    private func stoppedScrolling() {
+        scrollBarManager.startTimerToHideScrollBar()
     }
 }
 
- extension PhotoVideoDataSourceForCollectionView: ScrollBarViewDelegate {
+extension PhotoVideoDataSourceForCollectionView: ScrollBarViewDelegate {
     func scrollBarViewBeganDraggin() {
-        yearsView.showAnimated()
+        scrollBarManager.yearsView.showAnimated()
     }
     func scrollBarViewDidEndDraggin() {
         updateScrollBarTextIfNeed()
-        yearsView.hideAnimated()
+        scrollBarManager.yearsView.hideAnimated()
+        stoppedScrolling()
     }
- }
- 
+}

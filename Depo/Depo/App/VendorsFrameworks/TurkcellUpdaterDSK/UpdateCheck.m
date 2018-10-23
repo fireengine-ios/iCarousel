@@ -1,19 +1,19 @@
 /*******************************************************************************
  *
  *  Copyright (C) 2014 Turkcell
- *  
+ *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
- *  
+ *
  *       http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *  
+ *
  *******************************************************************************/
 //
 //  UpdateCheck.m
@@ -65,7 +65,6 @@
         [updateServerIntegration getJsonFromServerByPostingProperties:[self updateServerURL]];
     else
         [updateServerIntegration getJsonFromServer:[self updateServerURL]];
-    
 }
 
 - (void) updateCallback:(NSDictionary *) updateDataDictionary
@@ -85,6 +84,8 @@
 @implementation UpdateCheck (PrivateMethods)
 
 - (void) computeJson:(NSDictionary *)updateDataDictionary{
+    
+    //NSLog(@"dict %@", updateDataDictionary.description);
     
     NSDictionary *currentConfigurationDictionary = [Configuration getCurrentConfiguration];
     
@@ -114,17 +115,17 @@
         
         if ([forceUpdateString isEqualToString:@"true"] == YES || [forceUpdateString isEqualToString:@"1"]){
             
-            alertViewTitle = [Message getMessage:@"update_required"];
-            cancelButtonTitle = [Message getMessage:@"exit_application"];
+            alertViewTitle = [[Message sharedInstance] getMessage:@"update_required"];
+            cancelButtonTitle = [[Message sharedInstance] getMessage:@"exit_application"];
             
         }else{
             
-            alertViewTitle = [Message getMessage:@"update_found"];
-            cancelButtonTitle = [Message getMessage:@"remind_me_later"];
+            alertViewTitle = [[Message sharedInstance] getMessage:@"update_found"];
+            cancelButtonTitle = [[Message sharedInstance] getMessage:@"remind_me_later"];
             
         }
         
-        okButtonTitle = [Message getMessage:@"install_"];
+        okButtonTitle = [[Message sharedInstance] getMessage:@"install_"];
         
         NSDictionary *descriptions = [Controller getDescriptionsForLanguage:[currentConfigurationDictionary objectForKey:@"deviceLanguage"] fromUpdate:updateDictionary];
         
@@ -154,11 +155,7 @@
             if ([forceUpdateString isEqualToString:@"true"] == YES || [forceUpdateString isEqualToString:@"1"]){
                 [alertViewDictionary setValue:nil forKey:@"cancelButtonTitle"];
             }
-            
-            
-            
-            
-            
+
             [alertViewDictionary setValue:okButtonTitle forKey:@"okButtonTitle"];
             
             if (([Controller getTargetPackageURLFromUpdate:updateDictionary] == nil || [[[Controller getTargetPackageURLFromUpdate:updateDictionary] description] length] == 0) &&
@@ -196,112 +193,6 @@
     }
     
 }
-
-/*
- - (void) computeJsonOfPostPropertiesResponse:(NSDictionary *)updateDataDictionary{
- 
- NSDictionary *currentConfigurationDictionary = [Configuration getCurrentConfiguration];
- 
- if ([Controller bundleIDControlCurrentConfiguration:currentConfigurationDictionary
- withUpdateData:updateDataDictionary]){
- 
- NSString *alertViewTitle, *cancelButtonTitle, *okButtonTitle;
- 
- NSDictionary *updateDictionary = [Filter getMatchedUpdateFromUpdateDataDictionary:updateDataDictionary
- withCurrentConfiguration:[Configuration getCurrentConfiguration]];
- 
- //NSDictionary *updateDictionary = [updateDataDictionary copy];
- 
- NSDictionary *messageDictionary = [Filter getMatchedMessageFromUpdateDataDictionary:updateDataDictionary
- withCurrentConfiguration:[Configuration getCurrentConfiguration]];
- 
- if (updateDictionary == nil) {
- 
- if (messageDictionary == nil) {
- [[self updateCheckDelegate] updateNotFound];
- }else{
- [self computeMessageDictionary:[Controller getMessageDictionaryFromMessage:messageDictionary]];
- }
- 
- return;
- }
- 
- if ([[Controller getForceUpdateFromUpdate:updateDictionary] isEqualToString:@"true"] == YES){
- 
- alertViewTitle = [Message getMessage:@"update_required"];
- cancelButtonTitle = [Message getMessage:@"exit_application"];
- 
- }else{
- 
- alertViewTitle = [Message getMessage:@"update_found"];
- cancelButtonTitle = [Message getMessage:@"remind_me_later"];
- 
- }
- 
- okButtonTitle = [Message getMessage:@"install_"];
- 
- NSDictionary *descriptions = [Controller getDescriptionsForLanguageOfPostPropertiesResponse:[currentConfigurationDictionary objectForKey:@"deviceLanguage"] fromUpdate:updateDictionary];
- 
- if (([descriptions objectForKey:@"message"] == nil) || (!([[[descriptions objectForKey:@"message"] description] length] > 0))) {
- 
- [[self updateCheckDelegate] updateNotFound];
- 
- }else{
- 
- NSString *message = [NSString stringWithString:[descriptions objectForKey:@"message"]];
- 
- if (([descriptions objectForKey:@"warnings"] != nil) && ([[[descriptions objectForKey:@"warnings"] description] length] > 0)) {
- message = [message stringByAppendingString:@"\n"];
- message = [message stringByAppendingString:[descriptions objectForKey:@"warnings"]];
- }
- 
- if (([descriptions objectForKey:@"whatIsNew"] != nil) && ([[[descriptions objectForKey:@"whatIsNew"] description] length] > 0)) {
- message = [message stringByAppendingString:@"\n"];
- message = [message stringByAppendingString:[descriptions objectForKey:@"whatIsNew"]];
- }
- 
- NSMutableDictionary *alertViewDictionary = [[NSMutableDictionary alloc] init];
- [alertViewDictionary setValue:alertViewTitle forKey:@"alertViewTitle"];
- [alertViewDictionary setValue:message forKey:@"message"];
- [alertViewDictionary setValue:cancelButtonTitle forKey:@"cancelButtonTitle"];
- [alertViewDictionary setValue:okButtonTitle forKey:@"okButtonTitle"];
- 
- if (([Controller getTargetPackageURLFromUpdateOfPostPropertiesResponse:updateDictionary] == nil || [[[Controller getTargetPackageURLFromUpdateOfPostPropertiesResponse:updateDictionary] description] length] == 0) &&
- ([[[Controller getForceExitFromUpdate:updateDictionary] description] isEqualToString:@"false"])){
- 
- if (message == nil) {
- [[self updateCheckDelegate] updateNotFound];
- }else{
- [self computeMessageDictionary:[Controller getMessageDictionaryFromMessage:messageDictionary]];
- }
- 
- return;
- 
- }else{
- 
- [alertViewDictionary setValue:[Controller getTargetPackageURLFromUpdateOfPostPropertiesResponse:updateDictionary]
- forKeyPath:@"targetPackageURL"];
- 
- [alertViewDictionary setValue:[[Controller getForceUpdateFromUpdate:updateDictionary] description]
- forKey:@"forceUpdate"];
- 
- [alertViewDictionary setValue:[[Controller getForceExitFromUpdate:updateDictionary] description]
- forKey:@"forceExit"];
- 
- [[self updateCheckDelegate] updateFound:alertViewDictionary];
- 
- }
- 
- }
- 
- }
- else{
- NSError *bundleIDError = [[NSError alloc] initWithDomain:@"BUNDLE_ID_INCORRECT" code:-1 userInfo:nil];
- [[self updateCheckDelegate] updateCheckFailed:bundleIDError];
- }
- 
- }
- */
 
 - (void) computeMessageDictionary:(NSDictionary *)messageDictionary{
     
@@ -348,7 +239,6 @@
             if ([messageLastShownDatePlusThreeHours compare:now] == NSOrderedDescending){
                 showMessage = NO;
             }
-            
         }
         
         if (showMessage) {
@@ -389,7 +279,7 @@
             [messageViewDictionary setObject:warnings forKey:@"warnings"];
             [messageViewDictionary setObject:targetWebsiteUrl forKey:@"targetWebsiteUrl"];
             
-            [[self updateCheckDelegate] displayMessageFound:messageViewDictionary];
+            [[self updateCheckDelegate] updateNotFound];
             
         }else{
             [[self updateCheckDelegate] updateNotFound];

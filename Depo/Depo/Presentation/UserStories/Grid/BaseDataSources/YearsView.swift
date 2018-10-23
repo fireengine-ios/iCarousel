@@ -18,7 +18,7 @@ final class YearsView: UIView {
     
     private var labels = [UILabel]()
     private var labelsOffsetRatio = [CGFloat]()
-    private let selfWidth: CGFloat = 85
+    private var selfWidth: CGFloat = 85
     
     private var cellHeight: CGFloat = 1
     private var headerHeight: CGFloat = 1
@@ -160,6 +160,9 @@ final class YearsView: UIView {
         self.cellHeight = cellHeight
         self.headerHeight = headerHeight
         self.numberOfColumns = numberOfColumns
+        
+        /// we need to attach labels to the left side of last column
+        selfWidth = cellHeight
     }
     
     func update(additionalSections: [(name: String, count: Int)]) {
@@ -285,10 +288,10 @@ final class YearsView: UIView {
         let label = TextInsetsLabel()
         label.text = text
         label.textAlignment = .center
-        label.font = UIFont.TurkcellSaturaDemFont(size: 9)
+        label.font = UIFont.TurkcellSaturaDemFont(size: 12)
         label.backgroundColor = UIColor.white.withAlphaComponent(0.7)
         label.textColor = UIColor.lrTealishTwo
-        label.textInsets = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
+        label.textInsets = UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 10)
         label.sizeToFit()
         label.layer.cornerRadius = label.frame.height * 0.5
         label.layer.masksToBounds = true

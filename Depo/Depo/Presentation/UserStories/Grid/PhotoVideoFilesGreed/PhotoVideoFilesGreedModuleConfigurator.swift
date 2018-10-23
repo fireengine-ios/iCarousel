@@ -7,7 +7,7 @@
 //
 
 final class PhotoVideoFilesGreedModuleConfigurator {
-    func configure(viewController: BaseFilesGreedViewController,
+    func configure(viewController: PhotoVideoController,
                    moduleOutput: BaseFilesGreedModuleOutput? = nil,
                    remoteServices: RemoteItemsService,
                    fileFilters: [GeneralFilesFiltrationType],
