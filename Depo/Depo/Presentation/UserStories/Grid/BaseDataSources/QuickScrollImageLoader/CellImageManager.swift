@@ -27,7 +27,7 @@ final class CellImageManager {
     }
     
     //MARK: - Static vars
-    private static let maxConcurrentOperations = 32
+    private static let maxConcurrentOperations = Device.isIpad ? 96 : 32
     private static let globalDispatchQueue = DispatchQueue(label: DispatchQueueLabels.cellImageManagerQueue)
     
     private static let globalOperationQueue: OperationQueue = {
@@ -131,7 +131,7 @@ final class CellImageManager {
                 }
             }
         }
-
+        
         myOperationsOrdered = [downloadThumbnailOperation, adapter, blurOperation, doneThumbnailOperation, downloadMediumOperation, doneMediumOperation]
         startOperations()
     }

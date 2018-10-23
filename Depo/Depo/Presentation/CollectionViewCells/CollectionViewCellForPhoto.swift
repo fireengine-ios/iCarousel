@@ -187,7 +187,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     func cleanCell() {
-        reset()
+        cancelImageLoading()
         
         DispatchQueue.main.async {
             self.visualEffectBlur.isHidden = true
@@ -203,12 +203,13 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         cloudStatusImage.image = UIImage()
     }
     
-    private func reset() {
+    private func cancelImageLoading() {
         imageView.sd_cancelCurrentImageLoad()
-        if let imageManager = cellImageManager {
-            imageManager.cancelImageLoading()
-            cellImageManager = nil
-        }
+        cellImageManager?.cancelImageLoading()
+    }
+    
+    private func reset() {
+        cellImageManager = nil
         imageView.image = nil
         uuid = nil
         setAssetId(nil)
