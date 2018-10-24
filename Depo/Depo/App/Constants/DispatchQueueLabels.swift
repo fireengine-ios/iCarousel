@@ -27,4 +27,5 @@ struct DispatchQueueLabels {
     static let localUnsyncedOperationQueue = "localUnsyncedOperationQueue"
     static let analyticsPrivateQueue = "com.lifebox.analyticsPrivateQueue"
     static let cellImageManagerQueue = "com.lifebox.cellImageManager"
+    static let itemsRepositoryBackgroundQueue = "com.lifebox.itemsRepositoryBackgroundQueue"
 }
