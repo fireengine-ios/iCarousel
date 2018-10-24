@@ -137,7 +137,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
                 }
                 
                 let needAnimate = !cached && (self?.imageView.image == nil)
-                self?.visualEffectBlur.isHidden = !needAnimate
                 self?.setImage(image: image, animated: needAnimate)
             }
         }

@@ -7,56 +7,77 @@
 //
 
 import Foundation
+import BlurImageProcessor
 
 
 final class ImageBlurOperation: Operation, DataTransferrableOperation {
     
     var inputData: AnyObject?
+    private var imageProcessor: ALDBlurImageProcessor?
+    private let semaphore = DispatchSemaphore(value: 0)
     private (set) var outputData: AnyObject?
     
+    
+    override func cancel() {
+        super.cancel()
+        
+        semaphore.signal()
+        imageProcessor?.cancelAsyncBlurOperations()
+    }
 
     override func main() {
         guard !isCancelled, let inputImage = inputData as? UIImage else {
             return
         }
         
-        outputData = blurEffect(image: inputImage)
+        blurEffect(image: inputImage) { [weak self] image in
+            self?.outputData = image
+            self?.semaphore.signal()
+        }
+        
+        semaphore.wait()
     }
     
     
-    private func blurEffect(image: UIImage) -> UIImage? {
+    private func blurEffect(image: UIImage, completion: @escaping (_ image: UIImage?)->Void) {
         /// if isSimulator
         /// #if targetEnvironment(simulator)
         #if (arch(i386) || arch(x86_64)) && os(iOS)
-        return image
+            completion(image)
         #else
         
+        imageProcessor = ALDBlurImageProcessor(image: image)
+        imageProcessor?.asyncBlur(withRadius: 2, iterations: 1, successBlock: { image in
+            completion(image)
+        }, errorBlock: { _ in
+            completion(nil)
+        })
         
         
-        guard let gaussianFilter = CIFilter(name: "CIGaussianBlur"),
-            let cropFilter = CIFilter(name: "CICrop"),
-            let inputImage = CIImage(image: image),
-            !isCancelled
-        else {
-            return nil
-        }
-        
-        gaussianFilter.setValue(1, forKey: kCIInputRadiusKey)
-        gaussianFilter.setValue(inputImage, forKey: kCIInputImageKey)
-        
-        guard !isCancelled, let gaussianImage = gaussianFilter.outputImage else {
-            return nil
-        }
-  
-        cropFilter.setValue(gaussianImage, forKey: kCIInputImageKey)
-        cropFilter.setValue(CIVector(cgRect: inputImage.extent), forKey: "inputRectangle")
-        
-        
-        guard !isCancelled, let croppedImage = cropFilter.outputImage else {
-            return nil
-        }
-        
-        return UIImage(ciImage: croppedImage)
+//        guard let gaussianFilter = CIFilter(name: "CIGaussianBlur"),
+//            let cropFilter = CIFilter(name: "CICrop"),
+//            let inputImage = CIImage(image: image),
+//            !isCancelled
+//        else {
+//            return nil
+//        }
+//
+//        gaussianFilter.setValue(1, forKey: kCIInputRadiusKey)
+//        gaussianFilter.setValue(inputImage, forKey: kCIInputImageKey)
+//
+//        guard !isCancelled, let gaussianImage = gaussianFilter.outputImage else {
+//            return nil
+//        }
+//
+//        cropFilter.setValue(gaussianImage, forKey: kCIInputImageKey)
+//        cropFilter.setValue(CIVector(cgRect: inputImage.extent), forKey: "inputRectangle")
+//
+//
+//        guard !isCancelled, let croppedImage = cropFilter.outputImage else {
+//            return nil
+//        }
+//
+//        return UIImage(ciImage: croppedImage)
         #endif
 
         ///TODO: check what is wrong, I had crashes on context.createCGImage

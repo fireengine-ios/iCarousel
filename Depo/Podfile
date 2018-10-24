@@ -49,6 +49,8 @@ def core_pods
   
   #migration
   pod 'SQLite.swift', '0.11.4'
+  
+  pod 'BlurImageProcessor', '~> 1.0'
 
 end
 

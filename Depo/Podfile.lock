@@ -3,6 +3,7 @@ PODS:
     - Adjust/Core (= 4.13.0)
   - Adjust/Core (4.13.0)
   - Alamofire (4.7.2)
+  - BlurImageProcessor (1.0.0)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
@@ -79,6 +80,7 @@ PODS:
 DEPENDENCIES:
   - Adjust
   - Alamofire (~> 4.5)
+  - BlurImageProcessor (~> 1.0)
   - CircleProgressBar (~> 0.32)
   - Crashlytics
   - Curio_iOS_SDK (from `https://github.com/KonstDevelop/Curio_iOS_SDK.git`, branch `pod-issue`)
@@ -108,6 +110,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Adjust
     - Alamofire
+    - BlurImageProcessor
     - Bolts
     - CircleProgressBar
     - Crashlytics
@@ -159,6 +162,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Adjust: 8f204c1005d6635e7c931c6a2cb2f881965bf478
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  BlurImageProcessor: a4794ad3128748dbff8b40ae43ce9386d3667bba
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   CircleProgressBar: 3920079be5224b62b3d9ed6eeb23ac01c835b681
   Crashlytics: 0360624eea1c978a743feddb2fb1ef8b37fb7a0d
@@ -194,6 +198,6 @@ SPEC CHECKSUMS:
   XCGLogger: c9601cae9a8912de34a58666ba931ed3d624dd31
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
 
-PODFILE CHECKSUM: ce9fef06a3bf88fdfb8d5e6be840d656d303eedd
+PODFILE CHECKSUM: 22893db4d7ace1eeecc012541c64d82d1e0de7d9
 
 COCOAPODS: 1.5.3

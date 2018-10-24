@@ -118,12 +118,11 @@ final class CellImageManager {
         }
         
         let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail)
-        ///Testing default blur effect
-//        let blurOperation = ImageBlurOperation()
-//        let adapter = generateAdapterBlockOperation(dependent: blurOperation, dependency: downloadThumbnailOperation)
-        let doneThumbnailOperation = BlockOperation { [weak self, unowned downloadThumbnailOperation] in
-            if let outputImage = downloadThumbnailOperation.outputData as? UIImage {
-                if let uuid = self?.uniqueId, downloadThumbnailOperation.name == self?.uniqueId {
+        let blurOperation = ImageBlurOperation()
+        let adapter = generateAdapterBlockOperation(dependent: blurOperation, dependency: downloadThumbnailOperation)
+        let doneThumbnailOperation = BlockOperation { [weak self, unowned blurOperation] in
+            if let outputImage = blurOperation.outputData as? UIImage {
+                if let uuid = self?.uniqueId, blurOperation.name == self?.uniqueId {
                     self?.lastSavedImage = outputImage
                     self?.processingState = .thumbnailReady
                     self?.completionBlock?(outputImage, false, uuid)
@@ -133,9 +132,7 @@ final class CellImageManager {
             }
         }
         
-        myOperationsOrdered = [downloadThumbnailOperation, doneThumbnailOperation, downloadMediumOperation, doneMediumOperation]
-        ///Testing default blur effect
-//        myOperationsOrdered = [downloadThumbnailOperation, adapter, blurOperation, doneThumbnailOperation, downloadMediumOperation, doneMediumOperation]
+        myOperationsOrdered = [downloadThumbnailOperation, adapter, blurOperation, doneThumbnailOperation, downloadMediumOperation, doneMediumOperation]
         startOperations()
     }
     

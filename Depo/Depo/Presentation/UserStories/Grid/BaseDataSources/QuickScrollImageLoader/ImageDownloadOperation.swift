@@ -30,9 +30,8 @@ final class ImageDownloadOperation: Operation, DataTransferrableOperation {
     
     override func cancel() {
         super.cancel()
-        
-        task?.cancel()
         semaphore.signal()
+        task?.cancel()
     }
     
     override func main() {
