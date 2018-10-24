@@ -29,6 +29,7 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
     var lastAddedVideoPageCallback: VoidHandler?
     var allFilesDownloadedCallback: VoidHandler?
     
+    private let privateQueue = DispatchQueue(label: DispatchQueueLabels.itemsRepositoryBackgroundQueue)
     ///array of delegates would be better then one callback (or array of callbacks??)
     
     func updateCache() {
@@ -182,19 +183,21 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
     }
 
     private func loadItems(callBack: @escaping ResponseVoid) {
-        //TODO: If there is no videos - start downloading onl them,
-        //if there is no photos - start downlading only photos
-        guard let pathPhoto = filePathPhoto,
-            let pathVideo = filePathVideo,
-            let savedPhotos = NSKeyedUnarchiver.unarchiveObject(withFile: pathPhoto) as? [WrapData?],
-            let savedVideos = NSKeyedUnarchiver.unarchiveObject(withFile: pathVideo) as? [WrapData?]
-            else {
-                callBack(ResponseResult.failed(CustomErrors.unknown))
-                return
+        privateQueue.async { [weak self] in
+            //TODO: If there is no videos - start downloading onl them,
+            //if there is no photos - start downlading only photos
+            guard let pathPhoto = self?.filePathPhoto,
+                let pathVideo = self?.filePathVideo,
+                let savedPhotos = NSKeyedUnarchiver.unarchiveObject(withFile: pathPhoto) as? [WrapData?],
+                let savedVideos = NSKeyedUnarchiver.unarchiveObject(withFile: pathVideo) as? [WrapData?]
+                else {
+                    callBack(ResponseResult.failed(CustomErrors.unknown))
+                    return
+            }
+            self?.allRemotePhotos = savedPhotos.flatMap{return $0}
+            self?.allRemoteVideos = savedVideos.flatMap{return $0}
+            callBack(ResponseResult.success(()))
         }
-        allRemotePhotos = savedPhotos.flatMap{return $0}
-        allRemoteVideos = savedVideos.flatMap{return $0}
-        callBack(ResponseResult.success(()))
     }
     
     private var filePathURL: URL? {
