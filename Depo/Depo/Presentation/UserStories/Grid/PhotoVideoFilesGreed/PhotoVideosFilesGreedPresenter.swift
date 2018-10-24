@@ -79,9 +79,9 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         startAsyncOperation()
         dataSource.isPaginationDidEnd = false
         
-        interactor.reloadItems(nil,
-                               sortBy: sortedRule.sortingRules,
-                               sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
+//        interactor.reloadItems(nil,
+//                               sortBy: sortedRule.sortingRules,
+//                               sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
     }
     
     override func getFileFilter() -> FieldValue {
@@ -154,6 +154,11 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
     }
     
     override func showOnlySyncedItems(_ value: Bool) {
+        guard let photoDataSource = dataSource as? PhotoVideoDataSourceForCollectionView else {
+            return
+        }
+        photoDataSource.reloadData()
+        photoDataSource.showOnlySync(onlySync: value)
 //        if value {
 //            filtersByDefault = filters
 //            filters = filters.filter { type -> Bool in

@@ -54,18 +54,23 @@ final class PageCompounder {
         }
 
         var tempoArray = pageItems
-        
-        let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
-        
-        tempoArray.append(contentsOf: wrapedLocals)
-        tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
-        
-        notAllowedLocalIDs = notAllowedLocalIDs.union(wrapedLocals.flatMap{$0.getTrimmedLocalID()})
-        
-        let actualArray = tempoArray.prefix(pageSize)
-        let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
-        compoundedCallback(Array(actualArray), Array(leftovers))
-        
+        ///QuickFix to the access to DB items in different thread
+        requestContext.perform { [weak self] in
+            guard let `self` = self else {
+                compoundedCallback([],[])
+                return
+            }
+            let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
+            
+            tempoArray.append(contentsOf: wrapedLocals)
+            tempoArray = self.sortByCurrentType(items: tempoArray, sortType: sortType)
+            
+            self.notAllowedLocalIDs = self.notAllowedLocalIDs.union(wrapedLocals.flatMap{$0.getTrimmedLocalID()})
+            
+            let actualArray = tempoArray.prefix(self.pageSize)
+            let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
+            compoundedCallback(Array(actualArray), Array(leftovers))
+        }
     }
     
     func appendNotAllowedItems(items: [Item]) {

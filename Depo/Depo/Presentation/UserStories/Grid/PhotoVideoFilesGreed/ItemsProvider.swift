@@ -34,8 +34,14 @@ class ItemsProvider {
         
     }
     
-    func reloadItems(callback: ItemsCallback) { ///Will be inactive after quickScroll API implementation
-
+    func reloadItems(callback: @escaping ItemsCallback) { ///Will be inactive after quickScroll API implementation
+        allRemoteItems.removeAll()
+        currentDataBasePage = 0
+        getNextItems(callback: callback)
+    }
+    
+    func getCurrentRemotes() -> [WrapData] {
+        return allRemoteItems
     }
     
     ///for photo And Videos while items being downloaded

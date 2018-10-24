@@ -11,6 +11,8 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     private let itemProvider: ItemsProvider
     private let scrollBarManager = PhotoVideoScrollBarManager()
 
+    private var showOnlySynched = false
+    
     init(sortingRules: SortedRules, fieldValue: FieldValue) {
         self.itemProvider = ItemsProvider(fieldValue: fieldValue)
         super.init(sortingRules: sortingRules)
@@ -109,6 +111,29 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         scrollBarManager.scrollBar.setText(headerText)
     }
     
+    func showOnlySync(onlySync: Bool) {
+        isDropedData = true
+        DispatchQueue.main.async {
+            self.allMediaItems.removeAll()
+            self.dropData()
+            self.showOnlySynched = onlySync
+            self.isLocalPaginationOn = !onlySync
+            self.itemProvider.reloadItems(callback: { [weak self] remotes in
+                self?.appendCollectionView(items: remotes, pageNum: 0)
+            })
+        }
+    }
+    
+    override func reloadData() {
+        isDropedData = true
+        DispatchQueue.main.async {
+            super.reloadData()
+            self.itemProvider.reloadItems(callback: { [weak self] remotes in
+                self?.appendCollectionView(items: remotes, pageNum: 0)
+            })
+        }
+    }
+    
     private func filesAppendedAndSorted() {
         delegate?.filesAppendedAndSorted()
         CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
@@ -176,6 +201,18 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             guard let `self` = self else {
                 complition(ResponseResult.success([]))
                 return
+            }
+            
+            guard !self.showOnlySynched else {
+                self.allMediaItems.append(contentsOf: pageItems)
+                self.isLocalPaginationOn = false
+                self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                
+                complition(ResponseResult.success(self.getIndexPathsForItems(pageItems)))
+                return
+//                complition(ResponseResult.success([]))
+//
+//                return
             }
             
             guard let unwrapedFilters = self.originalFilters,
