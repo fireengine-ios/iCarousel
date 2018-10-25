@@ -34,14 +34,21 @@ class ItemsProvider {
         
     }
     
-    func reloadItems(callback: ItemsCallback) { ///Will be inactive after quickScroll API implementation
-
+    func reloadItems(callback: @escaping ItemsCallback) { ///Will be inactive after quickScroll API implementation
+        allRemoteItems.removeAll()
+        currentDataBasePage = 0
+        getNextItems(callback: callback)
+    }
+    
+    func getCurrentRemotes() -> [WrapData] {
+        return allRemoteItems
     }
     
     ///for photo And Videos while items being downloaded
     func getNextItems(callback: @escaping ItemsCallback) {
         currentDataBasePage += 1
-        let nextPageRange = currentDataBasePage*databasePageSize..<(currentDataBasePage + 1)*databasePageSize
+        let nextPageRange = (currentDataBasePage - 1)*databasePageSize..<currentDataBasePage*databasePageSize
+        
         switch fieldValue {
         case .image://FIXME just call one method with field value
             itemsRepository.getNextStoredPhotosPage(range: nextPageRange) { [weak self] remoteItems in

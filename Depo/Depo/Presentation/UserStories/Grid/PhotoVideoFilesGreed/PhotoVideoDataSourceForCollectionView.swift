@@ -10,72 +10,15 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     
     private let itemProvider: ItemsProvider
     private let scrollBarManager = PhotoVideoScrollBarManager()
-
+    private var showOnlySynched = false
+    
+    //MARK:- Initial state/setup
+    
     init(sortingRules: SortedRules, fieldValue: FieldValue) {
         self.itemProvider = ItemsProvider(fieldValue: fieldValue)
         super.init(sortingRules: sortingRules)
     }
 
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
-            let cell_ = cell as? CollectionViewCellDataProtocol else {
-                return
-        }
-        
-        cell_.updating()
-        cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
-        cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
-        cell_.setDelegateObject(delegateObject: self)
-        
-        guard let wraped = unwrapedObject as? Item else {
-            return
-        }
-        
-        switch wraped.patchToPreview {
-        case .localMediaContent(let local):
-            cell_.setAssetId(local.asset.localIdentifier)
-            self.filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
-                DispatchQueue.main.async {
-                    if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
-                        cell_.setImage(image: image, animated:  false)
-                    } else {
-                        cell_.setPlaceholderImage(fileType: wraped.fileType)
-                    }
-                }
-            })
-            
-        case let .remoteUrl(url):
-            if url != nil, let meta = wraped.metaData {
-                cell_.setImage(with: meta)
-            } else {
-                cell_.setPlaceholderImage(fileType: wraped.fileType)
-            }
-        }
-
-        if let photoCell = cell_ as? CollectionViewCellForPhoto {
-            let file = itemForIndexPath(indexPath: indexPath)
-            if let `file` = file, uploadedObjectID.index(of: file.uuid) != nil {
-                photoCell.finishedUploadForObject()
-            }
-        }
-        
-        if let cell = cell as? BasicCollectionMultiFileCell {
-            cell.moreButton.isHidden = !needShow3DotsInCell
-        }
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        let isLastSection = (section == allItems.count - 1)
-        
-        let height: CGFloat
-        if !isLastSection || (isPaginationDidEnd && !isLocalPaginationOn) {
-            height = 0
-        } else {
-            height = 50
-        }
-        return CGSize(width: collectionView.contentSize.width, height: height)
-    }
-    
     override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]? = nil) {
         
         originalFilters = filters
@@ -90,84 +33,96 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         
         if !ItemsRepository.shared.isAllRemotesDownloaded {
             CardsManager.default.startOperationWith(type: .prepareQuickScroll)
-            ItemsRepository.shared.allFilesDownloadedCallback = {
-                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-            }
+//            ItemsRepository.shared.allFilesDownloadedCallback = {
+//                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+//            }
         }
     }
     
-    func updateScrollBarTextIfNeed() {
-        let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
-            return first < second
-        })
-        
-        guard let indexPath = firstVisibleIndexPath else {
-            return
+    //MARK:- Main Calculations/ Array related activities
+    
+    func showOnlySync(onlySync: Bool) {
+        isDropedData = true
+        DispatchQueue.main.async {
+            self.allMediaItems.removeAll()
+            self.dropData()
+            self.showOnlySynched = onlySync
+            self.isLocalPaginationOn = !onlySync
+            self.itemProvider.reloadItems(callback: { [weak self] remotes in
+                self?.appendCollectionView(items: remotes, pageNum: 0)
+            })
         }
-        
-        let headerText = getHeaderText(indexPath: indexPath, shortForm: true)
-        scrollBarManager.scrollBar.setText(headerText)
     }
     
-    private func filesAppendedAndSorted() {
-        delegate?.filesAppendedAndSorted()
-        CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-       
-        DispatchQueue.main.async
-            {
-            self.scrollBarManager.addScrollBar(to: self.collectionView, delegate: self)
-            let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
-            self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
-            CellImageManager.clear()
-            self.collectionView?.reloadData() ///Check if we can just reload one supplementary view
+    override func dropData() {
+        emptyMetaItems.removeAll()
+        allItems.removeAll()
+        pageLeftOvers.removeAll()
+        allMediaItems.removeAll()
+        pageCompounder.dropData()
 
+        
+        isDropedData = true
+    }
+    
+    override func reloadData() {
+        isPaginationDidEnd = false
+        isLocalPaginationOn = true
+        isLocalFilesRequested = false
+        super.reloadData()
+        dispatchQueue.async { [weak self] in
+            self?.itemProvider.reloadItems(callback: { [weak self] remotes in
+                self?.appendCollectionView(items: remotes, pageNum: 0)
+            })
         }
     }
     
     override func appendCollectionView(items: [WrapData], pageNum: Int) {
-        
-       debugPrint("---APPEND page num is %i", pageNum)
-        if isPaginationDidEnd, !isLocalPaginationOn {
-            ///appending missing dates section when all other items are represented
-            if !emptyMetaItems.isEmpty {
-                allItems.append(emptyMetaItems)
-                self.batchInsertItems(newIndexes: ResponseResult.success(self.getIndexPathsForItems(emptyMetaItems)))
-            }
-            
-            filesAppendedAndSorted()
-            return
-        }
-        var tempoEmptyItems = [WrapData]()
-        var filteredItems = [WrapData]()
-        
-        
-        items.forEach {
-            if !$0.isLocalItem, $0.metaData?.takenDate != nil {
-                filteredItems.append($0)
-            } else {
-                tempoEmptyItems.append($0)
-            }
-        }
-        emptyMetaItems.append(contentsOf: tempoEmptyItems)
-        pageCompounder.appendNotAllowedItems(items: emptyMetaItems)
-
-        if tempoEmptyItems.count >= pageCompounder.pageSize {
-            self.breakItemsIntoSections(breakingArray: self.allMediaItems)
-            self.batchInsertItems(newIndexes: ResponseResult.success([]))
-            return
-        }
-        
-        if filteredItems.isEmpty, tempoEmptyItems.isEmpty {
-            isPaginationDidEnd = true
-        }
-        
-        compoundItems(pageItems: filteredItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] response in
+        dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 return
             }
-        
-            self.batchInsertItems(newIndexes: response)
-        })
+            debugPrint("---APPEND page num is %i", pageNum)
+            if self.isPaginationDidEnd, !self.isLocalPaginationOn {
+                ///appending missing dates section when all other items are represented
+                if !self.emptyMetaItems.isEmpty {
+                    self.allItems.append(self.emptyMetaItems)
+                    self.batchInsertItems(newIndexes: ResponseResult.success(self.getIndexPathsForItems(self.emptyMetaItems)))
+                }
+                self.filesAppendedAndSorted()
+                return
+            }
+            var tempoEmptyItems = [WrapData]()
+            var filteredItems = [WrapData]()
+            
+            items.forEach {
+                if !$0.isLocalItem, $0.metaData?.takenDate != nil {
+                    filteredItems.append($0)
+                } else {
+                    tempoEmptyItems.append($0)
+                }
+            }
+            self.emptyMetaItems.append(contentsOf: tempoEmptyItems)
+            self.pageCompounder.appendNotAllowedItems(items: self.emptyMetaItems)
+            
+            if tempoEmptyItems.count >= self.pageCompounder.pageSize {
+                self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                self.batchInsertItems(newIndexes: ResponseResult.success([]))
+                return
+            }
+            
+            if filteredItems.isEmpty, tempoEmptyItems.isEmpty {
+                self.isPaginationDidEnd = true
+            }
+            
+            self.compoundItems(pageItems: filteredItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] response in
+                guard let `self` = self else {
+                    return
+                }
+                
+                self.batchInsertItems(newIndexes: response)
+            })
+        }
     }
     
     override func compoundItems(pageItems: [WrapData], pageNum: Int, originalRemotes: Bool = false, complition: @escaping ResponseArrayHandler<IndexPath>) {
@@ -176,6 +131,18 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             guard let `self` = self else {
                 complition(ResponseResult.success([]))
                 return
+            }
+            
+            guard !self.showOnlySynched else {
+                self.allMediaItems.append(contentsOf: pageItems)
+                self.isLocalPaginationOn = false
+                self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                
+                complition(ResponseResult.success(self.getIndexPathsForItems(pageItems)))
+                return
+//                complition(ResponseResult.success([]))
+//
+//                return
             }
             
             guard let unwrapedFilters = self.originalFilters,
@@ -395,14 +362,103 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         DispatchQueue.toMain {
             self.allItems = newAllItems
         }
-       //// currently we add missing dates after all collection is presented, (at the very end)
-//        if needShowEmptyMetaDataItems && !emptyMetaItems.isEmpty {
-//            if currentSortType == .metaDataTimeUp {
-//                allItems.append(emptyMetaItems)
-//            } else if currentSortType == .metaDataTimeDown {
-//                allItems.insert(emptyMetaItems, at: 0)
-//            }
-//        }
+    }
+    
+    private func filesAppendedAndSorted() {
+        delegate?.filesAppendedAndSorted()
+        if ItemsRepository.shared.isAllRemotesDownloaded {
+            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+        } else {
+            ItemsRepository.shared.allFilesDownloadedCallback = {
+                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+            }
+        }
+        
+        DispatchQueue.main.async
+            {
+                self.scrollBarManager.addScrollBar(to: self.collectionView, delegate: self)
+                let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
+                self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
+                CellImageManager.clear()
+                self.collectionView?.reloadData() ///Check if we can just reload one supplementary view
+        }
+    }
+    
+    //MARK:- Collection delegate/ data source
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
+            let cell_ = cell as? CollectionViewCellDataProtocol else {
+                return
+        }
+        
+        cell_.updating()
+        cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+        cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
+        cell_.setDelegateObject(delegateObject: self)
+        
+        guard let wraped = unwrapedObject as? Item else {
+            return
+        }
+        
+        switch wraped.patchToPreview {
+        case .localMediaContent(let local):
+            cell_.setAssetId(local.asset.localIdentifier)
+            self.filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
+                DispatchQueue.main.async {
+                    if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
+                        cell_.setImage(image: image, animated:  false)
+                    } else {
+                        cell_.setPlaceholderImage(fileType: wraped.fileType)
+                    }
+                }
+            })
+            
+        case let .remoteUrl(url):
+            if url != nil, let meta = wraped.metaData {
+                cell_.setImage(with: meta)
+            } else {
+                cell_.setPlaceholderImage(fileType: wraped.fileType)
+            }
+        }
+        
+        if let photoCell = cell_ as? CollectionViewCellForPhoto {
+            let file = itemForIndexPath(indexPath: indexPath)
+            if let `file` = file, uploadedObjectID.index(of: file.uuid) != nil {
+                photoCell.finishedUploadForObject()
+            }
+        }
+        
+        if let cell = cell as? BasicCollectionMultiFileCell {
+            cell.moreButton.isHidden = !needShow3DotsInCell
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        let isLastSection = (section == allItems.count - 1)
+        
+        let height: CGFloat
+        if !isLastSection || (isPaginationDidEnd && !isLocalPaginationOn) {
+            height = 0
+        } else {
+            height = 50
+        }
+        return CGSize(width: collectionView.contentSize.width, height: height)
+    }
+    
+    //MARK:- Scroll Related
+    
+    func updateScrollBarTextIfNeed() {
+        let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
+            return first < second
+        })
+        
+        guard let indexPath = firstVisibleIndexPath else {
+            return
+        }
+        
+        let headerText = getHeaderText(indexPath: indexPath, shortForm: true)
+        scrollBarManager.scrollBar.setText(headerText)
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
