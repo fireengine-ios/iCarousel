@@ -75,13 +75,10 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         dataSource.dropData()
         dataSource.currentSortType = sortedRule
         dataSource.isHeaderless = (sortedRule == .sizeAZ || sortedRule == .sizeZA)
-        dataSource.reloadData()
         startAsyncOperation()
-        dataSource.isPaginationDidEnd = false
-        
-        interactor.reloadItems(nil,
-                               sortBy: sortedRule.sortingRules,
-                               sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
+    
+        dataSource.reloadData()
+
     }
     
     override func getFileFilter() -> FieldValue {
@@ -151,6 +148,30 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         }
         updateNoFilesView()
         updateThreeDotsButton()
+    }
+    
+    override func showOnlySyncedItems(_ value: Bool) {
+        guard let photoDataSource = dataSource as? PhotoVideoDataSourceForCollectionView else {
+            return
+        }
+        photoDataSource.reloadData()
+        photoDataSource.showOnlySync(onlySync: value)
+//        if value {
+//            filtersByDefault = filters
+//            filters = filters.filter { type -> Bool in
+//                switch type {
+//                case .localStatus(_):
+//                    return false
+//                default:
+//                    return true
+//                }
+//            }
+//            filters.append(.localStatus(.nonLocal))
+//        } else {
+//            filters = filtersByDefault
+//        }
+//        dataSource.originalFilters = filters
+//        reloadData()
     }
     
 //    override func getNextItems() {
