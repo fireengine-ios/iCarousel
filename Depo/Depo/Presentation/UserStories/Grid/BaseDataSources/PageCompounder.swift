@@ -52,19 +52,25 @@ final class PageCompounder {
             compoundedCallback(pageItems, [])
             return
         }
-
-        var tempoArray = pageItems
+        requestContext.perform { [weak self] in ///for now this will help the reduce possibility for crash - better solution is to return media items in callback which is called inside context
+            guard let `self` = self else {
+                compoundedCallback(pageItems, [])
+                return
+            }
+            var tempoArray = pageItems
+            
+            let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
+            
+            tempoArray.append(contentsOf: wrapedLocals)
+            tempoArray = self.sortByCurrentType(items: tempoArray, sortType: sortType)
+            
+            self.notAllowedLocalIDs = self.notAllowedLocalIDs.union(wrapedLocals.flatMap{$0.getTrimmedLocalID()})
+            
+            let actualArray = tempoArray.prefix(self.pageSize)
+            let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
+            compoundedCallback(Array(actualArray), Array(leftovers))
+        }
         
-        let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
-        
-        tempoArray.append(contentsOf: wrapedLocals)
-        tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
-        
-        notAllowedLocalIDs = notAllowedLocalIDs.union(wrapedLocals.flatMap{$0.getTrimmedLocalID()})
-        
-        let actualArray = tempoArray.prefix(pageSize)
-        let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
-        compoundedCallback(Array(actualArray), Array(leftovers))
         
     }
     
