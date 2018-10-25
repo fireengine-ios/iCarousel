@@ -18,13 +18,16 @@ final class TurkcellUpdaterService {
             case .none:
                 ///never
                 print("UpdaterController: none")
+                
             case .updateFound:
                 ///if parentController == nil
                 print("UpdaterController: updateFound")
                 
             case .updateChosen:
                 /// OK or Install
+                /// Stop the app flow
                 print("UpdaterController: updateChosen")
+                return
                 
             case .updateCheckCompleted:
                 ///Cancelled or not found or failed
