@@ -1226,7 +1226,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell_ = cell as? CollectionViewCellDataProtocol else {
-                return
+            return
         }
         
         if let photoCell = cell_ as? CollectionViewCellForPhoto {

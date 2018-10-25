@@ -21,8 +21,8 @@ final class ImageBlurOperation: Operation, DataTransferrableOperation {
     override func cancel() {
         super.cancel()
         
-        semaphore.signal()
         imageProcessor?.cancelAsyncBlurOperations()
+        semaphore.signal()
     }
 
     override func main() {

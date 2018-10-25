@@ -30,8 +30,9 @@ final class ImageDownloadOperation: Operation, DataTransferrableOperation {
     
     override func cancel() {
         super.cancel()
-        semaphore.signal()
         task?.cancel()
+        task = nil
+        semaphore.signal()
     }
     
     override func main() {
@@ -48,14 +49,18 @@ final class ImageDownloadOperation: Operation, DataTransferrableOperation {
             return
         }
         
-        task = URLSession.sharedCustom.dataTask(with: url) { [weak self] data, response, error in
-            if let data = data, let image = UIImage(data: data), let `self` = self {
+        task = URLSession.sharedCustom.dataTask(with: url) { [weak self] data, _, error in
+            guard let `self` = self else {
+                return
+            }
+            
+            if error == nil, let data = data, let image = UIImage(data: data) {
                 self.outputData = image
                 
                 self.imageCache?.store(image, forKey: cacheKey, completion: nil)
             }
             
-            self?.semaphore.signal()
+            self.semaphore.signal()
         }
         
         task?.resume()
