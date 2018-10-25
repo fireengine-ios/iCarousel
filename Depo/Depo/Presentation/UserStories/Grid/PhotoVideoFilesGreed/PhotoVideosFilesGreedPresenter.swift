@@ -79,9 +79,9 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         startAsyncOperation()
         dataSource.isPaginationDidEnd = false
         
-        interactor.reloadItems(nil,
-                               sortBy: sortedRule.sortingRules,
-                               sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
+//        interactor.reloadItems(nil,
+//                               sortBy: sortedRule.sortingRules,
+//                               sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
     }
     
     override func getFileFilter() -> FieldValue {

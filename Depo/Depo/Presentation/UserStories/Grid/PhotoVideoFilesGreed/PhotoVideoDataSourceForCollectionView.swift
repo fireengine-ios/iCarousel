@@ -32,9 +32,9 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         
         if !ItemsRepository.shared.isAllRemotesDownloaded {
             CardsManager.default.startOperationWith(type: .prepareQuickScroll)
-            ItemsRepository.shared.allFilesDownloadedCallback = {
-                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-            }
+//            ItemsRepository.shared.allFilesDownloadedCallback = {
+//                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+//            }
         }
     }
     
@@ -327,7 +327,13 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     
     private func filesAppendedAndSorted() {
         delegate?.filesAppendedAndSorted()
-        CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+        if ItemsRepository.shared.isAllRemotesDownloaded {
+            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+        } else {
+            ItemsRepository.shared.allFilesDownloadedCallback = {
+                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+            }
+        }
         
         DispatchQueue.main.async
             {

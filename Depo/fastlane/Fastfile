@@ -171,7 +171,7 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
     	" -F \"file=@#{filePath}\""\
     	" -F \"find_by_udid=0\""\
     	" -F \"wall_of_apps=0\""\
-    	" -F \"callback_emails=zdaecq@gmail.com\""
+    	" -F \"callback_emails=Aleksandr.Pestriakov@life.com.by\""
     )
   end
 
