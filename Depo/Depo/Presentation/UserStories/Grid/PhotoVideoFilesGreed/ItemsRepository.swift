@@ -39,6 +39,8 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
             case .success(_):
                 self?.isAllPhotosDownloaded = true
                 self?.isAllVideosDownloaded = true
+                self?.lastAddedPhotoPageCallback?()
+                self?.lastAddedVideoPageCallback?()
                 self?.allFilesDownloadedCallback?()
             case .failed(_):
                 self?.downloadAllFiles() { [weak self] in

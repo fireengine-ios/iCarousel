@@ -52,6 +52,7 @@ final class PageCompounder {
             compoundedCallback(pageItems, [])
             return
         }
+        
         requestContext.perform { [weak self] in ///for now this will help the reduce possibility for crash - better solution is to return media items in callback which is called inside context
             guard let `self` = self else {
                 compoundedCallback(pageItems, [])
@@ -70,8 +71,6 @@ final class PageCompounder {
             let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
             compoundedCallback(Array(actualArray), Array(leftovers))
         }
-        
-        
     }
     
     func appendNotAllowedItems(items: [Item]) {

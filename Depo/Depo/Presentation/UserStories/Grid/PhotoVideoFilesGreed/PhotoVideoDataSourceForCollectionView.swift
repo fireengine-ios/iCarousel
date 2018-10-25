@@ -10,7 +10,8 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     
     private let itemProvider: ItemsProvider
     private let scrollBarManager = PhotoVideoScrollBarManager()
-
+    private var showOnlySynched = false
+    
     //MARK:- Initial state/setup
     
     init(sortingRules: SortedRules, fieldValue: FieldValue) {
@@ -40,6 +41,42 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     
     //MARK:- Main Calculations/ Array related activities
     
+    func showOnlySync(onlySync: Bool) {
+        isDropedData = true
+        DispatchQueue.main.async {
+            self.allMediaItems.removeAll()
+            self.dropData()
+            self.showOnlySynched = onlySync
+            self.isLocalPaginationOn = !onlySync
+            self.itemProvider.reloadItems(callback: { [weak self] remotes in
+                self?.appendCollectionView(items: remotes, pageNum: 0)
+            })
+        }
+    }
+    
+    override func dropData() {
+        emptyMetaItems.removeAll()
+        allItems.removeAll()
+        pageLeftOvers.removeAll()
+        allMediaItems.removeAll()
+        pageCompounder.dropData()
+
+        
+        isDropedData = true
+    }
+    
+    override func reloadData() {
+        isPaginationDidEnd = false
+        isLocalPaginationOn = true
+        isLocalFilesRequested = false
+        super.reloadData()
+        dispatchQueue.async { [weak self] in
+            self?.itemProvider.reloadItems(callback: { [weak self] remotes in
+                self?.appendCollectionView(items: remotes, pageNum: 0)
+            })
+        }
+    }
+    
     override func appendCollectionView(items: [WrapData], pageNum: Int) {
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
@@ -52,13 +89,11 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                     self.allItems.append(self.emptyMetaItems)
                     self.batchInsertItems(newIndexes: ResponseResult.success(self.getIndexPathsForItems(self.emptyMetaItems)))
                 }
-                
                 self.filesAppendedAndSorted()
                 return
             }
             var tempoEmptyItems = [WrapData]()
             var filteredItems = [WrapData]()
-            
             
             items.forEach {
                 if !$0.isLocalItem, $0.metaData?.takenDate != nil {
@@ -96,6 +131,18 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             guard let `self` = self else {
                 complition(ResponseResult.success([]))
                 return
+            }
+            
+            guard !self.showOnlySynched else {
+                self.allMediaItems.append(contentsOf: pageItems)
+                self.isLocalPaginationOn = false
+                self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                
+                complition(ResponseResult.success(self.getIndexPathsForItems(pageItems)))
+                return
+//                complition(ResponseResult.success([]))
+//
+//                return
             }
             
             guard let unwrapedFilters = self.originalFilters,
@@ -315,14 +362,6 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         DispatchQueue.toMain {
             self.allItems = newAllItems
         }
-       //// currently we add missing dates after all collection is presented, (at the very end)
-//        if needShowEmptyMetaDataItems && !emptyMetaItems.isEmpty {
-//            if currentSortType == .metaDataTimeUp {
-//                allItems.append(emptyMetaItems)
-//            } else if currentSortType == .metaDataTimeDown {
-//                allItems.insert(emptyMetaItems, at: 0)
-//            }
-//        }
     }
     
     private func filesAppendedAndSorted() {
@@ -342,7 +381,6 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
                 CellImageManager.clear()
                 self.collectionView?.reloadData() ///Check if we can just reload one supplementary view
-                
         }
     }
     
