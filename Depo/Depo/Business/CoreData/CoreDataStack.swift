@@ -16,6 +16,9 @@ final class CoreDataStack: NSObject {
     
     typealias AppendingLocalItemsPageAppended = ([Item])->Void
     
+    static let notificationNewLocalPageAppended = "notificationNewLocalPageAppended"
+    static let notificationNewLocalPageAppendedFilesKey = "notificationNewLocalPageAppendedFilesKey"
+    
     @objc static let `default` = CoreDataStack()
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
@@ -38,7 +41,7 @@ final class CoreDataStack: NSObject {
         
         return coordinator
     }()
-
+    
     var mainContext: NSManagedObjectContext
     
     var newChildBackgroundContext: NSManagedObjectContext {
@@ -50,8 +53,6 @@ final class CoreDataStack: NSObject {
     var backgroundContext: NSManagedObjectContext
     
     let privateQueue = DispatchQueue(label: DispatchQueueLabels.coreDataStack, attributes: .concurrent)
-    
-    var pageAppendedCallBack: AppendingLocalItemsPageAppended?
     
     var inProcessAppendingLocalFiles = false
     
@@ -219,4 +220,5 @@ final class CoreDataStack: NSObject {
             }
         }
     }
+    
 }

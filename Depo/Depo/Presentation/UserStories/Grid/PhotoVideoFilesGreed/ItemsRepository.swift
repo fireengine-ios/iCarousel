@@ -72,6 +72,10 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
         }
         dropItem(path: pathPhoto)
         dropItem(path: pathVideo)
+        allRemotePhotos.removeAll()
+        allRemoteVideos.removeAll()
+        PhotoVideoFilesGreedModuleStatusContainer.shared.isVideScreenPaginationDidEnd = false
+        PhotoVideoFilesGreedModuleStatusContainer.shared.isPhotoScreenPaginationDidEnd = false
         isAllPhotosDownloaded = false
         isAllVideosDownloaded = false
     }

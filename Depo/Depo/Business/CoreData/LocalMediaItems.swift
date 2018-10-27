@@ -100,10 +100,15 @@ extension CoreDataStack {
             print("LOCAL_ITEMS: All local files have been added in \(Date().timeIntervalSince(start)) seconds")
             self?.inProcessAppendingLocalFiles = false
             NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
+            self?.postiNotificationLocalPageAdded(latestItems: [])
             
-            self?.pageAppendedCallBack?([])
             completion?()
         }
+    }
+    
+    private func postiNotificationLocalPageAdded(latestItems: [WrapData]) {
+        let latestLocals = [CoreDataStack.notificationNewLocalPageAppendedFilesKey: latestItems]
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: CoreDataStack.notificationNewLocalPageAppended), object: nil, userInfo: latestLocals)
     }
     
     private func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping VoidHandler ) {
@@ -136,7 +141,7 @@ extension CoreDataStack {
                     }
                     
                     self?.saveDataForContext(context: context, saveAndWait: true, savedCallBack: { [weak self] in
-                        self?.pageAppendedCallBack?(addedObjects)
+                        self?.postiNotificationLocalPageAdded(latestItems: addedObjects)
                         
                         ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
                         print("LOCAL_ITEMS: page has been added in \(Date().timeIntervalSince(start)) secs")
