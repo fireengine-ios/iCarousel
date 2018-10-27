@@ -26,7 +26,7 @@ final class PageCompounder {
     private var lastLocalPageAddedAction: CoreDataStack.AppendingLocalItemsPageAppended?
     
     init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(onLastLocalPageAppendedToDB(notification:)), name: NSNotification.Name.notificationNewLocalPageAppended, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onLastLocalPageAppendedToDB(notification:)), name: Notification.Name.notificationNewLocalPageAppended, object: nil)
     }
     
     private func compoundItems(pageItems: [WrapData],
