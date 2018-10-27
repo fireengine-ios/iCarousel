@@ -16,7 +16,6 @@ final class CoreDataStack: NSObject {
     
     typealias AppendingLocalItemsPageAppended = ([Item])->Void
     
-    static let notificationNewLocalPageAppended = "notificationNewLocalPageAppended"
     static let notificationNewLocalPageAppendedFilesKey = "notificationNewLocalPageAppendedFilesKey"
     
     @objc static let `default` = CoreDataStack()

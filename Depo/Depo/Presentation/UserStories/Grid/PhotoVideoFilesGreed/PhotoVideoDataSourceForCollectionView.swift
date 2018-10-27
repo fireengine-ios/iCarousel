@@ -90,27 +90,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             guard let `self` = self else {
                 return
             }
-            switch self.itemProvider.fieldValue {
-            case .image:
-                break
-            case .video:
-                debugPrint("---APPEND page num is %i", pageNum)
-            default:
-                break
-            }
-            
             if self.isPaginationDidEnd, !self.isLocalPaginationOn {
                 ///appending missing dates section when all other items are represented
                 if !self.emptyMetaItems.isEmpty {
                     self.allItems.append(self.emptyMetaItems)
-                    switch self.itemProvider.fieldValue {
-                    case .image:
-                        break
-                    case .video:
-                        debugPrint("---batchInsertItems page num is %i", pageNum)
-                    default:
-                        break
-                    }
                     self.batchInsertItems(newIndexes: ResponseResult.success(self.getIndexPathsForItems(self.emptyMetaItems)))
                 }
                 self.filesAppendedAndSorted()
@@ -131,14 +114,6 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             
             if tempoEmptyItems.count >= self.pageCompounder.pageSize {
                 self.breakItemsIntoSections(breakingArray: self.allMediaItems)
-                switch self.itemProvider.fieldValue {
-                case .image:
-                    break
-                case .video:
-                    debugPrint("---batchInsertItems page num is %i", pageNum)
-                default:
-                    break
-                }
                 self.batchInsertItems(newIndexes: ResponseResult.success([]))
                 return
             }
@@ -151,29 +126,12 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 guard let `self` = self else {
                     return
                 }
-                switch self.itemProvider.fieldValue {
-                case .image:
-                    break
-                case .video:
-                    debugPrint("---batchInsertItems page num is %i", pageNum)
-                default:
-                    break
-                }
                 self.batchInsertItems(newIndexes: response)
             })
         }
     }
     
     override func compoundItems(pageItems: [WrapData], pageNum: Int, originalRemotes: Bool = false, complition: @escaping ResponseArrayHandler<IndexPath>) {
-        switch self.itemProvider.fieldValue {
-        case .image:
-            break
-        case .video:
-            debugPrint("---cumpound page num is %i", pageNum)
-        default:
-            break
-        }
-        
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 complition(ResponseResult.success([]))

@@ -108,7 +108,7 @@ extension CoreDataStack {
     
     private func postiNotificationLocalPageAdded(latestItems: [WrapData]) {
         let latestLocals = [CoreDataStack.notificationNewLocalPageAppendedFilesKey: latestItems]
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: CoreDataStack.notificationNewLocalPageAppended), object: nil, userInfo: latestLocals)
+        NotificationCenter.default.post(name: NSNotification.Name.notificationNewLocalPageAppended, object: nil, userInfo: latestLocals)
     }
     
     private func save(items: [PHAsset], context: NSManagedObjectContext, completion: @escaping VoidHandler ) {
