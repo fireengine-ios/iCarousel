@@ -10,7 +10,7 @@ typealias ItemsCallback = (_ items: [WrapData])->Void
 
 class ItemsProvider {
     
-    private let fieldValue: FieldValue
+    let fieldValue: FieldValue
     private var allRemoteItems = [WrapData]()
     let itemsRepository = ItemsRepository.shared
     var databasePageSize = NumericConstants.numberOfLocalItemsOnPage

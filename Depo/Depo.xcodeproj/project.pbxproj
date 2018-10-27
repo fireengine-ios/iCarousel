@@ -2408,6 +2408,8 @@
 		8C9EA14020B593E600FED3A2 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
 		8CA2913D20CA885C0014379E /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */; };
 		8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */; };
+		8CACA2AB2181F479001F1BE1 /* PhotoVideoFilesGreedModuleStatusObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CACA2AA2181F479001F1BE1 /* PhotoVideoFilesGreedModuleStatusObserver.swift */; };
+		8CACA2AC2181F479001F1BE1 /* PhotoVideoFilesGreedModuleStatusObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CACA2AA2181F479001F1BE1 /* PhotoVideoFilesGreedModuleStatusObserver.swift */; };
 		8CAFBF0220825E720046E881 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		8CB293331F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */; };
 		8CB478AE20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */; };
@@ -4969,6 +4971,7 @@
 		8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MailVerificationViewController.xib; sourceTree = "<group>"; };
 		8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceExtension.swift; sourceTree = "<group>"; };
 		8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndServicesDataStorage.swift; sourceTree = "<group>"; };
+		8CACA2AA2181F479001F1BE1 /* PhotoVideoFilesGreedModuleStatusObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoFilesGreedModuleStatusObserver.swift; sourceTree = "<group>"; };
 		8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetInitialConfig.swift; sourceTree = "<group>"; };
 		8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaSignUpRequrementResponse.swift; sourceTree = "<group>"; };
 		8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetConfigurator.swift; sourceTree = "<group>"; };
@@ -9332,6 +9335,7 @@
 				CEEA3C562179C093000C3FBC /* PhotoVideoScrollBarManager.swift */,
 				8C157B7E2173CD8A00313F2B /* ItemsProvider.swift */,
 				8C157B81217477AB00313F2B /* ItemsRepository.swift */,
+				8CACA2AA2181F479001F1BE1 /* PhotoVideoFilesGreedModuleStatusObserver.swift */,
 			);
 			path = PhotoVideoFilesGreed;
 			sourceTree = "<group>";
@@ -14451,6 +14455,7 @@
 				8C0E8CF21FDEBDFF00789C91 /* BottomSelectionTabBarInteractorOutput.swift in Sources */,
 				8C0E8CF31FDEBDFF00789C91 /* CreateStoryPreviewInteractor.swift in Sources */,
 				8C0E8CF41FDEBDFF00789C91 /* AppDelegate.swift in Sources */,
+				8CACA2AC2181F479001F1BE1 /* PhotoVideoFilesGreedModuleStatusObserver.swift in Sources */,
 				8C0E8CF51FDEBDFF00789C91 /* CollectionViewCellForController.swift in Sources */,
 				C62239A4204972B00043ED44 /* WidgetService.swift in Sources */,
 				8C0E8CF61FDEBDFF00789C91 /* AccountResponse.swift in Sources */,
@@ -15626,6 +15631,7 @@
 				CE6DE7601FCC44F800C23CBD /* KeyboardLayoutConstraint.swift in Sources */,
 				CE51ABCD1EF90853005DCEE0 /* AutoSyncInitializer.swift in Sources */,
 				7859299420060E8B003F8AB3 /* ManageContactsPresenter.swift in Sources */,
+				8CACA2AB2181F479001F1BE1 /* PhotoVideoFilesGreedModuleStatusObserver.swift in Sources */,
 				7C49881B1F3320420039C5F2 /* CreateStoryPhotosOrderRouter.swift in Sources */,
 				CE2F56231F7552A900F49DA1 /* ResizableCollectionView.swift in Sources */,
 				CEAE3FB71EFD4F0D00A405B2 /* HomePageRouter.swift in Sources */,

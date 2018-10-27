@@ -66,13 +66,21 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     }
     
     override func reloadData() {
+        switch itemProvider.fieldValue {
+        case .image:
+            PhotoVideoFilesGreedModuleStatusContainer.shared.isPhotoScreenPaginationDidEnd = false
+        case .video:
+            PhotoVideoFilesGreedModuleStatusContainer.shared.isVideScreenPaginationDidEnd = false
+        default:
+            break
+        }
         isPaginationDidEnd = false
         isLocalPaginationOn = true
         isLocalFilesRequested = false
         super.reloadData()
         dispatchQueue.async { [weak self] in
             self?.itemProvider.reloadItems(callback: { [weak self] remotes in
-                self?.appendCollectionView(items: remotes, pageNum: 0)
+                self?.appendCollectionView(items: remotes, pageNum: 1)
             })
         }
     }
@@ -82,7 +90,6 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             guard let `self` = self else {
                 return
             }
-            debugPrint("---APPEND page num is %i", pageNum)
             if self.isPaginationDidEnd, !self.isLocalPaginationOn {
                 ///appending missing dates section when all other items are represented
                 if !self.emptyMetaItems.isEmpty {
@@ -119,14 +126,12 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 guard let `self` = self else {
                     return
                 }
-                
                 self.batchInsertItems(newIndexes: response)
             })
         }
     }
     
     override func compoundItems(pageItems: [WrapData], pageNum: Int, originalRemotes: Bool = false, complition: @escaping ResponseArrayHandler<IndexPath>) {
-        debugPrint("---cumpound page num is %i", pageNum)
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 complition(ResponseResult.success([]))
@@ -364,15 +369,32 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         }
     }
     
+    private func hideQSCard() {
+        guard PhotoVideoFilesGreedModuleStatusContainer.shared.isPhotoScreenPaginationDidEnd,
+            PhotoVideoFilesGreedModuleStatusContainer.shared.isVideScreenPaginationDidEnd else {
+                return
+        }
+        CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+//        if ItemsRepository.shared.isAllRemotesDownloaded {
+//            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+//        } else {
+//            ItemsRepository.shared.allFilesDownloadedCallback = {
+//                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+//            }
+//        }
+    }
+    
     private func filesAppendedAndSorted() {
         delegate?.filesAppendedAndSorted()
-        if ItemsRepository.shared.isAllRemotesDownloaded {
-            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-        } else {
-            ItemsRepository.shared.allFilesDownloadedCallback = {
-                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-            }
+        switch itemProvider.fieldValue {
+        case .image:
+            PhotoVideoFilesGreedModuleStatusContainer.shared.isPhotoScreenPaginationDidEnd = true
+        case .video:
+            PhotoVideoFilesGreedModuleStatusContainer.shared.isVideScreenPaginationDidEnd = true
+        default:
+            break
         }
+        hideQSCard()
         
         DispatchQueue.main.async {
                 self.scrollBarManager.addScrollBar(to: self.collectionView, delegate: self)
