@@ -7,35 +7,25 @@
 //
 
 import Foundation
+import SDWebImage
 
 
 typealias CellImageManagerOperationsFinished = (_ image: UIImage?, _ cached: Bool, _ uuid: String?)->Void
 
 
-protocol DataTransferrableOperation: class {
-    var inputData: AnyObject? { get set}
-    var outputData: AnyObject? { get }
-}
-
-
 final class CellImageManager {
     
-    private enum ImageProcessingState {
-        case unprocessed
-        case thumbnailReady
-        case mediumReady
-    }
-    
     //MARK: - Static vars
-    private static let maxConcurrentOperations = Device.isIpad ? 96 : 32
+    private static let maxConcurrentOperations = 32
     private static let globalDispatchQueue = DispatchQueue(label: DispatchQueueLabels.cellImageManagerQueue)
     
     private static let globalOperationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = maxConcurrentOperations
-        queue.qualityOfService = .userInteractive
+        queue.qualityOfService = .default
         return queue
     }()
+
     
     private static var instances = [URL : CellImageManager]()
     
@@ -55,23 +45,23 @@ final class CellImageManager {
     
     static func clear() {
         globalDispatchQueue.async {
-            instances.removeAll()
             globalOperationQueue.cancelAllOperations()
+            instances.removeAll()
         }
     }
     
+    
     //MARK: - Instance vars
     
-    private var completionBlock: CellImageManagerOperationsFinished?
-
-    private lazy var operationQueue = CellImageManager.globalOperationQueue
-    private lazy var dispatchQueue = CellImageManager.globalDispatchQueue
-
-    private (set) var uniqueId: String = UUID().uuidString
-    private var myOperationsOrdered = [Operation]()
+    let uniqueId: String = UUID().uuidString
     
-    private var lastSavedImage: UIImage?
-    private var processingState: ImageProcessingState = .unprocessed
+    private lazy var dispatchQueue = DispatchQueue(label: "\(uniqueId)")
+    private lazy var operationQueue = CellImageManager.globalOperationQueue
+    private var currentOperation: Operation?
+    
+    private let imageCache = SDWebImageManager.shared().imageCache
+    
+    private var completionBlock: CellImageManagerOperationsFinished?
     
     
     //MARK: - Interface
@@ -85,8 +75,8 @@ final class CellImageManager {
     
     func cancelImageLoading() {
         dispatchQueue.async { [weak self] in
-            self?.myOperationsOrdered.forEach { $0.cancel() }
-            self?.myOperationsOrdered.removeAll()
+            self?.currentOperation?.cancel()
+            self?.currentOperation = nil
         }
     }
     
@@ -94,84 +84,74 @@ final class CellImageManager {
     //MARK: - Private
     
     private func setupOperations(thumbnail: URL?, url: URL?) {
-        guard processingState != .mediumReady else {
-            completionBlock?(lastSavedImage, true, uniqueId)
+        ///check if image is already downloaded with url
+        if let image = getImageFromCache(url: url) {
+            completionBlock?(image, true, uniqueId)
             return
         }
         
-        let downloadMediumOperation = ImageDownloadOperation(url: url)
-        let doneMediumOperation = BlockOperation { [weak self, unowned downloadMediumOperation] in
-            if let uuid = self?.uniqueId, let outputImage = downloadMediumOperation.outputData as? UIImage {
-                if downloadMediumOperation.name == self?.uniqueId {
-                    self?.lastSavedImage = outputImage
-                    self?.processingState = .mediumReady
-                    self?.completionBlock?(outputImage, true, uuid)
-                }
+        ///prepare download operation for url
+        let downloadImage = { [weak self] in
+            guard let `self` = self else { return }
+            
+            let downloadOperation = ImageDownloadOperation(url: url)
+            downloadOperation.outputBlock = { [weak self] outputImage in
+                guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
+                
+                self.cache(image: outputImage, url: url)
+                self.completionBlock?(outputImage, false, self.uniqueId)
             }
+            
+            self.start(operation: downloadOperation)
         }
         
-        guard processingState != .thumbnailReady else {
-            completionBlock?(lastSavedImage, true, uniqueId)
-            myOperationsOrdered = [downloadMediumOperation, doneMediumOperation]
-            startOperations()
+        ///check if image is already downloaded with thumbnail url
+        if let image = getImageFromCache(url: thumbnail) {
+            completionBlock?(image, true, uniqueId)
+            downloadImage()
             return
         }
         
         let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail)
-        let blurOperation = ImageBlurOperation()
-        let adapter = generateAdapterBlockOperation(dependent: blurOperation, dependency: downloadThumbnailOperation)
-        let doneThumbnailOperation = BlockOperation { [weak self, unowned blurOperation] in
-            if let outputImage = blurOperation.outputData as? UIImage {
-                if let uuid = self?.uniqueId, blurOperation.name == self?.uniqueId {
-                    self?.lastSavedImage = outputImage
-                    self?.processingState = .thumbnailReady
-                    self?.completionBlock?(outputImage, false, uuid)
-                } else {
-                    self?.cancelImageLoading()
-                }
-            }
+        downloadThumbnailOperation.outputBlock = { [weak self] outputImage in
+            guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
+            
+            ///another guard in case if we want to save an unblurred thumbnail image
+            guard let blurredImage = outputImage.blurred() else { return }
+            
+            self.cache(image: blurredImage, url: thumbnail)
+            self.completionBlock?(blurredImage, false, self.uniqueId)
+            
+            downloadImage()
         }
-        
-        myOperationsOrdered = [downloadThumbnailOperation, adapter, blurOperation, doneThumbnailOperation, downloadMediumOperation, doneMediumOperation]
-        startOperations()
+        downloadThumbnailOperation.queuePriority = .high
+        start(operation: downloadThumbnailOperation)
     }
     
-    private func startOperations() {
-        setDependecies(ordered: myOperationsOrdered)
-        name(operations: myOperationsOrdered)
-        operationQueue.addOperations(myOperationsOrdered, waitUntilFinished: false)
+    private func start(operation: Operation) {
+        currentOperation = operation
+        operationQueue.addOperation(operation)
     }
 }
 
 
 
-//MARK: - Helpers
+//MARK: - Cache
 extension CellImageManager {
     
-    ///in order to transfer data between operations
-    private func generateAdapterBlockOperation(dependent: DataTransferrableOperation, dependency: DataTransferrableOperation) -> BlockOperation {
-        return BlockOperation { [unowned dependent, unowned dependency] in
-            if type(of: dependent.inputData) == type(of: dependency.outputData) {
-                dependent.inputData = dependency.outputData
-            }
+    private func getImageFromCache(url: URL?) -> UIImage? {
+        guard let cacheKey = url?.byTrimmingQuery?.absoluteString else {
+            return nil
         }
+        
+        return imageCache?.imageFromCache(forKey: cacheKey)
     }
     
-    ///ordered by prioriy: first-to-run...last-to-run
-    private func setDependecies(ordered: [Operation]) {
-        guard ordered.count > 1 else {
+    private func cache(image: UIImage, url: URL?) {
+        guard let cacheKey = url?.byTrimmingQuery?.absoluteString else {
             return
         }
         
-        for i in 0...ordered.count-2 {
-            let firstOp = ordered[i]
-            let secondOp = ordered[i+1]
-            secondOp.addDependency(firstOp)
-        }
+        imageCache?.store(image, forKey: cacheKey, completion: nil)
     }
-    
-    private func name(operations: [Operation]) {
-        operations.forEach { $0.name = uniqueId }
-    }
-    
 }
