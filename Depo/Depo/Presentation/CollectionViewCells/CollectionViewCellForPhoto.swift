@@ -108,7 +108,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     override func setImage(with url: URL) {
-        self.imageView.contentMode = .center
+        imageView.contentMode = .center
         imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
             guard let `self` = self else {
                 return
@@ -123,7 +123,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
         
         isAlreadyConfigured = true
-        self.backgroundColor = ColorConstants.fileGreedCellColor
+        backgroundColor = ColorConstants.fileGreedCellColor
     }
     
     override func setImage(with metaData: BaseMetaData) {
@@ -137,7 +137,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
                 }
                 
                 let needAnimate = !cached && (self?.imageView.image == nil)
-                self?.visualEffectBlur.isHidden = !needAnimate
                 self?.setImage(image: image, animated: needAnimate)
             }
         }
@@ -217,7 +216,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     deinit {
-        cellImageManager?.cancelImageLoading()
+        cancelImageLoading()
     }
 
 }

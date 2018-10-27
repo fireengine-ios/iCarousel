@@ -7,18 +7,15 @@
 //
 
 import Foundation
-import SDWebImage
 
 
-final class ImageDownloadOperation: Operation, DataTransferrableOperation {
+final class ImageDownloadOperation: Operation {
     
-    var inputData: AnyObject?
-    private (set) var outputData: AnyObject?
+    var outputBlock: ((AnyObject?) -> Void)?
     
     private let semaphore = DispatchSemaphore(value: 0)
     private var url: URL?
     private var task: URLSessionTask?
-    private var imageCache = SDWebImageManager.shared().imageCache
     
     
     init(url: URL?) {
@@ -30,33 +27,29 @@ final class ImageDownloadOperation: Operation, DataTransferrableOperation {
     
     override func cancel() {
         super.cancel()
-        
         task?.cancel()
+        task = nil
+        outputBlock?(nil)
         semaphore.signal()
     }
     
     override func main() {
-        guard !isCancelled, let url = url, let cacheKey = url.byTrimmingQuery?.absoluteString else {
-            return
-        }
-
-        if let image = imageCache?.imageFromCache(forKey: cacheKey) {
-            outputData = image
+        guard !isCancelled else { return }
+        
+        guard let url = url else {
+            outputBlock?(nil)
             return
         }
         
-        guard !isCancelled else {
-            return
-        }
-        
-        task = URLSession.sharedCustom.dataTask(with: url) { [weak self] data, response, error in
-            if let data = data, let image = UIImage(data: data), let `self` = self {
-                self.outputData = image
-                
-                self.imageCache?.store(image, forKey: cacheKey, completion: nil)
-            }
+        task = URLSession.sharedCustom.dataTask(with: url) { [weak self] data, _, error in
+            guard let `self` = self, !self.isCancelled else { return }
             
-            self?.semaphore.signal()
+            if error == nil, let data = data, let image = UIImage(data: data) {
+                self.outputBlock?(image)
+            } else {
+                self.outputBlock?(nil)
+            }
+            self.semaphore.signal()
         }
         
         task?.resume()

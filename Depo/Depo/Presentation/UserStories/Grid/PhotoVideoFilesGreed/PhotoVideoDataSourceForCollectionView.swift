@@ -374,8 +374,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             }
         }
         
-        DispatchQueue.main.async
-            {
+        DispatchQueue.main.async {
                 self.scrollBarManager.addScrollBar(to: self.collectionView, delegate: self)
                 let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
                 self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
