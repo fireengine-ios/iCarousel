@@ -16,7 +16,6 @@ class ItemsRepository {
             instance = newInstance
             return newInstance
         }
-        
     }
     
     fileprivate static var instance: ItemsRepository?
@@ -91,6 +90,8 @@ class ItemsRepository {
         }
         searchPhotoService = nil
         searchVideoService = nil
+        isPhotoLoadDone = false
+        isVideoLoadDone = false
         dropPhotoItems()
         dropVideoItems()
         allRemotePhotos.removeAll()
@@ -256,8 +257,9 @@ class ItemsRepository {
                 self.isAllVideosLoaded = false
                 return
         }
-        
+        debugPrint("!-- saveItems ALL PHOTOS array count \(self.allRemotePhotos.count)")
         self.archiveInRangeTillFinished(items: self.allRemotePhotos, toFile: pathPhoto)
+        debugPrint("!-- saveItems ALL VIDEOS array count \(self.allRemoteVideos.count)")
         self.archiveInRangeTillFinished(items: self.allRemoteVideos, toFile: pathVideo)
         
 //        NSKeyedArchiver.archiveRootObject(allRemotePhotos, toFile: pathPhoto)
@@ -270,15 +272,20 @@ class ItemsRepository {
             let endIndex = (pageNum + 1) * NumericConstants.itemProviderSearchRequest
             
             let arrayInRange = Array(items.dropFirst(startIndex).prefix(endIndex))
+            debugPrint("!-- archiveInRangeTillFinished array count\(arrayInRange.count)")
             guard !arrayInRange.isEmpty else {
                 return
             }
-            debugPrint("!-- archiveInRangeTillFinished \(pageNum)")
             let pathToSave = toFile + "\(pageNum)"
+            debugPrint("!-- archiveInRangeTillFinished \(pageNum) with path \(pathToSave)")
+            
             NSKeyedArchiver.archiveRootObject(arrayInRange, toFile: pathToSave)
             self?.archiveInRangeTillFinished(items: items, toFile: toFile, pageNum: pageNum + 1)
         }
     }
+    
+    private var isPhotoLoadDone = false
+    private var isVideoLoadDone = false
     
     private func loadItems(callBack: @escaping ResponseVoid) {
         privateQueue.async { [weak self] in
@@ -289,13 +296,16 @@ class ItemsRepository {
                 guard let `self` = self else {
                     return
                 }
+                self.isPhotoLoadDone = true
                 switch result {
                 case .success(_):
                     if self.isAllRemotesLoaded {
                         callBack(result)
                     }
                 case .failed(_):
-                    callBack(result)
+                    if self.isVideoLoadDone {
+                        callBack(result)
+                    }
                 }
             })
 
@@ -303,13 +313,16 @@ class ItemsRepository {
                 guard let `self` = self else {
                     return
                 }
+                self.isVideoLoadDone = true
                 switch result {
                 case .success(_):
                     if self.isAllRemotesLoaded {
                         callBack(result)
                     }
                 case .failed(_):
-                    callBack(result)
+                    if self.isPhotoLoadDone {
+                        callBack(result)
+                    }
                 }
             })
         }
@@ -353,7 +366,7 @@ class ItemsRepository {
             guard let pathVideo = self.filePathVideo,
                 let savedVideos = NSKeyedUnarchiver.unarchiveObject(withFile: pathVideo + "\(pageNum)") as? [WrapData?]
                 else {
-                    if self.allRemotePhotos.isEmpty {
+                    if self.allRemoteVideos.isEmpty {
                         finished(ResponseResult.failed(CustomErrors.unknown))
                     } else {
                         self.isAllVideosLoaded = true
