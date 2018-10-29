@@ -17,13 +17,16 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     init(sortingRules: SortedRules, fieldValue: FieldValue) {
         self.itemProvider = ItemsProvider(fieldValue: fieldValue)
         super.init(sortingRules: sortingRules)
+        
     }
 
     override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]? = nil) {
         
         originalFilters = filters
-        
         self.collectionView = collectionView
+        
+        self.scrollBarManager.addScrollBar(to: self.collectionView, delegate: self)
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -269,6 +272,8 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                         CellImageManager.clear()
                         self.needReloadData = false
                         self.collectionView?.reloadData()
+                        let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
+                        self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
                     }
                     self.isLocalFilesRequested = false
                     self.delegate?.filesAppendedAndSorted()
@@ -308,6 +313,8 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                         guard !self.isDropedData else {
                             return
                         }
+                        let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
+                        self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
                         self.delegate?.filesAppendedAndSorted()
                         self.isLocalFilesRequested = false
                         self.dispatchQueue.async { [weak self] in
@@ -397,9 +404,9 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         hideQSCard()
         
         DispatchQueue.main.async {
-                self.scrollBarManager.addScrollBar(to: self.collectionView, delegate: self)
-                let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
-                self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
+//                self.scrollBarManager.addScrollBar(to: self.collectionView, delegate: self)
+//                let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
+//                self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
                 CellImageManager.clear()
                 self.collectionView?.reloadData() ///Check if we can just reload one supplementary view
         }
