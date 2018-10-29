@@ -182,15 +182,17 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                                                       sortType: self.currentSortType,
                                                       compoundedCallback:
                     { [weak self] (compoundedItems, lefovers) in
-                        guard let `self` = self else {
-                            return
+                        self?.dispatchQueue.async {
+                            guard let `self` = self else {
+                                return
+                            }
+                            self.pageLeftOvers.removeAll()
+                            self.pageLeftOvers.append(contentsOf: lefovers)
+                            self.allMediaItems.append(contentsOf: compoundedItems)
+                            self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                            
+                            complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
                         }
-                        self.pageLeftOvers.removeAll()
-                        self.pageLeftOvers.append(contentsOf: lefovers)
-                        self.allMediaItems.append(contentsOf: compoundedItems)
-                        self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
-                        
-                        complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
                 })
             } else if self.isPaginationDidEnd {
                 let isEmptyLeftOvers = self.pageLeftOvers.filter{!$0.isLocalItem}.isEmpty
@@ -207,22 +209,25 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                                                      dropFirst: needToDropFirstItem,
                                                      compoundedCallback:
                     { [weak self] (compoundedItems, lefovers) in
-                        guard let `self` = self else {
-                            return
+                        self?.dispatchQueue.async {
+                            guard let `self` = self else {
+                                return
+                            }
+                            
+                            self.pageLeftOvers.removeAll()
+                            self.pageLeftOvers.append(contentsOf: lefovers)
+                            
+                            self.allMediaItems.append(contentsOf: compoundedItems)
+                            
+                            if compoundedItems.isEmpty,
+                                self.isPaginationDidEnd {
+                                self.isLocalPaginationOn = false
+                            }
+                            
+                            self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                            complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
                         }
                         
-                        self.pageLeftOvers.removeAll()
-                        self.pageLeftOvers.append(contentsOf: lefovers)
-                        
-                        self.allMediaItems.append(contentsOf: compoundedItems)
-                        
-                        if compoundedItems.isEmpty,
-                            self.isPaginationDidEnd {
-                            self.isLocalPaginationOn = false
-                        }
-                        
-                        self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
-                        complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
                 })
             } else if !self.isPaginationDidEnd { ///Middle page
                 let isEmptyLeftOvers = self.pageLeftOvers.isEmpty
@@ -240,16 +245,18 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                                                        sortType: self.currentSortType,
                                                        compoundedCallback:
                     { [weak self] (compoundedItems, lefovers) in
-                        guard let `self` = self else {
-                            return
+                        self?.dispatchQueue.async {
+                            guard let `self` = self else {
+                                return
+                            }
+                            self.pageLeftOvers.removeAll()
+                            self.pageLeftOvers.append(contentsOf: lefovers)
+                            
+                            self.allMediaItems.append(contentsOf: compoundedItems)
+                            
+                            self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
+                            complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
                         }
-                        self.pageLeftOvers.removeAll()
-                        self.pageLeftOvers.append(contentsOf: lefovers)
-                        
-                        self.allMediaItems.append(contentsOf: compoundedItems)
-                        
-                        self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
-                        complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
                 })
             }
         }
