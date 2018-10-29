@@ -17,7 +17,7 @@ class ItemsProvider {
     private var currentDataBasePage: Int = 0
 
     var isAllFilesDownloaded: Bool {
-        return itemsRepository.isAllRemotesDownloaded
+        return itemsRepository.isAllRemotesLoaded
     }
     
     //private let quickSearchService
