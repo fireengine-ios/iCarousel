@@ -30,6 +30,7 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
     var allFilesDownloadedCallback: VoidHandler?
     
     private let privateQueue = DispatchQueue(label: DispatchQueueLabels.itemsRepositoryBackgroundQueue)
+    private let privateConcurentQueue = DispatchQueue(label: DispatchQueueLabels.itemsRepositoryBackgroundQueue + "concurent", qos: .default , attributes: .concurrent)
     ///array of delegates would be better then one callback (or array of callbacks??)
     
     func updateCache() {
@@ -52,15 +53,20 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
     }
     
     private func downloadAllFiles(completion: @escaping VoidHandler) {
-        downloadPhotos() { [weak self] in
-            //FIXME: implement as one method by providing different searchFilds value
-            if let `self` = self, self.isAllRemotesDownloaded {
-                completion()
+        privateQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
             }
-        }
-        downloadVideos() { [weak self] in
-            if let `self` = self, self.isAllRemotesDownloaded {
-                completion()
+            self.downloadPhotos() { [weak self] in
+                //FIXME: implement as one method by providing different searchFilds value
+                if let `self` = self, self.isAllRemotesDownloaded {
+                    completion()
+                }
+            }
+            self.downloadVideos() { [weak self] in
+                if let `self` = self, self.isAllRemotesDownloaded {
+                    completion()
+                }
             }
         }
     }
@@ -105,33 +111,43 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
     
     
     func getNextStoredPhotosPage(range: CountableRange<Int>, storedRemotes: @escaping ItemsCallback) {
-        guard range.startIndex >= 0, range.startIndex < range.endIndex else {
-            storedRemotes([])
-            return
-        }
-        let arrayInRange = Array(allRemotePhotos.dropFirst(range.startIndex).prefix(range.endIndex - range.startIndex))
-        if arrayInRange.isEmpty, !isAllPhotosDownloaded {
-            lastAddedPhotoPageCallback = { [weak self] in
-                self?.getNextStoredPhotosPage(range: range, storedRemotes: storedRemotes)
+        privateConcurentQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
             }
-            return
+            guard range.startIndex >= 0, range.startIndex < range.endIndex else {
+                storedRemotes([])
+                return
+            }
+            let arrayInRange = Array(self.allRemotePhotos.dropFirst(range.startIndex).prefix(range.endIndex - range.startIndex))
+            if arrayInRange.isEmpty, !self.isAllPhotosDownloaded {
+                self.lastAddedPhotoPageCallback = { [weak self] in
+                    self?.getNextStoredPhotosPage(range: range, storedRemotes: storedRemotes)
+                }
+                return
+            }
+            storedRemotes(arrayInRange)
         }
-        storedRemotes(arrayInRange)
     }
     
     func getNextStoredVideosPage(range: CountableRange<Int>, storedRemotes: @escaping ItemsCallback) {
-        guard range.startIndex >= 0, range.startIndex < range.endIndex else {
-            storedRemotes([])
-            return
-        }
-        let arrayInRange = Array(allRemoteVideos.dropFirst(range.startIndex).prefix(range.endIndex - range.startIndex))
-        if arrayInRange.isEmpty, !isAllVideosDownloaded {
-            lastAddedVideoPageCallback = { [weak self] in
-                self?.getNextStoredVideosPage(range: range, storedRemotes: storedRemotes)
+        privateConcurentQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
             }
-            return
+            guard range.startIndex >= 0, range.startIndex < range.endIndex else {
+                storedRemotes([])
+                return
+            }
+            let arrayInRange = Array(self.allRemoteVideos.dropFirst(range.startIndex).prefix(range.endIndex - range.startIndex))
+            if arrayInRange.isEmpty, !self.isAllVideosDownloaded {
+                self.lastAddedVideoPageCallback = { [weak self] in
+                    self?.getNextStoredVideosPage(range: range, storedRemotes: storedRemotes)
+                }
+                return
+            }
+            storedRemotes(arrayInRange)
         }
-        storedRemotes(arrayInRange)
     }
     
     ///Download will be separated into download for photos pnly and videos only.
@@ -141,15 +157,20 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
             searchPhotoService = PhotoAndVideoService(requestSize: NumericConstants.itemProviderSearchRequest, type: .image)
         }
         searchPhotoService?.nextItems(sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remotes in
-            self?.allRemotePhotos.append(contentsOf: remotes)
-            self?.lastAddedPhotoPageCallback?()
-            guard remotes.count >= NumericConstants.itemProviderSearchRequest else {
-                self?.isAllPhotosDownloaded = true
-                finished()
-                self?.searchPhotoService = nil
-                return
+            self?.privateQueue.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                self.allRemotePhotos.append(contentsOf: remotes)
+                self.lastAddedPhotoPageCallback?()
+                guard remotes.count >= NumericConstants.itemProviderSearchRequest else {
+                    self.isAllPhotosDownloaded = true
+                    finished()
+                    self.searchPhotoService = nil
+                    return
+                }
+                self.downloadPhotos(finished: finished)
             }
-            self?.downloadPhotos(finished: finished)
         }, fail: { [weak self] in
             self?.searchPhotoService?.currentPage -= 1
             self?.downloadPhotos(finished: finished)
@@ -162,13 +183,18 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
             searchVideoService = PhotoAndVideoService(requestSize: NumericConstants.itemProviderSearchRequest, type: .video)
         }
         searchVideoService?.nextItems(sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remotes in
-            self?.allRemoteVideos.append(contentsOf: remotes)
-            self?.lastAddedVideoPageCallback?()
-            guard remotes.count >= NumericConstants.itemProviderSearchRequest else {
-                self?.isAllVideosDownloaded = true
-                finished()
-                self?.searchVideoService = nil
-                return
+            self?.privateQueue.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                self.allRemoteVideos.append(contentsOf: remotes)
+                self.lastAddedVideoPageCallback?()
+                guard remotes.count >= NumericConstants.itemProviderSearchRequest else {
+                    self.isAllVideosDownloaded = true
+                    finished()
+                    self.searchVideoService = nil
+                    return
+                }
             }
             self?.downloadVideos(finished: finished)
             }, fail: { [weak self] in
@@ -178,14 +204,19 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
     }
     
     private func saveItems() {
-        guard let pathPhoto = filePathPhoto,
-            let pathVideo = filePathVideo else {
-                isAllPhotosDownloaded = false
-                isAllVideosDownloaded = false
-            return
+        privateQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            guard let pathPhoto = self.filePathPhoto,
+                let pathVideo = self.filePathVideo else {
+                    self.isAllPhotosDownloaded = false
+                    self.isAllVideosDownloaded = false
+                    return
+            }
+            NSKeyedArchiver.archiveRootObject(self.allRemotePhotos, toFile: pathPhoto)
+            NSKeyedArchiver.archiveRootObject(self.allRemoteVideos, toFile: pathVideo)
         }
-        NSKeyedArchiver.archiveRootObject(allRemotePhotos, toFile: pathPhoto)
-        NSKeyedArchiver.archiveRootObject( allRemoteVideos, toFile: pathVideo)
     }
 
     private func loadItems(callBack: @escaping ResponseVoid) {
@@ -224,10 +255,12 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
     }
     
     func archiveObject(object: NSCoding?, path: String) {
-        guard let unwrapedObj = object else {
-            return
+        privateConcurentQueue.async {
+            guard let unwrapedObj = object else {
+                return
+            }
+            NSKeyedArchiver.archiveRootObject(unwrapedObj, toFile: path)
         }
-        NSKeyedArchiver.archiveRootObject(unwrapedObj, toFile: path)
     }
     
     func unarchiveObject(path: String) -> Any? {
