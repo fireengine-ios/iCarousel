@@ -195,8 +195,9 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
                     self.searchVideoService = nil
                     return
                 }
+                
+                self.downloadVideos(finished: finished)
             }
-            self?.downloadVideos(finished: finished)
             }, fail: { [weak self] in
                 self?.searchVideoService?.currentPage -= 1
                 self?.downloadVideos(finished: finished)
