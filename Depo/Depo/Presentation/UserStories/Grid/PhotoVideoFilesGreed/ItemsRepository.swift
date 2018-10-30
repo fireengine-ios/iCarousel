@@ -172,8 +172,10 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
                 self.downloadPhotos(finished: finished)
             }
         }, fail: { [weak self] in
-            self?.searchPhotoService?.currentPage -= 1
-            self?.downloadPhotos(finished: finished)
+            self?.privateQueue.async { [weak self] in
+                self?.searchPhotoService?.currentPage -= 1
+                self?.downloadPhotos(finished: finished)
+            }
         })
         
     }
@@ -195,11 +197,14 @@ class ItemsRepository {//}: NSKeyedArchiverDelegate {
                     self.searchVideoService = nil
                     return
                 }
+                
+                self.downloadVideos(finished: finished)
             }
-            self?.downloadVideos(finished: finished)
             }, fail: { [weak self] in
-                self?.searchVideoService?.currentPage -= 1
-                self?.downloadVideos(finished: finished)
+                self?.privateQueue.async { [weak self] in
+                    self?.searchVideoService?.currentPage -= 1
+                    self?.downloadVideos(finished: finished)
+                }
         })
     }
     
