@@ -40,6 +40,7 @@ class ItemsRepository {
     var allFilesDownloadedCallback: VoidHandler?
     
     private let privateQueue = DispatchQueue(label: DispatchQueueLabels.itemsRepositoryBackgroundQueue)
+    private let privateConcurentQueue = DispatchQueue(label: DispatchQueueLabels.itemsRepositoryBackgroundQueue + "concurent", qos: .default , attributes: .concurrent)
     ///array of delegates would be better then one callback (or array of callbacks??)
     
     func updateCache() {
@@ -69,13 +70,16 @@ class ItemsRepository {
     
     private func downloadAllFiles(completion: @escaping VoidHandler) {
         privateQueue.async { [weak self] in
-            self?.downloadPhotos() { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            self.downloadPhotos() { [weak self] in
                 //FIXME: implement as one method by providing different searchFilds value
                 if let `self` = self, self.isAllRemotesLoaded {
                     completion()
                 }
             }
-            self?.downloadVideos() { [weak self] in
+            self.downloadVideos() { [weak self] in
                 if let `self` = self, self.isAllRemotesLoaded {
                     completion()
                 }
@@ -150,7 +154,7 @@ class ItemsRepository {
     
     
     func getNextStoredPhotosPage(range: CountableRange<Int>, storedRemotes: @escaping ItemsCallback) {
-        self.privateQueue.async { [weak self] in
+        privateConcurentQueue.async { [weak self] in
             guard let `self` = self else {
                 return
             }
@@ -170,7 +174,7 @@ class ItemsRepository {
     }
     
     func getNextStoredVideosPage(range: CountableRange<Int>, storedRemotes: @escaping ItemsCallback) {
-        self.privateQueue.async { [weak self] in
+        privateConcurentQueue.async { [weak self] in
             guard let `self` = self else {
                 return
             }
@@ -197,26 +201,50 @@ class ItemsRepository {
         }
         searchPhotoService?.nextItems(sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remotes in
             self?.privateQueue.async { [weak self] in
+//<<<<<<< HEAD
+//                guard let _ = self?.searchPhotoService else {
+//                    return
+//                }
+//                self?.allRemotePhotos.append(contentsOf: remotes)
+//                self?.lastAddedPhotoPageCallback?()
+//                guard remotes.count >= NumericConstants.itemProviderSearchRequest else {
+//                    self?.isAllPhotosLoaded = true
+//                    finished()
+//                    self?.searchPhotoService = nil
+//                    return
+//                }
+//                self?.downloadPhotos(finished: finished)
+//            }
+//        }, fail: { [weak self] in
+//            //Check Reachability?
+//            guard let _ = self?.searchPhotoService else {
+//                return
+//            }
+//            self?.searchPhotoService?.currentPage -= 1
+//            self?.downloadPhotos(finished: finished)
+//=======
+                guard let `self` = self,
+                    let _ = self.searchPhotoService else {
+                    return
+                }
+                self.allRemotePhotos.append(contentsOf: remotes)
+                self.lastAddedPhotoPageCallback?()
+                guard remotes.count >= NumericConstants.itemProviderSearchRequest else {
+                    self.isAllPhotosLoaded = true
+                    finished()
+                    self.searchPhotoService = nil
+                    return
+                }
+                self.downloadPhotos(finished: finished)
+            }
+        }, fail: { [weak self] in
+            self?.privateQueue.async { [weak self] in
                 guard let _ = self?.searchPhotoService else {
                     return
                 }
-                self?.allRemotePhotos.append(contentsOf: remotes)
-                self?.lastAddedPhotoPageCallback?()
-                guard remotes.count >= NumericConstants.itemProviderSearchRequest else {
-                    self?.isAllPhotosLoaded = true
-                    finished()
-                    self?.searchPhotoService = nil
-                    return
-                }
+                self?.searchPhotoService?.currentPage -= 1
                 self?.downloadPhotos(finished: finished)
             }
-        }, fail: { [weak self] in
-            //Check Reachability?
-            guard let _ = self?.searchPhotoService else {
-                return
-            }
-            self?.searchPhotoService?.currentPage -= 1
-            self?.downloadPhotos(finished: finished)
         })
         
     }
@@ -227,29 +255,47 @@ class ItemsRepository {
         }
         searchVideoService?.nextItems(sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remotes in
             self?.privateQueue.async { [weak self] in
-                guard let _ = self?.searchVideoService else {
+//<<<<<<< HEAD
+//                guard let _ = self?.searchVideoService else {
+//                    return
+//                }
+//                self?.allRemoteVideos.append(contentsOf: remotes)
+//                self?.lastAddedVideoPageCallback?()
+//                guard remotes.count >= NumericConstants.itemProviderSearchRequest else {
+//                    self?.isAllVideosLoaded = true
+//                    finished()
+//                    self?.searchVideoService = nil
+//                    return
+//                }
+//=======
+                guard let `self` = self,
+                    let _ = self.searchVideoService else {
                     return
                 }
-                self?.allRemoteVideos.append(contentsOf: remotes)
-                self?.lastAddedVideoPageCallback?()
+                self.allRemoteVideos.append(contentsOf: remotes)
+                self.lastAddedVideoPageCallback?()
                 guard remotes.count >= NumericConstants.itemProviderSearchRequest else {
-                    self?.isAllVideosLoaded = true
+                    self.isAllVideosLoaded = true
                     finished()
-                    self?.searchVideoService = nil
+                    self.searchVideoService = nil
                     return
                 }
+                
+                self.downloadVideos(finished: finished)
             }
-            self?.downloadVideos(finished: finished)
             }, fail: { [weak self] in
-                guard let _ = self?.searchVideoService else {
-                    return
+                self?.privateQueue.async { [weak self] in
+                    guard let _ = self?.searchVideoService else {
+                        return
+                    }
+                    self?.searchVideoService?.currentPage -= 1
+                    self?.downloadVideos(finished: finished)
                 }
-                self?.searchVideoService?.currentPage -= 1
-                self?.downloadVideos(finished: finished)
         })
     }
     
     private func saveItems() {
+//<<<<<<< HEAD
         
         guard let pathPhoto = self.filePathPhoto,
             let pathVideo = self.filePathVideo else {
@@ -264,6 +310,21 @@ class ItemsRepository {
         
 //        NSKeyedArchiver.archiveRootObject(allRemotePhotos, toFile: pathPhoto)
 //        NSKeyedArchiver.archiveRootObject(allRemoteVideos, toFile: pathVideo)
+//=======
+//        privateQueue.async { [weak self] in
+//            guard let `self` = self else {
+//                return
+//            }
+//            guard let pathPhoto = self.filePathPhoto,
+//                let pathVideo = self.filePathVideo else {
+//                    self.isAllPhotosDownloaded = false
+//                    self.isAllVideosDownloaded = false
+//                    return
+//            }
+//            NSKeyedArchiver.archiveRootObject(self.allRemotePhotos, toFile: pathPhoto)
+//            NSKeyedArchiver.archiveRootObject(self.allRemoteVideos, toFile: pathVideo)
+//        }
+//>>>>>>> quickscroll-plan-a-develop
     }
     
     private func archiveInRangeTillFinished(items: [WrapData], toFile: String, pageNum: Int = 0) {
@@ -404,10 +465,12 @@ class ItemsRepository {
     }
     
     func archiveObject(object: NSCoding?, path: String) {
-        guard let unwrapedObj = object else {
-            return
+        privateConcurentQueue.async {
+            guard let unwrapedObj = object else {
+                return
+            }
+            NSKeyedArchiver.archiveRootObject(unwrapedObj, toFile: path)
         }
-        NSKeyedArchiver.archiveRootObject(unwrapedObj, toFile: path)
     }
     
     func unarchiveObject(path: String) -> Any? {
