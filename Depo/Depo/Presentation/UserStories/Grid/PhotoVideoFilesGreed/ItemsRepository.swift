@@ -21,8 +21,8 @@ class ItemsRepository {
     fileprivate static var instance: ItemsRepository?
     
     let pathToMetaDataComponent = "MetaData"
-    let pathToPhotoComponent = "StoragePhoto"
-    let pathToVideoComponent = "StorageVideo"
+    private let pathToPhotoComponent = "StoragePhoto"
+    private let pathToVideoComponent = "StorageVideo"
     
     var isAllRemotesLoaded: Bool {
         return isAllPhotosLoaded && isAllVideosLoaded
@@ -134,7 +134,7 @@ class ItemsRepository {
             try? FileManager.default.removeItem(atPath: path)
         }
     }
-    
+    /*
     func getSavedAllSavedItems(fieldType: FieldValue, itemsCallback: @escaping ItemsCallback) {
         ///TODO: its better to add here the callback when all added then call the method again,
         ///BUT for that to happen we need array of callbacks or delegates
@@ -151,7 +151,7 @@ class ItemsRepository {
             break
         }
     }
-    
+    */
     
     func getNextStoredPhotosPage(range: CountableRange<Int>, storedRemotes: @escaping ItemsCallback) {
         privateConcurentQueue.async { [weak self] in
@@ -295,8 +295,6 @@ class ItemsRepository {
     }
     
     private func saveItems() {
-//<<<<<<< HEAD
-        
         guard let pathPhoto = self.filePathPhoto,
             let pathVideo = self.filePathVideo else {
                 self.isAllPhotosLoaded = false
@@ -308,9 +306,6 @@ class ItemsRepository {
         debugPrint("!-- saveItems ALL VIDEOS array count \(self.allRemoteVideos.count)")
         self.archiveInRangeTillFinished(items: self.allRemoteVideos, toFile: pathVideo)
         
-//        NSKeyedArchiver.archiveRootObject(allRemotePhotos, toFile: pathPhoto)
-//        NSKeyedArchiver.archiveRootObject(allRemoteVideos, toFile: pathVideo)
-//=======
 //        privateQueue.async { [weak self] in
 //            guard let `self` = self else {
 //                return
@@ -325,24 +320,6 @@ class ItemsRepository {
 //            NSKeyedArchiver.archiveRootObject(self.allRemoteVideos, toFile: pathVideo)
 //        }
 //>>>>>>> quickscroll-plan-a-develop
-    }
-    
-    private func archiveInRangeTillFinished(items: [WrapData], toFile: String, pageNum: Int = 0) {
-        self.privateQueue.async { [weak self] in
-            let startIndex = pageNum * NumericConstants.itemProviderSearchRequest
-            let endIndex = (pageNum + 1) * NumericConstants.itemProviderSearchRequest
-            
-            let arrayInRange = Array(items.dropFirst(startIndex).prefix(endIndex))
-            debugPrint("!-- archiveInRangeTillFinished array count\(arrayInRange.count)")
-            guard !arrayInRange.isEmpty else {
-                return
-            }
-            let pathToSave = toFile + "\(pageNum)"
-            debugPrint("!-- archiveInRangeTillFinished \(pageNum) with path \(pathToSave)")
-            
-            NSKeyedArchiver.archiveRootObject(arrayInRange, toFile: pathToSave)
-            self?.archiveInRangeTillFinished(items: items, toFile: toFile, pageNum: pageNum + 1)
-        }
     }
     
     private var isPhotoLoadDone = false
@@ -386,6 +363,28 @@ class ItemsRepository {
                     }
                 }
             })
+        }
+    }
+}
+
+//MARK:- Archiving/Unarchiving stuff
+extension ItemsRepository {
+    
+    private func archiveInRangeTillFinished(items: [WrapData], toFile: String, pageNum: Int = 0) {
+        self.privateQueue.async { [weak self] in
+            let startIndex = pageNum * NumericConstants.itemProviderSearchRequest
+            let endIndex = (pageNum + 1) * NumericConstants.itemProviderSearchRequest
+            
+            let arrayInRange = Array(items.dropFirst(startIndex).prefix(endIndex))
+            debugPrint("!-- archiveInRangeTillFinished array count\(arrayInRange.count)")
+            guard !arrayInRange.isEmpty else {
+                return
+            }
+            let pathToSave = toFile + "\(pageNum)"
+            debugPrint("!-- archiveInRangeTillFinished \(pageNum) with path \(pathToSave)")
+            
+            NSKeyedArchiver.archiveRootObject(arrayInRange, toFile: pathToSave)
+            self?.archiveInRangeTillFinished(items: items, toFile: toFile, pageNum: pageNum + 1)
         }
     }
     
@@ -447,6 +446,24 @@ class ItemsRepository {
         }
     }
     
+    func archiveObject(object: NSCoding?, path: String) {
+        privateConcurentQueue.async {
+            guard let unwrapedObj = object else {
+                return
+            }
+            NSKeyedArchiver.archiveRootObject(unwrapedObj, toFile: path)
+        }
+    }
+    
+    func unarchiveObject(path: String) -> Any? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: path)
+    }
+    
+}
+
+//MARK:- File Path Stuff
+extension ItemsRepository {
+    
     private var filePathURL: URL? {
         let manager = FileManager.default
         return manager.urls(for: .documentDirectory, in: .userDomainMask).first
@@ -461,20 +478,7 @@ class ItemsRepository {
     }
     
     func getPath(component: String) -> String? {
-         return filePathURL?.appendingPathComponent(component).path
-    }
-    
-    func archiveObject(object: NSCoding?, path: String) {
-        privateConcurentQueue.async {
-            guard let unwrapedObj = object else {
-                return
-            }
-            NSKeyedArchiver.archiveRootObject(unwrapedObj, toFile: path)
-        }
-    }
-    
-    func unarchiveObject(path: String) -> Any? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: path)
+        return filePathURL?.appendingPathComponent(component).path
     }
     
 }

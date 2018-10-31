@@ -65,9 +65,9 @@ class ItemsProvider {
         }
     }
 
-    func getAllFieldRelatedSavedRemoteItems(itemsCallback: @escaping ItemsCallback) {
-        //TODO: additional safety in ItemsRepository
-        itemsRepository.getSavedAllSavedItems(fieldType: fieldValue, itemsCallback: itemsCallback)
-    }
+//    func getAllFieldRelatedSavedRemoteItems(itemsCallback: @escaping ItemsCallback) {
+//        //TODO: additional safety in ItemsRepository
+//        itemsRepository.getSavedAllSavedItems(fieldType: fieldValue, itemsCallback: itemsCallback)
+//    }
     
 }
