@@ -87,53 +87,7 @@ class ItemsRepository {
         }
     }
     
-    func dropCache() {
-        guard let pathPhoto = filePathPhoto,
-            let pathVideo = filePathVideo else {
-                return
-        }
-        searchPhotoService = nil
-        searchVideoService = nil
-        isPhotoLoadDone = false
-        isVideoLoadDone = false
-        dropPhotoItems()
-        dropVideoItems()
-        allRemotePhotos.removeAll()
-        allRemoteVideos.removeAll()
-        PhotoVideoFilesGreedModuleStatusContainer.shared.isVideScreenPaginationDidEnd = false
-        PhotoVideoFilesGreedModuleStatusContainer.shared.isPhotoScreenPaginationDidEnd = false
-        isAllPhotosLoaded = false
-        isAllVideosLoaded = false
-        
-        ///FOR now its easier and more efficient to create new instance then canceling ongoing request/or operation
-        ItemsRepository.instance = nil
-    }
     
-    private func dropPhotoItems(pageNum: Int = 0) {
-        guard let pathPhoto = self.filePathPhoto else {
-            return
-        }
-        debugPrint("!-- dropPhotoItems \(pageNum)")
-        dropItem(path: pathPhoto + "\(pageNum)") { [weak self] in
-            self?.dropPhotoItems(pageNum: pageNum + 1)
-        }
-    }
-    
-    private func dropVideoItems(pageNum: Int = 0) {
-        guard let pathVideo = self.filePathVideo  else {
-            return
-        }
-        debugPrint("!-- dropVideoItems \(pageNum)")
-        dropItem(path: pathVideo + "\(pageNum)") { [weak self] in
-            self?.dropVideoItems(pageNum: pageNum + 1)
-        }
-    }
-    
-    private func dropItem(path: String, callback: VoidHandler) {
-        if FileManager.default.fileExists(atPath: path) {
-            try? FileManager.default.removeItem(atPath: path)
-        }
-    }
     /*
     func getSavedAllSavedItems(fieldType: FieldValue, itemsCallback: @escaping ItemsCallback) {
         ///TODO: its better to add here the callback when all added then call the method again,
@@ -365,6 +319,58 @@ class ItemsRepository {
             })
         }
     }
+    
+    
+    //MARK:- Drop
+    
+    func dropCache() {
+        guard let pathPhoto = filePathPhoto,
+            let pathVideo = filePathVideo else {
+                return
+        }
+        searchPhotoService = nil
+        searchVideoService = nil
+        isPhotoLoadDone = false
+        isVideoLoadDone = false
+        dropPhotoItems()
+        dropVideoItems()
+        allRemotePhotos.removeAll()
+        allRemoteVideos.removeAll()
+        PhotoVideoFilesGreedModuleStatusContainer.shared.isVideScreenPaginationDidEnd = false
+        PhotoVideoFilesGreedModuleStatusContainer.shared.isPhotoScreenPaginationDidEnd = false
+        isAllPhotosLoaded = false
+        isAllVideosLoaded = false
+        
+        ///FOR now its easier and more efficient to create new instance then canceling ongoing request/or operation
+        ItemsRepository.instance = nil
+    }
+    
+    private func dropPhotoItems(pageNum: Int = 0) {
+        guard let pathPhoto = self.filePathPhoto else {
+            return
+        }
+        debugPrint("!-- dropPhotoItems \(pageNum)")
+        dropItem(path: pathPhoto + "\(pageNum)") { [weak self] in
+            self?.dropPhotoItems(pageNum: pageNum + 1)
+        }
+    }
+    
+    private func dropVideoItems(pageNum: Int = 0) {
+        guard let pathVideo = self.filePathVideo  else {
+            return
+        }
+        debugPrint("!-- dropVideoItems \(pageNum)")
+        dropItem(path: pathVideo + "\(pageNum)") { [weak self] in
+            self?.dropVideoItems(pageNum: pageNum + 1)
+        }
+    }
+    
+    private func dropItem(path: String, callback: VoidHandler) {
+        if FileManager.default.fileExists(atPath: path) {
+            try? FileManager.default.removeItem(atPath: path)
+        }
+    }
+    
 }
 
 //MARK:- Archiving/Unarchiving stuff
