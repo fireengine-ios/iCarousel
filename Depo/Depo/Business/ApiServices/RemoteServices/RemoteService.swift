@@ -49,6 +49,7 @@ class RemoteItemsService {
         }
         
         self.fieldValue = fieldValue
+        debugPrint("!-- init requst size \(requestSize) field value = \(fieldValue)")
         self.requestSize = requestSize
         currentPage = 0
         queueOperations = OperationQueue()
@@ -75,8 +76,9 @@ class RemoteItemsService {
     
     func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         debugLog("RemoteItemsService nextItems")
-
+        debugPrint("!-- NEXT ITEMS field \(fieldValue) and page \(currentPage)")
         if let unwrapedFieldValue = newFieldValue {
+            debugPrint("!-- NEXT ITEMS NEW field \(unwrapedFieldValue) and page \(currentPage)")
             fieldValue = unwrapedFieldValue
         }
         
