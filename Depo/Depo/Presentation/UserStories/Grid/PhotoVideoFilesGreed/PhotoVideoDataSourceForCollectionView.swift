@@ -34,7 +34,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         registerFooters()
         registerCells()
         
-        if !ItemsRepository.shared.allItemsReady {
+        if !ItemsRepository.sharedSession.allItemsReady {
             CardsManager.default.startOperationWith(type: .prepareQuickScroll)
 //            ItemsRepository.shared.allFilesDownloadedCallback = {
 //                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)

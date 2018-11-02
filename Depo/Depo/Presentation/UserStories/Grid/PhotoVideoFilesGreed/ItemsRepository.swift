@@ -8,7 +8,7 @@
 
 class ItemsRepository {
     
-    static var shared: ItemsRepository {
+    static var sharedSession: ItemsRepository {
         if let unwrapedInstance = ItemsRepository.instance {
             return unwrapedInstance
         } else {

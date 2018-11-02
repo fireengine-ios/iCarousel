@@ -12,7 +12,7 @@ class ItemsProvider {
     
     let fieldValue: FieldValue
     private var allRemoteItems = [WrapData]()
-    let itemsRepository = ItemsRepository.shared
+    let itemsRepository = ItemsRepository.sharedSession
     var databasePageSize = NumericConstants.numberOfLocalItemsOnPage
     private var currentDataBasePage: Int = 0
 
