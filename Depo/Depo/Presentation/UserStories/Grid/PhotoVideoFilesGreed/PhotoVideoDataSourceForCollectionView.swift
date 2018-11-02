@@ -432,10 +432,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
             cell_.setAssetId(local.asset.localIdentifier)
-            self.filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
+            filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
                 DispatchQueue.main.async {
                     if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
-                        cell_.setImage(image: image, animated:  false)
+                        cell_.setImage(image: image, animated:  true)
                     } else {
                         cell_.setPlaceholderImage(fileType: wraped.fileType)
                     }
@@ -459,6 +459,43 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         
         if let cell = cell as? BasicCollectionMultiFileCell {
             cell.moreButton.isHidden = !needShow3DotsInCell
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionElementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID, for: indexPath)
+            
+            guard let textHeader = headerView as? CollectionViewSimpleHeaderWithText else {
+                return headerView
+            }
+        
+            let title = getHeaderText(indexPath: indexPath)
+            
+            textHeader.setText(text: title)
+//            textHeader.setSelectedState(selected: isHeaderSelected(section: indexPath.section), activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
+            textHeader.selectionView.tag = indexPath.section
+            if (textHeader.selectionView.gestureRecognizers == nil){
+                let tapGesture = UITapGestureRecognizer(target: self,
+                                                        action: #selector(onHeaderTap))
+                textHeader.selectionView.addGestureRecognizer(tapGesture)
+            }
+            headers.insert(textHeader)
+            return headerView
+        case UICollectionElementKindSectionFooter:
+            if indexPath.section == allItems.count - 1, !isPaginationDidEnd,
+                let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter, for: indexPath) as? CollectionViewSpinnerFooter
+            {
+                footerView.startSpinner()
+                return footerView
+                
+            } else {
+                return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter, for: indexPath)
+            }
+        default:
+            assert(false, "Unexpected element kind")
+            return UICollectionReusableView()
         }
     }
     
