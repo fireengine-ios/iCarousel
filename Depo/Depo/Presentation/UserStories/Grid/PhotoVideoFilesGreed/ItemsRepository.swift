@@ -187,9 +187,6 @@ class ItemsRepository {
             guard let `self` = self else {
                 return
             }
-            self.allRemotePhotos.sort{
-                $0.metaDate > $1.metaDate
-            }
             if self.isAllRemotesLoaded {
                 callBack(result)
             }
@@ -199,9 +196,6 @@ class ItemsRepository {
         unArchiveVideoInRangeTillFinished(finished: { [weak self] result in
             guard let `self` = self else {
                 return
-            }
-            self.allRemoteVideos.sort{
-                $0.metaDate > $1.metaDate
             }
             if self.isAllRemotesLoaded {
                 callBack(result)
@@ -262,10 +256,11 @@ extension ItemsRepository {
         let startIndex = pageNum * NumericConstants.itemProviderSearchRequest
         let endIndex = (pageNum + 1) * NumericConstants.itemProviderSearchRequest
         
-        let arrayInRange = Array(items.dropFirst(startIndex).prefix(endIndex))
+        let arrayInRange = Array(items.dropFirst(startIndex).prefix(endIndex - startIndex))
         guard !arrayInRange.isEmpty else {
             return
         }
+        
         let pathToSave = toFile + "\(pageNum)"
         
         NSKeyedArchiver.archiveRootObject(arrayInRange, toFile: pathToSave)
