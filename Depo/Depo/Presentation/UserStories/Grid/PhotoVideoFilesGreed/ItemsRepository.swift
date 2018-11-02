@@ -25,17 +25,12 @@ class ItemsRepository {
     private let pathToVideoComponent = "StorageVideo"
     
     private var isAllRemotesLoaded: Bool {
-        debugPrint("!-- isAllRemotesLoaded \(isAllPhotosLoaded && isAllVideosLoaded), isAllPhotosLoaded \(isAllPhotosLoaded), isAllVideosLoaded \(isAllVideosLoaded)")
         return isAllPhotosLoaded && isAllVideosLoaded
     }
     private var isAllPhotosLoaded = false
     private var isAllVideosLoaded = false
     
     var allItemsReady = false
-    
-    //FIXME: flags too similar
-//    private var isPhotoLoadDone = false
-//    private var isVideoLoadDone = false
     
     private var allRemotePhotos = [WrapData]()
     private var allRemoteVideos = [WrapData]()
@@ -105,7 +100,6 @@ class ItemsRepository {
         }
         searchPhotoService?.nextItems(sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remotes in
             self?.privateQueuePhoto.async { [weak self] in
-                debugPrint("!--downloadPhotos number of remotes \(remotes.count)")
                 guard let `self` = self,
                     let _ = self.searchPhotoService else {
                     return
@@ -138,7 +132,6 @@ class ItemsRepository {
         }
         searchVideoService?.nextItems(sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remotes in
             self?.privateQueueVideo.async { [weak self] in
-                debugPrint("!--downloadVideos number of remotes \(remotes.count)")
                 guard let `self` = self,
                     let _ = self.searchVideoService else {
                         return
@@ -172,22 +165,18 @@ class ItemsRepository {
                 self.isAllVideosLoaded = false
                 return
         }
-        debugPrint("!-- saveItems ALL PHOTOS array count \(self.allRemotePhotos.count)")
         privateQueuePhoto.async { [weak self] in
             guard let `self` = self else {
                 return
             }
             self.archiveInRangeTillFinished(items: self.allRemotePhotos, toFile: pathPhoto)
         }
-        
-        debugPrint("!-- saveItems ALL VIDEOS array count \(self.allRemoteVideos.count)")
         privateQueueVideo.async { [weak self] in
             guard let `self` = self else {
                 return
             }
             self.archiveInRangeTillFinished(items: self.allRemoteVideos, toFile: pathVideo)
         }
-        
     }
     
     private func loadItems(callBack: @escaping ResponseVoid) {
@@ -218,14 +207,8 @@ class ItemsRepository {
     //MARK:- Drop
     
     func dropCache() {
-        guard let pathPhoto = filePathPhoto,
-            let pathVideo = filePathVideo else {
-                return
-        }
         searchPhotoService = nil
         searchVideoService = nil
-//        isPhotoLoadDone = false
-//        isVideoLoadDone = false
         dropPhotoItems()
         dropVideoItems()
         allRemotePhotos.removeAll()
@@ -244,7 +227,6 @@ class ItemsRepository {
         guard let pathPhoto = self.filePathPhoto else {
             return
         }
-        debugPrint("!-- dropPhotoItems \(pageNum)")
         dropItem(path: pathPhoto + "\(pageNum)") { [weak self] in
             self?.dropPhotoItems(pageNum: pageNum + 1)
         }
@@ -254,7 +236,6 @@ class ItemsRepository {
         guard let pathVideo = self.filePathVideo  else {
             return
         }
-        debugPrint("!-- dropVideoItems \(pageNum)")
         dropItem(path: pathVideo + "\(pageNum)") { [weak self] in
             self?.dropVideoItems(pageNum: pageNum + 1)
         }
@@ -276,12 +257,10 @@ extension ItemsRepository {
         let endIndex = (pageNum + 1) * NumericConstants.itemProviderSearchRequest
         
         let arrayInRange = Array(items.dropFirst(startIndex).prefix(endIndex))
-        debugPrint("!-- archiveInRangeTillFinished array count\(arrayInRange.count)")
         guard !arrayInRange.isEmpty else {
             return
         }
         let pathToSave = toFile + "\(pageNum)"
-        debugPrint("!-- archiveInRangeTillFinished \(pageNum) with path \(pathToSave)")
         
         NSKeyedArchiver.archiveRootObject(arrayInRange, toFile: pathToSave)
         archiveInRangeTillFinished(items: items, toFile: toFile, pageNum: pageNum + 1)
@@ -289,7 +268,6 @@ extension ItemsRepository {
     }
     
     private func unArchivePhotoInRangeTillFinished(pageNum: Int = 0, finished: @escaping ResponseVoid) {
-        debugPrint("!-- unArchivePhotoInRangeTillFinished \(pageNum)")
         self.privateQueuePhoto.async { [weak self] in
             guard let `self` = self else {
                 return
@@ -318,7 +296,6 @@ extension ItemsRepository {
     }
     
     private func unArchiveVideoInRangeTillFinished(pageNum: Int = 0, finished: @escaping ResponseVoid) {
-        debugPrint("!-- unArchiveVideoInRangeTillFinished \(pageNum)")
         self.privateQueueVideo.async { [weak self] in
             guard let `self` = self else {
                 return
