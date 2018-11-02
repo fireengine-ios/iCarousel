@@ -105,7 +105,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var selectedItemsArray = Set<BaseDataSourceItem>()
     
-    private var headers = Set([CollectionViewSimpleHeaderWithText]())
+    var headers = Set([CollectionViewSimpleHeaderWithText]())
     
     var enableSelectionOnHeader = false
     
