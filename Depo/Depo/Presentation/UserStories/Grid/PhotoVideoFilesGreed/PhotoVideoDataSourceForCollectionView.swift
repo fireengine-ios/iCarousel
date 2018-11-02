@@ -32,10 +32,8 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         registerCells()
         
         if !ItemsRepository.shared.isAllRemotesDownloaded {
-            CardsManager.default.startOperationWith(type: .prepareQuickScroll)
-//            ItemsRepository.shared.allFilesDownloadedCallback = {
-//                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-//            }
+            let cardType: OperationType = (itemProvider.fieldValue == .image) ? .preparePhotosQuickScroll : .prepareVideosQuickScroll
+            CardsManager.default.startOperationWith(type: cardType)
         }
     }
     
@@ -70,7 +68,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         case .image:
             PhotoVideoFilesGreedModuleStatusContainer.shared.isPhotoScreenPaginationDidEnd = false
         case .video:
-            PhotoVideoFilesGreedModuleStatusContainer.shared.isVideScreenPaginationDidEnd = false
+            PhotoVideoFilesGreedModuleStatusContainer.shared.isVideoScreenPaginationDidEnd = false
         default:
             break
         }
@@ -376,39 +374,33 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         }
     }
     
-    private func hideQSCard() {
-        guard PhotoVideoFilesGreedModuleStatusContainer.shared.isPhotoScreenPaginationDidEnd,
-            PhotoVideoFilesGreedModuleStatusContainer.shared.isVideScreenPaginationDidEnd else {
-                return
-        }
-        CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-//        if ItemsRepository.shared.isAllRemotesDownloaded {
-//            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-//        } else {
-//            ItemsRepository.shared.allFilesDownloadedCallback = {
-//                CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-//            }
-//        }
+    private func hideQSCard(photos: Bool) {
+        let cardType: OperationType = photos ? .preparePhotosQuickScroll : .prepareVideosQuickScroll
+        CardsManager.default.stopOperationWithType(type: cardType)
     }
     
     private func filesAppendedAndSorted() {
         delegate?.filesAppendedAndSorted()
+        
+        let statusContainer = PhotoVideoFilesGreedModuleStatusContainer.shared
+        
         switch itemProvider.fieldValue {
         case .image:
-            PhotoVideoFilesGreedModuleStatusContainer.shared.isPhotoScreenPaginationDidEnd = true
+            statusContainer.isPhotoScreenPaginationDidEnd = true
+            hideQSCard(photos: true)
         case .video:
-            PhotoVideoFilesGreedModuleStatusContainer.shared.isVideScreenPaginationDidEnd = true
+            statusContainer.isVideoScreenPaginationDidEnd = true
+            hideQSCard(photos: false)
         default:
             break
         }
-        hideQSCard()
         
         DispatchQueue.main.async {
-                self.scrollBarManager.addScrollBar(to: self.collectionView, delegate: self)
-                let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
-                self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
-                CellImageManager.clear()
-                self.collectionView?.reloadData() ///Check if we can just reload one supplementary view
+            self.scrollBarManager.addScrollBar(to: self.collectionView, delegate: self)
+            let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
+            self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
+            CellImageManager.clear()
+            self.collectionView?.reloadData() ///Check if we can just reload one supplementary view
         }
     }
     
