@@ -12,12 +12,12 @@ class ItemsProvider {
     
     let fieldValue: FieldValue
     private var allRemoteItems = [WrapData]()
-    let itemsRepository = ItemsRepository.shared
+    let itemsRepository = ItemsRepository.sharedSession
     var databasePageSize = NumericConstants.numberOfLocalItemsOnPage
     private var currentDataBasePage: Int = 0
 
     var isAllFilesDownloaded: Bool {
-        return itemsRepository.isAllRemotesDownloaded
+        return itemsRepository.allItemsReady
     }
     
     //private let quickSearchService
@@ -65,9 +65,9 @@ class ItemsProvider {
         }
     }
 
-    func getAllFieldRelatedSavedRemoteItems(itemsCallback: @escaping ItemsCallback) {
-        //TODO: additional safety in ItemsRepository
-        itemsRepository.getSavedAllSavedItems(fieldType: fieldValue, itemsCallback: itemsCallback)
-    }
+//    func getAllFieldRelatedSavedRemoteItems(itemsCallback: @escaping ItemsCallback) {
+//        //TODO: additional safety in ItemsRepository
+//        itemsRepository.getSavedAllSavedItems(fieldType: fieldValue, itemsCallback: itemsCallback)
+//    }
     
 }

@@ -85,7 +85,7 @@ class LoginInteractor: LoginInteractorInput {
             self.analyticsService.track(event: .login)
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
 //            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
-            ItemsRepository.shared.updateCache()
+            ItemsRepository.sharedSession.updateCache()
             DispatchQueue.main.async {
                 self.output?.succesLogin()
             }

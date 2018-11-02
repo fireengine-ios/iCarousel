@@ -653,8 +653,8 @@ class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
         }
         fileSize = aDecoder.decodeObject(forKey: SearchJsonKey.bytes) as? Int64 ?? 0
         id = aDecoder.decodeObject(forKey: SearchJsonKey.id) as? Int64
-        let metaDataPath = (ItemsRepository.shared.getPath(component: ItemsRepository.shared.pathToMetaDataComponent) ?? "") + "\(id ?? 0)"
-        metaData = ItemsRepository.shared.unarchiveObject(path: metaDataPath) as? BaseMetaData
+        let metaDataPath = (ItemsRepository.sharedSession.getPath(component: ItemsRepository.sharedSession.pathToMetaDataComponent) ?? "") + "\(id ?? 0)"
+        metaData = ItemsRepository.sharedSession.unarchiveObject(path: metaDataPath) as? BaseMetaData
         favorites = metaData?.favourite ?? false
         patchToPreview = .remoteUrl(URL(string: ""))//TODO: Change to medium by default
         status = Status(string:aDecoder.decodeObject(forKey: SearchJsonKey.status) as? String)
@@ -694,8 +694,8 @@ class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
         aCoder.encode(uuid, forKey: SearchJsonKey.uuid)
         aCoder.encode(fileSize, forKey: SearchJsonKey.bytes)
         aCoder.encode(id, forKey: SearchJsonKey.id)
-        let metaDataPath = (ItemsRepository.shared.getPath(component: ItemsRepository.shared.pathToMetaDataComponent) ?? "") + "\(id ?? 0)"
-        ItemsRepository.shared.archiveObject(object: metaData, path: metaDataPath)
+        let metaDataPath = (ItemsRepository.sharedSession.getPath(component: ItemsRepository.sharedSession.pathToMetaDataComponent) ?? "") + "\(id ?? 0)"
+        ItemsRepository.sharedSession.archiveObject(object: metaData, path: metaDataPath)
         aCoder.encode(status.hashValue, forKey: SearchJsonKey.status)
         aCoder.encode(tmpDownloadUrl, forKey: SearchJsonKey.tempDownloadURL)
         aCoder.encode(md5, forKey: SearchJsonKey.hash)
