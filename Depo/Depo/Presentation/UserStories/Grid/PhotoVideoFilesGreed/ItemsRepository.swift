@@ -219,7 +219,7 @@ class ItemsRepository {
         dropVideoItems()
         allRemotePhotos.removeAll()
         allRemoteVideos.removeAll()
-        PhotoVideoFilesGreedModuleStatusContainer.shared.isVideScreenPaginationDidEnd = false
+        PhotoVideoFilesGreedModuleStatusContainer.shared.isVideoScreenPaginationDidEnd = false
         PhotoVideoFilesGreedModuleStatusContainer.shared.isPhotoScreenPaginationDidEnd = false
         isAllPhotosLoaded = false
         isAllVideosLoaded = false

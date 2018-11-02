@@ -14,6 +14,6 @@ class PhotoVideoFilesGreedModuleStatusContainer {
     static let shared = PhotoVideoFilesGreedModuleStatusContainer()
     
     var isPhotoScreenPaginationDidEnd = false
-    var isVideScreenPaginationDidEnd = false
+    var isVideoScreenPaginationDidEnd = false
     
 }
