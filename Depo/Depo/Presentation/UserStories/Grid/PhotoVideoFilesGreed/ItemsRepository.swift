@@ -187,6 +187,9 @@ class ItemsRepository {
             guard let `self` = self else {
                 return
             }
+            self.allRemotePhotos.sort{
+                $0.metaDate > $1.metaDate
+            }
             if self.isAllRemotesLoaded {
                 callBack(result)
             }
@@ -196,6 +199,9 @@ class ItemsRepository {
         unArchiveVideoInRangeTillFinished(finished: { [weak self] result in
             guard let `self` = self else {
                 return
+            }
+            self.allRemoteVideos.sort{
+                $0.metaDate > $1.metaDate
             }
             if self.isAllRemotesLoaded {
                 callBack(result)
