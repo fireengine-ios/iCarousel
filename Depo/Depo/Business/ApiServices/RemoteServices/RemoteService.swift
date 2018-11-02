@@ -49,7 +49,6 @@ class RemoteItemsService {
         }
         
         self.fieldValue = fieldValue
-        debugPrint("!-- init requst size \(requestSize) field value = \(fieldValue)")
         self.requestSize = requestSize
         currentPage = 0
         queueOperations = OperationQueue()
