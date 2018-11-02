@@ -17,13 +17,16 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     init(sortingRules: SortedRules, fieldValue: FieldValue) {
         self.itemProvider = ItemsProvider(fieldValue: fieldValue)
         super.init(sortingRules: sortingRules)
+        
     }
 
     override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]? = nil) {
         
         originalFilters = filters
-        
         self.collectionView = collectionView
+        
+        self.scrollBarManager.addScrollBar(to: self.collectionView, delegate: self)
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -31,7 +34,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         registerFooters()
         registerCells()
         
-        if !ItemsRepository.shared.isAllRemotesDownloaded {
+        if !ItemsRepository.sharedSession.allItemsReady {
             let cardType: OperationType = (itemProvider.fieldValue == .image) ? .preparePhotosQuickScroll : .prepareVideosQuickScroll
             CardsManager.default.startOperationWith(type: cardType)
         }
@@ -180,7 +183,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                                                       sortType: self.currentSortType,
                                                       compoundedCallback:
                     { [weak self] (compoundedItems, lefovers) in
-                        self?.dispatchQueue.async {
+                        self?.dispatchQueue.async { [weak self] in
                             guard let `self` = self else {
                                 return
                             }
@@ -207,7 +210,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                                                      dropFirst: needToDropFirstItem,
                                                      compoundedCallback:
                     { [weak self] (compoundedItems, lefovers) in
-                        self?.dispatchQueue.async {
+                        self?.dispatchQueue.async { [weak self] in
                             guard let `self` = self else {
                                 return
                             }
@@ -225,7 +228,6 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                             self.isHeaderless ? self.setupOneSectionMediaItemsArray(items: self.allMediaItems) : self.breakItemsIntoSections(breakingArray: self.allMediaItems)
                             complition(ResponseResult.success(self.getIndexPathsForItems(compoundedItems)))
                         }
-                        
                 })
             } else if !self.isPaginationDidEnd { ///Middle page
                 let isEmptyLeftOvers = self.pageLeftOvers.isEmpty
@@ -243,7 +245,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                                                        sortType: self.currentSortType,
                                                        compoundedCallback:
                     { [weak self] (compoundedItems, lefovers) in
-                        self?.dispatchQueue.async {
+                        self?.dispatchQueue.async { [weak self] in
                             guard let `self` = self else {
                                 return
                             }
@@ -274,6 +276,8 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                         CellImageManager.clear()
                         self.needReloadData = false
                         self.collectionView?.reloadData()
+                        let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
+                        self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
                     }
                     self.isLocalFilesRequested = false
                     self.delegate?.filesAppendedAndSorted()
@@ -313,6 +317,8 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                         guard !self.isDropedData else {
                             return
                         }
+                        let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
+                        self.scrollBarManager.updateYearsView(with: self.allItems, emptyMetaItems: self.emptyMetaItems, cellHeight: cellHeight)
                         self.delegate?.filesAppendedAndSorted()
                         self.isLocalFilesRequested = false
                         self.dispatchQueue.async { [weak self] in
