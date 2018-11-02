@@ -253,6 +253,10 @@ extension ItemsRepository {
     
     private func archiveInRangeTillFinished(items: [WrapData], toFile: String, pageNum: Int = 0) {
         
+        guard pageNum >= 0 else {
+            return
+        }
+        
         let startIndex = pageNum * NumericConstants.itemProviderSearchRequest
         let endIndex = (pageNum + 1) * NumericConstants.itemProviderSearchRequest
         
