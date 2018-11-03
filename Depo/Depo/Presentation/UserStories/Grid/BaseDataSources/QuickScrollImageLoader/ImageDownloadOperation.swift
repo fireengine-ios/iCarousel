@@ -36,14 +36,14 @@ final class ImageDownloadOperation: Operation {
     override func main() {
         guard !isCancelled else { return }
         
-        guard let url = url else {
+        guard let url = url?.byTrimmingQuery else {
             outputBlock?(nil)
             return
         }
         
-        task = URLSession.sharedCustom.dataTask(with: url) { [weak self] data, _, error in
+        task = URLSession.sharedCustomImageDownload.dataTask(with: url) { [weak self] data, _, error in
             guard let `self` = self, !self.isCancelled else { return }
-            
+
             if error == nil, let data = data, let image = UIImage(data: data) {
                 self.outputBlock?(image)
             } else {
@@ -51,6 +51,7 @@ final class ImageDownloadOperation: Operation {
             }
             self.semaphore.signal()
         }
+
         
         task?.resume()
         
@@ -60,10 +61,15 @@ final class ImageDownloadOperation: Operation {
 
 
 private extension URLSession {
-    static let sharedCustom: URLSession = {
+    static let sharedCustomImageDownload: URLSession = {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         config.urlCache = nil
+        
+        let tokenStorage: TokenStorage = factory.resolve()
+        if let token = tokenStorage.accessToken {
+            config.httpAdditionalHeaders = [HeaderConstant.AuthToken: token]
+        }
         
         return URLSession(configuration: config)
     }()
