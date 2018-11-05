@@ -83,5 +83,8 @@ final class PhotoVideoFilesGreedModuleConfigurator {
         
         presenter.interactor = interactor
         viewController.output = presenter
+        
+        let notPermitted: OperationType = (filedType == .image) ? .prepareVideosQuickScroll : .preparePhotosQuickScroll
+        viewController.scrolliblePopUpView.addNotPermittedPopUpViewTypes(types: [notPermitted])
     }
 }
