@@ -17,6 +17,7 @@ final class TokenStorageUserDefaults: TokenStorage {
     
     private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
     
+    private (set) var lastSavedAccessToken: String?
     var accessToken: String? {
         get {
             guard let token = defaults?.string(forKey: accessTokenKey) else {
@@ -27,6 +28,7 @@ final class TokenStorageUserDefaults: TokenStorage {
         }
         set {
             defaults?.setValue(newValue, forKey: accessTokenKey)
+            lastSavedAccessToken = newValue
         }
     }
     

@@ -36,12 +36,13 @@ final class ImageDownloadOperation: Operation {
     override func main() {
         guard !isCancelled else { return }
         
-        guard let url = url?.byTrimmingQuery else {
+        guard let trimmedURL = url?.byTrimmingQuery else {
             outputBlock?(nil)
             return
         }
         
-        task = URLSession.sharedCustomImageDownload.dataTask(with: url) { [weak self] data, _, error in
+        let session = URLSession.sharedCustomImageDownload(updateToken: true)
+        task = session.dataTask(with: trimmedURL) { [weak self] data, _, error in
             guard let `self` = self, !self.isCancelled else { return }
 
             if error == nil, let data = data, let image = UIImage(data: data) {
@@ -61,16 +62,30 @@ final class ImageDownloadOperation: Operation {
 
 
 private extension URLSession {
-    static let sharedCustomImageDownload: URLSession = {
+    
+    private static let tokenStorage: TokenStorage = factory.resolve()
+    
+    private static let sharedCustomImageDownload: URLSession = {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         config.urlCache = nil
         
-        let tokenStorage: TokenStorage = factory.resolve()
         if let token = tokenStorage.accessToken {
             config.httpAdditionalHeaders = [HeaderConstant.AuthToken: token]
         }
         
         return URLSession(configuration: config)
     }()
+    
+    static func sharedCustomImageDownload(updateToken: Bool) -> URLSession {
+        let session = sharedCustomImageDownload
+        
+        if updateToken {
+            if let token = tokenStorage.lastSavedAccessToken {
+                session.configuration.httpAdditionalHeaders = [HeaderConstant.AuthToken: token]
+            }
+        }
+        
+        return session
+    }
 }
