@@ -18,6 +18,7 @@ final class TokenKeychainStorage: TokenStorage {
     
     private lazy var keychain = KeychainSwift()
     
+    private (set) var savedAccessToken: String?
     var accessToken: String? {
         get {
             guard let token = keychain.get(accessTokenKey) else {
@@ -31,6 +32,7 @@ final class TokenKeychainStorage: TokenStorage {
             /// You can use .accessibleAfterFirstUnlock if you need your app to access the keychain item while in the background. Note that it is less secure than the .accessibleWhenUnlocked option
             /// https://github.com/evgenyneu/keychain-swift#keychain_item_access
             keychain.set(newValue, forKey: accessTokenKey, withAccess: .accessibleAfterFirstUnlock)
+            savedAccessToken = newValue
         }
     }
     
@@ -56,6 +58,11 @@ final class TokenKeychainStorage: TokenStorage {
         get { return keychain.getBool(isClearTokensKey) ?? false }
         set { keychain.set(newValue, forKey: isClearTokensKey, withAccess: .accessibleAfterFirstUnlock) }
     }
+    
+    init() {
+        savedAccessToken = accessToken
+    }
+    
     
     func clearTokens() {
         accessToken = nil

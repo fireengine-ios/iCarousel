@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 
 final class ImageDownloadOperation: Operation {
@@ -17,16 +18,14 @@ final class ImageDownloadOperation: Operation {
     private var url: URL?
     private var task: URLSessionTask?
     
-    
     init(url: URL?) {
         self.url = url
-        
         super.init()
     }
     
-    
     override func cancel() {
         super.cancel()
+        
         task?.cancel()
         task = nil
         outputBlock?(nil)
@@ -34,43 +33,27 @@ final class ImageDownloadOperation: Operation {
     }
     
     override func main() {
-        guard !isCancelled else { return }
+        guard !isCancelled else {
+            return
+        }
         
-        guard let url = url?.byTrimmingQuery else {
+        guard let trimmedURL = url?.byTrimmingQuery else {
             outputBlock?(nil)
             return
         }
         
-        task = URLSession.sharedCustomImageDownload.dataTask(with: url) { [weak self] data, _, error in
-            guard let `self` = self, !self.isCancelled else { return }
-
-            if error == nil, let data = data, let image = UIImage(data: data) {
+        task = SessionManager.customDefault.request(trimmedURL)
+            .responseData { dataResponse in
+                guard let data = dataResponse.value, let image = UIImage(data: data) else {
+                    self.outputBlock?(nil)
+                    self.semaphore.signal()
+                    return
+                }
+                
                 self.outputBlock?(image)
-            } else {
-                self.outputBlock?(nil)
-            }
-            self.semaphore.signal()
-        }
+                self.semaphore.signal()
+            }.task
 
-        
-        task?.resume()
-        
         semaphore.wait()
     }
-}
-
-
-private extension URLSession {
-    static let sharedCustomImageDownload: URLSession = {
-        let config = URLSessionConfiguration.default
-        config.requestCachePolicy = .reloadIgnoringLocalCacheData
-        config.urlCache = nil
-        
-        let tokenStorage: TokenStorage = factory.resolve()
-        if let token = tokenStorage.accessToken {
-            config.httpAdditionalHeaders = [HeaderConstant.AuthToken: token]
-        }
-        
-        return URLSession(configuration: config)
-    }()
 }
