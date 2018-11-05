@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TokenStorage: class {
-    var lastSavedAccessToken: String? { get }
+    var savedAccessToken: String? { get }
     var accessToken: String? { get set }
     var refreshToken: String? { get set }
     var isRememberMe: Bool { get set }

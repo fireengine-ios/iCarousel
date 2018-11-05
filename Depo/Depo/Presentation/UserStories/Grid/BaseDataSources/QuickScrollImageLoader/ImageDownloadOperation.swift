@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 
 final class ImageDownloadOperation: Operation {
@@ -27,6 +28,7 @@ final class ImageDownloadOperation: Operation {
     
     override func cancel() {
         super.cancel()
+        
         task?.cancel()
         task = nil
         outputBlock?(nil)
@@ -41,51 +43,19 @@ final class ImageDownloadOperation: Operation {
             return
         }
         
-        let session = URLSession.sharedCustomImageDownload(updateToken: true)
-        task = session.dataTask(with: trimmedURL) { [weak self] data, _, error in
-            guard let `self` = self, !self.isCancelled else { return }
-
-            if error == nil, let data = data, let image = UIImage(data: data) {
+        let session = SessionManager.customDefault //URLSession.sharedCustomImageDownload(updateToken: true)
+        task = session.request(trimmedURL)
+            .responseData { dataResponse in
+                guard let data = dataResponse.value, let image = UIImage(data: data) else {
+                    self.outputBlock?(nil)
+                    self.semaphore.signal()
+                    return
+                }
+                
                 self.outputBlock?(image)
-            } else {
-                self.outputBlock?(nil)
-            }
-            self.semaphore.signal()
-        }
+                self.semaphore.signal()
+            }.task
 
-        
-        task?.resume()
-        
         semaphore.wait()
-    }
-}
-
-
-private extension URLSession {
-    
-    private static let tokenStorage: TokenStorage = factory.resolve()
-    
-    private static let sharedCustomImageDownload: URLSession = {
-        let config = URLSessionConfiguration.default
-        config.requestCachePolicy = .reloadIgnoringLocalCacheData
-        config.urlCache = nil
-        
-        if let token = tokenStorage.accessToken {
-            config.httpAdditionalHeaders = [HeaderConstant.AuthToken: token]
-        }
-        
-        return URLSession(configuration: config)
-    }()
-    
-    static func sharedCustomImageDownload(updateToken: Bool) -> URLSession {
-        let session = sharedCustomImageDownload
-        
-        if updateToken {
-            if let token = tokenStorage.lastSavedAccessToken {
-                session.configuration.httpAdditionalHeaders = [HeaderConstant.AuthToken: token]
-            }
-        }
-        
-        return session
     }
 }
