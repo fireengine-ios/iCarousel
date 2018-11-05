@@ -18,13 +18,10 @@ final class ImageDownloadOperation: Operation {
     private var url: URL?
     private var task: URLSessionTask?
     
-    
     init(url: URL?) {
         self.url = url
-        
         super.init()
     }
-    
     
     override func cancel() {
         super.cancel()
@@ -36,15 +33,16 @@ final class ImageDownloadOperation: Operation {
     }
     
     override func main() {
-        guard !isCancelled else { return }
+        guard !isCancelled else {
+            return
+        }
         
         guard let trimmedURL = url?.byTrimmingQuery else {
             outputBlock?(nil)
             return
         }
         
-        let session = SessionManager.customDefault //URLSession.sharedCustomImageDownload(updateToken: true)
-        task = session.request(trimmedURL)
+        task = SessionManager.customDefault.request(trimmedURL)
             .responseData { dataResponse in
                 guard let data = dataResponse.value, let image = UIImage(data: data) else {
                     self.outputBlock?(nil)
