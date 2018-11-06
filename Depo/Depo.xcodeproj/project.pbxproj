@@ -2609,8 +2609,6 @@
 		B54BFF50202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
 		B54BFF5B202C8E180018AF82 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		B5513AF9205BAED70016C344 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
-		B556CE0021845DB70086D0F1 /* UIImage+blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CDFF21845DB70086D0F1 /* UIImage+blur.swift */; };
-		B556CE0121845DB70086D0F1 /* UIImage+blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CDFF21845DB70086D0F1 /* UIImage+blur.swift */; };
 		B556CE032184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
 		B556CE042184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
 		B5624791212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
@@ -5128,7 +5126,6 @@
 		B54BFF4B202C73790018AF82 /* SharedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
 		B54BFF4E202C74090018AF82 /* SharedEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedEnums.swift; sourceTree = "<group>"; };
 		B5513AF8205BAED70016C344 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
-		B556CDFF21845DB70086D0F1 /* UIImage+blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+blur.swift"; sourceTree = "<group>"; };
 		B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
 		B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AugmentedRealityDataSource.swift; sourceTree = "<group>"; };
 		B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityFileProvider.swift; sourceTree = "<group>"; };
@@ -10764,7 +10761,6 @@
 				B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */,
 				B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */,
 				B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */,
-				B556CDFF21845DB70086D0F1 /* UIImage+blur.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -14650,7 +14646,6 @@
 				8C0E8D9F1FDEBDFF00789C91 /* AppRater.m in Sources */,
 				8C0E8DA01FDEBDFF00789C91 /* RegistrationUserInfoModel.swift in Sources */,
 				8C0E8DA11FDEBDFF00789C91 /* AutoSyncPresenter.swift in Sources */,
-				B556CE0121845DB70086D0F1 /* UIImage+blur.swift in Sources */,
 				8C0E8DA31FDEBDFF00789C91 /* HomePageViewInput.swift in Sources */,
 				8C0E8DA41FDEBDFF00789C91 /* IntroduceModel.swift in Sources */,
 				8C0E8DA51FDEBDFF00789C91 /* BottomSelectionTabBarRouter.swift in Sources */,
@@ -15826,7 +15821,6 @@
 				CE51ACAD1EF90853005DCEE0 /* CoreTelephonyService.swift in Sources */,
 				CEE1D1F81F714DFE0008F4CF /* MediaItemsAlbum+CoreDataProperties.swift in Sources */,
 				7CFBB6DB1F28A40F009C32D5 /* BaseCollectionViewCell.swift in Sources */,
-				B556CE0021845DB70086D0F1 /* UIImage+blur.swift in Sources */,
 				7CDABD081F1E3A6300C8CC16 /* UserProfileInteractorInput.swift in Sources */,
 				CE4F4DC11F14BCC900EF1F0C /* EULAService.swift in Sources */,
 				8C06AC0C20066641003D8E05 /* TurkcellSecurityInteractor.swift in Sources */,
