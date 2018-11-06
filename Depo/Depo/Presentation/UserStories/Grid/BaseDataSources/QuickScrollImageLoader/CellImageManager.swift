@@ -117,7 +117,7 @@ final class CellImageManager {
             guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
             
             ///another guard in case if we want to save an unblurred thumbnail image
-            guard let blurredImage = outputImage.blurred() else { return }
+            guard let blurredImage = self.blurred(image: outputImage) else { return }
             
             self.cache(image: blurredImage, url: thumbnail)
             self.completionBlock?(blurredImage, false, self.uniqueId)
@@ -126,6 +126,13 @@ final class CellImageManager {
         }
         downloadThumbnailOperation.queuePriority = .high
         start(operation: downloadThumbnailOperation)
+    }
+    
+    private func blurred(image: UIImage, with radiusInPixels: Float = 2.0) -> UIImage? {
+        let filter = GPUImageGaussianBlurFilter()
+        filter.blurRadiusInPixels = CGFloat(radiusInPixels)
+        return filter.image(byFilteringImage: image)
+        
     }
     
     private func start(operation: Operation) {
