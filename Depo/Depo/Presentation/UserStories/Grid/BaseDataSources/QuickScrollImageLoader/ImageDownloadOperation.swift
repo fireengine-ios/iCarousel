@@ -43,6 +43,7 @@ final class ImageDownloadOperation: Operation {
         }
         
         task = SessionManager.customDefault.request(trimmedURL)
+            .customValidate()
             .responseData { dataResponse in
                 guard let data = dataResponse.value, let image = UIImage(data: data) else {
                     self.outputBlock?(nil)
@@ -52,7 +53,8 @@ final class ImageDownloadOperation: Operation {
                 
                 self.outputBlock?(image)
                 self.semaphore.signal()
-            }.task
+            }
+            .task
 
         semaphore.wait()
     }
