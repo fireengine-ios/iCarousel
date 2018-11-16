@@ -919,4 +919,10 @@ struct TextConstants {
     static let useFollowingPremiumMembership = NSLocalizedString("us_following_premium_membership", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let additionalDataStoragePackage = NSLocalizedString("additional_data_storage_package", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let month = NSLocalizedString("month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let backUpOriginalQuality = NSLocalizedString("back_up_with_original_quality", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let removeDuplicateContacts = NSLocalizedString("remove_duplicate_contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceRecognitionToReach = NSLocalizedString("face_recognition_to_reach", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let placeRecognitionToBeam = NSLocalizedString("place_recognition_to_beam", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let objectRecognitionToRemember = NSLocalizedString("objec_recognition_to_remember", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

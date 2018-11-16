@@ -39,15 +39,15 @@ final class PremiumView: UIView {
         for premiumListView in premiumListViews.enumerated() {
             switch types[premiumListView.offset] {
             case .backup:
-                premiumListView.element.configure(with: "Back up with Original Quality", image: UIImage(named: "backupPremiumIcon") ?? UIImage())
+                premiumListView.element.configure(with: TextConstants.backUpOriginalQuality, image: UIImage(named: "backupPremiumIcon") ?? UIImage())
             case .removeDuplicate:
-                premiumListView.element.configure(with: "Remove Duplicate Contacts from Your Directory", image: UIImage(named: "removeDuplicatePremiumIcon") ?? UIImage())
+                premiumListView.element.configure(with: TextConstants.removeDuplicateContacts, image: UIImage(named: "removeDuplicatePremiumIcon") ?? UIImage())
             case .faceRecognition:
-                premiumListView.element.configure(with: "Face Recognition to reach your loved one's memories", image: UIImage(named: "faceImagePremiumIcon") ?? UIImage())
+                premiumListView.element.configure(with: TextConstants.faceRecognitionToReach, image: UIImage(named: "faceImagePremiumIcon") ?? UIImage())
             case .placeRecognition:
-                premiumListView.element.configure(with: "Place Recognition to beam you up to the memories", image: UIImage(named: "placeRecognitionPremiumIcon") ?? UIImage())
+                premiumListView.element.configure(with: TextConstants.placeRecognitionToBeam, image: UIImage(named: "placeRecognitionPremiumIcon") ?? UIImage())
             case .objectRecognition:
-                premiumListView.element.configure(with: "Object Recognition to remember with things you love", image: UIImage(named: "objectRecognitionPremiumIcon") ?? UIImage())
+                premiumListView.element.configure(with: TextConstants.objectRecognitionToRemember, image: UIImage(named: "objectRecognitionPremiumIcon") ?? UIImage())
             }
         }
     }
