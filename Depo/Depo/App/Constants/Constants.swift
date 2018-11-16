@@ -914,4 +914,9 @@ struct TextConstants {
     static let launchCampaignCardDetail = NSLocalizedString("launch_campaign_card_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let launchCampaignCardTitle = NSLocalizedString("launch_campaign_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let launchCampaignCardMessage = NSLocalizedString("launch_campaign_card_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: - Premium
+    static let useFollowingPremiumMembership = NSLocalizedString("us_following_premium_membership", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let additionalDataStoragePackage = NSLocalizedString("additional_data_storage_package", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let month = NSLocalizedString("month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

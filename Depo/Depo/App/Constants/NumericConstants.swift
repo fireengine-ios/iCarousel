@@ -91,6 +91,15 @@ struct NumericConstants {
     static let intervalInSecondsBetweenAutoSyncItemsAppending = 8.0
     
     static let intervalInSecondsBetweenAppResponsivenessUpdate: TimeInterval = 3 * 60
+    
+    static let scaleForPremiumButton: CGFloat = 0.8
+    static let defaultScaleForPremiumButton: Double = 1
+    static let repeatCountForPremiumButton: Float = 1
+    static let delayForStartAnimation: Double = 3
+    static let durationBetweenAnimation: CFTimeInterval = 3
+    static let repeatCountForAnimation: Float = 10000000
+    
+    static let alphaForColorsPremiumButton: CGFloat = 0.85
 }
 
 struct RequestSizeConstant {
