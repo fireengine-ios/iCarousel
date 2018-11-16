@@ -916,13 +916,13 @@ struct TextConstants {
     static let launchCampaignCardMessage = NSLocalizedString("launch_campaign_card_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: - Premium
-    static let useFollowingPremiumMembership = NSLocalizedString("us_following_premium_membership", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let additionalDataStoragePackage = NSLocalizedString("additional_data_storage_package", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let useFollowingPremiumMembership = NSLocalizedString("Use the following Premium Membership advantages with only", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let additionalDataStoragePackage = NSLocalizedString("additional to your data storage package", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let month = NSLocalizedString("month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    static let backUpOriginalQuality = NSLocalizedString("back_up_with_original_quality", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let removeDuplicateContacts = NSLocalizedString("remove_duplicate_contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let faceRecognitionToReach = NSLocalizedString("face_recognition_to_reach", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let placeRecognitionToBeam = NSLocalizedString("place_recognition_to_beam", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let objectRecognitionToRemember = NSLocalizedString("objec_recognition_to_remember", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let backUpOriginalQuality = NSLocalizedString("Back up with Original Quality", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let removeDuplicateContacts = NSLocalizedString("Remove Duplicate Contacts from Your Directory", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceRecognitionToReach = NSLocalizedString("Face Recognition to reach your loved one's memories", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let placeRecognitionToBeam = NSLocalizedString("Place Recognition to beam you up to the memories", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let objectRecognitionToRemember = NSLocalizedString("Object Recognition to remember with things you love", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

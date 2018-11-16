@@ -32,29 +32,34 @@ final class PremiumHeaderView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        commonInit()
+        setupView()
     }
     
     // MARK: Utility methods(Public)
-    func configure(with title: String, price: String) {
+    func configure(with title: String, price: String, isHiddenTitleImageView: Bool?) {
         titleLabel.text = title
         
-        let description = TextConstants.useFollowingPremiumMembership + " \(price) /\(TextConstants.month)" + " \(TextConstants.additionalDataStoragePackage)"
-        subtitleLabel.attributedText = getAttributeText(with: description)
+        let descriptionPrice = "\(price)/\(TextConstants.month)"
+        
+        let description = TextConstants.useFollowingPremiumMembership + " \(descriptionPrice)" + " \(TextConstants.additionalDataStoragePackage)"
+        subtitleLabel.attributedText = getAttributeText(with: description, price: descriptionPrice)
+        
+        premiumHeaderImageView.isHidden = isHiddenTitleImageView ?? false
     }
 
     
     // MARK: Utility methods(Private)
     private func setup() {        
-        setStyle()
+        setupDesign()
         
         premiumButton.addSelectedAnimation()
         
         premiumHeaderImageView.image = UIImage(named: "crownPremiumIcon")
     }
     
-    private func commonInit() {
-        Bundle(for: PremiumHeaderView.self).loadNibNamed(String.init(describing: PremiumHeaderView.self), owner: self, options: nil)
+    private func setupView() {
+        let nibNamed = String(describing: PremiumHeaderView.self)
+        Bundle(for: PremiumHeaderView.self).loadNibNamed(nibNamed, owner: self, options: nil)
         guard let view = view else { return }
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -63,20 +68,20 @@ final class PremiumHeaderView: UIView {
         addSubview(view)
     }
     
-    private func setStyle() {
-        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: C.Font.titleLabelSize)
+    private func setupDesign() {
+        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
         titleLabel.textColor = ColorConstants.darkText
         
-        subtitleLabel.font = UIFont.TurkcellSaturaMedFont(size: C.Font.subtitleLabelSize)
+        subtitleLabel.font = UIFont.TurkcellSaturaMedFont(size: 20)
         subtitleLabel.textColor = ColorConstants.darkText
     }
     
-    private func getAttributeText(with text: String) -> NSMutableAttributedString {
-        let range = (description as NSString).range(of: "\(text) /\(TextConstants.month)")
-        let attr: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.TurkcellSaturaBolFont(size: C.Font.priceSize),
+    private func getAttributeText(with text: String, price: String) -> NSMutableAttributedString {
+        let range = (text as NSString).range(of: price)
+        let attr: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.TurkcellSaturaBolFont(size: 18),
                                                         NSAttributedStringKey.foregroundColor: UIColor.lrTealish]
         
-        let attributedString = NSMutableAttributedString(string: description)
+        let attributedString = NSMutableAttributedString(string: text)
         attributedString.addAttributes(attr, range: range)
         return attributedString
     }
@@ -86,13 +91,4 @@ final class PremiumHeaderView: UIView {
         delegate?.onBecomePremiumTap()
     }
     
-}
-
-// MARK: - Constants
-private enum C {
-    enum Font {
-        static let titleLabelSize: CGFloat = 20
-        static let subtitleLabelSize: CGFloat = 20
-        static let priceSize: CGFloat = 18
-    }
 }

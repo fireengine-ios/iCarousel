@@ -15,7 +15,7 @@ enum PremiumListType {
     case placeRecognition
     case objectRecognition
     
-    var allTypes: [PremiumListType] {
+    static var allTypes: [PremiumListType] {
         return [.backup, .removeDuplicate, .faceRecognition, .placeRecognition, .objectRecognition]
     }
 }
@@ -30,7 +30,7 @@ final class PremiumListView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        commonInit()
+        setupView()
     }
     
     override func awakeFromNib() {
@@ -46,8 +46,9 @@ final class PremiumListView: UIView {
     }
     
     // MARK: Utility methods(Private)
-    private func commonInit() {
-        Bundle(for: PremiumListView.self).loadNibNamed(String.init(describing: PremiumListView.self), owner: self, options: nil)
+    private func setupView() {
+        let nibNamed = String(describing: PremiumListView.self)
+        Bundle(for: PremiumListView.self).loadNibNamed(nibNamed, owner: self, options: nil)
         guard let view = view else { return }
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -57,19 +58,12 @@ final class PremiumListView: UIView {
     }
     
     private func setup() {
-        setStyle()
+        setupDesign()
     }
     
-    private func setStyle() {
-        titleLabel.font = UIFont.TurkcellSaturaMedFont(size: C.Font.size)
+    private func setupDesign() {
+        titleLabel.font = UIFont.TurkcellSaturaMedFont(size: 15)
         titleLabel.textColor = ColorConstants.darkText
     }
 
-}
-
-// MARK: - Constants
-private enum C {
-    enum Font {
-        static let size: CGFloat = 15
-    }
 }

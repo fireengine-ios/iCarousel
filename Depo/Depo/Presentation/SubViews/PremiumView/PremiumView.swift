@@ -30,12 +30,12 @@ final class PremiumView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        commonInit()
+        setupView()
     }
     
     // MARK: Utility methods(Public)
-    func configure(with title: String, price: String, types: [PremiumListType]) {
-        premiumHeaderView.configure(with: title, price: price)
+    func configure(with title: String, price: String, types: [PremiumListType], isHiddenTitleImageView: Bool? = false) {
+        premiumHeaderView.configure(with: title, price: price, isHiddenTitleImageView: isHiddenTitleImageView)
         for premiumListView in premiumListViews.enumerated() {
             switch types[premiumListView.offset] {
             case .backup:
@@ -53,8 +53,9 @@ final class PremiumView: UIView {
     }
     
     // MARK: Utility methods(Private)
-    private func commonInit() {
-        Bundle(for: PremiumView.self).loadNibNamed(String(describing: PremiumView.self), owner: self, options: nil)
+    private func setupView() {
+        let nibNamed = String(describing: PremiumView.self)
+        Bundle(for: PremiumView.self).loadNibNamed(nibNamed, owner: self, options: nil)
         guard let view = view else { return }
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]

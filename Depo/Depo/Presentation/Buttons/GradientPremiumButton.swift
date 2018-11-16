@@ -8,6 +8,11 @@
 
 import UIKit
 
+private enum GradientPoint {
+    static var start: CGPoint = CGPoint(x: 1.0, y: 0.5)
+    static var end: CGPoint = CGPoint(x: 0.0, y: 0.5)
+}
+
 final class GradientPremiumButton: UIButton {
 
     override class var layerClass: Swift.AnyClass {
@@ -29,16 +34,16 @@ final class GradientPremiumButton: UIButton {
     // MARK: Utility methods
     private func setup() {
         layer.masksToBounds = true
-        setStyle()
+        setupDesign()
         
         addGradient()
     }
     
-    private func setStyle() {
+    private func setupDesign() {
         setTitleColor(.white, for: .normal)
         setTitleColor(.white, for: .selected)
         
-        titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: C.Font.size)
+        titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
     }
     
     private func addGradient() {
@@ -46,26 +51,13 @@ final class GradientPremiumButton: UIButton {
             return
         }
         
-        gradientLayer.colors = [ColorConstants.letlrTiffanyBlueGradient.cgColor,
+        gradientLayer.colors = [ColorConstants.lrTiffanyBlueGradient.cgColor,
                                 ColorConstants.orangeGradient.cgColor,
                                 UIColor.lrTealishTwo.withAlphaComponent(NumericConstants.alphaForColorsPremiumButton).cgColor,]
-        gradientLayer.startPoint = C.GradientPoint.start
-        gradientLayer.endPoint = C.GradientPoint.end
+        gradientLayer.startPoint = GradientPoint.start
+        gradientLayer.endPoint = GradientPoint.end
         gradientLayer.isOpaque = true
         gradientLayer.shouldRasterize = true
         gradientLayer.rasterizationScale = UIScreen.main.scale
-    }
-
-}
-
-// MARK: - Constants
-private enum C {
-    enum Font {
-        static let size: CGFloat = 18
-    }
-    
-    enum GradientPoint {
-        static var start: CGPoint = CGPoint(x: 1.0, y: 0.5)
-        static var end: CGPoint = CGPoint(x: 0.0, y: 0.5)
     }
 }
