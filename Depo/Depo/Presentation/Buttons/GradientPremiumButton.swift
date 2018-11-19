@@ -38,6 +38,10 @@ final class GradientPremiumButton: UIButton {
                       height: size.height + self.titleEdgeInsets.top + self.titleEdgeInsets.bottom)
     }
     
+    func addSelectedAnimation() {
+        addAnimation()
+    }
+    
     // MARK: Utility methods
     private func setup() {
         layer.masksToBounds = true
@@ -66,5 +70,22 @@ final class GradientPremiumButton: UIButton {
         gradientLayer.isOpaque = true
         gradientLayer.shouldRasterize = true
         gradientLayer.rasterizationScale = UIScreen.main.scale
+    }
+    
+    private func addAnimation() {
+        let selectedAnimation = CASpringAnimation(keyPath: "transform.scale")
+        selectedAnimation.duration = NumericConstants.animationDuration
+        selectedAnimation.fromValue = NumericConstants.defaultScaleForPremiumButton
+        selectedAnimation.toValue = NumericConstants.scaleForPremiumButton
+        selectedAnimation.repeatCount = NumericConstants.repeatCountForPremiumButton
+        selectedAnimation.autoreverses = true
+        
+        let animationGroup = CAAnimationGroup()
+        animationGroup.beginTime = CACurrentMediaTime() + NumericConstants.delayForStartAnimation
+        animationGroup.duration = NumericConstants.durationBetweenAnimation
+        animationGroup.repeatCount = NumericConstants.repeatCountForAnimation
+        animationGroup.animations = [selectedAnimation]
+        
+        layer.add(animationGroup, forKey: "selectedAnimation")
     }
 }

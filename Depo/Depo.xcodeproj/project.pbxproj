@@ -2566,7 +2566,6 @@
 		A20CDBA8219D6C1E00CA9A67 /* PremiumHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDBA7219D6C1E00CA9A67 /* PremiumHeaderView.swift */; };
 		A20CDBAA219D6C2800CA9A67 /* PremiumHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20CDBA9219D6C2800CA9A67 /* PremiumHeaderView.xib */; };
 		A20CDBB0219DAC2700CA9A67 /* GradientPremiumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDBAF219DAC2700CA9A67 /* GradientPremiumButton.swift */; };
-		A20CDBB2219DD2DB00CA9A67 /* UIButton+Animate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDBB1219DD2DB00CA9A67 /* UIButton+Animate.swift */; };
 		A253D62921A210690049AC15 /* PremiumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A253D62821A210690049AC15 /* PremiumViewController.xib */; };
 		A253D62A21A210690049AC15 /* PremiumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A253D62821A210690049AC15 /* PremiumViewController.xib */; };
 		A253D62B21A212020049AC15 /* PremiumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079901219F131B00AD5037 /* PremiumViewController.swift */; };
@@ -5097,7 +5096,6 @@
 		A20CDBA7219D6C1E00CA9A67 /* PremiumHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumHeaderView.swift; sourceTree = "<group>"; };
 		A20CDBA9219D6C2800CA9A67 /* PremiumHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumHeaderView.xib; sourceTree = "<group>"; };
 		A20CDBAF219DAC2700CA9A67 /* GradientPremiumButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientPremiumButton.swift; sourceTree = "<group>"; };
-		A20CDBB1219DD2DB00CA9A67 /* UIButton+Animate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Animate.swift"; sourceTree = "<group>"; };
 		A253D62821A210690049AC15 /* PremiumViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumViewController.xib; sourceTree = "<group>"; };
 		A27FB35728F24100F410FBA2 /* TermsAndServicesInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInitializer.swift; sourceTree = "<group>"; };
 		A3E3BDF23BBE84B495BAA606 /* Pods-autosync-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-autosync-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-autosync-widget/Pods-autosync-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -10885,7 +10883,6 @@
 				B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */,
 				B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */,
 				B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */,
-				A20CDBB1219DD2DB00CA9A67 /* UIButton+Animate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -16045,7 +16042,6 @@
 				CE51ACDA1EF90853005DCEE0 /* TermsAndServicesRouter.swift in Sources */,
 				CE51ACDB1EF90853005DCEE0 /* TermsAndServicesConfigurator.swift in Sources */,
 				CE2DBA152058EC7B00D08C5E /* FaceImageItemsViewInput.swift in Sources */,
-				A20CDBB2219DD2DB00CA9A67 /* UIButton+Animate.swift in Sources */,
 				CE51ACDC1EF90853005DCEE0 /* TermsAndServicesInitializer.swift in Sources */,
 				CE49E8FA2099BD71007F05A6 /* UIButton+Font.swift in Sources */,
 				CE51ACDD1EF90853005DCEE0 /* IntroduceViewInput.swift in Sources */,

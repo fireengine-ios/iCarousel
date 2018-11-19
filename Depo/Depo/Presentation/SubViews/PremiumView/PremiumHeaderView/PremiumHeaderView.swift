@@ -52,11 +52,10 @@ final class PremiumHeaderView: UIView {
     // MARK: Utility methods(Private)
     private func setup() {        
         setupDesign()
-        
-        premiumButton.addSelectedAnimation()
-        
+                
         premiumHeaderImageView.image = UIImage(named: "crownPremiumIcon")
         premiumButton.setTitle(TextConstants.becomePremiumMember, for: .normal)
+        premiumButton.addSelectedAnimation()
     }
     
     private func setupView() {
