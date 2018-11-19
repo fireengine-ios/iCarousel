@@ -28,10 +28,6 @@ struct RouteRequests {
         }
     }()
     
-    static let packageUrl: URL = {
-        return URL(string: "https://mylifebox.com")!
-    }()
-    
     static let unsecuredAuthenticationUrl: String = {
         switch currentServerEnvironment {
         case .test: return "http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
@@ -191,6 +187,11 @@ struct RouteRequests {
             
             static let faceImageAllowed = settingsApi +/ "faceImageAllowed"
             static let facebookTaggingEnabled = settingsApi +/ "facebookTaggingEnabled"
+        }
+        
+        enum Permissions {
+            static let authority = Account.accountApi +/ "authority"
+            static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
         }
     }
 

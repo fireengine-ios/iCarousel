@@ -234,81 +234,44 @@ class UsageResponse: ObjectRequestResponse {
 
 final class PermissionsResponse: ObjectRequestResponse {
 
-    var permitions: [PermissionResponse]?
-
-    override func mapping() {
-        permitions = json?.arrayObject as? [PermissionResponse]
-    }
+    var permissions: [PermissionResponse]?
     
     func hasPermissionFor(_ type: PermissionResponse.PackageType) -> Bool {
-        var isGranted = false
-        if let hasPermission = permitions?.contains(where: { $0.type == type }) {
-            isGranted = hasPermission
-        }
-        return isGranted
+        let hasPermission = permissions?.contains(where: { $0.type == type })
+        return hasPermission ?? false
+    }
+
+    override func mapping() {
+        permissions = json?.arrayObject as? [PermissionResponse]
     }
 }
 
 final class PermissionResponse: ObjectRequestResponse {
     
     enum PackageType: String {
-        case none
         case faceRecognition    = "AUTH_FACE_IMAGE_LOCATION"
         case deleteDublicate    = "AUTH_DELETE_DUPLICATE"
         case premiumUser        = "AUTH_PREMIUM_USER"
         
-        static func getPackageType(with key: String? = "") -> PackageType {
-            switch key {
-            case self.faceRecognition.rawValue: return self.faceRecognition
-                
-            case self.deleteDublicate.rawValue: return self.deleteDublicate
-                
-            case self.premiumUser.rawValue: return self.premiumUser
-                
-            default: return self.none
-            }
-        }
-        
         func title() -> String {
             switch self {
-                case .faceRecognition: return TextConstants.faceRecognitionTitle
-                
-                case .deleteDublicate: return TextConstants.deleteDuplicatedTitle
-                
-                default: return ""
+                case .faceRecognition:
+                    return TextConstants.faceRecognitionTitle
+                case .deleteDublicate:
+                    return TextConstants.deleteDuplicatedTitle
+                default:
+                    return ""
             }
         }
         
         enum FeatureType: String {
-            case none
             case apple  = "FEATURE_APPLE"
             case slcm   = "FEATURE_SLCM"
-            
-            static func getPackageType(with key: String? = "") -> FeatureType {
-                switch key {
-                    case apple.rawValue: return self.apple
-                    
-                    case slcm.rawValue: return self.slcm
-                    
-                    default: return self.none
-                }
-            }
         }
         
         enum AuthorityType: String {
-            case none
             case premium  = "AUTH_PREMIUM_USER"
             case standart   = "AUTH_STANDART_USER"
-            
-            static func getPackageType(with key: String? = "") -> AuthorityType {
-                switch key {
-                    case premium.rawValue: return self.premium
-                    
-                    case standart.rawValue: return self.standart
-                    
-                    default: return self.none
-                }
-            }
         }
     }
     
@@ -321,7 +284,9 @@ final class PermissionResponse: ObjectRequestResponse {
     
     override func mapping() {
         let typeString = json?[PermissionResponseKeys.type].string
-        type = PackageType.getPackageType(with: typeString)
+        if let string = typeString, let type = PackageType(rawValue: string) {
+            self.type = type
+        }
     }
 }
 
@@ -369,14 +334,14 @@ final class FeaturePacksResponse: ObjectRequestResponse {
 
 final class FeaturePacksDetailsResponse: ObjectRequestResponse {
     
-    private struct FeaturePacksDetailsResponseKeys {
+    private enum ResponseKey {
         static let authorityType = "authorityType"
     }
     
     var authorityType: String?
 
     override func mapping() {
-        authorityType = json?[FeaturePacksDetailsResponseKeys.authorityType].string
+        authorityType = json?[ResponseKey.authorityType].string
     }
 }
 

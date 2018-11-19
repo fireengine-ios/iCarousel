@@ -12,8 +12,8 @@ import Alamofire
 protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
     func info(success: SuccessResponse?, fail:@escaping FailResponse)
-    func permissions(success: SuccessResponse?, fail:@escaping FailResponse)
-    func featurePacks(success: SuccessResponse?, fail:@escaping FailResponse)
+    func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
+    func featurePacks(handler: @escaping (ResponseResult<FeaturePacksResponse>) -> Void)
 }
 
 class AccountService: BaseRequestService, AccountServicePrl {
@@ -42,20 +42,40 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func permissions(success: SuccessResponse?, fail: @escaping FailResponse) {
+    func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void) {
         debugLog("AccountService permissions")
         
-        let param = PermissionParameters()
-        let handler = BaseResponseHandler<PermissionResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
+        sessionManager
+            .request(RouteRequests.Account.Permissions.authority)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    
+                    let permissions = PermissionsResponse(json: data, headerResponse: nil)
+                    handler(.success(permissions))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
     }
     
-    func featurePacks(success: SuccessResponse?, fail: @escaping FailResponse) {
+    func featurePacks(handler: @escaping (ResponseResult<FeaturePacksResponse>) -> Void) {
         debugLog("AccountService featurePacks")
         
-        let param = FeaturePacksParameters()
-        let handler = BaseResponseHandler<FeaturePacksResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
+        sessionManager
+            .request(RouteRequests.Account.Permissions.featurePacks)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    
+                    let featurePacks = FeaturePacksResponse(json: data, headerResponse: nil)
+                    handler(.success(featurePacks))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
     }
     
     func provision() {
