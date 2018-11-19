@@ -36,7 +36,7 @@ final class PremiumHeaderView: UIView {
     }
     
     // MARK: Utility methods(Public)
-    func configure(with title: String, price: String, isHiddenTitleImageView: Bool?) {
+    func configure(with title: String, price: String, isHiddenTitleImageView: Bool?, titleEdgeInsets: UIEdgeInsets) {
         titleLabel.text = title
         
         let descriptionPrice = "\(price)/\(TextConstants.month)"
@@ -45,6 +45,7 @@ final class PremiumHeaderView: UIView {
         subtitleLabel.attributedText = getAttributeText(with: description, price: descriptionPrice)
         
         premiumHeaderImageView.isHidden = isHiddenTitleImageView ?? false
+        premiumButton.titleEdgeInsets = titleEdgeInsets
     }
 
     
@@ -55,6 +56,7 @@ final class PremiumHeaderView: UIView {
         premiumButton.addSelectedAnimation()
         
         premiumHeaderImageView.image = UIImage(named: "crownPremiumIcon")
+        premiumButton.setTitle(TextConstants.becomePremiumMember, for: .normal)
     }
     
     private func setupView() {

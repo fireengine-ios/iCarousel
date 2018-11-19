@@ -789,5 +789,12 @@ class RouterVC: NSObject {
     func passcodeSettings(isTurkcell: Bool, inNeedOfMail: Bool) -> UIViewController {
         return PasscodeSettingsModuleInitializer.setupModule(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail)
     }
+    
+    // MARK: - Premium
+    
+    func premium(title: String) -> UIViewController{
+        let controller = PremiumModuleInitializer.initializePremiumController(with: "PremiumViewController", title: title)
+        return controller
+    }
 
 }

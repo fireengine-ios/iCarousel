@@ -31,11 +31,18 @@ final class GradientPremiumButton: UIButton {
         layer.cornerRadius = frame.height / 2
     }
     
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        
+        return CGSize(width: size.width + self.titleEdgeInsets.left + self.titleEdgeInsets.right,
+                      height: size.height + self.titleEdgeInsets.top + self.titleEdgeInsets.bottom)
+    }
+    
     // MARK: Utility methods
     private func setup() {
         layer.masksToBounds = true
         setupDesign()
-        
+
         addGradient()
     }
     
