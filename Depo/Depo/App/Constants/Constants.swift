@@ -914,4 +914,11 @@ struct TextConstants {
     static let launchCampaignCardDetail = NSLocalizedString("launch_campaign_card_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let launchCampaignCardTitle = NSLocalizedString("launch_campaign_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let launchCampaignCardMessage = NSLocalizedString("launch_campaign_card_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //PremiumView
+    static let deleteDuplicatedTitle = NSLocalizedString("delete_duplicated_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceRecognitionTitle = NSLocalizedString("face_recognition_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumTitle = NSLocalizedString("become_premium_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let placesTitle = NSLocalizedString("places_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let thingsTitle = NSLocalizedString("things_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

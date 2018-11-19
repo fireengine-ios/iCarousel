@@ -678,3 +678,10 @@
 "launch_campaign_card_detail" = "Details";
 "launch_campaign_card_title" = "Prague Campaign";
 "launch_campaign_card_message" = "Prague is waiting for you! Start exploring lifebox right now and be one of the 10 lucky couples";
+
+/* PremiumView */
+"delete_duplicated_title" = "To delete all duplicated contacts and unlock many more features become a Premium member!";
+"face_recognition_title" = "To see all the faces in your gallery and unlock many more features become a Premium member!";
+"become_premium_title" = "Become a Premium Member!";
+"places_title" = "To see all the places in your gallery and unlock many more features become a Premium member!";
+"things_title" = "To see all the things in your gallery and unlock many more features become a Premium member!";
