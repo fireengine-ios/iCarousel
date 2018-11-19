@@ -28,6 +28,10 @@ struct RouteRequests {
         }
     }()
     
+    static let packageUrl: URL = {
+        return URL(string: "https://mylifebox.com")!
+    }()
+    
     static let unsecuredAuthenticationUrl: String = {
         switch currentServerEnvironment {
         case .test: return "http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"

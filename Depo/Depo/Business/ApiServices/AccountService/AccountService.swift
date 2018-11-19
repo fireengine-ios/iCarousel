@@ -12,6 +12,8 @@ import Alamofire
 protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
     func info(success: SuccessResponse?, fail:@escaping FailResponse)
+    func permissions(success: SuccessResponse?, fail:@escaping FailResponse)
+    func featurePacks(success: SuccessResponse?, fail:@escaping FailResponse)
 }
 
 class AccountService: BaseRequestService, AccountServicePrl {
@@ -40,6 +42,22 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executeGetRequest(param: param, handler: handler)
     }
     
+    func permissions(success: SuccessResponse?, fail: @escaping FailResponse) {
+        debugLog("AccountService permissions")
+        
+        let param = PermissionParameters()
+        let handler = BaseResponseHandler<PermissionResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+    }
+    
+    func featurePacks(success: SuccessResponse?, fail: @escaping FailResponse) {
+        debugLog("AccountService featurePacks")
+        
+        let param = FeaturePacksParameters()
+        let handler = BaseResponseHandler<FeaturePacksResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+    }
+    
     func provision() {
         
     }
@@ -58,7 +76,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: param, handler: handler)
     }
-    
     
     // MARK: Profile photo
     

@@ -14,6 +14,8 @@ struct AccountPath {
     static let info = accountBase + "info"
     static let quota = accountBase + "quotaInfo"
     static let usages = accountBase + "usages"
+    static let authority = accountBase + "authority"
+    static let featurePacks = accountBase + "feature-packs/IOS"
     static let provision = accountBase + "provision"
     static let profilePhoto = accountBase + "profilePhoto"
 //    static let storeProducNames = accountBase + "allAccessOffers/APPLE"
@@ -134,6 +136,18 @@ class QuotaInfo: BaseRequestParametrs {
 class UsageParameters: BaseRequestParametrs {
     override var patch: URL {
         return URL(string: AccountPath.usages, relativeTo: super.patch)!
+    }
+}
+
+class PermissionParameters: BaseRequestParametrs {
+    override var patch: URL {
+        return URL(string: AccountPath.authority, relativeTo: super.package)!
+    }
+}
+
+class FeaturePacksParameters: BaseRequestParametrs {
+    override var patch: URL {
+        return URL(string: AccountPath.featurePacks, relativeTo: super.package)!
     }
 }
 
