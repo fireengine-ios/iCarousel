@@ -103,6 +103,14 @@
 		4A0AC15D20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC15B20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift */; };
 		4A2039C72087ACBC004850ED /* AutoSyncRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2039C62087ACBB004850ED /* AutoSyncRouterInput.swift */; };
 		4A2039C82087ACBC004850ED /* AutoSyncRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2039C62087ACBB004850ED /* AutoSyncRouterInput.swift */; };
+		4A257BAE21A3E87000194A5F /* AuthorityStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAD21A3E87000194A5F /* AuthorityStorage.swift */; };
+		4A257BB021A3E8FA00194A5F /* AuthorityKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAF21A3E8FA00194A5F /* AuthorityKeychainStorage.swift */; };
+		4A257BB121A4267A00194A5F /* AuthorityStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAD21A3E87000194A5F /* AuthorityStorage.swift */; };
+		4A257BB221A4267D00194A5F /* AuthorityKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAF21A3E8FA00194A5F /* AuthorityKeychainStorage.swift */; };
+		4A257BB321A4272700194A5F /* AuthorityStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAD21A3E87000194A5F /* AuthorityStorage.swift */; };
+		4A257BB421A4272800194A5F /* AuthorityStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAD21A3E87000194A5F /* AuthorityStorage.swift */; };
+		4A257BB521A4275D00194A5F /* AuthorityKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAF21A3E8FA00194A5F /* AuthorityKeychainStorage.swift */; };
+		4A257BB621A4275E00194A5F /* AuthorityKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAF21A3E8FA00194A5F /* AuthorityKeychainStorage.swift */; };
 		4A3F4119203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3F4118203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift */; };
 		4A3F411A203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3F4118203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift */; };
 		4A56D5AF202AF51D003A4624 /* FaceImageAddNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5AE202AF51D003A4624 /* FaceImageAddNameViewController.swift */; };
@@ -3781,6 +3789,8 @@
 		4A0AC1552087395E00032CC7 /* PeriodicContactSyncViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncViewOutput.swift; sourceTree = "<group>"; };
 		4A0AC15B20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncInteractorOutput.swift; sourceTree = "<group>"; };
 		4A2039C62087ACBB004850ED /* AutoSyncRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncRouterInput.swift; sourceTree = "<group>"; };
+		4A257BAD21A3E87000194A5F /* AuthorityStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorityStorage.swift; sourceTree = "<group>"; };
+		4A257BAF21A3E8FA00194A5F /* AuthorityKeychainStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorityKeychainStorage.swift; sourceTree = "<group>"; };
 		4A3F4118203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosInteractorOutput.swift; sourceTree = "<group>"; };
 		4A4AC5C4BDA613483E0B3CCA /* SyncContactsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsPresenter.swift; sourceTree = "<group>"; };
 		4A56D5AE202AF51D003A4624 /* FaceImageAddNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageAddNameViewController.swift; sourceTree = "<group>"; };
@@ -6605,6 +6615,15 @@
 				4A0AC1432087374300032CC7 /* PeriodicContactSyncInitializer.swift */,
 			);
 			path = Configurator;
+			sourceTree = "<group>";
+		};
+		4A257BAC21A3E85300194A5F /* AuthorityStorage */ = {
+			isa = PBXGroup;
+			children = (
+				4A257BAD21A3E87000194A5F /* AuthorityStorage.swift */,
+				4A257BAF21A3E8FA00194A5F /* AuthorityKeychainStorage.swift */,
+			);
+			path = AuthorityStorage;
 			sourceTree = "<group>";
 		};
 		4A56D5A4202AF467003A4624 /* FaceImageAddName */ = {
@@ -10585,6 +10604,7 @@
 		CE246A131F3D2D76008DF705 /* AccountService */ = {
 			isa = PBXGroup;
 			children = (
+				4A257BAC21A3E85300194A5F /* AuthorityStorage */,
 				CE2F55FB1F7551CD00F49DA1 /* AccountParameters.swift */,
 				CE2F55FA1F7551CD00F49DA1 /* AccountResponse.swift */,
 				CE2F55F91F7551CD00F49DA1 /* AccountService.swift */,
@@ -14632,6 +14652,7 @@
 				8C0E8D201FDEBDFF00789C91 /* CountiesGSMCodeCompositor.swift in Sources */,
 				4A0AC15D20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */,
 				B56FBB292122C4BA004F4A59 /* TermsOfUseRouterInput.swift in Sources */,
+				4A257BB121A4267A00194A5F /* AuthorityStorage.swift in Sources */,
 				8CEE8D26214A473200150996 /* FaceImageDesigner.swift in Sources */,
 				8C0E8D211FDEBDFF00789C91 /* HomePageInteractorInput.swift in Sources */,
 				B5CDB33F21787FEF006CFA50 /* Configuration.m in Sources */,
@@ -14986,6 +15007,7 @@
 				8C0E8E3E1FDEBDFF00789C91 /* ForgotPasswordRouter.swift in Sources */,
 				8C0E8E3F1FDEBDFF00789C91 /* ProgressPopUp.swift in Sources */,
 				8C0E8E401FDEBDFF00789C91 /* ForgotPasswordConfigurator.swift in Sources */,
+				4A257BB221A4267D00194A5F /* AuthorityKeychainStorage.swift in Sources */,
 				4A0AC1422087372E00032CC7 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				8C0E8E411FDEBDFF00789C91 /* ForgotPasswordInitializer.swift in Sources */,
 				8C0E8E421FDEBDFF00789C91 /* PasscodeView.swift in Sources */,
@@ -15514,6 +15536,7 @@
 			files = (
 				CED54F6F204A7D4B00B750BB /* BytesType.swift in Sources */,
 				CE1B7620204D2E4000B5E12A /* FileStorage.swift in Sources */,
+				4A257BB621A4275E00194A5F /* AuthorityKeychainStorage.swift in Sources */,
 				CE1BE94E20492C930074BDDC /* RequestHeader.swift in Sources */,
 				CED54F6E204A760900B750BB /* SwiftyJSONExtension.swift in Sources */,
 				CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */,
@@ -15533,6 +15556,7 @@
 				CEF371A020873B41007AD36E /* UIViewController+NavBar.swift in Sources */,
 				CE1BE94C20492C870074BDDC /* AuthorizationURLs.swift in Sources */,
 				CE1BE94820492C510074BDDC /* SharedFactory.swift in Sources */,
+				4A257BB421A4272800194A5F /* AuthorityStorage.swift in Sources */,
 				CE4D281A207E0A5B003AE4FB /* Device.swift in Sources */,
 				CE4D2820207E2435003AE4FB /* BiometricsManager.swift in Sources */,
 				CE1BE94920492C550074BDDC /* TokenStorage.swift in Sources */,
@@ -15668,6 +15692,7 @@
 				8C7786A41F3F38F0005CB432 /* VisualMusicPlayerRouter.swift in Sources */,
 				D49886591F3EFBE200F50C95 /* ImportPhotosInteractor.swift in Sources */,
 				A20CDBB0219DAC2700CA9A67 /* GradientPremiumButton.swift in Sources */,
+				4A257BB021A3E8FA00194A5F /* AuthorityKeychainStorage.swift in Sources */,
 				8C7786A21F3F38F0005CB432 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				7C4484FE1F0FC607003AF631 /* ButtonWithGrayCorner.swift in Sources */,
 				CE2F562E1F75548500F49DA1 /* SubscriptionParameters.swift in Sources */,
@@ -15766,6 +15791,7 @@
 				B56FBB1F2122C3D9004F4A59 /* TermsOfUseInitializer.swift in Sources */,
 				7C1CB8F61F724E54000768E8 /* ProgressPopUpProtocol.swift in Sources */,
 				CE2976DF1FD58E2000350F3A /* LocalAlbumModuleInitializer.swift in Sources */,
+				4A257BAE21A3E87000194A5F /* AuthorityStorage.swift in Sources */,
 				78B02CBF200D1B0300D11CD2 /* ContactSyncParametrs.swift in Sources */,
 				CE8F44E61F6AB59C0062C2E0 /* ActivityTimelineService.swift in Sources */,
 				7C4988191F3320420039C5F2 /* CreateStoryPhotosOrderModuleInput.swift in Sources */,
@@ -16692,6 +16718,7 @@
 				CE98F6D9204E6BD800433915 /* UIImageView+Scale.swift in Sources */,
 				CE1458CF2045734200812544 /* Alamofire+Validate.swift in Sources */,
 				CE4D282F207E4A14003AE4FB /* ShareWormholeListener.swift in Sources */,
+				4A257BB321A4272700194A5F /* AuthorityStorage.swift in Sources */,
 				CEA524BA2046C95E0036FCEA /* UploadQueueService.swift in Sources */,
 				CE4D2822207E2493003AE4FB /* Equatable+Contains.swift in Sources */,
 				CE4D281E207E23F7003AE4FB /* PasscodeEnterViewController.swift in Sources */,
@@ -16754,6 +16781,7 @@
 				CE4D2819207E0A5A003AE4FB /* Device.swift in Sources */,
 				8C73CFD6208265D200B66E64 /* String+Subscript.swift in Sources */,
 				CE4D2827207E3CF0003AE4FB /* WormholePoster.swift in Sources */,
+				4A257BB521A4275D00194A5F /* AuthorityKeychainStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -188,6 +188,11 @@ struct RouteRequests {
             static let faceImageAllowed = settingsApi +/ "faceImageAllowed"
             static let facebookTaggingEnabled = settingsApi +/ "facebookTaggingEnabled"
         }
+        
+        enum Permissions {
+            static let authority = Account.accountApi +/ "authority"
+            static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
+        }
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"

@@ -12,6 +12,8 @@ import Alamofire
 protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
     func info(success: SuccessResponse?, fail:@escaping FailResponse)
+    func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
+    func featurePacks(handler: @escaping (ResponseResult<FeaturePacksResponse>) -> Void)
 }
 
 class AccountService: BaseRequestService, AccountServicePrl {
@@ -40,6 +42,42 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executeGetRequest(param: param, handler: handler)
     }
     
+    func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void) {
+        debugLog("AccountService permissions")
+        
+        sessionManager
+            .request(RouteRequests.Account.Permissions.authority)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    
+                    let permissions = PermissionsResponse(json: data, headerResponse: nil)
+                    handler(.success(permissions))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    func featurePacks(handler: @escaping (ResponseResult<FeaturePacksResponse>) -> Void) {
+        debugLog("AccountService featurePacks")
+        
+        sessionManager
+            .request(RouteRequests.Account.Permissions.featurePacks)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    
+                    let featurePacks = FeaturePacksResponse(json: data, headerResponse: nil)
+                    handler(.success(featurePacks))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
     func provision() {
         
     }
@@ -58,7 +96,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: param, handler: handler)
     }
-    
     
     // MARK: Profile photo
     
