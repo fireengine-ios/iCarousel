@@ -74,7 +74,6 @@
                                 <constraint firstAttribute="trailing" secondItem="8rI-MV-uQT" secondAttribute="trailing" id="ahj-d1-zba"/>
                                 <constraint firstItem="8rI-MV-uQT" firstAttribute="top" secondItem="yMx-AY-vjW" secondAttribute="top" id="cE7-Ek-NGF"/>
                                 <constraint firstAttribute="bottom" secondItem="9Te-f5-hf4" secondAttribute="bottom" priority="250" constant="30" id="qVY-9g-kjg"/>
-                                <constraint firstItem="9Te-f5-hf4" firstAttribute="centerX" secondItem="yMx-AY-vjW" secondAttribute="centerX" id="zym-RG-01N"/>
                             </constraints>
                         </view>
                     </subviews>

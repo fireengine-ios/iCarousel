@@ -21,7 +21,7 @@ class UserInfoSubViewModuleConfigurator {
 
         let router = UserInfoSubViewRouter()
 
-        let presenter = UserInfoSubViewPresenter()
+        let presenter = UserInfoSubViewPresenter(isPremiumUser: AuthorityKeychainStorage().isPremium ?? false)
         presenter.view = viewController
         presenter.router = router
 

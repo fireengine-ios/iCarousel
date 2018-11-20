@@ -56,6 +56,10 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.packages)
     }
     
+    func goToPremium() {
+        router.pushViewController(viewController: router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
+    }
+    
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needReplaceOfCurrentController: Bool) {
         let vc = router.passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail)
         if needReplaceOfCurrentController {

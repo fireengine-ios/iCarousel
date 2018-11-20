@@ -10,10 +10,10 @@ import Foundation
 
 final class PremiumModuleInitializer: NSObject {
     
-    class func initializePremiumController(with nibName: String, title: String) -> UIViewController {
+    class func initializePremiumController(with nibName: String, title: String, headerTitle: String) -> UIViewController {
         let viewController = PremiumViewController(nibName: nibName, bundle: nil)
         let configurator = PremiumModuleConfigurator()
-        configurator.configure(viewController: viewController, title: title)
+        configurator.configure(viewController: viewController, title: title, headerTitle: headerTitle)
         
         return viewController
     }

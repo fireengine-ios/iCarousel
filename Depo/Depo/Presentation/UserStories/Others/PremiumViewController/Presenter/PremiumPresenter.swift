@@ -15,9 +15,11 @@ final class PremiumPresenter {
     var router: PremiumRouterInput!
     
     var title: String
+    var headerTitle: String
     
-    init(title: String) {
+    init(title: String, headerTitle: String) {
         self.title = title
+        self.headerTitle = headerTitle
     }
     
 }

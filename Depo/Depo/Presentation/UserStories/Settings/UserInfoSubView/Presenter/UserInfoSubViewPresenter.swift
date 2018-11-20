@@ -12,6 +12,12 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     var interactor: UserInfoSubViewInteractorInput!
     var router: UserInfoSubViewRouterInput!
     
+    var isPremiumUser: Bool
+    
+    init(isPremiumUser: Bool) {
+        self.isPremiumUser = isPremiumUser
+    }
+    
     func requestsFinished() {
         asyncOperationSucces()
     }

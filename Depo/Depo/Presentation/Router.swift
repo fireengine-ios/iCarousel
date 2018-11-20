@@ -792,8 +792,8 @@ class RouterVC: NSObject {
     
     // MARK: - Premium
     
-    func premium(title: String) -> UIViewController{
-        let controller = PremiumModuleInitializer.initializePremiumController(with: "PremiumViewController", title: title)
+    func premium(title: String, headerTitle: String) -> UIViewController{
+        let controller = PremiumModuleInitializer.initializePremiumController(with: "PremiumViewController", title: title, headerTitle: headerTitle)
         return controller
     }
 

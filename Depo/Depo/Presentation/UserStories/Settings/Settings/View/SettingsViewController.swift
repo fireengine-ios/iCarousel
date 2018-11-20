@@ -122,7 +122,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0) {
-            return 156
+            return 210
         }
         return 14
     }
@@ -329,6 +329,10 @@ extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
     
     func upgradeButtonPressed() {
         output.goToPackages()
+    }
+    
+    func premiumButtonPressed() {
+        output.goToPremium()
     }
 }
 
