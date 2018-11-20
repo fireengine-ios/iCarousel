@@ -20,30 +20,27 @@ final class AuthorityKeychainStorage: AuthorityStorage {
     private var keychain = KeychainSwift()
 
     var isPremium: Bool? {
-
         didSet {
             keychain.set(isPremium ?? false, forKey: Keys.isPremium)
         }
     }
     
     var faceRecognition: Bool? {
-        
         didSet {
             keychain.set(faceRecognition ?? false, forKey: Keys.faceRecognition)
         }
     }
     
     var deleteDublicate: Bool? {
-        
         didSet {
             keychain.set(deleteDublicate ?? false, forKey: Keys.deleteDublicate)
         }
     }
     
-    func refrashStatus(permissions: PermissionsResponse) {
-        faceRecognition = permissions.hasPermissionFor(.faceRecognition)
-        deleteDublicate = permissions.hasPermissionFor(.deleteDublicate)
-        isPremium = permissions.hasPermissionFor(.premiumUser)
+    func refrashStatus(premium: Bool, deleteDublicate: Bool, faceRecognition: Bool) {
+        self.faceRecognition = faceRecognition
+        self.deleteDublicate = deleteDublicate
+        isPremium = premium
     }
     
     init() {

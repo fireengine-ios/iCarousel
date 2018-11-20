@@ -13,5 +13,5 @@ protocol AuthorityStorage: class {
     var faceRecognition: Bool? { get set }
     var deleteDublicate: Bool? { get set }
     
-    func refrashStatus(permissions: PermissionsResponse)
+    func refrashStatus(premium: Bool, deleteDublicate: Bool, faceRecognition: Bool)
 }
