@@ -254,15 +254,13 @@ final class PermissionResponse: ObjectRequestResponse {
         case premiumUser        = "AUTH_PREMIUM_USER"
         
         var title: String {
-            get {
-                switch self {
-                    case .faceRecognition:
-                        return TextConstants.faceRecognitionTitle
-                    case .deleteDublicate:
-                        return TextConstants.deleteDuplicatedTitle
-                    case .premiumUser:
-                        return ""
-                }
+            switch self {
+            case .faceRecognition:
+                return TextConstants.faceRecognitionTitle
+            case .deleteDublicate:
+                return TextConstants.deleteDuplicatedTitle
+            case .premiumUser:
+                return ""
             }
         }
     }

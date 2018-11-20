@@ -37,9 +37,9 @@ final class AuthorityKeychainStorage: AuthorityStorage {
         }
     }
     
-    func refrashStatus(premium: Bool, deleteDublicate: Bool, faceRecognition: Bool) {
-        self.faceRecognition = faceRecognition
-        self.deleteDublicate = deleteDublicate
+    func refrashStatus(premium: Bool, dublicates: Bool, faces: Bool) {
+        faceRecognition = faces
+        deleteDublicate = dublicates
         isPremium = premium
     }
     
