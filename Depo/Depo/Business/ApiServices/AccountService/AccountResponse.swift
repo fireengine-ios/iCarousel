@@ -259,7 +259,7 @@ final class PermissionResponse: ObjectRequestResponse {
                     return TextConstants.faceRecognitionTitle
                 case .deleteDublicate:
                     return TextConstants.deleteDuplicatedTitle
-                default:
+                case .premiumUser:
                     return ""
             }
         }
