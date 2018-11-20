@@ -921,4 +921,18 @@ struct TextConstants {
     static let becomePremiumTitle = NSLocalizedString("become_premium_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let placesTitle = NSLocalizedString("places_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let thingsTitle = NSLocalizedString("things_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    //MARK: - Premium
+    static let useFollowingPremiumMembership = NSLocalizedString("Use the following Premium Membership advantages with only", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let additionalDataStoragePackage = NSLocalizedString("additional to your data storage package", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let month = NSLocalizedString("month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let backUpOriginalQuality = NSLocalizedString("Back up with Original Quality", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let removeDuplicateContacts = NSLocalizedString("Remove Duplicate Contacts from Your Directory", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceRecognitionToReach = NSLocalizedString("Face Recognition to reach your loved one's memories", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let placeRecognitionToBeam = NSLocalizedString("Place Recognition to beam you up to the memories", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let objectRecognitionToRemember = NSLocalizedString("Object Recognition to remember with things you love", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremium = NSLocalizedString("Become Premium", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumMember = NSLocalizedString("Become Premium Member!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let standartUser = NSLocalizedString("Standart User", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let premiumUser = NSLocalizedString("Premium User", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
