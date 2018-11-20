@@ -31,6 +31,8 @@ final class PremiumViewController: BaseViewController {
     // MARK: Utility methods
     private func setup() {
         setTitle(withString: output.title)
+        let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
+        premiumView.configure(with: output.headerTitle, price: "30 $", types: PremiumListType.allTypes, titleEdgeInsets: titleEdgeInsets)
     }
     
 }

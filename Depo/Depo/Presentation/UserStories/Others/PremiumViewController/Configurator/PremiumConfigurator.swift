@@ -10,11 +10,11 @@ import Foundation
 
 final class PremiumModuleConfigurator {
     
-    func configure(viewController: PremiumViewController, title: String) {
+    func configure(viewController: PremiumViewController, title: String, headerTitle: String) {
         let router = PremiumRouter()
         router.view = viewController
         
-        let presenter = PremiumPresenter(title: title)
+        let presenter = PremiumPresenter(title: title, headerTitle: headerTitle)
         presenter.view = viewController
         presenter.router = router
         

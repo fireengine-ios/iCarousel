@@ -30,6 +30,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     private let contactsSyncService = ContactsSyncService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private let contactService: ContactService = ContactService()
+    private let accountService: AccountService = AccountService()
     
     func startOperation(operationType: SyncOperationType) {
         updateAccessToken { [weak self] in
@@ -107,6 +108,25 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 self?.output?.showError(errorType: errorType)
             }
         })
+    }
+    
+    func getUserStatus() {
+        output?.asyncOperationStarted()
+
+        accountService.permissions { [weak self] response in
+            self?.output?.asyncOperationFinished()
+            
+            switch response {
+            case .success(let result):
+                DispatchQueue.toMain {
+                    self?.output?.didObtainUserStatus(isPremiumUser: result.hasPermissionFor(.deleteDublicate))
+                }
+            case .failed(_):
+                DispatchQueue.toMain {
+                    self?.output?.didObtainUserStatus(isPremiumUser: false)
+                }
+            }
+        }
     }
     
     private func loadLastBackUp() {
