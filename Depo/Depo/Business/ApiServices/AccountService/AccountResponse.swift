@@ -236,7 +236,7 @@ final class PermissionsResponse: ObjectRequestResponse {
 
     var permissions: [PermissionResponse]?
     
-    func hasPermissionFor(_ type: PermissionResponse.PackageType) -> Bool {
+    func hasPermissionFor(_ type: PermissionResponse.AuthorityType) -> Bool {
         let hasPermission = permissions?.contains(where: { $0.type == type })
         return hasPermission ?? false
     }
@@ -248,7 +248,7 @@ final class PermissionsResponse: ObjectRequestResponse {
 
 final class PermissionResponse: ObjectRequestResponse {
     
-    enum PackageType: String {
+    enum AuthorityType: String {
         case faceRecognition    = "AUTH_FACE_IMAGE_LOCATION"
         case deleteDublicate    = "AUTH_DELETE_DUPLICATE"
         case premiumUser        = "AUTH_PREMIUM_USER"
@@ -263,36 +263,41 @@ final class PermissionResponse: ObjectRequestResponse {
                     return ""
             }
         }
-        
-        enum FeatureType: String {
-            case apple  = "FEATURE_APPLE"
-            case slcm   = "FEATURE_SLCM"
-        }
-        
-        enum AuthorityType: String {
-            case premium  = "AUTH_PREMIUM_USER"
-            case standart   = "AUTH_STANDART_USER"
-        }
     }
     
-    private struct PermissionResponseKeys {
+    private enum ResponseKeys {
         static let type = "type"
     }
     
-    var type: PackageType?
+    var type: AuthorityType?
     
     
     override func mapping() {
-        let typeString = json?[PermissionResponseKeys.type].string
-        if let string = typeString, let type = PackageType(rawValue: string) {
+        let typeString = json?[ResponseKeys.type].string
+        if let string = typeString, let type = AuthorityType(rawValue: string) {
             self.type = type
         }
     }
 }
 
 final class FeaturePacksResponse: ObjectRequestResponse {
+    var packs: [FeaturePackResponse]?
 
-    private struct FeaturePacksResponseKeys {
+    override func mapping() {
+        if let featurePacks = json?.arrayObject as? [FeaturePackResponse] {
+            packs = featurePacks
+        }
+    }
+}
+
+final class FeaturePackResponse: ObjectRequestResponse {
+
+    enum FeatureType: String {
+        case apple  = "FEATURE_APPLE"
+        case slcm   = "FEATURE_SLCM"
+    }
+    
+    private enum ResponseKeys {
         static let name = "name"
         static let displayName = "displayName"
         static let price = "price"
@@ -314,34 +319,43 @@ final class FeaturePacksResponse: ObjectRequestResponse {
     var quota: Int64?
     var status: String?
     var details: [FeaturePacksDetailsResponse]?
-    var type: String?
+    var featureType: FeatureType?
 
     override func mapping() {
-        name = json?[FeaturePacksResponseKeys.name].string
-        displayName = json?[FeaturePacksResponseKeys.displayName].string
-        price = json?[FeaturePacksResponseKeys.price].float
-        currency = json?[FeaturePacksResponseKeys.currency].string
-        slcmOfferId = json?[FeaturePacksResponseKeys.slcmOfferId].int
-        cometOfferId = json?[FeaturePacksResponseKeys.cometOfferId].int
-        quota = json?[FeaturePacksResponseKeys.quota].int64
-        status = json?[FeaturePacksResponseKeys.status].string
-        if let detailsArray = json?[FeaturePacksResponseKeys.details].arrayObject as? [FeaturePacksDetailsResponse] {
+        name = json?[ResponseKeys.name].string
+        displayName = json?[ResponseKeys.displayName].string
+        price = json?[ResponseKeys.price].float
+        currency = json?[ResponseKeys.currency].string
+        slcmOfferId = json?[ResponseKeys.slcmOfferId].int
+        cometOfferId = json?[ResponseKeys.cometOfferId].int
+        quota = json?[ResponseKeys.quota].int64
+        status = json?[ResponseKeys.status].string
+        if let detailsArray = json?[ResponseKeys.details].arrayObject as? [FeaturePacksDetailsResponse] {
             details = detailsArray
         }
-        type = json?[FeaturePacksResponseKeys.type].string
+        if let type = json?[ResponseKeys.type].string {
+            featureType = FeatureType(rawValue: type)
+        }
     }
 }
 
 final class FeaturePacksDetailsResponse: ObjectRequestResponse {
     
+    enum AuthorityType: String {
+        case premium  = "AUTH_PREMIUM_USER"
+        case standart   = "AUTH_STANDART_USER"
+    }
+    
     private enum ResponseKey {
         static let authorityType = "authorityType"
     }
     
-    var authorityType: String?
+    var authorityType: AuthorityType?
 
     override func mapping() {
-        authorityType = json?[ResponseKey.authorityType].string
+        if let type = json?[ResponseKey.authorityType].string {
+            authorityType = AuthorityType(rawValue: type)
+        }
     }
 }
 
