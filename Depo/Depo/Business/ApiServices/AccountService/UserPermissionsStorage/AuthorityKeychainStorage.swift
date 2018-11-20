@@ -11,56 +11,44 @@ import KeychainSwift
 
 final class AuthorityKeychainStorage: AuthorityStorage {
     
-    private let isPremiumKey = "AUTH_PREMIUM_USER"
-    private let faceRecognitionKey = "AUTH_FACE_IMAGE_LOCATION"
-    private let deleteDublicateKey = "AUTH_DELETE_DUPLICATE"
-    
-    private lazy var keychain = KeychainSwift()
-    
-    var isPremium: String? {
-        get {
-            guard let isPremiumValue = keychain.get(isPremiumKey) else {
-                return nil
-            }
-            return isPremiumValue
-        }
-        set {
-            keychain.set(newValue, forKey: isPremiumKey, withAccess: .accessibleAfterFirstUnlock)
+    private enum Keys {
+        static let isPremium = "AUTH_PREMIUM_USER"
+        static let faceRecognition = "AUTH_FACE_IMAGE_LOCATION"
+        static let deleteDublicate = "AUTH_DELETE_DUPLICATE"
+    }
+
+    private var keychain = KeychainSwift()
+
+    var isPremium: Bool? {
+
+        didSet {
+            keychain.set(isPremium ?? false, forKey: Keys.isPremium)
         }
     }
     
-    var faceRecognition: String? {
-        get {
-            guard let faceRecognition = keychain.get(faceRecognitionKey) else {
-                return nil
-            }
-            return faceRecognition
-        }
+    var faceRecognition: Bool? {
         
-        set {
-            keychain.set(newValue, forKey: faceRecognitionKey, withAccess: .accessibleAfterFirstUnlock)
+        didSet {
+            keychain.set(faceRecognition ?? false, forKey: Keys.faceRecognition)
         }
     }
     
-    var deleteDublicate: String? {
-        get {
-            guard let deleteDublicate = keychain.get(deleteDublicateKey) else {
-                return nil
-            }
-            return deleteDublicate
-        }
+    var deleteDublicate: Bool? {
         
-        set {
-            keychain.set(newValue, forKey: deleteDublicateKey, withAccess: .accessibleAfterFirstUnlock)
+        didSet {
+            keychain.set(deleteDublicate ?? false, forKey: Keys.deleteDublicate)
         }
     }
     
     func refrashStatus(permissions: PermissionsResponse) {
-        faceRecognition = permissions.hasPermissionFor(.faceRecognition) ? faceRecognitionKey : nil
-        deleteDublicate = permissions.hasPermissionFor(.deleteDublicate) ? deleteDublicateKey : nil
-        isPremium = permissions.hasPermissionFor(.premiumUser) ? isPremiumKey : nil
+        faceRecognition = permissions.hasPermissionFor(.faceRecognition)
+        deleteDublicate = permissions.hasPermissionFor(.deleteDublicate)
+        isPremium = permissions.hasPermissionFor(.premiumUser)
     }
     
     init() {
+        isPremium = keychain.getBool(Keys.isPremium)
+        faceRecognition = keychain.getBool(Keys.faceRecognition)
+        deleteDublicate = keychain.getBool(Keys.deleteDublicate)
     }
 }

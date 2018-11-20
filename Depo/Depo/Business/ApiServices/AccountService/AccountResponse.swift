@@ -253,14 +253,16 @@ final class PermissionResponse: ObjectRequestResponse {
         case deleteDublicate    = "AUTH_DELETE_DUPLICATE"
         case premiumUser        = "AUTH_PREMIUM_USER"
         
-        func title() -> String {
-            switch self {
-                case .faceRecognition:
-                    return TextConstants.faceRecognitionTitle
-                case .deleteDublicate:
-                    return TextConstants.deleteDuplicatedTitle
-                case .premiumUser:
-                    return ""
+        var title: String {
+            get {
+                switch self {
+                    case .faceRecognition:
+                        return TextConstants.faceRecognitionTitle
+                    case .deleteDublicate:
+                        return TextConstants.deleteDuplicatedTitle
+                    case .premiumUser:
+                        return ""
+                }
             }
         }
     }

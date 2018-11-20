@@ -9,9 +9,9 @@
 import Foundation
 
 protocol AuthorityStorage: class {
-    var isPremium: String? { get set }
-    var faceRecognition: String? { get set }
-    var deleteDublicate: String? { get set }
+    var isPremium: Bool? { get set }
+    var faceRecognition: Bool? { get set }
+    var deleteDublicate: Bool? { get set }
     
     func refrashStatus(permissions: PermissionsResponse)
 }
