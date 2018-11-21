@@ -111,6 +111,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     func getUserStatus() {
+        let authorityStorage: AuthorityStorage = factory.resolve()
         output?.asyncOperationStarted()
 
         accountService.permissions { [weak self] response in
@@ -123,7 +124,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 }
             case .failed(_):
                 DispatchQueue.toMain {
-                    self?.output?.didObtainUserStatus(isPremiumUser: false)
+                    self?.output?.didObtainUserStatus(isPremiumUser: authorityStorage.deleteDublicate ?? false)
                 }
             }
         }

@@ -19,6 +19,8 @@ protocol Factory: SharedFactory {
     
     func resolve() -> HomeCardsService
     func resolve() -> AnalyticsService
+
+    func resolve() -> AuthorityStorage
 }
 
 final class FactoryMain: FactoryBase, Factory {
@@ -44,6 +46,11 @@ final class FactoryMain: FactoryBase, Factory {
     }()
     func resolve() -> AuthorizationRepository {
         return FactoryMain.authorizationRepository
+    }
+
+    private static let authorityStorage = AuthorityKeychainStorage()
+    func resolve() -> AuthorityStorage {
+        return FactoryMain.authorityStorage
     }
 }
 

@@ -53,8 +53,6 @@ final class GradientPremiumButton: UIButton {
     private func setupDesign() {
         setTitleColor(.white, for: .normal)
         setTitleColor(.white, for: .selected)
-        
-        titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
     }
     
     private func addGradient() {
@@ -73,6 +71,7 @@ final class GradientPremiumButton: UIButton {
     }
     
     private func addAnimation() {
+        layer.removeAllAnimations()
         let selectedAnimation = CASpringAnimation(keyPath: "transform.scale")
         selectedAnimation.speed = NumericConstants.speedForAnimation
         selectedAnimation.duration = NumericConstants.durationAnimationForPremiumButton
@@ -88,7 +87,7 @@ final class GradientPremiumButton: UIButton {
         animationGroup.duration = NumericConstants.durationBetweenAnimation
         animationGroup.repeatCount = NumericConstants.repeatCountForAnimation
         animationGroup.animations = [selectedAnimation]
-        
+
         layer.add(animationGroup, forKey: "selectedAnimation")
     }
 }

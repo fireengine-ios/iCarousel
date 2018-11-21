@@ -14,12 +14,13 @@ class HomePageInteractor: HomePageInteractorInput {
     private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
     private(set) var homeCardsLoaded = false
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    
+
     func homePagePresented() {
         FreeAppSpace.default.checkFreeAppSpace()
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
+        getPremiumCardInfo(isRefresh: false)
         getAllCardsForHomePage()
     }
     
@@ -44,6 +45,7 @@ class HomePageInteractor: HomePageInteractorInput {
     func needRefresh() {
         homeCardsLoaded = false
         getAllCardsForHomePage()
+        getPremiumCardInfo(isRefresh: true)
     }
     
     func getAllCardsForHomePage() {
@@ -57,6 +59,27 @@ class HomePageInteractor: HomePageInteractorInput {
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)
                 }
+            }
+        }
+    }
+
+    func updateUserAuthority(_ isFirstAppear: Bool) {
+        if !isFirstAppear {
+            getPremiumCardInfo(isRefresh: true)
+        }
+    }
+
+    private func getPremiumCardInfo(isRefresh: Bool) {
+        let authorityStorage: AuthorityStorage = factory.resolve()
+        AccountService().permissions { response in
+            switch response {
+            case .success(let result):
+                authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
+                                            dublicates: result.hasPermissionFor(.deleteDublicate),
+                                                 faces: result.hasPermissionFor(.faceRecognition))
+                isRefresh ? CardsManager.default.refreshPremiumCard() : CardsManager.default.startPremiumCard()
+            case .failed(_):
+                isRefresh ? CardsManager.default.refreshPremiumCard() : CardsManager.default.startPremiumCard()
             }
         }
     }

@@ -21,10 +21,13 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
     
     private var loadCollectionView = false
-    
+    private var isFirstAppear = true
+
     func viewIsReady() {
         spotlightManager.delegate = self
         interactor.trackScreen()
+        interactor.updateUserAuthority(isFirstAppear)
+        isFirstAppear = false
     }
     
     func homePagePresented() {

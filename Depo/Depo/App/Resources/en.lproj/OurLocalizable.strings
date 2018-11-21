@@ -682,7 +682,6 @@
 /* PremiumView */
 "delete_duplicated_title" = "To delete all duplicated contacts and unlock many more features become a Premium member!";
 "face_recognition_title" = "To see all the faces in your gallery and unlock many more features become a Premium member!";
-"become_premium_title" = "Become a Premium Member!";
 "places_title" = "To see all the places in your gallery and unlock many more features become a Premium member!";
 "things_title" = "To see all the things in your gallery and unlock many more features become a Premium member!";
 "Use the following Premium Membership advantages with only" = "Use the following Premium Membership advantages with only";
@@ -700,3 +699,15 @@
 "lifebox Premium" = "lifebox Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "To delete all duplicated contacts and unlock many more features become a Premium member!";
 
+
+/* PremiumBanner */
+"standard_banner_message" = "Discover our Premium features that brings you better cloud storage experience!";
+"premium_banner_message" = "Discover now Premium features that brings you better cloud storage experience!";
+"standard_banner_title" = "Lifebox Premium";
+"premium_banner_title" = "Welcome to lifebox Premium!";
+
+"back_up_short" = "Back Up With Original Quality";
+"remove_duplicate_short" = "Remove Duplicated Contacts";
+"places_recognition_short" = "Places Recognition";
+"face_recognition_short" = "Face Recognition";
+"object_recognition_short" = "Object Recognition";

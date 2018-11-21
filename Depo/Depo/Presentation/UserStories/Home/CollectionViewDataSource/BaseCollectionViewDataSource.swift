@@ -184,7 +184,8 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         if viewsByType[type] == nil {
             let view = getViewForOperation(operation: type)
             setViewByType(view: view, operation: type)
-            let index = 0
+            //helps to keep PremiumInfoCard on top
+            let index = (popUps.first(where: { $0.isKind(of: PremiumInfoCard.self) }) != nil) ? 1 : 0
             
             print("insert at index ", index, type.rawValue)
             self.popUps.insert(view, at: index)
@@ -244,6 +245,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         newPopUps = newPopUps.sorted(by: { view1, view2 -> Bool in
             let order1 = view1.cardObject?.order ?? 0
             let order2 = view2.cardObject?.order ?? 0
+            if order1 == order2 {
+                return view1 is PremiumInfoCard
+            }
             return order1 < order2
         })
         
@@ -278,10 +282,20 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             popUps = popUps.sorted(by: { view1, view2 -> Bool in
                 let order1 = view1.cardObject?.order ?? 0
                 let order2 = view2.cardObject?.order ?? 0
+                if order1 == order2 {
+                    return view1 is PremiumInfoCard
+                }
                 return order1 < order2
             })
             collectionView.reloadData()
             delegate?.didReloadCollectionView(self.collectionView)
+        }
+    }
+
+    func refreshPremiumCard() {
+        if let view = popUps.filter({ $0 is PremiumInfoCard }).first as? PremiumInfoCard {
+            view.configurateWithType(viewType: .premium)
+            collectionView.reloadData()
         }
     }
     

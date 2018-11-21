@@ -19,5 +19,6 @@ protocol HomePageInteractorInput {
     func needCheckQuota()
     
     func trackScreen()
-    
+
+    func updateUserAuthority(_ isFirstAppear: Bool)
 }

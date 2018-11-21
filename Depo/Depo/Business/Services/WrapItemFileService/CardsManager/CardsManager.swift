@@ -33,6 +33,8 @@ enum OperationType: String {
     case animationCard              = "animation"
     
     case launchCampaign             = "launchCampaign"
+    
+    case premium                    = "premium"
 }
 
 typealias BlockObject = VoidHandler
@@ -164,6 +166,22 @@ class CardsManager: NSObject {
             }
         }
         
+    }
+
+    func startPremiumCard() {
+        DispatchQueue.main.async {
+            for notificationView in self.foloversArray {
+                notificationView.startOperationWith(type: .premium, allOperations: 0, completedOperations: 0)
+            }
+        }
+    }
+
+    func refreshPremiumCard() {
+        DispatchQueue.main.async {
+            for notificationView in self.foloversArray {
+                notificationView.refreshPremiumCard()
+            }
+        }
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ) {
@@ -367,6 +385,10 @@ class CardsManager: NSObject {
             cardView = AnimationCard.initFromNib()
         case .launchCampaign:
             cardView = LaunchCampaignCard.initFromNib()
+        case .premium:
+            let popUp = PremiumInfoCard.initFromNib()
+            popUp.configurateWithType(viewType: .premium)
+            cardView = popUp
         }
         
         cardView.set(object: serverObject)
