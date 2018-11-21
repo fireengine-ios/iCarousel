@@ -3382,6 +3382,7 @@
 		CECD4E511FE10C7700978BE7 /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */; };
 		CECD4E541FE1150B00978BE7 /* UIButton+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E531FE1150B00978BE7 /* UIButton+Color.swift */; };
 		CECD4E561FE1152600978BE7 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E551FE1152600978BE7 /* UIImage+Color.swift */; };
+		CECE42BB21A53F45007625F2 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		CED4B0242017505300D06CA9 /* HomeCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */; };
 		CED4B0252017505300D06CA9 /* Alamofire+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE228D532017338B0082BA14 /* Alamofire+Request.swift */; };
 		CED4B0262017505300D06CA9 /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E020174D7500F49E41 /* ResponseParser.swift */; };
@@ -13876,6 +13877,7 @@
 				8C06B1CC2008AD72003D8E05 /* sticker_resize.png in Resources */,
 				8C06B10E2008AD72003D8E05 /* status_badge@3x.png in Resources */,
 				8C06AEC22008AD70003D8E05 /* alt_cizgili_secili.png in Resources */,
+				CECE42BB21A53F45007625F2 /* OurLocalizable.strings in Resources */,
 				7C5358101F9492DA00EABBAF /* OTPViewController~iphone.xib in Resources */,
 				8C06B1562008AD72003D8E05 /* text_selected@3x.png in Resources */,
 				8C06AF162008AD70003D8E05 /* cizgi_1@2x.png in Resources */,
