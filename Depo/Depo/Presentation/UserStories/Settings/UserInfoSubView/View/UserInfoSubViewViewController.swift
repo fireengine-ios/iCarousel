@@ -13,6 +13,7 @@ protocol UserInfoSubViewViewControllerActionsDelegate: class {
     func changePhotoPressed()
     func updateUserProfile(userInfo: AccountInfoResponse)
     func upgradeButtonPressed()
+    func premiumButtonPressed()
 }
 
 class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
@@ -28,6 +29,8 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     @IBOutlet weak var upgradeUserStorrageButton: InsetsButton!
     @IBOutlet weak var usersStorrageUssesProgress: RoundedProgressView!
     @IBOutlet weak var uplaodLabel: UILabel!
+    @IBOutlet private weak var premiumButton: GradientPremiumButton!
+    @IBOutlet private weak var statusLabel: UILabel!
     
     @IBOutlet weak var editButton: UIButton!
     weak var actionsDelegate: UserInfoSubViewViewControllerActionsDelegate?
@@ -75,6 +78,15 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         
         userIconImageView.sd_setShowActivityIndicatorView(true)
         userIconImageView.sd_setIndicatorStyle(.gray)
+        
+        premiumButton.titleEdgeInsets = UIEdgeInsetsMake(5, 7, 5, 7)
+        premiumButton.setTitle(TextConstants.becomePremium, for: .normal)
+        premiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        premiumButton.isHidden = output.isPremiumUser
+        
+        statusLabel.text = output.isPremiumUser ? TextConstants.standardUser : TextConstants.premiumUser
+        statusLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        statusLabel.textColor = ColorConstants.textGrayColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -166,5 +178,9 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     
     @IBAction func onUpdateUserPhoto() {
         actionsDelegate?.changePhotoPressed()
+    }
+    
+    @IBAction private func onBecomePremiumTap(_ sender: Any) {
+        actionsDelegate?.premiumButtonPressed()
     }
 }

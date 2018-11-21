@@ -25,6 +25,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     func viewWillBecomeActive() {
         startAsyncOperation()
         interactor.getCellsData()
+        interactor.getUserStatus()
     }
     
     func cellsDataForSettings(array: [[String]]) {
@@ -100,6 +101,10 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToPackages()
     }
     
+    func goToPremium() {
+        router.goToPremium()
+    }
+    
     func goToPasscodeSettings(needReplaceOfCurrentController: Bool) {
         router.goToPasscodeSettings(isTurkcell: interactor.isTurkcellUser, inNeedOfMail: inNeedOfMailVerefication(), needReplaceOfCurrentController: needReplaceOfCurrentController)
     }
@@ -134,6 +139,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     func photoCaptured(data: Data) {
         interactor.uploadPhoto(withPhoto: data)
     }
+    
     func onChangeUserPhoto() {
         interactor.trackPhotoEdit()
         view.showPhotoAlertSheet()

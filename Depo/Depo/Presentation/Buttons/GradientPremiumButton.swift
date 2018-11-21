@@ -74,11 +74,14 @@ final class GradientPremiumButton: UIButton {
     
     private func addAnimation() {
         let selectedAnimation = CASpringAnimation(keyPath: "transform.scale")
-        selectedAnimation.duration = NumericConstants.animationDuration
+        selectedAnimation.speed = NumericConstants.speedForAnimation
+        selectedAnimation.duration = NumericConstants.durationAnimationForPremiumButton
         selectedAnimation.fromValue = NumericConstants.defaultScaleForPremiumButton
         selectedAnimation.toValue = NumericConstants.scaleForPremiumButton
-        selectedAnimation.repeatCount = NumericConstants.repeatCountForPremiumButton
         selectedAnimation.autoreverses = true
+        selectedAnimation.repeatCount = NumericConstants.repeatCountForPremiumButton
+        selectedAnimation.initialVelocity = NumericConstants.initialVelocityForAnimation
+        selectedAnimation.damping = NumericConstants.dampingForAnimation
         
         let animationGroup = CAAnimationGroup()
         animationGroup.beginTime = CACurrentMediaTime() + NumericConstants.delayForStartAnimation

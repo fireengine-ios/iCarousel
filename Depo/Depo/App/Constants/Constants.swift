@@ -933,8 +933,9 @@ struct TextConstants {
     static let objectRecognitionToRemember = NSLocalizedString("Object Recognition to remember with things you love", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let becomePremium = NSLocalizedString("Become Premium", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let becomePremiumMember = NSLocalizedString("Become Premium Member!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let standartUser = NSLocalizedString("Standart User", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let standardUser = NSLocalizedString("Standard User", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let premiumUser = NSLocalizedString("Premium User", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lifeboxPremium = NSLocalizedString("lifebox Premium", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteDuplicatedContactsForPremiumTitle = NSLocalizedString("Delete Duplicated Contacts For PremiumTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
 }

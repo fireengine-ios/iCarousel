@@ -21,4 +21,6 @@ protocol SettingsInteractorInput {
     
     func trackScreen()
     func trackPhotoEdit()
+    
+    func getUserStatus()
 }
