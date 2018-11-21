@@ -21,4 +21,9 @@ class SyncContactsRouter: SyncContactsRouterInput {
         let viewController = router.duplicatedContacts(analyzeResponse: analyzeResponse, moduleOutput: moduleOutput)
         router.pushViewController(viewController: viewController)
     }
+    
+    func goToPremium() {
+        router.pushViewController(viewController: router.premium(title: TextConstants.duplicatedContacts, headerTitle: TextConstants.deleteDuplicatedContactsForPremiumTitle))
+        
+    }
 }

@@ -55,7 +55,6 @@ final class PremiumHeaderView: UIView {
                 
         premiumHeaderImageView.image = UIImage(named: "crownPremiumIcon")
         premiumButton.setTitle(TextConstants.becomePremiumMember, for: .normal)
-        premiumButton.addSelectedAnimation()
     }
     
     private func setupView() {
