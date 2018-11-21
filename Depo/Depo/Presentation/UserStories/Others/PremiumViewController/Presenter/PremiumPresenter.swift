@@ -35,13 +35,17 @@ extension PremiumPresenter: PremiumViewOutput {
 
 // MARK: - PremiumInteractorOtuput
 extension PremiumPresenter: PremiumInteractorOutput {
-    
+
+    func didPurchased() {
+        router.goToBack()
+    }
 }
 
 // MARK: - PremiumViewDelegate
 extension PremiumPresenter: PremiumViewDelegate {
     
     func onBecomePremiumTap() {
+        interactor.startPurchaseBecomePremiumUser()
     }
     
 }

@@ -12,10 +12,12 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     var interactor: UserInfoSubViewInteractorInput!
     var router: UserInfoSubViewRouterInput!
     
-    var isPremiumUser: Bool
-    
-    init(isPremiumUser: Bool) {
-        self.isPremiumUser = isPremiumUser
+    private let authorityStorage: AuthorityStorage = factory.resolve()
+
+    var isPremiumUser: Bool {
+        get {
+            return authorityStorage.isPremium ?? false
+        }
     }
     
     func requestsFinished() {

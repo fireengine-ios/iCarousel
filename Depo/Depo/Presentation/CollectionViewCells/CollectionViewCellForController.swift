@@ -47,9 +47,6 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
         DispatchQueue.main.async {
             self.contentView.addSubview(controllersView)
             controllersView.frame = self.contentView.bounds
-            if let baseView = controllersView as? BaseView {
-                baseView.viewWillShow()
-            }
         }
     }
     

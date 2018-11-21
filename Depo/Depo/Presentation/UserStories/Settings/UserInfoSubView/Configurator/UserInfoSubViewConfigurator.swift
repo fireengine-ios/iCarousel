@@ -19,9 +19,7 @@ class UserInfoSubViewModuleConfigurator {
     private func configure(viewController: UserInfoSubViewViewController) {
         let router = UserInfoSubViewRouter()
 
-        let authorityStorage: AuthorityStorage = factory.resolve()
-
-        let presenter = UserInfoSubViewPresenter(isPremiumUser: authorityStorage.isPremium ?? false)
+        let presenter = UserInfoSubViewPresenter()
         presenter.view = viewController
         presenter.router = router
 

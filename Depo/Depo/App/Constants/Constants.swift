@@ -914,13 +914,13 @@ struct TextConstants {
     static let launchCampaignCardDetail = NSLocalizedString("launch_campaign_card_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let launchCampaignCardTitle = NSLocalizedString("launch_campaign_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let launchCampaignCardMessage = NSLocalizedString("launch_campaign_card_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
-    //PremiumView
+
+    //MARK: - PremiumView
     static let deleteDuplicatedTitle = NSLocalizedString("delete_duplicated_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceRecognitionTitle = NSLocalizedString("face_recognition_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let becomePremiumTitle = NSLocalizedString("become_premium_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let placesTitle = NSLocalizedString("places_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let thingsTitle = NSLocalizedString("things_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     //MARK: - Premium
     static let useFollowingPremiumMembership = NSLocalizedString("Use the following Premium Membership advantages with only", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let additionalDataStoragePackage = NSLocalizedString("additional to your data storage package", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -938,4 +938,16 @@ struct TextConstants {
     static let lifeboxPremium = NSLocalizedString("lifebox Premium", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteDuplicatedContactsForPremiumTitle = NSLocalizedString("Delete Duplicated Contacts For PremiumTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    
+    //MARK: - PremiumBanner
+    static let premiumBannerMessage = NSLocalizedString("premium_banner_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let standardBannerMessage = NSLocalizedString("standard_banner_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let premiumBannerTitle = NSLocalizedString("premium_banner_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let standardBannerTitle = NSLocalizedString("standard_banner_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let backUpShort = NSLocalizedString("back_up_short", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let removeDuplicateShort = NSLocalizedString("remove_duplicate_short", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let placesRecognitionShort = NSLocalizedString("places_recognition_short", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceRecognitionShort = NSLocalizedString("face_recognition_short", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let objectRecognitionShort = NSLocalizedString("object_recognition_short", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

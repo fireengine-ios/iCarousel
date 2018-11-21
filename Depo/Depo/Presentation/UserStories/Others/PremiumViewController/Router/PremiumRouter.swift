@@ -16,5 +16,8 @@ final class PremiumRouter {
 
 // MARK: - PremiumRouterInput
 extension PremiumRouter: PremiumRouterInput {
-    
+
+    func goToBack() {
+        RouterVC().popViewController()
+    }
 }

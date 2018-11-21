@@ -78,20 +78,23 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         
         userIconImageView.sd_setShowActivityIndicatorView(true)
         userIconImageView.sd_setIndicatorStyle(.gray)
-        
-        premiumButton.titleEdgeInsets = UIEdgeInsetsMake(5, 7, 5, 7)
-        premiumButton.setTitle(TextConstants.becomePremium, for: .normal)
-        premiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        premiumButton.isHidden = output.isPremiumUser
-        
-        statusLabel.text = output.isPremiumUser ? TextConstants.standardUser : TextConstants.premiumUser
-        statusLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
-        statusLabel.textColor = ColorConstants.textGrayColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        setupDesignByUserAuthority()
+    }
+
+    private func setupDesignByUserAuthority() {
+        premiumButton.titleEdgeInsets = UIEdgeInsetsMake(5, 7, 5, 7)
+        premiumButton.setTitle(TextConstants.becomePremium, for: .normal)
+        premiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        premiumButton.isHidden = output.isPremiumUser
+
+        statusLabel.text = output.isPremiumUser ? TextConstants.premiumUser : TextConstants.standardUser
+        statusLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        statusLabel.textColor = ColorConstants.textGrayColor
     }
         
     func reloadUserInfo() {

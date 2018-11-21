@@ -9,4 +9,6 @@
 import Foundation
 
 protocol PremiumRouterInput: class {
+
+    func goToBack()
 }

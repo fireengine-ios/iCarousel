@@ -81,6 +81,8 @@
 		486F7B5A208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486F7B59208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift */; };
 		486F7B5B208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486F7B59208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift */; };
 		48AAD540DF9AE2C249F9B6D4 /* OTPViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */; };
+		4A02B7FE21A0550F00635694 /* PremiumInfoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A02B7FD21A0550F00635694 /* PremiumInfoCard.swift */; };
+		4A02B80021A0552000635694 /* PremiumInfoCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A02B7FF21A0552000635694 /* PremiumInfoCard.xib */; };
 		4A0AC135208736F100032CC7 /* PeriodicContactSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC134208736F100032CC7 /* PeriodicContactSyncViewController.swift */; };
 		4A0AC136208736F100032CC7 /* PeriodicContactSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC134208736F100032CC7 /* PeriodicContactSyncViewController.swift */; };
 		4A0AC138208736FF00032CC7 /* PeriodicContactSyncRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC137208736FF00032CC7 /* PeriodicContactSyncRouter.swift */; };
@@ -101,6 +103,7 @@
 		4A0AC1572087395E00032CC7 /* PeriodicContactSyncViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC1552087395E00032CC7 /* PeriodicContactSyncViewOutput.swift */; };
 		4A0AC15C20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC15B20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift */; };
 		4A0AC15D20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC15B20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift */; };
+		4A14AD0821A53FED0094C550 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		4A2039C72087ACBC004850ED /* AutoSyncRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2039C62087ACBB004850ED /* AutoSyncRouterInput.swift */; };
 		4A2039C82087ACBC004850ED /* AutoSyncRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2039C62087ACBB004850ED /* AutoSyncRouterInput.swift */; };
 		4A257BAE21A3E87000194A5F /* AuthorityStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAD21A3E87000194A5F /* AuthorityStorage.swift */; };
@@ -140,6 +143,7 @@
 		4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7E2D395BBA8DC5D0612F29 /* LBAlbumLikePreviewSliderInteractorOutput.swift */; };
 		4A9886F420443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9886F320443F800027D7CD /* FaceImagePhotosInteractorInput.swift */; };
 		4A9886F520443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9886F320443F800027D7CD /* FaceImagePhotosInteractorInput.swift */; };
+		4A98C86C219FF89F00C3B04F /* PremiumFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98C86B219FF89F00C3B04F /* PremiumFeaturesView.swift */; };
 		4A9B38F4201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B38F2201F2D99009FC572 /* CollectionViewCellForFaceImage.swift */; };
 		4A9B38F5201F2D99009FC572 /* CollectionViewCellForFaceImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B38F2201F2D99009FC572 /* CollectionViewCellForFaceImage.swift */; };
 		4A9B38F6201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */; };
@@ -3779,6 +3783,8 @@
 		492FFCA73A2AFF885199E9CF /* FeedbackViewInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractorOutput.swift; sourceTree = "<group>"; };
 		495272FEC812C8DD6AC7A071 /* SplashInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashInteractorInput.swift; sourceTree = "<group>"; };
 		49A793804B9422E2D6327427 /* UploadFilesSelectionPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionPresenter.swift; sourceTree = "<group>"; };
+		4A02B7FD21A0550F00635694 /* PremiumInfoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumInfoCard.swift; sourceTree = "<group>"; };
+		4A02B7FF21A0552000635694 /* PremiumInfoCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumInfoCard.xib; sourceTree = "<group>"; };
 		4A0AC134208736F100032CC7 /* PeriodicContactSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncViewController.swift; sourceTree = "<group>"; };
 		4A0AC137208736FF00032CC7 /* PeriodicContactSyncRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncRouter.swift; sourceTree = "<group>"; };
 		4A0AC13A2087370B00032CC7 /* PeriodicContactSyncPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicContactSyncPresenter.swift; sourceTree = "<group>"; };
@@ -3807,6 +3813,7 @@
 		4A8CC301201A00D400C040C4 /* FaceImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageViewController.swift; sourceTree = "<group>"; };
 		4A8CC302201A00D400C040C4 /* FaceImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FaceImageViewController.xib; sourceTree = "<group>"; };
 		4A9886F320443F800027D7CD /* FaceImagePhotosInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosInteractorInput.swift; sourceTree = "<group>"; };
+		4A98C86B219FF89F00C3B04F /* PremiumFeaturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumFeaturesView.swift; sourceTree = "<group>"; };
 		4A9B38F2201F2D99009FC572 /* CollectionViewCellForFaceImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForFaceImage.swift; sourceTree = "<group>"; };
 		4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCellForFaceImage.xib; sourceTree = "<group>"; };
 		4A9B38FE201F3502009FC572 /* FaceImageItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewController.swift; sourceTree = "<group>"; };
@@ -6556,6 +6563,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4A02B7FC21A0549700635694 /* PremiumInfoCard */ = {
+			isa = PBXGroup;
+			children = (
+				4A02B7FD21A0550F00635694 /* PremiumInfoCard.swift */,
+				4A02B7FF21A0552000635694 /* PremiumInfoCard.xib */,
+			);
+			path = PremiumInfoCard;
+			sourceTree = "<group>";
+		};
 		4A0AC12E2087367A00032CC7 /* PeriodicContactSync */ = {
 			isa = PBXGroup;
 			children = (
@@ -6695,6 +6711,14 @@
 				CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */,
 			);
 			path = FaceImage;
+			sourceTree = "<group>";
+		};
+		4A98C86A219FF87500C3B04F /* PremiumFeaturesView */ = {
+			isa = PBXGroup;
+			children = (
+				4A98C86B219FF89F00C3B04F /* PremiumFeaturesView.swift */,
+			);
+			path = PremiumFeaturesView;
 			sourceTree = "<group>";
 		};
 		4A9B38F8201F3189009FC572 /* FaceImageItems */ = {
@@ -7359,6 +7383,7 @@
 			isa = PBXGroup;
 			children = (
 				A20CDB9C219D608300CA9A67 /* PremiumView */,
+				4A98C86A219FF87500C3B04F /* PremiumFeaturesView */,
 				9840C62020AEAD1C00A8634F /* CheckBoxView */,
 				7CA4A160207E3D4E00F270C8 /* FullOfQuotaPopUps */,
 				9826DB3D207F60BC00C00238 /* CustomScrollIndicator */,
@@ -8343,6 +8368,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				4A02B7FC21A0549700635694 /* PremiumInfoCard */,
 				B5B6B14E2170A01E00463260 /* PrepareToQuickScroll */,
 				7CD92DB6207509F000010BFA /* AnimationCard */,
 				7C84920F201CB8EF007C502A /* LatestUploads */,
@@ -13573,6 +13599,7 @@
 				8C06B0462008AD71003D8E05 /* oval_siyah.png in Resources */,
 				8C06AF622008AD70003D8E05 /* duz_beyaz.png in Resources */,
 				8C06AEE62008AD70003D8E05 /* bottomright@3x.png in Resources */,
+				4A14AD0821A53FED0094C550 /* OurLocalizable.strings in Resources */,
 				8C06AF202008AD70003D8E05 /* cizgi_2.png in Resources */,
 				8C06B0962008AD71003D8E05 /* polaroid_yeni@2x.png in Resources */,
 				CEBBDE0C1F01E69B00CDF527 /* TurkcellSaturaMed.ttf in Resources */,
@@ -13661,6 +13688,7 @@
 				8C06AFF82008AD71003D8E05 /* kontrast@2x.png in Resources */,
 				8C06B1AE2008AD72003D8E05 /* CRYPopupViewController.nib in Resources */,
 				8C06B0FC2008AD72003D8E05 /* share_icon@3x.png in Resources */,
+				4A02B80021A0552000635694 /* PremiumInfoCard.xib in Resources */,
 				8C06AF1A2008AD70003D8E05 /* cizgi_1_selected.png in Resources */,
 				8C06B1282008AD72003D8E05 /* t_kucuk_selected.png in Resources */,
 				8C06AFB42008AD71003D8E05 /* frekans_secili.png in Resources */,
@@ -16006,6 +16034,7 @@
 				B56B97B4212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */,
 				984F8E7D200CDEA200D9D595 /* StoriesInteractor.swift in Sources */,
 				CE51ACC71EF90853005DCEE0 /* RegistrationModuleInput.swift in Sources */,
+				4A02B7FE21A0550F00635694 /* PremiumInfoCard.swift in Sources */,
 				CE51ACC81EF90853005DCEE0 /* RegistrationPresenter.swift in Sources */,
 				78D9BA3A2007E7F100F2233F /* DuplicatedContactsInteractorInput.swift in Sources */,
 				CE51ACC91EF90853005DCEE0 /* RegistrationInteractorInput.swift in Sources */,
@@ -16667,6 +16696,7 @@
 				8C06AC1020066641003D8E05 /* TurkcellSecurityModuleInput.swift in Sources */,
 				EDD8CBFAF2355BDB13376953 /* ActivityTimelinePresenter.swift in Sources */,
 				872D8C119282747BDC9A55C6 /* ActivityTimelineInteractorInput.swift in Sources */,
+				4A98C86C219FF89F00C3B04F /* PremiumFeaturesView.swift in Sources */,
 				2364F4A40D0899837114AB2A /* ActivityTimelineInteractorOutput.swift in Sources */,
 				A0052B3EF580D29AEEB116BA /* ActivityTimelineInteractor.swift in Sources */,
 				7C4F60A22019D0340033C58F /* CollageCard.swift in Sources */,

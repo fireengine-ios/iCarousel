@@ -10,4 +10,5 @@ import Foundation
 
 protocol PremiumInteractorInput {
     
+    func startPurchaseBecomePremiumUser()
 }
