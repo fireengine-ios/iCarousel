@@ -81,7 +81,8 @@ final class PremiumFeaturesView: UIView {
         descriptionLabel.frame = .zero
         descriptionLabel.numberOfLines = 0
         descriptionLabel.font = UIFont.TurkcellSaturaMedFont(size: 14)
-        
+        descriptionLabel.textColor = ColorConstants.darkText
+
         imageView.translatesAutoresizingMaskIntoConstraints = false
 
         imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
