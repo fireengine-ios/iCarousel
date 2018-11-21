@@ -78,10 +78,8 @@ class HomePageInteractor: HomePageInteractorInput {
                                             dublicates: result.hasPermissionFor(.deleteDublicate),
                                                  faces: result.hasPermissionFor(.faceRecognition))
                 isRefresh ? CardsManager.default.refreshPremiumCard() : CardsManager.default.startPremiumCard()
-                break
             case .failed(_):
                 isRefresh ? CardsManager.default.refreshPremiumCard() : CardsManager.default.startPremiumCard()
-                break
             }
         }
     }

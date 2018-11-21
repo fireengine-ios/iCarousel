@@ -184,6 +184,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         if viewsByType[type] == nil {
             let view = getViewForOperation(operation: type)
             setViewByType(view: view, operation: type)
+            //helps to keep PremiumInfoCard on top
             let index = (popUps.first(where: { $0.isKind(of: PremiumInfoCard.self) }) != nil) ? 1 : 0
             
             print("insert at index ", index, type.rawValue)

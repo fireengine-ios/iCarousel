@@ -104,7 +104,9 @@ struct NumericConstants {
     static let durationAnimationForPremiumButton: Double = 0.5
 
     static let timeIntervalForPremiumFeaturesView: TimeInterval = 2
-    
+    static let imageViewSizeForPremiumFeaturesView: CGFloat = 46
+    static let transitionDurationForPremiumFeaturesView: TimeInterval = 1
+
     static let alphaForColorsPremiumButton: CGFloat = 0.85
 }
 
