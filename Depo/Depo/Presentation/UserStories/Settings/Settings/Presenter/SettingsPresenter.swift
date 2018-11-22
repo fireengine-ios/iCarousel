@@ -12,10 +12,18 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     var interactor: SettingsInteractorInput!
     var router: SettingsRouterInput!
     
+    private let authorityStorage: AuthorityStorage = factory.resolve()
+    
     private let cameraService = CameraService()
     
     var isPasscodeEmpty: Bool {
         return interactor.isPasscodeEmpty
+    }
+    
+    var isPremiumUser: Bool {
+        get {
+            return authorityStorage.isPremium ?? false
+        }
     }
     
     func viewIsReady() {
