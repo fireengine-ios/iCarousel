@@ -714,3 +714,7 @@
 "object_recognition_short" = "Object Recognition";
 "lorem_ipsum_non_turkcell" = "LOREM IPSUM NON-TURKCELL";
 "lorem_ipsum_turkcell" = " LOREM IPSUM TURKCELL";
+
+/* PackageInfoView */
+"my_storage" = "My Storage";
+"see_details" = "See Details";

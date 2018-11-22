@@ -954,4 +954,8 @@ struct TextConstants {
     
     static let loremNonTurkcell = NSLocalizedString("lorem_ipsum_non_turkcell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loremTurkcell = NSLocalizedString("lorem_ipsum_turkcell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    //MARK: - PackageInfoView
+    static let myStorage = NSLocalizedString("my_storage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let seeDetails = NSLocalizedString("see_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

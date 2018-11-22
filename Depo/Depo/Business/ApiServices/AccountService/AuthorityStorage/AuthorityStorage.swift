@@ -12,6 +12,8 @@ protocol AuthorityStorage: class {
     var isPremium: Bool? { get set }
     var faceRecognition: Bool? { get set }
     var deleteDublicate: Bool? { get set }
+    var isBannerShowedForPremium: Bool { get }
+    var isLosePremiumStatus: Bool { get }
     
     func refrashStatus(premium: Bool, dublicates: Bool, faces: Bool)
 }

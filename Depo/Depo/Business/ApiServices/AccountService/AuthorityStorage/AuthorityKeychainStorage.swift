@@ -15,11 +15,25 @@ final class AuthorityKeychainStorage: AuthorityStorage {
         static let isPremium = "AUTH_PREMIUM_USER"
         static let faceRecognition = "AUTH_FACE_IMAGE_LOCATION"
         static let deleteDublicate = "AUTH_DELETE_DUPLICATE"
+
+        static let isBannerShowedForPremium = "isBannerShowedForPremium"
+        static let isLosePremiumStatus = "isLosePremiumStatus"
     }
 
     private var keychain = KeychainSwift()
 
     var isPremium: Bool? {
+
+        willSet {
+            if isPremium ?? false == true, newValue ?? false == false {
+                UserDefaults.standard.set(true, forKey: Keys.isLosePremiumStatus)
+                UserDefaults.standard.set(false, forKey: Keys.isBannerShowedForPremium)
+            } else if isPremium ?? false == false, newValue ?? false == true {
+                UserDefaults.standard.set(false, forKey: Keys.isLosePremiumStatus)
+                UserDefaults.standard.set(true, forKey: Keys.isBannerShowedForPremium)
+            }
+        }
+
         didSet {
             keychain.set(isPremium ?? false, forKey: Keys.isPremium)
         }
@@ -34,6 +48,18 @@ final class AuthorityKeychainStorage: AuthorityStorage {
     var deleteDublicate: Bool? {
         didSet {
             keychain.set(deleteDublicate ?? false, forKey: Keys.deleteDublicate)
+        }
+    }
+
+    var isBannerShowedForPremium: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Keys.isBannerShowedForPremium)
+        }
+    }
+
+    var isLosePremiumStatus: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Keys.isLosePremiumStatus)
         }
     }
     

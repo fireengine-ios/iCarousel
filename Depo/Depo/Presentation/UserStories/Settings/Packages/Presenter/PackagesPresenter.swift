@@ -13,7 +13,7 @@ class PackagesPresenter {
     
     var activeSubscriptions: [SubscriptionPlanBaseResponse] = []
     private var accountType = AccountType.all
-    
+
     private var referenceToken = ""
     private var userPhone = ""
     private var offerToBuy: OfferServiceResponse?
@@ -124,6 +124,13 @@ extension PackagesPresenter: PackagesViewOutput {
     func openTermsOfUseScreen() {
         router.openTermsOfUse()
     }
+
+    func configureViews(_ views: [PackageInfoView]) {
+        for view in views {
+            view.delegate = self
+        }
+    }
+
 }
 
 // MARK: - OptInControllerDelegate
@@ -280,4 +287,19 @@ extension PackagesPresenter: PackagesInteractorOutput {
 // MARK: PackagesModuleInput
 extension PackagesPresenter: PackagesModuleInput {
 
+}
+
+// MARK: PackageInfoViewDelegate
+extension PackagesPresenter: PackageInfoViewDelegate {
+
+    func onSeeDetailsTap(with type: ControlPackageType) {
+        switch type {
+        case .myStorage:
+            break
+        case .premiumUser:
+            router.openLeavePremium()
+        case .standard:
+            break
+        }
+    }
 }

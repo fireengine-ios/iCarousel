@@ -16,4 +16,6 @@ protocol PackagesViewOutput {
     func getAccountType() -> AccountType
     
     func openTermsOfUseScreen()
+
+    func configureViews(_ views: [PackageInfoView])
 }

@@ -12,7 +12,8 @@ final class PackagesViewController: BaseViewController {
     var output: PackagesViewOutput!
     
     @IBOutlet weak var descriptionLabel: UILabel!
-    
+    @IBOutlet weak private var topStackView: UIStackView!
+
     @IBOutlet weak private var collectionView: ResizableCollectionView!
     @IBOutlet weak private var promoView: PromoView!
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
@@ -58,10 +59,35 @@ final class PackagesViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        setupStackView()
     }
     
     private func setupCollectionView() {
         collectionView.register(nibCell: SubscriptionPlanCollectionViewCell.self)
+    }
+
+    private func setupStackView() {
+
+        for view in topStackView.arrangedSubviews {
+            view.removeFromSuperview()
+        }
+
+        let authorityStorage: AuthorityStorage = factory.resolve()
+
+        let isPremium = authorityStorage.isPremium ?? false
+
+        let firstView = PackageInfoView.initFromNib()
+        isPremium ?
+            firstView.configure(with: .premiumUser) :
+            firstView.configure(with: .standard)
+
+        let secondView = PackageInfoView.initFromNib()
+        secondView.configure(with: .myStorage)
+
+        output.configureViews([firstView, secondView])
+
+        topStackView.addArrangedSubview(firstView)
+        topStackView.addArrangedSubview(secondView)
     }
     
     
