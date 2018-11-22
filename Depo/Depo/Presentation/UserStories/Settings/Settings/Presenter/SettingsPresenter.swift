@@ -21,9 +21,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     var isPremiumUser: Bool {
-        get {
-            return authorityStorage.isPremium ?? false
-        }
+        return authorityStorage.isPremium ?? false
     }
     
     func viewIsReady() {

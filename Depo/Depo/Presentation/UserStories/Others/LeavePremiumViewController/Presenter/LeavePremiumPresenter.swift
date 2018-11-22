@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class LeavePremiumPresenter {
+final class LeavePremiumPresenter: BasePresenter {
     
     weak var view: LeavePremiumViewInput!
     var interactor: LeavePremiumInteractorInput!
@@ -24,6 +24,17 @@ final class LeavePremiumPresenter {
         self.activeSubscriptions = activeSubscriptions
     }
     
+    override func startAsyncOperation() {
+        outputView()?.showSpiner()
+    }
+    
+    //MARK : BasePresenter
+    
+    override func outputView() -> Waiting? {
+        return view as? Waiting
+    }
+    
+    // MARK: Utility methods
     private func getAccountType(for accountType: String, subscriptionPlans: [SubscriptionPlanBaseResponse]) -> AccountType {
         if accountType == "TURKCELL" {
             return .turkcell
@@ -58,6 +69,8 @@ extension LeavePremiumPresenter: LeavePremiumViewOutput {
 // MARK: - LeavePremiumInteractorOtuput
 extension LeavePremiumPresenter: LeavePremiumInteractorOutput {
     func didLoadAccountType(accountTypeString: String) {
+        asyncOperationSucces()
+
         authorityStorage.refrashStatus(premium: false, dublicates: false, faces: false)
         
         let accountType = getAccountType(for: accountTypeString, subscriptionPlans: activeSubscriptions)
@@ -67,12 +80,20 @@ extension LeavePremiumPresenter: LeavePremiumInteractorOutput {
             router.showAlert(with: TextConstants.loremTurkcell)
         }
     }
+    
+    func didErrorMessage(with text: String) {
+        asyncOperationSucces()
+
+        router.showError(with: text)
+    }
 }
 
 // MARK: - LeavePremiumViewDelegate
 extension LeavePremiumPresenter: LeavePremiumViewDelegate {
     
     func onLeavePremiumTap() {
+        startAsyncOperation()
+
         interactor.getAccountType()
     }
     

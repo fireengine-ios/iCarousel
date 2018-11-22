@@ -11,4 +11,5 @@ import Foundation
 protocol LeavePremiumRouterInput: class {
     func goToBack()
     func showAlert(with text: String)
+    func showError(with text: String)
 }

@@ -29,4 +29,8 @@ extension LeavePremiumRouter: LeavePremiumRouterInput {
         }
         router.presentViewController(controller: popUpController)
     }
+    
+    func showError(with text: String) {
+        UIApplication.showErrorAlert(message: text)
+    }
 }

@@ -10,4 +10,5 @@ import Foundation
 
 protocol LeavePremiumInteractorOutput: class {
     func didLoadAccountType(accountTypeString: String)
+    func didErrorMessage(with text: String)
 }

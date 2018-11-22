@@ -33,6 +33,7 @@ extension LeavePremiumInteractor: LeavePremiumInteractorInput {
                 }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {
+                    self?.output.didErrorMessage(with: errorResponse.description)
                 }
         })
     }

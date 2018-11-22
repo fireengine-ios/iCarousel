@@ -34,12 +34,6 @@ final class LeavePremiumHeaderView: UIView {
         setupView()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        leavePremiumButton.layer.cornerRadius = 15
-    }
-    
     // MARK: Utility methods(Public)
     func configure(with price: String) {
         priceLabel.text = price
@@ -71,6 +65,7 @@ final class LeavePremiumHeaderView: UIView {
         leavePremiumButton.backgroundColor = ColorConstants.darcBlueColor
         leavePremiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
         leavePremiumButton.layer.masksToBounds = true
+        leavePremiumButton.layer.cornerRadius = 15
     }
     
     // MARK: Actions
