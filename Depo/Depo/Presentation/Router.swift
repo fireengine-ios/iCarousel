@@ -796,5 +796,12 @@ class RouterVC: NSObject {
         let controller = PremiumModuleInitializer.initializePremiumController(with: "PremiumViewController", title: title, headerTitle: headerTitle)
         return controller
     }
+    
+    // MARK: - Leave Premium
+
+    func leavePremium(title: String, activeSubscriptions: [SubscriptionPlanBaseResponse]) -> UIViewController{
+        let controller = LeavePremiumModuleInitializer.initializeLeavePremiumController(with: "LeavePremiumViewController", title: title, activeSubscriptions: activeSubscriptions)
+        return controller
+    }
 
 }

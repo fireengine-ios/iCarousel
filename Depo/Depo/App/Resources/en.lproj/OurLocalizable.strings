@@ -694,6 +694,7 @@
 "Object Recognition to remember with things you love" = "Object Recognition to remember with things you love";
 "Become Premium" = "Become Premium";
 "Become Premium Member!" = "Become Premium Member!";
+"leave_premium_membership" = "Leave Premium Membership";
 "Standard User" = "Standard User";
 "Premium User" = "Premium User";
 "lifebox Premium" = "lifebox Premium";
@@ -711,3 +712,5 @@
 "places_recognition_short" = "Places Recognition";
 "face_recognition_short" = "Face Recognition";
 "object_recognition_short" = "Object Recognition";
+"lorem_ipsum_non_turkcell" = "LOREM IPSUM NON-TURKCELL";
+"lorem_ipsum_turkcell" = " LOREM IPSUM TURKCELL";

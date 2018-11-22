@@ -50,6 +50,8 @@ protocol SettingsViewOutput {
     func goTurkcellSecurity()
     
     var isPasscodeEmpty: Bool { get }
+    
+    var isPremiumUser: Bool { get }
 
 //    func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool)
 //    func turkcellSecurityChanged(passcode: Bool, autoLogin: Bool)
