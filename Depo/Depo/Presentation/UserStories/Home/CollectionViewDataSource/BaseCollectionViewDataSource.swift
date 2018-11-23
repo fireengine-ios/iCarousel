@@ -259,13 +259,14 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
-        if !checkIsThisIsPermittedType(type: type) {
+        if !checkIsThisIsPermittedType(type: type), type != .premium {
             return
         }
-        if !checkIsNeedShowPopUpFor(operationType: type) {
+        if !checkIsNeedShowPopUpFor(operationType: type), type != .premium {
             return
         }
         if popUps.contains(where: { $0 is PremiumInfoCard }) {
+            refreshPremiumCard()
             return
         }
         

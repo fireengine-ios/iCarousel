@@ -146,9 +146,9 @@ extension PackagesInteractor: PackagesInteractorInput {
         accountService.permissions { [weak self] (result) in
             switch result {
             case .success(let response):
-                self?.authorityStorage.refrashStatus(premium: response.hasPermissionFor(.premiumUser),
-                                                     dublicates: response.hasPermissionFor(.deleteDublicate),
-                                                     faces: response.hasPermissionFor(.faceRecognition))
+//                self?.authorityStorage.refrashStatus(premium: response.hasPermissionFor(.premiumUser),
+//                                                     dublicates: response.hasPermissionFor(.deleteDublicate),
+//                                                     faces: response.hasPermissionFor(.faceRecognition))
                 DispatchQueue.main.async {
                     self?.output.successedGotUserAuthority()
                 }
