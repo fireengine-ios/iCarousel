@@ -109,10 +109,10 @@ struct NumericConstants {
 
     static let alphaForColorsPremiumButton: CGFloat = 0.85
 
-    static let packageViewCornerRadius: CGFloat = 0.85
+    static let packageViewCornerRadius: CGFloat = 5
     static let packageViewShadowOpacity: Float = 1
     static let packageViewMainShadowRadius: CGFloat = 3
-    static let packageViewBottomViewShadowRadius: CGFloat = 1
+    static let packageViewBottomViewShadowRadius: CGFloat = 2
 }
 
 struct RequestSizeConstant {

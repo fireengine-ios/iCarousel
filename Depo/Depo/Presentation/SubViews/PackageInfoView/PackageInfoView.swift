@@ -25,6 +25,7 @@ final class PackageInfoView: UIView, NibInit {
     @IBOutlet private weak var seeDetailsLabel: UILabel!
     @IBOutlet private weak var bottomView: UIView!
     @IBOutlet private weak var storageSizeLabel: UILabel!
+    @IBOutlet private weak var shadowView: UIView!
 
     //MARK: vars
     private var view: PackagePremiumView?
@@ -54,7 +55,7 @@ final class PackageInfoView: UIView, NibInit {
         case .myStorage:
             titleLabel.text = TextConstants.myStorage
             seeDetailsLabel.text = TextConstants.seeDetails
-            storageSizeLabel.text = "9484685 GB"
+            storageSizeLabel.text = "105 GB"
         case .premiumUser:
             titleLabel.text = TextConstants.premiumUser
             seeDetailsLabel.text = TextConstants.seeDetails
@@ -84,8 +85,10 @@ final class PackageInfoView: UIView, NibInit {
     }
 
     private func setupShadow() {
+
         layer.cornerRadius = NumericConstants.packageViewCornerRadius
         view?.layer.cornerRadius = NumericConstants.packageViewCornerRadius
+        bottomView.layer.cornerRadius = NumericConstants.packageViewCornerRadius
 
         clipsToBounds = false
 
@@ -98,14 +101,10 @@ final class PackageInfoView: UIView, NibInit {
                                                      width: layer.frame.size.width,
                                                      height: layer.frame.size.height)).cgPath
 
-        bottomView.layer.shadowColor = UIColor.lightGray.cgColor
-        bottomView.layer.shadowOpacity = NumericConstants.packageViewShadowOpacity
-        bottomView.layer.shadowOffset = CGSize.zero
-        bottomView.layer.shadowRadius = NumericConstants.packageViewBottomViewShadowRadius
-        bottomView.layer.shadowPath = UIBezierPath(rect: CGRect(x: 0,
-                                                                y: 0,
-                                                                width: bottomView.layer.frame.size.width,
-                                                                height: bottomView.layer.frame.size.height)).cgPath
+        shadowView.layer.shadowColor = UIColor.lightGray.cgColor
+        shadowView.layer.shadowOpacity = NumericConstants.packageViewShadowOpacity
+        shadowView.layer.shadowOffset = CGSize.zero
+        shadowView.layer.shadowRadius = NumericConstants.packageViewBottomViewShadowRadius
     }
 
     private func setupGesture() {
