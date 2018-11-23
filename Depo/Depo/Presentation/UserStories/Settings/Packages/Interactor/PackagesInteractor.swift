@@ -131,7 +131,8 @@ extension PackagesInteractor: PackagesInteractorInput {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self?.output.failed(with: TextConstants.errorGettingStorageInfo)
+                    let error = CustomErrors.serverError("An error occurred while getting storage info.")
+                    self?.output.failed(with: error.description)
                 }
             }
         }) { [weak self] errorResponse in

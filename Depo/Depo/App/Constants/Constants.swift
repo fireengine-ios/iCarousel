@@ -802,7 +802,6 @@ struct TextConstants {
     
     static let renewalDate = NSLocalizedString("Renewal Date: %@", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let subscriptionEndDate = NSLocalizedString("Expiration Date: %@", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-        static let errorGettingStorageInfo = NSLocalizedString("error_getting_storage_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - Navigation bar img names
     
