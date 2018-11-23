@@ -47,7 +47,7 @@ final class PackageInfoView: UIView, NibInit {
     }
 
     //MARK: Utility methods(public)
-    func configure(with type: ControlPackageType) {
+    func configure(with type: ControlPackageType, capacity: Int64? = nil) {
 
         viewType = type
 
@@ -55,23 +55,28 @@ final class PackageInfoView: UIView, NibInit {
         case .myStorage:
             titleLabel.text = TextConstants.myStorage
             seeDetailsLabel.text = TextConstants.seeDetails
-            storageSizeLabel.text = "105 GB"
+            if let capacity = capacity, capacity != 0 {
+                let capacityGB = capacity.bytesString
+                storageSizeLabel.text = capacityGB
+            } else {
+                storageSizeLabel.isHidden = true
+            }
         case .premiumUser:
             titleLabel.text = TextConstants.premiumUser
             seeDetailsLabel.text = TextConstants.seeDetails
             storageSizeLabel.isHidden = true
         case .standard:
-            packagePremiumView = PackagePremiumView.initFromNib()
-            guard let becomePremiumView = packagePremiumView else { return }
-            addSubview(becomePremiumView)
-            packagePremiumView = becomePremiumView
+            let packagePremiumView = PackagePremiumView.initFromNib()
+            addSubview(packagePremiumView)
 
-            packagePremiumView?.translatesAutoresizingMaskIntoConstraints = false
+            packagePremiumView.translatesAutoresizingMaskIntoConstraints = false
 
-            packagePremiumView?.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            packagePremiumView?.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-            packagePremiumView?.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            packagePremiumView?.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+            packagePremiumView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            packagePremiumView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+            packagePremiumView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            packagePremiumView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+
+            self.packagePremiumView = packagePremiumView
         }
     }
 

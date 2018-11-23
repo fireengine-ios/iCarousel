@@ -28,4 +28,7 @@ protocol PackagesInteractorInput {
     func trackPackageClick(plan: SubscriptionPlan, planIndex: Int)
     /// MAYBE WILL BE NEED
     //func getCurrentSubscription()
+
+    func getStorageCapacity()
+    func getUserAuthority()
 }

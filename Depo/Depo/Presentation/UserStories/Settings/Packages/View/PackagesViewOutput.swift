@@ -14,7 +14,8 @@ protocol PackagesViewOutput {
     func restorePurchasesPressed()
     
     func getAccountType() -> AccountType
-    
+    func getStorageCapacity() -> Int64
+
     func openTermsOfUseScreen()
 
     func configureViews(_ views: [PackageInfoView])

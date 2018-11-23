@@ -77,11 +77,10 @@
                             <rect key="frame" x="0.0" y="178" width="347" height="30"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xid-YY-Gvb" customClass="GradientPremiumButton" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="150.5" y="0.0" width="46" height="30"/>
+                                    <rect key="frame" x="158.5" y="0.0" width="30" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="teX-MN-J1v"/>
                                     </constraints>
-                                    <state key="normal" title="Button"/>
                                     <connections>
                                         <action selector="onBecomePremiumTap:" destination="QpB-uy-Vaj" eventType="touchUpInside" id="2dC-ac-Q8j"/>
                                     </connections>

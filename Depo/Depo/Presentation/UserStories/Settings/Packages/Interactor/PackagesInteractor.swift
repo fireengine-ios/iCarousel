@@ -15,6 +15,7 @@ class PackagesInteractor {
     private let subscriptionsService: SubscriptionsService
     private let accountService: AccountServicePrl
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var authorityStorage: AuthorityStorage = factory.resolve()
     
     init(offersService: OffersService = OffersServiceIml(),
          subscriptionsService: SubscriptionsService = SubscriptionsServiceIml(),
@@ -120,6 +121,34 @@ extension PackagesInteractor: PackagesInteractorInput {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })
+    }
+
+    func getStorageCapacity() {
+        accountService.usage(success: { [weak self]  (response) in
+            if let response = response as? UsageResponse, let quotaBytes = response.quotaBytes {
+                DispatchQueue.main.async {
+                    self?.output.successed(quotaBytes: quotaBytes)
+                }
+            }
+        }) { [weak self] errorResponse in
+            DispatchQueue.main.async {
+                self?.output.failedUsage(with: errorResponse)
+            }
+        }
+    }
+
+    func getUserAuthority() {
+        accountService.permissions { [weak self] (result) in
+            switch result {
+            case .success(let response):
+                self?.authorityStorage.refrashStatus(premium: response.hasPermissionFor(.premiumUser),
+                                                     dublicates: response.hasPermissionFor(.deleteDublicate),
+                                                     faces: response.hasPermissionFor(.faceRecognition))
+                self?.output.successedGotUserAuthority()
+            case .failed(let error):
+                self?.output.successedGotUserAuthority()
+            }
+        }
     }
     
     func getToken(for offer: OfferServiceResponse) {

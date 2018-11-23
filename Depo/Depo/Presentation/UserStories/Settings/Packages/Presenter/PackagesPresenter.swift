@@ -19,7 +19,8 @@ class PackagesPresenter {
     private var offerToBuy: OfferServiceResponse?
     private var offerIndex: Int = 0
     private var optInVC: OptInController?
-    
+    private var storageCapacity: Int64 = 0
+
     private func getAccountType(for accountType: String, subscriptionPlans: [SubscriptionPlanBaseResponse]) -> AccountType {
         if accountType == "TURKCELL" {
             return .turkcell
@@ -57,6 +58,10 @@ extension PackagesPresenter: PackagesViewOutput {
     func getAccountType() -> AccountType {
         return accountType
     }
+
+    func getStorageCapacity() -> Int64 {
+        return storageCapacity
+    }
     
     func submit(promocode: String) {
         interactor.submit(promocode: promocode)
@@ -66,6 +71,8 @@ extension PackagesPresenter: PackagesViewOutput {
         interactor.trackScreen()
         view?.startActivityIndicator()
         interactor.getActiveSubscriptions()
+        interactor.getUserAuthority()
+        interactor.getStorageCapacity()
     }
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
@@ -271,6 +278,15 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(offerApple: OfferApple) {
         view?.stopActivityIndicator()
+    }
+
+    func successed(quotaBytes: Int64) {
+        storageCapacity = quotaBytes
+        view?.setupStackView(with: quotaBytes)
+    }
+
+    func successedGotUserAuthority() {
+        view?.setupStackView(with: storageCapacity)
     }
     
     func failedUsage(with error: ErrorResponse) {
