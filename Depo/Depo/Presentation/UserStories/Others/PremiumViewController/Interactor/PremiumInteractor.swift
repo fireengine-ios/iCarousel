@@ -17,8 +17,7 @@ extension PremiumInteractor: PremiumInteractorInput {
 
     func startPurchaseBecomePremiumUser() {
         let authorityStorage: AuthorityStorage = factory.resolve()
-        let isPremium = !(authorityStorage.isPremium ?? false)
-        authorityStorage.refrashStatus(premium: isPremium, dublicates: true, faces: true)
+        authorityStorage.refrashStatus(premium: true, dublicates: true, faces: true)
 
         output.didPurchased()
     }

@@ -74,9 +74,9 @@ class HomePageInteractor: HomePageInteractorInput {
         AccountService().permissions { response in
             switch response {
             case .success(let result):
-                authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
-                                            dublicates: result.hasPermissionFor(.deleteDublicate),
-                                                 faces: result.hasPermissionFor(.faceRecognition))
+//                authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
+//                                            dublicates: result.hasPermissionFor(.deleteDublicate),
+//                                                 faces: result.hasPermissionFor(.faceRecognition))
                 if isRefresh {
                     authorityStorage.isLosePremiumStatus ?
                         CardsManager.default.startPremiumCard() :
