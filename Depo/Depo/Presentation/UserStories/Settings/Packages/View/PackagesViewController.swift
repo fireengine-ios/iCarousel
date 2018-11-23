@@ -138,6 +138,10 @@ extension PackagesViewController: PackagesViewInput {
     func display(error: ErrorResponse) {
         UIApplication.showErrorAlert(message: error.description)
     }
+
+    func display(errorMessage: String) {
+        UIApplication.showErrorAlert(message: errorMessage)
+    }
     
     func display(subscriptionPlans array: [SubscriptionPlan], append: Bool = false) {
         if let layout = collectionView.collectionViewLayout as? ColumnsCollectionLayout {

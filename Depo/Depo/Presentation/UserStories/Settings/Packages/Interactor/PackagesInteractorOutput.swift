@@ -21,6 +21,7 @@ protocol PackagesInteractorOutput: class {
     func successed(quotaBytes: Int64)
     func successedGotUserAuthority()
     func failedUsage(with error: ErrorResponse)
+    func failed(with errorMessage: String)
     func failedVerifyOffer()
     
     func successedPromocode()

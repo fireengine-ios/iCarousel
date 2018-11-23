@@ -129,6 +129,10 @@ extension PackagesInteractor: PackagesInteractorInput {
                 DispatchQueue.main.async {
                     self?.output.successed(quotaBytes: quotaBytes)
                 }
+            } else {
+                DispatchQueue.main.async {
+                    self?.output.failed(with: TextConstants.errorGettingStorageInfo)
+                }
             }
         }) { [weak self] errorResponse in
             DispatchQueue.main.async {
@@ -144,9 +148,13 @@ extension PackagesInteractor: PackagesInteractorInput {
                 self?.authorityStorage.refrashStatus(premium: response.hasPermissionFor(.premiumUser),
                                                      dublicates: response.hasPermissionFor(.deleteDublicate),
                                                      faces: response.hasPermissionFor(.faceRecognition))
-                self?.output.successedGotUserAuthority()
+                DispatchQueue.main.async {
+                    self?.output.successedGotUserAuthority()
+                }
             case .failed(let error):
-                self?.output.successedGotUserAuthority()
+                DispatchQueue.main.async {
+                    self?.output.successedGotUserAuthority()
+                }
             }
         }
     }

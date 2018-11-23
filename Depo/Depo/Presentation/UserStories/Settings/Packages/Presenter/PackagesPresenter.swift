@@ -294,6 +294,10 @@ extension PackagesPresenter: PackagesInteractorOutput {
         view?.stopActivityIndicator()
         view?.display(error: error)
     }
+
+    func failed(with errorMessage: String) {
+        view?.display(errorMessage: errorMessage)
+    }
     
     func purchasesRestored(text: String) {
         
