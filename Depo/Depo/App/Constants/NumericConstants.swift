@@ -108,6 +108,11 @@ struct NumericConstants {
     static let transitionDurationForPremiumFeaturesView: TimeInterval = 1
 
     static let alphaForColorsPremiumButton: CGFloat = 0.85
+
+    static let packageViewCornerRadius: CGFloat = 5
+    static let packageViewShadowOpacity: Float = 1
+    static let packageViewMainShadowRadius: CGFloat = 3
+    static let packageViewBottomViewShadowRadius: CGFloat = 2
 }
 
 struct RequestSizeConstant {

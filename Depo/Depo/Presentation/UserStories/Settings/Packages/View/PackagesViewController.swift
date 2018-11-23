@@ -12,7 +12,8 @@ final class PackagesViewController: BaseViewController {
     var output: PackagesViewOutput!
     
     @IBOutlet weak var descriptionLabel: UILabel!
-    
+    @IBOutlet weak private var topStackView: UIStackView!
+
     @IBOutlet weak private var collectionView: ResizableCollectionView!
     @IBOutlet weak private var promoView: PromoView!
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
@@ -58,13 +59,13 @@ final class PackagesViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        setupStackView(with: output.getStorageCapacity())
     }
     
     private func setupCollectionView() {
         collectionView.register(nibCell: SubscriptionPlanCollectionViewCell.self)
     }
-    
-    
+
     private func setupPolicy() {
         let attributedString = NSMutableAttributedString(
             string: TextConstants.packagesPolicyHeader,
@@ -111,7 +112,7 @@ final class PackagesViewController: BaseViewController {
 
 // MARK: PackagesViewInput
 extension PackagesViewController: PackagesViewInput {
-    
+
     func reloadPackages() {
         plans = []
         output.viewIsReady()
@@ -136,6 +137,10 @@ extension PackagesViewController: PackagesViewInput {
     
     func display(error: ErrorResponse) {
         UIApplication.showErrorAlert(message: error.description)
+    }
+
+    func display(errorMessage: String) {
+        UIApplication.showErrorAlert(message: errorMessage)
     }
     
     func display(subscriptionPlans array: [SubscriptionPlan], append: Bool = false) {
@@ -181,6 +186,29 @@ extension PackagesViewController: PackagesViewInput {
         alertVC.addAction(settingsAction)
         alertVC.addAction(okAction)
         present(alertVC, animated: true, completion: nil)
+    }
+
+    func setupStackView(with storageCapacity: Int64) {
+        for view in topStackView.arrangedSubviews {
+            view.removeFromSuperview()
+        }
+
+        let authorityStorage: AuthorityStorage = factory.resolve()
+
+        let isPremium = authorityStorage.isPremium ?? false
+
+        let firstView = PackageInfoView.initFromNib()
+        isPremium ?
+            firstView.configure(with: .premiumUser) :
+            firstView.configure(with: .standard)
+
+        let secondView = PackageInfoView.initFromNib()
+        secondView.configure(with: .myStorage, capacity: storageCapacity)
+
+        output.configureViews([firstView, secondView])
+
+        topStackView.addArrangedSubview(firstView)
+        topStackView.addArrangedSubview(secondView)
     }
 }
 

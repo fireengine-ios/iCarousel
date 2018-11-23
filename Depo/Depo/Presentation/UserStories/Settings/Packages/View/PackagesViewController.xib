@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,6 +27,7 @@
                 <outlet property="promoView" destination="5bp-6o-N2u" id="9NB-9L-Bts"/>
                 <outlet property="scrollView" destination="TRR-B7-lJ8" id="V89-Ic-Tct"/>
                 <outlet property="subtitleLabel" destination="LS1-hD-FRu" id="00P-TY-Gbd"/>
+                <outlet property="topStackView" destination="FWc-7v-dob" id="yM7-NJ-6Xm"/>
                 <outlet property="view" destination="iN0-l3-epB" id="fj3-X7-Fa4"/>
             </connections>
         </placeholder>
@@ -35,20 +36,23 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TRR-B7-lJ8">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRR-B7-lJ8">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                     <subviews>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cPJ-cW-pMM">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPJ-cW-pMM">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                             <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="FWc-7v-dob">
+                                    <rect key="frame" x="14" y="14" width="292" height="49"/>
+                                </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Packages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LS1-hD-FRu">
-                                    <rect key="frame" x="20" y="20" width="60" height="21"/>
+                                    <rect key="frame" x="20" y="77" width="60" height="21"/>
                                     <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="18"/>
                                     <color key="textColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <collectionView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="280" placeholderIntrinsicHeight="263" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="YAO-ir-hJp" customClass="ResizableCollectionView" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="61" width="320" height="263"/>
+                                <collectionView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="263" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="YAO-ir-hJp" customClass="ResizableCollectionView" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="118" width="320" height="263"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rT7-r1-YOK" customClass="ColumnsCollectionLayout" customModule="lifebox" customModuleProvider="target">
                                         <size key="itemSize" width="50" height="50"/>
@@ -69,14 +73,14 @@
                                         <outlet property="delegate" destination="-1" id="uoU-jg-xxp"/>
                                     </connections>
                                 </collectionView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="*Average figure. Total number of documents depends on the size of each document." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3N-5r-5TB">
-                                    <rect key="frame" x="20" y="340" width="280" height="28"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*Average figure. Total number of documents depends on the size of each document." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3N-5r-5TB">
+                                    <rect key="frame" x="20" y="397" width="280" height="28"/>
                                     <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="14"/>
                                     <color key="textColor" red="0.019607843140000001" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5bp-6o-N2u" customClass="PromoView" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="398" width="292" height="0.0"/>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5bp-6o-N2u" customClass="PromoView" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="20" y="455" width="292" height="0.0"/>
                                     <subviews>
                                         <view hidden="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="HQv-5f-b5d">
                                             <rect key="frame" x="0.0" y="0.0" width="192" height="0.0"/>
@@ -146,8 +150,8 @@
                                         <outlet property="titleLabel" destination="gi8-P3-gCs" id="BvM-gx-M8C"/>
                                     </connections>
                                 </view>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0Wh-5R-OYf">
-                                    <rect key="frame" x="16" y="406" width="288" height="90"/>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0Wh-5R-OYf">
+                                    <rect key="frame" x="16" y="463" width="288" height="33"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -160,21 +164,24 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="0Wh-5R-OYf" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" constant="16" id="0nU-Ai-raX"/>
+                                <constraint firstAttribute="trailing" secondItem="FWc-7v-dob" secondAttribute="trailing" constant="14" id="Ayq-Jq-A7Y"/>
                                 <constraint firstItem="5bp-6o-N2u" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" constant="20" id="CL9-3w-NZH"/>
                                 <constraint firstAttribute="trailing" secondItem="X3N-5r-5TB" secondAttribute="trailing" constant="20" id="Cme-Qp-9Ej"/>
                                 <constraint firstItem="0Wh-5R-OYf" firstAttribute="top" secondItem="5bp-6o-N2u" secondAttribute="bottom" constant="8" id="Cnr-df-Zlf"/>
                                 <constraint firstItem="LS1-hD-FRu" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" constant="20" id="Fq7-7d-gMA"/>
                                 <constraint firstItem="5bp-6o-N2u" firstAttribute="top" secondItem="X3N-5r-5TB" secondAttribute="bottom" constant="30" id="Nbk-tA-oZu"/>
+                                <constraint firstItem="FWc-7v-dob" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" constant="14" id="OAj-no-AHU"/>
+                                <constraint firstAttribute="bottom" secondItem="0Wh-5R-OYf" secondAttribute="bottom" constant="8" id="R9e-fb-iXi"/>
                                 <constraint firstAttribute="trailing" secondItem="0Wh-5R-OYf" secondAttribute="trailing" constant="16" id="RQQ-kd-i6H"/>
                                 <constraint firstItem="YAO-ir-hJp" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" id="YHx-hH-r3B"/>
                                 <constraint firstItem="X3N-5r-5TB" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" constant="20" id="Zem-ab-Y1d"/>
-                                <constraint firstAttribute="bottom" secondItem="0Wh-5R-OYf" secondAttribute="bottom" constant="8" id="aoT-aC-dgW"/>
                                 <constraint firstAttribute="trailing" secondItem="5bp-6o-N2u" secondAttribute="trailing" constant="8" id="etb-DA-nLY"/>
                                 <constraint firstAttribute="trailing" secondItem="YAO-ir-hJp" secondAttribute="trailing" id="huE-8d-yOp"/>
                                 <constraint firstItem="YAO-ir-hJp" firstAttribute="top" secondItem="LS1-hD-FRu" secondAttribute="bottom" constant="20" id="ixP-0Y-2Al"/>
+                                <constraint firstItem="LS1-hD-FRu" firstAttribute="top" secondItem="FWc-7v-dob" secondAttribute="bottom" constant="14" id="jAw-PG-o9m"/>
                                 <constraint firstItem="X3N-5r-5TB" firstAttribute="top" secondItem="YAO-ir-hJp" secondAttribute="bottom" constant="16" id="mR9-Se-lNd"/>
-                                <constraint firstItem="LS1-hD-FRu" firstAttribute="top" secondItem="cPJ-cW-pMM" secondAttribute="top" constant="20" id="nvt-YZ-Lxg"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5bp-6o-N2u" secondAttribute="bottom" constant="10" id="y0Z-zg-80L"/>
+                                <constraint firstItem="FWc-7v-dob" firstAttribute="top" secondItem="cPJ-cW-pMM" secondAttribute="top" constant="14" id="y4Z-JP-AbZ"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -197,6 +204,7 @@
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <viewLayoutGuide key="safeArea" id="nPs-St-HNE"/>
+            <point key="canvasLocation" x="131.25" y="153.16901408450704"/>
         </view>
         <customObject id="2I8-Re-xUl" customClass="KeyboardHideManager" customModule="lifebox" customModuleProvider="target">
             <userDefinedRuntimeAttributes>

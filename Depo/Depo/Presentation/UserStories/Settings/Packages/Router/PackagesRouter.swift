@@ -12,8 +12,13 @@ class PackagesRouter {
 
 // MARK: PackagesRouterInput
 extension PackagesRouter: PackagesRouterInput {
-    
+
     func openTermsOfUse() {
         router.pushViewController(viewController: router.termsOfUseScreen)
+    }
+
+    func openLeavePremium() {
+        let vc = router.leavePremium(title: TextConstants.lifeboxPremium, activeSubscriptions: [])
+        router.pushViewController(viewController: vc)
     }
 }

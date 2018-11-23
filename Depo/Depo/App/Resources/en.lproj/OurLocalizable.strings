@@ -704,7 +704,7 @@
 /* PremiumBanner */
 "standard_banner_message" = "Discover our Premium features that brings you better cloud storage experience!";
 "premium_banner_message" = "Discover now Premium features that brings you better cloud storage experience!";
-"standard_banner_title" = "Lifebox Premium";
+"standard_banner_title" = "lifebox Premium";
 "premium_banner_title" = "Welcome to lifebox Premium!";
 
 "back_up_short" = "Back Up With Original Quality";
@@ -714,3 +714,7 @@
 "object_recognition_short" = "Object Recognition";
 "lorem_ipsum_non_turkcell" = "LOREM IPSUM NON-TURKCELL";
 "lorem_ipsum_turkcell" = " LOREM IPSUM TURKCELL";
+
+/* PackageInfoView */
+"my_storage" = "My Storage";
+"see_details" = "See Details";

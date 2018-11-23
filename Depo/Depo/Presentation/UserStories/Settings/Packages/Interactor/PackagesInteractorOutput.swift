@@ -18,11 +18,14 @@ protocol PackagesInteractorOutput: class {
     func successed(activeSubscriptions: [SubscriptionPlanBaseResponse])
     func successed(accountTypeString: String)
     func successed(offerApple: OfferApple)
+    func successed(quotaBytes: Int64)
+    func successedGotUserAuthority()
     func failedUsage(with error: ErrorResponse)
+    func failed(with errorMessage: String)
     func failedVerifyOffer()
     
     func successedPromocode()
     func failedPromocode(with errorString: String)
-    
+
     func purchasesRestored(text: String)
 }

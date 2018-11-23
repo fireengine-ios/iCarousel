@@ -265,6 +265,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         if !checkIsNeedShowPopUpFor(operationType: type) {
             return
         }
+        if popUps.contains(where: { $0 is PremiumInfoCard }) {
+            return
+        }
         
         if viewsByType[type] == nil {
             let view = getViewForOperation(operation: type)
