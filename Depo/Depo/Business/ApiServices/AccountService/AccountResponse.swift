@@ -273,25 +273,35 @@ final class PermissionResponse: ObjectRequestResponse {
 }
 
 final class FeaturePacksResponse: ObjectRequestResponse {
-    var packs: [FeaturePackResponse]?
+    var packs: [PackageModelResponse]?
 
     override func mapping() {
         let packsJsonArray = json?.array
-        if let packsList = packsJsonArray?.flatMap({ FeaturePackResponse.init(withJSON: $0) }) {
+        if let packsList = packsJsonArray?.flatMap({ PackageModelResponse.init(withJSON: $0) }) {
             packs = packsList
         }
     }
 }
 
-final class FeaturePackResponse: ObjectRequestResponse {
+final class PackageModelResponse: ObjectRequestResponse {
 
-    enum FeatureType: String {
-        case apple          = "FEATURE_APPLE"
-        case slcm           = "FEATURE_SLCM"
-        case slcmPaycell    = "FEATURE_SLCM_PAYCELL"
+    enum PackageType: String {
+        case apple              = "FEATURE_APPLE"
+        case SLCM               = "FEATURE_SLCM"
+        case SLCMPaycell        = "FEATURE_SLCM_PAYCELL"
+        case google             = "FEATURE_GOOGLE"
+        case freeOfCharge       = "FEATURE_FREE_OF_CHARGE"
+        case lifeCell           = "FEATURE_LIFECELL"
+        case promo              = "FEATURE_PROMO"
+        case KKTCell            = "FEATURE_KKTCELL"
+        case MoldCell           = "FEATURE_MOLDCELL"
+        case life               = "FEATURE_LIFE"
+        case paycellAllAccess   = "FEATURE_PAYCELL_ALL_ACCESS"
+        case paycellSLCM        = "FEATURE_PAYCELL_SLCM"
+        case allAccessPaycell   = "FEATURE_ALL_ACCESS_PAYCELL"
     }
 
-    enum FeatureStatus: String {
+    enum PackageStatus: String {
         case enables    = "ENABLED"
         case disabled   = "DISABLED"
     }
@@ -321,10 +331,10 @@ final class FeaturePackResponse: ObjectRequestResponse {
     var slcmOfferId: Int?
     var cometOfferId: Int?
     var period: String?
-    var type: FeatureType?
-    var status: FeatureStatus?
+    var type: PackageType?
+    var status: PackageStatus?
     var cpcmOfferId: Int?
-    var authorities: [FeaturePacksAuthoritiesResponse]?
+    var authorities: [PackagePackAuthoritiesResponse]?
 
     override func mapping() {
         name = json?[ResponseKeys.name].string
@@ -337,20 +347,20 @@ final class FeaturePackResponse: ObjectRequestResponse {
         cometOfferId = json?[ResponseKeys.cometOfferId].int
         period = json?[ResponseKeys.period].string
         if let typeString = json?[ResponseKeys.type].string {
-            type = FeatureType(rawValue: typeString)
+            type = PackageType(rawValue: typeString)
         }
         if let statusString = json?[ResponseKeys.status].string {
-            status = FeatureStatus(rawValue: statusString)
+            status = PackageStatus(rawValue: statusString)
         }
         cpcmOfferId = json?[ResponseKeys.cpcmOfferId].int
         let authoritiesJsonArray = json?[ResponseKeys.authorities].array
-        if let authoritiesList = authoritiesJsonArray?.flatMap({ FeaturePacksAuthoritiesResponse.init(withJSON: $0) }) {
+        if let authoritiesList = authoritiesJsonArray?.flatMap({ PackagePackAuthoritiesResponse.init(withJSON: $0) }) {
             authorities = authoritiesList
         }
     }
 }
 
-final class FeaturePacksAuthoritiesResponse: ObjectRequestResponse {
+final class PackagePackAuthoritiesResponse: ObjectRequestResponse {
     
     enum AuthorityType: String {
         case faceRecognition    = "AUTH_FACE_IMAGE_LOCATION"
@@ -367,6 +377,17 @@ final class FeaturePacksAuthoritiesResponse: ObjectRequestResponse {
     override func mapping() {
         if let typeString = json?[ResponseKey.authorityType].string {
             authorityType = AuthorityType(rawValue: typeString)
+        }
+    }
+}
+
+final class AvailableOffersResponse: ObjectRequestResponse {
+    var offers: [PackageModelResponse]?
+
+    override func mapping() {
+        let packsJsonArray = json?.array
+        if let packsList = packsJsonArray?.flatMap({ PackageModelResponse.init(withJSON: $0) }) {
+            offers = packsList
         }
     }
 }

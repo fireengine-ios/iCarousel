@@ -14,6 +14,7 @@ protocol AccountServicePrl {
     func info(success: SuccessResponse?, fail:@escaping FailResponse)
     func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
     func featurePacks(handler: @escaping (ResponseResult<FeaturePacksResponse>) -> Void)
+    func availableOffers(handler: @escaping (ResponseResult<AvailableOffersResponse>) -> Void)
 }
 
 class AccountService: BaseRequestService, AccountServicePrl {
@@ -71,6 +72,24 @@ class AccountService: BaseRequestService, AccountServicePrl {
                 case .success(let data):
                     
                     let featurePacks = FeaturePacksResponse(json: data, headerResponse: nil)
+                    handler(.success(featurePacks))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+
+    func availableOffers(handler: @escaping (ResponseResult<AvailableOffersResponse>) -> Void) {
+        debugLog("AccountService featurePacks")
+
+        sessionManager
+            .request(RouteRequests.Account.Permissions.featurePacks)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+
+                    let featurePacks = AvailableOffersResponse(json: data, headerResponse: nil)
                     handler(.success(featurePacks))
                 case .failure(let error):
                     handler(.failed(error))

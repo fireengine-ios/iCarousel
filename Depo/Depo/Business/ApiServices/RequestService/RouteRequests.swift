@@ -192,6 +192,7 @@ struct RouteRequests {
         enum Permissions {
             static let authority = Account.accountApi +/ "authority"
             static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
+            static let availableOffers = Account.accountApi +/ "available-offers/IOS"
         }
     }
 
