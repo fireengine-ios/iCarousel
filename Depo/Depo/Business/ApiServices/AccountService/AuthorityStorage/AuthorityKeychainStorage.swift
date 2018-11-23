@@ -25,12 +25,12 @@ final class AuthorityKeychainStorage: AuthorityStorage {
     var isPremium: Bool? {
 
         willSet {
-            if isPremium ?? false == true, newValue ?? false == false {
-                UserDefaults.standard.set(true, forKey: Keys.isLosePremiumStatus)
-                UserDefaults.standard.set(false, forKey: Keys.isBannerShowedForPremium)
-            } else if isPremium ?? false == false, newValue ?? false == true {
-                UserDefaults.standard.set(false, forKey: Keys.isLosePremiumStatus)
-                UserDefaults.standard.set(true, forKey: Keys.isBannerShowedForPremium)
+            let currentFlag = isPremium ?? false
+            let newFlag = newValue ?? false
+
+            if currentFlag != newFlag {
+                UserDefaults.standard.set(currentFlag, forKey: Keys.isLosePremiumStatus)
+                UserDefaults.standard.set(newFlag, forKey: Keys.isBannerShowedForPremium)
             }
         }
 
@@ -52,15 +52,11 @@ final class AuthorityKeychainStorage: AuthorityStorage {
     }
 
     var isBannerShowedForPremium: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: Keys.isBannerShowedForPremium)
-        }
+        return UserDefaults.standard.bool(forKey: Keys.isBannerShowedForPremium)
     }
 
     var isLosePremiumStatus: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: Keys.isLosePremiumStatus)
-        }
+        return UserDefaults.standard.bool(forKey: Keys.isLosePremiumStatus)
     }
     
     func refrashStatus(premium: Bool, dublicates: Bool, faces: Bool) {

@@ -28,7 +28,7 @@ final class PackageInfoView: UIView, NibInit {
     @IBOutlet private weak var shadowView: UIView!
 
     //MARK: vars
-    private var view: PackagePremiumView?
+    private var packagePremiumView: PackagePremiumView?
     private var viewType: ControlPackageType!
     weak var delegate: PackageInfoViewDelegate!
 
@@ -61,15 +61,17 @@ final class PackageInfoView: UIView, NibInit {
             seeDetailsLabel.text = TextConstants.seeDetails
             storageSizeLabel.isHidden = true
         case .standard:
-            view = PackagePremiumView.initFromNib()
-            addSubview(view ?? UIView())
+            packagePremiumView = PackagePremiumView.initFromNib()
+            guard let becomePremiumView = packagePremiumView else { return }
+            addSubview(becomePremiumView)
+            packagePremiumView = becomePremiumView
 
-            view?.translatesAutoresizingMaskIntoConstraints = false
+            packagePremiumView?.translatesAutoresizingMaskIntoConstraints = false
 
-            view?.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            view?.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-            view?.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            view?.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+            packagePremiumView?.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            packagePremiumView?.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+            packagePremiumView?.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            packagePremiumView?.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         }
     }
 
@@ -87,7 +89,7 @@ final class PackageInfoView: UIView, NibInit {
     private func setupShadow() {
 
         layer.cornerRadius = NumericConstants.packageViewCornerRadius
-        view?.layer.cornerRadius = NumericConstants.packageViewCornerRadius
+        packagePremiumView?.layer.cornerRadius = NumericConstants.packageViewCornerRadius
         bottomView.layer.cornerRadius = NumericConstants.packageViewCornerRadius
 
         clipsToBounds = false
