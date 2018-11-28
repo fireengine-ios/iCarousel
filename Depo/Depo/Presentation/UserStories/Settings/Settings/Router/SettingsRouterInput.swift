@@ -45,4 +45,6 @@ protocol SettingsRouterInput {
     func goTurkcellSecurity()
     
     func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?)
+    
+    func showError(errorMessage: String)
 }

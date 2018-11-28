@@ -119,12 +119,15 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             
             switch response {
             case .success(let result):
+                authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
+                                                     dublicates: result.hasPermissionFor(.deleteDublicate),
+                                                     faces: result.hasPermissionFor(.faceRecognition))
                 DispatchQueue.toMain {
                     self?.output?.didObtainUserStatus(isPremiumUser: result.hasPermissionFor(.deleteDublicate))
                 }
-            case .failed(_):
+            case .failed(let error):
                 DispatchQueue.toMain {
-                    self?.output?.didObtainUserStatus(isPremiumUser: authorityStorage.deleteDublicate ?? false)
+                    self?.output?.didObtainFailUserStatus(errorMessage: error.localizedDescription)
                 }
             }
         }

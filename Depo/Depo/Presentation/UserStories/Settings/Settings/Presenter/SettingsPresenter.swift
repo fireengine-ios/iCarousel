@@ -173,6 +173,16 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         view.profileWontChangeWith(error: error)
     }
     
+    func didObtainUserStatus() {
+        asyncOperationSucces()
+        view.updateStatusUser()
+    }
+    
+    func didFailToObtainUserStatus(errorMessage: String) {
+        asyncOperationSucces()
+        router.showError(errorMessage: errorMessage)
+    }
+    
     func connectToNetworkFailed() {
         asyncOperationSucces()
         router.goToConnectedToNetworkFailed()
