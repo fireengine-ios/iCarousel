@@ -13,4 +13,5 @@ protocol SettingsViewInput: class {
     func updatePhoto(image: UIImage)
     func profileInfoChanged()
     func profileWontChangeWith(error: Error)
+    func updateStatusUser()
 }

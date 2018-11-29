@@ -71,12 +71,12 @@ class HomePageInteractor: HomePageInteractorInput {
 
     private func getPremiumCardInfo(isRefresh: Bool) {
         let authorityStorage: AuthorityStorage = factory.resolve()
-        AccountService().permissions { response in
+        AccountService().permissions { [weak self] response in
             switch response {
             case .success(let result):
-//                authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
-//                                            dublicates: result.hasPermissionFor(.deleteDublicate),
-//                                                 faces: result.hasPermissionFor(.faceRecognition))
+                authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
+                                            dublicates: result.hasPermissionFor(.deleteDublicate),
+                                                 faces: result.hasPermissionFor(.faceRecognition))
                 if isRefresh {
                     authorityStorage.isLosePremiumStatus ?
                         CardsManager.default.startPremiumCard() :
@@ -85,14 +85,9 @@ class HomePageInteractor: HomePageInteractorInput {
                     let isBannerShowedForPremium = authorityStorage.isBannerShowedForPremium
                     isBannerShowedForPremium ? () : CardsManager.default.startPremiumCard()
                 }
-            case .failed(_):
-                if isRefresh {
-                    authorityStorage.isLosePremiumStatus ?
-                        CardsManager.default.startPremiumCard() :
-                        CardsManager.default.refreshPremiumCard()
-                } else {
-                    let isBannerShowedForPremium = authorityStorage.isBannerShowedForPremium
-                    isBannerShowedForPremium ? () : CardsManager.default.startPremiumCard()
+            case .failed(let error):
+                DispatchQueue.toMain {
+                    self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
                 }
             }
         }

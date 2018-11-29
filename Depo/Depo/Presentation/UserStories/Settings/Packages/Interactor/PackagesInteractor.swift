@@ -143,18 +143,18 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
 
     func getUserAuthority() {
-        accountService.permissions { [weak self] (result) in
-            switch result {
-            case .success(let response):
-//                self?.authorityStorage.refrashStatus(premium: response.hasPermissionFor(.premiumUser),
-//                                                     dublicates: response.hasPermissionFor(.deleteDublicate),
-//                                                     faces: response.hasPermissionFor(.faceRecognition))
+        accountService.permissions { [weak self] response in
+            switch response {
+            case .success(let result):
+                self?.authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
+                                                     dublicates: result.hasPermissionFor(.deleteDublicate),
+                                                     faces: result.hasPermissionFor(.faceRecognition))
                 DispatchQueue.main.async {
                     self?.output.successedGotUserAuthority()
                 }
             case .failed(let error):
                 DispatchQueue.main.async {
-                    self?.output.successedGotUserAuthority()
+                    self?.output.failed(with: error.localizedDescription)
                 }
             }
         }

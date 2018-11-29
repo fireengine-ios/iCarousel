@@ -97,4 +97,8 @@ class SettingsRouter: SettingsRouterInput {
         mailController.modalTransitionStyle = .crossDissolve
         router.presentViewController(controller: mailController)//.present(mailController, animated: true, completion: nil)
     }
+    
+    func showError(errorMessage: String) {
+        UIApplication.showErrorAlert(message: errorMessage)
+    }
 }

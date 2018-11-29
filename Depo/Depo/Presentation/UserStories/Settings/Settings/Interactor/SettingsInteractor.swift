@@ -21,6 +21,8 @@ class SettingsInteractor: SettingsInteractorInput {
     
     private let analyticsManager: AnalyticsService = factory.resolve()
     
+    private let authorityStorage: AuthorityStorage = factory.resolve()
+    
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
@@ -121,10 +123,17 @@ class SettingsInteractor: SettingsInteractorInput {
     func getUserStatus() {
         accountSerivese.permissions { [weak self] response in
             switch response {
-            case .success(_):
-                break
-            case .failed(_):
-                break
+            case .success(let result):
+                self?.authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
+                                               dublicates: result.hasPermissionFor(.deleteDublicate),
+                                               faces: result.hasPermissionFor(.faceRecognition))
+                DispatchQueue.toMain {
+                    self?.output.didObtainUserStatus()
+                }
+            case .failed(let error):
+                DispatchQueue.toMain {
+                    self?.output.didFailToObtainUserStatus(errorMessage: error.localizedDescription)
+                }
             }
         }
     }

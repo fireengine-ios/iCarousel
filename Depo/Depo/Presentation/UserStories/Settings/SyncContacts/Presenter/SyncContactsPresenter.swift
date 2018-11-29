@@ -135,6 +135,10 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         }
     }
     
+    func didObtainFailUserStatus(errorMessage: String) {
+        router.showError(errorMessage: errorMessage)
+    }
+    
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
