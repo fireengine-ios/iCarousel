@@ -417,7 +417,6 @@ class RouterVC: NSObject, BaseFilesGreedModuleOutput {
             return SegmentedController()
         }
         let controllers = [allFiles, documents, musics, favorites]
-//        let navControllers = controllers.flatMap { NavigationController(rootViewController: $0!) }
         return SegmentedController.initWithControllers(controllers)
     }
     

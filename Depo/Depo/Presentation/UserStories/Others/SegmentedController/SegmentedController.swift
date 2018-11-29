@@ -82,6 +82,11 @@ final class SegmentedController: UIViewController, NibInit {
         
         segmentedControl.removeAllSegments()
         
+        guard !viewControllers.isEmpty else {
+            assertionFailure()
+            return
+        }
+        
         for (index, controller) in viewControllers.enumerated() {
             segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)
 //            segmentedControl.setTitle(controller.title, forSegmentAt: index)
