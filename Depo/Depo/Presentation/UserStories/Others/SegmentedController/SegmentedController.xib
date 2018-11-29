@@ -26,10 +26,7 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="50"/>
                     <subviews>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kla-02-C1E">
-                            <rect key="frame" x="107.5" y="11" width="160" height="29"/>
-                            <constraints>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="kxd-Uq-6at"/>
-                            </constraints>
+                            <rect key="frame" x="20" y="11" width="335" height="29"/>
                             <segments>
                                 <segment title="First"/>
                                 <segment title="Second"/>
@@ -41,9 +38,8 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="kla-02-C1E" firstAttribute="centerX" secondItem="qmm-Jd-Jcw" secondAttribute="centerX" id="Awt-ur-9Kn"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kla-02-C1E" secondAttribute="trailing" constant="8" id="BJh-j9-bxQ"/>
-                        <constraint firstItem="kla-02-C1E" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qmm-Jd-Jcw" secondAttribute="leading" constant="8" id="Mbt-2D-QdY"/>
+                        <constraint firstAttribute="trailing" secondItem="kla-02-C1E" secondAttribute="trailing" constant="20" id="BJh-j9-bxQ"/>
+                        <constraint firstItem="kla-02-C1E" firstAttribute="leading" secondItem="qmm-Jd-Jcw" secondAttribute="leading" constant="20" id="Mbt-2D-QdY"/>
                         <constraint firstItem="kla-02-C1E" firstAttribute="centerY" secondItem="qmm-Jd-Jcw" secondAttribute="centerY" id="qLa-57-uF1"/>
                         <constraint firstAttribute="height" constant="50" id="zoq-FT-W4G"/>
                     </constraints>
