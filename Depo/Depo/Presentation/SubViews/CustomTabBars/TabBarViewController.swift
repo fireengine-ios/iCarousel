@@ -354,7 +354,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                     router.photosScreen,
                     router.videosScreen,
                     router.musics,
-                    router.allFiles]
+                    router.segmentedFiles]
         customNavigationControllers = list.flatMap { NavigationController(rootViewController: $0!) }
     }
     

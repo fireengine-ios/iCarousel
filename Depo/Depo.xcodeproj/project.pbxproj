@@ -3522,6 +3522,7 @@
 		CEFFA8F021AFC21400B34F36 /* SegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */; };
 		CEFFA8F221AFC27900B34F36 /* SegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */; };
 		CEFFA8F321AFC27900B34F36 /* SegmentedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFFA8ED21AFC21400B34F36 /* SegmentedController.xib */; };
+		CEFFA8F521B0089800B34F36 /* ViewSortStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8F421B0089800B34F36 /* ViewSortStorage.swift */; };
 		D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */; };
 		D42ED46420C9D9E600761645 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */; };
 		D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E01F3F18FA00EFDC6D /* UsageInfoConfigurator.swift */; };
@@ -5744,6 +5745,7 @@
 		CEFC14152059609F002DE803 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		CEFFA8ED21AFC21400B34F36 /* SegmentedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedController.xib; sourceTree = "<group>"; };
 		CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedController.swift; sourceTree = "<group>"; };
+		CEFFA8F421B0089800B34F36 /* ViewSortStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSortStorage.swift; sourceTree = "<group>"; };
 		CFC97990A9F9F470648ADD6B /* Pods-LifeboxUnitTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.enterprise.xcconfig"; sourceTree = "<group>"; };
 		D07372B64C00468A227C63A7 /* TermsAndServicesConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesConfigurator.swift; sourceTree = "<group>"; };
 		D329B3047AEFF11E8E02E7A9 /* Pods-TC_Depo_LifeTech.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -10884,6 +10886,7 @@
 				CEAE3F8F1EFD4CF100A405B2 /* Buttons */,
 				7C032B851EEFFC1A006532C8 /* SubViews */,
 				7CD1F8D41F014F150028F51A /* Router.swift */,
+				CEFFA8F421B0089800B34F36 /* ViewSortStorage.swift */,
 				CEF73B9C1FCEAC30004C3ADF /* KeyboardHideManager.swift */,
 				CE6DE75F1FCC44F800C23CBD /* KeyboardLayoutConstraint.swift */,
 			);
@@ -16517,6 +16520,7 @@
 				CE6A8F1720737E230001EB54 /* ServerMessageError.swift in Sources */,
 				78E3D51A203FFEC800FA3478 /* MenloworksTags.swift in Sources */,
 				B5BA987B2068C6F200CA3BF9 /* UIImage+Size.swift in Sources */,
+				CEFFA8F521B0089800B34F36 /* ViewSortStorage.swift in Sources */,
 				4A9B3905201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
 				A207990E219F137E00AD5037 /* PremiumInteractor.swift in Sources */,
 				CEB2734E205BF57B00E1AE9C /* UnderlineTextField.swift in Sources */,

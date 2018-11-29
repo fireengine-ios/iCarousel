@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RouterVC: NSObject, BaseFilesGreedModuleOutput {
+class RouterVC: NSObject {
     
     let splitContr = SplitIpadViewContoller()
     
@@ -408,11 +408,22 @@ class RouterVC: NSObject, BaseFilesGreedModuleOutput {
         }
     }
     
+    var favorites: UIViewController? {
+        let storage = ViewSortStorage.shared
+        return favorites(moduleOutput: storage,
+                         sortType: storage.favoritesSortType,
+                         viewType: storage.favoritesViewType)
+    }
+    
     var allFiles: UIViewController? {
-        let favoritesVC = favorites(moduleOutput: self, sortType: favoritesSortType, viewType: favoritesViewType)
-        let allFilesVC = allFiles(moduleOutput: self, sortType: allFilesSortType, viewType: allFilesViewType)
-        
-        guard let musics = musics, let documents = documents, let favorites = favoritesVC, let allFiles = allFilesVC else {
+        let storage = ViewSortStorage.shared
+        return allFiles(moduleOutput: storage,
+                        sortType: storage.allFilesSortType,
+                        viewType: storage.allFilesViewType)
+    }
+    
+    var segmentedFiles: UIViewController? {
+        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles else {
             assertionFailure()
             return SegmentedController()
         }
