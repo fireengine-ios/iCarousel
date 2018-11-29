@@ -92,14 +92,14 @@ class SingletonStorage {
         guard foreceReload || faceImageSettings == nil,
         accountInfo != nil else {
             if let faceImageSettingsUnwraped  = faceImageSettings {
-                success(faceImageSettingsUnwraped.allowed ?? false)
+                success(faceImageSettingsUnwraped.isFaceImageAllowed ?? false)
             } else {
                 fail(.string(TextConstants.errorUnknown))
             }
             return
         }
         getFaceImageRecognitionSettingsForUser(completion: { firStatus in
-            guard let status = firStatus.allowed else {
+            guard let status = firStatus.isFaceImageAllowed else {
                 fail(ErrorResponse.string(TextConstants.errorUnknown))
                 return
             }
@@ -108,7 +108,7 @@ class SingletonStorage {
     }
     
     var isFaceImageRecognitionON : Any {
-        return faceImageSettings?.allowed ?? NSNull()
+        return faceImageSettings?.isFaceImageAllowed ?? NSNull()
     }
     
     //MARK: - subscriptions

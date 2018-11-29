@@ -119,18 +119,18 @@ final class FaceImageViewController: ViewController, NibInit {
     
     private func checkFaceImageIsAllowed(completion: VoidHandler? = nil)  {
         activityManager.start()
-        accountService.isAllowedFaceImage { [weak self] result in
+        accountService.isAllowedFaceImageAndFacebook { [weak self] result in
             DispatchQueue.toMain {
                 switch result {
-                case .success(let isAllowed):
-                    self?.faceImageAllowedSwitch.setOn(isAllowed, animated: true)
-                    if isAllowed {
+                case .success(let result):
+                    self?.faceImageAllowedSwitch.setOn(result.isFaceImageAllowed ?? false, animated: true)
+//                    if isAllowed {
                         /// next request
-                        self?.checkFacebookTagsIsAllowed(completion: completion)
-                    } else {
-                        self?.displayManager.applyConfiguration(.initial)
+//                        self?.checkFacebookTagsIsAllowed(completion: completion)
+//                    } else {
+//                        self?.displayManager.applyConfiguration(.initial)
                         completion?()
-                    }
+//                    }
                     
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)

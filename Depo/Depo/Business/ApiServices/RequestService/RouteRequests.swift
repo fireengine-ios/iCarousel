@@ -185,7 +185,7 @@ struct RouteRequests {
         enum Settings {
             static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
             
-            static let faceImageAllowed = settingsApi +/ "faceImageAllowed"
+            static let faceImageAllowed = baseUrl +/ "account/setting"
             static let facebookTaggingEnabled = settingsApi +/ "facebookTaggingEnabled"
         }
         

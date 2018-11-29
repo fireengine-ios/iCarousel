@@ -119,7 +119,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     private func faceImageAllowed(completion: @escaping (_ result: Bool) -> Void) {
         let accountService = AccountService()
         accountService.faceImageAllowed(success: { response in
-            if let response = response as? FaceImageAllowedResponse, let allowed = response.allowed {
+            if let response = response as? FaceImageAllowedResponse, let allowed = response.isFaceImageAllowed {
                 completion(allowed)
             } else {
                 completion(false)
