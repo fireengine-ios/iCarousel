@@ -80,11 +80,16 @@ final class SegmentedController: UIViewController, NibInit {
 //        navigationBarWithGradientStyle()
 //        needShowTabBar = true
         
-        add(childController: viewControllers[segmentedControl.selectedSegmentIndex])
+        segmentedControl.removeAllSegments()
         
         for (index, controller) in viewControllers.enumerated() {
-            segmentedControl.setTitle(controller.title, forSegmentAt: index)
+            segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)
+//            segmentedControl.setTitle(controller.title, forSegmentAt: index)
         }
+        
+        /// selectedSegmentIndex == -1 after removeAllSegments
+        segmentedControl.selectedSegmentIndex = 0
+        add(childController: viewControllers[segmentedControl.selectedSegmentIndex])
     }
     
     private func setup(with controllers: [UIViewController]) {
@@ -128,6 +133,7 @@ final class SegmentedController: UIViewController, NibInit {
 extension UIViewController {
     
     func removeFromParentVC() {
+        willMove(toParentViewController: nil)
         view.removeFromSuperview()
         removeFromParentViewController()
     }

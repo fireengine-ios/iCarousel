@@ -178,6 +178,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         let items = [("outlineHome", "", TextConstants.accessibilityHome),
                      ("outlinePhotosVideos", "", TextConstants.accessibilityPhotosVideos),
                      ("", "", ""),
+                     //!!!
                      ("outlineMusic", "", TextConstants.accessibilityMusic),
                      ("outlineDocs", "", TextConstants.accessibilityDocuments)]
         
@@ -353,7 +354,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                     router.photosScreen,
                     router.videosScreen,
                     router.musics,
-                    router.documents]
+                    router.allFiles]
         customNavigationControllers = list.flatMap { NavigationController(rootViewController: $0!) }
     }
     

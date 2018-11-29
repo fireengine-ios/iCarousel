@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RouterVC: NSObject {
+class RouterVC: NSObject, BaseFilesGreedModuleOutput {
     
     let splitContr = SplitIpadViewContoller()
     
@@ -387,9 +387,38 @@ class RouterVC: NSObject {
     // MARK: Music
     
     var musics: UIViewController? {
-  
         let controller = BaseFilesGreedModuleInitializer.initializeMusicViewController(with: "BaseFilesGreedViewController")
         return controller
+    }
+    
+    
+    private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
+    private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    
+    private(set) var favoritesViewType = MoreActionsConfig.ViewType.Grid
+    private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    
+    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
+        if fieldType == .all {
+            self.allFilesViewType = type
+            self.allFilesSortType = sortedType
+        } else if fieldType == .favorite {
+            self.favoritesViewType = type
+            self.favoritesSortType = sortedType
+        }
+    }
+    
+    var allFiles: UIViewController? {
+        let favoritesVC = favorites(moduleOutput: self, sortType: favoritesSortType, viewType: favoritesViewType)
+        let allFilesVC = allFiles(moduleOutput: self, sortType: allFilesSortType, viewType: allFilesViewType)
+        
+        guard let musics = musics, let documents = documents, let favorites = favoritesVC, let allFiles = allFilesVC else {
+            assertionFailure()
+            return SegmentedController()
+        }
+        let controllers = [allFiles, documents, musics, favorites]
+//        let navControllers = controllers.flatMap { NavigationController(rootViewController: $0!) }
+        return SegmentedController.initWithControllers(controllers)
     }
     
     
