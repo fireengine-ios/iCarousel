@@ -76,10 +76,14 @@ final class SegmentedController: UIViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         homePageNavigationBarStyle()//without refactor
 //        navigationBarWithGradientStyle()
 //        needShowTabBar = true
-        
+        setupSegmentedControl()
+    }
+    
+    private func setupSegmentedControl() {
         segmentedControl.removeAllSegments()
         
         guard !viewControllers.isEmpty else {
@@ -89,7 +93,6 @@ final class SegmentedController: UIViewController, NibInit {
         
         for (index, controller) in viewControllers.enumerated() {
             segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)
-//            segmentedControl.setTitle(controller.title, forSegmentAt: index)
         }
         
         /// selectedSegmentIndex == -1 after removeAllSegments
