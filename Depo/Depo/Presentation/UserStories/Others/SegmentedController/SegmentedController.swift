@@ -36,13 +36,13 @@ extension SegmentedChildController where Self: UIViewController {
 //    func segmentedControllerEndEditMode()
 //}
 
-final class SegmentedController: UIViewController, NibInit {
+final class SegmentedController: BaseViewController, NibInit {
     
     static func initWithControllers(_ controllers: [UIViewController]) -> SegmentedController {
         let controller = SegmentedController.initFromNib()
         controller.setup(with: controllers)
         return controller
-    } 
+    }
     
     @IBOutlet private weak var contanerView: UIView!
     
@@ -51,11 +51,10 @@ final class SegmentedController: UIViewController, NibInit {
             newValue.tintColor = ColorConstants.darcBlueColor
             newValue.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)],
                                             for: .normal)
-            
         }
     }
     
-    private var viewControllers: [UIViewController] = []
+    private var viewControllers: [BaseViewController] = []
     
     // TODO: - make safe -
     var currentController: UIViewController {
@@ -77,9 +76,9 @@ final class SegmentedController: UIViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        homePageNavigationBarStyle()//without refactor
+//        homePageNavigationBarStyle()//without refactor
 //        navigationBarWithGradientStyle()
-//        needShowTabBar = true
+        needShowTabBar = true
         setupSegmentedControl()
     }
     
@@ -97,11 +96,12 @@ final class SegmentedController: UIViewController, NibInit {
         
         /// selectedSegmentIndex == -1 after removeAllSegments
         segmentedControl.selectedSegmentIndex = 0
-        add(childController: viewControllers[segmentedControl.selectedSegmentIndex])
+        setupSelectedController(viewControllers[segmentedControl.selectedSegmentIndex])
     }
     
     private func setup(with controllers: [UIViewController]) {
-        guard !controllers.isEmpty else {
+        guard !controllers.isEmpty, let controllers = controllers as? [BaseViewController] else {
+            assertionFailure()
             return
         }
         viewControllers = controllers
@@ -112,11 +112,17 @@ final class SegmentedController: UIViewController, NibInit {
         let selectedIndex = sender.selectedSegmentIndex
         
         guard selectedIndex < viewControllers.count else {
+            assertionFailure()
             return
         }
         
         childViewControllers.forEach { $0.removeFromParentVC() }
-        add(childController: viewControllers[selectedIndex])
+        setupSelectedController(viewControllers[selectedIndex])
+    }
+    
+    private func setupSelectedController(_ controller: BaseViewController) {
+        add(childController: controller)
+        floatingButtonsArray = controller.floatingButtonsArray
     }
     
     private func add(childController: UIViewController) {
