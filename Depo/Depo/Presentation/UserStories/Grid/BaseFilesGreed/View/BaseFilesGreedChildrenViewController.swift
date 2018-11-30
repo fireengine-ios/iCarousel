@@ -10,15 +10,20 @@ import Foundation
 
 class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        navigationBarWithGradientStyle()
+//    }
+    
     override func configureNavBarActions(isSelecting: Bool = false) {
         super.configureNavBarActions(isSelecting: isSelecting)
-        defaultNavBarStyle()
-        navigationBarWithGradientStyle()
+//        defaultNavBarStyle()
+//        navigationBarWithGradientStyle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
+//        navigationBarWithGradientStyle()
         if mainTitle != "" {
             subTitle = output.getSortTypeString()
         }
