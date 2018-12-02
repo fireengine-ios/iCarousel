@@ -199,23 +199,23 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
      
-    func changeFaceImageAllowed(isAllowed: Bool, handler: @escaping ResponseVoid) {
+    func changeFaceImageAndFacebookAllowed(isFaceImageAllowed: Bool, isFacebookAllowed: Bool, handler: @escaping (ResponseResult<FaceImageAllowedResponse>) -> Void) {
         debugLog("AccountService changeFaceImageAllowed")
+        
+        let params: [String: Any] = ["faceImageRecognitionAllowed": isFaceImageAllowed,
+                                     "facebookTaggingEnabled": isFacebookAllowed]
         
         sessionManager
             .request(RouteRequests.Account.Settings.faceImageAllowed,
-                     method: .put,
-                     encoding: String(isAllowed))
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.prettyPrinted)
             .customValidate()
-            .responseString { response in
+            .responseData { response in
                 switch response.result {    
-                case .success(let text):
-                    if text == "\"OK\"" {
-                        handler(.success(()))
-                    } else {
-                        let error = CustomErrors.serverError(text)
-                        handler(.failed(error))
-                    }
+                case .success(let data):
+                    let faceImageAllowed = FaceImageAllowedResponse(json: data, headerResponse: nil)
+                    handler(.success(faceImageAllowed))
                 case .failure(let error):
                     handler(.failed(error))
                 }

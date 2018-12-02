@@ -718,3 +718,5 @@
 /* PackageInfoView */
 "my_storage" = "My Storage";
 "see_details" = "See Details";
+"face_image_description" = "Since you have a standart account, 100 of your images will be processed for face recognition and only 3 of your contacts' face will show";
+"face_image_upgrade" = "Upgrade to lifebox Premium for your entire picture gallery and use this feature without any limitation";

@@ -129,13 +129,13 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BaH-JO-rG7">
                     <rect key="frame" x="20" y="61" width="335" height="96"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1f-4s-CY4">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1f-4s-CY4">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-CI-WuL">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-CI-WuL">
                             <rect key="frame" x="0.0" y="30.5" width="335" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
@@ -147,6 +147,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zth-QW-h0a" customClass="GradientPremiumButton" customModule="lifebox" customModuleProvider="target">
                                     <rect key="frame" x="67" y="0.0" width="201" height="35"/>
                                     <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="onPremiumButtonTap:" destination="-1" eventType="touchUpInside" id="tpK-AC-wcO"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -188,19 +191,27 @@
         </view>
         <customObject id="E6W-gA-F3l" customClass="FaceImageDisplayManager" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="faceImagePremiumButton" destination="zth-QW-h0a" id="1rI-9s-Nkc"/>
+                <outlet property="faceImageStackView" destination="BaH-JO-rG7" id="WP0-BS-o01"/>
+                <outlet property="faceImageView" destination="HH3-jN-8kF" id="IKh-5C-McA"/>
                 <outlet property="facebookImportButton" destination="rTe-cC-LX9" id="eDY-5l-8tp"/>
                 <outlet property="facebookView" destination="vcu-gc-WA6" id="X4v-J4-cli"/>
+                <outlet property="firstFaceImageLabel" destination="r1f-4s-CY4" id="yIq-M1-Uid"/>
                 <outlet property="firstFacebookLabel" destination="tU6-ga-vMe" id="RXi-t6-Rkx"/>
                 <outlet property="labelsStackView" destination="yKZ-qH-VVG" id="wqO-m5-jX3"/>
+                <outlet property="secondFaceImageLabel" destination="hwc-CI-WuL" id="uFj-Zx-6Xl"/>
                 <outlet property="secondFacebookLabel" destination="rhq-SJ-P4C" id="ShG-XD-pO8"/>
             </connections>
         </customObject>
         <customObject id="pu3-QY-bUD" customClass="FaceImageDesigner" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="faceImageAllowedLabel" destination="h4B-P5-Rce" id="2b9-fd-bFp"/>
+                <outlet property="faceImagePremiumButton" destination="zth-QW-h0a" id="BTu-YP-emr"/>
                 <outlet property="facebookImportButton" destination="rTe-cC-LX9" id="lDV-Xp-JyP"/>
                 <outlet property="facebookTagsAllowedLabel" destination="WSp-nP-Yha" id="9z5-3O-D5U"/>
+                <outlet property="firstFaceImageLabel" destination="r1f-4s-CY4" id="dGn-SP-wNb"/>
                 <outlet property="firstFacebookLabel" destination="tU6-ga-vMe" id="XMU-z0-7OR"/>
+                <outlet property="secondFaceImageLabel" destination="hwc-CI-WuL" id="rx2-tA-gb7"/>
                 <outlet property="secondFacebookLabel" destination="rhq-SJ-P4C" id="YXK-YY-ajr"/>
             </connections>
         </customObject>

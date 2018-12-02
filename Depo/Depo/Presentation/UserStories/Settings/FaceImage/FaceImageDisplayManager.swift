@@ -10,6 +10,8 @@ import UIKit
 
 enum FaceImageDisplayConfigurations {
     case initial /// faceImageOff
+    case faceImageOff
+    case faceImageOn
     case facebookTagsOff
     case facebookImportOff
     case facebookImportOn
@@ -22,6 +24,11 @@ final class FaceImageDisplayManager: NSObject {
     @IBOutlet private weak var facebookImportButton: UIButton!
     @IBOutlet private weak var firstFacebookLabel: UILabel!
     @IBOutlet private weak var secondFacebookLabel: UILabel!
+    @IBOutlet private weak var faceImageStackView: UIStackView!
+    @IBOutlet private weak var firstFaceImageLabel: UILabel!
+    @IBOutlet private weak var secondFaceImageLabel: UILabel!
+    @IBOutlet private weak var faceImagePremiumButton: GradientPremiumButton!
+    @IBOutlet private weak var faceImageView: UIView!
     
     var configuration = FaceImageDisplayConfigurations.initial
     
@@ -33,9 +40,25 @@ final class FaceImageDisplayManager: NSObject {
             labelsStackView.isHidden = true
             facebookView.isHidden = true
             facebookImportButton.isHidden = true
+            faceImageStackView.isHidden = true
+            firstFaceImageLabel.isHidden = true
+            secondFaceImageLabel.isHidden = true
+            faceImagePremiumButton.isHidden = true
+            faceImageView.isHidden = true
             /// face image switch is off
             /// hide all
-            
+        case .faceImageOff:
+            faceImageStackView.isHidden = true
+            firstFaceImageLabel.isHidden = true
+            secondFaceImageLabel.isHidden = true
+            faceImagePremiumButton.isHidden = true
+            faceImageView.isHidden = true
+        case .faceImageOn:
+            faceImageStackView.isHidden = false
+            firstFaceImageLabel.isHidden = false
+            secondFaceImageLabel.isHidden = false
+            faceImagePremiumButton.isHidden = false
+            faceImageView.isHidden = false
         case .facebookTagsOff:
             labelsStackView.isHidden = false
             facebookView.isHidden = false

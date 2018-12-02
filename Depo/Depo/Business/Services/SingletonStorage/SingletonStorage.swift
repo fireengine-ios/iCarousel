@@ -74,15 +74,14 @@ class SingletonStorage {
             return
         }
         let accountService = AccountService()
-        accountService.faceImageAllowed(success: { [weak self] response in
-            if let response = response as? FaceImageAllowedResponse {
-                self?.faceImageSettings = response
-                completion(response)
-            } else {
-                fail(ErrorResponse.string(TextConstants.errorUnknown))
+        accountService.isAllowedFaceImageAndFacebook(handler: { [weak self] response in
+            switch response {
+            case .success(let result):
+                self?.faceImageSettings = result
+                completion(result)
+            case .failed(let error):
+                fail(ErrorResponse.string(error.localizedDescription))
             }
-            }, fail: { error in
-                fail(error)
         })
     }
     
