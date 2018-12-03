@@ -121,11 +121,12 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         accountService.isAllowedFaceImageAndFacebook(handler: { [weak self] response in
             switch response {
             case .success(let result):
-                if let allowed = result.isFaceImageAllowed {
-                    completion(allowed)
-                } else {
+                guard let allowed = result.isFaceImageAllowed else {
                     completion(false)
+                    return
                 }
+                
+                completion(allowed)
             case .failed(_):
                 DispatchQueue.main.async {
                     self?.output.operationFailed()
