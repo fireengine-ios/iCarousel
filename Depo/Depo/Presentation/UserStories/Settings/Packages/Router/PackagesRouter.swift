@@ -21,4 +21,8 @@ extension PackagesRouter: PackagesRouterInput {
         let vc = router.leavePremium(title: TextConstants.lifeboxPremium, activeSubscriptions: [])
         router.pushViewController(viewController: vc)
     }
+    
+    func openMyStorage(storageUsage: UsageResponse?) {
+
+    }
 }

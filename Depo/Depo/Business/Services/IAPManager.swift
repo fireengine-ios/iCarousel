@@ -56,7 +56,7 @@ final class IAPManager: NSObject {
         request.start()
     }
     
-    func purchase(offerApple: OfferApple, handler: @escaping PurchaseHandler) {
+    func purchase(product: SKProduct, handler: @escaping PurchaseHandler) {
         debugLog("IAPManager purchase offer")
         
         guard canMakePayments else {
@@ -72,7 +72,7 @@ final class IAPManager: NSObject {
         
         purchaseHandler = handler
         purchaseInProgress = true
-        let payment = SKPayment(product: offerApple.skProduct)
+        let payment = SKPayment(product: product)
         SKPaymentQueue.default().add(payment)
     }
     

@@ -284,75 +284,137 @@ final class FeaturePacksResponse: ObjectRequestResponse {
 }
 
 final class PackageModelResponse: ObjectRequestResponse {
-
     enum PackageType: String {
-        case apple              = "FEATURE_APPLE"
-        case SLCM               = "FEATURE_SLCM"
-        case SLCMPaycell        = "FEATURE_SLCM_PAYCELL"
-        case google             = "FEATURE_GOOGLE"
-        case freeOfCharge       = "FEATURE_FREE_OF_CHARGE"
-        case lifeCell           = "FEATURE_LIFECELL"
-        case promo              = "FEATURE_PROMO"
-        case KKTCell            = "FEATURE_KKTCELL"
-        case MoldCell           = "FEATURE_MOLDCELL"
-        case life               = "FEATURE_LIFE"
-        case paycellAllAccess   = "FEATURE_PAYCELL_ALL_ACCESS"
-        case paycellSLCM        = "FEATURE_PAYCELL_SLCM"
-        case allAccessPaycell   = "FEATURE_ALL_ACCESS_PAYCELL"
+        
+        static let allFeatures: [PackageType] = [appleFeature, SLCMFeature, SLCMPaycellFeature, googleFeature,
+                                                 freeOfChargeFeature, freeOfChargeFeature, lifeCellFeature, promoFeature,
+                                                 KKTCellFeature, MoldCellFeature, lifeFeature, KKTCellFeature, MoldCellFeature,
+                                                 lifeFeature, paycellAllAccessFeature, paycellSLCMFeature, allAccessPaycellFeature]
+        
+        case appleFeature               = "FEATURE_APPLE"
+        case SLCMFeature                = "FEATURE_SLCM"
+        case SLCMPaycellFeature         = "FEATURE_SLCM_PAYCELL"
+        case googleFeature              = "FEATURE_GOOGLE"
+        case freeOfChargeFeature        = "FEATURE_FREE_OF_CHARGE"
+        case lifeCellFeature            = "FEATURE_LIFECELL"
+        case promoFeature               = "FEATURE_PROMO"
+        case KKTCellFeature             = "FEATURE_KKTCELL"
+        case MoldCellFeature            = "FEATURE_MOLDCELL"
+        case lifeFeature                = "FEATURE_LIFE"
+        case paycellAllAccessFeature    = "FEATURE_PAYCELL_ALL_ACCESS"
+        case paycellSLCMFeature         = "FEATURE_PAYCELL_SLCM"
+        case allAccessPaycellFeature    = "FEATURE_ALL_ACCESS_PAYCELL"
+        
+        case apple                      = "APPLE"
+        case SLCM                       = "SLCM"
+        case google                     = "GOOGLE"
+        case freeOfCharge               = "FREE_OF_CHARGE"
+        case lifeCell                   = "LIFECELL"
+        case promo                      = "PROMO"
+        case KKTCell                    = "KKTCELL"
+        case MoldCell                   = "MOLDCELL"
+        case life                       = "LIFE"
+        case paycellAllAccess           = "PAYCELL_ALL_ACCESS"
+        case paycellSLCM                = "PAYCELL_SLCM"
+        
+        var isFeature: Bool {
+            return PackageType.allFeatures.contains(self)
+        }
+        
+        var cancelText: String {
+            switch self {
+            case .apple:
+                return "apple subscription cancel text"
+            case .SLCM:
+                return "SLCM subscription cancel text"
+            case .google:
+                return "google subscription cancel text"
+            case .freeOfCharge:
+                return "freeOfCharge subscription cancel text"
+            case .lifeCell:
+                return "lifeCell subscription cancel text"
+            case .promo:
+                return "promo subscription cancel text"
+            case .KKTCell:
+                return "KKTCell subscription cancel text"
+            case .MoldCell:
+                return "MoldCell subscription cancel text"
+            case .life:
+                return "life subscription cancel text"
+            case .paycellAllAccess:
+                return "paycellAllAccess subscription cancel text"
+            case .paycellSLCM:
+                return "paycellSLCM subscription cancel text"
+            default:
+                return "common subscription cancel text"
+            }
+        }
     }
 
     enum PackageStatus: String {
-        case enables    = "ENABLED"
+        case enabled    = "ENABLED"
         case disabled   = "DISABLED"
     }
     
     private enum ResponseKeys {
         static let name = "name"
+        static let currency = "currency"
         static let displayName = "displayName"
-        static let descriptioуn = "description"
+        static let offerDescription = "description"
         static let price = "price"
         static let isDefault = "isDefault"
         static let role = "role"
         static let slcmOfferId = "slcmOfferId"
         static let cometOfferId = "cometOfferId"
+        static let offerProductId = "offerProductId"
+        static let cpcmOfferId = "cpcmOfferId"
+        static let inAppPurchaseId = "inAppPurchaseId"
         static let period = "period"
         static let type = "type"
+        static let quota = "quota"
         static let status = "status"
-        static let cpcmOfferId = "cpcmOfferId"
         static let authorities = "authorities"
     }
 
     var name: String?
+    var currency: String?
     var displayName: String?
-    var descriptioуn: String?
+    var offerDescription: String?
     var price: Float?
     var isDefault: Bool?
     var role: String?
     var slcmOfferId: Int?
     var cometOfferId: Int?
+    var offerProductId: Int?
+    var cpcmOfferId: Int?
+    var inAppPurchaseId: String?
     var period: String?
     var type: PackageType?
+    var quota: Int64?
     var status: PackageStatus?
-    var cpcmOfferId: Int?
     var authorities: [PackagePackAuthoritiesResponse]?
 
     override func mapping() {
         name = json?[ResponseKeys.name].string
+        currency = json?[ResponseKeys.currency].string
         displayName = json?[ResponseKeys.displayName].string
-        descriptioуn = json?[ResponseKeys.descriptioуn].string
+        offerDescription = json?[ResponseKeys.offerDescription].string
         price = json?[ResponseKeys.price].float
         isDefault = json?[ResponseKeys.isDefault].bool
         role = json?[ResponseKeys.role].string
         slcmOfferId = json?[ResponseKeys.slcmOfferId].int
         cometOfferId = json?[ResponseKeys.cometOfferId].int
+        cpcmOfferId = json?[ResponseKeys.cpcmOfferId].int
+        offerProductId = json?[ResponseKeys.offerProductId].int
+        inAppPurchaseId = json?[ResponseKeys.inAppPurchaseId].string
         period = json?[ResponseKeys.period].string
+        quota = json?[ResponseKeys.quota].int64
         if let typeString = json?[ResponseKeys.type].string {
             type = PackageType(rawValue: typeString)
         }
         if let statusString = json?[ResponseKeys.status].string {
             status = PackageStatus(rawValue: statusString)
         }
-        cpcmOfferId = json?[ResponseKeys.cpcmOfferId].int
         let authoritiesJsonArray = json?[ResponseKeys.authorities].array
         if let authoritiesList = authoritiesJsonArray?.flatMap({ PackagePackAuthoritiesResponse.init(withJSON: $0) }) {
             authorities = authoritiesList

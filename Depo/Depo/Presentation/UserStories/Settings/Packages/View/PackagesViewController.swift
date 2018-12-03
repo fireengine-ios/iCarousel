@@ -22,17 +22,11 @@ final class PackagesViewController: BaseViewController {
     
     @IBOutlet private weak var subtitleLabel: UILabel! {
         didSet {
-            subtitleLabel.text = TextConstants.packages
+            subtitleLabel.text = TextConstants.packageSectionTitle
         }
     }
     
     private lazy var activityManager = ActivityIndicatorManager()
-    
-    private var plans = [SubscriptionPlan]() {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
     
     private let policyHeaderSize: CGFloat = Device.isIpad ? 15 : 13
     private let policyTextSize: CGFloat = Device.isIpad ? 13 : 10
@@ -41,7 +35,9 @@ final class PackagesViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        setupDesign()
+
         automaticallyAdjustsScrollViewInsets = false
         setTitle(withString: TextConstants.packages)
         activityManager.delegate = self
@@ -64,6 +60,11 @@ final class PackagesViewController: BaseViewController {
     
     private func setupCollectionView() {
         collectionView.register(nibCell: SubscriptionPlanCollectionViewCell.self)
+    }
+
+    private func setupDesign() {
+        subtitleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        subtitleLabel.textColor = ColorConstants.darkText
     }
 
     private func setupPolicy() {
@@ -114,8 +115,7 @@ final class PackagesViewController: BaseViewController {
 extension PackagesViewController: PackagesViewInput {
 
     func reloadPackages() {
-        plans = []
-        output.viewIsReady()
+        collectionView.reloadData()
     }
     
     func successedPromocode() {
@@ -143,23 +143,13 @@ extension PackagesViewController: PackagesViewInput {
         UIApplication.showErrorAlert(message: errorMessage)
     }
     
-    func display(subscriptionPlans array: [SubscriptionPlan], append: Bool = false) {
-        if let layout = collectionView.collectionViewLayout as? ColumnsCollectionLayout {
-            layout.cellHeight = SubscriptionPlanCollectionViewCell.heightForAccount(type: output.getAccountType())
-        }
-        if append {
-            plans += array
-        } else {
-            plans = array
-        }
-    }
-    
-    func showActivateOfferAlert(for offer: OfferServiceResponse, planIndex: Int) {
+    func showActivateOfferAlert(for offer: PackageModelResponse, planIndex: Int) {
         let bodyText = "\(offer.period ?? "") \(offer.price ?? 0)"
         
-        let vc = DarkPopUpController.with(title: offer.name, message: bodyText, buttonTitle: TextConstants.purchase) { [weak self] vc in
-            vc.close()
-            self?.output.buy(offer: offer, planIndex: planIndex)
+        let vc = DarkPopUpController.with(title: offer.displayName, message: bodyText, buttonTitle: TextConstants.purchase) { [weak self] vc in
+            vc.close(animation: {
+                self?.output.buy(offer: offer, planIndex: planIndex)
+            })
         }
         present(vc, animated: false, completion: nil)
     }
@@ -216,14 +206,14 @@ extension PackagesViewController: PackagesViewInput {
 extension PackagesViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return plans.count
+        return output.availableOffers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(cell: SubscriptionPlanCollectionViewCell.self, for: indexPath)
         cell.delegate = self
         cell.indexPath = indexPath
-        cell.configure(with: plans[indexPath.item], accountType: output.getAccountType())
+        cell.configure(with: output.availableOffers[indexPath.item], accountType: output.getAccountType())
         return cell
     }
 }
@@ -231,7 +221,7 @@ extension PackagesViewController: UICollectionViewDataSource {
 // MARK: SubscriptionPlanCellDelegate
 extension PackagesViewController: SubscriptionPlanCellDelegate {
     func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
-        let plan = plans[indexPath.row]
+        let plan = output.availableOffers[indexPath.row]
         
         if let tag = MenloworksSubscriptionStorage(rawValue: plan.name) {
             MenloworksAppEvents.onSubscriptionClicked(tag)

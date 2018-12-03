@@ -715,6 +715,20 @@
 "lorem_ipsum_non_turkcell" = "LOREM IPSUM NON-TURKCELL";
 "lorem_ipsum_turkcell" = " LOREM IPSUM TURKCELL";
 
+/* Package */
+"package_period_day" = "day";
+"package_period_week" = "week";
+"package_period_month" = "month";
+"package_period_year" = "year";
+
+"package_apple_price" = "%@ / %@";
+
 /* PackageInfoView */
 "my_storage" = "My Storage";
 "see_details" = "See Details";
+
+/* PackageViewController */
+"package_cancel_button" = "Leave Membership";
+"my_storage_usage" = "%@ of %@ left";
+"package_section_title" = "Upgrade Your Storage";
+"available_head_name_title" = "+ %@";

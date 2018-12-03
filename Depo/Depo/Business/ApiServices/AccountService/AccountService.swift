@@ -83,7 +83,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
         debugLog("AccountService featurePacks")
 
         sessionManager
-            .request(RouteRequests.Account.Permissions.featurePacks)
+            .request(RouteRequests.Account.Permissions.availableOffers)
             .customValidate()
             .responseData { response in
                 switch response.result {
