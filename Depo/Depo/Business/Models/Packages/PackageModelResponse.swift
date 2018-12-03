@@ -46,27 +46,27 @@ final class PackageModelResponse: Equatable {
         var cancelText: String {
             switch self {
             case .apple:
-                return "apple subscription cancel text"
+                return TextConstants.packageAppleCancelText
             case .SLCM:
-                return "SLCM subscription cancel text"
+                return TextConstants.packageSLCMCancelText
             case .google:
-                return "google subscription cancel text"
+                return TextConstants.packageGoogleCancelText
             case .freeOfCharge:
-                return "freeOfCharge subscription cancel text"
+                return TextConstants.packageFreeOfChargeCancelText
             case .lifeCell:
-                return "lifeCell subscription cancel text"
+                return TextConstants.packageLifeCellCancelText
             case .promo:
-                return "promo subscription cancel text"
+                return TextConstants.packagePromoCancelText
             case .KKTCell:
-                return "KKTCell subscription cancel text"
+                return TextConstants.packageKKTCellCancelText
             case .MoldCell:
-                return "MoldCell subscription cancel text"
+                return TextConstants.packageMoldCellCancelText
             case .life:
-                return "life subscription cancel text"
+                return TextConstants.packageLifeCancelText
             case .paycellAllAccess:
-                return "paycellAllAccess subscription cancel text"
+                return TextConstants.packagePaycellAllAccessCancelText
             case .paycellSLCM:
-                return "paycellSLCM subscription cancel text"
+                return TextConstants.packagePaycellSLCMCancelText
             }
         }
     }
