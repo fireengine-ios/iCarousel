@@ -21,8 +21,6 @@ class SettingsInteractor: SettingsInteractorInput {
     
     private let analyticsManager: AnalyticsService = factory.resolve()
     
-    private let authorityStorage: AuthorityStorage = factory.resolve()
-    
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
@@ -124,9 +122,7 @@ class SettingsInteractor: SettingsInteractorInput {
         accountSerivese.permissions { [weak self] response in
             switch response {
             case .success(let result):
-                self?.authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
-                                               dublicates: result.hasPermissionFor(.deleteDublicate),
-                                               faces: result.hasPermissionFor(.faceRecognition))
+                AuthoritySingleton.shared.refreshStatus(with: result)
                 DispatchQueue.toMain {
                     self?.output.didObtainUserStatus()
                 }

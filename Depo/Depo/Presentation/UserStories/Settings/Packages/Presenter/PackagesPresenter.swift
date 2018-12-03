@@ -11,50 +11,42 @@ class PackagesPresenter {
     var interactor: PackagesInteractorInput!
     var router: PackagesRouterInput!
     
-    var activeSubscriptions: [SubscriptionPlanBaseResponse] = []
+    var availableOffers: [SubscriptionPlan] = []
+    
     private var accountType = AccountType.all
 
     private var referenceToken = ""
     private var userPhone = ""
-    private var offerToBuy: OfferServiceResponse?
+    private var offerToBuy: PackageModelResponse?
     private var offerIndex: Int = 0
     private var optInVC: OptInController?
     private var storageCapacity: Int64 = 0
+    private var storageUsage: UsageResponse?
 
-    private func getAccountType(for accountType: String, subscriptionPlans: [SubscriptionPlanBaseResponse]) -> AccountType {
+    private func getAccountType(for accountType: String) -> AccountType {
         if accountType == "TURKCELL" {
             return .turkcell
         } else {
-            let plans = subscriptionPlans.flatMap { $0.subscriptionPlanRole }
-            for plan in plans {
-                if plan.hasPrefix("lifebox") {
-                    return .ukranian
-                } else if plan.hasPrefix("kktcell") {
-                    return .cyprus
-                } else if plan.hasPrefix("moldcell") {
-                    return .moldovian
-                } else if plan.hasPrefix("life") {
-                    return .life
-                }
-            }
             return .all
         }
     }
     
     private func refreshPage() {
-        activeSubscriptions = []
+        view?.startActivityIndicator()
+        
+        availableOffers = []
         referenceToken = ""
         userPhone = ""
         offerToBuy = nil
         offerIndex = 0
         optInVC = nil
-        view?.reloadPackages()
+        
+        interactor.getAvailableOffers()
     }
 }
 
 // MARK: PackagesViewOutput
 extension PackagesPresenter: PackagesViewOutput {
-
     func getAccountType() -> AccountType {
         return accountType
     }
@@ -70,7 +62,7 @@ extension PackagesPresenter: PackagesViewOutput {
     func viewIsReady() {
         interactor.trackScreen()
         view?.startActivityIndicator()
-        interactor.getActiveSubscriptions()
+        interactor.getAccountType()
         interactor.getUserAuthority()
         interactor.getStorageCapacity()
     }
@@ -78,36 +70,20 @@ extension PackagesPresenter: PackagesViewOutput {
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
 
         interactor.trackPackageClick(plan: plan, planIndex: planIndex)
-        
-        switch accountType {
-        case .turkcell:
-            if let offer = plan.model as? OfferServiceResponse { /// purchase, from active subscription list
-                view?.showActivateOfferAlert(for: offer, planIndex: planIndex)
-            } else if let quota = (plan.model as? SubscriptionPlanBaseResponse)?.subscriptionPlanQuota { /// cancel
-                let message = String(format: TextConstants.offersCancelTurkcell, quota.bytesString)
-                view?.showCancelOfferAlert(with: message)
-            }
-        case .ukranian:
-            view?.showCancelOfferAlert(with: TextConstants.offersCancelUkranian)
-        case .cyprus:
-            view?.showCancelOfferAlert(with: TextConstants.offersCancelCyprus)
-        case .moldovian:
-            view?.showCancelOfferAlert(with: TextConstants.offersCancelMoldcell)
-        case .life:
-            view?.showCancelOfferAlert(with: TextConstants.offersCancelLife)
-        case .all:
-            if let offer = plan.model as? OfferApple {
-                view?.startActivityIndicator()
-                interactor.activate(offerApple: offer, planIndex: planIndex)
-            } else {
-                view?.showCancelOfferApple()
-            }
-        }
+        guard let model = plan.model as? PackageModelResponse else { return }
+        switch model.type {
+        case .SLCM?:
+            view?.showActivateOfferAlert(for: model, planIndex: planIndex)
+        case .apple?:
+            view?.startActivityIndicator()
+            interactor.activate(offer: model, planIndex: planIndex)
+        default:
+            let error = CustomErrors.serverError("This is not buyable offer type")
+            failed(with: error.localizedDescription)
+         }
     }
     
-    func buy(offer: OfferServiceResponse, planIndex: Int) {
-        view?.startActivityIndicator()
-        
+    func buy(offer: PackageModelResponse, planIndex: Int) {
         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] userInfoResponse in
             self?.userPhone = userInfoResponse.fullPhoneNumber
             self?.offerToBuy = offer
@@ -115,7 +91,6 @@ extension PackagesPresenter: PackagesViewOutput {
             DispatchQueue.toMain {
                 self?.view?.startActivityIndicator()
                 self?.interactor.getToken(for: offer)
-                self?.view?.stopActivityIndicator()
             }
         }, fail: { [weak self] failResponse in
             DispatchQueue.toMain {
@@ -174,29 +149,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
         view?.successedPromocode()
     }
     
-    func failedPromocode(with errorString: String) {
-        view?.show(promocodeError: errorString)
-    }
-    
-    func successedJobExists(isJobExists: Bool) {
-        if !isJobExists {
-            view?.startActivityIndicator()
-            interactor.getOffers()
-        }
-        view?.stopActivityIndicator()
-    }
-    
-    func failedVerifyOffer() {
-        optInVC?.stopActivityIndicator()
-        optInVC?.clearCode()
-        optInVC?.view.endEditing(true)
-        
-        if optInVC?.increaseNumberOfAttemps() == false {
-            let vc = PopUpController.with(title: TextConstants.checkPhoneAlertTitle, message: TextConstants.promocodeInvalid, image: .error, buttonTitle: TextConstants.ok)
-            optInVC?.present(vc, animated: false, completion: nil)
-        }
-    }
-    
     func successedVerifyOffer() {
         optInVC?.stopActivityIndicator()
         optInVC?.resignFirstResponder()
@@ -212,11 +164,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
                                                buttonTitle: TextConstants.ok)
             RouterVC().presentViewController(controller: popupVC)
         }
-    }
-    
-    func successed(activeSubscriptions: [SubscriptionPlanBaseResponse]) {
-        interactor.getAccountType()
-        self.activeSubscriptions = activeSubscriptions
     }
     
     func successed(tokenForOffer: String) {
@@ -237,70 +184,65 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(accountTypeString: String) {
-        accountType = getAccountType(for: accountTypeString, subscriptionPlans: activeSubscriptions)
-        switch accountType {
-        case .turkcell:
-            view?.startActivityIndicator()
-            interactor.checkJobExists()
-        case .ukranian:
-            view?.showSubTurkcellOpenAlert(with: TextConstants.offersActivateUkranian)
-        case .cyprus:
-            view?.showSubTurkcellOpenAlert(with: TextConstants.offersActivateCyprus)
-        case .moldovian:
-            break
-        case .life:
-            break
-        case .all:
-            //show restore
-            view?.showRestoreButton()
-            /// in app purchase
-            view?.showInAppPolicy()
-            interactor.getOfferApples()
+        accountType = getAccountType(for: accountTypeString)
+        
+        interactor.getAvailableOffers()
+    }
+    
+    func successed(usage: UsageResponse) {
+        storageUsage = usage
+        if let quotaBytes = usage.quotaBytes {
+            storageCapacity = quotaBytes
+            view?.setupStackView(with: quotaBytes)
         }
-        
-        let subscriptionPlans = interactor.convertToASubscriptionList(activeSubscriptionList: activeSubscriptions, accountType: accountType)
-        view?.display(subscriptionPlans: subscriptionPlans, append: false)
-        
-        view?.stopActivityIndicator()
     }
     
-    func successed(offers: [OfferServiceResponse]) {
-        let subscriptionPlans = interactor.convertToSubscriptionPlans(offers: offers, accountType: accountType)
-        view?.display(subscriptionPlans: subscriptionPlans, append: true)
-        view?.stopActivityIndicator()
-    }
-    
-    func successed(offerApples: [OfferApple]) {
-        let subscriptionPlans = interactor.convertToSubscriptionPlans(offerApples: offerApples)
-        view?.display(subscriptionPlans: subscriptionPlans, append: true)
-        view?.stopActivityIndicator()
-    }
-    
-    func successed(offerApple: OfferApple) {
-        view?.stopActivityIndicator()
-    }
+    func successed(allOffers: [PackageModelResponse]) {
+        let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
+        availableOffers = offers.filter({
+            guard let model = $0.model as? PackageModelResponse, let type = model.type else { return false }
+            return type == .SLCM || type == .apple
+        })
 
-    func successed(quotaBytes: Int64) {
-        storageCapacity = quotaBytes
-        view?.setupStackView(with: quotaBytes)
+        view?.stopActivityIndicator()
+        view?.reloadPackages()
     }
 
     func successedGotUserAuthority() {
         view?.setupStackView(with: storageCapacity)
     }
     
-    func failedUsage(with error: ErrorResponse) {
+    func failedPromocode(with errorString: String) {
+        view?.show(promocodeError: errorString)
+    }
+    
+    func failedVerifyOffer() {
         optInVC?.stopActivityIndicator()
+        optInVC?.clearCode()
+        optInVC?.view.endEditing(true)
+        
+        if optInVC?.increaseNumberOfAttemps() == false {
+            let vc = PopUpController.with(title: TextConstants.checkPhoneAlertTitle, message: TextConstants.promocodeInvalid, image: .error, buttonTitle: TextConstants.ok)
+            optInVC?.present(vc, animated: false, completion: nil)
+        }
+    }
+    
+    func failedUsage(with error: ErrorResponse) {
         view?.stopActivityIndicator()
         view?.display(error: error)
     }
 
     func failed(with errorMessage: String) {
+        view?.stopActivityIndicator()
         view?.display(errorMessage: errorMessage)
     }
     
     func purchasesRestored(text: String) {
         
+    }
+    
+    func refreshPackages() {
+        refreshPage()
     }
 }
 
@@ -315,11 +257,10 @@ extension PackagesPresenter: PackageInfoViewDelegate {
     func onSeeDetailsTap(with type: ControlPackageType) {
         switch type {
         case .myStorage:
-            break
+            router.openMyStorage(storageUsage: storageUsage)
         case .premiumUser:
             router.openLeavePremium()
-        case .standard:
-            break
+        case .standard: break
         }
     }
 }

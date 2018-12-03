@@ -279,7 +279,7 @@ class AuthenticationService: BaseRequestService {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
-    
+
     // MARK: - Login
     
     func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?) {
@@ -391,6 +391,7 @@ class AuthenticationService: BaseRequestService {
             RecentSearchesService.shared.clearAll()
             SyncServiceManager.shared.stopSync()
             AutoSyncDataStorage().clear()
+            AuthoritySingleton.shared.clear()
             storageVars.autoSyncSet = false
             SingletonStorage.shared.accountInfo = nil
             SyncSettings.shared().periodicBackup = SYNCPeriodic.none

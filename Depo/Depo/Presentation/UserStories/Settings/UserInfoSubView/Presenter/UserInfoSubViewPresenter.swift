@@ -12,10 +12,8 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     var interactor: UserInfoSubViewInteractorInput!
     var router: UserInfoSubViewRouterInput!
     
-    private let authorityStorage: AuthorityStorage = factory.resolve()
-
     var isPremiumUser: Bool {
-        return authorityStorage.isPremium ?? false
+        return AuthoritySingleton.shared.isPremium ?? false
     }
     
     func requestsFinished() {

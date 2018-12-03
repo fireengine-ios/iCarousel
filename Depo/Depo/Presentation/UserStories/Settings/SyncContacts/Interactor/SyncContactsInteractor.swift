@@ -111,7 +111,6 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     func getUserStatus() {
-        let authorityStorage: AuthorityStorage = factory.resolve()
         output?.asyncOperationStarted()
 
         accountService.permissions { [weak self] response in
@@ -119,9 +118,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             
             switch response {
             case .success(let result):
-                authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
-                                                     dublicates: result.hasPermissionFor(.deleteDublicate),
-                                                     faces: result.hasPermissionFor(.faceRecognition))
+                AuthoritySingleton.shared.refreshStatus(with: result)
                 DispatchQueue.toMain {
                     self?.output?.didObtainUserStatus(isPremiumUser: result.hasPermissionFor(.deleteDublicate))
                 }

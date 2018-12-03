@@ -13,7 +13,8 @@ protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
     func info(success: SuccessResponse?, fail:@escaping FailResponse)
     func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
-    func featurePacks(handler: @escaping (ResponseResult<FeaturePacksResponse>) -> Void)
+    func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
+    func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
 }
 
 class AccountService: BaseRequestService, AccountServicePrl {
@@ -60,7 +61,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
-    func featurePacks(handler: @escaping (ResponseResult<FeaturePacksResponse>) -> Void) {
+    func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
         debugLog("AccountService featurePacks")
         
         sessionManager
@@ -69,9 +70,25 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    
-                    let featurePacks = FeaturePacksResponse(json: data, headerResponse: nil)
-                    handler(.success(featurePacks))
+                    let offersArray = PackageModelResponse.array(from: data)
+                    handler(.success(offersArray))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+
+    func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
+        debugLog("AccountService featurePacks")
+
+        sessionManager
+            .request(RouteRequests.Account.Permissions.availableOffers)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let offersArray = PackageModelResponse.array(from: data)
+                    handler(.success(offersArray))
                 case .failure(let error):
                     handler(.failed(error))
                 }

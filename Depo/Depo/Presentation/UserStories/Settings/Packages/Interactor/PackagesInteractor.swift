@@ -15,7 +15,6 @@ class PackagesInteractor {
     private let subscriptionsService: SubscriptionsService
     private let accountService: AccountServicePrl
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private lazy var authorityStorage: AuthorityStorage = factory.resolve()
     
     init(offersService: OffersService = OffersServiceIml(),
          subscriptionsService: SubscriptionsService = SubscriptionsServiceIml(),
@@ -87,20 +86,20 @@ class PackagesInteractor {
 
 // MARK: PackagesInteractorInput
 extension PackagesInteractor: PackagesInteractorInput {
-    
-    func getActiveSubscriptions() {
-        subscriptionsService.activeSubscriptions(
-            success: { [weak self] response in
-                guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else { return }
-                SingletonStorage.shared.activeUserSubscription = subscriptionsResponce
-                DispatchQueue.main.async {
-                    self?.output.successed(activeSubscriptions: subscriptionsResponce.list)
+
+    func getAvailableOffers() {
+        accountService.availableOffers { [weak self] (result) in
+            switch result {
+            case .success(let response):
+                DispatchQueue.toMain {
+                    self?.getInfoForAppleProducts(offers: response)
                 }
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
-                    self?.output.failedUsage(with: errorResponse)
+            case .failed(let error):
+                DispatchQueue.toMain {
+                    self?.output.failed(with: error.localizedDescription)
                 }
-        })
+            }
+        }
     }
     
     func trackScreen() {
@@ -125,9 +124,9 @@ extension PackagesInteractor: PackagesInteractorInput {
 
     func getStorageCapacity() {
         accountService.usage(success: { [weak self]  (response) in
-            if let response = response as? UsageResponse, let quotaBytes = response.quotaBytes {
+            if let response = response as? UsageResponse {
                 DispatchQueue.main.async {
-                    self?.output.successed(quotaBytes: quotaBytes)
+                    self?.output.successed(usage: response)
                 }
             } else {
                 DispatchQueue.main.async {
@@ -143,12 +142,10 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
 
     func getUserAuthority() {
-        accountService.permissions { [weak self] response in
-            switch response {
-            case .success(let result):
-                self?.authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
-                                                     dublicates: result.hasPermissionFor(.deleteDublicate),
-                                                     faces: result.hasPermissionFor(.faceRecognition))
+        accountService.permissions { [weak self] (result) in
+            switch result {
+            case .success(let response):
+                AuthoritySingleton.shared.refreshStatus(with: response)
                 DispatchQueue.main.async {
                     self?.output.successedGotUserAuthority()
                 }
@@ -160,28 +157,28 @@ extension PackagesInteractor: PackagesInteractorInput {
         }
     }
     
-    func getToken(for offer: OfferServiceResponse) {
+    func getToken(for offer: PackageModelResponse) {
         offersService.initOffer(offer: offer,
             success: { [weak self] response in
                 guard let offerResponse = response as? InitOfferResponse,
                     let token = offerResponse.referenceToken
                 else {
-                    DispatchQueue.main.async {
+                    DispatchQueue.toMain {
                         self?.output.failedUsage(with: ErrorResponse.string("token nil"))
                     }
                     return
                 }            
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.successed(tokenForOffer: token)
                 }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self?.output.failedUsage(with: errorResponse)
                 }
         })
     }
     
-    func verifyOffer(_ offer: OfferServiceResponse?, planIndex: Int, token: String, otp: String) {
+    func verifyOffer(_ offer: PackageModelResponse?, planIndex: Int, token: String, otp: String) {
         /// to test success without buying package
 ///        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
 ///            self.output.successedVerifyOffer()
@@ -211,7 +208,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
     
-    func getResendToken(for offer: OfferServiceResponse) {
+    func getResendToken(for offer: PackageModelResponse) {
         offersService.initOffer(offer: offer,
             success: { [weak self] response in
                 guard let offerResponse = response as? InitOfferResponse,
@@ -233,28 +230,43 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
     
-    func activate(offerApple: OfferApple, planIndex: Int) {
-        iapManager.purchase(offerApple: offerApple) { [weak self] result in
+    private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
+        let appleOffers = offers.flatMap({ return $0.inAppPurchaseId })
+        iapManager.loadProducts(productIds: appleOffers) { [weak self] _ in
+            self?.output.successed(allOffers: offers)
+        }
+    }
+    
+    func activate(offer: PackageModelResponse, planIndex: Int) {
+        guard let product = iapManager.product(for: offer.inAppPurchaseId ?? "") else {
+            let error = CustomErrors.serverError("An error occured while getting product with id - \(offer.inAppPurchaseId ?? "") from App Store")
+            DispatchQueue.toMain {
+                self.output.failed(with: error.localizedDescription)
+            }
+            return
+        }
+
+        iapManager.purchase(product: product) { [weak self] result in
             switch result {
             case .success(let identifier):
-                self?.analyticsService.trackInAppPurchase(product: offerApple.skProduct)
-                self?.analyticsService.trackProductInAppPurchaseGA(product: offerApple.skProduct, packageIndex: planIndex)
+                self?.analyticsService.trackInAppPurchase(product: product)
+                self?.analyticsService.trackProductInAppPurchaseGA(product: product, packageIndex: planIndex)
                 self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true)
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseSuccess)
                 self?.validatePurchase(productId: identifier)
             case .canceled:
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("transaction canceled"))
-               self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseFailure)
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseFailure)
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.string(TextConstants.cancelPurchase))
                 }
             case .error(let error):
-                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("\(error.description)"))
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("\(error.description)"))
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .purchaseFailure)
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.error(error))
                 }
-            case .inProgress: 
+            case .inProgress:
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.string(TextConstants.inProgressPurchase))
                 }
@@ -264,18 +276,20 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     private func validatePurchase(productId: String) {
         guard let receipt = iapManager.receipt else {
-            getActiveSubscriptions()
+            output.refreshPackages()
             return
         }
         
         offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
-                self?.getActiveSubscriptions()
+                self?.output.refreshPackages()
                 return
             }
             
             if status == .success {
-                self?.getActiveSubscriptions()
+                DispatchQueue.toMain {
+                    self?.output.refreshPackages()
+                }
             } else {
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.string(status.description))
@@ -311,38 +325,10 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
         
         group.notify(queue: .main) { [weak self] in
-            self?.getActiveSubscriptions()
+            DispatchQueue.toMain {
+                self?.output.refreshPackages()
+            }
         }
-    }
-    
-    func getOffers() {
-        offersService.offersAll(
-            success: { [weak self] response in
-                guard let offerResponse = response as? OfferAllResponse else { return }
-                DispatchQueue.main.async {
-                    self?.output.successed(offers: offerResponse.list)
-                }
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
-                    self?.output.failedUsage(with: errorResponse)
-                }
-        })
-    }
-    
-    func checkJobExists() {
-        offersService.getJobExists(
-            success: { [weak self] response in
-                guard let jobResponse = response as? JobExistsResponse,
-                    let isJobExists = jobResponse.isJobExists
-                    else { return }
-                DispatchQueue.main.async {
-                    self?.output.successedJobExists(isJobExists: isJobExists)
-                }
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
-                    self?.output.failedUsage(with: errorResponse)
-                }
-        })
     }
     
     func submit(promocode: String) {
@@ -370,87 +356,40 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
     
-    func getOfferApples() {
-        offersService.offersAllApple(
-            success: { [weak self] response in
-                guard let offerResponse = response as? OfferAllAppleServiceResponse else { return }
-                self?.iapManager.loadProducts(productIds: offerResponse.list, handler: { [weak self] result in
-                    switch result {
-                    case .success(let array):
-                        DispatchQueue.toMain {
-                            self?.output.successed(offerApples: array)
-                        }
-                    case .failed(let error):
-                        DispatchQueue.toMain {
-                            self?.output.failedUsage(with: ErrorResponse.error(error))
-                        }
+    func convertToSubscriptionPlan(offers: [PackageModelResponse], accountType: AccountType) -> [SubscriptionPlan]  {
+        return offers.flatMap({ offer in
+            let price = offer.price ?? 0
+            
+            let priceString: String!
+            if offer.type == .apple, let product = iapManager.product(for: offer.inAppPurchaseId ?? "") {
+                let price = product.localizedPrice
+                let period: String!
+                if #available(iOS 11.2, *) {
+                    switch product.subscriptionPeriod?.unit.rawValue {
+                    case 0:
+                        period = TextConstants.packagePeriodDay
+                    case 1:
+                        period = TextConstants.packagePeriodWeek
+                    case 2:
+                        period = TextConstants.packagePeriodMonth
+                    case 3:
+                        period = TextConstants.packagePeriodYear
+                    default:
+                        period = TextConstants.packagePeriodMonth
                     }
-                })
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.toMain {
-                    self?.output.failedUsage(with: errorResponse)
-                }
-        })
-    }
-    
-    func convertToSubscriptionPlans(offers: [OfferServiceResponse], accountType: AccountType) -> [SubscriptionPlan] {
-        return offers.flatMap { offer in
-            guard let price = offer.price, let name = offer.quota?.bytesString else {
-                return nil
-            }
-            
-            let currency = getCurrency(for: accountType)
-            let priceString = String(format: TextConstants.offersPrice, price, currency)
-            
-            return subscriptionPlanWith(name: name, priceString: priceString, type: .default, model: offer)
-        }
-    }
-    
-    func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse], accountType: AccountType) -> [SubscriptionPlan] {
-        return activeSubscriptionList.flatMap { subscription in
-            guard let price = subscription.subscriptionPlanPrice, let name = subscription.subscriptionPlanQuota?.bytesString else {
-                return nil
-            }
-            
-            let currency: String
-            let priceString: String
-            
-            if let inAppPurchaseId = subscription.subscriptionPlanInAppPurchaseId,
-                let localizedPrice = iapManager.product(for: inAppPurchaseId)?.localizedPrice {
-                priceString = String(format: TextConstants.offersLocalizedPrice, localizedPrice)
-            } else {
-                if let subscriptionType = subscription.type, subscriptionType == .free {
-                    ///free subscription should have the same currency as account type has
-                    currency = getCurrency(for: accountType)
                 } else {
-                    currency = getCurrency(for: subscription)
+                    period = (offer.period ?? "").lowercased()
                 }
+                priceString = String(format: TextConstants.packageApplePrice, price, period)
+            } else {
+                let currency = offer.currency ?? getCurrency(for: accountType)
                 priceString = String(format: TextConstants.offersPrice, price, currency)
             }
             
-            let type: SubscriptionPlanType = price == 0 ? .free : .current
-            
-            return subscriptionPlanWith(name: name, priceString: priceString, type: type, model: subscription)
-        }
-    }
-    
-    func convertToSubscriptionPlans(offerApples: [OfferApple]) -> [SubscriptionPlan] {
-        return offerApples.flatMap { offer in
-            guard let name = offer.name else {
-                return nil
-            }
-            
-            let currency = getCurrency(for: AccountType.all)
-            
-            let priceString: String
-            if let price = offer.price {
-                priceString = String(format: TextConstants.offersLocalizedPrice, price)
-            } else {
-                priceString = String(format: TextConstants.offersPrice, currency, offer.rawPrice)
-            }
+            let name = offer.quota?.bytesString ?? (offer.displayName ?? "")
             
             return subscriptionPlanWith(name: name, priceString: priceString, type: .default, model: offer)
-        }
+        })
     }
 
     func restorePurchases() {
@@ -488,7 +427,9 @@ extension PackagesInteractor: PackagesInteractorInput {
             }
             
             if status == .restored || status == .success {
-                self?.getActiveSubscriptions()
+                DispatchQueue.toMain {
+                    self?.output.refreshPackages()
+                }
             } else {
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.string(status.description))
@@ -518,22 +459,5 @@ extension PackagesInteractor: PackagesInteractorInput {
         case .all:
             return "$" /// temp
         }
-    }
-    
-    private func getCurrency(for subscription: SubscriptionPlanBaseResponse) -> String {
-        var type: AccountType = .turkcell
-        
-        if let role = subscription.subscriptionPlanRole {
-            if role.hasPrefix("lifebox") {
-                type = .ukranian
-            } else if role.hasPrefix("kktcell") {
-                type = .cyprus
-            } else if role.hasPrefix("moldcell") {
-                type = .moldovian
-            } else if role.hasPrefix("life") {
-                type = .life
-            }
-        }
-        return getCurrency(for: type)
     }
 }

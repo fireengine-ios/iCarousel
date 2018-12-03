@@ -17,8 +17,6 @@ final class PackagePremiumView: UIView, NibInit {
     @IBOutlet private weak var becomePremiumButton: GradientPremiumButton!
     @IBOutlet private weak var contentStackView: UIStackView!
 
-    private var authorityStorage: AuthorityStorage = factory.resolve()
-
     override func awakeFromNib() {
         super.awakeFromNib()
 

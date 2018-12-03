@@ -110,14 +110,6 @@
 		4A14AD0821A53FED0094C550 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		4A2039C72087ACBC004850ED /* AutoSyncRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2039C62087ACBB004850ED /* AutoSyncRouterInput.swift */; };
 		4A2039C82087ACBC004850ED /* AutoSyncRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2039C62087ACBB004850ED /* AutoSyncRouterInput.swift */; };
-		4A257BAE21A3E87000194A5F /* AuthorityStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAD21A3E87000194A5F /* AuthorityStorage.swift */; };
-		4A257BB021A3E8FA00194A5F /* AuthorityKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAF21A3E8FA00194A5F /* AuthorityKeychainStorage.swift */; };
-		4A257BB121A4267A00194A5F /* AuthorityStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAD21A3E87000194A5F /* AuthorityStorage.swift */; };
-		4A257BB221A4267D00194A5F /* AuthorityKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAF21A3E8FA00194A5F /* AuthorityKeychainStorage.swift */; };
-		4A257BB321A4272700194A5F /* AuthorityStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAD21A3E87000194A5F /* AuthorityStorage.swift */; };
-		4A257BB421A4272800194A5F /* AuthorityStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAD21A3E87000194A5F /* AuthorityStorage.swift */; };
-		4A257BB521A4275D00194A5F /* AuthorityKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAF21A3E8FA00194A5F /* AuthorityKeychainStorage.swift */; };
-		4A257BB621A4275E00194A5F /* AuthorityKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A257BAF21A3E8FA00194A5F /* AuthorityKeychainStorage.swift */; };
 		4A26E66C21A6E7D70033B797 /* PackagePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26E66B21A6E7D70033B797 /* PackagePremiumView.swift */; };
 		4A26E66E21A6E7F00033B797 /* PackagePremiumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A26E66D21A6E7F00033B797 /* PackagePremiumView.xib */; };
 		4A3F4119203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3F4118203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift */; };
@@ -2514,6 +2506,8 @@
 		8DCB21781F3C8BC000BAFE1E /* SeacrhViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21771F3C8BC000BAFE1E /* SeacrhViewRouter.swift */; };
 		8DCB217A1F3C8BE700BAFE1E /* SearchViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21791F3C8BE700BAFE1E /* SearchViewRouterInput.swift */; };
 		9065EE336B9F1D044DBD3944 /* AlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B652E3FD76DE060B9DBD160F /* AlbumDetailViewController.swift */; };
+		921423E321B51E5300B44574 /* PackageModelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E221B51E5300B44574 /* PackageModelResponse.swift */; };
+		921423EA21B562D500B44574 /* AuthoritySingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E921B562D500B44574 /* AuthoritySingleton.swift */; };
 		93BB369B3341CED27FDF2EC0 /* PhotoVideoDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264BDDE222D06B0A452F4DF7 /* PhotoVideoDetailRouter.swift */; };
 		93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2FD9ED30E838052B7A7D71 /* BaseFilesGreedRouter.swift */; };
 		956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */; };
@@ -3846,8 +3840,6 @@
 		4A11F55C21A58EBF00D6AADC /* PackageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageInfoView.swift; sourceTree = "<group>"; };
 		4A11F55E21A5946B00D6AADC /* PackageInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PackageInfoView.xib; sourceTree = "<group>"; };
 		4A2039C62087ACBB004850ED /* AutoSyncRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncRouterInput.swift; sourceTree = "<group>"; };
-		4A257BAD21A3E87000194A5F /* AuthorityStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorityStorage.swift; sourceTree = "<group>"; };
-		4A257BAF21A3E8FA00194A5F /* AuthorityKeychainStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorityKeychainStorage.swift; sourceTree = "<group>"; };
 		4A26E66B21A6E7D70033B797 /* PackagePremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagePremiumView.swift; sourceTree = "<group>"; };
 		4A26E66D21A6E7F00033B797 /* PackagePremiumView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PackagePremiumView.xib; sourceTree = "<group>"; };
 		4A3F4118203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosInteractorOutput.swift; sourceTree = "<group>"; };
@@ -5105,6 +5097,8 @@
 		90CCB3146C622ADE6CFE961E /* UserInfoSubViewConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewConfigurator.swift; sourceTree = "<group>"; };
 		919F353289ABE9A2E77F3D4C /* ActivityTimelineViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineViewInput.swift; sourceTree = "<group>"; };
 		91F451A358830EBF98327912 /* FileInfoRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoRouterInput.swift; sourceTree = "<group>"; };
+		921423E221B51E5300B44574 /* PackageModelResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageModelResponse.swift; sourceTree = "<group>"; };
+		921423E921B562D500B44574 /* AuthoritySingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthoritySingleton.swift; sourceTree = "<group>"; };
 		92C1BED0751734B73B9583DD /* SettingsViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewOutput.swift; sourceTree = "<group>"; };
 		9308A9A544DF5D8923C800E0 /* AlbumsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumsPresenter.swift; sourceTree = "<group>"; };
 		931900C1D8314FD173F701DC /* TermsAndServicesRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesRouterInput.swift; sourceTree = "<group>"; };
@@ -6709,15 +6703,6 @@
 				4A11F55E21A5946B00D6AADC /* PackageInfoView.xib */,
 			);
 			path = PackageInfoView;
-			sourceTree = "<group>";
-		};
-		4A257BAC21A3E85300194A5F /* AuthorityStorage */ = {
-			isa = PBXGroup;
-			children = (
-				4A257BAD21A3E87000194A5F /* AuthorityStorage.swift */,
-				4A257BAF21A3E8FA00194A5F /* AuthorityKeychainStorage.swift */,
-			);
-			path = AuthorityStorage;
 			sourceTree = "<group>";
 		};
 		4A26E66A21A6E79F0033B797 /* PackagePremiumView */ = {
@@ -9933,6 +9918,14 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		921423E821B562B600B44574 /* AuthoritySingleton */ = {
+			isa = PBXGroup;
+			children = (
+				921423E921B562D500B44574 /* AuthoritySingleton.swift */,
+			);
+			path = AuthoritySingleton;
+			sourceTree = "<group>";
+		};
 		92C9F550DC7528C74BAEFD9F /* UserInfoSubView */ = {
 			isa = PBXGroup;
 			children = (
@@ -10799,7 +10792,7 @@
 		CE246A131F3D2D76008DF705 /* AccountService */ = {
 			isa = PBXGroup;
 			children = (
-				4A257BAC21A3E85300194A5F /* AuthorityStorage */,
+				921423E821B562B600B44574 /* AuthoritySingleton */,
 				CE2F55FB1F7551CD00F49DA1 /* AccountParameters.swift */,
 				CE2F55FA1F7551CD00F49DA1 /* AccountResponse.swift */,
 				CE2F55F91F7551CD00F49DA1 /* AccountService.swift */,
@@ -10923,6 +10916,7 @@
 			children = (
 				CE2F55F51F75515C00F49DA1 /* PlanType.swift */,
 				CE2F55F61F75515C00F49DA1 /* SubscriptionPlan.swift */,
+				921423E221B51E5300B44574 /* PackageModelResponse.swift */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -14257,7 +14251,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
@@ -14286,7 +14280,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
@@ -14343,7 +14337,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
@@ -14372,7 +14366,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
@@ -14402,7 +14396,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
+				"${PODS_ROOT}/GoogleTagManager/Frameworks/frameworks/GoogleTagManager.framework/Resources/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -14460,7 +14454,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
@@ -14489,7 +14483,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
@@ -14545,7 +14539,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
+				"${PODS_ROOT}/GoogleTagManager/Frameworks/frameworks/GoogleTagManager.framework/Resources/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -14612,7 +14606,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
+				"${PODS_ROOT}/GoogleTagManager/Frameworks/frameworks/GoogleTagManager.framework/Resources/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -14868,7 +14862,6 @@
 				8C0E8D201FDEBDFF00789C91 /* CountiesGSMCodeCompositor.swift in Sources */,
 				4A0AC15D20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */,
 				B56FBB292122C4BA004F4A59 /* TermsOfUseRouterInput.swift in Sources */,
-				4A257BB121A4267A00194A5F /* AuthorityStorage.swift in Sources */,
 				8CEE8D26214A473200150996 /* FaceImageDesigner.swift in Sources */,
 				8C0E8D211FDEBDFF00789C91 /* HomePageInteractorInput.swift in Sources */,
 				B5CDB33F21787FEF006CFA50 /* Configuration.m in Sources */,
@@ -15228,7 +15221,6 @@
 				8C0E8E3E1FDEBDFF00789C91 /* ForgotPasswordRouter.swift in Sources */,
 				8C0E8E3F1FDEBDFF00789C91 /* ProgressPopUp.swift in Sources */,
 				8C0E8E401FDEBDFF00789C91 /* ForgotPasswordConfigurator.swift in Sources */,
-				4A257BB221A4267D00194A5F /* AuthorityKeychainStorage.swift in Sources */,
 				4A0AC1422087372E00032CC7 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				8C0E8E411FDEBDFF00789C91 /* ForgotPasswordInitializer.swift in Sources */,
 				8C0E8E421FDEBDFF00789C91 /* PasscodeView.swift in Sources */,
@@ -15767,7 +15759,6 @@
 			files = (
 				CED54F6F204A7D4B00B750BB /* BytesType.swift in Sources */,
 				CE1B7620204D2E4000B5E12A /* FileStorage.swift in Sources */,
-				4A257BB621A4275E00194A5F /* AuthorityKeychainStorage.swift in Sources */,
 				CE1BE94E20492C930074BDDC /* RequestHeader.swift in Sources */,
 				CED54F6E204A760900B750BB /* SwiftyJSONExtension.swift in Sources */,
 				CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */,
@@ -15787,7 +15778,6 @@
 				CEF371A020873B41007AD36E /* UIViewController+NavBar.swift in Sources */,
 				CE1BE94C20492C870074BDDC /* AuthorizationURLs.swift in Sources */,
 				CE1BE94820492C510074BDDC /* SharedFactory.swift in Sources */,
-				4A257BB421A4272800194A5F /* AuthorityStorage.swift in Sources */,
 				CE4D281A207E0A5B003AE4FB /* Device.swift in Sources */,
 				CE4D2820207E2435003AE4FB /* BiometricsManager.swift in Sources */,
 				CE1BE94920492C550074BDDC /* TokenStorage.swift in Sources */,
@@ -15924,7 +15914,6 @@
 				8C7786A41F3F38F0005CB432 /* VisualMusicPlayerRouter.swift in Sources */,
 				D49886591F3EFBE200F50C95 /* ImportPhotosInteractor.swift in Sources */,
 				A20CDBB0219DAC2700CA9A67 /* GradientPremiumButton.swift in Sources */,
-				4A257BB021A3E8FA00194A5F /* AuthorityKeychainStorage.swift in Sources */,
 				8C7786A21F3F38F0005CB432 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				7C4484FE1F0FC607003AF631 /* ButtonWithGrayCorner.swift in Sources */,
 				CE2F562E1F75548500F49DA1 /* SubscriptionParameters.swift in Sources */,
@@ -16027,7 +16016,6 @@
 				B56FBB1F2122C3D9004F4A59 /* TermsOfUseInitializer.swift in Sources */,
 				7C1CB8F61F724E54000768E8 /* ProgressPopUpProtocol.swift in Sources */,
 				CE2976DF1FD58E2000350F3A /* LocalAlbumModuleInitializer.swift in Sources */,
-				4A257BAE21A3E87000194A5F /* AuthorityStorage.swift in Sources */,
 				78B02CBF200D1B0300D11CD2 /* ContactSyncParametrs.swift in Sources */,
 				CE8F44E61F6AB59C0062C2E0 /* ActivityTimelineService.swift in Sources */,
 				7C4988191F3320420039C5F2 /* CreateStoryPhotosOrderModuleInput.swift in Sources */,
@@ -16328,6 +16316,7 @@
 				7CFF0C8C1F4C0E6F00E72E6A /* AlbumServiceResponse.swift in Sources */,
 				CE51ACE31EF90853005DCEE0 /* IntroduceInteractorOutput.swift in Sources */,
 				CE51ACE41EF90853005DCEE0 /* IntroduceInteractor.swift in Sources */,
+				921423EA21B562D500B44574 /* AuthoritySingleton.swift in Sources */,
 				EFA74FAE1FBF378F00CF946E /* PrintPresenter.swift in Sources */,
 				CE51ACE51EF90853005DCEE0 /* IntroduceRouterInput.swift in Sources */,
 				CE51ACE61EF90853005DCEE0 /* IntroduceRouter.swift in Sources */,
@@ -16528,6 +16517,7 @@
 				7859299A20060E94003F8AB3 /* ManageContactsInteractorInput.swift in Sources */,
 				4AC68930202C5153003400D0 /* FaceImageAddNameViewOutput.swift in Sources */,
 				CEC3C24A1FB99AF800C3D67F /* PasscodeSettingsRouter.swift in Sources */,
+				921423E321B51E5300B44574 /* PackageModelResponse.swift in Sources */,
 				7C4F60B0201C674A0033C58F /* MovieCard.swift in Sources */,
 				CE6DE7581FCBE84100C23CBD /* FBResponses.swift in Sources */,
 				78E8E2B02023195600A979AB /* FaceImagePhotosInitializer.swift in Sources */,
@@ -16966,7 +16956,6 @@
 				CE98F6D9204E6BD800433915 /* UIImageView+Scale.swift in Sources */,
 				CE1458CF2045734200812544 /* Alamofire+Validate.swift in Sources */,
 				CE4D282F207E4A14003AE4FB /* ShareWormholeListener.swift in Sources */,
-				4A257BB321A4272700194A5F /* AuthorityStorage.swift in Sources */,
 				CEA524BA2046C95E0036FCEA /* UploadQueueService.swift in Sources */,
 				CE4D2822207E2493003AE4FB /* Equatable+Contains.swift in Sources */,
 				CE4D281E207E23F7003AE4FB /* PasscodeEnterViewController.swift in Sources */,
@@ -17029,7 +17018,6 @@
 				CE4D2819207E0A5A003AE4FB /* Device.swift in Sources */,
 				8C73CFD6208265D200B66E64 /* String+Subscript.swift in Sources */,
 				CE4D2827207E3CF0003AE4FB /* WormholePoster.swift in Sources */,
-				4A257BB521A4275D00194A5F /* AuthorityKeychainStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

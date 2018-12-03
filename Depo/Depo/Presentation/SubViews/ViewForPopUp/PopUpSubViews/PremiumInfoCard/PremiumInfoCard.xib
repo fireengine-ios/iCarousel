@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,7 +36,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6FS-eQ-LQr">
-                                                    <rect key="frame" x="37" y="17" width="24" height="16"/>
+                                                    <rect key="frame" x="37" y="30" width="24" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="3U1-zY-xCS"/>
                                                         <constraint firstAttribute="width" secondItem="6FS-eQ-LQr" secondAttribute="height" multiplier="24:16" id="aGd-ID-nVt"/>
@@ -46,7 +46,7 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="ZKE-HD-zu9" firstAttribute="leading" secondItem="OKN-HT-OhB" secondAttribute="leading" id="DDx-Wf-xPK"/>
-                                                <constraint firstItem="6FS-eQ-LQr" firstAttribute="centerY" secondItem="ZKE-HD-zu9" secondAttribute="centerY" id="Uky-p4-Awj"/>
+                                                <constraint firstItem="6FS-eQ-LQr" firstAttribute="bottom" secondItem="ZKE-HD-zu9" secondAttribute="bottom" constant="-4" id="Y8P-CI-b2s"/>
                                                 <constraint firstItem="ZKE-HD-zu9" firstAttribute="top" secondItem="OKN-HT-OhB" secondAttribute="top" id="dIL-Fm-iaY"/>
                                                 <constraint firstAttribute="bottom" secondItem="ZKE-HD-zu9" secondAttribute="bottom" id="n2t-Nn-wsc"/>
                                                 <constraint firstItem="6FS-eQ-LQr" firstAttribute="leading" secondItem="ZKE-HD-zu9" secondAttribute="trailing" constant="8" id="w2q-KW-hDZ"/>
