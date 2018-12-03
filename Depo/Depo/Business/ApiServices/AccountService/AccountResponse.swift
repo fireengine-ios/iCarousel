@@ -107,11 +107,19 @@ class SecuritySettingsInfoResponse: ObjectRequestResponse {
     
 }
 
-class FaceImageAllowedResponse: ObjectRequestResponse {
-    var allowed: Bool?
+final class FaceImageAllowedResponse: ObjectRequestResponse {
+    
+    var isFaceImageAllowed: Bool?
+    var isFacebookAllowed: Bool?
+    
+    private enum ResponseKeys {
+        static let faceImage = "faceImageRecognitionAllowed"
+        static let facebook = "facebookTaggingEnabled"
+    }
     
     override func mapping() {
-        allowed = json?.bool
+        isFaceImageAllowed = json?[ResponseKeys.faceImage].bool
+        isFacebookAllowed = json?[ResponseKeys.facebook].bool
     }
 }
 

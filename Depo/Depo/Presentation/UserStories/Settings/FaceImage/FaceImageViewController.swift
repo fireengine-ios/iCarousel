@@ -19,6 +19,9 @@ final class FaceImageViewController: ViewController, NibInit {
     private lazy var accountService = AccountService()
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
     private lazy var facebookService = FBService()
+    private let authorityStorage: AuthorityStorage = factory.resolve()
+    
+    private var isShowFaceImageWaitAlert: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,31 +32,33 @@ final class FaceImageViewController: ViewController, NibInit {
         navigationController?.navigationItem.title = TextConstants.backTitle
         
         activityManager.delegate = self
-        analyticsManager.trackScreen(self)
-        
-        /// start requests
-        checkFaceImageIsAllowed()
+        analyticsManager.trackScreen(self)        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationBarWithGradientStyle()
-        updateFacebookImportIfNeed()
+        checkFaceImageAndFacebokIsAllowed()
     }
     
     @IBAction private func faceImageSwitchValueChanged(_ sender: UISwitch) {
-        changeFaceImageAllowed(isAllowed: sender.isOn)
+        isShowFaceImageWaitAlert = true
+        changeFaceImageAndFacebookAllowed(isFaceImageAllowed: sender.isOn, isFacebookAllowed: facebookTagsAllowedSwitch.isOn)
     }
     
     @IBAction private func facebookSwitchValueChanged(_ sender: UISwitch) {
-        changeFacebookTagsAllowed(isAllowed: sender.isOn)
+        changeFaceImageAndFacebookAllowed(isFaceImageAllowed: faceImageAllowedSwitch.isOn, isFacebookAllowed: sender.isOn)
     }
     
     @IBAction private func showFacebookImport(_ sender: UIButton) {
         goToImportPhotos()
     }
     
+    @IBAction private func onPremiumButtonTap(_ sender: Any) {
+        goToPremium()
+        
+    }
     // MARK: - functions
     
     private func updateFacebookImportIfNeed() {
@@ -65,6 +70,11 @@ final class FaceImageViewController: ViewController, NibInit {
     private func goToImportPhotos() {
         let router = RouterVC()
         router.pushViewController(viewController: router.importPhotos!)
+    }
+    
+    private func goToPremium() {
+        let router = RouterVC()
+        router.pushViewController(viewController: router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
     }
     
     private func sendAnaliticsForFaceImageAllowed(isAllowed: Bool) {
@@ -84,121 +94,72 @@ final class FaceImageViewController: ViewController, NibInit {
     }
     
     // MARK: - face image
-    
-    private func changeFaceImageAllowed(isAllowed: Bool,  completion: VoidHandler? = nil) {
+    private func changeFaceImageAndFacebookAllowed(isFaceImageAllowed: Bool, isFacebookAllowed: Bool, completion: VoidHandler? = nil) {
         activityManager.start()
-        accountService.changeFaceImageAllowed(isAllowed: isAllowed) { [weak self] result in
+        accountService.changeFaceImageAndFacebookAllowed(isFaceImageAllowed: isFaceImageAllowed, isFacebookAllowed: isFacebookAllowed) { [weak self] response in
             DispatchQueue.toMain {
-                switch result {
-                case .success(_):
+                switch response {
+                case .success(let result):
                     NotificationCenter.default.post(name: .changeFaceImageStatus, object: self)
-                    self?.sendAnaliticsForFaceImageAllowed(isAllowed: isAllowed)
+                    self?.sendAnaliticsForFaceImageAllowed(isAllowed: result.isFaceImageAllowed == true)
                     
-                    if isAllowed {
-                        self?.facebookTagsAllowedSwitch.setOn(true, animated: false)
-                        self?.showFaceImageWaitAlert()
-                        /// next request
-                        self?.changeFacebookTagsAllowed(isAllowed: true)
+                    if result.isFaceImageAllowed == true {
+                        self?.displayManager.applyConfiguration(.faceImageOn)
+                        if self?.isShowFaceImageWaitAlert == true {
+                            self?.showFaceImageWaitAlert()
+                        }
+                        
+                        if result.isFacebookAllowed == true {
+                            self?.facebookTagsAllowedSwitch.setOn(true, animated: false)
+                            self?.checkFacebookImportStatus()
+                        } else {
+                            self?.displayManager.applyConfiguration(.facebookTagsOff)
+                        }
                     } else {
                         self?.displayManager.applyConfiguration(.initial)
                     }
                     
+                    self?.view.layoutIfNeeded()
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)
-                    
-                    /// revert state
-                    if let isOn = self?.faceImageAllowedSwitch.isOn {
-                        self?.faceImageAllowedSwitch.setOn(!isOn, animated: true)
-                    }
+                        
+                        /// revert state
+                    self?.facebookTagsAllowedSwitch.setOn(self?.facebookTagsAllowedSwitch.isOn == false, animated: true)
+                    self?.faceImageAllowedSwitch.setOn(self?.faceImageAllowedSwitch.isOn == false, animated: true)
                 }
                 self?.activityManager.stop()
+                self?.isShowFaceImageWaitAlert = false
                 completion?()
             }
         }
     }
     
-    private func checkFaceImageIsAllowed(completion: VoidHandler? = nil)  {
+    private func checkFaceImageAndFacebokIsAllowed(completion: VoidHandler? = nil)  {
+        let group = DispatchGroup()
         activityManager.start()
-        accountService.isAllowedFaceImage { [weak self] result in
-            DispatchQueue.toMain {
-                switch result {
-                case .success(let isAllowed):
-                    self?.faceImageAllowedSwitch.setOn(isAllowed, animated: true)
-                    if isAllowed {
-                        /// next request
-                        self?.checkFacebookTagsIsAllowed(completion: completion)
-                    } else {
-                        self?.displayManager.applyConfiguration(.initial)
-                        completion?()
-                    }
-                    
-                case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
-                    completion?()
-                }
-                self?.activityManager.stop()
+        checkFaceImageStatus(with: group)
+        
+        group.notify(queue: .main) {
+            self.activityManager.stop()
+            if self.authorityStorage.faceRecognition == false, self.faceImageAllowedSwitch.isOn {
+                self.displayManager.applyConfiguration(.faceImageOn)
+            } else {
+                self.displayManager.applyConfiguration(.faceImageOff)
             }
+            
+            self.view.layoutIfNeeded()
         }
+        
     }
     
     // MARK: - facebook
-    
-    private func checkFacebookTagsIsAllowed(completion: VoidHandler? = nil)  {
-        activityManager.start()
-        accountService.isAllowedFacebookTags { [weak self] result in
-            DispatchQueue.toMain {
-                switch result {
-                case .success(let isAllowed):
-                    self?.facebookTagsAllowedSwitch.setOn(isAllowed, animated: true)
-                    if isAllowed {
-                        /// next request
-                        self?.checkFacebookImportStatus(completion: completion)
-                    } else {
-                        self?.displayManager.applyConfiguration(.facebookTagsOff)
-                        completion?()
-                    }
-                    
-                case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
-                    completion?()
-                }
-                
-                self?.activityManager.stop()
-            }
+    private func checkFacebookImportStatus(completion: VoidHandler? = nil, group: DispatchGroup? = nil) {
+        if group == nil {
+            activityManager.start()
+        } else {
+            group?.enter()
         }
-    }
-    
-    private func changeFacebookTagsAllowed(isAllowed: Bool, completion: VoidHandler? = nil) {
-        activityManager.start()
         
-        accountService.changeFacebookTagsAllowed(isAllowed: isAllowed) { [weak self] result in
-            DispatchQueue.toMain {
-                switch result {
-                case .success(_):
-                    if isAllowed {
-                        /// next request
-                        self?.checkFacebookImportStatus(completion: completion)
-                    } else {
-                        self?.displayManager.applyConfiguration(.facebookTagsOff)
-                        completion?()
-                    }
-                    
-                case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
-                    
-                    /// revert state
-                    if let isOn = self?.facebookTagsAllowedSwitch.isOn {
-                        self?.facebookTagsAllowedSwitch.setOn(!isOn, animated: true)
-                    }
-                    completion?()
-                }
-                self?.activityManager.stop()
-            }
-        }
-    }
-    
-    private func checkFacebookImportStatus(completion: VoidHandler? = nil) {
-        activityManager.start()
         facebookService.requestStatus { [weak self] result in
             DispatchQueue.toMain {
                 switch result {
@@ -208,13 +169,75 @@ final class FaceImageViewController: ViewController, NibInit {
                     } else {
                         self?.displayManager.applyConfiguration(.facebookImportOff)
                     }
-                    
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)
                 }
-                self?.activityManager.stop()
+                if group == nil {
+                    self?.activityManager.stop()
+                } else {
+                    group?.leave()
+                }
+                
                 completion?()
             }
+        }
+    }
+    
+    private func checkFaceImageStatus(with group: DispatchGroup) {
+        group.enter()
+        accountService.permissions { [weak self] response in
+            switch response {
+            case .success(let result):
+                self?.authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
+                                                     dublicates: result.hasPermissionFor(.deleteDublicate),
+                                                     faces: result.hasPermissionFor(.faceRecognition))
+                
+                self?.checkFaceImageAndFacebookState(with: group)
+            case .failed(let error):
+                DispatchQueue.toMain {
+                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                }
+                
+                self?.checkFaceImageAndFacebookState(with: group)
+            }
+            
+            group.leave()
+        }
+    }
+    
+    private func checkFaceImageAndFacebookState(with group: DispatchGroup, completion: VoidHandler? = nil) {
+        group.enter()
+        
+        accountService.isAllowedFaceImageAndFacebook { [weak self] result in
+            DispatchQueue.toMain {
+                switch result {
+                case .success(let result):
+                    self?.faceImageAllowedSwitch.setOn(result.isFaceImageAllowed == true, animated: true)
+                    self?.facebookTagsAllowedSwitch.setOn(result.isFacebookAllowed == true, animated: true)
+                    
+                    if result.isFacebookAllowed == true {
+                        self?.checkFacebookImportStatus(completion: completion, group: group)
+                    } else {
+                        self?.displayManager.applyConfiguration(.facebookTagsOff)
+                        
+                        completion?()
+                    }
+
+                    completion?()
+                case .failed(let error):
+                    DispatchQueue.toMain {
+                        /// revert state
+                        self?.facebookTagsAllowedSwitch.setOn(self?.facebookTagsAllowedSwitch.isOn == false, animated: true)
+                        self?.faceImageAllowedSwitch.setOn(self?.faceImageAllowedSwitch.isOn == false, animated: true)
+                        
+                        UIApplication.showErrorAlert(message: error.description)
+                    }
+                    
+                    completion?()
+                }
+            }
+            
+            group.leave()
         }
     }
 }
