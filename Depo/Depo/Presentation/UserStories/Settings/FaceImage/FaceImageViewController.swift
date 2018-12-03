@@ -124,8 +124,8 @@ final class FaceImageViewController: ViewController, NibInit {
                     UIApplication.showErrorAlert(message: error.description)
                         
                         /// revert state
-                    self?.facebookTagsAllowedSwitch.setOn(!(self?.facebookTagsAllowedSwitch.isOn == true), animated: true)
-                    self?.faceImageAllowedSwitch.setOn(!(self?.faceImageAllowedSwitch.isOn == true), animated: true)
+                    self?.facebookTagsAllowedSwitch.setOn(self?.facebookTagsAllowedSwitch.isOn == false, animated: true)
+                    self?.faceImageAllowedSwitch.setOn(self?.faceImageAllowedSwitch.isOn == false, animated: true)
                 }
                 self?.activityManager.stop()
                 self?.isShowFaceImageWaitAlert = false
@@ -227,8 +227,8 @@ final class FaceImageViewController: ViewController, NibInit {
                 case .failed(let error):
                     DispatchQueue.toMain {
                         /// revert state
-                        self?.facebookTagsAllowedSwitch.setOn(!(self?.facebookTagsAllowedSwitch.isOn == true), animated: true)
-                        self?.faceImageAllowedSwitch.setOn(!(self?.faceImageAllowedSwitch.isOn == true), animated: true)
+                        self?.facebookTagsAllowedSwitch.setOn(self?.facebookTagsAllowedSwitch.isOn == false, animated: true)
+                        self?.faceImageAllowedSwitch.setOn(self?.faceImageAllowedSwitch.isOn == false, animated: true)
                         
                         UIApplication.showErrorAlert(message: error.description)
                     }

@@ -106,10 +106,6 @@ class SingletonStorage {
         }, fail: fail)
     }
     
-    var isFaceImageRecognitionON : Any {
-        return faceImageSettings?.isFaceImageAllowed ?? NSNull()
-    }
-    
     //MARK: - subscriptions
     
     func getActiveSubscriptionsList(success: @escaping (_ result: ActiveSubscriptionResponse) -> Void,
