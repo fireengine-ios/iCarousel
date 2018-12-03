@@ -15,9 +15,7 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     private let authorityStorage: AuthorityStorage = factory.resolve()
 
     var isPremiumUser: Bool {
-        get {
-            return authorityStorage.isPremium ?? false
-        }
+        return authorityStorage.isPremium ?? false
     }
     
     func requestsFinished() {

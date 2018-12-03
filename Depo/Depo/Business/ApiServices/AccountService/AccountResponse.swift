@@ -243,7 +243,7 @@ final class PermissionsResponse: ObjectRequestResponse {
 
     override func mapping() {
         let permissionsJsonArray = json?.array
-        if let permissionList = permissionsJsonArray?.flatMap({ PermissionResponse.init(withJSON: $0) }) {
+        if let permissionList = permissionsJsonArray?.flatMap({ PermissionResponse(withJSON: $0) }) {
             permissions = permissionList
         }
     }

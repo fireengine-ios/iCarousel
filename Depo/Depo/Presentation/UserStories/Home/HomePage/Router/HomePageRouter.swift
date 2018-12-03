@@ -56,4 +56,8 @@ class HomePageRouter: HomePageRouterInput {
         controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
         router.pushViewController(viewController: controller)
     }
+    
+    func showError(errorMessage: String) {
+        UIApplication.showErrorAlert(message: errorMessage)
+    }
 }

@@ -47,6 +47,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         
+        CardsManager.default.addViewForNotification(view: homePageDataSource)
         homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
         
         configurateRefreshControl()
@@ -78,7 +79,6 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         homePageDataSource.isActive = true
-        CardsManager.default.addViewForNotification(view: homePageDataSource)
         if homepageIsActiveAndVisible {
             homePageNavigationBarStyle()
             configureNavBarActions()
