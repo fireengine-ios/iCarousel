@@ -188,7 +188,7 @@ final class FaceImageViewController: ViewController, NibInit {
         accountService.permissions { [weak self] response in
             switch response {
             case .success(let result):
-                self?.authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
+                self?.authorityStorage.refreshStatus(premium: result.hasPermissionFor(.premiumUser),
                                                      dublicates: result.hasPermissionFor(.deleteDublicate),
                                                      faces: result.hasPermissionFor(.faceRecognition))
                 
