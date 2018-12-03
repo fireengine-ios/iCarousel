@@ -92,14 +92,13 @@ extension PackagesInteractor: PackagesInteractorInput {
         accountService.availableOffers { [weak self] (result) in
             switch result {
             case .success(let response):
-                if let packs = response.offers {
-                    self?.getInfoForAppleProducts(offers: packs)
-                } else {
-                    let error = CustomErrors.serverError("An error accurred while getting available offers")
-                    self?.output.failed(with: error.description)
+                DispatchQueue.toMain {
+                    self?.getInfoForAppleProducts(offers: response)
                 }
             case .failed(let error):
-                self?.output.failed(with: error.localizedDescription)
+                DispatchQueue.toMain {
+                    self?.output.failed(with: error.localizedDescription)
+                }
             }
         }
     }
@@ -390,7 +389,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                 priceString = String(format: TextConstants.offersPrice, price, currency)
             }
             
-            let name = offer.quota?.bytesString ?? ""
+            let name = offer.quota?.bytesString ?? (offer.displayName ?? "")
             
             return subscriptionPlanWith(name: name, priceString: priceString, type: .default, model: offer)
         })

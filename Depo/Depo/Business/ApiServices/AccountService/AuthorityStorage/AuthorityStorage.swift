@@ -15,5 +15,7 @@ protocol AuthorityStorage: class {
     var isBannerShowedForPremium: Bool { get }
     var isLosePremiumStatus: Bool { get }
     
+    func hideBannerForSecondLogin()
     func refrashStatus(premium: Bool, dublicates: Bool, faces: Bool)
+    func restoreStats()
 }

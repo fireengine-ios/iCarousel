@@ -84,6 +84,7 @@ class HomePageInteractor: HomePageInteractorInput {
                 } else {
                     let isBannerShowedForPremium = authorityStorage.isBannerShowedForPremium
                     isBannerShowedForPremium ? () : CardsManager.default.startPremiumCard()
+                    authorityStorage.hideBannerForSecondLogin()
                 }
             case .failed(let error):
                 DispatchQueue.toMain {

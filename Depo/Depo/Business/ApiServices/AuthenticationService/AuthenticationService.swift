@@ -279,7 +279,8 @@ class AuthenticationService: BaseRequestService {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
-    
+    private lazy var authorityStorage: AuthorityStorage = factory.resolve()
+
     // MARK: - Login
     
     func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?) {
@@ -384,6 +385,7 @@ class AuthenticationService: BaseRequestService {
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
+            self.authorityStorage.restoreStats()
             CoreDataStack.default.clearDataBase()
             FreeAppSpace.default.clear()
             CardsManager.default.stopAllOperations()

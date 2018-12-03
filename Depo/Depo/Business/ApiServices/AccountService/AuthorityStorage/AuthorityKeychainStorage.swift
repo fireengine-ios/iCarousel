@@ -10,8 +10,11 @@ import Foundation
 import KeychainSwift
 
 final class AuthorityKeychainStorage: AuthorityStorage {
-    
+
     private enum Keys {
+        //Took from StorageVars to get userID instead of creating storageVars
+        static let currentUserID = "CurrentUserIDKey"
+        
         static let isPremium = "AUTH_PREMIUM_USER"
         static let faceRecognition = "AUTH_FACE_IMAGE_LOCATION"
         static let deleteDublicate = "AUTH_DELETE_DUPLICATE"
@@ -29,8 +32,9 @@ final class AuthorityKeychainStorage: AuthorityStorage {
             let newFlag = newValue ?? false
 
             if currentFlag != newFlag {
-                UserDefaults.standard.set(currentFlag, forKey: Keys.isLosePremiumStatus)
-                UserDefaults.standard.set(newFlag, forKey: Keys.isBannerShowedForPremium)
+                let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+
+                UserDefaults.standard.set(currentFlag, forKey: Keys.isLosePremiumStatus + userID)
             }
         }
 
@@ -50,19 +54,34 @@ final class AuthorityKeychainStorage: AuthorityStorage {
             keychain.set(deleteDublicate ?? false, forKey: Keys.deleteDublicate)
         }
     }
-
+    
     var isBannerShowedForPremium: Bool {
-        return UserDefaults.standard.bool(forKey: Keys.isBannerShowedForPremium)
+        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        return UserDefaults.standard.bool(forKey: Keys.isBannerShowedForPremium + userID)
     }
 
     var isLosePremiumStatus: Bool {
-        return UserDefaults.standard.bool(forKey: Keys.isLosePremiumStatus)
+        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        return UserDefaults.standard.bool(forKey: Keys.isLosePremiumStatus + userID)
+    }
+    
+    func hideBannerForSecondLogin() {
+        if isPremium == true {
+            let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+            UserDefaults.standard.set(true, forKey: Keys.isBannerShowedForPremium + userID)
+        }
     }
     
     func refrashStatus(premium: Bool, dublicates: Bool, faces: Bool) {
         faceRecognition = faces
         deleteDublicate = dublicates
         isPremium = premium
+    }
+    
+    func restoreStats() {
+        isPremium = nil
+        faceRecognition = nil
+        deleteDublicate = nil
     }
     
     init() {
