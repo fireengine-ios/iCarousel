@@ -19,7 +19,7 @@ final class FaceImageViewController: ViewController, NibInit {
     private lazy var accountService = AccountService()
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
     private lazy var facebookService = FBService()
-    private let authorityStorage: AuthorityStorage = factory.resolve()
+    private let authorityStorage = AuthoritySingleton.shared
     
     private var isShowFaceImageWaitAlert: Bool = false
     
