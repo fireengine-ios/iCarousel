@@ -15,7 +15,6 @@ class PackagesInteractor {
     private let subscriptionsService: SubscriptionsService
     private let accountService: AccountServicePrl
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private lazy var authorityStorage: AuthorityStorage = factory.resolve()
     
     init(offersService: OffersService = OffersServiceIml(),
          subscriptionsService: SubscriptionsService = SubscriptionsServiceIml(),
@@ -146,9 +145,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         accountService.permissions { [weak self] (result) in
             switch result {
             case .success(let response):
-                self?.authorityStorage.refrashStatus(premium: response.hasPermissionFor(.premiumUser),
-                                               dublicates: response.hasPermissionFor(.deleteDublicate),
-                                               faces: response.hasPermissionFor(.faceRecognition))
+                AuthoritySingleton.shared.refreshStatus(with: response)
                 DispatchQueue.main.async {
                     self?.output.successedGotUserAuthority()
                 }

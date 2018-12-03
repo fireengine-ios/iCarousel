@@ -17,8 +17,6 @@ final class LeavePremiumPresenter: BasePresenter {
     var title: String
     var activeSubscriptions: [SubscriptionPlanBaseResponse]
     
-    private let authorityStorage: AuthorityStorage = factory.resolve()
-    
     init(title: String, activeSubscriptions: [SubscriptionPlanBaseResponse]) {
         self.title = title
         self.activeSubscriptions = activeSubscriptions
@@ -71,7 +69,7 @@ extension LeavePremiumPresenter: LeavePremiumInteractorOutput {
     func didLoadAccountType(accountTypeString: String) {
         asyncOperationSucces()
 
-        authorityStorage.refrashStatus(premium: false, dublicates: false, faces: false)
+        AuthoritySingleton.shared.refreshStatus(premium: false, dublicates: false, faces: false)
         
         let accountType = getAccountType(for: accountTypeString, subscriptionPlans: activeSubscriptions)
         if accountType != .turkcell {

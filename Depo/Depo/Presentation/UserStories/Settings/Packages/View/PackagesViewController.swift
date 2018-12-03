@@ -164,9 +164,7 @@ extension PackagesViewController: PackagesViewInput {
             view.removeFromSuperview()
         }
 
-        let authorityStorage: AuthorityStorage = factory.resolve()
-
-        let isPremium = authorityStorage.isPremium ?? false
+        let isPremium = AuthoritySingleton.shared.isPremium
 
         let firstView = PackageInfoView.initFromNib()
         isPremium ?

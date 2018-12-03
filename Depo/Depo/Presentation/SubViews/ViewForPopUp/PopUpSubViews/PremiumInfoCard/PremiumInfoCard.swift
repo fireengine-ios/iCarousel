@@ -17,8 +17,6 @@ final class PremiumInfoCard: BaseView {
     @IBOutlet private weak var becomePremiumButton: GradientPremiumButton!
     @IBOutlet private weak var contentStackView: UIStackView!
 
-    private var authorityStorage: AuthorityStorage = factory.resolve()
-
     override func configurateView() {
         super.configurateView()
         
@@ -40,7 +38,7 @@ final class PremiumInfoCard: BaseView {
     func configurateWithType(viewType: OperationType) {
         if viewType == .premium {
 
-            let isPremium = authorityStorage.isPremium ?? false
+            let isPremium = AuthoritySingleton.shared.isPremium
             buttonContentView.isHidden = isPremium
             crownImage.isHidden = isPremium
 

@@ -76,7 +76,7 @@ final class PackageModelResponse: Equatable {
         case disabled   = "DISABLED"
     }
     
-    fileprivate enum ResponseKeys {
+    private enum ResponseKeys {
         static let name = "name"
         static let currency = "currency"
         static let displayName = "displayName"
