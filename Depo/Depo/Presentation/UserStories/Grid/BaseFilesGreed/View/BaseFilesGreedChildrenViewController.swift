@@ -20,17 +20,19 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         super.configureNavBarActions(isSelecting: isSelecting)
 //        defaultNavBarStyle()
 //        navigationBarWithGradientStyle()
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        navigationBarWithGradientStyle()
-        homePageNavigationBarStyle()
+//        homePageNavigationBarStyle()
         
         if let _ = parent as? SegmentedController {
-            
+            homePageNavigationBarStyle()
         } else {
-            
+            navigationBarWithGradientStyle()
         }
         
         if mainTitle != "" {
@@ -61,7 +63,13 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
             subTitle = output.getSortTypeString()
         }
         setTitle(withString: mainTitle, andSubTitle: subTitle)
-        homePageNavigationBarStyle()
+//        homePageNavigationBarStyle()
+        
+        if let _ = parent as? SegmentedController {
+            homePageNavigationBarStyle()
+        } else {
+            navigationBarWithGradientStyle()
+        }
     }
 
     override func configurateNavigationBar() {
