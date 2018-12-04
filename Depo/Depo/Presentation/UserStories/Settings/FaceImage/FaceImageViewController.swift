@@ -26,8 +26,6 @@ final class FaceImageViewController: ViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        displayManager.applyConfiguration(.initial)
-        
         setTitle(withString: TextConstants.faceAndImageGrouping)
         navigationController?.navigationItem.title = TextConstants.backTitle
         
@@ -38,6 +36,8 @@ final class FaceImageViewController: ViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        displayManager.applyConfiguration(.initial)
+
         navigationBarWithGradientStyle()
         checkFaceImageAndFacebokIsAllowed()
     }
@@ -103,8 +103,7 @@ final class FaceImageViewController: ViewController, NibInit {
                     NotificationCenter.default.post(name: .changeFaceImageStatus, object: self)
                     self?.sendAnaliticsForFaceImageAllowed(isAllowed: result.isFaceImageAllowed == true)
                     
-                    if result.isFaceImageAllowed == true {
-                        self?.displayManager.applyConfiguration(.faceImageOn)
+                    if result.isFaceImageAllowed == true {                        
                         if self?.isShowFaceImageWaitAlert == true {
                             self?.showFaceImageWaitAlert()
                         }
@@ -142,9 +141,11 @@ final class FaceImageViewController: ViewController, NibInit {
         group.notify(queue: .main) {
             self.activityManager.stop()
             if self.authorityStorage.faceRecognition == false, self.faceImageAllowedSwitch.isOn {
-                self.displayManager.applyConfiguration(.faceImageOn)
+                self.displayManager.applyConfiguration(.faceImageStandart)
+            } else if self.faceImageAllowedSwitch.isOn {
+                self.displayManager.applyConfiguration(.faceImagePremium)
             } else {
-                self.displayManager.applyConfiguration(.faceImageOff)
+                self.displayManager.applyConfiguration(.initial)
             }
             
             self.view.layoutIfNeeded()
@@ -185,6 +186,7 @@ final class FaceImageViewController: ViewController, NibInit {
     
     private func checkFaceImageStatus(with group: DispatchGroup) {
         group.enter()
+        
         accountService.permissions { [weak self] response in
             switch response {
             case .success(let result):
@@ -219,7 +221,6 @@ final class FaceImageViewController: ViewController, NibInit {
                         self?.checkFacebookImportStatus(completion: completion, group: group)
                     } else {
                         self?.displayManager.applyConfiguration(.facebookTagsOff)
-                        
                         completion?()
                     }
 
