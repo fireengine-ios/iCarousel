@@ -42,6 +42,7 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
         static let subscriptionPlanDisplayName = "displayName"
         static let subscriptionPlanDescription = "description"
         static let subscriptionPlanPrice = "price"
+        static let subscriptionPlanCurrency = "currency"
         static let subscriptionPlanisDefault = "isDefault"
         static let subscriptionPlanRole = "role"
         static let subscriptionPlanStatus = "status"
@@ -70,6 +71,7 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
     var subscriptionPlanDisplayName: String?
     var subscriptionPlanDescription: String?
     var subscriptionPlanPrice: Float?
+    var subscriptionPlanCurrency: String?
     var subscriptionPlanIsDefault: Bool?
     var subscriptionPlanRole: String?
     var subscriptionPlanStatus: PackageModelResponse.PackageStatus?
@@ -101,6 +103,7 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
         subscriptionPlanDisplayName = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanDisplayName]?.string
         subscriptionPlanDescription = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanDescription]?.string
         subscriptionPlanPrice = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanPrice]?.float
+        subscriptionPlanCurrency = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanCurrency]?.string
         subscriptionPlanIsDefault = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanisDefault]?.bool
         subscriptionPlanRole = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanRole]?.string
         if let status = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanStatus]?.string {

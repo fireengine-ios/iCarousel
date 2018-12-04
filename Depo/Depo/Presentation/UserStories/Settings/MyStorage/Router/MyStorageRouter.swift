@@ -9,14 +9,14 @@
 import UIKit
 
 final class MyStorageRouter {
-    weak var view: MyStorageViewController?
+    private let router = RouterVC()
 }
 
 //MARK: - MyStorageRouterInput
 extension MyStorageRouter: MyStorageRouterInput {
     func showCancelOfferAlert(with text: String) {
         let vc = DarkPopUpController.with(title: TextConstants.offersInfo, message: text, buttonTitle: TextConstants.offersOk)
-        view?.present(vc, animated: false, completion: nil)
+        router.presentViewController(controller: vc)
     }
     
     func showCancelOfferApple() {
@@ -30,7 +30,7 @@ extension MyStorageRouter: MyStorageRouterInput {
         
         alertVC.addAction(settingsAction)
         alertVC.addAction(okAction)
-        view?.present(alertVC, animated: true, completion: nil)
+        router.presentViewController(controller: alertVC)
     }
     
     func display(error: String) {

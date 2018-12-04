@@ -18,7 +18,6 @@ class MyStorageModuleConfigurator {
 
     private func configure(with view: MyStorageViewController, usage: UsageResponse?) {
         let router = MyStorageRouter()
-        router.view = view
         
         let presenter = MyStoragePresenter()
         presenter.view = view

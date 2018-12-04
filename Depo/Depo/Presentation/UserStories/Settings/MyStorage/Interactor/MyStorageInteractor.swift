@@ -64,9 +64,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
     }
     
     private func getInfoForAppleProducts(offers: [SubscriptionPlanBaseResponse]) {
-        let appleOffers: [String] = offers.flatMap({
-                return $0.subscriptionPlanInAppPurchaseId ?? ""
-        })
+        let appleOffers: [String] = offers.flatMap({ return $0.subscriptionPlanInAppPurchaseId })
         iapManager.loadProducts(productIds: appleOffers) { [weak self] _ in
             self?.output.successed(allOffers: offers)
         }
@@ -87,11 +85,11 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 return nil
             }
             
-            let priceString: String!
+            let priceString: String
             
             if subscription.subscriptionPlanType == .apple, let product = iapManager.product(for: subscription.subscriptionPlanInAppPurchaseId ?? "") {
                 let price = product.localizedPrice
-                let period: String!
+                let period: String
                 if #available(iOS 11.2, *) {
                     switch product.subscriptionPeriod?.unit.rawValue {
                     case 0:
@@ -110,7 +108,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 }
                 priceString = String(format: TextConstants.packageApplePrice, price, period)
             } else {
-                let currency =  (subscription.subscriptionPlanPeriod ?? getCurrency(for: subscription)).lowercased()
+                let currency = (subscription.subscriptionPlanCurrency ?? getCurrency(for: subscription))
                 priceString = String(format: TextConstants.offersPrice, price, currency)
             }
             

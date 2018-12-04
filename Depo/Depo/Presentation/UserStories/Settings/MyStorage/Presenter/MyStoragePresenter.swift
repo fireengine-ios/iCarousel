@@ -16,18 +16,15 @@ final class MyStoragePresenter {
     var usage: UsageResponse!
     var accountType: AccountType = .all
     var displayableOffers: [SubscriptionPlan] = []
+    
     private var allOffers: [SubscriptionPlanBaseResponse] = []
+    
     //MARK: - UtilityMethods
     private func getAccountType(for accountType: String, subscriptions: [SubscriptionPlanBaseResponse]) -> AccountType {
         if accountType == "TURKCELL" {
             return .turkcell
         } else {
-            let plans = subscriptions.flatMap { if let rule = $0.subscriptionPlanRole {
-                return rule
-            } else {
-                return ""
-                }
-            }
+            let plans = subscriptions.flatMap { return $0.subscriptionPlanRole }
             for plan in plans {
                 if plan.hasPrefix("lifebox") {
                     return .ukranian
@@ -54,9 +51,9 @@ final class MyStoragePresenter {
     
     private func displayOffers() {
         displayableOffers = interactor.convertToASubscriptionList(activeSubscriptionList: allOffers, accountType: accountType)
-        displayableOffers.sort(by: { plan1, plan2 in
-            return plan1.type == .free
-        })
+        if let index = displayableOffers.index(where: { $0.type == .free }) {
+            displayableOffers.swapAt(0, index)
+        }
         
         view?.stopActivityIndicator()
         view?.reloadCollectionView()
