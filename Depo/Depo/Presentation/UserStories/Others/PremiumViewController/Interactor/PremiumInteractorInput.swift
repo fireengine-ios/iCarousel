@@ -12,7 +12,7 @@ protocol PremiumInteractorInput {
     
     func getAccountType()
     func getFeaturePacks(isAppleProduct: Bool)
-    func getPriceInfoFromApple(offer: PackageModelResponse) -> String
+    func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String
 
     func activate(offer: PackageModelResponse)
     

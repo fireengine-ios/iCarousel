@@ -26,7 +26,13 @@ extension MyStorageInteractor: MyStorageInteractorInput {
     func getUsage() {
         accountService.usage(
             success: { [weak self] response in
-                guard let usage = response as? UsageResponse else { return }
+                guard let usage = response as? UsageResponse else {
+                    let error = CustomErrors.serverError("An error occured while getting storage usage")
+                    DispatchQueue.toMain {
+                        self?.output.failed(with: error.localizedDescription)
+                    }
+                    return
+                }
                 DispatchQueue.toMain {
                     self?.output.successed(usage: usage)
                 }
@@ -39,7 +45,13 @@ extension MyStorageInteractor: MyStorageInteractorInput {
     
     func getAccountType() {
         accountService.info(success: {  [weak self] (response) in
-            guard let response = response as? AccountInfoResponse else { return }
+            guard let response = response as? AccountInfoResponse else {
+                let error = CustomErrors.serverError("An error occured while getting account info")
+                DispatchQueue.toMain {
+                    self?.output.failed(with: error.localizedDescription)
+                }
+                return
+            }
             DispatchQueue.toMain {
                 self?.output.successed(accountInfo: response)
             }
@@ -53,7 +65,13 @@ extension MyStorageInteractor: MyStorageInteractorInput {
     func getAllOffers() {
         subscriptionsService.activeSubscriptions(
             success: { [weak self] response in
-                guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else { return }
+                guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else {
+                    let error = CustomErrors.serverError("An error occured while getting active subscription")
+                    DispatchQueue.toMain {
+                        self?.output.failed(with: error.localizedDescription)
+                    }
+                    return
+                }
                 SingletonStorage.shared.activeUserSubscription = subscriptionsResponce
                 self?.getInfoForAppleProducts(offers: subscriptionsResponce.list)
             }, fail: { [weak self] errorResponse in
@@ -64,9 +82,18 @@ extension MyStorageInteractor: MyStorageInteractorInput {
     }
     
     private func getInfoForAppleProducts(offers: [SubscriptionPlanBaseResponse]) {
-        let appleOffers: [String] = offers.flatMap({ return $0.subscriptionPlanInAppPurchaseId })
-        iapManager.loadProducts(productIds: appleOffers) { [weak self] _ in
-            self?.output.successed(allOffers: offers)
+        let appleOffers = offers.flatMap({ return $0.subscriptionPlanInAppPurchaseId })
+        iapManager.loadProducts(productIds: appleOffers) { [weak self] response in
+            switch response {
+            case .success(_):
+                DispatchQueue.toMain {
+                    self?.output.successed(allOffers: offers)
+                }
+            case .failed(let error):
+                DispatchQueue.toMain {
+                    self?.output.failed(with: error.localizedDescription)
+                }
+            }
         }
     }
     

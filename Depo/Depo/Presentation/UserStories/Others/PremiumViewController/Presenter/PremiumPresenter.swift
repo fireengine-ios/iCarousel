@@ -16,6 +16,7 @@ final class PremiumPresenter {
     
     var title: String
     var headerTitle: String
+    var authority: PackagePackAuthoritiesResponse.AuthorityType = .premiumUser
     
     private var userPhone = ""
     
@@ -28,29 +29,32 @@ final class PremiumPresenter {
         }
     }
     
-    init(title: String, headerTitle: String) {
+    init(title: String, headerTitle: String, authority: PackagePackAuthoritiesResponse.AuthorityType?) {
         self.title = title
         self.headerTitle = headerTitle
+        guard let authority = authority else { return }
+        self.authority = authority
     }
     
     //MARK: Utility Methods(private)
     private func displayFeatureInfo() {
         let price: String
-        guard let offer = feature else { return }
-        if accountType == .all {
-            price = interactor.getPriceInfoFromApple(offer: offer)
-        } else {
-            let currency = offer.currency ?? ""
-            let priceString = String(offer.price ?? 0)
-            price = String(format: TextConstants.offersLocalizedPrice, priceString, currency)
+        guard let offer = feature else {
+            self.failed(with: "Couldn't get feature offer for this authority type")
+            return
         }
+        
+        price = interactor.getPriceInfo(for: offer, accountType: accountType)
         
         view.stopActivityIndicator()
         view.displayFeatureInfo(price: price)
     }
     
     private func prepareForPurchase() {
-        guard let offer = feature else { return }
+        guard let offer = feature else {
+            self.failed(with: "Couldn't get feature offer for this authority type")
+            return
+        }
         if let type = offer.featureType, type == .appleFeature {
             view.startActivityIndicator()
             interactor.activate(offer: offer)
@@ -66,7 +70,10 @@ final class PremiumPresenter {
             self?.userPhone = userInfoResponse.fullPhoneNumber
             DispatchQueue.toMain {
                 self?.view.startActivityIndicator()
-                guard let offer = self?.feature else { return }
+                guard let offer = self?.feature else {
+                    self?.failed(with: "Couldn't get feature offer for this authority type")
+                    return
+                }
                 self?.interactor.getToken(for: offer)
             }
             }, fail: { [weak self] failResponse in
@@ -102,8 +109,8 @@ extension PremiumPresenter: PremiumInteractorOutput {
         let featureType: PackageModelResponse.FeaturePackageType = accountType == .all ? .appleFeature : .SLCMFeature
         for feature in allFeatures {
             if feature.featureType == featureType {
-                guard let authrities = feature.authorities else { continue }
-                if authrities.contains(where: { $0.authorityType == .premiumUser }) {
+                guard let authorities = feature.authorities else { continue }
+                if authorities.contains(where: { return $0.authorityType == authority }) {
                     self.feature = feature
                     break
                 }
@@ -172,7 +179,10 @@ extension PremiumPresenter: OptInControllerDelegate {
     func optInResendPressed(_ optInVC: OptInController) {
         optInVC.startActivityIndicator()
         self.optInVC = optInVC
-        guard let offer = feature else { return }
+        guard let offer = feature else {
+            self.failed(with: "Couldn't get feature offer for this authority type")
+            return
+        }
         interactor.getResendToken(for: offer)
     }
     
@@ -190,7 +200,10 @@ extension PremiumPresenter: OptInControllerDelegate {
     func optIn(_ optInVC: OptInController, didEnterCode code: String) {
         optInVC.startActivityIndicator()
         self.optInVC = optInVC
-        guard let offer = feature else { return }
+        guard let offer = feature else {
+            self.failed(with: "Couldn't get feature offer for this authority type")
+            return
+        }
         interactor.verifyOffer(offer, token: referenceToken, otp: code)
     }
 }

@@ -14,17 +14,9 @@ final class PremiumInteractor {
     private let accountService: AccountServicePrl = AccountService()
     private let offersService: OffersService = OffersServiceIml()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-
-    private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
-        let appleOffers: [String] = offers.flatMap({ return $0.inAppPurchaseId })
-        iapManager.loadProducts(productIds: appleOffers) { [weak self] _ in
-            DispatchQueue.toMain {
-                self?.output.successed(allFeatures: offers)
-            }
-        }
-    }
     
-    func getPriceInfoFromApple(offer: PackageModelResponse) -> String {
+    //MARK: - Utility Methids(public)
+    func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String {
         if let iapProductId = offer.inAppPurchaseId, let product = iapManager.product(for: iapProductId) {
             let price = product.localizedPrice
             let period: String
@@ -46,14 +38,48 @@ final class PremiumInteractor {
             }
             return String(format: TextConstants.packageApplePrice, price, period)
         } else {
-            if let price = offer.period, let currency = offer.currency {
-                if let period = offer.period {
-                    return String(format: TextConstants.offersPrice, (price + " " + currency), period)
+            if let price = offer.price {
+                let currency = offer.currency ?? getCurrency(for: accountType)
+                if let period = offer.period?.lowercased() {
+                    return String(format: TextConstants.packageApplePrice, (String(price) + " " + currency), period)
                 } else {
-                    return price + " " + currency
+                    return String(price) + " " + currency
                 }
             } else {
                 return TextConstants.free
+            }
+        }
+    }
+    
+    //MARK: - Utility Methids(private)
+    private func getCurrency(for accountType: AccountType) -> String {
+        switch accountType {
+        ///https://en.wikipedia.org/wiki/Northern_Cyprus
+        case .turkcell, .cyprus:
+            return "TL"
+        case .ukranian:
+            return "UAH"
+        case .moldovian:
+            return "MDL"
+        case .life:
+            return "BYN"
+        case .all:
+            return "$" /// temp
+        }
+    }
+    
+    private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
+        let appleOffers: [String] = offers.flatMap({ return $0.inAppPurchaseId })
+        iapManager.loadProducts(productIds: appleOffers) { [weak self] response in
+            switch response {
+            case .success(_):
+                DispatchQueue.toMain {
+                    self?.output.successed(allFeatures: offers)
+                }
+            case .failed(let error):
+                DispatchQueue.toMain {
+                    self?.output.failed(with: error.localizedDescription)
+                }
             }
         }
     }

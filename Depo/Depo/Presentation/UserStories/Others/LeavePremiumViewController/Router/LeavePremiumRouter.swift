@@ -25,7 +25,6 @@ extension LeavePremiumRouter: LeavePremiumRouterInput {
         
         let popUpController = DarkPopUpController.with(title: TextConstants.offersInfo, message: text, buttonTitle: TextConstants.offersOk) { vc in
             vc.close()
-            router.popViewController()
         }
         router.presentViewController(controller: popUpController)
     }

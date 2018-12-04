@@ -9,16 +9,16 @@
 import Foundation
 
 final class PremiumRouter {
-    
-    weak var view: PremiumViewController!
-    var delegate: PremiumPresenter?
+    private let router = RouterVC()
+
+    weak var delegate: PremiumPresenter?
 }
 
 // MARK: - PremiumRouterInput
 extension PremiumRouter: PremiumRouterInput {
 
     func goToBack() {
-        RouterVC().popViewController()
+        router.popViewController()
     }
     
     func displayError(with errorMessage: String) {
@@ -32,7 +32,7 @@ extension PremiumRouter: PremiumRouterInput {
                 self?.delegate?.buy()
             })
         }
-        view.present(vc, animated: false, completion: nil)
+        router.presentViewController(controller: vc)
     }
     
     func showPromocodInvalideAlert(for vc: UIViewController?) {

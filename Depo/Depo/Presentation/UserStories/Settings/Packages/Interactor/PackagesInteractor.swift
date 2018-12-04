@@ -232,8 +232,17 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
         let appleOffers = offers.flatMap({ return $0.inAppPurchaseId })
-        iapManager.loadProducts(productIds: appleOffers) { [weak self] _ in
-            self?.output.successed(allOffers: offers)
+        iapManager.loadProducts(productIds: appleOffers) { [weak self] response in
+            switch response {
+            case .success(_):
+                DispatchQueue.toMain {
+                    self?.output.successed(allOffers: offers)
+                }
+            case .failed(let error):
+                DispatchQueue.toMain {
+                    self?.output.failed(with: error.localizedDescription)
+                }
+            }
         }
     }
     
