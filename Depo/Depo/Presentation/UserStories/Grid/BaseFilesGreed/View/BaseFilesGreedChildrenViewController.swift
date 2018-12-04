@@ -40,8 +40,6 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         }
         
         setTitle(withString: mainTitle, andSubTitle: subTitle)
-        let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
-        navigationItem.title = mainTitle
     }
 
     override func startSelection(with numberOfItems: Int) {
@@ -56,14 +54,14 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     override func stopSelection() {
         configureNavBarActions(isSelecting: false)
         underNavBarBar?.setSorting(enabled: true)
+        
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.leftBarButtonItem = nil
-        navigationItem.title = mainTitle
+        
         if mainTitle != "" {
             subTitle = output.getSortTypeString()
         }
         setTitle(withString: mainTitle, andSubTitle: subTitle)
-//        homePageNavigationBarStyle()
         
         if let _ = parent as? SegmentedController {
             homePageNavigationBarStyle()

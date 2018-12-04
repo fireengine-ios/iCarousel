@@ -168,6 +168,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+        navigationItem.title = ""
     }
     
     func configurateFreeAppSpaceActions(deleteAction: @escaping VoidHandler) {
@@ -263,6 +264,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     func stopSelection() {
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.leftBarButtonItem = nil
+        
         homePageNavigationBarStyle()
         configureNavBarActions(isSelecting: false)
         underNavBarBar?.setSorting(enabled: true)
