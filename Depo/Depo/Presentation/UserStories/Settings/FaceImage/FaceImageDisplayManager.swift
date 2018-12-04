@@ -47,6 +47,7 @@ final class FaceImageDisplayManager: NSObject {
             faceImageView.isHidden = true
             /// face image switch is off
             /// hide all
+            
         case .faceImageStandart:
             faceImageStackView.isHidden = false
             firstFaceImageLabel.isHidden = false
@@ -55,6 +56,7 @@ final class FaceImageDisplayManager: NSObject {
             faceImageView.isHidden = false
             /// face image switch is on
             /// StandartUser
+            
         case .faceImagePremium:
             faceImageStackView.isHidden = true
             firstFaceImageLabel.isHidden = true
@@ -63,6 +65,7 @@ final class FaceImageDisplayManager: NSObject {
             faceImageView.isHidden = true
             /// face image switch is on
             /// PremiumUser
+            
         case .facebookTagsOff:
             labelsStackView.isHidden = false
             facebookView.isHidden = false
@@ -71,6 +74,7 @@ final class FaceImageDisplayManager: NSObject {
             facebookImportButton.isHidden = true
             /// facebook switch is off
             /// show one text
+            
         case .facebookImportOff:
             labelsStackView.isHidden = false
             facebookView.isHidden = false
@@ -81,10 +85,11 @@ final class FaceImageDisplayManager: NSObject {
             /// face image switch is on
             /// facebook switch is off
             /// show button and two texts
+            
         case .facebookImportOn:
             labelsStackView.isHidden = false
             facebookView.isHidden = false
-            firstFacebookLabel.text = TextConstants.facebookTagsOff
+            firstFacebookLabel.text = TextConstants.facebookTagsOn
             facebookImportButton.isHidden = true
             secondFacebookLabel.isHidden = true
             /// face image switch is on
