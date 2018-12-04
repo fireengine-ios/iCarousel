@@ -16,7 +16,7 @@ final class PremiumView: UIView {
     
     weak var delegate: PremiumViewDelegate?
 
-    @IBOutlet private  var view: UIView!
+    @IBOutlet private var view: UIView!
     @IBOutlet private weak var premiumHeaderView: PremiumHeaderView!
     
     @IBOutlet private var premiumListViews: [PremiumListView]!

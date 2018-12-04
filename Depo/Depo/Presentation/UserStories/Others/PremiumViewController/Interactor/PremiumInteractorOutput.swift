@@ -10,5 +10,16 @@ import Foundation
 
 protocol PremiumInteractorOutput: class {
     
-    func didPurchased()
+    func successed(allFeatures: [PackageModelResponse])
+    func successed(accountType: String)
+    
+    func successed(tokenForOffer: String)
+    func successed(tokenForResend: String)
+    
+    func successedVerifyOffer()
+    
+    func failed(with errorMessage: String)
+    func failedVerifyOffer()
+
+    func purchaseFinished()
 }

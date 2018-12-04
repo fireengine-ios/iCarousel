@@ -804,4 +804,10 @@ class RouterVC: NSObject {
         return controller
     }
 
+    //MARK: - My Storage
+    
+    func myStorage(usageStorage: UsageResponse?) -> MyStorageViewController {
+        let controller = MyStorageModuleInitializer.initializeMyStorageController(usage: usageStorage)
+        return controller
+    }
 }

@@ -11,15 +11,15 @@ import UIKit
 final class PremiumViewController: BaseViewController {
     
     var output: PremiumViewOutput!
-    
+    private lazy var activityManager = ActivityIndicatorManager()
+
     @IBOutlet private weak var premiumView: PremiumView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        output.onViewDidLoad(with: premiumView)
-        
         setup()
+
+        output.onViewDidLoad(with: premiumView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,14 +30,30 @@ final class PremiumViewController: BaseViewController {
     
     // MARK: Utility methods
     private func setup() {
+        activityManager.delegate = self
         setTitle(withString: output.title)
         
         let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
-        premiumView.configure(with: output.headerTitle, price: "30 $", types: PremiumListType.allTypes, titleEdgeInsets: titleEdgeInsets)
+        premiumView.configure(with: output.headerTitle, price: "", types: PremiumListType.allTypes, titleEdgeInsets: titleEdgeInsets)
     }
     
 }
 
 // MARK: - PremiumViewInput
 extension PremiumViewController: PremiumViewInput {
+    func displayFeatureInfo(price: String) {
+        let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
+        premiumView.configure(with: output.headerTitle, price: price, types: PremiumListType.allTypes, titleEdgeInsets: titleEdgeInsets)
+    }
+}
+
+// MARK: - ActivityIndicator
+extension PremiumViewController: ActivityIndicator {
+    func startActivityIndicator() {
+        activityManager.start()
+    }
+    
+    func stopActivityIndicator() {
+        activityManager.stop()
+    }
 }

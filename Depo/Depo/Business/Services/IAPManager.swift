@@ -19,7 +19,7 @@ final class IAPManager: NSObject {
     
     static let shared = IAPManager()
     
-    typealias OfferAppleHandler = ResponseArrayHandler<OfferApple>
+    typealias OfferAppleHandler = ResponseBool
     typealias PurchaseHandler = (_ isSuccess: PurchaseResult) -> Void
     
     private var restorePurchasesCallback: RestoreHandler?
@@ -47,7 +47,7 @@ final class IAPManager: NSObject {
         }
     }
     
-    func loadProducts(productIds: [String], handler: @escaping OfferAppleHandler) {
+    func loadProducts(productIds: [String], handler: @escaping ResponseBool) {
         debugLog("IAPManager loadProductsWithProductIds")
         
         offerAppleHandler = handler
@@ -106,10 +106,7 @@ extension IAPManager: SKProductsRequestDelegate {
         
         products = response.products
         
-        let sortedOffers = response.products
-            .map { OfferApple(skProduct: $0) }
-            .sorted { $0.rawPrice < $1.rawPrice }
-        offerAppleHandler(.success(sortedOffers))
+        offerAppleHandler(.success(true))
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
