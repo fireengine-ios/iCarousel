@@ -10,7 +10,8 @@ import UIKit
 
 enum FaceImageDisplayConfigurations {
     case initial /// faceImageOff
-    case faceImageOn
+    case faceImageStandart
+    case faceImagePremium
     case facebookTagsOff
     case facebookImportOff
     case facebookImportOn
@@ -46,22 +47,40 @@ final class FaceImageDisplayManager: NSObject {
             faceImageView.isHidden = true
             /// face image switch is off
             /// hide all
-        case .faceImageOn:
+        case .faceImageStandart:
             faceImageStackView.isHidden = false
             firstFaceImageLabel.isHidden = false
             secondFaceImageLabel.isHidden = false
             faceImagePremiumButton.isHidden = false
             faceImageView.isHidden = false
+            /// face image switch is on
+            /// StandartUser
+        case .faceImagePremium:
+            faceImageStackView.isHidden = true
+            firstFaceImageLabel.isHidden = true
+            secondFaceImageLabel.isHidden = true
+            faceImagePremiumButton.isHidden = true
+            faceImageView.isHidden = true
+            /// face image switch is on
+            /// PremiumUser
         case .facebookTagsOff:
             labelsStackView.isHidden = false
             facebookView.isHidden = false
-            facebookImportButton.isHidden = true
             firstFacebookLabel.text = TextConstants.facebookTagsOff
             secondFacebookLabel.isHidden = true
+            facebookImportButton.isHidden = true
             /// facebook switch is off
             /// show one text
-            
         case .facebookImportOff:
+            labelsStackView.isHidden = false
+            facebookView.isHidden = false
+            firstFacebookLabel.text = TextConstants.facebookTagsOff
+            facebookImportButton.isHidden = true
+            secondFacebookLabel.isHidden = true
+            /// face image switch is on
+            /// facebook switch is on
+            /// hide button and second text
+        case .facebookImportOn:
             labelsStackView.isHidden = false
             facebookView.isHidden = false
             facebookImportButton.isHidden = false
@@ -71,16 +90,6 @@ final class FaceImageDisplayManager: NSObject {
             /// face image switch is on
             /// facebook switch is on
             /// show button and two texts
-            
-        case .facebookImportOn:
-            labelsStackView.isHidden = false
-            facebookView.isHidden = false
-            facebookImportButton.isHidden = true
-            firstFacebookLabel.text = TextConstants.facebookTagsOn
-            secondFacebookLabel.isHidden = true
-            /// face image switch is on
-            /// facebook switch is on
-            /// hide button and second text
         }
     }
 }
