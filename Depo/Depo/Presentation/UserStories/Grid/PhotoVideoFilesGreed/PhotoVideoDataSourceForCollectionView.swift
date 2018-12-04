@@ -282,9 +282,15 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                     self.isLocalFilesRequested = false
                     self.delegate?.filesAppendedAndSorted()
                     self.isDropedData = false
-                    self.itemProvider.getNextItems(callback: { [weak self] remotes in
-                        self?.appendCollectionView(items: remotes, pageNum: self?.itemProvider.currentPage ?? 0)
-                    })
+                    if self.pageLeftOvers.isEmpty {
+                        self.itemProvider.getNextItems(callback: { [weak self] remotes in
+                            self?.appendCollectionView(items: remotes, pageNum: self?.itemProvider.currentPage ?? 0)
+                        })
+                    } else {
+                        self.compoundItems(pageItems: [], pageNum: 2) { [weak self] response in
+                            self?.batchInsertItems(newIndexes: response)
+                        }
+                    }
 //                    self.delegate?.getNextItems()
                 }
                 

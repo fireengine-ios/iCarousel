@@ -123,11 +123,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     var isLocalFilesRequested = false
     var isDropedData = true
     
-    var allMediaItems = [WrapData]()
+    var allMediaItems = [WrapData](){
+        didSet{
+            debugPrint("!-- all medi items count \(allMediaItems.count)")
+            debugPrint("!-- all locals count \(allMediaItems.filter{$0.isLocalItem == true}.count)")
+        }
+    }
 
     var allItems = [[WrapData]]()
     var pageLeftOvers = [WrapData]()
-    var emptyMetaItems = [WrapData]()
+    var emptyMetaItems = [WrapData](){
+        didSet{
+            debugPrint("!-- empty items count \(emptyMetaItems.count)")
+        }
+    }
     
     var uploadedObjectID = [String]()
     private var uploadToAlbumItems = [String]()
