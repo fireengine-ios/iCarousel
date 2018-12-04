@@ -69,7 +69,7 @@ final class PremiumInteractor {
     }
     
     private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
-        let appleOffers: [String] = offers.flatMap({ return $0.inAppPurchaseId })
+        let appleOffers = offers.flatMap({ return $0.inAppPurchaseId })
         iapManager.loadProducts(productIds: appleOffers) { [weak self] response in
             switch response {
             case .success(_):
@@ -211,16 +211,27 @@ extension PremiumInteractor: PremiumInteractorInput {
         
         //just sending reciept
         group.enter()
-        offersService.validateApplePurchase(with: receipt, productId: nil, success: { response in
+        offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
             group.leave()
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
+                let error = CustomErrors.serverError("An error occurred while getting response for purchase validation")
+                DispatchQueue.toMain {
+                    self?.output.failed(with: error.localizedDescription)
+                }
                 return
             }
             if !(status == .restored || status == .success) {
                 debugLog("validateRestorePurchaseFailed: \(status.description)")
+                let error = CustomErrors.serverError(status.description)
+                DispatchQueue.toMain {
+                    self?.output.failed(with: error.localizedDescription)
+                }
             }
-        }, fail: { errorResponse in
+        }, fail: { [weak self] errorResponse in
             debugLog("validateRestorePurchaseFailed: \(errorResponse.description)")
+            DispatchQueue.toMain {
+                self?.output.failed(with: errorResponse.description)
+            }
             group.leave()
         })
         
