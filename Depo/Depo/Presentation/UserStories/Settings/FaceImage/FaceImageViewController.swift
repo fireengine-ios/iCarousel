@@ -166,9 +166,9 @@ final class FaceImageViewController: ViewController, NibInit {
                 switch result {
                 case .success(let isAllowed):
                     if isAllowed {
-                        self?.displayManager.applyConfiguration(.facebookImportOff)
-                    } else {
                         self?.displayManager.applyConfiguration(.facebookImportOn)
+                    } else {
+                        self?.displayManager.applyConfiguration(.facebookImportOff)
                     }
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)

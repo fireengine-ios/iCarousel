@@ -74,22 +74,22 @@ final class FaceImageDisplayManager: NSObject {
         case .facebookImportOff:
             labelsStackView.isHidden = false
             facebookView.isHidden = false
+            facebookImportButton.isHidden = false
+            firstFacebookLabel.text = TextConstants.facebookTagsOn
+            secondFacebookLabel.isHidden = false
+            secondFacebookLabel.text = TextConstants.facebookTagsImport
+            /// face image switch is on
+            /// facebook switch is off
+            /// show button and two texts
+        case .facebookImportOn:
+            labelsStackView.isHidden = false
+            facebookView.isHidden = false
             firstFacebookLabel.text = TextConstants.facebookTagsOff
             facebookImportButton.isHidden = true
             secondFacebookLabel.isHidden = true
             /// face image switch is on
             /// facebook switch is on
             /// hide button and second text
-        case .facebookImportOn:
-            labelsStackView.isHidden = false
-            facebookView.isHidden = false
-            facebookImportButton.isHidden = false
-            firstFacebookLabel.text = TextConstants.facebookTagsOn
-            secondFacebookLabel.isHidden = false
-            secondFacebookLabel.text = TextConstants.facebookTagsImport
-            /// face image switch is on
-            /// facebook switch is on
-            /// show button and two texts
         }
     }
 }
