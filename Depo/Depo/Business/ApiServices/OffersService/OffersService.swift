@@ -56,7 +56,7 @@ class OffersServiceIml: BaseRequestService, OffersService {
     func initOffer(offer: PackageModelResponse, success: SuccessResponse?, fail: @escaping FailResponse) {
         debugLog("OffersServiceIml initOffer")
 
-        guard let id = offer.slcmOfferId else {
+        guard let id = offer.cometOfferId else {
             debugLog("OffersServiceIml initOffer error")
 
             fail(ErrorResponse.string("Invalid offer"))
