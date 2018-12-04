@@ -8,29 +8,29 @@
 
 import Foundation
 
-protocol SegmentedChildController: class {
-    func setTitle(_ title: String)
-    func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
-    func setRightBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
-}
-extension SegmentedChildController where Self: UIViewController {
-    
-    private var parentVC: SegmentedController? {
-        return parent as? SegmentedController
-    }
-    
-    func setTitle(_ title: String) {
-        parentVC?.navigationItem.title = title
-    }
-    
-    func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
-        parentVC?.navigationItem.setLeftBarButtonItems(items, animated: animated)
-    }
-    
-    func setRightBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
-        parentVC?.navigationItem.setRightBarButtonItems(items, animated: animated)
-    }
-}
+//protocol SegmentedChildController: class {
+//    func setTitle(_ title: String)
+//    func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
+//    func setRightBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
+//}
+//extension SegmentedChildController where Self: UIViewController {
+//
+//    private var parentVC: SegmentedController? {
+//        return parent as? SegmentedController
+//    }
+//
+//    func setTitle(_ title: String) {
+//        parentVC?.navigationItem.title = title
+//    }
+//
+//    func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
+//        parentVC?.navigationItem.setLeftBarButtonItems(items, animated: animated)
+//    }
+//
+//    func setRightBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
+//        parentVC?.navigationItem.setRightBarButtonItems(items, animated: animated)
+//    }
+//}
 
 //protocol SegmentedControllerDelegate: class {
 //    func segmentedControllerEndEditMode()
