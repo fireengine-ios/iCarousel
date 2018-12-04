@@ -23,6 +23,7 @@ extension PackagesRouter: PackagesRouterInput {
     }
     
     func openMyStorage(storageUsage: UsageResponse?) {
-
+        let viewController = router.myStorage(usageStorage: storageUsage)
+        router.pushViewController(viewController: viewController)
     }
 }

@@ -2506,6 +2506,32 @@
 		8DCB21781F3C8BC000BAFE1E /* SeacrhViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21771F3C8BC000BAFE1E /* SeacrhViewRouter.swift */; };
 		8DCB217A1F3C8BE700BAFE1E /* SearchViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21791F3C8BE700BAFE1E /* SearchViewRouterInput.swift */; };
 		9065EE336B9F1D044DBD3944 /* AlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B652E3FD76DE060B9DBD160F /* AlbumDetailViewController.swift */; };
+		92004B3821AD0F2200582C45 /* MyStorageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92004B2521AD0F2100582C45 /* MyStorageViewController.xib */; };
+		92004B3921AD0F2200582C45 /* MyStorageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92004B2521AD0F2100582C45 /* MyStorageViewController.xib */; };
+		92004B3A21AD0F2200582C45 /* MyStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B2621AD0F2100582C45 /* MyStorageViewController.swift */; };
+		92004B3B21AD0F2200582C45 /* MyStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B2621AD0F2100582C45 /* MyStorageViewController.swift */; };
+		92004B5121AD100100582C45 /* MyStorageModuleConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5021AD100100582C45 /* MyStorageModuleConfigurator.swift */; };
+		92004B5221AD100100582C45 /* MyStorageModuleConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5021AD100100582C45 /* MyStorageModuleConfigurator.swift */; };
+		92004B5421AD10E600582C45 /* MyStorageModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5321AD10E600582C45 /* MyStorageModuleInitializer.swift */; };
+		92004B5521AD10E600582C45 /* MyStorageModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5321AD10E600582C45 /* MyStorageModuleInitializer.swift */; };
+		92004B5721AD11EF00582C45 /* MyStorageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5621AD11EF00582C45 /* MyStorageViewOutput.swift */; };
+		92004B5821AD11EF00582C45 /* MyStorageViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5621AD11EF00582C45 /* MyStorageViewOutput.swift */; };
+		92004B5A21AD136400582C45 /* MyStorageViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5921AD136400582C45 /* MyStorageViewInput.swift */; };
+		92004B5B21AD136400582C45 /* MyStorageViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5921AD136400582C45 /* MyStorageViewInput.swift */; };
+		92004B5D21AD14F400582C45 /* MyStorageRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5C21AD14F400582C45 /* MyStorageRouterInput.swift */; };
+		92004B5E21AD14F400582C45 /* MyStorageRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5C21AD14F400582C45 /* MyStorageRouterInput.swift */; };
+		92004B6021AD151A00582C45 /* MyStorageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5F21AD151A00582C45 /* MyStorageRouter.swift */; };
+		92004B6121AD151A00582C45 /* MyStorageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5F21AD151A00582C45 /* MyStorageRouter.swift */; };
+		92004B6321AD18E100582C45 /* MyStorageModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6221AD18E100582C45 /* MyStorageModuleInput.swift */; };
+		92004B6421AD18E100582C45 /* MyStorageModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6221AD18E100582C45 /* MyStorageModuleInput.swift */; };
+		92004B6621AD18FE00582C45 /* MyStoragePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6521AD18FE00582C45 /* MyStoragePresenter.swift */; };
+		92004B6721AD18FE00582C45 /* MyStoragePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6521AD18FE00582C45 /* MyStoragePresenter.swift */; };
+		92004B6921AD197800582C45 /* MyStorageInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6821AD197800582C45 /* MyStorageInteractorInput.swift */; };
+		92004B6A21AD197800582C45 /* MyStorageInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6821AD197800582C45 /* MyStorageInteractorInput.swift */; };
+		92004B6C21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6B21AD199100582C45 /* MyStorageInteractorOutput.swift */; };
+		92004B6D21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6B21AD199100582C45 /* MyStorageInteractorOutput.swift */; };
+		92004B6F21AD19B300582C45 /* MyStorageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6E21AD19B300582C45 /* MyStorageInteractor.swift */; };
+		92004B7021AD19B300582C45 /* MyStorageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6E21AD19B300582C45 /* MyStorageInteractor.swift */; };
 		921423E321B51E5300B44574 /* PackageModelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E221B51E5300B44574 /* PackageModelResponse.swift */; };
 		921423EA21B562D500B44574 /* AuthoritySingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E921B562D500B44574 /* AuthoritySingleton.swift */; };
 		93BB369B3341CED27FDF2EC0 /* PhotoVideoDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264BDDE222D06B0A452F4DF7 /* PhotoVideoDetailRouter.swift */; };
@@ -5097,6 +5123,19 @@
 		90CCB3146C622ADE6CFE961E /* UserInfoSubViewConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewConfigurator.swift; sourceTree = "<group>"; };
 		919F353289ABE9A2E77F3D4C /* ActivityTimelineViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineViewInput.swift; sourceTree = "<group>"; };
 		91F451A358830EBF98327912 /* FileInfoRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoRouterInput.swift; sourceTree = "<group>"; };
+		92004B2521AD0F2100582C45 /* MyStorageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyStorageViewController.xib; sourceTree = "<group>"; };
+		92004B2621AD0F2100582C45 /* MyStorageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStorageViewController.swift; sourceTree = "<group>"; };
+		92004B5021AD100100582C45 /* MyStorageModuleConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageModuleConfigurator.swift; sourceTree = "<group>"; };
+		92004B5321AD10E600582C45 /* MyStorageModuleInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageModuleInitializer.swift; sourceTree = "<group>"; };
+		92004B5621AD11EF00582C45 /* MyStorageViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageViewOutput.swift; sourceTree = "<group>"; };
+		92004B5921AD136400582C45 /* MyStorageViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageViewInput.swift; sourceTree = "<group>"; };
+		92004B5C21AD14F400582C45 /* MyStorageRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageRouterInput.swift; sourceTree = "<group>"; };
+		92004B5F21AD151A00582C45 /* MyStorageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageRouter.swift; sourceTree = "<group>"; };
+		92004B6221AD18E100582C45 /* MyStorageModuleInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageModuleInput.swift; sourceTree = "<group>"; };
+		92004B6521AD18FE00582C45 /* MyStoragePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoragePresenter.swift; sourceTree = "<group>"; };
+		92004B6821AD197800582C45 /* MyStorageInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageInteractorInput.swift; sourceTree = "<group>"; };
+		92004B6B21AD199100582C45 /* MyStorageInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageInteractorOutput.swift; sourceTree = "<group>"; };
+		92004B6E21AD19B300582C45 /* MyStorageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageInteractor.swift; sourceTree = "<group>"; };
 		921423E221B51E5300B44574 /* PackageModelResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageModelResponse.swift; sourceTree = "<group>"; };
 		921423E921B562D500B44574 /* AuthoritySingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthoritySingleton.swift; sourceTree = "<group>"; };
 		92C1BED0751734B73B9583DD /* SettingsViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewOutput.swift; sourceTree = "<group>"; };
@@ -9918,6 +9957,74 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		92004B2221AD0E5400582C45 /* MyStorage */ = {
+			isa = PBXGroup;
+			children = (
+				92004B2D21AD0F2200582C45 /* Configurator */,
+				92004B2921AD0F2200582C45 /* Interactor */,
+				92004B3021AD0F2200582C45 /* Presenter */,
+				92004B3321AD0F2200582C45 /* Router */,
+				92004B2321AD0F2100582C45 /* View */,
+			);
+			path = MyStorage;
+			sourceTree = "<group>";
+		};
+		92004B2321AD0F2100582C45 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92004B2521AD0F2100582C45 /* MyStorageViewController.xib */,
+				92004B2621AD0F2100582C45 /* MyStorageViewController.swift */,
+				92004B5921AD136400582C45 /* MyStorageViewInput.swift */,
+				92004B5621AD11EF00582C45 /* MyStorageViewOutput.swift */,
+				92004B2821AD0F2100582C45 /* Views */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		92004B2821AD0F2100582C45 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		92004B2921AD0F2200582C45 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				92004B6E21AD19B300582C45 /* MyStorageInteractor.swift */,
+				92004B6821AD197800582C45 /* MyStorageInteractorInput.swift */,
+				92004B6B21AD199100582C45 /* MyStorageInteractorOutput.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		92004B2D21AD0F2200582C45 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				92004B5021AD100100582C45 /* MyStorageModuleConfigurator.swift */,
+				92004B5321AD10E600582C45 /* MyStorageModuleInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		92004B3021AD0F2200582C45 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				92004B6521AD18FE00582C45 /* MyStoragePresenter.swift */,
+				92004B6221AD18E100582C45 /* MyStorageModuleInput.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		92004B3321AD0F2200582C45 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				92004B5F21AD151A00582C45 /* MyStorageRouter.swift */,
+				92004B5C21AD14F400582C45 /* MyStorageRouterInput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		921423E821B562B600B44574 /* AuthoritySingleton */ = {
 			isa = PBXGroup;
 			children = (
@@ -11197,6 +11304,7 @@
 				D49886451F3EFBE200F50C95 /* ImportPhotos */,
 				D47863DE1F3F18FA00EFDC6D /* UsageInfo */,
 				CE2F55FF1F7552A900F49DA1 /* Packages */,
+				92004B2221AD0E5400582C45 /* MyStorage */,
 				05A75126899674B79F6FA6F9 /* SyncContacts */,
 				CE95ED301F516736002F923A /* HelpAndSupport */,
 				5E26BCF377F078459F09451C /* FeedbackView */,
@@ -13501,6 +13609,7 @@
 				8C06B0752008AD71003D8E05 /* paylas_fb@3x.png in Resources */,
 				8C06AF632008AD70003D8E05 /* duz_beyaz.png in Resources */,
 				8C06AFA12008AD71003D8E05 /* focus@3x.png in Resources */,
+				92004B3921AD0F2200582C45 /* MyStorageViewController.xib in Resources */,
 				8C06B0872008AD71003D8E05 /* paylas_mail@3x.png in Resources */,
 				7C257B4120174D8B00CB56F8 /* ContactBackupEmpty.xib in Resources */,
 				8C0E906E1FDEBDFF00789C91 /* PasscodeSettingsViewController.xib in Resources */,
@@ -13909,6 +14018,7 @@
 				8C06AF102008AD70003D8E05 /* checkbox_secili@2x.png in Resources */,
 				4A9F8E4E2087546500622A6C /* PeriodicContactSyncViewController.xib in Resources */,
 				8C6EF8911F348B77002AC795 /* EditinglBar.xib in Resources */,
+				92004B3821AD0F2200582C45 /* MyStorageViewController.xib in Resources */,
 				78052963200DCDA70051FA78 /* ManageContactTableViewCell.xib in Resources */,
 				7C0435081F4DBAAF00193C75 /* AlbumCollectionViewCell.xib in Resources */,
 				7C257B3A20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */,
@@ -14658,6 +14768,7 @@
 				8C0E8C761FDEBDFF00789C91 /* PackagesPresenter.swift in Sources */,
 				8C0E8C771FDEBDFF00789C91 /* LocalMediaItems.swift in Sources */,
 				B56FBB2F2122C811004F4A59 /* TermsOfUseInteractor.swift in Sources */,
+				92004B6421AD18E100582C45 /* MyStorageModuleInput.swift in Sources */,
 				4A6DBE8D21A6F93A0003D1B4 /* PremiumListView.swift in Sources */,
 				8C0E8C781FDEBDFF00789C91 /* ApplicationPalette.swift in Sources */,
 				4A9B390F201F3969009FC572 /* FaceImageItemsInitializer.swift in Sources */,
@@ -14693,6 +14804,7 @@
 				8C0E8C8E1FDEBDFF00789C91 /* CustomTabBarItem.swift in Sources */,
 				8C0E8C8F1FDEBDFF00789C91 /* EditinglBar.swift in Sources */,
 				CED4B0242017505300D06CA9 /* HomeCardsService.swift in Sources */,
+				92004B3B21AD0F2200582C45 /* MyStorageViewController.swift in Sources */,
 				8C0E8C901FDEBDFF00789C91 /* SubPlussButtonView.swift in Sources */,
 				8C0E8C911FDEBDFF00789C91 /* VisualMusicPlayerViewController.swift in Sources */,
 				A2268EC021A68BD3002F2611 /* LeavePremiumHeaderView.swift in Sources */,
@@ -14756,6 +14868,7 @@
 				8C0E8CCF1FDEBDFF00789C91 /* AlbumSelectionPresenter.swift in Sources */,
 				8C0E8CD01FDEBDFF00789C91 /* PrintInteractorOutput.swift in Sources */,
 				8C0E8CD21FDEBDFF00789C91 /* MoreActionsConfig.swift in Sources */,
+				92004B7021AD19B300582C45 /* MyStorageInteractor.swift in Sources */,
 				8C0E8CD31FDEBDFF00789C91 /* ServerValueError.swift in Sources */,
 				8C0E8CD51FDEBDFF00789C91 /* CreateStoryNameInteractorInput.swift in Sources */,
 				8C0E8CD61FDEBDFF00789C91 /* HomePageModuleInput.swift in Sources */,
@@ -14852,6 +14965,7 @@
 				8C0E8D191FDEBDFF00789C91 /* InfoButtonCellProtocol.swift in Sources */,
 				8C0E8D1A1FDEBDFF00789C91 /* Mail.swift in Sources */,
 				CE92456A206E0910000C7791 /* InfinityRotater.swift in Sources */,
+				92004B6721AD18FE00582C45 /* MyStoragePresenter.swift in Sources */,
 				4A56D5CE202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */,
 				8C0E8D1C1FDEBDFF00789C91 /* UIApplication+Settings.swift in Sources */,
 				8C0E8D1D1FDEBDFF00789C91 /* LoginRouterInput.swift in Sources */,
@@ -14879,6 +14993,7 @@
 				8C0E8D2B1FDEBDFF00789C91 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				8C0E8D2C1FDEBDFF00789C91 /* UIApplication+topController.swift in Sources */,
 				8C0E8D2D1FDEBDFF00789C91 /* VisualMusicPlayerViewOutput.swift in Sources */,
+				92004B6A21AD197800582C45 /* MyStorageInteractorInput.swift in Sources */,
 				8CDB21EA20AC0FB700739700 /* UINavigationController+Push.swift in Sources */,
 				8C0E8D301FDEBDFF00789C91 /* LocalAlbumPresenter.swift in Sources */,
 				8C0E8D311FDEBDFF00789C91 /* CaptchaViewController.swift in Sources */,
@@ -14993,6 +15108,7 @@
 				8C0E8D9A1FDEBDFF00789C91 /* MediaItemsAlbum+CoreDataProperties.swift in Sources */,
 				8C0E8D9B1FDEBDFF00789C91 /* BaseCollectionViewCell.swift in Sources */,
 				8C06AC0B20066641003D8E05 /* TurkcellSecurityInitializer.swift in Sources */,
+				92004B6121AD151A00582C45 /* MyStorageRouter.swift in Sources */,
 				8C0E8D9C1FDEBDFF00789C91 /* UserProfileInteractorInput.swift in Sources */,
 				CEF371A920887806007AD36E /* UIViewController+NavBar.swift in Sources */,
 				8C0E8D9D1FDEBDFF00789C91 /* EULAService.swift in Sources */,
@@ -15146,6 +15262,7 @@
 				B5CDB33D21787FEF006CFA50 /* Filter.m in Sources */,
 				8C13C302210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */,
 				B5CDB3552179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */,
+				92004B5521AD10E600582C45 /* MyStorageModuleInitializer.swift in Sources */,
 				8C0E8E031FDEBDFF00789C91 /* WrapperedItemUtil.swift in Sources */,
 				8C06AC1920066641003D8E05 /* TurkcellSecurityViewController.swift in Sources */,
 				8C0E8E041FDEBDFF00789C91 /* CreateStorySelectionRouter.swift in Sources */,
@@ -15251,6 +15368,7 @@
 				C62239A7204973120043ED44 /* FaceImageChangeCoverPresenter.swift in Sources */,
 				8C0E8E641FDEBDFF00789C91 /* PredicateRules.swift in Sources */,
 				8C0E8E651FDEBDFF00789C91 /* DropboxResponse.swift in Sources */,
+				92004B5221AD100100582C45 /* MyStorageModuleConfigurator.swift in Sources */,
 				4AAF28B820205454007B43BA /* FaceImageItemsConfigurator.swift in Sources */,
 				8C0E8E681FDEBDFF00789C91 /* FileService.swift in Sources */,
 				8C0E8E691FDEBDFF00789C91 /* AlertFilesActionsSheetPresenter.swift in Sources */,
@@ -15348,6 +15466,7 @@
 				8C0E8ED51FDEBDFF00789C91 /* ShadowView.swift in Sources */,
 				8C0E8ED61FDEBDFF00789C91 /* CreateStoryNameInteractorOutput.swift in Sources */,
 				8C0E8ED71FDEBDFF00789C91 /* CollectionViewStoryReorderView.swift in Sources */,
+				92004B6D21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
 				CED4B02E2018594700D06CA9 /* HomeCardResponse.swift in Sources */,
 				8C0E8ED81FDEBDFF00789C91 /* SearchViewController.swift in Sources */,
 				8C0E8ED91FDEBDFF00789C91 /* BasicCollectionMultiFileCell.swift in Sources */,
@@ -15430,6 +15549,7 @@
 				8C0E8F0F1FDEBDFF00789C91 /* SyncContactsInteractor.swift in Sources */,
 				8C0E8F101FDEBDFF00789C91 /* PackagesInteractorInput.swift in Sources */,
 				8C0E8F111FDEBDFF00789C91 /* PrintModuleConfigurator.swift in Sources */,
+				92004B5821AD11EF00582C45 /* MyStorageViewOutput.swift in Sources */,
 				486F7B5B208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift in Sources */,
 				8C06AC0F20066641003D8E05 /* TurkcellSecurityInteractorIO.swift in Sources */,
 				8C0E8F121FDEBDFF00789C91 /* SyncContactsRouterInput.swift in Sources */,
@@ -15472,6 +15592,7 @@
 				8C0B91A920170EB000A5BA81 /* ManageContactsRouter.swift in Sources */,
 				8C0E8F2B1FDEBDFF00789C91 /* SettingsRouterInput.swift in Sources */,
 				8C0E8F2C1FDEBDFF00789C91 /* SettingsRouter.swift in Sources */,
+				92004B5E21AD14F400582C45 /* MyStorageRouterInput.swift in Sources */,
 				8C0E8F2D1FDEBDFF00789C91 /* SettingsConfigurator.swift in Sources */,
 				8C0E8F2E1FDEBDFF00789C91 /* SettingsInitializer.swift in Sources */,
 				8C0E8F2F1FDEBDFF00789C91 /* AlertFilesActionsSheetInitialConfig.swift in Sources */,
@@ -15692,6 +15813,7 @@
 				8C0E8FB91FDEBDFF00789C91 /* FeedbackViewInteractor.swift in Sources */,
 				8C0E8FBA1FDEBDFF00789C91 /* FeedbackViewRouterInput.swift in Sources */,
 				8C0E8FBB1FDEBDFF00789C91 /* FeedbackViewRouter.swift in Sources */,
+				92004B5B21AD136400582C45 /* MyStorageViewInput.swift in Sources */,
 				8C0E8FBC1FDEBDFF00789C91 /* FeedbackViewConfigurator.swift in Sources */,
 				8C0E8FBD1FDEBDFF00789C91 /* FeedbackViewInitializer.swift in Sources */,
 				8C0E8FBE1FDEBDFF00789C91 /* ActivityTimelineViewInput.swift in Sources */,
@@ -15894,6 +16016,7 @@
 				8DCB21781F3C8BC000BAFE1E /* SeacrhViewRouter.swift in Sources */,
 				CE51AB5B1EF90853005DCEE0 /* ValidationService.swift in Sources */,
 				CE9AFAD1211D73D0006AF836 /* FaceImageDisplayManager.swift in Sources */,
+				92004B3A21AD0F2200582C45 /* MyStorageViewController.swift in Sources */,
 				7CDABD0E1F1E3A6300C8CC16 /* UserProfileViewController.swift in Sources */,
 				986B20622077684C00E04B96 /* StreamReaderWriter.swift in Sources */,
 				8DCB21731F3C86D700BAFE1E /* SearchViewInteractorInput.swift in Sources */,
@@ -15913,6 +16036,7 @@
 				CE51AB701EF90853005DCEE0 /* AutoSyncViewInput.swift in Sources */,
 				8C7786A41F3F38F0005CB432 /* VisualMusicPlayerRouter.swift in Sources */,
 				D49886591F3EFBE200F50C95 /* ImportPhotosInteractor.swift in Sources */,
+				92004B5721AD11EF00582C45 /* MyStorageViewOutput.swift in Sources */,
 				A20CDBB0219DAC2700CA9A67 /* GradientPremiumButton.swift in Sources */,
 				8C7786A21F3F38F0005CB432 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				7C4484FE1F0FC607003AF631 /* ButtonWithGrayCorner.swift in Sources */,
@@ -16092,6 +16216,7 @@
 				D498865E1F3EFBE200F50C95 /* ImportPhotosRouterInput.swift in Sources */,
 				CE51AC2D1EF90853005DCEE0 /* ProtoInputTextCell.swift in Sources */,
 				7CAC23C21F4ADC3900607660 /* RemoteSearchService.swift in Sources */,
+				92004B5121AD100100582C45 /* MyStorageModuleConfigurator.swift in Sources */,
 				7C355E611F01226B003B004C /* BaseCollectionViewDataSource.swift in Sources */,
 				7C3A74521F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CE58FB0020444525007F3F54 /* SharedFactory.swift in Sources */,
@@ -16108,6 +16233,7 @@
 				7C634F9F1F0E6E7E00B5B93D /* BlueButtonWithWhiteText.swift in Sources */,
 				8CF6A9C5207C8CF9007DEF71 /* CollectionViewSpinnerFooter.swift in Sources */,
 				CE1E26E120174D7500F49E41 /* ResponseParser.swift in Sources */,
+				92004B5A21AD136400582C45 /* MyStorageViewInput.swift in Sources */,
 				CEBB2DD61F76550A00D725F0 /* String+Int.swift in Sources */,
 				78D9BA412007E81200F2233F /* DuplicatedContactsRouterInput.swift in Sources */,
 				B53DCE9620EF634900400DBA /* SyncDBUtils.m in Sources */,
@@ -16286,6 +16412,7 @@
 				7C6E2FA31F32FCD900536DB6 /* AudioSelectionCollectionViewCell.swift in Sources */,
 				CE51ACD51EF90853005DCEE0 /* TermsAndServicesPresenter.swift in Sources */,
 				CE51ACD61EF90853005DCEE0 /* TermsAndServicesInteractorInput.swift in Sources */,
+				92004B6F21AD19B300582C45 /* MyStorageInteractor.swift in Sources */,
 				CE51ACD71EF90853005DCEE0 /* TermsAndServicesInteractorOutput.swift in Sources */,
 				CE51ACD81EF90853005DCEE0 /* TermsAndServicesInteractor.swift in Sources */,
 				7C233CD71FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift in Sources */,
@@ -16367,6 +16494,7 @@
 				CE51ACEF1EF90853005DCEE0 /* PhoneVereficationInteractorOutput.swift in Sources */,
 				486F7B57208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift in Sources */,
 				7C66E8B01F979C3300D98F27 /* CreateStoryPreviewRouterInput.swift in Sources */,
+				92004B5D21AD14F400582C45 /* MyStorageRouterInput.swift in Sources */,
 				CE51ACF01EF90853005DCEE0 /* SmartTimerLabel.swift in Sources */,
 				7C66E8A91F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift in Sources */,
 				8C06AC1220066641003D8E05 /* TurkcellSecurityPresenter.swift in Sources */,
@@ -16387,6 +16515,7 @@
 				B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */,
 				CE51ACF41EF90853005DCEE0 /* PhoneVereficationConfigurator.swift in Sources */,
 				CE51ACF51EF90853005DCEE0 /* PhoneVereficationInitializer.swift in Sources */,
+				92004B6621AD18FE00582C45 /* MyStoragePresenter.swift in Sources */,
 				CE95ED571F516736002F923A /* HelpAndSupportViewController.swift in Sources */,
 				8C77869D1F3F38EF005CB432 /* VisualMusicPlayerConfigurator.swift in Sources */,
 				CE51ACF61EF90853005DCEE0 /* ForgotPasswordViewInput.swift in Sources */,
@@ -16400,6 +16529,7 @@
 				8C6EF88F1F348B77002AC795 /* EditingBarConfig.swift in Sources */,
 				8C9EA13F20B593E600FED3A2 /* DeviceExtension.swift in Sources */,
 				B5C4C8A22049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */,
+				92004B6321AD18E100582C45 /* MyStorageModuleInput.swift in Sources */,
 				CE2F561E1F7552A900F49DA1 /* PackagesViewController.swift in Sources */,
 				CEC3C2411FB99AF800C3D67F /* PasscodeSettingsModuleInput.swift in Sources */,
 				7CFE92EB1F5E7DEC008A3B72 /* DropDovnTableViewCell.swift in Sources */,
@@ -16488,6 +16618,7 @@
 				B5BA987B2068C6F200CA3BF9 /* UIImage+Size.swift in Sources */,
 				4A9B3905201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
 				A207990E219F137E00AD5037 /* PremiumInteractor.swift in Sources */,
+				92004B5421AD10E600582C45 /* MyStorageModuleInitializer.swift in Sources */,
 				CEB2734E205BF57B00E1AE9C /* UnderlineTextField.swift in Sources */,
 				7CF6BDBA1F0B88910066709E /* CollectionViewCellForVideo.swift in Sources */,
 				8C6EF87B1F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift in Sources */,
@@ -16651,6 +16782,7 @@
 				8C77869E1F3F38EF005CB432 /* VisualMusicPlayerInitializer.swift in Sources */,
 				CE95ED581F516736002F923A /* HelpAndSupportViewInput.swift in Sources */,
 				B53DCE9020EF634900400DBA /* ContactUtil.m in Sources */,
+				92004B6C21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
 				EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */,
 				98570AFA208F7558002CCEBA /* SpotlightViewController.swift in Sources */,
 				D49886611F3EFBE200F50C95 /* ImportPhotosViewInput.swift in Sources */,
@@ -16779,6 +16911,7 @@
 				623832623FBADF19F6C0036D /* SelectFolderPresenter.swift in Sources */,
 				B5CDB34021787FEF006CFA50 /* Message.m in Sources */,
 				7C0435071F4DBAAF00193C75 /* AlbumCollectionViewCell.swift in Sources */,
+				92004B6921AD197800582C45 /* MyStorageInteractorInput.swift in Sources */,
 				34EB62653F5454C7AC298EE3 /* SelectFolderInitializer.swift in Sources */,
 				7CE825BE1F823D9700356AD2 /* FreeUpSpacePopUp.swift in Sources */,
 				8C77869F1F3F38EF005CB432 /* VisualMusicPlayerInteractor.swift in Sources */,
@@ -16907,6 +17040,7 @@
 				A0052B3EF580D29AEEB116BA /* ActivityTimelineInteractor.swift in Sources */,
 				7C4F60A22019D0340033C58F /* CollageCard.swift in Sources */,
 				7D44F2D8BA13AA210B247EF0 /* ActivityTimelineRouterInput.swift in Sources */,
+				92004B6021AD151A00582C45 /* MyStorageRouter.swift in Sources */,
 				7859299B20060E94003F8AB3 /* ManageContactsInteractorOutput.swift in Sources */,
 				FA793D87201872DC00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				865630C8BE985198C2339934 /* ActivityTimelineRouter.swift in Sources */,
