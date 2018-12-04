@@ -10,6 +10,7 @@ import Foundation
 
 protocol PremiumViewOutput {
     func onViewDidLoad(with premiumView: PremiumView)
+    
     var title: String { get }
     var headerTitle: String { get }
 }

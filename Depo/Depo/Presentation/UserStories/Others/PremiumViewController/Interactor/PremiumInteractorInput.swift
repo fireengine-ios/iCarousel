@@ -10,5 +10,14 @@ import Foundation
 
 protocol PremiumInteractorInput {
     
-    func startPurchaseBecomePremiumUser()
+    func getAccountType()
+    func getFeaturePacks(isAppleProduct: Bool)
+    func getPriceInfoFromApple(offer: PackageModelResponse) -> String
+
+    func activate(offer: PackageModelResponse)
+    
+    func getToken(for: PackageModelResponse)
+    func getResendToken(for offer: PackageModelResponse)
+    
+    func verifyOffer(_ offer: PackageModelResponse, token: String, otp: String)
 }
