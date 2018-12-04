@@ -144,7 +144,7 @@ final class FaceImageViewController: ViewController, NibInit {
             if self.authorityStorage.faceRecognition == false, self.faceImageAllowedSwitch.isOn {
                 self.displayManager.applyConfiguration(.faceImageOn)
             } else {
-                self.displayManager.applyConfiguration(.faceImageOff)
+                self.displayManager.applyConfiguration(.initial)
             }
             
             self.view.layoutIfNeeded()
@@ -215,11 +215,13 @@ final class FaceImageViewController: ViewController, NibInit {
                     self?.faceImageAllowedSwitch.setOn(result.isFaceImageAllowed == true, animated: true)
                     self?.facebookTagsAllowedSwitch.setOn(result.isFacebookAllowed == true, animated: true)
                     
+                    if result.isFaceImageAllowed == true {
+                        self?.displayManager.applyConfiguration(.facebookTagsOff)
+                    }
+                    
                     if result.isFacebookAllowed == true {
                         self?.checkFacebookImportStatus(completion: completion, group: group)
                     } else {
-                        self?.displayManager.applyConfiguration(.facebookTagsOff)
-                        
                         completion?()
                     }
 

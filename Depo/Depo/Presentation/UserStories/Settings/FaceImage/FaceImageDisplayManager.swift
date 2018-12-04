@@ -10,7 +10,6 @@ import UIKit
 
 enum FaceImageDisplayConfigurations {
     case initial /// faceImageOff
-    case faceImageOff
     case faceImageOn
     case facebookTagsOff
     case facebookImportOff
@@ -47,12 +46,6 @@ final class FaceImageDisplayManager: NSObject {
             faceImageView.isHidden = true
             /// face image switch is off
             /// hide all
-        case .faceImageOff:
-            faceImageStackView.isHidden = true
-            firstFaceImageLabel.isHidden = true
-            secondFaceImageLabel.isHidden = true
-            faceImagePremiumButton.isHidden = true
-            faceImageView.isHidden = true
         case .faceImageOn:
             faceImageStackView.isHidden = false
             firstFaceImageLabel.isHidden = false
