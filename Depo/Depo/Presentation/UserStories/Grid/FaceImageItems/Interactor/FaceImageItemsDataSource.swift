@@ -7,7 +7,6 @@
 //
 
 class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
-    var descriptionLabelHeight: CGFloat = 0
     var price: String?
     var faceImageType: FaceImageType
     
@@ -20,7 +19,7 @@ class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
             return super.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
         } else {
             let premiumView = collectionView.dequeue(supplementaryView: PremiumFooterCollectionReusableView.self, kind: kind, for: indexPath)
-            premiumView.configure(price: "30$/month")
+            premiumView.configure(price: price, type: faceImageType)
             return premiumView
         }
     }
@@ -29,7 +28,7 @@ class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
         if AuthoritySingleton.shared.isPremium {
             return super.collectionView(collectionView, layout: collectionViewLayout, referenceSizeForFooterInSection: section)
         } else {
-            return CGSize(width: UIScreen.main.bounds.width, height: NumericConstants.premiumViewHeight + descriptionLabelHeight)
+            return CGSize(width: UIScreen.main.bounds.width, height: NumericConstants.premiumViewHeight)
         }
     }
     

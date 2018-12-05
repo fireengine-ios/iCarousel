@@ -114,7 +114,7 @@ struct NumericConstants {
     static let packageViewMainShadowRadius: CGFloat = 3
     static let packageViewBottomViewShadowRadius: CGFloat = 2
     
-    static let premiumViewHeight: CGFloat = 474
+    static let premiumViewHeight: CGFloat = 550
     static let requestSizeForFaceImageStandartUser = 13
 }
 

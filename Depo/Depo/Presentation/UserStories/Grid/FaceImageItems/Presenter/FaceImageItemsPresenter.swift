@@ -259,7 +259,9 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     }
     
     func didObtainFeaturePrice(_ price: String) {
-        
+        if let dataSource = dataSource as? FaceImageItemsDataSource {
+            dataSource.price = price
+        }
     }
     
     func didObtainFeaturePacks(_ packs: [PackageModelResponse]) {
