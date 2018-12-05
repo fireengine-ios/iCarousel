@@ -172,9 +172,12 @@ extension PackagesViewController: PackagesViewInput {
         } else {
             firstView.configure(with: .standard)
             let standartUserLabel = UILabel()
-            let attributedString = NSAttributedString(string: "   " + TextConstants.standardUser, attributes: [
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.firstLineHeadIndent = 16
+            let attributedString = NSAttributedString(string: TextConstants.standardUser, attributes: [
                 .font : UIFont.TurkcellSaturaDemFont(size: 16),
                 .foregroundColor : ColorConstants.textGrayColor,
+                .paragraphStyle : paragraphStyle,
                 ])
             standartUserLabel.attributedText = attributedString
             topStackView.addArrangedSubview(standartUserLabel)
