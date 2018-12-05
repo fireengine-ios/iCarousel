@@ -14,7 +14,7 @@ final class PremiumPresenter {
     var interactor: PremiumInteractorInput!
     var router: PremiumRouterInput!
     
-    weak var delegate: FaceImageItemsModuleOutput?
+    weak var moduleOutput: FaceImageItemsModuleOutput?
     
     var title: String
     var headerTitle: String
@@ -38,7 +38,7 @@ final class PremiumPresenter {
             self.authority = authority
         }
         if let module = module {
-            self.delegate = module
+            moduleOutput = module
         }
     }
     
@@ -176,8 +176,8 @@ extension PremiumPresenter: PremiumInteractorOutput {
     //MARK: finish purchase
     func purchaseFinished() {
         view?.stopActivityIndicator()
-        if let delegate = delegate {
-            delegate.didReloadData()
+        if let moduleOutput = moduleOutput {
+            moduleOutput.didReloadData()
         }
         router.goToBack()
     }

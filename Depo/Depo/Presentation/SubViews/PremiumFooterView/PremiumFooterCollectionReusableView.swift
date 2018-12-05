@@ -8,12 +8,23 @@
 
 import UIKit
 
-class PremiumFooterCollectionReusableView: UICollectionReusableView {
+protocol PremiumFooterCollectionReusableViewDelegate: class {
+    func onBecomePremiumTap()
+}
+
+final class PremiumFooterCollectionReusableView: UICollectionReusableView {
 
     @IBOutlet private weak var premiumView: PremiumView!
     
+    weak var delegate: PremiumFooterCollectionReusableViewDelegate?
     
-    func configure(price: String?, type: FaceImageType) {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        premiumView.delegate = self
+    }
+    
+    func configure(price: String?, type: FaceImageType, isSelectedAnimation: Bool? = false) {
         let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
         premiumView.configure(with: String(format: TextConstants.faceImageFooterViewMessage, type.footerDescription),
                               price: price ?? TextConstants.free,
@@ -21,10 +32,23 @@ class PremiumFooterCollectionReusableView: UICollectionReusableView {
                               isHiddenTitleImageView: true,
                               titleEdgeInsets: titleEdgeInsets,
                               isNeedScroll: false)
-        
+        if isSelectedAnimation == true {
+            addSelectedAmination()
+        }
     }
     
-    func addSelectedAmination() {
+    // MARK: Utility methods
+    private func addSelectedAmination() {
         premiumView.addSelectedAmination()
     }
+    
+}
+
+// MARK: PremiumViewDelegate
+extension PremiumFooterCollectionReusableView: PremiumViewDelegate {
+    
+    func onBecomePremiumTap() {
+        delegate?.onBecomePremiumTap()
+    }
+    
 }

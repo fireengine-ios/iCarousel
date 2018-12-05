@@ -32,7 +32,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
 
     override func viewIsReady(collectionView: UICollectionView) {
         if let faceImageType = faceImageType {
-            dataSource = FaceImageItemsDataSource(faceImageType: faceImageType)
+            dataSource = FaceImageItemsDataSource(faceImageType: faceImageType, delegate: self)
         }
         super.viewIsReady(collectionView: collectionView)
         
@@ -335,4 +335,15 @@ extension FaceImageItemsPresenter: FaceImageItemsModuleOutput {
     func delete(item: Item) {
         dataSource.deleteItems(items: [item])
     }
+}
+
+// MARK: - FaceImageDataSourceDelegate
+extension FaceImageItemsPresenter: FaceImageItemsDataSourceDelegate {
+    
+    func onBecomePremiumTap() {
+        if let router = router as? FaceImageItemsRouter {
+            router.openPremium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember, module: self)
+        }
+    }
+    
 }

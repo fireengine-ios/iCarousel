@@ -144,7 +144,7 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
             } else {
                 period = (offer.period ?? "").lowercased()
             }
-            fullPrice = String(format: TextConstants.packageApplePrice, price, period)
+            fullPrice = String(format: TextConstants.faceImageApplePrice, price, period)
         } else {
             if let price = offer.price {
                 let currency = offer.currency ?? getCurrency(for: accountType)

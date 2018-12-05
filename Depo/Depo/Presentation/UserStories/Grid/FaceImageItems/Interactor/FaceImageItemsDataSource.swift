@@ -6,12 +6,20 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
+protocol FaceImageItemsDataSourceDelegate: class {
+    func onBecomePremiumTap()
+}
+
+
+final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     var price: String?
     var faceImageType: FaceImageType
     
-    init(faceImageType: FaceImageType) {
+    weak var premiumDelegate: FaceImageItemsDataSourceDelegate?
+    
+    init(faceImageType: FaceImageType, delegate: FaceImageItemsDataSourceDelegate) {
         self.faceImageType = faceImageType
+        premiumDelegate = delegate
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -20,6 +28,7 @@ class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
         } else {
             let premiumView = collectionView.dequeue(supplementaryView: PremiumFooterCollectionReusableView.self, kind: kind, for: indexPath)
             premiumView.configure(price: price, type: faceImageType)
+            premiumView.delegate = self
             return premiumView
         }
     }
@@ -48,9 +57,17 @@ class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     // MARK: Utility methods
     func didAnimationForPremiumButton(with indexPath: IndexPath) {
         if let footerView = collectionView?.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewPremiumFooter, for: indexPath) as? PremiumFooterCollectionReusableView {
-            footerView.addSelectedAmination()
+            footerView.configure(price: price, type: faceImageType, isSelectedAnimation: true)
+            footerView.delegate = self
         }
     }
     
+}
+
+// MARK: - PremiumFooterCollectionReusableViewDelegate
+extension FaceImageItemsDataSource: PremiumFooterCollectionReusableViewDelegate {
+    func onBecomePremiumTap() {
+        premiumDelegate?.onBecomePremiumTap()
+    }
 }
 

@@ -812,6 +812,7 @@ struct TextConstants {
     static let packagePeriodYear = NSLocalizedString("package_period_year", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     static let packageApplePrice = NSLocalizedString("package_apple_price", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageApplePrice = NSLocalizedString("face_image_apple_price", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let packageAppleCancelText = NSLocalizedString("package_apple_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packageSLCMCancelText = NSLocalizedString("package_slcm_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
