@@ -217,10 +217,16 @@ class RouterVC: NSObject {
     }
     
     func isOnFavoritesView() -> Bool {
-        if let tabBarVc = tabBarVC {
-            if let contr = tabBarVc.viewControllers.last as? BaseFilesGreedViewController {
-                return contr.isFavorites
-            }
+        guard let tabBarVc = tabBarVC else {
+            return false
+        }
+        
+        if let contr = tabBarVc.viewControllers.last as? BaseFilesGreedViewController {
+            return contr.isFavorites
+        } else if let contr = tabBarVc.viewControllers.last as? SegmentedController,
+            let currentVC = contr.currentController as? BaseFilesGreedViewController
+        {
+            return currentVC.isFavorites
         }
         
         return false

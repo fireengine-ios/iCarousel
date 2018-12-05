@@ -179,8 +179,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                      ("outlinePhotosVideos", "", TextConstants.accessibilityPhotosVideos),
                      ("", "", ""),
                      //!!!
-                     ("outlineMusic", "", TextConstants.accessibilityMusic),
-                     ("outlineDocs", "", TextConstants.accessibilityDocuments)]
+                     ("outlineContacts", "", TextConstants.periodicContactsSync),
+                     ("outlineDocs", "", TextConstants.homeButtonAllFiles)]
         
         tabBar.setupItems(withImageToTitleNames: items)
     }
