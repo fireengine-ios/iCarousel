@@ -25,8 +25,12 @@ class PremiumFooterCollectionReusableView: UICollectionReusableView {
         premiumView.configure(with: String(format: TextConstants.faceImageFooterViewMessage, faceImageType.footerDescription),
                               price: price,
                               types: PremiumListType.allTypes,
-                              isHiddenTitleImageView: false,
+                              isHiddenTitleImageView: true,
                               titleEdgeInsets: titleEdgeInsets,
                               isNeedScroll: false)
+    }
+    
+    func addSelectedAmination() {
+        premiumView.addSelectedAmination()
     }
 }

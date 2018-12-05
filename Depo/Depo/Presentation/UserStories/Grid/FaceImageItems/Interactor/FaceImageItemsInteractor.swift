@@ -86,12 +86,13 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
     //MARK: - Utility Methids(private)
     private func getAuthorities(group: DispatchGroup) {
         group.enter()
+        
         accountService.permissions { [weak self] result in
             switch result {
             case .success(let response):
                 AuthoritySingleton.shared.refreshStatus(with: response)
                 if !response.hasPermissionFor(.faceRecognition) {
-                    self?.remoteItems.requestSize = 13
+                    self?.remoteItems.requestSize = NumericConstants.requestSizeForFaceImageStandartUser
                 }
             case .failed(let error):
                 self?.output.asyncOperationFail(errorMessage: error.localizedDescription)

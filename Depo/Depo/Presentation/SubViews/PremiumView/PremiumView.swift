@@ -59,6 +59,10 @@ final class PremiumView: UIView {
         }
     }
     
+    func addSelectedAmination() {
+        premiumHeaderView.addSelectedAmination()
+    }
+    
     // MARK: Utility methods(Private)
     private func setupView() {
         let nibNamed = String(describing: PremiumView.self)
