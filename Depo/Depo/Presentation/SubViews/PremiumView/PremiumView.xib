@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PremiumView" customModule="lifebox" customModuleProvider="target">
             <connections>
                 <outlet property="premiumHeaderView" destination="8rI-MV-uQT" id="yVr-wA-7gj"/>
+                <outlet property="scrollView" destination="PgH-Xc-JLe" id="ZVX-7x-n3x"/>
                 <outlet property="view" destination="iN0-l3-epB" id="XGK-3c-oVn"/>
                 <outletCollection property="premiumListViews" destination="aSu-B3-S6i" collectionClass="NSMutableArray" id="hRD-d9-QEm"/>
                 <outletCollection property="premiumListViews" destination="3M4-BB-X0a" collectionClass="NSMutableArray" id="5gA-wb-eeG"/>

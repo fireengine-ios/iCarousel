@@ -948,6 +948,12 @@ struct TextConstants {
     static let faceRecognitionTitle = NSLocalizedString("face_recognition_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let placesTitle = NSLocalizedString("places_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let thingsTitle = NSLocalizedString("things_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: - FaceImagePremiumFooterView
+    static let faceImageFooterViewMessage = NSLocalizedString("face_image_footer_view_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageFaceRecognition = NSLocalizedString("face_image_face_recognition", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImagePlaceRecognition = NSLocalizedString("face_image_place_recognition", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageThingRecognition = NSLocalizedString("face_image_thing_recognition", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     //MARK: - Premium
     static let useFollowingPremiumMembership = NSLocalizedString("Use the following Premium Membership advantages with only", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

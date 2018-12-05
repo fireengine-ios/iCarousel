@@ -747,6 +747,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func registerFooters() {
+        let footerView = UINib(nibName: CollectionViewSuplementaryConstants.collectionViewPremiumFooter,
+                               bundle: nil)
+        collectionView?.register(footerView,
+                                forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+                                withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewPremiumFooter)
+        
         let headerNib = UINib(nibName: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter,
                               bundle: nil)
         collectionView?.register(headerNib,

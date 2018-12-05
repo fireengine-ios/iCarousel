@@ -2534,6 +2534,10 @@
 		92004B7021AD19B300582C45 /* MyStorageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6E21AD19B300582C45 /* MyStorageInteractor.swift */; };
 		921423E321B51E5300B44574 /* PackageModelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E221B51E5300B44574 /* PackageModelResponse.swift */; };
 		921423EA21B562D500B44574 /* AuthoritySingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E921B562D500B44574 /* AuthoritySingleton.swift */; };
+		9240C04B21B805A4005E710C /* PremiumFooterCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */; };
+		9240C04C21B805A4005E710C /* PremiumFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */; };
+		9240C04D21B805A8005E710C /* PremiumFooterCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */; };
+		9240C04E21B805AF005E710C /* PremiumFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */; };
 		93BB369B3341CED27FDF2EC0 /* PhotoVideoDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264BDDE222D06B0A452F4DF7 /* PhotoVideoDetailRouter.swift */; };
 		93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2FD9ED30E838052B7A7D71 /* BaseFilesGreedRouter.swift */; };
 		956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */; };
@@ -5138,6 +5142,8 @@
 		92004B6E21AD19B300582C45 /* MyStorageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageInteractor.swift; sourceTree = "<group>"; };
 		921423E221B51E5300B44574 /* PackageModelResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageModelResponse.swift; sourceTree = "<group>"; };
 		921423E921B562D500B44574 /* AuthoritySingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthoritySingleton.swift; sourceTree = "<group>"; };
+		9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumFooterCollectionReusableView.swift; sourceTree = "<group>"; };
+		9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumFooterCollectionReusableView.xib; sourceTree = "<group>"; };
 		92C1BED0751734B73B9583DD /* SettingsViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewOutput.swift; sourceTree = "<group>"; };
 		9308A9A544DF5D8923C800E0 /* AlbumsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumsPresenter.swift; sourceTree = "<group>"; };
 		931900C1D8314FD173F701DC /* TermsAndServicesRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesRouterInput.swift; sourceTree = "<group>"; };
@@ -7492,6 +7498,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				9240C04821B80520005E710C /* PremiumFooterView */,
 				A2268EBA21A68B95002F2611 /* LeavePremiumView */,
 				4A11F55B21A58DB900D6AADC /* PackageInfoView */,
 				4A26E66A21A6E79F0033B797 /* PackagePremiumView */,
@@ -10031,6 +10038,15 @@
 				921423E921B562D500B44574 /* AuthoritySingleton.swift */,
 			);
 			path = AuthoritySingleton;
+			sourceTree = "<group>";
+		};
+		9240C04821B80520005E710C /* PremiumFooterView */ = {
+			isa = PBXGroup;
+			children = (
+				9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */,
+				9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */,
+			);
+			path = PremiumFooterView;
 			sourceTree = "<group>";
 		};
 		92C9F550DC7528C74BAEFD9F /* UserInfoSubView */ = {
@@ -13557,6 +13573,7 @@
 				8C0E90611FDEBDFF00789C91 /* ActionsMenuTableViewCell.xib in Resources */,
 				8C06B0CF2008AD71003D8E05 /* sample_green.png in Resources */,
 				9840C62320AEAD6B00A8634F /* CheckBoxView.xib in Resources */,
+				9240C04E21B805AF005E710C /* PremiumFooterCollectionReusableView.xib in Resources */,
 				8C06AF452008AD70003D8E05 /* crop_icon.png in Resources */,
 				8C06B0B32008AD71003D8E05 /* rotate@2x.png in Resources */,
 				7C4F60B4201C675F0033C58F /* MovieCard.xib in Resources */,
@@ -13888,6 +13905,7 @@
 				8C06AEEA2008AD70003D8E05 /* Buyuk@2x.png in Resources */,
 				8C06B0662008AD71003D8E05 /* Paylas_butnuna_basin@2x.png in Resources */,
 				CE51AEC41EF90853005DCEE0 /* RegistrationScreen.xib in Resources */,
+				9240C04C21B805A4005E710C /* PremiumFooterCollectionReusableView.xib in Resources */,
 				CE8F44F81F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.xib in Resources */,
 				78D9BA472007E82800F2233F /* DuplicatedContactsViewController.xib in Resources */,
 				78FA7AD92008D5D800E0747F /* DuplicatedContactTableViewCell.xib in Resources */,
@@ -15750,6 +15768,7 @@
 				8C0E8F911FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				B56FBB1B2122C23D004F4A59 /* TermsOfUseViewController.swift in Sources */,
 				8C0E8F921FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
+				9240C04D21B805A8005E710C /* PremiumFooterCollectionReusableView.swift in Sources */,
 				8C0E8F931FDEBDFF00789C91 /* HelpAndSupportInitializer.swift in Sources */,
 				8C0E8F941FDEBDFF00789C91 /* LBAlbumLikePreviewSliderRouterInput.swift in Sources */,
 				8C0E8F951FDEBDFF00789C91 /* LBAlbumLikePreviewSliderRouter.swift in Sources */,
@@ -17058,6 +17077,7 @@
 				8518B9D1741BF6B4470BCD73 /* OTPViewPresenter.swift in Sources */,
 				4AAF28B720205454007B43BA /* FaceImageItemsConfigurator.swift in Sources */,
 				C35EE3E71E1DE92F727B422B /* OTPViewModuleInput.swift in Sources */,
+				9240C04B21B805A4005E710C /* PremiumFooterCollectionReusableView.swift in Sources */,
 				C16DECBEE5DA1602185ABA27 /* OTPViewInteractor.swift in Sources */,
 				B54844C0209C86DC006270A1 /* XCGLogger+Extension.swift in Sources */,
 				759BB6DB00ECA61DBDBBB0B9 /* OTPViewInteractorIO.swift in Sources */,
