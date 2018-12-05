@@ -15,11 +15,9 @@ final class LeavePremiumPresenter: BasePresenter {
     var router: LeavePremiumRouterInput!
     
     var title: String
-    var activeSubscriptions: [SubscriptionPlanBaseResponse]
     
-    init(title: String, activeSubscriptions: [SubscriptionPlanBaseResponse]) {
+    init(title: String) {
         self.title = title
-        self.activeSubscriptions = activeSubscriptions
     }
     
     override func startAsyncOperation() {
@@ -33,26 +31,13 @@ final class LeavePremiumPresenter: BasePresenter {
     }
     
     // MARK: Utility methods
-    private func getAccountType(for accountType: String, subscriptionPlans: [SubscriptionPlanBaseResponse]) -> AccountType {
+    private func getAccountType(for accountType: String) -> AccountType {
         if accountType == "TURKCELL" {
             return .turkcell
         } else {
-            let plans = subscriptionPlans.flatMap { $0.subscriptionPlanRole }
-            for plan in plans {
-                if plan.hasPrefix("lifebox") {
-                    return .ukranian
-                } else if plan.hasPrefix("kktcell") {
-                    return .cyprus
-                } else if plan.hasPrefix("moldcell") {
-                    return .moldovian
-                } else if plan.hasPrefix("life") {
-                    return .life
-                }
-            }
             return .all
         }
     }
-    
 }
 
 // MARK: - LeavePremiumViewOutput
@@ -68,10 +53,7 @@ extension LeavePremiumPresenter: LeavePremiumViewOutput {
 extension LeavePremiumPresenter: LeavePremiumInteractorOutput {
     func didLoadAccountType(accountTypeString: String) {
         asyncOperationSucces()
-
-        AuthoritySingleton.shared.refreshStatus(premium: false, dublicates: false, faces: false)
-        
-        let accountType = getAccountType(for: accountTypeString, subscriptionPlans: activeSubscriptions)
+        let accountType = getAccountType(for: accountTypeString)
         if accountType != .turkcell {
             router.showAlert(with: TextConstants.loremNonTurkcell)
         } else {

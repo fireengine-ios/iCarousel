@@ -8,6 +8,7 @@
 
 protocol PackagesViewOutput {
     func viewIsReady()
+    func viewWillAppear()
     func didPressOn(plan: SubscriptionPlan, planIndex: Int)
     func buy(offer: PackageModelResponse, planIndex: Int)
     func submit(promocode: String)

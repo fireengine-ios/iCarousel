@@ -55,6 +55,7 @@ final class PackagesViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        output.viewWillAppear()
         setupStackView(with: output.getStorageCapacity())
     }
     
@@ -163,13 +164,21 @@ extension PackagesViewController: PackagesViewInput {
         for view in topStackView.arrangedSubviews {
             view.removeFromSuperview()
         }
-
         let isPremium = AuthoritySingleton.shared.isPremium
 
         let firstView = PackageInfoView.initFromNib()
-        isPremium ?
-            firstView.configure(with: .premiumUser) :
+        if isPremium {
+            firstView.configure(with: .premiumUser)
+        } else {
             firstView.configure(with: .standard)
+            let standartUserLabel = UILabel()
+            let attributedString = NSAttributedString(string: "   " + TextConstants.standardUser, attributes: [
+                .font : UIFont.TurkcellSaturaDemFont(size: 16),
+                .foregroundColor : ColorConstants.textGrayColor,
+                ])
+            standartUserLabel.attributedText = attributedString
+            topStackView.addArrangedSubview(standartUserLabel)
+        }
 
         let secondView = PackageInfoView.initFromNib()
         secondView.configure(with: .myStorage, capacity: storageCapacity)

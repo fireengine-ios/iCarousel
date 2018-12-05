@@ -10,11 +10,11 @@ import Foundation
 
 final class LeavePremiumModuleConfigurator {
     
-    func configure(viewController: LeavePremiumViewController, title: String, activeSubscriptions: [SubscriptionPlanBaseResponse]) {
+    func configure(viewController: LeavePremiumViewController, title: String) {
         let router = LeavePremiumRouter()
         router.view = viewController
         
-        let presenter = LeavePremiumPresenter(title: title, activeSubscriptions: activeSubscriptions)
+        let presenter = LeavePremiumPresenter(title: title)
         presenter.view = viewController
         presenter.router = router
         

@@ -14,8 +14,8 @@ protocol PackagesInteractorInput {
     func activate(offer: PackageModelResponse, planIndex: Int)
     func verifyOffer(_ offer: PackageModelResponse?, planIndex: Int, token: String, otp: String)
     func submit(promocode: String)
-    func getAvailableOffers()
-    func getAccountType()
+    func getAvailableOffers(group: DispatchGroup)
+    func getAccountType(group: DispatchGroup)
     func convertToSubscriptionPlan(offers: [PackageModelResponse], accountType: AccountType) -> [SubscriptionPlan]
     
     func restorePurchases()
@@ -24,6 +24,6 @@ protocol PackagesInteractorInput {
     /// MAYBE WILL BE NEED
     //func getCurrentSubscription()
 
-    func getStorageCapacity()
-    func getUserAuthority()
+    func getStorageCapacity(group: DispatchGroup)
+    func getUserAuthority(group: DispatchGroup)
 }

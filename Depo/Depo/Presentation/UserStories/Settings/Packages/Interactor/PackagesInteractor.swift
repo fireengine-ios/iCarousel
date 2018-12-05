@@ -87,14 +87,21 @@ class PackagesInteractor {
 // MARK: PackagesInteractorInput
 extension PackagesInteractor: PackagesInteractorInput {
 
-    func getAvailableOffers() {
+    func trackScreen() {
+        analyticsService.logScreen(screen: .packages)
+        analyticsService.trackDimentionsEveryClickGA(screen: .packages)
+    }
+    
+    func getAvailableOffers(group: DispatchGroup) {
+        group.enter()
         accountService.availableOffers { [weak self] (result) in
             switch result {
             case .success(let response):
                 DispatchQueue.toMain {
-                    self?.getInfoForAppleProducts(offers: response)
+                    self?.getInfoForAppleProducts(offers: response, group: group)
                 }
             case .failed(let error):
+                group.leave()
                 DispatchQueue.toMain {
                     self?.output.failed(with: error.localizedDescription)
                 }
@@ -102,27 +109,26 @@ extension PackagesInteractor: PackagesInteractorInput {
         }
     }
     
-    func trackScreen() {
-        analyticsService.logScreen(screen: .packages)
-        analyticsService.trackDimentionsEveryClickGA(screen: .packages)
-    }
-    
-    func getAccountType() {
+    func getAccountType(group: DispatchGroup) {
+        group.enter()
         accountService.info(
             success: { [weak self] response in
                 guard let response = response as? AccountInfoResponse,
                     let accountType = response.accountType else { return }
                 DispatchQueue.main.async {
                     self?.output.successed(accountTypeString: accountType)
+                    group.leave()
                 }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: errorResponse)
+                    group.leave()
                 }
         })
     }
 
-    func getStorageCapacity() {
+    func getStorageCapacity(group: DispatchGroup) {
+        group.enter()
         accountService.usage(success: { [weak self]  (response) in
             if let response = response as? UsageResponse {
                 DispatchQueue.main.async {
@@ -134,14 +140,17 @@ extension PackagesInteractor: PackagesInteractorInput {
                     self?.output.failed(with: error.description)
                 }
             }
+            group.leave()
         }) { [weak self] errorResponse in
             DispatchQueue.main.async {
                 self?.output.failedUsage(with: errorResponse)
             }
+            group.leave()
         }
     }
 
-    func getUserAuthority() {
+    func getUserAuthority(group: DispatchGroup) {
+        group.enter()
         accountService.permissions { [weak self] (result) in
             switch result {
             case .success(let response):
@@ -149,10 +158,12 @@ extension PackagesInteractor: PackagesInteractorInput {
                 DispatchQueue.main.async {
                     self?.output.successedGotUserAuthority()
                 }
+                group.leave()
             case .failed(let error):
                 DispatchQueue.main.async {
                     self?.output.failed(with: error.localizedDescription)
                 }
+                group.leave()
             }
         }
     }
@@ -230,15 +241,16 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
     
-    private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
+    private func getInfoForAppleProducts(offers: [PackageModelResponse], group: DispatchGroup) {
         let appleOffers = offers.flatMap({ return $0.inAppPurchaseId })
         iapManager.loadProducts(productIds: appleOffers) { [weak self] response in
             switch response {
             case .success(_):
                 DispatchQueue.toMain {
-                    self?.output.successed(allOffers: offers)
+                    self?.output.successed(allOffers: offers, group: group)
                 }
             case .failed(let error):
+                group.leave()
                 DispatchQueue.toMain {
                     self?.output.failed(with: error.localizedDescription)
                 }

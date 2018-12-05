@@ -23,6 +23,8 @@ class PackagesPresenter {
     private var storageCapacity: Int64 = 0
     private var storageUsage: UsageResponse?
 
+    private let group = DispatchGroup()
+    
     private func getAccountType(for accountType: String) -> AccountType {
         if accountType == "TURKCELL" {
             return .turkcell
@@ -41,7 +43,8 @@ class PackagesPresenter {
         offerIndex = 0
         optInVC = nil
         
-        interactor.getAvailableOffers()
+        group.enter()
+        interactor.getAvailableOffers(group: group)
     }
 }
 
@@ -61,10 +64,17 @@ extension PackagesPresenter: PackagesViewOutput {
     
     func viewIsReady() {
         interactor.trackScreen()
+        interactor.getAccountType(group: group)
+        interactor.getStorageCapacity(group: group)
+    }
+    
+    func viewWillAppear() {
         view?.startActivityIndicator()
-        interactor.getAccountType()
-        interactor.getUserAuthority()
-        interactor.getStorageCapacity()
+        interactor.getUserAuthority(group: group)
+        
+        group.notify(queue: DispatchQueue.main) {
+            self.view?.stopActivityIndicator()
+        }
     }
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
@@ -95,6 +105,7 @@ extension PackagesPresenter: PackagesViewOutput {
         }, fail: { [weak self] failResponse in
             DispatchQueue.toMain {
                 self?.view?.stopActivityIndicator()
+                self?.failed(with: "An error occurred while getting account info.")
             }
         })
     }
@@ -185,8 +196,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(accountTypeString: String) {
         accountType = getAccountType(for: accountTypeString)
-        
-        interactor.getAvailableOffers()
+        interactor.getAvailableOffers(group: group)
     }
     
     func successed(usage: UsageResponse) {
@@ -197,15 +207,15 @@ extension PackagesPresenter: PackagesInteractorOutput {
         }
     }
     
-    func successed(allOffers: [PackageModelResponse]) {
+    func successed(allOffers: [PackageModelResponse], group: DispatchGroup) {
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
+        group.leave()
         availableOffers = offers.filter({
             guard let model = $0.model as? PackageModelResponse, let type = model.type else { return false }
             return type == .SLCM || type == .apple
         })
-
         view?.stopActivityIndicator()
-        view?.reloadPackages()
+        self.view?.reloadPackages()
     }
 
     func successedGotUserAuthority() {
