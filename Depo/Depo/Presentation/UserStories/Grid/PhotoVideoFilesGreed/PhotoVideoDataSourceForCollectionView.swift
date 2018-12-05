@@ -11,6 +11,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
     private let itemProvider: ItemsProvider
     private let scrollBarManager = PhotoVideoScrollBarManager()
     private var showOnlySynched = false
+    private let compounderMidPage: Int = 2
     
     //MARK:- Initial state/setup
     
@@ -287,7 +288,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                             self?.appendCollectionView(items: remotes, pageNum: self?.itemProvider.currentPage ?? 0)
                         })
                     } else {
-                        self.compoundItems(pageItems: [], pageNum: 2) { [weak self] response in
+                        ///We send here 2 because current compound logic is separeted into
+                        ///3 ways: first page, mid page, last page.
+                        ///2 is for mid page logic.(any number that not 1 and pagination did not end)
+                        self.compoundItems(pageItems: [], pageNum: self.compounderMidPage) { [weak self] response in
                             self?.batchInsertItems(newIndexes: response)
                         }
                     }
