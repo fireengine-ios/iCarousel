@@ -134,7 +134,4 @@ extension FaceImageItemsViewController: FaceImageItemsViewInput {
             }
         }
     }
-    
-    func configureForStandartUser() {
-    }
 }

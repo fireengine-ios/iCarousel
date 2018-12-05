@@ -10,10 +10,10 @@ import Foundation
 
 final class PremiumModuleInitializer: NSObject {
     
-    class func initializePremiumController(with nibName: String, title: String, headerTitle: String) -> UIViewController {
+    class func initializePremiumController(with nibName: String, title: String, headerTitle: String, module: FaceImageItemsModuleOutput?) -> UIViewController {
         let viewController = PremiumViewController(nibName: nibName, bundle: nil)
         let configurator = PremiumModuleConfigurator()
-        configurator.configure(viewController: viewController, title: title, headerTitle: headerTitle)
+        configurator.configure(viewController: viewController, title: title, headerTitle: headerTitle, module: module)
         
         return viewController
     }

@@ -14,6 +14,8 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
     private let remoteItemsService = RemoteItemsService.init(requestSize: 999, fieldValue: FieldValue.image)
+    private let accountService: AccountServicePrl = AccountService()
+    private let iapManager = IAPManager.shared
 
     private var isCheckPhotos: Bool = true
     
@@ -71,21 +73,110 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
     
     override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
         let superFunc = { super.reloadItems(searchText, sortBy: sortBy, sortOrder: sortOrder, newFieldValue: newFieldValue) }
-        AccountService().permissions { [weak self] result in
+        let group = DispatchGroup()
+        
+        getAuthorities(group: group)
+        getAccountType(group: group)
+        
+        group.notify(queue: DispatchQueue.main) {
+            superFunc()
+        }
+    }
+    
+    //MARK: - Utility Methids(private)
+    private func getAuthorities(group: DispatchGroup) {
+        group.enter()
+        accountService.permissions { [weak self] result in
             switch result {
-                case .success(let response):
+            case .success(let response):
                 AuthoritySingleton.shared.refreshStatus(with: response)
-                if !response.hasPermissionFor(.premiumUser) {
-                    self?.remoteItems.requestSize = 12
-                    if let output = self?.output as? FaceImageItemsInteractorOutput {
-                        output.configureForStandartUser()
-                    }
+                if !response.hasPermissionFor(.faceRecognition) {
+                    self?.remoteItems.requestSize = 13
                 }
-                superFunc()
-                
-                case .failed(let error):
+            case .failed(let error):
                 self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
             }
+            group.leave()
+        }
+    }
+    
+    private func getAccountType(group: DispatchGroup) {
+        group.enter()
+        accountService.info(
+            success: { [weak self] response in
+                guard let response = response as? AccountInfoResponse, let accountType = response.accountType else {
+                    self?.output.asyncOperationFail(errorMessage: "An error occurred while getting account info")
+                    return
+                }
+    
+                if let output = self?.output as? FaceImageItemsInteractorOutput {
+                    DispatchQueue.toMain {
+                        output.didObtainAccountType(accountType, group: group)
+                    }
+                }
+            }, fail: { [weak self] errorResponse in
+                group.leave()
+                DispatchQueue.toMain {
+                    self?.output.asyncOperationFail(errorMessage: errorResponse.description)
+                }
+        })
+    }
+    
+    private func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType, group: DispatchGroup?) {
+        let fullPrice: String
+        if let iapProductId = offer.inAppPurchaseId, let product = iapManager.product(for: iapProductId) {
+            let price = product.localizedPrice
+            let period: String
+            if #available(iOS 11.2, *) {
+                switch product.subscriptionPeriod?.unit.rawValue {
+                case 0:
+                    period = TextConstants.packagePeriodDay
+                case 1:
+                    period = TextConstants.packagePeriodWeek
+                case 2:
+                    period = TextConstants.packagePeriodMonth
+                case 3:
+                    period = TextConstants.packagePeriodYear
+                default:
+                    period = TextConstants.packagePeriodMonth
+                }
+            } else {
+                period = (offer.period ?? "").lowercased()
+            }
+            fullPrice = String(format: TextConstants.packageApplePrice, price, period)
+        } else {
+            if let price = offer.price {
+                let currency = offer.currency ?? getCurrency(for: accountType)
+                if let period = offer.period?.lowercased() {
+                    fullPrice = String(format: TextConstants.packageApplePrice, (String(price) + " " + currency), period)
+                } else {
+                    fullPrice = String(price) + " " + currency
+                }
+            } else {
+                fullPrice = TextConstants.free
+            }
+        }
+        if let output = self.output as? FaceImageItemsInteractorOutput {
+            output.didObtainFeaturePrice(fullPrice)
+        } else {
+            output.asyncOperationFail(errorMessage: "An error occurred while getting featue pack price")
+        }
+        group?.leave()
+    }
+    
+    private func getCurrency(for accountType: AccountType) -> String {
+        switch accountType {
+        ///https://en.wikipedia.org/wiki/Northern_Cyprus
+        case .turkcell, .cyprus:
+            return "TL"
+        case .ukranian:
+            return "UAH"
+        case .moldovian:
+            return "MDL"
+        case .life:
+            return "BYN"
+        case .all:
+            return "$" /// temp
         }
     }
 }
@@ -176,4 +267,45 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         self.isCheckPhotos = isCheckPhotos
     }
     
+    func getFeaturePacks(group: DispatchGroup?) {
+        accountService.featurePacks { [weak self] result in
+            switch result {
+            case .success(let response):
+                if let output = self?.output as? FaceImageItemsInteractorOutput {
+                    DispatchQueue.toMain {
+                        output.didObtainFeaturePacks(response)
+                    }
+                } else {
+                    self?.output.asyncOperationFail(errorMessage: "An error occurred while getting featue packs")
+                }
+            case .failed(let error):
+                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+                group?.leave()
+            }
+        }
+    }
+    
+    func getInfoForAppleProducts(offer: PackageModelResponse, accountType: AccountType, group: DispatchGroup?) {
+        if accountType == .turkcell {
+            getPriceInfo(for: offer, accountType: accountType, group: group)
+            return
+        }
+        
+        guard let offerId = offer.inAppPurchaseId else {
+            output.asyncOperationFail(errorMessage: "An error occurred while getting product id from offer")
+            group?.leave()
+            return
+        }
+        iapManager.loadProducts(productIds: [offerId]) { [weak self] response in
+            switch response {
+            case .success(_):
+                DispatchQueue.toMain {
+                    self?.getPriceInfo(for: offer, accountType: accountType, group: group)
+                }
+            case .failed(let error):
+                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+                group?.leave()
+            }
+        }
+    }
 }

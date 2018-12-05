@@ -13,4 +13,7 @@ protocol FaceImageItemsInteractorInput {
     func onSaveVisibilityChanges(_ items: [PeopleItem])
     func checkPhotos()
     func changeCheckPhotosState(isCheckPhotos: Bool)
+    
+    func getFeaturePacks(group: DispatchGroup?)
+    func getInfoForAppleProducts(offer: PackageModelResponse, accountType: AccountType, group: DispatchGroup?)
 }

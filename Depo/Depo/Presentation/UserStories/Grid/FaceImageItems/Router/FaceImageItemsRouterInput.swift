@@ -9,4 +9,5 @@
 protocol FaceImageItemsRouterInput {
     func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem, moduleOutput: FaceImageItemsModuleOutput?)
     func showPopUp()
+    func openPremium(title: String, headerTitle: String, module: FaceImageItemsModuleOutput)
 }

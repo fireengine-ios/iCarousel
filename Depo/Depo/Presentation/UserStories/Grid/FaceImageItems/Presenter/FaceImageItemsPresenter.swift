@@ -24,6 +24,12 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private var forceLoadNextItems = false
     
+    private var featureType: PackageModelResponse.FeaturePackageType = .appleFeature
+    
+    private var accountType: AccountType = .all
+
+    private var addFooterGroup: DispatchGroup?
+
     override func viewIsReady(collectionView: UICollectionView) {        
         super.viewIsReady(collectionView: collectionView)
         
@@ -243,10 +249,32 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         }
     }
     
-    func configureForStandartUser() {
-        if let view = view as? FaceImageItemsViewInput {
-            dataSource.hideLoadingFooter()
-            view.configureForStandartUser()
+    func didObtainFeaturePrice(_ price: String) {
+        
+    }
+    
+    func didObtainFeaturePacks(_ packs: [PackageModelResponse]) {
+        featureType = accountType == .all ? .appleFeature : .SLCMFeature
+        for feature in packs {
+            if feature.featureType == featureType {
+                guard let authorities = feature.authorities else { continue }
+                if authorities.contains(where: { return $0.authorityType == .faceRecognition }) {
+                    if let interactor = interactor as? FaceImageItemsInteractor {
+                        interactor.getInfoForAppleProducts(offer: feature, accountType: accountType, group: addFooterGroup)
+                    }
+                    break
+                }
+            }
+        }
+    }
+    
+    func didObtainAccountType(_ accountType: String, group: DispatchGroup) {
+        addFooterGroup = group
+        if accountType == "TURKCELL" {
+            self.accountType = .turkcell
+        }
+        if let interactor = interactor as? FaceImageItemsInteractor {
+            interactor.getFeaturePacks(group: addFooterGroup)
         }
     }
 }
