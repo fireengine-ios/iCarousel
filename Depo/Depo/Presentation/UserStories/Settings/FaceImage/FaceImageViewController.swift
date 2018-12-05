@@ -103,7 +103,13 @@ final class FaceImageViewController: ViewController, NibInit {
                     NotificationCenter.default.post(name: .changeFaceImageStatus, object: self)
                     self?.sendAnaliticsForFaceImageAllowed(isAllowed: result.isFaceImageAllowed == true)
                     
-                    if result.isFaceImageAllowed == true {                        
+                    if result.isFaceImageAllowed == true {
+                        if self?.authorityStorage.faceRecognition == false {
+                            self?.displayManager.applyConfiguration(.faceImageStandart)
+                        } else if self?.faceImageAllowedSwitch.isOn == true {
+                            self?.displayManager.applyConfiguration(.faceImagePremium)
+                        }
+                        
                         if self?.isShowFaceImageWaitAlert == true {
                             self?.showFaceImageWaitAlert()
                         }
