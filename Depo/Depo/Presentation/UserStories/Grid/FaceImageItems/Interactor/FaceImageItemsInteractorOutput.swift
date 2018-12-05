@@ -10,4 +10,6 @@ protocol FaceImageItemsInteractorOutput {
     func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item)
     func didSaveChanges(_ items: [PeopleItem])
     func didShowPopUp()
+    
+    func configureForStandartUser()
 }

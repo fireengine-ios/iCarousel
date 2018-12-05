@@ -243,6 +243,12 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         }
     }
     
+    func configureForStandartUser() {
+        if let view = view as? FaceImageItemsViewInput {
+            dataSource.hideLoadingFooter()
+            view.configureForStandartUser()
+        }
+    }
 }
 
 // MARK: FaceImageItemsViewOutput

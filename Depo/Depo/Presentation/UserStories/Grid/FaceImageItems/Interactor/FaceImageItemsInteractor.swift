@@ -69,6 +69,25 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
         return ""
     }
     
+    override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
+        let superFunc = { super.reloadItems(searchText, sortBy: sortBy, sortOrder: sortOrder, newFieldValue: newFieldValue) }
+        AccountService().permissions { [weak self] result in
+            switch result {
+                case .success(let response):
+                AuthoritySingleton.shared.refreshStatus(with: response)
+                if !response.hasPermissionFor(.premiumUser) {
+                    self?.remoteItems.requestSize = 12
+                    if let output = self?.output as? FaceImageItemsInteractorOutput {
+                        output.configureForStandartUser()
+                    }
+                }
+                superFunc()
+                
+                case .failed(let error):
+                self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
+            }
+        }
+    }
 }
 
 // MARK: FaceImageItemsInteractorInput

@@ -62,9 +62,6 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
         navBarConfigurator.configure(right: [done], left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
-    
-    // MARK: - FaceImageItemsInput
-
 }
 
 // MARK: - FaceImageItemsViewInput
@@ -138,4 +135,6 @@ extension FaceImageItemsViewController: FaceImageItemsViewInput {
         }
     }
     
+    func configureForStandartUser() {
+    }
 }
