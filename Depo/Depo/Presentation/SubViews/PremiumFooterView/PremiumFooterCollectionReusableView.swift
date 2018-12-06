@@ -26,7 +26,8 @@ final class PremiumFooterCollectionReusableView: UICollectionReusableView {
     
     func configure(price: String?, type: FaceImageType, isSelectedAnimation: Bool? = false) {
         let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
-        premiumView.configure(with: String(format: TextConstants.faceImageFooterViewMessage, type.footerDescription),
+        let descriptionMessage = String(format: TextConstants.faceImageFooterViewMessage, type.footerDescription)
+        premiumView.configure(with: descriptionMessage,
                               price: price ?? TextConstants.free,
                               types: PremiumListType.allTypes,
                               isHiddenTitleImageView: true,
