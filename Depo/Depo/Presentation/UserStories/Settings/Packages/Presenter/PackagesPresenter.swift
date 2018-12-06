@@ -22,8 +22,6 @@ class PackagesPresenter {
     private var optInVC: OptInController?
     private var storageCapacity: Int64 = 0
     private var storageUsage: UsageResponse?
-
-    private let group = DispatchGroup()
     
     private func getAccountType(for accountType: String) -> AccountType {
         if accountType == "TURKCELL" {
@@ -34,8 +32,6 @@ class PackagesPresenter {
     }
     
     private func refreshPage() {
-        view?.startActivityIndicator()
-        
         availableOffers = []
         referenceToken = ""
         userPhone = ""
@@ -43,8 +39,8 @@ class PackagesPresenter {
         offerIndex = 0
         optInVC = nil
         
-        group.enter()
-        interactor.getAvailableOffers(group: group)
+        view?.startActivityIndicator()
+        interactor.getAvailableOffers()
     }
 }
 
@@ -64,17 +60,17 @@ extension PackagesPresenter: PackagesViewOutput {
     
     func viewIsReady() {
         interactor.trackScreen()
-        interactor.getAccountType(group: group)
-        interactor.getStorageCapacity(group: group)
+        
+        view?.startActivityIndicator()
+        interactor.getAccountType()
+        
+        view?.startActivityIndicator()
+        interactor.getStorageCapacity()
     }
     
     func viewWillAppear() {
         view?.startActivityIndicator()
-        interactor.getUserAuthority(group: group)
-        
-        group.notify(queue: DispatchQueue.main) {
-            self.view?.stopActivityIndicator()
-        }
+        interactor.getUserAuthority()
     }
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
@@ -196,10 +192,11 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(accountTypeString: String) {
         accountType = getAccountType(for: accountTypeString)
-        interactor.getAvailableOffers(group: group)
+        interactor.getAvailableOffers()
     }
     
     func successed(usage: UsageResponse) {
+        view?.stopActivityIndicator()
         storageUsage = usage
         if let quotaBytes = usage.quotaBytes {
             storageCapacity = quotaBytes
@@ -207,18 +204,18 @@ extension PackagesPresenter: PackagesInteractorOutput {
         }
     }
     
-    func successed(allOffers: [PackageModelResponse], group: DispatchGroup) {
+    func successed(allOffers: [PackageModelResponse]) {
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
-        group.leave()
         availableOffers = offers.filter({
             guard let model = $0.model as? PackageModelResponse, let type = model.type else { return false }
             return type == .SLCM || type == .apple
         })
         view?.stopActivityIndicator()
-        self.view?.reloadPackages()
+        view?.reloadData()
     }
 
     func successedGotUserAuthority() {
+        view?.stopActivityIndicator()
         view?.setupStackView(with: storageCapacity)
     }
     

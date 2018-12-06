@@ -115,7 +115,7 @@ final class PackagesViewController: BaseViewController {
 // MARK: PackagesViewInput
 extension PackagesViewController: PackagesViewInput {
 
-    func reloadPackages() {
+    func reloadData() {
         collectionView.reloadData()
     }
     
@@ -126,7 +126,7 @@ extension PackagesViewController: PackagesViewInput {
         promoView.endEditing(true)
         promoView.codeTextField.text = ""
         promoView.errorLabel.text = ""
-        reloadPackages()
+        reloadData()
     }
     
     func show(promocodeError: String) {
