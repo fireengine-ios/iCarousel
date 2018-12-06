@@ -54,19 +54,21 @@ extension MyStorageViewController: MyStorageViewInput {
         
         let storageString = String(format: TextConstants.myStorageUsage, left.bytesString, full.bytesString)
         
-        guard let lastWord = storageString.lastIndex(of: " ") else { return }
-        let lastWordLocation = storageString.distance(from: storageString.startIndex,
-                                                      to: lastWord)
-        let lastWordLength = storageString.distance(from: lastWord,
-                                                    to: storageString.endIndex)
-        let range = NSRange(location: lastWordLocation, length: lastWordLength)
+        //TODO: - think how to change this code aradic writing
+        
+//        guard let lastWord = storageString.lastIndex(of: " ") else { return }
+//        let lastWordLocation = storageString.distance(from: storageString.startIndex,
+//                                                      to: lastWord)
+//        let lastWordLength = storageString.distance(from: lastWord,
+//                                                    to: storageString.endIndex)
+//        let range = NSRange(location: lastWordLocation, length: lastWordLength)
         
         let attributedString = NSMutableAttributedString(string: storageString, attributes: [
             .font: UIFont.TurkcellSaturaBolFont(size: 20),
             .foregroundColor: ColorConstants.textGrayColor,
             .kern: 0.0
             ])
-        attributedString.addAttribute(.font, value: UIFont.TurkcellSaturaMedFont(size: 20), range: range)
+//        attributedString.addAttribute(.font, value: UIFont.TurkcellSaturaMedFont(size: 20), range: range)
         
         storageUsageTextView.attributedText = attributedString
     }
