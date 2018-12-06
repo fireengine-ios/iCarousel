@@ -90,10 +90,10 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
             switch result {
             case .success(let response):
                 AuthoritySingleton.shared.refreshStatus(with: response)
-                if !response.hasPermissionFor(.faceRecognition) {
-                    self?.remoteItems.requestSize = NumericConstants.requestSizeForFaceImageStandartUser
+                if response.hasPermissionFor(.faceRecognition) {
+                    self?.remoteItems.requestSize = RequestSizeConstant.faceImageItemsRequestSize
                 } else {
-                    group.leave()
+                    self?.remoteItems.requestSize = NumericConstants.requestSizeForFaceImageStandartUser
                 }
             case .failed(let error):
                 self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
