@@ -342,7 +342,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         setTitle(withString: String(count) + " " + TextConstants.accessibilitySelected)
     }
     
-    static let sliderH: CGFloat = 180
+    static let sliderH: CGFloat = 139
     
     private func setupSlider(sliderController: LBAlbumLikePreviewSliderViewController) {
         contentSlider = sliderController
