@@ -76,7 +76,6 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
         let group = DispatchGroup()
         
         getAuthorities(group: group)
-        getAccountType(group: group)
         
         group.notify(queue: DispatchQueue.main) {
             superFunc()
@@ -92,8 +91,7 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
                 AuthoritySingleton.shared.refreshStatus(with: response)
                 if !response.hasPermissionFor(.faceRecognition) {
                     self?.remoteItems.requestSize = NumericConstants.requestSizeForFaceImageStandartUser
-                } else {
-                    group.leave()
+                    self?.getAccountType(group: group)
                 }
             case .failed(let error):
                 self?.output.asyncOperationFail(errorMessage: error.localizedDescription)
