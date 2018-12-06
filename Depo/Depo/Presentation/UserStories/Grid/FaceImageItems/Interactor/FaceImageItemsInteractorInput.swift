@@ -15,7 +15,7 @@ protocol FaceImageItemsInteractorInput {
     func changeCheckPhotosState(isCheckPhotos: Bool)
     
     func getFeaturePacks()
-    func getInfoForAppleProducts(offer: PackageModelResponse, accountType: AccountType)
+    func getPriceInfo(offer: PackageModelResponse, accountType: AccountType)
     func checkAccountType()
     func reloadFaceImageItems()
 }

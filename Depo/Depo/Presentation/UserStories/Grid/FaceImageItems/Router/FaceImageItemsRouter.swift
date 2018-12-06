@@ -30,4 +30,8 @@ extension FaceImageItemsRouter: FaceImageItemsRouterInput {
         let vc = router.premium(title: title, headerTitle: headerTitle, module: module)
         router.pushViewController(viewController: vc)
     }
+    
+    func display(error: String) {
+        UIApplication.showErrorAlert(message: error)
+    }
 }

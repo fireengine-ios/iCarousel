@@ -239,9 +239,7 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     func didSaveChanges(_ items: [PeopleItem]) {
         isChangeVisibilityMode = false
         dataSource.setSelectionState(selectionState: false)
-        
-        asyncOperationSucces()
-        
+                
         view.stopSelection()
         
         albumSliderModuleOutput?.reload(type: .people)
@@ -256,9 +254,17 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         }
     }
     
+    func didFailed(errorMessage: String) {
+        if let router = self.router as? FaceImageItemsRouter {
+            router.display(error: errorMessage)
+        }
+    }
+    
     func didObtainFeaturePrice(_ price: String) {
-        if let dataSource = dataSource as? FaceImageItemsDataSource {
+        if let dataSource = dataSource as? FaceImageItemsDataSource,
+            let interactor = interactor as? FaceImageItemsInteractor{
             dataSource.price = price
+            interactor.reloadFaceImageItems()
         }
     }
     
@@ -266,11 +272,12 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         featureType = accountType == .all ? .appleFeature : .SLCMFeature
         for feature in packs {
             if feature.featureType == featureType {
-                guard let authorities = feature.authorities else { continue }
-                if authorities.contains(where: { return $0.authorityType == .faceRecognition }) {
-                    if let interactor = interactor as? FaceImageItemsInteractor {
-                        interactor.getInfoForAppleProducts(offer: feature, accountType: accountType)
-                    }
+                
+                if let authorities = feature.authorities,
+                    let interactor = interactor as? FaceImageItemsInteractor,
+                    authorities.contains(where: { return $0.authorityType == .faceRecognition }) {
+                    
+                    interactor.getPriceInfo(offer: feature, accountType: accountType)
                     break
                 }
             }
@@ -287,7 +294,7 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     }
     
     func didObtainAccountPermision(isAllowed: Bool) {
-        if isAllowed {
+        if !isAllowed {
             if let interactor = interactor as? FaceImageItemsInteractorInput {
                 interactor.checkAccountType()
             }
