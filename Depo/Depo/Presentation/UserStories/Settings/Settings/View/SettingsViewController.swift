@@ -319,6 +319,10 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         userInfoSubView.dismissLoadingSpinner()
     }
     
+    func updateStatusUser() {
+        tableView.reloadData()
+    }
+    
 }
 
 // MARK: - UserInfoSubViewViewControllerActionsDelegate

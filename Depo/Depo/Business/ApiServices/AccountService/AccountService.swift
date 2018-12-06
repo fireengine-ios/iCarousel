@@ -13,7 +13,8 @@ protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
     func info(success: SuccessResponse?, fail:@escaping FailResponse)
     func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
-    func featurePacks(handler: @escaping (ResponseResult<FeaturePacksResponse>) -> Void)
+    func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
+    func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
 }
 
 class AccountService: BaseRequestService, AccountServicePrl {
@@ -60,7 +61,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
-    func featurePacks(handler: @escaping (ResponseResult<FeaturePacksResponse>) -> Void) {
+    func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
         debugLog("AccountService featurePacks")
         
         sessionManager
@@ -69,9 +70,25 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    
-                    let featurePacks = FeaturePacksResponse(json: data, headerResponse: nil)
-                    handler(.success(featurePacks))
+                    let offersArray = PackageModelResponse.array(from: data)
+                    handler(.success(offersArray))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+
+    func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
+        debugLog("AccountService featurePacks")
+
+        sessionManager
+            .request(RouteRequests.Account.Permissions.availableOffers)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let offersArray = PackageModelResponse.array(from: data)
+                    handler(.success(offersArray))
                 case .failure(let error):
                     handler(.failed(error))
                 }
@@ -182,46 +199,40 @@ class AccountService: BaseRequestService, AccountServicePrl {
     
     private lazy var sessionManager: SessionManager = factory.resolve()
     
-    func isAllowedFaceImage(handler: @escaping ResponseBool) {
+    func isAllowedFaceImageAndFacebook(handler: @escaping (ResponseResult<FaceImageAllowedResponse>) -> Void) {
         debugLog("AccountService isAllowedFaceImage")
         
         sessionManager
             .request(RouteRequests.Account.Settings.faceImageAllowed)
             .customValidate()
-            .responseString { response in
+            .responseData { response in
                 switch response.result {    
-                case .success(let text):
-                    if text == "true" {
-                        handler(.success(true))
-                    } else if text == "false" {
-                        handler(.success(false))
-                    } else {
-                        let error = CustomErrors.serverError(text)
-                        handler(.failed(error))
-                    }
+                case .success(let data):
+                    let faceImageAllowed = FaceImageAllowedResponse(json: data, headerResponse: nil)
+                    handler(.success(faceImageAllowed))
                 case .failure(let error):
                     handler(.failed(error))
                 }
         }
     }
      
-    func changeFaceImageAllowed(isAllowed: Bool, handler: @escaping ResponseVoid) {
+    func changeFaceImageAndFacebookAllowed(isFaceImageAllowed: Bool, isFacebookAllowed: Bool, handler: @escaping (ResponseResult<FaceImageAllowedResponse>) -> Void) {
         debugLog("AccountService changeFaceImageAllowed")
+        
+        let params: [String: Any] = ["faceImageRecognitionAllowed": isFaceImageAllowed,
+                                     "facebookTaggingEnabled": isFacebookAllowed]
         
         sessionManager
             .request(RouteRequests.Account.Settings.faceImageAllowed,
-                     method: .put,
-                     encoding: String(isAllowed))
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.prettyPrinted)
             .customValidate()
-            .responseString { response in
+            .responseData { response in
                 switch response.result {    
-                case .success(let text):
-                    if text == "\"OK\"" {
-                        handler(.success(()))
-                    } else {
-                        let error = CustomErrors.serverError(text)
-                        handler(.failed(error))
-                    }
+                case .success(let data):
+                    let faceImageAllowed = FaceImageAllowedResponse(json: data, headerResponse: nil)
+                    handler(.success(faceImageAllowed))
                 case .failure(let error):
                     handler(.failed(error))
                 }
@@ -273,4 +284,5 @@ class AccountService: BaseRequestService, AccountServicePrl {
                 }
         }
     }
+    
 }

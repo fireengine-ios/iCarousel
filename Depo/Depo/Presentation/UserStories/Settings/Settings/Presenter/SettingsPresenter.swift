@@ -12,8 +12,6 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     var interactor: SettingsInteractorInput!
     var router: SettingsRouterInput!
     
-    private let authorityStorage: AuthorityStorage = factory.resolve()
-    
     private let cameraService = CameraService()
     
     var isPasscodeEmpty: Bool {
@@ -21,7 +19,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     var isPremiumUser: Bool {
-        return authorityStorage.isPremium ?? false
+        return AuthoritySingleton.shared.isPremium
     }
     
     func viewIsReady() {
@@ -171,6 +169,16 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     
     func profilePhotoUploadFailed(error: Error) {
         view.profileWontChangeWith(error: error)
+    }
+    
+    func didObtainUserStatus() {
+        asyncOperationSucces()
+        view.updateStatusUser()
+    }
+    
+    func didFailToObtainUserStatus(errorMessage: String) {
+        asyncOperationSucces()
+        router.showError(errorMessage: errorMessage)
     }
     
     func connectToNetworkFailed() {

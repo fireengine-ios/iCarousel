@@ -13,7 +13,7 @@ protocol OffersService {
     func activate(offer: OfferServiceResponse, success: SuccessResponse?, fail: @escaping FailResponse)
     func offersAllApple(success: SuccessResponse?, fail: @escaping FailResponse)
     func validateApplePurchase(with receiptId: String, productId: String?, success: SuccessResponse?, fail: @escaping FailResponse)
-    func initOffer(offer: OfferServiceResponse, success: SuccessResponse?, fail: @escaping FailResponse)
+    func initOffer(offer: PackageModelResponse, success: SuccessResponse?, fail: @escaping FailResponse)
     func verifyOffer(otp: String, referenceToken: String, success: SuccessResponse?, fail: @escaping FailResponse)
     func getJobExists(success: SuccessResponse?, fail: @escaping FailResponse)
     func submit(promocode: String, success: SuccessResponse?, fail: @escaping FailResponse)
@@ -53,10 +53,10 @@ class OffersServiceIml: BaseRequestService, OffersService {
         executePostRequest(param: param, handler: handler)
     }
     
-    func initOffer(offer: OfferServiceResponse, success: SuccessResponse?, fail: @escaping FailResponse) {
+    func initOffer(offer: PackageModelResponse, success: SuccessResponse?, fail: @escaping FailResponse) {
         debugLog("OffersServiceIml initOffer")
 
-        guard let id = offer.offerId else {
+        guard let id = offer.cometOfferId else {
             debugLog("OffersServiceIml initOffer error")
 
             fail(ErrorResponse.string("Invalid offer"))

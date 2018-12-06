@@ -802,6 +802,34 @@ struct TextConstants {
     
     static let renewalDate = NSLocalizedString("Renewal Date: %@", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let subscriptionEndDate = NSLocalizedString("Expiration Date: %@", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let cancelButtonTitle = NSLocalizedString("package_cancel_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packageSectionTitle = NSLocalizedString("package_section_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let availableHeadNameTitle = NSLocalizedString("available_head_name_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let packagePeriodDay = NSLocalizedString("package_period_day", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packagePeriodWeek = NSLocalizedString("package_period_week", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packagePeriodMonth = NSLocalizedString("package_period_month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packagePeriodYear = NSLocalizedString("package_period_year", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let packageApplePrice = NSLocalizedString("package_apple_price", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let packageAppleCancelText = NSLocalizedString("package_apple_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packageSLCMCancelText = NSLocalizedString("package_slcm_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packageGoogleCancelText = NSLocalizedString("package_google_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packageFreeOfChargeCancelText = NSLocalizedString("package_free_of_charge_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packageLifeCellCancelText = NSLocalizedString("package_lifecell_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packagePromoCancelText = NSLocalizedString("package_promo_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packageKKTCellCancelText = NSLocalizedString("package_kktcell_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packageMoldCellCancelText = NSLocalizedString("package_moldcell_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packageLifeCancelText = NSLocalizedString("package_life_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packagePaycellAllAccessCancelText = NSLocalizedString("package_paycell_all_access_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packagePaycellSLCMCancelText = NSLocalizedString("package_paycell_slcm_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packageDefaultCancelText = NSLocalizedString("package_default_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    
+    //MARK: - MyStorage
+    
+    static let myStorageUsage = NSLocalizedString("my_storage_usage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - Navigation bar img names
     
@@ -939,7 +967,6 @@ struct TextConstants {
     static let lifeboxPremium = NSLocalizedString("lifebox Premium", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteDuplicatedContactsForPremiumTitle = NSLocalizedString("Delete Duplicated Contacts For PremiumTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    
     //MARK: - PremiumBanner
     static let premiumBannerMessage = NSLocalizedString("premium_banner_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let standardBannerMessage = NSLocalizedString("standard_banner_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -958,4 +985,6 @@ struct TextConstants {
     //MARK: - PackageInfoView
     static let myStorage = NSLocalizedString("my_storage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let seeDetails = NSLocalizedString("see_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageGroupingDescription = NSLocalizedString("face_image_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageUpgrade = NSLocalizedString("face_image_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

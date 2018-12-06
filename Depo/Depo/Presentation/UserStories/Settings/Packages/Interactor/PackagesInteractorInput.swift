@@ -9,19 +9,14 @@
 import Foundation
 
 protocol PackagesInteractorInput {
-    func getOffers()
-    func checkJobExists()
-    func getOfferApples()
-    func getToken(for offer: OfferServiceResponse)
-    func getResendToken(for offer: OfferServiceResponse)
-    func activate(offerApple: OfferApple, planIndex: Int)
-    func verifyOffer(_ offer: OfferServiceResponse?, planIndex: Int, token: String, otp: String)
+    func getToken(for offer: PackageModelResponse)
+    func getResendToken(for offer: PackageModelResponse)
+    func activate(offer: PackageModelResponse, planIndex: Int)
+    func verifyOffer(_ offer: PackageModelResponse?, planIndex: Int, token: String, otp: String)
     func submit(promocode: String)
-    func getActiveSubscriptions()
+    func getAvailableOffers()
     func getAccountType()
-    func convertToSubscriptionPlans(offers: [OfferServiceResponse], accountType: AccountType) -> [SubscriptionPlan]
-    func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse], accountType: AccountType) -> [SubscriptionPlan]
-    func convertToSubscriptionPlans(offerApples: [OfferApple]) -> [SubscriptionPlan]
+    func convertToSubscriptionPlan(offers: [PackageModelResponse], accountType: AccountType) -> [SubscriptionPlan]
     
     func restorePurchases()
     func trackScreen()

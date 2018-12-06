@@ -21,5 +21,7 @@ protocol HomePageRouterInput {
     func moveToFavouritsFilesPage()
     
     func moveToCreationStory()
+    
+    func showError(errorMessage: String)
 
 }

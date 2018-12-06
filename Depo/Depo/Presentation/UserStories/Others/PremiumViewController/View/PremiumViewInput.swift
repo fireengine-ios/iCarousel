@@ -8,5 +8,6 @@
 
 import Foundation
 
-protocol PremiumViewInput: class {
+protocol PremiumViewInput: class, ActivityIndicator {
+    func displayFeatureInfo(price: String)
 }

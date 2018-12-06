@@ -26,4 +26,8 @@ class SyncContactsRouter: SyncContactsRouterInput {
         router.pushViewController(viewController: router.premium(title: TextConstants.duplicatedContacts, headerTitle: TextConstants.deleteDuplicatedContactsForPremiumTitle))
         
     }
+    
+    func showError(errorMessage: String) {
+        UIApplication.showErrorAlert(message: errorMessage)
+    }
 }
