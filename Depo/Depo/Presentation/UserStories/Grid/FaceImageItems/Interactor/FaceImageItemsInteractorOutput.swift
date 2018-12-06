@@ -13,5 +13,6 @@ protocol FaceImageItemsInteractorOutput {
         
     func didObtainFeaturePrice(_ price: String)
     func didObtainFeaturePacks(_ packs: [PackageModelResponse])
-    func didObtainAccountType(_ accountType: String, group: DispatchGroup)
+    func didObtainAccountType(_ accountType: String)
+    func didObtainAccountPermision(isAllowed: Bool)
 }

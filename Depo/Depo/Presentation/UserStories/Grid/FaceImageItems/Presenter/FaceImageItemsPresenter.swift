@@ -28,8 +28,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private var accountType: AccountType = .all
 
-    private var addFooterGroup: DispatchGroup?
-
     override func viewIsReady(collectionView: UICollectionView) {
         if let faceImageType = faceImageType {
             dataSource = FaceImageItemsDataSource(faceImageType: faceImageType, delegate: self)
@@ -271,7 +269,7 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
                 guard let authorities = feature.authorities else { continue }
                 if authorities.contains(where: { return $0.authorityType == .faceRecognition }) {
                     if let interactor = interactor as? FaceImageItemsInteractor {
-                        interactor.getInfoForAppleProducts(offer: feature, accountType: accountType, group: addFooterGroup)
+                        interactor.getInfoForAppleProducts(offer: feature, accountType: accountType)
                     }
                     break
                 }
@@ -279,13 +277,24 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         }
     }
     
-    func didObtainAccountType(_ accountType: String, group: DispatchGroup) {
-        addFooterGroup = group
+    func didObtainAccountType(_ accountType: String) {
         if accountType == "TURKCELL" {
             self.accountType = .turkcell
         }
         if let interactor = interactor as? FaceImageItemsInteractor {
-            interactor.getFeaturePacks(group: addFooterGroup)
+            interactor.getFeaturePacks()
+        }
+    }
+    
+    func didObtainAccountPermision(isAllowed: Bool) {
+        if isAllowed {
+            if let interactor = interactor as? FaceImageItemsInteractorInput {
+                interactor.checkAccountType()
+            }
+        } else {
+            if let interactor = interactor as? FaceImageItemsInteractorInput {
+                interactor.reloadFaceImageItems()
+            }
         }
     }
 }

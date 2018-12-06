@@ -255,6 +255,7 @@ extension PremiumInteractor: PremiumInteractorInput {
                                             }
                                             return
                                     }
+                                    
                                     DispatchQueue.toMain {
                                         self?.output.successed(tokenForOffer: token)
                                     }
