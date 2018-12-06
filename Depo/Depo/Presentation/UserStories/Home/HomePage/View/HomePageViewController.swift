@@ -47,8 +47,8 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         
-        CardsManager.default.addViewForNotification(view: homePageDataSource)
         homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
+        CardsManager.default.addViewForNotification(view: homePageDataSource)
         
         configurateRefreshControl()
         

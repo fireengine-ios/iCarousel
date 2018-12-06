@@ -294,7 +294,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 }
                 return order1 < order2
             })
-            collectionView.reloadData()
+            collectionView?.reloadData()
             delegate?.didReloadCollectionView(self.collectionView)
         }
     }
