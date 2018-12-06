@@ -16,6 +16,13 @@ final class ViewSortStorage {
     
     private(set) var favoritesViewType = MoreActionsConfig.ViewType.Grid
     private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    
+    func resetToDefault() {
+        allFilesViewType = MoreActionsConfig.ViewType.Grid
+        allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+        favoritesViewType = MoreActionsConfig.ViewType.Grid
+        favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    }
 }
 
 extension ViewSortStorage: BaseFilesGreedModuleOutput {
