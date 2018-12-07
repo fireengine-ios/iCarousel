@@ -30,6 +30,11 @@ class PackagesInteractor {
 // MARK: PackagesInteractorInput
 extension PackagesInteractor: PackagesInteractorInput {
 
+    func trackScreen() {
+        analyticsService.logScreen(screen: .packages)
+        analyticsService.trackDimentionsEveryClickGA(screen: .packages)
+    }
+    
     func getAvailableOffers() {
         accountService.availableOffers { [weak self] (result) in
             switch result {
@@ -43,11 +48,6 @@ extension PackagesInteractor: PackagesInteractorInput {
                 }
             }
         }
-    }
-    
-    func trackScreen() {
-        analyticsService.logScreen(screen: .packages)
-        analyticsService.trackDimentionsEveryClickGA(screen: .packages)
     }
     
     func getAccountType() {
