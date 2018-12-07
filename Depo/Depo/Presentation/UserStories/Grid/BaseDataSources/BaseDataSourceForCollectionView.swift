@@ -57,6 +57,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
     
     func newFolderCreated()
+    
+    func onSelectedFaceImageDemoCell(with indexPath: IndexPath)
 }
 
 extension BaseDataSourceForCollectionViewDelegate {
@@ -82,6 +84,8 @@ extension BaseDataSourceForCollectionViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) { }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) { }
+    
+    func onSelectedFaceImageDemoCell(with indexPath: IndexPath) {}
 }
 
 typealias PageItemsCallBack = ([WrapData])->Void
@@ -747,6 +751,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func registerFooters() {
+        let footerView = UINib(nibName: CollectionViewSuplementaryConstants.collectionViewPremiumFooter,
+                               bundle: nil)
+        collectionView?.register(footerView,
+                                forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+                                withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewPremiumFooter)
+        
         let headerNib = UINib(nibName: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter,
                               bundle: nil)
         collectionView?.register(headerNib,

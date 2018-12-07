@@ -24,6 +24,17 @@ enum FaceImageType {
         }
     }
     
+    var footerDescription: String {
+        switch self {
+        case .people:
+            return TextConstants.faceImageFaceRecognition
+        case .places:
+            return TextConstants.faceImagePlaceRecognition
+        case .things:
+            return TextConstants.faceImageThingRecognition
+        }
+    }
+    
     var myStreamType: MyStreamType {
         switch self {
         case .people:

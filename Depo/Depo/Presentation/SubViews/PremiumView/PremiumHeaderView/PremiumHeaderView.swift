@@ -36,7 +36,10 @@ final class PremiumHeaderView: UIView {
     }
     
     // MARK: Utility methods(Public)
-    func configure(with title: String, price: String, isHiddenTitleImageView: Bool?, titleEdgeInsets: UIEdgeInsets) {
+    func configure(with title: String,
+                   price: String,
+                   isHiddenTitleImageView: Bool?,
+                   titleEdgeInsets: UIEdgeInsets) {
         titleLabel.text = title
         
         let description = TextConstants.useFollowingPremiumMembership + " \(price)" + " \(TextConstants.additionalDataStoragePackage)"
@@ -44,6 +47,10 @@ final class PremiumHeaderView: UIView {
         
         premiumHeaderImageView.isHidden = isHiddenTitleImageView ?? false
         premiumButton.titleEdgeInsets = titleEdgeInsets
+    }
+    
+    func addSelectedAmination() {
+        premiumButton.addSingleSelectedAnimation()
     }
     
     // MARK: Utility methods(Private)

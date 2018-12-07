@@ -14,6 +14,7 @@ class PackagesInteractor {
     private let offersService: OffersService
     private let subscriptionsService: SubscriptionsService
     private let accountService: AccountServicePrl
+    private let packageService = PackageService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     init(offersService: OffersService = OffersServiceIml(),
@@ -23,64 +24,6 @@ class PackagesInteractor {
         self.offersService = offersService
         self.subscriptionsService = subscriptionsService
         self.accountService = accountService
-    }
-    
-    private func subscriptionPlanWith(name: String, priceString: String, type: SubscriptionPlanType, model: Any) -> SubscriptionPlan {
-        if name.contains("500") {
-            return SubscriptionPlan(name: name,
-                                    photosCount: 500_000,
-                                    videosCount: 50_000,
-                                    songsCount: 250_000,
-                                    docsCount: 5_000_000,
-                                    priceString: priceString,
-                                    type: type,
-                                    model: model)
-        } else if name.contains("50") {
-            return SubscriptionPlan(name: name,
-                                    photosCount: 50_000,
-                                    videosCount: 5_000,
-                                    songsCount: 25_000,
-                                    docsCount: 500_000,
-                                    priceString: priceString,
-                                    type: type,
-                                    model: model)
-        } else if name.contains("100") {
-            return SubscriptionPlan(name: name,
-                                    photosCount: 100_000,
-                                    videosCount: 10_000,
-                                    songsCount: 50_000,
-                                    docsCount: 1_000_000,
-                                    priceString: priceString,
-                                    type: type,
-                                    model: model)
-        } else if name.contains("2.5") || name.contains("2,5") {
-            return SubscriptionPlan(name: name,
-                                    photosCount: 2_560_000,
-                                    videosCount: 256_000,
-                                    songsCount: 1_280_000,
-                                    docsCount: 25_600_000,
-                                    priceString: priceString,
-                                    type: type,
-                                    model: model)
-        } else if name.contains("5") {
-            return SubscriptionPlan(name: name,
-                                    photosCount: 5_000,
-                                    videosCount: 500,
-                                    songsCount: 2_500,
-                                    docsCount: 50_000,
-                                    priceString: priceString,
-                                    type: type,
-                                    model: model)
-        } else {
-            return SubscriptionPlan(name: name,
-                                    photosCount: 0,
-                                    videosCount: 0,
-                                    songsCount: 0,
-                                    docsCount: 0,
-                                    priceString: priceString,
-                                    type: type,
-                                    model: model)
-        }
     }
 }
 
@@ -231,19 +174,15 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
-        let appleOffers = offers.flatMap({ return $0.inAppPurchaseId })
-        iapManager.loadProducts(productIds: appleOffers) { [weak self] response in
-            switch response {
-            case .success(_):
-                DispatchQueue.toMain {
-                    self?.output.successed(allOffers: offers)
-                }
-            case .failed(let error):
-                DispatchQueue.toMain {
-                    self?.output.failed(with: error.localizedDescription)
-                }
+        packageService.getInfoForAppleProducts(offers: offers, success: {
+            DispatchQueue.toMain {
+                self.output.successed(allOffers: offers)
             }
-        }
+        }, fail: { error in
+            DispatchQueue.toMain {
+                self.output.failed(with: error.localizedDescription)
+            }
+        })
     }
     
     func activate(offer: PackageModelResponse, planIndex: Int) {
@@ -366,39 +305,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func convertToSubscriptionPlan(offers: [PackageModelResponse], accountType: AccountType) -> [SubscriptionPlan]  {
-        return offers.flatMap({ offer in
-            let price = offer.price ?? 0
-            
-            let priceString: String!
-            if offer.type == .apple, let product = iapManager.product(for: offer.inAppPurchaseId ?? "") {
-                let price = product.localizedPrice
-                let period: String!
-                if #available(iOS 11.2, *) {
-                    switch product.subscriptionPeriod?.unit.rawValue {
-                    case 0:
-                        period = TextConstants.packagePeriodDay
-                    case 1:
-                        period = TextConstants.packagePeriodWeek
-                    case 2:
-                        period = TextConstants.packagePeriodMonth
-                    case 3:
-                        period = TextConstants.packagePeriodYear
-                    default:
-                        period = TextConstants.packagePeriodMonth
-                    }
-                } else {
-                    period = (offer.period ?? "").lowercased()
-                }
-                priceString = String(format: TextConstants.packageApplePrice, price, period)
-            } else {
-                let currency = offer.currency ?? getCurrency(for: accountType)
-                priceString = String(format: TextConstants.offersPrice, price, currency)
-            }
-            
-            let name = offer.quota?.bytesString ?? (offer.displayName ?? "")
-            
-            return subscriptionPlanWith(name: name, priceString: priceString, type: .default, model: offer)
-        })
+        return packageService.convertToSubscriptionPlan(offers: offers, accountType: accountType)
     }
 
     func restorePurchases() {
@@ -452,21 +359,5 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
         
         return true
-    }
-    
-    private func getCurrency(for accountType: AccountType) -> String {
-        switch accountType {
-        ///https://en.wikipedia.org/wiki/Northern_Cyprus
-        case .turkcell, .cyprus:
-            return "TL"
-        case .ukranian:
-            return "UAH"
-        case .moldovian:
-            return "MDL"
-        case .life:
-            return "BYN"
-        case .all:
-            return "$" /// temp
-        }
     }
 }

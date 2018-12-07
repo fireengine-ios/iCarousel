@@ -13,75 +13,25 @@ final class PremiumInteractor {
     private let iapManager = IAPManager.shared
     private let accountService: AccountServicePrl = AccountService()
     private let offersService: OffersService = OffersServiceIml()
+    private let packageService: PackageService = PackageService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     //MARK: - Utility Methids(public)
     func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String {
-        if let iapProductId = offer.inAppPurchaseId, let product = iapManager.product(for: iapProductId) {
-            let price = product.localizedPrice
-            let period: String
-            if #available(iOS 11.2, *) {
-                switch product.subscriptionPeriod?.unit.rawValue {
-                case 0:
-                    period = TextConstants.packagePeriodDay
-                case 1:
-                    period = TextConstants.packagePeriodWeek
-                case 2:
-                    period = TextConstants.packagePeriodMonth
-                case 3:
-                    period = TextConstants.packagePeriodYear
-                default:
-                    period = TextConstants.packagePeriodMonth
-                }
-            } else {
-                period = (offer.period ?? "").lowercased()
-            }
-            return String(format: TextConstants.packageApplePrice, price, period)
-        } else {
-            if let price = offer.price {
-                let currency = offer.currency ?? getCurrency(for: accountType)
-                if let period = offer.period?.lowercased() {
-                    return String(format: TextConstants.packageApplePrice, (String(price) + " " + currency), period)
-                } else {
-                    return String(price) + " " + currency
-                }
-            } else {
-                return TextConstants.free
-            }
-        }
+        return packageService.getPriceInfo(for: offer, accountType: accountType)
     }
     
     //MARK: - Utility Methids(private)
-    private func getCurrency(for accountType: AccountType) -> String {
-        switch accountType {
-        ///https://en.wikipedia.org/wiki/Northern_Cyprus
-        case .turkcell, .cyprus:
-            return "TL"
-        case .ukranian:
-            return "UAH"
-        case .moldovian:
-            return "MDL"
-        case .life:
-            return "BYN"
-        case .all:
-            return "$" /// temp
-        }
-    }
-    
     private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
-        let appleOffers = offers.flatMap({ return $0.inAppPurchaseId })
-        iapManager.loadProducts(productIds: appleOffers) { [weak self] response in
-            switch response {
-            case .success(_):
-                DispatchQueue.toMain {
-                    self?.output.successed(allFeatures: offers)
-                }
-            case .failed(let error):
-                DispatchQueue.toMain {
-                    self?.output.failed(with: error.localizedDescription)
-                }
+        packageService.getInfoForAppleProducts(offers: offers, success: { [weak self] in
+            DispatchQueue.toMain {
+                self?.output.successed(allFeatures: offers)
             }
-        }
+        }, fail: { [weak self] error in
+            DispatchQueue.toMain {
+                self?.output.failed(with: error.localizedDescription)
+            }
+        })
     }
 }
 
@@ -255,6 +205,7 @@ extension PremiumInteractor: PremiumInteractorInput {
                                             }
                                             return
                                     }
+                                    
                                     DispatchQueue.toMain {
                                         self?.output.successed(tokenForOffer: token)
                                     }

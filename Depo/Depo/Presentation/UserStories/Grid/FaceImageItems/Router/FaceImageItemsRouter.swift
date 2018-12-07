@@ -9,7 +9,7 @@
 import Foundation
 
 final class FaceImageItemsRouter: BaseFilesGreedRouter {
-    
+    let router = RouterVC()
 }
 
 // MARK: FaceImageItemsRouterInput
@@ -17,15 +17,21 @@ final class FaceImageItemsRouter: BaseFilesGreedRouter {
 extension FaceImageItemsRouter: FaceImageItemsRouterInput {
     
     func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem, moduleOutput: FaceImageItemsModuleOutput?) {
-        let router = RouterVC()
         let vc = router.imageFacePhotosController(album: album, item: item, moduleOutput: moduleOutput)
         router.pushViewController(viewController: vc)
     }
     
     func showPopUp() {
         let popUp = PopUpController.with(title: nil, message: TextConstants.faceImageWaitAlbum, image: .none, buttonTitle: TextConstants.ok)
-        
-        RouterVC().presentViewController(controller: popUp)
+        router.presentViewController(controller: popUp)
     }
     
+    func openPremium(title: String, headerTitle: String, module: FaceImageItemsModuleOutput) {
+        let vc = router.premium(title: title, headerTitle: headerTitle, module: module)
+        router.pushViewController(viewController: vc)
+    }
+    
+    func display(error: String) {
+        UIApplication.showErrorAlert(message: error)
+    }
 }

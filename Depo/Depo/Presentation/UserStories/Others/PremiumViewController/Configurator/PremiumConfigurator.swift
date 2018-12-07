@@ -10,10 +10,14 @@ import Foundation
 
 final class PremiumModuleConfigurator {
     
-    func configure(viewController: PremiumViewController, title: String, headerTitle: String, authority: PackagePackAuthoritiesResponse.AuthorityType? = nil) {
+    func configure(viewController: PremiumViewController,
+                   title: String,
+                   headerTitle: String,
+                   authority: PackagePackAuthoritiesResponse.AuthorityType? = nil,
+                   module: FaceImageItemsModuleOutput?) {
         let router = PremiumRouter()
         
-        let presenter = PremiumPresenter(title: title, headerTitle: headerTitle, authority: authority)
+        let presenter = PremiumPresenter(title: title, headerTitle: headerTitle, authority: authority, module: module)
         presenter.view = viewController
         presenter.router = router
         
