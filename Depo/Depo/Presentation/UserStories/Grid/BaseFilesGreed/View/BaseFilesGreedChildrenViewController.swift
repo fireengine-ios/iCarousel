@@ -52,7 +52,6 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     }
     
     override func stopSelection() {
-        configureNavBarActions(isSelecting: false)
         underNavBarBar?.setSorting(enabled: true)
         
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
@@ -68,6 +67,8 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         } else {
             navigationBarWithGradientStyle()
         }
+        
+        configureNavBarActions(isSelecting: false)
     }
 
     override func configurateNavigationBar() {
