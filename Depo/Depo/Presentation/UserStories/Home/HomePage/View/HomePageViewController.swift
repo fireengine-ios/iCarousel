@@ -185,7 +185,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
             }
             
             let verticalSpace: CGFloat = 20
-            let navBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height + 44
+            let navBarHeight: CGFloat = 44
             
             frame = CGRect(x: 0, y: premiumCardFrame.height + navBarHeight + verticalSpace, width: premiumCardFrame.width, height: collectionView.frame.height - premiumCardFrame.height - verticalSpace)
             
