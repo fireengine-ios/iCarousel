@@ -14,6 +14,8 @@ final class PremiumPresenter {
     var interactor: PremiumInteractorInput!
     var router: PremiumRouterInput!
     
+    weak var moduleOutput: FaceImageItemsModuleOutput?
+    
     var title: String
     var headerTitle: String
     var authority: PackagePackAuthoritiesResponse.AuthorityType = .premiumUser
@@ -29,11 +31,15 @@ final class PremiumPresenter {
         }
     }
     
-    init(title: String, headerTitle: String, authority: PackagePackAuthoritiesResponse.AuthorityType?) {
+    init(title: String, headerTitle: String, authority: PackagePackAuthoritiesResponse.AuthorityType?, module: FaceImageItemsModuleOutput?) {
         self.title = title
         self.headerTitle = headerTitle
-        guard let authority = authority else { return }
-        self.authority = authority
+        if let authority = authority {
+            self.authority = authority
+        }
+        if let module = module {
+            moduleOutput = module
+        }
     }
     
     //MARK: Utility Methods(private)
@@ -170,6 +176,9 @@ extension PremiumPresenter: PremiumInteractorOutput {
     //MARK: finish purchase
     func purchaseFinished() {
         view?.stopActivityIndicator()
+        if let moduleOutput = moduleOutput {
+            moduleOutput.didReloadData()
+        }
         router.goToBack()
     }
 }

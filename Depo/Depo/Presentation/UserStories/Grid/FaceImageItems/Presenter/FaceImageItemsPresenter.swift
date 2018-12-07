@@ -24,7 +24,14 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private var forceLoadNextItems = false
     
-    override func viewIsReady(collectionView: UICollectionView) {        
+    private var featureType: PackageModelResponse.FeaturePackageType = .appleFeature
+    
+    private var accountType: AccountType = .all
+
+    override func viewIsReady(collectionView: UICollectionView) {
+        if let faceImageType = faceImageType {
+            dataSource = FaceImageItemsDataSource(faceImageType: faceImageType, delegate: self)
+        }
         super.viewIsReady(collectionView: collectionView)
         
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.cellForFaceImage)
@@ -53,9 +60,15 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         dataSource.allMediaItems.forEach { peopleItem in
             if let peopleItem = peopleItem as? PeopleItem,
             let isVisible = peopleItem.responseObject.visible,
-            peopleItem.uuid == item.uuid {
+            peopleItem.uuid == item.uuid, peopleItem.responseObject.isDemo == false {
                 peopleItem.responseObject.visible = !isVisible
             }
+        }
+    }
+    
+    override func onSelectedFaceImageDemoCell(with indexPath: IndexPath) {
+        if let dataSource = dataSource as? FaceImageItemsDataSource {
+            dataSource.didAnimationForPremiumButton(with: indexPath)
         }
     }
     
@@ -226,9 +239,7 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     func didSaveChanges(_ items: [PeopleItem]) {
         isChangeVisibilityMode = false
         dataSource.setSelectionState(selectionState: false)
-        
-        asyncOperationSucces()
-        
+                
         view.stopSelection()
         
         albumSliderModuleOutput?.reload(type: .people)
@@ -243,6 +254,56 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         }
     }
     
+    func didFailed(errorMessage: String) {
+        if let router = self.router as? FaceImageItemsRouter {
+            router.display(error: errorMessage)
+        }
+    }
+    
+    func didObtainFeaturePrice(_ price: String) {
+        if let dataSource = dataSource as? FaceImageItemsDataSource,
+            let interactor = interactor as? FaceImageItemsInteractor{
+            dataSource.price = price
+            interactor.reloadFaceImageItems()
+        }
+    }
+    
+    func didObtainFeaturePacks(_ packs: [PackageModelResponse]) {
+        featureType = accountType == .all ? .appleFeature : .SLCMFeature
+        for feature in packs {
+            if feature.featureType == featureType {
+                
+                if let authorities = feature.authorities,
+                    let interactor = interactor as? FaceImageItemsInteractor,
+                    authorities.contains(where: { return $0.authorityType == .faceRecognition }) {
+                    
+                    interactor.getPriceInfo(offer: feature, accountType: accountType)
+                    break
+                }
+            }
+        }
+    }
+    
+    func didObtainAccountType(_ accountType: String) {
+        if accountType == "TURKCELL" {
+            self.accountType = .turkcell
+        }
+        if let interactor = interactor as? FaceImageItemsInteractor {
+            interactor.getFeaturePacks()
+        }
+    }
+    
+    func didObtainAccountPermision(isAllowed: Bool) {
+        if !isAllowed {
+            if let interactor = interactor as? FaceImageItemsInteractorInput {
+                interactor.checkAccountType()
+            }
+        } else {
+            if let interactor = interactor as? FaceImageItemsInteractorInput {
+                interactor.reloadFaceImageItems()
+            }
+        }
+    }
 }
 
 // MARK: FaceImageItemsViewOutput
@@ -290,4 +351,15 @@ extension FaceImageItemsPresenter: FaceImageItemsModuleOutput {
     func delete(item: Item) {
         dataSource.deleteItems(items: [item])
     }
+}
+
+// MARK: - FaceImageDataSourceDelegate
+extension FaceImageItemsPresenter: FaceImageItemsDataSourceDelegate {
+    
+    func onBecomePremiumTap() {
+        if let router = router as? FaceImageItemsRouter {
+            router.openPremium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember, module: self)
+        }
+    }
+    
 }

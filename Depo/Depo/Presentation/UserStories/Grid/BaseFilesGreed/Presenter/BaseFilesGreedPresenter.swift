@@ -347,6 +347,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onItemSelectedActiveState(item: BaseDataSourceItem) { }
     
+    func onSelectedFaceImageDemoCell(with indexPath: IndexPath) { }
+    
     private func getSameTypeItems(item: BaseDataSourceItem, items: [[BaseDataSourceItem]]) -> [BaseDataSourceItem] {
         let allItems = items.flatMap { $0 }
         if item.fileType.isDocument {

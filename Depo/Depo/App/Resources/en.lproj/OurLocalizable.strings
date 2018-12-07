@@ -721,6 +721,7 @@
 "package_period_month" = "month";
 "package_period_year" = "year";
 
+"face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@ / %@";
 
 "package_apple_cancel_text" = "Apple subscription cancel text.";
@@ -741,6 +742,12 @@
 "see_details" = "See Details";
 "face_image_description" = "Since you have a standart account, 100 of your images will be processed for face recognition and only 3 of your contacts' face will show";
 "face_image_upgrade" = "Upgrade to lifebox Premium for your entire picture gallery and use this feature without any limitation";
+
+/* FaceImagePremiumFooterView */
+"face_image_footer_view_message" = "To see all the %@ in your gallery and unlock many more features become a Premium member!";
+"face_image_face_recognition" = "faces";
+"face_image_place_recognition" = "places";
+"face_image_thing_recognition" = "things";
 
 /* PackageViewController */
 "package_cancel_button" = "Leave Membership";

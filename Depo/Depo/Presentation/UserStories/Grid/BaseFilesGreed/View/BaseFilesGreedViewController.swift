@@ -354,7 +354,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navigationItem.title = title
     }
     
-    static let sliderH: CGFloat = 180
+    static let sliderH: CGFloat = 139
     
     private func setupSlider(sliderController: LBAlbumLikePreviewSliderViewController) {
         contentSlider = sliderController

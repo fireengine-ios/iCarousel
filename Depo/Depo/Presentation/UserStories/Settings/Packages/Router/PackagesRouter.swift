@@ -18,7 +18,7 @@ extension PackagesRouter: PackagesRouterInput {
     }
 
     func openLeavePremium() {
-        let vc = router.leavePremium(title: TextConstants.lifeboxPremium, activeSubscriptions: [])
+        let vc = router.leavePremium(title: TextConstants.lifeboxPremium)
         router.pushViewController(viewController: vc)
     }
     

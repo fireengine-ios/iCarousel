@@ -14,6 +14,9 @@ struct ThingsJsonKey {
     static let thumbnail = "thumbnail"
     static let name = "name"
     static let objectInfos = "objectInfos"
+    static let demo = "Demo"
+    static let rank = "rank"
+    static let alternateThumbnail = "alternateThumbnail"
 }
 
 final class ThingsItemResponse: ObjectRequestResponse {
@@ -22,12 +25,18 @@ final class ThingsItemResponse: ObjectRequestResponse {
     var code: String?
     var thumbnail: URL?
     var name: String?
+    var isDemo: Bool?
+    var rank: Int64?
+    var alternateThumbnail: URL?
     
     override func mapping() {
         id = json?[ThingsJsonKey.id].int64
         code = json?[ThingsJsonKey.code].string
         thumbnail = json?[ThingsJsonKey.thumbnail].url
         name = json?[ThingsJsonKey.name].string
+        isDemo = json?[ThingsJsonKey.demo].bool
+        rank = json?[ThingsJsonKey.rank].int64
+        alternateThumbnail = json?[ThingsJsonKey.alternateThumbnail].url
 
     }
 }

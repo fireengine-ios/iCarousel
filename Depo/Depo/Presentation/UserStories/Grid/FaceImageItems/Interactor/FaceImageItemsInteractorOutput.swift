@@ -10,4 +10,11 @@ protocol FaceImageItemsInteractorOutput {
     func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item)
     func didSaveChanges(_ items: [PeopleItem])
     func didShowPopUp()
+    
+    func didFailed(errorMessage: String)
+    
+    func didObtainFeaturePrice(_ price: String)
+    func didObtainFeaturePacks(_ packs: [PackageModelResponse])
+    func didObtainAccountType(_ accountType: String)
+    func didObtainAccountPermision(isAllowed: Bool)
 }

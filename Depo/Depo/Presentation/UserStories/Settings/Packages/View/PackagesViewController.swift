@@ -55,6 +55,7 @@ final class PackagesViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        output.viewWillAppear()
         setupStackView(with: output.getStorageCapacity())
     }
     
@@ -114,7 +115,7 @@ final class PackagesViewController: BaseViewController {
 // MARK: PackagesViewInput
 extension PackagesViewController: PackagesViewInput {
 
-    func reloadPackages() {
+    func reloadData() {
         collectionView.reloadData()
     }
     
@@ -125,7 +126,7 @@ extension PackagesViewController: PackagesViewInput {
         promoView.endEditing(true)
         promoView.codeTextField.text = ""
         promoView.errorLabel.text = ""
-        reloadPackages()
+        reloadData()
     }
     
     func show(promocodeError: String) {
@@ -163,13 +164,24 @@ extension PackagesViewController: PackagesViewInput {
         for view in topStackView.arrangedSubviews {
             view.removeFromSuperview()
         }
-
         let isPremium = AuthoritySingleton.shared.isPremium
 
         let firstView = PackageInfoView.initFromNib()
-        isPremium ?
-            firstView.configure(with: .premiumUser) :
+        if isPremium {
+            firstView.configure(with: .premiumUser)
+        } else {
             firstView.configure(with: .standard)
+            let standartUserLabel = UILabel()
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.firstLineHeadIndent = 16
+            let attributedString = NSAttributedString(string: TextConstants.standardUser, attributes: [
+                .font : UIFont.TurkcellSaturaDemFont(size: 16),
+                .foregroundColor : ColorConstants.textGrayColor,
+                .paragraphStyle : paragraphStyle,
+                ])
+            standartUserLabel.attributedText = attributedString
+            topStackView.addArrangedSubview(standartUserLabel)
+        }
 
         let secondView = PackageInfoView.initFromNib()
         secondView.configure(with: .myStorage, capacity: storageCapacity)

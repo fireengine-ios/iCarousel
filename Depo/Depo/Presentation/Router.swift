@@ -837,15 +837,15 @@ class RouterVC: NSObject {
     
     // MARK: - Premium
     
-    func premium(title: String, headerTitle: String) -> UIViewController{
-        let controller = PremiumModuleInitializer.initializePremiumController(with: "PremiumViewController", title: title, headerTitle: headerTitle)
+    func premium(title: String, headerTitle: String, module: FaceImageItemsModuleOutput? = nil) -> UIViewController{
+        let controller = PremiumModuleInitializer.initializePremiumController(with: "PremiumViewController", title: title, headerTitle: headerTitle, module: module)
         return controller
     }
     
     // MARK: - Leave Premium
 
-    func leavePremium(title: String, activeSubscriptions: [SubscriptionPlanBaseResponse]) -> UIViewController{
-        let controller = LeavePremiumModuleInitializer.initializeLeavePremiumController(with: "LeavePremiumViewController", title: title, activeSubscriptions: activeSubscriptions)
+    func leavePremium(title: String) -> UIViewController{
+        let controller = LeavePremiumModuleInitializer.initializeLeavePremiumController(with: "LeavePremiumViewController", title: title)
         return controller
     }
 
