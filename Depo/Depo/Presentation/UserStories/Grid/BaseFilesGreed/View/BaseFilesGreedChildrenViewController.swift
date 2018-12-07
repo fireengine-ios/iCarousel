@@ -47,7 +47,7 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         selectedItemsCountChange(with: numberOfItems)
         underNavBarBar?.setSorting(enabled: false)
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
-        navigationItem.leftBarButtonItem = cancelSelectionButton!
+        navigationItem.leftBarButtonItem = cancelSelectionButton
         navigationBarWithGradientStyle()
     }
     

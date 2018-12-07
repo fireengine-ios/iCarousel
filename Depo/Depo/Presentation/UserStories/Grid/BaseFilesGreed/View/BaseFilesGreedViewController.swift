@@ -254,7 +254,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func startSelection(with numberOfItems: Int) {
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
-        navigationItem.leftBarButtonItem = cancelSelectionButton!
+        navigationItem.leftBarButtonItem = cancelSelectionButton
         selectedItemsCountChange(with: numberOfItems)
         navigationBarWithGradientStyle()
         configureNavBarActions(isSelecting: true)
