@@ -54,7 +54,7 @@ extension MyStorageViewController: MyStorageViewInput {
         
         let storageString = String(format: TextConstants.myStorageUsage, left.bytesString, full.bytesString)
         
-        //TODO: - think how to change this code aradic writing
+        //TODO: - think how to change this code for RTL languages
         
 //        guard let lastWord = storageString.lastIndex(of: " ") else { return }
 //        let lastWordLocation = storageString.distance(from: storageString.startIndex,

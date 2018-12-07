@@ -14,7 +14,7 @@ class PackagesInteractor {
     private let offersService: OffersService
     private let subscriptionsService: SubscriptionsService
     private let accountService: AccountServicePrl
-    private let packageService =  PackageService()
+    private let packageService = PackageService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     init(offersService: OffersService = OffersServiceIml(),

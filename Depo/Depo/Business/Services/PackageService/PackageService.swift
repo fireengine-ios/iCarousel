@@ -102,7 +102,7 @@ final class PackageService {
     }
     
     private func getOfferPeriod(for offer: Any) -> String? {
-        var period: String? = nil
+        var period: String?
         if let offer = offer as? PackageModelResponse, let periodString = offer.period {
             period = periodString.lowercased()
         } else if let offer = offer as? SubscriptionPlanBaseResponse, let periodString = offer.subscriptionPlanPeriod {
@@ -112,7 +112,7 @@ final class PackageService {
     }
 
     private func getOfferPrice(for offer: Any) -> String? {
-        var price: String? = nil
+        var price: String?
         if let offer = offer as? PackageModelResponse, let priceFloat = offer.price {
             price = String(priceFloat)
         } else if let offer = offer as? SubscriptionPlanBaseResponse, let priceFloat = offer.subscriptionPlanPrice {
@@ -122,7 +122,7 @@ final class PackageService {
     }
 
     private func getOfferCurrency(for offer: Any) -> String? {
-        var currency: String? = nil
+        var currency: String?
         if let offer = offer as? PackageModelResponse, let currencyString = offer.currency {
             currency = currencyString
         } else if let offer = offer as? SubscriptionPlanBaseResponse, let currencyString = offer.subscriptionPlanCurrency {
@@ -132,7 +132,7 @@ final class PackageService {
     }
     
     private func getOfferQuota(for offer: Any) -> Int64? {
-        var quota: Int64? = nil
+        var quota: Int64?
         if let offer = offer as? PackageModelResponse, let quotaString = offer.quota {
             quota = quotaString
         } else if let offer = offer as? SubscriptionPlanBaseResponse, let quotaString = offer.subscriptionPlanQuota {
@@ -142,7 +142,7 @@ final class PackageService {
     }
     
     private func getOfferDisplayName(for offer: Any) -> String? {
-        var displayName: String? = nil
+        var displayName: String?
         if let offer = offer as? PackageModelResponse, let displayNameString = offer.displayName {
             displayName = displayNameString
         } else if let offer = offer as? SubscriptionPlanBaseResponse, let displayNameString = offer.subscriptionPlanDisplayName {
