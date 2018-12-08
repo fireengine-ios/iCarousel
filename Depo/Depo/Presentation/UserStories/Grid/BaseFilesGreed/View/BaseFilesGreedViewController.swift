@@ -165,7 +165,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         })
         let rightActions: [NavBarWithAction] = isSelecting ? [more] : [more, search]
         navBarConfigurator.configure(right: rightActions, left: [])
+    
+        let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+        navigationItem.title = ""
     }
     
     func configurateFreeAppSpaceActions(deleteAction: @escaping VoidHandler) {
@@ -250,7 +253,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func startSelection(with numberOfItems: Int) {
-        navigationItem.leftBarButtonItem = cancelSelectionButton!
+        let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
+        navigationItem.leftBarButtonItem = cancelSelectionButton
         selectedItemsCountChange(with: numberOfItems)
         navigationBarWithGradientStyle()
         configureNavBarActions(isSelecting: true)
@@ -258,13 +262,16 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func stopSelection() {
-        self.navigationItem.leftBarButtonItem = nil
+        let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
+        navigationItem.leftBarButtonItem = nil
+        
         homePageNavigationBarStyle()
         configureNavBarActions(isSelecting: false)
         underNavBarBar?.setSorting(enabled: true)
     }
     
     func setThreeDotsMenu(active isActive: Bool) {
+        let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.rightBarButtonItem?.isEnabled = isActive
         
         if let threeDotsItem = navigationItem.rightBarButtonItems?.first(where: {$0.accessibilityLabel == TextConstants.accessibilityMore}) {
@@ -304,11 +311,13 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func requestStarted() {
         backAsCancelBarButton?.isEnabled = false
+        let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     func requestStopped() {
         backAsCancelBarButton?.isEnabled = true
+        let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
@@ -339,7 +348,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func selectedItemsCountChange(with count: Int) {
-        setTitle(withString: String(count) + " " + TextConstants.accessibilitySelected)
+        let title = String(count) + " " + TextConstants.accessibilitySelected
+        setTitle(withString: title)
+        let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
+        navigationItem.title = title
     }
     
     static let sliderH: CGFloat = 139

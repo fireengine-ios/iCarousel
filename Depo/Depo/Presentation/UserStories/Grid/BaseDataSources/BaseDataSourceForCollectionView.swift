@@ -1574,19 +1574,21 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         if let `self` = self{
                             self.collectionView?.reloadItems(at: arrayOfPath)
                         }
-                        }, completion: nil)
+                    }, completion: nil)
                 }
             }
         }
     }
     
-    func addFilesToFavorites(items: [Item]){
+    func addFilesToFavorites(items: [Item]) {
         if let unwrapedFilters = originalFilters, isFavoritesOnly(filters: unwrapedFilters) {
-            delegate?.needReloadData()
-        }else{
+            /// we need delay for server update. we fetch new items from server for favorites screen
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.delegate?.needReloadData()
+            }
+        } else {
             updateFavoritesCellStatus(items: items, isFavorites: true)
         }
-        
     }
     
     func removeFileFromFavorites(items: [Item]){

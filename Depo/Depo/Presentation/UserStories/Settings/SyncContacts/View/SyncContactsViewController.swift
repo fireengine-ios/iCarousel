@@ -46,6 +46,8 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     
     var output: SyncContactsViewOutput!
     
+    var tabBarSetup = false
+    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,6 +101,10 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         cancelButton.adjustsFontSizeToFitWidth()
         deleteDuplicatedButton.adjustsFontSizeToFitWidth()
         
+        if tabBarSetup {
+            needShowTabBar = true
+        }
+        
         output.viewIsReady()
         
         MenloworksAppEvents.onContactSyncPageOpen()
@@ -110,8 +116,12 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
-        setTitle(withString: TextConstants.backUpMyContacts)
+        if tabBarSetup {
+            homePageNavigationBarStyle()
+        } else {
+            navigationBarWithGradientStyle()
+            setTitle(withString: TextConstants.backUpMyContacts)
+        }
     }
     
     // MARK: buttons action

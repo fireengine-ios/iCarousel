@@ -397,6 +397,8 @@ class AuthenticationService: BaseRequestService {
             SyncSettings.shared().periodicBackup = SYNCPeriodic.none
             ItemOperationManager.default.clear()
             ItemsRepository.sharedSession.dropCache()
+            ViewSortStorage.shared.resetToDefault()
+            
             self.player.stop()
             self.cancellAllRequests()
             

@@ -217,10 +217,16 @@ class RouterVC: NSObject {
     }
     
     func isOnFavoritesView() -> Bool {
-        if let tabBarVc = tabBarVC {
-            if let contr = tabBarVc.viewControllers.last as? BaseFilesGreedViewController {
-                return contr.isFavorites
-            }
+        guard let tabBarVc = tabBarVC else {
+            return false
+        }
+        
+        if let contr = tabBarVc.viewControllers.last as? BaseFilesGreedViewController {
+            return contr.isFavorites
+        } else if let contr = tabBarVc.viewControllers.last as? SegmentedController,
+            let currentVC = contr.currentController as? BaseFilesGreedViewController
+        {
+            return currentVC.isFavorites
         }
         
         return false
@@ -387,9 +393,48 @@ class RouterVC: NSObject {
     // MARK: Music
     
     var musics: UIViewController? {
-  
         let controller = BaseFilesGreedModuleInitializer.initializeMusicViewController(with: "BaseFilesGreedViewController")
         return controller
+    }
+    
+    
+    private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
+    private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    
+    private(set) var favoritesViewType = MoreActionsConfig.ViewType.Grid
+    private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    
+    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
+        if fieldType == .all {
+            self.allFilesViewType = type
+            self.allFilesSortType = sortedType
+        } else if fieldType == .favorite {
+            self.favoritesViewType = type
+            self.favoritesSortType = sortedType
+        }
+    }
+    
+    var favorites: UIViewController? {
+        let storage = ViewSortStorage.shared
+        return favorites(moduleOutput: storage,
+                         sortType: storage.favoritesSortType,
+                         viewType: storage.favoritesViewType)
+    }
+    
+    var allFiles: UIViewController? {
+        let storage = ViewSortStorage.shared
+        return allFiles(moduleOutput: storage,
+                        sortType: storage.allFilesSortType,
+                        viewType: storage.allFilesViewType)
+    }
+    
+    var segmentedFiles: UIViewController? {
+        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles else {
+            assertionFailure()
+            return SegmentedController()
+        }
+        let controllers = [allFiles, documents, musics, favorites]
+        return SegmentedController.initWithControllers(controllers)
     }
     
     

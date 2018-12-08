@@ -10,15 +10,20 @@ import Foundation
 
 class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     
-    override func configureNavBarActions(isSelecting: Bool = false) {
-        super.configureNavBarActions(isSelecting: isSelecting)
-        defaultNavBarStyle()
-        navigationBarWithGradientStyle()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        homePageNavigationBarStyle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
+        
+        if let _ = parent as? SegmentedController {
+            homePageNavigationBarStyle()
+        } else {
+            navigationBarWithGradientStyle()
+        }
+        
         if mainTitle != "" {
             subTitle = output.getSortTypeString()
         }
@@ -30,17 +35,29 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         configureNavBarActions(isSelecting: true)
         selectedItemsCountChange(with: numberOfItems)
         underNavBarBar?.setSorting(enabled: false)
-        navigationItem.leftBarButtonItem = cancelSelectionButton!
+        let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
+        navigationItem.leftBarButtonItem = cancelSelectionButton
+        navigationBarWithGradientStyle()
     }
     
     override func stopSelection() {
-        configureNavBarActions(isSelecting: false)
         underNavBarBar?.setSorting(enabled: true)
+        
+        let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.leftBarButtonItem = nil
+        
         if mainTitle != "" {
             subTitle = output.getSortTypeString()
         }
         setTitle(withString: mainTitle, andSubTitle: subTitle)
+        
+        if let _ = parent as? SegmentedController {
+            homePageNavigationBarStyle()
+        } else {
+            navigationBarWithGradientStyle()
+        }
+        
+        configureNavBarActions(isSelecting: false)
     }
 
     override func configurateNavigationBar() {
@@ -50,5 +67,4 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     override func isNeedShowTabBar() -> Bool {
         return needShowTabBar
     }
-    
 }
