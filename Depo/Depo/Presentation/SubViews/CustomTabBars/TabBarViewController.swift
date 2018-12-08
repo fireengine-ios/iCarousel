@@ -178,7 +178,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         let items = [("outlineHome", "", TextConstants.accessibilityHome),
                      ("outlinePhotosVideos", "", TextConstants.accessibilityPhotosVideos),
                      ("", "", ""),
-                     //!!!
                      ("outlineContacts", "", TextConstants.periodicContactsSync),
                      ("outlineDocs", "", TextConstants.homeButtonAllFiles)]
         
