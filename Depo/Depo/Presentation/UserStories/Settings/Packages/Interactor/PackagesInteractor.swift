@@ -174,13 +174,13 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
-        packageService.getInfoForAppleProducts(offers: offers, success: {
+        packageService.getInfoForAppleProducts(offers: offers, success: { [weak self] in
             DispatchQueue.toMain {
-                self.output.successed(allOffers: offers)
+                self?.output.successed(allOffers: offers)
             }
-        }, fail: { error in
+        }, fail: { [weak self] error in
             DispatchQueue.toMain {
-                self.output.failed(with: error.localizedDescription)
+                self?.output.failed(with: error.localizedDescription)
             }
         })
     }
@@ -188,9 +188,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     func activate(offer: PackageModelResponse, planIndex: Int) {
         guard let product = iapManager.product(for: offer.inAppPurchaseId ?? "") else {
             let error = CustomErrors.serverError("An error occured while getting product with id - \(offer.inAppPurchaseId ?? "") from App Store")
-            DispatchQueue.toMain {
-                self.output.failed(with: error.localizedDescription)
-            }
+            self.output.failed(with: error.localizedDescription)
             return
         }
 
