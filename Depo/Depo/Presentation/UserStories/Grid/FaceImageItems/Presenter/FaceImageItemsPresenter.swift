@@ -149,14 +149,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    private func updateUgglaViewIfNeed() {
-        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
-            DispatchQueue.main.async {
-                view.updateUgglaViewPosition()
-            }
-        }
-    }
-    
     override func updateThreeDotsButton() {
         view.setThreeDotsMenu(active: true)
     }
@@ -179,23 +171,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         if scrollView == dataSource.collectionView {
             updateUgglaViewIfNeed()
         }
-    }
-    
-    private func hasUgglaLabel() -> Bool {
-        return faceImageType == .people || faceImageType == .things
-    }
-    
-    // MARK: - Utility methods
-    
-    private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
-        self.isChangeVisibilityMode = isChangeVisibilityMode
-        dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
-        
-        if let view = view as? FaceImageItemsViewInput {
-            view.hideUgglaView()
-        }
-        
-        reloadData()
     }
     
     override func updateNoFilesView() {
@@ -222,6 +197,42 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             }
             updatedMyStream = true
         }
+    }
+    
+    // MARK: - Utility methods
+    private func hasUgglaLabel() -> Bool {
+        return faceImageType == .people || faceImageType == .things
+    }
+    
+    private func switchVisibilityMode(_ isChangeVisibilityMode: Bool) {
+        self.isChangeVisibilityMode = isChangeVisibilityMode
+        dataSource.setSelectionState(selectionState: isChangeVisibilityMode)
+        
+        if let view = view as? FaceImageItemsViewInput {
+            view.hideUgglaView()
+        }
+        
+        reloadData()
+    }
+        
+    private func updateUgglaViewIfNeed() {
+        if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
+            DispatchQueue.main.async {
+                view.updateUgglaViewPosition()
+            }
+        }
+    }
+    
+    private func getHeightForDescriptionLabel(with price: String) -> CGFloat {
+        let description = TextConstants.useFollowingPremiumMembership + " \(price)" + " \(TextConstants.additionalDataStoragePackage)"
+        let maxLabelWidth = UIScreen.main.bounds.width - 60
+        let label = UILabel()
+        label.text = description
+        label.font = UIFont.TurkcellSaturaMedFont(size: 20)
+        label.numberOfLines = 0
+        let neededMessageSize = label.sizeThatFits(CGSize(width: maxLabelWidth,
+                                                                  height: CGFloat.greatestFiniteMagnitude))
+        return neededMessageSize.height
     }
 }
 
@@ -264,6 +275,7 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         if let dataSource = dataSource as? FaceImageItemsDataSource,
             let interactor = interactor as? FaceImageItemsInteractor{
             dataSource.price = price
+            dataSource.heightDescriptionLabel = getHeightForDescriptionLabel(with: price)
             interactor.reloadFaceImageItems()
         }
     }

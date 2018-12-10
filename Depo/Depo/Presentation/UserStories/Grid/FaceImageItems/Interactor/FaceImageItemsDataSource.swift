@@ -14,6 +14,7 @@ protocol FaceImageItemsDataSourceDelegate: class {
 final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     var price: String?
     var faceImageType: FaceImageType
+    var heightDescriptionLabel: CGFloat = 0
     
     weak var premiumDelegate: FaceImageItemsDataSourceDelegate?
     
@@ -37,7 +38,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
         if AuthoritySingleton.shared.isPremium {
             return super.collectionView(collectionView, layout: collectionViewLayout, referenceSizeForFooterInSection: section)
         } else {
-            return CGSize(width: UIScreen.main.bounds.width, height: NumericConstants.premiumViewHeight)
+            return CGSize(width: UIScreen.main.bounds.width, height: NumericConstants.premiumViewHeight + heightDescriptionLabel)
         }
     }
     
