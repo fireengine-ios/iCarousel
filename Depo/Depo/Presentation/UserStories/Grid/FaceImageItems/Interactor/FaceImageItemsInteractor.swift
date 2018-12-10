@@ -14,8 +14,13 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
     private let remoteItemsService = RemoteItemsService.init(requestSize: 999, fieldValue: FieldValue.image)
+    private let accountService: AccountServicePrl = AccountService()
+    private let packageService: PackageService = PackageService()
+    private let iapManager = IAPManager.shared
 
     private var isCheckPhotos: Bool = true
+    
+    private var reloadItemsHandler: (() -> Void)?
     
     override func imageForNoFileImageView() -> UIImage {
         if remoteItems is PeopleItemsService {
@@ -69,6 +74,35 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
         return ""
     }
     
+    override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
+        reloadItemsHandler = {
+            super.reloadItems(searchText, sortBy: sortBy, sortOrder: sortOrder, newFieldValue: newFieldValue)
+        }
+        
+        getAuthorities()
+    }
+    
+    //MARK: - Utility Methids(private)
+    private func getAuthorities() {
+        accountService.permissions { [weak self] result in
+            switch result {
+            case .success(let response):
+                AuthoritySingleton.shared.refreshStatus(with: response)
+                if !response.hasPermissionFor(.faceRecognition) {
+                    self?.remoteItems.requestSize = RequestSizeConstant.requestSizeForFaceImageStandartUser
+                }
+                
+                if let output = self?.output as? FaceImageItemsInteractorOutput {
+                    output.didObtainAccountPermision(isAllowed: response.hasPermissionFor(.faceRecognition))
+                }
+            case .failed(let error):
+                if let output = self?.output as? FaceImageItemsInteractorOutput {
+                    output.didFailed(errorMessage: error.localizedDescription)
+                }
+                self?.reloadItemsHandler?()
+            }
+        }
+    }
 }
 
 // MARK: FaceImageItemsInteractorInput
@@ -124,9 +158,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         peopleService.changePeopleVisibility(peoples: items, success: { [weak self] _ in
             if let output = self?.output as? FaceImageItemsInteractorOutput {
                 output.didSaveChanges(items)
-            }
-            
-            self?.output.asyncOperationSucces()
+            }            
             }, fail: { [weak self] error in
                 self?.output.asyncOperationFail(errorMessage: error.description)
         })
@@ -157,4 +189,75 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         self.isCheckPhotos = isCheckPhotos
     }
     
+    func getFeaturePacks() {
+        accountService.featurePacks { [weak self] result in
+            switch result {
+            case .success(let response):
+                if let output = self?.output as? FaceImageItemsInteractorOutput {
+                    DispatchQueue.toMain {
+                        output.didObtainFeaturePacks(response)
+                    }
+                }
+            case .failed(let error):
+                if let output = self?.output as? FaceImageItemsInteractorOutput {
+                    output.didFailed(errorMessage: error.localizedDescription)
+                }
+                self?.reloadItemsHandler?()
+            }
+        }
+    }
+    
+    func getPriceInfo(offer: PackageModelResponse, accountType: AccountType) {
+        if let output = output as? FaceImageItemsInteractorOutput, accountType == .turkcell {
+            let price = packageService.getPriceInfo(for: offer, accountType: accountType)
+            DispatchQueue.toMain {
+                output.didObtainFeaturePrice(price)
+            }
+            return
+        }
+        
+        packageService.getInfoForAppleProducts(offers: [offer], success: { [weak self] in
+            if let output = self?.output as? FaceImageItemsInteractorOutput {
+                let price = self?.packageService.getPriceInfo(for: offer, accountType: accountType)
+                DispatchQueue.toMain {
+                    output.didObtainFeaturePrice(price ?? TextConstants.free)
+                }
+            }
+        }, fail: { [weak self] error in
+            if let output = self?.output as? FaceImageItemsInteractorOutput {
+                output.didFailed(errorMessage: error.description)
+            }
+            self?.reloadItemsHandler?()
+        })
+    }
+    
+    func checkAccountType() {
+        accountService.info(
+            success: { [weak self] response in
+                guard let response = response as? AccountInfoResponse, let accountType = response.accountType else {
+                    let error = CustomErrors.serverError("An error occurred while getting account info")
+                    if let output = self?.output as? FaceImageItemsInteractorOutput {
+                        output.didFailed(errorMessage: error.localizedDescription)
+                    }
+                    self?.reloadItemsHandler?()
+                    return
+                }
+                
+                if let output = self?.output as? FaceImageItemsInteractorOutput {
+                    DispatchQueue.toMain {
+                        output.didObtainAccountType(accountType)
+                    }
+                }
+            }, fail: { [weak self] errorResponse in
+                if let output = self?.output as? FaceImageItemsInteractorOutput {
+                    output.didFailed(errorMessage: errorResponse.description)
+                }
+                
+                self?.reloadItemsHandler?()
+        })
+    }
+    
+    func reloadFaceImageItems() {
+        reloadItemsHandler?()
+    }
 }

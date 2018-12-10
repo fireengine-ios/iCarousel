@@ -36,23 +36,27 @@ final class PremiumHeaderView: UIView {
     }
     
     // MARK: Utility methods(Public)
-    func configure(with title: String, price: String, isHiddenTitleImageView: Bool?, titleEdgeInsets: UIEdgeInsets) {
+    func configure(with title: String,
+                   price: String,
+                   isHiddenTitleImageView: Bool?,
+                   titleEdgeInsets: UIEdgeInsets) {
         titleLabel.text = title
         
-        let descriptionPrice = "\(price)/\(TextConstants.month)"
-        
-        let description = TextConstants.useFollowingPremiumMembership + " \(descriptionPrice)" + " \(TextConstants.additionalDataStoragePackage)"
-        subtitleLabel.attributedText = getAttributeText(with: description, price: descriptionPrice)
+        let description = String(format: TextConstants.useFollowingPremiumMembership, price) 
+        subtitleLabel.attributedText = getAttributeText(with: description, price: price)
         
         premiumHeaderImageView.isHidden = isHiddenTitleImageView ?? false
         premiumButton.titleEdgeInsets = titleEdgeInsets
     }
-
+    
+    func addSelectedAmination() {
+        premiumButton.addSingleSelectedAnimation()
+    }
     
     // MARK: Utility methods(Private)
     private func setup() {        
         setupDesign()
-                
+        
         premiumHeaderImageView.image = UIImage(named: "crownPremiumIcon")
         premiumButton.setTitle(TextConstants.becomePremiumMember, for: .normal)
     }

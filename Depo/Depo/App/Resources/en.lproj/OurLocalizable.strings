@@ -684,11 +684,10 @@
 "face_recognition_title" = "To see all the faces in your gallery and unlock many more features become a Premium member!";
 "places_title" = "To see all the places in your gallery and unlock many more features become a Premium member!";
 "things_title" = "To see all the things in your gallery and unlock many more features become a Premium member!";
-"Use the following Premium Membership advantages with only" = "Use the following Premium Membership advantages with only";
-"additional to your data storage package" = "additional to your data storage package !";
+"use_following_premium_membership_advantages_with_only_additional_your_data_storage_package" = "Use the following Premium Membership advantages with only %@ additional to your data storage package";
 "month" = "month";
 "Back up with Original Quality" = "Back up with Original Quality";
-"Remove Duplicate Contacts from Your Directory" = "Remove Duplicate Contacts from Your Directory";
+"Remove Duplicate Contacts from Your Directory" = "Remove Duplicate Contacts from Your Phone Directory";
 "Face Recognition to reach your loved one's memories" = "Face Recognition to reach your loved one's memories";
 "Place Recognition to beam you up to the memories" = "Place Recognition to beam you up to the memories";
 "Object Recognition to remember with things you love" = "Object Recognition to remember with things you love";
@@ -715,6 +714,63 @@
 "lorem_ipsum_non_turkcell" = "LOREM IPSUM NON-TURKCELL";
 "lorem_ipsum_turkcell" = " LOREM IPSUM TURKCELL";
 
+/* Package */
+"package_period_day" = "day";
+"package_period_week" = "week";
+"package_period_month" = "month";
+"package_period_year" = "year";
+
+"face_image_apple_price" = "%@/%@";
+"package_apple_price" = "%@ / %@";
+
+"package_apple_cancel_text" = "Apple subscription cancel text.";
+"package_slcm_cancel_text" = "SLCM subscription cancel text.";
+"package_google_cancel_text" = "Google subscription cancel text.";
+"package_free_of_charge_cancel_text" = "FreeOfCharge subscription cancel text.";
+"package_lifecell_cancel_text" = "LifeCell subscription cancel text.";
+"package_promo_cancel_text" = "Promo subscription cancel text.";
+"package_kktcell_cancel_text" = "KKTCell subscription cancel text.";
+"package_moldcell_cancel_text" = "MoldCell subscription cancel text.";
+"package_life_cancel_text" = "Life subscription cancel text.";
+"package_paycell_all_access_cancel_text" = "PaycellAllAccess subscription cancel text.";
+"package_paycell_slcm_cancel_text" = "PaycellSLCM subscription cancel text.";
+"package_slcm_paycell_cancel_text" = "SLCMPaycell subscription cancel text.";
+"package_default_cancel_text" = "Default subscription cancel text.";
+
+/* Leave Premium */
+
+"leave_premium_premium_description" = "lifebox’ın avantajlı Premium dünyasından faydalanmaktasın. Premium üyeliğin ile lifebox’ın aşağıdaki tüm gelişmiş özellikleri ve faydalarını kullanabiliyorsun.";
+"leave_premium_cancel_description" = "Premium üyeliğini sonlandırdığında Premium özellik ve avantajlarından faydalanamayacaksın.";
+
+"feature_apple_cancel_text" = "Apple feature subscription cancel text.";
+"feature_slcm_cancel_text" = "SLCM feature subscription cancel text.";
+"feature_google_cancel_text" = "Google feature subscription cancel text.";
+"feature_free_of_charge_cancel_text" = "FreeOfCharge feature subscription cancel text.";
+"feature_lifecell_cancel_text" = "LifeCell feature subscription cancel text.";
+"feature_promo_cancel_text" = "Promo feature subscription cancel text.";
+"feature_kktcell_cancel_text" = "KKTCell feature subscription cancel text.";
+"feature_moldcell_cancel_text" = "MoldCell feature subscription cancel text.";
+"feature_life_cancel_text" = "Life feature subscription cancel text.";
+"feature_paycell_all_access_cancel_text" = "PaycellAllAccess feature subscription cancel text.";
+"feature_paycell_slcm_cancel_text" = "PaycellSLCM feature subscription cancel text.";
+"feature_slcm_paycell_cancel_text" = "SLCMPaycell feature subscription cancel text.";
+"feature_all_access_paycell_cancel_text" = "AllAccessPaycell feature subscription cancel text.";
+"feature_default_cancel_text" = "Default feature subscription cancel text.";
+
 /* PackageInfoView */
 "my_storage" = "My Storage";
 "see_details" = "See Details";
+"face_image_description" = "Since you have a standart account, 100 of your images will be processed for face recognition and only 3 of your contacts' face will show";
+"face_image_upgrade" = "Upgrade to lifebox Premium for your entire picture gallery and use this feature without any limitation";
+
+/* FaceImagePremiumFooterView */
+"face_image_footer_view_message" = "To see all the %@ in your gallery and unlock many more features become a Premium member!";
+"face_image_face_recognition" = "faces";
+"face_image_place_recognition" = "places";
+"face_image_thing_recognition" = "things";
+
+/* PackageViewController */
+"package_cancel_button" = "Leave Membership";
+"my_storage_usage" = "%@ of %@ left";
+"package_section_title" = "Upgrade Your Storage";
+"available_head_name_title" = "+ %@";

@@ -46,4 +46,5 @@ struct CollectionViewSuplementaryConstants {
     static let collectionViewStoryReorderView = "CollectionViewStoryReorderView"
     static let collectionViewHeaderWithText = "CollectionViewHeaderWithText"
     static let collectionViewSpinnerFooter = "CollectionViewSpinnerFooter"
+    static let collectionViewPremiumFooter = "PremiumFooterCollectionReusableView"
 }

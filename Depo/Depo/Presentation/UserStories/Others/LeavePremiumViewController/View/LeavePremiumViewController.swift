@@ -16,8 +16,11 @@ final class LeavePremiumViewController: BaseViewController {
         
     @IBOutlet private weak var leavePremiumView: LeavePremiumView!
     
+    private lazy var activityManager = ActivityIndicatorManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityManager.delegate = self
         
         output.onViewDidLoad(with: leavePremiumView)
         
@@ -34,11 +37,14 @@ final class LeavePremiumViewController: BaseViewController {
     private func setup() {
         setTitle(withString: TextConstants.lifeboxPremium)
         
-        leavePremiumView.configure(with: "30 $/month", types: PremiumListType.allTypes)
+        leavePremiumView.configure(with: "", types: PremiumListType.allTypes)
     }
     
 }
 
 // MARK: - LeavePremiumViewInput
 extension LeavePremiumViewController: LeavePremiumViewInput {
+    func display(price: String) {
+        leavePremiumView.configure(with: price, types: PremiumListType.allTypes)
+    }
 }

@@ -10,4 +10,8 @@ import Foundation
 
 protocol LeavePremiumInteractorInput: class {
     func getAccountType()
+    func getActiveSubscription()
+    
+    func getPrice(for offer: SubscriptionPlanBaseResponse, accountType: AccountType) -> String
+    func getAppleInfo(for offer: SubscriptionPlanBaseResponse)
 }

@@ -42,6 +42,10 @@ final class GradientPremiumButton: UIButton {
         addAnimation()
     }
     
+    func addSingleSelectedAnimation() {
+        addSingleAnimation()
+    }
+    
     // MARK: Utility methods
     private func setup() {
         layer.masksToBounds = true
@@ -88,6 +92,24 @@ final class GradientPremiumButton: UIButton {
         animationGroup.repeatCount = NumericConstants.repeatCountForAnimation
         animationGroup.animations = [selectedAnimation]
 
+        layer.add(animationGroup, forKey: "selectedAnimation")
+    }
+    
+    private func addSingleAnimation() {
+        layer.removeAllAnimations()
+        let selectedAnimation = CASpringAnimation(keyPath: "transform.scale")
+        selectedAnimation.speed = NumericConstants.speedForAnimation
+        selectedAnimation.duration = NumericConstants.durationAnimationForPremiumButton
+        selectedAnimation.fromValue = NumericConstants.defaultScaleForPremiumButton
+        selectedAnimation.toValue = NumericConstants.scaleForPremiumButton
+        selectedAnimation.autoreverses = true
+        selectedAnimation.initialVelocity = NumericConstants.initialVelocityForAnimation
+        selectedAnimation.damping = NumericConstants.dampingForAnimation
+        
+        let animationGroup = CAAnimationGroup()
+        animationGroup.duration = NumericConstants.durationBetweenAnimation
+        animationGroup.animations = [selectedAnimation]
+        
         layer.add(animationGroup, forKey: "selectedAnimation")
     }
 }

@@ -97,14 +97,18 @@ class SearchViewInteractor: SearchViewInteractorInput {
     }
     
     private func faceImageAllowed(completion: @escaping (_ result: Bool) -> Void) {
-        accountService.faceImageAllowed(success: { response in
-            if let response = response as? FaceImageAllowedResponse, let allowed = response.allowed {
+        accountService.isAllowedFaceImageAndFacebook(handler: { response in
+            switch response {
+            case .success(let result):
+                guard let allowed = result.isFaceImageAllowed else {
+                    completion(false)
+                    return
+                }
+                
                 completion(allowed)
-            } else {
+            case .failed(_):
                 completion(false)
             }
-            }, fail: { error in
-                completion(false)
         })
     }
     

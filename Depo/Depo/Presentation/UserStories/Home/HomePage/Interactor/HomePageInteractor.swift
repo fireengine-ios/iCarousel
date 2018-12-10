@@ -70,29 +70,22 @@ class HomePageInteractor: HomePageInteractorInput {
     }
 
     private func getPremiumCardInfo(isRefresh: Bool) {
-        let authorityStorage: AuthorityStorage = factory.resolve()
-        AccountService().permissions { response in
+        AccountService().permissions { [weak self] response in
             switch response {
             case .success(let result):
-//                authorityStorage.refrashStatus(premium: result.hasPermissionFor(.premiumUser),
-//                                            dublicates: result.hasPermissionFor(.deleteDublicate),
-//                                                 faces: result.hasPermissionFor(.faceRecognition))
+                AuthoritySingleton.shared.refreshStatus(with: result)
                 if isRefresh {
-                    authorityStorage.isLosePremiumStatus ?
+                    AuthoritySingleton.shared.isLosePremiumStatus ?
                         CardsManager.default.startPremiumCard() :
                         CardsManager.default.refreshPremiumCard()
                 } else {
-                    let isBannerShowedForPremium = authorityStorage.isBannerShowedForPremium
+                    let isBannerShowedForPremium = AuthoritySingleton.shared.isBannerShowedForPremium
                     isBannerShowedForPremium ? () : CardsManager.default.startPremiumCard()
+                    AuthoritySingleton.shared.hideBannerForSecondLogin()
                 }
-            case .failed(_):
-                if isRefresh {
-                    authorityStorage.isLosePremiumStatus ?
-                        CardsManager.default.startPremiumCard() :
-                        CardsManager.default.refreshPremiumCard()
-                } else {
-                    let isBannerShowedForPremium = authorityStorage.isBannerShowedForPremium
-                    isBannerShowedForPremium ? () : CardsManager.default.startPremiumCard()
+            case .failed(let error):
+                DispatchQueue.toMain {
+                    self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
                 }
             }
         }

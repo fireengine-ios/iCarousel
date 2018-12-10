@@ -744,7 +744,8 @@ class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
         status = .unknown
         metaData = BaseMetaData()
         metaData?.takenDate = Date()
-        tmpDownloadUrl = peopleItemResponse.thumbnail
+        
+        tmpDownloadUrl = peopleItemResponse.isDemo == true ? peopleItemResponse.alternateThumbnail : peopleItemResponse.thumbnail
         patchToPreview = .remoteUrl(tmpDownloadUrl)
         super.init()
         name = peopleItemResponse.name
@@ -761,7 +762,7 @@ class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
         status = .unknown
         metaData = BaseMetaData()
         metaData?.takenDate = Date()
-        tmpDownloadUrl = thingsItemResponse.thumbnail
+        tmpDownloadUrl = thingsItemResponse.isDemo == true ? thingsItemResponse.alternateThumbnail : thingsItemResponse.thumbnail
         patchToPreview = .remoteUrl(tmpDownloadUrl)
         super.init()
         name = thingsItemResponse.name
@@ -778,7 +779,7 @@ class WrapData: BaseDataSourceItem, Wrappered, NSCoding {
         status = .unknown
         metaData = BaseMetaData()
         metaData?.takenDate = Date()
-        tmpDownloadUrl = placesItemResponse.thumbnail
+        tmpDownloadUrl = placesItemResponse.isDemo == true ? placesItemResponse.alternateThumbnail : placesItemResponse.thumbnail
         patchToPreview = .remoteUrl(tmpDownloadUrl)
         super.init()
         name = placesItemResponse.name

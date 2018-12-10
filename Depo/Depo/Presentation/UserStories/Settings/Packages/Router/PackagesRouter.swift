@@ -18,7 +18,12 @@ extension PackagesRouter: PackagesRouterInput {
     }
 
     func openLeavePremium() {
-        let vc = router.leavePremium(title: TextConstants.lifeboxPremium, activeSubscriptions: [])
+        let vc = router.leavePremium(title: TextConstants.lifeboxPremium)
         router.pushViewController(viewController: vc)
+    }
+    
+    func openMyStorage(storageUsage: UsageResponse?) {
+        let viewController = router.myStorage(usageStorage: storageUsage)
+        router.pushViewController(viewController: viewController)
     }
 }

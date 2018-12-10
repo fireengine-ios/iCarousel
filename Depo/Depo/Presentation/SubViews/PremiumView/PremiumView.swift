@@ -16,7 +16,8 @@ final class PremiumView: UIView {
     
     weak var delegate: PremiumViewDelegate?
 
-    @IBOutlet private  var view: UIView!
+    @IBOutlet private var view: UIView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var premiumHeaderView: PremiumHeaderView!
     
     @IBOutlet private var premiumListViews: [PremiumListView]!
@@ -34,7 +35,13 @@ final class PremiumView: UIView {
     }
     
     // MARK: Utility methods(Public)
-    func configure(with title: String, price: String, types: [PremiumListType], isHiddenTitleImageView: Bool? = false, titleEdgeInsets: UIEdgeInsets) {
+    func configure(with title: String,
+                   price: String,
+                   types: [PremiumListType],
+                   isHiddenTitleImageView: Bool? = false,
+                   titleEdgeInsets: UIEdgeInsets,
+                   isNeedScroll: Bool = true) {
+        scrollView.isScrollEnabled = isNeedScroll
         premiumHeaderView.configure(with: title, price: price, isHiddenTitleImageView: isHiddenTitleImageView, titleEdgeInsets: titleEdgeInsets)
         for premiumListView in premiumListViews.enumerated() {
             switch types[premiumListView.offset] {
@@ -50,6 +57,10 @@ final class PremiumView: UIView {
                 premiumListView.element.configure(with: TextConstants.objectRecognitionToRemember, image: UIImage(named: "objectRecognitionPremiumIcon") ?? UIImage())
             }
         }
+    }
+    
+    func addSelectedAmination() {
+        premiumHeaderView.addSelectedAmination()
     }
     
     // MARK: Utility methods(Private)

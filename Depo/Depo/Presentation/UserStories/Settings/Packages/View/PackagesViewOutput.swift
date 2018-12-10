@@ -8,8 +8,9 @@
 
 protocol PackagesViewOutput {
     func viewIsReady()
+    func viewWillAppear()
     func didPressOn(plan: SubscriptionPlan, planIndex: Int)
-    func buy(offer: OfferServiceResponse, planIndex: Int)
+    func buy(offer: PackageModelResponse, planIndex: Int)
     func submit(promocode: String)
     func restorePurchasesPressed()
     
@@ -19,4 +20,6 @@ protocol PackagesViewOutput {
     func openTermsOfUseScreen()
 
     func configureViews(_ views: [PackageInfoView])
+
+    var availableOffers: [SubscriptionPlan] { get }
 }

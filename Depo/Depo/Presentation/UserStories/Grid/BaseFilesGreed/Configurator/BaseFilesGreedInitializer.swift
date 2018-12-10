@@ -72,6 +72,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: []))
         viewController.mainTitle = ""
+        viewController.title = TextConstants.music
         return viewController
     }
     
@@ -97,6 +98,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: []))
         viewController.mainTitle = ""
+        viewController.title = TextConstants.documents
         return viewController
     }
     
@@ -128,7 +130,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.mainTitle = TextConstants.homeButtonAllFiles
         
         MenloworksAppEvents.onAllFilesOpen()
-        
+        viewController.title = TextConstants.homeButtonAllFiles
         return viewController
     }
     
@@ -159,7 +161,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.mainTitle = TextConstants.homeButtonFavorites
         
         MenloworksAppEvents.onFavoritesOpen()
-        
+        viewController.title = TextConstants.homeButtonFavorites
         return viewController
     }
     

@@ -18,4 +18,5 @@ protocol SyncContactsInteractorOutput: class {
     func asyncOperationStarted()
     func asyncOperationFinished()
     func didObtainUserStatus(isPremiumUser: Bool)
+    func didObtainFailUserStatus(errorMessage: String)
 }

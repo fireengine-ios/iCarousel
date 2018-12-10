@@ -10,5 +10,6 @@ import Foundation
 
 protocol LeavePremiumViewOutput {
     func onViewDidLoad(with premiumView: LeavePremiumView)
+    
     var title: String { get }
 }

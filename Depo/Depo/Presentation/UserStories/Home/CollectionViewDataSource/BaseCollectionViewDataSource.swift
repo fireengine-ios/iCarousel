@@ -63,7 +63,10 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
-        return HomeViewTopView.getHeight()
+        return 0.1
+        // TODO: clean project from HomeViewTopView and collectionView delegates from it
+        /// to show home buttons
+        //return HomeViewTopView.getHeight()
     }
     
     func isPopUpCell(path: IndexPath) -> Bool {
@@ -291,7 +294,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
                 }
                 return order1 < order2
             })
-            collectionView.reloadData()
+            collectionView?.reloadData()
             delegate?.didReloadCollectionView(self.collectionView)
         }
     }
