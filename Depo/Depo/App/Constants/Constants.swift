@@ -957,9 +957,10 @@ struct TextConstants {
     static let faceImageThingRecognition = NSLocalizedString("face_image_thing_recognition", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     //MARK: - Premium
-    static let useFollowingPremiumMembership = NSLocalizedString("Use the following Premium Membership advantages with only", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let additionalDataStoragePackage = NSLocalizedString("additional to your data storage package", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let useFollowingPremiumMembership = NSLocalizedString("Use_following_Premium_Membership_advantages_with_only_%@_additional_your_data_storage_package", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let month = NSLocalizedString("month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    
     
     static let backUpOriginalQuality = NSLocalizedString("Back up with Original Quality", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let removeDuplicateContacts = NSLocalizedString("Remove Duplicate Contacts from Your Directory", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

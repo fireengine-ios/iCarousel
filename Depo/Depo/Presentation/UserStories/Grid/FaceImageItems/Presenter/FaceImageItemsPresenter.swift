@@ -224,15 +224,10 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     }
     
     private func getHeightForDescriptionLabel(with price: String) -> CGFloat {
-        let description = TextConstants.useFollowingPremiumMembership + " \(price)" + " \(TextConstants.additionalDataStoragePackage)"
-        let maxLabelWidth = UIScreen.main.bounds.width - 60
-        let label = UILabel()
-        label.text = description
-        label.font = UIFont.TurkcellSaturaMedFont(size: 20)
-        label.numberOfLines = 0
-        let neededMessageSize = label.sizeThatFits(CGSize(width: maxLabelWidth,
-                                                                  height: CGFloat.greatestFiniteMagnitude))
-        return neededMessageSize.height
+        let description = String(format: TextConstants.useFollowingPremiumMembership, price)
+        let sumMargins: CGFloat = 60
+        let maxLabelWidth = UIScreen.main.bounds.width - sumMargins
+        return description.height(for: maxLabelWidth, font: UIFont.TurkcellSaturaMedFont(size: 20))
     }
 }
 
