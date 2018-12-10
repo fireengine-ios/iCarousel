@@ -73,6 +73,7 @@ final class FaceImageDesigner: NSObject {
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.setTitle(TextConstants.becomePremiumMember, for: .normal)
+            newValue.titleEdgeInsets = UIEdgeInsetsMake(6, 17, 6, 17)
         }
     }
 }

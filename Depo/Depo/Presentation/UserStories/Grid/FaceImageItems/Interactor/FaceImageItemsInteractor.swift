@@ -89,7 +89,7 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
             case .success(let response):
                 AuthoritySingleton.shared.refreshStatus(with: response)
                 if !response.hasPermissionFor(.faceRecognition) {
-                    self?.remoteItems.requestSize = NumericConstants.requestSizeForFaceImageStandartUser
+                    self?.remoteItems.requestSize = RequestSizeConstant.requestSizeForFaceImageStandartUser
                 }
                 
                 if let output = self?.output as? FaceImageItemsInteractorOutput {

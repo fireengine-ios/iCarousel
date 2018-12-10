@@ -92,8 +92,29 @@ extension MyStorageViewController: UICollectionViewDataSource {
         cell.configure(with: output.displayableOffers[indexPath.row], accountType: output.accountType)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if Device.isIpad {
+            return CGSize(width: collectionView.frame.width / 2 - NumericConstants.iPadPackageSumInset, height: NumericConstants.heightForPackageCell)
+        } else {
+            return CGSize(width: collectionView.frame.width / 2 - NumericConstants.packageSumInset, height: NumericConstants.heightForPackageCell)
+        }
+    }
+    
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
+extension MyStorageViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return Device.isIpad ? 28 : 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return Device.isIpad ? 28 : 10
+    }
+}
+
+// MARK: - SubscriptionPlanCellDelegate
 extension MyStorageViewController: SubscriptionPlanCellDelegate {
     func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
         guard let plan = output?.displayableOffers[indexPath.row] else { return }

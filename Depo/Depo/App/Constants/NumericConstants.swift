@@ -113,13 +113,16 @@ struct NumericConstants {
     static let packageViewShadowOpacity: Float = 1
     static let packageViewMainShadowRadius: CGFloat = 3
     static let packageViewBottomViewShadowRadius: CGFloat = 2
+    static let iPadPackageSumInset: CGFloat = 24
+    static let packageSumInset: CGFloat = 15
+    static let heightForPackageCell: CGFloat = 255
     
-    static let premiumViewHeight: CGFloat = 550
-    static let requestSizeForFaceImageStandartUser = 13
+    static let premiumViewHeight: CGFloat = 510
 }
 
 struct RequestSizeConstant {
     
     static let faceImageItemsRequestSize = 100
+    static let requestSizeForFaceImageStandartUser = 13
     
 }

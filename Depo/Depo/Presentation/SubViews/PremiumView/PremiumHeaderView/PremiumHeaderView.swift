@@ -42,7 +42,7 @@ final class PremiumHeaderView: UIView {
                    titleEdgeInsets: UIEdgeInsets) {
         titleLabel.text = title
         
-        let description = TextConstants.useFollowingPremiumMembership + " \(price)" + " \(TextConstants.additionalDataStoragePackage)"
+        let description = String(format: TextConstants.useFollowingPremiumMembership, price) 
         subtitleLabel.attributedText = getAttributeText(with: description, price: price)
         
         premiumHeaderImageView.isHidden = isHiddenTitleImageView ?? false
