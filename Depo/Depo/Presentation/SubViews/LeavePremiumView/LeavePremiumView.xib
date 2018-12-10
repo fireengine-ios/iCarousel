@@ -73,16 +73,17 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyK-S1-Rmt" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="172.5" y="677.5" width="30" height="30"/>
+                                    <rect key="frame" x="164.5" y="677.5" width="46" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="Nmk-P3-g71"/>
                                     </constraints>
+                                    <state key="normal" title="Button"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="size" keyPath="topBottom">
                                             <size key="value" width="6" height="6"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="size" keyPath="leftRight">
-                                            <size key="value" width="23" height="-23"/>
+                                            <size key="value" width="23" height="23"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
