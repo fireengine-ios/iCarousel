@@ -2967,6 +2967,8 @@
 		CE27C31F1EF9515800D4D156 /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
 		CE27C3201EF9515C00D4D156 /* CaptchaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0CD1EF8F081005DCEE0 /* CaptchaService.swift */; };
 		CE27C3211EF9515F00D4D156 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0C81EF8ED38005DCEE0 /* AuthenticationService.swift */; };
+		CE292C1421BE5C54004FC745 /* Text+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE292C1321BE5C53004FC745 /* Text+Size.swift */; };
+		CE292C1521BE5C54004FC745 /* Text+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE292C1321BE5C53004FC745 /* Text+Size.swift */; };
 		CE2976DD1FD58E2000350F3A /* LocalAlbumPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976D31FD58E1F00350F3A /* LocalAlbumPresenter.swift */; };
 		CE2976DE1FD58E2000350F3A /* LocalAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976D51FD58E1F00350F3A /* LocalAlbumViewController.swift */; };
 		CE2976DF1FD58E2000350F3A /* LocalAlbumModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976D71FD58E1F00350F3A /* LocalAlbumModuleInitializer.swift */; };
@@ -5452,6 +5454,7 @@
 		CE246A0D1F3D2CDE008DF705 /* SyncServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncServiceManager.swift; sourceTree = "<group>"; };
 		CE24FB8A1F0B117B00C55188 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		CE274D601FB4806400CD53D7 /* Equatable+Contains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Equatable+Contains.swift"; sourceTree = "<group>"; };
+		CE292C1321BE5C53004FC745 /* Text+Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Text+Size.swift"; sourceTree = "<group>"; };
 		CE2976D31FD58E1F00350F3A /* LocalAlbumPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumPresenter.swift; sourceTree = "<group>"; };
 		CE2976D51FD58E1F00350F3A /* LocalAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumViewController.swift; sourceTree = "<group>"; };
 		CE2976D71FD58E1F00350F3A /* LocalAlbumModuleInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumModuleInitializer.swift; sourceTree = "<group>"; };
@@ -11243,6 +11246,7 @@
 				B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */,
 				B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */,
 				B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */,
+				CE292C1321BE5C53004FC745 /* Text+Size.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -15603,6 +15607,7 @@
 				8C0E8F0B1FDEBDFF00789C91 /* SyncContactsPresenter.swift in Sources */,
 				8C0E8F0C1FDEBDFF00789C91 /* UserProfileViewInput.swift in Sources */,
 				8C0E8F0D1FDEBDFF00789C91 /* SyncContactsInteractorInput.swift in Sources */,
+				CE292C1521BE5C54004FC745 /* Text+Size.swift in Sources */,
 				8C0E8F0E1FDEBDFF00789C91 /* SyncContactsInteractorOutput.swift in Sources */,
 				8C0E8F0F1FDEBDFF00789C91 /* SyncContactsInteractor.swift in Sources */,
 				8C0E8F101FDEBDFF00789C91 /* PackagesInteractorInput.swift in Sources */,
@@ -17092,6 +17097,7 @@
 				2EF733E89FE2194E3B6817BA /* FeedbackViewConfigurator.swift in Sources */,
 				4A8CC303201A00D400C040C4 /* FaceImageViewController.swift in Sources */,
 				8AC9821D58B05574782F11AB /* FeedbackViewInitializer.swift in Sources */,
+				CE292C1421BE5C54004FC745 /* Text+Size.swift in Sources */,
 				9807261C203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */,
 				AD2151F5167A65F51A485818 /* ActivityTimelineViewInput.swift in Sources */,
 				EBE4DB98A7204834F0BB6B76 /* ActivityTimelineViewOutput.swift in Sources */,
