@@ -102,7 +102,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     }
     
     func successed(allOffers: [SubscriptionPlanBaseResponse]) {
-        self.allOffers = allOffers
+        self.allOffers = allOffers.filter { $0.subscriptionPlanType != nil }
         interactor.getAccountType()
     }
     
