@@ -46,9 +46,11 @@ final class AuthoritySingleton {
     }
     
     func hideBannerForSecondLogin() {
+        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
         if isPremium == true {
-            let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
             UserDefaults.standard.set(true, forKey: Keys.isBannerShowedForPremium + userID)
+        } else {
+            UserDefaults.standard.set(false, forKey: Keys.isBannerShowedForPremium + userID)
         }
     }
 

@@ -26,11 +26,13 @@ final class PackagePremiumView: UIView, NibInit {
 
     private func setup() {
         titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
+        titleLabel.textColor = ColorConstants.darkText
+
         messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        messageLabel.textColor = ColorConstants.textGrayColor
+
         becomePremiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-
         becomePremiumButton.titleEdgeInsets = UIEdgeInsetsMake(6, 17, 6, 17)
-
         becomePremiumButton.setTitle(TextConstants.becomePremiumMember, for: .normal)
 
         crownImage.image = UIImage(named: "crownSmall")

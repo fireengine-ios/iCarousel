@@ -18,7 +18,7 @@ final class PremiumPresenter {
     
     var title: String
     var headerTitle: String
-    var authority: PackagePackAuthoritiesResponse.AuthorityType = .premiumUser
+    var authority: AuthorityType = .premiumUser
     
     private var userPhone = ""
     
@@ -31,7 +31,7 @@ final class PremiumPresenter {
         }
     }
     
-    init(title: String, headerTitle: String, authority: PackagePackAuthoritiesResponse.AuthorityType?, module: FaceImageItemsModuleOutput?) {
+    init(title: String, headerTitle: String, authority: AuthorityType?, module: FaceImageItemsModuleOutput?) {
         self.title = title
         self.headerTitle = headerTitle
         if let authority = authority {
@@ -112,7 +112,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
     }
     
     func successed(allFeatures: [PackageModelResponse]) {
-        let featureType: PackageModelResponse.FeaturePackageType = accountType == .all ? .appleFeature : .SLCMFeature
+        let featureType: FeaturePackageType = accountType == .all ? .appleFeature : .SLCMFeature
         for feature in allFeatures {
             if feature.featureType == featureType {
                 guard let authorities = feature.authorities else { continue }

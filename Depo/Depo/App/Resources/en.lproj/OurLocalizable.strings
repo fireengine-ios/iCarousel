@@ -735,7 +735,28 @@
 "package_life_cancel_text" = "Life subscription cancel text.";
 "package_paycell_all_access_cancel_text" = "PaycellAllAccess subscription cancel text.";
 "package_paycell_slcm_cancel_text" = "PaycellSLCM subscription cancel text.";
-"package_default_cancel_text" = "Dafault subscription cancel text.";
+"package_slcm_paycell_cancel_text" = "SLCMPaycell subscription cancel text.";
+"package_default_cancel_text" = "Default subscription cancel text.";
+
+/* Leave Premium */
+
+"leave_premium_premium_description" = "lifebox’ın avantajlı Premium dünyasından faydalanmaktasın. Premium üyeliğin ile lifebox’ın aşağıdaki tüm gelişmiş özellikleri ve faydalarını kullanabiliyorsun.";
+"leave_premium_cancel_description" = "Premium üyeliğini sonlandırdığında Premium özellik ve avantajlarından faydalanamayacaksın.";
+
+"feature_apple_cancel_text" = "Apple feature subscription cancel text.";
+"feature_slcm_cancel_text" = "SLCM feature subscription cancel text.";
+"feature_google_cancel_text" = "Google feature subscription cancel text.";
+"feature_free_of_charge_cancel_text" = "FreeOfCharge feature subscription cancel text.";
+"feature_lifecell_cancel_text" = "LifeCell feature subscription cancel text.";
+"feature_promo_cancel_text" = "Promo feature subscription cancel text.";
+"feature_kktcell_cancel_text" = "KKTCell feature subscription cancel text.";
+"feature_moldcell_cancel_text" = "MoldCell feature subscription cancel text.";
+"feature_life_cancel_text" = "Life feature subscription cancel text.";
+"feature_paycell_all_access_cancel_text" = "PaycellAllAccess feature subscription cancel text.";
+"feature_paycell_slcm_cancel_text" = "PaycellSLCM feature subscription cancel text.";
+"feature_slcm_paycell_cancel_text" = "SLCMPaycell feature subscription cancel text.";
+"feature_all_access_paycell_cancel_text" = "AllAccessPaycell feature subscription cancel text.";
+"feature_default_cancel_text" = "Default feature subscription cancel text.";
 
 /* PackageInfoView */
 "my_storage" = "My Storage";

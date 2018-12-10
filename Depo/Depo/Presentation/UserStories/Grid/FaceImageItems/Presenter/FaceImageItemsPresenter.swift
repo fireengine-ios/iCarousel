@@ -24,7 +24,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     
     private var forceLoadNextItems = false
     
-    private var featureType: PackageModelResponse.FeaturePackageType = .appleFeature
+    private var featureType: FeaturePackageType = .appleFeature
     
     private var accountType: AccountType = .all
 

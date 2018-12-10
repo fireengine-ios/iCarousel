@@ -825,8 +825,8 @@ struct TextConstants {
     static let packageLifeCancelText = NSLocalizedString("package_life_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packagePaycellAllAccessCancelText = NSLocalizedString("package_paycell_all_access_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packagePaycellSLCMCancelText = NSLocalizedString("package_paycell_slcm_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packageSLCMPaycellCancelText = NSLocalizedString("package_slcm_paycell_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packageDefaultCancelText = NSLocalizedString("package_default_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-
     
     //MARK: - MyStorage
     
@@ -989,6 +989,26 @@ struct TextConstants {
     static let loremNonTurkcell = NSLocalizedString("lorem_ipsum_non_turkcell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loremTurkcell = NSLocalizedString("lorem_ipsum_turkcell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
+    //MARK: - LeavePremiumViewController
+    
+    static let leavePremiumPremiumDescription = NSLocalizedString("leave_premium_premium_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let leavePremiumCancelDescription = NSLocalizedString("leave_premium_cancel_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let featureAppleCancelText = NSLocalizedString("feature_apple_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureSLCMCancelText = NSLocalizedString("feature_slcm_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureGoogleCancelText = NSLocalizedString("feature_google_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureFreeOfChargeCancelText = NSLocalizedString("feature_free_of_charge_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureLifeCellCancelText = NSLocalizedString("feature_lifecell_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featurePromoCancelText = NSLocalizedString("feature_promo_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureKKTCellCancelText = NSLocalizedString("feature_kktcell_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureMoldCellCancelText = NSLocalizedString("feature_moldcell_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureLifeCancelText = NSLocalizedString("feature_life_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featurePaycellAllAccessCancelText = NSLocalizedString("feature_paycell_all_access_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featurePaycellSLCMCancelText = NSLocalizedString("feature_paycell_slcm_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureSLCMPaycellCancelText = NSLocalizedString("feature_slcm_paycell_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureAllAccessPaycellCancelText = NSLocalizedString("feature_slcm_paycell_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureDefaultCancelText = NSLocalizedString("feature_default_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     //MARK: - PackageInfoView
     static let myStorage = NSLocalizedString("my_storage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let seeDetails = NSLocalizedString("see_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

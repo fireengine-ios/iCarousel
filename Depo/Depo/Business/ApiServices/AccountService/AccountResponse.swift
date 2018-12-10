@@ -244,7 +244,7 @@ final class PermissionsResponse: ObjectRequestResponse {
 
     var permissions: [PermissionResponse]?
     
-    func hasPermissionFor(_ type: PermissionResponse.AuthorityType) -> Bool {
+    func hasPermissionFor(_ type: AuthorityType) -> Bool {
         let hasPermission = permissions?.contains(where: { $0.type == type })
         return hasPermission ?? false
     }
@@ -258,13 +258,6 @@ final class PermissionsResponse: ObjectRequestResponse {
 }
 
 final class PermissionResponse: ObjectRequestResponse {
-    
-    enum AuthorityType: String {
-        case faceRecognition    = "AUTH_FACE_IMAGE_LOCATION"
-        case deleteDublicate    = "AUTH_DELETE_DUPLICATE"
-        case premiumUser        = "AUTH_PREMIUM_USER"
-    }
-    
     private enum ResponseKeys {
         static let type = "type"
     }
@@ -281,13 +274,6 @@ final class PermissionResponse: ObjectRequestResponse {
 }
 
 final class PackagePackAuthoritiesResponse: ObjectRequestResponse {
-    
-    enum AuthorityType: String {
-        case faceRecognition    = "AUTH_FACE_IMAGE_LOCATION"
-        case deleteDublicate    = "AUTH_DELETE_DUPLICATE"
-        case premiumUser        = "AUTH_PREMIUM_USER"
-    }
-    
     private enum ResponseKey {
         static let authorityType = "authorityType"
     }
