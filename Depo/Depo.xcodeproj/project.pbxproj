@@ -2969,6 +2969,26 @@
 		CE27C3211EF9515F00D4D156 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0C81EF8ED38005DCEE0 /* AuthenticationService.swift */; };
 		CE292C1421BE5C54004FC745 /* Text+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE292C1321BE5C53004FC745 /* Text+Size.swift */; };
 		CE292C1521BE5C54004FC745 /* Text+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE292C1321BE5C53004FC745 /* Text+Size.swift */; };
+		CE292C1621BE5DE9004FC745 /* PremiumViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079903219F132E00AD5037 /* PremiumViewInput.swift */; };
+		CE292C1721BE5DE9004FC745 /* PremiumViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079905219F133900AD5037 /* PremiumViewOutput.swift */; };
+		CE292C1821BE5DE9004FC745 /* PremiumRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079907219F134B00AD5037 /* PremiumRouter.swift */; };
+		CE292C1921BE5DE9004FC745 /* PremiumRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079909219F135900AD5037 /* PremiumRouterInput.swift */; };
+		CE292C1A21BE5DE9004FC745 /* PremiumPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A207990B219F136500AD5037 /* PremiumPresenter.swift */; };
+		CE292C1B21BE5DE9004FC745 /* PremiumInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A207990D219F137E00AD5037 /* PremiumInteractor.swift */; };
+		CE292C1C21BE5DE9004FC745 /* PremiumInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A207990F219F139400AD5037 /* PremiumInteractorOutput.swift */; };
+		CE292C1D21BE5DE9004FC745 /* PremiumInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079911219F13A800AD5037 /* PremiumInteractorInput.swift */; };
+		CE292C1E21BE5DE9004FC745 /* PremiumConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079913219F13B900AD5037 /* PremiumConfigurator.swift */; };
+		CE292C1F21BE5DE9004FC745 /* PremiumInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079915219F13CB00AD5037 /* PremiumInitializer.swift */; };
+		CE292C2021BE5DE9004FC745 /* GradientPremiumButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CDBAF219DAC2700CA9A67 /* GradientPremiumButton.swift */; };
+		CE292C2121BE5DE9004FC745 /* ViewSortStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8F421B0089800B34F36 /* ViewSortStorage.swift */; };
+		CE292C2221BE5DE9004FC745 /* PackageModelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E221B51E5300B44574 /* PackageModelResponse.swift */; };
+		CE292C2321BE5DE9004FC745 /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
+		CE292C2421BE5DE9004FC745 /* AuthoritySingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E921B562D500B44574 /* AuthoritySingleton.swift */; };
+		CE292C2521BE5DE9004FC745 /* PackageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A745FF21B91A4F00386C37 /* PackageService.swift */; };
+		CE292C2621BE5DE9004FC745 /* ShareWormholeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D282E207E4A14003AE4FB /* ShareWormholeListener.swift */; };
+		CE292C2721BE5DE9004FC745 /* UICollectionView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB420454B3900232025 /* UICollectionView+Layout.swift */; };
+		CE292C2821BE5DE9004FC745 /* Error+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B7626204D349C00B5E12A /* Error+Alamofire.swift */; };
+		CE292C2921BE5DE9004FC745 /* NSFileCoordinator+Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FE967208B2C260065AC7E /* NSFileCoordinator+Coordinate.swift */; };
 		CE2976DD1FD58E2000350F3A /* LocalAlbumPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976D31FD58E1F00350F3A /* LocalAlbumPresenter.swift */; };
 		CE2976DE1FD58E2000350F3A /* LocalAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976D51FD58E1F00350F3A /* LocalAlbumViewController.swift */; };
 		CE2976DF1FD58E2000350F3A /* LocalAlbumModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976D71FD58E1F00350F3A /* LocalAlbumModuleInitializer.swift */; };
@@ -14803,6 +14823,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE292C1621BE5DE9004FC745 /* PremiumViewInput.swift in Sources */,
+				CE292C1721BE5DE9004FC745 /* PremiumViewOutput.swift in Sources */,
+				CE292C1821BE5DE9004FC745 /* PremiumRouter.swift in Sources */,
+				CE292C1921BE5DE9004FC745 /* PremiumRouterInput.swift in Sources */,
+				CE292C1A21BE5DE9004FC745 /* PremiumPresenter.swift in Sources */,
+				CE292C1B21BE5DE9004FC745 /* PremiumInteractor.swift in Sources */,
+				CE292C1C21BE5DE9004FC745 /* PremiumInteractorOutput.swift in Sources */,
+				CE292C1D21BE5DE9004FC745 /* PremiumInteractorInput.swift in Sources */,
+				CE292C1E21BE5DE9004FC745 /* PremiumConfigurator.swift in Sources */,
+				CE292C1F21BE5DE9004FC745 /* PremiumInitializer.swift in Sources */,
+				CE292C2021BE5DE9004FC745 /* GradientPremiumButton.swift in Sources */,
+				CE292C2121BE5DE9004FC745 /* ViewSortStorage.swift in Sources */,
+				CE292C2221BE5DE9004FC745 /* PackageModelResponse.swift in Sources */,
+				CE292C2321BE5DE9004FC745 /* AuthorityType.swift in Sources */,
+				CE292C2421BE5DE9004FC745 /* AuthoritySingleton.swift in Sources */,
+				CE292C2521BE5DE9004FC745 /* PackageService.swift in Sources */,
+				CE292C2621BE5DE9004FC745 /* ShareWormholeListener.swift in Sources */,
+				CE292C2721BE5DE9004FC745 /* UICollectionView+Layout.swift in Sources */,
+				CE292C2821BE5DE9004FC745 /* Error+Alamofire.swift in Sources */,
+				CE292C2921BE5DE9004FC745 /* NSFileCoordinator+Coordinate.swift in Sources */,
 				8C0E8C641FDEBDFF00789C91 /* ActivitiesByDay.swift in Sources */,
 				8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */,
 				8C0B919420170E3800A5BA81 /* DuplicatedContactsModuleInput.swift in Sources */,
