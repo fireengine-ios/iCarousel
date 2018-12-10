@@ -9,66 +9,108 @@
 import Foundation
 import SwiftyJSON
 
+enum FeaturePackageType: String {
+    case appleFeature               = "FEATURE_APPLE"
+    case SLCMFeature                = "FEATURE_SLCM"
+    case SLCMPaycellFeature         = "FEATURE_SLCM_PAYCELL"
+    case googleFeature              = "FEATURE_GOOGLE"
+    case freeOfChargeFeature        = "FEATURE_FREE_OF_CHARGE"
+    case lifeCellFeature            = "FEATURE_LIFECELL"
+    case promoFeature               = "FEATURE_PROMO"
+    case KKTCellFeature             = "FEATURE_KKTCELL"
+    case MoldCellFeature            = "FEATURE_MOLDCELL"
+    case lifeFeature                = "FEATURE_LIFE"
+    case paycellAllAccessFeature    = "FEATURE_PAYCELL_ALL_ACCESS"
+    case allAccessFeature           = "FEATURE_ALL_ACCESS"
+    case paycellSLCMFeature         = "FEATURE_PAYCELL_SLCM"
+    case allAccessPaycellFeature    = "FEATURE_ALL_ACCESS_PAYCELL"
+    
+    var cancelText: String {
+        switch self {
+        case .appleFeature:
+            return TextConstants.featureAppleCancelText
+        case .SLCMFeature:
+            return TextConstants.featureSLCMCancelText
+        case .googleFeature:
+            return TextConstants.featureGoogleCancelText
+        case .allAccessPaycellFeature:
+            return TextConstants.featurePaycellAllAccessCancelText
+        case .allAccessFeature:
+            return TextConstants.featurePaycellSLCMCancelText
+        case .SLCMPaycellFeature:
+            return TextConstants.featureSLCMPaycellCancelText
+        case .SLCMPaycellFeature:
+            return TextConstants.featureSLCMPaycellCancelText
+        case .freeOfChargeFeature:
+            return TextConstants.featureFreeOfChargeCancelText
+        case .lifeCellFeature:
+            return TextConstants.featureLifeCellCancelText
+        case .promoFeature:
+            return TextConstants.featurePromoCancelText
+        case .KKTCellFeature:
+            return TextConstants.featureKKTCellCancelText
+        case .MoldCellFeature:
+            return TextConstants.featureMoldCellCancelText
+        case .lifeCellFeature:
+            return TextConstants.packageLifeCellCancelText
+        case .lifeFeature:
+            return TextConstants.featureLifeCancelText
+        case .paycellAllAccessFeature:
+            return TextConstants.featurePaycellAllAccessCancelText
+        case .allAccessFeature:
+            return TextConstants.featureDefaultCancelText
+        case .paycellSLCMFeature:
+            return TextConstants.featurePaycellSLCMCancelText
+        case .allAccessPaycellFeature:
+            return TextConstants.featureAllAccessPaycellCancelText
+        }
+    }
+}
+
+enum PackageType: String {
+    case apple                      = "APPLE"
+    case SLCM                       = "SLCM"
+    case google                     = "GOOGLE"
+    case freeOfCharge               = "FREE_OF_CHARGE"
+    case lifeCell                   = "LIFECELL"
+    case promo                      = "PROMO"
+    case KKTCell                    = "KKTCELL"
+    case MoldCell                   = "MOLDCELL"
+    case life                       = "LIFE"
+    case paycellAllAccess           = "PAYCELL_ALL_ACCESS"
+    case paycellSLCM                = "PAYCELL_SLCM"
+    
+    var cancelText: String {
+        switch self {
+        case .apple:
+            return TextConstants.packageAppleCancelText
+        case .SLCM:
+            return TextConstants.packageSLCMCancelText
+        case .google:
+            return TextConstants.packageGoogleCancelText
+        case .freeOfCharge:
+            return TextConstants.packageFreeOfChargeCancelText
+        case .lifeCell:
+            return TextConstants.packageLifeCellCancelText
+        case .promo:
+            return TextConstants.packagePromoCancelText
+        case .KKTCell:
+            return TextConstants.packageKKTCellCancelText
+        case .MoldCell:
+            return TextConstants.packageMoldCellCancelText
+        case .life:
+            return TextConstants.packageLifeCancelText
+        case .paycellAllAccess:
+            return TextConstants.packagePaycellAllAccessCancelText
+        case .paycellSLCM:
+            return TextConstants.packagePaycellSLCMCancelText
+        }
+    }
+}
+
 final class PackageModelResponse: Equatable {
     static func == (lhs: PackageModelResponse, rhs: PackageModelResponse) -> Bool {
         return (lhs.quota ?? 0) > (rhs.quota ?? 0)
-    }
-    
-    enum FeaturePackageType: String {
-        case appleFeature               = "FEATURE_APPLE"
-        case SLCMFeature                = "FEATURE_SLCM"
-        case SLCMPaycellFeature         = "FEATURE_SLCM_PAYCELL"
-        case googleFeature              = "FEATURE_GOOGLE"
-        case freeOfChargeFeature        = "FEATURE_FREE_OF_CHARGE"
-        case lifeCellFeature            = "FEATURE_LIFECELL"
-        case promoFeature               = "FEATURE_PROMO"
-        case KKTCellFeature             = "FEATURE_KKTCELL"
-        case MoldCellFeature            = "FEATURE_MOLDCELL"
-        case lifeFeature                = "FEATURE_LIFE"
-        case paycellAllAccessFeature    = "FEATURE_PAYCELL_ALL_ACCESS"
-        case paycellSLCMFeature         = "FEATURE_PAYCELL_SLCM"
-        case allAccessPaycellFeature    = "FEATURE_ALL_ACCESS_PAYCELL"
-    }
-    
-    enum PackageType: String {
-        case apple                      = "APPLE"
-        case SLCM                       = "SLCM"
-        case google                     = "GOOGLE"
-        case freeOfCharge               = "FREE_OF_CHARGE"
-        case lifeCell                   = "LIFECELL"
-        case promo                      = "PROMO"
-        case KKTCell                    = "KKTCELL"
-        case MoldCell                   = "MOLDCELL"
-        case life                       = "LIFE"
-        case paycellAllAccess           = "PAYCELL_ALL_ACCESS"
-        case paycellSLCM                = "PAYCELL_SLCM"
-        
-        var cancelText: String {
-            switch self {
-            case .apple:
-                return TextConstants.packageAppleCancelText
-            case .SLCM:
-                return TextConstants.packageSLCMCancelText
-            case .google:
-                return TextConstants.packageGoogleCancelText
-            case .freeOfCharge:
-                return TextConstants.packageFreeOfChargeCancelText
-            case .lifeCell:
-                return TextConstants.packageLifeCellCancelText
-            case .promo:
-                return TextConstants.packagePromoCancelText
-            case .KKTCell:
-                return TextConstants.packageKKTCellCancelText
-            case .MoldCell:
-                return TextConstants.packageMoldCellCancelText
-            case .life:
-                return TextConstants.packageLifeCancelText
-            case .paycellAllAccess:
-                return TextConstants.packagePaycellAllAccessCancelText
-            case .paycellSLCM:
-                return TextConstants.packagePaycellSLCMCancelText
-            }
-        }
     }
     
     enum PackageStatus: String {

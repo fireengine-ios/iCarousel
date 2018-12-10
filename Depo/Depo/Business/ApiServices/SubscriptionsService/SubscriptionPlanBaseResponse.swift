@@ -76,8 +76,8 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
     var subscriptionPlanRole: String?
     var subscriptionPlanStatus: PackageModelResponse.PackageStatus?
     var subscriptionPlanAuthorities: [PackagePackAuthoritiesResponse]?
-    var subscriptionPlanType: PackageModelResponse.PackageType?
-    var subscriptionPlanFeatureType: PackageModelResponse.FeaturePackageType?
+    var subscriptionPlanType: PackageType?
+    var subscriptionPlanFeatureType: FeaturePackageType?
     var subscriptionPlanSlcmOfferId: String?
     var subscriptionPlanCometOfferId: String?
     var subscriptionPlanQuota: Int64?
@@ -113,8 +113,8 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
             subscriptionPlanAuthorities = authorities.flatMap({ PackagePackAuthoritiesResponse(withJSON: $0) })
         }
         if let type = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanType]?.string {
-            subscriptionPlanType = PackageModelResponse.PackageType(rawValue: type)
-            subscriptionPlanFeatureType = PackageModelResponse.FeaturePackageType(rawValue: type)
+            subscriptionPlanType = PackageType(rawValue: type)
+            subscriptionPlanFeatureType = FeaturePackageType(rawValue: type)
         }
         subscriptionPlanSlcmOfferId = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanSlcmOfferId]?.string
         subscriptionPlanCometOfferId = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanCometOfferId]?.string

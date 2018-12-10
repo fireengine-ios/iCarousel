@@ -13,12 +13,9 @@ protocol LeavePremiumHeaderViewDelegate: class {
 }
 
 final class LeavePremiumHeaderView: UIView {
-    
-    weak var delegate: LeavePremiumHeaderViewDelegate?
-    
-    @IBOutlet private weak var leavePremiumImageView: UIImageView!
-    @IBOutlet private weak var leavePremiumButton: UIButton!
-    @IBOutlet private weak var priceLabel: UILabel!
+        
+    @IBOutlet private weak var topMessageLabel: UILabel!
+    @IBOutlet private weak var detailsLabel: UILabel!
     
     @IBOutlet private var view: UIView!
     
@@ -34,15 +31,11 @@ final class LeavePremiumHeaderView: UIView {
         setupView()
     }
     
-    // MARK: Utility methods(Public)
-    func configure(with price: String) {
-        priceLabel.text = price
-    }
-    
     // MARK: Utility methods(Private)
     private func setup() {
-        leavePremiumImageView.image = UIImage(named: "crownPremiumIcon")
-        leavePremiumButton.setTitle(TextConstants.leavePremiumMember, for: .normal)
+        
+        topMessageLabel.text = TextConstants.leavePremiumPremiumDescription
+        detailsLabel.text = TextConstants.leavePremiumCancelDescription
         setupDesign()
     }
     
@@ -58,19 +51,10 @@ final class LeavePremiumHeaderView: UIView {
     }
     
     private func setupDesign() {
-        priceLabel.font = UIFont.TurkcellSaturaBolFont(size: 22)
-        priceLabel.textColor = UIColor.lrTealish
+        topMessageLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
+        topMessageLabel.textColor = ColorConstants.darkText
         
-        leavePremiumButton.setTitleColor(.white, for: .normal)
-        leavePremiumButton.backgroundColor = ColorConstants.darcBlueColor
-        leavePremiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-        leavePremiumButton.layer.masksToBounds = true
-        leavePremiumButton.layer.cornerRadius = 15
+        detailsLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        detailsLabel.textColor = ColorConstants.textGrayColor
     }
-    
-    // MARK: Actions
-    @IBAction private func onLeavePremiumTap(_ sender: Any) {
-        delegate?.onLeavePremiumTap()
-    }
-    
 }

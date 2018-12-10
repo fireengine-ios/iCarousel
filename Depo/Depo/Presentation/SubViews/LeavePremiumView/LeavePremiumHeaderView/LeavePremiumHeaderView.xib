@@ -12,9 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LeavePremiumHeaderView" customModule="lifebox" customModuleProvider="target">
             <connections>
-                <outlet property="leavePremiumButton" destination="CEj-G9-o49" id="Iox-HQ-l4I"/>
-                <outlet property="leavePremiumImageView" destination="lE6-rh-d7N" id="RZB-Ec-vZh"/>
-                <outlet property="priceLabel" destination="V3c-Nb-W1F" id="x8l-47-vly"/>
+                <outlet property="detailsLabel" destination="UBN-MQ-Oqk" id="W4G-gD-HS1"/>
+                <outlet property="topMessageLabel" destination="8TD-PF-9RX" id="zzI-wc-THU"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Kdu-fQ-lYh"/>
             </connections>
         </placeholder>
@@ -23,21 +22,14 @@
             <rect key="frame" x="0.0" y="0.0" width="399" height="204"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crownPremiumIcon" translatesAutoresizingMaskIntoConstraints="NO" id="lE6-rh-d7N">
-                    <rect key="frame" x="161.5" y="31" width="76" height="58.5"/>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEj-G9-o49">
-                    <rect key="frame" x="80" y="117.5" width="239" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="A6N-8f-Lxr"/>
-                    </constraints>
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="onLeavePremiumTap:" destination="-1" eventType="touchUpInside" id="bGd-vb-n4d"/>
-                    </connections>
-                </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3c-Nb-W1F">
-                    <rect key="frame" x="24" y="183.5" width="351" height="20.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TD-PF-9RX">
+                    <rect key="frame" x="28" y="23" width="343" height="140.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBN-MQ-Oqk">
+                    <rect key="frame" x="23" y="183.5" width="353" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -45,22 +37,17 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="CEj-G9-o49" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="1I0-36-Juj"/>
-                <constraint firstItem="V3c-Nb-W1F" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="4ag-tw-XOR"/>
-                <constraint firstItem="CEj-G9-o49" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.6" id="EWb-Am-eVZ"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="V3c-Nb-W1F" secondAttribute="bottom" id="Gwf-0S-1x1"/>
-                <constraint firstItem="CEj-G9-o49" firstAttribute="top" secondItem="lE6-rh-d7N" secondAttribute="bottom" constant="28" id="L0f-Np-hHr"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="V3c-Nb-W1F" secondAttribute="trailing" constant="24" id="iIy-Yg-wi9"/>
-                <constraint firstItem="V3c-Nb-W1F" firstAttribute="top" secondItem="CEj-G9-o49" secondAttribute="bottom" constant="36" id="nzY-0l-0AY"/>
-                <constraint firstItem="lE6-rh-d7N" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="31" id="sYy-FZ-0Dv"/>
-                <constraint firstItem="lE6-rh-d7N" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="xjX-fQ-sjJ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="UBN-MQ-Oqk" secondAttribute="trailing" constant="23" id="3NM-rj-vAK"/>
+                <constraint firstItem="8TD-PF-9RX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="28" id="L7h-cP-LAO"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8TD-PF-9RX" secondAttribute="trailing" constant="28" id="cv6-b8-Wc0"/>
+                <constraint firstItem="UBN-MQ-Oqk" firstAttribute="top" secondItem="8TD-PF-9RX" secondAttribute="bottom" constant="20" id="iMr-qZ-dxp"/>
+                <constraint firstItem="UBN-MQ-Oqk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="23" id="iXl-e4-dkM"/>
+                <constraint firstItem="8TD-PF-9RX" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="23" id="pr9-7E-Hhd"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="UBN-MQ-Oqk" secondAttribute="bottom" id="zxc-iQ-JVa"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="72.799999999999997" y="-162.3688155922039"/>
+            <point key="canvasLocation" x="72.799999999999997" y="-162.81859070464768"/>
         </view>
     </objects>
-    <resources>
-        <image name="crownPremiumIcon" width="76" height="56"/>
-    </resources>
 </document>

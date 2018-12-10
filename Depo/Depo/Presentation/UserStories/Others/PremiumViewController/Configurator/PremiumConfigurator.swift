@@ -13,7 +13,7 @@ final class PremiumModuleConfigurator {
     func configure(viewController: PremiumViewController,
                    title: String,
                    headerTitle: String,
-                   authority: PackagePackAuthoritiesResponse.AuthorityType? = nil,
+                   authority: AuthorityType? = nil,
                    module: FaceImageItemsModuleOutput?) {
         let router = PremiumRouter()
         

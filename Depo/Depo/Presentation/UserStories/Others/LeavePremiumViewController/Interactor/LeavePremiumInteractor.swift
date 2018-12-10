@@ -13,16 +13,21 @@ final class LeavePremiumInteractor {
     weak var output: LeavePremiumInteractorOutput!
     
     private let accountService: AccountServicePrl
-    
-    init(accountService: AccountServicePrl = AccountService()) {
+    private let packageService: PackageService
+    private let subscriptionsService: SubscriptionsService
+
+    init(accountService: AccountServicePrl = AccountService(),
+         subscriptionsService: SubscriptionsService = SubscriptionsServiceIml(),
+         packageService: PackageService = PackageService()) {
         self.accountService = accountService
+        self.subscriptionsService = subscriptionsService
+        self.packageService = packageService
     }
     
 }
 
 // MARK: LeavePremiumInteractorInput
 extension LeavePremiumInteractor: LeavePremiumInteractorInput {
-    
     func getAccountType() {
         accountService.info(
             success: { [weak self] response in
@@ -38,4 +43,39 @@ extension LeavePremiumInteractor: LeavePremiumInteractorInput {
         })
     }
     
+    func getActiveSubscription() {
+        subscriptionsService.activeSubscriptions(success: { [weak self] response in
+            guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else {
+                let error = CustomErrors.serverError("An error occured while getting active subscription")
+                DispatchQueue.toMain {
+                    self?.output.didErrorMessage(with: error.localizedDescription)
+                }
+                return
+            }
+            SingletonStorage.shared.activeUserSubscription = subscriptionsResponce
+            DispatchQueue.toMain {
+                self?.output.didLoadActiveSubscriptions(subscriptionsResponce.list)
+            }
+        }) { [weak self] error in
+            DispatchQueue.toMain {
+                self?.output.didErrorMessage(with: error.localizedDescription)
+            }
+        }
+    }
+    
+    func getPrice(for offer: SubscriptionPlanBaseResponse, accountType: AccountType) -> String {
+        return packageService.getPriceInfo(for: offer, accountType: accountType)
+    }
+    
+    func getAppleInfo(for offer: SubscriptionPlanBaseResponse) {
+        packageService.getInfoForAppleProducts(offers: [offer], success: { [weak self] in
+            DispatchQueue.toMain {
+                self?.output.didLoadInfoFromApple()
+            }
+        }, fail: { [weak self] error in
+            DispatchQueue.toMain {
+                self?.output.didErrorMessage(with: error.localizedDescription)
+            }
+        })
+    }
 }

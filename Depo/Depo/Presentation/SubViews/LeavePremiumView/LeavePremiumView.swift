@@ -17,6 +17,8 @@ final class LeavePremiumView: UIView {
     weak var delegate: LeavePremiumViewDelegate?
 
     @IBOutlet private weak var leavePremiumHeaderView: LeavePremiumHeaderView!
+    @IBOutlet weak var leavePremiumButton: InsetsButton!
+    @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet var premiumListViews: [PremiumListView]!
     
     @IBOutlet private var view: UIView!
@@ -24,7 +26,7 @@ final class LeavePremiumView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        setup()
+        setupDesign()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,7 +37,8 @@ final class LeavePremiumView: UIView {
     
     // MARK: Utility methods(Public)
     func configure(with price: String, types: [PremiumListType]) {
-        leavePremiumHeaderView.configure(with: price)
+        priceLabel.text = price
+        
         for premiumListView in premiumListViews.enumerated() {
             switch types[premiumListView.offset] {
             case .backup:
@@ -64,15 +67,21 @@ final class LeavePremiumView: UIView {
         addSubview(view)
     }
     
-    private func setup() {
-        leavePremiumHeaderView.delegate = self
+    private func setupDesign() {
+        leavePremiumButton.setTitle(TextConstants.leavePremiumMember, for: .normal)
+
+        leavePremiumButton.setTitleColor(.white, for: .normal)
+        leavePremiumButton.backgroundColor = ColorConstants.darcBlueColor
+        leavePremiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+        leavePremiumButton.layer.masksToBounds = true
+        leavePremiumButton.layer.cornerRadius = 15
+        
+        priceLabel.textColor = UIColor.lrTealish
+        priceLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
     }
     
-}
-
- //MARK: - LeavePremiumHeaderViewDelegate
-extension LeavePremiumView: LeavePremiumHeaderViewDelegate {
-    func onLeavePremiumTap() {
+    // MARK: Actions
+    @IBAction func onLeavePremiumTap(_ sender: Any) {
         delegate?.onLeavePremiumTap()
     }
 }

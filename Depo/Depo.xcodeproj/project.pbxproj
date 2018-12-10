@@ -2534,6 +2534,7 @@
 		92004B7021AD19B300582C45 /* MyStorageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6E21AD19B300582C45 /* MyStorageInteractor.swift */; };
 		921423E321B51E5300B44574 /* PackageModelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E221B51E5300B44574 /* PackageModelResponse.swift */; };
 		921423EA21B562D500B44574 /* AuthoritySingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E921B562D500B44574 /* AuthoritySingleton.swift */; };
+		9224936821BC14890086CB6A /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
 		9240C04B21B805A4005E710C /* PremiumFooterCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */; };
 		9240C04C21B805A4005E710C /* PremiumFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */; };
 		9240C04D21B805A8005E710C /* PremiumFooterCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */; };
@@ -5145,6 +5146,7 @@
 		92004B6E21AD19B300582C45 /* MyStorageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageInteractor.swift; sourceTree = "<group>"; };
 		921423E221B51E5300B44574 /* PackageModelResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageModelResponse.swift; sourceTree = "<group>"; };
 		921423E921B562D500B44574 /* AuthoritySingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthoritySingleton.swift; sourceTree = "<group>"; };
+		9224936721BC14890086CB6A /* AuthorityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorityType.swift; sourceTree = "<group>"; };
 		9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumFooterCollectionReusableView.swift; sourceTree = "<group>"; };
 		9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumFooterCollectionReusableView.xib; sourceTree = "<group>"; };
 		92A745FF21B91A4F00386C37 /* PackageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageService.swift; sourceTree = "<group>"; };
@@ -7768,6 +7770,7 @@
 				CED4B02B201858D500D06CA9 /* HomeCardResponse.swift */,
 				B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */,
 				4AD1A819208A277200930112 /* PeriodicContactsSyncSettingsModel.swift */,
+				9224936721BC14890086CB6A /* AuthorityType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
