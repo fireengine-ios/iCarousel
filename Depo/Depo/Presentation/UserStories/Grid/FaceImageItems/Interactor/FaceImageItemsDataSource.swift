@@ -47,8 +47,11 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
             return
         }
         
-        if let peopleItem = unwrapedObject as? PeopleItem,
-            peopleItem.responseObject.isDemo == true {
+        if let smartItem = unwrapedObject as? PeopleItem, smartItem.responseObject.isDemo == true {
+            delegate?.onSelectedFaceImageDemoCell(with: indexPath)
+        } else if let smartItem = unwrapedObject as? ThingsItem, smartItem.responseObject.isDemo == true  {
+            delegate?.onSelectedFaceImageDemoCell(with: indexPath)
+        } else if let smartItem = unwrapedObject as? PlacesItem, smartItem.responseObject.isDemo == true  {
             delegate?.onSelectedFaceImageDemoCell(with: indexPath)
         } else {
             super.collectionView(collectionView, didSelectItemAt: indexPath)
