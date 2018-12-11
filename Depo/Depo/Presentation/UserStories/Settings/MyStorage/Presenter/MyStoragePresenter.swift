@@ -17,7 +17,13 @@ final class MyStoragePresenter {
     var accountType: AccountType = .all
     var displayableOffers: [SubscriptionPlan] = []
     
+    var title: String
+    
     private var allOffers: [SubscriptionPlanBaseResponse] = []
+    
+    init(title: String) {
+        self.title = title
+    }
     
     //MARK: - UtilityMethods
     private func getAccountType(for accountType: String, subscriptions: [SubscriptionPlanBaseResponse]) -> AccountType {
