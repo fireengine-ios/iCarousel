@@ -176,10 +176,11 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
                     output.didShowPopUp()
                 }
                 
-                self?.output.asyncOperationSucces()
+                guard let output = self?.output else { return }
+                output.asyncOperationSucces()
                 }, fail: { [weak self] in
-                    
-                    self?.output.getContentWithFail(errorString: nil)//asyncOperationFail(errorMessage: nil)
+                    guard let output = self?.output else { return }
+                    output.getContentWithFail(errorString: nil)//asyncOperationFail(errorMessage: nil)
                     
             })
         }
