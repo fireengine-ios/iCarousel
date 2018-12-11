@@ -72,13 +72,13 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
             }
             }, fail: { [weak self] in
                 debugLog("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems fail")
-                guard let `self` = self else {
+                guard let `self` = self, let output = self.output else {
                     return
                 }
                 if self.getNextPageRetryCounter >= self.numberOfRetries {
                     self.getNextPageRetryCounter = 0
                     self.isUpdating = false
-                    self.output.getContentWithFail(errorString: nil)
+                    output.getContentWithFail(errorString: nil)
                 } else {
                     self.isUpdating = false
                     self.remoteItems.cancellAllRequests()
@@ -118,13 +118,13 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                 }
             }, fail: { [weak self] in
                 debugLog("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems fail")
-                guard let `self` = self else {
+                guard let `self` = self, let output = self.output else {
                     return
                 }
                 if self.getNextPageRetryCounter >= self.numberOfRetries {
                     self.getNextPageRetryCounter = 0
                     self.isUpdating = false
-                    self.output.getContentWithFail(errorString: nil)
+                    output.getContentWithFail(errorString: nil)
                 } else {
                     self.isUpdating = false
                     self.remoteItems.cancellAllRequests()
