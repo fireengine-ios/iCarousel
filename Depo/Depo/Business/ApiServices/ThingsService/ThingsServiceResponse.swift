@@ -14,7 +14,7 @@ struct ThingsJsonKey {
     static let thumbnail = "thumbnail"
     static let name = "name"
     static let objectInfos = "objectInfos"
-    static let demo = "Demo"
+    static let demo = "demo"
     static let rank = "rank"
     static let alternateThumbnail = "alternateThumbnail"
 }
