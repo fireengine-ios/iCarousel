@@ -27,9 +27,9 @@ final class PremiumInteractor {
             DispatchQueue.toMain {
                 self?.output.successed(allFeatures: offers)
             }
-        }, fail: { [weak self] error in
+        }, fail: { [weak self] _ in
             DispatchQueue.toMain {
-                self?.output.failed(with: error.localizedDescription)
+                self?.output.switchToTextWithoutPrice()
             }
         })
     }
@@ -68,9 +68,9 @@ extension PremiumInteractor: PremiumInteractorInput {
                         self?.output.successed(allFeatures: response)
                     }
                 }
-            case .failed(let error):
+            case .failed(_):
                 DispatchQueue.toMain {
-                    self?.output.failed(with: error.localizedDescription)
+                    self?.output.switchToTextWithoutPrice()
                 }
             }
         }
