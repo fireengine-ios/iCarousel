@@ -2989,6 +2989,7 @@
 		CE292C2721BE5DE9004FC745 /* UICollectionView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB420454B3900232025 /* UICollectionView+Layout.swift */; };
 		CE292C2821BE5DE9004FC745 /* Error+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B7626204D349C00B5E12A /* Error+Alamofire.swift */; };
 		CE292C2921BE5DE9004FC745 /* NSFileCoordinator+Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FE967208B2C260065AC7E /* NSFileCoordinator+Coordinate.swift */; };
+		CE292C3021C2419C004FC745 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE292C2F21C2419C004FC745 /* PassthroughView.swift */; };
 		CE2976DD1FD58E2000350F3A /* LocalAlbumPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976D31FD58E1F00350F3A /* LocalAlbumPresenter.swift */; };
 		CE2976DE1FD58E2000350F3A /* LocalAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976D51FD58E1F00350F3A /* LocalAlbumViewController.swift */; };
 		CE2976DF1FD58E2000350F3A /* LocalAlbumModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976D71FD58E1F00350F3A /* LocalAlbumModuleInitializer.swift */; };
@@ -5475,6 +5476,7 @@
 		CE24FB8A1F0B117B00C55188 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		CE274D601FB4806400CD53D7 /* Equatable+Contains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Equatable+Contains.swift"; sourceTree = "<group>"; };
 		CE292C1321BE5C53004FC745 /* Text+Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Text+Size.swift"; sourceTree = "<group>"; };
+		CE292C2F21C2419C004FC745 /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
 		CE2976D31FD58E1F00350F3A /* LocalAlbumPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumPresenter.swift; sourceTree = "<group>"; };
 		CE2976D51FD58E1F00350F3A /* LocalAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumViewController.swift; sourceTree = "<group>"; };
 		CE2976D71FD58E1F00350F3A /* LocalAlbumModuleInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumModuleInitializer.swift; sourceTree = "<group>"; };
@@ -12290,6 +12292,7 @@
 			children = (
 				CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */,
 				CEFFA8ED21AFC21400B34F36 /* SegmentedController.xib */,
+				CE292C2F21C2419C004FC745 /* PassthroughView.swift */,
 			);
 			path = SegmentedController;
 			sourceTree = "<group>";
@@ -16668,6 +16671,7 @@
 				CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */,
 				7CAC23BC1F45718700607660 /* RemoteService.swift in Sources */,
 				D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */,
+				CE292C3021C2419C004FC745 /* PassthroughView.swift in Sources */,
 				CE47155F20BFEDD3001DF164 /* UILabel+Font.swift in Sources */,
 				CE51AD001EF90853005DCEE0 /* ForgotPasswordRouterInput.swift in Sources */,
 				7CFE92F81F5EDDE4008A3B72 /* LanguageModel.swift in Sources */,
