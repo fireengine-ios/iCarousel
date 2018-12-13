@@ -13,4 +13,5 @@ protocol MyStorageViewOutput {
     
     var displayableOffers: [SubscriptionPlan] { get }
     var accountType: AccountType { get }
+    var title: String { get }
 }

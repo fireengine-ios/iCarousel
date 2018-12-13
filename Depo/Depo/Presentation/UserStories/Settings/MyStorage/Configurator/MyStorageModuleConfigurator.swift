@@ -19,7 +19,7 @@ class MyStorageModuleConfigurator {
     private func configure(with view: MyStorageViewController, usage: UsageResponse?) {
         let router = MyStorageRouter()
         
-        let presenter = MyStoragePresenter()
+        let presenter = MyStoragePresenter(title: TextConstants.myStorage)
         presenter.view = view
         presenter.router = router
         if let storageUsage = usage {
