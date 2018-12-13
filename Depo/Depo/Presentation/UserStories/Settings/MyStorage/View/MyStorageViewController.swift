@@ -37,6 +37,8 @@ final class MyStorageViewController: BaseViewController {
     
     //MARK: UtilityMethods
     private func setup() {
+        setTitle(withString: output.title)
+
         setupCollectionView()
         activityManager.delegate = self
         automaticallyAdjustsScrollViewInsets = false
