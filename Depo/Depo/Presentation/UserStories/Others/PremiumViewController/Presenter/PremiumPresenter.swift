@@ -144,16 +144,9 @@ extension PremiumPresenter: PremiumInteractorOutput {
     func successedVerifyOffer() {
         optInVC?.stopActivityIndicator()
         optInVC?.resignFirstResponder()
-        RouterVC().popViewController()
-        
-        router.goToBack()
         /// to wait popViewController animation
-        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {
-            let popupVC = PopUpController.with(title: TextConstants.success,
-                                               message: TextConstants.successfullyPurchased,
-                                               image: .success,
-                                               buttonTitle: TextConstants.ok)
-            RouterVC().presentViewController(controller: popupVC)
+        DispatchQueue.toMain {
+            self.router.purchaseSuccessed()
         }
     }
     
