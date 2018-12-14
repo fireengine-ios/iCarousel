@@ -14,4 +14,5 @@ protocol PremiumRouterInput: class {
     func displayError(with errorMessage: String)
     func showActivateOfferAlert(with displayName: String, text: String, delegate: PremiumPresenter)
     func showPromocodInvalideAlert(for vc: UIViewController?)
+    func purchaseSuccessed()
 }

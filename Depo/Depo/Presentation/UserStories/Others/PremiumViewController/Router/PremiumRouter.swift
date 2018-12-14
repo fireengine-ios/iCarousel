@@ -42,4 +42,20 @@ extension PremiumRouter: PremiumRouterInput {
                                                    buttonTitle: TextConstants.ok)
         vc?.present(popUpController, animated: false, completion: nil)
     }
+    
+    func purchaseSuccessed() {
+        let successPopUp = PopUpController.with(title: TextConstants.success,
+                                                message: TextConstants.successfullyPurchased,
+                                                image: .success,
+                                                buttonTitle: TextConstants.ok,
+                                                action: { vc in
+                                                    vc.close(completion: { [weak self] in
+                                                        //dismiss optIn
+                                                        self?.goToBack()
+                                                        //dismiss premium
+                                                        self?.goToBack()
+                                                    })
+        })
+        router.presentViewController(controller: successPopUp)
+    }
 }
