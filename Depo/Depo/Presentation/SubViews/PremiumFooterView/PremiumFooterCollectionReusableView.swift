@@ -28,7 +28,7 @@ final class PremiumFooterCollectionReusableView: UICollectionReusableView {
         let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
         let descriptionMessage = String(format: TextConstants.faceImageFooterViewMessage, type.footerDescription)
         premiumView.configure(with: descriptionMessage,
-                              price: price ?? TextConstants.free,
+                              price: price,
                               types: PremiumListType.allTypes,
                               isHiddenTitleImageView: true,
                               titleEdgeInsets: titleEdgeInsets,

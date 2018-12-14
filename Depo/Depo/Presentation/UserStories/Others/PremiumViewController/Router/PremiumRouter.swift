@@ -25,6 +25,13 @@ extension PremiumRouter: PremiumRouterInput {
         UIApplication.showErrorAlert(message: errorMessage)
     }
     
+    func showNoDetailsAlert() {
+        let vc = DarkPopUpController.with(title: TextConstants.offersInfo,
+                                          message: TextConstants.noDetailsMessage,
+                                          buttonTitle: TextConstants.ok)
+        router.presentViewController(controller: vc)
+    }
+    
     func showActivateOfferAlert(with displayName: String, text: String, delegate: PremiumPresenter) {
         self.delegate = delegate
         let vc = DarkPopUpController.with(title: displayName, message: text, buttonTitle: TextConstants.purchase) { [weak self] vc in

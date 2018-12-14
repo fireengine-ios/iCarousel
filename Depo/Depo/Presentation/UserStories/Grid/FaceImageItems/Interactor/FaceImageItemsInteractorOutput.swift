@@ -12,6 +12,7 @@ protocol FaceImageItemsInteractorOutput {
     func didShowPopUp()
     
     func didFailed(errorMessage: String)
+    func switchToTextWithoutPrice()
     
     func didObtainFeaturePrice(_ price: String)
     func didObtainFeaturePacks(_ packs: [PackageModelResponse])

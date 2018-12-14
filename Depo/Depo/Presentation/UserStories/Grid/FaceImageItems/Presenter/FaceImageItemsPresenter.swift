@@ -223,8 +223,13 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    private func getHeightForDescriptionLabel(with price: String) -> CGFloat {
-        let description = String(format: TextConstants.useFollowingPremiumMembership, price)
+    private func getHeightForDescriptionLabel(with price: String?) -> CGFloat {
+        let description: String
+        if let price = price {
+            description = String(format: TextConstants.useFollowingPremiumMembership, price)
+        } else {
+            description = TextConstants.noDetailsMessage
+        }
         let sumMargins: CGFloat = 60
         let maxLabelWidth = UIScreen.main.bounds.width - sumMargins
         return description.height(for: maxLabelWidth, font: UIFont.TurkcellSaturaMedFont(size: 20))
@@ -263,6 +268,13 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     func didFailed(errorMessage: String) {
         if let router = self.router as? FaceImageItemsRouter {
             router.display(error: errorMessage)
+        }
+    }
+    
+    func switchToTextWithoutPrice() {
+        if let dataSource = dataSource as? FaceImageItemsDataSource {
+            dataSource.price = nil
+            dataSource.heightDescriptionLabel = getHeightForDescriptionLabel(with: nil)
         }
     }
     
@@ -364,9 +376,14 @@ extension FaceImageItemsPresenter: FaceImageItemsModuleOutput {
 extension FaceImageItemsPresenter: FaceImageItemsDataSourceDelegate {
     
     func onBecomePremiumTap() {
-        if let router = router as? FaceImageItemsRouter {
-            router.openPremium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember, module: self)
+        if let router = router as? FaceImageItemsRouter, let dataSource = dataSource as? FaceImageItemsDataSource {
+            if let price = dataSource.price, !price.isEmpty {
+                router.openPremium(title: TextConstants.lifeboxPremium,
+                                   headerTitle: TextConstants.becomePremiumMember,
+                                   module: self)
+            } else {
+                router.showNoDetailsAlert()
+            }
         }
     }
-    
 }

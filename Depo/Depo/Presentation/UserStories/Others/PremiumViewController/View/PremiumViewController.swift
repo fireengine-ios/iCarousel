@@ -41,7 +41,7 @@ final class PremiumViewController: BaseViewController {
 
 // MARK: - PremiumViewInput
 extension PremiumViewController: PremiumViewInput {
-    func displayFeatureInfo(price: String) {
+    func displayFeatureInfo(price: String?) {
         let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
         premiumView.configure(with: output.headerTitle, price: price, types: PremiumListType.allTypes, titleEdgeInsets: titleEdgeInsets)
     }

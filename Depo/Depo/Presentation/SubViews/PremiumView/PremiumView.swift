@@ -36,7 +36,7 @@ final class PremiumView: UIView {
     
     // MARK: Utility methods(Public)
     func configure(with title: String,
-                   price: String,
+                   price: String?,
                    types: [PremiumListType],
                    isHiddenTitleImageView: Bool? = false,
                    titleEdgeInsets: UIEdgeInsets,

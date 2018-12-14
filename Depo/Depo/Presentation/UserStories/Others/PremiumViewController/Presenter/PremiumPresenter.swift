@@ -46,7 +46,8 @@ final class PremiumPresenter {
     private func displayFeatureInfo() {
         let price: String
         guard let offer = feature else {
-            self.failed(with: "Couldn't get feature offer for this authority type")
+            view.stopActivityIndicator()
+            view.displayFeatureInfo(price: nil)
             return
         }
         
@@ -58,7 +59,7 @@ final class PremiumPresenter {
     
     private func prepareForPurchase() {
         guard let offer = feature else {
-            self.failed(with: "Couldn't get feature offer for this authority type")
+            router.showNoDetailsAlert()
             return
         }
         if let type = offer.featureType, type == .appleFeature {
@@ -122,6 +123,10 @@ extension PremiumPresenter: PremiumInteractorOutput {
                 }
             }
         }
+        
+        if feature == nil {
+            switchToTextWithoutPrice()
+        }
     }
     
     func successed(tokenForOffer: String) {
@@ -159,6 +164,10 @@ extension PremiumPresenter: PremiumInteractorOutput {
         if optInVC?.increaseNumberOfAttemps() == false {
             router.showPromocodInvalideAlert(for: optInVC)
         }
+    }
+    
+    func switchToTextWithoutPrice() {
+        displayFeatureInfo()
     }
     
     func failed(with errorMessage: String) {
