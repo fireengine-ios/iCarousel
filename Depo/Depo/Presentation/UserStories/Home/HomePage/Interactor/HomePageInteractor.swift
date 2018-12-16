@@ -14,14 +14,28 @@ class HomePageInteractor: HomePageInteractorInput {
     private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
     private(set) var homeCardsLoaded = false
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
+    private func fillCollectionView(isReloadAll: Bool = true) {
+        self.homeCardsLoaded = true
+        self.output.fillCollectionView(isReloadAll: isReloadAll)
+    }
 
     func homePagePresented() {
         FreeAppSpace.default.checkFreeAppSpace()
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
-        getPremiumCardInfo(isRefresh: false)
-        getAllCardsForHomePage()
+        let group = DispatchGroup()
+        
+        group.enter()
+        getPremiumCardInfo(isRefresh: false, group: group)
+        
+        group.enter()
+        getAllCardsForHomePage(group: group)
+        
+        group.notify(queue: DispatchQueue.main, execute: {
+            self.fillCollectionView()
+        })
     }
     
     func trackScreen() {
@@ -44,46 +58,61 @@ class HomePageInteractor: HomePageInteractorInput {
     
     func needRefresh() {
         homeCardsLoaded = false
-        getAllCardsForHomePage()
-        getPremiumCardInfo(isRefresh: true)
+        let group = DispatchGroup()
+        
+        group.enter()
+        getAllCardsForHomePage(group: group)
+        
+        group.enter()
+        getPremiumCardInfo(group: group)
+        
+        group.notify(queue: DispatchQueue.main, execute: {
+            self.fillCollectionView()
+        })
     }
     
-    func getAllCardsForHomePage() {
+    private func getAllCardsForHomePage(group: DispatchGroup) {
         homeCardsService.all { [weak self] result in
             DispatchQueue.main.async {
                 self?.output.stopRefresh()
                 switch result {
-                case .success(let array):
-                    self?.homeCardsLoaded = true
-                    CardsManager.default.startOperatonsForCardsResponces(cardsResponces: array)                    
+                case .success(let response):
+                    self?.output.didObtainHomeCards(response)
+                    group.leave()
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)
+                    group.leave()
                 }
             }
         }
     }
 
-    func updateUserAuthority(_ isFirstAppear: Bool) {
-        if !isFirstAppear {
-            getPremiumCardInfo(isRefresh: true)
-        }
+    func updateUserAuthority() {
+        getPremiumCardInfo(group: nil)
     }
 
-    private func getPremiumCardInfo(isRefresh: Bool) {
+    private func getPremiumCardInfo(isRefresh: Bool = true, group: DispatchGroup?) {
         AccountService().permissions { [weak self] response in
             switch response {
             case .success(let result):
                 AuthoritySingleton.shared.refreshStatus(with: result)
-                if isRefresh {
-                    AuthoritySingleton.shared.isLosePremiumStatus ?
-                        CardsManager.default.startPremiumCard() :
-                        CardsManager.default.refreshPremiumCard()
-                } else {
-                    let isBannerShowedForPremium = AuthoritySingleton.shared.isBannerShowedForPremium
-                    isBannerShowedForPremium ? () : CardsManager.default.startPremiumCard()
+                if !isRefresh {
+                    //on first load
+                    if !AuthoritySingleton.shared.isBannerShowedForPremium {
+                        CardsManager.default.startPremiumCard()
+                    }
+                    
                     AuthoritySingleton.shared.hideBannerForSecondLogin()
+                    group?.leave()
+                } else if let group = group {
+                    //on refresh
+                    group.leave()
+                } else {
+                    //on back to HomePAge
+                    self?.fillCollectionView(isReloadAll: false)
                 }
             case .failed(let error):
+                group?.leave()
                 DispatchQueue.toMain {
                     self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
                 }

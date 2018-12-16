@@ -29,6 +29,4 @@ protocol CardsManagerViewProtocol {
     func addNotPermittedPopUpViewTypes(types: [OperationType])
     
     var isEnable: Bool { get set }
-
-    func refreshPremiumCard()
 }

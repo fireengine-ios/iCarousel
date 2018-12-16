@@ -13,7 +13,8 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     var router: HomePageRouterInput!
     
     private let spotlightManager = SpotlightManager.shared
-
+    private var cards: [HomeCardResponse] = []
+    
     private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
     private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
     
@@ -23,11 +24,16 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     private var loadCollectionView = false
     private var isFirstAppear = true
 
-    func viewIsReady() {
+    func viewIsReady(spinner: () -> ()) {
         spotlightManager.delegate = self
         interactor.trackScreen()
-        interactor.updateUserAuthority(isFirstAppear)
-        isFirstAppear = false
+        
+        if isFirstAppear {
+            spinner()
+            interactor.updateUserAuthority()
+        } else {
+            isFirstAppear = false
+        }
     }
     
     func homePagePresented() {
@@ -98,6 +104,19 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     
     func didObtainFailCardInfo(errorMessage: String) {
         router.showError(errorMessage: errorMessage)
+    }
+    
+    func didObtainHomeCards(_ cards: [HomeCardResponse]) {
+        self.cards = cards
+    }
+    
+    func fillCollectionView(isReloadAll: Bool) {
+        if isReloadAll {
+            CardsManager.default.startOperatonsForCardsResponces(cardsResponces: cards)
+        }
+        
+        CardsManager.default.startPremiumCard()
+        view.stopRefresh()
     }
 }
 

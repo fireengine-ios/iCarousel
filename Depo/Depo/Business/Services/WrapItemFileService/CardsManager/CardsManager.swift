@@ -175,14 +175,6 @@ class CardsManager: NSObject {
             }
         }
     }
-
-    func refreshPremiumCard() {
-        DispatchQueue.main.async {
-            for notificationView in self.foloversArray {
-                notificationView.refreshPremiumCard()
-            }
-        }
-    }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ) {
         setProgressForOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)

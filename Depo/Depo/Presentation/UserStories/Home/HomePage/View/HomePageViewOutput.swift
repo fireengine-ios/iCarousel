@@ -8,7 +8,7 @@
 
 protocol HomePageViewOutput {
 
-    func viewIsReady()
+    func viewIsReady(spinner: () -> ())
        
     func homePagePresented()
     
