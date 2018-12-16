@@ -35,12 +35,16 @@ extension PackagesInteractor: PackagesInteractorInput {
         analyticsService.trackDimentionsEveryClickGA(screen: .packages)
     }
     
-    func getAvailableOffers() {
+    func getAvailableOffers(with accountType: AccountType) {
         accountService.availableOffers { [weak self] (result) in
             switch result {
             case .success(let response):
                 DispatchQueue.toMain {
-                    self?.getInfoForAppleProducts(offers: response)
+                    if accountType == .turkcell {
+                        self?.output.successed(allOffers: response)
+                    } else {
+                        self?.getInfoForAppleProducts(offers: response)
+                    }
                 }
             case .failed(let error):
                 DispatchQueue.toMain {
