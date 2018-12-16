@@ -26,9 +26,9 @@ extension FaceImageItemsRouter: FaceImageItemsRouterInput {
         router.presentViewController(controller: popUp)
     }
     
-    func showNoDetailsAlert() {
+    func showNoDetailsAlert(with message: String) {
         let alert = DarkPopUpController.with(title: TextConstants.offersInfo,
-                                             message: TextConstants.noDetailsMessage,
+                                             message: message,
                                              buttonTitle: TextConstants.ok)
         router.presentViewController(controller: alert)
     }

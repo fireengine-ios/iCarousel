@@ -37,12 +37,13 @@ final class PremiumView: UIView {
     // MARK: Utility methods(Public)
     func configure(with title: String,
                    price: String?,
+                   description: String,
                    types: [PremiumListType],
                    isHiddenTitleImageView: Bool? = false,
                    titleEdgeInsets: UIEdgeInsets,
                    isNeedScroll: Bool = true) {
         scrollView.isScrollEnabled = isNeedScroll
-        premiumHeaderView.configure(with: title, price: price, isHiddenTitleImageView: isHiddenTitleImageView, titleEdgeInsets: titleEdgeInsets)
+        premiumHeaderView.configure(with: title, price: price, description: description, isHiddenTitleImageView: isHiddenTitleImageView, titleEdgeInsets: titleEdgeInsets)
         for premiumListView in premiumListViews.enumerated() {
             switch types[premiumListView.offset] {
             case .backup:
