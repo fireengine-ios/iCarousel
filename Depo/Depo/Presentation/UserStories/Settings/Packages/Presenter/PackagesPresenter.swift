@@ -40,7 +40,7 @@ class PackagesPresenter {
         optInVC = nil
         
         view?.startActivityIndicator()
-        interactor.getAvailableOffers()
+        interactor.getAvailableOffers(with: accountType)
     }
 }
 
@@ -159,17 +159,9 @@ extension PackagesPresenter: PackagesInteractorOutput {
     func successedVerifyOffer() {
         optInVC?.stopActivityIndicator()
         optInVC?.resignFirstResponder()
-        RouterVC().popViewController()
         
-        refreshPage()
-        
-        /// to wait popViewController animation
-        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) { 
-            let popupVC = PopUpController.with(title: TextConstants.success,
-                                               message: TextConstants.successfullyPurchased,
-                                               image: .success,
-                                               buttonTitle: TextConstants.ok)
-            RouterVC().presentViewController(controller: popupVC)
+        DispatchQueue.toMain {
+            self.router.showSuccessPurchasedPopUp(with: self)
         }
     }
     
@@ -192,7 +184,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(accountTypeString: String) {
         accountType = getAccountType(for: accountTypeString)
-        interactor.getAvailableOffers()
+        interactor.getAvailableOffers(with: accountType)
     }
     
     func successed(usage: UsageResponse) {

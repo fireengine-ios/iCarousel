@@ -9,19 +9,28 @@
 
 class HomePageInteractor: HomePageInteractorInput {
 
+    private enum RefreshStatus {
+        case reloadAll
+        case reloadPremium
+    }
+    
     weak var output: HomePageInteractorOutput!
     
     private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
     private(set) var homeCardsLoaded = false
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
+    private func fillCollectionView(isReloadAll: Bool = true) {
+        self.homeCardsLoaded = true
+        self.output.fillCollectionView(isReloadAll: isReloadAll)
+    }
 
     func homePagePresented() {
         FreeAppSpace.default.checkFreeAppSpace()
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
-        getPremiumCardInfo(isRefresh: false)
-        getAllCardsForHomePage()
+        getAllCardsForHomePage(loadStatus: .reloadAll)
     }
     
     func trackScreen() {
@@ -44,46 +53,47 @@ class HomePageInteractor: HomePageInteractorInput {
     
     func needRefresh() {
         homeCardsLoaded = false
-        getAllCardsForHomePage()
-        getPremiumCardInfo(isRefresh: true)
+        getAllCardsForHomePage(loadStatus: .reloadAll)
     }
     
-    func getAllCardsForHomePage() {
+    private func getAllCardsForHomePage(loadStatus: RefreshStatus) {
         homeCardsService.all { [weak self] result in
             DispatchQueue.main.async {
                 self?.output.stopRefresh()
                 switch result {
-                case .success(let array):
-                    self?.homeCardsLoaded = true
-                    CardsManager.default.startOperatonsForCardsResponces(cardsResponces: array)                    
+                case .success(let response):
+                    self?.output.didObtainHomeCards(response)
+                    self?.getPremiumCardInfo(loadStatus: loadStatus)
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
+                    self?.getPremiumCardInfo(loadStatus: loadStatus)
+
+                    DispatchQueue.toMain {
+                        self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
+                    }
                 }
             }
         }
     }
 
-    func updateUserAuthority(_ isFirstAppear: Bool) {
-        if !isFirstAppear {
-            getPremiumCardInfo(isRefresh: true)
-        }
+    func updateUserAuthority() {
+        getPremiumCardInfo(loadStatus: .reloadPremium)
     }
 
-    private func getPremiumCardInfo(isRefresh: Bool) {
+    private func getPremiumCardInfo(loadStatus: RefreshStatus) {
         AccountService().permissions { [weak self] response in
             switch response {
             case .success(let result):
                 AuthoritySingleton.shared.refreshStatus(with: result)
-                if isRefresh {
-                    AuthoritySingleton.shared.isLosePremiumStatus ?
-                        CardsManager.default.startPremiumCard() :
-                        CardsManager.default.refreshPremiumCard()
-                } else {
-                    let isBannerShowedForPremium = AuthoritySingleton.shared.isBannerShowedForPremium
-                    isBannerShowedForPremium ? () : CardsManager.default.startPremiumCard()
-                    AuthoritySingleton.shared.hideBannerForSecondLogin()
+
+                switch loadStatus {
+                case .reloadAll:
+                    self?.fillCollectionView()
+                case .reloadPremium:
+                    self?.fillCollectionView(isReloadAll: false)
                 }
             case .failed(let error):
+                self?.fillCollectionView()
+                
                 DispatchQueue.toMain {
                     self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
                 }

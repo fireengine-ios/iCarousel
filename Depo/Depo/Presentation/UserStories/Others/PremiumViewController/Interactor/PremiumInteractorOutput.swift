@@ -19,6 +19,7 @@ protocol PremiumInteractorOutput: class {
     func successedVerifyOffer()
     
     func failed(with errorMessage: String)
+    func switchToTextWithoutPrice(isError: Bool)
     func failedVerifyOffer()
 
     func purchaseFinished()

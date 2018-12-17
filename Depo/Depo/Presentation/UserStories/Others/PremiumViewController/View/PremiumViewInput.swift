@@ -9,5 +9,5 @@
 import Foundation
 
 protocol PremiumViewInput: class, ActivityIndicator {
-    func displayFeatureInfo(price: String)
+    func displayFeatureInfo(price: String?, description: String)
 }

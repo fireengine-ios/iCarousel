@@ -14,7 +14,7 @@ protocol PackagesInteractorInput {
     func activate(offer: PackageModelResponse, planIndex: Int)
     func verifyOffer(_ offer: PackageModelResponse?, planIndex: Int, token: String, otp: String)
     func submit(promocode: String)
-    func getAvailableOffers()
+    func getAvailableOffers(with accountType: AccountType)
     func getAccountType()
     func convertToSubscriptionPlan(offers: [PackageModelResponse], accountType: AccountType) -> [SubscriptionPlan]
     

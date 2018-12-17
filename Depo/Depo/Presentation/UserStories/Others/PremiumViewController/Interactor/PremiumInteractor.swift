@@ -21,15 +21,15 @@ final class PremiumInteractor {
         return packageService.getPriceInfo(for: offer, accountType: accountType)
     }
     
-    //MARK: - Utility Methids(private)
+    //MARK: - Utility Methods(private)
     private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
         packageService.getInfoForAppleProducts(offers: offers, success: { [weak self] in
             DispatchQueue.toMain {
                 self?.output.successed(allFeatures: offers)
             }
-        }, fail: { [weak self] error in
+        }, fail: { [weak self] _ in
             DispatchQueue.toMain {
-                self?.output.failed(with: error.localizedDescription)
+                self?.output.switchToTextWithoutPrice(isError: true)
             }
         })
     }
@@ -68,9 +68,9 @@ extension PremiumInteractor: PremiumInteractorInput {
                         self?.output.successed(allFeatures: response)
                     }
                 }
-            case .failed(let error):
+            case .failed(_):
                 DispatchQueue.toMain {
-                    self?.output.failed(with: error.localizedDescription)
+                    self?.output.switchToTextWithoutPrice(isError: true)
                 }
             }
         }

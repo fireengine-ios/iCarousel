@@ -27,6 +27,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     private var featureType: FeaturePackageType = .appleFeature
     
     private var accountType: AccountType = .all
+    
+    private var alertText = ""
 
     override func viewIsReady(collectionView: UICollectionView) {
         if let faceImageType = faceImageType {
@@ -223,8 +225,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    private func getHeightForDescriptionLabel(with price: String) -> CGFloat {
-        let description = String(format: TextConstants.useFollowingPremiumMembership, price)
+    private func getHeightForDescriptionLabel(with description: String) -> CGFloat {
+        
         let sumMargins: CGFloat = 60
         let maxLabelWidth = UIScreen.main.bounds.width - sumMargins
         return description.height(for: maxLabelWidth, font: UIFont.TurkcellSaturaMedFont(size: 20))
@@ -266,17 +268,38 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         }
     }
     
+    func switchToTextWithoutPrice(isError: Bool) {
+        if let dataSource = dataSource as? FaceImageItemsDataSource,
+            let interactor = interactor as? FaceImageItemsInteractor{
+            
+            let errorDescription = isError ? TextConstants.serverErrorMessage : TextConstants.noDetailsMessage
+            alertText = errorDescription
+            
+            dataSource.price = nil
+            dataSource.detailMessage = errorDescription
+            dataSource.heightDescriptionLabel = getHeightForDescriptionLabel(with: errorDescription)
+            
+            interactor.reloadFaceImageItems()
+        }
+    }
+    
     func didObtainFeaturePrice(_ price: String) {
         if let dataSource = dataSource as? FaceImageItemsDataSource,
             let interactor = interactor as? FaceImageItemsInteractor{
+            
+            let description = String(format: TextConstants.useFollowingPremiumMembership, price)
+            
             dataSource.price = price
-            dataSource.heightDescriptionLabel = getHeightForDescriptionLabel(with: price)
+            dataSource.detailMessage = description
+            dataSource.heightDescriptionLabel = getHeightForDescriptionLabel(with: description)
+            
             interactor.reloadFaceImageItems()
         }
     }
     
     func didObtainFeaturePacks(_ packs: [PackageModelResponse]) {
         featureType = accountType == .all ? .appleFeature : .SLCMFeature
+        var premiumFeature: PackageModelResponse? = nil
         for feature in packs {
             if feature.featureType == featureType {
                 
@@ -284,10 +307,15 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
                     let interactor = interactor as? FaceImageItemsInteractor,
                     authorities.contains(where: { return $0.authorityType == .faceRecognition }) {
                     
+                    premiumFeature = feature
                     interactor.getPriceInfo(offer: feature, accountType: accountType)
                     break
                 }
             }
+        }
+        
+        if premiumFeature == nil {
+            switchToTextWithoutPrice(isError: false)
         }
     }
     
@@ -364,9 +392,14 @@ extension FaceImageItemsPresenter: FaceImageItemsModuleOutput {
 extension FaceImageItemsPresenter: FaceImageItemsDataSourceDelegate {
     
     func onBecomePremiumTap() {
-        if let router = router as? FaceImageItemsRouter {
-            router.openPremium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember, module: self)
+        if let router = router as? FaceImageItemsRouter, let dataSource = dataSource as? FaceImageItemsDataSource {
+            if let price = dataSource.price, !price.isEmpty {
+                router.openPremium(title: TextConstants.lifeboxPremium,
+                                   headerTitle: TextConstants.becomePremiumMember,
+                                   module: self)
+            } else {
+                router.showNoDetailsAlert(with: alertText)
+            }
         }
     }
-    
 }

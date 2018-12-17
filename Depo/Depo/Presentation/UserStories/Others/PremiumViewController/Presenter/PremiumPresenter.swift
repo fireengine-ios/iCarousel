@@ -22,12 +22,14 @@ final class PremiumPresenter {
     
     private var userPhone = ""
     
+    private var alertText: String = ""
+    
     private var optInVC: OptInController?
     private var referenceToken = ""
     private var accountType: AccountType = .all
     private var feature: PackageModelResponse? {
         didSet {
-            displayFeatureInfo()
+            displayFeatureInfo(isError: false)
         }
     }
     
@@ -43,22 +45,25 @@ final class PremiumPresenter {
     }
     
     //MARK: Utility Methods(private)
-    private func displayFeatureInfo() {
-        let price: String
-        guard let offer = feature else {
-            self.failed(with: "Couldn't get feature offer for this authority type")
-            return
+    private func displayFeatureInfo(isError: Bool = false) {
+        var price: String?
+        let description: String
+        
+        if let offer = feature {
+            price = interactor.getPriceInfo(for: offer, accountType: accountType)
+            description = String(format: TextConstants.useFollowingPremiumMembership, price ?? "")
+        } else {
+            description = isError ? TextConstants.serverErrorMessage : TextConstants.noDetailsMessage
+            alertText = description
         }
         
-        price = interactor.getPriceInfo(for: offer, accountType: accountType)
-        
         view.stopActivityIndicator()
-        view.displayFeatureInfo(price: price)
+        view.displayFeatureInfo(price: price, description: description)
     }
     
     private func prepareForPurchase() {
         guard let offer = feature else {
-            self.failed(with: "Couldn't get feature offer for this authority type")
+            router.showNoDetailsAlert(with: alertText)
             return
         }
         if let type = offer.featureType, type == .appleFeature {
@@ -108,6 +113,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
         if accountType == "TURKCELL" {
             self.accountType = .turkcell
         }
+        
         interactor.getFeaturePacks(isAppleProduct: self.accountType == .all)
     }
     
@@ -121,6 +127,10 @@ extension PremiumPresenter: PremiumInteractorOutput {
                     break
                 }
             }
+        }
+        
+        if feature == nil {
+            switchToTextWithoutPrice(isError: false)
         }
     }
     
@@ -144,16 +154,9 @@ extension PremiumPresenter: PremiumInteractorOutput {
     func successedVerifyOffer() {
         optInVC?.stopActivityIndicator()
         optInVC?.resignFirstResponder()
-        RouterVC().popViewController()
-        
-        router.goToBack()
         /// to wait popViewController animation
-        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {
-            let popupVC = PopUpController.with(title: TextConstants.success,
-                                               message: TextConstants.successfullyPurchased,
-                                               image: .success,
-                                               buttonTitle: TextConstants.ok)
-            RouterVC().presentViewController(controller: popupVC)
+        DispatchQueue.toMain {
+            self.router.purchaseSuccessed()
         }
     }
     
@@ -166,6 +169,10 @@ extension PremiumPresenter: PremiumInteractorOutput {
         if optInVC?.increaseNumberOfAttemps() == false {
             router.showPromocodInvalideAlert(for: optInVC)
         }
+    }
+    
+    func switchToTextWithoutPrice(isError: Bool) {
+        displayFeatureInfo(isError: isError)
     }
     
     func failed(with errorMessage: String) {

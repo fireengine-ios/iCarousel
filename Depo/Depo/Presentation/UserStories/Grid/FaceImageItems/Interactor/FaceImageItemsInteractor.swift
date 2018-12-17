@@ -82,7 +82,7 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
         getAuthorities()
     }
     
-    //MARK: - Utility Methids(private)
+    //MARK: - Utility Methods(private)
     private func getAuthorities() {
         accountService.permissions { [weak self] result in
             switch result {
@@ -96,6 +96,11 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
                     output.didObtainAccountPermision(isAllowed: response.hasPermissionFor(.faceRecognition))
                 }
             case .failed(let error):
+                
+                if !AuthoritySingleton.shared.faceRecognition {
+                    self?.remoteItems.requestSize = RequestSizeConstant.requestSizeForFaceImageStandartUser
+                }
+                
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
                     output.didFailed(errorMessage: error.localizedDescription)
                 }
@@ -199,10 +204,11 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
                         output.didObtainFeaturePacks(response)
                     }
                 }
-            case .failed(let error):
+            case .failed(_):
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    output.didFailed(errorMessage: error.localizedDescription)
+                    output.switchToTextWithoutPrice(isError: true)
                 }
+                
                 self?.reloadItemsHandler?()
             }
         }
@@ -221,13 +227,19 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
             if let output = self?.output as? FaceImageItemsInteractorOutput {
                 let price = self?.packageService.getPriceInfo(for: offer, accountType: accountType)
                 DispatchQueue.toMain {
-                    output.didObtainFeaturePrice(price ?? TextConstants.free)
+                    if let price = price {
+                        output.didObtainFeaturePrice(price)
+                    } else {
+                        output.switchToTextWithoutPrice(isError: false)
+                        self?.reloadItemsHandler?()
+                    }
                 }
             }
-        }, fail: { [weak self] error in
+        }, fail: { [weak self] _ in
             if let output = self?.output as? FaceImageItemsInteractorOutput {
-                output.didFailed(errorMessage: error.description)
+                output.switchToTextWithoutPrice(isError: true)
             }
+            
             self?.reloadItemsHandler?()
         })
     }

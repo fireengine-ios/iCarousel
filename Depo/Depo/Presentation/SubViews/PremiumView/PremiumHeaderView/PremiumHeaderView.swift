@@ -37,12 +37,12 @@ final class PremiumHeaderView: UIView {
     
     // MARK: Utility methods(Public)
     func configure(with title: String,
-                   price: String,
+                   price: String?,
+                   description: String,
                    isHiddenTitleImageView: Bool?,
                    titleEdgeInsets: UIEdgeInsets) {
         titleLabel.text = title
-        
-        let description = String(format: TextConstants.useFollowingPremiumMembership, price) 
+
         subtitleLabel.attributedText = getAttributeText(with: description, price: price)
         
         premiumHeaderImageView.isHidden = isHiddenTitleImageView ?? false
@@ -82,8 +82,8 @@ final class PremiumHeaderView: UIView {
         premiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
     }
     
-    private func getAttributeText(with text: String, price: String) -> NSMutableAttributedString {
-        let range = (text as NSString).range(of: price)
+    private func getAttributeText(with text: String, price: String?) -> NSMutableAttributedString {
+        let range = (text as NSString).range(of: price ?? "")
         let attr: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.TurkcellSaturaBolFont(size: 18),
                                                         NSAttributedStringKey.foregroundColor: UIColor.lrTealish]
         
