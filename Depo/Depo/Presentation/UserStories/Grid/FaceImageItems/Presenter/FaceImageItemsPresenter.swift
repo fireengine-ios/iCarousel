@@ -272,12 +272,12 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         if let dataSource = dataSource as? FaceImageItemsDataSource,
             let interactor = interactor as? FaceImageItemsInteractor{
             
-            let description = isError ? TextConstants.serverErrorMessage : TextConstants.noDetailsMessage
-            alertText = description
+            let errorDescription = isError ? TextConstants.serverErrorMessage : TextConstants.noDetailsMessage
+            alertText = errorDescription
             
             dataSource.price = nil
-            dataSource.detailMessage = description
-            dataSource.heightDescriptionLabel = getHeightForDescriptionLabel(with: description)
+            dataSource.detailMessage = errorDescription
+            dataSource.heightDescriptionLabel = getHeightForDescriptionLabel(with: errorDescription)
             
             interactor.reloadFaceImageItems()
         }

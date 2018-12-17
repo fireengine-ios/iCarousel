@@ -34,7 +34,7 @@ final class PremiumViewController: BaseViewController {
         setTitle(withString: output.title)
         
         let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
-        let description = String(format: TextConstants.useFollowingPremiumMembership, "")
+        let description = TextConstants.useFollowingPremiumMembership
         premiumView.configure(with: output.headerTitle, price: "", description: description, types: PremiumListType.allTypes, titleEdgeInsets: titleEdgeInsets)
     }
     
