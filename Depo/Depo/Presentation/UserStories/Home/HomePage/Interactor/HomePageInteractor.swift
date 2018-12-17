@@ -9,7 +9,7 @@
 
 class HomePageInteractor: HomePageInteractorInput {
 
-    enum RefreshStatus {
+    private enum RefreshStatus {
         case reloadAll
         case reloadPremium
     }
