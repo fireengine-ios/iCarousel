@@ -92,7 +92,7 @@ class HomePageInteractor: HomePageInteractorInput {
                     self?.fillCollectionView(isReloadAll: false)
                 }
                 
-                self?.output.didShowPopupAboutPremium(isStandartUser: !result.hasPermissionFor(.premiumUser))
+                self?.output.didShowPopupAboutPremium()
             case .failed(let error):
                 self?.fillCollectionView()
                 

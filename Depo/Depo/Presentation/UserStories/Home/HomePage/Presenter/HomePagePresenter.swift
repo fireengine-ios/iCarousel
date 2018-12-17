@@ -102,12 +102,17 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         interactor.needCheckQuota()
     }
     
-    func didShowPopupAboutPremium(isStandartUser: Bool) {
-        if AuthoritySingleton.shared.isShowPopupAboutPremiumAfterRegistration, isStandartUser {
+    func didShowPopupAboutPremium() {
+        if AuthoritySingleton.shared.isShowPopupAboutPremiumAfterRegistration {
             AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: false)
-            router.showPopupForNewUser(with: TextConstants.homePagePopUp,
+            router.showPopupForNewUser(with: TextConstants.homePagePopup,
                                                                   title: TextConstants.lifeboxPremium,
                                                                   headerTitle: TextConstants.becomePremiumMember)
+        } else if !AuthoritySingleton.shared.isShowedPopupAboutPremiumAfterLogin, !AuthoritySingleton.shared.isPremium {
+            AuthoritySingleton.shared.setShowedPopupAboutPremiumAfterLogin(isShow: true)
+            router.showPopupForNewUser(with: TextConstants.descriptionAboutStandartUser,
+                                       title: TextConstants.lifeboxPremium,
+                                       headerTitle: TextConstants.becomePremiumMember)
         }
     }
     

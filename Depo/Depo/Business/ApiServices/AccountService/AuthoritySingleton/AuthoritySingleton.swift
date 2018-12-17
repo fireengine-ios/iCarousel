@@ -19,6 +19,8 @@ final class AuthoritySingleton {
         static let isBannerShowedForPremium = "isBannerShowedForPremium"
         static let isLosePremiumStatus = "isLosePremiumStatus"
         static let isShowPopupAboutPremiumAfterRegistration = "isShowPopupAboutPremiumAfterRegistration"
+        static let isShowedPopupAboutPremiumAfterLogin = "isShowedPopupAboutPremiumAfterLogin"
+        static let isShowedPopupAboutPremiumAfterSync = "isShowedPopupAboutPremiumAfterSync"
     }
     
     var isPremium: Bool = false {
@@ -57,12 +59,32 @@ final class AuthoritySingleton {
     
     var isShowPopupAboutPremiumAfterRegistration: Bool {
         let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
-        return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterRegistration + userID)
+        return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterRegistration + userID) && isPremium == false
     }
     
     func setShowPopupAboutPremiumAfterRegistration(isShow: Bool) {
         let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
         UserDefaults.standard.set(isShow, forKey: Keys.isShowPopupAboutPremiumAfterRegistration  + userID)
+    }
+    
+    var isShowedPopupAboutPremiumAfterLogin: Bool {
+        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        return UserDefaults.standard.bool(forKey: Keys.isShowedPopupAboutPremiumAfterLogin + userID)
+    }
+    
+    func setShowedPopupAboutPremiumAfterLogin(isShow: Bool) {
+        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        UserDefaults.standard.set(isShow, forKey: Keys.isShowedPopupAboutPremiumAfterLogin  + userID)
+    }
+    
+    var isShowedPopupAboutPremiumAfterSync: Bool {
+        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        return UserDefaults.standard.bool(forKey: Keys.isShowedPopupAboutPremiumAfterSync + userID)
+    }
+    
+    func setShowedPopupAboutPremiumAfterSync(isShow: Bool) {
+        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        UserDefaults.standard.set(isShow, forKey: Keys.isShowedPopupAboutPremiumAfterSync  + userID)
     }
 
     func refreshStatus(premium: Bool, dublicates: Bool, faces: Bool) {

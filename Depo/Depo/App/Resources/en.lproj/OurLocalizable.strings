@@ -778,5 +778,7 @@
 "available_head_name_title" = "+ %@";
 
 "home_page_pop_up" = "Home page pop up";
+"sync_page_pop_up" = "Sync pop up";
 "ok_for_upgrade" = "Yes, Upgrade";
 "no_for_upgrade" = "No, I am OK";
+"you_standard_user_we_will_keep_your_existing_photos_also_newly_uploded_photos_high_quality" = "You are a standard user and we will keep your existing photos&videos and also newly uploded photos&videos in high quality for 3 months";
