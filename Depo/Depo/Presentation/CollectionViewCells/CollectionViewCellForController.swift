@@ -10,7 +10,7 @@ import UIKit
 
 class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
     
-    func addViewOnCell(controllersView: UIView, withShadow: Bool) {
+    func addViewOnCell(controllersView: UIView) {
         for view in self.contentView.subviews {
             view.removeFromSuperview()
         }
@@ -19,33 +19,30 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
             isSwipeEnable = baseView.canSwipe
         }
         
-        if (withShadow) {
-            if (contentView.layer.sublayers != nil) {
-                for l in contentView.layer.sublayers! {
-                    l.removeFromSuperlayer()
-                }
+        if let sublayers = contentView.layer.sublayers {
+            for sublayer in sublayers {
+                sublayer.removeFromSuperlayer()
             }
-            
-            controllersView.layer.cornerRadius = 5
-            controllersView.clipsToBounds = true
-            
-            let layer = CALayer()
-            layer.frame = CGRect(x: contentView.layer.frame.origin.x, y: contentView.layer.frame.origin.y, width: contentView.layer.frame.size.width, height: contentView.layer.frame.size.height )
-            
-            layer.shadowColor = UIColor.lightGray.cgColor
-            layer.shadowOpacity = 1
-            layer.shadowOffset = CGSize.zero
-            layer.shadowRadius = 3
-            layer.shadowPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: layer.frame.size.width, height: layer.frame.size.height)).cgPath
-            layer.shouldRasterize = true
-            layer.cornerRadius = 5
-            
-            contentView.layer.addSublayer(layer)
         }
         
+        controllersView.layer.cornerRadius = 5
+        controllersView.clipsToBounds = true
+        
+        let layer = CALayer()
+        layer.frame = contentView.layer.frame
+        
+        layer.shadowColor = UIColor.lightGray.cgColor
+        layer.shadowOpacity = 1
+        layer.shadowOffset = CGSize.zero
+        layer.shadowRadius = 3
+        layer.shadowPath = UIBezierPath(rect: layer.bounds).cgPath
+        layer.shouldRasterize = true
+        layer.cornerRadius = 5
         
         DispatchQueue.main.async {
+            self.contentView.layer.addSublayer(layer)
             self.contentView.addSubview(controllersView)
+            
             controllersView.frame = self.contentView.bounds
         }
     }

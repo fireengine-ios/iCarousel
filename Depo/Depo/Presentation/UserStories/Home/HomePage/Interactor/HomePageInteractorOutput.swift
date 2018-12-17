@@ -16,4 +16,7 @@ protocol HomePageInteractorOutput: class {
     
     func didObtainFailCardInfo(errorMessage: String)
     
+    func didObtainHomeCards(_ cards: [HomeCardResponse])
+    
+    func fillCollectionView(isReloadAll: Bool)
 }

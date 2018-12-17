@@ -218,10 +218,6 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
             
         }
     }
-
-    func refreshPremiumCard() {
-        //protocol function, used in another delegated class
-    }
     
     func startOperationsWith(serverObjects: [HomeCardResponse]) {
         

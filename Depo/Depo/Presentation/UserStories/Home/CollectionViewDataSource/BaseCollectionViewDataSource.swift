@@ -100,7 +100,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         baseCell.setStateToDefault()
         baseCell.cellDelegate = self
         let popUpView = popUps[indexPath.row]
-        baseCell.addViewOnCell(controllersView: popUpView, withShadow: true)
+        baseCell.addViewOnCell(controllersView: popUpView)
         popUpView.viewWillShow()
         baseCell.willDisplay()
         return baseCell
@@ -299,8 +299,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         }
     }
 
-    func refreshPremiumCard() {
-        if let view = popUps.filter({ $0 is PremiumInfoCard }).first as? PremiumInfoCard {
+    private func refreshPremiumCard() {
+        if let view = popUps.filter({ $0 is PremiumInfoCard }).first as? PremiumInfoCard,
+            (view.isPremium != AuthoritySingleton.shared.isPremium || AuthoritySingleton.shared.isLosePremiumStatus) {
             view.configurateWithType(viewType: .premium)
             collectionView.reloadData()
         }
