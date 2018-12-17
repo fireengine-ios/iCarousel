@@ -24,12 +24,12 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     private var loadCollectionView = false
     private var isFirstAppear = true
 
-    func viewIsReady(spinner: () -> ()) {
+    func viewIsReady() {
         spotlightManager.delegate = self
         interactor.trackScreen()
         
         if isFirstAppear {
-            spinner()
+            view.startSpinner()
             interactor.updateUserAuthority()
         } else {
             isFirstAppear = false
