@@ -22,12 +22,14 @@ final class PremiumPresenter {
     
     private var userPhone = ""
     
+    private var alertText: String = ""
+    
     private var optInVC: OptInController?
     private var referenceToken = ""
     private var accountType: AccountType = .all
     private var feature: PackageModelResponse? {
         didSet {
-            displayFeatureInfo()
+            displayFeatureInfo(isError: false)
         }
     }
     
@@ -43,23 +45,25 @@ final class PremiumPresenter {
     }
     
     //MARK: Utility Methods(private)
-    private func displayFeatureInfo() {
-        let price: String
-        guard let offer = feature else {
-            view.stopActivityIndicator()
-            view.displayFeatureInfo(price: nil)
-            return
+    private func displayFeatureInfo(isError: Bool = false) {
+        var price: String?
+        let description: String
+        
+        if let offer = feature {
+            price = interactor.getPriceInfo(for: offer, accountType: accountType)
+            description = String(format: TextConstants.useFollowingPremiumMembership, price ?? "")
+        } else {
+            description = isError ? TextConstants.serverErrorMessage : TextConstants.noDetailsMessage
+            alertText = description
         }
         
-        price = interactor.getPriceInfo(for: offer, accountType: accountType)
-        
         view.stopActivityIndicator()
-        view.displayFeatureInfo(price: price)
+        view.displayFeatureInfo(price: price, description: description)
     }
     
     private func prepareForPurchase() {
         guard let offer = feature else {
-            router.showNoDetailsAlert()
+            router.showNoDetailsAlert(with: alertText)
             return
         }
         if let type = offer.featureType, type == .appleFeature {
@@ -109,6 +113,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
         if accountType == "TURKCELL" {
             self.accountType = .turkcell
         }
+        
         interactor.getFeaturePacks(isAppleProduct: self.accountType == .all)
     }
     
@@ -125,7 +130,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
         }
         
         if feature == nil {
-            switchToTextWithoutPrice()
+            switchToTextWithoutPrice(isError: false)
         }
     }
     
@@ -166,8 +171,8 @@ extension PremiumPresenter: PremiumInteractorOutput {
         }
     }
     
-    func switchToTextWithoutPrice() {
-        displayFeatureInfo()
+    func switchToTextWithoutPrice(isError: Bool) {
+        displayFeatureInfo(isError: isError)
     }
     
     func failed(with errorMessage: String) {

@@ -82,7 +82,7 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
         getAuthorities()
     }
     
-    //MARK: - Utility Methids(private)
+    //MARK: - Utility Methods(private)
     private func getAuthorities() {
         accountService.permissions { [weak self] result in
             switch result {
@@ -206,7 +206,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
                 }
             case .failed(_):
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    output.switchToTextWithoutPrice()
+                    output.switchToTextWithoutPrice(isError: true)
                 }
                 
                 self?.reloadItemsHandler?()
@@ -230,14 +230,14 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
                     if let price = price {
                         output.didObtainFeaturePrice(price)
                     } else {
-                        output.switchToTextWithoutPrice()
+                        output.switchToTextWithoutPrice(isError: false)
                         self?.reloadItemsHandler?()
                     }
                 }
             }
         }, fail: { [weak self] _ in
             if let output = self?.output as? FaceImageItemsInteractorOutput {
-                output.switchToTextWithoutPrice()
+                output.switchToTextWithoutPrice(isError: true)
             }
             
             self?.reloadItemsHandler?()

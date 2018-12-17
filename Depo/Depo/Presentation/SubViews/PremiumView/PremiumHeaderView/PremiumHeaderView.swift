@@ -38,16 +38,11 @@ final class PremiumHeaderView: UIView {
     // MARK: Utility methods(Public)
     func configure(with title: String,
                    price: String?,
+                   description: String,
                    isHiddenTitleImageView: Bool?,
                    titleEdgeInsets: UIEdgeInsets) {
         titleLabel.text = title
-        
-        let description: String
-        if let price = price {
-            description = String(format: TextConstants.useFollowingPremiumMembership, price)
-        } else {
-            description = TextConstants.noDetailsMessage
-        }
+
         subtitleLabel.attributedText = getAttributeText(with: description, price: price)
         
         premiumHeaderImageView.isHidden = isHiddenTitleImageView ?? false

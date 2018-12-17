@@ -13,6 +13,7 @@ protocol FaceImageItemsDataSourceDelegate: class {
 
 final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     var price: String?
+    var detailMessage: String = ""
     var faceImageType: FaceImageType
     var heightDescriptionLabel: CGFloat = 0
     
@@ -28,7 +29,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
             return super.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
         } else {
             let premiumView = collectionView.dequeue(supplementaryView: PremiumFooterCollectionReusableView.self, kind: kind, for: indexPath)
-            premiumView.configure(price: price, type: faceImageType)
+            premiumView.configure(price: price, description: detailMessage, type: faceImageType)
             premiumView.delegate = self
             return premiumView
         }
@@ -61,7 +62,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     // MARK: Utility methods
     func didAnimationForPremiumButton(with indexPath: IndexPath) {
         if let footerView = collectionView?.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewPremiumFooter, for: indexPath) as? PremiumFooterCollectionReusableView {
-            footerView.configure(price: price, type: faceImageType, isSelectedAnimation: true)
+            footerView.configure(price: price, description: detailMessage, type: faceImageType, isSelectedAnimation: true)
             footerView.delegate = self
         }
     }
