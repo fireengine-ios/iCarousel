@@ -19,9 +19,9 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
             isSwipeEnable = baseView.canSwipe
         }
         
-        if (contentView.layer.sublayers != nil) {
-            for l in contentView.layer.sublayers! {
-                l.removeFromSuperlayer()
+        if let sublayers = contentView.layer.sublayers {
+            for sublayer in sublayers {
+                sublayer.removeFromSuperlayer()
             }
         }
         
@@ -29,13 +29,13 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
         controllersView.clipsToBounds = true
         
         let layer = CALayer()
-        layer.frame = CGRect(x: contentView.layer.frame.origin.x, y: contentView.layer.frame.origin.y, width: contentView.layer.frame.size.width, height: contentView.layer.frame.size.height )
+        layer.frame = contentView.layer.frame
         
         layer.shadowColor = UIColor.lightGray.cgColor
         layer.shadowOpacity = 1
         layer.shadowOffset = CGSize.zero
         layer.shadowRadius = 3
-        layer.shadowPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: layer.frame.size.width, height: layer.frame.size.height)).cgPath
+        layer.shadowPath = UIBezierPath(rect: layer.bounds).cgPath
         layer.shouldRasterize = true
         layer.cornerRadius = 5
         

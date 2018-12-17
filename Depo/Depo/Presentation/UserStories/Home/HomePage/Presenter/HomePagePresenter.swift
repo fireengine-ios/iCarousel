@@ -28,7 +28,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         spotlightManager.delegate = self
         interactor.trackScreen()
         
-        if isFirstAppear {
+        if !isFirstAppear {
             view.startSpinner()
             interactor.updateUserAuthority()
         } else {
@@ -115,7 +115,11 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
             CardsManager.default.startOperatonsForCardsResponces(cardsResponces: cards)
         }
         
-        CardsManager.default.startPremiumCard()
+        if !AuthoritySingleton.shared.isBannerShowedForPremium {
+            CardsManager.default.startPremiumCard()
+        }
+        AuthoritySingleton.shared.hideBannerForSecondLogin()
+        
         view.stopRefresh()
     }
 }
