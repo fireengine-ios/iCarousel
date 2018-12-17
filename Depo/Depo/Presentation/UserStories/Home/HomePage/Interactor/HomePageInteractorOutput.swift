@@ -14,6 +14,8 @@ protocol HomePageInteractorOutput: class {
     
     func needPresentPopUp(popUpView: UIViewController)
     
+    func didShowPopupAboutPremium(isStandartUser: Bool)
+    
     func didObtainFailCardInfo(errorMessage: String)
     
     func didObtainHomeCards(_ cards: [HomeCardResponse])

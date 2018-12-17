@@ -18,6 +18,7 @@ final class AuthoritySingleton {
         
         static let isBannerShowedForPremium = "isBannerShowedForPremium"
         static let isLosePremiumStatus = "isLosePremiumStatus"
+        static let isShowPopupAboutPremiumAfterRegistration = "isShowPopupAboutPremiumAfterRegistration"
     }
     
     var isPremium: Bool = false {
@@ -52,6 +53,16 @@ final class AuthoritySingleton {
         } else {
             UserDefaults.standard.set(false, forKey: Keys.isBannerShowedForPremium + userID)
         }
+    }
+    
+    var isShowPopupAboutPremiumAfterRegistration: Bool {
+        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterRegistration + userID)
+    }
+    
+    func setShowPopupAboutPremiumAfterRegistration(isShow: Bool) {
+        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        UserDefaults.standard.set(isShow, forKey: Keys.isShowPopupAboutPremiumAfterRegistration  + userID)
     }
 
     func refreshStatus(premium: Bool, dublicates: Bool, faces: Bool) {

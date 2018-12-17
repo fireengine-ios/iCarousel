@@ -23,5 +23,7 @@ protocol HomePageRouterInput {
     func moveToCreationStory()
     
     func showError(errorMessage: String)
+    
+    func showPopupForNewUser(with message: String, title: String, headerTitle: String)
 
 }
