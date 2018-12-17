@@ -40,7 +40,7 @@ class PackagesPresenter {
         optInVC = nil
         
         view?.startActivityIndicator()
-        interactor.getAvailableOffers()
+        interactor.getAvailableOffers(with: accountType)
     }
 }
 
@@ -184,7 +184,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(accountTypeString: String) {
         accountType = getAccountType(for: accountTypeString)
-        interactor.getAvailableOffers()
+        interactor.getAvailableOffers(with: accountType)
     }
     
     func successed(usage: UsageResponse) {
