@@ -764,12 +764,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                  withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter)
     }
     
-    func setPreferedCellReUseID(reUseID: String?){
+    func setPreferedCellReUseID(reUseID: String?) {
         preferedCellReUseID = reUseID
     }
     
-    func setSelectionState(selectionState: Bool){        
-        if (isSelectionStateActive == selectionState){
+    func setSelectionState(selectionState: Bool) {
+        if isSelectionStateActive == selectionState {
             return
         }
         if selectionState {
@@ -833,8 +833,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func selectAll(isTrue: Bool){
-        if (isTrue) {
+    func selectAll(isTrue: Bool) {
+        if isTrue {
             selectedItemsArray.removeAll()
             let parsedItems: [BaseDataSourceItem] = allItems.flatMap{ $0 }
             selectedItemsArray.formUnion(parsedItems) //<BaseDataSourceItem>(parsedItems)
@@ -843,7 +843,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag),
                                         activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
             }
-        }else{
+        } else {
             selectedItemsArray.removeAll()
             updateVisibleCells()
             for header in headers{
@@ -944,15 +944,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func onSelectObject(object: BaseDataSourceItem) {
-        if (isObjctSelected(object: object)) {
+        if isObjctSelected(object: object) {
             selectedItemsArray.remove(object)
         } else {
-            if (maxSelectionCount >= 0){
-                if (selectedItemsArray.count >= maxSelectionCount){
-                    if (canReselect){
+            if maxSelectionCount >= 0 {
+                if selectedItemsArray.count >= maxSelectionCount {
+                    if canReselect {
                         selectedItemsArray.removeFirst()
                         updateVisibleCells()
-                    }else{
+                    } else {
                         delegate?.onMaxSelectionExeption()
                         return
                     }
