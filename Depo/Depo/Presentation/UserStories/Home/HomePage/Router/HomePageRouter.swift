@@ -73,7 +73,7 @@ class HomePageRouter: HomePageRouterInput {
                                                 })
         })
         
-        router.navigationController?.present(controller, animated: true, completion: {})
+        router.navigationController?.present(controller, animated: true, completion: nil)
     }
     
     // MARK: Utility methods

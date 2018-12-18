@@ -1018,7 +1018,7 @@ struct TextConstants {
     
     static let homePagePopup = NSLocalizedString("home_page_pop_up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let syncPopup = NSLocalizedString("sync_page_pop_up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let descriptionAboutStandartUser = NSLocalizedString("you_standard_user_we_will_keep_your_existing_photos_also_newly_uploded_photos_high_quality", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let descriptionAboutStandartUser = NSLocalizedString("uploded_photos_high_quality", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let yesForUpgrade = NSLocalizedString("ok_for_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let noForUpgrade = NSLocalizedString("no_for_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
