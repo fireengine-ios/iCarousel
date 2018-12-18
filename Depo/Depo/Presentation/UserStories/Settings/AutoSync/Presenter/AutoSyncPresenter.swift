@@ -67,13 +67,14 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
             }
         } else {
             if !AuthoritySingleton.shared.isShowedPopupAboutPremiumAfterSync,
-                !AuthoritySingleton.shared.isPremium {
+                !AuthoritySingleton.shared.isPremium, fromSettings {
                 AuthoritySingleton.shared.setShowedPopupAboutPremiumAfterSync(isShow: true)
                 
                 router.showPopupForNewUser(with: TextConstants.syncPopup,
                                            title: TextConstants.lifeboxPremium,
                                            headerTitle: TextConstants.becomePremiumMember)
             }
+            
             view.checkPermissionsSuccessed()
         }
     }
