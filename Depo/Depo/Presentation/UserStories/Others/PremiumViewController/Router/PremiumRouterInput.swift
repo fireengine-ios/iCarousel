@@ -15,5 +15,5 @@ protocol PremiumRouterInput: class {
     func showNoDetailsAlert(with message: String)
     func showActivateOfferAlert(with displayName: String, text: String, delegate: PremiumPresenter)
     func showPromocodInvalideAlert(for vc: UIViewController?)
-    func purchaseSuccessed()
+    func purchaseSuccessed(with delegate: FaceImageItemsModuleOutput?)
 }

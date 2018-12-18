@@ -156,7 +156,7 @@ extension PremiumPresenter: PremiumInteractorOutput {
         optInVC?.resignFirstResponder()
         /// to wait popViewController animation
         DispatchQueue.toMain {
-            self.router.purchaseSuccessed()
+            self.router.purchaseSuccessed(with: self.moduleOutput)
         }
     }
     
