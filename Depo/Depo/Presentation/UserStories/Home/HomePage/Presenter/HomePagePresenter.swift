@@ -133,6 +133,9 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         
         if isReloadAll {
             CardsManager.default.startOperatonsForCardsResponces(cardsResponces: cards)
+        } else {
+            //to hide spinner when refresh only premium card
+            view.stopRefresh()
         }
     }
 }
