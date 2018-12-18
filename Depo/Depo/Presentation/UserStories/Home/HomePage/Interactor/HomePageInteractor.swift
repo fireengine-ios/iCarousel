@@ -20,7 +20,7 @@ class HomePageInteractor: HomePageInteractorInput {
     private(set) var homeCardsLoaded = false
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    private func fillCollectionView(isReloadAll: Bool = true) {
+    private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
         self.output.fillCollectionView(isReloadAll: isReloadAll)
     }
@@ -30,7 +30,8 @@ class HomePageInteractor: HomePageInteractorInput {
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
-        getAllCardsForHomePage(loadStatus: .reloadAll)
+        getPremiumCardInfo(loadStatus: .reloadAll)
+        getAllCardsForHomePage()
     }
     
     func trackScreen() {
@@ -53,20 +54,20 @@ class HomePageInteractor: HomePageInteractorInput {
     
     func needRefresh() {
         homeCardsLoaded = false
-        getAllCardsForHomePage(loadStatus: .reloadAll)
+        
+        getPremiumCardInfo(loadStatus: .reloadAll)
+        getAllCardsForHomePage()
     }
     
-    private func getAllCardsForHomePage(loadStatus: RefreshStatus) {
+    private func getAllCardsForHomePage() {
         homeCardsService.all { [weak self] result in
             DispatchQueue.main.async {
                 self?.output.stopRefresh()
                 switch result {
                 case .success(let response):
                     self?.output.didObtainHomeCards(response)
-                    self?.getPremiumCardInfo(loadStatus: loadStatus)
+                    self?.fillCollectionView(isReloadAll: true)
                 case .failed(let error):
-                    self?.getPremiumCardInfo(loadStatus: loadStatus)
-
                     DispatchQueue.toMain {
                         self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
                     }
@@ -87,12 +88,14 @@ class HomePageInteractor: HomePageInteractorInput {
 
                 switch loadStatus {
                 case .reloadAll:
-                    self?.fillCollectionView()
+                    self?.fillCollectionView(isReloadAll: true)
                 case .reloadPremium:
                     self?.fillCollectionView(isReloadAll: false)
                 }
+                
+                self?.output.didShowPopupAboutPremium()
             case .failed(let error):
-                self?.fillCollectionView()
+                self?.fillCollectionView(isReloadAll: true)
                 
                 DispatchQueue.toMain {
                     self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
