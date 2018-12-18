@@ -58,7 +58,7 @@ final class PremiumPresenter {
         }
         
         view.stopActivityIndicator()
-        view.displayFeatureInfo(price: price, description: description)
+        view.displayFeatureInfo(price: price, description: description, isNeedPolicy: accountType != .turkcell)
     }
     
     private func prepareForPurchase() {

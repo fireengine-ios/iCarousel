@@ -184,6 +184,9 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(accountTypeString: String) {
         accountType = getAccountType(for: accountTypeString)
+        
+        accountType != .turkcell ? view?.showInAppPolicy() : ()
+        
         interactor.getAvailableOffers(with: accountType)
     }
     
