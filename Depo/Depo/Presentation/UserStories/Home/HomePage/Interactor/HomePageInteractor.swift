@@ -91,6 +91,8 @@ class HomePageInteractor: HomePageInteractorInput {
                 case .reloadPremium:
                     self?.fillCollectionView(isReloadAll: false)
                 }
+                
+                self?.output.didShowPopupAboutPremium()
             case .failed(let error):
                 self?.fillCollectionView()
                 
