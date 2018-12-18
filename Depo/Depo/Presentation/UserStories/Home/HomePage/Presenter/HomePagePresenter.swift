@@ -125,16 +125,15 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     }
     
     func fillCollectionView(isReloadAll: Bool) {
-        if isReloadAll {
-            CardsManager.default.startOperatonsForCardsResponces(cardsResponces: cards)
-        }
         
         if !AuthoritySingleton.shared.isBannerShowedForPremium {
             CardsManager.default.startPremiumCard()
         }
         AuthoritySingleton.shared.hideBannerForSecondLogin()
         
-        view.stopRefresh()
+        if isReloadAll {
+            CardsManager.default.startOperatonsForCardsResponces(cardsResponces: cards)
+        }
     }
 }
 
