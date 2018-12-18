@@ -27,11 +27,7 @@ final class PremiumPresenter {
     private var optInVC: OptInController?
     private var referenceToken = ""
     private var accountType: AccountType = .all
-    private var feature: PackageModelResponse? {
-        didSet {
-            displayFeatureInfo(isError: false)
-        }
-    }
+    private var feature: PackageModelResponse?
     
     init(title: String, headerTitle: String, authority: AuthorityType?, module: FaceImageItemsModuleOutput?) {
         self.title = title
@@ -113,24 +109,27 @@ extension PremiumPresenter: PremiumInteractorOutput {
         if accountType == "TURKCELL" {
             self.accountType = .turkcell
         }
-        
-        interactor.getFeaturePacks(isAppleProduct: self.accountType == .all)
+        interactor.getFeaturePacks()
     }
     
     func successed(allFeatures: [PackageModelResponse]) {
-        let featureType: FeaturePackageType = accountType == .all ? .appleFeature : .SLCMFeature
         for feature in allFeatures {
-            if feature.featureType == featureType {
-                guard let authorities = feature.authorities else { continue }
-                if authorities.contains(where: { return $0.authorityType == authority }) {
-                    self.feature = feature
-                    break
-                }
+            guard let authorities = feature.authorities else { continue }
+            if authorities.contains(where: { return $0.authorityType == authority }) {
+                self.feature = feature
+                break
             }
         }
         
-        if feature == nil {
+        guard let neededFeature = feature else {
             switchToTextWithoutPrice(isError: false)
+            return
+        }
+
+        if neededFeature.featureType == .appleFeature {
+            interactor.getInfoForAppleProducts(offer: neededFeature)
+        } else {
+            displayFeatureInfo()
         }
     }
     
@@ -158,6 +157,10 @@ extension PremiumPresenter: PremiumInteractorOutput {
         DispatchQueue.toMain {
             self.router.purchaseSuccessed(with: self.moduleOutput)
         }
+    }
+    
+    func successedGotAppleInfo() {
+        displayFeatureInfo()
     }
     
     //MARK: Fail
