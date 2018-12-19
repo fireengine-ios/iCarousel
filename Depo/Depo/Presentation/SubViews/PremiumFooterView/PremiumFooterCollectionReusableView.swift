@@ -33,7 +33,8 @@ final class PremiumFooterCollectionReusableView: UICollectionReusableView {
                               types: PremiumListType.allTypes,
                               isHiddenTitleImageView: true,
                               titleEdgeInsets: titleEdgeInsets,
-                              isNeedScroll: false)
+                              isNeedScroll: false,
+                              isNeedPolicy: false)
         if isSelectedAnimation == true {
             addSelectedAmination()
         }
