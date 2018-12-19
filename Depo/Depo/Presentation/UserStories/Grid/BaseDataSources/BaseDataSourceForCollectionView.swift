@@ -1817,6 +1817,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
     }
     
+    func finishUploadFiles() { }
+    
     func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
         debugPrint("updatedAlbumCoverPhoto")
         ///Need further testing, seems like we dont need this any longer.

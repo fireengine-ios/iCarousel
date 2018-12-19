@@ -224,7 +224,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         requestAllItems()
     }
     
-    func finishedUploadFile(file: WrapData) {
+    func finishUploadFiles() {
         var needUpdate = false
         currentItems.forEach { item in
             if let type = item.type, type.isFaceImageType(),

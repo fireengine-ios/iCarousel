@@ -59,6 +59,8 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool
     
+    func finishUploadFiles()
+    
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -107,6 +109,8 @@ extension ItemOperationManagerViewProtocol {
     func filesMoved(items: [Item], toFolder folderUUID: String) {}
     
     func syncFinished() {}
+    
+    func finishUploadFiles() {}
     
 }
 
@@ -360,5 +364,14 @@ class ItemOperationManager: NSObject {
             }
         }
     }
+    
+    func finishUploadFiles() {
+        DispatchQueue.main.async {
+            for view in self.views {
+                view.finishUploadFiles()
+            }
+        }
+    }
+
     
 }
