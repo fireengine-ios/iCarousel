@@ -48,7 +48,10 @@ final class PremiumView: UIView {
                    isNeedScroll: Bool = true,
                    isNeedPolicy: Bool) {
         scrollView.isScrollEnabled = isNeedScroll
-        isNeedPolicy ? setupPolicy() : ()
+        
+        if isNeedPolicy {
+            setupPolicy()
+        }
         
         premiumHeaderView.configure(with: title, price: price, description: description, isHiddenTitleImageView: isHiddenTitleImageView, titleEdgeInsets: titleEdgeInsets)
         for premiumListView in premiumListViews.enumerated() {
