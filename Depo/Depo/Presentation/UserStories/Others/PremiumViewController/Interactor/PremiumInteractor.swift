@@ -15,24 +15,6 @@ final class PremiumInteractor {
     private let offersService: OffersService = OffersServiceIml()
     private let packageService: PackageService = PackageService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    
-    //MARK: - Utility Methids(public)
-    func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String {
-        return packageService.getPriceInfo(for: offer, accountType: accountType)
-    }
-    
-    //MARK: - Utility Methods(private)
-    private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
-        packageService.getInfoForAppleProducts(offers: offers, success: { [weak self] in
-            DispatchQueue.toMain {
-                self?.output.successed(allFeatures: offers)
-            }
-        }, fail: { [weak self] _ in
-            DispatchQueue.toMain {
-                self?.output.switchToTextWithoutPrice(isError: true)
-            }
-        })
-    }
 }
 
 // MARK: PremiumInteractorInput
@@ -57,16 +39,12 @@ extension PremiumInteractor: PremiumInteractorInput {
         })
     }
     
-    func getFeaturePacks(isAppleProduct: Bool) {
+    func getFeaturePacks() {
         accountService.featurePacks { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.toMain {
-                    if isAppleProduct {
-                        self?.getInfoForAppleProducts(offers: response)
-                    } else {
-                        self?.output.successed(allFeatures: response)
-                    }
+                    self?.output.successed(allFeatures: response)
                 }
             case .failed(_):
                 DispatchQueue.toMain {
@@ -74,6 +52,22 @@ extension PremiumInteractor: PremiumInteractorInput {
                 }
             }
         }
+    }
+    
+    func getInfoForAppleProducts(offer: PackageModelResponse) {
+        packageService.getInfoForAppleProducts(offers: [offer], success: { [weak self] in
+            DispatchQueue.toMain {
+                self?.output.successedGotAppleInfo()
+            }
+            }, fail: { [weak self] _ in
+                DispatchQueue.toMain {
+                    self?.output.switchToTextWithoutPrice(isError: true)
+                }
+        })
+    }
+    
+    func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String {
+        return packageService.getPriceInfo(for: offer, accountType: accountType)
     }
     
     //MARK: apple purchase
