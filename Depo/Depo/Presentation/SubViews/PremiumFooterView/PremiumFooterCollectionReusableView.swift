@@ -54,4 +54,11 @@ extension PremiumFooterCollectionReusableView: PremiumViewDelegate {
         delegate?.onBecomePremiumTap()
     }
     
+    func showTermsOfUse() {
+        //delegate func, used only in PremiumViewController
+    }
+    
+    func openLink(with url: URL) {
+        //delegate func, used only in PremiumViewController
+    }
 }
