@@ -10,6 +10,8 @@ import UIKit
 
 protocol PremiumViewDelegate: class {
     func onBecomePremiumTap()
+    func showTermsOfUse()
+    func openLink(with url: URL)
 }
 
 final class PremiumView: UIView {
@@ -120,5 +122,26 @@ final class PremiumView: UIView {
 extension PremiumView: PremiumHeaderViewDelegate {
     func onBecomePremiumTap() {
         delegate?.onBecomePremiumTap()
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension PremiumView: UITextViewDelegate {
+    
+    @available(iOS 10.0, *)
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        if URL.absoluteString == TextConstants.NotLocalized.termsOfUseLink {
+            DispatchQueue.toMain {
+                self.delegate?.showTermsOfUse()
+            }
+            return true
+        }
+        UIApplication.shared.open(URL, options: [:], completionHandler: nil)
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        delegate?.openLink(with: URL)
+        return true
     }
 }

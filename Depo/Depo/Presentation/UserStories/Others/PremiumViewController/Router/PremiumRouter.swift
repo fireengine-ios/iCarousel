@@ -66,4 +66,12 @@ extension PremiumRouter: PremiumRouterInput {
         })
         router.presentViewController(controller: successPopUp)
     }
+    
+    func openLink(with url: URL) {
+        UIApplication.shared.openURL(url)
+    }
+    
+    func showTermsOfUse() {
+        router.pushViewController(viewController: router.termsOfUseScreen)
+    }
 }

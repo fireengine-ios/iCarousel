@@ -230,4 +230,11 @@ extension PremiumPresenter: PremiumViewDelegate {
         prepareForPurchase()
     }
     
+    func openLink(with url: URL) {
+        router.openLink(with: url)
+    }
+    
+    func showTermsOfUse() {
+        router.showTermsOfUse()
+    }
 }

@@ -72,6 +72,9 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="kbW-ZH-7De"/>
+                                    </connections>
                                 </textView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
