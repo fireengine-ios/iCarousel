@@ -1468,8 +1468,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 guard let `self` = self else {
                     return
                 }
-//                ///Not sure if semaphore even needed here, but we have allItems change, so just in case, after allItems is changed - we call signal
-//                let semaphore = DispatchSemaphore(value: 0)
                 
                 if let unwrapedFilters = self.originalFilters,
                     self.isAlbumDetail(filters: unwrapedFilters) {
@@ -1491,12 +1489,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                 /// Collection was reloaded from different thread
                                 return
                             }
-//                            DispatchQueue.toMain {
-                                ///DO WE NEED MAIN HERE? ///test requred.
-                                ///Becase we use operations now, we migt no longer need put it into
-                                ///main thread every time we change all files, it should be fine without it.
-                                self.allItems[section][row] = file
-//                            }
+                            self.allItems[section][row] = file
+
                             break finished
                         }
                     }
@@ -1508,9 +1502,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         self.allMediaItems[index] = file
                     }
                 }
-                ///CALL it after all allMediaItems and allItems changes were made, we dont care about other stuff
-//                semaphore.signal()
-                
+    
                 guard self.needShowProgressInCell else {
                     return
                 }
@@ -1532,7 +1524,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     }
                     
                 })
-//                semaphore.wait()
             }
             uploadOperation.queuePriority = .high
             self?.batchOperations.addOperation(uploadOperation)
