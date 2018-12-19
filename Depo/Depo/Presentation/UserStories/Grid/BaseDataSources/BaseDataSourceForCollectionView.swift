@@ -156,10 +156,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
     
+    let batchOperations: OperationQueue
+    
     var lastPage: Int = 0
     
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
+        batchOperations = OperationQueue()
+        batchOperations.maxConcurrentOperationCount = 1
         super.init()
     }
     
@@ -1458,65 +1462,78 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
  
     func finishedUploadFile(file: WrapData){
         dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            if let unwrapedFilters = self.originalFilters,
-                self.isAlbumDetail(filters: unwrapedFilters) {
-                return
-            }
-            
-            let uuid = file.getTrimmedLocalID()
-            
-            if self.uploadedObjectID.index(of: file.uuid) == nil {
-                self.uploadedObjectID.append(uuid)
-            }
-            
-            finished: for (section, array) in self.allItems.enumerated() {
-                for (row, object) in array.enumerated() {
-                    if object.getTrimmedLocalID() == uuid, object.isLocalItem {
-                        file.isLocalItem = false
-                        
-                        guard section < self.allItems.count, row < self.allItems[section].count else {
-                            /// Collection was reloaded from different thread
-                            return
+            let uploadOperation = BlockOperation{ [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                ///Not sure if semaphore even needed here, but we have allItems change, so just in case, after allItems is changed - we call signal
+                let semaphore = DispatchSemaphore(value: 0)
+                
+                if let unwrapedFilters = self.originalFilters,
+                    self.isAlbumDetail(filters: unwrapedFilters) {
+                    return
+                }
+                
+                let uuid = file.getTrimmedLocalID()
+                
+                if self.uploadedObjectID.index(of: file.uuid) == nil {
+                    self.uploadedObjectID.append(uuid)
+                }
+                
+                finished: for (section, array) in self.allItems.enumerated() {
+                    for (row, object) in array.enumerated() {
+                        if object.getTrimmedLocalID() == uuid, object.isLocalItem {
+                            file.isLocalItem = false
+                            
+                            guard section < self.allItems.count, row < self.allItems[section].count else {
+                                /// Collection was reloaded from different thread
+                                return
+                            }
+                            DispatchQueue.toMain {
+                                ///DO WE NEED MAIN HERE? ///test requred.
+                                ///Becase we use operations now, we migt no longer need put it into
+                                ///main thread every time we change all files, it should be fine without it.
+                                self.allItems[section][row] = file
+                            }
+                            break finished
                         }
-                        
-                        self.allItems[section][row] = file
-                        
-                        break finished
                     }
                 }
-            }
-            
-            for (index, object) in self.allMediaItems.enumerated(){
-                if object.uuid == file.uuid {
-                    file.isLocalItem = false
-                    self.allMediaItems[index] = file
+                
+                for (index, object) in self.allMediaItems.enumerated(){
+                    if object.uuid == file.uuid {
+                        file.isLocalItem = false
+                        self.allMediaItems[index] = file
+                    }
                 }
-            }
-            
-            
-            guard self.needShowProgressInCell else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                if let cell = self.getCellForFile(objectUUID: file.uuid) {
-                    cell.finishedUploadForObject()
+                ///CALL it after all allMediaItems and allItems changes were made, we dont care about other stuff
+                semaphore.signal()
+                
+                guard self.needShowProgressInCell else {
+                    return
                 }
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
-                if let `self` = self {
-                    let cell = self.getCellForFile(objectUUID: file.uuid)
-                    cell?.resetCloudImage()
+                
+                DispatchQueue.main.async {
+                    if let cell = self.getCellForFile(objectUUID: file.uuid) {
+                        cell.finishedUploadForObject()
+                    }
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
+                    if let `self` = self {
+                        let cell = self.getCellForFile(objectUUID: file.uuid)
+                        cell?.resetCloudImage()
+                        
+                        if let index = self.uploadedObjectID.index(of: uuid){
+                            self.uploadedObjectID.remove(at: index)
+                        }
+                    }
                     
-                    if let index = self.uploadedObjectID.index(of: uuid){
-                        self.uploadedObjectID.remove(at: index)
-                    }
-                }
-            })
+                })
+                semaphore.wait()
+            }
+            uploadOperation.queuePriority = .high
+            self?.batchOperations.addOperation(uploadOperation)
         }
     }
     
@@ -1601,113 +1618,118 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func deleteItems(items: [Item]) {
         dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            if self.allItems.isEmpty {
-                return
-            }
-            guard !items.isEmpty else {
-                return
-            }
-            
-            var idsForRemove = [String]()
-            var objectsForReplaceDict = [String : Item]()
-            
-            if let unwrapedFilters = self.originalFilters,
-                !self.showOnlyRemotes(filters: unwrapedFilters) {
-                
-                var serverObjects = [Item]()
-                
-                var allItemsIDs = [String]()
-                for array in self.allItems {
-                    for object in array {
-                        allItemsIDs.append(object.getTrimmedLocalID())
-                    }
+            let deleteOperation = BlockOperation{ [weak self] in
+                guard let `self` = self else {
+                    return
                 }
                 
-                for object in items {
-                    if object.isLocalItem {
-                        idsForRemove.append(object.getLocalID())
-                    } else {
-                        serverObjects.append(object)
-                    }
+                let semaphore = DispatchSemaphore(value: 0)
+                
+                if self.allItems.isEmpty { /// no need for signals here, cuz we never reach semaphore wait
+                    return
+                }
+                guard !items.isEmpty else {
+                    return
                 }
                 
-                let localIDs = serverObjects.map {
-                    $0.getTrimmedLocalID()
-                }
-                let localObjectsForReplace = CoreDataStack.default.allLocalItems(trimmedLocalIds: localIDs)
+                var idsForRemove = [String]()
+                var objectsForReplaceDict = [String : Item]()
                 
-                let foundedLocalID = localObjectsForReplace.map {
-                    $0.getTrimmedLocalID()
-                }
-                for object in serverObjects {
-                    let trimmedID = object.getTrimmedLocalID()
-                    if let index = foundedLocalID.index(of: trimmedID) {
-                        let objForReplace = localObjectsForReplace[index]
-                        if let index = allItemsIDs.index(of: trimmedID){
-                            allItemsIDs.remove(at: index)
-                            if allItemsIDs.contains(trimmedID) {
-                                idsForRemove.append(object.uuid)
-                            } else {
-                                objectsForReplaceDict[object.uuid] = objForReplace
-                            }
+                if let unwrapedFilters = self.originalFilters,
+                    !self.showOnlyRemotes(filters: unwrapedFilters) {
+                    
+                    var serverObjects = [Item]()
+                    
+                    var allItemsIDs = [String]()
+                    for array in self.allItems {
+                        for object in array {
+                            allItemsIDs.append(object.getTrimmedLocalID())
                         }
-                    } else {
-                        idsForRemove.append(object.uuid)
                     }
-                }
-            } else {
-                idsForRemove = items.map{
-                    $0.uuid
-                }
-            }
-            
-            self.emptyMetaItems = self.emptyMetaItems.filter { !idsForRemove.contains($0.uuid) }
-
-            var newArray = [[WrapData]]()
-            
-            var recentlyUpdatedIndexes = [IndexPath]()
-            var recentlyDeletedIndexes = [IndexPath]()
-            var recentlyDeletedSections =  IndexSet()
-            
-            for (index, array) in self.allItems.enumerated() {
-                var newSectionArray = [WrapData]()
-                for object in array {
                     
-                    if let index = idsForRemove.index(of: object.getLocalID()) {
-                        self.allMediaItems.remove(object)
-                        idsForRemove.remove(at: index)
-                        recentlyDeletedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))///FOR now like that, in future = it should be called after with whole array
-                        continue
+                    for object in items {
+                        if object.isLocalItem {
+                            idsForRemove.append(object.getLocalID())
+                        } else {
+                            serverObjects.append(object)
+                        }
                     }
-                    if let obj = objectsForReplaceDict[object.uuid] {
-                        newSectionArray.append(obj)
-                        recentlyUpdatedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))
-                        continue
+                    
+                    let localIDs = serverObjects.map {
+                        $0.getTrimmedLocalID()
                     }
-                    newSectionArray.append(object)
-                }
-                if !newSectionArray.isEmpty {
-                    newArray.append(newSectionArray)
+                    //FIXME: check new compounder for locals
+                    let localObjectsForReplace = CoreDataStack.default.allLocalItems(trimmedLocalIds: localIDs)
+                    
+                    let foundedLocalID = localObjectsForReplace.map {
+                        $0.getTrimmedLocalID()
+                    }
+                    for object in serverObjects {
+                        let trimmedID = object.getTrimmedLocalID()
+                        if let index = foundedLocalID.index(of: trimmedID) {
+                            let objForReplace = localObjectsForReplace[index]
+                            if let index = allItemsIDs.index(of: trimmedID){
+                                allItemsIDs.remove(at: index)
+                                if allItemsIDs.contains(trimmedID) {
+                                    idsForRemove.append(object.uuid)
+                                } else {
+                                    objectsForReplaceDict[object.uuid] = objForReplace
+                                }
+                            }
+                        } else {
+                            idsForRemove.append(object.uuid)
+                        }
+                    }
                 } else {
-                    recentlyDeletedSections.insert(index)
+                    idsForRemove = items.map{
+                        $0.uuid
+                    }
                 }
-            }
-            
-            DispatchQueue.toMain {
-                self.allItems = newArray
-                CellImageManager.clear()
-                self.collectionView?.reloadData()
-                ///change performBatchUpdates to the reladData() in case of crash
-                self.collectionView?.performBatchUpdates({
-//                    self.allItems = newArray
-//                    self.collectionView?.reloadItems(at: recentlyUpdatedIndexes)
-//                    self.collectionView?.deleteItems(at: recentlyDeletedIndexes)
-//                    self.collectionView?.deleteSections(recentlyDeletedSections)
-                    
-                }, completion: { _ in
+                
+                self.emptyMetaItems = self.emptyMetaItems.filter { !idsForRemove.contains($0.uuid) }
+                
+                var newArray = [[WrapData]]()
+                
+                var recentlyUpdatedIndexes = [IndexPath]()
+                var recentlyDeletedIndexes = [IndexPath]()
+                var recentlyDeletedSections =  IndexSet()
+                
+                for (index, array) in self.allItems.enumerated() {
+                    var newSectionArray = [WrapData]()
+                    for object in array {
+                        
+                        if let index = idsForRemove.index(of: object.getLocalID()) {
+                            self.allMediaItems.remove(object)
+                            idsForRemove.remove(at: index)
+                            recentlyDeletedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))///FOR now like that, in future = it should be called after with whole array
+                            continue
+                        }
+                        if let obj = objectsForReplaceDict[object.uuid] {
+                            newSectionArray.append(obj)
+                            recentlyUpdatedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))
+                            continue
+                        }
+                        newSectionArray.append(object)
+                    }
+                    if !newSectionArray.isEmpty {
+                        newArray.append(newSectionArray)
+                    } else {
+                        recentlyDeletedSections.insert(index)
+                    }
+                }
+                
+                DispatchQueue.toMain {
+                    self.allItems = newArray
+                    CellImageManager.clear()
+                    self.collectionView?.reloadData()
+//                    //change performBatchUpdates to the reladData() in case of crash
+//                                    self.collectionView?.performBatchUpdates({
+//                    //                    self.allItems = newArray
+//                    //                    self.collectionView?.reloadItems(at: recentlyUpdatedIndexes)
+//                    //                    self.collectionView?.deleteItems(at: recentlyDeletedIndexes)
+//                    //                    self.collectionView?.deleteSections(recentlyDeletedSections)
+//
+//                                    }, completion: { _ in
                     //update folder items count
                     if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
                         self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
@@ -1720,8 +1742,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     self.delegate?.didDelete(items: items)
                     
                     self.updateCoverPhoto()
-                })
+                    semaphore.signal()
+                }
+                semaphore.wait()
             }
+            deleteOperation.queuePriority = .high
+            self?.batchOperations.addOperation(deleteOperation)
         }
     }
     
