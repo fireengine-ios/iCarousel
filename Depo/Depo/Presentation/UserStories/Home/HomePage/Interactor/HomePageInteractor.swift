@@ -19,6 +19,7 @@ class HomePageInteractor: HomePageInteractorInput {
     private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
     private(set) var homeCardsLoaded = false
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private var isShowPopupAboutPremium = true
     
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
@@ -93,7 +94,10 @@ class HomePageInteractor: HomePageInteractorInput {
                     self?.fillCollectionView(isReloadAll: false)
                 }
                 
-                self?.output.didShowPopupAboutPremium()
+                if self?.isShowPopupAboutPremium == true {
+                    self?.output.didShowPopupAboutPremium()
+                    self?.isShowPopupAboutPremium = false
+                }
             case .failed(let error):
                 self?.fillCollectionView(isReloadAll: true)
                 
