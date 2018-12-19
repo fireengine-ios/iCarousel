@@ -19,9 +19,13 @@ final class PremiumView: UIView {
     @IBOutlet private var view: UIView!
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var premiumHeaderView: PremiumHeaderView!
+    @IBOutlet weak var policyTextView: UITextView!
     
     @IBOutlet private var premiumListViews: [PremiumListView]!
     
+    private let policyHeaderSize: CGFloat = Device.isIpad ? 15 : 13
+    private let policyTextSize: CGFloat = Device.isIpad ? 13 : 10
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -37,12 +41,19 @@ final class PremiumView: UIView {
     // MARK: Utility methods(Public)
     func configure(with title: String,
                    price: String?,
+                   description: String,
                    types: [PremiumListType],
                    isHiddenTitleImageView: Bool? = false,
                    titleEdgeInsets: UIEdgeInsets,
-                   isNeedScroll: Bool = true) {
+                   isNeedScroll: Bool = true,
+                   isNeedPolicy: Bool) {
         scrollView.isScrollEnabled = isNeedScroll
-        premiumHeaderView.configure(with: title, price: price, isHiddenTitleImageView: isHiddenTitleImageView, titleEdgeInsets: titleEdgeInsets)
+        
+        if isNeedPolicy {
+            setupPolicy()
+        }
+        
+        premiumHeaderView.configure(with: title, price: price, description: description, isHiddenTitleImageView: isHiddenTitleImageView, titleEdgeInsets: titleEdgeInsets)
         for premiumListView in premiumListViews.enumerated() {
             switch types[premiumListView.offset] {
             case .backup:
@@ -79,6 +90,30 @@ final class PremiumView: UIView {
         premiumHeaderView.delegate = self        
     }
     
+    private func setupPolicy() {
+        let attributedString = NSMutableAttributedString(
+            string: TextConstants.packagesPolicyHeader,
+            attributes: [.foregroundColor: ColorConstants.textGrayColor,
+                         .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)])
+        
+        let policyAttributedString = NSMutableAttributedString(
+            string: "\n\n" + TextConstants.packagesPolicyText,
+            attributes: [.foregroundColor: ColorConstants.textGrayColor,
+                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
+        attributedString.append(policyAttributedString)
+        
+        let termsAttributedString = NSMutableAttributedString(
+            string: TextConstants.termsOfUseLinkText,
+            attributes: [.link: TextConstants.NotLocalized.termsOfUseLink,
+                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
+        attributedString.append(termsAttributedString)
+        
+        policyTextView.attributedText = attributedString
+        policyTextView.clipsToBounds = true
+        policyTextView.layer.cornerRadius = 5
+        policyTextView.layer.borderColor = ColorConstants.textLightGrayColor.cgColor
+        policyTextView.layer.borderWidth = 1
+    }
 }
 
 // MARK: - PremiumHeaderViewDelegate

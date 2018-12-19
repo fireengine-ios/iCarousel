@@ -960,7 +960,7 @@ struct TextConstants {
     static let useFollowingPremiumMembership = NSLocalizedString("use_following_premium_membership_advantages_with_only_additional_your_data_storage_package", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let month = NSLocalizedString("month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let noDetailsMessage = NSLocalizedString("no_details_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let serverErrorMessage = NSLocalizedString("please_try_again_later", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let backUpOriginalQuality = NSLocalizedString("Back up with Original Quality", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let removeDuplicateContacts = NSLocalizedString("Remove Duplicate Contacts from Your Directory", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1015,4 +1015,10 @@ struct TextConstants {
     static let seeDetails = NSLocalizedString("see_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageGroupingDescription = NSLocalizedString("face_image_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageUpgrade = NSLocalizedString("face_image_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let homePagePopup = NSLocalizedString("home_page_pop_up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let syncPopup = NSLocalizedString("sync_page_pop_up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let descriptionAboutStandartUser = NSLocalizedString("uploded_photos_high_quality", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let yesForUpgrade = NSLocalizedString("ok_for_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let noForUpgrade = NSLocalizedString("no_for_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

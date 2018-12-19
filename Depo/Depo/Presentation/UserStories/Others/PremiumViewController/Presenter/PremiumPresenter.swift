@@ -22,14 +22,12 @@ final class PremiumPresenter {
     
     private var userPhone = ""
     
+    private var alertText: String = ""
+    
     private var optInVC: OptInController?
     private var referenceToken = ""
     private var accountType: AccountType = .all
-    private var feature: PackageModelResponse? {
-        didSet {
-            displayFeatureInfo()
-        }
-    }
+    private var feature: PackageModelResponse?
     
     init(title: String, headerTitle: String, authority: AuthorityType?, module: FaceImageItemsModuleOutput?) {
         self.title = title
@@ -43,23 +41,25 @@ final class PremiumPresenter {
     }
     
     //MARK: Utility Methods(private)
-    private func displayFeatureInfo() {
-        let price: String
-        guard let offer = feature else {
-            view.stopActivityIndicator()
-            view.displayFeatureInfo(price: nil)
-            return
+    private func displayFeatureInfo(isError: Bool = false) {
+        var price: String?
+        let description: String
+        
+        if let offer = feature {
+            price = interactor.getPriceInfo(for: offer, accountType: accountType)
+            description = String(format: TextConstants.useFollowingPremiumMembership, price ?? "")
+        } else {
+            description = isError ? TextConstants.serverErrorMessage : TextConstants.noDetailsMessage
+            alertText = description
         }
         
-        price = interactor.getPriceInfo(for: offer, accountType: accountType)
-        
         view.stopActivityIndicator()
-        view.displayFeatureInfo(price: price)
+        view.displayFeatureInfo(price: price, description: description, isNeedPolicy: accountType != .turkcell)
     }
     
     private func prepareForPurchase() {
         guard let offer = feature else {
-            router.showNoDetailsAlert()
+            router.showNoDetailsAlert(with: alertText)
             return
         }
         if let type = offer.featureType, type == .appleFeature {
@@ -109,23 +109,23 @@ extension PremiumPresenter: PremiumInteractorOutput {
         if accountType == "TURKCELL" {
             self.accountType = .turkcell
         }
-        interactor.getFeaturePacks(isAppleProduct: self.accountType == .all)
+        interactor.getFeaturePacks()
     }
     
     func successed(allFeatures: [PackageModelResponse]) {
-        let featureType: FeaturePackageType = accountType == .all ? .appleFeature : .SLCMFeature
-        for feature in allFeatures {
-            if feature.featureType == featureType {
-                guard let authorities = feature.authorities else { continue }
-                if authorities.contains(where: { return $0.authorityType == authority }) {
-                    self.feature = feature
-                    break
-                }
-            }
-        }
+        feature = allFeatures.first(where: { feature in
+            return feature.authorities?.contains(where: { $0.authorityType == authority }) ?? false
+        })
         
-        if feature == nil {
-            switchToTextWithoutPrice()
+        guard let neededFeature = feature else {
+            switchToTextWithoutPrice(isError: false)
+            return
+        }
+
+        if neededFeature.featureType == .appleFeature {
+            interactor.getInfoForAppleProducts(offer: neededFeature)
+        } else {
+            displayFeatureInfo()
         }
     }
     
@@ -151,8 +151,12 @@ extension PremiumPresenter: PremiumInteractorOutput {
         optInVC?.resignFirstResponder()
         /// to wait popViewController animation
         DispatchQueue.toMain {
-            self.router.purchaseSuccessed()
+            self.router.purchaseSuccessed(with: self.moduleOutput)
         }
+    }
+    
+    func successedGotAppleInfo() {
+        displayFeatureInfo()
     }
     
     //MARK: Fail
@@ -166,8 +170,8 @@ extension PremiumPresenter: PremiumInteractorOutput {
         }
     }
     
-    func switchToTextWithoutPrice() {
-        displayFeatureInfo()
+    func switchToTextWithoutPrice(isError: Bool) {
+        displayFeatureInfo(isError: isError)
     }
     
     func failed(with errorMessage: String) {

@@ -132,6 +132,10 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         hideSpiner()
     }
     
+    func startSpinner() {
+        showSpiner()
+    }
+    
     func needPresentPopUp(popUpView: UIViewController) {
         DispatchQueue.toMain {
             self.present(popUpView, animated: true, completion: nil)

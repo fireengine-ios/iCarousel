@@ -20,5 +20,5 @@ protocol HomePageInteractorInput {
     
     func trackScreen()
 
-    func updateUserAuthority(_ isFirstAppear: Bool)
+    func updateUserAuthority()
 }
