@@ -134,9 +134,9 @@ extension PremiumView: UITextViewDelegate {
             DispatchQueue.toMain {
                 self.delegate?.showTermsOfUse()
             }
-            return true
+        } else {
+            delegate?.openLink(with: URL)
         }
-        UIApplication.shared.open(URL, options: [:], completionHandler: nil)
         return true
     }
     
