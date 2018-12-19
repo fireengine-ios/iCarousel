@@ -113,13 +113,9 @@ extension PremiumPresenter: PremiumInteractorOutput {
     }
     
     func successed(allFeatures: [PackageModelResponse]) {
-        for feature in allFeatures {
-            guard let authorities = feature.authorities else { continue }
-            if authorities.contains(where: { return $0.authorityType == authority }) {
-                self.feature = feature
-                break
-            }
-        }
+        feature = allFeatures.first(where: { feature in
+            return feature.authorities?.contains(where: { $0.authorityType == authority }) ?? false
+        })
         
         guard let neededFeature = feature else {
             switchToTextWithoutPrice(isError: false)
