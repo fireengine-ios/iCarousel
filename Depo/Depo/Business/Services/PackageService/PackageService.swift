@@ -110,7 +110,7 @@ final class PackageService {
         }
         return period
     }
-
+    
     private func getOfferPrice(for offer: Any) -> String? {
         var price: String?
         if let offer = offer as? PackageModelResponse, let priceFloat = offer.price {
@@ -120,7 +120,7 @@ final class PackageService {
         }
         return price
     }
-
+    
     private func getOfferCurrency(for offer: Any) -> String? {
         var currency: String?
         if let offer = offer as? PackageModelResponse, let currencyString = offer.currency {
@@ -179,14 +179,14 @@ final class PackageService {
             let price = product.localizedPrice
             if #available(iOS 11.2, *) {
                 let period: String
-                switch product.subscriptionPeriod?.unit.rawValue {
-                case 0:
+                switch product.subscriptionPeriod?.unit {
+                case .day?:
                     period = TextConstants.packagePeriodDay
-                case 1:
+                case .week?:
                     period = TextConstants.packagePeriodWeek
-                case 2:
+                case .month?:
                     period = TextConstants.packagePeriodMonth
-                case 3:
+                case .year?:
                     period = TextConstants.packagePeriodYear
                 default:
                     period = TextConstants.packagePeriodMonth
