@@ -25,22 +25,24 @@ final class LeavePremiumPresenter {
     }
     
     private var cancelText: String? {
-        guard let featureType = feature?.subscriptionPlanFeatureType, let accountType = accountType else {
+        guard let feature = feature, let featureType = feature.subscriptionPlanFeatureType else {
             return nil
         }
         
+        let cancelText: String
         if featureType == .allAccessFeature {
-            switch accountType {
+            //used "" to get type from offer to show correct alert info
+            switch getAccountType(for: "", subscription: feature) {
             case .all: return TextConstants.offersAllCancel
-            case .cyprus: return TextConstants.offersCancelCyprus
-            case .ukranian: return TextConstants.offersCancelUkranian
-            case .life: return TextConstants.offersCancelLife
-            case .moldovian: return TextConstants.offersCancelMoldcell
-            case .turkcell: return TextConstants.offersCancelTurkcell
+            case .cyprus: return TextConstants.featureKKTCellCancelText
+            case .ukranian: return TextConstants.featureLifeCellCancelText
+            case .life: return TextConstants.featureLifeCancelText
+            case .moldovian: return TextConstants.featureMoldCellCancelText
+            case .turkcell: return String(format: TextConstants.offersCancelTurkcell, feature.subscriptionPlanName ?? "")
             }
+        } else {
+            return featureType.cancelText
         }
-        
-        return featureType.cancelText
     }
     
     init(title: String) {
@@ -64,7 +66,7 @@ final class LeavePremiumPresenter {
                 type = .cyprus
             } else if role.contains("moldcell") {
                 type = .moldovian
-            } else if role.contains("life") {
+            } else if role.contains("life-") {
                 type = .life
             }
         }
@@ -104,14 +106,14 @@ extension LeavePremiumPresenter: LeavePremiumInteractorOutput {
     }
     
     func didLoadActiveSubscriptions(_ offers: [SubscriptionPlanBaseResponse]) {
-        offers.forEach { offer in
-            if let authorities = offer.subscriptionPlanAuthorities, feature == nil {
-                if authorities.contains(where: { $0.authorityType == .premiumUser }) {
-                    feature = offer
-                    print("iteration breaked")
-                }
-                print("iteration continue")
-            }
+        feature = offers.first(where: { offer in
+            return offer.subscriptionPlanAuthorities?.contains(where: { $0.authorityType == .premiumUser }) ?? false
+        })
+        
+        guard let feature = feature else {
+            let error = CustomErrors.text("No feature pack with premium authority type.")
+            didErrorMessage(with: error.localizedDescription)
+            return
         }
         
         interactor.getAccountType()

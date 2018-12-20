@@ -85,7 +85,8 @@ extension MyStoragePresenter: MyStorageViewOutput {
             return
         }
         if type != .apple {
-            router?.showCancelOfferAlert(with: type.cancelText)
+            let cancelText = String(format: type.cancelText, plan.name)
+            router?.showCancelOfferAlert(with: cancelText)
         } else {
             router?.showCancelOfferApple()
         }
@@ -108,7 +109,19 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     }
     
     func successed(allOffers: [SubscriptionPlanBaseResponse]) {
-        self.allOffers = allOffers.filter { $0.subscriptionPlanType != nil }
+        self.allOffers = allOffers.filter {
+            //show only non-feature offers
+            if $0.subscriptionPlanType == nil {
+                 return false
+            }
+            
+            //hide apple offers if apple server don't sent offer info
+            if let appleId = $0.subscriptionPlanInAppPurchaseId, IAPManager.shared.product(for: appleId) == nil {
+                return false
+            }
+            
+            return true
+        }
         interactor.getAccountType()
     }
     

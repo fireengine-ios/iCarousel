@@ -83,23 +83,23 @@ enum PackageType: String {
     var cancelText: String {
         switch self {
         case .apple:
-            return TextConstants.packageAppleCancelText
+            return TextConstants.offersAllCancel
         case .SLCM:
-            return TextConstants.packageSLCMCancelText
+            return TextConstants.offersCancelTurkcell
         case .google:
             return TextConstants.packageGoogleCancelText
         case .freeOfCharge:
             return TextConstants.packageFreeOfChargeCancelText
         case .lifeCell:
-            return TextConstants.packageLifeCellCancelText
+            return TextConstants.offersCancelUkranian
         case .promo:
             return TextConstants.packagePromoCancelText
         case .KKTCell:
-            return TextConstants.packageKKTCellCancelText
+            return TextConstants.offersCancelCyprus
         case .MoldCell:
-            return TextConstants.packageMoldCellCancelText
+            return TextConstants.offersCancelMoldcell
         case .life:
-            return TextConstants.packageLifeCancelText
+            return TextConstants.offersCancelLife
         case .paycellAllAccess:
             return TextConstants.packagePaycellAllAccessCancelText
         case .paycellSLCM:

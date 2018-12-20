@@ -772,7 +772,7 @@
 "face_image_thing_recognition" = "things";
 
 /* PackageViewController */
-"package_cancel_button" = "Leave Membership";
+"package_cancel_button" = "Cancel your subscription";
 "my_storage_usage" = "%@ of %@ left";
 "package_section_title" = "Upgrade Your Storage";
 "available_head_name_title" = "+ %@";

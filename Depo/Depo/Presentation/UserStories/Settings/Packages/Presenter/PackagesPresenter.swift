@@ -205,7 +205,13 @@ extension PackagesPresenter: PackagesInteractorOutput {
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
         availableOffers = offers.filter({
             guard let model = $0.model as? PackageModelResponse, let type = model.type else { return false }
-            return type == .SLCM || type == .apple
+            if type == .SLCM {
+                return true
+            } else if type == .apple {
+                return IAPManager.shared.product(for: model.inAppPurchaseId ?? "") != nil
+            } else {
+                return false
+            }
         })
         view?.stopActivityIndicator()
         view?.reloadData()
