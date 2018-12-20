@@ -33,12 +33,8 @@ enum FeaturePackageType: String {
             return TextConstants.featureSLCMCancelText
         case .googleFeature:
             return TextConstants.featureGoogleCancelText
-        case .allAccessPaycellFeature:
+        case .paycellAllAccessFeature:
             return TextConstants.featurePaycellAllAccessCancelText
-        case .allAccessFeature:
-            return TextConstants.featurePaycellSLCMCancelText
-        case .SLCMPaycellFeature:
-            return TextConstants.featureSLCMPaycellCancelText
         case .SLCMPaycellFeature:
             return TextConstants.featureSLCMPaycellCancelText
         case .freeOfChargeFeature:
@@ -51,12 +47,8 @@ enum FeaturePackageType: String {
             return TextConstants.featureKKTCellCancelText
         case .MoldCellFeature:
             return TextConstants.featureMoldCellCancelText
-        case .lifeCellFeature:
-            return TextConstants.packageLifeCellCancelText
         case .lifeFeature:
             return TextConstants.featureLifeCancelText
-        case .paycellAllAccessFeature:
-            return TextConstants.featurePaycellAllAccessCancelText
         case .allAccessFeature:
             return TextConstants.featureDefaultCancelText
         case .paycellSLCMFeature:
@@ -83,23 +75,23 @@ enum PackageType: String {
     var cancelText: String {
         switch self {
         case .apple:
-            return TextConstants.packageAppleCancelText
+            return TextConstants.offersAllCancel
         case .SLCM:
-            return TextConstants.packageSLCMCancelText
+            return TextConstants.offersCancelTurkcell
         case .google:
             return TextConstants.packageGoogleCancelText
         case .freeOfCharge:
             return TextConstants.packageFreeOfChargeCancelText
         case .lifeCell:
-            return TextConstants.packageLifeCellCancelText
+            return TextConstants.offersCancelUkranian
         case .promo:
             return TextConstants.packagePromoCancelText
         case .KKTCell:
-            return TextConstants.packageKKTCellCancelText
+            return TextConstants.offersCancelCyprus
         case .MoldCell:
-            return TextConstants.packageMoldCellCancelText
+            return TextConstants.offersCancelMoldcell
         case .life:
-            return TextConstants.packageLifeCancelText
+            return TextConstants.offersCancelLife
         case .paycellAllAccess:
             return TextConstants.packagePaycellAllAccessCancelText
         case .paycellSLCM:

@@ -725,15 +725,10 @@
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@ / %@";
 
-"package_apple_cancel_text" = "Apple subscription cancel text.";
-"package_slcm_cancel_text" = "SLCM subscription cancel text.";
 "package_google_cancel_text" = "Google subscription cancel text.";
 "package_free_of_charge_cancel_text" = "FreeOfCharge subscription cancel text.";
 "package_lifecell_cancel_text" = "LifeCell subscription cancel text.";
 "package_promo_cancel_text" = "Promo subscription cancel text.";
-"package_kktcell_cancel_text" = "KKTCell subscription cancel text.";
-"package_moldcell_cancel_text" = "MoldCell subscription cancel text.";
-"package_life_cancel_text" = "Life subscription cancel text.";
 "package_paycell_all_access_cancel_text" = "PaycellAllAccess subscription cancel text.";
 "package_paycell_slcm_cancel_text" = "PaycellSLCM subscription cancel text.";
 "package_slcm_paycell_cancel_text" = "SLCMPaycell subscription cancel text.";
@@ -772,7 +767,7 @@
 "face_image_thing_recognition" = "things";
 
 /* PackageViewController */
-"package_cancel_button" = "Leave Membership";
+"package_cancel_button" = "Cancel your subscription";
 "my_storage_usage" = "%@ of %@ left";
 "package_section_title" = "Upgrade Your Storage";
 "available_head_name_title" = "+ %@";
