@@ -56,6 +56,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         }
     }
     
+    func hideScrollIndicatorIfNeeded() {
+        scrollBarManager.startTimerToHideScrollBar()
+    }
+    
     override func dropData() {
         emptyMetaItems.removeAll()
         allItems.removeAll()
