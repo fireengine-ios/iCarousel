@@ -33,12 +33,8 @@ enum FeaturePackageType: String {
             return TextConstants.featureSLCMCancelText
         case .googleFeature:
             return TextConstants.featureGoogleCancelText
-        case .allAccessPaycellFeature:
+        case .paycellAllAccessFeature:
             return TextConstants.featurePaycellAllAccessCancelText
-        case .allAccessFeature:
-            return TextConstants.featurePaycellSLCMCancelText
-        case .SLCMPaycellFeature:
-            return TextConstants.featureSLCMPaycellCancelText
         case .SLCMPaycellFeature:
             return TextConstants.featureSLCMPaycellCancelText
         case .freeOfChargeFeature:
@@ -51,12 +47,8 @@ enum FeaturePackageType: String {
             return TextConstants.featureKKTCellCancelText
         case .MoldCellFeature:
             return TextConstants.featureMoldCellCancelText
-        case .lifeCellFeature:
-            return TextConstants.packageLifeCellCancelText
         case .lifeFeature:
             return TextConstants.featureLifeCancelText
-        case .paycellAllAccessFeature:
-            return TextConstants.featurePaycellAllAccessCancelText
         case .allAccessFeature:
             return TextConstants.featureDefaultCancelText
         case .paycellSLCMFeature:
