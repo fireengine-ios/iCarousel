@@ -178,18 +178,20 @@ final class PackageService {
         if let iapProductId = getAppleIds(for: [offer]).first, let product = iapManager.product(for: iapProductId) {
             let price = product.localizedPrice
             if #available(iOS 11.2, *) {
+                guard let subscriptionPeriod = product.subscriptionPeriod else {
+                    fullPrice = String(format: TextConstants.packageApplePrice, price, TextConstants.packagePeriodMonth)
+                    return fullPrice
+                }
                 let period: String
-                switch product.subscriptionPeriod?.unit {
-                case .day?:
+                switch subscriptionPeriod.unit {
+                case .day:
                     period = TextConstants.packagePeriodDay
-                case .week?:
+                case .week:
                     period = TextConstants.packagePeriodWeek
-                case .month?:
+                case .month:
                     period = TextConstants.packagePeriodMonth
-                case .year?:
+                case .year:
                     period = TextConstants.packagePeriodYear
-                default:
-                    period = TextConstants.packagePeriodMonth
                 }
                 fullPrice = String(format: TextConstants.packageApplePrice, price, period)
             } else {
