@@ -61,25 +61,32 @@ class HomePageRouter: HomePageRouterInput {
         UIApplication.showErrorAlert(message: errorMessage)
     }
     
-    func showPopupForNewUser(with message: String, title: String, headerTitle: String) {
+    func showPopupForNewUser(with message: String, title: String, headerTitle: String, completion: @escaping VoidHandler) {
         let controller = PopUpController.with(title: nil,
                                               message: message,
                                               image: .none,
                                               firstButtonTitle: TextConstants.noForUpgrade,
                                               secondButtonTitle: TextConstants.yesForUpgrade,
-                                              secondAction: { [weak self] vc in
+                                               secondAction: { [weak self] vc in
                                                 vc.dismiss(animated: true, completion: {
-                                                    self?.moveToPremium(title: title, headerTitle: headerTitle)
+                                                    self?.moveToPremium(title: title, headerTitle: headerTitle, completion: completion)
                                                 })
         })
         
-        router.navigationController?.present(controller, animated: true, completion: nil)
+        UIApplication.topController()?.present(controller, animated: true, completion: nil)
     }
     
     // MARK: Utility methods
-    private func moveToPremium(title: String, headerTitle: String) {
+    private func moveToPremium(title: String, headerTitle: String, completion: @escaping VoidHandler) {
         let controller = router.premium(title: title, headerTitle: headerTitle)
-        router.pushViewController(viewController: controller)
+        if router.getViewControllerForPresent()?.presentedViewController is LargeFullOfQuotaPopUp {
+            completion()
+            router.getViewControllerForPresent()?.dismiss(animated: false, completion: { [weak self] in
+                self?.router.pushViewController(viewController: controller)
+            })
+        } else {
+            router.pushViewController(viewController: controller)
+        }
     }
     
 }

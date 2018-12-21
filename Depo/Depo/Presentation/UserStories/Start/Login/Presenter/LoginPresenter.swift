@@ -167,6 +167,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     private func openApp() {
         storageVars.emptyEmailUp = false
+        AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
         router.goToSyncSettingsView()
     }
     

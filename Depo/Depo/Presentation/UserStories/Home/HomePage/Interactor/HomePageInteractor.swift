@@ -141,8 +141,12 @@ class HomePageInteractor: HomePageInteractorInput {
                     }
                     
                     if let popUpView = viewForPresent {
+                        if RouterVC().getViewControllerForPresent()?.presentedViewController is PopUpController,
+                            let popUpView = popUpView as? LargeFullOfQuotaPopUp {
+                            popUpView.delegate = self
+                        }
                         
-                        RouterVC().tabBarVC?.present(popUpView, animated: true, completion: nil)
+                        UIApplication.topController()?.present(popUpView, animated: true, completion: nil)
 //                        self?.output.needPresentPopUp(popUpView: popUpView)
                     }
                     
@@ -169,6 +173,15 @@ class HomePageInteractor: HomePageInteractorInput {
             return
         }
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .quota, eventLabel: .quotaUsed(quotaUsed))
+    }
+    
+}
+
+//MARK: - LargeFullOfQuotaPopUpDelegate
+extension HomePageInteractor: LargeFullOfQuotaPopUpDelegate {
+    
+    func onOpenExpandTap() {
+        output.didOpenExpand()
     }
     
 }

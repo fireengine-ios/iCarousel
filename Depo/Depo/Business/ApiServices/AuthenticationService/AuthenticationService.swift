@@ -398,6 +398,7 @@ class AuthenticationService: BaseRequestService {
             ItemOperationManager.default.clear()
             ItemsRepository.sharedSession.dropCache()
             ViewSortStorage.shared.resetToDefault()
+            AuthoritySingleton.shared.setLoginAlready(isLoginAlready: false)
             
             self.player.stop()
             self.cancellAllRequests()
