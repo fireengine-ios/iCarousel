@@ -21,4 +21,7 @@ protocol HomePageInteractorOutput: class {
     func didObtainHomeCards(_ cards: [HomeCardResponse])
     
     func fillCollectionView(isReloadAll: Bool)
+    
+    func didOpenExpand()
+        
 }

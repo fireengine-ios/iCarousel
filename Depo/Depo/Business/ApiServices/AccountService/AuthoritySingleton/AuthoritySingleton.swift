@@ -21,6 +21,7 @@ final class AuthoritySingleton {
         static let isShowPopupAboutPremiumAfterRegistration = "isShowPopupAboutPremiumAfterRegistration"
         static let isShowedPopupAboutPremiumAfterLogin = "isShowedPopupAboutPremiumAfterLogin"
         static let isShowedPopupAboutPremiumAfterSync = "isShowedPopupAboutPremiumAfterSync"
+        static let isLoginAlready = "isLoginAlready"
     }
     
     var isPremium: Bool = false {
@@ -85,6 +86,16 @@ final class AuthoritySingleton {
     func setShowedPopupAboutPremiumAfterSync(isShow: Bool) {
         let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
         UserDefaults.standard.set(isShow, forKey: Keys.isShowedPopupAboutPremiumAfterSync  + userID)
+    }
+    
+    var isLoginAlready: Bool {
+        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        return UserDefaults.standard.bool(forKey: Keys.isLoginAlready + userID)
+    }
+    
+    func setLoginAlready(isLoginAlready: Bool) {
+        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        UserDefaults.standard.set(isLoginAlready, forKey: Keys.isLoginAlready  + userID)
     }
 
     func refreshStatus(premium: Bool, dublicates: Bool, faces: Bool) {
