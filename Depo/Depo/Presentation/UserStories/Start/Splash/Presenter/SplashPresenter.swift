@@ -64,11 +64,13 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     // MARK: Interactor out
     
     func onSuccessLogin() {
+        AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
         interactor.checkEULA()
         MenloworksAppEvents.onStartWithLogin(true)
     }
     
     func onSuccessLoginTurkcell() {
+        AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
         turkcellLogin = true
         interactor.checkEULA()
         MenloworksAppEvents.onStartWithLogin(true)
