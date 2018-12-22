@@ -12,6 +12,8 @@ final class AuthoritySingleton {
     
     static let shared: AuthoritySingleton = AuthoritySingleton()
     
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    
     private enum Keys {
         //Took from StorageVars to get userID instead of creating storageVars
         static let currentUserID = "CurrentUserIDKey"
@@ -22,7 +24,16 @@ final class AuthoritySingleton {
         static let isShowedPopupAboutPremiumAfterLogin = "isShowedPopupAboutPremiumAfterLogin"
         static let isShowedPopupAboutPremiumAfterSync = "isShowedPopupAboutPremiumAfterSync"
         static let isLoginAlready = "isLoginAlready"
+        static let currentAppVersionKey = "currentAppVersionKey"
+        static let isNewAppVersionKey = "isNewAppVersionKey"
     }
+    
+    var currentAppVersion: String? {
+        get { return UserDefaults.standard.string(forKey: Keys.currentAppVersionKey) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.currentAppVersionKey) }
+    }
+    
+    var isNewAppVersion: Bool = false
     
     var isPremium: Bool = false {
         willSet {
@@ -114,5 +125,21 @@ final class AuthoritySingleton {
         isPremium = false
         faceRecognition = false
         deleteDublicate = false
+    }
+    
+    func checkNewVersionApp() {
+        if getAppVersion() != currentAppVersion {
+            setLoginAlready(isLoginAlready: tokenStorage.refreshToken != nil)
+            currentAppVersion = getAppVersion()
+            isNewAppVersion = true
+        }
+    }
+    
+    // MARK: Utility methods
+    private func getAppVersion() -> String {
+        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+            return ""
+        }
+        return version
     }
 }
