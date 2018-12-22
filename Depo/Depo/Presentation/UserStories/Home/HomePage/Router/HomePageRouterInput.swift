@@ -24,6 +24,6 @@ protocol HomePageRouterInput {
     
     func showError(errorMessage: String)
     
-    func showPopupForNewUser(with message: String, title: String, headerTitle: String, completion: @escaping VoidHandler)
+    func showPopupForNewUser(with message: String, title: String, headerTitle: String, completion: VoidHandler?)
 
 }

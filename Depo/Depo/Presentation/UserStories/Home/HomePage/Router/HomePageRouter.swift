@@ -61,7 +61,7 @@ class HomePageRouter: HomePageRouterInput {
         UIApplication.showErrorAlert(message: errorMessage)
     }
     
-    func showPopupForNewUser(with message: String, title: String, headerTitle: String, completion: @escaping VoidHandler) {
+    func showPopupForNewUser(with message: String, title: String, headerTitle: String, completion: VoidHandler?) {
         let controller = PopUpController.with(title: nil,
                                               message: message,
                                               image: .none,
@@ -77,10 +77,12 @@ class HomePageRouter: HomePageRouterInput {
     }
     
     // MARK: Utility methods
-    private func moveToPremium(title: String, headerTitle: String, completion: @escaping VoidHandler) {
+    private func moveToPremium(title: String, headerTitle: String, completion: VoidHandler?) {
         let controller = router.premium(title: title, headerTitle: headerTitle)
-        if router.getViewControllerForPresent()?.presentedViewController is LargeFullOfQuotaPopUp {
-            completion()
+        /// Show another popup after the transition because the user did not see it behind it
+        let isPresentedQuotaPopUpUnderPremiumPopUp = router.getViewControllerForPresent()?.presentedViewController is LargeFullOfQuotaPopUp
+        if isPresentedQuotaPopUpUnderPremiumPopUp {
+            completion?()
             router.getViewControllerForPresent()?.dismiss(animated: false, completion: { [weak self] in
                 self?.router.pushViewController(viewController: controller)
             })

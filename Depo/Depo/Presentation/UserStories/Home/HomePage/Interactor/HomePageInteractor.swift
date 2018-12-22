@@ -141,8 +141,10 @@ class HomePageInteractor: HomePageInteractorInput {
                     }
                     
                     if let popUpView = viewForPresent {
-                        if RouterVC().getViewControllerForPresent()?.presentedViewController is PopUpController,
-                            let popUpView = popUpView as? LargeFullOfQuotaPopUp {
+                        let router = RouterVC()
+                        /// Show another popup after the transition because the user did not see it behind it
+                        let isPresentedPopUpUnderQuotaPopUp = router.getViewControllerForPresent()?.presentedViewController is PopUpController
+                        if isPresentedPopUpUnderQuotaPopUp, let popUpView = popUpView as? LargeFullOfQuotaPopUp {
                             popUpView.delegate = self
                         }
                         

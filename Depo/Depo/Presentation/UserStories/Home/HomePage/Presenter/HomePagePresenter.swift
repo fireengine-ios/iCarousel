@@ -47,7 +47,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
             isShowPopupAboutPremium = false
             router.showPopupForNewUser(with: TextConstants.descriptionAboutStandartUser,
                                        title: TextConstants.lifeboxPremium,
-                                       headerTitle: TextConstants.becomePremiumMember, completion: { })
+                                       headerTitle: TextConstants.becomePremiumMember, completion: nil)
         }
     }
     
@@ -122,7 +122,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
             AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: false)
             router.showPopupForNewUser(with: TextConstants.homePagePopup,
                                                                   title: TextConstants.lifeboxPremium,
-                                                                  headerTitle: TextConstants.becomePremiumMember, completion: {})
+                                                                  headerTitle: TextConstants.becomePremiumMember, completion: nil)
         } else if !AuthoritySingleton.shared.isShowedPopupAboutPremiumAfterLogin,
             !AuthoritySingleton.shared.isPremium,
             AuthoritySingleton.shared.isLoginAlready {
