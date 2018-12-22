@@ -252,6 +252,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func refreshPackages() {
+        view?.stopActivityIndicator()
         refreshPage()
     }
 }
