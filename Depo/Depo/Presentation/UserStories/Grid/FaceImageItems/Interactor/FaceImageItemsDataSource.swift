@@ -25,7 +25,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if AuthoritySingleton.shared.isPremium {
+        if AuthoritySingleton.shared.faceRecognition {
             return super.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
         } else {
             let premiumView = collectionView.dequeue(supplementaryView: PremiumFooterCollectionReusableView.self, kind: kind, for: indexPath)
@@ -36,7 +36,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        if AuthoritySingleton.shared.isPremium {
+        if AuthoritySingleton.shared.faceRecognition {
             return super.collectionView(collectionView, layout: collectionViewLayout, referenceSizeForFooterInSection: section)
         } else {
             return CGSize(width: UIScreen.main.bounds.width, height: NumericConstants.premiumViewHeight + heightDescriptionLabel)
