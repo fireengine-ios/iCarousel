@@ -159,6 +159,8 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         switch operationType {
         case .prepareToAutoSync:
             return viewsByType[.sync] == nil
+        case .premium:
+            return !popUps.contains(where: { $0 is PremiumInfoCard })
         default:
             return true
         }
@@ -265,11 +267,10 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         if !checkIsThisIsPermittedType(type: type), type != .premium {
             return
         }
-        if !checkIsNeedShowPopUpFor(operationType: type), type != .premium {
-            return
-        }
-        if popUps.contains(where: { $0 is PremiumInfoCard }) {
-            refreshPremiumCard()
+        if !checkIsNeedShowPopUpFor(operationType: type) {
+            if type == .premium {
+                refreshPremiumCard()
+            }
             return
         }
         
