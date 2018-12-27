@@ -88,6 +88,9 @@ final class UploadService: BaseRequestService {
                 returnedUploadOperation(nil)
                 return
             }
+            
+            PremiumService.shared.showPopupForNewUserIfNeeded()
+            
             self.analyticsService.trackDimentionsEveryClickGA(screen: .upload, downloadsMetrics: nil, uploadsMetrics: items.count)
             self.trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
             

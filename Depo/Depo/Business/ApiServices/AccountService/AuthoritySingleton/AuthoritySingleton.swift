@@ -22,7 +22,7 @@ final class AuthoritySingleton {
         static let isLosePremiumStatus = "isLosePremiumStatus"
         static let isShowPopupAboutPremiumAfterRegistration = "isShowPopupAboutPremiumAfterRegistration"
         static let isShowedPopupAboutPremiumAfterLogin = "isShowedPopupAboutPremiumAfterLogin"
-        static let isShowedPopupAboutPremiumAfterSync = "isShowedPopupAboutPremiumAfterSync"
+        static let isShowPopupAboutPremiumAfterStartSync = "isShowPopupAboutPremiumAfterStartSync"
         static let isLoginAlready = "isLoginAlready"
         static let currentAppVersionKey = "currentAppVersionKey"
         static let isNewAppVersionKey = "isNewAppVersionKey"
@@ -89,14 +89,14 @@ final class AuthoritySingleton {
         UserDefaults.standard.set(isShow, forKey: Keys.isShowedPopupAboutPremiumAfterLogin  + userID)
     }
     
-    var isShowedPopupAboutPremiumAfterSync: Bool {
+    var isShowPopupAboutPremiumAfterSync: Bool {
         let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
-        return UserDefaults.standard.bool(forKey: Keys.isShowedPopupAboutPremiumAfterSync + userID)
+        return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterStartSync + userID) && isPremium == false
     }
     
-    func setShowedPopupAboutPremiumAfterSync(isShow: Bool) {
+    func setShowPopupAboutPremiumAfterSync(isShow: Bool) {
         let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
-        UserDefaults.standard.set(isShow, forKey: Keys.isShowedPopupAboutPremiumAfterSync  + userID)
+        UserDefaults.standard.set(isShow, forKey: Keys.isShowPopupAboutPremiumAfterStartSync  + userID)
     }
     
     var isLoginAlready: Bool {

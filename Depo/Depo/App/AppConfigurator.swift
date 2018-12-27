@@ -52,6 +52,8 @@ final class AppConfigurator {
         startUpdateLocation(with: launchOptions)
         
         AuthoritySingleton.shared.checkNewVersionApp()
+        
+        PremiumService.shared.addObserverForSyncStatusDidChange()
     }
     
     private static func setupIAPObserver() {

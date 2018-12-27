@@ -123,6 +123,5 @@ struct NumericConstants {
 struct RequestSizeConstant {
     
     static let faceImageItemsRequestSize = 100
-    static let requestSizeForFaceImageStandartUser = 13
     
 }

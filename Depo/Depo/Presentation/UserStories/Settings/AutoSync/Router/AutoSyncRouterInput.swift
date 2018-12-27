@@ -10,5 +10,4 @@ import Foundation
 
 protocol AutoSyncRouterInput {
     func routNextVC()
-    func showPopupForNewUser(with message: String, title: String, headerTitle: String)
 }
