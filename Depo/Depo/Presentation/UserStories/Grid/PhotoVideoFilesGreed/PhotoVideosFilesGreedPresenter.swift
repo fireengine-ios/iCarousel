@@ -57,6 +57,14 @@ final class PhotoVideosFilesGreedPresenter: BaseFilesGreedPresenter {
         subscribeDataSource()
     }
     
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        
+        if let dataSource = dataSource as? PhotoVideoDataSourceForCollectionView {
+            dataSource.hideScrollIndicatorIfNeeded()
+        }
+    }
+    
     override func onReloadData() {
         debugLog("BaseFilesGreedPresenter onReloadData")
         

@@ -19,6 +19,7 @@ class HomePageInteractor: HomePageInteractorInput {
     private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
     private(set) var homeCardsLoaded = false
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private var isShowPopupAboutPremium = true
     
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
@@ -93,7 +94,10 @@ class HomePageInteractor: HomePageInteractorInput {
                     self?.fillCollectionView(isReloadAll: false)
                 }
                 
-                self?.output.didShowPopupAboutPremium()
+                if self?.isShowPopupAboutPremium == true {
+                    self?.output.didShowPopupAboutPremium()
+                    self?.isShowPopupAboutPremium = false
+                }
             case .failed(let error):
                 self?.fillCollectionView(isReloadAll: true)
                 
@@ -137,8 +141,14 @@ class HomePageInteractor: HomePageInteractorInput {
                     }
                     
                     if let popUpView = viewForPresent {
+                        let router = RouterVC()
+                        /// Show another popup after the transition because the user did not see it behind it
+                        let isPresentedPopUpUnderQuotaPopUp = router.getViewControllerForPresent()?.presentedViewController is PopUpController
+                        if isPresentedPopUpUnderQuotaPopUp, let popUpView = popUpView as? LargeFullOfQuotaPopUp {
+                            popUpView.delegate = self
+                        }
                         
-                        RouterVC().tabBarVC?.present(popUpView, animated: true, completion: nil)
+                        UIApplication.topController()?.present(popUpView, animated: true, completion: nil)
 //                        self?.output.needPresentPopUp(popUpView: popUpView)
                     }
                     
@@ -165,6 +175,15 @@ class HomePageInteractor: HomePageInteractorInput {
             return
         }
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .quota, eventLabel: .quotaUsed(quotaUsed))
+    }
+    
+}
+
+//MARK: - LargeFullOfQuotaPopUpDelegate
+extension HomePageInteractor: LargeFullOfQuotaPopUpDelegate {
+    
+    func onOpenExpandTap() {
+        output.didOpenExpand()
     }
     
 }

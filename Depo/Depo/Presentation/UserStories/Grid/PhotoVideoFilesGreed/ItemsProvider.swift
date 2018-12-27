@@ -46,6 +46,7 @@ class ItemsProvider {
     
     ///for photo And Videos while items being downloaded
     func getNextItems(callback: @escaping ItemsCallback) {
+        
         currentDataBasePage += 1
         let nextPageRange = (currentDataBasePage - 1)*databasePageSize..<currentDataBasePage*databasePageSize
         

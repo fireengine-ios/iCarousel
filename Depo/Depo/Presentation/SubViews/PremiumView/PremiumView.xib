@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PremiumView" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="policyTextView" destination="PRX-oj-6gS" id="FOv-Vw-EeC"/>
                 <outlet property="premiumHeaderView" destination="8rI-MV-uQT" id="yVr-wA-7gj"/>
                 <outlet property="scrollView" destination="PgH-Xc-JLe" id="ZVX-7x-n3x"/>
                 <outlet property="view" destination="iN0-l3-epB" id="XGK-3c-oVn"/>
@@ -34,11 +35,11 @@
                             <rect key="frame" x="0.0" y="0.0" width="1024" height="1346"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rI-MV-uQT" customClass="PremiumHeaderView" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="1052"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="1017"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="9Te-f5-hf4">
-                                    <rect key="frame" x="0.0" y="1076" width="1024" height="240"/>
+                                    <rect key="frame" x="0.0" y="1041" width="1024" height="240"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aSu-B3-S6i" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="37"/>
@@ -65,16 +66,30 @@
                                         <constraint firstAttribute="height" constant="240" id="XIi-d8-l0Z"/>
                                     </constraints>
                                 </stackView>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRX-oj-6gS">
+                                    <rect key="frame" x="16" y="1305" width="992" height="33"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="kbW-ZH-7De"/>
+                                    </connections>
+                                </textView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="PRX-oj-6gS" firstAttribute="leading" secondItem="yMx-AY-vjW" secondAttribute="leading" constant="16" id="4GK-7Q-TDh"/>
                                 <constraint firstItem="9Te-f5-hf4" firstAttribute="leading" secondItem="yMx-AY-vjW" secondAttribute="leading" id="EFQ-mf-j0e"/>
+                                <constraint firstAttribute="trailing" secondItem="PRX-oj-6gS" secondAttribute="trailing" constant="16" id="EcP-YX-4DH"/>
                                 <constraint firstAttribute="trailing" secondItem="9Te-f5-hf4" secondAttribute="trailing" id="KLt-4J-p9i"/>
                                 <constraint firstItem="9Te-f5-hf4" firstAttribute="top" secondItem="8rI-MV-uQT" secondAttribute="bottom" constant="24" id="OqT-n3-3Ye"/>
                                 <constraint firstItem="8rI-MV-uQT" firstAttribute="leading" secondItem="yMx-AY-vjW" secondAttribute="leading" id="S2c-6T-Pxy"/>
+                                <constraint firstItem="PRX-oj-6gS" firstAttribute="top" secondItem="9Te-f5-hf4" secondAttribute="bottom" constant="24" id="Yov-HT-Gw8"/>
                                 <constraint firstAttribute="trailing" secondItem="8rI-MV-uQT" secondAttribute="trailing" id="ahj-d1-zba"/>
                                 <constraint firstItem="8rI-MV-uQT" firstAttribute="top" secondItem="yMx-AY-vjW" secondAttribute="top" id="cE7-Ek-NGF"/>
                                 <constraint firstAttribute="bottom" secondItem="9Te-f5-hf4" secondAttribute="bottom" priority="250" constant="30" id="qVY-9g-kjg"/>
+                                <constraint firstAttribute="bottom" secondItem="PRX-oj-6gS" secondAttribute="bottom" constant="8" id="sjL-eS-9vT"/>
                             </constraints>
                         </view>
                     </subviews>

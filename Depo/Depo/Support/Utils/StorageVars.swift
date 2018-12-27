@@ -19,7 +19,7 @@ protocol StorageVars: class {
     var smallFullOfQuotaPopUpCheckBox: Bool { get set }
     var periodicContactSyncSet: Bool { get set }
     var usersWhoUsedApp: [String: Any] { get set }
-    var isNewAppVersionFirstLaunch: Bool { get set }
+    var isNewAppVersionFirstLaunchTurkcellLanding: Bool { get set }
     var deepLink: String? {get set}
     var interruptedSyncVideoQueueItems: [String] { get set }
 }
@@ -28,15 +28,15 @@ final class UserDefaultsVars: StorageVars {
     
     private let userDefaults = UserDefaults.standard
     
-    
     private let isAppFirstLaunchKey = "isAppFirstLaunchKey"
     var isAppFirstLaunch: Bool {
         get { return userDefaults.object(forKey: isAppFirstLaunchKey) as? Bool ?? true }
         set { userDefaults.set(newValue, forKey: isAppFirstLaunchKey) }
     }
     
+    ///Do not change key
     private let isNewAppVersionFirstLaunchKey = "isNewAppVersionFirstLaunch%@"
-    var isNewAppVersionFirstLaunch: Bool {
+    var isNewAppVersionFirstLaunchTurkcellLanding: Bool {
         get {
             return userDefaults.object(forKey: String(format: isNewAppVersionFirstLaunchKey, getAppVersion())) as? Bool ?? true
         }
@@ -44,11 +44,18 @@ final class UserDefaultsVars: StorageVars {
             userDefaults.set(newValue, forKey: String(format: isNewAppVersionFirstLaunchKey, getAppVersion()))
         }
     }
+    
     private func getAppVersion() -> String {
         guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
             return ""
         }
         return version
+    }
+    
+    private let currentAppVersionKey = "currentAppVersionKey"
+    var currentAppVersion: String? {
+        get { return userDefaults.string(forKey: currentAppVersionKey) }
+        set { userDefaults.set(newValue, forKey: currentAppVersionKey) }
     }
     
     private let currentUserIDKey = "CurrentUserIDKey"

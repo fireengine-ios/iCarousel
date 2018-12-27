@@ -27,11 +27,7 @@ final class PremiumPresenter {
     private var optInVC: OptInController?
     private var referenceToken = ""
     private var accountType: AccountType = .all
-    private var feature: PackageModelResponse? {
-        didSet {
-            displayFeatureInfo(isError: false)
-        }
-    }
+    private var feature: PackageModelResponse?
     
     init(title: String, headerTitle: String, authority: AuthorityType?, module: FaceImageItemsModuleOutput?) {
         self.title = title
@@ -58,7 +54,7 @@ final class PremiumPresenter {
         }
         
         view.stopActivityIndicator()
-        view.displayFeatureInfo(price: price, description: description)
+        view.displayFeatureInfo(price: price, description: description, isNeedPolicy: accountType != .turkcell)
     }
     
     private func prepareForPurchase() {
@@ -113,24 +109,23 @@ extension PremiumPresenter: PremiumInteractorOutput {
         if accountType == "TURKCELL" {
             self.accountType = .turkcell
         }
-        
-        interactor.getFeaturePacks(isAppleProduct: self.accountType == .all)
+        interactor.getFeaturePacks()
     }
     
     func successed(allFeatures: [PackageModelResponse]) {
-        let featureType: FeaturePackageType = accountType == .all ? .appleFeature : .SLCMFeature
-        for feature in allFeatures {
-            if feature.featureType == featureType {
-                guard let authorities = feature.authorities else { continue }
-                if authorities.contains(where: { return $0.authorityType == authority }) {
-                    self.feature = feature
-                    break
-                }
-            }
-        }
+        feature = allFeatures.first(where: { feature in
+            return feature.authorities?.contains(where: { $0.authorityType == authority }) ?? false
+        })
         
-        if feature == nil {
+        guard let neededFeature = feature else {
             switchToTextWithoutPrice(isError: false)
+            return
+        }
+
+        if neededFeature.featureType == .appleFeature {
+            interactor.getInfoForAppleProducts(offer: neededFeature)
+        } else {
+            displayFeatureInfo()
         }
     }
     
@@ -158,6 +153,10 @@ extension PremiumPresenter: PremiumInteractorOutput {
         DispatchQueue.toMain {
             self.router.purchaseSuccessed(with: self.moduleOutput)
         }
+    }
+    
+    func successedGotAppleInfo() {
+        displayFeatureInfo()
     }
     
     //MARK: Fail
@@ -231,4 +230,11 @@ extension PremiumPresenter: PremiumViewDelegate {
         prepareForPurchase()
     }
     
+    func openLink(with url: URL) {
+        router.openLink(with: url)
+    }
+    
+    func showTermsOfUse() {
+        router.showTermsOfUse()
+    }
 }

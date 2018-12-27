@@ -56,6 +56,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         }
     }
     
+    func hideScrollIndicatorIfNeeded() {
+        scrollBarManager.startTimerToHideScrollBar()
+    }
+    
     override func dropData() {
         emptyMetaItems.removeAll()
         allItems.removeAll()
@@ -96,7 +100,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                 ///appending missing dates section when all other items are represented
                 if !self.emptyMetaItems.isEmpty {
                     self.allItems.append(self.emptyMetaItems)
-                    self.batchInsertItems(newIndexes: ResponseResult.success(self.getIndexPathsForItems(self.emptyMetaItems)))
+                    self.batchInsertItems(newIndexes: ResponseResult.success(self.getIndexPathsForItems(self.emptyMetaItems)), complition: nil)
                 }
                 self.filesAppendedAndSorted()
                 return
@@ -116,20 +120,34 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
             
             if tempoEmptyItems.count >= self.pageCompounder.pageSize {
                 self.breakItemsIntoSections(breakingArray: self.allMediaItems)
-                self.batchInsertItems(newIndexes: ResponseResult.success([]))
+                self.batchInsertItems(newIndexes: ResponseResult.success([]), complition: nil)
                 return
             }
             
             if filteredItems.isEmpty, tempoEmptyItems.isEmpty {
                 self.isPaginationDidEnd = true
             }
-            
-            self.compoundItems(pageItems: filteredItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] response in
+            /**
+             NOW:
+             whole page compunding cycle is one operation
+            */
+            let batchOperation = BlockOperation{ [weak self] in
                 guard let `self` = self else {
                     return
                 }
-                self.batchInsertItems(newIndexes: response)
-            })
+                let semaphore = DispatchSemaphore(value: 0)
+                self.compoundItems(pageItems: filteredItems, pageNum: pageNum, originalRemotes: true, complition: { [weak self] response in
+                    guard let `self` = self else {
+                        semaphore.signal()
+                        return
+                    }
+                    self.batchInsertItems(newIndexes: response) {
+                        semaphore.signal()
+                    }
+                })
+                semaphore.wait()
+            }
+            self.batchOperations.addOperation(batchOperation)
         }
     }
     
@@ -263,9 +281,10 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         }
     }
     
-    func batchInsertItems(newIndexes: ResponseResult<[IndexPath]>) {
-        //completion: VoidHandler
+    func batchInsertItems(newIndexes: ResponseResult<[IndexPath]>, complition: VoidHandler?) {
+        
         guard let collectionView = collectionView else {
+            complition?()
             return
         }
         
@@ -286,22 +305,24 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                     if self.pageLeftOvers.isEmpty {
                         self.itemProvider.getNextItems(callback: { [weak self] remotes in
                             self?.appendCollectionView(items: remotes, pageNum: self?.itemProvider.currentPage ?? 0)
+                            complition?()
                         })
                     } else {
                         ///We send here 2 because current compound logic is separeted into
                         ///3 ways: first page, mid page, last page.
                         ///2 is for mid page logic.(any number that not 1 and pagination did not end)
                         self.compoundItems(pageItems: [], pageNum: self.compounderMidPage) { [weak self] response in
-                            self?.batchInsertItems(newIndexes: response)
+                            self?.batchInsertItems(newIndexes: response, complition: complition)
                         }
                     }
 //                    self.delegate?.getNextItems()
                 }
-                
             } else {
                 guard let lastIndex = array.last else {
+                    complition?()
                     return
                 }
+
                 DispatchQueue.main.async {
                     ///--
                     ///Original place of new Indexes calculation
@@ -315,7 +336,6 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                         ///While Array of arrays is not safe we will add it here, so there should be no crashes on incert
                         let newSectionNum = lastIndex.section + 1
                         let oldSectionNum = collectionView.numberOfSections
-                        
                         var newArray = IndexSet()
                         if newSectionNum > oldSectionNum {
                             newArray = IndexSet(integersIn: Range(oldSectionNum..<newSectionNum))
@@ -325,6 +345,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                         collectionView.insertItems(at: array)
                     }, completion: { status in
                         guard !self.isDropedData else {
+                            complition?()
                             return
                         }
                         let cellHeight = self.delegate?.getCellSizeForGreed().height ?? 0
@@ -333,25 +354,31 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
                         self.isLocalFilesRequested = false
                         self.dispatchQueue.async { [weak self] in
                             guard let `self` = self else {
+                                complition?()
                                 return
                             }
                             if !self.isPaginationDidEnd {
                                 if self.pageLeftOvers.isEmpty {
                                     self.itemProvider.getNextItems(callback: { [weak self] remotes in
                                         self?.appendCollectionView(items: remotes, pageNum: self?.itemProvider.currentPage ?? 0)
+                                        complition?()
                                     })
-//                                    self.delegate?.getNextItems()
+                                    //                                    self.delegate?.getNextItems()
                                 } else if !self.pageLeftOvers.isEmpty{
                                     self.compoundItems(pageItems: [], pageNum: self.lastPage, complition: { [weak self] response in
-                                        self?.batchInsertItems(newIndexes: response)
+                                        self?.batchInsertItems(newIndexes: response, complition: complition)
+                                        
                                     })
                                 }
                             } else if self.isLocalPaginationOn {
                                 ///PageNum: 2 beacause we need to compound page applying middle page rules.
                                 self.compoundItems(pageItems: [], pageNum: 2, complition: { [weak self] response in
                                     
-                                    self?.batchInsertItems(newIndexes: response)
+                                    self?.batchInsertItems(newIndexes: response, complition: complition)
+                                    
                                 })
+                            } else {
+                                complition?()
                             }
                         }
                     })
@@ -360,6 +387,7 @@ final class PhotoVideoDataSourceForCollectionView: BaseDataSourceForCollectionVi
         case .failed(_):
             delegate?.filesAppendedAndSorted()
             isLocalFilesRequested = false
+            complition?()
         }
     }
     

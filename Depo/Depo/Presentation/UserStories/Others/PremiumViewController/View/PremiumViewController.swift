@@ -36,16 +36,25 @@ final class PremiumViewController: BaseViewController {
         let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
         //used "" instead of price until retrieving correct price from server
         let description = String(format: TextConstants.useFollowingPremiumMembership, "")
-        premiumView.configure(with: output.headerTitle, price: "", description: description, types: PremiumListType.allTypes, titleEdgeInsets: titleEdgeInsets)
+        premiumView.configure(with: output.headerTitle,
+                              price: "",
+                              description: description,
+                              types: PremiumListType.allTypes,
+                              titleEdgeInsets: titleEdgeInsets,
+                              isNeedPolicy: false)
     }
-    
 }
 
 // MARK: - PremiumViewInput
 extension PremiumViewController: PremiumViewInput {
-    func displayFeatureInfo(price: String?, description: String) {
+    func displayFeatureInfo(price: String?, description: String, isNeedPolicy: Bool) {
         let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
-        premiumView.configure(with: output.headerTitle, price: price, description: description, types: PremiumListType.allTypes, titleEdgeInsets: titleEdgeInsets)
+        premiumView.configure(with: output.headerTitle,
+                              price: price,
+                              description: description,
+                              types: PremiumListType.allTypes,
+                              titleEdgeInsets: titleEdgeInsets,
+                              isNeedPolicy: isNeedPolicy)
     }
 }
 

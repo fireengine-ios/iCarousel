@@ -379,6 +379,7 @@ extension ItemsRepository {
             let arrayInRange = Array(self.allRemotePhotos.dropFirst(range.startIndex).prefix(range.endIndex - range.startIndex))
             if arrayInRange.isEmpty, !self.isAllPhotosLoaded {
                 self.lastAddedPhotoPageCallback = { [weak self] in
+                    self?.lastAddedPhotoPageCallback = nil
                     self?.getNextStoredPhotosPage(range: range, storedRemotes: storedRemotes)
                 }
                 return
@@ -399,6 +400,7 @@ extension ItemsRepository {
             let arrayInRange = Array(self.allRemoteVideos.dropFirst(range.startIndex).prefix(range.endIndex - range.startIndex))
             if arrayInRange.isEmpty, !self.isAllVideosLoaded {
                 self.lastAddedVideoPageCallback = { [weak self] in
+                    self?.lastAddedVideoPageCallback = nil
                     self?.getNextStoredVideosPage(range: range, storedRemotes: storedRemotes)
                 }
                 return

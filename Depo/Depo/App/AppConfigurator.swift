@@ -50,6 +50,8 @@ final class AppConfigurator {
         LocalMediaStorage.default.clearTemporaryFolder()
         
         startUpdateLocation(with: launchOptions)
+        
+        AuthoritySingleton.shared.checkNewVersionApp()
     }
     
     private static func setupIAPObserver() {

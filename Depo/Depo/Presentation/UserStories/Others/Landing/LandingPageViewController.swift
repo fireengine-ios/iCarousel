@@ -21,7 +21,7 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
     
     @IBAction func onStartUsingButton() {
         let storageVars: StorageVars = factory.resolve()
-        storageVars.isNewAppVersionFirstLaunch = false
+        storageVars.isNewAppVersionFirstLaunchTurkcellLanding = false
         let router = RouterVC()
         if isTurkcell {
             router.setNavigationController(controller: router.synchronyseScreen)

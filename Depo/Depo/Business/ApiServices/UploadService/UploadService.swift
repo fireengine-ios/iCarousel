@@ -124,6 +124,7 @@ final class UploadService: BaseRequestService {
                     self?.stopTracking()
                     self?.clearUploadCounters()
                     self?.hideUploadCardIfNeeded()
+                    ItemOperationManager.default.finishUploadFiles()
                     success()
                     }, fail: { [weak self] errorResponse in
                         self?.stopTracking()

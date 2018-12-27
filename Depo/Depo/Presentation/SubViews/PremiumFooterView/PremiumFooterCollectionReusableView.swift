@@ -33,7 +33,8 @@ final class PremiumFooterCollectionReusableView: UICollectionReusableView {
                               types: PremiumListType.allTypes,
                               isHiddenTitleImageView: true,
                               titleEdgeInsets: titleEdgeInsets,
-                              isNeedScroll: false)
+                              isNeedScroll: false,
+                              isNeedPolicy: false)
         if isSelectedAnimation == true {
             addSelectedAmination()
         }
@@ -53,4 +54,11 @@ extension PremiumFooterCollectionReusableView: PremiumViewDelegate {
         delegate?.onBecomePremiumTap()
     }
     
+    func showTermsOfUse() {
+        //delegate func, used only in PremiumViewController
+    }
+    
+    func openLink(with url: URL) {
+        //delegate func, used only in PremiumViewController
+    }
 }

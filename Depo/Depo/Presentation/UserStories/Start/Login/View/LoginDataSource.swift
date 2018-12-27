@@ -90,7 +90,7 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
             cell.textInput.tag = 33
             cell.textDelegate = self
             #if DEBUG
-                cell.textInput.text = "qwerty"//"qwerty"// "zxcvbn"//".FsddQ646"
+                cell.textInput.text = "qwerty"// "zxcvbn"//".FsddQ646"
             #endif
             return cell
         }
