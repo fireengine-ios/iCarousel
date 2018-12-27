@@ -147,7 +147,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         if isChangeVisibilityMode {
             return dataSource.allMediaItems.isEmpty && !containsInvisibleItems
         } else {
-            return dataSource.allMediaItems.isEmpty
+            return dataSource.allMediaItems.isEmpty && AuthoritySingleton.shared.faceRecognition
         }
     }
     
