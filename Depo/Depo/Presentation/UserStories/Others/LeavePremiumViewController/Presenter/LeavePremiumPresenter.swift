@@ -30,9 +30,8 @@ final class LeavePremiumPresenter {
         }
         
         let cancelText: String
-        if featureType == .allAccessFeature {
-            //used "" to get type from offer to show correct alert info
-            switch getAccountType(for: "", subscription: feature) {
+        if let accountType = accountType, featureType == .allAccessFeature {
+            switch getAccountType(for: accountType.rawValue, subscription: feature) {
             case .all: return TextConstants.offersAllCancel
             case .cyprus: return TextConstants.featureKKTCellCancelText
             case .ukranian: return TextConstants.featureLifeCellCancelText
@@ -60,6 +59,7 @@ final class LeavePremiumPresenter {
         if accountType == "TURKCELL" {
             type = .turkcell
         } else if let role = subscription?.subscriptionPlanRole?.lowercased() {
+            ///Only for features used "lifecell" instead of "lifebox". Do not change!
             if role.contains("lifecell") {
                 type = .ukranian
             } else if role.contains("kktcell") {

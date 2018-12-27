@@ -14,33 +14,37 @@ final class MyStoragePresenter {
     var router: MyStorageRouterInput!
     
     var usage: UsageResponse!
-    var accountType: AccountType = .all
-    var displayableOffers: [SubscriptionPlan] = []
+    var accountType: AccountType = .all {
+        didSet {
+            switch accountType {
+            case .ukranian:
+                router.showSubTurkcellOpenAlert(with: TextConstants.offersActivateUkranian)
+            case .cyprus:
+                router.showSubTurkcellOpenAlert(with: TextConstants.offersActivateCyprus)
+            default: break
+            }
+        }
+    }
     
     var title: String
     
     private var allOffers: [SubscriptionPlanBaseResponse] = []
-    
+    var displayableOffers: [SubscriptionPlan] = []
+
     init(title: String) {
         self.title = title
     }
     
     //MARK: - UtilityMethods
     private func getAccountType(for accountType: String, subscriptions: [SubscriptionPlanBaseResponse]) -> AccountType {
-        if accountType == "TURKCELL" {
+        if AccountType(rawValue: accountType) == .turkcell {
             return .turkcell
         } else {
-            let plans = subscriptions.flatMap { return $0.subscriptionPlanRole }
-            for plan in plans {
-                if plan.hasPrefix("lifebox") {
-                    return .ukranian
-                } else if plan.hasPrefix("kktcell") {
-                    return .cyprus
-                } else if plan.hasPrefix("moldcell") {
-                    return .moldovian
-                } else if plan.hasPrefix("life") {
-                    return .life
-                }
+            let roles = subscriptions.flatMap { return $0.subscriptionPlanRole?.uppercased() }
+            for role in roles {
+                guard let index = role.index(of: "-"),
+                    let accountType = AccountType(rawValue: String(role[..<index])) else { continue }
+                return accountType
             }
             return .all
         }

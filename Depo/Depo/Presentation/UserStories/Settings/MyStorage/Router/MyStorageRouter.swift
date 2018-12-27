@@ -33,6 +33,11 @@ extension MyStorageRouter: MyStorageRouterInput {
         router.presentViewController(controller: alertVC)
     }
     
+    func showSubTurkcellOpenAlert(with text: String) {
+        let vc = DarkPopUpController.with(title: TextConstants.offersInfo, message: text, buttonTitle: TextConstants.offersOk)
+        router.presentViewController(controller: vc)
+    }
+    
     func display(error: String) {
         UIApplication.showErrorAlert(message: error)
     }
