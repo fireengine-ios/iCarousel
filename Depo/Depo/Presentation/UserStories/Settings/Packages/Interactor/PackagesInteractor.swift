@@ -189,6 +189,10 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
     
+    func getAccountType(with accountType: String, offers: [Any]) -> AccountType {
+        return packageService.getAccountType(for: accountType, offers: offers)
+    }
+    
     func activate(offer: PackageModelResponse, planIndex: Int) {
         guard let product = iapManager.product(for: offer.inAppPurchaseId ?? "") else {
             let error = CustomErrors.serverError("An error occured while getting product with id - \(offer.inAppPurchaseId ?? "") from App Store")

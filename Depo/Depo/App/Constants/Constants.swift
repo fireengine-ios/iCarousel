@@ -823,10 +823,6 @@ struct TextConstants {
     static let packageSLCMPaycellCancelText = NSLocalizedString("package_slcm_paycell_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packageDefaultCancelText = NSLocalizedString("package_default_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    //MARK: - MyStorage
-    
-    static let myStorageUsage = NSLocalizedString("my_storage_usage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
     // MARK: - Navigation bar img names
     
     static let moreBtnImgName = "more"
@@ -981,9 +977,6 @@ struct TextConstants {
     static let placesRecognitionShort = NSLocalizedString("places_recognition_short", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceRecognitionShort = NSLocalizedString("face_recognition_short", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let objectRecognitionShort = NSLocalizedString("object_recognition_short", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
-    static let loremNonTurkcell = NSLocalizedString("lorem_ipsum_non_turkcell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let loremTurkcell = NSLocalizedString("lorem_ipsum_turkcell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     //MARK: - LeavePremiumViewController
     

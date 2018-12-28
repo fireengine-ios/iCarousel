@@ -21,7 +21,10 @@ final class MyStoragePresenter {
                 router.showSubTurkcellOpenAlert(with: TextConstants.offersActivateUkranian)
             case .cyprus:
                 router.showSubTurkcellOpenAlert(with: TextConstants.offersActivateCyprus)
-            default: break
+            case .moldovian: break
+            case .turkcell: break
+            case .life: break
+            case .all: break
             }
         }
     }
@@ -36,20 +39,6 @@ final class MyStoragePresenter {
     }
     
     //MARK: - UtilityMethods
-    private func getAccountType(for accountType: String, subscriptions: [SubscriptionPlanBaseResponse]) -> AccountType {
-        if AccountType(rawValue: accountType) == .turkcell {
-            return .turkcell
-        } else {
-            let roles = subscriptions.flatMap { return $0.subscriptionPlanRole?.uppercased() }
-            for role in roles {
-                guard let index = role.index(of: "-"),
-                    let accountType = AccountType(rawValue: String(role[..<index])) else { continue }
-                return accountType
-            }
-            return .all
-        }
-    }
-    
     private func calculateProgress() {
         let usedStorageSize = usage.usedBytes ?? 0
         let fullStorageSize = usage.quotaBytes ?? 0
@@ -106,8 +95,8 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     }
     
     func successed(accountInfo: AccountInfoResponse) {
-        if let accountType = accountInfo.accountType {
-            self.accountType = getAccountType(for: accountType, subscriptions: allOffers)
+        if let accountTypeString = accountInfo.accountType {
+            accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers)
         }
         displayOffers()
     }

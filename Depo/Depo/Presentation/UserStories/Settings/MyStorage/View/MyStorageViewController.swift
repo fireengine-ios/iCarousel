@@ -54,7 +54,7 @@ extension MyStorageViewController: MyStorageViewInput {
     func configureProgress(with full: Int64, left: Int64) {
         storageUsageProgressView.progress = Float(left) / Float(full)
         
-        let storageString = String(format: TextConstants.myStorageUsage, left.bytesString, full.bytesString)
+        let storageString = String(format: TextConstants.usageInfoBytesRemained, left.bytesString, full.bytesString)
         
         //TODO: - think how to change this code for RTL languages
         

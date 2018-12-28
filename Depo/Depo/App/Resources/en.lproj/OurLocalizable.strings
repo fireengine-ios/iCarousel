@@ -713,8 +713,6 @@
 "places_recognition_short" = "Places Recognition";
 "face_recognition_short" = "Face Recognition";
 "object_recognition_short" = "Object Recognition";
-"lorem_ipsum_non_turkcell" = "LOREM IPSUM NON-TURKCELL";
-"lorem_ipsum_turkcell" = " LOREM IPSUM TURKCELL";
 
 /* Package */
 "package_period_day" = "day";
@@ -768,7 +766,6 @@
 
 /* PackageViewController */
 "package_cancel_button" = "Cancel your subscription";
-"my_storage_usage" = "%@ of %@ left";
 "package_section_title" = "Upgrade Your Storage";
 "available_head_name_title" = "+ %@";
 

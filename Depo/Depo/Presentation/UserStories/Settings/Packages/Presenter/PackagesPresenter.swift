@@ -23,20 +23,6 @@ class PackagesPresenter {
     private var storageCapacity: Int64 = 0
     private var storageUsage: UsageResponse?
     
-    private func getAccountType(for accountType: String, offers: [PackageModelResponse] = []) -> AccountType {
-        if AccountType(rawValue: accountType) == .turkcell {
-            return .turkcell
-        } else {
-            let roles = offers.flatMap { return $0.role?.uppercased() }
-            for role in roles {
-                guard let index = role.index(of: "-"),
-                    let accountType = AccountType(rawValue: String(role[..<index])) else { continue }
-                return accountType
-            }
-            return .all
-        }
-    }
-    
     private func refreshPage() {
         availableOffers = []
         referenceToken = ""
@@ -189,7 +175,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(accountTypeString: String) {
-        accountType = getAccountType(for: accountTypeString)
+        accountType = interactor.getAccountType(with: accountTypeString, offers: [])
         
         if accountType != .turkcell {
             view?.showInAppPolicy()
@@ -208,7 +194,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(allOffers: [PackageModelResponse]) {
-        accountType = getAccountType(for: accountType.rawValue, offers: allOffers)
+        accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)
         
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
         availableOffers = offers.filter({
