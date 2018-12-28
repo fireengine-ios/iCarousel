@@ -537,7 +537,7 @@
 "dropboxLastUpdatedFile" = "Ultima actualizare pe %@ - %d fișier";
 "dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";
 "PackagesPolicyHeader" = "Abonament pentru aplicație cu caracter de auto-reînnoire a achiziției:";
-"PackagesPolicyText" = "Abonamentele sunt reînnoite lunar.  Plata va fi preluată de pe contul iTunes la confirmarea achiziției.\nAbonamentul se reînnoiește automat, cu excepția cazului în care opțiunea de auto-reînnoire este oprită cu cel puțin 24 de ore înainte de expirarea perioadei curente.\nPlata se va extrage cu 24 de ore înainte de sfârșitul perioadei curente. Taxele se reflectă pe măsură ce sunt afișate în ecranul de achiziție al aplicației.\nAbonamentele pot fi gestionate de utilizator și reînnoirea automată poate fi oprită din setări.\nDacă utilizatorul achiziționează abonamentul în perioada de testare gratuită, partea neutilizată a acestei perioade - se pierde.\nPolitica de confidențialitate: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nTermeni de utilizare: ";
+"PackagesPolicyText" = "Abonamentele sunt reînnoite lunar.  Plata va fi preluată de pe contul iTunes la confirmarea achiziției.\nAbonamentul se reînnoiește automat, cu excepția cazului în care opțiunea de auto-reînnoire este oprită cu cel puțin 24 de ore înainte de expirarea perioadei curente.\nPlata se va extrage cu 24 de ore înainte de sfârșitul perioadei curente. Taxele se reflectă pe măsură ce sunt afișate în ecranul de achiziție al aplicației.\nAbonamentele pot fi gestionate de utilizator și reînnoirea automată poate fi oprită din setări.\nDacă utilizatorul achiziționează abonamentul în perioada de testare gratuită, partea neutilizată a acestei perioade - se pierde.\nPolitica de confidențialitate: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nTermeni de utilizare:";
 "Missing Dates" = "Date lipsă";
 "You have successfully registered, please log in with your credentials" = "Te-ai înregistrat cu succes, te rugăm să te conectezi cu datele tale";
 "Animation" = "Animaţie";
@@ -640,8 +640,110 @@
 "offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "Please enter a valid login." = "Introduceți textul de mai jos";
 "Please enter the text below" = "Por favor ingrese el texto a continuación";
-"facebook_photo_tags" = "";
-"facebook_tags_on" = "";
-"facebook_tags_off" = "";
-"facebook_tags_import" = "";
+"facebook_photo_tags" = "Etichete pe poza facebook";
+"facebook_tags_on" = "După ce activezi această opțiune, vei primi etichetele tale Facebook în lifebox";
+"facebook_tags_off" = "După ce activezi această opțiune, vei primi etichetele tale Facebook în lifebox";
+"facebook_tags_import" = "Activează opțiunea \"Importă din Facebook\" pentru a putea utiliza funcția \"Transfer de Etichetă Facebook\"";
 "TermsOfUseLinkText" = "clic";
+"launch_campaign_card_detail" = "Detalii";
+"launch_campaign_card_title" = "Campanie Praga";
+"launch_campaign_card_message" = "Praga vă așteaptă! Începeți să explorați acum Lifebox și să fiți unul dintre cele 10 cupluri norocoase";
+"%d same contacts" = "%d aceleași contacte";
+"Quick Scroll Preparation" = "";
+
+/*PremiumView*/
+"delete_duplicated_title" = "";
+"face_recognition_title" = "";
+"places_title" = "";
+"things_title" = "";
+"use_following_premium_membership_advantages_with_only_additional_your_data_storage_package" = "";
+"month" = "";
+"no_details_message" = "";
+"please_try_again_later" = "";
+"Back up with Original Quality" = "";
+"Remove Duplicate Contacts from Your Directory" = "";
+"Face Recognition to reach your loved one's memories" = "";
+"Place Recognition to beam you up to the memories" = "";
+"Object Recognition to remember with things you love" = "";
+"Become Premium" = "";
+"Become Premium Member!" = "";
+"leave_premium_membership" = "";
+"Standard User" = "";
+"Premium User" = "";
+"lifebox Premium" = "";
+"Delete Duplicated Contacts For PremiumTitle" = "";
+
+/*PremiumBanner*/
+"standard_banner_message" = "";
+"premium_banner_message" = "";
+"standard_banner_title" = "";
+"premium_banner_title" = "";
+"back_up_short" = "";
+"remove_duplicate_short" = "";
+"places_recognition_short" = "";
+"face_recognition_short" = "";
+"object_recognition_short" = "";
+"lorem_ipsum_non_turkcell" = "";
+"lorem_ipsum_turkcell" = "";
+
+/*Package*/
+"package_period_day" = "";
+"package_period_week" = "";
+"package_period_month" = "";
+"package_period_year" = "";
+"face_image_apple_price" = "";
+"package_apple_price" = "";
+"package_apple_cancel_text" = "";
+"package_slcm_cancel_text" = "";
+"package_google_cancel_text" = "";
+"package_free_of_charge_cancel_text" = "";
+"package_lifecell_cancel_text" = "";
+"package_promo_cancel_text" = "";
+"package_kktcell_cancel_text" = "";
+"package_moldcell_cancel_text" = "";
+"package_life_cancel_text" = "";
+"package_paycell_all_access_cancel_text" = "";
+"package_paycell_slcm_cancel_text" = "";
+"package_slcm_paycell_cancel_text" = "";
+"package_default_cancel_text" = "";
+
+/*Leave Premium*/
+"leave_premium_premium_description" = "";
+"leave_premium_cancel_description" = "";
+"feature_apple_cancel_text" = "";
+"feature_slcm_cancel_text" = "";
+"feature_google_cancel_text" = "";
+"feature_free_of_charge_cancel_text" = "";
+"feature_lifecell_cancel_text" = "";
+"feature_promo_cancel_text" = "";
+"feature_kktcell_cancel_text" = "";
+"feature_moldcell_cancel_text" = "";
+"feature_life_cancel_text" = "";
+"feature_paycell_all_access_cancel_text" = "";
+"feature_paycell_slcm_cancel_text" = "";
+"feature_slcm_paycell_cancel_text" = "";
+"feature_all_access_paycell_cancel_text" = "";
+"feature_default_cancel_text" = "";
+
+/*PackageInfoView*/
+"my_storage" = "";
+"see_details" = "";
+"face_image_description" = "";
+"face_image_upgrade" = "";
+
+/*FaceImagePremiumFooterView*/
+"face_image_footer_view_message" = "";
+"face_image_face_recognition" = "";
+"face_image_place_recognition" = "";
+"face_image_thing_recognition" = "";
+
+/*PackageViewController*/
+"package_cancel_button" = "";
+"my_storage_usage" = "";
+"package_section_title" = "";
+"available_head_name_title" = "";
+"home_page_pop_up" = "";
+"sync_page_pop_up" = "";
+"ok_for_upgrade" = "";
+"no_for_upgrade" = "";
+"uploded_photos_high_quality" = "";

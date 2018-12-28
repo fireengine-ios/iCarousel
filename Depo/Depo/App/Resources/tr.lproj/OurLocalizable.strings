@@ -137,7 +137,7 @@
 "Wi-Fi" = "Wi-Fi";
 "Free up space" = "Yer aç";
 "Your device memory is almost full" = "Cihazının hafızası dolmak üzere!";
-"There are some duplicated items both in your device and lifebox" = "Hem cihazında, hem de lifebox’ında yer alan öğelerin var. Cihazında olanları silerek yeni anılarına yer aç!  ";
+"There are some duplicated items both in your device and lifebox" = "Hem cihazında, hem de lifebox’ında yer alan öğelerin var. Cihazında olanları silerek yeni anılarına yer aç!";
 "Operation is complete" = "İşlem tamamlandı";
 "Download is complete" = "İndirme tamamlandı";
 "Deleting is complete" = "Silme işlemi tamamlandı.";
@@ -203,8 +203,8 @@
 "Fail while adding to album" = "Albüme eklerken hata meydana geldi";
 "Story not created" = "Hikaye oluşturulamadı.";
 "Story created" = "Hikayeni hazırlıyoruz. Hazır olduğunda Videolar albümünde bulabilirsin.";
-"Sorry, but story photos should not be empty" = "Lütfen en az bir fotoğraf veya video seçin";
-"Please choose %d files at most" = "Lütfen en fazla %d fotoğraf veya video seçin";
+"Sorry, but story photos should not be empty" = "Lütfen en az bir fotoğraf seçin";
+"Please choose %d files at most" = "Lütfen en fazla %d fotoğraf seçin";
 "Continue" = "Devam et";
 "Sorry, but story name should not be empty" = "Lütfen hikayene bir isim ver";
 "SAVE" = "Kaydet";
@@ -408,18 +408,18 @@
 "Musics" = "Öneriler";
 "Your Uploads" = "Müziklerim";
 "Create a story" = "Hikaye oluştur";
-"Please Choose 20 files at most" = "Lütfen en fazla 20 dosya seçin";
+"Please Choose 20 files at most" = "Lütfen en fazla 20 fotoğraf seçin";
 "You need to enable access to Contacts to continue" = "Devam etmek için Kişilere erişime izin vermeniz gerekli";
 "Cancel BackUp" = "Yedeklemeyi iptal et";
 "Clear BackUp" = "Yedeklemeyi temizle";
-"There are %d duplicated contacts." = "%d kopyalanmış kişi mevcut.";
+"There are %d duplicated contacts." = "Cihazının kontak listesinde %d tekrarlayan kişi mevcut.";
 "Are you sure you want to delete?" = "Silmek istediğine emin misin?";
-"This duplicated contacts will be deleted from your contacts." = "Bu kopyalanmış kişiler kişi listenizden silinecek.";
+"This duplicated contacts will be deleted from your contacts." = "Tekrarlanmış kişilerin cihazının kontak listesinden silinecek.";
 "%%%d Restored…" = "%%%d Geri yüklendi…";
 "%%%d Analyzed…" = "%%%d Analiz edildi…";
 "%%%d Backed up…" = "%%%d yedeklendi…";
 "Restored %d Contacts" = "%d Kişiler eski durumuna getirildi.";
-"%d Duplicated Contacts Deleted" = "%d kopyalanmış kişi silindi.";
+"%d Duplicated Contacts Deleted" = "Cihazının kontak listesinden %d tekrarlayan kişi silindi.";
 "You have %d numbers on your contacts backup." = "lifebox'ında %d kişi var.";
 "This contact will be deleted from your contacts." = "Bu kişi kontak listenden silinecek.";
 "Upgrade" = "Yükselt";
@@ -543,7 +543,7 @@
 "dropboxLastUpdatedFile" = "Son güncelleme: %@ - %d dosya";
 "dropboxLastUpdatedFiles" = "Son güncelleme: %@ - %d dosya";
 "PackagesPolicyHeader" = "Uygulama içi satın alım için otomatik yenilebilir abonelik:";
-"PackagesPolicyText" = "Abonelikler aylık bazda yenilenmekte ve ödeme, satın alma onayından sonra iTunes hesabına faturalandırılmaktadır. \nOtomatik yenileme mevcut dönemin sona ermesinden en az 24 saat önce kapatılmazsa abonelik otomatik olarak yenilenir. \nHesap, mevcut dönemin sona ermesine 24 saat kala yenileme işlemi doğrultusunda ücretlendirilecektir. Ücretler uygulama içi satın alma ekranında gösterildiği gibi yansıtılacaktır.\nAbonelikler kullanıcı tarafından yönetilebilir ve otomatik yenileme, satın alma işleminden sonra kullanıcının Hesap Ayarlarına giderek kapatılabilir. \nGizlilik ve Güvenlik: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nKullanım Şartları: ";
+"PackagesPolicyText" = "Abonelikler aylık bazda yenilenmekte ve ödeme, satın alma onayından sonra iTunes hesabına faturalandırılmaktadır. \nOtomatik yenileme mevcut dönemin sona ermesinden en az 24 saat önce kapatılmazsa abonelik otomatik olarak yenilenir. \nHesap, mevcut dönemin sona ermesine 24 saat kala yenileme işlemi doğrultusunda ücretlendirilecektir. Ücretler uygulama içi satın alma ekranında gösterildiği gibi yansıtılacaktır.\nAbonelikler kullanıcı tarafından yönetilebilir ve otomatik yenileme, satın alma işleminden sonra kullanıcının Hesap Ayarlarına giderek kapatılabilir. \nGizlilik ve Güvenlik: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nKullanım Şartları:";
 "Missing Dates" = "Eksik günler";
 "You have successfully registered, please log in with your credentials" = "Başarılı bir şekilde kaydoldun, telefon numaran / e-posta adresin ve şifren ile giriş yapabilirsin.";
 "Animation" = "Animasyon";
@@ -560,7 +560,7 @@
 "Discover your first filtered photo" = "Sana özel filtrelediğimiz ilk fotoğrafını hemen keşfet!";
 "You have reached your lifebox memory limit" = "lifebox depolama alanın neredeyse doldu !";
 "Error occurred while accessing your contacts.\nPlease check your settings." = "Kontaklarına ulaşamadık. Lütfen ayarlarını kontrol et!";
-"Manage Contacts" = "Kişileri yönet";
+"Manage Contacts" = "lifebox kişilerini yönet";
 "Import fearture is totally free of charge and does not affect your internet package" = "Transfer özelliği tamamen ücretsiz olup internet paketinizden veri harcamayacaktır.";
 "Your last backup was on %@" = "Son yedekleme tarihi: %@";
 "Contacts Sync" = "Otomatik Kontak Yedekleme";
@@ -589,7 +589,7 @@
 "Cancel Analyzing" = "Analizi iptal et";
 "Delete all" = "Tümünü sil";
 "Keep" = "Sakla";
-"Duplicated Contacts" = "Çoklanmış kontaklar";
+"Duplicated Contacts" = "Tekrarlayan Kişiler";
 "Free" = "Ücretsiz";
 "%d%% Backed up…" = "%d%% yedekleniyor";
 "%d%% Restored…" = "%d%% indiriliyor";
@@ -614,7 +614,7 @@
 "You have not enough memory in your device" = "Bu işlemi yapabilmek için cihazında yeterli alan bulunmuyor.";
 "The purchase was canceled" = "Satın alma iptal edildi.";
 "The purchase in progress" = "Satın alma işlemi devam ediyor.";
-"You have no duplicated contacts!" = "Kopyalanmış kişilerin yok!";
+"You have no duplicated contacts!" = "Cihazının kontak listesinde tekrarlayan kişilerin yok!";
 "Daily" = "Günlük";
 "Weekly" = "Haftalık";
 "Monthly" = "Aylık";
@@ -648,8 +648,110 @@
 "offersCancelLife" = "lifebox 25GB paketini iptal etmek için lütfen “Stop1” metnini kullanarak,  lifebox 100GB paketini iptal etmek için lütfen “Stop2” metnini kullanarak, lifebox 500GB paketini iptal etmek için lütfen “Stop3” metnini kullanarak, 6767'ye SMS atın.";
 "Please enter a valid login." = "Giriş reddedildi. Lütfen giriş bilgilerini kontrol et.";
 "Please enter the text below" = "Lütfen aşağıdaki metni giriniz.";
-"facebook_photo_tags" = "";
-"facebook_tags_on" = "";
-"facebook_tags_off" = "";
-"facebook_tags_import" = "";
+"facebook_photo_tags" = "Facebook Fotoğraf Etiketleri";
+"facebook_tags_on" = "Bu özelliği aktif hale getirdiğinde Facebook’taki kişi etiketlerin lifebox’ta da gözükecek.";
+"facebook_tags_off" = "Bu özelliği aktif hale getirdiğinde Facebook’taki kişi etiketlerin lifebox’ta da gözükecek.";
+"facebook_tags_import" = "Facebook fotoğraf etiketlerinin lifebox’ta da gözükmesi için “Facebook’tan Taşı” özelliğini aktif hale getirmelisin.";
 "TermsOfUseLinkText" = "Tıklayın";
+"launch_campaign_card_detail" = "Detaylar";
+"launch_campaign_card_title" = "Prag Kampanyası";
+"launch_campaign_card_message" = "Prag seyahati lifebox’la seni bekliyor! Sen de hemen lifebox’ı keşfetmeye başla, çekilişle belirlenecek 10 şanslı çiftten biri ol!";
+"%d same contacts" = "%d aynı kişi";
+"Quick Scroll Preparation" = "";
+
+/*PremiumView*/
+"delete_duplicated_title" = "Telefon rehberindeki tekrarlayan kontakları silmek ve Premium hesabın diğer avantajlı özelliklerinden faydalanmak için Premium ol!";
+"face_recognition_title" = "Fotoğraflarındaki tüm yüzlere ulaşmak ve Premium hesabın diğer avantajlı özelliklerinden faydalanmak için Premium ol!";
+"places_title" = "Fotoğraflarındaki tüm yerlere ulaşmak ve Premium hesabın diğer avantajlı özelliklerinden faydalanmak için Premium ol!";
+"things_title" = "Fotoğraflarındaki tüm nesnelere ulaşmak ve Premium hesabın diğer avantajlı özelliklerinden faydalanmak için Premium ol!";
+"use_following_premium_membership_advantages_with_only_additional_your_data_storage_package" = "Avantajlı Premium özelliklerinden mevcut paketine ek sadece %@ ücretle faydalanabilirsin!";
+"month" = "Ay";
+"no_details_message" = "İsteğinizi gerçekleştiriyoruz. Tamamlandığında sizi bilgilendireceğiz";
+"please_try_again_later" = "Bir hata oluştu, lütfen daha sonra tekrar deneyin.";
+"Back up with Original Quality" = "Anılarını orijinal kalitede yedekle";
+"Remove Duplicate Contacts from Your Directory" = "Rehberindeki Tekrarlayan Kontakları Sil!";
+"Face Recognition to reach your loved one's memories" = "Yüz Tanıma ile sevdiklerinle olan anılara daha kolay ulaş!";
+"Place Recognition to beam you up to the memories" = "Lokasyon Tanıma ile anıların yerlere göre gruplansın!";
+"Object Recognition to remember with things you love" = "Nesne Tanıma ile anılarını nesnelere göre grupla!";
+"Become Premium" = "Premium Ol";
+"Become Premium Member!" = "Premium Ol!";
+"leave_premium_membership" = "Premium'dan Ayrıl";
+"Standard User" = "Standart Hesap";
+"Premium User" = "Premium Hesap";
+"lifebox Premium" = "lifebox Premium";
+"Delete Duplicated Contacts For PremiumTitle" = "Telefon rehberindeki tekrarlayan kontakları silmek ve Premium hesabın diğer avantajlı özelliklerinden faydalanmak için Premium ol!";
+
+/*PremiumBanner*/
+"standard_banner_message" = "Daha iyi bir deneyim için sen de hemen Premium ol!";
+"premium_banner_message" = "Sen de hemen Premium özellikleri keşfet!";
+"standard_banner_title" = "lifebox Premium";
+"premium_banner_title" = "Premium'a Hoş Geldin!";
+"back_up_short" = "Anılarını orijinal kalitede yedekle";
+"remove_duplicate_short" = "Rehberindeki Tekrarlayan Kontakları Sil!";
+"places_recognition_short" = "Lokasyon Tanıma ile anıların yerlere göre gruplansın!";
+"face_recognition_short" = "Yüz Tanıma ile sevdiklerinle olan anılara daha kolay ulaş!";
+"object_recognition_short" = "Nesne Tanıma ile anılarını nesnelere göre grupla!";
+"lorem_ipsum_non_turkcell" = "";
+"lorem_ipsum_turkcell" = "İptal etmek için IPTAL LIFEBOX PREMIUM %s yazıp 2200'a gönderebilirsin.";
+
+/*Package*/
+"package_period_day" = "Gün";
+"package_period_week" = "Hafta";
+"package_period_month" = "Ay";
+"package_period_year" = "Yıl";
+"face_image_apple_price" = "%@/%@";
+"package_apple_price" = "%@/%@";
+"package_apple_cancel_text" = "";
+"package_slcm_cancel_text" = "";
+"package_google_cancel_text" = "";
+"package_free_of_charge_cancel_text" = "";
+"package_lifecell_cancel_text" = "";
+"package_promo_cancel_text" = "";
+"package_kktcell_cancel_text" = "";
+"package_moldcell_cancel_text" = "";
+"package_life_cancel_text" = "";
+"package_paycell_all_access_cancel_text" = "";
+"package_paycell_slcm_cancel_text" = "";
+"package_slcm_paycell_cancel_text" = "";
+"package_default_cancel_text" = "";
+
+/*Leave Premium*/
+"leave_premium_premium_description" = "Premium üyeliğin ile lifebox'ın aşağıdaki tüm gelişmiş özelliklerini kullanabiliyorsun.";
+"leave_premium_cancel_description" = "Premium üyeliğini sonlandırdığında Premium özellik ve avantajlarından faydalanamayacaksın.";
+"feature_apple_cancel_text" = "";
+"feature_slcm_cancel_text" = "";
+"feature_google_cancel_text" = "";
+"feature_free_of_charge_cancel_text" = "";
+"feature_lifecell_cancel_text" = "";
+"feature_promo_cancel_text" = "";
+"feature_kktcell_cancel_text" = "KKTCELL kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
+"feature_moldcell_cancel_text" = "";
+"feature_life_cancel_text" = "";
+"feature_paycell_all_access_cancel_text" = "";
+"feature_paycell_slcm_cancel_text" = "";
+"feature_slcm_paycell_cancel_text" = "";
+"feature_all_access_paycell_cancel_text" = "";
+"feature_default_cancel_text" = "";
+
+/*PackageInfoView*/
+"my_storage" = "Saklama Alanım";
+"see_details" = "Detaylar";
+"face_image_description" = "Standart kullanıcı olduğun için fotoğrafların arasından sadece 100 tanesi işlenebilecek. Sana özel oluşturulacak akıllı albümlerde sadece 3 kişi, nesne ve lokasyon klasörü görebileceksin.";
+"face_image_upgrade" = "Bu özelliği fotoğraf limiti olmadan kullanmak için sen de hemen Premium ol!";
+
+/*FaceImagePremiumFooterView*/
+"face_image_footer_view_message" = "Fotoğraflarındaki tüm %@ ulaşmak ve Premium hesabın diğer avantajlı özelliklerinden faydalanmak için Premium ol!";
+"face_image_face_recognition" = "Kişiler";
+"face_image_place_recognition" = "Yerler";
+"face_image_thing_recognition" = "Nesneler";
+
+/*PackageViewController*/
+"package_cancel_button" = "Premium'dan Ayrıl";
+"my_storage_usage" = "";
+"package_section_title" = "Saklama alanını yükselt";
+"available_head_name_title" = "";
+"home_page_pop_up" = "";
+"sync_page_pop_up" = "";
+"ok_for_upgrade" = "Evet, Premium olmak istiyorum.";
+"no_for_upgrade" = "Hayır, Premium olmadan devam etmek istiyorum";
+"uploded_photos_high_quality" = "lifebox'a standart kullanıcı olarak giriş yapıyorsun. Mevcut fotoğraf ve videolarınla beraber lifebox'a yükleyeceğin yeni anıların 1 Mart'a kadar yüksek kalitede saklanacak. Orijinal kalitede saklanabilmesi için Premium olup ayrıcalıklardan faydalanmak ister misin?";
