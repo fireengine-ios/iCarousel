@@ -73,6 +73,7 @@ extension CoreDataStack {
         guard !inProcessAppendingLocalFiles else {
             return
         }
+        debugLog("insertFromGallery")
         inProcessAppendingLocalFiles = true
         
         let localMediaStorage = LocalMediaStorage.default

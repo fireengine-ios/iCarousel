@@ -158,7 +158,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillEnterForeground")
-        
+        if BackgroundTaskService.shared.appWasSuspended {
+            CoreDataStack.default.appendLocalMediaItems(completion: nil)
+        }
         ContactSyncSDK.doPeriodicSync()
         MenloworksAppEvents.sendProfileName()
     }
