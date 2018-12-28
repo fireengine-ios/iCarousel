@@ -105,6 +105,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
             self?.tokenStorage.isRememberMe = true
             self?.analyticsService.track(event: .login)
             AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: true)
+            AuthoritySingleton.shared.setShowPopupAboutPremiumAfterSync(isShow: true)
             
             DispatchQueue.main.async {
                 self?.output.succesLogin()

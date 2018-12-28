@@ -88,19 +88,11 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
             switch result {
             case .success(let response):
                 AuthoritySingleton.shared.refreshStatus(with: response)
-                if !response.hasPermissionFor(.faceRecognition) {
-                    self?.remoteItems.requestSize = RequestSizeConstant.requestSizeForFaceImageStandartUser
-                }
                 
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
                     output.didObtainAccountPermision(isAllowed: response.hasPermissionFor(.faceRecognition))
                 }
             case .failed(let error):
-                
-                if !AuthoritySingleton.shared.faceRecognition {
-                    self?.remoteItems.requestSize = RequestSizeConstant.requestSizeForFaceImageStandartUser
-                }
-                
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
                     output.didFailed(errorMessage: error.localizedDescription)
                 }
