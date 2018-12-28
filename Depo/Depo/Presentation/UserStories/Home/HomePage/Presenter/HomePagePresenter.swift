@@ -120,6 +120,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     func didShowPopupAboutPremium() {
         if AuthoritySingleton.shared.isShowPopupAboutPremiumAfterRegistration {
             AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: false)
+            AuthoritySingleton.shared.setShowedPopupAboutPremiumAfterLogin(isShow: true)
             router.showPopupForNewUser(with: TextConstants.homePagePopup,
                                                                   title: TextConstants.lifeboxPremium,
                                                                   headerTitle: TextConstants.becomePremiumMember, completion: nil)

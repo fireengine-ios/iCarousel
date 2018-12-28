@@ -49,19 +49,19 @@ final class AuthoritySingleton {
     
     var deleteDublicate: Bool = false
     var faceRecognition: Bool = false
-
+    
     var isBannerShowedForPremium: Bool {
-        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        let userID = SingletonStorage.shared.uniqueUserID
         return UserDefaults.standard.bool(forKey: Keys.isBannerShowedForPremium + userID)
     }
     
     var isLosePremiumStatus: Bool {
-        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        let userID = SingletonStorage.shared.uniqueUserID
         return UserDefaults.standard.bool(forKey: Keys.isLosePremiumStatus + userID)
     }
     
     func hideBannerForSecondLogin() {
-        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        let userID = SingletonStorage.shared.uniqueUserID
         if isPremium == true {
             UserDefaults.standard.set(true, forKey: Keys.isBannerShowedForPremium + userID)
         } else {
@@ -70,45 +70,45 @@ final class AuthoritySingleton {
     }
     
     var isShowPopupAboutPremiumAfterRegistration: Bool {
-        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        let userID = SingletonStorage.shared.uniqueUserID
         return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterRegistration + userID) && isPremium == false
     }
     
     func setShowPopupAboutPremiumAfterRegistration(isShow: Bool) {
-        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        let userID = SingletonStorage.shared.uniqueUserID
         UserDefaults.standard.set(isShow, forKey: Keys.isShowPopupAboutPremiumAfterRegistration  + userID)
     }
     
     var isShowedPopupAboutPremiumAfterLogin: Bool {
-        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        let userID = SingletonStorage.shared.uniqueUserID
         return UserDefaults.standard.bool(forKey: Keys.isShowedPopupAboutPremiumAfterLogin + userID)
     }
     
     func setShowedPopupAboutPremiumAfterLogin(isShow: Bool) {
-        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        let userID = SingletonStorage.shared.uniqueUserID
         UserDefaults.standard.set(isShow, forKey: Keys.isShowedPopupAboutPremiumAfterLogin  + userID)
     }
     
     var isShowPopupAboutPremiumAfterSync: Bool {
-        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        let userID = SingletonStorage.shared.uniqueUserID
         return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterStartSync + userID) && isPremium == false
     }
     
     func setShowPopupAboutPremiumAfterSync(isShow: Bool) {
-        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        let userID = SingletonStorage.shared.uniqueUserID
         UserDefaults.standard.set(isShow, forKey: Keys.isShowPopupAboutPremiumAfterStartSync  + userID)
     }
     
     var isLoginAlready: Bool {
-        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        let userID = SingletonStorage.shared.uniqueUserID
         return UserDefaults.standard.bool(forKey: Keys.isLoginAlready + userID)
     }
     
     func setLoginAlready(isLoginAlready: Bool) {
-        let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
+        let userID = SingletonStorage.shared.uniqueUserID
         UserDefaults.standard.set(isLoginAlready, forKey: Keys.isLoginAlready  + userID)
     }
-
+    
     func refreshStatus(premium: Bool, dublicates: Bool, faces: Bool) {
         faceRecognition = faces
         deleteDublicate = dublicates
