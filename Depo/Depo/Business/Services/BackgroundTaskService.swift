@@ -20,14 +20,17 @@ final class BackgroundTaskService {
     var expirationDelegates = MulticastDelegate<BackgroundTaskServiceDelegate>()
     
     private var backgroundTaskId = UIBackgroundTaskInvalid
-    
+    private (set) var appWasSuspended = false
     
     func beginBackgroundTask() {
+        appWasSuspended = false
+        
         guard backgroundTaskId == UIBackgroundTaskInvalid else {
             return
         }
         
         self.backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: UUID().uuidString, expirationHandler: { [weak self] in
+            self?.appWasSuspended = true
             self?.expirationDelegates.invoke(invocation: { delegate in
                 delegate.backgroundTaskWillExpire()
             })

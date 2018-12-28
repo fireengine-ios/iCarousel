@@ -186,6 +186,11 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
+        if type == .premium {
+            // not let PremiumInfoCard appear anywhere else than in HomePage
+            return
+        }
+        
         if !checkIsThisIsPermittedType(type: type) {
             return
         }

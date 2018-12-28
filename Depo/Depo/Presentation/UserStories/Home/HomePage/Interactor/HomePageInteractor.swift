@@ -9,17 +9,29 @@
 
 class HomePageInteractor: HomePageInteractorInput {
 
+    private enum RefreshStatus {
+        case reloadAll
+        case reloadPremium
+    }
+    
     weak var output: HomePageInteractorOutput!
     
     private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
     private(set) var homeCardsLoaded = false
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private var isShowPopupAboutPremium = true
     
+    private func fillCollectionView(isReloadAll: Bool) {
+        self.homeCardsLoaded = true
+        self.output.fillCollectionView(isReloadAll: isReloadAll)
+    }
+
     func homePagePresented() {
         FreeAppSpace.default.checkFreeAppSpace()
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
+        getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
     }
     
@@ -43,19 +55,54 @@ class HomePageInteractor: HomePageInteractorInput {
     
     func needRefresh() {
         homeCardsLoaded = false
+        
+        getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
     }
     
-    func getAllCardsForHomePage() {
+    private func getAllCardsForHomePage() {
         homeCardsService.all { [weak self] result in
             DispatchQueue.main.async {
                 self?.output.stopRefresh()
                 switch result {
-                case .success(let array):
-                    self?.homeCardsLoaded = true
-                    CardsManager.default.startOperatonsForCardsResponces(cardsResponces: array)                    
+                case .success(let response):
+                    self?.output.didObtainHomeCards(response)
+                    self?.fillCollectionView(isReloadAll: true)
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
+                    DispatchQueue.toMain {
+                        self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
+                    }
+                }
+            }
+        }
+    }
+
+    func updateUserAuthority() {
+        getPremiumCardInfo(loadStatus: .reloadPremium)
+    }
+
+    private func getPremiumCardInfo(loadStatus: RefreshStatus) {
+        AccountService().permissions { [weak self] response in
+            switch response {
+            case .success(let result):
+                AuthoritySingleton.shared.refreshStatus(with: result)
+
+                switch loadStatus {
+                case .reloadAll:
+                    self?.fillCollectionView(isReloadAll: true)
+                case .reloadPremium:
+                    self?.fillCollectionView(isReloadAll: false)
+                }
+                
+                if self?.isShowPopupAboutPremium == true {
+                    self?.output.didShowPopupAboutPremium()
+                    self?.isShowPopupAboutPremium = false
+                }
+            case .failed(let error):
+                self?.fillCollectionView(isReloadAll: true)
+                
+                DispatchQueue.toMain {
+                    self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
                 }
             }
         }
@@ -94,8 +141,14 @@ class HomePageInteractor: HomePageInteractorInput {
                     }
                     
                     if let popUpView = viewForPresent {
+                        let router = RouterVC()
+                        /// Show another popup after the transition because the user did not see it behind it
+                        let isPresentedPopUpUnderQuotaPopUp = router.getViewControllerForPresent()?.presentedViewController is PopUpController
+                        if isPresentedPopUpUnderQuotaPopUp, let popUpView = popUpView as? LargeFullOfQuotaPopUp {
+                            popUpView.delegate = self
+                        }
                         
-                        RouterVC().tabBarVC?.present(popUpView, animated: true, completion: nil)
+                        UIApplication.topController()?.present(popUpView, animated: true, completion: nil)
 //                        self?.output.needPresentPopUp(popUpView: popUpView)
                     }
                     
@@ -122,6 +175,15 @@ class HomePageInteractor: HomePageInteractorInput {
             return
         }
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .quota, eventLabel: .quotaUsed(quotaUsed))
+    }
+    
+}
+
+//MARK: - LargeFullOfQuotaPopUpDelegate
+extension HomePageInteractor: LargeFullOfQuotaPopUpDelegate {
+    
+    func onOpenExpandTap() {
+        output.didOpenExpand()
     }
     
 }

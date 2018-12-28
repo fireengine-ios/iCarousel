@@ -22,8 +22,8 @@ public class MediaItemsMetaData: NSManagedObject {
         self.artist = metadata?.artist
         self.duration = metadata?.duration ?? Double(-1.0)
         self.genre = metadata?.genre
-        self.height = metadata?.height ?? Int16(0)
-        self.width = metadata?.width ?? Int16(0)
+        self.height = Int16(metadata?.height ?? 0)
+        self.width = Int16(metadata?.width ?? 0)
         self.largeUrl = metadata?.largeUrl?.absoluteString
         self.mediumUrl = metadata?.mediumUrl?.absoluteString
         self.smalURl = metadata?.smalURl?.absoluteString

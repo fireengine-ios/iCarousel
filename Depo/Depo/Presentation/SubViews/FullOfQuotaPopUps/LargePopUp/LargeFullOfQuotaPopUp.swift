@@ -14,7 +14,13 @@ enum LargeFullOfQuotaPopUpType{
     case LargeFullOfQuotaPopUpType100
 }
 
+protocol LargeFullOfQuotaPopUpDelegate: class {
+    func onOpenExpandTap()
+}
+
 class LargeFullOfQuotaPopUp: UIViewController {
+    
+    weak var delegate: LargeFullOfQuotaPopUpDelegate?
     
     static func popUp(type: LargeFullOfQuotaPopUpType) -> LargeFullOfQuotaPopUp {
         let controller = LargeFullOfQuotaPopUp(nibName: "LargeFullOfQuotaPopUp", bundle: nil)
@@ -129,8 +135,11 @@ class LargeFullOfQuotaPopUp: UIViewController {
     @IBAction func onExpandButton() {
         let viewController = RouterVC().packages
         viewController.needShowTabBar = false
-        RouterVC().pushViewController(viewController: viewController)
-        close()
+        delegate?.onOpenExpandTap()
+        RouterVC().getViewControllerForPresent()?.dismiss(animated: false, completion: { [weak self] in
+            RouterVC().pushViewController(viewController: viewController)
+            self?.close()
+        })
     }
     
 }

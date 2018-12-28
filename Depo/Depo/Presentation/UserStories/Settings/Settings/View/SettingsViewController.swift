@@ -122,7 +122,11 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0) {
-            return 156
+            if output.isPremiumUser {
+                return 186
+            } else {
+                return 210
+            }
         }
         return 14
     }
@@ -315,6 +319,10 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         userInfoSubView.dismissLoadingSpinner()
     }
     
+    func updateStatusUser() {
+        tableView.reloadData()
+    }
+    
 }
 
 // MARK: - UserInfoSubViewViewControllerActionsDelegate
@@ -329,6 +337,10 @@ extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
     
     func upgradeButtonPressed() {
         output.goToPackages()
+    }
+    
+    func premiumButtonPressed() {
+        output.goToPremium()
     }
 }
 

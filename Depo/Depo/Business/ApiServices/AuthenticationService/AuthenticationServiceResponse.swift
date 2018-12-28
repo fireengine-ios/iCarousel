@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class ObjectRequestResponse: ObjectFromRequestResponse {
+class ObjectRequestResponse: NSObject, ObjectFromRequestResponse {
     var json: JSON?
     var response: HTTPURLResponse?
     var jsonString: String?
@@ -28,17 +28,19 @@ class ObjectRequestResponse: ObjectFromRequestResponse {
             self.json = nil
         }
         response = headerResponse
+        super.init()
         mapping()
     }
     
     required init(withJSON: JSON?) {
         self.json = withJSON
         self.response = nil
+        super.init()
         mapping()
     }
     
-    init() {
-
+    override init() {
+        super.init()
     }
     
     func mapping() {}

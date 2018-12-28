@@ -64,7 +64,7 @@ class Device {
     
     /// https://stackoverflow.com/questions/46192280/detect-if-the-device-is-iphone-x
     static var isIphoneX: Bool {
-        return (UIDevice.current.userInterfaceIdiom == .phone) && (UIScreen.main.nativeBounds.height == 2436)
+        return (UIDevice.current.userInterfaceIdiom == .phone) && (UIScreen.main.bounds.height >= 812)
     }
     
     static var isIpad: Bool {

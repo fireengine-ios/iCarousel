@@ -7,11 +7,12 @@
 //
 
 class AutoSyncRouter: AutoSyncRouterInput {
+    
+    private let router = RouterVC()
  
     func routNextVC() {
         DispatchQueue.toMain {
-            let router = RouterVC()
-            router.setNavigationController(controller: router.tabBarScreen)
+            self.router.setNavigationController(controller: self.router.tabBarScreen)
         }
     }
 

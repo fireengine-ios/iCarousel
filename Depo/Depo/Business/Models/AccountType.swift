@@ -8,11 +8,11 @@
 
 import Foundation
 
-enum AccountType {
-    case turkcell
-    case all
-    case ukranian
-    case cyprus
-    case moldovian
-    case life
+enum AccountType: String {
+    case turkcell   = "TURKCELL"
+    case all        = "ALL_ACCESS"
+    case ukranian   = "LIFEBOX"
+    case cyprus     = "KKTCELL"
+    case moldovian  = "MOLDCELL"
+    case life       = "LIFE"
 }

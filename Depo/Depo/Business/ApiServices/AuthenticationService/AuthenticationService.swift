@@ -279,7 +279,7 @@ class AuthenticationService: BaseRequestService {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
-    
+
     // MARK: - Login
     
     func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?) {
@@ -390,11 +390,17 @@ class AuthenticationService: BaseRequestService {
             CardsManager.default.clear()
             RecentSearchesService.shared.clearAll()
             SyncServiceManager.shared.stopSync()
+            UploadService.default.cancelOperations()
             AutoSyncDataStorage().clear()
+            AuthoritySingleton.shared.clear()
             storageVars.autoSyncSet = false
             SingletonStorage.shared.accountInfo = nil
             SyncSettings.shared().periodicBackup = SYNCPeriodic.none
             ItemOperationManager.default.clear()
+//            ItemsRepository.sharedSession.dropCache()
+            ViewSortStorage.shared.resetToDefault()
+            AuthoritySingleton.shared.setLoginAlready(isLoginAlready: false)
+            
             self.player.stop()
             self.cancellAllRequests()
             

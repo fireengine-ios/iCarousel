@@ -59,25 +59,26 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                 }
                 
                 self?.isUpdating = false
+                guard let output = self?.output else { return }
                 if items.count == 0 {
-                    self?.output.getContentWithSuccessEnd()
+                    output.getContentWithSuccessEnd()
                 } else if isArrayPresenter {
                     var array = [[WrapData]]()
                     array.append(items)
-                    self?.output.getContentWithSuccess(array: array)
+                    output.getContentWithSuccess(array: array)
                 } else if items.count > 0 {
-                    self?.output.getContentWithSuccess(items: items)
+                    output.getContentWithSuccess(items: items)
                 }
             }
             }, fail: { [weak self] in
                 debugLog("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems fail")
-                guard let `self` = self else {
+                guard let `self` = self, let output = self.output else {
                     return
                 }
                 if self.getNextPageRetryCounter >= self.numberOfRetries {
                     self.getNextPageRetryCounter = 0
                     self.isUpdating = false
-                    self.output.getContentWithFail(errorString: nil)
+                    output.getContentWithFail(errorString: nil)
                 } else {
                     self.isUpdating = false
                     self.remoteItems.cancellAllRequests()
@@ -104,25 +105,26 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                     debugLog("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems success")
 
                     self?.isUpdating = false
+                    guard let output = self?.output else { return }
                     if items.count == 0 {
-                        self?.output.getContentWithSuccessEnd()
-                    } else if let out = self?.output as? CreateStorySelectionInteractorOutput {
+                        output.getContentWithSuccessEnd()
+                    } else if let out = output as? CreateStorySelectionInteractorOutput {
                         var array = [[WrapData]]()
                         array.append(items)
                         out.getContentWithSuccess(array: array)
                     } else if items.count > 0 {
-                        self?.output.getContentWithSuccess(items: items)
+                        output.getContentWithSuccess(items: items)
                     }
                 }
             }, fail: { [weak self] in
                 debugLog("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems fail")
-                guard let `self` = self else {
+                guard let `self` = self, let output = self.output else {
                     return
                 }
                 if self.getNextPageRetryCounter >= self.numberOfRetries {
                     self.getNextPageRetryCounter = 0
                     self.isUpdating = false
-                    self.output.getContentWithFail(errorString: nil)
+                    output.getContentWithFail(errorString: nil)
                 } else {
                     self.isUpdating = false
                     self.remoteItems.cancellAllRequests()

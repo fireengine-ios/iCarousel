@@ -10,4 +10,8 @@ import Foundation
 
 protocol PackagesRouterInput {
     func openTermsOfUse()
+    func openLeavePremium()
+    func openMyStorage(storageUsage: UsageResponse?)
+    
+    func showSuccessPurchasedPopUp(with delegate: PackagesPresenter)
 }

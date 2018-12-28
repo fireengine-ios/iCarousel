@@ -40,15 +40,20 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     func startOperation(operationType: SyncOperationType) {
-        if operationType != .getBackUpStatus {
-            requesetAccess { success in
-                if success {
-                    self.proccessOperation(operationType)
+        if operationType != .analyze {
+            if operationType != .getBackUpStatus {
+                requesetAccess { success in
+                    if success {
+                        self.proccessOperation(operationType)
+                    }
                 }
+            } else {
+                proccessOperation(operationType)
             }
         } else {
-            proccessOperation(operationType)
+            interactor.getUserStatus()
         }
+        
     }
     
     // MARK: Interactor Output
@@ -116,6 +121,22 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     func asyncOperationFinished() {
         outputView()?.hideSpiner()
+    }
+    
+    func didObtainUserStatus(isPremiumUser: Bool) {
+        if isPremiumUser {
+            requesetAccess { success in
+                if success {
+                    self.proccessOperation(.analyze)
+                }
+            }
+        } else {
+            router.goToPremium()
+        }
+    }
+    
+    func didObtainFailUserStatus(errorMessage: String) {
+        router.showError(errorMessage: errorMessage)
     }
     
     override func outputView() -> Waiting? {

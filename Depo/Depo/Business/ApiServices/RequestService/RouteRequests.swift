@@ -18,7 +18,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static let currentServerEnvironment = ServerEnvironment.production
+    private static let currentServerEnvironment = ServerEnvironment.test
     
     static let baseUrl: URL = {
         switch currentServerEnvironment {
@@ -152,6 +152,19 @@ struct RouteRequests {
     static let searchContacts = "search?sortField=firstname&sortOrder=ASC&maxResult=16&query=%@&currentPage=%d"
     static let deleteContacts = "contact"
     
+    //MARK: - Turkcell Updater
+    
+    static func updaterUrl() -> String {
+        switch currentServerEnvironment {
+        case .preProduction:
+            return "https://adepotest.turkcell.com.tr/download/update_ios.json"
+        case .production:
+            return "https://adepo.turkcell.com.tr/download/update_ios.json"
+        case .test:
+            return "https://tcloudstb.turkcell.com.tr/download/update_ios.json"
+        }
+    }
+    
     
     struct HomeCards {
         static let all = baseUrl +/ "assistant/v1"
@@ -172,8 +185,14 @@ struct RouteRequests {
         enum Settings {
             static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
             
-            static let faceImageAllowed = settingsApi +/ "faceImageAllowed"
+            static let faceImageAllowed = baseUrl +/ "account/setting"
             static let facebookTaggingEnabled = settingsApi +/ "facebookTaggingEnabled"
+        }
+        
+        enum Permissions {
+            static let authority = Account.accountApi +/ "authority"
+            static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
+            static let availableOffers = Account.accountApi +/ "available-offers/IOS"
         }
     }
 

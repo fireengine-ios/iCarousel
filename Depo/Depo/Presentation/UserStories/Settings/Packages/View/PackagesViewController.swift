@@ -12,7 +12,8 @@ final class PackagesViewController: BaseViewController {
     var output: PackagesViewOutput!
     
     @IBOutlet weak var descriptionLabel: UILabel!
-    
+    @IBOutlet weak private var topStackView: UIStackView!
+
     @IBOutlet weak private var collectionView: ResizableCollectionView!
     @IBOutlet weak private var promoView: PromoView!
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
@@ -21,17 +22,11 @@ final class PackagesViewController: BaseViewController {
     
     @IBOutlet private weak var subtitleLabel: UILabel! {
         didSet {
-            subtitleLabel.text = TextConstants.packages
+            subtitleLabel.text = TextConstants.packageSectionTitle
         }
     }
     
     private lazy var activityManager = ActivityIndicatorManager()
-    
-    private var plans = [SubscriptionPlan]() {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
     
     private let policyHeaderSize: CGFloat = Device.isIpad ? 15 : 13
     private let policyTextSize: CGFloat = Device.isIpad ? 13 : 10
@@ -40,7 +35,9 @@ final class PackagesViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        setupDesign()
+
         automaticallyAdjustsScrollViewInsets = false
         setTitle(withString: TextConstants.packages)
         activityManager.delegate = self
@@ -58,13 +55,19 @@ final class PackagesViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        output.viewWillAppear()
+        setupStackView(with: output.getStorageCapacity())
     }
     
     private func setupCollectionView() {
         collectionView.register(nibCell: SubscriptionPlanCollectionViewCell.self)
     }
-    
-    
+
+    private func setupDesign() {
+        subtitleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        subtitleLabel.textColor = ColorConstants.darkText
+    }
+
     private func setupPolicy() {
         let attributedString = NSMutableAttributedString(
             string: TextConstants.packagesPolicyHeader,
@@ -111,10 +114,9 @@ final class PackagesViewController: BaseViewController {
 
 // MARK: PackagesViewInput
 extension PackagesViewController: PackagesViewInput {
-    
-    func reloadPackages() {
-        plans = []
-        output.viewIsReady()
+
+    func reloadData() {
+        collectionView.reloadData()
     }
     
     func successedPromocode() {
@@ -124,7 +126,7 @@ extension PackagesViewController: PackagesViewInput {
         promoView.endEditing(true)
         promoView.codeTextField.text = ""
         promoView.errorLabel.text = ""
-        reloadPackages()
+        reloadData()
     }
     
     func show(promocodeError: String) {
@@ -137,50 +139,52 @@ extension PackagesViewController: PackagesViewInput {
     func display(error: ErrorResponse) {
         UIApplication.showErrorAlert(message: error.description)
     }
-    
-    func display(subscriptionPlans array: [SubscriptionPlan], append: Bool = false) {
-        if let layout = collectionView.collectionViewLayout as? ColumnsCollectionLayout {
-            layout.cellHeight = SubscriptionPlanCollectionViewCell.heightForAccount(type: output.getAccountType())
-        }
-        if append {
-            plans += array
-        } else {
-            plans = array
-        }
+
+    func display(errorMessage: String) {
+        UIApplication.showErrorAlert(message: errorMessage)
     }
     
-    func showActivateOfferAlert(for offer: OfferServiceResponse, planIndex: Int) {
+    func showActivateOfferAlert(for offer: PackageModelResponse, planIndex: Int) {
         let bodyText = "\(offer.period ?? "") \(offer.price ?? 0)"
         
-        let vc = DarkPopUpController.with(title: offer.name, message: bodyText, buttonTitle: TextConstants.purchase) { [weak self] vc in
-            vc.close()
-            self?.output.buy(offer: offer, planIndex: planIndex)
+        let vc = DarkPopUpController.with(title: offer.displayName, message: bodyText, buttonTitle: TextConstants.purchase) { [weak self] vc in
+            vc.close(animation: {
+                self?.output.buy(offer: offer, planIndex: planIndex)
+            })
         }
         present(vc, animated: false, completion: nil)
     }
-    
-    func showSubTurkcellOpenAlert(with text: String) {
-        let vc = DarkPopUpController.with(title: TextConstants.offersInfo, message: text, buttonTitle: TextConstants.offersOk)
-        present(vc, animated: false, completion: nil)
-    }
-    
-    func showCancelOfferAlert(with text: String) {
-        let vc = DarkPopUpController.with(title: TextConstants.offersInfo, message: text, buttonTitle: TextConstants.offersOk)
-        present(vc, animated: false, completion: nil)
-    }
-    
-    func showCancelOfferApple() {
-        let alertVC = UIAlertController(title: TextConstants.offersInfo, message: TextConstants.offersAllCancel, preferredStyle: .alert)
-        alertVC.view.tintColor = UIColor.lrTealish
-        
-        let okAction = UIAlertAction(title: TextConstants.offersOk, style: .cancel, handler: nil)
-        let settingsAction = UIAlertAction(title: TextConstants.offersSettings, style: .default) { _ in
-            UIApplication.shared.openSettings()
+
+    func setupStackView(with storageCapacity: Int64) {
+        for view in topStackView.arrangedSubviews {
+            view.removeFromSuperview()
         }
-        
-        alertVC.addAction(settingsAction)
-        alertVC.addAction(okAction)
-        present(alertVC, animated: true, completion: nil)
+        let isPremium = AuthoritySingleton.shared.isPremium
+
+        let firstView = PackageInfoView.initFromNib()
+        if isPremium {
+            firstView.configure(with: .premiumUser)
+        } else {
+            firstView.configure(with: .standard)
+            let standartUserLabel = UILabel()
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.firstLineHeadIndent = 16
+            let attributedString = NSAttributedString(string: TextConstants.standardUser, attributes: [
+                .font : UIFont.TurkcellSaturaDemFont(size: 16),
+                .foregroundColor : ColorConstants.textGrayColor,
+                .paragraphStyle : paragraphStyle,
+                ])
+            standartUserLabel.attributedText = attributedString
+            topStackView.addArrangedSubview(standartUserLabel)
+        }
+
+        let secondView = PackageInfoView.initFromNib()
+        secondView.configure(with: .myStorage, capacity: storageCapacity)
+
+        output.configureViews([firstView, secondView])
+
+        topStackView.addArrangedSubview(firstView)
+        topStackView.addArrangedSubview(secondView)
     }
 }
 
@@ -188,14 +192,14 @@ extension PackagesViewController: PackagesViewInput {
 extension PackagesViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return plans.count
+        return output.availableOffers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(cell: SubscriptionPlanCollectionViewCell.self, for: indexPath)
         cell.delegate = self
         cell.indexPath = indexPath
-        cell.configure(with: plans[indexPath.item], accountType: output.getAccountType())
+        cell.configure(with: output.availableOffers[indexPath.item], accountType: output.getAccountType())
         return cell
     }
 }
@@ -203,7 +207,7 @@ extension PackagesViewController: UICollectionViewDataSource {
 // MARK: SubscriptionPlanCellDelegate
 extension PackagesViewController: SubscriptionPlanCellDelegate {
     func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
-        let plan = plans[indexPath.row]
+        let plan = output.availableOffers[indexPath.row]
         
         if let tag = MenloworksSubscriptionStorage(rawValue: plan.name) {
             MenloworksAppEvents.onSubscriptionClicked(tag)

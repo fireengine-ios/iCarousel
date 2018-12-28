@@ -84,7 +84,7 @@ final class AnalyticsService {
         }
     }
     
-    func trackInnerPurchase(_ offer: OfferServiceResponse) {
+    func trackInnerPurchase(_ offer: PackageModelResponse) {
         guard let name = offer.name, let price = offer.price else {
             return
         }
@@ -124,8 +124,8 @@ final class AnalyticsService {
 
 protocol AnalyticsGA {///GA = GoogleAnalytics
     func logScreen(screen: AnalyticsAppScreens)
-    func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int)
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int)
+    func trackProductPurchasedInnerGA(offer: PackageModelResponse, packageIndex: Int)
     func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, eventValue: String?)
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
     func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Float)
@@ -205,11 +205,11 @@ extension AnalyticsService: AnalyticsGA {
         }
     }
     
-    func trackProductPurchasedInnerGA(offer: OfferServiceResponse, packageIndex: Int) {
+    func trackProductPurchasedInnerGA(offer: PackageModelResponse, packageIndex: Int) {
         let analyticasItemList = "Turkcell Package"
         var itemID = ""
         var price = ""
-        if let offerIDUnwraped = offer.offerId, let unwrapedPrice = offer.price {
+        if let offerIDUnwraped = offer.slcmOfferId, let unwrapedPrice = offer.price {
             itemID = "\(offerIDUnwraped)"
             price = "\(unwrapedPrice)"
         }

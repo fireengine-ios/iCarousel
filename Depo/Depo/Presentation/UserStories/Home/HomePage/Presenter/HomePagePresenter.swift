@@ -13,7 +13,8 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     var router: HomePageRouterInput!
     
     private let spotlightManager = SpotlightManager.shared
-
+    private var cards: [HomeCardResponse] = []
+    
     private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
     private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
     
@@ -21,10 +22,33 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
     
     private var loadCollectionView = false
+    private var isFirstAppear = true
     
+    private var isShowPopupQuota = false
+    private var isShowPopupAboutPremium = false
+
     func viewIsReady() {
         spotlightManager.delegate = self
         interactor.trackScreen()
+        
+        if !isFirstAppear {
+            view.startSpinner()
+            interactor.updateUserAuthority()
+        } else {
+            isFirstAppear = false
+        }
+        
+        if isShowPopupQuota {
+            isShowPopupQuota = false
+            interactor.needCheckQuota()
+        }
+        
+        if isShowPopupAboutPremium {
+            isShowPopupAboutPremium = false
+            router.showPopupForNewUser(with: TextConstants.descriptionAboutStandartUser,
+                                       title: TextConstants.lifeboxPremium,
+                                       headerTitle: TextConstants.becomePremiumMember, completion: nil)
+        }
     }
     
     func homePagePresented() {
@@ -88,8 +112,54 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     func requestShowSpotlight(for types: [SpotlightType]) {
         spotlightManager.requestShowSpotlight(for: types)
     }
+    
     func needCheckQuota() {
         interactor.needCheckQuota()
+    }
+    
+    func didShowPopupAboutPremium() {
+        if AuthoritySingleton.shared.isShowPopupAboutPremiumAfterRegistration {
+            AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: false)
+            router.showPopupForNewUser(with: TextConstants.homePagePopup,
+                                                                  title: TextConstants.lifeboxPremium,
+                                                                  headerTitle: TextConstants.becomePremiumMember, completion: nil)
+        } else if !AuthoritySingleton.shared.isShowedPopupAboutPremiumAfterLogin,
+            !AuthoritySingleton.shared.isPremium,
+            AuthoritySingleton.shared.isLoginAlready {
+            AuthoritySingleton.shared.setShowedPopupAboutPremiumAfterLogin(isShow: true)
+            router.showPopupForNewUser(with: TextConstants.descriptionAboutStandartUser,
+                                       title: TextConstants.lifeboxPremium,
+                                       headerTitle: TextConstants.becomePremiumMember, completion: { [weak self] in
+                                        self?.isShowPopupQuota = true
+            })
+        }
+    }
+    
+    func didObtainFailCardInfo(errorMessage: String) {
+        router.showError(errorMessage: errorMessage)
+    }
+    
+    func didObtainHomeCards(_ cards: [HomeCardResponse]) {
+        self.cards = cards
+    }
+    
+    func fillCollectionView(isReloadAll: Bool) {
+        
+        if !AuthoritySingleton.shared.isBannerShowedForPremium {
+            CardsManager.default.startPremiumCard()
+        }
+        AuthoritySingleton.shared.hideBannerForSecondLogin()
+        
+        if isReloadAll {
+            CardsManager.default.startOperatonsForCardsResponces(cardsResponces: cards)
+        } else {
+            //to hide spinner when refresh only premium card
+            view.stopRefresh()
+        }
+    }
+    
+    func didOpenExpand() {
+        isShowPopupAboutPremium = true
     }
 }
 

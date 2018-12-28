@@ -15,6 +15,9 @@ struct PeopleJsonKey {
     static let thumbnail = "thumbnail"
     static let visible = "visible"
     static let personInfos = "personInfos"
+    static let demo = "demo"
+    static let rank = "rank"
+    static let alternateThumbnail = "alternateThumbnail"
 }
 
 
@@ -25,6 +28,9 @@ final class PeopleItemResponse: ObjectRequestResponse {
     var name: String?
     var thumbnail: URL?
     var visible: Bool?
+    var isDemo: Bool?
+    var rank: Int64?
+    var alternateThumbnail: URL?
 
     override func mapping() {
         id = json?[PeopleJsonKey.id].int64
@@ -32,6 +38,9 @@ final class PeopleItemResponse: ObjectRequestResponse {
         name = json?[PeopleJsonKey.name].string
         thumbnail = json?[PeopleJsonKey.thumbnail].url
         visible = json?[PeopleJsonKey.visible].bool
+        isDemo = json?[PeopleJsonKey.demo].bool
+        rank = json?[PeopleJsonKey.rank].int64
+        alternateThumbnail = json?[PeopleJsonKey.alternateThumbnail].url
     }
 }
 
