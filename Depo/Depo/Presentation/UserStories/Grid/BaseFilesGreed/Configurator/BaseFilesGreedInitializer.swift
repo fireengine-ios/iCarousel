@@ -43,8 +43,11 @@ class BaseFilesGreedModuleInitializer: NSObject {
 
 //        topBarConfig: gridListTopBarConfig,
 //        alertSheetConfig: alertSheetConfig)
-        
-        configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100), fileFilters: [.fileType(fileType)], bottomBarConfig: bottomBarConfig, topBarConfig: gridListTopBarConfig, alertSheetConfig: alertSheetConfig)
+        configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
+                               fileFilters: [.fileType(fileType)],
+                               bottomBarConfig: bottomBarConfig, visibleSlider: true, visibleSyncItemsCheckBox: true,
+                               topBarConfig: gridListTopBarConfig,
+                               alertSheetConfig: alertSheetConfig)
 //        (viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
 //                               fileFilters: [.fileType(fileType)],
 //                               bottomBarConfig: bottomBarConfig, visibleSlider: true, visibleSyncItemsCheckBox: true,
