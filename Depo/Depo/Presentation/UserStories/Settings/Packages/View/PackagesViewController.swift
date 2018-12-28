@@ -154,11 +154,6 @@ extension PackagesViewController: PackagesViewInput {
         }
         present(vc, animated: false, completion: nil)
     }
-    
-    func showSubTurkcellOpenAlert(with text: String) {
-        let vc = DarkPopUpController.with(title: TextConstants.offersInfo, message: text, buttonTitle: TextConstants.offersOk)
-        present(vc, animated: false, completion: nil)
-    }
 
     func setupStackView(with storageCapacity: Int64) {
         for view in topStackView.arrangedSubviews {

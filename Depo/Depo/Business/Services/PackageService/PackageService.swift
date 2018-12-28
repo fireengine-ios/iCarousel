@@ -159,7 +159,34 @@ final class PackageService {
         return type
     }
     
+    private func getOfferRole(for offer: Any) -> String {
+        let role: String
+        if let offer = offer as? SubscriptionPlanBaseResponse, let offerRole = offer.subscriptionPlanRole {
+            role = offerRole
+        } else if let offer = offer as? PackageModelResponse, let offerRole = offer.role {
+            role = offerRole
+        } else {
+            role = AccountType.all.rawValue
+        }
+        return role
+    }
+    
     //MARK: Utility Methods(public)
+    func getAccountType(for accountType: String, offers: [Any] = []) -> AccountType {
+        if AccountType(rawValue: accountType) == .turkcell {
+            return .turkcell
+        } else {
+            let packageService = PackageService()
+            let roles: [String] = offers.flatMap { return packageService.getOfferRole(for: $0) }
+            for role in roles {
+                guard let index = role.index(of: "-"),
+                    let accountType = AccountType(rawValue: String(role[..<index])) else { continue }
+                return accountType
+            }
+            return .all
+        }
+    }
+    
     func getInfoForAppleProducts(offers: [Any], success: @escaping () -> (), fail: @escaping (Error) -> ()) {
         let appleOffers = getAppleIds(for: offers)
         iapManager.loadProducts(productIds: appleOffers) { response in

@@ -9,6 +9,7 @@
 protocol MyStorageRouterInput {
     func showCancelOfferAlert(with text: String)
     func showCancelOfferApple()
+    func showSubTurkcellOpenAlert(with text: String)
     
     func display(error: String)
 }

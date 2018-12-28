@@ -19,6 +19,18 @@ final class MyStorageInteractor {
     private let accountService: AccountServicePrl = AccountService()
     private let offersService: OffersService = OffersServiceIml()
     private let packageService = PackageService()
+    
+    private func getInfoForAppleProducts(offers: [SubscriptionPlanBaseResponse]) {
+        packageService.getInfoForAppleProducts(offers: offers, success: { [weak self] in
+            DispatchQueue.toMain {
+                self?.output.successed(allOffers: offers)
+            }
+            }, fail: { [weak self] error in
+                DispatchQueue.toMain {
+                    self?.output.failed(with: error.localizedDescription)
+                }
+        })
+    }
 }
 
 //MARK: - MyStorageInteractorInput
@@ -63,6 +75,10 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         }
     }
     
+    func getAccountType(with accountType: String, offers: [Any]) -> AccountType {
+        return packageService.getAccountType(for: accountType, offers: offers)
+    }
+    
     func getAllOffers() {
         subscriptionsService.activeSubscriptions(
             success: { [weak self] response in
@@ -79,18 +95,6 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 DispatchQueue.toMain {
                     self?.output.failed(with: errorResponse)
                 }
-        })
-    }
-    
-    private func getInfoForAppleProducts(offers: [SubscriptionPlanBaseResponse]) {
-        packageService.getInfoForAppleProducts(offers: offers, success: { [weak self] in
-            DispatchQueue.toMain {
-                self?.output.successed(allOffers: offers)
-            }
-        }, fail: { [weak self] error in
-            DispatchQueue.toMain {
-                self?.output.failed(with: error.localizedDescription)
-            }
         })
     }
     

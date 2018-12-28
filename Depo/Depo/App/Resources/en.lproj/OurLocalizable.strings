@@ -713,6 +713,10 @@
 "object_recognition_short" = "Object Recognition to remember with things you love";
 "lorem_ipsum_non_turkcell" = "Please do not translate this";
 "lorem_ipsum_turkcell" = "Please do not translate this";
+"remove_duplicate_short" = "Remove Duplicated Contacts";
+"places_recognition_short" = "Places Recognition";
+"face_recognition_short" = "Face Recognition";
+"object_recognition_short" = "Object Recognition";
 
 /*Package*/
 "package_period_day" = "day";
@@ -768,6 +772,8 @@
 /*PackageViewController*/
 "package_cancel_button" = "Leave Membership";
 "my_storage_usage" = "%1$@ of %2$@ has remained";
+/* PackageViewController */
+"package_cancel_button" = "Cancel your subscription";
 "package_section_title" = "Upgrade Your Storage";
 "available_head_name_title" = "+ %@";
 "home_page_pop_up" = "Since you do not have a Premium account,  your photos and videos will be stored in high quality. Become Premium to keep your memories in original quality!";

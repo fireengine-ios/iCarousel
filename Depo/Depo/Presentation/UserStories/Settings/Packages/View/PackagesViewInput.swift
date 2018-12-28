@@ -12,7 +12,6 @@ protocol PackagesViewInput: class, ActivityIndicator {
     func showActivateOfferAlert(for offer: PackageModelResponse, planIndex: Int)
     func show(promocodeError: String)
     func successedPromocode()
-    func showSubTurkcellOpenAlert(with text: String)
     
     func showRestoreButton()
     func showInAppPolicy()

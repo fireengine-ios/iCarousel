@@ -23,14 +23,6 @@ class PackagesPresenter {
     private var storageCapacity: Int64 = 0
     private var storageUsage: UsageResponse?
     
-    private func getAccountType(for accountType: String) -> AccountType {
-        if accountType == "TURKCELL" {
-            return .turkcell
-        } else {
-            return .all
-        }
-    }
-    
     private func refreshPage() {
         availableOffers = []
         referenceToken = ""
@@ -183,7 +175,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(accountTypeString: String) {
-        accountType = getAccountType(for: accountTypeString)
+        accountType = interactor.getAccountType(with: accountTypeString, offers: [])
         
         if accountType != .turkcell {
             view?.showInAppPolicy()
@@ -202,11 +194,13 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(allOffers: [PackageModelResponse]) {
+        accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)
+        
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
         availableOffers = offers.filter({
             guard let model = $0.model as? PackageModelResponse, let type = model.type else { return false }
             
-            //show only offers with type slcm and apple(if apple sent offer info)
+            ///show only offers with type slcm and apple(if apple sent offer info)
             switch type {
             case .SLCM: return true
             case .apple: return IAPManager.shared.product(for: model.inAppPurchaseId ?? "") != nil

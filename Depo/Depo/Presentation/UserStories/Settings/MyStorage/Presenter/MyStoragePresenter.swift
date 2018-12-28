@@ -14,38 +14,28 @@ final class MyStoragePresenter {
     var router: MyStorageRouterInput!
     
     var usage: UsageResponse!
-    var accountType: AccountType = .all
-    var displayableOffers: [SubscriptionPlan] = []
+    var accountType: AccountType = .all {
+        didSet {
+            switch accountType {
+            case .ukranian:
+                router.showSubTurkcellOpenAlert(with: TextConstants.offersActivateUkranian)
+            case .cyprus:
+                router.showSubTurkcellOpenAlert(with: TextConstants.offersActivateCyprus)
+            case .moldovian, .turkcell, .life, .all: break
+            }
+        }
+    }
     
     var title: String
     
     private var allOffers: [SubscriptionPlanBaseResponse] = []
-    
+    var displayableOffers: [SubscriptionPlan] = []
+
     init(title: String) {
         self.title = title
     }
     
     //MARK: - UtilityMethods
-    private func getAccountType(for accountType: String, subscriptions: [SubscriptionPlanBaseResponse]) -> AccountType {
-        if accountType == "TURKCELL" {
-            return .turkcell
-        } else {
-            let plans = subscriptions.flatMap { return $0.subscriptionPlanRole }
-            for plan in plans {
-                if plan.hasPrefix("lifebox") {
-                    return .ukranian
-                } else if plan.hasPrefix("kktcell") {
-                    return .cyprus
-                } else if plan.hasPrefix("moldcell") {
-                    return .moldovian
-                } else if plan.hasPrefix("life") {
-                    return .life
-                }
-            }
-            return .all
-        }
-    }
-    
     private func calculateProgress() {
         let usedStorageSize = usage.usedBytes ?? 0
         let fullStorageSize = usage.quotaBytes ?? 0
@@ -102,8 +92,8 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     }
     
     func successed(accountInfo: AccountInfoResponse) {
-        if let accountType = accountInfo.accountType {
-            self.accountType = getAccountType(for: accountType, subscriptions: allOffers)
+        if let accountTypeString = accountInfo.accountType {
+            accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers)
         }
         displayOffers()
     }
