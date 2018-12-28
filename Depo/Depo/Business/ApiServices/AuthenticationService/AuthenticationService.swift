@@ -390,6 +390,7 @@ class AuthenticationService: BaseRequestService {
             CardsManager.default.clear()
             RecentSearchesService.shared.clearAll()
             SyncServiceManager.shared.stopSync()
+            UploadService.default.cancelOperations()
             AutoSyncDataStorage().clear()
             AuthoritySingleton.shared.clear()
             storageVars.autoSyncSet = false
