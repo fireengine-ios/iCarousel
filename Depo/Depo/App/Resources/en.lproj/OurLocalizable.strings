@@ -711,8 +711,8 @@
 "places_recognition_short" = "Place Recognition to beam you up to the memories";
 "face_recognition_short" = "Face Recognition to reach your loved one's memories";
 "object_recognition_short" = "Object Recognition to remember with things you love";
-"lorem_ipsum_non_turkcell" = "LOREM IPSUM NON-TURKCELL";
-"lorem_ipsum_turkcell" = "LOREM IPSUM TURKCELL";
+"lorem_ipsum_non_turkcell" = "Please do not translate this";
+"lorem_ipsum_turkcell" = "Please do not translate this";
 
 /*Package*/
 "package_period_day" = "day";

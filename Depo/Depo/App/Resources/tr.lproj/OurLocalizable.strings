@@ -69,7 +69,7 @@
 "Cancel" = "Vazgeç";
 "Info" = "Bilgi";
 "You can open settings and cancel subscption." = "Ayarlar menüsünden aboneliğini iptal edebilirsin.";
-"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Paketini iptal etmek için lütfen “Iptal LIFEBOX %@” yazıp 2200’a gönder.";
+"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Paketini iptal etmek için lütfen “IPTAL LIFEBOX %@” yazıp 2200’a gönder.";
 "You can visit iTunes to cancel your subscription" = "Paketini iptal etmek için iTunes’u ziyaret edebilirsin.";
 "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Bu yaptığına inanamıyorum! Tekrar etkinleştirmeye karar verdiğinde senin için burada olacağız :) Bunu yapmakta kararlıysan “STOP” yaz 2’e gönder.";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Platinum ve lifecell müşterileri üyeliklerini iptal etmek için LIFE CANCEL yazarak, diğer müşteriler ise LIFEBOX CANCEL yazarak 3030’a gönderebilirler.";
@@ -657,7 +657,7 @@
 "launch_campaign_card_title" = "Prag Kampanyası";
 "launch_campaign_card_message" = "Prag seyahati lifebox’la seni bekliyor! Sen de hemen lifebox’ı keşfetmeye başla, çekilişle belirlenecek 10 şanslı çiftten biri ol!";
 "%d same contacts" = "%d aynı kişi";
-"Quick Scroll Preparation" = "";
+"Quick Scroll Preparation" = "Fotoğrafların ve videoların hazırlanıyor";
 
 /*PremiumView*/
 "delete_duplicated_title" = "Telefon rehberindeki tekrarlayan kontakları silmek ve Premium hesabın diğer avantajlı özelliklerinden faydalanmak için Premium ol!";
@@ -691,8 +691,8 @@
 "places_recognition_short" = "Lokasyon Tanıma ile anıların yerlere göre gruplansın!";
 "face_recognition_short" = "Yüz Tanıma ile sevdiklerinle olan anılara daha kolay ulaş!";
 "object_recognition_short" = "Nesne Tanıma ile anılarını nesnelere göre grupla!";
-"lorem_ipsum_non_turkcell" = "";
-"lorem_ipsum_turkcell" = "İptal etmek için IPTAL LIFEBOX PREMIUM %s yazıp 2200'a gönderebilirsin.";
+"lorem_ipsum_non_turkcell" = "Please do not translate this";
+"lorem_ipsum_turkcell" = "Please do not translate this";
 
 /*Package*/
 "package_period_day" = "Gün";
@@ -701,37 +701,37 @@
 "package_period_year" = "Yıl";
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@/%@";
-"package_apple_cancel_text" = "";
-"package_slcm_cancel_text" = "";
-"package_google_cancel_text" = "";
-"package_free_of_charge_cancel_text" = "";
-"package_lifecell_cancel_text" = "";
-"package_promo_cancel_text" = "";
-"package_kktcell_cancel_text" = "";
-"package_moldcell_cancel_text" = "";
-"package_life_cancel_text" = "";
-"package_paycell_all_access_cancel_text" = "";
-"package_paycell_slcm_cancel_text" = "";
-"package_slcm_paycell_cancel_text" = "";
-"package_default_cancel_text" = "";
+"package_apple_cancel_text" = "Paketini iptal etmek için lütfen telefonundaki iTunes & App Store menüsünü kullan.";
+"package_slcm_cancel_text" = "Paketini iptal etmek için lütfen “IPTAL LIFEBOX %@” yazıp 2200’a gönder.";
+"package_google_cancel_text" = "Paketini iptal etmek için lütfen Google Play Store'u kullan.";
+"package_free_of_charge_cancel_text" = "Bize Ulaşın menüsünden iptal talebini bize iletebilirsin.";
+"package_lifecell_cancel_text" = "lifebox 50 GB’yi devre dışı bırakmak için 50VYKL yazarak, lifebox 500 GB için ise 500VYKL yazarak 8080’e SMS gönderin.";
+"package_promo_cancel_text" = "Bize Ulaşın menüsünden iptal talebini bize iletebilirsin.";
+"package_kktcell_cancel_text" = "Platinum ve lifecell müşterileri üyeliklerini iptal etmek için LIFE CANCEL yazarak, diğer müşteriler ise LIFEBOX CANCEL yazarak 3030’a gönderebilirler.";
+"package_moldcell_cancel_text" = "Bu yaptığına inanamıyorum! Tekrar etkinleştirmeye karar verdiğinde senin için burada olacağız :) Bunu yapmakta kararlıysan “STOP” yaz 2’e gönder.";
+"package_life_cancel_text" = "lifebox 25GB paketini iptal etmek için lütfen “Stop1” metnini kullanarak,  lifebox 100GB paketini iptal etmek için lütfen “Stop2” metnini kullanarak, lifebox 500GB paketini iptal etmek için lütfen “Stop3” metnini kullanarak, 6767'ye SMS atın.";
+"package_paycell_all_access_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u kullan";
+"package_paycell_slcm_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u kullan";
+"package_slcm_paycell_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u kullan";
+"package_default_cancel_text" = "Bize Ulaşın menüsünden iptal talebini bize iletebilirsin.";
 
 /*Leave Premium*/
 "leave_premium_premium_description" = "Premium üyeliğin ile lifebox'ın aşağıdaki tüm gelişmiş özelliklerini kullanabiliyorsun.";
 "leave_premium_cancel_description" = "Premium üyeliğini sonlandırdığında Premium özellik ve avantajlarından faydalanamayacaksın.";
-"feature_apple_cancel_text" = "";
-"feature_slcm_cancel_text" = "";
-"feature_google_cancel_text" = "";
-"feature_free_of_charge_cancel_text" = "";
-"feature_lifecell_cancel_text" = "";
-"feature_promo_cancel_text" = "";
+"feature_apple_cancel_text" = "Paketini iptal etmek için lütfen telefonundaki iTunes & App Store menüsünü kullan.";
+"feature_slcm_cancel_text" = "Paketini iptal etmek için lütfen “IPTAL LIFEBOX PREMIUM %@” yazıp 2200’a gönder.";
+"feature_google_cancel_text" = "Paketini iptal etmek için lütfen Google Play Store'u kullan.";
+"feature_free_of_charge_cancel_text" = "Bize Ulaşın menüsünden iptal talebini bize iletebilirsin.";
+"feature_lifecell_cancel_text" = "Lifecell kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
+"feature_promo_cancel_text" = "Bize Ulaşın menüsünden iptal talebini bize iletebilirsin.";
 "feature_kktcell_cancel_text" = "KKTCELL kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
-"feature_moldcell_cancel_text" = "";
-"feature_life_cancel_text" = "";
-"feature_paycell_all_access_cancel_text" = "";
-"feature_paycell_slcm_cancel_text" = "";
-"feature_slcm_paycell_cancel_text" = "";
-"feature_all_access_paycell_cancel_text" = "";
-"feature_default_cancel_text" = "";
+"feature_moldcell_cancel_text" = "Moldcell kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
+"feature_life_cancel_text" = "life:) kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
+"feature_paycell_all_access_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u kullan";
+"feature_paycell_slcm_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u kullan";
+"feature_slcm_paycell_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u kullan";
+"feature_all_access_paycell_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u kullan";
+"feature_default_cancel_text" = "Bize Ulaşın menüsünden iptal talebini bize iletebilirsin.";
 
 /*PackageInfoView*/
 "my_storage" = "Saklama Alanım";
@@ -747,11 +747,11 @@
 
 /*PackageViewController*/
 "package_cancel_button" = "Premium'dan Ayrıl";
-"my_storage_usage" = "";
+"my_storage_usage" = "%2$@’nin %1$@'si kaldı";
 "package_section_title" = "Saklama alanını yükselt";
-"available_head_name_title" = "";
-"home_page_pop_up" = "";
-"sync_page_pop_up" = "";
+"available_head_name_title" = "+ %@";
+"home_page_pop_up" = "Premium kullanıcı olmadığın için fotoğrafların ve videoların yüksek kalitede saklanacak. Anılarını orijinal kalitede saklamak için hemen Premium ol!";
+"sync_page_pop_up" = "Premium kullanıcı olmadığın için fotoğrafların ve videoların yüksek kalitede saklanacak. Anılarını orijinal kalitede saklamak için hemen Premium ol!";
 "ok_for_upgrade" = "Evet, Premium olmak istiyorum.";
 "no_for_upgrade" = "Hayır, Premium olmadan devam etmek istiyorum";
 "uploded_photos_high_quality" = "lifebox'a standart kullanıcı olarak giriş yapıyorsun. Mevcut fotoğraf ve videolarınla beraber lifebox'a yükleyeceğin yeni anıların 1 Mart'a kadar yüksek kalitede saklanacak. Orijinal kalitede saklanabilmesi için Premium olup ayrıcalıklardan faydalanmak ister misin?";
