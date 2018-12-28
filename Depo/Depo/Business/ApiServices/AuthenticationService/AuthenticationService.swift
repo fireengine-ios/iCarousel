@@ -397,7 +397,7 @@ class AuthenticationService: BaseRequestService {
             SingletonStorage.shared.accountInfo = nil
             SyncSettings.shared().periodicBackup = SYNCPeriodic.none
             ItemOperationManager.default.clear()
-            ItemsRepository.sharedSession.dropCache()
+//            ItemsRepository.sharedSession.dropCache()
             ViewSortStorage.shared.resetToDefault()
             AuthoritySingleton.shared.setLoginAlready(isLoginAlready: false)
             
