@@ -128,7 +128,10 @@ final class AuthoritySingleton {
     }
     
     func checkNewVersionApp() {
+        debugLog("Starn new version app, app version = \(getAppVersion()) - current app version \(currentAppVersion ?? "nil")")
+
         if getAppVersion() != currentAppVersion {
+            debugLog("New version!")
             setLoginAlready(isLoginAlready: tokenStorage.refreshToken != nil)
             currentAppVersion = getAppVersion()
             isNewAppVersion = true
