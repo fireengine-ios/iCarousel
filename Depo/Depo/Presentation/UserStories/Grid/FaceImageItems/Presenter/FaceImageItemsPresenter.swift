@@ -152,6 +152,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     }
     
     override func updateThreeDotsButton() {
+        //FIXME: we need solve memory leak, something holds presenter in memory
+        guard let view = view else { return }
         view.setThreeDotsMenu(active: true)
     }
     

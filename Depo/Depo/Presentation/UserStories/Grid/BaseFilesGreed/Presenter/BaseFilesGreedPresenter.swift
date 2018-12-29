@@ -116,6 +116,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        /// dataSource is last reference which keep presenter? (possible solution use WeakWrapper)
         ItemOperationManager.default.stopUpdateView(view: dataSource)
     }
     
