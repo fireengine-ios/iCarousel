@@ -118,7 +118,6 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     }
     
     func didShowPopupAboutPremium() {
-        debugLog("showed after login = \(AuthoritySingleton.shared.isShowedPopupAboutPremiumAfterLogin), login already = \(AuthoritySingleton.shared.isLoginAlready)")
         if AuthoritySingleton.shared.isShowPopupAboutPremiumAfterRegistration {
             AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: false)
             AuthoritySingleton.shared.setShowedPopupAboutPremiumAfterLogin(isShow: true)
