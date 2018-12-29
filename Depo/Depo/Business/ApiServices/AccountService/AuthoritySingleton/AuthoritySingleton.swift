@@ -100,13 +100,11 @@ final class AuthoritySingleton {
     }
     
     var isLoginAlready: Bool {
-        let userID = SingletonStorage.shared.uniqueUserID
-        return UserDefaults.standard.bool(forKey: Keys.isLoginAlready + userID)
+        return UserDefaults.standard.bool(forKey: Keys.isLoginAlready)
     }
     
     func setLoginAlready(isLoginAlready: Bool) {
-        let userID = SingletonStorage.shared.uniqueUserID
-        UserDefaults.standard.set(isLoginAlready, forKey: Keys.isLoginAlready  + userID)
+        UserDefaults.standard.set(isLoginAlready, forKey: Keys.isLoginAlready)
     }
     
     func refreshStatus(premium: Bool, dublicates: Bool, faces: Bool) {
