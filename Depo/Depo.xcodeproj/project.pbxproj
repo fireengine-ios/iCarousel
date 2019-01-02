@@ -2367,6 +2367,7 @@
 		8C5408471F62AD6400D4717A /* GridListTopBarSortingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5408461F62AD6400D4717A /* GridListTopBarSortingTableCell.swift */; };
 		8C5408491F62AD9100D4717A /* GridListTopBarSortingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C5408481F62AD9100D4717A /* GridListTopBarSortingTableCell.xib */; };
 		8C54084C1F62C77200D4717A /* FloatingContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54084B1F62C77200D4717A /* FloatingContainerVC.swift */; };
+		8C66374321DCA89500E1C857 /* PremiumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A222450E21D3C593006EB432 /* PremiumService.swift */; };
 		8C6CC55E1F879A72007D49C6 /* GeneralFilesFiltration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CC55D1F879A72007D49C6 /* GeneralFilesFiltration.swift */; };
 		8C6EF8761F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8621F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift */; };
 		8C6EF8771F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8631F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift */; };
@@ -15912,6 +15913,7 @@
 				8C0E8FCC1FDEBDFF00789C91 /* UploadParametrs.swift in Sources */,
 				8C0E8FCD1FDEBDFF00789C91 /* ImportFromDropboxPresenter.swift in Sources */,
 				8C0E8FCE1FDEBDFF00789C91 /* OTPViewController.swift in Sources */,
+				8C66374321DCA89500E1C857 /* PremiumService.swift in Sources */,
 				CED4B0252017505300D06CA9 /* Alamofire+Request.swift in Sources */,
 				8C0E8FCF1FDEBDFF00789C91 /* OTPViewIO.swift in Sources */,
 				8C0E8FD01FDEBDFF00789C91 /* OTPViewPresenter.swift in Sources */,
