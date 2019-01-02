@@ -15,7 +15,6 @@ protocol SubscriptionPlanCellDelegate: class {
 
 class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak fileprivate var checkmarkImageView: UIImageView!
     @IBOutlet weak fileprivate var planeNameLabel: UILabel!
     @IBOutlet weak fileprivate var photosCountLabel: UILabel!
     @IBOutlet weak fileprivate var videosCountLabel: UILabel!
@@ -28,6 +27,7 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak fileprivate var upgradeButton: UIButton!
     @IBOutlet weak fileprivate var cancelButton: UIButton!
     @IBOutlet weak fileprivate var priceHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak fileprivate var stackView: UIStackView!
     
     let borderWidth: CGFloat = 2
     let cornerRadius: CGFloat = 5
@@ -35,12 +35,8 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
     weak var delegate: SubscriptionPlanCellDelegate?
     var indexPath = IndexPath()
     
-    static func heightForAccount(type: AccountType) -> CGFloat {
-        if type == .all {
-            return 255
-        } else {
-            return 240
-        }
+    func heightForAccount() -> CGFloat {
+        return stackView.frame.maxY + 8
     }
     
     override func awakeFromNib() {
@@ -50,15 +46,19 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         layer.borderWidth = borderWidth
         
         cancelButton.titleLabel?.lineBreakMode = .byWordWrapping
-        
+        cancelButton.titleLabel?.textAlignment = .center
+        cancelButton.titleLabel?.numberOfLines = 2
+        let title = NSAttributedString(string: TextConstants.cancelButtonTitle, attributes: [.font : UIFont.TurkcellSaturaDemFont(size: 14),
+                                                                                             .foregroundColor : ColorConstants.darcBlueColor,
+                                                                                             .underlineStyle : 1])
+        cancelButton.setAttributedTitle(title, for: .normal)
+
         upgradeButton.setTitle(TextConstants.upgrade, for: .normal)
         
         freeButton.setTitle(TextConstants.free, for: .normal)
         freeButton.layer.borderWidth = borderWidth
         freeButton.layer.borderColor = UIColor.lrTealishTwo.cgColor
         freeButton.isUserInteractionEnabled = false
-
-        checkmarkImageView.tintColor = ColorConstants.blueColor
         
         dateInfoLabel.text = ""
         storeLabel.text = ""
@@ -73,54 +73,42 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         freeButton.isHidden = true
         upgradeButton.isHidden = true
         cancelButton.isHidden = true
-        checkmarkImageView.isHidden = true
+        storeLabel.isHidden = true
         
         switch plan.type {
         case .default:
             layer.borderColor = ColorConstants.lightPeach.cgColor
             upgradeButton.isHidden = false
         case .free:
-            layer.borderColor = ColorConstants.darcBlueColor.cgColor
+            layer.borderColor = ColorConstants.lightPeach.cgColor
+            priceLabel.isHidden = true
             freeButton.isHidden = false
-            checkmarkImageView.isHidden = false
         case .current:
             layer.borderColor = ColorConstants.darcBlueColor.cgColor
             cancelButton.isHidden = false
-            checkmarkImageView.isHidden = false
         }
         
-        planeNameLabel.text = plan.name
+        
+        planeNameLabel.text = String(format: TextConstants.availableHeadNameTitle, plan.name)
+        priceLabel.text = plan.priceString
+        
         photosCountLabel.text = String(format: TextConstants.usageInfoPhotos, plan.photosCount)
         videosCountLabel.text = String(format: TextConstants.usageInfoVideos, plan.videosCount)
         songsCountLabel.text = String(format: TextConstants.usageInfoSongs, plan.songsCount)
         docsCountLabel.text = String(format: TextConstants.usageInfoDocs, plan.docsCount)
-        priceLabel.text = plan.priceString
         
-        if accountType == .all {
-            if let model = plan.model as? SubscriptionPlanBaseResponse, let renewalDate = model.nextRenewalDate {
+        if let model = plan.model as? SubscriptionPlanBaseResponse {
+            
+            if let storageSize = model.subscriptionPlanQuota?.bytesString {
+                planeNameLabel.text = storageSize
+            }
+
+            if let renewalDate = model.nextRenewalDate {
                 let date = dateString(from: renewalDate)
                 dateInfoLabel.text = String(format: TextConstants.renewalDate, date)
-                
-                if let type = model.type {
-                    storeLabel.text = type.description
-                }
-            }
-            priceHeightConstraint.constant = 18
-        } else {
-            dateInfoLabel.isHidden = true
-            storeLabel.isHidden = true
-            priceHeightConstraint.constant = 30
-        }
-        
-        if let model = plan.model as? SubscriptionPlanBaseResponse, model.type == .promo {
-            cancelButton.isHidden = true
-            
-            if let subscriptionEndDate = model.subscriptionEndDate {
-                let date = dateString(from: subscriptionEndDate)
-                dateInfoLabel.text = String(format: TextConstants.subscriptionEndDate, date)
-                dateInfoLabel.isHidden = false
             }
         }
+        priceHeightConstraint.constant = 18
     }
     
     // MARK: - IBActions

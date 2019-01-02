@@ -117,4 +117,20 @@ class SettingsInteractor: SettingsInteractorInput {
         analyticsManager.trackDimentionsEveryClickGA(screen: .settingsPhotoEdit)
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .profilePhoto, eventLabel: .profilePhotoClick)
     }
+    
+    func getUserStatus() {
+        accountSerivese.permissions { [weak self] response in
+            switch response {
+            case .success(let result):
+                AuthoritySingleton.shared.refreshStatus(with: result)
+                DispatchQueue.toMain {
+                    self?.output.didObtainUserStatus()
+                }
+            case .failed(let error):
+                DispatchQueue.toMain {
+                    self?.output.didFailToObtainUserStatus(errorMessage: error.localizedDescription)
+                }
+            }
+        }
+    }
 }

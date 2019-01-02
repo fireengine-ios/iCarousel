@@ -51,7 +51,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private let semaphore = DispatchSemaphore(value: 0)
     
-    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreed)
+    let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreed)
     
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
@@ -116,6 +116,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        /// dataSource is last reference which keep presenter? (possible solution use WeakWrapper)
         ItemOperationManager.default.stopUpdateView(view: dataSource)
     }
     
@@ -162,7 +163,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         //        uploadData()
     }
     
-    private func getFileFilter() -> FieldValue {
+    func getFileFilter() -> FieldValue {
         for type in self.filters {
             switch type {
             case .fileType(let type):
@@ -310,7 +311,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return dataSource.isSelectionStateActive
     }
     
-    @objc private func updateThreeDots(_ sender: Any) {
+    @objc func updateThreeDots(_ sender: Any) {
         DispatchQueue.main.async {
             self.updateThreeDotsButton()
         }
@@ -346,6 +347,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func onItemSelectedActiveState(item: BaseDataSourceItem) { }
+    
+    func onSelectedFaceImageDemoCell(with indexPath: IndexPath) { }
     
     private func getSameTypeItems(item: BaseDataSourceItem, items: [[BaseDataSourceItem]]) -> [BaseDataSourceItem] {
         let allItems = items.flatMap { $0 }
@@ -388,9 +391,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func filesAppendedAndSorted() {
         DispatchQueue.toMain {
-            if self.dataSource.isPaginationDidEnd {
-                debugPrint("SORTED")
-            }
             self.view.stopRefresher()
             self.updateNoFilesView()
             self.asyncOperationSucces()
@@ -441,7 +441,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     // MARK: - UnderNavBarBar/TopBar
     
-    private func setupTopBar() {
+    func setupTopBar() {
         guard let unwrapedConfig = topBarConfig else {
             return
         }

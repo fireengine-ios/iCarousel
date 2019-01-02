@@ -23,6 +23,12 @@ final class PageCompounder {
     
     private let coreData = CoreDataStack.default
     
+    private var lastLocalPageAddedAction: CoreDataStack.AppendingLocalItemsPageAppended?
+    
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onLastLocalPageAppendedToDB(notification:)), name: Notification.Name.notificationNewLocalPageAppended, object: nil)
+    }
+    
     private func compoundItems(pageItems: [WrapData],
                                sortType: SortedRules,
                                predicate: NSCompoundPredicate,
@@ -52,20 +58,25 @@ final class PageCompounder {
             compoundedCallback(pageItems, [])
             return
         }
-
-        var tempoArray = pageItems
         
-        let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
-        
-        tempoArray.append(contentsOf: wrapedLocals)
-        tempoArray = sortByCurrentType(items: tempoArray, sortType: sortType)
-        
-        notAllowedLocalIDs = notAllowedLocalIDs.union(wrapedLocals.flatMap{$0.getTrimmedLocalID()})
-        
-        let actualArray = tempoArray.prefix(pageSize)
-        let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
-        compoundedCallback(Array(actualArray), Array(leftovers))
-        
+        requestContext.perform { [weak self] in ///for now this will help the reduce possibility for crash - better solution is to return media items in callback which is called inside context
+            guard let `self` = self else {
+                compoundedCallback(pageItems, [])
+                return
+            }
+            var tempoArray = pageItems
+            
+            let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
+            
+            tempoArray.append(contentsOf: wrapedLocals)
+            tempoArray = self.sortByCurrentType(items: tempoArray, sortType: sortType)
+            
+            self.notAllowedLocalIDs = self.notAllowedLocalIDs.union(wrapedLocals.flatMap{$0.getTrimmedLocalID()})
+            
+            let actualArray = tempoArray.prefix(self.pageSize)
+            let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
+            compoundedCallback(Array(actualArray), Array(leftovers))
+        }
     }
     
     func appendNotAllowedItems(items: [Item]) {
@@ -74,9 +85,13 @@ final class PageCompounder {
     }
     
     func dropData() {
-        coreData.pageAppendedCallBack = nil
+        lastLocalPageAddedAction = nil
         notAllowedMD5s.removeAll()
         notAllowedLocalIDs.removeAll()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func compoundFirstPage(pageItems: [WrapData],
@@ -204,10 +219,10 @@ final class PageCompounder {
                                            sortType: SortedRules,
                                            predicate: NSCompoundPredicate,
                                            compoundedCallback: @escaping CompoundedPageCallback) {
-        
-        self.coreData.pageAppendedCallBack = { [weak self] freshlyDBAppendedItems in
-            self?.coreData.pageAppendedCallBack = nil
-            
+
+            lastLocalPageAddedAction = { [weak self] freshlyDBAppendedItems in
+            self?.lastLocalPageAddedAction = nil
+                
             guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
                 lastFreshLocalItem.metaDate <= firstItem.metaDate else {
                     
@@ -261,9 +276,9 @@ final class PageCompounder {
                                            predicate: NSCompoundPredicate,
                                            compoundedCallback: @escaping CompoundedPageCallback) {
         
-        self.coreData.pageAppendedCallBack = { [weak self] freshlyDBAppendedItems in
-            self?.coreData.pageAppendedCallBack = nil
-            
+            lastLocalPageAddedAction = { [weak self] freshlyDBAppendedItems in
+            self?.lastLocalPageAddedAction = nil
+                
             guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
                 lastFreshLocalItem.metaDate <= lastItem.metaDate else {
                     guard let `self` = self else {
@@ -304,9 +319,9 @@ final class PageCompounder {
                                            predicate: NSCompoundPredicate,
                                            compoundedCallback: @escaping CompoundedPageCallback) {
         
-        self.coreData.pageAppendedCallBack = { [weak self] freshlyDBAppendedItems in
-            self?.coreData.pageAppendedCallBack = nil
-            
+            lastLocalPageAddedAction = { [weak self] freshlyDBAppendedItems in
+            self?.lastLocalPageAddedAction = nil
+                
             guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
                 lastFreshLocalItem.metaDate <= firstItem.metaDate
                 else {
@@ -349,6 +364,19 @@ final class PageCompounder {
                                     compoundedCallback(compoundedPage, leftovers)
             })
         }
+    }
+    
+    //MARK:- Notification
+    
+    @objc func onLastLocalPageAppendedToDB(notification: Notification) {
+        guard let innerCallback = lastLocalPageAddedAction,
+            let userInfo = notification.userInfo else {
+            
+            return
+        }
+        let items = userInfo[CoreDataStack.notificationNewLocalPageAppendedFilesKey] as? [WrapData]
+        innerCallback(items ?? [])
+        
     }
     
     // MARK: - sorting

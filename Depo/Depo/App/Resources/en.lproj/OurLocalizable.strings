@@ -211,8 +211,8 @@
 "Fail while adding to album" = "Fail while adding to album";
 "Story not created" = "Story not created";
 "Story created" = "We are preparing your story. Once it is finished, you can access it from Videos Album.";
-"Sorry, but story photos should not be empty" = "Please choose at least one photo or video";
-"Please choose %d files at most" = "Please choose %d photos or videos at most";
+"Sorry, but story photos should not be empty" = "Please choose at least one photo";
+"Please choose %d files at most" = "Please choose maximum %d photos";
 "Continue" = "Continue";
 "Sorry, but story name should not be empty" = "Please give a name to your story";
 "SAVE" = "Save";
@@ -426,7 +426,7 @@
 "Musics" = "Musics";
 "Your Uploads" = "Your Uploads";
 "Create a story" = "Create a story";
-"Please Choose 20 files at most" = "Please Choose 20 files at most";
+"Please Choose 20 files at most" = "Please choose maximum 20 photos";
 
 /*???*/
 "You need to enable access to Contacts to continue" = "You need to enable access to Contacts to continue";
@@ -677,3 +677,107 @@
 "launch_campaign_card_title" = "Prague Campaign";
 "launch_campaign_card_message" = "Prague is waiting for you! Start exploring lifebox right now and be one of the 10 lucky couples";
 "%d same contacts" = "%d same contact(s)";
+"Quick Scroll Preparation" = "Preparing your photos and videos";
+
+/*PremiumView*/
+"delete_duplicated_title" = "To delete all duplicated contacts from phone directory and unlock many more features, become a Premium member!";
+"face_recognition_title" = "To see all the faces in your gallery and unlock many more features, become a Premium member!";
+"places_title" = "To see all the places in your gallery and unlock many more features, become a Premium member!";
+"things_title" = "To see all the things in your gallery and unlock many more features, become a Premium member!";
+"use_following_premium_membership_advantages_with_only_additional_your_data_storage_package" = "Use the following Premium Membership advantages with only %@ additional to your storage package";
+"month" = "Month";
+"no_details_message" = "We are processing your request. We will inform you when it is finished.";
+"please_try_again_later" = "Please try again later.";
+"Back up with Original Quality" = "Back up with Original Quality";
+"Remove Duplicate Contacts from Your Directory" = "Remove Duplicate Contacts from Your Phone Directory";
+"Face Recognition to reach your loved one's memories" = "Face Recognition to reach your loved one's memories";
+"Place Recognition to beam you up to the memories" = "Place Recognition to beam you up to the memories";
+"Object Recognition to remember with things you love" = "Object Recognition to remember with things you love";
+"Become Premium" = "Become Premium";
+"Become Premium Member!" = "Become Premium Member!";
+"leave_premium_membership" = "Leave Premium Membership";
+"Standard User" = "Standard User";
+"Premium User" = "Premium Account";
+"lifebox Premium" = "lifebox Premium";
+"Delete Duplicated Contacts For PremiumTitle" = "To delete all duplicated contacts from phone directory and unlock many more features, become a Premium member!";
+
+/*PremiumBanner*/
+"standard_banner_message" = "Discover our Premium features that brings you better cloud storage experience!";
+"premium_banner_message" = "Discover now Premium features that brings you better cloud storage experience!";
+"standard_banner_title" = "lifebox Premium";
+"premium_banner_title" = "Welcome to lifebox Premium!";
+"back_up_short" = "Back Up With Original Quality";
+"remove_duplicate_short" = "Remove Duplicated Contacts from Your Phone Directory";
+"places_recognition_short" = "Place Recognition to beam you up to the memories";
+"face_recognition_short" = "Face Recognition to reach your loved one's memories";
+"object_recognition_short" = "Object Recognition to remember with things you love";
+"lorem_ipsum_non_turkcell" = "Please do not translate this";
+"lorem_ipsum_turkcell" = "Please do not translate this";
+"remove_duplicate_short" = "Remove Duplicated Contacts";
+"places_recognition_short" = "Places Recognition";
+"face_recognition_short" = "Face Recognition";
+"object_recognition_short" = "Object Recognition";
+
+/*Package*/
+"package_period_day" = "day";
+"package_period_week" = "week";
+"package_period_month" = "Month";
+"package_period_year" = "year";
+"face_image_apple_price" = "%@/%@";
+"package_apple_price" = "%@ / %@";
+"package_apple_cancel_text" = "To cancel your package, please use iTunes & App Store menu in your device";
+"package_slcm_cancel_text" = "To cancel your package, please send a SMS to 2200 with this text: \"IPTAL LIFEBOX %@\"";
+"package_google_cancel_text" = "To cancel your package, please use Google Play Store";
+"package_free_of_charge_cancel_text" = "Please use Contact Us menu to inform us to process your request";
+"package_lifecell_cancel_text" = "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080.";
+"package_promo_cancel_text" = "Please use Contact Us menu to inform us to process your request";
+"package_kktcell_cancel_text" = "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships";
+"package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2";
+"package_life_cancel_text" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
+"package_paycell_all_access_cancel_text" = "To cancel your package, please use www.mylifebox.com";
+"package_paycell_slcm_cancel_text" = "To cancel your package, please use www.mylifebox.com";
+"package_slcm_paycell_cancel_text" = "To cancel your package, please use www.mylifebox.com";
+"package_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
+
+/*Leave Premium*/
+"leave_premium_premium_description" = "You can use all the advanced features of lifebox with your Premium membership.";
+"leave_premium_cancel_description" = "You will not be able to benefit from Premium privileges if you cancel your membership";
+"feature_apple_cancel_text" = "To cancel your package, please use iTunes & App Store menu in your device";
+"feature_slcm_cancel_text" = "To cancel your package, Please send an SMS to 2200 with this text: “IPTAL LIFEBOX PREMIUM %s”";
+"feature_google_cancel_text" = "To cancel your package, please use Google Play Store";
+"feature_free_of_charge_cancel_text" = "Please use Contact Us menu to inform us to process your request";
+"feature_lifecell_cancel_text" = "You can continue to use Premium features for free since you are a lifecell user";
+"feature_promo_cancel_text" = "Please use Contact Us menu to inform us to process your request";
+"feature_kktcell_cancel_text" = "You can continue to use Premium features for free since you are a lifecell-KKTC user";
+"feature_moldcell_cancel_text" = "You can continue to use Premium features for free since you are a Moldcell user";
+"feature_life_cancel_text" = "You can continue to use Premium features for free since you are a life:) user";
+"feature_paycell_all_access_cancel_text" = "To cancel your package, please use www.mylifebox.com";
+"feature_paycell_slcm_cancel_text" = "To cancel your package, please use www.mylifebox.com";
+"feature_slcm_paycell_cancel_text" = "To cancel your package, please use www.mylifebox.com";
+"feature_all_access_paycell_cancel_text" = "To cancel your package, please use www.mylifebox.com";
+"feature_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
+
+/*PackageInfoView*/
+"my_storage" = "My Storage";
+"see_details" = "See Details";
+"face_image_description" = "Since you have a standard account, 100 of your photos will be processed. You will only see 3 people, objects and places in your smart albums.";
+"face_image_upgrade" = "Upgrade to lifebox Premium to use this feature without any limitation.";
+
+/*FaceImagePremiumFooterView*/
+"face_image_footer_view_message" = "To see all the %@ in your gallery and unlock many more features become a Premium member!";
+"face_image_face_recognition" = "People";
+"face_image_place_recognition" = "Places";
+"face_image_thing_recognition" = "Things";
+
+/*PackageViewController*/
+"package_cancel_button" = "Leave Membership";
+"my_storage_usage" = "%1$@ of %2$@ has remained";
+/* PackageViewController */
+"package_cancel_button" = "Cancel your subscription";
+"package_section_title" = "Upgrade Your Storage";
+"available_head_name_title" = "+ %@";
+"home_page_pop_up" = "Since you do not have a Premium account,  your photos and videos will be stored in high quality. Become Premium to keep your memories in original quality!";
+"sync_page_pop_up" = "Since you do not have a Premium account,  your photos and videos will be stored in high quality. Become Premium to keep your memories in original quality!";
+"ok_for_upgrade" = "Yes, Upgrade";
+"no_for_upgrade" = "No, I'm OK";
+"uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. We will keep your existing photos and videos along with new uploded memories in high quality until 1st of March. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";

@@ -14,7 +14,6 @@ import UIKit
     private let headerImageHeight: CGFloat = 190
     
     private var albumsSlider: LBAlbumLikePreviewSliderViewController?
-    private var albumsSliderModule: LBAlbumLikePreviewSliderPresenter?
     private var headerView = UIView()
     private var headerImage = LoadingImageView()
     private var gradientHeaderLayer: CALayer?
@@ -125,7 +124,6 @@ import UIKit
         }
         let sliderVC = sliderModuleConfigurator.lbAlbumLikeSliderVC
         albumsSlider = sliderVC
-        albumsSliderModule = sliderPresenter
         if let basePresenter = output as? BaseFilesGreedModuleInput {
             sliderPresenter.baseGreedPresenterModule = basePresenter
         }
@@ -171,7 +169,6 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
         mainTitle = name
         
         configureNavBarWithTouch()
-        albumsSlider?.setTitle(String(format: TextConstants.albumLikeSliderWithPerson, name))
     }
     
     func setHeaderImage(with path: PathForItem) {

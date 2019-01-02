@@ -56,4 +56,39 @@ class HomePageRouter: HomePageRouterInput {
         controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
         router.pushViewController(viewController: controller)
     }
+    
+    func showError(errorMessage: String) {
+        UIApplication.showErrorAlert(message: errorMessage)
+    }
+    
+    func showPopupForNewUser(with message: String, title: String, headerTitle: String, completion: VoidHandler?) {
+        let controller = PopUpController.with(title: nil,
+                                              message: message,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.noForUpgrade,
+                                              secondButtonTitle: TextConstants.yesForUpgrade,
+                                               secondAction: { [weak self] vc in
+                                                vc.dismiss(animated: true, completion: {
+                                                    self?.moveToPremium(title: title, headerTitle: headerTitle, completion: completion)
+                                                })
+        })
+        
+        UIApplication.topController()?.present(controller, animated: true, completion: nil)
+    }
+    
+    // MARK: Utility methods
+    private func moveToPremium(title: String, headerTitle: String, completion: VoidHandler?) {
+        let controller = router.premium(title: title, headerTitle: headerTitle)
+        /// Show another popup after the transition because the user did not see it behind it
+        let isPresentedQuotaPopUpUnderPremiumPopUp = router.getViewControllerForPresent()?.presentedViewController is LargeFullOfQuotaPopUp
+        if isPresentedQuotaPopUpUnderPremiumPopUp {
+            completion?()
+            router.getViewControllerForPresent()?.dismiss(animated: false, completion: { [weak self] in
+                self?.router.pushViewController(viewController: controller)
+            })
+        } else {
+            router.pushViewController(viewController: controller)
+        }
+    }
+    
 }

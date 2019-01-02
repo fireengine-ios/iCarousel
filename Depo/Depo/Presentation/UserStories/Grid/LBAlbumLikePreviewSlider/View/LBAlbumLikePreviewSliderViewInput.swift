@@ -9,5 +9,5 @@
 protocol LBAlbumLikePreviewSliderViewInput: class {
 
     func setupInitialState()
-    func setTitle(_ title: String)
+
 }

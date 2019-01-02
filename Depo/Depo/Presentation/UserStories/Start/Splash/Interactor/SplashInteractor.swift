@@ -28,7 +28,9 @@ class SplashInteractor: SplashInteractorInput {
                 failLogin()
             } else {
                 authenticationService.turkcellAuth(success: { [weak self] in
+                    AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
                     self?.tokenStorage.isRememberMe = true
+//                    ItemsRepository.sharedSession.updateCache()
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                         self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
 //                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
@@ -70,6 +72,7 @@ class SplashInteractor: SplashInteractorInput {
     
     func successLogin() {
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
+//        ItemsRepository.sharedSession.updateCache()
 //        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
         DispatchQueue.toMain {
             self.output.onSuccessLogin()

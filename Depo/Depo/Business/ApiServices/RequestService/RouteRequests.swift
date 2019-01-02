@@ -18,7 +18,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static let currentServerEnvironment = ServerEnvironment.production
+    private static let currentServerEnvironment = ServerEnvironment.test
     
     static let baseUrl: URL = {
         switch currentServerEnvironment {
@@ -185,8 +185,14 @@ struct RouteRequests {
         enum Settings {
             static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
             
-            static let faceImageAllowed = settingsApi +/ "faceImageAllowed"
+            static let faceImageAllowed = baseUrl +/ "account/setting"
             static let facebookTaggingEnabled = settingsApi +/ "facebookTaggingEnabled"
+        }
+        
+        enum Permissions {
+            static let authority = Account.accountApi +/ "authority"
+            static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
+            static let availableOffers = Account.accountApi +/ "available-offers/IOS"
         }
     }
 

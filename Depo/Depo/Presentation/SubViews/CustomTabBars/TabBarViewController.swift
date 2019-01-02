@@ -178,8 +178,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         let items = [("outlineHome", "", TextConstants.accessibilityHome),
                      ("outlinePhotosVideos", "", TextConstants.accessibilityPhotosVideos),
                      ("", "", ""),
-                     ("outlineMusic", "", TextConstants.accessibilityMusic),
-                     ("outlineDocs", "", TextConstants.accessibilityDocuments)]
+                     ("outlineContacts", "", TextConstants.periodicContactsSync),
+                     ("outlineDocs", "", TextConstants.homeButtonAllFiles)]
         
         tabBar.setupItems(withImageToTitleNames: items)
     }
@@ -349,11 +349,17 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     func setupCustomNavControllers() {
         let router = RouterVC()
+        guard let syncContactsVC = router.syncContacts as? SyncContactsViewController else {
+            assertionFailure()
+            return
+        }
+        syncContactsVC.tabBarSetup = true
+        
         let list = [router.homePageScreen,
                     router.photosScreen,
                     router.videosScreen,
-                    router.musics,
-                    router.documents]
+                    syncContactsVC,
+                    router.segmentedFiles]
         customNavigationControllers = list.flatMap { NavigationController(rootViewController: $0!) }
     }
     
@@ -648,7 +654,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
             
-            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.musicScreenIndex.rawValue, TabScreenIndex.documentsScreenIndex.rawValue]
+            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.musicScreenIndex.rawValue,
+                                                                TabScreenIndex.documentsScreenIndex.rawValue,
+                                                                TabScreenIndex.homePageScreenIndex.rawValue]
             if tabbarSelectedIndex == selectedIndex && arrayOfIndexesOfViewsThatShouldntBeRefreshed.contains(tabbarSelectedIndex) {
                 return
             }

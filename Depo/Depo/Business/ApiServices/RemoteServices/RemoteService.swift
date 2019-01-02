@@ -75,7 +75,6 @@ class RemoteItemsService {
     
     func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         debugLog("RemoteItemsService nextItems")
-
         if let unwrapedFieldValue = newFieldValue {
             fieldValue = unwrapedFieldValue
         }

@@ -94,6 +94,10 @@ final class ThingsItem: Item {
         responseObject = response
         super.init(thingsItemResponse: response)
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+         return nil
+    }
 }
 
 final class ThingsAlbumParameters: BaseRequestParametrs {

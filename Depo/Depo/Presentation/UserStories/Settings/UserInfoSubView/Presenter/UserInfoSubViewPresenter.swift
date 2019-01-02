@@ -12,6 +12,10 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     var interactor: UserInfoSubViewInteractorInput!
     var router: UserInfoSubViewRouterInput!
     
+    var isPremiumUser: Bool {
+        return AuthoritySingleton.shared.isPremium ?? false
+    }
+    
     func requestsFinished() {
         asyncOperationSucces()
     }

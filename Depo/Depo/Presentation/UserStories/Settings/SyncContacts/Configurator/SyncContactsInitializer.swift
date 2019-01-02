@@ -14,6 +14,7 @@ class SyncContactsModuleInitializer: NSObject {
         let viewController = SyncContactsViewController(nibName: nibName, bundle: nil)
         let configurator = SyncContactsModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)
+        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .newFolder])
         return viewController
     }
 

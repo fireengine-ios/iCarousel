@@ -13,6 +13,8 @@ enum OperationType: String {
     case sync                       = "Sync"
     case download                   = "Download"
     case prepareToAutoSync          = "prepareToAutoSync"
+    case preparePhotosQuickScroll   = "preparePhotosQuickScroll"
+    case prepareVideosQuickScroll   = "prepareVideosQuickScroll"
     case autoUploadIsOff            = "autoUploadIsOff"
     case waitingForWiFi             = "waitingForWiFi"
     
@@ -31,6 +33,8 @@ enum OperationType: String {
     case animationCard              = "animation"
     
     case launchCampaign             = "launchCampaign"
+    
+    case premium                    = "premium"
 }
 
 typealias BlockObject = VoidHandler
@@ -52,7 +56,7 @@ class CardsManager: NSObject {
     private var deletedCards = Set<OperationType>()
     
     var cardsThatStartedByDevice: [OperationType] {
-        return [.upload, .sync, .download, .prepareToAutoSync, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
+        return [.upload, .sync, .download, .prepareToAutoSync, .preparePhotosQuickScroll, .prepareVideosQuickScroll, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
     }
     
     func clear() {
@@ -140,7 +144,7 @@ class CardsManager: NSObject {
         }
     }
     
-    func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
+    func startOperationWith(type: OperationType, allOperations: Int? = nil, completedOperations: Int? = nil) {
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
     
@@ -162,6 +166,14 @@ class CardsManager: NSObject {
             }
         }
         
+    }
+
+    func startPremiumCard() {
+        DispatchQueue.main.async {
+            for notificationView in self.foloversArray {
+                notificationView.startOperationWith(type: .premium, allOperations: 0, completedOperations: 0)
+            }
+        }
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ) {
@@ -339,6 +351,10 @@ class CardsManager: NSObject {
             cardView = popUp
         case .prepareToAutoSync:
             cardView = PrepareToAutoSync.initFromNib()
+        case .preparePhotosQuickScroll:
+            cardView = PrepareQuickScroll.initFromNib()
+        case .prepareVideosQuickScroll:
+            cardView = PrepareQuickScroll.initFromNib()
         case .autoUploadIsOff:
             cardView = AutoUploadIsOffPopUp.initFromNib()
         case .waitingForWiFi:
@@ -361,6 +377,10 @@ class CardsManager: NSObject {
             cardView = AnimationCard.initFromNib()
         case .launchCampaign:
             cardView = LaunchCampaignCard.initFromNib()
+        case .premium:
+            let popUp = PremiumInfoCard.initFromNib()
+            popUp.configurateWithType(viewType: .premium)
+            cardView = popUp
         }
         
         cardView.set(object: serverObject)

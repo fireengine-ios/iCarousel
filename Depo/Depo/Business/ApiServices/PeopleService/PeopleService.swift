@@ -24,6 +24,17 @@ enum FaceImageType {
         }
     }
     
+    var footerDescription: String {
+        switch self {
+        case .people:
+            return TextConstants.faceImageFaceRecognition
+        case .places:
+            return TextConstants.faceImagePlaceRecognition
+        case .things:
+            return TextConstants.faceImageThingRecognition
+        }
+    }
+    
     var myStreamType: MyStreamType {
         switch self {
         case .people:
@@ -361,5 +372,9 @@ final class PeopleItem: Item {
     init(response: PeopleItemResponse) {
         responseObject = response
         super.init(peopleItemResponse: response)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        return nil
     }
 }

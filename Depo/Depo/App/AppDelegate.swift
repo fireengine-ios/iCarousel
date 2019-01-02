@@ -130,6 +130,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidEnterBackground")
+        
+        BackgroundTaskService.shared.beginBackgroundTask()
 
         firstResponder = application.firstResponder
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
@@ -156,7 +158,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillEnterForeground")
-        
+        if BackgroundTaskService.shared.appWasSuspended {
+            CoreDataStack.default.appendLocalMediaItems(completion: nil)
+        }
         ContactSyncSDK.doPeriodicSync()
         MenloworksAppEvents.sendProfileName()
     }
