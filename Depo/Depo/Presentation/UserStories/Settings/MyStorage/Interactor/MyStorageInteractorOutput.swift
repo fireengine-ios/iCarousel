@@ -11,7 +11,6 @@ protocol MyStorageInteractorOutput: class {
     func successed(accountInfo: AccountInfoResponse)
     
     func successed(allOffers: [SubscriptionPlanBaseResponse])
-    func configureAppleOffers()
 
     func failed(with error: ErrorResponse)
     func failed(with error: String)

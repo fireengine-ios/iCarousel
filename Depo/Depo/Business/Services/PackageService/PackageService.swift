@@ -168,7 +168,7 @@ final class PackageService {
         } else {
             role = AccountType.all.rawValue
         }
-        return role
+        return role.uppercased()
     }
     
     //MARK: Utility Methods(public)
