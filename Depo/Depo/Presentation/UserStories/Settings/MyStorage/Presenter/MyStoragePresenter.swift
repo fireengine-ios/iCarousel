@@ -60,7 +60,7 @@ final class MyStoragePresenter {
 extension MyStoragePresenter: MyStorageViewOutput {
     func viewDidLoad() {
         view?.startActivityIndicator()
-        interactor.getAllOffers()
+        interactor.getAccountType()
         interactor.getUsage()
 
         if usage != nil {
@@ -95,7 +95,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
         if let accountTypeString = accountInfo.accountType {
             accountType = interactor.getAccountType(with: accountTypeString, offers: allOffers)
         }
-        displayOffers()
+        interactor.getAllOffers(with: accountType)
     }
     
     func successed(allOffers: [SubscriptionPlanBaseResponse]) {
@@ -112,11 +112,9 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
             
             return true
         }
-        interactor.getAccountType()
-    }
-    
-    func configureAppleOffers() {
-        interactor.getAccountType()
+        
+        accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)
+        displayOffers()
     }
     
     func failed(with error: ErrorResponse) {

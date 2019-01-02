@@ -27,6 +27,7 @@ final class MyStorageInteractor {
             }
             }, fail: { [weak self] error in
                 DispatchQueue.toMain {
+                    self?.output.successed(allOffers: offers)
                     self?.output.failed(with: error.localizedDescription)
                 }
         })
@@ -79,7 +80,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         return packageService.getAccountType(for: accountType, offers: offers)
     }
     
-    func getAllOffers() {
+    func getAllOffers(with accountType: AccountType) {
         subscriptionsService.activeSubscriptions(
             success: { [weak self] response in
                 guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else {
@@ -90,7 +91,13 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                     return
                 }
                 SingletonStorage.shared.activeUserSubscription = subscriptionsResponce
-                self?.getInfoForAppleProducts(offers: subscriptionsResponce.list)
+                
+                let offersList = subscriptionsResponce.list
+                if accountType != .turkcell {
+                    self?.getInfoForAppleProducts(offers: offersList)
+                } else {
+                    self?.output.successed(allOffers: offersList)
+                }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.toMain {
                     self?.output.failed(with: errorResponse)
