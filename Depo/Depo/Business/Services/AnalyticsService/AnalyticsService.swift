@@ -143,16 +143,6 @@ extension AnalyticsService: AnalyticsGA {
                 "screenName": screen.name,
                 "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
             ]
-            
-            switch screen {
-            case .loginScreen:
-                debugLog("-- track loginScreen logScreen method")
-            case .signUpScreen:
-                debugLog("-- track registrationScreen logScreen method")
-            default:
-                break
-            }
-            
             Analytics.logEvent("screenView", parameters: logScreenParametrs + dimentionParametrs)
         }
     }
@@ -160,14 +150,6 @@ extension AnalyticsService: AnalyticsGA {
     func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int? = nil,
                                      uploadsMetrics: Int? = nil, isPaymentMethodNative: Bool? = nil) {
         prepareDimentionsParametrs(screen: screen, downloadsMetrics: downloadsMetrics, uploadsMetrics: uploadsMetrics, isPaymentMethodNative: isPaymentMethodNative) { parametrs in
-            switch screen {
-            case .loginScreen:
-                debugLog("-- track loginScreen trackDimentionsEveryClickGA method")
-            case .signUpScreen:
-                debugLog("-- track registrationScreen trackDimentionsEveryClickGA method")
-            default:
-                break
-            }
             Analytics.logEvent("screenView", parameters: parametrs)
         }
     }

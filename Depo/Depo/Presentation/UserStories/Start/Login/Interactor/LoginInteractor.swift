@@ -128,7 +128,6 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     func trackScreen() {
-        debugLog("-- track Login Screen")
         analyticsService.logScreen(screen: .loginScreen)
         analyticsService.trackDimentionsEveryClickGA(screen: .loginScreen)
     }

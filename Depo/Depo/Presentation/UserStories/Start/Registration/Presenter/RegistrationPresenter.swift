@@ -16,7 +16,6 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     
     // MARK: - View output
     func viewIsReady() {
-        debugLog("-- track registrationScreen")
         interactor.trackScreen()
         startAsyncOperation()
         interactor.checkCaptchaRequerement()
