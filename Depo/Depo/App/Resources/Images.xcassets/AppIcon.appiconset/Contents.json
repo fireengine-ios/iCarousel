@@ -33,13 +33,13 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "new_lifebox_logo120.png",
+      "filename" : "Icon_120.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "new_lifebox_logo180.png",
+      "filename" : "Icon_180.png",
       "scale" : "3x"
     },
     {
@@ -75,19 +75,19 @@
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "new_lifebox_logo76.png",
+      "filename" : "Icon_76.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "new_lifebox_logo152.png",
+      "filename" : "Icon_152.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "new_lifebox_logo167.png",
+      "filename" : "Icon_167.png",
       "scale" : "2x"
     },
     {
