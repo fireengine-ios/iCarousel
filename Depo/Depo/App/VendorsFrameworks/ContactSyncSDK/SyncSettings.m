@@ -105,7 +105,6 @@
 }
 - (NSString*)endpointUrl
 {
-    return CONTACT_SYNC_BASE_PROD_URL;
     if (self.url){
         return self.url;
     }
