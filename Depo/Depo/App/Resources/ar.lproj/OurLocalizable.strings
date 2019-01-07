@@ -707,8 +707,8 @@
 "package_period_week" = "";
 "package_period_month" = "";
 "package_period_year" = "";
-"face_image_apple_price" = "";
-"package_apple_price" = "";
+"face_image_apple_price" = "%@/%@";
+"package_apple_price" = "%@ / %@";
 "package_apple_cancel_text" = "";
 "package_slcm_cancel_text" = "";
 "package_google_cancel_text" = "";
@@ -757,7 +757,7 @@
 "package_cancel_button" = "";
 "my_storage_usage" = "";
 "package_section_title" = "";
-"available_head_name_title" = "";
+"available_head_name_title" = "+ %@";
 "home_page_pop_up" = "";
 "sync_page_pop_up" = "";
 "ok_for_upgrade" = "";
