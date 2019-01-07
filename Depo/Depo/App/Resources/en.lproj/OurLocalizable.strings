@@ -73,7 +73,7 @@
 "Cancel" = "Cancel";
 "Info" = "Info";
 "You can open settings and cancel subscption." = "You can open settings and cancel subscption.";
-"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Please text \"Iptal LIFEBOX %@\" to 2200 to cancel your package";
+"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "To cancel your package, please send an SMS to 2200 with this text: \"IPTAL LIFEBOX %@\"";
 "You can visit iTunes to cancel your subscription" = "You can visit iTunes to cancel your package";
 "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships";
@@ -713,10 +713,6 @@
 "object_recognition_short" = "Object Recognition to remember with things you love";
 "lorem_ipsum_non_turkcell" = "Please do not translate this";
 "lorem_ipsum_turkcell" = "Please do not translate this";
-"remove_duplicate_short" = "Remove Duplicated Contacts";
-"places_recognition_short" = "Places Recognition";
-"face_recognition_short" = "Face Recognition";
-"object_recognition_short" = "Object Recognition";
 
 /*Package*/
 "package_period_day" = "day";
@@ -726,7 +722,7 @@
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@ / %@";
 "package_apple_cancel_text" = "To cancel your package, please use iTunes & App Store menu in your device";
-"package_slcm_cancel_text" = "To cancel your package, please send a SMS to 2200 with this text: \"IPTAL LIFEBOX %@\"";
+"package_slcm_cancel_text" = "To cancel your package, please send an SMS to 2200 with this text: \"IPTAL LIFEBOX %@\"";
 "package_google_cancel_text" = "To cancel your package, please use Google Play Store";
 "package_free_of_charge_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 "package_lifecell_cancel_text" = "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080.";
@@ -734,9 +730,9 @@
 "package_kktcell_cancel_text" = "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships";
 "package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2";
 "package_life_cancel_text" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
-"package_paycell_all_access_cancel_text" = "To cancel your package, please use www.mylifebox.com";
-"package_paycell_slcm_cancel_text" = "To cancel your package, please use www.mylifebox.com";
-"package_slcm_paycell_cancel_text" = "To cancel your package, please use www.mylifebox.com";
+"package_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
+"package_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
+"package_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 
 /*Leave Premium*/
@@ -751,10 +747,10 @@
 "feature_kktcell_cancel_text" = "You can continue to use Premium features for free since you are a lifecell-KKTC user";
 "feature_moldcell_cancel_text" = "You can continue to use Premium features for free since you are a Moldcell user";
 "feature_life_cancel_text" = "You can continue to use Premium features for free since you are a life:) user";
-"feature_paycell_all_access_cancel_text" = "To cancel your package, please use www.mylifebox.com";
-"feature_paycell_slcm_cancel_text" = "To cancel your package, please use www.mylifebox.com";
-"feature_slcm_paycell_cancel_text" = "To cancel your package, please use www.mylifebox.com";
-"feature_all_access_paycell_cancel_text" = "To cancel your package, please use www.mylifebox.com";
+"feature_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
+"feature_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
+"feature_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
+"feature_all_access_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "feature_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 
 /*PackageInfoView*/
@@ -770,14 +766,12 @@
 "face_image_thing_recognition" = "Things";
 
 /*PackageViewController*/
-"package_cancel_button" = "Leave Membership";
-"my_storage_usage" = "%1$@ of %2$@ has remained";
-/* PackageViewController */
 "package_cancel_button" = "Cancel your subscription";
+"my_storage_usage" = "%1$@ of %2$@ has remained";
 "package_section_title" = "Upgrade Your Storage";
 "available_head_name_title" = "+ %@";
 "home_page_pop_up" = "Since you do not have a Premium account,  your photos and videos will be stored in high quality. Become Premium to keep your memories in original quality!";
 "sync_page_pop_up" = "Since you do not have a Premium account,  your photos and videos will be stored in high quality. Become Premium to keep your memories in original quality!";
 "ok_for_upgrade" = "Yes, Upgrade";
 "no_for_upgrade" = "No, I'm OK";
-"uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. We will keep your existing photos and videos along with new uploded memories in high quality until 1st of March. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
+"uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. We will keep your existing photos and videos along with new uploaded memories in high quality until 1st of March. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
