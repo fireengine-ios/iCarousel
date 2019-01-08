@@ -152,7 +152,7 @@
 "%@ about Lifebox" = "%@ о lifebox";
 "Complaint" = "Жалоба";
 "Suggestion" = "Совет";
-"Feedback Form" = "Чтобы предложить совет или оставить жалобу, пожалуйста, свяжитесь с нами:";
+"Feedback Form" = "Чтобы оставить предложение или жалобу, пожалуйста, свяжитесь с нами:";
 "Thanks for leaving a comment!" = "Оставить отзыв";
 
 /*Fuzzy*/
@@ -539,7 +539,7 @@
 "dropboxLastUpdatedFile" = "Обновлено последний раз %@ - %d файл";
 "dropboxLastUpdatedFiles" = "Обновлено последний раз %@ - %d файл(-а, -ов)";
 "PackagesPolicyHeader" = "Автоматическое возобновление подписки на in-app покупку:";
-"PackagesPolicyText" = "Подписка продлевается каждый месяц.\nПри подтверждении покупки оплата взимается с вашей учётной записи iTunes.\n\nПодписка продлевается автоматически, если функция автоматического продления не выключена по крайней мере за 24 часа до окончания текущего периода.\nЗа продление подписки с вашего счёта будут списаны средства в течение 24-х часов до окончания текущего периода. Плата отображается как плата на экране покупок в приложении.\n\nПользователь может управлять своими подписками, после совершения покупки функция автоматического продления подписки может быть выключена в меню \"Настройки» учётной записи пользователя.\n\nЛюбая неиспользованная часть подписки в течение бесплатного пробного периода, если таковая имеется, будет прервана, как только пользователь оформит подписку, где это применимо.\n \nПолитика конфиденциальности: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\n Условия использования: ";
+"PackagesPolicyText" = "Подписка продлевается каждый месяц.\nПри подтверждении покупки оплата взимается с вашей учётной записи iTunes.\nПодписка продлевается автоматически, если функция автоматического продления не выключена по крайней мере за 24 часа до окончания текущего периода.\nЗа продление подписки с вашего счёта будут списаны средства в течение 24-х часов до окончания текущего периода. Плата отображается как плата на экране покупок в приложении.\nПользователь может управлять своими подписками, после совершения покупки функция автоматического продления подписки может быть выключена в меню \"Настройки» учётной записи пользователя.\nЛюбая неиспользованная часть подписки в течение бесплатного пробного периода, если таковая имеется, будет прервана, как только пользователь оформит подписку, где это применимо.\nПолитика конфиденциальности: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nУсловия использования:";
 "Missing Dates" = "Дата отсутствует";
 "You have successfully registered, please log in with your credentials" = "Вы успешно зарегистрированы, пожалуйста, авторизуйтесь, использую ваши учётные данные.";
 "Animation" = "Анимация";
@@ -642,8 +642,110 @@
 "offersCancelLife" = "Чтобы отменить подписку на пакет \"lifebox 25GB\", пожалуйста, отправьте SMS с текстом “Stop1” на короткий номер 6767, на пакет \"lifebox 100GB\" - SMS с текстом “Stop2”, на пакет \"lifebox 500GB\" - SMS с текстом “Stop3”";
 "Please enter a valid login." = "Неверный логин. Пожалуйста, проверьте логин или пароль";
 "Please enter the text below" = "Пожалуйста, введите символы, показанные ниже";
-"facebook_photo_tags" = "";
-"facebook_tags_on" = "";
-"facebook_tags_off" = "";
-"facebook_tags_import" = "";
+"facebook_photo_tags" = "Фотометки Facebook";
+"facebook_tags_on" = "После включения данной опции фотометки из Facebook будут проставлены на ваших фотографиях";
+"facebook_tags_off" = "После включения данной опции фотометки из Facebook будут проставлены на ваших фотографиях";
+"facebook_tags_import" = "Чтобы использовать функцию \"Фотометки Facebook\", пожалуйста, включите функцию \"Импортировать из Facebook\".";
 "TermsOfUseLinkText" = "Нажмите";
+"launch_campaign_card_detail" = "Детали";
+"launch_campaign_card_title" = "Пражская кампания";
+"launch_campaign_card_message" = "Прага ждет вас! Начните исследовать lifebox прямо сейчас и стать одной из 10 счастливых пар";
+"%d same contacts" = "Дубликатов: %d";
+"Quick Scroll Preparation" = "Подготовка фотографий и видео";
+
+/*PremiumView*/
+"delete_duplicated_title" = "Чтобы удалить дубликаты контактов и разблокировать больше функций, станьте Premium пользователем!";
+"face_recognition_title" = "Чтобы увидеть все лица в Вашей галерее и разблокировать больше функций, станьте Premium пользователем!";
+"places_title" = "Чтобы увидеть все места в Вашей галерее и разблокировать больше функций, станьте Premium пользователем!";
+"things_title" = "Чтобы увидеть все предметы в Вашей галерее и разблокировать больше функций, станьте Premium пользователем!";
+"use_following_premium_membership_advantages_with_only_additional_your_data_storage_package" = "Используйте преимущества Premium пользователейвсего лишь с дополнительными %@ к вашему пакету.";
+"month" = "месяц";
+"no_details_message" = "Мы обрабатываем Ваш запрос. Мы сообщим, когда процесс закончится.";
+"please_try_again_later" = "Пожалуйста, попробуйте позже.";
+"Back up with Original Quality" = "Архивировать в оригинальном качестве";
+"Remove Duplicate Contacts from Your Directory" = "Удалить дубликаты контактов из вашей телефонной книги";
+"Face Recognition to reach your loved one's memories" = "Распознавайте лица, чтобы быть ближе к любимым";
+"Place Recognition to beam you up to the memories" = "Распознавайте места, чтобы передавать воспоминания";
+"Object Recognition to remember with things you love" = "Распознайте объект, чтобы помнить вещи, которые вам нравятся";
+"Become Premium" = "Стать Premium";
+"Become Premium Member!" = "Стань Premium пользователем!";
+"leave_premium_membership" = "Покинуть Premium сообщество";
+"Standard User" = "Standard пользователь";
+"Premium User" = "Premium пользователь";
+"lifebox Premium" = "lifebox Premium";
+"Delete Duplicated Contacts For PremiumTitle" = "Чтобы удалить дубликаты контактов и разблокировать больше функций, станьте Premium пользователем!";
+
+/*PremiumBanner*/
+"standard_banner_message" = "Откройте для себя возможности Premium пользователя, что подарит вам лучший опыт использования облачного хранилища!";
+"premium_banner_message" = "Откройте для себя преимущества Premium пользователя прямо сейчас, что подарит вам лучший опыт использования облачного хранилища!";
+"standard_banner_title" = "lifebox Premium";
+"premium_banner_title" = "Добро пожаловать в lifebox Premium!";
+"back_up_short" = "Архивировать в оригинальном качестве";
+"remove_duplicate_short" = "Удалить дубликаты контактов";
+"places_recognition_short" = "Распознавайте места, чтобы передавать воспоминания";
+"face_recognition_short" = "Распознавайте лица, чтобы быть ближе к любимым";
+"object_recognition_short" = "Распознавайте объекты, чтобы помнить вещи, которые вам нравятся";
+"lorem_ipsum_non_turkcell" = "Please do not translate this";
+"lorem_ipsum_turkcell" = "Please do not translate this";
+
+/*Package*/
+"package_period_day" = "день";
+"package_period_week" = "неделя";
+"package_period_month" = "месяц";
+"package_period_year" = "год";
+"face_image_apple_price" = "%@/%@";
+"package_apple_price" = "%@ / %@";
+"package_apple_cancel_text" = "Текст отмены Apple подписки.";
+"package_slcm_cancel_text" = "Пожалуйста, отправьте сообщение с текстом \"Iptal LIFEBOX %@\" на номер 2222, чтобы отменить вашу подписку.";
+"package_google_cancel_text" = "Текст отмены Google подписки";
+"package_free_of_charge_cancel_text" = "Пожалуйста, воспользуйтесь меню \"Оставить отзыв\", чтобы сообщить нам о вашем запросе.";
+"package_lifecell_cancel_text" = "Текст отмены LifeCell подписки.";
+"package_promo_cancel_text" = "Пожалуйста, воспользуйтесь меню \"Оставить отзыв\", чтобы сообщить нам о вашем запросе.";
+"package_kktcell_cancel_text" = "Текст отмены KKTCell подписки.";
+"package_moldcell_cancel_text" = "Текст отмены Moldcell подписки.";
+"package_life_cancel_text" = "Текст отмены Life подписки.";
+"package_paycell_all_access_cancel_text" = "Чтобы отменить подписку на ваш пакет, пожалуйста, перейдите на www.mylifebox.com";
+"package_paycell_slcm_cancel_text" = "Чтобы отменить подписку на ваш пакет, пожалуйста, перейдите на www.mylifebox.com";
+"package_slcm_paycell_cancel_text" = "Чтобы отменить подписку на ваш пакет, пожалуйста, перейдите на www.mylifebox.com";
+"package_default_cancel_text" = "Пожалуйста, воспользуйтесь меню \"Оставить отзыв\", чтобы сообщить нам о вашем запросе.";
+
+/*Leave Premium*/
+"leave_premium_premium_description" = "Вы можете воспользоваться всеми преимуществами lifebox, находясь в Premium сообществе.";
+"leave_premium_cancel_description" = "Вы не сможете воспользоваться привелегиями Premium сообщества, если отмените свою подписку.";
+"feature_apple_cancel_text" = "Текст отмены подписки функции Apple.";
+"feature_slcm_cancel_text" = "Чтобы отменить подписку, пожалуйста, отправьте сообщение с текстом “IPTAL LIFEBOX PREMIUM %s” на номер 2200.";
+"feature_google_cancel_text" = "Текст отмены подписки функции Google.";
+"feature_free_of_charge_cancel_text" = "Пожалуйста, воспользуйтесь меню \"Оставить отзыв\", чтобы сообщить нам о вашем запросе.";
+"feature_lifecell_cancel_text" = "Вы можете продолжать использовать функции Premium пользователя, поскольку вы являетесь абонентом lifecell";
+"feature_promo_cancel_text" = "Пожалуйста, воспользуйтесь меню \"Оставить отзыв\", чтобы сообщить нам о вашем запросе.";
+"feature_kktcell_cancel_text" = "Вы можете продолжать использовать функции Premium пользователя, поскольку вы являетесь абонентом KKTCELL";
+"feature_moldcell_cancel_text" = "Вы можете продолжать использовать функции Premium пользователя, поскольку вы являетесь абонентом Moldcell";
+"feature_life_cancel_text" = "Вы можете продолжать использовать функции Premium пользователя, поскольку вы являетесь абонентом life:)";
+"feature_paycell_all_access_cancel_text" = "Чтобы отменить подписку на пакет, пожалуйста, перейдите на www.mylifebox.com";
+"feature_paycell_slcm_cancel_text" = "Чтобы отменить подписку на пакет, пожалуйста, перейдите на www.mylifebox.com";
+"feature_slcm_paycell_cancel_text" = "Чтобы отменить подписку на пакет, пожалуйста, перейдите на www.mylifebox.com";
+"feature_all_access_paycell_cancel_text" = "Чтобы отменить подписку на пакет, пожалуйста, перейдите на www.mylifebox.com";
+"feature_default_cancel_text" = "Пожалуйста, воспользуйтесь меню \"Оставить отзыв\", чтобы сообщить нам о вашем запросе.";
+
+/*PackageInfoView*/
+"my_storage" = "Моё хранилище";
+"see_details" = "Смотрите детали";
+"face_image_description" = "Так как вы являетесь стандартным пользователем, только 100 ваших фото будут обработаны. В ваших умных альбомах вы сможете увидеть только 3 объекта, человека и места.";
+"face_image_upgrade" = "Обновитесь до lifebox Premium, чтобы использовать данную функцию без ограничений.";
+
+/*FaceImagePremiumFooterView*/
+"face_image_footer_view_message" = "Чтобы увидеть все %@ в вашей галерее и разблокировать больше функций, станьте Premium пользователем!";
+"face_image_face_recognition" = "Люди";
+"face_image_place_recognition" = "Места";
+"face_image_thing_recognition" = "Предметы";
+
+/*PackageViewController*/
+"package_cancel_button" = "Отменить подписку";
+"my_storage_usage" = "%@ из %@ осталось";
+"package_section_title" = "Расширьте ваше хранилище";
+"available_head_name_title" = "+ %@";
+"home_page_pop_up" = "Так как Вы не являетесь Premium пользователем, Ваши фото и видео файлы будут сохранены в высоком качестве. Станьте Premium пользователем, чтобы хранить Ваши воспоминания в оригинальном качестве!";
+"sync_page_pop_up" = "Так как вы не являетесь Premium пользователем, Ваши фото и видео файлы будут сохранены в высоком качестве. Станьте Premium пользователем, чтобы хранить ваши воспоминания в оригинальном качестве!";
+"ok_for_upgrade" = "Да, Обновить";
+"no_for_upgrade" = "Нет, не хочу";
+"uploded_photos_high_quality" = "Вы пользуетесь стандартным пакетом lifebox. Ваши фото и видео будут храниться в высоком качестве до 1ого марта. Хотите стать Премиум пользователем, чтобы хранить воспоминания в оригинальном качестве и пользоваться преимуществами Премиум пакета?";

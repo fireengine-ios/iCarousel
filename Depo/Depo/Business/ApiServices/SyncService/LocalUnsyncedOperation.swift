@@ -49,12 +49,14 @@ final class LocalUnsyncedOperation: Operation {
                 return
             }
             
+            debugLog("LocalMediaStorage found \(items.count) items to sync")
             self.compareRemoteItems(with: items, service: self.service, fieldValue: self.fieldValue) { [weak self] items, error in
                 guard let `self` = self else {
                     return
                 }
                 
                 guard error == nil, let unsyncedItems = items, self.isExecuting else {
+                    debugLog("LocalMediaStorage no items to sync")
                     self.completion([])
                     self.semaphore.signal()
                     return

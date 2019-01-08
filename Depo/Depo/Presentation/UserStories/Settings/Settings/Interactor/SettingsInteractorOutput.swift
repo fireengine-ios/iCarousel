@@ -23,4 +23,6 @@ protocol SettingsInteractorOutput: class {
     func asyncOperationStarted()
     func asyncOperationStoped()
     
+    func didObtainUserStatus()
+    func didFailToObtainUserStatus(errorMessage: String)
 }

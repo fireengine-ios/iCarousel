@@ -88,10 +88,11 @@ final class UploadService: BaseRequestService {
                 returnedUploadOperation(nil)
                 return
             }
-            self.analyticsService.trackDimentionsEveryClickGA(screen: .upload, downloadsMetrics: nil, uploadsMetrics: items.count)
-            self.trackAnalyticsFor(items: items, isFromCamera: isFromCamera)
+            
+            PremiumService.shared.showPopupForNewUserIfNeeded()
             
             let filteredItems = self.filter(items: items)
+            self.trackAnalyticsFor(items: filteredItems, isFromCamera: isFromCamera)
             
             switch uploadType {
             case .autoSync:
@@ -120,10 +121,13 @@ final class UploadService: BaseRequestService {
                         returnedUploadOperation(seyncOperations)
                 })
             default:
+                 self.analyticsService.trackDimentionsEveryClickGA(screen: .upload, downloadsMetrics: nil, uploadsMetrics: items.count)
+                 
                 self.uploadFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
                     self?.stopTracking()
                     self?.clearUploadCounters()
                     self?.hideUploadCardIfNeeded()
+                    ItemOperationManager.default.finishUploadFiles()
                     success()
                     }, fail: { [weak self] errorResponse in
                         self?.stopTracking()
@@ -233,6 +237,7 @@ final class UploadService: BaseRequestService {
                         
                         let checkIfFinished = {
                             if self.uploadOperations.filter({ $0.uploadType == .syncToUse }).isEmpty {
+                                self.trackUploadItemsFinished(items: itemsToUpload)
                                 success()
                                 self.logSyncSettings(state: "FinishedSyncToUseFileList")
                                 return
@@ -430,6 +435,7 @@ final class UploadService: BaseRequestService {
                         let checkIfFinished = {
                             if !successHandled, self.uploadOperations.filter({ $0.uploadType == .autoSync && $0.item.fileType == finishedOperation.item.fileType }).isEmpty {
                                 successHandled = true
+                                self.trackUploadItemsFinished(items: itemsToSync)
                                 success()
                                 self.logSyncSettings(state: "FinishedSyncFileList")
                                 return

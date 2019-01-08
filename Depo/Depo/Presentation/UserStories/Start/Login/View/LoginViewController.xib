@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,13 +45,13 @@
                     <rect key="frame" x="0.0" y="88" width="375" height="724"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="346" translatesAutoresizingMaskIntoConstraints="NO" id="HCp-Ig-1We">
-                            <rect key="frame" x="30" y="8.6666666666666696" width="315" height="20.333333333333329"/>
+                            <rect key="frame" x="30" y="7.9999999999999982" width="315" height="20.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="900" verticalCompressionResistancePriority="900" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBi-l1-gsZ" userLabel="Error Label">
-                            <rect key="frame" x="30" y="79" width="315" height="21.666666666666671"/>
+                            <rect key="frame" x="30" y="78.333333333333343" width="315" height="21.666666666666671"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="105" id="gcW-yU-gan"/>
                             </constraints>
@@ -60,11 +60,11 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BuA-r0-ykZ">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="519.66666666666663"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="519"/>
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZUi-xv-OhT">
-                            <rect key="frame" x="0.0" y="100.66666666666666" width="375" height="221.99999999999997"/>
+                            <rect key="frame" x="0.0" y="100" width="375" height="222"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="222" id="LAF-pw-hnK"/>
@@ -72,7 +72,7 @@
                             <color key="sectionIndexBackgroundColor" red="0.023596025971353463" green="0.0" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kfw-l0-Y4i">
-                            <rect key="frame" x="0.0" y="322.66666666666669" width="375" height="30"/>
+                            <rect key="frame" x="0.0" y="322" width="375" height="30"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqD-Ug-1FL">
                                     <rect key="frame" x="25" y="0.0" width="30" height="30"/>
@@ -107,17 +107,17 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crD-Uh-f0U" userLabel="view for captcha">
-                            <rect key="frame" x="0.0" y="362.66666666666669" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="362" width="375" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" id="pok-rb-ldH"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F62-WO-wVy" userLabel="bottom view">
-                            <rect key="frame" x="0.0" y="362.66666666666669" width="375" height="157.00000000000006"/>
+                            <rect key="frame" x="0.0" y="362" width="375" height="157"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTQ-k6-noA" customClass="WhiteButtonWithRoundedCorner" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="129.33333333333334" y="30" width="117" height="55"/>
+                                    <rect key="frame" x="129" y="30" width="117" height="55"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="55" id="ChL-oB-er0">
                                             <variation key="widthClass=regular" constant="64"/>
@@ -132,7 +132,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sKm-UQ-Thl" customClass="ButtonWithCorner" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="151" y="109.99999999999994" width="73" height="29"/>
+                                    <rect key="frame" x="151" y="110" width="73" height="29"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="29" id="oX6-5L-wKm">
                                             <variation key="widthClass=regular" constant="44"/>

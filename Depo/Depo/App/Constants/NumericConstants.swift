@@ -81,6 +81,7 @@ struct NumericConstants {
     static let logMaxSize: UInt64 = 5_242_880
     
     static let numberOfLocalItemsOnPage: Int = 100
+    static let itemProviderSearchRequest: Int = 1000
     
     static let limitContactsForBackUp: Int = 5000
     static let defaultCustomScrollIndicatorOffset: CGFloat = 50
@@ -90,6 +91,33 @@ struct NumericConstants {
     static let intervalInSecondsBetweenAutoSyncItemsAppending = 8.0
     
     static let intervalInSecondsBetweenAppResponsivenessUpdate: TimeInterval = 3 * 60
+    
+    static let scaleForPremiumButton: CGFloat = 0.85
+    static let defaultScaleForPremiumButton: Double = 1
+    static let repeatCountForPremiumButton: Float = 1
+    static let delayForStartAnimation: Double = 3
+    static let durationBetweenAnimation: CFTimeInterval = 3
+    static let repeatCountForAnimation: Float = 10000000
+    static let initialVelocityForAnimation: CGFloat = 0.3
+    static let dampingForAnimation: CGFloat = 0.3
+    static let speedForAnimation: Float = 1.7
+    static let durationAnimationForPremiumButton: Double = 0.5
+
+    static let timeIntervalForPremiumFeaturesView: TimeInterval = 2
+    static let imageViewSizeForPremiumFeaturesView: CGFloat = 46
+    static let transitionDurationForPremiumFeaturesView: TimeInterval = 1
+
+    static let alphaForColorsPremiumButton: CGFloat = 0.85
+
+    static let packageViewCornerRadius: CGFloat = 5
+    static let packageViewShadowOpacity: Float = 1
+    static let packageViewMainShadowRadius: CGFloat = 3
+    static let packageViewBottomViewShadowRadius: CGFloat = 2
+    static let iPadPackageSumInset: CGFloat = 24
+    static let packageSumInset: CGFloat = 15
+    static let heightForPackageCell: CGFloat = 255
+    
+    static let premiumViewHeight: CGFloat = 510
 }
 
 struct RequestSizeConstant {

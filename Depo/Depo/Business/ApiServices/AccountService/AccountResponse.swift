@@ -107,11 +107,19 @@ class SecuritySettingsInfoResponse: ObjectRequestResponse {
     
 }
 
-class FaceImageAllowedResponse: ObjectRequestResponse {
-    var allowed: Bool?
+final class FaceImageAllowedResponse: ObjectRequestResponse {
+    
+    var isFaceImageAllowed: Bool?
+    var isFacebookAllowed: Bool?
+    
+    private enum ResponseKeys {
+        static let faceImage = "faceImageRecognitionAllowed"
+        static let facebook = "facebookTaggingEnabled"
+    }
     
     override func mapping() {
-        allowed = json?.bool
+        isFaceImageAllowed = json?[ResponseKeys.faceImage].bool
+        isFacebookAllowed = json?[ResponseKeys.facebook].bool
     }
 }
 
@@ -228,6 +236,53 @@ class UsageResponse: ObjectRequestResponse {
         let internetDataUsageJsonArray = json?[UsageResponseKeys.internetDataUsage].array
         if let tmpList = internetDataUsageJsonArray?.flatMap({ InternetDataUsage(withJSON: $0) }) {
             internetDataUsage = tmpList
+        }
+    }
+}
+
+final class PermissionsResponse: ObjectRequestResponse {
+
+    var permissions: [PermissionResponse]?
+    
+    func hasPermissionFor(_ type: AuthorityType) -> Bool {
+        let hasPermission = permissions?.contains(where: { $0.type == type })
+        return hasPermission ?? false
+    }
+
+    override func mapping() {
+        let permissionsJsonArray = json?.array
+        if let permissionList = permissionsJsonArray?.flatMap({ PermissionResponse(withJSON: $0) }) {
+            permissions = permissionList
+        }
+    }
+}
+
+final class PermissionResponse: ObjectRequestResponse {
+    private enum ResponseKeys {
+        static let type = "type"
+    }
+    
+    var type: AuthorityType?
+    
+    
+    override func mapping() {
+        let typeString = json?[ResponseKeys.type].string
+        if let string = typeString, let type = AuthorityType(rawValue: string) {
+            self.type = type
+        }
+    }
+}
+
+final class PackagePackAuthoritiesResponse: ObjectRequestResponse {
+    private enum ResponseKey {
+        static let authorityType = "authorityType"
+    }
+    
+    var authorityType: AuthorityType?
+
+    override func mapping() {
+        if let typeString = json?[ResponseKey.authorityType].string {
+            authorityType = AuthorityType(rawValue: typeString)
         }
     }
 }

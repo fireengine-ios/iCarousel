@@ -11,4 +11,5 @@ import UIKit
 enum Images {
     static var noDocuments: UIImage { return #imageLiteral(resourceName: "ImageNoDocuments") }
     static var exitWhite: UIImage { return #imageLiteral(resourceName: "CloseCardIconWhite") }
+    static var scrollBarHandle: UIImage { return #imageLiteral(resourceName: "scroll_bar_handle") }
 }

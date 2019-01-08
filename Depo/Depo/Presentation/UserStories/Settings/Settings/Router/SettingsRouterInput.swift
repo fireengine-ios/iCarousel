@@ -32,6 +32,8 @@ protocol SettingsRouterInput {
     
     func goToPackages()
     
+    func goToPremium()
+    
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needReplaceOfCurrentController: Bool)
     
     func closeEnterPasscode()
@@ -43,4 +45,6 @@ protocol SettingsRouterInput {
     func goTurkcellSecurity()
     
     func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?)
+    
+    func showError(errorMessage: String)
 }

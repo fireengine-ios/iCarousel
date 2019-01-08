@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 
+
 class CollectionViewCellForPhoto: BaseCollectionViewCell {
     @IBOutlet weak var favoriteIcon: UIImageView!
     
@@ -27,6 +28,10 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     static let borderW: CGFloat = 3
     
     private let visualEffectBlur = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    
+    private var cellImageManager: CellImageManager?
+    private var uuid: String?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,8 +64,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         if let item = wrappedObj as? Item {
             favoriteIcon.isHidden = !item.favorites
         }
-        
-        imageView.image = nil
 
         if wrappered.isLocalItem && wrappered.fileSize < NumericConstants.fourGigabytes {
             cloudStatusImage.image = UIImage(named: "objectNotInCloud")
@@ -76,9 +79,9 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.imageView.image = nil
-        self.imageView.sd_cancelCurrentImageLoad()
-        self.isAlreadyConfigured = false
+        reset()
+        
+        isAlreadyConfigured = false
     }
     
     override func updating() {
@@ -98,14 +101,15 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             imageView.image = image
         }
         
+        
         backgroundColor = ColorConstants.fileGreedCellColor
         
         isAlreadyConfigured = true
     }
-
+    
     override func setImage(with url: URL) {
-        self.imageView.contentMode = .center
-        imageView.sd_setImage(with: url, placeholderImage: nil, options:[.queryDiskSync, .avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
+        imageView.contentMode = .center
+        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
             guard let `self` = self else {
                 return
             }
@@ -115,12 +119,31 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
                 return
             }
             
-            let shouldAnimate = (cacheType == .none)
-            self.setImage(image: image, animated: shouldAnimate)
+            self.setImage(image: image, animated: true)
         }
         
         isAlreadyConfigured = true
-        self.backgroundColor = ColorConstants.fileGreedCellColor
+        backgroundColor = ColorConstants.fileGreedCellColor
+    }
+    
+    override func setImage(with metaData: BaseMetaData) {
+        let cacheKey = metaData.mediumUrl?.byTrimmingQuery
+        cellImageManager = CellImageManager.instance(by: cacheKey)
+        uuid = cellImageManager?.uniqueId
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
+            DispatchQueue.toMain {
+                guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
+                    return
+                }
+                
+                let needAnimate = !cached && (self?.imageView.image == nil)
+                self?.setImage(image: image, animated: needAnimate)
+            }
+        }
+
+        cellImageManager?.loadImage(thumbnailUrl: metaData.smalURl, url: metaData.mediumUrl, completionBlock: imageSetBlock)
+
+        isAlreadyConfigured = true
     }
 
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
@@ -164,6 +187,8 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     func cleanCell() {
+        cancelImageLoading()
+        
         DispatchQueue.main.async {
             self.visualEffectBlur.isHidden = true
             self.progressView.isHidden = true
@@ -176,6 +201,22 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     func resetCloudImage() {
         cloudStatusImage.image = UIImage()
+    }
+    
+    private func cancelImageLoading() {
+        imageView.sd_cancelCurrentImageLoad()
+        cellImageManager?.cancelImageLoading()
+    }
+    
+    private func reset() {
+        cellImageManager = nil
+        imageView.image = nil
+        uuid = nil
+        setAssetId(nil)
+    }
+    
+    deinit {
+        cancelImageLoading()
     }
 
 }

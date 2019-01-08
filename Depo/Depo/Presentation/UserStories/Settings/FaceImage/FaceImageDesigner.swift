@@ -42,6 +42,22 @@ final class FaceImageDesigner: NSObject {
         }
     }
     
+    @IBOutlet private weak var firstFaceImageLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.darkText
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
+            newValue.text = TextConstants.faceImageGroupingDescription
+        }
+    }
+    
+    @IBOutlet private weak var secondFaceImageLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.darkText
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
+            newValue.text = TextConstants.faceImageUpgrade
+        }
+    }
+    
     @IBOutlet private weak var facebookImportButton: UIButton! {
         willSet {
             newValue.setTitleColor(UIColor.white, for: .normal)
@@ -49,6 +65,15 @@ final class FaceImageDesigner: NSObject {
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.layer.cornerRadius = 25
             newValue.setTitle(TextConstants.importFromFB, for: .normal)
+        }
+    }
+    
+    @IBOutlet private weak var faceImagePremiumButton: UIButton! {
+        willSet {
+            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.setTitle(TextConstants.becomePremiumMember, for: .normal)
+            newValue.titleEdgeInsets = UIEdgeInsetsMake(6, 17, 6, 17)
         }
     }
 }

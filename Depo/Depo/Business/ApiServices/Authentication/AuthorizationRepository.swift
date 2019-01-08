@@ -72,7 +72,7 @@ extension AuthorizationRepositoryImp: RequestAdapter {
     
     public func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         guard urlRequest.url?.absoluteString != nil,
-            let accessToken = tokenStorage.accessToken
+            let accessToken = tokenStorage.savedAccessToken
             else { return urlRequest }
         var urlRequest = urlRequest
         urlRequest.setValue(fullAccessToken(accessToken), forHTTPHeaderField: authorizationHeaderKey)

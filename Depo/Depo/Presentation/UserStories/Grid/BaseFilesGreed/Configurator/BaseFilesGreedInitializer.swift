@@ -18,12 +18,12 @@ class BaseFilesGreedModuleInitializer: NSObject {
     }
     
     class func initializePhotoVideosViewController(with nibName: String, screenFilterType: MoreActionsConfig.MoreActionsFileType) -> UIViewController {
-        let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
+        let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)//PhotoVideoController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
         viewController.scrolliblePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
         viewController.scrolliblePopUpView.isEnable = true
-        let configurator = BaseFilesGreedModuleConfigurator()
+        let configurator = BaseFilesGreedModuleConfigurator()//PhotoVideoFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .sync, .addToAlbum, .delete],
                                                style: .default, tintColor: nil)
         
@@ -39,11 +39,20 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                   selectionModeTypes: [.createStory, .print, .deleteDeviceOriginal])
 
+        let fileType: FileType = screenFilterType.convertToFileType()
+
+//        topBarConfig: gridListTopBarConfig,
+//        alertSheetConfig: alertSheetConfig)
         configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
-                               fileFilters: [.fileType(screenFilterType.convertToFileType())],
+                               fileFilters: [.fileType(fileType)],
                                bottomBarConfig: bottomBarConfig, visibleSlider: true, visibleSyncItemsCheckBox: true,
                                topBarConfig: gridListTopBarConfig,
                                alertSheetConfig: alertSheetConfig)
+//        (viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
+//                               fileFilters: [.fileType(fileType)],
+//                               bottomBarConfig: bottomBarConfig, visibleSlider: true, visibleSyncItemsCheckBox: true,
+//                               topBarConfig: gridListTopBarConfig,
+//                               alertSheetConfig: alertSheetConfig, filedType: fileType.convertedToSearchFieldValue)
         viewController.mainTitle = ""
         return viewController
     }
@@ -70,6 +79,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: []))
         viewController.mainTitle = ""
+        viewController.title = TextConstants.music
         return viewController
     }
     
@@ -95,6 +105,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: []))
         viewController.mainTitle = ""
+        viewController.title = TextConstants.documents
         return viewController
     }
     
@@ -126,7 +137,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.mainTitle = TextConstants.homeButtonAllFiles
         
         MenloworksAppEvents.onAllFilesOpen()
-        
+        viewController.title = TextConstants.homeButtonAllFiles
         return viewController
     }
     
@@ -157,7 +168,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.mainTitle = TextConstants.homeButtonFavorites
         
         MenloworksAppEvents.onFavoritesOpen()
-        
+        viewController.title = TextConstants.homeButtonFavorites
         return viewController
     }
     

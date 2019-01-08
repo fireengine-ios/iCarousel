@@ -13,4 +13,5 @@ protocol SyncContactsInteractorInput {
     func trackScreen()
     func analyze()
     func performOperation(forType type: SYNCMode)
+    func getUserStatus()
 }

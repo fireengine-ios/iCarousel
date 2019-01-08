@@ -12,4 +12,6 @@ protocol UserInfoSubViewViewOutput {
     func loadingIndicatorRequired()
     
     func loadingIndicatorDismissalRequired()
+    
+    var isPremiumUser: Bool { get }
 }

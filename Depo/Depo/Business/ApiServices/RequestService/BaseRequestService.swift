@@ -80,7 +80,7 @@ class BaseRequestParametrs: RequestParametrs {
     var patch: URL {
         return RouteRequests.baseUrl
     }
-    
+
     var header: RequestHeaderParametrs {
         return RequestHeaders.authification()
     }

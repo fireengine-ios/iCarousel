@@ -74,15 +74,14 @@ class SingletonStorage {
             return
         }
         let accountService = AccountService()
-        accountService.faceImageAllowed(success: { [weak self] response in
-            if let response = response as? FaceImageAllowedResponse {
-                self?.faceImageSettings = response
-                completion(response)
-            } else {
-                fail(ErrorResponse.string(TextConstants.errorUnknown))
+        accountService.isAllowedFaceImageAndFacebook(handler: { [weak self] response in
+            switch response {
+            case .success(let result):
+                self?.faceImageSettings = result
+                completion(result)
+            case .failed(let error):
+                fail(ErrorResponse.string(error.localizedDescription))
             }
-            }, fail: { error in
-                fail(error)
         })
     }
     
@@ -92,23 +91,19 @@ class SingletonStorage {
         guard foreceReload || faceImageSettings == nil,
         accountInfo != nil else {
             if let faceImageSettingsUnwraped  = faceImageSettings {
-                success(faceImageSettingsUnwraped.allowed ?? false)
+                success(faceImageSettingsUnwraped.isFaceImageAllowed ?? false)
             } else {
                 fail(.string(TextConstants.errorUnknown))
             }
             return
         }
         getFaceImageRecognitionSettingsForUser(completion: { firStatus in
-            guard let status = firStatus.allowed else {
+            guard let status = firStatus.isFaceImageAllowed else {
                 fail(ErrorResponse.string(TextConstants.errorUnknown))
                 return
             }
             success(status)
         }, fail: fail)
-    }
-    
-    var isFaceImageRecognitionON : Any {
-        return faceImageSettings?.allowed ?? NSNull()
     }
     
     //MARK: - subscriptions

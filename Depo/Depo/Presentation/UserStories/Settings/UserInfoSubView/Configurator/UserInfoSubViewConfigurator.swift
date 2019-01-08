@@ -9,16 +9,14 @@
 import UIKit
 
 class UserInfoSubViewModuleConfigurator {
-
+    
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
-
         if let viewController = viewInput as? UserInfoSubViewViewController {
             configure(viewController: viewController)
         }
     }
 
     private func configure(viewController: UserInfoSubViewViewController) {
-
         let router = UserInfoSubViewRouter()
 
         let presenter = UserInfoSubViewPresenter()

@@ -11,10 +11,7 @@ import UIKit
 final class LBAlbumLikePreviewSliderViewController: ViewController {
     var output: LBAlbumLikePreviewSliderViewOutput!
     
-    var sliderTitle: String?
-    
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var titleLabel: UILabel!
     
     class func initFromXIB() -> LBAlbumLikePreviewSliderViewController {
         return LBAlbumLikePreviewSliderViewController(nibName: "LBAlbumLikePreviewSliderViewController", bundle: nil)
@@ -53,20 +50,6 @@ extension LBAlbumLikePreviewSliderViewController: LBAlbumLikePreviewSliderViewIn
     
     func setupInitialState() {
         view.backgroundColor = UIColor.lrSkinTone
-        
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        titleLabel.textColor = UIColor.gray
-        titleLabel.alpha = 0.5
-        titleLabel.text = sliderTitle ?? TextConstants.albumLikeSlidertitle
-        titleLabel.isUserInteractionEnabled = true
-
-        ///LR-4845 we dont need clickable title for now
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTouchRecognition))
-//        titleLabel.addGestureRecognizer(tapGesture)
-    }
-    
-    func setTitle(_ title: String) {
-        titleLabel.text = title
     }
     
 }

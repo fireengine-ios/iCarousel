@@ -540,6 +540,7 @@ protocol  Wrappered {
 }
 
 class WrapData: BaseDataSourceItem, Wrappered {
+    
     enum Status: String {
         case active = "ACTIVE"
         case uploaded = "UPLOADED"
@@ -644,6 +645,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         self.init(baseModel: baseModel)
     }
     
+    //MARK:-
+    
     init(musicForCreateStory: CreateStoryMusicItem) {
         id = musicForCreateStory.id
         tmpDownloadUrl = musicForCreateStory.path
@@ -670,7 +673,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         status = .unknown
         metaData = BaseMetaData()
         metaData?.takenDate = Date()
-        tmpDownloadUrl = peopleItemResponse.thumbnail
+        
+        tmpDownloadUrl = peopleItemResponse.isDemo == true ? peopleItemResponse.alternateThumbnail : peopleItemResponse.thumbnail
         patchToPreview = .remoteUrl(tmpDownloadUrl)
         super.init()
         name = peopleItemResponse.name
@@ -687,7 +691,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         status = .unknown
         metaData = BaseMetaData()
         metaData?.takenDate = Date()
-        tmpDownloadUrl = thingsItemResponse.thumbnail
+        tmpDownloadUrl = thingsItemResponse.isDemo == true ? thingsItemResponse.alternateThumbnail : thingsItemResponse.thumbnail
         patchToPreview = .remoteUrl(tmpDownloadUrl)
         super.init()
         name = thingsItemResponse.name
@@ -704,7 +708,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         status = .unknown
         metaData = BaseMetaData()
         metaData?.takenDate = Date()
-        tmpDownloadUrl = placesItemResponse.thumbnail
+        tmpDownloadUrl = placesItemResponse.isDemo == true ? placesItemResponse.alternateThumbnail : placesItemResponse.thumbnail
         patchToPreview = .remoteUrl(tmpDownloadUrl)
         super.init()
         name = placesItemResponse.name
@@ -770,7 +774,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         status = Status(string: remote.status)
         
         super.init(uuid: remote.uuid)
-        md5 = remote.hash ?? "not hash "
+        md5 = remote.itemHash ?? "not hash "
         
         albums = remote.albums
         
@@ -925,7 +929,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         metaData?.duration = (assetDuration == nil) ? mediaItem.metadata?.duration : assetDuration
         
         metaData?.genre = mediaItem.metadata?.genre ?? []
-        metaData?.height = mediaItem.metadata?.height
+        metaData?.height = Int(mediaItem.metadata?.height ?? 0)
         metaData?.title = mediaItem.metadata?.title
         
         if let largeUrl = mediaItem.metadata?.largeUrl {

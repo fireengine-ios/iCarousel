@@ -52,7 +52,8 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         nameLabel.text = item.name
         
         if let peopleItem = wrappedObj as? PeopleItem,
-            let isVisible = peopleItem.responseObject.visible {
+            let isVisible = peopleItem.responseObject.visible,
+            let isDemo = peopleItem.responseObject.isDemo {
             isCellSelected = isVisible
             
             if !isVisible {
@@ -60,8 +61,8 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
                 transperentView.alpha = NumericConstants.faceImageCellTransperentAlpha
             }
             
-            visibleImageView.isHidden = isCellSelected
-            transperentView.alpha = !isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+            visibleImageView.isHidden = isCellSelected || isDemo
+            transperentView.alpha = !isCellSelected && !isDemo ? NumericConstants.faceImageCellTransperentAlpha : 0
         }
         
         isAccessibilityElement = true

@@ -63,7 +63,10 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
-        return HomeViewTopView.getHeight()
+        return 0.1
+        // TODO: clean project from HomeViewTopView and collectionView delegates from it
+        /// to show home buttons
+        //return HomeViewTopView.getHeight()
     }
     
     func isPopUpCell(path: IndexPath) -> Bool {
@@ -97,7 +100,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         baseCell.setStateToDefault()
         baseCell.cellDelegate = self
         let popUpView = popUps[indexPath.row]
-        baseCell.addViewOnCell(controllersView: popUpView, withShadow: true)
+        baseCell.addViewOnCell(controllersView: popUpView)
         popUpView.viewWillShow()
         baseCell.willDisplay()
         return baseCell
@@ -156,6 +159,8 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         switch operationType {
         case .prepareToAutoSync:
             return viewsByType[.sync] == nil
+        case .premium:
+            return !popUps.contains(where: { $0 is PremiumInfoCard })
         default:
             return true
         }
@@ -184,7 +189,8 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         if viewsByType[type] == nil {
             let view = getViewForOperation(operation: type)
             setViewByType(view: view, operation: type)
-            let index = 0
+            //helps to keep PremiumInfoCard on top
+            let index = (popUps.first(where: { $0.isKind(of: PremiumInfoCard.self) }) != nil) ? 1 : 0
             
             print("insert at index ", index, type.rawValue)
             self.popUps.insert(view, at: index)
@@ -244,6 +250,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         newPopUps = newPopUps.sorted(by: { view1, view2 -> Bool in
             let order1 = view1.cardObject?.order ?? 0
             let order2 = view2.cardObject?.order ?? 0
+            if order1 == order2 {
+                return view1 is PremiumInfoCard
+            }
             return order1 < order2
         })
         
@@ -255,10 +264,13 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
-        if !checkIsThisIsPermittedType(type: type) {
+        if !checkIsThisIsPermittedType(type: type), type != .premium {
             return
         }
         if !checkIsNeedShowPopUpFor(operationType: type) {
+            if type == .premium {
+                refreshPremiumCard()
+            }
             return
         }
         
@@ -278,10 +290,21 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             popUps = popUps.sorted(by: { view1, view2 -> Bool in
                 let order1 = view1.cardObject?.order ?? 0
                 let order2 = view2.cardObject?.order ?? 0
+                if order1 == order2 {
+                    return view1 is PremiumInfoCard
+                }
                 return order1 < order2
             })
-            collectionView.reloadData()
+            collectionView?.reloadData()
             delegate?.didReloadCollectionView(self.collectionView)
+        }
+    }
+
+    private func refreshPremiumCard() {
+        if let view = popUps.filter({ $0 is PremiumInfoCard }).first as? PremiumInfoCard,
+            (view.isPremium != AuthoritySingleton.shared.isPremium || AuthoritySingleton.shared.isLosePremiumStatus) {
+            view.configurateWithType(viewType: .premium)
+            collectionView.reloadData()
         }
     }
     

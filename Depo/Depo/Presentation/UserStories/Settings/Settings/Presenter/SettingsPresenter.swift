@@ -18,6 +18,10 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         return interactor.isPasscodeEmpty
     }
     
+    var isPremiumUser: Bool {
+        return AuthoritySingleton.shared.isPremium
+    }
+    
     func viewIsReady() {
         interactor.trackScreen()
     }
@@ -25,6 +29,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     func viewWillBecomeActive() {
         startAsyncOperation()
         interactor.getCellsData()
+        interactor.getUserStatus()
     }
     
     func cellsDataForSettings(array: [[String]]) {
@@ -100,6 +105,10 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToPackages()
     }
     
+    func goToPremium() {
+        router.goToPremium()
+    }
+    
     func goToPasscodeSettings(needReplaceOfCurrentController: Bool) {
         router.goToPasscodeSettings(isTurkcell: interactor.isTurkcellUser, inNeedOfMail: inNeedOfMailVerefication(), needReplaceOfCurrentController: needReplaceOfCurrentController)
     }
@@ -134,6 +143,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     func photoCaptured(data: Data) {
         interactor.uploadPhoto(withPhoto: data)
     }
+    
     func onChangeUserPhoto() {
         interactor.trackPhotoEdit()
         view.showPhotoAlertSheet()
@@ -159,6 +169,16 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     
     func profilePhotoUploadFailed(error: Error) {
         view.profileWontChangeWith(error: error)
+    }
+    
+    func didObtainUserStatus() {
+        asyncOperationSucces()
+        view.updateStatusUser()
+    }
+    
+    func didFailToObtainUserStatus(errorMessage: String) {
+        asyncOperationSucces()
+        router.showError(errorMessage: errorMessage)
     }
     
     func connectToNetworkFailed() {
