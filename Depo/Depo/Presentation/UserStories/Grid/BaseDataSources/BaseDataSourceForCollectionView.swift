@@ -164,6 +164,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     var lastPage: Int = 0
     
+    private var currentTopSection: Int?
+    
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
         super.init()
@@ -292,7 +294,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                 print("BATCH: \(!self.isPaginationDidEnd), \(self.isLocalPaginationOn), \(!self.isLocalFilesRequested)")
                                 if !self.isPaginationDidEnd,
                                     self.isLocalPaginationOn,
-                                    !self.isLocalFilesRequested {// array.count < self.pageCompounder.pageSize {
+                                    !self.isLocalFilesRequested, array.count < self.pageCompounder.pageSize {
                                     debugPrint("!!! TRY TO GET NEW PAGE")
                                     self.delegate?.getNextItems()
                                 }
@@ -1078,7 +1080,25 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidScroll(scrollView: scrollView)
-//        updateCachedAssets()
+        
+        updateCachedAssets()
+        
+        if needShowCustomScrollIndicator {
+            let firstVisibleIndexPath = collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
+                return first < second
+            })
+            
+            guard let indexPath = firstVisibleIndexPath else {
+                return
+            }
+            
+            if let currentTopSection = currentTopSection, currentTopSection == indexPath.section {
+                return
+            }
+            
+            let headerText = getHeaderText(indexPath: indexPath)
+            delegate?.didChangeTopHeader(text: headerText)
+        }
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
