@@ -25,7 +25,9 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     // MARK: view out
     func viewIsReady() {
         interactor.trackScreen()
-        
+    }
+    
+    func viewWillAppear() {
         if ContactSyncSDK.isRunning() {
             if AnalyzeStatus.shared().analyzeStep == AnalyzeStep.ANALYZE_STEP_INITAL {
                 interactor.performOperation(forType: SyncSettings.shared().mode)
