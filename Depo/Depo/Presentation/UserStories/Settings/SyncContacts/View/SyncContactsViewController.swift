@@ -122,6 +122,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
             navigationBarWithGradientStyle()
             setTitle(withString: TextConstants.backUpMyContacts)
         }
+        output.viewWillAppear()
     }
     
     // MARK: buttons action
