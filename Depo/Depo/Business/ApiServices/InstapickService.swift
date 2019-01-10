@@ -9,13 +9,36 @@
 import Alamofire
 import SwiftyJSON
 
-final class InstapickService {
+
+protocol InstaPickServiceDelegate: class {
+    func didRemoveAnalysis()
+    func didFinishAnalysis()
+}
+
+
+protocol InstapickService: class {
+    var delegates: MulticastDelegate<InstaPickServiceDelegate> {get}
     
+    func getThumbnails(handler: @escaping (ResponseResult<[URL]>) -> Void)
+    
+    //TODO: add real
+    func removeAnalysis()
+    func startAnalysis()
+    //
+}
+
+
+final class InstapickServiceImpl: InstapickService {
+
     let sessionManager: SessionManager
+    
+    let delegates = MulticastDelegate<InstaPickServiceDelegate>()
+    
     
     init(sessionManager: SessionManager = SessionManager.customDefault) {
         self.sessionManager = sessionManager
     }
+    
     
     func getThumbnails(handler: @escaping (ResponseResult<[URL]>) -> Void) {
         sessionManager
@@ -38,6 +61,20 @@ final class InstapickService {
                 case .failure(let error):
                     handler(.failed(error))
                 }
+        }
+    }
+    
+    func removeAnalysis() {
+        //TODO: add in the callback
+        delegates.invoke { delegate in
+            delegate.didRemoveAnalysis()
+        }
+    }
+    
+    func startAnalysis() {
+        //TODO: add in the callback
+        delegates.invoke { delegate in
+            delegate.didFinishAnalysis()
         }
     }
 }
