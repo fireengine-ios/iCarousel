@@ -19,6 +19,7 @@ protocol Factory: SharedFactory {
     
     func resolve() -> HomeCardsService
     func resolve() -> AnalyticsService
+    func resolve() -> InstapickService
 }
 
 final class FactoryMain: FactoryBase, Factory {
@@ -46,7 +47,7 @@ final class FactoryMain: FactoryBase, Factory {
         return FactoryMain.authorizationRepository
     }
     
-    private static let instapickService = InstapickService()
+    private static let instapickService = InstapickServiceImpl()
     func resolve() -> InstapickService {
         return FactoryMain.instapickService
     }
