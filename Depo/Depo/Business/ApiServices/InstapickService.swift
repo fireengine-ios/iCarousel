@@ -20,6 +20,7 @@ protocol InstapickService: class {
     var delegates: MulticastDelegate<InstaPickServiceDelegate> {get}
     
     func getThumbnails(handler: @escaping (ResponseResult<[URL]>) -> Void)
+    func getAnalysisCount(handler: @escaping (ResponseResult<AnalysisCount>) -> Void)
     
     //TODO: add real
     func removeAnalysis()
