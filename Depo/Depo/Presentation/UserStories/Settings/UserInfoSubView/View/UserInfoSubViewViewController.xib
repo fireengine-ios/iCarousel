@@ -97,19 +97,19 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tq3-Cw-n2e" customClass="RoundedProgressView" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="139" y="148" width="228" height="6"/>
+                    <rect key="frame" x="139" y="159.5" width="228" height="6"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="6" id="y8H-Ug-91i"/>
                     </constraints>
                 </progressView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information Label " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFu-Zy-sLD">
-                    <rect key="frame" x="139" y="154" width="137.5" height="32"/>
+                    <rect key="frame" x="139" y="165.5" width="137.5" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tg0-9Y-BfD" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="346" y="154" width="21" height="21"/>
+                    <rect key="frame" x="346" y="165.5" width="21" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="WC5-p4-4FC"/>
                     </constraints>
@@ -126,21 +126,18 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="NwW-ii-iw1">
-                    <rect key="frame" x="139" y="92" width="46" height="46"/>
+                    <rect key="frame" x="139" y="92" width="228" height="57.5"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wig-sL-WKg">
-                            <rect key="frame" x="0.0" y="0.0" width="46" height="18"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="18" id="hIT-vC-QoS"/>
-                            </constraints>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="228" placeholderIntrinsicHeight="29.5" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wig-sL-WKg">
+                            <rect key="frame" x="0.0" y="0.0" width="228" height="29.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOp-jI-SoB" customClass="GradientPremiumButton" customModule="lifebox" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="22" width="46" height="24"/>
+                            <rect key="frame" x="0.0" y="33.5" width="228" height="24"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="24" id="sBf-Ea-MgO"/>
+                                <constraint firstAttribute="height" constant="24" id="5c9-uw-F4N"/>
                             </constraints>
                             <state key="normal" title="Button"/>
                             <connections>
@@ -174,6 +171,7 @@
                 <constraint firstItem="Ojf-9r-JdU" firstAttribute="centerX" secondItem="geQ-Zk-cbM" secondAttribute="centerX" id="bpU-zE-TVI"/>
                 <constraint firstItem="Ojf-9r-JdU" firstAttribute="width" secondItem="geQ-Zk-cbM" secondAttribute="width" id="ccX-k3-JhU"/>
                 <constraint firstItem="O02-jH-Ujj" firstAttribute="centerY" secondItem="geQ-Zk-cbM" secondAttribute="centerY" id="d8A-uC-mYf"/>
+                <constraint firstItem="NwW-ii-iw1" firstAttribute="trailing" secondItem="tg0-9Y-BfD" secondAttribute="trailing" id="eOv-uP-mMU"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kwu-pj-lHl" secondAttribute="trailing" constant="10" id="eXk-gO-AZH"/>
                 <constraint firstItem="O02-jH-Ujj" firstAttribute="centerX" secondItem="geQ-Zk-cbM" secondAttribute="centerX" id="f5b-xD-ynv"/>
                 <constraint firstAttribute="trailing" secondItem="3Qn-i2-0sL" secondAttribute="trailing" id="hoQ-l5-1WT"/>

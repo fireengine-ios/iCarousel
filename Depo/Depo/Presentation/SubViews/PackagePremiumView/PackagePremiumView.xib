@@ -29,14 +29,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="194" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbf-FG-5FA">
-                                                    <rect key="frame" x="0.0" y="0.0" width="29" height="16"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="29" height="50"/>
                                                     <accessibility key="accessibilityConfiguration" identifier="title"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nUn-7g-cck">
-                                                    <rect key="frame" x="37" y="0.0" width="24" height="16"/>
+                                                    <rect key="frame" x="37" y="30" width="24" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="aXB-nk-Tu9"/>
                                                         <constraint firstAttribute="width" secondItem="nUn-7g-cck" secondAttribute="height" multiplier="24:16" id="ttM-Go-wWF"/>
@@ -93,6 +93,10 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xid-YY-Gvb" secondAttribute="trailing" constant="8" id="6Nt-PP-hIN"/>
+                        <constraint firstItem="xid-YY-Gvb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KF8-q7-ciT" secondAttribute="leading" constant="8" id="rAT-sZ-bUp"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
