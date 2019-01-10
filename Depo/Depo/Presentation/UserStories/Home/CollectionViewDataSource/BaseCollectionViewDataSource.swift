@@ -269,6 +269,11 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         }
         if !checkIsNeedShowPopUpFor(operationType: type) {
             if type == .premium {
+                ///Premiim info card already first item
+                if let view = collectionView.cellForItem(at: IndexPath(item: 0, section: 0))?.contentView.subviews.first as? PremiumInfoCard {
+                    view.viewWillShow()
+                }
+                
                 refreshPremiumCard()
             }
             return
