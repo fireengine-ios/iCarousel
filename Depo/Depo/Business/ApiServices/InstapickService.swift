@@ -77,4 +77,51 @@ final class InstapickServiceImpl: InstapickService {
             delegate.didFinishAnalysis()
         }
     }
+    
+    func getAnalysisCount(handler: @escaping (ResponseResult<AnalysisCount>) -> Void) {
+        sessionManager
+            .request(RouteRequests.Instapick.analysisCount)
+            .customValidate()
+            .responseData { response in
+                
+                /// server mock
+                let results = AnalysisCount(left: 2, total: 32)
+                handler(.success(results))
+                
+                /// !!! server logic. don't delete
+//                switch response.result {
+//                case .success(let data):
+//                    let json = JSON(data: data)
+//
+//                    guard let results = AnalysisCount(json: json) else {
+//                        let error = CustomErrors.serverError("\(RouteRequests.Instapick.analysisCount) not AnalysisCount in response")
+//                        handler(.failed(error))
+//                        return
+//                    }
+//
+//                    handler(.success(results))
+//                case .failure(let error):
+//                    handler(.failed(error))
+//                }
+        }
+    }
+}
+
+final class AnalysisCount {
+    let left: Int
+    let total: Int
+    
+    init(left: Int, total: Int) {
+        self.left = left
+        self.total = total
+    }
+    
+    init?(json: JSON) {
+        guard let left = json["left"].int, let total = json["total"].int else {
+            assertionFailure()
+            return nil
+        }
+        self.left = left
+        self.total = total
+    }
 }
