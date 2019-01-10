@@ -22,7 +22,8 @@ class StoriesDataSourceForCollectionView: ArrayDataSourceForCollectionView {
             }
             newArray.append(sectionArray)
         }
-        tableDataMArray = newArray
+        
+        setAllItems(items: newArray)
         
         ItemOperationManager.default.deleteStories(items: items)
         delegate?.didDelete(items: items)

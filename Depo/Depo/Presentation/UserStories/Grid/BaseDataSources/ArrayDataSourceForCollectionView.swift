@@ -20,8 +20,11 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     }
     
     override internal func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
-        let array = tableDataMArray[indexPath.section]
-        return array[indexPath.row]
+        guard tableDataMArray.count > indexPath.section, tableDataMArray[indexPath.section].count > indexPath.row else {
+            return nil
+        }
+        
+        return tableDataMArray[safe: indexPath.section]?[safe: indexPath.row]
     }
     
     override func getAllObjects() -> [[BaseDataSourceItem]] {
