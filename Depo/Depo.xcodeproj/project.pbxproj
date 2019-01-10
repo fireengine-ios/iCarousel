@@ -2889,6 +2889,7 @@
 		CE15AFBE20A0846E00015874 /* UINavigationController+Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15AFBD20A0846E00015874 /* UINavigationController+Push.swift */; };
 		CE16C0461FF22F8F00BE5906 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
 		CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
+		CE170F6A21E76DFD00BE352D /* InstapickService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE170F6921E76DFD00BE352D /* InstapickService.swift */; };
 		CE18CC7D204E84DE00FA3F44 /* DocumentActionCustomizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC7C204E84DE00FA3F44 /* DocumentActionCustomizator.swift */; };
 		CE18CC7F204E85DC00FA3F44 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
 		CE18CC80204E85DC00FA3F44 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
@@ -5425,6 +5426,7 @@
 		CE15AFBD20A0846E00015874 /* UINavigationController+Push.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Push.swift"; sourceTree = "<group>"; };
 		CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE16C0471FF22FA500BE5906 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		CE170F6921E76DFD00BE352D /* InstapickService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickService.swift; sourceTree = "<group>"; };
 		CE18CC7C204E84DE00FA3F44 /* DocumentActionCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentActionCustomizator.swift; sourceTree = "<group>"; };
 		CE18CC8F204E87CE00FA3F44 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorIdentificators.swift; sourceTree = "<group>"; };
@@ -11480,6 +11482,7 @@
 				CEADDA9A1F23480D001DDA8A /* FileService */,
 				CE8F44ED1F6AB7790062C2E0 /* ActivityTimelineService */,
 				CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */,
+				CE170F6921E76DFD00BE352D /* InstapickService.swift */,
 			);
 			path = ApiServices;
 			sourceTree = "<group>";
@@ -16735,6 +16738,7 @@
 				CEF73B9D1FCEAC30004C3ADF /* KeyboardHideManager.swift in Sources */,
 				38BA503099842E5840815A3A /* BaseFilesGreedPresenter.swift in Sources */,
 				CECD4E561FE1152600978BE7 /* UIImage+Color.swift in Sources */,
+				CE170F6A21E76DFD00BE352D /* InstapickService.swift in Sources */,
 				FDC8F998E27D9EA9B6B95F47 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				CE9487D985CF5DEAC28D4438 /* BaseFilesGreedInteractorOutput.swift in Sources */,
 				B5E74798208B3736003A7110 /* UploadOperation.swift in Sources */,
