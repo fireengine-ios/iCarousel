@@ -29,6 +29,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     private var accountType: AccountType = .all
     
     private var alertText = ""
+    
+    private let sumMarginsForFooter: CGFloat = 60
 
     override func viewIsReady(collectionView: UICollectionView) {
         if let faceImageType = faceImageType {
@@ -232,17 +234,14 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     }
     
     private func getHeightForDescriptionLabel(with description: String) -> CGFloat {
-        
-        let sumMargins: CGFloat = 60
-        let maxLabelWidth = UIScreen.main.bounds.width - sumMargins
+        let maxLabelWidth = UIScreen.main.bounds.width - sumMarginsForFooter
         return description.height(for: maxLabelWidth, font: UIFont.TurkcellSaturaMedFont(size: 20))
     }
     
     private func getHeightForTitleLabel() -> CGFloat {
         if let faceImageType = faceImageType {
             let description = String(format: TextConstants.faceImageFooterViewMessage, faceImageType.footerDescription)
-            let sumMargins: CGFloat = 60
-            let maxLabelWidth = UIScreen.main.bounds.width - sumMargins
+            let maxLabelWidth = UIScreen.main.bounds.width - sumMarginsForFooter
             return description.height(for: maxLabelWidth, font: UIFont.TurkcellSaturaBolFont(size: 20))
         } else {
             return 0
