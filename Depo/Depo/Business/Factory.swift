@@ -45,6 +45,11 @@ final class FactoryMain: FactoryBase, Factory {
     func resolve() -> AuthorizationRepository {
         return FactoryMain.authorizationRepository
     }
+    
+    private static let instapickService = InstapickService()
+    func resolve() -> InstapickService {
+        return FactoryMain.instapickService
+    }
 }
 
 /// services
