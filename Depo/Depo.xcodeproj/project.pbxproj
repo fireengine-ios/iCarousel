@@ -2652,6 +2652,8 @@
 		A217E44C21A5B0E40084AA37 /* LeavePremiumInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E44B21A5B0E40084AA37 /* LeavePremiumInitializer.swift */; };
 		A217E44D21A5B0E40084AA37 /* LeavePremiumInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E44B21A5B0E40084AA37 /* LeavePremiumInitializer.swift */; };
 		A222450F21D3C593006EB432 /* PremiumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A222450E21D3C593006EB432 /* PremiumService.swift */; };
+		A225690B21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225690A21E8B30E00A9D147 /* IntrinsicTextView.swift */; };
+		A225690C21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225690A21E8B30E00A9D147 /* IntrinsicTextView.swift */; };
 		A2268EB921A688DB002F2611 /* LeavePremiumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2268EB821A688DB002F2611 /* LeavePremiumViewController.xib */; };
 		A2268EBD21A68BBC002F2611 /* LeavePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2268EBC21A68BBC002F2611 /* LeavePremiumView.swift */; };
 		A2268EBF21A68BD3002F2611 /* LeavePremiumHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2268EBE21A68BD3002F2611 /* LeavePremiumHeaderView.swift */; };
@@ -5257,6 +5259,7 @@
 		A217E44821A5B0D00084AA37 /* LeavePremiumConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeavePremiumConfigurator.swift; sourceTree = "<group>"; };
 		A217E44B21A5B0E40084AA37 /* LeavePremiumInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeavePremiumInitializer.swift; sourceTree = "<group>"; };
 		A222450E21D3C593006EB432 /* PremiumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumService.swift; sourceTree = "<group>"; };
+		A225690A21E8B30E00A9D147 /* IntrinsicTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicTextView.swift; sourceTree = "<group>"; };
 		A2268EB821A688DB002F2611 /* LeavePremiumViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeavePremiumViewController.xib; sourceTree = "<group>"; };
 		A2268EBC21A68BBC002F2611 /* LeavePremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeavePremiumView.swift; sourceTree = "<group>"; };
 		A2268EBE21A68BD3002F2611 /* LeavePremiumHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeavePremiumHeaderView.swift; sourceTree = "<group>"; };
@@ -7581,6 +7584,7 @@
 				CE6BD9CB1FBEF8D5008FA8A1 /* InsetsLabel.swift */,
 				CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */,
 				CEBAB15A2094803C002824C6 /* InsetsButton.swift */,
+				A225690A21E8B30E00A9D147 /* IntrinsicTextView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -15365,6 +15369,7 @@
 				4A0AC1482087375B00032CC7 /* PeriodicContactSyncViewInput.swift in Sources */,
 				8C0E8DF31FDEBDFF00789C91 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				98E792D9203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
+				A225690C21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */,
 				A217E42F21A5B0220084AA37 /* LeavePremiumViewInput.swift in Sources */,
 				8C0E8DF41FDEBDFF00789C91 /* ActivityTimelineHeader.swift in Sources */,
 				8C0E8DF51FDEBDFF00789C91 /* PrintViewInput.swift in Sources */,
@@ -16506,6 +16511,7 @@
 				787F4B221FDAC2A700378F73 /* AlbumDetailModuleOutput.swift in Sources */,
 				8CD8F4F41F1E202600F1257B /* GradientLoadingIndicator.swift in Sources */,
 				8C7786A31F3F38F0005CB432 /* VisualMusicPlayerPresenter.swift in Sources */,
+				A225690B21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */,
 				CE3471871F02F38400B97AC3 /* AuthenticationServiceResponse.swift in Sources */,
 				CE51ACCB1EF90853005DCEE0 /* RegistrationInteractor.swift in Sources */,
 				8C6EF8781F348B5C002AC795 /* BottomSelectionTabBarInteractor.swift in Sources */,

@@ -42,6 +42,12 @@ class LBAlbumLikePreviewSliderRouter {
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
+    private func goToInstaPickView(_ moduleOutput: LBAlbumLikePreviewSliderModuleInput?) {
+        //TODO: INSTAPICK go to Analyses History page
+        let controller = router.placesListController(moduleOutput: moduleOutput)
+        router.pushViewControllertoTableViewNavBar(viewController: controller)
+    }
+    
 }
 
 // MARK: - LBAlbumLikePreviewSliderRouterInput
@@ -59,6 +65,7 @@ extension LBAlbumLikePreviewSliderRouter: LBAlbumLikePreviewSliderRouterInput {
         case .people: goToPeopleListView(moduleOutput)
         case .things: goToThingListView(moduleOutput)
         case .places: goToPlaceListView(moduleOutput)
+        case .instaPick: goToInstaPickView(moduleOutput)
         case .album:
             guard let albumItem = item.albumItem else {
                 break
