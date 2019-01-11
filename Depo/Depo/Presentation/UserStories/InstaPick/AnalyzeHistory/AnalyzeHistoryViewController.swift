@@ -16,24 +16,12 @@ final class AnalyzeHistoryViewController: ViewController, NibInit {
     @IBOutlet weak var newAnalysisButton: BlueButtonWithMediumWhiteText!
     @IBOutlet weak var newAnalysisButtonBottonConstraint: NSLayoutConstraint!
     
+    private let dataSource = AnalyzeHistoryDataSourceForCollectionView()
+    
     private let refresher = UIRefreshControl()
     private var page = 0
-    private var allDataLoaded = false
     
     private let instapickService: InstapickService = factory.resolve()
-    
-    private var items = [Item]()
-    
-    //Temp
-    private var analysisCount = InstapickAnalysisCount(left: 0, total: 0) {
-        didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadSections(IndexSet(arrayLiteral: 0))
-            }
-        }
-    }
-    private var left = 0
-    private var total = 0
     
     // MARK: - Life cycle
     
@@ -44,11 +32,9 @@ final class AnalyzeHistoryViewController: ViewController, NibInit {
     }
 
     private func configure() {
-        collectionView.register(nibCell: CollectionViewCellForInstapickPhoto.self)
-        collectionView.register(nibCell: CollectionViewCellForInstapickAnalysis.self)
+        dataSource.setupCollectionView(collectionView: collectionView)
+        dataSource.delegate = self
         collectionView.contentInset.bottom = newAnalysisButtonBottonConstraint.constant + newAnalysisButton.bounds.height + 8
-        collectionView.dataSource = self
-        collectionView.delegate = self
         
         refresher.tintColor = ColorConstants.whiteColor
         refresher.addTarget(self, action: #selector(reloadData), for: .valueChanged)
@@ -66,7 +52,7 @@ final class AnalyzeHistoryViewController: ViewController, NibInit {
     @objc private func reloadData() {
         reloadCards()
         page = 0
-        allDataLoaded = false
+        dataSource.isPaginationDidEnd = false
         loadNextHistoryPage()
     }
     
@@ -84,7 +70,7 @@ final class AnalyzeHistoryViewController: ViewController, NibInit {
             
             switch result {
             case .success(let analysisCount):
-                self.analysisCount = analysisCount
+                self.dataSource.reloadCards(with: analysisCount)
             case .failed(let error):
                 print(error.localizedDescription)
             }
@@ -92,80 +78,44 @@ final class AnalyzeHistoryViewController: ViewController, NibInit {
     }
     
     private func loadNextHistoryPage() {
-        
-    }
-}
-
-// MARK: - UICollectionViewDataSource
-
-extension AnalyzeHistoryViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }
-        return items.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
-            return collectionView.dequeue(cell: CollectionViewCellForInstapickAnalysis.self, for: indexPath)
-        } else {
-            return collectionView.dequeue(cell: CollectionViewCellForInstapickPhoto.self, for: indexPath)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            (cell as? CollectionViewCellForInstapickAnalysis)?.setup(with: analysisCount)
-            (cell as? CollectionViewCellForInstapickAnalysis)?.delegate = self
-        } else {
-            (cell as? CollectionViewCellForInstapickPhoto)?.setup(with: items[indexPath.item])
-        }
-        
-        if allDataLoaded {
-            return
-        }
-        
-        let countRow: Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
-        let isLastSection = numberOfSections(in: collectionView) - 1 == indexPath.section
-        let isLastCell = countRow - 1 == indexPath.row
-        
-        if isLastSection, isLastCell {
-            loadNextHistoryPage()
+        instapickService.getAnalyzeHistory(offset: page, limit: 20) { [weak self] result in
+            guard let `self` = self else { return }
+            
+            switch result {
+            case .success(let history):
+                DispatchQueue.main.async {
+                    self.dataSource.appendHistoryItems(history)
+                    self.page += 1
+                
+                    if self.dataSource.isEmpty {
+                        self.displayManager.applyConfiguration(.empty)
+                    } else if self.displayManager.configuration == .empty {
+                        self.displayManager.applyConfiguration(.initial)
+                    }
+                }
+            case .failed(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
+// MARK: - AnalyzeHistoryDataSourceDelegate
 
-extension AnalyzeHistoryViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.section == 0 {
-            return CGSize(width: collectionView.bounds.width, height: 126)
-        } else {
-            return CGSize(width: 80, height: 108)
-        }
+extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
+    func needLoadNextHistoryPage() {
+        loadNextHistoryPage()
     }
-}
-
-extension AnalyzeHistoryViewController: InstapickAnalysisCellDelegate {
+    
+    func onLongPressInCell() {
+    
+    }
+    
     func onPurchase() {
         
     }
     
-    func onSeeDetails() {
-        
-    }
-    
-    func canLongPress() -> Bool {
-        return true
-    }
-    
-    func onLongPress(cell: UICollectionViewCell) {
+    func onSeeDetailsForAnanyze(_ analyze: InstapickAnalyze) {
         
     }
 }

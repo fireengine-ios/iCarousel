@@ -16,6 +16,9 @@ final class CollectionViewCellForInstapickPhoto: BaseCollectionViewCell {
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
 
+    private var cellImageManager: CellImageManager?
+    private var uuid: String?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -44,7 +47,34 @@ final class CollectionViewCellForInstapickPhoto: BaseCollectionViewCell {
         imageView.alpha = isSelected && isSelectionActive ? 0.75 : 1
     }
     
-    func setup(with item: Item) {
+    func setup(with item: InstapickAnalyze) {
+        rankLabel.text = "\(item.rank)"
         
+        let count = item.photoCount ?? 0
+        countLabel.text = "\(count) photos"
+        
+        if let metadata = item.fileInfo?.metadata {
+            setImage(with: metadata)
+        }
+    }
+
+    override func setImage(with metaData: BaseMetaData) {
+        let cacheKey = metaData.mediumUrl?.byTrimmingQuery
+        cellImageManager = CellImageManager.instance(by: cacheKey)
+        uuid = cellImageManager?.uniqueId
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
+            DispatchQueue.toMain {
+                guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
+                    return
+                }
+                
+                let needAnimate = !cached && (self?.imageView.image == nil)
+                self?.setImage(image: image, animated: needAnimate)
+            }
+        }
+        
+        cellImageManager?.loadImage(thumbnailUrl: metaData.smalURl, url: metaData.mediumUrl, completionBlock: imageSetBlock)
+        
+        isAlreadyConfigured = true
     }
 }

@@ -11,8 +11,7 @@ import UIKit
 enum AnalyzeHistoryDisplayConfiguration {
     case initial
     case empty
-    case selection
-    
+    case selection    
 }
 
 final class AnalyzeHistoryDisplayManager: NSObject {

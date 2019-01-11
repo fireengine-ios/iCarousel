@@ -10,7 +10,7 @@ import UIKit
 
 protocol InstapickAnalysisCellDelegate: LBCellsDelegate {
     func onPurchase()
-    func onSeeDetails()
+    func onSeeDetails(cell: UICollectionViewCell)
 }
 
 private enum InstapickAnalysisCellState {
@@ -116,6 +116,6 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
     }
     
     @IBAction private func onSeeDetailsPressed(_ sender: UIButton) {
-        (delegate as? InstapickAnalysisCellDelegate)?.onSeeDetails()
+        (delegate as? InstapickAnalysisCellDelegate)?.onSeeDetails(cell: self)
     }
 }
