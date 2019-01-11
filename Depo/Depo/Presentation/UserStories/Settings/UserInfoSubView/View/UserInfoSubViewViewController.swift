@@ -31,7 +31,7 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
     @IBOutlet weak var uplaodLabel: UILabel!
     @IBOutlet private weak var premiumButton: GradientPremiumButton!
     @IBOutlet private weak var statusLabel: UILabel!
-    
+    @IBOutlet private weak var premiumView: UIView!
     @IBOutlet weak var editButton: UIButton!
     weak var actionsDelegate: UserInfoSubViewViewControllerActionsDelegate?
     
@@ -91,6 +91,7 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         premiumButton.setTitle(TextConstants.becomePremium, for: .normal)
         premiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         premiumButton.isHidden = output.isPremiumUser
+        premiumView.isHidden = output.isPremiumUser
 
         statusLabel.text = output.isPremiumUser ? TextConstants.premiumUser : TextConstants.standardUser
         statusLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
