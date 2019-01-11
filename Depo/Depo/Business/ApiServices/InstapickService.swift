@@ -233,16 +233,20 @@ final class InstapickAnalysisCount {
 
 final class InstapickAnalyze {
     let requestIdentifier: String
-    // let message: String
     let rank: Float
     let hashTags: [String]
     let fileInfo: SearchItemResponse?
+    let photoCount: Int?
+    let startedDate: Date?
+    // let message: String
     
     init(requestIdentifier: String, rank: Float, hashTags: [String], fileInfo: SearchItemResponse?) {
         self.requestIdentifier = requestIdentifier
         self.rank = rank
         self.hashTags = hashTags
         self.fileInfo = fileInfo
+        self.photoCount = nil
+        self.startedDate = nil
     }
 
     init?(json: JSON) {
@@ -261,6 +265,9 @@ final class InstapickAnalyze {
         
         let fileInfo = json["fileInfo"]
         self.fileInfo = fileInfo.exists() ? SearchItemResponse(withJSON: fileInfo) : nil
+        
+        self.photoCount = json["photoCount"].int
+        self.startedDate = json["startedDate"].date
     }
 }
 
