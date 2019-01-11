@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="editButton" destination="SQf-bN-tvc" id="r6s-GG-ZpG"/>
                 <outlet property="premiumButton" destination="HOp-jI-SoB" id="IXl-0t-yeZ"/>
+                <outlet property="premiumView" destination="Lp0-Ce-77j" id="HD7-bg-Ry2"/>
                 <outlet property="statusLabel" destination="Wig-sL-WKg" id="WtH-gF-l0p"/>
                 <outlet property="upgradeUserStorrageButton" destination="tg0-9Y-BfD" id="NX9-Py-19L"/>
                 <outlet property="uplaodLabel" destination="Pnv-u5-zWS" id="TY5-ri-t1S"/>
@@ -103,7 +104,7 @@
                     </constraints>
                 </progressView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information Label " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFu-Zy-sLD">
-                    <rect key="frame" x="139" y="165.5" width="137.5" height="20.5"/>
+                    <rect key="frame" x="139" y="169.5" width="137.5" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -134,16 +135,26 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOp-jI-SoB" customClass="GradientPremiumButton" customModule="lifebox" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lp0-Ce-77j">
                             <rect key="frame" x="0.0" y="33.5" width="228" height="24"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOp-jI-SoB" customClass="GradientPremiumButton" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="46" height="24"/>
+                                    <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="onBecomePremiumTap:" destination="-1" eventType="touchUpInside" id="yEf-UA-p4n"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="24" id="5c9-uw-F4N"/>
+                                <constraint firstAttribute="bottom" secondItem="HOp-jI-SoB" secondAttribute="bottom" id="AE3-ED-PYB"/>
+                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HOp-jI-SoB" secondAttribute="trailing" constant="8" id="NOv-Ye-l8M"/>
+                                <constraint firstItem="HOp-jI-SoB" firstAttribute="top" secondItem="Lp0-Ce-77j" secondAttribute="top" id="X0s-Wr-kXF"/>
+                                <constraint firstItem="HOp-jI-SoB" firstAttribute="leading" secondItem="Lp0-Ce-77j" secondAttribute="leading" id="oO6-DT-uai"/>
+                                <constraint firstAttribute="height" constant="24" id="xik-lb-xA6"/>
                             </constraints>
-                            <state key="normal" title="Button"/>
-                            <connections>
-                                <action selector="onBecomePremiumTap:" destination="-1" eventType="touchUpInside" id="yEf-UA-p4n"/>
-                            </connections>
-                        </button>
+                        </view>
                     </subviews>
                 </stackView>
             </subviews>
@@ -162,7 +173,7 @@
                 <constraint firstItem="tg0-9Y-BfD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lFu-Zy-sLD" secondAttribute="trailing" constant="16" id="HjC-Aj-uL3"/>
                 <constraint firstItem="geQ-Zk-cbM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Htj-Lx-pOc"/>
                 <constraint firstItem="SQf-bN-tvc" firstAttribute="top" secondItem="fAZ-EG-CYK" secondAttribute="top" constant="-10" id="Ne0-UX-jeS"/>
-                <constraint firstItem="3Qn-i2-0sL" firstAttribute="top" secondItem="lFu-Zy-sLD" secondAttribute="bottom" constant="23" id="QG9-qF-aKK"/>
+                <constraint firstItem="3Qn-i2-0sL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="lFu-Zy-sLD" secondAttribute="bottom" constant="19" id="QG9-qF-aKK"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lsG-5I-zeN" secondAttribute="trailing" constant="10" id="Txj-kn-fYs"/>
                 <constraint firstItem="Tq3-Cw-n2e" firstAttribute="top" secondItem="NwW-ii-iw1" secondAttribute="bottom" constant="10" id="VX7-GA-G9W"/>
                 <constraint firstItem="3Qn-i2-0sL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="a27-WK-CQN"/>
@@ -175,7 +186,7 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kwu-pj-lHl" secondAttribute="trailing" constant="10" id="eXk-gO-AZH"/>
                 <constraint firstItem="O02-jH-Ujj" firstAttribute="centerX" secondItem="geQ-Zk-cbM" secondAttribute="centerX" id="f5b-xD-ynv"/>
                 <constraint firstAttribute="trailing" secondItem="3Qn-i2-0sL" secondAttribute="trailing" id="hoQ-l5-1WT"/>
-                <constraint firstItem="lFu-Zy-sLD" firstAttribute="top" secondItem="Tq3-Cw-n2e" secondAttribute="bottom" id="lrk-kj-YeV"/>
+                <constraint firstItem="lFu-Zy-sLD" firstAttribute="top" secondItem="Tq3-Cw-n2e" secondAttribute="bottom" constant="4" id="lrk-kj-YeV"/>
                 <constraint firstItem="lFu-Zy-sLD" firstAttribute="leading" secondItem="fAZ-EG-CYK" secondAttribute="leading" id="m4u-1f-R0s"/>
                 <constraint firstItem="Pnv-u5-zWS" firstAttribute="centerX" secondItem="geQ-Zk-cbM" secondAttribute="centerX" id="mDF-TJ-JK3"/>
                 <constraint firstItem="kwu-pj-lHl" firstAttribute="top" secondItem="lsG-5I-zeN" secondAttribute="bottom" id="me7-d9-jhy"/>
