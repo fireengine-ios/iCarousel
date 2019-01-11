@@ -21,7 +21,7 @@ protocol InstapickService: class {
     
     func getThumbnails(handler: @escaping (ResponseResult<[URL]>) -> Void)
     
-    //TODO: add real
+    //TODO: INSTAPICK add real
     func removeAnalysis()
     func startAnalysis()
     //
@@ -65,14 +65,14 @@ final class InstapickServiceImpl: InstapickService {
     }
     
     func removeAnalysis() {
-        //TODO: add in the callback
+        //TODO: INSTAPICK add in the callback
         delegates.invoke { delegate in
             delegate.didRemoveAnalysis()
         }
     }
     
     func startAnalysis() {
-        //TODO: add in the callback
+        //TODO: INSTAPICK add in the callback
         delegates.invoke { delegate in
             delegate.didFinishAnalysis()
         }
