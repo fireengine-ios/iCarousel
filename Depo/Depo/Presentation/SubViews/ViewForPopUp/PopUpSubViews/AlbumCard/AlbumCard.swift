@@ -91,11 +91,11 @@ final class AlbumCard: BaseView {
         if let album = album {
             albumItem = AlbumItem(remote: album)
         }
-        
-        let photosJson = object[AlbumDetailJsonKey.albumDetailFiles].array
-        
-        if let albumName = albumItem?.name, let photosCount = photosJson?.count {
-            setupAlbumDescriptionWith(albumName: albumName, photosCount: photosCount)
+                
+        if let albumItem = albumItem, let albumName = albumItem.name {
+            let imageCount = albumItem.imageCount ?? 0
+            let videoCount = albumItem.videoCount ?? 0
+            setupAlbumDescriptionWith(albumName: albumName, photosCount: imageCount + videoCount)
         }
         
         /// MAYBE WILL BE NEED
