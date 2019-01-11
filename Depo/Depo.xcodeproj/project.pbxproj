@@ -7533,7 +7533,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				925B96D421E79BAF00B39415 /* RadialGradientView */,
+				925B96D421E79BAF00B39415 /* RadialGradientableView */,
 				9240C04821B80520005E710C /* PremiumFooterView */,
 				A2268EBA21A68B95002F2611 /* LeavePremiumView */,
 				4A11F55B21A58DB900D6AADC /* PackageInfoView */,
@@ -10083,13 +10083,13 @@
 			path = PremiumFooterView;
 			sourceTree = "<group>";
 		};
-		925B96D421E79BAF00B39415 /* RadialGradientView */ = {
+		925B96D421E79BAF00B39415 /* RadialGradientableView */ = {
 			isa = PBXGroup;
 			children = (
 				925B96D521E79BAF00B39415 /* RadialGradientableLayer.swift */,
 				925B96D621E79BAF00B39415 /* RadialGradientableView.swift */,
 			);
-			path = RadialGradientView;
+			path = RadialGradientableView;
 			sourceTree = "<group>";
 		};
 		92A745FE21B91A3C00386C37 /* PackageService */ = {
