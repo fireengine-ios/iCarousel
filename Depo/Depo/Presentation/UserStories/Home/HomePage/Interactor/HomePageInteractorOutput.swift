@@ -23,5 +23,6 @@ protocol HomePageInteractorOutput: class {
     func fillCollectionView(isReloadAll: Bool)
     
     func didOpenExpand()
-        
+    
+    func didObtainInstaPickStatus(status: AnalysisCount)
 }

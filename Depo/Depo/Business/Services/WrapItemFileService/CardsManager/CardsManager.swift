@@ -35,6 +35,8 @@ enum OperationType: String {
     case launchCampaign             = "launchCampaign"
     
     case premium                    = "premium"
+    
+    case instaPick                  = "instaPick"
 }
 
 typealias BlockObject = VoidHandler
@@ -56,7 +58,7 @@ class CardsManager: NSObject {
     private var deletedCards = Set<OperationType>()
     
     var cardsThatStartedByDevice: [OperationType] {
-        return [.upload, .sync, .download, .prepareToAutoSync, .preparePhotosQuickScroll, .prepareVideosQuickScroll, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
+        return [.upload, .sync, .download, .prepareToAutoSync, .preparePhotosQuickScroll, .prepareVideosQuickScroll, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning, .instaPick]
     }
     
     func clear() {
@@ -172,6 +174,15 @@ class CardsManager: NSObject {
         DispatchQueue.main.async {
             for notificationView in self.foloversArray {
                 notificationView.startOperationWith(type: .premium, allOperations: 0, completedOperations: 0)
+                notificationView.startOperationWith(type: .instaPick, allOperations: 0, completedOperations: 0)
+            }
+        }
+    }
+    
+    func configureInstaPick(analysisLeft: Int, totalCount: Int) {
+        DispatchQueue.main.async {
+            for notificationView in self.foloversArray {
+                notificationView.configureInstaPick(with: totalCount, leftCount: analysisLeft)
             }
         }
     }
@@ -381,6 +392,8 @@ class CardsManager: NSObject {
             let popUp = PremiumInfoCard.initFromNib()
             popUp.configurateWithType(viewType: .premium)
             cardView = popUp
+        case .instaPick:
+            cardView = InstaPickCard.initFromNib()
         }
         
         cardView.set(object: serverObject)

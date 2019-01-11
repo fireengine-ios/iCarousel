@@ -33,7 +33,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         
         if !isFirstAppear {
             view.startSpinner()
-            interactor.updateUserAuthority()
+            interactor.updateLocalUserDetail()
         } else {
             isFirstAppear = false
         }
@@ -142,6 +142,10 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     
     func didObtainHomeCards(_ cards: [HomeCardResponse]) {
         self.cards = cards
+    }
+    
+    func didObtainInstaPickStatus(status: AnalysisCount) {
+        CardsManager.default.configureInstaPick(analysisLeft: status.left, totalCount: status.total)
     }
     
     func fillCollectionView(isReloadAll: Bool) {
