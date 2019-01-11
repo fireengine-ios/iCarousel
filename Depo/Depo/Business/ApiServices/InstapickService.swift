@@ -22,6 +22,7 @@ protocol InstapickService: class {
     func getThumbnails(handler: @escaping (ResponseResult<[URL]>) -> Void)
     func getAnalysisCount(handler: @escaping (ResponseResult<InstapickAnalysisCount>) -> Void)
     func startAnalysis(ids: [String], handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
+    func getAnalyzeHistory(offset: Int, limit: Int, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
     
     //TODO: add real
     func removeAnalysis()
@@ -139,6 +140,53 @@ final class InstapickServiceImpl: InstapickService {
                 //    assertionFailure(error.localizedDescription)
                 //    handler(.failed(error))
                 //}
+        }
+    }
+    
+    func getAnalyzeHistory(offset: Int, limit: Int, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void) {
+        sessionManager
+            .request(RouteRequests.Instapick.analyzeHistory,
+                     parameters: ["pageSize": limit,
+                                  "pageNumber": offset],
+                     encoding: URLEncoding.default)
+            .customValidate()
+            .responseData { [weak self] response in
+                
+                /// server mock
+                if offset == 1 {
+                    handler(.success([]))
+                    return
+                }
+                
+                let results = [
+                    InstapickAnalyze(requestIdentifier: "123", rank: 5, hashTags: ["#hashTags1", "#hashTags2"], fileInfo: nil),
+                    InstapickAnalyze(requestIdentifier: "567", rank: 4, hashTags: ["#hashTags3", "#hashTags4"], fileInfo: nil)
+                ]
+                handler(.success(results))
+                
+                /// !!! server logic. don't delete
+                //switch response.result {
+                //case .success(let data):
+                //    let json = JSON(data: data)
+                //
+                //    guard let results = json.array?.flatMap({ InstapickAnalyze(json: $0) }) else {
+                //        let error = CustomErrors.serverError("\(RouteRequests.Instapick.analyze) not [InstapickAnalyze] in response")
+                //        assertionFailure(error.localizedDescription)
+                //        handler(.failed(error))
+                //        return
+                //    }
+                //
+                //    handler(.success(results))
+                //case .failure(let error):
+                //    assertionFailure(error.localizedDescription)
+                //    handler(.failed(error))
+                //}
+                
+                
+                //TODO: add in the callback
+                self?.delegates.invoke { delegate in
+                    delegate.didFinishAnalysis()
+                }
         }
     }
 }
