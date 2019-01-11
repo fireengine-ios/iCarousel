@@ -142,10 +142,10 @@ final class InstaPickCard: BaseView {
     func isNeedReloadWithNew(totalCount: Int, leftCount: Int) -> Bool {
         var newCardType: InstaPick.CardType = .noUsedBefore
         if leftCount == 0 {
-            isUsedBefore = false
+            isUsedBefore = true
             newCardType = .noAnalysis
         } else if totalCount != leftCount {
-            isUsedBefore = false
+            isUsedBefore = true
             newCardType = .usedBefore
         }
 

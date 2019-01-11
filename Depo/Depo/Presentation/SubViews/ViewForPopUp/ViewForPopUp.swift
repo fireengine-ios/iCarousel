@@ -190,7 +190,8 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
-        if type == .premium, type == .instaPick {
+        ///TODO: remove 'type == .instaPick' after (because of lines 227-229)
+        if type == .premium || type == .instaPick {
             /// not let some cards appear anywhere else than in HomePage
             return
         }

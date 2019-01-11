@@ -12,7 +12,7 @@ class RadialGradientLayer: CALayer {
     
     var isNeedGradient: Bool = true {
         didSet {
-            colors = isNeedGradient ? InstaPickGradient.gradientColors : [UIColor.white.cgColor]
+            setNeedsDisplay()
         }
     }
     
@@ -23,12 +23,6 @@ class RadialGradientLayer: CALayer {
     var radius: CGFloat {
         ///Pythagorean theorem
         return sqrt(pow(bounds.width, 2) + pow(bounds.height, 2))
-    }
-    
-    var colors: [CGColor] = InstaPickGradient.gradientColors {
-        didSet {
-            setNeedsDisplay()
-        }
     }
     
     override init(){
@@ -42,10 +36,11 @@ class RadialGradientLayer: CALayer {
     }
 
     override func draw(in ctx: CGContext) {
+        guard isNeedGradient else { return }
         ctx.saveGState()
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         guard let gradient = CGGradient(colorsSpace: colorSpace,
-                                        colors: colors as CFArray,
+                                        colors: InstaPickGradient.gradientColors as CFArray,
                                         locations: InstaPickGradient.locations) else {
             return
         }
