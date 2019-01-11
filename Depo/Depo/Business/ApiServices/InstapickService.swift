@@ -197,3 +197,38 @@ final class InstapickAnalyze {
         self.fileInfo = fileInfo.exists() ? SearchItemResponse(withJSON: fileInfo) : nil
     }
 }
+
+
+// MARK: - Examples
+
+//let instapickService: InstapickService = factory.resolve()
+//
+//instapickService.getThumbnails { result in
+//    switch result {
+//    case .success(let urls):
+//        print("---", urls)
+//        if urls.isEmpty {
+//            print("--- urls.isEmpty")
+//        }
+//    case .failed(let error):
+//        print("---", error.localizedDescription)
+//    }
+//}
+//
+//instapickService.getAnalysisCount { result in
+//    switch result {
+//    case .success(let analysisCount):
+//        print("---", analysisCount.left)
+//    case .failed(let error):
+//        print("---", error.localizedDescription)
+//    }
+//}
+//
+//instapickService.startAnalysis(ids: ["111", "222"]) { result in
+//    switch result {
+//    case .success(let instapickAnalyze):
+//        print("---", instapickAnalyze.first?.rank ?? "nil")
+//    case .failed(let error):
+//        print("---", error.localizedDescription)
+//    }
+//}
