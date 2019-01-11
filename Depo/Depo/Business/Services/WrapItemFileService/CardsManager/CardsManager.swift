@@ -174,6 +174,7 @@ class CardsManager: NSObject {
         DispatchQueue.main.async {
             for notificationView in self.foloversArray {
                 notificationView.startOperationWith(type: .premium, allOperations: 0, completedOperations: 0)
+                //TODO: REMOVE AFTER
                 notificationView.startOperationWith(type: .instaPick, allOperations: 0, completedOperations: 0)
             }
         }
