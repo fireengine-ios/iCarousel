@@ -7,7 +7,8 @@
 //
 
 enum MyStreamType: Int {
-    case people = 0
+    case instaPick
+    case people
     case things
     case places
     case story
@@ -16,6 +17,7 @@ enum MyStreamType: Int {
     
     var title: String {
         switch self {
+        case .instaPick: return TextConstants.myStreamInstaPickTitle
         case .albums: return TextConstants.myStreamAlbumsTitle
         case .story: return TextConstants.myStreamStoriesTitle
         case .people: return TextConstants.myStreamPeopleTitle
@@ -27,6 +29,7 @@ enum MyStreamType: Int {
     
     var placeholder: UIImage {
         switch self {
+        case .instaPick: return #imageLiteral(resourceName: "instapickImage")
         case .albums: return #imageLiteral(resourceName: "album")
         case .story: return #imageLiteral(resourceName: "story")
         case .people: return #imageLiteral(resourceName: "people")
@@ -38,16 +41,16 @@ enum MyStreamType: Int {
     
     var placeholderBorderColor: CGColor {
         switch self {
-        case .albums, .album, .story:
-            return ColorConstants.blueColor.cgColor
-        case .things, .places, .people:
+        case .instaPick:
             return ColorConstants.orangeBorder.cgColor
+        default:
+            return ColorConstants.blueColor.cgColor
         }
     }
     
     func isMyStreamSliderType() -> Bool {
         switch self {
-        case .albums, .story, .people, .things, .places:
+        case .albums, .story, .people, .things, .places, .instaPick:
             return true
         case .album:
             return false
@@ -55,17 +58,21 @@ enum MyStreamType: Int {
     }
     
     func isFaceImageType() -> Bool {
-        return self == .people || self == .things || self == .places
+        return self.isContained(in: [.people, .things, .places])
     }
 }
 
 class SliderItem {
     var name: String?
     var previewItems: [PathForItem]?
+    var previewPlaceholder: UIImage?
     var type: MyStreamType? {
         didSet {
             placeholderImage = type?.placeholder
             name = type?.title
+            if type == .instaPick {
+                previewPlaceholder = #imageLiteral(resourceName: "dummyInstaPickThumbnail")
+            }
         }
     }
     var placeholderImage: UIImage?
