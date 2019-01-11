@@ -1,1 +1,2 @@
 "NSPhotoLibraryUsageDescription" = "Uygulamada fotoğraflarınızı gösterebilmek için lifebox’ın fotoğraf galerinize erişmesi gereklidir";
+"NSFaceIDUsageDescription" = "Uygulamamız güvenliğin için Face ID özelliğini kullanmanı sağlayabilir";
