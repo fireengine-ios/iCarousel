@@ -2554,6 +2554,22 @@
 		9840C62320AEAD6B00A8634F /* CheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840C62120AEAD6B00A8634F /* CheckBoxView.xib */; };
 		9840C62520AEAD8100A8634F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9840C62420AEAD8100A8634F /* CheckBoxView.swift */; };
 		9840C62620AEAD8100A8634F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9840C62420AEAD8100A8634F /* CheckBoxView.swift */; };
+		984A512B21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */; };
+		984A512C21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */; };
+		984A514021E734D2004525F5 /* AnalyzeHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */; };
+		984A514121E734D2004525F5 /* AnalyzeHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */; };
+		984A514421E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A514321E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift */; };
+		984A514521E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A514321E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift */; };
+		984A514721E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A514621E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib */; };
+		984A514821E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A514621E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib */; };
+		984A515421E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515321E87883004525F5 /* AnalyzeHistoryDesigner.swift */; };
+		984A515521E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515321E87883004525F5 /* AnalyzeHistoryDesigner.swift */; };
+		984A515721E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515621E87A4F004525F5 /* AnalyzeHistoryDisplayManager.swift */; };
+		984A515821E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515621E87A4F004525F5 /* AnalyzeHistoryDisplayManager.swift */; };
+		984A515A21E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515921E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift */; };
+		984A515B21E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515921E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift */; };
+		984A515D21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A515C21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib */; };
+		984A515E21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A515C21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib */; };
 		984F8E7D200CDEA200D9D595 /* StoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */; };
 		984F8E7F200CE10100D9D595 /* StoriesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */; };
 		98570AFA208F7558002CCEBA /* SpotlightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98570AF7208F7556002CCEBA /* SpotlightViewController.swift */; };
@@ -5178,6 +5194,14 @@
 		9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomScrollIndicator.xib; sourceTree = "<group>"; };
 		9840C62120AEAD6B00A8634F /* CheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBoxView.xib; sourceTree = "<group>"; };
 		9840C62420AEAD8100A8634F /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
+		984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryViewController.swift; sourceTree = "<group>"; };
+		984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnalyzeHistoryViewController.xib; sourceTree = "<group>"; };
+		984A514321E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForInstapickPhoto.swift; sourceTree = "<group>"; };
+		984A514621E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCellForInstapickPhoto.xib; sourceTree = "<group>"; };
+		984A515321E87883004525F5 /* AnalyzeHistoryDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDesigner.swift; sourceTree = "<group>"; };
+		984A515621E87A4F004525F5 /* AnalyzeHistoryDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDisplayManager.swift; sourceTree = "<group>"; };
+		984A515921E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForInstapickAnalysis.swift; sourceTree = "<group>"; };
+		984A515C21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCellForInstapickAnalysis.xib; sourceTree = "<group>"; };
 		984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInteractor.swift; sourceTree = "<group>"; };
 		984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInitializer.swift; sourceTree = "<group>"; };
 		98570AF7208F7556002CCEBA /* SpotlightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightViewController.swift; sourceTree = "<group>"; };
@@ -10124,6 +10148,25 @@
 			path = CheckBoxView;
 			sourceTree = "<group>";
 		};
+		984A511321E72A29004525F5 /* InstaPick */ = {
+			isa = PBXGroup;
+			children = (
+				984A511521E72C18004525F5 /* AnalyzeHistory */,
+			);
+			path = InstaPick;
+			sourceTree = "<group>";
+		};
+		984A511521E72C18004525F5 /* AnalyzeHistory */ = {
+			isa = PBXGroup;
+			children = (
+				984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */,
+				984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */,
+				984A515321E87883004525F5 /* AnalyzeHistoryDesigner.swift */,
+				984A515621E87A4F004525F5 /* AnalyzeHistoryDisplayManager.swift */,
+			);
+			path = AnalyzeHistory;
+			sourceTree = "<group>";
+		};
 		98A8677C2088C64D00D2D4F4 /* SpotlightViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -11312,6 +11355,7 @@
 				CE3EB30D1FC7F512000B70D6 /* Settings */,
 				CE3EB30F1FC7F7E7000B70D6 /* Home */,
 				1ABC710687B8CDE0F37A8170 /* CreateStory */,
+				984A511321E72A29004525F5 /* InstaPick */,
 			);
 			path = UserStories;
 			sourceTree = "<group>";
@@ -11904,6 +11948,10 @@
 				4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */,
 				4A56D5C6202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift */,
 				4A56D5C7202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib */,
+				984A514321E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift */,
+				984A514621E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib */,
+				984A515921E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift */,
+				984A515C21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -13122,6 +13170,7 @@
 				CE5B5E4220C293B800D91112 /* InfoPlist.strings in Resources */,
 				8C0E8FFD1FDEBDFF00789C91 /* HomeViewTopView.xib in Resources */,
 				8C06AFE12008AD71003D8E05 /* italic_secili@2x.png in Resources */,
+				984A514821E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib in Resources */,
 				8C06AF732008AD70003D8E05 /* edit.png in Resources */,
 				8C06B12D2008AD72003D8E05 /* t_kucuk_selected@3x.png in Resources */,
 				8C0E8FFE1FDEBDFF00789C91 /* LoginViewController.xib in Resources */,
@@ -13167,6 +13216,7 @@
 				8C06B18B2008AD72003D8E05 /* underline_sari.png in Resources */,
 				8C06AF832008AD70003D8E05 /* error_icon@3x.png in Resources */,
 				9807261A203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */,
+				984A514121E734D2004525F5 /* AnalyzeHistoryViewController.xib in Resources */,
 				8C0E90021FDEBDFF00789C91 /* AppRater.bundle in Resources */,
 				8C06AFC92008AD71003D8E05 /* header_icon@2x.png in Resources */,
 				8C06AECF2008AD70003D8E05 /* beyaz_cerceve.png in Resources */,
@@ -13570,6 +13620,7 @@
 				8C0E90591FDEBDFF00789C91 /* UserInfoSubViewViewController.xib in Resources */,
 				4A13DBE721A6FE6D002C3D16 /* PremiumInfoCard.xib in Resources */,
 				8C06B0AD2008AD71003D8E05 /* right@2x.png in Resources */,
+				984A515E21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib in Resources */,
 				8C06AF352008AD70003D8E05 /* cizgi_3_selected@2x.png in Resources */,
 				8C06B1112008AD72003D8E05 /* success_icon.png in Resources */,
 				8C06B0132008AD71003D8E05 /* kup.png in Resources */,
@@ -13749,6 +13800,7 @@
 				8C06B1102008AD72003D8E05 /* success_icon.png in Resources */,
 				8C06B04C2008AD71003D8E05 /* parlaklik.png in Resources */,
 				8C06AFAC2008AD71003D8E05 /* frame_selected@3x.png in Resources */,
+				984A515D21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib in Resources */,
 				8C06AF862008AD70003D8E05 /* extraOptions@2x.png in Resources */,
 				CEAE3FDE1EFD500B00A405B2 /* HomeViewTopView.xib in Resources */,
 				CE51AD201EF90853005DCEE0 /* LoginViewController.xib in Resources */,
@@ -13935,6 +13987,7 @@
 				B56FBB1C2122C23D004F4A59 /* TermsOfUseViewController.xib in Resources */,
 				8C06AF902008AD70003D8E05 /* filtre.png in Resources */,
 				8C06AF3A2008AD70003D8E05 /* close_icon@2x.png in Resources */,
+				984A514021E734D2004525F5 /* AnalyzeHistoryViewController.xib in Resources */,
 				8C06B0462008AD71003D8E05 /* oval_siyah.png in Resources */,
 				8C06AF622008AD70003D8E05 /* duz_beyaz.png in Resources */,
 				8C06AEE62008AD70003D8E05 /* bottomright@3x.png in Resources */,
@@ -14149,6 +14202,7 @@
 				7C554A001F6C11C300067F99 /* CollectionViewStoryReorderView.xib in Resources */,
 				8C06AF9E2008AD71003D8E05 /* focus@2x.png in Resources */,
 				8C06AFCC2008AD71003D8E05 /* info_icon.png in Resources */,
+				984A514721E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib in Resources */,
 				8C06B1C42008AD72003D8E05 /* lookup_soft_elegance_2.png in Resources */,
 				8C06B0082008AD71003D8E05 /* Kucuk_Selected@2x.png in Resources */,
 				8C06B0162008AD71003D8E05 /* kup@3x.png in Resources */,
@@ -14411,7 +14465,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -14421,7 +14475,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
@@ -14450,7 +14504,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
@@ -14470,7 +14524,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7745E7DF35170131924746B7 /* [CP] Check Pods Manifest.lock */ = {
@@ -14497,7 +14551,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -14507,7 +14561,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
@@ -14536,7 +14590,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
@@ -14556,7 +14610,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8669CB1C4E4A3903FDCFE854 /* [CP] Copy Pods Resources */ = {
@@ -14565,8 +14619,8 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
-				"${PODS_ROOT}/GoogleTagManager/Frameworks/frameworks/GoogleTagManager.framework/Resources/TagManagerResources.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -14574,7 +14628,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8C0E8C621FDEBDFF00789C91 /* [CP] Check Pods Manifest.lock */ = {
@@ -14614,7 +14668,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -14624,7 +14678,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
@@ -14653,7 +14707,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
@@ -14673,7 +14727,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8C0E90771FDEBDFF00789C91 /* ShellScript */ = {
@@ -14708,8 +14762,8 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
-				"${PODS_ROOT}/GoogleTagManager/Frameworks/frameworks/GoogleTagManager.framework/Resources/TagManagerResources.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -14717,7 +14771,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BCA0868506E6C5E554B5F870 /* [CP] Check Pods Manifest.lock */ = {
@@ -14775,8 +14829,8 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
-				"${PODS_ROOT}/GoogleTagManager/Frameworks/frameworks/GoogleTagManager.framework/Resources/TagManagerResources.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -14784,7 +14838,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -15044,6 +15098,7 @@
 				CE92456A206E0910000C7791 /* InfinityRotater.swift in Sources */,
 				92004B6721AD18FE00582C45 /* MyStoragePresenter.swift in Sources */,
 				4A56D5CE202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */,
+				984A515521E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */,
 				8C0E8D1C1FDEBDFF00789C91 /* UIApplication+Settings.swift in Sources */,
 				8C0E8D1D1FDEBDFF00789C91 /* LoginRouterInput.swift in Sources */,
 				98B01C7A206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */,
@@ -15256,6 +15311,7 @@
 				8C0E8DD01FDEBDFF00789C91 /* LoginInteractorInput.swift in Sources */,
 				8C0E8DD11FDEBDFF00789C91 /* CreateStoryPhotosOrderInteractorOutput.swift in Sources */,
 				4A0AC139208736FF00032CC7 /* PeriodicContactSyncRouter.swift in Sources */,
+				984A515B21E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift in Sources */,
 				4A56D5B3202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */,
 				8C0E8DD21FDEBDFF00789C91 /* CreateStoryNameInitializer.swift in Sources */,
 				8C0E8DD31FDEBDFF00789C91 /* AudioSelectionCollectionViewCell.swift in Sources */,
@@ -15531,6 +15587,7 @@
 				8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */,
 				8C0E8ED11FDEBDFF00789C91 /* Int64+Bytes.swift in Sources */,
 				C62239A5204972D00043ED44 /* SharedEnums.swift in Sources */,
+				984A515821E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */,
 				4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */,
 				B56FBB382122C956004F4A59 /* TermsOfUseModuleInput.swift in Sources */,
 				8C0E8ED21FDEBDFF00789C91 /* BottomSelectionTabBarModuleInput.swift in Sources */,
@@ -15567,6 +15624,7 @@
 				8C017B762074B782002484E7 /* Keys.swift in Sources */,
 				8C0E8EE81FDEBDFF00789C91 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				8C0E8EE91FDEBDFF00789C91 /* PhotoVideoDetailInteractorOutput.swift in Sources */,
+				984A514521E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift in Sources */,
 				8C0E8EEA1FDEBDFF00789C91 /* PhotoVideoDetailInteractor.swift in Sources */,
 				4ADE087F202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */,
 				8C0E8EEB1FDEBDFF00789C91 /* PackagesModuleInput.swift in Sources */,
@@ -15712,6 +15770,7 @@
 				8C0B91C02017145D00A5BA81 /* UISearchBar+Cancel.swift in Sources */,
 				8C0E8F481FDEBDFF00789C91 /* FileInfoViewOutput.swift in Sources */,
 				8CD84C471FDEC68A005CD3B8 /* UploadFilesSelectionDataSource.swift in Sources */,
+				984A512C21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
 				8C0E8F491FDEBDFF00789C91 /* FileInfoViewController.swift in Sources */,
 				8C0E8F4A1FDEBDFF00789C91 /* FileInfoModuleInput.swift in Sources */,
 				8C0E8F4B1FDEBDFF00789C91 /* BottomSelectionTabBarRouterInput.swift in Sources */,
@@ -16140,6 +16199,7 @@
 				CE95ED531F516736002F923A /* HelpAndSupportPresenter.swift in Sources */,
 				CE51AB951EF90853005DCEE0 /* IntroduceDataSource.swift in Sources */,
 				7C1EA0481F9792F1002DBAD8 /* CreateStoryResponce.swift in Sources */,
+				984A514421E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift in Sources */,
 				4A9F8E5820875D4300622A6C /* PeriodicContactSyncDataSource.swift in Sources */,
 				7CDABD071F1E3A6300C8CC16 /* UserProfileInteractor.swift in Sources */,
 				CEAE3FB61EFD4F0D00A405B2 /* HomePagePresenter.swift in Sources */,
@@ -16327,6 +16387,7 @@
 				CE15AFBE20A0846E00015874 /* UINavigationController+Push.swift in Sources */,
 				CE51AC521EF90853005DCEE0 /* LoginDataStorage.swift in Sources */,
 				7859299920060E94003F8AB3 /* ManageContactsInteractor.swift in Sources */,
+				984A515721E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */,
 				7C3A74391F04F4B800124DF5 /* BaseMediaContent.swift in Sources */,
 				CE51AC591EF90853005DCEE0 /* IntroduceSubView.swift in Sources */,
 				78D9BA4A2007E82800F2233F /* DuplicatedContactsViewOutput.swift in Sources */,
@@ -16491,6 +16552,7 @@
 				7C233CD71FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift in Sources */,
 				8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */,
 				CE51ACD91EF90853005DCEE0 /* TermsAndServicesRouterInput.swift in Sources */,
+				984A515421E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */,
 				CEACBEA11F6C0EEA003BE328 /* RingView.swift in Sources */,
 				92A7460021B91A4F00386C37 /* PackageService.swift in Sources */,
 				CE3A3003200F4B030028C900 /* Validator.swift in Sources */,
@@ -16565,6 +16627,7 @@
 				8C06AC0E20066641003D8E05 /* TurkcellSecurityInteractorIO.swift in Sources */,
 				CE51ACEE1EF90853005DCEE0 /* PhoneVereficationInteractorInput.swift in Sources */,
 				7C241EF81F960BA300322149 /* CollectionViewCellForStoryPhoto.swift in Sources */,
+				984A512B21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
 				CE51ACEF1EF90853005DCEE0 /* PhoneVereficationInteractorOutput.swift in Sources */,
 				486F7B57208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift in Sources */,
 				7C66E8B01F979C3300D98F27 /* CreateStoryPreviewRouterInput.swift in Sources */,
@@ -16931,6 +16994,7 @@
 				9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */,
 				CEBAB15B2094803C002824C6 /* InsetsButton.swift in Sources */,
 				8C6EF8801F348B5C002AC795 /* BottomSelectionTabBarRouterInput.swift in Sources */,
+				984A515A21E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift in Sources */,
 				BA527EDC7876722B487A0428 /* FileInfoPresenter.swift in Sources */,
 				5ED1673DE08513D8CA5485E3 /* FileInfoInteractorInput.swift in Sources */,
 				98E792D8203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,

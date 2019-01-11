@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnalyzeHistoryViewController" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="bM6-zc-MfF" id="FRe-j8-8We"/>
+                <outlet property="designer" destination="Zh9-3c-Msj" id="V3b-16-TsY"/>
+                <outlet property="displayManager" destination="R5A-jK-x2J" id="lqz-Ij-RZB"/>
+                <outlet property="newAnalysisButton" destination="LAp-wq-sNv" id="DNW-yU-2zw"/>
+                <outlet property="newAnalysisButtonBottonConstraint" destination="wt3-kh-Ml3" id="rh9-Cd-7cG"/>
+                <outlet property="view" destination="iN0-l3-epB" id="IXV-g1-3v4"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7L-a1-TzF">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JdK-Md-nJt">
+                            <rect key="frame" x="30" y="157" width="315" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="1kr-vL-PEf"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oD6-Bs-QAS">
+                            <rect key="frame" x="30" y="188" width="315" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="hTn-9T-fmR"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="JdK-Md-nJt" firstAttribute="leading" secondItem="a7L-a1-TzF" secondAttribute="leading" constant="30" id="2Oa-2V-tC0"/>
+                        <constraint firstItem="oD6-Bs-QAS" firstAttribute="leading" secondItem="a7L-a1-TzF" secondAttribute="leading" constant="30" id="7he-av-Vr0"/>
+                        <constraint firstAttribute="trailing" secondItem="JdK-Md-nJt" secondAttribute="trailing" constant="30" id="9Fo-uI-8mU"/>
+                        <constraint firstItem="oD6-Bs-QAS" firstAttribute="top" secondItem="JdK-Md-nJt" secondAttribute="bottom" constant="10" id="IFv-qz-ffs"/>
+                        <constraint firstItem="JdK-Md-nJt" firstAttribute="top" secondItem="a7L-a1-TzF" secondAttribute="top" constant="157" id="SC4-pl-Lmy"/>
+                        <constraint firstAttribute="trailing" secondItem="oD6-Bs-QAS" secondAttribute="trailing" constant="30" id="lwM-Vh-JAd"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="bM6-zc-MfF">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CyQ-yf-Wnx">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAp-wq-sNv" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="79" y="496" width="217" height="46"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="G0q-oF-t9L"/>
+                        <constraint firstAttribute="width" constant="217" id="cwL-zF-y2y"/>
+                    </constraints>
+                    <state key="normal" title="New InstaPick Analysis"/>
+                    <connections>
+                        <action selector="newAnalysisAction:" destination="-1" eventType="touchUpInside" id="Srp-gc-MhB"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="a7L-a1-TzF" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="5FC-0l-ZMe"/>
+                <constraint firstItem="a7L-a1-TzF" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="GfC-pW-fE2"/>
+                <constraint firstItem="bM6-zc-MfF" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Rbc-6d-9jd"/>
+                <constraint firstItem="LAp-wq-sNv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="V6u-f2-BrM"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="bM6-zc-MfF" secondAttribute="bottom" id="X1R-HC-hig"/>
+                <constraint firstItem="a7L-a1-TzF" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="j6m-p6-rVJ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bM6-zc-MfF" secondAttribute="trailing" id="oJD-WY-nFt"/>
+                <constraint firstItem="a7L-a1-TzF" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="p3S-up-xjA"/>
+                <constraint firstItem="bM6-zc-MfF" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="uPd-Lv-He7"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="LAp-wq-sNv" secondAttribute="bottom" constant="61" id="wt3-kh-Ml3"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+        <customObject id="Zh9-3c-Msj" customClass="AnalyzeHistoryDesigner" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="bM6-zc-MfF" id="1eV-Gr-siB"/>
+                <outlet property="emptySubtitleLabel" destination="oD6-Bs-QAS" id="087-x2-qMH"/>
+                <outlet property="emptyTitleLabel" destination="JdK-Md-nJt" id="drf-5l-LSn"/>
+            </connections>
+        </customObject>
+        <customObject id="R5A-jK-x2J" customClass="AnalyzeHistoryDisplayManager" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="bM6-zc-MfF" id="ETA-rz-dps"/>
+                <outlet property="emptyView" destination="a7L-a1-TzF" id="1kZ-vV-b3z"/>
+            </connections>
+        </customObject>
+    </objects>
+</document>
