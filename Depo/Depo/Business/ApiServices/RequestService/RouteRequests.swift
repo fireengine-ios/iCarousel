@@ -18,7 +18,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static let currentServerEnvironment = ServerEnvironment.production
+    private static let currentServerEnvironment = ServerEnvironment.preProduction
     
     static let baseUrl: URL = {
         switch currentServerEnvironment {
@@ -194,6 +194,12 @@ struct RouteRequests {
             static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
             static let availableOffers = Account.accountApi +/ "available-offers/IOS"
         }
+    }
+    
+    enum Instapick {
+        static let instapickApi = baseUrl +/ "instapick"
+        static let thumbnails = instapickApi +/ "thumbnails"
+        static let analysisCount = instapickApi +/ "getCount"
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
