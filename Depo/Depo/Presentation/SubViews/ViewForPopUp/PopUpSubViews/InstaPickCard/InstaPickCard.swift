@@ -156,12 +156,12 @@ final class InstaPickCard: BaseView {
     }
     
     //MARK: - Actions
-    @IBAction func onCloseTap(_ sender: Any) {
+    @IBAction private func onCloseTap(_ sender: Any) {
         deleteCard()
     }
     
     
-    @IBAction func onBottomButtonTap(_ sender: Any) {
+    @IBAction private func onBottomButtonTap(_ sender: Any) {
         //TODO: add redirect for different types
         guard let cardType = cardType else { return }
         switch cardType {

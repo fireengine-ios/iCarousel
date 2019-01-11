@@ -12,12 +12,7 @@ class RadialGradientLayer: CALayer {
     
     var isNeedGradient: Bool = true {
         didSet {
-            switch isNeedGradient {
-            case true:
-                colors = InstaPickGradient.gradientColors
-            case false:
-                colors = [UIColor.white.cgColor]
-            }
+            colors = isNeedGradient ? InstaPickGradient.gradientColors : [UIColor.white.cgColor]
         }
     }
     
@@ -26,7 +21,7 @@ class RadialGradientLayer: CALayer {
     }
     
     var radius: CGFloat {
-        //Pythagorean theorem
+        ///Pythagorean theorem
         return sqrt(pow(bounds.width, 2) + pow(bounds.height, 2))
     }
     

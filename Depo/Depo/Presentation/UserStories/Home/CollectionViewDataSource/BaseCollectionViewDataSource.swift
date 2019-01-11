@@ -188,7 +188,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
     }
     
     func configureInstaPick(with totalCount: Int, leftCount: Int) {
-        guard let instaPickCard = popUps.first(where: { $0.isKind(of: InstaPickCard.self) }) as? InstaPickCard,
+        guard let instaPickCard = popUps.first(where: { $0 is InstaPickCard }) as? InstaPickCard,
             instaPickCard.isNeedReloadWithNew(totalCount: totalCount, leftCount: leftCount),
             let index = popUps.index(of: instaPickCard) else {
             return
