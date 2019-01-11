@@ -82,8 +82,8 @@ final class InstapickServiceImpl: InstapickService {
                 
                 /// server mock
                 let results = [
-                    InstapickAnalyze(requestIdentifier: "123", rank: 5, hashTags: ["#hashTags1", "#hashTags2"], fileInfo: nil),
-                    InstapickAnalyze(requestIdentifier: "567", rank: 4, hashTags: ["#hashTags3", "#hashTags4"], fileInfo: nil)
+                    InstapickAnalyze(requestIdentifier: "123", rank: 5, hashTags: ["#hashTags1", "#hashTags2"], fileInfo: nil, photoCount: nil, startedDate: nil),
+                    InstapickAnalyze(requestIdentifier: "567", rank: 4, hashTags: ["#hashTags3", "#hashTags4"], fileInfo: nil, photoCount: nil, startedDate: nil)
                 ]
                 handler(.success(results))
                 
@@ -177,8 +177,8 @@ final class InstapickServiceImpl: InstapickService {
                 item2.metadata?.largeUrl = URL(string: "https://via.placeholder.com/500/FF0000")
                 
                 let results = [
-                    InstapickAnalyze(requestIdentifier: "123", rank: 5, hashTags: ["#hashTags1", "#hashTags2"], fileInfo: item1),
-                    InstapickAnalyze(requestIdentifier: "567", rank: 4, hashTags: ["#hashTags3", "#hashTags4"], fileInfo: item2)
+                    InstapickAnalyze(requestIdentifier: "123", rank: 5, hashTags: ["#hashTags1", "#hashTags2"], fileInfo: item1, photoCount: 1, startedDate: Date.distantPast),
+                    InstapickAnalyze(requestIdentifier: "567", rank: 4, hashTags: ["#hashTags3", "#hashTags4"], fileInfo: item2, photoCount: 1, startedDate: Date.distantPast)
                 ]
                 handler(.success(results))
                 
@@ -240,13 +240,13 @@ final class InstapickAnalyze {
     let startedDate: Date?
     // let message: String
     
-    init(requestIdentifier: String, rank: Float, hashTags: [String], fileInfo: SearchItemResponse?) {
+    init(requestIdentifier: String, rank: Float, hashTags: [String], fileInfo: SearchItemResponse?, photoCount: Int?, startedDate: Date?) {
         self.requestIdentifier = requestIdentifier
         self.rank = rank
         self.hashTags = hashTags
         self.fileInfo = fileInfo
-        self.photoCount = nil
-        self.startedDate = nil
+        self.photoCount = photoCount
+        self.startedDate = startedDate
     }
 
     init?(json: JSON) {
