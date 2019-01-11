@@ -117,7 +117,7 @@ struct NumericConstants {
     static let packageSumInset: CGFloat = 15
     static let heightForPackageCell: CGFloat = 255
     
-    static let premiumViewHeight: CGFloat = 510
+    static let premiumViewHeight: CGFloat = 480
 }
 
 struct RequestSizeConstant {

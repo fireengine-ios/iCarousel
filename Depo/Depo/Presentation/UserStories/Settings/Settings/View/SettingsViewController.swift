@@ -125,7 +125,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
             if output.isPremiumUser {
                 return 186
             } else {
-                return 210
+                return 224
             }
         }
         return 14
