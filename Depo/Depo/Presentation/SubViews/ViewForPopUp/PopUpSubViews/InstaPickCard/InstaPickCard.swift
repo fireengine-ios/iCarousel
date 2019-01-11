@@ -28,7 +28,7 @@ final class InstaPickCard: BaseView {
     }
 
     //IBOutlets
-    @IBOutlet private weak var gradientView: RadialGradientView!
+    @IBOutlet private weak var gradientView: RadialGradientableView!
     
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var detailLabel: UILabel!
@@ -77,6 +77,8 @@ final class InstaPickCard: BaseView {
         case .noUsedBefore:
             setupTitleLabel(with: TextConstants.instaPickNoUsedBeforeTitleLabel, textColor: UIColor.white)
             
+            gradientView.isNeedGradient = true
+            
             detailLabel.textColor = UIColor.white
             detailLabel.text = TextConstants.instaPickNoUsedBeforeDetailLabel
             
@@ -86,6 +88,8 @@ final class InstaPickCard: BaseView {
             
         case .noAnalysis:
             setupTitleLabel(with: TextConstants.instaPickNoAnalysisTitleLabel, textColor: UIColor.white)
+            
+            gradientView.isNeedGradient = true
             
             detailLabel.textColor = UIColor.white
             detailLabel.text = TextConstants.instaPickNoAnalysisDetailLabel

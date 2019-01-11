@@ -194,7 +194,9 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             return
         }
         let indexPath = IndexPath(item: index, section: 0)
-        collectionView.reloadItems(at: [indexPath])
+        collectionView.performBatchUpdates({ [weak self] in
+            self?.collectionView.reloadItems(at: [indexPath])
+        }, completion: nil)
     }
     
     func startOperationWith(type: OperationType) {

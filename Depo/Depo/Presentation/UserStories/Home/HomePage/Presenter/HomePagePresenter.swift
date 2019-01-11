@@ -136,7 +136,10 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         }
     }
     
-    func didObtainFailCardInfo(errorMessage: String) {
+    func didObtainFailCardInfo(errorMessage: String, isNeedStopRefresh: Bool) {
+        if isNeedStopRefresh {
+            view.stopRefresh()
+        }
         router.showError(errorMessage: errorMessage)
     }
     

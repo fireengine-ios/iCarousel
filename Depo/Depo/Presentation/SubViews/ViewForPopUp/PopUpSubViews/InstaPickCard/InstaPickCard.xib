@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="505" height="143"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IjD-Y9-jpH" customClass="RadialGradientView" customModule="lifebox" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IjD-Y9-jpH" customClass="RadialGradientableView" customModule="lifebox" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="505" height="99"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lbu-Gd-J8h">
@@ -103,7 +103,7 @@
             <connections>
                 <outlet property="bottomButton" destination="mKd-gU-Tzr" id="afX-No-s4I"/>
                 <outlet property="detailLabel" destination="byb-pm-ZWi" id="Jcr-eR-9mY"/>
-                <outlet property="gradientView" destination="IjD-Y9-jpH" id="DFt-cz-uJR"/>
+                <outlet property="gradientView" destination="IjD-Y9-jpH" id="Ec5-vT-reJ"/>
                 <outlet property="imageView" destination="Lbu-Gd-J8h" id="akf-Du-YzC"/>
                 <outlet property="titleLabel" destination="RY4-W8-xzQ" id="WZI-3z-675"/>
             </connections>

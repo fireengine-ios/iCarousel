@@ -71,7 +71,8 @@ class HomePageInteractor: HomePageInteractorInput {
                     self?.fillCollectionView(isReloadAll: true)
                 case .failed(let error):
                     DispatchQueue.toMain {
-                        self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
+                        self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription,
+                                                           isNeedStopRefresh: true)
                     }
                 }
             }
@@ -99,7 +100,8 @@ class HomePageInteractor: HomePageInteractorInput {
                 self?.fillCollectionView(isReloadAll: true)
                 
                 DispatchQueue.toMain {
-                    self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
+                    self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription,
+                                                       isNeedStopRefresh: loadStatus == .reloadSingle)
                 }
             }
         }
@@ -113,7 +115,8 @@ class HomePageInteractor: HomePageInteractorInput {
                 self.output.didObtainInstaPickStatus(status: response)
             case .failed(let error):
                 DispatchQueue.toMain {
-                    self.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
+                    self.output.didObtainFailCardInfo(errorMessage: error.localizedDescription,
+                                                      isNeedStopRefresh: true)
                 }
             }
         }

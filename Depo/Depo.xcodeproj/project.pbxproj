@@ -2530,10 +2530,10 @@
 		9240C04C21B805A4005E710C /* PremiumFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */; };
 		9240C04D21B805A8005E710C /* PremiumFooterCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */; };
 		9240C04E21B805AF005E710C /* PremiumFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */; };
-		925B96D721E79BB000B39415 /* RadialGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D521E79BAF00B39415 /* RadialGradientLayer.swift */; };
-		925B96D821E79BB000B39415 /* RadialGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D521E79BAF00B39415 /* RadialGradientLayer.swift */; };
-		925B96D921E79BB000B39415 /* RadialGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D621E79BAF00B39415 /* RadialGradientView.swift */; };
-		925B96DA21E79BB000B39415 /* RadialGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D621E79BAF00B39415 /* RadialGradientView.swift */; };
+		925B96D721E79BB000B39415 /* RadialGradientableLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D521E79BAF00B39415 /* RadialGradientableLayer.swift */; };
+		925B96D821E79BB000B39415 /* RadialGradientableLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D521E79BAF00B39415 /* RadialGradientableLayer.swift */; };
+		925B96D921E79BB000B39415 /* RadialGradientableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D621E79BAF00B39415 /* RadialGradientableView.swift */; };
+		925B96DA21E79BB000B39415 /* RadialGradientableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D621E79BAF00B39415 /* RadialGradientableView.swift */; };
 		927E508621E8AADA00E44CC0 /* InstaPickCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921EC07921E5ED30000A0860 /* InstaPickCard.swift */; };
 		927E508721E8AAE600E44CC0 /* InstaPickCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 921EC07B21E5ED55000A0860 /* InstaPickCard.xib */; };
 		92A7460021B91A4F00386C37 /* PackageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A745FF21B91A4F00386C37 /* PackageService.swift */; };
@@ -5169,8 +5169,8 @@
 		9224936721BC14890086CB6A /* AuthorityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorityType.swift; sourceTree = "<group>"; };
 		9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumFooterCollectionReusableView.swift; sourceTree = "<group>"; };
 		9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumFooterCollectionReusableView.xib; sourceTree = "<group>"; };
-		925B96D521E79BAF00B39415 /* RadialGradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadialGradientLayer.swift; sourceTree = "<group>"; };
-		925B96D621E79BAF00B39415 /* RadialGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadialGradientView.swift; sourceTree = "<group>"; };
+		925B96D521E79BAF00B39415 /* RadialGradientableLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadialGradientableLayer.swift; sourceTree = "<group>"; };
+		925B96D621E79BAF00B39415 /* RadialGradientableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadialGradientableView.swift; sourceTree = "<group>"; };
 		92A745FF21B91A4F00386C37 /* PackageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageService.swift; sourceTree = "<group>"; };
 		92C1BED0751734B73B9583DD /* SettingsViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewOutput.swift; sourceTree = "<group>"; };
 		9308A9A544DF5D8923C800E0 /* AlbumsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumsPresenter.swift; sourceTree = "<group>"; };
@@ -10086,8 +10086,8 @@
 		925B96D421E79BAF00B39415 /* RadialGradientView */ = {
 			isa = PBXGroup;
 			children = (
-				925B96D521E79BAF00B39415 /* RadialGradientLayer.swift */,
-				925B96D621E79BAF00B39415 /* RadialGradientView.swift */,
+				925B96D521E79BAF00B39415 /* RadialGradientableLayer.swift */,
+				925B96D621E79BAF00B39415 /* RadialGradientableView.swift */,
 			);
 			path = RadialGradientView;
 			sourceTree = "<group>";
@@ -15662,7 +15662,7 @@
 				8C0E8F101FDEBDFF00789C91 /* PackagesInteractorInput.swift in Sources */,
 				8C0E8F111FDEBDFF00789C91 /* PrintModuleConfigurator.swift in Sources */,
 				92004B5821AD11EF00582C45 /* MyStorageViewOutput.swift in Sources */,
-				925B96DA21E79BB000B39415 /* RadialGradientView.swift in Sources */,
+				925B96DA21E79BB000B39415 /* RadialGradientableView.swift in Sources */,
 				486F7B5B208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift in Sources */,
 				8C06AC0F20066641003D8E05 /* TurkcellSecurityInteractorIO.swift in Sources */,
 				8C0E8F121FDEBDFF00789C91 /* SyncContactsRouterInput.swift in Sources */,
@@ -15714,7 +15714,7 @@
 				9808A062206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */,
 				8C0E8F331FDEBDFF00789C91 /* SplashViewController.swift in Sources */,
 				8C0E8F341FDEBDFF00789C91 /* SplashModuleInput.swift in Sources */,
-				925B96D821E79BB000B39415 /* RadialGradientLayer.swift in Sources */,
+				925B96D821E79BB000B39415 /* RadialGradientableLayer.swift in Sources */,
 				8C0E8F351FDEBDFF00789C91 /* MoreFilesActionsPresenter.swift in Sources */,
 				8C0E8F361FDEBDFF00789C91 /* SplashPresenter.swift in Sources */,
 				8C0B91AE20170ECA00A5BA81 /* ManageContactsInteractorOutput.swift in Sources */,
@@ -16630,7 +16630,7 @@
 				CE51ACF51EF90853005DCEE0 /* PhoneVereficationInitializer.swift in Sources */,
 				92004B6621AD18FE00582C45 /* MyStoragePresenter.swift in Sources */,
 				CE95ED571F516736002F923A /* HelpAndSupportViewController.swift in Sources */,
-				925B96D921E79BB000B39415 /* RadialGradientView.swift in Sources */,
+				925B96D921E79BB000B39415 /* RadialGradientableView.swift in Sources */,
 				8C77869D1F3F38EF005CB432 /* VisualMusicPlayerConfigurator.swift in Sources */,
 				CE51ACF61EF90853005DCEE0 /* ForgotPasswordViewInput.swift in Sources */,
 				CEACBEA51F6C1120003BE328 /* ActivityTimelineTableBackView.swift in Sources */,
@@ -16954,7 +16954,7 @@
 				44A9155A999E7CF45CED922A /* SplashRouterInput.swift in Sources */,
 				D5AAB0E3366C42E757055E8C /* SplashRouter.swift in Sources */,
 				CE246A031F3C5B5E008DF705 /* UploadService.swift in Sources */,
-				925B96D721E79BB000B39415 /* RadialGradientLayer.swift in Sources */,
+				925B96D721E79BB000B39415 /* RadialGradientableLayer.swift in Sources */,
 				8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */,
 				53794AC45ECB88862D21B980 /* SplashConfigurator.swift in Sources */,
 				D47863F91F3F18FA00EFDC6D /* UsageInfoRouterInput.swift in Sources */,

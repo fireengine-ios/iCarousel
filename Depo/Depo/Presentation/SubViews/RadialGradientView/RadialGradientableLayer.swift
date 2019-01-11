@@ -1,5 +1,5 @@
 //
-//  RadialGradientLayer.swift
+//  RadialGradientableLayer.swift
 //  Depo_LifeTech
 //
 //  Created by Raman Harhun on 1/10/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RadialGradientLayer: CALayer {
+final class RadialGradientableLayer: CALayer {
     
     var isNeedGradient: Bool = true {
         didSet {
@@ -25,14 +25,14 @@ class RadialGradientLayer: CALayer {
         return sqrt(pow(bounds.width, 2) + pow(bounds.height, 2))
     }
     
-    override init(){
+    override init() {
         super.init()
-        
-        needsDisplayOnBoundsChange = true
+        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init()
+        super.init(coder: aDecoder)
+        setup()
     }
 
     override func draw(in ctx: CGContext) {
@@ -50,6 +50,11 @@ class RadialGradientLayer: CALayer {
                                endCenter: center,
                                endRadius: radius,
                                options: CGGradientDrawingOptions(rawValue: 0))
+    }
+    
+    //Utility Method
+    private func setup() {
+        needsDisplayOnBoundsChange = true
     }
 }
 

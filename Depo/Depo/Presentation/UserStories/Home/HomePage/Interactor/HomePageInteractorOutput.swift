@@ -16,7 +16,7 @@ protocol HomePageInteractorOutput: class {
     
     func didShowPopupAboutPremium()
     
-    func didObtainFailCardInfo(errorMessage: String)
+    func didObtainFailCardInfo(errorMessage: String, isNeedStopRefresh: Bool)
     
     func didObtainHomeCards(_ cards: [HomeCardResponse])
     
