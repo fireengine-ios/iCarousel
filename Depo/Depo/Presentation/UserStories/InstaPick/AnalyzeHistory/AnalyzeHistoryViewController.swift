@@ -25,7 +25,7 @@ final class AnalyzeHistoryViewController: ViewController, NibInit {
     private var items = [Item]()
     
     //Temp
-    private var analysisCount = AnalysisCount(left: 0, total: 0) {
+    private var analysisCount = InstapickAnalysisCount(left: 0, total: 0) {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadSections(IndexSet(arrayLiteral: 0))

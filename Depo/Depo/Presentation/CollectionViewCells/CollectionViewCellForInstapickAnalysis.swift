@@ -18,7 +18,7 @@ private enum InstapickAnalysisCellState {
     case canNewAnalysis
     case needPurchase
     
-    init(with count: AnalysisCount) {
+    init(with count: InstapickAnalysisCount) {
         if count.left == 0 {
             self = .needPurchase
         } else if count.left == count.total {
@@ -92,7 +92,7 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
         isHiddenContent = true
     }
     
-    func setup(with count: AnalysisCount) {
+    func setup(with count: InstapickAnalysisCount) {
         countLabel.text = "\(count.left) of \(count.total)"
         
         let state = InstapickAnalysisCellState(with: count)
