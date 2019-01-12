@@ -53,6 +53,8 @@ enum ElementTypes {
     case makeAlbumCover
     case albumDetails
     case completelyDeleteAlbums
+    //instaPick
+    case instaPick
 }
 
 typealias AnimationBlock = () -> Void

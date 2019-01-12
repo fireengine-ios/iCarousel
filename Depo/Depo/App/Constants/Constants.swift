@@ -1010,4 +1010,7 @@ struct TextConstants {
     static let descriptionAboutStandartUser = NSLocalizedString("uploded_photos_high_quality", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let yesForUpgrade = NSLocalizedString("ok_for_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let noForUpgrade = NSLocalizedString("no_for_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: - InstaPickThreeDors
+    static let newInstaPick = NSLocalizedString("new_insta_pick", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

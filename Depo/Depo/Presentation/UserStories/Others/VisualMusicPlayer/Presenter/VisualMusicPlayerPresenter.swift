@@ -17,6 +17,7 @@ class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlaye
     func deSelectAll() {}
     func stopModeSelected() {}
     func printSelected() {}
+    func openInstaPick() { }
     var selectedItems: [BaseDataSourceItem] {
         if let currentItem = view.player.currentItem {
             return [currentItem]

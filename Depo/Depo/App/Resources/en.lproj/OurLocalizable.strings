@@ -776,3 +776,6 @@
 "ok_for_upgrade" = "Yes, Upgrade";
 "no_for_upgrade" = "No, I'm OK";
 "uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. If you don't upgrade to Premium, your memories will be kept in high quality. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
+
+/*InstaPick three dots*/
+"new_insta_pick" = "New InstaPick";

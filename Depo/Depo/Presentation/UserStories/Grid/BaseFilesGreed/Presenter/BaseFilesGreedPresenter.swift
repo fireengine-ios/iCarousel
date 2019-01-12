@@ -811,6 +811,17 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return type
     }
     
+    func openInstaPick() {
+        startAsyncOperation()
+        let instaPickRoutingService = InstaPickRoutingService()
+        instaPickRoutingService.getViewController(success: { [weak self] vc in
+            self?.asyncOperationSucces()
+            self?.router.openNeededInstaPick(viewController: vc)
+        }) { [weak self] errorMessage in
+            self?.asyncOperationFail(errorMessage: errorMessage)
+        }
+    }
+    
     // MARK: - BaseFilesGreedModuleOutput
     
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
