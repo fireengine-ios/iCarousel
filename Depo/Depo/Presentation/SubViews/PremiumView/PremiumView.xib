@@ -66,7 +66,7 @@
                                         <constraint firstAttribute="height" constant="240" id="XIi-d8-l0Z"/>
                                     </constraints>
                                 </stackView>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRX-oj-6gS">
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRX-oj-6gS" customClass="IntrinsicTextView" customModule="lifebox" customModuleProvider="target">
                                     <rect key="frame" x="16" y="1305" width="992" height="33"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -85,7 +85,7 @@
                                 <constraint firstAttribute="trailing" secondItem="9Te-f5-hf4" secondAttribute="trailing" id="KLt-4J-p9i"/>
                                 <constraint firstItem="9Te-f5-hf4" firstAttribute="top" secondItem="8rI-MV-uQT" secondAttribute="bottom" constant="24" id="OqT-n3-3Ye"/>
                                 <constraint firstItem="8rI-MV-uQT" firstAttribute="leading" secondItem="yMx-AY-vjW" secondAttribute="leading" id="S2c-6T-Pxy"/>
-                                <constraint firstItem="PRX-oj-6gS" firstAttribute="top" secondItem="9Te-f5-hf4" secondAttribute="bottom" constant="24" id="Yov-HT-Gw8"/>
+                                <constraint firstItem="PRX-oj-6gS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9Te-f5-hf4" secondAttribute="bottom" constant="24" id="Yov-HT-Gw8"/>
                                 <constraint firstAttribute="trailing" secondItem="8rI-MV-uQT" secondAttribute="trailing" id="ahj-d1-zba"/>
                                 <constraint firstItem="8rI-MV-uQT" firstAttribute="top" secondItem="yMx-AY-vjW" secondAttribute="top" id="cE7-Ek-NGF"/>
                                 <constraint firstAttribute="bottom" secondItem="9Te-f5-hf4" secondAttribute="bottom" priority="250" constant="30" id="qVY-9g-kjg"/>
