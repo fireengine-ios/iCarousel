@@ -725,7 +725,7 @@
 "leave_premium_premium_description" = "Premium üyeliğin ile lifebox'ın aşağıdaki tüm gelişmiş özelliklerini kullanabiliyorsun.";
 "leave_premium_cancel_description" = "Premium üyeliğini sonlandırdığında Premium özellik ve avantajlarından faydalanamayacaksın.";
 "feature_apple_cancel_text" = "Paketini iptal etmek için lütfen telefonundaki iTunes & App Store menüsünü kullan.";
-"feature_slcm_cancel_text" = "Paketini iptal etmek için lütfen “IPTAL LIFEBOX PREMIUM %@” yazıp 2200’a gönder.";
+"feature_slcm_cancel_text" = "Paketini iptal etmek için lütfen “Lifebox Premium İptal” yazıp 2200’a gönder.";
 "feature_google_cancel_text" = "Paketini iptal etmek için lütfen Google Play Store'u kullan.";
 "feature_free_of_charge_cancel_text" = "Bize Ulaşın menüsünden iptal talebini bize iletebilirsin.";
 "feature_lifecell_cancel_text" = "Lifecell kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
@@ -761,3 +761,4 @@
 "ok_for_upgrade" = "Evet, Premium Ol";
 "no_for_upgrade" = "Hayır, Devam Et";
 "uploded_photos_high_quality" = "lifebox'a standart kullanıcı olarak giriş yapıyorsun. Hesabını Premium'a yükseltmezsen içeriklerin orijinal olarak saklanmaya devam edemeyecek. Orijinal kalitede saklanabilmesi için Premium olup ayrıcalıklardan faydalanmak ister misin?";
+"NSFaceIDUsageDescription" = "Uygulamamız güvenliğin için Face ID özelliğini kullanmanı sağlayabilir";
