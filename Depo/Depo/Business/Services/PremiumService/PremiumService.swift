@@ -50,7 +50,7 @@ final class PremiumService {
     // MARK: Utility methods
     @objc private func onAutoSyncStatusDidChange(notification: NSNotification) {
         if let vc = notification.object as? ItemSyncService,
-            vc.status == .executing {
+            vc.status == .executing, UIApplication.shared.applicationState == .active {
             showPopupForNewUserIfNeeded()
         }
     }
