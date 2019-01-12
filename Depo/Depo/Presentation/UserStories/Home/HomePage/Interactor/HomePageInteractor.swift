@@ -11,7 +11,7 @@ class HomePageInteractor: HomePageInteractorInput {
 
     private enum RefreshStatus {
         case reloadAll
-        case reloadPremium
+        case reloadSingle
     }
     
     weak var output: HomePageInteractorOutput!
@@ -19,6 +19,7 @@ class HomePageInteractor: HomePageInteractorInput {
     private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
     private(set) var homeCardsLoaded = false
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var instapickService: InstapickService = factory.resolve()
     private var isShowPopupAboutPremium = true
     
     private func fillCollectionView(isReloadAll: Bool) {
@@ -70,15 +71,17 @@ class HomePageInteractor: HomePageInteractorInput {
                     self?.fillCollectionView(isReloadAll: true)
                 case .failed(let error):
                     DispatchQueue.toMain {
-                        self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
+                        self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription,
+                                                           isNeedStopRefresh: true)
                     }
                 }
             }
         }
     }
 
-    func updateUserAuthority() {
-        getPremiumCardInfo(loadStatus: .reloadPremium)
+    func updateLocalUserDetail() {
+        getPremiumCardInfo(loadStatus: .reloadSingle)
+        getInstaPickInfo()
     }
 
     private func getPremiumCardInfo(loadStatus: RefreshStatus) {
@@ -87,12 +90,7 @@ class HomePageInteractor: HomePageInteractorInput {
             case .success(let result):
                 AuthoritySingleton.shared.refreshStatus(with: result)
 
-                switch loadStatus {
-                case .reloadAll:
-                    self?.fillCollectionView(isReloadAll: true)
-                case .reloadPremium:
-                    self?.fillCollectionView(isReloadAll: false)
-                }
+                self?.fillCollectionView(isReloadAll: loadStatus == .reloadAll)
                 
                 if self?.isShowPopupAboutPremium == true {
                     self?.output.didShowPopupAboutPremium()
@@ -102,7 +100,23 @@ class HomePageInteractor: HomePageInteractorInput {
                 self?.fillCollectionView(isReloadAll: true)
                 
                 DispatchQueue.toMain {
-                    self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription)
+                    self?.output.didObtainFailCardInfo(errorMessage: error.localizedDescription,
+                                                       isNeedStopRefresh: loadStatus == .reloadSingle)
+                }
+            }
+        }
+    }
+    
+    private func getInstaPickInfo() {
+        instapickService.getAnalysisCount { [weak self] result in
+            guard let `self` = self else { return }
+            switch result {
+            case .success(let response):
+                self.output.didObtainInstaPickStatus(status: response)
+            case .failed(let error):
+                DispatchQueue.toMain {
+                    self.output.didObtainFailCardInfo(errorMessage: error.localizedDescription,
+                                                      isNeedStopRefresh: true)
                 }
             }
         }

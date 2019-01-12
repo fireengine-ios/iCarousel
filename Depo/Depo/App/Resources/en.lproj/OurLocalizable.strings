@@ -776,3 +776,16 @@
 "ok_for_upgrade" = "Yes, Upgrade";
 "no_for_upgrade" = "No, I'm OK";
 "uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. If you don't upgrade to Premium, your memories will be kept in high quality. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
+"uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. We will keep your existing photos and videos along with new uploaded memories in high quality until 1st of March. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
+
+/*InstaPickCard*/
+
+"used_before_title_label" = "InstaPick to get bunch of likes!";
+"no_used_before_title_label" = "Analyze with InstaPick!";
+"no_analysis_title_label" = "Get more InstaPick!";
+
+"used_before_detail_label" = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+"no_used_before_detail_label" = "Let us analyze your selected photos and suggest you which one to share!";
+"no_analysis_detail_label" = "Let us analyze your selected photos and suggest you which one to share!";
+
+"instapick_button_has_analysis" = "Let’s Start!";
