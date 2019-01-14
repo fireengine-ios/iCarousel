@@ -711,7 +711,7 @@
 "leave_premium_premium_description" = "Puede utilizar todas las funciones avanzadas de lifebox con su membresía de Premium.";
 "leave_premium_cancel_description" = "Si cancela su membresía de Premium, \nNo podrá beneficiarse de los privilegios del paquete de Premium.";
 "feature_apple_cancel_text" = "Para cancelar su paquete, use el menú de iTunes y App Store en su dispositivo.";
-"feature_slcm_cancel_text" = "Para cancelar su paquete, envíe un mensaje al numero de “2200” con este texto: \"IPTAL LIFEBOX PREMIUM %s\".";
+"feature_slcm_cancel_text" = "Para cancelar su paquete, envíe un mensaje al numero de “2200” con este texto: LIFEBOX PREMIUM IPTAL";
 "feature_google_cancel_text" = "Para cancelar su paquete, use “Google Play Store”.";
 "feature_free_of_charge_cancel_text" = "Por favor use el menú de “Contáctenos” (Contact us) para informarnos para procesar su solicitud.";
 "feature_lifecell_cancel_text" = "Puede continuar utilizando las funciones de Premium de forma gratuita porque usted es un usuario de LifeCell.";

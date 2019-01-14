@@ -710,7 +710,7 @@
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@ / %@";
 "package_apple_cancel_text" = "لإلغاء حزمتك، يرجى استخدام قائمة iTunes & App Store على جهازك.";
-"package_slcm_cancel_text" = "لإلغاء حزمتك يمكنك إرسال رسالة نصية قصيرة إلى 2200 مكتوب بها \"IPTAL LIFEBOX %@\".";
+"package_slcm_cancel_text" = "لإلغاء حزمتك يمكنك إرسال رسالة نصية قصيرة إلى 2200 مكتوب بها  @% IPTAL LIFEBOX.";
 "package_google_cancel_text" = "لإلغاء حزمتك، يرجى استخدام جوجل بلاي ستور.";
 "package_free_of_charge_cancel_text" = "يرجى استخدام قائمة الاتصال بنا لإبلاغنا بمعالجة طلبك.";
 "package_lifecell_cancel_text" = "يمكنك إرسال رسالة نصية قصيرة إلى 8080، وتكتب فيها “50VYKL” من أجل إلغاء لايف بوكس 50 جيجا، ولإلغاء لايف بوكس 500 جيجا أرسل رسالة مكتوب بها“500VYKL” ";
@@ -727,7 +727,7 @@
 "leave_premium_premium_description" = "يمكنك استخدام جميع المزايا المتقدمة من لايف بوكس من خلال العضوية البريميوم.";
 "leave_premium_cancel_description" = "لن تتمكن من الاستفادة من امتيازات البريميوم إذا ألغيت عضويتك";
 "feature_apple_cancel_text" = "لإلغاء حزمتك، يرجى استخدام قائمة iTunes & App Store على جهازك.";
-"feature_slcm_cancel_text" = "لإلغاء حزمتك يمكنك إرسال رسالة نصية قصيرة إلى 2200 مكتوب بها “IPTAL LIFEBOX PREMIUM %s”.";
+"feature_slcm_cancel_text" = "للإلغاء يمكنك إرسال (LIFEBOX PREMIUM IPTAL) إلى 2200.";
 "feature_google_cancel_text" = "لإلغاء حزمتك، يرجى استخدام جوجل بلاي ستور";
 "feature_free_of_charge_cancel_text" = "يرجى استخدام قائمة الاتصال بنا لإبلاغنا بمعالجة طلبك.";
 "feature_lifecell_cancel_text" = "لأنك مستخدم lifecell  يمكنك الاستمرار في استخدام مميزات العضوية البريميوم مجانًا.";
