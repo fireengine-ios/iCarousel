@@ -34,7 +34,6 @@ final class InstaPickRoutingService {
         errorHandler = error
         
         if !doNotShowAgain {
-            checkInstagramAccount()
             checkInstagramLikePermission()
         } else {
             configureViewController()
@@ -82,6 +81,8 @@ final class InstaPickRoutingService {
         instagramLikePermission = likePermission
         if likePermission {
             configureViewController()
+        } else {
+            checkInstagramAccount()
         }
     }
     
