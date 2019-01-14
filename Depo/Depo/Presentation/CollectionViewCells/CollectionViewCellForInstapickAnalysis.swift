@@ -31,19 +31,35 @@ private enum InstapickAnalysisCellState {
 
 final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
     
-    @IBOutlet weak var borderView: ShadowView!
+    @IBOutlet weak var borderView: UIView! {
+        willSet {
+            newValue.clipsToBounds = true
+            newValue.layer.cornerRadius = 5
+        }
+    }
+    
+    @IBOutlet weak var shadowView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 5
+            newValue.layer.shadowColor = UIColor.black.cgColor
+            newValue.layer.shadowRadius = 5
+            newValue.layer.shadowOpacity = 0.3
+            newValue.layer.shadowOffset = .zero
+        }
+    }
     
     @IBOutlet weak var analyzeLabel: UILabel! {
         willSet {
-            analyzeLabel.textColor = ColorConstants.textGrayColor
-            analyzeLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.text = TextConstants.analyzeHistoryAnalyzeLeft
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
         }
     }
     @IBOutlet weak var countLabel: UILabel! {
         willSet {
-            countLabel.textColor = ColorConstants.textGrayColor
-            countLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            countLabel.textAlignment = .right
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.textAlignment = .right
         }
     }
     
@@ -51,19 +67,21 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
     
     @IBOutlet weak var purchaseBackImageView: UIImageView! {
         willSet {
-            purchaseBackImageView.contentMode = .scaleAspectFit
-            purchaseBackImageView.image = UIImage(named: "purchase_back")
+            newValue.contentMode = .scaleAspectFill
+            newValue.image = UIImage(named: "purchase_back")
         }
     }
     
     @IBOutlet weak var purchaseButton: UIButton! {
         willSet {
-            purchaseButton.clipsToBounds = true
-            purchaseButton.layer.borderColor = UIColor.white.cgColor
-            purchaseButton.layer.borderWidth = 1
-            purchaseButton.backgroundColor = .clear
-            purchaseButton.tintColor = .white
-            purchaseButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            newValue.setTitle(TextConstants.purchase, for: .normal)
+            newValue.clipsToBounds = true
+            newValue.layer.cornerRadius = newValue.bounds.height * 0.5
+            newValue.layer.borderColor = UIColor.white.cgColor
+            newValue.layer.borderWidth = 1
+            newValue.backgroundColor = .clear
+            newValue.tintColor = .white
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         }
     }
     
@@ -71,8 +89,9 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
     
     @IBOutlet weak var seeDetailsButton: UIButton! {
         willSet {
-            seeDetailsButton.tintColor = UIColor.lrTealishTwo
-            seeDetailsButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            newValue.setTitle(TextConstants.seeDetails, for: .normal)
+            newValue.tintColor = UIColor.lrTealishTwo
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         }
     }
     
@@ -90,10 +109,13 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
         super.awakeFromNib()
     
         isHiddenContent = true
+        
+        contentView.backgroundColor = .white
     }
     
     func setup(with count: InstapickAnalysisCount) {
-        countLabel.text = "\(count.left) of \(count.total)"
+        let countText = String(format: TextConstants.analyzeHistoryAnalyzeCount, count.left, count.total)
+        countLabel.text = countText
         
         let state = InstapickAnalysisCellState(with: count)
         switch state {

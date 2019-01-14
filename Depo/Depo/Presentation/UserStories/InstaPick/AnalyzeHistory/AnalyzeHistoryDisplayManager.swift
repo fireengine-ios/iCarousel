@@ -15,8 +15,8 @@ enum AnalyzeHistoryDisplayConfiguration {
 }
 
 final class AnalyzeHistoryDisplayManager: NSObject {
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var emptyView: UIView!
+    @IBOutlet private weak var emptyView: UIView!
+    @IBOutlet private weak var newAnalysisView: UIView!
     
     var configuration: AnalyzeHistoryDisplayConfiguration = .initial
     
@@ -26,13 +26,15 @@ final class AnalyzeHistoryDisplayManager: NSObject {
         switch configuration {
         case .initial:
             emptyView.isHidden = true
+            newAnalysisView.isHidden = false
             
         case .empty:
             emptyView.isHidden = false
+            newAnalysisView.isHidden = false
             
         case .selection:
             emptyView.isHidden = true
-            collectionView.reloadData()
+            newAnalysisView.isHidden = true
         }
     }
 }

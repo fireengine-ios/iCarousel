@@ -39,6 +39,8 @@ final class CollectionViewCellForInstapickPhoto: BaseCollectionViewCell {
         
         countLabel.textColor = ColorConstants.lightText
         countLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
+        
+        contentView.backgroundColor = .white
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
@@ -50,8 +52,8 @@ final class CollectionViewCellForInstapickPhoto: BaseCollectionViewCell {
     func setup(with item: InstapickAnalyze) {
         rankLabel.text = "\(item.rank)"
         
-        let count = item.photoCount ?? 0
-        countLabel.text = "\(count) photos"
+        let countText = String(format: TextConstants.analyzeHistoryPhotosCount, item.photoCount ?? 0)
+        countLabel.text = countText
         
         if let metadata = item.fileInfo?.metadata {
             setImage(with: metadata)
@@ -64,7 +66,12 @@ final class CollectionViewCellForInstapickPhoto: BaseCollectionViewCell {
         uuid = cellImageManager?.uniqueId
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
             DispatchQueue.toMain {
-                guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
+                guard let image = image else {
+                    self?.setImage(image: UIImage(named: "photo_not_found"), animated: false)
+                    return
+                }
+                
+                guard let uuid = self?.uuid, uuid == uniqueId else {
                     return
                 }
                 
@@ -74,6 +81,23 @@ final class CollectionViewCellForInstapickPhoto: BaseCollectionViewCell {
         }
         
         cellImageManager?.loadImage(thumbnailUrl: metaData.smalURl, url: metaData.mediumUrl, completionBlock: imageSetBlock)
+        
+        isAlreadyConfigured = true
+    }
+    
+    override func setImage(image: UIImage?, animated: Bool) {
+        imageView.contentMode = .scaleAspectFill
+        if animated {
+            imageView.layer.opacity = NumericConstants.numberCellDefaultOpacity
+            imageView.image = image
+            UIView.animate(withDuration: 0.2, animations: {
+                self.imageView.layer.opacity = NumericConstants.numberCellAnimateOpacity
+            })
+        } else {
+            imageView.image = image
+        }
+
+        backgroundColor = ColorConstants.fileGreedCellColor
         
         isAlreadyConfigured = true
     }

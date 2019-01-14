@@ -12,7 +12,8 @@ protocol AnalyzeHistoryDataSourceDelegate: class {
     func needLoadNextHistoryPage()
     func onLongPressInCell()
     func onPurchase()
-    func onSeeDetailsForAnanyze(_ analyze: InstapickAnalyze)
+    func onSeeDetailsForAnalyze(_ analyze: InstapickAnalyze)
+    func onUpdateSelectedItems(count: Int)
 }
 
 final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
@@ -20,8 +21,9 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     private var collectionView: UICollectionView!
     
     private var items = [InstapickAnalyze]()
+    private(set) var selectedItems = [InstapickAnalyze]()
     
-    private var analysisCount = InstapickAnalysisCount(left: 0, total: 0) {
+    private(set) var analysisCount = InstapickAnalysisCount(left: 0, total: 0) {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadSections(IndexSet(arrayLiteral: 0))
@@ -29,7 +31,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         }
     }
     
-    private var isSelectionStateActive = false
+    private(set) var isSelectionStateActive = false
     
     var isPaginationDidEnd = false
     
@@ -48,6 +50,10 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         collectionView.register(nibCell: CollectionViewCellForInstapickAnalysis.self)
         collectionView.dataSource = self
         collectionView.delegate = self
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.minimumLineSpacing = 0
+            layout.minimumInteritemSpacing = 0
+        }
     }
     
     func reloadCards(with analysisCount: InstapickAnalysisCount) {
@@ -81,6 +87,32 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
             collectionView.insertItems(at: insertIndexPaths)
         })
     }
+    
+    func deleteSelectedItems() {
+        var deleteIndexPaths = [IndexPath]()
+        selectedItems.forEach { item in
+            if let index = self.items.index(of: item) {
+                deleteIndexPaths.append(IndexPath(item: index, section: 1))
+            }
+        }
+        
+        collectionView.performBatchUpdates({
+            collectionView.deleteItems(at: deleteIndexPaths)
+        })
+    }
+    
+    private func startSelection(with indexPath: IndexPath) {
+        isSelectionStateActive = true
+        let item = items[indexPath.item]
+        selectedItems = [item]
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+    }
+    
+    func cancelSelection() {
+        isSelectionStateActive = false
+        selectedItems.removeAll()
+        collectionView.reloadData()
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -110,7 +142,11 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
             (cell as? CollectionViewCellForInstapickAnalysis)?.setup(with: analysisCount)
             (cell as? CollectionViewCellForInstapickAnalysis)?.delegate = self
         } else {
-            (cell as? CollectionViewCellForInstapickPhoto)?.setup(with: items[indexPath.item])
+            let item = items[indexPath.item]
+            let isSelected = isSelectionStateActive && selectedItems.contains(item)
+            (cell as? CollectionViewCellForInstapickPhoto)?.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isSelected)
+            (cell as? CollectionViewCellForInstapickPhoto)?.setup(with: item)
+            (cell as? CollectionViewCellForInstapickPhoto)?.delegate = self
         }
         
         if isPaginationDidEnd {
@@ -134,6 +170,29 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
     }
 }
 
+// MARK: - UICollectionViewDelegate
+
+extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = items[indexPath.item]
+        if isSelectionStateActive {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCellDataProtocol else {
+                return
+            }
+            let isSelected = selectedItems.contains(item)
+            cell.setSelection(isSelectionActive: isSelectionStateActive, isSelected: !isSelected)
+            if isSelected {
+                selectedItems.remove(item)
+            } else {
+                selectedItems.append(item)
+            }
+            delegate?.onUpdateSelectedItems(count: selectedItems.count)
+        } else {
+            delegate?.onSeeDetailsForAnalyze(item)
+        }
+    }
+}
+
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegateFlowLayout {
@@ -143,6 +202,13 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegateFlo
         } else {
             return CGSize(width: 80, height: 108)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if section == 0 {
+            return .zero
+        }
+        return UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
     }
 }
 
@@ -155,7 +221,7 @@ extension AnalyzeHistoryDataSourceForCollectionView: InstapickAnalysisCellDelega
     
     func onSeeDetails(cell: UICollectionViewCell) {
         if let analyze = analyzeForCell(cell) {
-            delegate?.onSeeDetailsForAnanyze(analyze)
+            delegate?.onSeeDetailsForAnalyze(analyze)
         }
     }
     
@@ -165,6 +231,9 @@ extension AnalyzeHistoryDataSourceForCollectionView: InstapickAnalysisCellDelega
     
     func onLongPress(cell: UICollectionViewCell) {
         if !isSelectionStateActive {
+            if let indexPath = collectionView.indexPath(for: cell) {
+                startSelection(with: indexPath)
+            }
             delegate?.onLongPressInCell()
         }
     }

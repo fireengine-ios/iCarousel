@@ -43,8 +43,7 @@ class LBAlbumLikePreviewSliderRouter {
     }
     
     private func goToInstaPickView(_ moduleOutput: LBAlbumLikePreviewSliderModuleInput?) {
-        //TODO: INSTAPICK go to Analyses History page
-        let controller = router.placesListController(moduleOutput: moduleOutput)
+        let controller = router.analyzesHistoryController()
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     

@@ -9,27 +9,37 @@
 import UIKit
 
 final class AnalyzeHistoryDesigner: NSObject {
-    @IBOutlet private weak var collectionView: UICollectionView! {
-        willSet {
-            
-        }
-    }
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     @IBOutlet private weak var emptyTitleLabel: UILabel! {
         willSet {
-            emptyTitleLabel.textColor = ColorConstants.darkText
-            emptyTitleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
-            emptyTitleLabel.textAlignment = .center
-            emptyTitleLabel.numberOfLines = 0
+            newValue.text = TextConstants.analyzeHistoryEmptyTitle
+            newValue.textColor = ColorConstants.darkText
+            newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)
+            newValue.textAlignment = .center
+            newValue.numberOfLines = 0
         }
     }
     
     @IBOutlet private weak var emptySubtitleLabel: UILabel! {
         willSet {
-            emptySubtitleLabel.textColor = ColorConstants.textGrayColor
-            emptySubtitleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
-            emptySubtitleLabel.textAlignment = .center
-            emptySubtitleLabel.numberOfLines = 0
+            newValue.text = TextConstants.analyzeHistoryEmptySubtitle
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            newValue.textAlignment = .center
+            newValue.numberOfLines = 0
+        }
+    }
+    
+    @IBOutlet private weak var newAnalyseView: UIView! {
+        willSet {
+            newValue.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        }
+    }
+    
+    @IBOutlet private weak var newAnalysisButton: BlueButtonWithMediumWhiteText! {
+        willSet {
+            newValue.setTitle(TextConstants.analyzeHistoryAnalyseButton, for: .normal)
         }
     }
 }

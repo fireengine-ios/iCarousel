@@ -696,6 +696,13 @@ class RouterVC: NSObject {
         return controller as! BaseFilesGreedChildrenViewController
     }
     
+    // MARK: Analyses History page
+    
+    func analyzesHistoryController() -> AnalyzeHistoryViewController {
+        let controller = AnalyzeHistoryViewController.initFromNib()
+        return controller
+    }
+    
     // MARK: Face Image Recognition Photos
     
     func imageFacePhotosController(album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
