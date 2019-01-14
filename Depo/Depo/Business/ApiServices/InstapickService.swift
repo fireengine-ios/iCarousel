@@ -20,12 +20,11 @@ protocol InstapickService: class {
     var delegates: MulticastDelegate<InstaPickServiceDelegate> {get}
     
     func getThumbnails(handler: @escaping (ResponseResult<[URL]>) -> Void)
-    func getAnalysisCount(handler: @escaping (ResponseResult<InstapickAnalysisCount>) -> Void)
-    func startAnalysis(ids: [String], handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
+    func getAnalyzesCount(handler: @escaping (ResponseResult<InstapickAnalyzesCount>) -> Void)
+    func startAnalyzes(ids: [String], handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
+    func removeAnalyzes(ids: [String], handler: @escaping (ResponseResult<Void>) -> Void)
     func getAnalyzeHistory(offset: Int, limit: Int, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
-    
-    //TODO: add real
-    func removeAnalysis()
+    func getAnalyzeDetails(id: String, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
 }
 
 
@@ -64,14 +63,12 @@ final class InstapickServiceImpl: InstapickService {
         }
     }
     
-    func removeAnalysis() {
+    func removeAnalyzes() {
         //TODO: add in the callback
-        delegates.invoke { delegate in
-            delegate.didRemoveAnalysis()
-        }
+
     }
     
-    func startAnalysis(ids: [String], handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void) {
+    func startAnalyzes(ids: [String], handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void) {
         sessionManager
             .request(RouteRequests.Instapick.analyze,
                      method: .post,
@@ -113,14 +110,37 @@ final class InstapickServiceImpl: InstapickService {
         }
     }
     
-    func getAnalysisCount(handler: @escaping (ResponseResult<InstapickAnalysisCount>) -> Void) {
+    func removeAnalyzes(ids: [String], handler: @escaping (ResponseResult<Void>) -> Void) {
         sessionManager
-            .request(RouteRequests.Instapick.analysisCount)
+            .request(RouteRequests.Instapick.removeAnalyzes,
+                     method: .delete,
+                     parameters: ids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseData { [weak self] response in
+                
+                /// server mock
+                handler(.success(()))
+                
+                /// !!! server logic. don't delete
+                //switch response.result {
+                //case .success(_):
+                //    handler(.success(()))
+                //case .failure(let error):
+                //    assertionFailure(error.localizedDescription)
+                //    handler(.failed(error))
+                //}
+        }
+    }
+    
+    func getAnalyzesCount(handler: @escaping (ResponseResult<InstapickAnalyzesCount>) -> Void) {
+        sessionManager
+            .request(RouteRequests.Instapick.analyzesCount)
             .customValidate()
             .responseData { response in
                 
                 /// server mock
-                let results = InstapickAnalysisCount(left: 2, total: 32)
+                let results = InstapickAnalyzesCount(left: 2, total: 32)
                 handler(.success(results))
                 
                 /// !!! server logic. don't delete
@@ -259,7 +279,7 @@ final class InstapickServiceImpl: InstapickService {
     }
 }
 
-final class InstapickAnalysisCount {
+final class InstapickAnalyzesCount {
     let left: Int
     let total: Int
     
