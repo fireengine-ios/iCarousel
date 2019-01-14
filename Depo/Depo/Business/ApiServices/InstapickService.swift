@@ -15,7 +15,7 @@ protocol InstaPickServiceDelegate: class {
     func didFinishAnalysis()
 }
 
-
+/// https://wiki.life.com.by/x/IjAWBQ
 protocol InstapickService: class {
     var delegates: MulticastDelegate<InstaPickServiceDelegate> {get}
     
