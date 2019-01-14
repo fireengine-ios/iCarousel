@@ -202,6 +202,7 @@ struct RouteRequests {
         static let analysisCount = instapickApi +/ "getCount"
         static let analyze = instapickApi +/ "analyze"
         static let analyzeHistory = instapickApi +/ "getAnalyzeHistory"
+        static let analyzeDetails = instapickApi +/ "getAnalyzeDetails"
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"

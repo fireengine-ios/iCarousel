@@ -207,6 +207,56 @@ final class InstapickServiceImpl: InstapickService {
                 }
         }
     }
+    
+    func getAnalyzeDetails(id: String, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void) {
+        sessionManager
+            .request(RouteRequests.Instapick.analyzeDetails,
+                     encoding: id)
+            .customValidate()
+            .responseData { [weak self] response in
+                
+                let item1 = SearchItemResponse()
+                item1.createdDate = Date()
+                item1.id = 121212121212212
+                item1.uuid = UUID().uuidString
+                item1.metadata = BaseMetaData()
+                item1.metadata?.smalURl = URL(string: "https://via.placeholder.com/100/FFFF00")
+                item1.metadata?.mediumUrl = URL(string: "https://via.placeholder.com/300/FFFF00")
+                item1.metadata?.largeUrl = URL(string: "https://via.placeholder.com/500/FFFF00")
+                
+                let item2 = SearchItemResponse()
+                item2.createdDate = Date()
+                item2.id = 121212121212212
+                item2.uuid = UUID().uuidString
+                item2.metadata = BaseMetaData()
+                item2.metadata?.smalURl = URL(string: "https://via.placeholder.com/100/FF0000")
+                item2.metadata?.mediumUrl = URL(string: "https://via.placeholder.com/300/FF0000")
+                item2.metadata?.largeUrl = URL(string: "https://via.placeholder.com/500/FF0000")
+                
+                let results = [
+                    InstapickAnalyze(requestIdentifier: "123", rank: 5, hashTags: ["#hashTags1", "#hashTags2"], fileInfo: item1, photoCount: 1, startedDate: Date.distantPast),
+                    InstapickAnalyze(requestIdentifier: "567", rank: 4, hashTags: ["#hashTags3", "#hashTags4"], fileInfo: item2, photoCount: 1, startedDate: Date.distantPast)
+                ]
+                handler(.success(results))
+                
+                //switch response.result {
+                //case .success(let data):
+                //    let json = JSON(data: data)
+                //
+                //    guard let results = json.array?.flatMap({ InstapickAnalyze(json: $0) }) else {
+                //        let error = CustomErrors.serverError("\(RouteRequests.Instapick.analyzeHistory) not [InstapickAnalyze] in response")
+                //        assertionFailure(error.localizedDescription)
+                //        handler(.failed(error))
+                //        return
+                //    }
+                //
+                //    handler(.success(results))
+                //case .failure(let error):
+                //    assertionFailure(error.localizedDescription)
+                //    handler(.failed(error))
+                //}
+        }
+    }
 }
 
 final class InstapickAnalysisCount {
