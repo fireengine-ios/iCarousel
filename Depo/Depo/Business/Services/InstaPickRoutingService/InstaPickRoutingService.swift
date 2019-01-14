@@ -10,12 +10,11 @@ import Foundation
 
 final class InstaPickRoutingService {
     typealias ViewControllerHandler  = (UIViewController) -> ()
-    typealias ErrorHandler  = (LocalizedError) -> ()
 
     private var instaService = InstagramService()
     
     private var successHandler: ViewControllerHandler?
-    private var errorHandler: ErrorHandler?
+    private var errorHandler: FailResponse?
     
     private var instagramNickname: String?
     private var instagramLikePermission: Bool?
@@ -29,7 +28,7 @@ final class InstaPickRoutingService {
     }
     
     //Utility Methods(public)
-    func getViewController(success: @escaping ViewControllerHandler, error: @escaping ErrorHandler) {
+    func getViewController(success: @escaping ViewControllerHandler, error: @escaping FailResponse) {
         successHandler = success
         errorHandler = error
         
@@ -49,8 +48,9 @@ final class InstaPickRoutingService {
         instaService.socialStatus(success: { [weak self] response in
             guard let response = response as? SocialStatusResponse,
                 let isConnected: Bool = response.instagram else {
-                    let error = CustomErrors.serverError("An error ocured while getting Instagram status.")
-                    self?.showError(with: error)
+                    let error = CustomErrors.serverError("An error occurred while getting Instagram status.")
+                    let errorResponse = ErrorResponse.error(error)
+                    self?.showError(with: errorResponse)
                     return
             }
 
@@ -72,8 +72,9 @@ final class InstaPickRoutingService {
         if let name = names.randomElement() {
             got(nickName: name)
         } else {
-            let error = CustomErrors.serverError("An error occured while getting nickName from server.")
-            showError(with: error)
+            let error = CustomErrors.serverError("An error occurred while getting nickname.")
+            let errorResponse = ErrorResponse.error(error)
+            showError(with: errorResponse)
         }
     }
     
@@ -122,7 +123,7 @@ final class InstaPickRoutingService {
         successHandler(vc)
     }
     
-    private func showError(with error: LocalizedError) {
+    private func showError(with error: ErrorResponse) {
         guard let errorHandler = errorHandler else {
             UIApplication.showErrorAlert(message: "Error handler unexpected become nil.")
             return
