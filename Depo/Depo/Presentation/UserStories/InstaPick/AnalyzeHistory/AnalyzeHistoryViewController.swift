@@ -25,6 +25,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private var navBarConfigurator = NavigationBarConfigurator()
     private var cancelSelectionButton: UIBarButtonItem!
     
+    private let rightButtonBox = CGRect(x: Device.winSize.width - 45, y: -15, width: 0, height: 0)
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -61,9 +63,9 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     private func configureNavBarActions() {
-        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
-            self?.onMorePressed()
-        })
+        let more = NavBarWithAction(navItem: NavigationBarList().more) { [weak self] item in
+            self?.onMorePressed(item)
+        }
         let rightActions: [NavBarWithAction] = [more]
         navBarConfigurator.configure(right: rightActions, left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
@@ -109,16 +111,65 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         stopSelection()
     }
     
-    @IBAction private func deleteSelectedItems(_ sender: Any) {
-        dataSource.deleteSelectedItems()
+    @IBAction private func deleteSelectedItems(_ sender: Any?) {
+        deleteSelectedAnalyzes()
     }
     
-    private func onMorePressed() {
+    private func onMorePressed(_ sender: Any) {
         if dataSource.isSelectionStateActive {
-            
+            showAlertSheet(with: [.delete], sender: sender)
         } else {
-            
+            showAlertSheet(with: [.select], sender: sender)
         }
+    }
+    
+    private func showAlertSheet(with types: [ElementTypes], sender: Any?) {
+        let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        types.forEach { type in
+            var action: UIAlertAction?
+            switch type {
+            case .delete:
+                action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
+                    self.deleteSelectedAnalyzes()
+                })
+            case .select:
+                action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
+                    self.dataSource.startSelection(with: nil)
+                })
+            default:
+                action = nil
+            }
+            
+            if let action = action {
+                actionSheetVC.addAction(action)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel)
+        actionSheetVC.addAction(cancelAction)
+        
+        actionSheetVC.view.tintColor = UIColor.black
+        actionSheetVC.popoverPresentationController?.sourceView = view
+        
+        if let pressedBarButton = sender as? UIButton {
+            var sourceRectFrame = pressedBarButton.convert(pressedBarButton.frame, to: view)
+            if sourceRectFrame.origin.x > view.bounds.width {
+                sourceRectFrame = CGRect(origin: CGPoint(x: pressedBarButton.frame.origin.x, y: pressedBarButton.frame.origin.y + 20), size: pressedBarButton.frame.size)
+            }
+            actionSheetVC.popoverPresentationController?.sourceRect = sourceRectFrame
+        } else if let _ = sender as? UIBarButtonItem {
+            //FIXME: use actionSheetVC.popoverPresentationController?.barButtonItem instead
+            if navigationController?.navigationBar.isTranslucent == true {
+                var frame = rightButtonBox
+                frame.origin.y = 44
+                actionSheetVC.popoverPresentationController?.sourceRect = frame
+            } else {
+                actionSheetVC.popoverPresentationController?.sourceRect = rightButtonBox
+            }
+            
+            actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up
+        }
+        present(actionSheetVC, animated: true)
     }
     
     // MARK: - Functions
@@ -139,14 +190,14 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     private func reloadCards() {
-        instapickService.getAnalysisCount { [weak self] result in
+        instapickService.getAnalyzesCount { [weak self] result in
             guard let `self` = self else { return }
             
             switch result {
             case .success(let analysisCount):
                 self.dataSource.reloadCards(with: analysisCount)
             case .failed(let error):
-                print(error.localizedDescription)
+                UIApplication.showErrorAlert(message: error.description)
             }
         }
     }
@@ -168,7 +219,23 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                     }
                 }
             case .failed(let error):
-                print(error.localizedDescription)
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
+    }
+    
+    private func deleteSelectedAnalyzes() {
+        let ids = dataSource.selectedItems.map { $0.requestIdentifier }
+        instapickService.removeAnalyzes(ids: ids) { [weak self] result in
+            guard let `self` = self else { return }
+            
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self.dataSource.deleteSelectedItems()
+                }
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
             }
         }
     }

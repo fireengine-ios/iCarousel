@@ -23,7 +23,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     private var items = [InstapickAnalyze]()
     private(set) var selectedItems = [InstapickAnalyze]()
     
-    private(set) var analysisCount = InstapickAnalysisCount(left: 0, total: 0) {
+    private(set) var analysisCount = InstapickAnalyzesCount(left: 0, total: 0) {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadSections(IndexSet(arrayLiteral: 0))
@@ -56,7 +56,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         }
     }
     
-    func reloadCards(with analysisCount: InstapickAnalysisCount) {
+    func reloadCards(with analysisCount: InstapickAnalyzesCount) {
         self.analysisCount = analysisCount
     }
     
@@ -96,15 +96,23 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
             }
         }
         
+        selectedItems.forEach { item in
+            items.remove(item)
+        }
+        
         collectionView.performBatchUpdates({
             collectionView.deleteItems(at: deleteIndexPaths)
         })
     }
     
-    private func startSelection(with indexPath: IndexPath) {
+    func startSelection(with indexPath: IndexPath?) {
         isSelectionStateActive = true
-        let item = items[indexPath.item]
-        selectedItems = [item]
+        if let indexPath = indexPath {
+            let item = items[indexPath.item]
+            selectedItems = [item]
+        } else {
+            selectedItems = []
+        }
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
     }
     

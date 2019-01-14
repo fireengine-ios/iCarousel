@@ -18,7 +18,7 @@ private enum InstapickAnalysisCellState {
     case canNewAnalysis
     case needPurchase
     
-    init(with count: InstapickAnalysisCount) {
+    init(with count: InstapickAnalyzesCount) {
         if count.left == 0 {
             self = .needPurchase
         } else if count.left == count.total {
@@ -113,22 +113,28 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
         contentView.backgroundColor = .white
     }
     
-    func setup(with count: InstapickAnalysisCount) {
+    func setup(with count: InstapickAnalyzesCount) {
+        if count.left == 0, count.total == 0 {
+            isHiddenContent = true
+            return
+        }
+        
         let countText = String(format: TextConstants.analyzeHistoryAnalyzeCount, count.left, count.total)
         countLabel.text = countText
+        countLabel.isHidden = false
         
         let state = InstapickAnalysisCellState(with: count)
         switch state {
         case .noOldAnalysis, .canNewAnalysis:
             countLabel.textColor = ColorConstants.textGrayColor
             purchaseView.isHidden = true
+            seeDetailsView.isHidden = false
 
         case .needPurchase:
             countLabel.textColor = ColorConstants.darkRed
             purchaseView.isHidden = false
+            seeDetailsView.isHidden = true
         }
-        
-        isHiddenContent = false
     }
     
     // MARK: - Actions
