@@ -102,6 +102,7 @@ final class InstaPickRoutingService {
     private func configureViewController() {
         guard let successHandler = successHandler else { return }
         //TODO: - add controllers
+        ///all string constants is temporary solution (waiting new controllers)
         let title = "Insta Pick"
         var message: String = "You might to open InstaPick PopUp"
         
