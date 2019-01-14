@@ -711,7 +711,7 @@
 "leave_premium_premium_description" = "Poți beneficia de toate avantajele lifebox cu pachetul Premium.";
 "leave_premium_cancel_description" = "Nu vei putea beneficia de avantajele Premium, în cazul în care îți anulezi abonamentul";
 "feature_apple_cancel_text" = "Pentru anularea abonamentului, te rugăm să folosești iTunes & App Store din dispozitivul tău";
-"feature_slcm_cancel_text" = "Pentru a-ți anula pachetul, transmite un SMS la 2200, cu textul: “Lifebox Premium İptal”";
+"feature_slcm_cancel_text" = "Pentru a-ți anula pachetul, transmite un SMS la 2200, cu textul:  LIFEBOX PREMIUM IPTAL";
 "feature_google_cancel_text" = "Pentru anularea abonamentului, te rugăm să folosești Google Play Store din dispozitivul tău";
 "feature_free_of_charge_cancel_text" = "Pentru a ne informa de solicitarea ta, te rugăm să folosești meniul Cotactează-ne";
 "feature_lifecell_cancel_text" = "Odată ce ești utilizator lifecell, poți utiliza în continuare beneficiile Premium, gratuit ";
