@@ -101,7 +101,10 @@ final class InstaPickRoutingService {
     }
     
     private func configureViewController() {
-        guard let successHandler = successHandler else { return }
+        guard let successHandler = successHandler else {
+            UIApplication.showErrorAlert(message: "Success handler unexpected become nil.")
+            return
+        }
         //TODO: - add controllers
         ///all string constants is temporary solution (waiting new controllers)
         let title = "Insta Pick"
@@ -120,7 +123,10 @@ final class InstaPickRoutingService {
     }
     
     private func showError(with error: LocalizedError) {
-        guard let errorHandler = errorHandler else { return }
+        guard let errorHandler = errorHandler else {
+            UIApplication.showErrorAlert(message: "Error handler unexpected become nil.")
+            return
+        }
         errorHandler(error)
     }
 }
