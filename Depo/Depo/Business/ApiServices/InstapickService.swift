@@ -15,17 +15,16 @@ protocol InstaPickServiceDelegate: class {
     func didFinishAnalysis()
 }
 
-
+/// https://wiki.life.com.by/x/IjAWBQ
 protocol InstapickService: class {
     var delegates: MulticastDelegate<InstaPickServiceDelegate> {get}
     
     func getThumbnails(handler: @escaping (ResponseResult<[URL]>) -> Void)
-    func getAnalysisCount(handler: @escaping (ResponseResult<InstapickAnalysisCount>) -> Void)
-    func startAnalysis(ids: [String], handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
+    func getAnalyzesCount(handler: @escaping (ResponseResult<InstapickAnalyzesCount>) -> Void)
+    func startAnalyzes(ids: [String], handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
+    func removeAnalyzes(ids: [String], handler: @escaping (ResponseResult<Void>) -> Void)
     func getAnalyzeHistory(offset: Int, limit: Int, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
-    
-    //TODO: add real
-    func removeAnalysis()
+    func getAnalyzeDetails(id: String, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
 }
 
 
@@ -64,14 +63,7 @@ final class InstapickServiceImpl: InstapickService {
         }
     }
     
-    func removeAnalysis() {
-        //TODO: add in the callback
-        delegates.invoke { delegate in
-            delegate.didRemoveAnalysis()
-        }
-    }
-    
-    func startAnalysis(ids: [String], handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void) {
+    func startAnalyzes(ids: [String], handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void) {
         sessionManager
             .request(RouteRequests.Instapick.analyze,
                      method: .post,
@@ -113,14 +105,37 @@ final class InstapickServiceImpl: InstapickService {
         }
     }
     
-    func getAnalysisCount(handler: @escaping (ResponseResult<InstapickAnalysisCount>) -> Void) {
+    func removeAnalyzes(ids: [String], handler: @escaping (ResponseResult<Void>) -> Void) {
         sessionManager
-            .request(RouteRequests.Instapick.analysisCount)
+            .request(RouteRequests.Instapick.removeAnalyzes,
+                     method: .delete,
+                     parameters: ids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseData { [weak self] response in
+                
+                /// server mock
+                handler(.success(()))
+                
+                /// !!! server logic. don't delete
+                //switch response.result {
+                //case .success(_):
+                //    handler(.success(()))
+                //case .failure(let error):
+                //    assertionFailure(error.localizedDescription)
+                //    handler(.failed(error))
+                //}
+        }
+    }
+    
+    func getAnalyzesCount(handler: @escaping (ResponseResult<InstapickAnalyzesCount>) -> Void) {
+        sessionManager
+            .request(RouteRequests.Instapick.analyzesCount)
             .customValidate()
             .responseData { response in
                 
                 /// server mock
-                let results = InstapickAnalysisCount(left: 2, total: 32)
+                let results = InstapickAnalyzesCount(left: 2, total: 32)
                 handler(.success(results))
                 
                 /// !!! server logic. don't delete
@@ -160,7 +175,7 @@ final class InstapickServiceImpl: InstapickService {
                 
                 let item1 = SearchItemResponse()
                 item1.createdDate = Date()
-                item1.id = 121212121212212
+                item1.id = 123
                 item1.uuid = UUID().uuidString
                 item1.metadata = BaseMetaData()
                 item1.metadata?.smalURl = URL(string: "https://via.placeholder.com/100/FFFF00")
@@ -169,7 +184,7 @@ final class InstapickServiceImpl: InstapickService {
                 
                 let item2 = SearchItemResponse()
                 item2.createdDate = Date()
-                item2.id = 121212121212212
+                item2.id = 456
                 item2.uuid = UUID().uuidString
                 item2.metadata = BaseMetaData()
                 item2.metadata?.smalURl = URL(string: "https://via.placeholder.com/100/FF0000")
@@ -207,9 +222,59 @@ final class InstapickServiceImpl: InstapickService {
                 }
         }
     }
+    
+    func getAnalyzeDetails(id: String, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void) {
+        sessionManager
+            .request(RouteRequests.Instapick.analyzeDetails,
+                     encoding: id)
+            .customValidate()
+            .responseData { [weak self] response in
+                
+                let item1 = SearchItemResponse()
+                item1.createdDate = Date()
+                item1.id = 123
+                item1.uuid = UUID().uuidString
+                item1.metadata = BaseMetaData()
+                item1.metadata?.smalURl = URL(string: "https://via.placeholder.com/100/FFFF00")
+                item1.metadata?.mediumUrl = URL(string: "https://via.placeholder.com/300/FFFF00")
+                item1.metadata?.largeUrl = URL(string: "https://via.placeholder.com/500/FFFF00")
+                
+                let item2 = SearchItemResponse()
+                item2.createdDate = Date()
+                item2.id = 456
+                item2.uuid = UUID().uuidString
+                item2.metadata = BaseMetaData()
+                item2.metadata?.smalURl = URL(string: "https://via.placeholder.com/100/FF0000")
+                item2.metadata?.mediumUrl = URL(string: "https://via.placeholder.com/300/FF0000")
+                item2.metadata?.largeUrl = URL(string: "https://via.placeholder.com/500/FF0000")
+                
+                let results = [
+                    InstapickAnalyze(requestIdentifier: "123", rank: 5, hashTags: ["#hashTags1", "#hashTags2"], fileInfo: item1, photoCount: 1, startedDate: Date.distantPast),
+                    InstapickAnalyze(requestIdentifier: "567", rank: 4, hashTags: ["#hashTags3", "#hashTags4"], fileInfo: item2, photoCount: 1, startedDate: Date.distantPast)
+                ]
+                handler(.success(results))
+                
+                //switch response.result {
+                //case .success(let data):
+                //    let json = JSON(data: data)
+                //
+                //    guard let results = json.array?.flatMap({ InstapickAnalyze(json: $0) }) else {
+                //        let error = CustomErrors.serverError("\(RouteRequests.Instapick.analyzeHistory) not [InstapickAnalyze] in response")
+                //        assertionFailure(error.localizedDescription)
+                //        handler(.failed(error))
+                //        return
+                //    }
+                //
+                //    handler(.success(results))
+                //case .failure(let error):
+                //    assertionFailure(error.localizedDescription)
+                //    handler(.failed(error))
+                //}
+        }
+    }
 }
 
-final class InstapickAnalysisCount {
+final class InstapickAnalyzesCount {
     let left: Int
     let total: Int
     
@@ -231,7 +296,7 @@ final class InstapickAnalysisCount {
     }
 }
 
-final class InstapickAnalyze: Equatable {
+final class InstapickAnalyze {
     let requestIdentifier: String
     let rank: Float
     let hashTags: [String]
@@ -268,10 +333,6 @@ final class InstapickAnalyze: Equatable {
         
         self.photoCount = json["photoCount"].int
         self.startedDate = json["startedDate"].date
-    }
-    
-    static func == (left: InstapickAnalyze, right: InstapickAnalyze) -> Bool {
-        return left.requestIdentifier == right.requestIdentifier
     }
 }
 

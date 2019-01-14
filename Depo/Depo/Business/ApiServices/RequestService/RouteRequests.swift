@@ -199,9 +199,11 @@ struct RouteRequests {
     enum Instapick {
         static let instapickApi = baseUrl +/ "instapick"
         static let thumbnails = instapickApi +/ "thumbnails"
-        static let analysisCount = instapickApi +/ "getCount"
+        static let analyzesCount = instapickApi +/ "getCount"
         static let analyze = instapickApi +/ "analyze"
         static let analyzeHistory = instapickApi +/ "getAnalyzeHistory"
+        static let analyzeDetails = instapickApi +/ "getAnalyzeDetails"
+        static let removeAnalyzes = instapickApi +/ "deleteAnalyze"
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"

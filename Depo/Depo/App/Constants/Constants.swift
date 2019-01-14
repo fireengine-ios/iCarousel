@@ -1022,4 +1022,15 @@ struct TextConstants {
     static let analyzeHistoryAnalyzeCount = NSLocalizedString("analyze_history_analyze_count", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let analyzeHistoryAnalyseButton = NSLocalizedString("analyze_with_instapick", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let analyzeHistoryPhotosCount = NSLocalizedString("analyze_history_photos_count", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    //MARK: - InstaPickCard
+    static let instaPickUsedBeforeTitleLabel = NSLocalizedString("used_before_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickNoUsedBeforeTitleLabel = NSLocalizedString("no_used_before_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickNoAnalysisTitleLabel = NSLocalizedString("no_analysis_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let instaPickUsedBeforeDetailLabel = NSLocalizedString("used_before_detail_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickNoUsedBeforeDetailLabel = NSLocalizedString("no_used_before_detail_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickNoAnalysisDetailLabel = NSLocalizedString("no_analysis_detail_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let instaPickButtonHasAnalysis = NSLocalizedString("instapick_button_has_analysis", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickButtonNoAnalysis = NSLocalizedString("Purchase", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
