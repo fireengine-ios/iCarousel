@@ -180,7 +180,7 @@ final class InstapickServiceImpl: InstapickService {
                 
                 let item1 = SearchItemResponse()
                 item1.createdDate = Date()
-                item1.id = 121212121212212
+                item1.id = 123
                 item1.uuid = UUID().uuidString
                 item1.metadata = BaseMetaData()
                 item1.metadata?.smalURl = URL(string: "https://via.placeholder.com/100/FFFF00")
@@ -189,7 +189,7 @@ final class InstapickServiceImpl: InstapickService {
                 
                 let item2 = SearchItemResponse()
                 item2.createdDate = Date()
-                item2.id = 121212121212212
+                item2.id = 456
                 item2.uuid = UUID().uuidString
                 item2.metadata = BaseMetaData()
                 item2.metadata?.smalURl = URL(string: "https://via.placeholder.com/100/FF0000")
@@ -237,7 +237,7 @@ final class InstapickServiceImpl: InstapickService {
                 
                 let item1 = SearchItemResponse()
                 item1.createdDate = Date()
-                item1.id = 121212121212212
+                item1.id = 123
                 item1.uuid = UUID().uuidString
                 item1.metadata = BaseMetaData()
                 item1.metadata?.smalURl = URL(string: "https://via.placeholder.com/100/FFFF00")
@@ -246,7 +246,7 @@ final class InstapickServiceImpl: InstapickService {
                 
                 let item2 = SearchItemResponse()
                 item2.createdDate = Date()
-                item2.id = 121212121212212
+                item2.id = 456
                 item2.uuid = UUID().uuidString
                 item2.metadata = BaseMetaData()
                 item2.metadata?.smalURl = URL(string: "https://via.placeholder.com/100/FF0000")
