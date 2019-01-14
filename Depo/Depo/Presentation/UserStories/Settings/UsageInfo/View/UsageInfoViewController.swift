@@ -59,6 +59,7 @@ class UsageInfoViewController: ViewController {
         super.viewDidLoad()
         setTitle(withString: TextConstants.settingsViewCellUsageInfo)
         setupTableView()
+        setupDesign()
         output.viewIsReady()
     }
     
@@ -70,6 +71,10 @@ class UsageInfoViewController: ViewController {
     
     private func setupTableView() {
         tableView.register(nibCell: InternetDataUsageCell.self)
+    }
+    
+    private func setupDesign() {
+        upgradeButton.titleLabel?.adjustsFontSizeToFitWidth()
     }
     
     @IBAction func actionUpgradeButton(_ sender: UIButton) {

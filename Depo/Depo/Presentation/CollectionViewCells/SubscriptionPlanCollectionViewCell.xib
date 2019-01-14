@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -212,11 +212,10 @@
                                             <action selector="actionUpgradeButtonClicked:" destination="F33-PF-zlW" eventType="touchUpInside" id="Emc-Kv-5Zk"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evq-vg-PZs">
-                                        <rect key="frame" x="28" y="0.0" width="84" height="30"/>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evq-vg-PZs" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
+                                        <rect key="frame" x="43" y="0.0" width="54" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="84" id="KTQ-Jg-zh6"/>
                                             <constraint firstAttribute="height" constant="30" id="deh-nD-hoF"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="14"/>
@@ -256,12 +255,14 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="evq-vg-PZs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tVE-qx-jLH" secondAttribute="leading" constant="8" id="13i-7Y-LRI"/>
                                     <constraint firstItem="ZBi-AK-SBO" firstAttribute="centerY" secondItem="tVE-qx-jLH" secondAttribute="centerY" id="AcA-J7-bGG"/>
                                     <constraint firstItem="evq-vg-PZs" firstAttribute="centerY" secondItem="tVE-qx-jLH" secondAttribute="centerY" id="CCq-CH-IK0"/>
                                     <constraint firstItem="evq-vg-PZs" firstAttribute="centerX" secondItem="tVE-qx-jLH" secondAttribute="centerX" id="Uye-Ia-Fpc"/>
                                     <constraint firstAttribute="height" constant="30" id="V5C-a6-4Cf"/>
                                     <constraint firstItem="6nz-Ll-Gfk" firstAttribute="centerY" secondItem="tVE-qx-jLH" secondAttribute="centerY" id="VdO-RJ-5EI"/>
                                     <constraint firstItem="6nz-Ll-Gfk" firstAttribute="centerX" secondItem="tVE-qx-jLH" secondAttribute="centerX" id="W1n-0D-AYu"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="evq-vg-PZs" secondAttribute="trailing" constant="8" id="bQN-j1-vAG"/>
                                     <constraint firstItem="ZBi-AK-SBO" firstAttribute="centerX" secondItem="tVE-qx-jLH" secondAttribute="centerX" id="qZt-cf-rIu"/>
                                 </constraints>
                             </view>

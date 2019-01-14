@@ -63,11 +63,6 @@ final class InstapickServiceImpl: InstapickService {
         }
     }
     
-    func removeAnalyzes() {
-        //TODO: add in the callback
-
-    }
-    
     func startAnalyzes(ids: [String], handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void) {
         sessionManager
             .request(RouteRequests.Instapick.analyze,
