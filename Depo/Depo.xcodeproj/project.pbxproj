@@ -2523,12 +2523,23 @@
 		920DC89B21CBABBB009777AD /* LeavePremiumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2268EB821A688DB002F2611 /* LeavePremiumViewController.xib */; };
 		921423E321B51E5300B44574 /* PackageModelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E221B51E5300B44574 /* PackageModelResponse.swift */; };
 		921423EA21B562D500B44574 /* AuthoritySingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E921B562D500B44574 /* AuthoritySingleton.swift */; };
+		921EC07A21E5ED30000A0860 /* InstaPickCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921EC07921E5ED30000A0860 /* InstaPickCard.swift */; };
+		921EC07C21E5ED55000A0860 /* InstaPickCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 921EC07B21E5ED55000A0860 /* InstaPickCard.xib */; };
+		92203C3621E9E0CB00926469 /* InstaPickRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */; };
+		92203C3721EA0E8800926469 /* InstaPickRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */; };
 		9224936821BC14890086CB6A /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
 		9240C04B21B805A4005E710C /* PremiumFooterCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */; };
 		9240C04C21B805A4005E710C /* PremiumFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */; };
 		9240C04D21B805A8005E710C /* PremiumFooterCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */; };
 		9240C04E21B805AF005E710C /* PremiumFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */; };
+		925B96D721E79BB000B39415 /* RadialGradientableLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D521E79BAF00B39415 /* RadialGradientableLayer.swift */; };
+		925B96D821E79BB000B39415 /* RadialGradientableLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D521E79BAF00B39415 /* RadialGradientableLayer.swift */; };
+		925B96D921E79BB000B39415 /* RadialGradientableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D621E79BAF00B39415 /* RadialGradientableView.swift */; };
+		925B96DA21E79BB000B39415 /* RadialGradientableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B96D621E79BAF00B39415 /* RadialGradientableView.swift */; };
+		927E508621E8AADA00E44CC0 /* InstaPickCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921EC07921E5ED30000A0860 /* InstaPickCard.swift */; };
+		927E508721E8AAE600E44CC0 /* InstaPickCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 921EC07B21E5ED55000A0860 /* InstaPickCard.xib */; };
 		92A7460021B91A4F00386C37 /* PackageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A745FF21B91A4F00386C37 /* PackageService.swift */; };
+		92E74B6D21E4BF780057E0B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6FBFBB1FB2DC3F008FC18C /* AppDelegate.swift */; };
 		93BB369B3341CED27FDF2EC0 /* PhotoVideoDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264BDDE222D06B0A452F4DF7 /* PhotoVideoDetailRouter.swift */; };
 		93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2FD9ED30E838052B7A7D71 /* BaseFilesGreedRouter.swift */; };
 		956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */; };
@@ -5163,9 +5174,14 @@
 		92004B6E21AD19B300582C45 /* MyStorageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageInteractor.swift; sourceTree = "<group>"; };
 		921423E221B51E5300B44574 /* PackageModelResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageModelResponse.swift; sourceTree = "<group>"; };
 		921423E921B562D500B44574 /* AuthoritySingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthoritySingleton.swift; sourceTree = "<group>"; };
+		921EC07921E5ED30000A0860 /* InstaPickCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCard.swift; sourceTree = "<group>"; };
+		921EC07B21E5ED55000A0860 /* InstaPickCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickCard.xib; sourceTree = "<group>"; };
+		92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickRoutingService.swift; sourceTree = "<group>"; };
 		9224936721BC14890086CB6A /* AuthorityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorityType.swift; sourceTree = "<group>"; };
 		9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumFooterCollectionReusableView.swift; sourceTree = "<group>"; };
 		9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumFooterCollectionReusableView.xib; sourceTree = "<group>"; };
+		925B96D521E79BAF00B39415 /* RadialGradientableLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadialGradientableLayer.swift; sourceTree = "<group>"; };
+		925B96D621E79BAF00B39415 /* RadialGradientableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadialGradientableView.swift; sourceTree = "<group>"; };
 		92A745FF21B91A4F00386C37 /* PackageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageService.swift; sourceTree = "<group>"; };
 		92C1BED0751734B73B9583DD /* SettingsViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewOutput.swift; sourceTree = "<group>"; };
 		9308A9A544DF5D8923C800E0 /* AlbumsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumsPresenter.swift; sourceTree = "<group>"; };
@@ -7533,6 +7549,7 @@
 			isa = PBXGroup;
 			children = (
 				B522E92121E8CAEC00C4958E /* InstaPickProgressView */,
+				925B96D421E79BAF00B39415 /* RadialGradientableView */,
 				9240C04821B80520005E710C /* PremiumFooterView */,
 				A2268EBA21A68B95002F2611 /* LeavePremiumView */,
 				4A11F55B21A58DB900D6AADC /* PackageInfoView */,
@@ -8268,6 +8285,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				92203C3421E9E0A300926469 /* InstaPickRoutingService */,
 				A222450D21D3C53A006EB432 /* PremiumService */,
 				92A745FE21B91A3C00386C37 /* PackageService */,
 				B5CDB34321788536006CFA50 /* TurkcellUpdaterService */,
@@ -8527,6 +8545,7 @@
 		7CE825B81F823CAD00356AD2 /* PopUpSubViews */ = {
 			isa = PBXGroup;
 			children = (
+				921EC07821E5ED05000A0860 /* InstaPickCard */,
 				4A02B7FC21A0549700635694 /* PremiumInfoCard */,
 				B5B6B14E2170A01E00463260 /* PrepareToQuickScroll */,
 				7CD92DB6207509F000010BFA /* AnimationCard */,
@@ -10064,6 +10083,23 @@
 			path = AuthoritySingleton;
 			sourceTree = "<group>";
 		};
+		921EC07821E5ED05000A0860 /* InstaPickCard */ = {
+			isa = PBXGroup;
+			children = (
+				921EC07921E5ED30000A0860 /* InstaPickCard.swift */,
+				921EC07B21E5ED55000A0860 /* InstaPickCard.xib */,
+			);
+			path = InstaPickCard;
+			sourceTree = "<group>";
+		};
+		92203C3421E9E0A300926469 /* InstaPickRoutingService */ = {
+			isa = PBXGroup;
+			children = (
+				92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */,
+			);
+			path = InstaPickRoutingService;
+			sourceTree = "<group>";
+		};
 		9240C04821B80520005E710C /* PremiumFooterView */ = {
 			isa = PBXGroup;
 			children = (
@@ -10071,6 +10107,15 @@
 				9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */,
 			);
 			path = PremiumFooterView;
+			sourceTree = "<group>";
+		};
+		925B96D421E79BAF00B39415 /* RadialGradientableView */ = {
+			isa = PBXGroup;
+			children = (
+				925B96D521E79BAF00B39415 /* RadialGradientableLayer.swift */,
+				925B96D621E79BAF00B39415 /* RadialGradientableView.swift */,
+			);
+			path = RadialGradientableView;
 			sourceTree = "<group>";
 		};
 		92A745FE21B91A3C00386C37 /* PackageService */ = {
@@ -13417,6 +13462,7 @@
 				8C0E903F1FDEBDFF00789C91 /* AlbumCell.xib in Resources */,
 				8C06B1D32008AD72003D8E05 /* TOCropViewController.nib in Resources */,
 				8C06B0352008AD71003D8E05 /* Orta.png in Resources */,
+				927E508721E8AAE600E44CC0 /* InstaPickCard.xib in Resources */,
 				8C0E90401FDEBDFF00789C91 /* TurkcellSaturaMedIta.ttf in Resources */,
 				8C06AF032008AD70003D8E05 /* caps2_selected@2x.png in Resources */,
 				8C06AEE32008AD70003D8E05 /* bottomleft@3x.png in Resources */,
@@ -14100,6 +14146,7 @@
 				A20CDBA0219D60B800CA9A67 /* PremiumView.xib in Resources */,
 				8C06AF422008AD70003D8E05 /* crop@3x.png in Resources */,
 				8C06AC1A20066641003D8E05 /* TurkcellSecurityViewController.xib in Resources */,
+				921EC07C21E5ED55000A0860 /* InstaPickCard.xib in Resources */,
 				8C06AF102008AD70003D8E05 /* checkbox_secili@2x.png in Resources */,
 				4A9F8E4E2087546500622A6C /* PeriodicContactSyncViewController.xib in Resources */,
 				8C6EF8911F348B77002AC795 /* EditinglBar.xib in Resources */,
@@ -14820,6 +14867,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92E74B6D21E4BF780057E0B9 /* AppDelegate.swift in Sources */,
 				78B2D34D204AA5F500D096DC /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -15242,6 +15290,7 @@
 				8C0E8DB21FDEBDFF00789C91 /* RegistrationInteractorOutput.swift in Sources */,
 				B56FBB3E2122C9B9004F4A59 /* TermsOfUseViewOutput.swift in Sources */,
 				8C0E8DB31FDEBDFF00789C91 /* ArrayDataSourceForCollectionView.swift in Sources */,
+				927E508621E8AADA00E44CC0 /* InstaPickCard.swift in Sources */,
 				8C0E8DB41FDEBDFF00789C91 /* CreateStoryPhotosOrderInteractor.swift in Sources */,
 				8C0E8DB51FDEBDFF00789C91 /* ImportPhotosInteractorOutput.swift in Sources */,
 				8C0E8DB61FDEBDFF00789C91 /* LoginPhoneMailCell.swift in Sources */,
@@ -15572,6 +15621,7 @@
 				8C0E8ED71FDEBDFF00789C91 /* CollectionViewStoryReorderView.swift in Sources */,
 				92004B6D21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
 				CED4B02E2018594700D06CA9 /* HomeCardResponse.swift in Sources */,
+				92203C3721EA0E8800926469 /* InstaPickRoutingService.swift in Sources */,
 				8C0E8ED81FDEBDFF00789C91 /* SearchViewController.swift in Sources */,
 				8C0E8ED91FDEBDFF00789C91 /* BasicCollectionMultiFileCell.swift in Sources */,
 				8C0E8EDA1FDEBDFF00789C91 /* WrapItemFileService.swift in Sources */,
@@ -15654,6 +15704,7 @@
 				8C0E8F101FDEBDFF00789C91 /* PackagesInteractorInput.swift in Sources */,
 				8C0E8F111FDEBDFF00789C91 /* PrintModuleConfigurator.swift in Sources */,
 				92004B5821AD11EF00582C45 /* MyStorageViewOutput.swift in Sources */,
+				925B96DA21E79BB000B39415 /* RadialGradientableView.swift in Sources */,
 				486F7B5B208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift in Sources */,
 				8C06AC0F20066641003D8E05 /* TurkcellSecurityInteractorIO.swift in Sources */,
 				8C0E8F121FDEBDFF00789C91 /* SyncContactsRouterInput.swift in Sources */,
@@ -15705,6 +15756,7 @@
 				9808A062206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */,
 				8C0E8F331FDEBDFF00789C91 /* SplashViewController.swift in Sources */,
 				8C0E8F341FDEBDFF00789C91 /* SplashModuleInput.swift in Sources */,
+				925B96D821E79BB000B39415 /* RadialGradientableLayer.swift in Sources */,
 				8C0E8F351FDEBDFF00789C91 /* MoreFilesActionsPresenter.swift in Sources */,
 				8C0E8F361FDEBDFF00789C91 /* SplashPresenter.swift in Sources */,
 				8C0B91AE20170ECA00A5BA81 /* ManageContactsInteractorOutput.swift in Sources */,
@@ -16622,6 +16674,7 @@
 				CE51ACF51EF90853005DCEE0 /* PhoneVereficationInitializer.swift in Sources */,
 				92004B6621AD18FE00582C45 /* MyStoragePresenter.swift in Sources */,
 				CE95ED571F516736002F923A /* HelpAndSupportViewController.swift in Sources */,
+				925B96D921E79BB000B39415 /* RadialGradientableView.swift in Sources */,
 				8C77869D1F3F38EF005CB432 /* VisualMusicPlayerConfigurator.swift in Sources */,
 				CE51ACF61EF90853005DCEE0 /* ForgotPasswordViewInput.swift in Sources */,
 				CEACBEA51F6C1120003BE328 /* ActivityTimelineTableBackView.swift in Sources */,
@@ -16749,6 +16802,7 @@
 				B56FBB222122C3E7004F4A59 /* TermsOfUseConfigurator.swift in Sources */,
 				CE4516A91F7D2EF1008B1F9A /* ServerStatusError.swift in Sources */,
 				CE4F4DC01F14AD2A00EF1F0C /* BaseRequestService.swift in Sources */,
+				921EC07A21E5ED30000A0860 /* InstaPickCard.swift in Sources */,
 				4A56D5CD202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */,
 				7859299A20060E94003F8AB3 /* ManageContactsInteractorInput.swift in Sources */,
 				4AC68930202C5153003400D0 /* FaceImageAddNameViewOutput.swift in Sources */,
@@ -16944,6 +16998,7 @@
 				44A9155A999E7CF45CED922A /* SplashRouterInput.swift in Sources */,
 				D5AAB0E3366C42E757055E8C /* SplashRouter.swift in Sources */,
 				CE246A031F3C5B5E008DF705 /* UploadService.swift in Sources */,
+				925B96D721E79BB000B39415 /* RadialGradientableLayer.swift in Sources */,
 				8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */,
 				53794AC45ECB88862D21B980 /* SplashConfigurator.swift in Sources */,
 				D47863F91F3F18FA00EFDC6D /* UsageInfoRouterInput.swift in Sources */,
@@ -16978,6 +17033,7 @@
 				FA793D822018725400A02B46 /* PeopleService.swift in Sources */,
 				D47863F81F3F18FA00EFDC6D /* UsageInfoRouter.swift in Sources */,
 				CEF371A82088778D007AD36E /* AppConfigurator.swift in Sources */,
+				92203C3621E9E0CB00926469 /* InstaPickRoutingService.swift in Sources */,
 				8C11C42E1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift in Sources */,
 				CEDA44C5207B8ADF00E653DD /* BackButton.swift in Sources */,
 				ACB080CC00E036849D63FBAD /* FileInfoConfigurator.swift in Sources */,

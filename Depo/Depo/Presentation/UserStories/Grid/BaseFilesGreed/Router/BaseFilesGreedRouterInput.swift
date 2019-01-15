@@ -19,4 +19,6 @@ protocol BaseFilesGreedRouterInput {
     func showSearchScreen(output: UIViewController?)
 
     func showUpload()
+    
+    func openNeededInstaPick(viewController: UIViewController)
 }

@@ -55,8 +55,9 @@ final class HomeCardResponse : Equatable {
             return .animationCard
         case .launchCampaign:
             return .launchCampaign
+        case .instaPick:
+            return .instaPick
         }
-        
     }
 }
 
@@ -89,4 +90,5 @@ enum HomeCardTypes: String {
     //case rating = "RATING"
     case animation = "ANIMATION"
     case launchCampaign = "LAUNCH_CAMPAIGN"
+    case instaPick = "INSTAGRAM_LIKE"
 }
