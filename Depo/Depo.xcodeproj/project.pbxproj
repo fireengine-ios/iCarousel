@@ -2543,6 +2543,8 @@
 		956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */; };
 		97DC05B9B3DCF2CBAE060AF4 /* SyncContactsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC08749C42535A16BE62A26 /* SyncContactsInteractorOutput.swift */; };
 		97E245036F6119CDFA534B88 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD920B02D55872C2278EC4BE /* SplashViewController.swift */; };
+		980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */; };
+		980488D521EDC983004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */; };
 		9807260D203468D9004E1505 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807260C203468D9004E1505 /* SearchDataSource.swift */; };
 		9807260E203468D9004E1505 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807260C203468D9004E1505 /* SearchDataSource.swift */; };
 		98072619203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */; };
@@ -5199,6 +5201,7 @@
 		95383081F9605943122914E0 /* ForgotPasswordInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractorInput.swift; sourceTree = "<group>"; };
 		96158F7F1AB74A2D8C67DADA /* BaseFilesGreedInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractorInput.swift; sourceTree = "<group>"; };
 		9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryTabBarPresenter.swift; sourceTree = "<group>"; };
 		9807260C203468D9004E1505 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionTableViewCell.xib; sourceTree = "<group>"; };
 		9807261B203C340B004E1505 /* SuggestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTableViewCell.swift; sourceTree = "<group>"; };
@@ -10203,6 +10206,7 @@
 				98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */,
 				984A515321E87883004525F5 /* AnalyzeHistoryDesigner.swift */,
 				984A515621E87A4F004525F5 /* AnalyzeHistoryDisplayManager.swift */,
+				980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */,
 			);
 			path = AnalyzeHistory;
 			sourceTree = "<group>";
@@ -15224,6 +15228,7 @@
 				8C0E8D621FDEBDFF00789C91 /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				C62239BD2049774B0043ED44 /* PeopleAlbumSliderInteractor.swift in Sources */,
 				8C0E8D641FDEBDFF00789C91 /* BottomSelectionTabBarViewController.swift in Sources */,
+				980488D521EDC983004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
 				8C0E8D651FDEBDFF00789C91 /* BaseDataSourceForCollectionView.swift in Sources */,
 				8C0E8D661FDEBDFF00789C91 /* AutoSyncViewController.swift in Sources */,
 				8CD2B3B41FE7B42500280547 /* AutoUploadIsOffPopUp.swift in Sources */,
@@ -16457,6 +16462,7 @@
 				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
 				4A0AC1562087395E00032CC7 /* PeriodicContactSyncViewOutput.swift in Sources */,
 				4A56D5BB202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
+				980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
 				78E8E2AE2023191800A979AB /* FaceImagePhotosRouter.swift in Sources */,
 				2BA37C38202837B400660394 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
 				7C121F00208742A800AA585F /* TokenKeychainStorage.swift in Sources */,

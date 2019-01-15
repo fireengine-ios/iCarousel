@@ -46,6 +46,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     func setupCollectionView(collectionView: UICollectionView) {
         self.collectionView = collectionView
         
+        collectionView.alwaysBounceVertical = true
         collectionView.register(nibCell: CollectionViewCellForInstapickPhoto.self)
         collectionView.register(nibCell: CollectionViewCellForInstapickAnalysis.self)
         collectionView.dataSource = self
@@ -61,14 +62,17 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     }
     
     func appendHistoryItems(_ newItems: [InstapickAnalyze]) {
+        guard !newItems.isEmpty else {
+            isPaginationDidEnd = true
+            return
+        }
+        
         if items.isEmpty {
             items = newItems
             collectionView.reloadData()
         } else {
             mergeItems(with: newItems)
         }
-
-        isPaginationDidEnd = newItems.isEmpty
     }
     
     private func mergeItems(with newItems: [InstapickAnalyze]) {
@@ -88,7 +92,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         })
     }
     
-    func deleteSelectedItems() {
+    func deleteSelectedItems(completion: VoidHandler?) {
         var deleteIndexPaths = [IndexPath]()
         selectedItems.forEach { item in
             if let index = self.items.index(of: item) {
@@ -102,7 +106,10 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         
         collectionView.performBatchUpdates({
             collectionView.deleteItems(at: deleteIndexPaths)
-        })
+        }) { [weak self] _ in
+            self?.selectedItems.removeAll()
+            completion?()
+        }
     }
     
     func startSelection(with indexPath: IndexPath?) {
@@ -222,7 +229,7 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegateFlo
 
 // MARK: - InstapickAnalysisCellDelegate
 
-extension AnalyzeHistoryDataSourceForCollectionView: InstapickAnalysisCellDelegate {
+extension AnalyzeHistoryDataSourceForCollectionView: InstapickAnalysisCellDelegate, LBCellsDelegate {
     func onPurchase() {
         delegate?.onPurchase()
     }

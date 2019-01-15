@@ -75,13 +75,13 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
     @IBOutlet weak var purchaseButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.purchase, for: .normal)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
             newValue.clipsToBounds = true
             newValue.layer.cornerRadius = newValue.bounds.height * 0.5
             newValue.layer.borderColor = UIColor.white.cgColor
             newValue.layer.borderWidth = 1
             newValue.backgroundColor = .clear
-            newValue.tintColor = .white
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         }
     }
     
@@ -90,7 +90,7 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
     @IBOutlet weak var seeDetailsButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.seeDetails, for: .normal)
-            newValue.tintColor = UIColor.lrTealishTwo
+            newValue.setTitleColor(UIColor.lrTealishTwo, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         }
     }
@@ -106,11 +106,7 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
     // MARK: -
     
     override func awakeFromNib() {
-        super.awakeFromNib()
-    
         isHiddenContent = true
-        
-        contentView.backgroundColor = .white
     }
     
     func setup(with count: InstapickAnalyzesCount) {

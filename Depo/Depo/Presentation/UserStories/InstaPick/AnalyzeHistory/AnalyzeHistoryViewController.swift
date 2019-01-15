@@ -27,6 +27,11 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     private let rightButtonBox = CGRect(x: Device.winSize.width - 45, y: -15, width: 0, height: 0)
     
+    private var editingTabBar: BottomSelectionTabBarViewController?
+    private var bottomBarPresenter: BottomSelectionTabBarModuleInput?
+    private var bottomBarSettablePresenter = AnalyzeHistoryTabBarPresenter()
+    private let editingElements: [ElementTypes] = [.delete]
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -40,6 +45,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         super.viewWillAppear(animated)
         
         navigationBarWithGradientStyle()
+        editingTabBar?.view.layoutIfNeeded()
     }
     
     private func configure() {
@@ -49,11 +55,12 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         dataSource.delegate = self
         collectionView.contentInset.bottom = newAnalysisView.bounds.height
         
-        refresher.tintColor = ColorConstants.whiteColor
+        refresher.tintColor = .clear
         refresher.addTarget(self, action: #selector(reloadData), for: .valueChanged)
         collectionView.addSubview(refresher)
         
         configureNavBarActions()
+        configureBottomTabBar()
         setTitle(withString: TextConstants.analyzeHistoryTitle)
         
         cancelSelectionButton = UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
@@ -71,8 +78,17 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
-    private func startSelection() {
-        selectedItemsCountChange(with: 0)
+    private func configureBottomTabBar() {
+        let bottomBarConfig = EditingBarConfig(elementsConfig: editingElements, style: .default, tintColor: nil)
+        let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
+        let botvarBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig, settablePresenter: bottomBarSettablePresenter)
+        editingTabBar = botvarBarVC
+        bottomBarPresenter = bottomBarVCmodule.presenter
+        bottomBarSettablePresenter.setup(with: editingElements, delegate: self)
+    }
+    
+    private func startSelection(with count: Int) {
+        selectedItemsCountChange(with: count)
         navigationItem.leftBarButtonItem = cancelSelectionButton
         displayManager.applyConfiguration(.selection)
     }
@@ -81,18 +97,25 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         navigationItem.leftBarButtonItem = nil
         setTitle(withString: TextConstants.analyzeHistoryTitle)
         dataSource.cancelSelection()
-        displayManager.applyConfiguration(.initial)
+        bottomBarPresenter?.dismiss(animated: true)
+        displayManager.applyConfiguration(dataSource.isEmpty ? .empty : .initial)
     }
     
     private func selectedItemsCountChange(with count: Int) {
         navigationItem.title = "\(count) \(TextConstants.accessibilitySelected)"
+        
+        if count == 0 {
+            bottomBarPresenter?.dismiss(animated: true)
+        } else {
+            bottomBarPresenter?.show(animated: true, onView: view)
+        }
     }
     
     // MARK: - Actions
     
     @IBAction private func newAnalysisAction(_ sender: Any) {
         if dataSource.analysisCount.left > 0 {
-            //TODO: - New Analyze
+            //TODO: - Open New Analyze
         } else {
             let popup = PopUpController.with(title: TextConstants.analyzeHistoryPopupTitle,
                                              message: TextConstants.analyzeHistoryPopupMessage,
@@ -135,6 +158,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .select:
                 action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
                     self.dataSource.startSelection(with: nil)
+                    self.startSelection(with: 0)
                 })
             default:
                 action = nil
@@ -175,10 +199,27 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     // MARK: - Functions
     
     @objc private func reloadData() {
-        reloadCards()
+        showSpiner()
         page = 0
         dataSource.isPaginationDidEnd = false
-        loadNextHistoryPage()
+        
+        let group = DispatchGroup()
+        group.enter()
+        group.enter()
+        
+        loadNextHistoryPage {
+            group.leave()
+        }
+        
+        reloadCards {
+            group.leave()
+        }
+        
+        stopRefresher()
+        
+        group.notify(queue: .main) { [weak self] in
+            self?.hideSpiner()
+        }
     }
     
     private func stopRefresher() {
@@ -189,7 +230,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         }
     }
     
-    private func reloadCards() {
+    private func reloadCards(completion: VoidHandler? = nil) {
         instapickService.getAnalyzesCount { [weak self] result in
             guard let `self` = self else { return }
             
@@ -199,10 +240,12 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
             }
+            
+            completion?()
         }
     }
     
-    private func loadNextHistoryPage() {
+    private func loadNextHistoryPage(completion: VoidHandler? = nil) {
         instapickService.getAnalyzeHistory(offset: page, limit: 20) { [weak self] result in
             guard let `self` = self else { return }
             
@@ -221,6 +264,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
             }
+            
+            completion?()
         }
     }
     
@@ -232,7 +277,9 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    self.dataSource.deleteSelectedItems()
+                    self.dataSource.deleteSelectedItems(completion: {
+                        self.stopSelection()
+                    })
                 }
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
@@ -249,7 +296,7 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
     }
     
     func onLongPressInCell() {
-        startSelection()
+        startSelection(with: 1)
     }
     
     func onPurchase() {
@@ -262,5 +309,16 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
     
     func onUpdateSelectedItems(count: Int) {
         selectedItemsCountChange(with: count)
+    }
+}
+
+extension AnalyzeHistoryViewController: AnalyzeHistoryTabBarPresenterDelegate {
+    func bottomBarSelectedItem(_ item: ElementTypes) {
+        switch item {
+        case .delete:
+            deleteSelectedAnalyzes()
+        default:
+            break
+        }
     }
 }
