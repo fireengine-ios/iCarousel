@@ -12,7 +12,7 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     
     private let topView = UIView()
     private let contanerView = UIView()
-    let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
+    private let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
     
     private let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
@@ -36,32 +36,35 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         topView.backgroundColor = .white
         contanerView.backgroundColor = .white
         
+        segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
+        
         view.addSubview(topView)
         topView.addSubview(segmentedControl)
         view.addSubview(contanerView)
+        view.addSubview(transparentGradientView)
         
+        setupLayout()
+    }
+    
+    private func setupLayout() {
         topView.translatesAutoresizingMaskIntoConstraints = false
-        contanerView.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        
         topView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         topView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         let edgeOffset: CGFloat = 35
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: edgeOffset).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).isActive = true
         segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).isActive = true
         
+        contanerView.translatesAutoresizingMaskIntoConstraints = false
         contanerView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
         contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         contanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         contanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
-        
-        view.addSubview(transparentGradientView)
         let transparentGradientViewHeight: CGFloat = 100
         transparentGradientView.translatesAutoresizingMaskIntoConstraints = false
         transparentGradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
