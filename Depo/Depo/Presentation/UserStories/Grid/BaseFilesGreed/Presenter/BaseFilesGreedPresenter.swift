@@ -10,6 +10,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     lazy var player: MediaPlayer = factory.resolve()
     
+    private lazy var instaPickRoutingService = InstaPickRoutingService()
+    
     var dataSource: BaseDataSourceForCollectionView
     
     weak var view: BaseFilesGreedViewInput!
@@ -809,6 +811,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func sortType() -> MoreActionsConfig.ViewType {
         return type
+    }
+    
+    func openInstaPick() {
+        startAsyncOperation()
+        instaPickRoutingService.getViewController(success: { [weak self] vc in
+            self?.asyncOperationSucces()
+            self?.router.openNeededInstaPick(viewController: vc)
+        }) { [weak self] error in
+            self?.asyncOperationFail(errorMessage: error.localizedDescription)
+        }
     }
     
     // MARK: - BaseFilesGreedModuleOutput

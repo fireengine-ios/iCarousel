@@ -434,6 +434,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     self.interactor.delete(item: currentItems)
                     self.basePassingPresenter?.stopModeSelected()
                 })
+            case .instaPick:
+                action = UIAlertAction(title: TextConstants.newInstaPick, style: .default, handler: { _ in
+                    self.basePassingPresenter?.openInstaPick()
+                })
             }
             return action
         }

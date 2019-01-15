@@ -788,6 +788,8 @@
 "analyze_history_analyze_count" = "%ld of %ld";
 "analyze_with_instapick" = "Analyze With InstaPick";
 "analyze_history_photos_count" = "%d photos";
+/*InstaPick three dots*/
+"new_insta_pick" = "New InstaPick";
 "uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. We will keep your existing photos and videos along with new uploaded memories in high quality until 1st of March. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
 
 /*InstaPickCard*/
