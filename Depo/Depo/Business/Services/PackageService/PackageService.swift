@@ -104,11 +104,25 @@ final class PackageService {
     private func getOfferPeriod(for offer: Any) -> String? {
         var period: String?
         if let offer = offer as? PackageModelResponse, let periodString = offer.period {
-            period = periodString.lowercased()
+            period = localized(offerPeriod: periodString.lowercased())
         } else if let offer = offer as? SubscriptionPlanBaseResponse, let periodString = offer.subscriptionPlanPeriod {
-            period = periodString.lowercased()
+            period = localized(offerPeriod: periodString.lowercased()) 
         }
         return period
+    }
+    
+    private func localized(offerPeriod: String) -> String {
+        if offerPeriod.contains("year") {
+            return TextConstants.packagePeriodYear
+        } else if offerPeriod.contains("month") {
+            return TextConstants.packagePeriodMonth
+        } else if offerPeriod.contains("week") {
+            return TextConstants.packagePeriodWeek
+        } else if offerPeriod.contains("day") {
+            return TextConstants.packagePeriodDay
+        }
+        
+        return offerPeriod
     }
     
     private func getOfferPrice(for offer: Any) -> String? {
