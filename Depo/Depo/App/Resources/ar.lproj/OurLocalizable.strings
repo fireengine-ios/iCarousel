@@ -1,3 +1,4 @@
+
 "Welcome1Info" = "عِشْ لحظات حياتك ووثّقها ثم تذكّرها";
 "Welcome1SubInfo" = "اجمع الصور ومقاطع الفيديو والملفات في مكان واحد ألا وهو لايف بوكس! وتمكّن من الوصول إليها أينما كنت وفي أي وقت كان.";
 "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "خدمات المواقع معطلة في إعدادات الجهاز. إن أردت استعمال ميزة المزامنة في لايف بوكس، فعليك تمكين خدمات المواقع بالذهاب إلى إعدادات، ثم الخصوصية، ثم خدمات المواقع.";
@@ -142,8 +143,8 @@
 "Download is complete" = "اكتمل التنزيل";
 "Deleting is complete" = "اكتمل الحذف";
 "Downloading files" = "يتم تنزيل الملفات";
-"Uploading files over" = "انتهى تحميل الملفات";
-"Syncing files over" = "مزامنة الملفات باستعمال";
+"Uploading files over" = "انتهى تحميل الملفات%@";
+"Syncing files over" = " مزامنة الملفات باستعمال %@";
 "(%ld of %ld)" = "(%ld من %ld)";
 "You need to specify your language preference so that we can serve you better." = "يرجى تعيين تفضيلات اللغة حتى تصلك خدماتنا بشكل أفضل.";
 "Please type your message" = "يرجى كتابة رسالة";
@@ -568,7 +569,7 @@
 "Error occurred while accessing your contacts.\nPlease check your settings." = "حدث خطأ أثناء الوصول إلى جهات الاتصال الخاصة بك.";
 "Manage Contacts" = "إدارة جهات الاتصال";
 "Import fearture is totally free of charge and does not affect your internet package" = "ميزة الاستيراد مجانية ولا تؤثر في حزمة الإنترنت";
-"Your last backup was on %@" = "آخر نسخة احتياطية:@%";
+"Your last backup was on %@" = "آخر نسخة احتياطية: %@";
 "Contacts Sync" = "مزامنة جهات الاتصال";
 "Sort By" = "ترتيب حسب";
 "LifeboxLargePopUpTitle100" = "سعة تخزينك ممتلئة";
@@ -580,7 +581,7 @@
 "Lifebox can sync your contacts automatically." = "يمكن للايف بوكس مزامنة جهات الاتصال تلقائياً";
 "error_login" = "تحتاج إلى تسجيل الدخول إلى lifebox لتحميل الملفات";
 "uploading" = "جاري التحميل";
-"widgetBottomTitleLastSyncFormat" = "آخر تحميل:٪ @";
+"widgetBottomTitleLastSyncFormat" = "آخر تحميل:%@";
 "widgetBottomTitleNewerSyncronized" = "لا يتم أبدًا استخدام المزامنة التلقائية";
 "widgetTopTitleFinished" = "تم الانتهاء من المزامنة التلقائية";
 "widgetTopTitleInactive" = "المزامنة التلقائية غير نشطة";
@@ -628,8 +629,8 @@
 "LifeboxSmallPopUpCheckBoxTex" = "لا تظهر مرة أخرى";
 "LifeboxSmallPopUpFirstButtonText" = "موافق";
 "LifeboxSmallPopUpSecondButtonText" = "ترقية";
-"has_remained_lifebox_usage" = "٪ @ of٪ @ بقيت (فقط لاستخدام Lifebox)";
-"Renewal Date: %@" = "تاريخ التجديد: ٪@";
+"has_remained_lifebox_usage" = "%@ of %@ بقيت (فقط لاستخدام Lifebox)";
+"Renewal Date: %@" = "تاريخ التجديد: %@";
 "created" = "تم الإنشاء";
 "uploaded" = "تم التحميل";
 "updated" = "تم التحديث";
@@ -668,7 +669,7 @@
 "face_recognition_title" = "لرؤية جميع الوجوه في معرضك وإلغاء قفل العديد من الميزات، احصل على العضوية البريميوم!";
 "places_title" = "لرؤية جميع الأماكن في معرضك وإلغاء قفل العديد من الميزات، احصل على العضوية البريميوم!";
 "things_title" = "لرؤية جميع الأشياء في معرضك وإلغاء قفل العديد من الميزات، احصل على العضوية البريميوم!";
-"use_following_premium_membership_advantages_with_only_additional_your_data_storage_package" = "استخدم مزايا العضوية البريميوم التالية مع٪ @ إضافية فقط لحزمة التخزين الخاصة بك";
+"use_following_premium_membership_advantages_with_only_additional_your_data_storage_package" = "استخدم مزايا العضوية البريميوم التالية مع%@ إضافية فقط لحزمة التخزين الخاصة بك";
 "month" = "شهر";
 "no_details_message" = "ننفذ طلبك، سنبلغكم عند اكتماله.";
 "please_try_again_later" = "حاول مرة أخرى من فضلك";
@@ -706,7 +707,7 @@
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@ / %@";
 "package_apple_cancel_text" = "لإلغاء حزمتك، يرجى استخدام قائمة iTunes & App Store على جهازك.";
-"package_slcm_cancel_text" = "لإلغاء حزمتك يمكنك إرسال رسالة نصية قصيرة إلى 2200 مكتوب بها  @% IPTAL LIFEBOX.";
+"package_slcm_cancel_text" = "لإلغاء حزمتك يمكنك إرسال رسالة نصية قصيرة إلى 2200 مكتوب بها  %@ IPTAL LIFEBOX.";
 "package_google_cancel_text" = "لإلغاء حزمتك، يرجى استخدام جوجل بلاي ستور.";
 "package_free_of_charge_cancel_text" = "يرجى استخدام قائمة الاتصال بنا لإبلاغنا بمعالجة طلبك.";
 "package_lifecell_cancel_text" = "يمكنك إرسال رسالة نصية قصيرة إلى 8080، وتكتب فيها “50VYKL” من أجل إلغاء لايف بوكس 50 جيجا، ولإلغاء لايف بوكس 500 جيجا أرسل رسالة مكتوب بها“500VYKL” ";
