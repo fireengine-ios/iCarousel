@@ -36,8 +36,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                                         showGridListButton: false,
                                                         defaultFilterState: screenFilterType)
 
-        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                  selectionModeTypes: [.createStory, .print, .deleteDeviceOriginal])
+        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .instaPick],
+                                                                   selectionModeTypes: [.createStory, .print, .deleteDeviceOriginal])
 
         let fileType: FileType = screenFilterType.convertToFileType()
 

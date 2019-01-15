@@ -79,5 +79,8 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         navigation.navigationBar.isHidden = false
         router.presentViewController(controller: navigation)
     }
-        
+    
+    func openNeededInstaPick(viewController: UIViewController) {
+        router.presentViewController(controller: viewController)
+    }
 }
