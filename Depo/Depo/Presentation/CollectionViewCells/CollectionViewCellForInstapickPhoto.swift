@@ -10,11 +10,11 @@ import UIKit
 
 final class CollectionViewCellForInstapickPhoto: BaseCollectionViewCell {
     
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var selectionImageView: UIImageView!
-    @IBOutlet weak var rankView: UIView!
-    @IBOutlet weak var rankLabel: UILabel!
-    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var selectionImageView: UIImageView!
+    @IBOutlet private weak var rankView: UIView!
+    @IBOutlet private weak var rankLabel: UILabel!
+    @IBOutlet private weak var countLabel: UILabel!
 
     private var cellImageManager: CellImageManager?
     private var uuid: String?

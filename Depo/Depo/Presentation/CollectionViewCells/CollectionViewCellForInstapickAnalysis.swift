@@ -31,14 +31,14 @@ private enum InstapickAnalysisCellState {
 
 final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
     
-    @IBOutlet weak var borderView: UIView! {
+    @IBOutlet private weak var borderView: UIView! {
         willSet {
             newValue.clipsToBounds = true
             newValue.layer.cornerRadius = 5
         }
     }
     
-    @IBOutlet weak var shadowView: UIView! {
+    @IBOutlet private weak var shadowView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 5
             newValue.layer.shadowColor = UIColor.black.cgColor
@@ -48,7 +48,7 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
         }
     }
     
-    @IBOutlet weak var analyzeLabel: UILabel! {
+    @IBOutlet private weak var analyzeLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.analyzeHistoryAnalyzeLeft
             newValue.textColor = ColorConstants.textGrayColor
@@ -63,16 +63,16 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
         }
     }
     
-    @IBOutlet weak var purchaseView: UIView!
+    @IBOutlet private weak var purchaseView: UIView!
     
-    @IBOutlet weak var purchaseBackImageView: UIImageView! {
+    @IBOutlet private weak var purchaseBackImageView: UIImageView! {
         willSet {
             newValue.contentMode = .scaleAspectFill
             newValue.image = UIImage(named: "purchase_back")
         }
     }
     
-    @IBOutlet weak var purchaseButton: UIButton! {
+    @IBOutlet private weak var purchaseButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.purchase, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
@@ -85,9 +85,9 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
         }
     }
     
-    @IBOutlet weak var seeDetailsView: UIView!
+    @IBOutlet private weak var seeDetailsView: UIView!
     
-    @IBOutlet weak var seeDetailsButton: UIButton! {
+    @IBOutlet private weak var seeDetailsButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.seeDetails, for: .normal)
             newValue.setTitleColor(UIColor.lrTealishTwo, for: .normal)

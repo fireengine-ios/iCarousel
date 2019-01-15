@@ -699,8 +699,7 @@ class RouterVC: NSObject {
     // MARK: Analyses History page
     
     func analyzesHistoryController() -> AnalyzeHistoryViewController {
-        let controller = AnalyzeHistoryViewController.initFromNib()
-        return controller
+        return AnalyzeHistoryViewController.initFromNib()
     }
     
     // MARK: Face Image Recognition Photos
