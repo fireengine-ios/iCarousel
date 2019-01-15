@@ -711,7 +711,7 @@
 "leave_premium_premium_description" = "Sie können alle erweiterten Funktionen von lifebox mit Ihrer Premium-Mitgliedschaft nutzen.";
 "leave_premium_cancel_description" = "Sie können von Premium-Privilegien nicht profitieren, wenn Sie Ihre Mitgliedschaft kündigen";
 "feature_apple_cancel_text" = "Um Ihr Paket zu stornieren, verwenden Sie bitte das iTunes & App Store-Menü auf Ihrem Gerät";
-"feature_slcm_cancel_text" = "Um Ihr Paket zu stornieren, senden Sie bitte eine SMS mit dem folgenden Text an die Nummer 2200: \"IPTAL LIFEBOX %@\"";
+"feature_slcm_cancel_text" = "Um Ihr Paket zu stornieren, senden Sie bitte eine SMS mit dem folgenden Text an die Nummer 2200:  LIFEBOX PREMIUM IPTAL";
 "feature_google_cancel_text" = "Um Ihr Paket zu stornieren, verwenden Sie bitte den Google Play Store";
 "feature_free_of_charge_cancel_text" = "Bitte verwenden Sie das Menü \"Kontaktieren Sie uns\", um uns Ihre Anfrage zu bearbeiten";
 "feature_lifecell_cancel_text" = "Sie können die Premium-Funktionen weiterhin kostenlos nutzen, da Sie ein lifeCell-Benutzer sind";
