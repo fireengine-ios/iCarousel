@@ -85,6 +85,14 @@ class RouterVC: NSObject {
         return navController
     }
     
+    func createRootNavigationControllerWithModalStyle(controller: UIViewController) -> UINavigationController {
+        let navController = NavigationController(rootViewController: controller)
+        navController.modalPresentationStyle = .overFullScreen
+        navController.modalTransitionStyle = .crossDissolve
+        navController.navigationBar.isTranslucent = false
+        return navController
+    }
+    
     func setNavigationController(controller: UIViewController?) {
         guard let window = UIApplication.shared.windows.first else {
             return
@@ -203,7 +211,7 @@ class RouterVC: NSObject {
             })
         }
     }
-    
+        
     func showSpiner() {
         if let lastViewController = getViewControllerForPresent() {
             lastViewController.showSpinerIncludeNavigatinBar()
