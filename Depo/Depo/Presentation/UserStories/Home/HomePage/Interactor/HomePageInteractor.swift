@@ -108,7 +108,7 @@ class HomePageInteractor: HomePageInteractorInput {
     }
     
     private func getInstaPickInfo() {
-        instapickService.getAnalysisCount { [weak self] result in
+        instapickService.getAnalyzesCount { [weak self] result in
             guard let `self` = self else { return }
             switch result {
             case .success(let response):

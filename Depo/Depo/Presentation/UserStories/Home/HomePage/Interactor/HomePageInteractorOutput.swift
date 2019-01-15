@@ -24,5 +24,5 @@ protocol HomePageInteractorOutput: class {
     
     func didOpenExpand()
     
-    func didObtainInstaPickStatus(status: AnalysisCount)
+    func didObtainInstaPickStatus(status: InstapickAnalyzesCount)
 }
