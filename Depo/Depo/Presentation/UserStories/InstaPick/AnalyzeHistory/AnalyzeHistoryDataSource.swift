@@ -201,17 +201,17 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         switch sections[indexPath.section] {
         case .cards:
-            if let cell_ = cell as? InstapickAnalysisCell {
-                cell_.setup(with: analysisCount)
-                cell_.delegate = self
+            if let cell = cell as? InstapickAnalysisCell {
+                cell.setup(with: analysisCount)
+                cell.delegate = self
             }
         case .photos:
-            if let cell_ = cell as? InstapickAnalyzeHistoryPhotoCell {
+            if let cell = cell as? InstapickAnalyzeHistoryPhotoCell {
                 let item = items[indexPath.item]
                 let isSelected = isSelectionStateActive && selectedItems.contains(item)
-                cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isSelected)
-                cell_.setup(with: item)
-                cell_.delegate = self
+                cell.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isSelected)
+                cell.setup(with: item)
+                cell.delegate = self
             }
         }
         

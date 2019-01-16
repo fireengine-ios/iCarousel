@@ -785,7 +785,7 @@
 "analyze_history_empty_title" = "analyze_history_empty_title";
 "analyze_history_empty_subtitle" = "analyze_history_empty_subtitle";
 "analyze_history_analyze_left" = "Analyses Left";
-"analyze_history_analyze_count" = "%ld of %ld";
+"analyze_history_analyze_count" = "%1$d of %2$d";
 "analyze_with_instapick" = "Analyze With InstaPick";
 "analyze_history_photos_count" = "%d photos";
 /*InstaPick three dots*/

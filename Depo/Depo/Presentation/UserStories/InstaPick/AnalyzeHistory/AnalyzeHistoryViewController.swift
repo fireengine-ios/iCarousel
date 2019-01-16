@@ -24,9 +24,14 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private let pageSize = Device.isIpad ? 50 : 30
     
     private var navBarConfigurator = NavigationBarConfigurator()
-    private var cancelSelectionButton: UIBarButtonItem!
+    private lazy var cancelSelectionButton: UIBarButtonItem = {
+        return UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
+                               font: .TurkcellSaturaDemFont(size: 19.0),
+                               target: self,
+                               selector: #selector(onCancelSelectionButton))
+    }()
     
-    private let rightButtonBox = CGRect(x: Device.winSize.width - 45, y: -15, width: 0, height: 0)
+    private let navBarRightItemSourceRect = CGRect(x: Device.winSize.width - 45, y: -15, width: 0, height: 0)
     
     private var editingTabBar: BottomSelectionTabBarViewController?
     private var bottomBarPresenter: BottomSelectionTabBarModuleInput?
@@ -63,11 +68,6 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         configureNavBarActions()
         configureBottomTabBar()
         setTitle(withString: TextConstants.analyzeHistoryTitle)
-        
-        cancelSelectionButton = UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
-                                                font: .TurkcellSaturaDemFont(size: 19.0),
-                                                target: self,
-                                                selector: #selector(onCancelSelectionButton))
     }
     
     private func configureNavBarActions() {
@@ -185,11 +185,11 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         } else if let _ = sender as? UIBarButtonItem {
             //FIXME: use actionSheetVC.popoverPresentationController?.barButtonItem instead
             if navigationController?.navigationBar.isTranslucent == true {
-                var frame = rightButtonBox
+                var frame = navBarRightItemSourceRect
                 frame.origin.y = 44
                 actionSheetVC.popoverPresentationController?.sourceRect = frame
             } else {
-                actionSheetVC.popoverPresentationController?.sourceRect = rightButtonBox
+                actionSheetVC.popoverPresentationController?.sourceRect = navBarRightItemSourceRect
             }
             
             actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up
