@@ -11,7 +11,7 @@ import UIKit
 final class InstaPickSelectionSegmentedController: UIViewController {
     
     private let topView = UIView()
-    private let contanerView = UIView()
+    private let containerView = UIView()
     private let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
     
     private let segmentedControl: UISegmentedControl = {
@@ -36,13 +36,13 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     
     private func setup() {
         topView.backgroundColor = .white
-        contanerView.backgroundColor = .white
+        containerView.backgroundColor = .white
         
         segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
         
         view.addSubview(topView)
         topView.addSubview(segmentedControl)
-        view.addSubview(contanerView)
+        view.addSubview(containerView)
         view.addSubview(transparentGradientView)
         
         setupLayout()
@@ -61,11 +61,11 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         segmentedControl.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).isActive = true
         segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).isActive = true
         
-        contanerView.translatesAutoresizingMaskIntoConstraints = false
-        contanerView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
-        contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        contanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        contanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         let transparentGradientViewHeight: CGFloat = 100
         transparentGradientView.translatesAutoresizingMaskIntoConstraints = false
@@ -121,9 +121,9 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     
     private func add(childController: UIViewController) {
         addChildViewController(childController)
-        childController.view.frame = contanerView.bounds
+        childController.view.frame = containerView.bounds
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        contanerView.addSubview(childController.view)
+        containerView.addSubview(childController.view)
         childController.didMove(toParentViewController: self)
     }
 }
