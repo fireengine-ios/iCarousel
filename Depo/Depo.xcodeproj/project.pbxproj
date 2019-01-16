@@ -2845,6 +2845,10 @@
 		C35EE3E71E1DE92F727B422B /* OTPViewModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */; };
 		C3C2356C20B6DA1B00F3FB6D /* MPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3C2356B20B6DA1B00F3FB6D /* MPush.framework */; };
 		C3C2356D20B6DA1B00F3FB6D /* MPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3C2356B20B6DA1B00F3FB6D /* MPush.framework */; };
+		C4A38BA221EE1F2300ECCCEA /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */; };
+		C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */; };
+		C4A38BA421EE1F4E00ECCCEA /* InstaPickSelectionSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */; };
+		C4D9C03221EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */; };
 		C5E5EC15332297CC6F59374A /* SyncContactsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B17E6F8BC6EF2FCF5C768A7 /* SyncContactsViewInput.swift */; };
 		C62239A0204972080043ED44 /* MenloworksAppEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D51D20403FE100FA3478 /* MenloworksAppEvents.swift */; };
 		C62239A1204972120043ED44 /* MenloworksTagsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D51B204006FA00FA3478 /* MenloworksTagsConstants.swift */; };
@@ -5435,6 +5439,8 @@
 		C2287D169D831E3173413D01 /* IntroduceRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouterInput.swift; sourceTree = "<group>"; };
 		C3C2356B20B6DA1B00F3FB6D /* MPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MPush.framework; sourceTree = "<group>"; };
 		C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewController.swift; sourceTree = "<group>"; };
+		C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentGradientView.swift; sourceTree = "<group>"; };
+		C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickSelectionSegmentedController.swift; sourceTree = "<group>"; };
 		C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInitializer.swift; sourceTree = "<group>"; };
 		C65DCBDB204683820083A965 /* MenloworksEventsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenloworksEventsService.swift; sourceTree = "<group>"; };
 		C65DCBDC204683820083A965 /* MenloworksEventsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenloworksEventsConstants.swift; sourceTree = "<group>"; };
@@ -10816,6 +10822,8 @@
 				CE57DFAA1FDE66980065B688 /* DarkPopUp */,
 				CE3E4D09201B131600173045 /* PVViewerController */,
 				CEFFA8F121AFC21C00B34F36 /* SegmentedController */,
+				C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */,
+				C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -15061,6 +15069,7 @@
 				8C0E8CCF1FDEBDFF00789C91 /* AlbumSelectionPresenter.swift in Sources */,
 				8C0E8CD01FDEBDFF00789C91 /* PrintInteractorOutput.swift in Sources */,
 				8C0E8CD21FDEBDFF00789C91 /* MoreActionsConfig.swift in Sources */,
+				C4A38BA421EE1F4E00ECCCEA /* InstaPickSelectionSegmentedController.swift in Sources */,
 				92004B7021AD19B300582C45 /* MyStorageInteractor.swift in Sources */,
 				8C0E8CD31FDEBDFF00789C91 /* ServerValueError.swift in Sources */,
 				8C0E8CD51FDEBDFF00789C91 /* CreateStoryNameInteractorInput.swift in Sources */,
@@ -15427,6 +15436,7 @@
 				8C0E8DF31FDEBDFF00789C91 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				98E792D9203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				A225690C21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */,
+				C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */,
 				A217E42F21A5B0220084AA37 /* LeavePremiumViewInput.swift in Sources */,
 				8C0E8DF41FDEBDFF00789C91 /* ActivityTimelineHeader.swift in Sources */,
 				8C0E8DF51FDEBDFF00789C91 /* PrintViewInput.swift in Sources */,
@@ -16323,6 +16333,7 @@
 				CE2F55FD1F7551CD00F49DA1 /* AccountResponse.swift in Sources */,
 				7CF6BDE11F0B97050066709E /* CollectionViewCellForAudio.swift in Sources */,
 				CE6DE7601FCC44F800C23CBD /* KeyboardLayoutConstraint.swift in Sources */,
+				C4D9C03221EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift in Sources */,
 				CE51ABCD1EF90853005DCEE0 /* AutoSyncInitializer.swift in Sources */,
 				7859299420060E8B003F8AB3 /* ManageContactsPresenter.swift in Sources */,
 				7C49881B1F3320420039C5F2 /* CreateStoryPhotosOrderRouter.swift in Sources */,
@@ -16662,6 +16673,7 @@
 				CE8F44F11F6AC1550062C2E0 /* ActivityTimelineHeader.swift in Sources */,
 				EFA74FB01FBF378F00CF946E /* PrintViewInput.swift in Sources */,
 				CE4F6195206D1E7B00B179DA /* AnimationFlowManager.swift in Sources */,
+				C4A38BA221EE1F2300ECCCEA /* TransparentGradientView.swift in Sources */,
 				CEDFECA71F10C77E003D1A75 /* UINavigationBarExtension.swift in Sources */,
 				D47863FD1F3F18FA00EFDC6D /* UsageInfoViewOutput.swift in Sources */,
 				CE51ACE81EF90853005DCEE0 /* IntroduceInitializer.swift in Sources */,
