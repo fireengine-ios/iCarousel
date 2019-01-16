@@ -1025,6 +1025,12 @@ struct TextConstants {
     static let instaPickButtonHasAnalysis = NSLocalizedString("instapick_button_has_analysis", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickButtonNoAnalysis = NSLocalizedString("Purchase", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let instaPickAnalyzingBottomText = NSLocalizedString("insta_pick_analyzing_bottom", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickAnalyzingText_0 = NSLocalizedString("insta_pick_analyzing_0", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickAnalyzingText_1 = NSLocalizedString("insta_pick_analyzing_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickAnalyzingText_2 = NSLocalizedString("insta_pick_analyzing_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickAnalyzingText_3 = NSLocalizedString("insta_pick_analyzing_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickAnalyzingText_4 = NSLocalizedString("insta_pick_analyzing_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     //MARK: - InstaPickPopUp
     static let instaPickDontShowThisAgain = NSLocalizedString("dont_show_this_again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickAnlyze = NSLocalizedString("instapick_analyze", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
