@@ -14,7 +14,7 @@ protocol AnalyzeHistoryTabBarPresenterDelegate: class {
 
 final class AnalyzeHistoryTabBarPresenter: BottomSelectionTabBarPresenter {
     
-    weak var delegate: AnalyzeHistoryTabBarPresenterDelegate?
+    private weak var delegate: AnalyzeHistoryTabBarPresenterDelegate?
     
     private var types = [ElementTypes]()
     

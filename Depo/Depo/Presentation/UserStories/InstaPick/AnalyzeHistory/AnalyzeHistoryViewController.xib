@@ -110,7 +110,6 @@
         </view>
         <customObject id="Zh9-3c-Msj" customClass="AnalyzeHistoryDesigner" customModule="lifebox" customModuleProvider="target">
             <connections>
-                <outlet property="collectionView" destination="bM6-zc-MfF" id="1eV-Gr-siB"/>
                 <outlet property="emptySubtitleLabel" destination="oD6-Bs-QAS" id="087-x2-qMH"/>
                 <outlet property="emptyTitleLabel" destination="JdK-Md-nJt" id="drf-5l-LSn"/>
                 <outlet property="newAnalyseView" destination="muL-9i-x4Y" id="udm-nA-hpQ"/>

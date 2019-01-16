@@ -10,17 +10,18 @@ import UIKit
 
 final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
-    @IBOutlet var designer: AnalyzeHistoryDesigner!
-    @IBOutlet var displayManager: AnalyzeHistoryDisplayManager!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var newAnalysisButton: BlueButtonWithMediumWhiteText!
-    @IBOutlet weak var newAnalysisView: UIView!
+    @IBOutlet private var designer: AnalyzeHistoryDesigner!
+    @IBOutlet private var displayManager: AnalyzeHistoryDisplayManager!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var newAnalysisButton: BlueButtonWithMediumWhiteText!
+    @IBOutlet private weak var newAnalysisView: UIView!
     
     private let dataSource = AnalyzeHistoryDataSourceForCollectionView()
     private let instapickService: InstapickService = factory.resolve()
     
     private let refresher = UIRefreshControl()
     private var page = 0
+    private let pageSize = Device.isIpad ? 50 : 30
     
     private var navBarConfigurator = NavigationBarConfigurator()
     private var cancelSelectionButton: UIBarButtonItem!
@@ -199,26 +200,25 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     // MARK: - Functions
     
     @objc private func reloadData() {
-        showSpiner()
-        page = 0
-        dataSource.isPaginationDidEnd = false
-        
-        let group = DispatchGroup()
-        group.enter()
-        group.enter()
-        
-        loadNextHistoryPage {
-            group.leave()
-        }
-        
-        reloadCards {
-            group.leave()
-        }
-        
         stopRefresher()
+        guard !dataSource.isSelectionStateActive else {
+            return
+        }
         
-        group.notify(queue: .main) { [weak self] in
-            self?.hideSpiner()
+        showSpiner()
+        
+        reloadCards { [weak self] result in
+            guard let `self` = self else {
+                return
+            }
+            
+            if result {
+                self.page = 0
+                self.dataSource.isPaginationDidEnd = false
+                self.loadNextHistoryPage(completion: { [weak self] _ in
+                    self?.hideSpiner()
+                })
+            }
         }
     }
     
@@ -230,23 +230,23 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         }
     }
     
-    private func reloadCards(completion: VoidHandler? = nil) {
+    private func reloadCards(completion: BoolHandler? = nil) {
         instapickService.getAnalyzesCount { [weak self] result in
             guard let `self` = self else { return }
             
             switch result {
             case .success(let analysisCount):
                 self.dataSource.reloadCards(with: analysisCount)
+                completion?(true)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
+                completion?(false)
             }
-            
-            completion?()
         }
     }
     
-    private func loadNextHistoryPage(completion: VoidHandler? = nil) {
-        instapickService.getAnalyzeHistory(offset: page, limit: 20) { [weak self] result in
+    private func loadNextHistoryPage(completion: BoolHandler? = nil) {
+        instapickService.getAnalyzeHistory(offset: page, limit: pageSize) { [weak self] result in
             guard let `self` = self else { return }
             
             switch result {
@@ -260,12 +260,12 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                     } else if self.displayManager.configuration == .empty {
                         self.displayManager.applyConfiguration(.initial)
                     }
+                    completion?(true)
                 }
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
+                completion?(false)
             }
-            
-            completion?()
         }
     }
     

@@ -296,7 +296,7 @@ final class InstapickAnalyzesCount {
     }
 }
 
-final class InstapickAnalyze: Equatable {
+final class InstapickAnalyze {
     let requestIdentifier: String
     let rank: Float
     let hashTags: [String]
@@ -334,7 +334,9 @@ final class InstapickAnalyze: Equatable {
         self.photoCount = json["photoCount"].int
         self.startedDate = json["startedDate"].date
     }
-    
+}
+
+extension InstapickAnalyze: Equatable {
     static func == (lhs: InstapickAnalyze, rhs: InstapickAnalyze) -> Bool {
         return lhs.requestIdentifier == rhs.requestIdentifier
     }

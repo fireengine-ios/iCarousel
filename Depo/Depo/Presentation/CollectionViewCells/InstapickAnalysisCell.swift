@@ -1,5 +1,5 @@
 //
-//  CollectionViewCellForInstapickAnalysis.swift
+//  InstapickAnalysisCell.swift
 //  Depo
 //
 //  Created by Andrei Novikau on 1/11/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol InstapickAnalysisCellDelegate: LBCellsDelegate {
+protocol InstapickAnalysisCellDelegate: class {
     func onPurchase()
     func onSeeDetails(cell: UICollectionViewCell)
 }
@@ -29,7 +29,7 @@ private enum InstapickAnalysisCellState {
     }
 }
 
-final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
+final class InstapickAnalysisCell: UICollectionViewCell {
     
     @IBOutlet private weak var borderView: UIView! {
         willSet {
@@ -103,9 +103,12 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
         }
     }
     
+    weak var delegate: InstapickAnalysisCellDelegate?
+    
     // MARK: -
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         isHiddenContent = true
     }
     
@@ -136,10 +139,10 @@ final class CollectionViewCellForInstapickAnalysis: BaseCollectionViewCell {
     // MARK: - Actions
     
     @IBAction private func onPurchasePressed(_ sender: UIButton) {
-        (delegate as? InstapickAnalysisCellDelegate)?.onPurchase()
+        delegate?.onPurchase()
     }
     
     @IBAction private func onSeeDetailsPressed(_ sender: UIButton) {
-        (delegate as? InstapickAnalysisCellDelegate)?.onSeeDetails(cell: self)
+        delegate?.onSeeDetails(cell: self)
     }
 }

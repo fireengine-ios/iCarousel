@@ -1,5 +1,5 @@
 //
-//  CollectionViewCellForInstapickPhoto.swift
+//  InstapickAnalyzeHistoryPhotoCell.swift
 //  Depo
 //
 //  Created by Andrei Novikau on 1/10/19.
@@ -8,45 +8,66 @@
 
 import UIKit
 
-final class CollectionViewCellForInstapickPhoto: BaseCollectionViewCell {
+final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
     
-    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var imageView: UIImageView! {
+        willSet {
+            newValue.contentMode = .scaleAspectFill
+            newValue.backgroundColor = UIColor.clear
+            newValue.clipsToBounds = true
+            newValue.layer.borderColor = UIColor.lrTealish.cgColor
+            newValue.layer.borderWidth = 1
+            newValue.alpha = 1
+        }
+    }
+    
     @IBOutlet private weak var selectionImageView: UIImageView!
-    @IBOutlet private weak var rankView: UIView!
-    @IBOutlet private weak var rankLabel: UILabel!
-    @IBOutlet private weak var countLabel: UILabel!
+    
+    @IBOutlet private weak var rankView: UIView! {
+        willSet {
+            newValue.clipsToBounds = true
+            newValue.layer.cornerRadius = newValue.bounds.height * 0.5
+            newValue.backgroundColor = UIColor.lrTealish
+        }
+    }
+    
+    @IBOutlet private weak var rankLabel: UILabel! {
+        willSet {
+            newValue.textColor = .white
+            newValue.font = UIFont.TurkcellSaturaBolFont(size: Device.isIpad ? 14 : 12)
+        }
+    }
+    
+    @IBOutlet private weak var countLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.lightText
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: Device.isIpad ? 16 : 14)
+        }
+    }
+    
+    @IBOutlet private weak var selectionImageWidth: NSLayoutConstraint!
+    @IBOutlet private weak var rankViewWidth: NSLayoutConstraint!
 
     private var cellImageManager: CellImageManager?
     private var uuid: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = UIColor.clear
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = imageView.bounds.height * 0.5
-        imageView.layer.borderColor = UIColor.lrTealish.cgColor
-        imageView.layer.borderWidth = 1
-        imageView.alpha = 1
-        
-        rankView.clipsToBounds = true
-        rankView.layer.cornerRadius = rankView.bounds.height * 0.5
-        rankView.backgroundColor = UIColor.lrTealish
-        
-        rankLabel.textColor = .white
-        rankLabel.font = UIFont.TurkcellSaturaBolFont(size: 12)
-        
-        countLabel.textColor = ColorConstants.lightText
-        countLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
-        
+
         contentView.backgroundColor = .white
+        selectionImageWidth.constant = Device.isIpad ? 22 : 15
+        rankViewWidth.constant = Device.isIpad ? 26 : 24
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.layer.cornerRadius = imageView.bounds.height * 0.5
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         selectionImageView.isHidden = !isSelectionActive
         selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
-        imageView.alpha = isSelected && isSelectionActive ? 0.75 : 1
+        imageView.alpha = isSelected && isSelectionActive ? 0.5 : 1
     }
     
     func setup(with item: InstapickAnalyze) {
@@ -90,7 +111,7 @@ final class CollectionViewCellForInstapickPhoto: BaseCollectionViewCell {
         if animated {
             imageView.layer.opacity = NumericConstants.numberCellDefaultOpacity
             imageView.image = image
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: NumericConstants.setImageAnimationDuration, animations: {
                 self.imageView.layer.opacity = NumericConstants.numberCellAnimateOpacity
             })
         } else {

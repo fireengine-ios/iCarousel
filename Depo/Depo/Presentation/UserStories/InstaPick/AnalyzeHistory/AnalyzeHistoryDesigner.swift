@@ -8,9 +8,7 @@
 
 import UIKit
 
-final class AnalyzeHistoryDesigner: NSObject {
-    @IBOutlet private weak var collectionView: UICollectionView!
-    
+final class AnalyzeHistoryDesigner: NSObject {    
     @IBOutlet private weak var emptyTitleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.analyzeHistoryEmptyTitle

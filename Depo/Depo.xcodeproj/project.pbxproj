@@ -2571,18 +2571,18 @@
 		984A512C21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */; };
 		984A514021E734D2004525F5 /* AnalyzeHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */; };
 		984A514121E734D2004525F5 /* AnalyzeHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */; };
-		984A514421E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A514321E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift */; };
-		984A514521E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A514321E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift */; };
-		984A514721E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A514621E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib */; };
-		984A514821E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A514621E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib */; };
+		984A514421E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A514321E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift */; };
+		984A514521E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A514321E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift */; };
+		984A514721E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A514621E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib */; };
+		984A514821E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A514621E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib */; };
 		984A515421E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515321E87883004525F5 /* AnalyzeHistoryDesigner.swift */; };
 		984A515521E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515321E87883004525F5 /* AnalyzeHistoryDesigner.swift */; };
 		984A515721E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515621E87A4F004525F5 /* AnalyzeHistoryDisplayManager.swift */; };
 		984A515821E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515621E87A4F004525F5 /* AnalyzeHistoryDisplayManager.swift */; };
-		984A515A21E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515921E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift */; };
-		984A515B21E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515921E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift */; };
-		984A515D21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A515C21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib */; };
-		984A515E21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A515C21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib */; };
+		984A515A21E88D28004525F5 /* InstapickAnalysisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515921E88D28004525F5 /* InstapickAnalysisCell.swift */; };
+		984A515B21E88D28004525F5 /* InstapickAnalysisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515921E88D28004525F5 /* InstapickAnalysisCell.swift */; };
+		984A515D21E88D64004525F5 /* InstapickAnalysisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A515C21E88D64004525F5 /* InstapickAnalysisCell.xib */; };
+		984A515E21E88D64004525F5 /* InstapickAnalysisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A515C21E88D64004525F5 /* InstapickAnalysisCell.xib */; };
 		984F8E7D200CDEA200D9D595 /* StoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */; };
 		984F8E7F200CE10100D9D595 /* StoriesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */; };
 		98570AFA208F7558002CCEBA /* SpotlightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98570AF7208F7556002CCEBA /* SpotlightViewController.swift */; };
@@ -5218,12 +5218,12 @@
 		9840C62420AEAD8100A8634F /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryViewController.swift; sourceTree = "<group>"; };
 		984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnalyzeHistoryViewController.xib; sourceTree = "<group>"; };
-		984A514321E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForInstapickPhoto.swift; sourceTree = "<group>"; };
-		984A514621E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCellForInstapickPhoto.xib; sourceTree = "<group>"; };
+		984A514321E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickAnalyzeHistoryPhotoCell.swift; sourceTree = "<group>"; };
+		984A514621E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstapickAnalyzeHistoryPhotoCell.xib; sourceTree = "<group>"; };
 		984A515321E87883004525F5 /* AnalyzeHistoryDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDesigner.swift; sourceTree = "<group>"; };
 		984A515621E87A4F004525F5 /* AnalyzeHistoryDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDisplayManager.swift; sourceTree = "<group>"; };
-		984A515921E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForInstapickAnalysis.swift; sourceTree = "<group>"; };
-		984A515C21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCellForInstapickAnalysis.xib; sourceTree = "<group>"; };
+		984A515921E88D28004525F5 /* InstapickAnalysisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickAnalysisCell.swift; sourceTree = "<group>"; };
+		984A515C21E88D64004525F5 /* InstapickAnalysisCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstapickAnalysisCell.xib; sourceTree = "<group>"; };
 		984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInteractor.swift; sourceTree = "<group>"; };
 		984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInitializer.swift; sourceTree = "<group>"; };
 		98570AF7208F7556002CCEBA /* SpotlightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightViewController.swift; sourceTree = "<group>"; };
@@ -12004,10 +12004,10 @@
 				4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */,
 				4A56D5C6202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift */,
 				4A56D5C7202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib */,
-				984A514321E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift */,
-				984A514621E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib */,
-				984A515921E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift */,
-				984A515C21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib */,
+				984A514321E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift */,
+				984A514621E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib */,
+				984A515921E88D28004525F5 /* InstapickAnalysisCell.swift */,
+				984A515C21E88D64004525F5 /* InstapickAnalysisCell.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -13226,7 +13226,7 @@
 				CE5B5E4220C293B800D91112 /* InfoPlist.strings in Resources */,
 				8C0E8FFD1FDEBDFF00789C91 /* HomeViewTopView.xib in Resources */,
 				8C06AFE12008AD71003D8E05 /* italic_secili@2x.png in Resources */,
-				984A514821E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib in Resources */,
+				984A514821E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */,
 				8C06AF732008AD70003D8E05 /* edit.png in Resources */,
 				8C06B12D2008AD72003D8E05 /* t_kucuk_selected@3x.png in Resources */,
 				8C0E8FFE1FDEBDFF00789C91 /* LoginViewController.xib in Resources */,
@@ -13677,7 +13677,7 @@
 				8C0E90591FDEBDFF00789C91 /* UserInfoSubViewViewController.xib in Resources */,
 				4A13DBE721A6FE6D002C3D16 /* PremiumInfoCard.xib in Resources */,
 				8C06B0AD2008AD71003D8E05 /* right@2x.png in Resources */,
-				984A515E21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib in Resources */,
+				984A515E21E88D64004525F5 /* InstapickAnalysisCell.xib in Resources */,
 				8C06AF352008AD70003D8E05 /* cizgi_3_selected@2x.png in Resources */,
 				8C06B1112008AD72003D8E05 /* success_icon.png in Resources */,
 				8C06B0132008AD71003D8E05 /* kup.png in Resources */,
@@ -13857,7 +13857,7 @@
 				8C06B1102008AD72003D8E05 /* success_icon.png in Resources */,
 				8C06B04C2008AD71003D8E05 /* parlaklik.png in Resources */,
 				8C06AFAC2008AD71003D8E05 /* frame_selected@3x.png in Resources */,
-				984A515D21E88D64004525F5 /* CollectionViewCellForInstapickAnalysis.xib in Resources */,
+				984A515D21E88D64004525F5 /* InstapickAnalysisCell.xib in Resources */,
 				8C06AF862008AD70003D8E05 /* extraOptions@2x.png in Resources */,
 				CEAE3FDE1EFD500B00A405B2 /* HomeViewTopView.xib in Resources */,
 				CE51AD201EF90853005DCEE0 /* LoginViewController.xib in Resources */,
@@ -14260,7 +14260,7 @@
 				7C554A001F6C11C300067F99 /* CollectionViewStoryReorderView.xib in Resources */,
 				8C06AF9E2008AD71003D8E05 /* focus@2x.png in Resources */,
 				8C06AFCC2008AD71003D8E05 /* info_icon.png in Resources */,
-				984A514721E747C6004525F5 /* CollectionViewCellForInstapickPhoto.xib in Resources */,
+				984A514721E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */,
 				8C06B1C42008AD72003D8E05 /* lookup_soft_elegance_2.png in Resources */,
 				8C06B0082008AD71003D8E05 /* Kucuk_Selected@2x.png in Resources */,
 				8C06B0162008AD71003D8E05 /* kup@3x.png in Resources */,
@@ -15372,7 +15372,7 @@
 				8C0E8DD01FDEBDFF00789C91 /* LoginInteractorInput.swift in Sources */,
 				8C0E8DD11FDEBDFF00789C91 /* CreateStoryPhotosOrderInteractorOutput.swift in Sources */,
 				4A0AC139208736FF00032CC7 /* PeriodicContactSyncRouter.swift in Sources */,
-				984A515B21E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift in Sources */,
+				984A515B21E88D28004525F5 /* InstapickAnalysisCell.swift in Sources */,
 				4A56D5B3202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */,
 				8C0E8DD21FDEBDFF00789C91 /* CreateStoryNameInitializer.swift in Sources */,
 				8C0E8DD31FDEBDFF00789C91 /* AudioSelectionCollectionViewCell.swift in Sources */,
@@ -15687,7 +15687,7 @@
 				8C017B762074B782002484E7 /* Keys.swift in Sources */,
 				8C0E8EE81FDEBDFF00789C91 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				8C0E8EE91FDEBDFF00789C91 /* PhotoVideoDetailInteractorOutput.swift in Sources */,
-				984A514521E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift in Sources */,
+				984A514521E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
 				8C0E8EEA1FDEBDFF00789C91 /* PhotoVideoDetailInteractor.swift in Sources */,
 				4ADE087F202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */,
 				8C0E8EEB1FDEBDFF00789C91 /* PackagesModuleInput.swift in Sources */,
@@ -16264,7 +16264,7 @@
 				CE95ED531F516736002F923A /* HelpAndSupportPresenter.swift in Sources */,
 				CE51AB951EF90853005DCEE0 /* IntroduceDataSource.swift in Sources */,
 				7C1EA0481F9792F1002DBAD8 /* CreateStoryResponce.swift in Sources */,
-				984A514421E74458004525F5 /* CollectionViewCellForInstapickPhoto.swift in Sources */,
+				984A514421E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
 				4A9F8E5820875D4300622A6C /* PeriodicContactSyncDataSource.swift in Sources */,
 				7CDABD071F1E3A6300C8CC16 /* UserProfileInteractor.swift in Sources */,
 				CEAE3FB61EFD4F0D00A405B2 /* HomePagePresenter.swift in Sources */,
@@ -17065,7 +17065,7 @@
 				9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */,
 				CEBAB15B2094803C002824C6 /* InsetsButton.swift in Sources */,
 				8C6EF8801F348B5C002AC795 /* BottomSelectionTabBarRouterInput.swift in Sources */,
-				984A515A21E88D28004525F5 /* CollectionViewCellForInstapickAnalysis.swift in Sources */,
+				984A515A21E88D28004525F5 /* InstapickAnalysisCell.swift in Sources */,
 				BA527EDC7876722B487A0428 /* FileInfoPresenter.swift in Sources */,
 				5ED1673DE08513D8CA5485E3 /* FileInfoInteractorInput.swift in Sources */,
 				98E792D8203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
