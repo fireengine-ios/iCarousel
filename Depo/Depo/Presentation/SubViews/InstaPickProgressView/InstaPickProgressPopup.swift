@@ -7,35 +7,125 @@
 //
 
 import UIKit
+import SDWebImage
+
 
 class InstaPickProgressPopup: ViewController {
     
-    @IBOutlet weak var topCaption: UILabel!
-    @IBOutlet weak var bottomCaption: UILabel!
-    @IBOutlet weak var circularLoader: LTCircularProgressView! //{
-//        didSet {
-//            circularLoader.backWidth = 10.0
-//            circularLoader.backColor = .gray
-//            circularLoader.progressWidth = 10.0
-//            circularLoader.progressRatio = 0.0
-//            circularLoader.progressColor = .red
-//        }
-//    }
-    @IBOutlet weak var analyzingImage: UIImageView!
-
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        circularLoader.animateConstantly()
+    @IBOutlet private weak var topCaption: UILabel! {
+        didSet {
+            topCaption.text = ""
+        }
+    }
+    @IBOutlet private weak var bottomCaption: UILabel! {
+        didSet {
+            bottomCaption.text = bottomCaptionText
+        }
+    }
+    @IBOutlet private weak var circularLoader: LTCircularProgressView! {
+        didSet {
+            circularLoader.backWidth = 10.0
+            circularLoader.backColor = ColorConstants.lightBlueColor
+            circularLoader.progressWidth = 10.0
+            circularLoader.progressRatio = 0.0
+            circularLoader.progressColor = ColorConstants.blueColor
+        }
+    }
+    @IBOutlet private weak var analyzingImage: UIImageView! {
+        didSet {
+            analyzingImage.contentMode = .scaleAspectFill
+        }
     }
     
-    private func setupAnalyzingImage() {
-        let inset = circularLoader.radius - circularLoader.innerRadius - circularLoader.backWidth
+    private var topCaptionTexts = [String]()
+    private var bottomCaptionText = ""
+    private var analyzingImagesUrls = [URL]()
+    
+    private var numberOfSteps: Int {
+        return max(analyzingImagesUrls.count, topCaptionTexts.count)
+    }
+    private let timeForStep = 2.0
+    private var transitionDuration: Double {
+        return timeForStep / 4.0
+    }
+    
+    
+    static func createPopup(with analyzingImages: [URL], topTexts: [String], bottomText: String) -> InstaPickProgressPopup {
+        let controller = InstaPickProgressPopup(nibName: "InstaPickProgressPopup", bundle: nil)
+        controller.analyzingImagesUrls = analyzingImages
+        controller.topCaptionTexts = topTexts
+        controller.bottomCaptionText = bottomText
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        return controller
+    }
+    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        let ovalPath = UIBezierPath(ovalIn: analyzingImage.layer.bounds)
+        startInfiniteAnimation()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setupAnalyzingImage()
+    }
+    
+
+    private func setupAnalyzingImage() {
+        let inset: CGFloat = 8.0
+        let diameter = (circularLoader.innerRadius - inset) * 2.0
+        let startPoint = (analyzingImage.layer.bounds.width - diameter) / 2.0
+        
+        let maskLayerRect = CGRect(x: startPoint, y: startPoint, width: diameter, height: diameter)
+        let ovalPath = UIBezierPath(ovalIn: maskLayerRect)
         let maskLayer = CAShapeLayer()
         maskLayer.path = ovalPath.cgPath
         
+        analyzingImage.layer.mask = maskLayer
+    }
+    
+    private func startInfiniteAnimation() {
+        circularLoader.animateInfinitely(numberOfSteps: numberOfSteps, timeForStep: timeForStep) { [weak self] step, _ in
+            guard let `self` = self else { return }
+            
+            self.changeImage(on: step)
+            self.changeTopCaption(on: step)
+        }
+    }
+    
+    private func changeImage(on step: Int) {
+        let imageIndex = step % analyzingImagesUrls.count
+        analyzingImage.sd_setImage(with: analyzingImagesUrls[safe: imageIndex], placeholderImage: nil, options: [.avoidAutoSetImage], completed: { [weak self] image, error, cahceType, _ in
+            guard let `self` = self else {
+                return
+            }
+            
+            UIView.transition(with: self.analyzingImage,
+                              duration: self.transitionDuration,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                                self.analyzingImage.image = image
+            }, completion: nil)
+        })
+    }
+    
+    
+    private func changeTopCaption(on step: Int) {
+        let topTextIndex = step % topCaptionTexts.count
+        UIView.transition(with: topCaption,
+                          duration: transitionDuration,
+                          options: .transitionCrossDissolve,
+                          animations: {
+                            self.topCaption.text = self.topCaptionTexts[safe: topTextIndex]
+        }, completion: nil)
+    }
+    
+    
+    
+    @IBAction func close(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

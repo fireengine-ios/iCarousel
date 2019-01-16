@@ -69,24 +69,11 @@ class LTCircularProgressView: UIView {
     }
     
     var innerRadius: CGFloat {
-        return radius - max(progressWidth, backWidth) / 2.0
+        return min(layer.bounds.width, layer.bounds.height) / 2.0 - max(progressWidth, backWidth)
     }
-    
-    private let oneStepAnimationDuration = 2.0
-    private var currentAnimationTime = 0.0
-    private var steps: Double = 5
-    
-    private var timeToAnimateAllSteps: Double {
-        return oneStepAnimationDuration * steps
-    }
-    
-    private var progressRatioStep: CGFloat {
-        return CGFloat(1.0 / steps)
-    }
-    
-    private lazy var timer: Timer = {
-        return Timer.scheduledTimer(timeInterval: oneStepAnimationDuration, target: self, selector: #selector(animateStep), userInfo: nil, repeats: true)
-    }()
+
+    private var animationHelper: LTCircularAnimationHelper?
+
     
     //MARK: - Init
     
@@ -97,6 +84,7 @@ class LTCircularProgressView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
     
     
     //MARK: - Override
@@ -177,25 +165,58 @@ class LTCircularProgressView: UIView {
         progressRatio = progress
     }
     
-    func animateConstantly() {
+    func animateInfinitely(numberOfSteps: Int, timeForStep: TimeInterval, stepBlock: LTCircularAnimationStepBlock?) {
+        animationHelper?.stopAnimation()
+        let progressRatioStep: CGFloat = 1.0 / CGFloat(numberOfSteps)
+        animationHelper = LTCircularAnimationHelper(with: numberOfSteps, timeForStep: timeForStep, stepBlock: { [weak self] currentStep, isLastStep in
+            guard let `self` = self else { return }
+            
+            self.set(progress: self.progressRatio + progressRatioStep, withAnimation: true, duration: timeForStep)
+            
+            if isLastStep {
+                self.progressRatio = 0.0
+            }
+            
+            stepBlock?(currentStep, isLastStep)
+        })
+        animationHelper?.animateInfinitely()
+    }
+}
+
+
+typealias LTCircularAnimationStepBlock = (_ stepNumber: Int, _ isLastStep: Bool)->Void
+
+
+final class LTCircularAnimationHelper {
+    private var stepCallback: LTCircularAnimationStepBlock?
+    
+    private lazy var timer: Timer = {
+        return Timer.scheduledTimer(timeInterval: stepDuration, target: self, selector: #selector(performAnimationStep), userInfo: nil, repeats: true)
+    }()
+    
+    private var steps = 5
+    private var stepDuration = 0.5
+    
+    private var currentStep = 0
+    
+    
+    init(with numberOfSteps: Int, timeForStep: TimeInterval, stepBlock: @escaping LTCircularAnimationStepBlock) {
+        steps = numberOfSteps
+        stepDuration = timeForStep
+        stepCallback = stepBlock
+    }
+    
+    @objc private func performAnimationStep() {
+        let isLastStep = currentStep >= (steps - 1)
+        stepCallback?(currentStep, isLastStep)
+        currentStep = isLastStep ? 0 : currentStep + 1
+    }
+    
+    func animateInfinitely() {
         timer.fire()
     }
     
     func stopAnimation() {
         timer.invalidate()
-    }
-    
-    
-    
-    @objc private func animateStep() {
-        if currentAnimationTime >= timeToAnimateAllSteps {
-            progressRatio = 0.0
-            currentAnimationTime = oneStepAnimationDuration
-            set(progress: progressRatioStep, withAnimation: true, duration: oneStepAnimationDuration)
-        } else {
-            currentAnimationTime += oneStepAnimationDuration
-            set(progress: progressRatio + progressRatioStep, withAnimation: true, duration: oneStepAnimationDuration)
-            ///change photo/captions
-        }
     }
 }
