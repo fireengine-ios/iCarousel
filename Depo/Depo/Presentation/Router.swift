@@ -89,7 +89,6 @@ class RouterVC: NSObject {
         let navController = NavigationController(rootViewController: controller)
         navController.modalPresentationStyle = .overFullScreen
         navController.modalTransitionStyle = .crossDissolve
-        navController.navigationBar.isTranslucent = false
         return navController
     }
     

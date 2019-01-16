@@ -74,7 +74,8 @@ final class InstapickPopUpController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupFontsAndTextColors()
+        setupFonts()
+        setupTextColors()
         configure()
     }
     
@@ -133,23 +134,26 @@ final class InstapickPopUpController: UIViewController {
         connectWithInstaView.configure(instaNickname: instaNickname)
         
         titleLabel.text = TextConstants.instaPickAnlyze
+        
+        let paragraphStyle = getParagraphStyle()
         subtitleLabel.attributedText = NSAttributedString(string: TextConstants.instaPickConnectedAccount,
-                                                             attributes: [NSAttributedStringKey.paragraphStyle: getParagraphStyle()])
+                                                             attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
         descriptionLabel.attributedText = NSAttributedString(string: TextConstants.instaPickDescription,
-                                                             attributes: [NSAttributedStringKey.paragraphStyle: getParagraphStyle()])
+                                                             attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
         descriptionLabel.text = TextConstants.instaPickDescription
         withoutConnectingButton.setTitle(TextConstants.instaPickConnectedWithoutInstagram, for: .normal)
-
         checkBoxLabel.text = TextConstants.instaPickDontShowThisAgain
     }
     
-    private func setupFontsAndTextColors() {
+    private func setupFonts() {
         titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 28)
         subtitleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
         descriptionLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         checkBoxLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
         withoutConnectingButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        
+    }
+    
+    private func setupTextColors() {
         titleLabel.textColor = ColorConstants.darcBlueColor
         subtitleLabel.textColor = ColorConstants.darcBlueColor
         descriptionLabel.textColor = ColorConstants.darkGrayTransperentColor
@@ -184,7 +188,11 @@ final class InstapickPopUpController: UIViewController {
                 self?.hideSpinerForView(containerView)
             }
             
-            guard let response = response as? InstagramConfigResponse else { return }
+            guard let response = response as? InstagramConfigResponse else {
+                UIApplication.showErrorAlert(message: "An error occurred while getting feature type from offer.")
+                return
+            }
+            
             DispatchQueue.toMain {
                 self?.openInstagramAuth(param: response)
             }
