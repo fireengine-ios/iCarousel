@@ -145,10 +145,10 @@ final class InstaPickCard: BaseView {
     }
     
     private func openInstaPickPopUp() {
-        instapickRoutingService.getViewController(success: { (vc) in
+        instapickRoutingService.getViewController(success: { controller in
             DispatchQueue.toMain {
                 let router = RouterVC()
-                let vc = router.createRootNavigationControllerWithModalStyle(controller: vc)
+                let vc = router.createRootNavigationControllerWithModalStyle(controller: controller)
                 router.presentViewController(controller: vc)
             }
         }) { (error) in

@@ -33,7 +33,7 @@ final class ConnectWithInstaView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        layer.cornerRadius = bounds.height / 2
+        layer.cornerRadius = bounds.height * 0.5
     }
     
     required init?(coder aDecoder: NSCoder) {
