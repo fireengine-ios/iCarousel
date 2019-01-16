@@ -31,7 +31,11 @@ final class AnalyzeHistoryDesigner: NSObject {
     
     @IBOutlet private weak var newAnalyseView: UIView! {
         willSet {
-            newValue.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            let gradientView = TransparentGradientView(style: .vertical, mainColor: .white)
+            gradientView.frame = newValue.bounds
+            newValue.addSubview(gradientView)
+            newValue.sendSubview(toBack: gradientView)
+            gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
     }
     

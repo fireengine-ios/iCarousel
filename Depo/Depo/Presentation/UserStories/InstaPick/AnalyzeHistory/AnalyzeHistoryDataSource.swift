@@ -30,7 +30,14 @@ private enum AnalyzeHistorySectionType: Int {
         }
     }
     
-    var cellSpacing: CGFloat {
+    var lineSpacing: CGFloat {
+        switch self {
+        case .cards: return 0
+        case .photos: return 23
+        }
+    }
+    
+    var interitemSpacing: CGFloat {
         switch self {
         case .cards: return 0
         case .photos: return Device.isIpad ? 20 : 8
@@ -48,7 +55,7 @@ private enum AnalyzeHistorySectionType: Int {
         switch self {
         case .cards: return CGSize(width: width, height: 126)
         case .photos:
-            let cellWidth = (width - sectionInsets.left - sectionInsets.right - cellSpacing * (numberOfColumns - 1)) / numberOfColumns
+            let cellWidth = (width - sectionInsets.left - sectionInsets.right - interitemSpacing * (numberOfColumns - 1)) / numberOfColumns
             return CGSize(width: cellWidth, height: cellWidth + 28)
         }
     }
@@ -260,11 +267,11 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegateFlo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return AnalyzeHistorySectionType(rawValue: section)?.cellSpacing ?? 0
+        return AnalyzeHistorySectionType(rawValue: section)?.lineSpacing ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return AnalyzeHistorySectionType(rawValue: section)?.cellSpacing ?? 0
+        return AnalyzeHistorySectionType(rawValue: section)?.interitemSpacing ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
