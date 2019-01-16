@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 class LTCircularProgressView: UIView {
     
     private let backgroundCircleLayer = CAShapeLayer()
@@ -167,7 +167,8 @@ class LTCircularProgressView: UIView {
     
     func animateInfinitely(numberOfSteps: Int, timeForStep: TimeInterval, stepBlock: LTCircularAnimationStepBlock?) {
         animationHelper?.stopAnimation()
-        let progressRatioStep: CGFloat = 1.0 / CGFloat(numberOfSteps)
+        let safeNumberOfSteps = (numberOfSteps == 0) ? 1 : numberOfSteps
+        let progressRatioStep: CGFloat = 1.0 / CGFloat(safeNumberOfSteps)
         animationHelper = LTCircularAnimationHelper(with: numberOfSteps, timeForStep: timeForStep, stepBlock: { [weak self] currentStep, isLastStep in
             guard let `self` = self else { return }
             

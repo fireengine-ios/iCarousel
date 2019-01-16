@@ -41,19 +41,20 @@ class InstaPickProgressPopup: ViewController {
     private var bottomCaptionText = ""
     private var analyzingImagesUrls = [URL]()
     
-    private var numberOfSteps: Int {
+    
+    private let animationStepDuration = 2.0
+    private var animationStepsNumber: Int {
         return max(analyzingImagesUrls.count, topCaptionTexts.count)
     }
-    private let timeForStep = 2.0
     private var transitionDuration: Double {
-        return timeForStep / 4.0
+        return animationStepDuration / 4.0
     }
     
     
     static func createPopup(with analyzingImages: [URL], topTexts: [String], bottomText: String) -> InstaPickProgressPopup {
         let controller = InstaPickProgressPopup(nibName: "InstaPickProgressPopup", bundle: nil)
-        controller.analyzingImagesUrls = analyzingImages
-        controller.topCaptionTexts = topTexts
+        controller.analyzingImagesUrls = []//analyzingImages
+        controller.topCaptionTexts = []//topTexts
         controller.bottomCaptionText = bottomText
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
@@ -61,8 +62,8 @@ class InstaPickProgressPopup: ViewController {
     }
     
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         startInfiniteAnimation()
     }
@@ -88,7 +89,7 @@ class InstaPickProgressPopup: ViewController {
     }
     
     private func startInfiniteAnimation() {
-        circularLoader.animateInfinitely(numberOfSteps: numberOfSteps, timeForStep: timeForStep) { [weak self] step, _ in
+        circularLoader.animateInfinitely(numberOfSteps: animationStepsNumber, timeForStep: animationStepDuration) { [weak self] step, _ in
             guard let `self` = self else { return }
             
             self.changeImage(on: step)
@@ -97,6 +98,8 @@ class InstaPickProgressPopup: ViewController {
     }
     
     private func changeImage(on step: Int) {
+        guard !analyzingImagesUrls.isEmpty else { return }
+        
         let imageIndex = step % analyzingImagesUrls.count
         analyzingImage.sd_setImage(with: analyzingImagesUrls[safe: imageIndex], placeholderImage: nil, options: [.avoidAutoSetImage], completed: { [weak self] image, error, cahceType, _ in
             guard let `self` = self else {
@@ -114,6 +117,8 @@ class InstaPickProgressPopup: ViewController {
     
     
     private func changeTopCaption(on step: Int) {
+        guard !topCaptionTexts.isEmpty else { return }
+        
         let topTextIndex = step % topCaptionTexts.count
         UIView.transition(with: topCaption,
                           duration: transitionDuration,
