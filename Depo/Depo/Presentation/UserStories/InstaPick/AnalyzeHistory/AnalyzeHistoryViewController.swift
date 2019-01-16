@@ -207,17 +207,19 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         
         showSpiner()
         
-        reloadCards { [weak self] result in
+        reloadCards { [weak self] isSuccess in
             guard let `self` = self else {
                 return
             }
             
-            if result {
+            if isSuccess {
                 self.page = 0
                 self.dataSource.isPaginationDidEnd = false
                 self.loadNextHistoryPage(completion: { [weak self] _ in
                     self?.hideSpiner()
                 })
+            } else {
+                self.hideSpiner()
             }
         }
     }
