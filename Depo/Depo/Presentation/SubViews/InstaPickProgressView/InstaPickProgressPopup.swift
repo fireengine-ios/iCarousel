@@ -53,8 +53,8 @@ final class InstaPickProgressPopup: ViewController {
     
     static func createPopup(with analyzingImages: [URL], topTexts: [String], bottomText: String) -> InstaPickProgressPopup {
         let controller = InstaPickProgressPopup(nibName: "InstaPickProgressPopup", bundle: nil)
-        controller.analyzingImagesUrls = []//analyzingImages
-        controller.topCaptionTexts = []//topTexts
+        controller.analyzingImagesUrls = analyzingImages
+        controller.topCaptionTexts = topTexts
         controller.bottomCaptionText = bottomText
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
