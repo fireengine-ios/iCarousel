@@ -10,8 +10,8 @@ import UIKit
 import SDWebImage
 
 
-class InstaPickProgressPopup: ViewController {
-    
+final class InstaPickProgressPopup: ViewController {
+
     @IBOutlet private weak var topCaption: UILabel! {
         didSet {
             topCaption.text = ""
