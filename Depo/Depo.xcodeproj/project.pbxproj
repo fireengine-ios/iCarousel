@@ -2696,6 +2696,8 @@
 		B3B5A5509A09A51F47A9AA34 /* SelectNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669AB32EC041C5277B6D63E3 /* SelectNameRouter.swift */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B520000C202492A90096D036 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520000B202492A90096D036 /* SynchronizedArray.swift */; };
+		B522E92621E8CB6100C4958E /* LTCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522E92521E8CB6100C4958E /* LTCircularProgressView.swift */; };
+		B522E92721E8CB6100C4958E /* LTCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522E92521E8CB6100C4958E /* LTCircularProgressView.swift */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
 		B5390D782164F0F800A02002 /* ScrollBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D772164F0F700A02002 /* ScrollBarView.swift */; };
 		B5390D792164F0F800A02002 /* ScrollBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D772164F0F700A02002 /* ScrollBarView.swift */; };
@@ -2787,12 +2789,16 @@
 		B56FBB3E2122C9B9004F4A59 /* TermsOfUseViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FBB3C2122C9B9004F4A59 /* TermsOfUseViewOutput.swift */; };
 		B5711DFF20C13F4200E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
 		B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
+		B573B94021ECD0280085148A /* InstaPickProgressPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */; };
+		B573B94121ECD0280085148A /* InstaPickProgressPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */; };
 		B5781BD0210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */; };
 		B5781BD1210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */; };
 		B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E8181FE288A500F47B0A /* PhotoSyncService.swift */; };
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
 		B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B57FE7FE212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
+		B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
+		B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
 		B59A63DF2167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59A63E02167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B5A84523212DA315007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84522212DA314007EA795 /* images.xcassets */; };
@@ -5324,6 +5330,7 @@
 		B3A0B3E5058A3D09CC569377 /* PhotoVideoDetailInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInitializer.swift; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
+		B522E92521E8CB6100C4958E /* LTCircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTCircularProgressView.swift; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
 		B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncOperation.swift; sourceTree = "<group>"; };
 		B5390D772164F0F700A02002 /* ScrollBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollBarView.swift; sourceTree = "<group>"; };
@@ -5388,10 +5395,12 @@
 		B56FBB392122C9AA004F4A59 /* TermsOfUseViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewInput.swift; sourceTree = "<group>"; };
 		B56FBB3C2122C9B9004F4A59 /* TermsOfUseViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewOutput.swift; sourceTree = "<group>"; };
 		B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ShareActivity.swift"; sourceTree = "<group>"; };
+		B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstaPickProgressPopup.xib; sourceTree = "<group>"; };
 		B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+OpenURL.swift"; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
 		B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityInitializer.swift; sourceTree = "<group>"; };
+		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
 		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		B5A84524212DA325007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
@@ -7586,6 +7595,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				B522E92121E8CAEC00C4958E /* InstaPickProgressView */,
 				A2EF976921ECC3E600EC7DE7 /* ConnectWithInstaView */,
 				925B96D421E79BAF00B39415 /* RadialGradientableView */,
 				9240C04821B80520005E710C /* PremiumFooterView */,
@@ -10618,6 +10628,16 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		B522E92121E8CAEC00C4958E /* InstaPickProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */,
+				B522E92521E8CB6100C4958E /* LTCircularProgressView.swift */,
+				B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */,
+			);
+			path = InstaPickProgressView;
+			sourceTree = "<group>";
+		};
 		B5390D7D2165F4F500A02002 /* QuickScrollImageLoader */ = {
 			isa = PBXGroup;
 			children = (
@@ -13330,6 +13350,7 @@
 				8C06AFF72008AD71003D8E05 /* kontrast.png in Resources */,
 				8C06AF5B2008AD70003D8E05 /* daire@3x.png in Resources */,
 				8C06B0CD2008AD71003D8E05 /* sample_bw@3x.png in Resources */,
+				B573B94121ECD0280085148A /* InstaPickProgressPopup.xib in Resources */,
 				A2EF976521EC7E2900EC7DE7 /* InstapickPopUpController.xib in Resources */,
 				7CD7C2A720189E24009F6D3D /* StorageCard.xib in Resources */,
 				8C06B0332008AD71003D8E05 /* ok_selected@3x.png in Resources */,
@@ -14074,6 +14095,7 @@
 				8C06B1D22008AD72003D8E05 /* TOCropViewController.nib in Resources */,
 				8C06AF8C2008AD70003D8E05 /* extraOptions_selected@2x.png in Resources */,
 				CE8F44F31F6AC1660062C2E0 /* ActivityTimelineHeader.xib in Resources */,
+				B573B94021ECD0280085148A /* InstaPickProgressPopup.xib in Resources */,
 				7C203555201F4F8F00D84727 /* LatestUploadCardCell.xib in Resources */,
 				8C06B01A2008AD71003D8E05 /* kup_selected@2x.png in Resources */,
 				8C06AF662008AD70003D8E05 /* duz_cizgi@2x.png in Resources */,
@@ -15555,6 +15577,7 @@
 				8C0E8E261FDEBDFF00789C91 /* CreateStoryNamePresenter.swift in Sources */,
 				8C0E8E271FDEBDFF00789C91 /* ForgotPasswordInteractorInput.swift in Sources */,
 				8C0E8E281FDEBDFF00789C91 /* ForgotPasswordInteractorOutput.swift in Sources */,
+				B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
 				8C0E8E291FDEBDFF00789C91 /* AutoSyncViewOutput.swift in Sources */,
 				8C0E8E2A1FDEBDFF00789C91 /* ImportFromInstagramInteractor.swift in Sources */,
 				8C0E8E2B1FDEBDFF00789C91 /* ForgotPasswordInteractor.swift in Sources */,
@@ -15707,6 +15730,7 @@
 				8C0E8ED41FDEBDFF00789C91 /* ContactsSyncService.swift in Sources */,
 				8C0E8ED51FDEBDFF00789C91 /* ShadowView.swift in Sources */,
 				8C0E8ED61FDEBDFF00789C91 /* CreateStoryNameInteractorOutput.swift in Sources */,
+				B522E92721E8CB6100C4958E /* LTCircularProgressView.swift in Sources */,
 				8C0E8ED71FDEBDFF00789C91 /* CollectionViewStoryReorderView.swift in Sources */,
 				92004B6D21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
 				CED4B02E2018594700D06CA9 /* HomeCardResponse.swift in Sources */,
@@ -16743,6 +16767,7 @@
 				CED4B02A2017731400D06CA9 /* Alamofire+Response.swift in Sources */,
 				CE51ACED1EF90853005DCEE0 /* PhoneVereficationPresenter.swift in Sources */,
 				8C06AC0E20066641003D8E05 /* TurkcellSecurityInteractorIO.swift in Sources */,
+				B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
 				CE51ACEE1EF90853005DCEE0 /* PhoneVereficationInteractorInput.swift in Sources */,
 				7C241EF81F960BA300322149 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				984A512B21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
@@ -17190,6 +17215,7 @@
 				77CF7B297D6D1B75D73CACBC /* SelectNamePresenter.swift in Sources */,
 				CE3E4D07201B11BF00173045 /* PVViewerController.swift in Sources */,
 				7C1F898D1F70ECB100740177 /* BaseView.swift in Sources */,
+				B522E92621E8CB6100C4958E /* LTCircularProgressView.swift in Sources */,
 				7CF9A9F51FA2279500242FDD /* ImageForDowload.swift in Sources */,
 				8CF87D5F1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */,
 				05EC9C53FBA7BE69C5C9BFCD /* SelectNameInteractorInput.swift in Sources */,

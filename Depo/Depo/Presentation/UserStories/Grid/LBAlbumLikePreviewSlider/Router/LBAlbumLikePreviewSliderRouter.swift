@@ -45,6 +45,26 @@ class LBAlbumLikePreviewSliderRouter {
     private func goToInstaPickView(_ moduleOutput: LBAlbumLikePreviewSliderModuleInput?) {
         let controller = router.analyzesHistoryController()
         router.pushViewControllertoTableViewNavBar(viewController: controller)
+        
+//        let imagesUrls = [
+//            URL(string: "https://im0-tub-ua.yandex.net/i?id=70da0b4b7101ea480e4086c928074be9&n=13")!,
+//            URL(string: "https://www.telegraph.co.uk/content/dam/news/2016/09/08/107667228_beech-tree-NEWS_trans_NvBQzQNjv4BqplGOf-dgG3z4gg9owgQTXEmhb5tXCQRHAvHRWfzHzHk.jpg")!,
+//            URL(string: "https://im0-tub-ua.yandex.net/i?id=70da0b4b7101ea480e4086c928074be9&n=13")!,
+//            URL(string: "https://www.telegraph.co.uk/content/dam/news/2016/09/08/107667228_beech-tree-NEWS_trans_NvBQzQNjv4BqplGOf-dgG3z4gg9owgQTXEmhb5tXCQRHAvHRWfzHzHk.jpg")!]
+//
+//        let topTexts = [TextConstants.instaPickAnalyzingText_0,
+//                        TextConstants.instaPickAnalyzingText_1,
+//                        TextConstants.instaPickAnalyzingText_2,
+//                        TextConstants.instaPickAnalyzingText_3,
+//                        TextConstants.instaPickAnalyzingText_4]
+//
+//        let bottomText = TextConstants.instaPickAnalyzingBottomText
+//        if let currentController = UIApplication.topController() {
+//            //TODO: INSTAPICK pass selected images' urls and text somewhere else
+//            let controller = InstaPickProgressPopup.createPopup(with: imagesUrls, topTexts: topTexts, bottomText: bottomText)
+//
+//            currentController.present(controller, animated: true, completion: nil)
+//        }
     }
     
 }
