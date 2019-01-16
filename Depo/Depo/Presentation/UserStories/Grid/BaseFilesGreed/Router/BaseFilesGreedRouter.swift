@@ -81,6 +81,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     }
     
     func openNeededInstaPick(viewController: UIViewController) {
-        router.presentViewController(controller: viewController)
+        let vc = router.createRootNavigationControllerWithModalStyle(controller: viewController)
+        router.presentViewController(controller: vc)
     }
 }

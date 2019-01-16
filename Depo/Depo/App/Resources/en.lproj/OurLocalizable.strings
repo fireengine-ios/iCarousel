@@ -803,3 +803,12 @@
 "no_analysis_detail_label" = "Let us analyze your selected photos and suggest you which one to share!";
 
 "instapick_button_has_analysis" = "Let’s Start!";
+
+/*InstaPickPopUp*/
+"dont_show_this_again" = "Don't show this again";
+"instapick_analyze" = "Analyze with InstaPick!";
+"connected_account" = "It works great with your connected account!";
+"instapick_description" = "Lorem psum dolor sit amet, adipiscing consectetur adipiscing elit.  Lorem psum dolor sit amet, adipiscing consectetur elit.";
+"connected_with_instagram" = "Connect with Instagram";
+"connected_with_instagram_name" = "Connect with Instagram as";
+"continue_without_connecting" = "Continue without connecting";
