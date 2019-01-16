@@ -22,7 +22,7 @@ final class InstaPickRoutingService {
 
     private let doNotShowAgainKey = "instaPickDoNotShowAgainKey"
     public var doNotShowAgain: Bool
-    
+        
     init() {
         doNotShowAgain = UserDefaults.standard.bool(forKey: doNotShowAgainKey)
     }
@@ -40,7 +40,8 @@ final class InstaPickRoutingService {
     }
     
     func stopShowing() {
-        UserDefaults.standard.set(true, forKey: doNotShowAgainKey)
+        doNotShowAgain = true
+        UserDefaults.standard.set(doNotShowAgain, forKey: doNotShowAgainKey)
     }
     
     //Utility Methods(private)
@@ -102,25 +103,29 @@ final class InstaPickRoutingService {
     }
     
     private func configureViewController() {
+        if doNotShowAgain {
+            ///TODO: open the photo selection screen which is not yet ready
+            didOpenInstaPickPopUp()
+        } else if let instagramNickname = instagramNickname {
+            didOpenInstaPickPopUp(instaNickname: instagramNickname)
+        } else if let hasPermission = instagramLikePermission, hasPermission {
+            ///TODO: open the photo selection screen which is not yet ready
+            didOpenInstaPickPopUp()
+        } else {
+            didOpenInstaPickPopUp()
+        }
+    }
+    
+    private func didOpenInstaPickPopUp(instaNickname: String? = nil) {
         guard let successHandler = successHandler else {
             UIApplication.showErrorAlert(message: "Success handler unexpected become nil.")
             return
         }
-        //TODO: - add controllers
-        ///all string constants is temporary solution (waiting new controllers)
-        let title = "Insta Pick"
-        var message: String = "You might to open InstaPick PopUp"
         
-        if doNotShowAgain {
-            message = "You might to open selection mode for InstaPick Analyze"
-        } else if let instagramNickname = instagramNickname {
-            message = "You might to open InstaPick PopUp with nickname: \(instagramNickname)"
-        } else if let hasPermission = instagramLikePermission, hasPermission {
-            message = "You might to open selection mode for InstaPick Analyze"
+        if let vc = InstapickPopUpController.with(instaNickname: instaNickname) {
+            vc.delegate = self
+            successHandler(vc)
         }
-        
-        let vc = DarkPopUpController.with(title: title, message: message, buttonTitle: "OK!")
-        successHandler(vc)
     }
     
     private func showError(with error: ErrorResponse) {
@@ -130,4 +135,16 @@ final class InstaPickRoutingService {
         }
         errorHandler(error)
     }
+}
+
+extension InstaPickRoutingService: InstapickPopUpControllerDelegate {
+    
+    func onConnectWithoutInsta() {
+        ///TODO: open the photo selection screen which is not yet ready
+    }
+    
+    func onConnectWithInsta() {
+        ///TODO: need to redo instagram authentication and open the photo selection screen which is not yet ready
+    }
+    
 }
