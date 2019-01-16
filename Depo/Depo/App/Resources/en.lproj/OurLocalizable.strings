@@ -799,3 +799,11 @@
 "insta_pick_analyzing_2" = "How nice of you to share your moments with your friends!";
 "insta_pick_analyzing_3" = "Life is good with great memories!";
 "insta_pick_analyzing_4" = "You have a great photo album.";
+/*InstaPickPopUp*/
+"dont_show_this_again" = "Don't show this again";
+"instapick_analyze" = "Analyze with InstaPick!";
+"connected_account" = "It works great with your connected account!";
+"instapick_description" = "Lorem psum dolor sit amet, adipiscing consectetur adipiscing elit.  Lorem psum dolor sit amet, adipiscing consectetur elit.";
+"connected_with_instagram" = "Connect with Instagram";
+"connected_with_instagram_name" = "Connect with Instagram as";
+"continue_without_connecting" = "Continue without connecting";

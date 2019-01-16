@@ -46,9 +46,7 @@ final class InstaPickProgressPopup: ViewController {
     private var animationStepsNumber: Int {
         return max(analyzingImagesUrls.count, topCaptionTexts.count)
     }
-    private var transitionDuration: Double {
-        return animationStepDuration * 0.25
-    }
+    private let transitionDuration = 0.25
     
     
     static func createPopup(with analyzingImages: [URL], topTexts: [String], bottomText: String) -> InstaPickProgressPopup {

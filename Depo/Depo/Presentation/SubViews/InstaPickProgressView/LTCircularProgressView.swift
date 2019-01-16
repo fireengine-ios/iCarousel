@@ -73,17 +73,6 @@ class LTCircularProgressView: UIView {
     }
 
     private var animationHelper: LTCircularAnimationHelper?
-
-    
-    //MARK: - Init
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     
     
     //MARK: - Override
@@ -119,7 +108,7 @@ class LTCircularProgressView: UIView {
         backgroundCircleLayer.removeFromSuperlayer()
         
         let arcCenter = convert(center, from: superview)
-        let startAngle = -CGFloat.pi/2 ///top point
+        let startAngle = -CGFloat.pi * 0.5 ///top point
         let endAngle = 2 * CGFloat.pi + startAngle
         let path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         backgroundCircleLayer.path = path.cgPath
@@ -134,7 +123,7 @@ class LTCircularProgressView: UIView {
         foregroundCircleLayer.removeFromSuperlayer()
         
         let arcCenter = convert(center, from: superview)
-        let startAngle = -CGFloat.pi/2 ///top point
+        let startAngle = -CGFloat.pi * 0.5 ///top point
         let endAngle = 2 * CGFloat.pi + startAngle
         let path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         foregroundCircleLayer.lineCap = kCALineCapRound
