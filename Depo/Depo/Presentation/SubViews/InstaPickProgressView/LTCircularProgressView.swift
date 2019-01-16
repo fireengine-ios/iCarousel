@@ -65,11 +65,11 @@ class LTCircularProgressView: UIView {
 //    }
     
     var radius: CGFloat {
-        return (min(layer.bounds.width, layer.bounds.height) - max(progressWidth, backWidth)) / 2.0
+        return (min(layer.bounds.width, layer.bounds.height) - max(progressWidth, backWidth)) * 0.5
     }
     
     var innerRadius: CGFloat {
-        return min(layer.bounds.width, layer.bounds.height) / 2.0 - max(progressWidth, backWidth)
+        return min(layer.bounds.width, layer.bounds.height) * 0.5 - max(progressWidth, backWidth)
     }
 
     private var animationHelper: LTCircularAnimationHelper?

@@ -47,7 +47,7 @@ final class InstaPickProgressPopup: ViewController {
         return max(analyzingImagesUrls.count, topCaptionTexts.count)
     }
     private var transitionDuration: Double {
-        return animationStepDuration / 4.0
+        return animationStepDuration * 0.25
     }
     
     
@@ -78,7 +78,7 @@ final class InstaPickProgressPopup: ViewController {
     private func setupAnalyzingImage() {
         let inset: CGFloat = 8.0
         let diameter = (circularLoader.innerRadius - inset) * 2.0
-        let startPoint = (analyzingImage.layer.bounds.width - diameter) / 2.0
+        let startPoint = (analyzingImage.layer.bounds.width - diameter) * 0.5
         
         let maskLayerRect = CGRect(x: startPoint, y: startPoint, width: diameter, height: diameter)
         let ovalPath = UIBezierPath(ovalIn: maskLayerRect)
