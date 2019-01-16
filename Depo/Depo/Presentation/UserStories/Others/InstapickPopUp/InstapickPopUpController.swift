@@ -189,7 +189,8 @@ final class InstapickPopUpController: UIViewController {
             }
             
             guard let response = response as? InstagramConfigResponse else {
-                UIApplication.showErrorAlert(message: "An error occurred while getting feature type from offer.")
+                let error = CustomErrors.serverError("An error occurred while getting instagram details.")
+                UIApplication.showErrorAlert(message: error.localizedDescription)
                 return
             }
             
