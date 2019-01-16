@@ -86,7 +86,6 @@ class LTCircularProgressView: UIView {
     }
     
     
-    
     //MARK: - Override
     
     ///IB
