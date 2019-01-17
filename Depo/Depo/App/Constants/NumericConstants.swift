@@ -120,15 +120,17 @@ struct NumericConstants {
     
     static let premiumViewHeight: CGFloat = 480
     
-    static let instaPickHashtagCellHeight: CGFloat = 35
-    static let instaPickHashtagCellWidthConstant: CGFloat = 53
+    static let instaPickHashtagCellHeight: CGFloat = 30
+    static let instaPickHashtagCellWidthConstant: CGFloat = 45
     
-    static let instaPickhashtagCellCornerRadius: CGFloat = 13.5
+    static let instaPickhashtagCellCornerRadius: CGFloat = 12
     static let instaPickhashtagCellBorderWidth: CGFloat = 0.2
     static let instaPickhashtagCellShadowRadius: CGFloat = 5
     
     static let instaPickhashtagCellShadowColorAlpha: CGFloat = 0.11
     static let instaPickhashtagCellBorderColorAlpha: CGFloat = 0.15
+    
+    static let instaPickDetailsPopUpCornerRadius: CGFloat = 2
 }
 
 struct RequestSizeConstant {

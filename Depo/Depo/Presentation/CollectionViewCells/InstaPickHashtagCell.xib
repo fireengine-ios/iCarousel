@@ -22,19 +22,19 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wa2-WH-aXY">
                         <rect key="frame" x="5" y="5" width="110" height="39"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wjV-eS-y4U">
-                                <rect key="frame" x="8" y="6" width="42" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wjV-eS-y4U">
+                                <rect key="frame" x="10" y="6" width="78" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfT-yt-eXX">
-                                <rect key="frame" x="58" y="5.5" width="28" height="28"/>
+                                <rect key="frame" x="80" y="4.5" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="WPl-lU-iFY"/>
-                                    <constraint firstAttribute="width" constant="28" id="nWw-LZ-hp2"/>
+                                    <constraint firstAttribute="height" constant="30" id="WPl-lU-iFY"/>
+                                    <constraint firstAttribute="width" constant="30" id="nWw-LZ-hp2"/>
                                 </constraints>
-                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <inset key="contentEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
                                 <state key="normal" image="grayCloseButton"/>
                                 <connections>
                                     <action selector="onCloseTap:" destination="gTV-IL-0wX" eventType="touchUpInside" id="ukl-9u-3wS"/>
@@ -45,10 +45,10 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="wjV-eS-y4U" secondAttribute="bottom" constant="6" id="0UP-SH-sAh"/>
                             <constraint firstItem="jfT-yt-eXX" firstAttribute="centerY" secondItem="Wa2-WH-aXY" secondAttribute="centerY" id="5Ae-ao-pp6"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jfT-yt-eXX" secondAttribute="trailing" id="cBu-1Z-dk7"/>
-                            <constraint firstItem="wjV-eS-y4U" firstAttribute="leading" secondItem="Wa2-WH-aXY" secondAttribute="leading" constant="8" id="ca0-PM-ggi"/>
+                            <constraint firstAttribute="trailing" secondItem="jfT-yt-eXX" secondAttribute="trailing" id="cBu-1Z-dk7"/>
+                            <constraint firstItem="wjV-eS-y4U" firstAttribute="leading" secondItem="Wa2-WH-aXY" secondAttribute="leading" constant="10" id="ca0-PM-ggi"/>
                             <constraint firstItem="wjV-eS-y4U" firstAttribute="top" secondItem="Wa2-WH-aXY" secondAttribute="top" constant="6" id="g6G-0N-Wum"/>
-                            <constraint firstItem="jfT-yt-eXX" firstAttribute="leading" secondItem="wjV-eS-y4U" secondAttribute="trailing" constant="8" id="qZN-qf-ICS"/>
+                            <constraint firstItem="jfT-yt-eXX" firstAttribute="leading" secondItem="wjV-eS-y4U" secondAttribute="trailing" constant="-8" id="qZN-qf-ICS"/>
                         </constraints>
                     </view>
                 </subviews>

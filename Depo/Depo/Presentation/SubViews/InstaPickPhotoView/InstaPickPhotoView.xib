@@ -62,7 +62,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4v-SO-HCe" customClass="RadialGradientableView" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="170" y="145" width="30" height="30"/>
+                    <rect key="frame" x="170" y="140" width="30" height="30"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLh-jt-PJn">
                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -97,10 +97,11 @@
                 <constraint firstItem="rIZ-bL-dv1" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="R3L-Yg-y5c"/>
                 <constraint firstItem="JGb-yz-vuB" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="aGT-CU-G17"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rIZ-bL-dv1" secondAttribute="trailing" id="ado-NY-6hL"/>
+                <constraint firstItem="JGb-yz-vuB" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="ejy-vp-oBY"/>
                 <constraint firstItem="R4v-SO-HCe" firstAttribute="height" secondItem="JGb-yz-vuB" secondAttribute="height" multiplier="1:10" constant="10" id="iXh-Tg-ZXc"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="centerX" secondItem="pnx-lf-EgO" secondAttribute="centerX" constant="41" id="sLr-56-20U"/>
                 <constraint firstItem="R4v-SO-HCe" firstAttribute="trailing" secondItem="JGb-yz-vuB" secondAttribute="trailing" id="tmR-ER-nSn"/>
-                <constraint firstItem="R4v-SO-HCe" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" multiplier="1.6" id="vNj-Nb-Pf0"/>
+                <constraint firstItem="R4v-SO-HCe" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" multiplier="1.5" constant="5" id="vNj-Nb-Pf0"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="rIZ-bL-dv1" secondAttribute="bottom" id="zjX-HY-JOO"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

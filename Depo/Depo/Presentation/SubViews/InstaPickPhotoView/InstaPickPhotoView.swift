@@ -14,7 +14,7 @@ protocol InstaPickPhotoViewDelegate {
 
 final class InstaPickPhotoView: UIView {
     
-    private static let bigViewId = "BigView"
+    private static let bigViewId = "bigView"
     
     @IBOutlet private var view: UIView!
     

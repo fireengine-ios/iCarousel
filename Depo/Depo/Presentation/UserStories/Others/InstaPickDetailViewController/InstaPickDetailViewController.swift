@@ -10,6 +10,29 @@ import UIKit
 
 final class InstaPickDetailViewController: UIViewController {
     
+    private enum PhotoViewType: String {
+        case bigView = "bigView"
+        case smallOne = "smallOne"
+        case smallTwo = "smallTwo"
+        case smallThree = "smallThree"
+        case smallFour = "smallFour"
+        
+        var index: Int {
+            switch self {
+            case .bigView:
+                return 0
+            case .smallOne:
+                return 1
+            case .smallTwo:
+                return 2
+            case .smallThree:
+                return 3
+            case .smallFour:
+                return 4
+            }
+        }
+    }
+    
     //MARK: IBOutlet
     @IBOutlet private weak var topLabel: UILabel!
     @IBOutlet private weak var analysisLeftLabel: UILabel!
@@ -19,13 +42,17 @@ final class InstaPickDetailViewController: UIViewController {
     
     @IBOutlet private weak var darkView: UIView!
     @IBOutlet private weak var containerView: UIView!
+    @IBOutlet private weak var smallPhotosContainerView: UIView!
+    @IBOutlet private weak var smallPhotosStackView: UIStackView!
+    @IBOutlet private weak var photosStackView: UIStackView!
     
     @IBOutlet private weak var collectionView: UICollectionView!
     
     @IBOutlet var instaPickPhotoViews: [InstaPickPhotoView]!
-    
+
     //MARK: Mock
     ///Remove after server become ready
+//    var analyzes: [InstapickAnalyze] = []
     var analyzes: [InstapickAnalyze] = [InstapickAnalyze(requestIdentifier: "123",
                                                        rank: 7.7,
                                                        hashTags: ["#lifebox", "#xmas", "#orangeSoft",
@@ -49,24 +76,6 @@ final class InstaPickDetailViewController: UIViewController {
                                                                     "#wfgwrg", "#wrgwrg",
                                                                     "#fun", "#wwhgwtrh", "#wrwtwrth",
                                                                     "#wrth", "#wrthwt"],
-                                                         fileInfo: nil,
-                                                         photoCount: 5,
-                                                         startedDate: Date()),
-                                        InstapickAnalyze(requestIdentifier: "2342",
-                                                         rank: 8.7,
-                                                         hashTags: ["#wrthr", "#wtwetyjetyjrwrtg", "#wrg",
-                                                                    "#wfgwrg", "#wrgwrg", "#wrwttgw",
-                                                                    "#ulip'p", "#hethe", "#wrwtwrth",
-                                                                    "#wrth", "#wrthwrtwt", "#wrthwt"],
-                                                         fileInfo: nil,
-                                                         photoCount: 5,
-                                                         startedDate: Date()),
-                                        InstapickAnalyze(requestIdentifier: "34535",
-                                                         rank: 9.7,
-                                                         hashTags: ["#wtwrwrtg", "#wrg",
-                                                                    "#wfgwrg", "#wrwttgw",
-                                                                    "#fun", "#wwhgwtrh", "#wrwtwrth",
-                                                                    "#wrth", "#wrthwrtwt", "#wrthwt"],
                                                          fileInfo: nil,
                                                          photoCount: 5,
                                                          startedDate: Date())]
@@ -99,16 +108,10 @@ final class InstaPickDetailViewController: UIViewController {
     
     //MARK: - Utility Methods(public)
     func configure(with models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) {
-        analyzes = models
+//        analyzes = models //tmp
         
         leftCount = String(analyzesCount.left)
         totalCount = String(analyzesCount.total)
-    }
-    
-    //tmp
-    ///REMOVE AFTER
-    func configure(with hashtagS: String) {
-
     }
     
     //MARK: - Utility Methods(private)
@@ -137,6 +140,8 @@ final class InstaPickDetailViewController: UIViewController {
     }
     
     private func setup() {
+        containerView.layer.cornerRadius = NumericConstants.instaPickDetailsPopUpCornerRadius
+        
         prepareToAppear()
         setupPhotoViews()
         setupCollectionView()
@@ -145,15 +150,27 @@ final class InstaPickDetailViewController: UIViewController {
     }
     
     private func setupPhotoViews() {
-        let maxCount = analyzes.count
-        for (index, photoView) in instaPickPhotoViews.enumerated() {
-            if maxCount >= (index + 1) {
+        guard !analyzes.isEmpty else {
+            let error = CustomErrors.text("Error.There are on photos to show")
+            showErrorWith(message: error.localizedDescription)
+            return
+        }
+        
+        let maxIndex = analyzes.count - 1
+        
+        for view in instaPickPhotoViews {
+            if let id = view.restorationIdentifier, let type = PhotoViewType(rawValue: id), type.index <= maxIndex {
+                let analyze = analyzes[type.index]
 //                photoView.configureImageView(with: analyzes[index], delegate: self)
-                let url = URL(string: photoUrls[index]) //tmp
-                photoView.configureImageView(with: analyzes[index], url: url, delegate: self)
+                let url = URL(string: photoUrls[type.index])
+                view.configureImageView(with: analyze, url: url, delegate: self)
             } else {
-                photoView.isHidden = true
+                view.isHidden = true
             }
+        }
+        
+        if maxIndex == 0 {
+            photosStackView.removeArrangedSubview(smallPhotosContainerView)
         }
     }
     
@@ -290,8 +307,7 @@ final class InstaPickDetailViewController: UIViewController {
 //            return
 //        }
         let url = photoUrls[0] //tmp
-        let clipboardString = hashtags.joined()
-        let activityVC = UIActivityViewController(activityItems: [clipboardString, url], applicationActivities: nil)
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         self.present(activityVC, animated: true, completion: nil) ///routerVC not work
     }
     

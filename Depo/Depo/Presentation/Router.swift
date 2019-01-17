@@ -889,18 +889,4 @@ class RouterVC: NSObject {
         
         return controller
     }
-    
-    //tmp
-    ///REMOVE AFTER
-    func instaPickDetailViewController(hashtag: String) -> InstaPickDetailViewController {
-        let nibName = String(describing: InstaPickDetailViewController.self)
-        let controller = InstaPickDetailViewController(nibName: nibName, bundle: nil)
-        
-        controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        
-        controller.configure(with: hashtag)
-        
-        return controller
-    }
 }
