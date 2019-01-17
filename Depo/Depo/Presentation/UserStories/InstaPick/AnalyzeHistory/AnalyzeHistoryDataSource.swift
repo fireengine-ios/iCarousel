@@ -85,6 +85,10 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     var isEmpty: Bool {
         return items.isEmpty
     }
+    
+    var itemsCount: Int {
+        return items.count
+    }
 
     weak var delegate: AnalyzeHistoryDataSourceDelegate?
     
@@ -162,9 +166,11 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         }
     }
     
-    func startSelection(with indexPath: IndexPath?) {
+    func startSelection(with indexPath: IndexPath? = nil, selectAll: Bool = false) {
         isSelectionStateActive = true
-        if let indexPath = indexPath {
+        if selectAll {
+            selectedItems = items
+        } else if let indexPath = indexPath {
             let item = items[indexPath.item]
             selectedItems = [item]
         } else {
