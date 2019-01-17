@@ -102,6 +102,7 @@
             <viewLayoutGuide key="safeArea" id="Fhy-Rz-zex"/>
             <connections>
                 <outlet property="bottomButton" destination="mKd-gU-Tzr" id="afX-No-s4I"/>
+                <outlet property="closeButton" destination="aLx-bk-6LK" id="GVz-Ij-Bst"/>
                 <outlet property="detailLabel" destination="byb-pm-ZWi" id="Jcr-eR-9mY"/>
                 <outlet property="gradientView" destination="IjD-Y9-jpH" id="Ec5-vT-reJ"/>
                 <outlet property="imageView" destination="Lbu-Gd-J8h" id="akf-Du-YzC"/>
