@@ -40,6 +40,37 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         return viewController
     }
     
+    class func initializeViewControllerForInstaPick(with nibName: String, selectedItem: Item, allItems: [Item], hideActions: Bool = false) -> UIViewController {
+        var photoVideoBottomBarConfig = EditingBarConfig.init(elementsConfig: [], style: .blackOpaque, tintColor: nil)
+        
+        if !selectedItem.isLocalItem {
+            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [],
+                                                         style: .blackOpaque, tintColor: nil)
+            
+            let langCode = Device.locale
+            if langCode != "tr", langCode != "en" {
+                photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [],
+                                                             style: .blackOpaque, tintColor: nil)
+            }
+        } else {
+            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [],
+                                                         style: .blackOpaque, tintColor: nil)
+        }
+        
+        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [],
+                                                        style: .blackOpaque, tintColor: nil)
+        let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
+        let configurator = PhotoVideoDetailModuleConfigurator()
+        configurator.configureModuleForViewInput(viewInput: viewController,
+                                                 photoVideoBottomBarConfig: photoVideoBottomBarConfig,
+                                                 documentsBottomBarConfig: documentsBottomBarConfig,
+                                                 selecetedItem: selectedItem,
+                                                 allItems: allItems,
+                                                 hideActions: hideActions,
+                                                 hideInterations: true)
+        return viewController
+    }
+    
     class func initializeAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, hideActions: Bool = false) -> UIViewController {
         var photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .print, .removeFromAlbum],
                                                          style: .blackOpaque, tintColor: nil)

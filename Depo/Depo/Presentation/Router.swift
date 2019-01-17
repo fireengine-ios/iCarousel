@@ -626,6 +626,15 @@ class RouterVC: NSObject {
         return c
     }
     
+    func filesDetailViewControllerForInstaPick(fileObject: WrapData, items: [WrapData]) -> UIViewController {
+        let controller = PhotoVideoDetailModuleInitializer.initializeViewControllerForInstaPick(with: "PhotoVideoDetailViewController",
+                                                                                    selectedItem: fileObject,
+                                                                                    allItems: items)
+        let c = controller as! PhotoVideoDetailViewController
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return c
+    }
+    
     func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
                                                                                          selectedItem: fileObject,
@@ -853,6 +862,32 @@ class RouterVC: NSObject {
     
     func myStorage(usageStorage: UsageResponse?) -> MyStorageViewController {
         let controller = MyStorageModuleInitializer.initializeMyStorageController(usage: usageStorage)
+        return controller
+    }
+    
+    func instaPickDetailViewController(models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) -> InstaPickDetailViewController {
+        let nibName = String(describing: InstaPickDetailViewController.self)
+        let controller = InstaPickDetailViewController(nibName: nibName, bundle: nil)
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        controller.configure(with: models, analyzesCount: analyzesCount)
+        
+        return controller
+    }
+    
+    //tmp
+    ///REMOVE AFTER
+    func instaPickDetailViewController(hashtag: String) -> InstaPickDetailViewController {
+        let nibName = String(describing: InstaPickDetailViewController.self)
+        let controller = InstaPickDetailViewController(nibName: nibName, bundle: nil)
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        controller.configure(with: hashtag)
+        
         return controller
     }
 }

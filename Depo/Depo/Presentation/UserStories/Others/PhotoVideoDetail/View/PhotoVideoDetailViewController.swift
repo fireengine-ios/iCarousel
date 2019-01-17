@@ -28,6 +28,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     var hideActions = false
     var editingTabBar: BottomSelectionTabBarViewController!
     private var needToScrollAfterRotation = true
+    var isNeedHideInteractions = false
     
     private var isFullScreen = false {
         didSet {
@@ -112,7 +113,13 @@ final class PhotoVideoDetailViewController: BaseViewController {
         OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         ItemOperationManager.default.startUpdateView(view: self)
         
-        setupMoreButton()
+        if !isNeedHideInteractions {
+            setupMoreButton()
+        }
+        viewForBottomBar.isHidden = isNeedHideInteractions
+        bottomBlackView.isHidden = isNeedHideInteractions
+        editingTabBar.view.isHidden = isNeedHideInteractions
+        
         onStopPlay()
         rootNavController(vizible: true)
         blackNavigationBarStyle()
@@ -214,7 +221,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     private func setupTitle() {
-        guard !objects.isEmpty, selectedIndex < objects.count else {
+        guard !objects.isEmpty, selectedIndex < objects.count, !isNeedHideInteractions else {
             return
         }
         if let name = objects[selectedIndex].name {
