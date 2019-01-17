@@ -228,7 +228,9 @@ final class InstapickServiceImpl: InstapickService {
     
     func getAnalyzeDetails(id: String, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void) {
         sessionManager
-            .request(RouteRequests.Instapick.analyzeDetails, encoding: id)
+            .request(RouteRequests.Instapick.analyzeDetails,
+                     method: .post,
+                     encoding: id)
             .customValidate()
             .responseData { [weak self] response in
                 
