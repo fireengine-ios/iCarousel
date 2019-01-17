@@ -44,7 +44,7 @@ final class SegmentedController: BaseViewController, NibInit {
         return controller
     }
     
-    @IBOutlet private weak var contanerView: UIView!
+    @IBOutlet private weak var containerView: UIView!
     
     @IBOutlet private weak var segmentedControl: UISegmentedControl! {
         willSet {
@@ -127,9 +127,9 @@ final class SegmentedController: BaseViewController, NibInit {
     
     private func add(childController: UIViewController) {
         addChildViewController(childController)
-        childController.view.frame = contanerView.bounds
+        childController.view.frame = containerView.bounds
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        contanerView.addSubview(childController.view)
+        containerView.addSubview(childController.view)
         childController.didMove(toParentViewController: self)
     }
 }

@@ -2525,6 +2525,8 @@
 		921423EA21B562D500B44574 /* AuthoritySingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E921B562D500B44574 /* AuthoritySingleton.swift */; };
 		921EC07A21E5ED30000A0860 /* InstaPickCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921EC07921E5ED30000A0860 /* InstaPickCard.swift */; };
 		921EC07C21E5ED55000A0860 /* InstaPickCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 921EC07B21E5ED55000A0860 /* InstaPickCard.xib */; };
+		92203C3621E9E0CB00926469 /* InstaPickRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */; };
+		92203C3721EA0E8800926469 /* InstaPickRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */; };
 		9224936821BC14890086CB6A /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
 		9240C04B21B805A4005E710C /* PremiumFooterCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */; };
 		9240C04C21B805A4005E710C /* PremiumFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */; };
@@ -2543,6 +2545,8 @@
 		956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */; };
 		97DC05B9B3DCF2CBAE060AF4 /* SyncContactsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC08749C42535A16BE62A26 /* SyncContactsInteractorOutput.swift */; };
 		97E245036F6119CDFA534B88 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD920B02D55872C2278EC4BE /* SplashViewController.swift */; };
+		980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */; };
+		980488D521EDC983004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */; };
 		9807260D203468D9004E1505 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807260C203468D9004E1505 /* SearchDataSource.swift */; };
 		9807260E203468D9004E1505 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807260C203468D9004E1505 /* SearchDataSource.swift */; };
 		98072619203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */; };
@@ -2563,6 +2567,22 @@
 		9840C62320AEAD6B00A8634F /* CheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840C62120AEAD6B00A8634F /* CheckBoxView.xib */; };
 		9840C62520AEAD8100A8634F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9840C62420AEAD8100A8634F /* CheckBoxView.swift */; };
 		9840C62620AEAD8100A8634F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9840C62420AEAD8100A8634F /* CheckBoxView.swift */; };
+		984A512B21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */; };
+		984A512C21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */; };
+		984A514021E734D2004525F5 /* AnalyzeHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */; };
+		984A514121E734D2004525F5 /* AnalyzeHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */; };
+		984A514421E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A514321E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift */; };
+		984A514521E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A514321E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift */; };
+		984A514721E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A514621E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib */; };
+		984A514821E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A514621E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib */; };
+		984A515421E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515321E87883004525F5 /* AnalyzeHistoryDesigner.swift */; };
+		984A515521E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515321E87883004525F5 /* AnalyzeHistoryDesigner.swift */; };
+		984A515721E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515621E87A4F004525F5 /* AnalyzeHistoryDisplayManager.swift */; };
+		984A515821E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515621E87A4F004525F5 /* AnalyzeHistoryDisplayManager.swift */; };
+		984A515A21E88D28004525F5 /* InstapickAnalysisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515921E88D28004525F5 /* InstapickAnalysisCell.swift */; };
+		984A515B21E88D28004525F5 /* InstapickAnalysisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A515921E88D28004525F5 /* InstapickAnalysisCell.swift */; };
+		984A515D21E88D64004525F5 /* InstapickAnalysisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A515C21E88D64004525F5 /* InstapickAnalysisCell.xib */; };
+		984A515E21E88D64004525F5 /* InstapickAnalysisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A515C21E88D64004525F5 /* InstapickAnalysisCell.xib */; };
 		984F8E7D200CDEA200D9D595 /* StoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */; };
 		984F8E7F200CE10100D9D595 /* StoriesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */; };
 		98570AFA208F7558002CCEBA /* SpotlightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98570AF7208F7556002CCEBA /* SpotlightViewController.swift */; };
@@ -2585,6 +2605,7 @@
 		98C878242074B78A00374177 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878222074B78A00374177 /* ViewController.swift */; };
 		98C878262074E1C100374177 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878252074E1C100374177 /* NavigationController.swift */; };
 		98C878272074E1C100374177 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878252074E1C100374177 /* NavigationController.swift */; };
+		98D3856D21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */; };
 		98E65A292029AAEF00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E792D5203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */; };
@@ -2658,6 +2679,14 @@
 		A253D62921A210690049AC15 /* PremiumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A253D62821A210690049AC15 /* PremiumViewController.xib */; };
 		A253D62A21A210690049AC15 /* PremiumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A253D62821A210690049AC15 /* PremiumViewController.xib */; };
 		A253D62B21A212020049AC15 /* PremiumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079901219F131B00AD5037 /* PremiumViewController.swift */; };
+		A2EF976221EC7E2900EC7DE7 /* InstapickPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF976021EC7E2900EC7DE7 /* InstapickPopUpController.swift */; };
+		A2EF976321EC7E2900EC7DE7 /* InstapickPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF976021EC7E2900EC7DE7 /* InstapickPopUpController.swift */; };
+		A2EF976421EC7E2900EC7DE7 /* InstapickPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976121EC7E2900EC7DE7 /* InstapickPopUpController.xib */; };
+		A2EF976521EC7E2900EC7DE7 /* InstapickPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976121EC7E2900EC7DE7 /* InstapickPopUpController.xib */; };
+		A2EF976721ECC3DE00EC7DE7 /* ConnectWithInstaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF976621ECC3DE00EC7DE7 /* ConnectWithInstaView.swift */; };
+		A2EF976821ECC3DE00EC7DE7 /* ConnectWithInstaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF976621ECC3DE00EC7DE7 /* ConnectWithInstaView.swift */; };
+		A2EF976B21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */; };
+		A2EF976C21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */; };
 		A8F0A4767B5D5821DD4D8083 /* FeedbackViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2E11E4CDC11532B17CCF0 /* FeedbackViewInteractor.swift */; };
 		AAADE05BB4633A42298A897A /* SettingsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB80F562E2E268C766082D5 /* SettingsInitializer.swift */; };
 		ACB080CC00E036849D63FBAD /* FileInfoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A790A17A1745A0D85ECB596 /* FileInfoConfigurator.swift */; };
@@ -2667,6 +2696,8 @@
 		B3B5A5509A09A51F47A9AA34 /* SelectNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669AB32EC041C5277B6D63E3 /* SelectNameRouter.swift */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B520000C202492A90096D036 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520000B202492A90096D036 /* SynchronizedArray.swift */; };
+		B522E92621E8CB6100C4958E /* LTCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522E92521E8CB6100C4958E /* LTCircularProgressView.swift */; };
+		B522E92721E8CB6100C4958E /* LTCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522E92521E8CB6100C4958E /* LTCircularProgressView.swift */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
 		B5390D782164F0F800A02002 /* ScrollBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D772164F0F700A02002 /* ScrollBarView.swift */; };
 		B5390D792164F0F800A02002 /* ScrollBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D772164F0F700A02002 /* ScrollBarView.swift */; };
@@ -2758,12 +2789,16 @@
 		B56FBB3E2122C9B9004F4A59 /* TermsOfUseViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FBB3C2122C9B9004F4A59 /* TermsOfUseViewOutput.swift */; };
 		B5711DFF20C13F4200E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
 		B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */; };
+		B573B94021ECD0280085148A /* InstaPickProgressPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */; };
+		B573B94121ECD0280085148A /* InstaPickProgressPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */; };
 		B5781BD0210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */; };
 		B5781BD1210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */; };
 		B579E8191FE288A500F47B0A /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E8181FE288A500F47B0A /* PhotoSyncService.swift */; };
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
 		B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B57FE7FE212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
+		B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
+		B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
 		B59A63DF2167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59A63E02167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B5A84523212DA315007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84522212DA314007EA795 /* images.xcassets */; };
@@ -2824,6 +2859,10 @@
 		C35EE3E71E1DE92F727B422B /* OTPViewModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */; };
 		C3C2356C20B6DA1B00F3FB6D /* MPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3C2356B20B6DA1B00F3FB6D /* MPush.framework */; };
 		C3C2356D20B6DA1B00F3FB6D /* MPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3C2356B20B6DA1B00F3FB6D /* MPush.framework */; };
+		C4A38BA221EE1F2300ECCCEA /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */; };
+		C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */; };
+		C4A38BA421EE1F4E00ECCCEA /* InstaPickSelectionSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */; };
+		C4D9C03221EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */; };
 		C5E5EC15332297CC6F59374A /* SyncContactsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B17E6F8BC6EF2FCF5C768A7 /* SyncContactsViewInput.swift */; };
 		C62239A0204972080043ED44 /* MenloworksAppEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D51D20403FE100FA3478 /* MenloworksAppEvents.swift */; };
 		C62239A1204972120043ED44 /* MenloworksTagsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3D51B204006FA00FA3478 /* MenloworksTagsConstants.swift */; };
@@ -5168,6 +5207,7 @@
 		921423E921B562D500B44574 /* AuthoritySingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthoritySingleton.swift; sourceTree = "<group>"; };
 		921EC07921E5ED30000A0860 /* InstaPickCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCard.swift; sourceTree = "<group>"; };
 		921EC07B21E5ED55000A0860 /* InstaPickCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickCard.xib; sourceTree = "<group>"; };
+		92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickRoutingService.swift; sourceTree = "<group>"; };
 		9224936721BC14890086CB6A /* AuthorityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorityType.swift; sourceTree = "<group>"; };
 		9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumFooterCollectionReusableView.swift; sourceTree = "<group>"; };
 		9240C04A21B805A4005E710C /* PremiumFooterCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumFooterCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -5182,6 +5222,7 @@
 		95383081F9605943122914E0 /* ForgotPasswordInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractorInput.swift; sourceTree = "<group>"; };
 		96158F7F1AB74A2D8C67DADA /* BaseFilesGreedInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractorInput.swift; sourceTree = "<group>"; };
 		9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryTabBarPresenter.swift; sourceTree = "<group>"; };
 		9807260C203468D9004E1505 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionTableViewCell.xib; sourceTree = "<group>"; };
 		9807261B203C340B004E1505 /* SuggestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTableViewCell.swift; sourceTree = "<group>"; };
@@ -5193,6 +5234,14 @@
 		9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomScrollIndicator.xib; sourceTree = "<group>"; };
 		9840C62120AEAD6B00A8634F /* CheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBoxView.xib; sourceTree = "<group>"; };
 		9840C62420AEAD8100A8634F /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
+		984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryViewController.swift; sourceTree = "<group>"; };
+		984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnalyzeHistoryViewController.xib; sourceTree = "<group>"; };
+		984A514321E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickAnalyzeHistoryPhotoCell.swift; sourceTree = "<group>"; };
+		984A514621E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstapickAnalyzeHistoryPhotoCell.xib; sourceTree = "<group>"; };
+		984A515321E87883004525F5 /* AnalyzeHistoryDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDesigner.swift; sourceTree = "<group>"; };
+		984A515621E87A4F004525F5 /* AnalyzeHistoryDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDisplayManager.swift; sourceTree = "<group>"; };
+		984A515921E88D28004525F5 /* InstapickAnalysisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickAnalysisCell.swift; sourceTree = "<group>"; };
+		984A515C21E88D64004525F5 /* InstapickAnalysisCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstapickAnalysisCell.xib; sourceTree = "<group>"; };
 		984F8E7C200CDEA200D9D595 /* StoriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInteractor.swift; sourceTree = "<group>"; };
 		984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesInitializer.swift; sourceTree = "<group>"; };
 		98570AF7208F7556002CCEBA /* SpotlightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightViewController.swift; sourceTree = "<group>"; };
@@ -5206,6 +5255,7 @@
 		98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceConstants.swift; sourceTree = "<group>"; };
 		98C878222074B78A00374177 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		98C878252074E1C100374177 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDataSource.swift; sourceTree = "<group>"; };
 		98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDataSourceForCollectionView.swift; sourceTree = "<group>"; };
 		98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentlySearchedFaceImageTableViewCell.xib; sourceTree = "<group>"; };
 		98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySearchedFaceImageTableViewCell.swift; sourceTree = "<group>"; };
@@ -5256,6 +5306,10 @@
 		A2268EC421A68C2A002F2611 /* LeavePremiumView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeavePremiumView.xib; sourceTree = "<group>"; };
 		A253D62821A210690049AC15 /* PremiumViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumViewController.xib; sourceTree = "<group>"; };
 		A27FB35728F24100F410FBA2 /* TermsAndServicesInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInitializer.swift; sourceTree = "<group>"; };
+		A2EF976021EC7E2900EC7DE7 /* InstapickPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickPopUpController.swift; sourceTree = "<group>"; };
+		A2EF976121EC7E2900EC7DE7 /* InstapickPopUpController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstapickPopUpController.xib; sourceTree = "<group>"; };
+		A2EF976621ECC3DE00EC7DE7 /* ConnectWithInstaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectWithInstaView.swift; sourceTree = "<group>"; };
+		A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectWithInstaView.xib; sourceTree = "<group>"; };
 		A3E3BDF23BBE84B495BAA606 /* Pods-autosync-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-autosync-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-autosync-widget/Pods-autosync-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		A40655AE864D2491AF9B181A /* PhotoVideoDetailPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailPresenter.swift; sourceTree = "<group>"; };
 		A44DB6B541540CC3F60A6E22 /* RegistrationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -5276,6 +5330,7 @@
 		B3A0B3E5058A3D09CC569377 /* PhotoVideoDetailInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInitializer.swift; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
+		B522E92521E8CB6100C4958E /* LTCircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTCircularProgressView.swift; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
 		B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncOperation.swift; sourceTree = "<group>"; };
 		B5390D772164F0F700A02002 /* ScrollBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollBarView.swift; sourceTree = "<group>"; };
@@ -5340,10 +5395,12 @@
 		B56FBB392122C9AA004F4A59 /* TermsOfUseViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewInput.swift; sourceTree = "<group>"; };
 		B56FBB3C2122C9B9004F4A59 /* TermsOfUseViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewOutput.swift; sourceTree = "<group>"; };
 		B5711DFE20C13F4200E72A9D /* String+ShareActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ShareActivity.swift"; sourceTree = "<group>"; };
+		B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstaPickProgressPopup.xib; sourceTree = "<group>"; };
 		B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+OpenURL.swift"; sourceTree = "<group>"; };
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
 		B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityInitializer.swift; sourceTree = "<group>"; };
+		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
 		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		B5A84524212DA325007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
@@ -5403,6 +5460,8 @@
 		C2287D169D831E3173413D01 /* IntroduceRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouterInput.swift; sourceTree = "<group>"; };
 		C3C2356B20B6DA1B00F3FB6D /* MPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MPush.framework; sourceTree = "<group>"; };
 		C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewController.swift; sourceTree = "<group>"; };
+		C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentGradientView.swift; sourceTree = "<group>"; };
+		C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickSelectionSegmentedController.swift; sourceTree = "<group>"; };
 		C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInitializer.swift; sourceTree = "<group>"; };
 		C65DCBDB204683820083A965 /* MenloworksEventsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenloworksEventsService.swift; sourceTree = "<group>"; };
 		C65DCBDC204683820083A965 /* MenloworksEventsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenloworksEventsConstants.swift; sourceTree = "<group>"; };
@@ -7536,6 +7595,8 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				B522E92121E8CAEC00C4958E /* InstaPickProgressView */,
+				A2EF976921ECC3E600EC7DE7 /* ConnectWithInstaView */,
 				925B96D421E79BAF00B39415 /* RadialGradientableView */,
 				9240C04821B80520005E710C /* PremiumFooterView */,
 				A2268EBA21A68B95002F2611 /* LeavePremiumView */,
@@ -8272,6 +8333,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				92203C3421E9E0A300926469 /* InstaPickRoutingService */,
 				A222450D21D3C53A006EB432 /* PremiumService */,
 				92A745FE21B91A3C00386C37 /* PackageService */,
 				B5CDB34321788536006CFA50 /* TurkcellUpdaterService */,
@@ -10078,6 +10140,14 @@
 			path = InstaPickCard;
 			sourceTree = "<group>";
 		};
+		92203C3421E9E0A300926469 /* InstaPickRoutingService */ = {
+			isa = PBXGroup;
+			children = (
+				92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */,
+			);
+			path = InstaPickRoutingService;
+			sourceTree = "<group>";
+		};
 		9240C04821B80520005E710C /* PremiumFooterView */ = {
 			isa = PBXGroup;
 			children = (
@@ -10159,6 +10229,27 @@
 				9840C62420AEAD8100A8634F /* CheckBoxView.swift */,
 			);
 			path = CheckBoxView;
+			sourceTree = "<group>";
+		};
+		984A511321E72A29004525F5 /* InstaPick */ = {
+			isa = PBXGroup;
+			children = (
+				984A511521E72C18004525F5 /* AnalyzeHistory */,
+			);
+			path = InstaPick;
+			sourceTree = "<group>";
+		};
+		984A511521E72C18004525F5 /* AnalyzeHistory */ = {
+			isa = PBXGroup;
+			children = (
+				984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */,
+				984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */,
+				98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */,
+				984A515321E87883004525F5 /* AnalyzeHistoryDesigner.swift */,
+				984A515621E87A4F004525F5 /* AnalyzeHistoryDisplayManager.swift */,
+				980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */,
+			);
+			path = AnalyzeHistory;
 			sourceTree = "<group>";
 		};
 		98A8677C2088C64D00D2D4F4 /* SpotlightViewController */ = {
@@ -10325,6 +10416,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		A20BA8BA21E9E8A900C6FFBC /* InstapickPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				A2EF976021EC7E2900EC7DE7 /* InstapickPopUpController.swift */,
+				A2EF976121EC7E2900EC7DE7 /* InstapickPopUpController.xib */,
+			);
+			path = InstapickPopUp;
+			sourceTree = "<group>";
+		};
 		A20CDB9C219D608300CA9A67 /* PremiumView */ = {
 			isa = PBXGroup;
 			children = (
@@ -10440,6 +10540,15 @@
 			path = LeavePremiumHeaderView;
 			sourceTree = "<group>";
 		};
+		A2EF976921ECC3E600EC7DE7 /* ConnectWithInstaView */ = {
+			isa = PBXGroup;
+			children = (
+				A2EF976621ECC3DE00EC7DE7 /* ConnectWithInstaView.swift */,
+				A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */,
+			);
+			path = ConnectWithInstaView;
+			sourceTree = "<group>";
+		};
 		A4ECBED0E5120E2F9B5F37F2 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -10517,6 +10626,16 @@
 				26960B2B062ACC0F92ACEE26 /* UserInfoSubViewInitializer.swift */,
 			);
 			path = Configurator;
+			sourceTree = "<group>";
+		};
+		B522E92121E8CAEC00C4958E /* InstaPickProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */,
+				B522E92521E8CB6100C4958E /* LTCircularProgressView.swift */,
+				B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */,
+			);
+			path = InstaPickProgressView;
 			sourceTree = "<group>";
 		};
 		B5390D7D2165F4F500A02002 /* QuickScrollImageLoader */ = {
@@ -10732,6 +10851,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				A20BA8BA21E9E8A900C6FFBC /* InstapickPopUp */,
 				A217E42421A5AF3E0084AA37 /* LeavePremiumViewController */,
 				A20798FB219F12BB00AD5037 /* PremiumViewController */,
 				B5C7C57D211C6958006E94DB /* AugmentedReality */,
@@ -10754,6 +10874,8 @@
 				CE57DFAA1FDE66980065B688 /* DarkPopUp */,
 				CE3E4D09201B131600173045 /* PVViewerController */,
 				CEFFA8F121AFC21C00B34F36 /* SegmentedController */,
+				C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */,
+				C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -11349,6 +11471,7 @@
 				CE3EB30D1FC7F512000B70D6 /* Settings */,
 				CE3EB30F1FC7F7E7000B70D6 /* Home */,
 				1ABC710687B8CDE0F37A8170 /* CreateStory */,
+				984A511321E72A29004525F5 /* InstaPick */,
 			);
 			path = UserStories;
 			sourceTree = "<group>";
@@ -11941,6 +12064,10 @@
 				4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */,
 				4A56D5C6202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift */,
 				4A56D5C7202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib */,
+				984A514321E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift */,
+				984A514621E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib */,
+				984A515921E88D28004525F5 /* InstapickAnalysisCell.swift */,
+				984A515C21E88D64004525F5 /* InstapickAnalysisCell.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -13159,6 +13286,7 @@
 				CE5B5E4220C293B800D91112 /* InfoPlist.strings in Resources */,
 				8C0E8FFD1FDEBDFF00789C91 /* HomeViewTopView.xib in Resources */,
 				8C06AFE12008AD71003D8E05 /* italic_secili@2x.png in Resources */,
+				984A514821E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */,
 				8C06AF732008AD70003D8E05 /* edit.png in Resources */,
 				8C06B12D2008AD72003D8E05 /* t_kucuk_selected@3x.png in Resources */,
 				8C0E8FFE1FDEBDFF00789C91 /* LoginViewController.xib in Resources */,
@@ -13204,6 +13332,7 @@
 				8C06B18B2008AD72003D8E05 /* underline_sari.png in Resources */,
 				8C06AF832008AD70003D8E05 /* error_icon@3x.png in Resources */,
 				9807261A203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */,
+				984A514121E734D2004525F5 /* AnalyzeHistoryViewController.xib in Resources */,
 				8C0E90021FDEBDFF00789C91 /* AppRater.bundle in Resources */,
 				8C06AFC92008AD71003D8E05 /* header_icon@2x.png in Resources */,
 				8C06AECF2008AD70003D8E05 /* beyaz_cerceve.png in Resources */,
@@ -13221,6 +13350,8 @@
 				8C06AFF72008AD71003D8E05 /* kontrast.png in Resources */,
 				8C06AF5B2008AD70003D8E05 /* daire@3x.png in Resources */,
 				8C06B0CD2008AD71003D8E05 /* sample_bw@3x.png in Resources */,
+				B573B94121ECD0280085148A /* InstaPickProgressPopup.xib in Resources */,
+				A2EF976521EC7E2900EC7DE7 /* InstapickPopUpController.xib in Resources */,
 				7CD7C2A720189E24009F6D3D /* StorageCard.xib in Resources */,
 				8C06B0332008AD71003D8E05 /* ok_selected@3x.png in Resources */,
 				8C06B05D2008AD71003D8E05 /* paylas_akilli_depo@3x.png in Resources */,
@@ -13259,6 +13390,7 @@
 				8C06AFBD2008AD71003D8E05 /* geri@2x.png in Resources */,
 				8C06B0BB2008AD71003D8E05 /* rotation_secili.png in Resources */,
 				8C0E900D1FDEBDFF00789C91 /* TabBarView.xib in Resources */,
+				A2EF976C21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */,
 				8C06B0692008AD71003D8E05 /* Paylas_butnuna_basin@3x.png in Resources */,
 				8C06B0292008AD71003D8E05 /* ok_btn_kucuk.png in Resources */,
 				8C0E90101FDEBDFF00789C91 /* SplashViewController.xib in Resources */,
@@ -13608,6 +13740,7 @@
 				8C0E90591FDEBDFF00789C91 /* UserInfoSubViewViewController.xib in Resources */,
 				4A13DBE721A6FE6D002C3D16 /* PremiumInfoCard.xib in Resources */,
 				8C06B0AD2008AD71003D8E05 /* right@2x.png in Resources */,
+				984A515E21E88D64004525F5 /* InstapickAnalysisCell.xib in Resources */,
 				8C06AF352008AD70003D8E05 /* cizgi_3_selected@2x.png in Resources */,
 				8C06B1112008AD72003D8E05 /* success_icon.png in Resources */,
 				8C06B0132008AD71003D8E05 /* kup.png in Resources */,
@@ -13787,6 +13920,7 @@
 				8C06B1102008AD72003D8E05 /* success_icon.png in Resources */,
 				8C06B04C2008AD71003D8E05 /* parlaklik.png in Resources */,
 				8C06AFAC2008AD71003D8E05 /* frame_selected@3x.png in Resources */,
+				984A515D21E88D64004525F5 /* InstapickAnalysisCell.xib in Resources */,
 				8C06AF862008AD70003D8E05 /* extraOptions@2x.png in Resources */,
 				CEAE3FDE1EFD500B00A405B2 /* HomeViewTopView.xib in Resources */,
 				CE51AD201EF90853005DCEE0 /* LoginViewController.xib in Resources */,
@@ -13874,6 +14008,7 @@
 				8C06B0AE2008AD71003D8E05 /* right@3x.png in Resources */,
 				8C06B0242008AD71003D8E05 /* ok@2x.png in Resources */,
 				CE3E4D08201B11BF00173045 /* PVViewerController.xib in Resources */,
+				A2EF976421EC7E2900EC7DE7 /* InstapickPopUpController.xib in Resources */,
 				8C06AF6C2008AD70003D8E05 /* duz_cizgi_selected@2x.png in Resources */,
 				8C06AEBA2008AD70003D8E05 /* akilli_depo_beyaz@3x.png in Resources */,
 				7C355E1C1F00E949003B004C /* CollectionViewCellForController.xib in Resources */,
@@ -13960,6 +14095,7 @@
 				8C06B1D22008AD72003D8E05 /* TOCropViewController.nib in Resources */,
 				8C06AF8C2008AD70003D8E05 /* extraOptions_selected@2x.png in Resources */,
 				CE8F44F31F6AC1660062C2E0 /* ActivityTimelineHeader.xib in Resources */,
+				B573B94021ECD0280085148A /* InstaPickProgressPopup.xib in Resources */,
 				7C203555201F4F8F00D84727 /* LatestUploadCardCell.xib in Resources */,
 				8C06B01A2008AD71003D8E05 /* kup_selected@2x.png in Resources */,
 				8C06AF662008AD70003D8E05 /* duz_cizgi@2x.png in Resources */,
@@ -13973,6 +14109,7 @@
 				B56FBB1C2122C23D004F4A59 /* TermsOfUseViewController.xib in Resources */,
 				8C06AF902008AD70003D8E05 /* filtre.png in Resources */,
 				8C06AF3A2008AD70003D8E05 /* close_icon@2x.png in Resources */,
+				984A514021E734D2004525F5 /* AnalyzeHistoryViewController.xib in Resources */,
 				8C06B0462008AD71003D8E05 /* oval_siyah.png in Resources */,
 				8C06AF622008AD70003D8E05 /* duz_beyaz.png in Resources */,
 				8C06AEE62008AD70003D8E05 /* bottomright@3x.png in Resources */,
@@ -14188,6 +14325,7 @@
 				7C554A001F6C11C300067F99 /* CollectionViewStoryReorderView.xib in Resources */,
 				8C06AF9E2008AD71003D8E05 /* focus@2x.png in Resources */,
 				8C06AFCC2008AD71003D8E05 /* info_icon.png in Resources */,
+				984A514721E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */,
 				8C06B1C42008AD72003D8E05 /* lookup_soft_elegance_2.png in Resources */,
 				8C06B0082008AD71003D8E05 /* Kucuk_Selected@2x.png in Resources */,
 				8C06B0162008AD71003D8E05 /* kup@3x.png in Resources */,
@@ -14240,6 +14378,7 @@
 				7CC11AB01FE276F500AF022D /* WaitingForWiFiPopUp.xib in Resources */,
 				8C06B0BE2008AD71003D8E05 /* rotation_secili@3x.png in Resources */,
 				8C06B0AA2008AD71003D8E05 /* renk_selected@3x.png in Resources */,
+				A2EF976B21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */,
 				8C06B0DE2008AD71003D8E05 /* sample_red@3x.png in Resources */,
 				8C06B0742008AD71003D8E05 /* paylas_fb@3x.png in Resources */,
 				8C06AFF62008AD71003D8E05 /* kontrast.png in Resources */,
@@ -14536,7 +14675,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -14595,7 +14734,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8669CB1C4E4A3903FDCFE854 /* [CP] Copy Pods Resources */ = {
@@ -14604,8 +14743,8 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
-				"${PODS_ROOT}/GoogleTagManager/Frameworks/frameworks/GoogleTagManager.framework/Resources/TagManagerResources.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -14613,7 +14752,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8C0E8C621FDEBDFF00789C91 /* [CP] Check Pods Manifest.lock */ = {
@@ -14653,7 +14792,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -14747,8 +14886,8 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
-				"${PODS_ROOT}/GoogleTagManager/Frameworks/frameworks/GoogleTagManager.framework/Resources/TagManagerResources.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -14756,7 +14895,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TC_Depo_LifeTech/Pods-TC_Depo_LifeTech-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BCA0868506E6C5E554B5F870 /* [CP] Check Pods Manifest.lock */ = {
@@ -14823,7 +14962,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -14924,6 +15063,7 @@
 				8C0E8C8E1FDEBDFF00789C91 /* CustomTabBarItem.swift in Sources */,
 				8C0E8C8F1FDEBDFF00789C91 /* EditinglBar.swift in Sources */,
 				CED4B0242017505300D06CA9 /* HomeCardsService.swift in Sources */,
+				A2EF976821ECC3DE00EC7DE7 /* ConnectWithInstaView.swift in Sources */,
 				92004B3B21AD0F2200582C45 /* MyStorageViewController.swift in Sources */,
 				8C0E8C901FDEBDFF00789C91 /* SubPlussButtonView.swift in Sources */,
 				8C0E8C911FDEBDFF00789C91 /* VisualMusicPlayerViewController.swift in Sources */,
@@ -14988,6 +15128,7 @@
 				8C0E8CCF1FDEBDFF00789C91 /* AlbumSelectionPresenter.swift in Sources */,
 				8C0E8CD01FDEBDFF00789C91 /* PrintInteractorOutput.swift in Sources */,
 				8C0E8CD21FDEBDFF00789C91 /* MoreActionsConfig.swift in Sources */,
+				C4A38BA421EE1F4E00ECCCEA /* InstaPickSelectionSegmentedController.swift in Sources */,
 				92004B7021AD19B300582C45 /* MyStorageInteractor.swift in Sources */,
 				8C0E8CD31FDEBDFF00789C91 /* ServerValueError.swift in Sources */,
 				8C0E8CD51FDEBDFF00789C91 /* CreateStoryNameInteractorInput.swift in Sources */,
@@ -15084,6 +15225,7 @@
 				CE92456A206E0910000C7791 /* InfinityRotater.swift in Sources */,
 				92004B6721AD18FE00582C45 /* MyStoragePresenter.swift in Sources */,
 				4A56D5CE202B316F003A4624 /* FaceImageAddNameDataSource.swift in Sources */,
+				984A515521E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */,
 				8C0E8D1C1FDEBDFF00789C91 /* UIApplication+Settings.swift in Sources */,
 				8C0E8D1D1FDEBDFF00789C91 /* LoginRouterInput.swift in Sources */,
 				98B01C7A206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */,
@@ -15166,6 +15308,7 @@
 				8C0E8D621FDEBDFF00789C91 /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				C62239BD2049774B0043ED44 /* PeopleAlbumSliderInteractor.swift in Sources */,
 				8C0E8D641FDEBDFF00789C91 /* BottomSelectionTabBarViewController.swift in Sources */,
+				980488D521EDC983004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
 				8C0E8D651FDEBDFF00789C91 /* BaseDataSourceForCollectionView.swift in Sources */,
 				8C0E8D661FDEBDFF00789C91 /* AutoSyncViewController.swift in Sources */,
 				8CD2B3B41FE7B42500280547 /* AutoUploadIsOffPopUp.swift in Sources */,
@@ -15297,6 +15440,7 @@
 				8C0E8DD01FDEBDFF00789C91 /* LoginInteractorInput.swift in Sources */,
 				8C0E8DD11FDEBDFF00789C91 /* CreateStoryPhotosOrderInteractorOutput.swift in Sources */,
 				4A0AC139208736FF00032CC7 /* PeriodicContactSyncRouter.swift in Sources */,
+				984A515B21E88D28004525F5 /* InstapickAnalysisCell.swift in Sources */,
 				4A56D5B3202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */,
 				8C0E8DD21FDEBDFF00789C91 /* CreateStoryNameInitializer.swift in Sources */,
 				8C0E8DD31FDEBDFF00789C91 /* AudioSelectionCollectionViewCell.swift in Sources */,
@@ -15351,6 +15495,7 @@
 				8C0E8DF31FDEBDFF00789C91 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				98E792D9203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				A225690C21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */,
+				C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */,
 				A217E42F21A5B0220084AA37 /* LeavePremiumViewInput.swift in Sources */,
 				8C0E8DF41FDEBDFF00789C91 /* ActivityTimelineHeader.swift in Sources */,
 				8C0E8DF51FDEBDFF00789C91 /* PrintViewInput.swift in Sources */,
@@ -15367,6 +15512,7 @@
 				C62239A92049731D0043ED44 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
 				8C0E8DFC1FDEBDFF00789C91 /* PHAssetCollection.swift in Sources */,
 				B53DCE8720EF634900400DBA /* SyncRecord.m in Sources */,
+				A2EF976321EC7E2900EC7DE7 /* InstapickPopUpController.swift in Sources */,
 				CE055F4020383A3400E6BFE8 /* PHAsset+Properties.swift in Sources */,
 				8C0E8DFD1FDEBDFF00789C91 /* HomePageInteractor.swift in Sources */,
 				CE61D1C420468759001D01DC /* URL+Video.swift in Sources */,
@@ -15431,6 +15577,7 @@
 				8C0E8E261FDEBDFF00789C91 /* CreateStoryNamePresenter.swift in Sources */,
 				8C0E8E271FDEBDFF00789C91 /* ForgotPasswordInteractorInput.swift in Sources */,
 				8C0E8E281FDEBDFF00789C91 /* ForgotPasswordInteractorOutput.swift in Sources */,
+				B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
 				8C0E8E291FDEBDFF00789C91 /* AutoSyncViewOutput.swift in Sources */,
 				8C0E8E2A1FDEBDFF00789C91 /* ImportFromInstagramInteractor.swift in Sources */,
 				8C0E8E2B1FDEBDFF00789C91 /* ForgotPasswordInteractor.swift in Sources */,
@@ -15573,6 +15720,7 @@
 				8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */,
 				8C0E8ED11FDEBDFF00789C91 /* Int64+Bytes.swift in Sources */,
 				C62239A5204972D00043ED44 /* SharedEnums.swift in Sources */,
+				984A515821E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */,
 				4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */,
 				B56FBB382122C956004F4A59 /* TermsOfUseModuleInput.swift in Sources */,
 				8C0E8ED21FDEBDFF00789C91 /* BottomSelectionTabBarModuleInput.swift in Sources */,
@@ -15582,9 +15730,11 @@
 				8C0E8ED41FDEBDFF00789C91 /* ContactsSyncService.swift in Sources */,
 				8C0E8ED51FDEBDFF00789C91 /* ShadowView.swift in Sources */,
 				8C0E8ED61FDEBDFF00789C91 /* CreateStoryNameInteractorOutput.swift in Sources */,
+				B522E92721E8CB6100C4958E /* LTCircularProgressView.swift in Sources */,
 				8C0E8ED71FDEBDFF00789C91 /* CollectionViewStoryReorderView.swift in Sources */,
 				92004B6D21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
 				CED4B02E2018594700D06CA9 /* HomeCardResponse.swift in Sources */,
+				92203C3721EA0E8800926469 /* InstaPickRoutingService.swift in Sources */,
 				8C0E8ED81FDEBDFF00789C91 /* SearchViewController.swift in Sources */,
 				8C0E8ED91FDEBDFF00789C91 /* BasicCollectionMultiFileCell.swift in Sources */,
 				8C0E8EDA1FDEBDFF00789C91 /* WrapItemFileService.swift in Sources */,
@@ -15609,6 +15759,7 @@
 				8C017B762074B782002484E7 /* Keys.swift in Sources */,
 				8C0E8EE81FDEBDFF00789C91 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				8C0E8EE91FDEBDFF00789C91 /* PhotoVideoDetailInteractorOutput.swift in Sources */,
+				984A514521E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
 				8C0E8EEA1FDEBDFF00789C91 /* PhotoVideoDetailInteractor.swift in Sources */,
 				4ADE087F202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */,
 				8C0E8EEB1FDEBDFF00789C91 /* PackagesModuleInput.swift in Sources */,
@@ -15756,6 +15907,7 @@
 				8C0B91C02017145D00A5BA81 /* UISearchBar+Cancel.swift in Sources */,
 				8C0E8F481FDEBDFF00789C91 /* FileInfoViewOutput.swift in Sources */,
 				8CD84C471FDEC68A005CD3B8 /* UploadFilesSelectionDataSource.swift in Sources */,
+				984A512C21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
 				8C0E8F491FDEBDFF00789C91 /* FileInfoViewController.swift in Sources */,
 				8C0E8F4A1FDEBDFF00789C91 /* FileInfoModuleInput.swift in Sources */,
 				8C0E8F4B1FDEBDFF00789C91 /* BottomSelectionTabBarRouterInput.swift in Sources */,
@@ -16184,6 +16336,7 @@
 				CE95ED531F516736002F923A /* HelpAndSupportPresenter.swift in Sources */,
 				CE51AB951EF90853005DCEE0 /* IntroduceDataSource.swift in Sources */,
 				7C1EA0481F9792F1002DBAD8 /* CreateStoryResponce.swift in Sources */,
+				984A514421E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift in Sources */,
 				4A9F8E5820875D4300622A6C /* PeriodicContactSyncDataSource.swift in Sources */,
 				7CDABD071F1E3A6300C8CC16 /* UserProfileInteractor.swift in Sources */,
 				CEAE3FB61EFD4F0D00A405B2 /* HomePagePresenter.swift in Sources */,
@@ -16242,6 +16395,7 @@
 				CE2F55FD1F7551CD00F49DA1 /* AccountResponse.swift in Sources */,
 				7CF6BDE11F0B97050066709E /* CollectionViewCellForAudio.swift in Sources */,
 				CE6DE7601FCC44F800C23CBD /* KeyboardLayoutConstraint.swift in Sources */,
+				C4D9C03221EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift in Sources */,
 				CE51ABCD1EF90853005DCEE0 /* AutoSyncInitializer.swift in Sources */,
 				7859299420060E8B003F8AB3 /* ManageContactsPresenter.swift in Sources */,
 				7C49881B1F3320420039C5F2 /* CreateStoryPhotosOrderRouter.swift in Sources */,
@@ -16341,6 +16495,7 @@
 				CEAE3FDD1EFD500B00A405B2 /* HomeViewTopView.swift in Sources */,
 				CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */,
 				78D9BA392007E7F100F2233F /* DuplicatedContactsInteractor.swift in Sources */,
+				A2EF976721ECC3DE00EC7DE7 /* ConnectWithInstaView.swift in Sources */,
 				CEF3719B20873673007AD36E /* UIViewController+NavBar.swift in Sources */,
 				CEB1CEAA1F21E11200C9DD8F /* SwiftyJSONExtension.swift in Sources */,
 				B53DCE9820EF634900400DBA /* ContactDevice.m in Sources */,
@@ -16371,6 +16526,7 @@
 				CE15AFBE20A0846E00015874 /* UINavigationController+Push.swift in Sources */,
 				CE51AC521EF90853005DCEE0 /* LoginDataStorage.swift in Sources */,
 				7859299920060E94003F8AB3 /* ManageContactsInteractor.swift in Sources */,
+				984A515721E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */,
 				7C3A74391F04F4B800124DF5 /* BaseMediaContent.swift in Sources */,
 				CE51AC591EF90853005DCEE0 /* IntroduceSubView.swift in Sources */,
 				78D9BA4A2007E82800F2233F /* DuplicatedContactsViewOutput.swift in Sources */,
@@ -16393,6 +16549,7 @@
 				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
 				4A0AC1562087395E00032CC7 /* PeriodicContactSyncViewOutput.swift in Sources */,
 				4A56D5BB202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
+				980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
 				78E8E2AE2023191800A979AB /* FaceImagePhotosRouter.swift in Sources */,
 				2BA37C38202837B400660394 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
 				7C121F00208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
@@ -16536,6 +16693,7 @@
 				7C233CD71FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift in Sources */,
 				8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */,
 				CE51ACD91EF90853005DCEE0 /* TermsAndServicesRouterInput.swift in Sources */,
+				984A515421E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */,
 				CEACBEA11F6C0EEA003BE328 /* RingView.swift in Sources */,
 				92A7460021B91A4F00386C37 /* PackageService.swift in Sources */,
 				CE3A3003200F4B030028C900 /* Validator.swift in Sources */,
@@ -16578,6 +16736,7 @@
 				CE8F44F11F6AC1550062C2E0 /* ActivityTimelineHeader.swift in Sources */,
 				EFA74FB01FBF378F00CF946E /* PrintViewInput.swift in Sources */,
 				CE4F6195206D1E7B00B179DA /* AnimationFlowManager.swift in Sources */,
+				C4A38BA221EE1F2300ECCCEA /* TransparentGradientView.swift in Sources */,
 				CEDFECA71F10C77E003D1A75 /* UINavigationBarExtension.swift in Sources */,
 				D47863FD1F3F18FA00EFDC6D /* UsageInfoViewOutput.swift in Sources */,
 				CE51ACE81EF90853005DCEE0 /* IntroduceInitializer.swift in Sources */,
@@ -16608,8 +16767,10 @@
 				CED4B02A2017731400D06CA9 /* Alamofire+Response.swift in Sources */,
 				CE51ACED1EF90853005DCEE0 /* PhoneVereficationPresenter.swift in Sources */,
 				8C06AC0E20066641003D8E05 /* TurkcellSecurityInteractorIO.swift in Sources */,
+				B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
 				CE51ACEE1EF90853005DCEE0 /* PhoneVereficationInteractorInput.swift in Sources */,
 				7C241EF81F960BA300322149 /* CollectionViewCellForStoryPhoto.swift in Sources */,
+				984A512B21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
 				CE51ACEF1EF90853005DCEE0 /* PhoneVereficationInteractorOutput.swift in Sources */,
 				486F7B57208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift in Sources */,
 				7C66E8B01F979C3300D98F27 /* CreateStoryPreviewRouterInput.swift in Sources */,
@@ -16676,6 +16837,7 @@
 				D47863F51F3F18FA00EFDC6D /* UsageInfoInteractorOutput.swift in Sources */,
 				CE246A0E1F3D2CDE008DF705 /* SyncServiceManager.swift in Sources */,
 				7C233CD81FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift in Sources */,
+				98D3856D21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift in Sources */,
 				CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */,
 				7CAC23BC1F45718700607660 /* RemoteService.swift in Sources */,
 				D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */,
@@ -16979,6 +17141,7 @@
 				9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */,
 				CEBAB15B2094803C002824C6 /* InsetsButton.swift in Sources */,
 				8C6EF8801F348B5C002AC795 /* BottomSelectionTabBarRouterInput.swift in Sources */,
+				984A515A21E88D28004525F5 /* InstapickAnalysisCell.swift in Sources */,
 				BA527EDC7876722B487A0428 /* FileInfoPresenter.swift in Sources */,
 				5ED1673DE08513D8CA5485E3 /* FileInfoInteractorInput.swift in Sources */,
 				98E792D8203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
@@ -16995,6 +17158,7 @@
 				FA793D822018725400A02B46 /* PeopleService.swift in Sources */,
 				D47863F81F3F18FA00EFDC6D /* UsageInfoRouter.swift in Sources */,
 				CEF371A82088778D007AD36E /* AppConfigurator.swift in Sources */,
+				92203C3621E9E0CB00926469 /* InstaPickRoutingService.swift in Sources */,
 				8C11C42E1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift in Sources */,
 				CEDA44C5207B8ADF00E653DD /* BackButton.swift in Sources */,
 				ACB080CC00E036849D63FBAD /* FileInfoConfigurator.swift in Sources */,
@@ -17051,6 +17215,7 @@
 				77CF7B297D6D1B75D73CACBC /* SelectNamePresenter.swift in Sources */,
 				CE3E4D07201B11BF00173045 /* PVViewerController.swift in Sources */,
 				7C1F898D1F70ECB100740177 /* BaseView.swift in Sources */,
+				B522E92621E8CB6100C4958E /* LTCircularProgressView.swift in Sources */,
 				7CF9A9F51FA2279500242FDD /* ImageForDowload.swift in Sources */,
 				8CF87D5F1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */,
 				05EC9C53FBA7BE69C5C9BFCD /* SelectNameInteractorInput.swift in Sources */,
@@ -17150,6 +17315,7 @@
 				1C8FDD0A3C795F7711BC5822 /* FeedbackViewRouterInput.swift in Sources */,
 				2D620A893121CE2330C18858 /* FeedbackViewRouter.swift in Sources */,
 				2EF733E89FE2194E3B6817BA /* FeedbackViewConfigurator.swift in Sources */,
+				A2EF976221EC7E2900EC7DE7 /* InstapickPopUpController.swift in Sources */,
 				4A8CC303201A00D400C040C4 /* FaceImageViewController.swift in Sources */,
 				8AC9821D58B05574782F11AB /* FeedbackViewInitializer.swift in Sources */,
 				CE292C1421BE5C54004FC745 /* Text+Size.swift in Sources */,

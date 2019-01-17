@@ -39,6 +39,8 @@ class InstagramAuthViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationBarWithGradientStyle()
+        
         setTitle(withString: "Instagram login")
         webView.backgroundColor = UIColor.white
         webView.isOpaque = false

@@ -85,6 +85,13 @@ class RouterVC: NSObject {
         return navController
     }
     
+    func createRootNavigationControllerWithModalStyle(controller: UIViewController) -> UINavigationController {
+        let navController = NavigationController(rootViewController: controller)
+        navController.modalPresentationStyle = .overFullScreen
+        navController.modalTransitionStyle = .crossDissolve
+        return navController
+    }
+    
     func setNavigationController(controller: UIViewController?) {
         guard let window = UIApplication.shared.windows.first else {
             return
@@ -203,7 +210,7 @@ class RouterVC: NSObject {
             })
         }
     }
-    
+        
     func showSpiner() {
         if let lastViewController = getViewControllerForPresent() {
             lastViewController.showSpinerIncludeNavigatinBar()
@@ -694,6 +701,12 @@ class RouterVC: NSObject {
     func placesListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
         let controller = FaceImageItemsInitializer.initializePlacesController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
         return controller as! BaseFilesGreedChildrenViewController
+    }
+    
+    // MARK: Analyses History page
+    
+    func analyzesHistoryController() -> AnalyzeHistoryViewController {
+        return AnalyzeHistoryViewController.initFromNib()
     }
     
     // MARK: Face Image Recognition Photos

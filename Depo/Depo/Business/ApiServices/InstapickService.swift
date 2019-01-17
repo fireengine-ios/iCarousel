@@ -341,6 +341,12 @@ final class InstapickAnalyze {
     }
 }
 
+extension InstapickAnalyze: Equatable {
+    static func == (lhs: InstapickAnalyze, rhs: InstapickAnalyze) -> Bool {
+        return lhs.requestIdentifier == rhs.requestIdentifier
+    }
+}
+
 
 // MARK: - Examples
 
