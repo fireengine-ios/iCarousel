@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSFaceIDUsageDescription</key>
-	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -36,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>12.1.2</string>
+	<string>12.1.8</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -122,6 +120,8 @@
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSContactsUsageDescription</key>
+	<string></string>
+	<key>NSFaceIDUsageDescription</key>
 	<string></string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Your location will be used for background syncing</string>
