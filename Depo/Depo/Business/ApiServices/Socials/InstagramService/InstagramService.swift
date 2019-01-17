@@ -7,8 +7,15 @@
 //
 
 import Foundation
+import Alamofire
 
 final class InstagramService: BaseRequestService {
+    
+    private let sessionManager: SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
+        return SessionManager(configuration: configuration)
+    }()
     
     func socialStatus(success: SuccessResponse?, fail: FailResponse?) {
         debugLog("InstagramService socialStatus")
@@ -23,6 +30,22 @@ final class InstagramService: BaseRequestService {
         let parameters = InstagramConfigParametrs()
         let handler = BaseResponseHandler<InstagramConfigResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: parameters, handler: handler)
+    }
+
+    func checkInstagramLogin(token: String, handler: @escaping (ResponseResult<Void>) -> Void) {
+        sessionManager
+            .request(RouteRequests.instagramConnect,
+                     method: .post,
+                     encoding: token)
+            .customValidate()
+            .responseData { [weak self] response in
+                switch response.result {
+                case .success(_):
+                    break
+                case .failure(let error):
+                    break
+                }
+        }
     }
     
     func getSyncStatus(success: SuccessResponse?, fail: FailResponse?) {
