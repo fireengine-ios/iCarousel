@@ -777,6 +777,17 @@
 "no_for_upgrade" = "No, I'm OK";
 "uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. If you don't upgrade to Premium, your memories will be kept in high quality. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
 
+/*AnalyzeHistoryController*/
+"InstaPick" = "InstaPick";
+"no_analyses_left_title" = "No Analyzes Left";
+"no_analyses_left_message" = "No Analyzes Left";
+"no_analyses_left_button" = "Purchase InstaPick";
+"analyze_history_empty_title" = "analyze_history_empty_title";
+"analyze_history_empty_subtitle" = "analyze_history_empty_subtitle";
+"analyze_history_analyze_left" = "Analyses Left";
+"analyze_history_analyze_count" = "%1$d of %2$d";
+"analyze_with_instapick" = "Analyze With InstaPick";
+"analyze_history_photos_count" = "%d photos";
 /*InstaPick three dots*/
 "new_insta_pick" = "New InstaPick";
 "uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. We will keep your existing photos and videos along with new uploaded memories in high quality until 1st of March. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";

@@ -9,6 +9,7 @@
 import Foundation
 
 public typealias VoidHandler = () -> Void
+public typealias BoolHandler = (Bool) -> Void
 typealias ResponseVoid = (ResponseResult<Void>) -> Void
 typealias ResponseBool = (ResponseResult<Bool>) -> Void
 typealias ResponseHandler<T> = (ResponseResult<T>) -> Void
