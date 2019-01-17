@@ -39,6 +39,8 @@ final class InstaPickCard: BaseView {
     var totalCount: Int = 0
     var isUsedBefore: Bool = true
     
+    private lazy var instapickRoutingService = InstaPickRoutingService()
+    
     private var cardType: InstaPick.CardType?
     //override
     override func configurateView() {
@@ -142,6 +144,18 @@ final class InstaPickCard: BaseView {
         cardType = type
     }
     
+    private func openInstaPickPopUp() {
+        instapickRoutingService.getViewController(success: { controller in
+            DispatchQueue.toMain {
+                let router = RouterVC()
+                let vc = router.createRootNavigationControllerWithModalStyle(controller: controller)
+                router.presentViewController(controller: vc)
+            }
+        }) { (error) in
+            UIApplication.showErrorAlert(message: error.localizedDescription)
+        }
+    }
+    
     //MARK: - Utility Methods(public)
     func isNeedReloadWithNew(totalCount: Int, leftCount: Int) -> Bool {
         var newCardType: InstaPick.CardType = .noUsedBefore
@@ -168,10 +182,12 @@ final class InstaPickCard: BaseView {
     @IBAction private func onBottomButtonTap(_ sender: Any) {
         //TODO: add redirect for different types
         guard let cardType = cardType else { return }
+
         switch cardType {
         case .usedBefore:
-            break
+            openInstaPickPopUp()
         case .noUsedBefore:
+            openInstaPickPopUp()
             break
         case .noAnalysis:
             break

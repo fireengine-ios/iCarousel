@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="TurkcellSaturaBol.ttf">
+            <string>TurkcellSaturaBol</string>
+        </array>
+        <array key="TurkcellSaturaDem.ttf">
+            <string>TurkcellSaturaDem</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstaPickProgressPopup" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="analyzingImage" destination="ccZ-aj-Ni1" id="FOv-7i-Cyc"/>
+                <outlet property="bottomCaption" destination="vB8-dd-TD0" id="BVe-TK-LtL"/>
+                <outlet property="circularLoader" destination="HVk-6C-71R" id="Rkf-rg-Cow"/>
+                <outlet property="topCaption" destination="KtI-Qi-HYB" id="zKH-Bl-eRx"/>
+                <outlet property="view" destination="iN0-l3-epB" id="mHa-L9-PyN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOh-bg-eJT">
+                    <rect key="frame" x="16" y="36" width="343" height="607"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HVk-6C-71R" customClass="LTCircularProgressView" customModule="lifebox" customModuleProvider="target">
+                            <rect key="frame" x="32" y="164" width="279" height="279"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="HVk-6C-71R" secondAttribute="height" multiplier="1:1" id="ApS-RL-sAU"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="progressColor">
+                                    <color key="value" red="0.20000000000000001" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="progressWidth">
+                                    <real key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="progressRadius">
+                                    <real key="value" value="128"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                    <real key="value" value="0.5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="backColor">
+                                    <color key="value" red="0.75686274509803919" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                                    <real key="value" value="112"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="backWidth">
+                                    <real key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="progressRatio">
+                                    <real key="value" value="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make sure to pick your best photos and reach more people!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="KtI-Qi-HYB">
+                            <rect key="frame" x="32" y="8" width="279" height="124"/>
+                            <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="28"/>
+                            <color key="textColor" red="0.039215686274509803" green="0.19607843137254902" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enjoy your time while we analyze your photos!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vB8-dd-TD0">
+                            <rect key="frame" x="32" y="475" width="279" height="36"/>
+                            <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
+                            <color key="textColor" red="0.036609407514333725" green="0.19467014074325562" blue="0.27790236473083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ccZ-aj-Ni1">
+                            <rect key="frame" x="32" y="164" width="279" height="279"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1J-iq-dUr">
+                            <rect key="frame" x="318" y="8" width="17" height="22"/>
+                            <state key="normal" image="grayCloseButton"/>
+                            <connections>
+                                <action selector="close:" destination="-1" eventType="touchUpInside" id="7Rd-wE-C34"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="HVk-6C-71R" firstAttribute="top" secondItem="KtI-Qi-HYB" secondAttribute="bottom" constant="32" id="5R1-4z-FqL"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vB8-dd-TD0" secondAttribute="bottom" constant="16" id="7uK-PF-6bq"/>
+                        <constraint firstItem="ccZ-aj-Ni1" firstAttribute="height" secondItem="HVk-6C-71R" secondAttribute="height" id="DFA-Le-zou"/>
+                        <constraint firstItem="KtI-Qi-HYB" firstAttribute="leading" secondItem="gOh-bg-eJT" secondAttribute="leading" constant="32" id="DRY-aH-x7r"/>
+                        <constraint firstItem="vB8-dd-TD0" firstAttribute="trailing" secondItem="KtI-Qi-HYB" secondAttribute="trailing" id="EIl-Rx-4OT"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HVk-6C-71R" secondAttribute="trailing" constant="32" id="FeB-Qe-IkU"/>
+                        <constraint firstItem="HVk-6C-71R" firstAttribute="centerY" secondItem="gOh-bg-eJT" secondAttribute="centerY" id="Gim-Yk-X6Q"/>
+                        <constraint firstItem="ccZ-aj-Ni1" firstAttribute="width" secondItem="HVk-6C-71R" secondAttribute="width" id="Mhi-fl-F6e"/>
+                        <constraint firstAttribute="trailing" secondItem="u1J-iq-dUr" secondAttribute="trailing" constant="8" id="Qxn-O1-AZL"/>
+                        <constraint firstItem="u1J-iq-dUr" firstAttribute="top" secondItem="gOh-bg-eJT" secondAttribute="top" constant="8" id="ROe-7o-eA3"/>
+                        <constraint firstItem="vB8-dd-TD0" firstAttribute="leading" secondItem="KtI-Qi-HYB" secondAttribute="leading" id="SXZ-q4-HcB"/>
+                        <constraint firstAttribute="trailing" secondItem="KtI-Qi-HYB" secondAttribute="trailing" constant="32" id="T2g-lw-LR3"/>
+                        <constraint firstItem="KtI-Qi-HYB" firstAttribute="top" secondItem="gOh-bg-eJT" secondAttribute="top" constant="8" id="T4s-mp-u1d"/>
+                        <constraint firstItem="HVk-6C-71R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gOh-bg-eJT" secondAttribute="leading" constant="32" id="awa-Gi-gUG"/>
+                        <constraint firstItem="ccZ-aj-Ni1" firstAttribute="centerY" secondItem="HVk-6C-71R" secondAttribute="centerY" id="c1P-7t-ams"/>
+                        <constraint firstItem="ccZ-aj-Ni1" firstAttribute="centerX" secondItem="HVk-6C-71R" secondAttribute="centerX" id="dkz-3g-XJ4"/>
+                        <constraint firstItem="vB8-dd-TD0" firstAttribute="top" secondItem="HVk-6C-71R" secondAttribute="bottom" constant="32" id="ihT-jc-Bni"/>
+                        <constraint firstItem="HVk-6C-71R" firstAttribute="centerX" secondItem="gOh-bg-eJT" secondAttribute="centerX" id="mEQ-HA-hrA"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.5" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="gOh-bg-eJT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Ste-GB-OYL"/>
+                <constraint firstItem="gOh-bg-eJT" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="X1w-nV-UL6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="gOh-bg-eJT" secondAttribute="bottom" constant="24" id="r6p-JE-ARS"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gOh-bg-eJT" secondAttribute="trailing" constant="16" id="z6E-VL-Wlh"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="295.19999999999999" y="226.23688155922042"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="grayCloseButton" width="17" height="17"/>
+    </resources>
+</document>

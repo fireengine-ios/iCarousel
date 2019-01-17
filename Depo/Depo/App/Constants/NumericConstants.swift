@@ -44,6 +44,7 @@ struct NumericConstants {
     static let numberOfElementsInSyncRequest: Int = 30000
     
     static let animationDuration: Double = 0.3
+    static let setImageAnimationDuration: Double = 0.2
     static let fastAnimationDuration: Double = 0.1
     static let scrollIndicatorAnimationDuration: TimeInterval = 1.8
     

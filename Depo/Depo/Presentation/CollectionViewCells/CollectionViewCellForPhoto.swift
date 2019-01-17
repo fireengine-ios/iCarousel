@@ -94,7 +94,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         if animated {
             imageView.layer.opacity = NumericConstants.numberCellDefaultOpacity
             imageView.image = image
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: NumericConstants.setImageAnimationDuration, animations: {
                 self.imageView.layer.opacity = NumericConstants.numberCellAnimateOpacity
             })
         } else {

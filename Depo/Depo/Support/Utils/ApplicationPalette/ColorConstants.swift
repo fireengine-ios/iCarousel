@@ -37,6 +37,7 @@ struct ColorConstants {
     static let oldieFilterColor = UIColor(red: 1, green: 230.0 / 255.0, blue: 0, alpha: 0.4)
     static let bottomViewGrayColor = UIColor(red: 248 / 255, green: 248 / 255, blue: 248 / 255, alpha: 1)
     static let blackForLanding = UIColor(red: 12 / 255, green: 6 / 255, blue: 42 / 255, alpha: 1)
+    static let darkGrayTransperentColor = UIColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 0.54)
     
     static let orangeGradientStart = UIColor(red: 255 / 255, green: 177 / 255, blue: 33 / 255, alpha: 1)
     static let orangeGradientEnd = UIColor(red: 255 / 255, green: 183 / 255, blue: 116 / 255, alpha: 1)
@@ -44,6 +45,7 @@ struct ColorConstants {
     static let greenGradientEnd = UIColor(red: 77 / 255, green: 218 / 255, blue: 218 / 255, alpha: 1)
     static let redGradientStart = UIColor(red: 159 / 255, green: 4 / 255, blue: 27 / 255, alpha: 1)
     static let redGradientEnd = UIColor(red: 245 / 255, green: 81 / 255, blue: 95 / 255, alpha: 1)
+    static let darkRed = UIColor(red: 208 / 255, green: 2 / 255, blue: 27 / 255, alpha: 1)
     
     static let lrTiffanyBlueGradient = UIColor(red: 244 / 255, green: 71 / 255, blue: 87 / 255, alpha: NumericConstants.alphaForColorsPremiumButton)
     static let orangeGradient = UIColor(red: 255 / 255, green: 159 / 255, blue: 8 / 255, alpha: NumericConstants.alphaForColorsPremiumButton)
