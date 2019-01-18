@@ -1022,6 +1022,7 @@ struct TextConstants {
     static let analyzeHistoryAnalyzeCount = NSLocalizedString("analyze_history_analyze_count", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let analyzeHistoryAnalyseButton = NSLocalizedString("analyze_with_instapick", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let analyzeHistoryPhotosCount = NSLocalizedString("analyze_history_photos_count", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzeHistoryStartHereTitle = NSLocalizedString("analyze_history_start_here", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     //MARK: - InstaPickThreeDors
     static let newInstaPick = NSLocalizedString("new_insta_pick", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     //MARK: - InstaPickCard

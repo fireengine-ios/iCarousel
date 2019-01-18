@@ -246,8 +246,6 @@ extension InstapickPopUpController: InstagramAuthViewControllerDelegate {
         }
     }
     
-    func instagramAuthCancel() {
-        ///TODO: need to redo instagram authentication
-    }
+    func instagramAuthCancel() { }
     
 }

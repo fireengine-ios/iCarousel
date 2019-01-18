@@ -57,6 +57,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private func configure() {
         needShowTabBar = false
         
+        displayManager.applyConfiguration(.initial)
+        
         dataSource.setupCollectionView(collectionView: collectionView)
         dataSource.delegate = self
         collectionView.contentInset.bottom = newAnalysisView.bounds.height
@@ -143,7 +145,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         if dataSource.isSelectionStateActive {
             showAlertSheet(with: [.delete], sender: sender)
         } else {
-            showAlertSheet(with: [.select], sender: sender)
+            showAlertSheet(with: [.select, .selectAll], sender: sender)
         }
     }
     
@@ -158,8 +160,13 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 })
             case .select:
                 action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
-                    self.dataSource.startSelection(with: nil)
+                    self.dataSource.startSelection()
                     self.startSelection(with: 0)
+                })
+            case .selectAll:
+                action = UIAlertAction(title: TextConstants.actionSheetSelectAll, style: .default, handler: { _ in
+                    self.dataSource.startSelection(with: nil, selectAll: true)
+                    self.startSelection(with: self.dataSource.itemsCount)
                 })
             default:
                 action = nil
