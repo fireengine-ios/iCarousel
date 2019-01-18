@@ -111,6 +111,11 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         self.analysisCount = analysisCount
     }
     
+    func reloadHistoryItems(_ newItems: [InstapickAnalyze]) {
+        items.removeAll()
+        appendHistoryItems(newItems)
+    }
+    
     func appendHistoryItems(_ newItems: [InstapickAnalyze]) {
         guard !newItems.isEmpty else {
             isPaginationDidEnd = true
@@ -233,6 +238,10 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
 
 extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.section == AnalyzeHistorySectionType.photos.rawValue else {
+            return
+        }
+        
         let item = items[indexPath.item]
         if isSelectionStateActive {
             guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCellDataProtocol else {

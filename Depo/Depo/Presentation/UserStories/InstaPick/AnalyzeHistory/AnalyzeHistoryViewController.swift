@@ -254,7 +254,11 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             switch result {
             case .success(let history):
                 DispatchQueue.main.async {
-                    self.dataSource.appendHistoryItems(history)
+                    if self.page == 0 {
+                        self.dataSource.reloadHistoryItems(history)
+                    } else {
+                        self.dataSource.appendHistoryItems(history)
+                    }
                     self.page += 1
                 
                     if self.dataSource.isEmpty {
