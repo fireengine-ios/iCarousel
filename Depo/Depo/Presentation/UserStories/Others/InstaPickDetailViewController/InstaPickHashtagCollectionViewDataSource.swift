@@ -21,6 +21,11 @@ class InstaPickHashtagCollectionViewDataSource: UICollectionViewFlowLayout {
         return collectionViewWidth - sectionInset.left - sectionInset.right
     }
     
+    override func prepare() {
+        minimumLineSpacing = 0
+        minimumInteritemSpacing = 0
+    }
+    
     //MARK: - UICollectionViewFlowLayout(override)
     override open func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         guard let layoutAttributes = super.layoutAttributesForItem(at: indexPath)?.copy() as? UICollectionViewLayoutAttributes else {
@@ -94,14 +99,6 @@ extension InstaPickHashtagCollectionViewDataSource: UICollectionViewDelegateFlow
         let width = hashtags[indexPath.row].width(for: textHeight, font: textFont) + NumericConstants.instaPickHashtagCellWidthConstant
         
         return CGSize(width: width, height: NumericConstants.instaPickHashtagCellHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
     }
 }
 

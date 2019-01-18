@@ -50,14 +50,13 @@ final class InstaPickDetailViewController: UIViewController {
     
     @IBOutlet var instaPickPhotoViews: [InstaPickPhotoView]!
 
-    var analyzes: [InstapickAnalyze] = []
-
     //MARK: Vars
     private var dataSource = InstaPickHashtagCollectionViewDataSource()
     private var isShown = false
     private var selectedPhoto: InstapickAnalyze?
-    private var leftCount: String!
-    private var totalCount: String!
+    
+    private var analyzes: [InstapickAnalyze] = []
+    private var analyzesCount: InstapickAnalyzesCount?
 
     //MARK: lifecycle
     override func viewDidLoad() {
@@ -74,9 +73,7 @@ final class InstaPickDetailViewController: UIViewController {
     //MARK: - Utility Methods(public)
     func configure(with models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) {
         analyzes = models
-        
-        leftCount = String(analyzesCount.left)
-        totalCount = String(analyzesCount.total)
+        self.analyzesCount = analyzesCount
     }
     
     //MARK: - Utility Methods(private)
@@ -177,9 +174,14 @@ final class InstaPickDetailViewController: UIViewController {
     private func setupAnalysisLeftLabel() {
         //TODO: find the way to seek needed substring(we could create one more PO Editing tag like "%@ of %@" to compare
         //TODO: and seek be this string). What do you think?
-        let text = String(format: TextConstants.instaPickLeftCountLabel, leftCount, totalCount)
+        guard let analyzesCount = analyzesCount else {
+            let error = CustomErrors.serverError("An error occurred while getting analyzes count.")
+            showErrorWith(message: error.localizedDescription)
+            return
+        }
+        let text = String(format: TextConstants.instaPickLeftCountLabel, analyzesCount.left, analyzesCount.left)
         ///if left count is 0 we seek ":"(not 0 because of RTL language) and draw in red
-        if leftCount == "0", let location = text.firstIndex(of: ":") {
+        if analyzesCount.left == 0, let location = text.firstIndex(of: ":") {
             let attributedString = NSMutableAttributedString(string: text, attributes: [
                 .font : UIFont.TurkcellSaturaDemFont(size: 18),
                 .foregroundColor : ColorConstants.textGrayColor,
