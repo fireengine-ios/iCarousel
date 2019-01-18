@@ -144,16 +144,11 @@ final class InstaPickCard: BaseView {
         cardType = type
     }
     
-    private func openInstaPickPopUp() {
-        instapickRoutingService.getViewController(success: { controller in
-            DispatchQueue.toMain {
-                let router = RouterVC()
-                let vc = router.createRootNavigationControllerWithModalStyle(controller: controller)
-                router.presentViewController(controller: vc)
-            }
-        }) { (error) in
-            UIApplication.showErrorAlert(message: error.localizedDescription)
-        }
+    private func openInstaPickHistory() {
+        let router = RouterVC()
+        
+        let controller = router.analyzesHistoryController()
+        router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
     //MARK: - Utility Methods(public)
@@ -185,9 +180,9 @@ final class InstaPickCard: BaseView {
 
         switch cardType {
         case .usedBefore:
-            openInstaPickPopUp()
+            openInstaPickHistory()
         case .noUsedBefore:
-            openInstaPickPopUp()
+            openInstaPickHistory()
             break
         case .noAnalysis:
             break
