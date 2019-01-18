@@ -30,8 +30,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                                target: self,
                                selector: #selector(onCancelSelectionButton))
     }()
-    
-    private let navBarRightItemSourceRect = CGRect(x: Device.winSize.width - 45, y: -15, width: 0, height: 0)
+    private var navBarRightItems: [UIBarButtonItem]?
     
     private var editingTabBar: BottomSelectionTabBarViewController?
     private var bottomBarPresenter: BottomSelectionTabBarModuleInput?
@@ -78,7 +77,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         }
         let rightActions: [NavBarWithAction] = [more]
         navBarConfigurator.configure(right: rightActions, left: [])
-        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+        navBarRightItems = navBarConfigurator.rightItems
     }
     
     private func configureBottomTabBar() {
@@ -92,16 +91,16 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     private func startSelection(with count: Int) {
         selectedItemsCountChange(with: count)
-        navigationItem.leftBarButtonItem = cancelSelectionButton
         displayManager.applyConfiguration(.selection)
+        updateNavBarItems()
     }
     
     private func stopSelection() {
-        navigationItem.leftBarButtonItem = nil
         setTitle(withString: TextConstants.analyzeHistoryTitle)
         dataSource.cancelSelection()
         bottomBarPresenter?.dismiss(animated: true)
         displayManager.applyConfiguration(dataSource.isEmpty ? .empty : .initial)
+        updateNavBarItems()
     }
     
     private func selectedItemsCountChange(with count: Int) {
@@ -111,6 +110,20 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             bottomBarPresenter?.dismiss(animated: true)
         } else {
             bottomBarPresenter?.show(animated: true, onView: view)
+        }
+    }
+    
+    private func updateNavBarItems() {
+        switch displayManager.configuration {
+        case .initial:
+            navigationItem.rightBarButtonItems = navBarRightItems
+            navigationItem.leftBarButtonItem = nil
+        case .empty:
+            navigationItem.rightBarButtonItems = nil
+            navigationItem.leftBarButtonItem = nil
+        case .selection:
+            navigationItem.rightBarButtonItems = nil
+            navigationItem.leftBarButtonItem = cancelSelectionButton
         }
     }
     
@@ -142,9 +155,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     private func onMorePressed(_ sender: Any) {
-        if dataSource.isSelectionStateActive {
-            showAlertSheet(with: [.delete], sender: sender)
-        } else {
+        if !dataSource.isSelectionStateActive {
             showAlertSheet(with: [.select, .selectAll], sender: sender)
         }
     }
@@ -154,10 +165,6 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         types.forEach { type in
             var action: UIAlertAction?
             switch type {
-            case .delete:
-                action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                    self.deleteSelectedAnalyzes()
-                })
             case .select:
                 action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
                     self.dataSource.startSelection()
@@ -189,16 +196,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 sourceRectFrame = CGRect(origin: CGPoint(x: pressedBarButton.frame.origin.x, y: pressedBarButton.frame.origin.y + 20), size: pressedBarButton.frame.size)
             }
             actionSheetVC.popoverPresentationController?.sourceRect = sourceRectFrame
-        } else if let _ = sender as? UIBarButtonItem {
-            //FIXME: use actionSheetVC.popoverPresentationController?.barButtonItem instead
-            if navigationController?.navigationBar.isTranslucent == true {
-                var frame = navBarRightItemSourceRect
-                frame.origin.y = 44
-                actionSheetVC.popoverPresentationController?.sourceRect = frame
-            } else {
-                actionSheetVC.popoverPresentationController?.sourceRect = navBarRightItemSourceRect
-            }
-            
+        } else if let item = sender as? UIBarButtonItem {
+            actionSheetVC.popoverPresentationController?.barButtonItem = item
             actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up
         }
         present(actionSheetVC, animated: true)
@@ -273,6 +272,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                     } else if self.displayManager.configuration == .empty {
                         self.displayManager.applyConfiguration(.initial)
                     }
+                    self.updateNavBarItems()
                     completion?(true)
                 }
             case .failed(let error):
