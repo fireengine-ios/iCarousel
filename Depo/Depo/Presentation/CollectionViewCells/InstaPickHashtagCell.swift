@@ -29,15 +29,15 @@ final class InstaPickHashtagCell: UICollectionViewCell {
         hashtagLabel.font = UIFont.TurkcellSaturaMedFont(size: 10)
         hashtagLabel.textColor = ColorConstants.darkText
         
-        shadowView.layer.cornerRadius = NumericConstants.instaPickhashtagCellCornerRadius
+        shadowView.layer.cornerRadius = NumericConstants.instaPickHashtagCellCornerRadius
         
-        shadowView.layer.borderColor = ColorConstants.darkBorder.withAlphaComponent(NumericConstants.instaPickhashtagCellBorderColorAlpha).cgColor
-        shadowView.layer.borderWidth = NumericConstants.instaPickhashtagCellBorderWidth
+        shadowView.layer.borderColor = ColorConstants.darkBorder.withAlphaComponent(NumericConstants.instaPickHashtagCellBorderColorAlpha).cgColor
+        shadowView.layer.borderWidth = NumericConstants.instaPickHashtagCellBorderWidth
         
-        shadowView.layer.shadowColor = UIColor.black.withAlphaComponent(NumericConstants.instaPickhashtagCellShadowColorAlpha).cgColor
+        shadowView.layer.shadowColor = UIColor.black.withAlphaComponent(NumericConstants.instaPickHashtagCellShadowColorAlpha).cgColor
         shadowView.layer.shadowOpacity = NumericConstants.packageViewShadowOpacity
         shadowView.layer.shadowOffset = .zero
-        shadowView.layer.shadowRadius = NumericConstants.instaPickhashtagCellShadowRadius
+        shadowView.layer.shadowRadius = NumericConstants.instaPickHashtagCellShadowRadius
     }
     
     func configure(with hashtag: String, delegate: InstaPickHashtagCellDelegate) {

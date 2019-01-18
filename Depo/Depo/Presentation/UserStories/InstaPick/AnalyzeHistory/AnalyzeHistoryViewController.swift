@@ -240,12 +240,12 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     private func reloadCards(success: VoidHandler? = nil) {
-        getAnalyzesCount(success: { [weak self] response in
+        getAnalyzesCount(success: { [weak self] analyzesCount in
             guard let `self` = self else {
                 return
             }
 
-            self.dataSource.reloadCards(with: response)
+            self.dataSource.reloadCards(with: analyzesCount)
             success?()
         })
     }
@@ -332,9 +332,9 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private func prepareToOpenDetails(with analyze: InstapickAnalyze) {
         startActivityIndicator()
         
-        getAnalyzesCount(success: { [weak self] response in
+        getAnalyzesCount(success: { [weak self] analyzesCount in
             
-            self?.getAnalyzeDetails(for: analyze.requestIdentifier, analyzesCount: response)
+            self?.getAnalyzeDetails(for: analyze.requestIdentifier, analyzesCount: analyzesCount)
             })
     }
     

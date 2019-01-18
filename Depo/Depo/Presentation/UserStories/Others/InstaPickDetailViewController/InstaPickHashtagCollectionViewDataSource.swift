@@ -189,18 +189,16 @@ fileprivate extension UICollectionViewLayoutAttributes {
     }
     
     private func alignToPrecedingItem(collectionViewLayout: InstaPickHashtagCollectionViewDataSource) {
-        let itemSpacing = collectionViewLayout.minimumInteritemSpacing
         
         if let precedingItemAttributes = collectionViewLayout.layoutAttributesForItem(at: precedingIndexPath) {
-            frame.origin.x = precedingItemAttributes.frame.maxX + itemSpacing
+            frame.origin.x = precedingItemAttributes.frame.maxX
         }
     }
     
     private func alignToFollowingItem(collectionViewLayout: InstaPickHashtagCollectionViewDataSource) {
-        let itemSpacing = collectionViewLayout.minimumInteritemSpacing
         
         if let followingItemAttributes = collectionViewLayout.layoutAttributesForItem(at: followingIndexPath) {
-            frame.origin.x = followingItemAttributes.frame.minX - itemSpacing - frame.size.width
+            frame.origin.x = followingItemAttributes.frame.minX - frame.size.width
         }
     }
     
