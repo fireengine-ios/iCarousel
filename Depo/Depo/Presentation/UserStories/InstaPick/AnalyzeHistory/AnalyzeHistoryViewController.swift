@@ -211,20 +211,17 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         
         startActivityIndicator()
         
-        reloadCards { [weak self] isSuccess in
+        reloadCards { [weak self] in
             guard let `self` = self else {
                 return
             }
             
-            if isSuccess {
-                self.page = 0
-                self.dataSource.isPaginationDidEnd = false
-                self.loadNextHistoryPage(completion: { [weak self] _ in
-                    self?.stopActivityIndicator()
-                })
-            } else {
-                self.stopActivityIndicator()
-            }
+            self.page = 0
+            self.dataSource.isPaginationDidEnd = false
+            self.loadNextHistoryPage(completion: { [weak self] _ in
+                self?.stopActivityIndicator()
+            })
+
         }
     }
     
@@ -236,23 +233,22 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         }
     }
     
-    private func reloadCards(completion: BoolHandler? = nil) {
+    private func reloadCards(success: VoidHandler? = nil) {
         getAnalyzesCount(success: { [weak self] response in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
 
             self.dataSource.reloadCards(with: response)
-            completion?(true)
-        }, fail: { [weak self] error in
-            guard let `self` = self else { return }
-
-            self.showError(message: error.localizedDescription)
-            completion?(false)
+            success?()
         })
     }
     
     private func loadNextHistoryPage(completion: BoolHandler? = nil) {
         instapickService.getAnalyzeHistory(offset: page, limit: pageSize) { [weak self] result in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
             
             switch result {
             case .success(let history):
@@ -278,7 +274,9 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         startActivityIndicator()
         let ids = dataSource.selectedItems.map { $0.requestIdentifier }
         instapickService.removeAnalyzes(ids: ids) { [weak self] result in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
             
             switch result {
             case .success:
@@ -296,7 +294,9 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     private func getAnalyzeDetails(for id: String, analyzesCount: InstapickAnalyzesCount) {
         instapickService.getAnalyzeDetails(id: id) { [weak self] result in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
 
             switch result {
             case .success(let response):
@@ -307,17 +307,14 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         }
     }
     
-    private func getAnalyzesCount(success: @escaping (InstapickAnalyzesCount) -> (), fail: @escaping FailResponse) {
+    private func getAnalyzesCount(success: @escaping (InstapickAnalyzesCount) -> ()) {
         instapickService.getAnalyzesCount { [weak self] result in
 
             switch result {
             case .success(let analysisCount):
                 success(analysisCount)
-                break
             case .failed(let error):
-                let errorResponse = ErrorResponse.error(error)
-                fail(errorResponse)
-                break
+                self?.showError(message: error.localizedDescription)
             }
         }
     }
@@ -326,14 +323,9 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         startActivityIndicator()
         
         getAnalyzesCount(success: { [weak self] response in
-            guard let `self` = self else { return }
             
-            self.getAnalyzeDetails(for: analyze.requestIdentifier, analyzesCount: response)
-            }, fail: { [weak self] error in
-                guard let `self` = self else { return }
-
-                self.showError(message: error.localizedDescription)
-        })
+            self?.getAnalyzeDetails(for: analyze.requestIdentifier, analyzesCount: response)
+            })
     }
     
     private func openDetail(for analysis: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) {
@@ -378,7 +370,6 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
     }
     
     func onSeeDetailsForAnalyze(_ analyze: InstapickAnalyze) {
-        //TODO: - Open Analyze Details Screen
         prepareToOpenDetails(with: analyze)
     }
     

@@ -46,8 +46,6 @@ final class InstaPickProgressPopup: ViewController {
     private var animationStepsNumber: Int {
         return max(analyzingImagesUrls.count, topCaptionTexts.count)
     }
-    private let transitionDuration = 0.25
-    
     
     static func createPopup(with analyzingImages: [URL], topTexts: [String], bottomText: String) -> InstaPickProgressPopup {
         let controller = InstaPickProgressPopup(nibName: "InstaPickProgressPopup", bundle: nil)
@@ -105,7 +103,7 @@ final class InstaPickProgressPopup: ViewController {
             }
             
             UIView.transition(with: self.analyzingImage,
-                              duration: self.transitionDuration,
+                              duration: NumericConstants.instaPickImageViewTransitionDuration,
                               options: .transitionCrossDissolve,
                               animations: {
                                 self.analyzingImage.image = image
@@ -119,7 +117,7 @@ final class InstaPickProgressPopup: ViewController {
         
         let topTextIndex = step % topCaptionTexts.count
         UIView.transition(with: topCaption,
-                          duration: transitionDuration,
+                          duration: NumericConstants.instaPickImageViewTransitionDuration,
                           options: .transitionCrossDissolve,
                           animations: {
                             self.topCaption.text = self.topCaptionTexts[safe: topTextIndex]

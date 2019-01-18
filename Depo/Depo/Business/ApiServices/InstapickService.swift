@@ -337,7 +337,7 @@ final class InstapickAnalyze {
     }
     
     func getSmallImageURL() -> URL? {
-        return fileInfo?.metadata?.smalURl
+        return fileInfo?.metadata?.mediumUrl
     }
     
     func getLargeImageURL() -> URL? {

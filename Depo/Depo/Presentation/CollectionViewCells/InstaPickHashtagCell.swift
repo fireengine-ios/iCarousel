@@ -9,7 +9,7 @@
 import UIKit
 
 protocol InstaPickHashtagCellDelegate: class {
-    func dismissCell(with hashtag: String)
+    func dismiss(cell: InstaPickHashtagCell)
 }
 
 final class InstaPickHashtagCell: UICollectionViewCell {
@@ -46,7 +46,6 @@ final class InstaPickHashtagCell: UICollectionViewCell {
     }
 
     @IBAction private func onCloseTap(_ sender: Any) {
-        guard let hastag = hashtagLabel.text else { return }
-        delegate?.dismissCell(with: hastag)
+        delegate?.dismiss(cell: self)
     }
 }

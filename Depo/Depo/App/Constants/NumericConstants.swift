@@ -131,6 +131,8 @@ struct NumericConstants {
     static let instaPickhashtagCellBorderColorAlpha: CGFloat = 0.15
     
     static let instaPickDetailsPopUpCornerRadius: CGFloat = 2
+    
+    static let instaPickImageViewTransitionDuration: TimeInterval = 0.25
 }
 
 struct RequestSizeConstant {

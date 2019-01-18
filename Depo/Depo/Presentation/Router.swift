@@ -633,15 +633,6 @@ class RouterVC: NSObject {
         return c
     }
     
-    func filesDetailViewControllerForInstaPick(fileObject: WrapData, items: [WrapData]) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewControllerForInstaPick(with: "PhotoVideoDetailViewController",
-                                                                                    selectedItem: fileObject,
-                                                                                    allItems: items)
-        let c = controller as! PhotoVideoDetailViewController
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return c
-    }
-    
     func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
                                                                                          selectedItem: fileObject,

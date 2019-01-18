@@ -50,49 +50,14 @@ final class InstaPickDetailViewController: UIViewController {
     
     @IBOutlet var instaPickPhotoViews: [InstaPickPhotoView]!
 
-    //MARK: Mock
-    ///Remove after server become ready
-//    var analyzes: [InstapickAnalyze] = []
-    var analyzes: [InstapickAnalyze] = [InstapickAnalyze(requestIdentifier: "123",
-                                                       rank: 7.7,
-                                                       hashTags: ["#lifebox", "#xmas", "#orangeSoft",
-                                                                  "#wrtht", "#instaPick", "#hipster",
-                                                                  "#fun", "#summer", "#photo",
-                                                                  "#oohs", "#friend", "#best"],
-                                                       fileInfo: nil,
-                                                       photoCount: 5,
-                                                       startedDate: Date()),
-                                        InstapickAnalyze(requestIdentifier: "345",
-                                                         rank: 7.4,
-                                                         hashTags: ["#8474", "#13534523", "#wrg",
-                                                                    "#fun", "#wwhgwtrh", "#wrwt53wrth",
-                                                                    "#wrth", "#wrthwrtwt", "#4535"],
-                                                         fileInfo: nil,
-                                                         photoCount: 5,
-                                                         startedDate: Date()),
-                                        InstapickAnalyze(requestIdentifier: "1233",
-                                                         rank: 2.7,
-                                                         hashTags: ["#gwhwrgwr", "#wtwrwrtg", "#wrg",
-                                                                    "#wfgwrg", "#wrgwrg",
-                                                                    "#fun", "#wwhgwtrh", "#wrwtwrth",
-                                                                    "#wrth", "#wrthwt"],
-                                                         fileInfo: nil,
-                                                         photoCount: 5,
-                                                         startedDate: Date())]
-    
-    var photoUrls = ["https://www.irishtimes.com/polopoly_fs/1.3103126.1496249528!/image/image.jpg_gen/derivatives/box_620_330/image.jpg",
-                     "https://imgs.smoothradio.com/images/11045?crop=16_9&width=660&relax=1&signature=fQibOhAoATw9IS6IxqXXXyXyvQ4=",
-                     "https://www.telegraph.co.uk/content/dam/films/2017/03/20/bean_trans_NvBQzQNjv4BqFNKJvd-mi0anfcfhLYGg39oWbqNtszRryLrO6EuiQ.png?imwidth=1400",
-                     "https://cdn.dnaindia.com/sites/default/files/styles/full/public/2018/07/19/706762-rowan-atkinson.jpg",
-                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjC0cQTdNUh9Uyf3h7jgzar-aAb4PI4bRLt21gmDVCRVRPiSZd"]
+    var analyzes: [InstapickAnalyze] = []
 
     //MARK: Vars
-    private var hashtags: [String] = []
-    
+    private var dataSource = InstaPickHashtagCollectionViewDataSource()
     private var isShown = false
     private var selectedPhoto: InstapickAnalyze?
-    private var leftCount: String = "0"
-    private var totalCount: String = "32"
+    private var leftCount: String!
+    private var totalCount: String!
 
     //MARK: lifecycle
     override func viewDidLoad() {
@@ -108,7 +73,7 @@ final class InstaPickDetailViewController: UIViewController {
     
     //MARK: - Utility Methods(public)
     func configure(with models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) {
-//        analyzes = models //tmp
+        analyzes = models
         
         leftCount = String(analyzesCount.left)
         totalCount = String(analyzesCount.total)
@@ -151,7 +116,7 @@ final class InstaPickDetailViewController: UIViewController {
     
     private func setupPhotoViews() {
         guard !analyzes.isEmpty else {
-            let error = CustomErrors.text("Error.There are on photos to show")
+            let error = CustomErrors.serverError("There are no photos to show.")
             showErrorWith(message: error.localizedDescription)
             return
         }
@@ -161,9 +126,8 @@ final class InstaPickDetailViewController: UIViewController {
         for view in instaPickPhotoViews {
             if let id = view.restorationIdentifier, let type = PhotoViewType(rawValue: id), type.index <= maxIndex {
                 let analyze = analyzes[type.index]
-//                photoView.configureImageView(with: analyzes[index], delegate: self)
-                let url = URL(string: photoUrls[type.index])
-                view.configureImageView(with: analyze, url: url, delegate: self)
+                
+                view.configureImageView(with: analyze, delegate: self)
             } else {
                 view.isHidden = true
             }
@@ -175,14 +139,9 @@ final class InstaPickDetailViewController: UIViewController {
     }
     
     private func setupCollectionView() {
-        let layout = InstaPickCollectionViewFlowLayout()
-        ///distance between cells makes by shadow space
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        collectionView.collectionViewLayout = layout
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        collectionView.collectionViewLayout = dataSource
+        collectionView.delegate = dataSource
+        collectionView.dataSource = dataSource
         
         collectionView.register(nibCell: InstaPickHashtagCell.self)
     }
@@ -219,6 +178,7 @@ final class InstaPickDetailViewController: UIViewController {
         //TODO: find the way to seek needed substring(we could create one more PO Editing tag like "%@ of %@" to compare
         //TODO: and seek be this string). What do you think?
         let text = String(format: TextConstants.instaPickLeftCountLabel, leftCount, totalCount)
+        ///if left count is 0 we seek ":"(not 0 because of RTL language) and draw in red
         if leftCount == "0", let location = text.firstIndex(of: ":") {
             let attributedString = NSMutableAttributedString(string: text, attributes: [
                 .font : UIFont.TurkcellSaturaDemFont(size: 18),
@@ -239,53 +199,62 @@ final class InstaPickDetailViewController: UIViewController {
     }
     
     private func prepareToAppear() {
-        if analyzes.count > 0 {
+        if analyzes.isEmpty {
+            let error = CustomErrors.serverError("There are no photos to show.")
+            showErrorWith(message: error.localizedDescription)
+        } else {
             analyzes.sort(by: { left, right in
                 return left.rank > right.rank
             })
             
-            analyzes.first?.isPicked = true
+            let topRatePhoto = analyzes.first
+
+            topRatePhoto?.isPicked = true
             
-            let topRatePhoto = analyzes[0]
-            hashtags = topRatePhoto.hashTags
+            dataSource.hashtags = topRatePhoto?.hashTags ?? []
             
             selectedPhoto = topRatePhoto
-        } else {
-            let error = CustomErrors.text("Error. There are no any photos to show.")
-            showErrorWith(message: error.localizedDescription)
         }
     }
     
     private func setNewSelectedPhoto(with id: String) {
-        guard let newSelectedPhotoIndex = analyzes.firstIndex(where: { $0.requestIdentifier == id }) else {
-            let error = CustomErrors.text("An error occurred while changing selected photo. Not found photo with id: \(id)")
+        guard let newSelectedPhotoIndex = analyzes.firstIndex(where: {
+            if let analyzeId = $0.fileInfo?.uuid {
+               return analyzeId == id
+            }
+            return false
+        }) else {
+            let error = CustomErrors.serverError("An error occurred while changing selected photo. Not found photo with id: \(id)")
             showErrorWith(message: error.localizedDescription)
             return
         }
         
         analyzes.swapAt(0, newSelectedPhotoIndex)
-        photoUrls.swapAt(0, newSelectedPhotoIndex)
         
         setupPhotoViews()
         
         let newSelectedPhoto = analyzes.first
-        hashtags = newSelectedPhoto?.hashTags ?? []
+        dataSource.hashtags = newSelectedPhoto?.hashTags ?? []
         collectionView.reloadData()
         
         selectedPhoto = newSelectedPhoto
     }
     
     private func openImage() {
-        let router = RouterVC()
-        guard let selectedPhoto = selectedPhoto else { return } //tmp
-//        guard let selectedPhoto = selectedPhoto, selectedPhoto.getLargeImageURL() != nil else {
-//            let error = CustomErrors.text("Error. There is no url for large photo.")
-//            showErrorWith(message: error)
-//            return
-//        }
-        let wrappedData = Item(instaPickAnalyzeModel: selectedPhoto)
-        let controller = router.filesDetailViewControllerForInstaPick(fileObject: wrappedData, items: [wrappedData])
-        let nController = NavigationController(rootViewController: controller)
+        guard let selectedPhoto = selectedPhoto, selectedPhoto.getLargeImageURL() != nil else {
+            let error = CustomErrors.serverError("There is no url for large photo.")
+            showErrorWith(message: error.localizedDescription)
+            return
+        }
+        
+        let vc = PVViewerController.initFromNib()
+        if let view = instaPickPhotoViews.first(where: { $0.restorationIdentifier == PhotoViewType.bigView.rawValue }),
+            let image = view.getImage() {
+            
+            vc.image = image
+        }
+        
+        let nController = NavigationController(rootViewController: vc)
         self.present(nController, animated: true, completion: nil) ///routerVC not work
     }
     
@@ -295,18 +264,16 @@ final class InstaPickDetailViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction private func onCopyToClipboardTap(_ sender: Any) {
-        ///Is it need? In task you should by press include it to share but I think its unclear for user
-        let clipboardString = hashtags.joined()
+        let clipboardString = dataSource.hashtags.joined()
         UIPasteboard.general.string = clipboardString
     }
     
     @IBAction private func onShareTap(_ sender: Any) {
-//        guard let url: URL = selectedPhoto?.getLargeImageURL() else {
-//            let error = CustomErrors.text("Error. There is no url for large photo.")
-//            showErrorWith(message: error)
-//            return
-//        }
-        let url = photoUrls[0] //tmp
+        guard let url: URL = selectedPhoto?.getLargeImageURL() else {
+            let error = CustomErrors.serverError("There is no url for large photo.")
+            showErrorWith(message: error.localizedDescription)
+            return
+        }
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         self.present(activityVC, animated: true, completion: nil) ///routerVC not work
     }
@@ -316,45 +283,15 @@ final class InstaPickDetailViewController: UIViewController {
     }
 }
 
-//MARK: - UICollectionViewDataSource
-extension InstaPickDetailViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return hashtags.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeue(cell: InstaPickHashtagCell.self, for: indexPath)
-        cell.configure(with: hashtags[indexPath.row], delegate: self)
-        return cell
-    }
-}
-
-//MARK: - UICollectionViewDelegateFlowLayout
-extension InstaPickDetailViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = hashtags[indexPath.row].width(for: 23, font: UIFont.TurkcellSaturaMedFont(size: 10)) + NumericConstants.instaPickHashtagCellWidthConstant
-        return CGSize(width: width, height: NumericConstants.instaPickHashtagCellHeight)
-    }
-}
-
-//MARK: - InstaPickHashtagCellDelegate
-extension InstaPickDetailViewController: InstaPickHashtagCellDelegate {
-    func dismissCell(with hashtag: String) {
-        guard let index = hashtags.index(of: hashtag) else { return }
-        hashtags.remove(at: index)
-        let indexPath = IndexPath(item: index, section: 0)
-        collectionView?.performBatchUpdates({ [weak self] in
-            self?.collectionView?.deleteItems(at: [indexPath])
-            }, completion: nil)
-    }
-}
-
 extension InstaPickDetailViewController: InstaPickPhotoViewDelegate {
-    func didTapOnImage(_ id: String) {
-        if selectedPhoto?.requestIdentifier == id {
+    func didTapOnImage(_ id: String?) {
+        guard let id = id else {
+            let error = CustomErrors.serverError("Enable to get photo metadata.")
+            showErrorWith(message: error.localizedDescription)
+            return
+        }
+        
+        if let selectedPhotoId = selectedPhoto?.fileInfo?.uuid, selectedPhotoId == id {
             openImage()
         } else {
             setNewSelectedPhoto(with: id)

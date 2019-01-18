@@ -2537,8 +2537,8 @@
 		9219B19D21ECB7B900098021 /* InstaPickHashtagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9219B19921ECB7B900098021 /* InstaPickHashtagCell.xib */; };
 		921EC07A21E5ED30000A0860 /* InstaPickCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921EC07921E5ED30000A0860 /* InstaPickCard.swift */; };
 		921EC07C21E5ED55000A0860 /* InstaPickCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 921EC07B21E5ED55000A0860 /* InstaPickCard.xib */; };
-		921FF09A21EDB550007EA5E6 /* InstaPickCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FF09921EDB550007EA5E6 /* InstaPickCollectionViewFlowLayout.swift */; };
-		921FF09B21EDB550007EA5E6 /* InstaPickCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FF09921EDB550007EA5E6 /* InstaPickCollectionViewFlowLayout.swift */; };
+		921FF09A21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FF09921EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift */; };
+		921FF09B21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FF09921EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift */; };
 		92203C3621E9E0CB00926469 /* InstaPickRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */; };
 		92203C3721EA0E8800926469 /* InstaPickRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */; };
 		9224936821BC14890086CB6A /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
@@ -5227,7 +5227,7 @@
 		9219B19921ECB7B900098021 /* InstaPickHashtagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickHashtagCell.xib; sourceTree = "<group>"; };
 		921EC07921E5ED30000A0860 /* InstaPickCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCard.swift; sourceTree = "<group>"; };
 		921EC07B21E5ED55000A0860 /* InstaPickCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickCard.xib; sourceTree = "<group>"; };
-		921FF09921EDB550007EA5E6 /* InstaPickCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		921FF09921EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickHashtagCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickRoutingService.swift; sourceTree = "<group>"; };
 		9224936721BC14890086CB6A /* AuthorityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorityType.swift; sourceTree = "<group>"; };
 		9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumFooterCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -10158,7 +10158,7 @@
 			children = (
 				9219B18821ECA25800098021 /* InstaPickDetailViewController.swift */,
 				9219B18921ECA25800098021 /* InstaPickDetailViewController.xib */,
-				921FF09921EDB550007EA5E6 /* InstaPickCollectionViewFlowLayout.swift */,
+				921FF09921EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift */,
 			);
 			path = InstaPickDetailViewController;
 			sourceTree = "<group>";
@@ -15536,7 +15536,7 @@
 				8C0E8DEC1FDEBDFF00789C91 /* IntroduceRouterInput.swift in Sources */,
 				8C0E8DED1FDEBDFF00789C91 /* IntroduceRouter.swift in Sources */,
 				8C0E8DEE1FDEBDFF00789C91 /* SettingsTableViewSwitchCell.swift in Sources */,
-				921FF09B21EDB550007EA5E6 /* InstaPickCollectionViewFlowLayout.swift in Sources */,
+				921FF09B21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
 				8C0E8DEF1FDEBDFF00789C91 /* PhotoStory.swift in Sources */,
 				8C0E8DF01FDEBDFF00789C91 /* IntroduceConfigurator.swift in Sources */,
 				8C0E8DF11FDEBDFF00789C91 /* PasscodeStorage.swift in Sources */,
@@ -16991,7 +16991,7 @@
 				921423E321B51E5300B44574 /* PackageModelResponse.swift in Sources */,
 				7C4F60B0201C674A0033C58F /* MovieCard.swift in Sources */,
 				CE6DE7581FCBE84100C23CBD /* FBResponses.swift in Sources */,
-				921FF09A21EDB550007EA5E6 /* InstaPickCollectionViewFlowLayout.swift in Sources */,
+				921FF09A21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
 				78E8E2B02023195600A979AB /* FaceImagePhotosInitializer.swift in Sources */,
 				DE10EF65DE653E0EDBEC8C17 /* BaseFilesGreedViewInput.swift in Sources */,
 				B5CDB33021787FEF006CFA50 /* UpdateServerIntegration.m in Sources */,

@@ -8,7 +8,11 @@
 
 import UIKit
 
-class InstaPickCollectionViewFlowLayout: UICollectionViewFlowLayout {
+///https://github.com/mischa-hildebrand/AlignedCollectionViewFlowLayout/blob/master/AlignedCollectionViewFlowLayout/Classes/AlignedCollectionViewFlowLayout.swift
+
+class InstaPickHashtagCollectionViewDataSource: UICollectionViewFlowLayout {
+    
+    var hashtags: [String] = []
     
     private var contentWidth: CGFloat? {
         guard let collectionViewWidth = collectionView?.frame.size.width else {
@@ -79,6 +83,61 @@ class InstaPickCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
 }
 
+//MARK: - UICollectionViewDelegateFlowLayout
+extension InstaPickHashtagCollectionViewDataSource: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let textHeight = NumericConstants.instaPickHashtagCellHeight
+        let textFont = UIFont.TurkcellSaturaMedFont(size: 10)
+        let width = hashtags[indexPath.row].width(for: textHeight, font: textFont) + NumericConstants.instaPickHashtagCellWidthConstant
+        
+        return CGSize(width: width, height: NumericConstants.instaPickHashtagCellHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
+
+//MARK: - UICollectionViewDataSource
+extension InstaPickHashtagCollectionViewDataSource: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return hashtags.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeue(cell: InstaPickHashtagCell.self, for: indexPath)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? InstaPickHashtagCell {
+            cell.configure(with: hashtags[indexPath.row], delegate: self)
+        }
+    }
+}
+
+//MARK: - InstaPickHashtagCellDelegate
+extension InstaPickHashtagCollectionViewDataSource: InstaPickHashtagCellDelegate {
+    func dismiss(cell: InstaPickHashtagCell) {
+        guard let indexPath = collectionView?.indexPath(for: cell) else {
+            return
+        }
+        
+        hashtags.remove(at: indexPath.row)
+        collectionView?.performBatchUpdates({ [weak self] in
+            self?.collectionView?.deleteItems(at: [indexPath])
+            }, completion: nil)
+    }
+}
+
 //MARK: - UICollectionViewLayoutAttributes
 fileprivate extension UICollectionViewLayoutAttributes {
     private var currentSection: Int {
@@ -97,7 +156,7 @@ fileprivate extension UICollectionViewLayoutAttributes {
         return IndexPath(item: currentItem + 1, section: currentSection)
     }
     
-    func isRepresentingFirstItemInLine(collectionViewLayout: InstaPickCollectionViewFlowLayout) -> Bool {
+    func isRepresentingFirstItemInLine(collectionViewLayout: InstaPickHashtagCollectionViewDataSource) -> Bool {
         if currentItem <= 0 {
             return true
         } else {
@@ -109,7 +168,7 @@ fileprivate extension UICollectionViewLayoutAttributes {
         }
     }
     
-    func isRepresentingLastItemInLine(collectionViewLayout: InstaPickCollectionViewFlowLayout) -> Bool {
+    func isRepresentingLastItemInLine(collectionViewLayout: InstaPickHashtagCollectionViewDataSource) -> Bool {
         guard let itemCount = collectionViewLayout.collectionView?.numberOfItems(inSection: currentSection) else {
             return false
         }
@@ -129,7 +188,7 @@ fileprivate extension UICollectionViewLayoutAttributes {
         frame.origin.x = sectionInset.left
     }
     
-    private func alignToPrecedingItem(collectionViewLayout: InstaPickCollectionViewFlowLayout) {
+    private func alignToPrecedingItem(collectionViewLayout: InstaPickHashtagCollectionViewDataSource) {
         let itemSpacing = collectionViewLayout.minimumInteritemSpacing
         
         if let precedingItemAttributes = collectionViewLayout.layoutAttributesForItem(at: precedingIndexPath) {
@@ -137,7 +196,7 @@ fileprivate extension UICollectionViewLayoutAttributes {
         }
     }
     
-    private func alignToFollowingItem(collectionViewLayout: InstaPickCollectionViewFlowLayout) {
+    private func alignToFollowingItem(collectionViewLayout: InstaPickHashtagCollectionViewDataSource) {
         let itemSpacing = collectionViewLayout.minimumInteritemSpacing
         
         if let followingItemAttributes = collectionViewLayout.layoutAttributesForItem(at: followingIndexPath) {
@@ -145,7 +204,7 @@ fileprivate extension UICollectionViewLayoutAttributes {
         }
     }
     
-    func alignHorizontally(collectionViewLayout: InstaPickCollectionViewFlowLayout) {
+    func alignHorizontally(collectionViewLayout: InstaPickHashtagCollectionViewDataSource) {
         if isRepresentingFirstItemInLine(collectionViewLayout: collectionViewLayout) {
             alignToLeft(with: collectionViewLayout.sectionInset)
         } else {

@@ -15,12 +15,11 @@ class PhotoVideoDetailModuleConfigurator {
                                                        documentsBottomBarConfig: EditingBarConfig,
                                                        selecetedItem: Item,
                                                        allItems: [Item],
-                                                       hideActions: Bool = false,
-                                                       hideInterations: Bool = false) {
+                                                       hideActions: Bool = false) {
         if let viewController = viewInput as? PhotoVideoDetailViewController {
             configure(viewController: viewController, photoVideoBottomBarConfig: photoVideoBottomBarConfig, documentsBottomBarConfig: documentsBottomBarConfig, alertSheetExcludeTypes: [.delete],
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions,
-                      selecetedItem: selecetedItem, allItems: allItems, hideActions: hideActions, hideInterations: hideInterations)
+                      selecetedItem: selecetedItem, allItems: allItems, hideActions: hideActions)
         }
     }
 
@@ -74,8 +73,7 @@ class PhotoVideoDetailModuleConfigurator {
                            selecetedItem: Item,
                            allItems: [Item],
                            albumItem: Item? = nil,
-                           hideActions: Bool,
-                           hideInterations: Bool = false) {
+                           hideActions: Bool) {
         let router = PhotoVideoDetailRouter()
 
         let presenter = PhotoVideoDetailPresenter()
@@ -98,7 +96,6 @@ class PhotoVideoDetailModuleConfigurator {
         let botvarBarVC = bottomBarVCmodule.setupModule(config: photoVideoBottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
         viewController.editingTabBar = botvarBarVC
         viewController.hideActions = hideActions
-        viewController.isNeedHideInteractions = hideInterations
         presenter.bottomBarPresenter = bottomBarVCmodule.presenter
         bottomBarVCmodule.presenter?.basePassingPresenter = presenter
         //--------------------

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol InstaPickPhotoViewDelegate {
-    func didTapOnImage(_ id: String)
+    func didTapOnImage(_ id: String?)
 }
 
 final class InstaPickPhotoView: UIView {
@@ -41,10 +41,10 @@ final class InstaPickPhotoView: UIView {
         
         setup()
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
 
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        
         setupLayers()
     }
     
@@ -60,39 +60,44 @@ final class InstaPickPhotoView: UIView {
     }
 
     private func setup() {
+        setNeedsLayout()
+        layoutIfNeeded()
+        
         imageView.contentMode = .scaleAspectFill
         
-        setupFonts()
+        contentView.layer.masksToBounds = true
+        rateView.layer.masksToBounds = true
+        pickedView.layer.masksToBounds = true
+
         setupLayers()
+        setupFonts()
     }
     
     private func setupLayers() {
         imageView.layer.cornerRadius = imageView.bounds.height * 0.5
 
-        contentView.layer.masksToBounds = true
         contentView.layer.cornerRadius = contentView.bounds.height * 0.5
         
-        rateView.layer.masksToBounds = true
         rateView.layer.cornerRadius = rateView.bounds.height * 0.5
 
-        pickedView.layer.masksToBounds = true
         pickedView.layer.cornerRadius = pickedView.bounds.height * 0.5
     }
     
     private func setupView() {
         let nibNamed = String(describing: InstaPickPhotoView.self)
         Bundle(for: InstaPickPhotoView.self).loadNibNamed(nibNamed, owner: self, options: nil)
-        guard let view = view else { return }
+        guard let view = view else {
+            return
+        }
+        
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.translatesAutoresizingMaskIntoConstraints = true
         
         addSubview(view)
     }
     
     //MARK: - Utility methods(public)
     func configureImageView(with model: InstapickAnalyze,
-                            url: URL?, //tmp
                             delegate: InstaPickPhotoViewDelegate? = nil) {
         if let oldModel = self.model {
             ///logic for reuse this method on tap at small image (not pass if model same and reconfigure if thay are different)
@@ -106,16 +111,38 @@ final class InstaPickPhotoView: UIView {
 
         let isBigView = restorationIdentifier == InstaPickPhotoView.bigViewId
 
-        let Url = isBigView ? url : url //tmp
-//        let url = isBigView ? model.getLargeImageURL() : model.getSmallImageURL()
-        imageView.sd_setImage(with: Url, completed: { [weak self] (image, _, _, _) in
-            if image == nil {
-                self?.imageView.backgroundColor = .white
-                self?.imageView.image = UIImage(named: "instaPickImageNotFound")
+        let url = isBigView ? model.getLargeImageURL() : model.getSmallImageURL()
+        imageView.sd_setImage(with: url, completed: { [weak self] (image, _, _, _) in
+            guard let `self` = self else {
+                return
             }
+            
+            let imageToAttach: UIImage?
+            let imageViewBackgroundColor: UIColor
+            
+            if image == nil {
+                imageToAttach = UIImage(named: "instaPickImageNotFound")
+                imageViewBackgroundColor = .white
+            } else {
+                imageToAttach = image
+                imageViewBackgroundColor = .clear
+            }
+            
+            UIView.transition(with: self.imageView,
+                              duration: NumericConstants.instaPickImageViewTransitionDuration,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                                self.imageView.backgroundColor = imageViewBackgroundColor
+                                self.imageView.image = imageToAttach
+            }, completion: nil)
         })
         
-        if !model.isPicked {
+        if model.isPicked {
+            pickedView.isHidden = !isBigView
+            
+            rateView.isNeedGradient = true
+            contentView.isNeedGradient = true
+        } else {
             pickedView.isHidden = true
             
             rateView.isNeedGradient = false
@@ -123,17 +150,18 @@ final class InstaPickPhotoView: UIView {
             
             contentView.isNeedGradient = false
             contentView.backgroundColor = UIColor.lrTealish
-        } else {
-            pickedView.isHidden = !isBigView
-            
-            rateView.isNeedGradient = true
-            contentView.isNeedGradient = true
         }
         
         self.model = model
     }
     
+    func getImage() -> UIImage? {
+        return imageView.image
+    }
+    
+    //MARK: Action
     @IBAction private func onImageTap(_ sender: Any) {
-        delegate?.didTapOnImage(model?.requestIdentifier ?? "")
+        let id = model?.fileInfo?.uuid
+        delegate?.didTapOnImage(id)
     }
 }
