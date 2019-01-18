@@ -63,11 +63,11 @@ final class InstagramService: BaseRequestService {
         executeGetRequest(param: parameters, handler: handler)
     }
     
-    func checkInstagramLogin(token: String, handler: @escaping (ResponseResult<Void>) -> Void) {
+    func checkInstagramLogin(instagramAccessToken: String, handler: @escaping (ResponseResult<Void>) -> Void) {
         sessionManager
             .request(RouteRequests.instagramConnect,
                      method: .post,
-                     encoding: token)
+                     encoding: instagramAccessToken)
             .customValidate()
             .responseData { response in
                 switch response.result {

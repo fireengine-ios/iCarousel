@@ -23,7 +23,7 @@ class InstagramAuthViewController: ViewController {
     
     private var isLoginStarted = false
     private var isLoginCanceled = false
-    private var accessToken: String?
+    private var instagramAccessToken: String?
     
     private lazy var instagramService = InstagramService()
     
@@ -70,8 +70,8 @@ class InstagramAuthViewController: ViewController {
     
     private func checkInstagramLogin() {
         showSpiner()
-        if let accessToken = accessToken {
-            instagramService.checkInstagramLogin(token: accessToken) { [weak self] response in
+        if let instagramAccessToken = instagramAccessToken {
+            instagramService.checkInstagramLogin(instagramAccessToken: instagramAccessToken) { [weak self] response in
                 self?.hideSpiner()
                 switch response {
                 case .success(_):
@@ -113,7 +113,7 @@ extension InstagramAuthViewController: WKNavigationDelegate {
         }
         
         if let index = currentUrl.range(of: "#access_token=")?.upperBound {
-            accessToken = String(currentUrl.suffix(from: index))
+            instagramAccessToken = String(currentUrl.suffix(from: index))
             isLoginStarted = true
         } else if currentUrl.contains("access_denied"), navigationAction.navigationType == .formSubmitted {
             isLoginCanceled = true
