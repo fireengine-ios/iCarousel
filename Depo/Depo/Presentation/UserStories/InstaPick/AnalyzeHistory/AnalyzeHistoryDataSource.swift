@@ -116,8 +116,8 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     }
     
     func reloadHistoryItems(_ newItems: [InstapickAnalyze]) {
-        items.removeAll()
-        appendHistoryItems(newItems)
+        items = newItems
+        collectionView.reloadData()
     }
     
     func appendHistoryItems(_ newItems: [InstapickAnalyze]) {
@@ -125,13 +125,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
             isPaginationDidEnd = true
             return
         }
-        
-        if items.isEmpty {
-            items = newItems
-            collectionView.reloadData()
-        } else {
-            mergeItems(with: newItems)
-        }
+        mergeItems(with: newItems)
     }
     
     private func mergeItems(with newItems: [InstapickAnalyze]) {
