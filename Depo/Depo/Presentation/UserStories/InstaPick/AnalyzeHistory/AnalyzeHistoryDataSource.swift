@@ -85,6 +85,10 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     var isEmpty: Bool {
         return items.isEmpty
     }
+    
+    var itemsCount: Int {
+        return items.count
+    }
 
     weak var delegate: AnalyzeHistoryDataSourceDelegate?
     
@@ -111,18 +115,17 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         self.analysisCount = analysisCount
     }
     
+    func reloadHistoryItems(_ newItems: [InstapickAnalyze]) {
+        items = newItems
+        collectionView.reloadData()
+    }
+    
     func appendHistoryItems(_ newItems: [InstapickAnalyze]) {
         guard !newItems.isEmpty else {
             isPaginationDidEnd = true
             return
         }
-        
-        if items.isEmpty {
-            items = newItems
-            collectionView.reloadData()
-        } else {
-            mergeItems(with: newItems)
-        }
+        mergeItems(with: newItems)
     }
     
     private func mergeItems(with newItems: [InstapickAnalyze]) {
@@ -162,9 +165,11 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         }
     }
     
-    func startSelection(with indexPath: IndexPath?) {
+    func startSelection(with indexPath: IndexPath? = nil, selectAll: Bool = false) {
         isSelectionStateActive = true
-        if let indexPath = indexPath {
+        if selectAll {
+            selectedItems = items
+        } else if let indexPath = indexPath {
             let item = items[indexPath.item]
             selectedItems = [item]
         } else {
@@ -233,6 +238,10 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
 
 extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.section == AnalyzeHistorySectionType.photos.rawValue else {
+            return
+        }
+        
         let item = items[indexPath.item]
         if isSelectionStateActive {
             guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCellDataProtocol else {

@@ -77,12 +77,13 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         countLabel.text = countText
         
         if let metadata = item.fileInfo?.metadata {
-            setImage(with: metadata)
+            setImage(with: metadata, identifier: item.requestIdentifier)
         }
     }
 
-    override func setImage(with metaData: BaseMetaData) {
-        let cacheKey = metaData.mediumUrl?.byTrimmingQuery
+    func setImage(with metaData: BaseMetaData, identifier: String) {
+        //url is not unique key for analyze items
+        let cacheKey = metaData.mediumUrl?.byTrimmingQuery?.appendingPathComponent(identifier)
         cellImageManager = CellImageManager.instance(by: cacheKey)
         uuid = cellImageManager?.uniqueId
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in

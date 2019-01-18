@@ -44,4 +44,14 @@ final class AnalyzeHistoryDesigner: NSObject {
             newValue.setTitle(TextConstants.analyzeHistoryAnalyseButton, for: .normal)
         }
     }
+    
+    @IBOutlet private weak var startLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.analyzeHistoryStartHereTitle
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 14)
+            newValue.textAlignment = .center
+            newValue.numberOfLines = 0
+        }
+    }
 }

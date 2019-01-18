@@ -23,6 +23,9 @@ class InstagramAuthViewController: ViewController {
     
     private var isLoginStarted = false
     private var isLoginCanceled = false
+    private var instagramAccessToken: String?
+    
+    private lazy var instagramService = InstagramService()
     
     weak var delegate: InstagramAuthViewControllerDelegate?
     
@@ -60,6 +63,28 @@ class InstagramAuthViewController: ViewController {
         }
     }
     
+    private func instagramAuthCancel() {
+        delegate?.instagramAuthCancel()
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func checkInstagramLogin() {
+        showSpiner()
+        if let instagramAccessToken = instagramAccessToken {
+            instagramService.checkInstagramLogin(instagramAccessToken: instagramAccessToken) { [weak self] response in
+                self?.hideSpiner()
+                switch response {
+                case .success(_):
+                    self?.delegate?.instagramAuthSuccess()
+                    self?.navigationController?.popViewController(animated: true)
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    self?.instagramAuthCancel()
+                }
+            }
+        }
+    }
+    
     deinit {
         webView.navigationDelegate = nil
         webView.stopLoading()
@@ -70,11 +95,9 @@ extension InstagramAuthViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if isLoginStarted {
-            delegate?.instagramAuthSuccess()
-            navigationController?.popViewController(animated: true)
+            checkInstagramLogin()
         } else if isLoginCanceled {
-            delegate?.instagramAuthCancel()
-            navigationController?.popViewController(animated: true)
+            instagramAuthCancel()
         }
     }
     
@@ -89,7 +112,8 @@ extension InstagramAuthViewController: WKNavigationDelegate {
             return
         }
         
-        if currentUrl.contains("#access_token"), navigationAction.navigationType == .formSubmitted {
+        if let index = currentUrl.range(of: "#access_token=")?.upperBound {
+            instagramAccessToken = String(currentUrl.suffix(from: index))
             isLoginStarted = true
         } else if currentUrl.contains("access_denied"), navigationAction.navigationType == .formSubmitted {
             isLoginCanceled = true
