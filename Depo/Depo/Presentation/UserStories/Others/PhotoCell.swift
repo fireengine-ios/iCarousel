@@ -5,8 +5,10 @@ final class PhotoCell: UICollectionViewCell {
     private enum Constants {
         static let favoriteImageViewSideSize: CGFloat = 24
         static let edgeInset: CGFloat = 6
+        static let selectionBorderWidth: CGFloat = 3
         
-        static let checkmarkFillImage = UIImage(named: "checkmark_fill")
+        static let checkmarkFillImage = UIImage(named: "selected")
+        static let checkmarkEmptyImage = UIImage(named: "notSelected")
     }
     
     let imageView: UIImageView = {
@@ -32,10 +34,15 @@ final class PhotoCell: UICollectionViewCell {
                           width: Constants.favoriteImageViewSideSize,
                           height: Constants.favoriteImageViewSideSize)
         let imageView = UIImageView(frame: rect)
+        imageView.isHidden = true
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "favoriteStar")
         return imageView
     }()
+    
+    private var cellImageManager: CellImageManager?
+    private var uuid: String?
     
     //private var representedAssetIdentifier = ""
     
@@ -55,8 +62,13 @@ final class PhotoCell: UICollectionViewCell {
         addSubview(favoriteImageView)
         layer.borderColor = UIColor.red.cgColor
         
-        //favoriteImageView.image = Constants.checkmarkFillImage
-        //favoriteImageView.tintColor = UIColor.yellow
+        layer.borderColor = ColorConstants.darcBlueColor.cgColor
+        
+        // TODO: setup accessibility
+        //favoriteImageView.accessibilityLabel = TextConstants.accessibilityFavorite
+        isAccessibilityElement = true
+        accessibilityTraits = UIAccessibilityTraitImage
+        //accessibilityLabel = wrappered.name
     }
     
     override func layoutSubviews() {
@@ -78,26 +90,34 @@ final class PhotoCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
         imageView.image = nil
         selectionImageView.image = nil
-        favoriteImageView.image = nil
+        favoriteImageView.isHidden = true
+        cellImageManager = nil
     }
     
     func update(for selectionState: PhotoSelectionController.SelectionState) {
         if self.isSelected {
             selectionImageView.image = Constants.checkmarkFillImage
-            selectionImageView.tintColor = UIColor.blue
-            layer.borderWidth = 3
+            setViewBorder(isSelected: true)
         } else {
-            layer.borderWidth = 0
+            setViewBorder(isSelected: false)
             switch selectionState {
             case .selecting:
-                selectionImageView.image = Constants.checkmarkFillImage
-                selectionImageView.tintColor = UIColor.black
+                selectionImageView.image = Constants.checkmarkEmptyImage
                 break
             case .ended:
                 selectionImageView.image = nil
             }
+        }
+    }
+    
+    private func setViewBorder(isSelected: Bool) {
+        if isSelected {
+            layer.borderWidth = Constants.selectionBorderWidth
+        } else {
+            layer.borderWidth = 0
         }
     }
 }
@@ -200,7 +220,7 @@ final class PhotoService {
                 let data = try? Data(contentsOf: file),
                 let photos = try? JSONDecoder().decode([WebPhoto].self, from: data)
                 else {
-                    assertionFailure()
+//                    assertionFailure()
                     return nil
             }
             self.photos = photos
