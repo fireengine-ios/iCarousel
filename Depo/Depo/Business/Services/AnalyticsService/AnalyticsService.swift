@@ -164,7 +164,7 @@ extension AnalyticsService: AnalyticsGA {
         let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
         var payment: String?
         if let unwrapedisNativePayment = isPaymentMethodNative {
-            payment = "\(unwrapedisNativePayment)"
+            payment = unwrapedisNativePayment ? "inApp" : "Turkcell"
         }
 
         let group = DispatchGroup()
@@ -219,7 +219,7 @@ extension AnalyticsService: AnalyticsGA {
                                            transactionID: "", tax: "0",
                                            priceValue: price, shipping: "0")
         
-        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: false) { dimentionParametrs in
             Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
         }
     }
@@ -233,7 +233,7 @@ extension AnalyticsService: AnalyticsGA {
                                            transactionID: "", tax: "0",
                                            priceValue: price, shipping: "0")
         
-        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true) { dimentionParametrs in
             Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
         }
     }
