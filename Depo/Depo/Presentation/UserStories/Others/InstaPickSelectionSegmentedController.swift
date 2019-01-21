@@ -12,11 +12,13 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     
     private let topView = UIView()
     private let contanerView = UIView()
-    let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
+    private let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
     
     private let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
-        //segmentedControl.tintColor = UIColor.magenta
+        segmentedControl.tintColor = ColorConstants.darcBlueColor
+        segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)],
+                                                for: .normal)
         return segmentedControl
     }()
     
@@ -81,12 +83,16 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         transparentGradientView.heightAnchor.constraint(equalToConstant: transparentGradientViewHeight).isActive = true
         
         let button = BlueButtonWithWhiteText()
+        button.isExclusiveTouch = true
+        button.setTitle(TextConstants.analyzeWithInstapick, for: .normal)
         button.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
         
-        transparentGradientView.addSubview(button)
-        button.leadingAnchor.constraint(equalTo: transparentGradientView.leadingAnchor, constant: edgeOffset).isActive = true
-        button.trailingAnchor.constraint(equalTo: transparentGradientView.trailingAnchor, constant: -edgeOffset).isActive = true
+        view.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: edgeOffset).isActive = true
+        button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -edgeOffset).isActive = true
         button.centerYAnchor.constraint(equalTo: transparentGradientView.centerYAnchor).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 54).isActive = true
     }
     
     @objc private func analyzeWithInstapick() {
