@@ -113,6 +113,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         ItemOperationManager.default.startUpdateView(view: self)
         
         setupMoreButton()
+        
         onStopPlay()
         rootNavController(vizible: true)
         blackNavigationBarStyle()

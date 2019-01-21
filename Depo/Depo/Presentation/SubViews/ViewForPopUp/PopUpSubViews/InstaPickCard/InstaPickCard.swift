@@ -34,10 +34,13 @@ final class InstaPickCard: BaseView {
     @IBOutlet private weak var detailLabel: UILabel!
     @IBOutlet private weak var bottomButton: UIButton!
     @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var closeButton: UIButton!
     
     var analysisLeft: Int = 0
     var totalCount: Int = 0
     var isUsedBefore: Bool = true
+    
+    private lazy var instapickRoutingService = InstaPickRoutingService()
     
     private var cardType: InstaPick.CardType?
     //override
@@ -67,6 +70,8 @@ final class InstaPickCard: BaseView {
             
             gradientView.isNeedGradient = false
             
+            closeButton.setImage(UIImage(named: "CloseCardIcon"), for: .normal)
+            
             detailLabel.textColor = ColorConstants.darkText
             detailLabel.text = TextConstants.instaPickUsedBeforeDetailLabel
             
@@ -79,6 +84,8 @@ final class InstaPickCard: BaseView {
             
             gradientView.isNeedGradient = true
             
+            closeButton.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
+
             detailLabel.textColor = UIColor.white
             detailLabel.text = TextConstants.instaPickNoUsedBeforeDetailLabel
             
@@ -91,6 +98,8 @@ final class InstaPickCard: BaseView {
             
             gradientView.isNeedGradient = true
             
+            closeButton.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
+
             detailLabel.textColor = UIColor.white
             detailLabel.text = TextConstants.instaPickNoAnalysisDetailLabel
             
@@ -142,6 +151,13 @@ final class InstaPickCard: BaseView {
         cardType = type
     }
     
+    private func openInstaPickHistory() {
+        let router = RouterVC()
+        
+        let controller = router.analyzesHistoryController()
+        router.pushViewControllertoTableViewNavBar(viewController: controller)
+    }
+    
     //MARK: - Utility Methods(public)
     func isNeedReloadWithNew(totalCount: Int, leftCount: Int) -> Bool {
         var newCardType: InstaPick.CardType = .noUsedBefore
@@ -168,10 +184,12 @@ final class InstaPickCard: BaseView {
     @IBAction private func onBottomButtonTap(_ sender: Any) {
         //TODO: add redirect for different types
         guard let cardType = cardType else { return }
+
         switch cardType {
         case .usedBefore:
-            break
+            openInstaPickHistory()
         case .noUsedBefore:
+            openInstaPickHistory()
             break
         case .noAnalysis:
             break

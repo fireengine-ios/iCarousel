@@ -1011,6 +1011,18 @@ struct TextConstants {
     static let yesForUpgrade = NSLocalizedString("ok_for_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let noForUpgrade = NSLocalizedString("no_for_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    //MARK: - InstaPick Analyze History Page
+    static let analyzeHistoryTitle = NSLocalizedString("InstaPick", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzeHistoryPopupTitle = NSLocalizedString("no_analyses_left_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzeHistoryPopupMessage = NSLocalizedString("no_analyses_left_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzeHistoryPopupButton = NSLocalizedString("no_analyses_left_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzeHistoryEmptyTitle = NSLocalizedString("analyze_history_empty_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzeHistoryEmptySubtitle = NSLocalizedString("analyze_history_empty_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzeHistoryAnalyzeLeft = NSLocalizedString("analyze_history_analyze_left", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzeHistoryAnalyzeCount = NSLocalizedString("analyze_history_analyze_count", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzeHistoryAnalyseButton = NSLocalizedString("analyze_with_instapick", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzeHistoryPhotosCount = NSLocalizedString("analyze_history_photos_count", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzeHistoryStartHereTitle = NSLocalizedString("analyze_history_start_here", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     //MARK: - InstaPickThreeDors
     static let newInstaPick = NSLocalizedString("new_insta_pick", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     //MARK: - InstaPickCard
@@ -1026,4 +1038,27 @@ struct TextConstants {
     static let instaPickButtonNoAnalysis = NSLocalizedString("Purchase", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let analyzeWithInstapick = NSLocalizedString("analyze_with_instapick", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    //InstaPickDetailViewController
+    
+    static let instaPickReadyToShareLabel = NSLocalizedString("you_are_ready_to_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickLeftCountLabel = NSLocalizedString("instaPick_analysis_left", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickMoreHashtagsLabel = NSLocalizedString("engage_with_more_hastags", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickCopyHashtagsButton = NSLocalizedString("copy_hashtags_to_clipboard", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickShareButton = NSLocalizedString("share_on_social_media", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let instaPickPickedLabel = NSLocalizedString("picked", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickAnalyzingBottomText = NSLocalizedString("insta_pick_analyzing_bottom", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickAnalyzingText_0 = NSLocalizedString("insta_pick_analyzing_0", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickAnalyzingText_1 = NSLocalizedString("insta_pick_analyzing_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickAnalyzingText_2 = NSLocalizedString("insta_pick_analyzing_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickAnalyzingText_3 = NSLocalizedString("insta_pick_analyzing_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickAnalyzingText_4 = NSLocalizedString("insta_pick_analyzing_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    //MARK: - InstaPickPopUp
+    static let instaPickDontShowThisAgain = NSLocalizedString("dont_show_this_again", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickAnlyze = NSLocalizedString("instapick_analyze", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickConnectedAccount = NSLocalizedString("connected_account", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickDescription = NSLocalizedString("instapick_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickConnectedWithInstagram = NSLocalizedString("connected_with_instagram", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickConnectedWithInstagramName = NSLocalizedString("connected_with_instagram_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickConnectedWithoutInstagram = NSLocalizedString("continue_without_connecting", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

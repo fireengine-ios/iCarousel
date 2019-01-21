@@ -85,6 +85,13 @@ class RouterVC: NSObject {
         return navController
     }
     
+    func createRootNavigationControllerWithModalStyle(controller: UIViewController) -> UINavigationController {
+        let navController = NavigationController(rootViewController: controller)
+        navController.modalPresentationStyle = .overFullScreen
+        navController.modalTransitionStyle = .crossDissolve
+        return navController
+    }
+    
     func setNavigationController(controller: UIViewController?) {
         guard let window = UIApplication.shared.windows.first else {
             return
@@ -203,7 +210,7 @@ class RouterVC: NSObject {
             })
         }
     }
-    
+        
     func showSpiner() {
         if let lastViewController = getViewControllerForPresent() {
             lastViewController.showSpinerIncludeNavigatinBar()
@@ -696,6 +703,12 @@ class RouterVC: NSObject {
         return controller as! BaseFilesGreedChildrenViewController
     }
     
+    // MARK: Analyses History page
+    
+    func analyzesHistoryController() -> AnalyzeHistoryViewController {
+        return AnalyzeHistoryViewController.initFromNib()
+    }
+    
     // MARK: Face Image Recognition Photos
     
     func imageFacePhotosController(album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
@@ -853,6 +866,18 @@ class RouterVC: NSObject {
     
     func myStorage(usageStorage: UsageResponse?) -> MyStorageViewController {
         let controller = MyStorageModuleInitializer.initializeMyStorageController(usage: usageStorage)
+        return controller
+    }
+    
+    func instaPickDetailViewController(models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) -> InstaPickDetailViewController {
+        let nibName = String(describing: InstaPickDetailViewController.self)
+        let controller = InstaPickDetailViewController(nibName: nibName, bundle: nil)
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        controller.configure(with: models, analyzesCount: analyzesCount)
+        
         return controller
     }
 }

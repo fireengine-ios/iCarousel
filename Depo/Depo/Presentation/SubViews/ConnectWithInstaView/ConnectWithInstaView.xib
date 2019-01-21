@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConnectWithInstaView" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="instagramImageView" destination="f0H-qI-rPn" id="Jk0-rU-Hde"/>
+                <outlet property="nameLabel" destination="yLM-gj-Two" id="kCG-Nm-1BY"/>
+                <outlet property="titleLabel" destination="XRo-yv-dzk" id="3OM-Me-SEh"/>
+                <outlet property="view" destination="iN0-l3-epB" id="r5y-Aa-Ytx"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="InstagramIcon" translatesAutoresizingMaskIntoConstraints="NO" id="f0H-qI-rPn">
+                    <rect key="frame" x="25" y="14.5" width="17" height="17"/>
+                </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oAn-Xc-tPZ">
+                    <rect key="frame" x="58" y="13" width="42" height="20.5"/>
+                    <subviews>
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRo-yv-dzk">
+                            <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yLM-gj-Two">
+                            <rect key="frame" x="0.0" y="0.0" width="42" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejX-OI-VUM">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onConnectTap:" destination="-1" eventType="touchUpInside" id="GhX-Km-mKG"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ejX-OI-VUM" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="DZp-2L-WSv"/>
+                <constraint firstItem="f0H-qI-rPn" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="K5Q-9F-ZLu"/>
+                <constraint firstItem="ejX-OI-VUM" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="K7Q-if-2WM"/>
+                <constraint firstItem="oAn-Xc-tPZ" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="KAy-lR-Oeg"/>
+                <constraint firstItem="ejX-OI-VUM" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="XfE-tj-Yzi"/>
+                <constraint firstItem="oAn-Xc-tPZ" firstAttribute="leading" secondItem="f0H-qI-rPn" secondAttribute="trailing" constant="16" id="j84-FX-Fbe"/>
+                <constraint firstItem="ejX-OI-VUM" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="rhV-h7-QJk"/>
+                <constraint firstItem="f0H-qI-rPn" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="sXc-vh-dpC"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oAn-Xc-tPZ" secondAttribute="trailing" constant="24" id="t36-NT-whB"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="InstagramIcon" width="17" height="17"/>
+    </resources>
+</document>
