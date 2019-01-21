@@ -319,7 +319,6 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     private func getAnalyzesCount(success: @escaping (InstapickAnalyzesCount) -> ()) {
         instapickService.getAnalyzesCount { [weak self] result in
-
             switch result {
             case .success(let analysisCount):
                 success(analysisCount)
@@ -333,9 +332,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         startActivityIndicator()
         
         getAnalyzesCount(success: { [weak self] analyzesCount in
-            
             self?.getAnalyzeDetails(for: analyze.requestIdentifier, analyzesCount: analyzesCount)
-            })
+        })
     }
     
     private func openDetail(for analysis: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) {
