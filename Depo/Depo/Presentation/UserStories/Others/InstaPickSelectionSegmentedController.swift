@@ -11,18 +11,16 @@ import UIKit
 final class InstaPickSelectionSegmentedController: UIViewController {
     
     private let topView = UIView()
-    private let containerView = UIView()
-    private let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
+    private let contanerView = UIView()
+    let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
     
     private let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
-        segmentedControl.tintColor = ColorConstants.darcBlueColor
-        segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)],
-                                                for: .normal)
+        //segmentedControl.tintColor = UIColor.magenta
         return segmentedControl
     }()
     
-    private var viewControllers: [UIViewController] = []
+    private var viewControllers: [UIViewController] = [PhotoSelectionController()]
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -36,43 +34,63 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     
     private func setup() {
         topView.backgroundColor = .white
-        containerView.backgroundColor = .white
-        
-        segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
-        
-        view.addSubview(topView)
-        topView.addSubview(segmentedControl)
-        view.addSubview(containerView)
-        view.addSubview(transparentGradientView)
-        
+        contanerView.backgroundColor = .white
         setupLayout()
+        
     }
     
     private func setupLayout() {
+        view.addSubview(topView)
+        topView.addSubview(segmentedControl)
+        view.addSubview(contanerView)
+        
+        
         topView.translatesAutoresizingMaskIntoConstraints = false
+        contanerView.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        
         topView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         topView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         let edgeOffset: CGFloat = 35
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: edgeOffset).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).isActive = true
         segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).isActive = true
         
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        contanerView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
+        contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        contanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        contanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        //        NSLayoutConstraint.activate([
+        //            contanerView.topAnchor.constraint(equalTo: topView.bottomAnchor),
+        //            contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        //            contanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        //            contanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        //            ])
         
-        let transparentGradientViewHeight: CGFloat = 100
+        segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
+        
+        view.addSubview(transparentGradientView)
+        let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
         transparentGradientView.translatesAutoresizingMaskIntoConstraints = false
         transparentGradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         transparentGradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         transparentGradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         transparentGradientView.heightAnchor.constraint(equalToConstant: transparentGradientViewHeight).isActive = true
+        
+        let button = BlueButtonWithWhiteText()
+        button.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
+        
+        transparentGradientView.addSubview(button)
+        button.leadingAnchor.constraint(equalTo: transparentGradientView.leadingAnchor, constant: edgeOffset).isActive = true
+        button.trailingAnchor.constraint(equalTo: transparentGradientView.trailingAnchor, constant: -edgeOffset).isActive = true
+        button.centerYAnchor.constraint(equalTo: transparentGradientView.centerYAnchor).isActive = true
+    }
+    
+    @objc private func analyzeWithInstapick() {
+        print("analyzeWithInstapick")
     }
     
     override func viewDidLoad() {
@@ -121,9 +139,9 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     
     private func add(childController: UIViewController) {
         addChildViewController(childController)
-        childController.view.frame = containerView.bounds
+        childController.view.frame = contanerView.bounds
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        containerView.addSubview(childController.view)
+        contanerView.addSubview(childController.view)
         childController.didMove(toParentViewController: self)
     }
 }
