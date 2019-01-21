@@ -101,7 +101,9 @@ final class InstaPickPhotoView: UIView {
                             delegate: InstaPickPhotoViewDelegate? = nil) {
         if let oldModel = self.model {
             ///logic for reuse this method on tap at small image (not pass if model same and reconfigure if thay are different)
-            guard oldModel.requestIdentifier != model.requestIdentifier else { return }
+            guard let oldId = oldModel.fileInfo?.uuid, let newId = model.fileInfo?.uuid, oldId != newId else {
+                return
+            }
         }
         
         if delegate != nil {
