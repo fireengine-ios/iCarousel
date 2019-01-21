@@ -22,6 +22,13 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         return segmentedControl
     }()
     
+    private let analyzeButton: BlueButtonWithWhiteText = {
+        let analyzeButton = BlueButtonWithWhiteText()
+        analyzeButton.isExclusiveTouch = true
+        analyzeButton.setTitle(TextConstants.analyzeWithInstapick, for: .normal)
+        return analyzeButton
+    }()
+    
     private var viewControllers: [UIViewController] = [PhotoSelectionController()]
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -37,6 +44,10 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     private func setup() {
         topView.backgroundColor = .white
         contanerView.backgroundColor = .white
+        
+        segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
+        analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
+        
         setupLayout()
     }
     
@@ -44,62 +55,55 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         view.addSubview(topView)
         topView.addSubview(segmentedControl)
         view.addSubview(contanerView)
+        view.addSubview(transparentGradientView)
+        view.addSubview(analyzeButton)
+        
         let edgeOffset: CGFloat = 35
+        let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
         
         topView.translatesAutoresizingMaskIntoConstraints = false
-        contanerView.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        
         topView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         topView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: edgeOffset).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).isActive = true
         segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).isActive = true
         
+        contanerView.translatesAutoresizingMaskIntoConstraints = false
         contanerView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
         contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         contanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         contanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
-        
-        view.addSubview(transparentGradientView)
-        let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
         transparentGradientView.translatesAutoresizingMaskIntoConstraints = false
         transparentGradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         transparentGradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         transparentGradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         transparentGradientView.heightAnchor.constraint(equalToConstant: transparentGradientViewHeight).isActive = true
         
-        let button = BlueButtonWithWhiteText()
-        button.isExclusiveTouch = true
-        button.setTitle(TextConstants.analyzeWithInstapick, for: .normal)
-        button.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
-        
-        view.addSubview(button)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: edgeOffset).isActive = true
-        button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -edgeOffset).isActive = true
-        button.centerYAnchor.constraint(equalTo: transparentGradientView.centerYAnchor).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 54).isActive = true
+        analyzeButton.translatesAutoresizingMaskIntoConstraints = false
+        analyzeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: edgeOffset).isActive = true
+        analyzeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -edgeOffset).isActive = true
+        analyzeButton.centerYAnchor.constraint(equalTo: transparentGradientView.centerYAnchor).isActive = true
+        analyzeButton.heightAnchor.constraint(equalToConstant: 54).isActive = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /// test code
-//        let vc1 = UIViewController()
-//        vc1.view.backgroundColor = .red
-//        vc1.title = "Title 1"
-//        viewControllers.append(vc1)
-//
-//        let vc2 = UIViewController()
-//        vc2.view.backgroundColor = .blue
-//        vc2.title = "Title 2"
-//        viewControllers.append(vc2)
+        /// temp code
+        let vc1 = UIViewController()
+        vc1.view.backgroundColor = .red
+        vc1.title = "Placeholder 1"
+        viewControllers.append(vc1)
+
+        let vc2 = UIViewController()
+        vc2.view.backgroundColor = .blue
+        vc2.title = "Placeholder 2"
+        viewControllers.append(vc2)
         
         selectController(at: 0)
         setupSegmentedControl()
