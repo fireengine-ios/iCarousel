@@ -2523,8 +2523,22 @@
 		920DC89B21CBABBB009777AD /* LeavePremiumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2268EB821A688DB002F2611 /* LeavePremiumViewController.xib */; };
 		921423E321B51E5300B44574 /* PackageModelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E221B51E5300B44574 /* PackageModelResponse.swift */; };
 		921423EA21B562D500B44574 /* AuthoritySingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E921B562D500B44574 /* AuthoritySingleton.swift */; };
+		9219B18A21ECA25800098021 /* InstaPickDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9219B18821ECA25800098021 /* InstaPickDetailViewController.swift */; };
+		9219B18B21ECA25800098021 /* InstaPickDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9219B18821ECA25800098021 /* InstaPickDetailViewController.swift */; };
+		9219B18C21ECA25800098021 /* InstaPickDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9219B18921ECA25800098021 /* InstaPickDetailViewController.xib */; };
+		9219B18D21ECA25800098021 /* InstaPickDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9219B18921ECA25800098021 /* InstaPickDetailViewController.xib */; };
+		9219B19021ECA82A00098021 /* InstaPickPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9219B18F21ECA82A00098021 /* InstaPickPhotoView.swift */; };
+		9219B19121ECA82A00098021 /* InstaPickPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9219B18F21ECA82A00098021 /* InstaPickPhotoView.swift */; };
+		9219B19321ECA86F00098021 /* InstaPickPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9219B19221ECA86F00098021 /* InstaPickPhotoView.xib */; };
+		9219B19421ECA86F00098021 /* InstaPickPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9219B19221ECA86F00098021 /* InstaPickPhotoView.xib */; };
+		9219B19A21ECB7B900098021 /* InstaPickHashtagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9219B19821ECB7B900098021 /* InstaPickHashtagCell.swift */; };
+		9219B19B21ECB7B900098021 /* InstaPickHashtagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9219B19821ECB7B900098021 /* InstaPickHashtagCell.swift */; };
+		9219B19C21ECB7B900098021 /* InstaPickHashtagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9219B19921ECB7B900098021 /* InstaPickHashtagCell.xib */; };
+		9219B19D21ECB7B900098021 /* InstaPickHashtagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9219B19921ECB7B900098021 /* InstaPickHashtagCell.xib */; };
 		921EC07A21E5ED30000A0860 /* InstaPickCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921EC07921E5ED30000A0860 /* InstaPickCard.swift */; };
 		921EC07C21E5ED55000A0860 /* InstaPickCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 921EC07B21E5ED55000A0860 /* InstaPickCard.xib */; };
+		921FF09A21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FF09921EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift */; };
+		921FF09B21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FF09921EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift */; };
 		92203C3621E9E0CB00926469 /* InstaPickRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */; };
 		92203C3721EA0E8800926469 /* InstaPickRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */; };
 		9224936821BC14890086CB6A /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
@@ -5205,8 +5219,15 @@
 		92004B6E21AD19B300582C45 /* MyStorageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageInteractor.swift; sourceTree = "<group>"; };
 		921423E221B51E5300B44574 /* PackageModelResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageModelResponse.swift; sourceTree = "<group>"; };
 		921423E921B562D500B44574 /* AuthoritySingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthoritySingleton.swift; sourceTree = "<group>"; };
+		9219B18821ECA25800098021 /* InstaPickDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickDetailViewController.swift; sourceTree = "<group>"; };
+		9219B18921ECA25800098021 /* InstaPickDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickDetailViewController.xib; sourceTree = "<group>"; };
+		9219B18F21ECA82A00098021 /* InstaPickPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickPhotoView.swift; sourceTree = "<group>"; };
+		9219B19221ECA86F00098021 /* InstaPickPhotoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickPhotoView.xib; sourceTree = "<group>"; };
+		9219B19821ECB7B900098021 /* InstaPickHashtagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickHashtagCell.swift; sourceTree = "<group>"; };
+		9219B19921ECB7B900098021 /* InstaPickHashtagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickHashtagCell.xib; sourceTree = "<group>"; };
 		921EC07921E5ED30000A0860 /* InstaPickCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCard.swift; sourceTree = "<group>"; };
 		921EC07B21E5ED55000A0860 /* InstaPickCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickCard.xib; sourceTree = "<group>"; };
+		921FF09921EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickHashtagCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		92203C3521E9E0CB00926469 /* InstaPickRoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickRoutingService.swift; sourceTree = "<group>"; };
 		9224936721BC14890086CB6A /* AuthorityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorityType.swift; sourceTree = "<group>"; };
 		9240C04921B805A4005E710C /* PremiumFooterCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumFooterCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -7595,6 +7616,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				9219B18E21ECA7FA00098021 /* InstaPickPhotoView */,
 				B522E92121E8CAEC00C4958E /* InstaPickProgressView */,
 				A2EF976921ECC3E600EC7DE7 /* ConnectWithInstaView */,
 				925B96D421E79BAF00B39415 /* RadialGradientableView */,
@@ -10131,6 +10153,25 @@
 			path = AuthoritySingleton;
 			sourceTree = "<group>";
 		};
+		9219B18721ECA21800098021 /* InstaPickDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9219B18821ECA25800098021 /* InstaPickDetailViewController.swift */,
+				9219B18921ECA25800098021 /* InstaPickDetailViewController.xib */,
+				921FF09921EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift */,
+			);
+			path = InstaPickDetailViewController;
+			sourceTree = "<group>";
+		};
+		9219B18E21ECA7FA00098021 /* InstaPickPhotoView */ = {
+			isa = PBXGroup;
+			children = (
+				9219B18F21ECA82A00098021 /* InstaPickPhotoView.swift */,
+				9219B19221ECA86F00098021 /* InstaPickPhotoView.xib */,
+			);
+			path = InstaPickPhotoView;
+			sourceTree = "<group>";
+		};
 		921EC07821E5ED05000A0860 /* InstaPickCard */ = {
 			isa = PBXGroup;
 			children = (
@@ -10851,6 +10892,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				9219B18721ECA21800098021 /* InstaPickDetailViewController */,
 				A20BA8BA21E9E8A900C6FFBC /* InstapickPopUp */,
 				A217E42421A5AF3E0084AA37 /* LeavePremiumViewController */,
 				A20798FB219F12BB00AD5037 /* PremiumViewController */,
@@ -12064,6 +12106,8 @@
 				4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */,
 				4A56D5C6202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift */,
 				4A56D5C7202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib */,
+				9219B19821ECB7B900098021 /* InstaPickHashtagCell.swift */,
+				9219B19921ECB7B900098021 /* InstaPickHashtagCell.xib */,
 				984A514321E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift */,
 				984A514621E747C6004525F5 /* InstapickAnalyzeHistoryPhotoCell.xib */,
 				984A515921E88D28004525F5 /* InstapickAnalysisCell.swift */,
@@ -13397,6 +13441,7 @@
 				8C06AFA52008AD71003D8E05 /* frame@2x.png in Resources */,
 				8C06B04D2008AD71003D8E05 /* parlaklik.png in Resources */,
 				8C06B0B12008AD71003D8E05 /* rotate.png in Resources */,
+				9219B19421ECA86F00098021 /* InstaPickPhotoView.xib in Resources */,
 				8C06B1092008AD72003D8E05 /* slider_thumb@3x.png in Resources */,
 				8C0E90131FDEBDFF00789C91 /* GSMUInputCell.xib in Resources */,
 				8C06AF7D2008AD70003D8E05 /* edit_selected@3x.png in Resources */,
@@ -13417,6 +13462,7 @@
 				8C0E90161FDEBDFF00789C91 /* TermsAndServicesScreen.xib in Resources */,
 				8C06B1032008AD72003D8E05 /* slider_thumb2@2x.png in Resources */,
 				8C0E90171FDEBDFF00789C91 /* SyncContactsViewController.xib in Resources */,
+				9219B18D21ECA25800098021 /* InstaPickDetailViewController.xib in Resources */,
 				8C0E90181FDEBDFF00789C91 /* CollectionViewCellForController.xib in Resources */,
 				8C06AFF52008AD71003D8E05 /* kirmizi@3x.png in Resources */,
 				8C06B14B2008AD72003D8E05 /* target_secili@3x.png in Resources */,
@@ -13444,6 +13490,7 @@
 				8C06B0952008AD71003D8E05 /* polaroid_yeni.png in Resources */,
 				8C0E901C1FDEBDFF00789C91 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				8C0E901D1FDEBDFF00789C91 /* PhoneVereficationScreen~ipad.xib in Resources */,
+				9219B19D21ECB7B900098021 /* InstaPickHashtagCell.xib in Resources */,
 				8C06AF392008AD70003D8E05 /* close_icon.png in Resources */,
 				8C0E901E1FDEBDFF00789C91 /* MailVerificationViewController.xib in Resources */,
 				8C06B1492008AD72003D8E05 /* target_secili@2x.png in Resources */,
@@ -14193,6 +14240,7 @@
 				8C06AF0A2008AD70003D8E05 /* check-mark@3x.png in Resources */,
 				8C06B04E2008AD71003D8E05 /* parlaklik@2x.png in Resources */,
 				7CEE2724209C560500EF6C79 /* PageForLanding.xib in Resources */,
+				9219B19321ECA86F00098021 /* InstaPickPhotoView.xib in Resources */,
 				CEDEAB321FADA5D20046555F /* AlbumCell.xib in Resources */,
 				8C06AF722008AD70003D8E05 /* edit.png in Resources */,
 				8C06B0122008AD71003D8E05 /* kup.png in Resources */,
@@ -14365,6 +14413,7 @@
 				8DCB21621F3C6C6500BAFE1E /* SearchView.xib in Resources */,
 				7859298A20060E7D003F8AB3 /* ManageContactsViewController.xib in Resources */,
 				8C06AFB62008AD71003D8E05 /* frekans_secili@2x.png in Resources */,
+				9219B18C21ECA25800098021 /* InstaPickDetailViewController.xib in Resources */,
 				7C2F56FB1F1CC1CC0014870B /* ActionsMenuTableViewCell.xib in Resources */,
 				8C06B0DC2008AD71003D8E05 /* sample_red@2x.png in Resources */,
 				8C06AEFE2008AD70003D8E05 /* caps2@3x.png in Resources */,
@@ -14485,6 +14534,7 @@
 				8C06B0022008AD71003D8E05 /* Kucuk@2x.png in Resources */,
 				8C06B0982008AD71003D8E05 /* polaroid_yeni@3x.png in Resources */,
 				8C7786A71F3F38F0005CB432 /* VisualMusicPlayerViewController.xib in Resources */,
+				9219B19C21ECB7B900098021 /* InstaPickHashtagCell.xib in Resources */,
 				8C06AED02008AD70003D8E05 /* beyaz_cerceve@2x.png in Resources */,
 				98570AFC208F7558002CCEBA /* SpotlightViewController.xib in Resources */,
 				8C06B0F02008AD72003D8E05 /* serbest_cizgi@3x.png in Resources */,
@@ -15344,6 +15394,7 @@
 				B5390D7C2164F2C600A02002 /* TextInsetsLabel.swift in Sources */,
 				8C0E8D851FDEBDFF00789C91 /* CreateStoryNameRouterInput.swift in Sources */,
 				8C0E8D861FDEBDFF00789C91 /* AutoSyncConfigurator.swift in Sources */,
+				9219B19121ECA82A00098021 /* InstaPickPhotoView.swift in Sources */,
 				8C0E8D871FDEBDFF00789C91 /* CreateStoryPhotosOrderInitializer.swift in Sources */,
 				B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */,
 				8C0E8D8A1FDEBDFF00789C91 /* BasicCustomNavBarViewController.swift in Sources */,
@@ -15485,6 +15536,7 @@
 				8C0E8DEC1FDEBDFF00789C91 /* IntroduceRouterInput.swift in Sources */,
 				8C0E8DED1FDEBDFF00789C91 /* IntroduceRouter.swift in Sources */,
 				8C0E8DEE1FDEBDFF00789C91 /* SettingsTableViewSwitchCell.swift in Sources */,
+				921FF09B21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
 				8C0E8DEF1FDEBDFF00789C91 /* PhotoStory.swift in Sources */,
 				8C0E8DF01FDEBDFF00789C91 /* IntroduceConfigurator.swift in Sources */,
 				8C0E8DF11FDEBDFF00789C91 /* PasscodeStorage.swift in Sources */,
@@ -15613,6 +15665,7 @@
 				8C0E8E4B1FDEBDFF00789C91 /* CreateStoryNameViewOutput.swift in Sources */,
 				4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */,
 				8C0E8E501FDEBDFF00789C91 /* LocalAlbumRouter.swift in Sources */,
+				9219B18B21ECA25800098021 /* InstaPickDetailViewController.swift in Sources */,
 				CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */,
 				8C0E8E511FDEBDFF00789C91 /* SearchViewOutput.swift in Sources */,
 				8C0E8E521FDEBDFF00789C91 /* OfferApple.swift in Sources */,
@@ -15802,6 +15855,7 @@
 				4AD1A81F208A2F2100930112 /* PeriodContactsSyncModel.swift in Sources */,
 				986B2066207C9C4100E04B96 /* TextEnterDataSource.swift in Sources */,
 				8C0E8F071FDEBDFF00789C91 /* SyncContactsViewController.swift in Sources */,
+				9219B19B21ECB7B900098021 /* InstaPickHashtagCell.swift in Sources */,
 				CE23A0F8205FF5320048267D /* EmailEnterCustomizator.swift in Sources */,
 				C62239AD2049732D0043ED44 /* FaceImageChangeCoverRouter.swift in Sources */,
 				8C0E8F081FDEBDFF00789C91 /* FBService.swift in Sources */,
@@ -16621,9 +16675,11 @@
 				CE51ACC41EF90853005DCEE0 /* RegistrationViewInput.swift in Sources */,
 				CE51ACC51EF90853005DCEE0 /* RegistrationViewOutput.swift in Sources */,
 				CE51ACC61EF90853005DCEE0 /* RegistrationViewController.swift in Sources */,
+				9219B19021ECA82A00098021 /* InstaPickPhotoView.swift in Sources */,
 				7C4F60A92019E2AE0033C58F /* AlbumCard.swift in Sources */,
 				CE95ED541F516736002F923A /* HelpAndSupportRouter.swift in Sources */,
 				A2079908219F134B00AD5037 /* PremiumRouter.swift in Sources */,
+				9219B19A21ECB7B900098021 /* InstaPickHashtagCell.swift in Sources */,
 				7C6E2F9E1F31E7C000536DB6 /* CreateStoryAudioSelectionPresenter.swift in Sources */,
 				CEDFECBB1F11F86B003D1A75 /* SearchServiceResponse.swift in Sources */,
 				B56FBB3D2122C9B9004F4A59 /* TermsOfUseViewOutput.swift in Sources */,
@@ -16633,6 +16689,7 @@
 				CE51ACC71EF90853005DCEE0 /* RegistrationModuleInput.swift in Sources */,
 				4A02B7FE21A0550F00635694 /* PremiumInfoCard.swift in Sources */,
 				CE51ACC81EF90853005DCEE0 /* RegistrationPresenter.swift in Sources */,
+				9219B18A21ECA25800098021 /* InstaPickDetailViewController.swift in Sources */,
 				78D9BA3A2007E7F100F2233F /* DuplicatedContactsInteractorInput.swift in Sources */,
 				CE51ACC91EF90853005DCEE0 /* RegistrationInteractorInput.swift in Sources */,
 				9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */,
@@ -16934,6 +16991,7 @@
 				921423E321B51E5300B44574 /* PackageModelResponse.swift in Sources */,
 				7C4F60B0201C674A0033C58F /* MovieCard.swift in Sources */,
 				CE6DE7581FCBE84100C23CBD /* FBResponses.swift in Sources */,
+				921FF09A21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
 				78E8E2B02023195600A979AB /* FaceImagePhotosInitializer.swift in Sources */,
 				DE10EF65DE653E0EDBEC8C17 /* BaseFilesGreedViewInput.swift in Sources */,
 				B5CDB33021787FEF006CFA50 /* UpdateServerIntegration.m in Sources */,

@@ -805,6 +805,15 @@
 
 "instapick_button_has_analysis" = "Let’s Start!";
 
+/*InstaPickDetailViewController*/
+
+"you_are_ready_to_share" = "You are ready to share!";
+"instaPick_analysis_left" = "Analysis Left: %1$d of %2$d";
+"engage_with_more_hastags" = "Engage with more #hastags";
+"copy_hashtags_to_clipboard" = "Copy #hashtags to clipboard";
+"share_on_social_media" = "Share on Social Media!";
+
+"picked" = "PICKED!";
 "insta_pick_analyzing_bottom" = "Enjoy your time while we analyze your photos! 😊";
 "insta_pick_analyzing_0" = "We are looking for the photo you will get the most likes.";
 "insta_pick_analyzing_1" = "You have selected beautiful photos";

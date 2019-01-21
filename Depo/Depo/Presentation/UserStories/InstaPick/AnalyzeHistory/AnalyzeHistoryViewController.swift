@@ -16,6 +16,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     @IBOutlet private weak var newAnalysisButton: BlueButtonWithMediumWhiteText!
     @IBOutlet private weak var newAnalysisView: UIView!
     
+    private lazy var activityManager = ActivityIndicatorManager()
+
     private let dataSource = AnalyzeHistoryDataSourceForCollectionView()
     private let instapickService: InstapickService = factory.resolve()
     
@@ -56,8 +58,9 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private func configure() {
         needShowTabBar = false
         
+        activityManager.delegate = self
         displayManager.applyConfiguration(.initial)
-        
+
         dataSource.setupCollectionView(collectionView: collectionView)
         dataSource.delegate = self
         collectionView.contentInset.bottom = newAnalysisView.bounds.height
@@ -211,22 +214,19 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             return
         }
         
-        showSpiner()
+        startActivityIndicator()
         
-        reloadCards { [weak self] isSuccess in
+        reloadCards { [weak self] in
             guard let `self` = self else {
                 return
             }
             
-            if isSuccess {
-                self.page = 0
-                self.dataSource.isPaginationDidEnd = false
-                self.loadNextHistoryPage(completion: { [weak self] _ in
-                    self?.hideSpiner()
-                })
-            } else {
-                self.hideSpiner()
-            }
+            self.page = 0
+            self.dataSource.isPaginationDidEnd = false
+            self.loadNextHistoryPage(completion: { [weak self] _ in
+                self?.stopActivityIndicator()
+            })
+
         }
     }
     
@@ -238,24 +238,22 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         }
     }
     
-    private func reloadCards(completion: BoolHandler? = nil) {
-        instapickService.getAnalyzesCount { [weak self] result in
-            guard let `self` = self else { return }
-            
-            switch result {
-            case .success(let analysisCount):
-                self.dataSource.reloadCards(with: analysisCount)
-                completion?(true)
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
-                completion?(false)
+    private func reloadCards(success: VoidHandler? = nil) {
+        getAnalyzesCount(success: { [weak self] analyzesCount in
+            guard let `self` = self else {
+                return
             }
-        }
+
+            self.dataSource.reloadCards(with: analyzesCount)
+            success?()
+        })
     }
     
     private func loadNextHistoryPage(completion: BoolHandler? = nil) {
         instapickService.getAnalyzeHistory(offset: page, limit: pageSize) { [weak self] result in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
             
             switch result {
             case .success(let history):
@@ -276,28 +274,93 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                     completion?(true)
                 }
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
                 completion?(false)
+                self.showError(message: error.localizedDescription)
             }
         }
     }
     
     private func deleteSelectedAnalyzes() {
+        startActivityIndicator()
         let ids = dataSource.selectedItems.map { $0.requestIdentifier }
         instapickService.removeAnalyzes(ids: ids) { [weak self] result in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
             
             switch result {
             case .success:
+                self.stopActivityIndicator()
                 DispatchQueue.main.async {
                     self.dataSource.deleteSelectedItems(completion: {
                         self.stopSelection()
                     })
                 }
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+                self.showError(message: error.localizedDescription)
             }
         }
+    }
+    
+    private func getAnalyzeDetails(for id: String, analyzesCount: InstapickAnalyzesCount) {
+        instapickService.getAnalyzeDetails(id: id) { [weak self] result in
+            guard let `self` = self else {
+                return
+            }
+
+            switch result {
+            case .success(let response):
+                self.openDetail(for: response, analyzesCount: analyzesCount)
+            case .failed(let error):
+                self.showError(message: error.localizedDescription)
+            }
+        }
+    }
+    
+    private func getAnalyzesCount(success: @escaping (InstapickAnalyzesCount) -> ()) {
+        instapickService.getAnalyzesCount { [weak self] result in
+
+            switch result {
+            case .success(let analysisCount):
+                success(analysisCount)
+            case .failed(let error):
+                self?.showError(message: error.localizedDescription)
+            }
+        }
+    }
+    
+    private func prepareToOpenDetails(with analyze: InstapickAnalyze) {
+        startActivityIndicator()
+        
+        getAnalyzesCount(success: { [weak self] analyzesCount in
+            
+            self?.getAnalyzeDetails(for: analyze.requestIdentifier, analyzesCount: analyzesCount)
+            })
+    }
+    
+    private func openDetail(for analysis: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) {
+        stopActivityIndicator()
+        
+        let router = RouterVC()
+        let controller = router.instaPickDetailViewController(models: analysis, analyzesCount: analyzesCount)
+        
+        router.presentViewController(controller: controller)
+    }
+    
+    private func showError(message: String) {
+        stopActivityIndicator()
+        
+        UIApplication.showErrorAlert(message: message)
+    }
+}
+
+extension AnalyzeHistoryViewController: ActivityIndicator {
+    func startActivityIndicator() {
+        activityManager.start()
+    }
+    
+    func stopActivityIndicator() {
+        activityManager.stop()
     }
 }
 
@@ -317,7 +380,7 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
     }
     
     func onSeeDetailsForAnalyze(_ analyze: InstapickAnalyze) {
-        //TODO: - Open Analyze Details Screen
+        prepareToOpenDetails(with: analyze)
     }
     
     func onUpdateSelectedItems(count: Int) {

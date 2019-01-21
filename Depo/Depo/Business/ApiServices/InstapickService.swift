@@ -308,6 +308,7 @@ final class InstapickAnalyze {
     let fileInfo: SearchItemResponse?
     let photoCount: Int?
     let startedDate: Date?
+    var isPicked: Bool = false
     // let message: String
     
     init(requestIdentifier: String, rank: Float, hashTags: [String], fileInfo: SearchItemResponse?, photoCount: Int?, startedDate: Date?) {
@@ -338,6 +339,14 @@ final class InstapickAnalyze {
         
         self.photoCount = json["photoCount"].int
         self.startedDate = json["startedDate"].date
+    }
+    
+    func getSmallImageURL() -> URL? {
+        return fileInfo?.metadata?.mediumUrl
+    }
+    
+    func getLargeImageURL() -> URL? {
+        return fileInfo?.metadata?.largeUrl
     }
 }
 
