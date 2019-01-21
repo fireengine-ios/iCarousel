@@ -159,7 +159,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     private func onMorePressed(_ sender: Any) {
         if !dataSource.isSelectionStateActive {
-            showAlertSheet(with: [.select, .selectAll], sender: sender)
+            showAlertSheet(with: [.select], sender: sender)
         }
     }
     
@@ -172,11 +172,6 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
                     self.dataSource.startSelection()
                     self.startSelection(with: 0)
-                })
-            case .selectAll:
-                action = UIAlertAction(title: TextConstants.actionSheetSelectAll, style: .default, handler: { _ in
-                    self.dataSource.startSelection(with: nil, selectAll: true)
-                    self.startSelection(with: self.dataSource.itemsCount)
                 })
             default:
                 action = nil

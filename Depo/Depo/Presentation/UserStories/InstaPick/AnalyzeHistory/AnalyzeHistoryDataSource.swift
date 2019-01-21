@@ -165,11 +165,9 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         }
     }
     
-    func startSelection(with indexPath: IndexPath? = nil, selectAll: Bool = false) {
+    func startSelection(with indexPath: IndexPath? = nil) {
         isSelectionStateActive = true
-        if selectAll {
-            selectedItems = items
-        } else if let indexPath = indexPath {
+        if let indexPath = indexPath {
             let item = items[indexPath.item]
             selectedItems = [item]
         } else {
