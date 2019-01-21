@@ -38,14 +38,13 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         topView.backgroundColor = .white
         contanerView.backgroundColor = .white
         setupLayout()
-        
     }
     
     private func setupLayout() {
         view.addSubview(topView)
         topView.addSubview(segmentedControl)
         view.addSubview(contanerView)
-        
+        let edgeOffset: CGFloat = 35
         
         topView.translatesAutoresizingMaskIntoConstraints = false
         contanerView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +55,6 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         topView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        let edgeOffset: CGFloat = 35
         segmentedControl.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: edgeOffset).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).isActive = true
         segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).isActive = true
@@ -65,12 +63,6 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         contanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         contanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        //        NSLayoutConstraint.activate([
-        //            contanerView.topAnchor.constraint(equalTo: topView.bottomAnchor),
-        //            contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        //            contanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        //            contanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        //            ])
         
         segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
         
@@ -95,30 +87,25 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         button.heightAnchor.constraint(equalToConstant: 54).isActive = true
     }
     
-    @objc private func analyzeWithInstapick() {
-        print("analyzeWithInstapick")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let vc1 = UIViewController()
-        vc1.view.backgroundColor = .red
-        vc1.title = "Title 1"
-        viewControllers.append(vc1)
-        
-        let vc2 = UIViewController()
-        vc2.view.backgroundColor = .blue
-        vc2.title = "Title 2"
-        viewControllers.append(vc2)
-        
+        /// test code
+//        let vc1 = UIViewController()
+//        vc1.view.backgroundColor = .red
+//        vc1.title = "Title 1"
+//        viewControllers.append(vc1)
+//
+//        let vc2 = UIViewController()
+//        vc2.view.backgroundColor = .blue
+//        vc2.title = "Title 2"
+//        viewControllers.append(vc2)
         
         selectController(at: 0)
         setupSegmentedControl()
     }
     
     private func setupSegmentedControl() {
-        //segmentedControl.removeAllSegments()
         assert(!viewControllers.isEmpty, "should not be empty")
         
         for (index, controller) in viewControllers.enumerated() {
@@ -127,6 +114,10 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         
         /// selectedSegmentIndex == -1 after removeAllSegments
         segmentedControl.selectedSegmentIndex = 0
+    }
+    
+    @objc private func analyzeWithInstapick() {
+        print("analyzeWithInstapick")
     }
     
     @objc private func controllerDidChange(_ sender: UISegmentedControl) {
