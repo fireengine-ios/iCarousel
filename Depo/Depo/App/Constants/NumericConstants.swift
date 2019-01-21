@@ -120,6 +120,7 @@ struct NumericConstants {
     
     static let premiumViewHeight: CGFloat = 480
     
+    static let instaPickSelectionSegmentedTransparentGradientViewHeight: CGFloat = 130
     static let instaPickHashtagCellHeight: CGFloat = 30
     static let instaPickHashtagCellWidthConstant: CGFloat = 45
     

@@ -22,7 +22,14 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         return segmentedControl
     }()
     
-    private var viewControllers: [UIViewController] = []
+    private let analyzeButton: BlueButtonWithWhiteText = {
+        let analyzeButton = BlueButtonWithWhiteText()
+        analyzeButton.isExclusiveTouch = true
+        analyzeButton.setTitle(TextConstants.analyzeWithInstapick, for: .normal)
+        return analyzeButton
+    }()
+    
+    private var viewControllers: [UIViewController] = [PhotoSelectionController()]
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -39,23 +46,39 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         containerView.backgroundColor = .white
         
         segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
+        analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
         
+        setupLayout()
+        
+        // TODO: localize
+        navigationItem.title = "Photos Selected (\(0))"
+        
+        let cancelButton = UIBarButtonItem(title: "Cancel",
+                                           font: UIFont.TurkcellSaturaDemFont(size: 19),
+                                           tintColor: UIColor.white,
+                                           accessibilityLabel: "Cancel",
+                                           style: .plain,
+                                           target: self,
+                                           selector: #selector(closeSelf))
+        navigationItem.leftBarButtonItem = cancelButton
+    }
+    
+    private func setupLayout() {
         view.addSubview(topView)
         topView.addSubview(segmentedControl)
         view.addSubview(containerView)
         view.addSubview(transparentGradientView)
+        view.addSubview(analyzeButton)
         
-        setupLayout()
-    }
-    
-    private func setupLayout() {
+        let edgeOffset: CGFloat = 35
+        let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
+        
         topView.translatesAutoresizingMaskIntoConstraints = false
         topView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         topView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        let edgeOffset: CGFloat = 35
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: edgeOffset).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).isActive = true
@@ -67,34 +90,39 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        let transparentGradientViewHeight: CGFloat = 100
         transparentGradientView.translatesAutoresizingMaskIntoConstraints = false
         transparentGradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         transparentGradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         transparentGradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         transparentGradientView.heightAnchor.constraint(equalToConstant: transparentGradientViewHeight).isActive = true
+        
+        analyzeButton.translatesAutoresizingMaskIntoConstraints = false
+        analyzeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: edgeOffset).isActive = true
+        analyzeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -edgeOffset).isActive = true
+        analyzeButton.centerYAnchor.constraint(equalTo: transparentGradientView.centerYAnchor).isActive = true
+        analyzeButton.heightAnchor.constraint(equalToConstant: 54).isActive = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /// temp code
+        // TODO: remove
         let vc1 = UIViewController()
         vc1.view.backgroundColor = .red
-        vc1.title = "Title 1"
+        vc1.title = "Placeholder 1"
         viewControllers.append(vc1)
-        
+
         let vc2 = UIViewController()
         vc2.view.backgroundColor = .blue
-        vc2.title = "Title 2"
+        vc2.title = "Placeholder 2"
         viewControllers.append(vc2)
-        
         
         selectController(at: 0)
         setupSegmentedControl()
     }
     
     private func setupSegmentedControl() {
-        //segmentedControl.removeAllSegments()
         assert(!viewControllers.isEmpty, "should not be empty")
         
         for (index, controller) in viewControllers.enumerated() {
@@ -103,6 +131,24 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         
         /// selectedSegmentIndex == -1 after removeAllSegments
         segmentedControl.selectedSegmentIndex = 0
+    }
+    
+    
+    @objc private func closeSelf() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func analyzeWithInstapick() {
+        
+        // TODO: refactor
+        guard let selectionController = childViewControllers.first as? PhotoSelectionController,
+            let selectedItems = selectionController.selectedItems() else {
+            assertionFailure()
+            return
+        }
+        
+        print(selectedItems.count)
+        // start analyze
     }
     
     @objc private func controllerDidChange(_ sender: UISegmentedControl) {
@@ -125,5 +171,27 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         containerView.addSubview(childController.view)
         childController.didMove(toParentViewController: self)
+    }
+}
+
+// MARK: - Static
+extension InstaPickSelectionSegmentedController {
+    static func controllerToPresent() -> UIViewController {
+        let vc = InstaPickSelectionSegmentedController()
+        let navVC = UINavigationController(rootViewController: vc)
+        
+        let navigationBar = navVC.navigationBar
+        
+        let textAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.TurkcellSaturaDemFont(size: 19)
+        ]
+        
+        navigationBar.titleTextAttributes = textAttributes
+        navigationBar.barTintColor = UIColor.lrTealish //bar's background
+        navigationBar.barStyle = .black
+        navigationBar.isTranslucent = false
+        
+        return navVC
     }
 }
