@@ -740,12 +740,12 @@
 "leave_premium_premium_description" = "You can use all the advanced features of lifebox with your Premium membership.";
 "leave_premium_cancel_description" = "You will not be able to benefit from Premium privileges if you cancel your membership";
 "feature_apple_cancel_text" = "To cancel your package, please use iTunes & App Store menu in your device";
-"feature_slcm_cancel_text" = "To cancel your package, Please send an SMS to 2200 with this text: “IPTAL LIFEBOX PREMIUM %s”";
+"feature_slcm_cancel_text" = "To cancel your package, Please send an SMS to 2200 with this text: LIFEBOX PREMIUM IPTAL";
 "feature_google_cancel_text" = "To cancel your package, please use Google Play Store";
 "feature_free_of_charge_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 "feature_lifecell_cancel_text" = "You can continue to use Premium features for free since you are a lifecell user";
 "feature_promo_cancel_text" = "Please use Contact Us menu to inform us to process your request";
-"feature_kktcell_cancel_text" = "You can continue to use Premium features for free since you are a lifecell-KKTC user";
+"feature_kktcell_cancel_text" = "You can continue to use Premium features for free since you are a KKTCELL user";
 "feature_moldcell_cancel_text" = "You can continue to use Premium features for free since you are a Moldcell user";
 "feature_life_cancel_text" = "You can continue to use Premium features for free since you are a life:) user";
 "feature_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
@@ -828,3 +828,4 @@
 "connected_with_instagram" = "Connect with Instagram";
 "connected_with_instagram_name" = "Connect with Instagram as";
 "continue_without_connecting" = "Continue without connecting";
+"NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
