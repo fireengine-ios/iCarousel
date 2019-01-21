@@ -94,6 +94,8 @@ final class InstapickServiceImpl: InstapickService {
                         return
                     }
                 
+                    self?.delegates.invoke(invocation: { $0.didFinishAnalysis() })
+                    
                     handler(.success(results))
                 case .failure(let error):
                     assertionFailure(error.localizedDescription)
@@ -123,6 +125,7 @@ final class InstapickServiceImpl: InstapickService {
                 /// !!! server logic. don't delete
                 switch response.result {
                 case .success(_):
+                    self?.delegates.invoke(invocation: { $0.didRemoveAnalysis() })
                     handler(.success(()))
                 case .failure(let error):
                     assertionFailure(error.localizedDescription)
