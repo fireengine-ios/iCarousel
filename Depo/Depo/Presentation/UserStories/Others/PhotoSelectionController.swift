@@ -3,6 +3,7 @@ import UIKit
 // TODO: localize
 // TODO: error handling
 // TODO: paginationSize + test for iPad
+// TODO: refactor
 final class PhotoSelectionController: UIViewController {
     
     enum SelectionState {
@@ -11,7 +12,7 @@ final class PhotoSelectionController: UIViewController {
     }
     
     private let photoService = PhotoService()
-    private let paginationSize = 32
+    private let paginationSize = 100
     private var paginationPage = 0
     private var isLoadingMore = false
     private var isLoadingMoreFinished = false
