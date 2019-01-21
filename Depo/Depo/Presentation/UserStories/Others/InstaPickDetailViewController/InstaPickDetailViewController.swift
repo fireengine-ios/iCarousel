@@ -79,6 +79,7 @@ final class InstaPickDetailViewController: UIViewController {
     //MARK: - Utility Methods(private)
     private func open() {
         if isShown {
+            self.statusBarColor = .clear
             return
         }
         isShown = true
@@ -179,7 +180,7 @@ final class InstaPickDetailViewController: UIViewController {
             showErrorWith(message: error.localizedDescription)
             return
         }
-        let text = String(format: TextConstants.instaPickLeftCountLabel, analyzesCount.left, analyzesCount.left)
+        let text = String(format: TextConstants.instaPickLeftCountLabel, analyzesCount.left, analyzesCount.total)
         ///if left count is 0 we seek ":"(not 0 because of RTL language) and draw in red
         if analyzesCount.left == 0, let location = text.firstIndex(of: ":") {
             let attributedString = NSMutableAttributedString(string: text, attributes: [
