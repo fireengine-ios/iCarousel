@@ -18,6 +18,13 @@ extension String {
                                             attributes: [.font: font], context: nil)
         return boundingBox.height
     }
+    
+    func width(for height: CGFloat, font: UIFont) -> CGFloat {
+        let maxSize = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = self.boundingRect(with: maxSize, options: .usesLineFragmentOrigin,
+                                            attributes: [.font: font], context: nil)
+        return boundingBox.width
+    }
 }
 
 extension NSAttributedString {

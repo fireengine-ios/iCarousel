@@ -181,13 +181,18 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         return CardsManager.popUpViewForOperaion(type: operation)
     }
     
+    func configureInstaPick(with totalCount: Int, leftCount: Int) {
+        ///DO NOT DELETE. This delegate method used in BaseCollectionViewDataSource
+    }
+    
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
-        if type == .premium {
-            // not let PremiumInfoCard appear anywhere else than in HomePage
+        ///TODO: remove 'type == .instaPick' after (because of lines 227-229)
+        if type == .premium || type == .instaPick {
+            /// not let some cards appear anywhere else than in HomePage
             return
         }
         

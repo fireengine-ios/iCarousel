@@ -485,6 +485,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     func changeCover() { }
     
     func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }
+    func openInstaPick() { }
     
     func didDelete(items: [BaseDataSourceItem]) {
         if dataSource.allObjectIsEmpty() {
