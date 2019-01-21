@@ -1,5 +1,6 @@
 import UIKit
 
+// TODO: localize
 final class PhotoSelectionController: UIViewController {
     
     enum SelectionState {
@@ -7,7 +8,8 @@ final class PhotoSelectionController: UIViewController {
         case ended
     }
     
-    private let photoService = PhotoService()
+    //private let photoService = PhotoService()
+    private let photoService = PhotoService2()
     private let paginationSize = 32
     private var paginationPage = 0
     private var isLoadingMore = false
@@ -16,7 +18,7 @@ final class PhotoSelectionController: UIViewController {
     private let selectingLimit = 5
     private var selectionState = SelectionState.selecting
     
-    private var photos = [WebPhoto]()
+    private var photos = [SearchItemResponse]()
     private let cellId = String(describing: PhotoCell.self)
     private let footerId = String(describing: CollectionSpinnerFooter.self)
     
@@ -67,7 +69,6 @@ final class PhotoSelectionController: UIViewController {
         view.addSubview(collectionView)
         title = "Photos"
         
-        //readJson()
         emptyMessageLabel.text = "Loading..."
         loadMore()
         collectionView.reloadData()
@@ -78,18 +79,6 @@ final class PhotoSelectionController: UIViewController {
         collectionView.collectionViewLayout.invalidateLayout()
     }
     
-    private func readJson() {
-        guard
-            let file = Bundle.main.url(forResource: "photos", withExtension: "json"),
-            let data = try? Data(contentsOf: file),
-            let photos = try? JSONDecoder().decode([WebPhoto].self, from: data)
-            else {
-                assertionFailure()
-                return
-        }
-        self.photos = photos
-    }
-    
     private func loadMore() {
         if isLoadingMore, isLoadingMoreFinished {
             assertionFailure()
@@ -98,41 +87,88 @@ final class PhotoSelectionController: UIViewController {
         
         isLoadingMore = true
         
-        self.photoService.loadPhotos(page: paginationPage, size: paginationSize, handler: { photos in
-            let newItemsRange = self.photos.count ..< (self.photos.count + photos.count)
-            let indexPathesForNewItems = newItemsRange.map({ IndexPath(item: $0, section: 0) })
-            self.photos.append(contentsOf: photos)
+        self.photoService.loadPhotos(page: paginationPage, size: paginationSize, handler: { result in
             
-            if !photos.isEmpty {
-                self.collectionView.backgroundView = nil
+            switch result {
+            case .success(let photos):
+                
+                let newItemsRange = self.photos.count ..< (self.photos.count + photos.count)
+                let indexPathesForNewItems = newItemsRange.map({ IndexPath(item: $0, section: 0) })
+                self.photos.append(contentsOf: photos)
+                
+                if !photos.isEmpty {
+                    self.collectionView.backgroundView = nil
+                }
+                
+                self.collectionView.performBatchUpdates({
+                    self.collectionView.insertItems(at: indexPathesForNewItems)
+                }, completion: { _ in
+                    self.isLoadingMore = false
+                    self.paginationPage += 1
+                    let isLoadingMoreFinished = photos.count < self.paginationSize
+                    
+                    if isLoadingMoreFinished {
+                        self.isLoadingMoreFinished = true
+                        
+                        /// to hide footer view by func referenceSizeForFooterInSection
+                        self.collectionView.performBatchUpdates({
+                            self.collectionView.collectionViewLayout.invalidateLayout()
+                        }, completion: nil)
+                        
+                        /// just in case stop animation.
+                        /// don't forget to start animation if need (for pullToRefresh)
+                        self.loadingMoreFooterView?.stopSpinner()
+                        
+                        /// if we don't have any item in collection
+                        if self.photos.isEmpty {
+                            self.emptyMessageLabel.text = "There is no photos"
+                        }
+                    }
+                })
+                
+                
+            case .failed(let error):
+                assertionFailure(error.localizedDescription)
             }
             
-            self.collectionView.performBatchUpdates({
-                self.collectionView.insertItems(at: indexPathesForNewItems)
-            }, completion: { _ in
-                self.isLoadingMore = false
-                self.paginationPage += 1
-                let isLoadingMoreFinished = photos.count < self.paginationSize
-                
-                if isLoadingMoreFinished {
-                    self.isLoadingMoreFinished = true
-                    
-                    /// to hide footer view by func referenceSizeForFooterInSection
-                    self.collectionView.performBatchUpdates({
-                        self.collectionView.collectionViewLayout.invalidateLayout()
-                    }, completion: nil)
-                    
-                    /// just in case stop animation.
-                    /// don't forget to start animation if need (for pullToRefresh)
-                    self.loadingMoreFooterView?.stopSpinner()
-                    
-                    /// if we don't have any item in collection
-                    if self.photos.isEmpty {
-                        self.emptyMessageLabel.text = "There is no photos"
-                    }
-                }
-            })
+            
         })
+        
+//        self.photoService.loadPhotos(page: paginationPage, size: paginationSize, handler: { photos in
+//            let newItemsRange = self.photos.count ..< (self.photos.count + photos.count)
+//            let indexPathesForNewItems = newItemsRange.map({ IndexPath(item: $0, section: 0) })
+//            self.photos.append(contentsOf: photos)
+//
+//            if !photos.isEmpty {
+//                self.collectionView.backgroundView = nil
+//            }
+//
+//            self.collectionView.performBatchUpdates({
+//                self.collectionView.insertItems(at: indexPathesForNewItems)
+//            }, completion: { _ in
+//                self.isLoadingMore = false
+//                self.paginationPage += 1
+//                let isLoadingMoreFinished = photos.count < self.paginationSize
+//
+//                if isLoadingMoreFinished {
+//                    self.isLoadingMoreFinished = true
+//
+//                    /// to hide footer view by func referenceSizeForFooterInSection
+//                    self.collectionView.performBatchUpdates({
+//                        self.collectionView.collectionViewLayout.invalidateLayout()
+//                    }, completion: nil)
+//
+//                    /// just in case stop animation.
+//                    /// don't forget to start animation if need (for pullToRefresh)
+//                    self.loadingMoreFooterView?.stopSpinner()
+//
+//                    /// if we don't have any item in collection
+//                    if self.photos.isEmpty {
+//                        self.emptyMessageLabel.text = "There is no photos"
+//                    }
+//                }
+//            })
+//        })
     }
     
     /// need cancel last request if pullToRequest before end
@@ -183,18 +219,7 @@ extension PhotoSelectionController: UICollectionViewDelegate {
         
         let item = photos[indexPath.row]
         cell.update(for: selectionState)
-        
-        URLSession.shared.dataTask(with: item.thumbnailUrl) { data, response, error in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let image = UIImage(data: data)
-                else { return }
-            DispatchQueue.main.async() {
-                cell.imageView.image = image
-            }
-            }.resume()
+        cell.setup(by: item)
         
         /// load more
         if !isLoadingMoreFinished, !isLoadingMore, indexPath.row == photos.count - 1 {
