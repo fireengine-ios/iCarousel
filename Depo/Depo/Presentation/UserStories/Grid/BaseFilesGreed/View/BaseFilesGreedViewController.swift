@@ -113,8 +113,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             subTitle = output.getSortTypeString()
         }
         
-        contentSlider?.reloadAllData()
-        
         output.viewWillAppear()
     
         if let searchController = navigationController?.topViewController as? SearchViewController {
