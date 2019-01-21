@@ -64,6 +64,13 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         imageView.layer.cornerRadius = imageView.bounds.height * 0.5
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        reset()
+        isAlreadyConfigured = false
+    }
+    
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         selectionImageView.isHidden = !isSelectionActive
         selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
@@ -122,5 +129,15 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         backgroundColor = ColorConstants.fileGreedCellColor
         
         isAlreadyConfigured = true
+    }
+    
+    private func reset() {
+        cellImageManager = nil
+        imageView.image = nil
+        uuid = nil
+    }
+    
+    deinit {
+        cellImageManager?.cancelImageLoading()
     }
 }

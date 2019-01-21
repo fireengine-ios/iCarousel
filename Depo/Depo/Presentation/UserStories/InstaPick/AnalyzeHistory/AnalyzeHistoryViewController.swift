@@ -154,12 +154,12 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     @IBAction private func deleteSelectedItems(_ sender: Any?) {
-        deleteSelectedAnalyzes()
+        deleteAction()
     }
     
     private func onMorePressed(_ sender: Any) {
         if !dataSource.isSelectionStateActive {
-            showAlertSheet(with: [.select, .selectAll], sender: sender)
+            showAlertSheet(with: [.select], sender: sender)
         }
     }
     
@@ -172,11 +172,6 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
                     self.dataSource.startSelection()
                     self.startSelection(with: 0)
-                })
-            case .selectAll:
-                action = UIAlertAction(title: TextConstants.actionSheetSelectAll, style: .default, handler: { _ in
-                    self.dataSource.startSelection(with: nil, selectAll: true)
-                    self.startSelection(with: self.dataSource.itemsCount)
                 })
             default:
                 action = nil
@@ -279,6 +274,24 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             }
         }
     }
+
+    private func deleteAction() {
+        showDeletePopUp { [weak self] in
+            self?.deleteSelectedAnalyzes()
+        }
+    }
+
+    private func showDeletePopUp(okHandler: @escaping VoidHandler) {
+        let controller = PopUpController.with(title: TextConstants.analyzeHistoryConfirmDeleteTitle,
+                                              message: TextConstants.analyzeHistoryConfirmDeleteText,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.analyzeHistoryConfirmDeleteNo,
+                                              secondButtonTitle: TextConstants.analyzeHistoryConfirmDeleteYes,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        RouterVC().presentViewController(controller: controller)
+    }
     
     private func deleteSelectedAnalyzes() {
         startActivityIndicator()
@@ -288,12 +301,13 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 return
             }
             
+            self.stopActivityIndicator()
             switch result {
             case .success:
-                self.stopActivityIndicator()
                 DispatchQueue.main.async {
                     self.dataSource.deleteSelectedItems(completion: {
                         self.stopSelection()
+                        UIApplication.showSuccessAlert(message: TextConstants.popUpDeleteComplete)
                     })
                 }
             case .failed(let error):
@@ -392,7 +406,7 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryTabBarPresenterDelegate {
     func bottomBarSelectedItem(_ item: ElementTypes) {
         switch item {
         case .delete:
-            deleteSelectedAnalyzes()
+            deleteAction()
         default:
             break
         }
