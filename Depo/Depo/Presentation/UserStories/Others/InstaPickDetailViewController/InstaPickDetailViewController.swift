@@ -57,7 +57,8 @@ final class InstaPickDetailViewController: UIViewController {
     
     private var analyzes: [InstapickAnalyze] = []
     private var analyzesCount: InstapickAnalyzesCount?
-
+    
+    private lazy var activityManager = ActivityIndicatorManager()
     //MARK: lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +104,7 @@ final class InstaPickDetailViewController: UIViewController {
     }
     
     private func setup() {
+        activityManager.delegate = self
         containerView.layer.cornerRadius = NumericConstants.instaPickDetailsPopUpCornerRadius
         
         prepareToAppear()
@@ -272,13 +274,31 @@ final class InstaPickDetailViewController: UIViewController {
     }
     
     @IBAction private func onShareTap(_ sender: Any) {
-        guard let url: URL = selectedPhoto?.getLargeImageURL() else {
-            let error = CustomErrors.serverError("There is no url for large photo.")
+        guard let fileForDownload = FileForDownload(forInstaPickAnalyze: selectedPhoto) else {
+            let error = CustomErrors.serverError("There is no needed info to share.")
             showErrorWith(message: error.localizedDescription)
             return
         }
-        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-        self.present(activityVC, animated: true, completion: nil) ///routerVC not work
+        
+        let shareButtonRect = self.shareButton.convert(self.shareButton.bounds, to: self.view)
+
+        let rect = CGRect(x: shareButtonRect.midX, y: shareButtonRect.minY - 10, width: 10, height: 50)
+        
+        startActivityIndicator()
+        let downloader = FilesDownloader()
+        downloader.getFiles(filesForDownload: [fileForDownload], response: { [weak self] urls, path in
+            self?.stopActivityIndicator()
+            let activityVC = UIActivityViewController(activityItems: urls, applicationActivities: nil)
+            
+            ///works only on iPad
+            activityVC.popoverPresentationController?.sourceRect = rect
+            activityVC.popoverPresentationController?.sourceView = self?.view
+            
+            self?.present(activityVC, animated: true, completion: nil) ///routerVC not work
+        }) { [weak self] errorString in
+            self?.stopActivityIndicator()
+            self?.showErrorWith(message: errorString)
+        }
     }
     
     @IBAction private func onCloseTap(_ sender: Any) {
@@ -299,5 +319,15 @@ extension InstaPickDetailViewController: InstaPickPhotoViewDelegate {
         } else {
             setNewSelectedPhoto(with: id)
         }
+    }
+}
+
+extension InstaPickDetailViewController: ActivityIndicator {
+    func startActivityIndicator() {
+        activityManager.start()
+    }
+    
+    func stopActivityIndicator() {
+        activityManager.stop()
     }
 }
