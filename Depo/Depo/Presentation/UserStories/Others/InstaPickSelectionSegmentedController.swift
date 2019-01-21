@@ -49,6 +49,9 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
         
         setupLayout()
+        
+        // TODO: localize
+        navigationItem.title = "Photos Selected (\(0))"
     }
     
     private func setupLayout() {
@@ -95,6 +98,7 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         super.viewDidLoad()
         
         /// temp code
+        // TODO: remove
         let vc1 = UIViewController()
         vc1.view.backgroundColor = .red
         vc1.title = "Placeholder 1"
@@ -121,7 +125,16 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     }
     
     @objc private func analyzeWithInstapick() {
-        print("analyzeWithInstapick")
+        
+        // TODO: refactor
+        guard let selectionController = childViewControllers.first as? PhotoSelectionController,
+            let selectedItems = selectionController.selectedItems() else {
+            assertionFailure()
+            return
+        }
+        
+        print(selectedItems.count)
+        // start analyze
     }
     
     @objc private func controllerDidChange(_ sender: UISegmentedControl) {

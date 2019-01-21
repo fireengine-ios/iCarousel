@@ -1,6 +1,8 @@
 import UIKit
 
 // TODO: localize
+// TODO: error handling
+// TODO: paginationSize + test for iPad
 final class PhotoSelectionController: UIViewController {
     
     enum SelectionState {
@@ -8,8 +10,7 @@ final class PhotoSelectionController: UIViewController {
         case ended
     }
     
-    //private let photoService = PhotoService()
-    private let photoService = PhotoService2()
+    private let photoService = PhotoService()
     private let paginationSize = 32
     private var paginationPage = 0
     private var isLoadingMore = false
@@ -126,49 +127,11 @@ final class PhotoSelectionController: UIViewController {
                     }
                 })
                 
-                
             case .failed(let error):
+                // TODO: error handling
                 assertionFailure(error.localizedDescription)
             }
-            
-            
         })
-        
-//        self.photoService.loadPhotos(page: paginationPage, size: paginationSize, handler: { photos in
-//            let newItemsRange = self.photos.count ..< (self.photos.count + photos.count)
-//            let indexPathesForNewItems = newItemsRange.map({ IndexPath(item: $0, section: 0) })
-//            self.photos.append(contentsOf: photos)
-//
-//            if !photos.isEmpty {
-//                self.collectionView.backgroundView = nil
-//            }
-//
-//            self.collectionView.performBatchUpdates({
-//                self.collectionView.insertItems(at: indexPathesForNewItems)
-//            }, completion: { _ in
-//                self.isLoadingMore = false
-//                self.paginationPage += 1
-//                let isLoadingMoreFinished = photos.count < self.paginationSize
-//
-//                if isLoadingMoreFinished {
-//                    self.isLoadingMoreFinished = true
-//
-//                    /// to hide footer view by func referenceSizeForFooterInSection
-//                    self.collectionView.performBatchUpdates({
-//                        self.collectionView.collectionViewLayout.invalidateLayout()
-//                    }, completion: nil)
-//
-//                    /// just in case stop animation.
-//                    /// don't forget to start animation if need (for pullToRefresh)
-//                    self.loadingMoreFooterView?.stopSpinner()
-//
-//                    /// if we don't have any item in collection
-//                    if self.photos.isEmpty {
-//                        self.emptyMessageLabel.text = "There is no photos"
-//                    }
-//                }
-//            })
-//        })
     }
     
     /// need cancel last request if pullToRequest before end
@@ -184,6 +147,10 @@ final class PhotoSelectionController: UIViewController {
         
         /// call after resetting paginationPage
         loadMore()
+    }
+    
+    func selectedItems() -> [SearchItemResponse]? {
+        return collectionView.indexPathsForSelectedItems?.flatMap({ photos[$0.item] })
     }
 }
 
@@ -264,6 +231,9 @@ extension PhotoSelectionController: UICollectionViewDelegate {
             }
             cell.update(for: selectionState)
         }
+        
+        // TODO: refactor
+        parent?.navigationItem.title = "Photos Selected (\(selectedCount))"
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -284,6 +254,9 @@ extension PhotoSelectionController: UICollectionViewDelegate {
             }
             cell.update(for: selectionState)
         }
+        
+        // TODO: refactor
+        parent?.navigationItem.title = "Photos Selected (\(selectedCount))"
     }
 }
 
