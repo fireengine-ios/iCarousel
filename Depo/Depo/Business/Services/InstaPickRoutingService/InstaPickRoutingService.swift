@@ -124,8 +124,14 @@ final class InstaPickRoutingService {
     }
     
     private func didOpenInstaPickSelectionSegmented() {
+        guard let successHandler = successHandler else {
+            UIApplication.showErrorAlert(message: "Success handler unexpected become nil.")
+            return
+        }
+        
         let router = RouterVC()
         let controller = InstaPickSelectionSegmentedController.controllerToPresent()
+        successHandler(controller)
         router.presentViewController(controller: controller)
     }
     
