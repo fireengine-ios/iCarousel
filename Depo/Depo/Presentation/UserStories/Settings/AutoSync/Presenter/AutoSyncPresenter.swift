@@ -23,7 +23,6 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     var fromSettings: Bool = false
 
     func viewIsReady() {
-        interactor.trackScreen()
         startAsyncOperationDisableScreen()
         interactor.prepareCellModels()
     }

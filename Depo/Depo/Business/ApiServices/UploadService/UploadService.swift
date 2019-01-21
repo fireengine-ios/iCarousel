@@ -97,7 +97,7 @@ final class UploadService: BaseRequestService {
             switch uploadType {
             case .autoSync:
                 self.syncFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: success, fail: fail, syncOperationsListCallBack: { [weak self] syncOperations in
-                    self?.stopTracking()
+                    
                     returnedUploadOperation(syncOperations)
                 })
             case .syncToUse:
@@ -436,6 +436,7 @@ final class UploadService: BaseRequestService {
                             if !successHandled, self.uploadOperations.filter({ $0.uploadType == .autoSync && $0.item.fileType == finishedOperation.item.fileType }).isEmpty {
                                 successHandled = true
                                 self.trackUploadItemsFinished(items: itemsToSync)
+                                self.stopTracking()
                                 success()
                                 self.logSyncSettings(state: "FinishedSyncFileList")
                                 return
@@ -451,6 +452,7 @@ final class UploadService: BaseRequestService {
                                     self.logEvent("FinishUpload \(fileName) FAIL: \(error.errorDescription ?? "")")
                                 }
                                 self.uploadOperations.removeIfExists(finishedOperation)
+                                self.stopTracking()
                                 fail(error)
                             }
                             return
@@ -703,7 +705,6 @@ extension UploadService {
 extension UploadService {
     
     fileprivate func trackAnalyticsFor(items: [WrapData], isFromCamera: Bool) {
-        
         startSyncTracking()
         
         guard !isFromCamera else {
