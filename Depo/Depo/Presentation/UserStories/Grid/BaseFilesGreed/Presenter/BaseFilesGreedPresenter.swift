@@ -817,7 +817,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         startAsyncOperation()
         instaPickRoutingService.getViewController(success: { [weak self] vc in
             self?.asyncOperationSucces()
-            self?.router.openNeededInstaPick(viewController: vc)
+            if vc is InstapickPopUpController {
+                self?.router.openNeededInstaPick(viewController: vc)
+            }
         }) { [weak self] error in
             self?.asyncOperationFail(errorMessage: error.localizedDescription)
         }

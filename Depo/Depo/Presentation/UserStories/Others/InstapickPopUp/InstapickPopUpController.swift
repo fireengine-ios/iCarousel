@@ -232,7 +232,9 @@ extension InstapickPopUpController: ConnectWithInstaViewDelegate {
     }
     
     func onConnectWithLoginInstaTap() {
-        delegate?.onConnectWithInsta()
+        close { [weak self] in
+            self?.delegate?.onConnectWithInsta()
+        }
     }
     
 }
@@ -246,8 +248,6 @@ extension InstapickPopUpController: InstagramAuthViewControllerDelegate {
         }
     }
     
-    func instagramAuthCancel() {
-        ///TODO: need to redo instagram authentication
-    }
+    func instagramAuthCancel() { }
     
 }

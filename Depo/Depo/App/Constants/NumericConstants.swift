@@ -119,6 +119,21 @@ struct NumericConstants {
     static let heightForPackageCell: CGFloat = 255
     
     static let premiumViewHeight: CGFloat = 480
+    
+    static let instaPickSelectionSegmentedTransparentGradientViewHeight: CGFloat = 130
+    static let instaPickHashtagCellHeight: CGFloat = 30
+    static let instaPickHashtagCellWidthConstant: CGFloat = 45
+    
+    static let instaPickHashtagCellCornerRadius: CGFloat = 12
+    static let instaPickHashtagCellBorderWidth: CGFloat = 0.2
+    static let instaPickHashtagCellShadowRadius: CGFloat = 5
+    
+    static let instaPickHashtagCellShadowColorAlpha: CGFloat = 0.11
+    static let instaPickHashtagCellBorderColorAlpha: CGFloat = 0.15
+    
+    static let instaPickDetailsPopUpCornerRadius: CGFloat = 2
+    
+    static let instaPickImageViewTransitionDuration: TimeInterval = 0.25
 }
 
 struct RequestSizeConstant {

@@ -21,10 +21,8 @@ final class InstaPickRoutingService {
     private var instagramStatus: Bool?
 
     private let doNotShowAgainKey = "instaPickDoNotShowAgainKey"
-    public var doNotShowAgain: Bool
-        
-    init() {
-        doNotShowAgain = UserDefaults.standard.bool(forKey: doNotShowAgainKey)
+    private var doNotShowAgain: Bool {
+        return UserDefaults.standard.bool(forKey: doNotShowAgainKey)
     }
     
     //Utility Methods(public)
@@ -40,8 +38,7 @@ final class InstaPickRoutingService {
     }
     
     func stopShowing() {
-        doNotShowAgain = true
-        UserDefaults.standard.set(doNotShowAgain, forKey: doNotShowAgainKey)
+        UserDefaults.standard.set(true, forKey: doNotShowAgainKey)
     }
     
     //Utility Methods(private)
@@ -104,13 +101,11 @@ final class InstaPickRoutingService {
     
     private func configureViewController() {
         if doNotShowAgain {
-            ///TODO: open the photo selection screen which is not yet ready
-            didOpenInstaPickPopUp()
+            didOpenInstaPickSelectionSegmented()
         } else if let instagramNickname = instagramNickname {
             didOpenInstaPickPopUp(instaNickname: instagramNickname)
         } else if let hasPermission = instagramLikePermission, hasPermission {
-            ///TODO: open the photo selection screen which is not yet ready
-            didOpenInstaPickPopUp()
+            didOpenInstaPickSelectionSegmented()
         } else {
             didOpenInstaPickPopUp()
         }
@@ -128,6 +123,18 @@ final class InstaPickRoutingService {
         }
     }
     
+    private func didOpenInstaPickSelectionSegmented() {
+        guard let successHandler = successHandler else {
+            UIApplication.showErrorAlert(message: "Success handler unexpected become nil.")
+            return
+        }
+        
+        let router = RouterVC()
+        let controller = InstaPickSelectionSegmentedController.controllerToPresent()
+        successHandler(controller)
+        router.presentViewController(controller: controller)
+    }
+    
     private func showError(with error: ErrorResponse) {
         guard let errorHandler = errorHandler else {
             UIApplication.showErrorAlert(message: "Error handler unexpected become nil.")
@@ -140,11 +147,11 @@ final class InstaPickRoutingService {
 extension InstaPickRoutingService: InstapickPopUpControllerDelegate {
     
     func onConnectWithoutInsta() {
-        ///TODO: open the photo selection screen which is not yet ready
+        didOpenInstaPickSelectionSegmented()
     }
     
     func onConnectWithInsta() {
-        ///TODO: need to redo instagram authentication and open the photo selection screen which is not yet ready
+        didOpenInstaPickSelectionSegmented()
     }
     
 }

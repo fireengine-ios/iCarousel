@@ -31,7 +31,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         if ContactSyncSDK.isRunning() {
             if AnalyzeStatus.shared().analyzeStep == AnalyzeStep.ANALYZE_STEP_INITAL {
                 interactor.performOperation(forType: SyncSettings.shared().mode)
-            } else {
+            } else if AnalyzeStatus.shared().analyzeStep != AnalyzeStep.ANALYZE_STEP_PROCESS_DUPLICATES {
                 view.setInitialState()
                 startOperation(operationType: .getBackUpStatus)
             }

@@ -748,6 +748,22 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isFolder = false
     }
     
+    init(instaPickAnalyzeModel: InstapickAnalyze) {
+        fileSize = 0
+        favorites = false
+        status = .unknown
+        metaData = instaPickAnalyzeModel.fileInfo?.metadata
+        
+        let serverURL = instaPickAnalyzeModel.fileInfo?.tempDownloadURL
+        patchToPreview = .remoteUrl(serverURL)
+        super.init()
+        
+        tmpDownloadUrl = serverURL
+        
+        syncStatus = .synced
+        isFolder = false
+    }
+    
     override func getCellReUseID() -> String {
         
         switch fileType {

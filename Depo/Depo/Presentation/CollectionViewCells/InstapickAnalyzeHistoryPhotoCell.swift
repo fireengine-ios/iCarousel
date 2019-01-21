@@ -64,6 +64,13 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         imageView.layer.cornerRadius = imageView.bounds.height * 0.5
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        reset()
+        isAlreadyConfigured = false
+    }
+    
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         selectionImageView.isHidden = !isSelectionActive
         selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
@@ -77,12 +84,13 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         countLabel.text = countText
         
         if let metadata = item.fileInfo?.metadata {
-            setImage(with: metadata)
+            setImage(with: metadata, identifier: item.requestIdentifier)
         }
     }
 
-    override func setImage(with metaData: BaseMetaData) {
-        let cacheKey = metaData.mediumUrl?.byTrimmingQuery
+    func setImage(with metaData: BaseMetaData, identifier: String) {
+        //url is not unique key for analyze items
+        let cacheKey = metaData.mediumUrl?.byTrimmingQuery?.appendingPathComponent(identifier)
         cellImageManager = CellImageManager.instance(by: cacheKey)
         uuid = cellImageManager?.uniqueId
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
@@ -121,5 +129,15 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         backgroundColor = ColorConstants.fileGreedCellColor
         
         isAlreadyConfigured = true
+    }
+    
+    private func reset() {
+        cellImageManager = nil
+        imageView.image = nil
+        uuid = nil
+    }
+    
+    deinit {
+        cellImageManager?.cancelImageLoading()
     }
 }

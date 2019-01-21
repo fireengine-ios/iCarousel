@@ -868,4 +868,16 @@ class RouterVC: NSObject {
         let controller = MyStorageModuleInitializer.initializeMyStorageController(usage: usageStorage)
         return controller
     }
+    
+    func instaPickDetailViewController(models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) -> InstaPickDetailViewController {
+        let nibName = String(describing: InstaPickDetailViewController.self)
+        let controller = InstaPickDetailViewController(nibName: nibName, bundle: nil)
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        controller.configure(with: models, analyzesCount: analyzesCount)
+        
+        return controller
+    }
 }

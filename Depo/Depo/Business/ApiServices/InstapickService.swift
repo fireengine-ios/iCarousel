@@ -25,6 +25,7 @@ protocol InstapickService: class {
     func removeAnalyzes(ids: [String], handler: @escaping (ResponseResult<Void>) -> Void)
     func getAnalyzeHistory(offset: Int, limit: Int, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
     func getAnalyzeDetails(id: String, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
+    func startAnalyze(ids: [String], popupToDissmiss: UIViewController)
 }
 
 
@@ -94,6 +95,8 @@ final class InstapickServiceImpl: InstapickService {
                         return
                     }
                 
+                    self?.delegates.invoke(invocation: { $0.didFinishAnalysis() })
+                    
                     handler(.success(results))
                 case .failure(let error):
                     assertionFailure(error.localizedDescription)
@@ -123,6 +126,7 @@ final class InstapickServiceImpl: InstapickService {
                 /// !!! server logic. don't delete
                 switch response.result {
                 case .success(_):
+                    self?.delegates.invoke(invocation: { $0.didRemoveAnalysis() })
                     handler(.success(()))
                 case .failure(let error):
                     assertionFailure(error.localizedDescription)
@@ -276,6 +280,38 @@ final class InstapickServiceImpl: InstapickService {
                 }
         }
     }
+    
+    /// global logic
+    func startAnalyze(ids: [String], popupToDissmiss: UIViewController) {
+        startAnalyzes(ids: ids) { [weak self] result in
+            switch result {
+            case .success(let analysis):
+                
+                self?.getAnalyzesCount { result in
+                    switch result {
+                    case .success(let analyzesCount):
+                        
+                        popupToDissmiss.dismiss(animated: true, completion: {
+                            
+                            if let currentController = UIApplication.topController() {
+                                let instapickDetailControlller = RouterVC().instaPickDetailViewController(models: analysis, analyzesCount: analyzesCount)
+                                currentController.present(instapickDetailControlller, animated: true, completion: nil)
+                            } else {
+                                /// nothing to show
+                                assertionFailure()
+                            }
+                        })
+                        
+                    case .failed(let error):
+                        UIApplication.showErrorAlert(message: error.localizedDescription)
+                    }
+                }
+                
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.localizedDescription)
+            }
+        }
+    }
 }
 
 final class InstapickAnalyzesCount {
@@ -308,6 +344,7 @@ final class InstapickAnalyze {
     let fileInfo: SearchItemResponse?
     let photoCount: Int?
     let startedDate: Date?
+    var isPicked: Bool = false
     // let message: String
     
     init(requestIdentifier: String, rank: Float, hashTags: [String], fileInfo: SearchItemResponse?, photoCount: Int?, startedDate: Date?) {
@@ -338,6 +375,14 @@ final class InstapickAnalyze {
         
         self.photoCount = json["photoCount"].int
         self.startedDate = json["startedDate"].date
+    }
+    
+    func getSmallImageURL() -> URL? {
+        return fileInfo?.metadata?.mediumUrl
+    }
+    
+    func getLargeImageURL() -> URL? {
+        return fileInfo?.metadata?.largeUrl
     }
 }
 

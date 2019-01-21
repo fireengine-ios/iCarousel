@@ -740,12 +740,12 @@
 "leave_premium_premium_description" = "You can use all the advanced features of lifebox with your Premium membership.";
 "leave_premium_cancel_description" = "You will not be able to benefit from Premium privileges if you cancel your membership";
 "feature_apple_cancel_text" = "To cancel your package, please use iTunes & App Store menu in your device";
-"feature_slcm_cancel_text" = "To cancel your package, Please send an SMS to 2200 with this text: “IPTAL LIFEBOX PREMIUM %s”";
+"feature_slcm_cancel_text" = "To cancel your package, Please send an SMS to 2200 with this text: LIFEBOX PREMIUM IPTAL";
 "feature_google_cancel_text" = "To cancel your package, please use Google Play Store";
 "feature_free_of_charge_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 "feature_lifecell_cancel_text" = "You can continue to use Premium features for free since you are a lifecell user";
 "feature_promo_cancel_text" = "Please use Contact Us menu to inform us to process your request";
-"feature_kktcell_cancel_text" = "You can continue to use Premium features for free since you are a lifecell-KKTC user";
+"feature_kktcell_cancel_text" = "You can continue to use Premium features for free since you are a KKTCELL user";
 "feature_moldcell_cancel_text" = "You can continue to use Premium features for free since you are a Moldcell user";
 "feature_life_cancel_text" = "You can continue to use Premium features for free since you are a life:) user";
 "feature_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
@@ -786,8 +786,13 @@
 "analyze_history_empty_subtitle" = "analyze_history_empty_subtitle";
 "analyze_history_analyze_left" = "Analyses Left";
 "analyze_history_analyze_count" = "%1$d of %2$d";
-"analyze_with_instapick" = "Analyze With InstaPick";
+"analyze_with_instapick" = "New InstaPick Analysis";
 "analyze_history_photos_count" = "%d photos";
+"analyze_history_start_here" = "Start\nHere!";
+"analyze_confirm_delete_title" = "Are you sure you want to delete?";
+"analyze_confirm_delete_text" = "These analyses will be deleted from your Analyze History";
+"analyze_confirm_delete_yes" = "YES";
+"analyze_confirm_delete_no"  = "NO";
 /*InstaPick three dots*/
 "new_insta_pick" = "New InstaPick";
 "uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. We will keep your existing photos and videos along with new uploaded memories in high quality until 1st of March. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
@@ -803,7 +808,17 @@
 "no_analysis_detail_label" = "Let us analyze your selected photos and suggest you which one to share!";
 
 "instapick_button_has_analysis" = "Let’s Start!";
+"analyze_with_instapick" = "Analyze With InstaPick";
 
+/*InstaPickDetailViewController*/
+
+"you_are_ready_to_share" = "You are ready to share!";
+"instaPick_analysis_left" = "Analysis Left: %1$d of %2$d";
+"engage_with_more_hastags" = "Engage with more #hastags";
+"copy_hashtags_to_clipboard" = "Copy #hashtags to clipboard";
+"share_on_social_media" = "Share on Social Media!";
+
+"picked" = "PICKED!";
 "insta_pick_analyzing_bottom" = "Enjoy your time while we analyze your photos! 😊";
 "insta_pick_analyzing_0" = "We are looking for the photo you will get the most likes.";
 "insta_pick_analyzing_1" = "You have selected beautiful photos";
@@ -818,3 +833,4 @@
 "connected_with_instagram" = "Connect with Instagram";
 "connected_with_instagram_name" = "Connect with Instagram as";
 "continue_without_connecting" = "Continue without connecting";
+"NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";

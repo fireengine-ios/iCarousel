@@ -16,6 +16,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     @IBOutlet private weak var newAnalysisButton: BlueButtonWithMediumWhiteText!
     @IBOutlet private weak var newAnalysisView: UIView!
     
+    private lazy var activityManager = ActivityIndicatorManager()
+
     private let dataSource = AnalyzeHistoryDataSourceForCollectionView()
     private let instapickService: InstapickService = factory.resolve()
     
@@ -30,8 +32,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                                target: self,
                                selector: #selector(onCancelSelectionButton))
     }()
-    
-    private let navBarRightItemSourceRect = CGRect(x: Device.winSize.width - 45, y: -15, width: 0, height: 0)
+    private var navBarRightItems: [UIBarButtonItem]?
     
     private var editingTabBar: BottomSelectionTabBarViewController?
     private var bottomBarPresenter: BottomSelectionTabBarModuleInput?
@@ -57,6 +58,9 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private func configure() {
         needShowTabBar = false
         
+        activityManager.delegate = self
+        displayManager.applyConfiguration(.initial)
+
         dataSource.setupCollectionView(collectionView: collectionView)
         dataSource.delegate = self
         collectionView.contentInset.bottom = newAnalysisView.bounds.height
@@ -76,7 +80,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         }
         let rightActions: [NavBarWithAction] = [more]
         navBarConfigurator.configure(right: rightActions, left: [])
-        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+        navBarRightItems = navBarConfigurator.rightItems
     }
     
     private func configureBottomTabBar() {
@@ -90,16 +94,16 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     private func startSelection(with count: Int) {
         selectedItemsCountChange(with: count)
-        navigationItem.leftBarButtonItem = cancelSelectionButton
         displayManager.applyConfiguration(.selection)
+        updateNavBarItems()
     }
     
     private func stopSelection() {
-        navigationItem.leftBarButtonItem = nil
         setTitle(withString: TextConstants.analyzeHistoryTitle)
         dataSource.cancelSelection()
         bottomBarPresenter?.dismiss(animated: true)
         displayManager.applyConfiguration(dataSource.isEmpty ? .empty : .initial)
+        updateNavBarItems()
     }
     
     private func selectedItemsCountChange(with count: Int) {
@@ -109,6 +113,20 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             bottomBarPresenter?.dismiss(animated: true)
         } else {
             bottomBarPresenter?.show(animated: true, onView: view)
+        }
+    }
+    
+    private func updateNavBarItems() {
+        switch displayManager.configuration {
+        case .initial:
+            navigationItem.rightBarButtonItems = navBarRightItems
+            navigationItem.leftBarButtonItem = nil
+        case .empty:
+            navigationItem.rightBarButtonItems = nil
+            navigationItem.leftBarButtonItem = nil
+        case .selection:
+            navigationItem.rightBarButtonItems = nil
+            navigationItem.leftBarButtonItem = cancelSelectionButton
         }
     }
     
@@ -136,13 +154,11 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     @IBAction private func deleteSelectedItems(_ sender: Any?) {
-        deleteSelectedAnalyzes()
+        deleteAction()
     }
     
     private func onMorePressed(_ sender: Any) {
-        if dataSource.isSelectionStateActive {
-            showAlertSheet(with: [.delete], sender: sender)
-        } else {
+        if !dataSource.isSelectionStateActive {
             showAlertSheet(with: [.select], sender: sender)
         }
     }
@@ -152,13 +168,9 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         types.forEach { type in
             var action: UIAlertAction?
             switch type {
-            case .delete:
-                action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                    self.deleteSelectedAnalyzes()
-                })
             case .select:
                 action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
-                    self.dataSource.startSelection(with: nil)
+                    self.dataSource.startSelection()
                     self.startSelection(with: 0)
                 })
             default:
@@ -182,16 +194,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 sourceRectFrame = CGRect(origin: CGPoint(x: pressedBarButton.frame.origin.x, y: pressedBarButton.frame.origin.y + 20), size: pressedBarButton.frame.size)
             }
             actionSheetVC.popoverPresentationController?.sourceRect = sourceRectFrame
-        } else if let _ = sender as? UIBarButtonItem {
-            //FIXME: use actionSheetVC.popoverPresentationController?.barButtonItem instead
-            if navigationController?.navigationBar.isTranslucent == true {
-                var frame = navBarRightItemSourceRect
-                frame.origin.y = 44
-                actionSheetVC.popoverPresentationController?.sourceRect = frame
-            } else {
-                actionSheetVC.popoverPresentationController?.sourceRect = navBarRightItemSourceRect
-            }
-            
+        } else if let item = sender as? UIBarButtonItem {
+            actionSheetVC.popoverPresentationController?.barButtonItem = item
             actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up
         }
         present(actionSheetVC, animated: true)
@@ -205,22 +209,19 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             return
         }
         
-        showSpiner()
+        startActivityIndicator()
         
-        reloadCards { [weak self] isSuccess in
+        reloadCards { [weak self] in
             guard let `self` = self else {
                 return
             }
             
-            if isSuccess {
-                self.page = 0
-                self.dataSource.isPaginationDidEnd = false
-                self.loadNextHistoryPage(completion: { [weak self] _ in
-                    self?.hideSpiner()
-                })
-            } else {
-                self.hideSpiner()
-            }
+            self.page = 0
+            self.dataSource.isPaginationDidEnd = false
+            self.loadNextHistoryPage(completion: { [weak self] _ in
+                self?.stopActivityIndicator()
+            })
+
         }
     }
     
@@ -232,29 +233,31 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         }
     }
     
-    private func reloadCards(completion: BoolHandler? = nil) {
-        instapickService.getAnalyzesCount { [weak self] result in
-            guard let `self` = self else { return }
-            
-            switch result {
-            case .success(let analysisCount):
-                self.dataSource.reloadCards(with: analysisCount)
-                completion?(true)
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
-                completion?(false)
+    private func reloadCards(success: VoidHandler? = nil) {
+        getAnalyzesCount(success: { [weak self] analyzesCount in
+            guard let `self` = self else {
+                return
             }
-        }
+
+            self.dataSource.reloadCards(with: analyzesCount)
+            success?()
+        })
     }
     
     private func loadNextHistoryPage(completion: BoolHandler? = nil) {
         instapickService.getAnalyzeHistory(offset: page, limit: pageSize) { [weak self] result in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
             
             switch result {
             case .success(let history):
                 DispatchQueue.main.async {
-                    self.dataSource.appendHistoryItems(history)
+                    if self.page == 0 {
+                        self.dataSource.reloadHistoryItems(history)
+                    } else {
+                        self.dataSource.appendHistoryItems(history)
+                    }
                     self.page += 1
                 
                     if self.dataSource.isEmpty {
@@ -262,31 +265,114 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                     } else if self.displayManager.configuration == .empty {
                         self.displayManager.applyConfiguration(.initial)
                     }
+                    self.updateNavBarItems()
                     completion?(true)
                 }
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
                 completion?(false)
+                self.showError(message: error.localizedDescription)
             }
         }
     }
+
+    private func deleteAction() {
+        showDeletePopUp { [weak self] in
+            self?.deleteSelectedAnalyzes()
+        }
+    }
+
+    private func showDeletePopUp(okHandler: @escaping VoidHandler) {
+        let controller = PopUpController.with(title: TextConstants.analyzeHistoryConfirmDeleteTitle,
+                                              message: TextConstants.analyzeHistoryConfirmDeleteText,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.analyzeHistoryConfirmDeleteNo,
+                                              secondButtonTitle: TextConstants.analyzeHistoryConfirmDeleteYes,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        RouterVC().presentViewController(controller: controller)
+    }
     
     private func deleteSelectedAnalyzes() {
+        startActivityIndicator()
         let ids = dataSource.selectedItems.map { $0.requestIdentifier }
         instapickService.removeAnalyzes(ids: ids) { [weak self] result in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                return
+            }
             
+            self.stopActivityIndicator()
             switch result {
             case .success:
                 DispatchQueue.main.async {
                     self.dataSource.deleteSelectedItems(completion: {
                         self.stopSelection()
+                        UIApplication.showSuccessAlert(message: TextConstants.popUpDeleteComplete)
                     })
                 }
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+                self.showError(message: error.localizedDescription)
             }
         }
+    }
+    
+    private func getAnalyzeDetails(for id: String, analyzesCount: InstapickAnalyzesCount) {
+        instapickService.getAnalyzeDetails(id: id) { [weak self] result in
+            guard let `self` = self else {
+                return
+            }
+
+            switch result {
+            case .success(let response):
+                self.openDetail(for: response, analyzesCount: analyzesCount)
+            case .failed(let error):
+                self.showError(message: error.localizedDescription)
+            }
+        }
+    }
+    
+    private func getAnalyzesCount(success: @escaping (InstapickAnalyzesCount) -> ()) {
+        instapickService.getAnalyzesCount { [weak self] result in
+            switch result {
+            case .success(let analysisCount):
+                success(analysisCount)
+            case .failed(let error):
+                self?.showError(message: error.localizedDescription)
+            }
+        }
+    }
+    
+    private func prepareToOpenDetails(with analyze: InstapickAnalyze) {
+        startActivityIndicator()
+        
+        getAnalyzesCount(success: { [weak self] analyzesCount in
+            self?.getAnalyzeDetails(for: analyze.requestIdentifier, analyzesCount: analyzesCount)
+        })
+    }
+    
+    private func openDetail(for analysis: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) {
+        stopActivityIndicator()
+        
+        let router = RouterVC()
+        let controller = router.instaPickDetailViewController(models: analysis, analyzesCount: analyzesCount)
+        
+        router.presentViewController(controller: controller)
+    }
+    
+    private func showError(message: String) {
+        stopActivityIndicator()
+        
+        UIApplication.showErrorAlert(message: message)
+    }
+}
+
+extension AnalyzeHistoryViewController: ActivityIndicator {
+    func startActivityIndicator() {
+        activityManager.start()
+    }
+    
+    func stopActivityIndicator() {
+        activityManager.stop()
     }
 }
 
@@ -306,7 +392,7 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
     }
     
     func onSeeDetailsForAnalyze(_ analyze: InstapickAnalyze) {
-        //TODO: - Open Analyze Details Screen
+        prepareToOpenDetails(with: analyze)
     }
     
     func onUpdateSelectedItems(count: Int) {
@@ -318,7 +404,7 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryTabBarPresenterDelegate {
     func bottomBarSelectedItem(_ item: ElementTypes) {
         switch item {
         case .delete:
-            deleteSelectedAnalyzes()
+            deleteAction()
         default:
             break
         }

@@ -34,6 +34,7 @@ final class InstaPickCard: BaseView {
     @IBOutlet private weak var detailLabel: UILabel!
     @IBOutlet private weak var bottomButton: UIButton!
     @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var closeButton: UIButton!
     
     var analysisLeft: Int = 0
     var totalCount: Int = 0
@@ -69,6 +70,8 @@ final class InstaPickCard: BaseView {
             
             gradientView.isNeedGradient = false
             
+            closeButton.setImage(UIImage(named: "CloseCardIcon"), for: .normal)
+            
             detailLabel.textColor = ColorConstants.darkText
             detailLabel.text = TextConstants.instaPickUsedBeforeDetailLabel
             
@@ -81,6 +84,8 @@ final class InstaPickCard: BaseView {
             
             gradientView.isNeedGradient = true
             
+            closeButton.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
+
             detailLabel.textColor = UIColor.white
             detailLabel.text = TextConstants.instaPickNoUsedBeforeDetailLabel
             
@@ -93,6 +98,8 @@ final class InstaPickCard: BaseView {
             
             gradientView.isNeedGradient = true
             
+            closeButton.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
+
             detailLabel.textColor = UIColor.white
             detailLabel.text = TextConstants.instaPickNoAnalysisDetailLabel
             
@@ -144,16 +151,11 @@ final class InstaPickCard: BaseView {
         cardType = type
     }
     
-    private func openInstaPickPopUp() {
-        instapickRoutingService.getViewController(success: { controller in
-            DispatchQueue.toMain {
-                let router = RouterVC()
-                let vc = router.createRootNavigationControllerWithModalStyle(controller: controller)
-                router.presentViewController(controller: vc)
-            }
-        }) { (error) in
-            UIApplication.showErrorAlert(message: error.localizedDescription)
-        }
+    private func openInstaPickHistory() {
+        let router = RouterVC()
+        
+        let controller = router.analyzesHistoryController()
+        router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
     
     //MARK: - Utility Methods(public)
@@ -185,9 +187,9 @@ final class InstaPickCard: BaseView {
 
         switch cardType {
         case .usedBefore:
-            openInstaPickPopUp()
+            openInstaPickHistory()
         case .noUsedBefore:
-            openInstaPickPopUp()
+            openInstaPickHistory()
             break
         case .noAnalysis:
             break
