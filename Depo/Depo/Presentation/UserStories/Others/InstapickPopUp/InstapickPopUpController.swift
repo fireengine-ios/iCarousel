@@ -232,7 +232,9 @@ extension InstapickPopUpController: ConnectWithInstaViewDelegate {
     }
     
     func onConnectWithLoginInstaTap() {
-        delegate?.onConnectWithInsta()
+        close { [weak self] in
+            self?.delegate?.onConnectWithInsta()
+        }
     }
     
 }
