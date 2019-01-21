@@ -10,25 +10,6 @@ import UIKit
 
 final class InstaPickSelectionSegmentedController: UIViewController {
     
-    static func controllerToPresent() -> UIViewController {
-        let vc = InstaPickSelectionSegmentedController()
-        let navVC = UINavigationController(rootViewController: vc)
-        
-        let navigationBar = navVC.navigationBar
-        
-        let textAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.white,
-            .font: UIFont.TurkcellSaturaDemFont(size: 19)
-        ]
-        
-        navigationBar.titleTextAttributes = textAttributes
-        navigationBar.barTintColor = UIColor.lrTealish //bar's background
-        navigationBar.barStyle = .black
-        navigationBar.isTranslucent = false
-        
-        return navVC
-    }
-    
     private let topView = UIView()
     private let contanerView = UIView()
     private let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
@@ -190,5 +171,27 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         contanerView.addSubview(childController.view)
         childController.didMove(toParentViewController: self)
+    }
+}
+
+// MARK: - Static
+extension InstaPickSelectionSegmentedController {
+    static func controllerToPresent() -> UIViewController {
+        let vc = InstaPickSelectionSegmentedController()
+        let navVC = UINavigationController(rootViewController: vc)
+        
+        let navigationBar = navVC.navigationBar
+        
+        let textAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.TurkcellSaturaDemFont(size: 19)
+        ]
+        
+        navigationBar.titleTextAttributes = textAttributes
+        navigationBar.barTintColor = UIColor.lrTealish //bar's background
+        navigationBar.barStyle = .black
+        navigationBar.isTranslucent = false
+        
+        return navVC
     }
 }
