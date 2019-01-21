@@ -10,6 +10,25 @@ import UIKit
 
 final class InstaPickSelectionSegmentedController: UIViewController {
     
+    static func controllerToPresent() -> UIViewController {
+        let vc = InstaPickSelectionSegmentedController()
+        let navVC = UINavigationController(rootViewController: vc)
+        
+        let navigationBar = navVC.navigationBar
+        
+        let textAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.TurkcellSaturaDemFont(size: 19)
+        ]
+        
+        navigationBar.titleTextAttributes = textAttributes
+        navigationBar.barTintColor = UIColor.lrTealish //bar's background
+        navigationBar.barStyle = .black
+        navigationBar.isTranslucent = false
+        
+        return navVC
+    }
+    
     private let topView = UIView()
     private let contanerView = UIView()
     private let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
@@ -52,6 +71,15 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         
         // TODO: localize
         navigationItem.title = "Photos Selected (\(0))"
+        
+        let cancelButton = UIBarButtonItem(title: "Cancel",
+                                           font: UIFont.TurkcellSaturaDemFont(size: 19),
+                                           tintColor: UIColor.white,
+                                           accessibilityLabel: "Cancel",
+                                           style: .plain,
+                                           target: self,
+                                           selector: #selector(closeSelf))
+        navigationItem.leftBarButtonItem = cancelButton
     }
     
     private func setupLayout() {
@@ -122,6 +150,11 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         
         /// selectedSegmentIndex == -1 after removeAllSegments
         segmentedControl.selectedSegmentIndex = 0
+    }
+    
+    
+    @objc private func closeSelf() {
+        dismiss(animated: true, completion: nil)
     }
     
     @objc private func analyzeWithInstapick() {
