@@ -133,7 +133,6 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         segmentedControl.selectedSegmentIndex = 0
     }
     
-    
     @objc private func closeSelf() {
         dismiss(animated: true, completion: nil)
     }
@@ -147,8 +146,30 @@ final class InstaPickSelectionSegmentedController: UIViewController {
             return
         }
         
-        print(selectedItems.count)
-        // start analyze
+        guard !selectedItems.isEmpty else {
+            return
+        }
+        
+        dismiss(animated: true, completion: {
+            
+            let imagesUrls = selectedItems.flatMap({ $0.metadata?.mediumUrl })
+            let ids = selectedItems.flatMap({ $0.uuid })
+            
+            let topTexts = [TextConstants.instaPickAnalyzingText_0,
+                            TextConstants.instaPickAnalyzingText_1,
+                            TextConstants.instaPickAnalyzingText_2,
+                            TextConstants.instaPickAnalyzingText_3,
+                            TextConstants.instaPickAnalyzingText_4]
+            
+            let bottomText = TextConstants.instaPickAnalyzingBottomText
+            if let currentController = UIApplication.topController() {
+                let controller = InstaPickProgressPopup.createPopup(with: imagesUrls, topTexts: topTexts, bottomText: bottomText)
+                currentController.present(controller, animated: true, completion: nil)
+                
+                let instapickService: InstapickService = factory.resolve()
+                instapickService.startAnalyze(ids: ids, popupToDissmiss: controller)
+            }
+        })
     }
     
     @objc private func controllerDidChange(_ sender: UISegmentedControl) {
