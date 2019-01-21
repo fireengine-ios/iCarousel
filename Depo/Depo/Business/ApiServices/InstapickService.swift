@@ -25,6 +25,7 @@ protocol InstapickService: class {
     func removeAnalyzes(ids: [String], handler: @escaping (ResponseResult<Void>) -> Void)
     func getAnalyzeHistory(offset: Int, limit: Int, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
     func getAnalyzeDetails(id: String, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
+    func startAnalyze(ids: [String], popupToDissmiss: UIViewController)
 }
 
 
@@ -277,6 +278,38 @@ final class InstapickServiceImpl: InstapickService {
                     assertionFailure(error.localizedDescription)
                     handler(.failed(error))
                 }
+        }
+    }
+    
+    /// global logic
+    func startAnalyze(ids: [String], popupToDissmiss: UIViewController) {
+        startAnalyzes(ids: ids) { [weak self] result in
+            switch result {
+            case .success(let analysis):
+                
+                self?.getAnalyzesCount { result in
+                    switch result {
+                    case .success(let analyzesCount):
+                        
+                        popupToDissmiss.dismiss(animated: true, completion: {
+                            
+                            if let currentController = UIApplication.topController() {
+                                let instapickDetailControlller = RouterVC().instaPickDetailViewController(models: analysis, analyzesCount: analyzesCount)
+                                currentController.present(instapickDetailControlller, animated: true, completion: nil)
+                            } else {
+                                /// nothing to show
+                                assertionFailure()
+                            }
+                        })
+                        
+                    case .failed(let error):
+                        UIApplication.showErrorAlert(message: error.localizedDescription)
+                    }
+                }
+                
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.localizedDescription)
+            }
         }
     }
 }

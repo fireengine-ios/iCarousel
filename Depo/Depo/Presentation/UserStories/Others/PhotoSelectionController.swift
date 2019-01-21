@@ -4,6 +4,7 @@ import UIKit
 // TODO: error handling
 // TODO: paginationSize + test for iPad
 // TODO: refactor
+// TODO: updaye cell layout UICollectionViewDelegateFlowLayout
 final class PhotoSelectionController: UIViewController {
     
     enum SelectionState {
