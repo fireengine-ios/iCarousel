@@ -789,6 +789,10 @@
 "analyze_with_instapick" = "New InstaPick Analysis";
 "analyze_history_photos_count" = "%d photos";
 "analyze_history_start_here" = "Start\nHere!";
+"analyze_confirm_delete_title" = "Are you sure you want to delete?";
+"analyze_confirm_delete_text" = "These analyses will be deleted from your Analyze History";
+"analyze_confirm_delete_yes" = "YES";
+"analyze_confirm_delete_no"  = "NO";
 /*InstaPick three dots*/
 "new_insta_pick" = "New InstaPick";
 "uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. We will keep your existing photos and videos along with new uploaded memories in high quality until 1st of March. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
