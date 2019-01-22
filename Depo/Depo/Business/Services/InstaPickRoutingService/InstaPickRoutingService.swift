@@ -62,7 +62,7 @@ final class InstaPickRoutingService {
     
     private func checkInstagramLikePermission() {
         //TODO: - new api will be soon
-        let hasPermission = Bool.random()
+        let hasPermission = true//Bool.random()
         got(likePermission: hasPermission)
     }
     
