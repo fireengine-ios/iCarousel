@@ -32,7 +32,7 @@ final class InstaPickRoutingService {
         errorHandler = error
         
         if !doNotShowAgain {
-            checkInstagramLikePermission()
+            checkInstagramAccount()
         } else {
             configureViewController()
         }
@@ -54,7 +54,7 @@ final class InstaPickRoutingService {
                     return
             }
 
-            self?.got(status: isConnected)
+            self?.got(status: isConnected, nickname: response.instagramUsername)
         }) { [weak self] error in
             self?.showError(with: error)
         }
@@ -62,58 +62,36 @@ final class InstaPickRoutingService {
     
     private func checkInstagramLikePermission() {
         //TODO: - new api will be soon
-        let hasPermission = Bool.random()
+        let hasPermission = false
         got(likePermission: hasPermission)
-    }
-    
-    private func getNickname() {
-        //TODO: - new api will be soon
-        let names = ["Fred", "Sam", "Din", "Jack", "Emma", "Susan"]
-        if let name = names.randomElement() {
-            got(nickName: name)
-        } else {
-            let error = CustomErrors.serverError("An error occurred while getting nickname.")
-            let errorResponse = ErrorResponse.error(error)
-            showError(with: errorResponse)
-        }
     }
     
     private func got(likePermission: Bool) {
         instagramLikePermission = likePermission
-        if likePermission {
-            configureViewController()
-        } else {
-            checkInstagramAccount()
-        }
-    }
-    
-    private func got(status: Bool) {
-        instagramStatus = status
-        if status {
-            getNickname()
-        } else {
-            configureViewController()
-        }
-    }
-    
-    private func got(nickName: String) {
-        instagramNickname = nickName
         configureViewController()
+    }
+    
+    private func got(status: Bool, nickname: String?) {
+        instagramStatus = status
+        if let nickname = nickname, status {
+            instagramNickname = nickname
+            checkInstagramLikePermission()
+        } else {
+            configureViewController()
+        }
     }
     
     private func configureViewController() {
         if doNotShowAgain {
             didOpenInstaPickSelectionSegmented()
-        } else if let instagramNickname = instagramNickname {
-            didOpenInstaPickPopUp(instaNickname: instagramNickname)
         } else if let hasPermission = instagramLikePermission, hasPermission {
             didOpenInstaPickSelectionSegmented()
         } else {
-            didOpenInstaPickPopUp()
+            didOpenInstaPickPopUp(instaNickname: instagramNickname)
         }
     }
     
-    private func didOpenInstaPickPopUp(instaNickname: String? = nil) {
+    private func didOpenInstaPickPopUp(instaNickname: String?) {
         guard let successHandler = successHandler else {
             UIApplication.showErrorAlert(message: "Success handler unexpected become nil.")
             return
