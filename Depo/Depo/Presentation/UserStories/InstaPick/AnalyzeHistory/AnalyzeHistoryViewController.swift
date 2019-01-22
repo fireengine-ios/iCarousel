@@ -142,7 +142,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 
             }, error: { errorResponse in
                 DispatchQueue.toMain {
-                    UIApplication.showErrorAlert(message: errorResponse.description)
+                    UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
                 }
             })
         } else {
@@ -280,7 +280,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 }
             case .failed(let error):
                 completion?(false)
-                self.showError(message: error.description)
+                self.showError(message: error.localizedDescription)
             }
         }
     }
@@ -321,7 +321,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                     })
                 }
             case .failed(let error):
-                self.showError(message: error.description)
+                self.showError(message: error.localizedDescription)
             }
         }
     }
@@ -336,7 +336,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .success(let response):
                 self.openDetail(for: response, analyzesCount: analyzesCount)
             case .failed(let error):
-                self.showError(message: error.description)
+                self.showError(message: error.localizedDescription)
             }
         }
     }
@@ -347,7 +347,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .success(let analysisCount):
                 success(analysisCount)
             case .failed(let error):
-                self?.showError(message: error.description)
+                self?.showError(message: error.localizedDescription)
             }
         }
     }
