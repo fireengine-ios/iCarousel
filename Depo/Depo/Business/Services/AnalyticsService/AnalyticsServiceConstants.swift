@@ -681,6 +681,7 @@ enum GADementionsFields {
     case faceImageStatus
     case userPackage
     case gsmOperatorType
+    case deviceId
     
     var text: String {
         switch self {
@@ -712,6 +713,8 @@ enum GADementionsFields {
             return "userPackage"
         case .gsmOperatorType:
             return "gsmOperatorType"
+        case .deviceId:
+            return "deviceid"
         }
     }
     

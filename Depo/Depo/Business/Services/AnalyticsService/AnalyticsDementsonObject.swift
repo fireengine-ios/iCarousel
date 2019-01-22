@@ -23,6 +23,7 @@ struct AnalyticsDementsonObject {
     let countOfUploadMetric: Int?
     let countOfDownloadMetric: Int?
     let gsmOperatorType: String
+    let deviceId: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
     
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
@@ -46,7 +47,8 @@ struct AnalyticsDementsonObject {
             GADementionsFields.operatorSystem.text : operatorSystem,
             GADementionsFields.faceImageStatus.text : "\(facialRecognition)",
             GADementionsFields.userPackage.text : userOwnedPackages,
-            GADementionsFields.gsmOperatorType.text : gsmOperatorType
+            GADementionsFields.gsmOperatorType.text : gsmOperatorType,
+            GADementionsFields.deviceId.text: deviceId
         ]
         if let paymentMethodUnwraped = paymentMethod {
             dimesionDictionary[GADementionsFields.paymentMethod.text] = paymentMethodUnwraped
