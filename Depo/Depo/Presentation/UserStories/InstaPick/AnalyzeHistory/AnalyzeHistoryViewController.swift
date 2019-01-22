@@ -136,10 +136,15 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     // MARK: - Actions
     
     @IBAction private func newAnalysisAction(_ sender: Any) {
+        showSpiner()
         if dataSource.analysisCount.left > 0 {
             
-            instapickRoutingService.getViewController(success: { _ in
+            instapickRoutingService.getViewController(success: { [weak self] controller in
+                self?.hideSpiner()
                 
+                if controller is InstapickPopUpController, let vc = self?.router.createRootNavigationControllerWithModalStyle(controller: controller) {
+                    self?.router.presentViewController(controller: vc)
+                }
             }, error: { errorResponse in
                 DispatchQueue.toMain {
                     UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
