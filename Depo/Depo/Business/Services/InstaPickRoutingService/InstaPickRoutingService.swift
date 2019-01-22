@@ -22,7 +22,8 @@ final class InstaPickRoutingService {
 
     private let doNotShowAgainKey = "instaPickDoNotShowAgainKey"
     private var doNotShowAgain: Bool {
-        return UserDefaults.standard.bool(forKey: doNotShowAgainKey)
+        let userID = SingletonStorage.shared.uniqueUserID
+        return UserDefaults.standard.bool(forKey: doNotShowAgainKey + userID)
     }
     
     //Utility Methods(public)
@@ -38,7 +39,8 @@ final class InstaPickRoutingService {
     }
     
     func stopShowing() {
-        UserDefaults.standard.set(true, forKey: doNotShowAgainKey)
+        let userID = SingletonStorage.shared.uniqueUserID
+        UserDefaults.standard.set(true, forKey: doNotShowAgainKey + userID)
     }
     
     //Utility Methods(private)
