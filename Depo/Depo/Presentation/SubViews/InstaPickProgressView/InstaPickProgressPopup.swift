@@ -61,6 +61,7 @@ final class InstaPickProgressPopup: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        setupInitialStates()
         startInfiniteAnimation()
     }
     
@@ -84,6 +85,11 @@ final class InstaPickProgressPopup: ViewController {
         analyzingImage.layer.mask = maskLayer
     }
     
+    private func setupInitialStates() {
+        analyzingImage.sd_setImage(with: analyzingImagesUrls.first, completed: nil)
+        topCaption.text = topCaptionTexts.first
+    }
+    
     private func startInfiniteAnimation() {
         circularLoader.animateInfinitely(numberOfSteps: animationStepsNumber, timeForStep: animationStepDuration) { [weak self] step, _ in
             guard let `self` = self else { return }
@@ -94,7 +100,7 @@ final class InstaPickProgressPopup: ViewController {
     }
     
     private func changeImage(on step: Int) {
-        guard !analyzingImagesUrls.isEmpty else { return }
+        guard analyzingImagesUrls.count > 1 else { return }
         
         let imageIndex = step % analyzingImagesUrls.count
         analyzingImage.sd_setImage(with: analyzingImagesUrls[safe: imageIndex], placeholderImage: nil, options: [.avoidAutoSetImage], completed: { [weak self] image, error, cahceType, _ in
