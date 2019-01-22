@@ -574,9 +574,9 @@ enum GAEventLabel {
         case .purchaseFailure:
             return "Failure"
         case .trueLogin:
-            return "True"
+            return "Success"
         case .falseLogin:
-            return "False"
+            return "Failure"
         case .feedbackOpen:
             return "Open"
         case .feedbackSend:
