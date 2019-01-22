@@ -39,6 +39,9 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private var bottomBarSettablePresenter = AnalyzeHistoryTabBarPresenter()
     private let editingElements: [ElementTypes] = [.delete]
     
+    private let instapickRoutingService = InstaPickRoutingService()
+    private let router = RouterVC()
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -134,7 +137,14 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     @IBAction private func newAnalysisAction(_ sender: Any) {
         if dataSource.analysisCount.left > 0 {
-            //TODO: - Open New Analyze
+            
+            instapickRoutingService.getViewController(success: { _ in
+                
+            }, error: { errorResponse in
+                DispatchQueue.toMain {
+                    UIApplication.showErrorAlert(message: errorResponse.description)
+                }
+            })
         } else {
             let popup = PopUpController.with(title: TextConstants.analyzeHistoryPopupTitle,
                                              message: TextConstants.analyzeHistoryPopupMessage,
@@ -270,7 +280,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 }
             case .failed(let error):
                 completion?(false)
-                self.showError(message: error.localizedDescription)
+                self.showError(message: error.description)
             }
         }
     }
@@ -290,7 +300,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                                               secondAction: { vc in
                                                 vc.close(completion: okHandler)
         })
-        RouterVC().presentViewController(controller: controller)
+        router.presentViewController(controller: controller)
     }
     
     private func deleteSelectedAnalyzes() {
@@ -301,9 +311,9 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 return
             }
             
-            self.stopActivityIndicator()
             switch result {
             case .success:
+                self.stopActivityIndicator()
                 DispatchQueue.main.async {
                     self.dataSource.deleteSelectedItems(completion: {
                         self.stopSelection()
@@ -311,7 +321,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                     })
                 }
             case .failed(let error):
-                self.showError(message: error.localizedDescription)
+                self.showError(message: error.description)
             }
         }
     }
@@ -326,7 +336,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .success(let response):
                 self.openDetail(for: response, analyzesCount: analyzesCount)
             case .failed(let error):
-                self.showError(message: error.localizedDescription)
+                self.showError(message: error.description)
             }
         }
     }
@@ -337,7 +347,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .success(let analysisCount):
                 success(analysisCount)
             case .failed(let error):
-                self?.showError(message: error.localizedDescription)
+                self?.showError(message: error.description)
             }
         }
     }
@@ -361,8 +371,9 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     private func showError(message: String) {
         stopActivityIndicator()
-        
-        UIApplication.showErrorAlert(message: message)
+        DispatchQueue.toMain {
+            UIApplication.showErrorAlert(message: message)
+        }
     }
 }
 
