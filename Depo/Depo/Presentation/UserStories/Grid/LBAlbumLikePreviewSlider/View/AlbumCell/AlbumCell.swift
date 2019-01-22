@@ -59,14 +59,18 @@ class AlbumCell: UICollectionViewCell {
     }
     
     fileprivate func setupImage(_ imageView: LoadingImageView, path: PathForItem?, placeholder: UIImage?) {
-        if path == nil, placeholder != nil {
-            DispatchQueue.toMain {
+        if placeholder != nil {
+            if let path = path, case let .remoteUrl(url) = path {
+                imageView.sd_setImage(with: url, placeholderImage: placeholder, options: [], completed: nil)
+            } else {
                 imageView.image = placeholder
             }
             return
         }
+        
         imageView.backgroundColor = UIColor.lightGray.lighter(by: 20.0)
         imageView.loadImageByPath(path_: path)
+        
     }
 
     override func awakeFromNib() {

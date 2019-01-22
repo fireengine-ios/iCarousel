@@ -7,7 +7,7 @@
 //
 
 enum MyStreamType: Int {
-    case instaPick
+    case instaPick = 0
     case people
     case things
     case places
