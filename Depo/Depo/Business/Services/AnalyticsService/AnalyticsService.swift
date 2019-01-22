@@ -192,7 +192,7 @@ extension AnalyticsService: AnalyticsGA {
         let screenName: Any = screen?.name ?? NSNull()
         
         group.notify(queue: privateQueue) { 
-            parametrsCallback(AnalyticsDementsonObject(screenName: screenName, pageType: screenName, sourceType: screenName, loginStatus: "\(loginStatus)",
+            parametrsCallback(AnalyticsDimension(screenName: screenName, pageType: screenName, sourceType: screenName, loginStatus: "\(loginStatus)",
                 platform: "iOS", isWifi: ReachabilityService().isReachableViaWiFi,
                 service: "Lifebox", developmentVersion: version,
                 paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),

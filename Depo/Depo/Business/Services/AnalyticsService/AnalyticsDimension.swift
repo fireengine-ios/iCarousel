@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-struct AnalyticsDementsonObject {
+struct AnalyticsDimension {
     let screenName: Any//String
     let pageType: Any//used to be AnalyticsAppScreens, now just string
     let sourceType: Any//String
