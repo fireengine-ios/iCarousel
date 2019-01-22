@@ -185,9 +185,8 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
             switch result {
             case .success(let urls):
                 let item = SliderItem(withThumbnails: urls, type: .instaPick)
-//                let item = SliderItem(withThumbnails: [URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyGstgtQc67seHxg3KT5uvSITYzDFZhejWcs7YsgsrN28Od7tsHA")], type: .instaPick)
 
-                DispatchQueue.main.async {
+                DispatchQueue.toMain {
                     self.dataStorage.addNew(item: item)
                     group.leave()
                 }
@@ -196,20 +195,6 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
                 group.leave()
             }
         }
-    }
-    
-    private func updateInstaPickThumbnails() {
-        let group = DispatchGroup()
-        let queue = DispatchQueue(label: DispatchQueueLabels.instaPickItemsUpdate)
-        
-        queue.async { [weak self] in
-            self?.getInstaPickThumbnails(group: group)
-        }
-        
-        group.notify(queue: queue) { [weak self] in
-            self?.operationSuccessed()
-        }
-        
     }
     
     private func getFaceImageItems(group: DispatchGroup) {
@@ -238,7 +223,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
             return type1.rawValue < type2.rawValue
         })
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.output.operationSuccessed(withItems: items)
         }
     }
@@ -297,10 +282,10 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
 
 extension LBAlbumLikePreviewSliderInteractor: InstaPickServiceDelegate {
     func didFinishAnalysis() {
-        updateInstaPickThumbnails()
+        reload(type: .instaPick)
     }
     
     func didRemoveAnalysis() {
-        updateInstaPickThumbnails()
+        reload(type: .instaPick)
     }
 }
