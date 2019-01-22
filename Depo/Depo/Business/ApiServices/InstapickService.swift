@@ -102,12 +102,6 @@ final class InstapickServiceImpl: InstapickService {
                     assertionFailure(error.localizedDescription)
                     handler(.failed(error))
                 }
-                
-                
-                //TODO: add in the callback
-                self?.delegates.invoke { delegate in
-                    delegate.didFinishAnalysis()
-                }
         }
     }
     
@@ -220,12 +214,6 @@ final class InstapickServiceImpl: InstapickService {
                 case .failure(let error):
                     assertionFailure(error.localizedDescription)
                     handler(.failed(error))
-                }
-                
-                
-                //TODO: add in the callback
-                self?.delegates.invoke { delegate in
-                    delegate.didFinishAnalysis()
                 }
         }
     }
