@@ -359,7 +359,7 @@ final class InstapickAnalyze {
         self.hashTags = hashTags
         
         let fileInfo = json["fileInfo"]
-        self.fileInfo = fileInfo.exists() ? SearchItemResponse(withJSON: fileInfo) : nil
+        self.fileInfo = (fileInfo == JSON.null) ? nil : SearchItemResponse(withJSON: fileInfo)
         
         self.photoCount = json["photoCount"].int
         self.startedDate = json["startedDate"].date
@@ -376,7 +376,25 @@ final class InstapickAnalyze {
 
 extension InstapickAnalyze: Equatable {
     static func == (lhs: InstapickAnalyze, rhs: InstapickAnalyze) -> Bool {
-        return lhs.requestIdentifier == rhs.requestIdentifier
+        var extraCheck: Bool?
+        
+        if let lFileInfo = lhs.fileInfo, let rFileInfo = rhs.fileInfo {
+            extraCheck = lFileInfo.uuid ?? "uuid" == rFileInfo.uuid ?? "uuid" &&
+                lFileInfo.id ?? 0 == rFileInfo.id ?? 0 &&
+                lFileInfo.name ?? "name" == rFileInfo.name ?? "name"
+        }
+        
+        let returnValue = lhs.requestIdentifier == rhs.requestIdentifier &&
+            lhs.hashTags == rhs.hashTags &&
+            lhs.rank == rhs.rank &&
+            lhs.isPicked == rhs.isPicked &&
+            (lhs.fileInfo != nil) == (rhs.fileInfo != nil)
+        
+        guard let extraCheckValue = extraCheck else {
+            return returnValue
+        }
+        
+        return returnValue == true && returnValue == extraCheckValue
     }
 }
 

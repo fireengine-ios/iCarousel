@@ -169,7 +169,7 @@
                                                                 <action selector="onCopyToClipboardTap:" destination="-1" eventType="touchUpInside" id="vt7-8I-8s1"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6o-kD-Nrz" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6o-kD-Nrz" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
                                                             <rect key="frame" x="63" y="532" width="217" height="46"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="217" id="A9i-uP-amv"/>
