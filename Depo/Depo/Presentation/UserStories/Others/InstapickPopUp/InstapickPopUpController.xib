@@ -37,11 +37,11 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v7y-y6-dka">
-                                    <rect key="frame" x="19" y="64" width="337.5" height="533.5"/>
+                                    <rect key="frame" x="19" y="66.5" width="337.5" height="534"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5qA-Nd-7C5">
-                                    <rect key="frame" x="19" y="64" width="337.5" height="533.5"/>
+                                    <rect key="frame" x="19" y="66.5" width="337.5" height="534"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acp-lU-iDZ">
                                             <rect key="frame" x="287.5" y="20" width="50" height="50"/>
@@ -73,7 +73,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="U2v-jM-rIt">
-                                            <rect key="frame" x="131.5" y="465.5" width="74" height="18"/>
+                                            <rect key="frame" x="131.5" y="466" width="74" height="18"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAc-BU-Ecf" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
@@ -137,8 +137,8 @@
                             <constraints>
                                 <constraint firstItem="5qA-Nd-7C5" firstAttribute="centerX" secondItem="twf-bo-xdc" secondAttribute="centerX" id="974-H0-KK0"/>
                                 <constraint firstItem="v7y-y6-dka" firstAttribute="height" secondItem="5qA-Nd-7C5" secondAttribute="height" id="DMp-5U-R1W"/>
+                                <constraint firstItem="5qA-Nd-7C5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="twf-bo-xdc" secondAttribute="top" constant="24" id="HVQ-Ny-vJf"/>
                                 <constraint firstItem="v7y-y6-dka" firstAttribute="centerX" secondItem="5qA-Nd-7C5" secondAttribute="centerX" id="OP8-a4-Fac"/>
-                                <constraint firstItem="5qA-Nd-7C5" firstAttribute="top" secondItem="twf-bo-xdc" secondAttribute="top" constant="64" id="Pkh-vp-MXz"/>
                                 <constraint firstItem="v7y-y6-dka" firstAttribute="width" secondItem="5qA-Nd-7C5" secondAttribute="width" id="Svx-cK-jrG"/>
                                 <constraint firstItem="5qA-Nd-7C5" firstAttribute="width" secondItem="twf-bo-xdc" secondAttribute="width" multiplier="0.9" id="nXf-us-A7l"/>
                                 <constraint firstItem="5qA-Nd-7C5" firstAttribute="height" secondItem="twf-bo-xdc" secondAttribute="height" multiplier="0.8" id="uhF-Tc-vQ2"/>
@@ -150,6 +150,7 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="twf-bo-xdc" secondAttribute="bottom" id="OcT-5c-n4i"/>
                         <constraint firstAttribute="trailing" secondItem="twf-bo-xdc" secondAttribute="trailing" id="Rgb-ZG-3BE"/>
+                        <constraint firstItem="5qA-Nd-7C5" firstAttribute="centerY" secondItem="LMZ-Wy-gnC" secondAttribute="centerY" id="Uii-lr-7oz"/>
                         <constraint firstItem="twf-bo-xdc" firstAttribute="top" secondItem="LMZ-Wy-gnC" secondAttribute="top" id="WNa-1q-OeL"/>
                         <constraint firstItem="twf-bo-xdc" firstAttribute="leading" secondItem="LMZ-Wy-gnC" secondAttribute="leading" id="haA-ai-tJ2"/>
                         <constraint firstItem="twf-bo-xdc" firstAttribute="height" secondItem="LMZ-Wy-gnC" secondAttribute="height" priority="250" id="vNr-N4-Lun"/>
@@ -158,7 +159,7 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="LMZ-Wy-gnC" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="DIx-0s-uNt"/>
+                <constraint firstItem="LMZ-Wy-gnC" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="DIx-0s-uNt"/>
                 <constraint firstItem="LMZ-Wy-gnC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OoF-Cy-4xe"/>
                 <constraint firstItem="LMZ-Wy-gnC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="aUk-nj-cKG"/>
                 <constraint firstItem="twf-bo-xdc" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="eAH-t0-pNa"/>

@@ -47,10 +47,10 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Va1-dT-UOQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="662"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="661.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nfo-vd-geH">
-                                            <rect key="frame" x="16" y="30" width="343" height="608"/>
+                                            <rect key="frame" x="16" y="29.5" width="343" height="608"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RC4-0c-Xb9" userLabel="Content View">
                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="608"/>
@@ -122,7 +122,7 @@
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" restorationIdentifier="smallThree" translatesAutoresizingMaskIntoConstraints="NO" id="QD4-Gc-Iaq" customClass="InstaPickPhotoView" customModule="lifebox" customModuleProvider="target">
-                                                                                    <rect key="frame" x="0.0" y="95.5" width="43" height="43"/>
+                                                                                    <rect key="frame" x="0.0" y="96" width="43" height="42.5"/>
                                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" secondItem="QD4-Gc-Iaq" secondAttribute="height" multiplier="1:1" id="Da0-D2-fGG"/>
@@ -224,7 +224,7 @@
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="Nfo-vd-geH" secondAttribute="bottom" constant="24" id="3Pc-CN-vgu"/>
                                         <constraint firstAttribute="trailing" secondItem="Nfo-vd-geH" secondAttribute="trailing" constant="16" id="Ccy-fe-Da3"/>
-                                        <constraint firstItem="Nfo-vd-geH" firstAttribute="top" secondItem="Va1-dT-UOQ" secondAttribute="top" constant="30" id="L1K-Wa-qbz"/>
+                                        <constraint firstItem="Nfo-vd-geH" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Va1-dT-UOQ" secondAttribute="top" constant="24" id="L1K-Wa-qbz"/>
                                         <constraint firstItem="Nfo-vd-geH" firstAttribute="centerX" secondItem="Va1-dT-UOQ" secondAttribute="centerX" id="ReN-HS-TyR"/>
                                     </constraints>
                                 </view>
@@ -234,6 +234,7 @@
                                 <constraint firstAttribute="trailing" secondItem="Va1-dT-UOQ" secondAttribute="trailing" id="QES-CL-yPa"/>
                                 <constraint firstAttribute="bottom" secondItem="Va1-dT-UOQ" secondAttribute="bottom" id="YP8-9P-kiW"/>
                                 <constraint firstItem="Va1-dT-UOQ" firstAttribute="leading" secondItem="FN2-0K-0zP" secondAttribute="leading" id="bIz-ya-Lhx"/>
+                                <constraint firstItem="Nfo-vd-geH" firstAttribute="centerY" secondItem="FN2-0K-0zP" secondAttribute="centerY" id="t9U-tz-e57"/>
                             </constraints>
                         </scrollView>
                     </subviews>
