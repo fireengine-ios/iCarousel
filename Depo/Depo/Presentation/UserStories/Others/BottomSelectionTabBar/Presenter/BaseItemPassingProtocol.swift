@@ -23,6 +23,8 @@ protocol BaseItemInputPassingProtocol: class {
     
     func deleteFromFaceImageAlbum(items: [BaseDataSourceItem])
     
+    func openInstaPick()
+    
     var selectedItems: [BaseDataSourceItem] { get }//FOR NOW
 }
 

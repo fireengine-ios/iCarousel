@@ -128,7 +128,7 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackProductPurchasedInnerGA(offer: PackageModelResponse, packageIndex: Int)
     func trackCustomGAEvent(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, eventValue: String?)
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
-    func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Float)
+    func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Double)
     func stopTimelyTracking()
     func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int?,
     uploadsMetrics: Int?, isPaymentMethodNative: Bool?)
@@ -164,7 +164,7 @@ extension AnalyticsService: AnalyticsGA {
         let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
         var payment: String?
         if let unwrapedisNativePayment = isPaymentMethodNative {
-            payment = "\(unwrapedisNativePayment)"
+            payment = unwrapedisNativePayment ? "inApp" : "Turkcell"
         }
 
         let group = DispatchGroup()
@@ -219,7 +219,7 @@ extension AnalyticsService: AnalyticsGA {
                                            transactionID: "", tax: "0",
                                            priceValue: price, shipping: "0")
         
-        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: false) { dimentionParametrs in
             Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
         }
     }
@@ -233,7 +233,7 @@ extension AnalyticsService: AnalyticsGA {
                                            transactionID: "", tax: "0",
                                            priceValue: price, shipping: "0")
         
-        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true) { dimentionParametrs in
             Analytics.logEvent(AnalyticsEventEcommercePurchase, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
         }
     }
@@ -276,37 +276,48 @@ extension AnalyticsService: AnalyticsGA {
         } 
     }
     
-    func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, timeInterval: Float = 60.0) {
+    func trackEventTimely(eventCategory: GAEventCantegory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, timeInterval: Double = 60.0) {
         ///every minute by default
         if innerTimer != nil {
             stopTimelyTracking()
         }
-        innerTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeInterval), target: self, selector: #selector(timerStep(sender:)), userInfo:
-            [
-                GACustomEventKeys.category.key: eventCategory,
-             GACustomEventKeys.action.key: eventActions,
-             GACustomEventKeys.label.key: eventLabel
-            ],
-                                          repeats: true)
+        
+        let userInfo: [String: Any] = [GACustomEventKeys.category.key: eventCategory,
+                                       GACustomEventKeys.action.key: eventActions,
+                                       GACustomEventKeys.label.key: eventLabel]
+        
+        DispatchQueue.toMain {
+            self.innerTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(self.timerStep(_:)), userInfo: userInfo, repeats: true)
+            ///fire at least once
+            self.innerTimer?.fire()
+        }
     }
     
-    @objc func timerStep(sender: Timer) {
-        guard let unwrapedUserInfo = sender.userInfo as? [String: Any],
-            let eventCategory = unwrapedUserInfo[GACustomEventKeys.category.key] as? GAEventCantegory,
-        let eventActions = unwrapedUserInfo[GACustomEventKeys.action.key] as? GAEventAction,
-            let eventLabel = unwrapedUserInfo[GACustomEventKeys.label.key] as? GAEventLabel else {
-            return
+    @objc func timerStep(_ timer: Timer) {
+        privateQueue.async { [weak self] in
+            guard
+                let `self` = self,
+                let unwrapedUserInfo = timer.userInfo as? [String: Any],
+                let eventCategory = unwrapedUserInfo[GACustomEventKeys.category.key] as? GAEventCantegory,
+                let eventActions = unwrapedUserInfo[GACustomEventKeys.action.key] as? GAEventAction,
+                let eventLabel = unwrapedUserInfo[GACustomEventKeys.label.key] as? GAEventLabel
+                else {
+                    return
+            }
+            
+            self.trackCustomGAEvent(eventCategory: eventCategory, eventActions: eventActions, eventLabel: eventLabel)
         }
-        trackCustomGAEvent(eventCategory: eventCategory, eventActions: eventActions, eventLabel: eventLabel)
     }
     
     func stopTimelyTracking() {
-        guard let curTimer = innerTimer else {
-            return
-        }
-        if curTimer.isValid {
-            curTimer.invalidate()
-            innerTimer = nil
+        DispatchQueue.toMain {
+            guard let curTimer = self.innerTimer else {
+                return
+            }
+            if curTimer.isValid {
+                curTimer.invalidate()
+                self.innerTimer = nil
+            }
         }
     }
 //in future we migt need more then 1 timer, in case this calss become songleton

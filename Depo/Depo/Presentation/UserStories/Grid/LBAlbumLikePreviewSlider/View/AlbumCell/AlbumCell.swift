@@ -32,6 +32,8 @@ class AlbumCell: UICollectionViewCell {
             setup(withSliderItem: item)
         }
         
+        placeholderImage.layer.borderColor = type.placeholderBorderColor
+        
         isAccessibilityElement = true
         accessibilityTraits = UIAccessibilityTraitNone
         accessibilityLabel = item.name
@@ -43,21 +45,32 @@ class AlbumCell: UICollectionViewCell {
     
     private func setup(withSliderItem item: SliderItem) {
         if let items = item.previewItems, !items.isEmpty {
-            previewBackView.isHidden = false            
+            previewBackView.isHidden = false
             placeholderImage.image = nil
-            setupImage(previewImage1, path: items.first)
-            setupImage(previewImage2, path: items[safe: 1])
-            setupImage(previewImage3, path: items[safe: 2])
-            setupImage(previewImage4, path: items[safe: 3])
+
+            setupImage(previewImage1, path: items.first, placeholder: item.previewPlaceholder)
+            setupImage(previewImage2, path: items[safe: 1], placeholder: item.previewPlaceholder)
+            setupImage(previewImage3, path: items[safe: 2], placeholder: item.previewPlaceholder)
+            setupImage(previewImage4, path: items[safe: 3], placeholder: item.previewPlaceholder)
         } else {
             previewBackView.isHidden = true
             placeholderImage.image = item.placeholderImage
         }
     }
     
-    fileprivate func setupImage(_ imageView: LoadingImageView, path: PathForItem?) {
+    fileprivate func setupImage(_ imageView: LoadingImageView, path: PathForItem?, placeholder: UIImage?) {
+        if placeholder != nil {
+            if let path = path, case let .remoteUrl(url) = path {
+                imageView.sd_setImage(with: url, placeholderImage: placeholder, options: [], completed: nil)
+            } else {
+                imageView.image = placeholder
+            }
+            return
+        }
+        
         imageView.backgroundColor = UIColor.lightGray.lighter(by: 20.0)
         imageView.loadImageByPath(path_: path)
+        
     }
 
     override func awakeFromNib() {

@@ -33,7 +33,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         
         if !isFirstAppear {
             view.startSpinner()
-            interactor.updateUserAuthority()
+            interactor.updateLocalUserDetail()
         } else {
             isFirstAppear = false
         }
@@ -136,12 +136,19 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         }
     }
     
-    func didObtainFailCardInfo(errorMessage: String) {
+    func didObtainFailCardInfo(errorMessage: String, isNeedStopRefresh: Bool) {
+        if isNeedStopRefresh {
+            view.stopRefresh()
+        }
         router.showError(errorMessage: errorMessage)
     }
     
     func didObtainHomeCards(_ cards: [HomeCardResponse]) {
         self.cards = cards
+    }
+    
+    func didObtainInstaPickStatus(status: InstapickAnalyzesCount) {
+        CardsManager.default.configureInstaPick(analysisLeft: status.left, totalCount: status.total)
     }
     
     func fillCollectionView(isReloadAll: Bool) {

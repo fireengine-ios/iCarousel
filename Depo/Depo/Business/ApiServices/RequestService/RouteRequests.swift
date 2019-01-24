@@ -18,7 +18,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static let currentServerEnvironment = ServerEnvironment.production
+    private static let currentServerEnvironment = ServerEnvironment.preProduction
     
     static let baseUrl: URL = {
         switch currentServerEnvironment {
@@ -92,6 +92,7 @@ struct RouteRequests {
     // MARK: - Instagram
     static let socialStatus = "share/social/status"
     static let instagramConfig = "share/social/instagram/config"
+    static let instagramConnect =  baseUrl +/ "share/social/instagram/connect"
     static let instagramSyncStatus = "share/social/instagram/syncStatus"
     static let instagramCreateMigration = "share/social/instagram/migration/create"
     static let instagramCancelMigration = "share/social/instagram/migration/cancel"
@@ -194,6 +195,16 @@ struct RouteRequests {
             static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
             static let availableOffers = Account.accountApi +/ "available-offers/IOS"
         }
+    }
+    
+    enum Instapick {
+        static let instapickApi = baseUrl +/ "instapick"
+        static let thumbnails = instapickApi +/ "thumbnails"
+        static let analyzesCount = instapickApi +/ "getCount"
+        static let analyze = instapickApi +/ "analyze"
+        static let analyzeHistory = instapickApi +/ "getAnalyzeHistory"
+        static let analyzeDetails = instapickApi +/ "getAnalyzeDetails"
+        static let removeAnalyzes = instapickApi +/ "deleteAnalyze"
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"

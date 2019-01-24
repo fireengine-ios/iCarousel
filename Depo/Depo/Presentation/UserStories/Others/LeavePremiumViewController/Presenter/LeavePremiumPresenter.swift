@@ -59,8 +59,7 @@ final class LeavePremiumPresenter {
         if accountType == "TURKCELL" {
             type = .turkcell
         } else if let role = subscription?.subscriptionPlanRole?.lowercased() {
-            ///Only for features used "lifecell" instead of "lifebox". Do not change!
-            if role.contains("lifecell") {
+            if role.contains("lifebox") {
                 type = .ukranian
             } else if role.contains("kktcell") {
                 type = .cyprus
