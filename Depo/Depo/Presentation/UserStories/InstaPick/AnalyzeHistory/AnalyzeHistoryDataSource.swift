@@ -21,7 +21,7 @@ private enum AnalyzeHistorySectionType: Int {
     case photos
     
     var numberOfColumns: CGFloat {
-        return Device.isIpad ? 6 : 4
+        return Device.isIpad ? 7 : 4
     }
     
     var cellType: UICollectionViewCell.Type {
