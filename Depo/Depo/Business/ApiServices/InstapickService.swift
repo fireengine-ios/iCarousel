@@ -376,25 +376,24 @@ final class InstapickAnalyze {
 
 extension InstapickAnalyze: Equatable {
     static func == (lhs: InstapickAnalyze, rhs: InstapickAnalyze) -> Bool {
+        ///need for photos with equal rank, hashtags, isPicked
         var extraCheck: Bool?
         
         if let lFileInfo = lhs.fileInfo, let rFileInfo = rhs.fileInfo {
-            extraCheck = lFileInfo.uuid ?? "uuid" == rFileInfo.uuid ?? "uuid" &&
-                lFileInfo.id ?? 0 == rFileInfo.id ?? 0 &&
-                lFileInfo.name ?? "name" == rFileInfo.name ?? "name"
+            extraCheck = lFileInfo == rFileInfo
         }
         
         let returnValue = lhs.requestIdentifier == rhs.requestIdentifier &&
             lhs.hashTags == rhs.hashTags &&
             lhs.rank == rhs.rank &&
             lhs.isPicked == rhs.isPicked &&
-            (lhs.fileInfo != nil) == (rhs.fileInfo != nil)
+            (lhs.fileInfo != nil) == (rhs.fileInfo != nil) ///need for same photos but deleted one
         
-        guard let extraCheckValue = extraCheck else {
+        guard let extraCheckValue = extraCheck, extraCheckValue else {
             return returnValue
         }
         
-        return returnValue == true && returnValue == extraCheckValue
+        return returnValue == extraCheckValue
     }
 }
 
