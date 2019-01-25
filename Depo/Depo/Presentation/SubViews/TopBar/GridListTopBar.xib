@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,10 +23,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7m-go-R4c">
-                    <rect key="frame" x="10" y="14" width="68" height="37"/>
+                    <rect key="frame" x="10" y="11" width="68" height="43"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="68" id="Dzb-Wi-FeT"/>
-                        <constraint firstAttribute="height" constant="37" id="xi5-cC-uuT"/>
+                        <constraint firstAttribute="height" constant="43" id="xi5-cC-uuT"/>
                     </constraints>
                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                     <state key="normal" title="Sort By" image="TriangleCopy3">
@@ -48,10 +48,10 @@
                     </segments>
                 </segmentedControl>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hB-ca-1KW">
-                    <rect key="frame" x="329" y="16.5" width="28" height="32"/>
+                    <rect key="frame" x="321" y="14.5" width="36" height="36"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="32" id="73N-Rs-kra"/>
-                        <constraint firstAttribute="width" constant="28" id="TDf-0W-O3l"/>
+                        <constraint firstAttribute="height" constant="36" id="73N-Rs-kra"/>
+                        <constraint firstAttribute="width" constant="36" id="TDf-0W-O3l"/>
                     </constraints>
                     <state key="normal" image="TopBarGrid"/>
                     <state key="selected" image="TopBarList"/>
