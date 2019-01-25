@@ -26,7 +26,6 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
     @IBOutlet private weak var rankView: UIView! {
         willSet {
             newValue.clipsToBounds = true
-            newValue.layer.cornerRadius = newValue.bounds.height * 0.5
             newValue.backgroundColor = UIColor.lrTealish
         }
     }
@@ -62,6 +61,7 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         imageView.layer.cornerRadius = imageView.bounds.height * 0.5
+        rankView.layer.cornerRadius = rankView.bounds.height * 0.5
     }
     
     override func prepareForReuse() {
@@ -86,6 +86,7 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         if let metadata = item.fileInfo?.metadata {
             setImage(with: metadata, identifier: item.requestIdentifier)
         } else {
+            imageView.layer.borderWidth = 0
             setImage(image: UIImage(named: "photo_not_found"), animated: false)
         }
     }
@@ -98,6 +99,7 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
             DispatchQueue.toMain {
                 guard let image = image else {
+                    self?.imageView.layer.borderWidth = 0
                     self?.setImage(image: UIImage(named: "photo_not_found"), animated: false)
                     return
                 }
