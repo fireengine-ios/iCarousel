@@ -11,7 +11,7 @@ import UIKit
 protocol SettingsDelegate: class {
     func goToContactSync()
     
-    func goToIportPhotos()
+    func goToConnectedAccounts()
     
     func goToAutoUpload()
     
@@ -185,26 +185,19 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
                 } else {
                     output.goToContactSync()
                 }
-            case 1: // import photos
-                MenloworksTagsService.shared.onSocialMediaPageClicked()
-                if (settingsDelegate != nil) {
-                    settingsDelegate?.goToIportPhotos()
-                } else {
-                    output.goToImportPhotos()
-                }
-            case 2: // auto upload
+            case 1: // auto upload
                 if (settingsDelegate != nil) {
                     settingsDelegate!.goToAutoUpload()
                 } else {
                     output.goToAutoApload()
                 }
-            case 3: // periodic contact sync
+            case 2: // periodic contact sync
                 if (settingsDelegate != nil) {
                     settingsDelegate?.goToPeriodicContactSync()
                 } else {
                     output.goToPeriodicContactSync()
                 }
-            case 4: // face image
+            case 3: // face image
                 if (settingsDelegate != nil) {
                     settingsDelegate?.goToFaceImage()
                 } else {
@@ -215,6 +208,19 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
             }
             break
         case 1:
+            switch indexPath.row {
+            case 0:
+                // import photos
+                MenloworksTagsService.shared.onSocialMediaPageClicked()
+                if let delegate = settingsDelegate {
+                    delegate.goToConnectedAccounts()
+                } else {
+                    output.goToConnectedAccounts()
+                }
+            default:
+                break
+            }
+        case 2:
             switch indexPath.row {
             case 0: // my activity timeline
                 if (settingsDelegate != nil) {
@@ -236,7 +242,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
                 break
             }
             break
-        case 2:
+        case 3:
             switch indexPath.row {
             case 0:
                 if (settingsDelegate != nil) {

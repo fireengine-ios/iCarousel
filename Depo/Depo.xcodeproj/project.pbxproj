@@ -2818,6 +2818,28 @@
 		B5A84523212DA315007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84522212DA314007EA795 /* images.xcassets */; };
 		B5A84525212DA326007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84524212DA325007EA795 /* images.xcassets */; };
 		B5A84527212DA339007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84526212DA339007EA795 /* images.xcassets */; };
+		B5AB5B5621F9A92B003AABB4 /* ConnectedAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B5421F9A92B003AABB4 /* ConnectedAccountsViewController.swift */; };
+		B5AB5B5721F9A92B003AABB4 /* ConnectedAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B5421F9A92B003AABB4 /* ConnectedAccountsViewController.swift */; };
+		B5AB5B5821F9A92B003AABB4 /* ConnectedAccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B5521F9A92B003AABB4 /* ConnectedAccountsViewController.xib */; };
+		B5AB5B5921F9A92B003AABB4 /* ConnectedAccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B5521F9A92B003AABB4 /* ConnectedAccountsViewController.xib */; };
+		B5AB5B5C21F9ACBA003AABB4 /* DropboxAccountConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B5B21F9ACBA003AABB4 /* DropboxAccountConnection.swift */; };
+		B5AB5B5D21F9ACBA003AABB4 /* DropboxAccountConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B5B21F9ACBA003AABB4 /* DropboxAccountConnection.swift */; };
+		B5AB5B5F21F9ACFF003AABB4 /* SocialAcccountConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B5E21F9ACFF003AABB4 /* SocialAcccountConnection.swift */; };
+		B5AB5B6021F9ACFF003AABB4 /* SocialAcccountConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B5E21F9ACFF003AABB4 /* SocialAcccountConnection.swift */; };
+		B5AB5B6421F9B01B003AABB4 /* DropboxAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B6221F9B01B003AABB4 /* DropboxAccountConnectionCell.swift */; };
+		B5AB5B6521F9B01B003AABB4 /* DropboxAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B6221F9B01B003AABB4 /* DropboxAccountConnectionCell.swift */; };
+		B5AB5B6621F9B01B003AABB4 /* DropboxAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B6321F9B01B003AABB4 /* DropboxAccountConnectionCell.xib */; };
+		B5AB5B6721F9B01B003AABB4 /* DropboxAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B6321F9B01B003AABB4 /* DropboxAccountConnectionCell.xib */; };
+		B5AB5B6A21F9B029003AABB4 /* FacebookAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B6821F9B029003AABB4 /* FacebookAccountConnectionCell.swift */; };
+		B5AB5B6B21F9B029003AABB4 /* FacebookAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B6821F9B029003AABB4 /* FacebookAccountConnectionCell.swift */; };
+		B5AB5B6C21F9B029003AABB4 /* FacebookAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B6921F9B029003AABB4 /* FacebookAccountConnectionCell.xib */; };
+		B5AB5B6D21F9B029003AABB4 /* FacebookAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B6921F9B029003AABB4 /* FacebookAccountConnectionCell.xib */; };
+		B5AB5B7021F9B040003AABB4 /* InstagramAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B6E21F9B040003AABB4 /* InstagramAccountConnectionCell.swift */; };
+		B5AB5B7121F9B040003AABB4 /* InstagramAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B6E21F9B040003AABB4 /* InstagramAccountConnectionCell.swift */; };
+		B5AB5B7221F9B040003AABB4 /* InstagramAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B6F21F9B040003AABB4 /* InstagramAccountConnectionCell.xib */; };
+		B5AB5B7321F9B040003AABB4 /* InstagramAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B6F21F9B040003AABB4 /* InstagramAccountConnectionCell.xib */; };
+		B5AB5B7521F9B066003AABB4 /* FacebookAccountConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B7421F9B066003AABB4 /* FacebookAccountConnection.swift */; };
+		B5AB5B7621F9B066003AABB4 /* FacebookAccountConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B7421F9B066003AABB4 /* FacebookAccountConnection.swift */; };
 		B5B6B1512170A01E00463260 /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B6B14F2170A01E00463260 /* PrepareQuickScroll.swift */; };
 		B5B6B1522170A01E00463260 /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B6B14F2170A01E00463260 /* PrepareQuickScroll.swift */; };
 		B5B6B1532170A01E00463260 /* PrepareQuickScroll.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5B6B1502170A01E00463260 /* PrepareQuickScroll.xib */; };
@@ -5428,6 +5450,17 @@
 		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		B5A84524212DA325007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		B5A84526212DA339007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
+		B5AB5B5421F9A92B003AABB4 /* ConnectedAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsViewController.swift; sourceTree = "<group>"; };
+		B5AB5B5521F9A92B003AABB4 /* ConnectedAccountsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectedAccountsViewController.xib; sourceTree = "<group>"; };
+		B5AB5B5B21F9ACBA003AABB4 /* DropboxAccountConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropboxAccountConnection.swift; sourceTree = "<group>"; };
+		B5AB5B5E21F9ACFF003AABB4 /* SocialAcccountConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAcccountConnection.swift; sourceTree = "<group>"; };
+		B5AB5B6221F9B01B003AABB4 /* DropboxAccountConnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropboxAccountConnectionCell.swift; sourceTree = "<group>"; };
+		B5AB5B6321F9B01B003AABB4 /* DropboxAccountConnectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropboxAccountConnectionCell.xib; sourceTree = "<group>"; };
+		B5AB5B6821F9B029003AABB4 /* FacebookAccountConnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAccountConnectionCell.swift; sourceTree = "<group>"; };
+		B5AB5B6921F9B029003AABB4 /* FacebookAccountConnectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FacebookAccountConnectionCell.xib; sourceTree = "<group>"; };
+		B5AB5B6E21F9B040003AABB4 /* InstagramAccountConnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAccountConnectionCell.swift; sourceTree = "<group>"; };
+		B5AB5B6F21F9B040003AABB4 /* InstagramAccountConnectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstagramAccountConnectionCell.xib; sourceTree = "<group>"; };
+		B5AB5B7421F9B066003AABB4 /* FacebookAccountConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAccountConnection.swift; sourceTree = "<group>"; };
 		B5B6B14F2170A01E00463260 /* PrepareQuickScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrepareQuickScroll.swift; sourceTree = "<group>"; };
 		B5B6B1502170A01E00463260 /* PrepareQuickScroll.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrepareQuickScroll.xib; sourceTree = "<group>"; };
 		B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+JPEG.swift"; sourceTree = "<group>"; };
@@ -10821,6 +10854,40 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		B5AB5B5321F9A90C003AABB4 /* ConnectedAccounts */ = {
+			isa = PBXGroup;
+			children = (
+				B5AB5B6121F9AF95003AABB4 /* Cells */,
+				B5AB5B5A21F9AC90003AABB4 /* Models */,
+				B5AB5B5421F9A92B003AABB4 /* ConnectedAccountsViewController.swift */,
+				B5AB5B5521F9A92B003AABB4 /* ConnectedAccountsViewController.xib */,
+			);
+			path = ConnectedAccounts;
+			sourceTree = "<group>";
+		};
+		B5AB5B5A21F9AC90003AABB4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B5AB5B5E21F9ACFF003AABB4 /* SocialAcccountConnection.swift */,
+				B5AB5B5B21F9ACBA003AABB4 /* DropboxAccountConnection.swift */,
+				B5AB5B7421F9B066003AABB4 /* FacebookAccountConnection.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B5AB5B6121F9AF95003AABB4 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B5AB5B6221F9B01B003AABB4 /* DropboxAccountConnectionCell.swift */,
+				B5AB5B6321F9B01B003AABB4 /* DropboxAccountConnectionCell.xib */,
+				B5AB5B6821F9B029003AABB4 /* FacebookAccountConnectionCell.swift */,
+				B5AB5B6921F9B029003AABB4 /* FacebookAccountConnectionCell.xib */,
+				B5AB5B6E21F9B040003AABB4 /* InstagramAccountConnectionCell.swift */,
+				B5AB5B6F21F9B040003AABB4 /* InstagramAccountConnectionCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		B5B6B14E2170A01E00463260 /* PrepareToQuickScroll */ = {
 			isa = PBXGroup;
 			children = (
@@ -11541,6 +11608,7 @@
 		CE3EB30D1FC7F512000B70D6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				B5AB5B5321F9A90C003AABB4 /* ConnectedAccounts */,
 				B56FBB102122C191004F4A59 /* TermsOfUse */,
 				4A0AC12E2087367A00032CC7 /* PeriodicContactSync */,
 				4A8CC2F42019FFB600C040C4 /* FaceImage */,
@@ -13550,6 +13618,7 @@
 				4A56D5CB202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
 				B5CDB33521787FEF006CFA50 /* Localizable.strings in Resources */,
 				8C06AF6B2008AD70003D8E05 /* duz_cizgi_selected.png in Resources */,
+				B5AB5B5921F9A92B003AABB4 /* ConnectedAccountsViewController.xib in Resources */,
 				8C06B1692008AD72003D8E05 /* toolbar_crop_icon@3x.png in Resources */,
 				8C0E902B1FDEBDFF00789C91 /* TurkcellSaturaMed.ttf in Resources */,
 				8C0E902D1FDEBDFF00789C91 /* RegistrationScreen.xib in Resources */,
@@ -13619,6 +13688,7 @@
 				8C06AF032008AD70003D8E05 /* caps2_selected@2x.png in Resources */,
 				8C06AEE32008AD70003D8E05 /* bottomleft@3x.png in Resources */,
 				8C0E90411FDEBDFF00789C91 /* GridListTopBar.xib in Resources */,
+				B5AB5B7321F9B040003AABB4 /* InstagramAccountConnectionCell.xib in Resources */,
 				8C06B1B72008AD72003D8E05 /* CRYShareViewController.nib in Resources */,
 				8C0E90421FDEBDFF00789C91 /* CollectionViewCellForPhoto.xib in Resources */,
 				7CEE2725209C560500EF6C79 /* PageForLanding.xib in Resources */,
@@ -13669,6 +13739,7 @@
 				8C06B11B2008AD72003D8E05 /* t_buyuk@3x.png in Resources */,
 				8C06AF4B2008AD70003D8E05 /* crop_selected.png in Resources */,
 				8C06B1152008AD72003D8E05 /* success_icon@3x.png in Resources */,
+				B5AB5B6721F9B01B003AABB4 /* DropboxAccountConnectionCell.xib in Resources */,
 				8C0E90471FDEBDFF00789C91 /* ActivityTimelineFileCell.xib in Resources */,
 				8C0E90491FDEBDFF00789C91 /* EditinglBar.xib in Resources */,
 				8C06AEBD2008AD70003D8E05 /* alt_cizgili.png in Resources */,
@@ -13775,6 +13846,7 @@
 				8C0B919820170E5000A5BA81 /* DuplicatedContactsViewController.xib in Resources */,
 				8C06B1732008AD72003D8E05 /* toolbar_undo_icon@2x.png in Resources */,
 				8C06AFCB2008AD71003D8E05 /* header_icon@3x.png in Resources */,
+				B5AB5B6D21F9B029003AABB4 /* FacebookAccountConnectionCell.xib in Resources */,
 				8C06B1AD2008AD72003D8E05 /* CRYFrameCell.nib in Resources */,
 				8C06B0F52008AD72003D8E05 /* serbest_cizgi_selected@2x.png in Resources */,
 				8C06B13D2008AD72003D8E05 /* tahta_yeni@2x.png in Resources */,
@@ -14010,6 +14082,7 @@
 				7C4485031F0FC87A003AF631 /* SettingHeaderView.xib in Resources */,
 				7C0D5DF2202F108900DE953F /* CreateStoryAudioSelectionViewController.xib in Resources */,
 				8C06B0202008AD71003D8E05 /* lifebox@2x.png in Resources */,
+				B5AB5B5821F9A92B003AABB4 /* ConnectedAccountsViewController.xib in Resources */,
 				8C06B1AA2008AD72003D8E05 /* CRYFilterCell.nib in Resources */,
 				CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */,
 				8C06B0A62008AD71003D8E05 /* renk_selected.png in Resources */,
@@ -14234,6 +14307,7 @@
 				8C06B02C2008AD71003D8E05 /* ok_btn_kucuk@3x.png in Resources */,
 				7CF6BDE21F0B97050066709E /* CollectionViewCellForAudio.xib in Resources */,
 				8C06B1962008AD72003D8E05 /* vintage.png in Resources */,
+				B5AB5B6C21F9B029003AABB4 /* FacebookAccountConnectionCell.xib in Resources */,
 				8C06B0C02008AD71003D8E05 /* sag_ok.png in Resources */,
 				8C06B1682008AD72003D8E05 /* toolbar_crop_icon@3x.png in Resources */,
 				8C06AF602008AD70003D8E05 /* daire_selected@3x.png in Resources */,
@@ -14284,6 +14358,7 @@
 				8C06B1302008AD72003D8E05 /* t_orta@2x.png in Resources */,
 				8C06AF282008AD70003D8E05 /* cizgi_2_selected@2x.png in Resources */,
 				7CED0B111F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib in Resources */,
+				B5AB5B6621F9B01B003AABB4 /* DropboxAccountConnectionCell.xib in Resources */,
 				7C3B186F1FE0153E00FF3C39 /* PrepareToAutoSync.xib in Resources */,
 				8C06AF6A2008AD70003D8E05 /* duz_cizgi_selected.png in Resources */,
 				8C06B1522008AD72003D8E05 /* text_selected.png in Resources */,
@@ -14523,6 +14598,7 @@
 				7C3A74531F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.xib in Resources */,
 				8C06AF3E2008AD70003D8E05 /* crop.png in Resources */,
 				7CD7C2A620189E24009F6D3D /* StorageCard.xib in Resources */,
+				B5AB5B7221F9B040003AABB4 /* InstagramAccountConnectionCell.xib in Resources */,
 				8C06AF5A2008AD70003D8E05 /* daire@3x.png in Resources */,
 				8C06AEB82008AD70003D8E05 /* akilli_depo_beyaz@2x.png in Resources */,
 				8C06AED22008AD70003D8E05 /* beyaz_cerceve@3x.png in Resources */,
@@ -15221,6 +15297,7 @@
 				B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */,
 				8C0E8CE91FDEBDFF00789C91 /* HelpAndSupportModuleInput.swift in Sources */,
 				CE49E8FB2099BD83007F05A6 /* UIButton+Font.swift in Sources */,
+				B5AB5B6521F9B01B003AABB4 /* DropboxAccountConnectionCell.swift in Sources */,
 				8C0E8CEA1FDEBDFF00789C91 /* BaseFilesGreedChildrenViewController.swift in Sources */,
 				8C0E8CEC1FDEBDFF00789C91 /* CreateStoryAudioSelectionViewController.swift in Sources */,
 				8C0E8CED1FDEBDFF00789C91 /* CustomSwitch.swift in Sources */,
@@ -15473,6 +15550,7 @@
 				8C0E8DBD1FDEBDFF00789C91 /* RegistrationRouterInput.swift in Sources */,
 				8C0E8DBE1FDEBDFF00789C91 /* RegistrationRouter.swift in Sources */,
 				8C0E8DBF1FDEBDFF00789C91 /* SpringLabel.swift in Sources */,
+				B5AB5B5D21F9ACBA003AABB4 /* DropboxAccountConnection.swift in Sources */,
 				8C0E8DC01FDEBDFF00789C91 /* BottomSelectionTabBarViewInput.swift in Sources */,
 				8C0E8DC11FDEBDFF00789C91 /* RegistrationConfigurator.swift in Sources */,
 				8C0E8DC21FDEBDFF00789C91 /* LocalAlbumViewController.swift in Sources */,
@@ -15493,6 +15571,7 @@
 				8C0E8DCC1FDEBDFF00789C91 /* ImportPhotosConfigurator.swift in Sources */,
 				8C0E8DCD1FDEBDFF00789C91 /* PackagesInteractorOutput.swift in Sources */,
 				8C0E8DCE1FDEBDFF00789C91 /* TermsAndServicesViewController.swift in Sources */,
+				B5AB5B7121F9B040003AABB4 /* InstagramAccountConnectionCell.swift in Sources */,
 				8C0E8DCF1FDEBDFF00789C91 /* TermsAndServicesModuleInput.swift in Sources */,
 				8C0E8DD01FDEBDFF00789C91 /* LoginInteractorInput.swift in Sources */,
 				8C0E8DD11FDEBDFF00789C91 /* CreateStoryPhotosOrderInteractorOutput.swift in Sources */,
@@ -15639,6 +15718,7 @@
 				8C0E8E291FDEBDFF00789C91 /* AutoSyncViewOutput.swift in Sources */,
 				8C0E8E2A1FDEBDFF00789C91 /* ImportFromInstagramInteractor.swift in Sources */,
 				8C0E8E2B1FDEBDFF00789C91 /* ForgotPasswordInteractor.swift in Sources */,
+				B5AB5B7621F9B066003AABB4 /* FacebookAccountConnection.swift in Sources */,
 				8C0E8E2C1FDEBDFF00789C91 /* OffersService.swift in Sources */,
 				C62239B4204973CC0043ED44 /* FaceImagePhotosInitializer.swift in Sources */,
 				8C0E8E2D1FDEBDFF00789C91 /* LocalMediaStorage.swift in Sources */,
@@ -15756,6 +15836,7 @@
 				8C0E8EBE1FDEBDFF00789C91 /* BaseFilesGreedRouterInput.swift in Sources */,
 				8C0E8EBF1FDEBDFF00789C91 /* CircleButton.swift in Sources */,
 				8C0E8EC01FDEBDFF00789C91 /* DateExtension.swift in Sources */,
+				B5AB5B5721F9A92B003AABB4 /* ConnectedAccountsViewController.swift in Sources */,
 				8C0E8EC11FDEBDFF00789C91 /* BaseFilesGreedRouter.swift in Sources */,
 				8C0E8EC21FDEBDFF00789C91 /* BaseFilesGreedConfigurator.swift in Sources */,
 				4A56D5B9202AF547003A4624 /* FaceImageAddNameInteractor.swift in Sources */,
@@ -15772,6 +15853,7 @@
 				8C0E8ECB1FDEBDFF00789C91 /* UsageInfoInteractor.swift in Sources */,
 				8CB478AF20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */,
 				8C0E8ECC1FDEBDFF00789C91 /* AudioSelectionDataSource.swift in Sources */,
+				B5AB5B6021F9ACFF003AABB4 /* SocialAcccountConnection.swift in Sources */,
 				8C0E8ECD1FDEBDFF00789C91 /* LocalAlbumCollectionViewCell.swift in Sources */,
 				8C0E8ECE1FDEBDFF00789C91 /* AlbumItem.swift in Sources */,
 				8C0E8ECF1FDEBDFF00789C91 /* UserProfileRouter.swift in Sources */,
@@ -16061,6 +16143,7 @@
 				8C0E8F851FDEBDFF00789C91 /* SelectNameConfigurator.swift in Sources */,
 				8C0E8F861FDEBDFF00789C91 /* SelectNameInitializer.swift in Sources */,
 				C62239B1204973720043ED44 /* FaceImageItemsInteractorInput.swift in Sources */,
+				B5AB5B6B21F9B029003AABB4 /* FacebookAccountConnectionCell.swift in Sources */,
 				8C0E8F871FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
 				8C0E8F881FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
 				9807260E203468D9004E1505 /* SearchDataSource.swift in Sources */,
@@ -16600,6 +16683,7 @@
 				8C00971A1F6BDAD900FA069C /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				CEF41E9B2035B2BF0008FCD5 /* PreventCollectionView.swift in Sources */,
 				8C6EF8811F348B5C002AC795 /* BottomSelectionTabBarViewController.swift in Sources */,
+				B5AB5B7021F9B040003AABB4 /* InstagramAccountConnectionCell.swift in Sources */,
 				7C3A74361F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift in Sources */,
 				CE51AC6E1EF90853005DCEE0 /* AutoSyncViewController.swift in Sources */,
 				8C00971E1F6BDB0500FA069C /* AlertFilesActionsSheetInteractorInput.swift in Sources */,
@@ -16910,6 +16994,7 @@
 				CE47155F20BFEDD3001DF164 /* UILabel+Font.swift in Sources */,
 				CE51AD001EF90853005DCEE0 /* ForgotPasswordRouterInput.swift in Sources */,
 				7CFE92F81F5EDDE4008A3B72 /* LanguageModel.swift in Sources */,
+				B5AB5B5F21F9ACFF003AABB4 /* SocialAcccountConnection.swift in Sources */,
 				CE274D611FB4806400CD53D7 /* Equatable+Contains.swift in Sources */,
 				78DDEF9C201908C100E3530B /* String+CyrillicCompare.swift in Sources */,
 				7C233CDA1FD6DB1E0013CCA0 /* UploadFromLifeBoxPhotosPresenter.swift in Sources */,
@@ -17033,6 +17118,7 @@
 				93BCDFC78CC70DD7A25AB20B /* BaseFilesGreedRouter.swift in Sources */,
 				DAFC0963466EA8E360C3FC67 /* BaseFilesGreedConfigurator.swift in Sources */,
 				7C2F56FA1F1CC1CC0014870B /* ActionsMenuTableViewCell.swift in Sources */,
+				B5AB5B6421F9B01B003AABB4 /* DropboxAccountConnectionCell.swift in Sources */,
 				8BC2414816C90E31214FFA9E /* BaseFilesGreedInitializer.swift in Sources */,
 				7C6E2F741F31E4C900536DB6 /* CreateStorySelectionConfigurator.swift in Sources */,
 				8DCB216C1F3C858A00BAFE1E /* SearchViewPresenter.swift in Sources */,
@@ -17128,6 +17214,7 @@
 				CE2F56181F7552A900F49DA1 /* PackagesInteractorInput.swift in Sources */,
 				EFA74FB31FBF378F00CF946E /* PrintModuleConfigurator.swift in Sources */,
 				B02F86BF64856149537A10F3 /* SyncContactsRouterInput.swift in Sources */,
+				B5AB5B5621F9A92B003AABB4 /* ConnectedAccountsViewController.swift in Sources */,
 				8DCB21651F3C6FCF00BAFE1E /* SearchViewConfigurator.swift in Sources */,
 				8C77869E1F3F38EF005CB432 /* VisualMusicPlayerInitializer.swift in Sources */,
 				CE95ED581F516736002F923A /* HelpAndSupportViewInput.swift in Sources */,
@@ -17191,6 +17278,7 @@
 				925B96D721E79BB000B39415 /* RadialGradientableLayer.swift in Sources */,
 				8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */,
 				53794AC45ECB88862D21B980 /* SplashConfigurator.swift in Sources */,
+				B5AB5B6A21F9B029003AABB4 /* FacebookAccountConnectionCell.swift in Sources */,
 				D47863F91F3F18FA00EFDC6D /* UsageInfoRouterInput.swift in Sources */,
 				4C7B0D374F8DE575C03C683C /* SplashInitializer.swift in Sources */,
 				B5390D82216605F600A02002 /* CellImageManager.swift in Sources */,
@@ -17232,6 +17320,7 @@
 				5DF885B77D64CAAB43CB969F /* FileInfoInitializer.swift in Sources */,
 				D47863FC1F3F18FA00EFDC6D /* UsageInfoViewInput.swift in Sources */,
 				78E8E2B820236D6900A979AB /* FaceImageItemsRouterInput.swift in Sources */,
+				B5AB5B7521F9B066003AABB4 /* FacebookAccountConnection.swift in Sources */,
 				7CEEC1BB1F33251800BD433F /* CreateStoryPhotosOrderConfigurator.swift in Sources */,
 				78D9BA492007E82800F2233F /* DuplicatedContactsViewController.swift in Sources */,
 				7C4988171F3320420039C5F2 /* CreateStoryPhotosOrderInteractorInput.swift in Sources */,
@@ -17381,6 +17470,7 @@
 				1C8FDD0A3C795F7711BC5822 /* FeedbackViewRouterInput.swift in Sources */,
 				2D620A893121CE2330C18858 /* FeedbackViewRouter.swift in Sources */,
 				2EF733E89FE2194E3B6817BA /* FeedbackViewConfigurator.swift in Sources */,
+				B5AB5B5C21F9ACBA003AABB4 /* DropboxAccountConnection.swift in Sources */,
 				A2EF976221EC7E2900EC7DE7 /* InstapickPopUpController.swift in Sources */,
 				4A8CC303201A00D400C040C4 /* FaceImageViewController.swift in Sources */,
 				8AC9821D58B05574782F11AB /* FeedbackViewInitializer.swift in Sources */,

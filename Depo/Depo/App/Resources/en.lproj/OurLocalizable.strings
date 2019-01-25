@@ -262,6 +262,7 @@
 "Import From Facebook" = "Import from Facebook";
 "Import From Dropbox" = "Import from Dropbox";
 "Import Photos" = "Import Photos";
+"Connected Accounts" = "Connected Accounts";
 "Are you sure you want to exit the application?" = "Are you sure you want to exit the application?";
 "Auto-login" = "Auto-login";
 "Logout" = "Logout";
@@ -834,3 +835,4 @@
 "connected_with_instagram_name" = "Connect with Instagram as";
 "continue_without_connecting" = "Continue without connecting";
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
+"Facebook" = "Facebook";
