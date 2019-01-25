@@ -37,7 +37,7 @@ final class LeavePremiumPresenter {
             case .ukranian: return TextConstants.featureLifeCellCancelText
             case .life: return TextConstants.featureLifeCancelText
             case .moldovian: return TextConstants.featureMoldCellCancelText
-            case .albanian: return TextConstants.featureMoldCellCancelText
+            case .albanian: return TextConstants.featureAlbanianCancelText
             case .turkcell: return String(format: TextConstants.offersCancelTurkcell, feature.subscriptionPlanName ?? "")
             }
         } else {

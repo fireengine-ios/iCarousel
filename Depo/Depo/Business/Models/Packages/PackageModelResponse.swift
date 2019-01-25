@@ -98,7 +98,7 @@ enum PackageType: String {
         case .paycellSLCM:
             return TextConstants.packagePaycellSLCMCancelText
         case .albanian:
-            return TextConstants.packagePaycellSLCMCancelText
+            return TextConstants.packageAlbanianCancelText
         }
     }
 }
