@@ -115,6 +115,8 @@ final class SettingsInfoPermissionsResponse: ObjectRequestResponse {
     var isFacebookTaggingEnabledStatus: Bool?
     var isInstapickAllowed: Bool?
     
+    private let jsonStatusOK = "OK"
+    
     private enum ResponseKeys {
         static let faceImage = "faceImageRecognitionAllowed"
         static let faceImageStatus = "faceImageRecognitionAllowedStatus"
@@ -125,9 +127,9 @@ final class SettingsInfoPermissionsResponse: ObjectRequestResponse {
     
     override func mapping() {
         isFaceImageAllowed = json?[ResponseKeys.faceImage].bool
-        isFaceImageRecognitionAllowedStatus = json?[ResponseKeys.faceImageStatus].string == "OK"
+        isFaceImageRecognitionAllowedStatus = json?[ResponseKeys.faceImageStatus].string == jsonStatusOK ? true : false
         isFacebookAllowed = json?[ResponseKeys.facebook].bool
-        isFacebookTaggingEnabledStatus = json?[ResponseKeys.facebookStatus].string == "OK" ? true : false
+        isFacebookTaggingEnabledStatus = json?[ResponseKeys.facebookStatus].string == jsonStatusOK ? true : false
         isInstapickAllowed = json?[ResponseKeys.instapick].bool
     }
 }
