@@ -82,6 +82,8 @@ final class PackageService {
             return "MDL"
         case .life:
             return "BYN"
+        case .albanian:
+            return "ALL"
         case .all:
             return "$" /// temp
         }
@@ -190,8 +192,7 @@ final class PackageService {
         if AccountType(rawValue: accountType) == .turkcell {
             return .turkcell
         } else {
-            let packageService = PackageService()
-            let roles: [String] = offers.flatMap { return packageService.getOfferRole(for: $0) }
+            let roles: [String] = offers.flatMap { return getOfferRole(for: $0) }
             for role in roles {
                 guard let index = role.index(of: "-"),
                     let accountType = AccountType(rawValue: String(role[..<index])) else {
