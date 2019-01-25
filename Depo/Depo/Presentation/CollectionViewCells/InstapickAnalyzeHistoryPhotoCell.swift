@@ -14,7 +14,7 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         willSet {
             newValue.contentMode = .scaleAspectFill
             newValue.backgroundColor = UIColor.clear
-            newValue.clipsToBounds = true
+            newValue.layer.masksToBounds = true
             newValue.layer.borderColor = UIColor.lrTealish.cgColor
             newValue.layer.borderWidth = 1
             newValue.alpha = 1
@@ -85,6 +85,8 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         
         if let metadata = item.fileInfo?.metadata {
             setImage(with: metadata, identifier: item.requestIdentifier)
+        } else {
+            setImage(image: UIImage(named: "photo_not_found"), animated: false)
         }
     }
 
@@ -115,7 +117,6 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
     }
     
     override func setImage(image: UIImage?, animated: Bool) {
-        imageView.contentMode = .scaleAspectFill
         if animated {
             imageView.layer.opacity = NumericConstants.numberCellDefaultOpacity
             imageView.image = image
