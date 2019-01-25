@@ -194,7 +194,9 @@ final class PackageService {
             let roles: [String] = offers.flatMap { return packageService.getOfferRole(for: $0) }
             for role in roles {
                 guard let index = role.index(of: "-"),
-                    let accountType = AccountType(rawValue: String(role[..<index])) else { continue }
+                    let accountType = AccountType(rawValue: String(role[..<index])) else {
+                        continue
+                }
                 return accountType
             }
             return .all
