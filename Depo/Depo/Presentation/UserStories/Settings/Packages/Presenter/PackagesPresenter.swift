@@ -68,10 +68,13 @@ extension PackagesPresenter: PackagesViewOutput {
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
 
         interactor.trackPackageClick(plan: plan, planIndex: planIndex)
-        guard let model = plan.model as? PackageModelResponse else { return }
+        guard let model = plan.model as? PackageModelResponse else {
+            return
+        }
         switch model.type {
         case .SLCM?:
-            view?.showActivateOfferAlert(for: model, planIndex: planIndex)
+            let price = interactor.getPriceInfo(for: model, accountType: accountType)
+            view?.showActivateOfferAlert(with: price, for: model, planIndex: planIndex)
         case .apple?:
             view?.startActivityIndicator()
             interactor.activate(offer: model, planIndex: planIndex)
