@@ -31,12 +31,13 @@ final class LeavePremiumPresenter {
         
         let cancelText: String
         if let accountType = accountType, featureType == .allAccessFeature {
-            switch getAccountType(for: accountType.rawValue, subscription: feature) {
+            switch interactor.getAccountType(with: accountType.rawValue, offers: [feature]) {
             case .all: return TextConstants.offersAllCancel
             case .cyprus: return TextConstants.featureKKTCellCancelText
             case .ukranian: return TextConstants.featureLifeCellCancelText
             case .life: return TextConstants.featureLifeCancelText
             case .moldovian: return TextConstants.featureMoldCellCancelText
+            case .albanian: return TextConstants.featureMoldCellCancelText
             case .turkcell: return String(format: TextConstants.offersCancelTurkcell, feature.subscriptionPlanName ?? "")
             }
         } else {
@@ -52,24 +53,6 @@ final class LeavePremiumPresenter {
     private func displayPrice() {
         view?.stopActivityIndicator()
         view?.display(price: price)
-    }
-    
-    private func getAccountType(for accountType: String, subscription: SubscriptionPlanBaseResponse?) -> AccountType {
-        var type: AccountType = .all
-        if accountType == "TURKCELL" {
-            type = .turkcell
-        } else if let role = subscription?.subscriptionPlanRole?.lowercased() {
-            if role.contains("lifebox") {
-                type = .ukranian
-            } else if role.contains("kktcell") {
-                type = .cyprus
-            } else if role.contains("moldcell") {
-                type = .moldovian
-            } else if role.contains("life-") {
-                type = .life
-            }
-        }
-        return type
     }
 }
 
@@ -88,7 +71,7 @@ extension LeavePremiumPresenter: LeavePremiumViewOutput {
 // MARK: - LeavePremiumInteractorOtuput
 extension LeavePremiumPresenter: LeavePremiumInteractorOutput {
     func didLoadAccountType(accountTypeString: String) {
-        let accountType = getAccountType(for: accountTypeString,subscription: feature)
+        let accountType = interactor.getAccountType(with: accountTypeString, offers: [feature])
         self.accountType = accountType
         
         guard let feature = feature, let featureType = feature.subscriptionPlanFeatureType else {

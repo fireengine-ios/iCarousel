@@ -71,6 +71,7 @@ enum PackageType: String {
     case life                       = "LIFE"
     case paycellAllAccess           = "PAYCELL_ALL_ACCESS"
     case paycellSLCM                = "PAYCELL_SLCM"
+    case albanian                   = "ALBTELECOM"
     
     var cancelText: String {
         switch self {
@@ -95,6 +96,8 @@ enum PackageType: String {
         case .paycellAllAccess:
             return TextConstants.packagePaycellAllAccessCancelText
         case .paycellSLCM:
+            return TextConstants.packagePaycellSLCMCancelText
+        case .albanian:
             return TextConstants.packagePaycellSLCMCancelText
         }
     }
