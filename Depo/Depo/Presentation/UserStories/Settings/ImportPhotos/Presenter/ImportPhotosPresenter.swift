@@ -30,8 +30,6 @@ class ImportFromFBPresenter: BasePresenter {
 extension ImportFromFBPresenter: ImportFromFBViewOutput {
     
     func viewIsReady() {
-        analyticsService.logScreen(screen: .importPhotos)
-        analyticsService.trackDimentionsEveryClickGA(screen: .importPhotos)
         view?.startActivityIndicator()
         interactor.requestStatus()
     }

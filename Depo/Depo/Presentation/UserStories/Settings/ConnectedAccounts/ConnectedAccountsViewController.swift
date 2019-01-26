@@ -19,7 +19,12 @@ final class ConnectedAccountsViewController: ViewController, ErrorPresenter {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private lazy var activityManager = ActivityIndicatorManager()
+    private lazy var activityManager: ActivityIndicatorManager = {
+        let manager = ActivityIndicatorManager()
+        manager.delegate = self
+        return manager
+    }()
+    private let analyticsService: AnalyticsService = factory.resolve()
     
     private let sections: [SocialAccount] = [.instagram, .facebook, .dropbox]
     
@@ -31,8 +36,22 @@ final class ConnectedAccountsViewController: ViewController, ErrorPresenter {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setupScreen()
         setupTableView()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        trackScreen()
+    }
+    
+    
+    private func setupScreen() {
+        setTitle(withString: TextConstants.settingsViewCellConnectedAccounts)
+        navigationController?.navigationItem.title = TextConstants.backTitle
     }
     
     private func setupTableView() {
@@ -50,9 +69,15 @@ final class ConnectedAccountsViewController: ViewController, ErrorPresenter {
             tableView.register(nib, forCellReuseIdentifier: id)
         }
     }
+    
+    private func trackScreen() {
+        analyticsService.logScreen(screen: .connectedAccounts)
+        analyticsService.trackDimentionsEveryClickGA(screen: .connectedAccounts)
+    }
 }
 
 
+// MARK: - UITableViewDataSource
 extension ConnectedAccountsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -66,9 +91,11 @@ extension ConnectedAccountsViewController: UITableViewDataSource {
         let cellId = cellIdentifier(for: indexPath.section)
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         
+        (cell as? SocialAccountConnectionCell)?.delegate = self
+        
         return cell
     }
-    
+ 
     private func cellIdentifier(for section: Int) -> String {
         guard let accountType = SocialAccount(rawValue: section) else {
             assertionFailure("wrong index")
@@ -87,13 +114,21 @@ extension ConnectedAccountsViewController: UITableViewDataSource {
 }
 
 
+// MARK: - UITableViewDelegate
 extension ConnectedAccountsViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? SocialAccountConnectionCell {
+            cell.willDisplay()
+        }
+    }
 }
 
-
-// MARK: - ActivityIndicator
-extension ConnectedAccountsViewController: ActivityIndicator {
+// MARK: - SocialAccountConnectionCellDelegate
+extension ConnectedAccountsViewController: SocialAccountConnectionCellDelegate {
+    func showError(message: String) {
+        showErrorAlert(message: message)
+    }
+    
     func startActivityIndicator() {
         activityManager.start()
     }
@@ -102,6 +137,7 @@ extension ConnectedAccountsViewController: ActivityIndicator {
         activityManager.stop()
     }
 }
+
 
 
 

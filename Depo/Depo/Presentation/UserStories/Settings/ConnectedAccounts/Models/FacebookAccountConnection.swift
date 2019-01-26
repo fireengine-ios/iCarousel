@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+final class FacebookAccountConnection: SocialAccountConnection {
+    var isConnected = false
+    
+    
+    
+}

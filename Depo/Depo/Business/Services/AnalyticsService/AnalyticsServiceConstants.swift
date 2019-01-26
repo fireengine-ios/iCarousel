@@ -117,7 +117,7 @@ enum AnalyticsAppScreens {
     case placesFIR
     ///Settings
     case settings
-    case importPhotos
+    case connectedAccounts
     case settingsFIR
     case activityTimeline
     case usageInfo
@@ -215,8 +215,8 @@ enum AnalyticsAppScreens {
         ///Settings
         case .settings:
             return "Settings"
-        case .importPhotos:
-            return "Import Photos"
+        case .connectedAccounts:
+            return "Connected Accounts"
         case .settingsFIR:
             return "Face & Image Grouping"
         case .activityTimeline:

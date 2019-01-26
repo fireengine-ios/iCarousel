@@ -836,3 +836,6 @@
 "continue_without_connecting" = "Continue without connecting";
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
 "Facebook" = "Facebook";
+"Dropbox" = "Dropbox";
+"Instagram" = "Instagram";
+"connected_as_format" = "Connected as %@";

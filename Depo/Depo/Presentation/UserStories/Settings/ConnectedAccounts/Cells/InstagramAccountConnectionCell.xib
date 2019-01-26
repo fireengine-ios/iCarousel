@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="TurkcellSaturaBol.ttf">
+            <string>TurkcellSaturaBol</string>
+        </array>
         <array key="TurkcellSaturaDem.ttf">
             <string>TurkcellSaturaDem</string>
         </array>
@@ -43,11 +46,11 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwh-w7-4FC">
-                        <rect key="frame" x="72" y="214" width="176" height="49.5"/>
-                        <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="20"/>
+                        <rect key="frame" x="68" y="214" width="184" height="49.5"/>
+                        <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="20"/>
                         <inset key="contentEdgeInsets" minX="16" minY="8" maxX="16" maxY="8"/>
                         <state key="normal" title="Remove Connection">
-                            <color key="titleColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="titleColor" red="0.47058823529411764" green="0.50980392156862742" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                         <connections>
                             <action selector="removeConnection:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vaE-G4-c1u"/>
@@ -120,9 +123,11 @@
                 <outlet property="caption" destination="MDv-b5-eXE" id="CDt-44-Ux8"/>
                 <outlet property="connectedAs" destination="4lF-p5-9Jq" id="hjR-KV-FZ0"/>
                 <outlet property="importFromInstagramIcon" destination="py1-23-qvm" id="bgp-HJ-PrB"/>
+                <outlet property="importFromInstagramText" destination="agT-6Z-UrP" id="jjn-QD-urY"/>
                 <outlet property="importSwitch" destination="0T7-qd-OSF" id="ZC9-qE-UGb"/>
                 <outlet property="instaPickIcon" destination="Qsc-us-Nea" id="3qH-vf-pUq"/>
                 <outlet property="instaPickSwitch" destination="qaR-Xw-oTj" id="Mzu-ih-ZeE"/>
+                <outlet property="instaPickText" destination="YQZ-8w-2wI" id="vAr-CA-cSO"/>
                 <outlet property="removeConnectionButton" destination="dwh-w7-4FC" id="IOt-NU-vha"/>
             </connections>
             <point key="canvasLocation" x="137.59999999999999" y="153.82308845577214"/>

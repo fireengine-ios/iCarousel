@@ -8,78 +8,112 @@
 
 import UIKit
 
-///TODO: setup outlets
 
-final class DropboxAccountConnectionCell: UITableViewCell {
+final class DropboxAccountConnectionCell: UITableViewCell, SocialAccountConnectionCell {
     
-    @IBOutlet private weak var caption: UILabel!
-    @IBOutlet private weak var icon: UIImageView!
-    @IBOutlet private weak var customText: UILabel!
+    weak var delegate: SocialAccountConnectionCellDelegate?
+    
+    private var interactor: ImportFromDropboxInteractor!
+    private var presenter: ImportFromDropboxPresenter!
+    
+    @IBOutlet private weak var caption: UILabel! {
+        didSet {
+            caption.text = TextConstants.dropbox
+        }
+    }
+    
+    @IBOutlet private weak var icon: UIImageView! {
+        didSet {
+            icon.contentMode = .center
+            icon.image = #imageLiteral(resourceName: "dropox")
+        }
+    }
+    
+    @IBOutlet private weak var customText: UILabel! {
+        didSet {
+            customText.text = TextConstants.importFromDB
+            customText.adjustsFontSizeToFitWidth()
+        }
+    }
+    
     @IBOutlet private weak var progress: UILabel! {
         didSet {
             progress.isHidden = true
+            progress.text = " "
         }
     }
+    
     @IBOutlet private weak var rotatingImage: RotatingImageView! {
         didSet {
             rotatingImage.isHidden = true
         }
     }
+    
     @IBOutlet private weak var connectButton: UIButton!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        setup()
     }
     
+    func willDisplay() {
+        rotatingImage.resumeAnimations()
+    }
+    
+    private func setup() {
+        interactor = ImportFromDropboxInteractor()
+        presenter = ImportFromDropboxPresenter()
+        
+        interactor.output = presenter
+        
+        presenter.interactor = interactor
+        presenter.view = self
+    }
+
+    
     @IBAction func connectToDropbox(_ sender: Any) {
-        //
+        presenter.startDropbox()
     }
     
 }
 
 
 // MARK: - ImportFromDropboxViewInput
-//extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
-//    
-//    func startDropboxStatus() {
-//        dropboxButton.isEnabled = false
-//        dropboxLoaderImageView.isHidden = false
-//        dropboxLoaderImageView.startInfinityRotate360Degrees(duration: 2)
-//        dropboxLoadingLabel.text = String(format: TextConstants.importFiles, String(0))
-//    }
-//    
-//    func updateDropboxStatus(progressPercent: Int) {
-//        dropboxLoadingLabel.text = String(format: TextConstants.importFiles, String(progressPercent))
-//    }
-//    
-//    func stopDropboxStatus(lastUpdateMessage: String) {
-//        dropboxButton.isEnabled = true
-//        dropboxLoaderImageView.isHidden = true
-//        dropboxLoaderImageView.stopInfinityRotate360Degrees()
-//        dropboxLoadingLabel.text = lastUpdateMessage
-//    }
-//    
-//    // MARK: Start
-//    
-//    /// nothing. maybe will be toast message
-//    func dbStartSuccessCallback() {
-//        MenloworksEventsService.shared.onDropboxTransfered()
-//    }
-//    
-//    func failedDropboxStart(errorMessage: String) {
-//        let isDropboxAuthorisationError = errorMessage.contains("invalid_access_token")
-//        if isDropboxAuthorisationError {
-//            showErrorAlert(message: TextConstants.dropboxAuthorisationError)
-//        } else {
-//            showErrorAlert(message: errorMessage)
-//        }
-//    }
-//}
+extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
+
+    func startDropboxStatus() {
+        connectButton.isEnabled = false
+        rotatingImage.isHidden = false
+        rotatingImage.startInfinityRotate360Degrees(duration: 2)
+        progress.text = String(format: TextConstants.importFiles, String(0))
+    }
+    
+    func updateDropboxStatus(progressPercent: Int) {
+        progress.text = String(format: TextConstants.importFiles, String(progressPercent))
+    }
+    
+    func stopDropboxStatus(lastUpdateMessage: String) {
+        connectButton.isEnabled = true
+        rotatingImage.isHidden = true
+        rotatingImage.stopInfinityRotate360Degrees()
+        progress.text = lastUpdateMessage
+    }
+    
+    // MARK: Start
+    
+    /// nothing. maybe will be toast message
+    func dbStartSuccessCallback() {
+        MenloworksEventsService.shared.onDropboxTransfered()
+    }
+    
+    func failedDropboxStart(errorMessage: String) {
+        let isDropboxAuthorisationError = errorMessage.contains("invalid_access_token")
+        if isDropboxAuthorisationError {
+            delegate?.showError(message: TextConstants.dropboxAuthorisationError)
+        } else {
+            delegate?.showError(message: errorMessage)
+        }
+    }
+}
