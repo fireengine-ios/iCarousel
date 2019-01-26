@@ -9,7 +9,7 @@
 import UIKit
 
 protocol InstaPickPhotoViewDelegate {
-    func didTapOnImage(_ id: String?)
+    func didTapOnImage(_ model: InstapickAnalyze?)
 }
 
 final class InstaPickPhotoView: UIView {
@@ -99,9 +99,9 @@ final class InstaPickPhotoView: UIView {
     //MARK: - Utility methods(public)
     func configureImageView(with model: InstapickAnalyze,
                             delegate: InstaPickPhotoViewDelegate? = nil) {
-        if let oldModel = self.model {
+        if let oldModel = self.model, let oldId = oldModel.fileInfo?.uuid, let newId = model.fileInfo?.uuid {
             ///logic for reuse this method on tap at small image (not pass if model same and reconfigure if thay are different)
-            guard let oldId = oldModel.fileInfo?.uuid, let newId = model.fileInfo?.uuid, oldId != newId else {
+            if oldId == newId {
                 return
             }
         }
@@ -163,7 +163,6 @@ final class InstaPickPhotoView: UIView {
     
     //MARK: Action
     @IBAction private func onImageTap(_ sender: Any) {
-        let id = model?.fileInfo?.uuid
-        delegate?.didTapOnImage(id)
+        delegate?.didTapOnImage(model)
     }
 }

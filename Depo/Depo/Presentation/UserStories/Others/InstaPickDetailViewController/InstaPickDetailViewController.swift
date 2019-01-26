@@ -38,7 +38,7 @@ final class InstaPickDetailViewController: UIViewController {
     @IBOutlet private weak var analysisLeftLabel: UILabel!
     @IBOutlet private weak var hashTagsLabel: UILabel!
     @IBOutlet private weak var copyToClipboardButton: UIButton!
-    @IBOutlet private weak var shareButton: BlueButtonWithWhiteText!
+    @IBOutlet private weak var shareButton: BlueButtonWithMediumWhiteText!
     
     @IBOutlet private weak var darkView: UIView!
     @IBOutlet private weak var containerView: UIView!
@@ -159,7 +159,8 @@ final class InstaPickDetailViewController: UIViewController {
         copyToClipboardButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         copyToClipboardButton.setTitleColor(UIColor.lrTealishTwo, for: .normal)
         
-        shareButton.titleEdgeInsets = UIEdgeInsetsMake(11, 16, 11, 16)
+        shareButton.setBackgroundColor(UIColor.white, for: .disabled)
+        shareButton.setTitleColor(ColorConstants.darcBlueColor.lighter(by: 40.0), for: .disabled)
     }
 
     private func setupTexts() {
@@ -172,6 +173,15 @@ final class InstaPickDetailViewController: UIViewController {
         copyToClipboardButton.setTitle(TextConstants.instaPickCopyHashtagsButton, for: .normal)
         
         shareButton.setTitle(TextConstants.instaPickShareButton, for: .normal)
+    }
+    
+    private func configureShareButton(isEnabled: Bool) {
+        shareButton.isEnabled = isEnabled
+        
+        let color = ColorConstants.darcBlueColor.lighter(by: isEnabled ? 0 : 40).cgColor
+        
+        shareButton.layer.borderColor = color
+        shareButton.layer.borderWidth = isEnabled ? 0 : 2
     }
     
     private func setupAnalysisLeftLabel() {
@@ -214,6 +224,8 @@ final class InstaPickDetailViewController: UIViewController {
             
             let topRatePhoto = analyzes.first
 
+            configureShareButton(isEnabled: topRatePhoto?.fileInfo?.uuid != nil)
+
             topRatePhoto?.isPicked = true
             
             dataSource.hashtags = topRatePhoto?.hashTags ?? []
@@ -222,14 +234,9 @@ final class InstaPickDetailViewController: UIViewController {
         }
     }
     
-    private func setNewSelectedPhoto(with id: String) {
-        guard let newSelectedPhotoIndex = analyzes.firstIndex(where: {
-            if let analyzeId = $0.fileInfo?.uuid {
-               return analyzeId == id
-            }
-            return false
-        }) else {
-            let error = CustomErrors.serverError("An error occurred while changing selected photo. Not found photo with id: \(id)")
+    private func setNewSelectedPhoto(with model: InstapickAnalyze) {
+        guard let newSelectedPhotoIndex = analyzes.index(of: model) else {
+            let error = CustomErrors.serverError("An error occured while changing selected photo. Photo in nil.")
             showErrorWith(message: error.localizedDescription)
             return
         }
@@ -238,17 +245,17 @@ final class InstaPickDetailViewController: UIViewController {
         
         setupPhotoViews()
         
-        let newSelectedPhoto = analyzes.first
-        dataSource.hashtags = newSelectedPhoto?.hashTags ?? []
+        dataSource.hashtags = model.hashTags
         collectionView.reloadData()
         
-        selectedPhoto = newSelectedPhoto
+        configureShareButton(isEnabled: model.fileInfo?.uuid != nil)
+        
+        selectedPhoto = model
     }
     
     private func openImage() {
-        guard let selectedPhoto = selectedPhoto, selectedPhoto.getLargeImageURL() != nil else {
-            let error = CustomErrors.serverError("There is no url for large photo.")
-            showErrorWith(message: error.localizedDescription)
+        guard let selectedPhoto = selectedPhoto, selectedPhoto.fileInfo?.uuid != nil else {
+            ///if selected photo was deleted
             return
         }
         
@@ -307,17 +314,15 @@ final class InstaPickDetailViewController: UIViewController {
 }
 
 extension InstaPickDetailViewController: InstaPickPhotoViewDelegate {
-    func didTapOnImage(_ id: String?) {
-        guard let id = id else {
-            let error = CustomErrors.serverError("Enable to get photo metadata.")
-            showErrorWith(message: error.localizedDescription)
+    func didTapOnImage(_ model: InstapickAnalyze?) {
+        guard let model = model else {
             return
         }
         
-        if let selectedPhotoId = selectedPhoto?.fileInfo?.uuid, selectedPhotoId == id {
+        if let selectedPhoto = selectedPhoto, model == selectedPhoto {
             openImage()
         } else {
-            setNewSelectedPhoto(with: id)
+            setNewSelectedPhoto(with: model)
         }
     }
 }

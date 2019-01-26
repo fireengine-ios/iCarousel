@@ -43,7 +43,7 @@ final class InstapickPopUpController: UIViewController {
     @IBOutlet private weak var containerView: UIView! {
         didSet {
             containerView.layer.masksToBounds = true
-            containerView.layer.cornerRadius = 5
+            containerView.layer.cornerRadius = Device.isIpad ? 10 : 2
         }
     }
     
@@ -132,6 +132,10 @@ final class InstapickPopUpController: UIViewController {
     private func configure() {
         connectWithInstaView.delegate = self
         connectWithInstaView.configure(instaNickname: instaNickname)
+        
+        let widthFactor: CGFloat = Device.isIpad ? 0.6 : 0.7
+        descriptionLabel.preferredMaxLayoutWidth = UIScreen.main.bounds.width * widthFactor
+        subtitleLabel.preferredMaxLayoutWidth = UIScreen.main.bounds.width * widthFactor
         
         titleLabel.text = TextConstants.instaPickAnlyze
         

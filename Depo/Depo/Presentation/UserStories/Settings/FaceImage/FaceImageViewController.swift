@@ -216,7 +216,7 @@ final class FaceImageViewController: ViewController, NibInit {
     private func checkFaceImageAndFacebookState(with group: DispatchGroup, completion: VoidHandler? = nil) {
         group.enter()
         
-        accountService.isAllowedFaceImageAndFacebook { [weak self] result in
+        accountService.getSettingsInfoPermissions { [weak self] result in
             DispatchQueue.toMain {
                 switch result {
                 case .success(let result):

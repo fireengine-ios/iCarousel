@@ -235,6 +235,14 @@ final class SearchItemResponse: ObjectRequestResponse {
     }
 }
 
+extension SearchItemResponse {
+    static func == (lhs: SearchItemResponse, rhs: SearchItemResponse) -> Bool {
+        return lhs.uuid == rhs.uuid &&
+            lhs.id == rhs.id &&
+            lhs.name == rhs.name
+    }
+}
+
 final class SearchResponse: ObjectRequestResponse {
     
     var list: Array<SearchItemResponse> = []

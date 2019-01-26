@@ -734,6 +734,7 @@
 "package_life_cancel_text" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "package_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
+"package_albanian_cancel_text" = "Package albanian cancel text";
 "package_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 
@@ -748,6 +749,7 @@
 "feature_promo_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 "feature_kktcell_cancel_text" = "You can continue to use Premium features for free since you are a KKTCELL user";
 "feature_moldcell_cancel_text" = "You can continue to use Premium features for free since you are a Moldcell user";
+"feature_albanian_cancel_text" = "Feature albanian cancel text";
 "feature_life_cancel_text" = "You can continue to use Premium features for free since you are a life:) user";
 "feature_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "feature_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
