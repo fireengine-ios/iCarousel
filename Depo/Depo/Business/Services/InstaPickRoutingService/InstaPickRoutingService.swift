@@ -99,6 +99,8 @@ final class InstaPickRoutingService {
     }
     
     private func didOpenInstaPickPopUp(instaNickname: String?) {
+        instagramNickname = nil
+
         guard let successHandler = successHandler else {
             UIApplication.showErrorAlert(message: "Success handler unexpected become nil.")
             return
@@ -111,6 +113,8 @@ final class InstaPickRoutingService {
     }
     
     private func didOpenInstaPickSelectionSegmented() {
+        instagramNickname = nil
+
         guard let successHandler = successHandler else {
             UIApplication.showErrorAlert(message: "Success handler unexpected become nil.")
             return
@@ -129,6 +133,7 @@ final class InstaPickRoutingService {
         }
         errorHandler(error)
     }
+    
 }
 
 extension InstaPickRoutingService: InstapickPopUpControllerDelegate {
