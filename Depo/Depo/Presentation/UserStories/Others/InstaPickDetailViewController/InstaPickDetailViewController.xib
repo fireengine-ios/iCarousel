@@ -50,10 +50,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nfo-vd-geH">
-                                            <rect key="frame" x="119" y="103" width="530" height="818"/>
+                                            <rect key="frame" x="119" y="98" width="530" height="828"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RC4-0c-Xb9" userLabel="Content View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="530" height="818"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="530" height="828"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDk-eY-3Lm">
                                                             <rect key="frame" x="244" y="90" width="42" height="38"/>
@@ -78,7 +78,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EU4-bu-mbr">
-                                                            <rect key="frame" x="244" y="486" width="42" height="24"/>
+                                                            <rect key="frame" x="244" y="496" width="42" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="PFw-l5-qhr">
                                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
@@ -89,7 +89,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="NV2-v7-EJx">
-                                                            <rect key="frame" x="70" y="524" width="390" height="100"/>
+                                                            <rect key="frame" x="70" y="534" width="390" height="100"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="75" id="DBQ-ot-amH">
@@ -104,16 +104,16 @@
                                                             </collectionViewFlowLayout>
                                                         </collectionView>
                                                         <stackView opaque="NO" contentMode="center" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="q5N-z4-Gtm">
-                                                            <rect key="frame" x="90.5" y="194" width="349" height="250"/>
+                                                            <rect key="frame" x="85" y="194" width="360" height="260"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="YZz-yY-rbp">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="349" height="250"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="360" height="260"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6pm-H8-NeA">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="260" height="260"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="bigView" translatesAutoresizingMaskIntoConstraints="NO" id="Ynk-f5-yeT" customClass="InstaPickPhotoView" customModule="lifebox" customModuleProvider="target">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="260"/>
                                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" secondItem="Ynk-f5-yeT" secondAttribute="height" multiplier="1:1" id="jqm-wJ-1yY"/>
@@ -129,34 +129,34 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BM4-jc-aDX">
-                                                                            <rect key="frame" x="294" y="0.0" width="55" height="250"/>
+                                                                            <rect key="frame" x="304" y="0.0" width="56" height="260"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jtO-kl-uZE">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="250"/>
+                                                                                    <rect key="frame" x="0.0" y="3" width="56" height="254"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" restorationIdentifier="smallOne" translatesAutoresizingMaskIntoConstraints="NO" id="6H1-i6-G1u" customClass="InstaPickPhotoView" customModule="lifebox" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" secondItem="6H1-i6-G1u" secondAttribute="height" multiplier="1:1" id="hXa-1r-IGA"/>
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" restorationIdentifier="smallTwo" translatesAutoresizingMaskIntoConstraints="NO" id="xHE-Hs-2sD" customClass="InstaPickPhotoView" customModule="lifebox" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="65" width="55" height="55"/>
+                                                                                            <rect key="frame" x="0.0" y="66" width="56" height="56"/>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" secondItem="xHE-Hs-2sD" secondAttribute="height" multiplier="1:1" id="yC6-iJ-Ylg"/>
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" restorationIdentifier="smallFour" translatesAutoresizingMaskIntoConstraints="NO" id="iax-U1-9TV" customClass="InstaPickPhotoView" customModule="lifebox" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="130" width="55" height="55"/>
+                                                                                            <rect key="frame" x="0.0" y="132" width="56" height="56"/>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" secondItem="iax-U1-9TV" secondAttribute="height" multiplier="1:1" id="Dj5-UC-mxm"/>
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" restorationIdentifier="smallThree" translatesAutoresizingMaskIntoConstraints="NO" id="QD4-Gc-Iaq" customClass="InstaPickPhotoView" customModule="lifebox" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="195" width="55" height="55"/>
+                                                                                            <rect key="frame" x="0.0" y="198" width="56" height="56"/>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" secondItem="QD4-Gc-Iaq" secondAttribute="height" multiplier="1:1" id="Da0-D2-fGG"/>
@@ -179,8 +179,8 @@
                                                                                 <constraint firstItem="jtO-kl-uZE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BM4-jc-aDX" secondAttribute="top" id="XaH-r7-QzU"/>
                                                                                 <constraint firstItem="jtO-kl-uZE" firstAttribute="centerY" secondItem="BM4-jc-aDX" secondAttribute="centerY" id="bxL-2S-L4B"/>
                                                                                 <constraint firstItem="jtO-kl-uZE" firstAttribute="leading" secondItem="BM4-jc-aDX" secondAttribute="leading" id="jHu-2X-0Ai"/>
-                                                                                <constraint firstAttribute="width" constant="45" id="ozh-iU-ZPR">
-                                                                                    <variation key="heightClass=regular-widthClass=regular" constant="55"/>
+                                                                                <constraint firstAttribute="width" constant="46" id="ozh-iU-ZPR">
+                                                                                    <variation key="heightClass=regular-widthClass=regular" constant="56"/>
                                                                                 </constraint>
                                                                             </constraints>
                                                                         </view>
@@ -189,8 +189,8 @@
                                                                 </stackView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="195" id="M3R-jN-3o8">
-                                                                    <variation key="heightClass=regular-widthClass=regular" constant="250"/>
+                                                                <constraint firstAttribute="height" constant="200" id="M3R-jN-3o8">
+                                                                    <variation key="heightClass=regular-widthClass=regular" constant="260"/>
                                                                 </constraint>
                                                             </constraints>
                                                         </stackView>
@@ -206,7 +206,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GN-cn-ujP">
-                                                            <rect key="frame" x="242" y="660" width="46" height="19"/>
+                                                            <rect key="frame" x="242" y="670" width="46" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="KHs-xd-XGe">
                                                                     <variation key="heightClass=regular-widthClass=regular" constant="19"/>
@@ -218,7 +218,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6o-kD-Nrz" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
-                                                            <rect key="frame" x="156.5" y="701" width="217" height="57"/>
+                                                            <rect key="frame" x="156.5" y="711" width="217" height="57"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="217" id="A9i-uP-amv"/>
                                                                 <constraint firstAttribute="height" constant="46" id="n7N-Wy-GFN">

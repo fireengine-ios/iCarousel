@@ -14,14 +14,11 @@ protocol InstaPickPhotoViewDelegate {
 
 final class InstaPickPhotoView: UIView {
     
-    private enum ConstraintConstants {
-        static let rateConstant: CGFloat      = isIPad ? 10.25 : 7.75
-        static let imageViewConstant: CGFloat = isIPad ? 26.5 : 22.0
-        static let containerConstant: CGFloat = isIPad ? 27.5 : 22.5
-    }
-    
     private static let bigViewId = "bigView"
-    private static let isIPad = Device.isIpad
+    
+    private let rateConstant: CGFloat      = Device.isIpad ? 10.5 : 8
+    private let imageViewConstant: CGFloat = Device.isIpad ? 27 : 22.5
+    private let containerConstant: CGFloat = Device.isIpad ? 28 : 23
     
     @IBOutlet private var view: UIView!
     
@@ -60,17 +57,16 @@ final class InstaPickPhotoView: UIView {
         let isIPad = Device.isIpad
         let isBigView = restorationIdentifier == InstaPickPhotoView.bigViewId
         
-        let bigViewFontSize: CGFloat = isIPad ? 20 : 14
-        let smallViewFontSize: CGFloat = isIPad ? 14 : 10
+        if isBigView {
+            rateLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 20 : 14)
+        } else {
+            rateLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 14 : 10)
+        }
+        rateLabel.textColor = .white
         
-        let rateFontSize: CGFloat = isBigView ? bigViewFontSize : smallViewFontSize
-        
-        pickedLabel.font = UIFont.TurkcellSaturaBolFont(size: bigViewFontSize)
+        pickedLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 20 : 14)
         pickedLabel.textColor = .white
         pickedLabel.text = TextConstants.instaPickPickedLabel
-        
-        rateLabel.font = UIFont.TurkcellSaturaBolFont(size: rateFontSize)
-        rateLabel.textColor = .white
     }
 
     private func setup() {
@@ -99,11 +95,11 @@ final class InstaPickPhotoView: UIView {
             pickedView.layer.cornerRadius = pickedView.bounds.height * 0.5
         } else {
             ///has static size for iPhone/iPad + fix wrong layer corner radius
-            imageView.layer.cornerRadius = ConstraintConstants.imageViewConstant
+            imageView.layer.cornerRadius = imageViewConstant
             
-            contentView.layer.cornerRadius = ConstraintConstants.containerConstant
+            contentView.layer.cornerRadius = containerConstant
             
-            rateView.layer.cornerRadius = ConstraintConstants.rateConstant
+            rateView.layer.cornerRadius = rateConstant
         }
     }
     
@@ -186,6 +182,7 @@ final class InstaPickPhotoView: UIView {
     
     //MARK: Action
     @IBAction private func onImageTap(_ sender: Any) {
+        setupLayers()
         delegate?.didTapOnImage(model)
     }
 }
