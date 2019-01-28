@@ -45,7 +45,7 @@ final class GSMUserInputCell: BaseUserInputCellView {
         let doneButton = UIBarButtonItem(title: TextConstants.nextTitle,
                                          target: self,
                                          selector: #selector(nextButtonPressed(sender:)))
-        doneButton.tintColor = UIColor(51, 204, 204, 1.0)
+        doneButton.tintColor = UIColor.lrTealish
         
         let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
 
