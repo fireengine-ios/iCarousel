@@ -129,7 +129,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     
     private func faceImageAllowed(completion: @escaping (_ result: Bool) -> Void) {
         let accountService = AccountService()
-        accountService.isAllowedFaceImageAndFacebook(handler: { [weak self] response in
+        accountService.getSettingsInfoPermissions(handler: { [weak self] response in
             switch response {
             case .success(let result):
                 guard let allowed = result.isFaceImageAllowed else {

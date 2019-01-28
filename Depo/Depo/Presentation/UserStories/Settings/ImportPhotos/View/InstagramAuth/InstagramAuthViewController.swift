@@ -26,6 +26,7 @@ class InstagramAuthViewController: ViewController {
     private var instagramAccessToken: String?
     
     private lazy var instagramService = InstagramService()
+    private lazy var accountService = AccountService()
     
     weak var delegate: InstagramAuthViewControllerDelegate?
     
@@ -72,15 +73,33 @@ class InstagramAuthViewController: ViewController {
         showSpiner()
         if let instagramAccessToken = instagramAccessToken {
             instagramService.checkInstagramLogin(instagramAccessToken: instagramAccessToken) { [weak self] response in
-                self?.hideSpiner()
                 switch response {
                 case .success(_):
-                    self?.delegate?.instagramAuthSuccess()
-                    self?.navigationController?.popViewController(animated: true)
+                    self?.changeLikePermissionForInstagram()
                 case .failed(let error):
+                    self?.hideSpiner()
                     UIApplication.showErrorAlert(message: error.localizedDescription)
                     self?.instagramAuthCancel()
                 }
+            }
+        }
+    }
+    
+    private func changeLikePermissionForInstagram() {
+        accountService.changeInstapickAllowed(isInstapickAllowed: true) { [weak self] response in
+            self?.hideSpiner()
+
+            switch response {
+            case .success(let result):
+                if result.isInstapickAllowed == true {
+                    self?.delegate?.instagramAuthSuccess()
+                    self?.navigationController?.popViewController(animated: true)
+                } else {
+                    self?.instagramAuthCancel()
+                }
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.localizedDescription)
+                self?.instagramAuthCancel()
             }
         }
     }

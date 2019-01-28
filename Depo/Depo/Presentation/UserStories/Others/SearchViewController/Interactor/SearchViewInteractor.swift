@@ -97,7 +97,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     }
     
     private func faceImageAllowed(completion: @escaping (_ result: Bool) -> Void) {
-        accountService.isAllowedFaceImageAndFacebook(handler: { response in
+        accountService.getSettingsInfoPermissions(handler: { response in
             switch response {
             case .success(let result):
                 guard let allowed = result.isFaceImageAllowed else {
