@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad9_7" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VsN-4v-Hif">
-                    <rect key="frame" x="146" y="0.0" width="83" height="46"/>
+                    <rect key="frame" x="40" y="0.0" width="295" height="46"/>
                     <subviews>
                         <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="InstagramIcon" translatesAutoresizingMaskIntoConstraints="NO" id="f0H-qI-rPn">
                             <rect key="frame" x="8" y="14.5" width="17" height="17"/>
@@ -68,7 +68,7 @@
                     </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejX-OI-VUM">
-                    <rect key="frame" x="0.0" y="10" width="375" height="46"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -81,8 +81,8 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="VsN-4v-Hif" secondAttribute="bottom" id="9RT-CA-T00"/>
                 <constraint firstItem="ejX-OI-VUM" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="DZp-2L-WSv"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VsN-4v-Hif" secondAttribute="trailing" priority="250" constant="16" id="DlC-89-8Tt"/>
-                <constraint firstItem="VsN-4v-Hif" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="250" constant="16" id="If3-v8-Kgc"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VsN-4v-Hif" secondAttribute="trailing" priority="250" constant="40" id="DlC-89-8Tt"/>
+                <constraint firstItem="VsN-4v-Hif" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="250" constant="40" id="If3-v8-Kgc"/>
                 <constraint firstItem="ejX-OI-VUM" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="K7Q-if-2WM"/>
                 <constraint firstItem="VsN-4v-Hif" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Kyt-ym-6Ip"/>
                 <constraint firstItem="ejX-OI-VUM" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="XfE-tj-Yzi"/>
