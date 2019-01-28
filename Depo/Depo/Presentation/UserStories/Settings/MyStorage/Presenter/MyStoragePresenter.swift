@@ -21,7 +21,7 @@ final class MyStoragePresenter {
                 router.showSubTurkcellOpenAlert(with: TextConstants.offersActivateUkranian)
             case .cyprus:
                 router.showSubTurkcellOpenAlert(with: TextConstants.offersActivateCyprus)
-            case .moldovian, .turkcell, .life, .all: break
+            case .moldovian, .turkcell, .life, .all, .albanian: break
             }
         }
     }

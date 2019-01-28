@@ -505,8 +505,10 @@ class MenloworksTagsService {
     
     private func sendFIRStatus() {
         AccountService().faceImageAllowed(success: { response in
-            guard let response = response as? FaceImageAllowedResponse,
-                  let status = response.isFaceImageAllowed else { return }
+            guard let response = response as? SettingsInfoPermissionsResponse,
+                  let status = response.isFaceImageAllowed else {
+                    return
+            }
             let tag = MenloworksTags.FaceImageRecognitionStatus(isEnabled: status)
             self.hitTag(tag)
         }, fail: { _ in })

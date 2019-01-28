@@ -11,7 +11,8 @@ import Foundation
 final class InstaPickRoutingService {
     typealias ViewControllerHandler  = (UIViewController) -> ()
 
-    private var instaService = InstagramService()
+    private lazy var instaService = InstagramService()
+    private lazy var accountService = AccountService()
     
     private var successHandler: ViewControllerHandler?
     private var errorHandler: FailResponse?
@@ -61,9 +62,15 @@ final class InstaPickRoutingService {
     }
     
     private func checkInstagramLikePermission() {
-        //TODO: - new api will be soon
-        let hasPermission = false
-        got(likePermission: hasPermission)
+        accountService.getSettingsInfoPermissions { [weak self] response in
+            switch response {
+            case .success(let result):
+                self?.got(likePermission: result.isInstapickAllowed == true)
+            case .failed(let error):
+                let errorResponse = ErrorResponse.error(error)
+                self?.showError(with: errorResponse)
+            }
+        }
     }
     
     private func got(likePermission: Bool) {
