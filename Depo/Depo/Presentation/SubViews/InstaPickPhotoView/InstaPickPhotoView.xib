@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -24,7 +24,7 @@
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGb-yz-vuB" customClass="RadialGradientableView" customModule="lifebox" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -62,10 +62,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4v-SO-HCe" customClass="RadialGradientableView" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="170" y="140" width="30" height="30"/>
+                    <rect key="frame" x="165" y="137.5" width="35" height="35"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLh-jt-PJn">
-                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                            <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -98,7 +98,9 @@
                 <constraint firstItem="JGb-yz-vuB" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="aGT-CU-G17"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rIZ-bL-dv1" secondAttribute="trailing" id="ado-NY-6hL"/>
                 <constraint firstItem="JGb-yz-vuB" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="ejy-vp-oBY"/>
-                <constraint firstItem="R4v-SO-HCe" firstAttribute="height" secondItem="JGb-yz-vuB" secondAttribute="height" multiplier="1:10" constant="10" id="iXh-Tg-ZXc"/>
+                <constraint firstItem="R4v-SO-HCe" firstAttribute="height" secondItem="JGb-yz-vuB" secondAttribute="height" multiplier="1:8" constant="10" id="iXh-Tg-ZXc">
+                    <variation key="heightClass=regular-widthClass=regular" constant="14"/>
+                </constraint>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="centerX" secondItem="pnx-lf-EgO" secondAttribute="centerX" constant="41" id="sLr-56-20U"/>
                 <constraint firstItem="R4v-SO-HCe" firstAttribute="trailing" secondItem="JGb-yz-vuB" secondAttribute="trailing" id="tmR-ER-nSn"/>
                 <constraint firstItem="R4v-SO-HCe" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" multiplier="1.5" constant="5" id="vNj-Nb-Pf0"/>

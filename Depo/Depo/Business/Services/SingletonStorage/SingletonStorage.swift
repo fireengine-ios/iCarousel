@@ -14,7 +14,7 @@ class SingletonStorage {
     
     var isAppraterInited: Bool = false
     var accountInfo: AccountInfoResponse?
-    var faceImageSettings: FaceImageAllowedResponse?
+    var faceImageSettings: SettingsInfoPermissionsResponse?
     var signUpInfo: RegistrationUserInfoModel?
     var activeUserSubscription: ActiveSubscriptionResponse?
     var referenceToken: String?
@@ -68,13 +68,13 @@ class SingletonStorage {
         }
     }
     
-    private func getFaceImageRecognitionSettingsForUser(completion: @escaping (_ result: FaceImageAllowedResponse) -> Void, fail: @escaping (ErrorResponse) -> Void) {
+    private func getFaceImageRecognitionSettingsForUser(completion: @escaping (_ result: SettingsInfoPermissionsResponse) -> Void, fail: @escaping (ErrorResponse) -> Void) {
         if let unwrapedFIRStatus = faceImageSettings {
             completion(unwrapedFIRStatus)
             return
         }
         let accountService = AccountService()
-        accountService.isAllowedFaceImageAndFacebook(handler: { [weak self] response in
+        accountService.getSettingsInfoPermissions(handler: { [weak self] response in
             switch response {
             case .success(let result):
                 self?.faceImageSettings = result

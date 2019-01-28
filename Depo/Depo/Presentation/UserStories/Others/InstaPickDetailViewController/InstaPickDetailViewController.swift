@@ -42,8 +42,8 @@ final class InstaPickDetailViewController: UIViewController {
     
     @IBOutlet private weak var darkView: UIView!
     @IBOutlet private weak var containerView: UIView!
-    @IBOutlet private weak var smallPhotosContainerView: UIView!
     @IBOutlet private weak var smallPhotosStackView: UIStackView!
+    @IBOutlet private weak var smallPhotosContainerView: UIView!
     @IBOutlet private weak var photosStackView: UIStackView!
     
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -134,7 +134,7 @@ final class InstaPickDetailViewController: UIViewController {
         }
         
         if maxIndex == 0 {
-            photosStackView.removeArrangedSubview(smallPhotosContainerView)
+            smallPhotosContainerView.isHidden = true
         }
     }
     
@@ -147,16 +147,18 @@ final class InstaPickDetailViewController: UIViewController {
     }
     
     private func setupFonts() {
-        topLabel.font = UIFont.TurkcellSaturaBolFont(size: 28)
+        let isIPad = Device.isIpad
+        
+        topLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 38 : 28)
         topLabel.textColor = ColorConstants.darcBlueColor
         
-        analysisLeftLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        analysisLeftLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
         analysisLeftLabel.textColor = ColorConstants.textGrayColor
         
-        hashTagsLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        hashTagsLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
         hashTagsLabel.textColor = ColorConstants.darcBlueColor
         
-        copyToClipboardButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        copyToClipboardButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 19 : 14)
         copyToClipboardButton.setTitleColor(UIColor.lrTealishTwo, for: .normal)
         
         shareButton.setBackgroundColor(UIColor.white, for: .disabled)
