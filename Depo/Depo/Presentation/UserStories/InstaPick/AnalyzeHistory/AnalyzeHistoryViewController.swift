@@ -160,6 +160,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                                             self?.hideSpiner()
                                             controller.close()
                                          }) { [weak self] controller in
+                                            self?.hideSpiner()
                                             controller.close {
                                                 self?.onPurchase()
                                             }
