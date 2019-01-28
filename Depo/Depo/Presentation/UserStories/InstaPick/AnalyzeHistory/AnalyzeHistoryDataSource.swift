@@ -16,9 +16,21 @@ protocol AnalyzeHistoryDataSourceDelegate: class {
     func onUpdateSelectedItems(count: Int)
 }
 
-private enum AnalyzeHistorySectionType: Int {
-    case cards = 0
+private enum AnalyzeHistoryCardType: Int {
+    case analysis
+    case free
+}
+
+private enum AnalyzeHistorySectionType {
+    case cards(AnalyzeHistoryCardType)
     case photos
+    
+    var value: Int {
+        switch self {
+        case .cards: return 0
+        case .photos: return 1
+        }
+    }
     
     var numberOfColumns: CGFloat {
         return Device.isIpad ? 7 : 4
@@ -26,7 +38,11 @@ private enum AnalyzeHistorySectionType: Int {
     
     var cellType: UICollectionViewCell.Type {
         switch self {
-        case .cards: return InstapickAnalysisCell.self
+        case .cards(let type):
+            switch type {
+            case .analysis: return InstapickAnalysisCell.self
+            case .free: return InstapickFreeCell.self
+            }
         case .photos: return InstapickAnalyzeHistoryPhotoCell.self
         }
     }
@@ -54,7 +70,11 @@ private enum AnalyzeHistorySectionType: Int {
     
     func cellSize(collectionViewWidth width: CGFloat) -> CGSize {
         switch self {
-        case .cards: return CGSize(width: width, height: 126)
+        case .cards(let type):
+            switch type {
+            case .analysis: return CGSize(width: width, height: 126)
+            case .free: return CGSize(width: width, height: 96)
+            }
         case .photos:
             let cellWidth = (width - sectionInsets.left - sectionInsets.right - interitemSpacing * (numberOfColumns - 1)) / numberOfColumns
             return CGSize(width: cellWidth, height: cellWidth + 28)
@@ -62,18 +82,26 @@ private enum AnalyzeHistorySectionType: Int {
     }
 }
 
+extension AnalyzeHistorySectionType: Equatable {
+    static func == (lhs: AnalyzeHistorySectionType, rhs: AnalyzeHistorySectionType) -> Bool {
+        return lhs.value == rhs.value
+    }
+}
+
 final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     
     private var collectionView: UICollectionView!
     
-    private let sections: [AnalyzeHistorySectionType] = [.cards, .photos]
+    private var sections: [AnalyzeHistorySectionType] = [.cards(.analysis), .photos]
     private var items = [InstapickAnalyze]()
     private(set) var selectedItems = [InstapickAnalyze]()
     
-    private(set) var analysisCount = InstapickAnalyzesCount(left: 0, total: 0) {
+    private(set) var analysisCount: InstapickAnalyzesCount? {
         didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadSections(IndexSet(arrayLiteral: AnalyzeHistorySectionType.cards.rawValue))
+            if let index = indexForCardsSection() {
+                DispatchQueue.main.async {
+                    self.collectionView.reloadSections(IndexSet(arrayLiteral: index))
+                }  
             }
         }
     }
@@ -99,6 +127,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         
         collectionView.alwaysBounceVertical = true
         collectionView.register(nibCell: InstapickAnalysisCell.self)
+        collectionView.register(nibCell: InstapickFreeCell.self)
         collectionView.register(nibCell: InstapickAnalyzeHistoryPhotoCell.self)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -111,7 +140,19 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         return items[safe: indexPath.item]
     }
     
+    private func indexForCardsSection() -> Int? {
+        for (index, section) in sections.enumerated() {
+            if section == .cards(.analysis) || section == .cards(.free) {
+                return index
+            }
+        }
+        return nil
+    }
+    
     func reloadCards(with analysisCount: InstapickAnalyzesCount) {
+        if let index = indexForCardsSection() {
+            sections[index] = .cards(analysisCount.isFree ? .free : .analysis)
+        }
         self.analysisCount = analysisCount
     }
     
@@ -129,13 +170,17 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     }
     
     private func mergeItems(with newItems: [InstapickAnalyze]) {
+        guard let section = sections.index(of: .photos) else {
+            return
+        }
+        
         let uuids = items.map {$0.requestIdentifier}
         
         var insertIndexPaths = [IndexPath]()
         
         newItems.forEach { item in
             if !uuids.contains(item.requestIdentifier) {
-                insertIndexPaths.append(IndexPath(item: items.count, section: AnalyzeHistorySectionType.photos.rawValue))
+                insertIndexPaths.append(IndexPath(item: items.count, section: section))
                 self.items.append(item)
             }
         }
@@ -146,10 +191,14 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     }
     
     func deleteSelectedItems(completion: VoidHandler?) {
+        guard let section = sections.index(of: .photos) else {
+            return
+        }
+        
         var deleteIndexPaths = [IndexPath]()
         selectedItems.forEach { item in
             if let index = self.items.index(of: item) {
-                deleteIndexPaths.append(IndexPath(item: index, section: AnalyzeHistorySectionType.photos.rawValue))
+                deleteIndexPaths.append(IndexPath(item: index, section: section))
             }
         }
         
@@ -192,7 +241,7 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch sections[section] {
-        case .cards: return 1
+        case .cards: return analysisCount != nil ? 1 : 0
         case .photos: return items.count
         }
     }
@@ -204,8 +253,8 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         switch sections[indexPath.section] {
         case .cards:
-            if let cell = cell as? InstapickAnalysisCell {
-                cell.setup(with: analysisCount)
+            if let cell = cell as? InstapickAnalysisCell, let count = analysisCount {
+                cell.setup(with: count)
                 cell.delegate = self
             }
         case .photos:
@@ -236,7 +285,7 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
 
 extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard indexPath.section == AnalyzeHistorySectionType.photos.rawValue else {
+        guard let photosSection = sections.index(of: .photos), photosSection == indexPath.section else {
             return
         }
         
