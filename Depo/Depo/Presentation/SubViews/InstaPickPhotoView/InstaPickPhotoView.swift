@@ -182,7 +182,6 @@ final class InstaPickPhotoView: UIView {
     
     //MARK: Action
     @IBAction private func onImageTap(_ sender: Any) {
-        setupLayers()
         delegate?.didTapOnImage(model)
     }
 }
