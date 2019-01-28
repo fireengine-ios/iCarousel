@@ -137,11 +137,18 @@ extension InstagramAccountConnectionCell: ImportFromInstagramViewInput {
     
     // MARK: Status
     
-    func instagramStatusSuccess() {
+    func instagramStatusSuccess(username: String?) {
+        if let username = username {
+            connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
+            connectedAs.isHidden = false
+        } else {
+            connectedAs.isHidden = true
+        }
         isConnected = true
     }
     
     func instagramStatusFailure() {
+        connectedAs.isHidden = true
         isConnected = false
     }
     
@@ -164,6 +171,7 @@ extension InstagramAccountConnectionCell: ImportFromInstagramViewInput {
     // MARK: Stop
     
     func instagramStopSuccess() {
+        connectedAs.isHidden = true
         isConnected = false
     }
     

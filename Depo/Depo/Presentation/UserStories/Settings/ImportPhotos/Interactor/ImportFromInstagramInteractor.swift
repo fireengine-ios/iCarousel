@@ -22,7 +22,7 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
                 let isConnected = response.instagram
                 else { return }
             if isConnected {
-                self?.getSyncStatus()
+                self?.getSyncStatus(username: response.instagramUsername)
             } else {
                 DispatchQueue.main.async {
                     self?.instOutput?.syncStatusFailure(errorMessage: "Instagram is not connected")
@@ -36,13 +36,13 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
         })
     }
     
-    private func getSyncStatus() {
+    private func getSyncStatus(username: String?) {
         instService.getSyncStatus(success: { [weak self] response in
             guard let response = response as? SocialSyncStatusResponse,
                 let status = response.status
                 else { return }
             DispatchQueue.main.async {
-                self?.instOutput?.syncStatusSuccess(status: status)
+                self?.instOutput?.syncStatusSuccess(status: status, username: username)
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async {

@@ -75,10 +75,10 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
     
     // MARK: sync status
     
-    func syncStatusSuccess(status: Bool) {
+    func syncStatusSuccess(status: Bool, username: String?) {
         view?.stopActivityIndicator()
-        if status == true {
-            view?.instagramStatusSuccess()
+        if status {
+            view?.instagramStatusSuccess(username: username)
             analyticsService.track(event: .importInstagram)
         } else {
             view?.instagramStatusFailure()

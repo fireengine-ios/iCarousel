@@ -69,7 +69,7 @@ protocol ImportFromInstagramInteractorOutput: class {
     func connectionSuccess(isConnected: Bool)
     func connectionFailure(errorMessage: String)
     
-    func syncStatusSuccess(status: Bool)
+    func syncStatusSuccess(status: Bool, username: String?)
     func syncStatusFailure(errorMessage: String)
     
     func configSuccess(instagramConfig: InstagramConfigResponse)
