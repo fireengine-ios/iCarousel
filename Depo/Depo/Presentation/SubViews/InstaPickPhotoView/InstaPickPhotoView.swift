@@ -14,7 +14,14 @@ protocol InstaPickPhotoViewDelegate {
 
 final class InstaPickPhotoView: UIView {
     
+    private enum ConstraintConstants {
+        static let rateConstant: CGFloat      = isIPad ? 10.25 : 7.75
+        static let imageViewConstant: CGFloat = isIPad ? 26.5 : 22.0
+        static let containerConstant: CGFloat = isIPad ? 27.5 : 22.5
+    }
+    
     private static let bigViewId = "bigView"
+    private static let isIPad = Device.isIpad
     
     @IBOutlet private var view: UIView!
     
@@ -50,12 +57,19 @@ final class InstaPickPhotoView: UIView {
     
     //MARK: - Utility methods(private)
     private func setupFonts() {
+        let isIPad = Device.isIpad
         let isBigView = restorationIdentifier == InstaPickPhotoView.bigViewId
-        pickedLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        
+        let bigViewFontSize: CGFloat = isIPad ? 20 : 14
+        let smallViewFontSize: CGFloat = isIPad ? 14 : 10
+        
+        let rateFontSize: CGFloat = isBigView ? bigViewFontSize : smallViewFontSize
+        
+        pickedLabel.font = UIFont.TurkcellSaturaBolFont(size: bigViewFontSize)
         pickedLabel.textColor = .white
         pickedLabel.text = TextConstants.instaPickPickedLabel
         
-        rateLabel.font = UIFont.TurkcellSaturaBolFont(size: isBigView ? 14 : 8)
+        rateLabel.font = UIFont.TurkcellSaturaBolFont(size: rateFontSize)
         rateLabel.textColor = .white
     }
 
@@ -74,13 +88,23 @@ final class InstaPickPhotoView: UIView {
     }
     
     private func setupLayers() {
-        imageView.layer.cornerRadius = imageView.bounds.height * 0.5
+        ///Big view may change size on different iPhone's screen width
+        if restorationIdentifier == InstaPickPhotoView.bigViewId {
+            imageView.layer.cornerRadius = imageView.bounds.height * 0.5
 
-        contentView.layer.cornerRadius = contentView.bounds.height * 0.5
-        
-        rateView.layer.cornerRadius = rateView.bounds.height * 0.5
-
-        pickedView.layer.cornerRadius = pickedView.bounds.height * 0.5
+            contentView.layer.cornerRadius = contentView.bounds.height * 0.5
+            
+            rateView.layer.cornerRadius = rateView.bounds.height * 0.5
+            
+            pickedView.layer.cornerRadius = pickedView.bounds.height * 0.5
+        } else {
+            ///has static size for iPhone/iPad + fix wrong layer corner radius
+            imageView.layer.cornerRadius = ConstraintConstants.imageViewConstant
+            
+            contentView.layer.cornerRadius = ConstraintConstants.containerConstant
+            
+            rateView.layer.cornerRadius = ConstraintConstants.rateConstant
+        }
     }
     
     private func setupView() {
@@ -91,7 +115,6 @@ final class InstaPickPhotoView: UIView {
         }
         
         view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         addSubview(view)
     }
