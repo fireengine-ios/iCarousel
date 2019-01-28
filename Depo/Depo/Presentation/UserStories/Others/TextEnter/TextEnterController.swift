@@ -86,6 +86,7 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
                                          target: self,
                                          selector: #selector(donePicker))
         let pickerToolBar = barButtonItemsWithRitht(button: doneButton)
+        doneButton.tintColor = UIColor(51, 204, 204, 1.0)
         pickerContainer.addSubview(pickerToolBar)
         pickerView.dataSource = dataSource
         pickerView.delegate = dataSource
