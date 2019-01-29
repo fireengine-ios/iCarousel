@@ -8,7 +8,16 @@
 
 import UIKit
 
+protocol InstaPickSelectionSegmentedControllerDelegate {
+    func didSelectItem(_ selectedItem: SearchItemResponse)
+    func didDeselectItem(_ deselectItem: SearchItemResponse)
+}
+
 final class InstaPickSelectionSegmentedController: UIViewController {
+    
+    var selectedItems = [SearchItemResponse]()
+    private var currentSelectingCount = 0
+    private var selectionState = PhotoSelectionController.SelectionState.selecting
     
     private let maxSelectingLimit = 5
     private var selectingLimit = 0
@@ -32,7 +41,7 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         return analyzeButton
     }()
     
-    private var viewControllers: [UIViewController] = []
+    private var viewControllers: [PhotoSelectionController] = []
     
     private let instapickService: InstapickService = factory.resolve()
     
@@ -139,19 +148,15 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     
     /// one time called
     private func setupScreenWithSelectingLimit(_ selectingLimit: Int) {
-        viewControllers = [PhotoSelectionController(title: "Photos", selectingLimit: selectingLimit)]
+        viewControllers = [PhotoSelectionController(title: "Photos", selectingLimit: selectingLimit, delegate: self),
+                           PhotoSelectionController(title: "Photos 2", selectingLimit: selectingLimit, delegate: self)]
         
         /// temp code
         // TODO: remove
-        let vc1 = UIViewController()
-        vc1.view.backgroundColor = .red
-        vc1.title = "Placeholder 1"
-        viewControllers.append(vc1)
-        
-        let vc2 = UIViewController()
-        vc2.view.backgroundColor = .blue
-        vc2.title = "Placeholder 2"
-        viewControllers.append(vc2)
+//        let vc1 = UIViewController()
+//        vc1.view.backgroundColor = .red
+//        vc1.title = "Placeholder 1"
+//        viewControllers.append(vc1)
         
         DispatchQueue.toMain {
             self.selectController(at: 0)
@@ -251,5 +256,60 @@ extension InstaPickSelectionSegmentedController {
         navigationBar.isTranslucent = false
         
         return navVC
+    }
+}
+
+extension InstaPickSelectionSegmentedController: PhotoSelectionControllerDelegate {
+    func canSelectItems() -> Bool {
+        switch selectionState {
+        case .selecting:
+            return true
+        case .ended:
+            return false
+        }
+    }
+    
+    func selectionController(_ controller: PhotoSelectionController, didSelectItem item: SearchItemResponse) {
+        
+        for childController in viewControllers {
+            guard childController != controller else {
+                continue
+            }
+            childController.didSelectItem(item)
+        }
+        
+        selectedItems.append(item)
+        updateTitle()
+        
+        let selectedCount = selectedItems.count
+        let isReachedLimit = (selectedCount == selectingLimit)
+        
+        if isReachedLimit {
+            selectionState = .ended
+        } else {
+            selectionState = .selecting
+        }
+    }
+    
+    func selectionController(_ controller: PhotoSelectionController, didDeselectItem item: SearchItemResponse) {
+        for childController in viewControllers {
+            guard childController != controller else {
+                continue
+            }
+            childController.didDeselectItem(item)
+        }
+        
+        /// not working
+        ///selectedItems.remove(item)
+        for index in (0..<selectedItems.count).reversed() where selectedItems[index] == item {
+            selectedItems.remove(at: index)
+        }
+        
+        selectionState = .selecting
+        updateTitle()
+    }
+    
+    private func updateTitle() {
+        navigationItem.title = "Photos Selected (\(selectedItems.count))"
     }
 }
