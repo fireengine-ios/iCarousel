@@ -10,6 +10,9 @@ import UIKit
 
 final class InstaPickSelectionSegmentedController: UIViewController {
     
+    private let maxSelectingLimit = 5
+    private var selectingLimit = 0
+    
     private let topView = UIView()
     private let containerView = UIView()
     private let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
@@ -29,7 +32,9 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         return analyzeButton
     }()
     
-    private var viewControllers: [UIViewController] = [PhotoSelectionController()]
+    private var viewControllers: [UIViewController] = []
+    
+    private let instapickService: InstapickService = factory.resolve()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -106,20 +111,52 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getSelectingLimitAndStart()
+    }
+    
+    /// one time called
+    private func getSelectingLimitAndStart() {
+        instapickService.getAnalyzesCount { [weak self] result in
+            guard let `self` = self else {
+                return
+            }
+            
+            switch result {
+            case .success(let analyzesCount):
+                
+                if analyzesCount.left < self.maxSelectingLimit {
+                    self.selectingLimit = analyzesCount.left
+                } else {
+                    self.selectingLimit = self.maxSelectingLimit
+                }
+                self.setupScreenWithSelectingLimit(self.selectingLimit)
+                
+            case .failed(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    /// one time called
+    private func setupScreenWithSelectingLimit(_ selectingLimit: Int) {
+        viewControllers = [PhotoSelectionController(title: "Photos", selectingLimit: selectingLimit)]
+        
         /// temp code
         // TODO: remove
         let vc1 = UIViewController()
         vc1.view.backgroundColor = .red
         vc1.title = "Placeholder 1"
         viewControllers.append(vc1)
-
+        
         let vc2 = UIViewController()
         vc2.view.backgroundColor = .blue
         vc2.title = "Placeholder 2"
         viewControllers.append(vc2)
         
-        selectController(at: 0)
-        setupSegmentedControl()
+        DispatchQueue.toMain {
+            self.selectController(at: 0)
+            self.setupSegmentedControl()
+        }
     }
     
     private func setupSegmentedControl() {

@@ -18,7 +18,7 @@ final class PhotoSelectionController: UIViewController {
     private var isLoadingMore = false
     private var isLoadingMoreFinished = false
     
-    private let selectingLimit = 5
+    private var selectingLimit = 0
     private var selectionState = SelectionState.selecting
     
     private var photos = [SearchItemResponse]()
@@ -63,16 +63,35 @@ final class PhotoSelectionController: UIViewController {
         label.numberOfLines = 0
         //label.textColor
         //label.font
+        label.text = "Loading..."
         return label
     }()
+    
+    convenience init(title: String, selectingLimit: Int) {
+        self.init(nibName: nil, bundle: nil)
+        self.title = title
+        self.selectingLimit = selectingLimit
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(collectionView)
-        title = "Photos"
         
-        emptyMessageLabel.text = "Loading..."
         loadMore()
         collectionView.reloadData()
     }
