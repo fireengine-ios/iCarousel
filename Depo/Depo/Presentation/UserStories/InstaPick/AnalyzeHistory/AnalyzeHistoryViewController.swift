@@ -137,8 +137,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     @IBAction private func newAnalysisAction(_ sender: Any) {
         showSpiner()
-        if dataSource.analysisCount.left > 0 {
-            
+    
+        if let count = dataSource.analysisCount?.left, count > 0 {
             instapickRoutingService.getViewController(success: { [weak self] controller in
                 self?.hideSpiner()
                 
