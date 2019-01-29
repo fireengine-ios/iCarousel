@@ -316,10 +316,10 @@ final class InstapickAnalyzesCount {
     }
     
     init?(json: JSON) {
+        ///there is "used" key from server response. it is "total - remaining"
         guard
             let left = json["remaining"].int,
             let total = json["total"].int,
-///            let used = json["used"].int, - there is "used" key from server response. it is "total - remaining"
             let isFree = json["isFree"].bool
         else {
             assertionFailure()
