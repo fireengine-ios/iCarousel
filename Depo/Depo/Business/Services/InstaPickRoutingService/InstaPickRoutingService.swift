@@ -107,7 +107,7 @@ final class InstaPickRoutingService {
                     if analysisCount.left > 0 {
                         self?.prepareToOpenController()
                     } else {
-                        self?.didOpenAnalyzesHistoryController()
+                        self?.didOpenHistoryPopUp()
                     }
                 }
             case .failed(let error):
@@ -154,7 +154,7 @@ final class InstaPickRoutingService {
         router.presentViewController(controller: controller)
     }
     
-    private func didOpenAnalyzesHistoryController() {
+    private func didOpenHistoryPopUp() {
         guard let successHandler = successHandler else {
             UIApplication.showErrorAlert(message: "Success handler unexpected become nil.")
             return
@@ -167,12 +167,12 @@ final class InstaPickRoutingService {
                                          secondButtonTitle: TextConstants.analyzeHistoryPopupButton,
                                          firstAction: {  controller in
                                             controller.close()
-        }) { [weak self] controller in
-            controller.close {
-                self?.onPurchase()
-            }
-        }
-        
+                                         },
+                                         secondAction: { [weak self] controller in
+                                            controller.close {
+                                                self?.onPurchase()
+                                            }
+                                         })
         
         let router = RouterVC()
         successHandler(popup)
