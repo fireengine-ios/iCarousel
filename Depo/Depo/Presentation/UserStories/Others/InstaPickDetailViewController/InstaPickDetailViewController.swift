@@ -224,7 +224,7 @@ final class InstaPickDetailViewController: UIViewController {
             showErrorWith(message: error.localizedDescription)
         } else {
             analyzes.sort(by: { left, right in
-                return left.rank > right.rank
+                return left.score > right.score
             })
             
             let topRatePhoto = analyzes.first
