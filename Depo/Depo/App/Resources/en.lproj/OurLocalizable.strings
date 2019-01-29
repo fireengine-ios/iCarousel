@@ -781,6 +781,7 @@
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "InstaPick";
+"analyze_history_free_text" = "Free for Limited Time";
 "no_analyses_left_title" = "No Analyzes Left";
 "no_analyses_left_message" = "No Analyzes Left";
 "no_analyses_left_button" = "Purchase InstaPick";
