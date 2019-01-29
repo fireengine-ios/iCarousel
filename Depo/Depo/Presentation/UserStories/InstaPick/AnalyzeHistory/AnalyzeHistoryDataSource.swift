@@ -71,6 +71,10 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     
     private let sections: [AnalyzeHistorySectionType] = [.cards, .photos]
     
+    private lazy var indexOfPhotoSection: Int? = {
+        return sections.index(of: .photos)
+    }()
+    
     private var cards = [AnalyzeHistoryCardType]()
     private var items = [InstapickAnalyze]()
     private(set) var selectedItems = [InstapickAnalyze]()
@@ -141,7 +145,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     }
     
     private func mergeItems(with newItems: [InstapickAnalyze]) {
-        guard let section = sections.index(of: .photos) else {
+        guard let section = indexOfPhotoSection else {
             return
         }
         
@@ -162,7 +166,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     }
     
     func deleteSelectedItems(completion: VoidHandler?) {
-        guard let section = sections.index(of: .photos) else {
+        guard let section = indexOfPhotoSection else {
             return
         }
         
@@ -236,6 +240,7 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
                     cell.delegate = self
                 }
             case .free:
+                //static card, nothing to setup
                 break
             }
         case .photos:
@@ -266,7 +271,7 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
 
 extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard indexPath.section == sections.index(of: .photos) else {
+        guard indexPath.section == indexOfPhotoSection else {
             return
         }
         
@@ -300,7 +305,7 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegateFlo
             return CGSize(width: collectionView.bounds.width, height: cards[indexPath.item].cellHeight)
         case .photos:
             let width = (collectionView.bounds.width - section.sectionInsets.left - section.sectionInsets.right - section.interitemSpacing * (section.numberOfColumns - 1)) / section.numberOfColumns
-            return CGSize(width: width, height: width + 28)
+            return CGSize(width: width, height: width + InstapickAnalyzeHistoryPhotoCell.underPhotoOffset)
         }
     }
     

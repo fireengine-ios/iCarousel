@@ -306,14 +306,13 @@ final class InstapickAnalyzesCount {
     let left: Int
     let total: Int
     let isFree: Bool
-    var used: Int {
-        return total - left
-    }
+    let used: Int
     
     init(left: Int, total: Int, isFree: Bool) {
         self.left = left
         self.total = total
         self.isFree = isFree
+        self.used = total - left
     }
     
     init?(json: JSON) {
@@ -330,6 +329,7 @@ final class InstapickAnalyzesCount {
         self.left = left
         self.total = total
         self.isFree = isFree
+        self.used = total - left
     }
 }
 
