@@ -223,19 +223,6 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         present(actionSheetVC, animated: true)
     }
     
-    private func showUpdgradePopup() {
-        let controller = PopUpController.with(title: nil,
-                                              message: TextConstants.analyzeHistoryNeedUpgradeText,
-                                              image: .none,
-                                              firstButtonTitle: TextConstants.analyzeHistoryConfirmDeleteNo,
-                                              secondButtonTitle: TextConstants.analyzeHistoryUpgradeButton,
-                                              secondAction: { vc in
-                                                vc.close()
-                                                UIApplication.shared.openAppstore()
-        })
-        router.presentViewController(controller: controller)
-    }
-    
     // MARK: - Functions
     
     @objc private func reloadData() {
@@ -425,12 +412,12 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
     
     func onPurchase() {
         //TODO: - Open Purchase Screen
-        showUpdgradePopup()
+        InstaPickRoutingService.showUpdgradePopup()
     }
     
     func onSeeDetails() {
         //TODO: - Open Details Screen
-        showUpdgradePopup()
+        InstaPickRoutingService.showUpdgradePopup()
     }
     
     func onSelectAnalyze(_ analyze: InstapickAnalyze) {
