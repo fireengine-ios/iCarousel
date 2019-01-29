@@ -160,10 +160,27 @@ final class InstaPickRoutingService {
             return
         }
         
+        let popup = PopUpController.with(title: TextConstants.analyzeHistoryPopupTitle,
+                                         message: TextConstants.analyzeHistoryPopupMessage,
+                                         image: .custom(UIImage(named: "popup_info")),
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.analyzeHistoryPopupButton,
+                                         firstAction: {  controller in
+                                            controller.close()
+        }) { [weak self] controller in
+            controller.close {
+                self?.onPurchase()
+            }
+        }
+        
+        
         let router = RouterVC()
-        let controller = router.analyzesHistoryController()
-        successHandler(controller)
-        router.pushViewController(viewController: controller)
+        successHandler(popup)
+        router.presentViewController(controller: popup)
+    }
+    
+    private func onPurchase() {
+        //TODO: - Open Purchase Screen
     }
     
     private func showError(with error: ErrorResponse) {
