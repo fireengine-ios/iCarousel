@@ -19,7 +19,18 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
     
     private var isConnected = false {
         didSet {
-            importSwitch.setOn(isConnected, animated: true)
+            removeConnectionButton.isHidden = !isConnected
+            connectedAs.isHidden = !isConnected
+            if !isConnected {
+                isImportOn = false
+                isInstaPickOn = false
+            }
+        }
+    }
+    
+    private var isImportOn = false {
+        didSet {
+            importSwitch.setOn(isImportOn, animated: true)
         }
     }
     
@@ -65,6 +76,7 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
     
     @IBOutlet private weak var removeConnectionButton: UIButton! {
         didSet {
+            removeConnectionButton.isHidden = true
             removeConnectionButton.layer.borderColor = removeConnectionButton.currentTitleColor.cgColor
             removeConnectionButton.layer.borderWidth = 2.0
             removeConnectionButton.layer.cornerRadius = removeConnectionButton.bounds.height * 0.4
@@ -115,7 +127,11 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
  
     
     @IBAction func instaPickSwitchValueChanged(_ sender: UISwitch) {
-        ///
+        if sender.isOn {
+            presenter.enableInstaPick()
+        } else {
+            presenter.disableInstaPick()
+        }
     }
     
     @IBAction func importSwitchValueChanged(_ sender: UISwitch) {
@@ -127,56 +143,86 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
     }
     
     @IBAction func removeConnection(_ sender: Any) {
-        ///
+        presenter.disconnectAccount()
     }
 }
 
 
 // MARK: - ImportFromInstagramViewInput
 extension InstagramAccountConnectionCell: ImportFromInstagramViewInput {
+
+    // MARK: Social status (connection)
     
-    // MARK: Status
-    
-    func instagramStatusSuccess(username: String?) {
+    func connectionStatusSuccess(_ isOn: Bool, username: String?) {
+        isConnected = isOn
+        
         if let username = username {
             connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
             connectedAs.isHidden = false
         } else {
             connectedAs.isHidden = true
         }
-        isConnected = true
     }
     
-    func instagramStatusFailure() {
-        connectedAs.isHidden = true
+    func connectionStatusFailure(errorMessage: String) {
         isConnected = false
     }
+
+    func disconnectionSuccess() {
+        isConnected = false
+    }
+    
+    func disconnectionFailure(errorMessage: String) {
+        delegate?.showError(message: errorMessage)
+    }
+    
+    // MARK: instaPick
+    
+    func instaPickStatusSuccess(_ isOn: Bool) {
+        isInstaPickOn = isOn
+    }
+    
+    func instaPickStatusFailure() {
+        isInstaPickOn = false
+    }
+    
+    
+    // MARK: Sync status
+    
+    func syncStatusSuccess(_ isOn: Bool) {
+        isImportOn = isOn
+    }
+    
+    func syncStatusFailure() {
+        isImportOn = false
+    }
+    
     
     // MARK: Start
     
-    func instagramStartSuccess() {
+    func syncStartSuccess() {
         MenloworksEventsService.shared.onInstagramTransfered()
         MenloworksTagsService.shared.instagramImport(isOn: true)
-        isConnected = true
+        isImportOn = true
     }
     
-    func instagramStartFailure(errorMessage: String) {
+    func syncStartFailure(errorMessage: String) {
         MenloworksTagsService.shared.instagramImport(isOn: false)
-        isConnected = false
+        isImportOn = false
         if errorMessage != TextConstants.NotLocalized.instagramLoginCanceled {
             delegate?.showError(message: errorMessage)
         }
     }
     
+    
     // MARK: Stop
     
-    func instagramStopSuccess() {
-        connectedAs.isHidden = true
-        isConnected = false
+    func syncStopSuccess() {
+        isImportOn = false
     }
     
-    func instagramStopFailure(errorMessage: String) {
-        isConnected = true
+    func syncStopFailure(errorMessage: String) {
+        isImportOn = true
         delegate?.showError(message: errorMessage)
     }
 }

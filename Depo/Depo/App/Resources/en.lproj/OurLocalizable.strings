@@ -840,4 +840,4 @@
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
-"connected_as_format" = "Connected as %@";
+"connected_as_format" = "Connected as @%@";

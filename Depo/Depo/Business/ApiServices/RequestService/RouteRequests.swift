@@ -93,6 +93,7 @@ struct RouteRequests {
     static let socialStatus = "share/social/status"
     static let instagramConfig = "share/social/instagram/config"
     static let instagramConnect =  baseUrl +/ "share/social/instagram/connect"
+    static let instagramDisconnect =  baseUrl +/ "share/social/instagram/disconnect"
     static let instagramSyncStatus = "share/social/instagram/syncStatus"
     static let instagramCreateMigration = "share/social/instagram/migration/create"
     static let instagramCancelMigration = "share/social/instagram/migration/cancel"

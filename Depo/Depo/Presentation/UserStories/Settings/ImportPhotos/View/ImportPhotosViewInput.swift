@@ -35,12 +35,22 @@ protocol ImportFromDropboxViewInput: class, ActivityIndicator {
 // MARK: - Instagram
 
 protocol ImportFromInstagramViewInput: class, ActivityIndicator {
-    func instagramStatusSuccess(username: String?)
-    func instagramStatusFailure()
     
-    func instagramStartSuccess()
-    func instagramStartFailure(errorMessage: String)
+    func connectionStatusSuccess(_ isOn: Bool, username: String?)
+    func connectionStatusFailure(errorMessage: String)
     
-    func instagramStopSuccess()
-    func instagramStopFailure(errorMessage: String)
+    func instaPickStatusSuccess(_ isOn: Bool)
+    func instaPickStatusFailure()
+    
+    func syncStatusSuccess(_ isOn: Bool)
+    func syncStatusFailure()
+    
+    func syncStartSuccess()
+    func syncStartFailure(errorMessage: String)
+    
+    func syncStopSuccess()
+    func syncStopFailure(errorMessage: String)
+    
+    func disconnectionSuccess()
+    func disconnectionFailure(errorMessage: String)
 }

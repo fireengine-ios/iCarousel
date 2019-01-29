@@ -11,62 +11,216 @@ import Foundation
 class ImportFromInstagramInteractor {
     weak var instOutput: ImportFromInstagramInteractorOutput?
     private let instService = InstagramService()
-    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private let accountService = AccountService()
+    private let analyticsService: AnalyticsService = factory.resolve()
 }
 
 extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
     
-    func getConnectionStatus() {
+    func getAllStatuses() {
+        let failureHandler: FailResponse = { [weak self] errorResponse in
+            if let output = self?.instOutput {
+                output.instaPickFailure(errorMessage: errorResponse.description)
+                output.connectionFailure(errorMessage: errorResponse.description)
+                output.syncStatusFailure(errorMessage: errorResponse.description)
+            }
+        }
+        
         instService.socialStatus(success: { [weak self] response in
             guard let response = response as? SocialStatusResponse,
                 let isConnected = response.instagram
-                else { return }
+            else {
+                return
+            }
+            
+            DispatchQueue.toMain {
+                self?.instOutput?.connectionSuccess(isConnected: isConnected, username: response.instagramUsername)
+            }
+            
             if isConnected {
-                self?.getSyncStatus(username: response.instagramUsername)
+                self?.getSyncStatus()
+                self?.getInstaPickStatus()
             } else {
-                DispatchQueue.main.async {
-                    self?.instOutput?.syncStatusFailure(errorMessage: "Instagram is not connected")
+                DispatchQueue.toMain {
+                    if let output = self?.instOutput {
+                        output.instaPickSuccess(isOn: false)
+                        output.syncStatusSuccess(status: false)
+                    }
                 }
             }
-        }, fail: { [weak self] errorResponse in
-            DispatchQueue.main.async {
+        }, fail: { errorResponse in
+            DispatchQueue.toMain {
                 errorResponse.showInternetErrorGlobal()
-                self?.instOutput?.syncStatusFailure(errorMessage: errorResponse.description)
+                failureHandler(errorResponse)
             }
         })
     }
     
-    private func getSyncStatus(username: String?) {
+    func disconnectAccount() {
+        instService.disconnectInstagram { [weak self] response in
+            switch response {
+            case .success(let permissions):
+                DispatchQueue.toMain {
+                    self?.instOutput?.disconnectionSuccess()
+                }
+            case .failed(let error):
+                DispatchQueue.toMain {
+                    self?.instOutput?.disconnectionFailure(errorMessage: error.description)
+                }
+            }
+        }
+    }
+    
+    func setInstaPick(status: Bool) {
+        
+        let failureHandler: FailResponse = { [weak self] errorResponse in
+            if let output = self?.instOutput {
+                output.connectionFailure(errorMessage: errorResponse.description)
+                if status {
+                    ///instapicstartfailure
+                    output.instaPickFailure(errorMessage: errorResponse.description)
+                } else {
+                    ///instapicstopfailure
+//                    output.stopSyncFailure(errorMessage: errorResponse.description)
+                }
+            }
+        }
+        
+        instService.socialStatus(success: { [weak self] response in
+            guard let response = response as? SocialStatusResponse,
+                let isConnected = response.instagram
+                else {
+                    return
+            }
+            
+            DispatchQueue.toMain {
+                self?.instOutput?.connectionSuccess(isConnected: isConnected, username: response.instagramUsername)
+            }
+            
+            if status {
+                if isConnected {
+                    self?.changeInstaPick(status: status)
+                } else {
+                    self?.getConfig()
+                }
+            } else {
+                if isConnected {
+                    self?.changeInstaPick(status: status)
+                } else {
+                    DispatchQueue.toMain {
+                        /// just copypasted, maybe another error text is needed
+                        failureHandler(.string("Instagram is not connected"))
+                    }
+                }
+            }
+            }, fail: { errorResponse in
+                DispatchQueue.toMain {
+                    errorResponse.showInternetErrorGlobal()
+                    failureHandler(errorResponse)
+                }
+        })
+    }
+    
+    func setSync(status: Bool) {
+        let failureHandler: FailResponse = { [weak self] errorResponse in
+            if let output = self?.instOutput {
+                output.connectionFailure(errorMessage: errorResponse.description)
+                if status {
+                    output.startSyncFailure(errorMessage: errorResponse.description)
+                } else {
+                    output.stopSyncFailure(errorMessage: errorResponse.description)
+                }
+            }
+        }
+        
+        instService.socialStatus(success: { [weak self] response in
+            guard let response = response as? SocialStatusResponse,
+                let isConnected = response.instagram
+                else {
+                    return
+            }
+            
+            DispatchQueue.toMain {
+                self?.instOutput?.connectionSuccess(isConnected: isConnected, username: response.instagramUsername)
+            }
+            
+            if status {
+                if isConnected {
+                    self?.startSync()
+                } else {
+                    self?.getConfig()
+                }
+            } else {
+                if isConnected {
+                    self?.stopSync()
+                } else {
+                    DispatchQueue.toMain {
+                        /// just copypasted, maybe another error text is needed
+                        failureHandler(.string("Instagram is not connected"))
+                    }
+                }
+            }
+            }, fail: { errorResponse in
+                DispatchQueue.toMain {
+                    errorResponse.showInternetErrorGlobal()
+                    failureHandler(errorResponse)
+                }
+        })
+    }
+    
+    private func changeInstaPick(status: Bool) {
+        accountService.changeInstapickAllowed(isInstapickAllowed: status) { [weak self] response in
+            guard let `self` = self else {
+                return
+            }
+            
+            switch response {
+            case .success(let permissions):
+                DispatchQueue.toMain {
+                    self.instOutput?.instaPickSuccess(isOn: permissions.isInstapickAllowed ?? false)
+                }
+            case .failed(let error):
+                DispatchQueue.toMain {
+                    self.instOutput?.instaPickFailure(errorMessage: error.description)
+                }
+            }
+        }
+    }
+    
+    private func getInstaPickStatus() {
+        accountService.getSettingsInfoPermissions { [weak self] response in
+            switch response {
+            case .success(let permissions):
+                DispatchQueue.toMain {
+                    self?.instOutput?.instaPickSuccess(isOn: permissions.isInstapickAllowed ?? false)
+                }
+            case .failed(let error):
+                DispatchQueue.toMain {
+                    self?.instOutput?.instaPickFailure(errorMessage: error.description)
+                }
+            }
+        }
+    }
+    
+    private func getSyncStatus() {
         instService.getSyncStatus(success: { [weak self] response in
             guard let response = response as? SocialSyncStatusResponse,
                 let status = response.status
-                else { return }
-            DispatchQueue.main.async {
-                self?.instOutput?.syncStatusSuccess(status: status, username: username)
+                else {
+                    return
             }
-        }, fail: { [weak self] errorResponse in
+            
             DispatchQueue.main.async {
-                self?.instOutput?.syncStatusFailure(errorMessage: errorResponse.description)
+                self?.instOutput?.syncStatusSuccess(status: status)
             }
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.instOutput?.syncStatusFailure(errorMessage: errorResponse.description)
+                }
         })
     }
     
-    func getConnection() {
-        instService.socialStatus(success: { [weak self] response in
-            guard let response = response as? SocialStatusResponse,
-                let isConnected = response.instagram
-                else { return }
-            DispatchQueue.main.async {
-                self?.instOutput?.connectionSuccess(isConnected: isConnected)
-            }
-        }, fail: { [weak self] errorResponse in
-            DispatchQueue.main.async {
-                self?.instOutput?.connectionFailure(errorMessage: errorResponse.description)
-            }
-        })
-    }
-    
-    func getConfig() {
+    private func getConfig() {
         instService.getInstagramConfig(success: { [weak self] response in
             guard let response = response as? InstagramConfigResponse else { return }
             DispatchQueue.main.async {
@@ -79,29 +233,39 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
         })
     }
     
-    func setAsync(status: Bool) {
-        let params = SocialSyncStatusParametrs(status: status)
+    private func startSync() {
+        let params = SocialSyncStatusParametrs(status: true)
         instService.setSyncStatus(param: params, success: { [weak self] response in
             guard let _ = response as? SendSocialSyncStatusResponse else { return }
+            
+            self?.uploadCurrent()
             DispatchQueue.main.async {
-                if status {
-                    self?.instOutput?.startAsyncSuccess()
-                } else {
-                    self?.instOutput?.stopAsyncSuccess()
-                }
+                self?.instOutput?.startSyncSuccess()
             }
-        }, fail: { [weak self] errorResponse in
-            DispatchQueue.main.async {
-                if status {
-                    self?.instOutput?.startAsyncFailure(errorMessage: errorResponse.description)
-                } else {
-                    self?.instOutput?.stopAsyncFailure(errorMessage: errorResponse.description)
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.instOutput?.startSyncFailure(errorMessage: errorResponse.description)
                 }
-            }
         })
     }
     
-    func uploadCurrent() {
+    private func stopSync() {
+        let params = SocialSyncStatusParametrs(status: false)
+        instService.setSyncStatus(param: params, success: { [weak self] response in
+            guard let _ = response as? SendSocialSyncStatusResponse else { return }
+            
+            self?.cancelUpload()
+            DispatchQueue.main.async {
+                self?.instOutput?.stopSyncSuccess()
+            }
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.instOutput?.stopSyncFailure(errorMessage: errorResponse.description)
+                }
+        })
+    }
+    
+    private func uploadCurrent() {
         instService.createMigration(success: { [weak self] response in
             guard let _ = response as? CreateMigrationResponse else { return }
             DispatchQueue.main.async {
@@ -114,7 +278,7 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
         })
     }
     
-    func cancelUpload() {
+    private func cancelUpload() {
         instService.cancelMigration(success: { [weak self] response in
             guard let _ = response as? CancelMigrationResponse else { return }
             DispatchQueue.main.async {

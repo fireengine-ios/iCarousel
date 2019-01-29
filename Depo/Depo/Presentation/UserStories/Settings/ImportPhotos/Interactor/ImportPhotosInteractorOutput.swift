@@ -30,7 +30,7 @@ protocol ImportFromFBInteractorOutput: class {
     func stopSuccessCallback()
     func stopFailureCallback(errorMessage: String)
     
-    func goToOnboarding()
+//    func goToOnboarding()
     
 //    func success(socialStatus: SocialStatusResponse)
 //    func failed(with errorMessage: String)
@@ -66,24 +66,30 @@ protocol ImportFromDropboxInteractorOutput: class {
 
 protocol ImportFromInstagramInteractorOutput: class {
     
-    func connectionSuccess(isConnected: Bool)
+    func connectionSuccess(isConnected: Bool, username: String?)
     func connectionFailure(errorMessage: String)
     
-    func syncStatusSuccess(status: Bool, username: String?)
-    func syncStatusFailure(errorMessage: String)
+    func disconnectionSuccess()
+    func disconnectionFailure(errorMessage: String)
     
+    func instaPickSuccess(isOn: Bool)
+    func instaPickFailure(errorMessage: String)
+    
+    func syncStatusSuccess(status: Bool)
+    func syncStatusFailure(errorMessage: String)
+
     func configSuccess(instagramConfig: InstagramConfigResponse)
     func configFailure(errorMessage: String)
     
-    func startAsyncSuccess()
-    func startAsyncFailure(errorMessage: String)
+    func startSyncSuccess()
+    func startSyncFailure(errorMessage: String)
+    
+    func stopSyncSuccess()
+    func stopSyncFailure(errorMessage: String)
     
     func uploadCurrentSuccess()
     func uploadCurrentFailure(errorMessage: String)
-    
-    func stopAsyncSuccess()
-    func stopAsyncFailure(errorMessage: String)
-    
+
     func cancelUploadSuccess()
     func cancelUploadFailure(errorMessage: String)
 }
