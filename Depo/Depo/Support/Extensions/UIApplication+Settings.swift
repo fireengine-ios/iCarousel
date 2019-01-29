@@ -13,6 +13,6 @@ extension UIApplication {
         UIApplication.shared.openSafely(URL(string: UIApplicationOpenSettingsURLString))
     }
     func openAppstore() {
-        UIApplication.shared.openSafely(URL(string: "itms-apps://itunes.apple.com/app/id\(Keys.applicationId)"))
+        UIApplication.shared.openSafely(URL(string: "itms-apps://itunes.apple.com/app/id\(Device.applicationId)"))
     }
 }
