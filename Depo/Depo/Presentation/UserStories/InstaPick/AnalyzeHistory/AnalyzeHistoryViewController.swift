@@ -152,14 +152,20 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             })
         } else {
             let popup = PopUpController.with(title: TextConstants.analyzeHistoryPopupTitle,
-                                             message: TextConstants.analyzeHistoryPopupMessage,
-                                             image: .custom(UIImage(named: "popup_info")),
-                                             buttonTitle: TextConstants.analyzeHistoryPopupButton) { [weak self] controller in
-                                                controller.close { [weak self] in
-                                                    self?.onPurchase()
-                                                }
+                                         message: TextConstants.analyzeHistoryPopupMessage,
+                                         image: .custom(UIImage(named: "popup_info")),
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.analyzeHistoryPopupButton,
+                                         firstAction: { [weak self] controller in
+                                            self?.hideSpiner()
+                                            controller.close()
+                                         }) { [weak self] controller in
+                                            self?.hideSpiner()
+                                            controller.close {
+                                                self?.onPurchase()
                                             }
-
+                                         }
+            
             present(popup, animated: true)
         }
     }
