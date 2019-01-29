@@ -127,7 +127,7 @@ final class InstaPickDetailViewController: UIViewController {
             if let id = view.restorationIdentifier, let type = PhotoViewType(rawValue: id), type.index <= maxIndex {
                 let analyze = analyzes[type.index]
                 
-                view.configureImageView(with: analyze, delegate: self)
+                view.configureImageView(with: analyze, delegate: self, smallPhotosCount: maxIndex)
             } else {
                 view.isHidden = true
             }
