@@ -796,6 +796,10 @@
 "analyze_confirm_delete_text" = "These analyses will be deleted from your Analyze History";
 "analyze_confirm_delete_yes" = "YES";
 "analyze_confirm_delete_no"  = "NO";
+/*InstapickUpgradePopup*/
+"instapick_upgrade_popup_text" = "In order to purchase Instagram Likes package, you need to upgrade your lifebox application.";
+"instapick_upgrade_popup_button" = "Upgrade";
+"instapick_upgrade_popup_no" = "No";
 /*InstaPick three dots*/
 "new_insta_pick" = "New InstaPick";
 "uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. We will keep your existing photos and videos along with new uploaded memories in high quality until 1st of March. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";

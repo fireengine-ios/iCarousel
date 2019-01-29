@@ -12,7 +12,8 @@ protocol AnalyzeHistoryDataSourceDelegate: class {
     func needLoadNextHistoryPage()
     func onLongPressInCell()
     func onPurchase()
-    func onSeeDetailsForAnalyze(_ analyze: InstapickAnalyze)
+    func onSeeDetails()
+    func onSelectAnalyze(_ analyze: InstapickAnalyze)
     func onUpdateSelectedItems(count: Int)
 }
 
@@ -289,7 +290,7 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDelegate {
             }
             delegate?.onUpdateSelectedItems(count: selectedItems.count)
         } else {
-            delegate?.onSeeDetailsForAnalyze(item)
+            delegate?.onSelectAnalyze(item)
         }
     }
 }
@@ -330,9 +331,7 @@ extension AnalyzeHistoryDataSourceForCollectionView: InstapickAnalysisCellDelega
     }
     
     func onSeeDetails(cell: UICollectionViewCell) {
-        if let analyze = analyzeForCell(cell) {
-            delegate?.onSeeDetailsForAnalyze(analyze)
-        }
+        delegate?.onSeeDetails()
     }
     
     func canLongPress() -> Bool {

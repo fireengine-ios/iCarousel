@@ -181,6 +181,7 @@ final class InstaPickRoutingService {
     
     private func onPurchase() {
         //TODO: - Open Purchase Screen
+        InstaPickRoutingService.showUpdgradePopup()
     }
     
     private func showError(with error: ErrorResponse) {
@@ -204,4 +205,20 @@ extension InstaPickRoutingService: InstapickPopUpControllerDelegate {
         didOpenInstaPickSelectionSegmented()
     }
     
+}
+
+// MARK: - Instapick Upgrade Popup
+extension InstaPickRoutingService {
+    static func showUpdgradePopup() {
+        let controller = PopUpController.with(title: nil,
+                                              message: TextConstants.instapickUpgradePopupText,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.instapickUpgradePopupNoButton,
+                                              secondButtonTitle: TextConstants.instapickUpgradePopupButton,
+                                              secondAction: { vc in
+                                                vc.close()
+                                                UIApplication.shared.openAppstore()
+        })
+        RouterVC().presentViewController(controller: controller)
+    }
 }

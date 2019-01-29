@@ -205,7 +205,7 @@ final class InstaPickCard: BaseView {
         case .noUsedBefore:
             openInstaPickHistory()
         case .noAnalysis:
-            break
+            InstaPickRoutingService.showUpdgradePopup()
         }
     }
 }
