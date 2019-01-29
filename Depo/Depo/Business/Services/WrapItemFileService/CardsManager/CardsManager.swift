@@ -178,10 +178,10 @@ class CardsManager: NSObject {
         }
     }
     
-    func configureInstaPick(analysisLeft: Int, totalCount: Int) {
+    func configureInstaPick(with analysisStatus: InstapickAnalyzesCount) {
         DispatchQueue.main.async {
             for notificationView in self.foloversArray {
-                notificationView.configureInstaPick(with: totalCount, leftCount: analysisLeft)
+                notificationView.configureInstaPick(with: analysisStatus)
             }
         }
     }

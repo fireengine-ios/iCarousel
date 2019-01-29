@@ -70,7 +70,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     private var items = [InstapickAnalyze]()
     private(set) var selectedItems = [InstapickAnalyze]()
     
-    private(set) var analysisCount = InstapickAnalyzesCount(left: 0, total: 0) {
+    private(set) var analysisCount = InstapickAnalyzesCount(left: 0, total: 0, isFree: false, used: 0) {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadSections(IndexSet(arrayLiteral: AnalyzeHistorySectionType.cards.rawValue))

@@ -305,23 +305,32 @@ final class InstapickServiceImpl: InstapickService {
 final class InstapickAnalyzesCount {
     let left: Int
     let total: Int
+    let isFree: Bool
+    let used: Int
     
-    init(left: Int, total: Int) {
+    init(left: Int, total: Int, isFree: Bool, used: Int) {
         self.left = left
         self.total = total
+        self.isFree = isFree
+        self.used = used
     }
     
     init?(json: JSON) {
         /// there is "used" key from server response. it is "total - remaining"
         guard
             let left = json["remaining"].int,
-            let total = json["total"].int
+            let total = json["total"].int,
+            let isFree = json["isFree"].bool,
+            let used = json["used"].int
         else {
             assertionFailure()
             return nil
         }
+        
         self.left = left
         self.total = total
+        self.isFree = isFree
+        self.used = used
     }
 }
 

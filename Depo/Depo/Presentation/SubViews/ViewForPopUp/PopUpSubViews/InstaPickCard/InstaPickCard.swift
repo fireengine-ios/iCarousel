@@ -17,9 +17,10 @@ final class InstaPickCard: BaseView {
             case noAnalysis
         }
         
-        static let isUsedField = "isUsed"
-        static let leftField = "left"
-        static let totalField = "total"
+        static let isUsedField  = "isEverUsed"
+        static let isFreeField  = "isFree"
+        static let leftField    = "remaining"
+        static let totalField   = "total"
         
         static let usedBeforeIcon = UIImage(named: "instaPickLikesRed")
         static let defaultIcon = UIImage(named: "instaPickLikesWhite")
@@ -39,7 +40,8 @@ final class InstaPickCard: BaseView {
     var analysisLeft: Int = 0
     var totalCount: Int = 0
     var isUsedBefore: Bool = true
-    
+    var isFree: Bool = false
+
     private lazy var instapickRoutingService = InstaPickRoutingService()
     
     private var cardType: InstaPick.CardType?
@@ -111,11 +113,17 @@ final class InstaPickCard: BaseView {
     
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
-        guard  let isUsedBefore: Bool = object?.details?[InstaPick.isUsedField].bool,
+        guard
+            let isUsedBefore: Bool = object?.details?[InstaPick.isUsedField].bool,
+            let isFree: Bool = object?.details?[InstaPick.isFreeField].bool,
             let analysisLeft: Int = object?.details?[InstaPick.leftField].int,
-            let totalCount: Int = object?.details?[InstaPick.totalField].int else { return }
+            let totalCount: Int = object?.details?[InstaPick.totalField].int
+        else {
+            return
+        }
         
         self.isUsedBefore = isUsedBefore
+        self.isFree = isFree
         self.analysisLeft = analysisLeft
         self.totalCount = totalCount
     }
@@ -141,7 +149,7 @@ final class InstaPickCard: BaseView {
     
     private func chooseType() {
         let type: InstaPick.CardType
-        if !isUsedBefore {
+        if isFree || !isUsedBefore {
             type = .noUsedBefore
         } else if analysisLeft == 0 {
             type = .noAnalysis
@@ -159,18 +167,22 @@ final class InstaPickCard: BaseView {
     }
     
     //MARK: - Utility Methods(public)
-    func isNeedReloadWithNew(totalCount: Int, leftCount: Int) -> Bool {
+    func isNeedReloadWithNew(status: InstapickAnalyzesCount) -> Bool {
         var newCardType: InstaPick.CardType = .noUsedBefore
-        if leftCount == 0 {
+        
+        if status.isFree {
+            ///no-used-before case, realized on newCardType init
+        } else if status.left == 0 {
             isUsedBefore = true
             newCardType = .noAnalysis
-        } else if totalCount != leftCount {
+        } else if status.used > 0 {
             isUsedBefore = true
             newCardType = .usedBefore
         }
 
-        self.analysisLeft = leftCount
-        self.totalCount = totalCount
+        self.analysisLeft = status.left
+        self.totalCount = status.total
+        self.isFree = status.isFree
         
         return newCardType != cardType
     }
@@ -190,7 +202,6 @@ final class InstaPickCard: BaseView {
             openInstaPickHistory()
         case .noUsedBefore:
             openInstaPickHistory()
-            break
         case .noAnalysis:
             break
         }
