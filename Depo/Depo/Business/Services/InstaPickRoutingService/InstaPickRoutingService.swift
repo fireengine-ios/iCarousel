@@ -107,7 +107,7 @@ final class InstaPickRoutingService {
                     if analysisCount.left > 0 {
                         self?.prepareToOpenController()
                     } else {
-                        self?.didOpenAnalyzesHistoryController()
+                        self?.didOpenHistoryPopUp()
                     }
                 }
             case .failed(let error):
@@ -154,16 +154,33 @@ final class InstaPickRoutingService {
         router.presentViewController(controller: controller)
     }
     
-    private func didOpenAnalyzesHistoryController() {
+    private func didOpenHistoryPopUp() {
         guard let successHandler = successHandler else {
             UIApplication.showErrorAlert(message: "Success handler unexpected become nil.")
             return
         }
         
+        let popup = PopUpController.with(title: TextConstants.analyzeHistoryPopupTitle,
+                                         message: TextConstants.analyzeHistoryPopupMessage,
+                                         image: .custom(UIImage(named: "popup_info")),
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.analyzeHistoryPopupButton,
+                                         firstAction: {  controller in
+                                            controller.close()
+                                         },
+                                         secondAction: { [weak self] controller in
+                                            controller.close {
+                                                self?.onPurchase()
+                                            }
+                                         })
+        
         let router = RouterVC()
-        let controller = router.analyzesHistoryController()
-        successHandler(controller)
-        router.pushViewController(viewController: controller)
+        successHandler(popup)
+        router.presentViewController(controller: popup)
+    }
+    
+    private func onPurchase() {
+        //TODO: - Open Purchase Screen
     }
     
     private func showError(with error: ErrorResponse) {

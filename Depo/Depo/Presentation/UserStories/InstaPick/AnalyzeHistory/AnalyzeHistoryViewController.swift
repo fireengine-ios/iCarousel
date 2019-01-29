@@ -159,12 +159,13 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                                          firstAction: { [weak self] controller in
                                             self?.hideSpiner()
                                             controller.close()
-                                         }) { [weak self] controller in
+                                         },
+                                         secondAction: { [weak self] controller in
                                             self?.hideSpiner()
                                             controller.close {
                                                 self?.onPurchase()
                                             }
-                                         }
+                                         })
             
             present(popup, animated: true)
         }
