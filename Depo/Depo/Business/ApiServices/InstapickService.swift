@@ -320,8 +320,7 @@ final class InstapickAnalyzesCount {
         guard
             let left = json["remaining"].int,
             let total = json["total"].int,
-            let isFree = json["isFree"].bool,
-            let used = json["used"].int
+            let isFree = json["isFree"].bool
         else {
             assertionFailure()
             return nil
@@ -330,7 +329,7 @@ final class InstapickAnalyzesCount {
         self.left = left
         self.total = total
         self.isFree = isFree
-        self.used = used
+        self.used = total - left
     }
 }
 

@@ -168,16 +168,18 @@ final class InstaPickCard: BaseView {
     
     //MARK: - Utility Methods(public)
     func isNeedReloadWithNew(status: InstapickAnalyzesCount) -> Bool {
-        var newCardType: InstaPick.CardType = .noUsedBefore
+        let newCardType: InstaPick.CardType
         
         if status.isFree {
-            ///no-used-before case, realized on newCardType init
+             newCardType = .noUsedBefore
         } else if status.left == 0 {
             isUsedBefore = true
             newCardType = .noAnalysis
         } else if status.used > 0 {
             isUsedBefore = true
             newCardType = .usedBefore
+        } else {
+            newCardType = .noUsedBefore
         }
 
         self.analysisLeft = status.left
