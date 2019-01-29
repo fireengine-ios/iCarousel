@@ -316,7 +316,7 @@ final class InstapickAnalyzesCount {
     }
     
     init?(json: JSON) {
-        /// there is "used" key from server response. it is "total - remaining"
+        ///there is "used" key from server response. it is "total - remaining"
         guard
             let left = json["remaining"].int,
             let total = json["total"].int,
@@ -336,6 +336,7 @@ final class InstapickAnalyzesCount {
 final class InstapickAnalyze {
     let requestIdentifier: String
     let rank: Float
+    let score: Float
     let hashTags: [String]
     let fileInfo: SearchItemResponse?
     let photoCount: Int?
@@ -343,9 +344,10 @@ final class InstapickAnalyze {
     var isPicked: Bool = false
     // let message: String
     
-    init(requestIdentifier: String, rank: Float, hashTags: [String], fileInfo: SearchItemResponse?, photoCount: Int?, startedDate: Date?) {
+    init(requestIdentifier: String, rank: Float, hashTags: [String], fileInfo: SearchItemResponse?, photoCount: Int?, startedDate: Date?, score: Float) {
         self.requestIdentifier = requestIdentifier
         self.rank = rank
+        self.score = score
         self.hashTags = hashTags
         self.fileInfo = fileInfo
         self.photoCount = photoCount
@@ -356,6 +358,7 @@ final class InstapickAnalyze {
         guard
             let requestIdentifier = json["requestIdentifier"].string,
             let rank = json["rank"].float,
+            let score = json["score"].float,
             let hashTags = json["hashTags"].array?.flatMap({ $0.string })
         else {
             assertionFailure()
@@ -364,6 +367,7 @@ final class InstapickAnalyze {
         
         self.requestIdentifier = requestIdentifier
         self.rank = rank
+        self.score = score
         self.hashTags = hashTags
         
         let fileInfo = json["fileInfo"]

@@ -194,11 +194,14 @@ final class InstaPickDetailViewController: UIViewController {
             showErrorWith(message: error.localizedDescription)
             return
         }
-        let text = String(format: TextConstants.instaPickLeftCountLabel, analyzesCount.left, analyzesCount.total)
+        
+        let text = analyzesCount.isFree ? TextConstants.instaPickUnlimitedLeftCountLabel :
+            String(format: TextConstants.instaPickLeftCountLabel, analyzesCount.left, analyzesCount.total)
+        
         ///if left count is 0 we seek ":"(not 0 because of RTL language) and draw in red
-        if analyzesCount.left == 0, let location = text.firstIndex(of: ":") {
+        if analyzesCount.left == 0, let location = text.firstIndex(of: ":"), !analyzesCount.isFree {
             let attributedString = NSMutableAttributedString(string: text, attributes: [
-                .font : UIFont.TurkcellSaturaDemFont(size: 18),
+                .font : UIFont.TurkcellSaturaDemFont(size: Device.isIpad ? 24 : 18),
                 .foregroundColor : ColorConstants.textGrayColor,
                 .kern : 0.29
                 ])
@@ -221,7 +224,7 @@ final class InstaPickDetailViewController: UIViewController {
             showErrorWith(message: error.localizedDescription)
         } else {
             analyzes.sort(by: { left, right in
-                return left.rank > right.rank
+                return left.score > right.score
             })
             
             let topRatePhoto = analyzes.first

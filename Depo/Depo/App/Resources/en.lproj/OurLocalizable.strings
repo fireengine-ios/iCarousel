@@ -818,7 +818,8 @@
 /*InstaPickDetailViewController*/
 
 "you_are_ready_to_share" = "You are ready to share!";
-"instaPick_analysis_left" = "Analysis Left: %1$d of %2$d";
+"instapick_analysis_left" = "Analysis Left: %1$d of %2$d";
+"instapick_unlimited_analysis" = "Free for Limited Time";
 "engage_with_more_hastags" = "Engage with more #hastags";
 "copy_hashtags_to_clipboard" = "Copy #hashtags to clipboard";
 "share_on_social_media" = "Share on Social Media!";
