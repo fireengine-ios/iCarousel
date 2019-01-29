@@ -428,9 +428,13 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
         showUpdgradePopup()
     }
     
-    func onSeeDetailsForAnalyze(_ analyze: InstapickAnalyze) {
-//        prepareToOpenDetails(with: analyze)
+    func onSeeDetails() {
+        //TODO: - Open Details Screen
         showUpdgradePopup()
+    }
+    
+    func onSelectAnalyze(_ analyze: InstapickAnalyze) {
+        prepareToOpenDetails(with: analyze)
     }
     
     func onUpdateSelectedItems(count: Int) {
