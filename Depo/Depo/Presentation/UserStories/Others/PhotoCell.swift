@@ -163,6 +163,10 @@ final class PhotoCell: UICollectionViewCell {
         
         backgroundColor = ColorConstants.fileGreedCellColor
     }
+    
+    func cancelImageLoading() {
+        cellImageManager?.cancelImageLoading()
+    }
 }
 
 final class CollectionSpinnerFooter: UICollectionReusableView {
