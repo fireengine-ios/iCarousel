@@ -372,6 +372,10 @@ extension PhotoSelectionController {
 extension PhotoSelectionController: InstaPickSelectionSegmentedControllerDelegate {
     
     func didSelectItem(_ selectedItem: SearchItemResponse) {
+        /// controller can be created but not added as child so view will not be loaded yet
+        guard isViewLoaded else {
+            return
+        }
         for (index, photo) in photos.enumerated() {
             if photo.uuid == selectedItem.uuid {
                 let indexPath = IndexPath(item: index, section: photosSectionIndex)
@@ -383,6 +387,9 @@ extension PhotoSelectionController: InstaPickSelectionSegmentedControllerDelegat
     }
     
     func didDeselectItem(_ deselectItem: SearchItemResponse) {
+        guard isViewLoaded else {
+            return
+        }
         for (index, photo) in photos.enumerated() {
             if photo.uuid == deselectItem.uuid {
                 let indexPath = IndexPath(item: index, section: photosSectionIndex)
@@ -394,6 +401,9 @@ extension PhotoSelectionController: InstaPickSelectionSegmentedControllerDelegat
     }
     
     func selectionStateDidChange(_ selectionState: PhotoSelectionController.SelectionState) {
+        guard isViewLoaded else {
+            return
+        }
         updateVisibleCellsForSelectionState()
     }
 }
