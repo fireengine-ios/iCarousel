@@ -137,8 +137,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     @IBAction private func newAnalysisAction(_ sender: Any) {
         showSpiner()
-        if dataSource.analysisCount.left > 0 {
-            
+    
+        if let count = dataSource.analysisCount?.left, count > 0 {
             instapickRoutingService.getViewController(success: { [weak self] controller in
                 self?.hideSpiner()
                 
@@ -152,14 +152,21 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             })
         } else {
             let popup = PopUpController.with(title: TextConstants.analyzeHistoryPopupTitle,
-                                             message: TextConstants.analyzeHistoryPopupMessage,
-                                             image: .custom(UIImage(named: "popup_info")),
-                                             buttonTitle: TextConstants.analyzeHistoryPopupButton) { [weak self] controller in
-                                                controller.close { [weak self] in
-                                                    self?.onPurchase()
-                                                }
+                                         message: TextConstants.analyzeHistoryPopupMessage,
+                                         image: .custom(UIImage(named: "popup_info")),
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.analyzeHistoryPopupButton,
+                                         firstAction: { [weak self] controller in
+                                            self?.hideSpiner()
+                                            controller.close()
+                                         },
+                                         secondAction: { [weak self] controller in
+                                            self?.hideSpiner()
+                                            controller.close {
+                                                self?.onPurchase()
                                             }
-
+                                         })
+            
             present(popup, animated: true)
         }
     }
@@ -405,9 +412,15 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
     
     func onPurchase() {
         //TODO: - Open Purchase Screen
+        InstaPickRoutingService.showUpdgradePopup()
     }
     
-    func onSeeDetailsForAnalyze(_ analyze: InstapickAnalyze) {
+    func onSeeDetails() {
+        //TODO: - Open Details Screen
+        InstaPickRoutingService.showUpdgradePopup()
+    }
+    
+    func onSelectAnalyze(_ analyze: InstapickAnalyze) {
         prepareToOpenDetails(with: analyze)
     }
     

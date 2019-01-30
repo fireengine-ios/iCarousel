@@ -16,6 +16,10 @@ final class InstaPickPhotoView: UIView {
     
     private static let bigViewId = "bigView"
     
+    private let rateConstant: CGFloat      = Device.isIpad ? 10.5 : 8
+    private let imageViewConstant: CGFloat = Device.isIpad ? 27 : 22.5
+    private let containerConstant: CGFloat = Device.isIpad ? 28 : 23
+    
     @IBOutlet private var view: UIView!
     
     @IBOutlet private weak var contentView: RadialGradientableView!
@@ -50,13 +54,19 @@ final class InstaPickPhotoView: UIView {
     
     //MARK: - Utility methods(private)
     private func setupFonts() {
+        let isIPad = Device.isIpad
         let isBigView = restorationIdentifier == InstaPickPhotoView.bigViewId
-        pickedLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        
+        if isBigView {
+            rateLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 20 : 14)
+        } else {
+            rateLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 14 : 10)
+        }
+        rateLabel.textColor = .white
+        
+        pickedLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 20 : 14)
         pickedLabel.textColor = .white
         pickedLabel.text = TextConstants.instaPickPickedLabel
-        
-        rateLabel.font = UIFont.TurkcellSaturaBolFont(size: isBigView ? 14 : 8)
-        rateLabel.textColor = .white
     }
 
     private func setup() {
@@ -74,13 +84,23 @@ final class InstaPickPhotoView: UIView {
     }
     
     private func setupLayers() {
-        imageView.layer.cornerRadius = imageView.bounds.height * 0.5
+        ///Big view may change size on different iPhone's screen width
+        if restorationIdentifier == InstaPickPhotoView.bigViewId {
+            imageView.layer.cornerRadius = imageView.bounds.height * 0.5
 
-        contentView.layer.cornerRadius = contentView.bounds.height * 0.5
-        
-        rateView.layer.cornerRadius = rateView.bounds.height * 0.5
-
-        pickedView.layer.cornerRadius = pickedView.bounds.height * 0.5
+            contentView.layer.cornerRadius = contentView.bounds.height * 0.5
+            
+            rateView.layer.cornerRadius = rateView.bounds.height * 0.5
+            
+            pickedView.layer.cornerRadius = pickedView.bounds.height * 0.5
+        } else {
+            ///has static size for iPhone/iPad + fix wrong layer corner radius
+            imageView.layer.cornerRadius = imageViewConstant
+            
+            contentView.layer.cornerRadius = containerConstant
+            
+            rateView.layer.cornerRadius = rateConstant
+        }
     }
     
     private func setupView() {
@@ -91,14 +111,14 @@ final class InstaPickPhotoView: UIView {
         }
         
         view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         addSubview(view)
     }
     
     //MARK: - Utility methods(public)
     func configureImageView(with model: InstapickAnalyze,
-                            delegate: InstaPickPhotoViewDelegate? = nil) {
+                            delegate: InstaPickPhotoViewDelegate? = nil,
+                            smallPhotosCount: Int) {
         if let oldModel = self.model, let oldId = oldModel.fileInfo?.uuid, let newId = model.fileInfo?.uuid {
             ///logic for reuse this method on tap at small image (not pass if model same and reconfigure if thay are different)
             if oldId == newId {
@@ -140,7 +160,7 @@ final class InstaPickPhotoView: UIView {
         })
         
         if model.isPicked {
-            pickedView.isHidden = !isBigView
+            pickedView.isHidden = !(isBigView && smallPhotosCount > 0)
             
             rateView.isNeedGradient = true
             contentView.isNeedGradient = true

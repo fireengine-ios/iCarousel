@@ -148,7 +148,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     }
     
     func didObtainInstaPickStatus(status: InstapickAnalyzesCount) {
-        CardsManager.default.configureInstaPick(analysisLeft: status.left, totalCount: status.total)
+        CardsManager.default.configureInstaPick(with: status)
     }
     
     func fillCollectionView(isReloadAll: Bool) {

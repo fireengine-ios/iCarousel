@@ -95,7 +95,7 @@ extension InstaPickHashtagCollectionViewDataSource: UICollectionViewDelegateFlow
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let textHeight = NumericConstants.instaPickHashtagCellHeight
-        let textFont = UIFont.TurkcellSaturaMedFont(size: 10)
+        let textFont = UIFont.TurkcellSaturaMedFont(size: 14)
         let width = hashtags[indexPath.row].width(for: textHeight, font: textFont) + NumericConstants.instaPickHashtagCellWidthConstant
         
         return CGSize(width: width, height: NumericConstants.instaPickHashtagCellHeight)

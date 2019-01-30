@@ -782,6 +782,7 @@
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "InstaPick";
+"analyze_history_free_text" = "Free for Limited Time";
 "no_analyses_left_title" = "No Analyzes Left";
 "no_analyses_left_message" = "No Analyzes Left";
 "no_analyses_left_button" = "Purchase InstaPick";
@@ -796,6 +797,10 @@
 "analyze_confirm_delete_text" = "These analyses will be deleted from your Analyze History";
 "analyze_confirm_delete_yes" = "YES";
 "analyze_confirm_delete_no"  = "NO";
+/*InstapickUpgradePopup*/
+"instapick_upgrade_popup_text" = "In order to purchase Instagram Likes package, you need to upgrade your lifebox application.";
+"instapick_upgrade_popup_button" = "Upgrade";
+"instapick_upgrade_popup_no" = "No";
 /*InstaPick three dots*/
 "new_insta_pick" = "New InstaPick";
 "uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. We will keep your existing photos and videos along with new uploaded memories in high quality until 1st of March. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
@@ -816,7 +821,8 @@
 /*InstaPickDetailViewController*/
 
 "you_are_ready_to_share" = "You are ready to share!";
-"instaPick_analysis_left" = "Analysis Left: %1$d of %2$d";
+"instapick_analysis_left" = "Analysis Left: %1$d of %2$d";
+"instapick_unlimited_analysis" = "Free for Limited Time";
 "engage_with_more_hastags" = "Engage with more #hastags";
 "copy_hashtags_to_clipboard" = "Copy #hashtags to clipboard";
 "share_on_social_media" = "Share on Social Media!";

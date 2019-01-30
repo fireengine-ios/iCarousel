@@ -90,12 +90,10 @@ class InstagramAuthViewController: ViewController {
             self?.hideSpiner()
 
             switch response {
-            case .success(let result):
-                if result.isInstapickAllowed == true {
+            case .success(_):
+                DispatchQueue.toMain {
                     self?.delegate?.instagramAuthSuccess()
                     self?.navigationController?.popViewController(animated: true)
-                } else {
-                    self?.instagramAuthCancel()
                 }
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.localizedDescription)
