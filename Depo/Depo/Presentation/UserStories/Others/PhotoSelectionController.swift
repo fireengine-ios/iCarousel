@@ -138,43 +138,42 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
                 let indexPathesForNewItems = newItemsRange.map({ IndexPath(item: $0, section: self.photosSectionIndex) })
                 self.photos.append(contentsOf: newPhotos)
                 
-                self.collectionView.performBatchUpdates({
-                    self.collectionView.insertItems(at: indexPathesForNewItems)
-                }, completion: { _ in
-                    
-                    self.isLoadingMore = false
-                    self.paginationPage += 1
-                    let isLoadingMoreFinished = newPhotos.count < self.paginationSize
-                    
-                    if isLoadingMoreFinished {
-                        self.isLoadingMoreFinished = true
-                        
-                        /// to hide footer view by func referenceSizeForFooterInSection
-                        self.collectionView.performBatchUpdates({
-                            self.collectionView.collectionViewLayout.invalidateLayout()
-                        }, completion: nil)
-                        
-                        /// just in case stop animation.
-                        /// don't forget to start animation if need (for pullToRefresh)
-                        self.loadingMoreFooterView?.stopSpinner()
-                        
-                        /// if we don't have any item in collection
-                        if self.photos.isEmpty {
-                            self.emptyMessageLabel.text = "There is no photos"
-                        }
+                /// use performBatchUpdates if there will be problems,
+                /// but will be delay for "updateSelectedCellsIfNeed"
+                self.collectionView.insertItems(at: indexPathesForNewItems)
+                
+                if isFirstPageLoaded {
+                    let isNewPhotosExist = !newPhotos.isEmpty
+                    if isNewPhotosExist {
+                        self.collectionView.backgroundView = nil
                     }
+                }
+                
+                /// call after "self.photos.append(contentsOf: newPhotos)"
+                /// and "self.collectionView.insertItems"
+                self.updateSelectedCellsIfNeed(for: newPhotos)
+                
+                self.isLoadingMore = false
+                self.paginationPage += 1
+                let isLoadingMoreFinished = newPhotos.count < self.paginationSize
+                
+                if isLoadingMoreFinished {
+                    self.isLoadingMoreFinished = true
                     
-                    /// call after "self.photos.append(contentsOf: newPhotos)"
-                    self.checkForSelection(photos: newPhotos)
+                    /// to hide footer view by func referenceSizeForFooterInSection
+                    self.collectionView.performBatchUpdates({
+                        self.collectionView.collectionViewLayout.invalidateLayout()
+                    }, completion: nil)
                     
-                    // TODO: refactor
-                    if isFirstPageLoaded {
-                        let isNewPhotosExist = !newPhotos.isEmpty
-                        if isNewPhotosExist {
-                            self.collectionView.backgroundView = nil
-                        }
+                    /// just in case stop animation.
+                    /// don't forget to start animation if need (for pullToRefresh)
+                    self.loadingMoreFooterView?.stopSpinner()
+                    
+                    /// if we don't have any item in collection
+                    if self.photos.isEmpty {
+                        self.emptyMessageLabel.text = "There is no photos"
                     }
-                })
+                }
                 
             case .failed(let error):
                 self.showErrorAlert(message: error.localizedDescription)
@@ -182,7 +181,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         })
     }
     
-    private func checkForSelection(photos newPhotos: [SearchItemResponse]) {
+    private func updateSelectedCellsIfNeed(for newPhotos: [SearchItemResponse]) {
         guard let delegate = self.delegate else {
             assertionFailure()
             return
