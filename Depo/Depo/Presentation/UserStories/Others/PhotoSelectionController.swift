@@ -132,24 +132,24 @@ final class PhotoSelectionController: UIViewController {
             }
             
             switch result {
-            case .success(let photos):
+            case .success(let newPhotos):
                 
-                let q = self.photos.isEmpty
+                /// call before "self.photos.append"
+                let isFirstPageLoaded = self.photos.isEmpty
                 
-                let newItemsRange = self.photos.count ..< (self.photos.count + photos.count)
+                let newItemsRange = self.photos.count ..< (self.photos.count + newPhotos.count)
                 let indexPathesForNewItems = newItemsRange.map({ IndexPath(item: $0, section: self.photosSectionIndex) })
-                self.photos.append(contentsOf: photos)
+                self.photos.append(contentsOf: newPhotos)
                 
-                if !photos.isEmpty {
-                    self.collectionView.backgroundView = nil
-                }
+                self.checkForSelection(photos: newPhotos)
                 
                 self.collectionView.performBatchUpdates({
                     self.collectionView.insertItems(at: indexPathesForNewItems)
                 }, completion: { _ in
+                    
                     self.isLoadingMore = false
                     self.paginationPage += 1
-                    let isLoadingMoreFinished = photos.count < self.paginationSize
+                    let isLoadingMoreFinished = newPhotos.count < self.paginationSize
                     
                     if isLoadingMoreFinished {
                         self.isLoadingMoreFinished = true
@@ -169,8 +169,15 @@ final class PhotoSelectionController: UIViewController {
                         }
                     }
                     
-                    if q {
-                        //self.onFirstItems(photos: photos)
+                    self.checkForSelection(photos: newPhotos)
+                    
+                    if isFirstPageLoaded {
+                        
+                        
+                        let isNewPhotosExist = !newPhotos.isEmpty
+                        if isNewPhotosExist {
+                            self.collectionView.backgroundView = nil
+                        }
                     }
                 })
                 
@@ -181,7 +188,26 @@ final class PhotoSelectionController: UIViewController {
         })
     }
     
-    private func onFirstItems(photos: [SearchItemResponse]) {
+    private func checkForSelection(photos newPhotos: [SearchItemResponse]) {
+        
+        guard let delegate = self.delegate else {
+            assertionFailure()
+            return
+        }
+        
+        let startIndex = self.photos.count - newPhotos.count
+            
+        for item in delegate.selectedItems {
+            for (index, photo) in newPhotos.enumerated() {
+                
+                if photo.uuid == item.uuid {
+                    let indexPath = IndexPath(item: startIndex + index, section: photosSectionIndex)
+                    /// func "selectCellIfCan" fails if selection is stoped already
+                    collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+                    selectCell(at: indexPath)
+                }
+            }
+        }
         
         let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
         let isReachedLimit = (selectedCount == selectingLimit)
@@ -190,23 +216,6 @@ final class PhotoSelectionController: UIViewController {
             selectionState = .ended
         } else {
             selectionState = .selecting
-        }
-        
-        
-        if let delegate = self.delegate {
-            
-            for item in delegate.selectedItems {
-                
-                for (index, photo) in photos.enumerated() {
-                    
-                    if photo.uuid == item.uuid {
-                        
-                        let indexPath = IndexPath(item: index, section: photosSectionIndex)
-                        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
-                    }
-                }
-                
-            }
         }
     }
     
