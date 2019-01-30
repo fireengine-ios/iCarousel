@@ -774,7 +774,7 @@ class RouterVC: NSObject {
     // MARK: - Import photos
     
     var connectedAccounts: UIViewController? {
-        return ConnectedAccountsViewController.initialize()
+        return ConnectedAccountsViewController.initFromNib()
     }
     
     // MARK: Face image

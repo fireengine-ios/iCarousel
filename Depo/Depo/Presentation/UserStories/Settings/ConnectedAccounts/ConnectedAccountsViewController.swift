@@ -15,7 +15,7 @@ enum SocialAccount: Int {
 }
 
 
-final class ConnectedAccountsViewController: ViewController, ErrorPresenter {
+final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPresenter {
     
     @IBOutlet private weak var tableView: UITableView!
     
@@ -27,12 +27,7 @@ final class ConnectedAccountsViewController: ViewController, ErrorPresenter {
     private let analyticsService: AnalyticsService = factory.resolve()
     
     private let sections: [SocialAccount] = [.instagram, .facebook, .dropbox]
-    
-    
-    static func initialize() -> ConnectedAccountsViewController {
-        return ConnectedAccountsViewController(nibName: "ConnectedAccountsViewController", bundle: nil)
-    }
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,11 +120,11 @@ extension ConnectedAccountsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (section == 0) ? 0 : 14
+        return (section == SocialAccount.instagram.rawValue) ? 0 : 14
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return (section == 0) ? nil : SettingHeaderView.viewFromNib()
+        return (section == SocialAccount.instagram.rawValue) ? nil : SettingHeaderView.viewFromNib()
     }
 }
 

@@ -45,6 +45,7 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
     
     @IBOutlet private weak var caption: UILabel! {
         didSet {
+            caption.font = UIFont.TurkcellSaturaDemFont(size: 18.0)
             caption.text = TextConstants.instagram
         }
     }
@@ -65,6 +66,7 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
     
     @IBOutlet weak var instaPickText: UILabel! {
         didSet {
+            instaPickText.font = UIFont.TurkcellSaturaRegFont(size: 18.0)
             instaPickText.text = TextConstants.myStreamInstaPickTitle
             instaPickText.adjustsFontSizeToFitWidth()
         }
@@ -72,6 +74,7 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
     
     @IBOutlet weak var importFromInstagramText: UILabel! {
         didSet {
+            importFromInstagramText.font = UIFont.TurkcellSaturaRegFont(size: 18.0)
             importFromInstagramText.text = TextConstants.importFromInstagram
             importFromInstagramText.adjustsFontSizeToFitWidth()
         }
@@ -79,6 +82,7 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
     
     @IBOutlet private weak var removeConnectionButton: UIButton! {
         didSet {
+            removeConnectionButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 20.0)
             removeConnectionButton.isHidden = true
             removeConnectionButton.layer.borderColor = removeConnectionButton.currentTitleColor.cgColor
             removeConnectionButton.layer.borderWidth = 2.0
@@ -100,6 +104,7 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
     
     @IBOutlet private weak var connectedAs: UILabel! {
         didSet {
+            connectedAs.font = UIFont.TurkcellSaturaMedFont(size: 16.0)
             connectedAs.text = " "
             connectedAs.isHidden = true
         }

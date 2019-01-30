@@ -18,6 +18,7 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialAccountConnecti
     
     @IBOutlet private weak var caption: UILabel! {
         didSet {
+            caption.font = UIFont.TurkcellSaturaDemFont(size: 18.0)
             caption.text = TextConstants.dropbox
         }
     }
@@ -31,6 +32,7 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialAccountConnecti
     
     @IBOutlet private weak var customText: UILabel! {
         didSet {
+            customText.font = UIFont.TurkcellSaturaRegFont(size: 18.0)
             customText.text = TextConstants.importFromDB
             customText.adjustsFontSizeToFitWidth()
         }
@@ -38,6 +40,7 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialAccountConnecti
     
     @IBOutlet private weak var progress: UILabel! {
         didSet {
+            progress.font = UIFont.TurkcellSaturaRegFont(size: 14.0)
             progress.isHidden = true
             progress.text = " "
         }

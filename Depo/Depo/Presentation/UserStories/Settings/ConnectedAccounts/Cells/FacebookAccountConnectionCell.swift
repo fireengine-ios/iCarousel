@@ -42,6 +42,7 @@ final class FacebookAccountConnectionCell: UITableViewCell, SocialAccountConnect
     
     @IBOutlet private weak var caption: UILabel! {
         didSet {
+            caption.font = UIFont.TurkcellSaturaDemFont(size: 18.0)
             caption.text = TextConstants.facebook
         }
     }
@@ -55,6 +56,7 @@ final class FacebookAccountConnectionCell: UITableViewCell, SocialAccountConnect
     
     @IBOutlet private weak var customText: UILabel! {
         didSet {
+            customText.font = UIFont.TurkcellSaturaRegFont(size: 18.0)
             customText.text = TextConstants.importFromFB
             customText.adjustsFontSizeToFitWidth()
         }
