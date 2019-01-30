@@ -336,7 +336,7 @@ struct TextConstants {
     static let settingsViewCellBeckup = NSLocalizedString("Back-up my contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellContactsSync = NSLocalizedString("Contacts Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellImportPhotos = NSLocalizedString("Import Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsViewCellConnectedAccounts = NSLocalizedString("Connected Accounts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsViewCellConnectedAccounts = NSLocalizedString("connected_ccounts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellAutoUpload = NSLocalizedString("Auto Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellFaceAndImageGrouping = NSLocalizedString("Face & Image Grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellActivityTimline = NSLocalizedString("My Activity Timeline", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
