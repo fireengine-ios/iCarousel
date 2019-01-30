@@ -242,7 +242,7 @@
 		78052965200DD3470051FA78 /* ManageContactsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78052964200DD3470051FA78 /* ManageContactsModels.swift */; };
 		7809A32D1FED09EF00954A5F /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7809A32C1FED09EF00954A5F /* AsyncOperation.swift */; };
 		781839861FE9140E0046D73C /* FileForDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781839851FE9140E0046D73C /* FileForDownload.swift */; };
-		7825C22120179C7900AE77AE /* UIView+SubviewsVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7825C22020179C7900AE77AE /* UIView+SubviewsVisibility.swift */; };
+		7825C22120179C7900AE77AE /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7825C22020179C7900AE77AE /* UIView+Utils.swift */; };
 		7829FEBDBF0B8DD3EEBBC34A /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A18BA44717122453DCA565 /* LBAlbumLikePreviewSliderViewOutput.swift */; };
 		782E40B31FE7D0B9007F7838 /* RecentSearchesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */; };
 		7859298A20060E7D003F8AB3 /* ManageContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7859298620060E7D003F8AB3 /* ManageContactsViewController.xib */; };
@@ -374,7 +374,7 @@
 		7C379F3F202C35F00050C055 /* ManageContactsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78624AD9201C8A3A00C969D3 /* ManageContactsModuleOutput.swift */; };
 		7C379F40202C364F0050C055 /* CardActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99AC77201CB778003DD3B7 /* CardActionType.swift */; };
 		7C379F41202C36BE0050C055 /* OrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B3AF0202888240002558C /* OrientationManager.swift */; };
-		7C379F42202C37CF0050C055 /* UIView+SubviewsVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7825C22020179C7900AE77AE /* UIView+SubviewsVisibility.swift */; };
+		7C379F42202C37CF0050C055 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7825C22020179C7900AE77AE /* UIView+Utils.swift */; };
 		7C3A74331F04DDD300124DF5 /* BaseFilesGreedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74321F04DDD300124DF5 /* BaseFilesGreedViewController.xib */; };
 		7C3A74361F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74351F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift */; };
 		7C3A74391F04F4B800124DF5 /* BaseMediaContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74381F04F4B800124DF5 /* BaseMediaContent.swift */; };
@@ -4054,7 +4054,7 @@
 		78052964200DD3470051FA78 /* ManageContactsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageContactsModels.swift; sourceTree = "<group>"; };
 		7809A32C1FED09EF00954A5F /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		781839851FE9140E0046D73C /* FileForDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileForDownload.swift; sourceTree = "<group>"; };
-		7825C22020179C7900AE77AE /* UIView+SubviewsVisibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SubviewsVisibility.swift"; sourceTree = "<group>"; };
+		7825C22020179C7900AE77AE /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 		782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesService.swift; sourceTree = "<group>"; };
 		7859298620060E7D003F8AB3 /* ManageContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ManageContactsViewController.xib; sourceTree = "<group>"; };
 		7859298720060E7D003F8AB3 /* ManageContactsViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageContactsViewOutput.swift; sourceTree = "<group>"; };
@@ -11426,7 +11426,7 @@
 				CEDFECA11F10C77E003D1A75 /* UINavigationBar */,
 				CEDFECA31F10C77E003D1A75 /* UIViewController */,
 				CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */,
-				7825C22020179C7900AE77AE /* UIView+SubviewsVisibility.swift */,
+				7825C22020179C7900AE77AE /* UIView+Utils.swift */,
 				CE3E4D0C201B696500173045 /* UIButton+Properties.swift */,
 				CE055F3E20383A3400E6BFE8 /* PHAsset+Properties.swift */,
 				CE654FB020454AAD00232025 /* URL+Video.swift */,
@@ -16024,7 +16024,7 @@
 				8C0E8F681FDEBDFF00789C91 /* FirstResponder.swift in Sources */,
 				8C0E8F691FDEBDFF00789C91 /* PasscodeSettingsRouterInput.swift in Sources */,
 				8CF6A9C6207C8CF9007DEF71 /* CollectionViewSpinnerFooter.swift in Sources */,
-				7C379F42202C37CF0050C055 /* UIView+SubviewsVisibility.swift in Sources */,
+				7C379F42202C37CF0050C055 /* UIView+Utils.swift in Sources */,
 				8C0E8F6A1FDEBDFF00789C91 /* PasscodeSettingsConfigurator.swift in Sources */,
 				8C0E8F6B1FDEBDFF00789C91 /* UploadFilesSelectionRouterInput.swift in Sources */,
 				8C0E8F6C1FDEBDFF00789C91 /* UploadFilesSelectionRouter.swift in Sources */,
@@ -17368,7 +17368,7 @@
 				CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */,
 				B56FBB312122C84F004F4A59 /* TermsOfUseInteractorInput.swift in Sources */,
 				4A56D5B5202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
-				7825C22120179C7900AE77AE /* UIView+SubviewsVisibility.swift in Sources */,
+				7825C22120179C7900AE77AE /* UIView+Utils.swift in Sources */,
 				CE907A321F94D49900D2F8CE /* VolumeSlider.swift in Sources */,
 				98E65A292029AAEF00597226 /* StoriesDataSourceForCollectionView.swift in Sources */,
 				2B2BF4C237C2D4869CCB8F24 /* FeedbackViewInput.swift in Sources */,

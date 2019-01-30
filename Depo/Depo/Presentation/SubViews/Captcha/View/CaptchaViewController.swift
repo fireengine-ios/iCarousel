@@ -53,6 +53,8 @@ final class CaptchaViewController: ViewController {
         getImageCaptcha()
         captchaPlaceholderLabel.text = TextConstants.captchaPlaceholder
         imageBackground.layer.cornerRadius = 5
+        inputTextField.delegate = self
+        inputTextField.returnKeyType = .done
         inputTextField.autocorrectionType = .no
         inputTextField.tag = 33
     }
@@ -122,5 +124,12 @@ final class CaptchaViewController: ViewController {
                 UIApplication.showErrorAlert(message: error.description)
             }
         })
+    }
+}
+
+extension CaptchaViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
     }
 }
