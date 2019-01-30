@@ -1,6 +1,7 @@
 import UIKit
 
 protocol PhotoSelectionControllerDelegate: class {
+    var selectionState: PhotoSelectionController.SelectionState { get }
     var selectedItems: [SearchItemResponse] { get set }
     func canSelectItems() -> Bool
     func selectionController(_ controller: PhotoSelectionController, didSelectItem item: SearchItemResponse)
@@ -28,7 +29,11 @@ final class PhotoSelectionController: UIViewController {
     private var isLoadingMoreFinished = false
     
     private var selectingLimit = 0
-    private var selectionState = SelectionState.selecting
+    private var localSelectionState = SelectionState.selecting
+    
+    private var selectionState: SelectionState {
+        return delegate?.selectionState ?? localSelectionState
+    }
     
     private let photosSectionIndex = 0
     private var photos = [SearchItemResponse]()
@@ -141,8 +146,6 @@ final class PhotoSelectionController: UIViewController {
                 let indexPathesForNewItems = newItemsRange.map({ IndexPath(item: $0, section: self.photosSectionIndex) })
                 self.photos.append(contentsOf: newPhotos)
                 
-                self.checkForSelection(photos: newPhotos)
-                
                 self.collectionView.performBatchUpdates({
                     self.collectionView.insertItems(at: indexPathesForNewItems)
                 }, completion: { _ in
@@ -171,9 +174,8 @@ final class PhotoSelectionController: UIViewController {
                     
                     self.checkForSelection(photos: newPhotos)
                     
+                    // TODO: refactor
                     if isFirstPageLoaded {
-                        
-                        
                         let isNewPhotosExist = !newPhotos.isEmpty
                         if isNewPhotosExist {
                             self.collectionView.backgroundView = nil
@@ -213,9 +215,9 @@ final class PhotoSelectionController: UIViewController {
         let isReachedLimit = (selectedCount == selectingLimit)
         
         if isReachedLimit {
-            selectionState = .ended
+            localSelectionState = .ended
         } else {
-            selectionState = .selecting
+            localSelectionState = .selecting
         }
     }
     
@@ -288,26 +290,32 @@ extension PhotoSelectionController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        if let delegate = delegate {
-            return delegate.canSelectItems()
-        } else {
-            switch selectionState {
-            case .selecting:
-                return true
-            case .ended:
-                return false
-            }
+//        if let delegate = delegate {
+//            return delegate.canSelectItems()
+//        } else {
+//            switch localSelectionState {
+//            case .selecting:
+//                return true
+//            case .ended:
+//                return false
+//            }
+//        }
+        switch selectionState {
+        case .selecting:
+            return true
+        case .ended:
+            return false
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectCell(at: indexPath)
         delegate?.selectionController(self, didSelectItem: photos[indexPath.item])
+        selectCell(at: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        deselectCell(at: indexPath)
         delegate?.selectionController(self, didDeselectItem: photos[indexPath.item])
+        deselectCell(at: indexPath)
     }
 }
 
@@ -345,13 +353,13 @@ extension PhotoSelectionController {
         
         if isReachedLimit {
             /// update all cells
-            selectionState = .ended
+            localSelectionState = .ended
             let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
             cells.forEach({ $0.update(for: selectionState) })
             
         } else {
             /// update one cell
-            selectionState = .selecting
+            localSelectionState = .selecting
             
             guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
                 return
@@ -372,7 +380,7 @@ extension PhotoSelectionController {
     }
     
     private func deselectCell(at indexPath: IndexPath) {
-        selectionState = .selecting
+        localSelectionState = .selecting
         let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
         let isDeselectFromLimit = (selectedCount == selectingLimit - 1)
         
@@ -414,5 +422,10 @@ extension PhotoSelectionController: InstaPickSelectionSegmentedControllerDelegat
                 break
             }
         }
+    }
+    
+    func selectionStateDidChange(_ selectionState: PhotoSelectionController.SelectionState) {
+        let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
+        cells.forEach({ $0.update(for: selectionState) })
     }
 }
