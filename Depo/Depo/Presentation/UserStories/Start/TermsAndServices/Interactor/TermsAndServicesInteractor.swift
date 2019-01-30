@@ -72,7 +72,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                                     captchaAnswer: sigUpInfo.captchaAnswer)
         
         authenticationService.signUp(user: signUpUser, sucess: { [weak self] result in
-            self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .register)
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .register, eventLabel: .success)
             DispatchQueue.main.async {
                 guard let t = result as? SignUpSuccessResponse else {
                     return

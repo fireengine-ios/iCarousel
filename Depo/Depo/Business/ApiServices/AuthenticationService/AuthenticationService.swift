@@ -418,12 +418,12 @@ class AuthenticationService: BaseRequestService {
         }
     }
     
-    func serverLogout(complition: @escaping VoidHandler) {
+    func serverLogout(complition: @escaping BoolHandler) {
         let requestParametrs = SigngOutParametes(authToken: self.tokenStorage.accessToken ?? "", rememberMeToken: self.tokenStorage.refreshToken ?? "")
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { response in
-            complition()
+            complition(true)
         }, fail: { failresponse in
-            complition()
+            complition(false)
         })
         executePostRequest(param: requestParametrs, handler: handler)
     }

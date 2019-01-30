@@ -73,9 +73,11 @@ class SettingsInteractor: SettingsInteractorInput {
 
     func onLogout() {
         output.asyncOperationStarted()
-        authService.serverLogout(complition: { [weak self] in
+        authService.serverLogout(complition: { [weak self] success in
             self?.output.asyncOperationStoped()
-            self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .logout)
+            if success {
+                self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .logout, eventLabel: .success)
+            }
             self?.authService.logout { [weak self] in
                 MenloworksEventsService.shared.onLoggedOut()
                 self?.output.goToOnboarding()

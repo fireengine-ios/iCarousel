@@ -83,7 +83,12 @@ class LoginInteractor: LoginInteractorInput {
             debugLog("login isRememberMe \(self.rememberMe)")
             self.tokenStorage.isRememberMe = self.rememberMe
             self.analyticsService.track(event: .login)
-            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
+            
+            if Validator.isValid(email: login) {
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.email.text)
+            } else {
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.gsm.text)
+            }
 //            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
 //            ItemsRepository.sharedSession.updateCache()
             DispatchQueue.main.async {
@@ -94,28 +99,47 @@ class LoginInteractor: LoginInteractorInput {
                 guard let `self` = self else {
                     return
                 }
-                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .falseLogin)
                 
                 if self.isBlockError(forResponse: errorResponse) {
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.accountIsBlocked.text)
                     self.output?.failedBlockError()
                     return
                 }
                 if self.inNeedOfCaptcha(forResponse: errorResponse) {
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.captchaRequired.text)
                     self.output?.needShowCaptcha()
                 } else if (!self.checkInternetConnection()) {
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.networkError.text)
                     self.output?.failLogin(message: TextConstants.errorConnectedToNetwork)
                 } else if self.isAuthenticationDisabledForAccount(forResponse: errorResponse) {
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.turkcellPasswordDisabled.text)
                     self.output?.failLogin(message: TextConstants.loginScreenAuthWithTurkcellError)
                 } else if self.isNeedSignUp(forResponse: errorResponse) {
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.signupRequired.text)
                     self.output?.needSignUp(message: TextConstants.loginScreenNeedSignUpError)
-                } else if self.isAuthenticationError(forResponse: errorResponse) || self.inNeedOfCaptcha(forResponse: errorResponse) {
+                } else if self.isAuthenticationError(forResponse: errorResponse) {
+                    switch errorResponse {
+                    case .error(let error):
+                        if error.urlErrorCode.rawValue == 401 {
+                            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.unauthorized.text)
+                        }
+                    case .httpCode(let code):
+                        if code == 401 {
+                            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.unauthorized.text)
+                        }
+                    default:
+                        break
+                    }
                     self.attempts += 1
                     self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 } else if self.isInvalidCaptchaError(forResponse: errorResponse) {
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.incorrectCaptcha.text)
                     self.output?.failLogin(message: TextConstants.loginScreenInvalidCaptchaError)
                 } else if self.isInternetError(forResponse: errorResponse) {
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.networkError.text)
                     self.output?.failLogin(message: errorResponse.description)
                 } else if self.isEmptyPhoneError(for: errorResponse) {
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.incorrectUsernamePassword.text)
                     self.login = login
                     self.password = password
                     self.atachedCaptcha = atachedCaptcha
