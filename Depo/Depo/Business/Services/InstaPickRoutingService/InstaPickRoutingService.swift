@@ -13,6 +13,7 @@ final class InstaPickRoutingService {
 
     private lazy var instaService = InstagramService()
     private lazy var accountService = AccountService()
+    private lazy var instapickService: InstapickService = factory.resolve()
     
     private var successHandler: ViewControllerHandler?
     private var errorHandler: FailResponse?
@@ -27,15 +28,15 @@ final class InstaPickRoutingService {
         return UserDefaults.standard.bool(forKey: doNotShowAgainKey + userID)
     }
     
-    //Utility Methods(public)
-    func getViewController(success: @escaping ViewControllerHandler, error: @escaping FailResponse) {
+    // MARK: Utility Methods(public)
+    func getViewController(isCheckAnalyzesCount: Bool? = false, success: @escaping ViewControllerHandler, error: @escaping FailResponse) {
         successHandler = success
         errorHandler = error
         
-        if !doNotShowAgain {
-            checkInstagramAccount()
+        if isCheckAnalyzesCount == true {
+            getAnalyzesCount()
         } else {
-            configureViewController()
+            prepareToOpenController()
         }
     }
     
@@ -44,7 +45,7 @@ final class InstaPickRoutingService {
         UserDefaults.standard.set(true, forKey: doNotShowAgainKey + userID)
     }
     
-    //Utility Methods(private)
+    // MARK: Utility Methods(private)
     private func checkInstagramAccount() {
         instaService.socialStatus(success: { [weak self] response in
             guard let response = response as? SocialStatusResponse,
@@ -98,6 +99,33 @@ final class InstaPickRoutingService {
         }
     }
     
+    private func getAnalyzesCount() {
+        instapickService.getAnalyzesCount { [weak self] result in
+            switch result {
+            case .success(let analysisCount):
+                DispatchQueue.toMain {
+                    if analysisCount.left > 0 {
+                        self?.prepareToOpenController()
+                    } else {
+                        self?.didOpenHistoryPopUp()
+                    }
+                }
+            case .failed(let error):
+                let errorResponse = ErrorResponse.error(error)
+                self?.showError(with: errorResponse)
+            }
+        }
+    }
+    
+    private func prepareToOpenController() {
+        if !doNotShowAgain {
+            checkInstagramAccount()
+        } else {
+            configureViewController()
+        }
+    }
+    
+    // MARK: Routing
     private func didOpenInstaPickPopUp(instaNickname: String?) {
         instagramNickname = nil
 
@@ -126,6 +154,36 @@ final class InstaPickRoutingService {
         router.presentViewController(controller: controller)
     }
     
+    private func didOpenHistoryPopUp() {
+        guard let successHandler = successHandler else {
+            UIApplication.showErrorAlert(message: "Success handler unexpected become nil.")
+            return
+        }
+        
+        let popup = PopUpController.with(title: TextConstants.analyzeHistoryPopupTitle,
+                                         message: TextConstants.analyzeHistoryPopupMessage,
+                                         image: .custom(UIImage(named: "popup_info")),
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.analyzeHistoryPopupButton,
+                                         firstAction: {  controller in
+                                            controller.close()
+                                         },
+                                         secondAction: { [weak self] controller in
+                                            controller.close {
+                                                self?.onPurchase()
+                                            }
+                                         })
+        
+        let router = RouterVC()
+        successHandler(popup)
+        router.presentViewController(controller: popup)
+    }
+    
+    private func onPurchase() {
+        //TODO: - Open Purchase Screen
+        InstaPickRoutingService.showUpdgradePopup()
+    }
+    
     private func showError(with error: ErrorResponse) {
         guard let errorHandler = errorHandler else {
             UIApplication.showErrorAlert(message: "Error handler unexpected become nil.")
@@ -136,6 +194,7 @@ final class InstaPickRoutingService {
     
 }
 
+// MARK: - InstapickPopUpControllerDelegate
 extension InstaPickRoutingService: InstapickPopUpControllerDelegate {
     
     func onConnectWithoutInsta() {
@@ -146,4 +205,20 @@ extension InstaPickRoutingService: InstapickPopUpControllerDelegate {
         didOpenInstaPickSelectionSegmented()
     }
     
+}
+
+// MARK: - Instapick Upgrade Popup
+extension InstaPickRoutingService {
+    static func showUpdgradePopup() {
+        let controller = PopUpController.with(title: nil,
+                                              message: TextConstants.instapickUpgradePopupText,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.instapickUpgradePopupNoButton,
+                                              secondButtonTitle: TextConstants.instapickUpgradePopupButton,
+                                              secondAction: { vc in
+                                                vc.close()
+                                                UIApplication.shared.openAppstore()
+        })
+        RouterVC().presentViewController(controller: controller)
+    }
 }

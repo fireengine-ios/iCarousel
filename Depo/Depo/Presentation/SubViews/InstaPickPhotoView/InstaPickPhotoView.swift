@@ -117,7 +117,8 @@ final class InstaPickPhotoView: UIView {
     
     //MARK: - Utility methods(public)
     func configureImageView(with model: InstapickAnalyze,
-                            delegate: InstaPickPhotoViewDelegate? = nil) {
+                            delegate: InstaPickPhotoViewDelegate? = nil,
+                            smallPhotosCount: Int) {
         if let oldModel = self.model, let oldId = oldModel.fileInfo?.uuid, let newId = model.fileInfo?.uuid {
             ///logic for reuse this method on tap at small image (not pass if model same and reconfigure if thay are different)
             if oldId == newId {
@@ -159,7 +160,7 @@ final class InstaPickPhotoView: UIView {
         })
         
         if model.isPicked {
-            pickedView.isHidden = !isBigView
+            pickedView.isHidden = !(isBigView && smallPhotosCount > 0)
             
             rateView.isNeedGradient = true
             contentView.isNeedGradient = true

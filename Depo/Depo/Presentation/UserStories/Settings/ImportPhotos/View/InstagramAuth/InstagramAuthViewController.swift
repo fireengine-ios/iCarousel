@@ -49,7 +49,8 @@ class InstagramAuthViewController: ViewController {
         webView.backgroundColor = UIColor.white
         webView.isOpaque = false
 
-        let request = URLRequest(url: authPath!)
+        var request = URLRequest(url: authPath!)
+        request.httpShouldHandleCookies = false
         webView.load(request)
     }
     
