@@ -21,10 +21,13 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
         didSet {
             removeConnectionButton.isHidden = !isConnected
             connectedAs.isHidden = !isConnected
+        
             if !isConnected {
                 isImportOn = false
                 isInstaPickOn = false
             }
+            
+            delegate?.willChangeHeight()
         }
     }
     
@@ -79,7 +82,7 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
             removeConnectionButton.isHidden = true
             removeConnectionButton.layer.borderColor = removeConnectionButton.currentTitleColor.cgColor
             removeConnectionButton.layer.borderWidth = 2.0
-            removeConnectionButton.layer.cornerRadius = removeConnectionButton.bounds.height * 0.4
+            removeConnectionButton.layer.cornerRadius = removeConnectionButton.bounds.height * 0.3
         }
     }
     
@@ -102,17 +105,16 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
         }
     }
     
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         setup()
-    }
-    
-    func willDisplay() {
+        
         presenter.viewIsReady()
     }
     
+
     private func setup() {
         interactor = ImportFromInstagramInteractor()
         presenter = ImportFromInstagramPresenter()

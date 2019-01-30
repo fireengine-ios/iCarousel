@@ -10,10 +10,10 @@ import UIKit
 
 protocol SocialAccountConnectionCellDelegate: class, ActivityIndicator {
     func showError(message: String)
+    func willChangeHeight()
 }
 
 protocol SocialAccountConnectionCell: class, ActivityIndicator {
-    func willDisplay()
     var delegate: SocialAccountConnectionCellDelegate? { get set }
 }
 
@@ -71,9 +71,7 @@ final class FacebookAccountConnectionCell: UITableViewCell, SocialAccountConnect
         super.awakeFromNib()
         
         setup()
-    }
-    
-    func willDisplay() {
+        
         presenter.viewIsReady()
     }
     

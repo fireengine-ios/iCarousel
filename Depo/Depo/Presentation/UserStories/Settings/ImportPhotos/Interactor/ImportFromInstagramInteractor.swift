@@ -63,6 +63,10 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
                 DispatchQueue.toMain {
                     self?.instOutput?.disconnectionSuccess()
                 }
+                
+                self?.changeInstaPick(status: false)
+                self?.stopSync()
+                
             case .failed(let error):
                 DispatchQueue.toMain {
                     self?.instOutput?.disconnectionFailure(errorMessage: error.description)
@@ -97,15 +101,11 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
                 self?.instOutput?.connectionSuccess(isConnected: isConnected, username: response.instagramUsername)
             }
             
-            if status {
-                if isConnected {
-                    self?.changeInstaPick(status: status)
-                } else {
-                    self?.getConfig()
-                }
+            if isConnected {
+                self?.changeInstaPick(status: status)
             } else {
-                if isConnected {
-                    self?.changeInstaPick(status: status)
+                if status {
+                    self?.getConfig()
                 } else {
                     DispatchQueue.toMain {
                         /// just copypasted, maybe another error text is needed
@@ -113,6 +113,7 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
                     }
                 }
             }
+
             }, fail: { errorResponse in
                 DispatchQueue.toMain {
                     errorResponse.showInternetErrorGlobal()

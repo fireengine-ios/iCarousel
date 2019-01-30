@@ -116,15 +116,35 @@ extension ConnectedAccountsViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension ConnectedAccountsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let cell = cell as? SocialAccountConnectionCell {
-            cell.willDisplay()
-        }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return (section == 0) ? 0 : 14
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return (section == 0) ? nil : SettingHeaderView.viewFromNib()
     }
 }
 
 // MARK: - SocialAccountConnectionCellDelegate
 extension ConnectedAccountsViewController: SocialAccountConnectionCellDelegate {
+    
+    func willChangeHeight() {
+        DispatchQueue.main.async {
+            UIView.setAnimationsEnabled(false)
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+        }
+    }
+    
     func showError(message: String) {
         showErrorAlert(message: message)
     }

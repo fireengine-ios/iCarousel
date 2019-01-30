@@ -45,23 +45,6 @@
                             <constraint firstAttribute="width" secondItem="Qsc-us-Nea" secondAttribute="height" multiplier="1:1" id="fBR-sm-GUb"/>
                         </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwh-w7-4FC">
-                        <rect key="frame" x="68" y="214" width="184" height="49.5"/>
-                        <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="20"/>
-                        <inset key="contentEdgeInsets" minX="16" minY="8" maxX="16" maxY="8"/>
-                        <state key="normal" title="Remove Connection">
-                            <color key="titleColor" red="0.47058823529411764" green="0.50980392156862742" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                        <connections>
-                            <action selector="removeConnection:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vaE-G4-c1u"/>
-                        </connections>
-                    </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected as @testo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4lF-p5-9Jq">
-                        <rect key="frame" x="97" y="178" width="126" height="16"/>
-                        <fontDescription key="fontDescription" name="TurkcellSaturaMed" family="TurkcellSaturaMed" pointSize="16"/>
-                        <color key="textColor" red="0.039215686274509803" green="0.19607843137254902" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="InstaPick" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQZ-8w-2wI">
                         <rect key="frame" x="60" y="61.5" width="187" height="19"/>
                         <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
@@ -92,16 +75,36 @@
                             <action selector="importSwitchValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="cHm-PP-69t"/>
                         </connections>
                     </switch>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="WiS-mP-Eso">
+                        <rect key="frame" x="68" y="153.5" width="184" height="115.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected as @testo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4lF-p5-9Jq">
+                                <rect key="frame" x="29" y="0.0" width="126" height="16"/>
+                                <fontDescription key="fontDescription" name="TurkcellSaturaMed" family="TurkcellSaturaMed" pointSize="16"/>
+                                <color key="textColor" red="0.039215686274509803" green="0.19607843137254902" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwh-w7-4FC">
+                                <rect key="frame" x="0.0" y="48" width="184" height="67.5"/>
+                                <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="16" minY="8" maxX="16" maxY="8"/>
+                                <state key="normal" title="Remove Connection">
+                                    <color key="titleColor" red="0.47058823529411764" green="0.50980392156862742" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="removeConnection:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vaE-G4-c1u"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="4lF-p5-9Jq" firstAttribute="top" secondItem="py1-23-qvm" secondAttribute="bottom" constant="43" id="19O-XK-QgQ"/>
                     <constraint firstAttribute="trailing" secondItem="MDv-b5-eXE" secondAttribute="trailing" constant="16" id="7jQ-Cw-GJV"/>
                     <constraint firstItem="YQZ-8w-2wI" firstAttribute="leading" secondItem="Qsc-us-Nea" secondAttribute="trailing" constant="22" id="CbP-Xm-krt"/>
-                    <constraint firstItem="dwh-w7-4FC" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="DPS-kb-y8J"/>
                     <constraint firstItem="YQZ-8w-2wI" firstAttribute="centerY" secondItem="Qsc-us-Nea" secondAttribute="centerY" id="FT7-fZ-PuD"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="WiS-mP-Eso" secondAttribute="bottom" constant="16" id="HPa-L9-MAa"/>
                     <constraint firstItem="qaR-Xw-oTj" firstAttribute="centerY" secondItem="YQZ-8w-2wI" secondAttribute="centerY" id="HVj-WN-dwP"/>
                     <constraint firstItem="MDv-b5-eXE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="ITS-ay-5v8"/>
-                    <constraint firstItem="4lF-p5-9Jq" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="OhG-lI-Egn"/>
                     <constraint firstItem="Qsc-us-Nea" firstAttribute="leading" secondItem="MDv-b5-eXE" secondAttribute="leading" id="PPa-Gy-H6W"/>
                     <constraint firstAttribute="trailing" secondItem="qaR-Xw-oTj" secondAttribute="trailing" constant="20" id="XXZ-5M-oF6"/>
                     <constraint firstItem="MDv-b5-eXE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Y8F-EN-Clu"/>
@@ -113,9 +116,9 @@
                     <constraint firstAttribute="trailing" secondItem="0T7-qd-OSF" secondAttribute="trailing" constant="20" id="dPU-N2-u9Z"/>
                     <constraint firstItem="qaR-Xw-oTj" firstAttribute="leading" secondItem="YQZ-8w-2wI" secondAttribute="trailing" constant="4" id="f4m-xm-zdf"/>
                     <constraint firstItem="0T7-qd-OSF" firstAttribute="leading" secondItem="agT-6Z-UrP" secondAttribute="trailing" constant="4" id="gJY-tC-G7Q"/>
-                    <constraint firstItem="dwh-w7-4FC" firstAttribute="top" secondItem="4lF-p5-9Jq" secondAttribute="bottom" constant="20" id="n61-z3-gbL"/>
+                    <constraint firstItem="WiS-mP-Eso" firstAttribute="top" secondItem="agT-6Z-UrP" secondAttribute="bottom" constant="20" id="l1b-iu-zvn"/>
                     <constraint firstItem="Qsc-us-Nea" firstAttribute="top" secondItem="MDv-b5-eXE" secondAttribute="bottom" constant="22" id="pT3-qt-xQG"/>
-                    <constraint firstAttribute="bottom" secondItem="dwh-w7-4FC" secondAttribute="bottom" constant="32" id="yke-3G-ZAa"/>
+                    <constraint firstItem="WiS-mP-Eso" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="wqs-vR-2pI"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

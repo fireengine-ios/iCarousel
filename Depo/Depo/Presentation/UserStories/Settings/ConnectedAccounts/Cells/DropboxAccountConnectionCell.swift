@@ -56,9 +56,7 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialAccountConnecti
         super.awakeFromNib()
         
         setup()
-    }
-    
-    func willDisplay() {
+        
         rotatingImage.resumeAnimations()
     }
     
