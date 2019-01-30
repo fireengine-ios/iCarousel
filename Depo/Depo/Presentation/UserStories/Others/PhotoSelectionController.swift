@@ -18,7 +18,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         case ended
     }
     
-    weak var delegate: PhotoSelectionControllerDelegate?
+    private weak var delegate: PhotoSelectionControllerDelegate?
     
     private let photoService = PhotoService()
     private let paginationSize = 100
@@ -332,8 +332,7 @@ extension PhotoSelectionController {
         if isReachedLimit {
             /// update all cells
             localSelectionState = .ended
-            let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
-            cells.forEach({ $0.update(for: selectionState) })
+            updateVisibleCellsForSelectionState()
             
         } else {
             /// update one cell
@@ -349,8 +348,7 @@ extension PhotoSelectionController {
         
         if isDeselectFromLimit {
             /// update all cells
-            let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
-            cells.forEach({ $0.update(for: selectionState) })
+            updateVisibleCellsForSelectionState()
             
         } else {
             /// update one cell
@@ -363,6 +361,11 @@ extension PhotoSelectionController {
             return
         }
         cell.update(for: selectionState)
+    }
+    
+    private func updateVisibleCellsForSelectionState() {
+        let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
+        cells.forEach({ $0.update(for: selectionState) })
     }
 }
 
@@ -391,7 +394,6 @@ extension PhotoSelectionController: InstaPickSelectionSegmentedControllerDelegat
     }
     
     func selectionStateDidChange(_ selectionState: PhotoSelectionController.SelectionState) {
-        let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
-        cells.forEach({ $0.update(for: selectionState) })
+        updateVisibleCellsForSelectionState()
     }
 }
