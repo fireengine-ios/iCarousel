@@ -3,7 +3,8 @@ import UIKit
 final class PhotoCell: UICollectionViewCell {
     
     private enum Constants {
-        static let favoriteImageViewSideSize: CGFloat = 24
+        static let selectionImageViewSideSize: CGFloat = 24
+        static let favoriteImageViewSideSize: CGFloat = 20
         static let edgeInset: CGFloat = 6
         static let selectionBorderWidth: CGFloat = 3
         
@@ -80,8 +81,8 @@ final class PhotoCell: UICollectionViewCell {
         imageView.frame = bounds
         selectionImageView.frame = CGRect(x: bounds.width - Constants.favoriteImageViewSideSize - Constants.edgeInset,
                                           y: Constants.edgeInset,
-                                          width: Constants.favoriteImageViewSideSize,
-                                          height: Constants.favoriteImageViewSideSize)
+                                          width: Constants.selectionImageViewSideSize,
+                                          height: Constants.selectionImageViewSideSize)
         favouriteImageView.frame = CGRect(x: Constants.edgeInset,
                                          y: Constants.edgeInset,
                                          width: Constants.favoriteImageViewSideSize,
@@ -214,10 +215,10 @@ final class PhotoService {
     private var requestTask: URLSessionTask?
     private let searchService = SearchService()
     
-    func loadPhotos(page: Int, size: Int, handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
+    func loadPhotos(isFavorites: Bool, page: Int, size: Int, handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
         
-        let requestParam = SearchByFieldParameters(fieldName: .content_type,
-                                                   fieldValue: .image,
+        let requestParam = SearchByFieldParameters(fieldName: isFavorites ? .favorite : .content_type,
+                                                   fieldValue: isFavorites ? .favorite : .image,
                                                    sortBy: .date,
                                                    sortOrder: .asc,
                                                    page: page,
@@ -238,5 +239,173 @@ final class PhotoService {
             assertionFailure(errorResponse.localizedDescription)
             handler(.failed(errorResponse))
         })
+    }
+    
+    func loadAlbumPhotos(albumUuid: String, page: Int, size: Int, handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
+        
+        let requestParams = AlbumDetalParameters(albumUuid: albumUuid,
+                                                 sortBy: .date,
+                                                 sortOrder: .desc,
+                                                 page: page,
+                                                 size: size)
+        
+        searchService.searchContentAlbum(param: requestParams, success: { response  in
+            
+            guard let result = (response as? AlbumDetailResponse)?.list else {
+                assertionFailure()
+                let error = CustomErrors.serverError("failed parsing searchService.searchContentAlbum")
+                handler(.failed(error))
+                return
+            }
+            
+            handler(.success(result))
+        }, fail: { errorResponse in
+            assertionFailure(errorResponse.localizedDescription)
+            handler(.failed(errorResponse))
+        })
+    }
+
+    func cancelCurrentTask() {
+        requestTask?.cancel()
+    }
+}
+
+protocol PhotoSelectionDataSourceProtocol {
+    func reset()
+    func getNext(handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void)
+}
+
+final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
+    
+    private let photoService = PhotoService()
+    private var paginationPage: Int = 0
+    private let paginationPageSize: Int
+    
+    required init(pageSize: Int) {
+        self.paginationPageSize = pageSize
+    }
+    
+    func reset() {
+        paginationPage = 0
+    }
+    
+    func getNext(handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
+        photoService.loadPhotos(isFavorites: false, page: paginationPage, size: paginationPageSize) { [weak self] result in
+            guard let `self` = self else {
+                return
+            }
+            
+            switch result {
+            case .success(let items):
+                self.paginationPage += 1
+                handler(ResponseResult.success(items))
+            case .failed(let error):
+                handler(ResponseResult.failed(error))
+            }
+        }
+    }
+}
+
+final class AlbumPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
+    
+    private let photoService = PhotoService()
+    private let albumUuid: String
+    private var paginationPage: Int = 0
+    private let paginationPageSize: Int
+    
+    required init(pageSize: Int, albumUuid: String) {
+        self.paginationPageSize = pageSize
+        self.albumUuid = albumUuid
+    }
+    
+    func reset() {
+        paginationPage = 0
+    }
+    
+    func getNext(handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
+        let filteredItems = [SearchItemResponse]()
+        
+        loadNext(filteredItems: filteredItems, handler: handler)
+    }
+    
+    private func loadNext(filteredItems: [SearchItemResponse], handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
+        photoService.loadAlbumPhotos(albumUuid: albumUuid, page: paginationPage, size: paginationPageSize) { [weak self] result in
+            guard let `self` = self else {
+                return
+            }
+            
+            switch result {
+            case .success(let items):
+                var filteredItems = filteredItems
+                self.paginationPage += 1
+                
+                if items.isEmpty {
+                    handler(ResponseResult.success(filteredItems))
+                    return
+                }
+                
+                filteredItems.append(contentsOf: items.filter({$0.contentType?.hasPrefix("image") ?? false}))
+                
+                if filteredItems.count < self.paginationPageSize {
+                    self.loadNext(filteredItems: filteredItems, handler: handler)
+                } else {
+                    handler(ResponseResult.success(filteredItems))
+                }
+                
+            case .failed(let error):
+                handler(ResponseResult.failed(error))
+            }
+        }
+    }
+}
+
+final class FavoritePhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
+    
+    private let photoService = PhotoService()
+    private var paginationPage: Int = 0
+    private let paginationPageSize: Int
+    
+    required init(pageSize: Int) {
+        self.paginationPageSize = pageSize
+    }
+    
+    func reset() {
+        paginationPage = 0
+    }
+    
+    func getNext(handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
+        let filteredItems = [SearchItemResponse]()
+        
+        loadNext(filteredItems: filteredItems, handler: handler)
+    }
+    
+    private func loadNext(filteredItems: [SearchItemResponse], handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
+        photoService.loadPhotos(isFavorites: true, page: paginationPage, size: paginationPageSize) { [weak self] result in
+            guard let `self` = self else {
+                return
+            }
+            
+            switch result {
+            case .success(let items):
+                var filteredItems = filteredItems
+                self.paginationPage += 1
+                
+                if items.isEmpty {
+                    handler(ResponseResult.success(filteredItems))
+                    return
+                }
+                
+                filteredItems.append(contentsOf: items.filter({$0.contentType?.hasPrefix("image") ?? false}))
+                
+                if filteredItems.count < self.paginationPageSize {
+                    self.loadNext(filteredItems: filteredItems, handler: handler)
+                } else {
+                    handler(ResponseResult.success(filteredItems))
+                }
+                
+            case .failed(let error):
+                handler(ResponseResult.failed(error))
+            }
+        }
     }
 }

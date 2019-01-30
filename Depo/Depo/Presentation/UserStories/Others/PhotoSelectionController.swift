@@ -20,9 +20,8 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     
     private weak var delegate: PhotoSelectionControllerDelegate?
     
-    private let photoService = PhotoService()
+    lazy var dataSource: PhotoSelectionDataSourceProtocol = FavoritePhotosSelectionDataSource(pageSize: paginationSize)
     private let paginationSize = 100
-    private var paginationPage = 0
     private var isLoadingMore = false
     private var isLoadingMoreFinished = false
     
@@ -123,7 +122,9 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         
         isLoadingMore = true
         
-        self.photoService.loadPhotos(page: paginationPage, size: paginationSize, handler: { [weak self] result in
+        
+        
+        self.dataSource.getNext { [weak self] result in
             guard let `self` = self else {
                 return
             }
@@ -154,7 +155,6 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
                 self.updateSelectedCellsIfNeed(for: newPhotos)
                 
                 self.isLoadingMore = false
-                self.paginationPage += 1
                 let isLoadingMoreFinished = newPhotos.count < self.paginationSize
                 
                 if isLoadingMoreFinished {
@@ -178,7 +178,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
             case .failed(let error):
                 self.showErrorAlert(message: error.localizedDescription)
             }
-        })
+        }
     }
     
     private func updateSelectedCellsIfNeed(for newPhotos: [SearchItemResponse]) {
@@ -211,7 +211,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         photos.removeAll()
         collectionView.reloadData()
         isLoadingMoreFinished = false
-        paginationPage = 0
+        dataSource.reset()
         
         /// call after resetting paginationPage
         loadMore()
