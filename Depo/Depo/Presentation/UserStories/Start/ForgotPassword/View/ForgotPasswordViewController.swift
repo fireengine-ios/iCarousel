@@ -112,17 +112,23 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     fileprivate func configureKeyboard() {
         
         keyboard.on(event: .willChangeFrame) { [weak self] options in
-            guard let self = self else { return }
+            guard let `self` = self else {
+                return
+            }
             self.updateContentInsetWithKeyboardFrame(options.endFrame)
             self.scrollToFirstResponderIfNeeded(animated: false)
             }
             .on(event: .willShow) { [weak self] options in
-                guard let self = self else { return }
+                guard let `self` = self else {
+                    return
+                }
                 self.updateContentInsetWithKeyboardFrame(options.endFrame)
                 self.scrollToFirstResponderIfNeeded(animated: false)
             }
             .on(event: .willHide) { [weak self] _ in
-                guard let self = self else { return }
+                guard let `self` = self else {
+                    return
+                }
                 var inset = self.scrollView.contentInset
                 inset.bottom = 0
 
@@ -146,7 +152,9 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     }
 
     private func scrollToFirstResponderIfNeeded(animated: Bool) {
-        guard let firstResponser = view.firstResponder as? UIView else { return }
+        guard let firstResponser = view.firstResponder as? UIView else {
+            return
+        }
 
         let frameOnWindow = firstResponser.frameOnWindow
         let frameOnWindowWithInset = frameOnWindow.offsetBy(dx: 0.0, dy: 50.0)

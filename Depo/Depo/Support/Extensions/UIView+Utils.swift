@@ -14,7 +14,9 @@ extension UIView {
     }
 
     var frameOnWindow: CGRect {
-        guard let superview = superview, let window = window else { return frame }
+        guard let superview = superview, let window = window else {
+            return frame
+        }
         return superview.convert(frame, to: window)
     }
 }
