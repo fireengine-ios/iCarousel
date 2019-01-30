@@ -1602,7 +1602,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
                 DispatchQueue.main.async {
                     self.collectionView?.performBatchUpdates({ [weak self] in
-                        if let `self` = self{
+                        if let `self` = self {
                             self.collectionView?.reloadItems(at: arrayOfPath)
                         }
                     }, completion: nil)
