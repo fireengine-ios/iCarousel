@@ -20,8 +20,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     
     private weak var delegate: PhotoSelectionControllerDelegate?
     
-    lazy var dataSource: PhotoSelectionDataSourceProtocol = FavoritePhotosSelectionDataSource(pageSize: paginationSize)
-    private let paginationSize = 100
+    private let dataSource: PhotoSelectionDataSourceProtocol
     private var isLoadingMore = false
     private var isLoadingMoreFinished = false
     
@@ -79,11 +78,19 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         return label
     }()
     
-    convenience init(title: String, selectingLimit: Int, delegate: PhotoSelectionControllerDelegate?) {
-        self.init(nibName: nil, bundle: nil)
-        self.title = title
+    init(title: String, selectingLimit: Int, delegate: PhotoSelectionControllerDelegate?, dataSource: PhotoSelectionDataSourceProtocol) {
+        self.dataSource = dataSource
         self.selectingLimit = selectingLimit
         self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+        self.title = title
+    }
+    
+    /// will never be called
+    required init?(coder aDecoder: NSCoder) {
+        /// set any PhotoSelectionDataSourceProtocol
+        self.dataSource = AllPhotosSelectionDataSource(pageSize: 100)
+        super.init(coder: aDecoder)
     }
     
 //    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -122,8 +129,6 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         
         isLoadingMore = true
         
-        
-        
         self.dataSource.getNext { [weak self] result in
             guard let `self` = self else {
                 return
@@ -155,7 +160,8 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
                 self.updateSelectedCellsIfNeed(for: newPhotos)
                 
                 self.isLoadingMore = false
-                let isLoadingMoreFinished = newPhotos.count < self.paginationSize
+                
+                let isLoadingMoreFinished = self.dataSource.isPaginationFinished
                 
                 if isLoadingMoreFinished {
                     self.isLoadingMoreFinished = true

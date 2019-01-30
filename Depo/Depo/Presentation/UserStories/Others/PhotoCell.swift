@@ -169,9 +169,8 @@ final class CollectionSpinnerFooter: UICollectionReusableView {
     
     private let activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        activity.startAnimating()
         activity.hidesWhenStopped = true
-        //activity.color = UIColor.red
+        activity.startAnimating()
         return activity
     }()
     
@@ -186,10 +185,7 @@ final class CollectionSpinnerFooter: UICollectionReusableView {
     }
     
     private func setup() {
-        backgroundColor = .white
         addSubview(activityIndicator)
-        
-        activityIndicator.startAnimating()
     }
     
     override func layoutSubviews() {
@@ -271,12 +267,14 @@ final class PhotoService {
 }
 
 protocol PhotoSelectionDataSourceProtocol {
+    var isPaginationFinished: Bool { get }
     func reset()
     func getNext(handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void)
 }
 
 final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
     
+    var isPaginationFinished = false
     private let photoService = PhotoService()
     private var paginationPage: Int = 0
     private let paginationPageSize: Int
@@ -287,6 +285,7 @@ final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
     
     func reset() {
         paginationPage = 0
+        isPaginationFinished = false
     }
     
     func getNext(handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
@@ -298,6 +297,7 @@ final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
             switch result {
             case .success(let items):
                 self.paginationPage += 1
+                self.isPaginationFinished = (items.count < self.paginationPageSize)
                 handler(ResponseResult.success(items))
             case .failed(let error):
                 handler(ResponseResult.failed(error))
@@ -308,6 +308,7 @@ final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
 
 final class AlbumPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
     
+    var isPaginationFinished = false
     private let photoService = PhotoService()
     private let albumUuid: String
     private var paginationPage: Int = 0
@@ -320,6 +321,7 @@ final class AlbumPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
     
     func reset() {
         paginationPage = 0
+        isPaginationFinished = false
     }
     
     func getNext(handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
@@ -340,6 +342,7 @@ final class AlbumPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
                 self.paginationPage += 1
                 
                 if items.isEmpty {
+                    self.isPaginationFinished = true
                     handler(ResponseResult.success(filteredItems))
                     return
                 }
@@ -349,6 +352,7 @@ final class AlbumPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
                 if filteredItems.count < self.paginationPageSize {
                     self.loadNext(filteredItems: filteredItems, handler: handler)
                 } else {
+                    self.isPaginationFinished = (filteredItems.count < self.paginationPageSize)
                     handler(ResponseResult.success(filteredItems))
                 }
                 
@@ -361,6 +365,7 @@ final class AlbumPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
 
 final class FavoritePhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
     
+    var isPaginationFinished = false
     private let photoService = PhotoService()
     private var paginationPage: Int = 0
     private let paginationPageSize: Int
@@ -371,6 +376,7 @@ final class FavoritePhotosSelectionDataSource: PhotoSelectionDataSourceProtocol 
     
     func reset() {
         paginationPage = 0
+        isPaginationFinished = false
     }
     
     func getNext(handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
@@ -391,6 +397,7 @@ final class FavoritePhotosSelectionDataSource: PhotoSelectionDataSourceProtocol 
                 self.paginationPage += 1
                 
                 if items.isEmpty {
+                    self.isPaginationFinished = true
                     handler(ResponseResult.success(filteredItems))
                     return
                 }
@@ -400,6 +407,7 @@ final class FavoritePhotosSelectionDataSource: PhotoSelectionDataSourceProtocol 
                 if filteredItems.count < self.paginationPageSize {
                     self.loadNext(filteredItems: filteredItems, handler: handler)
                 } else {
+                    self.isPaginationFinished = (filteredItems.count < self.paginationPageSize)
                     handler(ResponseResult.success(filteredItems))
                 }
                 

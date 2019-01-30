@@ -156,8 +156,23 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     
     /// one time called
     private func setupScreenWithSelectingLimit(_ selectingLimit: Int) {
-        viewControllers = [PhotoSelectionController(title: "Photos", selectingLimit: selectingLimit, delegate: self),
-                           PhotoSelectionController(title: "Photos 2", selectingLimit: selectingLimit, delegate: self)]
+        
+        // TODO: iPad
+        let pageSize = 100
+        
+        let allPhotosDataSource = AllPhotosSelectionDataSource(pageSize: pageSize)
+        let allPhotosVC = PhotoSelectionController(title: "Photos",
+                                                   selectingLimit: selectingLimit,
+                                                   delegate: self,
+                                                   dataSource: allPhotosDataSource)
+        
+        let favoriteDataSource = FavoritePhotosSelectionDataSource(pageSize: pageSize)
+        let favoritePhotosVC = PhotoSelectionController(title: "Favs",
+                                                        selectingLimit: selectingLimit,
+                                                        delegate: self,
+                                                        dataSource: favoriteDataSource)
+        
+        viewControllers = [allPhotosVC, favoritePhotosVC]
         
         DispatchQueue.toMain {
             self.selectController(at: 0)
