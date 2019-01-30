@@ -3,17 +3,15 @@ import UIKit
 protocol PhotoSelectionControllerDelegate: class {
     var selectionState: PhotoSelectionController.SelectionState { get }
     var selectedItems: [SearchItemResponse] { get set }
-    func canSelectItems() -> Bool
     func selectionController(_ controller: PhotoSelectionController, didSelectItem item: SearchItemResponse)
     func selectionController(_ controller: PhotoSelectionController, didDeselectItem item: SearchItemResponse)
 }
 
 // TODO: localize
-// TODO: error handling
 // TODO: paginationSize + test for iPad
 // TODO: refactor
 // TODO: updaye cell layout UICollectionViewDelegateFlowLayout
-final class PhotoSelectionController: UIViewController {
+final class PhotoSelectionController: UIViewController, ErrorPresenter {
     
     enum SelectionState {
         case selecting
@@ -82,7 +80,7 @@ final class PhotoSelectionController: UIViewController {
         return label
     }()
     
-    convenience init(title: String, selectingLimit: Int, delegate: PhotoSelectionControllerDelegate) {
+    convenience init(title: String, selectingLimit: Int, delegate: PhotoSelectionControllerDelegate?) {
         self.init(nibName: nil, bundle: nil)
         self.title = title
         self.selectingLimit = selectingLimit
@@ -109,13 +107,7 @@ final class PhotoSelectionController: UIViewController {
         view.addSubview(collectionView)
         
         loadMore()
-        collectionView.reloadData()
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-//            print("----- SELECTED")
-//            let indexPath = IndexPath(item: 0, section: self.photosSectionIndex)
-//            self.selectCellIfCan(at: indexPath)
-//        }
+        //collectionView.reloadData()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -172,6 +164,7 @@ final class PhotoSelectionController: UIViewController {
                         }
                     }
                     
+                    /// call after "self.photos.append(contentsOf: newPhotos)"
                     self.checkForSelection(photos: newPhotos)
                     
                     // TODO: refactor
@@ -184,19 +177,18 @@ final class PhotoSelectionController: UIViewController {
                 })
                 
             case .failed(let error):
-                // TODO: error handling
-                assertionFailure(error.localizedDescription)
+                self.showErrorAlert(message: error.localizedDescription)
             }
         })
     }
     
     private func checkForSelection(photos newPhotos: [SearchItemResponse]) {
-        
         guard let delegate = self.delegate else {
             assertionFailure()
             return
         }
         
+        /// subtracting bcz newPhotos are appended in self.photos
         let startIndex = self.photos.count - newPhotos.count
             
         for item in delegate.selectedItems {
@@ -204,20 +196,10 @@ final class PhotoSelectionController: UIViewController {
                 
                 if photo.uuid == item.uuid {
                     let indexPath = IndexPath(item: startIndex + index, section: photosSectionIndex)
-                    /// func "selectCellIfCan" fails if selection is stoped already
                     collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
                     selectCell(at: indexPath)
                 }
             }
-        }
-        
-        let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
-        let isReachedLimit = (selectedCount == selectingLimit)
-        
-        if isReachedLimit {
-            localSelectionState = .ended
-        } else {
-            localSelectionState = .selecting
         }
     }
     
@@ -236,9 +218,9 @@ final class PhotoSelectionController: UIViewController {
         loadMore()
     }
     
-    func selectedItems() -> [SearchItemResponse]? {
-        return collectionView.indexPathsForSelectedItems?.flatMap({ photos[$0.item] })
-    }
+//    func selectedItems() -> [SearchItemResponse]? {
+//        return collectionView.indexPathsForSelectedItems?.flatMap({ photos[$0.item] })
+//    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -290,16 +272,6 @@ extension PhotoSelectionController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-//        if let delegate = delegate {
-//            return delegate.canSelectItems()
-//        } else {
-//            switch localSelectionState {
-//            case .selecting:
-//                return true
-//            case .ended:
-//                return false
-//            }
-//        }
         switch selectionState {
         case .selecting:
             return true
@@ -309,13 +281,19 @@ extension PhotoSelectionController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.selectionController(self, didSelectItem: photos[indexPath.item])
-        selectCell(at: indexPath)
+        if let delegate = delegate {
+            delegate.selectionController(self, didSelectItem: photos[indexPath.item])
+        } else {
+            selectCell(at: indexPath)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        delegate?.selectionController(self, didDeselectItem: photos[indexPath.item])
-        deselectCell(at: indexPath)
+        if let delegate = delegate {
+            delegate.selectionController(self, didDeselectItem: photos[indexPath.item])
+        } else {
+            deselectCell(at: indexPath)
+        }
     }
 }
 
@@ -360,22 +338,7 @@ extension PhotoSelectionController {
         } else {
             /// update one cell
             localSelectionState = .selecting
-            
-            guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
-                return
-            }
-            cell.update(for: selectionState)
-        }
-        // TODO: refactor
-        //parent?.navigationItem.title = "Photos Selected (\(selectedCount))"
-    }
-    
-    private func selectCellIfCan(at indexPath: IndexPath) {
-        if collectionView(collectionView, shouldSelectItemAt: indexPath) {
-            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
-            selectCell(at: indexPath)
-        } else {
-            assertionFailure("we should not select")
+            updateCellForSelectionState(at: indexPath)
         }
     }
     
@@ -391,13 +354,15 @@ extension PhotoSelectionController {
             
         } else {
             /// update one cell
-            guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
-                return
-            }
-            cell.update(for: selectionState)
+            updateCellForSelectionState(at: indexPath)
         }
-        // TODO: refactor
-        //parent?.navigationItem.title = "Photos Selected (\(selectedCount))"
+    }
+    
+    private func updateCellForSelectionState(at indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
+            return
+        }
+        cell.update(for: selectionState)
     }
 }
 
@@ -405,9 +370,10 @@ extension PhotoSelectionController: InstaPickSelectionSegmentedControllerDelegat
     
     func didSelectItem(_ selectedItem: SearchItemResponse) {
         for (index, photo) in photos.enumerated() {
-            if photo == selectedItem {
+            if photo.uuid == selectedItem.uuid {
                 let indexPath = IndexPath(item: index, section: photosSectionIndex)
-                selectCellIfCan(at: indexPath)
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+                updateCellForSelectionState(at: indexPath)
                 break
             }
         }
@@ -415,10 +381,10 @@ extension PhotoSelectionController: InstaPickSelectionSegmentedControllerDelegat
     
     func didDeselectItem(_ deselectItem: SearchItemResponse) {
         for (index, photo) in photos.enumerated() {
-            if photo == deselectItem {
+            if photo.uuid == deselectItem.uuid {
                 let indexPath = IndexPath(item: index, section: photosSectionIndex)
                 collectionView.deselectItem(at: indexPath, animated: false)
-                deselectCell(at: indexPath)
+                updateCellForSelectionState(at: indexPath)
                 break
             }
         }

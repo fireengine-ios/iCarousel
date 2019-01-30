@@ -18,6 +18,7 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     
     var selectedItems = [SearchItemResponse]()
     private var currentSelectingCount = 0
+    
     var selectionState = PhotoSelectionController.SelectionState.selecting {
         didSet {
             for childController in viewControllers {
@@ -158,13 +159,6 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         viewControllers = [PhotoSelectionController(title: "Photos", selectingLimit: selectingLimit, delegate: self),
                            PhotoSelectionController(title: "Photos 2", selectingLimit: selectingLimit, delegate: self)]
         
-        /// temp code
-        // TODO: remove
-//        let vc1 = UIViewController()
-//        vc1.view.backgroundColor = .red
-//        vc1.title = "Placeholder 1"
-//        viewControllers.append(vc1)
-        
         DispatchQueue.toMain {
             self.selectController(at: 0)
             self.setupSegmentedControl()
@@ -187,22 +181,14 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     }
     
     @objc private func analyzeWithInstapick() {
-        
-        // TODO: refactor
-        guard let selectionController = childViewControllers.first as? PhotoSelectionController,
-            let selectedItems = selectionController.selectedItems() else {
-            assertionFailure()
-            return
-        }
-        
         guard !selectedItems.isEmpty else {
             return
         }
         
         dismiss(animated: true, completion: {
             
-            let imagesUrls = selectedItems.flatMap({ $0.metadata?.mediumUrl })
-            let ids = selectedItems.flatMap({ $0.uuid })
+            let imagesUrls = self.selectedItems.flatMap({ $0.metadata?.mediumUrl })
+            let ids = self.selectedItems.flatMap({ $0.uuid })
             
             let topTexts = [TextConstants.instaPickAnalyzingText_0,
                             TextConstants.instaPickAnalyzingText_1,
@@ -267,21 +253,10 @@ extension InstaPickSelectionSegmentedController {
 }
 
 extension InstaPickSelectionSegmentedController: PhotoSelectionControllerDelegate {
-    func canSelectItems() -> Bool {
-        switch selectionState {
-        case .selecting:
-            return true
-        case .ended:
-            return false
-        }
-    }
     
     func selectionController(_ controller: PhotoSelectionController, didSelectItem item: SearchItemResponse) {
         
         for childController in viewControllers {
-            guard childController != controller else {
-                continue
-            }
             childController.didSelectItem(item)
         }
         
@@ -300,14 +275,10 @@ extension InstaPickSelectionSegmentedController: PhotoSelectionControllerDelegat
     
     func selectionController(_ controller: PhotoSelectionController, didDeselectItem item: SearchItemResponse) {
         for childController in viewControllers {
-            guard childController != controller else {
-                continue
-            }
             childController.didDeselectItem(item)
         }
         
-        /// not working
-        ///selectedItems.remove(item)
+        /// not working "selectedItems.remove(item)"
         for index in (0..<selectedItems.count).reversed() where selectedItems[index] == item {
             selectedItems.remove(at: index)
         }
