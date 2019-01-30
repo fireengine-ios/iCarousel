@@ -841,3 +841,5 @@
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
 "connected_as_format" = "Connected as @%@";
+"instagram_remove_connection_warning_title" = "You're about to remove your Instagram connection.";
+"instagram_remove_connection_warning_message" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\n";

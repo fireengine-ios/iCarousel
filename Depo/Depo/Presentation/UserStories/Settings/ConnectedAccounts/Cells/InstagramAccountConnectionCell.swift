@@ -145,7 +145,22 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
     }
     
     @IBAction func removeConnection(_ sender: Any) {
-        presenter.disconnectAccount()
+        let attributedText = NSMutableAttributedString(string: TextConstants.instagramRemoveConnectionWarningMessage, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+        if let connectedAsText = connectedAs.attributedText {
+            attributedText.append(connectedAsText)
+        }
+        let warningPopup = PopUpController.with(title: TextConstants.instagramRemoveConnectionWarning,
+                             attributedMessage: attributedText,
+                             image: .none,
+                             firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.actionSheetRemove,
+                             firstAction: { popup in
+                                popup.close()
+        }, secondAction: { [weak self] popup in
+            popup.close()
+            self?.presenter.disconnectAccount()
+        })
+        
+        UIApplication.topController()?.present(warningPopup, animated: true, completion: nil)
     }
 }
 

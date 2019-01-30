@@ -59,7 +59,7 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
     func disconnectAccount() {
         instService.disconnectInstagram { [weak self] response in
             switch response {
-            case .success(let permissions):
+            case .success(_):
                 DispatchQueue.toMain {
                     self?.instOutput?.disconnectionSuccess()
                 }
@@ -80,13 +80,7 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
         let failureHandler: FailResponse = { [weak self] errorResponse in
             if let output = self?.instOutput {
                 output.connectionFailure(errorMessage: errorResponse.description)
-                if status {
-                    ///instapicstartfailure
-                    output.instaPickFailure(errorMessage: errorResponse.description)
-                } else {
-                    ///instapicstopfailure
-//                    output.stopSyncFailure(errorMessage: errorResponse.description)
-                }
+                output.instaPickFailure(errorMessage: errorResponse.description)
             }
         }
         
@@ -101,17 +95,10 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
                 self?.instOutput?.connectionSuccess(isConnected: isConnected, username: response.instagramUsername)
             }
             
-            if isConnected {
+            if isConnected || !status {
                 self?.changeInstaPick(status: status)
-            } else {
-                if status {
-                    self?.getConfig()
-                } else {
-                    DispatchQueue.toMain {
-                        /// just copypasted, maybe another error text is needed
-                        failureHandler(.string("Instagram is not connected"))
-                    }
-                }
+            } else if status {
+                self?.getConfig()
             }
 
             }, fail: { errorResponse in
@@ -145,21 +132,14 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
                 self?.instOutput?.connectionSuccess(isConnected: isConnected, username: response.instagramUsername)
             }
             
-            if status {
-                if isConnected {
+            if isConnected {
+                if status {
                     self?.startSync()
                 } else {
-                    self?.getConfig()
-                }
-            } else {
-                if isConnected {
                     self?.stopSync()
-                } else {
-                    DispatchQueue.toMain {
-                        /// just copypasted, maybe another error text is needed
-                        failureHandler(.string("Instagram is not connected"))
-                    }
                 }
+            } else if status {
+                self?.getConfig()
             }
             }, fail: { errorResponse in
                 DispatchQueue.toMain {
