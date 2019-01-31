@@ -129,7 +129,7 @@ final class CaptchaViewController: ViewController {
 
 extension CaptchaViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
+        textField.resignFirstResponder()
         return true
     }
 }

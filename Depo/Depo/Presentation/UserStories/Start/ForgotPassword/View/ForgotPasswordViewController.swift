@@ -144,8 +144,8 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         view.layoutIfNeeded()
     }
 
-    private func updateContentInsetWithKeyboardFrame(_ kbFrame: CGRect) {
-        let bottomInset = kbFrame.height + UIScreen.main.bounds.height - kbFrame.maxY
+    private func updateContentInsetWithKeyboardFrame(_ keyboardFrame: CGRect) {
+        let bottomInset = keyboardFrame.height + UIScreen.main.bounds.height - keyboardFrame.maxY
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
         scrollView.contentInset = insets
         scrollView.scrollIndicatorInsets = insets
@@ -199,17 +199,17 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
 
 // MARK: UITableViewDelegate
 
-extension ForgotPasswordViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-
+extension ForgotPasswordViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 88.0
+    }
+}
+
+// MARK: UITableViewDataSource
+
+extension ForgotPasswordViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
