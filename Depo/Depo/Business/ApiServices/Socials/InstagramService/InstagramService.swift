@@ -64,10 +64,11 @@ final class InstagramService: BaseRequestService {
     }
     
     func checkInstagramLogin(instagramAccessToken: String, handler: @escaping (ResponseResult<Void>) -> Void) {
+        var urlRequest = URLRequest(url: RouteRequests.instagramConnect)
+        urlRequest.httpBody = instagramAccessToken.data(using: .utf8)
+        urlRequest.httpMethod = HTTPMethod.post.rawValue
         sessionManager
-            .request(RouteRequests.instagramConnect,
-                     method: .post,
-                     encoding: instagramAccessToken)
+            .request(urlRequest)
             .customValidate()
             .responseData { response in
                 switch response.result {
