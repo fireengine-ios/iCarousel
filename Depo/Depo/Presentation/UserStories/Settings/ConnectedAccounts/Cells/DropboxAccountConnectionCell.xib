@@ -36,7 +36,7 @@
                         <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" image="dropox" translatesAutoresizingMaskIntoConstraints="NO" id="ZOM-Bi-dfz">
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" image="dropbox" translatesAutoresizingMaskIntoConstraints="NO" id="ZOM-Bi-dfz">
                         <rect key="frame" x="16" y="54" width="37.5" height="37.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="ZOM-Bi-dfz" secondAttribute="height" multiplier="1:1" id="5l2-7d-vc7"/>
@@ -101,8 +101,8 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="dropbox" width="22" height="20"/>
         <image name="dropbox_button" width="32" height="32"/>
         <image name="dropbox_progress" width="42" height="42"/>
-        <image name="dropox" width="22" height="20"/>
     </resources>
 </document>

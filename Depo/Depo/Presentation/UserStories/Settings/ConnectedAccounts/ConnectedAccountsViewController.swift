@@ -55,6 +55,7 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
         
         tableView.tableFooterView = UIView()
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        tableView.separatorStyle = .none
         
         let reusableIds = [CellsIdConstants.instagramAccountConnectionCell,
                            CellsIdConstants.facebookAccountConnectionCell,
