@@ -75,8 +75,8 @@
                             <action selector="importSwitchValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="cHm-PP-69t"/>
                         </connections>
                     </switch>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="WiS-mP-Eso">
-                        <rect key="frame" x="68" y="153.5" width="184" height="115.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WiS-mP-Eso">
+                        <rect key="frame" x="68" y="165.5" width="184" height="111.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected as @testo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4lF-p5-9Jq">
                                 <rect key="frame" x="29" y="0.0" width="126" height="16"/>
@@ -85,7 +85,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwh-w7-4FC">
-                                <rect key="frame" x="0.0" y="48" width="184" height="67.5"/>
+                                <rect key="frame" x="0.0" y="36" width="184" height="75.5"/>
                                 <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="20"/>
                                 <inset key="contentEdgeInsets" minX="16" minY="8" maxX="16" maxY="8"/>
                                 <state key="normal" title="Remove Connection">
@@ -102,7 +102,7 @@
                     <constraint firstAttribute="trailing" secondItem="MDv-b5-eXE" secondAttribute="trailing" constant="16" id="7jQ-Cw-GJV"/>
                     <constraint firstItem="YQZ-8w-2wI" firstAttribute="leading" secondItem="Qsc-us-Nea" secondAttribute="trailing" constant="22" id="CbP-Xm-krt"/>
                     <constraint firstItem="YQZ-8w-2wI" firstAttribute="centerY" secondItem="Qsc-us-Nea" secondAttribute="centerY" id="FT7-fZ-PuD"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="WiS-mP-Eso" secondAttribute="bottom" constant="16" id="HPa-L9-MAa"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="WiS-mP-Eso" secondAttribute="bottom" constant="8" id="HPa-L9-MAa"/>
                     <constraint firstItem="qaR-Xw-oTj" firstAttribute="centerY" secondItem="YQZ-8w-2wI" secondAttribute="centerY" id="HVj-WN-dwP"/>
                     <constraint firstItem="MDv-b5-eXE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="ITS-ay-5v8"/>
                     <constraint firstItem="Qsc-us-Nea" firstAttribute="leading" secondItem="MDv-b5-eXE" secondAttribute="leading" id="PPa-Gy-H6W"/>
@@ -116,7 +116,7 @@
                     <constraint firstAttribute="trailing" secondItem="0T7-qd-OSF" secondAttribute="trailing" constant="20" id="dPU-N2-u9Z"/>
                     <constraint firstItem="qaR-Xw-oTj" firstAttribute="leading" secondItem="YQZ-8w-2wI" secondAttribute="trailing" constant="4" id="f4m-xm-zdf"/>
                     <constraint firstItem="0T7-qd-OSF" firstAttribute="leading" secondItem="agT-6Z-UrP" secondAttribute="trailing" constant="4" id="gJY-tC-G7Q"/>
-                    <constraint firstItem="WiS-mP-Eso" firstAttribute="top" secondItem="agT-6Z-UrP" secondAttribute="bottom" constant="20" id="l1b-iu-zvn"/>
+                    <constraint firstItem="WiS-mP-Eso" firstAttribute="top" secondItem="agT-6Z-UrP" secondAttribute="bottom" constant="32" id="l1b-iu-zvn"/>
                     <constraint firstItem="Qsc-us-Nea" firstAttribute="top" secondItem="MDv-b5-eXE" secondAttribute="bottom" constant="22" id="pT3-qt-xQG"/>
                     <constraint firstItem="WiS-mP-Eso" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="wqs-vR-2pI"/>
                 </constraints>

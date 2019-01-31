@@ -133,10 +133,8 @@ extension ConnectedAccountsViewController: SocialAccountConnectionCellDelegate {
     
     func willChangeHeight() {
         DispatchQueue.main.async {
-            UIView.setAnimationsEnabled(false)
             self.tableView.beginUpdates()
             self.tableView.endUpdates()
-            UIView.setAnimationsEnabled(true)
         }
     }
     

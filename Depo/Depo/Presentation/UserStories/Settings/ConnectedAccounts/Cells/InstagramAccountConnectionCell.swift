@@ -86,7 +86,7 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
             removeConnectionButton.isHidden = true
             removeConnectionButton.layer.borderColor = removeConnectionButton.currentTitleColor.cgColor
             removeConnectionButton.layer.borderWidth = 2.0
-            removeConnectionButton.layer.cornerRadius = removeConnectionButton.bounds.height * 0.3
+            removeConnectionButton.layer.cornerRadius = removeConnectionButton.bounds.height * 0.25
         }
     }
     
