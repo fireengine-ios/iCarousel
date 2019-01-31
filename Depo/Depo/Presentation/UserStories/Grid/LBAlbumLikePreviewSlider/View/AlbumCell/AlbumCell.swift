@@ -10,14 +10,21 @@ import UIKit
 
 class AlbumCell: UICollectionViewCell {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var previewBackView: UIView!
-    @IBOutlet weak var previewImage1: LoadingImageView!
-    @IBOutlet weak var previewImage2: LoadingImageView!
-    @IBOutlet weak var previewImage3: LoadingImageView!
-    @IBOutlet weak var previewImage4: LoadingImageView!
-    @IBOutlet weak var placeholderImage: UIImageView!
-    @IBOutlet weak var bigPreviewImage: LoadingImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var previewBackView: UIView!
+    @IBOutlet private weak var previewImage1: LoadingImageView!
+    @IBOutlet private weak var previewImage2: LoadingImageView!
+    @IBOutlet private weak var previewImage3: LoadingImageView!
+    @IBOutlet private weak var previewImage4: LoadingImageView!
+    @IBOutlet private weak var placeholderImage: UIImageView!
+    @IBOutlet private weak var bigPreviewImage: LoadingImageView!
+    @IBOutlet private weak var gradientView: RadialGradientableView! {
+        didSet {
+            gradientView.backgroundColor = UIColor.lrTealish
+            gradientView.isNeedGradient = false
+            gradientView.isHidden = true
+        }
+    }
     
     func setup(withItem item: SliderItem) {
         titleLabel.text = item.name
@@ -45,8 +52,19 @@ class AlbumCell: UICollectionViewCell {
     
     private func setup(withSliderItem item: SliderItem) {
         if let items = item.previewItems, !items.isEmpty {
-            previewBackView.isHidden = false
-            placeholderImage.image = nil
+            if item.type == .instaPick {
+                gradientView.layer.borderWidth = 2.0
+                gradientView.layer.borderColor = item.type?.placeholderBorderColor
+                gradientView.isHidden = false
+                gradientView.isNeedGradient = true
+                previewBackView.backgroundColor = .clear
+            } else {
+                previewBackView.isHidden = false
+                placeholderImage.image = nil
+                gradientView.isHidden = true
+                gradientView.isNeedGradient = false
+            }
+            
 
             setupImage(previewImage1, path: items.first, placeholder: item.previewPlaceholder)
             setupImage(previewImage2, path: items[safe: 1], placeholder: item.previewPlaceholder)
