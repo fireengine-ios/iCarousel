@@ -21,11 +21,14 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     
     var selectionState = PhotoSelectionController.SelectionState.selecting {
         didSet {
-            for childController in viewControllers {
-                childController.selectionStateDidChange(selectionState)
+            delegates.invoke { delegate in
+                delegate.selectionStateDidChange(selectionState)
             }
         }
     }
+    
+    // TODO: iPad
+    private let selectionControllerPageSize = 100
     
     private let maxSelectingLimit = 5
     private var selectingLimit = 0
@@ -49,7 +52,8 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         return analyzeButton
     }()
     
-    private var viewControllers: [PhotoSelectionController] = []
+    private var segmentedViewControllers: [UIViewController] = []
+    private var delegates = MulticastDelegate<InstaPickSelectionSegmentedControllerDelegate>()
     
     private let instapickService: InstapickService = factory.resolve()
     
@@ -157,22 +161,25 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     /// one time called
     private func setupScreenWithSelectingLimit(_ selectingLimit: Int) {
         
-        // TODO: iPad
-        let pageSize = 100
-        
-        let allPhotosDataSource = AllPhotosSelectionDataSource(pageSize: pageSize)
+        let allPhotosDataSource = AllPhotosSelectionDataSource(pageSize: selectionControllerPageSize)
         let allPhotosVC = PhotoSelectionController(title: "Photos",
                                                    selectingLimit: selectingLimit,
                                                    delegate: self,
                                                    dataSource: allPhotosDataSource)
         
-        let favoriteDataSource = FavoritePhotosSelectionDataSource(pageSize: pageSize)
+        let albumsVC = InstapickAlbumSelectionViewController(title: "Albums", delegate: self)
+        
+        let favoriteDataSource = FavoritePhotosSelectionDataSource(pageSize: selectionControllerPageSize)
         let favoritePhotosVC = PhotoSelectionController(title: "Favs",
                                                         selectingLimit: selectingLimit,
                                                         delegate: self,
                                                         dataSource: favoriteDataSource)
         
-        viewControllers = [allPhotosVC, favoritePhotosVC]
+        segmentedViewControllers = [allPhotosVC, albumsVC, favoritePhotosVC]
+        
+        /// we should not add "delegates.add(albumsVC)" bcz it is not selection controller
+        delegates.add(allPhotosVC)
+        delegates.add(favoritePhotosVC)
         
         DispatchQueue.toMain {
             self.selectController(at: 0)
@@ -181,9 +188,9 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     }
     
     private func setupSegmentedControl() {
-        assert(!viewControllers.isEmpty, "should not be empty")
+        assert(!segmentedViewControllers.isEmpty, "should not be empty")
         
-        for (index, controller) in viewControllers.enumerated() {
+        for (index, controller) in segmentedViewControllers.enumerated() {
             segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)
         }
         
@@ -227,13 +234,13 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     }
     
     private func selectController(at selectedIndex: Int) {
-        guard selectedIndex < viewControllers.count else {
+        guard selectedIndex < segmentedViewControllers.count else {
             assertionFailure()
             return
         }
         
         childViewControllers.forEach { $0.removeFromParentVC() }
-        add(childController: viewControllers[selectedIndex])
+        add(childController: segmentedViewControllers[selectedIndex])
     }
     
     private func add(childController: UIViewController) {
@@ -251,10 +258,11 @@ extension InstaPickSelectionSegmentedController {
         let vc = InstaPickSelectionSegmentedController()
         let navVC = UINavigationController(rootViewController: vc)
         
+        let navigationTextColor = UIColor.white
         let navigationBar = navVC.navigationBar
         
         let textAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.white,
+            .foregroundColor: navigationTextColor,
             .font: UIFont.TurkcellSaturaDemFont(size: 19)
         ]
         
@@ -262,6 +270,7 @@ extension InstaPickSelectionSegmentedController {
         navigationBar.barTintColor = UIColor.lrTealish //bar's background
         navigationBar.barStyle = .black
         navigationBar.isTranslucent = false
+        navigationBar.tintColor = navigationTextColor
         
         return navVC
     }
@@ -271,8 +280,8 @@ extension InstaPickSelectionSegmentedController: PhotoSelectionControllerDelegat
     
     func selectionController(_ controller: PhotoSelectionController, didSelectItem item: SearchItemResponse) {
         
-        for childController in viewControllers {
-            childController.didSelectItem(item)
+        delegates.invoke { delegate in
+            delegate.didSelectItem(item)
         }
         
         selectedItems.append(item)
@@ -289,8 +298,9 @@ extension InstaPickSelectionSegmentedController: PhotoSelectionControllerDelegat
     }
     
     func selectionController(_ controller: PhotoSelectionController, didDeselectItem item: SearchItemResponse) {
-        for childController in viewControllers {
-            childController.didDeselectItem(item)
+        
+        delegates.invoke { delegate in
+            delegate.didDeselectItem(item)
         }
         
         /// not working "selectedItems.remove(item)"
@@ -304,5 +314,19 @@ extension InstaPickSelectionSegmentedController: PhotoSelectionControllerDelegat
     
     private func updateTitle() {
         navigationItem.title = "Photos Selected (\(selectedItems.count))"
+    }
+}
+
+extension InstaPickSelectionSegmentedController: InstapickAlbumSelectionDelegate {
+    
+    func onSelectAlbum(_ album: AlbumItem) {
+        let dataSource = AlbumPhotosSelectionDataSource(pageSize: selectionControllerPageSize, albumUuid: album.uuid)
+        let selectionController = PhotoSelectionController(title: album.name ?? "",
+                                                           selectingLimit: selectingLimit,
+                                                           delegate: self,
+                                                           dataSource: dataSource)
+        navigationController?.pushViewController(selectionController, animated: true)
+//        //TODO: - need send selected items
+//        (RouterVC().navigationController?.presentedViewController as? UINavigationController)?.show(selectionController, sender: nil)
     }
 }

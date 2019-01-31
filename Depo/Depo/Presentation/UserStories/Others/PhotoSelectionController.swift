@@ -73,8 +73,8 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         label.textAlignment = .center
         label.numberOfLines = 0
-        //label.textColor
-        //label.font
+        label.textColor = ColorConstants.textGrayColor
+        label.font = UIFont.TurkcellSaturaRegFont(size: 14)
         label.text = "Loading..."
         return label
     }()
