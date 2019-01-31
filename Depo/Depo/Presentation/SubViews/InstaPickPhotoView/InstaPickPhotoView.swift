@@ -107,7 +107,7 @@ class InstaPickPhotoView: UIView, NibInit {
         pickedView.layer.cornerRadius = pickedView.bounds.height * 0.5
     }
     
-    func setupFonts(isIPad: Bool) {
+    func setupLabelsDesign(isIPad: Bool) {
         rateLabel.textColor = .white
         
         pickedLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 20 : 14)
@@ -130,7 +130,7 @@ class InstaPickPhotoView: UIView, NibInit {
         pickedLabel.textAlignment = .center
         
         setupCornerRadius()
-        setupFonts(isIPad: Device.isIpad)
+        setupLabelsDesign(isIPad: Device.isIpad)
     }
     
     //MARK: - Utility methods(public)

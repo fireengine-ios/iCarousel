@@ -25,8 +25,8 @@ final class InstaPickBigPhotoView: InstaPickPhotoView {
         imageViewHeightConstraint.constraintWithMultiplier(0.97).isActive = true
     }
     
-    override func setupFonts(isIPad: Bool) {
-        super.setupFonts(isIPad: isIPad)
+    override func setupLabelsDesign(isIPad: Bool) {
+        super.setupLabelsDesign(isIPad: isIPad)
 
         rateLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 20 : 14)
     }
