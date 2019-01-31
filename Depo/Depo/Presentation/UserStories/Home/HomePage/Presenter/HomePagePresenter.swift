@@ -80,6 +80,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     }
     
     func needRefresh() {
+        cards.removeAll()
         interactor.needRefresh()
     }
     
@@ -158,9 +159,9 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         }
         AuthoritySingleton.shared.hideBannerForSecondLogin()
         
-        if isReloadAll {
+        if isReloadAll, !cards.isEmpty {
             CardsManager.default.startOperatonsForCardsResponces(cardsResponces: cards)
-        } else {
+        } else if !cards.isEmpty {
             //to hide spinner when refresh only premium card
             view.stopRefresh()
         }
