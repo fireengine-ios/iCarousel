@@ -80,6 +80,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     }
     
     func needRefresh() {
+        cards.removeAll()
         interactor.needRefresh()
     }
     
@@ -157,6 +158,10 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
             CardsManager.default.startPremiumCard()
         }
         AuthoritySingleton.shared.hideBannerForSecondLogin()
+        
+        guard !cards.isEmpty else {
+            return
+        }
         
         if isReloadAll {
             CardsManager.default.startOperatonsForCardsResponces(cardsResponces: cards)

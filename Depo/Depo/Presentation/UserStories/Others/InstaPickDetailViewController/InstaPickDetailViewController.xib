@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad12_9" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -33,30 +33,30 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Myr-Pj-PlW" userLabel="Background View">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1xO-RL-kub">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FN2-0K-0zP">
-                            <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Va1-dT-UOQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="648"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nfo-vd-geH">
-                                            <rect key="frame" x="247" y="269" width="530" height="828"/>
+                                            <rect key="frame" x="16" y="30" width="288" height="588"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RC4-0c-Xb9" userLabel="Content View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="530" height="828"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="588"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDk-eY-3Lm">
-                                                            <rect key="frame" x="244" y="90" width="42" height="38"/>
+                                                            <rect key="frame" x="123" y="55" width="42" height="31"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="31" id="hzj-ux-tuJ">
                                                                     <variation key="heightClass=regular-widthClass=regular" constant="38"/>
@@ -67,7 +67,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIy-Xf-bKH">
-                                                            <rect key="frame" x="244" y="136" width="42" height="24"/>
+                                                            <rect key="frame" x="123" y="92" width="42" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="ubQ-qK-Nn1">
                                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
@@ -78,7 +78,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EU4-bu-mbr">
-                                                            <rect key="frame" x="244" y="496" width="42" height="24"/>
+                                                            <rect key="frame" x="123" y="366" width="42" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="PFw-l5-qhr">
                                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
@@ -89,7 +89,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="NV2-v7-EJx">
-                                                            <rect key="frame" x="70" y="534" width="390" height="100"/>
+                                                            <rect key="frame" x="24" y="393" width="240" height="75"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="75" id="DBQ-ot-amH">
@@ -103,17 +103,53 @@
                                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             </collectionViewFlowLayout>
                                                         </collectionView>
-                                                        <stackView opaque="NO" contentMode="center" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="q5N-z4-Gtm">
-                                                            <rect key="frame" x="85" y="194" width="360" height="260"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pan-JD-bOc">
+                                                            <rect key="frame" x="241" y="12" width="35" height="35"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="35" id="Pgf-0e-OaW"/>
+                                                                <constraint firstAttribute="width" constant="35" id="mdu-de-r53"/>
+                                                            </constraints>
+                                                            <state key="normal" image="grayCloseButton"/>
+                                                            <connections>
+                                                                <action selector="onCloseTap:" destination="-1" eventType="touchUpInside" id="Fhq-QH-mVR"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GN-cn-ujP">
+                                                            <rect key="frame" x="121" y="482" width="46" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="18" id="KHs-xd-XGe">
+                                                                    <variation key="heightClass=regular-widthClass=regular" constant="19"/>
+                                                                </constraint>
+                                                            </constraints>
+                                                            <state key="normal" title="Button"/>
+                                                            <connections>
+                                                                <action selector="onCopyToClipboardTap:" destination="-1" eventType="touchUpInside" id="vt7-8I-8s1"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6o-kD-Nrz" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                                                            <rect key="frame" x="35.5" y="512" width="217" height="46"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="217" id="A9i-uP-amv"/>
+                                                                <constraint firstAttribute="height" constant="46" id="n7N-Wy-GFN">
+                                                                    <variation key="heightClass=regular-widthClass=regular" constant="57"/>
+                                                                </constraint>
+                                                            </constraints>
+                                                            <state key="normal" title="Button"/>
+                                                            <connections>
+                                                                <action selector="onShareTap:" destination="-1" eventType="touchUpInside" id="PCX-wd-uUc"/>
+                                                            </connections>
+                                                        </button>
+                                                        <stackView opaque="NO" contentMode="center" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="q5N-z4-Gtm">
+                                                            <rect key="frame" x="25" y="132" width="238" height="200"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="YZz-yY-rbp">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="360" height="260"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="238" height="200"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6pm-H8-NeA">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="260" height="260"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="167" height="200"/>
                                                                             <subviews>
-                                                                                <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="bigView" translatesAutoresizingMaskIntoConstraints="NO" id="Ynk-f5-yeT" customClass="InstaPickPhotoView" customModule="lifebox" customModuleProvider="target">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="260"/>
+                                                                                <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="bigView" translatesAutoresizingMaskIntoConstraints="NO" id="Ynk-f5-yeT" customClass="InstaPickBigPhotoView" customModule="lifebox" customModuleProvider="target">
+                                                                                    <rect key="frame" x="0.0" y="16.5" width="167" height="167"/>
                                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" secondItem="Ynk-f5-yeT" secondAttribute="height" multiplier="1:1" id="jqm-wJ-1yY"/>
@@ -122,41 +158,43 @@
                                                                             </subviews>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
+                                                                                <constraint firstItem="Ynk-f5-yeT" firstAttribute="width" relation="lessThanOrEqual" secondItem="6pm-H8-NeA" secondAttribute="width" id="3kK-Fa-lW1"/>
                                                                                 <constraint firstItem="Ynk-f5-yeT" firstAttribute="centerX" secondItem="6pm-H8-NeA" secondAttribute="centerX" id="EKp-lA-F0D"/>
-                                                                                <constraint firstItem="Ynk-f5-yeT" firstAttribute="width" secondItem="6pm-H8-NeA" secondAttribute="width" id="efr-jy-OxO"/>
+                                                                                <constraint firstItem="Ynk-f5-yeT" firstAttribute="width" secondItem="6pm-H8-NeA" secondAttribute="width" priority="250" id="efr-jy-OxO"/>
                                                                                 <constraint firstItem="Ynk-f5-yeT" firstAttribute="centerY" secondItem="6pm-H8-NeA" secondAttribute="centerY" id="ubc-vH-6B3"/>
-                                                                                <constraint firstItem="Ynk-f5-yeT" firstAttribute="height" secondItem="6pm-H8-NeA" secondAttribute="height" id="x8m-dv-dtL"/>
+                                                                                <constraint firstItem="Ynk-f5-yeT" firstAttribute="height" relation="lessThanOrEqual" secondItem="6pm-H8-NeA" secondAttribute="height" id="ww9-RZ-0Xx"/>
+                                                                                <constraint firstItem="Ynk-f5-yeT" firstAttribute="height" secondItem="6pm-H8-NeA" secondAttribute="height" priority="250" id="x8m-dv-dtL"/>
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BM4-jc-aDX">
-                                                                            <rect key="frame" x="304" y="0.0" width="56" height="260"/>
+                                                                            <rect key="frame" x="192" y="0.0" width="46" height="200"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jtO-kl-uZE">
-                                                                                    <rect key="frame" x="0.0" y="3" width="56" height="254"/>
+                                                                                    <rect key="frame" x="0.0" y="0.5" width="46" height="199"/>
                                                                                     <subviews>
-                                                                                        <view contentMode="scaleToFill" restorationIdentifier="smallOne" translatesAutoresizingMaskIntoConstraints="NO" id="6H1-i6-G1u" customClass="InstaPickPhotoView" customModule="lifebox" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
+                                                                                        <view contentMode="scaleToFill" restorationIdentifier="smallOne" translatesAutoresizingMaskIntoConstraints="NO" id="6H1-i6-G1u" customClass="InstaPickSmallPhotoView" customModule="lifebox" customModuleProvider="target">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" secondItem="6H1-i6-G1u" secondAttribute="height" multiplier="1:1" id="hXa-1r-IGA"/>
                                                                                             </constraints>
                                                                                         </view>
-                                                                                        <view contentMode="scaleToFill" restorationIdentifier="smallTwo" translatesAutoresizingMaskIntoConstraints="NO" id="xHE-Hs-2sD" customClass="InstaPickPhotoView" customModule="lifebox" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="66" width="56" height="56"/>
+                                                                                        <view contentMode="scaleToFill" restorationIdentifier="smallTwo" translatesAutoresizingMaskIntoConstraints="NO" id="xHE-Hs-2sD" customClass="InstaPickSmallPhotoView" customModule="lifebox" customModuleProvider="target">
+                                                                                            <rect key="frame" x="0.0" y="51" width="46" height="46"/>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" secondItem="xHE-Hs-2sD" secondAttribute="height" multiplier="1:1" id="yC6-iJ-Ylg"/>
                                                                                             </constraints>
                                                                                         </view>
-                                                                                        <view contentMode="scaleToFill" restorationIdentifier="smallFour" translatesAutoresizingMaskIntoConstraints="NO" id="iax-U1-9TV" customClass="InstaPickPhotoView" customModule="lifebox" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="132" width="56" height="56"/>
+                                                                                        <view contentMode="scaleToFill" restorationIdentifier="smallFour" translatesAutoresizingMaskIntoConstraints="NO" id="iax-U1-9TV" customClass="InstaPickSmallPhotoView" customModule="lifebox" customModuleProvider="target">
+                                                                                            <rect key="frame" x="0.0" y="102" width="46" height="46"/>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" secondItem="iax-U1-9TV" secondAttribute="height" multiplier="1:1" id="Dj5-UC-mxm"/>
                                                                                             </constraints>
                                                                                         </view>
-                                                                                        <view contentMode="scaleToFill" restorationIdentifier="smallThree" translatesAutoresizingMaskIntoConstraints="NO" id="QD4-Gc-Iaq" customClass="InstaPickPhotoView" customModule="lifebox" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="198" width="56" height="56"/>
+                                                                                        <view contentMode="scaleToFill" restorationIdentifier="smallThree" translatesAutoresizingMaskIntoConstraints="NO" id="QD4-Gc-Iaq" customClass="InstaPickSmallPhotoView" customModule="lifebox" customModuleProvider="target">
+                                                                                            <rect key="frame" x="0.0" y="153" width="46" height="46"/>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" secondItem="QD4-Gc-Iaq" secondAttribute="height" multiplier="1:1" id="Da0-D2-fGG"/>
@@ -194,42 +232,6 @@
                                                                 </constraint>
                                                             </constraints>
                                                         </stackView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pan-JD-bOc">
-                                                            <rect key="frame" x="465" y="30" width="35" height="35"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="35" id="Pgf-0e-OaW"/>
-                                                                <constraint firstAttribute="width" constant="35" id="mdu-de-r53"/>
-                                                            </constraints>
-                                                            <state key="normal" image="grayCloseButton"/>
-                                                            <connections>
-                                                                <action selector="onCloseTap:" destination="-1" eventType="touchUpInside" id="Fhq-QH-mVR"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GN-cn-ujP">
-                                                            <rect key="frame" x="242" y="670" width="46" height="19"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="18" id="KHs-xd-XGe">
-                                                                    <variation key="heightClass=regular-widthClass=regular" constant="19"/>
-                                                                </constraint>
-                                                            </constraints>
-                                                            <state key="normal" title="Button"/>
-                                                            <connections>
-                                                                <action selector="onCopyToClipboardTap:" destination="-1" eventType="touchUpInside" id="vt7-8I-8s1"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6o-kD-Nrz" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
-                                                            <rect key="frame" x="156.5" y="711" width="217" height="57"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="217" id="A9i-uP-amv"/>
-                                                                <constraint firstAttribute="height" constant="46" id="n7N-Wy-GFN">
-                                                                    <variation key="heightClass=regular-widthClass=regular" constant="57"/>
-                                                                </constraint>
-                                                            </constraints>
-                                                            <state key="normal" title="Button"/>
-                                                            <connections>
-                                                                <action selector="onShareTap:" destination="-1" eventType="touchUpInside" id="PCX-wd-uUc"/>
-                                                            </connections>
-                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -265,7 +267,9 @@
                                                         <constraint firstItem="NV2-v7-EJx" firstAttribute="leading" secondItem="RC4-0c-Xb9" secondAttribute="leading" constant="24" id="dDt-4U-3zx">
                                                             <variation key="heightClass=regular-widthClass=regular" constant="70"/>
                                                         </constraint>
-                                                        <constraint firstItem="q5N-z4-Gtm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RC4-0c-Xb9" secondAttribute="leading" constant="10" id="fUT-Yx-X2y"/>
+                                                        <constraint firstItem="q5N-z4-Gtm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RC4-0c-Xb9" secondAttribute="leading" constant="25" id="fUT-Yx-X2y">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                        </constraint>
                                                         <constraint firstItem="QIy-Xf-bKH" firstAttribute="centerX" secondItem="RC4-0c-Xb9" secondAttribute="centerX" id="g7g-Hh-3eJ"/>
                                                         <constraint firstItem="EU4-bu-mbr" firstAttribute="top" secondItem="q5N-z4-Gtm" secondAttribute="bottom" constant="34" id="gDA-NG-Tz6">
                                                             <variation key="heightClass=regular-widthClass=regular" constant="42"/>
