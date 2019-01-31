@@ -64,10 +64,26 @@ final class InstagramService: BaseRequestService {
     }
     
     func checkInstagramLogin(instagramAccessToken: String, handler: @escaping (ResponseResult<Void>) -> Void) {
+        var urlRequest = URLRequest(url: RouteRequests.instagramConnect)
+        urlRequest.httpBody = instagramAccessToken.data(using: .utf8)
+        urlRequest.httpMethod = HTTPMethod.post.rawValue
         sessionManager
-            .request(RouteRequests.instagramConnect,
-                     method: .post,
-                     encoding: instagramAccessToken)
+            .request(urlRequest)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(_):
+                    handler(.success(()))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    func disconnectInstagram(handler: @escaping (ResponseResult<Void>) -> Void) {
+        sessionManager
+            .request(RouteRequests.instagramDisconnect,
+                     method: .post)
             .customValidate()
             .responseData { response in
                 switch response.result {

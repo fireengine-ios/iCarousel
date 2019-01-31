@@ -267,9 +267,22 @@ extension InstapickPopUpController: ConnectWithInstaViewDelegate {
 extension InstapickPopUpController: InstagramAuthViewControllerDelegate {
     
     func instagramAuthSuccess() {
-        close { [weak self] in
-            self?.delegate?.onConnectWithInsta()
+        accountService.changeInstapickAllowed(isInstapickAllowed: true) { [weak self] response in
+            self?.hideSpiner()
+            
+            switch response {
+            case .success(_):
+                DispatchQueue.toMain {
+                    self?.close { [weak self] in
+                        self?.delegate?.onConnectWithInsta()
+                    }
+                }
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.localizedDescription)
+            }
         }
+        
+        
     }
     
     func instagramAuthCancel() { }

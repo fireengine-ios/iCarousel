@@ -262,6 +262,7 @@
 "Import From Facebook" = "Import from Facebook";
 "Import From Dropbox" = "Import from Dropbox";
 "Import Photos" = "Import Photos";
+"connected_accounts" = "Connected Accounts";
 "Are you sure you want to exit the application?" = "Are you sure you want to exit the application?";
 "Auto-login" = "Auto-login";
 "Logout" = "Logout";
@@ -842,3 +843,9 @@
 "connected_with_instagram_name" = "Connect with Instagram as";
 "continue_without_connecting" = "Continue without connecting";
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
+"Facebook" = "Facebook";
+"Dropbox" = "Dropbox";
+"Instagram" = "Instagram";
+"connected_as_format" = "Connected as @%@";
+"instagram_remove_connection_warning_title" = "You're about to remove your Instagram connection.";
+"instagram_remove_connection_warning_message" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\n";

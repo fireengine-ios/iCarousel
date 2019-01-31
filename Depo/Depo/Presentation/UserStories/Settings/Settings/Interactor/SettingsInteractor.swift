@@ -43,11 +43,13 @@ class SettingsInteractor: SettingsInteractorInput {
                              TextConstants.settingsViewCellUsageInfo,
                              passcodeCellTitle]
         
+        let importAccountsCells = [TextConstants.settingsViewCellConnectedAccounts]
+        
         var array = [[TextConstants.settingsViewCellBeckup,
-                      TextConstants.settingsViewCellImportPhotos,
                       TextConstants.settingsViewCellAutoUpload,
                       TextConstants.settingsViewCellContactsSync,
                       TextConstants.settingsViewCellFaceAndImageGrouping],
+                     importAccountsCells,
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
                       TextConstants.settingsViewCellLogout]]
@@ -59,7 +61,8 @@ class SettingsInteractor: SettingsInteractorInput {
             DispatchQueue.toMain {
                 self.userInfoResponse = response
                 if self.isTurkcellUser {
-                    array[1].append(TextConstants.settingsViewCellLoginSettings)
+                    /// add to the securityCells section
+                    array[2].append(TextConstants.settingsViewCellLoginSettings)
                 }
                 self.output.cellsDataForSettings(array: array)
             }
