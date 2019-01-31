@@ -52,14 +52,14 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
     
     @IBOutlet private weak var instaPickIcon: UIImageView! {
         didSet {
-            instaPickIcon.image = #imageLiteral(resourceName: "instagram")
+            instaPickIcon.image = UIImage(named:"instagram")
             instaPickIcon.contentMode = .center
         }
     }
     
     @IBOutlet private weak var importFromInstagramIcon: UIImageView! {
         didSet {
-            importFromInstagramIcon.image = #imageLiteral(resourceName: "instagram")
+            importFromInstagramIcon.image = UIImage(named:"instagram")
             importFromInstagramIcon.contentMode = .center
         }
     }

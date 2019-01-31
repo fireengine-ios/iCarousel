@@ -50,7 +50,7 @@ final class FacebookAccountConnectionCell: UITableViewCell, SocialAccountConnect
     @IBOutlet private weak var icon: UIImageView! {
         didSet {
             icon.contentMode = .center
-            icon.image = #imageLiteral(resourceName: "facebook")
+            icon.image = UIImage(named:"facebook")
         }
     }
     

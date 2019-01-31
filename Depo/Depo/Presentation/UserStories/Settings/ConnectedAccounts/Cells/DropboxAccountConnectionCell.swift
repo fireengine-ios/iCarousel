@@ -26,7 +26,7 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialAccountConnecti
     @IBOutlet private weak var icon: UIImageView! {
         didSet {
             icon.contentMode = .center
-            icon.image = #imageLiteral(resourceName: "dropox")
+            icon.image = UIImage(named:"dropbox")
         }
     }
     

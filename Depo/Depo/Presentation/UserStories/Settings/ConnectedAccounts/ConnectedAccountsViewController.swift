@@ -54,6 +54,7 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
         tableView.delegate = self
         
         tableView.tableFooterView = UIView()
+        tableView.estimatedRowHeight = UITableViewAutomaticDimension
         
         let reusableIds = [CellsIdConstants.instagramAccountConnectionCell,
                            CellsIdConstants.facebookAccountConnectionCell,
@@ -112,10 +113,6 @@ extension ConnectedAccountsViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension ConnectedAccountsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
