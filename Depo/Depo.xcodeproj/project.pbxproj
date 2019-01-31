@@ -5179,6 +5179,8 @@
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
 		8CD8F4F61F1F407C00F1257B /* EmptyContainerNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyContainerNavVC.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
+		8CF541EF22030F35001BB03F /* sq */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sq; path = sq.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
+		8CF541F022030F36001BB03F /* sq */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sq; path = sq.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8CF6A9BD207C8C32007DEF71 /* PageCompounder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCompounder.swift; sourceTree = "<group>"; };
 		8CF6A9C1207C8CF8007DEF71 /* CollectionViewSpinnerFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewSpinnerFooter.xib; sourceTree = "<group>"; };
 		8CF6A9C2207C8CF8007DEF71 /* CollectionViewSpinnerFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewSpinnerFooter.swift; sourceTree = "<group>"; };
@@ -13317,6 +13319,7 @@
 				pt,
 				base,
 				ro,
+				sq,
 			);
 			mainGroup = 051E1DEA19CAC2F900FD1E03;
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
@@ -17620,6 +17623,7 @@
 				CEBAB15820945C66002824C6 /* de */,
 				CEBAB15920945C85002824C6 /* ar */,
 				8C0971BB209F91EC003C5609 /* uk */,
+				8CF541EF22030F35001BB03F /* sq */,
 			);
 			name = OurLocalizable.strings;
 			path = .;
@@ -17707,6 +17711,7 @@
 				CEEB7AA220A5BC3C0070FDC2 /* ru */,
 				CEEB7AA320A5BC690070FDC2 /* es */,
 				CEEB7AA420A5BC6A0070FDC2 /* ro */,
+				8CF541F022030F36001BB03F /* sq */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
