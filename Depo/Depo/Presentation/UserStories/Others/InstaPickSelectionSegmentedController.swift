@@ -14,20 +14,26 @@ protocol InstaPickSelectionSegmentedControllerDelegate {
     func didDeselectItem(_ deselectItem: SearchItemResponse)
 }
 
-final class InstaPickSelectionSegmentedController: UIViewController {
+final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresenter {
     
     var selectedItems = [SearchItemResponse]()
     private var currentSelectingCount = 0
     
     var selectionState = PhotoSelectionState.selecting {
         didSet {
+            switch selectionState {
+            case .selecting:
+                analyzesLeftLabel.isHidden = true
+            case .ended:
+                analyzesLeftLabel.isHidden = false
+            }
+            
             delegates.invoke { delegate in
                 delegate.selectionStateDidChange(selectionState)
             }
         }
     }
     
-    // TODO: iPad
     private let selectionControllerPageSize = Device.isIpad ? 200 : 100
     
     private let maxSelectingLimit = 5
@@ -45,11 +51,31 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         return segmentedControl
     }()
     
-    private let analyzeButton: BlueButtonWithWhiteText = {
-        let analyzeButton = BlueButtonWithWhiteText()
-        analyzeButton.isExclusiveTouch = true
-        analyzeButton.setTitle(TextConstants.analyzeWithInstapick, for: .normal)
-        return analyzeButton
+    private let analyzeButton: RoundedInsetsButton = {
+        let button = RoundedInsetsButton()
+        button.isExclusiveTouch = true
+        button.setTitle(TextConstants.analyzeWithInstapick, for: .normal)
+        button.insets = UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30)
+        
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitleColor(UIColor.white.darker(by: 30), for: .highlighted)
+        button.setBackgroundColor(ColorConstants.darcBlueColor, for: .normal)
+        button.setBackgroundColor(ColorConstants.darcBlueColor.darker(by: 30), for: .highlighted)
+        
+        button.titleLabel?.font = ApplicationPalette.bigRoundButtonFont
+        button.adjustsFontSizeToFitWidth()
+        return button
+    }()
+    
+    private let analyzesLeftLabel: InsetsLabel = {
+        let label = InsetsLabel()
+        label.textAlignment = .center
+        label.textColor = ColorConstants.darcBlueColor
+        label.font = UIFont.TurkcellSaturaBolFont(size: 16)
+        label.isHidden = true
+        label.backgroundColor = ColorConstants.fileGreedCellColor
+        label.insets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
+        return label
     }()
     
     private var segmentedViewControllers: [UIViewController] = []
@@ -95,6 +121,7 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         view.addSubview(containerView)
         view.addSubview(transparentGradientView)
         view.addSubview(analyzeButton)
+        view.addSubview(analyzesLeftLabel)
         
         let edgeOffset: CGFloat = 35
         let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
@@ -123,10 +150,15 @@ final class InstaPickSelectionSegmentedController: UIViewController {
         transparentGradientView.heightAnchor.constraint(equalToConstant: transparentGradientViewHeight).isActive = true
         
         analyzeButton.translatesAutoresizingMaskIntoConstraints = false
-        analyzeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: edgeOffset).isActive = true
-        analyzeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -edgeOffset).isActive = true
+//        analyzeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: edgeOffset).isActive = true
+//        analyzeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -edgeOffset).isActive = true
         analyzeButton.centerYAnchor.constraint(equalTo: transparentGradientView.centerYAnchor).isActive = true
+        analyzeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         analyzeButton.heightAnchor.constraint(equalToConstant: 54).isActive = true
+        
+        analyzesLeftLabel.translatesAutoresizingMaskIntoConstraints = false
+        analyzesLeftLabel.bottomAnchor.constraint(equalTo: transparentGradientView.topAnchor, constant: -20).isActive = true
+        analyzesLeftLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     override func viewDidLoad() {
@@ -153,13 +185,14 @@ final class InstaPickSelectionSegmentedController: UIViewController {
                 self.setupScreenWithSelectingLimit(self.selectingLimit)
                 
             case .failed(let error):
-                print(error.localizedDescription)
+                self.showErrorAlert(message: error.localizedDescription)
             }
         }
     }
     
     /// one time called
     private func setupScreenWithSelectingLimit(_ selectingLimit: Int) {
+        analyzesLeftLabel.text = "You only have \(selectingLimit) analyses left"
         
         let allPhotosDataSource = AllPhotosSelectionDataSource(pageSize: selectionControllerPageSize)
         let allPhotosVC = PhotoSelectionController(title: "Photos",
