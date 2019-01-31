@@ -14,7 +14,7 @@ protocol InstaPickSelectionSegmentedControllerDelegate {
     func didDeselectItem(_ deselectItem: SearchItemResponse)
 }
 
-final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresenter {
+final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresenter, BackButtonActions {
     
     var selectedItems = [SearchItemResponse]()
     private var currentSelectingCount = 0
@@ -104,6 +104,7 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         
         // TODO: localize
         navigationItem.title = "Photos Selected (\(0))"
+        removeBackButtonTitle()
         
         let cancelButton = UIBarButtonItem(title: "Cancel",
                                            font: UIFont.TurkcellSaturaDemFont(size: 19),
@@ -113,52 +114,6 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
                                            target: self,
                                            selector: #selector(closeSelf))
         navigationItem.leftBarButtonItem = cancelButton
-    }
-    
-    private func setupLayout() {
-        view.addSubview(topView)
-        topView.addSubview(segmentedControl)
-        view.addSubview(containerView)
-        view.addSubview(transparentGradientView)
-        view.addSubview(analyzeButton)
-        view.addSubview(analyzesLeftLabel)
-        
-        let edgeOffset: CGFloat = 35
-        let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
-        
-        topView.translatesAutoresizingMaskIntoConstraints = false
-        topView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        topView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: edgeOffset).isActive = true
-        segmentedControl.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).isActive = true
-        segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).isActive = true
-        
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        transparentGradientView.translatesAutoresizingMaskIntoConstraints = false
-        transparentGradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        transparentGradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        transparentGradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        transparentGradientView.heightAnchor.constraint(equalToConstant: transparentGradientViewHeight).isActive = true
-        
-        analyzeButton.translatesAutoresizingMaskIntoConstraints = false
-//        analyzeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: edgeOffset).isActive = true
-//        analyzeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -edgeOffset).isActive = true
-        analyzeButton.centerYAnchor.constraint(equalTo: transparentGradientView.centerYAnchor).isActive = true
-        analyzeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        analyzeButton.heightAnchor.constraint(equalToConstant: 54).isActive = true
-        
-        analyzesLeftLabel.translatesAutoresizingMaskIntoConstraints = false
-        analyzesLeftLabel.bottomAnchor.constraint(equalTo: transparentGradientView.topAnchor, constant: -20).isActive = true
-        analyzesLeftLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     override func viewDidLoad() {
@@ -300,7 +255,7 @@ extension InstaPickSelectionSegmentedController {
         ]
         
         navigationBar.titleTextAttributes = textAttributes
-        navigationBar.barTintColor = UIColor.lrTealish //bar's background
+        navigationBar.barTintColor = UIColor.lrTealish ///bar's background
         navigationBar.barStyle = .black
         navigationBar.isTranslucent = false
         navigationBar.tintColor = navigationTextColor
@@ -350,6 +305,7 @@ extension InstaPickSelectionSegmentedController: PhotoSelectionControllerDelegat
     }
 }
 
+// MARK: - InstapickAlbumSelectionDelegate
 extension InstaPickSelectionSegmentedController: InstapickAlbumSelectionDelegate {
     
     func onSelectAlbum(_ album: AlbumItem) {
@@ -360,5 +316,64 @@ extension InstaPickSelectionSegmentedController: InstapickAlbumSelectionDelegate
                                                            dataSource: dataSource)
         delegates.add(albumSelectionVC)
         navigationController?.pushViewController(albumSelectionVC, animated: true)
+    }
+}
+
+// MARK: - layout
+extension InstaPickSelectionSegmentedController {
+    
+    private func setupLayout() {
+        view.addSubview(topView)
+        topView.addSubview(segmentedControl)
+        view.addSubview(containerView)
+        view.addSubview(transparentGradientView)
+        view.addSubview(analyzeButton)
+        view.addSubview(analyzesLeftLabel)
+        
+        let edgeOffset: CGFloat = Device.isIpad ? 75 : 35
+        let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
+        
+        topView.translatesAutoresizingMaskIntoConstraints = false
+        topView.topAnchor.constraint(equalTo: view.topAnchor).activate()
+        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        topView.heightAnchor.constraint(equalToConstant: 50).activate()
+        
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.leadingAnchor
+            .constraint(equalTo: topView.leadingAnchor, constant: edgeOffset).activate()
+        segmentedControl.trailingAnchor
+            .constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).activate()
+        segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).activate()
+        
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.topAnchor.constraint(equalTo: topView.bottomAnchor).activate()
+        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
+        
+        transparentGradientView.translatesAutoresizingMaskIntoConstraints = false
+        transparentGradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
+        transparentGradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        transparentGradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        transparentGradientView.heightAnchor
+            .constraint(equalToConstant: transparentGradientViewHeight).activate()
+        
+        analyzeButton.translatesAutoresizingMaskIntoConstraints = false
+        analyzeButton.leadingAnchor
+            .constraint(equalTo: view.leadingAnchor, constant: 10)
+            .setPriority(750)
+            .activate()
+        analyzeButton.trailingAnchor
+            .constraint(equalTo: view.trailingAnchor, constant: -10)
+            .setPriority(750)
+            .activate()
+        analyzeButton.centerYAnchor.constraint(equalTo: transparentGradientView.centerYAnchor).activate()
+        analyzeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
+        analyzeButton.heightAnchor.constraint(equalToConstant: 54).activate()
+        
+        analyzesLeftLabel.translatesAutoresizingMaskIntoConstraints = false
+        analyzesLeftLabel.bottomAnchor.constraint(equalTo: transparentGradientView.topAnchor, constant: -20).activate()
+        analyzesLeftLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
     }
 }
