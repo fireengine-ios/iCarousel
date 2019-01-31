@@ -159,9 +159,13 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         }
         AuthoritySingleton.shared.hideBannerForSecondLogin()
         
-        if isReloadAll, !cards.isEmpty {
+        guard !cards.isEmpty else {
+            return
+        }
+        
+        if isReloadAll {
             CardsManager.default.startOperatonsForCardsResponces(cardsResponces: cards)
-        } else if !cards.isEmpty {
+        } else {
             //to hide spinner when refresh only premium card
             view.stopRefresh()
         }
