@@ -1,10 +1,15 @@
 import UIKit
 
 protocol PhotoSelectionControllerDelegate: class {
-    var selectionState: PhotoSelectionController.SelectionState { get }
+    var selectionState: PhotoSelectionState { get }
     var selectedItems: [SearchItemResponse] { get set }
     func selectionController(_ controller: PhotoSelectionController, didSelectItem item: SearchItemResponse)
     func selectionController(_ controller: PhotoSelectionController, didDeselectItem item: SearchItemResponse)
+}
+
+enum PhotoSelectionState {
+    case selecting
+    case ended
 }
 
 // TODO: localize
@@ -13,23 +18,17 @@ protocol PhotoSelectionControllerDelegate: class {
 // TODO: updaye cell layout UICollectionViewDelegateFlowLayout
 final class PhotoSelectionController: UIViewController, ErrorPresenter {
     
-    // TODO: refactor name
-    enum SelectionState {
-        case selecting
-        case ended
-    }
-    
     private weak var delegate: PhotoSelectionControllerDelegate?
     
     private let dataSource: PhotoSelectionDataSourceProtocol
     private var isLoadingMore = false
     private var isLoadingMoreFinished = false
     
-    private var selectionState: SelectionState {
+    private var selectionState: PhotoSelectionState {
         return delegate?.selectionState ?? localSelectionState
     }
     
-    private var localSelectionState = SelectionState.selecting
+    private var localSelectionState = PhotoSelectionState.selecting
     private var selectingLimit = 0
     
     private let photosSectionIndex = 0
@@ -381,7 +380,7 @@ extension PhotoSelectionController: InstaPickSelectionSegmentedControllerDelegat
         }
     }
     
-    func selectionStateDidChange(_ selectionState: PhotoSelectionController.SelectionState) {
+    func selectionStateDidChange(_ selectionState: PhotoSelectionState) {
         guard isViewLoaded else {
             return
         }

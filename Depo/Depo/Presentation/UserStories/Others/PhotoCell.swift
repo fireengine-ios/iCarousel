@@ -98,7 +98,7 @@ final class PhotoCell: UICollectionViewCell {
         cellImageManager = nil
     }
     
-    func update(for selectionState: PhotoSelectionController.SelectionState) {
+    func update(for selectionState: PhotoSelectionState) {
         if self.isSelected {
             selectionImageView.image = Constants.checkmarkFillImage
             setViewBorder(isSelected: true)

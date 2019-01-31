@@ -9,7 +9,7 @@
 import UIKit
 
 protocol InstaPickSelectionSegmentedControllerDelegate {
-    func selectionStateDidChange(_ selectionState: PhotoSelectionController.SelectionState)
+    func selectionStateDidChange(_ selectionState: PhotoSelectionState)
     func didSelectItem(_ selectedItem: SearchItemResponse)
     func didDeselectItem(_ deselectItem: SearchItemResponse)
 }
@@ -19,7 +19,7 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     var selectedItems = [SearchItemResponse]()
     private var currentSelectingCount = 0
     
-    var selectionState = PhotoSelectionController.SelectionState.selecting {
+    var selectionState = PhotoSelectionState.selecting {
         didSet {
             delegates.invoke { delegate in
                 delegate.selectionStateDidChange(selectionState)
