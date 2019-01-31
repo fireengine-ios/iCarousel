@@ -33,16 +33,15 @@ class StoriesDataSourceForCollectionView: ArrayDataSourceForCollectionView {
     }
     
     override func getIndexPathForObject(itemUUID: String) -> IndexPath? {
-        var indexPath: IndexPath? = nil
-        
         for (section, array) in tableDataMArray.enumerated() {
-            for (row, arraysObject) in array.enumerated() {
-                if arraysObject.uuid == itemUUID {
-                    indexPath = IndexPath(row: row, section: section)
+            for (row, item) in array.enumerated() {
+                if item.uuid == itemUUID {
+                    return IndexPath(row: row, section: section)
                 }
             }
         }
-        return indexPath
+
+        return nil
     }
     
     override func updateFavoritesCellStatus(items: [Item], isFavorites: Bool) {
@@ -50,28 +49,24 @@ class StoriesDataSourceForCollectionView: ArrayDataSourceForCollectionView {
             guard let `self` = self else {
                 return
             }
-            var arrayOfPath = [IndexPath]()
             
-            for item in items {
-                if let path = self.getIndexPathForObject(itemUUID: item.uuid) {
-                    arrayOfPath.append(path)
-                }
-            }
+            let changedItemsIndexPaths = items.flatMap { self.getIndexPathForObject(itemUUID: $0.uuid) }
             
-            if arrayOfPath.count > 0 {
+            if !changedItemsIndexPaths.isEmpty {
                 let uuids = items.map { $0.uuid }
+                
                 for array in self.tableDataMArray {
-                    for arraysObject in array {
-                        if uuids.contains(arraysObject.uuid), let arraysItem = arraysObject as? Item {
-                            arraysItem.favorites = isFavorites
+                    for dataSourceItem in array {
+                        if uuids.contains(dataSourceItem.uuid), let wrappedItem = dataSourceItem as? Item {
+                            wrappedItem.favorites = isFavorites
                         }
                     }
                 }
                 
-                DispatchQueue.main.async {
-                    self.collectionView?.performBatchUpdates({ [weak self] in
-                            self?.collectionView?.reloadItems(at: arrayOfPath)
-                        }, completion: nil)
+                DispatchQueue.toMain { [weak self] in
+                    self?.collectionView?.performBatchUpdates({
+                        self?.collectionView?.reloadItems(at: changedItemsIndexPaths)
+                    }, completion: nil)
                 }
             }
         }
