@@ -24,6 +24,8 @@ struct AnalyticsDimension {
     let countOfDownloadMetric: Int?
     let gsmOperatorType: String
     let deviceId: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
+    let loginType: GADementionValues.login?
+    let errorType: String?
     
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
@@ -58,6 +60,12 @@ struct AnalyticsDimension {
         }
         if let numberOfUploads = countOfUploadMetric {
             dimesionDictionary[GAMetrics.countOfUpload.text] = "\(numberOfUploads)"
+        }
+        if let loginType = loginType {
+            dimesionDictionary[GADementionsFields.loginType.text] = loginType.text
+        }
+        if let errorType = errorType {
+            dimesionDictionary[GADementionsFields.errorType.text] = errorType
         }
         return dimesionDictionary
     }

@@ -24,7 +24,7 @@ class SplashInteractor: SplashInteractorInput {
     func startLoginInBackroung() {
         if tokenStorage.accessToken == nil {
             if ReachabilityService().isReachableViaWiFi {
-                analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.serverError.text)
+                analyticsService.trackLoginEvent(error: .serverError)
                 failLogin()
             } else {
                 authenticationService.turkcellAuth(success: { [weak self] in
@@ -35,12 +35,14 @@ class SplashInteractor: SplashInteractorInput {
 //                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
                         self?.turkcellSuccessLogin()
                     }, fail: { [weak self] error in
-                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.serverError.text)
+                        let loginError = LoginResponseError(with: error)
+                        self?.analyticsService.trackLoginEvent(error: loginError)
                         self?.output.asyncOperationSucces()
                         self?.output.onFailLogin()
                     })
                 }, fail: { [weak self] response in
-                    self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.serverError.text)
+                    let loginError = LoginResponseError(with: response)
+                    self?.analyticsService.trackLoginEvent(error: loginError)
                     self?.output.asyncOperationSucces()
                     self?.output.onFailLogin()
                 })
@@ -79,7 +81,6 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func failLogin() {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure)
         DispatchQueue.toMain {
             self.output.onFailLogin()
             if !ReachabilityService().isReachable {

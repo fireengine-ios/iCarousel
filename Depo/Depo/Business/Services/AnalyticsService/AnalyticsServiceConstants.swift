@@ -677,6 +677,7 @@ enum GADementionsFields {
     case userPackage
     case gsmOperatorType
     case deviceId
+    case errorType
     
     var text: String {
         switch self {
@@ -712,6 +713,8 @@ enum GADementionsFields {
             return "gsmOperatorType"
         case .deviceId:
             return "deviceid"
+        case .errorType:
+            return "errorType"
         }
     }
     

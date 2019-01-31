@@ -62,6 +62,7 @@ class LoginInteractor: LoginInteractorInput {
             return
         }
         if !Validator.isValid(email: login) && !Validator.isValid(phone: login) {
+            analyticsService.trackLoginEvent(error: .incorrectUsernamePassword)
             output?.failLogin(message: TextConstants.loginScreenInvalidLoginError)
             return
         }
@@ -85,9 +86,9 @@ class LoginInteractor: LoginInteractorInput {
             self.analyticsService.track(event: .login)
             
             if Validator.isValid(email: login) {
-                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.email.text)
+                self.analyticsService.trackLoginEvent(loginType: .email)
             } else {
-                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.gsm.text)
+                self.analyticsService.trackLoginEvent(loginType: .gsm)
             }
 //            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
 //            ItemsRepository.sharedSession.updateCache()
@@ -100,52 +101,35 @@ class LoginInteractor: LoginInteractorInput {
                     return
                 }
                 
-                if self.isBlockError(forResponse: errorResponse) {
-                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.accountIsBlocked.text)
+                let loginError = LoginResponseError(with: errorResponse)
+                
+                self.analyticsService.trackLoginEvent(error: loginError)
+                
+                switch loginError {
+                case .block:
                     self.output?.failedBlockError()
-                    return
-                }
-                if self.inNeedOfCaptcha(forResponse: errorResponse) {
-                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.captchaRequired.text)
+                case .needCaptcha:
                     self.output?.needShowCaptcha()
-                } else if (!self.checkInternetConnection()) {
-                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.networkError.text)
-                    self.output?.failLogin(message: TextConstants.errorConnectedToNetwork)
-                } else if self.isAuthenticationDisabledForAccount(forResponse: errorResponse) {
-                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.turkcellPasswordDisabled.text)
+                case .authenticationDisabledForAccount:
                     self.output?.failLogin(message: TextConstants.loginScreenAuthWithTurkcellError)
-                } else if self.isNeedSignUp(forResponse: errorResponse) {
-                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.signupRequired.text)
+                case .needSignUp:
                     self.output?.needSignUp(message: TextConstants.loginScreenNeedSignUpError)
-                } else if self.isAuthenticationError(forResponse: errorResponse) {
-                    switch errorResponse {
-                    case .error(let error):
-                        if error.urlErrorCode.rawValue == 401 {
-                            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.unauthorized.text)
-                        }
-                    case .httpCode(let code):
-                        if code == 401 {
-                            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.unauthorized.text)
-                        }
-                    default:
-                        break
-                    }
+                case .incorrectUsernamePassword:
                     self.attempts += 1
                     self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
-                } else if self.isInvalidCaptchaError(forResponse: errorResponse) {
-                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.incorrectCaptcha.text)
+                case .incorrectCaptcha:
                     self.output?.failLogin(message: TextConstants.loginScreenInvalidCaptchaError)
-                } else if self.isInternetError(forResponse: errorResponse) {
-                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.networkError.text)
+                case .networkError, .serverError:
                     self.output?.failLogin(message: errorResponse.description)
-                } else if self.isEmptyPhoneError(for: errorResponse) {
-                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .failure, eventValue: GADementionValues.loginError.incorrectUsernamePassword.text)
+                case .unauthorized:
+                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
+                case .noInternetConnection:
+                    self.output?.failLogin(message: TextConstants.errorConnectedToNetwork)
+                case .emptyPhone:
                     self.login = login
                     self.password = password
                     self.atachedCaptcha = atachedCaptcha
                     self.output?.openEmptyPhone()
-                } else {
-                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 }
             }
         })
@@ -197,42 +181,6 @@ class LoginInteractor: LoginInteractorInput {
             return false
         }
         return true
-    }
-    
-    private func inNeedOfCaptcha(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("Captcha required")
-    }
-    
-    private func isAuthenticationDisabledForAccount(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("Authentication with Turkcell Password is disabled for the account")
-    }
-    
-    private func isNeedSignUp(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("Sign up required")
-    }
-    
-    private func isAuthenticationError(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("Authentication failure")
-    }
-    
-    private func isInvalidCaptchaError(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("Invalid captcha")
-    }
-    
-    private func isInternetError(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("Internet")
-    }
-    
-    private func isBlockError(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("LDAP account is locked")
-    }
-    
-    private func isEmptyPhoneError(for errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains(HeaderConstant.emptyMSISDN)
-    }
-    
-    private func checkInternetConnection() -> Bool {
-        return ReachabilityService().isReachable
     }
     
     private func emptyEmailCheck(for headers: [String: Any]) {
