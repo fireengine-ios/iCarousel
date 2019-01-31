@@ -14,44 +14,20 @@ protocol InstaPickSelectionSegmentedControllerDelegate {
     func didDeselectItem(_ deselectItem: SearchItemResponse)
 }
 
-final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresenter, BackButtonActions {
-    
-    var selectedItems = [SearchItemResponse]()
-    private var currentSelectingCount = 0
-    
-    var selectionState = PhotoSelectionState.selecting {
-        didSet {
-            switch selectionState {
-            case .selecting:
-                analyzesLeftLabel.isHidden = true
-            case .ended:
-                analyzesLeftLabel.isHidden = false
-            }
-            
-            delegates.invoke { delegate in
-                delegate.selectionStateDidChange(selectionState)
-            }
-        }
-    }
-    
-    private let selectionControllerPageSize = Device.isIpad ? 200 : 100
-    
-    private let maxSelectingLimit = 5
-    private var selectingLimit = 0
+final class InstaPickSelectionSegmentedView: UIView {
     
     private let topView = UIView()
-    private let containerView = UIView()
+    let containerView = UIView()
     private let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
     
-    private let segmentedControl: UISegmentedControl = {
+    let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
         segmentedControl.tintColor = ColorConstants.darcBlueColor
-        segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)],
-                                                for: .normal)
+        segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)], for: .normal)
         return segmentedControl
     }()
     
-    private let analyzeButton: RoundedInsetsButton = {
+    let analyzeButton: RoundedInsetsButton = {
         let button = RoundedInsetsButton()
         button.isExclusiveTouch = true
         button.setTitle(TextConstants.analyzeWithInstapick, for: .normal)
@@ -67,7 +43,7 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         return button
     }()
     
-    private let analyzesLeftLabel: InsetsLabel = {
+    let analyzesLeftLabel: InsetsLabel = {
         let label = InsetsLabel()
         label.textAlignment = .center
         label.textColor = ColorConstants.darcBlueColor
@@ -77,6 +53,105 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         label.insets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
         return label
     }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        topView.backgroundColor = .white
+        containerView.backgroundColor = .white
+        setupLayout()
+    }
+    
+    private func setupLayout() {
+        let view = self
+        view.addSubview(topView)
+        topView.addSubview(segmentedControl)
+        view.addSubview(containerView)
+        view.addSubview(transparentGradientView)
+        view.addSubview(analyzeButton)
+        view.addSubview(analyzesLeftLabel)
+        
+        let edgeOffset: CGFloat = Device.isIpad ? 75 : 35
+        let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
+        
+        topView.translatesAutoresizingMaskIntoConstraints = false
+        topView.topAnchor.constraint(equalTo: view.topAnchor).activate()
+        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        topView.heightAnchor.constraint(equalToConstant: 50).activate()
+        
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.leadingAnchor
+            .constraint(equalTo: topView.leadingAnchor, constant: edgeOffset).activate()
+        segmentedControl.trailingAnchor
+            .constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).activate()
+        segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).activate()
+        
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.topAnchor.constraint(equalTo: topView.bottomAnchor).activate()
+        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
+        
+        transparentGradientView.translatesAutoresizingMaskIntoConstraints = false
+        transparentGradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
+        transparentGradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        transparentGradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        transparentGradientView.heightAnchor
+            .constraint(equalToConstant: transparentGradientViewHeight).activate()
+        
+        analyzeButton.translatesAutoresizingMaskIntoConstraints = false
+        analyzeButton.leadingAnchor
+            .constraint(equalTo: view.leadingAnchor, constant: 10)
+            .setPriority(750)
+            .activate()
+        analyzeButton.trailingAnchor
+            .constraint(equalTo: view.trailingAnchor, constant: -10)
+            .setPriority(750)
+            .activate()
+        analyzeButton.centerYAnchor.constraint(equalTo: transparentGradientView.centerYAnchor).activate()
+        analyzeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
+        analyzeButton.heightAnchor.constraint(equalToConstant: 54).activate()
+        
+        analyzesLeftLabel.translatesAutoresizingMaskIntoConstraints = false
+        analyzesLeftLabel.bottomAnchor.constraint(equalTo: transparentGradientView.topAnchor, constant: -20).activate()
+        analyzesLeftLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
+    }
+}
+
+final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresenter, BackButtonActions {
+    
+    /// not private bcz protocol requirement
+    var selectedItems = [SearchItemResponse]()
+    
+    /// not private bcz protocol requirement
+    var selectionState = PhotoSelectionState.selecting {
+        didSet {
+            switch selectionState {
+            case .selecting:
+                vcView.analyzesLeftLabel.isHidden = true
+            case .ended:
+                vcView.analyzesLeftLabel.isHidden = false
+            }
+            
+            delegates.invoke { delegate in
+                delegate.selectionStateDidChange(selectionState)
+            }
+        }
+    }
+    
+    private let selectionControllerPageSize = Device.isIpad ? 200 : 100
+    private var currentSelectingCount = 0
+    private let maxSelectingLimit = 5
+    private var selectingLimit = 0
     
     private var segmentedViewControllers: [UIViewController] = []
     private var delegates = MulticastDelegate<InstaPickSelectionSegmentedControllerDelegate>()
@@ -94,13 +169,8 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     }
     
     private func setup() {
-        topView.backgroundColor = .white
-        containerView.backgroundColor = .white
-        
-        segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
-        analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
-        
-        setupLayout()
+        vcView.segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
+        vcView.analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
         
         // TODO: localize
         navigationItem.title = "Photos Selected (\(0))"
@@ -115,6 +185,19 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
                                            selector: #selector(closeSelf))
         navigationItem.leftBarButtonItem = cancelButton
     }
+    
+    override func loadView() {
+        self.view = InstaPickSelectionSegmentedView()
+    }
+    
+    private lazy var vcView: InstaPickSelectionSegmentedView = {
+        if let view = self.view as? InstaPickSelectionSegmentedView {
+            return view
+        } else {
+            assertionFailure("override func loadView")
+            return InstaPickSelectionSegmentedView()
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,7 +230,7 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     
     /// one time called
     private func setupScreenWithSelectingLimit(_ selectingLimit: Int) {
-        analyzesLeftLabel.text = "You only have \(selectingLimit) analyses left"
+        vcView.analyzesLeftLabel.text = "You only have \(selectingLimit) analyses left"
         
         let allPhotosDataSource = AllPhotosSelectionDataSource(pageSize: selectionControllerPageSize)
         let allPhotosVC = PhotoSelectionController(title: "Photos",
@@ -179,11 +262,11 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         assert(!segmentedViewControllers.isEmpty, "should not be empty")
         
         for (index, controller) in segmentedViewControllers.enumerated() {
-            segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)
+            vcView.segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)
         }
         
         /// selectedSegmentIndex == -1 after removeAllSegments
-        segmentedControl.selectedSegmentIndex = 0
+        vcView.segmentedControl.selectedSegmentIndex = 0
     }
     
     @objc private func closeSelf() {
@@ -233,9 +316,9 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     
     private func add(childController: UIViewController) {
         addChildViewController(childController)
-        childController.view.frame = containerView.bounds
+        childController.view.frame = vcView.containerView.bounds
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        containerView.addSubview(childController.view)
+        vcView.containerView.addSubview(childController.view)
         childController.didMove(toParentViewController: self)
     }
 }
@@ -316,64 +399,5 @@ extension InstaPickSelectionSegmentedController: InstapickAlbumSelectionDelegate
                                                            dataSource: dataSource)
         delegates.add(albumSelectionVC)
         navigationController?.pushViewController(albumSelectionVC, animated: true)
-    }
-}
-
-// MARK: - layout
-extension InstaPickSelectionSegmentedController {
-    
-    private func setupLayout() {
-        view.addSubview(topView)
-        topView.addSubview(segmentedControl)
-        view.addSubview(containerView)
-        view.addSubview(transparentGradientView)
-        view.addSubview(analyzeButton)
-        view.addSubview(analyzesLeftLabel)
-        
-        let edgeOffset: CGFloat = Device.isIpad ? 75 : 35
-        let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
-        
-        topView.translatesAutoresizingMaskIntoConstraints = false
-        topView.topAnchor.constraint(equalTo: view.topAnchor).activate()
-        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
-        topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
-        topView.heightAnchor.constraint(equalToConstant: 50).activate()
-        
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.leadingAnchor
-            .constraint(equalTo: topView.leadingAnchor, constant: edgeOffset).activate()
-        segmentedControl.trailingAnchor
-            .constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).activate()
-        segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).activate()
-        
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: topView.bottomAnchor).activate()
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
-        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
-        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
-        
-        transparentGradientView.translatesAutoresizingMaskIntoConstraints = false
-        transparentGradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
-        transparentGradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
-        transparentGradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
-        transparentGradientView.heightAnchor
-            .constraint(equalToConstant: transparentGradientViewHeight).activate()
-        
-        analyzeButton.translatesAutoresizingMaskIntoConstraints = false
-        analyzeButton.leadingAnchor
-            .constraint(equalTo: view.leadingAnchor, constant: 10)
-            .setPriority(750)
-            .activate()
-        analyzeButton.trailingAnchor
-            .constraint(equalTo: view.trailingAnchor, constant: -10)
-            .setPriority(750)
-            .activate()
-        analyzeButton.centerYAnchor.constraint(equalTo: transparentGradientView.centerYAnchor).activate()
-        analyzeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
-        analyzeButton.heightAnchor.constraint(equalToConstant: 54).activate()
-        
-        analyzesLeftLabel.translatesAutoresizingMaskIntoConstraints = false
-        analyzesLeftLabel.bottomAnchor.constraint(equalTo: transparentGradientView.topAnchor, constant: -20).activate()
-        analyzesLeftLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
     }
 }
