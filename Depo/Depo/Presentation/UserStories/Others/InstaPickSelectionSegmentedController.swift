@@ -321,12 +321,11 @@ extension InstaPickSelectionSegmentedController: InstapickAlbumSelectionDelegate
     
     func onSelectAlbum(_ album: AlbumItem) {
         let dataSource = AlbumPhotosSelectionDataSource(pageSize: selectionControllerPageSize, albumUuid: album.uuid)
-        let selectionController = PhotoSelectionController(title: album.name ?? "",
+        let albumSelectionVC = PhotoSelectionController(title: album.name ?? "",
                                                            selectingLimit: selectingLimit,
                                                            delegate: self,
                                                            dataSource: dataSource)
-        navigationController?.pushViewController(selectionController, animated: true)
-//        //TODO: - need send selected items
-//        (RouterVC().navigationController?.presentedViewController as? UINavigationController)?.show(selectionController, sender: nil)
+        delegates.add(albumSelectionVC)
+        navigationController?.pushViewController(albumSelectionVC, animated: true)
     }
 }
