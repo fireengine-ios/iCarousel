@@ -28,7 +28,7 @@ final class InstaPickSelectionSegmentedController: UIViewController {
     }
     
     // TODO: iPad
-    private let selectionControllerPageSize = 100
+    private let selectionControllerPageSize = Device.isIpad ? 200 : 100
     
     private let maxSelectingLimit = 5
     private var selectingLimit = 0

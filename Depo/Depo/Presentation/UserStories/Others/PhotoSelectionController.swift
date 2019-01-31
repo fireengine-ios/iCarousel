@@ -13,13 +13,9 @@ enum PhotoSelectionState {
 }
 
 // TODO: localize
-// TODO: paginationSize + test for iPad
-// TODO: refactor
-// TODO: updaye cell layout UICollectionViewDelegateFlowLayout
 final class PhotoSelectionController: UIViewController, ErrorPresenter {
     
     private weak var delegate: PhotoSelectionControllerDelegate?
-    
     private let dataSource: PhotoSelectionDataSourceProtocol
     private var isLoadingMore = false
     private var isLoadingMoreFinished = false
@@ -37,10 +33,8 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     private let footerId = String(describing: CollectionSpinnerFooter.self)
     
     private lazy var collectionView: UICollectionView = {
-        let isIpad = UI_USER_INTERFACE_IDIOM() == .pad
+        let isIpad = Device.isIpad
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = isIpad ? 10 : 1
-        layout.minimumInteritemSpacing = isIpad ? 10 : 1
         layout.sectionInset = .init(top: 1, left: 1, bottom: 1, right: 1)
         
         let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
@@ -100,9 +94,30 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         loadMore()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        updateItemSize()
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    private func updateItemSize() {
+        let isIpad = Device.isIpad
+        let viewWidth = collectionView.bounds.width
+        
+        let columns: CGFloat = isIpad ? 6 : 4
+        let padding: CGFloat = isIpad ? 10 : 1
+        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
+        let itemSize = CGSize(width: itemWidth, height: itemWidth)
+        
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = itemSize
+            layout.minimumInteritemSpacing = padding
+            layout.minimumLineSpacing = padding
+        }
     }
     
     private func loadMore() {
@@ -331,17 +346,11 @@ extension PhotoSelectionController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension PhotoSelectionController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width / 4 - 3
-        return CGSize(width: width, height: width)
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         
         if isLoadingMore {
-            // TODO: need to check for all iOS
-            //return CGSize(width: collectionView.contentSize.width, height: 50)
             return CGSize(width: 0, height: 50)
         } else {
             return .zero
@@ -349,6 +358,7 @@ extension PhotoSelectionController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - InstaPickSelectionSegmentedControllerDelegate
 extension PhotoSelectionController: InstaPickSelectionSegmentedControllerDelegate {
     
     func didSelectItem(_ selectedItem: SearchItemResponse) {
