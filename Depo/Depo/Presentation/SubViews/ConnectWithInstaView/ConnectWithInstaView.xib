@@ -27,12 +27,12 @@
                     <rect key="frame" x="40" y="0.0" width="295" height="46"/>
                     <subviews>
                         <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="InstagramIcon" translatesAutoresizingMaskIntoConstraints="NO" id="f0H-qI-rPn">
-                            <rect key="frame" x="8" y="14.5" width="17" height="17"/>
+                            <rect key="frame" x="0.0" y="14.5" width="17" height="17"/>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oAn-Xc-tPZ">
-                            <rect key="frame" x="33" y="13" width="42" height="20.5"/>
+                            <rect key="frame" x="25" y="13" width="42" height="20.5"/>
                             <subviews>
-                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRo-yv-dzk">
+                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="XRo-yv-dzk">
                                     <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
@@ -49,23 +49,12 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oAn-Xc-tPZ" secondAttribute="trailing" constant="8" id="13E-h7-G4T"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oAn-Xc-tPZ" secondAttribute="trailing" id="13E-h7-G4T"/>
                         <constraint firstItem="oAn-Xc-tPZ" firstAttribute="centerY" secondItem="VsN-4v-Hif" secondAttribute="centerY" id="3EK-66-cVP"/>
-                        <constraint firstAttribute="trailing" secondItem="oAn-Xc-tPZ" secondAttribute="trailing" constant="8" id="96t-DY-Kh6"/>
                         <constraint firstItem="oAn-Xc-tPZ" firstAttribute="leading" secondItem="f0H-qI-rPn" secondAttribute="trailing" constant="8" id="WAU-I6-W6Z"/>
-                        <constraint firstItem="f0H-qI-rPn" firstAttribute="leading" secondItem="VsN-4v-Hif" secondAttribute="leading" constant="8" id="YJv-0K-vuR"/>
+                        <constraint firstItem="f0H-qI-rPn" firstAttribute="leading" secondItem="VsN-4v-Hif" secondAttribute="leading" id="YJv-0K-vuR"/>
                         <constraint firstItem="f0H-qI-rPn" firstAttribute="centerY" secondItem="VsN-4v-Hif" secondAttribute="centerY" id="nah-zW-1Kk"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="96t-DY-Kh6"/>
-                        </mask>
-                    </variation>
-                    <variation key="heightClass=regular-widthClass=regular">
-                        <mask key="constraints">
-                            <include reference="96t-DY-Kh6"/>
-                        </mask>
-                    </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejX-OI-VUM">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
@@ -81,26 +70,16 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="VsN-4v-Hif" secondAttribute="bottom" id="9RT-CA-T00"/>
                 <constraint firstItem="ejX-OI-VUM" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="DZp-2L-WSv"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VsN-4v-Hif" secondAttribute="trailing" priority="250" constant="40" id="DlC-89-8Tt"/>
-                <constraint firstItem="VsN-4v-Hif" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="250" constant="40" id="If3-v8-Kgc"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VsN-4v-Hif" secondAttribute="trailing" constant="40" id="DlC-89-8Tt"/>
+                <constraint firstItem="VsN-4v-Hif" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="If3-v8-Kgc"/>
                 <constraint firstItem="ejX-OI-VUM" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="K7Q-if-2WM"/>
-                <constraint firstItem="VsN-4v-Hif" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Kyt-ym-6Ip"/>
                 <constraint firstItem="ejX-OI-VUM" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="XfE-tj-Yzi"/>
                 <constraint firstItem="VsN-4v-Hif" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ccQ-7O-BSS"/>
                 <constraint firstItem="ejX-OI-VUM" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="rhV-h7-QJk"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="Kyt-ym-6Ip"/>
-                </mask>
-            </variation>
-            <variation key="heightClass=regular-widthClass=regular">
-                <mask key="constraints">
-                    <include reference="Kyt-ym-6Ip"/>
-                </mask>
-            </variation>
+            <point key="canvasLocation" x="26.953125" y="31.640624999999996"/>
         </view>
     </objects>
     <resources>
