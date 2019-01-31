@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol InstaPickPhotoViewDelegate {
+protocol InstaPickPhotoViewDelegate: class {
     func didTapOnImage(_ model: InstapickAnalyze?)
 }
 
@@ -28,9 +28,9 @@ class InstaPickPhotoView: UIView, NibInit {
     var pickedViewCenterXConstraint: NSLayoutConstraint!
     
     var model: InstapickAnalyze?
-    private var delegate: InstaPickPhotoViewDelegate?
+    private weak var delegate: InstaPickPhotoViewDelegate?
 
-    private var tapGesture: UITapGestureRecognizer!
+    private lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(onImageTap))
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -116,7 +116,6 @@ class InstaPickPhotoView: UIView, NibInit {
     }
     
     private func prepareToAppear() {
-        tapGesture = UITapGestureRecognizer(target: self, action: #selector(onImageTap))
         addGestureRecognizer(tapGesture)
         
         containerView.layer.masksToBounds = true
