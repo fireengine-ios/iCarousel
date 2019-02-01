@@ -72,7 +72,6 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                                     captchaAnswer: sigUpInfo.captchaAnswer)
         
         authenticationService.signUp(user: signUpUser, sucess: { [weak self] result in
-            self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .register)
             DispatchQueue.main.async {
                 guard let t = result as? SignUpSuccessResponse else {
                     return
@@ -82,17 +81,26 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                 SingletonStorage.shared.referenceToken = t.referenceToken
                 
                 self?.analyticsService.track(event: .signUp)
+                self?.analyticsService.trackSignupEvent()
                 
                 self?.output.signUpSuccessed()
             }
         }, fail: { [weak self] errorResponce in
             DispatchQueue.main.async {
-                if self?.isRedirectToSplash(forResponse: errorResponce) == true {
-                    self?.output.signupFailedCaptchaRequired()
-                    self?.output.signupFailed(errorResponce: errorResponce)
+                if case ErrorResponse.error(let error) = errorResponce,
+                    let statusError = error as? ServerStatusError,
+                    let signUpError = SignupResponseError(with: statusError) {
+                    
+                    self?.analyticsService.trackSignupEvent(error: signUpError)
+                    
+                    if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
+                        self?.output.signupFailedCaptchaRequired()
+                    }
                 } else {
-                    self?.output.signupFailed(errorResponce: errorResponce)
+                    self?.analyticsService.trackSignupEvent(error: .serverError)
                 }
+
+                self?.output.signupFailed(errorResponce: errorResponce)
             }
         })
     }
@@ -111,15 +119,5 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                 self?.output.applyEulaFaild(errorResponce: errorResponce)
             }
         })
-    }
-    
-    private func isRedirectToSplash(forResponse errorResponse: ErrorResponse) -> Bool {
-        if case ErrorResponse.error(let error) = errorResponse,
-            let serverError = error as? ServerValueError,
-            serverError.value.contains("Captcha required.") || serverError.value.contains("Invalid captcha.")
-        {
-            return true
-        }
-        return false
     }
 }

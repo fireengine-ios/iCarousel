@@ -76,10 +76,9 @@
                         <action selector="onBottomButtonTap:" destination="976-Lr-wiL" eventType="touchUpInside" id="Sxv-n4-5Jf"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKd-gU-Tzr">
-                    <rect key="frame" x="14" y="99" width="46" height="44"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKd-gU-Tzr">
+                    <rect key="frame" x="14" y="99" width="491" height="44"/>
                     <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="6"/>
-                    <state key="normal" title="Button"/>
                     <connections>
                         <action selector="onBottomButtonTap:" destination="976-Lr-wiL" eventType="touchUpInside" id="H59-l8-NnD"/>
                     </connections>
@@ -95,6 +94,7 @@
                 <constraint firstItem="IjD-Y9-jpH" firstAttribute="top" secondItem="976-Lr-wiL" secondAttribute="top" id="SZS-Up-YYW"/>
                 <constraint firstItem="mKd-gU-Tzr" firstAttribute="bottom" secondItem="dp2-ic-ya5" secondAttribute="bottom" id="aot-MI-B6F"/>
                 <constraint firstItem="dp2-ic-ya5" firstAttribute="top" secondItem="IjD-Y9-jpH" secondAttribute="bottom" id="cwG-6V-GIx"/>
+                <constraint firstItem="Fhy-Rz-zex" firstAttribute="trailing" secondItem="mKd-gU-Tzr" secondAttribute="trailing" id="kit-E9-KYh"/>
                 <constraint firstItem="dp2-ic-ya5" firstAttribute="leading" secondItem="976-Lr-wiL" secondAttribute="leading" id="s2C-jC-BpZ"/>
                 <constraint firstItem="IjD-Y9-jpH" firstAttribute="trailing" secondItem="976-Lr-wiL" secondAttribute="trailing" id="yUt-k9-PSN"/>
             </constraints>

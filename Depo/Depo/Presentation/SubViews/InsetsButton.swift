@@ -54,3 +54,25 @@ class InsetsButton: UIButton {
         return size
     }
 }
+
+final class RoundedInsetsButton: InsetsButton {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        layer.masksToBounds = true
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = bounds.height * 0.5
+    }
+}
