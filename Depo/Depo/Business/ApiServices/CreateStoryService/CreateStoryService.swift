@@ -136,15 +136,17 @@ class CreateStoryMusicService: RemoteItemsService {
     func allItems(success: ListRemoveItems?, fail: FailRemoteItems?) {
         debugLog("CreateStoryMusicService allItems")
      
-        let requestService = BaseRequestService()
-        let  handler = BaseResponseHandler< CreateStoryMusicListResponse, ObjectRequestResponse>(success: {  resp  in
+        let requestService = BaseRequestService(transIdLogging: true)
+        let handler = BaseResponseHandler< CreateStoryMusicListResponse, ObjectRequestResponse>(success: { [weak self] response in
+            guard let `self` = self else {
+                return
+            }
+            
             if self.isGotAll {
                 debugLog("CreateStoryMusicService allItems success with empty result")
 
                 success?([])
-                return
-            }
-            if let response = resp as? CreateStoryMusicListResponse,
+            } else if let response = response as? CreateStoryMusicListResponse,
                 let list = response.list {
                 let result = list.flatMap { WrapData(musicForCreateStory: $0) }
                 self.isGotAll = true
@@ -156,10 +158,15 @@ class CreateStoryMusicService: RemoteItemsService {
 
                 fail?()
             }
+            
+            requestService.debugLogTransIdIfNeeded(headers: (response as? CreateStoryMusicListResponse)?.response?.allHeaderFields, method: "getAllItems")
+            
         }, fail: { errorResponse  in
             debugLog("CreateStoryMusicService allItems fail")
             errorResponse.showInternetErrorGlobal()
             fail?()
+            
+            requestService.debugLogTransIdIfNeeded(errorResponse: errorResponse, method: "getAllItems")
         })
 
         requestService.executeGetRequest(param: CreateStoryMusicList(), handler: handler)
@@ -182,35 +189,42 @@ class CreateStoryService: BaseRequestService {
     func createStory(createStory: CreateStory, success: CreateStorSuccess?, fail: FailResponse?) {
         debugLog("CreateStoryMusicService createStory")
 
-        let  handler = BaseResponseHandler< CreateResponse, ObjectRequestResponse>(success: { [weak self] resp in
-            if let created = resp as? CreateResponse,
-                created.isOkStatus {
+        let handler = BaseResponseHandler< CreateResponse, ObjectRequestResponse>(success: { [weak self] response in
+            if let response = response as? CreateResponse,
+                response.isOkStatus {
                 debugLog("CreateStoryMusicServic createStory success")
-
+                
                 self?.analyticsService.track(event: .createStory)
                 success?()
             } else {
                 debugLog("CreateStoryMusicService createStory fail")
                 fail?(ErrorResponse.string(TextConstants.errorUnknown))
             }
-        }, fail: fail)
+            self?.debugLogTransIdIfNeeded(headers: (response as? CreateResponse)?.response?.allHeaderFields, method: "createStory")
+        }, fail: { [weak self] errorResponse  in
+            debugLog("CreateStoryMusicService createStory fail")
+            self?.debugLogTransIdIfNeeded(errorResponse: errorResponse, method: "createStory")
+            fail(errorResponse)
+        })
         executePostRequest(param: createStory, handler: handler)
     }
     
     func getPreview(preview: CreateStoryPreview, success: @escaping GetPreviewStorrySyccess, fail: @escaping FailResponse ) {
         debugLog("CreateStoryMusicService getPreview fail")
 
-        let  handler = BaseResponseHandler<CreateStoryResponce, ObjectRequestResponse>(success: {  resp  in
-            if let responce = resp as? CreateStoryResponce {
+        let handler = BaseResponseHandler<CreateStoryResponce, ObjectRequestResponse>(success: { [weak self] response in
+            if let response = response as? CreateStoryResponce {
                 debugLog("CreateStoryMusicService getPreview success")
 
-                success(responce)
+                success(response)
             } else {
                 debugLog("CreateStoryMusicService getPreview fail")
                 fail(ErrorResponse.string(TextConstants.errorUnknown))
             }
-        }, fail: { errorResponse  in
+            self?.debugLogTransIdIfNeeded(headers: (response as? CreateResponse)?.response?.allHeaderFields, method: "getPreview")
+        }, fail: { [weak self] errorResponse  in
             debugLog("CreateStoryMusicService getPreview fail")
+            self?.debugLogTransIdIfNeeded(errorResponse: errorResponse, method: "getPreview")
             fail(errorResponse)
         })
         executePostRequest(param: preview, handler: handler)

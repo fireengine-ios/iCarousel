@@ -115,9 +115,14 @@ class JsonConvertor {
     }
 }
 
-class BaseRequestService {
+class BaseRequestService: TransIdLogging {
     
     let requestService = RequestService.default
+    var transIdLogging = false
+    
+    init(transIdLogging: Bool = false) {
+        self.transIdLogging = transIdLogging
+    }
     
     func executePostRequest<T, P> (param: RequestParametrs, handler: BaseResponseHandler<T, P>) {
         let task = requestService.requestTask(patch: param.patch,
@@ -216,5 +221,28 @@ class BaseRequestService {
                                                   timeoutInterval: param.timeout,
                                                   response: handler.response)
         task.resume()
+    }
+}
+
+protocol TransIdLogging: class {
+    var transIdLogging: Bool { get set }
+    func debugLogTransIdIfNeeded(headers: [AnyHashable: Any]?, method: String)
+    func debugLogTransIdIfNeeded(errorResponse: ErrorResponse, method: String)
+}
+
+extension TransIdLogging {
+    func debugLogTransIdIfNeeded(headers: [AnyHashable: Any]?, method: String) {
+        if transIdLogging,
+            let headers = headers,
+            let transId = headers[HeaderConstant.transId] {
+            let serviceName = String(describing: self)
+            debugLog("\(serviceName) \(method) \(HeaderConstant.transId): \(transId)")
+        }
+    }
+    
+    func debugLogTransIdIfNeeded(errorResponse: ErrorResponse, method: String) {
+        if case ErrorResponse.failResponse(let response) = errorResponse {
+            debugLogTransIdIfNeeded(headers: (response as? ObjectRequestResponse)?.response?.allHeaderFields, method: method)
+        }
     }
 }

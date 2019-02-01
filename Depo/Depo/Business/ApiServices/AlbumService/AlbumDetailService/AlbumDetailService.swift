@@ -26,20 +26,24 @@ class AlbumDetailService: RemoteItemsService {
 
         let serchParam = AlbumDetalParameters (albumUuid: albumUUID, sortBy: sortBy, sortOrder: sortOrder, page: currentPage, size: requestSize)
         
-        remote.searchContentAlbum(param: serchParam, success: { response in
-            guard let resultResponse = (response as? AlbumDetailResponse)?.list else {
+        remote.searchContentAlbum(param: serchParam, success: { [weak self] response in
+            guard let `self` = self, let resultResponse = response as? AlbumDetailResponse else {
                 fail?()
                 return
             }
             debugLog("AlbumDetailService nextItems SearchService searchContentAlbum success")
 
-            let list = resultResponse.flatMap { WrapData(remote: $0) }
+            let list = resultResponse.list.flatMap { WrapData(remote: $0) }
             self.currentPage = self.currentPage + 1
             success?(list)
-        }, fail: { error in
+            
+            self.remote.debugLogTransIdIfNeeded(headers: resultResponse.response?.allHeaderFields, method: "searchContentAlbum")
+        }, fail: { [weak self] error in
             debugLog("AlbumDetailService nextItems SearchService searchContentAlbum fail")
             error.showInternetErrorGlobal()
             fail?()
+            
+            self?.remote.debugLogTransIdIfNeeded(errorResponse: error, method: "searchContentAlbum")
         })
     }
     
@@ -50,18 +54,24 @@ class AlbumDetailService: RemoteItemsService {
         requestSize = 1
         
         let serchParam = AlbumDetalParameters (albumUuid: albumUUID, sortBy: sortBy, sortOrder: sortOrder, page: currentPage, size: requestSize)
-        remote.searchContentAlbum(param: serchParam, success: { response in
-            guard let coverPhoto = (response as? AlbumDetailResponse)?.coverPhoto else {
+        remote.searchContentAlbum(param: serchParam, success: { [weak self] response in
+            guard let resultResponse = response as? AlbumDetailResponse else {
                 fail()
                 return
             }
             debugLog("AlbumDetailService albumCoverPhoto success")
 
-            success(WrapData(remote: coverPhoto))
-        }, fail: { error in
+            if let photo = resultResponse.coverPhoto {
+                success(WrapData(remote: photo))
+            }
+            
+            self?.remote.debugLogTransIdIfNeeded(headers: resultResponse.response?.allHeaderFields, method: "albumCoverPhoto")
+        }, fail: { [weak self] error in
             debugLog("AlbumDetailService albumCoverPhoto fail")
             error.showInternetErrorGlobal()
             fail()
+            
+            self?.remote.debugLogTransIdIfNeeded(errorResponse: error, method: "albumCoverPhoto")
         })
     }
 }

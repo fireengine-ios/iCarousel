@@ -27,7 +27,7 @@ class RemoteItemsService {
     
     var fieldValue: FieldValue
     
-    let remote = SearchService()
+    let remote = SearchService(transIdLogging: true)
     
     private let queueOperations: OperationQueue
     
@@ -71,8 +71,7 @@ class RemoteItemsService {
         self.fieldValue = fileType
         nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
     }
-    
-    
+        
     func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         debugLog("RemoteItemsService nextItems")
         if let unwrapedFieldValue = newFieldValue {
@@ -135,16 +134,23 @@ class RemoteItemsService {
         debugLog("RemoteItemsService getSuggestion")
 
         let parametrs = SuggestionParametrs(withText: text)
-        remote.suggestion(param: parametrs, success: { suggestList in
+        remote.suggestion(param: parametrs, success: { [weak self] response in
             debugLog("RemoteItemsService getSuggestion SearchService suggestion success")
+            guard let suggestionResponse = response as? SuggestionResponse else {
+                fail(ErrorResponse.failResponse(response))
+                return
+            }
             
-            success((suggestList as! SuggestionResponse).list)
-        }) { errorResponce in
+            success(suggestionResponse.list)
+            self?.remote.debugLogTransIdIfNeeded(headers: suggestionResponse.response?.allHeaderFields, method: "getSuggestion")
+        }, fail: { [weak self] errorResponce in
             errorResponce.showInternetErrorGlobal()
             debugLog("RemoteItemsService getSuggestion SearchService suggestion fail")
 
             fail(errorResponce)
-        }
+            
+            self?.remote.debugLogTransIdIfNeeded(errorResponse: errorResponce, method: "getSuggestion")
+        })
     }
     
     func stopAllOperations() {
@@ -165,7 +171,7 @@ final class NextPageOperation: Operation {
 
     
     init(requestParam: SearchByFieldParameters, success: ListRemoveItems?, fail: FailRemoteItems?) {
-        self.searchService = SearchService()
+        self.searchService = SearchService(transIdLogging: true)
         self.requestParam = requestParam
         self.fail = fail
         self.success = success
@@ -200,6 +206,9 @@ final class NextPageOperation: Operation {
                 
                 let list = resultResponse.flatMap { WrapData(remote: $0) }
                 self.success?(list)
+                
+                self.searchService.debugLogTransIdIfNeeded(headers: (response as? SearchResponse)?.response?.allHeaderFields, method: "searchByField")
+                
                 self.semaphore.signal()
             }
         }, fail: { [weak self] errorResponce in
@@ -212,6 +221,9 @@ final class NextPageOperation: Operation {
             }
             
             self?.fail?()
+            
+            self?.searchService.debugLogTransIdIfNeeded(errorResponse: errorResponce, method: "searchByField")
+
             self?.semaphore.signal()
         })
         semaphore.wait()
@@ -267,6 +279,7 @@ class FavouritesService: RemoteItemsService {
 class StoryService: RemoteItemsService {
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .story)
+        remote.transIdLogging = true
     }
     
     func allStories(sortBy: SortType = .date, sortOrder: SortOrder = .desc, success: ListRemoveItems?, fail: FailRemoteItems?) {
@@ -296,10 +309,14 @@ class StoryService: RemoteItemsService {
             self?.currentPage += 1
             let list = resultResponse.list.flatMap { Item(remote: $0) }
             success?(list)
-        }, fail: {  errorResponce in
+            
+            self?.remote.debugLogTransIdIfNeeded(headers: resultResponse.response?.allHeaderFields, method: "search")
+        }, fail: { [weak self] errorResponce in
             errorResponce.showInternetErrorGlobal()
             debugLog("StoryService remote searchStories fail")
             fail?()
+            
+            self?.remote.debugLogTransIdIfNeeded(errorResponse: errorResponce, method: "search")
         })
     }
 }
