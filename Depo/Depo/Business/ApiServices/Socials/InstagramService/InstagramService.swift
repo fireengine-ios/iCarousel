@@ -7,8 +7,15 @@
 //
 
 import Foundation
+import Alamofire
 
 final class InstagramService: BaseRequestService {
+    
+    let sessionManager: SessionManager
+    
+    init(sessionManager: SessionManager = SessionManager.customDefault) {
+        self.sessionManager = sessionManager
+    }
     
     func socialStatus(success: SuccessResponse?, fail: FailResponse?) {
         debugLog("InstagramService socialStatus")
@@ -54,6 +61,37 @@ final class InstagramService: BaseRequestService {
         let parameters = CancelMigrationParametrs()
         let handler = BaseResponseHandler<CancelMigrationResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: parameters, handler: handler)
+    }
+    
+    func checkInstagramLogin(instagramAccessToken: String, handler: @escaping (ResponseResult<Void>) -> Void) {
+        sessionManager
+            .request(RouteRequests.instagramConnect,
+                     method: .post,
+                     encoding: instagramAccessToken)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(_):
+                    handler(.success(()))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    func disconnectInstagram(handler: @escaping (ResponseResult<Void>) -> Void) {
+        sessionManager
+            .request(RouteRequests.instagramDisconnect,
+                     method: .post)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(_):
+                    handler(.success(()))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
     }
 //
 //    func setSyncStatusAndCreateMigration(success: SuccessResponse?, fail: FailResponse?){

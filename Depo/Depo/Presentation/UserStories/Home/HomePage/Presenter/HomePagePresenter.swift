@@ -33,7 +33,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         
         if !isFirstAppear {
             view.startSpinner()
-            interactor.updateUserAuthority()
+            interactor.updateLocalUserDetail()
         } else {
             isFirstAppear = false
         }
@@ -80,6 +80,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     }
     
     func needRefresh() {
+        cards.removeAll()
         interactor.needRefresh()
     }
     
@@ -136,12 +137,19 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         }
     }
     
-    func didObtainFailCardInfo(errorMessage: String) {
+    func didObtainFailCardInfo(errorMessage: String, isNeedStopRefresh: Bool) {
+        if isNeedStopRefresh {
+            view.stopRefresh()
+        }
         router.showError(errorMessage: errorMessage)
     }
     
     func didObtainHomeCards(_ cards: [HomeCardResponse]) {
         self.cards = cards
+    }
+    
+    func didObtainInstaPickStatus(status: InstapickAnalyzesCount) {
+        CardsManager.default.configureInstaPick(with: status)
     }
     
     func fillCollectionView(isReloadAll: Bool) {
@@ -150,6 +158,10 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
             CardsManager.default.startPremiumCard()
         }
         AuthoritySingleton.shared.hideBannerForSecondLogin()
+        
+        guard !cards.isEmpty else {
+            return
+        }
         
         if isReloadAll {
             CardsManager.default.startOperatonsForCardsResponces(cardsResponces: cards)

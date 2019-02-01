@@ -144,10 +144,9 @@ extension PackagesViewController: PackagesViewInput {
         UIApplication.showErrorAlert(message: errorMessage)
     }
     
-    func showActivateOfferAlert(for offer: PackageModelResponse, planIndex: Int) {
-        let bodyText = "\(offer.period ?? "") \(offer.price ?? 0)"
+    func showActivateOfferAlert(with price: String, for offer: PackageModelResponse, planIndex: Int) {
         
-        let vc = DarkPopUpController.with(title: offer.displayName, message: bodyText, buttonTitle: TextConstants.purchase) { [weak self] vc in
+        let vc = DarkPopUpController.with(title: offer.displayName, message: price, buttonTitle: TextConstants.purchase) { [weak self] vc in
             vc.close(animation: {
                 self?.output.buy(offer: offer, planIndex: planIndex)
             })

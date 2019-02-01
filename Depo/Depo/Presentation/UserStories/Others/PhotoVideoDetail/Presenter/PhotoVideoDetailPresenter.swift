@@ -197,6 +197,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         }
     }
     
+    func openInstaPick() { }
+    
     func deSelectAll() {
         
     }

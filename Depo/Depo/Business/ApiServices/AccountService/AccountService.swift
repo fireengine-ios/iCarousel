@@ -186,29 +186,51 @@ class AccountService: BaseRequestService, AccountServicePrl {
         debugLog("AccountService faceImageAllowed")
         
         let parameters = FaceImageAllowedParameters()
-        let handler = BaseResponseHandler<FaceImageAllowedResponse, ObjectRequestResponse>(success: success, fail: fail)
+        let handler = BaseResponseHandler<SettingsInfoPermissionsResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: parameters, handler: handler)
     }
     
     func switchFaceImageAllowed(parameters: FaceImageAllowedParameters, success: SuccessResponse?, fail: @escaping FailResponse) {
         debugLog("AccountService switchFaceImageAllowed")
 
-        let handler = BaseResponseHandler<FaceImageAllowedResponse, ObjectRequestResponse>(success: success, fail: fail)
+        let handler = BaseResponseHandler<SettingsInfoPermissionsResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePutRequest(param: parameters, handler: handler)
     }
     
     private lazy var sessionManager: SessionManager = factory.resolve()
     
-    func isAllowedFaceImageAndFacebook(handler: @escaping (ResponseResult<FaceImageAllowedResponse>) -> Void) {
-        debugLog("AccountService isAllowedFaceImage")
+    func getSettingsInfoPermissions(handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void) {
+        debugLog("AccountService getSettingsInfoPermissions")
         
         sessionManager
-            .request(RouteRequests.Account.Settings.faceImageAllowed)
+            .request(RouteRequests.Account.Settings.accessInformation)
             .customValidate()
             .responseData { response in
                 switch response.result {    
                 case .success(let data):
-                    let faceImageAllowed = FaceImageAllowedResponse(json: data, headerResponse: nil)
+                    let faceImageAllowed = SettingsInfoPermissionsResponse(json: data, headerResponse: nil)
+                    handler(.success(faceImageAllowed))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    func changeInstapickAllowed(isInstapickAllowed: Bool, handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void) {
+        debugLog("AccountService changeInstapickAllowed")
+        
+        let params: [String: Any] = ["instapickAllowed": isInstapickAllowed]
+        
+        sessionManager
+            .request(RouteRequests.Account.Settings.accessInformation,
+                     method: .patch,
+                     parameters: params,
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let faceImageAllowed = SettingsInfoPermissionsResponse(json: data, headerResponse: nil)
                     handler(.success(faceImageAllowed))
                 case .failure(let error):
                     handler(.failed(error))
@@ -216,14 +238,14 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
      
-    func changeFaceImageAndFacebookAllowed(isFaceImageAllowed: Bool, isFacebookAllowed: Bool, handler: @escaping (ResponseResult<FaceImageAllowedResponse>) -> Void) {
+    func changeFaceImageAndFacebookAllowed(isFaceImageAllowed: Bool, isFacebookAllowed: Bool, handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void) {
         debugLog("AccountService changeFaceImageAllowed")
         
         let params: [String: Any] = ["faceImageRecognitionAllowed": isFaceImageAllowed,
                                      "facebookTaggingEnabled": isFacebookAllowed]
         
         sessionManager
-            .request(RouteRequests.Account.Settings.faceImageAllowed,
+            .request(RouteRequests.Account.Settings.accessInformation,
                      method: .post,
                      parameters: params,
                      encoding: JSONEncoding.prettyPrinted)
@@ -231,7 +253,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .responseData { response in
                 switch response.result {    
                 case .success(let data):
-                    let faceImageAllowed = FaceImageAllowedResponse(json: data, headerResponse: nil)
+                    let faceImageAllowed = SettingsInfoPermissionsResponse(json: data, headerResponse: nil)
                     handler(.success(faceImageAllowed))
                 case .failure(let error):
                     handler(.failed(error))

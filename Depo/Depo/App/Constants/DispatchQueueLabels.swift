@@ -11,6 +11,7 @@ struct DispatchQueueLabels {
     static let baseFilesGreedCollectionDataSource = "com.lifebox.BaseDataSourceForCollectionView"
     static let myStreamAlbums = "GetMyStreamData"
     static let faceImageItemsUpdate = "UpdateFaceImageItems"
+    static let instaPickItemsUpdate = "InstaPickItemsUpdate"
     static let getUserInfo = "GetUserInfo"
     static let coreDataStack = "com.lifebox.CoreDataStack"
     static let autosync = "com.lifebox.autosync"

@@ -19,7 +19,7 @@ class ImportFromFBPresenter: BasePresenter {
     
     weak var view: ImportFromFBViewInput?
     var interactor: ImportFromFBInteractorInput!
-    var router: ImportFromFBRouterInput!
+//    var router: ImportFromFBRouterInput!
     
     var facebookStatus: FBStatusObject?
     
@@ -30,8 +30,6 @@ class ImportFromFBPresenter: BasePresenter {
 extension ImportFromFBPresenter: ImportFromFBViewOutput {
     
     func viewIsReady() {
-        analyticsService.logScreen(screen: .importPhotos)
-        analyticsService.trackDimentionsEveryClickGA(screen: .importPhotos)
         view?.startActivityIndicator()
         interactor.requestStatus()
     }
@@ -58,7 +56,7 @@ extension ImportFromFBPresenter: ImportFromFBViewOutput {
 
 // MARK: - ImportFromFBInteractorOutput
 extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
-    
+
     // MARK: Status
     
     func statusSuccessCallback(status: FBStatusObject) {
@@ -148,7 +146,7 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
     
     // MARK: Router
     
-    func goToOnboarding() {
-        router.goToOnboarding()
-    }
+//    func goToOnboarding() {
+//        router.goToOnboarding()
+//    }
 }

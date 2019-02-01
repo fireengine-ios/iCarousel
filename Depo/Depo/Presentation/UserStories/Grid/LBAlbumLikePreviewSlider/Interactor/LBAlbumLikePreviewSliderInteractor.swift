@@ -13,10 +13,18 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     let dataStorage = LBAlbumLikePreviewSliderDataStorage()
     
     let faceImageService = FaceImageService()
+    private let instaPickService: InstapickService = factory.resolve()
 
     // MARK: - Interactor Input
     
+    override init() {
+        super.init()
+        
+        instaPickService.delegates.add(self)
+    }
+    
     deinit {
+        instaPickService.delegates.remove(self)
         ItemOperationManager.default.stopUpdateView(view: self)
     }
     
@@ -44,6 +52,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         faceImageAllowed { [weak self] result in
             self?.getAlbums(group: group)
             self?.getStories(group: group)
+            self?.getInstaPickThumbnails(group: group)
             
             if result == true {
                 self?.getFaceImageItems(group: group)
@@ -65,6 +74,8 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         let queue = DispatchQueue(label: DispatchQueueLabels.myStreamAlbums)
         
         switch type {
+        case .instaPick:
+            getInstaPickThumbnails(group: group)
         case .story:
             getStories(group: group)
         case .albums:
@@ -86,7 +97,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     
     private func getAlbums(group: DispatchGroup) {
         group.enter()
-        let albumService = AlbumService(requestSize: 4)
+        let albumService = AlbumService(requestSize: NumericConstants.myStreamSliderThumbnailsCount)
         albumService.allAlbums(sortBy: .date, sortOrder: .desc, success: { [weak self] albums in
             DispatchQueue.main.async {
                 self?.dataStorage.addNew(item: SliderItem(withAlbumItems: albums))
@@ -102,7 +113,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     
     private func getStories(group: DispatchGroup) {
         group.enter()
-        let storiesService = StoryService(requestSize: 4)
+        let storiesService = StoryService(requestSize: NumericConstants.myStreamSliderThumbnailsCount)
         storiesService.allStories(success: { [weak self] stories in
             DispatchQueue.main.async {
                 self?.dataStorage.addNew(item: SliderItem(withStoriesItems: stories))
@@ -118,7 +129,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
     
     private func faceImageAllowed(completion: @escaping (_ result: Bool) -> Void) {
         let accountService = AccountService()
-        accountService.isAllowedFaceImageAndFacebook(handler: { [weak self] response in
+        accountService.getSettingsInfoPermissions(handler: { [weak self] response in
             switch response {
             case .success(let result):
                 guard let allowed = result.isFaceImageAllowed else {
@@ -163,6 +174,29 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         })
     }
     
+    private func getInstaPickThumbnails(group: DispatchGroup) {
+        group.enter()
+        instaPickService.getThumbnails { [weak self] result in
+            guard let `self` = self else {
+                group.leave()
+                return
+            }
+            
+            switch result {
+            case .success(let urls):
+                let item = SliderItem(withThumbnails: urls, type: .instaPick)
+
+                DispatchQueue.toMain {
+                    self.dataStorage.addNew(item: item)
+                    group.leave()
+                }
+            case .failed(_):
+                self.output.operationFailed()
+                group.leave()
+            }
+        }
+    }
+    
     private func getFaceImageItems(group: DispatchGroup) {
         getThumbnails(forType: .people, group: group)
         getThumbnails(forType: .things, group: group)
@@ -189,7 +223,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
             return type1.rawValue < type2.rawValue
         })
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.output.operationSuccessed(withItems: items)
         }
     }
@@ -228,7 +262,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         var needUpdate = false
         currentItems.forEach { item in
             if let type = item.type, type.isFaceImageType(),
-                let previews = item.previewItems, previews.count < 4 {
+                let previews = item.previewItems, previews.count < NumericConstants.myStreamSliderThumbnailsCount {
                 needUpdate = true
             }
         }
@@ -242,5 +276,16 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
             return compairedView == self
         }
         return false
+    }
+}
+
+
+extension LBAlbumLikePreviewSliderInteractor: InstaPickServiceDelegate {
+    func didFinishAnalysis() {
+        reload(type: .instaPick)
+    }
+    
+    func didRemoveAnalysis() {
+        reload(type: .instaPick)
     }
 }

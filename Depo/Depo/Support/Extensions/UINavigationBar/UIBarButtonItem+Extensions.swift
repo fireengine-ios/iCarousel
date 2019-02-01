@@ -25,6 +25,8 @@ extension UIBarButtonItem {
 
         if let font = font {
             self.setTitleTextAttributes([.font : font], for: .normal)
+            self.setTitleTextAttributes([.font : font], for: .highlighted)
+            self.setTitleTextAttributes([.font : font], for: .disabled)
         }
     }
 }

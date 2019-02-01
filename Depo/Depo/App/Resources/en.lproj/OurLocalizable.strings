@@ -262,6 +262,7 @@
 "Import From Facebook" = "Import from Facebook";
 "Import From Dropbox" = "Import from Dropbox";
 "Import Photos" = "Import Photos";
+"connected_accounts" = "Connected Accounts";
 "Are you sure you want to exit the application?" = "Are you sure you want to exit the application?";
 "Auto-login" = "Auto-login";
 "Logout" = "Logout";
@@ -424,6 +425,7 @@
 "Things" = "Things";
 "Places" = "Places";
 "Musics" = "Musics";
+"InstaPick" = "InstaPick";
 "Your Uploads" = "Your Uploads";
 "Create a story" = "Create a story";
 "Please Choose 20 files at most" = "Please choose maximum 20 photos";
@@ -732,6 +734,7 @@
 "package_life_cancel_text" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "package_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
+"package_albanian_cancel_text" = "Package albanian cancel text";
 "package_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 
@@ -746,6 +749,7 @@
 "feature_promo_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 "feature_kktcell_cancel_text" = "You can continue to use Premium features for free since you are a KKTCELL user";
 "feature_moldcell_cancel_text" = "You can continue to use Premium features for free since you are a Moldcell user";
+"feature_albanian_cancel_text" = "Feature albanian cancel text";
 "feature_life_cancel_text" = "You can continue to use Premium features for free since you are a life:) user";
 "feature_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "feature_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
@@ -775,4 +779,73 @@
 "ok_for_upgrade" = "Yes, Upgrade";
 "no_for_upgrade" = "No, I'm OK";
 "uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. If you don't upgrade to Premium, your memories will be kept in high quality. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
+
+/*AnalyzeHistoryController*/
+"InstaPick" = "InstaPick";
+"analyze_history_free_text" = "Free for Limited Time";
+"no_analyses_left_title" = "No Analyzes Left";
+"no_analyses_left_message" = "No Analyzes Left";
+"no_analyses_left_button" = "Purchase InstaPick";
+"analyze_history_empty_title" = "analyze_history_empty_title";
+"analyze_history_empty_subtitle" = "analyze_history_empty_subtitle";
+"analyze_history_analyze_left" = "Analyses Left";
+"analyze_history_analyze_count" = "%1$d of %2$d";
+"analyze_with_instapick" = "New InstaPick Analysis";
+"analyze_history_photos_count" = "%d photos";
+"analyze_history_start_here" = "Start\nHere!";
+"analyze_confirm_delete_title" = "Are you sure you want to delete?";
+"analyze_confirm_delete_text" = "These analyses will be deleted from your Analyze History";
+"analyze_confirm_delete_yes" = "YES";
+"analyze_confirm_delete_no"  = "NO";
+/*InstapickUpgradePopup*/
+"instapick_upgrade_popup_text" = "In order to purchase Instagram Likes package, you need to upgrade your lifebox application.";
+"instapick_upgrade_popup_button" = "Upgrade";
+"instapick_upgrade_popup_no" = "No";
+/*InstaPick three dots*/
+"new_insta_pick" = "New InstaPick";
+"uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. We will keep your existing photos and videos along with new uploaded memories in high quality until 1st of March. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
+
+/*InstaPickCard*/
+
+"used_before_title_label" = "InstaPick to get bunch of likes!";
+"no_used_before_title_label" = "Analyze with InstaPick!";
+"no_analysis_title_label" = "Get more InstaPick!";
+
+"used_before_detail_label" = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+"no_used_before_detail_label" = "Let us analyze your selected photos and suggest you which one to share!";
+"no_analysis_detail_label" = "Let us analyze your selected photos and suggest you which one to share!";
+
+"instapick_button_has_analysis" = "Let’s Start!";
+"analyze_with_instapick" = "Analyze With InstaPick";
+
+/*InstaPickDetailViewController*/
+
+"you_are_ready_to_share" = "You are ready to share!";
+"instapick_analysis_left" = "Analysis Left: %1$d of %2$d";
+"instapick_unlimited_analysis" = "Free for Limited Time";
+"engage_with_more_hastags" = "Engage with more #hastags";
+"copy_hashtags_to_clipboard" = "Copy #hashtags to clipboard";
+"share_on_social_media" = "Share on Social Media!";
+
+"picked" = "PICKED!";
+"insta_pick_analyzing_bottom" = "Enjoy your time while we analyze your photos! 😊";
+"insta_pick_analyzing_0" = "We are looking for the photo you will get the most likes.";
+"insta_pick_analyzing_1" = "You have selected beautiful photos";
+"insta_pick_analyzing_2" = "How nice of you to share your moments with your friends!";
+"insta_pick_analyzing_3" = "Life is good with great memories!";
+"insta_pick_analyzing_4" = "You have a great photo album.";
+/*InstaPickPopUp*/
+"dont_show_this_again" = "Don't show this again";
+"instapick_analyze" = "Analyze with InstaPick!";
+"connected_account" = "It works great with your connected account!";
+"instapick_description" = "Lorem psum dolor sit amet, adipiscing consectetur adipiscing elit.  Lorem psum dolor sit amet, adipiscing consectetur elit.";
+"connected_with_instagram" = "Connect with Instagram";
+"connected_with_instagram_name" = "Connect with Instagram as";
+"continue_without_connecting" = "Continue without connecting";
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
+"Facebook" = "Facebook";
+"Dropbox" = "Dropbox";
+"Instagram" = "Instagram";
+"connected_as_format" = "Connected as @%@";
+"instagram_remove_connection_warning_title" = "You're about to remove your Instagram connection.";
+"instagram_remove_connection_warning_message" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\n";

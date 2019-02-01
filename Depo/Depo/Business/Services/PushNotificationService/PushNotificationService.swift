@@ -219,11 +219,11 @@ final class PushNotificationService {
     }
     
     private func openImportDropbox() {
-        pushTo(router.importPhotos)
+        pushTo(router.connectedAccounts)
     }
     
     private func openSocialMedia() {
-        pushTo(router.importPhotos)
+        pushTo(router.connectedAccounts)
     }
     
     private func openFaq() {

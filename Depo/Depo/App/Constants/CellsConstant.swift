@@ -23,6 +23,9 @@ struct CellsIdConstants {
     static let suggestionTableSectionHeaderID = "SuggestionTableSectionHeader"
     static let suggestionTableViewCellID = "SuggestionTableViewCell"
     static let recentlySearchedTableViewCellID = "RecentlySearchedFaceImageTableViewCell"
+    static let facebookAccountConnectionCell = "FacebookAccountConnectionCell"
+    static let dropboxAccountConnectionCell = "DropboxAccountConnectionCell"
+    static let instagramAccountConnectionCell = "InstagramAccountConnectionCell"
 }
 
 struct CollectionViewCellsIdsConstant {
@@ -39,6 +42,7 @@ struct CollectionViewCellsIdsConstant {
     static let localAlbumCell = "LocalAlbumCollectionViewCell"
     static let cellForFaceImage = "CollectionViewCellForFaceImage"
     static let cellForFaceImageAddName = "CollectionViewCellForFaceImageAddName"
+    static let cellForInstapickPhoto = "CollectionViewCellForInstapickPhoto"
 }
 
 struct CollectionViewSuplementaryConstants {

@@ -28,5 +28,7 @@ protocol CardsManagerViewProtocol {
     
     func addNotPermittedPopUpViewTypes(types: [OperationType])
     
+    func configureInstaPick(with analysisStatus: InstapickAnalyzesCount)
+    
     var isEnable: Bool { get set }
 }

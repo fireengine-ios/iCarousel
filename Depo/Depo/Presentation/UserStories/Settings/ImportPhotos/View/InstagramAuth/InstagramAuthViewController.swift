@@ -23,6 +23,10 @@ class InstagramAuthViewController: ViewController {
     
     private var isLoginStarted = false
     private var isLoginCanceled = false
+    private var instagramAccessToken: String?
+    
+    private lazy var instagramService = InstagramService()
+    private lazy var accountService = AccountService()
     
     weak var delegate: InstagramAuthViewControllerDelegate?
     
@@ -39,11 +43,14 @@ class InstagramAuthViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationBarWithGradientStyle()
+        
         setTitle(withString: "Instagram login")
         webView.backgroundColor = UIColor.white
         webView.isOpaque = false
 
-        let request = URLRequest(url: authPath!)
+        var request = URLRequest(url: authPath!)
+        request.httpShouldHandleCookies = false
         webView.load(request)
     }
     
@@ -58,6 +65,30 @@ class InstagramAuthViewController: ViewController {
         }
     }
     
+    private func instagramAuthCancel() {
+        delegate?.instagramAuthCancel()
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func checkInstagramLogin() {
+        showSpiner()
+        if let instagramAccessToken = instagramAccessToken {
+            instagramService.checkInstagramLogin(instagramAccessToken: instagramAccessToken) { [weak self] response in
+                switch response {
+                case .success(_):
+                    DispatchQueue.toMain {
+                        self?.delegate?.instagramAuthSuccess()
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                case .failed(let error):
+                    self?.hideSpiner()
+                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    self?.instagramAuthCancel()
+                }
+            }
+        }
+    }
+    
     deinit {
         webView.navigationDelegate = nil
         webView.stopLoading()
@@ -68,11 +99,12 @@ extension InstagramAuthViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if isLoginStarted {
-            delegate?.instagramAuthSuccess()
-            navigationController?.popViewController(animated: true)
+            ///server returns 500 if checkInstagramLogin immediately
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                self.checkInstagramLogin()
+            }
         } else if isLoginCanceled {
-            delegate?.instagramAuthCancel()
-            navigationController?.popViewController(animated: true)
+            instagramAuthCancel()
         }
     }
     
@@ -87,7 +119,8 @@ extension InstagramAuthViewController: WKNavigationDelegate {
             return
         }
         
-        if currentUrl.contains("#access_token"), navigationAction.navigationType == .formSubmitted {
+        if let index = currentUrl.range(of: "#access_token=")?.upperBound {
+            instagramAccessToken = String(currentUrl.suffix(from: index))
             isLoginStarted = true
         } else if currentUrl.contains("access_denied"), navigationAction.navigationType == .formSubmitted {
             isLoginCanceled = true

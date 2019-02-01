@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -50,7 +48,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8qh-Pd-GkY">
-                                    <rect key="frame" x="37.5" y="229.5" width="300" height="209"/>
+                                    <rect key="frame" x="37.5" y="229" width="300" height="209"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="b7l-4P-zk8">
                                             <rect key="frame" x="130" y="30" width="40" height="40"/>
@@ -63,7 +61,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vgj-JX-vfg">
-                                                    <rect key="frame" x="-167.5" y="0.0" width="40" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Vgj-JX-vfg" secondAttribute="height" multiplier="1:1" id="B5g-Lz-oif"/>
                                                         <constraint firstAttribute="width" constant="40" id="eHc-SV-EPB"/>
@@ -99,7 +97,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTn-VC-Atd" userLabel="Buttons View">
-                                            <rect key="frame" x="0.0" y="162.5" width="300" height="46"/>
+                                            <rect key="frame" x="0.0" y="163" width="300" height="46"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-8G-xaM" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
                                                     <rect key="frame" x="-1" y="0.0" width="151.5" height="47"/>
@@ -170,7 +168,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="izp-zY-Aet" userLabel="Equal View">
-                                    <rect key="frame" x="172.5" y="438.5" width="30" height="228.5"/>
+                                    <rect key="frame" x="172.5" y="438" width="30" height="229"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="2w3-iG-Q0f"/>

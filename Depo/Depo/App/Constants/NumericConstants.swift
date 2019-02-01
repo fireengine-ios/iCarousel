@@ -44,6 +44,7 @@ struct NumericConstants {
     static let numberOfElementsInSyncRequest: Int = 30000
     
     static let animationDuration: Double = 0.3
+    static let setImageAnimationDuration: Double = 0.2
     static let fastAnimationDuration: Double = 0.1
     static let scrollIndicatorAnimationDuration: TimeInterval = 1.8
     
@@ -118,6 +119,21 @@ struct NumericConstants {
     static let heightForPackageCell: CGFloat = 255
     
     static let premiumViewHeight: CGFloat = 480
+    
+    static let instaPickSelectionSegmentedTransparentGradientViewHeight: CGFloat = 130
+    static let instaPickHashtagCellHeight: CGFloat = 35
+    static let instaPickHashtagCellWidthConstant: CGFloat = 45
+    
+    static let instaPickHashtagCellCornerRadius: CGFloat = 12
+    static let instaPickHashtagCellBorderWidth: CGFloat = 0.2
+    static let instaPickHashtagCellShadowRadius: CGFloat = 5
+    
+    static let instaPickHashtagCellShadowColorAlpha: CGFloat = 0.11
+    static let instaPickHashtagCellBorderColorAlpha: CGFloat = 0.15
+    
+    static let instaPickDetailsPopUpCornerRadius: CGFloat = 2
+    
+    static let instaPickImageViewTransitionDuration: TimeInterval = 0.25
 }
 
 struct RequestSizeConstant {

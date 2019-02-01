@@ -740,7 +740,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             CollectionViewCellsIdsConstant.albumCell,
                             CollectionViewCellsIdsConstant.localAlbumCell,
                             CollectionViewCellsIdsConstant.cellForFaceImage,
-                            CollectionViewCellsIdsConstant.cellForFaceImageAddName]
+                            CollectionViewCellsIdsConstant.cellForFaceImageAddName,
+                            CollectionViewCellsIdsConstant.cellForInstapickPhoto]
         
         registreList.forEach {
             let listNib = UINib(nibName: $0, bundle: nil)
@@ -1601,7 +1602,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
                 DispatchQueue.main.async {
                     self.collectionView?.performBatchUpdates({ [weak self] in
-                        if let `self` = self{
+                        if let `self` = self {
                             self.collectionView?.reloadItems(at: arrayOfPath)
                         }
                     }, completion: nil)
