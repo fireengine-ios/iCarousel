@@ -27,10 +27,6 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWR-Nw-LGh" customClass="RadialGradientableView" customModule="lifebox" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="186" height="131"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TbP-rD-dRR">
                         <rect key="frame" x="0.0" y="0.0" width="186" height="131"/>
                         <subviews>
@@ -82,16 +78,12 @@
             <constraints>
                 <constraint firstItem="q9c-AG-hk6" firstAttribute="width" secondItem="9LX-Q4-Kta" secondAttribute="width" id="4mn-1t-q6z"/>
                 <constraint firstItem="9LX-Q4-Kta" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5I5-jZ-Ztg"/>
-                <constraint firstItem="kWR-Nw-LGh" firstAttribute="trailing" secondItem="TbP-rD-dRR" secondAttribute="trailing" id="7hg-dh-wwB"/>
-                <constraint firstItem="kWR-Nw-LGh" firstAttribute="top" secondItem="TbP-rD-dRR" secondAttribute="top" id="7jl-mr-5lh"/>
                 <constraint firstItem="9LX-Q4-Kta" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="9T2-NP-tKv"/>
                 <constraint firstAttribute="trailing" secondItem="TbP-rD-dRR" secondAttribute="trailing" id="GjN-yZ-DYK"/>
                 <constraint firstItem="XSq-I2-uPu" firstAttribute="top" secondItem="9LX-Q4-Kta" secondAttribute="bottom" id="I5g-f5-Sp7"/>
                 <constraint firstItem="q9c-AG-hk6" firstAttribute="centerY" secondItem="9LX-Q4-Kta" secondAttribute="centerY" id="PRn-Uu-eiK"/>
-                <constraint firstItem="kWR-Nw-LGh" firstAttribute="bottom" secondItem="TbP-rD-dRR" secondAttribute="bottom" id="Sqr-bt-oSf"/>
                 <constraint firstAttribute="bottom" secondItem="XSq-I2-uPu" secondAttribute="bottom" id="X6k-jY-zK9"/>
                 <constraint firstItem="q9c-AG-hk6" firstAttribute="height" secondItem="9LX-Q4-Kta" secondAttribute="height" id="cVq-YD-qOX"/>
-                <constraint firstItem="kWR-Nw-LGh" firstAttribute="leading" secondItem="TbP-rD-dRR" secondAttribute="leading" id="eZs-nR-2TR"/>
                 <constraint firstItem="q9c-AG-hk6" firstAttribute="centerX" secondItem="9LX-Q4-Kta" secondAttribute="centerX" id="ifb-fM-UhG"/>
                 <constraint firstItem="XSq-I2-uPu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="oc3-K6-Up6"/>
                 <constraint firstAttribute="trailing" secondItem="9LX-Q4-Kta" secondAttribute="trailing" id="w5X-qU-Zr2"/>
@@ -103,7 +95,6 @@
             <size key="customSize" width="186" height="151"/>
             <connections>
                 <outlet property="bigPreviewImage" destination="q9c-AG-hk6" id="Lao-nx-v3z"/>
-                <outlet property="gradientView" destination="kWR-Nw-LGh" id="6GM-c7-KaS"/>
                 <outlet property="placeholderImage" destination="9LX-Q4-Kta" id="7d0-QZ-0yM"/>
                 <outlet property="previewBackView" destination="TbP-rD-dRR" id="6JY-eq-xjp"/>
                 <outlet property="previewImage1" destination="0rl-uE-Kzb" id="ikU-sU-iEJ"/>
