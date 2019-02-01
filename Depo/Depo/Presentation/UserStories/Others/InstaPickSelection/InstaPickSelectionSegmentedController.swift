@@ -125,7 +125,7 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         vcView.analyzesLeftLabel.text = String(format: TextConstants.instapickSelectionAnalyzesLeft, selectingLimit)
         
         let allPhotosDataSource = AllPhotosSelectionDataSource(pageSize: selectionControllerPageSize)
-        let allPhotosVC = PhotoSelectionController(title: TextConstants.photos,
+        let allPhotosVC = PhotoSelectionController(title: TextConstants.actionSheetPhotos,
                                                    selectingLimit: selectingLimit,
                                                    delegate: self,
                                                    dataSource: allPhotosDataSource)
