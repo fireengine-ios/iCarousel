@@ -41,7 +41,6 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialAccountConnecti
     @IBOutlet private weak var progress: UILabel! {
         didSet {
             progress.font = UIFont.TurkcellSaturaRegFont(size: 14.0)
-            progress.isHidden = true
             progress.text = " "
         }
     }
@@ -90,12 +89,10 @@ extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
         connectButton.isEnabled = false
         rotatingImage.isHidden = false
         rotatingImage.startInfinityRotate360Degrees(duration: 2)
-        progress.isHidden = false
         progress.text = String(format: TextConstants.importFiles, String(0))
     }
     
     func updateDropboxStatus(progressPercent: Int) {
-        progress.isHidden = false
         progress.text = String(format: TextConstants.importFiles, String(progressPercent))
     }
     
