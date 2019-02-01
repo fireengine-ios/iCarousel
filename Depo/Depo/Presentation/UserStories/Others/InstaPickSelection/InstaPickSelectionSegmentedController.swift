@@ -19,7 +19,11 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     // MARK: properties
     
     /// not private bcz protocol requirement
-    var selectedItems = [SearchItemResponse]()
+    var selectedItems = [SearchItemResponse]() {
+        didSet {
+            vcView.analyzeButton.isHidden = selectedItems.isEmpty
+        }
+    }
     
     /// not private bcz protocol requirement
     var selectionState = PhotoSelectionState.selecting {
@@ -122,7 +126,10 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     
     /// one time called
     private func setupScreenWithSelectingLimit(_ selectingLimit: Int) {
-        vcView.analyzesLeftLabel.text = String(format: TextConstants.instapickSelectionAnalyzesLeft, selectingLimit)
+        let formatedAnalyzesLeft = (selectingLimit == maxSelectingLimit) ?
+            TextConstants.instapickSelectionAnalyzesLeftMax :
+            TextConstants.instapickSelectionAnalyzesLeft
+        vcView.analyzesLeftLabel.text = String(format: formatedAnalyzesLeft, selectingLimit)
         
         let allPhotosDataSource = AllPhotosSelectionDataSource(pageSize: selectionControllerPageSize)
         let allPhotosVC = PhotoSelectionController(title: TextConstants.actionSheetPhotos,
