@@ -90,6 +90,12 @@ class AlbumCell: UICollectionViewCell {
         imageView.loadImageByPath(path_: path)
         
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        gradientView.isHidden = true
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
