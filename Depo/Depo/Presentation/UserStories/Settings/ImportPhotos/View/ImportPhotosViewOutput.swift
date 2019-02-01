@@ -27,6 +27,12 @@ protocol ImportFromDropboxViewOutput {
 
 protocol ImportFromInstagramViewOutput {
     func viewIsReady()
+    
+    func disconnectAccount()
+    
     func startInstagram()
     func stopInstagram()
+    
+    func enableInstaPick()
+    func disableInstaPick()
 }

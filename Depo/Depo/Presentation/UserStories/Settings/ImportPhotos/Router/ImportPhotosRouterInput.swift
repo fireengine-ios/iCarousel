@@ -8,13 +8,13 @@
 
 import Foundation
 
-protocol ImportFromFBRouterInput {
-    func goToOnboarding()
-}
-
-protocol ImportFromDropboxRouterInput {
-    func goToOnboarding()
-}
+//protocol ImportFromFBRouterInput {
+//    func goToOnboarding()
+//}
+//
+//protocol ImportFromDropboxRouterInput {
+//    func goToOnboarding()
+//}
 
 protocol ImportFromInstagramRouterInput {
     func openInstagramAuth(param: InstagramConfigResponse, delegate: InstagramAuthViewControllerDelegate?)

@@ -3,7 +3,8 @@ import UIKit
 final class PhotoCell: UICollectionViewCell {
     
     private enum Constants {
-        static let favoriteImageViewSideSize: CGFloat = 24
+        static let selectionImageViewSideSize: CGFloat = 24
+        static let favoriteImageViewSideSize: CGFloat = 20
         static let edgeInset: CGFloat = 6
         static let selectionBorderWidth: CGFloat = 3
         
@@ -80,8 +81,8 @@ final class PhotoCell: UICollectionViewCell {
         imageView.frame = bounds
         selectionImageView.frame = CGRect(x: bounds.width - Constants.favoriteImageViewSideSize - Constants.edgeInset,
                                           y: Constants.edgeInset,
-                                          width: Constants.favoriteImageViewSideSize,
-                                          height: Constants.favoriteImageViewSideSize)
+                                          width: Constants.selectionImageViewSideSize,
+                                          height: Constants.selectionImageViewSideSize)
         favouriteImageView.frame = CGRect(x: Constants.edgeInset,
                                          y: Constants.edgeInset,
                                          width: Constants.favoriteImageViewSideSize,
@@ -97,7 +98,7 @@ final class PhotoCell: UICollectionViewCell {
         cellImageManager = nil
     }
     
-    func update(for selectionState: PhotoSelectionController.SelectionState) {
+    func update(for selectionState: PhotoSelectionState) {
         if self.isSelected {
             selectionImageView.image = Constants.checkmarkFillImage
             setViewBorder(isSelected: true)
@@ -162,15 +163,18 @@ final class PhotoCell: UICollectionViewCell {
         
         backgroundColor = ColorConstants.fileGreedCellColor
     }
+    
+    func cancelImageLoading() {
+        cellImageManager?.cancelImageLoading()
+    }
 }
 
 final class CollectionSpinnerFooter: UICollectionReusableView {
     
     private let activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        activity.startAnimating()
         activity.hidesWhenStopped = true
-        //activity.color = UIColor.red
+        activity.startAnimating()
         return activity
     }()
     
@@ -185,10 +189,7 @@ final class CollectionSpinnerFooter: UICollectionReusableView {
     }
     
     private func setup() {
-        backgroundColor = .white
         addSubview(activityIndicator)
-        
-        activityIndicator.startAnimating()
     }
     
     override func layoutSubviews() {
@@ -203,40 +204,5 @@ final class CollectionSpinnerFooter: UICollectionReusableView {
     
     func stopSpinner() {
         activityIndicator.stopAnimating()
-    }
-}
-
-
-import Foundation
-
-final class PhotoService {
-    
-    private var requestTask: URLSessionTask?
-    private let searchService = SearchService()
-    
-    func loadPhotos(page: Int, size: Int, handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
-        
-        let requestParam = SearchByFieldParameters(fieldName: .content_type,
-                                                   fieldValue: .image,
-                                                   sortBy: .date,
-                                                   sortOrder: .asc,
-                                                   page: page,
-                                                   size: size,
-                                                   minified: false)
-        
-        requestTask = searchService.searchByField(param: requestParam, success: { response  in
-            
-            guard let result = (response as? SearchResponse)?.list else {
-                assertionFailure()
-                let error = CustomErrors.serverError("failed parsing searchService.searchByField")
-                handler(.failed(error))
-                return
-            }
-            
-            handler(.success(result))
-        }, fail: { errorResponse in
-            assertionFailure(errorResponse.localizedDescription)
-            handler(.failed(errorResponse))
-        })
     }
 }

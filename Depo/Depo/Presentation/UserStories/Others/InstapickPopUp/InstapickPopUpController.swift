@@ -65,6 +65,7 @@ final class InstapickPopUpController: UIViewController {
     }
     
     private lazy var instapickRoutingService = InstaPickRoutingService()
+    private lazy var accountService = AccountService()
     
     private var instaNickname: String?
     private var doNotShowAgain: Bool = false
@@ -210,6 +211,27 @@ final class InstapickPopUpController: UIViewController {
         })
     }
     
+    private func changeLikePermissionForInstagram() {
+        showSpinnerOnView(containerView)
+
+        accountService.changeInstapickAllowed(isInstapickAllowed: true) { [weak self] response in
+            if let containerView = self?.containerView {
+                self?.hideSpinerForView(containerView)
+            }
+            
+            switch response {
+            case .success(_):
+                DispatchQueue.toMain {
+                    self?.close { [weak self] in
+                        self?.delegate?.onConnectWithInsta()
+                    }
+                }
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.localizedDescription)
+            }
+        }
+    }
+    
     // MARK: Actions
     @IBAction private func onWithoutConnectingTap(_ sender: Any) {
         close { [weak self] in
@@ -236,9 +258,7 @@ extension InstapickPopUpController: ConnectWithInstaViewDelegate {
     }
     
     func onConnectWithLoginInstaTap() {
-        close { [weak self] in
-            self?.delegate?.onConnectWithInsta()
-        }
+        changeLikePermissionForInstagram()
     }
     
 }
@@ -247,9 +267,22 @@ extension InstapickPopUpController: ConnectWithInstaViewDelegate {
 extension InstapickPopUpController: InstagramAuthViewControllerDelegate {
     
     func instagramAuthSuccess() {
-        close { [weak self] in
-            self?.delegate?.onConnectWithInsta()
+        accountService.changeInstapickAllowed(isInstapickAllowed: true) { [weak self] response in
+            self?.hideSpiner()
+            
+            switch response {
+            case .success(_):
+                DispatchQueue.toMain {
+                    self?.close { [weak self] in
+                        self?.delegate?.onConnectWithInsta()
+                    }
+                }
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.localizedDescription)
+            }
         }
+        
+        
     }
     
     func instagramAuthCancel() { }

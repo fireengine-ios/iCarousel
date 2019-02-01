@@ -42,8 +42,8 @@ final class InstaPickDetailViewController: UIViewController {
     
     @IBOutlet private weak var darkView: UIView!
     @IBOutlet private weak var containerView: UIView!
-    @IBOutlet private weak var smallPhotosContainerView: UIView!
     @IBOutlet private weak var smallPhotosStackView: UIStackView!
+    @IBOutlet private weak var smallPhotosContainerView: UIView!
     @IBOutlet private weak var photosStackView: UIStackView!
     
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -127,14 +127,14 @@ final class InstaPickDetailViewController: UIViewController {
             if let id = view.restorationIdentifier, let type = PhotoViewType(rawValue: id), type.index <= maxIndex {
                 let analyze = analyzes[type.index]
                 
-                view.configureImageView(with: analyze, delegate: self)
+                view.configureImageView(with: analyze, delegate: self, smallPhotosCount: maxIndex)
             } else {
                 view.isHidden = true
             }
         }
         
         if maxIndex == 0 {
-            photosStackView.removeArrangedSubview(smallPhotosContainerView)
+            smallPhotosContainerView.isHidden = true
         }
     }
     
@@ -147,16 +147,18 @@ final class InstaPickDetailViewController: UIViewController {
     }
     
     private func setupFonts() {
-        topLabel.font = UIFont.TurkcellSaturaBolFont(size: 28)
+        let isIPad = Device.isIpad
+        
+        topLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 38 : 28)
         topLabel.textColor = ColorConstants.darcBlueColor
         
-        analysisLeftLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        analysisLeftLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
         analysisLeftLabel.textColor = ColorConstants.textGrayColor
         
-        hashTagsLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        hashTagsLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
         hashTagsLabel.textColor = ColorConstants.darcBlueColor
         
-        copyToClipboardButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        copyToClipboardButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 19 : 14)
         copyToClipboardButton.setTitleColor(UIColor.lrTealishTwo, for: .normal)
         
         shareButton.setBackgroundColor(UIColor.white, for: .disabled)
@@ -192,11 +194,14 @@ final class InstaPickDetailViewController: UIViewController {
             showErrorWith(message: error.localizedDescription)
             return
         }
-        let text = String(format: TextConstants.instaPickLeftCountLabel, analyzesCount.left, analyzesCount.total)
+        
+        let text = analyzesCount.isFree ? TextConstants.instaPickUnlimitedLeftCountLabel :
+            String(format: TextConstants.instaPickLeftCountLabel, analyzesCount.left, analyzesCount.total)
+        
         ///if left count is 0 we seek ":"(not 0 because of RTL language) and draw in red
-        if analyzesCount.left == 0, let location = text.firstIndex(of: ":") {
+        if analyzesCount.left == 0, let location = text.firstIndex(of: ":"), !analyzesCount.isFree {
             let attributedString = NSMutableAttributedString(string: text, attributes: [
-                .font : UIFont.TurkcellSaturaDemFont(size: 18),
+                .font : UIFont.TurkcellSaturaDemFont(size: Device.isIpad ? 24 : 18),
                 .foregroundColor : ColorConstants.textGrayColor,
                 .kern : 0.29
                 ])
@@ -219,7 +224,7 @@ final class InstaPickDetailViewController: UIViewController {
             showErrorWith(message: error.localizedDescription)
         } else {
             analyzes.sort(by: { left, right in
-                return left.rank > right.rank
+                return left.score > right.score
             })
             
             let topRatePhoto = analyzes.first

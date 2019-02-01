@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-struct AnalyticsDementsonObject {
+struct AnalyticsDimension {
     let screenName: Any//String
     let pageType: Any//used to be AnalyticsAppScreens, now just string
     let sourceType: Any//String
@@ -23,6 +23,9 @@ struct AnalyticsDementsonObject {
     let countOfUploadMetric: Int?
     let countOfDownloadMetric: Int?
     let gsmOperatorType: String
+    let deviceId: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
+    let loginType: GADementionValues.login?
+    let errorType: String?
     
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
@@ -46,7 +49,8 @@ struct AnalyticsDementsonObject {
             GADementionsFields.operatorSystem.text : operatorSystem,
             GADementionsFields.faceImageStatus.text : "\(facialRecognition)",
             GADementionsFields.userPackage.text : userOwnedPackages,
-            GADementionsFields.gsmOperatorType.text : gsmOperatorType
+            GADementionsFields.gsmOperatorType.text : gsmOperatorType,
+            GADementionsFields.deviceId.text: deviceId
         ]
         if let paymentMethodUnwraped = paymentMethod {
             dimesionDictionary[GADementionsFields.paymentMethod.text] = paymentMethodUnwraped
@@ -56,6 +60,12 @@ struct AnalyticsDementsonObject {
         }
         if let numberOfUploads = countOfUploadMetric {
             dimesionDictionary[GAMetrics.countOfUpload.text] = "\(numberOfUploads)"
+        }
+        if let loginType = loginType {
+            dimesionDictionary[GADementionsFields.loginType.text] = loginType.text
+        }
+        if let errorType = errorType {
+            dimesionDictionary[GADementionsFields.errorType.text] = errorType
         }
         return dimesionDictionary
     }

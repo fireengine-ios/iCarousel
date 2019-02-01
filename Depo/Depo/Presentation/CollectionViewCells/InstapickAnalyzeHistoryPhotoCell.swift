@@ -10,6 +10,8 @@ import UIKit
 
 final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
     
+    static let underPhotoOffset: CGFloat = 28
+    
     @IBOutlet private weak var imageView: UIImageView! {
         willSet {
             newValue.contentMode = .scaleAspectFill

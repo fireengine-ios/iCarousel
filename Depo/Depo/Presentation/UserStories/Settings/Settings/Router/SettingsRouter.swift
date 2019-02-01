@@ -20,8 +20,8 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.syncContacts)
     }
     
-    func goToImportPhotos() {
-        router.pushViewController(viewController: router.importPhotos!)
+    func goToConnectedAccounts() {
+        router.pushViewController(viewController: router.connectedAccounts!)
     }
     
     func goToAutoApload() {
