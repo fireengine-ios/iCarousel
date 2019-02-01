@@ -52,7 +52,7 @@ final class FaceImageViewController: ViewController, NibInit {
     }
     
     @IBAction private func showFacebookImport(_ sender: UIButton) {
-        goToImportPhotos()
+        goToConnectedAccounts()
     }
     
     @IBAction private func onPremiumButtonTap(_ sender: Any) {
@@ -67,9 +67,9 @@ final class FaceImageViewController: ViewController, NibInit {
         }
     }
     
-    private func goToImportPhotos() {
+    private func goToConnectedAccounts() {
         let router = RouterVC()
-        router.pushViewController(viewController: router.importPhotos!)
+        router.pushViewController(viewController: router.connectedAccounts!)
     }
     
     private func goToPremium() {

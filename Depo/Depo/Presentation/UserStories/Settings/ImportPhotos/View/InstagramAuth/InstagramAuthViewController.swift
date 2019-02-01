@@ -76,29 +76,15 @@ class InstagramAuthViewController: ViewController {
             instagramService.checkInstagramLogin(instagramAccessToken: instagramAccessToken) { [weak self] response in
                 switch response {
                 case .success(_):
-                    self?.changeLikePermissionForInstagram()
+                    DispatchQueue.toMain {
+                        self?.delegate?.instagramAuthSuccess()
+                        self?.navigationController?.popViewController(animated: true)
+                    }
                 case .failed(let error):
                     self?.hideSpiner()
                     UIApplication.showErrorAlert(message: error.localizedDescription)
                     self?.instagramAuthCancel()
                 }
-            }
-        }
-    }
-    
-    private func changeLikePermissionForInstagram() {
-        accountService.changeInstapickAllowed(isInstapickAllowed: true) { [weak self] response in
-            self?.hideSpiner()
-
-            switch response {
-            case .success(_):
-                DispatchQueue.toMain {
-                    self?.delegate?.instagramAuthSuccess()
-                    self?.navigationController?.popViewController(animated: true)
-                }
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.localizedDescription)
-                self?.instagramAuthCancel()
             }
         }
     }
@@ -113,7 +99,10 @@ extension InstagramAuthViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if isLoginStarted {
-            checkInstagramLogin()
+            ///server returns 500 if checkInstagramLogin immediately
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                self.checkInstagramLogin()
+            }
         } else if isLoginCanceled {
             instagramAuthCancel()
         }

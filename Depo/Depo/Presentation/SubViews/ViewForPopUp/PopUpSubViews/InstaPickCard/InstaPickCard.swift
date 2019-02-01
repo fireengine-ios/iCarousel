@@ -175,7 +175,7 @@ final class InstaPickCard: BaseView {
         } else if status.left == 0 {
             isUsedBefore = true
             newCardType = .noAnalysis
-        } else if status.used > 0 {
+        } else if status.used > 0 || isUsedBefore {
             isUsedBefore = true
             newCardType = .usedBefore
         } else {
