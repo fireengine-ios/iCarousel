@@ -12,7 +12,7 @@ class ImportFromDropboxPresenter: BasePresenter {
     
     weak var view: ImportFromDropboxViewInput?
     var interactor: ImportFromDropboxInteractorInput!
-    var router: ImportFromDropboxRouterInput!
+//    var router: ImportFromDropboxRouterInput!
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
 

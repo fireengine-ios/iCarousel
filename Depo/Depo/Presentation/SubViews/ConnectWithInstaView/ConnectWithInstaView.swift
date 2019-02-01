@@ -44,14 +44,19 @@ final class ConnectWithInstaView: UIView {
     
     // MARK: Utility methods(Public)
     func configure(instaNickname: String? = nil) {
-        nameLabel.isHidden = instaNickname == nil
+        isLoginInsta = instaNickname != nil
+
+        setupFontsAndTextColors()
+
+        nameLabel.isHidden = instaNickname == nil || Device.isIpad
         
         if let instaNickname = instaNickname {
-            nameLabel.text = "@\(instaNickname)"
+            if let text = titleLabel.text, Device.isIpad {
+                titleLabel.text = text + " @\(instaNickname)"
+            } else {
+                nameLabel.text = "@\(instaNickname)"
+            }
         }
-        
-        isLoginInsta = instaNickname != nil
-        setupFontsAndTextColors()
     }
     
     // MARK: Utility methods(Private)

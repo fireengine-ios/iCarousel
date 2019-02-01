@@ -55,6 +55,39 @@ final class PopUpController: ViewController {
         return vc
     }
     
+    static func with(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, firstButtonTitle: String, secondButtonTitle: String, firstUrl: URL? = nil, secondUrl: URL? = nil, firstAction: PopUpButtonHandler? = nil, secondAction: PopUpButtonHandler? = nil) -> PopUpController {
+        
+        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image, firstUrl: firstUrl, secondUrl: secondUrl)
+        vc.buttonState = .twin
+        
+        if let firstAction = firstAction {
+            vc.firstAction = firstAction
+        }
+        if let secondAction = secondAction {
+            vc.secondAction = secondAction
+        }
+        
+        vc.firstButtonTitle = firstButtonTitle
+        vc.secondButtonTitle = secondButtonTitle
+        
+        return vc
+    }
+    
+    private static func controllerWith(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, firstUrl: URL? = nil, secondUrl: URL? = nil) -> PopUpController {
+        let vc = PopUpController(nibName: "PopUpController", bundle: nil)
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overFullScreen
+        
+        vc.alertTitle = title
+        vc.attributedAlertMessage = attributedMessage
+        vc.popUpImage = image
+        vc.firstUrl = firstUrl
+        vc.secondUrl = secondUrl
+        
+        return vc
+    }
+    
+    
     private static func controllerWith(title: String?, message: String?, image: PopUpImage, firstUrl: URL? = nil, secondUrl: URL? = nil) -> PopUpController {
         let vc = PopUpController(nibName: "PopUpController", bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
@@ -120,6 +153,7 @@ final class PopUpController: ViewController {
     
     private var alertTitle: String?
     private var alertMessage: String?
+    private var attributedAlertMessage: NSAttributedString?
     
     private var firstButtonTitle = ""
     private var secondButtonTitle = ""
@@ -151,7 +185,12 @@ final class PopUpController: ViewController {
         setupPopUpImage()
         
         titleLabel.text = alertTitle
-        messageLabel.text = alertMessage
+        if let attributedMessage = attributedAlertMessage {
+            messageLabel.attributedText = attributedMessage
+        } else {
+            messageLabel.text = alertMessage
+
+        }
     }
     
     private func setupButtonState() {

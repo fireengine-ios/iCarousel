@@ -104,6 +104,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
         authenticationService.login(user: user, sucess: { [weak self] _ in
             self?.tokenStorage.isRememberMe = true
             self?.analyticsService.track(event: .login)
+            self?.analyticsService.trackLoginEvent(loginType: .gsm)
             AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: true)
             AuthoritySingleton.shared.setShowPopupAboutPremiumAfterSync(isShow: true)
             
@@ -115,13 +116,16 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                 return
             }
             
+            let loginError = LoginResponseError(with: errorResponse)
+            
+            self.analyticsService.trackLoginEvent(error: loginError)
+            
             let incorrectCredentioal = true
             if (incorrectCredentioal) {
                 self.attempts += 1
             }
             DispatchQueue.main.async {
-
-                if self.isRedirectToSplash(forResponse: errorResponse) {
+                if loginError == .incorrectCaptcha || loginError == .needCaptcha {
                     self.output.didRedirectToSplash()
                 } else {
                     self.output.failLogin(message: errorResponse.description)

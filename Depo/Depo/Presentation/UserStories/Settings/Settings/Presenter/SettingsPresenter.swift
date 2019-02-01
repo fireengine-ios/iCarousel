@@ -69,8 +69,8 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToContactSync()
     }
     
-    func goToImportPhotos() {
-        router.goToImportPhotos()
+    func goToConnectedAccounts() {
+        router.goToConnectedAccounts()
     }
     
     func goToAutoApload() {

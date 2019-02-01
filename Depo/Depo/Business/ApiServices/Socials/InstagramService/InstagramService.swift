@@ -78,6 +78,21 @@ final class InstagramService: BaseRequestService {
                 }
         }
     }
+    
+    func disconnectInstagram(handler: @escaping (ResponseResult<Void>) -> Void) {
+        sessionManager
+            .request(RouteRequests.instagramDisconnect,
+                     method: .post)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(_):
+                    handler(.success(()))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
 //
 //    func setSyncStatusAndCreateMigration(success: SuccessResponse?, fail: FailResponse?){
 //

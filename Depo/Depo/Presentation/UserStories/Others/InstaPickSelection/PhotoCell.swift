@@ -206,4 +206,3 @@ final class CollectionSpinnerFooter: UICollectionReusableView {
         activityIndicator.stopAnimating()
     }
 }
-

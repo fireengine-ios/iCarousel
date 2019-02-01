@@ -181,7 +181,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
         return CardsManager.popUpViewForOperaion(type: operation)
     }
     
-    func configureInstaPick(with totalCount: Int, leftCount: Int) {
+    func configureInstaPick(with analysisStatus: InstapickAnalyzesCount) {
         ///DO NOT DELETE. This delegate method used in BaseCollectionViewDataSource
     }
     

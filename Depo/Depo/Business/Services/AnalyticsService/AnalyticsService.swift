@@ -132,6 +132,8 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func stopTimelyTracking()
     func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int?,
     uploadsMetrics: Int?, isPaymentMethodNative: Bool?)
+    func trackLoginEvent(loginType: GADementionValues.login?, error: LoginResponseError?)
+    func trackSignupEvent(error: SignupResponseError?)
 //    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
 }
 
@@ -158,6 +160,8 @@ extension AnalyticsService: AnalyticsGA {
                                             downloadsMetrics: Int? = nil,
                                             uploadsMetrics: Int? = nil,
                                             isPaymentMethodNative: Bool? = nil,
+                                            loginType: GADementionValues.login? = nil,
+                                            errorType: String? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
         let loginStatus = SingletonStorage.shared.referenceToken != nil
@@ -192,7 +196,7 @@ extension AnalyticsService: AnalyticsGA {
         let screenName: Any = screen?.name ?? NSNull()
         
         group.notify(queue: privateQueue) { 
-            parametrsCallback(AnalyticsDementsonObject(screenName: screenName, pageType: screenName, sourceType: screenName, loginStatus: "\(loginStatus)",
+            parametrsCallback(AnalyticsDimension(screenName: screenName, pageType: screenName, sourceType: screenName, loginStatus: "\(loginStatus)",
                 platform: "iOS", isWifi: ReachabilityService().isReachableViaWiFi,
                 service: "Lifebox", developmentVersion: version,
                 paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
@@ -201,7 +205,9 @@ extension AnalyticsService: AnalyticsGA {
                 userPackagesNames: activeSubscriptionNames,
                 countOfUploadMetric: uploadsMetrics,
                 countOfDownloadMetric: downloadsMetrics,
-                gsmOperatorType: SingletonStorage.shared.accountInfo?.accountType ?? "").productParametrs)
+                gsmOperatorType: SingletonStorage.shared.accountInfo?.accountType ?? "",
+                loginType: loginType,
+                errorType: errorType).productParametrs)
         }
     }
     
@@ -253,7 +259,28 @@ extension AnalyticsService: AnalyticsGA {
             ]
             Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
         }
-       
+    }
+    
+    func trackLoginEvent(loginType: GADementionValues.login? = nil, error: LoginResponseError? = nil) {
+        prepareDimentionsParametrs(screen: nil, loginType: loginType, errorType: error?.dimensionValue) { dimentionParametrs in
+            let parametrs: [String: Any] = [
+                "eventCategory" : GAEventCantegory.functions.text,
+                "eventAction" : GAEventAction.login.text,
+                "eventLabel" : loginType != nil ? GAEventLabel.success.text : GAEventLabel.failure.text
+            ]
+            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+        }
+    }
+    
+    func trackSignupEvent(error: SignupResponseError? = nil) {
+        prepareDimentionsParametrs(screen: nil, errorType: error?.dimensionValue) { dimentionParametrs in
+            let parametrs: [String: Any] = [
+                "eventCategory" : GAEventCantegory.functions.text,
+                "eventAction" : GAEventAction.register.text,
+                "eventLabel" : error == nil ? GAEventLabel.success.text : GAEventLabel.failure.text
+            ]
+            Analytics.logEvent("GAEvent", parameters: parametrs + dimentionParametrs)
+        }
     }
     
     func trackPackageClick(package: SubscriptionPlan, packageIndex: Int) {
