@@ -1,14 +1,17 @@
-//
-//  NSLayoutConstraintExtension.swift
-//  Depo
-//
-//  Created by Raman Harhun on 1/30/19.
-//  Copyright © 2019 LifeTech. All rights reserved.
-//
-
 import Foundation
 
 extension NSLayoutConstraint {
+    
+    @discardableResult
+    func setPriority(_ priority: Float) -> NSLayoutConstraint {
+        self.priority = .init(priority)
+        return self
+    }
+    
+    func activate() {
+        isActive = true
+    }
+    
     func constraintWithMultiplier(_ multiplier: CGFloat) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: self.firstItem, attribute: self.firstAttribute,
                                   relatedBy: self.relation,

@@ -843,6 +843,12 @@
 "connected_with_instagram_name" = "Connect with Instagram as";
 "continue_without_connecting" = "Continue without connecting";
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
+
+"instapick_selection_photos_selected" = "Photos Selected (%d)";
+"instapick_selection_analyzes_left" = "You only have %d analyses left";
+"loading" = "Loading...";
+"there_are_no_photos" = "There are no photos";
+"there_are_no_albums" = "There are no albums";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
