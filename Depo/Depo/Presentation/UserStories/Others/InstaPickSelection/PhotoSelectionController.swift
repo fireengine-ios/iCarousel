@@ -12,7 +12,7 @@ enum PhotoSelectionState {
     case ended
 }
 
-// TODO: localize
+// TODO: accessibility
 final class PhotoSelectionController: UIViewController, ErrorPresenter {
     
     private weak var delegate: PhotoSelectionControllerDelegate?
@@ -68,7 +68,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         label.numberOfLines = 0
         label.textColor = ColorConstants.textGrayColor
         label.font = UIFont.TurkcellSaturaRegFont(size: 14)
-        label.text = "Loading..."
+        label.text = TextConstants.loading
         return label
     }()
     
@@ -176,7 +176,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
                     
                     /// if we don't have any item in collection
                     if self.photos.isEmpty {
-                        self.emptyMessageLabel.text = "There is no photos"
+                        self.emptyMessageLabel.text = TextConstants.thereAreNoPhotos
                     }
                 }
                 
@@ -186,9 +186,9 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         }
     }
     
-    // TODO: need cancel last request if needs pullToRequest before end
+    /// need cancel last request if needs pullToRequest before end
     private func reloadData() {
-        emptyMessageLabel.text = "Loading..."
+        emptyMessageLabel.text = TextConstants.loading
         collectionView.backgroundView = emptyMessageLabel
         
         loadingMoreFooterView?.startSpinner()

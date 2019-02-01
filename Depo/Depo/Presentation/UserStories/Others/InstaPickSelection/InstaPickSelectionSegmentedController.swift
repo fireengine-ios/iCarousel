@@ -14,120 +14,9 @@ protocol InstaPickSelectionSegmentedControllerDelegate {
     func didDeselectItem(_ deselectItem: SearchItemResponse)
 }
 
-final class InstaPickSelectionSegmentedView: UIView {
-    
-    private let topView = UIView()
-    let containerView = UIView()
-    private let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
-    
-    let segmentedControl: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl()
-        segmentedControl.tintColor = ColorConstants.darcBlueColor
-        segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)], for: .normal)
-        return segmentedControl
-    }()
-    
-    let analyzeButton: RoundedInsetsButton = {
-        let button = RoundedInsetsButton()
-        button.isExclusiveTouch = true
-        button.setTitle(TextConstants.analyzeWithInstapick, for: .normal)
-        button.insets = UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30)
-        
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.setTitleColor(UIColor.white.darker(by: 30), for: .highlighted)
-        button.setBackgroundColor(ColorConstants.darcBlueColor, for: .normal)
-        button.setBackgroundColor(ColorConstants.darcBlueColor.darker(by: 30), for: .highlighted)
-        
-        button.titleLabel?.font = ApplicationPalette.bigRoundButtonFont
-        button.adjustsFontSizeToFitWidth()
-        return button
-    }()
-    
-    let analyzesLeftLabel: InsetsLabel = {
-        let label = InsetsLabel()
-        label.textAlignment = .center
-        label.textColor = ColorConstants.darcBlueColor
-        label.font = UIFont.TurkcellSaturaBolFont(size: 16)
-        label.isHidden = true
-        label.backgroundColor = ColorConstants.fileGreedCellColor
-        label.insets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
-        return label
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    private func setup() {
-        topView.backgroundColor = .white
-        containerView.backgroundColor = .white
-        setupLayout()
-    }
-    
-    private func setupLayout() {
-        let view = self
-        view.addSubview(topView)
-        topView.addSubview(segmentedControl)
-        view.addSubview(containerView)
-        view.addSubview(transparentGradientView)
-        view.addSubview(analyzeButton)
-        view.addSubview(analyzesLeftLabel)
-        
-        let edgeOffset: CGFloat = Device.isIpad ? 75 : 35
-        let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
-        
-        topView.translatesAutoresizingMaskIntoConstraints = false
-        topView.topAnchor.constraint(equalTo: view.topAnchor).activate()
-        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
-        topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
-        topView.heightAnchor.constraint(equalToConstant: 50).activate()
-        
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.leadingAnchor
-            .constraint(equalTo: topView.leadingAnchor, constant: edgeOffset).activate()
-        segmentedControl.trailingAnchor
-            .constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).activate()
-        segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).activate()
-        
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: topView.bottomAnchor).activate()
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
-        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
-        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
-        
-        transparentGradientView.translatesAutoresizingMaskIntoConstraints = false
-        transparentGradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
-        transparentGradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
-        transparentGradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
-        transparentGradientView.heightAnchor
-            .constraint(equalToConstant: transparentGradientViewHeight).activate()
-        
-        analyzeButton.translatesAutoresizingMaskIntoConstraints = false
-        analyzeButton.leadingAnchor
-            .constraint(equalTo: view.leadingAnchor, constant: 10)
-            .setPriority(750)
-            .activate()
-        analyzeButton.trailingAnchor
-            .constraint(equalTo: view.trailingAnchor, constant: -10)
-            .setPriority(750)
-            .activate()
-        analyzeButton.centerYAnchor.constraint(equalTo: transparentGradientView.centerYAnchor).activate()
-        analyzeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
-        analyzeButton.heightAnchor.constraint(equalToConstant: 54).activate()
-        
-        analyzesLeftLabel.translatesAutoresizingMaskIntoConstraints = false
-        analyzesLeftLabel.bottomAnchor.constraint(equalTo: transparentGradientView.topAnchor, constant: -20).activate()
-        analyzesLeftLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
-    }
-}
-
 final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresenter, BackButtonActions {
+    
+    // MARK: properties
     
     /// not private bcz protocol requirement
     var selectedItems = [SearchItemResponse]()
@@ -158,6 +47,8 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     
     private let instapickService: InstapickService = factory.resolve()
     
+    // MARK: start
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -172,14 +63,13 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         vcView.segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
         vcView.analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
         
-        // TODO: localize
-        navigationItem.title = "Photos Selected (\(0))"
+        navigationItem.title = String(format: TextConstants.instapickSelectionPhotosSelected, 0)
         removeBackButtonTitle()
         
-        let cancelButton = UIBarButtonItem(title: "Cancel",
+        let cancelButton = UIBarButtonItem(title: TextConstants.cancel,
                                            font: UIFont.TurkcellSaturaDemFont(size: 19),
                                            tintColor: UIColor.white,
-                                           accessibilityLabel: "Cancel",
+                                           accessibilityLabel: TextConstants.cancel,
                                            style: .plain,
                                            target: self,
                                            selector: #selector(closeSelf))
@@ -204,6 +94,8 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         
         getSelectingLimitAndStart()
     }
+    
+    // MARK: methods
     
     /// one time called
     private func getSelectingLimitAndStart() {
@@ -230,18 +122,18 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     
     /// one time called
     private func setupScreenWithSelectingLimit(_ selectingLimit: Int) {
-        vcView.analyzesLeftLabel.text = "You only have \(selectingLimit) analyses left"
+        vcView.analyzesLeftLabel.text = String(format: TextConstants.instapickSelectionAnalyzesLeft, selectingLimit)
         
         let allPhotosDataSource = AllPhotosSelectionDataSource(pageSize: selectionControllerPageSize)
-        let allPhotosVC = PhotoSelectionController(title: "Photos",
+        let allPhotosVC = PhotoSelectionController(title: TextConstants.photos,
                                                    selectingLimit: selectingLimit,
                                                    delegate: self,
                                                    dataSource: allPhotosDataSource)
         
-        let albumsVC = InstapickAlbumSelectionViewController(title: "Albums", delegate: self)
+        let albumsVC = InstapickAlbumSelectionViewController(title: TextConstants.albumsTitle, delegate: self)
         
         let favoriteDataSource = FavoritePhotosSelectionDataSource(pageSize: selectionControllerPageSize)
-        let favoritePhotosVC = PhotoSelectionController(title: "Favs",
+        let favoritePhotosVC = PhotoSelectionController(title: TextConstants.homeButtonFavorites,
                                                         selectingLimit: selectingLimit,
                                                         delegate: self,
                                                         dataSource: favoriteDataSource)
@@ -323,30 +215,7 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     }
 }
 
-// MARK: - Static
-extension InstaPickSelectionSegmentedController {
-    static func controllerToPresent() -> UIViewController {
-        let vc = InstaPickSelectionSegmentedController()
-        let navVC = UINavigationController(rootViewController: vc)
-        
-        let navigationTextColor = UIColor.white
-        let navigationBar = navVC.navigationBar
-        
-        let textAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: navigationTextColor,
-            .font: UIFont.TurkcellSaturaDemFont(size: 19)
-        ]
-        
-        navigationBar.titleTextAttributes = textAttributes
-        navigationBar.barTintColor = UIColor.lrTealish ///bar's background
-        navigationBar.barStyle = .black
-        navigationBar.isTranslucent = false
-        navigationBar.tintColor = navigationTextColor
-        
-        return navVC
-    }
-}
-
+// MARK: - PhotoSelectionControllerDelegate
 extension InstaPickSelectionSegmentedController: PhotoSelectionControllerDelegate {
     
     func selectionController(_ controller: PhotoSelectionController, didSelectItem item: SearchItemResponse) {
@@ -384,7 +253,7 @@ extension InstaPickSelectionSegmentedController: PhotoSelectionControllerDelegat
     }
     
     private func updateTitle() {
-        navigationItem.title = "Photos Selected (\(selectedItems.count))"
+        navigationItem.title = String(format: TextConstants.instapickSelectionPhotosSelected, selectedItems.count)
     }
 }
 
@@ -399,5 +268,29 @@ extension InstaPickSelectionSegmentedController: InstapickAlbumSelectionDelegate
                                                            dataSource: dataSource)
         delegates.add(albumSelectionVC)
         navigationController?.pushViewController(albumSelectionVC, animated: true)
+    }
+}
+
+// MARK: - Static
+extension InstaPickSelectionSegmentedController {
+    static func controllerToPresent() -> UIViewController {
+        let vc = InstaPickSelectionSegmentedController()
+        let navVC = UINavigationController(rootViewController: vc)
+        
+        let navigationTextColor = UIColor.white
+        let navigationBar = navVC.navigationBar
+        
+        let textAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: navigationTextColor,
+            .font: UIFont.TurkcellSaturaDemFont(size: 19)
+        ]
+        
+        navigationBar.titleTextAttributes = textAttributes
+        navigationBar.barTintColor = UIColor.lrTealish ///bar's background
+        navigationBar.barStyle = .black
+        navigationBar.isTranslucent = false
+        navigationBar.tintColor = navigationTextColor
+        
+        return navVC
     }
 }

@@ -22,7 +22,7 @@ final class InstapickAlbumSelectionViewController: UIViewController, ErrorPresen
         label.numberOfLines = 0
         label.textColor = ColorConstants.textGrayColor
         label.font = UIFont.TurkcellSaturaRegFont(size: 14)
-        label.text = "Loading..."
+        label.text = TextConstants.loading
         return label
     }()
     
@@ -75,7 +75,7 @@ final class InstapickAlbumSelectionViewController: UIViewController, ErrorPresen
             refresher.endRefreshing()
         }
         
-        emptyMessageLabel.text = "Loading..."
+        emptyMessageLabel.text = TextConstants.loading
         collectionView.backgroundView = emptyMessageLabel
         
         albumService.allAlbums(sortBy: .date, sortOrder: .desc, success: { [weak self] albums in
@@ -85,7 +85,7 @@ final class InstapickAlbumSelectionViewController: UIViewController, ErrorPresen
                 self.dataSource.reload(with: albums)
                 
                 if albums.isEmpty {
-                    self.emptyMessageLabel.text = "There is no albums"
+                    self.emptyMessageLabel.text = TextConstants.thereAreNoAlbums
                 } else {
                     self.collectionView.backgroundView = nil
                 }

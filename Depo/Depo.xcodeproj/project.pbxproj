@@ -2928,6 +2928,9 @@
 		CE00B254220332FF00A5A696 /* NSLayoutConstraint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B252220332F000A5A696 /* NSLayoutConstraint+Extensions.swift */; };
 		CE00B256220334D800A5A696 /* BackButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B255220334D800A5A696 /* BackButtonActions.swift */; };
 		CE00B257220334E400A5A696 /* BackButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B255220334D800A5A696 /* BackButtonActions.swift */; };
+		CE00B2772204248000A5A696 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2762204248000A5A696 /* PhotoService.swift */; };
+		CE00B2792204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */; };
+		CE00B27B220424C800A5A696 /* InstaPickSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B27A220424C800A5A696 /* InstaPickSelectionSegmentedView.swift */; };
 		CE0283A11FE1222A0016FBE2 /* PopUpImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0283A01FE1222A0016FBE2 /* PopUpImage.swift */; };
 		CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */; };
 		CE055F3F20383A3400E6BFE8 /* PHAsset+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE055F3E20383A3400E6BFE8 /* PHAsset+Properties.swift */; };
@@ -5513,6 +5516,9 @@
 		CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickAlbumSelectionDataSource.swift; sourceTree = "<group>"; };
 		CE00B252220332F000A5A696 /* NSLayoutConstraint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extensions.swift"; sourceTree = "<group>"; };
 		CE00B255220334D800A5A696 /* BackButtonActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonActions.swift; sourceTree = "<group>"; };
+		CE00B2762204248000A5A696 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
+		CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectionDataSourceProtocol.swift; sourceTree = "<group>"; };
+		CE00B27A220424C800A5A696 /* InstaPickSelectionSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickSelectionSegmentedView.swift; sourceTree = "<group>"; };
 		CE0283A01FE1222A0016FBE2 /* PopUpImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpImage.swift; sourceTree = "<group>"; };
 		CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarConfugurator.swift; sourceTree = "<group>"; };
 		CE055F3E20383A3400E6BFE8 /* PHAsset+Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PHAsset+Properties.swift"; sourceTree = "<group>"; };
@@ -10909,6 +10915,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				CE00B27C2204261700A5A696 /* InstaPickSelection */,
 				9219B18721ECA21800098021 /* InstaPickDetailViewController */,
 				A20BA8BA21E9E8A900C6FFBC /* InstapickPopUp */,
 				A217E42421A5AF3E0084AA37 /* LeavePremiumViewController */,
@@ -10933,12 +10940,6 @@
 				CE57DFAA1FDE66980065B688 /* DarkPopUp */,
 				CE3E4D09201B131600173045 /* PVViewerController */,
 				CEFFA8F121AFC21C00B34F36 /* SegmentedController */,
-				C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */,
-				CE00B24721F5A79400A5A696 /* PhotoSelectionController.swift */,
-				CE00B24B2202FB1400A5A696 /* InstapickAlbumSelectionViewController.swift */,
-				CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */,
-				CE00B24921F5A7B000A5A696 /* PhotoCell.swift */,
-				C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -10994,6 +10995,21 @@
 				9991BD4E3939E69007211781 /* OTPViewInitializer.swift */,
 			);
 			path = Configurator;
+			sourceTree = "<group>";
+		};
+		CE00B27C2204261700A5A696 /* InstaPickSelection */ = {
+			isa = PBXGroup;
+			children = (
+				C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */,
+				CE00B27A220424C800A5A696 /* InstaPickSelectionSegmentedView.swift */,
+				CE00B24721F5A79400A5A696 /* PhotoSelectionController.swift */,
+				CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */,
+				CE00B24B2202FB1400A5A696 /* InstapickAlbumSelectionViewController.swift */,
+				CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */,
+				CE00B24921F5A7B000A5A696 /* PhotoCell.swift */,
+				C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */,
+			);
+			path = InstaPickSelection;
 			sourceTree = "<group>";
 		};
 		CE085D521FD6DBF0009FF427 /* views */ = {
@@ -11708,6 +11724,7 @@
 				CE8F44ED1F6AB7790062C2E0 /* ActivityTimelineService */,
 				CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */,
 				CE170F6921E76DFD00BE352D /* InstapickService.swift */,
+				CE00B2762204248000A5A696 /* PhotoService.swift */,
 			);
 			path = ApiServices;
 			sourceTree = "<group>";
@@ -16450,6 +16467,7 @@
 				8C7786A81F3F38F0005CB432 /* VisualMusicPlayerViewInput.swift in Sources */,
 				CE51ABB31EF90853005DCEE0 /* AutoSyncModuleInput.swift in Sources */,
 				CEE1D1FE1F714F300008F4CF /* CoreDataStack.swift in Sources */,
+				CE00B2792204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
 				CE51ABB51EF90853005DCEE0 /* AutoSyncInteractorOutput.swift in Sources */,
 				7C04350B1F4EF3DA00193C75 /* AlbumDetailService.swift in Sources */,
 				CE33DFFF1F0296C000706C40 /* RequestHeader.swift in Sources */,
@@ -16947,6 +16965,7 @@
 				CE0ED9731FBC0F5A00487632 /* PasscodeView.swift in Sources */,
 				CE0ED96E1FBC0F5A00487632 /* BiometricsManager.swift in Sources */,
 				CEDEAB311FADA5D20046555F /* AlbumCell.swift in Sources */,
+				CE00B2772204248000A5A696 /* PhotoService.swift in Sources */,
 				7C6E2F9A1F31E4F800536DB6 /* CreateStoryNameViewOutput.swift in Sources */,
 				CE2976E21FD58E2000350F3A /* LocalAlbumRouter.swift in Sources */,
 				8DCB216A1F3C84E800BAFE1E /* SearchViewOutput.swift in Sources */,
@@ -17027,6 +17046,7 @@
 				921FF09A21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
 				78E8E2B02023195600A979AB /* FaceImagePhotosInitializer.swift in Sources */,
 				DE10EF65DE653E0EDBEC8C17 /* BaseFilesGreedViewInput.swift in Sources */,
+				CE00B27B220424C800A5A696 /* InstaPickSelectionSegmentedView.swift in Sources */,
 				B5CDB33021787FEF006CFA50 /* UpdateServerIntegration.m in Sources */,
 				228C4DD0339279189CC9619C /* BaseFilesGreedViewOutput.swift in Sources */,
 				CE3E4D13201C70A100173045 /* ImageManager.swift in Sources */,
