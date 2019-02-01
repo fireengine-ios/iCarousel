@@ -106,8 +106,10 @@ final class InstaPickSelectionSegmentedView: UIView {
         analyzeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
         analyzeButton.heightAnchor.constraint(equalToConstant: 54).activate()
         
+        
         analyzesLeftLabel.translatesAutoresizingMaskIntoConstraints = false
-        analyzesLeftLabel.bottomAnchor.constraint(equalTo: transparentGradientView.topAnchor, constant: -20).activate()
+        analyzesLeftLabel.bottomAnchor.constraint(equalTo: transparentGradientView.topAnchor,
+                                                  constant: Device.isIpad ? -20 : 0).activate()
         analyzesLeftLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
     }
 }
