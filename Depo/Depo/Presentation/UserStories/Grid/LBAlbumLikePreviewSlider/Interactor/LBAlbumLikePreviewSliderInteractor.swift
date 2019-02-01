@@ -12,7 +12,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
 
     let dataStorage = LBAlbumLikePreviewSliderDataStorage()
     
-    let faceImageService = FaceImageService()
+    let faceImageService = FaceImageService(transIdLogging: true)
     private let instaPickService: InstapickService = factory.resolve()
 
     // MARK: - Interactor Input
@@ -152,6 +152,8 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: type), success: { [weak self] response in
             debugLog("FaceImageService \(type.description) Thumbnails success")
             
+            self?.faceImageService.debugLogTransIdIfNeeded(headers: (response as? ObjectRequestResponse)?.response?.allHeaderFields, method: "getThumbnails")
+            
             let item: SliderItem
             if let thumbnails = (response as? FaceImageThumbnailsResponse)?.list {
                 item = SliderItem(withThumbnails: thumbnails.map { URL(string: $0) }, type: type.myStreamType)
@@ -166,6 +168,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
             
             }, fail: { [weak self] error in
                 debugLog("FaceImageService \(type.description) Thumbnails fail")
+                self?.faceImageService.debugLogTransIdIfNeeded(errorResponse: error, method: "getThumbnails")
                 
                 DispatchQueue.main.async {
                     self?.output.operationFailed()
