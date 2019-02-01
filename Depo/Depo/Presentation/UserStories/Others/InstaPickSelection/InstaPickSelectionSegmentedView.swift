@@ -40,7 +40,8 @@ final class InstaPickSelectionSegmentedView: UIView {
         label.textColor = ColorConstants.darcBlueColor
         label.font = UIFont.TurkcellSaturaBolFont(size: 16)
         label.backgroundColor = ColorConstants.fileGreedCellColor.withAlphaComponent(0.9)
-        label.insets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
+        let edgeInset: CGFloat = Device.isIpad ? 90 : 15
+        label.insets = UIEdgeInsets(top: 5, left: edgeInset, bottom: 5, right: edgeInset)
         label.layer.cornerRadius = 3
         label.layer.masksToBounds = true
         label.isHidden = true
