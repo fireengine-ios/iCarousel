@@ -34,11 +34,15 @@ final class InstaPickSelectionSegmentedView: UIView {
     let analyzesLeftLabel: InsetsLabel = {
         let label = InsetsLabel()
         label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.textColor = ColorConstants.darcBlueColor
         label.font = UIFont.TurkcellSaturaBolFont(size: 16)
         label.isHidden = true
-        label.backgroundColor = ColorConstants.fileGreedCellColor
+        label.backgroundColor = ColorConstants.fileGreedCellColor.withAlphaComponent(0.9)
         label.insets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
+        label.layer.cornerRadius = 3
+        label.layer.masksToBounds = true
         return label
     }()
     
@@ -110,6 +114,13 @@ final class InstaPickSelectionSegmentedView: UIView {
         analyzesLeftLabel.translatesAutoresizingMaskIntoConstraints = false
         analyzesLeftLabel.bottomAnchor.constraint(equalTo: transparentGradientView.topAnchor,
                                                   constant: Device.isIpad ? -20 : 0).activate()
-        analyzesLeftLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
+        if !Device.isIpad {
+            analyzesLeftLabel.leadingAnchor
+                .constraint(equalTo: topView.leadingAnchor, constant: 14).activate()
+            analyzesLeftLabel.trailingAnchor
+                .constraint(equalTo: topView.trailingAnchor, constant: -14).activate()
+        } else {
+            analyzesLeftLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
+        }
     }
 }
