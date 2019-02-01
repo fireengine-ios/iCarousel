@@ -115,13 +115,13 @@ final class InstaPickSelectionSegmentedView: UIView {
         analyzesLeftLabel.translatesAutoresizingMaskIntoConstraints = false
         analyzesLeftLabel.bottomAnchor.constraint(equalTo: transparentGradientView.topAnchor,
                                                   constant: Device.isIpad ? -20 : 0).activate()
-        if !Device.isIpad {
+        if Device.isIpad {
+            analyzesLeftLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
+        } else {
             analyzesLeftLabel.leadingAnchor
                 .constraint(equalTo: topView.leadingAnchor, constant: 14).activate()
             analyzesLeftLabel.trailingAnchor
                 .constraint(equalTo: topView.trailingAnchor, constant: -14).activate()
-        } else {
-            analyzesLeftLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).activate()
         }
     }
 }
