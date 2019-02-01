@@ -29,7 +29,7 @@ enum MyStreamType: Int {
     
     var placeholder: UIImage {
         switch self {
-        case .instaPick: return #imageLiteral(resourceName: "instapickImage")
+        case .instaPick: return #imageLiteral(resourceName: "tryInstapick")
         case .albums: return #imageLiteral(resourceName: "album")
         case .story: return #imageLiteral(resourceName: "story")
         case .people: return #imageLiteral(resourceName: "people")
@@ -42,7 +42,7 @@ enum MyStreamType: Int {
     var placeholderBorderColor: CGColor {
         switch self {
         case .instaPick:
-            return ColorConstants.orangeBorder.cgColor
+            return UIColor.clear.cgColor
         default:
             return ColorConstants.blueColor.cgColor
         }

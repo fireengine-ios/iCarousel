@@ -17,8 +17,8 @@ typealias ContactsOperation = (ContactsResponse) -> Void
 
 class ContactsSyncService: BaseRequestService {
     
-    override init() {
-        super.init()
+    override init(transIdLogging: Bool = false) {
+        super.init(transIdLogging: transIdLogging)
         setup()
     }
     

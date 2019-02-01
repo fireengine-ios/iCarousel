@@ -6,7 +6,7 @@ protocol InstapickAlbumSelectionDataSourceDelegate: class {
 
 final class InstapickAlbumSelectionDataSource: NSObject {
     
-    private var collectionView: UICollectionView!
+    private var collectionView: UICollectionView?
     private var albums = [AlbumItem]()
     weak var delegate: InstapickAlbumSelectionDataSourceDelegate?
     
@@ -27,7 +27,7 @@ final class InstapickAlbumSelectionDataSource: NSObject {
     
     func reload(with albums: [AlbumItem]) {
         self.albums = albums
-        collectionView.reloadData()
+        collectionView?.reloadData()
     }
 }
 
@@ -57,7 +57,7 @@ extension InstapickAlbumSelectionDataSource: UICollectionViewDelegate {
 
 extension InstapickAlbumSelectionDataSource: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let sizeCell: CGFloat = (Device.winSize.width - NumericConstants.amountInsetForAlbum) / 4
+        let sizeCell: CGFloat = (Device.winSize.width - NumericConstants.amountInsetForAlbum) * 0.25
         return CGSize(width: sizeCell, height: sizeCell + NumericConstants.heightTextAlbumCell)
     }
     
