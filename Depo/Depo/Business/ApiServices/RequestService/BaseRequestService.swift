@@ -118,7 +118,7 @@ class JsonConvertor {
 class BaseRequestService: TransIdLogging {
     
     let requestService = RequestService.default
-    var transIdLogging = false
+    let transIdLogging: Bool
     
     init(transIdLogging: Bool = false) {
         self.transIdLogging = transIdLogging
@@ -225,7 +225,7 @@ class BaseRequestService: TransIdLogging {
 }
 
 protocol TransIdLogging: class {
-    var transIdLogging: Bool { get set }
+    var transIdLogging: Bool { get }
     func debugLogTransIdIfNeeded(headers: [AnyHashable: Any]?, method: String)
     func debugLogTransIdIfNeeded(errorResponse: ErrorResponse, method: String)
 }
@@ -235,7 +235,7 @@ extension TransIdLogging {
         if transIdLogging,
             let headers = headers,
             let transId = headers[HeaderConstant.transId] {
-            let serviceName = String(describing: self)
+            let serviceName = String(describing: type(of: self))
             debugLog("\(serviceName) \(method) \(HeaderConstant.transId): \(transId)")
         }
     }

@@ -204,7 +204,7 @@ class CreateStoryService: BaseRequestService {
         }, fail: { [weak self] errorResponse  in
             debugLog("CreateStoryMusicService createStory fail")
             self?.debugLogTransIdIfNeeded(errorResponse: errorResponse, method: "createStory")
-            fail(errorResponse)
+            fail?(errorResponse)
         })
         executePostRequest(param: createStory, handler: handler)
     }

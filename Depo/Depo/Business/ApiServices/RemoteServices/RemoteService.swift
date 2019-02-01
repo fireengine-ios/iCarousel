@@ -279,7 +279,6 @@ class FavouritesService: RemoteItemsService {
 class StoryService: RemoteItemsService {
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .story)
-        remote.transIdLogging = true
     }
     
     func allStories(sortBy: SortType = .date, sortOrder: SortOrder = .desc, success: ListRemoveItems?, fail: FailRemoteItems?) {
