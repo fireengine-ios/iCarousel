@@ -2533,8 +2533,6 @@
 		921E7C382201EAAA00341F75 /* InstaPickBigPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E7C362201EAAA00341F75 /* InstaPickBigPhotoView.swift */; };
 		921E7C3A2201ED8B00341F75 /* InstaPickSmallPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E7C392201ED8B00341F75 /* InstaPickSmallPhotoView.swift */; };
 		921E7C3B2201ED8B00341F75 /* InstaPickSmallPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E7C392201ED8B00341F75 /* InstaPickSmallPhotoView.swift */; };
-		921E7C3D2201F99C00341F75 /* NSLayoutConstraintExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E7C3C2201F99C00341F75 /* NSLayoutConstraintExtension.swift */; };
-		921E7C3E2201F99C00341F75 /* NSLayoutConstraintExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E7C3C2201F99C00341F75 /* NSLayoutConstraintExtension.swift */; };
 		921EC07A21E5ED30000A0860 /* InstaPickCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921EC07921E5ED30000A0860 /* InstaPickCard.swift */; };
 		921EC07C21E5ED55000A0860 /* InstaPickCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 921EC07B21E5ED55000A0860 /* InstaPickCard.xib */; };
 		921FF09A21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FF09921EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift */; };
@@ -5260,7 +5258,6 @@
 		921E7C332201CB9F00341F75 /* InstaPickPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickPhotoView.swift; sourceTree = "<group>"; };
 		921E7C362201EAAA00341F75 /* InstaPickBigPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickBigPhotoView.swift; sourceTree = "<group>"; };
 		921E7C392201ED8B00341F75 /* InstaPickSmallPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickSmallPhotoView.swift; sourceTree = "<group>"; };
-		921E7C3C2201F99C00341F75 /* NSLayoutConstraintExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtension.swift; sourceTree = "<group>"; };
 		921EC07921E5ED30000A0860 /* InstaPickCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCard.swift; sourceTree = "<group>"; };
 		921EC07B21E5ED55000A0860 /* InstaPickCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickCard.xib; sourceTree = "<group>"; };
 		921FF09921EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickHashtagCollectionViewDataSource.swift; sourceTree = "<group>"; };
@@ -11537,7 +11534,6 @@
 				B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */,
 				CE292C1321BE5C53004FC745 /* Text+Size.swift */,
 				CE00B252220332F000A5A696 /* NSLayoutConstraint+Extensions.swift */,
-				921E7C3C2201F99C00341F75 /* NSLayoutConstraintExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -15957,7 +15953,6 @@
 				8C0E8F071FDEBDFF00789C91 /* SyncContactsViewController.swift in Sources */,
 				9219B19B21ECB7B900098021 /* InstaPickHashtagCell.swift in Sources */,
 				CE23A0F8205FF5320048267D /* EmailEnterCustomizator.swift in Sources */,
-				921E7C3E2201F99C00341F75 /* NSLayoutConstraintExtension.swift in Sources */,
 				C62239AD2049732D0043ED44 /* FaceImageChangeCoverRouter.swift in Sources */,
 				8C0E8F081FDEBDFF00789C91 /* FBService.swift in Sources */,
 				8C0E8F091FDEBDFF00789C91 /* PasscodeSettingsInitializer.swift in Sources */,
@@ -17434,7 +17429,6 @@
 				CE61D1C52046875A001D01DC /* URL+Video.swift in Sources */,
 				A222450F21D3C593006EB432 /* PremiumService.swift in Sources */,
 				41A69B03298B6F93F851567F /* LBAlbumLikePreviewSliderInitializer.swift in Sources */,
-				921E7C3D2201F99C00341F75 /* NSLayoutConstraintExtension.swift in Sources */,
 				CE2F56171F7552A900F49DA1 /* PackagesInteractor.swift in Sources */,
 				85AAD0E4BD93A160437B1236 /* AlbumSelectionViewController.swift in Sources */,
 				7C529688203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */,
