@@ -3468,6 +3468,14 @@
 		CE99AC78201CB778003DD3B7 /* CardActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99AC77201CB778003DD3B7 /* CardActionType.swift */; };
 		CE9AFAD1211D73D0006AF836 /* FaceImageDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */; };
 		CE9CB666210F2D7500342EEE /* FixedAVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CB665210F2D7500342EEE /* FixedAVPlayerViewController.swift */; };
+		CE9F540022045A36003E76D4 /* InstaPickSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B27A220424C800A5A696 /* InstaPickSelectionSegmentedView.swift */; };
+		CE9F540122045A36003E76D4 /* PhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */; };
+		CE9F540222045A36003E76D4 /* InstapickAlbumSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */; };
+		CE9F540322045A36003E76D4 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE292C2F21C2419C004FC745 /* PassthroughView.swift */; };
+		CE9F540422045A36003E76D4 /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */; };
+		CE9F540522045A36003E76D4 /* InstapickService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE170F6921E76DFD00BE352D /* InstapickService.swift */; };
+		CE9F540622045A36003E76D4 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2762204248000A5A696 /* PhotoService.swift */; };
+		CE9F540722045A36003E76D4 /* PremiumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A222450E21D3C593006EB432 /* PremiumService.swift */; };
 		CEA1B6AC213EA9AC000B3DF4 /* LaunchCampaignCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40EACE2136BEEB0038ABAC /* LaunchCampaignCard.swift */; };
 		CEA1B6AD213EAA09000B3DF4 /* LaunchCampaignCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE40EAD02136BEF30038ABAC /* LaunchCampaignCard.xib */; };
 		CEA524BA2046C95E0036FCEA /* UploadQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524B92046C95E0036FCEA /* UploadQueueService.swift */; };
@@ -15120,6 +15128,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE9F540022045A36003E76D4 /* InstaPickSelectionSegmentedView.swift in Sources */,
+				CE9F540122045A36003E76D4 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
+				CE9F540222045A36003E76D4 /* InstapickAlbumSelectionDataSource.swift in Sources */,
+				CE9F540322045A36003E76D4 /* PassthroughView.swift in Sources */,
+				CE9F540422045A36003E76D4 /* AnalyzeHistoryDataSource.swift in Sources */,
+				CE9F540522045A36003E76D4 /* InstapickService.swift in Sources */,
+				CE9F540622045A36003E76D4 /* PhotoService.swift in Sources */,
+				CE9F540722045A36003E76D4 /* PremiumService.swift in Sources */,
 				CE292C1621BE5DE9004FC745 /* PremiumViewInput.swift in Sources */,
 				CE292C1721BE5DE9004FC745 /* PremiumViewOutput.swift in Sources */,
 				CE292C1821BE5DE9004FC745 /* PremiumRouter.swift in Sources */,
