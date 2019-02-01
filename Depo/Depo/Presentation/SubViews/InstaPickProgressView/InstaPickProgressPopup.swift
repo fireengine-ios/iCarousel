@@ -10,11 +10,11 @@ import UIKit
 import SDWebImage
 
 
-final class InstaPickProgressPopup: ViewController {
+final class InstaPickProgressPopup: ViewController, NibInit {
 
     @IBOutlet private weak var topCaption: UILabel! {
         didSet {
-            topCaption.text = ""
+            topCaption.text = " "
         }
     }
     @IBOutlet private weak var bottomCaption: UILabel! {
@@ -22,7 +22,7 @@ final class InstaPickProgressPopup: ViewController {
             bottomCaption.text = bottomCaptionText
         }
     }
-    @IBOutlet private weak var circularLoader: LTCircularProgressView! {
+    @IBOutlet private weak var circularLoader: InstaPickCircularLoader! {
         didSet {
             circularLoader.backWidth = 10.0
             circularLoader.backColor = ColorConstants.lightBlueColor
@@ -31,14 +31,10 @@ final class InstaPickProgressPopup: ViewController {
             circularLoader.progressColor = ColorConstants.blueColor
         }
     }
-    @IBOutlet private weak var analyzingImage: UIImageView! {
-        didSet {
-            analyzingImage.contentMode = .scaleAspectFill
-        }
-    }
+
     
     private var topCaptionTexts = [String]()
-    private var bottomCaptionText = ""
+    private var bottomCaptionText = " "
     private var analyzingImagesUrls = [URL]()
     
     
@@ -48,7 +44,7 @@ final class InstaPickProgressPopup: ViewController {
     }
     
     static func createPopup(with analyzingImages: [URL], topTexts: [String], bottomText: String) -> InstaPickProgressPopup {
-        let controller = InstaPickProgressPopup(nibName: "InstaPickProgressPopup", bundle: nil)
+        let controller = InstaPickProgressPopup.initFromNib()
         controller.analyzingImagesUrls = analyzingImages
         controller.topCaptionTexts = topTexts
         controller.bottomCaptionText = bottomText
@@ -57,36 +53,16 @@ final class InstaPickProgressPopup: ViewController {
         return controller
     }
     
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         setupInitialStates()
         startInfiniteAnimation()
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        setupAnalyzingImage()
-    }
-    
 
-    private func setupAnalyzingImage() {
-        let inset: CGFloat = 8.0
-        let diameter = (circularLoader.innerRadius - inset) * 2.0
-        let startPoint = (analyzingImage.layer.bounds.width - diameter) * 0.5
-        
-        let maskLayerRect = CGRect(x: startPoint, y: startPoint, width: diameter, height: diameter)
-        let ovalPath = UIBezierPath(ovalIn: maskLayerRect)
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = ovalPath.cgPath
-        
-        analyzingImage.layer.mask = maskLayer
-    }
     
     private func setupInitialStates() {
-        analyzingImage.sd_setImage(with: analyzingImagesUrls.first, completed: nil)
+        circularLoader.set(imageUrl: analyzingImagesUrls.first, animated: false)
         topCaption.text = topCaptionTexts.first
     }
     
@@ -103,18 +79,9 @@ final class InstaPickProgressPopup: ViewController {
         guard analyzingImagesUrls.count > 1 else { return }
         
         let imageIndex = step % analyzingImagesUrls.count
-        analyzingImage.sd_setImage(with: analyzingImagesUrls[safe: imageIndex], placeholderImage: nil, options: [.avoidAutoSetImage], completed: { [weak self] image, error, cahceType, _ in
-            guard let `self` = self else {
-                return
-            }
-            
-            UIView.transition(with: self.analyzingImage,
-                              duration: NumericConstants.instaPickImageViewTransitionDuration,
-                              options: .transitionCrossDissolve,
-                              animations: {
-                                self.analyzingImage.image = image
-            }, completion: nil)
-        })
+        let imageUrl = analyzingImagesUrls[safe: imageIndex]
+        
+        circularLoader.set(imageUrl: imageUrl, animated: true)
     }
     
     

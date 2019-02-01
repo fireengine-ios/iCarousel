@@ -1,18 +1,27 @@
 //
-//  LTCircularProgressView.swift
+//  InstaPickCircularLoader.swift
 //  Depo
 //
-//  Created by Konstantin Studilin on 11/01/2019.
+//  Created by Konstantin Studilin on 01/02/2019.
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
 import UIKit
+import SDWebImage
 
-//@IBDesignable
-class LTCircularProgressView: UIView {
+
+class InstaPickCircularLoader: UIView, FromNib {
     
     private let backgroundCircleLayer = CAShapeLayer()
     private let foregroundCircleLayer = CAShapeLayer()
+    
+    
+    @IBOutlet private weak var image: UIImageView! {
+        didSet {
+            image.contentMode = .scaleAspectFill
+            image.clipsToBounds = true
+        }
+    }
     
     //MARK: - @IBInspectable
     
@@ -22,7 +31,7 @@ class LTCircularProgressView: UIView {
             foregroundCircleLayer.lineWidth = progressWidth
         }
     }
-
+    
     @IBInspectable var progressColor: UIColor = .red {
         didSet {
             foregroundCircleLayer.strokeColor = progressColor.cgColor
@@ -37,9 +46,9 @@ class LTCircularProgressView: UIView {
                 progressRatio = optimisedValue
             }
             #if TARGET_INTERFACE_BUILDER
-                foregroundCircleLayer.strokeEnd = optimisedValue
+            foregroundCircleLayer.strokeEnd = optimisedValue
             #else
-                ///
+            ///
             #endif
         }
     }
@@ -58,11 +67,11 @@ class LTCircularProgressView: UIView {
         }
     }
     
-//    @IBInspectable var radius: CGFloat = 64 {
-//        didSet {
-//            setupLayers()
-//        }
-//    }
+    //    @IBInspectable var radius: CGFloat = 64 {
+    //        didSet {
+    //            setupLayers()
+    //        }
+    //    }
     
     var radius: CGFloat {
         return (min(layer.bounds.width, layer.bounds.height) - max(progressWidth, backWidth)) * 0.5
@@ -71,43 +80,54 @@ class LTCircularProgressView: UIView {
     var innerRadius: CGFloat {
         return min(layer.bounds.width, layer.bounds.height) * 0.5 - max(progressWidth, backWidth)
     }
-
+    
     private var animationHelper: LTCircularAnimationHelper?
     
     
     //MARK: - Override
     
-    ///IB
-    override func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        setupLayers()
+        setup()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         
-        setupLayers()
+        setup()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    private func setup() {
+        setupFromNib()
         
-        setupLayers()
+        setupBackgroundCircle()
+        setupForegroundCircle()
+        setupImage()
     }
     
     
     //MARK: - Setup
+
     
-    private func setupLayers() {
-        setupBackgroundCircle()
-        setupForegroundCircle()
+    private func setupImage() {
+//        let inset: CGFloat = 8.0
+//        let diameter = (innerRadius - inset) * 2.0
+//        let startPoint = (image.layer.bounds.width - diameter) * 0.5
+//
+//        let maskLayerRect = CGRect(x: startPoint, y: startPoint, width: diameter, height: diameter)
+        let ovalPath = UIBezierPath(ovalIn: layer.bounds)
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = ovalPath.cgPath
+        
+        image.layer.mask = maskLayer
     }
     
     private func setupBackgroundCircle() {
         backgroundCircleLayer.removeFromSuperlayer()
         
-        let arcCenter = convert(center, from: superview)
+//        let arcCenter = convert(center, from: superview)
+        let arcCenter = CGPoint(x: layer.bounds.width * 0.5, y: layer.bounds.height * 0.5)
         let startAngle = -CGFloat.pi * 0.5 ///top point
         let endAngle = 2 * CGFloat.pi + startAngle
         let path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
@@ -118,11 +138,12 @@ class LTCircularProgressView: UIView {
         
         layer.insertSublayer(backgroundCircleLayer, at: 0)
     }
-
+    
     private func setupForegroundCircle() {
         foregroundCircleLayer.removeFromSuperlayer()
         
-        let arcCenter = convert(center, from: superview)
+//        let arcCenter = convert(center, from: superview)
+        let arcCenter = CGPoint(x: layer.bounds.width * 0.5, y: layer.bounds.height * 0.5)
         let startAngle = -CGFloat.pi * 0.5 ///top point
         let endAngle = 2 * CGFloat.pi + startAngle
         let path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
@@ -135,9 +156,29 @@ class LTCircularProgressView: UIView {
         
         layer.addSublayer(foregroundCircleLayer)
     }
-
+    
     
     //MARK: - Animate
+    
+    func set(imageUrl: URL?, animated: Bool) {
+        if animated {
+            image.sd_setImage(with: imageUrl, placeholderImage: nil, options: [.avoidAutoSetImage], completed: { [weak self] image, error, cahceType, _ in
+                guard let `self` = self else {
+                    return
+                }
+                
+                UIView.transition(with: self.image,
+                                  duration: NumericConstants.instaPickImageViewTransitionDuration,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                                    self.image.image = image
+                }, completion: nil)
+            })
+        } else {
+            image.sd_setImage(with: imageUrl, completed: nil)
+        }
+    }
+    
     
     func set(progress: CGFloat, withAnimation: Bool, duration: TimeInterval?) {
         if withAnimation, let interval = duration {

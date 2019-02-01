@@ -99,8 +99,9 @@ final class InstapickServiceImpl: InstapickService {
                     
                     handler(.success(results))
                 case .failure(let error):
-                    assertionFailure(error.localizedDescription)
-                    handler(.failed(error))
+                    print("error")
+//                    assertionFailure(error.localizedDescription)
+//                    handler(.failed(error))
                 }
         }
     }
