@@ -28,6 +28,7 @@ final class InstaPickSelectionSegmentedView: UIView {
         
         button.titleLabel?.font = ApplicationPalette.bigRoundButtonFont
         button.adjustsFontSizeToFitWidth()
+        button.isHidden = true
         return button
     }()
     
@@ -38,11 +39,11 @@ final class InstaPickSelectionSegmentedView: UIView {
         label.lineBreakMode = .byWordWrapping
         label.textColor = ColorConstants.darcBlueColor
         label.font = UIFont.TurkcellSaturaBolFont(size: 16)
-        label.isHidden = true
         label.backgroundColor = ColorConstants.fileGreedCellColor.withAlphaComponent(0.9)
         label.insets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
         label.layer.cornerRadius = 3
         label.layer.masksToBounds = true
+        label.isHidden = true
         return label
     }()
     

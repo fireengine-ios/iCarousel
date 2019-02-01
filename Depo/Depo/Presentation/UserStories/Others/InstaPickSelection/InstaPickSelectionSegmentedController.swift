@@ -19,7 +19,11 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     // MARK: properties
     
     /// not private bcz protocol requirement
-    var selectedItems = [SearchItemResponse]()
+    var selectedItems = [SearchItemResponse]() {
+        didSet {
+            vcView.analyzeButton.isHidden = selectedItems.isEmpty
+        }
+    }
     
     /// not private bcz protocol requirement
     var selectionState = PhotoSelectionState.selecting {
