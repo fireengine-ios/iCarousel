@@ -43,6 +43,8 @@ class InstagramAuthViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        removeCache()
+        
         navigationBarWithGradientStyle()
         
         setTitle(withString: "Instagram login")
@@ -89,6 +91,18 @@ class InstagramAuthViewController: ViewController {
         }
     }
     
+    private func removeCache() {
+        let dataStore = WKWebsiteDataStore.default()
+        dataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
+            records.forEach({ record in
+                dataStore.removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(),
+                                     for: [record],
+                                     completionHandler: {})
+            })
+        }
+        
+    }
+    
     deinit {
         webView.navigationDelegate = nil
         webView.stopLoading()
@@ -122,7 +136,8 @@ extension InstagramAuthViewController: WKNavigationDelegate {
         if let index = currentUrl.range(of: "#access_token=")?.upperBound {
             instagramAccessToken = String(currentUrl.suffix(from: index))
             isLoginStarted = true
-        } else if currentUrl.contains("access_denied"), navigationAction.navigationType == .formSubmitted {
+            removeCache()
+        } else if currentUrl.contains("access_denied") {
             isLoginCanceled = true
         }
         
