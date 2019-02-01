@@ -185,10 +185,11 @@ final class PopUpController: ViewController {
         setupPopUpImage()
         
         titleLabel.text = alertTitle
-        if let message = alertMessage {
-            messageLabel.text = message
-        } else if let attributedMessage = attributedAlertMessage {
+        if let attributedMessage = attributedAlertMessage {
             messageLabel.attributedText = attributedMessage
+        } else {
+            messageLabel.text = alertMessage
+
         }
     }
     
