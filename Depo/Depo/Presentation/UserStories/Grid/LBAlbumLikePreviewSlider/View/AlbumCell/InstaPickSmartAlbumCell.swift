@@ -57,12 +57,14 @@ final class InstaPickSmartAlbumCell: UICollectionViewCell, SmartAlbumCell {
             thumbnail?.contentMode = .scaleAspectFill
             thumbnail?.clipsToBounds = true
         }
+        
+        setupAccessibility()
     }
     
     
     func setup(withItem item: SliderItem) {
         name.text = item.name
-        setupAccessibility(label: item.name)
+        accessibilityLabel = item.name
         
         guard let previews = item.previewItems, !previews.isEmpty else {
             noItemsBackgroundImage.image = item.placeholderImage
@@ -87,9 +89,8 @@ final class InstaPickSmartAlbumCell: UICollectionViewCell, SmartAlbumCell {
         }
     }
     
-    private func setupAccessibility(label: String?) {
+    private func setupAccessibility() {
         isAccessibilityElement = true
         accessibilityTraits = UIAccessibilityTraitNone
-        accessibilityLabel = label
     }
 }
