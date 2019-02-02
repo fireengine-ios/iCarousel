@@ -49,6 +49,8 @@ struct HeaderConstant {
     static let emptyEmail = "EMPTY_EMAIL"
     
     static let objecMetaDevice = "X-Object-Meta-Device-UUID"
+    
+    static let transId = "X-Trans-Id"
 }
 
 class RequestHeaders {

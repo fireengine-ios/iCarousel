@@ -145,11 +145,14 @@ class AlbumService: RemoteItemsService {
             self?.currentPage += 1
             let list = resultResponse.list.flatMap { AlbumItem(remote: $0) }
             success(list)
-        }, fail: { errorResponse in
+            
+            self?.remote.debugLogTransIdIfNeeded(headers: resultResponse.response?.allHeaderFields, method: "searchAlbums")
+        }, fail: { [weak self] errorResponse in
             errorResponse.showInternetErrorGlobal()
             debugLog("AlbumService remote searchAlbums fail")
 
             fail()
+            self?.remote.debugLogTransIdIfNeeded(errorResponse: errorResponse, method: "searchAlbums")
         })
     }
     

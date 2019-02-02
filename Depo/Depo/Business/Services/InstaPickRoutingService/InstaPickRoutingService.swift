@@ -221,8 +221,9 @@ extension InstaPickRoutingService {
                                               firstButtonTitle: TextConstants.instapickUpgradePopupNoButton,
                                               secondButtonTitle: TextConstants.instapickUpgradePopupButton,
                                               secondAction: { vc in
-                                                vc.close()
-                                                UIApplication.shared.openAppstore()
+                                                vc.close {
+                                                    UIApplication.shared.openAppstore()
+                                                }
         })
         RouterVC().presentViewController(controller: controller)
     }
