@@ -55,7 +55,7 @@ final class PlacesService: BaseRequestService {
 }
 
 final class PlacesItemsService: RemoteItemsService {
-    private let service = PlacesService()
+    private let service = PlacesService(transIdLogging: true)
     
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .image)
@@ -65,16 +65,20 @@ final class PlacesItemsService: RemoteItemsService {
         let param = PlacesPageParameters(pageSize: requestSize, pageNumber: currentPage)
 
         service.getPlacesPage(param: param, success: { [weak self] response in
-            if let response = response as? PlacesPageResponse {
-                success?(response.list.map({ PlacesItem(response: $0) }))
-                self?.currentPage += 1
-            } else {
+            guard let response = response as? PlacesPageResponse else {
                 fail?()
+                return
             }
-        }) { error in
+
+            success?(response.list.map({ PlacesItem(response: $0) }))
+            self?.currentPage += 1
+            
+            self?.service.debugLogTransIdIfNeeded(headers: response.response?.allHeaderFields, method: "getPlaces")
+        }, fail: { [weak self] error in
             error.showInternetErrorGlobal()
             fail?()
-        }
+            self?.service.debugLogTransIdIfNeeded(errorResponse: error, method: "getPlaces")
+        })
     }
 }
 

@@ -12,6 +12,7 @@ class CreateStoryPreviewInteractor {
     var responce: CreateStoryResponce?
     var isRequestStarted = false
     private let analyticsManager: AnalyticsService = factory.resolve()
+    private lazy var createStoryService = CreateStoryService(transIdLogging: true)
 }
 
 // MARK: CreateStoryPreviewInteractorInput
@@ -41,18 +42,18 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
         
         isRequestStarted = true
         
-        CreateStoryService().createStory(createStory: parameter, success: {[weak self] in
+        createStoryService.createStory(createStory: parameter, success: { [weak self] in
             DispatchQueue.main.async {
                 self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .story, eventLabel: .crateStory(.save))
                 self?.output?.storyCreated()
                 ItemOperationManager.default.newStoryCreated()
             }
             
-            }, fail: {[weak self] error in
-                DispatchQueue.main.async {
-                    self?.output?.storyCreatedWithError()
-                    self?.isRequestStarted = false
-                }
+        }, fail: {[weak self] error in
+            DispatchQueue.main.async {
+                self?.output?.storyCreatedWithError()
+                self?.isRequestStarted = false
+            }
         })
     }
     
