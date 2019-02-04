@@ -24,6 +24,7 @@ final class InstaPickProgressPopup: ViewController, NibInit {
     }
     @IBOutlet private weak var circularLoader: InstaPickCircularLoader! {
         didSet {
+            circularLoader.backgroundColor = .clear
             circularLoader.backWidth = 10.0
             circularLoader.backColor = ColorConstants.lightBlueColor
             circularLoader.progressWidth = 10.0
@@ -53,15 +54,17 @@ final class InstaPickProgressPopup: ViewController, NibInit {
         return controller
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         setupInitialStates()
         startInfiniteAnimation()
     }
+ 
 
     
     private func setupInitialStates() {
+        circularLoader.layoutIfNeeded()
         circularLoader.set(imageUrl: analyzingImagesUrls.first, animated: false)
         topCaption.text = topCaptionTexts.first
     }

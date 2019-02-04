@@ -15,9 +15,15 @@ class InstaPickCircularLoader: UIView, FromNib {
     private let backgroundCircleLayer = CAShapeLayer()
     private let foregroundCircleLayer = CAShapeLayer()
     
+    @IBOutlet private var backgroundView: UIView! {
+        didSet {
+            backgroundView.backgroundColor = .clear
+        }
+    }
     
     @IBOutlet private weak var image: UIImageView! {
         didSet {
+            image.backgroundColor = .clear
             image.contentMode = .scaleAspectFill
             image.clipsToBounds = true
         }
@@ -45,6 +51,7 @@ class InstaPickCircularLoader: UIView, FromNib {
             if progressRatio != optimisedValue {
                 progressRatio = optimisedValue
             }
+            
             #if TARGET_INTERFACE_BUILDER
             foregroundCircleLayer.strokeEnd = optimisedValue
             #else
@@ -74,11 +81,11 @@ class InstaPickCircularLoader: UIView, FromNib {
     //    }
     
     var radius: CGFloat {
-        return (min(layer.bounds.width, layer.bounds.height) - max(progressWidth, backWidth)) * 0.5
+        return (min(bounds.width, bounds.height) - max(progressWidth, backWidth)) * 0.5
     }
     
     var innerRadius: CGFloat {
-        return min(layer.bounds.width, layer.bounds.height) * 0.5 - max(progressWidth, backWidth)
+        return min(bounds.width, bounds.height) * 0.5 - max(progressWidth, backWidth)
     }
     
     private var animationHelper: LTCircularAnimationHelper?
@@ -89,34 +96,37 @@ class InstaPickCircularLoader: UIView, FromNib {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setup()
+        setupFromNib()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        setup()
-    }
-    
-    private func setup() {
         setupFromNib()
+    }
+
+    
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
         
         setupBackgroundCircle()
         setupForegroundCircle()
-        setupImage()
+        setupImageMask()
     }
     
     
     //MARK: - Setup
 
     
-    private func setupImage() {
-//        let inset: CGFloat = 8.0
-//        let diameter = (innerRadius - inset) * 2.0
-//        let startPoint = (image.layer.bounds.width - diameter) * 0.5
+    private func setupImageMask() {
+        let inset: CGFloat = 4.0
+        let diameter = (innerRadius - inset) * 2.0
+        let startPoint = (image.bounds.width - diameter) * 0.5
 //
-//        let maskLayerRect = CGRect(x: startPoint, y: startPoint, width: diameter, height: diameter)
-        let ovalPath = UIBezierPath(ovalIn: layer.bounds)
+        let maskLayerRect = CGRect(x: startPoint, y: startPoint,
+                                   width: diameter,
+                                   height: diameter)
+        let ovalPath = UIBezierPath(ovalIn: maskLayerRect)
         let maskLayer = CAShapeLayer()
         maskLayer.path = ovalPath.cgPath
         
@@ -126,8 +136,7 @@ class InstaPickCircularLoader: UIView, FromNib {
     private func setupBackgroundCircle() {
         backgroundCircleLayer.removeFromSuperlayer()
         
-//        let arcCenter = convert(center, from: superview)
-        let arcCenter = CGPoint(x: layer.bounds.width * 0.5, y: layer.bounds.height * 0.5)
+        let arcCenter = CGPoint(x: bounds.width * 0.5, y: bounds.height * 0.5)
         let startAngle = -CGFloat.pi * 0.5 ///top point
         let endAngle = 2 * CGFloat.pi + startAngle
         let path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
@@ -136,14 +145,13 @@ class InstaPickCircularLoader: UIView, FromNib {
         backgroundCircleLayer.fillColor = UIColor.clear.cgColor
         backgroundCircleLayer.strokeColor = backColor.cgColor
         
-        layer.insertSublayer(backgroundCircleLayer, at: 0)
+        backgroundView.layer.insertSublayer(backgroundCircleLayer, at: 0)
     }
     
     private func setupForegroundCircle() {
         foregroundCircleLayer.removeFromSuperlayer()
         
-//        let arcCenter = convert(center, from: superview)
-        let arcCenter = CGPoint(x: layer.bounds.width * 0.5, y: layer.bounds.height * 0.5)
+        let arcCenter = CGPoint(x: bounds.width * 0.5, y: bounds.height * 0.5)
         let startAngle = -CGFloat.pi * 0.5 ///top point
         let endAngle = 2 * CGFloat.pi + startAngle
         let path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
@@ -154,7 +162,7 @@ class InstaPickCircularLoader: UIView, FromNib {
         foregroundCircleLayer.strokeColor = progressColor.cgColor
         foregroundCircleLayer.strokeEnd = progressRatio
         
-        layer.addSublayer(foregroundCircleLayer)
+        backgroundView.layer.addSublayer(foregroundCircleLayer)
     }
     
     
