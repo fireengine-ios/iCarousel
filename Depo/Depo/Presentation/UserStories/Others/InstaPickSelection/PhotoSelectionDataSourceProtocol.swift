@@ -49,7 +49,7 @@ final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
                 
                 var filteredItems = filteredItems
                 /// filter missing dates
-                filteredItems.append(contentsOf: items.filter { $0.metadata?.smalURl != nil })
+                filteredItems.append(contentsOf: items.filter { $0.metadata?.takenDate != nil })
                 
                 let isSomethingFiltered = (filteredItems.count != items.count)
                 let isEnoughForPaginationSize = (filteredItems.count >= self.paginationPageSize)
@@ -111,7 +111,7 @@ final class AlbumPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
                 var filteredItems = filteredItems
                 /// filter missing dates and leave only images
                 filteredItems.append(contentsOf: items.filter {
-                    $0.metadata?.smalURl != nil &&
+                    $0.metadata?.takenDate != nil &&
                     $0.contentType?.hasPrefix("image") ?? false
                 })
                 
@@ -173,7 +173,7 @@ final class FavoritePhotosSelectionDataSource: PhotoSelectionDataSourceProtocol 
                 var filteredItems = filteredItems
                 /// filter missing dates and leave only images
                 filteredItems.append(contentsOf: items.filter {
-                    $0.metadata?.smalURl != nil &&
+                    $0.metadata?.takenDate != nil &&
                     $0.contentType?.hasPrefix("image") ?? false
                 })
                 
