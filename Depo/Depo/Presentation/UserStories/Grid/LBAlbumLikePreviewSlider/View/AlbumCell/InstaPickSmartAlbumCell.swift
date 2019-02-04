@@ -76,11 +76,12 @@ final class InstaPickSmartAlbumCell: UICollectionViewCell, SmartAlbumCell {
         thumbnailsContainer.isHidden = false
         noItemsBackgroundImage.isHidden = true
         
-        updateThumbnails(with: previews, placeholder: item.previewPlaceholder)
+        updateThumbnails(with: previews, placeholders: item.previewPlaceholders)
     }
     
-    private func updateThumbnails(with previews: [PathForItem], placeholder: UIImage?) {
+    private func updateThumbnails(with previews: [PathForItem], placeholders: [UIImage?]) {
         for i in 0..<thumnbails.count {
+            let placeholder = placeholders.count < i ? placeholders[i] : nil
             if case let .some(.remoteUrl(url)) = previews[safe: i] {
                 thumnbails[i]?.sd_setImage(with: url, placeholderImage: placeholder, options: [], completed: nil)
             } else {

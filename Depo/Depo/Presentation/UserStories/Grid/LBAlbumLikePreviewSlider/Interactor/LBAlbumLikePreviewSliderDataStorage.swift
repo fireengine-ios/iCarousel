@@ -65,13 +65,17 @@ enum MyStreamType: Int {
 class SliderItem {
     var name: String?
     var previewItems: [PathForItem]?
-    var previewPlaceholder: UIImage?
+    var previewPlaceholders = [UIImage?]()
     var type: MyStreamType? {
         didSet {
             placeholderImage = type?.placeholder
             name = type?.title
             if type == .instaPick {
-                previewPlaceholder = #imageLiteral(resourceName: "dummyInstaPickThumbnail")
+                previewPlaceholders = [UIImage(named: "dummyInstaPickThumbnail_2"),
+                                      UIImage(named: "dummyInstaPickThumbnail_0"),
+                                      UIImage(named: "dummyInstaPickThumbnail_1"),
+                                      UIImage(named: "dummyInstaPickThumbnail_2")]
+                
             }
         }
     }
