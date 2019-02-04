@@ -65,13 +65,6 @@ final class InstapickAnalysisCell: UICollectionViewCell {
     
     @IBOutlet private weak var purchaseView: UIView!
     
-    @IBOutlet private weak var purchaseBackImageView: UIImageView! {
-        willSet {
-            newValue.contentMode = .scaleAspectFill
-            newValue.image = UIImage(named: "purchase_back")
-        }
-    }
-    
     @IBOutlet private weak var purchaseButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.purchase, for: .normal)
