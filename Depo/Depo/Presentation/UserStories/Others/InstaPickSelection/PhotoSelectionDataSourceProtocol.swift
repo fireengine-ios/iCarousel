@@ -83,7 +83,7 @@ final class AlbumPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
                 
                 filteredItems.append(contentsOf: items.filter({$0.contentType?.hasPrefix("image") ?? false}))
                 
-                if filteredItems.count < self.paginationPageSize {
+                if filteredItems.count != items.count, filteredItems.count < self.paginationPageSize {
                     self.loadNext(filteredItems: filteredItems, handler: handler)
                 } else {
                     self.isPaginationFinished = (filteredItems.count < self.paginationPageSize)
