@@ -12,13 +12,21 @@ import SDWebImage
 
 final class InstaPickProgressPopup: ViewController, NibInit {
 
+    @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var leadingConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var trailingConstraint: NSLayoutConstraint!
+    
+    
     @IBOutlet private weak var topCaption: UILabel! {
         didSet {
+            topCaption.font = UIFont.TurkcellSaturaBolFont(size: Device.isIpad ? 30 : 28)
             topCaption.text = " "
         }
     }
     @IBOutlet private weak var bottomCaption: UILabel! {
         didSet {
+            bottomCaption.font = UIFont.TurkcellSaturaDemFont(size: Device.isIpad ? 20 : 18)
             bottomCaption.text = bottomCaptionText
         }
     }
@@ -54,6 +62,22 @@ final class InstaPickProgressPopup: ViewController, NibInit {
         return controller
     }
     
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        let marginlLeftRight: CGFloat = Device.isIpad ? 90.0 : 16.0
+        let marginTopBottom: CGFloat = Device.isIpad ? 120.0 : 20.0
+        let loaderWidth: CGFloat = Device.isIpad ? view.bounds.width * 0.4 : 220
+
+        topConstraint.constant = marginTopBottom
+        bottomConstraint.constant = marginTopBottom
+        leadingConstraint.constant = marginlLeftRight
+        trailingConstraint.constant = marginlLeftRight
+        
+        circularLoader.widthAnchor.constraint(equalToConstant: loaderWidth).activate()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -62,7 +86,6 @@ final class InstaPickProgressPopup: ViewController, NibInit {
     }
  
 
-    
     private func setupInitialStates() {
         circularLoader.layoutIfNeeded()
         circularLoader.set(imageUrl: analyzingImagesUrls.first, animated: false)
