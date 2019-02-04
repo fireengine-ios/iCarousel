@@ -784,8 +784,8 @@
 "no_analyses_left_title" = "No Analyzes Left";
 "no_analyses_left_message" = "No Analyzes Left";
 "no_analyses_left_button" = "Purchase PhotoPick";
-"analyze_history_empty_title" = "analyze_history_empty_title";
-"analyze_history_empty_subtitle" = "analyze_history_empty_subtitle";
+"analyze_history_empty_title" = "Didn't you start analyzing your photos yet?";
+"analyze_history_empty_subtitle" = "Start analyzing now to find out which photo gets the highest rank and share on social media.";
 "analyze_history_analyze_left" = "Analyses Left";
 "analyze_history_analyze_count" = "%1$d / %2$d";
 "analyze_with_instapick" = "Analyze with PhotoPick";
@@ -844,9 +844,10 @@
 "Instagram" = "Instagram";
 "connected_as_format" = "Connected account:  @%@";
 "instagram_remove_connection_warning_title" = "You're about to remove your Instagram connection.";
-"instagram_remove_connection_warning_message" = "Are you sure you want to remove your Instagram connection?";
+"instagram_remove_connection_warning_message" = "Are you sure you want to remove your Instagram connection?\n\n";
 "instapick_selection_photos_selected" = "Photos Selected (%d)";
 "instapick_selection_analyzes_left" = "You only have %d analyses left";
 "loading" = "Loading...";
 "there_are_no_photos" = "There are no photos";
 "there_are_no_albums" = "There are no albums";
+"instapick_selection_analyzes_left_max" = "You’ve selected %d photos\n(the max. number you can select)";
