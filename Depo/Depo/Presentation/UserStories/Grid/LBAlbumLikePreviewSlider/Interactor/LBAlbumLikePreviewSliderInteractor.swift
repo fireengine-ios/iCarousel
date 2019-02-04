@@ -284,7 +284,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
 
 
 extension LBAlbumLikePreviewSliderInteractor: InstaPickServiceDelegate {
-    func didFinishAnalysis() {
+    func didFinishAnalysis(_ analyses: [InstapickAnalyze]) {
         reload(type: .instaPick)
     }
     
