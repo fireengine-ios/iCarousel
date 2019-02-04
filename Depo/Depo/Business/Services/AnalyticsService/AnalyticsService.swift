@@ -313,8 +313,8 @@ extension AnalyticsService: AnalyticsGA {
                                        GACustomEventKeys.action.key: eventActions,
                                        GACustomEventKeys.label.key: eventLabel]
         
-        DispatchQueue.toMain {
-            self.innerTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(self.timerStep(_:)), userInfo: userInfo, repeats: true)
+        DispatchQueue.main.async {
+            self.innerTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(self.timerStep), userInfo: userInfo, repeats: true)
             ///fire at least once
             self.innerTimer?.fire()
         }
