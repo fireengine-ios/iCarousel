@@ -4,7 +4,7 @@ final class PhotoCell: UICollectionViewCell {
     
     private enum Constants {
         static let selectionImageViewSideSize: CGFloat = 24
-        static let favoriteImageViewSideSize: CGFloat = 20
+        static let favoriteImageViewSideSize: CGFloat = 13
         static let edgeInset: CGFloat = 6
         static let selectionBorderWidth: CGFloat = 3
         
@@ -78,7 +78,7 @@ final class PhotoCell: UICollectionViewCell {
     
     private func updateFrames() {
         imageView.frame = bounds
-        selectionImageView.frame = CGRect(x: bounds.width - Constants.favoriteImageViewSideSize - Constants.edgeInset,
+        selectionImageView.frame = CGRect(x: bounds.width - Constants.selectionImageViewSideSize - Constants.edgeInset,
                                           y: Constants.edgeInset,
                                           width: Constants.selectionImageViewSideSize,
                                           height: Constants.selectionImageViewSideSize)

@@ -64,6 +64,14 @@ final class InstaPickCard: BaseView {
         configurateCard()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let bottomSpace : CGFloat = 21.0
+        let h = bottomButton.frame.maxY + bottomSpace
+        if calculatedH != h {
+            calculatedH = h
+        }
+    }
     private func configurateCard() {
         guard let type = cardType else { return }
         switch type {
