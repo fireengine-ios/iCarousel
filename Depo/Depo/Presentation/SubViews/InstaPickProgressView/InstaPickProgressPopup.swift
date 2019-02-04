@@ -12,8 +12,6 @@ import SDWebImage
 
 final class InstaPickProgressPopup: ViewController, NibInit {
 
-    @IBOutlet weak var contentView: UIView!
-    
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
