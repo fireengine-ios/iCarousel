@@ -35,7 +35,6 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     private lazy var collectionView: UICollectionView = {
         let isIpad = Device.isIpad
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = .init(top: 1, left: 1, bottom: 1, right: 1)
         
         let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -93,6 +92,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         view.addSubview(collectionView)
         loadMore()
     }
+
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -105,11 +105,9 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     }
     
     private func updateItemSize() {
-        let isIpad = Device.isIpad
         let viewWidth = collectionView.bounds.width
-        
-        let columns: CGFloat = isIpad ? 6 : 4
-        let padding: CGFloat = isIpad ? 10 : 1
+        let columns: CGFloat = Device.isIpad ? 8 : 4
+        let padding: CGFloat = 1
         let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
         let itemSize = CGSize(width: itemWidth, height: itemWidth)
         

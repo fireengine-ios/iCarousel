@@ -64,7 +64,7 @@ final class ThingsService: BaseRequestService {
 //}
 
 final class ThingsItemsService: RemoteItemsService {
-    private let service = ThingsService()
+    private let service = ThingsService(transIdLogging: true)
     
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .image)
@@ -74,16 +74,22 @@ final class ThingsItemsService: RemoteItemsService {
         let param = ThingsPageParameters(pageSize: requestSize, pageNumber: currentPage)
         
         service.getThingsPage(param: param, success: { [weak self] response in
-            if let response = response as? ThingsPageResponse {
-                success?(response.list.map({ ThingsItem(response: $0) }))
-                self?.currentPage += 1
-            } else {
+            guard let response = response as? ThingsPageResponse else {
                 fail?()
+                return
             }
-        }) { error in
+
+            success?(response.list.map({ ThingsItem(response: $0) }))
+            self?.currentPage += 1
+            
+            self?.service.debugLogTransIdIfNeeded(headers: response.response?.allHeaderFields, method: "getThings")
+            
+        }, fail: { [weak self] error in
             error.showInternetErrorGlobal()
             fail?()
-        }
+            
+            self?.service.debugLogTransIdIfNeeded(errorResponse: error, method: "getThings")
+        })
     }
 }
 

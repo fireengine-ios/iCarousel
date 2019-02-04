@@ -15,10 +15,9 @@ final class PhotoCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        //imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .lightGray
+        imageView.backgroundColor = ColorConstants.fileGreedCellColor
         imageView.isOpaque = true
         return imageView
     }()
@@ -160,8 +159,6 @@ final class PhotoCell: UICollectionViewCell {
         } else {
             imageView.image = image
         }
-        
-        backgroundColor = ColorConstants.fileGreedCellColor
     }
     
     func cancelImageLoading() {
