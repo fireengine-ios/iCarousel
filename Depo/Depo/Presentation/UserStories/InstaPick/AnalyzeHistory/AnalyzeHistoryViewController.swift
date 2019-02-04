@@ -44,6 +44,10 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     // MARK: - Life cycle
     
+    deinit {
+        instapickService.delegates.remove(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,6 +63,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     private func configure() {
+        instapickService.delegates.add(self)
         needShowTabBar = false
         
         activityManager.delegate = self
@@ -67,6 +72,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         dataSource.setupCollectionView(collectionView: collectionView)
         dataSource.delegate = self
         collectionView.contentInset.bottom = newAnalysisView.bounds.height
+        collectionView.backgroundColor = .clear
         
         refresher.tintColor = .clear
         refresher.addTarget(self, action: #selector(reloadData), for: .valueChanged)
@@ -437,5 +443,13 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryTabBarPresenterDelegate {
         default:
             break
         }
+    }
+}
+
+extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
+    func didRemoveAnalysis() { }
+    
+    func didFinishAnalysis(_ analyses: [InstapickAnalyze]) {
+        dataSource.insertNewItems(analyses)
     }
 }
