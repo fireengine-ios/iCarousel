@@ -2348,6 +2348,20 @@
 		8C13C301210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
 		8C13C302210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */; };
 		8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */; };
+		8C272FD222081C9200E0096D /* InstapickService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FD122081C9200E0096D /* InstapickService.swift */; };
+		8C272FD322081C9200E0096D /* InstapickService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FD122081C9200E0096D /* InstapickService.swift */; };
+		8C272FD522081CCA00E0096D /* PhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FD422081CCA00E0096D /* PhotoSelectionDataSourceProtocol.swift */; };
+		8C272FD622081CCA00E0096D /* PhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FD422081CCA00E0096D /* PhotoSelectionDataSourceProtocol.swift */; };
+		8C272FD822081CE800E0096D /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FD722081CE800E0096D /* AnalyzeHistoryDataSource.swift */; };
+		8C272FD922081CE800E0096D /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FD722081CE800E0096D /* AnalyzeHistoryDataSource.swift */; };
+		8C272FDB22081D0400E0096D /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FDA22081D0300E0096D /* PhotoService.swift */; };
+		8C272FDC22081D0400E0096D /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FDA22081D0300E0096D /* PhotoService.swift */; };
+		8C272FDE22081D2000E0096D /* PremiumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FDD22081D2000E0096D /* PremiumService.swift */; };
+		8C272FDF22081D2000E0096D /* PremiumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FDD22081D2000E0096D /* PremiumService.swift */; };
+		8C272FE122081D6800E0096D /* InstaPickSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FE022081D6800E0096D /* InstaPickSelectionSegmentedView.swift */; };
+		8C272FE222081D6800E0096D /* InstaPickSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FE022081D6800E0096D /* InstaPickSelectionSegmentedView.swift */; };
+		8C272FE422081D9000E0096D /* InstapickAlbumSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FE322081D9000E0096D /* InstapickAlbumSelectionDataSource.swift */; };
+		8C272FE522081D9000E0096D /* InstapickAlbumSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C272FE322081D9000E0096D /* InstapickAlbumSelectionDataSource.swift */; };
 		8C2924C3205A4B1B005E40C9 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
 		8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
 		8C3930EF2100668300C1D82D /* GoogleService-Info-ent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */; };
@@ -2363,7 +2377,6 @@
 		8C5408471F62AD6400D4717A /* GridListTopBarSortingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5408461F62AD6400D4717A /* GridListTopBarSortingTableCell.swift */; };
 		8C5408491F62AD9100D4717A /* GridListTopBarSortingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C5408481F62AD9100D4717A /* GridListTopBarSortingTableCell.xib */; };
 		8C54084C1F62C77200D4717A /* FloatingContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54084B1F62C77200D4717A /* FloatingContainerVC.swift */; };
-		8C66374321DCA89500E1C857 /* PremiumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A222450E21D3C593006EB432 /* PremiumService.swift */; };
 		8C6CC55E1F879A72007D49C6 /* GeneralFilesFiltration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CC55D1F879A72007D49C6 /* GeneralFilesFiltration.swift */; };
 		8C6EF8761F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8621F348B5C002AC795 /* BottomSelectionTabBarConfigurator.swift */; };
 		8C6EF8771F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8631F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift */; };
@@ -2420,12 +2433,6 @@
 		8CB478AF20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */; };
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
 		8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */; };
-		8CB91709220458C600250E4E /* InstapickService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE170F6921E76DFD00BE352D /* InstapickService.swift */; };
-		8CB9170A220458CB00250E4E /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2762204248000A5A696 /* PhotoService.swift */; };
-		8CB9170B2204590C00250E4E /* InstaPickSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B27A220424C800A5A696 /* InstaPickSelectionSegmentedView.swift */; };
-		8CB9170C2204591500250E4E /* PhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */; };
-		8CB9170D2204592200250E4E /* InstapickAlbumSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */; };
-		8CB9170E2204596900250E4E /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */; };
 		8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */; };
 		8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
 		8CCA070520C4412800558AB0 /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
@@ -2630,7 +2637,6 @@
 		98C878272074E1C100374177 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878252074E1C100374177 /* NavigationController.swift */; };
 		98CB9A852202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
 		98CB9A862202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
-		98D3856D21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */; };
 		98E65A292029AAEF00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */; };
 		98E792D5203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */; };
@@ -2690,7 +2696,6 @@
 		A217E44A21A5B0D00084AA37 /* LeavePremiumConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E44821A5B0D00084AA37 /* LeavePremiumConfigurator.swift */; };
 		A217E44C21A5B0E40084AA37 /* LeavePremiumInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E44B21A5B0E40084AA37 /* LeavePremiumInitializer.swift */; };
 		A217E44D21A5B0E40084AA37 /* LeavePremiumInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E44B21A5B0E40084AA37 /* LeavePremiumInitializer.swift */; };
-		A222450F21D3C593006EB432 /* PremiumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A222450E21D3C593006EB432 /* PremiumService.swift */; };
 		A225690B21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225690A21E8B30E00A9D147 /* IntrinsicTextView.swift */; };
 		A225690C21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225690A21E8B30E00A9D147 /* IntrinsicTextView.swift */; };
 		A2268EB921A688DB002F2611 /* LeavePremiumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2268EB821A688DB002F2611 /* LeavePremiumViewController.xib */; };
@@ -2956,14 +2961,10 @@
 		CE00B24D2202FB3F00A5A696 /* InstapickAlbumSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B24B2202FB1400A5A696 /* InstapickAlbumSelectionViewController.swift */; };
 		CE00B24E2202FB4300A5A696 /* PhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B24721F5A79400A5A696 /* PhotoSelectionController.swift */; };
 		CE00B24F2202FB4600A5A696 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B24921F5A7B000A5A696 /* PhotoCell.swift */; };
-		CE00B2512202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */; };
 		CE00B253220332F000A5A696 /* NSLayoutConstraint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B252220332F000A5A696 /* NSLayoutConstraint+Extensions.swift */; };
 		CE00B254220332FF00A5A696 /* NSLayoutConstraint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B252220332F000A5A696 /* NSLayoutConstraint+Extensions.swift */; };
 		CE00B256220334D800A5A696 /* BackButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B255220334D800A5A696 /* BackButtonActions.swift */; };
 		CE00B257220334E400A5A696 /* BackButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B255220334D800A5A696 /* BackButtonActions.swift */; };
-		CE00B2772204248000A5A696 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2762204248000A5A696 /* PhotoService.swift */; };
-		CE00B2792204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */; };
-		CE00B27B220424C800A5A696 /* InstaPickSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B27A220424C800A5A696 /* InstaPickSelectionSegmentedView.swift */; };
 		CE0283A11FE1222A0016FBE2 /* PopUpImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0283A01FE1222A0016FBE2 /* PopUpImage.swift */; };
 		CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */; };
 		CE055F3F20383A3400E6BFE8 /* PHAsset+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE055F3E20383A3400E6BFE8 /* PHAsset+Properties.swift */; };
@@ -3000,7 +3001,6 @@
 		CE15AFBE20A0846E00015874 /* UINavigationController+Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15AFBD20A0846E00015874 /* UINavigationController+Push.swift */; };
 		CE16C0461FF22F8F00BE5906 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */; };
 		CE16C0481FF22FA500BE5906 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE16C0471FF22FA500BE5906 /* Social.framework */; };
-		CE170F6A21E76DFD00BE352D /* InstapickService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE170F6921E76DFD00BE352D /* InstapickService.swift */; };
 		CE18CC7D204E84DE00FA3F44 /* DocumentActionCustomizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC7C204E84DE00FA3F44 /* DocumentActionCustomizator.swift */; };
 		CE18CC7F204E85DC00FA3F44 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
 		CE18CC80204E85DC00FA3F44 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
@@ -3481,14 +3481,7 @@
 		CE99AC78201CB778003DD3B7 /* CardActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99AC77201CB778003DD3B7 /* CardActionType.swift */; };
 		CE9AFAD1211D73D0006AF836 /* FaceImageDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */; };
 		CE9CB666210F2D7500342EEE /* FixedAVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CB665210F2D7500342EEE /* FixedAVPlayerViewController.swift */; };
-		CE9F540022045A36003E76D4 /* InstaPickSelectionSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B27A220424C800A5A696 /* InstaPickSelectionSegmentedView.swift */; };
-		CE9F540122045A36003E76D4 /* PhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */; };
-		CE9F540222045A36003E76D4 /* InstapickAlbumSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */; };
 		CE9F540322045A36003E76D4 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE292C2F21C2419C004FC745 /* PassthroughView.swift */; };
-		CE9F540422045A36003E76D4 /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */; };
-		CE9F540522045A36003E76D4 /* InstapickService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE170F6921E76DFD00BE352D /* InstapickService.swift */; };
-		CE9F540622045A36003E76D4 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2762204248000A5A696 /* PhotoService.swift */; };
-		CE9F540722045A36003E76D4 /* PremiumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A222450E21D3C593006EB432 /* PremiumService.swift */; };
 		CEA1B6AC213EA9AC000B3DF4 /* LaunchCampaignCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40EACE2136BEEB0038ABAC /* LaunchCampaignCard.swift */; };
 		CEA1B6AD213EAA09000B3DF4 /* LaunchCampaignCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE40EAD02136BEF30038ABAC /* LaunchCampaignCard.xib */; };
 		CEA524BA2046C95E0036FCEA /* UploadQueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524B92046C95E0036FCEA /* UploadQueueService.swift */; };
@@ -5150,6 +5143,13 @@
 		8C13C300210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPackageProductObject.swift; sourceTree = "<group>"; };
 		8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoButtonCellProtocol.swift; sourceTree = "<group>"; };
 		8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUserInputCellView.swift; sourceTree = "<group>"; };
+		8C272FD122081C9200E0096D /* InstapickService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstapickService.swift; sourceTree = "<group>"; };
+		8C272FD422081CCA00E0096D /* PhotoSelectionDataSourceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSelectionDataSourceProtocol.swift; sourceTree = "<group>"; };
+		8C272FD722081CE800E0096D /* AnalyzeHistoryDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDataSource.swift; sourceTree = "<group>"; };
+		8C272FDA22081D0300E0096D /* PhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
+		8C272FDD22081D2000E0096D /* PremiumService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PremiumService.swift; sourceTree = "<group>"; };
+		8C272FE022081D6800E0096D /* InstaPickSelectionSegmentedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPickSelectionSegmentedView.swift; sourceTree = "<group>"; };
+		8C272FE322081D9000E0096D /* InstapickAlbumSelectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstapickAlbumSelectionDataSource.swift; sourceTree = "<group>"; };
 		8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPhoneMailCell.xib; sourceTree = "<group>"; };
 		8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-ent.plist"; sourceTree = "<group>"; };
 		8C3930EE2100668300C1D82D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -5333,7 +5333,6 @@
 		98C878222074B78A00374177 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		98C878252074E1C100374177 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceResponseError.swift; sourceTree = "<group>"; };
-		98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDataSource.swift; sourceTree = "<group>"; };
 		98E65A282029AAEF00597226 /* StoriesDataSourceForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDataSourceForCollectionView.swift; sourceTree = "<group>"; };
 		98E792D4203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentlySearchedFaceImageTableViewCell.xib; sourceTree = "<group>"; };
 		98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySearchedFaceImageTableViewCell.swift; sourceTree = "<group>"; };
@@ -5375,7 +5374,6 @@
 		A217E44521A5B0C10084AA37 /* LeavePremiumInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeavePremiumInteractorOutput.swift; sourceTree = "<group>"; };
 		A217E44821A5B0D00084AA37 /* LeavePremiumConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeavePremiumConfigurator.swift; sourceTree = "<group>"; };
 		A217E44B21A5B0E40084AA37 /* LeavePremiumInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeavePremiumInitializer.swift; sourceTree = "<group>"; };
-		A222450E21D3C593006EB432 /* PremiumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumService.swift; sourceTree = "<group>"; };
 		A225690A21E8B30E00A9D147 /* IntrinsicTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicTextView.swift; sourceTree = "<group>"; };
 		A2268EB821A688DB002F2611 /* LeavePremiumViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeavePremiumViewController.xib; sourceTree = "<group>"; };
 		A2268EBC21A68BBC002F2611 /* LeavePremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeavePremiumView.swift; sourceTree = "<group>"; };
@@ -5567,12 +5565,8 @@
 		CE00B24721F5A79400A5A696 /* PhotoSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectionController.swift; sourceTree = "<group>"; };
 		CE00B24921F5A7B000A5A696 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		CE00B24B2202FB1400A5A696 /* InstapickAlbumSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickAlbumSelectionViewController.swift; sourceTree = "<group>"; };
-		CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickAlbumSelectionDataSource.swift; sourceTree = "<group>"; };
 		CE00B252220332F000A5A696 /* NSLayoutConstraint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extensions.swift"; sourceTree = "<group>"; };
 		CE00B255220334D800A5A696 /* BackButtonActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonActions.swift; sourceTree = "<group>"; };
-		CE00B2762204248000A5A696 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
-		CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectionDataSourceProtocol.swift; sourceTree = "<group>"; };
-		CE00B27A220424C800A5A696 /* InstaPickSelectionSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickSelectionSegmentedView.swift; sourceTree = "<group>"; };
 		CE0283A01FE1222A0016FBE2 /* PopUpImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpImage.swift; sourceTree = "<group>"; };
 		CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarConfugurator.swift; sourceTree = "<group>"; };
 		CE055F3E20383A3400E6BFE8 /* PHAsset+Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PHAsset+Properties.swift"; sourceTree = "<group>"; };
@@ -5599,7 +5593,6 @@
 		CE15AFBD20A0846E00015874 /* UINavigationController+Push.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Push.swift"; sourceTree = "<group>"; };
 		CE16C0451FF22F8E00BE5906 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE16C0471FF22FA500BE5906 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		CE170F6921E76DFD00BE352D /* InstapickService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickService.swift; sourceTree = "<group>"; };
 		CE18CC7C204E84DE00FA3F44 /* DocumentActionCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentActionCustomizator.swift; sourceTree = "<group>"; };
 		CE18CC8F204E87CE00FA3F44 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorIdentificators.swift; sourceTree = "<group>"; };
@@ -10359,7 +10352,7 @@
 			children = (
 				984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */,
 				984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */,
-				98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */,
+				8C272FD722081CE800E0096D /* AnalyzeHistoryDataSource.swift */,
 				984A515321E87883004525F5 /* AnalyzeHistoryDesigner.swift */,
 				984A515621E87A4F004525F5 /* AnalyzeHistoryDisplayManager.swift */,
 				980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */,
@@ -10631,7 +10624,7 @@
 		A222450D21D3C53A006EB432 /* PremiumService */ = {
 			isa = PBXGroup;
 			children = (
-				A222450E21D3C593006EB432 /* PremiumService.swift */,
+				8C272FDD22081D2000E0096D /* PremiumService.swift */,
 			);
 			path = PremiumService;
 			sourceTree = "<group>";
@@ -11076,11 +11069,11 @@
 			isa = PBXGroup;
 			children = (
 				C4D9C03121EDC6DB00693D94 /* InstaPickSelectionSegmentedController.swift */,
-				CE00B27A220424C800A5A696 /* InstaPickSelectionSegmentedView.swift */,
+				8C272FE022081D6800E0096D /* InstaPickSelectionSegmentedView.swift */,
 				CE00B24721F5A79400A5A696 /* PhotoSelectionController.swift */,
-				CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */,
+				8C272FD422081CCA00E0096D /* PhotoSelectionDataSourceProtocol.swift */,
 				CE00B24B2202FB1400A5A696 /* InstapickAlbumSelectionViewController.swift */,
-				CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */,
+				8C272FE322081D9000E0096D /* InstapickAlbumSelectionDataSource.swift */,
 				CE00B24921F5A7B000A5A696 /* PhotoCell.swift */,
 				C4A38BA121EE1F2300ECCCEA /* TransparentGradientView.swift */,
 			);
@@ -11799,8 +11792,8 @@
 				CEADDA9A1F23480D001DDA8A /* FileService */,
 				CE8F44ED1F6AB7790062C2E0 /* ActivityTimelineService */,
 				CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */,
-				CE170F6921E76DFD00BE352D /* InstapickService.swift */,
-				CE00B2762204248000A5A696 /* PhotoService.swift */,
+				8C272FD122081C9200E0096D /* InstapickService.swift */,
+				8C272FDA22081D0300E0096D /* PhotoService.swift */,
 			);
 			path = ApiServices;
 			sourceTree = "<group>";
@@ -15151,14 +15144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE9F540022045A36003E76D4 /* InstaPickSelectionSegmentedView.swift in Sources */,
-				CE9F540122045A36003E76D4 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
-				CE9F540222045A36003E76D4 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				CE9F540322045A36003E76D4 /* PassthroughView.swift in Sources */,
-				CE9F540422045A36003E76D4 /* AnalyzeHistoryDataSource.swift in Sources */,
-				CE9F540522045A36003E76D4 /* InstapickService.swift in Sources */,
-				CE9F540622045A36003E76D4 /* PhotoService.swift in Sources */,
-				CE9F540722045A36003E76D4 /* PremiumService.swift in Sources */,
 				CE292C1621BE5DE9004FC745 /* PremiumViewInput.swift in Sources */,
 				CE292C1721BE5DE9004FC745 /* PremiumViewOutput.swift in Sources */,
 				CE292C1821BE5DE9004FC745 /* PremiumRouter.swift in Sources */,
@@ -15206,6 +15192,7 @@
 				8C0E8C771FDEBDFF00789C91 /* LocalMediaItems.swift in Sources */,
 				B56FBB2F2122C811004F4A59 /* TermsOfUseInteractor.swift in Sources */,
 				92004B6421AD18E100582C45 /* MyStorageModuleInput.swift in Sources */,
+				8C272FD322081C9200E0096D /* InstapickService.swift in Sources */,
 				4A6DBE8D21A6F93A0003D1B4 /* PremiumListView.swift in Sources */,
 				8C0E8C781FDEBDFF00789C91 /* ApplicationPalette.swift in Sources */,
 				4A9B390F201F3969009FC572 /* FaceImageItemsInitializer.swift in Sources */,
@@ -15373,6 +15360,7 @@
 				C62239A0204972080043ED44 /* MenloworksAppEvents.swift in Sources */,
 				8C0E8CFE1FDEBDFF00789C91 /* CustomNavBarView.swift in Sources */,
 				8C0E8CFF1FDEBDFF00789C91 /* CollectionViewCellForPhoto.swift in Sources */,
+				8C272FE522081D9000E0096D /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				8C0E8D001FDEBDFF00789C91 /* LoginInteractor.swift in Sources */,
 				FA33A7E3209451B1008F946C /* NavigationBarStyle.swift in Sources */,
 				C62239AE204973300043ED44 /* FaceImageChangeCoverRouterInput.swift in Sources */,
@@ -15388,7 +15376,6 @@
 				8C0E8D0A1FDEBDFF00789C91 /* AutoSyncDataStorage.swift in Sources */,
 				8C0E8D0B1FDEBDFF00789C91 /* PrintInitializer.swift in Sources */,
 				8C0E8D0C1FDEBDFF00789C91 /* UserProfileInitializer.swift in Sources */,
-				8CB9170B2204590C00250E4E /* InstaPickSelectionSegmentedView.swift in Sources */,
 				8C0E8D0D1FDEBDFF00789C91 /* BaseCellModel.swift in Sources */,
 				4A6DBE8621A6F8F20003D1B4 /* LeavePremiumView.swift in Sources */,
 				8C0E8D111FDEBDFF00789C91 /* LocalAlbumInteractor.swift in Sources */,
@@ -15414,6 +15401,7 @@
 				98B01C7A206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */,
 				B5CDB33B21787FEF006CFA50 /* UIAlertViewCustom.m in Sources */,
 				8C0E8D1E1FDEBDFF00789C91 /* AlbumDetailResponce.swift in Sources */,
+				8C272FDC22081D0400E0096D /* PhotoService.swift in Sources */,
 				B5CDB33321787FEF006CFA50 /* UpdaterController.m in Sources */,
 				8C0E8D201FDEBDFF00789C91 /* CountiesGSMCodeCompositor.swift in Sources */,
 				4A0AC15D20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */,
@@ -15485,7 +15473,6 @@
 				8C0E8D561FDEBDFF00789C91 /* RouteRequests.swift in Sources */,
 				8C0E8D571FDEBDFF00789C91 /* PackagesInitializer.swift in Sources */,
 				8C0E8D581FDEBDFF00789C91 /* LoginDataStorage.swift in Sources */,
-				8CB9170D2204592200250E4E /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				8C0E8D591FDEBDFF00789C91 /* BaseMediaContent.swift in Sources */,
 				8C0E8D5A1FDEBDFF00789C91 /* IntroduceSubView.swift in Sources */,
 				8C0E8D5C1FDEBDFF00789C91 /* LoginInteractorOutput.swift in Sources */,
@@ -15559,7 +15546,6 @@
 				CEF371A920887806007AD36E /* UIViewController+NavBar.swift in Sources */,
 				8C0E8D9D1FDEBDFF00789C91 /* EULAService.swift in Sources */,
 				8C0E8D9E1FDEBDFF00789C91 /* AutoSyncDataSource.swift in Sources */,
-				8CB91709220458C600250E4E /* InstapickService.swift in Sources */,
 				8C0E8D9F1FDEBDFF00789C91 /* AppRater.m in Sources */,
 				8C0E8DA01FDEBDFF00789C91 /* RegistrationUserInfoModel.swift in Sources */,
 				8C0E8DA11FDEBDFF00789C91 /* AutoSyncPresenter.swift in Sources */,
@@ -15634,7 +15620,6 @@
 				8C0E8DD21FDEBDFF00789C91 /* CreateStoryNameInitializer.swift in Sources */,
 				8C0E8DD31FDEBDFF00789C91 /* AudioSelectionCollectionViewCell.swift in Sources */,
 				8C0E8DD41FDEBDFF00789C91 /* TermsAndServicesPresenter.swift in Sources */,
-				8CB9170C2204591500250E4E /* PhotoSelectionDataSourceProtocol.swift in Sources */,
 				CE39D3E7216B756E004AB6D7 /* YearsView.swift in Sources */,
 				9807261D203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */,
 				8C0E8DD51FDEBDFF00789C91 /* TermsAndServicesInteractorInput.swift in Sources */,
@@ -15703,7 +15688,6 @@
 				B56FBB3B2122C9AA004F4A59 /* TermsOfUseViewInput.swift in Sources */,
 				C62239A92049731D0043ED44 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
 				8C0E8DFC1FDEBDFF00789C91 /* PHAssetCollection.swift in Sources */,
-				8CB9170E2204596900250E4E /* AnalyzeHistoryDataSource.swift in Sources */,
 				B53DCE8720EF634900400DBA /* SyncRecord.m in Sources */,
 				A2EF976321EC7E2900EC7DE7 /* InstapickPopUpController.swift in Sources */,
 				CE055F4020383A3400E6BFE8 /* PHAsset+Properties.swift in Sources */,
@@ -15818,6 +15802,7 @@
 				8C0E8E5B1FDEBDFF00789C91 /* PasscodeState.swift in Sources */,
 				8C0E8E5D1FDEBDFF00789C91 /* UserProfileConfigurator.swift in Sources */,
 				8C0B91AA20170EB400A5BA81 /* ManageContactsModuleInput.swift in Sources */,
+				8C272FD922081CE800E0096D /* AnalyzeHistoryDataSource.swift in Sources */,
 				8C0E8E5E1FDEBDFF00789C91 /* LocalAlbumConfigurator.swift in Sources */,
 				4AD1A81B208A277200930112 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				8C0B919720170E4C00A5BA81 /* DuplicatedContactsViewController.swift in Sources */,
@@ -15875,7 +15860,6 @@
 				B56FBB232122C3E7004F4A59 /* TermsOfUseConfigurator.swift in Sources */,
 				8C0E8EB11FDEBDFF00789C91 /* BaseFilesGreedViewController.swift in Sources */,
 				8CEE8D25214A472B00150996 /* FaceImageDisplayManager.swift in Sources */,
-				8CB9170A220458CB00250E4E /* PhotoService.swift in Sources */,
 				4A56D5BF202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */,
 				8C0E8EB21FDEBDFF00789C91 /* ImportFromDropboxInteractor.swift in Sources */,
 				8C0E8EB31FDEBDFF00789C91 /* BaseFilesGreedModuleInput.swift in Sources */,
@@ -15914,6 +15898,7 @@
 				8C0E8ECF1FDEBDFF00789C91 /* UserProfileRouter.swift in Sources */,
 				8C0E8ED01FDEBDFF00789C91 /* SelectionImageView.swift in Sources */,
 				8C017B772074B795002484E7 /* UIImage+Size.swift in Sources */,
+				8C272FDF22081D2000E0096D /* PremiumService.swift in Sources */,
 				8C0E8ED11FDEBDFF00789C91 /* Int64+Bytes.swift in Sources */,
 				C62239A5204972D00043ED44 /* SharedEnums.swift in Sources */,
 				984A515821E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */,
@@ -16123,6 +16108,7 @@
 				7C121F01208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
 				8C0E8F561FDEBDFF00789C91 /* ActionSheetPredetermendConfigs.swift in Sources */,
 				8C0E8F571FDEBDFF00789C91 /* FileInfoConfigurator.swift in Sources */,
+				8C272FE222081D6800E0096D /* InstaPickSelectionSegmentedView.swift in Sources */,
 				8C0E8F581FDEBDFF00789C91 /* FileInfoInitializer.swift in Sources */,
 				8C0E8F591FDEBDFF00789C91 /* UsageInfoViewInput.swift in Sources */,
 				8C0E8F5A1FDEBDFF00789C91 /* CreateStoryPhotosOrderConfigurator.swift in Sources */,
@@ -16200,6 +16186,7 @@
 				8C0E8F861FDEBDFF00789C91 /* SelectNameInitializer.swift in Sources */,
 				C62239B1204973720043ED44 /* FaceImageItemsInteractorInput.swift in Sources */,
 				B5AB5B6B21F9B029003AABB4 /* FacebookAccountConnectionCell.swift in Sources */,
+				8C272FD622081CCA00E0096D /* PhotoSelectionDataSourceProtocol.swift in Sources */,
 				8C0E8F871FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
 				8C0E8F881FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
 				9807260E203468D9004E1505 /* SearchDataSource.swift in Sources */,
@@ -16310,7 +16297,6 @@
 				8C0E8FCC1FDEBDFF00789C91 /* UploadParametrs.swift in Sources */,
 				8C0E8FCD1FDEBDFF00789C91 /* ImportFromDropboxPresenter.swift in Sources */,
 				8C0E8FCE1FDEBDFF00789C91 /* OTPViewController.swift in Sources */,
-				8C66374321DCA89500E1C857 /* PremiumService.swift in Sources */,
 				CED4B0252017505300D06CA9 /* Alamofire+Request.swift in Sources */,
 				8C0E8FCF1FDEBDFF00789C91 /* OTPViewIO.swift in Sources */,
 				8C0E8FD01FDEBDFF00789C91 /* OTPViewPresenter.swift in Sources */,
@@ -16504,6 +16490,7 @@
 				CE23A0F2205FF4E00048267D /* ErrorPresenter.swift in Sources */,
 				CE51AB6C1EF90853005DCEE0 /* LoginPresenter.swift in Sources */,
 				7C6945E720039F4A00152344 /* FreeAppSpaceConfigurator.swift in Sources */,
+				8C272FE422081D9000E0096D /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */,
 				CECD4E511FE10C7700978BE7 /* UIColor+Adjust.swift in Sources */,
 				B56E0DDA20B44AFC0082044D /* AppResponsivenessService.swift in Sources */,
@@ -16568,7 +16555,6 @@
 				8C7786A81F3F38F0005CB432 /* VisualMusicPlayerViewInput.swift in Sources */,
 				CE51ABB31EF90853005DCEE0 /* AutoSyncModuleInput.swift in Sources */,
 				CEE1D1FE1F714F300008F4CF /* CoreDataStack.swift in Sources */,
-				CE00B2792204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
 				CE51ABB51EF90853005DCEE0 /* AutoSyncInteractorOutput.swift in Sources */,
 				7C04350B1F4EF3DA00193C75 /* AlbumDetailService.swift in Sources */,
 				CE33DFFF1F0296C000706C40 /* RequestHeader.swift in Sources */,
@@ -16806,6 +16792,7 @@
 				D47863F41F3F18FA00EFDC6D /* UsageInfoInteractorInput.swift in Sources */,
 				B54BFF4F202C74090018AF82 /* SharedEnums.swift in Sources */,
 				CEF69DDD1FB584CD00FCE6AB /* ResponseResult.swift in Sources */,
+				8C272FD222081C9200E0096D /* InstapickService.swift in Sources */,
 				7C6E2F751F31E4C900536DB6 /* CreateStorySelectionInitializer.swift in Sources */,
 				7C6945E620039F4A00152344 /* FreeAppSpaceInitializer.swift in Sources */,
 				CE51ACAD1EF90853005DCEE0 /* CoreTelephonyService.swift in Sources */,
@@ -16862,6 +16849,7 @@
 				CE51ACCC1EF90853005DCEE0 /* RegistrationRouterInput.swift in Sources */,
 				CED6442E2060E776009AFC12 /* StorageVars.swift in Sources */,
 				CE51ACCD1EF90853005DCEE0 /* RegistrationRouter.swift in Sources */,
+				8C272FE122081D6800E0096D /* InstaPickSelectionSegmentedView.swift in Sources */,
 				98A867772080DCBC00D2D4F4 /* ArrayExtension.swift in Sources */,
 				CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */,
 				8C6EF8831F348B5C002AC795 /* BottomSelectionTabBarViewInput.swift in Sources */,
@@ -16894,6 +16882,7 @@
 				A2079902219F131B00AD5037 /* PremiumViewController.swift in Sources */,
 				7C6E2FA31F32FCD900536DB6 /* AudioSelectionCollectionViewCell.swift in Sources */,
 				CE51ACD51EF90853005DCEE0 /* TermsAndServicesPresenter.swift in Sources */,
+				8C272FD522081CCA00E0096D /* PhotoSelectionDataSourceProtocol.swift in Sources */,
 				CE51ACD61EF90853005DCEE0 /* TermsAndServicesInteractorInput.swift in Sources */,
 				92004B6F21AD19B300582C45 /* MyStorageInteractor.swift in Sources */,
 				CE51ACD71EF90853005DCEE0 /* TermsAndServicesInteractorOutput.swift in Sources */,
@@ -16949,7 +16938,6 @@
 				CEDFECA71F10C77E003D1A75 /* UINavigationBarExtension.swift in Sources */,
 				D47863FD1F3F18FA00EFDC6D /* UsageInfoViewOutput.swift in Sources */,
 				CE51ACE81EF90853005DCEE0 /* IntroduceInitializer.swift in Sources */,
-				CE00B2512202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				D49886621F3EFBE200F50C95 /* ImportPhotosViewOutput.swift in Sources */,
 				4A9886F420443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
 				CE2F55FC1F7551CD00F49DA1 /* AccountService.swift in Sources */,
@@ -17047,7 +17035,6 @@
 				D47863F51F3F18FA00EFDC6D /* UsageInfoInteractorOutput.swift in Sources */,
 				CE246A0E1F3D2CDE008DF705 /* SyncServiceManager.swift in Sources */,
 				7C233CD81FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift in Sources */,
-				98D3856D21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift in Sources */,
 				CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */,
 				7CAC23BC1F45718700607660 /* RemoteService.swift in Sources */,
 				D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */,
@@ -17067,7 +17054,6 @@
 				CE0ED9731FBC0F5A00487632 /* PasscodeView.swift in Sources */,
 				CE0ED96E1FBC0F5A00487632 /* BiometricsManager.swift in Sources */,
 				CEDEAB311FADA5D20046555F /* AlbumCell.swift in Sources */,
-				CE00B2772204248000A5A696 /* PhotoService.swift in Sources */,
 				7C6E2F9A1F31E4F800536DB6 /* CreateStoryNameViewOutput.swift in Sources */,
 				CE2976E21FD58E2000350F3A /* LocalAlbumRouter.swift in Sources */,
 				8DCB216A1F3C84E800BAFE1E /* SearchViewOutput.swift in Sources */,
@@ -17151,7 +17137,6 @@
 				921FF09A21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
 				78E8E2B02023195600A979AB /* FaceImagePhotosInitializer.swift in Sources */,
 				DE10EF65DE653E0EDBEC8C17 /* BaseFilesGreedViewInput.swift in Sources */,
-				CE00B27B220424C800A5A696 /* InstaPickSelectionSegmentedView.swift in Sources */,
 				B5CDB33021787FEF006CFA50 /* UpdateServerIntegration.m in Sources */,
 				228C4DD0339279189CC9619C /* BaseFilesGreedViewOutput.swift in Sources */,
 				CE3E4D13201C70A100173045 /* ImageManager.swift in Sources */,
@@ -17164,7 +17149,6 @@
 				CEF73B9D1FCEAC30004C3ADF /* KeyboardHideManager.swift in Sources */,
 				38BA503099842E5840815A3A /* BaseFilesGreedPresenter.swift in Sources */,
 				CECD4E561FE1152600978BE7 /* UIImage+Color.swift in Sources */,
-				CE170F6A21E76DFD00BE352D /* InstapickService.swift in Sources */,
 				FDC8F998E27D9EA9B6B95F47 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				CE9487D985CF5DEAC28D4438 /* BaseFilesGreedInteractorOutput.swift in Sources */,
 				B5E74798208B3736003A7110 /* UploadOperation.swift in Sources */,
@@ -17475,7 +17459,6 @@
 				8C0097121F6BDA5000FA069C /* MoreFilesActionsInteractorInput.swift in Sources */,
 				7A3DC2411860465D7AB44D69 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */,
 				CE61D1C52046875A001D01DC /* URL+Video.swift in Sources */,
-				A222450F21D3C593006EB432 /* PremiumService.swift in Sources */,
 				41A69B03298B6F93F851567F /* LBAlbumLikePreviewSliderInitializer.swift in Sources */,
 				CE2F56171F7552A900F49DA1 /* PackagesInteractor.swift in Sources */,
 				85AAD0E4BD93A160437B1236 /* AlbumSelectionViewController.swift in Sources */,
@@ -17489,9 +17472,11 @@
 				64ADD65B7FCE7BDBF07F4FA1 /* AlbumsRouter.swift in Sources */,
 				CE2F56251F75531800F49DA1 /* UICollectionView+Extensions.swift in Sources */,
 				4E2D35C770D6AD2189D274A8 /* AlbumsInitializer.swift in Sources */,
+				8C272FDB22081D0400E0096D /* PhotoService.swift in Sources */,
 				9065EE336B9F1D044DBD3944 /* AlbumDetailViewController.swift in Sources */,
 				7C6945E920039F4A00152344 /* FreeAppSpaceRouter.swift in Sources */,
 				7C00FE1C1F5958380041D041 /* SingletonStorage.swift in Sources */,
+				8C272FD822081CE800E0096D /* AnalyzeHistoryDataSource.swift in Sources */,
 				CE95ED591F516736002F923A /* HelpAndSupportViewOutput.swift in Sources */,
 				98C878232074B78A00374177 /* ViewController.swift in Sources */,
 				C7055CAC94DC0C09FAC5F608 /* AlbumDetailPresenter.swift in Sources */,
@@ -17556,6 +17541,7 @@
 				FA793D87201872DC00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				865630C8BE985198C2339934 /* ActivityTimelineRouter.swift in Sources */,
 				78624ADA201C8A3A00C969D3 /* ManageContactsModuleOutput.swift in Sources */,
+				8C272FDE22081D2000E0096D /* PremiumService.swift in Sources */,
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
 				B53DCE8820EF634900400DBA /* SyncDB.m in Sources */,
