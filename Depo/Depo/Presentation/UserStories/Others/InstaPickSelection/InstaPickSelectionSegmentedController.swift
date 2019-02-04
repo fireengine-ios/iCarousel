@@ -19,7 +19,11 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     // MARK: properties
     
     /// not private bcz protocol requirement
-    var selectedItems = [SearchItemResponse]()
+    var selectedItems = [SearchItemResponse]() {
+        didSet {
+            vcView.analyzeButton.isHidden = selectedItems.isEmpty
+        }
+    }
     
     /// not private bcz protocol requirement
     var selectionState = PhotoSelectionState.selecting {
@@ -47,6 +51,29 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     
     private let instapickService: InstapickService = factory.resolve()
     
+    private lazy var albumsTabIndex: Int = {
+        if let index = segmentedViewControllers.index(of: albumsVC) {
+            return index
+        }
+        assertionFailure("there is no albumsVC in segmentedViewControllers. check func setupScreenWithSelectingLimit. It was: index = 1")
+        return 0
+    }()
+    
+    private lazy var albumsVC = InstapickAlbumSelectionViewController(title: TextConstants.albumsTitle, delegate: self)
+    
+    private lazy var closeAlbumButton = UIBarButtonItem(image: UIImage(named: "closeButton"),
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(onCloseAlbum))
+    
+    private lazy var closeSelfButton = UIBarButtonItem(title: TextConstants.cancel,
+                                                    font: UIFont.TurkcellSaturaDemFont(size: 19),
+                                                    tintColor: UIColor.white,
+                                                    accessibilityLabel: TextConstants.cancel,
+                                                    style: .plain,
+                                                    target: self,
+                                                    selector: #selector(closeSelf))
+    
     // MARK: start
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -63,17 +90,9 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         vcView.segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
         vcView.analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
         
-        navigationItem.title = String(format: TextConstants.instapickSelectionPhotosSelected, 0)
         removeBackButtonTitle()
-        
-        let cancelButton = UIBarButtonItem(title: TextConstants.cancel,
-                                           font: UIFont.TurkcellSaturaDemFont(size: 19),
-                                           tintColor: UIColor.white,
-                                           accessibilityLabel: TextConstants.cancel,
-                                           style: .plain,
-                                           target: self,
-                                           selector: #selector(closeSelf))
-        navigationItem.leftBarButtonItem = cancelButton
+        navigationItem.title = String(format: TextConstants.instapickSelectionPhotosSelected, 0)
+        navigationItem.leftBarButtonItem = closeSelfButton
     }
     
     override func loadView() {
@@ -122,15 +141,16 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     
     /// one time called
     private func setupScreenWithSelectingLimit(_ selectingLimit: Int) {
-        vcView.analyzesLeftLabel.text = String(format: TextConstants.instapickSelectionAnalyzesLeft, selectingLimit)
+        let formatedAnalyzesLeft = (selectingLimit == maxSelectingLimit) ?
+            TextConstants.instapickSelectionAnalyzesLeftMax :
+            TextConstants.instapickSelectionAnalyzesLeft
+        vcView.analyzesLeftLabel.text = String(format: formatedAnalyzesLeft, selectingLimit)
         
         let allPhotosDataSource = AllPhotosSelectionDataSource(pageSize: selectionControllerPageSize)
         let allPhotosVC = PhotoSelectionController(title: TextConstants.actionSheetPhotos,
                                                    selectingLimit: selectingLimit,
                                                    delegate: self,
                                                    dataSource: allPhotosDataSource)
-        
-        let albumsVC = InstapickAlbumSelectionViewController(title: TextConstants.albumsTitle, delegate: self)
         
         let favoriteDataSource = FavoritePhotosSelectionDataSource(pageSize: selectionControllerPageSize)
         let favoritePhotosVC = PhotoSelectionController(title: TextConstants.homeButtonFavorites,
@@ -204,6 +224,19 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         
         childViewControllers.forEach { $0.removeFromParentVC() }
         add(childController: segmentedViewControllers[selectedIndex])
+        updateLeftBarButtonItem(selectedIndex: selectedIndex)
+    }
+    
+    private func updateLeftBarButtonItem(selectedIndex: Int) {
+        /// optimized for reading, not performance
+        let isAlbumsTabOpened = (selectedIndex == albumsTabIndex)
+        let isAnyAlbumOpened = (segmentedViewControllers[albumsTabIndex] != albumsVC)
+        
+        if isAlbumsTabOpened, isAnyAlbumOpened {
+            navigationItem.leftBarButtonItem = closeAlbumButton
+        } else {
+            navigationItem.leftBarButtonItem = closeSelfButton
+        }
     }
     
     private func add(childController: UIViewController) {
@@ -212,6 +245,17 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         vcView.containerView.addSubview(childController.view)
         childController.didMove(toParentViewController: self)
+    }
+    
+    
+    @objc private func onCloseAlbum() {
+        replaceControllerAtAlbumsTab(with: albumsVC)
+    }
+    
+    private func replaceControllerAtAlbumsTab(with controller: UIViewController) {
+        segmentedViewControllers.remove(at: albumsTabIndex)
+        segmentedViewControllers.insert(controller, at: albumsTabIndex)
+        selectController(at: albumsTabIndex)
     }
 }
 
@@ -267,7 +311,7 @@ extension InstaPickSelectionSegmentedController: InstapickAlbumSelectionDelegate
                                                            delegate: self,
                                                            dataSource: dataSource)
         delegates.add(albumSelectionVC)
-        navigationController?.pushViewController(albumSelectionVC, animated: true)
+        replaceControllerAtAlbumsTab(with: albumSelectionVC)
     }
 }
 
