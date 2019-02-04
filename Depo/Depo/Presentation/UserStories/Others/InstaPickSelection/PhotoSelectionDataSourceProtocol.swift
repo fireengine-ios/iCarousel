@@ -23,7 +23,16 @@ final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
     }
     
     func getNext(handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
-        photoService.loadPhotos(isFavorites: false, page: paginationPage, size: paginationPageSize) { [weak self] result in
+        let filteredItems = [SearchItemResponse]()
+        
+        loadNext(filteredItems: filteredItems, handler: handler)
+    }
+    
+    private func loadNext(filteredItems: [SearchItemResponse], handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
+        
+        photoService.loadPhotos(isFavorites: false,
+                                page: paginationPage,
+                                size: paginationPageSize) { [weak self] result in
             guard let `self` = self else {
                 return
             }
@@ -31,8 +40,27 @@ final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
             switch result {
             case .success(let items):
                 self.paginationPage += 1
-                self.isPaginationFinished = (items.count < self.paginationPageSize)
-                handler(ResponseResult.success(items))
+                
+                if items.isEmpty {
+                    self.isPaginationFinished = true
+                    handler(ResponseResult.success(filteredItems))
+                    return
+                }
+                
+                var filteredItems = filteredItems
+                /// filter missing dates
+                filteredItems.append(contentsOf: items.filter { $0.metadata?.smalURl != nil })
+                
+                let isSomethingFiltered = (filteredItems.count != items.count)
+                let isEnoughForPaginationSize = (filteredItems.count >= self.paginationPageSize)
+                
+                if isSomethingFiltered, isEnoughForPaginationSize {
+                    self.loadNext(filteredItems: filteredItems, handler: handler)
+                } else {
+                    self.isPaginationFinished = (filteredItems.count < self.paginationPageSize)
+                    handler(ResponseResult.success(filteredItems))
+                }
+                
             case .failed(let error):
                 handler(ResponseResult.failed(error))
             }
@@ -72,7 +100,6 @@ final class AlbumPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
             
             switch result {
             case .success(let items):
-                var filteredItems = filteredItems
                 self.paginationPage += 1
                 
                 if items.isEmpty {
@@ -81,9 +108,17 @@ final class AlbumPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
                     return
                 }
                 
-                filteredItems.append(contentsOf: items.filter({$0.contentType?.hasPrefix("image") ?? false}))
+                var filteredItems = filteredItems
+                /// filter missing dates and leave only images
+                filteredItems.append(contentsOf: items.filter {
+                    $0.metadata?.smalURl != nil &&
+                    $0.contentType?.hasPrefix("image") ?? false
+                })
                 
-                if filteredItems.count != items.count, filteredItems.count < self.paginationPageSize {
+                let isSomethingFiltered = (filteredItems.count != items.count)
+                let isEnoughForPaginationSize = (filteredItems.count >= self.paginationPageSize)
+                
+                if isSomethingFiltered, isEnoughForPaginationSize {
                     self.loadNext(filteredItems: filteredItems, handler: handler)
                 } else {
                     self.isPaginationFinished = (filteredItems.count < self.paginationPageSize)
@@ -127,7 +162,6 @@ final class FavoritePhotosSelectionDataSource: PhotoSelectionDataSourceProtocol 
             
             switch result {
             case .success(let items):
-                var filteredItems = filteredItems
                 self.paginationPage += 1
                 
                 if items.isEmpty {
@@ -136,9 +170,17 @@ final class FavoritePhotosSelectionDataSource: PhotoSelectionDataSourceProtocol 
                     return
                 }
                 
-                filteredItems.append(contentsOf: items.filter({$0.contentType?.hasPrefix("image") ?? false}))
+                var filteredItems = filteredItems
+                /// filter missing dates and leave only images
+                filteredItems.append(contentsOf: items.filter {
+                    $0.metadata?.smalURl != nil &&
+                    $0.contentType?.hasPrefix("image") ?? false
+                })
                 
-                if filteredItems.count < self.paginationPageSize {
+                let isSomethingFiltered = (filteredItems.count != items.count)
+                let isEnoughForPaginationSize = (filteredItems.count >= self.paginationPageSize)
+                
+                if isSomethingFiltered, isEnoughForPaginationSize {
                     self.loadNext(filteredItems: filteredItems, handler: handler)
                 } else {
                     self.isPaginationFinished = (filteredItems.count < self.paginationPageSize)
