@@ -76,7 +76,7 @@
                         <action selector="onBottomButtonTap:" destination="976-Lr-wiL" eventType="touchUpInside" id="Sxv-n4-5Jf"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKd-gU-Tzr">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKd-gU-Tzr">
                     <rect key="frame" x="14" y="99" width="491" height="44"/>
                     <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="6"/>
                     <connections>
