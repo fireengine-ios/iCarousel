@@ -183,9 +183,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
         if accountType != .turkcell {
             view?.showInAppPolicy()
         }
-        if accountType == .all {
-            view?.showRestoreButton()
-        }
         
         interactor.getAvailableOffers(with: accountType)
     }

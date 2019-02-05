@@ -78,6 +78,18 @@ extension MyStorageViewController: MyStorageViewInput {
     func reloadCollectionView() {
         collectionView.reloadData()
     }
+    
+    func showRestoreButton() {
+        //IF THE USER NON CELL USER
+        let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
+        moreButton.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem = moreButton
+    }
+    
+    @objc private func restorePurhases() {
+        startActivityIndicator()
+        output.restorePurchasesPressed()
+    }
 }
 
 //MARK: UICollectionViewDataSource

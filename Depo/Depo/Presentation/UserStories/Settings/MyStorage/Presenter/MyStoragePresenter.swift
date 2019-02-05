@@ -35,6 +35,14 @@ final class MyStoragePresenter {
         self.title = title
     }
     
+    private func refreshPage() {
+        allOffers = []
+        displayableOffers = []
+        
+        view?.startActivityIndicator()
+        interactor.getAllOffers(with: accountType)
+    }
+    
     //MARK: - UtilityMethods
     private func calculateProgress() {
         let usedStorageSize = usage.usedBytes ?? 0
@@ -81,6 +89,10 @@ extension MyStoragePresenter: MyStorageViewOutput {
             router?.showCancelOfferApple()
         }
     }
+    
+    func restorePurchasesPressed() {
+        interactor.restorePurchases()
+    }
 }
 
 //MARK: - MyStorageInteractorOutput
@@ -125,5 +137,10 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     func failed(with error: String) {
         view?.stopActivityIndicator()
         router?.display(error: error)
+    }
+    
+    func refreshPackages() {
+        view?.stopActivityIndicator()
+        refreshPage()
     }
 }
