@@ -5,7 +5,7 @@
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Bu albümü sildiğinde albümün içindeki dosyalar lifebox'ından kalmaya devam edecek. Dosyalarına Fotoğraflar sekmesinden ulaşabilirsin. Silmek istdiğine emin misin?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Bu dosyayı silersen, lifebox'ından da tamamen silinir. Silmek istediğine emin misin?";
 "Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Bu dosyaları silersen, lifebox'ından da tamamen silinir. Silmek istediğine emin misin?";
-"Purchase" = "Satınalma";
+"Purchase" = "Satın Al";
 "Packages" = "Paketler";
 "Verification code is blocked.\nPlease request a new code" = "Doğrulama kodu bloke durumda. Lütfen yeni bir kod talep et.";
 "Verification code is invalid.\nPlease try again" = "Doğrulama kodu geçersiz. Lütfen tekrar dene.";
@@ -65,7 +65,7 @@
 "%.2f %@ / month" = "%.2f %@ / Ay";
 "Settings" = "Ayarlar";
 "OK" = "Tamam";
-"Buy" = "Satınalma";
+"Buy" = "Satın Al";
 "Cancel" = "Vazgeç";
 "Info" = "Bilgi";
 "You can open settings and cancel subscption." = "Paketini iptal etmek için iTunes’u ziyaret edebilirsin.";
@@ -381,7 +381,7 @@
 "Enter the verification code" = "Doğrulama kodunu girin";
 "Verify Your Email" = "e-posta adresini doğrula";
 "Verify Your Phone Number" = "Telefon Numaranızı Doğrulayın";
-"Verify Your Purchase" = "Satınalma İşlemini Doğrulayın";
+"Verify Your Purchase" = "Satın alma işlemini doğrulayın";
 " You have to fill in a password" = "Şifreni girmen gerekiyor.";
 "Please enter valid Email" = "Lütfen geçerli e-posta adresi girin";
 " You have to fill in your mail" = "E-postanı girmen gerekiyor.";
@@ -507,7 +507,7 @@
 "Destination folder can not be the same folder" = "Hedef klasör aynı klasör olamaz";
 "Google Play Store" = "Google Play Store";
 "AppStore" = "AppStore";
-"Successful purchase." = "Satınalma başarılı.";
+"Successful purchase." = "Satın alma işlemi başarılı";
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Geçersiz satın alma. AppStore, verilen bilgiler doğrultusunda satın alım işlemini doğrulamıyor.";
 "A temporary error has occurred due to technical reasons." = "Teknik sebeplerden dolayı geçici bir hata meydana geldi.";
 "Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Bu satın alıma ilişkin abonelik hali hazırda başka bir lifebox kullanıcısı için aktifleştirilmiş durumda. Farklı lifebox hesaplarının aynı Apple veya Google ID ile kullanılmasının bu tarz durumlara yol açabileceğini unutmayın.";
@@ -762,3 +762,78 @@
 "no_for_upgrade" = "Hayır, Devam Et";
 "uploded_photos_high_quality" = "lifebox'a standart kullanıcı olarak giriş yapıyorsun. Hesabını Premium'a yükseltmezsen içeriklerin orijinal olarak saklanmaya devam edemeyecek. Orijinal kalitede saklanabilmesi için Premium olup ayrıcalıklardan faydalanmak ister misin?";
 "NSFaceIDUsageDescription" = "Uygulamamız güvenliğin için Face ID özelliğini kullanmanı sağlayabilir";
+
+/*AnalyzeHistoryController*/
+"InstaPick" = "PhotoPick";
+"package_albanian_cancel_text" = "ALB kota iptal text'i";
+"feature_albanian_cancel_text" = "ALBtelecom kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
+"no_analyses_left_title" = "Analiz hakkın kalmadı";
+"no_analyses_left_message" = "Hakkın bitti diye üzülme, yeni fotoğraflar sorgulamak için hemen paket satın alabilirsin!";
+"no_analyses_left_button" = "PhotoPick Al";
+"analyze_history_empty_title" = "Henüz fotoğraflarını analiz etmeye başlamadın mı?";
+"analyze_history_empty_subtitle" = "Hangi fotoğrafının daha yüksek puan alacağını öğrenmek ve sosyal medyada paylaşmak için hemen analize başla";
+"analyze_history_analyze_left" = "Analiz Hakkı";
+"analyze_history_analyze_count" = "%1$d / %2$d";
+"analyze_with_instapick" = "PhotoPick ile Analiz Et!";
+"analyze_history_photos_count" = "%d Fotoğraf";
+"analyze_history_start_here" = "Hemen\nBaşla";
+"analyze_confirm_delete_title" = "Silmek istediğine emin misin?";
+"analyze_confirm_delete_text" = "Seçtiklerin analiz geçmişinden silinecek.";
+"analyze_confirm_delete_yes" = "Evet";
+"analyze_confirm_delete_no" = "Hayır";
+
+/*InstaPick three dots*/
+"new_insta_pick" = "Yeni PhotoPick";
+
+/*InstaPickCard*/
+"used_before_title_label" = "PhotoPick ile daha çok beğeni!";
+"no_used_before_title_label" = "PhotoPick ile Analiz Et!";
+"no_analysis_title_label" = "Daha fazla PhotoPick!";
+"used_before_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et!";
+"no_used_before_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et!";
+"no_analysis_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et!";
+"instapick_button_has_analysis" = "Hadi, Başla!";
+
+/*InstaPickDetailViewController*/
+"you_are_ready_to_share" = "Fotoğrafın paylaşıma hazır!";
+"instaPick_analysis_left" = "Analiz hakkı: %1$d / %2$d";
+"engage_with_more_hastags" = "Daha fazla #hashtag ile etkileşimini artır!";
+"copy_hashtags_to_clipboard" = "#hashtag'leri kopyala";
+"share_on_social_media" = "Paylaş!";
+"picked" = "FAVORİ!";
+"insta_pick_analyzing_bottom" = "Fotoğraflarını analiz ederken zamanın tadını çıkar! 😊";
+"insta_pick_analyzing_0" = "En çok beğeni alacağın fotoğrafı arıyoruz!";
+"insta_pick_analyzing_1" = "Çok güzel fotoğraflar seçmişsin!";
+"insta_pick_analyzing_2" = "Arkadaşların ile sevdiğin anları paylaşman ne kadar güzel!";
+"insta_pick_analyzing_3" = "Hayat yaşadığın anlardan ibaret!";
+"insta_pick_analyzing_4" = "Harika bir fotoğraf albümün var!";
+
+/*InstaPickPopUp*/
+"dont_show_this_again" = "Bir daha gösterme";
+"instapick_analyze" = "PhotoPick ile Analiz Et!";
+"connected_account" = "Bağladığın Instagram hesabınla daha iyi sonuçlar alırsın!";
+"instapick_description" = "Instagram hesabını bağlamayı tercih edersen, her yeni PhotoPick sorgunda hesabına özel analiz yaparak kişiselleştirilmiş, çok daha iyi bir deneyim sunabileceğiz.";
+"connected_with_instagram" = "Instagram'la Bağlan";
+"connected_with_instagram_name" = "Instagram'la Bağlan :";
+"continue_without_connecting" = "Bağlamadan devam et";
+"connected_accounts" = "Bağlı Hesaplar";
+"analyze_history_free_text" = "Sınırlı Bir Süre Ücretsiz!";
+
+/*InstapickUpgradePopup*/
+"instapick_upgrade_popup_text" = "PhotoPick paketi almak için uygulamanı güncellemen gerekiyor.";
+"instapick_upgrade_popup_button" = "Yükselt";
+"instapick_upgrade_popup_no" = "Vazgeç";
+"instapick_analysis_left" = "Analiz hakkı: %1$d / %2$d";
+"instapick_unlimited_analysis" = "Sınırlı Bir Süre Ücretsiz!";
+"Facebook" = "Facebook";
+"Dropbox" = "Dropbox";
+"Instagram" = "Instagram";
+"connected_as_format" = "Bağlı hesap: @%@";
+"instagram_remove_connection_warning_title" = "Instagram bağlantını kaldırmak üzeresin";
+"instagram_remove_connection_warning_message" = "Instagram ile olan bağlantını kaldırmak istediğine emin misin?\n\n";
+"instapick_selection_photos_selected" = "Seçili Fotoğraf (%d)";
+"instapick_selection_analyzes_left" = "Sadece %d analiz hakkın kaldı";
+"loading" = "Yükleniyor...";
+"there_are_no_photos" = "Hiç fotoğraf yok";
+"there_are_no_albums" = "Hiç albüm yok";
+"instapick_selection_analyzes_left_max" = "%d fotoğraf seçtin\n(1 sorguda seçebileceğin en yüksek sayı)";
