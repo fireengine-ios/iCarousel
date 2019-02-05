@@ -219,9 +219,7 @@ final class PackageService {
     func getPriceInfo(for offer: Any, accountType: AccountType) -> String {
         
         let fullPrice: String
-        if let iapProductId = getAppleIds(for: [offer]).first,
-            let product = iapManager.product(for: iapProductId),
-            Float(product.localizedPrice) ?? 0 > 0 {
+        if let iapProductId = getAppleIds(for: [offer]).first, let product = iapManager.product(for: iapProductId), !product.isFree {
             
             let price = product.localizedPrice
             if #available(iOS 11.2, *) {
