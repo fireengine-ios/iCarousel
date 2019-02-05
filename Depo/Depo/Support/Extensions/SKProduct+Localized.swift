@@ -16,4 +16,8 @@ extension SKProduct {
         numberFormatter.locale = priceLocale
         return numberFormatter.string(from: price) ?? ""
     }
+    
+    var isFree: Bool {
+        return price == .zero
+    }
 }
