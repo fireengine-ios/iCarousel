@@ -446,8 +446,9 @@ extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
             if $0.rank == $1.rank {
                 return $0.score < $1.score
             }
-            return $0.rank < $1.rank }) else {
-                return
+            return $0.rank < $1.rank
+        }) else {
+            return
         }
         dataSource.insertNewItems([mainAnalyse])
     }
