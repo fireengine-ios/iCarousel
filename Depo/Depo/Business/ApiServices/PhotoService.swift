@@ -9,7 +9,7 @@ final class PhotoService {
         
         let requestParam = SearchByFieldParameters(fieldName: isFavorites ? .favorite : .content_type,
                                                    fieldValue: isFavorites ? .favorite : .image,
-                                                   sortBy: .date,
+                                                   sortBy: .imageDate,
                                                    sortOrder: .desc,
                                                    page: page,
                                                    size: size,
