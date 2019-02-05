@@ -129,9 +129,9 @@ final class PackageService {
     
     private func getOfferPrice(for offer: Any) -> String? {
         var price: String?
-        if let offer = offer as? PackageModelResponse, let priceFloat = offer.price {
+        if let offer = offer as? PackageModelResponse, let priceFloat = offer.price, priceFloat > 0 {
             price = String(priceFloat)
-        } else if let offer = offer as? SubscriptionPlanBaseResponse, let priceFloat = offer.subscriptionPlanPrice {
+        } else if let offer = offer as? SubscriptionPlanBaseResponse, let priceFloat = offer.subscriptionPlanPrice, priceFloat > 0 {
             price = String(priceFloat)
         }
         return price
@@ -219,7 +219,10 @@ final class PackageService {
     func getPriceInfo(for offer: Any, accountType: AccountType) -> String {
         
         let fullPrice: String
-        if let iapProductId = getAppleIds(for: [offer]).first, let product = iapManager.product(for: iapProductId) {
+        if let iapProductId = getAppleIds(for: [offer]).first,
+            let product = iapManager.product(for: iapProductId),
+            Float(product.localizedPrice) ?? 0 > 0 {
+            
             let price = product.localizedPrice
             if #available(iOS 11.2, *) {
                 guard let subscriptionPeriod = product.subscriptionPeriod else {
