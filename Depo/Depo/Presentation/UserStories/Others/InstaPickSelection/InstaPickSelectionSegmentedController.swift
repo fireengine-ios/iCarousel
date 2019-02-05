@@ -324,7 +324,7 @@ extension InstaPickSelectionSegmentedController {
         let navigationTextColor = UIColor.white
         let navigationBar = navVC.navigationBar
         
-        let textAttributes: [NSAttributedString.Key: AnyHashable] = [
+        let textAttributes: [NSAttributedStringKey: AnyHashable] = [
             .foregroundColor: navigationTextColor,
             .font: UIFont.TurkcellSaturaDemFont(size: 19)
         ]
