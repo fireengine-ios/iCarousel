@@ -44,7 +44,10 @@ final class PhotoCell: UICollectionViewCell {
     private var cellImageManager: CellImageManager?
     private var uuid: String?
     
-    //private var representedAssetIdentifier = ""
+    
+    var isNeedToUpdate: Bool {
+        return imageView.image == nil
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -196,7 +199,6 @@ final class CollectionSpinnerFooter: UICollectionReusableView {
     
     func startSpinner() {
         activityIndicator.startAnimating()
-        isHidden = false
     }
     
     func stopSpinner() {
