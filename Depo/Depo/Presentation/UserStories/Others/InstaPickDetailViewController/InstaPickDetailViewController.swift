@@ -199,7 +199,7 @@ final class InstaPickDetailViewController: UIViewController {
             String(format: TextConstants.instaPickLeftCountLabel, analyzesCount.left, analyzesCount.total)
         
         ///if left count is 0 we seek ":"(not 0 because of RTL language) and draw in red
-        if analyzesCount.left == 0, let location = text.firstIndex(of: ":"), !analyzesCount.isFree {
+        if analyzesCount.left == 0, let location = text.index(of: ":"), !analyzesCount.isFree {
             let attributedString = NSMutableAttributedString(string: text, attributes: [
                 .font : UIFont.TurkcellSaturaDemFont(size: Device.isIpad ? 24 : 18),
                 .foregroundColor : ColorConstants.textGrayColor,
