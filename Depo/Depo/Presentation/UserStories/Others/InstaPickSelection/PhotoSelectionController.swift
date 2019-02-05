@@ -102,7 +102,9 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         
         view.addSubview(collectionView)
         
-        /// don't need to call loadMore() bcz it is called in reachability.whenReachable
+        /// will call loadMore() also in reachability.whenReachable
+        loadMore()
+        loadingMoreFooterView?.startSpinner()
         setupReachability()
     }
     
@@ -123,7 +125,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         }
         
         reachability.whenReachable = { [weak self] reachability in
-            guard let `self` = self else {
+            guard let `self` = self, !self.isLoadingMoreFinished else {
                 return
             }
             self.loadMore()
@@ -138,23 +140,13 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
                 let item = self.photos[indexPath.row]
                 //cell.update(for: selectionState)
                 cell.setup(by: item)
-
             }
-        }
-        
-        reachability.whenUnreachable = { [weak self] reachability in
-            guard let `self` = self else {
-                return
-            }
-            self.loadMore()
-            self.loadingMoreFooterView?.startSpinner()
         }
         
         do {
             try reachability.startNotifier()
         } catch {
             assertionFailure("can't start reachability notifier: \(error.localizedDescription)")
-            print("can't start reachability notifier: \(error.localizedDescription)")
         }
     }
     
