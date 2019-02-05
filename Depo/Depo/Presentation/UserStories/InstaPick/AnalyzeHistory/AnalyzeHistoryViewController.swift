@@ -142,19 +142,16 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     // MARK: - Actions
     
     @IBAction private func newAnalysisAction(_ sender: Any) {
-        showSpiner()
-    
         if let count = dataSource.analysisCount?.left, count > 0 {
+            startActivityIndicator()
             instapickRoutingService.getViewController(success: { [weak self] controller in
-                self?.hideSpiner()
-                
+                self?.stopActivityIndicator()
+
                 if controller is InstapickPopUpController, let vc = self?.router.createRootNavigationControllerWithModalStyle(controller: controller) {
                     self?.router.presentViewController(controller: vc)
                 }
-            }, error: { errorResponse in
-                DispatchQueue.toMain {
-                    UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
-                }
+            }, error: { [weak self] errorResponse in
+                self?.showError(message: errorResponse.localizedDescription)
             })
         } else {
             let popup = PopUpController.with(title: TextConstants.analyzeHistoryPopupTitle,
@@ -162,12 +159,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                                          image: .custom(UIImage(named: "popup_info")),
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.analyzeHistoryPopupButton,
-                                         firstAction: { [weak self] controller in
-                                            self?.hideSpiner()
-                                            controller.close()
-                                         },
                                          secondAction: { [weak self] controller in
-                                            self?.hideSpiner()
                                             controller.close {
                                                 self?.onPurchase()
                                             }
