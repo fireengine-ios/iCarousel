@@ -259,17 +259,18 @@ final class InstaPickDetailViewController: UIViewController {
     }
     
     private func openImage() {
-        guard let selectedPhoto = selectedPhoto, selectedPhoto.fileInfo?.uuid != nil else {
-            ///if selected photo was deleted
+        guard
+            let selectedPhoto = selectedPhoto, selectedPhoto.fileInfo?.uuid != nil,
+            let view = instaPickPhotoViews.first(where: { $0.restorationIdentifier == PhotoViewType.bigView.rawValue }),
+            let image = view.getImage(),
+            image.size != .zero
+        else {
+            ///if selected photo was deleted/nil/zero size
             return
         }
         
         let vc = PVViewerController.initFromNib()
-        if let view = instaPickPhotoViews.first(where: { $0.restorationIdentifier == PhotoViewType.bigView.rawValue }),
-            let image = view.getImage() {
-            
-            vc.image = image
-        }
+        vc.image = image
         
         let nController = NavigationController(rootViewController: vc)
         self.present(nController, animated: true, completion: nil) ///routerVC not work
