@@ -803,9 +803,13 @@
 "used_before_title_label" = "PhotoPick to get bunch of likes!";
 "no_used_before_title_label" = "Analyze with PhotoPick!";
 "no_analysis_title_label" = "Get more PhotoPick!";
+"free_trial_title_label" = "Get more PhotoPick!";
+
 "used_before_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes!";
 "no_used_before_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes!";
 "no_analysis_detail_label" = "Let us analyze your selected photos and suggest you which one to share!";
+"free_trial_detail_label" = "Let us analyze your selected photos and suggest you which one to share!";
+
 "instapick_button_has_analysis" = "Let’s Start!";
 
 /*InstaPickDetailViewController*/
