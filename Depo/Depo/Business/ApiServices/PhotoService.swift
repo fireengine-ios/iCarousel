@@ -26,7 +26,6 @@ final class PhotoService {
             
             handler(.success(result))
         }, fail: { errorResponse in
-            assertionFailure(errorResponse.localizedDescription)
             handler(.failed(errorResponse))
         })
     }
@@ -50,7 +49,6 @@ final class PhotoService {
             
             handler(.success(result))
         }, fail: { errorResponse in
-            assertionFailure(errorResponse.localizedDescription)
             handler(.failed(errorResponse))
         })
     }
