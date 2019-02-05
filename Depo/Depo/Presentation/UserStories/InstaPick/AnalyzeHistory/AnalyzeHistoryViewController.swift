@@ -450,6 +450,13 @@ extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
         }) else {
             return
         }
-        dataSource.insertNewItems([mainAnalyse])
+        let insertAnalyse = InstapickAnalyze(requestIdentifier: mainAnalyse.requestIdentifier,
+                                             rank: mainAnalyse.rank,
+                                             hashTags: mainAnalyse.hashTags,
+                                             fileInfo: mainAnalyse.fileInfo,
+                                             photoCount: analyses.count,
+                                             startedDate: mainAnalyse.startedDate,
+                                             score: mainAnalyse.score)
+        dataSource.insertNewItems([insertAnalyse])
     }
 }

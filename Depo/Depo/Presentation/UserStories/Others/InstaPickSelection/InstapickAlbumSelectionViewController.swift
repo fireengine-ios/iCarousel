@@ -15,14 +15,15 @@ final class InstapickAlbumSelectionViewController: UIViewController, ErrorPresen
         return collectionView
     }()
     
-    private let emptyMessageLabel: UILabel = {
-        let label = UILabel()
+    private let emptyMessageLabel: InsetsLabel = {
+        let label = InsetsLabel()
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = ColorConstants.textGrayColor
         label.font = UIFont.TurkcellSaturaRegFont(size: 14)
         label.text = TextConstants.loading
+        label.insets = UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30)
         return label
     }()
     
