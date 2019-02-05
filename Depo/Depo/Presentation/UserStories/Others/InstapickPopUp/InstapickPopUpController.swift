@@ -43,7 +43,7 @@ final class InstapickPopUpController: UIViewController {
     @IBOutlet private weak var containerView: UIView! {
         didSet {
             containerView.layer.masksToBounds = true
-            containerView.layer.cornerRadius = Device.isIpad ? 10 : 2
+            containerView.layer.cornerRadius = Device.isIpad ? 10 : 5
         }
     }
     
