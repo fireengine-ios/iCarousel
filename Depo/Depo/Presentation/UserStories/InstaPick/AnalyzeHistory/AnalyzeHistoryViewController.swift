@@ -24,6 +24,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private let refresher = UIRefreshControl()
     private var page = 0
     private let pageSize = Device.isIpad ? 50 : 30
+    private var reloadingAnalyses = false
     
     private var navBarConfigurator = NavigationBarConfigurator()
     private lazy var cancelSelectionButton: UIBarButtonItem = {
@@ -230,6 +231,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         }
         
         startActivityIndicator()
+        reloadingAnalyses = true
         
         reloadCards { [weak self] in
             guard let `self` = self else {
@@ -270,15 +272,18 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 return
             }
             
+            self.reloadingAnalyses = false
+            
             switch result {
             case .success(let history):
                 DispatchQueue.main.async {
-                    if self.page == 0 {
+                    self.page += 1
+                    
+                    if self.page == 1 {
                         self.dataSource.reloadHistoryItems(history)
                     } else {
                         self.dataSource.appendHistoryItems(history)
                     }
-                    self.page += 1
                 
                     if self.dataSource.isEmpty {
                         self.displayManager.applyConfiguration(.empty)
@@ -401,7 +406,9 @@ extension AnalyzeHistoryViewController: ActivityIndicator {
 
 extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
     func needLoadNextHistoryPage() {
-        loadNextHistoryPage()
+        if !reloadingAnalyses {
+            loadNextHistoryPage()
+        }
     }
     
     func onLongPressInCell() {
