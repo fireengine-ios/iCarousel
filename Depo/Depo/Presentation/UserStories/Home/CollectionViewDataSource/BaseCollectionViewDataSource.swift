@@ -191,6 +191,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             let index = popUps.index(of: instaPickCard) else {
             return
         }
+
         let indexPath = IndexPath(item: index, section: 0)
         collectionView.performBatchUpdates({ [weak self] in
             self?.collectionView.reloadItems(at: [indexPath])
