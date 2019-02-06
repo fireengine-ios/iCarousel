@@ -26,6 +26,8 @@ final class MyStorageViewController: BaseViewController {
         }
     }
     
+    private lazy var restoreButton = UIBarButtonItem(image: UIImage(named: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
+    
     // MARK: - View lifecycle
 
     override func viewDidLoad() {
@@ -81,9 +83,7 @@ extension MyStorageViewController: MyStorageViewInput {
     
     func showRestoreButton() {
         //IF THE USER NON CELL USER
-        let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
-        moreButton.tintColor = UIColor.white
-        navigationItem.rightBarButtonItem = moreButton
+        navigationItem.rightBarButtonItem = restoreButton
     }
     
     @objc private func restorePurhases() {

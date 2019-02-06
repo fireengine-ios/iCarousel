@@ -158,28 +158,29 @@ extension MyStorageInteractor: MyStorageInteractorInput {
             return
         }
         
-        let group = DispatchGroup()
-        
         //just sending reciept
-        group.enter()
-        offersService.validateApplePurchase(with: receipt, productId: nil, success: { response in
-            group.leave()
+        offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
                 return
             }
             if !(status == .restored || status == .success) {
                 debugLog("validateRestorePurchaseFailed: \(status.description)")
+                
+                DispatchQueue.main.async {
+                    self?.output.failed(with: ErrorResponse.string(status.description))
+                }
+            } else {
+                DispatchQueue.toMain {
+                    self?.output.refreshPackages()
+                }
             }
-        }, fail: { errorResponse in
+        }, fail: { [weak self] errorResponse in
             debugLog("validateRestorePurchaseFailed: \(errorResponse.description)")
-            group.leave()
-        })
-        
-        group.notify(queue: .main) { [weak self] in
+            
             DispatchQueue.toMain {
-                self?.output.refreshPackages()
+                self?.output.failed(with: errorResponse)
             }
-        }
+        })
     }
     
     func trackPackageClick(plan packages: SubscriptionPlan, planIndex: Int) {
