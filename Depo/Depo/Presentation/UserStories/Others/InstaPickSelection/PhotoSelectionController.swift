@@ -1,4 +1,5 @@
 import UIKit
+import Reachability
 
 protocol PhotoSelectionControllerDelegate: class {
     var selectionState: PhotoSelectionState { get }
@@ -32,6 +33,8 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     private let cellId = String(describing: PhotoCell.self)
     private let footerId = String(describing: CollectionSpinnerFooter.self)
     
+    private let reachabilityService = Reachability()
+    
     private lazy var collectionView: UICollectionView = {
         let isIpad = Device.isIpad
         let layout = UICollectionViewFlowLayout()
@@ -48,8 +51,10 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         collectionView.alwaysBounceVertical = true
         collectionView.allowsMultipleSelection = true
         
-        let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: transparentGradientViewHeight, right: 0)
+        if self.delegate != nil {
+            let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: transparentGradientViewHeight, right: 0)
+        }
         
         collectionView.backgroundView = emptyMessageLabel
         emptyMessageLabel.frame = collectionView.bounds
@@ -60,14 +65,15 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         return collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: photosSectionIndex)) as? CollectionSpinnerFooter
     }()
     
-    private let emptyMessageLabel: UILabel = {
-        let label = UILabel()
+    private let emptyMessageLabel: InsetsLabel = {
+        let label = InsetsLabel()
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = ColorConstants.textGrayColor
         label.font = UIFont.TurkcellSaturaRegFont(size: 14)
         label.text = TextConstants.loading
+        label.insets = UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30)
         return label
     }()
     
@@ -81,18 +87,26 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     
     /// will never be called
     required init?(coder aDecoder: NSCoder) {
+        assertionFailure()
         /// set any PhotoSelectionDataSourceProtocol
         self.dataSource = AllPhotosSelectionDataSource(pageSize: 100)
         super.init(coder: aDecoder)
+    }
+    
+    deinit {
+        reachabilityService?.stopNotifier()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(collectionView)
+        
+        /// will call loadMore() also in reachability.whenReachable
         loadMore()
+        loadingMoreFooterView?.startSpinner()
+        setupReachability()
     }
-
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -102,6 +116,38 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    private func setupReachability() {
+        guard let reachability = reachabilityService else {
+            assertionFailure()
+            return
+        }
+        
+        reachability.whenReachable = { [weak self] reachability in
+            guard let `self` = self, !self.isLoadingMoreFinished else {
+                return
+            }
+            self.loadMore()
+            self.loadingMoreFooterView?.startSpinner()
+            
+            /// reload photos
+            for indexPath in self.collectionView.indexPathsForVisibleItems {
+                guard
+                    let cell = self.collectionView.cellForItem(at: indexPath) as? PhotoCell,
+                    cell.isNeedToUpdate
+                    else { return }
+                let item = self.photos[indexPath.row]
+                //cell.update(for: selectionState)
+                cell.setup(by: item)
+            }
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            assertionFailure("can't start reachability notifier: \(error.localizedDescription)")
+        }
     }
     
     private func updateItemSize() {
@@ -119,12 +165,13 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     }
     
     private func loadMore() {
-        if isLoadingMore, isLoadingMoreFinished {
-            assertionFailure()
+        if isLoadingMore || isLoadingMoreFinished {
             return
         }
         
         isLoadingMore = true
+        /// to update footer spinner
+        updateLoadingMoreFooterViewLayout()
         
         self.dataSource.getNext { [weak self] result in
             guard let `self` = self else {
@@ -162,15 +209,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
                 
                 if isLoadingMoreFinished {
                     self.isLoadingMoreFinished = true
-                    
-                    /// to hide footer view by func referenceSizeForFooterInSection
-                    self.collectionView.performBatchUpdates({
-                        self.collectionView.collectionViewLayout.invalidateLayout()
-                    }, completion: nil)
-                    
-                    /// just in case stop animation.
-                    /// don't forget to start animation if need (for pullToRefresh)
-                    self.loadingMoreFooterView?.stopSpinner()
+                    self.hideFooterSpinner()
                     
                     /// if we don't have any item in collection
                     if self.photos.isEmpty {
@@ -179,9 +218,31 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
                 }
                 
             case .failed(let error):
+                self.isLoadingMore = false
                 self.showErrorAlert(message: error.localizedDescription)
+                self.hideFooterSpinner()
+                
+                /// if we don't have any item in collection
+                if self.photos.isEmpty {
+                    self.emptyMessageLabel.text = error.localizedDescription
+                }
             }
         }
+    }
+    
+    /// to update footer view by func referenceSizeForFooterInSection
+    private func updateLoadingMoreFooterViewLayout() {
+        self.collectionView.performBatchUpdates({
+            self.collectionView.collectionViewLayout.invalidateLayout()
+        }, completion: nil)
+    }
+    
+    private func hideFooterSpinner() {
+        updateLoadingMoreFooterViewLayout()
+        
+        /// just in case stop animation.
+        /// don't forget to start animation if need (for pullToRefresh)
+        self.loadingMoreFooterView?.stopSpinner()
     }
     
     /// need cancel last request if needs pullToRequest before end

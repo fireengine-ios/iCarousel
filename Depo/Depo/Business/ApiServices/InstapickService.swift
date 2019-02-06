@@ -62,7 +62,6 @@ final class InstapickServiceImpl: InstapickService {
                     
                     handler(.success(results))
                 case .failure(let error):
-                    assertionFailure(error.localizedDescription)
                     handler(.failed(error))
                 }
         }
@@ -99,7 +98,6 @@ final class InstapickServiceImpl: InstapickService {
                     
                     handler(.success(results))
                 case .failure(let error):
-                    assertionFailure(error.localizedDescription)
                     handler(.failed(error))
                 }
         }
@@ -123,7 +121,6 @@ final class InstapickServiceImpl: InstapickService {
                     self?.delegates.invoke(invocation: { $0.didRemoveAnalysis() })
                     handler(.success(()))
                 case .failure(let error):
-                    assertionFailure(error.localizedDescription)
                     handler(.failed(error))
                 }
         }
@@ -153,7 +150,6 @@ final class InstapickServiceImpl: InstapickService {
                 
                     handler(.success(results))
                 case .failure(let error):
-                    assertionFailure(error.localizedDescription)
                     handler(.failed(error))
                 }
         }
@@ -212,7 +208,6 @@ final class InstapickServiceImpl: InstapickService {
                 
                     handler(.success(results))
                 case .failure(let error):
-                    assertionFailure(error.localizedDescription)
                     handler(.failed(error))
                 }
         }
@@ -263,7 +258,6 @@ final class InstapickServiceImpl: InstapickService {
                 
                     handler(.success(results))
                 case .failure(let error):
-                    assertionFailure(error.localizedDescription)
                     handler(.failed(error))
                 }
         }

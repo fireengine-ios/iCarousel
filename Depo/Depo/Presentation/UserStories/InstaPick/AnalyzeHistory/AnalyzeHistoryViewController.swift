@@ -442,6 +442,21 @@ extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
     func didRemoveAnalysis() { }
     
     func didFinishAnalysis(_ analyses: [InstapickAnalyze]) {
-        dataSource.insertNewItems(analyses)
+        guard let mainAnalyse = analyses.max(by: {
+            if $0.rank == $1.rank {
+                return $0.score < $1.score
+            }
+            return $0.rank < $1.rank
+        }) else {
+            return
+        }
+        let insertAnalyse = InstapickAnalyze(requestIdentifier: mainAnalyse.requestIdentifier,
+                                             rank: mainAnalyse.rank,
+                                             hashTags: mainAnalyse.hashTags,
+                                             fileInfo: mainAnalyse.fileInfo,
+                                             photoCount: analyses.count,
+                                             startedDate: mainAnalyse.startedDate,
+                                             score: mainAnalyse.score)
+        dataSource.insertNewItems([insertAnalyse])
     }
 }

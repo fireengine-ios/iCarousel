@@ -783,9 +783,9 @@
 "used_before_title_label" = "PhotoPick ile daha çok beğeni!";
 "no_used_before_title_label" = "PhotoPick ile Analiz Et!";
 "no_analysis_title_label" = "Daha fazla PhotoPick!";
-"used_before_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et!";
-"no_used_before_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et!";
-"no_analysis_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et!";
+"used_before_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Kullanmadığın haklar analiz için fotoğraflarını bekliyor😉";
+"no_used_before_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Yoksa henüz denemedin mi?";
+"no_analysis_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Analiz hakkını artırmak için paket almayı unutma😉";
 "instapick_button_has_analysis" = "Hadi, Başla!";
 
 /*InstaPickDetailViewController*/
@@ -815,8 +815,8 @@
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "PhotoPick paketi almak için uygulamanı güncellemen gerekiyor.";
-"instapick_upgrade_popup_button" = "Yükselt";
-"instapick_upgrade_popup_no" = "Vazgeç";
+"instapick_upgrade_popup_button" = "Güncelle";
+"instapick_upgrade_popup_no" = "Hayır";
 "instapick_analysis_left" = "Analiz hakkı: %1$d / %2$d";
 "instapick_unlimited_analysis" = "Sınırlı Bir Süre Ücretsiz!";
 "Facebook" = "Facebook";
