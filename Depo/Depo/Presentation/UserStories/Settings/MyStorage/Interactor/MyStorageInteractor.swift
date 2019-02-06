@@ -113,6 +113,7 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         iapManager.restorePurchases { [weak self] result in
             switch result {
             case .success:
+//                let offers = productIds.map { OfferApple(productId: $0) } ///Backend dont need this for now
                 self?.validateRestorePurchase(offersApple: [])
                 
             case .fail(let error):
