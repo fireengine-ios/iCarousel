@@ -24,7 +24,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private let refresher = UIRefreshControl()
     private var page = 0
     private let pageSize = Device.isIpad ? 50 : 30
-    private var loadNextHistoryPage = false
+    private var isLoadingNextPage = false
     
     private var navBarConfigurator = NavigationBarConfigurator()
     private lazy var cancelSelectionButton: UIBarButtonItem = {
@@ -231,7 +231,6 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         }
         
         startActivityIndicator()
-        loadNextHistoryPage = true
         
         reloadCards { [weak self] in
             guard let `self` = self else {
@@ -267,12 +266,18 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     private func loadNextHistoryPage(completion: BoolHandler? = nil) {
+        if isLoadingNextPage || dataSource.isPaginationDidEnd {
+            return
+        }
+        
+        isLoadingNextPage = true
+        
         instapickService.getAnalyzeHistory(offset: page, limit: pageSize) { [weak self] result in
             guard let `self` = self else {
                 return
             }
             
-            self.loadNextHistoryPage = false
+            self.isLoadingNextPage = false
             
             switch result {
             case .success(let history):
@@ -406,9 +411,7 @@ extension AnalyzeHistoryViewController: ActivityIndicator {
 
 extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
     func needLoadNextHistoryPage() {
-        if !loadNextHistoryPage {
-            loadNextHistoryPage()
-        }
+        loadNextHistoryPage()
     }
     
     func onLongPressInCell() {
