@@ -177,11 +177,11 @@ final class InstaPickCard: BaseView {
         let type: InstaPick.CardType
         if isFree {
             type = .trial
-        } else if !isUsedBefore {
-            type = .noUsedBefore
         } else if analysisLeft == 0 {
             type = .noAnalysis
-        } else {
+        } else if !isUsedBefore {
+            type = .noUsedBefore
+        } else  {
             type = .usedBefore
         }
         cardType = type
@@ -214,12 +214,13 @@ final class InstaPickCard: BaseView {
         self.totalCount = status.total
         self.isFree = status.isFree
         
-        if newCardType != cardType {
+        let isNeedLoad = newCardType != cardType
+        if isNeedLoad {
             configurateCard()
             layoutIfNeeded() /// need to calculate height of card
         }
         
-        return newCardType != cardType
+        return isNeedLoad
     }
     
     //MARK: - Actions
