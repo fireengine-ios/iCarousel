@@ -8,7 +8,7 @@ protocol InstaPickServiceDelegate: class {
 
 /// https://wiki.life.com.by/x/IjAWBQ
 protocol InstapickService: class {
-    var delegates: MulticastDelegate<InstaPickServiceDelegate> {get}
+    var delegates: MulticastDelegate<InstaPickServiceDelegate> { get }
     
     func getThumbnails(handler: @escaping (ResponseResult<[URL]>) -> Void)
     func getAnalyzesCount(handler: @escaping (ResponseResult<InstapickAnalyzesCount>) -> Void)
@@ -19,20 +19,35 @@ protocol InstapickService: class {
     func startAnalyze(ids: [String], popupToDissmiss: UIViewController)
 }
 
-
 final class InstapickServiceImpl {
     
     private enum Keys {
         static let serverValue = "value"
     }
 
-    let sessionManager: SessionManager
+    private let sessionManager: SessionManager
     let delegates = MulticastDelegate<InstaPickServiceDelegate>()
     
     init(sessionManager: SessionManager = SessionManager.customDefault) {
         self.sessionManager = sessionManager
     }
     
+    private func handleBackendErrorIfCan(data: Data?) -> Error? {
+        guard let data = data, let status = JSON(data: data)["status"].string else {
+            return nil
+        }
+        
+        let text: String
+        
+        switch status {
+        case "3104":
+            text = TextConstants.instapickUnderConstruction
+        default:
+            return nil
+        }
+        
+        return CustomErrors.text(text)
+    }
 }
 
 extension InstapickServiceImpl: InstapickService {
@@ -41,7 +56,7 @@ extension InstapickServiceImpl: InstapickService {
         sessionManager
             .request(RouteRequests.Instapick.thumbnails)
             .customValidate()
-            .responseData { response in
+            .responseData { [weak self] response in
                 switch response.result {
                 case .success(let data):
                     guard let jsonArray = JSON(data: data).array else {
@@ -57,7 +72,7 @@ extension InstapickServiceImpl: InstapickService {
                     
                     handler(.success(results))
                 case .failure(let error):
-                    let responseError = InstapickServiceImpl.handleBackendErrorIfCan(data: response.data) ?? error
+                    let responseError = self?.handleBackendErrorIfCan(data: response.data) ?? error
                     handler(.failed(responseError))
                 }
         }
@@ -85,7 +100,7 @@ extension InstapickServiceImpl: InstapickService {
                     
                     handler(.success(results))
                 case .failure(let error):
-                    let responseError = InstapickServiceImpl.handleBackendErrorIfCan(data: response.data) ?? error
+                    let responseError = self?.handleBackendErrorIfCan(data: response.data) ?? error
                     handler(.failed(responseError))
                 }
         }
@@ -104,7 +119,7 @@ extension InstapickServiceImpl: InstapickService {
                     self?.delegates.invoke(invocation: { $0.didRemoveAnalysis() })
                     handler(.success(()))
                 case .failure(let error):
-                    let responseError = InstapickServiceImpl.handleBackendErrorIfCan(data: response.data) ?? error
+                    let responseError = self?.handleBackendErrorIfCan(data: response.data) ?? error
                     handler(.failed(responseError))
                 }
         }
@@ -114,7 +129,7 @@ extension InstapickServiceImpl: InstapickService {
         sessionManager
             .request(RouteRequests.Instapick.analyzesCount)
             .customValidate()
-            .responseData { response in
+            .responseData { [weak self] response in
                 switch response.result {
                 case .success(let data):
                     let json = JSON(data: data)[Keys.serverValue]
@@ -128,7 +143,7 @@ extension InstapickServiceImpl: InstapickService {
                 
                     handler(.success(results))
                 case .failure(let error):
-                    let responseError = InstapickServiceImpl.handleBackendErrorIfCan(data: response.data) ?? error
+                    let responseError = self?.handleBackendErrorIfCan(data: response.data) ?? error
                     handler(.failed(responseError))
                 }
         }
@@ -156,7 +171,7 @@ extension InstapickServiceImpl: InstapickService {
                 
                     handler(.success(results))
                 case .failure(let error):
-                    let responseError = InstapickServiceImpl.handleBackendErrorIfCan(data: response.data) ?? error
+                    let responseError = self?.handleBackendErrorIfCan(data: response.data) ?? error
                     handler(.failed(responseError))
                 }
         }
@@ -182,7 +197,7 @@ extension InstapickServiceImpl: InstapickService {
                 
                     handler(.success(results))
                 case .failure(let error):
-                    let responseError = InstapickServiceImpl.handleBackendErrorIfCan(data: response.data) ?? error
+                    let responseError = self?.handleBackendErrorIfCan(data: response.data) ?? error
                     handler(.failed(responseError))
                 }
         }
@@ -217,24 +232,6 @@ extension InstapickServiceImpl: InstapickService {
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.localizedDescription)
             }
-        }
-    }
-}
-
-// MARK: - static
-private extension InstapickServiceImpl {
-    
-    static func handleBackendErrorIfCan(data: Data?) -> Error? {
-        guard let data = data, let status = JSON(data: data)["status"].string else {
-            return nil
-        }
-        
-        /// if there will be a lot of switch cases, can be created InstapickServerError with switch in it
-        switch status {
-        case "3104":
-            return CustomErrors.text(TextConstants.instapickUnderConstruction)
-        default:
-            return nil
         }
     }
 }
