@@ -24,6 +24,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private let refresher = UIRefreshControl()
     private var page = 0
     private let pageSize = Device.isIpad ? 50 : 30
+    private var isLoadingNextPage = false
     
     private var navBarConfigurator = NavigationBarConfigurator()
     private lazy var cancelSelectionButton: UIBarButtonItem = {
@@ -265,20 +266,29 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     private func loadNextHistoryPage(completion: BoolHandler? = nil) {
+        if isLoadingNextPage || dataSource.isPaginationDidEnd {
+            return
+        }
+        
+        isLoadingNextPage = true
+        
         instapickService.getAnalyzeHistory(offset: page, limit: pageSize) { [weak self] result in
             guard let `self` = self else {
                 return
             }
             
+            self.isLoadingNextPage = false
+            
             switch result {
             case .success(let history):
                 DispatchQueue.main.async {
-                    if self.page == 0 {
+                    self.page += 1
+                    
+                    if self.page == 1 {
                         self.dataSource.reloadHistoryItems(history)
                     } else {
                         self.dataSource.appendHistoryItems(history)
                     }
-                    self.page += 1
                 
                     if self.dataSource.isEmpty {
                         self.displayManager.applyConfiguration(.empty)
