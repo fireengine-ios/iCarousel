@@ -12,6 +12,7 @@ protocol MyStorageInteractorInput {
     func getAccountType(with accountType: String, offers: [Any]) -> AccountType
     func getAllOffers(with accountType: AccountType)
     
+    func restorePurchases()
     func trackPackageClick(plan packages: SubscriptionPlan, planIndex: Int)
     
     func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse],

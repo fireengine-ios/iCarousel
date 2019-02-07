@@ -26,6 +26,8 @@ final class MyStorageViewController: BaseViewController {
         }
     }
     
+    private lazy var restoreButton = UIBarButtonItem(image: UIImage(named: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
+    
     // MARK: - View lifecycle
 
     override func viewDidLoad() {
@@ -77,6 +79,16 @@ extension MyStorageViewController: MyStorageViewInput {
     
     func reloadCollectionView() {
         collectionView.reloadData()
+    }
+    
+    func showRestoreButton() {
+        //IF THE USER NON CELL USER
+        navigationItem.rightBarButtonItem = restoreButton
+    }
+    
+    @objc private func restorePurhases() {
+        startActivityIndicator()
+        output.restorePurchasesPressed()
     }
 }
 
