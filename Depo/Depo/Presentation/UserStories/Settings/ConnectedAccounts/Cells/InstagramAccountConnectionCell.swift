@@ -8,9 +8,9 @@
 
 import UIKit
 
-final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnectionCell {
+final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCell {
     
-    weak var delegate: SocialAccountConnectionCellDelegate?
+    weak var delegate: SocialConnectionCellDelegate?
     
     private var interactor: ImportFromInstagramInteractor!
     private var presenter: ImportFromInstagramPresenter!

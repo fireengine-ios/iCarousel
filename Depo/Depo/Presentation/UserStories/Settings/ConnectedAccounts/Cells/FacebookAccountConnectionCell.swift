@@ -8,16 +8,26 @@
 
 import UIKit
 
-protocol SocialAccountConnectionCellDelegate: class, ActivityIndicator {
+protocol SocialConnectionCellDelegate: class, ActivityIndicator {
     func showError(message: String)
     func willChangeHeight()
 }
 
-protocol SocialAccountConnectionCell: class, ActivityIndicator {
-    var delegate: SocialAccountConnectionCellDelegate? { get set }
+protocol SocialConnectionCell: class, ActivityIndicator {
+    var delegate: SocialConnectionCellDelegate? { get set }
 }
 
-extension SocialAccountConnectionCell {
+
+protocol SocialRemoveConnectionCellDelegate: class {
+
+}
+
+protocol SocialRemoveConnectionCell: class {
+    var delegate: SocialRemoveConnectionCellDelegate? { get set }
+}
+
+
+extension SocialConnectionCell {
     func startActivityIndicator() {
         delegate?.startActivityIndicator()
     }
@@ -27,9 +37,9 @@ extension SocialAccountConnectionCell {
     }
 }
 
-final class FacebookAccountConnectionCell: UITableViewCell, SocialAccountConnectionCell {
+final class FacebookAccountConnectionCell: UITableViewCell, SocialConnectionCell {
 
-    weak var delegate: SocialAccountConnectionCellDelegate?
+    weak var delegate: SocialConnectionCellDelegate?
     
     private var interactor: ImportFromFBInteractor!
     private var presenter: ImportFromFBPresenter!
