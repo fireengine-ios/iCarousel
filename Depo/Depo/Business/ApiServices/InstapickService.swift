@@ -1,14 +1,5 @@
-//
-//  InstapickService.swift
-//  Depo_LifeTech
-//
-//  Created by Bondar Yaroslav on 1/10/19.
-//  Copyright © 2019 LifeTech. All rights reserved.
-//
-
 import Alamofire
 import SwiftyJSON
-
 
 protocol InstaPickServiceDelegate: class {
     func didRemoveAnalysis()
@@ -29,7 +20,7 @@ protocol InstapickService: class {
 }
 
 
-final class InstapickServiceImpl: InstapickService {
+final class InstapickServiceImpl {
     
     private enum Keys {
         static let serverValue = "value"
@@ -41,6 +32,10 @@ final class InstapickServiceImpl: InstapickService {
     init(sessionManager: SessionManager = SessionManager.customDefault) {
         self.sessionManager = sessionManager
     }
+    
+}
+
+extension InstapickServiceImpl: InstapickService {
     
     func getThumbnails(handler: @escaping (ResponseResult<[URL]>) -> Void) {
         sessionManager
@@ -193,20 +188,6 @@ final class InstapickServiceImpl: InstapickService {
         }
     }
     
-    static func handleBackendErrorIfCan(data: Data?) -> Error? {
-        guard let data = data, let status = JSON(data: data)["status"].string else {
-            return nil
-        }
-        
-        /// if there will be a lot of switch cases, can be created InstapickServerError with switch in it
-        switch status {
-        case "3104":
-            return CustomErrors.text(TextConstants.instapickUnderConstruction)
-        default:
-            return nil
-        }
-    }
-    
     /// global logic
     func startAnalyze(ids: [String], popupToDissmiss: UIViewController) {
         startAnalyzes(ids: ids) { [weak self] result in
@@ -236,6 +217,24 @@ final class InstapickServiceImpl: InstapickService {
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.localizedDescription)
             }
+        }
+    }
+}
+
+// MARK: - static
+private extension InstapickServiceImpl {
+    
+    static func handleBackendErrorIfCan(data: Data?) -> Error? {
+        guard let data = data, let status = JSON(data: data)["status"].string else {
+            return nil
+        }
+        
+        /// if there will be a lot of switch cases, can be created InstapickServerError with switch in it
+        switch status {
+        case "3104":
+            return CustomErrors.text(TextConstants.instapickUnderConstruction)
+        default:
+            return nil
         }
     }
 }
