@@ -200,6 +200,8 @@
 		4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */; };
 		4AFAEAC12027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
 		4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
+		4BF13C34220C238F00DCB06B /* AdjustsFontSizeInsetsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF13C33220C238E00DCB06B /* AdjustsFontSizeInsetsButton.swift */; };
+		4BF13C35220C238F00DCB06B /* AdjustsFontSizeInsetsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF13C33220C238E00DCB06B /* AdjustsFontSizeInsetsButton.swift */; };
 		4C625D18F465CC4F6D27A6B1 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500943E503755A25C4E6B64 /* SettingsInteractor.swift */; };
 		4C7B0D374F8DE575C03C683C /* SplashInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE7E386FBD5473EAA3840B /* SplashInitializer.swift */; };
 		4D19E8403C8694B3328BB3D2 /* BaseFilesGreedModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4FE9A3DE9EE69A1D9C29B /* BaseFilesGreedModuleInput.swift */; };
@@ -4036,6 +4038,7 @@
 		4ADE0880202DC8370095346F /* FaceImageItemsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsModuleOutput.swift; sourceTree = "<group>"; };
 		4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewOutput.swift; sourceTree = "<group>"; };
 		4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewOutput.swift; sourceTree = "<group>"; };
+		4BF13C33220C238E00DCB06B /* AdjustsFontSizeInsetsButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjustsFontSizeInsetsButton.swift; sourceTree = "<group>"; };
 		4C65BBC58B8393C6251C13D6 /* SelectFolderViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderViewController.swift; sourceTree = "<group>"; };
 		4C7DA7C21EC6C571D491E359 /* OTPViewPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewPresenter.swift; sourceTree = "<group>"; };
 		4CDFC675B66399A57487FB85 /* UserInfoSubViewRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewRouter.swift; sourceTree = "<group>"; };
@@ -7721,6 +7724,7 @@
 				CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */,
 				CEBAB15A2094803C002824C6 /* InsetsButton.swift */,
 				A225690A21E8B30E00A9D147 /* IntrinsicTextView.swift */,
+				4BF13C33220C238E00DCB06B /* AdjustsFontSizeInsetsButton.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -15882,6 +15886,7 @@
 				8C0E8EC31FDEBDFF00789C91 /* ActionsMenuTableViewCell.swift in Sources */,
 				8C0E8EC41FDEBDFF00789C91 /* BaseFilesGreedInitializer.swift in Sources */,
 				8C0E8EC51FDEBDFF00789C91 /* CreateStorySelectionConfigurator.swift in Sources */,
+				4BF13C35220C238F00DCB06B /* AdjustsFontSizeInsetsButton.swift in Sources */,
 				8C0E8EC61FDEBDFF00789C91 /* SearchViewPresenter.swift in Sources */,
 				8C0E8EC71FDEBDFF00789C91 /* InternetDataUsageCell.swift in Sources */,
 				8C0E8EC91FDEBDFF00789C91 /* UIviewControlllerExtensions.swift in Sources */,
@@ -16802,6 +16807,7 @@
 				CE51ACBA1EF90853005DCEE0 /* IntroduceModel.swift in Sources */,
 				8C0332972115F42D00E75EBC /* AnalyticsDimension.swift in Sources */,
 				8C6EF87F1F348B5C002AC795 /* BottomSelectionTabBarRouter.swift in Sources */,
+				4BF13C34220C238F00DCB06B /* AdjustsFontSizeInsetsButton.swift in Sources */,
 				CE51ACBF1EF90853005DCEE0 /* PasswordCell.swift in Sources */,
 				A2079916219F13CB00AD5037 /* PremiumInitializer.swift in Sources */,
 				CE51ACC41EF90853005DCEE0 /* RegistrationViewInput.swift in Sources */,

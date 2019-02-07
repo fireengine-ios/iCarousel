@@ -10,9 +10,8 @@ import UIKit
 
 extension UIButton {
     // TODO: check for titleEdgeInsets and InsetsButton class
-    func adjustsFontSizeToFitWidth(numberOfLines: Int = 1, minScaleFactor: CGFloat = 0) {
-        titleLabel?.numberOfLines = numberOfLines
-        titleLabel?.minimumScaleFactor = minScaleFactor
+    func adjustsFontSizeToFitWidth() {
+        titleLabel?.numberOfLines = 0
         titleLabel?.adjustsFontSizeToFitWidth = true
         titleLabel?.lineBreakMode = .byClipping
     }
