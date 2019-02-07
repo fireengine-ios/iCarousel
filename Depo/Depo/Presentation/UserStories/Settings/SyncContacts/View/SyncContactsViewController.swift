@@ -99,8 +99,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         backUpButton.adjustsFontSizeToFitWidth()
         restoreButton.adjustsFontSizeToFitWidth()
         cancelButton.adjustsFontSizeToFitWidth()
-        deleteDuplicatedButton.adjustsFontSizeToFitWidth(numberOfLines: 0)
-
+        
         if tabBarSetup {
             needShowTabBar = true
         }
