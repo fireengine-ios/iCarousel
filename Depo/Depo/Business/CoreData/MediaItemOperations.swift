@@ -81,9 +81,13 @@ extension CoreDataStack {
     
     // MARK: MediaItem
     
-    func mediaItemByLocalID(trimmedLocalIDS: [String]) -> [MediaItem] {
-        let predicate = NSPredicate(format: "trimmedLocalFileID IN %@", trimmedLocalIDS)
-        return executeRequest(predicate: predicate, context: newChildBackgroundContext)
+    func mediaItemByLocalID(trimmedLocalIDS: [String], completion: @escaping MediaItemsCallBack) {
+        let context = newChildBackgroundContext
+        context.perform { [weak self] in
+            let predicate = NSPredicate(format: "trimmedLocalFileID IN %@", trimmedLocalIDS)
+            let items = self?.executeRequest(predicate: predicate, context: context) ?? []
+            completion(items)
+        }
     }
     
     func executeRequest(predicate: NSPredicate, context: NSManagedObjectContext) -> [MediaItem] {

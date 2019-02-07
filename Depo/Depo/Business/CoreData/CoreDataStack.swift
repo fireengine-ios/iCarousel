@@ -11,11 +11,6 @@ import CoreData
 
 final class CoreDataStack: NSObject {
     
-    typealias AppendingLocaclItemsFinishCallback = () -> Void
-    typealias AppendingLocaclItemsProgressCallback = (Float) -> Void
-    
-    typealias AppendingLocalItemsPageAppended = ([Item])->Void
-    
     static let notificationNewLocalPageAppendedFilesKey = "notificationNewLocalPageAppendedFilesKey"
     
     @objc static let `default` = CoreDataStack()
@@ -98,15 +93,14 @@ final class CoreDataStack: NSObject {
         
     }
     
-    func getLocalDuplicates(remoteItems: [Item], duplicatesCallBack: @escaping ([Item]) -> Void) {
+    func getLocalDuplicates(remoteItems: [Item], duplicatesCallBack: @escaping LocalFilesCallBack) {
         var remoteMd5s = [String]()
         var trimmedIDs = [String]()
         remoteItems.forEach {
             remoteMd5s.append($0.md5)
             trimmedIDs.append($0.getTrimmedLocalID())
         }
-        
-        
+
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
         fetchRequest.predicate = NSPredicate(format: "(md5Value IN %@) OR (trimmedLocalFileID IN %@)", remoteMd5s, trimmedIDs)
         let sort = NSSortDescriptor(key: "creationDateValue", ascending: false)
@@ -122,7 +116,6 @@ final class CoreDataStack: NSObject {
             array = localDuplicatesMediaItems.flatMap { WrapData(mediaItem: $0) }
 
             duplicatesCallBack(array)
-            
         }
     }
 

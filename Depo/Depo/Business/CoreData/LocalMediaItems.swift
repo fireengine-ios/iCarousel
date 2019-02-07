@@ -10,6 +10,7 @@ import Foundation
 import Photos
 
 typealias LocalFilesCallBack = (_ localFiles: [WrapData]) -> Void
+typealias MediaItemsCallBack = (_ mediaItems: [MediaItem]) -> Void
 
 extension CoreDataStack {
 
@@ -242,55 +243,60 @@ extension CoreDataStack {
  
     }
     
-    func allLocalItems() -> [WrapData] {
-        let context = newChildBackgroundContext
+    func allLocalItems(completion: @escaping LocalFilesCallBack) {
         let predicate = NSPredicate(format: "localFileID != nil")
-        let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
-        return items.flatMap { $0.wrapedObject }
+        allLocalItems(with: predicate, completion: completion)
     }
     
-    func allLocalItems(with localIds: [String]) -> [WrapData] {
-        let context = newChildBackgroundContext
+    func allLocalItems(with localIds: [String], completion: @escaping LocalFilesCallBack) {
         let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", localIds)
-        let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
-        return items.flatMap { $0.wrapedObject }
+        allLocalItems(with: predicate, completion: completion)
     }
     
-    func allLocalItems(with assets: [PHAsset]) -> [WrapData] {
-        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-            return []
-        }
-        let context = newChildBackgroundContext
-        
-        let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", assets.map { $0.localIdentifier })
-        var items = executeRequest(predicate: predicate, context: context)
-        
-        /// sort items in the assets order
-        let ordering = Dictionary(uniqueKeysWithValues: assets.enumerated().map { ($1.localIdentifier, $0) })
-        items = items.sorted(by: { (firstItem, secondItem) -> Bool in
-            if let firstLocalId = firstItem.localFileID, let firstIndex = ordering[firstLocalId] {
-                if let secondLocalId = secondItem.localFileID, let secondIndex = ordering[secondLocalId] {
-                    return firstIndex < secondIndex
-                } else {
-                    return false
-                }
-            }
-            return false
-        })
-        
-        var localItems = [WrapData]()
-        for (item, asset) in zip(items, assets) {
-            localItems.append(item.wrapedObject(with: asset))
-        }
-
-        return localItems
-    }
-    
-    func allLocalItems(trimmedLocalIds: [String]) -> [WrapData] {
-        let context = newChildBackgroundContext
+    func allLocalItems(trimmedLocalIds: [String], completion: @escaping LocalFilesCallBack) {
         let predicate = NSPredicate(format: "(trimmedLocalFileID != nil) AND (trimmedLocalFileID IN %@)", trimmedLocalIds)
-        let items: [MediaItem] = executeRequest(predicate: predicate, context: context)
-        return items.flatMap { $0.wrapedObject }
+        allLocalItems(with: predicate, completion: completion)
+    }
+    
+    private func allLocalItems(with predicate: NSPredicate, completion: @escaping LocalFilesCallBack) {
+        let context = newChildBackgroundContext
+        context.perform { [weak self] in
+            let items: [MediaItem] = self?.executeRequest(predicate: predicate, context: context) ?? []
+            completion(items.flatMap { $0.wrapedObject })
+        }
+    }
+    
+    func allLocalItems(with assets: [PHAsset], completion: @escaping LocalFilesCallBack) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            completion([])
+            return
+        }
+        
+        let context = newChildBackgroundContext
+        context.perform { [weak self] in
+            let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@)", assets.map { $0.localIdentifier })
+            var items = self?.executeRequest(predicate: predicate, context: context) ?? []
+            
+            /// sort items in the assets order
+            let ordering = Dictionary(uniqueKeysWithValues: assets.enumerated().map { ($1.localIdentifier, $0) })
+            items = items.sorted(by: { (firstItem, secondItem) -> Bool in
+                if let firstLocalId = firstItem.localFileID, let firstIndex = ordering[firstLocalId] {
+                    if let secondLocalId = secondItem.localFileID, let secondIndex = ordering[secondLocalId] {
+                        return firstIndex < secondIndex
+                    } else {
+                        return false
+                    }
+                }
+                return false
+            })
+            
+            var localItems = [WrapData]()
+            for (item, asset) in zip(items, assets) {
+                localItems.append(item.wrapedObject(with: asset))
+            }
+            
+            completion(localItems)
+        }
     }
     
     func hasLocalItemsForSync(video: Bool, image: Bool, completion: @escaping  (_ has: Bool) -> Void) {
@@ -301,7 +307,7 @@ extension CoreDataStack {
         
     }
     
-    func allLocalItemsForSync(video: Bool, image: Bool, completion: @escaping (_ items: [WrapData]) -> Void) {
+    func allLocalItemsForSync(video: Bool, image: Bool, completion: @escaping LocalFilesCallBack) {
         getUnsyncsedMediaItems(video: video, image: image, completion: { items in
             let sortedItems = items.sorted { $0.fileSizeValue < $1.fileSizeValue }
             let wrappedItems = sortedItems.flatMap { $0.wrapedObject }
@@ -310,7 +316,7 @@ extension CoreDataStack {
         })
     }
     
-    private func getUnsyncsedMediaItems(video: Bool, image: Bool, completion: @escaping (_ items: [MediaItem]) -> Void) {
+    private func getUnsyncsedMediaItems(video: Bool, image: Bool, completion: @escaping MediaItemsCallBack) {
         let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
         let currentlyInLibriaryLocalIDs: [String] = assetList.flatMap { $0.localIdentifier }
         
@@ -323,26 +329,22 @@ extension CoreDataStack {
         }
         
         let context = newChildBackgroundContext
-        newChildBackgroundContext.perform { [weak self] in
+        context.perform { [weak self] in
             let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@) AND (SUBQUERY(objectSyncStatus, $x, $x.userID == %@).@count == 0)", filesTypesArray, currentlyInLibriaryLocalIDs, SingletonStorage.shared.uniqueUserID)
            completion(self?.executeRequest(predicate: predicate, context: context) ?? [])
         }
-        
-        
     }
     
     func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], complition: VoidHandler? = nil) {
-        
         let newContext = newChildBackgroundContext
-        
         newContext.perform { [weak self] in
             guard let `self` = self else {
                 return
             }
 
             let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@)", actualPhotoLibItemsIDs)
-            let allNonAccurateSavedLocalFiles: [MediaItem] = self.executeRequest(predicate: predicate,
-                                                                            context: newContext)
+            let allNonAccurateSavedLocalFiles = self.executeRequest(predicate: predicate, context: newContext)
+            
             allNonAccurateSavedLocalFiles.forEach {
                 newContext.delete($0)
             }
