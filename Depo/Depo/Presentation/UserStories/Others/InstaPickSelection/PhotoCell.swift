@@ -4,7 +4,7 @@ final class PhotoCell: UICollectionViewCell {
     
     private enum Constants {
         static let selectionImageViewSideSize: CGFloat = 24
-        static let favoriteImageViewSideSize: CGFloat = 20
+        static let favoriteImageViewSideSize: CGFloat = 13
         static let edgeInset: CGFloat = 6
         static let selectionBorderWidth: CGFloat = 3
         
@@ -15,10 +15,9 @@ final class PhotoCell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        //imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .lightGray
+        imageView.backgroundColor = ColorConstants.fileGreedCellColor
         imageView.isOpaque = true
         return imageView
     }()
@@ -45,7 +44,10 @@ final class PhotoCell: UICollectionViewCell {
     private var cellImageManager: CellImageManager?
     private var uuid: String?
     
-    //private var representedAssetIdentifier = ""
+    
+    var isNeedToUpdate: Bool {
+        return imageView.image == nil
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -79,7 +81,7 @@ final class PhotoCell: UICollectionViewCell {
     
     private func updateFrames() {
         imageView.frame = bounds
-        selectionImageView.frame = CGRect(x: bounds.width - Constants.favoriteImageViewSideSize - Constants.edgeInset,
+        selectionImageView.frame = CGRect(x: bounds.width - Constants.selectionImageViewSideSize - Constants.edgeInset,
                                           y: Constants.edgeInset,
                                           width: Constants.selectionImageViewSideSize,
                                           height: Constants.selectionImageViewSideSize)
@@ -160,8 +162,6 @@ final class PhotoCell: UICollectionViewCell {
         } else {
             imageView.image = image
         }
-        
-        backgroundColor = ColorConstants.fileGreedCellColor
     }
     
     func cancelImageLoading() {
@@ -199,7 +199,6 @@ final class CollectionSpinnerFooter: UICollectionReusableView {
     
     func startSpinner() {
         activityIndicator.startAnimating()
-        isHidden = false
     }
     
     func stopSpinner() {

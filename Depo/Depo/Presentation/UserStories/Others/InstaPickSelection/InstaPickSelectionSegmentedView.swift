@@ -40,10 +40,22 @@ final class InstaPickSelectionSegmentedView: UIView {
         label.textColor = ColorConstants.darcBlueColor
         label.font = UIFont.TurkcellSaturaBolFont(size: 16)
         label.backgroundColor = ColorConstants.fileGreedCellColor.withAlphaComponent(0.9)
-        label.insets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
+        let edgeInset: CGFloat = Device.isIpad ? 90 : 15
+        label.insets = UIEdgeInsets(top: 5, left: edgeInset, bottom: 5, right: edgeInset)
         label.layer.cornerRadius = 3
         label.layer.masksToBounds = true
         label.isHidden = true
+        return label
+    }()
+    
+    let emptyMessageLabel: InsetsLabel = {
+        let label = InsetsLabel()
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.textColor = ColorConstants.textGrayColor
+        label.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        label.text = TextConstants.loading
+        label.insets = UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30)
         return label
     }()
     
@@ -71,6 +83,7 @@ final class InstaPickSelectionSegmentedView: UIView {
         view.addSubview(transparentGradientView)
         view.addSubview(analyzeButton)
         view.addSubview(analyzesLeftLabel)
+        view.addSubview(emptyMessageLabel)
         
         let edgeOffset: CGFloat = Device.isIpad ? 75 : 35
         let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
@@ -123,5 +136,10 @@ final class InstaPickSelectionSegmentedView: UIView {
             analyzesLeftLabel.trailingAnchor
                 .constraint(equalTo: topView.trailingAnchor, constant: -14).activate()
         }
+        
+        emptyMessageLabel.translatesAutoresizingMaskIntoConstraints = false
+        emptyMessageLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).activate()
+        emptyMessageLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        emptyMessageLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
     }
 }

@@ -1,12 +1,5 @@
-//
-//  InstaPickSelectionSegmentedController.swift
-//  Depo_LifeTech
-//
-//  Created by Yaroslav Bondar on 15/01/2019.
-//  Copyright © 2019 LifeTech. All rights reserved.
-//
-
 import UIKit
+import Reachability
 
 protocol InstaPickSelectionSegmentedControllerDelegate {
     func selectionStateDidChange(_ selectionState: PhotoSelectionState)
@@ -50,6 +43,33 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     private var delegates = MulticastDelegate<InstaPickSelectionSegmentedControllerDelegate>()
     
     private let instapickService: InstapickService = factory.resolve()
+    private let reachabilityService = Reachability()
+    
+    private var isGettingSelectingLimit = false
+    private var isGettingSelectingLimitFinished = false
+    
+    private lazy var albumsTabIndex: Int = {
+        if let index = segmentedViewControllers.index(of: albumsVC) {
+            return index
+        }
+        assertionFailure("there is no albumsVC in segmentedViewControllers. check func setupScreenWithSelectingLimit. It was: index = 1")
+        return 0
+    }()
+    
+    private lazy var albumsVC = InstapickAlbumSelectionViewController(title: TextConstants.albumsTitle, delegate: self)
+    
+    private lazy var closeAlbumButton = UIBarButtonItem(image: UIImage(named: "closeButton"),
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(onCloseAlbum))
+    
+    private lazy var closeSelfButton = UIBarButtonItem(title: TextConstants.cancel,
+                                                    font: UIFont.TurkcellSaturaDemFont(size: 19),
+                                                    tintColor: UIColor.white,
+                                                    accessibilityLabel: TextConstants.cancel,
+                                                    style: .plain,
+                                                    target: self,
+                                                    selector: #selector(closeSelf))
     
     // MARK: start
     
@@ -63,21 +83,17 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         setup()
     }
     
+    deinit {
+        reachabilityService?.stopNotifier()
+    }
+    
     private func setup() {
         vcView.segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
         vcView.analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
         
-        navigationItem.title = String(format: TextConstants.instapickSelectionPhotosSelected, 0)
         removeBackButtonTitle()
-        
-        let cancelButton = UIBarButtonItem(title: TextConstants.cancel,
-                                           font: UIFont.TurkcellSaturaDemFont(size: 19),
-                                           tintColor: UIColor.white,
-                                           accessibilityLabel: TextConstants.cancel,
-                                           style: .plain,
-                                           target: self,
-                                           selector: #selector(closeSelf))
-        navigationItem.leftBarButtonItem = cancelButton
+        navigationItem.title = String(format: TextConstants.instapickSelectionPhotosSelected, 0)
+        navigationItem.leftBarButtonItem = closeSelfButton
     }
     
     override func loadView() {
@@ -97,12 +113,39 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         super.viewDidLoad()
         
         getSelectingLimitAndStart()
+        setupReachability()
     }
     
     // MARK: methods
     
+    private func setupReachability() {
+        guard let reachability = reachabilityService else {
+            assertionFailure()
+            return
+        }
+        
+        reachability.whenReachable = { [weak self] reachability in
+            guard let `self` = self, !self.isGettingSelectingLimitFinished else {
+                return
+            }
+            self.getSelectingLimitAndStart()
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            assertionFailure("can't start reachability notifier: \(error.localizedDescription)")
+        }
+    }
+    
     /// one time called
     private func getSelectingLimitAndStart() {
+        guard !isGettingSelectingLimit else {
+            return
+        }
+        isGettingSelectingLimit = true
+        vcView.emptyMessageLabel.text = TextConstants.loading
+        
         instapickService.getAnalyzesCount { [weak self] result in
             guard let `self` = self else {
                 return
@@ -117,10 +160,14 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
                     self.selectingLimit = self.maxSelectingLimit
                 }
                 self.setupScreenWithSelectingLimit(self.selectingLimit)
+                self.isGettingSelectingLimitFinished = true
+                self.vcView.emptyMessageLabel.isHidden = true
                 
             case .failed(let error):
                 self.showErrorAlert(message: error.localizedDescription)
+                self.vcView.emptyMessageLabel.text = error.localizedDescription
             }
+            self.isGettingSelectingLimit = false
         }
     }
     
@@ -136,8 +183,6 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
                                                    selectingLimit: selectingLimit,
                                                    delegate: self,
                                                    dataSource: allPhotosDataSource)
-        
-        let albumsVC = InstapickAlbumSelectionViewController(title: TextConstants.albumsTitle, delegate: self)
         
         let favoriteDataSource = FavoritePhotosSelectionDataSource(pageSize: selectionControllerPageSize)
         let favoritePhotosVC = PhotoSelectionController(title: TextConstants.homeButtonFavorites,
@@ -211,6 +256,19 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         
         childViewControllers.forEach { $0.removeFromParentVC() }
         add(childController: segmentedViewControllers[selectedIndex])
+        updateLeftBarButtonItem(selectedIndex: selectedIndex)
+    }
+    
+    private func updateLeftBarButtonItem(selectedIndex: Int) {
+        /// optimized for reading, not performance
+        let isAlbumsTabOpened = (selectedIndex == albumsTabIndex)
+        let isAnyAlbumOpened = (segmentedViewControllers[albumsTabIndex] != albumsVC)
+        
+        if isAlbumsTabOpened, isAnyAlbumOpened {
+            navigationItem.leftBarButtonItem = closeAlbumButton
+        } else {
+            navigationItem.leftBarButtonItem = closeSelfButton
+        }
     }
     
     private func add(childController: UIViewController) {
@@ -219,6 +277,17 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         vcView.containerView.addSubview(childController.view)
         childController.didMove(toParentViewController: self)
+    }
+    
+    
+    @objc private func onCloseAlbum() {
+        replaceControllerAtAlbumsTab(with: albumsVC)
+    }
+    
+    private func replaceControllerAtAlbumsTab(with controller: UIViewController) {
+        segmentedViewControllers.remove(at: albumsTabIndex)
+        segmentedViewControllers.insert(controller, at: albumsTabIndex)
+        selectController(at: albumsTabIndex)
     }
 }
 
@@ -274,7 +343,7 @@ extension InstaPickSelectionSegmentedController: InstapickAlbumSelectionDelegate
                                                            delegate: self,
                                                            dataSource: dataSource)
         delegates.add(albumSelectionVC)
-        navigationController?.pushViewController(albumSelectionVC, animated: true)
+        replaceControllerAtAlbumsTab(with: albumSelectionVC)
     }
 }
 
@@ -287,7 +356,7 @@ extension InstaPickSelectionSegmentedController {
         let navigationTextColor = UIColor.white
         let navigationBar = navVC.navigationBar
         
-        let textAttributes: [NSAttributedString.Key: Any] = [
+        let textAttributes: [NSAttributedString.Key: AnyHashable] = [
             .foregroundColor: navigationTextColor,
             .font: UIFont.TurkcellSaturaDemFont(size: 19)
         ]

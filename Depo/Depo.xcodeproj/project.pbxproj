@@ -2716,8 +2716,6 @@
 		B3B5A5509A09A51F47A9AA34 /* SelectNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669AB32EC041C5277B6D63E3 /* SelectNameRouter.swift */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B520000C202492A90096D036 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520000B202492A90096D036 /* SynchronizedArray.swift */; };
-		B522E92621E8CB6100C4958E /* LTCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522E92521E8CB6100C4958E /* LTCircularProgressView.swift */; };
-		B522E92721E8CB6100C4958E /* LTCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522E92521E8CB6100C4958E /* LTCircularProgressView.swift */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
 		B5390D782164F0F800A02002 /* ScrollBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D772164F0F700A02002 /* ScrollBarView.swift */; };
 		B5390D792164F0F800A02002 /* ScrollBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D772164F0F700A02002 /* ScrollBarView.swift */; };
@@ -2828,6 +2826,10 @@
 		B5AB2F072204356400E3AF23 /* InstaPickSmartAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB2F042204356400E3AF23 /* InstaPickSmartAlbumCell.swift */; };
 		B5AB2F082204356400E3AF23 /* InstaPickSmartAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB2F052204356400E3AF23 /* InstaPickSmartAlbumCell.xib */; };
 		B5AB2F092204356400E3AF23 /* InstaPickSmartAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB2F052204356400E3AF23 /* InstaPickSmartAlbumCell.xib */; };
+		B5AB2F0B2204940800E3AF23 /* InstaPickCircularLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB2F0A2204940800E3AF23 /* InstaPickCircularLoader.swift */; };
+		B5AB2F0C2204940800E3AF23 /* InstaPickCircularLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB2F0A2204940800E3AF23 /* InstaPickCircularLoader.swift */; };
+		B5AB2F0E2204941B00E3AF23 /* InstaPickCircularLoader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB2F0D2204941B00E3AF23 /* InstaPickCircularLoader.xib */; };
+		B5AB2F0F2204941B00E3AF23 /* InstaPickCircularLoader.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB2F0D2204941B00E3AF23 /* InstaPickCircularLoader.xib */; };
 		B5AB5B5621F9A92B003AABB4 /* ConnectedAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B5421F9A92B003AABB4 /* ConnectedAccountsViewController.swift */; };
 		B5AB5B5721F9A92B003AABB4 /* ConnectedAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB5B5421F9A92B003AABB4 /* ConnectedAccountsViewController.swift */; };
 		B5AB5B5821F9A92B003AABB4 /* ConnectedAccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B5521F9A92B003AABB4 /* ConnectedAccountsViewController.xib */; };
@@ -5402,7 +5404,6 @@
 		B3A0B3E5058A3D09CC569377 /* PhotoVideoDetailInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInitializer.swift; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
-		B522E92521E8CB6100C4958E /* LTCircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTCircularProgressView.swift; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
 		B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncOperation.swift; sourceTree = "<group>"; };
 		B5390D772164F0F700A02002 /* ScrollBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollBarView.swift; sourceTree = "<group>"; };
@@ -5479,6 +5480,8 @@
 		B5A84526212DA339007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		B5AB2F042204356400E3AF23 /* InstaPickSmartAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickSmartAlbumCell.swift; sourceTree = "<group>"; };
 		B5AB2F052204356400E3AF23 /* InstaPickSmartAlbumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickSmartAlbumCell.xib; sourceTree = "<group>"; };
+		B5AB2F0A2204940800E3AF23 /* InstaPickCircularLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickCircularLoader.swift; sourceTree = "<group>"; };
+		B5AB2F0D2204941B00E3AF23 /* InstaPickCircularLoader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstaPickCircularLoader.xib; sourceTree = "<group>"; };
 		B5AB5B5421F9A92B003AABB4 /* ConnectedAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsViewController.swift; sourceTree = "<group>"; };
 		B5AB5B5521F9A92B003AABB4 /* ConnectedAccountsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectedAccountsViewController.xib; sourceTree = "<group>"; };
 		B5AB5B6221F9B01B003AABB4 /* DropboxAccountConnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropboxAccountConnectionCell.swift; sourceTree = "<group>"; };
@@ -10741,8 +10744,9 @@
 			isa = PBXGroup;
 			children = (
 				B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */,
-				B522E92521E8CB6100C4958E /* LTCircularProgressView.swift */,
 				B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */,
+				B5AB2F0A2204940800E3AF23 /* InstaPickCircularLoader.swift */,
+				B5AB2F0D2204941B00E3AF23 /* InstaPickCircularLoader.xib */,
 			);
 			path = InstaPickProgressView;
 			sourceTree = "<group>";
@@ -13763,6 +13767,7 @@
 				8C06AEB92008AD70003D8E05 /* akilli_depo_beyaz@2x.png in Resources */,
 				8C06B0632008AD71003D8E05 /* paylas_bip@3x.png in Resources */,
 				8C06B17B2008AD72003D8E05 /* topright@2x.png in Resources */,
+				B5AB2F0F2204941B00E3AF23 /* InstaPickCircularLoader.xib in Resources */,
 				98570AFD208F7558002CCEBA /* SpotlightViewController.xib in Resources */,
 				8C06AFFF2008AD71003D8E05 /* kontrast_secili@3x.png in Resources */,
 				8C06AFFD2008AD71003D8E05 /* kontrast_secili@2x.png in Resources */,
@@ -14569,6 +14574,7 @@
 				8C06AEBE2008AD70003D8E05 /* alt_cizgili@2x.png in Resources */,
 				7C2F56F61F1CC0FE0014870B /* ActionsMenuView.xib in Resources */,
 				8C06AFF02008AD71003D8E05 /* kirmizi.png in Resources */,
+				B5AB2F0E2204941B00E3AF23 /* InstaPickCircularLoader.xib in Resources */,
 				8C06B1842008AD72003D8E05 /* underline.png in Resources */,
 				8C06AF5C2008AD70003D8E05 /* daire_selected.png in Resources */,
 				8C06B07A2008AD71003D8E05 /* paylas_kaydet@3x.png in Resources */,
@@ -15300,6 +15306,7 @@
 				8C0E8CD01FDEBDFF00789C91 /* PrintInteractorOutput.swift in Sources */,
 				8C0E8CD21FDEBDFF00789C91 /* MoreActionsConfig.swift in Sources */,
 				C4A38BA421EE1F4E00ECCCEA /* InstaPickSelectionSegmentedController.swift in Sources */,
+				B5AB2F0C2204940800E3AF23 /* InstaPickCircularLoader.swift in Sources */,
 				92004B7021AD19B300582C45 /* MyStorageInteractor.swift in Sources */,
 				8C0E8CD31FDEBDFF00789C91 /* ServerValueError.swift in Sources */,
 				8C0E8CD51FDEBDFF00789C91 /* CreateStoryNameInteractorInput.swift in Sources */,
@@ -15911,7 +15918,6 @@
 				8C0E8ED41FDEBDFF00789C91 /* ContactsSyncService.swift in Sources */,
 				8C0E8ED51FDEBDFF00789C91 /* ShadowView.swift in Sources */,
 				8C0E8ED61FDEBDFF00789C91 /* CreateStoryNameInteractorOutput.swift in Sources */,
-				B522E92721E8CB6100C4958E /* LTCircularProgressView.swift in Sources */,
 				8C0E8ED71FDEBDFF00789C91 /* CollectionViewStoryReorderView.swift in Sources */,
 				92004B6D21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
 				CED4B02E2018594700D06CA9 /* HomeCardResponse.swift in Sources */,
@@ -17084,6 +17090,7 @@
 				8CCA070520C4412800558AB0 /* SessionServiceExtension.swift in Sources */,
 				7859299520060E8B003F8AB3 /* ManageContactsModuleInput.swift in Sources */,
 				7CAC23BF1F4ABD3100607660 /* LoadingImageView.swift in Sources */,
+				B5AB2F0B2204940800E3AF23 /* InstaPickCircularLoader.swift in Sources */,
 				CEC3C2431FB99AF800C3D67F /* PasscodeSettingsViewIO.swift in Sources */,
 				9808A05E206A88580022376D /* PushNotificationService.swift in Sources */,
 				98EAC9422080CBFF00AAD5B6 /* ContactService.swift in Sources */,
@@ -17419,7 +17426,6 @@
 				77CF7B297D6D1B75D73CACBC /* SelectNamePresenter.swift in Sources */,
 				CE3E4D07201B11BF00173045 /* PVViewerController.swift in Sources */,
 				7C1F898D1F70ECB100740177 /* BaseView.swift in Sources */,
-				B522E92621E8CB6100C4958E /* LTCircularProgressView.swift in Sources */,
 				7CF9A9F51FA2279500242FDD /* ImageForDowload.swift in Sources */,
 				8CF87D5F1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */,
 				05EC9C53FBA7BE69C5C9BFCD /* SelectNameInteractorInput.swift in Sources */,

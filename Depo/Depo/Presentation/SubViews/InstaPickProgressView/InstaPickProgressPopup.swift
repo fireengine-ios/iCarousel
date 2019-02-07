@@ -10,20 +10,29 @@ import UIKit
 import SDWebImage
 
 
-final class InstaPickProgressPopup: ViewController {
+final class InstaPickProgressPopup: ViewController, NibInit {
 
+    @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var leadingConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var trailingConstraint: NSLayoutConstraint!
+    
+    
     @IBOutlet private weak var topCaption: UILabel! {
         didSet {
-            topCaption.text = ""
+            topCaption.font = UIFont.TurkcellSaturaBolFont(size: Device.isIpad ? 30 : 28)
+            topCaption.text = " "
         }
     }
     @IBOutlet private weak var bottomCaption: UILabel! {
         didSet {
+            bottomCaption.font = UIFont.TurkcellSaturaDemFont(size: Device.isIpad ? 20 : 18)
             bottomCaption.text = bottomCaptionText
         }
     }
-    @IBOutlet private weak var circularLoader: LTCircularProgressView! {
+    @IBOutlet private weak var circularLoader: InstaPickCircularLoader! {
         didSet {
+            circularLoader.backgroundColor = .clear
             circularLoader.backWidth = 10.0
             circularLoader.backColor = ColorConstants.lightBlueColor
             circularLoader.progressWidth = 10.0
@@ -31,14 +40,10 @@ final class InstaPickProgressPopup: ViewController {
             circularLoader.progressColor = ColorConstants.blueColor
         }
     }
-    @IBOutlet private weak var analyzingImage: UIImageView! {
-        didSet {
-            analyzingImage.contentMode = .scaleAspectFill
-        }
-    }
+
     
     private var topCaptionTexts = [String]()
-    private var bottomCaptionText = ""
+    private var bottomCaptionText = " "
     private var analyzingImagesUrls = [URL]()
     
     
@@ -48,7 +53,7 @@ final class InstaPickProgressPopup: ViewController {
     }
     
     static func createPopup(with analyzingImages: [URL], topTexts: [String], bottomText: String) -> InstaPickProgressPopup {
-        let controller = InstaPickProgressPopup(nibName: "InstaPickProgressPopup", bundle: nil)
+        let controller = InstaPickProgressPopup.initFromNib()
         controller.analyzingImagesUrls = analyzingImages
         controller.topCaptionTexts = topTexts
         controller.bottomCaptionText = bottomText
@@ -57,36 +62,33 @@ final class InstaPickProgressPopup: ViewController {
         return controller
     }
     
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        let marginlLeftRight: CGFloat = Device.isIpad ? 90.0 : 16.0
+        let marginTopBottom: CGFloat = Device.isIpad ? 120.0 : 20.0
+        let loaderWidth: CGFloat = Device.isIpad ? view.bounds.width * 0.4 : 220
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        topConstraint.constant = marginTopBottom
+        bottomConstraint.constant = marginTopBottom
+        leadingConstraint.constant = marginlLeftRight
+        trailingConstraint.constant = marginlLeftRight
+        
+        circularLoader.widthAnchor.constraint(equalToConstant: loaderWidth).activate()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         setupInitialStates()
         startInfiniteAnimation()
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        setupAnalyzingImage()
-    }
-    
+ 
 
-    private func setupAnalyzingImage() {
-        let inset: CGFloat = 8.0
-        let diameter = (circularLoader.innerRadius - inset) * 2.0
-        let startPoint = (analyzingImage.layer.bounds.width - diameter) * 0.5
-        
-        let maskLayerRect = CGRect(x: startPoint, y: startPoint, width: diameter, height: diameter)
-        let ovalPath = UIBezierPath(ovalIn: maskLayerRect)
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = ovalPath.cgPath
-        
-        analyzingImage.layer.mask = maskLayer
-    }
-    
     private func setupInitialStates() {
-        analyzingImage.sd_setImage(with: analyzingImagesUrls.first, completed: nil)
+        circularLoader.layoutIfNeeded()
+        circularLoader.set(imageUrl: analyzingImagesUrls.first, animated: false)
         topCaption.text = topCaptionTexts.first
     }
     
@@ -103,18 +105,9 @@ final class InstaPickProgressPopup: ViewController {
         guard analyzingImagesUrls.count > 1 else { return }
         
         let imageIndex = step % analyzingImagesUrls.count
-        analyzingImage.sd_setImage(with: analyzingImagesUrls[safe: imageIndex], placeholderImage: nil, options: [.avoidAutoSetImage], completed: { [weak self] image, error, cahceType, _ in
-            guard let `self` = self else {
-                return
-            }
-            
-            UIView.transition(with: self.analyzingImage,
-                              duration: NumericConstants.instaPickImageViewTransitionDuration,
-                              options: .transitionCrossDissolve,
-                              animations: {
-                                self.analyzingImage.image = image
-            }, completion: nil)
-        })
+        let imageUrl = analyzingImagesUrls[safe: imageIndex]
+        
+        circularLoader.set(imageUrl: imageUrl, animated: true)
     }
     
     

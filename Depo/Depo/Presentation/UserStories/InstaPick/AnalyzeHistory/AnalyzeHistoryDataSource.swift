@@ -142,10 +142,14 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
             isPaginationDidEnd = true
             return
         }
-        mergeItems(with: newItems)
+        mergeItems(with: newItems, insertFirst: false)
     }
     
-    private func mergeItems(with newItems: [InstapickAnalyze]) {
+    func insertNewItems(_ newItems: [InstapickAnalyze]) {
+        mergeItems(with: newItems, insertFirst: true)
+    }
+    
+    private func mergeItems(with newItems: [InstapickAnalyze], insertFirst: Bool) {
         guard let section = indexOfPhotoSection else {
             return
         }
@@ -154,10 +158,15 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         
         var insertIndexPaths = [IndexPath]()
         
-        newItems.forEach { item in
+        newItems.enumerated().forEach { index, item in
             if !uuids.contains(item.requestIdentifier) {
-                insertIndexPaths.append(IndexPath(item: items.count, section: section))
-                self.items.append(item)
+                if insertFirst {
+                    insertIndexPaths.append(IndexPath(item: index, section: section))
+                    self.items.insert(item, at: index)
+                } else {
+                    insertIndexPaths.append(IndexPath(item: items.count, section: section))
+                    self.items.append(item)
+                } 
             }
         }
         
