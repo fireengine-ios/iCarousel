@@ -1080,6 +1080,7 @@ struct TextConstants {
     static let instapickSelectionPhotosSelected = NSLocalizedString("instapick_selection_photos_selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instapickSelectionAnalyzesLeft = NSLocalizedString("instapick_selection_analyzes_left", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instapickSelectionAnalyzesLeftMax = NSLocalizedString("instapick_selection_analyzes_left_max", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instapickUnderConstruction = NSLocalizedString("instapick_under_construction", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loading = NSLocalizedString("loading", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let thereAreNoPhotos = NSLocalizedString("there_are_no_photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let thereAreNoAlbums = NSLocalizedString("there_are_no_albums", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
