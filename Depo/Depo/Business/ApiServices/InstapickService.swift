@@ -26,6 +26,7 @@ final class InstapickServiceImpl {
     }
 
     private let sessionManager: SessionManager
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     let delegates = MulticastDelegate<InstaPickServiceDelegate>()
     
     init(sessionManager: SessionManager = SessionManager.customDefault) {
@@ -206,8 +207,11 @@ extension InstapickServiceImpl: InstapickService {
     /// global logic
     func startAnalyze(ids: [String], popupToDissmiss: UIViewController) {
         startAnalyzes(ids: ids) { [weak self] result in
+            let eventLabel: GAEventLabel
+            
             switch result {
             case .success(let analysis):
+                eventLabel = .success
                 
                 self?.getAnalyzesCount { result in
                     switch result {
@@ -231,7 +235,9 @@ extension InstapickServiceImpl: InstapickService {
                 
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.localizedDescription)
+                eventLabel = .failure
             }
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .photopickAnalysis, eventLabel: eventLabel)
         }
     }
 }
