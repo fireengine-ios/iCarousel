@@ -2968,6 +2968,8 @@
 		CE08BDEB1FC8404600440CA0 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
 		CE08BDED1FC8415600440CA0 /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
 		CE09155E1F3870D000C82A44 /* WrapItemFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */; };
+		CE0EA622220B2048000EF616 /* InstapickAnalyzesCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA621220B2048000EF616 /* InstapickAnalyzesCount.swift */; };
+		CE0EA624220B2072000EF616 /* InstapickAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */; };
 		CE0ED96E1FBC0F5A00487632 /* BiometricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */; };
 		CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9651FBC0F5A00487632 /* PasscodeViewImp.swift */; };
 		CE0ED9711FBC0F5A00487632 /* PasscodeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9661FBC0F5A00487632 /* PasscodeState.swift */; };
@@ -5575,6 +5577,8 @@
 		CE08BDE91FC8404600440CA0 /* TokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
 		CE08BDEC1FC8415600440CA0 /* URL+Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Path.swift"; sourceTree = "<group>"; };
 		CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapItemFileService.swift; sourceTree = "<group>"; };
+		CE0EA621220B2048000EF616 /* InstapickAnalyzesCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickAnalyzesCount.swift; sourceTree = "<group>"; };
+		CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickAnalyze.swift; sourceTree = "<group>"; };
 		CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiometricsManager.swift; sourceTree = "<group>"; };
 		CE0ED9651FBC0F5A00487632 /* PasscodeViewImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeViewImp.swift; sourceTree = "<group>"; };
 		CE0ED9661FBC0F5A00487632 /* PasscodeState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeState.swift; sourceTree = "<group>"; };
@@ -7952,6 +7956,8 @@
 				B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */,
 				4AD1A819208A277200930112 /* PeriodicContactsSyncSettingsModel.swift */,
 				9224936721BC14890086CB6A /* AuthorityType.swift */,
+				CE0EA621220B2048000EF616 /* InstapickAnalyzesCount.swift */,
+				CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -16561,6 +16567,7 @@
 				7C6E2F991F31E4F800536DB6 /* CreateStoryNameViewInput.swift in Sources */,
 				CEAE3FBA1EFD4F0D00A405B2 /* HomePageViewController.swift in Sources */,
 				FA793D852018725400A02B46 /* ThingsServiceResponse.swift in Sources */,
+				CE0EA622220B2048000EF616 /* InstapickAnalyzesCount.swift in Sources */,
 				CE51ABBD1EF90853005DCEE0 /* LoginViewOutput.swift in Sources */,
 				CE9CB666210F2D7500342EEE /* FixedAVPlayerViewController.swift in Sources */,
 				7C634FAA1F0F936700B5B93D /* SettingsTableViewCell.swift in Sources */,
@@ -17351,6 +17358,7 @@
 				98E792D8203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				780400F91FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift in Sources */,
 				CE40133B1FCFE4AF006F28FD /* PromoView.swift in Sources */,
+				CE0EA624220B2072000EF616 /* InstapickAnalyze.swift in Sources */,
 				9224936821BC14890086CB6A /* AuthorityType.swift in Sources */,
 				7CEE2722209C560500EF6C79 /* PageForLanding.swift in Sources */,
 				66B07DFECFC39B41382FF00D /* FileInfoInteractorOutput.swift in Sources */,
