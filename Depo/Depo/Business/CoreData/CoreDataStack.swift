@@ -11,6 +11,11 @@ import CoreData
 
 final class CoreDataStack: NSObject {
     
+    typealias AppendingLocaclItemsFinishCallback = () -> Void
+    typealias AppendingLocaclItemsProgressCallback = (Float) -> Void
+    
+    typealias AppendingLocalItemsPageAppended = ([Item])->Void
+    
     static let notificationNewLocalPageAppendedFilesKey = "notificationNewLocalPageAppendedFilesKey"
     
     @objc static let `default` = CoreDataStack()

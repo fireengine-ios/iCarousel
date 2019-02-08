@@ -83,28 +83,33 @@ extension CoreDataStack {
         
         updateICloudStatus(for: assetsList, context: newChildBackgroundContext)
         
-        let notSaved = listAssetIdIsNotSaved(allList: assetsList, context: backgroundContext)
-        originalAssetsBeingAppended.append(list: notSaved)///tempo assets
-        
-        let start = Date()
-        
-        guard !notSaved.isEmpty else {
-            inProcessAppendingLocalFiles = false
-            print("LOCAL_ITEMS: All local files have been added in \(Date().timeIntervalSince(start)) seconds")
-            NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
-            return
-        }
-        
-        print("All local files started  \((start)) seconds")
-        nonCloudAlreadySavedAssets.dropAll()
-        save(items: notSaved, context: backgroundContext) { [weak self] in
-            self?.originalAssetsBeingAppended.dropAll()///tempo assets
-            print("LOCAL_ITEMS: All local files have been added in \(Date().timeIntervalSince(start)) seconds")
-            self?.inProcessAppendingLocalFiles = false
-            NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
-            self?.postiNotificationLocalPageAdded(latestItems: [])
+        listAssetIdIsNotSaved(allList: assetsList, context: backgroundContext) { [weak self] notSavedAssets in
+            guard let `self` = self else {
+                return
+            }
+
+            self.originalAssetsBeingAppended.append(list: notSavedAssets)///tempo assets
             
-            completion?()
+            let start = Date()
+            
+            guard !notSavedAssets.isEmpty else {
+                self.inProcessAppendingLocalFiles = false
+                print("LOCAL_ITEMS: All local files have been added in \(Date().timeIntervalSince(start)) seconds")
+                NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
+                return
+            }
+            
+            print("All local files started  \((start)) seconds")
+            self.nonCloudAlreadySavedAssets.dropAll()
+            self.save(items: notSavedAssets, context: self.backgroundContext) { [weak self] in
+                self?.originalAssetsBeingAppended.dropAll()///tempo assets
+                print("LOCAL_ITEMS: All local files have been added in \(Date().timeIntervalSince(start)) seconds")
+                self?.inProcessAppendingLocalFiles = false
+                NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
+                self?.postiNotificationLocalPageAdded(latestItems: [])
+                
+                completion?()
+            }
         }
     }
     
@@ -161,56 +166,57 @@ extension CoreDataStack {
             return
         }
         privateQueue.async { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            
-            let alreadySavedAssets = self.listAssetIdAlreadySaved(allList: assets, context: context)
-            let start = Date()
-            LocalMediaStorage.default.getCompactInfo(from: alreadySavedAssets, completion: { [weak self] info in
+            self?.listAssetIdAlreadySaved(allList: assets, context: context, completion: { [weak self] alreadySavedAssets in
                 guard let `self` = self else {
                     return
                 }
-                print("iCloud: updated iCloud in \(Date().timeIntervalSince(start)) secs")
-                context.perform {
-                    let invalidItems = info.filter { !$0.isValid }.map { $0.asset.localIdentifier }
-                    print("iCloud: removing \(invalidItems.count) items")
-                    self.removeLocalMediaItems(with: invalidItems, completion: {})
-                }
+                
+                let start = Date()
+                LocalMediaStorage.default.getCompactInfo(from: alreadySavedAssets, completion: { [weak self] info in
+                    guard let `self` = self else {
+                        return
+                    }
+                    print("iCloud: updated iCloud in \(Date().timeIntervalSince(start)) secs")
+                    context.perform {
+                        let invalidItems = info.filter { !$0.isValid }.map { $0.asset.localIdentifier }
+                        print("iCloud: removing \(invalidItems.count) items")
+                        self.removeLocalMediaItems(with: invalidItems, completion: {})
+                    }
+                })
             })
         }
     }
     
-    private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
+    func listAssetIdAlreadySaved(allList: [PHAsset], context: NSManagedObjectContext, completion: @escaping ([PHAsset]) -> Void) {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-            return []
+            return
+        }
+        
+        let currentlyInLibriaryIDs: [String] = allList.map { $0.localIdentifier }
+        
+        let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
+        context.perform { [weak self] in
+            let alredySaved = self?.executeRequest(predicate: predicate, context: context) ?? []
+            let alredySavedIDs = alredySaved.flatMap { $0.localFileID }
+            completion(allList.filter { alredySavedIDs.contains( $0.localIdentifier ) })
+        }
+    }
+    
+    private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext, completion: @escaping ([PHAsset]) -> Void) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            completion([])
+            return
         }
         let currentlyInLibriaryIDs: [String] = allList.map { $0.localIdentifier }
         
         checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs)
         
         let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
-
-        let alredySaved: [MediaItem] = executeRequest(predicate: predicate, context: context)
-        
-        let alredySavedIDs = alredySaved.flatMap { $0.localFileID }
-        
-        return allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) }
-    }
-    
-    func listAssetIdAlreadySaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
-        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-            return []
+        context.perform { [weak self] in
+            let alredySaved = self?.executeRequest(predicate: predicate, context: context) ?? []
+            let alredySavedIDs = alredySaved.flatMap { $0.localFileID }
+            completion(allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) })
         }
-        let currentlyInLibriaryIDs: [String] = allList.map { $0.localIdentifier }
-        
-        let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
-        
-        let alredySaved: [MediaItem] = executeRequest(predicate: predicate, context: context)
-        
-        let alredySavedIDs = alredySaved.flatMap { $0.localFileID }
-        
-        return allList.filter { alredySavedIDs.contains( $0.localIdentifier ) }
     }
     
     func removeLocalMediaItems(with assetIdList: [String], completion: @escaping VoidHandler) {
@@ -237,7 +243,7 @@ extension CoreDataStack {
                 ///Appearantly after recovery local ID may change, so temporary soloution is to check all files all over. and in the future chenge DataBase behavior heavily
                 let assetsList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
                 
-                self?.checkLocalFilesExistence(actualPhotoLibItemsIDs: assetsList.flatMap{$0.localIdentifier}, complition: completion)
+                self?.checkLocalFilesExistence(actualPhotoLibItemsIDs: assetsList.flatMap{$0.localIdentifier}, completion: completion)
             })
         }
  
@@ -335,7 +341,7 @@ extension CoreDataStack {
         }
     }
     
-    func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], complition: VoidHandler? = nil) {
+    func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], completion: VoidHandler? = nil) {
         let newContext = newChildBackgroundContext
         newContext.perform { [weak self] in
             guard let `self` = self else {
@@ -352,7 +358,7 @@ extension CoreDataStack {
                 /// put notification here that item deleted
                 let items = allNonAccurateSavedLocalFiles.map { $0.wrapedObject }
                 ItemOperationManager.default.deleteItems(items: items)
-                complition?()
+                completion?()
             })
         }
     }
