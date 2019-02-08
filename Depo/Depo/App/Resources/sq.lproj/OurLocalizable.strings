@@ -1,6 +1,6 @@
-"Welcome1Info" = "Direkt, Grumbulloni, Kujtoni";
+"Welcome1Info" = "Jetoni, Grumbulloni, Kujtoni";
 "Welcome1SubInfo" = "Grumbulloni fotot, videot dhe skedarët tuaja në lifebox! Aksesojini kujtimet kurdoherë e kudo që të jeni.";
-"Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Shërbimet e vendndodhjes janë të çaktivizuara tek Rregullimet e pajisjes suaj. Për të përdorur funksionin e sinkronizimit të sfondit të lifebox, ju duhet të aktivizoni shërbimet e vendndodhjes nën menunë \"Rregullime - Privatësia - Shërbimet e Vendndodhjes\". ";
+"Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Shërbimet e vendndodhjes janë të çaktivizuara tek Rregullimet e pajisjes suaj. Për të përdorur funksionin e sinkronizimit të sfondit të lifebox, ju duhet të aktivizoni shërbimet e vendndodhjes nën menunë \"Rregullime - Privatësia - Shërbimet e Vendndodhjes\".";
 "This file will be removed only from your album. You can access this file from Photos tab" = "Ky skedar do të hiqet vetëm nga albumi juaj. Ju mund ta aksesoni këtë skedar nga tab-i i Fotove";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Fshirja e këtij albumi nuk do t'i heqë skedarët nga lifebox. Ju mund t'i aksesoni këto skedarë nga tab-i i Fotove. A jeni i sigurt që dëshironi t'i fshini?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Fshirja e këtij skedari do t'i heqë ato çka ajo pëmban nga lifebox. Ju nuk do të keni mundësi t'i aksesoni ato pasi të jenë fshirë. A jeni i sigurt se dëshironi ta fshini?";
@@ -20,7 +20,7 @@
 "Touch ID" = "Identifikim me prekje";
 "Face ID" = "Identifikim me fytyrë";
 "Enable" = "Mundësoni";
-"Please activate %@ from your device settings to use this feature" = "Ju lutem, aktivizoni %@ nga Rregullimet/Cilësimet/Konfigurimet e pajisjes suaj për ta përdorur këtë funksion.";
+"Please activate %@ from your device settings to use this feature" = "Ju lutem, aktivizoni %@ nga Cilësimet e pajisjes suaj për ta përdorur këtë funksion.";
 "To enter passcode" = "Vendosni kodin e kalimit të lifebox.";
 "Set a Passcode" = "Përcaktoni një kod kalimi për lifebox.";
 "Passcodes don't match, please try again" = "Kodet e kalimit nuk përputhen. Ju lutem, provoni përseri.";
@@ -593,7 +593,7 @@
 "%d%% Restored…" = "%d%% Rivendosur…";
 "%d%% Analyzed…" = "%d%% Analizuar …";
 "START USING" = "Filloni";
-"landingTitle0" = "Direkt, Grumbulloni, Kujtoni ";
+"landingTitle0" = "Jetoni, Grumbulloni, Kujtoni";
 
 /*Fuzzy*/
 "landingSubTitle0" = "Grumbulloni fotot, videot, kontaktet dhe skedarët e tjerë në lifebox ! Aksesoni dhe kujtoni kurdo dhe kudo që të jeni.";
@@ -853,7 +853,7 @@
 "Instagram" = "Instagram";
 "connected_as_format" = "Llogari të lidhura: @%@";
 "instagram_remove_connection_warning_title" = "Jeni duke hequr lidhjen me Instagram";
-"instagram_remove_connection_warning_message" = "Jeni të sigurt që dëshironi të hiqni lidhjen me Instagram?\\n\\n";
+"instagram_remove_connection_warning_message" = "Jeni të sigurt që dëshironi të hiqni lidhjen me Instagram?\n\n";
 "instapick_selection_photos_selected" = "Foto të përzgjedhura (%d)";
 "instapick_selection_analyzes_left" = "Ju keni %d analizime të mbetura";
 
@@ -861,6 +861,7 @@
 "loading" = "Duke u ngarkuar...";
 "there_are_no_photos" = "Nuk ka foto";
 "there_are_no_albums" = "Nuk ka albume";
-"instapick_selection_analyzes_left_max" = "Ju keni përzgjedhur %d foto\\n (numri maksimal që mund të përzgjidhni)";
+"instapick_selection_analyzes_left_max" = "Ju keni përzgjedhur %d foto\n(numri maksimal që mund të përzgjidhni)";
 "free_trial_title_label" = "Analizoni me PhotoPick";
 "free_trial_detail_label" = "Zbuloni se cilat foto do të marrin vlerësim më të lartë; analizoni me PhotoPick për më shumë pëlqime! Provojeni falas për një periudhë të limituar!";
+"instapick_under_construction" = "Ne po bëjmë përmirësime në PhotoPick për një eksperiencë më të mirë 😉";
