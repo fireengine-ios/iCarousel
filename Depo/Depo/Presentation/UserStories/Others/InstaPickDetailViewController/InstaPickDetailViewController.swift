@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class InstaPickDetailViewController: UIViewController {
+final class InstaPickDetailViewController: UIViewController, ControlTabBarProtocol {
     
     private enum PhotoViewType: String {
         case bigView = "bigView"
@@ -59,6 +59,7 @@ final class InstaPickDetailViewController: UIViewController {
     private var analyzesCount: InstapickAnalyzesCount?
     
     private lazy var activityManager = ActivityIndicatorManager()
+        
     //MARK: lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +70,12 @@ final class InstaPickDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         open()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        showTabBar()
     }
     
     //MARK: - Utility Methods(public)

@@ -750,17 +750,17 @@
 "NSFaceIDUsageDescription" = "Ця програма використовує Face ID для підвищення вашої безпеки";
 
 /*AnalyzeHistoryController*/
-"InstaPick" = "ФотоPick";
+"InstaPick" = "PhotoPick";
 "package_albanian_cancel_text" = "Albanian quota cancel text";
 "feature_albanian_cancel_text" = "Ви можете безкоштовно користуватися Преміум підпискою як абонент ALBtelecom";
 "no_analyses_left_title" = "Немає оцінок";
 "no_analyses_left_message" = "Немає оцінок";
-"no_analyses_left_button" = "Активувати ФотоPick";
+"no_analyses_left_button" = "Активувати PhotoPick";
 "analyze_history_empty_title" = "Ще не оцінювали ваші фото?";
 "analyze_history_empty_subtitle" = "Почніть оцінювати та дізнайтеся, які фото отримають найбільше вподобань, щоб потім поділитися у соцмережах";
 "analyze_history_analyze_left" = "Історія оцінювань";
 "analyze_history_analyze_count" = "%1$d/%2$d";
-"analyze_with_instapick" = "Оцінка ФотоPick";
+"analyze_with_instapick" = "Оцінка PhotoPick";
 "analyze_history_photos_count" = "%d фото";
 "analyze_history_start_here" = "Почніть тут!";
 "analyze_confirm_delete_title" = "Ви впевнені, що хочете видалити?";
@@ -769,15 +769,15 @@
 "analyze_confirm_delete_no" = "НІ";
 
 /*InstaPick three dots*/
-"new_insta_pick" = "Новий ФотоPick";
+"new_insta_pick" = "Новий PhotoPick";
 
 /*InstaPickCard*/
-"used_before_title_label" = "Ще більше вподобань з ФотоPick!";
-"no_used_before_title_label" = "Оцінка ФотоPick!";
-"no_analysis_title_label" = "Отримайте більше з ФотоPick!";
-"used_before_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з ФотоPick та отримуйте ще більше вподобань! Ще більше оцінок очікують на ваші фото:)";
-"no_used_before_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з ФотоPick та отримуйте ще більше вподобань! Ще не спробували?";
-"no_analysis_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з ФотоPick та отримуйте ще більше вподобань! Не забудьте активувати новий пакет для ФотоPick! :)";
+"used_before_title_label" = "Ще більше вподобань з PhotoPick!";
+"no_used_before_title_label" = "Оцінка PhotoPick!";
+"no_analysis_title_label" = "Отримайте більше з PhotoPick!";
+"used_before_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з PhotoPick та отримуйте ще більше вподобань! Ще більше оцінок очікують на ваші фото:)";
+"no_used_before_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з PhotoPick та отримуйте ще більше вподобань! Ще не спробували?";
+"no_analysis_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з PhotoPick та отримуйте ще більше вподобань! Не забудьте активувати новий пакет для PhotoPick! :)";
 "instapick_button_has_analysis" = "Давайте починати!";
 
 /*InstaPickDetailViewController*/
@@ -796,9 +796,9 @@
 
 /*InstaPickPopUp*/
 "dont_show_this_again" = "Не показувати це знову";
-"instapick_analyze" = "Оцінити з ФотоPick!";
+"instapick_analyze" = "Оцінити з PhotoPick!";
 "connected_account" = "Це чудово працює з вашим об'єднаним аккаунтом!";
-"instapick_description" = "Якщо ви зв'яжете ваш обліковий запис з профілем в Instagram, ми зможемо покращити сервіс, виконуючи персоналізованно кожну нову оцінку ФотоPick";
+"instapick_description" = "Якщо ви зв'яжете ваш обліковий запис з профілем в Instagram, ми зможемо покращити сервіс, виконуючи персоналізованно кожну нову оцінку PhotoPick";
 "connected_with_instagram" = "Поєднати з Instagram";
 "connected_with_instagram_name" = "Поєднати з Instagram як";
 "continue_without_connecting" = "Продовжувати без об'єднання";
@@ -806,7 +806,7 @@
 "analyze_history_free_text" = "Безкоштовно на деякий час";
 
 /*InstapickUpgradePopup*/
-"instapick_upgrade_popup_text" = "Будь ласка оновіть lifebox  додаток, щоб активувати пакет ФотоPick";
+"instapick_upgrade_popup_text" = "Будь ласка оновіть lifebox  додаток, щоб активувати пакет PhotoPick";
 "instapick_upgrade_popup_button" = "Оновити";
 "instapick_upgrade_popup_no" = "Ні";
 "instapick_analysis_left" = "Залишилося оцінки: %1$d/%2$d";
@@ -823,6 +823,6 @@
 "there_are_no_photos" = "Немає фото";
 "there_are_no_albums" = "Немає альбомів";
 "instapick_selection_analyzes_left_max" = "Ви обрали %d фото (максимально можлива кількість)";
-"free_trial_title_label" = "Оцінити з ФотоPick";
-"free_trial_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з ФотоPick та отримуйте ще більше вподобань! Спробуйте безкоштовно!";
-"instapick_under_construction" = "Ми покращуємо сервіс ФотоPick  :)";
+"free_trial_title_label" = "Оцінити з PhotoPick";
+"free_trial_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з PhotoPick та отримуйте ще більше вподобань! Спробуйте безкоштовно!";
+"instapick_under_construction" = "Ми покращуємо сервіс PhotoPick  :)";
