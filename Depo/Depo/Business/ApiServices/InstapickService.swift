@@ -205,6 +205,19 @@ extension InstapickServiceImpl: InstapickService {
     
     /// global logic
     func startAnalyze(ids: [String], popupToDissmiss: UIViewController) {
+        
+        func showError(_ error: Error) {
+            let popupVC = PopUpController.with(title: TextConstants.errorAlert, message: error.localizedDescription, image: .error, buttonTitle: TextConstants.ok) { vc in
+                vc.close {
+                    popupToDissmiss.dismiss(animated: true, completion: nil)
+                }
+            }
+            
+            DispatchQueue.toMain {
+                UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
+            }
+        }
+        
         startAnalyzes(ids: ids) { [weak self] result in
             switch result {
             case .success(let analysis):
@@ -225,12 +238,12 @@ extension InstapickServiceImpl: InstapickService {
                         })
                         
                     case .failed(let error):
-                        UIApplication.showErrorAlert(message: error.localizedDescription)
+                        showError(error)
                     }
                 }
                 
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.localizedDescription)
+                showError(error)
             }
         }
     }
