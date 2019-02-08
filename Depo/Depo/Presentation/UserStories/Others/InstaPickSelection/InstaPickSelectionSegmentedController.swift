@@ -1,12 +1,5 @@
-//
-//  InstaPickSelectionSegmentedController.swift
-//  Depo_LifeTech
-//
-//  Created by Yaroslav Bondar on 15/01/2019.
-//  Copyright © 2019 LifeTech. All rights reserved.
-//
-
 import UIKit
+import Reachability
 
 protocol InstaPickSelectionSegmentedControllerDelegate {
     func selectionStateDidChange(_ selectionState: PhotoSelectionState)
@@ -50,6 +43,10 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     private var delegates = MulticastDelegate<InstaPickSelectionSegmentedControllerDelegate>()
     
     private let instapickService: InstapickService = factory.resolve()
+    private let reachabilityService = Reachability()
+    
+    private var isGettingSelectingLimit = false
+    private var isGettingSelectingLimitFinished = false
     
     private lazy var albumsTabIndex: Int = {
         if let index = segmentedViewControllers.index(of: albumsVC) {
@@ -86,6 +83,10 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         setup()
     }
     
+    deinit {
+        reachabilityService?.stopNotifier()
+    }
+    
     private func setup() {
         vcView.segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
         vcView.analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
@@ -112,12 +113,39 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         super.viewDidLoad()
         
         getSelectingLimitAndStart()
+        setupReachability()
     }
     
     // MARK: methods
     
+    private func setupReachability() {
+        guard let reachability = reachabilityService else {
+            assertionFailure()
+            return
+        }
+        
+        reachability.whenReachable = { [weak self] reachability in
+            guard let `self` = self, !self.isGettingSelectingLimitFinished else {
+                return
+            }
+            self.getSelectingLimitAndStart()
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            assertionFailure("can't start reachability notifier: \(error.localizedDescription)")
+        }
+    }
+    
     /// one time called
     private func getSelectingLimitAndStart() {
+        guard !isGettingSelectingLimit else {
+            return
+        }
+        isGettingSelectingLimit = true
+        vcView.emptyMessageLabel.text = TextConstants.loading
+        
         instapickService.getAnalyzesCount { [weak self] result in
             guard let `self` = self else {
                 return
@@ -132,10 +160,14 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
                     self.selectingLimit = self.maxSelectingLimit
                 }
                 self.setupScreenWithSelectingLimit(self.selectingLimit)
+                self.isGettingSelectingLimitFinished = true
+                self.vcView.emptyMessageLabel.isHidden = true
                 
             case .failed(let error):
                 self.showErrorAlert(message: error.localizedDescription)
+                self.vcView.emptyMessageLabel.text = error.localizedDescription
             }
+            self.isGettingSelectingLimit = false
         }
     }
     

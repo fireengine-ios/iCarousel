@@ -803,15 +803,15 @@
 "used_before_title_label" = "PhotoPick to get bunch of likes!";
 "no_used_before_title_label" = "Analyze with PhotoPick!";
 "no_analysis_title_label" = "Get more PhotoPick!";
-"used_before_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes!";
-"no_used_before_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes!";
-"no_analysis_detail_label" = "Let us analyze your selected photos and suggest you which one to share!";
+"used_before_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! You have more analysis waiting for your photos😉";
+"no_used_before_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! You haven't tried yet?";
+"no_analysis_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Don't forget to purchase new package for more PhotoPick😉";
 "instapick_button_has_analysis" = "Let’s Start!";
 
 /*InstaPickDetailViewController*/
 "you_are_ready_to_share" = "You are ready to share!";
 "instaPick_analysis_left" = "Analysis Left: %1$d / %2$d";
-"engage_with_more_hastags" = "Engage with more #hastags";
+"engage_with_more_hastags" = "Engage with more #hashtags";
 "copy_hashtags_to_clipboard" = "Copy #hashtags to clipboard";
 "share_on_social_media" = "Share on Social Media!";
 "picked" = "PICKED!";
@@ -834,8 +834,8 @@
 "analyze_history_free_text" = "Free for Limited Time";
 
 /*InstapickUpgradePopup*/
-"instapick_upgrade_popup_text" = "In order to purchase PhotoPick package, you need to upgrade your lifebox application.";
-"instapick_upgrade_popup_button" = "Upgrade";
+"instapick_upgrade_popup_text" = "In order to purchase PhotoPick package, you need to update your lifebox application.";
+"instapick_upgrade_popup_button" = "Update";
 "instapick_upgrade_popup_no" = "No";
 "instapick_analysis_left" = "Analysis Left: %1$d / %2$d";
 "instapick_unlimited_analysis" = "Free for Limited Time";
@@ -851,3 +851,6 @@
 "there_are_no_photos" = "There are no photos";
 "there_are_no_albums" = "There are no albums";
 "instapick_selection_analyzes_left_max" = "You’ve selected %d photos\n(the max. number you can select)";
+"free_trial_title_label" = "Analyze with PhotoPick";
+"free_trial_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Try more free for a limited time!";
+"instapick_under_construction" = "We are making improvement on PhotoPick for a better experience 😉";

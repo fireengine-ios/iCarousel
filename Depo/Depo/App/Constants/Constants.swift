@@ -680,7 +680,7 @@ struct TextConstants {
     static let offersCancelCyprus = NSLocalizedString("Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let offersCancelMoldcell = NSLocalizedString("Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let offersCancelTurkcell = NSLocalizedString("Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let offersCancelLife = NSLocalizedString("To deactivate lifebox 25GB please send SMS with the text \"Stop1\", for lifebox 100GB please send SMS with the text \"Stop2\", for lifebox 500GB please send SMS with the text \"Stop3\" to the number 6767", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let offersCancelLife = NSLocalizedString("offersCancelLife", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let offersInfo = NSLocalizedString("Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let offersOk = NSLocalizedString("OK", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1041,10 +1041,12 @@ struct TextConstants {
     static let instaPickUsedBeforeTitleLabel = NSLocalizedString("used_before_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickNoUsedBeforeTitleLabel = NSLocalizedString("no_used_before_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickNoAnalysisTitleLabel = NSLocalizedString("no_analysis_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let instaPickFreeTrialTitleLabel = NSLocalizedString("free_trial_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let instaPickUsedBeforeDetailLabel = NSLocalizedString("used_before_detail_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickNoUsedBeforeDetailLabel = NSLocalizedString("no_used_before_detail_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickNoAnalysisDetailLabel = NSLocalizedString("no_analysis_detail_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickFreeTrialDetailLabel = NSLocalizedString("free_trial_detail_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let instaPickButtonHasAnalysis = NSLocalizedString("instapick_button_has_analysis", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickButtonNoAnalysis = NSLocalizedString("Purchase", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1078,6 +1080,7 @@ struct TextConstants {
     static let instapickSelectionPhotosSelected = NSLocalizedString("instapick_selection_photos_selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instapickSelectionAnalyzesLeft = NSLocalizedString("instapick_selection_analyzes_left", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instapickSelectionAnalyzesLeftMax = NSLocalizedString("instapick_selection_analyzes_left_max", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instapickUnderConstruction = NSLocalizedString("instapick_under_construction", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loading = NSLocalizedString("loading", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let thereAreNoPhotos = NSLocalizedString("there_are_no_photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let thereAreNoAlbums = NSLocalizedString("there_are_no_albums", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

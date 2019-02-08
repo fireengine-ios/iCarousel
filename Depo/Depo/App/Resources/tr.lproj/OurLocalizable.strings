@@ -789,9 +789,9 @@
 "used_before_title_label" = "PhotoPick ile daha çok beğeni!";
 "no_used_before_title_label" = "PhotoPick ile Analiz Et!";
 "no_analysis_title_label" = "Daha fazla PhotoPick!";
-"used_before_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et!";
-"no_used_before_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et!";
-"no_analysis_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et!";
+"used_before_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Kullanmadığın haklar analiz için fotoğraflarını bekliyor😉";
+"no_used_before_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Yoksa henüz denemedin mi?";
+"no_analysis_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Analiz hakkını artırmak için paket almayı unutma😉";
 "instapick_button_has_analysis" = "Hadi, Başla!";
 
 /*InstaPickDetailViewController*/
@@ -821,8 +821,8 @@
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "PhotoPick paketi almak için uygulamanı güncellemen gerekiyor.";
-"instapick_upgrade_popup_button" = "Yükselt";
-"instapick_upgrade_popup_no" = "Vazgeç";
+"instapick_upgrade_popup_button" = "Güncelle";
+"instapick_upgrade_popup_no" = "Hayır";
 "instapick_analysis_left" = "Analiz hakkı: %1$d / %2$d";
 "instapick_unlimited_analysis" = "Sınırlı Bir Süre Ücretsiz!";
 "Facebook" = "Facebook";
@@ -830,10 +830,13 @@
 "Instagram" = "Instagram";
 "connected_as_format" = "Bağlı hesap: @%@";
 "instagram_remove_connection_warning_title" = "Instagram bağlantını kaldırmak üzeresin";
-"instagram_remove_connection_warning_message" = "Instagram ile olan bağlantını kaldırmak istediğine emin misin?\n\n";
+"instagram_remove_connection_warning_message" = "Instagram ile olan bağlantını kaldırmak istediğine emin misin?\\n\\n";
 "instapick_selection_photos_selected" = "Seçili Fotoğraf (%d)";
 "instapick_selection_analyzes_left" = "Sadece %d analiz hakkın kaldı";
 "loading" = "Yükleniyor...";
 "there_are_no_photos" = "Hiç fotoğraf yok";
 "there_are_no_albums" = "Hiç albüm yok";
 "instapick_selection_analyzes_left_max" = "%d fotoğraf seçtin\n(1 sorguda seçebileceğin en yüksek sayı)";
+"free_trial_title_label" = "PhotoPick ile Analiz Et!";
+"free_trial_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Üstelik daha çok dene diye sınırlı bir süre için ücretsiz!";
+"instapick_under_construction" = "Daha iyi bir deneyim yaşaman için PhotoPick'i iyileştiriyoruz 😉";

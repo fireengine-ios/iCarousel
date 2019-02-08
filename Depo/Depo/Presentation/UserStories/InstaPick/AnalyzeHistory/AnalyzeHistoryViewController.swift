@@ -24,6 +24,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private let refresher = UIRefreshControl()
     private var page = 0
     private let pageSize = Device.isIpad ? 50 : 30
+    private var isLoadingNextPage = false
     
     private var navBarConfigurator = NavigationBarConfigurator()
     private lazy var cancelSelectionButton: UIBarButtonItem = {
@@ -265,20 +266,29 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     private func loadNextHistoryPage(completion: BoolHandler? = nil) {
+        if isLoadingNextPage || dataSource.isPaginationDidEnd {
+            return
+        }
+        
+        isLoadingNextPage = true
+        
         instapickService.getAnalyzeHistory(offset: page, limit: pageSize) { [weak self] result in
             guard let `self` = self else {
                 return
             }
             
+            self.isLoadingNextPage = false
+            
             switch result {
             case .success(let history):
                 DispatchQueue.main.async {
-                    if self.page == 0 {
+                    self.page += 1
+                    
+                    if self.page == 1 {
                         self.dataSource.reloadHistoryItems(history)
                     } else {
                         self.dataSource.appendHistoryItems(history)
                     }
-                    self.page += 1
                 
                     if self.dataSource.isEmpty {
                         self.displayManager.applyConfiguration(.empty)
@@ -442,6 +452,21 @@ extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
     func didRemoveAnalysis() { }
     
     func didFinishAnalysis(_ analyses: [InstapickAnalyze]) {
-        dataSource.insertNewItems(analyses)
+        guard let mainAnalyse = analyses.max(by: {
+            if $0.rank == $1.rank {
+                return $0.score < $1.score
+            }
+            return $0.rank < $1.rank
+        }) else {
+            return
+        }
+        let insertAnalyse = InstapickAnalyze(requestIdentifier: mainAnalyse.requestIdentifier,
+                                             rank: mainAnalyse.rank,
+                                             hashTags: mainAnalyse.hashTags,
+                                             fileInfo: mainAnalyse.fileInfo,
+                                             photoCount: analyses.count,
+                                             startedDate: mainAnalyse.startedDate,
+                                             score: mainAnalyse.score)
+        dataSource.insertNewItems([insertAnalyse])
     }
 }
