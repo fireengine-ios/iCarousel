@@ -65,7 +65,6 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     private func configure() {
         instapickService.delegates.add(self)
-        needShowTabBar = false
         
         activityManager.delegate = self
         displayManager.applyConfiguration(.initial)
@@ -384,7 +383,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         stopActivityIndicator()
         
         let router = RouterVC()
-        let controller = router.instaPickDetailViewController(models: analysis, analyzesCount: analyzesCount)
+        let controller = router.instaPickDetailViewController(models: analysis, analyzesCount: analyzesCount, isShowTabBar: false)
         
         router.presentViewController(controller: controller)
     }

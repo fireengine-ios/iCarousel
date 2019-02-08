@@ -2425,6 +2425,8 @@
 		8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */; };
 		8C975E13220DA24300AC3502 /* InstapickAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */; };
 		8C975E14220DA25000AC3502 /* InstapickAnalyzesCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA621220B2048000EF616 /* InstapickAnalyzesCount.swift */; };
+		8C975E17220DC55000AC3502 /* ControlTabBarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C975E16220DC55000AC3502 /* ControlTabBarProtocol.swift */; };
+		8C975E18220DC55000AC3502 /* ControlTabBarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C975E16220DC55000AC3502 /* ControlTabBarProtocol.swift */; };
 		8C9EA13F20B593E600FED3A2 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
 		8C9EA14020B593E600FED3A2 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
 		8CA2913D20CA885C0014379E /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */; };
@@ -5208,6 +5210,7 @@
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
 		8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailVerificationViewController.swift; sourceTree = "<group>"; };
 		8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MailVerificationViewController.xib; sourceTree = "<group>"; };
+		8C975E16220DC55000AC3502 /* ControlTabBarProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlTabBarProtocol.swift; sourceTree = "<group>"; };
 		8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceExtension.swift; sourceTree = "<group>"; };
 		8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndServicesDataStorage.swift; sourceTree = "<group>"; };
 		8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetInitialConfig.swift; sourceTree = "<group>"; };
@@ -9933,6 +9936,14 @@
 			path = MailVerification;
 			sourceTree = "<group>";
 		};
+		8C975E15220DC55000AC3502 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8C975E16220DC55000AC3502 /* ControlTabBarProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		8CAACDC81F14F39000B0A6FF /* Servieces */ = {
 			isa = PBXGroup;
 			children = (
@@ -11680,6 +11691,7 @@
 		CE3EB30E1FC7F6A0000B70D6 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				8C975E15220DC55000AC3502 /* Protocols */,
 				7C3A74341F04DE2800124DF5 /* BaseDataSources */,
 				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
 				4A56D5A4202AF467003A4624 /* FaceImageAddName */,
@@ -16067,6 +16079,7 @@
 				8C0E8F361FDEBDFF00789C91 /* SplashPresenter.swift in Sources */,
 				8C0B91AE20170ECA00A5BA81 /* ManageContactsInteractorOutput.swift in Sources */,
 				8C0E8F371FDEBDFF00789C91 /* GeneralFilesFiltration.swift in Sources */,
+				8C975E18220DC55000AC3502 /* ControlTabBarProtocol.swift in Sources */,
 				8C0E8F381FDEBDFF00789C91 /* SearchViewInteractorOutput.swift in Sources */,
 				8C0E8F391FDEBDFF00789C91 /* SplashInteractorInput.swift in Sources */,
 				8C0E8F3A1FDEBDFF00789C91 /* BottomSelectionTabBarInitializer.swift in Sources */,
@@ -16455,6 +16468,7 @@
 				CEC3C21E1FB9961900C3D67F /* PasscodeEnterViewController.swift in Sources */,
 				7C66E8B11F979C3300D98F27 /* CreateStoryPreviewViewController.swift in Sources */,
 				CEE04E141F471AFE00D74FA1 /* UIImageView.swift in Sources */,
+				8C975E17220DC55000AC3502 /* ControlTabBarProtocol.swift in Sources */,
 				CEE005761F7B846C004FA8DE /* PHPhotoLibraryChangeObserver.swift in Sources */,
 				7CDABD0A1F1E3A6300C8CC16 /* UserProfileModuleInput.swift in Sources */,
 				CEF371AC20887BAC007AD36E /* MD5.swift in Sources */,
