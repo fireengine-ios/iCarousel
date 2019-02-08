@@ -868,14 +868,14 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func instaPickDetailViewController(models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) -> InstaPickDetailViewController {
+    func instaPickDetailViewController(models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount, isShowTabBar: Bool) -> InstaPickDetailViewController {
         let nibName = String(describing: InstaPickDetailViewController.self)
         let controller = InstaPickDetailViewController(nibName: nibName, bundle: nil)
         
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
         
-        controller.configure(with: models, analyzesCount: analyzesCount)
+        controller.configure(with: models, analyzesCount: analyzesCount, isShowTabBar: isShowTabBar)
         
         return controller
     }

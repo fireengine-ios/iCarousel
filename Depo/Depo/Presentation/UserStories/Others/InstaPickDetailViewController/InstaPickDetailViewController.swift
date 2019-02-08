@@ -54,6 +54,7 @@ final class InstaPickDetailViewController: UIViewController, ControlTabBarProtoc
     private var dataSource = InstaPickHashtagCollectionViewDataSource()
     private var isShown = false
     private var selectedPhoto: InstapickAnalyze?
+    private var isShowTabBar = true
     
     private var analyzes: [InstapickAnalyze] = []
     private var analyzesCount: InstapickAnalyzesCount?
@@ -75,13 +76,14 @@ final class InstaPickDetailViewController: UIViewController, ControlTabBarProtoc
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        showTabBar()
+        showTabBarIfNeeded()
     }
     
     //MARK: - Utility Methods(public)
-    func configure(with models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) {
+    func configure(with models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount, isShowTabBar: Bool) {
         analyzes = models
         self.analyzesCount = analyzesCount
+        self.isShowTabBar = isShowTabBar
     }
     
     //MARK: - Utility Methods(private)
@@ -285,6 +287,10 @@ final class InstaPickDetailViewController: UIViewController, ControlTabBarProtoc
     
     private func showErrorWith(message: String) {
         UIApplication.showErrorAlert(message: message)
+    }
+    
+    private func showTabBarIfNeeded() {
+        isShowTabBar ? showTabBar() : hideTabBar()
     }
     
     //MARK: - Actions
