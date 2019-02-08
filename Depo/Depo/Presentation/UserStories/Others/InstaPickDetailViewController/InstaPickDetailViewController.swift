@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class InstaPickDetailViewController: UIViewController {
+final class InstaPickDetailViewController: BaseViewController {
     
     private enum PhotoViewType: String {
         case bigView = "bigView"
@@ -69,6 +69,10 @@ final class InstaPickDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         open()
+    }
+    
+    override func isNeedShowTabBar() -> Bool {
+        return true
     }
     
     //MARK: - Utility Methods(public)
