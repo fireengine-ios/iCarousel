@@ -209,10 +209,10 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             for object in deletedPhotos {
                 ///Previously it was compering pointers not md5 values
                 if let index = self.duplicatesArray.index(where: { $0.md5 == object.md5 }) {
-                    self.duplicatesArray.remove(at: index)
+                    self.duplicatesArray.safeRemove(at: index)
                     self.analyticsService.track(event: .freeUpSpace)
                 } else if let index = self.duplicatesArray.index(where: { $0.getTrimmedLocalID() == object.getTrimmedLocalID() }) {
-                    self.duplicatesArray.remove(at: index)
+                    self.duplicatesArray.safeRemove(at: index)
                     self.analyticsService.track(event: .freeUpSpace)
                 }
             }
@@ -307,9 +307,9 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                         {
                             self.serverDuplicatesArray.append(item)
                             self.duplicatesArray.append(elementToAdd)
-                            self.localtemsArray.remove(at: index)
-                            self.localMD5Array.remove(at: index)
-                            self.localTrimmedID.remove(at: index)
+                            self.localtemsArray.safeRemove(at: index)
+                            self.localMD5Array.safeRemove(at: index)
+                            self.localTrimmedID.safeRemove(at: index)
                             
                             if self.localtemsArray.isEmpty {
                                 isFinished = true
@@ -320,9 +320,9 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                         {
                             self.serverDuplicatesArray.append(item)
                             self.duplicatesArray.append(elementToAdd)
-                            self.localtemsArray.remove(at: index)
-                            self.localMD5Array.remove(at: index)
-                            self.localTrimmedID.remove(at: index)
+                            self.localtemsArray.safeRemove(at: index)
+                            self.localMD5Array.safeRemove(at: index)
+                            self.localTrimmedID.safeRemove(at: index)
                             
                             if self.localtemsArray.isEmpty {
                                 isFinished = true
@@ -497,7 +497,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 for item in networksObjects {
                     if let index = duplicatesMD5Array.index(of: item.md5) {
                         duplicatesMD5Array.remove(at: index)
-                        self.duplicatesArray.remove(at: index)
+                        self.duplicatesArray.safeRemove(at: index)
                     } else {
                         networksObjectsForDelete.append(item)
                     }
