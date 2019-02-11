@@ -176,12 +176,15 @@ public extension SynchronizedArray {
     /// - Parameters:
     ///   - index: The position of the element to remove.
     ///   - completion: The handler with the removed element.
-    func remove(at index: Int, completion: ((Element) -> Void)? = nil) {
+    func safeRemove(at index: Int, completion: ((Element) -> Void)? = nil) {
         queue.async(flags: .barrier) {
-            let element = self.array.remove(at: index)
-            
-            DispatchQueue.main.async {
-                completion?(element)
+            let isIndexValid = self.array.indices.contains(index)
+            if isIndexValid {
+                let element = self.array.remove(at: index)
+                
+                DispatchQueue.main.async {
+                    completion?(element)
+                }
             }
         }
     }
