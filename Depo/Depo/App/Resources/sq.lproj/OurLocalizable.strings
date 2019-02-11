@@ -359,7 +359,7 @@
 "E-Mail or GSM Number" = "E-mail ose Numër Telefoni";
 "Remember my credentials" = "Kujtoni fjalëkalimin tim";
 "I can't login" = "Kam harruar fjalëkalimin.";
-"Register to lifebox and get a 5 GB of storage for free!" = "Regjistrohuni në lifebox dhe merrni falas 5 GB arkivë!";
+"Register to lifebox and get a 5 GB of storage for free!" = "Regjistrohuni në lifebox dhe merrni dhuratë 5 GB arkivë!";
 "Login" = "Hyni";
 "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>" = "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>";
 "Accept  Terms" = "Kam lexuar e pranuar termat e përdorimit.";
@@ -367,7 +367,7 @@
 "Please enter your password" = "Ju lutem, vendosni fjalëkalimin tuaj.";
 "Please enter a valid GSM number." = "Ju lutem, vendosni një numër të vlefshëm telefoni.";
 "Please enter a valid email address." = "Ju lutem, vendosni një adresë të vlefshme e-mail-i.";
-"You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "Jeni duke finalizuar procesin me  %@ adresën e-mail. Ne do ta përdorim këtë e-mail për operime me fjalëkalim dhe njoftime të sitit.";
+"You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "Jeni duke finalizuar procesin me  %@ adresën e-mail. Ne do ta përdorim këtë e-mail për veprime me fjalëkalim dhe njoftime të sitit.";
 "E-mail Usage Information" = "Informacion i Përdorimit të E-mail ";
 "Password fields do not match." = "Fjalëkalimet nuk përputhen.";
 "Please check the e-mail address." = "Ju lutem, kontrolloni adresën e e-mail.";
@@ -588,7 +588,7 @@
 "Delete all" = "Fshijini të Gjitha ";
 "Keep" = "Ruani";
 "Duplicated Contacts" = "Kontaktet e përsëritura";
-"Free" = "E Lirë";
+"Free" = "Dhuratë";
 "%d%% Backed up…" = "%d%% kopje rezervë";
 "%d%% Restored…" = "%d%% Rivendosur…";
 "%d%% Analyzed…" = "%d%% Analizuar …";
@@ -828,14 +828,14 @@
 
 /*InstaPickPopUp*/
 "dont_show_this_again" = "Mos e shfaqni përsëri";
-"instapick_analyze" = "Analizoni me PhotoPick";
+"instapick_analyze" = "Analizoni me PhotoPick!";
 "connected_account" = "Funksionon shumë mirë me llogarinë tuaj të lidhur!";
 "instapick_description" = "Nëse zgjidhni të lidheni me llogarinë tuaj në Instagram, ne do të mund t'ju ofrojmë një përvojë më të mirë e të personalizuar, duke kryer analizim të përshtatur për ju në çdo analizë të re PhotoPick.";
 "connected_with_instagram" = "Lidhuni me Instagram";
 "connected_with_instagram_name" = "Lidhuni me Instagram si";
 "continue_without_connecting" = "Vazhdoni pa u lidhur";
 "connected_accounts" = "Llogari të lidhura";
-"analyze_history_free_text" = "E lirë për një periudhë të kufizuar";
+"analyze_history_free_text" = "Falas për një periudhë të kufizuar";
 
 /*InstapickUpgradePopup*/
 /*Fuzzy*/
@@ -845,9 +845,7 @@
 "instapick_upgrade_popup_button" = "Përditësoni";
 "instapick_upgrade_popup_no" = "Jo";
 "instapick_analysis_left" = "Analizim i mbetur: %1$d / %2$d";
-
-/*Fuzzy*/
-"instapick_unlimited_analysis" = "E lirë për një periudhë të kufizuar";
+"instapick_unlimited_analysis" = "Falas për një periudhë të kufizuar";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";

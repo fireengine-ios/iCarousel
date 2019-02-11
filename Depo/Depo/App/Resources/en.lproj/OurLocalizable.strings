@@ -793,8 +793,8 @@
 "analyze_history_start_here" = "Start\nHere!";
 "analyze_confirm_delete_title" = "Are you sure you want to delete?";
 "analyze_confirm_delete_text" = "Selected items will be deleted from analysis history.";
-"analyze_confirm_delete_yes" = "YES";
-"analyze_confirm_delete_no" = "NO";
+"analyze_confirm_delete_yes" = "Yes";
+"analyze_confirm_delete_no" = "No";
 
 /*InstaPick three dots*/
 "new_insta_pick" = "New PhotoPick";
