@@ -101,9 +101,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             imageView.image = image
         }
         
-        
-        backgroundColor = ColorConstants.fileGreedCellColor
-        
         isAlreadyConfigured = true
     }
     
@@ -123,7 +120,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
         
         isAlreadyConfigured = true
-        backgroundColor = ColorConstants.fileGreedCellColor
     }
     
     override func setImage(with metaData: BaseMetaData) {
