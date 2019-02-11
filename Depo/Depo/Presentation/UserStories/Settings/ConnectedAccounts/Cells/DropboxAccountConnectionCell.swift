@@ -90,10 +90,12 @@ extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
         rotatingImage.isHidden = false
         rotatingImage.startInfinityRotate360Degrees(duration: 2)
         progress.text = String(format: TextConstants.importFiles, String(0))
+        delegate?.willChangeHeight()
     }
     
     func updateDropboxStatus(progressPercent: Int) {
         progress.text = String(format: TextConstants.importFiles, String(progressPercent))
+        delegate?.willChangeHeight()
     }
     
     func stopDropboxStatus(lastUpdateMessage: String) {
@@ -101,6 +103,7 @@ extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
         rotatingImage.isHidden = true
         rotatingImage.stopInfinityRotate360Degrees()
         progress.text = lastUpdateMessage
+        delegate?.willChangeHeight()
     }
     
     // MARK: Start
