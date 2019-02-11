@@ -138,8 +138,8 @@ final class InstapickPopUpController: UIViewController {
         descriptionLabel.preferredMaxLayoutWidth = UIScreen.main.bounds.width * widthFactor
         subtitleLabel.preferredMaxLayoutWidth = UIScreen.main.bounds.width * widthFactor
         
-        let titleLabelOffset: CGFloat = Device.isIpad ? 0.6 : 0.8
-        titleLabel.preferredMaxLayoutWidth = UIScreen.main.bounds.width * titleLabelOffset
+        let titleLabelWidthFactor: CGFloat = Device.isIpad ? 0.6 : 0.8
+        titleLabel.preferredMaxLayoutWidth = UIScreen.main.bounds.width * titleLabelWidthFactor
         titleLabel.text = TextConstants.instaPickAnlyze
         
         let paragraphStyle = getParagraphStyle()
