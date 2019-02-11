@@ -22,6 +22,8 @@ final class InstaPickProgressPopup: ViewController, NibInit {
         didSet {
             topCaption.font = UIFont.TurkcellSaturaBolFont(size: Device.isIpad ? 30 : 28)
             topCaption.text = " "
+            topCaption.adjustsFontSizeToFitWidth = true
+            topCaption.minimumScaleFactor = 0.5
         }
     }
     @IBOutlet private weak var bottomCaption: UILabel! {
