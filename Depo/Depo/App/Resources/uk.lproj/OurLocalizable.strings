@@ -765,8 +765,8 @@
 "analyze_history_start_here" = "Почніть тут!";
 "analyze_confirm_delete_title" = "Ви впевнені, що хочете видалити?";
 "analyze_confirm_delete_text" = "Обрані файли будуть видалені з історії оцінок";
-"analyze_confirm_delete_yes" = "ТАК";
-"analyze_confirm_delete_no" = "НІ";
+"analyze_confirm_delete_yes" = "Так";
+"analyze_confirm_delete_no" = "Ні";
 
 /*InstaPick three dots*/
 "new_insta_pick" = "Новий PhotoPick";
@@ -784,7 +784,7 @@
 "you_are_ready_to_share" = "Ви готові поділитися!";
 "instaPick_analysis_left" = "Залишилося оцінки: %1$d/ %2$d";
 "engage_with_more_hastags" = "Підписуйте #хештеги";
-"copy_hashtags_to_clipboard" = "Зкопіюйте #хештег у буфер обміну";
+"copy_hashtags_to_clipboard" = "Зкопіюйте #хештеги у буфер обміну";
 "share_on_social_media" = "Поділіться у соцмережах!";
 "picked" = "Обрано!";
 "insta_pick_analyzing_bottom" = "Ми аналізуємо ваші фото!:)";
@@ -816,13 +816,13 @@
 "Instagram" = "Instagram";
 "connected_as_format" = "Поєднані обликові записи: @%@";
 "instagram_remove_connection_warning_title" = "Видалення поєднання з Instagram";
-"instagram_remove_connection_warning_message" = "Ви впевнені, що хочете видалити поєднання з Instagram?";
+"instagram_remove_connection_warning_message" = "Ви впевнені, що хочете видалити поєднання з Instagram?\n\n";
 "instapick_selection_photos_selected" = "Обрані фото (%d)";
 "instapick_selection_analyzes_left" = "Залишилося %d оцінки";
 "loading" = "Завантаження...";
 "there_are_no_photos" = "Немає фото";
 "there_are_no_albums" = "Немає альбомів";
-"instapick_selection_analyzes_left_max" = "Ви обрали %d фото (максимально можлива кількість)";
+"instapick_selection_analyzes_left_max" = "Ви обрали %d фото\n(максимально можлива кількість)";
 "free_trial_title_label" = "Оцінити з PhotoPick";
 "free_trial_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з PhotoPick та отримуйте ще більше вподобань! Спробуйте безкоштовно!";
 "instapick_under_construction" = "Ми покращуємо сервіс PhotoPick  :)";

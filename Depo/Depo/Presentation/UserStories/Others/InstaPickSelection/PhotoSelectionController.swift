@@ -135,8 +135,9 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
             for indexPath in self.collectionView.indexPathsForVisibleItems {
                 guard
                     let cell = self.collectionView.cellForItem(at: indexPath) as? PhotoCell,
-                    cell.isNeedToUpdate
-                    else { return }
+                    cell.isNeedToUpdate else {
+                        return
+                }
                 let item = self.photos[indexPath.row]
                 //cell.update(for: selectionState)
                 cell.setup(by: item)
@@ -185,37 +186,34 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
                 let isFirstPageLoaded = self.photos.isEmpty
                 
                 let newItemsRange = self.photos.count ..< (self.photos.count + newPhotos.count)
-                let indexPathesForNewItems = newItemsRange.map({ IndexPath(item: $0, section: self.photosSectionIndex) })
+                let indexPathsForNewItems = newItemsRange.map({ IndexPath(item: $0, section: self.photosSectionIndex) })
                 self.photos.append(contentsOf: newPhotos)
-                
-                /// use performBatchUpdates if there will be problems,
-                /// but will be delay for "updateSelectedCellsIfNeed"
-                self.collectionView.insertItems(at: indexPathesForNewItems)
-                
-                if isFirstPageLoaded {
-                    let isNewPhotosExist = !newPhotos.isEmpty
-                    if isNewPhotosExist {
-                        self.collectionView.backgroundView = nil
-                    }
-                }
-                
-                /// call after "self.photos.append(contentsOf: newPhotos)"
-                /// and "self.collectionView.insertItems"
-                self.updateSelectedCellsIfNeed(for: newPhotos)
-                
-                self.isLoadingMore = false
-                
-                let isLoadingMoreFinished = self.dataSource.isPaginationFinished
-                
-                if isLoadingMoreFinished {
-                    self.isLoadingMoreFinished = true
-                    self.hideFooterSpinner()
+
+                self.collectionView.performBatchUpdates({ [weak self] in
                     
-                    /// if we don't have any item in collection
-                    if self.photos.isEmpty {
-                        self.emptyMessageLabel.text = TextConstants.thereAreNoPhotos
+                    self?.collectionView.insertItems(at: indexPathsForNewItems)
+                }, completion: { [weak self] _ in
+                    
+                    if isFirstPageLoaded, !newPhotos.isEmpty {
+                        self?.collectionView.backgroundView = nil
                     }
-                }
+                    
+                    /// call after "self.photos.append(contentsOf: newPhotos)"
+                    /// and "self.collectionView.insertItems"
+                    self?.updateSelectedCellsIfNeed(for: newPhotos)
+                    
+                    self?.isLoadingMore = false
+                    
+                    if let isLoadingMoreFinished = self?.dataSource.isPaginationFinished, isLoadingMoreFinished {
+                        self?.isLoadingMoreFinished = true
+                        self?.hideFooterSpinner()
+                        
+                        /// if we don't have any item in collection
+                        if let isEmpty = self?.photos.isEmpty, isEmpty {
+                            self?.emptyMessageLabel.text = TextConstants.thereAreNoPhotos
+                        }
+                    }
+                })
                 
             case .failed(let error):
                 self.isLoadingMore = false
@@ -337,6 +335,15 @@ extension PhotoSelectionController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        /// this code in willDisplay will cause empty cells
+        let isLastCell = (indexPath.row == photos.count - 1)
+        if !isLoadingMoreFinished, !isLoadingMore, isLastCell {
+            DispatchQueue.toMain {
+                self.loadMore()
+            }
+        }
+        
         return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
     }
     
@@ -363,12 +370,6 @@ extension PhotoSelectionController: UICollectionViewDelegate {
         let item = photos[indexPath.row]
         cell.update(for: selectionState)
         cell.setup(by: item)
-        
-        /// load more
-        let isLastCell = (indexPath.row == photos.count - 1)
-        if !isLoadingMoreFinished, !isLoadingMore, isLastCell {
-            loadMore()
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

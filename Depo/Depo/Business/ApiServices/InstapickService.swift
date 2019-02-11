@@ -229,7 +229,10 @@ extension InstapickServiceImpl: InstapickService {
                         popupToDissmiss.dismiss(animated: true, completion: {
                             
                             if let currentController = UIApplication.topController() {
-                                let instapickDetailControlller = RouterVC().instaPickDetailViewController(models: analysis, analyzesCount: analyzesCount, isShowTabBar: true)
+                                let router = RouterVC()
+                                let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
+                                                                                                      analyzesCount: analyzesCount,
+                                                                                                      isShowTabBar: router.getViewControllerForPresent() is BaseFilesGreedViewController)
                                 currentController.present(instapickDetailControlller, animated: true, completion: nil)
                             } else {
                                 /// nothing to show
