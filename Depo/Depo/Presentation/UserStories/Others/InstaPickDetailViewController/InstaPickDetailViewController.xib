@@ -24,11 +24,11 @@
                 <outlet property="smallPhotosStackView" destination="jtO-kl-uZE" id="P0a-B5-REU"/>
                 <outlet property="topLabel" destination="IDk-eY-3Lm" id="hkp-a7-h9u"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outletCollection property="instaPickPhotoViews" destination="Ynk-f5-yeT" collectionClass="NSMutableArray" id="WBR-aw-BoP"/>
-                <outletCollection property="instaPickPhotoViews" destination="iax-U1-9TV" collectionClass="NSMutableArray" id="rFT-cV-UzQ"/>
-                <outletCollection property="instaPickPhotoViews" destination="xHE-Hs-2sD" collectionClass="NSMutableArray" id="Eo9-rL-3Z7"/>
-                <outletCollection property="instaPickPhotoViews" destination="QD4-Gc-Iaq" collectionClass="NSMutableArray" id="8bg-pb-cWV"/>
-                <outletCollection property="instaPickPhotoViews" destination="6H1-i6-G1u" collectionClass="NSMutableArray" id="b8v-gh-USx"/>
+                <outletCollection property="instaPickPhotoViews" destination="Ynk-f5-yeT" collectionClass="NSMutableArray" id="2Xd-D5-sZ0"/>
+                <outletCollection property="instaPickPhotoViews" destination="6H1-i6-G1u" collectionClass="NSMutableArray" id="FhM-xh-jNM"/>
+                <outletCollection property="instaPickPhotoViews" destination="xHE-Hs-2sD" collectionClass="NSMutableArray" id="Cow-00-D5J"/>
+                <outletCollection property="instaPickPhotoViews" destination="iax-U1-9TV" collectionClass="NSMutableArray" id="6pX-Qn-lcu"/>
+                <outletCollection property="instaPickPhotoViews" destination="QD4-Gc-Iaq" collectionClass="NSMutableArray" id="6L1-Pn-fGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -47,49 +47,34 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Va1-dT-UOQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="648"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="637.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nfo-vd-geH">
-                                            <rect key="frame" x="16" y="30" width="288" height="588"/>
+                                            <rect key="frame" x="16" y="30" width="288" height="577.5"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RC4-0c-Xb9" userLabel="Content View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="588"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="577.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDk-eY-3Lm">
-                                                            <rect key="frame" x="123" y="55" width="42" height="31"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="31" id="hzj-ux-tuJ">
-                                                                    <variation key="heightClass=regular-widthClass=regular" constant="38"/>
-                                                                </constraint>
-                                                            </constraints>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDk-eY-3Lm">
+                                                            <rect key="frame" x="123" y="55" width="42" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIy-Xf-bKH">
-                                                            <rect key="frame" x="123" y="92" width="42" height="20"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="20" id="ubQ-qK-Nn1">
-                                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                                </constraint>
-                                                            </constraints>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIy-Xf-bKH">
+                                                            <rect key="frame" x="123" y="81.5" width="42" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EU4-bu-mbr">
-                                                            <rect key="frame" x="123" y="366" width="42" height="21"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="21" id="PFw-l5-qhr">
-                                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                                </constraint>
-                                                            </constraints>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EU4-bu-mbr">
+                                                            <rect key="frame" x="123" y="356" width="42" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="NV2-v7-EJx">
-                                                            <rect key="frame" x="24" y="393" width="240" height="75"/>
+                                                            <rect key="frame" x="24" y="382.5" width="240" height="75"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="75" id="DBQ-ot-amH">
@@ -115,7 +100,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GN-cn-ujP">
-                                                            <rect key="frame" x="121" y="482" width="46" height="18"/>
+                                                            <rect key="frame" x="121" y="471.5" width="46" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="KHs-xd-XGe">
                                                                     <variation key="heightClass=regular-widthClass=regular" constant="19"/>
@@ -127,7 +112,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6o-kD-Nrz" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
-                                                            <rect key="frame" x="35.5" y="512" width="217" height="46"/>
+                                                            <rect key="frame" x="35.5" y="501.5" width="217" height="46"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="217" id="A9i-uP-amv"/>
                                                                 <constraint firstAttribute="height" constant="46" id="n7N-Wy-GFN">
@@ -140,7 +125,7 @@
                                                             </connections>
                                                         </button>
                                                         <stackView opaque="NO" contentMode="center" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="q5N-z4-Gtm">
-                                                            <rect key="frame" x="25" y="132" width="238" height="200"/>
+                                                            <rect key="frame" x="25" y="122" width="238" height="200"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="YZz-yY-rbp">
                                                                     <rect key="frame" x="0.0" y="0.0" width="238" height="200"/>
@@ -186,18 +171,18 @@
                                                                                                 <constraint firstAttribute="width" secondItem="xHE-Hs-2sD" secondAttribute="height" multiplier="1:1" id="yC6-iJ-Ylg"/>
                                                                                             </constraints>
                                                                                         </view>
-                                                                                        <view contentMode="scaleToFill" restorationIdentifier="smallFour" translatesAutoresizingMaskIntoConstraints="NO" id="iax-U1-9TV" customClass="InstaPickSmallPhotoView" customModule="lifebox" customModuleProvider="target">
+                                                                                        <view contentMode="scaleToFill" restorationIdentifier="smallThree" translatesAutoresizingMaskIntoConstraints="NO" id="QD4-Gc-Iaq" customClass="InstaPickSmallPhotoView" customModule="lifebox" customModuleProvider="target">
                                                                                             <rect key="frame" x="0.0" y="102" width="46" height="46"/>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
-                                                                                                <constraint firstAttribute="width" secondItem="iax-U1-9TV" secondAttribute="height" multiplier="1:1" id="Dj5-UC-mxm"/>
+                                                                                                <constraint firstAttribute="width" secondItem="QD4-Gc-Iaq" secondAttribute="height" multiplier="1:1" id="Da0-D2-fGG"/>
                                                                                             </constraints>
                                                                                         </view>
-                                                                                        <view contentMode="scaleToFill" restorationIdentifier="smallThree" translatesAutoresizingMaskIntoConstraints="NO" id="QD4-Gc-Iaq" customClass="InstaPickSmallPhotoView" customModule="lifebox" customModuleProvider="target">
+                                                                                        <view contentMode="scaleToFill" restorationIdentifier="smallFour" translatesAutoresizingMaskIntoConstraints="NO" id="iax-U1-9TV" customClass="InstaPickSmallPhotoView" customModule="lifebox" customModuleProvider="target">
                                                                                             <rect key="frame" x="0.0" y="153" width="46" height="46"/>
                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
-                                                                                                <constraint firstAttribute="width" secondItem="QD4-Gc-Iaq" secondAttribute="height" multiplier="1:1" id="Da0-D2-fGG"/>
+                                                                                                <constraint firstAttribute="width" secondItem="iax-U1-9TV" secondAttribute="height" multiplier="1:1" id="Dj5-UC-mxm"/>
                                                                                             </constraints>
                                                                                         </view>
                                                                                     </subviews>
