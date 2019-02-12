@@ -65,7 +65,7 @@ final class PhotoCell: UICollectionViewCell {
         addSubview(favouriteImageView)
         layer.borderColor = UIColor.red.cgColor
         
-        layer.borderColor = ColorConstants.darcBlueColor.cgColor
+        layer.borderColor = ColorConstants.darkBlueColor.cgColor
         
         // TODO: setup accessibility
         //favoriteImageView.accessibilityLabel = TextConstants.accessibilityFavorite

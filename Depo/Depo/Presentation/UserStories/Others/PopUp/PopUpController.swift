@@ -123,7 +123,7 @@ final class PopUpController: ViewController {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.textColor = ColorConstants.darcBlueColor
+            titleLabel.textColor = ColorConstants.darkBlueColor
             titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
         }
     }

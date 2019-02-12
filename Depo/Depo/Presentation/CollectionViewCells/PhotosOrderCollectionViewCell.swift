@@ -22,11 +22,11 @@ class PhotosOrderCollectionViewCell: UICollectionViewCell {
         // Initialization code
         backgroundColor = ColorConstants.fileGreedCellColor
         
-        selectionView.layer.borderColor = ColorConstants.darcBlueColor.cgColor
+        selectionView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
         selectionView.layer.borderWidth = PhotosOrderCollectionViewCell.borderW
         selectionView.alpha = 0
         
-        positionLabel.backgroundColor = ColorConstants.darcBlueColor
+        positionLabel.backgroundColor = ColorConstants.darkBlueColor
         positionLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
         positionLabel.textColor = ColorConstants.whiteColor
         positionLabel.text = ""

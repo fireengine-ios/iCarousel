@@ -150,19 +150,19 @@ final class InstaPickDetailViewController: UIViewController {
         let isIPad = Device.isIpad
         
         topLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 38 : 28)
-        topLabel.textColor = ColorConstants.darcBlueColor
+        topLabel.textColor = ColorConstants.darkBlueColor
         
         analysisLeftLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
         analysisLeftLabel.textColor = ColorConstants.textGrayColor
         
         hashTagsLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
-        hashTagsLabel.textColor = ColorConstants.darcBlueColor
+        hashTagsLabel.textColor = ColorConstants.darkBlueColor
         
         copyToClipboardButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 19 : 14)
         copyToClipboardButton.setTitleColor(UIColor.lrTealishTwo, for: .normal)
         
         shareButton.setBackgroundColor(UIColor.white, for: .disabled)
-        shareButton.setTitleColor(ColorConstants.darcBlueColor.lighter(by: 40.0), for: .disabled)
+        shareButton.setTitleColor(ColorConstants.darkBlueColor.lighter(by: 40.0), for: .disabled)
     }
 
     private func setupTexts() {
@@ -180,7 +180,7 @@ final class InstaPickDetailViewController: UIViewController {
     private func configureShareButton(isEnabled: Bool) {
         shareButton.isEnabled = isEnabled
         
-        let color = ColorConstants.darcBlueColor.lighter(by: isEnabled ? 0 : 40).cgColor
+        let color = ColorConstants.darkBlueColor.lighter(by: isEnabled ? 0 : 40).cgColor
         
         shareButton.layer.borderColor = color
         shareButton.layer.borderWidth = isEnabled ? 0 : 2

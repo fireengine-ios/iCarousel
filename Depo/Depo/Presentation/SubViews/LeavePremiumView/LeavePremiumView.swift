@@ -71,7 +71,7 @@ final class LeavePremiumView: UIView {
         leavePremiumButton.setTitle(TextConstants.leavePremiumMember, for: .normal)
 
         leavePremiumButton.setTitleColor(.white, for: .normal)
-        leavePremiumButton.backgroundColor = ColorConstants.darcBlueColor
+        leavePremiumButton.backgroundColor = ColorConstants.darkBlueColor
         leavePremiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
         leavePremiumButton.layer.masksToBounds = true
         leavePremiumButton.layer.cornerRadius = 15

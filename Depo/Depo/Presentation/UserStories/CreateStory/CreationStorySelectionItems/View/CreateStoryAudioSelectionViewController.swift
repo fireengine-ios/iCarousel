@@ -18,7 +18,7 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
         
         segmentControll.setTitle(TextConstants.createStoryAudioMusics, forSegmentAt: 0)
         segmentControll.setTitle(TextConstants.createStoryAudioYourUploads, forSegmentAt: 1)
-        segmentControll.tintColor = ColorConstants.darcBlueColor
+        segmentControll.tintColor = ColorConstants.darkBlueColor
         
         collectionView.clipsToBounds = true
         

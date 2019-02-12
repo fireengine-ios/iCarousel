@@ -38,7 +38,7 @@ final class DarkPopUpController: ViewController {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.textColor = ColorConstants.darcBlueColor
+            titleLabel.textColor = ColorConstants.darkBlueColor
             titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
         }
     }
@@ -53,7 +53,7 @@ final class DarkPopUpController: ViewController {
     @IBOutlet private weak var actionButton: UIButton! {
         didSet {
             actionButton.setTitleColor(UIColor.white, for: .normal)
-            actionButton.backgroundColor = ColorConstants.darcBlueColor
+            actionButton.backgroundColor = ColorConstants.darkBlueColor
             actionButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             actionButton.layer.cornerRadius = 20
         }

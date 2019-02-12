@@ -50,7 +50,7 @@ class ManageContactsViewController: BaseViewController, ManageContactsViewInput 
         self.searchBar = searchBar
         
         searchBar.backgroundColor = ColorConstants.whiteColor
-        searchBar.tintColor = ColorConstants.darcBlueColor
+        searchBar.tintColor = ColorConstants.darkBlueColor
         searchBar.delegate = self
         searchBar.searchBarStyle = .minimal
         searchBar.setImage(UIImage(named: TextConstants.searchIcon), for: .search, state: .normal)
@@ -60,7 +60,7 @@ class ManageContactsViewController: BaseViewController, ManageContactsViewInput 
                 textFileld.backgroundColor = ColorConstants.whiteColor
                 textFileld.placeholder = TextConstants.search
                 textFileld.font = UIFont.TurkcellSaturaDemFont(size: 19)
-                textFileld.textColor = ColorConstants.darcBlueColor
+                textFileld.textColor = ColorConstants.darkBlueColor
                 textFileld.keyboardAppearance = .dark
             }
             if subView.isKind(of: UIButton.self) {

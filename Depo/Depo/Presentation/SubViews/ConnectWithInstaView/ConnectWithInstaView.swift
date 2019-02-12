@@ -78,8 +78,8 @@ final class ConnectWithInstaView: UIView {
     }
     
     private func setupFontsAndTextColors() {
-        titleLabel.textColor = ColorConstants.darcBlueColor
-        nameLabel.textColor = ColorConstants.darcBlueColor
+        titleLabel.textColor = ColorConstants.darkBlueColor
+        nameLabel.textColor = ColorConstants.darkBlueColor
         
         nameLabel.font = UIFont.TurkcellSaturaMedFont(size: 16)
         
