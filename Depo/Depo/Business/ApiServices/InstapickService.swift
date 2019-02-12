@@ -42,6 +42,8 @@ final class InstapickServiceImpl {
         switch status {
         case "3104":
             text = TextConstants.instapickUnderConstruction
+        case "3102":
+            text = TextConstants.instapickUnsupportedFileType
         default:
             return nil
         }
