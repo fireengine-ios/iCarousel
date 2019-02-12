@@ -840,3 +840,4 @@
 "free_trial_title_label" = "PhotoPick ile Analiz Et!";
 "free_trial_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Üstelik daha çok dene diye sınırlı bir süre için ücretsiz!";
 "instapick_under_construction" = "Daha iyi bir deneyim yaşaman için PhotoPick'i iyileştiriyoruz 😉";
+"instapick_unsupported_file_type" = "Seçmiş olduğun fotoğraflar desteklenmeyen bir formatta. Başka fotoğraflar seçerek PhotoPick deneyimini yaşamaya devam edebilirsin.";

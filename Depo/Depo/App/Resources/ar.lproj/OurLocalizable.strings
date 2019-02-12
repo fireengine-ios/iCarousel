@@ -842,3 +842,4 @@
 "free_trial_title_label" = "احصل على اختبار التحقق captcha";
 "free_trial_detail_label" = "احصل على اختبار تحقق سمعي";
 "instapick_under_construction" = "نحن نحقق تحسينًا على تطبيق PhotoPick للحصول على تجربة أفضل";
+"instapick_unsupported_file_type" = "تكون الصور التي حددتها بتنسيق غير متوافق. يمكنك متابعة تجربة PhotoPick بتحديد صور أخرى.";

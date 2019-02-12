@@ -854,3 +854,4 @@
 "free_trial_title_label" = "Analyze with PhotoPick";
 "free_trial_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Try more free for a limited time!";
 "instapick_under_construction" = "We are making improvement on PhotoPick for a better experience 😉";
+"instapick_unsupported_file_type" = "Photos you have selected are in unsupported format. You can continue PhotoPick experience by selecting other photos.";

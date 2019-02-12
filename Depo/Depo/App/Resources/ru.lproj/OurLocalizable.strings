@@ -828,3 +828,4 @@
 "free_trial_title_label" = "Оценка PhotoPick";
 "free_trial_detail_label" = "Узнайте, какие фото получат самые высокие оценки! Оценивайте с PhotoPick и получайте еще больше лайков! Попробуйте новинку бесплатно!";
 "instapick_under_construction" = "PhotoPick временно недоступен";
+"instapick_unsupported_file_type" = "Фотографии, которые вы выбрали, имеют некорректный формат. Вы можете использовать PhotoPick, выбрав другие фотографии.";
