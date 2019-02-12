@@ -37,7 +37,7 @@ enum LoginResponseError {
         else if errorResponse.description.contains("Sign up required") {
             self = .needSignUp
         }
-        else if errorResponse.description.contains("Authentication failure") {
+        else if errorResponse.description.contains("Authentication failure") || errorResponse.description.contains("LDAP system failure") {
             self = .incorrectUsernamePassword
         }
         else if errorResponse.description.contains("Invalid captcha") {
