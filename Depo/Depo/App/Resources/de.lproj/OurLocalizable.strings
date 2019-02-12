@@ -826,3 +826,4 @@
 "free_trial_title_label" = "Mit PhotoPick analysieren";
 "free_trial_detail_label" = "Herausfinden, welches Foto den höchsten Rang erreicht, und für mehr Likes mit PhotoPick analysieren! Für eine begrenzte Zeit mehr ausprobieren!";
 "instapick_under_construction" = "Wir verbessern PhotoPick für ein besseres Erlebnis 😉";
+"instapick_unsupported_file_type" = "Fotos, die Sie ausgewählt haben, werden nicht unterstützt. Sie können PhotoPick fortführen, indem Sie andere Fotos auswählen.";

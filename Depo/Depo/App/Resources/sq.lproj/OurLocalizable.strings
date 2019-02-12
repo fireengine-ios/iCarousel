@@ -769,7 +769,7 @@
 "ok_for_upgrade" = "Po, Përmirëso";
 
 /*Fuzzy*/
-"no_for_upgrade" = "Jo,";
+"no_for_upgrade" = "Jo";
 "uploded_photos_high_quality" = "Ju po hyni në lifebox si një përdorues standard. Nëse ju nuk kaloni në Premium, kujtimet tuaja do të ruhen në cilësi të lartë. Dëshironi të bëheni përdorues Premium që kujtimet tuaja të ruhen në cilësinë e tyre origjinale, si edhe të përfitoni nga privilegjet Premium?";
 
 /*Fuzzy*/
@@ -863,3 +863,4 @@
 "free_trial_title_label" = "Analizoni me PhotoPick";
 "free_trial_detail_label" = "Zbuloni se cilat foto do të marrin vlerësim më të lartë; analizoni me PhotoPick për më shumë pëlqime! Provojeni falas për një periudhë të limituar!";
 "instapick_under_construction" = "Ne po bëjmë përmirësime në PhotoPick për një eksperiencë më të mirë 😉";
+"instapick_unsupported_file_type" = "Fotot që keni zgjedhur janë në format të pambështetur. Ju mund të vazhdoni përvojën e PhotoPick duke përzgjedhur fotot e tjera.";
