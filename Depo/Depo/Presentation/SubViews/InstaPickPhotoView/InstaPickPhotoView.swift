@@ -78,7 +78,7 @@ class InstaPickPhotoView: UIView, NibInit {
         addSubview(rateView)
 
         rateView.widthAnchor.constraint(equalTo: rateView.heightAnchor).isActive = true
-        rateView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        rateView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
         rateViewCenterYConstraint = rateView.centerYAnchor.constraint(equalTo: centerYAnchor)
 
         pickedView.addSubview(pickedLabel)
