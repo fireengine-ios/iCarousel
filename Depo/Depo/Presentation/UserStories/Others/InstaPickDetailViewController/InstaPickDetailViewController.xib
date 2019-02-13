@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +18,6 @@
                 <outlet property="copyToClipboardButton" destination="5GN-cn-ujP" id="8qM-0X-e7J"/>
                 <outlet property="darkView" destination="Myr-Pj-PlW" id="vQP-uY-l4r"/>
                 <outlet property="hashTagsLabel" destination="EU4-bu-mbr" id="69O-FJ-kjo"/>
-                <outlet property="photosStackView" destination="YZz-yY-rbp" id="DSR-Wo-Qxc"/>
                 <outlet property="shareButton" destination="h6o-kD-Nrz" id="IZ8-t8-33s"/>
                 <outlet property="smallPhotosContainerView" destination="BM4-jc-aDX" id="QuQ-UN-bSz"/>
                 <outlet property="smallPhotosStackView" destination="jtO-kl-uZE" id="P0a-B5-REU"/>
@@ -125,14 +124,14 @@
                                                             </connections>
                                                         </button>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qu6-0Y-2aS">
-                                                            <rect key="frame" x="10" y="122" width="268" height="200"/>
+                                                            <rect key="frame" x="15" y="122" width="258" height="200"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="bigView" translatesAutoresizingMaskIntoConstraints="NO" id="Ynk-f5-yeT" customClass="InstaPickBigPhotoView" customModule="lifebox" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="222" height="200"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="212" height="200"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BM4-jc-aDX">
-                                                                    <rect key="frame" x="222" y="0.0" width="46" height="200"/>
+                                                                    <rect key="frame" x="212" y="0.0" width="46" height="200"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jtO-kl-uZE">
                                                                             <rect key="frame" x="0.0" y="0.5" width="46" height="199"/>
@@ -189,22 +188,22 @@
                                                                 </view>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="200" id="Pmi-Bt-K1P"/>
-                                                            </constraints>
-                                                        </stackView>
-                                                        <stackView opaque="NO" contentMode="center" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="q5N-z4-Gtm">
-                                                            <rect key="frame" x="121" y="122" width="50" height="200"/>
-                                                            <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="YZz-yY-rbp">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="200"/>
-                                                                    <variation key="heightClass=regular-widthClass=regular" spacing="44"/>
-                                                                </stackView>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="200" id="M3R-jN-3o8">
-                                                                    <variation key="heightClass=regular-widthClass=regular" constant="260"/>
+                                                                <constraint firstAttribute="height" constant="270" id="Lyh-4X-aff"/>
+                                                                <constraint firstAttribute="height" constant="200" id="Pmi-Bt-K1P">
+                                                                    <variation key="heightClass=regular-widthClass=regular" constant="270"/>
                                                                 </constraint>
                                                             </constraints>
+                                                            <variation key="default">
+                                                                <mask key="constraints">
+                                                                    <exclude reference="Lyh-4X-aff"/>
+                                                                </mask>
+                                                            </variation>
+                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                                <mask key="constraints">
+                                                                    <include reference="Lyh-4X-aff"/>
+                                                                    <exclude reference="Pmi-Bt-K1P"/>
+                                                                </mask>
+                                                            </variation>
                                                         </stackView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -220,13 +219,12 @@
                                                             <variation key="heightClass=regular-widthClass=regular" constant="36"/>
                                                         </constraint>
                                                         <constraint firstItem="qu6-0Y-2aS" firstAttribute="centerX" secondItem="RC4-0c-Xb9" secondAttribute="centerX" id="5zb-Rc-L9P"/>
-                                                        <constraint firstItem="q5N-z4-Gtm" firstAttribute="top" secondItem="QIy-Xf-bKH" secondAttribute="bottom" constant="20" id="8vl-Te-7kX">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="34"/>
-                                                        </constraint>
                                                         <constraint firstItem="pan-JD-bOc" firstAttribute="top" secondItem="RC4-0c-Xb9" secondAttribute="top" constant="12" id="Cyt-YU-xH6">
                                                             <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                                                         </constraint>
-                                                        <constraint firstItem="qu6-0Y-2aS" firstAttribute="leading" secondItem="RC4-0c-Xb9" secondAttribute="leading" constant="10" id="Ezu-j4-SRa"/>
+                                                        <constraint firstItem="qu6-0Y-2aS" firstAttribute="leading" secondItem="RC4-0c-Xb9" secondAttribute="leading" constant="15" id="Ezu-j4-SRa">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="70"/>
+                                                        </constraint>
                                                         <constraint firstItem="5GN-cn-ujP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RC4-0c-Xb9" secondAttribute="leading" constant="16" id="JYd-Qc-LU1"/>
                                                         <constraint firstItem="NV2-v7-EJx" firstAttribute="top" secondItem="EU4-bu-mbr" secondAttribute="bottom" constant="6" id="Kc6-Yw-mVL">
                                                             <variation key="heightClass=regular-widthClass=regular" constant="14"/>
@@ -236,20 +234,15 @@
                                                         <constraint firstItem="QIy-Xf-bKH" firstAttribute="top" secondItem="IDk-eY-3Lm" secondAttribute="bottom" constant="6" id="VBK-Zk-GhK">
                                                             <variation key="heightClass=regular-widthClass=regular" constant="8"/>
                                                         </constraint>
+                                                        <constraint firstItem="qu6-0Y-2aS" firstAttribute="top" secondItem="QIy-Xf-bKH" secondAttribute="bottom" constant="34" id="Vln-qu-vqT"/>
+                                                        <constraint firstItem="EU4-bu-mbr" firstAttribute="top" secondItem="qu6-0Y-2aS" secondAttribute="bottom" constant="42" id="YMO-2K-IpG"/>
                                                         <constraint firstAttribute="trailing" secondItem="pan-JD-bOc" secondAttribute="trailing" constant="12" id="Z0I-Ce-X5b">
                                                             <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                                                         </constraint>
-                                                        <constraint firstItem="q5N-z4-Gtm" firstAttribute="centerX" secondItem="RC4-0c-Xb9" secondAttribute="centerX" id="dDe-JV-H1u"/>
                                                         <constraint firstItem="NV2-v7-EJx" firstAttribute="leading" secondItem="RC4-0c-Xb9" secondAttribute="leading" constant="24" id="dDt-4U-3zx">
                                                             <variation key="heightClass=regular-widthClass=regular" constant="70"/>
                                                         </constraint>
-                                                        <constraint firstItem="q5N-z4-Gtm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RC4-0c-Xb9" secondAttribute="leading" constant="25" id="fUT-Yx-X2y">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="80"/>
-                                                        </constraint>
                                                         <constraint firstItem="QIy-Xf-bKH" firstAttribute="centerX" secondItem="RC4-0c-Xb9" secondAttribute="centerX" id="g7g-Hh-3eJ"/>
-                                                        <constraint firstItem="EU4-bu-mbr" firstAttribute="top" secondItem="q5N-z4-Gtm" secondAttribute="bottom" constant="34" id="gDA-NG-Tz6">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="42"/>
-                                                        </constraint>
                                                         <constraint firstItem="5GN-cn-ujP" firstAttribute="centerX" secondItem="RC4-0c-Xb9" secondAttribute="centerX" id="h6x-SJ-ytF"/>
                                                         <constraint firstItem="qu6-0Y-2aS" firstAttribute="top" secondItem="QIy-Xf-bKH" secondAttribute="bottom" constant="20" id="icK-wB-dTv"/>
                                                         <constraint firstItem="EU4-bu-mbr" firstAttribute="top" secondItem="qu6-0Y-2aS" secondAttribute="bottom" constant="34" id="kgK-QD-EJL"/>
@@ -262,8 +255,17 @@
                                                         <constraint firstItem="IDk-eY-3Lm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RC4-0c-Xb9" secondAttribute="leading" constant="16" id="xhv-Vo-4MJ"/>
                                                     </constraints>
                                                     <variation key="default">
-                                                        <mask key="subviews">
-                                                            <exclude reference="q5N-z4-Gtm"/>
+                                                        <mask key="constraints">
+                                                            <exclude reference="Vln-qu-vqT"/>
+                                                            <exclude reference="YMO-2K-IpG"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <mask key="constraints">
+                                                            <include reference="Vln-qu-vqT"/>
+                                                            <exclude reference="icK-wB-dTv"/>
+                                                            <include reference="YMO-2K-IpG"/>
+                                                            <exclude reference="kgK-QD-EJL"/>
                                                         </mask>
                                                     </variation>
                                                 </view>

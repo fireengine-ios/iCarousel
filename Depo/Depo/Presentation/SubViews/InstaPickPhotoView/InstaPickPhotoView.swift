@@ -94,7 +94,7 @@ class InstaPickPhotoView: UIView, NibInit {
         addSubview(pickedView)
         
         pickedView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        pickedViewCenterXConstraint = pickedView.centerXAnchor.constraint(equalTo: centerXAnchor)
+        pickedViewCenterXConstraint = pickedView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor)
     }
     
     private func setupCornerRadius() {
