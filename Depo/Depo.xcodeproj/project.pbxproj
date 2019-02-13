@@ -2718,6 +2718,8 @@
 		B50B4A6C220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50B4A68220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib */; };
 		B50B4A6E220C29470056FC86 /* UIEdgeInsets+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */; };
 		B50B4A6F220C29470056FC86 /* UIEdgeInsets+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */; };
+		B50B4A74220C598C0056FC86 /* ConnectedAccountsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */; };
+		B50B4A75220C598C0056FC86 /* ConnectedAccountsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B520000C202492A90096D036 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520000B202492A90096D036 /* SynchronizedArray.swift */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
@@ -2823,6 +2825,8 @@
 		B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
 		B59A63DF2167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59A63E02167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
+		B59CCE812213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
+		B59CCE822213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
 		B5A84523212DA315007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84522212DA314007EA795 /* images.xcassets */; };
 		B5A84525212DA326007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84524212DA325007EA795 /* images.xcassets */; };
 		B5A84527212DA339007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84526212DA339007EA795 /* images.xcassets */; };
@@ -5408,6 +5412,7 @@
 		B50B4A67220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountRemoveConnectionCell.swift; sourceTree = "<group>"; };
 		B50B4A68220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialAccountRemoveConnectionCell.xib; sourceTree = "<group>"; };
 		B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Extensions.swift"; sourceTree = "<group>"; };
+		B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsDataSource.swift; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
@@ -5481,6 +5486,7 @@
 		B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityInitializer.swift; sourceTree = "<group>"; };
 		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
+		B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountSectionMediator.swift; sourceTree = "<group>"; };
 		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		B5A84524212DA325007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		B5A84526212DA339007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
@@ -10900,6 +10906,7 @@
 				B5AB5B6121F9AF95003AABB4 /* Cells */,
 				B5AB5B5421F9A92B003AABB4 /* ConnectedAccountsViewController.swift */,
 				B5AB5B5521F9A92B003AABB4 /* ConnectedAccountsViewController.xib */,
+				B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */,
 			);
 			path = ConnectedAccounts;
 			sourceTree = "<group>";
@@ -10915,6 +10922,7 @@
 				B5AB5B6F21F9B040003AABB4 /* InstagramAccountConnectionCell.xib */,
 				B50B4A67220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift */,
 				B50B4A68220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib */,
+				B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -15302,6 +15310,7 @@
 				8C0E8CC41FDEBDFF00789C91 /* PhotosOrderCollectionViewCell.swift in Sources */,
 				8C0E8CC51FDEBDFF00789C91 /* InstagramResponses.swift in Sources */,
 				4A9B3909201F3533009FC572 /* FaceImageItemsRouter.swift in Sources */,
+				B50B4A75220C598C0056FC86 /* ConnectedAccountsDataSource.swift in Sources */,
 				8C0E8CC61FDEBDFF00789C91 /* HelpAndSupportPresenter.swift in Sources */,
 				FA793D8D201872EA00A02B46 /* ThingsService.swift in Sources */,
 				8C0E8CC71FDEBDFF00789C91 /* IntroduceDataSource.swift in Sources */,
@@ -15854,6 +15863,7 @@
 				8C0E8E871FDEBDFF00789C91 /* CreateStoryPhotoSelectionPresenter.swift in Sources */,
 				8C0B91AC20170EBB00A5BA81 /* ManageContactsInteractor.swift in Sources */,
 				CE5A612D2060E85200793EB0 /* StorageVars.swift in Sources */,
+				B59CCE822213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */,
 				FA793D8E201872EA00A02B46 /* ThingsServiceResponse.swift in Sources */,
 				8C0E8E8B1FDEBDFF00789C91 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
 				8C0E8E8C1FDEBDFF00789C91 /* DropDovnView.swift in Sources */,
@@ -16829,6 +16839,7 @@
 				A2079916219F13CB00AD5037 /* PremiumInitializer.swift in Sources */,
 				CE51ACC41EF90853005DCEE0 /* RegistrationViewInput.swift in Sources */,
 				CE51ACC51EF90853005DCEE0 /* RegistrationViewOutput.swift in Sources */,
+				B50B4A74220C598C0056FC86 /* ConnectedAccountsDataSource.swift in Sources */,
 				CE51ACC61EF90853005DCEE0 /* RegistrationViewController.swift in Sources */,
 				7C4F60A92019E2AE0033C58F /* AlbumCard.swift in Sources */,
 				CE95ED541F516736002F923A /* HelpAndSupportRouter.swift in Sources */,
@@ -16867,6 +16878,7 @@
 				CE51ACCD1EF90853005DCEE0 /* RegistrationRouter.swift in Sources */,
 				98A867772080DCBC00D2D4F4 /* ArrayExtension.swift in Sources */,
 				CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */,
+				B59CCE812213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */,
 				8C6EF8831F348B5C002AC795 /* BottomSelectionTabBarViewInput.swift in Sources */,
 				CE51ACCE1EF90853005DCEE0 /* RegistrationConfigurator.swift in Sources */,
 				CE2976DE1FD58E2000350F3A /* LocalAlbumViewController.swift in Sources */,

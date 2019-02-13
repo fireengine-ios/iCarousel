@@ -9,22 +9,19 @@
 import UIKit
 
 protocol SocialConnectionCellDelegate: class, ActivityIndicator {
+    func didConnectSuccessfully(section: Section)
+    func didDisconnectSuccessfully(section: Section)
     func showError(message: String)
-    func willChangeHeight()
 }
 
 protocol SocialConnectionCell: class, ActivityIndicator {
+    var section: Section? { get }
     var delegate: SocialConnectionCellDelegate? { get set }
+    
+    func setup(with: Section?)
+    func disconnect()
 }
 
-
-protocol SocialRemoveConnectionCellDelegate: class {
-
-}
-
-protocol SocialRemoveConnectionCell: class {
-    var delegate: SocialRemoveConnectionCellDelegate? { get set }
-}
 
 
 extension SocialConnectionCell {
@@ -38,6 +35,8 @@ extension SocialConnectionCell {
 }
 
 final class FacebookAccountConnectionCell: UITableViewCell, SocialConnectionCell {
+
+    private (set) var section: Section?
 
     weak var delegate: SocialConnectionCellDelegate?
     
@@ -95,6 +94,14 @@ final class FacebookAccountConnectionCell: UITableViewCell, SocialConnectionCell
         
         presenter.interactor = interactor
         presenter.view = self
+    }
+    
+    func setup(with section: Section?) {
+        self.section = section
+    }
+    
+    func disconnect() {
+        //TODO: disconnect
     }
     
     @IBAction func connectionSwitchValueChanged(_ sender: UISwitch) {

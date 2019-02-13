@@ -10,6 +10,7 @@ import UIKit
 
 final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCell {
     
+    private (set) var section: Section?
     weak var delegate: SocialConnectionCellDelegate?
     
     private var interactor: ImportFromInstagramInteractor!
@@ -17,19 +18,14 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
     private var router: ImportFromInstagramRouter!
     
     
-    private var isConnected = false {
-        didSet {
-            removeConnectionButton.isHidden = !isConnected
-            connectedAs.isHidden = !isConnected
-        
-            if !isConnected {
-                isImportOn = false
-                isInstaPickOn = false
-            }
-            
-            delegate?.willChangeHeight()
-        }
-    }
+//    private var isConnected = false {
+//        didSet {
+//            if !isConnected {
+//                isImportOn = false
+//                isInstaPickOn = false
+//            }
+//        }
+//    }
     
     private var isImportOn = false {
         didSet {
@@ -79,16 +75,7 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
             importFromInstagramText.adjustsFontSizeToFitWidth()
         }
     }
-    
-    @IBOutlet private weak var removeConnectionButton: UIButton! {
-        didSet {
-            removeConnectionButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 20.0)
-            removeConnectionButton.isHidden = true
-            removeConnectionButton.layer.borderColor = removeConnectionButton.currentTitleColor.cgColor
-            removeConnectionButton.layer.borderWidth = 2.0
-            removeConnectionButton.layer.cornerRadius = removeConnectionButton.bounds.height * 0.25
-        }
-    }
+
     
     @IBOutlet private weak var instaPickSwitch: UISwitch! {
         didSet {
@@ -98,18 +85,10 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
     
     @IBOutlet private weak var importSwitch: UISwitch! {
         didSet {
-            importSwitch.setOn(isConnected, animated: true)
+            importSwitch.setOn(isImportOn, animated: true)
         }
     }
-    
-    @IBOutlet private weak var connectedAs: UILabel! {
-        didSet {
-            connectedAs.font = UIFont.TurkcellSaturaMedFont(size: 16.0)
-            connectedAs.text = " "
-            connectedAs.isHidden = true
-        }
-    }
-    
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -131,7 +110,14 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
         presenter.interactor = interactor
         presenter.view = self
     }
- 
+    
+    func setup(with section: Section?) {
+        self.section = section
+    }
+    
+    func disconnect() {
+        presenter.disconnectAccount()
+    }
     
     @IBAction func instaPickSwitchValueChanged(_ sender: UISwitch) {
         if sender.isOn {
@@ -149,24 +135,6 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
         }
     }
     
-    @IBAction func removeConnection(_ sender: Any) {
-        let attributedText = NSMutableAttributedString(string: TextConstants.instagramRemoveConnectionWarningMessage, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
-        if let connectedAsText = connectedAs.attributedText {
-            attributedText.append(connectedAsText)
-        }
-        let warningPopup = PopUpController.with(title: TextConstants.instagramRemoveConnectionWarning,
-                             attributedMessage: attributedText,
-                             image: .none,
-                             firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.actionSheetRemove,
-                             firstAction: { popup in
-                                popup.close()
-        }, secondAction: { [weak self] popup in
-            popup.close()
-            self?.presenter.disconnectAccount()
-        })
-        
-        UIApplication.topController()?.present(warningPopup, animated: true, completion: nil)
-    }
 }
 
 
@@ -176,22 +144,18 @@ extension InstagramAccountConnectionCell: ImportFromInstagramViewInput {
     // MARK: Social status (connection)
     
     func connectionStatusSuccess(_ isOn: Bool, username: String?) {
-        isConnected = isOn
-        
-        if let username = username {
-            connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
-            connectedAs.isHidden = false
-        } else {
-            connectedAs.isHidden = true
+        if let section = section {
+            delegate?.didConnectSuccessfully(section: section)
         }
+        section?.mediator.setup(with: username)
     }
     
-    func connectionStatusFailure(errorMessage: String) {
-        isConnected = false
-    }
+    func connectionStatusFailure(errorMessage: String) {}
 
     func disconnectionSuccess() {
-        isConnected = false
+        if let section = section {
+            delegate?.didDisconnectSuccessfully(section: section)
+        }
     }
     
     func disconnectionFailure(errorMessage: String) {

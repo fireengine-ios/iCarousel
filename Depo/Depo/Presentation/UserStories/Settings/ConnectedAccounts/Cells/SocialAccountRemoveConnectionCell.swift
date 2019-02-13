@@ -8,22 +8,20 @@
 
 import UIKit
 
-protocol SocialRemoveConnectionCellDelegate: class {
-    
-}
-
 protocol SocialRemoveConnectionCell: class {
-    var delegate: SocialRemoveConnectionCellDelegate? { get set }
+    func setup(with section: Section?)
+    func set(username: String?)
 }
 
 
 class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnectionCell {
-    
-    weak var delegate: SocialRemoveConnectionCellDelegate?
+
+    private (set) var section: Section?
     
     @IBOutlet private weak var connectedAs: UILabel! {
         didSet {
             connectedAs.font = UIFont.TurkcellSaturaMedFont(size: 16.0)
+            connectedAs.textColor = ColorConstants.connectedAs
             connectedAs.text = " "
         }
     }
@@ -32,9 +30,24 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         didSet {
             removeConnectionButton.contentEdgeInsets = UIEdgeInsets.make(topBottom: 8.0, rightLeft: 16.0)
             removeConnectionButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 20.0)
-            removeConnectionButton.layer.borderColor = removeConnectionButton.currentTitleColor.cgColor
+            removeConnectionButton.tintColor = ColorConstants.removeConnection
+            removeConnectionButton.setTitle(TextConstants.removeConnection, for: .normal)
+            removeConnectionButton.layer.borderColor = removeConnectionButton.tintColor.cgColor
             removeConnectionButton.layer.borderWidth = 2.0
-            removeConnectionButton.layer.cornerRadius = removeConnectionButton.bounds.height * 0.25
+            removeConnectionButton.layer.cornerRadius = removeConnectionButton.bounds.height * 0.5
+        }
+    }
+    
+    func setup(with section: Section?) {
+        self.section = section
+    }
+    
+    func set(username: String?) {
+        guard let username = username, !username.isEmpty else {
+            return
+        }
+        DispatchQueue.toMain {
+            self.connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
         }
     }
     
@@ -52,7 +65,11 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
                                                     popup.close()
         }, secondAction: { [weak self] popup in
             popup.close()
-//            self?.presenter.disconnectAccount()
+            guard let `self` = self, let section = self.section else {
+                return
+            }
+            
+            section.mediator.disconnect()
         })
         
         UIApplication.topController()?.present(warningPopup, animated: true, completion: nil)

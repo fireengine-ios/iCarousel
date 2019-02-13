@@ -11,6 +11,7 @@ import UIKit
 
 final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell {
     
+    private (set) var section: Section?
     weak var delegate: SocialConnectionCellDelegate?
     
     private var interactor: ImportFromDropboxInteractor!
@@ -73,8 +74,15 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell 
         presenter.interactor = interactor
         presenter.view = self
     }
-
     
+    func setup(with section: Section?) {
+        self.section = section
+    }
+    
+    func disconnect() {
+        //TODO: disconnect
+    }
+
     @IBAction func connectToDropbox(_ sender: Any) {
         presenter.startDropbox()
     }
