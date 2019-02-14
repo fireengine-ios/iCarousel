@@ -166,6 +166,8 @@ typealias PhotosByAlbumsOperation = (_ items: [AlbumItem: [Item]]) -> Void
 
 class PhotosAlbumService: BaseRequestService {
     
+    private lazy var albumService = AlbumDetailService(requestSize: Device.isIpad ? 200 : 100)
+    
     func createAlbum(createAlbum: CreatesAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService createAlbum")
 
@@ -264,7 +266,6 @@ class PhotosAlbumService: BaseRequestService {
         var allItems = [WrapData]()
         for album in albums {
             group.enter()
-            let albumService = AlbumDetailService(requestSize: 100)
             albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { items in
                 debugLog("PhotosAlbumService loadAllItemsFrom albumService allItems success")
 
@@ -295,7 +296,6 @@ class PhotosAlbumService: BaseRequestService {
         var allItems = [AlbumItem: [Item]]()
         for album in albums {
             group.enter()
-            let albumService = AlbumDetailService(requestSize: 100)
             albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { items in
                 debugLog("PhotosAlbumService loadItemsBy AlbumDetailService allItems success")
 

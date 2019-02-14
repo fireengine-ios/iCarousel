@@ -20,26 +20,26 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekv-l6-cp5" customClass="RadialGradientableView" customModule="lifebox" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="188" height="126"/>
+                        <rect key="frame" x="0.0" y="0.0" width="188" height="130"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yrH-fP-qC2">
-                        <rect key="frame" x="2" y="2" width="184" height="122"/>
+                        <rect key="frame" x="2" y="2" width="184" height="126"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LAr-o5-62r">
-                        <rect key="frame" x="2" y="2" width="184" height="122"/>
+                        <rect key="frame" x="2" y="2" width="184" height="126"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kju-tv-6mf">
-                                <rect key="frame" x="0.0" y="0.0" width="91.5" height="60.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="91.5" height="62.5"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tSm-Pb-VcX">
-                                <rect key="frame" x="92.5" y="0.0" width="91.5" height="60.5"/>
+                                <rect key="frame" x="92.5" y="0.0" width="91.5" height="62.5"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j7V-JR-T8Z">
-                                <rect key="frame" x="0.0" y="61.5" width="91.5" height="60.5"/>
+                                <rect key="frame" x="0.0" y="63.5" width="91.5" height="62.5"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rSE-XJ-dRR">
-                                <rect key="frame" x="92.5" y="61.5" width="91.5" height="60.5"/>
+                                <rect key="frame" x="92.5" y="63.5" width="91.5" height="62.5"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -86,7 +86,7 @@
                 <constraint firstItem="ekv-l6-cp5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="et6-Vx-sdJ"/>
                 <constraint firstAttribute="trailing" secondItem="ekv-l6-cp5" secondAttribute="trailing" id="j6d-FB-c7R"/>
                 <constraint firstItem="LAr-o5-62r" firstAttribute="top" secondItem="yrH-fP-qC2" secondAttribute="top" id="pvs-rb-iRE"/>
-                <constraint firstItem="hIs-ap-lqv" firstAttribute="top" secondItem="ekv-l6-cp5" secondAttribute="bottom" constant="4" id="q8C-8V-E9h"/>
+                <constraint firstItem="hIs-ap-lqv" firstAttribute="top" secondItem="ekv-l6-cp5" secondAttribute="bottom" id="q8C-8V-E9h"/>
                 <constraint firstItem="hIs-ap-lqv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="rTL-OO-1OV"/>
                 <constraint firstItem="yrH-fP-qC2" firstAttribute="leading" secondItem="ekv-l6-cp5" secondAttribute="leading" constant="2" id="u4I-w7-PYn"/>
             </constraints>

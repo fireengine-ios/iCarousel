@@ -43,6 +43,8 @@ final class InstapickServiceImpl {
         switch status {
         case "3104":
             text = TextConstants.instapickUnderConstruction
+        case "3102":
+            text = TextConstants.instapickUnsupportedFileType
         default:
             return nil
         }
@@ -206,6 +208,19 @@ extension InstapickServiceImpl: InstapickService {
     
     /// global logic
     func startAnalyze(ids: [String], popupToDissmiss: UIViewController) {
+        
+        func showError(_ error: Error) {
+            let popupVC = PopUpController.with(title: TextConstants.errorAlert, message: error.localizedDescription, image: .error, buttonTitle: TextConstants.ok) { vc in
+                vc.close {
+                    popupToDissmiss.dismiss(animated: true, completion: nil)
+                }
+            }
+            
+            DispatchQueue.toMain {
+                UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
+            }
+        }
+        
         startAnalyzes(ids: ids) { [weak self] result in
             let eventLabel: GAEventLabel
             
@@ -220,7 +235,10 @@ extension InstapickServiceImpl: InstapickService {
                         popupToDissmiss.dismiss(animated: true, completion: {
                             
                             if let currentController = UIApplication.topController() {
-                                let instapickDetailControlller = RouterVC().instaPickDetailViewController(models: analysis, analyzesCount: analyzesCount)
+                                let router = RouterVC()
+                                let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
+                                                                                                      analyzesCount: analyzesCount,
+                                                                                                      isShowTabBar: router.getViewControllerForPresent() is BaseFilesGreedViewController)
                                 currentController.present(instapickDetailControlller, animated: true, completion: nil)
                             } else {
                                 /// nothing to show
@@ -229,13 +247,13 @@ extension InstapickServiceImpl: InstapickService {
                         })
                         
                     case .failed(let error):
-                        UIApplication.showErrorAlert(message: error.localizedDescription)
+                        showError(error)
                     }
                 }
                 
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.localizedDescription)
                 eventLabel = .failure
+                showError(error)
             }
             self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .photopickAnalysis, eventLabel: eventLabel)
         }
