@@ -286,9 +286,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                         semaphore.wait()
                     }
                 }
-                DispatchQueue.main.async {
-                    completion(albums)
-                }
+                
+                completion(albums)
             }
         }
     }
