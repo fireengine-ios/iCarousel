@@ -821,7 +821,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 self?.router.openNeededInstaPick(viewController: vc)
             }
         }) { [weak self] error in
-            self?.asyncOperationFail(errorMessage: error.localizedDescription)
+            self?.asyncOperationFail(errorMessage: error.description)
         }
     }
     

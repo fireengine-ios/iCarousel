@@ -28,7 +28,7 @@ final class MyStorageInteractor {
             }, fail: { [weak self] error in
                 DispatchQueue.toMain {
                     self?.output.successed(allOffers: offers)
-                    self?.output.failed(with: error.localizedDescription)
+                    self?.output.failed(with: error.description)
                 }
         })
     }
