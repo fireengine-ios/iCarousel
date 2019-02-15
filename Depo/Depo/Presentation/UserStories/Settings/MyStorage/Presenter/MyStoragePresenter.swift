@@ -134,7 +134,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     
     func failed(with error: ErrorResponse) {
         view?.stopActivityIndicator()
-        router?.display(error: error.description)
+        router?.display(error: error.localizedDescription)
     }
     
     func failed(with error: String) {

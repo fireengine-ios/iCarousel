@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 
 enum ErrorResponse {
     case failResponse(ObjectFromRequestResponse?)
@@ -76,23 +75,6 @@ extension ErrorResponse: LocalizedError {
 }
 
 extension Error {
-    
-    var isWorkWillIntroduced: Bool {
-        if let error = self as? AFError {
-            return error.responseCode == 503
-        } else if let error = self as? ServerError {
-            return error.code == 503
-        } else if let error = self as? ServerValueError {
-            return error.code == 503
-        } else if let error = self as? ServerStatusError {
-            return error.code == 503
-        } else if let error = self as? ServerMessageError {
-            return error.code == 503
-        }
-        
-        return false
-    }
-    
     var description: String {
         if isNetworkError {
             switch urlErrorCode {
@@ -101,11 +83,8 @@ extension Error {
             default:
                 return TextConstants.errorBadConnection
             }
-        } else if isWorkWillIntroduced {
-            return TextConstants.errorWorkWillIntroduced
         }
         
         return localizedDescription
     }
-    
 }

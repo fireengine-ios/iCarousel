@@ -48,7 +48,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                 }
             case .failed(let error):
                 DispatchQueue.toMain {
-                    self?.output.failed(with: error.description)
+                    self?.output.failed(with: error.localizedDescription)
                 }
             }
         }
@@ -98,7 +98,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                 }
             case .failed(let error):
                 DispatchQueue.main.async {
-                    self?.output.failed(with: error.description)
+                    self?.output.failed(with: error.localizedDescription)
                 }
             }
         }
@@ -184,7 +184,7 @@ extension PackagesInteractor: PackagesInteractorInput {
             }
         }, fail: { [weak self] error in
             DispatchQueue.toMain {
-                self?.output.failed(with: error.description)
+                self?.output.failed(with: error.localizedDescription)
             }
         })
     }

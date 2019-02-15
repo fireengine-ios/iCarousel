@@ -84,7 +84,7 @@ class InstagramAuthViewController: ViewController {
                     }
                 case .failed(let error):
                     self?.hideSpiner()
-                    UIApplication.showErrorAlert(message: error.description)
+                    UIApplication.showErrorAlert(message: error.localizedDescription)
                     self?.instagramAuthCancel()
                 }
             }

@@ -209,7 +209,7 @@ final class InstapickPopUpController: UIViewController {
                     self?.hideSpinerForView(containerView)
                 }
                 
-                UIApplication.showErrorAlert(message: errorResponse.description)
+                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
         })
     }
     
@@ -229,7 +229,7 @@ final class InstapickPopUpController: UIViewController {
                     }
                 }
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+                UIApplication.showErrorAlert(message: error.localizedDescription)
             }
         }
     }
@@ -280,7 +280,7 @@ extension InstapickPopUpController: InstagramAuthViewControllerDelegate {
                     }
                 }
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+                UIApplication.showErrorAlert(message: error.localizedDescription)
             }
         }
         

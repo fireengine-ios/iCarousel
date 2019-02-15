@@ -164,8 +164,8 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
                 self.vcView.emptyMessageLabel.isHidden = true
                 
             case .failed(let error):
-                self.showErrorAlert(message: error.description)
-                self.vcView.emptyMessageLabel.text = error.description
+                self.showErrorAlert(message: error.localizedDescription)
+                self.vcView.emptyMessageLabel.text = error.localizedDescription
             }
             self.isGettingSelectingLimit = false
         }

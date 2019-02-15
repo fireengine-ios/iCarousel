@@ -151,7 +151,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                     self?.router.presentViewController(controller: vc)
                 }
             }, error: { [weak self] errorResponse in
-                self?.showError(message: errorResponse.description)
+                self?.showError(message: errorResponse.localizedDescription)
             })
         } else {
             let popup = PopUpController.with(title: TextConstants.analyzeHistoryPopupTitle,
@@ -299,7 +299,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 }
             case .failed(let error):
                 completion?(false)
-                self.showError(message: error.description)
+                self.showError(message: error.localizedDescription)
             }
         }
     }
@@ -340,7 +340,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                     })
                 }
             case .failed(let error):
-                self.showError(message: error.description)
+                self.showError(message: error.localizedDescription)
             }
         }
     }
@@ -355,7 +355,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .success(let response):
                 self.openDetail(for: response, analyzesCount: analyzesCount)
             case .failed(let error):
-                self.showError(message: error.description)
+                self.showError(message: error.localizedDescription)
             }
         }
     }
@@ -366,7 +366,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .success(let analysisCount):
                 success(analysisCount)
             case .failed(let error):
-                self?.showError(message: error.description)
+                self?.showError(message: error.localizedDescription)
             }
         }
     }

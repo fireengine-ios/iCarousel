@@ -205,7 +205,7 @@ extension PremiumPresenter: OptInControllerDelegate {
         optInVC.showResendButton()
         optInVC.dropTimer()
         let error = CustomErrors.text(TextConstants.promocodeBlocked)
-        router.displayError(with: error.description)
+        router.displayError(with: error.localizedDescription)
     }
     
     func optInNavigationTitle() -> String {

@@ -124,7 +124,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 }
             case .failed(let error):
                 DispatchQueue.toMain {
-                    self?.output?.didObtainFailUserStatus(errorMessage: error.description)
+                    self?.output?.didObtainFailUserStatus(errorMessage: error.localizedDescription)
                 }
             }
         }
