@@ -217,12 +217,12 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
                 
             case .failed(let error):
                 self.isLoadingMore = false
-                self.showErrorAlert(message: error.localizedDescription)
+                self.showErrorAlert(message: error.description)
                 self.hideFooterSpinner()
                 
                 /// if we don't have any item in collection
                 if self.photos.isEmpty {
-                    self.emptyMessageLabel.text = error.localizedDescription
+                    self.emptyMessageLabel.text = error.description
                 }
             }
         }

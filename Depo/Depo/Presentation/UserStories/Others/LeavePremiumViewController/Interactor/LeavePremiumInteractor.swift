@@ -58,7 +58,7 @@ extension LeavePremiumInteractor: LeavePremiumInteractorInput {
             }
         }) { [weak self] error in
             DispatchQueue.toMain {
-                self?.output.didErrorMessage(with: error.localizedDescription)
+                self?.output.didErrorMessage(with: error.description)
             }
         }
     }
@@ -74,7 +74,7 @@ extension LeavePremiumInteractor: LeavePremiumInteractorInput {
             }
         }, fail: { [weak self] error in
             DispatchQueue.toMain {
-                self?.output.didErrorMessage(with: error.localizedDescription)
+                self?.output.didErrorMessage(with: error.description)
             }
         })
     }
