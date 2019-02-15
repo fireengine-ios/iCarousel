@@ -94,7 +94,7 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
                 }
             case .failed(let error):
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    output.didFailed(errorMessage: error.localizedDescription)
+                    output.didFailed(errorMessage: error.description)
                 }
                 self?.reloadItemsHandler?()
             }
