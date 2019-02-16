@@ -226,8 +226,8 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
             return type1.rawValue < type2.rawValue
         })
         
-        DispatchQueue.toMain {
-            self.output.operationSuccessed(withItems: items)
+        DispatchQueue.main.async { [weak self] in
+            self?.output?.operationSuccessed(withItems: items)
         }
     }
     
