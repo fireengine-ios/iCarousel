@@ -63,7 +63,8 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         let warningPopup = PopUpController.with(title: localizedTexts.title,
                                                 attributedMessage: attributedText,
                                                 image: .none,
-                                                firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.actionSheetRemove,
+                                                firstButtonTitle: TextConstants.cancel,
+                                                secondButtonTitle: TextConstants.actionSheetRemove,
                                                 firstAction: { popup in
                                                     popup.close()
         }, secondAction: { [weak self] popup in
