@@ -12,6 +12,9 @@ class MulticastDelegate <T> {
     private var weakDelegates = [WeakWrapper]()
     
     func add(_ delegate: T) {
+        guard (weakDelegates.first { $0.value === delegate as AnyObject } == nil) else {
+            return
+        }
         weakDelegates.append(WeakWrapper(value: delegate as AnyObject))
     }
     
