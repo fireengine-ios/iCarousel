@@ -52,7 +52,7 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell 
         }
     }
     
-    @IBOutlet private weak var connectButton: UIButton!
+    @IBOutlet private weak var importButton: UIButton!
     
     
     override func awakeFromNib() {
@@ -80,10 +80,10 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell 
     }
     
     func disconnect() {
-        //TODO: disconnect
+        presenter.disconnectAccount()
     }
 
-    @IBAction func connectToDropbox(_ sender: Any) {
+    @IBAction func importToDropbox(_ sender: Any) {
         presenter.startDropbox()
     }
     
@@ -93,8 +93,29 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell 
 // MARK: - ImportFromDropboxViewInput
 extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
 
+    func connectionStatusSuccess(_ isOn: Bool) {
+        if let section = section {
+            delegate?.didConnectSuccessfully(section: section)
+        }
+    }
+
+    func connectionStatusFailure(errorMessage: String) {
+        delegate?.showError(message: errorMessage)
+    }
+    
+    func disconnectionSuccess() {
+        if let section = section {
+            delegate?.didDisconnectSuccessfully(section: section)
+        }
+    }
+    
+    func disconnectionFailure(errorMessage: String) {
+        delegate?.showError(message: errorMessage)
+    }
+    
+
     func startDropboxStatus() {
-        connectButton.isEnabled = false
+        importButton.isEnabled = false
         rotatingImage.isHidden = false
         rotatingImage.startInfinityRotate360Degrees(duration: 2)
         progress.text = String(format: TextConstants.importFiles, String(0))
@@ -105,7 +126,7 @@ extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
     }
     
     func stopDropboxStatus(lastUpdateMessage: String) {
-        connectButton.isEnabled = true
+        importButton.isEnabled = true
         rotatingImage.isHidden = true
         rotatingImage.stopInfinityRotate360Degrees()
         progress.text = lastUpdateMessage

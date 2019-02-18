@@ -23,6 +23,9 @@ protocol ImportFromFBViewOutput {
 
 protocol ImportFromDropboxViewOutput {
     func viewIsReady()
+    
+    func disconnectAccount()
+    
     func startDropbox()
 }
 

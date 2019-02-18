@@ -64,7 +64,7 @@
                         <rect key="frame" x="262.5" y="53.5" width="41" height="41"/>
                         <state key="normal" image="dropbox_button"/>
                         <connections>
-                            <action selector="connectToDropbox:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="uxL-DD-pEM"/>
+                            <action selector="importToDropbox:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6LD-8y-1P9"/>
                         </connections>
                     </button>
                 </subviews>
@@ -91,9 +91,9 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="caption" destination="uTd-G6-VJJ" id="0Fg-fy-ZJ7"/>
-                <outlet property="connectButton" destination="Hnf-mh-3oA" id="aHv-lV-z9Y"/>
                 <outlet property="customText" destination="YIi-t2-lfG" id="5WS-rW-HYg"/>
                 <outlet property="icon" destination="ZOM-Bi-dfz" id="gw9-de-F0m"/>
+                <outlet property="importButton" destination="Hnf-mh-3oA" id="xAq-4D-uh3"/>
                 <outlet property="progress" destination="zwt-gE-Uac" id="x8G-ht-pld"/>
                 <outlet property="rotatingImage" destination="Rhr-v0-f3c" id="LSp-iT-DaN"/>
             </connections>

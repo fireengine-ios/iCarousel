@@ -82,6 +82,7 @@ struct RouteRequests {
     // MARK: Dropbox
     static let dropboxAuthUrl: URL = URL(string: "https://api.dropboxapi.com/1/oauth2/token_from_oauth1")!
     static let dropboxConnect = "migration/dropbox/connect?accessToken=%@"
+    static let dropboxDisconnect =  baseUrl +/ "/migration/dropbox/disconnect"
     static let dropboxStatus  = "migration/dropbox/status"
     static let dropboxStart   = "migration/dropbox/start"
     

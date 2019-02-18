@@ -848,7 +848,11 @@
 "Instagram" = "Instagram";
 "connected_as_format" = "Connected account:  @%@";
 "instagram_remove_connection_warning_title" = "You're about to remove your Instagram connection.";
+"facebook_remove_connection_warning_title" = "You're about to remove your Facebook connection.";
+"dropbox_remove_connection_warning_title" = "You're about to remove your Dropbox connection.";
 "instagram_remove_connection_warning_message" = "Are you sure you want to remove your Instagram connection?\n\n";
+"facebook_remove_connection_warning_message" = "Are you sure you want to remove your Facebook connection?\n\n";
+"dropbox_remove_connection_warning_message" = "Are you sure you want to remove your Dropbox connection?\n\n";
 "instapick_selection_photos_selected" = "Photos Selected (%d)";
 "instapick_selection_analyzes_left" = "You only have %d analyses left";
 "loading" = "Loading...";

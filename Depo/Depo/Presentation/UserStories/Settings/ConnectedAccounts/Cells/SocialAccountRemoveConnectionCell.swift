@@ -53,11 +53,14 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
     
     
     @IBAction func removeConnection(_ sender: Any) {
-        let attributedText = NSMutableAttributedString(string: TextConstants.instagramRemoveConnectionWarningMessage, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+        let localizedTexts = warningTexts()
+        
+        let attributedText = NSMutableAttributedString(string: localizedTexts.message, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
         if let connectedAsText = connectedAs.attributedText {
             attributedText.append(connectedAsText)
         }
-        let warningPopup = PopUpController.with(title: TextConstants.instagramRemoveConnectionWarning,
+        
+        let warningPopup = PopUpController.with(title: localizedTexts.title,
                                                 attributedMessage: attributedText,
                                                 image: .none,
                                                 firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.actionSheetRemove,
@@ -73,6 +76,24 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         })
         
         UIApplication.topController()?.present(warningPopup, animated: true, completion: nil)
+    }
+    
+    private func warningTexts() -> (title: String, message: String) {
+        guard let account = section?.account else {
+            return (" ", " ")
+        }
+        
+        switch account {
+        case .instagram:
+            return (TextConstants.instagramRemoveConnectionWarning,
+                    TextConstants.instagramRemoveConnectionWarningMessage)
+        case .facebook:
+            return (TextConstants.facebookRemoveConnectionWarning,
+                    TextConstants.facebookRemoveConnectionWarningMessage)
+        case .dropbox:
+            return (TextConstants.dropboxRemoveConnectionWarning,
+                    TextConstants.dropboxRemoveConnectionWarningMessage)
+        }
     }
 }
 

@@ -30,6 +30,13 @@ protocol ImportFromFBViewInput: class, ActivityIndicator {
 // MARK: - Dropbox
 
 protocol ImportFromDropboxViewInput: class, ActivityIndicator {
+    
+    func connectionStatusSuccess(_ isOn: Bool)
+    func connectionStatusFailure(errorMessage: String)
+    
+    func disconnectionSuccess()
+    func disconnectionFailure(errorMessage: String)
+    
     func dbStartSuccessCallback()
     func failedDropboxStart(errorMessage: String)
     

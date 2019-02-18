@@ -41,26 +41,29 @@ protocol ImportFromFBInteractorOutput: class {
 
 protocol ImportFromDropboxInteractorOutput: class {
     
-    func loginSuccessCallback(token: String)
-    func loginFailureCallback(errorMessage: String)
+    func loginSuccess(token: String)
+    func loginFailure(errorMessage: String)
     func loginCanceled()
     
-    func connectSuccessCallback()
-    func connectFailureCallback(errorMessage: String)
+    func connectWithTokenSuccess()
+    func connectWithTokenFailure(errorMessage: String)
+    
+    func disconnectionSuccess()
+    func disconnectionFailure(errorMessage: String)
 
-    func statusSuccessCallback(status: DropboxStatusObject)
-    func statusFailureCallback(errorMessage: String)
+    func statusSuccess(status: DropboxStatusObject)
+    func statusFailure(errorMessage: String)
     
-    func statusForStartSuccessCallback(status: DropboxStatusObject)
-    func statusForStartFailureCallback(errorMessage: String)
+    func statusForStartSuccess(status: DropboxStatusObject)
+    func statusForStartFailure(errorMessage: String)
     
-    func startSuccessCallback()
-    func startFailureCallback(errorMessage: String)
+    func startSuccess()
+    func startFailure(errorMessage: String)
     
     func failedWithInternetError(errorMessage: String)
     
-    func statusForCompletionSuccessCallback(dropboxStatus: DropboxStatusObject)
-    func statusForCompletionFailureCallback(errorMessage: String)
+    func statusForCompletionSuccess(dropboxStatus: DropboxStatusObject)
+    func statusForCompletionFailure(errorMessage: String)
 }
 
 // MARK: - Instagram

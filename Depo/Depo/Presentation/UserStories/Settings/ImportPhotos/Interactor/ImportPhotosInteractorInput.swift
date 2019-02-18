@@ -26,10 +26,13 @@ protocol ImportFromFBInteractorInput {
 // MARK: - Dropbox
 
 protocol ImportFromDropboxInteractorInput {
-    func requestStatus()
+    func disconnectAccount()
+    func startImport()
+    func getAllStatuses()
+
+    func loginIfNeeded()
     func requestStatusForStart()
-    func login()
-    func requestConnect(withToken token: String)
+    func connect(withToken token: String)
     func requestStart()
     func requestStatusForCompletion()
     func trackImportActivationDropBox()
