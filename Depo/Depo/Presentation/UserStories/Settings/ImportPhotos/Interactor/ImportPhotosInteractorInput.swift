@@ -30,7 +30,7 @@ protocol ImportFromDropboxInteractorInput {
     func startImport()
     func getAllStatuses()
 
-    func loginIfNeeded()
+    func login()
     func requestStatusForStart()
     func connect(withToken token: String)
     func requestStart()
