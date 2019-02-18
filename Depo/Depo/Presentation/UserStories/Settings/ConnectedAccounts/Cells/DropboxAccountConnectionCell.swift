@@ -9,9 +9,10 @@
 import UIKit
 
 
-final class DropboxAccountConnectionCell: UITableViewCell, SocialAccountConnectionCell {
+final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell {
     
-    weak var delegate: SocialAccountConnectionCellDelegate?
+    private(set) var section: Section?
+    weak var delegate: SocialConnectionCellDelegate?
     
     private var interactor: ImportFromDropboxInteractor!
     private var presenter: ImportFromDropboxPresenter!
@@ -51,7 +52,7 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialAccountConnecti
         }
     }
     
-    @IBOutlet private weak var connectButton: UIButton!
+    @IBOutlet private weak var importButton: UIButton!
     
     
     override func awakeFromNib() {
@@ -73,9 +74,16 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialAccountConnecti
         presenter.interactor = interactor
         presenter.view = self
     }
-
     
-    @IBAction func connectToDropbox(_ sender: Any) {
+    func setup(with section: Section?) {
+        self.section = section
+    }
+    
+    func disconnect() {
+        presenter.disconnectAccount()
+    }
+
+    @IBAction func importToDropbox(_ sender: Any) {
         presenter.startDropbox()
     }
     
@@ -85,25 +93,47 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialAccountConnecti
 // MARK: - ImportFromDropboxViewInput
 extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
 
+    func connectionStatusSuccess(_ isOn: Bool) {
+        if let section = section {
+            delegate?.didConnectSuccessfully(section: section)
+        }
+    }
+
+    func connectionStatusFailure(errorMessage: String) {
+        delegate?.showError(message: errorMessage)
+    }
+    
+    func disconnectionSuccess() {
+        if let section = section {
+            delegate?.didDisconnectSuccessfully(section: section)
+        }
+    }
+    
+    func disconnectionFailure(errorMessage: String) {
+        delegate?.showError(message: errorMessage)
+    }
+    
+
     func startDropboxStatus() {
-        connectButton.isEnabled = false
+        importButton.isEnabled = false
         rotatingImage.isHidden = false
         rotatingImage.startInfinityRotate360Degrees(duration: 2)
         progress.text = String(format: TextConstants.importFiles, String(0))
-        delegate?.willChangeHeight()
+        
+        if let section = section {
+            delegate?.didConnectSuccessfully(section: section)
+        }
     }
     
     func updateDropboxStatus(progressPercent: Int) {
         progress.text = String(format: TextConstants.importFiles, String(progressPercent))
-        delegate?.willChangeHeight()
     }
     
     func stopDropboxStatus(lastUpdateMessage: String) {
-        connectButton.isEnabled = true
+        importButton.isEnabled = true
         rotatingImage.isHidden = true
         rotatingImage.stopInfinityRotate360Degrees()
         progress.text = lastUpdateMessage
-        delegate?.willChangeHeight()
     }
     
     // MARK: Start

@@ -8,12 +8,6 @@
 
 import UIKit
 
-enum SocialAccount: Int {
-    case instagram
-    case facebook
-    case dropbox
-}
-
 
 final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPresenter {
     
@@ -25,13 +19,14 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
         return manager
     }()
     private let analyticsService: AnalyticsService = factory.resolve()
-    
-    private let sections: [SocialAccount] = [.instagram, .facebook, .dropbox]
+
+    private let dataSource = ConnectedAccountsDataSource()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dataSource.view = self
         setupScreen()
         setupTableView()
     }
@@ -50,7 +45,7 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
     }
     
     private func setupTableView() {
-        tableView.dataSource = self
+        tableView.dataSource = dataSource
         tableView.delegate = self
         
         tableView.tableFooterView = UIView()
@@ -61,7 +56,8 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
         
         let reusableIds = [CellsIdConstants.instagramAccountConnectionCell,
                            CellsIdConstants.facebookAccountConnectionCell,
-                           CellsIdConstants.dropboxAccountConnectionCell]
+                           CellsIdConstants.dropboxAccountConnectionCell,
+                           CellsIdConstants.socialAccountRemoveConnectionCell]
         
         for id in reusableIds {
             let nib = UINib(nibName: id, bundle: nil)
@@ -76,67 +72,43 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
 }
 
 
-// MARK: - UITableViewDataSource
-extension ConnectedAccountsViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellId = cellIdentifier(for: indexPath.section)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        
-        (cell as? SocialAccountConnectionCell)?.delegate = self
-        
-        return cell
-    }
- 
-    private func cellIdentifier(for section: Int) -> String {
-        guard let accountType = SocialAccount(rawValue: section) else {
-            assertionFailure("wrong index")
-            return ""
-        }
-        
-        switch accountType {
-        case .instagram:
-            return CellsIdConstants.instagramAccountConnectionCell
-        case .facebook:
-            return CellsIdConstants.facebookAccountConnectionCell
-        case .dropbox:
-            return CellsIdConstants.dropboxAccountConnectionCell
-        }
-    }
-}
-
-
 // MARK: - UITableViewDelegate
 extension ConnectedAccountsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (section == SocialAccount.instagram.rawValue) ? 0 : 14
+        return (section == Section.SocialAccount.instagram.rawValue) ? 0 : 14
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return (section == SocialAccount.instagram.rawValue) ? nil : SettingHeaderView.viewFromNib()
+        return (section == Section.SocialAccount.instagram.rawValue) ? nil : SettingHeaderView.viewFromNib()
     }
 }
 
-// MARK: - SocialAccountConnectionCellDelegate
-extension ConnectedAccountsViewController: SocialAccountConnectionCellDelegate {
-    
-    func willChangeHeight() {
-        DispatchQueue.main.async {
-            self.tableView.beginUpdates()
-            self.tableView.endUpdates()
+// MARK: - SocialConnectionCellDelegate
+extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
+    func didConnectSuccessfully(section: Section) {
+        if section.set(expanded: true) {
+            update(section: section)
         }
     }
     
+    func didDisconnectSuccessfully(section: Section) {
+        if section.set(expanded: false) {
+            update(section: section)
+        }
+    }
+
+    private func update(section: Section) {
+        DispatchQueue.toMain {
+            self.tableView.reloadSections([section.account.rawValue], with: .fade)
+        }
+    }
+    
+    
     func showError(message: String) {
-        showErrorAlert(message: message)
+        DispatchQueue.toMain {
+            self.showErrorAlert(message: message)
+        }
     }
     
     func startActivityIndicator() {

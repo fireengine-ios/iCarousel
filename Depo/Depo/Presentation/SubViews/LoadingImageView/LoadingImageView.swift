@@ -37,7 +37,7 @@ class LoadingImageView: UIImageView {
             let newCornerView = UIView()
             newCornerView.translatesAutoresizingMaskIntoConstraints = false
             newCornerView.backgroundColor = UIColor.clear
-            newCornerView.layer.borderColor = ColorConstants.darcBlueColor.cgColor
+            newCornerView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
             newCornerView.layer.borderWidth = 2
             cornerView = newCornerView
         }

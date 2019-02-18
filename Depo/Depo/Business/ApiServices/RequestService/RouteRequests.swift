@@ -75,22 +75,26 @@ struct RouteRequests {
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve/%i"
     
-    // MARK: Dropbox
     
+    //MARK: Social Connections
+    static let socialStatus = "share/social/status"
+    
+    // MARK: Dropbox
     static let dropboxAuthUrl: URL = URL(string: "https://api.dropboxapi.com/1/oauth2/token_from_oauth1")!
     static let dropboxConnect = "migration/dropbox/connect?accessToken=%@"
+    static let dropboxDisconnect = baseUrl +/ "migration/dropbox/disconnect"
     static let dropboxStatus  = "migration/dropbox/status"
     static let dropboxStart   = "migration/dropbox/start"
     
     // MARK: - FB
     static let fbPermissions = "migration/facebook/permissions"
     static let fbConnect     = "migration/facebook/connect?accessToken=%@"
+    static let fbDisconnect  =  baseUrl +/ "connect/c/facebook"
     static let fbStatus      = "migration/facebook/status"
     static let fbStart       = "migration/facebook/start"
     static let fbStop        = "migration/facebook/stop"
     
     // MARK: - Instagram
-    static let socialStatus = "share/social/status"
     static let instagramConfig = "share/social/instagram/config"
     static let instagramConnect =  baseUrl +/ "share/social/instagram/connect"
     static let instagramDisconnect =  baseUrl +/ "share/social/instagram/disconnect"

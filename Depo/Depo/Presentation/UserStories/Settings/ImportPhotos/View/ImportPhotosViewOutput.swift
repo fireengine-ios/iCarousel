@@ -12,14 +12,20 @@ import Foundation
 
 protocol ImportFromFBViewOutput {
     func viewIsReady()
-    func startFacebook()
-    func stopFacebook()
+    
+    func disconnectAccount()
+    
+    func startImport()
+    func stopImport()
 }
 
 // MARK: - Dropbox
 
 protocol ImportFromDropboxViewOutput {
     func viewIsReady()
+    
+    func disconnectAccount()
+    
     func startDropbox()
 }
 

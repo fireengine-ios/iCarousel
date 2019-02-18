@@ -161,8 +161,8 @@ final class InstapickPopUpController: UIViewController {
     }
     
     private func setupTextColors() {
-        titleLabel.textColor = ColorConstants.darcBlueColor
-        subtitleLabel.textColor = ColorConstants.darcBlueColor
+        titleLabel.textColor = ColorConstants.darkBlueColor
+        subtitleLabel.textColor = ColorConstants.darkBlueColor
         descriptionLabel.textColor = ColorConstants.darkGrayTransperentColor
         checkBoxLabel.textColor = ColorConstants.textGrayColor
         withoutConnectingButton.setTitleColor(.lrTealishTwo, for: .normal)

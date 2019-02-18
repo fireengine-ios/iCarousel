@@ -68,7 +68,7 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
             pageControll.currentPageIndicatorTintColor = ColorConstants.lightGrayColor
         } else {
             pageControll.pageIndicatorTintColor = ColorConstants.blueColor
-            pageControll.currentPageIndicatorTintColor = ColorConstants.darcBlueColor
+            pageControll.currentPageIndicatorTintColor = ColorConstants.darkBlueColor
         }
     }
 

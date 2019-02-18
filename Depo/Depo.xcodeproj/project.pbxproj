@@ -2717,6 +2717,14 @@
 		AF744E3CD7A5DD8E7D6C30BB /* UserInfoSubViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021DEBE120BC8745E74C3B8B /* UserInfoSubViewViewController.swift */; };
 		B02F86BF64856149537A10F3 /* SyncContactsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FD14ED875730C75E5AD4E0 /* SyncContactsRouterInput.swift */; };
 		B3B5A5509A09A51F47A9AA34 /* SelectNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669AB32EC041C5277B6D63E3 /* SelectNameRouter.swift */; };
+		B50B4A69220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A67220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift */; };
+		B50B4A6A220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A67220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift */; };
+		B50B4A6B220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50B4A68220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib */; };
+		B50B4A6C220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50B4A68220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib */; };
+		B50B4A6E220C29470056FC86 /* UIEdgeInsets+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */; };
+		B50B4A6F220C29470056FC86 /* UIEdgeInsets+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */; };
+		B50B4A74220C598C0056FC86 /* ConnectedAccountsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */; };
+		B50B4A75220C598C0056FC86 /* ConnectedAccountsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B520000C202492A90096D036 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520000B202492A90096D036 /* SynchronizedArray.swift */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
@@ -2822,6 +2830,8 @@
 		B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
 		B59A63DF2167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59A63E02167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
+		B59CCE812213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
+		B59CCE822213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
 		B5A84523212DA315007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84522212DA314007EA795 /* images.xcassets */; };
 		B5A84525212DA326007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84524212DA325007EA795 /* images.xcassets */; };
 		B5A84527212DA339007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84526212DA339007EA795 /* images.xcassets */; };
@@ -5407,6 +5417,10 @@
 		B0E129D217E4E979AFF5939D /* SyncContactsInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsInteractorInput.swift; sourceTree = "<group>"; };
 		B172FFCC3EC70BEDB98BAE4C /* PhoneVereficationRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationRouterInput.swift; sourceTree = "<group>"; };
 		B3A0B3E5058A3D09CC569377 /* PhotoVideoDetailInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInitializer.swift; sourceTree = "<group>"; };
+		B50B4A67220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountRemoveConnectionCell.swift; sourceTree = "<group>"; };
+		B50B4A68220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialAccountRemoveConnectionCell.xib; sourceTree = "<group>"; };
+		B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Extensions.swift"; sourceTree = "<group>"; };
+		B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsDataSource.swift; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
@@ -5480,6 +5494,7 @@
 		B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityInitializer.swift; sourceTree = "<group>"; };
 		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
+		B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountSectionMediator.swift; sourceTree = "<group>"; };
 		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		B5A84524212DA325007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		B5A84526212DA339007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
@@ -10911,6 +10926,7 @@
 				B5AB5B6121F9AF95003AABB4 /* Cells */,
 				B5AB5B5421F9A92B003AABB4 /* ConnectedAccountsViewController.swift */,
 				B5AB5B5521F9A92B003AABB4 /* ConnectedAccountsViewController.xib */,
+				B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */,
 			);
 			path = ConnectedAccounts;
 			sourceTree = "<group>";
@@ -10924,6 +10940,9 @@
 				B5AB5B6921F9B029003AABB4 /* FacebookAccountConnectionCell.xib */,
 				B5AB5B6E21F9B040003AABB4 /* InstagramAccountConnectionCell.swift */,
 				B5AB5B6F21F9B040003AABB4 /* InstagramAccountConnectionCell.xib */,
+				B50B4A67220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift */,
+				B50B4A68220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib */,
+				B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -11572,6 +11591,7 @@
 				B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */,
 				CE292C1321BE5C53004FC745 /* Text+Size.swift */,
 				CE00B252220332F000A5A696 /* NSLayoutConstraint+Extensions.swift */,
+				B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -13558,6 +13578,7 @@
 				8C06AFBD2008AD71003D8E05 /* geri@2x.png in Resources */,
 				8C06B0BB2008AD71003D8E05 /* rotation_secili.png in Resources */,
 				8C0E900D1FDEBDFF00789C91 /* TabBarView.xib in Resources */,
+				B50B4A6C220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib in Resources */,
 				A2EF976C21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */,
 				8C06B0692008AD71003D8E05 /* Paylas_butnuna_basin@3x.png in Resources */,
 				8C06B0292008AD71003D8E05 /* ok_btn_kucuk.png in Resources */,
@@ -14182,6 +14203,7 @@
 				A2268EC521A68C2A002F2611 /* LeavePremiumView.xib in Resources */,
 				8C06AFA62008AD71003D8E05 /* frame@3x.png in Resources */,
 				8C06AF9A2008AD71003D8E05 /* filtre_selected@3x.png in Resources */,
+				B50B4A6B220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib in Resources */,
 				8C06B0AE2008AD71003D8E05 /* right@3x.png in Resources */,
 				8C06B0242008AD71003D8E05 /* ok@2x.png in Resources */,
 				CE3E4D08201B11BF00173045 /* PVViewerController.xib in Resources */,
@@ -15309,6 +15331,7 @@
 				8C0E8CC41FDEBDFF00789C91 /* PhotosOrderCollectionViewCell.swift in Sources */,
 				8C0E8CC51FDEBDFF00789C91 /* InstagramResponses.swift in Sources */,
 				4A9B3909201F3533009FC572 /* FaceImageItemsRouter.swift in Sources */,
+				B50B4A75220C598C0056FC86 /* ConnectedAccountsDataSource.swift in Sources */,
 				8C0E8CC61FDEBDFF00789C91 /* HelpAndSupportPresenter.swift in Sources */,
 				FA793D8D201872EA00A02B46 /* ThingsService.swift in Sources */,
 				8C0E8CC71FDEBDFF00789C91 /* IntroduceDataSource.swift in Sources */,
@@ -15356,6 +15379,7 @@
 				B5781BD1210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */,
 				8C06AC1E2008AA93003D8E05 /* TabBarActionHandler.swift in Sources */,
 				8C0E8CE81FDEBDFF00789C91 /* SettingsTableViewCell.swift in Sources */,
+				B50B4A6F220C29470056FC86 /* UIEdgeInsets+Extensions.swift in Sources */,
 				4A6DBE8421A6F8DC0003D1B4 /* PackageInfoView.swift in Sources */,
 				B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */,
 				8C0E8CE91FDEBDFF00789C91 /* HelpAndSupportModuleInput.swift in Sources */,
@@ -15861,6 +15885,7 @@
 				8C0E8E871FDEBDFF00789C91 /* CreateStoryPhotoSelectionPresenter.swift in Sources */,
 				8C0B91AC20170EBB00A5BA81 /* ManageContactsInteractor.swift in Sources */,
 				CE5A612D2060E85200793EB0 /* StorageVars.swift in Sources */,
+				B59CCE822213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */,
 				FA793D8E201872EA00A02B46 /* ThingsServiceResponse.swift in Sources */,
 				8C0E8E8B1FDEBDFF00789C91 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
 				8C0E8E8C1FDEBDFF00789C91 /* DropDovnView.swift in Sources */,
@@ -16204,6 +16229,7 @@
 				4A56D5BC202AF556003A4624 /* FaceImageAddNameConfigurator.swift in Sources */,
 				B5711E0020C13F4300E72A9D /* String+ShareActivity.swift in Sources */,
 				8C0E8F841FDEBDFF00789C91 /* SelectNameRouter.swift in Sources */,
+				B50B4A6A220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift in Sources */,
 				C62239A3204972160043ED44 /* MenloworksTagsService.swift in Sources */,
 				8CD2B3B11FE7B3BD00280547 /* UIButton+Color.swift in Sources */,
 				A20B356E21B823D000A5E4F2 /* FaceImageItemsDataSource.swift in Sources */,
@@ -16472,6 +16498,7 @@
 				8C975E17220DC55000AC3502 /* ControlTabBarProtocol.swift in Sources */,
 				CEE005761F7B846C004FA8DE /* PHPhotoLibraryChangeObserver.swift in Sources */,
 				7CDABD0A1F1E3A6300C8CC16 /* UserProfileModuleInput.swift in Sources */,
+				B50B4A6E220C29470056FC86 /* UIEdgeInsets+Extensions.swift in Sources */,
 				CEF371AC20887BAC007AD36E /* MD5.swift in Sources */,
 				EF1B60481FCEF38400662CBC /* BottomSelectionMusicTabBarRouter.swift in Sources */,
 				78E8E2B62023638E00A979AB /* FaceImageItemsInteractorOutput.swift in Sources */,
@@ -16838,6 +16865,7 @@
 				A2079916219F13CB00AD5037 /* PremiumInitializer.swift in Sources */,
 				CE51ACC41EF90853005DCEE0 /* RegistrationViewInput.swift in Sources */,
 				CE51ACC51EF90853005DCEE0 /* RegistrationViewOutput.swift in Sources */,
+				B50B4A74220C598C0056FC86 /* ConnectedAccountsDataSource.swift in Sources */,
 				CE51ACC61EF90853005DCEE0 /* RegistrationViewController.swift in Sources */,
 				7C4F60A92019E2AE0033C58F /* AlbumCard.swift in Sources */,
 				CE95ED541F516736002F923A /* HelpAndSupportRouter.swift in Sources */,
@@ -16876,6 +16904,7 @@
 				CE51ACCD1EF90853005DCEE0 /* RegistrationRouter.swift in Sources */,
 				98A867772080DCBC00D2D4F4 /* ArrayExtension.swift in Sources */,
 				CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */,
+				B59CCE812213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */,
 				8C6EF8831F348B5C002AC795 /* BottomSelectionTabBarViewInput.swift in Sources */,
 				CE51ACCE1EF90853005DCEE0 /* RegistrationConfigurator.swift in Sources */,
 				CE2976DE1FD58E2000350F3A /* LocalAlbumViewController.swift in Sources */,
@@ -16964,6 +16993,7 @@
 				CE00B2512202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				D49886621F3EFBE200F50C95 /* ImportPhotosViewOutput.swift in Sources */,
 				4A9886F420443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
+				B50B4A69220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift in Sources */,
 				CE2F55FC1F7551CD00F49DA1 /* AccountService.swift in Sources */,
 				B56FBB3A2122C9AA004F4A59 /* TermsOfUseViewInput.swift in Sources */,
 				8C5408451F62A26000D4717A /* GridListTopBarSortingTableView.swift in Sources */,

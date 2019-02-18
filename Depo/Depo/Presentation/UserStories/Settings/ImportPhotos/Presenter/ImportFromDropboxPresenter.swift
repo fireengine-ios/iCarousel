@@ -15,6 +15,8 @@ class ImportFromDropboxPresenter: BasePresenter {
 //    var router: ImportFromDropboxRouterInput!
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
+    private var importIsAwaiting = false
 
     private let lastUpdateEmptyMessage = " "
 }
@@ -23,11 +25,21 @@ class ImportFromDropboxPresenter: BasePresenter {
 extension ImportFromDropboxPresenter: ImportFromDropboxViewOutput {
     func viewIsReady() {
         view?.startActivityIndicator()
-        interactor.requestStatus()
+        
+        interactor.getAllStatuses()
+    }
+    
+    func disconnectAccount() {
+        view?.startActivityIndicator()
+        
+        interactor.disconnectAccount()
     }
     
     func startDropbox() {
-        interactor.login()
+        view?.startActivityIndicator()
+        
+        importIsAwaiting = true
+        interactor.startImport()
     }
 }
 
@@ -35,10 +47,13 @@ extension ImportFromDropboxPresenter: ImportFromDropboxViewOutput {
 extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
     
     // MARK: status
-    
-    func statusSuccessCallback(status: DropboxStatusObject) {
+    func statusSuccess(status: DropboxStatusObject) {
         view?.stopActivityIndicator()
         
+        if let isConnected = status.connected {
+            view?.connectionStatusSuccess(isConnected)
+        }
+
         guard let requestStatus = status.status else {
             return
         }
@@ -46,19 +61,31 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
         switch requestStatus {
         case .scheduled, .waitingAction, .running, .pending:
             view?.startDropboxStatus()
-            statusForCompletionSuccessCallback(dropboxStatus: status)
+            statusForCompletionSuccess(dropboxStatus: status)
         case .finished, .failed, .cancelled, .none:
             view?.stopDropboxStatus(lastUpdateMessage: status.uploadDescription)
         }
     }
     
-    func statusFailureCallback(errorMessage: String) {  
+    func statusFailure(errorMessage: String) {
         view?.stopActivityIndicator()
+        view?.connectionStatusFailure(errorMessage: errorMessage)
     }
+    
+    func disconnectionSuccess() {
+        view?.stopActivityIndicator()
+        view?.disconnectionSuccess()
+    }
+    
+    func disconnectionFailure(errorMessage: String) {
+        view?.stopActivityIndicator()
+        view?.disconnectionFailure(errorMessage: errorMessage)
+    }
+    
     
     // MARK: - StatusForCompletion
     
-    func statusForCompletionSuccessCallback(dropboxStatus: DropboxStatusObject) {
+    func statusForCompletionSuccess(dropboxStatus: DropboxStatusObject) {
         guard let requestStatus = dropboxStatus.status else {
             view?.stopDropboxStatus(lastUpdateMessage: dropboxStatus.uploadDescription)
             return
@@ -82,23 +109,23 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
         }
     }
     
-    func statusForCompletionFailureCallback(errorMessage: String) {
+    func statusForCompletionFailure(errorMessage: String) {
         view?.stopDropboxStatus(lastUpdateMessage: lastUpdateEmptyMessage)
         view?.failedDropboxStart(errorMessage: errorMessage)
     }
     
     // MARK: status for start
     
-    func statusForStartSuccessCallback(status: DropboxStatusObject) {
+    func statusForStartSuccess(status: DropboxStatusObject) {
         if status.connected == true {
             interactor.requestStart()
         } else {
-            interactor.login()
-        }   
+            interactor.loginIfNeeded()
+        }
     }
     
-    func statusForStartFailureCallback(errorMessage: String) {
-        interactor.login()
+    func statusForStartFailure(errorMessage: String) {
+        interactor.loginIfNeeded()
     }
     
     func failedWithInternetError(errorMessage: String) {
@@ -108,11 +135,11 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
     
     // MARK: login, Token
     
-    func loginSuccessCallback(token: String) {
-        interactor.requestConnect(withToken: token)
+    func loginSuccess(token: String) {
+        interactor.connect(withToken: token)
     }
     
-    func loginFailureCallback(errorMessage: String) {
+    func loginFailure(errorMessage: String) {
         view?.stopActivityIndicator()
         view?.failedDropboxStart(errorMessage: errorMessage)
     }
@@ -121,20 +148,23 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
         view?.stopActivityIndicator()
     }
     
-    // MARK: connect
+    // MARK: connect with token
     
-    func connectSuccessCallback() {
-        interactor.requestStart()
+    func connectWithTokenSuccess() {
+        if importIsAwaiting {
+            interactor.requestStart()
+        }
     }
     
-    func connectFailureCallback(errorMessage: String) {
+    func connectWithTokenFailure(errorMessage: String) {
         view?.stopActivityIndicator()
         view?.failedDropboxStart(errorMessage: errorMessage)
     }
     
     // MARK: start
     
-    func startSuccessCallback() {
+    func startSuccess() {
+        importIsAwaiting = false
         view?.stopActivityIndicator()
         view?.startDropboxStatus()
         interactor.requestStatusForCompletion()
@@ -142,7 +172,8 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
         interactor.trackImportActivationDropBox()
     }
     
-    func startFailureCallback(errorMessage: String) {
+    func startFailure(errorMessage: String) {
+        importIsAwaiting = false
         view?.stopActivityIndicator()
         view?.failedDropboxStart(errorMessage: errorMessage)
     }
