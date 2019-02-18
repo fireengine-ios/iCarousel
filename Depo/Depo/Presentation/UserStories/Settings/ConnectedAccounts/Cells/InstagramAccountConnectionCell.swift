@@ -16,16 +16,7 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
     private var interactor: ImportFromInstagramInteractor!
     private var presenter: ImportFromInstagramPresenter!
     private var router: ImportFromInstagramRouter!
-    
-    
-//    private var isConnected = false {
-//        didSet {
-//            if !isConnected {
-//                isImportOn = false
-//                isInstaPickOn = false
-//            }
-//        }
-//    }
+
     
     private var isImportOn = false {
         didSet {
