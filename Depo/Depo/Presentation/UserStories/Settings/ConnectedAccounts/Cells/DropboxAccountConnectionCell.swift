@@ -11,7 +11,7 @@ import UIKit
 
 final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell {
     
-    private (set) var section: Section?
+    private(set) var section: Section?
     weak var delegate: SocialConnectionCellDelegate?
     
     private var interactor: ImportFromDropboxInteractor!

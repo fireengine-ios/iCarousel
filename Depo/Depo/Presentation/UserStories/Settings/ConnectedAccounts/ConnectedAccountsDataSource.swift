@@ -21,9 +21,9 @@ final class Section {
         case expanded
     }
     
-    private (set) var account: SocialAccount
-    private (set) var state: ExpandState
-    private (set) var mediator = SocialAccountSectionMediator()
+    private(set) var account: SocialAccount
+    private(set) var state: ExpandState
+    private(set) var mediator = SocialAccountSectionMediator()
     
     var numberOfRows: Int {
         return (state == .shrinked) ? 1 : 2

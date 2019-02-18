@@ -16,7 +16,7 @@ protocol SocialRemoveConnectionCell: class {
 
 class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnectionCell {
 
-    private (set) var section: Section?
+    private(set) var section: Section?
     
     @IBOutlet private weak var connectedAs: UILabel! {
         didSet {
