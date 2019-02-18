@@ -209,17 +209,17 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             for object in deletedPhotos {
                 ///Previously it was compering pointers not md5 values
                 if let index = self.duplicatesArray.index(where: { $0.md5 == object.md5 }) {
-                    self.duplicatesArray.remove(at: index)
+                    self.duplicatesArray.safeRemove(at: index)
                     self.analyticsService.track(event: .freeUpSpace)
                 } else if let index = self.duplicatesArray.index(where: { $0.getTrimmedLocalID() == object.getTrimmedLocalID() }) {
-                    self.duplicatesArray.remove(at: index)
+                    self.duplicatesArray.safeRemove(at: index)
                     self.analyticsService.track(event: .freeUpSpace)
                 }
             }
         }
     }
     
-    func startSearchDuplicates(finished: @escaping() -> Void) {
+    func startSearchDuplicates(finished: @escaping VoidHandler) {
         if (isSearchRunning) {
             needSearchAgain = true
             return
@@ -236,43 +236,46 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         serverDuplicatesArray.removeAll()
         
         dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            self.localtemsArray.append(self.allLocalItems().sorted { item1, item2 -> Bool in
-                if let date1 = item1.creationDate, let date2 = item2.creationDate {
-                    if (date1 > date2) {
-                        return true
-                    }
+            
+            self?.allLocalItems(completion: { [weak self] localItems in
+                guard let `self` = self else {
+                    return
                 }
-                return false
-            })
-            
-            self.localMD5Array.append( self.localtemsArray.flatMap{ $0.md5 })
-            self.localTrimmedID.append( self.localtemsArray.flatMap{ $0.getTrimmedLocalID() })
-            let latestDate = self.localtemsArray.last?.creationDate ?? Date()
-            
-            //need to check have we duplicates
-            if self.localtemsArray.count > 0 {
-                self.photoVideoService = PhotoAndVideoService(requestSize: self.numberElementsInRequest)
-                self.getDuplicatesObjects(latestDate: latestDate, success: { [weak self] in
-                    guard let self_ = self else {
-                        return
+                
+                self.localtemsArray.append(localItems.sorted { item1, item2 -> Bool in
+                    if let date1 = item1.creationDate, let date2 = item2.creationDate {
+                        if (date1 > date2) {
+                            return true
+                        }
                     }
-                    if (self_.duplicatesArray.count > 0) {
-                        debugPrint("duplicates count = ", self_.duplicatesArray.count)
-                    } else {
-                        debugPrint("have no duplicates")
-                    }
-                    finished()
-                    }, fail: {
-                        finished()
+                    return false
                 })
-            } else {
-                finished()
-            }
+                
+                self.localMD5Array.append( self.localtemsArray.flatMap{ $0.md5 })
+                self.localTrimmedID.append( self.localtemsArray.flatMap{ $0.getTrimmedLocalID() })
+                let latestDate = self.localtemsArray.last?.creationDate ?? Date()
+                
+                //need to check have we duplicates
+                if self.localtemsArray.count > 0 {
+                    self.photoVideoService = PhotoAndVideoService(requestSize: self.numberElementsInRequest)
+                    self.getDuplicatesObjects(latestDate: latestDate, success: { [weak self] in
+                        guard let self_ = self else {
+                            return
+                        }
+                        if (self_.duplicatesArray.count > 0) {
+                            debugPrint("duplicates count = ", self_.duplicatesArray.count)
+                        } else {
+                            debugPrint("have no duplicates")
+                        }
+                        finished()
+                        }, fail: {
+                            finished()
+                    })
+                } else {
+                    finished()
+                }
+            })
         }
-        
     }
     
     private func getDuplicatesObjects(latestDate: Date,
@@ -307,9 +310,9 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                         {
                             self.serverDuplicatesArray.append(item)
                             self.duplicatesArray.append(elementToAdd)
-                            self.localtemsArray.remove(at: index)
-                            self.localMD5Array.remove(at: index)
-                            self.localTrimmedID.remove(at: index)
+                            self.localtemsArray.safeRemove(at: index)
+                            self.localMD5Array.safeRemove(at: index)
+                            self.localTrimmedID.safeRemove(at: index)
                             
                             if self.localtemsArray.isEmpty {
                                 isFinished = true
@@ -320,9 +323,9 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                         {
                             self.serverDuplicatesArray.append(item)
                             self.duplicatesArray.append(elementToAdd)
-                            self.localtemsArray.remove(at: index)
-                            self.localMD5Array.remove(at: index)
-                            self.localTrimmedID.remove(at: index)
+                            self.localtemsArray.safeRemove(at: index)
+                            self.localMD5Array.safeRemove(at: index)
+                            self.localTrimmedID.safeRemove(at: index)
                             
                             if self.localtemsArray.isEmpty {
                                 isFinished = true
@@ -342,8 +345,8 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }, newFieldValue: nil)
     }
     
-    private func allLocalItems() -> [WrapData] {
-        return CoreDataStack.default.allLocalItems()
+    private func allLocalItems(completion: @escaping LocalFilesCallBack) {
+        CoreDataStack.default.allLocalItems(completion: completion)
     }
     
 
@@ -497,7 +500,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 for item in networksObjects {
                     if let index = duplicatesMD5Array.index(of: item.md5) {
                         duplicatesMD5Array.remove(at: index)
-                        self.duplicatesArray.remove(at: index)
+                        self.duplicatesArray.safeRemove(at: index)
                     } else {
                         networksObjectsForDelete.append(item)
                     }

@@ -203,7 +203,7 @@ final class FaceImageViewController: ViewController, NibInit {
                 self?.checkFaceImageAndFacebookState(with: group)
             case .failed(let error):
                 DispatchQueue.toMain {
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    UIApplication.showErrorAlert(message: error.description)
                 }
                 
                 self?.checkFaceImageAndFacebookState(with: group)

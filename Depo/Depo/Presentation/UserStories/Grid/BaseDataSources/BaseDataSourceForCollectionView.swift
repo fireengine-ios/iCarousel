@@ -1673,32 +1673,37 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         $0.getTrimmedLocalID()
                     }
                     //FIXME: check new compounder for locals
-                    let localObjectsForReplace = CoreDataStack.default.allLocalItems(trimmedLocalIds: localIDs)
-                    
-                    let foundedLocalID = localObjectsForReplace.map {
-                        $0.getTrimmedLocalID()
-                    }
-                    for object in serverObjects {
-                        let trimmedID = object.getTrimmedLocalID()
-                        if let index = foundedLocalID.index(of: trimmedID) {
-                            let objForReplace = localObjectsForReplace[index]
-                            if let index = allItemsIDs.index(of: trimmedID){
-                                allItemsIDs.remove(at: index)
-                                if allItemsIDs.contains(trimmedID) {
-                                    idsForRemove.append(object.uuid)
-                                } else {
-                                    objectsForReplaceDict[object.uuid] = objForReplace
-                                }
-                            }
-                        } else {
-                            idsForRemove.append(object.uuid)
+                    CoreDataStack.default.allLocalItems(trimmedLocalIds: localIDs, completion: { localItems in
+                        var localObjectsForReplace = localItems
+                        let foundedLocalID = localObjectsForReplace.map {
+                            $0.getTrimmedLocalID()
                         }
-                    }
+                        for object in serverObjects {
+                            let trimmedID = object.getTrimmedLocalID()
+                            if let index = foundedLocalID.index(of: trimmedID) {
+                                let objForReplace = localObjectsForReplace[index]
+                                if let index = allItemsIDs.index(of: trimmedID){
+                                    allItemsIDs.remove(at: index)
+                                    if allItemsIDs.contains(trimmedID) {
+                                        idsForRemove.append(object.uuid)
+                                    } else {
+                                        objectsForReplaceDict[object.uuid] = objForReplace
+                                    }
+                                }
+                            } else {
+                                idsForRemove.append(object.uuid)
+                            }
+                        }
+                        semaphore.signal()
+                    })
                 } else {
                     idsForRemove = items.map{
                         $0.uuid
                     }
+                    semaphore.signal()
                 }
+                
+                semaphore.wait()
                 
                 self.emptyMetaItems = self.emptyMetaItems.filter { !idsForRemove.contains($0.uuid) }
                 

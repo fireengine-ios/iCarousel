@@ -65,7 +65,6 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     private func configure() {
         instapickService.delegates.add(self)
-        needShowTabBar = false
         
         activityManager.delegate = self
         displayManager.applyConfiguration(.initial)
@@ -152,7 +151,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                     self?.router.presentViewController(controller: vc)
                 }
             }, error: { [weak self] errorResponse in
-                self?.showError(message: errorResponse.localizedDescription)
+                self?.showError(message: errorResponse.description)
             })
         } else {
             let popup = PopUpController.with(title: TextConstants.analyzeHistoryPopupTitle,
@@ -300,7 +299,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 }
             case .failed(let error):
                 completion?(false)
-                self.showError(message: error.localizedDescription)
+                self.showError(message: error.description)
             }
         }
     }
@@ -341,7 +340,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                     })
                 }
             case .failed(let error):
-                self.showError(message: error.localizedDescription)
+                self.showError(message: error.description)
             }
         }
     }
@@ -356,7 +355,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .success(let response):
                 self.openDetail(for: response, analyzesCount: analyzesCount)
             case .failed(let error):
-                self.showError(message: error.localizedDescription)
+                self.showError(message: error.description)
             }
         }
     }
@@ -367,7 +366,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .success(let analysisCount):
                 success(analysisCount)
             case .failed(let error):
-                self?.showError(message: error.localizedDescription)
+                self?.showError(message: error.description)
             }
         }
     }
@@ -384,7 +383,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         stopActivityIndicator()
         
         let router = RouterVC()
-        let controller = router.instaPickDetailViewController(models: analysis, analyzesCount: analyzesCount)
+        let controller = router.instaPickDetailViewController(models: analysis, analyzesCount: analyzesCount, isShowTabBar: false)
         
         router.presentViewController(controller: controller)
     }
@@ -460,6 +459,7 @@ extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
         }) else {
             return
         }
+        
         let insertAnalyse = InstapickAnalyze(requestIdentifier: mainAnalyse.requestIdentifier,
                                              rank: mainAnalyse.rank,
                                              hashTags: mainAnalyse.hashTags,
@@ -467,6 +467,11 @@ extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
                                              photoCount: analyses.count,
                                              startedDate: mainAnalyse.startedDate,
                                              score: mainAnalyse.score)
+        
+        if dataSource.isEmpty {
+            displayManager.applyConfiguration(.initial)
+        }
+        
         dataSource.insertNewItems([insertAnalyse])
     }
 }

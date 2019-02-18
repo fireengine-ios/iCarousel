@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class InstaPickDetailViewController: UIViewController {
+final class InstaPickDetailViewController: UIViewController, ControlTabBarProtocol {
     
     private enum PhotoViewType: String {
         case bigView = "bigView"
@@ -54,11 +54,13 @@ final class InstaPickDetailViewController: UIViewController {
     private var dataSource = InstaPickHashtagCollectionViewDataSource()
     private var isShown = false
     private var selectedPhoto: InstapickAnalyze?
+    private var isShowTabBar = true
     
     private var analyzes: [InstapickAnalyze] = []
     private var analyzesCount: InstapickAnalyzesCount?
     
     private lazy var activityManager = ActivityIndicatorManager()
+        
     //MARK: lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,10 +73,17 @@ final class InstaPickDetailViewController: UIViewController {
         open()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        showTabBarIfNeeded()
+    }
+    
     //MARK: - Utility Methods(public)
-    func configure(with models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) {
+    func configure(with models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount, isShowTabBar: Bool) {
         analyzes = models
         self.analyzesCount = analyzesCount
+        self.isShowTabBar = isShowTabBar
     }
     
     //MARK: - Utility Methods(private)
@@ -278,6 +287,10 @@ final class InstaPickDetailViewController: UIViewController {
     
     private func showErrorWith(message: String) {
         UIApplication.showErrorAlert(message: message)
+    }
+    
+    private func showTabBarIfNeeded() {
+        isShowTabBar ? showTabBar() : hideTabBar()
     }
     
     //MARK: - Actions

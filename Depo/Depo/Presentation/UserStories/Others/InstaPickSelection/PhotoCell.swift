@@ -17,7 +17,7 @@ final class PhotoCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-        imageView.backgroundColor = ColorConstants.fileGreedCellColor
+        imageView.backgroundColor = ColorConstants.photoCell
         imageView.isOpaque = true
         return imageView
     }()
@@ -63,7 +63,6 @@ final class PhotoCell: UICollectionViewCell {
         addSubview(imageView)
         addSubview(selectionImageView)
         addSubview(favouriteImageView)
-        layer.borderColor = UIColor.red.cgColor
         
         layer.borderColor = ColorConstants.darkBlueColor.cgColor
         
