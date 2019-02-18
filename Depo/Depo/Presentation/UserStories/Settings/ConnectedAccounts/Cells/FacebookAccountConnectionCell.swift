@@ -73,7 +73,7 @@ final class FacebookAccountConnectionCell: UITableViewCell, SocialConnectionCell
     
     @IBOutlet private weak var importSwitch: UISwitch! {
         didSet {
-            importSwitch.setOn(isImportOn, animated: true)
+            importSwitch.setOn(isImportOn, animated: false)
         }
     }
     
@@ -118,7 +118,11 @@ final class FacebookAccountConnectionCell: UITableViewCell, SocialConnectionCell
 extension FacebookAccountConnectionCell: ImportFromFBViewInput {
     func connectionStatusSuccess(_ isOn: Bool) {
         if let section = section {
-            delegate?.didConnectSuccessfully(section: section)
+            if isOn {
+               delegate?.didConnectSuccessfully(section: section)
+            } else {
+                delegate?.didDisconnectSuccessfully(section: section)
+            }
         }
     }
     

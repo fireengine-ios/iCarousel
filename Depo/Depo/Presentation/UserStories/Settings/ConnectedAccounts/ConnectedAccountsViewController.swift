@@ -88,22 +88,23 @@ extension ConnectedAccountsViewController: UITableViewDelegate {
 extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
     func didConnectSuccessfully(section: Section) {
         if section.set(expanded: true) {
-            update(section: section)
+            DispatchQueue.toMain {
+                let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue,
+                                          section: section.account.rawValue)
+                self.tableView.insertRows(at: [indexPath], with: .fade)
+            }
         }
     }
     
     func didDisconnectSuccessfully(section: Section) {
         if section.set(expanded: false) {
-            update(section: section)
+            DispatchQueue.toMain {
+                let indexPath = IndexPath(row: Section.ExpandState.expanded.rawValue,
+                                          section: section.account.rawValue)
+                self.tableView.deleteRows(at: [indexPath], with: .fade)
+            }
         }
     }
-
-    private func update(section: Section) {
-        DispatchQueue.toMain {
-            self.tableView.reloadSections([section.account.rawValue], with: .fade)
-        }
-    }
-    
     
     func showError(message: String) {
         DispatchQueue.toMain {
