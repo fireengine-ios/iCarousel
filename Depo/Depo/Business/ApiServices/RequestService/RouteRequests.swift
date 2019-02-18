@@ -88,6 +88,7 @@ struct RouteRequests {
     // MARK: - FB
     static let fbPermissions = "migration/facebook/permissions"
     static let fbConnect     = "migration/facebook/connect?accessToken=%@"
+    static let fbDisconnect  =  baseUrl +/ "/connect/c/facebook"
     static let fbStatus      = "migration/facebook/status"
     static let fbStart       = "migration/facebook/start"
     static let fbStop        = "migration/facebook/stop"

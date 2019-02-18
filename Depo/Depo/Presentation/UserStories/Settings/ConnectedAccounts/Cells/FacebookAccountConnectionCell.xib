@@ -48,7 +48,7 @@
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mv2-dO-dk3">
                         <rect key="frame" x="253" y="57.5" width="51" height="31"/>
                         <connections>
-                            <action selector="connectionSwitchValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="zCA-q4-Ieh"/>
+                            <action selector="importSwitchValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="c2U-Sg-NN7"/>
                         </connections>
                     </switch>
                 </subviews>
@@ -69,9 +69,9 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="caption" destination="KSu-ci-sFx" id="lgC-Xb-xio"/>
-                <outlet property="connectionSwitch" destination="mv2-dO-dk3" id="llp-qf-wTy"/>
                 <outlet property="customText" destination="Zfq-HD-DMG" id="zXa-aa-Te9"/>
                 <outlet property="icon" destination="A4G-xm-h6E" id="dt8-0e-Zbv"/>
+                <outlet property="importSwitch" destination="mv2-dO-dk3" id="BXP-Ad-gEe"/>
             </connections>
             <point key="canvasLocation" x="139.19999999999999" y="175.41229385307346"/>
         </tableViewCell>

@@ -73,7 +73,6 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
 
 
 // MARK: - UITableViewDelegate
-//TODO: maybe move to datasource
 extension ConnectedAccountsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

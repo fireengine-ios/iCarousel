@@ -11,14 +11,20 @@ import Foundation
 // MARK: - Facebook
 
 protocol ImportFromFBViewInput: class, ActivityIndicator {
+    func connectionStatusSuccess(_ isOn: Bool)
+    func connectionStatusFailure(errorMessage: String)
     
-    func succeedFacebookStart()
-    func failedFacebookStart(errorMessage: String)
+    func syncStatusSuccess(_ isOn: Bool)
+    func syncStatusFailure()
     
-    func succeedFacebookStop()
-    func failedFacebookStop(errorMessage: String)
+    func importStartSuccess()
+    func importStartFailure(errorMessage: String)
     
-    func failedFacebookStatus(errorMessage: String)
+    func importStopSuccess()
+    func importStopFailure(errorMessage: String)
+    
+    func disconnectionSuccess()
+    func disconnectionFailure(errorMessage: String)
 }
 
 // MARK: - Dropbox

@@ -22,7 +22,7 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         didSet {
             connectedAs.font = UIFont.TurkcellSaturaMedFont(size: 16.0)
             connectedAs.textColor = ColorConstants.connectedAs
-            connectedAs.text = " "
+            connectedAs.text = TextConstants.youAreConnected
         }
     }
     

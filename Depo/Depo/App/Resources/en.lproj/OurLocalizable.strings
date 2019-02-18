@@ -856,3 +856,4 @@
 "there_are_no_albums" = "There are no albums";
 "instapick_selection_analyzes_left_max" = "You’ve selected %d photos\n(the max. number you can select)";
 "remove_connection" = "Remove Connection";
+"you_are_connected" = "You are connected";
