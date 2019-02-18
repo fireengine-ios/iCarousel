@@ -76,7 +76,7 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
     
     @IBOutlet private weak var importSwitch: UISwitch! {
         didSet {
-            importSwitch.setOn(isImportOn, animated: true)
+            importSwitch.setOn(isImportOn, animated: false)
         }
     }
 
@@ -136,7 +136,11 @@ extension InstagramAccountConnectionCell: ImportFromInstagramViewInput {
     
     func connectionStatusSuccess(_ isOn: Bool, username: String?) {
         if let section = section {
-            delegate?.didConnectSuccessfully(section: section)
+            if isOn {
+                delegate?.didConnectSuccessfully(section: section)
+            } else {
+                delegate?.didDisconnectSuccessfully(section: section)
+            }
         }
         section?.mediator.setup(with: username)
     }

@@ -95,7 +95,11 @@ extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
 
     func connectionStatusSuccess(_ isOn: Bool) {
         if let section = section {
-            delegate?.didConnectSuccessfully(section: section)
+            if isOn {
+                delegate?.didConnectSuccessfully(section: section)
+            } else {
+                delegate?.didDisconnectSuccessfully(section: section)
+            } 
         }
     }
 
