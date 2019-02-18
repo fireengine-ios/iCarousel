@@ -25,7 +25,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zRE-7X-zPX">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zRE-7X-zPX" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
                         <rect key="frame" x="64" y="60.5" width="193" height="44"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="nnD-Zv-Rbw"/>
@@ -49,7 +49,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="connectedAs" destination="G0y-K7-T3w" id="xxh-N2-HSn"/>
-                <outlet property="removeConnectionButton" destination="zRE-7X-zPX" id="j6V-0b-tz9"/>
+                <outlet property="removeConnectionButton" destination="zRE-7X-zPX" id="bg5-Re-g8K"/>
             </connections>
             <point key="canvasLocation" x="-66.400000000000006" y="175.86206896551727"/>
         </tableViewCell>

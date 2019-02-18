@@ -10,7 +10,7 @@ import Foundation
 
 
 extension UIEdgeInsets {
-    static func make(topBottom: CGFloat, rightLeft: CGFloat) -> UIEdgeInsets {
-        return UIEdgeInsets(top: topBottom, left: rightLeft, bottom: topBottom, right: rightLeft)
+    init(topBottom: CGFloat, rightLeft: CGFloat) {
+        self.init(top: topBottom, left: rightLeft, bottom: topBottom, right: rightLeft)
     }
 }
