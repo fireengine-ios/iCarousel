@@ -80,7 +80,7 @@ extension ConnectedAccountsDataSource: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        var cellId = ""
+        let cellId: String
         switch (section.account, stateForRow) {
         case (.instagram, .shrinked):
             cellId = CellsIdConstants.instagramAccountConnectionCell
