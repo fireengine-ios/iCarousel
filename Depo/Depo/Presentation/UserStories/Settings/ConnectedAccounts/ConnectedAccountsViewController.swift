@@ -106,7 +106,9 @@ extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
     
     
     func showError(message: String) {
-        showErrorAlert(message: message)
+        DispatchQueue.toMain {
+            self.showErrorAlert(message: message)
+        }
     }
     
     func startActivityIndicator() {
