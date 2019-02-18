@@ -76,6 +76,10 @@ class Device {
         return isIpad ? "IPAD" : "IPHONE"
     }
     
+    static var systemVersion: String {
+        return UIDevice.current.systemVersion
+    }
+    
     static func operationSystemVersionLessThen(_ version: Int) -> Bool {
         return ProcessInfo().operatingSystemVersion.majorVersion < version
     }
@@ -164,8 +168,16 @@ class Device {
         if let uuid = device.identifierForVendor?.uuidString {
             result["uuid"] = uuid
         }
+        
+        if let appVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+            result["appVersion"] = appVersion
+        }
+        
         result["name"] = device.name
         result["deviceType"] = Device.deviceType
+        result["language"] = Locale.current.languageCode ?? ""
+        result["osVersion"] = Device.systemVersion
+
         return result
     }
     
@@ -202,4 +214,5 @@ class Device {
         return UUID
         
     }()
+    
 }
