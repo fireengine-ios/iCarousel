@@ -91,7 +91,7 @@ class DropboxService: BaseRequestService {
     func disconnectDropbox(handler: @escaping (ResponseResult<Void>) -> Void) {
         sessionManager
             .request(RouteRequests.dropboxDisconnect,
-                     method: .post)
+                     method: .get)
             .customValidate()
             .responseData { response in
                 switch response.result {
