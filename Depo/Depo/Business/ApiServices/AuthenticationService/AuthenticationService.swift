@@ -23,7 +23,10 @@ class AuthenticationUser: BaseRequestParametrs {
     override var requestParametrs: Any {
         let dict: [String: Any] = [LbRequestkeys.username   : login,
                                    LbRequestkeys.password   : password,
-                                   LbRequestkeys.deviceInfo : Device.deviceInfo]
+                                   LbRequestkeys.deviceInfo : Device.deviceInfo,
+                                   LbRequestkeys.language   : Locale.current.languageCode ?? "",
+                                   LbRequestkeys.appVersion : AuthoritySingleton.shared.getBuildVersion(),
+                                   LbRequestkeys.osVersion  : Device.systemVersion]
         return dict
     }
     
