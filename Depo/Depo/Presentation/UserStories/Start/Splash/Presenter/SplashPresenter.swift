@@ -153,4 +153,8 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     func onFailEULA() {
         router.navigateToTermsAndService()
     }
+    
+    func onFailGetAccountInfo(error: Error) {
+        router.showError(error)
+    }
 }

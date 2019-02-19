@@ -22,4 +22,6 @@ protocol SplashRouterInput {
     
     func navigateToLandingPages(isTurkCell: Bool)
     
+    func showError(_ error: Error)
+    
 }

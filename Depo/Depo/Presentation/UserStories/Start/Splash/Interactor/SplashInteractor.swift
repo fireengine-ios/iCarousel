@@ -55,7 +55,9 @@ class SplashInteractor: SplashInteractorInput {
                 /// only internet error
                 //self?.failLogin()
                 DispatchQueue.toMain {
-                    if !ReachabilityService().isReachable {
+                    if ReachabilityService().isReachable {
+                        self?.output.onFailGetAccountInfo(error: error)
+                    } else {
                         self?.output.onNetworkFail()
                     }
                 }

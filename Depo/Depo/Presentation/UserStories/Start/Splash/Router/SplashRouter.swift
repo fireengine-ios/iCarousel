@@ -45,4 +45,8 @@ class SplashRouter: SplashRouterInput {
             router.pushViewController(viewController: router.synchronyseScreen)
         }
     }
+    
+    func showError(_ error: Error) {
+        UIApplication.showErrorAlert(message: error.localizedDescription)
+    }
 }
