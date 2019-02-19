@@ -91,6 +91,10 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
             return
         }
         
+        if let isConnected = dropboxStatus.connected {
+            view?.connectionStatusSuccess(isConnected)
+        }
+        
         switch requestStatus {
         case .scheduled, .waitingAction, .pending:
             view?.updateDropboxStatus(progressPercent: 0)
@@ -120,12 +124,12 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
         if status.connected == true {
             interactor.requestStart()
         } else {
-            interactor.loginIfNeeded()
+            interactor.login()
         }
     }
     
     func statusForStartFailure(errorMessage: String) {
-        interactor.loginIfNeeded()
+        interactor.login()
     }
     
     func failedWithInternetError(errorMessage: String) {

@@ -40,7 +40,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
             }, fail: { [weak self] error in
                 DispatchQueue.main.async {
                     self?.dropboxManager.logout()
-                    self?.loginIfNeeded()
+                    self?.login()
                     self?.output?.connectWithTokenFailure(errorMessage: error.description)
                 }
         })
@@ -74,7 +74,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
                 if dropboxStatus.connected ?? false {
                     self?.requestStart()
                 } else {
-                    self?.loginIfNeeded()
+                    self?.login()
                 }
             } else {
                 failureHandler(ErrorResponse.string("wrong DropboxStatusObject"))
@@ -82,8 +82,9 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
         }, fail: failureHandler)
     }
 
-    func loginIfNeeded() {
-        dropboxManager.loginIfNeed { [weak self] result in
+    func login() {
+        dropboxManager.logout()
+        dropboxManager.login { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let token):
