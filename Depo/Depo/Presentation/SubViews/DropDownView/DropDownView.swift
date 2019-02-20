@@ -1,5 +1,5 @@
 //
-//  DropDovnView.swift
+//  DropDownView.swift
 //  Depo
 //
 //  Created by Oleg on 04.09.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol DropDovnViewDelegate {
+@objc protocol DropDownViewDelegate {
     @objc optional func onWillShow()
     @objc optional func onDidShow()
     @objc optional func onWillHide()
@@ -16,12 +16,12 @@ import UIKit
     func onSelectItem(atIndex index: Int)
 }
 
-class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
+class DropDownView: UIView {
     
     private var tableView: UITableView?
     private var titleLabel: UILabel?
-    private var dropDovnImage: UIImageView?
-    private var dropDovnButton: UIButton?
+    private var dropDownImage: UIImageView?
+    private var dropDownButton: UIButton?
     private var cornerView: UIView?
     private var bgView: UIView?
     private var constraint: NSLayoutConstraint?
@@ -31,7 +31,7 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
     var maxTableViewH: CGFloat = 100
     var selectedString: String?
     
-    weak var delegate: DropDovnViewDelegate?
+    weak var delegate: DropDownViewDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -81,26 +81,26 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         constraints.append(NSLayoutConstraint(item: titleLabel!, attribute: .right, relatedBy: .equal, toItem: bgView!, attribute: .right, multiplier: 1, constant: -25))
         constraints.append(NSLayoutConstraint(item: titleLabel!, attribute: .bottom, relatedBy: .equal, toItem: bgView!, attribute: .bottom, multiplier: 1, constant: 0))
         
-        dropDovnImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 8, height: 5))
-        dropDovnImage!.image = UIImage(named: "dropDownArrow")
-        dropDovnImage?.translatesAutoresizingMaskIntoConstraints = false
-        bgView!.addSubview(dropDovnImage!)
+        dropDownImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 8, height: 5))
+        dropDownImage!.image = UIImage(named: "dropDownArrow")
+        dropDownImage?.translatesAutoresizingMaskIntoConstraints = false
+        bgView!.addSubview(dropDownImage!)
         
-        constraints.append(NSLayoutConstraint(item: dropDovnImage!, attribute: .right, relatedBy: .equal, toItem: bgView!, attribute: .right, multiplier: 1, constant: -13))
-        constraints.append(NSLayoutConstraint(item: dropDovnImage!, attribute: .centerY, relatedBy: .equal, toItem: bgView!, attribute: .centerY, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: dropDovnImage!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 5))
-        constraints.append(NSLayoutConstraint(item: dropDovnImage!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 8))
+        constraints.append(NSLayoutConstraint(item: dropDownImage!, attribute: .right, relatedBy: .equal, toItem: bgView!, attribute: .right, multiplier: 1, constant: -13))
+        constraints.append(NSLayoutConstraint(item: dropDownImage!, attribute: .centerY, relatedBy: .equal, toItem: bgView!, attribute: .centerY, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: dropDownImage!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 5))
+        constraints.append(NSLayoutConstraint(item: dropDownImage!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 8))
         
         
-        dropDovnButton = UIButton(frame: CGRect(x: 0, y: 0, width: bgView!.frame.size.width, height: bgView!.frame.size.height))
-        dropDovnButton!.addTarget(self, action: #selector(onDropDovnButton), for: .touchUpInside)
-        dropDovnButton!.translatesAutoresizingMaskIntoConstraints = false
-        bgView!.addSubview(dropDovnButton!)
+        dropDownButton = UIButton(frame: CGRect(x: 0, y: 0, width: bgView!.frame.size.width, height: bgView!.frame.size.height))
+        dropDownButton!.addTarget(self, action: #selector(onDropDownButton), for: .touchUpInside)
+        dropDownButton!.translatesAutoresizingMaskIntoConstraints = false
+        bgView!.addSubview(dropDownButton!)
         
-        constraints.append(NSLayoutConstraint(item: dropDovnButton!, attribute: .left, relatedBy: .equal, toItem: bgView!, attribute: .left, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: dropDovnButton!, attribute: .top, relatedBy: .equal, toItem: bgView!, attribute: .top, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: dropDovnButton!, attribute: .right, relatedBy: .equal, toItem: bgView!, attribute: .right, multiplier: 1, constant: 0))
-        constraints.append(NSLayoutConstraint(item: dropDovnButton!, attribute: .bottom, relatedBy: .equal, toItem: bgView!, attribute: .bottom, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: dropDownButton!, attribute: .left, relatedBy: .equal, toItem: bgView!, attribute: .left, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: dropDownButton!, attribute: .top, relatedBy: .equal, toItem: bgView!, attribute: .top, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: dropDownButton!, attribute: .right, relatedBy: .equal, toItem: bgView!, attribute: .right, multiplier: 1, constant: 0))
+        constraints.append(NSLayoutConstraint(item: dropDownButton!, attribute: .bottom, relatedBy: .equal, toItem: bgView!, attribute: .bottom, multiplier: 1, constant: 0))
         
         let cornerFrame = CGRect(x: 1, y: 1, width: bgView!.frame.size.width - 2, height: cornerView!.frame.size.height - 1)
         tableView = UITableView(frame: cornerFrame, style: .plain)
@@ -118,13 +118,12 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         
         constraints.append(constraint!)
         
-        let nib = UINib.init(nibName: CellsIdConstants.dropDovnCellID, bundle: nil)
-        tableView!.register(nib, forCellReuseIdentifier: CellsIdConstants.dropDovnCellID)
+        let nib = UINib.init(nibName: CellsIdConstants.dropDownCellID, bundle: nil)
+        tableView!.register(nib, forCellReuseIdentifier: CellsIdConstants.dropDownCellID)
         tableView!.isHidden = true
         tableView!.reloadData()
         
         NSLayoutConstraint.activate(constraints)
-        
     }
 
     func setTableDataObjects(objects: [String], defaultObject: String?) {
@@ -136,7 +135,7 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         tableView?.reloadData()
     }
     
-    @objc private func onDropDovnButton() {
+    @objc private func onDropDownButton() {
         if let supView = superview {
             supView.bringSubview(toFront: self)
         }
@@ -193,29 +192,16 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         return nil
     }
     
-    
-    // MARK: UITableView delegate
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    func containsPoint(_ point: CGPoint) -> Bool {
+        return tableView?.frame.contains(point) == true
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableDataArray.count
-    }
-    
+}
+
+// MARK: UITableViewDelegate
+
+extension DropDownView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 32
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.dropDovnCellID, for: indexPath)
-        let string = tableDataArray[indexPath.row]
-        guard let cell_ = cell as? DropDovnTableViewCell else {
-            return cell
-        }
-        cell_.titleTextLabel!.text = string
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -227,5 +213,22 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         
         delegate?.onSelectItem(atIndex: indexPath.row)
     }
+}
+
+// MARK: UITableViewDataSource
+
+extension DropDownView: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableDataArray.count
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.dropDownCellID, for: indexPath)
+        let string = tableDataArray[indexPath.row]
+        guard let cell_ = cell as? DropDownTableViewCell else {
+            return cell
+        }
+        cell_.titleTextLabel!.text = string
+        return cell
+    }
 }

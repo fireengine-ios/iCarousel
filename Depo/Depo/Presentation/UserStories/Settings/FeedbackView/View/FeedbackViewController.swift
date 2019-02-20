@@ -8,10 +8,8 @@
 
 import UIKit
 
-final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnViewDelegate {
-    
-    @IBOutlet weak var allertView: UIView!
-    
+final class FeedbackViewController: ViewController {
+    @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitle: UILabel!
     @IBOutlet weak var suggestionButton: UIButton!
@@ -21,7 +19,7 @@ final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnV
     @IBOutlet weak var feedbackSubView: UIView!
     @IBOutlet weak var feedbackTextView: UITextView!
     @IBOutlet weak var languageLabel: UILabel!
-    @IBOutlet weak var dropDovnView: DropDovnView!
+    @IBOutlet weak var dropDownView: DropDownView!
     @IBOutlet weak var sendButton: BlueButtonWithWhiteText!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
@@ -46,6 +44,8 @@ final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnV
         setupTexts()
         
         feedbackTextView.delegate = self
+        dropDownView.delegate = self
+        
         feedbackSubView.layer.cornerRadius = 4
         feedbackTextView.layer.cornerRadius = 4
         
@@ -58,7 +58,9 @@ final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnV
                                                name: NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
         
-        dropDovnView.delegate = self
+        let tap = UITapGestureRecognizer(target: view, action: #selector(view.endEditing(_:)))
+        tap.delegate = self
+        view.addGestureRecognizer(tap)
         
         output.viewIsReady()
     }
@@ -67,7 +69,7 @@ final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnV
         super.viewWillAppear(animated)
 
         navigationBarWithGradientStyle()
-        bottomConstraint.constant = (view.frame.height - allertView.frame.height) * 0.5
+        bottomConstraint.constant = (view.frame.height - alertView.frame.height) * 0.5
         view.layoutIfNeeded()
         animateView()
     }
@@ -102,47 +104,13 @@ final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnV
         sendButton.setTitle(TextConstants.feedbackViewSendButton, for: .normal)
         sendButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 14)
         
-        suggestionButton.setImage(getImageForChecbox(isSelected: suggeston), for: .normal)
+        suggestionButton.setImage(getImageForCheckbox(isSelected: suggeston), for: .normal)
         suggestionButton.tintColor = ColorConstants.blueColor
         
-        complaintButton.setImage(getImageForChecbox(isSelected: complaint), for: .normal)
+        complaintButton.setImage(getImageForCheckbox(isSelected: complaint), for: .normal)
         complaintButton.tintColor = ColorConstants.blueColor
         
         feedbackTextView.textAlignment = .natural
-    }
-    
-    func languagesUploaded(lanuages: [LanguageModel]) {
-        languagesArray.removeAll()
-        languagesArray.append(contentsOf: lanuages)
-
-        let array = languagesArray.map({ object -> String in
-            object.displayLanguage ?? ""
-        })
-        
-        if let languageCode = NSLocale.current.languageCode, languageCode == "tr",
-           let currentLanguage = languagesArray.first(where: { $0.languageCode == "tr" }) {
-            selectedLanguage = currentLanguage
-        }
-            
-        dropDovnView!.setTableDataObjects(objects: array, defaultObject: selectedLanguage?.displayLanguage)
-    }
-    
-    func fail(text: String) {
-        UIApplication.showErrorAlert(message: text)
-    }
-    
-    func languageRequestSended(text: String) {
-        if Mail.canSendEmail() {
-            let stringForLetter = String(format: "%@\n\n%@", self.feedbackTextView!.text, text)
-            self.dismiss(animated: true, completion: nil)
-            Mail.shared().sendEmail(emailBody: stringForLetter, subject: self.getSubject(), emails: [TextConstants.feedbackEmail], success: {
-                //
-            }, fail: { error in
-                UIApplication.showErrorAlert(message: error?.description ?? TextConstants.feedbackEmailError)
-            })
-        } else {
-            UIApplication.showErrorAlert(message: TextConstants.feedbackEmailError)
-        }
     }
     
     private func animateView() {
@@ -150,22 +118,20 @@ final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnV
             return
         }
         isShown = true
-        allertView.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
+        alertView.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.allertView.transform = .identity
+            self.alertView.transform = .identity
         }
     }
     
-    func setSendButton(isEnabled: Bool) {
-        sendButton.isEnabled = isEnabled
+    private func toggleButtons() {
+        suggeston = !suggeston
+        complaint = !complaint
+        suggestionButton.setImage(getImageForCheckbox(isSelected: suggeston), for: .normal)
+        complaintButton.setImage(getImageForCheckbox(isSelected: complaint), for: .normal)
     }
     
-    
-    // MARK: Keboard
-    
-    @IBAction func onHideKeyboard() {
-        feedbackTextView.resignFirstResponder()
-    }
+    // MARK: Keyboard
     
     private func getMainYForView(view: UIView) -> CGFloat {
         if (view.superview == self.view) {
@@ -184,7 +150,7 @@ final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnV
         let keyboardFrame: NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
-        let y = allertView.frame.size.height + getMainYForView(view: allertView)
+        let y = alertView.frame.size.height + getMainYForView(view: alertView)
         
         if (view.frame.size.height - y) < keyboardHeight {
             let dy = keyboardHeight - (view.frame.size.height - y)
@@ -201,16 +167,10 @@ final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnV
     @objc func hideKeyboard() {
         self.scrollView.contentInset = .zero
     }
-
-    // MARK: FeedbackViewViewInput
-    func setupInitialState() {
-        
-    }
-    
     
     // MARK: IBActions
     
-    func getImageForChecbox(isSelected: Bool) -> UIImage {
+    func getImageForCheckbox(isSelected: Bool) -> UIImage {
         let imageName = isSelected ? "roundSelectedCheckBox" : "roundEmptyCheckBox"
         return UIImage(named: imageName)!.withRenderingMode(.alwaysTemplate)
     }
@@ -218,7 +178,7 @@ final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnV
     @IBAction func onCloseButton() {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
-            self.allertView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+            self.alertView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         }) { _ in
             self.dismiss(animated: false, completion: nil)
         }
@@ -262,33 +222,74 @@ final class FeedbackViewController: ViewController, FeedbackViewInput, DropDovnV
         }
         return ""
     }
-    
-    // MARK: DropDovnViewDelegate
+}
+
+extension FeedbackViewController: DropDownViewDelegate {
+    func onWillShow() {
+        feedbackTextView.resignFirstResponder()
+    }
     
     func onSelectItem(atIndex index: Int) {
         if index < languagesArray.count {
             selectedLanguage = languagesArray[index]
         }
     }
-    
-    func onWillShow() {
-        onHideKeyboard()
-    }
-    
-    private func toggleButtons() {
-        suggeston = !suggeston
-        complaint = !complaint
-        suggestionButton.setImage(getImageForChecbox(isSelected: suggeston), for: .normal)
-        complaintButton.setImage(getImageForChecbox(isSelected: complaint), for: .normal)
-    }
-    
 }
 
-
 extension FeedbackViewController: UITextViewDelegate {
-    
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        dropDovnView.hideViewIfNeeded()
+        dropDownView.hideViewIfNeeded()
         return true
+    }
+}
+
+extension FeedbackViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let location = gestureRecognizer.location(in: dropDownView)
+        return !dropDownView.containsPoint(location)
+    }
+}
+
+// MARK: FeedbackViewInput
+
+extension FeedbackViewController: FeedbackViewInput {
+    func setupInitialState() {}
+    
+    func languagesUploaded(lanuages: [LanguageModel]) {
+        languagesArray.removeAll()
+        languagesArray.append(contentsOf: lanuages)
+        
+        let array = languagesArray.map({ object -> String in
+            object.displayLanguage ?? ""
+        })
+        
+        if let languageCode = NSLocale.current.languageCode, languageCode == "tr",
+            let currentLanguage = languagesArray.first(where: { $0.languageCode == "tr" }) {
+            selectedLanguage = currentLanguage
+        }
+        
+        dropDownView!.setTableDataObjects(objects: array, defaultObject: selectedLanguage?.displayLanguage)
+    }
+
+    func fail(text: String) {
+        UIApplication.showErrorAlert(message: text)
+    }
+    
+    func languageRequestSended(text: String) {
+        if Mail.canSendEmail() {
+            let stringForLetter = String(format: "%@\n\n%@", self.feedbackTextView!.text, text)
+            self.dismiss(animated: true, completion: nil)
+            Mail.shared().sendEmail(emailBody: stringForLetter, subject: self.getSubject(), emails: [TextConstants.feedbackEmail], success: {
+                //
+            }, fail: { error in
+                UIApplication.showErrorAlert(message: error?.description ?? TextConstants.feedbackEmailError)
+            })
+        } else {
+            UIApplication.showErrorAlert(message: TextConstants.feedbackEmailError)
+        }
+    }
+    
+    func setSendButton(isEnabled: Bool) {
+        sendButton.isEnabled = isEnabled
     }
 }

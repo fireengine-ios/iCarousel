@@ -200,6 +200,12 @@
 		4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */; };
 		4AFAEAC12027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
 		4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
+		4B54AF2A221411A900024F5C /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B54AF27221411A900024F5C /* DropDownTableViewCell.xib */; };
+		4B54AF2B221411A900024F5C /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B54AF27221411A900024F5C /* DropDownTableViewCell.xib */; };
+		4B54AF2C221411A900024F5C /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54AF28221411A900024F5C /* DropDownTableViewCell.swift */; };
+		4B54AF2D221411A900024F5C /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54AF28221411A900024F5C /* DropDownTableViewCell.swift */; };
+		4B54AF2E221411A900024F5C /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54AF29221411A900024F5C /* DropDownView.swift */; };
+		4B54AF2F221411A900024F5C /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54AF29221411A900024F5C /* DropDownView.swift */; };
 		4C625D18F465CC4F6D27A6B1 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500943E503755A25C4E6B64 /* SettingsInteractor.swift */; };
 		4C7B0D374F8DE575C03C683C /* SplashInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE7E386FBD5473EAA3840B /* SplashInitializer.swift */; };
 		4D19E8403C8694B3328BB3D2 /* BaseFilesGreedModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4FE9A3DE9EE69A1D9C29B /* BaseFilesGreedModuleInput.swift */; };
@@ -565,9 +571,6 @@
 		7CFBB6DB1F28A40F009C32D5 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFBB6DA1F28A40F009C32D5 /* BaseCollectionViewCell.swift */; };
 		7CFCD1D520C15865001BDDC4 /* UILabel+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47155E20BFEDD3001DF164 /* UILabel+Font.swift */; };
 		7CFD0D201F8F44CA002B1FB5 /* ArrayDataSourceForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD0D1F1F8F44CA002B1FB5 /* ArrayDataSourceForCollectionView.swift */; };
-		7CFE92E81F5D85A5008A3B72 /* DropDovnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92E71F5D85A5008A3B72 /* DropDovnView.swift */; };
-		7CFE92EB1F5E7DEC008A3B72 /* DropDovnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92E91F5E7DEC008A3B72 /* DropDovnTableViewCell.swift */; };
-		7CFE92EC1F5E7DEC008A3B72 /* DropDovnTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFE92EA1F5E7DEC008A3B72 /* DropDovnTableViewCell.xib */; };
 		7CFE92F11F5EC666008A3B72 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFE92F01F5EC666008A3B72 /* MessageUI.framework */; };
 		7CFE92F41F5ED498008A3B72 /* FeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92F31F5ED498008A3B72 /* FeedbackService.swift */; };
 		7CFE92F81F5EDDE4008A3B72 /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92F71F5EDDE4008A3B72 /* LanguageModel.swift */; };
@@ -1862,7 +1865,6 @@
 		8C0E8E1F1FDEBDFF00789C91 /* EditingBarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8891F348B77002AC795 /* EditingBarConfig.swift */; };
 		8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F560E1F7552A900F49DA1 /* PackagesViewController.swift */; };
 		8C0E8E221FDEBDFF00789C91 /* PasscodeSettingsModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2321FB99AF800C3D67F /* PasscodeSettingsModuleInput.swift */; };
-		8C0E8E231FDEBDFF00789C91 /* DropDovnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92E91F5E7DEC008A3B72 /* DropDovnTableViewCell.swift */; };
 		8C0E8E241FDEBDFF00789C91 /* ForgotPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */; };
 		8C0E8E251FDEBDFF00789C91 /* ActivityTimelineFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44FB1F6BB21C0062C2E0 /* ActivityTimelineFileCell.swift */; };
 		8C0E8E261FDEBDFF00789C91 /* CreateStoryNamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F851F31E4F800536DB6 /* CreateStoryNamePresenter.swift */; };
@@ -1922,7 +1924,6 @@
 		8C0E8E841FDEBDFF00789C91 /* BottomSelectionTabBarDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8691F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift */; };
 		8C0E8E871FDEBDFF00789C91 /* CreateStoryPhotoSelectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F6E1F31E4C900536DB6 /* CreateStoryPhotoSelectionPresenter.swift */; };
 		8C0E8E8B1FDEBDFF00789C91 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift */; };
-		8C0E8E8C1FDEBDFF00789C91 /* DropDovnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFE92E71F5D85A5008A3B72 /* DropDovnView.swift */; };
 		8C0E8E8D1FDEBDFF00789C91 /* DropboxParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE7471FCBE84100C23CBD /* DropboxParametrs.swift */; };
 		8C0E8E8E1FDEBDFF00789C91 /* CreateStoryNameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F801F31E4F800536DB6 /* CreateStoryNameInteractor.swift */; };
 		8C0E8E8F1FDEBDFF00789C91 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
@@ -2265,7 +2266,6 @@
 		8C0E90101FDEBDFF00789C91 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C44850A1F1351A4003AF631 /* SplashViewController.xib */; };
 		8C0E90131FDEBDFF00789C91 /* GSMUInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */; };
 		8C0E90141FDEBDFF00789C91 /* HomePage.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FAC1EFD4F0D00A405B2 /* HomePage.xib */; };
-		8C0E90151FDEBDFF00789C91 /* DropDovnTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFE92EA1F5E7DEC008A3B72 /* DropDovnTableViewCell.xib */; };
 		8C0E90161FDEBDFF00789C91 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
 		8C0E90171FDEBDFF00789C91 /* SyncContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C634FA21F0F81EA00B5B93D /* SyncContactsViewController.xib */; };
 		8C0E90181FDEBDFF00789C91 /* CollectionViewCellForController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C355E1B1F00E949003B004C /* CollectionViewCellForController.xib */; };
@@ -4044,6 +4044,9 @@
 		4ADE0880202DC8370095346F /* FaceImageItemsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsModuleOutput.swift; sourceTree = "<group>"; };
 		4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewOutput.swift; sourceTree = "<group>"; };
 		4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewOutput.swift; sourceTree = "<group>"; };
+		4B54AF27221411A900024F5C /* DropDownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DropDownTableViewCell.xib; path = Depo/Presentation/SubViews/DropDownView/DropDownTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		4B54AF28221411A900024F5C /* DropDownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownTableViewCell.swift; path = Depo/Presentation/SubViews/DropDownView/DropDownTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		4B54AF29221411A900024F5C /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownView.swift; path = Depo/Presentation/SubViews/DropDownView/DropDownView.swift; sourceTree = SOURCE_ROOT; };
 		4C65BBC58B8393C6251C13D6 /* SelectFolderViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderViewController.swift; sourceTree = "<group>"; };
 		4C7DA7C21EC6C571D491E359 /* OTPViewPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewPresenter.swift; sourceTree = "<group>"; };
 		4CDFC675B66399A57487FB85 /* UserInfoSubViewRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewRouter.swift; sourceTree = "<group>"; };
@@ -4420,9 +4423,6 @@
 		7CF9A9F41FA2279500242FDD /* ImageForDowload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageForDowload.swift; sourceTree = "<group>"; };
 		7CFBB6DA1F28A40F009C32D5 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CFD0D1F1F8F44CA002B1FB5 /* ArrayDataSourceForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayDataSourceForCollectionView.swift; sourceTree = "<group>"; };
-		7CFE92E71F5D85A5008A3B72 /* DropDovnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDovnView.swift; sourceTree = "<group>"; };
-		7CFE92E91F5E7DEC008A3B72 /* DropDovnTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDovnTableViewCell.swift; sourceTree = "<group>"; };
-		7CFE92EA1F5E7DEC008A3B72 /* DropDovnTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDovnTableViewCell.xib; sourceTree = "<group>"; };
 		7CFE92F01F5EC666008A3B72 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		7CFE92F31F5ED498008A3B72 /* FeedbackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackService.swift; sourceTree = "<group>"; };
 		7CFE92F71F5EDDE4008A3B72 /* LanguageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageModel.swift; sourceTree = "<group>"; };
@@ -7713,7 +7713,7 @@
 				7C1F89901F70FFB700740177 /* ViewForPopUp */,
 				7C1F898B1F70EC7B00740177 /* BaseView */,
 				7C5AFD6E1F69761900DBB9E7 /* ViewController */,
-				7CFE92E61F5D852C008A3B72 /* DropDovnView */,
+				7CFE92E61F5D852C008A3B72 /* DropDownView */,
 				7CAC23BD1F4ABC8F00607660 /* LoadingImageView */,
 				8C6EF8861F348B77002AC795 /* CustomToolBar */,
 				7C0DBC2F1F2F2CA700F90590 /* SelectionImageView */,
@@ -8759,14 +8759,14 @@
 			path = landingSubViews;
 			sourceTree = "<group>";
 		};
-		7CFE92E61F5D852C008A3B72 /* DropDovnView */ = {
+		7CFE92E61F5D852C008A3B72 /* DropDownView */ = {
 			isa = PBXGroup;
 			children = (
-				7CFE92E71F5D85A5008A3B72 /* DropDovnView.swift */,
-				7CFE92E91F5E7DEC008A3B72 /* DropDovnTableViewCell.swift */,
-				7CFE92EA1F5E7DEC008A3B72 /* DropDovnTableViewCell.xib */,
+				4B54AF28221411A900024F5C /* DropDownTableViewCell.swift */,
+				4B54AF29221411A900024F5C /* DropDownView.swift */,
+				4B54AF27221411A900024F5C /* DropDownTableViewCell.xib */,
 			);
-			path = DropDovnView;
+			path = DropDownView;
 			sourceTree = "<group>";
 		};
 		7CFE92ED1F5EC5C9008A3B72 /* Mail */ = {
@@ -13577,7 +13577,6 @@
 				8C0E90141FDEBDFF00789C91 /* HomePage.xib in Resources */,
 				8C06B0CB2008AD71003D8E05 /* sample_bw@2x.png in Resources */,
 				8C06AFCD2008AD71003D8E05 /* info_icon.png in Resources */,
-				8C0E90151FDEBDFF00789C91 /* DropDovnTableViewCell.xib in Resources */,
 				8C06AFF12008AD71003D8E05 /* kirmizi.png in Resources */,
 				8C06B0432008AD71003D8E05 /* oval_beyaz@2x.png in Resources */,
 				8C06B10B2008AD72003D8E05 /* status_badge.png in Resources */,
@@ -13724,6 +13723,7 @@
 				8C06B1192008AD72003D8E05 /* t_buyuk@2x.png in Resources */,
 				8C06AEBB2008AD70003D8E05 /* akilli_depo_beyaz@3x.png in Resources */,
 				8C06B1CB2008AD72003D8E05 /* sticker_close@3x.png in Resources */,
+				4B54AF2B221411A900024F5C /* DropDownTableViewCell.xib in Resources */,
 				8C06B01D2008AD71003D8E05 /* kup_selected@3x.png in Resources */,
 				8C06B1712008AD72003D8E05 /* toolbar_undo_icon.png in Resources */,
 				8C06AEC72008AD70003D8E05 /* alt_cizgili_secili@3x.png in Resources */,
@@ -14166,13 +14166,13 @@
 				8C06B1042008AD72003D8E05 /* slider_thumb2@3x.png in Resources */,
 				8C06B1922008AD72003D8E05 /* undo@2x.png in Resources */,
 				8C06B1202008AD72003D8E05 /* t_buyuk_selected@3x.png in Resources */,
+				4B54AF2A221411A900024F5C /* DropDownTableViewCell.xib in Resources */,
 				8C06AEE42008AD70003D8E05 /* bottomright@2x.png in Resources */,
 				8C06B0E22008AD71003D8E05 /* sample_vintage@3x.png in Resources */,
 				9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */,
 				CE51AE291EF90853005DCEE0 /* GSMUInputCell.xib in Resources */,
 				CE680BC6203186E6001A8DF6 /* PhotoVideoDetailCell.xib in Resources */,
 				CEAE3FB91EFD4F0D00A405B2 /* HomePage.xib in Resources */,
-				7CFE92EC1F5E7DEC008A3B72 /* DropDovnTableViewCell.xib in Resources */,
 				B5C4C8A42049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */,
 				CE51AE371EF90853005DCEE0 /* TermsAndServicesScreen.xib in Resources */,
 				7C634FA31F0F81EA00B5B93D /* SyncContactsViewController.xib in Resources */,
@@ -15770,7 +15770,6 @@
 				7C203554201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */,
 				8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */,
 				8C0E8E221FDEBDFF00789C91 /* PasscodeSettingsModuleInput.swift in Sources */,
-				8C0E8E231FDEBDFF00789C91 /* DropDovnTableViewCell.swift in Sources */,
 				7CEE271C209B537500EF6C79 /* LandingPageViewController.swift in Sources */,
 				8C0E8E241FDEBDFF00789C91 /* ForgotPasswordPresenter.swift in Sources */,
 				8C0E8E251FDEBDFF00789C91 /* ActivityTimelineFileCell.swift in Sources */,
@@ -15862,7 +15861,6 @@
 				CE5A612D2060E85200793EB0 /* StorageVars.swift in Sources */,
 				FA793D8E201872EA00A02B46 /* ThingsServiceResponse.swift in Sources */,
 				8C0E8E8B1FDEBDFF00789C91 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
-				8C0E8E8C1FDEBDFF00789C91 /* DropDovnView.swift in Sources */,
 				8C0E8E8D1FDEBDFF00789C91 /* DropboxParametrs.swift in Sources */,
 				8C0E8E8E1FDEBDFF00789C91 /* CreateStoryNameInteractor.swift in Sources */,
 				8C0E8E8F1FDEBDFF00789C91 /* CustomErrors.swift in Sources */,
@@ -15992,6 +15990,7 @@
 				8C0E8EFD1FDEBDFF00789C91 /* UserInfoSubViewConfigurator.swift in Sources */,
 				8C0E8EFF1FDEBDFF00789C91 /* UserInfoSubViewInitializer.swift in Sources */,
 				8C0E8F001FDEBDFF00789C91 /* VisualMusicPlayerRouterInput.swift in Sources */,
+				4B54AF2D221411A900024F5C /* DropDownTableViewCell.swift in Sources */,
 				4A6DBE8F21A6F9440003D1B4 /* PremiumFeaturesView.swift in Sources */,
 				8C06AC262008AB8C003D8E05 /* FreeAppSpaceConfigurator.swift in Sources */,
 				8C0E8F011FDEBDFF00789C91 /* OfferParameters.swift in Sources */,
@@ -16054,6 +16053,7 @@
 				8C0E8F211FDEBDFF00789C91 /* PasscodeInputView.swift in Sources */,
 				8C0E8F221FDEBDFF00789C91 /* SettingsModuleInput.swift in Sources */,
 				8C0E8F231FDEBDFF00789C91 /* SettingsPresenter.swift in Sources */,
+				4B54AF2F221411A900024F5C /* DropDownView.swift in Sources */,
 				8C0E8F241FDEBDFF00789C91 /* SettingsInteractorInput.swift in Sources */,
 				8C0E8F271FDEBDFF00789C91 /* CreateStoryNameRouter.swift in Sources */,
 				8C0B919F20170E6A00A5BA81 /* DuplicatedContactsInteractorOutput.swift in Sources */,
@@ -17034,7 +17034,6 @@
 				92004B6321AD18E100582C45 /* MyStorageModuleInput.swift in Sources */,
 				CE2F561E1F7552A900F49DA1 /* PackagesViewController.swift in Sources */,
 				CEC3C2411FB99AF800C3D67F /* PasscodeSettingsModuleInput.swift in Sources */,
-				7CFE92EB1F5E7DEC008A3B72 /* DropDovnTableViewCell.swift in Sources */,
 				CE51ACFA1EF90853005DCEE0 /* ForgotPasswordPresenter.swift in Sources */,
 				CE8F44FD1F6BB21C0062C2E0 /* ActivityTimelineFileCell.swift in Sources */,
 				CE1B7624204D347C00B5E12A /* Error+Network.swift in Sources */,
@@ -17132,7 +17131,7 @@
 				7C6E2F771F31E4C900536DB6 /* CreateStoryPhotoSelectionPresenter.swift in Sources */,
 				7C6945E320039F4A00152344 /* FreeAppSpacePresenter.swift in Sources */,
 				7C233CD21FD51E290013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
-				7CFE92E81F5D85A5008A3B72 /* DropDovnView.swift in Sources */,
+				4B54AF2C221411A900024F5C /* DropDownTableViewCell.swift in Sources */,
 				CE6DE7531FCBE84100C23CBD /* DropboxParametrs.swift in Sources */,
 				7C6E2F901F31E4F800536DB6 /* CreateStoryNameInteractor.swift in Sources */,
 				CEF69DE31FB585E800FCE6AB /* CustomErrors.swift in Sources */,
@@ -17509,6 +17508,7 @@
 				C7055CAC94DC0C09FAC5F608 /* AlbumDetailPresenter.swift in Sources */,
 				CE2F56321F7554A300F49DA1 /* OfferServiceResponse.swift in Sources */,
 				CECD4E541FE1150B00978BE7 /* UIButton+Color.swift in Sources */,
+				4B54AF2E221411A900024F5C /* DropDownView.swift in Sources */,
 				CEEB7AA620A5D5C80070FDC2 /* GradientOrangeView.swift in Sources */,
 				CC5705DE3B84973A3C2928C7 /* AlbumDetailInteractor.swift in Sources */,
 				CEC3C2481FB99AF800C3D67F /* PasscodeSettingsInteractor.swift in Sources */,
