@@ -29,7 +29,7 @@ final class FeedbackViewController: ViewController {
             self.setupTexts()
         }
     }
-    private var languagesArray = [LanguageModel]()
+    private var availableLanguages = [LanguageModel]()
 
     var output: FeedbackViewOutput!
     
@@ -230,8 +230,8 @@ extension FeedbackViewController: DropDownViewDelegate {
     }
     
     func onSelectItem(atIndex index: Int) {
-        if index < languagesArray.count {
-            selectedLanguage = languagesArray[index]
+        if index < availableLanguages.count {
+            selectedLanguage = availableLanguages[index]
         }
     }
 }
@@ -252,23 +252,21 @@ extension FeedbackViewController: UIGestureRecognizerDelegate {
 
 // MARK: FeedbackViewInput
 
-extension FeedbackViewController: FeedbackViewInput {
-    func setupInitialState() {}
-    
-    func languagesUploaded(lanuages: [LanguageModel]) {
-        languagesArray.removeAll()
-        languagesArray.append(contentsOf: lanuages)
+extension FeedbackViewController: FeedbackViewInput {    
+    func languagesUploaded(languages: [LanguageModel]) {
+        availableLanguages.removeAll()
+        availableLanguages.append(contentsOf: languages)
         
-        let array = languagesArray.map({ object -> String in
+        let array = availableLanguages.map({ object -> String in
             object.displayLanguage ?? ""
         })
         
         if let languageCode = NSLocale.current.languageCode, languageCode == "tr",
-            let currentLanguage = languagesArray.first(where: { $0.languageCode == "tr" }) {
+            let currentLanguage = availableLanguages.first(where: { $0.languageCode == "tr" }) {
             selectedLanguage = currentLanguage
         }
         
-        dropDownView!.setTableDataObjects(objects: array, defaultObject: selectedLanguage?.displayLanguage)
+        dropDownView.setTableDataObjects(objects: array, defaultObject: selectedLanguage?.displayLanguage)
     }
 
     func fail(text: String) {

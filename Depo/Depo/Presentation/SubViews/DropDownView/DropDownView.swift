@@ -224,7 +224,12 @@ extension DropDownView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.dropDownCellID, for: indexPath)
+        
+        guard indexPath.row < tableDataArray.count else { 
+            return cell
+        }
         let string = tableDataArray[indexPath.row]
+        
         guard let cell_ = cell as? DropDownTableViewCell else {
             return cell
         }
