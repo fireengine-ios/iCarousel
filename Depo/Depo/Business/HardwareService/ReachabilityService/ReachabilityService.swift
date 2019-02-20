@@ -32,7 +32,7 @@ class ReachabilityService: ReachabilityProtocol {
     }
     
     var isReachable: Bool {
-        return self.reachability?.connection != .none
+        return self.reachability?.connection != Reachability.Connection.none
     }
     
     var status: String {
