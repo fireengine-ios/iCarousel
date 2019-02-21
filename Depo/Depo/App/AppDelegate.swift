@@ -12,6 +12,9 @@ import FBSDKCoreKit
 import SDWebImage
 import XCGLogger
 import Adjust
+#if DEBUG
+import netfox
+#endif
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -69,6 +72,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        #if DEBUG
+        NFX.sharedInstance().start()
+        #endif
         
         AppConfigurator.applicationStarted(with: launchOptions)
         
