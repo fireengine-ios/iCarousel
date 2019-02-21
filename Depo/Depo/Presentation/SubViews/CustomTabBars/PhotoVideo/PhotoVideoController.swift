@@ -524,7 +524,7 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
     
     private func getIndexPathForObject(itemUUID: String) -> IndexPath? {
-        let findedObject = dataSource.fetchedObjects.first { object in
+        let findedObject = dataSource.lastFetchedObjects?.first { object in
             return object.getTrimmedLocalID() == itemUUID
         }
         guard let mediaItem = findedObject?.coreDataObject else {
@@ -542,7 +542,7 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
     
     private func getIndexPathForLocalObject(objectTrimmedLocalID: String) -> IndexPath? {
-        let findedObject = dataSource.fetchedObjects.first { object in
+        let findedObject = dataSource.lastFetchedObjects?.first { object in
             return object.getTrimmedLocalID() == objectTrimmedLocalID && object.isLocalItem
         }
         guard let mediaItem = findedObject?.coreDataObject else {

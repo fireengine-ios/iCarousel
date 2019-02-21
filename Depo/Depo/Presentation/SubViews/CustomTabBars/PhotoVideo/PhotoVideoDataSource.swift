@@ -16,7 +16,7 @@ protocol PhotoVideoDataSourceDelegate: class {
 // TODO: selectedIndexPaths NSFetchedResultsController changes
 final class PhotoVideoDataSource: NSObject {
     
-    private var thresholdService = ThresholdBlockService(threshold: 0.1)
+    private var thresholdService = ThresholdBlockService(threshold: 0.1, queue: DispatchQueue.main)
     
     var isSelectingMode = false {
         didSet {
