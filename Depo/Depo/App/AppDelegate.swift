@@ -12,7 +12,9 @@ import FBSDKCoreKit
 import SDWebImage
 import XCGLogger
 import Adjust
+#if DEBUG
 import netfox
+#endif
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
