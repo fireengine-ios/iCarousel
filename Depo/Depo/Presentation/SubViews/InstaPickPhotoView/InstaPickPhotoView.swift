@@ -17,6 +17,8 @@ class InstaPickPhotoView: UIView, NibInit {
     private let imageView = UIImageView()
     private let containerView = RadialGradientableView()
     
+    private let pictureNotFoundStackView = UIStackView()
+    
     private let pickedLabel = UILabel()
     let rateLabel = UILabel()
     
@@ -43,6 +45,25 @@ class InstaPickPhotoView: UIView, NibInit {
         super.layoutSubviews()
         
         setupCornerRadius()
+    }
+    
+    private func prepareToAppear() {
+        addGestureRecognizer(tapGesture)
+        
+        containerView.layer.masksToBounds = true
+        
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
+        
+        rateView.layer.masksToBounds = true
+        rateLabel.textAlignment = .center
+        
+        pickedView.layer.masksToBounds = true
+        pickedLabel.textAlignment = .center
+        
+        setupCornerRadius()
+        setupLabelsDesign(isIPad: Device.isIpad)
+        configurePictureNotFound(fontSize: 16, imageWidth: 30, spacing: 8)
     }
 
     func setupLayout(isIPad: Bool) {
@@ -95,6 +116,15 @@ class InstaPickPhotoView: UIView, NibInit {
         
         pickedView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         pickedViewCenterXConstraint = pickedView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor)
+        
+        addSubview(pictureNotFoundStackView)
+        
+        pictureNotFoundStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        pictureNotFoundStackView.widthAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 0.8, constant: 0).isActive = true
+        pictureNotFoundStackView.topAnchor.constraint(greaterThanOrEqualTo: imageView.topAnchor).isActive = true
+        pictureNotFoundStackView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
+        pictureNotFoundStackView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
     }
     
     private func setupCornerRadius() {
@@ -115,22 +145,35 @@ class InstaPickPhotoView: UIView, NibInit {
         pickedLabel.text = TextConstants.instaPickPickedLabel
     }
     
-    private func prepareToAppear() {
-        addGestureRecognizer(tapGesture)
+    func configurePictureNotFound(fontSize: CGFloat, imageWidth: CGFloat, spacing: CGFloat) {
+        let pictureNotFoundImageView = UIImageView()
         
-        containerView.layer.masksToBounds = true
+        pictureNotFoundImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        pictureNotFoundImageView.image = UIImage(named: "instaPickPicture")
+        pictureNotFoundImageView.contentMode = .scaleAspectFit
+        pictureNotFoundImageView.heightAnchor.constraint(equalTo: pictureNotFoundImageView.widthAnchor, multiplier: 0.9).isActive = true
+        pictureNotFoundImageView.widthAnchor.constraint(equalToConstant: imageWidth).isActive = true
 
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.masksToBounds = true
+        let pictureNotFoundLabel = UILabel()
+
+        pictureNotFoundLabel.font           = UIFont.TurkcellSaturaDemFont(size: fontSize)
+
+        pictureNotFoundLabel.text           = TextConstants.instaPickPictureNotFoundLabel
+        pictureNotFoundLabel.textColor      = ColorConstants.darcBlueColor
+        pictureNotFoundLabel.textAlignment  = .center
+        pictureNotFoundLabel.numberOfLines  = 2
         
-        rateView.layer.masksToBounds = true
-        rateLabel.textAlignment = .center
+        pictureNotFoundLabel.adjustsFontSizeToFitWidth()
         
-        pickedView.layer.masksToBounds = true
-        pickedLabel.textAlignment = .center
+        pictureNotFoundStackView.axis       = .vertical
+        pictureNotFoundStackView.alignment  = .center
+        pictureNotFoundStackView.spacing    = spacing
         
-        setupCornerRadius()
-        setupLabelsDesign(isIPad: Device.isIpad)
+        pictureNotFoundStackView.addArrangedSubview(pictureNotFoundImageView)
+        pictureNotFoundStackView.addArrangedSubview(pictureNotFoundLabel)
+        
+        pictureNotFoundStackView.isHidden = true
     }
     
     //MARK: - Utility methods(public)
@@ -152,6 +195,7 @@ class InstaPickPhotoView: UIView, NibInit {
 
         rateLabel.text = String(model.rank)
         
+        pictureNotFoundStackView.isHidden = true
         imageView.sd_setImage(with: getPhotoUrl(), completed: { [weak self] (image, _, _, _) in
             guard let `self` = self else {
                 return
@@ -159,6 +203,7 @@ class InstaPickPhotoView: UIView, NibInit {
             
             let imageToAttach: UIImage?
             let imageViewBackgroundColor: UIColor
+            let isPictureExist = (image != nil)
             
             if image == nil {
                 imageToAttach = UIImage(named: "instaPickImageNotFound")
@@ -174,6 +219,7 @@ class InstaPickPhotoView: UIView, NibInit {
                               animations: {
                                 self.imageView.backgroundColor = imageViewBackgroundColor
                                 self.imageView.image = imageToAttach
+                                self.pictureNotFoundStackView.isHidden = isPictureExist
             }, completion: nil)
         })
         

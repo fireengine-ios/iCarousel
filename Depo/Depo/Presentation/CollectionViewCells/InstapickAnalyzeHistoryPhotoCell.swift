@@ -46,6 +46,14 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         }
     }
     
+    @IBOutlet weak var pictureNotFoundStackView: UIStackView!  {
+        willSet {
+            newValue.spacing = 5
+            newValue.axis = .vertical
+            newValue.alignment = .center
+        }
+    }
+    
     @IBOutlet private weak var selectionImageWidth: NSLayoutConstraint!
     @IBOutlet private weak var rankViewWidth: NSLayoutConstraint!
 
@@ -58,6 +66,7 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         contentView.backgroundColor = .white
         selectionImageWidth.constant = Device.isIpad ? 22 : 15
         rankViewWidth.constant = Device.isIpad ? 26 : 24
+        configurePictureNotFound()
     }
     
     override func layoutSubviews() {
@@ -79,6 +88,33 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         imageView.alpha = isSelected && isSelectionActive ? 0.5 : 1
     }
     
+    func configurePictureNotFound() {
+        let pictureNotFoundImageView = UIImageView()
+        
+        pictureNotFoundImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        pictureNotFoundImageView.image = UIImage(named: "instaPickPicture")
+        pictureNotFoundImageView.contentMode = .scaleAspectFit
+        pictureNotFoundImageView.heightAnchor.constraint(equalTo: pictureNotFoundImageView.widthAnchor, multiplier: 0.9).isActive = true
+        pictureNotFoundImageView.widthAnchor.constraint(equalToConstant: 17).isActive = true
+        
+        let pictureNotFoundLabel = UILabel()
+        
+        pictureNotFoundLabel.font           = UIFont.TurkcellSaturaDemFont(size: 10)
+        
+        pictureNotFoundLabel.text           = TextConstants.instaPickPictureNotFoundLabel
+        pictureNotFoundLabel.textColor      = ColorConstants.darcBlueColor
+        pictureNotFoundLabel.textAlignment  = .center
+        pictureNotFoundLabel.numberOfLines  = 2
+        
+        pictureNotFoundLabel.adjustsFontSizeToFitWidth()
+        
+        pictureNotFoundStackView.addArrangedSubview(pictureNotFoundImageView)
+        pictureNotFoundStackView.addArrangedSubview(pictureNotFoundLabel)
+        
+        pictureNotFoundStackView.isHidden = true
+    }
+    
     func setup(with item: InstapickAnalyze) {
         rankLabel.text = "\(item.rank)"
         
@@ -89,7 +125,8 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
             setImage(with: metadata, identifier: item.requestIdentifier)
         } else {
             imageView.layer.borderWidth = 0
-            setImage(image: UIImage(named: "photo_not_found"), animated: false)
+            pictureNotFoundStackView.isHidden = false
+            setImage(image: UIImage(named: "instaPickImageNotFound"), animated: false)
         }
     }
 
@@ -99,19 +136,21 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         cellImageManager = CellImageManager.instance(by: cacheKey)
         uuid = cellImageManager?.uniqueId
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
+            guard  let `self` = self else {
+                return
+            }
+            
             DispatchQueue.toMain {
-                guard let image = image else {
-                    self?.imageView.layer.borderWidth = 0
-                    self?.setImage(image: UIImage(named: "photo_not_found"), animated: false)
+                guard let image = image, let uuid = self.uuid, uuid == uniqueId else {
+                    self.imageView.layer.borderWidth = 0
+                    self.pictureNotFoundStackView.isHidden = false
+                    self.setImage(image: UIImage(named: "instaPickImageNotFound"), animated: false)
                     return
                 }
                 
-                guard let uuid = self?.uuid, uuid == uniqueId else {
-                    return
-                }
-                
-                let needAnimate = !cached && (self?.imageView.image == nil)
-                self?.setImage(image: image, animated: needAnimate)
+                self.pictureNotFoundStackView.isHidden = true
+                let needAnimate = !cached && (self.imageView.image == nil)
+                self.setImage(image: image, animated: needAnimate)
             }
         }
         
