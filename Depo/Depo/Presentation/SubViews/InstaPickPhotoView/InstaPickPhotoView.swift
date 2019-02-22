@@ -38,7 +38,7 @@ class InstaPickPhotoView: UIView, NibInit {
         super.awakeFromNib()
         
         setupLayout(isIPad: Device.isIpad)
-        prepareToAppear()
+        setup()
     }
     
     override func layoutSubviews() {
@@ -47,7 +47,7 @@ class InstaPickPhotoView: UIView, NibInit {
         setupCornerRadius()
     }
     
-    private func prepareToAppear() {
+    private func setup() {
         addGestureRecognizer(tapGesture)
         
         containerView.layer.masksToBounds = true

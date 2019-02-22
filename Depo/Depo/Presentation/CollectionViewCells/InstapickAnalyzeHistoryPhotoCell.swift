@@ -46,11 +46,32 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         }
     }
     
-    @IBOutlet weak var pictureNotFoundStackView: UIStackView!  {
+    @IBOutlet weak var pictureNotFoundStackView: UIStackView! {
         willSet {
             newValue.spacing = 5
             newValue.axis = .vertical
             newValue.alignment = .center
+            
+            newValue.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var pictureNotFoundImageView: UIImageView! {
+        willSet {
+            newValue.image = UIImage(named: "instaPickPicture")
+            newValue.contentMode = .scaleAspectFit
+        }
+    }
+    
+    @IBOutlet weak var pictureNotFoundLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 10)
+            newValue.text = TextConstants.instaPickPictureNotFoundLabel
+            newValue.textColor = ColorConstants.darcBlueColor
+            newValue.textAlignment = .center
+            newValue.numberOfLines = 2
+            
+            newValue.adjustsFontSizeToFitWidth()
         }
     }
     
@@ -66,7 +87,6 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         contentView.backgroundColor = .white
         selectionImageWidth.constant = Device.isIpad ? 22 : 15
         rankViewWidth.constant = Device.isIpad ? 26 : 24
-        configurePictureNotFound()
     }
     
     override func layoutSubviews() {
@@ -88,33 +108,6 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         imageView.alpha = isSelected && isSelectionActive ? 0.5 : 1
     }
     
-    func configurePictureNotFound() {
-        let pictureNotFoundImageView = UIImageView()
-        
-        pictureNotFoundImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        pictureNotFoundImageView.image = UIImage(named: "instaPickPicture")
-        pictureNotFoundImageView.contentMode = .scaleAspectFit
-        pictureNotFoundImageView.heightAnchor.constraint(equalTo: pictureNotFoundImageView.widthAnchor, multiplier: 0.9).isActive = true
-        pictureNotFoundImageView.widthAnchor.constraint(equalToConstant: 17).isActive = true
-        
-        let pictureNotFoundLabel = UILabel()
-        
-        pictureNotFoundLabel.font           = UIFont.TurkcellSaturaDemFont(size: 10)
-        
-        pictureNotFoundLabel.text           = TextConstants.instaPickPictureNotFoundLabel
-        pictureNotFoundLabel.textColor      = ColorConstants.darcBlueColor
-        pictureNotFoundLabel.textAlignment  = .center
-        pictureNotFoundLabel.numberOfLines  = 2
-        
-        pictureNotFoundLabel.adjustsFontSizeToFitWidth()
-        
-        pictureNotFoundStackView.addArrangedSubview(pictureNotFoundImageView)
-        pictureNotFoundStackView.addArrangedSubview(pictureNotFoundLabel)
-        
-        pictureNotFoundStackView.isHidden = true
-    }
-    
     func setup(with item: InstapickAnalyze) {
         rankLabel.text = "\(item.rank)"
         
@@ -124,9 +117,11 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         if let metadata = item.fileInfo?.metadata {
             setImage(with: metadata, identifier: item.requestIdentifier)
         } else {
-            imageView.layer.borderWidth = 0
-            pictureNotFoundStackView.isHidden = false
-            setImage(image: UIImage(named: "instaPickImageNotFound"), animated: false)
+            ///DispatchQueue.main.async uses to avoid "square" circles
+            DispatchQueue.main.async {
+                self.pictureNotFoundStackView.isHidden = false
+                self.setImage(image: UIImage(named: "instaPickImageNotFound"), animated: false)
+            }
         }
     }
 
@@ -142,7 +137,6 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
             
             DispatchQueue.toMain {
                 guard let image = image, let uuid = self.uuid, uuid == uniqueId else {
-                    self.imageView.layer.borderWidth = 0
                     self.pictureNotFoundStackView.isHidden = false
                     self.setImage(image: UIImage(named: "instaPickImageNotFound"), animated: false)
                     return
