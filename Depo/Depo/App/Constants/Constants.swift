@@ -1079,7 +1079,6 @@ struct TextConstants {
     static let instaPickConnectedWithoutInstagram = NSLocalizedString("continue_without_connecting", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let instapickSelectionPhotosSelected = NSLocalizedString("instapick_selection_photos_selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let instapickSelectionAnalyzesLeft = NSLocalizedString("instapick_selection_analyzes_left", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instapickSelectionAnalyzesLeftMax = NSLocalizedString("instapick_selection_analyzes_left_max", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instapickUnderConstruction = NSLocalizedString("instapick_under_construction", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instapickUnsupportedFileType = NSLocalizedString("instapick_unsupported_file_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
