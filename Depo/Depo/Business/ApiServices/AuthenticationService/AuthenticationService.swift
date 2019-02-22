@@ -23,7 +23,10 @@ class AuthenticationUser: BaseRequestParametrs {
     override var requestParametrs: Any {
         let dict: [String: Any] = [LbRequestkeys.username   : login,
                                    LbRequestkeys.password   : password,
-                                   LbRequestkeys.deviceInfo : Device.deviceInfo]
+                                   LbRequestkeys.deviceInfo : Device.deviceInfo,
+                                   LbRequestkeys.language   : Locale.current.languageCode ?? "",
+                                   LbRequestkeys.appVersion : AuthoritySingleton.shared.getBuildVersion(),
+                                   LbRequestkeys.osVersion  : Device.systemVersion]
         return dict
     }
     
@@ -418,12 +421,12 @@ class AuthenticationService: BaseRequestService {
         }
     }
     
-    func serverLogout(complition: @escaping VoidHandler) {
+    func serverLogout(complition: @escaping BoolHandler) {
         let requestParametrs = SigngOutParametes(authToken: self.tokenStorage.accessToken ?? "", rememberMeToken: self.tokenStorage.refreshToken ?? "")
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { response in
-            complition()
+            complition(true)
         }, fail: { failresponse in
-            complition()
+            complition(false)
         })
         executePostRequest(param: requestParametrs, handler: handler)
     }

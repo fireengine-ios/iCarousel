@@ -168,7 +168,7 @@ final class PeopleService: BaseRequestService {
         
         let parameters = DeletePhotosFromPeopleAlbum(id: id, photos: photos)
         
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { response  in
             debugLog("PeopleService deletePhotosFromAlbum success")
             
             success?()
@@ -179,7 +179,7 @@ final class PeopleService: BaseRequestService {
 }
 
 final class PeopleItemsService: RemoteItemsService {
-    private let service = PeopleService()
+    private let service = PeopleService(transIdLogging: true)
     
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .image)
@@ -189,16 +189,22 @@ final class PeopleItemsService: RemoteItemsService {
         let param = PeoplePageParameters(pageSize: requestSize, pageNumber: currentPage)
         
         service.getPeoplePage(param: param, success: { [weak self] response in
-            if let response = response as? PeoplePageResponse {
-                success?(response.list.map({ PeopleItem(response: $0) }))
-                self?.currentPage += 1
-            } else {
+            guard let response = response as? PeoplePageResponse else {
                 fail?()
+                return
             }
-        }) { error in
+            
+            success?(response.list.map({ PeopleItem(response: $0) }))
+            self?.currentPage += 1
+            
+            self?.service.debugLogTransIdIfNeeded(headers: response.response?.allHeaderFields, method: "getPeople")
+            
+        }, fail: { [weak self] error in
             error.showInternetErrorGlobal()
             fail?()
-        }
+            
+            self?.service.debugLogTransIdIfNeeded(errorResponse: error, method: "getPeople")
+        })
     }
     
     func searchPeople(text: String, success: ListRemoveItems?, fail: FailRemoteItems?) {
@@ -208,10 +214,10 @@ final class PeopleItemsService: RemoteItemsService {
             } else {
                 fail?()
             }
-        }) { error in
+        }, fail: { error in
             error.showInternetErrorGlobal()
             fail?()
-        }
+        })
     }
 
 }

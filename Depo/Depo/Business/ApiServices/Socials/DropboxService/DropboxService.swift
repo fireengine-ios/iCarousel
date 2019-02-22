@@ -8,6 +8,8 @@
 
 import Foundation
 import ObjectiveDropboxOfficial
+import Alamofire
+
 
 enum DropboxManagerResult {
     /// User is logged into Dropbox
@@ -83,6 +85,23 @@ final class DropboxManager {
 }
 
 class DropboxService: BaseRequestService {
+    
+    private lazy var sessionManager: SessionManager = factory.resolve()
+    
+    func disconnectDropbox(handler: @escaping (ResponseResult<Void>) -> Void) {
+        sessionManager
+            .request(RouteRequests.dropboxDisconnect,
+                     method: .get)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(_):
+                    handler(.success(()))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
     
     func requestToken(withCurrentToken currentToken: String, withConsumerKey consumerKey: String, withAppSecret appSecret: String, withAuthTokenSecret authTokenSecret: String, success: SuccessResponse?, fail: FailResponse?) {
         debugLog("DropboxService requestToken")

@@ -16,7 +16,7 @@ protocol SettingsViewOutput {
     
     func goToContactSync()
     
-    func goToImportPhotos()
+    func goToConnectedAccounts()
 
     func goToAutoApload()
     

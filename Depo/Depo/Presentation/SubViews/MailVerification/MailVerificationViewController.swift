@@ -35,7 +35,7 @@ class MailVerificationViewController: BaseViewController {
         super.viewDidLoad()
 //        UIBlurEffect()
         titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
-        titleLabel.textColor = ColorConstants.darcBlueColor
+        titleLabel.textColor = ColorConstants.darkBlueColor
         titleLabel.text = TextConstants.registrationCellPlaceholderEmail
         
         inputTextField.font = UIFont.TurkcellSaturaRegFont(size: 20)

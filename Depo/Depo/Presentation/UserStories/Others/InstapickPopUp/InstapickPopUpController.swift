@@ -43,7 +43,7 @@ final class InstapickPopUpController: UIViewController {
     @IBOutlet private weak var containerView: UIView! {
         didSet {
             containerView.layer.masksToBounds = true
-            containerView.layer.cornerRadius = Device.isIpad ? 10 : 2
+            containerView.layer.cornerRadius = Device.isIpad ? 10 : 5
         }
     }
     
@@ -134,10 +134,12 @@ final class InstapickPopUpController: UIViewController {
         connectWithInstaView.delegate = self
         connectWithInstaView.configure(instaNickname: instaNickname)
         
-        let widthFactor: CGFloat = Device.isIpad ? 0.6 : 0.7
+        let widthFactor: CGFloat = Device.isIpad ? 0.4 : 0.6
         descriptionLabel.preferredMaxLayoutWidth = UIScreen.main.bounds.width * widthFactor
         subtitleLabel.preferredMaxLayoutWidth = UIScreen.main.bounds.width * widthFactor
         
+        let titleLabelWidthFactor: CGFloat = Device.isIpad ? 0.6 : 0.8
+        titleLabel.preferredMaxLayoutWidth = UIScreen.main.bounds.width * titleLabelWidthFactor
         titleLabel.text = TextConstants.instaPickAnlyze
         
         let paragraphStyle = getParagraphStyle()
@@ -159,8 +161,8 @@ final class InstapickPopUpController: UIViewController {
     }
     
     private func setupTextColors() {
-        titleLabel.textColor = ColorConstants.darcBlueColor
-        subtitleLabel.textColor = ColorConstants.darcBlueColor
+        titleLabel.textColor = ColorConstants.darkBlueColor
+        subtitleLabel.textColor = ColorConstants.darkBlueColor
         descriptionLabel.textColor = ColorConstants.darkGrayTransperentColor
         checkBoxLabel.textColor = ColorConstants.textGrayColor
         withoutConnectingButton.setTitleColor(.lrTealishTwo, for: .normal)
@@ -207,7 +209,7 @@ final class InstapickPopUpController: UIViewController {
                     self?.hideSpinerForView(containerView)
                 }
                 
-                UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
+                UIApplication.showErrorAlert(message: errorResponse.description)
         })
     }
     
@@ -227,7 +229,7 @@ final class InstapickPopUpController: UIViewController {
                     }
                 }
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.localizedDescription)
+                UIApplication.showErrorAlert(message: error.description)
             }
         }
     }
@@ -267,9 +269,22 @@ extension InstapickPopUpController: ConnectWithInstaViewDelegate {
 extension InstapickPopUpController: InstagramAuthViewControllerDelegate {
     
     func instagramAuthSuccess() {
-        close { [weak self] in
-            self?.delegate?.onConnectWithInsta()
+        accountService.changeInstapickAllowed(isInstapickAllowed: true) { [weak self] response in
+            self?.hideSpiner()
+            
+            switch response {
+            case .success(_):
+                DispatchQueue.toMain {
+                    self?.close { [weak self] in
+                        self?.delegate?.onConnectWithInsta()
+                    }
+                }
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
         }
+        
+        
     }
     
     func instagramAuthCancel() { }

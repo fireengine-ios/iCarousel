@@ -29,7 +29,7 @@ enum MyStreamType: Int {
     
     var placeholder: UIImage {
         switch self {
-        case .instaPick: return #imageLiteral(resourceName: "instapickImage")
+        case .instaPick: return #imageLiteral(resourceName: "tryInstapick")
         case .albums: return #imageLiteral(resourceName: "album")
         case .story: return #imageLiteral(resourceName: "story")
         case .people: return #imageLiteral(resourceName: "people")
@@ -42,7 +42,7 @@ enum MyStreamType: Int {
     var placeholderBorderColor: CGColor {
         switch self {
         case .instaPick:
-            return ColorConstants.orangeBorder.cgColor
+            return UIColor.clear.cgColor
         default:
             return ColorConstants.blueColor.cgColor
         }
@@ -65,13 +65,17 @@ enum MyStreamType: Int {
 class SliderItem {
     var name: String?
     var previewItems: [PathForItem]?
-    var previewPlaceholder: UIImage?
+    var previewPlaceholders = [UIImage?]()
     var type: MyStreamType? {
         didSet {
             placeholderImage = type?.placeholder
             name = type?.title
             if type == .instaPick {
-                previewPlaceholder = #imageLiteral(resourceName: "dummyInstaPickThumbnail")
+                previewPlaceholders = [UIImage(named: "dummyInstaPickThumbnail_2"),
+                                      UIImage(named: "dummyInstaPickThumbnail_0"),
+                                      UIImage(named: "dummyInstaPickThumbnail_1"),
+                                      UIImage(named: "dummyInstaPickThumbnail_2")]
+                
             }
         }
     }

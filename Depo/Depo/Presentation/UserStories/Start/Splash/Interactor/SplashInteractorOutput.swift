@@ -22,4 +22,6 @@ protocol SplashInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func updateUserLanguageSuccess()
     func updateUserLanguageFailed(error: Error)
+    
+    func onFailGetAccountInfo(error: Error)
 }

@@ -2,117 +2,135 @@
 //  InstaPickPhotoView.swift
 //  Depo
 //
-//  Created by Raman Harhun on 1/14/19.
+//  Created by Raman Harhun on 1/30/19.
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
 import UIKit
 
-protocol InstaPickPhotoViewDelegate {
+protocol InstaPickPhotoViewDelegate: class {
     func didTapOnImage(_ model: InstapickAnalyze?)
 }
 
-final class InstaPickPhotoView: UIView {
+class InstaPickPhotoView: UIView, NibInit {
+
+    private let imageView = UIImageView()
+    private let containerView = RadialGradientableView()
     
-    private static let bigViewId = "bigView"
+    private let pickedLabel = UILabel()
+    let rateLabel = UILabel()
     
-    private let rateConstant: CGFloat      = Device.isIpad ? 10.5 : 8
-    private let imageViewConstant: CGFloat = Device.isIpad ? 27 : 22.5
-    private let containerConstant: CGFloat = Device.isIpad ? 28 : 23
+    let rateView = RadialGradientableView()
+    let pickedView = RadialGradientableView()
     
-    @IBOutlet private var view: UIView!
+    var rateViewCenterYConstraint: NSLayoutConstraint!
+    var imageViewHeightConstraint: NSLayoutConstraint!
+    var pickedViewCenterXConstraint: NSLayoutConstraint!
     
-    @IBOutlet private weak var contentView: RadialGradientableView!
-    @IBOutlet private weak var imageView: UIImageView!
-    
-    @IBOutlet private weak var pickedView: RadialGradientableView!
-    @IBOutlet private weak var pickedLabel: UILabel!
-    
-    @IBOutlet private weak var rateView: RadialGradientableView!
-    @IBOutlet private weak var rateLabel: UILabel!
-    
-    var delegate: InstaPickPhotoViewDelegate?
     var model: InstapickAnalyze?
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        setupView()
-    }
-    
+    private weak var delegate: InstaPickPhotoViewDelegate?
+
+    private lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(onImageTap))
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        setup()
+        setupLayout(isIPad: Device.isIpad)
+        prepareToAppear()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        setupCornerRadius()
+    }
 
-        setupLayers()
+    func setupLayout(isIPad: Bool) {
+        
+        addSubview(containerView)
+        
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        containerView.widthAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
+        containerView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        containerView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        containerView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        
+        addSubview(imageView)
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
+        imageViewHeightConstraint = imageView.heightAnchor.constraint(equalTo: heightAnchor)
+        
+        rateView.addSubview(rateLabel)
+        
+        rateView.translatesAutoresizingMaskIntoConstraints = false
+        rateLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        rateLabel.centerXAnchor.constraint(equalTo: rateView.centerXAnchor).isActive = true
+        rateLabel.centerYAnchor.constraint(equalTo: rateView.centerYAnchor).isActive = true
+        rateLabel.heightAnchor.constraint(equalTo: rateView.heightAnchor).isActive = true
+        rateLabel.widthAnchor.constraint(equalTo: rateLabel.heightAnchor).isActive = true
+
+        addSubview(rateView)
+
+        rateView.widthAnchor.constraint(equalTo: rateView.heightAnchor).isActive = true
+        rateView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
+        rateViewCenterYConstraint = rateView.centerYAnchor.constraint(equalTo: centerYAnchor)
+
+        pickedView.addSubview(pickedLabel)
+
+        pickedView.translatesAutoresizingMaskIntoConstraints = false
+        pickedLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        pickedLabel.centerXAnchor.constraint(equalTo: pickedView.centerXAnchor).isActive = true
+        pickedLabel.centerYAnchor.constraint(equalTo: pickedView.centerYAnchor).isActive = true
+        pickedLabel.heightAnchor.constraint(equalTo: pickedView.heightAnchor).isActive = true
+        pickedLabel.widthAnchor.constraint(equalTo: pickedView.widthAnchor).isActive = true
+
+        addSubview(pickedView)
+        
+        pickedView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        pickedViewCenterXConstraint = pickedView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor)
     }
     
-    //MARK: - Utility methods(private)
-    private func setupFonts() {
-        let isIPad = Device.isIpad
-        let isBigView = restorationIdentifier == InstaPickPhotoView.bigViewId
+    private func setupCornerRadius() {
+        containerView.layer.cornerRadius = bounds.height * 0.5
         
-        if isBigView {
-            rateLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 20 : 14)
-        } else {
-            rateLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 14 : 10)
-        }
+        rateView.layer.cornerRadius = rateView.bounds.height * 0.5
+        
+        imageView.layer.cornerRadius = imageView.bounds.height * 0.5
+        
+        pickedView.layer.cornerRadius = pickedView.bounds.height * 0.5
+    }
+    
+    func setupLabelsDesign(isIPad: Bool) {
         rateLabel.textColor = .white
         
         pickedLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 20 : 14)
         pickedLabel.textColor = .white
         pickedLabel.text = TextConstants.instaPickPickedLabel
     }
-
-    private func setup() {
-        setNeedsLayout()
-        layoutIfNeeded()
+    
+    private func prepareToAppear() {
+        addGestureRecognizer(tapGesture)
         
+        containerView.layer.masksToBounds = true
+
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
         
-        contentView.layer.masksToBounds = true
         rateView.layer.masksToBounds = true
+        rateLabel.textAlignment = .center
+        
         pickedView.layer.masksToBounds = true
-
-        setupLayers()
-        setupFonts()
-    }
-    
-    private func setupLayers() {
-        ///Big view may change size on different iPhone's screen width
-        if restorationIdentifier == InstaPickPhotoView.bigViewId {
-            imageView.layer.cornerRadius = imageView.bounds.height * 0.5
-
-            contentView.layer.cornerRadius = contentView.bounds.height * 0.5
-            
-            rateView.layer.cornerRadius = rateView.bounds.height * 0.5
-            
-            pickedView.layer.cornerRadius = pickedView.bounds.height * 0.5
-        } else {
-            ///has static size for iPhone/iPad + fix wrong layer corner radius
-            imageView.layer.cornerRadius = imageViewConstant
-            
-            contentView.layer.cornerRadius = containerConstant
-            
-            rateView.layer.cornerRadius = rateConstant
-        }
-    }
-    
-    private func setupView() {
-        let nibNamed = String(describing: InstaPickPhotoView.self)
-        Bundle(for: InstaPickPhotoView.self).loadNibNamed(nibNamed, owner: self, options: nil)
-        guard let view = view else {
-            return
-        }
+        pickedLabel.textAlignment = .center
         
-        view.frame = bounds
-        
-        addSubview(view)
+        setupCornerRadius()
+        setupLabelsDesign(isIPad: Device.isIpad)
     }
     
     //MARK: - Utility methods(public)
@@ -129,12 +147,12 @@ final class InstaPickPhotoView: UIView {
         if delegate != nil {
             self.delegate = delegate
         }
+        
+        self.model = model
+
         rateLabel.text = String(model.rank)
-
-        let isBigView = restorationIdentifier == InstaPickPhotoView.bigViewId
-
-        let url = isBigView ? model.getLargeImageURL() : model.getSmallImageURL()
-        imageView.sd_setImage(with: url, completed: { [weak self] (image, _, _, _) in
+        
+        imageView.sd_setImage(with: getPhotoUrl(), completed: { [weak self] (image, _, _, _) in
             guard let `self` = self else {
                 return
             }
@@ -160,29 +178,36 @@ final class InstaPickPhotoView: UIView {
         })
         
         if model.isPicked {
-            pickedView.isHidden = !(isBigView && smallPhotosCount > 0)
+            pickedView.isHidden = isNeedHidePickedView(hasSmallPhotos: smallPhotosCount > 0)
             
             rateView.isNeedGradient = true
-            contentView.isNeedGradient = true
+            containerView.isNeedGradient = true
         } else {
             pickedView.isHidden = true
             
             rateView.isNeedGradient = false
             rateView.backgroundColor = UIColor.lrTealish
             
-            contentView.isNeedGradient = false
-            contentView.backgroundColor = UIColor.lrTealish
+            containerView.isNeedGradient = false
+            containerView.backgroundColor = UIColor.lrTealish
         }
-        
-        self.model = model
     }
     
     func getImage() -> UIImage? {
         return imageView.image
     }
     
+    //MARK: Inheritor methods
+    func getPhotoUrl() -> URL? {
+        return nil
+    }
+    
+    func isNeedHidePickedView(hasSmallPhotos: Bool) -> Bool {
+        return true
+    }
+    
     //MARK: Action
-    @IBAction private func onImageTap(_ sender: Any) {
+    @objc func onImageTap() {
         delegate?.didTapOnImage(model)
     }
 }

@@ -27,7 +27,7 @@ class Device {
     
     static let applicationId = "665036334"
     
-    static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es"]
+    static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es", "sq"]
     static private let defaultLocale = "en"
     
     static func documentsFolderUrl(withComponent: String) -> URL {
@@ -74,6 +74,10 @@ class Device {
     
     static var deviceType: String {
         return isIpad ? "IPAD" : "IPHONE"
+    }
+    
+    static var systemVersion: String {
+        return UIDevice.current.systemVersion
     }
     
     static func operationSystemVersionLessThen(_ version: Int) -> Bool {
@@ -164,8 +168,16 @@ class Device {
         if let uuid = device.identifierForVendor?.uuidString {
             result["uuid"] = uuid
         }
+        
+        if let appVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+            result["appVersion"] = appVersion
+        }
+        
         result["name"] = device.name
         result["deviceType"] = Device.deviceType
+        result["language"] = Locale.current.languageCode ?? ""
+        result["osVersion"] = Device.systemVersion
+
         return result
     }
     
@@ -202,4 +214,5 @@ class Device {
         return UUID
         
     }()
+    
 }

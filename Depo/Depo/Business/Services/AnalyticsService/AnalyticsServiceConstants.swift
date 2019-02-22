@@ -117,7 +117,7 @@ enum AnalyticsAppScreens {
     case placesFIR
     ///Settings
     case settings
-    case importPhotos
+    case connectedAccounts
     case settingsFIR
     case activityTimeline
     case usageInfo
@@ -215,8 +215,8 @@ enum AnalyticsAppScreens {
         ///Settings
         case .settings:
             return "Settings"
-        case .importPhotos:
-            return "Import Photos"
+        case .connectedAccounts:
+            return "Connected Accounts"
         case .settingsFIR:
             return "Face & Image Grouping"
         case .activityTimeline:
@@ -385,6 +385,7 @@ enum GAEventAction {
     case everyMinuteVideo
     case serviceError
     case paymentErrors
+    case photopickAnalysis
     
     var text: String {
         switch self {
@@ -395,7 +396,7 @@ enum GAEventAction {
         case .logout:
             return "Logout"
         case .register:
-            return "MSISDN"//FE-55 "Register"
+            return "Signup"//FE-538  //"MSISDN"//FE-55 "Register"
         case .removefavorites:
             return "remove favorites"
         case .favoriteLike(let status):
@@ -454,6 +455,8 @@ enum GAEventAction {
             return "Service Errors"
         case .paymentErrors:
             return "Payment Errors"
+        case .photopickAnalysis:
+            return "Photopick Analysis"
         }
     }
 }
@@ -519,10 +522,8 @@ enum GAEventLabel {
     
     case empty
     
-    case purchaseSuccess
-    case purchaseFailure
-    case trueLogin
-    case falseLogin
+    case success
+    case failure
     case feedbackOpen
     case feedbackSend
     case download(FileType)
@@ -569,14 +570,10 @@ enum GAEventLabel {
         switch self {
         case .empty:
             return ""
-        case .purchaseSuccess:
+        case .success:
             return "Success"
-        case .purchaseFailure:
+        case .failure:
             return "Failure"
-        case .trueLogin:
-            return "True"
-        case .falseLogin:
-            return "False"
         case .feedbackOpen:
             return "Open"
         case .feedbackSend:
@@ -671,6 +668,7 @@ enum GADementionsFields {
     case pageType
     case sourceType
     case loginStatus
+    case loginType
     case platform
     case networkFixWifi
     case service
@@ -681,6 +679,8 @@ enum GADementionsFields {
     case faceImageStatus
     case userPackage
     case gsmOperatorType
+    case deviceId
+    case errorType
     
     var text: String {
         switch self {
@@ -692,6 +692,8 @@ enum GADementionsFields {
             return "sourceType"
         case .loginStatus:
             return "loginStatus"
+        case .loginType:
+            return "loginType"
         case .platform:
             return "platform"
         case .networkFixWifi:
@@ -712,6 +714,10 @@ enum GADementionsFields {
             return "userPackage"
         case .gsmOperatorType:
             return "gsmOperatorType"
+        case .deviceId:
+            return "deviceid"
+        case .errorType:
+            return "errorType"
         }
     }
     
@@ -726,6 +732,106 @@ enum GAMetrics {
             return "countOfUpload"
         case .countOfDownload:
             return "countOfDownload"
+        }
+    }
+}
+
+enum GADementionValues {
+    enum login {
+        case gsm
+        case email
+        case rememberLogin
+        case turkcellGSM
+        var text: String {
+            switch self {
+            case .gsm:
+                return "Login with Password - GSM"
+            case .email:
+                return "Login with Password – Email"
+            case .rememberLogin:
+                return "Remember Me Login"
+            case .turkcellGSM:
+                return "3G - LTE Login"
+            }
+        }
+    }
+    
+    enum loginError {
+        case incorrectUsernamePassword
+        case incorrectCaptcha
+        case accountIsBlocked
+        case signupRequired
+        case turkcellPasswordDisabled
+        case captchaRequired
+        case networkError
+        case serverError
+        case unauthorized
+        
+        var text: String {
+            switch self {
+            case .incorrectUsernamePassword:
+                return "INCORRECT_USERNAME_PASSWORD"
+            case .incorrectCaptcha:
+                return "INCORRECT_CAPTCHA"
+            case .accountIsBlocked:
+                return "ACCOUNT_IS_BLOCKED"
+            case .signupRequired:
+                return "SIGNUP_REQUIRED"
+            case .turkcellPasswordDisabled:
+                return "TURKCELL_PASSWORD_DISABLED"
+            case .captchaRequired:
+                return "CAPTCHA_REQUIRED"
+            case .networkError:
+                return "NETWORK_ERROR"
+            case .serverError:
+                return "SERVER_ERROR"
+            case .unauthorized:
+                return "UNAUTHORIZED"
+            }
+        }
+    }
+    
+    enum signUpError {
+        case invalidEmail
+        case emailAlreadyExists
+        case gsmAlreadyExists
+        case invalidPassword
+        case tooManyOtpRequests
+        case invalidOtp
+        case tooManyInvalidOtpAttempts
+        case networkError
+        case serverError
+        case incorrectCaptcha
+        case captchaRequired
+        case unauthorized
+        
+        var text: String {
+            switch self {
+            case .invalidEmail:
+                return "INVALID_EMAIL"
+            case .emailAlreadyExists:
+                return "EMAIL_ALREADY_EXISTS"
+            case .gsmAlreadyExists:
+                return "GSM_ALREADY_EXISTS"
+            case .invalidPassword:
+                return "INVALID_PASSWORD"
+            case .tooManyOtpRequests:
+                return "TOO_MANY_OTP_REQUESTS"
+            case .invalidOtp:
+                return "INVALID_OTP"
+            case .tooManyInvalidOtpAttempts:
+                return "TOO_MANY_INVALID_OTP_ATTEMPTS"
+            case .networkError:
+                return "NETWORK_ERROR"
+            case .serverError:
+                return "SERVER_ERROR"
+            case .incorrectCaptcha:
+                return "INCORRECT_CAPTCHA"
+            case .captchaRequired:
+                return "CAPTCHA_REQUIRED"
+            case .unauthorized:
+                return "UNAUTHORIZED"
+            }
         }
     }
 }

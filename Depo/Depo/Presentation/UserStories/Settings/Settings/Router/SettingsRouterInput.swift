@@ -14,7 +14,7 @@ protocol SettingsRouterInput {
     
     func goToContactSync()
     
-    func goToImportPhotos()
+    func goToConnectedAccounts()
     
     func goToAutoApload()
     

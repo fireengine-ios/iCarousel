@@ -11,19 +11,32 @@ import Foundation
 // MARK: - Facebook
 
 protocol ImportFromFBViewInput: class, ActivityIndicator {
+    func connectionStatusSuccess(_ isOn: Bool)
+    func connectionStatusFailure(errorMessage: String)
     
-    func succeedFacebookStart()
-    func failedFacebookStart(errorMessage: String)
+    func syncStatusSuccess(_ isOn: Bool)
+    func syncStatusFailure()
     
-    func succeedFacebookStop()
-    func failedFacebookStop(errorMessage: String)
+    func importStartSuccess()
+    func importStartFailure(errorMessage: String)
     
-    func failedFacebookStatus(errorMessage: String)
+    func importStopSuccess()
+    func importStopFailure(errorMessage: String)
+    
+    func disconnectionSuccess()
+    func disconnectionFailure(errorMessage: String)
 }
 
 // MARK: - Dropbox
 
 protocol ImportFromDropboxViewInput: class, ActivityIndicator {
+    
+    func connectionStatusSuccess(_ isOn: Bool)
+    func connectionStatusFailure(errorMessage: String)
+    
+    func disconnectionSuccess()
+    func disconnectionFailure(errorMessage: String)
+    
     func dbStartSuccessCallback()
     func failedDropboxStart(errorMessage: String)
     
@@ -35,12 +48,22 @@ protocol ImportFromDropboxViewInput: class, ActivityIndicator {
 // MARK: - Instagram
 
 protocol ImportFromInstagramViewInput: class, ActivityIndicator {
-    func instagramStatusSuccess()
-    func instagramStatusFailure()
     
-    func instagramStartSuccess()
-    func instagramStartFailure(errorMessage: String)
+    func connectionStatusSuccess(_ isOn: Bool, username: String?)
+    func connectionStatusFailure(errorMessage: String)
     
-    func instagramStopSuccess()
-    func instagramStopFailure(errorMessage: String)
+    func instaPickStatusSuccess(_ isOn: Bool)
+    func instaPickStatusFailure()
+    
+    func syncStatusSuccess(_ isOn: Bool)
+    func syncStatusFailure()
+    
+    func syncStartSuccess()
+    func syncStartFailure(errorMessage: String)
+    
+    func syncStopSuccess()
+    func syncStopFailure(errorMessage: String)
+    
+    func disconnectionSuccess()
+    func disconnectionFailure(errorMessage: String)
 }

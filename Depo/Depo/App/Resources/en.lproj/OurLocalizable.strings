@@ -424,7 +424,6 @@
 "Things" = "Things";
 "Places" = "Places";
 "Musics" = "Musics";
-"InstaPick" = "InstaPick";
 "Your Uploads" = "Your Uploads";
 "Create a story" = "Create a story";
 "Please Choose 20 files at most" = "Please choose maximum 20 photos";
@@ -524,6 +523,7 @@
 "Filter Card" = "Filter Card";
 "photos" = "photos";
 "Destination folder can not be the same folder" = "Destination folder can not be the same folder";
+"work_will_introduced" = "There is currently a maintenance work on lifebox, please try again later.";
 "Google Play Store" = "Google Play Store";
 "AppStore" = "AppStore";
 "Successful purchase." = "Successful purchase.";
@@ -694,6 +694,7 @@
 "Face Recognition to reach your loved one's memories" = "Face Recognition to reach your loved one's memories";
 "Place Recognition to beam you up to the memories" = "Place Recognition to beam you up to the memories";
 "Object Recognition to remember with things you love" = "Object Recognition to remember with things you love";
+"unlimited_photopick_analysis" = "Unlimited PhotoPick analysis";
 "Become Premium" = "Become Premium";
 "Become Premium Member!" = "Become Premium Member!";
 "leave_premium_membership" = "Leave Premium Membership";
@@ -733,7 +734,6 @@
 "package_life_cancel_text" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "package_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
-"package_albanian_cancel_text" = "Package albanian cancel text";
 "package_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 
@@ -748,7 +748,6 @@
 "feature_promo_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 "feature_kktcell_cancel_text" = "You can continue to use Premium features for free since you are a KKTCELL user";
 "feature_moldcell_cancel_text" = "You can continue to use Premium features for free since you are a Moldcell user";
-"feature_albanian_cancel_text" = "Feature albanian cancel text";
 "feature_life_cancel_text" = "You can continue to use Premium features for free since you are a life:) user";
 "feature_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "feature_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
@@ -778,67 +777,89 @@
 "ok_for_upgrade" = "Yes, Upgrade";
 "no_for_upgrade" = "No, I'm OK";
 "uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. If you don't upgrade to Premium, your memories will be kept in high quality. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
+"NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
 
 /*AnalyzeHistoryController*/
-"InstaPick" = "InstaPick";
-"analyze_history_free_text" = "Free for Limited Time";
+"InstaPick" = "PhotoPick";
+"package_albanian_cancel_text" = "Albanian quota cancel text";
+"feature_albanian_cancel_text" = "You can continue to use Premium features for free since you are a ALBtelecom user";
 "no_analyses_left_title" = "No Analyzes Left";
 "no_analyses_left_message" = "No Analyzes Left";
-"no_analyses_left_button" = "Purchase InstaPick";
-"analyze_history_empty_title" = "analyze_history_empty_title";
-"analyze_history_empty_subtitle" = "analyze_history_empty_subtitle";
+"no_analyses_left_button" = "Purchase PhotoPick";
+"analyze_history_empty_title" = "Didn't you start analyzing your photos yet?";
+"analyze_history_empty_subtitle" = "Start analyzing now to find out which photo gets the highest rank and share on social media.";
 "analyze_history_analyze_left" = "Analyses Left";
-"analyze_history_analyze_count" = "%1$d of %2$d";
-"analyze_with_instapick" = "New InstaPick Analysis";
+"analyze_history_analyze_count" = "%1$d / %2$d";
+"analyze_with_instapick" = "Analyze with PhotoPick";
 "analyze_history_photos_count" = "%d photos";
 "analyze_history_start_here" = "Start\nHere!";
 "analyze_confirm_delete_title" = "Are you sure you want to delete?";
-"analyze_confirm_delete_text" = "These analyses will be deleted from your Analyze History";
-"analyze_confirm_delete_yes" = "YES";
-"analyze_confirm_delete_no"  = "NO";
-/*InstapickUpgradePopup*/
-"instapick_upgrade_popup_text" = "In order to purchase Instagram Likes package, you need to upgrade your lifebox application.";
-"instapick_upgrade_popup_button" = "Upgrade";
-"instapick_upgrade_popup_no" = "No";
+"analyze_confirm_delete_text" = "Selected items will be deleted from analysis history.";
+"analyze_confirm_delete_yes" = "Yes";
+"analyze_confirm_delete_no" = "No";
+
 /*InstaPick three dots*/
-"new_insta_pick" = "New InstaPick";
-"uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. We will keep your existing photos and videos along with new uploaded memories in high quality until 1st of March. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
+"new_insta_pick" = "New PhotoPick";
 
 /*InstaPickCard*/
-
-"used_before_title_label" = "InstaPick to get bunch of likes!";
-"no_used_before_title_label" = "Analyze with InstaPick!";
-"no_analysis_title_label" = "Get more InstaPick!";
-
-"used_before_detail_label" = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
-"no_used_before_detail_label" = "Let us analyze your selected photos and suggest you which one to share!";
-"no_analysis_detail_label" = "Let us analyze your selected photos and suggest you which one to share!";
-
+"used_before_title_label" = "PhotoPick to get bunch of likes!";
+"no_used_before_title_label" = "Analyze with PhotoPick!";
+"no_analysis_title_label" = "Get more PhotoPick!";
+"used_before_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! You have more analysis waiting for your photos😉";
+"no_used_before_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! You haven't tried yet?";
+"no_analysis_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Don't forget to purchase new package for more PhotoPick😉";
 "instapick_button_has_analysis" = "Let’s Start!";
-"analyze_with_instapick" = "Analyze With InstaPick";
 
 /*InstaPickDetailViewController*/
-
 "you_are_ready_to_share" = "You are ready to share!";
-"instapick_analysis_left" = "Analysis Left: %1$d of %2$d";
-"instapick_unlimited_analysis" = "Free for Limited Time";
-"engage_with_more_hastags" = "Engage with more #hastags";
+"instaPick_analysis_left" = "Analysis Left: %1$d / %2$d";
+"engage_with_more_hastags" = "Engage with more #hashtags";
 "copy_hashtags_to_clipboard" = "Copy #hashtags to clipboard";
 "share_on_social_media" = "Share on Social Media!";
-
 "picked" = "PICKED!";
 "insta_pick_analyzing_bottom" = "Enjoy your time while we analyze your photos! 😊";
-"insta_pick_analyzing_0" = "We are looking for the photo you will get the most likes.";
-"insta_pick_analyzing_1" = "You have selected beautiful photos";
+"insta_pick_analyzing_0" = "We are looking for the photo you'll get the most likes.";
+"insta_pick_analyzing_1" = "You have selected beautiful photos!";
 "insta_pick_analyzing_2" = "How nice of you to share your moments with your friends!";
 "insta_pick_analyzing_3" = "Life is good with great memories!";
-"insta_pick_analyzing_4" = "You have a great photo album.";
+"insta_pick_analyzing_4" = "You have a great photo album!";
+
 /*InstaPickPopUp*/
 "dont_show_this_again" = "Don't show this again";
-"instapick_analyze" = "Analyze with InstaPick!";
+"instapick_analyze" = "Analyze with PhotoPick!";
 "connected_account" = "It works great with your connected account!";
-"instapick_description" = "Lorem psum dolor sit amet, adipiscing consectetur adipiscing elit.  Lorem psum dolor sit amet, adipiscing consectetur elit.";
+"instapick_description" = "If you choose to connect with your Instagram account, we'll be able to provide a personalized, much better experience by performing custom analysis on each new PhotoPick analysis.";
 "connected_with_instagram" = "Connect with Instagram";
 "connected_with_instagram_name" = "Connect with Instagram as";
 "continue_without_connecting" = "Continue without connecting";
-"NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
+"connected_accounts" = "Connected Accounts";
+"analyze_history_free_text" = "Free for Limited Time";
+
+/*InstapickUpgradePopup*/
+"instapick_upgrade_popup_text" = "In order to purchase PhotoPick package, you need to update your lifebox application.";
+"instapick_upgrade_popup_button" = "Update";
+"instapick_upgrade_popup_no" = "No";
+"instapick_analysis_left" = "Analysis Left: %1$d / %2$d";
+"instapick_unlimited_analysis" = "Free for Limited Time";
+"Facebook" = "Facebook";
+"Dropbox" = "Dropbox";
+"Instagram" = "Instagram";
+"connected_as_format" = "Connected account:  @%@";
+"instagram_remove_connection_warning_title" = "You're about to remove your Instagram connection.";
+"facebook_remove_connection_warning_title" = "You're about to remove your Facebook connection.";
+"dropbox_remove_connection_warning_title" = "You're about to remove your Dropbox connection.";
+"instagram_remove_connection_warning_message" = "Are you sure you want to remove your Instagram connection?\n\n";
+"facebook_remove_connection_warning_message" = "Are you sure you want to remove your Facebook connection?\n\n";
+"dropbox_remove_connection_warning_message" = "Are you sure you want to remove your Dropbox connection?\n\n";
+"instapick_selection_photos_selected" = "Photos Selected (%d)";
+"instapick_selection_analyzes_left" = "You only have %d analyses left";
+"loading" = "Loading...";
+"there_are_no_photos" = "There are no photos";
+"there_are_no_albums" = "There are no albums";
+"instapick_selection_analyzes_left_max" = "You’ve selected %d photos\n(the max. number you can select)";
+"remove_connection" = "Remove Connection";
+"you_are_connected" = "You are connected";
+"free_trial_title_label" = "Analyze with PhotoPick";
+"free_trial_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Try more free for a limited time!";
+"instapick_under_construction" = "We are making improvement on PhotoPick for a better experience 😉";
+"instapick_unsupported_file_type" = "Photos you have selected are in unsupported format. You can continue PhotoPick experience by selecting other photos.";

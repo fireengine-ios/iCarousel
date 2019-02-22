@@ -127,7 +127,7 @@ final class InstaPickRoutingService {
     
     // MARK: Routing
     private func didOpenInstaPickPopUp(instaNickname: String?) {
-        instagramNickname = nil
+        clearInfo()
 
         guard let successHandler = successHandler else {
             UIApplication.showErrorAlert(message: "Success handler unexpected become nil.")
@@ -141,7 +141,7 @@ final class InstaPickRoutingService {
     }
     
     private func didOpenInstaPickSelectionSegmented() {
-        instagramNickname = nil
+        clearInfo()
 
         guard let successHandler = successHandler else {
             UIApplication.showErrorAlert(message: "Success handler unexpected become nil.")
@@ -184,6 +184,11 @@ final class InstaPickRoutingService {
         InstaPickRoutingService.showUpdgradePopup()
     }
     
+    private func clearInfo() {
+        instagramNickname = nil
+        instagramLikePermission = false
+    }
+    
     private func showError(with error: ErrorResponse) {
         guard let errorHandler = errorHandler else {
             UIApplication.showErrorAlert(message: "Error handler unexpected become nil.")
@@ -216,8 +221,9 @@ extension InstaPickRoutingService {
                                               firstButtonTitle: TextConstants.instapickUpgradePopupNoButton,
                                               secondButtonTitle: TextConstants.instapickUpgradePopupButton,
                                               secondAction: { vc in
-                                                vc.close()
-                                                UIApplication.shared.openAppstore()
+                                                vc.close {
+                                                    UIApplication.shared.openAppstore()
+                                                }
         })
         RouterVC().presentViewController(controller: controller)
     }

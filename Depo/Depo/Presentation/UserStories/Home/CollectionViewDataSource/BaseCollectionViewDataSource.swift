@@ -161,8 +161,6 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             return viewsByType[.sync] == nil
         case .premium:
             return !popUps.contains(where: { $0 is PremiumInfoCard })
-        case .instaPick:
-            return !popUps.contains(where: { $0 is InstaPickCard })
         default:
             return true
         }
@@ -193,6 +191,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             let index = popUps.index(of: instaPickCard) else {
             return
         }
+
         let indexPath = IndexPath(item: index, section: 0)
         collectionView.performBatchUpdates({ [weak self] in
             self?.collectionView.reloadItems(at: [indexPath])

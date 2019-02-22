@@ -43,11 +43,13 @@ class SettingsInteractor: SettingsInteractorInput {
                              TextConstants.settingsViewCellUsageInfo,
                              passcodeCellTitle]
         
+        let importAccountsCells = [TextConstants.settingsViewCellConnectedAccounts]
+        
         var array = [[TextConstants.settingsViewCellBeckup,
-                      TextConstants.settingsViewCellImportPhotos,
                       TextConstants.settingsViewCellAutoUpload,
                       TextConstants.settingsViewCellContactsSync,
                       TextConstants.settingsViewCellFaceAndImageGrouping],
+                     importAccountsCells,
                      securityCells,
                      [TextConstants.settingsViewCellHelp,
                       TextConstants.settingsViewCellLogout]]
@@ -59,7 +61,8 @@ class SettingsInteractor: SettingsInteractorInput {
             DispatchQueue.toMain {
                 self.userInfoResponse = response
                 if self.isTurkcellUser {
-                    array[1].append(TextConstants.settingsViewCellLoginSettings)
+                    /// add to the securityCells section
+                    array[2].append(TextConstants.settingsViewCellLoginSettings)
                 }
                 self.output.cellsDataForSettings(array: array)
             }
@@ -73,9 +76,11 @@ class SettingsInteractor: SettingsInteractorInput {
 
     func onLogout() {
         output.asyncOperationStarted()
-        authService.serverLogout(complition: { [weak self] in
+        authService.serverLogout(complition: { [weak self] success in
             self?.output.asyncOperationStoped()
-            self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .logout)
+            if success {
+                self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .logout, eventLabel: .success)
+            }
             self?.authService.logout { [weak self] in
                 MenloworksEventsService.shared.onLoggedOut()
                 self?.output.goToOnboarding()
@@ -128,7 +133,7 @@ class SettingsInteractor: SettingsInteractorInput {
                 }
             case .failed(let error):
                 DispatchQueue.toMain {
-                    self?.output.didFailToObtainUserStatus(errorMessage: error.localizedDescription)
+                    self?.output.didFailToObtainUserStatus(errorMessage: error.description)
                 }
             }
         }

@@ -204,8 +204,8 @@ extension PremiumPresenter: OptInControllerDelegate {
     func optInReachedMaxAttempts(_ optInVC: OptInController) {
         optInVC.showResendButton()
         optInVC.dropTimer()
-        let error = CustomErrors.serverError(TextConstants.promocodeBlocked)
-        router.displayError(with: error.localizedDescription)
+        let error = CustomErrors.text(TextConstants.promocodeBlocked)
+        router.displayError(with: error.description)
     }
     
     func optInNavigationTitle() -> String {

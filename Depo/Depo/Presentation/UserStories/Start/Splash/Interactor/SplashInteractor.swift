@@ -24,7 +24,7 @@ class SplashInteractor: SplashInteractorInput {
     func startLoginInBackroung() {
         if tokenStorage.accessToken == nil {
             if ReachabilityService().isReachableViaWiFi {
-                analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .falseLogin)
+                analyticsService.trackLoginEvent(error: .serverError)
                 failLogin()
             } else {
                 authenticationService.turkcellAuth(success: { [weak self] in
@@ -32,16 +32,17 @@ class SplashInteractor: SplashInteractorInput {
                     self?.tokenStorage.isRememberMe = true
 //                    ItemsRepository.sharedSession.updateCache()
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
 //                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
                         self?.turkcellSuccessLogin()
                     }, fail: { [weak self] error in
-                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .falseLogin)
+                        let loginError = LoginResponseError(with: error)
+                        self?.analyticsService.trackLoginEvent(error: loginError)
                         self?.output.asyncOperationSucces()
                         self?.output.onFailLogin()
                     })
                 }, fail: { [weak self] response in
-                    self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .falseLogin)
+                    let loginError = LoginResponseError(with: response)
+                    self?.analyticsService.trackLoginEvent(error: loginError)
                     self?.output.asyncOperationSucces()
                     self?.output.onFailLogin()
                 })
@@ -54,7 +55,9 @@ class SplashInteractor: SplashInteractorInput {
                 /// only internet error
                 //self?.failLogin()
                 DispatchQueue.toMain {
-                    if !ReachabilityService().isReachable {
+                    if ReachabilityService().isReachable {
+                        self?.output.onFailGetAccountInfo(error: error)
+                    } else {
                         self?.output.onNetworkFail()
                     }
                 }
@@ -63,7 +66,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func turkcellSuccessLogin() {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
 //        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
         DispatchQueue.toMain {
             self.output.onSuccessLoginTurkcell()
@@ -71,7 +74,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func successLogin() {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
 //        ItemsRepository.sharedSession.updateCache()
 //        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
         DispatchQueue.toMain {
@@ -80,7 +83,6 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func failLogin() {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .falseLogin)
         DispatchQueue.toMain {
             self.output.onFailLogin()
             if !ReachabilityService().isReachable {

@@ -18,47 +18,84 @@ class ImportFromDropboxInteractor {
 
 extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
     
-    func requestStatus() {
+    func getAllStatuses() {
         requestStatusBaseRequest { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let status):
-                    self?.output?.statusSuccessCallback(status: status)
+                    self?.output?.statusSuccess(status: status)
                 case .failed(let error):
                     let errorMessage = (error as? ErrorResponse)?.description ?? error.description
-                    self?.output?.statusFailureCallback(errorMessage: errorMessage)
+                    self?.output?.statusFailure(errorMessage: errorMessage)
                 }
             }
         }
     }
     
+    func connect(withToken token: String) {
+        dbService.requestConnect(withToken: token, success: { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.output?.connectWithTokenSuccess()
+            }
+            }, fail: { [weak self] error in
+                DispatchQueue.main.async {
+                    self?.dropboxManager.logout()
+                    self?.login()
+                    self?.output?.connectWithTokenFailure(errorMessage: error.description)
+                }
+        })
+    }
+
+    func disconnectAccount() {
+        dbService.disconnectDropbox { [weak self] response in
+            switch response {
+            case .success(_):
+                self?.output?.disconnectionSuccess()  
+            case .failed(let error):
+                self?.output?.disconnectionFailure(errorMessage: error.description)
+            }
+        }
+    }
+    
+    func startImport() {
+        let failureHandler: FailResponse = { [weak self] errorResponse in
+            DispatchQueue.toMain {
+                if let output = self?.output {
+                    output.startFailure(errorMessage: errorResponse.description)
+                    output.statusFailure(errorMessage: errorResponse.description)
+                }
+            }
+        }
+        
+        dbService.requestStatus(success: { [weak self] response in
+            if let dropboxStatus = response as? DropboxStatusObject {
+                self?.output?.statusSuccess(status: dropboxStatus)
+                
+                if dropboxStatus.connected ?? false {
+                    self?.requestStart()
+                } else {
+                    self?.login()
+                }
+            } else {
+                failureHandler(ErrorResponse.string("wrong DropboxStatusObject"))
+            }
+        }, fail: failureHandler)
+    }
+
     func login() {
+        dropboxManager.logout()
         dropboxManager.login { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let token):
-                    self?.output?.loginSuccessCallback(token: token)
+                    self?.output?.loginSuccess(token: token)
                 case .cancel:
                     self?.output?.loginCanceled()
                 case .failed(let errorString):
-                    self?.output?.loginFailureCallback(errorMessage: errorString)
+                    self?.output?.loginFailure(errorMessage: errorString)
                 }
             }
         }
-    }
-    
-    func requestConnect(withToken token: String) {
-        dbService.requestConnect(withToken: token, success: { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.output?.connectSuccessCallback()
-            }
-        }, fail: { [weak self] error in
-            DispatchQueue.main.async {
-                self?.dropboxManager.logout()
-                self?.login()
-                self?.output?.connectFailureCallback(errorMessage: error.description)
-            }
-        })
     }
     
     func requestStatusForStart() {
@@ -66,7 +103,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let status):
-                    self?.output?.statusForStartSuccessCallback(status: status)
+                    self?.output?.statusForStartSuccess(status: status)
                 case .failed(let error):
                     if let errorResponse = error as? ErrorResponse,
                         case ErrorResponse.error(let error) = errorResponse,
@@ -74,7 +111,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
                     {
                         self?.output?.failedWithInternetError(errorMessage: error.description)
                     }
-                    self?.output?.statusForStartFailureCallback(errorMessage: error.description)
+                    self?.output?.statusForStartFailure(errorMessage: error.description)
                 }
             }
         }
@@ -83,11 +120,11 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
     func requestStart() {
         dbService.requestStart(success: { [weak self] _ in
             DispatchQueue.main.async {
-                self?.output?.startSuccessCallback()
+                self?.output?.startSuccess()
             }
         }, fail: { [weak self] error in
             DispatchQueue.main.async {
-                self?.output?.startFailureCallback(errorMessage: error.description)
+                self?.output?.startFailure(errorMessage: error.description)
             }
         })
     }
@@ -97,10 +134,10 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let status):
-                    self?.output?.statusForCompletionSuccessCallback(dropboxStatus: status)
+                    self?.output?.statusForCompletionSuccess(dropboxStatus: status)
                 case .failed(let error):
                     let errorMessage = (error as? ErrorResponse)?.description ?? error.description
-                    self?.output?.statusForCompletionFailureCallback(errorMessage: errorMessage)
+                    self?.output?.statusForCompletionFailure(errorMessage: errorMessage)
                 }
             }
         }
