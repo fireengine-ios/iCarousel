@@ -22,7 +22,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             return
         }
         
-        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] accessGranted, _ in
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) {[weak self] accessGranted, _ in
             debugLog("UploadFilesSelectionInteractor getAllItems LocalMediaStorage askPermissionForPhotoFramework")
             guard accessGranted else {
                 return
@@ -37,8 +37,9 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                         assets.append(asset)
                     })
                     
-                    CoreDataStack.default.allLocalItems(with: assets, completion: { [weak self] localItems in
-                        let items = localItems.sorted {
+                    MediaItemOperationsService.shared.allLocalItems(with: assets) { mediaItems in
+                        var items = mediaItems
+                        items.sort {
                             guard let firstDate = $0.creationDate else {
                                 return false
                             }
@@ -52,7 +53,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                         DispatchQueue.main.async {
                             self?.output.getContentWithSuccess(array: [items])
                         }
-                    })
+                    }
                 }
             }
         }

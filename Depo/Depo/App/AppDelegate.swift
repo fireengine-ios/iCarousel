@@ -165,7 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillEnterForeground")
         if BackgroundTaskService.shared.appWasSuspended {
-            CoreDataStack.default.appendLocalMediaItems(completion: nil)
+            MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
         }
         ContactSyncSDK.doPeriodicSync()
         MenloworksAppEvents.sendProfileName()
@@ -291,7 +291,11 @@ extension AppDelegate {
             ///call appendLocalMediaItems in the AppConfigurator
             return
         }
-        CoreDataStack.default.appendLocalMediaItems(completion: nil)
+        /// start photos logic after notification permission///MOVED TO CACHE MANAGER, when all remotes are added.
+//        MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
+        LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
+            
+        }
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

@@ -26,6 +26,7 @@ final class PasscodeViewImp: UIView, FromNib {
             passcodeErrorLabel.textColor = UIColor.white
             passcodeErrorLabel.layer.cornerRadius = 5
             passcodeErrorLabel.layer.masksToBounds = true
+            passcodeErrorLabel.alpha = 0
         }
     }
     

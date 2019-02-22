@@ -118,13 +118,13 @@ class AlbumService: RemoteItemsService {
         super.init(requestSize: requestSize, fieldValue: .albums)
     }
     
-    func allAlbums(sortBy: SortType, sortOrder: SortOrder, success: @escaping ListRemoveAlbums, fail:@escaping FailRemoteItems) {
+    func allAlbums(sortBy: SortType, sortOrder: SortOrder, success: @escaping ListRemoteAlbums, fail:@escaping FailRemoteItems) {
         currentPage = 0
         requestSize = 90000
         nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
     }
     
-    func nextItems(sortBy: SortType, sortOrder: SortOrder, success: @escaping ListRemoveAlbums, fail:@escaping FailRemoteItems ) {
+    func nextItems(sortBy: SortType, sortOrder: SortOrder, success: @escaping ListRemoteAlbums, fail:@escaping FailRemoteItems ) {
         debugLog("AlbumService nextItems")
 
         let serchParam = AlbumParameters(fieldName: contentType,

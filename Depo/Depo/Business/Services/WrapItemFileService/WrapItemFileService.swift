@@ -81,7 +81,7 @@ class WrapItemFileService: WrapItemFileOperations {
                 
                 let list: [String] = localAssetsW.map { $0.localIdentifier }
                 //                DispatchQueue.main.async {
-                CoreDataStack.default.removeLocalMediaItems(with: list, completion: {})
+                MediaItemOperationsService.shared.removeLocalMediaItems(with: list, completion: {})
                 ItemOperationManager.default.deleteItems(items: deleteFiles)
                 //                }
                 success?()
@@ -197,7 +197,7 @@ class WrapItemFileService: WrapItemFileOperations {
         remoteFileService.detail(uuids: item.uuid, success: success, fail: fail)
     }
     
-    func details(items: [WrapData], success: ListRemoveItems?, fail: FailResponse?) {
+    func details(items: [WrapData], success: ListRemoteItems?, fail: FailResponse?) {
         let items = remoteItemsUUID(files: items)
         remoteFileService.details(uuids: items, success: success, fail: fail)
     }

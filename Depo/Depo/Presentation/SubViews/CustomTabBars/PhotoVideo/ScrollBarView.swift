@@ -14,7 +14,7 @@ protocol ScrollBarViewDelegate: class {
 }
 
 /// https://github.com/TimOliver/TOScrollBar
-final class ScrollBarView: UIView {    
+final class ScrollBarView: UIView {
     
     weak var delegate: ScrollBarViewDelegate?
     
@@ -110,19 +110,19 @@ final class ScrollBarView: UIView {
     }
     
     private func hideLabelAnimated() {
-        UIView.animate(withDuration: animationDuration, delay: hideAnimationDelay, animations: { 
+        UIView.animate(withDuration: animationDuration, delay: hideAnimationDelay, animations: {
             self.insetsLabel.alpha = 0
         }, completion: nil)
     }
     
     private func showLabelAnimated() {
-        UIView.animate(withDuration: self.animationDuration) { 
+        UIView.animate(withDuration: self.animationDuration) {
             self.insetsLabel.alpha = 1
         }
     }
     
     private func setup() {
-//        addSubview(trackView)
+        //        addSubview(trackView)
         addSubview(handleView)
         addSubview(insetsLabel)
         
@@ -193,14 +193,14 @@ final class ScrollBarView: UIView {
         let halfWidth = scrollBarWidth * 0.5
         
         /// maybe will be need for instes
-//        let contentInset: UIEdgeInsets
-//        if #available(iOS 11.0, *) {
-//            contentInset = scrollView.adjustedContentInset
-//        } else {
-//            contentInset = scrollView.contentInset
-//        }
+        //        let contentInset: UIEdgeInsets
+        //        if #available(iOS 11.0, *) {
+        //            contentInset = scrollView.adjustedContentInset
+        //        } else {
+        //            contentInset = scrollView.contentInset
+        //        }
         
-//        scrollViewFrame.size.height -= contentInset.top + contentInset.bottom
+        //        scrollViewFrame.size.height -= contentInset.top + contentInset.bottom
         
         let largeTitleDelta: CGFloat
         if isInsetForLargeTitles {
@@ -229,7 +229,7 @@ final class ScrollBarView: UIView {
             frame.origin.y = originalYOffset
         } else {
             frame.origin.y = verticalInset.top
-//            frame.origin.y += contentInset.top
+            //            frame.origin.y += contentInset.top
             frame.origin.y += largeTitleDelta
         }
         
@@ -257,7 +257,7 @@ final class ScrollBarView: UIView {
                                  y: 0, width: handleWidth, height: heightOfHandleForContentSize)
         
         // Work out the y offset of the handle
-        // TODO: check other scrollView.contentInset for 
+        // TODO: check other scrollView.contentInset for
         let contentInset: UIEdgeInsets
         if #available(iOS 11.0, *) {
             contentInset = scrollView.safeAreaInsets
@@ -285,7 +285,7 @@ final class ScrollBarView: UIView {
         //        guard let scrollView = scrollView else {
         //            return scrollBarHandleMinHeight
         //        }
-        //        
+        //
         //        let heightRatio = scrollView.frame.height / scrollView.contentSize.height
         //        let height = frame.height * heightRatio
         //        return max(floor(height), scrollBarHandleMinHeight)
@@ -443,7 +443,7 @@ final class ScrollBarView: UIView {
         scrollView?.isScrollEnabled = true
         isDragging = false
         
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [], animations: { 
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [], animations: {
             self.layoutInScrollView()
             self.layoutIfNeeded()
         }, completion: nil)
@@ -462,7 +462,7 @@ final class ScrollBarView: UIView {
         scrollView?.isScrollEnabled = result != self
         return result
         
-    }    
+    }
 }
 
 private extension UIImage {

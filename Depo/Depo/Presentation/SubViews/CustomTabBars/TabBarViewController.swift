@@ -21,7 +21,6 @@ enum FloatingButtonsType {
 enum TabScreenIndex: Int {
     case homePageScreenIndex = 0
     case photosScreenIndex = 1
-    case videosScreenIndex = 2
     case musicScreenIndex = 3
     case documentsScreenIndex = 4
 }
@@ -235,9 +234,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     @objc func showVideosScreen(_ sender: Any) {
-        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
-        selectedIndex = TabScreenIndex.videosScreenIndex.rawValue
-        lastPhotoVideoIndex = TabScreenIndex.videosScreenIndex.rawValue
+//        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
+//        selectedIndex = TabScreenIndex.videosScreenIndex.rawValue
+//        lastPhotoVideoIndex = TabScreenIndex.videosScreenIndex.rawValue
     }
     
     @objc func showMusicBar(_ sender: Any) {
@@ -356,8 +355,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         syncContactsVC.tabBarSetup = true
         
         let list = [router.homePageScreen,
-                    router.photosScreen,
-                    router.videosScreen,
+                    router.segmentedController(with: [PhotoVideoController.initPhotoFromNib(), PhotoVideoController.initVideoFromNib()]),
                     syncContactsVC,
                     router.segmentedFiles]
         customNavigationControllers = list.flatMap { NavigationController(rootViewController: $0!) }
@@ -646,8 +644,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         if var tabbarSelectedIndex = (tabBar.items?.index(of: item)) {
             
             if tabbarSelectedIndex == TabScreenIndex.photosScreenIndex.rawValue,
-                (lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue ||
-                    lastPhotoVideoIndex == TabScreenIndex.videosScreenIndex.rawValue ) {
+                lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue
+            {
                 tabbarSelectedIndex = lastPhotoVideoIndex
                 tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
             } else {
@@ -660,6 +658,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             if tabbarSelectedIndex == selectedIndex && arrayOfIndexesOfViewsThatShouldntBeRefreshed.contains(tabbarSelectedIndex) {
                 return
             }
+            
+            if tabbarSelectedIndex > 2 {
+                tabbarSelectedIndex -= 1
+            }
+            
             selectedIndex = tabbarSelectedIndex
             
             if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {

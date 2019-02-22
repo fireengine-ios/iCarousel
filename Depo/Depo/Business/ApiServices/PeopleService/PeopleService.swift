@@ -185,7 +185,7 @@ final class PeopleItemsService: RemoteItemsService {
         super.init(requestSize: requestSize, fieldValue: .image)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         let param = PeoplePageParameters(pageSize: requestSize, pageNumber: currentPage)
         
         service.getPeoplePage(param: param, success: { [weak self] response in
@@ -207,7 +207,7 @@ final class PeopleItemsService: RemoteItemsService {
         })
     }
     
-    func searchPeople(text: String, success: ListRemoveItems?, fail: FailRemoteItems?) {
+    func searchPeople(text: String, success: ListRemoteItems?, fail: FailRemoteItems?) {
         service.searchPeople(text: text, success: { response in
             if let response = response as? PeopleServiceResponse {
                 success?(response.list.map({ PeopleItem(response: $0) }))

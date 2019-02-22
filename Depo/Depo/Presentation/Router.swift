@@ -26,6 +26,12 @@ class RouterVC: NSObject {
         let nController = navigationController
         let viewController = nController?.viewControllers.last
         
+        if let segmentedVC = viewController as? SegmentedController,
+            let vc = segmentedVC.currentController as? BaseViewController
+        {
+            return vc.floatingButtonsArray
+        }
+        
         if let baseViewController = viewController as? BaseViewController {
             return baseViewController.floatingButtonsArray
         }
@@ -382,6 +388,10 @@ class RouterVC: NSObject {
         
         let controller = HomePageModuleInitializer.initializeViewController(with: "HomePage")
         return controller
+    }
+    
+    func segmentedController(with controllers: [UIViewController]) -> SegmentedController {
+        return SegmentedController.initWithControllers(controllers)
     }
     
     

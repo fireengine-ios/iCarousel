@@ -41,7 +41,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             guard let `self` = self else {
                 return
             }
-            CoreDataStack.default.getLocalDuplicates(remoteItems: self.getDuplicatesObjects(), duplicatesCallBack: { [weak self] items in
+            MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: self.getDuplicatesObjects(), duplicatesCallBack: { [weak self] items in
                 self?.dispatchQueue.async { [weak self] in
                     guard let `self` = self else {
                         checkedArray([])
@@ -149,7 +149,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     }
     
     func checkFreeAppSpace() {
-        if CoreDataStack.default.inProcessAppendingLocalFiles {
+        if MediaItemOperationsService.shared.inProcessAppendingLocalFiles {
             NotificationCenter.default.addObserver(self,
                                                    selector: #selector(onLocalFilesHaveBeenLoaded),
                                                    name: Notification.Name.allLocalMediaItemsHaveBeenLoaded,
@@ -219,7 +219,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
     }
     
-    func startSearchDuplicates(finished: @escaping VoidHandler) {
+    func startSearchDuplicates(finished: @escaping() -> Void) {
         if (isSearchRunning) {
             needSearchAgain = true
             return
@@ -235,47 +235,44 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         duplicatesArray.removeAll()
         serverDuplicatesArray.removeAll()
         
-        dispatchQueue.async { [weak self] in
-            
-            self?.allLocalItems(completion: { [weak self] localItems in
-                guard let `self` = self else {
-                    return
-                }
-                
-                self.localtemsArray.append(localItems.sorted { item1, item2 -> Bool in
-                    if let date1 = item1.creationDate, let date2 = item2.creationDate {
-                        if (date1 > date2) {
-                            return true
-                        }
+        MediaItemOperationsService.shared.allLocalItems() { [weak self] localItems in
+            guard let `self` = self else {
+                return
+            }
+            self.localtemsArray.append(localItems.sorted { item1, item2 -> Bool in
+                if let date1 = item1.creationDate, let date2 = item2.creationDate {
+                    if (date1 > date2) {
+                        return true
                     }
-                    return false
-                })
-                
-                self.localMD5Array.append( self.localtemsArray.flatMap{ $0.md5 })
-                self.localTrimmedID.append( self.localtemsArray.flatMap{ $0.getTrimmedLocalID() })
-                let latestDate = self.localtemsArray.last?.creationDate ?? Date()
-                
-                //need to check have we duplicates
-                if self.localtemsArray.count > 0 {
-                    self.photoVideoService = PhotoAndVideoService(requestSize: self.numberElementsInRequest)
-                    self.getDuplicatesObjects(latestDate: latestDate, success: { [weak self] in
-                        guard let self_ = self else {
-                            return
-                        }
-                        if (self_.duplicatesArray.count > 0) {
-                            debugPrint("duplicates count = ", self_.duplicatesArray.count)
-                        } else {
-                            debugPrint("have no duplicates")
-                        }
-                        finished()
-                        }, fail: {
-                            finished()
-                    })
-                } else {
-                    finished()
                 }
+                return false
             })
+            
+            self.localMD5Array.append( self.localtemsArray.flatMap{ $0.md5 })
+            self.localTrimmedID.append( self.localtemsArray.flatMap{ $0.getTrimmedLocalID() })
+            let latestDate = self.localtemsArray.last?.creationDate ?? Date()
+            
+            //need to check have we duplicates
+            if self.localtemsArray.count > 0 {
+                self.photoVideoService = PhotoAndVideoService(requestSize: self.numberElementsInRequest)
+                self.getDuplicatesObjects(latestDate: latestDate, success: { [weak self] in
+                    guard let self_ = self else {
+                        return
+                    }
+                    if (self_.duplicatesArray.count > 0) {
+                        debugPrint("duplicates count = ", self_.duplicatesArray.count)
+                    } else {
+                        debugPrint("have no duplicates")
+                    }
+                    finished()
+                    }, fail: {
+                        finished()
+                })
+            } else {
+                finished()
+            }
         }
+        
     }
     
     private func getDuplicatesObjects(latestDate: Date,
@@ -344,11 +341,6 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
             fail()
         }, newFieldValue: nil)
     }
-    
-    private func allLocalItems(completion: @escaping LocalFilesCallBack) {
-        CoreDataStack.default.allLocalItems(completion: completion)
-    }
-    
 
     func getLocalFiesComaredWithServerObjectsAndClearFreeAppSpace(serverObjects: [WrapData], localObjects: [WrapData]) -> [WrapData] {
         var comparedFiles = [WrapData]()
@@ -432,7 +424,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
     
     func finishedDownloadFile(file: WrapData) {
         if !file.isLocalItem {
-            CoreDataStack.default.getLocalDuplicates(remoteItems: [file], duplicatesCallBack: { [weak self] items in
+            MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: [file], duplicatesCallBack: { [weak self] items in
                 guard let `self` = self else {
                     return
                 }
@@ -507,7 +499,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
                 }
                 networksObjects = networksObjectsForDelete
                 
-                CoreDataStack.default.getLocalDuplicates(remoteItems: networksObjects, duplicatesCallBack: { [weak self] items in
+                MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: networksObjects, duplicatesCallBack: { [weak self] items in
                     guard let `self` = self else {
                         return
                     }
@@ -551,7 +543,7 @@ class FreeAppService: RemoteItemsService {
         super.init(requestSize: 9999, fieldValue: .audio)
     }
     
-    func allItems(success: ListRemoveItems?, fail: FailRemoteItems?) {
+    func allItems(success: ListRemoteItems?, fail: FailRemoteItems?) {
         if self.isGotAll {
             success?([])
             return
@@ -563,7 +555,7 @@ class FreeAppService: RemoteItemsService {
         }
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         allItems(success: success, fail: fail)
     }
     

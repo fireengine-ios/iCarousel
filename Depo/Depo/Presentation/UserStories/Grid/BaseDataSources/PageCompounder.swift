@@ -21,13 +21,10 @@ final class PageCompounder {
     
     var pageSize: Int = NumericConstants.numberOfLocalItemsOnPage
     
-    private let coreData = CoreDataStack.default
+    private let coreData = MediaItemOperationsService.shared
     
-    private var lastLocalPageAddedAction: CoreDataStack.AppendingLocalItemsPageAppended?
-    
-    init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(onLastLocalPageAppendedToDB(notification:)), name: Notification.Name.notificationNewLocalPageAppended, object: nil)
-    }
+    private var lastLocalPageAddedAction: AppendingLocalItemsPageAppended?
+
     
     private func compoundItems(pageItems: [WrapData],
                                sortType: SortedRules,
@@ -41,7 +38,7 @@ final class PageCompounder {
         
         let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filterPredicate, predicate])
         
-        let requestContext = coreData.newChildBackgroundContext
+        let requestContext = CoreDataStack.default.newChildBackgroundContext
         
         let request = NSFetchRequest<MediaItem>()
         request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
@@ -366,18 +363,6 @@ final class PageCompounder {
         }
     }
     
-    //MARK:- Notification
-    
-    @objc func onLastLocalPageAppendedToDB(notification: Notification) {
-        guard let innerCallback = lastLocalPageAddedAction,
-            let userInfo = notification.userInfo else {
-            
-            return
-        }
-        let items = userInfo[CoreDataStack.notificationNewLocalPageAppendedFilesKey] as? [WrapData]
-        innerCallback(items ?? [])
-        
-    }
     
     // MARK: - sorting
     fileprivate func sortByCurrentType(items: [WrapData], sortType: SortedRules) -> [WrapData] {

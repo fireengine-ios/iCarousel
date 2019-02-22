@@ -84,10 +84,11 @@ extension VideoSyncService: BackgroundTaskServiceDelegate {
         if status == .executing, ReachabilityService().isReachableViaWWAN, !lastInterruptedItemsUUIDs.isEmpty {
             storageVars.interruptedSyncVideoQueueItems = lastInterruptedItemsUUIDs
             debugLog("Interrupted autosync queue:")
-            CoreDataStack.default.allLocalItems(trimmedLocalIds: lastInterruptedItemsUUIDs) { localItems in
-                localItems.forEach { debugLog($0.name ?? "") }
-            }            
-            stop()
+            
+            MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: lastInterruptedItemsUUIDs) { [weak self] mediaItems in
+                mediaItems.forEach { debugLog($0.name ?? "") }
+                self?.stop()
+            }
         }
     }
 }

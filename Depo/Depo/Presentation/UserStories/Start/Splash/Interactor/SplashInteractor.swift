@@ -49,6 +49,7 @@ class SplashInteractor: SplashInteractorInput {
             }
         } else {
             SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
+                CacheManager.shared.actualizeCache(completion: nil)
                 self?.successLogin()
             }, fail: { [weak self] error in
                 /// we don't need logout here
@@ -122,7 +123,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func clearAllPreviouslyStoredInfo() {
-        CoreDataStack.default.clearDataBase()
+        MediaItemOperationsService.shared.clearDataBase()
     }
     
     func updateUserLanguage() {

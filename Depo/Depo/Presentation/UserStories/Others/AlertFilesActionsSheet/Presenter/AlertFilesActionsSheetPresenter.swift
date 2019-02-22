@@ -112,6 +112,13 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
     
+    func show(with types: [ElementTypes], for items: [WrapData], presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?) {
+        let actions = constractActions(with: types, for: items)
+        DispatchQueue.main.async {
+            self.presentAlertSheet(with: actions, presentedBy: sender, viewController: viewController)
+        }
+    }
+    
     private func adjastActionTypes(for items: [Item]) -> [ElementTypes] {
         var actionTypes: [ElementTypes] = []
         if items.count == 1, let item = items.first {
@@ -188,7 +195,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     filteredActionTypes.remove(at: removeFromFavorites)
                 }
                 
-                CoreDataStack.default.getLocalDuplicates(remoteItems: remoteItems, duplicatesCallBack: { [weak self] items in
+                MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems, duplicatesCallBack: { [weak self] items in
                     let localDuplicates = items
                     if localDuplicates.isEmpty, let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
                         filteredActionTypes.remove(at: index)
@@ -399,7 +406,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     })
                     
                     action = UIAlertAction(title: "", style: .default, handler: nil)
-                    CoreDataStack.default.getLocalDuplicates(remoteItems: serverObjects, duplicatesCallBack: { [weak self] items in
+                    MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: serverObjects, duplicatesCallBack: { [weak self] items in
                         let localDuplicates = items
                         action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
                             MenloworksAppEvents.onDeleteClicked()

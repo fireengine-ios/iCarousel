@@ -9,6 +9,7 @@
 import Foundation
 import Photos
 import SDWebImage
+import SwiftyJSON
 
 typealias Item = WrapData
 typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void
@@ -850,6 +851,70 @@ class WrapData: BaseDataSourceItem, Wrappered {
         id = remote.id
     }
     
+    init(searchResponse: JSON) {
+        let fileUUID = searchResponse[SearchJsonKey.uuid].string ?? ""
+        fileSize = searchResponse[SearchJsonKey.bytes].int64 ?? 0
+        favorites = metaData?.favourite ?? false
+        patchToPreview = .remoteUrl(URL(string: ""))///????
+        status = Status(string:searchResponse[SearchJsonKey.status].string)
+        super.init(uuid: fileUUID)
+        
+        creationDate = searchResponse[SearchJsonKey.createdDate].date
+        lastModifiDate = searchResponse[SearchJsonKey.lastModifiedDate].date
+        id = searchResponse[SearchJsonKey.id].int64
+        md5 = searchResponse[SearchJsonKey.hash].string ?? "not hash"
+        name = searchResponse[SearchJsonKey.name].string
+        uuid = fileUUID
+        
+        mimeType = searchResponse[SearchJsonKey.content_type].string
+        fileType = FileType(type: mimeType, fileName: name)
+        metaData = BaseMetaData(withJSON: searchResponse[SearchJsonKey.metadata])
+        isFolder = searchResponse[SearchJsonKey.folder].bool
+//        uploaderDeviceType = searchResponse[SearchJsonKey.uploaderDeviceType].string
+        parent = searchResponse[SearchJsonKey.parent].string
+        tmpDownloadUrl = searchResponse[SearchJsonKey.tempDownloadURL].url
+        
+//        subordinates = searchResponse[SearchJsonKey.subordinates].array
+        albums = searchResponse[SearchJsonKey.album].array?.flatMap { $0.string }
+        childCount = searchResponse[SearchJsonKey.ChildCount].int64
+        
+        
+        
+        isLocalItem = false
+        syncStatus = .synced
+        setSyncStatusesAsSyncedForCurrentUser()
+        
+        var url: URL?
+        let previewIconSize: PreviewIconSize = .medium///
+        
+        switch fileType {
+        case .image, .audio, .video:
+            duration = WrapData.getDuration(duration: metaData?.duration)
+            durationValue = metaData?.duration
+            switch previewIconSize {
+            case .little : url = metaData?.smalURl
+            case .medium : url = metaData?.mediumUrl
+            case .large  : url = metaData?.largeUrl
+            } case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places), .photoAlbum:
+            if let mediumUrl = metaData?.mediumUrl {
+                url = mediumUrl
+            } else if let smallUrl = metaData?.smalURl {
+                url = smallUrl
+            } else {
+                url = nil
+            }
+        default:
+            break
+        }
+        
+        if let fileName = name {
+            md5 = "\(fileName.removeAllPreFileExtentionBracketValues())\(fileSize)"
+            debugPrint(md5)
+        }
+        
+        patchToPreview = .remoteUrl(url)
+    }
+    
     convenience init (remote: SearchItemResponse, parendfolderUUID: String?) {
         self.init(remote: remote)
         if let unwrapedFolderUUID = parendfolderUUID {
@@ -874,7 +939,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     init(mediaItem: MediaItem, asset: PHAsset? = nil) {
-//        coreDataObject = mediaItem
+        coreDataObject = mediaItem
         fileSize = mediaItem.fileSizeValue
         favorites = mediaItem.favoritesValue
         status = .unknown

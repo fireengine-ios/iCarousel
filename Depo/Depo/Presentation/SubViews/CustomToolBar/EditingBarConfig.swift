@@ -7,10 +7,7 @@
 //
 
 struct EditingBarConfig {
-    
-    let elementsConfig: [ElementTypes]
-    
+    let elementsConfig: [ElementTypes]    
     let style: UIBarStyle
-    
     let tintColor: UIColor?
 }

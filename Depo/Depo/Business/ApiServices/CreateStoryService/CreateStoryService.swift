@@ -133,7 +133,7 @@ class CreateStoryMusicService: RemoteItemsService {
         super.init(requestSize: 9999, fieldValue: .audio)
     }
     
-    func allItems(success: ListRemoveItems?, fail: FailRemoteItems?) {
+    func allItems(success: ListRemoteItems?, fail: FailRemoteItems?) {
         debugLog("CreateStoryMusicService allItems")
      
         let requestService = BaseRequestService(transIdLogging: true)
@@ -172,7 +172,7 @@ class CreateStoryMusicService: RemoteItemsService {
         requestService.executeGetRequest(param: CreateStoryMusicList(), handler: handler)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         debugLog("CreateStoryMusicService nextItems")
 
         allItems(success: success, fail: fail)

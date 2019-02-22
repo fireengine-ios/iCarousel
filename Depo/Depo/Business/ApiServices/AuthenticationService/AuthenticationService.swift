@@ -324,6 +324,7 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                            CacheManager.shared.actualizeCache(completion: nil)
                             sucess?(headers)
                             MenloworksAppEvents.onLogin()
                         }, fail: { error in
@@ -366,6 +367,7 @@ class AuthenticationService: BaseRequestService {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                    CacheManager.shared.actualizeCache(completion: nil)
                     sucess?()
                 }, fail: { error in
                     fail?(error)
@@ -387,7 +389,7 @@ class AuthenticationService: BaseRequestService {
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
-            CoreDataStack.default.clearDataBase()
+            MediaItemOperationsService.shared.clearDataBase()
             FreeAppSpace.default.clear()
             CardsManager.default.stopAllOperations()
             CardsManager.default.clear()

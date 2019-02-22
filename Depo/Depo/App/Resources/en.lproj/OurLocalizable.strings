@@ -133,6 +133,7 @@
 
 /*I cant understand*/
 "Auto Sync Preparation" = "Auto Sync Preparation";
+"Quick Scroll Preparation" = "Quick Scroll Preparation";
 "Sync with data plan" = "Sync with data plan";
 "Waiting for Wi-Fi connection to auto-sync" = "Waiting for Wi-Fi connection to auto-sync";
 "Auto Upload is off.\nGo to setting to auto sync." = "Auto sync is off.\nGo to setting to auto sync";
@@ -673,6 +674,7 @@
 "facebook_tags_on" = "You will get your Facebook tags to lifebox when you enable this option";
 "facebook_tags_off" = "You will get your Facebook tags to lifebox when you enable this option";
 "facebook_tags_import" = "Please enable \"Import from Facebook\" option to use \"Facebook Tag Transfer\" feature";
+"facebook_tags_import" = "Please enable \"Facebook Import\\\" option to use \\\"Facebook Tag Transfer\\\" feature";
 "TermsOfUseLinkText" = "TapHere";
 "launch_campaign_card_detail" = "Details";
 "launch_campaign_card_title" = "Prague Campaign";

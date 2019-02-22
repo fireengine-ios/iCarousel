@@ -23,17 +23,14 @@ public class MediaItem: NSManagedObject {
         idValue = wrapData.id ?? -1
 
         nameValue = wrapData.name
-
-        let char: Character = nameValue?.first ?? " "
-        
-        fileNameFirstChar = String(describing: char).uppercased()
         
         fileTypeValue = wrapData.fileType.valueForCoreDataMapping()
         fileSizeValue = wrapData.fileSize
         syncStatusValue = wrapData.syncStatus.valueForCoreDataMapping()
         favoritesValue = wrapData.favorites
         isLocalItemValue = wrapData.isLocalItem
-        creationDateValue = wrapData.creationDate as NSDate?
+        creationDateValue = wrapData.metaDate as NSDate?//wrapData.creationDate as NSDate?
+        ///need to discuss that, we might use creation date after all.
         lastModifiDateValue = wrapData.lastModifiDate as NSDate?
         urlToFileValue = wrapData.urlToFile?.absoluteString
         
@@ -47,11 +44,29 @@ public class MediaItem: NSManagedObject {
         case let .localMediaContent(assetContent):
             let localID = assetContent.asset.localIdentifier
             localFileID = localID
-            trimmedLocalFileID = localID.components(separatedBy: "/").first ?? localID
             patchToPreviewValue = nil
         }
         
         md5Value = wrapData.md5
+        trimmedLocalFileID = wrapData.getTrimmedLocalID()
+        
+        if isLocalItemValue {
+            ///This staus setup only works when all remotes added beforehand
+            let relatedTothisItemsRemotes = getAllRelatedItems(wrapItem: wrapData, findRelatedLocals: !isLocalItemValue, context: context)
+            relatedRemotes = NSSet(array: relatedTothisItemsRemotes)
+            updateLocalRelated(remotesMediaItems: relatedTothisItemsRemotes)
+        }
+            //TODO:CODE BELOW NEED TO BE TESTED
+        else {
+            let relatedTothisItemsLocals = getAllRelatedItems(wrapItem: wrapData, findRelatedLocals: isLocalItemValue, context: context)
+            relatedLocal = relatedTothisItemsLocals.first
+            updateRemoteRelated(localMediaItems: relatedTothisItemsLocals)
+        }
+        
+        if !isLocalItemValue, let md5 = md5Value, let trimmedID = trimmedLocalFileID,
+            (md5.isEmpty || trimmedID.isEmpty) {
+            debugPrint("!!! REMOTE ITEM MD5 EMPY \(md5Value) AND LOCAL ID \(trimmedLocalFileID)")
+        }
         
         let dateValue = self.creationDateValue as Date?
         
@@ -68,18 +83,54 @@ public class MediaItem: NSManagedObject {
         self.albums = NSOrderedSet(array: albums ?? [])
 
         let syncStatuses = convertToMediaItems(syncStatuses: wrapData.syncStatuses, context: context)
+        
         objectSyncStatus = syncStatuses
     }
     
-    private func convertToMediaItems(syncStatuses: [String], context: NSManagedObjectContext) -> NSSet {
-        return  NSSet(array: syncStatuses.flatMap { MediaItemsObjectSyncStatus(userID: $0, context: context) })
+    private func getRemoteTrimmedID(json: JSON) -> String  {
+        let uuid = json[SearchJsonKey.uuid].stringValue
+        if uuid.contains("~"){
+            return uuid.components(separatedBy: "~").first ?? uuid
+        }
+        return uuid
     }
     
+    private func convertToMediaItems(syncStatuses: [String], context: NSManagedObjectContext) -> NSSet {
+        return NSSet(array: syncStatuses.flatMap { MediaItemsObjectSyncStatus(userID: $0, context: context) })
+    }
+
     var wrapedObject: WrapData {
         return WrapData(mediaItem: self)
     }
     
     func wrapedObject(with asset: PHAsset) -> WrapData {
         return WrapData(mediaItem: self, asset: asset)
+    }
+}
+
+//MARK: - relations
+extension MediaItem {
+
+    private func getRelatedPredicate(item: WrapData, findRelatedLocals: Bool) -> NSPredicate {
+        return NSPredicate(format: "isLocalItemValue == %@ AND (trimmedLocalFileID == %@ OR md5Value == %@)", NSNumber(value: findRelatedLocals), item.getTrimmedLocalID(), item.md5)
+    }
+    
+    func getAllRelatedItems(wrapItem: WrapData, findRelatedLocals: Bool, context: NSManagedObjectContext)  -> [MediaItem] {
+        let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
+        request.predicate = getRelatedPredicate(item: wrapItem, findRelatedLocals: findRelatedLocals)
+        let relatedLocals = try? context.fetch(request)
+        return relatedLocals ?? []
+    }
+    
+    private func updateLocalRelated(remotesMediaItems: [MediaItem]) {
+        remotesMediaItems.forEach {
+            $0.relatedLocal = self
+        }
+    }
+    
+    private func updateRemoteRelated(localMediaItems: [MediaItem]) {
+        localMediaItems.forEach {
+            $0.relatedRemotes.adding(self)
+        }
     }
 }

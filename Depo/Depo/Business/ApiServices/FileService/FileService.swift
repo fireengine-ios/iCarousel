@@ -236,24 +236,24 @@ typealias FileOperation = () -> Void
 
 class FileService: BaseRequestService {
     
-    static let shared = FileService(transIdLogging: true)
+    static let shared = FileService()
     let downloadOperation = OperationQueue()
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.download)
     var allOperationsCount : Int = 0
     var completedOperationsCount : Int = 0
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    override init(transIdLogging: Bool = false) {
-        super.init(transIdLogging: transIdLogging)
+    init() {
+        super.init()
         downloadOperation.maxConcurrentOperationCount = 1
     }
     
     func move(moveFiles: MoveFiles, success: FileOperation?, fail: FailResponse?) {
         debugLog("FileService moveFiles: \(moveFiles.items.joined(separator: ", "))")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] response in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             debugLog("FileService move success")
-            self?.debugLogTransIdIfNeeded(headers: (response as? ObjectRequestResponse)?.response?.allHeaderFields, method: "move")
+
             success?()
         }, fail: fail)
         executePostRequest(param: moveFiles, handler: handler)
@@ -262,9 +262,9 @@ class FileService: BaseRequestService {
     func copy(copyparam: CopyFiles, success: FileOperation?, fail: FailResponse?) {
         debugLog("FileService copyFiles: \(copyparam.items.joined(separator: ", "))")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] response in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             debugLog("FileService copy success")
-            self?.debugLogTransIdIfNeeded(headers: (response as? ObjectRequestResponse)?.response?.allHeaderFields, method: "copy")
+
             success?()
         }, fail: fail)
         executePostRequest(param: copyparam, handler: handler)
@@ -273,9 +273,9 @@ class FileService: BaseRequestService {
     func delete(deleteFiles: DeleteFiles, success: FileOperation?, fail: FailResponse?) {
         debugLog("FileService deleteFiles: \(deleteFiles.items.joined(separator: ", "))")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] response in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             debugLog("FileService delete success")
-            self?.debugLogTransIdIfNeeded(headers: (response as? ObjectRequestResponse)?.response?.allHeaderFields, method: "delete")
+
             success?()
         }, fail: fail)
         executeDeleteRequest(param: deleteFiles, handler: handler)
@@ -284,9 +284,9 @@ class FileService: BaseRequestService {
     func createsFolder(createFolder: CreatesFolder, success: FileOperation?, fail: FailResponse?) {
         debugLog("FileService createFolder \(createFolder.folderName)")
         
-        let handler = BaseResponseHandler<CreateFolderResponse, ObjectRequestResponse>(success: { [weak self] response in
+        let handler = BaseResponseHandler<CreateFolderResponse, ObjectRequestResponse>(success: { _  in
             debugLog("FileService createFolder success")
-            self?.debugLogTransIdIfNeeded(headers: (response as? ObjectRequestResponse)?.response?.allHeaderFields, method: "createFolder")
+
             success?()
         }, fail: fail)
         executePostRequest(param: createFolder, handler: handler)
@@ -295,9 +295,9 @@ class FileService: BaseRequestService {
     func rename(rename: RenameFile, success: FileOperation?, fail: FailResponse?) {
         debugLog("FileService rename \(rename.newName)")
         
-        let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { [weak self] response in
+        let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { y  in
             debugLog("FileService rename success")
-            self?.debugLogTransIdIfNeeded(headers: (response as? ObjectRequestResponse)?.response?.allHeaderFields, method: "rename")
+
             success?()
         }, fail: fail)
         executePostRequest(param: rename, handler: handler)
@@ -417,7 +417,7 @@ class FileService: BaseRequestService {
             success?()
             return
         }
-        executeDownloadRequest(param: downloadParam) { [weak self] url, urlResponse, error in
+        executeDownloadRequest(param: downloadParam) { url, urlResponse, error in
             
             if let err = error {
                 fail?(.error(err))
@@ -430,38 +430,57 @@ class FileService: BaseRequestService {
                     
                     let destination = Device.documentsFolderUrl(withComponent: downloadParam.fileName)
                     
+                    let removeDestinationFile: () -> Void = {
+
+                        do {
+                            try FileManager.default.removeItem(at: destination)
+                        } catch { }
+                    }
+                    
                     do {
                         try FileManager.default.moveItem(at: location, to: destination)
                     } catch {
-                        fail?(.string("Download move file error"))
+                        
+                        fail?(.string("Downoad move file error"))
                         return
                     }
                     
-                    let type: PHAssetMediaType
+                    var type = PHAssetMediaType.unknown
+                    
                     switch downloadParam.contentType {
                         case .image : type = .image
                         case .video : type = .video
-                        default     : type = .unknown
+                        default     : break
                     }
                     
-                    if let item = downloadParam.item {
-                        CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()], completion: { [weak self] mediaItems in
-                            if let mediaItem = mediaItems.first {
-                                ///For now we do not update local files by remotes
-//                                CoreDataStack.default.updateSavedItems(savedItems: [mediaItem],
-//                                                                       remoteItems: [item],
-//                                                                       context: CoreDataStack.default.newChildBackgroundContext)
-                                self?.removeFile(at: destination)
+                    if let downloadItem = downloadParam.item {
+                        MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS: [downloadItem.getTrimmedLocalID()]) { mediaItems in
+                            if mediaItems.first != nil {
+                                removeDestinationFile()
                                 success?()
                             } else {
-                                self?.saveToAlbum(fileUrl: destination, type: type, album: downloadParam.albumName, item: downloadParam.item, success: success, fail: fail)
+                                LocalMediaStorage.default.appendToAlboum(fileUrl: destination,
+                                                                         type: type,
+                                                                         album: downloadParam.albumName,
+                                                                         item: downloadParam.item,
+                                                                         success: {
+                                                                            removeDestinationFile()
+                                                                            success?()
+                                }, fail: { error in
+                                    removeDestinationFile()
+                                    fail?(error)
+                                })
                             }
-                        })
+                        }
+                        
+                        ///For now we do not update local files by remotes
+//                        CoreDataStack.default.updateSavedItems(savedItems: [mediaItem],
+//                                                               remoteItems: [item],
+//                                                               context: CoreDataStack.default.newChildBackgroundContext)
+                        
                     } else {
-                        self?.saveToAlbum(fileUrl: destination, type: type, album: downloadParam.albumName, item: downloadParam.item, success: success, fail: fail)
+                      fail?(.string("Incorrect response "))
                     }
-                    
-                    self?.debugLogTransIdIfNeeded(headers: httpResponse.allHeaderFields, method: "downloadToCameraRoll")
                 } else {
                     fail?(.string("Incorrect response "))
                     return
@@ -471,24 +490,6 @@ class FileService: BaseRequestService {
                 return
             }
         }
-    }
-    
-    private func removeFile(at url: URL) {
-        do {
-            try FileManager.default.removeItem(at: url)
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
-    
-    private func saveToAlbum(fileUrl: URL, type: PHAssetMediaType, album: String?, item: WrapData?, success: FileOperation?, fail: FailResponse?) {
-        LocalMediaStorage.default.appendToAlboum(fileUrl: fileUrl, type: type, album: album, item: item, success: { [weak self] in
-            self?.removeFile(at: fileUrl)
-            success?()
-        }, fail: { [weak self] error in
-            self?.removeFile(at: fileUrl)
-            fail?(error)
-        })
     }
     
     private func trackDownloaded(lastQueueItems: [Item]) {
@@ -506,7 +507,7 @@ class FileService: BaseRequestService {
                         handler: handler)
     }
     
-    func details(uuids: [String], success: ListRemoveItems?, fail: FailResponse?) {
+    func details(uuids: [String], success: ListRemoteItems?, fail: FailResponse?) {
         
         let param = FileDetails(uuids: uuids)
         let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { responce in
@@ -539,7 +540,7 @@ class FileService: BaseRequestService {
     
     func filesList(rootFolder: String = "", sortBy: SortType, sortOrder: SortOrder,
                    folderOnly: Bool = false, remoteServicePage: Int,
-                   success: ListRemoveItems?, fail: FailRemoteItems?) {
+                   success: ListRemoteItems?, fail: FailRemoteItems?) {
         page = remoteServicePage
         let requestParam = FileList(rootDir: rootFolder,
                                     sortBy: sortBy,
@@ -547,19 +548,15 @@ class FileService: BaseRequestService {
                                     page: page,
                                     size: size,
                                     folderOnly: folderOnly)
-        let handler = BaseResponseHandler<FileListResponse, ObjectRequestResponse>(success: { [weak self] response in
-            guard let resultResponse = response as? FileListResponse else {
+        let handler = BaseResponseHandler<FileListResponse, ObjectRequestResponse>(success: { response in
+            guard let resultResponse = (response as? FileListResponse)?.fileList else {
                 fail?()
                 return
             }
-            success?(resultResponse.fileList)
-            
-            self?.debugLogTransIdIfNeeded(headers: resultResponse.response?.allHeaderFields, method: "filesList")
-        }, fail: { [weak self] errorResponse in
+            success?(resultResponse)
+        }, fail: { errorResponse in
             errorResponse.showInternetErrorGlobal()
             fail?()
-            
-            self?.debugLogTransIdIfNeeded(errorResponse: errorResponse, method: "filesList")
         })
         
         executeGetRequest(param: requestParam, handler: handler)
