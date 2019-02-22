@@ -659,15 +659,15 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 return
             }
             
+            if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
+                log(for: tabScreenIndex)
+            }
+            
             if tabbarSelectedIndex > 2 {
                 tabbarSelectedIndex -= 1
             }
             
             selectedIndex = tabbarSelectedIndex
-            
-            if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
-                log(for: tabScreenIndex)
-            }
         }
     }
 }
