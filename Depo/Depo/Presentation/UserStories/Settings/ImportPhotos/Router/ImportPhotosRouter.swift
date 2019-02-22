@@ -8,19 +8,19 @@
 
 import Foundation
 
-class ImportFromFBRouter: ImportFromFBRouterInput {
-    func goToOnboarding() {
-        let router = RouterVC()
-        router.setNavigationController(controller: router.onboardingScreen)
-    }
-}
-
-class ImportFromDropboxRouter: ImportFromDropboxRouterInput {
-    func goToOnboarding() {
-        let router = RouterVC()
-        router.setNavigationController(controller: router.onboardingScreen)
-    }
-}
+//class ImportFromFBRouter: ImportFromFBRouterInput {
+//    func goToOnboarding() {
+//        let router = RouterVC()
+//        router.setNavigationController(controller: router.onboardingScreen)
+//    }
+//}
+//
+//class ImportFromDropboxRouter: ImportFromDropboxRouterInput {
+//    func goToOnboarding() {
+//        let router = RouterVC()
+//        router.setNavigationController(controller: router.onboardingScreen)
+//    }
+//}
 
 class ImportFromInstagramRouter: ImportFromInstagramRouterInput {
     func openInstagramAuth(param: InstagramConfigResponse, delegate: InstagramAuthViewControllerDelegate?) {

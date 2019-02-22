@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class InstaPickDetailViewController: UIViewController {
+final class InstaPickDetailViewController: UIViewController, ControlTabBarProtocol {
     
     private enum PhotoViewType: String {
         case bigView = "bigView"
@@ -42,8 +42,8 @@ final class InstaPickDetailViewController: UIViewController {
     
     @IBOutlet private weak var darkView: UIView!
     @IBOutlet private weak var containerView: UIView!
-    @IBOutlet private weak var smallPhotosContainerView: UIView!
     @IBOutlet private weak var smallPhotosStackView: UIStackView!
+    @IBOutlet private weak var smallPhotosContainerView: UIView!
     @IBOutlet private weak var photosStackView: UIStackView!
     
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -54,11 +54,13 @@ final class InstaPickDetailViewController: UIViewController {
     private var dataSource = InstaPickHashtagCollectionViewDataSource()
     private var isShown = false
     private var selectedPhoto: InstapickAnalyze?
+    private var isShowTabBar = true
     
     private var analyzes: [InstapickAnalyze] = []
     private var analyzesCount: InstapickAnalyzesCount?
     
     private lazy var activityManager = ActivityIndicatorManager()
+        
     //MARK: lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,10 +73,17 @@ final class InstaPickDetailViewController: UIViewController {
         open()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        showTabBarIfNeeded()
+    }
+    
     //MARK: - Utility Methods(public)
-    func configure(with models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount) {
+    func configure(with models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount, isShowTabBar: Bool) {
         analyzes = models
         self.analyzesCount = analyzesCount
+        self.isShowTabBar = isShowTabBar
     }
     
     //MARK: - Utility Methods(private)
@@ -127,14 +136,14 @@ final class InstaPickDetailViewController: UIViewController {
             if let id = view.restorationIdentifier, let type = PhotoViewType(rawValue: id), type.index <= maxIndex {
                 let analyze = analyzes[type.index]
                 
-                view.configureImageView(with: analyze, delegate: self)
+                view.configureImageView(with: analyze, delegate: self, smallPhotosCount: maxIndex)
             } else {
                 view.isHidden = true
             }
         }
         
         if maxIndex == 0 {
-            photosStackView.removeArrangedSubview(smallPhotosContainerView)
+            smallPhotosContainerView.isHidden = true
         }
     }
     
@@ -147,20 +156,22 @@ final class InstaPickDetailViewController: UIViewController {
     }
     
     private func setupFonts() {
-        topLabel.font = UIFont.TurkcellSaturaBolFont(size: 28)
-        topLabel.textColor = ColorConstants.darcBlueColor
+        let isIPad = Device.isIpad
         
-        analysisLeftLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        topLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 38 : 28)
+        topLabel.textColor = ColorConstants.darkBlueColor
+        
+        analysisLeftLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
         analysisLeftLabel.textColor = ColorConstants.textGrayColor
         
-        hashTagsLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        hashTagsLabel.textColor = ColorConstants.darcBlueColor
+        hashTagsLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
+        hashTagsLabel.textColor = ColorConstants.darkBlueColor
         
-        copyToClipboardButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        copyToClipboardButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 19 : 14)
         copyToClipboardButton.setTitleColor(UIColor.lrTealishTwo, for: .normal)
         
         shareButton.setBackgroundColor(UIColor.white, for: .disabled)
-        shareButton.setTitleColor(ColorConstants.darcBlueColor.lighter(by: 40.0), for: .disabled)
+        shareButton.setTitleColor(ColorConstants.darkBlueColor.lighter(by: 40.0), for: .disabled)
     }
 
     private func setupTexts() {
@@ -178,7 +189,7 @@ final class InstaPickDetailViewController: UIViewController {
     private func configureShareButton(isEnabled: Bool) {
         shareButton.isEnabled = isEnabled
         
-        let color = ColorConstants.darcBlueColor.lighter(by: isEnabled ? 0 : 40).cgColor
+        let color = ColorConstants.darkBlueColor.lighter(by: isEnabled ? 0 : 40).cgColor
         
         shareButton.layer.borderColor = color
         shareButton.layer.borderWidth = isEnabled ? 0 : 2
@@ -192,11 +203,14 @@ final class InstaPickDetailViewController: UIViewController {
             showErrorWith(message: error.localizedDescription)
             return
         }
-        let text = String(format: TextConstants.instaPickLeftCountLabel, analyzesCount.left, analyzesCount.total)
+        
+        let text = analyzesCount.isFree ? TextConstants.instaPickUnlimitedLeftCountLabel :
+            String(format: TextConstants.instaPickLeftCountLabel, analyzesCount.left, analyzesCount.total)
+        
         ///if left count is 0 we seek ":"(not 0 because of RTL language) and draw in red
-        if analyzesCount.left == 0, let location = text.firstIndex(of: ":") {
+        if analyzesCount.left == 0, let location = text.index(of: ":"), !analyzesCount.isFree {
             let attributedString = NSMutableAttributedString(string: text, attributes: [
-                .font : UIFont.TurkcellSaturaDemFont(size: 18),
+                .font : UIFont.TurkcellSaturaDemFont(size: Device.isIpad ? 24 : 18),
                 .foregroundColor : ColorConstants.textGrayColor,
                 .kern : 0.29
                 ])
@@ -219,7 +233,7 @@ final class InstaPickDetailViewController: UIViewController {
             showErrorWith(message: error.localizedDescription)
         } else {
             analyzes.sort(by: { left, right in
-                return left.rank > right.rank
+                return left.score > right.score
             })
             
             let topRatePhoto = analyzes.first
@@ -254,17 +268,18 @@ final class InstaPickDetailViewController: UIViewController {
     }
     
     private func openImage() {
-        guard let selectedPhoto = selectedPhoto, selectedPhoto.fileInfo?.uuid != nil else {
-            ///if selected photo was deleted
+        guard
+            let selectedPhoto = selectedPhoto, selectedPhoto.fileInfo?.uuid != nil,
+            let view = instaPickPhotoViews.first(where: { $0.restorationIdentifier == PhotoViewType.bigView.rawValue }),
+            let image = view.getImage(),
+            image.size != .zero
+        else {
+            ///if selected photo was deleted/nil/zero size
             return
         }
         
         let vc = PVViewerController.initFromNib()
-        if let view = instaPickPhotoViews.first(where: { $0.restorationIdentifier == PhotoViewType.bigView.rawValue }),
-            let image = view.getImage() {
-            
-            vc.image = image
-        }
+        vc.image = image
         
         let nController = NavigationController(rootViewController: vc)
         self.present(nController, animated: true, completion: nil) ///routerVC not work
@@ -272,6 +287,10 @@ final class InstaPickDetailViewController: UIViewController {
     
     private func showErrorWith(message: String) {
         UIApplication.showErrorAlert(message: message)
+    }
+    
+    private func showTabBarIfNeeded() {
+        isShowTabBar ? showTabBar() : hideTabBar()
     }
     
     //MARK: - Actions

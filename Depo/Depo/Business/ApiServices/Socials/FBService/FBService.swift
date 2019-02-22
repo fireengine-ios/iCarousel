@@ -59,6 +59,13 @@ class FBService: BaseRequestService {
         executePostRequest(param: fb, handler: handler)
     }
     
+    func socialStatus(success: SuccessResponse?, fail: FailResponse?) {
+        debugLog("FBService socialStatus")
+        let params = SocialStatusParametrs()
+        let handler = BaseResponseHandler<SocialStatusResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: params, handler: handler)
+    }
+    
     func requestStatus(success: SuccessResponse?, fail: FailResponse?) {
         debugLog("FBService requestStatus")
 
@@ -108,6 +115,21 @@ class FBService: BaseRequestService {
                     } else {
                         handler(.success(false))
                     }
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    func disconnectFacebook(handler: @escaping (ResponseResult<Void>) -> Void) {
+        sessionManager
+            .request(RouteRequests.fbDisconnect,
+                     method: .delete)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(_):
+                    handler(.success(()))
                 case .failure(let error):
                     handler(.failed(error))
                 }

@@ -94,7 +94,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     private func configureUI() {
         welcomeLabel.text = TextConstants.termsAndUseWelcomeText
         welcomeLabel.font = UIFont.TurkcellSaturaDemFont(size: 25)
-        welcomeLabel.textColor = ColorConstants.darcBlueColor
+        welcomeLabel.textColor = ColorConstants.darkBlueColor
         
         checkboxLabel.text = TextConstants.termsAndUseCheckboxText
         checkboxLabel.font = UIFont.TurkcellSaturaRegFont(size: 12)

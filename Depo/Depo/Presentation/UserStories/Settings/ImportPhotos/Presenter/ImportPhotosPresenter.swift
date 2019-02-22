@@ -19,92 +19,154 @@ class ImportFromFBPresenter: BasePresenter {
     
     weak var view: ImportFromFBViewInput?
     var interactor: ImportFromFBInteractorInput!
-    var router: ImportFromFBRouterInput!
     
-    var facebookStatus: FBStatusObject?
+    var importIsAwaiting = false
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
 }
 
 // MARK: - ImportFromFBViewOutput
 extension ImportFromFBPresenter: ImportFromFBViewOutput {
-    
+
     func viewIsReady() {
-        analyticsService.logScreen(screen: .importPhotos)
-        analyticsService.trackDimentionsEveryClickGA(screen: .importPhotos)
         view?.startActivityIndicator()
-        interactor.requestStatus()
+        view?.startActivityIndicator()
+        
+        interactor.getAllStatuses()
     }
     
-    func startFacebook() {
-        guard let fbStatus = facebookStatus else {
-            interactor.requestStatus()
-            return
-        }
-        if fbStatus.connected == true {
-            interactor.requestStart()
-        } else {
-            interactor.requestPermissions()
-        }
+    func disconnectAccount() {
+        view?.startActivityIndicator()
+        
+        interactor.disconnectAccount()
     }
     
-    func stopFacebook() {
-        guard let fbStatus = facebookStatus else { return }
-        if fbStatus.connected == true {
-            interactor.requestStop()
-        }
+    func startImport() {
+        view?.startActivityIndicator()
+        
+        importIsAwaiting = true
+        interactor.setImport(status: true)
+    }
+    
+    func stopImport() {
+        view?.startActivityIndicator()
+        
+        interactor.setImport(status: false)
     }
 }
 
+
 // MARK: - ImportFromFBInteractorOutput
 extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
+    func tokenSuccess(token: String) {
+        interactor.connect(withToken: token)
+    }
     
-    // MARK: Status
-    
-    func statusSuccessCallback(status: FBStatusObject) {
-        facebookStatus = status
-        if status.connected == true, status.syncEnabled == true {
-            view?.succeedFacebookStart()
-            analyticsService.track(event: .importFacebook)
-            interactor.trackImportActivationFB()
-        } else {
-            view?.succeedFacebookStop()
+    func tokenFailure(errorMessage: String) {
+        view?.stopActivityIndicator()
+        
+        if errorMessage != TextConstants.NotLocalized.facebookLoginCanceled {
+            view?.connectionStatusSuccess(false)
         }
-        view?.stopActivityIndicator()
+        interactor.requestSyncStatus()
     }
     
-    func statusFailureCallback(errorMessage: String) {
-        view?.failedFacebookStatus(errorMessage: errorMessage)
+    
+    // MARK: connection
+    
+    func connectionSuccess(isConnected: Bool) {
         view?.stopActivityIndicator()
+        
+        if isConnected {
+            MenloworksAppEvents.onFacebookConnected()
+            view?.connectionStatusSuccess(isConnected)
+        }
     }
     
-    // MARK: Start
+    func connectionFailure(errorMessage: String) {
+        UIApplication.showErrorAlert(message: errorMessage)
+        view?.stopActivityIndicator()
+        view?.connectionStatusFailure(errorMessage: errorMessage)
+    }
     
-    func startSuccessCallback() {
-        view?.succeedFacebookStart()
+    func disconnectionSuccess() {
+        view?.stopActivityIndicator()
+        view?.disconnectionSuccess()
+    }
+    
+    func disconnectionFailure(errorMessage: String) {
+        view?.stopActivityIndicator()
+        view?.disconnectionFailure(errorMessage: errorMessage)
+    }
+    
+    
+    // MARK: sync status
+    
+    func syncStatusSuccess(status: Bool) {
+        view?.stopActivityIndicator()
+        if status {
+            view?.syncStatusSuccess(status)
+            analyticsService.track(event: .importFacebook)
+        } else {
+            view?.importStopSuccess()
+        }
+    }
+    
+    func syncStatusFailure(errorMessage: String) {
+        view?.stopActivityIndicator()
+        view?.syncStatusFailure()
+    }
+    
+    
+    // MARK: import
+    
+    func startImportSuccess() {
+        view?.stopActivityIndicator()
+        
+        importIsAwaiting = false
+        
         interactor.trackImportActivationFB()
         analyticsService.track(event: .importFacebook)
+        view?.importStartSuccess()
     }
     
-    func startFailureCallback(errorMessage: String) {
-        view?.failedFacebookStart(errorMessage: errorMessage)
-        interactor.requestStatus()
+    func startImportFailure(errorMessage: String) {
+        view?.stopActivityIndicator()
+        
+        importIsAwaiting = false
+        view?.importStartFailure(errorMessage: errorMessage)
     }
     
-    // MARK: Stop
-    
-    func stopSuccessCallback() {
-        view?.succeedFacebookStop()
+    func stopImportSuccess() {
+        view?.stopActivityIndicator()
+        view?.importStopSuccess()
     }
     
-    func stopFailureCallback(errorMessage: String) {
-        view?.failedFacebookStop(errorMessage: errorMessage)
-        interactor.requestStatus()
+    func stopImportFailure(errorMessage: String) {
+        view?.stopActivityIndicator()
+        view?.importStopFailure(errorMessage: errorMessage)
+    }
+    
+    
+    // MARK: authorization
+    
+    func connectionWithTokenSuccess() {
+        if importIsAwaiting {
+            startImport()
+        }
+        self.view?.stopActivityIndicator()
+    }
+    
+    func connectionWithTokenFailure(errorMessage: String) {
+        if importIsAwaiting {
+            view?.syncStatusSuccess(false)
+        }
+        view?.stopActivityIndicator()
     }
     
     // MARK: Permissions
     
-    func permissionsSuccessCallback(permissions: FBPermissionsObject) {
+    func permissionsSuccess(permissions: FBPermissionsObject) {
         view?.startActivityIndicator()
         var perms = [String]()
         if let readPerms = permissions.read {
@@ -117,38 +179,8 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
         interactor.requestToken(permissions: perms)
     }
     
-    func permissionsFailureCallback(errorMessage: String) {
-        view?.failedFacebookStart(errorMessage: errorMessage)
-        interactor.requestStatus()
-    }
-    
-    // MARK: Token
-    
-    func tokenSuccessCallback(token: String) {
-        interactor.requestConnect(withToken: token)
-    }
-    
-    func tokenFailureCallback(errorMessage: String) {
-        if errorMessage != TextConstants.NotLocalized.facebookLoginCanceled {
-            view?.failedFacebookStart(errorMessage: errorMessage)
-        }
-        interactor.requestStatus()
-    }
-    
-    // MARK: Connect
-    
-    func connectSuccessCallback() {
-        interactor.requestStart()
-        interactor.requestStatus()
-    }
-    
-    func connectFailureCallback(errorMessage: String) {
-        view?.failedFacebookStart(errorMessage: errorMessage)
-    }
-    
-    // MARK: Router
-    
-    func goToOnboarding() {
-        router.goToOnboarding()
+    func permissionsFailure(errorMessage: String) {
+        view?.stopActivityIndicator()
+        interactor.requestSyncStatus()
     }
 }

@@ -161,8 +161,6 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
             return viewsByType[.sync] == nil
         case .premium:
             return !popUps.contains(where: { $0 is PremiumInfoCard })
-        case .instaPick:
-            return !popUps.contains(where: { $0 is InstaPickCard })
         default:
             return true
         }
@@ -187,12 +185,13 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
         viewsByType[operation] = array
     }
     
-    func configureInstaPick(with totalCount: Int, leftCount: Int) {
+    func configureInstaPick(with analysisStatus: InstapickAnalyzesCount) {
         guard let instaPickCard = popUps.first(where: { $0 is InstaPickCard }) as? InstaPickCard,
-            instaPickCard.isNeedReloadWithNew(totalCount: totalCount, leftCount: leftCount),
+            instaPickCard.isNeedReloadWithNew(status: analysisStatus),
             let index = popUps.index(of: instaPickCard) else {
             return
         }
+
         let indexPath = IndexPath(item: index, section: 0)
         collectionView.performBatchUpdates({ [weak self] in
             self?.collectionView.reloadItems(at: [indexPath])

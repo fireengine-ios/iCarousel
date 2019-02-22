@@ -815,13 +815,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func openInstaPick() {
         startAsyncOperation()
-        instaPickRoutingService.getViewController(success: { [weak self] vc in
+        instaPickRoutingService.getViewController(isCheckAnalyzesCount: true, success: { [weak self] vc in
             self?.asyncOperationSucces()
             if vc is InstapickPopUpController {
                 self?.router.openNeededInstaPick(viewController: vc)
             }
         }) { [weak self] error in
-            self?.asyncOperationFail(errorMessage: error.localizedDescription)
+            self?.asyncOperationFail(errorMessage: error.description)
         }
     }
     

@@ -336,6 +336,7 @@ struct TextConstants {
     static let settingsViewCellBeckup = NSLocalizedString("Back-up my contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellContactsSync = NSLocalizedString("Contacts Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellImportPhotos = NSLocalizedString("Import Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsViewCellConnectedAccounts = NSLocalizedString("connected_accounts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellAutoUpload = NSLocalizedString("Auto Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellFaceAndImageGrouping = NSLocalizedString("Face & Image Grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellActivityTimline = NSLocalizedString("My Activity Timeline", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -679,7 +680,7 @@ struct TextConstants {
     static let offersCancelCyprus = NSLocalizedString("Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let offersCancelMoldcell = NSLocalizedString("Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let offersCancelTurkcell = NSLocalizedString("Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let offersCancelLife = NSLocalizedString("To deactivate lifebox 25GB please send SMS with the text \"Stop1\", for lifebox 100GB please send SMS with the text \"Stop2\", for lifebox 500GB please send SMS with the text \"Stop3\" to the number 6767", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let offersCancelLife = NSLocalizedString("offersCancelLife", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let offersInfo = NSLocalizedString("Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let offersOk = NSLocalizedString("OK", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -726,7 +727,7 @@ struct TextConstants {
     static let errorFileSystemAccessDenied = NSLocalizedString("Can't get access to file system", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorNothingToDownload = NSLocalizedString("Nothing to download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorSameDestinationFolder = NSLocalizedString("Destination folder can not be the same folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let errorWorkWillIntroduced = NSLocalizedString("work_will_introduced", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let canceledOperationTextError = NSLocalizedString("cancelled", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let networkConnectionLostTextError = NSLocalizedString("The network connection was lost.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let commonServiceError = NSLocalizedString("ServiceError", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -960,6 +961,7 @@ struct TextConstants {
     static let faceRecognitionToReach = NSLocalizedString("Face Recognition to reach your loved one's memories", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let placeRecognitionToBeam = NSLocalizedString("Place Recognition to beam you up to the memories", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let objectRecognitionToRemember = NSLocalizedString("Object Recognition to remember with things you love", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let unlimitedPhotopickAnalysis = NSLocalizedString("unlimited_photopick_analysis", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let becomePremium = NSLocalizedString("Become Premium", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let becomePremiumMember = NSLocalizedString("Become Premium Member!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let leavePremiumMember = NSLocalizedString("leave_premium_membership", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1018,6 +1020,7 @@ struct TextConstants {
     static let analyzeHistoryPopupTitle = NSLocalizedString("no_analyses_left_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let analyzeHistoryPopupMessage = NSLocalizedString("no_analyses_left_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let analyzeHistoryPopupButton = NSLocalizedString("no_analyses_left_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let analyzeHistoryFreeText = NSLocalizedString("analyze_history_free_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let analyzeHistoryEmptyTitle = NSLocalizedString("analyze_history_empty_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let analyzeHistoryEmptySubtitle = NSLocalizedString("analyze_history_empty_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let analyzeHistoryAnalyzeLeft = NSLocalizedString("analyze_history_analyze_left", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1029,16 +1032,22 @@ struct TextConstants {
     static let analyzeHistoryConfirmDeleteText = NSLocalizedString("analyze_confirm_delete_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let analyzeHistoryConfirmDeleteYes = NSLocalizedString("analyze_confirm_delete_yes", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let analyzeHistoryConfirmDeleteNo = NSLocalizedString("analyze_confirm_delete_no", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    //MARK: - InstapickUpgradePopup
+    static let instapickUpgradePopupText = NSLocalizedString("instapick_upgrade_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instapickUpgradePopupButton = NSLocalizedString("instapick_upgrade_popup_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instapickUpgradePopupNoButton = NSLocalizedString("instapick_upgrade_popup_no", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     //MARK: - InstaPickThreeDors
     static let newInstaPick = NSLocalizedString("new_insta_pick", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     //MARK: - InstaPickCard
     static let instaPickUsedBeforeTitleLabel = NSLocalizedString("used_before_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickNoUsedBeforeTitleLabel = NSLocalizedString("no_used_before_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickNoAnalysisTitleLabel = NSLocalizedString("no_analysis_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let instaPickFreeTrialTitleLabel = NSLocalizedString("free_trial_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let instaPickUsedBeforeDetailLabel = NSLocalizedString("used_before_detail_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickNoUsedBeforeDetailLabel = NSLocalizedString("no_used_before_detail_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickNoAnalysisDetailLabel = NSLocalizedString("no_analysis_detail_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickFreeTrialDetailLabel = NSLocalizedString("free_trial_detail_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let instaPickButtonHasAnalysis = NSLocalizedString("instapick_button_has_analysis", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickButtonNoAnalysis = NSLocalizedString("Purchase", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1047,7 +1056,8 @@ struct TextConstants {
     //InstaPickDetailViewController
     
     static let instaPickReadyToShareLabel = NSLocalizedString("you_are_ready_to_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let instaPickLeftCountLabel = NSLocalizedString("instaPick_analysis_left", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickLeftCountLabel = NSLocalizedString("instapick_analysis_left", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instaPickUnlimitedLeftCountLabel = NSLocalizedString("instapick_unlimited_analysis", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickMoreHashtagsLabel = NSLocalizedString("engage_with_more_hastags", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickCopyHashtagsButton = NSLocalizedString("copy_hashtags_to_clipboard", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickShareButton = NSLocalizedString("share_on_social_media", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1067,4 +1077,26 @@ struct TextConstants {
     static let instaPickConnectedWithInstagram = NSLocalizedString("connected_with_instagram", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickConnectedWithInstagramName = NSLocalizedString("connected_with_instagram_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickConnectedWithoutInstagram = NSLocalizedString("continue_without_connecting", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let instapickSelectionPhotosSelected = NSLocalizedString("instapick_selection_photos_selected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instapickSelectionAnalyzesLeft = NSLocalizedString("instapick_selection_analyzes_left", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instapickSelectionAnalyzesLeftMax = NSLocalizedString("instapick_selection_analyzes_left_max", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instapickUnderConstruction = NSLocalizedString("instapick_under_construction", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instapickUnsupportedFileType = NSLocalizedString("instapick_unsupported_file_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loading = NSLocalizedString("loading", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let thereAreNoPhotos = NSLocalizedString("there_are_no_photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let thereAreNoAlbums = NSLocalizedString("there_are_no_albums", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let facebook = NSLocalizedString("Facebook", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let dropbox = NSLocalizedString("Dropbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instagram = NSLocalizedString("Instagram", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instagramConnectedAsFormat = NSLocalizedString("connected_as_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instagramRemoveConnectionWarning = NSLocalizedString("instagram_remove_connection_warning_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let facebookRemoveConnectionWarning = NSLocalizedString("facebook_remove_connection_warning_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let dropboxRemoveConnectionWarning = NSLocalizedString("dropbox_remove_connection_warning_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let instagramRemoveConnectionWarningMessage = NSLocalizedString("instagram_remove_connection_warning_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let facebookRemoveConnectionWarningMessage = NSLocalizedString("facebook_remove_connection_warning_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let dropboxRemoveConnectionWarningMessage = NSLocalizedString("dropbox_remove_connection_warning_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let removeConnection = NSLocalizedString("remove_connection", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let youAreConnected = NSLocalizedString("you_are_connected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

@@ -153,7 +153,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
         let headers = [refreshTokenKey: tokenStorage.refreshToken ?? ""]
         
         sessionManager
-            .request(urls.refreshAccessToken, method: .post, parameters: [uuid: UIDevice.current.identifierForVendor?.uuidString ?? "", name: UIDevice.current.name, deviceType: Device.deviceType],
+            .request(urls.refreshAccessToken, method: .post, parameters: Device.deviceInfo,
                      encoding: JSONEncoding.default, headers: headers)
             .responseJSON { [weak self] response in
                 

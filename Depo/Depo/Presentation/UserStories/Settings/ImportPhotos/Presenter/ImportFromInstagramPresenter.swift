@@ -21,73 +21,116 @@ class ImportFromInstagramPresenter: BasePresenter {
     var router: ImportFromInstagramRouterInput!
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
+    private var syncIsAwaiting = false
+    private var instaPickIsAwaiting = false
 }
 
 // MARK: - ImportFromInstagramViewOutput
 extension ImportFromInstagramPresenter: ImportFromInstagramViewOutput {
     func viewIsReady() {
+        ///+ 2 calls inside the getAllStatuses()
         view?.startActivityIndicator()
-        interactor.getConnectionStatus()
+        view?.startActivityIndicator()
+        view?.startActivityIndicator()
+        
+        interactor.getAllStatuses()
+    }
+    
+    func disconnectAccount() {
+        view?.startActivityIndicator()
+        interactor.disconnectAccount()
     }
     
     func startInstagram() {
         view?.startActivityIndicator()
-        interactor.getConnection()
+        view?.startActivityIndicator()
+        
+        syncIsAwaiting = true
+        interactor.setSync(status: true)
+        interactor.trackImportActivationInstagram()
     }
     
     func stopInstagram() {
         view?.startActivityIndicator()
         view?.startActivityIndicator()
         MenloworksTagsService.shared.instagramImport(isOn: false)
-        interactor.setAsync(status: false)
-        interactor.cancelUpload()
+        interactor.setSync(status: false)
     }
     
-    private func start() {
+    func enableInstaPick() {
+        instaPickIsAwaiting = true
         view?.startActivityIndicator()
-        view?.startActivityIndicator()
-        interactor.setAsync(status: true)
-        interactor.uploadCurrent()
-        interactor.trackImportActivationInstagram()
+        interactor.setInstaPick(status: true)
     }
+    
+    func disableInstaPick() {
+        view?.startActivityIndicator()
+        interactor.setInstaPick(status: false)
+    }
+
 }
 
 // MARK: - ImportFromInstagramInteractorOutput
 extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
+
+    func instaPickSuccess(isOn: Bool) {
+        ///TODO: Menloworks?
+        ///TODO: analytics?
+        instaPickIsAwaiting = false
+        view?.stopActivityIndicator()
+        view?.instaPickStatusSuccess(isOn)
+    }
     
+    func instaPickFailure(errorMessage: String) {
+        instaPickIsAwaiting = false
+        UIApplication.showErrorAlert(message: errorMessage)
+        view?.stopActivityIndicator()
+        view?.instaPickStatusFailure()
+    }
+
     // MARK: connection
 
-    func connectionSuccess(isConnected: Bool) {
+    func connectionSuccess(isConnected: Bool, username: String?) {
+        view?.stopActivityIndicator()
+        
         if isConnected {
             MenloworksAppEvents.onInstagramConnected()
-            start()
-            view?.stopActivityIndicator()
-        } else {
-            interactor.getConfig()
+            view?.connectionStatusSuccess(isConnected, username: username)
         }
     }
 
     func connectionFailure(errorMessage: String) {
         UIApplication.showErrorAlert(message: errorMessage)
         view?.stopActivityIndicator()
-        view?.instagramStatusFailure()
+        view?.connectionStatusFailure(errorMessage: errorMessage)
+    }
+    
+    func disconnectionSuccess() {
+        view?.stopActivityIndicator()
+        view?.disconnectionSuccess()
+    }
+    
+    func disconnectionFailure(errorMessage: String) {
+        view?.stopActivityIndicator()
+        view?.disconnectionFailure(errorMessage: errorMessage)
     }
     
     // MARK: sync status
     
     func syncStatusSuccess(status: Bool) {
         view?.stopActivityIndicator()
-        if status == true {
-            view?.instagramStatusSuccess()
+        if status {
+            view?.syncStatusSuccess(status)
             analyticsService.track(event: .importInstagram)
         } else {
-            view?.instagramStatusFailure()
+            view?.syncStatusFailure()
         }
     }
     
     func syncStatusFailure(errorMessage: String) {
         view?.stopActivityIndicator()
-        view?.instagramStatusFailure()
+        view?.syncStatusFailure()
     }
     
     // MARK: config
@@ -99,56 +142,60 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
 
     func configFailure(errorMessage: String) {
         view?.stopActivityIndicator()
-        view?.instagramStartFailure(errorMessage: errorMessage)
+        view?.syncStartFailure(errorMessage: errorMessage)
     }
     
     // MARK: startAsync
     
-    func startAsyncSuccess() {
+    func startSyncSuccess() {
+        syncIsAwaiting = false
+        
         view?.stopActivityIndicator()
-        view?.instagramStartSuccess()
+        view?.syncStartSuccess()
         analyticsService.track(event: .importInstagram)
     }
     
-    func startAsyncFailure(errorMessage: String) {
+    func startSyncFailure(errorMessage: String) {
+        syncIsAwaiting = false
+        
         view?.stopActivityIndicator()
-        view?.instagramStartFailure(errorMessage: errorMessage)
+        view?.syncStartFailure(errorMessage: errorMessage)
     }
     
     // MARK: uploadCurrent
     
     func uploadCurrentSuccess() {
         view?.stopActivityIndicator()
-        view?.instagramStartSuccess()
+        view?.syncStartSuccess()
     }
     
     func uploadCurrentFailure(errorMessage: String) {
         view?.stopActivityIndicator()
-        view?.instagramStartFailure(errorMessage: errorMessage)
+        view?.syncStartFailure(errorMessage: errorMessage)
     }
     
-    // MARK: stopAsync
+    // MARK: stopSync
     
-    func stopAsyncSuccess() {
+    func stopSyncSuccess() {
         view?.stopActivityIndicator()
-        view?.instagramStopSuccess()
+        view?.syncStopSuccess()
     }
     
-    func stopAsyncFailure(errorMessage: String) {
+    func stopSyncFailure(errorMessage: String) {
         view?.stopActivityIndicator()
-        view?.instagramStopFailure(errorMessage: errorMessage)
+        view?.syncStopFailure(errorMessage: errorMessage)
     }
     
     // MARK: cancelUpload
     
     func cancelUploadSuccess() {
         view?.stopActivityIndicator()
-        view?.instagramStopSuccess()
+        view?.syncStopSuccess()
     }
     
     func cancelUploadFailure(errorMessage: String) {
         view?.stopActivityIndicator()
-        view?.instagramStopFailure(errorMessage: errorMessage)
+        view?.syncStopFailure(errorMessage: errorMessage)
     }
 }
 
@@ -158,12 +205,22 @@ extension ImportFromInstagramPresenter: InstagramAuthViewControllerDelegate {
     func instagramAuthSuccess() {
         view?.startActivityIndicator()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { /// + 1 for backend bug
-            self.start()
+            if self.instaPickIsAwaiting {
+                self.enableInstaPick()
+            } else if self.syncIsAwaiting {
+                self.startInstagram()
+            }
+            
             self.view?.stopActivityIndicator()
         }
     }
     
     func instagramAuthCancel() {
-        view?.instagramStartFailure(errorMessage: TextConstants.NotLocalized.instagramLoginCanceled)
+        if self.instaPickIsAwaiting {
+            self.instaPickSuccess(isOn: false)
+        } else if self.syncIsAwaiting {
+            self.syncStatusSuccess(status: false)
+        }
+        view?.syncStartFailure(errorMessage: TextConstants.NotLocalized.instagramLoginCanceled)
     }
 }

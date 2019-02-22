@@ -748,3 +748,82 @@
 "no_for_upgrade" = "Ні, не бажаю";
 "uploded_photos_high_quality" = "Ви входите в lifebox як Стандартний користувач. Якщо ви не оновитесь до Преміум користувача, ваші спогади будуть зберігатися в високій якості. Ви хочете стати Преміум користувачем, щоб зберігати їх в оригінальній якості і користуватися привілеями Преміум користувача?";
 "NSFaceIDUsageDescription" = "Ця програма використовує Face ID для підвищення вашої безпеки";
+
+/*AnalyzeHistoryController*/
+"InstaPick" = "PhotoPick";
+"package_albanian_cancel_text" = "Albanian quota cancel text";
+"feature_albanian_cancel_text" = "Ви можете безкоштовно користуватися Преміум підпискою як абонент ALBtelecom";
+"no_analyses_left_title" = "Немає оцінок";
+"no_analyses_left_message" = "Немає оцінок";
+"no_analyses_left_button" = "Активувати PhotoPick";
+"analyze_history_empty_title" = "Ще не оцінювали ваші фото?";
+"analyze_history_empty_subtitle" = "Почніть оцінювати та дізнайтеся, які фото отримають найбільше вподобань, щоб потім поділитися у соцмережах";
+"analyze_history_analyze_left" = "Історія оцінювань";
+"analyze_history_analyze_count" = "%1$d/%2$d";
+"analyze_with_instapick" = "Оцінка PhotoPick";
+"analyze_history_photos_count" = "%d фото";
+"analyze_history_start_here" = "Почніть тут!";
+"analyze_confirm_delete_title" = "Ви впевнені, що хочете видалити?";
+"analyze_confirm_delete_text" = "Обрані файли будуть видалені з історії оцінок";
+"analyze_confirm_delete_yes" = "Так";
+"analyze_confirm_delete_no" = "Ні";
+
+/*InstaPick three dots*/
+"new_insta_pick" = "Новий PhotoPick";
+
+/*InstaPickCard*/
+"used_before_title_label" = "Ще більше вподобань з PhotoPick!";
+"no_used_before_title_label" = "Оцінка PhotoPick!";
+"no_analysis_title_label" = "Отримайте більше з PhotoPick!";
+"used_before_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з PhotoPick та отримуйте ще більше вподобань! Ще більше оцінок очікують на ваші фото:)";
+"no_used_before_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з PhotoPick та отримуйте ще більше вподобань! Ще не спробували?";
+"no_analysis_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з PhotoPick та отримуйте ще більше вподобань! Не забудьте активувати новий пакет для PhotoPick! :)";
+"instapick_button_has_analysis" = "Давайте починати!";
+
+/*InstaPickDetailViewController*/
+"you_are_ready_to_share" = "Ви готові поділитися!";
+"instaPick_analysis_left" = "Залишилося оцінки: %1$d/ %2$d";
+"engage_with_more_hastags" = "Підписуйте #хештеги";
+"copy_hashtags_to_clipboard" = "Зкопіюйте #хештеги у буфер обміну";
+"share_on_social_media" = "Поділіться у соцмережах!";
+"picked" = "Обрано!";
+"insta_pick_analyzing_bottom" = "Ми аналізуємо ваші фото!:)";
+"insta_pick_analyzing_0" = "Ми шукаємо фото, з яким ви отримаєте якнайбільше вподобань!";
+"insta_pick_analyzing_1" = "Ви обрали дуже гарні фото!";
+"insta_pick_analyzing_2" = "Як добре ділитися яскравими моментами з друзями!";
+"insta_pick_analyzing_3" = "Життя стає яскравіше з гарними спогадами!";
+"insta_pick_analyzing_4" = "У вас дуже крутий фотоальбом!";
+
+/*InstaPickPopUp*/
+"dont_show_this_again" = "Не показувати це знову";
+"instapick_analyze" = "Оцінити з PhotoPick!";
+"connected_account" = "Це чудово працює з вашим об'єднаним аккаунтом!";
+"instapick_description" = "Якщо ви зв'яжете ваш обліковий запис з профілем в Instagram, ми зможемо покращити сервіс, виконуючи персоналізованно кожну нову оцінку PhotoPick";
+"connected_with_instagram" = "Поєднати з Instagram";
+"connected_with_instagram_name" = "Поєднати з Instagram як";
+"continue_without_connecting" = "Продовжувати без об'єднання";
+"connected_accounts" = "Поєднані обликові записи";
+"analyze_history_free_text" = "Безкоштовно на деякий час";
+
+/*InstapickUpgradePopup*/
+"instapick_upgrade_popup_text" = "Будь ласка оновіть lifebox  додаток, щоб активувати пакет PhotoPick";
+"instapick_upgrade_popup_button" = "Оновити";
+"instapick_upgrade_popup_no" = "Ні";
+"instapick_analysis_left" = "Залишилося оцінки: %1$d/%2$d";
+"instapick_unlimited_analysis" = "Безкоштовно на деякий час";
+"Facebook" = "Facebook";
+"Dropbox" = "Dropbox";
+"Instagram" = "Instagram";
+"connected_as_format" = "Поєднані обликові записи: @%@";
+"instagram_remove_connection_warning_title" = "Видалення поєднання з Instagram";
+"instagram_remove_connection_warning_message" = "Ви впевнені, що хочете видалити поєднання з Instagram?\n\n";
+"instapick_selection_photos_selected" = "Обрані фото (%d)";
+"instapick_selection_analyzes_left" = "Залишилося %d оцінки";
+"loading" = "Завантаження...";
+"there_are_no_photos" = "Немає фото";
+"there_are_no_albums" = "Немає альбомів";
+"instapick_selection_analyzes_left_max" = "Ви обрали %d фото\n(максимально можлива кількість)";
+"free_trial_title_label" = "Оцінити з PhotoPick";
+"free_trial_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з PhotoPick та отримуйте ще більше вподобань! Спробуйте безкоштовно!";
+"instapick_under_construction" = "Ми покращуємо сервіс PhotoPick  :)";
+"instapick_unsupported_file_type" = "Фотографії, які ви вибрали, мають некоректний формат. Ви можете використовувати Photopik, вибравши інші фотографії.";

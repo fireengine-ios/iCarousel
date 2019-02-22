@@ -43,13 +43,16 @@ class InstagramAuthViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        removeCache()
+        
         navigationBarWithGradientStyle()
         
         setTitle(withString: "Instagram login")
         webView.backgroundColor = UIColor.white
         webView.isOpaque = false
 
-        let request = URLRequest(url: authPath!)
+        var request = URLRequest(url: authPath!)
+        request.httpShouldHandleCookies = false
         webView.load(request)
     }
     
@@ -75,33 +78,29 @@ class InstagramAuthViewController: ViewController {
             instagramService.checkInstagramLogin(instagramAccessToken: instagramAccessToken) { [weak self] response in
                 switch response {
                 case .success(_):
-                    self?.changeLikePermissionForInstagram()
+                    DispatchQueue.toMain {
+                        self?.delegate?.instagramAuthSuccess()
+                        self?.navigationController?.popViewController(animated: true)
+                    }
                 case .failed(let error):
                     self?.hideSpiner()
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
+                    UIApplication.showErrorAlert(message: error.description)
                     self?.instagramAuthCancel()
                 }
             }
         }
     }
     
-    private func changeLikePermissionForInstagram() {
-        accountService.changeInstapickAllowed(isInstapickAllowed: true) { [weak self] response in
-            self?.hideSpiner()
-
-            switch response {
-            case .success(let result):
-                if result.isInstapickAllowed == true {
-                    self?.delegate?.instagramAuthSuccess()
-                    self?.navigationController?.popViewController(animated: true)
-                } else {
-                    self?.instagramAuthCancel()
-                }
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.localizedDescription)
-                self?.instagramAuthCancel()
-            }
+    private func removeCache() {
+        let dataStore = WKWebsiteDataStore.default()
+        dataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
+            records.forEach({ record in
+                dataStore.removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(),
+                                     for: [record],
+                                     completionHandler: {})
+            })
         }
+        
     }
     
     deinit {
@@ -114,7 +113,10 @@ extension InstagramAuthViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if isLoginStarted {
-            checkInstagramLogin()
+            ///server returns 500 if checkInstagramLogin immediately
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                self.checkInstagramLogin()
+            }
         } else if isLoginCanceled {
             instagramAuthCancel()
         }
@@ -134,7 +136,8 @@ extension InstagramAuthViewController: WKNavigationDelegate {
         if let index = currentUrl.range(of: "#access_token=")?.upperBound {
             instagramAccessToken = String(currentUrl.suffix(from: index))
             isLoginStarted = true
-        } else if currentUrl.contains("access_denied"), navigationAction.navigationType == .formSubmitted {
+            removeCache()
+        } else if currentUrl.contains("access_denied") {
             isLoginCanceled = true
         }
         

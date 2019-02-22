@@ -11,6 +11,7 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
     weak var output: CreateStoryPhotosOrderInteractorOutput!
     
     private lazy var fileService = WrapItemFileService()
+    private lazy var createStoryService = CreateStoryService(transIdLogging: true)
     
     var story: PhotoStory?
     
@@ -60,7 +61,7 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
                                        musicUUID: parameter.audioUuid,
                                        musicId: parameter.musicId)
             
-            CreateStoryService().getPreview(preview: t, success: { [weak self] responce in
+            createStoryService.getPreview(preview: t, success: { [weak self] responce in
                 if let `self` = self {
                     self.isRequestStarted = false
                     DispatchQueue.main.async {

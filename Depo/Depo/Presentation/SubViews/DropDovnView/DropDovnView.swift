@@ -69,7 +69,7 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: cornerView!.frame.size.width - 25, height: cornerView!.frame.size.height))
         titleLabel!.font = UIFont.TurkcellSaturaRegFont(size: 14)
-        titleLabel!.textColor = ColorConstants.darcBlueColor
+        titleLabel!.textColor = ColorConstants.darkBlueColor
         titleLabel!.textAlignment = .left
         titleLabel!.backgroundColor = UIColor.clear
         titleLabel!.translatesAutoresizingMaskIntoConstraints = false

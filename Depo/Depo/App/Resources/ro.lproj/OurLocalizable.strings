@@ -748,3 +748,82 @@
 "no_for_upgrade" = "Nu, sunt bine așa";
 "uploded_photos_high_quality" = "Ești înregistrat în lifebox ca utilizator standard și amintirile tale vor fi păstrate în calitate înaltă. Ți-ai dori să devii utilizator Premium ca să poți stoca amintirile în calitate originală și să beneficiezi de toate avantajele Premium?";
 "NSFaceIDUsageDescription" = "Această aplicație a fost proiectată să utilizeze Face ID pentru a-ți spori securitatea";
+
+/*AnalyzeHistoryController*/
+"InstaPick" = "PhotoPick";
+"package_albanian_cancel_text" = "Albanian quota cancel text";
+"feature_albanian_cancel_text" = "Poți utiliza opțiunii Premium în continuare gratuit, atâta timp cât ești utilizator ALBtelecom";
+"no_analyses_left_title" = "nu au mai rămas analize";
+"no_analyses_left_message" = "nu au mai rămas analize";
+"no_analyses_left_button" = "Cumpără PhotoPick";
+"analyze_history_empty_title" = "Încă nu ai început analiza fotografiilor tale?";
+"analyze_history_empty_subtitle" = "Pornește acum opțiunea de analiză a fotografiilor, pentru a afla care va avea cel mai mare impact pe rețelele de socializare";
+"analyze_history_analyze_left" = "Analize au rămas";
+"analyze_history_analyze_count" = "%1$d / %2$d";
+"analyze_with_instapick" = "Analizează cu PhotoPick";
+"analyze_history_photos_count" = "% fotografii";
+"analyze_history_start_here" = "Începe aici!";
+"analyze_confirm_delete_title" = "Ești sigur că vrei să ștergi?";
+"analyze_confirm_delete_text" = "Articolele selectate vor fi șterse din istoricul analizei.";
+"analyze_confirm_delete_yes" = "DA";
+"analyze_confirm_delete_no" = "NU";
+
+/*InstaPick three dots*/
+"new_insta_pick" = "Noul PhotoPick";
+
+/*InstaPickCard*/
+"used_before_title_label" = "PhotoPick - pentru a obține o mulțime de like-uri!";
+"no_used_before_title_label" = "Analizează cu PhotoPick!";
+"no_analysis_title_label" = "Obține mai mult PhotoPick!";
+"used_before_detail_label" = "Descoperă ce fotografie va avea cel mai mare succes, fă analiză cu PhotoPick pentru mai multe like-uri! Ai mai multe analize ce așteaptă pozele tale :)";
+"no_used_before_detail_label" = "Descoperă ce fotografie va avea cel mai mare succes, fă analiză cu PhotoPick pentru mai multe like-uri! Încă nu ai testat?";
+"no_analysis_detail_label" = "Descoperă ce fotografie va avea cel mai mare succes, fă analiză cu PhotoPick pentru mai multe like-uri! Nu uita să cumperi un pachet nou pentru mai mult PhotoPick :)";
+"instapick_button_has_analysis" = "Să începem!";
+
+/*InstaPickDetailViewController*/
+"you_are_ready_to_share" = "Ești gata pentru a te împărtăși!";
+"instaPick_analysis_left" = "Analiză a rămas: %1$d / %2$d";
+"engage_with_more_hastags" = "Interacționează cu mai multe #hastag-uri";
+"copy_hashtags_to_clipboard" = "Copie #hashtags în clipboard";
+"share_on_social_media" = "Distribuie în rețelele sociale!";
+"picked" = "ALES!";
+"insta_pick_analyzing_bottom" = "Bucură-te de timpul tău, în timp ce noi îți analizăm fotografiile!  :)";
+"insta_pick_analyzing_0" = "Noi căutăm fotografia ce-ți va afuce cele mai multe like-uri.";
+"insta_pick_analyzing_1" = "Ai selectat fotografii frumoase!";
+"insta_pick_analyzing_2" = "Ce frumos e să-ți împărtășești momentele cu prietenii!";
+"insta_pick_analyzing_3" = "Viața e frumoasă cu momente minunate!";
+"insta_pick_analyzing_4" = "Ai un album cu poze extraordinar!";
+
+/*InstaPickPopUp*/
+"dont_show_this_again" = "Nu mai arăta asta din nou";
+"instapick_analyze" = "Analizează cu PhotoPick!";
+"connected_account" = "Merge perfect cu contul tău conectat!";
+"instapick_description" = "În caz că alegi să te conectezi cu contul tău Instagram, vom avea ocazia să-ți oferim o mult mai bună experiență, prin efectuarea analize personalizate, pentru fiecare analiză PhotoPick.";
+"connected_with_instagram" = "Conectare cu Instagram";
+"connected_with_instagram_name" = "Conectare cu Instagram ca";
+"continue_without_connecting" = "Continuă fără conectare";
+"connected_accounts" = "Conturile conectate";
+"analyze_history_free_text" = "Gratuit pentru timp limitat";
+
+/*InstapickUpgradePopup*/
+"instapick_upgrade_popup_text" = "Pentru a cumpăra pachetul PhotoPick, e nevoie să actualizezi aplicația lifebox.";
+"instapick_upgrade_popup_button" = "Actualizare";
+"instapick_upgrade_popup_no" = "Nu";
+"instapick_analysis_left" = "Actualizarea a rămas: %1$d / %2$d ";
+"instapick_unlimited_analysis" = "Gratuit pentru timp limitat";
+"Facebook" = "Facebook";
+"Dropbox" = "Dropbox";
+"Instagram" = "Instagram";
+"connected_as_format" = "Contul conectat:  @%@";
+"instagram_remove_connection_warning_title" = "Ești pe cale de-a-ți elimina conexiunea Instagram";
+"instagram_remove_connection_warning_message" = "Ești sigur că vrei să-ți elimini conexiunea Instagram\n\n";
+"instapick_selection_photos_selected" = "Fotografii selectate (%d)";
+"instapick_selection_analyzes_left" = "A mai rămas doar %d de analizat";
+"loading" = "Se încarcă...";
+"there_are_no_photos" = "Aici nu sunt fotografii";
+"there_are_no_albums" = "Aici nu sunt albume";
+"instapick_selection_analyzes_left_max" = "Ai selectat %d fotografii\n(numărul maximal posibil de selectat)";
+"free_trial_title_label" = "Analizează cu PhotoPick";
+"free_trial_detail_label" = "Descoperă care poză anume va avea cel mai mare succes, analizează cu PhotoPick pentru mai multe like-uri! Mai testează gratuit o perioadă limitată de timp!";
+"instapick_under_construction" = "Facem imbunatatiri pe PhotoPick pentru o experienta mai buna 😉";
+"instapick_unsupported_file_type" = "Fotografiile pe care le-ați selectat sunt în format neacceptat. Puteți continua experiența PhotoPick selectând alte fotografii.";

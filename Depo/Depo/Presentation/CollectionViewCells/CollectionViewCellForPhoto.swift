@@ -37,7 +37,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         selectionView.layer.borderWidth = CollectionViewCellForPhoto.borderW
-        selectionView.layer.borderColor = ColorConstants.darcBlueColor.cgColor
+        selectionView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
         selectionView.alpha = 0
         
         progressView.tintColor = ColorConstants.blueColor
@@ -101,9 +101,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             imageView.image = image
         }
         
-        
-        backgroundColor = ColorConstants.fileGreedCellColor
-        
         isAlreadyConfigured = true
     }
     
@@ -123,7 +120,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
         
         isAlreadyConfigured = true
-        backgroundColor = ColorConstants.fileGreedCellColor
     }
     
     override func setImage(with metaData: BaseMetaData) {

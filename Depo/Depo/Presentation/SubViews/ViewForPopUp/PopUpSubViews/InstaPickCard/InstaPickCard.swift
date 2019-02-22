@@ -12,14 +12,16 @@ final class InstaPickCard: BaseView {
     
     private enum InstaPick {
         enum CardType {
+            case trial
             case usedBefore
             case noUsedBefore
             case noAnalysis
         }
         
-        static let isUsedField = "isUsed"
-        static let leftField = "left"
-        static let totalField = "total"
+        static let isUsedField  = "isEverUsed"
+        static let isFreeField  = "isFree"
+        static let leftField    = "remaining"
+        static let totalField   = "total"
         
         static let usedBeforeIcon = UIImage(named: "instaPickLikesRed")
         static let defaultIcon = UIImage(named: "instaPickLikesWhite")
@@ -28,6 +30,7 @@ final class InstaPickCard: BaseView {
     }
 
     //IBOutlets
+    @IBOutlet private weak var containerStackView: UIStackView!
     @IBOutlet private weak var gradientView: RadialGradientableView!
     
     @IBOutlet private weak var titleLabel: UILabel!
@@ -35,11 +38,13 @@ final class InstaPickCard: BaseView {
     @IBOutlet private weak var bottomButton: UIButton!
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var dividerLineView: UIView!
     
     var analysisLeft: Int = 0
     var totalCount: Int = 0
     var isUsedBefore: Bool = true
-    
+    var isFree: Bool = false
+
     private lazy var instapickRoutingService = InstaPickRoutingService()
     
     private var cardType: InstaPick.CardType?
@@ -55,20 +60,25 @@ final class InstaPickCard: BaseView {
         bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
     }
     
-    override func viewWillShow() {
-        super.viewWillShow()
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
-        chooseType()
-        configurateCard()
+        let height = containerStackView.frame.height
+        if calculatedH != height {
+            calculatedH = height
+        }
     }
-    
+
     private func configurateCard() {
+        chooseType()
+
         guard let type = cardType else { return }
         switch type {
         case .usedBefore:
             setupTitleLabel(with: TextConstants.instaPickUsedBeforeTitleLabel, textColor: ColorConstants.darkText)
             
             gradientView.isNeedGradient = false
+            dividerLineView.isHidden = false
             
             closeButton.setImage(UIImage(named: "CloseCardIcon"), for: .normal)
             
@@ -83,7 +93,8 @@ final class InstaPickCard: BaseView {
             setupTitleLabel(with: TextConstants.instaPickNoUsedBeforeTitleLabel, textColor: UIColor.white)
             
             gradientView.isNeedGradient = true
-            
+            dividerLineView.isHidden = true
+
             closeButton.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
 
             detailLabel.textColor = UIColor.white
@@ -97,7 +108,8 @@ final class InstaPickCard: BaseView {
             setupTitleLabel(with: TextConstants.instaPickNoAnalysisTitleLabel, textColor: UIColor.white)
             
             gradientView.isNeedGradient = true
-            
+            dividerLineView.isHidden = true
+
             closeButton.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
 
             detailLabel.textColor = UIColor.white
@@ -106,18 +118,40 @@ final class InstaPickCard: BaseView {
             bottomButton.setTitle(TextConstants.instaPickButtonNoAnalysis, for: .normal)
             
             imageView.image = InstaPick.defaultIcon
+        case .trial:
+            setupTitleLabel(with: TextConstants.instaPickFreeTrialTitleLabel, textColor: UIColor.white)
+            
+            gradientView.isNeedGradient = true
+            dividerLineView.isHidden = true
+            
+            closeButton.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
+            
+            detailLabel.textColor = UIColor.white
+            detailLabel.text = TextConstants.instaPickFreeTrialDetailLabel
+            
+            bottomButton.setTitle(TextConstants.instaPickButtonHasAnalysis, for: .normal)
+            
+            imageView.image = InstaPick.defaultIcon
         }
     }
     
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
-        guard  let isUsedBefore: Bool = object?.details?[InstaPick.isUsedField].bool,
+        guard
+            let isUsedBefore: Bool = object?.details?[InstaPick.isUsedField].bool,
+            let isFree: Bool = object?.details?[InstaPick.isFreeField].bool,
             let analysisLeft: Int = object?.details?[InstaPick.leftField].int,
-            let totalCount: Int = object?.details?[InstaPick.totalField].int else { return }
+            let totalCount: Int = object?.details?[InstaPick.totalField].int
+        else {
+            return
+        }
         
         self.isUsedBefore = isUsedBefore
+        self.isFree = isFree
         self.analysisLeft = analysisLeft
         self.totalCount = totalCount
+        
+        configurateCard()
     }
     
     override func deleteCard() {
@@ -141,11 +175,13 @@ final class InstaPickCard: BaseView {
     
     private func chooseType() {
         let type: InstaPick.CardType
-        if !isUsedBefore {
-            type = .noUsedBefore
+        if isFree {
+            type = .trial
         } else if analysisLeft == 0 {
             type = .noAnalysis
-        } else {
+        } else if !isUsedBefore {
+            type = .noUsedBefore
+        } else  {
             type = .usedBefore
         }
         cardType = type
@@ -159,20 +195,32 @@ final class InstaPickCard: BaseView {
     }
     
     //MARK: - Utility Methods(public)
-    func isNeedReloadWithNew(totalCount: Int, leftCount: Int) -> Bool {
-        var newCardType: InstaPick.CardType = .noUsedBefore
-        if leftCount == 0 {
+    func isNeedReloadWithNew(status: InstapickAnalyzesCount) -> Bool {
+        let newCardType: InstaPick.CardType
+        
+        if status.isFree {
+             newCardType = .trial
+        } else if status.left == 0 {
             isUsedBefore = true
             newCardType = .noAnalysis
-        } else if totalCount != leftCount {
+        } else if status.used > 0 || isUsedBefore {
             isUsedBefore = true
             newCardType = .usedBefore
+        } else {
+            newCardType = .noUsedBefore
         }
 
-        self.analysisLeft = leftCount
-        self.totalCount = totalCount
+        self.analysisLeft = status.left
+        self.totalCount = status.total
+        self.isFree = status.isFree
         
-        return newCardType != cardType
+        let isNeedLoad = newCardType != cardType
+        if isNeedLoad {
+            configurateCard()
+            layoutIfNeeded() /// need to calculate height of card
+        }
+        
+        return isNeedLoad
     }
     
     //MARK: - Actions
@@ -180,19 +228,14 @@ final class InstaPickCard: BaseView {
         deleteCard()
     }
     
-    
     @IBAction private func onBottomButtonTap(_ sender: Any) {
-        //TODO: add redirect for different types
         guard let cardType = cardType else { return }
 
         switch cardType {
-        case .usedBefore:
-            openInstaPickHistory()
-        case .noUsedBefore:
-            openInstaPickHistory()
-            break
         case .noAnalysis:
-            break
+            InstaPickRoutingService.showUpdgradePopup()
+        case .trial, .noUsedBefore, .usedBefore:
+            openInstaPickHistory()
         }
     }
 }

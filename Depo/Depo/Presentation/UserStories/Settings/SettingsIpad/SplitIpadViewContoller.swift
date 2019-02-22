@@ -40,8 +40,8 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
         }
     }
     
-    func goToIportPhotos() {
-        if let left = leftController, let controller = RouterVC().importPhotos {
+    func goToConnectedAccounts() {
+        if let left = leftController, let controller = RouterVC().connectedAccounts {
             configurateWithControllers(leftViewController: left, controllers: [controller])
         }
     }

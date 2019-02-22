@@ -668,7 +668,7 @@
 "Place Recognition to beam you up to the memories" = "Возвращайтесь в любимые места с функцией Распознавания мест";
 "Object Recognition to remember with things you love" = "Помните любимые вещи с функцией Распознавания объектов";
 "Become Premium" = "Стать Премиум";
-"Become Premium Member!" = "Стань Премиум пользователем!";
+"Become Premium Member!" = "Стать Премиум пользователем!";
 "leave_premium_membership" = "Отменить Премиум подписку";
 "Standard User" = "Standard пользователь";
 "Premium User" = "Премиум пользователь";
@@ -744,9 +744,88 @@
 "my_storage_usage" = "%@ из %@ осталось";
 "package_section_title" = "Расширьте ваше хранилище";
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "Вы входите в lifebox как Стандартный пользователь. Если вы не обновитесь до Премиум пользователя, ваши воспоминания будут сохраняться в высоком качестве. Вы хотите стать Премиум пользователем, чтобы сохранять их в оригинальном качестве и пользоваться привилегиями Премиум пользователя?";
-"sync_page_pop_up" = "Вы входите в lifebox как Стандартный пользователь. Если вы не обновитесь до Премиум пользователя, ваши воспоминания будут сохраняться в высоком качестве. Вы хотите стать Премиум пользователем, чтобы сохранять их в оригинальном качестве и пользоваться привилегиями Премиум пользователя?";
+"home_page_pop_up" = "Вы вошли в lifebox как Стандартный пользователь. Если вы не обновитесь до Премиум пользователя, ваши фото и видео будут сохраняться в высоком качестве. Вы хотите стать Премиум пользователем, чтобы сохранять их в оригинальном качестве и пользоваться преимуществами Премиум пользователя?";
+"sync_page_pop_up" = "Вы вошли в lifebox как Стандартный пользователь. Если вы не обновитесь до Премиум пользователя, ваши фото и видео будут сохраняться в высоком качестве. Вы хотите стать Премиум пользователем, чтобы сохранять их в оригинальном качестве и пользоваться преимуществами Премиум пользователя?";
 "ok_for_upgrade" = "Да, хочу";
 "no_for_upgrade" = "Нет, не хочу";
-"uploded_photos_high_quality" = "Вы входите в lifebox как Стандартный пользователь. Если вы не обновитесь до Премиум пользователя, ваши воспоминания будут сохраняться в высоком качестве. Вы хотите стать Премиум пользователем, чтобы сохранять их в оригинальном качестве и пользоваться привилегиями Премиум пользователя?";
+"uploded_photos_high_quality" = "Вы вошли в lifebox как Стандартный пользователь. Если вы не обновитесь до Премиум пользователя, ваши фото и видео будут сохраняться в высоком качестве. Вы хотите стать Премиум пользователем, чтобы сохранять их в оригинальном качестве и пользоваться преимуществами Премиум пользователя?";
 "NSFaceIDUsageDescription" = "Это приложение использует Face ID для повышения вашей безопасности";
+
+/*AnalyzeHistoryController*/
+"InstaPick" = "PhotoPick";
+"package_albanian_cancel_text" = "Albanian quota cancel text";
+"feature_albanian_cancel_text" = "Вы можете бесплатно пользоваться функциями Премиум подписки как абонент ALBtelecom";
+"no_analyses_left_title" = "Нет оценок";
+"no_analyses_left_message" = "Нет оценок";
+"no_analyses_left_button" = "Активировать PhotoPick";
+"analyze_history_empty_title" = "Вы еще не пользовались оценкой ваших фото?";
+"analyze_history_empty_subtitle" = "Воспользуйтесь функцией оценки и узнайте, какие фото будут самыми популярными, чтобы поделиться в соцсетях";
+"analyze_history_analyze_left" = "Оценки";
+"analyze_history_analyze_count" = "%1$d/%2$d";
+"analyze_with_instapick" = "Оценить с PhotoPick";
+"analyze_history_photos_count" = "%d фото";
+"analyze_history_start_here" = "Начните здесь!";
+"analyze_confirm_delete_title" = "Вы уверены, что хотите удалить?";
+"analyze_confirm_delete_text" = "Выбранные файлы будут удалены из истории оценки";
+"analyze_confirm_delete_yes" = "Да";
+"analyze_confirm_delete_no" = "Нет";
+
+/*InstaPick three dots*/
+"new_insta_pick" = "Новый PhotoPick";
+
+/*InstaPickCard*/
+"used_before_title_label" = "PhotoPick для множества лайков!";
+"no_used_before_title_label" = "Оценивайте с PhotoPick!";
+"no_analysis_title_label" = "Получите больше PhotoPick!";
+"used_before_detail_label" = "Узнайте, какие фото получат самые высокие оценки! Оценивайте с PhotoPick и получайте еще больше лайков! Еще больше оценок ждут ваши фото:)";
+"no_used_before_detail_label" = "Узнайте, какие фото получат самые высокие оценки! Оценивайте с PhotoPick и получайте еще больше лайков! Еще не пробовали?";
+"no_analysis_detail_label" = "Узнайте, какие фото получат самые высокие оценки! Оценивайте с PhotoPick и получайте еще больше лайков! Не забудьте активировать новый пакет, чтобы получить больше PhotoPick:)";
+"instapick_button_has_analysis" = "Давайте начнем!";
+
+/*InstaPickDetailViewController*/
+"you_are_ready_to_share" = "Вы готовы поделиться!";
+"instaPick_analysis_left" = "Осталось оценок: %1$d/%2$d";
+"engage_with_more_hastags" = "Подписывайте #хэштеги";
+"copy_hashtags_to_clipboard" = "Скопируйте #хэштеги в буфер обмена";
+"share_on_social_media" = "Поделиться в соцсетях!";
+"picked" = "Выбрано!";
+"insta_pick_analyzing_bottom" = "Мы анализируем ваши фото! :)";
+"insta_pick_analyzing_0" = "Мы ищем фото, которые получат самое большое количество лайков!";
+"insta_pick_analyzing_1" = "Вы выбрали красивые фото!";
+"insta_pick_analyzing_2" = "Как здорово делиться яркими моментами с друзьями!";
+"insta_pick_analyzing_3" = "Украсьте свою жизнь прекрасными воспоминаниями!";
+"insta_pick_analyzing_4" = "У вас прекрасный фотоальбом!";
+
+/*InstaPickPopUp*/
+"dont_show_this_again" = "Не показывать это снова";
+"instapick_analyze" = "Оцените с PhotoPick!";
+"connected_account" = "Эта функция классно работает с объединенными учетками!";
+"instapick_description" = "Если вы свяжете ваш аккаунт с профилем в Instagram, мы сможем улучшить сервис, выполняя персонализированно каждую новую оценку PhotoPick";
+"connected_with_instagram" = "Связать с Instagram";
+"connected_with_instagram_name" = "Связать с Instagram как";
+"continue_without_connecting" = "Продолжить без связывания";
+"connected_accounts" = "Связанные учетки";
+"analyze_history_free_text" = "Бесплатно на некоторое время";
+
+/*InstapickUpgradePopup*/
+"instapick_upgrade_popup_text" = "Обновите приложение lifebox, чтобы активировать пакет PhotoPick";
+"instapick_upgrade_popup_button" = "Обновить";
+"instapick_upgrade_popup_no" = "Нет";
+"instapick_analysis_left" = "Осталось оценок: %1$d / %2$d";
+"instapick_unlimited_analysis" = "Бесплатно на некоторое время";
+"Facebook" = "Facebook";
+"Dropbox" = "Dropbox";
+"Instagram" = "Instagram";
+"connected_as_format" = "Связанная учетка: @%@";
+"instagram_remove_connection_warning_title" = "Удаление связывания с Instagram";
+"instagram_remove_connection_warning_message" = "Вы уверены, что хотите удалить связывание с Instagram?\n\n";
+"instapick_selection_photos_selected" = "Выбранные фото (%d)";
+"instapick_selection_analyzes_left" = "У вас осталось всего %d оценки";
+"loading" = "Загрузка...";
+"there_are_no_photos" = "Нет фото";
+"there_are_no_albums" = "Нет альбомов";
+"instapick_selection_analyzes_left_max" = "Вы выбрали %d  фото\n(максимально возможное количество)";
+"free_trial_title_label" = "Оценка PhotoPick";
+"free_trial_detail_label" = "Узнайте, какие фото получат самые высокие оценки! Оценивайте с PhotoPick и получайте еще больше лайков! Попробуйте новинку бесплатно!";
+"instapick_under_construction" = "PhotoPick временно недоступен";
+"instapick_unsupported_file_type" = "Фотографии, которые вы выбрали, имеют некорректный формат. Вы можете использовать PhotoPick, выбрав другие фотографии.";

@@ -62,6 +62,7 @@ class LoginInteractor: LoginInteractorInput {
             return
         }
         if !Validator.isValid(email: login) && !Validator.isValid(phone: login) {
+            analyticsService.trackLoginEvent(error: .incorrectUsernamePassword)
             output?.failLogin(message: TextConstants.loginScreenInvalidLoginError)
             return
         }
@@ -83,7 +84,12 @@ class LoginInteractor: LoginInteractorInput {
             debugLog("login isRememberMe \(self.rememberMe)")
             self.tokenStorage.isRememberMe = self.rememberMe
             self.analyticsService.track(event: .login)
-            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .trueLogin)
+            
+            if Validator.isValid(email: login) {
+                self.analyticsService.trackLoginEvent(loginType: .email)
+            } else {
+                self.analyticsService.trackLoginEvent(loginType: .gsm)
+            }
 //            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
 //            ItemsRepository.sharedSession.updateCache()
             DispatchQueue.main.async {
@@ -94,34 +100,36 @@ class LoginInteractor: LoginInteractorInput {
                 guard let `self` = self else {
                     return
                 }
-                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .falseLogin)
                 
-                if self.isBlockError(forResponse: errorResponse) {
+                let loginError = LoginResponseError(with: errorResponse)
+                
+                self.analyticsService.trackLoginEvent(error: loginError)
+                
+                switch loginError {
+                case .block:
                     self.output?.failedBlockError()
-                    return
-                }
-                if self.inNeedOfCaptcha(forResponse: errorResponse) {
+                case .needCaptcha:
                     self.output?.needShowCaptcha()
-                } else if (!self.checkInternetConnection()) {
-                    self.output?.failLogin(message: TextConstants.errorConnectedToNetwork)
-                } else if self.isAuthenticationDisabledForAccount(forResponse: errorResponse) {
+                case .authenticationDisabledForAccount:
                     self.output?.failLogin(message: TextConstants.loginScreenAuthWithTurkcellError)
-                } else if self.isNeedSignUp(forResponse: errorResponse) {
+                case .needSignUp:
                     self.output?.needSignUp(message: TextConstants.loginScreenNeedSignUpError)
-                } else if self.isAuthenticationError(forResponse: errorResponse) || self.inNeedOfCaptcha(forResponse: errorResponse) {
+                case .incorrectUsernamePassword:
                     self.attempts += 1
                     self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
-                } else if self.isInvalidCaptchaError(forResponse: errorResponse) {
+                case .incorrectCaptcha:
                     self.output?.failLogin(message: TextConstants.loginScreenInvalidCaptchaError)
-                } else if self.isInternetError(forResponse: errorResponse) {
+                case .networkError, .serverError:
                     self.output?.failLogin(message: errorResponse.description)
-                } else if self.isEmptyPhoneError(for: errorResponse) {
+                case .unauthorized:
+                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
+                case .noInternetConnection:
+                    self.output?.failLogin(message: TextConstants.errorConnectedToNetwork)
+                case .emptyPhone:
                     self.login = login
                     self.password = password
                     self.atachedCaptcha = atachedCaptcha
                     self.output?.openEmptyPhone()
-                } else {
-                    self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 }
             }
         })
@@ -173,42 +181,6 @@ class LoginInteractor: LoginInteractorInput {
             return false
         }
         return true
-    }
-    
-    private func inNeedOfCaptcha(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("Captcha required")
-    }
-    
-    private func isAuthenticationDisabledForAccount(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("Authentication with Turkcell Password is disabled for the account")
-    }
-    
-    private func isNeedSignUp(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("Sign up required")
-    }
-    
-    private func isAuthenticationError(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("Authentication failure")
-    }
-    
-    private func isInvalidCaptchaError(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("Invalid captcha")
-    }
-    
-    private func isInternetError(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("Internet")
-    }
-    
-    private func isBlockError(forResponse errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains("LDAP account is locked")
-    }
-    
-    private func isEmptyPhoneError(for errorResponse: ErrorResponse) -> Bool {
-        return errorResponse.description.contains(HeaderConstant.emptyMSISDN)
-    }
-    
-    private func checkInternetConnection() -> Bool {
-        return ReachabilityService().isReachable
     }
     
     private func emptyEmailCheck(for headers: [String: Any]) {

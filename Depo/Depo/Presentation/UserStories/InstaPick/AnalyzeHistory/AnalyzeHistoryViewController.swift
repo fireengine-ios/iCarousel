@@ -24,6 +24,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     private let refresher = UIRefreshControl()
     private var page = 0
     private let pageSize = Device.isIpad ? 50 : 30
+    private var isLoadingNextPage = false
     
     private var navBarConfigurator = NavigationBarConfigurator()
     private lazy var cancelSelectionButton: UIBarButtonItem = {
@@ -44,6 +45,10 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     // MARK: - Life cycle
     
+    deinit {
+        instapickService.delegates.remove(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,7 +64,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     private func configure() {
-        needShowTabBar = false
+        instapickService.delegates.add(self)
         
         activityManager.delegate = self
         displayManager.applyConfiguration(.initial)
@@ -67,6 +72,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         dataSource.setupCollectionView(collectionView: collectionView)
         dataSource.delegate = self
         collectionView.contentInset.bottom = newAnalysisView.bounds.height
+        collectionView.backgroundColor = .clear
         
         refresher.tintColor = .clear
         refresher.addTarget(self, action: #selector(reloadData), for: .valueChanged)
@@ -136,30 +142,29 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     // MARK: - Actions
     
     @IBAction private func newAnalysisAction(_ sender: Any) {
-        showSpiner()
-        if dataSource.analysisCount.left > 0 {
-            
+        if let count = dataSource.analysisCount?.left, count > 0 {
+            startActivityIndicator()
             instapickRoutingService.getViewController(success: { [weak self] controller in
-                self?.hideSpiner()
-                
+                self?.stopActivityIndicator()
+
                 if controller is InstapickPopUpController, let vc = self?.router.createRootNavigationControllerWithModalStyle(controller: controller) {
                     self?.router.presentViewController(controller: vc)
                 }
-            }, error: { errorResponse in
-                DispatchQueue.toMain {
-                    UIApplication.showErrorAlert(message: errorResponse.localizedDescription)
-                }
+            }, error: { [weak self] errorResponse in
+                self?.showError(message: errorResponse.description)
             })
         } else {
             let popup = PopUpController.with(title: TextConstants.analyzeHistoryPopupTitle,
-                                             message: TextConstants.analyzeHistoryPopupMessage,
-                                             image: .custom(UIImage(named: "popup_info")),
-                                             buttonTitle: TextConstants.analyzeHistoryPopupButton) { [weak self] controller in
-                                                controller.close { [weak self] in
-                                                    self?.onPurchase()
-                                                }
+                                         message: TextConstants.analyzeHistoryPopupMessage,
+                                         image: .custom(UIImage(named: "popup_info")),
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.analyzeHistoryPopupButton,
+                                         secondAction: { [weak self] controller in
+                                            controller.close {
+                                                self?.onPurchase()
                                             }
-
+                                         })
+            
             present(popup, animated: true)
         }
     }
@@ -260,20 +265,29 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     }
     
     private func loadNextHistoryPage(completion: BoolHandler? = nil) {
+        if isLoadingNextPage || dataSource.isPaginationDidEnd {
+            return
+        }
+        
+        isLoadingNextPage = true
+        
         instapickService.getAnalyzeHistory(offset: page, limit: pageSize) { [weak self] result in
             guard let `self` = self else {
                 return
             }
             
+            self.isLoadingNextPage = false
+            
             switch result {
             case .success(let history):
                 DispatchQueue.main.async {
-                    if self.page == 0 {
+                    self.page += 1
+                    
+                    if self.page == 1 {
                         self.dataSource.reloadHistoryItems(history)
                     } else {
                         self.dataSource.appendHistoryItems(history)
                     }
-                    self.page += 1
                 
                     if self.dataSource.isEmpty {
                         self.displayManager.applyConfiguration(.empty)
@@ -285,7 +299,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 }
             case .failed(let error):
                 completion?(false)
-                self.showError(message: error.localizedDescription)
+                self.showError(message: error.description)
             }
         }
     }
@@ -326,7 +340,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                     })
                 }
             case .failed(let error):
-                self.showError(message: error.localizedDescription)
+                self.showError(message: error.description)
             }
         }
     }
@@ -341,7 +355,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .success(let response):
                 self.openDetail(for: response, analyzesCount: analyzesCount)
             case .failed(let error):
-                self.showError(message: error.localizedDescription)
+                self.showError(message: error.description)
             }
         }
     }
@@ -352,7 +366,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
             case .success(let analysisCount):
                 success(analysisCount)
             case .failed(let error):
-                self?.showError(message: error.localizedDescription)
+                self?.showError(message: error.description)
             }
         }
     }
@@ -369,7 +383,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         stopActivityIndicator()
         
         let router = RouterVC()
-        let controller = router.instaPickDetailViewController(models: analysis, analyzesCount: analyzesCount)
+        let controller = router.instaPickDetailViewController(models: analysis, analyzesCount: analyzesCount, isShowTabBar: false)
         
         router.presentViewController(controller: controller)
     }
@@ -405,9 +419,15 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
     
     func onPurchase() {
         //TODO: - Open Purchase Screen
+        InstaPickRoutingService.showUpdgradePopup()
     }
     
-    func onSeeDetailsForAnalyze(_ analyze: InstapickAnalyze) {
+    func onSeeDetails() {
+        //TODO: - Open Details Screen
+        InstaPickRoutingService.showUpdgradePopup()
+    }
+    
+    func onSelectAnalyze(_ analyze: InstapickAnalyze) {
         prepareToOpenDetails(with: analyze)
     }
     
@@ -424,5 +444,34 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryTabBarPresenterDelegate {
         default:
             break
         }
+    }
+}
+
+extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
+    func didRemoveAnalysis() { }
+    
+    func didFinishAnalysis(_ analyses: [InstapickAnalyze]) {
+        guard let mainAnalyse = analyses.max(by: {
+            if $0.rank == $1.rank {
+                return $0.score < $1.score
+            }
+            return $0.rank < $1.rank
+        }) else {
+            return
+        }
+        
+        let insertAnalyse = InstapickAnalyze(requestIdentifier: mainAnalyse.requestIdentifier,
+                                             rank: mainAnalyse.rank,
+                                             hashTags: mainAnalyse.hashTags,
+                                             fileInfo: mainAnalyse.fileInfo,
+                                             photoCount: analyses.count,
+                                             startedDate: mainAnalyse.startedDate,
+                                             score: mainAnalyse.score)
+        
+        if dataSource.isEmpty {
+            displayManager.applyConfiguration(.initial)
+        }
+        
+        dataSource.insertNewItems([insertAnalyse])
     }
 }

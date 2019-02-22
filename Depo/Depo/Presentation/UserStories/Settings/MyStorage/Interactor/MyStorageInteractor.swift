@@ -28,7 +28,7 @@ final class MyStorageInteractor {
             }, fail: { [weak self] error in
                 DispatchQueue.toMain {
                     self?.output.successed(allOffers: offers)
-                    self?.output.failed(with: error.localizedDescription)
+                    self?.output.failed(with: error.description)
                 }
         })
     }
@@ -102,6 +102,84 @@ extension MyStorageInteractor: MyStorageInteractorInput {
                 DispatchQueue.toMain {
                     self?.output.failed(with: errorResponse)
                 }
+        })
+    }
+    
+    func restorePurchases() {
+        guard !sendReciept() else {
+            return
+        }
+        
+        iapManager.restorePurchases { [weak self] result in
+            switch result {
+            case .success:
+//                let offers = productIds.map { OfferApple(productId: $0) } ///Backend dont need this for now
+                self?.validateRestorePurchase(offersApple: [])
+                
+            case .fail(let error):
+                DispatchQueue.main.async {
+                    self?.output.failed(with: ErrorResponse.error(error))
+                }
+            }
+        }
+    }
+    
+    private func sendReciept() -> Bool {
+        guard let receipt = iapManager.receipt else {
+            return false
+        }
+        
+        offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
+            guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
+                return
+            }
+            
+            if status == .restored || status == .success {
+                DispatchQueue.toMain {
+                    self?.output.refreshPackages()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self?.output.failed(with: ErrorResponse.string(status.description))
+                }
+            }
+            
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.output.failed(with: errorResponse)
+                }
+        })
+        
+        return true
+    }
+    
+    private func validateRestorePurchase(offersApple: [OfferApple]) {
+        guard let receipt = iapManager.receipt else {
+            return
+        }
+        
+        //just sending reciept
+        offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
+            guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
+                return
+            }
+            if !(status == .restored || status == .success) {
+                debugLog("validateRestorePurchaseFailed: \(status.description)")
+                
+                DispatchQueue.main.async {
+                    self?.output.failed(with: ErrorResponse.string(status.description))
+                }
+            } else {
+                DispatchQueue.toMain {
+                    self?.output.refreshPackages()
+                }
+            }
+        }, fail: { [weak self] errorResponse in
+            debugLog("validateRestorePurchaseFailed: \(errorResponse.description)")
+            
+            DispatchQueue.toMain {
+                self?.output.failed(with: errorResponse)
+            }
         })
     }
     
