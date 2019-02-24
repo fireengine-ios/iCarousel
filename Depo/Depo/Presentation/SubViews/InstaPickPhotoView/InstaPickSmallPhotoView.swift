@@ -22,6 +22,10 @@ final class InstaPickSmallPhotoView: InstaPickPhotoView {
         imageViewHeightConstraint.constraintWithMultiplier(0.96).isActive = true
     }
     
+    override func configurePictureNotFound(fontSize: CGFloat, imageWidth: CGFloat, spacing: CGFloat) {
+        super.configurePictureNotFound(fontSize: 6, imageWidth: 10, spacing: 4)
+    }
+    
     override func setupLabelsDesign(isIPad: Bool) {
         super.setupLabelsDesign(isIPad: isIPad)
         

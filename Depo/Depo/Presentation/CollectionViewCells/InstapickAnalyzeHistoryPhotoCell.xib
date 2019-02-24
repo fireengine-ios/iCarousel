@@ -25,6 +25,24 @@
                             <constraint firstAttribute="width" secondItem="iYj-XS-Dle" secondAttribute="height" multiplier="1:1" id="2Bu-IP-3vx"/>
                         </constraints>
                     </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xZQ-cj-yoX">
+                        <rect key="frame" x="19" y="21.5" width="42" height="37.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zl3-aY-YNm">
+                                <rect key="frame" x="11.5" y="0.0" width="19" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="PiJ-rl-HvP"/>
+                                    <constraint firstAttribute="height" secondItem="zl3-aY-YNm" secondAttribute="width" multiplier="0.9" id="tak-6f-12Q"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="320-OA-N11">
+                                <rect key="frame" x="0.0" y="17" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YM8-Sf-HUz">
                         <rect key="frame" x="0.0" y="53.5" width="26.5" height="26.5"/>
                         <subviews>
@@ -86,11 +104,15 @@
             <constraints>
                 <constraint firstItem="Jvr-NL-CY6" firstAttribute="trailing" secondItem="iYj-XS-Dle" secondAttribute="trailing" id="4RA-Sg-ZZK"/>
                 <constraint firstItem="Jvr-NL-CY6" firstAttribute="bottom" secondItem="iYj-XS-Dle" secondAttribute="bottom" constant="3" id="9Pm-VC-rHG"/>
+                <constraint firstItem="xZQ-cj-yoX" firstAttribute="centerX" secondItem="iYj-XS-Dle" secondAttribute="centerX" id="Lk7-c0-lnZ"/>
                 <constraint firstItem="YM8-Sf-HUz" firstAttribute="leading" secondItem="iYj-XS-Dle" secondAttribute="leading" id="OdT-UG-Hxk"/>
                 <constraint firstItem="vHc-GA-Ynd" firstAttribute="leading" secondItem="BHT-bW-h3z" secondAttribute="leading" id="QYc-4f-Cvh"/>
+                <constraint firstItem="xZQ-cj-yoX" firstAttribute="centerY" secondItem="iYj-XS-Dle" secondAttribute="centerY" id="TK1-cm-5Fz"/>
+                <constraint firstItem="xZQ-cj-yoX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iYj-XS-Dle" secondAttribute="leading" constant="8" id="Uuv-RU-Qm3"/>
                 <constraint firstItem="Jvr-NL-CY6" firstAttribute="width" secondItem="iYj-XS-Dle" secondAttribute="width" multiplier="1:3" id="ZsN-AG-Hyy"/>
                 <constraint firstItem="Jvr-NL-CY6" firstAttribute="height" secondItem="iYj-XS-Dle" secondAttribute="height" multiplier="1:3" id="cQg-yZ-CE2"/>
                 <constraint firstAttribute="trailing" secondItem="iYj-XS-Dle" secondAttribute="trailing" id="ifc-re-azs"/>
+                <constraint firstItem="xZQ-cj-yoX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iYj-XS-Dle" secondAttribute="top" id="jnK-iX-Ek7"/>
                 <constraint firstItem="vHc-GA-Ynd" firstAttribute="top" secondItem="iYj-XS-Dle" secondAttribute="bottom" constant="12" id="jpz-dB-akc"/>
                 <constraint firstItem="YM8-Sf-HUz" firstAttribute="bottom" secondItem="iYj-XS-Dle" secondAttribute="bottom" id="kH5-MH-xw9"/>
                 <constraint firstItem="iYj-XS-Dle" firstAttribute="leading" secondItem="BHT-bW-h3z" secondAttribute="leading" id="rMv-wh-rHO"/>
@@ -105,6 +127,9 @@
             <connections>
                 <outlet property="countLabel" destination="vHc-GA-Ynd" id="AFy-b9-EfY"/>
                 <outlet property="imageView" destination="iYj-XS-Dle" id="cMo-UH-feK"/>
+                <outlet property="pictureNotFoundImageView" destination="zl3-aY-YNm" id="P3B-c1-Xmc"/>
+                <outlet property="pictureNotFoundLabel" destination="320-OA-N11" id="z3x-CK-SoQ"/>
+                <outlet property="pictureNotFoundStackView" destination="xZQ-cj-yoX" id="cov-5y-L5k"/>
                 <outlet property="rankLabel" destination="eOV-mq-aAc" id="l68-0k-Cxl"/>
                 <outlet property="rankView" destination="9ns-CX-Fi0" id="QVT-Rt-xzq"/>
                 <outlet property="rankViewWidth" destination="ln1-Js-xwW" id="3Wa-NZ-Ue1"/>
