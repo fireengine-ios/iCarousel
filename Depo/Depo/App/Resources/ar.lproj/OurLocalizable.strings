@@ -835,7 +835,15 @@
 "there_are_no_photos" = "لايوجد صور";
 "there_are_no_albums" = "لايوجد البومات";
 "instapick_selection_analyzes_left_max" = "لقد قمت باختيار %d من الصور (الحد الأقصى الذي تستطيع اختياره)";
-"free_trial_title_label" = "احصل على اختبار التحقق captcha";
+"free_trial_title_label" = "تحليل مع PhotoPick";
 "free_trial_detail_label" = "احصل على اختبار تحقق سمعي";
 "instapick_under_construction" = "نحن نحقق تحسينًا على تطبيق PhotoPick للحصول على تجربة أفضل";
 "instapick_unsupported_file_type" = "تكون الصور التي حددتها بتنسيق غير متوافق. يمكنك متابعة تجربة PhotoPick بتحديد صور أخرى.";
+"work_will_introduced" = "";
+"facebook_remove_connection_warning_title" = "";
+"dropbox_remove_connection_warning_title" = "";
+"facebook_remove_connection_warning_message" = "";
+"dropbox_remove_connection_warning_message" = "";
+"remove_connection" = "";
+"you_are_connected" = "";
+"insta_pick_picture_not_found" = "";
