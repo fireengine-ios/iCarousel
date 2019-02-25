@@ -46,6 +46,35 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         }
     }
     
+    @IBOutlet weak var pictureNotFoundStackView: UIStackView! {
+        willSet {
+            newValue.spacing = 5
+            newValue.axis = .vertical
+            newValue.alignment = .center
+            
+            newValue.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var pictureNotFoundImageView: UIImageView! {
+        willSet {
+            newValue.image = UIImage(named: "instaPickPicture")
+            newValue.contentMode = .scaleAspectFit
+        }
+    }
+    
+    @IBOutlet weak var pictureNotFoundLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 10)
+            newValue.text = TextConstants.instaPickPictureNotFoundLabel
+            newValue.textColor = ColorConstants.darcBlueColor
+            newValue.textAlignment = .center
+            newValue.numberOfLines = 2
+            
+            newValue.adjustsFontSizeToFitWidth()
+        }
+    }
+    
     @IBOutlet private weak var selectionImageWidth: NSLayoutConstraint!
     @IBOutlet private weak var rankViewWidth: NSLayoutConstraint!
 
@@ -88,8 +117,11 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         if let metadata = item.fileInfo?.metadata {
             setImage(with: metadata, identifier: item.requestIdentifier)
         } else {
-            imageView.layer.borderWidth = 0
-            setImage(image: UIImage(named: "photo_not_found"), animated: false)
+            ///DispatchQueue.main.async uses to avoid "square" circles
+            DispatchQueue.main.async {
+                self.pictureNotFoundStackView.isHidden = false
+                self.setImage(image: UIImage(named: "instaPickImageNotFound"), animated: false)
+            }
         }
     }
 
@@ -99,19 +131,20 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         cellImageManager = CellImageManager.instance(by: cacheKey)
         uuid = cellImageManager?.uniqueId
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
+            guard  let `self` = self else {
+                return
+            }
+            
             DispatchQueue.toMain {
-                guard let image = image else {
-                    self?.imageView.layer.borderWidth = 0
-                    self?.setImage(image: UIImage(named: "photo_not_found"), animated: false)
+                guard let image = image, let uuid = self.uuid, uuid == uniqueId else {
+                    self.pictureNotFoundStackView.isHidden = false
+                    self.setImage(image: UIImage(named: "instaPickImageNotFound"), animated: false)
                     return
                 }
                 
-                guard let uuid = self?.uuid, uuid == uniqueId else {
-                    return
-                }
-                
-                let needAnimate = !cached && (self?.imageView.image == nil)
-                self?.setImage(image: image, animated: needAnimate)
+                self.pictureNotFoundStackView.isHidden = true
+                let needAnimate = !cached && (self.imageView.image == nil)
+                self.setImage(image: image, animated: needAnimate)
             }
         }
         

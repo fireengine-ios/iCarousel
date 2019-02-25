@@ -258,11 +258,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func successedVerifyPhone() {
-        optInVC?.stopActivityIndicator()
-        optInVC?.resignFirstResponder()
-        
-        tokenStorage.isClearTokens = false
-        
+        stopOptInVC()
         startAsyncOperationDisableScreen()
         interactor.relogin()
     }
@@ -286,6 +282,16 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     func updateUserLanguageFailed(error: Error) {
         view.showErrorMessage(with: error.description)
         completeAsyncOperationEnableScreen()
+    }
+    
+    func successedSilentLogin() {
+        stopOptInVC()
+    }
+    
+    private func stopOptInVC() {
+        optInVC?.stopActivityIndicator()
+        optInVC?.resignFirstResponder()
+        tokenStorage.isClearTokens = false
     }
 }
 
