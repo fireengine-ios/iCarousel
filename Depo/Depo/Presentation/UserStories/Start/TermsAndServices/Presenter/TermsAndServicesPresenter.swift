@@ -112,8 +112,6 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
             }
         }) { [weak self] error in
             self?.view.hideSpiner()
-
-            self?.delegate?.show(errorString: error.description)
         }
     }
     

@@ -161,8 +161,6 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
             }
         }) { [weak self] error in
             self?.view.hideSpiner()
-
-            self?.view.showErrorAlert(message: error.description)
         }
     }
     

@@ -95,8 +95,6 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
             }
         }) { [weak self] error in
             self?.hideSpiner()
-
-            UIApplication.showErrorAlert(message: error.description)
         }
     }
     

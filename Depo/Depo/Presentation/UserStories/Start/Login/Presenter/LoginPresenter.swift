@@ -192,8 +192,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
             }
         }) { [weak self] error in
             self?.view.hideSpiner()
-
-            self?.view.showErrorMessage(with: error.description)
         }
     }
     

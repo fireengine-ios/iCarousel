@@ -107,8 +107,6 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
             }
         }) { [weak self] error in
             self?.view.hideSpiner()
-
-            self?.router.presentErrorPopUp(with: error.description)
         }
     }
     
