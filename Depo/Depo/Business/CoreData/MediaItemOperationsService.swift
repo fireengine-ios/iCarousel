@@ -22,7 +22,7 @@ final class MediaItemOperationsService {
     
     let privateQueue = DispatchQueue(label: DispatchQueueLabels.mediaItemOperationsService, attributes: .concurrent)
     
-    var pageAppendedCallBack: AppendingLocalItemsPageAppended?
+//    var pageAppendedCallBack: AppendingLocalItemsPageAppended?
     
     var inProcessAppendingLocalFiles = false
     
@@ -194,6 +194,7 @@ final class MediaItemOperationsService {
                         array.append(MediaItemsObjectSyncStatus(userID: userID, context: context))
                     }
                     savedItem.objectSyncStatus = NSSet(array: array)
+                    savedItem.addToRelatedRemotes(MediaItem(wrapData: item, context: context))
                     
                     //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
                 })
@@ -400,6 +401,7 @@ final class MediaItemOperationsService {
                 self?.inProcessAppendingLocalFiles = false
                 print("LOCAL_ITEMS: All local files have been added in \(Date().timeIntervalSince(start)) seconds")
                 NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
+                completion?()
                 return
             }
             
@@ -411,7 +413,7 @@ final class MediaItemOperationsService {
                 self?.inProcessAppendingLocalFiles = false
                 NotificationCenter.default.post(name: Notification.Name.allLocalMediaItemsHaveBeenLoaded, object: nil)
                 
-                self?.pageAppendedCallBack?([])
+//                self?.pageAppendedCallBack?([])
                 completion?()
             }
         }
@@ -447,7 +449,7 @@ final class MediaItemOperationsService {
                     }
                     
                     CoreDataStack.default.saveDataForContext(context: context, saveAndWait: true, savedCallBack: { [weak self] in
-                        self?.pageAppendedCallBack?(addedObjects)
+//                        self?.pageAppendedCallBack?(addedObjects)
                         
                         ItemOperationManager.default.addedLocalFiles(items: addedObjects)//TODO: Seems like we need it to update page after photoTake
                         print("LOCAL_ITEMS: page has been added in \(Date().timeIntervalSince(start)) secs")
