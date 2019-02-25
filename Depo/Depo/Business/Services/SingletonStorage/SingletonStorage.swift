@@ -80,7 +80,7 @@ class SingletonStorage {
                 self?.faceImageSettings = result
                 completion(result)
             case .failed(let error):
-                fail(ErrorResponse.string(error.localizedDescription))
+                fail(ErrorResponse.string(error.description))
             }
         })
     }

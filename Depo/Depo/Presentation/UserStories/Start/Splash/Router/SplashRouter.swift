@@ -37,7 +37,7 @@ class SplashRouter: SplashRouterInput {
     }
     
     func showError(_ error: Error) {
-        UIApplication.showErrorAlert(message: error.localizedDescription)
+        UIApplication.showErrorAlert(message: error.description)
     }
     
     func goToSyncSettingsView(fromSplash: Bool = false) {
