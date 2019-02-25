@@ -44,9 +44,13 @@ final class AutoSyncRoutingService {
                     
                     successHandler(true)
                 }
-            case .failed(let error):
-                let errorResponse = ErrorResponse.error(error)
-                self?.showError(with: errorResponse)
+            case .failed(_):
+                guard let successHandler = self?.successHandler else {
+                    assertionFailure()
+                    return
+                }
+                
+                successHandler(true)
             }
         }
     }
@@ -61,15 +65,6 @@ final class AutoSyncRoutingService {
         settings.disableAutoSync()
         dataStorage.save(autoSyncSettings: settings)
         SyncServiceManager.shared.update(syncSettings: settings)
-    }
-    
-    private func showError(with error: ErrorResponse) {
-        guard let errorHandler = errorHandler else {
-            assertionFailure()
-            return
-        }
-        
-        errorHandler(error)
     }
     
 }
