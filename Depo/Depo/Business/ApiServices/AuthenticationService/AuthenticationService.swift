@@ -337,7 +337,7 @@ class AuthenticationService: BaseRequestService {
         debugLog("AuthenticationService autificationByToken")
         
         let user = AuthenticationUserByToken()
-        let params: [String: Any] = ["deviceInfo": Device.deviceInfo]
+        let params: [String: Any] = [LbRequestkeys.deviceInfo: Device.deviceInfo]
         
         SessionManager.customDefault.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
             .responseString { [weak self] response in
@@ -518,5 +518,19 @@ class AuthenticationService: BaseRequestService {
             .request(RouteRequests.updateLanguage, method: .post, encoding: language)
             .customValidate()
             .responseVoid(handler)
+    }
+    
+    func silentLogin(token: String, success: SuccessLogin?, fail: FailResponse?) {
+        debugLog("AuthenticationService silentLogin")
+        
+        SessionManager.customDefault
+            .request(RouteRequests.silentLogin,
+                     method: .post,
+                     parameters: [LbRequestkeys.token: token,
+                                  LbRequestkeys.deviceInfo: Device.deviceInfo],
+                     encoding: JSONEncoding.default)
+            .responseString { [weak self] response in
+                self?.loginHandler(response, success, fail)
+        }
     }
 }

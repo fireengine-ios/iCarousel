@@ -51,6 +51,8 @@ struct HeaderConstant {
     static let objecMetaDevice = "X-Object-Meta-Device-UUID"
     
     static let transId = "X-Trans-Id"
+    
+    static let silentToken = "X-Silent-Token"
 }
 
 class RequestHeaders {
