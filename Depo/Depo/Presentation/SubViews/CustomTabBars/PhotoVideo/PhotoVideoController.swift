@@ -361,7 +361,9 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
             self?.hideSpiner()
             if vc is InstapickPopUpController {
                 //FIXME: add router
-//                self?.router.openNeededInstaPick(viewController: vc)
+                let router = RouterVC()
+                let navController = router.createRootNavigationControllerWithModalStyle(controller: vc)
+                router.presentViewController(controller: navController)
             }
         }) { [weak self] error in
             self?.showAlert(with: error.description)
