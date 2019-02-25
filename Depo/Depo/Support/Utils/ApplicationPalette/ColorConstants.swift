@@ -50,6 +50,7 @@ struct ColorConstants {
     
     static let lrTiffanyBlueGradient = UIColor(red: 244 / 255, green: 71 / 255, blue: 87 / 255, alpha: NumericConstants.alphaForColorsPremiumButton)
     static let orangeGradient = UIColor(red: 255 / 255, green: 159 / 255, blue: 8 / 255, alpha: NumericConstants.alphaForColorsPremiumButton)
+    static let removeConnection = UIColor(red: 130 / 255, green: 150 / 255, blue: 161 / 255, alpha: 1.0)
 }
 
 extension UIColor {
