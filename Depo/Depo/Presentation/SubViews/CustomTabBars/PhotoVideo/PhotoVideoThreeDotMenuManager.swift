@@ -29,7 +29,7 @@ final class PhotoVideoThreeDotMenuManager {
                 self?.alert.show(with: types, for: items, presentedBy: nil, onSourceView: nil, viewController: nil)
             }
         } else {
-            self.alert.show(with: [.select], for: [], presentedBy: nil, onSourceView: nil, viewController: nil)
+            self.alert.show(with: [.select, .instaPick], for: [], presentedBy: nil, onSourceView: nil, viewController: nil)
         }
     }
     

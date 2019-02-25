@@ -390,22 +390,25 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func segmentedController(with controllers: [UIViewController]) -> SegmentedController {
-        return SegmentedController.initWithControllers(controllers)
+    func segmentedMedia() -> SegmentedController {
+        let photos = PhotoVideoController.initPhotoFromNib()
+        let videos = PhotoVideoController.initVideoFromNib()
+        
+        return SegmentedController.initWithControllers([photos, videos])
     }
     
     
     // MARK: Photos and Videos
     
-    var photosScreen: UIViewController? {
-        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Photo)
-        return controller
-    }
+//    var photosScreen: UIViewController? {
+//        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Photo)
+//        return controller
+//    }
     
-    var videosScreen: UIViewController? {
-        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Video)
-        return controller
-    }
+//    var videosScreen: UIViewController? {
+//        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Video)
+//        return controller
+//    }
     
     // MARK: Music
     

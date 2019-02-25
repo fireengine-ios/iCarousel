@@ -355,7 +355,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         syncContactsVC.tabBarSetup = true
         
         let list = [router.homePageScreen,
-                    router.segmentedController(with: [PhotoVideoController.initPhotoFromNib(), PhotoVideoController.initVideoFromNib()]),
+                    router.segmentedMedia(),
                     syncContactsVC,
                     router.segmentedFiles]
         customNavigationControllers = list.flatMap { NavigationController(rootViewController: $0!) }

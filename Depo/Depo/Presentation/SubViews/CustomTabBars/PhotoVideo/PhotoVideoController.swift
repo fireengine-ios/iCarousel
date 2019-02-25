@@ -79,6 +79,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         super.viewWillAppear(animated)
         updateCellSize()
         // TODO: need layoutIfNeeded?
+        homePageNavigationBarStyle()
+        // TODO: Set title?
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
         collectionViewManager.scrolliblePopUpView.isActive = true
     }
