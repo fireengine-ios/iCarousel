@@ -644,7 +644,7 @@
 "LifeboxSmallPopUpCheckBoxTex" = "Never show again";
 "LifeboxSmallPopUpFirstButtonText" = "OK";
 "LifeboxSmallPopUpSecondButtonText" = "UPGRADE";
-"has_remained_lifebox_usage" = "\"%@ of %@ has remained (only for lifebox usage)";
+"has_remained_lifebox_usage" = "%@ of %@ has remained (only for lifebox usage)";
 "Renewal Date: %@" = "Renewal date: %@";
 "created" = "created";
 "uploaded" = "uploaded";
@@ -814,7 +814,6 @@
 "engage_with_more_hastags" = "Engage with more #hashtags";
 "copy_hashtags_to_clipboard" = "Copy #hashtags to clipboard";
 "share_on_social_media" = "Share on Social Media!";
-"insta_pick_picture_not_found" = "Picture not found";
 "picked" = "PICKED!";
 "insta_pick_analyzing_bottom" = "Enjoy your time while we analyze your photos! 😊";
 "insta_pick_analyzing_0" = "We are looking for the photo you'll get the most likes.";
@@ -856,3 +855,11 @@
 "free_trial_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Try more free for a limited time!";
 "instapick_under_construction" = "We are making improvement on PhotoPick for a better experience 😉";
 "instapick_unsupported_file_type" = "Photos you have selected are in unsupported format. You can continue PhotoPick experience by selecting other photos.";
+"work_will_introduced" = "There is currently a maintenance work on lifebox, please try again later.";
+"facebook_remove_connection_warning_title" = "You're about to remove your Facebook connection.";
+"dropbox_remove_connection_warning_title" = "You're about to remove your Dropbox connection.";
+"facebook_remove_connection_warning_message" = "Are you sure you want to remove your Facebook connection?\n\n";
+"dropbox_remove_connection_warning_message" = "Are you sure you want to remove your Dropbox connection?\n\n";
+"remove_connection" = "Remove Connection";
+"you_are_connected" = "You are connected";
+"insta_pick_picture_not_found" = "Picture not found";
