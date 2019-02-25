@@ -38,7 +38,7 @@ final class AutoSyncRoutingService {
                     self?.successHandler?(false)
                 } else {
                     guard let successHandler = self?.successHandler else {
-                        UIApplication.showErrorAlert(message: "Success handler unexpected become nil.")
+                        assertionFailure()
                         return
                     }
                     
@@ -65,7 +65,7 @@ final class AutoSyncRoutingService {
     
     private func showError(with error: ErrorResponse) {
         guard let errorHandler = errorHandler else {
-            UIApplication.showErrorAlert(message: "Error handler unexpected become nil.")
+            assertionFailure()
             return
         }
         
