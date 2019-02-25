@@ -32,7 +32,7 @@ final class AutoSyncRoutingService {
         accountService.getFeatures { [weak self] (response) in
             switch response {
             case .success(let result):
-                if result.isAutoSyncDisabled == false {
+                if result.isAutoSyncDisabled == true {
                     self?.disableAutoSync()
                     self?.didOpenHome()
                     self?.successHandler?(false)
