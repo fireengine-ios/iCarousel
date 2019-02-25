@@ -13,6 +13,8 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControll: UIPageControl!
     
+    private lazy var autoSyncRoutingService = AutoSyncRoutingService()
+    
     @IBOutlet private weak var startUsingButton: BlueButtonWithMediumWhiteText! {
         didSet {
             startUsingButton.setTitle(TextConstants.landingStartUsing, for: .normal)
@@ -77,7 +79,30 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
         scrollToPage(currentPage)
     }
 
+    // MARK: - Utility methods
     private func scrollToPage(_ page: Int) {
         scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(currentPage), y: 0), animated: true)
     }
+    
+    private func openAutoSyncIfNeeded() {
+        showSpiner()
+        
+        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
+            self?.hideSpiner()
+            
+            if needToOpenAutoSync {
+                self?.goToSyncSettingsView()
+            }
+        }) { error in
+            self?.hideSpiner()
+
+            UIApplication.showErrorAlert(message: error.description)
+        }
+    }
+    
+    func goToSyncSettingsView() {
+        let router = RouterVC()
+        router.pushViewController(viewController: router.synchronyseScreen)
+    }
+    
 }

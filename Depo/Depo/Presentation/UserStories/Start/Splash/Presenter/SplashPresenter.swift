@@ -15,6 +15,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     private lazy var customProgressHUD = CustomProgressHUD()
     private var turkcellLogin = false
     private lazy var storageVars: StorageVars = factory.resolve()
+    private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     func viewIsReady() {
         TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] in
@@ -131,7 +132,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
                 router.navigateToApplication()
                 openLink()
             } else {
-                router.goToSyncSettingsView(fromSplash: true)
+                openAutoSyncIfNeeded()
             }
         }
     }
@@ -148,6 +149,21 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         }
         let navVC = NavigationController(rootViewController: vc)
         UIApplication.topController()?.present(navVC, animated: true, completion: nil)
+    }
+    
+    private func openAutoSyncIfNeeded() {
+        view.showSpiner()
+        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
+            self?.view.hideSpiner()
+            
+            if needToOpenAutoSync {
+                self?.router.goToSyncSettingsView(fromSplash: true)
+            }
+        }) { [weak self] error in
+            self?.view.hideSpiner()
+
+            self?.view.showErrorAlert(message: error.description)
+        }
     }
     
     func onFailEULA() {
