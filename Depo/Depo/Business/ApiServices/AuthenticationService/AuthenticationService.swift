@@ -523,7 +523,7 @@ class AuthenticationService: BaseRequestService {
     func silentLogin(token: String, success: SuccessLogin?, fail: FailResponse?) {
         debugLog("AuthenticationService silentLogin")
         
-        SessionManager.customDefault
+        sessionManagerWithoutToken
             .request(RouteRequests.silentLogin,
                      method: .post,
                      parameters: [LbRequestkeys.token: token,

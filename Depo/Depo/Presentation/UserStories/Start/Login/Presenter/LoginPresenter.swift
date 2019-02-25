@@ -259,8 +259,16 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func successedVerifyPhone() {
         stopOptInVC()
-        startAsyncOperationDisableScreen()
-        interactor.relogin()
+        
+        let popupVC = PopUpController.with(title: nil,
+                                           message: TextConstants.phoneUpdatedNeedsLogin,
+                                           image: .none,
+                                           buttonTitle: TextConstants.ok) { vc in
+                                            vc.close {
+                                                AppConfigurator.logout()
+                                            }
+        }
+        UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
     }
     
     func failedVerifyPhone(errorString: String) {
