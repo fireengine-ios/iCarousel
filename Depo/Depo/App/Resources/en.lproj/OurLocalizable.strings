@@ -852,7 +852,6 @@
 "facebook_remove_connection_warning_message" = "Are you sure you want to remove your Facebook connection?\n\n";
 "dropbox_remove_connection_warning_message" = "Are you sure you want to remove your Dropbox connection?\n\n";
 "instapick_selection_photos_selected" = "Photos Selected (%d)";
-"instapick_selection_analyzes_left" = "You only have %d analyses left";
 "loading" = "Loading...";
 "there_are_no_photos" = "There are no photos";
 "there_are_no_albums" = "There are no albums";
