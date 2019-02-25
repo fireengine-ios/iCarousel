@@ -86,7 +86,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         if interactor.cameFromLogin, storageVars.autoSyncSet {
             router.goToHomePage()
         } else {
-            router.goToAutoSync()
+            openAutoSyncIfNeeded()
         }
     }
     
