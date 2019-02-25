@@ -843,3 +843,4 @@
 "remove_connection" = "Bağlantıyı kaldır";
 "you_are_connected" = "Bağlı";
 "insta_pick_picture_not_found" = "Fotoğraf \nbulunamadı";
+"phone_updated_needs_login" = "";
