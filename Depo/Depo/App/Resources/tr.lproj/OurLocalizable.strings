@@ -390,7 +390,7 @@
 "Start using Lifebox now!" = "Yeni hesap oluştur";
 "E-mail field is invalid" = "E-posta alanı geçersiz";
 "Delete Device Original" = "Orijinalini cihazdan silin";
-"Please check your internet connection is active and Mobile Data is ON." = "Lütfen internet bağlantınıın aktif ve mobil verinin açık olduğunu kontrol et.";
+"Please check your internet connection is active and Mobile Data is ON." = "Lütfen internet bağlantının aktif ve mobil verinin açık olduğunu kontrol et.";
 "cancelled" = "Iptal edildi";
 "The network connection was lost." = "Ağ bağlantısı kaybedildi";
 "ServiceError" = "Servis Hatası";
@@ -432,7 +432,7 @@
 "Folder is Empty" = "Klasör Boş";
 "Folder Items" = "%d Öğeler";
 "Contact Backup" = "Kontak Yedekleme";
-"Your last contact update was %@ months ago!" = "Kontaklarını en son%@ ay önce yedekledin!";
+"Your last contact update was %@ months ago!" = "Kontaklarını en son %@ ay önce yedekledin!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Kontak listenizi en son güncellediğiniz tarihten bu yana %@ ay oldu. Kontaklarını hiçbir zaman kaybetmemek için şimdi yeniden yedekle.";
 "Your contact list looks empty" = "Kişi listen boş görünüyor";
 "You don’t have any contacts in your profile, backup your contacts now!" = "Hesabında hiçbir kontak bulunmuyor, kontaklarını hemen yedekle!";
@@ -824,7 +824,7 @@
 "Instagram" = "Instagram";
 "connected_as_format" = "Bağlı hesap: @%@";
 "instagram_remove_connection_warning_title" = "Instagram bağlantını kaldırmak üzeresin";
-"instagram_remove_connection_warning_message" = "Instagram ile olan bağlantını kaldırmak istediğine emin misin?\\n\\n";
+"instagram_remove_connection_warning_message" = "Instagram ile olan bağlantını kaldırmak istediğine emin misin?\n\n";
 "instapick_selection_photos_selected" = "Seçili Fotoğraf (%d)";
 "instapick_selection_analyzes_left" = "Sadece %d analiz hakkın kaldı";
 "loading" = "Yükleniyor...";
@@ -835,3 +835,11 @@
 "free_trial_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Üstelik daha çok dene diye sınırlı bir süre için ücretsiz!";
 "instapick_under_construction" = "Daha iyi bir deneyim yaşaman için PhotoPick'i iyileştiriyoruz 😉";
 "instapick_unsupported_file_type" = "Seçmiş olduğun fotoğraflar desteklenmeyen bir formatta. Başka fotoğraflar seçerek PhotoPick deneyimini yaşamaya devam edebilirsin.";
+"work_will_introduced" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
+"facebook_remove_connection_warning_title" = "Facebook bağlantını kaldırmak üzeresin.";
+"dropbox_remove_connection_warning_title" = "Dropbox bağlantını kaldırmak üzeresin.";
+"facebook_remove_connection_warning_message" = "Facebook ile olan bağlantını kaldırmak istediğine emin misin?";
+"dropbox_remove_connection_warning_message" = "Dropbox ile olan bağlantını kaldırmak istediğine emin misin?";
+"remove_connection" = "Bağlantıyı kaldır";
+"you_are_connected" = "Bağlı";
+"insta_pick_picture_not_found" = "Fotoğraf \nbulunamadı";

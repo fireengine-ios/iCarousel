@@ -1063,6 +1063,7 @@ struct TextConstants {
     static let instaPickCopyHashtagsButton = NSLocalizedString("copy_hashtags_to_clipboard", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickShareButton = NSLocalizedString("share_on_social_media", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let instaPickPictureNotFoundLabel = NSLocalizedString("insta_pick_picture_not_found", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickPickedLabel = NSLocalizedString("picked", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickAnalyzingBottomText = NSLocalizedString("insta_pick_analyzing_bottom", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickAnalyzingText_0 = NSLocalizedString("insta_pick_analyzing_0", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1099,4 +1100,5 @@ struct TextConstants {
     static let dropboxRemoveConnectionWarningMessage = NSLocalizedString("dropbox_remove_connection_warning_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let removeConnection = NSLocalizedString("remove_connection", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let youAreConnected = NSLocalizedString("you_are_connected", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let removeConnection = NSLocalizedString("remove_connection", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

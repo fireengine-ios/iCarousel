@@ -66,8 +66,8 @@ final class PremiumPresenter {
             view.startActivityIndicator()
             interactor.activate(offer: offer)
         } else {
-            let bodyText = "\(offer.period ?? "") \(offer.price ?? 0)"
-            router.showActivateOfferAlert(with: offer.displayName ?? "", text: bodyText, delegate: self)
+            let price = interactor.getPriceInfo(for: offer, accountType: accountType)
+            router.showActivateOfferAlert(with: offer.displayName ?? "", text: price, delegate: self)
         }
     }
     

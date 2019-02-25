@@ -24,6 +24,7 @@ struct LbRequestkeys {
     static let processPersonalData = "processPersonalData"
     static let appVersion = "appVersion"
     static let osVersion = "osVersion"
+    static let token = "token"
     
     //
     static let fileName = "Folder-Name"

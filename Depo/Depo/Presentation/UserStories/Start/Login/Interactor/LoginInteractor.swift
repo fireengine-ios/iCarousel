@@ -268,10 +268,18 @@ class LoginInteractor: LoginInteractorInput {
     
     func verifyPhoneNumber(token: String, code: String) {
         let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: token)
-        accountService.verifyPhoneNumber(parameters: parameters, success: { [weak self] responce in
-            DispatchQueue.main.async {
-                self?.output?.successedVerifyPhone()
+        accountService.verifyPhoneNumber(parameters: parameters, success: { [weak self] baseResponse in
+            
+            if let response = baseResponse as? ObjectRequestResponse,
+                let silentToken = response.responseHeader?[HeaderConstant.silentToken] as? String {
+                
+                self?.silentLogin(token: silentToken)
+            } else {
+                DispatchQueue.main.async {
+                    self?.output?.successedVerifyPhone()
+                }
             }
+            
         }) { [weak self] errorRespose in
             DispatchQueue.main.async {
                 self?.output?.failedVerifyPhone(errorString: TextConstants.phoneVereficationNonValidCodeErrorText)
@@ -311,5 +319,18 @@ class LoginInteractor: LoginInteractorInput {
 //        }) { [weak self] errorResponse in
 //            self?.output?.captchaRequredFailed()
 //        }
+    }
+    
+    private func silentLogin(token: String) {
+        authenticationService.silentLogin(token: token, success: { [weak self] in
+            DispatchQueue.main.async { [weak self] in
+                self?.output?.successedSilentLogin()
+                self?.output?.succesLogin()
+            }
+        }, fail: { [weak self] errorResponse in
+            DispatchQueue.main.async { [weak self] in
+                self?.output?.successedVerifyPhone()
+            }
+        })
     }
 }
