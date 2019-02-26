@@ -33,7 +33,7 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    var fetchedOriginalObhects: [MediaItem] {
+    var fetchedOriginalObjects: [MediaItem] {
         return fetchedResultsController.fetchedObjects ?? []
     }
     
@@ -62,9 +62,9 @@ final class PhotoVideoDataSource: NSObject {
         fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
         
         if Device.isIpad {
-            fetchRequest.fetchBatchSize = 50
+            fetchRequest.fetchBatchSize = 64
         } else {
-            fetchRequest.fetchBatchSize = 20
+            fetchRequest.fetchBatchSize = 32
         }
         
         //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
@@ -89,6 +89,7 @@ final class PhotoVideoDataSource: NSObject {
     
     func performFetch() {
         try? fetchedResultsController.performFetch()
+        updateLastFetchedObjects()
     }
     
     func setupOriginalPredicates(isPhotos: Bool, predicateSetupedCallback: @escaping VoidHandler) {
@@ -208,6 +209,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     
     private func reloadSupplementaryViewsIfNeeded() {
         if !sectionChanges.isEmpty {
+            CellImageManager.clear()
             collectionView.reloadData()
         }
     }

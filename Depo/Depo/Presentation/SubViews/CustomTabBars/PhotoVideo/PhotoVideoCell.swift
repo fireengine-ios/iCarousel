@@ -214,6 +214,8 @@ final class PhotoVideoCell: UICollectionViewCell {
     private func reset() {
         cellImageManager = nil
         thumbnailImageView.image = nil
+        favoriteImageView.isHidden = true
+        checkmarkImageView.isHidden = true
         uuid = nil
         indexPath = nil
         cellId = ""

@@ -12,7 +12,6 @@ import UIKit
 
 // TODO: CheckBoxViewDelegate logic
 // TODO: video controller
-// TODO: navigation bar with logo
 // TODO: duplicated files correct representation on collection
 // TODO: items operations (progress)
 // TODO: todos in file
@@ -105,6 +104,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private func fetchAndReload() {
         assetsFileCacheManager.resetCachedAssets()
         dataSource.performFetch()
+        CellImageManager.clear()
         collectionView.reloadData()
     }
     
@@ -278,16 +278,22 @@ extension PhotoVideoController: UIScrollViewDelegate {
             lastDate = Date.distantPast
         }
 
-        let category: QuickScrollCategory = isPhoto ? .photos : .videos
-        quickScrollService.requestListOfDateRange(startDate: max(firstDate, lastDate), endDate: min(firstDate, lastDate), category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
-            switch response {
-            case .success(let quckScrollResponse):
-                MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, completion: {
-                    debugPrint("appended and updated")
-                })
-            case .failed(let error):
-                ///may be canceled request
-                break///TODO: popup here?
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            let category: QuickScrollCategory = self.isPhoto ? .photos : .videos
+            self.quickScrollService.requestListOfDateRange(startDate: max(firstDate, lastDate), endDate: min(firstDate, lastDate), category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
+                switch response {
+                case .success(let quckScrollResponse):
+                    MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, completion: {
+                        debugPrint("appended and updated")
+                    })
+                case .failed(let error):
+                    ///may be canceled request
+                    break///TODO: popup here?
+                }
             }
         }
     }
