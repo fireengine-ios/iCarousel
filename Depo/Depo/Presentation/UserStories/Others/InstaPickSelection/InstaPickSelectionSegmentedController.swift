@@ -106,8 +106,6 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         setupScreenWithSelectingLimit(selectingLimit)
     }
     
-    // MARK: methods
-    
     /// one time called
     private func setupScreenWithSelectingLimit(_ selectingLimit: Int) {
         let formatedAnalyzesLeft = TextConstants.instapickSelectionAnalyzesLeftMax

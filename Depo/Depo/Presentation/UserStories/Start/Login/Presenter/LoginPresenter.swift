@@ -15,6 +15,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
     private let routerVC = RouterVC()
+    private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     var optInVC: OptInController?
     var textEnterVC: TextEnterController?
@@ -105,6 +106,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func succesLogin() {
+        tokenStorage.isClearTokens = false
         MenloworksTagsService.shared.onStartWithLogin(true)
         interactor.checkEULA()
     }
@@ -168,7 +170,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     private func openApp() {
         storageVars.emptyEmailUp = false
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
-        router.goToSyncSettingsView()
+        openAutoSyncIfNeeded()
     }
     
     private func openEmptyEmail() {
@@ -179,6 +181,19 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         }
         let navVC = NavigationController(rootViewController: vc)
         routerVC.presentViewController(controller: navVC)
+    }
+    
+    private func openAutoSyncIfNeeded() {
+        view.showSpiner()
+        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
+            self?.view.hideSpiner()
+            
+            if needToOpenAutoSync {
+                self?.router.goToSyncSettingsView()
+            }
+        }) { [weak self] error in
+            self?.view.hideSpiner()
+        }
     }
     
     func allAttemtsExhausted(user: String) {
@@ -259,8 +274,16 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func successedVerifyPhone() {
         stopOptInVC()
-        startAsyncOperationDisableScreen()
-        interactor.relogin()
+        
+        let popupVC = PopUpController.with(title: nil,
+                                           message: TextConstants.phoneUpdatedNeedsLogin,
+                                           image: .none,
+                                           buttonTitle: TextConstants.ok) { vc in
+                                            vc.close {
+                                                AppConfigurator.logout()
+                                            }
+        }
+        UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
     }
     
     func failedVerifyPhone(errorString: String) {
@@ -291,7 +314,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     private func stopOptInVC() {
         optInVC?.stopActivityIndicator()
         optInVC?.resignFirstResponder()
-        tokenStorage.isClearTokens = false
     }
 }
 

@@ -348,6 +348,41 @@ class InternetDataUsage: ObjectRequestResponse {
     }
 }
 
+final class FeaturesResponse: ObjectRequestResponse {
+    
+    private enum ResponseKey {
+        static let nonTcellPaycellSubscription = "non-tcell-paycell-subscription"
+        static let autoVideoUpload = "auto-video-upload"
+        static let faceImageRecognition = "face-image-recognition"
+        static let autoMusicUpload = "auto-music-upload"
+        static let autoPhotoUpload = "auto-photo-upload"
+        static let autoVideoUploadV2 = "auto-video-upload-v2"
+        static let tcellPaycellSubscription = "tcell-paycell-subscription"
+        static let autoSyncDisabled = "auto-sync-disabled"
+    }
+    
+    var isNonTcellPaycellSubscription: Bool?
+    var isAutoVideoUpload: Bool?
+    var isFaceImageRecognition: Bool?
+    var isAutoMusicUpload: Bool?
+    var isAutoPhotoUpload: Bool?
+    var isAutoVideoUploadV2: Bool?
+    var isTcellPaycellSubscription: Bool?
+    var isAutoSyncDisabled: Bool?
+
+    override func mapping() {
+        isNonTcellPaycellSubscription = json?[ResponseKey.nonTcellPaycellSubscription].bool
+        isAutoVideoUpload = json?[ResponseKey.autoVideoUpload].bool
+        isFaceImageRecognition = json?[ResponseKey.faceImageRecognition].bool
+        isAutoMusicUpload = json?[ResponseKey.autoMusicUpload].bool
+        isAutoPhotoUpload = json?[ResponseKey.autoPhotoUpload].bool
+        isAutoVideoUploadV2 = json?[ResponseKey.autoVideoUploadV2].bool
+        isTcellPaycellSubscription = json?[ResponseKey.tcellPaycellSubscription].bool
+        isAutoSyncDisabled = json?[ResponseKey.autoSyncDisabled].bool
+    }
+    
+}
+
 /// MAYBE WILL BE USED
 //class InternetDataUsageResponse: ObjectRequestResponse {
 //
