@@ -418,13 +418,11 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
     }
     
     func onPurchase() {
-        //TODO: - Open Purchase Screen
-        InstaPickRoutingService.showUpdgradePopup()
+        InstaPickRoutingService.openPremium()
     }
     
     func onSeeDetails() {
-        //TODO: - Open Details Screen
-        InstaPickRoutingService.showUpdgradePopup()
+        InstaPickRoutingService.openPremium()
     }
     
     func onSelectAnalyze(_ analyze: InstapickAnalyze) {
