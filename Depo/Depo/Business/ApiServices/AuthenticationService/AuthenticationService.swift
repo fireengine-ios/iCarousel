@@ -500,9 +500,10 @@ class AuthenticationService: BaseRequestService {
     func checkEmptyEmail(handler: @escaping ResponseBool) {
         let headers = [HeaderConstant.RememberMeToken: tokenStorage.refreshToken ?? ""]
         let refreshAccessTokenUrl = RouteRequests.baseUrl +/ RouteRequests.authificationByRememberMe
+        let params: [String: Any] = [LbRequestkeys.deviceInfo: Device.deviceInfo]
         
         sessionManagerWithoutToken
-            .request(refreshAccessTokenUrl, method: .post, parameters: [:], encoding: JSONEncoding.default, headers: headers)
+            .request(refreshAccessTokenUrl, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)
             .customValidate()
             .responseJSON { response in
                 if let headers = response.response?.allHeaderFields as? [String: Any],
@@ -526,7 +527,7 @@ class AuthenticationService: BaseRequestService {
     func silentLogin(token: String, success: SuccessLogin?, fail: FailResponse?) {
         debugLog("AuthenticationService silentLogin")
         
-        SessionManager.customDefault
+        sessionManagerWithoutToken
             .request(RouteRequests.silentLogin,
                      method: .post,
                      parameters: [LbRequestkeys.token: token,

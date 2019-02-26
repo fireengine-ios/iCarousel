@@ -872,3 +872,4 @@
 "remove_connection" = "Remove Connection";
 "you_are_connected" = "You are connected";
 "insta_pick_picture_not_found" = "Picture not found";
+"phone_updated_needs_login" = "You have successfully updated your phone number, please log in with your credentials";

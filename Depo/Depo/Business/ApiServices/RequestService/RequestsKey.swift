@@ -22,10 +22,9 @@ struct LbRequestkeys {
     static let referenceToken = "referenceToken"
     static let otp = "otp"
     static let processPersonalData = "processPersonalData"
+    static let token = "token"
     static let appVersion = "appVersion"
     static let osVersion = "osVersion"
-    static let token = "token"
-    
     //
     static let fileName = "Folder-Name"
 }

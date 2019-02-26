@@ -2687,6 +2687,8 @@
 		A217E44A21A5B0D00084AA37 /* LeavePremiumConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E44821A5B0D00084AA37 /* LeavePremiumConfigurator.swift */; };
 		A217E44C21A5B0E40084AA37 /* LeavePremiumInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E44B21A5B0E40084AA37 /* LeavePremiumInitializer.swift */; };
 		A217E44D21A5B0E40084AA37 /* LeavePremiumInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E44B21A5B0E40084AA37 /* LeavePremiumInitializer.swift */; };
+		A21A8AC72223D45200B03C05 /* AutoSyncRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21A8AC62223D45200B03C05 /* AutoSyncRoutingService.swift */; };
+		A21A8AC82223D45200B03C05 /* AutoSyncRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21A8AC62223D45200B03C05 /* AutoSyncRoutingService.swift */; };
 		A222450F21D3C593006EB432 /* PremiumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A222450E21D3C593006EB432 /* PremiumService.swift */; };
 		A225690B21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225690A21E8B30E00A9D147 /* IntrinsicTextView.swift */; };
 		A225690C21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225690A21E8B30E00A9D147 /* IntrinsicTextView.swift */; };
@@ -5374,6 +5376,7 @@
 		A217E44521A5B0C10084AA37 /* LeavePremiumInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeavePremiumInteractorOutput.swift; sourceTree = "<group>"; };
 		A217E44821A5B0D00084AA37 /* LeavePremiumConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeavePremiumConfigurator.swift; sourceTree = "<group>"; };
 		A217E44B21A5B0E40084AA37 /* LeavePremiumInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeavePremiumInitializer.swift; sourceTree = "<group>"; };
+		A21A8AC62223D45200B03C05 /* AutoSyncRoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncRoutingService.swift; sourceTree = "<group>"; };
 		A222450E21D3C593006EB432 /* PremiumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumService.swift; sourceTree = "<group>"; };
 		A225690A21E8B30E00A9D147 /* IntrinsicTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicTextView.swift; sourceTree = "<group>"; };
 		A2268EB821A688DB002F2611 /* LeavePremiumViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeavePremiumViewController.xib; sourceTree = "<group>"; };
@@ -8436,6 +8439,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A21A8AC52223D43100B03C05 /* AutoSyncRoutingService */,
 				92203C3421E9E0A300926469 /* InstaPickRoutingService */,
 				A222450D21D3C53A006EB432 /* PremiumService */,
 				92A745FE21B91A3C00386C37 /* PackageService */,
@@ -10642,6 +10646,14 @@
 				A217E44B21A5B0E40084AA37 /* LeavePremiumInitializer.swift */,
 			);
 			path = Configurator;
+			sourceTree = "<group>";
+		};
+		A21A8AC52223D43100B03C05 /* AutoSyncRoutingService */ = {
+			isa = PBXGroup;
+			children = (
+				A21A8AC62223D45200B03C05 /* AutoSyncRoutingService.swift */,
+			);
+			path = AutoSyncRoutingService;
 			sourceTree = "<group>";
 		};
 		A222450D21D3C53A006EB432 /* PremiumService */ = {
@@ -15399,6 +15411,7 @@
 				C62239A82049731B0043ED44 /* FaceImageChangeCoverInteractor.swift in Sources */,
 				8C0E8D031FDEBDFF00789C91 /* ProgressPopUpProtocol.swift in Sources */,
 				CE58FB0720444BFF007F3F54 /* ColorConstants.swift in Sources */,
+				A21A8AC82223D45200B03C05 /* AutoSyncRoutingService.swift in Sources */,
 				8C0E8D041FDEBDFF00789C91 /* LocalAlbumModuleInitializer.swift in Sources */,
 				8C0E8D061FDEBDFF00789C91 /* ActivityTimelineService.swift in Sources */,
 				8C0E8D071FDEBDFF00789C91 /* CreateStoryPhotosOrderModuleInput.swift in Sources */,
@@ -16507,6 +16520,7 @@
 				7C233CD61FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift in Sources */,
 				7C49881E1F3320420039C5F2 /* CreateStoryPhotosOrderViewInput.swift in Sources */,
 				8DCB21781F3C8BC000BAFE1E /* SeacrhViewRouter.swift in Sources */,
+				A21A8AC72223D45200B03C05 /* AutoSyncRoutingService.swift in Sources */,
 				CE51AB5B1EF90853005DCEE0 /* ValidationService.swift in Sources */,
 				CE9AFAD1211D73D0006AF836 /* FaceImageDisplayManager.swift in Sources */,
 				92004B3A21AD0F2200582C45 /* MyStorageViewController.swift in Sources */,
