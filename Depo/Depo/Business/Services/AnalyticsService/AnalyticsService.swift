@@ -324,6 +324,7 @@ extension AnalyticsService: AnalyticsGA {
         privateQueue.async { [weak self] in
             guard
                 let `self` = self,
+                timer.isValid,
                 let unwrapedUserInfo = timer.userInfo as? [String: Any],
                 let eventCategory = unwrapedUserInfo[GACustomEventKeys.category.key] as? GAEventCantegory,
                 let eventActions = unwrapedUserInfo[GACustomEventKeys.action.key] as? GAEventAction,

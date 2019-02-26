@@ -32,7 +32,8 @@ class ReachabilityService: ReachabilityProtocol {
     }
     
     var isReachable: Bool {
-        return self.reachability?.connection != .none
+        ///If you just .none, then compares not with the right enum
+        return self.reachability?.connection != Reachability.Connection.none
     }
     
     var status: String {

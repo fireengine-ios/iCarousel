@@ -55,6 +55,14 @@ struct RouteRequests {
         }
     }()
     
+    static let silentLogin: String = {
+        switch currentServerEnvironment {
+        case .test: return "https://tcloudstb.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
+        case .preProduction: return "https://adepotest.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
+        case .production: return "https://adepo.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
+        }
+    }()
+    
     // MARK: Authentication
     
     static let httpsAuthification = "auth/token?rememberMe=%@"
