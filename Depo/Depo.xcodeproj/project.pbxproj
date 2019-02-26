@@ -2784,6 +2784,8 @@
 		98B01C77206BCD7300DD78C7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */; };
 		98B01C79206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */; };
 		98B01C7A206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */; };
+		98C79FE922253E9600E63195 /* PhotoVideoScrollBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C79FE822253E9600E63195 /* PhotoVideoScrollBarManager.swift */; };
+		98C79FEA22253E9600E63195 /* PhotoVideoScrollBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C79FE822253E9600E63195 /* PhotoVideoScrollBarManager.swift */; };
 		98C878232074B78A00374177 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878222074B78A00374177 /* ViewController.swift */; };
 		98C878242074B78A00374177 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878222074B78A00374177 /* ViewController.swift */; };
 		98C878262074E1C100374177 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878252074E1C100374177 /* NavigationController.swift */; };
@@ -5478,6 +5480,7 @@
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
 		98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceConstants.swift; sourceTree = "<group>"; };
+		98C79FE822253E9600E63195 /* PhotoVideoScrollBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoVideoScrollBarManager.swift; sourceTree = "<group>"; };
 		98C878222074B78A00374177 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		98C878252074E1C100374177 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceResponseError.swift; sourceTree = "<group>"; };
@@ -9848,6 +9851,7 @@
 			isa = PBXGroup;
 			children = (
 				8C449C0C216628280060785C /* ScrollBarView.swift */,
+				98C79FE822253E9600E63195 /* PhotoVideoScrollBarManager.swift */,
 				8C449C0D216628280060785C /* PhotoVideoDataSource.swift */,
 				8C449C0E216628280060785C /* ThresholdBlockService.swift */,
 				8C449C0F216628280060785C /* PhotoVideoScrollDirectionManager.swift */,
@@ -16164,6 +16168,7 @@
 				CE23A0FB205FF5AF0048267D /* Images.swift in Sources */,
 				8C0E8EF31FDEBDFF00789C91 /* UserInfoSubViewViewController.swift in Sources */,
 				8C0E8EF41FDEBDFF00789C91 /* UserInfoSubViewModuleInput.swift in Sources */,
+				98C79FEA22253E9600E63195 /* PhotoVideoScrollBarManager.swift in Sources */,
 				8C0E8EF51FDEBDFF00789C91 /* MoreFilesActionsInteractor.swift in Sources */,
 				8C0E8EF61FDEBDFF00789C91 /* BaseDataSourceItem.swift in Sources */,
 				8C0E8EF71FDEBDFF00789C91 /* UserInfoSubViewPresenter.swift in Sources */,
@@ -17594,6 +17599,7 @@
 				9224936821BC14890086CB6A /* AuthorityType.swift in Sources */,
 				8C449C082166258B0060785C /* MediaItemOperationsService.swift in Sources */,
 				7CEE2722209C560500EF6C79 /* PageForLanding.swift in Sources */,
+				98C79FE922253E9600E63195 /* PhotoVideoScrollBarManager.swift in Sources */,
 				66B07DFECFC39B41382FF00D /* FileInfoInteractorOutput.swift in Sources */,
 				23C013C53919B6111BA5B06C /* FileInfoInteractor.swift in Sources */,
 				8DCB217A1F3C8BE700BAFE1E /* SearchViewRouterInput.swift in Sources */,

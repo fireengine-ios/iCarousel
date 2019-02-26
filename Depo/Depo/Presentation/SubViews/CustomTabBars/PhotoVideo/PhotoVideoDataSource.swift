@@ -11,6 +11,7 @@ import UIKit
 protocol PhotoVideoDataSourceDelegate: class {
     func selectedModeDidChange(_ selectingMode: Bool)
     func fetchPredicateCreated()
+    func contentDidChange(_ fetchedObjects: [WrapData])
 }
 
 // TODO: selectedIndexPaths NSFetchedResultsController changes
@@ -43,7 +44,11 @@ final class PhotoVideoDataSource: NSObject {
         } ?? []
     }
     
-    var lastFetchedObjects: [WrapData]?
+    var lastFetchedObjects: [WrapData]? {
+        didSet {
+            delegate?.contentDidChange(lastFetchedObjects ?? [])
+        }
+    }
     var canUpdateLastFecthed = true
     
     private weak var delegate: PhotoVideoDataSourceDelegate?
@@ -75,8 +80,9 @@ final class PhotoVideoDataSource: NSObject {
     }()
     
     /// collectionView needs only for NSFetchedResultsControllerDelegate
-    init(collectionView: UICollectionView?) {
+    init(collectionView: UICollectionView?, delegate: PhotoVideoDataSourceDelegate?) {
         self.collectionView = collectionView
+        self.delegate = delegate
     }
     
     func object(at indexPath: IndexPath) -> MediaItem {
@@ -89,6 +95,8 @@ final class PhotoVideoDataSource: NSObject {
     
     func performFetch() {
         try? fetchedResultsController.performFetch()
+        //need for update year view on scrollBar
+        updateLastFetchedObjects()
     }
     
     func setupOriginalPredicates(isPhotos: Bool, predicateSetupedCallback: @escaping VoidHandler) {
