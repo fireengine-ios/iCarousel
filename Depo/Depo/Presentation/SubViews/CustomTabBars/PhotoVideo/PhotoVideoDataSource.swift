@@ -136,8 +136,10 @@ extension PhotoVideoDataSource: UICollectionViewDataSource {
 extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        sectionChanges.removeAll()
-        objectChanges.removeAll()
+        DispatchQueue.toMain {
+            self.sectionChanges.removeAll()
+            self.objectChanges.removeAll()
+        }
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
@@ -187,13 +189,15 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        collectionView.performBatchUpdates({ [weak self] in
-            self?.sectionChanges.forEach { $0() }
-            self?.objectChanges.forEach { $0() }
-            }, completion: { [weak self] _ in
-                self?.reloadSupplementaryViewsIfNeeded()
-                self?.updateLastFetchedObjects()
-        })
+        DispatchQueue.toMain {
+            self.collectionView.performBatchUpdates({ [weak self] in
+                self?.sectionChanges.forEach { $0() }
+                self?.objectChanges.forEach { $0() }
+                }, completion: { [weak self] _ in
+                    self?.reloadSupplementaryViewsIfNeeded()
+                    self?.updateLastFetchedObjects()
+            })
+        }
     }
     
     private func updateLastFetchedObjects() {
