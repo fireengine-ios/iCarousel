@@ -24,56 +24,56 @@ final class QuickScrollService {
         self.sessionManager = sessionManager
     }
     
-    func requestGroups(handler: @escaping ResponseArrayHandler<QuickScrollGroupItem>) {
-        guard let requestURL = URL(string: RouteRequests.quickScrollGroups, relativeTo: RouteRequests.baseUrl) else {
-            handler(ResponseResult.failed(CustomErrors.unknown))
-            return
-        }
-        sessionManager
-            .request(requestURL)
-            .customValidate()
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    handler(ResponseResult.success(JSON(data: data).arrayValue.map {
-                        QuickScrollGroupItem(json: $0)
-                    }))
-                case .failure(let error):
-                    handler(ResponseResult.failed(error))
-                }
-        }
-    }
-    
-    func requestListOfGroups(reuststListGroupItems: [GroupsListRequestItem], handler: @escaping ResponseArrayHandler<QuickScrollGroupsListItem>) {
-        guard let requestURL = URL(string: RouteRequests.quickScrollGroupsList, relativeTo: RouteRequests.baseUrl) else {
-            handler(ResponseResult.failed(CustomErrors.unknown))
-            return
-        }
-//        RouteRequests.quickScrollGroupsList
-//        //    curl -X POST -H "Accept: application/json" -H "X-Auth-Token: {X-Auth-Token}" -d '[
-//        //    {"group": "2017-4", "start": 13, "end": 15},
-//        //    {"group": "2014-6", "start": 0, "end": 4}
-//        //    ]' "https://adepo.turkcell.com.tr/api/scroll/groups/list"
-
-        //TODO: ADD PARMETRS AS DATA
-        sessionManager
-            .request(requestURL,
-                     method: .post,
-                     parameters:[:])//"data":])
-            .customValidate()
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    handler(ResponseResult.success(JSON(data: data).arrayValue.map { QuickScrollGroupsListItem(json: $0) }))
-                case .failure(let error):
-                    handler(ResponseResult.failed(error))
-                }
-        }
-    }
+//    func requestGroups(handler: @escaping ResponseArrayHandler<QuickScrollGroupItem>) {
+//        guard let requestURL = URL(string: RouteRequests.quickScrollGroups, relativeTo: RouteRequests.baseUrl) else {
+//            handler(ResponseResult.failed(CustomErrors.unknown))
+//            return
+//        }
+//        sessionManager
+//            .request(requestURL)
+//            .customValidate()
+//            .responseData { response in
+//                switch response.result {
+//                case .success(let data):
+//                    handler(ResponseResult.success(JSON(data: data).arrayValue.map {
+//                        QuickScrollGroupItem(json: $0)
+//                    }))
+//                case .failure(let error):
+//                    handler(ResponseResult.failed(error))
+//                }
+//        }
+//    }
+//    
+//    func requestListOfGroups(reuststListGroupItems: [GroupsListRequestItem], handler: @escaping ResponseArrayHandler<QuickScrollGroupsListItem>) {
+//        guard let requestURL = URL(string: RouteRequests.quickScrollGroupsList, relativeTo: RouteRequests.baseUrl) else {
+//            handler(ResponseResult.failed(CustomErrors.unknown))
+//            return
+//        }
+////        RouteRequests.quickScrollGroupsList
+////        //    curl -X POST -H "Accept: application/json" -H "X-Auth-Token: {X-Auth-Token}" -d '[
+////        //    {"group": "2017-4", "start": 13, "end": 15},
+////        //    {"group": "2014-6", "start": 0, "end": 4}
+////        //    ]' "https://adepo.turkcell.com.tr/api/scroll/groups/list"
+//
+//        //TODO: ADD PARMETRS AS DATA
+//        sessionManager
+//            .request(requestURL,
+//                     method: .post,
+//                     parameters:[:])//"data":])
+//            .customValidate()
+//            .responseData { response in
+//                switch response.result {
+//                case .success(let data):
+//                    handler(ResponseResult.success(JSON(data: data).arrayValue.map { QuickScrollGroupsListItem(json: $0) }))
+//                case .failure(let error):
+//                    handler(ResponseResult.failed(error))
+//                }
+//        }
+//    }
 
     private var currentDataRequest: DataRequest?
-    func requestListOfDateRange(startDate: Date, endDate: Date? = nil,
-                                startID: Int64, endID: Int64? = nil,
+    func requestListOfDateRange(startDate: Date, endDate: Date,
+                                startID: Int64? = nil, endID: Int64? = nil,
                                 category: QuickScrollCategory, pageSize: Int,
                                 handler: @escaping ResponseHandler<QuickScrollRangeListItem>) {
         
@@ -85,13 +85,13 @@ final class QuickScrollService {
         currentDataRequest?.cancel()
         
         var body: [String: Any] = [startDateBodyKey: "\(startDate.millisecondsSince1970)",
-                                    endDateBodyKey: "",
+                                    endDateBodyKey: "\(endDate.millisecondsSince1970)",
                                     categoryBodyKey: category.text,
                                     sizeBodyKey: "\(pageSize)",
-                                    startFileIdKey: startID,
+                                    startFileIdKey: "",
                                     endFileIdKey: ""]
-        if let unwrapedEndDate = endDate {
-            body[endDateBodyKey] = "\(unwrapedEndDate.millisecondsSince1970)"
+        if let unwrapedStartId = startID {
+            body[startFileIdKey] = unwrapedStartId
         }
         if let unwrapedEndId = endID {
             body[endFileIdKey] = unwrapedEndId

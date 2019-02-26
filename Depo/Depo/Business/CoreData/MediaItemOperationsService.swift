@@ -213,8 +213,9 @@ final class MediaItemOperationsService {
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
     
-    func executeRequest(predicate: NSPredicate, context: NSManagedObjectContext, mediaItemsCallBack: @escaping MediaItemsCallBack) {
+    func executeRequest(predicate: NSPredicate, limit: Int = 0, context: NSManagedObjectContext, mediaItemsCallBack: @escaping MediaItemsCallBack) {
         let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
+        request.fetchLimit = limit
         request.predicate = predicate
         execute(request: request, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
@@ -265,37 +266,67 @@ final class MediaItemOperationsService {
             return
         }
         
-        let context = CoreDataStack.default.newChildBackgroundContext
+        var remoteIds = remoteItems.map { $0.id ?? 0 }
         
-        var remoteMd5s = [String]()
-        var remoteTrimmedIDs = [String]()
-        var remoteIds = [Int64]()
-        remoteItems.forEach{
-            remoteMd5s.append($0.md5)
-            remoteTrimmedIDs.append($0.getTrimmedLocalID())
-            remoteIds.append($0.id ?? 0)
-        }
+        let context = CoreDataStack.default.newChildBackgroundContext
         
         //*--------
         ///first option, kill all in range
-        let allRemoteItemsInRangePredicate = NSPredicate(format:"isLocalItemValue = false AND (creationDateValue <= %@ AND creationDateValue >= %@) AND idValue IN %@", firstRemote.metaDate as NSDate, lastRemote.metaDate as NSDate, remoteIds)
-        executeRequest(predicate: allRemoteItemsInRangePredicate, context: context) { savedRemoteItems in
+
+        let inDateRangePredicate = NSPredicate(format:"isLocalItemValue = false AND (creationDateValue <= %@ AND creationDateValue >= %@)", firstRemote.metaDate as NSDate, lastRemote.metaDate as NSDate)
+        
+        executeRequest(predicate: inDateRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
             
-            debugPrint("--- remotes count \(remoteItems.count)")
-            debugPrint("--- count of already saed \(savedRemoteItems.count)")
-            savedRemoteItems.forEach {
-                context.delete($0)
-            }
-            remoteItems.forEach {
-                ///Relations being setuped in the MediaItem init
-                _ = MediaItem(wrapData: $0, context: context)
-            }
+            debugPrint("--- remotes in date range count \(remoteItems.count)")
+            debugPrint("--- count of already saved in date range \(inDateRangeItems.count)")
             
-            context.saveAsync(completion: { status in
-                completion()
+            let inIdRangePredicate = NSPredicate(format:"isLocalItemValue = false AND (idValue IN %@) AND NOT (idValue IN %@)", remoteIds, inDateRangeItems.map { $0.idValue })
+            
+            self.executeRequest(predicate: inIdRangePredicate, context: context, mediaItemsCallBack: { inIdRangeItems in
+                debugPrint("--- count of already saved in id range \(inIdRangeItems.count)")
+                
+                var allSavedItems = (inDateRangeItems + inIdRangeItems).flatMap { WrapData(mediaItem: $0) }
+                debugPrint("--- count of already saved TOTAL count \(allSavedItems.count)")
+                
+                var deletedItems = [WrapData]()
+                var newSavedItems = [WrapData]()
+//                var updatedItems = [WrapData]()
+                
+                for newItem in remoteItems {
+                    if let existed = allSavedItems.first(where: { $0.uuid == newItem.uuid }) {
+                        if newItem != existed {
+                            existed.coreDataObject?.copyInfo(item: newItem, context: context)
+                        }
+                        allSavedItems.remove(existed)
+                    } else if !allSavedItems.contains(where: {$0.uuid == newItem.uuid }) {
+                        newSavedItems.append(newItem)
+                        allSavedItems.remove(newItem)
+                    }
+                }
+                deletedItems.append(contentsOf: allSavedItems)
+                
+                deletedItems.forEach {
+                    if let coreDataObject = $0.coreDataObject {
+                        context.delete(coreDataObject)
+                    }
+                }
+                
+                newSavedItems.forEach {
+                    ///Relations being setuped in the MediaItem init
+                    _ = MediaItem(wrapData: $0, context: context)
+                }
+                
+//                updatedItems.forEach {
+//                    $0.copyInfo(item: latestRemote, context: context)
+//                }
+                
+                context.saveAsync(completion: { status in
+                    completion()
+                })
             })
         }
         //---------*
+        
         //*--------
         ///second option: update already existed, kill all others in that remote items range
         ///FOR NOW WE NEED TO TEST FIRST ONE

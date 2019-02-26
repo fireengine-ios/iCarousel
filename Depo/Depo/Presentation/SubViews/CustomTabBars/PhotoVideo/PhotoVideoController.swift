@@ -265,14 +265,21 @@ extension PhotoVideoController: UIScrollViewDelegate {
             return
         }
         
-        guard let firstVisibleObject = collectionView.visibleCells.first,
-            let firstVisibleObjectIndex = collectionView.indexPath(for: firstVisibleObject)
+        guard
+            let workaroundVisibleIndexes = self.collectionView?.indexPathsForVisibleItems.sorted(by: <),
+            let firstDate = self.date(at: workaroundVisibleIndexes.first),
+            var lastDate = self.date(at: workaroundVisibleIndexes.last)
         else {
             return
         }
-        let firstVisibleMediaItem = dataSource.object(at: firstVisibleObjectIndex)
+        
+        if lastDate > firstDate {
+            ///it means that the lastDate is Date() because the item is an empty meta item
+            lastDate = Date.distantPast
+        }
+
         let category: QuickScrollCategory = isPhoto ? .photos : .videos
-        quickScrollService.requestListOfDateRange(startDate: (firstVisibleMediaItem.creationDateValue as Date?) ?? Date(), startID: firstVisibleMediaItem.idValue, category: category, pageSize: 20) { response in
+        quickScrollService.requestListOfDateRange(startDate: max(firstDate, lastDate), endDate: min(firstDate, lastDate), category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
             switch response {
             case .success(let quckScrollResponse):
                 MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, completion: {
@@ -283,6 +290,21 @@ extension PhotoVideoController: UIScrollViewDelegate {
                 break///TODO: popup here?
             }
         }
+    }
+    
+    private func date(at index: IndexPath?) -> Date? {
+        guard let objectIndex = index else {
+            return nil
+        }
+        
+        if objectIndex.section == 0 && objectIndex.row == 0 {
+            /// return Date.distantFuture to have the latest items, because user may have wrong date on his device.
+            return Date.distantFuture
+        }
+        
+        let item = WrapData(mediaItem: dataSource.object(at: objectIndex))
+    
+        return item.metaDate
     }
     
 }
