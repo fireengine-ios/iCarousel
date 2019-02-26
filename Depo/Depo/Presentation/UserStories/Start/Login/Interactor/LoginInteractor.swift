@@ -327,9 +327,12 @@ class LoginInteractor: LoginInteractorInput {
     private func silentLogin(token: String) {
         authenticationService.silentLogin(token: token, success: { [weak self] in
             DispatchQueue.main.async { [weak self] in
-                self?.tokenStorage.isRememberMe = true
-                self?.output?.successedSilentLogin()
-                self?.output?.succesLogin()
+                guard let `self` = self else {
+                    return
+                }
+                self.tokenStorage.isRememberMe = self.rememberMe
+                self.output?.successedSilentLogin()
+                self.output?.succesLogin()
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async { [weak self] in
