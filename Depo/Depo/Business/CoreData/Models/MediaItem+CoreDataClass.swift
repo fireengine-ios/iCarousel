@@ -108,6 +108,39 @@ public class MediaItem: NSManagedObject {
     func wrapedObject(with asset: PHAsset) -> WrapData {
         return WrapData(mediaItem: self, asset: asset)
     }
+    
+    func copyInfo(item: WrapData, context: NSManagedObjectContext) {
+        ///FOR NOW we copy everything, could downgrated to just urls and name
+        
+        metadata?.copyInfo(metaData: item.metaData)
+        
+        creationDateValue = item.creationDate as NSDate?
+        lastModifiDateValue = item.lastModifiDate as NSDate?
+        urlToFileValue = item.tmpDownloadUrl?.absoluteString
+        trimmedLocalFileID = item.getTrimmedLocalID()
+        parent = item.parent
+        monthValue = item.creationDate?.getDateForSortingOfCollectionView()
+        md5Value = item.md5
+        isFolder = item.isFolder ?? false
+        favoritesValue = item.favorites
+        fileTypeValue = item.fileType.valueForCoreDataMapping()
+        fileSizeValue = item.fileSize
+        nameValue = item.name
+        idValue = item.id ?? -1
+        uuid = item.uuid
+        
+        //
+        self.albums?.forEach { album in
+            if let savedAlbum = album as? MediaItemsAlbum {
+                context.delete(savedAlbum)
+            }
+        }
+        //
+        let albums = item.albums?.map({ albumUuid -> MediaItemsAlbum in
+            MediaItemsAlbum(uuid: albumUuid, context: context)
+        })
+        self.albums = NSOrderedSet(array: albums ?? [])
+    }
 }
 
 //MARK: - relations

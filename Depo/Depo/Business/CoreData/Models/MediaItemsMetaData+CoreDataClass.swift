@@ -29,5 +29,17 @@ public class MediaItemsMetaData: NSManagedObject {
         self.smalURl = metadata?.smalURl?.absoluteString
         self.title = metadata?.title
     }
-
+ 
+    func copyInfo(metaData: BaseMetaData?) {
+        self.album = metaData?.album
+        self.artist = metaData?.artist
+        self.duration = metaData?.duration ?? Double(-1.0)
+        self.genre = metaData?.genre
+        self.height = Int16(metaData?.height ?? 0)
+        self.width = Int16(metaData?.width ?? 0)
+        self.largeUrl = metaData?.largeUrl?.absoluteString
+        self.mediumUrl = metaData?.mediumUrl?.absoluteString
+        self.smalURl = metaData?.smalURl?.absoluteString
+        self.title = metaData?.title
+    }
 }
