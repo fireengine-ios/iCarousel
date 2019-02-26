@@ -11,6 +11,7 @@ import UIKit
 protocol PhotoVideoDataSourceDelegate: class {
     func selectedModeDidChange(_ selectingMode: Bool)
     func fetchPredicateCreated()
+    func contentDidChange(_ fetchedObjects: [WrapData])
 }
 
 // TODO: selectedIndexPaths NSFetchedResultsController changes
@@ -33,7 +34,7 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    var fetchedOriginalObjects: [MediaItem] {
+    var fetchedOriginalObhects: [MediaItem] {
         return fetchedResultsController.fetchedObjects ?? []
     }
     
@@ -43,7 +44,11 @@ final class PhotoVideoDataSource: NSObject {
         } ?? []
     }
     
-    var lastFetchedObjects: [WrapData]?
+    var lastFetchedObjects: [WrapData]? {
+        didSet {
+            delegate?.contentDidChange(lastFetchedObjects ?? [])
+        }
+    }
     var canUpdateLastFecthed = true
     
     private weak var delegate: PhotoVideoDataSourceDelegate?
@@ -62,9 +67,9 @@ final class PhotoVideoDataSource: NSObject {
         fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
         
         if Device.isIpad {
-            fetchRequest.fetchBatchSize = 64
+            fetchRequest.fetchBatchSize = 50
         } else {
-            fetchRequest.fetchBatchSize = 32
+            fetchRequest.fetchBatchSize = 20
         }
         
         //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
@@ -75,8 +80,9 @@ final class PhotoVideoDataSource: NSObject {
     }()
     
     /// collectionView needs only for NSFetchedResultsControllerDelegate
-    init(collectionView: UICollectionView?) {
+    init(collectionView: UICollectionView?, delegate: PhotoVideoDataSourceDelegate?) {
         self.collectionView = collectionView
+        self.delegate = delegate
     }
     
     func object(at indexPath: IndexPath) -> MediaItem {
@@ -89,6 +95,7 @@ final class PhotoVideoDataSource: NSObject {
     
     func performFetch() {
         try? fetchedResultsController.performFetch()
+        //need for update year view on scrollBar
         updateLastFetchedObjects()
     }
     
@@ -209,7 +216,6 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     
     private func reloadSupplementaryViewsIfNeeded() {
         if !sectionChanges.isEmpty {
-            CellImageManager.clear()
             collectionView.reloadData()
         }
     }

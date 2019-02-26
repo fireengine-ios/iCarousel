@@ -36,14 +36,14 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private lazy var collectionViewManager = PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
     private lazy var threeDotMenuManager = PhotoVideoThreeDotMenuManager(delegate: self)
     private lazy var bottomBarManager = PhotoVideoBottomBarManager(delegate: self)
-    private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView)
+    private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView, delegate: self)
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
     private lazy var scrollDirectionManager = PhotoVideoScrollDirectionManager()
     private lazy var instaPickRoutingService = InstaPickRoutingService()
 
     private lazy var assetsFileCacheManager = AssetFileCacheManager()
-
-    private let scrollBar = ScrollBarView()
+    
+    private let scrollBarManager = PhotoVideoScrollBarManager()
 
     private lazy var quickScrollService = QuickScrollService()
     
@@ -61,8 +61,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
         ItemOperationManager.default.startUpdateView(view: self)
         
+        scrollBarManager.addScrollBar(to: collectionView, delegate: self)
         performFetch()
-        scrollBar.add(to: collectionView)
     }
     
     deinit {
@@ -82,6 +82,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         // TODO: Set title?
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
         collectionViewManager.scrolliblePopUpView.isActive = true
+        scrollBarManager.startTimerToHideScrollBar()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -108,9 +109,9 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionView.reloadData()
     }
     
+    private let columnsNumber = 4
     private func updateCellSize() {
-        let columnsNumber = 4
-        _ = collectionView.saveAndGetItemSize(for: columnsNumber)
+        collectionView.saveAndGetItemSize(for: columnsNumber)
     }
     
     // MARK: - Editing Mode
@@ -126,6 +127,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
         onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
         navBarManager.setSelectionMode()
+        navigationBarWithGradientStyle()
     }
     
     private func stopEditingMode() {
@@ -134,6 +136,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
         bottomBarManager.hide()
         navBarManager.setDefaultMode()
+        homePageNavigationBarStyle()
     }
     
     // MARK: - helpers
@@ -195,7 +198,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func updateScrollBarTextIfNeed() {
-        guard scrollBar.isDragging else {
+        guard scrollBarManager.scrollBar.isDragging else {
             return
         }
         updateScrollBarText()
@@ -211,7 +214,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             return
         }
         let title = creationDate.getDateInTextForCollectionViewHeader()
-        scrollBar.setText(title)
+        scrollBarManager.scrollBar.setText(title)
     }
 }
 
@@ -229,6 +232,8 @@ extension PhotoVideoController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         assetsFileCacheManager.updateCachedAssets(on: collectionView, itemProviderClosure: itemProviderClosure)
         updateScrollBarTextIfNeed()
+        scrollBarManager.scrollViewDidScroll()
+        scrollBarManager.hideScrollBarIfNeed(for: scrollView.contentOffset.y)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -256,6 +261,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
     
     private func handleScrollEnd(with offset: CGPoint) {
         scrollDirectionManager.handleScrollEnd(with: offset)
+        scrollBarManager.startTimerToHideScrollBar()
         updateDB()
     }
     
@@ -629,5 +635,32 @@ extension PhotoVideoController {
             }
             return nil
         }
+    }
+}
+
+//MARK: - ScrollBarViewDelegate
+
+extension PhotoVideoController: ScrollBarViewDelegate {
+    func scrollBarViewBeganDragging() {
+        scrollBarManager.yearsView.showAnimated()
+    }
+    
+    func scrollBarViewDidEndDragging() {
+        updateScrollBarTextIfNeed()
+        scrollBarManager.yearsView.hideAnimated()
+        handleScrollEnd(with: .zero)
+    }
+}
+
+//MARK: - PhotoVideoDataSource
+
+extension PhotoVideoController: PhotoVideoDataSourceDelegate {
+    func selectedModeDidChange(_ selectingMode: Bool) { }
+    
+    func fetchPredicateCreated() { }
+    
+    func contentDidChange(_ fetchedObjects: [WrapData]) {
+        let height = collectionView.saveAndGetItemSize(for: columnsNumber).height
+        scrollBarManager.updateYearsView(with: fetchedObjects, emptyMetaItems: [], cellHeight: height)
     }
 }
