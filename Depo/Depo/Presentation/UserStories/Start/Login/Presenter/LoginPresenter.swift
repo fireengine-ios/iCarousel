@@ -105,6 +105,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func succesLogin() {
+        tokenStorage.isClearTokens = false
         MenloworksTagsService.shared.onStartWithLogin(true)
         interactor.checkEULA()
     }
@@ -299,7 +300,6 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     private func stopOptInVC() {
         optInVC?.stopActivityIndicator()
         optInVC?.resignFirstResponder()
-        tokenStorage.isClearTokens = false
     }
 }
 
