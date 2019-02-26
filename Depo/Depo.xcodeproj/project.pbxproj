@@ -5624,6 +5624,7 @@
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
 		B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityInitializer.swift; sourceTree = "<group>"; };
+		B580BF212224139B0067777C /* LifeBoxModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "LifeBoxModel 3.xcdatamodel"; sourceTree = "<group>"; };
 		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
 		B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountSectionMediator.swift; sourceTree = "<group>"; };
 		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
@@ -19703,10 +19704,11 @@
 		CE3AA9C11F4D860F000157AF /* LifeBoxModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B580BF212224139B0067777C /* LifeBoxModel 3.xcdatamodel */,
 				8CCFF3C821664B80002A923D /* LifeBoxModel 2.xcdatamodel */,
 				CE3AA9C21F4D860F000157AF /* LifeBoxModel.xcdatamodel */,
 			);
-			currentVersion = 8CCFF3C821664B80002A923D /* LifeBoxModel 2.xcdatamodel */;
+			currentVersion = B580BF212224139B0067777C /* LifeBoxModel 3.xcdatamodel */;
 			path = LifeBoxModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -980,7 +980,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         parent = mediaItem.parent
         md5 = mediaItem.md5Value ?? "not md5"
         
-        if let localId = asset?.localIdentifier.components(separatedBy: "/").first {
+        if let mediaItemUuid = mediaItem.uuid {
+            uuid = mediaItemUuid
+        } else if let localId = asset?.localIdentifier.components(separatedBy: "/").first {
             uuid = localId + "~" + UUID().uuidString
         } else {
             uuid = (mediaItem.trimmedLocalFileID ?? "") + "~" + UUID().uuidString

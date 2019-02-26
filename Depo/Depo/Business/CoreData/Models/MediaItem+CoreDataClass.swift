@@ -21,6 +21,8 @@ public class MediaItem: NSManagedObject {
         self.init(entity: entityDescr, insertInto: context)
         
         idValue = wrapData.id ?? -1
+        
+        uuid = wrapData.uuid
 
         nameValue = wrapData.name
         
