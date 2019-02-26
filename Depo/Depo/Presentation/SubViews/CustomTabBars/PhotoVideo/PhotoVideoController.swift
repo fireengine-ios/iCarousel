@@ -340,6 +340,12 @@ extension PhotoVideoController: UICollectionViewDelegate {
 //        }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let photoCell = cell as? PhotoVideoCell {
+            photoCell.didEndDisplay()
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoCell else {
             return

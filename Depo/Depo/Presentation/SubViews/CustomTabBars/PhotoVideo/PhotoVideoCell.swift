@@ -50,6 +50,9 @@ final class PhotoVideoCell: UICollectionViewCell {
     var indexPath: IndexPath?
     private var cellId = ""
     private lazy var filesDataSource = FilesDataSource()
+    private var cellImageManager: CellImageManager?
+    private var uuid: String?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -91,10 +94,28 @@ final class PhotoVideoCell: UICollectionViewCell {
                 }
             }
         case let .remoteUrl(url):
-            if let url = url {
-                setImage(with: url)
+            if url != nil, let meta = wraped.metaData {
+                setImage(with: meta)
             }
         }
+    }
+    
+    private func setImage(with metaData: BaseMetaData) {
+        let cacheKey = metaData.mediumUrl?.byTrimmingQuery
+        cellImageManager = CellImageManager.instance(by: cacheKey)
+        uuid = cellImageManager?.uniqueId
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
+            DispatchQueue.toMain {
+                guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
+                    return
+                }
+                
+                let needAnimate = !cached && (self?.thumbnailImageView.image == nil)
+                self?.setImage(image: image, animated: needAnimate)
+            }
+        }
+        
+        cellImageManager?.loadImage(thumbnailUrl: metaData.smalURl, url: metaData.mediumUrl, completionBlock: imageSetBlock)
     }
     
     private func setImage(image: UIImage, animated: Bool) {
@@ -149,11 +170,9 @@ final class PhotoVideoCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        thumbnailImageView.image = nil
-        thumbnailImageView.sd_cancelCurrentImageLoad()
+        cancelImageLoading()
         cancelledUploadForObject()
-        indexPath = nil
-        cellId = ""
+        reset()
     }
     
     func setProgressForObject(progress: Float, blurOn: Bool = false) {
@@ -181,5 +200,26 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     func resetCloudImage() {
         cloudStatusImageView.image = nil
+    }
+    
+    func didEndDisplay() {
+        cancelImageLoading()
+    }
+    
+    private func cancelImageLoading() {
+        thumbnailImageView.sd_cancelCurrentImageLoad()
+        cellImageManager?.cancelImageLoading()
+    }
+    
+    private func reset() {
+        cellImageManager = nil
+        thumbnailImageView.image = nil
+        uuid = nil
+        indexPath = nil
+        cellId = ""
+    }
+
+    deinit {
+        cancelImageLoading()
     }
 }
