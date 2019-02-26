@@ -124,7 +124,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
                     storageVars.isNewAppVersionFirstLaunchTurkcellLanding = false
                     router.navigateToLandingPages(isTurkCell: turkcellLogin)
                 } else {
-                    router.goToSyncSettingsView(fromSplash: true)
+                    openAutoSyncIfNeeded()
                 }
             }
         } else {
