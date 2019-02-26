@@ -2985,6 +2985,9 @@
 		B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579E81A1FE2892200F47B0A /* VideoSyncService.swift */; };
 		B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
 		B57FE7FE212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */; };
+		B580BF1E2223E4E30067777C /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
+		B580BF1F2223E4FE0067777C /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
+		B580BF202223E5090067777C /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449C80216632950060785C /* String+Subscript.swift */; };
 		B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
 		B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
 		B59CCE812213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
@@ -16529,6 +16532,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B580BF1E2223E4E30067777C /* Device.swift in Sources */,
+				B580BF1F2223E4FE0067777C /* Keys.swift in Sources */,
+				B580BF202223E5090067777C /* String+Subscript.swift in Sources */,
 				8C449D19216635F20060785C /* UIImage+Size.swift in Sources */,
 				B54BFF5B202C8E180018AF82 /* WidgetService.swift in Sources */,
 				B56E0DDD20B45EE80082044D /* AppResponsivenessService.swift in Sources */,

@@ -137,7 +137,7 @@ struct NumericConstants {
 }
 
 struct RequestSizeConstant {
-    
     static let faceImageItemsRequestSize = 100
+    static let quickScrollRangeApiPageSize = Device.isIpad ? 128 : 32
     
 }
