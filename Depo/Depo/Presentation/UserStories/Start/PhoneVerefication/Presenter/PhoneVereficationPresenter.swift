@@ -51,6 +51,10 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         interactor.authificate(atachedCaptcha: nil)
     }
     
+    func verificationSilentSuccess() {
+        /// empty bcz PhoneVereficationPresenter reused
+    }
+    
     func vereficationFailed(with error: String) {
         view.heighlightInfoTitle()
         completeAsyncOperationEnableScreen()
