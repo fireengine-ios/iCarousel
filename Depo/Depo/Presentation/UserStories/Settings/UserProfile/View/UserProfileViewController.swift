@@ -80,7 +80,7 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     }
     
     private func configureNavBar() {
-        setTitle(withString: TextConstants.userProfileTitle)
+        setTitle(withString: TextConstants.backTitle)
         
         navigationController?.navigationItem.title = TextConstants.backTitle
     }
