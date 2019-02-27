@@ -23,7 +23,10 @@ class AuthenticationUser: BaseRequestParametrs {
     override var requestParametrs: Any {
         let dict: [String: Any] = [LbRequestkeys.username   : login,
                                    LbRequestkeys.password   : password,
-                                   LbRequestkeys.deviceInfo : Device.deviceInfo]
+                                   LbRequestkeys.deviceInfo : Device.deviceInfo,
+                                   LbRequestkeys.language   : Locale.current.languageCode ?? "",
+                                   LbRequestkeys.appVersion : AuthoritySingleton.shared.getBuildVersion(),
+                                   LbRequestkeys.osVersion  : Device.systemVersion]
         return dict
     }
     
@@ -337,7 +340,7 @@ class AuthenticationService: BaseRequestService {
         debugLog("AuthenticationService autificationByToken")
         
         let user = AuthenticationUserByToken()
-        let params: [String: Any] = ["deviceInfo": Device.deviceInfo]
+        let params: [String: Any] = [LbRequestkeys.deviceInfo: Device.deviceInfo]
         
         SessionManager.customDefault.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
             .responseString { [weak self] response in
@@ -497,9 +500,10 @@ class AuthenticationService: BaseRequestService {
     func checkEmptyEmail(handler: @escaping ResponseBool) {
         let headers = [HeaderConstant.RememberMeToken: tokenStorage.refreshToken ?? ""]
         let refreshAccessTokenUrl = RouteRequests.baseUrl +/ RouteRequests.authificationByRememberMe
+        let params: [String: Any] = [LbRequestkeys.deviceInfo: Device.deviceInfo]
         
         sessionManagerWithoutToken
-            .request(refreshAccessTokenUrl, method: .post, parameters: [:], encoding: JSONEncoding.default, headers: headers)
+            .request(refreshAccessTokenUrl, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)
             .customValidate()
             .responseJSON { response in
                 if let headers = response.response?.allHeaderFields as? [String: Any],
@@ -518,5 +522,19 @@ class AuthenticationService: BaseRequestService {
             .request(RouteRequests.updateLanguage, method: .post, encoding: language)
             .customValidate()
             .responseVoid(handler)
+    }
+    
+    func silentLogin(token: String, success: SuccessLogin?, fail: FailResponse?) {
+        debugLog("AuthenticationService silentLogin")
+        
+        sessionManagerWithoutToken
+            .request(RouteRequests.silentLogin,
+                     method: .post,
+                     parameters: [LbRequestkeys.token: token,
+                                  LbRequestkeys.deviceInfo: Device.deviceInfo],
+                     encoding: JSONEncoding.default)
+            .responseString { [weak self] response in
+                self?.loginHandler(response, success, fail)
+        }
     }
 }

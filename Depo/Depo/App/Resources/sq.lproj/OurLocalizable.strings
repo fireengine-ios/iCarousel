@@ -835,7 +835,7 @@
 "connected_with_instagram_name" = "Lidhuni me Instagram si";
 "continue_without_connecting" = "Vazhdoni pa u lidhur";
 "connected_accounts" = "Llogari të lidhura";
-"analyze_history_free_text" = "Falas për një periudhë të kufizuar";
+"analyze_history_free_text" = "Përkohësisht Falas";
 
 /*InstapickUpgradePopup*/
 /*Fuzzy*/
@@ -845,7 +845,7 @@
 "instapick_upgrade_popup_button" = "Përditësoni";
 "instapick_upgrade_popup_no" = "Jo";
 "instapick_analysis_left" = "Analizim i mbetur: %1$d / %2$d";
-"instapick_unlimited_analysis" = "Falas për një periudhë të kufizuar";
+"instapick_unlimited_analysis" = "Përkohësisht Falas";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
@@ -864,3 +864,12 @@
 "free_trial_detail_label" = "Zbuloni se cilat foto do të marrin vlerësim më të lartë; analizoni me PhotoPick për më shumë pëlqime! Provojeni falas për një periudhë të limituar!";
 "instapick_under_construction" = "Ne po bëjmë përmirësime në PhotoPick për një eksperiencë më të mirë 😉";
 "instapick_unsupported_file_type" = "Fotot që keni zgjedhur janë në format të pambështetur. Ju mund të vazhdoni përvojën e PhotoPick duke përzgjedhur fotot e tjera.";
+"work_will_introduced" = "Janë duke u kryer disa punë mirëmbajtjeje në lifebox. Ju lutem, provoni përsëri më vonë.";
+"facebook_remove_connection_warning_title" = "Jeni duke hequr lidhjen me Facebook";
+"dropbox_remove_connection_warning_title" = "Jeni duke hequr lidhjen me Dropbox";
+"facebook_remove_connection_warning_message" = "Jeni të sigurt që dëshironi të hiqni lidhjen me Facebook?";
+"dropbox_remove_connection_warning_message" = "Jeni të sigurt që dëshironi të hiqni lidhjen me Dropbox?";
+"remove_connection" = "Hiqni lidhjen";
+"you_are_connected" = "";
+"insta_pick_picture_not_found" = "Fotoja nuk\nu gjet";
+"phone_updated_needs_login" = "";

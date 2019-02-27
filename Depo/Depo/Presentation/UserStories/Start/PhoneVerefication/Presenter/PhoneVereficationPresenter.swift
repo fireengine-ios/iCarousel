@@ -13,6 +13,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     var router: PhoneVereficationRouterInput!
 
     private lazy var customProgressHUD = CustomProgressHUD()
+    private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     func viewIsReady() {
         interactor.trackScreen()
@@ -50,6 +51,10 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         interactor.authificate(atachedCaptcha: nil)
     }
     
+    func verificationSilentSuccess() {
+        /// empty bcz PhoneVereficationPresenter reused
+    }
+    
     func vereficationFailed(with error: String) {
         view.heighlightInfoTitle()
         completeAsyncOperationEnableScreen()
@@ -78,7 +83,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         completeAsyncOperationEnableScreen()
         view.dropTimer()
         
-        router.goAutoSync()
+        openAutoSyncIfNeeded()
     }
     
     func failLogin(message: String) {
@@ -94,6 +99,19 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     func reachedMaxAttempts() {
         view.resendButtonShow(show: true)
         view.dropTimer()
+    }
+    
+    // MARK: - Utility methods
+    private func openAutoSyncIfNeeded() {
+        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
+            self?.view.hideSpiner()
+
+            if needToOpenAutoSync {
+                self?.router.goAutoSync()
+            }
+        }) { [weak self] error in
+            self?.view.hideSpiner()
+        }
     }
     
     // MARK: - Basic Presenter override

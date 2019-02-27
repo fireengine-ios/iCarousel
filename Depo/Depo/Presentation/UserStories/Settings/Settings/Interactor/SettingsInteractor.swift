@@ -133,7 +133,7 @@ class SettingsInteractor: SettingsInteractorInput {
                 }
             case .failed(let error):
                 DispatchQueue.toMain {
-                    self?.output.didFailToObtainUserStatus(errorMessage: error.localizedDescription)
+                    self?.output.didFailToObtainUserStatus(errorMessage: error.description)
                 }
             }
         }

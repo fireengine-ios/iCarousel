@@ -728,6 +728,8 @@ struct TextConstants {
     static let errorNothingToDownload = NSLocalizedString("Nothing to download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorSameDestinationFolder = NSLocalizedString("Destination folder can not be the same folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let errorWorkWillIntroduced = NSLocalizedString("work_will_introduced", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let canceledOperationTextError = NSLocalizedString("cancelled", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let networkConnectionLostTextError = NSLocalizedString("The network connection was lost.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let commonServiceError = NSLocalizedString("ServiceError", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1061,6 +1063,7 @@ struct TextConstants {
     static let instaPickCopyHashtagsButton = NSLocalizedString("copy_hashtags_to_clipboard", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickShareButton = NSLocalizedString("share_on_social_media", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let instaPickPictureNotFoundLabel = NSLocalizedString("insta_pick_picture_not_found", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickPickedLabel = NSLocalizedString("picked", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickAnalyzingBottomText = NSLocalizedString("insta_pick_analyzing_bottom", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instaPickAnalyzingText_0 = NSLocalizedString("insta_pick_analyzing_0", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1092,4 +1095,6 @@ struct TextConstants {
     static let instagramConnectedAsFormat = NSLocalizedString("connected_as_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instagramRemoveConnectionWarning = NSLocalizedString("instagram_remove_connection_warning_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let instagramRemoveConnectionWarningMessage = NSLocalizedString("instagram_remove_connection_warning_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let removeConnection = NSLocalizedString("remove_connection", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let phoneUpdatedNeedsLogin = NSLocalizedString("phone_updated_needs_login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

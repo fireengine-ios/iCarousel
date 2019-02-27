@@ -12,6 +12,7 @@ protocol PhoneVereficationInteractorOutput: class {
     
     func verificationSucces()
     func vereficationFailed(with error: String)
+    func verificationSilentSuccess()
     
     func resendCodeRequestFailed(with error: ErrorResponse)
     func resendCodeRequestSuccesed()

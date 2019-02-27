@@ -209,7 +209,7 @@ extension InstapickServiceImpl: InstapickService {
     func startAnalyze(ids: [String], popupToDissmiss: UIViewController) {
         
         func showError(_ error: Error) {
-            let popupVC = PopUpController.with(title: TextConstants.errorAlert, message: error.localizedDescription, image: .error, buttonTitle: TextConstants.ok) { vc in
+            let popupVC = PopUpController.with(title: TextConstants.errorAlert, message: error.description, image: .error, buttonTitle: TextConstants.ok) { vc in
                 vc.close {
                     popupToDissmiss.dismiss(animated: true, completion: nil)
                 }

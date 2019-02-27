@@ -827,3 +827,12 @@
 "free_trial_detail_label" = "Herausfinden, welches Foto den höchsten Rang erreicht, und für mehr Likes mit PhotoPick analysieren! Für eine begrenzte Zeit mehr ausprobieren!";
 "instapick_under_construction" = "Wir verbessern PhotoPick für ein besseres Erlebnis 😉";
 "instapick_unsupported_file_type" = "Fotos, die Sie ausgewählt haben, werden nicht unterstützt. Sie können PhotoPick fortführen, indem Sie andere Fotos auswählen.";
+"work_will_introduced" = "";
+"facebook_remove_connection_warning_title" = "";
+"dropbox_remove_connection_warning_title" = "";
+"facebook_remove_connection_warning_message" = "";
+"dropbox_remove_connection_warning_message" = "";
+"remove_connection" = "";
+"you_are_connected" = "";
+"insta_pick_picture_not_found" = "";
+"phone_updated_needs_login" = "";

@@ -135,6 +135,7 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
                 MenloworksTagsService.shared.onAutosyncVideosStatusOff()
             }
             
+            storageVars.autoSyncSet = true
             output.save(settings: settings)
         }
     }

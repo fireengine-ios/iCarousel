@@ -98,7 +98,7 @@ extension PremiumInteractor: PremiumInteractorInput {
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("\(error.description)"))
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
                 DispatchQueue.main.async {
-                    self?.output.failed(with: error.localizedDescription)
+                    self?.output.failed(with: error.description)
                 }
             case .inProgress:
                 DispatchQueue.main.async {
