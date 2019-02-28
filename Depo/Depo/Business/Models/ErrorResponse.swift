@@ -105,6 +105,8 @@ extension Error {
             return error.code == 503
         } else if let error = self as? ServerMessageError {
             return error.code == 503
+        } else if let error = self as? ErrorResponse {
+            return error.isWorkWillIntroduced
         }
         
         return false

@@ -48,8 +48,12 @@ class RegistrationInteractor: RegistrationInteractorInput {
             switch response {
             case .success(let boolResult):
                 self?.output.captchaRequred(requred: boolResult)
-            case .failed(_):
-                self?.output.captchaRequredFailed()
+            case .failed(let error):
+                if error.isWorkWillIntroduced {
+                    self?.output.captchaRequredFailed(with: error.description)
+                } else {
+                    self?.output.captchaRequredFailed()
+                }
             }
         }
         ///Implementation with old request bellow

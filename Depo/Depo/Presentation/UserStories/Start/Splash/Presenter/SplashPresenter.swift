@@ -44,8 +44,9 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         
         vc.success = {
-            rootVC.dismiss(animated: true, completion: nil)
-            self.interactor.startLoginInBackroung()
+            rootVC.dismiss(animated: true, completion: {
+                self.interactor.startLoginInBackroung()
+            })
         }
         
         let navVC = NavigationController(rootViewController: vc)

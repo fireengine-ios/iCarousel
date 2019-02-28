@@ -94,6 +94,11 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         asyncOperationSucces()
     }
     
+    func captchaRequredFailed(with message: String) {
+        asyncOperationSucces()
+        view.showErrorMessage(with: message)
+    }
+    
     func needShowCaptcha() {
         completeAsyncOperationEnableScreen()
         captchaShowed = true
