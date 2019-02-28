@@ -78,7 +78,12 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                 if self.getNextPageRetryCounter >= self.numberOfRetries {
                     self.getNextPageRetryCounter = 0
                     self.isUpdating = false
-                    output.getContentWithFail(errorString: nil)
+                    /// TODO: Add receiving error with text
+                    if self.needShowServerError() {
+                        output.getContentWithFail(errorString: TextConstants.errorWorkWillIntroduced)
+                    } else {
+                        output.getContentWithFail(errorString: nil)
+                    }
                 } else {
                     self.isUpdating = false
                     self.remoteItems.cancellAllRequests()
@@ -309,5 +314,13 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     
     var requestPageNum: Int {
         return remoteItems.currentPage
+    }
+    
+    // MARK: - Utility methods
+    private func needShowServerError() -> Bool {
+        return remoteItems is MusicService ||
+            remoteItems is DocumentService ||
+            remoteItems is AllFilesService ||
+            remoteItems is FavouritesService
     }
 }

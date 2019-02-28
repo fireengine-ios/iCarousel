@@ -42,6 +42,8 @@ extension ErrorResponse {
     var isWorkWillIntroduced: Bool {
         if case ErrorResponse.string(let error) = self, error == ErrorResponseText.serviceAnavailable {
             return true
+        } else if case ErrorResponse.httpCode(503) = self {
+            return true
         }
         
         return false
