@@ -21,7 +21,7 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
     @IBOutlet private weak var optionsStackView: UIStackView!
     @IBOutlet private weak var dropDownArrow: UIImageView!
     @IBOutlet private weak var optionLabel: UILabel! {
-        didSet { optionLabel.font = UIFont.TurkcellSaturaRegFont(size: 18.0) }
+        didSet { optionLabel.font = UIFont.TurkcellSaturaRegFont(size: 14.5) }
     }
     @IBOutlet private weak var expandButton: UIButton!
     @IBOutlet private var optionsViews: [AutoSyncSettingsOptionView]!

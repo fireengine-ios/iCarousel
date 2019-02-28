@@ -18,7 +18,7 @@ final class AutoSyncSettingsOptionView: UIView {
     private var isFromSettings: Bool = false
     
     @IBOutlet private weak var button: UIButton! {
-        didSet { button.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17.5) }
+        didSet { button.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 16.5) }
     }
     
     @IBOutlet private weak var checkboxImageView: UIImageView! {
