@@ -412,9 +412,6 @@
 "You need to enable access to Contacts to continue" = "Devam etmek için Kişilere erişime izin vermeniz gerekli";
 "Cancel BackUp" = "Yedeklemeyi iptal et";
 "Clear BackUp" = "Yedeklemeyi temizle";
-"There are %d duplicated contacts." = "Cihazının kontak listesinde %d kopyalanmış kişi mevcut.";
-"Are you sure you want to delete?" = "Silmek istediğine emin misin?";
-"This duplicated contacts will be deleted from your contacts." = "Bu kopyalanmış kişiler cihazının kontak listesinden silinecek.";
 "There are %d duplicated contacts." = "Cihazının kontak listesinde %d tekrarlayan kişi mevcut.";
 "Are you sure you want to delete?" = "Silmek istediğine emin misin?";
 "This duplicated contacts will be deleted from your contacts." = "Tekrarlanmış kişilerin cihazının kontak listesinden silinecek.";
@@ -422,7 +419,6 @@
 "%%%d Analyzed…" = "%%%d Analiz edildi…";
 "%%%d Backed up…" = "%%%d yedeklendi…";
 "Restored %d Contacts" = "%d Kişiler eski durumuna getirildi.";
-"%d Duplicated Contacts Deleted" = "Cihazının kontak listesinden %d kopyalanmış kişi silindi.";
 "%d Duplicated Contacts Deleted" = "Cihazının kontak listesinden %d tekrarlayan kişi silindi.";
 "You have %d numbers on your contacts backup." = "lifebox'ında %d kişi var.";
 "This contact will be deleted from your contacts." = "Bu kişi kontak listenden silinecek.";
@@ -593,7 +589,6 @@
 "Cancel Analyzing" = "Analizi iptal et";
 "Delete all" = "Tümünü sil";
 "Keep" = "Sakla";
-"Duplicated Contacts" = "Kopyalanmış Kişiler";
 "Duplicated Contacts" = "Tekrarlayan Kişiler";
 "Free" = "Ücretsiz";
 "%d%% Backed up…" = "%d%% yedekleniyor";
@@ -619,7 +614,6 @@
 "You have not enough memory in your device" = "Bu işlemi yapabilmek için cihazında yeterli alan bulunmuyor.";
 "The purchase was canceled" = "Satın alma iptal edildi.";
 "The purchase in progress" = "Satın alma işlemi devam ediyor.";
-"You have no duplicated contacts!" = "Cihazının kontak listesinde kopyalanmış kişilerin yok!";
 "You have no duplicated contacts!" = "Cihazının kontak listesinde tekrarlayan kişilerin yok!";
 "Daily" = "Günlük";
 "Weekly" = "Haftalık";
@@ -849,4 +843,4 @@
 "remove_connection" = "Bağlantıyı kaldır";
 "you_are_connected" = "Bağlı";
 "insta_pick_picture_not_found" = "Fotoğraf \nbulunamadı";
-"phone_updated_needs_login" = "";
+"phone_updated_needs_login" = "Başarılı biçimde telefon numaranızı güncellediniz, lütfen kullanıcı adınız ve şifren ile giriş yap";

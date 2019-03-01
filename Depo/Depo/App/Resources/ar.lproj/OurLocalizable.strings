@@ -652,10 +652,6 @@
 "offersCancelLife" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "Please enter a valid login." = "رُفِضَ تسجيل الدخول. يرجى التحقق من بيانات الاعتماد.";
 "Please enter the text below" = "يرجى إدخال النص أدناه";
-"facebook_photo_tags" = "صور الفيسبوك";
-"facebook_tags_on" = "ستحصل على علامات Facebook الخاصة بك على lifebox عند تمكين هذا الخيار\n";
-"facebook_tags_off" = "ستحصل على علامات Facebook الخاصة بك على lifebox عند تمكين هذا الخيار\n";
-"facebook_tags_import" = "يرجى تمكين خيار \"استيراد من Facebook\" لاستخدام ميزة \"نقل علامة Facebook\":\n";
 "facebook_photo_tags" = "Facebook صور العلامات";
 "facebook_tags_on" = "ستحصل على علامات Facebook الخاصة بك على lifebox عند تمكين هذا الخيار\n";
 "facebook_tags_off" = "ستحصل على علامات Facebook الخاصة بك على lifebox عند تمكين هذا الخيار\n";
@@ -843,12 +839,12 @@
 "free_trial_detail_label" = "احصل على اختبار تحقق سمعي";
 "instapick_under_construction" = "نحن نحقق تحسينًا على تطبيق PhotoPick للحصول على تجربة أفضل";
 "instapick_unsupported_file_type" = "تكون الصور التي حددتها بتنسيق غير متوافق. يمكنك متابعة تجربة PhotoPick بتحديد صور أخرى.";
-"work_will_introduced" = "";
+"work_will_introduced" = "يوجد أعمال صيانة حاليًا في لايف بوكس، يرجى المحاولة مرة أخرى في وقت لاحق.";
 "facebook_remove_connection_warning_title" = "";
 "dropbox_remove_connection_warning_title" = "";
 "facebook_remove_connection_warning_message" = "";
 "dropbox_remove_connection_warning_message" = "";
-"remove_connection" = "";
+"remove_connection" = "اقطع الاتصال";
 "you_are_connected" = "";
-"insta_pick_picture_not_found" = "";
-"phone_updated_needs_login" = "";
+"insta_pick_picture_not_found" = "الصورة \nغير موجودة";
+"phone_updated_needs_login" = "لقد أتممت تحديث رقم هاتفك بنجاح. يرجى تسجيل الدخول بكتابة بيانات الاعتماد.";
