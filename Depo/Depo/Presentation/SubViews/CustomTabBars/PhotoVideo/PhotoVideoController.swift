@@ -47,6 +47,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
 
     private lazy var quickScrollService = QuickScrollService()
     
+    private lazy var filesDataSource = FilesDataSource()
     
     // MARK: - life cycle
     
@@ -109,9 +110,15 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionView.reloadData()
     }
     
-    private let columnsNumber = 4
-    private func updateCellSize() {
-        collectionView.saveAndGetItemSize(for: columnsNumber)
+    private lazy var columnsNumber: Int = {
+        let viewWidth = UIScreen.main.bounds.width
+        let desiredItemWidth: CGFloat = 100
+        let preferredCount = Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone
+        return Int(max(floor(viewWidth / desiredItemWidth), CGFloat(preferredCount)))
+    }()
+    private lazy var itemSize = updateCellSize()
+    @discardableResult private func updateCellSize() -> CGSize {
+        return collectionView.saveAndGetItemSize(for: columnsNumber)
     }
     
     // MARK: - Editing Mode
@@ -330,6 +337,7 @@ extension PhotoVideoController: UICollectionViewDelegate {
         }
         cell.delegate = self
         cell.indexPath = indexPath
+        cell.filesDataSource = filesDataSource
         
         let object = dataSource.object(at: indexPath)
         let wraped = WrapData(mediaItem: object)
@@ -383,14 +391,6 @@ extension PhotoVideoController: UICollectionViewDelegate {
     }
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
-extension PhotoVideoController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        ///return CGSize(width: collectionView.contentSize.width, height: 50)
-        return CGSize(width: 0, height: 50)
-    }
-}
-
 // MARK: - BaseItemInputPassingProtocol 
 /// using: bottomBarPresenter.basePassingPresenter = self, PhotoVideoThreeDotMenuManager(delegate: self)
 extension PhotoVideoController: BaseItemInputPassingProtocol {
@@ -439,7 +439,7 @@ extension PhotoVideoController: PhotoVideoNavBarManagerDelegate {
     }
     
     func onThreeDotsButton() {
-        threeDotMenuManager.showActions(for: dataSource.selectedObjects, isSelectingMode: dataSource.isSelectingMode)
+        threeDotMenuManager.showActions(for: dataSource.selectedObjects, isSelectingMode: dataSource.isSelectingMode, sender: navBarManager.threeDotsButton)
     }
     
     func onSearchButton() {
@@ -660,7 +660,6 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
     func fetchPredicateCreated() { }
     
     func contentDidChange(_ fetchedObjects: [WrapData]) {
-        let height = collectionView.saveAndGetItemSize(for: columnsNumber).height
-        scrollBarManager.updateYearsView(with: fetchedObjects, emptyMetaItems: [], cellHeight: height)
+        scrollBarManager.updateYearsView(with: fetchedObjects, emptyMetaItems: [], cellHeight: itemSize.height, numberOfColumns: columnsNumber)
     }
 }

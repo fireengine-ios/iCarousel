@@ -22,14 +22,13 @@ final class PhotoVideoThreeDotMenuManager {
         self.delegate = delegate
     }
     
-    func showActions(for items: [WrapData], isSelectingMode: Bool) {
+    func showActions(for items: [WrapData], isSelectingMode: Bool, sender: Any?) {
         if isSelectingMode {
             actionsForImageItems(items) { [weak self] types in
-                // TODO: - check on iPad without sender -
-                self?.alert.show(with: types, for: items, presentedBy: nil, onSourceView: nil, viewController: nil)
+                self?.alert.show(with: types, for: items, presentedBy: sender, onSourceView: nil, viewController: nil)
             }
         } else {
-            self.alert.show(with: [.select, .instaPick], for: [], presentedBy: nil, onSourceView: nil, viewController: nil)
+            self.alert.show(with: [.select, .instaPick], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
         }
     }
     

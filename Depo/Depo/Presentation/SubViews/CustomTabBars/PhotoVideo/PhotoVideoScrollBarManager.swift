@@ -28,12 +28,11 @@ final class PhotoVideoScrollBarManager {
         scrollBar.delegate = delegate
     }
     
-    func updateYearsView(with allItems: [Item], emptyMetaItems: [Item], cellHeight: CGFloat) {
+    func updateYearsView(with allItems: [Item], emptyMetaItems: [Item], cellHeight: CGFloat, numberOfColumns: Int) {
         if allItems.isEmpty {
             return
         }
-        
-        let numberOfColumns = Int(Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone)
+    
         // TODO: getCellSizeForList must be called in main queue. for a while it is woking without it
         //        let cellHeight = delegate?.getCellSizeForGreed().height ?? 0
         let dates = allItems.flatMap({ $0 }).flatMap({ $0.metaDate })
