@@ -16,6 +16,10 @@ enum ErrorResponse {
     case httpCode(NSInteger)
 }
 
+enum ErrorResponseText {
+    static let serviceAnavailable = "\"503 Service Unavailable\""
+}
+
 extension ErrorResponse {
     func showInternetErrorGlobal() {
         if case ErrorResponse.error(let error) = self, error.isNetworkError {
@@ -34,10 +38,25 @@ extension ErrorResponse {
         }
         return false
     }
+    
+    var isWorkWillIntroduced: Bool {
+        if case ErrorResponse.string(let error) = self, error == ErrorResponseText.serviceAnavailable {
+            return true
+        } else if case ErrorResponse.httpCode(503) = self {
+            return true
+        }
+        
+        return false
+    }
+    
 }
 
 extension ErrorResponse: CustomStringConvertible {
     var description: String {
+        if isWorkWillIntroduced {
+            return TextConstants.errorWorkWillIntroduced
+        }
+        
         return localizedDescription
     }
 }
@@ -88,6 +107,8 @@ extension Error {
             return error.code == 503
         } else if let error = self as? ServerMessageError {
             return error.code == 503
+        } else if let error = self as? ErrorResponse {
+            return error.isWorkWillIntroduced
         }
         
         return false

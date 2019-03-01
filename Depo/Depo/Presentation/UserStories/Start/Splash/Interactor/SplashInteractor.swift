@@ -38,13 +38,23 @@ class SplashInteractor: SplashInteractorInput {
                         let loginError = LoginResponseError(with: error)
                         self?.analyticsService.trackLoginEvent(error: loginError)
                         self?.output.asyncOperationSucces()
-                        self?.output.onFailLogin()
+                        
+                        if error.isWorkWillIntroduced {
+                            self?.output.onFailGetAccountInfo(error: error)
+                        } else {
+                            self?.failLogin()
+                        }
                     })
                 }, fail: { [weak self] response in
                     let loginError = LoginResponseError(with: response)
                     self?.analyticsService.trackLoginEvent(error: loginError)
                     self?.output.asyncOperationSucces()
-                    self?.output.onFailLogin()
+                    
+                    if response.isWorkWillIntroduced {
+                        self?.output.onFailGetAccountInfo(error: response)
+                    } else {
+                        self?.failLogin()
+                    }
                 })
             }
         } else {

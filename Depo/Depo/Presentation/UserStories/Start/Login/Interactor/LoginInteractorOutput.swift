@@ -51,6 +51,7 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func captchaRequred(requred: Bool)
     func captchaRequredFailed()
+    func captchaRequredFailed(with message: String)
     
     func successedSilentLogin()
 }
