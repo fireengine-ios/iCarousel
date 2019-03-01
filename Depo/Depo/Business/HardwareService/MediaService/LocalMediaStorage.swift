@@ -509,8 +509,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
                 
                 mediaItem.localFileID = assetIdentifier
-                mediaItem.trimmedLocalFileID = assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier//item.getTrimmedLocalID()
+                mediaItem.trimmedLocalFileID = item.getTrimmedLocalID() //assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier
                 mediaItem.syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
+                mediaItem.md5Value = item.md5
                 
                 if isFilteredItem {
                     mediaItem.isFiltered = true
@@ -525,6 +526,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     context.perform {
                         mediaItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
                         userObjectSyncStatus.insert(MediaItemsObjectSyncStatus(userID: currentUserID, context: context))
+                        MediaItemOperationsService.shared.updateRelatedRemoteItems(mediaItem: mediaItem, context: context)
                         CoreDataStack.default.saveDataForContext(context: context, savedCallBack: {
                             success?()
                         })

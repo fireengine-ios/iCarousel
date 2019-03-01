@@ -345,11 +345,11 @@ class FileService: BaseRequestService {
         
         allOperationsCount = allOperationsCount + supportedItemsToDownload.count
         CardsManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
-        let downloadRequests: [BaseDownloadRequestParametrs] = supportedItemsToDownload.flatMap {
+        let downloadRequests: [BaseDownloadRequestParametrs] = supportedItemsToDownload.compactMap {
             BaseDownloadRequestParametrs(urlToFile: $0.urlToFile!, fileName: $0.name!, contentType: $0.fileType, albumName: album?.name, item: $0)
         }
         
-        let operations = downloadRequests.flatMap { baseDownloadRequest in
+        let operations = downloadRequests.compactMap { baseDownloadRequest in
             DownLoadOperation(downloadParam: baseDownloadRequest, success: { [weak self] in
                 guard let `self` = self else {
                     return
@@ -455,7 +455,7 @@ class FileService: BaseRequestService {
                     
                     if let downloadItem = downloadParam.item {
                         MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS: [downloadItem.getTrimmedLocalID()]) { mediaItems in
-                            if mediaItems.first != nil {
+                            if !mediaItems.isEmpty {
                                 removeDestinationFile()
                                 success?()
                             } else {
