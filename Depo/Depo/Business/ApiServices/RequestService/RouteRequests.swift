@@ -18,7 +18,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static let currentServerEnvironment = ServerEnvironment.production
+    private static let currentServerEnvironment = ServerEnvironment.preProduction
     
     static let baseUrl: URL = {
         switch currentServerEnvironment {
