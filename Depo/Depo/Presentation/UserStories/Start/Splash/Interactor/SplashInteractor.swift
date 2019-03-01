@@ -38,7 +38,7 @@ class SplashInteractor: SplashInteractorInput {
                         let loginError = LoginResponseError(with: error)
                         self?.analyticsService.trackLoginEvent(error: loginError)
                         self?.output.asyncOperationSucces()
-                        if error.isWorkWillIntroduced {
+                        if error.isWorkUnderway {
                             self?.output.onFailGetAccountInfo(error: error)
                         } else {
                             self?.failLogin()
@@ -48,7 +48,7 @@ class SplashInteractor: SplashInteractorInput {
                     let loginError = LoginResponseError(with: response)
                     self?.analyticsService.trackLoginEvent(error: loginError)
                     self?.output.asyncOperationSucces()
-                    if response.isWorkWillIntroduced {
+                    if response.isWorkUnderway {
                         self?.output.onFailGetAccountInfo(error: response)
                     } else {
                         self?.failLogin()

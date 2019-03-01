@@ -49,7 +49,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
             case .success(let boolResult):
                 self?.output.captchaRequred(requred: boolResult)
             case .failed(let error):
-                if error.isWorkWillIntroduced {
+                if error.isWorkUnderway {
                     self?.output.captchaRequredFailed(with: error.description)
                 } else {
                     self?.output.captchaRequredFailed()

@@ -864,7 +864,7 @@
 "free_trial_detail_label" = "Zbuloni se cilat foto do të marrin vlerësim më të lartë; analizoni me PhotoPick për më shumë pëlqime! Provojeni falas për një periudhë të limituar!";
 "instapick_under_construction" = "Ne po bëjmë përmirësime në PhotoPick për një eksperiencë më të mirë 😉";
 "instapick_unsupported_file_type" = "Fotot që keni zgjedhur janë në format të pambështetur. Ju mund të vazhdoni përvojën e PhotoPick duke përzgjedhur fotot e tjera.";
-"work_will_introduced" = "Janë duke u kryer disa punë mirëmbajtjeje në lifebox. Ju lutem, provoni përsëri më vonë.";
+"work_is_underway" = "Janë duke u kryer disa punë mirëmbajtjeje në lifebox. Ju lutem, provoni përsëri më vonë.";
 "facebook_remove_connection_warning_title" = "Jeni duke hequr lidhjen me Facebook";
 "dropbox_remove_connection_warning_title" = "Jeni duke hequr lidhjen me Dropbox";
 "facebook_remove_connection_warning_message" = "Jeni të sigurt që dëshironi të hiqni lidhjen me Facebook?";

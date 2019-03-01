@@ -39,7 +39,7 @@ extension ErrorResponse {
         return false
     }
     
-    var isWorkWillIntroduced: Bool {
+    var isWorkUnderway: Bool {
         if case ErrorResponse.string(let error) = self, error == ErrorResponseText.serviceAnavailable {
             return true
         } else if case ErrorResponse.httpCode(503) = self {
@@ -53,8 +53,8 @@ extension ErrorResponse {
 
 extension ErrorResponse: CustomStringConvertible {
     var description: String {
-        if isWorkWillIntroduced {
-            return TextConstants.errorWorkWillIntroduced
+        if isWorkUnderway {
+            return TextConstants.errorWorkIsUnderway
         }
         
         return localizedDescription
@@ -96,7 +96,7 @@ extension ErrorResponse: LocalizedError {
 
 extension Error {
     
-    var isWorkWillIntroduced: Bool {
+    var isWorkUnderway: Bool {
         if let error = self as? AFError {
             return error.responseCode == 503
         } else if let error = self as? ServerError {
@@ -108,7 +108,7 @@ extension Error {
         } else if let error = self as? ServerMessageError {
             return error.code == 503
         } else if let error = self as? ErrorResponse {
-            return error.isWorkWillIntroduced
+            return error.isWorkUnderway
         }
         
         return false
@@ -122,8 +122,8 @@ extension Error {
             default:
                 return TextConstants.errorBadConnection
             }
-        } else if isWorkWillIntroduced {
-            return TextConstants.errorWorkWillIntroduced
+        } else if isWorkUnderway {
+            return TextConstants.errorWorkIsUnderway
         }
         
         return localizedDescription
