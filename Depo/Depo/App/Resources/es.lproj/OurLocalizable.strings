@@ -827,12 +827,13 @@
 "free_trial_detail_label" = "¡Descubre cual foto obtendrá el rango más alto, analiza con PhotoPick para conseguir más “me gusta”(likes)! ¡Prueba más gratis por un tiempo limitado!";
 "instapick_under_construction" = "Estamos mejorando en PhotoPick para una mejor experiencia 😉";
 "instapick_unsupported_file_type" = "Las fotos que ha seleccionado están en formato no compatible. Puedes continuar la experiencia de PhotoPick seleccionando otras fotos.";
-"server_under_maintenance" = "";
+"work_will_introduced" = "Actualmente hay un trabajo de mantenimiento en LifeBox, porfavor inténtalo de nuevo más tarde.";
 "facebook_remove_connection_warning_title" = "";
 "dropbox_remove_connection_warning_title" = "";
 "facebook_remove_connection_warning_message" = "";
 "dropbox_remove_connection_warning_message" = "";
-"remove_connection" = "";
+"remove_connection" = "Eliminar la conexión.";
 "you_are_connected" = "";
-"insta_pick_picture_not_found" = "";
-"phone_updated_needs_login" = "";
+"insta_pick_picture_not_found" = "La imagen no se \nha encontrada";
+"phone_updated_needs_login" = "Ha actualizado su número de teléfono con éxito, inicie sesión con sus credenciales";
+"server_under_maintenance" = "";

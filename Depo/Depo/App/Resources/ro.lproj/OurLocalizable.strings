@@ -827,12 +827,13 @@
 "free_trial_detail_label" = "Descoperă care poză anume va avea cel mai mare succes, analizează cu PhotoPick pentru mai multe like-uri! Mai testează gratuit o perioadă limitată de timp!";
 "instapick_under_construction" = "Facem imbunatatiri pe PhotoPick pentru o experienta mai buna 😉";
 "instapick_unsupported_file_type" = "Fotografiile pe care le-ați selectat sunt în format neacceptat. Puteți continua experiența PhotoPick selectând alte fotografii.";
-"server_under_maintenance" = "";
+"work_will_introduced" = "La moment se efectuiază lucrări de întreținere a lifebox, te rugăm să încerci mai târziu.";
 "facebook_remove_connection_warning_title" = "";
 "dropbox_remove_connection_warning_title" = "";
 "facebook_remove_connection_warning_message" = "";
 "dropbox_remove_connection_warning_message" = "";
-"remove_connection" = "";
+"remove_connection" = "Elimină conexiunea";
 "you_are_connected" = "";
-"insta_pick_picture_not_found" = "";
-"phone_updated_needs_login" = "";
+"insta_pick_picture_not_found" = "Poza nu a \nfost găsită";
+"phone_updated_needs_login" = "Ați actualizat cu succes numărul dvs. de telefon, conectați-vă cu datele dvs. de acreditare";
+"server_under_maintenance" = "";

@@ -827,12 +827,13 @@
 "free_trial_detail_label" = "Дізнайтеся, які фото отримають найвищі оцінки! Оцінювайте з PhotoPick та отримуйте ще більше вподобань! Спробуйте безкоштовно!";
 "instapick_under_construction" = "Ми покращуємо сервіс PhotoPick  :)";
 "instapick_unsupported_file_type" = "Фотографії, які ви вибрали, мають некоректний формат. Ви можете використовувати Photopik, вибравши інші фотографії.";
-"server_under_maintenance" = "";
+"work_will_introduced" = "Тривають технічні роботи у lifebox! Будь ласка, спробуйте пізніше";
 "facebook_remove_connection_warning_title" = "";
 "dropbox_remove_connection_warning_title" = "";
 "facebook_remove_connection_warning_message" = "";
 "dropbox_remove_connection_warning_message" = "";
-"remove_connection" = "";
+"remove_connection" = "Видалити поєднання";
 "you_are_connected" = "";
-"insta_pick_picture_not_found" = "";
-"phone_updated_needs_login" = "";
+"insta_pick_picture_not_found" = "Картинку не \nзнайдено";
+"phone_updated_needs_login" = "Ви успішно оновили свій номер телефону, будь ласка, увійдіть у свій обліковий запис";
+"server_under_maintenance" = "";

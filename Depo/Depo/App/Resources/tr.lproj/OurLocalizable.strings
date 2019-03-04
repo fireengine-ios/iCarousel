@@ -835,7 +835,7 @@
 "free_trial_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Üstelik daha çok dene diye sınırlı bir süre için ücretsiz!";
 "instapick_under_construction" = "Daha iyi bir deneyim yaşaman için PhotoPick'i iyileştiriyoruz 😉";
 "instapick_unsupported_file_type" = "Seçmiş olduğun fotoğraflar desteklenmeyen bir formatta. Başka fotoğraflar seçerek PhotoPick deneyimini yaşamaya devam edebilirsin.";
-"server_under_maintenance" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
+"work_will_introduced" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
 "facebook_remove_connection_warning_title" = "Facebook bağlantını kaldırmak üzeresin.";
 "dropbox_remove_connection_warning_title" = "Dropbox bağlantını kaldırmak üzeresin.";
 "facebook_remove_connection_warning_message" = "Facebook ile olan bağlantını kaldırmak istediğine emin misin?";
@@ -843,4 +843,5 @@
 "remove_connection" = "Bağlantıyı kaldır";
 "you_are_connected" = "Bağlı";
 "insta_pick_picture_not_found" = "Fotoğraf \nbulunamadı";
-"phone_updated_needs_login" = "";
+"phone_updated_needs_login" = "Başarılı biçimde telefon numaranızı güncellediniz, lütfen kullanıcı adınız ve şifren ile giriş yap";
+"server_under_maintenance" = "";
