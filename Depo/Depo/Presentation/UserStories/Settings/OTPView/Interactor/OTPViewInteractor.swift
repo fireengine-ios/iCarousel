@@ -96,7 +96,8 @@ class OTPViewInteractor: PhoneVereficationInteractor {
     
     private func silentLogin(token: String) {
         authenticationService.silentLogin(token: token, success: { [weak self] in
-            self?.verificationSucces()
+            self?.savePhoneNumber()
+            self?.output.verificationSilentSuccess()
         }, fail: { [weak self] errorResponse in
             self?.verificationSucces()
         })
@@ -104,8 +105,12 @@ class OTPViewInteractor: PhoneVereficationInteractor {
     
     private func verificationSucces() {
         DispatchQueue.main.async { [weak self] in
-            self?.userInfo?.phoneNumber = self?.phoneNumber
+            self?.savePhoneNumber()
             self?.output.verificationSucces()
         }
+    }
+    
+    private func savePhoneNumber() {
+        userInfo?.phoneNumber = phoneNumber
     }
 }

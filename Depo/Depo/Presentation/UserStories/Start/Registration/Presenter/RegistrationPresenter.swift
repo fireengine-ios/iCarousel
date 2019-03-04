@@ -117,6 +117,11 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
         asyncOperationSucces()
     }
     
+    func captchaRequredFailed(with message: String) {
+        asyncOperationSucces()
+        view.showErrorTitle(withText: message)
+    }
+    
     // MARK: BasePresenter
     
     override func outputView() -> Waiting? {

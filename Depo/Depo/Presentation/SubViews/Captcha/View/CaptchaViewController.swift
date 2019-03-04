@@ -100,9 +100,9 @@ final class CaptchaViewController: ViewController {
             }
             
         }, fail: { error in
-            DispatchQueue.main.async {
-                UIApplication.showErrorAlert(message: error.description)
-            }
+//            DispatchQueue.main.async {
+//                UIApplication.showErrorAlert(message: error.description)
+//            }
         })
         
         currentCaptchaID = captchaService.uuid
