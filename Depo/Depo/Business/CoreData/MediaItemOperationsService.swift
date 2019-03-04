@@ -593,7 +593,37 @@ final class MediaItemOperationsService {
                 
             }
         }
+    }
+    
+    func removeRemoteItems(_ items: [WrapData], completion: @escaping VoidHandler) {
+        guard !items.isEmpty else {
+            return
+        }
         
+        CoreDataStack.default.performBackgroundTask { [weak self] context in
+            guard let `self` = self else {
+                return
+            }
+            
+            let predicate = NSPredicate(format: "uuid in %@", items.map {$0.uuid} )
+            self.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { [weak self] remoteItems in
+                guard let `self` = self else {
+                    return
+                }
+                
+                let remoteItemsSet = NSSet(array: remoteItems)
+                
+                self.mediaItemByLocalID(trimmedLocalIDS: items.map {$0.getTrimmedLocalID()}, context: context, mediaItemsCallBack: { mediaItems in
+                    mediaItems.forEach { $0.removeFromRelatedRemotes(remoteItemsSet)}
+                    
+                    remoteItems.forEach { context.delete($0) }
+                    
+                    context.saveAsync(completion: { _ in
+                        completion()
+                    })
+                })
+            })
+        }
     }
     
     func allLocalItems(localItems: @escaping LocalFilesCallBack) {

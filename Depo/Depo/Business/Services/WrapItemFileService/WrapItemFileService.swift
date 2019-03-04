@@ -52,8 +52,10 @@ class WrapItemFileService: WrapItemFileOperations {
     func delete(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         
         let successOperation: FileOperationSucces = {
-            success?()
-            ItemOperationManager.default.deleteItems(items: deleteFiles)
+            MediaItemOperationsService.shared.removeRemoteItems(deleteFiles, completion: {
+                success?()
+                ItemOperationManager.default.deleteItems(items: deleteFiles)
+            })
         }
         
         let failOperation: FailResponse = {  value in
