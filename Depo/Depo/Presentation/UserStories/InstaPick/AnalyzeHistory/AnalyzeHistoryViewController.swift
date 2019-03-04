@@ -63,6 +63,10 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         editingTabBar?.view.layoutIfNeeded()
     }
     
+    func updateAnalyzeCount(with analyzesCount: InstapickAnalyzesCount) {
+        self.dataSource.reloadCards(with: analyzesCount)
+    }
+    
     private func configure() {
         instapickService.delegates.add(self)
         

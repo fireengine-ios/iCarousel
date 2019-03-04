@@ -236,6 +236,7 @@ extension InstapickServiceImpl: InstapickService {
                             
                             if let currentController = UIApplication.topController() {
                                 let router = RouterVC()
+                                (router.getViewControllerForPresent() as? AnalyzeHistoryViewController)?.updateAnalyzeCount(with: analyzesCount)
                                 let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
                                                                                                       analyzesCount: analyzesCount,
                                                                                                       isShowTabBar: router.getViewControllerForPresent() is BaseFilesGreedViewController)
