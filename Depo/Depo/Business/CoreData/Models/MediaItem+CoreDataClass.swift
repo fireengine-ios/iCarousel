@@ -117,6 +117,16 @@ public class MediaItem: NSManagedObject {
         creationDateValue = item.creationDate as NSDate?
         lastModifiDateValue = item.lastModifiDate as NSDate?
         urlToFileValue = item.tmpDownloadUrl?.absoluteString
+        
+        switch item.patchToPreview {
+        case let .remoteUrl(url):
+            patchToPreviewValue = url?.absoluteString
+        case let .localMediaContent(assetContent):
+            let localID = assetContent.asset.localIdentifier
+            localFileID = localID
+            patchToPreviewValue = nil
+        }
+        
         trimmedLocalFileID = item.getTrimmedLocalID()
         parent = item.parent
         monthValue = item.creationDate?.getDateForSortingOfCollectionView()
