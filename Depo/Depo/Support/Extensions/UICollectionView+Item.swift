@@ -13,9 +13,8 @@ extension UICollectionView {
     func saveAndGetItemSize(for columnsNumber: Int) -> CGSize {
         
         let viewWidth = UIScreen.main.bounds.width
-        
-        let desiredItemWidth: CGFloat = 100
-        let columns: CGFloat = max(floor(viewWidth / desiredItemWidth), CGFloat(columnsNumber))
+
+        let columns = CGFloat(columnsNumber)
         let padding: CGFloat = 1
         let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
         let itemSize = CGSize(width: itemWidth, height: itemWidth)
@@ -24,6 +23,7 @@ extension UICollectionView {
             layout.itemSize = itemSize
             layout.minimumInteritemSpacing = padding
             layout.minimumLineSpacing = padding
+            layout.headerReferenceSize = CGSize(width: 0, height: 50)
         }
         return itemSize
     }

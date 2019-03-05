@@ -205,13 +205,26 @@ final class MediaItemOperationsService {
         }
     }
     
+    func updateRelatedRemoteItems(mediaItem: MediaItem, context: NSManagedObjectContext) {
+        guard let uuid = mediaItem.trimmedLocalFileID, let md5 = mediaItem.md5Value else {
+            return
+        }
+
+        let predicateForRemoteFiles = NSPredicate(format: "(trimmedLocalFileID == %@ OR md5Value == %@) AND isLocalItemValue == false)", uuid, md5)
+        
+        executeRequest(predicate: predicateForRemoteFiles, context: context) { alreadySavedRemoteItems in
+            alreadySavedRemoteItems.forEach({ savedItem in
+                savedItem.relatedLocal = mediaItem
+            })
+        }
+    }
     
     // MARK: MediaItem
     
     func mediaItemByLocalID(trimmedLocalIDS: [String],
                             context: NSManagedObjectContext = CoreDataStack.default.newChildBackgroundContext,
                             mediaItemsCallBack: @escaping MediaItemsCallBack) {
-        let predicate = NSPredicate(format: "trimmedLocalFileID IN %@", trimmedLocalIDS)
+        let predicate = NSPredicate(format: "trimmedLocalFileID IN %@ AND isLocalItemValue == true", trimmedLocalIDS)
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
     
@@ -392,7 +405,7 @@ final class MediaItemOperationsService {
             }
             LocalMediaStorage.default.assetsCache.append(list: newAssets)
             
-            MediaItemOperationsService.shared.saveLocalMediaItemsPaged(items: newAssets, context: CoreDataStack.default.newChildBackgroundContext, completion: completion)
+            self.saveLocalMediaItemsPaged(items: newAssets, context: CoreDataStack.default.newChildBackgroundContext, completion: completion)
         }
     }
     

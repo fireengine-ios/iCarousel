@@ -136,7 +136,6 @@ final class CellImageManager {
         let filter = GPUImageGaussianBlurFilter()
         filter.blurRadiusInPixels = CGFloat(radiusInPixels)
         return filter.image(byFilteringImage: image)
-        
     }
     
     private func start(operation: Operation) {
@@ -144,8 +143,6 @@ final class CellImageManager {
         operationQueue.addOperation(operation)
     }
 }
-
-
 
 //MARK: - Cache
 extension CellImageManager {
