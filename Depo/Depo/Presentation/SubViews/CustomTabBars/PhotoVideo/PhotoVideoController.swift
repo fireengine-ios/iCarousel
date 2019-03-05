@@ -103,9 +103,9 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func fetchAndReload() {
+        CellImageManager.clear()
         assetsFileCacheManager.resetCachedAssets()
         dataSource.performFetch()
-        CellImageManager.clear()
         collectionView.reloadData()
     }
     

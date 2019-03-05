@@ -8,11 +8,12 @@
 
 import Foundation
 import Alamofire
+import SDWebImage
 
 
-final class ImageDownloadOperation: Operation {
-    
-    var outputBlock: ((AnyObject?) -> Void)?
+final class ImageDownloadOperation: Operation, SDWebImageOperation {
+    typealias ImageDownloadOperationCallback = ((AnyObject?) -> Void)
+    var outputBlock: ImageDownloadOperationCallback?
     
     private let semaphore = DispatchSemaphore(value: 0)
     private var url: URL?
@@ -20,6 +21,12 @@ final class ImageDownloadOperation: Operation {
     
     init(url: URL?) {
         self.url = url
+        super.init()
+    }
+    
+    init(url: URL?, completion: ImageDownloadOperationCallback?) {
+        self.url = url
+        self.outputBlock = completion
         super.init()
     }
     
@@ -55,7 +62,7 @@ final class ImageDownloadOperation: Operation {
                 self.semaphore.signal()
             }
             .task
-
+        
         semaphore.wait()
     }
 }

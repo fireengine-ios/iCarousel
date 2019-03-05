@@ -27,5 +27,6 @@ extension MediaItemsMetaData {
     @NSManaged public var title: String?
     @NSManaged public var width: Int16
     @NSManaged public var item: MediaItem?
+    @NSManaged public var takenDate: NSDate?
 
 }

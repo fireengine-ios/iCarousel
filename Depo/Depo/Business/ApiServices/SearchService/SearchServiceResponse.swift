@@ -84,8 +84,8 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
     var favourite: Bool?
     
     // photo and video
-    var height: Int?
-    var width: Int?
+    var height: Int = 0
+    var width: Int = 0
     var takenDate: Date?
     var largeUrl: URL?
     var mediumUrl: URL?
@@ -101,7 +101,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
     var genre =  [String]()
     
     // music & video & story
-    var duration: Double?
+    var duration: Double = Double(-1.0)
     
     //story
     var videoSlideshow: Bool?
@@ -122,8 +122,8 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
     override func mapping() {
         favourite = json?[SearchJsonKey.favourite].boolFromString ?? false
 
-        height = json?[SearchJsonKey.ImageHeight].int
-        width = json?[SearchJsonKey.ImageWidth].int
+        height = json?[SearchJsonKey.ImageHeight].int ?? 0
+        width = json?[SearchJsonKey.ImageWidth].int ?? 0
         takenDate = json?[SearchJsonKey.ImageDateTime].date
         largeUrl = json?[SearchJsonKey.ThumbnailLarge].url
         mediumUrl = json?[SearchJsonKey.Thumbnail_Medium].url
@@ -154,8 +154,8 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         super.init()
         favourite = aDecoder.decodeObject(forKey: SearchJsonKey.favourite) as? Bool
-        height = aDecoder.decodeObject(forKey: SearchJsonKey.ImageHeight) as? Int
-        width = aDecoder.decodeObject(forKey:SearchJsonKey.ImageWidth) as? Int
+        height = aDecoder.decodeObject(forKey: SearchJsonKey.ImageHeight) as? Int ?? 0
+        width = aDecoder.decodeObject(forKey:SearchJsonKey.ImageWidth) as? Int ?? 0
         takenDate = aDecoder.decodeObject(forKey: SearchJsonKey.ImageDateTime) as? Date
         largeUrl = aDecoder.decodeObject(forKey: SearchJsonKey.ThumbnailLarge) as? URL
         mediumUrl = aDecoder.decodeObject(forKey: SearchJsonKey.Thumbnail_Medium) as? URL
@@ -165,7 +165,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         artist = aDecoder.decodeObject(forKey:SearchJsonKey.Artist) as? String
         album = aDecoder.decodeObject(forKey:SearchJsonKey.Album) as? String
         title = aDecoder.decodeObject(forKey:SearchJsonKey.Title) as? String
-        duration = aDecoder.decodeObject(forKey:SearchJsonKey.Duration) as? Double
+        duration = aDecoder.decodeObject(forKey:SearchJsonKey.Duration) as? Double ?? Double(-1.0)
         genre = aDecoder.decodeObject(forKey:SearchJsonKey.Genre) as? [String] ?? []
         videoSlideshow = aDecoder.decodeObject(forKey: SearchJsonKey.VideoSlideshow) as? Bool
         videoHLSPreview = aDecoder.decodeObject(forKey:SearchJsonKey.VideoHLSPreview) as? URL
@@ -190,6 +190,52 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         aCoder.encode(videoHLSPreview, forKey: SearchJsonKey.VideoHLSPreview)
     }
 }
+
+extension BaseMetaData {
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let metaData = object as? BaseMetaData else {
+            return false
+        }
+
+        return takenDate == metaData.takenDate &&
+            largeUrl?.byTrimmingQuery == metaData.largeUrl?.byTrimmingQuery &&
+            mediumUrl?.byTrimmingQuery == metaData.mediumUrl?.byTrimmingQuery &&
+            smalURl?.byTrimmingQuery == metaData.smalURl?.byTrimmingQuery &&
+            videoPreviewURL?.byTrimmingQuery == metaData.videoPreviewURL?.byTrimmingQuery &&
+            documentPreviewURL?.byTrimmingQuery == metaData.documentPreviewURL?.byTrimmingQuery &&
+            title == metaData.title &&
+            duration == metaData.duration &&
+            genre == metaData.genre &&
+            artist == metaData.artist &&
+            videoSlideshow == metaData.videoSlideshow &&
+            videoHLSPreview?.byTrimmingQuery == metaData.videoHLSPreview?.byTrimmingQuery &&
+            favourite == metaData.favourite &&
+            height == metaData.height &&
+            width == metaData.width
+    }
+    
+    func copy(metaData: BaseMetaData?) {
+        guard let metaData = metaData else {
+            return
+        }
+        
+        takenDate = metaData.takenDate
+        largeUrl = metaData.largeUrl
+        mediumUrl = metaData.mediumUrl
+        smalURl = metaData.smalURl
+        videoPreviewURL = metaData.videoPreviewURL
+        documentPreviewURL = metaData.documentPreviewURL
+        title = metaData.title
+        duration = metaData.duration
+        genre = metaData.genre
+        videoSlideshow = metaData.videoSlideshow
+        videoHLSPreview = metaData.videoHLSPreview
+        favourite = metaData.favourite
+        height = metaData.height
+        width = metaData.width
+    }
+}
+
 
 //MARK:- SearchItemResponse
 final class SearchItemResponse: ObjectRequestResponse {

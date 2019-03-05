@@ -216,6 +216,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     
     private func reloadSupplementaryViewsIfNeeded() {
         if !sectionChanges.isEmpty {
+            CellImageManager.clear()
             collectionView.reloadData()
         }
     }

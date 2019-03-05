@@ -16,6 +16,7 @@ typealias UploadOperationHandler = (_ uploadOperation: UploadOperation, _ value:
 final class UploadOperation: Operation {
     
     let inputItem: WrapData
+    private(set) var outputItem: WrapData?
     var uploadType: UploadType?
     private let uploadStategy: MetaStrategy
     private let uploadTo: MetaSpesialFolder
@@ -138,7 +139,9 @@ final class UploadOperation: Operation {
                     let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
                                                         fileUUID: uploadParam.tmpUUId )
                     
-                    self?.inputItem.uuid = uploadParam.tmpUUId
+//                    self?.inputItem.uuid = uploadParam.tmpUUId
+                    self?.inputItem.syncStatus = .synced
+                    self?.inputItem.setSyncStatusesAsSyncedForCurrentUser()
                     
                     self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
                         self?.dispatchQueue.async { [weak self] in
@@ -147,8 +150,10 @@ final class UploadOperation: Operation {
                             }
                             
                             if let response = baseurlResponse as? SearchItemResponse {
+                                self.outputItem = WrapData(remote: response)
                                 self.addPhotoToTheAlbum(with: uploadParam, response: response)
-                                self.inputItem.tmpDownloadUrl = response.tempDownloadURL
+                                self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
+                                MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
                             }
                             
                             customSucces()

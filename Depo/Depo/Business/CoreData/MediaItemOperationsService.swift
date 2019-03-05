@@ -172,7 +172,7 @@ final class MediaItemOperationsService {
 //        }
 //    }
     //TODO: check the usefullness of it/or need of refactor
-    func updateLocalItemSyncStatus(item: Item) {
+    func updateLocalItemSyncStatus(item: Item, newRemote: WrapData? = nil) {
         CoreDataStack.default.performBackgroundTask { [weak self] context in
             guard let `self` = self else {
                 return
@@ -194,8 +194,10 @@ final class MediaItemOperationsService {
                         array.append(MediaItemsObjectSyncStatus(userID: userID, context: context))
                     }
                     savedItem.objectSyncStatus = NSSet(array: array)
-                    savedItem.addToRelatedRemotes(MediaItem(wrapData: item, context: context))
-                    
+                    if let newRemoteItem = newRemote {
+                        savedItem.addToRelatedRemotes(MediaItem(wrapData: newRemoteItem, context: context))
+                    }
+
                     //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
                 })
                 context.saveAsync()
@@ -270,9 +272,6 @@ final class MediaItemOperationsService {
         
         let context = CoreDataStack.default.newChildBackgroundContext
         
-        //*--------
-        ///first option, kill all in range
-
         let inDateRangePredicate = NSPredicate(format:"isLocalItemValue = false AND (creationDateValue <= %@ AND creationDateValue >= %@)", firstRemote.metaDate as NSDate, lastRemote.metaDate as NSDate)
         
         executeRequest(predicate: inDateRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
@@ -290,7 +289,6 @@ final class MediaItemOperationsService {
                 
                 var deletedItems = [WrapData]()
                 var newSavedItems = [WrapData]()
-//                var updatedItems = [WrapData]()
                 
                 for newItem in remoteItems {
                     if let existed = allSavedItems.first(where: { $0.uuid == newItem.uuid }) {

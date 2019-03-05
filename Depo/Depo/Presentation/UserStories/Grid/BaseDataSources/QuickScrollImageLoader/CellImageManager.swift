@@ -129,6 +129,10 @@ final class CellImageManager {
     }
     
     private func blurred(image: UIImage, with radiusInPixels: Float = 2.0) -> UIImage? {
+        guard UIApplication.shared.applicationState == .active else {
+            return image
+        }
+        
         let filter = GPUImageGaussianBlurFilter()
         filter.blurRadiusInPixels = CGFloat(radiusInPixels)
         return filter.image(byFilteringImage: image)

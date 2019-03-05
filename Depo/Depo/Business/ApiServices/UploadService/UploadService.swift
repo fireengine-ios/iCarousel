@@ -269,11 +269,6 @@ final class UploadService: BaseRequestService {
                         
                         self.showUploadCardProgress()
                         
-                        finishedOperation.inputItem.syncStatus = .synced
-                        finishedOperation.inputItem.setSyncStatusesAsSyncedForCurrentUser()
-                        
-                        MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: finishedOperation.inputItem)
-                        
                         ItemOperationManager.default.finishedUploadFile(file: finishedOperation.inputItem, isAutoSync: false)
                         
                         checkIfFinished()
@@ -370,11 +365,6 @@ final class UploadService: BaseRequestService {
                         
                         self.showUploadCardProgress()
                         
-                        finishedOperation.inputItem.syncStatus = .synced
-                        finishedOperation.inputItem.setSyncStatusesAsSyncedForCurrentUser()
-                        
-                        MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: finishedOperation.inputItem)
-                        
                         ItemOperationManager.default.finishedUploadFile(file: finishedOperation.inputItem, isAutoSync: false)
                         
                         checkIfFinished()
@@ -466,11 +456,6 @@ final class UploadService: BaseRequestService {
                         if finishedOperation.inputItem.fileType == .image { self.finishedPhotoSyncOperationsCount += 1 } else if finishedOperation.inputItem.fileType == .video { self.finishedVideoSyncOperationsCount += 1 }
                         
                         self.showSyncCardProgress()
-                        
-                        finishedOperation.inputItem.syncStatus = .synced
-                        finishedOperation.inputItem.setSyncStatusesAsSyncedForCurrentUser()
-                        
-                        MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: finishedOperation.inputItem)
                         
                         ItemOperationManager.default.finishedUploadFile(file: finishedOperation.inputItem, isAutoSync: true)
                         

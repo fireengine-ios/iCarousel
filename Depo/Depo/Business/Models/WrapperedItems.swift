@@ -1005,15 +1005,18 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         metaData = BaseMetaData()
         /// metaData filling
+        metaData?.takenDate = mediaItem.metadata?.takenDate as Date?
         metaData?.favourite = mediaItem.favoritesValue
         //        metaData?.album = mediaItem.metadata?.album //FIXME: currently disabled
         metaData?.artist = mediaItem.metadata?.artist
 
-        metaData?.duration = (assetDuration == nil) ? mediaItem.metadata?.duration : assetDuration
+        
+        metaData?.duration = ((assetDuration == nil) ? mediaItem.metadata?.duration : assetDuration) ?? Double(-1.0)
         
         metaData?.genre = mediaItem.metadata?.genre ?? []
         metaData?.height = Int(mediaItem.metadata?.height ?? 0)
         metaData?.title = mediaItem.metadata?.title
+
         
         if let largeUrl = mediaItem.metadata?.largeUrl {
             metaData?.largeUrl = URL(string: largeUrl)
@@ -1034,6 +1037,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         creationDate = item.creationDate
         lastModifiDate = item.lastModifiDate
         md5 = item.md5
+        metaData?.copy(metaData: item.metaData)
     }
     
     private class func getDuration(duration: Double?) -> String {
@@ -1076,6 +1080,22 @@ class WrapData: BaseDataSourceItem, Wrappered {
             tempoString.remove(at: tempoString.startIndex)
         }
         return tempoString
+    }
+}
+
+extension WrapData {
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let wrapData = object as? WrapData else {
+            return false
+        }
+        
+        return uuid == wrapData.uuid &&
+            id == wrapData.id &&
+            name == wrapData.name &&
+            creationDate == wrapData.creationDate &&
+            lastModifiDate == wrapData.lastModifiDate &&
+            md5 == wrapData.md5 &&
+            metaData == wrapData.metaData
     }
 }
 
