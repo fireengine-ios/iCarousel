@@ -872,4 +872,5 @@
 "remove_connection" = "Hiqni lidhjen";
 "you_are_connected" = "";
 "insta_pick_picture_not_found" = "Fotoja nuk\nu gjet";
-"phone_updated_needs_login" = "";
+"phone_updated_needs_login" = "Ju keni përditësuar me sukses numrin tuaj të telefonit. Ju lutem, hyni me kredencialet tuaja.";
+"server_under_maintenance" = "";

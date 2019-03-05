@@ -21,6 +21,7 @@
                 <outletCollection property="premiumListViews" destination="QG4-xl-MnX" collectionClass="NSMutableArray" id="Xcm-eN-DhH"/>
                 <outletCollection property="premiumListViews" destination="JFl-w6-mC9" collectionClass="NSMutableArray" id="e2M-CF-NJ7"/>
                 <outletCollection property="premiumListViews" destination="cfO-EM-SHo" collectionClass="NSMutableArray" id="0wr-nJ-5rp"/>
+                <outletCollection property="premiumListViews" destination="Tww-PZ-QS0" collectionClass="NSMutableArray" id="Sds-cs-a9b"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

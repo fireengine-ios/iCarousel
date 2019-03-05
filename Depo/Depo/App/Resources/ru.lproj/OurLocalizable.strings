@@ -829,12 +829,13 @@
 "free_trial_detail_label" = "Узнайте, какие фото получат самые высокие оценки! Оценивайте с PhotoPick и получайте еще больше лайков! Попробуйте новинку бесплатно!";
 "instapick_under_construction" = "PhotoPick временно недоступен";
 "instapick_unsupported_file_type" = "Фотографии, которые вы выбрали, имеют некорректный формат. Вы можете использовать PhotoPick, выбрав другие фотографии.";
-"work_will_introduced" = "";
+"work_will_introduced" = "На данный момент ведутся технические работы. Пожалуйста, попробуйте позже";
 "facebook_remove_connection_warning_title" = "";
 "dropbox_remove_connection_warning_title" = "";
 "facebook_remove_connection_warning_message" = "";
 "dropbox_remove_connection_warning_message" = "";
-"remove_connection" = "";
+"remove_connection" = "Удалить связывание";
 "you_are_connected" = "";
-"insta_pick_picture_not_found" = "";
-"phone_updated_needs_login" = "";
+"insta_pick_picture_not_found" = "Картинка не \nнайдена";
+"phone_updated_needs_login" = "Вы успешно обновили номер телефона, пожалуйста, авторизуйтесь, используя ваши учётные данные.";
+"server_under_maintenance" = "";

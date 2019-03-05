@@ -839,12 +839,13 @@
 "free_trial_detail_label" = "احصل على اختبار تحقق سمعي";
 "instapick_under_construction" = "نحن نحقق تحسينًا على تطبيق PhotoPick للحصول على تجربة أفضل";
 "instapick_unsupported_file_type" = "تكون الصور التي حددتها بتنسيق غير متوافق. يمكنك متابعة تجربة PhotoPick بتحديد صور أخرى.";
-"work_will_introduced" = "";
+"work_will_introduced" = "يوجد أعمال صيانة حاليًا في لايف بوكس، يرجى المحاولة مرة أخرى في وقت لاحق.";
 "facebook_remove_connection_warning_title" = "";
 "dropbox_remove_connection_warning_title" = "";
 "facebook_remove_connection_warning_message" = "";
 "dropbox_remove_connection_warning_message" = "";
-"remove_connection" = "";
+"remove_connection" = "اقطع الاتصال";
 "you_are_connected" = "";
-"insta_pick_picture_not_found" = "";
-"phone_updated_needs_login" = "";
+"insta_pick_picture_not_found" = "الصورة \nغير موجودة";
+"phone_updated_needs_login" = "لقد أتممت تحديث رقم هاتفك بنجاح. يرجى تسجيل الدخول بكتابة بيانات الاعتماد.";
+"server_under_maintenance" = "";
