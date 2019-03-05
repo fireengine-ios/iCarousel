@@ -17,8 +17,9 @@ final class PremiumFeaturesView: UIView {
         case face
         case object
         case photoPick
+        case dataAdvantage
 
-        static let allFeatureTypes: [Feature] = [.backUp, .contacts, .places, .face, .object, .photoPick]
+        static let allFeatureTypes: [Feature] = [.backUp, .contacts, .places, .face, .object, .photoPick, .dataAdvantage]
 
         var title: String {
             switch self {
@@ -34,6 +35,8 @@ final class PremiumFeaturesView: UIView {
                 return TextConstants.objectRecognitionShort
             case .photoPick:
                 return TextConstants.photoPickShort
+            case .dataAdvantage:
+                return TextConstants.dataAdvantageShort
             }
         }
 
@@ -51,6 +54,8 @@ final class PremiumFeaturesView: UIView {
                 return UIImage(named: "object_recognition")
             case .photoPick:
                 return UIImage(named: "photo_pick")
+            case .dataAdvantage:
+                return UIImage(named: "data_advantage")
             }
         }
     }
