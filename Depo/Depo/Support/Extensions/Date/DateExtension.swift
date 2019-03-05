@@ -68,7 +68,8 @@ extension Date: Components {
         return Date(timeIntervalSinceReferenceDate: time)
     }
     
-    var millisecondsSince1970: UInt {
-        return UInt((self.timeIntervalSince1970 * 1000.0).rounded())
+    var millisecondsSince1970: Int {
+        return (timeIntervalSince1970 * 1000.0).toInt() ?? 0
     }
+    
 }

@@ -2992,6 +2992,8 @@
 		B580BF202223E5090067777C /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C449C80216632950060785C /* String+Subscript.swift */; };
 		B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
 		B586A5AA21EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */; };
+		B592D3A8222E55CC0098BDE2 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592D3A7222E55CC0098BDE2 /* Double+Extensions.swift */; };
+		B592D3A9222E55CC0098BDE2 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592D3A7222E55CC0098BDE2 /* Double+Extensions.swift */; };
 		B59CCE812213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
 		B59CCE822213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
 		B5A84523212DA315007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84522212DA314007EA795 /* images.xcassets */; };
@@ -5632,6 +5634,7 @@
 		B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityInitializer.swift; sourceTree = "<group>"; };
 		B580BF212224139B0067777C /* LifeBoxModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "LifeBoxModel 3.xcdatamodel"; sourceTree = "<group>"; };
 		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
+		B592D3A7222E55CC0098BDE2 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountSectionMediator.swift; sourceTree = "<group>"; };
 		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		B5A84524212DA325007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
@@ -9937,6 +9940,7 @@
 				8C449C48216632950060785C /* URL+Video.swift */,
 				8C449C63216632950060785C /* WKWebView+Extensions.swift */,
 				8C449C88216632950060785C /* XCGLogger+Extension.swift */,
+				B592D3A7222E55CC0098BDE2 /* Double+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -15712,6 +15716,7 @@
 				8C449D03216632960060785C /* ErrorPresenter.swift in Sources */,
 				8C0E8D861FDEBDFF00789C91 /* AutoSyncConfigurator.swift in Sources */,
 				8C0E8D871FDEBDFF00789C91 /* CreateStoryPhotosOrderInitializer.swift in Sources */,
+				B592D3A9222E55CC0098BDE2 /* Double+Extensions.swift in Sources */,
 				B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */,
 				8C0E8D8A1FDEBDFF00789C91 /* BasicCustomNavBarViewController.swift in Sources */,
 				8C0E8D8C1FDEBDFF00789C91 /* WrapperedItems.swift in Sources */,
@@ -17366,6 +17371,7 @@
 				8C449CA2216632950060785C /* Error+Network.swift in Sources */,
 				8C449C372166282B0060785C /* PhotoVideoController.swift in Sources */,
 				7859299A20060E94003F8AB3 /* ManageContactsInteractorInput.swift in Sources */,
+				B592D3A8222E55CC0098BDE2 /* Double+Extensions.swift in Sources */,
 				4AC68930202C5153003400D0 /* FaceImageAddNameViewOutput.swift in Sources */,
 				CEC3C24A1FB99AF800C3D67F /* PasscodeSettingsRouter.swift in Sources */,
 				921423E321B51E5300B44574 /* PackageModelResponse.swift in Sources */,
