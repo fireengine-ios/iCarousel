@@ -37,7 +37,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
             let rootVC = window.rootViewController,
             !interactor.isPasscodeEmpty
         else {
-            interactor.startLoginInBackroung()
+            interactor.startLoginInBackground()
             return
         }
         
@@ -45,7 +45,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         
         vc.success = {
             rootVC.dismiss(animated: true, completion: nil)
-            self.interactor.startLoginInBackroung()
+            self.interactor.startLoginInBackground()
         }
         
         let navVC = NavigationController(rootViewController: vc)
