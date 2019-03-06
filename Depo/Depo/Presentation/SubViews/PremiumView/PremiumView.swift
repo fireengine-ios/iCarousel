@@ -48,7 +48,8 @@ final class PremiumView: UIView {
                    isHiddenTitleImageView: Bool? = false,
                    titleEdgeInsets: UIEdgeInsets,
                    isNeedScroll: Bool = true,
-                   isNeedPolicy: Bool) {
+                   isNeedPolicy: Bool,
+                   isTurkcell: Bool) {
         scrollView.isScrollEnabled = isNeedScroll
         
         if isNeedPolicy {
@@ -70,6 +71,13 @@ final class PremiumView: UIView {
                 premiumListView.element.configure(with: TextConstants.objectRecognitionToRemember, image: UIImage(named: "objectRecognitionPremiumIcon") ?? UIImage())
             case .unlimitedPhotopick:
                 premiumListView.element.configure(with: TextConstants.unlimitedPhotopickAnalysis, image: UIImage(named: "unlimitedPhotopickIcon") ?? UIImage())
+            case .additionalData:
+                if isTurkcell {
+                    premiumListView.element.configure(with: TextConstants.additionalDataAdvantage , image: UIImage(named: "additionalDataIcon") ?? UIImage())
+                    premiumListView.element.isHidden = false
+                } else {
+                    premiumListView.element.isHidden = true
+                }
             }
         }
     }

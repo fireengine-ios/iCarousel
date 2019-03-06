@@ -340,6 +340,9 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         if accountType == "TURKCELL" {
             self.accountType = .turkcell
         }
+        
+        (dataSource as? FaceImageItemsDataSource)?.accountType = self.accountType
+        
         if let interactor = interactor as? FaceImageItemsInteractor {
             interactor.getFeaturePacks()
         }
