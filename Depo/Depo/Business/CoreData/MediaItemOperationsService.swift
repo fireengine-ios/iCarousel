@@ -683,8 +683,10 @@ final class MediaItemOperationsService {
     
     func allLocalItemsForSync(video: Bool, image: Bool, completion: @escaping (_ items: [WrapData]) -> Void) {
         getUnsyncsedMediaItems(video: video, image: image, completion: { items in
-            let sortedItems = items.sorted { $0.fileSizeValue < $1.fileSizeValue }
-            let wrappedItems = sortedItems.flatMap { $0.wrapedObject }
+            let wrappedItems = items
+                .filter { $0.fileSizeValue < NumericConstants.fourGigabytes }
+                .sorted { $0.fileSizeValue < $1.fileSizeValue }
+                .compactMap { $0.wrapedObject }
             
             completion(AppMigrator.migrateSyncStatus(for: wrappedItems))
         })

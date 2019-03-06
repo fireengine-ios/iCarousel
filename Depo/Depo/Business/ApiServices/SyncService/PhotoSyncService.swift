@@ -18,10 +18,9 @@ final class PhotoSyncService: ItemSyncServiceImpl {
     }
     
     override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
-        let operation = LocalUnsyncedOperation(service: photoVideoService, fieldValue: .image) { items in
+        MediaItemOperationsService.shared.allLocalItemsForSync(video: false, image: true) { items in
             completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by: { $0.metaDate > $1.metaDate }))
         }
-        getUnsyncedOperationQueue.addOperation(operation)
     }
     
     override func start(newItems: Bool) {

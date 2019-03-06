@@ -23,9 +23,9 @@ final class VideoSyncService: ItemSyncServiceImpl {
     }
 
     override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
-        let operation = LocalUnsyncedOperation(service: photoVideoService, fieldValue: .video) { items in
+        MediaItemOperationsService.shared.allLocalItemsForSync(video: false, image: true) { items in
             ///reversed video sync interruption fix
-//            let isMobileData = ReachabilityService().isReachableViaWWAN
+            //            let isMobileData = ReachabilityService().isReachableViaWWAN
             let fileSizeLimit = NumericConstants.fourGigabytes //isMobileData ? NumericConstants.hundredMegabytes : NumericConstants.fourGigabytes
             
             completion(items.filter { item in
@@ -34,15 +34,14 @@ final class VideoSyncService: ItemSyncServiceImpl {
                 }
                 
                 ///reversed video sync interruption fix
-//                if isMobileData {
-//                     return !self.lastInterruptedItemsUUIDs.contains(item.getTrimmedLocalID())
-//                }
-
+                //                if isMobileData {
+                //                     return !self.lastInterruptedItemsUUIDs.contains(item.getTrimmedLocalID())
+                //                }
+                
                 ///is WIFI
                 return true
-            }.sorted(by: { $0.fileSize < $1.fileSize }))
+            })
         }
-        getUnsyncedOperationQueue.addOperation(operation)
     }
     
     override func start(newItems: Bool) {
