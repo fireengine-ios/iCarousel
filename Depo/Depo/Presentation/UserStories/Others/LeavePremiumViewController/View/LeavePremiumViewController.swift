@@ -37,14 +37,14 @@ final class LeavePremiumViewController: BaseViewController {
     private func setup() {
         setTitle(withString: TextConstants.lifeboxPremium)
         
-        leavePremiumView.configure(with: "", types: PremiumListType.allTypes)
+        leavePremiumView.configure(with: "", types: PremiumListType.allTypes, hideButton: false)
     }
     
 }
 
 // MARK: - LeavePremiumViewInput
 extension LeavePremiumViewController: LeavePremiumViewInput {
-    func display(price: String) {
-        leavePremiumView.configure(with: price, types: PremiumListType.allTypes)
+    func display(price: String, hideLeaveButton: Bool) {
+        leavePremiumView.configure(with: price, types: PremiumListType.allTypes, hideButton: hideLeaveButton)
     }
 }
