@@ -67,7 +67,6 @@ struct RouteRequests {
     
     static let httpsAuthification = "auth/token?rememberMe=%@"
     static let authificationByRememberMe = "auth/rememberMe"
-    static let authificationByToken = "auth/token"
     static let signUp = "signup"
     static let logout = "auth/logout"
     
