@@ -295,7 +295,7 @@ final class SearchResponse: ObjectRequestResponse {
     
     override func mapping() {
         let  tmpList = json?.array
-        if let result = tmpList?.compactMap { SearchItemResponse(withJSON: $0) } {
+        if let result = tmpList?.compactMap({ SearchItemResponse(withJSON: $0) }) {
             list = result
         }
     }
