@@ -13,7 +13,7 @@ class FeedbackViewPresenter: BasePresenter, FeedbackViewModuleInput, FeedbackVie
     var router: FeedbackViewRouterInput!
 
     func viewIsReady() {
-        view.languagesUploaded(lanuages: LanguageModel.availableLanguages())
+        view.languagesUploaded(languages: LanguageModel.availableLanguages())
         interactor.trackScreen()
     }
     

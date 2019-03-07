@@ -7,9 +7,7 @@
 //
 
 protocol FeedbackViewInput: class {
-
-    func setupInitialState()
-    func languagesUploaded(lanuages: [LanguageModel])
+    func languagesUploaded(languages: [LanguageModel])
     func fail(text: String)
     func languageRequestSended(text: String)
     func setSendButton(isEnabled: Bool)
