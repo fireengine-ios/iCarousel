@@ -80,8 +80,8 @@ final class AdjustsFontSizeInsetsRoundedDarkBlueButton: AdjustsFontSizeInsetsRou
     private func setup() {
         titleLabel?.font = ApplicationPalette.bigRoundButtonFont
 
-        setBackgroundColor(ColorConstants.darcBlueColor, for: .normal)
-        setBackgroundColor(ColorConstants.darcBlueColor.lighter(by: 30.0), for: .disabled)
+        setBackgroundColor(ColorConstants.darkBlueColor, for: .normal)
+        setBackgroundColor(ColorConstants.darkBlueColor.lighter(by: 30.0), for: .disabled)
         setTitleColor(ColorConstants.whiteColor, for: .normal)
         setTitleColor(ColorConstants.lightGrayColor, for: .disabled)
     }
