@@ -36,7 +36,7 @@ final class LeavePremiumView: UIView {
     }
     
     // MARK: Utility methods(Public)
-    func configure(with price: String, types: [PremiumListType]) {
+    func configure(with price: String, types: [PremiumListType], isTurkcell: Bool) {
         priceLabel.text = price
         
         for premiumListView in premiumListViews.enumerated() {
@@ -53,6 +53,13 @@ final class LeavePremiumView: UIView {
                 premiumListView.element.configure(with: TextConstants.objectRecognitionToRemember, image: UIImage(named: "objectRecognitionPremiumIcon") ?? UIImage())
             case .unlimitedPhotopick:
                 premiumListView.element.configure(with: TextConstants.unlimitedPhotopickAnalysis, image: UIImage(named: "unlimitedPhotopickIcon") ?? UIImage())
+            case .additionalData:
+                if isTurkcell {
+                    premiumListView.element.configure(with: TextConstants.additionalDataAdvantage , image: UIImage(named: "additionalDataIcon") ?? UIImage())
+                    premiumListView.element.isHidden = false
+                } else {
+                    premiumListView.element.isHidden = true
+                }
             }
         }
     }

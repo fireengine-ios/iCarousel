@@ -17,7 +17,7 @@ final class LeavePremiumPresenter {
     var title: String
 
     private var feature: SubscriptionPlanBaseResponse?
-    private var accountType: AccountType?
+    var accountType: AccountType?
     private var price: String = TextConstants.free {
         didSet {
             displayPrice()
