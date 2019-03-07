@@ -66,6 +66,8 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
             view.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
         case .remoteServerError:
             view.showErrorAlert(message: TextConstants.errorManyContactsToBackUp)
+        case .failed:
+            view.showErrorAlert(message: TextConstants.serverErrorMessage)
         default:
             // TODO: Error handling
             break

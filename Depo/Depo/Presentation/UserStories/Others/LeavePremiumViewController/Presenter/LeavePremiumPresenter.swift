@@ -17,7 +17,7 @@ final class LeavePremiumPresenter {
     var title: String
 
     private var feature: SubscriptionPlanBaseResponse?
-    private var accountType: AccountType?
+    var accountType: AccountType?
     private var price: String = TextConstants.free {
         didSet {
             displayPrice()
@@ -29,7 +29,6 @@ final class LeavePremiumPresenter {
             return nil
         }
         
-        let cancelText: String
         if let accountType = accountType, featureType == .allAccessFeature {
             switch interactor.getAccountType(with: accountType.rawValue, offers: [feature]) {
             case .all: return TextConstants.offersAllCancel
@@ -52,7 +51,9 @@ final class LeavePremiumPresenter {
     // MARK: Utility methods
     private func displayPrice() {
         view?.stopActivityIndicator()
-        view?.display(price: price)
+        
+        let isNeedHideButton = price == TextConstants.free
+        view?.display(price: price, hideLeaveButton: isNeedHideButton)
     }
 }
 

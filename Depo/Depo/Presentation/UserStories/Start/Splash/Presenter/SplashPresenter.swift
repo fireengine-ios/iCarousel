@@ -37,7 +37,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
             let rootVC = window.rootViewController,
             !interactor.isPasscodeEmpty
         else {
-            interactor.startLoginInBackroung()
+            interactor.startLoginInBackground()
             return
         }
         
@@ -45,7 +45,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         
         vc.success = {
             rootVC.dismiss(animated: true, completion: {
-                self.interactor.startLoginInBackroung()
+                self.interactor.startLoginInBackground()
             })
         }
         
@@ -172,5 +172,5 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     func onFailGetAccountInfo(error: Error) {
         router.showError(error)
     }
-    
+
 }

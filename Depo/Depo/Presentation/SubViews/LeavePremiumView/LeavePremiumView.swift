@@ -36,8 +36,9 @@ final class LeavePremiumView: UIView {
     }
     
     // MARK: Utility methods(Public)
-    func configure(with price: String, types: [PremiumListType]) {
+    func configure(with price: String, types: [PremiumListType], hideButton: Bool = false, isTurkcell: Bool) {
         priceLabel.text = price
+        leavePremiumButton.isHidden = hideButton
         
         for premiumListView in premiumListViews.enumerated() {
             switch types[premiumListView.offset] {
@@ -51,6 +52,15 @@ final class LeavePremiumView: UIView {
                 premiumListView.element.configure(with: TextConstants.placeRecognitionToBeam, image: UIImage(named: "placeRecognitionPremiumIcon") ?? UIImage())
             case .objectRecognition:
                 premiumListView.element.configure(with: TextConstants.objectRecognitionToRemember, image: UIImage(named: "objectRecognitionPremiumIcon") ?? UIImage())
+            case .unlimitedPhotopick:
+                premiumListView.element.configure(with: TextConstants.unlimitedPhotopickAnalysis, image: UIImage(named: "unlimitedPhotopickIcon") ?? UIImage())
+            case .additionalData:
+                if isTurkcell {
+                    premiumListView.element.configure(with: TextConstants.additionalDataAdvantage , image: UIImage(named: "additionalDataIcon") ?? UIImage())
+                    premiumListView.element.isHidden = false
+                } else {
+                    premiumListView.element.isHidden = true
+                }
             }
         }
     }
@@ -71,7 +81,7 @@ final class LeavePremiumView: UIView {
         leavePremiumButton.setTitle(TextConstants.leavePremiumMember, for: .normal)
 
         leavePremiumButton.setTitleColor(.white, for: .normal)
-        leavePremiumButton.backgroundColor = ColorConstants.darcBlueColor
+        leavePremiumButton.backgroundColor = ColorConstants.darkBlueColor
         leavePremiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
         leavePremiumButton.layer.masksToBounds = true
         leavePremiumButton.layer.cornerRadius = 15

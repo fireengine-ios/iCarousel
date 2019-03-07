@@ -160,7 +160,7 @@ class InstaPickPhotoView: UIView, NibInit {
         pictureNotFoundLabel.font           = UIFont.TurkcellSaturaDemFont(size: fontSize)
 
         pictureNotFoundLabel.text           = TextConstants.instaPickPictureNotFoundLabel
-        pictureNotFoundLabel.textColor      = ColorConstants.darcBlueColor
+        pictureNotFoundLabel.textColor      = ColorConstants.darkBlueColor
         pictureNotFoundLabel.textAlignment  = .center
         pictureNotFoundLabel.numberOfLines  = 2
         

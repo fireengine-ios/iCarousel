@@ -24,7 +24,7 @@ final class PremiumFooterCollectionReusableView: UICollectionReusableView {
         premiumView.delegate = self
     }
     
-    func configure(price: String?, description: String, type: FaceImageType, isSelectedAnimation: Bool? = false) {
+    func configure(price: String?, description: String, type: FaceImageType, isSelectedAnimation: Bool? = false, isTurkcell: Bool) {
         let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
         let descriptionMessage = String(format: TextConstants.faceImageFooterViewMessage, type.footerDescription)
         premiumView.configure(with: descriptionMessage,
@@ -34,7 +34,8 @@ final class PremiumFooterCollectionReusableView: UICollectionReusableView {
                               isHiddenTitleImageView: true,
                               titleEdgeInsets: titleEdgeInsets,
                               isNeedScroll: false,
-                              isNeedPolicy: false)
+                              isNeedPolicy: false,
+                              isTurkcell: isTurkcell)
         if isSelectedAnimation == true {
             addSelectedAmination()
         }

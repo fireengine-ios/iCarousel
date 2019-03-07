@@ -118,7 +118,8 @@ struct NumericConstants {
     static let packageSumInset: CGFloat = 15
     static let heightForPackageCell: CGFloat = 255
     
-    static let premiumViewHeight: CGFloat = 480
+    static let premiumViewHeight: CGFloat = 508
+    static let plusPremiumViewHeightForTurkcell: CGFloat = 30
     
     static let instaPickSelectionSegmentedTransparentGradientViewHeight: CGFloat = 130
     static let instaPickHashtagCellHeight: CGFloat = 35

@@ -67,7 +67,7 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         willSet {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 10)
             newValue.text = TextConstants.instaPickPictureNotFoundLabel
-            newValue.textColor = ColorConstants.darcBlueColor
+            newValue.textColor = ColorConstants.darkBlueColor
             newValue.textAlignment = .center
             newValue.numberOfLines = 2
             

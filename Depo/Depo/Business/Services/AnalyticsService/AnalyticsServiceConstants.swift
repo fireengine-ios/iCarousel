@@ -385,6 +385,7 @@ enum GAEventAction {
     case everyMinuteVideo
     case serviceError
     case paymentErrors
+    case photopickAnalysis
     
     var text: String {
         switch self {
@@ -454,6 +455,8 @@ enum GAEventAction {
             return "Service Errors"
         case .paymentErrors:
             return "Payment Errors"
+        case .photopickAnalysis:
+            return "Photopick Analysis"
         }
     }
 }

@@ -9,5 +9,5 @@
 import Foundation
 
 protocol LeavePremiumViewInput: class, ActivityIndicator {
-    func display(price: String)
+    func display(price: String, hideLeaveButton: Bool)
 }

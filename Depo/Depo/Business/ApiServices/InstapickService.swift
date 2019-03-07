@@ -26,6 +26,7 @@ final class InstapickServiceImpl {
     }
 
     private let sessionManager: SessionManager
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     let delegates = MulticastDelegate<InstaPickServiceDelegate>()
     
     init(sessionManager: SessionManager = SessionManager.customDefault) {
@@ -221,8 +222,11 @@ extension InstapickServiceImpl: InstapickService {
         }
         
         startAnalyzes(ids: ids) { [weak self] result in
+            let eventLabel: GAEventLabel
+            
             switch result {
             case .success(let analysis):
+                eventLabel = .success
                 
                 self?.getAnalyzesCount { result in
                     switch result {
@@ -232,6 +236,7 @@ extension InstapickServiceImpl: InstapickService {
                             
                             if let currentController = UIApplication.topController() {
                                 let router = RouterVC()
+                                (router.getViewControllerForPresent() as? AnalyzeHistoryViewController)?.updateAnalyzeCount(with: analyzesCount)
                                 let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
                                                                                                       analyzesCount: analyzesCount,
                                                                                                       isShowTabBar: router.getViewControllerForPresent() is BaseFilesGreedViewController)
@@ -248,8 +253,10 @@ extension InstapickServiceImpl: InstapickService {
                 }
                 
             case .failed(let error):
+                eventLabel = .failure
                 showError(error)
             }
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .photopickAnalysis, eventLabel: eventLabel)
         }
     }
 }

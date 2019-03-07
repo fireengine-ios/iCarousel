@@ -63,6 +63,10 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         editingTabBar?.view.layoutIfNeeded()
     }
     
+    func updateAnalyzeCount(with analyzesCount: InstapickAnalyzesCount) {
+        self.dataSource.reloadCards(with: analyzesCount)
+    }
+    
     private func configure() {
         instapickService.delegates.add(self)
         
@@ -418,13 +422,11 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
     }
     
     func onPurchase() {
-        //TODO: - Open Purchase Screen
-        InstaPickRoutingService.showUpdgradePopup()
+        InstaPickRoutingService.openPremium()
     }
     
     func onSeeDetails() {
-        //TODO: - Open Details Screen
-        InstaPickRoutingService.showUpdgradePopup()
+        InstaPickRoutingService.openPremium()
     }
     
     func onSelectAnalyze(_ analyze: InstapickAnalyze) {

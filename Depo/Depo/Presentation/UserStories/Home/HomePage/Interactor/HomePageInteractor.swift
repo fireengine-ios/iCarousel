@@ -90,7 +90,16 @@ class HomePageInteractor: HomePageInteractorInput {
             case .success(let result):
                 AuthoritySingleton.shared.refreshStatus(with: result)
 
-                self?.fillCollectionView(isReloadAll: loadStatus == .reloadAll)
+                SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
+                    self?.fillCollectionView(isReloadAll: loadStatus == .reloadAll)
+                }, fail: { [weak self] error in
+                    self?.fillCollectionView(isReloadAll: true)
+                    
+                    DispatchQueue.toMain {
+                        self?.output.didObtainFailCardInfo(errorMessage: error.description,
+                                                           isNeedStopRefresh: loadStatus == .reloadSingle)
+                    }
+                })
                 
                 if self?.isShowPopupAboutPremium == true {
                     self?.output.didShowPopupAboutPremium()

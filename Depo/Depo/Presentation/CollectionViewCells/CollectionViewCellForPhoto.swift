@@ -37,7 +37,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         selectionView.layer.borderWidth = CollectionViewCellForPhoto.borderW
-        selectionView.layer.borderColor = ColorConstants.darcBlueColor.cgColor
+        selectionView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
         selectionView.alpha = 0
         
         progressView.tintColor = ColorConstants.blueColor

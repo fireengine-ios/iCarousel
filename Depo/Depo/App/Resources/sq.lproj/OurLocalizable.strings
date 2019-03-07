@@ -437,7 +437,7 @@
 "Backup" = "Kopje Rezervë ";
 "Last update:" = "Përditësimi i fundit:";
 "Your storage is empty!" = "Arkiva juaj është bosh!";
-"You are using %f of your disk space! It’s a great time to expand your storage." = "Ju jeni duke përdorur% d %% të kuotës suaj të lifebox. Është moment i duhur për të zgjeruar arkivën tuaj.";
+"You are using %f of your disk space! It’s a great time to expand your storage." = "Ju jeni duke përdorur%d%% të kuotës suaj të lifebox. Është moment i duhur për të zgjeruar arkivën tuaj.";
 "You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "Ju nuk keni ende asnjë skedar në lifebox-in tuaj. Filloni ngarkimin e kujtimeve tua në lifebox!";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "Ju jeni duke përdorur %d%% të arkivës së pajisjes suaj. Erdhi momenti të lironi hapesirë në të.";
 "Upload Files" = "Ngarkoni Skedarët";
@@ -782,7 +782,7 @@
 "package_albanian_cancel_text" = "Teksti i anulimit të kuotës shqiptare";
 "feature_albanian_cancel_text" = "Ju mund të vazhdoni të përdorni mundësitë Premium falas me qënë se jeni abonent ALBtelecom.";
 "no_analyses_left_title" = "Nuk ka më Analiza";
-"no_analyses_left_message" = "Nuk ka më Analiza";
+"no_analyses_left_message" = "Mos u mërzisni! Ju mundeni ende të blini një paketë të re për të analizuar fotot tuaja!";
 "no_analyses_left_button" = "Blini PhotoPick";
 "analyze_history_empty_title" = "Ende nuk keni filluar të analizoni fotot tuaja?";
 "analyze_history_empty_subtitle" = "Filloni analizën tani, për të kuptuar cila foto merr vlersimin më të lartë në rrjetet sociale.";
@@ -864,7 +864,7 @@
 "free_trial_detail_label" = "Zbuloni se cilat foto do të marrin vlerësim më të lartë; analizoni me PhotoPick për më shumë pëlqime! Provojeni falas për një periudhë të limituar!";
 "instapick_under_construction" = "Ne po bëjmë përmirësime në PhotoPick për një eksperiencë më të mirë 😉";
 "instapick_unsupported_file_type" = "Fotot që keni zgjedhur janë në format të pambështetur. Ju mund të vazhdoni përvojën e PhotoPick duke përzgjedhur fotot e tjera.";
-"server_under_maintenance" = "Janë duke u kryer disa punë mirëmbajtjeje në lifebox. Ju lutem, provoni përsëri më vonë.";
+"work_will_introduced" = "Janë duke u kryer disa punë mirëmbajtjeje në lifebox. Ju lutem, provoni përsëri më vonë.";
 "facebook_remove_connection_warning_title" = "Jeni duke hequr lidhjen me Facebook";
 "dropbox_remove_connection_warning_title" = "Jeni duke hequr lidhjen me Dropbox";
 "facebook_remove_connection_warning_message" = "Jeni të sigurt që dëshironi të hiqni lidhjen me Facebook?";
@@ -872,4 +872,8 @@
 "remove_connection" = "Hiqni lidhjen";
 "you_are_connected" = "";
 "insta_pick_picture_not_found" = "Fotoja nuk\nu gjet";
-"phone_updated_needs_login" = "";
+"phone_updated_needs_login" = "Ju keni përditësuar me sukses numrin tuaj të telefonit. Ju lutem, hyni me kredencialet tuaja.";
+"server_under_maintenance" = "";
+"unlimited_photopick_analysis" = "";
+"data_advantage_short" = "";
+"additional_data_advantage" = "";

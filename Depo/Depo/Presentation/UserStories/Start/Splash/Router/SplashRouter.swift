@@ -49,4 +49,5 @@ class SplashRouter: SplashRouterInput {
             router.pushViewController(viewController: router.synchronyseScreen)
         }
     }
+    
 }

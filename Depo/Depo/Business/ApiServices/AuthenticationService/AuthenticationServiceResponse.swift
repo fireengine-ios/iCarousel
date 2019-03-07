@@ -177,8 +177,7 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
         }
         if httpResponse.statusCode == 401, let url = httpResponse.url?.absoluteString,
                 !url.contains("http://adepo.turkcell.com.tr/api/auth/gsm/login"),
-                !url.contains(RouteRequests.authificationByRememberMe),
-                !url.contains(RouteRequests.authificationByToken) {
+                !url.contains(RouteRequests.authificationByRememberMe) {
             return
         } else {
             analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .serviceError, eventLabel: .serverError, eventValue: "\(httpResponse.statusCode) \(error?.description ?? "")")

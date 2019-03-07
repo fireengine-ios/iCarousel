@@ -8,16 +8,23 @@
 
 import UIKit
 
-protocol SocialAccountConnectionCellDelegate: class, ActivityIndicator {
+protocol SocialConnectionCellDelegate: class, ActivityIndicator {
+    func didConnectSuccessfully(section: Section)
+    func didDisconnectSuccessfully(section: Section)
     func showError(message: String)
-    func willChangeHeight()
 }
 
-protocol SocialAccountConnectionCell: class, ActivityIndicator {
-    var delegate: SocialAccountConnectionCellDelegate? { get set }
+protocol SocialConnectionCell: class, ActivityIndicator {
+    var section: Section? { get }
+    var delegate: SocialConnectionCellDelegate? { get set }
+    
+    func setup(with: Section?)
+    func disconnect()
 }
 
-extension SocialAccountConnectionCell {
+
+
+extension SocialConnectionCell {
     func startActivityIndicator() {
         delegate?.startActivityIndicator()
     }
@@ -27,16 +34,18 @@ extension SocialAccountConnectionCell {
     }
 }
 
-final class FacebookAccountConnectionCell: UITableViewCell, SocialAccountConnectionCell {
+final class FacebookAccountConnectionCell: UITableViewCell, SocialConnectionCell {
 
-    weak var delegate: SocialAccountConnectionCellDelegate?
+    private(set) var section: Section?
+
+    weak var delegate: SocialConnectionCellDelegate?
     
     private var interactor: ImportFromFBInteractor!
     private var presenter: ImportFromFBPresenter!
     
-    private var isConnected = false {
+    private var isImportOn = false {
         didSet {
-            connectionSwitch.setOn(isConnected, animated: true)
+            importSwitch.setOn(isImportOn, animated: true)
         }
     }
     
@@ -62,9 +71,9 @@ final class FacebookAccountConnectionCell: UITableViewCell, SocialAccountConnect
         }
     }
     
-    @IBOutlet private weak var connectionSwitch: UISwitch! {
+    @IBOutlet private weak var importSwitch: UISwitch! {
         didSet {
-            connectionSwitch.setOn(isConnected, animated: true)
+            importSwitch.setOn(isImportOn, animated: false)
         }
     }
     
@@ -87,11 +96,19 @@ final class FacebookAccountConnectionCell: UITableViewCell, SocialAccountConnect
         presenter.view = self
     }
     
-    @IBAction func connectionSwitchValueChanged(_ sender: UISwitch) {
+    func setup(with section: Section?) {
+        self.section = section
+    }
+    
+    func disconnect() {
+        presenter.disconnectAccount()
+    }
+    
+    @IBAction func importSwitchValueChanged(_ sender: UISwitch) {
         if sender.isOn {
-            presenter.startFacebook()
+            presenter.startImport()
         } else {
-            presenter.stopFacebook()
+            presenter.stopImport()
         }
     }
 }
@@ -99,32 +116,60 @@ final class FacebookAccountConnectionCell: UITableViewCell, SocialAccountConnect
 
 // MARK: - ImportFromFBViewInput
 extension FacebookAccountConnectionCell: ImportFromFBViewInput {
+    func connectionStatusSuccess(_ isOn: Bool) {
+        if let section = section {
+            if isOn {
+               delegate?.didConnectSuccessfully(section: section)
+            } else {
+                delegate?.didDisconnectSuccessfully(section: section)
+            }
+        }
+    }
     
-    func failedFacebookStatus(errorMessage: String) {
-        isConnected = false
+    func connectionStatusFailure(errorMessage: String) {
+        isImportOn = false
         delegate?.showError(message: errorMessage)
     }
     
-    func succeedFacebookStart() {
-        MenloworksAppEvents.onFacebookConnected()
+    func disconnectionSuccess() {
+        isImportOn = false
+        
+        if let section = section {
+            delegate?.didDisconnectSuccessfully(section: section)
+        }
+    }
+    
+    func disconnectionFailure(errorMessage: String) {
+        delegate?.showError(message: errorMessage)
+    }
+    
+    func syncStatusSuccess(_ isOn: Bool) {
+        isImportOn = isOn
+    }
+    
+    func syncStatusFailure() {
+        isImportOn = false
+    }
+    
+    func importStartSuccess() {
         MenloworksEventsService.shared.onFacebookTransfered()
         MenloworksTagsService.shared.facebookImport(isOn: true)
-        isConnected = true
+        
+        isImportOn = true
     }
     
-    func failedFacebookStart(errorMessage: String) {
-        MenloworksTagsService.shared.facebookImport(isOn: false)
-        isConnected = false
+    func importStartFailure(errorMessage: String) {
+        isImportOn = false
         delegate?.showError(message: errorMessage)
     }
     
-    func succeedFacebookStop() {
-        isConnected = false
+    func importStopSuccess() {
+        isImportOn = false
     }
     
-    func failedFacebookStop(errorMessage: String) {
-        MenloworksAppEvents.onFacebookConnected()
-        isConnected = true
+    func importStopFailure(errorMessage: String) {
         delegate?.showError(message: errorMessage)
     }
+    
+    
 }

@@ -26,7 +26,7 @@ final class PremiumPresenter {
     
     private var optInVC: OptInController?
     private var referenceToken = ""
-    private var accountType: AccountType = .all
+    var accountType: AccountType = .all
     private var feature: PackageModelResponse?
     
     init(title: String, headerTitle: String, authority: AuthorityType?, module: FaceImageItemsModuleOutput?) {
@@ -205,7 +205,7 @@ extension PremiumPresenter: OptInControllerDelegate {
         optInVC.showResendButton()
         optInVC.dropTimer()
         let error = CustomErrors.text(TextConstants.promocodeBlocked)
-        router.displayError(with: error.localizedDescription)
+        router.displayError(with: error.description)
     }
     
     func optInNavigationTitle() -> String {

@@ -12,4 +12,5 @@ protocol LeavePremiumViewOutput {
     func onViewDidLoad(with premiumView: LeavePremiumView)
     
     var title: String { get }
+    var accountType: AccountType? { get }
 }

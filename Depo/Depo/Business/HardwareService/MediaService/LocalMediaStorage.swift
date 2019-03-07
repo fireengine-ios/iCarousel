@@ -254,52 +254,56 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
                 
                 var albums = [AlbumItem]()
+ 
+                let semaphore = DispatchSemaphore(value: 0)
                 
                 [album, smartAlbum].forEach { album in
                     album.enumerateObjects { object, index, stop in
-                        let count = self.numberOfItems(in: object)
-                        if count.value > 0 {
-                            let item = AlbumItem(uuid: object.localIdentifier,
-                                                 name: object.localizedTitle,
-                                                 creationDate: nil,
-                                                 lastModifiDate: nil,
-                                                 fileType: .photoAlbum,
-                                                 syncStatus: .unknown,
-                                                 isLocalItem: true)
-                            if count.fromCoreData {
-                                item.imageCount = count.value
-                            }
-                            
-                            let fetchOptions = PHFetchOptions()
-                            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-                            fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-                            
-                            if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject {
+                        self.numberOfItems(in: object, completion: { count, fromCoreData in
+                            if count > 0 {
+                                let item = AlbumItem(uuid: object.localIdentifier,
+                                                     name: object.localizedTitle,
+                                                     creationDate: nil,
+                                                     lastModifiDate: nil,
+                                                     fileType: .photoAlbum,
+                                                     syncStatus: .unknown,
+                                                     isLocalItem: true)
+                                if fromCoreData {
+                                    item.imageCount = count
+                                }
                                 
-                                item.preview = WrapData(asset: asset)
+                                let fetchOptions = PHFetchOptions()
+                                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                                fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
+                                
+                                if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject {                                    
+                                    item.preview = WrapData(asset: asset)
+                                }
+                                albums.append(item)
                             }
-                            albums.append(item)
-                        }
+                            semaphore.signal()
+                        })
+                        semaphore.wait()
                     }
                 }
-                DispatchQueue.main.async {
-                    completion(albums)
-                }
+                
+                completion(albums)
             }
         }
     }
     
-    private func numberOfItems(in album: PHAssetCollection) -> (value: Int, fromCoreData: Bool) {
+    private func numberOfItems(in album: PHAssetCollection, completion: @escaping (_ value: Int, _ fromCoreData: Bool) -> Void) {
         guard !coreDataStack.inProcessAppendingLocalFiles else {
-            return (album.photosCount + album.videosCount, false)
+            completion(album.photosCount + album.videosCount, false)
+            return
         }
         
         let assets = PHAsset.fetchAssets(in: album, options: PHFetchOptions())
         let array = assets.objects(at: IndexSet(0..<assets.count))
         let context = coreDataStack.newChildBackgroundContext
-        let ids = coreDataStack.listAssetIdAlreadySaved(allList: array, context: context)
-        
-        return (ids.count, true)
+        coreDataStack.listAssetIdAlreadySaved(allList: array, context: context) { ids in
+            completion(ids.count, true)
+        }
     }
     
     // MARK: Image
@@ -493,41 +497,42 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             wrapData.copyFileData(from: item)
             
             let context = CoreDataStack.default.newChildBackgroundContext
-            context.perform { [weak self] in
-                let mediaItem: MediaItem
-                if let existingMediaItem = CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
-                    mediaItem = existingMediaItem
-                } else {
-                    mediaItem = MediaItem(wrapData: wrapData, context: context)
-                }
-
-                mediaItem.localFileID = assetIdentifier
-                mediaItem.trimmedLocalFileID = assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier//item.getTrimmedLocalID()
-                mediaItem.syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
-                
-                if isFilteredItem {
-                   mediaItem.isFiltered = true
-                }
-                
-                var userObjectSyncStatus = Set<MediaItemsObjectSyncStatus>()
-                if let unwrapedSet = mediaItem.objectSyncStatus as? Set<MediaItemsObjectSyncStatus> {
-                    userObjectSyncStatus = unwrapedSet
-                }
-                SingletonStorage.shared.getUniqueUserID(success: {
-                    currentUserID in
-                    context.perform {
-                        mediaItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
-                        userObjectSyncStatus.insert(MediaItemsObjectSyncStatus(userID: currentUserID, context: context))
-                        CoreDataStack.default.saveDataForContext(context: context, savedCallBack: {
-                            success?()
-                        })
+            context.perform {
+                CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()], completion: { [weak self] mediaItems in
+                    let mediaItem: MediaItem
+                    if let existingMediaItem = mediaItems.first {
+                        mediaItem = existingMediaItem
+                    } else {
+                        mediaItem = MediaItem(wrapData: wrapData, context: context)
+                    }
+                    
+                    mediaItem.localFileID = assetIdentifier
+                    mediaItem.trimmedLocalFileID = assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier//item.getTrimmedLocalID()
+                    mediaItem.syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
+                    
+                    if isFilteredItem {
+                        mediaItem.isFiltered = true
+                    }
+                    
+                    var userObjectSyncStatus = Set<MediaItemsObjectSyncStatus>()
+                    if let unwrapedSet = mediaItem.objectSyncStatus as? Set<MediaItemsObjectSyncStatus> {
+                        userObjectSyncStatus = unwrapedSet
+                    }
+                    SingletonStorage.shared.getUniqueUserID(success: {
+                        currentUserID in
+                        context.perform {
+                            mediaItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
+                            userObjectSyncStatus.insert(MediaItemsObjectSyncStatus(userID: currentUserID, context: context))
+                            CoreDataStack.default.saveDataForContext(context: context, savedCallBack: {
+                                success?()
+                            })
                         }
                     }, fail: {
                         fail?()
                         /// nothing, status not going to be saved
+                    })
                 })
-            }
-            
+            } 
         }
     }
     

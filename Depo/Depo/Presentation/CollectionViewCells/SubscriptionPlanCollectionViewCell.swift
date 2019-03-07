@@ -49,7 +49,7 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         cancelButton.titleLabel?.textAlignment = .center
         cancelButton.titleLabel?.numberOfLines = 2
         let title = NSAttributedString(string: TextConstants.cancelButtonTitle, attributes: [.font : UIFont.TurkcellSaturaDemFont(size: 14),
-                                                                                             .foregroundColor : ColorConstants.darcBlueColor,
+                                                                                             .foregroundColor : ColorConstants.darkBlueColor,
                                                                                              .underlineStyle : 1])
         cancelButton.setAttributedTitle(title, for: .normal)
 
@@ -84,7 +84,7 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
             priceLabel.isHidden = true
             freeButton.isHidden = false
         case .current:
-            layer.borderColor = ColorConstants.darcBlueColor.cgColor
+            layer.borderColor = ColorConstants.darkBlueColor.cgColor
             cancelButton.isHidden = false
         }
         
