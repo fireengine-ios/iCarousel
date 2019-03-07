@@ -20,7 +20,7 @@ final class CacheManager {///adding files TO DB // managing cache
     var allLocalAdded = false
     
     //TODO: place  blocks here?
-    var remotePageAdded: VoidHandler?
+//    var remotePageAdded: VoidHandler?
     
     func actualizeCache(completion: VoidHandler?) {
         MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
@@ -47,7 +47,7 @@ final class CacheManager {///adding files TO DB // managing cache
             self.processingRemoteItems = true
             self.addNextRemoteItemsPage { [weak self] in
                 self?.processingRemoteItems = false
-                self?.remotePageAdded?()
+//                self?.remotePageAdded?()
                 completion()
             }
     }
@@ -56,7 +56,7 @@ final class CacheManager {///adding files TO DB // managing cache
         photoVideoService.nextItems(fileType: .imageAndVideo, sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remoteItems in
             
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
-                self?.remotePageAdded?()
+//                self?.remotePageAdded?()
                 if remoteItems.count < CacheManager.pageSize {
                     self?.photoVideoService.currentPage = 0
                     completion()

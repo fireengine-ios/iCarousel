@@ -297,7 +297,7 @@ final class MediaItemOperationsService {
             self.executeRequest(predicate: inIdRangePredicate, context: context, mediaItemsCallBack: { inIdRangeItems in
                 debugPrint("--- count of already saved in id range \(inIdRangeItems.count)")
                 
-                var allSavedItems = (inDateRangeItems + inIdRangeItems).flatMap { WrapData(mediaItem: $0) }
+                var allSavedItems = (inDateRangeItems + inIdRangeItems).compactMap { WrapData(mediaItem: $0) }
                 debugPrint("--- count of already saved TOTAL count \(allSavedItems.count)")
                 
                 var deletedItems = [WrapData]()
@@ -327,21 +327,11 @@ final class MediaItemOperationsService {
                     _ = MediaItem(wrapData: $0, context: context)
                 }
                 
-//                updatedItems.forEach {
-//                    $0.copyInfo(item: latestRemote, context: context)
-//                }
-                
                 context.saveAsync(completion: { status in
                     completion()
                 })
             })
         }
-        //---------*
-        
-        //*--------
-        ///second option: update already existed, kill all others in that remote items range
-        ///FOR NOW WE NEED TO TEST FIRST ONE
-        //---------*
     }
     
     func getAllRemotesMediaItem(allRemotes: @escaping MediaItemsCallBack) {

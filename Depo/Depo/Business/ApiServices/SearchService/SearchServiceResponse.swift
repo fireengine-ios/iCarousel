@@ -276,7 +276,7 @@ final class SearchItemResponse: ObjectRequestResponse {
         tempDownloadURL = json?[SearchJsonKey.tempDownloadURL].url
         status = json?[SearchJsonKey.status].string
         subordinates = json?[SearchJsonKey.subordinates].array
-        albums = json?[SearchJsonKey.album].array?.flatMap { $0.string }
+        albums = json?[SearchJsonKey.album].array?.compactMap { $0.string }
         childCount = json?[SearchJsonKey.ChildCount].int64
     }
 }
@@ -295,7 +295,7 @@ final class SearchResponse: ObjectRequestResponse {
     
     override func mapping() {
         let  tmpList = json?.array
-        if let result = tmpList?.flatMap({ SearchItemResponse(withJSON: $0) }) {
+        if let result = tmpList?.compactMap { SearchItemResponse(withJSON: $0) } {
             list = result
         }
     }
