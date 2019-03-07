@@ -114,7 +114,7 @@ public class MediaItem: NSManagedObject {
         
         metadata?.copyInfo(metaData: item.metaData)
         
-        creationDateValue = item.creationDate as NSDate?
+        creationDateValue = item.metaDate as NSDate?
         lastModifiDateValue = item.lastModifiDate as NSDate?
         urlToFileValue = item.tmpDownloadUrl?.absoluteString
         
