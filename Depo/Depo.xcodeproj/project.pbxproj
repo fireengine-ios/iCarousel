@@ -200,12 +200,14 @@
 		4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */; };
 		4AFAEAC12027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
 		4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */; };
-		4B54AF2A221411A900024F5C /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B54AF27221411A900024F5C /* DropDownTableViewCell.xib */; };
-		4B54AF2B221411A900024F5C /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B54AF27221411A900024F5C /* DropDownTableViewCell.xib */; };
-		4B54AF2C221411A900024F5C /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54AF28221411A900024F5C /* DropDownTableViewCell.swift */; };
-		4B54AF2D221411A900024F5C /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54AF28221411A900024F5C /* DropDownTableViewCell.swift */; };
-		4B54AF2E221411A900024F5C /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54AF29221411A900024F5C /* DropDownView.swift */; };
-		4B54AF2F221411A900024F5C /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54AF29221411A900024F5C /* DropDownView.swift */; };
+		4BF7CF4B223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF7CF48223103E1002DAF37 /* DropDownTableViewCell.xib */; };
+		4BF7CF4C223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF7CF48223103E1002DAF37 /* DropDownTableViewCell.xib */; };
+		4BF7CF4D223103E2002DAF37 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF49223103E2002DAF37 /* DropDownTableViewCell.swift */; };
+		4BF7CF4E223103E2002DAF37 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF49223103E2002DAF37 /* DropDownTableViewCell.swift */; };
+		4BF7CF4F223103E2002DAF37 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF4A223103E2002DAF37 /* DropDownView.swift */; };
+		4BF7CF50223103E2002DAF37 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF4A223103E2002DAF37 /* DropDownView.swift */; };
+		4BF7CF5222310519002DAF37 /* AdjustsFontSizeInsetsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF5122310519002DAF37 /* AdjustsFontSizeInsetsButton.swift */; };
+		4BF7CF5322310519002DAF37 /* AdjustsFontSizeInsetsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF7CF5122310519002DAF37 /* AdjustsFontSizeInsetsButton.swift */; };
 		4C625D18F465CC4F6D27A6B1 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500943E503755A25C4E6B64 /* SettingsInteractor.swift */; };
 		4C7B0D374F8DE575C03C683C /* SplashInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE7E386FBD5473EAA3840B /* SplashInitializer.swift */; };
 		4D19E8403C8694B3328BB3D2 /* BaseFilesGreedModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4FE9A3DE9EE69A1D9C29B /* BaseFilesGreedModuleInput.swift */; };
@@ -4046,9 +4048,10 @@
 		4ADE0880202DC8370095346F /* FaceImageItemsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsModuleOutput.swift; sourceTree = "<group>"; };
 		4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosViewOutput.swift; sourceTree = "<group>"; };
 		4AFAEAC02027644800DF6A0B /* FaceImageItemsViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImageItemsViewOutput.swift; sourceTree = "<group>"; };
-		4B54AF27221411A900024F5C /* DropDownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DropDownTableViewCell.xib; path = Depo/Presentation/SubViews/DropDownView/DropDownTableViewCell.xib; sourceTree = SOURCE_ROOT; };
-		4B54AF28221411A900024F5C /* DropDownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownTableViewCell.swift; path = Depo/Presentation/SubViews/DropDownView/DropDownTableViewCell.swift; sourceTree = SOURCE_ROOT; };
-		4B54AF29221411A900024F5C /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownView.swift; path = Depo/Presentation/SubViews/DropDownView/DropDownView.swift; sourceTree = SOURCE_ROOT; };
+		4BF7CF48223103E1002DAF37 /* DropDownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DropDownTableViewCell.xib; path = Depo/Presentation/SubViews/DropDownView/DropDownTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		4BF7CF49223103E2002DAF37 /* DropDownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownTableViewCell.swift; path = Depo/Presentation/SubViews/DropDownView/DropDownTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		4BF7CF4A223103E2002DAF37 /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownView.swift; path = Depo/Presentation/SubViews/DropDownView/DropDownView.swift; sourceTree = SOURCE_ROOT; };
+		4BF7CF5122310519002DAF37 /* AdjustsFontSizeInsetsButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjustsFontSizeInsetsButton.swift; sourceTree = "<group>"; };
 		4C65BBC58B8393C6251C13D6 /* SelectFolderViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderViewController.swift; sourceTree = "<group>"; };
 		4C7DA7C21EC6C571D491E359 /* OTPViewPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewPresenter.swift; sourceTree = "<group>"; };
 		4CDFC675B66399A57487FB85 /* UserInfoSubViewRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewRouter.swift; sourceTree = "<group>"; };
@@ -7704,7 +7707,7 @@
 				7C1F89901F70FFB700740177 /* ViewForPopUp */,
 				7C1F898B1F70EC7B00740177 /* BaseView */,
 				7C5AFD6E1F69761900DBB9E7 /* ViewController */,
-				7CFE92E61F5D852C008A3B72 /* DropDownView */,
+				7CFE92E61F5D852C008A3B72 /* DropDovnView */,
 				7CAC23BD1F4ABC8F00607660 /* LoadingImageView */,
 				8C6EF8861F348B77002AC795 /* CustomToolBar */,
 				7C0DBC2F1F2F2CA700F90590 /* SelectionImageView */,
@@ -7719,6 +7722,7 @@
 				CEAE3FE71EFD517300A405B2 /* CustomTabBars */,
 				CEAE3FD21EFD500B00A405B2 /* HomePage */,
 				D47863FE1F3F30AE00EFDC6D /* ProgressView */,
+				4BF7CF5122310519002DAF37 /* AdjustsFontSizeInsetsButton.swift */,
 				CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */,
 				CE6BD9CB1FBEF8D5008FA8A1 /* InsetsLabel.swift */,
 				CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */,
@@ -8751,14 +8755,14 @@
 			path = landingSubViews;
 			sourceTree = "<group>";
 		};
-		7CFE92E61F5D852C008A3B72 /* DropDownView */ = {
+		7CFE92E61F5D852C008A3B72 /* DropDovnView */ = {
 			isa = PBXGroup;
 			children = (
-				4B54AF28221411A900024F5C /* DropDownTableViewCell.swift */,
-				4B54AF29221411A900024F5C /* DropDownView.swift */,
-				4B54AF27221411A900024F5C /* DropDownTableViewCell.xib */,
+				4BF7CF49223103E2002DAF37 /* DropDownTableViewCell.swift */,
+				4BF7CF48223103E1002DAF37 /* DropDownTableViewCell.xib */,
+				4BF7CF4A223103E2002DAF37 /* DropDownView.swift */,
 			);
-			path = DropDownView;
+			path = DropDovnView;
 			sourceTree = "<group>";
 		};
 		7CFE92ED1F5EC5C9008A3B72 /* Mail */ = {
@@ -13711,7 +13715,7 @@
 				8C06B1192008AD72003D8E05 /* t_buyuk@2x.png in Resources */,
 				8C06AEBB2008AD70003D8E05 /* akilli_depo_beyaz@3x.png in Resources */,
 				8C06B1CB2008AD72003D8E05 /* sticker_close@3x.png in Resources */,
-				4B54AF2B221411A900024F5C /* DropDownTableViewCell.xib in Resources */,
+				4BF7CF4C223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */,
 				8C06B01D2008AD71003D8E05 /* kup_selected@3x.png in Resources */,
 				8C06B1712008AD72003D8E05 /* toolbar_undo_icon.png in Resources */,
 				8C06AEC72008AD70003D8E05 /* alt_cizgili_secili@3x.png in Resources */,
@@ -14154,7 +14158,7 @@
 				8C06B1042008AD72003D8E05 /* slider_thumb2@3x.png in Resources */,
 				8C06B1922008AD72003D8E05 /* undo@2x.png in Resources */,
 				8C06B1202008AD72003D8E05 /* t_buyuk_selected@3x.png in Resources */,
-				4B54AF2A221411A900024F5C /* DropDownTableViewCell.xib in Resources */,
+				4BF7CF4B223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */,
 				8C06AEE42008AD70003D8E05 /* bottomright@2x.png in Resources */,
 				8C06B0E22008AD71003D8E05 /* sample_vintage@3x.png in Resources */,
 				9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */,
@@ -15583,6 +15587,7 @@
 				4A8CC304201A00D400C040C4 /* FaceImageViewController.swift in Sources */,
 				8C0E8DB01FDEBDFF00789C91 /* RegistrationInteractorInput.swift in Sources */,
 				8C0E8DB21FDEBDFF00789C91 /* RegistrationInteractorOutput.swift in Sources */,
+				4BF7CF50223103E2002DAF37 /* DropDownView.swift in Sources */,
 				B56FBB3E2122C9B9004F4A59 /* TermsOfUseViewOutput.swift in Sources */,
 				CE00B257220334E400A5A696 /* BackButtonActions.swift in Sources */,
 				8C0E8DB31FDEBDFF00789C91 /* ArrayDataSourceForCollectionView.swift in Sources */,
@@ -15718,6 +15723,7 @@
 				8C13C302210AFD7F0047AD67 /* AnalyticsPackageProductObject.swift in Sources */,
 				B5CDB3552179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */,
 				92004B5521AD10E600582C45 /* MyStorageModuleInitializer.swift in Sources */,
+				4BF7CF4E223103E2002DAF37 /* DropDownTableViewCell.swift in Sources */,
 				8C0E8E031FDEBDFF00789C91 /* WrapperedItemUtil.swift in Sources */,
 				8C06AC1920066641003D8E05 /* TurkcellSecurityViewController.swift in Sources */,
 				8C0E8E041FDEBDFF00789C91 /* CreateStorySelectionRouter.swift in Sources */,
@@ -15979,7 +15985,6 @@
 				8C0E8EFD1FDEBDFF00789C91 /* UserInfoSubViewConfigurator.swift in Sources */,
 				8C0E8EFF1FDEBDFF00789C91 /* UserInfoSubViewInitializer.swift in Sources */,
 				8C0E8F001FDEBDFF00789C91 /* VisualMusicPlayerRouterInput.swift in Sources */,
-				4B54AF2D221411A900024F5C /* DropDownTableViewCell.swift in Sources */,
 				4A6DBE8F21A6F9440003D1B4 /* PremiumFeaturesView.swift in Sources */,
 				8C06AC262008AB8C003D8E05 /* FreeAppSpaceConfigurator.swift in Sources */,
 				8C0E8F011FDEBDFF00789C91 /* OfferParameters.swift in Sources */,
@@ -16042,7 +16047,6 @@
 				8C0E8F211FDEBDFF00789C91 /* PasscodeInputView.swift in Sources */,
 				8C0E8F221FDEBDFF00789C91 /* SettingsModuleInput.swift in Sources */,
 				8C0E8F231FDEBDFF00789C91 /* SettingsPresenter.swift in Sources */,
-				4B54AF2F221411A900024F5C /* DropDownView.swift in Sources */,
 				8C0E8F241FDEBDFF00789C91 /* SettingsInteractorInput.swift in Sources */,
 				8C0E8F271FDEBDFF00789C91 /* CreateStoryNameRouter.swift in Sources */,
 				8C0B919F20170E6A00A5BA81 /* DuplicatedContactsInteractorOutput.swift in Sources */,
@@ -16110,6 +16114,7 @@
 				8C0E8F4C1FDEBDFF00789C91 /* FileInfoPresenter.swift in Sources */,
 				8C0E8F4D1FDEBDFF00789C91 /* FileInfoInteractorInput.swift in Sources */,
 				8C0E8F4E1FDEBDFF00789C91 /* PromoView.swift in Sources */,
+				4BF7CF5322310519002DAF37 /* AdjustsFontSizeInsetsButton.swift in Sources */,
 				8C0E8F4F1FDEBDFF00789C91 /* FileInfoInteractorOutput.swift in Sources */,
 				8C0E8F501FDEBDFF00789C91 /* FileInfoInteractor.swift in Sources */,
 				8C0B91AB20170EB700A5BA81 /* ManageContactsPresenter.swift in Sources */,
@@ -17002,6 +17007,7 @@
 				CE51ACF31EF90853005DCEE0 /* PhoneVereficationRouter.swift in Sources */,
 				2BA37C3A202837B400660394 /* FaceImageChangeCoverInteractorOutput.swift in Sources */,
 				4A9F8E5320875A4300622A6C /* PeriodicContactSyncSettingsTableViewCell.swift in Sources */,
+				4BF7CF4D223103E2002DAF37 /* DropDownTableViewCell.swift in Sources */,
 				B59A63DF2167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */,
 				B57FE7FD212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */,
 				CE51ACF41EF90853005DCEE0 /* PhoneVereficationConfigurator.swift in Sources */,
@@ -17115,13 +17121,13 @@
 				4A9B3905201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
 				A207990E219F137E00AD5037 /* PremiumInteractor.swift in Sources */,
 				92004B5421AD10E600582C45 /* MyStorageModuleInitializer.swift in Sources */,
+				4BF7CF4F223103E2002DAF37 /* DropDownView.swift in Sources */,
 				CEB2734E205BF57B00E1AE9C /* UnderlineTextField.swift in Sources */,
 				7CF6BDBA1F0B88910066709E /* CollectionViewCellForVideo.swift in Sources */,
 				8C6EF87B1F348B5C002AC795 /* BottomSelectionTabBarDataStorage.swift in Sources */,
 				7C6E2F771F31E4C900536DB6 /* CreateStoryPhotoSelectionPresenter.swift in Sources */,
 				7C6945E320039F4A00152344 /* FreeAppSpacePresenter.swift in Sources */,
 				7C233CD21FD51E290013CCA0 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
-				4B54AF2C221411A900024F5C /* DropDownTableViewCell.swift in Sources */,
 				CE6DE7531FCBE84100C23CBD /* DropboxParametrs.swift in Sources */,
 				7C6E2F901F31E4F800536DB6 /* CreateStoryNameInteractor.swift in Sources */,
 				CEF69DE31FB585E800FCE6AB /* CustomErrors.swift in Sources */,
@@ -17163,6 +17169,7 @@
 				B5AB2F062204356400E3AF23 /* InstaPickSmartAlbumCell.swift in Sources */,
 				CEF73B9D1FCEAC30004C3ADF /* KeyboardHideManager.swift in Sources */,
 				38BA503099842E5840815A3A /* BaseFilesGreedPresenter.swift in Sources */,
+				4BF7CF5222310519002DAF37 /* AdjustsFontSizeInsetsButton.swift in Sources */,
 				CECD4E561FE1152600978BE7 /* UIImage+Color.swift in Sources */,
 				CE170F6A21E76DFD00BE352D /* InstapickService.swift in Sources */,
 				FDC8F998E27D9EA9B6B95F47 /* BaseFilesGreedInteractorInput.swift in Sources */,
@@ -17498,7 +17505,6 @@
 				C7055CAC94DC0C09FAC5F608 /* AlbumDetailPresenter.swift in Sources */,
 				CE2F56321F7554A300F49DA1 /* OfferServiceResponse.swift in Sources */,
 				CECD4E541FE1150B00978BE7 /* UIButton+Color.swift in Sources */,
-				4B54AF2E221411A900024F5C /* DropDownView.swift in Sources */,
 				CEEB7AA620A5D5C80070FDC2 /* GradientOrangeView.swift in Sources */,
 				CC5705DE3B84973A3C2928C7 /* AlbumDetailInteractor.swift in Sources */,
 				CEC3C2481FB99AF800C3D67F /* PasscodeSettingsInteractor.swift in Sources */,

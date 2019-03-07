@@ -32,7 +32,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     }
     
     @IBOutlet weak var operationButtonsStackView: UIStackView!
-    @IBOutlet weak var deleteDuplicatedButton: BlueButtonWithMediumWhiteText!
+    @IBOutlet weak var deleteDuplicatedButton: AdjustsFontSizeInsetsRoundedDarkBlueButton!
     @IBOutlet weak var restoreButton: BlueButtonWithMediumWhiteText!
     @IBOutlet weak var backUpButton: BlueButtonWithMediumWhiteText!
     
@@ -99,7 +99,6 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         backUpButton.adjustsFontSizeToFitWidth()
         restoreButton.adjustsFontSizeToFitWidth()
         cancelButton.adjustsFontSizeToFitWidth()
-        deleteDuplicatedButton.adjustsFontSizeToFitWidth()
         
         if tabBarSetup {
             needShowTabBar = true
