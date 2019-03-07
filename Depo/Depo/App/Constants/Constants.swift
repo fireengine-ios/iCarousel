@@ -965,6 +965,7 @@ struct TextConstants {
     static let placeRecognitionToBeam = NSLocalizedString("Place Recognition to beam you up to the memories", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let objectRecognitionToRemember = NSLocalizedString("Object Recognition to remember with things you love", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let unlimitedPhotopickAnalysis = NSLocalizedString("unlimited_photopick_analysis", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let additionalDataAdvantage = NSLocalizedString("additional_data_advantage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let becomePremium = NSLocalizedString("Become Premium", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let becomePremiumMember = NSLocalizedString("Become Premium Member!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let leavePremiumMember = NSLocalizedString("leave_premium_membership", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -985,7 +986,6 @@ struct TextConstants {
     static let faceRecognitionShort = NSLocalizedString("face_recognition_short", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let objectRecognitionShort = NSLocalizedString("object_recognition_short", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photoPickShort = NSLocalizedString("unlimited_photopick_analysis", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let dataAdvantageShort = NSLocalizedString("data_advantage_short", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     //MARK: - LeavePremiumViewController
     

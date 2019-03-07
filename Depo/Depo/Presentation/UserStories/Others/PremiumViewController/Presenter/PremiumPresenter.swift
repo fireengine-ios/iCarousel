@@ -26,7 +26,7 @@ final class PremiumPresenter {
     
     private var optInVC: OptInController?
     private var referenceToken = ""
-    private var accountType: AccountType = .all
+    var accountType: AccountType = .all
     private var feature: PackageModelResponse?
     
     init(title: String, headerTitle: String, authority: AuthorityType?, module: FaceImageItemsModuleOutput?) {

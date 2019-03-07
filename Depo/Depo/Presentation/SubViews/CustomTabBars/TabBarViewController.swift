@@ -400,15 +400,22 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     private func showCurtainView(show: Bool) {
+        guard var currentViewController = currentViewController else {
+            return
+        }
+            
+        if let navigationViewController = (currentViewController as? SearchViewController)?.navigationController {
+            currentViewController = navigationViewController
+        }
         
-        currentViewController?.navigationItem.rightBarButtonItems?.forEach {
+        currentViewController.navigationItem.rightBarButtonItems?.forEach {
             $0.isEnabled = !show
         }
         
         if show {
-            curtainView.frame = CGRect(x: 0, y: 0, width: currentViewController?.view.frame.width ?? 0, height: currentViewController?.view.frame.height ?? 0)
-            currentViewController?.view.addSubview(curtainView)
-            currentViewController?.view.bringSubview(toFront: curtainView)
+            curtainView.frame = currentViewController.view.bounds
+            currentViewController.view.addSubview(curtainView)
+            currentViewController.view.bringSubview(toFront: curtainView)
         } else {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots), object: nil)
             curtainView.removeFromSuperview()
@@ -418,7 +425,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         if let searchController = currentViewController as? SearchViewController {
             searchController.setEnabledSearchBar(!show)
         } else {
-            currentViewController?.navigationItem.hidesBackButton = show
+            currentViewController.navigationItem.hidesBackButton = show
         }
     }
     

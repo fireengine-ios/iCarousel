@@ -15,9 +15,10 @@ enum PremiumListType {
     case placeRecognition
     case objectRecognition
     case unlimitedPhotopick
+    case additionalData
     
     static var allTypes: [PremiumListType] {
-        return [.backup, .removeDuplicate, .faceRecognition, .placeRecognition, .objectRecognition, .unlimitedPhotopick]
+        return [.backup, .removeDuplicate, .faceRecognition, .placeRecognition, .objectRecognition, .unlimitedPhotopick, .additionalData]
     }
 }
 

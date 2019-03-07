@@ -35,7 +35,7 @@ final class PremiumFeaturesView: UIView {
                 case .photoPick:
                     return TextConstants.photoPickShort
                 case .dataAdvantage:
-                    return TextConstants.dataAdvantageShort
+                    return TextConstants.additionalDataAdvantage
                 }
             }
             

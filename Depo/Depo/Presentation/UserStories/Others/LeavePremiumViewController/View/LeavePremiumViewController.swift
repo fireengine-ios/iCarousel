@@ -37,7 +37,7 @@ final class LeavePremiumViewController: BaseViewController {
     private func setup() {
         setTitle(withString: TextConstants.lifeboxPremium)
         
-        leavePremiumView.configure(with: "", types: PremiumListType.allTypes, hideButton: false)
+        leavePremiumView.configure(with: "", types: PremiumListType.allTypes, isTurkcell: output.accountType == .turkcell)
     }
     
 }
@@ -45,6 +45,6 @@ final class LeavePremiumViewController: BaseViewController {
 // MARK: - LeavePremiumViewInput
 extension LeavePremiumViewController: LeavePremiumViewInput {
     func display(price: String, hideLeaveButton: Bool) {
-        leavePremiumView.configure(with: price, types: PremiumListType.allTypes, hideButton: hideLeaveButton)
+        leavePremiumView.configure(with: price, types: PremiumListType.allTypes, hideButton: hideLeaveButton, isTurkcell: output.accountType == .turkcell)
     }
 }

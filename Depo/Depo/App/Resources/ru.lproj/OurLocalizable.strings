@@ -428,8 +428,8 @@
 "Folder is Empty" = "Папка пуста";
 "Folder Items" = "Файлов: %d";
 "Contact Backup" = "Резервная копия контактов";
-"Your last contact update was %@ months ago!" = "Вы обновляли данные о контактах %d месяц(-а, -ев) назад!";
-"It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Прошло %d месяц(-а, -ев) с момента, когда вы последний раз обновляли контакты. Обновите их сейчас, чтобы никогда не потерять.";
+"Your last contact update was %@ months ago!" = "Вы обновляли данные о контактах %@ месяц(-а, -ев) назад!";
+"It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Прошло %@ месяц(-а, -ев) с момента, когда вы последний раз обновляли контакты. Обновите их сейчас, чтобы никогда не потерять.";
 "Your contact list looks empty" = "Ваш список контактов пуст.";
 "You don’t have any contacts in your profile, backup your contacts now!" = "В вашем профиле нет контактов. Создайте резервную копию сейчас!";
 "Backup" = "Копировать";
