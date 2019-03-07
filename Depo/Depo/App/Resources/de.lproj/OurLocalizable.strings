@@ -20,7 +20,7 @@
 "Touch ID" = "Berührungsidentifikation";
 "Face ID" = "Gesichts-ID";
 "Enable" = "Aktivieren";
-"Please activate %@ from your device settings to use this feature" = "Bitte aktivieren Sie% @ von Ihren Geräteeinstellungen, um diese Funktion zu verwenden";
+"Please activate %@ from your device settings to use this feature" = "Bitte aktivieren Sie %@ von Ihren Geräteeinstellungen, um diese Funktion zu verwenden";
 "To enter passcode" = "Geben Sie den Code für die Lifebox ein";
 "Set a Passcode" = "Legen Sie einen Lifebox-Passcode fest";
 "Passcodes don't match, please try again" = "Passwörter stimmen nicht überein, bitte versuchen Sie es erneut";
@@ -754,7 +754,7 @@
 "package_albanian_cancel_text" = "Albanische Quote den Text abbrechen";
 "feature_albanian_cancel_text" = "Sie können die Premium-Funktionen weiterhin kostenlos nutzen, da Sie ALB-Telekom-Benutzer sind";
 "no_analyses_left_title" = "Keine Analysen geblieben";
-"no_analyses_left_message" = "Keine Analysen geblieben";
+"no_analyses_left_message" = "Seien Sie nicht traurig, Sie können immer noch ein neues Paket kaufen, um Ihre Fotos zu analysieren!";
 "no_analyses_left_button" = "PhotoPick kaufen";
 "analyze_history_empty_title" = "Haben Sie noch nicht begonnen, Ihre Fotos zu analysieren?";
 "analyze_history_empty_subtitle" = "Jetzt mit der Analyse beginnen, um herauszufinden, welches Foto den höchsten Rang erreicht, und es in den sozialen Medien teilen.";
@@ -837,3 +837,6 @@
 "insta_pick_picture_not_found" = "Bild nicht \ngefunden";
 "phone_updated_needs_login" = "Sie haben Ihre Telefonnummer erfolgreich aktualisiert. Melden Sie sich mit Ihren Zugangsdaten an";
 "server_under_maintenance" = "";
+"unlimited_photopick_analysis" = "";
+"data_advantage_short" = "";
+"additional_data_advantage" = "";

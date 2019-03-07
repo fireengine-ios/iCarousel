@@ -693,8 +693,6 @@
 "Face Recognition to reach your loved one's memories" = "Face Recognition to reach your loved one's memories";
 "Place Recognition to beam you up to the memories" = "Place Recognition to beam you up to the memories";
 "Object Recognition to remember with things you love" = "Object Recognition to remember with things you love";
-"unlimited_photopick_analysis" = "Unlimited PhotoPick analysis";
-"additional_data_advantage" = "Additional data advantage";
 "Become Premium" = "Become Premium";
 "Become Premium Member!" = "Become Premium Member!";
 "leave_premium_membership" = "Leave Premium Membership";
@@ -784,7 +782,7 @@
 "package_albanian_cancel_text" = "Albanian quota cancel text";
 "feature_albanian_cancel_text" = "You can continue to use Premium features for free since you are a ALBtelecom user";
 "no_analyses_left_title" = "No Analyzes Left";
-"no_analyses_left_message" = "No Analyzes Left";
+"no_analyses_left_message" = "Don't be sad, you can still purchase new package to analyze your photos!";
 "no_analyses_left_button" = "Purchase PhotoPick";
 "analyze_history_empty_title" = "Didn't you start analyzing your photos yet?";
 "analyze_history_empty_subtitle" = "Start analyzing now to find out which photo gets the highest rank and share on social media.";
@@ -866,4 +864,7 @@
 "you_are_connected" = "You are connected";
 "insta_pick_picture_not_found" = "Picture not found";
 "phone_updated_needs_login" = "You have successfully updated your phone number, please log in with your credentials";
-"server_under_maintenance" = "Server is under maintenance";
+"server_under_maintenance" = "There is currently a maintenance work on lifebox, please try again later.";
+"unlimited_photopick_analysis" = "Unlimited PhotoPick analysis";
+"data_advantage_short" = "Additional Data Advantage";
+"additional_data_advantage" = "Additional Data Advantage";
