@@ -34,8 +34,8 @@ final class PasswordCell: ProtoInputTextCell {
     @IBOutlet weak var textInput: UITextField! {
         didSet {
             inputTextField = textInput
-            textInput.delegate = self
             textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
+            textInput.keyboardType = .default
         }
     }
     
