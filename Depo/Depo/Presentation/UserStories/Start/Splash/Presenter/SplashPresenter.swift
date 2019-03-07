@@ -15,6 +15,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     private lazy var customProgressHUD = CustomProgressHUD()
     private var turkcellLogin = false
     private lazy var storageVars: StorageVars = factory.resolve()
+    private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     func viewIsReady() {
         TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] in
@@ -43,8 +44,9 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         
         vc.success = {
-            rootVC.dismiss(animated: true, completion: nil)
-            self.interactor.startLoginInBackroung()
+            rootVC.dismiss(animated: true, completion: {
+                self.interactor.startLoginInBackroung()
+            })
         }
         
         let navVC = NavigationController(rootViewController: vc)
@@ -123,7 +125,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
                     storageVars.isNewAppVersionFirstLaunchTurkcellLanding = false
                     router.navigateToLandingPages(isTurkCell: turkcellLogin)
                 } else {
-                    router.goToSyncSettingsView(fromSplash: true)
+                    openAutoSyncIfNeeded()
                 }
             }
         } else {
@@ -131,7 +133,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
                 router.navigateToApplication()
                 openLink()
             } else {
-                router.goToSyncSettingsView(fromSplash: true)
+                openAutoSyncIfNeeded()
             }
         }
     }
@@ -150,7 +152,25 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         UIApplication.topController()?.present(navVC, animated: true, completion: nil)
     }
     
+    private func openAutoSyncIfNeeded() {
+        view.showSpiner()
+        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
+            self?.view.hideSpiner()
+            
+            if needToOpenAutoSync {
+                self?.router.goToSyncSettingsView(fromSplash: true)
+            }
+        }) { [weak self] error in
+            self?.view.hideSpiner()
+        }
+    }
+    
     func onFailEULA() {
         router.navigateToTermsAndService()
     }
+    
+    func onFailGetAccountInfo(error: Error) {
+        router.showError(error)
+    }
+    
 }

@@ -1,5 +1,5 @@
 //
-//  DropDovnTableViewCell.swift
+//  DropDownTableViewCell.swift
 //  Depo
 //
 //  Created by Oleg on 05.09.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DropDovnTableViewCell: UITableViewCell {
+class DropDownTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleTextLabel: UILabel!
 

@@ -46,9 +46,13 @@ extension PremiumInteractor: PremiumInteractorInput {
                 DispatchQueue.toMain {
                     self?.output.successed(allFeatures: response)
                 }
-            case .failed(_):
+            case .failed(let error):
                 DispatchQueue.toMain {
-                    self?.output.switchToTextWithoutPrice(isError: true)
+                    if error.isServerUnderMaintenance {
+                        self?.output.failed(with: error.description)
+                    } else {
+                        self?.output.switchToTextWithoutPrice(isError: true)
+                    }
                 }
             }
         }
@@ -59,9 +63,13 @@ extension PremiumInteractor: PremiumInteractorInput {
             DispatchQueue.toMain {
                 self?.output.successedGotAppleInfo()
             }
-            }, fail: { [weak self] _ in
+            }, fail: { [weak self] error in
                 DispatchQueue.toMain {
-                    self?.output.switchToTextWithoutPrice(isError: true)
+                    if error.isServerUnderMaintenance {
+                        self?.output.failed(with: error.description)
+                    } else {
+                        self?.output.switchToTextWithoutPrice(isError: true)
+                    }
                 }
         })
     }
@@ -98,7 +106,7 @@ extension PremiumInteractor: PremiumInteractorInput {
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("\(error.description)"))
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
                 DispatchQueue.main.async {
-                    self?.output.failed(with: error.localizedDescription)
+                    self?.output.failed(with: error.description)
                 }
             case .inProgress:
                 DispatchQueue.main.async {

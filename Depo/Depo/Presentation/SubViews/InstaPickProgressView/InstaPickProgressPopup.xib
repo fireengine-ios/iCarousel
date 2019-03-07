@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -79,6 +79,7 @@
                         <constraint firstItem="SIH-wk-0Wm" firstAttribute="centerX" secondItem="gOh-bg-eJT" secondAttribute="centerX" id="U7I-yK-f6D"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SIH-wk-0Wm" secondAttribute="trailing" constant="16" id="Yqn-pP-bGV"/>
                         <constraint firstItem="SIH-wk-0Wm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gOh-bg-eJT" secondAttribute="leading" constant="16" id="Zpb-E8-0gd"/>
+                        <constraint firstItem="SIH-wk-0Wm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="KtI-Qi-HYB" secondAttribute="bottom" constant="8" id="vJd-uK-KfT"/>
                         <constraint firstItem="vB8-dd-TD0" firstAttribute="top" secondItem="SIH-wk-0Wm" secondAttribute="bottom" constant="40" id="vbL-M9-Zxo"/>
                     </constraints>
                 </view>

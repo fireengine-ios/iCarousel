@@ -7,12 +7,17 @@
 //
 
 import Foundation
+import Alamofire
 
 enum ErrorResponse {
     case failResponse(ObjectFromRequestResponse?)
     case error(Error)
     case string(String)
     case httpCode(NSInteger)
+}
+
+enum ErrorResponseText {
+    static let serviceAnavailable = "\"503 Service Unavailable\""
 }
 
 extension ErrorResponse {
@@ -33,10 +38,25 @@ extension ErrorResponse {
         }
         return false
     }
+    
+    var isServerUnderMaintenance: Bool {
+        if case ErrorResponse.string(let error) = self, error == ErrorResponseText.serviceAnavailable {
+            return true
+        } else if case ErrorResponse.httpCode(503) = self {
+            return true
+        }
+        
+        return false
+    }
+    
 }
 
 extension ErrorResponse: CustomStringConvertible {
     var description: String {
+        if isServerUnderMaintenance {
+            return TextConstants.errorServerUnderMaintenance
+        }
+        
         return localizedDescription
     }
 }
@@ -75,6 +95,25 @@ extension ErrorResponse: LocalizedError {
 }
 
 extension Error {
+    
+    var isServerUnderMaintenance: Bool {
+        if let error = self as? AFError {
+            return error.responseCode == 503
+        } else if let error = self as? ServerError {
+            return error.code == 503
+        } else if let error = self as? ServerValueError {
+            return error.code == 503
+        } else if let error = self as? ServerStatusError {
+            return error.code == 503
+        } else if let error = self as? ServerMessageError {
+            return error.code == 503
+        } else if let error = self as? ErrorResponse {
+            return error.isServerUnderMaintenance
+        }
+        
+        return false
+    }
+    
     var description: String {
         if isNetworkError {
             switch urlErrorCode {
@@ -83,6 +122,8 @@ extension Error {
             default:
                 return TextConstants.errorBadConnection
             }
+        } else if isServerUnderMaintenance {
+            return TextConstants.errorServerUnderMaintenance
         }
         
         return localizedDescription

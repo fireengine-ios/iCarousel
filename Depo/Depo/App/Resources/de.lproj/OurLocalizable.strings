@@ -748,3 +748,91 @@
 "no_for_upgrade" = "Nein mir geht's gut";
 "uploded_photos_high_quality" = "Sie melden sich gerade als Standardbenutzer bei lifebox an. Wir werden Ihre bestehenden Fotos und Videos zusammen mit neuen hochgeladenen Erinnerungen in hoher Qualität bis zum 1. März aufbewahren. Möchten Sie ein Premium-Benutzer sein, um Ihre Erinnerungen in Originalqualität zu speichern und von Premium-Privilegien zu profitieren?";
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
+
+/*AnalyzeHistoryController*/
+"InstaPick" = "PhotoPick";
+"package_albanian_cancel_text" = "Albanische Quote den Text abbrechen";
+"feature_albanian_cancel_text" = "Sie können die Premium-Funktionen weiterhin kostenlos nutzen, da Sie ALB-Telekom-Benutzer sind";
+"no_analyses_left_title" = "Keine Analysen geblieben";
+"no_analyses_left_message" = "Keine Analysen geblieben";
+"no_analyses_left_button" = "PhotoPick kaufen";
+"analyze_history_empty_title" = "Haben Sie noch nicht begonnen, Ihre Fotos zu analysieren?";
+"analyze_history_empty_subtitle" = "Jetzt mit der Analyse beginnen, um herauszufinden, welches Foto den höchsten Rang erreicht, und es in den sozialen Medien teilen.";
+"analyze_history_analyze_left" = "Analysen geblieben";
+"analyze_history_analyze_count" = "%1$d /%2$d";
+"analyze_with_instapick" = "Mit PhotoPick analysieren";
+"analyze_history_photos_count" = "%d Fotos";
+"analyze_history_start_here" = "Von hier starten!";
+"analyze_confirm_delete_title" = "Sind Sie sicher, dass Sie löschen möchten?";
+"analyze_confirm_delete_text" = "Ausgewählte Elemente werden aus dem Analyseverlauf gelöscht.";
+"analyze_confirm_delete_yes" = "JA";
+"analyze_confirm_delete_no" = "NEIN";
+
+/*InstaPick three dots*/
+"new_insta_pick" = "Neuer PhotoPick";
+
+/*InstaPickCard*/
+"used_before_title_label" = "PhotoPick um eine Menge Likes zu bekommen!";
+"no_used_before_title_label" = "Mit PhotoPick analysieren";
+"no_analysis_title_label" = "Sich mehr PhotoPick holen!";
+"used_before_detail_label" = "Herausfinden, welches Foto den höchsten Rang erreicht, und für mehr Likes mit PhotoPick analysieren! Sie haben mehr Analysen für Ihre Fotos 😉";
+"no_used_before_detail_label" = "Herausfinden, welches Foto den höchsten Rang erreicht, und für mehr Likes mit PhotoPick analysieren! Haben Sie es noch nicht versucht?";
+"no_analysis_detail_label" = "Herausfinden, welches Foto den höchsten Rang erreicht, und für mehr Likes mit PhotoPick analysieren! Nicht vergessen, ein neues Paket für mehr PhotoPick😉 zu kaufen.";
+"instapick_button_has_analysis" = "Lasst uns beginnen!";
+
+/*InstaPickDetailViewController*/
+"you_are_ready_to_share" = "Sie sind bereit zu teilen!";
+"instaPick_analysis_left" = "Analyse geblieben:%1$d / %2$d";
+"engage_with_more_hastags" = "Sich mit mehr #hastags engagieren";
+"copy_hashtags_to_clipboard" = "#hashtags in die Zwischenablage kopieren";
+"share_on_social_media" = "Auf Social Media teilen!";
+"picked" = "Ausgewählt!";
+"insta_pick_analyzing_bottom" = "Viel Spaß bei der Analyse Ihrer Fotos! 😊";
+"insta_pick_analyzing_0" = "Wir suchen nach dem Foto, das Sie am meisten mögen.";
+"insta_pick_analyzing_1" = "Sie haben schöne Fotos ausgewählt";
+"insta_pick_analyzing_2" = "Wie schön von dir, Ihre Momente mit Ihren Freunden zu teilen!";
+"insta_pick_analyzing_3" = "Das Leben ist gut mit schönen Erinnerungen!";
+"insta_pick_analyzing_4" = "Sie haben ein tolles Fotoalbum.";
+
+/*InstaPickPopUp*/
+"dont_show_this_again" = "Diesen nicht mehr anzeigen";
+"instapick_analyze" = "Mit PhotoPick analysieren!";
+"connected_account" = "Es funktioniert gut mit Ihrem verbundenen Konto!";
+"instapick_description" = "Wenn Sie sich für eine Verbindung mit Ihrem Instagram-Konto entscheiden, können wir eine personalisierte, wesentlich bessere Erfahrung bieten, indem wir für jede neue PhotoPick-Analyse eine benutzerdefinierte Analyse durchführen.";
+"connected_with_instagram" = "Sich mit Instagram verbinden";
+"connected_with_instagram_name" = "Sich mit Instagram als … verbinden";
+"continue_without_connecting" = "Weitergehen, ohne eine Verbindung herzustellen";
+"connected_accounts" = "Verbundene Konten";
+"analyze_history_free_text" = "Kostenlos für begrenzte Zeit";
+
+/*InstapickUpgradePopup*/
+"instapick_upgrade_popup_text" = "Um ein PhotoPick-Paket zu kaufen, müssen Sie Ihre Lifebox-Anwendung aktualisieren.";
+"instapick_upgrade_popup_button" = "Aktualisieren";
+"instapick_upgrade_popup_no" = "Nein";
+"instapick_analysis_left" = "Analyse geblieben:%1$d / %2$d";
+"instapick_unlimited_analysis" = "Kostenlos für begrenzte Zeit ";
+"Facebook" = "Facebook";
+"Dropbox" = "Dropbox";
+"Instagram" = "Instagram";
+"connected_as_format" = "Verbundenes Konto: @%@";
+"instagram_remove_connection_warning_title" = "Sie sind dabei, Ihre Instagram-Verbindung zu entfernen.";
+"instagram_remove_connection_warning_message" = "Möchten Sie Ihre Instagram-Verbindung wirklich entfernen?\n\n";
+"instapick_selection_photos_selected" = "Ausgewählte Fotos (%d)";
+"instapick_selection_analyzes_left" = "Sie haben nur noch %d Analysen";
+"loading" = "Wird geladen...";
+"there_are_no_photos" = "Es gibt keine Fotos";
+"there_are_no_albums" = "Es gibt keine Alben";
+"instapick_selection_analyzes_left_max" = "Sie haben %d Fotos ausgewählt \n(die maximale Anzahl, die Sie auswählen können)";
+"free_trial_title_label" = "Mit PhotoPick analysieren";
+"free_trial_detail_label" = "Herausfinden, welches Foto den höchsten Rang erreicht, und für mehr Likes mit PhotoPick analysieren! Für eine begrenzte Zeit mehr ausprobieren!";
+"instapick_under_construction" = "Wir verbessern PhotoPick für ein besseres Erlebnis 😉";
+"instapick_unsupported_file_type" = "Fotos, die Sie ausgewählt haben, werden nicht unterstützt. Sie können PhotoPick fortführen, indem Sie andere Fotos auswählen.";
+"server_under_maintenance" = "";
+"facebook_remove_connection_warning_title" = "";
+"dropbox_remove_connection_warning_title" = "";
+"facebook_remove_connection_warning_message" = "";
+"dropbox_remove_connection_warning_message" = "";
+"remove_connection" = "";
+"you_are_connected" = "";
+"insta_pick_picture_not_found" = "";
+"phone_updated_needs_login" = "";

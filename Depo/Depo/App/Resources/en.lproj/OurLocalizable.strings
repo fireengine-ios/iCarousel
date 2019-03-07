@@ -523,6 +523,7 @@
 "Filter Card" = "Filter Card";
 "photos" = "photos";
 "Destination folder can not be the same folder" = "Destination folder can not be the same folder";
+"server_under_maintenance" = "There is currently a maintenance work on lifebox, please try again later.";
 "Google Play Store" = "Google Play Store";
 "AppStore" = "AppStore";
 "Successful purchase." = "Successful purchase.";
@@ -644,7 +645,7 @@
 "LifeboxSmallPopUpCheckBoxTex" = "Never show again";
 "LifeboxSmallPopUpFirstButtonText" = "OK";
 "LifeboxSmallPopUpSecondButtonText" = "UPGRADE";
-"has_remained_lifebox_usage" = "\"%@ of %@ has remained (only for lifebox usage)";
+"has_remained_lifebox_usage" = "%@ of %@ has remained (only for lifebox usage)";
 "Renewal Date: %@" = "Renewal date: %@";
 "created" = "created";
 "uploaded" = "uploaded";
@@ -793,8 +794,8 @@
 "analyze_history_start_here" = "Start\nHere!";
 "analyze_confirm_delete_title" = "Are you sure you want to delete?";
 "analyze_confirm_delete_text" = "Selected items will be deleted from analysis history.";
-"analyze_confirm_delete_yes" = "YES";
-"analyze_confirm_delete_no" = "NO";
+"analyze_confirm_delete_yes" = "Yes";
+"analyze_confirm_delete_no" = "No";
 
 /*InstaPick three dots*/
 "new_insta_pick" = "New PhotoPick";
@@ -803,10 +804,6 @@
 "used_before_title_label" = "PhotoPick to get bunch of likes!";
 "no_used_before_title_label" = "Analyze with PhotoPick!";
 "no_analysis_title_label" = "Get more PhotoPick!";
-"free_trial_title_label" = "Get more PhotoPick!";
-
-"free_trial_detail_label" = "Let us analyze your selected photos and suggest you which one to share!";
-
 "used_before_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! You have more analysis waiting for your photos😉";
 "no_used_before_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! You haven't tried yet?";
 "no_analysis_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Don't forget to purchase new package for more PhotoPick😉";
@@ -815,7 +812,7 @@
 /*InstaPickDetailViewController*/
 "you_are_ready_to_share" = "You are ready to share!";
 "instaPick_analysis_left" = "Analysis Left: %1$d / %2$d";
-"engage_with_more_hastags" = "Engage with more #hastags";
+"engage_with_more_hastags" = "Engage with more #hashtags";
 "copy_hashtags_to_clipboard" = "Copy #hashtags to clipboard";
 "share_on_social_media" = "Share on Social Media!";
 "picked" = "PICKED!";
@@ -855,3 +852,16 @@
 "there_are_no_photos" = "There are no photos";
 "there_are_no_albums" = "There are no albums";
 "instapick_selection_analyzes_left_max" = "You’ve selected %d photos\n(the max. number you can select)";
+"free_trial_title_label" = "Analyze with PhotoPick";
+"free_trial_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Try more free for a limited time!";
+"instapick_under_construction" = "We are making improvement on PhotoPick for a better experience 😉";
+"instapick_unsupported_file_type" = "Photos you have selected are in unsupported format. You can continue PhotoPick experience by selecting other photos.";
+"server_under_maintenance" = "There is currently a maintenance work on lifebox, please try again later.";
+"facebook_remove_connection_warning_title" = "You're about to remove your Facebook connection.";
+"dropbox_remove_connection_warning_title" = "You're about to remove your Dropbox connection.";
+"facebook_remove_connection_warning_message" = "Are you sure you want to remove your Facebook connection?\n\n";
+"dropbox_remove_connection_warning_message" = "Are you sure you want to remove your Dropbox connection?\n\n";
+"remove_connection" = "Remove Connection";
+"you_are_connected" = "You are connected";
+"insta_pick_picture_not_found" = "Picture not found";
+"phone_updated_needs_login" = "You have successfully updated your phone number, please log in with your credentials";

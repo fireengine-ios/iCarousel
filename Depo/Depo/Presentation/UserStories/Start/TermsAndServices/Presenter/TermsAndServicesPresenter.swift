@@ -15,6 +15,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     weak var delegate: RegistrationViewDelegate?
     private var confirmAgreements = false
     private lazy var storageVars: StorageVars = factory.resolve()
+    private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     // MARK: IN
     func viewIsReady() {
@@ -85,7 +86,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         if interactor.cameFromLogin, storageVars.autoSyncSet {
             router.goToHomePage()
         } else {
-            router.goToAutoSync()
+            openAutoSyncIfNeeded()
         }
     }
     
@@ -97,6 +98,21 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func popUpPressed() {
         view.popNavigationVC()
+    }
+    
+    // MARK: Utility Methods
+    private func openAutoSyncIfNeeded() {
+        view.showSpiner()
+        
+        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
+            self?.view.hideSpiner()
+            
+            if needToOpenAutoSync {
+                self?.router.goToAutoSync()
+            }
+        }) { [weak self] error in
+            self?.view.hideSpiner()
+        }
     }
     
     //MARK : BasePresenter

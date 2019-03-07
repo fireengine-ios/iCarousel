@@ -19,10 +19,14 @@ final class InstaPickBigPhotoView: InstaPickPhotoView {
 
         //size constraints
         rateView.heightAnchor.constraint(equalToConstant: isIPad ? 40 : 30).isActive = true
-        pickedView.widthAnchor.constraint(equalToConstant: isIPad ? 95 : 70).isActive = true
+        pickedView.widthAnchor.constraint(equalToConstant: isIPad ? 100 : 70).isActive = true
         pickedView.heightAnchor.constraint(equalToConstant: isIPad ? 40 : 30).isActive = true
         
         imageViewHeightConstraint.constraintWithMultiplier(0.97).isActive = true
+    }
+    
+    override func configurePictureNotFound(fontSize: CGFloat, imageWidth: CGFloat, spacing: CGFloat) {
+        super.configurePictureNotFound(fontSize: 16, imageWidth: 30, spacing: 8)
     }
     
     override func setupLabelsDesign(isIPad: Bool) {

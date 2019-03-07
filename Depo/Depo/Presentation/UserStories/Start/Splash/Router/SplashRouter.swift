@@ -36,6 +36,10 @@ class SplashRouter: SplashRouterInput {
         UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
     }
     
+    func showError(_ error: Error) {
+        UIApplication.showErrorAlert(message: error.description)
+    }
+    
     func goToSyncSettingsView(fromSplash: Bool = false) {
         router.setNavigationController(controller: router.onboardingScreen)
         

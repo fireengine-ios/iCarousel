@@ -18,7 +18,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static let currentServerEnvironment = ServerEnvironment.preProduction
+    private static let currentServerEnvironment = ServerEnvironment.production
     
     static let baseUrl: URL = {
         switch currentServerEnvironment {
@@ -52,6 +52,14 @@ struct RouteRequests {
             return URL(string: "https://prv.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
         case .production:
             return URL(string: "https://www.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
+        }
+    }()
+    
+    static let silentLogin: String = {
+        switch currentServerEnvironment {
+        case .test: return "https://tcloudstb.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
+        case .preProduction: return "https://adepotest.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
+        case .production: return "https://adepo.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
         }
     }()
     
@@ -195,6 +203,7 @@ struct RouteRequests {
             static let authority = Account.accountApi +/ "authority"
             static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
             static let availableOffers = Account.accountApi +/ "available-offers/IOS"
+            static let features = baseUrl +/ "features"
         }
     }
     

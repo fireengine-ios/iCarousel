@@ -15,10 +15,11 @@ protocol AccountServicePrl {
     func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
     func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
+    func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
 }
 
 class AccountService: BaseRequestService, AccountServicePrl {
-    
+ 
     func info(success: SuccessResponse?, fail:@escaping FailResponse) {
         debugLog("AccountService info")
         
@@ -301,6 +302,23 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         let error = CustomErrors.serverError(text)
                         handler(.failed(error))
                     }
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void) {
+        debugLog("AccountService getFeatures")
+        
+        sessionManager
+            .request(RouteRequests.Account.Permissions.features)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let features = FeaturesResponse(json: data, headerResponse: nil)
+                    handler(.success(features))
                 case .failure(let error):
                     handler(.failed(error))
                 }

@@ -82,11 +82,13 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialAccountConnec
     
     @IBOutlet private weak var removeConnectionButton: UIButton! {
         didSet {
+            removeConnectionButton.tintColor = ColorConstants.removeConnection
             removeConnectionButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 20.0)
             removeConnectionButton.isHidden = true
             removeConnectionButton.layer.borderColor = removeConnectionButton.currentTitleColor.cgColor
             removeConnectionButton.layer.borderWidth = 2.0
             removeConnectionButton.layer.cornerRadius = removeConnectionButton.bounds.height * 0.25
+            removeConnectionButton.setTitle(TextConstants.removeConnection, for: .normal)
         }
     }
     
