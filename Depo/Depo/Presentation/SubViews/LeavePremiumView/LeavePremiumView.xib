@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -112,15 +112,19 @@
                                 <constraint firstItem="ZIN-J6-zfJ" firstAttribute="leading" secondItem="q6c-LM-wKc" secondAttribute="leading" id="hWk-JZ-IiR"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZIN-J6-zfJ" secondAttribute="trailing" id="i7O-Ng-zHp"/>
                                 <constraint firstAttribute="trailing" secondItem="YlA-UQ-7Pw" secondAttribute="trailing" id="ph9-dF-XXf"/>
+                                <constraint firstAttribute="trailing" secondItem="ZIN-J6-zfJ" secondAttribute="trailing" id="tRO-q7-Q7D"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="EnL-gE-HWe"/>
+                                    <exclude reference="i7O-Ng-zHp"/>
                                 </mask>
                             </variation>
                             <variation key="heightClass=regular-widthClass=regular">
                                 <mask key="constraints">
                                     <include reference="EnL-gE-HWe"/>
+                                    <include reference="i7O-Ng-zHp"/>
+                                    <exclude reference="tRO-q7-Q7D"/>
                                 </mask>
                             </variation>
                         </view>

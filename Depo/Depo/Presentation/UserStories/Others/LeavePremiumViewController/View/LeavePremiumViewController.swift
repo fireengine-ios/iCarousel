@@ -44,7 +44,7 @@ final class LeavePremiumViewController: BaseViewController {
 
 // MARK: - LeavePremiumViewInput
 extension LeavePremiumViewController: LeavePremiumViewInput {
-    func display(price: String) {
-        leavePremiumView.configure(with: price, types: PremiumListType.allTypes, isTurkcell: output.accountType == .turkcell)
+    func display(price: String, hideLeaveButton: Bool) {
+        leavePremiumView.configure(with: price, types: PremiumListType.allTypes, hideButton: hideLeaveButton, isTurkcell: output.accountType == .turkcell)
     }
 }

@@ -36,8 +36,9 @@ final class LeavePremiumView: UIView {
     }
     
     // MARK: Utility methods(Public)
-    func configure(with price: String, types: [PremiumListType], isTurkcell: Bool) {
+    func configure(with price: String, types: [PremiumListType], hideButton: Bool = false, isTurkcell: Bool) {
         priceLabel.text = price
+        leavePremiumButton.isHidden = hideButton
         
         for premiumListView in premiumListViews.enumerated() {
             switch types[premiumListView.offset] {
