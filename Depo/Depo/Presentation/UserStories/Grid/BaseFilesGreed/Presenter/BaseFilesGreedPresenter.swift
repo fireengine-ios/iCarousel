@@ -666,7 +666,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                         actionTypes.remove(at: deleteOriginalIndex)
                     } else if selectedItems is [Item] {
                         MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: selectedItems as! [Item], duplicatesCallBack: { [weak self] items in
-                            if items.count == 0 {
+                            if items.isEmpty {
                                 //selectedItems = localDuplicates
                                 actionTypes.remove(at: deleteOriginalIndex)
                             }

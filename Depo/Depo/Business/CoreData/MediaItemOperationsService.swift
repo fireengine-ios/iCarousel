@@ -58,34 +58,38 @@ final class MediaItemOperationsService {
         self.deleteObjects(fromFetch: fetchRequest)
         
     }
-    //TODO: check the usefullness of it/or need of refactor
-    func getLocalDuplicates(remoteItems: [Item], duplicatesCallBack: @escaping ([Item]) -> Void) {
-        var remoteMd5s = [String]()
-        var trimmedIDs = [String]()
-        remoteItems.forEach {
-            remoteMd5s.append($0.md5)
-            trimmedIDs.append($0.getTrimmedLocalID())
-        }
-        
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
-        fetchRequest.predicate = NSPredicate(format: "(md5Value IN %@) OR (trimmedLocalFileID IN %@)", remoteMd5s, trimmedIDs)
-        let sort = NSSortDescriptor(key: "creationDateValue", ascending: false)
-        fetchRequest.sortDescriptors = [sort]
-        
+    
+    func getLocalDuplicates(localItems: @escaping MediaItemsCallBack) {
         let context = CoreDataStack.default.newChildBackgroundContext
-        context.perform {
-            guard let localDuplicatesMediaItems = (try? context.fetch(fetchRequest)) as? [MediaItem] else {
-                duplicatesCallBack([])
-                return
+        let predicate = NSPredicate(format: "isLocalItemValue == true AND relatedRemotes.@count > 0")
+        
+        executeRequest(predicate: predicate, context: context, mediaItemsCallBack: localItems)
+    }
+    
+    func getLocalDuplicates(remoteItems: [Item], duplicatesCallBack: @escaping LocalFilesCallBack) {
+        getLocalDuplicates { [weak self] localItems in
+            self?.privateQueue.async {
+                var array = [WrapData]()
+                let uuids = Set(remoteItems.map {$0.uuid})
+                
+                for localItem in localItems {
+                    autoreleasepool {
+                        if let relatedRemotes = localItem.relatedRemotes as? Set<MediaItem> {
+                            let relatedUuids = relatedRemotes.compactMap {$0.uuid}
+                            if !uuids.intersection(relatedUuids).isEmpty {
+                                array.append(WrapData(mediaItem: localItem))
+                            }
+                        }
+                    }
+                }
+                
+                DispatchQueue.main.async {
+                    duplicatesCallBack(array)
+                }
             }
-            var array = [Item]()
-            array = localDuplicatesMediaItems.flatMap { WrapData(mediaItem: $0) }
-            
-            duplicatesCallBack(array)
-            
         }
     }
+    
     //TODO: check the usefullness of it/or need of refactor
     func getLocalFilteredItem(remoteOriginalItem: Item, localFilteredPhotosCallBack: @escaping (Item?) -> Void) {
         
