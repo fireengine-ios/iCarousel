@@ -62,7 +62,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
                 interactor.loadItem(item)
             }
         } else if type == .changeCoverPhoto {
-            outputView()?.hideSpiner()
+            outputView()?.hideSpinner()
 
             if let view = view as? FaceImagePhotosViewController,
                 let item = response as? Item {
@@ -72,7 +72,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     }
     
     override func operationFailed(withType type: ElementTypes) {
-        outputView()?.hideSpiner()
+        outputView()?.hideSpinner()
     }
     
     override func getContentWithSuccess(items: [WrapData]) {

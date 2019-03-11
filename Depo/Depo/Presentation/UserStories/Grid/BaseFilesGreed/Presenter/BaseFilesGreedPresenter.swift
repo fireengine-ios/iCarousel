@@ -267,7 +267,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             return
         }
         debugPrint("???getContentWithSuccessEnd()")
-        asyncOperationSucces()
+        asyncOperationSuccess()
 //        view.stopRefresher()
         if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView {
 
@@ -395,7 +395,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         DispatchQueue.toMain {
             self.view.stopRefresher()
             self.updateNoFilesView()
-            self.asyncOperationSucces()
+            self.asyncOperationSuccess()
             self.updateThreeDotsButton()
         }
     }
@@ -816,7 +816,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func openInstaPick() {
         startAsyncOperation()
         instaPickRoutingService.getViewController(isCheckAnalyzesCount: true, success: { [weak self] vc in
-            self?.asyncOperationSucces()
+            self?.asyncOperationSuccess()
             if vc is InstapickPopUpController {
                 self?.router.openNeededInstaPick(viewController: vc)
             }

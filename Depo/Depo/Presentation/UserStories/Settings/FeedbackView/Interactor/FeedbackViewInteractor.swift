@@ -75,7 +75,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
             }
             let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "", UIDevice.current.model, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN", quota, quotaUsed, packages)
             
-            self?.output.asyncOperationSucces()
+            self?.output.asyncOperationSuccess()
             self?.output.languageRequestSended(text: userInfoString)
         }
 

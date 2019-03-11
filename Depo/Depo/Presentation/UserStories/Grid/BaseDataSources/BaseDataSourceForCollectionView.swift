@@ -805,7 +805,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
-            cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
+            cell_.configureWithWrapper(wrappedObj: unwrapedObject)
             
             if let cell = cell as? BasicCollectionMultiFileCell {
                 cell.moreButton.isHidden = !needShow3DotsInCell
@@ -1018,7 +1018,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             cell_.setSelection(isSelectionActive: isSelectionStateActive,
                                isSelected: isObjctSelected(object: object))
-            cell_.confireWithWrapperd(wrappedObj: object)
+            cell_.configureWithWrapper(wrappedObj: object)
             
         }
         if isSelectionStateActive {
@@ -1045,7 +1045,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
             cell_.set(name: unwrapedObject.name)
             ///TODO: confireWithWrapperd call may be meaningless because of isAlreadyConfigured flag inside
-            cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
+            cell_.configureWithWrapper(wrappedObj: unwrapedObject)
             
             if let cell = cell as? BasicCollectionMultiFileCell {
                 cell.moreButton.isHidden = !needShow3DotsInCell
@@ -1186,7 +1186,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         cell_.updating()
         cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
-        cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
+        cell_.configureWithWrapper(wrappedObj: unwrapedObject)
         cell_.setDelegateObject(delegateObject: self)
         
         guard let wraped = unwrapedObject as? Item else {

@@ -17,7 +17,7 @@ final class TermsOfUsePresenter: BasePresenter  {
     
     
     func viewIsReady() {
-        view.showSpiner()
+        view.showSpinner()
         interactor.getEulaHTML()
     }
 }
@@ -25,12 +25,12 @@ final class TermsOfUsePresenter: BasePresenter  {
 
 extension TermsOfUsePresenter: TermsOfUseInteractorOutput {
     func showLoaded(eulaHTML: String) {
-        view.hideSpiner()
+        view.hideSpinner()
         view.showLoaded(eulaHTML: eulaHTML)
     }
     
     func failLoadEula(errorString: String) {
-        view.hideSpiner()
+        view.hideSpinner()
         view.showAlert(with: errorString)
     }
 }

@@ -66,7 +66,7 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     }
     
     
-    func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
+    func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
         
     }
     

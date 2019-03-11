@@ -14,18 +14,18 @@ import MBProgressHUD
 
 protocol Waiting {
     
-    func showSpiner()
+    func showSpinner()
     
     func showSpinnerOnView(_ view: UIView)
     
-    func showSpinerIncludeNavigatinBar()
+    func showSpinnerIncludeNavigationBar()
     
     func showSpinerWithCancelClosure(_ cancel: @escaping VoidHandler)
     func showFullscreenHUD(with text: String?, and cancelHandler: @escaping VoidHandler)
     
-    func hideSpinerIncludeNavigatinBar()
+    func hideSpinnerIncludeNavigationBar()
     
-    func hideSpiner()
+    func hideSpinner()
     
     func hideSpinerForView(_ view: UIView)
 }
@@ -43,7 +43,7 @@ extension UIViewController: Waiting {
             let gestureRecognizer = TapGestureRecognizerWithClosure(closure: { [weak self] in
                 DispatchQueue.main.async {
                     cancelHandler()
-                    self?.hideSpinerIncludeNavigatinBar()
+                    self?.hideSpinnerIncludeNavigationBar()
                 }
             })
             hud.backgroundView.addGestureRecognizer(gestureRecognizer)
@@ -60,7 +60,7 @@ extension UIViewController: Waiting {
             let gestureRecognizer = TapGestureRecognizerWithClosure(closure: { [weak self] in
                 DispatchQueue.main.async {
                     cancel()
-                    self?.hideSpinerIncludeNavigatinBar()
+                    self?.hideSpinnerIncludeNavigationBar()
                     self?.statusBarColor = oldColor
                 }
             })
@@ -68,7 +68,7 @@ extension UIViewController: Waiting {
         }
     }
     
-    func showSpiner() {
+    func showSpinner() {
         DispatchQueue.toMain {
             _ = MBProgressHUD.showAdded(to: self.view, animated: true)
         }
@@ -80,7 +80,7 @@ extension UIViewController: Waiting {
         }
     }
     
-    func showSpinerIncludeNavigatinBar() {
+    func showSpinnerIncludeNavigationBar() {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)
@@ -88,14 +88,14 @@ extension UIViewController: Waiting {
         }
     }
     
-    func hideSpinerIncludeNavigatinBar() {
+    func hideSpinnerIncludeNavigationBar() {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             MBProgressHUD.hideAllHUDs(for: window, animated: true)
         }
     }
     
-    func hideSpiner() {
+    func hideSpinner() {
         DispatchQueue.main.async {
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
         }

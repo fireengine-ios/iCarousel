@@ -30,7 +30,7 @@ class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
         if let url = URL(string: String(format: RouteRequests.faqContentUrl, Device.supportedLocale)) {
             let request = URLRequest(url: url)
             webView.load(request)
-            showSpiner()
+            showSpinner()
         }
         
     }
@@ -38,10 +38,10 @@ class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
     // MARK: WKNavigationDelegate
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        hideSpiner()
+        hideSpinner()
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        hideSpiner()
+        hideSpinner()
     }
 }

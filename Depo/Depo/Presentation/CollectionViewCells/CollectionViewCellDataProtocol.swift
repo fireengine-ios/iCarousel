@@ -8,7 +8,7 @@
 
 protocol CollectionViewCellDataProtocol {
     
-    func confireWithWrapperd(wrappedObj: BaseDataSourceItem)
+    func configureWithWrapper(wrappedObj: BaseDataSourceItem)
     
     func setImage(image: UIImage?, animated: Bool)
     

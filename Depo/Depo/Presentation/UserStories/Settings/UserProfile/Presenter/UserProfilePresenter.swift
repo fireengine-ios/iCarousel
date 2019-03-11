@@ -23,7 +23,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     }
     
     func stopNetworkOperation() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     func needSendOTP(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse) {

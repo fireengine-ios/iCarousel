@@ -40,7 +40,6 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
             startAsyncOperation()
             if let interactor_ = interactor as? UploadFilesSelectionInteractor, let dataSource = dataSource as? ArrayDataSourceForCollectionView {
                 interactor_.addToUploadOnDemandItems(items: dataSource.getSelectedItems())
-                router.showBack()
             }
             dataSource.selectAll(isTrue: false)
         } else {
@@ -61,7 +60,7 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     override func getContentWithSuccessEnd() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     //MARK: - UploadFilesSelectionInteractorOutput
@@ -69,13 +68,13 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     func networkOperationStopped() {
         debugLog("UploadFilesSelectionPresenter networkOperationStopped")
 
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     func addToUploadSuccessed() {
         debugLog("UploadFilesSelectionPresenter addToUploadSuccessed")
         
-        asyncOperationSucces()
+        asyncOperationSuccess()
         if let uploadVC = view as? UploadFilesSelectionViewInput {
             uploadVC.currentVC.navigationController?.viewControllers.first?.dismiss(animated: true)
             uploadVC.currentVC.navigationController?.popViewController(animated: true)

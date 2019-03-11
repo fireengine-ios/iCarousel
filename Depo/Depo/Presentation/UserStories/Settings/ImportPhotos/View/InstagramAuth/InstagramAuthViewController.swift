@@ -73,7 +73,7 @@ class InstagramAuthViewController: ViewController {
     }
     
     private func checkInstagramLogin() {
-        showSpiner()
+        showSpinner()
         if let instagramAccessToken = instagramAccessToken {
             instagramService.checkInstagramLogin(instagramAccessToken: instagramAccessToken) { [weak self] response in
                 switch response {
@@ -83,7 +83,7 @@ class InstagramAuthViewController: ViewController {
                         self?.navigationController?.popViewController(animated: true)
                     }
                 case .failed(let error):
-                    self?.hideSpiner()
+                    self?.hideSpinner()
                     UIApplication.showErrorAlert(message: error.description)
                     self?.instagramAuthCancel()
                 }

@@ -71,11 +71,11 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
     }
     
     func asyncOperationStarted() {
-        outputView()?.showSpiner()
+        outputView()?.showSpinner()
     }
     
     func asyncOperationFinished() {
-        outputView()?.hideSpiner()
+        outputView()?.hideSpinner()
     }
     
     override func outputView() -> Waiting? {

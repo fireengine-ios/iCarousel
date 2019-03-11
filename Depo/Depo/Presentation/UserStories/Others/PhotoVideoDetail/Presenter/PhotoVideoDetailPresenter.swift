@@ -110,7 +110,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func stopCreatingAVAsset() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
 
     func moreButtonPressed(sender: Any?, inAlbumState: Bool, object: Item, selectedIndex: Int) {
@@ -148,7 +148,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch type {
         case .delete, .removeFromAlbum, .removeFromFaceImageAlbum:
-            outputView()?.hideSpiner()
+            outputView()?.hideSpinner()
             interactor.deleteSelectedItem(type: type)
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()
@@ -159,7 +159,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func operationFailed(withType type: ElementTypes) {
-        outputView()?.hideSpiner()
+        outputView()?.hideSpinner()
 
         debugPrint("failed")
     }
@@ -211,7 +211,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func stopModeSelected() { }
     
     override func startAsyncOperation() {
-        outputView()?.showSpiner()
+        outputView()?.showSpinner()
     }
     
     //MARK : BasePresenter

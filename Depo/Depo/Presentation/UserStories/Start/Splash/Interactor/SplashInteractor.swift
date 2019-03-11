@@ -35,7 +35,7 @@ class SplashInteractor: SplashInteractorInput {
                     }, fail: { [weak self] error in
                         let loginError = LoginResponseError(with: error)
                         self?.analyticsService.trackLoginEvent(error: loginError)
-                        self?.output.asyncOperationSucces()
+                        self?.output.asyncOperationSuccess()
                         if error.isServerUnderMaintenance {
                             self?.output.onFailGetAccountInfo(error: error)
                         } else {
@@ -45,7 +45,7 @@ class SplashInteractor: SplashInteractorInput {
                 }, fail: { [weak self] response in
                     let loginError = LoginResponseError(with: response)
                     self?.analyticsService.trackLoginEvent(error: loginError)
-                    self?.output.asyncOperationSucces()
+                    self?.output.asyncOperationSuccess()
                     if response.isServerUnderMaintenance {
                         self?.output.onFailGetAccountInfo(error: response)
                     } else {

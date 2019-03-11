@@ -122,7 +122,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
                     }
                 }
                 
-                self?.output.asyncOperationSucces()
+                self?.output.asyncOperationSuccess()
                 }, fail: { [weak self] fail in
                     self?.output.asyncOperationFail(errorMessage: fail.description)
             })
@@ -136,7 +136,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
                     }
                 }
                 
-                self?.output.asyncOperationSucces()
+                self?.output.asyncOperationSuccess()
                 }, fail: { [weak self] fail in
                     self?.output.asyncOperationFail(errorMessage: fail.description)
             })
@@ -150,7 +150,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
                     }
                 }
                 
-                self?.output.asyncOperationSucces()
+                self?.output.asyncOperationSuccess()
                 }, fail: { [weak self] fail in
                     self?.output.asyncOperationFail(errorMessage: fail.description)
             })
@@ -184,7 +184,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
                 }
                 
                 guard let output = self?.output else { return }
-                output.asyncOperationSucces()
+                output.asyncOperationSuccess()
                 }, fail: { [weak self] in
                     guard let output = self?.output else { return }
                     output.getContentWithFail(errorString: nil)//asyncOperationFail(errorMessage: nil)

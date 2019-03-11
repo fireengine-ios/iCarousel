@@ -93,11 +93,11 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
     }
 
     func startLoading() {
-        showSpiner()
+        showSpinner()
     }
 
     func stopLoading() {
-        hideSpiner()
+        hideSpinner()
     }
        
     // MARK: - Actions

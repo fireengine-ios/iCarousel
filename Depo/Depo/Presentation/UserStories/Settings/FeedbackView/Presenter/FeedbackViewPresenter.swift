@@ -24,7 +24,7 @@ class FeedbackViewPresenter: BasePresenter, FeedbackViewModuleInput, FeedbackVie
     //interactor output
     
     func fail(text: String) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         view.fail(text: text)
     }
     
