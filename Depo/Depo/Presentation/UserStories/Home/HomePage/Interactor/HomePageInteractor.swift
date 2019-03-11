@@ -164,13 +164,6 @@ class HomePageInteractor: HomePageInteractorInput {
                     }
                     
                     if let popUpView = viewForPresent {
-                        let router = RouterVC()
-                        /// Show another popup after the transition because the user did not see it behind it
-                        let isPresentedPopUpUnderQuotaPopUp = router.getViewControllerForPresent()?.presentedViewController is PopUpController
-                        if isPresentedPopUpUnderQuotaPopUp, let popUpView = popUpView as? LargeFullOfQuotaPopUp {
-                            popUpView.delegate = self
-                        }
-                        
                         UIApplication.topController()?.present(popUpView, animated: true, completion: nil)
 //                        self?.output.needPresentPopUp(popUpView: popUpView)
                     }
@@ -198,15 +191,6 @@ class HomePageInteractor: HomePageInteractorInput {
             return
         }
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .quota, eventLabel: .quotaUsed(quotaUsed))
-    }
-    
-}
-
-//MARK: - LargeFullOfQuotaPopUpDelegate
-extension HomePageInteractor: LargeFullOfQuotaPopUpDelegate {
-    
-    func onOpenExpandTap() {
-        output.didOpenExpand()
     }
     
 }
