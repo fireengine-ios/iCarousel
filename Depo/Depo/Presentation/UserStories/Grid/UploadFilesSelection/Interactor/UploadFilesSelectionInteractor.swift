@@ -91,19 +91,16 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
     }
     
     fileprivate func verify(items: [WrapData]) -> String? {
-        if items.isEmpty {
+        guard !items.isEmpty else {
             return TextConstants.uploadFromLifeBoxNoSelectedPhotosError
         }
         
-        let fourGbItems = items.filter { $0.fileSize > NumericConstants.fourGigabytes }
-        if !fourGbItems.isEmpty {
+        guard items.filter({ $0.fileSize > NumericConstants.fourGigabytes }).isEmpty else {
             return TextConstants.syncFourGbVideo
         }
         
         let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes()
-        
-        let filteredItems = items.filter { $0.fileSize < freeDiskSpaceInBytes }
-        if filteredItems.isEmpty {
+        guard !items.filter({ $0.fileSize < freeDiskSpaceInBytes }).isEmpty else {
             return TextConstants.syncNotEnoughMemory
         }
         
