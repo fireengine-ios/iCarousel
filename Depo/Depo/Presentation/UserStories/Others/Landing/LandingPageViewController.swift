@@ -85,16 +85,16 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
     }
     
     private func openAutoSyncIfNeeded() {
-        showSpiner()
+        showSpinner()
         
         autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.hideSpiner()
+            self?.hideSpinner()
             
             if needToOpenAutoSync {
                 self?.goToSyncSettingsView()
             }
         }) { [weak self] error in
-            self?.hideSpiner()
+            self?.hideSpinner()
         }
     }
     

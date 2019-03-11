@@ -31,7 +31,7 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
     }
     
     func storyCreated() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         MenloworksAppEvents.onStoryCreated()
         
         let controller = PopUpController.with(title: TextConstants.pullToRefreshSuccess,
@@ -47,7 +47,7 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
     }
     
     func storyCreatedWithError() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         
         let controller = PopUpController.with(title: TextConstants.errorAlert,
                                               message: TextConstants.createStoryNotCreated,

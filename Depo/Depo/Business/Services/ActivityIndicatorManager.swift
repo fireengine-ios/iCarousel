@@ -43,10 +43,10 @@ protocol ActivityIndicatorManagerDelegate: class {
 
 extension UIViewController: ActivityIndicatorManagerDelegate {
     func showIndicator() {
-        showSpiner()
+        showSpinner()
     }
     
     func hideIndicator() {
-        hideSpiner()
+        hideSpinner()
     }
 }

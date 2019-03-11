@@ -270,7 +270,7 @@ extension InstapickPopUpController: InstagramAuthViewControllerDelegate {
     
     func instagramAuthSuccess() {
         accountService.changeInstapickAllowed(isInstapickAllowed: true) { [weak self] response in
-            self?.hideSpiner()
+            self?.hideSpinner()
             
             switch response {
             case .success(_):

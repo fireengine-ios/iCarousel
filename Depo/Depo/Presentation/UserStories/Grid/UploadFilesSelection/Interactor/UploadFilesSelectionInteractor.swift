@@ -95,14 +95,12 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             return TextConstants.uploadFromLifeBoxNoSelectedPhotosError
         }
         
-        var filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes }
-        guard !filteredItems.isEmpty else {
+        guard items.filter({ $0.fileSize > NumericConstants.fourGigabytes }).isEmpty else {
             return TextConstants.syncFourGbVideo
         }
         
         let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes()
-        filteredItems = filteredItems.filter { $0.fileSize < freeDiskSpaceInBytes }
-        guard !filteredItems.isEmpty else {
+        guard !items.filter({ $0.fileSize < freeDiskSpaceInBytes }).isEmpty else {
             return TextConstants.syncNotEnoughMemory
         }
         

@@ -45,7 +45,7 @@ extension InstapickAlbumSelectionDataSource: UICollectionViewDataSource {
             return
         }
         
-        cell.confireWithWrapperd(wrappedObj: albums[indexPath.item])
+        cell.configureWithWrapper(wrappedObj: albums[indexPath.item])
     }
 }
 

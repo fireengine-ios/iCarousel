@@ -144,7 +144,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                     output.didCountImage(count)
                 }
                 
-                self?.output.asyncOperationSucces()
+                self?.output.asyncOperationSuccess()
                 }, fail: { [weak self] fail in
                     self?.output.asyncOperationFail(errorMessage: fail.description)
             })
@@ -157,7 +157,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                     output.didCountImage(count)
                 }
                 
-                self?.output.asyncOperationSucces()
+                self?.output.asyncOperationSuccess()
                 }, fail: { [weak self] fail in
                     self?.output.asyncOperationFail(errorMessage: fail.description)
             })
@@ -170,7 +170,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                     output.didCountImage(count)
                 }
                 
-                self?.output.asyncOperationSucces()
+                self?.output.asyncOperationSuccess()
                 }, fail: { [weak self] fail in
                     self?.output.asyncOperationFail(errorMessage: fail.description)
             })
@@ -190,7 +190,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
                     output.didReload()
                 }
                 
-                self?.output.asyncOperationSucces()
+                self?.output.asyncOperationSuccess()
                 }, fail: { [weak self] fail in
                     self?.output.asyncOperationFail(errorMessage: fail.description)
             })

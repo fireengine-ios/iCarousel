@@ -125,7 +125,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         if view == nil {
             return
         }
-        asyncOperationSucces()
+        asyncOperationSuccess()
         
         showedSpinner = false
         //items.sorted(by: {$0.creationDate! > $1.creationDate!})
@@ -391,12 +391,12 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     private func showSpinner() {
         showedSpinner = true
-        view.showSpinner()
+        view.showSpiner()
     }
     
     private func hideSpinner() {
         showedSpinner = false
-        view.hideSpinner()
+        view.hideSpiner()
     }
     
     // MARK: Bottom Bar

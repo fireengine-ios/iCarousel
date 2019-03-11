@@ -54,7 +54,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         
     }
     
-    override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
+    override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
         guard let wrappered = wrappedObj as? WrapData, !isAlreadyConfigured else {
             return
         }

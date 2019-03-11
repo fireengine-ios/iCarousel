@@ -174,7 +174,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     }
     
     override func startAsyncOperation() {
-        outputView()?.showSpiner()
+        outputView()?.showSpinner()
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {

@@ -17,7 +17,7 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     }
     
     func requestsFinished() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     func setUserInfo(userInfo: AccountInfoResponse) {
@@ -38,12 +38,12 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     }
 
     private func showSpinner() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         startAsyncOperation()
     }
     
     func loadingIndicatorDismissalRequired() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     func failedWith(error: Error) {

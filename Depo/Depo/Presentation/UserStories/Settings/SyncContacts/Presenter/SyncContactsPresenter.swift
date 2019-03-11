@@ -120,11 +120,11 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     }
     
     func asyncOperationStarted() {
-        outputView()?.showSpiner()
+        outputView()?.showSpinner()
     }
     
     func asyncOperationFinished() {
-        outputView()?.hideSpiner()
+        outputView()?.hideSpinner()
     }
     
     func didObtainUserStatus(isPremiumUser: Bool) {

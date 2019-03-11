@@ -110,15 +110,15 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
         if requred, let captchaVC = router.getCapcha() {
             view.setupCaptchaVC(captchaVC: captchaVC)
         }
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     func captchaRequredFailed() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     func captchaRequredFailed(with message: String) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         view.showErrorTitle(withText: message)
     }
     

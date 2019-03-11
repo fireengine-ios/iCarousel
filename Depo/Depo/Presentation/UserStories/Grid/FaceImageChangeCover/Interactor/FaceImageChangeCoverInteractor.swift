@@ -26,7 +26,7 @@ extension FaceImageChangeCoverInteractor: FaceImageChangeCoverInteractorInput {
         let params = ChangeCoverPhoto(albumUUID: remoteItems.albumUUID,
                                       photoUUID: item.uuid)
         albumService.changeCoverPhoto(parameters: params, success: { [weak self] in
-            self?.output.asyncOperationSucces()
+            self?.output.asyncOperationSuccess()
             if let output = self?.output as? FaceImageChangeCoverInteractorOutput {
                 output.didSetCover(item: item)
             }
