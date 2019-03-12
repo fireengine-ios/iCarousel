@@ -73,10 +73,8 @@ extension PackagesPresenter: PackagesViewOutput {
         }
         switch model.type {
         case .SLCM?:
-            var title: String = ""
-            if let quota = model.quota {
-                title = String(format: TextConstants.turkcellPurchasePopupTitle, quota.bytesString)
-            }
+            let title = String(format: TextConstants.turkcellPurchasePopupTitle, model.quota?.bytesString ?? "")
+
             let price = interactor.getPriceInfo(for: model, accountType: accountType)
             view?.showActivateOfferAlert(with: title, price: price, for: model, planIndex: planIndex)
         case .apple?:
