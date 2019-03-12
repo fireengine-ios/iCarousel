@@ -25,10 +25,10 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="ixG-VK-R5k">
                                     <rect key="frame" x="0.0" y="0.0" width="194" height="164"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLB-yt-rVj">
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="194" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="aLB-yt-rVj">
                                             <rect key="frame" x="0.0" y="0.0" width="194" height="50"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbf-FG-5FA">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbf-FG-5FA">
                                                     <rect key="frame" x="0.0" y="0.0" width="29" height="50"/>
                                                     <accessibility key="accessibilityConfiguration" identifier="title"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -43,12 +43,12 @@
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="nUn-7g-cck" firstAttribute="top" secondItem="aLB-yt-rVj" secondAttribute="top" constant="30" id="E1O-cE-jNt"/>
                                                 <constraint firstItem="nUn-7g-cck" firstAttribute="leading" secondItem="Gbf-FG-5FA" secondAttribute="trailing" constant="8" id="Ri6-14-vke"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nUn-7g-cck" secondAttribute="trailing" id="WVd-mi-Wf7"/>
                                                 <constraint firstItem="Gbf-FG-5FA" firstAttribute="top" secondItem="aLB-yt-rVj" secondAttribute="top" id="ezq-op-m7h"/>
                                                 <constraint firstItem="Gbf-FG-5FA" firstAttribute="leading" secondItem="aLB-yt-rVj" secondAttribute="leading" id="foE-1f-7Jf"/>
+                                                <constraint firstItem="nUn-7g-cck" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aLB-yt-rVj" secondAttribute="top" id="luo-Tg-Gct"/>
                                                 <constraint firstAttribute="bottom" secondItem="Gbf-FG-5FA" secondAttribute="bottom" id="qCa-ei-RvU"/>
                                                 <constraint firstItem="nUn-7g-cck" firstAttribute="bottom" secondItem="Gbf-FG-5FA" secondAttribute="bottom" constant="-4" id="uq3-ho-Kzc"/>
                                             </constraints>
@@ -69,9 +69,6 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <constraints>
-                                <constraint firstItem="dwW-ta-p6I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nUn-7g-cck" secondAttribute="trailing" constant="20" id="dUc-CJ-EcW"/>
-                            </constraints>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MTc-oi-VUN">
                             <rect key="frame" x="0.0" y="178" width="347" height="30"/>

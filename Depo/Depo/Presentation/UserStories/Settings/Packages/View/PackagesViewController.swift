@@ -12,7 +12,7 @@ final class PackagesViewController: BaseViewController {
     var output: PackagesViewOutput!
     
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak private var topStackView: UIStackView!
+    @IBOutlet weak private var cardsStackView: UIStackView!
 
     @IBOutlet weak private var collectionView: ResizableCollectionView!
     @IBOutlet weak private var promoView: PromoView!
@@ -56,7 +56,6 @@ final class PackagesViewController: BaseViewController {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
         output.viewWillAppear()
-        setupStackView(with: output.getStorageCapacity())
     }
     
     private func setupCollectionView() {
@@ -155,35 +154,30 @@ extension PackagesViewController: PackagesViewInput {
     }
 
     func setupStackView(with storageCapacity: Int64) {
-        for view in topStackView.arrangedSubviews {
+        for view in cardsStackView.arrangedSubviews {
             view.removeFromSuperview()
         }
+        
         let isPremium = AuthoritySingleton.shared.isPremium
-
-        let firstView = PackageInfoView.initFromNib()
-        if isPremium {
-            firstView.configure(with: .premiumUser)
-        } else {
-            firstView.configure(with: .standard)
-            let standartUserLabel = UILabel()
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.firstLineHeadIndent = 16
-            let attributedString = NSAttributedString(string: TextConstants.standardUser, attributes: [
-                .font : UIFont.TurkcellSaturaDemFont(size: 16),
-                .foregroundColor : ColorConstants.textGrayColor,
-                .paragraphStyle : paragraphStyle,
-                ])
-            standartUserLabel.attributedText = attributedString
-            topStackView.addArrangedSubview(standartUserLabel)
+        
+        if !isPremium {
+            let premiumBannerCard = PackageInfoView.initFromNib()
+            premiumBannerCard.configure(with: .premiumBanner)
+            output.configureCard(premiumBannerCard)
+            cardsStackView.addArrangedSubview(premiumBannerCard)
         }
 
-        let secondView = PackageInfoView.initFromNib()
-        secondView.configure(with: .myStorage, capacity: storageCapacity)
+        let userDetailPageCard = PackageInfoView.initFromNib()
+        let isMiddleUser = AuthoritySingleton.shared.isMiddleUser
+        let type: ControlPackageType = isPremium ? .premiumUser : (isMiddleUser ? .middleUser : .standardUser)
+        userDetailPageCard.configure(with: type)
+        output.configureCard(userDetailPageCard)
+        cardsStackView.addArrangedSubview(userDetailPageCard)
 
-        output.configureViews([firstView, secondView])
-
-        topStackView.addArrangedSubview(firstView)
-        topStackView.addArrangedSubview(secondView)
+        let myStorageCard = PackageInfoView.initFromNib()
+        myStorageCard.configure(with: .myStorage, capacity: storageCapacity)
+        output.configureCard(myStorageCard)
+        cardsStackView.addArrangedSubview(myStorageCard)
     }
 }
 
