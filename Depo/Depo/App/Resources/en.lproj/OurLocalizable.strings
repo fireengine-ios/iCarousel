@@ -698,7 +698,10 @@
 "leave_premium_membership" = "Leave Premium Membership";
 "Standard User" = "Standard User";
 "Premium User" = "Premium Account";
+"middle_user" = "Middle User";
 "lifebox Premium" = "lifebox Premium";
+"lifebox_middle" = "lifebox Middle";
+"lifebox_standart" = "lifebox Standart";
 "Delete Duplicated Contacts For PremiumTitle" = "To delete all duplicated contacts from phone directory and unlock many more features, become a Premium member!";
 
 /*PremiumBanner*/
@@ -738,6 +741,13 @@
 /*Leave Premium*/
 "leave_premium_premium_description" = "You can use all the advanced features of lifebox with your Premium membership.";
 "leave_premium_cancel_description" = "You will not be able to benefit from Premium privileges if you cancel your membership";
+
+"account_detail_middle_title" = "account_detail_middle_title";
+"account_detail_middle_description" = "account_detail_middle_description";
+
+"account_detail_standart_title" = "account_detail_standart_title";
+"account_detail_standart_description" = "account_detail_standart_description";
+
 "feature_apple_cancel_text" = "To cancel your package, please use iTunes & App Store menu in your device";
 "feature_slcm_cancel_text" = "To cancel your package, Please send an SMS to 2200 with this text: LIFEBOX PREMIUM IPTAL";
 "feature_google_cancel_text" = "To cancel your package, please use Google Play Store";
@@ -866,5 +876,10 @@
 "phone_updated_needs_login" = "You have successfully updated your phone number, please log in with your credentials";
 "server_under_maintenance" = "There is currently a maintenance work on lifebox, please try again later.";
 "unlimited_photopick_analysis" = "Unlimited PhotoPick analysis";
+"store_in_high_quality" = "Store in High Quality";
+"5_photopick_analysis" = "5 PhotoPick analysis";
+"10_photopick_analysis" = "10 PhotoPick analysis";
+"data_package_for_turkcell" = "Data package for Turkcell subscribers";
+"delete_duplicated_contacts" = "Delete duplicated contacts";
 "data_advantage_short" = "Additional Data Advantage";
 "additional_data_advantage" = "Additional Data Advantage";
