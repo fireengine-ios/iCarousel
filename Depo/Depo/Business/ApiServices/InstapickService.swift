@@ -233,11 +233,11 @@ extension InstapickServiceImpl: InstapickService {
                     switch result {
                     case .success(let analyzesCount):
                         /// Popup time should be at least 5 seconds, even if the request returned success earlier
-                        if abs(startAnalysisDate.timeIntervalSince(Date())) > NumericConstants.instapickTimeoutForAnalyzePhotos {
+                        if Date().timeIntervalSince(startAnalysisDate) > NumericConstants.instapickTimeoutForAnalyzePhotos {
                             self?.dismissPopup(popupToDissmiss: popupToDissmiss, analyzesCount: analyzesCount, analysis: analysis)
                         } else {
                             /// If the request came before 5 seconds, then add the remaining time
-                            let missingTimeout = abs(NumericConstants.instapickTimeoutForAnalyzePhotos - abs(startAnalysisDate.timeIntervalSince(Date())))
+                            let missingTimeout = NumericConstants.instapickTimeoutForAnalyzePhotos - Date().timeIntervalSince(startAnalysisDate)
                             DispatchQueue.main.asyncAfter(deadline: .now() + missingTimeout) {
                                 self?.dismissPopup(popupToDissmiss: popupToDissmiss, analyzesCount: analyzesCount, analysis: analysis)
                             }
