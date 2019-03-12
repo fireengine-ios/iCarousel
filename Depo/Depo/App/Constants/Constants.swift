@@ -829,6 +829,8 @@ struct TextConstants {
     static let packageSLCMPaycellCancelText = NSLocalizedString("package_slcm_paycell_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packageDefaultCancelText = NSLocalizedString("package_default_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let turkcellPurchasePopupTitle = NSLocalizedString("turkcell_purchase_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     // MARK: - Navigation bar img names
     
     static let moreBtnImgName = "more"
