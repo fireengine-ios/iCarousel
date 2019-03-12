@@ -738,6 +738,8 @@
 "package_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 
+"turkcell_purchase_popup_title" = "Lifebox %@";
+
 /*Leave Premium*/
 "leave_premium_premium_description" = "You can use all the advanced features of lifebox with your Premium membership.";
 "leave_premium_cancel_description" = "You will not be able to benefit from Premium privileges if you cancel your membership";
@@ -865,6 +867,7 @@
 "free_trial_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Try more free for a limited time!";
 "instapick_under_construction" = "We are making improvement on PhotoPick for a better experience 😉";
 "instapick_unsupported_file_type" = "Photos you have selected are in unsupported format. You can continue PhotoPick experience by selecting other photos.";
+"connection_problem_occured" = "3106 error";
 "work_will_introduced" = "There is currently a maintenance work on lifebox, please try again later.";
 "facebook_remove_connection_warning_title" = "You're about to remove your Facebook connection.";
 "dropbox_remove_connection_warning_title" = "You're about to remove your Dropbox connection.";

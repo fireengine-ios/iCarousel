@@ -45,6 +45,8 @@ final class InstapickServiceImpl {
             text = TextConstants.instapickUnderConstruction
         case "3102":
             text = TextConstants.instapickUnsupportedFileType
+        case "3105":
+            text = TextConstants.instapickConnectionProblemOccured
         default:
             return nil
         }
@@ -221,32 +223,27 @@ extension InstapickServiceImpl: InstapickService {
             }
         }
         
+        let startAnalysisDate = Date()
         startAnalyzes(ids: ids) { [weak self] result in
             let eventLabel: GAEventLabel
-            
+
             switch result {
             case .success(let analysis):
                 eventLabel = .success
                 
-                self?.getAnalyzesCount { result in
+                self?.getAnalyzesCount { [weak self] result in
                     switch result {
                     case .success(let analyzesCount):
-                        
-                        popupToDissmiss.dismiss(animated: true, completion: {
-                            
-                            if let currentController = UIApplication.topController() {
-                                let router = RouterVC()
-                                (router.getViewControllerForPresent() as? AnalyzeHistoryViewController)?.updateAnalyzeCount(with: analyzesCount)
-                                let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
-                                                                                                      analyzesCount: analyzesCount,
-                                                                                                      isShowTabBar: router.getViewControllerForPresent() is BaseFilesGreedViewController)
-                                currentController.present(instapickDetailControlller, animated: true, completion: nil)
-                            } else {
-                                /// nothing to show
-                                assertionFailure()
+                        /// Popup time should be at least 5 seconds, even if the request returned success earlier
+                        if Date().timeIntervalSince(startAnalysisDate) > NumericConstants.instapickTimeoutForAnalyzePhotos {
+                            self?.dismissPopup(popupToDissmiss: popupToDissmiss, analyzesCount: analyzesCount, analysis: analysis)
+                        } else {
+                            /// If the request came before 5 seconds, then add the remaining time
+                            let missingTimeout = NumericConstants.instapickTimeoutForAnalyzePhotos - Date().timeIntervalSince(startAnalysisDate)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + missingTimeout) {
+                                self?.dismissPopup(popupToDissmiss: popupToDissmiss, analyzesCount: analyzesCount, analysis: analysis)
                             }
-                        })
-                        
+                        }
                     case .failed(let error):
                         showError(error)
                     }
@@ -258,5 +255,23 @@ extension InstapickServiceImpl: InstapickService {
             }
             self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .photopickAnalysis, eventLabel: eventLabel)
         }
+    }
+    
+    // MARK: - Utility methods
+    private func dismissPopup(popupToDissmiss: UIViewController, analyzesCount: InstapickAnalyzesCount, analysis: [InstapickAnalyze]) {
+        popupToDissmiss.dismiss(animated: true, completion: {
+            
+            if let currentController = UIApplication.topController() {
+                let router = RouterVC()
+                (router.getViewControllerForPresent() as? AnalyzeHistoryViewController)?.updateAnalyzeCount(with: analyzesCount)
+                let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
+                                                                                      analyzesCount: analyzesCount,
+                                                                                      isShowTabBar: router.getViewControllerForPresent() is BaseFilesGreedViewController)
+                currentController.present(instapickDetailControlller, animated: true, completion: nil)
+            } else {
+                /// nothing to show
+                assertionFailure()
+            }
+        })
     }
 }

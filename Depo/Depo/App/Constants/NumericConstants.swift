@@ -135,6 +135,8 @@ struct NumericConstants {
     static let instaPickDetailsPopUpCornerRadius: CGFloat = 2
     
     static let instaPickImageViewTransitionDuration: TimeInterval = 0.25
+    
+    static let instapickTimeoutForAnalyzePhotos: TimeInterval = 5
 }
 
 struct RequestSizeConstant {
