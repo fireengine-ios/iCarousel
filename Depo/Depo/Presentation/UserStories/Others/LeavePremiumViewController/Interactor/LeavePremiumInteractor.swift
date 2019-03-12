@@ -28,21 +28,6 @@ final class LeavePremiumInteractor {
 
 // MARK: LeavePremiumInteractorInput
 extension LeavePremiumInteractor: LeavePremiumInteractorInput {
-    func getAccountType() {
-        accountService.info(
-            success: { [weak self] response in
-                guard let response = response as? AccountInfoResponse,
-                    let accountType = response.accountType else { return }
-                DispatchQueue.main.async {
-                    self?.output.didLoadAccountType(accountTypeString: accountType)
-                }
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
-                    self?.output.didErrorMessage(with: errorResponse.description)
-                }
-        })
-    }
-    
     func getActiveSubscription() {
         subscriptionsService.activeSubscriptions(success: { [weak self] response in
             guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else {

@@ -17,8 +17,80 @@ enum PremiumListType {
     case unlimitedPhotopick
     case additionalData
     
+    case storeInHQ
+    case fiveAnalysis
+    case tenAnalysis
+    case dataPackage
+    case deleteDublicates
+    
     static var allTypes: [PremiumListType] {
         return [.backup, .removeDuplicate, .faceRecognition, .placeRecognition, .objectRecognition, .unlimitedPhotopick, .additionalData]
+    }
+    
+    static var standardTypes: [PremiumListType] {
+        return [.storeInHQ, .fiveAnalysis, .dataPackage]
+    }
+    
+    static var midTypes: [PremiumListType] {
+        return [.storeInHQ, .deleteDublicates, .faceRecognition, .placeRecognition, .objectRecognition, .tenAnalysis, .additionalData]
+    }
+    
+    var image: UIImage? {
+        switch self {
+        case .backup:
+            return UIImage(named: "backupPremiumIcon")
+        case .removeDuplicate:
+            return UIImage(named: "removeDuplicatePremiumIcon")
+        case .faceRecognition:
+            return UIImage(named: "faceImagePremiumIcon")
+        case .placeRecognition:
+            return UIImage(named: "placeRecognitionPremiumIcon")
+        case .objectRecognition:
+            return UIImage(named: "objectRecognitionPremiumIcon")
+        case .unlimitedPhotopick:
+            return UIImage(named: "unlimitedPhotopickIcon")
+        case .storeInHQ:
+            return UIImage(named: "backupPremiumIcon")
+        case .fiveAnalysis:
+            return UIImage(named: "unlimitedPhotopickIcon")
+        case .tenAnalysis:
+            return UIImage(named: "unlimitedPhotopickIcon")
+        case .dataPackage:
+            return UIImage(named: "additionalDataIcon")
+        case .deleteDublicates:
+            return UIImage(named: "removeDuplicatePremiumIcon")
+        case .additionalData:
+            return UIImage(named: "additionalDataIcon")
+        }
+    }
+    
+    var message: String {
+        switch self {
+            case .backup:
+                return TextConstants.backUpOriginalQuality
+            case .removeDuplicate:
+                return TextConstants.removeDuplicateContacts
+            case .faceRecognition:
+                return TextConstants.faceRecognitionToReach
+            case .placeRecognition:
+                return TextConstants.placeRecognitionToBeam
+            case .objectRecognition:
+                return TextConstants.objectRecognitionToRemember
+            case .unlimitedPhotopick:
+                return TextConstants.unlimitedPhotopickAnalysis
+            case .storeInHQ:
+                return TextConstants.storeInHighQuality
+            case .fiveAnalysis:
+                return TextConstants.fiveAnalysis
+            case .tenAnalysis:
+                return TextConstants.tenAnalysis
+            case .dataPackage:
+                return TextConstants.dataPackageForTurkcell
+            case .deleteDublicates:
+                return TextConstants.deleteDuplicatedContacts
+            case .additionalData:
+                return TextConstants.additionalDataAdvantage
+        }
     }
 }
 
