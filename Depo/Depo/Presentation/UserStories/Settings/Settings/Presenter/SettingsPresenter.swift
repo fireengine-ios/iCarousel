@@ -22,6 +22,10 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         return AuthoritySingleton.shared.isPremium
     }
     
+    var isMiddleUser: Bool {
+        return AuthoritySingleton.shared.isMiddleUser
+    }
+    
     func viewIsReady() {
         interactor.trackScreen()
     }
