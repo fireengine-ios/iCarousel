@@ -104,7 +104,7 @@ final class InstaPickRoutingService {
             switch result {
             case .success(let analysisCount):
                 DispatchQueue.toMain {
-                    if analysisCount.left > 0 {
+                    if analysisCount.left > 0 || analysisCount.isFree == true {
                         self?.prepareToOpenController()
                     } else {
                         self?.didOpenHistoryPopUp()
