@@ -47,6 +47,8 @@ final class AuthoritySingleton {
         }
     }
     
+    var isMiddleUser: Bool = false
+    
     var deleteDublicate: Bool = false
     var faceRecognition: Bool = false
     
@@ -107,20 +109,16 @@ final class AuthoritySingleton {
         UserDefaults.standard.set(isLoginAlready, forKey: Keys.isLoginAlready)
     }
     
-    func refreshStatus(premium: Bool, dublicates: Bool, faces: Bool) {
-        faceRecognition = faces
-        deleteDublicate = dublicates
-        isPremium = premium
-    }
-    
     func refreshStatus(with storage: PermissionsResponse) {
         isPremium = storage.hasPermissionFor(.premiumUser)
         deleteDublicate = storage.hasPermissionFor(.deleteDublicate)
         faceRecognition = storage.hasPermissionFor(.faceRecognition)
+        isMiddleUser = storage.hasPermissionFor(.middleUser)
     }
     
     func clear() {
         isPremium = false
+        isMiddleUser = false
         faceRecognition = false
         deleteDublicate = false
     }
