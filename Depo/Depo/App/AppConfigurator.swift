@@ -178,7 +178,8 @@ final class AppConfigurator {
         func setupMenloworks() {
             DispatchQueue.toMain {
                 MPush.setAppKey("TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd")
-                MPush.setServerURL("https://turkcell.menloworks.com")
+                MPush.setServerURL("https://api.xtremepush.com")
+                MPush.setShouldShowDebugLogs(true)//FIXME: remove this line when test is finished.
                 
                 
                 #if DEBUG
