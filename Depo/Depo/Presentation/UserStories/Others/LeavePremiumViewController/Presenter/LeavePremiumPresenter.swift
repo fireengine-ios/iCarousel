@@ -24,7 +24,7 @@ enum LeavePremiumType {
             types = PremiumListType.allTypes
         }
         
-        return isTurkcell ? types : types.filter { $0 == .additionalData }
+        return isTurkcell ? types : types.filter { $0 != .additionalData }
     }
     
     var title: String {
