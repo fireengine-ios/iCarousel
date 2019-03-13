@@ -13,7 +13,7 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     var router: UserInfoSubViewRouterInput!
     
     var isPremiumUser: Bool {
-        return AuthoritySingleton.shared.isPremium ?? false
+        return AuthoritySingleton.shared.accountType.isPremium
     }
     
     func requestsFinished() {

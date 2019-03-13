@@ -19,7 +19,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     var isPremiumUser: Bool {
-        return AuthoritySingleton.shared.isPremium
+        return AuthoritySingleton.shared.accountType.isPremium
     }
     
     func viewIsReady() {

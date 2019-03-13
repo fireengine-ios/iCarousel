@@ -157,7 +157,7 @@ extension PackagesViewController: PackagesViewInput {
             view.removeFromSuperview()
         }
         
-        let isPremium = AuthoritySingleton.shared.isPremium
+        let isPremium = AuthoritySingleton.shared.accountType.isPremium
         
         if !isPremium {
             let premiumBannerCard = PackageInfoView.initFromNib()
@@ -167,7 +167,7 @@ extension PackagesViewController: PackagesViewInput {
         }
 
         let userDetailPageCard = PackageInfoView.initFromNib()
-        let isMiddleUser = AuthoritySingleton.shared.isMiddleUser
+        let isMiddleUser = AuthoritySingleton.shared.accountType.isMiddle
         let type: ControlPackageType = isPremium ? .premiumUser : (isMiddleUser ? .middleUser : .standardUser)
         userDetailPageCard.configure(with: type)
         output.configureCard(userDetailPageCard)
