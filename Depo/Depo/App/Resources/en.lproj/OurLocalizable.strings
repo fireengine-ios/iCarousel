@@ -781,6 +781,7 @@
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
 
 /*AnalyzeHistoryController*/
+"instapick_see_details" = "See Details";
 "InstaPick" = "PhotoPick";
 "package_albanian_cancel_text" = "Albanian quota cancel text";
 "feature_albanian_cancel_text" = "You can continue to use Premium features for free since you are a ALBtelecom user";

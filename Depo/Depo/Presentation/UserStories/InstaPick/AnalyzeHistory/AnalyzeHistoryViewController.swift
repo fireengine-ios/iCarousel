@@ -162,7 +162,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                                          message: TextConstants.analyzeHistoryPopupMessage,
                                          image: .custom(UIImage(named: "popup_info")),
                                          firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.analyzeHistoryPopupButton,
+                                         secondButtonTitle: TextConstants.analyzeHistorySeeDetails,
                                          secondAction: { [weak self] controller in
                                             controller.close {
                                                 self?.onPurchase()

@@ -67,7 +67,7 @@ final class InstapickAnalysisCell: UICollectionViewCell {
     
     @IBOutlet private weak var purchaseButton: UIButton! {
         willSet {
-            newValue.setTitle(TextConstants.purchase, for: .normal)
+            newValue.setTitle(TextConstants.instaPickButtonNoAnalysis, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
             newValue.clipsToBounds = true
@@ -82,7 +82,7 @@ final class InstapickAnalysisCell: UICollectionViewCell {
     
     @IBOutlet private weak var seeDetailsButton: UIButton! {
         willSet {
-            newValue.setTitle(TextConstants.seeDetails, for: .normal)
+            newValue.setTitle(TextConstants.analyzeHistorySeeDetails, for: .normal)
             newValue.setTitleColor(UIColor.lrTealishTwo, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         }

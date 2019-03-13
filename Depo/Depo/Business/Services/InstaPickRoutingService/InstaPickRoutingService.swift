@@ -164,7 +164,7 @@ final class InstaPickRoutingService {
                                          message: TextConstants.analyzeHistoryPopupMessage,
                                          image: .custom(UIImage(named: "popup_info")),
                                          firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.analyzeHistoryPopupButton,
+                                         secondButtonTitle: TextConstants.instaPickButtonNoAnalysis,
                                          firstAction: {  controller in
                                             controller.close()
                                          },
