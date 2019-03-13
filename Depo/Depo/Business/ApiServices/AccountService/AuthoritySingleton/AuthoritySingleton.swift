@@ -93,7 +93,7 @@ final class AuthoritySingleton {
     
     var isShowPopupAboutPremiumAfterRegistration: Bool {
         let userID = SingletonStorage.shared.uniqueUserID
-        return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterRegistration + userID) && accountType.isPremium
+        return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterRegistration + userID) && !accountType.isPremium
     }
     
     func setShowPopupAboutPremiumAfterRegistration(isShow: Bool) {
@@ -113,7 +113,7 @@ final class AuthoritySingleton {
     
     var isShowPopupAboutPremiumAfterSync: Bool {
         let userID = SingletonStorage.shared.uniqueUserID
-        return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterStartSync + userID) && accountType.isPremium
+        return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterStartSync + userID) && !accountType.isPremium
     }
     
     func setShowPopupAboutPremiumAfterSync(isShow: Bool) {
