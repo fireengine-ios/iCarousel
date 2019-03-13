@@ -16,11 +16,11 @@ final class AuthoritySingleton {
         case standart
         
         var isPremium: Bool {
-            return self == AccountType.premium
+            return self == .premium
         }
         
         var isMiddle: Bool {
-            return self == AccountType.middle
+            return self == .middle
         }
         
         static func convert(from response: PermissionsResponse) -> AccountType {
@@ -63,10 +63,9 @@ final class AuthoritySingleton {
     
     var accountType: AccountType = .standart {
         willSet {
-            let currentType = accountType
             let newType = newValue
 
-            let isLosePremium = currentType != newType
+            let isLosePremium = accountType != newType
             if isLosePremium {
                 let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
                 UserDefaults.standard.set(isLosePremium, forKey: Keys.isLosePremiumStatus + userID)
