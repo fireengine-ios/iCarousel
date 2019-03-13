@@ -214,7 +214,7 @@ final class MediaItemOperationsService {
             return
         }
 
-        let predicateForRemoteFiles = NSPredicate(format: "(trimmedLocalFileID == %@ OR md5Value == %@) AND isLocalItemValue == false)", uuid, md5)
+        let predicateForRemoteFiles = NSPredicate(format: "(trimmedLocalFileID == %@ OR md5Value == %@) AND isLocalItemValue == false", uuid, md5)
         
         executeRequest(predicate: predicateForRemoteFiles, context: context) { alreadySavedRemoteItems in
             alreadySavedRemoteItems.forEach({ savedItem in
