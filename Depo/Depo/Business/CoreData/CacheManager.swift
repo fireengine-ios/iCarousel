@@ -21,17 +21,20 @@ final class CacheManager {///adding files TO DB // managing cache
     
     //TODO: place  blocks here?
 //    var remotePageAdded: VoidHandler?
+    var prepareDBCompletion: VoidHandler?
     
     func actualizeCache(completion: VoidHandler?) {
         MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
             if isNoRemotes {
                 self?.startAppendingAllRemotes(completion: { [weak self] in
                     self?.startAppendingAllLocals(completion: {
+                        self?.prepareDBCompletion?()
                         completion?()
                     })
                 })
             } else {
                 self?.startAppendingAllLocals(completion: {
+                    self?.prepareDBCompletion?()
                     completion?()
                 })
             }

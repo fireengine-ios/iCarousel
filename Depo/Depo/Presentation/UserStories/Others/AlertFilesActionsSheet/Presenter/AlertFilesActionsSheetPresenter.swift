@@ -195,15 +195,16 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     filteredActionTypes.remove(at: removeFromFavorites)
                 }
                 
-                MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems, duplicatesCallBack: { [weak self] items in
-                    let localDuplicates = items
-                    if localDuplicates.isEmpty, let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
-                        filteredActionTypes.remove(at: index)
-                    }
-                    self?.semaphore.signal()
-                })
-                self?.semaphore.wait()
-                
+                if let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
+                    MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems, duplicatesCallBack: { [weak self] items in
+                        let localDuplicates = items
+                        if localDuplicates.isEmpty {
+                            filteredActionTypes.remove(at: index)
+                        }
+                        self?.semaphore.signal()
+                    })
+                    self?.semaphore.wait()
+                }
             } else {
                 if let printIndex = filteredActionTypes.index(of: .print) {
                     filteredActionTypes.remove(at: printIndex)
