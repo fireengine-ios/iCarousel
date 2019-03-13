@@ -157,7 +157,7 @@ extension PackagesViewController: PackagesViewInput {
         for view in topStackView.arrangedSubviews {
             view.removeFromSuperview()
         }
-        let isPremium = AuthoritySingleton.shared.isPremium
+        let isPremium = AuthoritySingleton.shared.accountType.isPremium
 
         let firstView = PackageInfoView.initFromNib()
         if isPremium {
