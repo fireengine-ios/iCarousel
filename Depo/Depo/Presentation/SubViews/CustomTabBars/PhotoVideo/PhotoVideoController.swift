@@ -297,12 +297,15 @@ extension PhotoVideoController: UIScrollViewDelegate {
             }
             
             let category: QuickScrollCategory = self.isPhoto ? .photos : .videos
+            let fileType: FileType = self.isPhoto ? .image : .video
             self.quickScrollService.requestListOfDateRange(startDate: max(firstDate, lastDate), endDate: min(firstDate, lastDate), category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
                 switch response {
                 case .success(let quckScrollResponse):
-                    MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, completion: {
-                        debugPrint("appended and updated")
-                    })
+                    self.dispatchQueue.async {
+                        MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileType: fileType, completion: {
+                            debugPrint("appended and updated")
+                        })
+                    }
                 case .failed(let error):
                     ///may be canceled request
                     break///TODO: popup here?

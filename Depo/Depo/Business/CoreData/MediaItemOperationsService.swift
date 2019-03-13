@@ -275,24 +275,24 @@ final class MediaItemOperationsService {
         //WARNING:- DO we need notify ItemOperationManager here???
     }
 
-    func updateRemoteItems(remoteItems: [WrapData], completion: @escaping VoidHandler) {
+    func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, completion: @escaping VoidHandler) {
         guard let firstRemote = remoteItems.first, let lastRemote = remoteItems.last else {
             completion()
             return
         }
         
-        var remoteIds = remoteItems.map { $0.id ?? 0 }
+        let remoteIds = remoteItems.compactMap { $0.id }
         
         let context = CoreDataStack.default.newChildBackgroundContext
         
-        let inDateRangePredicate = NSPredicate(format:"isLocalItemValue = false AND (creationDateValue <= %@ AND creationDateValue >= %@)", firstRemote.metaDate as NSDate, lastRemote.metaDate as NSDate)
+        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND (creationDateValue <= %@ AND creationDateValue >= %@)", fileType.valueForCoreDataMapping(), firstRemote.metaDate as NSDate, lastRemote.metaDate as NSDate)
         
         executeRequest(predicate: inDateRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
-            
+
             debugPrint("--- remotes in date range count \(remoteItems.count)")
             debugPrint("--- count of already saved in date range \(inDateRangeItems.count)")
             
-            let inIdRangePredicate = NSPredicate(format:"isLocalItemValue = false AND (idValue IN %@) AND NOT (idValue IN %@)", remoteIds, inDateRangeItems.map { $0.idValue })
+            let inIdRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND (idValue IN %@) AND NOT (idValue IN %@)", fileType.valueForCoreDataMapping(), remoteIds, inDateRangeItems.compactMap { $0.idValue })
             
             self.executeRequest(predicate: inIdRangePredicate, context: context, mediaItemsCallBack: { inIdRangeItems in
                 debugPrint("--- count of already saved in id range \(inIdRangeItems.count)")

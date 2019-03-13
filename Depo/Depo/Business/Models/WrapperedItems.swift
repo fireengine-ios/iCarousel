@@ -804,7 +804,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isFolder = remote.folder
         syncStatus = .synced
         setSyncStatusesAsSyncedForCurrentUser()
-        creationDate = remote.createdDate
         
         parent = remote.parent
         

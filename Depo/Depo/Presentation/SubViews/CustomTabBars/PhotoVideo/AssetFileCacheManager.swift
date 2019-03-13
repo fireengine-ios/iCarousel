@@ -48,7 +48,7 @@ class AssetFileCacheManager {
         let (addedRects, removedRects) = differencesBetweenRects(previousPreheatRect, preheatRect)
         let addedAssets = addedRects
             .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
-            .flatMap { (indexPath) -> PHAsset? in
+            .compactMap { (indexPath) -> PHAsset? in
                 var asset: PHAsset?
                 
                 if let item = itemProviderClosure(indexPath) {
@@ -60,7 +60,7 @@ class AssetFileCacheManager {
         }
         let removedAssets = removedRects
             .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
-            .flatMap {  (indexPath) -> PHAsset? in
+            .compactMap {  (indexPath) -> PHAsset? in
                 var asset: PHAsset?
                 if let item = itemProviderClosure(indexPath) {
                     if case let PathForItem.localMediaContent(local) = item.patchToPreview {

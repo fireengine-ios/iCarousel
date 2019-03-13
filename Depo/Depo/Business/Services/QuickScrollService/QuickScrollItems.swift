@@ -120,7 +120,7 @@ final class QuickScrollRangeListItem {
         size = json[sizeJsonKey].intValue
         category = QuickScrollCategory.transfromFromString(text: json[categotyJsonKey].stringValue)
         let itemsJson: [JSON] = json[filesJsonKey].array ?? []
-        files = itemsJson.map{WrapData(searchResponse: $0)}
+        files = itemsJson.map { WrapData(searchResponse: $0) }
         debugPrint("all created")
     }
 
