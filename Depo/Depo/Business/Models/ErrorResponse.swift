@@ -17,7 +17,7 @@ enum ErrorResponse {
 }
 
 enum ErrorResponseText {
-    static let serviceAnavailable = "\"503 Service Unavailable\""
+    static let serviceAnavailable = "503 Service Unavailable"
 }
 
 extension ErrorResponse {
@@ -40,7 +40,7 @@ extension ErrorResponse {
     }
     
     var isServerUnderMaintenance: Bool {
-        if case ErrorResponse.string(let error) = self, error == ErrorResponseText.serviceAnavailable {
+        if case ErrorResponse.string(let error) = self, error.contains(ErrorResponseText.serviceAnavailable) {
             return true
         } else if case ErrorResponse.httpCode(503) = self {
             return true
