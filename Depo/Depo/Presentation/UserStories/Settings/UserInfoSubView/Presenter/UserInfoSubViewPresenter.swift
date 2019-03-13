@@ -16,6 +16,10 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
         return AuthoritySingleton.shared.accountType.isPremium
     }
     
+    var isMiddleUser: Bool {
+        return AuthoritySingleton.shared.accountType.isMiddle
+    }
+    
     func requestsFinished() {
         asyncOperationSuccess()
     }

@@ -46,6 +46,8 @@ final class InstapickServiceImpl {
         case "3102":
             text = TextConstants.instapickUnsupportedFileType
         case "3105":
+            text = TextConstants.instapickNoAvailableUnitsLeft
+        case "3106":
             text = TextConstants.instapickConnectionProblemOccured
         default:
             return nil

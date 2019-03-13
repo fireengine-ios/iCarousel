@@ -93,7 +93,14 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         premiumButton.isHidden = output.isPremiumUser
         premiumView.isHidden = output.isPremiumUser
 
-        statusLabel.text = output.isPremiumUser ? TextConstants.premiumUser : TextConstants.standardUser
+        if output.isPremiumUser {
+            statusLabel.text = TextConstants.premiumUser
+        } else if output.isMiddleUser {
+            statusLabel.text = TextConstants.midUser
+        } else {
+            statusLabel.text = TextConstants.standardUser
+        }
+        
         statusLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
         statusLabel.textColor = ColorConstants.textGrayColor
     }
