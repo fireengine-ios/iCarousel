@@ -27,7 +27,6 @@ final class PackagePremiumView: UIView, NibInit {
     private func setup() {
         titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
         titleLabel.textColor = ColorConstants.darkText
-        titleLabel.adjustsFontSizeToFitWidth()
 
         messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         messageLabel.textColor = ColorConstants.textGrayColor

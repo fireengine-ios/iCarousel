@@ -111,10 +111,8 @@ extension PackagesPresenter: PackagesViewOutput {
         router.openTermsOfUse()
     }
 
-    func configureViews(_ views: [PackageInfoView]) {
-        for view in views {
-            view.delegate = self
-        }
+    func configureCard(_ card: PackageInfoView) {
+        card.delegate = self
     }
 
 }
@@ -268,9 +266,18 @@ extension PackagesPresenter: PackageInfoViewDelegate {
         switch type {
         case .myStorage:
             router.openMyStorage(storageUsage: storageUsage)
-        case .premiumUser:
-            router.openLeavePremium()
-        case .standard: break
+        case .premiumUser, .standardUser, .middleUser:
+            let leavePremiumType: LeavePremiumType
+            if type == .standardUser {
+                leavePremiumType = .standard
+            } else if type == .middleUser {
+                leavePremiumType = .middle
+            } else {
+                leavePremiumType = .premium
+            }
+            router.openLeavePremium(type: leavePremiumType)
+        case .premiumBanner:
+            break
         }
     }
 }

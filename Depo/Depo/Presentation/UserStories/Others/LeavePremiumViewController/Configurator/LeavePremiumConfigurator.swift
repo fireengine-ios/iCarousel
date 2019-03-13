@@ -10,11 +10,11 @@ import Foundation
 
 final class LeavePremiumModuleConfigurator {
     
-    func configure(viewController: LeavePremiumViewController, title: String) {
+    func configure(viewController: LeavePremiumViewController, type: LeavePremiumType) {
         let router = LeavePremiumRouter()
         router.view = viewController
         
-        let presenter = LeavePremiumPresenter(title: title)
+        let presenter = LeavePremiumPresenter(type: type)
         presenter.view = viewController
         presenter.router = router
         

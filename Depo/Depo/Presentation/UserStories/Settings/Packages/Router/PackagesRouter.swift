@@ -18,8 +18,8 @@ extension PackagesRouter: PackagesRouterInput {
         router.pushViewController(viewController: router.termsOfUseScreen)
     }
 
-    func openLeavePremium() {
-        let vc = router.leavePremium(title: TextConstants.lifeboxPremium)
+    func openLeavePremium(type: LeavePremiumType) {
+        let vc = router.leavePremium(type: type)
         router.pushViewController(viewController: vc)
     }
     

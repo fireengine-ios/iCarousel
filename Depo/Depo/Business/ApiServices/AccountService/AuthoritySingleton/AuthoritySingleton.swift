@@ -16,11 +16,11 @@ final class AuthoritySingleton {
         case standart
         
         var isPremium: Bool {
-            return self == AccountType.premium
+            return self == .premium
         }
         
         var isMiddle: Bool {
-            return self == AccountType.middle
+            return self == .middle
         }
         
         static func convert(from response: PermissionsResponse) -> AccountType {
@@ -33,10 +33,6 @@ final class AuthoritySingleton {
             }
         }
     }
-    
-    static let shared: AuthoritySingleton = AuthoritySingleton()
-    
-    private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     private enum Keys {
         //Took from StorageVars to get userID instead of creating storageVars
@@ -52,28 +48,31 @@ final class AuthoritySingleton {
         static let isNewAppVersionKey = "isNewAppVersionKey"
     }
     
-    var currentAppVersion: String? {
-        get { return UserDefaults.standard.string(forKey: Keys.currentAppVersionKey) }
-        set { UserDefaults.standard.set(newValue, forKey: Keys.currentAppVersionKey) }
-    }
+    static let shared: AuthoritySingleton = AuthoritySingleton()
+    
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     var isNewAppVersion: Bool = false
     var deleteDublicate: Bool = false
     var faceRecognition: Bool = false
     
+    var currentAppVersion: String? {
+        get { return UserDefaults.standard.string(forKey: Keys.currentAppVersionKey) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.currentAppVersionKey) }
+    }
+    
     var accountType: AccountType = .standart {
         willSet {
-            let currentType = accountType
             let newType = newValue
-            
-            let isLosePremium = currentType != newType
+
+            let isLosePremium = accountType != newType
             if isLosePremium {
                 let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
                 UserDefaults.standard.set(isLosePremium, forKey: Keys.isLosePremiumStatus + userID)
             }
         }
     }
-
+    
     var isBannerShowedForPremium: Bool {
         let userID = SingletonStorage.shared.uniqueUserID
         return UserDefaults.standard.bool(forKey: Keys.isBannerShowedForPremium + userID)
@@ -86,6 +85,7 @@ final class AuthoritySingleton {
     
     func hideBannerForSecondLogin() {
         let userID = SingletonStorage.shared.uniqueUserID
+        
         let isHideBanner = accountType.isPremium
         UserDefaults.standard.set(isHideBanner, forKey: Keys.isBannerShowedForPremium + userID)
     }
@@ -131,12 +131,14 @@ final class AuthoritySingleton {
     func refreshStatus(with storage: PermissionsResponse) {
         deleteDublicate = storage.hasPermissionFor(.deleteDublicate)
         faceRecognition = storage.hasPermissionFor(.faceRecognition)
+        
         accountType = AccountType.convert(from: storage)
     }
     
     func clear() {
         faceRecognition = false
         deleteDublicate = false
+        
         accountType = .standart
     }
     

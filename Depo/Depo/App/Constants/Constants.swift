@@ -967,6 +967,11 @@ struct TextConstants {
     static let placeRecognitionToBeam = NSLocalizedString("Place Recognition to beam you up to the memories", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let objectRecognitionToRemember = NSLocalizedString("Object Recognition to remember with things you love", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let unlimitedPhotopickAnalysis = NSLocalizedString("unlimited_photopick_analysis", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let storeInHighQuality = NSLocalizedString("store_in_high_quality", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fiveAnalysis = NSLocalizedString("5_photopick_analysis", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tenAnalysis = NSLocalizedString("10_photopick_analysis", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let dataPackageForTurkcell = NSLocalizedString("data_package_for_turkcell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteDuplicatedContacts = NSLocalizedString("delete_duplicated_contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let additionalDataAdvantage = NSLocalizedString("additional_data_advantage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let becomePremium = NSLocalizedString("Become Premium", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let becomePremiumMember = NSLocalizedString("Become Premium Member!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -974,7 +979,10 @@ struct TextConstants {
     static let standardUser = NSLocalizedString("Standard User", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let midUser = NSLocalizedString("mid_user", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let premiumUser = NSLocalizedString("Premium User", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let middleUser = NSLocalizedString("middle_user", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let lifeboxPremium = NSLocalizedString("lifebox Premium", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lifeboxMiddle = NSLocalizedString("lifebox_middle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lifeboxStandart = NSLocalizedString("lifebox_standart", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteDuplicatedContactsForPremiumTitle = NSLocalizedString("Delete Duplicated Contacts For PremiumTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: - PremiumBanner
@@ -995,6 +1003,12 @@ struct TextConstants {
     static let leavePremiumPremiumDescription = NSLocalizedString("leave_premium_premium_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let leavePremiumCancelDescription = NSLocalizedString("leave_premium_cancel_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
+    static let accountDetailMiddleTitle = NSLocalizedString("account_detail_middle_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accountDetailMiddleDescription = NSLocalizedString("account_detail_middle_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let accountDetailStandartTitle = NSLocalizedString("account_detail_standart_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accountDetailStandartDescription = NSLocalizedString("account_detail_standart_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let featureAppleCancelText = NSLocalizedString("feature_apple_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let featureSLCMCancelText = NSLocalizedString("feature_slcm_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let featureGoogleCancelText = NSLocalizedString("feature_google_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
