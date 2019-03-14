@@ -59,6 +59,17 @@ enum LeavePremiumType {
             return TextConstants.leavePremiumCancelDescription
         }
     }
+    
+    var buttonTitle: String {
+        switch self {
+        case .standard:
+            return ""
+        case .middle:
+            return TextConstants.leaveMiddleMember
+        case .premium:
+            return TextConstants.leavePremiumMember
+        }
+    }
 }
 
 final class LeavePremiumPresenter {

@@ -976,6 +976,7 @@ struct TextConstants {
     static let becomePremium = NSLocalizedString("Become Premium", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let becomePremiumMember = NSLocalizedString("Become Premium Member!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let leavePremiumMember = NSLocalizedString("leave_premium_membership", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let leaveMiddleMember = NSLocalizedString("leave_middle_membership", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let standardUser = NSLocalizedString("Standard User", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let midUser = NSLocalizedString("mid_user", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let premiumUser = NSLocalizedString("Premium User", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
