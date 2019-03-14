@@ -54,6 +54,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         
         configure()
         reloadData()
+        trackScreen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +66,12 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     func updateAnalyzeCount(with analyzesCount: InstapickAnalyzesCount) {
         self.dataSource.reloadCards(with: analyzesCount)
+    }
+    
+    private func trackScreen() {
+        let analyticsService: AnalyticsService = factory.resolve()
+        analyticsService.logScreen(screen: .photoPickHistory)
+        analyticsService.trackDimentionsEveryClickGA(screen: .photoPickHistory)
     }
     
     private func configure() {
