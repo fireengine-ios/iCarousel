@@ -40,7 +40,7 @@ extension ErrorResponse {
     }
     
     var isServerUnderMaintenance: Bool {
-        if case ErrorResponse.string(let error) = self, error.contains(ErrorResponseText.serviceAnavailable) {
+        if case ErrorResponse.string(let error) = self, error.contains(ErrorResponseText.serviceAnavailable) || error.contains(TextConstants.errorServerUnderMaintenance) {
             return true
         } else if case ErrorResponse.httpCode(503) = self {
             return true
