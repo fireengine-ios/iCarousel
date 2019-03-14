@@ -141,6 +141,10 @@ enum AnalyticsAppScreens {
     ///Misc
     case nativeGalleryShare
     case welcomePage(Int)
+    ///PhotoPick
+    case photoPickHistory
+    case photoPickPhotoSelection
+    case photoPickAnalysisDetail
     
     var name: String {
         switch self {
@@ -240,6 +244,13 @@ enum AnalyticsAppScreens {
         ///Misc
         case .nativeGalleryShare:
             return "Native Share from Gallery"
+        ///PhotoPick
+        case .photoPickHistory:
+            return "PhotoPick History"
+        case .photoPickPhotoSelection:
+            return "PhotoPick Photo Selection"
+        case .photoPickAnalysisDetail:
+            return "PhotoPick Analysis Detail"
         }
     }
 }

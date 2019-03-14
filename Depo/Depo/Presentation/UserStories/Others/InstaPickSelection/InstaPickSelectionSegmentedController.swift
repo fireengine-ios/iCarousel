@@ -104,6 +104,13 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         super.viewDidLoad()
         
         setupScreenWithSelectingLimit(selectingLimit)
+        trackScreen()
+    }
+    
+    private func trackScreen() {
+        let analyticsService: AnalyticsService = factory.resolve()
+        analyticsService.logScreen(screen: .photoPickPhotoSelection)
+        analyticsService.trackDimentionsEveryClickGA(screen: .photoPickPhotoSelection)
     }
     
     /// one time called
