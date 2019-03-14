@@ -153,11 +153,17 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
                     #if DEBUG
                         if let text = String(data: data, encoding: .utf8) {
                             fail?(.string(text))
+                        } else if httpResponse.statusCode == 503 {
+                            fail?(.string(TextConstants.errorServerUnderMaintenance))
                         } else {
                             fail?(.string(TextConstants.errorServer))
                         }
                     #else
+                    if httpResponse.statusCode == 503 {
+                        fail?(.string(TextConstants.errorServerUnderMaintenance))
+                    } else {
                         fail?(.string(TextConstants.errorServer))
+                    }
                     #endif
                 }
             } else {
