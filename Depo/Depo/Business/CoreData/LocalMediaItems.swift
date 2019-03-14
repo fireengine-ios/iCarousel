@@ -129,7 +129,7 @@ extension CoreDataStack {
             return
         }
         
-        print("LOCAL_ITEMS: \(items.count) local files to add")
+        debugLog("LOCAL_ITEMS: \(items.count) local files to add")
         let start = Date()
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
         privateQueue.async { [weak self] in
