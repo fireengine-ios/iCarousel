@@ -24,7 +24,7 @@ enum LeavePremiumType {
             types = PremiumListType.allTypes
         }
         
-        return isTurkcell ? types : types.filter { $0 != .additionalData }
+        return isTurkcell ? types : types.filter { return !($0 == .additionalData || $0 == .dataPackage) }
     }
     
     var title: String {
@@ -57,6 +57,17 @@ enum LeavePremiumType {
             return TextConstants.accountDetailMiddleDescription
         case .premium:
             return TextConstants.leavePremiumCancelDescription
+        }
+    }
+    
+    var buttonTitle: String {
+        switch self {
+        case .standard:
+            return ""
+        case .middle:
+            return TextConstants.leaveMiddleMember
+        case .premium:
+            return TextConstants.leavePremiumMember
         }
     }
 }

@@ -38,8 +38,10 @@ final class LeavePremiumView: UIView {
     // MARK: Utility methods(Public)
     func configure(with price: String, type: LeavePremiumType, hideButton: Bool = false) {
         priceLabel.text = price
-        leavePremiumButton.isHidden = hideButton
         
+        leavePremiumButton.isHidden = hideButton
+        leavePremiumButton.setTitle(type.buttonTitle, for: .normal)
+
         let types = type.listTypes(isTurkcell: SingletonStorage.shared.isTurkcellUser)
         
         for premiumListView in premiumListViews.enumerated() {
@@ -66,8 +68,6 @@ final class LeavePremiumView: UIView {
     }
     
     private func setupDesign() {
-        leavePremiumButton.setTitle(TextConstants.leavePremiumMember, for: .normal)
-
         leavePremiumButton.setTitleColor(.white, for: .normal)
         leavePremiumButton.backgroundColor = ColorConstants.darkBlueColor
         leavePremiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
