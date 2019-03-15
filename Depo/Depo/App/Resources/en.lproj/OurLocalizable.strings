@@ -696,14 +696,9 @@
 "Become Premium" = "Become Premium";
 "Become Premium Member!" = "Become Premium Member!";
 "leave_premium_membership" = "Leave Premium Membership";
-"leave_middle_membership" = "Leave Middle Membership";
 "Standard User" = "Standard User";
-"mid_user" = "Mid User";
 "Premium User" = "Premium Account";
-"middle_user" = "Middle User";
 "lifebox Premium" = "lifebox Premium";
-"lifebox_middle" = "lifebox Middle";
-"lifebox_standart" = "lifebox Standart";
 "Delete Duplicated Contacts For PremiumTitle" = "To delete all duplicated contacts from phone directory and unlock many more features, become a Premium member!";
 
 /*PremiumBanner*/
@@ -740,18 +735,9 @@
 "package_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 
-"turkcell_purchase_popup_title" = "Lifebox %@";
-
 /*Leave Premium*/
 "leave_premium_premium_description" = "You can use all the advanced features of lifebox with your Premium membership.";
 "leave_premium_cancel_description" = "You will not be able to benefit from Premium privileges if you cancel your membership";
-
-"account_detail_middle_title" = "account_detail_middle_title";
-"account_detail_middle_description" = "account_detail_middle_description";
-
-"account_detail_standart_title" = "account_detail_standart_title";
-"account_detail_standart_description" = "account_detail_standart_description";
-
 "feature_apple_cancel_text" = "To cancel your package, please use iTunes & App Store menu in your device";
 "feature_slcm_cancel_text" = "To cancel your package, Please send an SMS to 2200 with this text: LIFEBOX PREMIUM IPTAL";
 "feature_google_cancel_text" = "To cancel your package, please use Google Play Store";
@@ -792,13 +778,12 @@
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
 
 /*AnalyzeHistoryController*/
-"instapick_see_details" = "See Details";
 "InstaPick" = "PhotoPick";
 "package_albanian_cancel_text" = "Albanian quota cancel text";
 "feature_albanian_cancel_text" = "You can continue to use Premium features for free since you are a ALBtelecom user";
 "no_analyses_left_title" = "No Analyzes Left";
 "no_analyses_left_message" = "Don't be sad, you can still purchase new package to analyze your photos!";
-"no_analyses_left_button" = "Purchase PhotoPick";
+"no_analyses_left_button" = "Become Premium";
 "analyze_history_empty_title" = "Didn't you start analyzing your photos yet?";
 "analyze_history_empty_subtitle" = "Start analyzing now to find out which photo gets the highest rank and share on social media.";
 "analyze_history_analyze_left" = "Analyses Left";
@@ -870,8 +855,6 @@
 "free_trial_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Try more free for a limited time!";
 "instapick_under_construction" = "We are making improvement on PhotoPick for a better experience 😉";
 "instapick_unsupported_file_type" = "Photos you have selected are in unsupported format. You can continue PhotoPick experience by selecting other photos.";
-"instapick_no_available_units_left" = "3105 error";
-"connection_problem_occured" = "3106 error";
 "work_will_introduced" = "There is currently a maintenance work on lifebox, please try again later.";
 "facebook_remove_connection_warning_title" = "You're about to remove your Facebook connection.";
 "dropbox_remove_connection_warning_title" = "You're about to remove your Dropbox connection.";
@@ -883,9 +866,25 @@
 "phone_updated_needs_login" = "You have successfully updated your phone number, please log in with your credentials";
 "server_under_maintenance" = "There is currently a maintenance work on lifebox, please try again later.";
 "unlimited_photopick_analysis" = "Unlimited PhotoPick analysis";
+"data_advantage_short" = "Additional Data Advantage";
+"additional_data_advantage" = "Additional Data Advantage";
+"connection_problem_occured" = "3106 error";
+"turkcell_purchase_popup_title" = "%@";
+"mid_user" = "Middle User";
+"instapick_no_available_units_left" = "3105 error";
+"middle_user" = "Middle User";
+"lifebox_middle" = "Middle User";
+"lifebox_standart" = "Standard User";
+"account_detail_middle_title" = "account_detail_middle_title";
+"account_detail_middle_description" = "account_detail_middle_description";
+"account_detail_standart_title" = "account_detail_standart_title";
+"account_detail_standart_description" = "account_detail_standart_description";
+
+/*AnalyzeHistoryController*/
+"instapick_see_details" = "Become Premium";
 "store_in_high_quality" = "Store in High Quality";
 "5_photopick_analysis" = "5 PhotoPick analysis";
 "10_photopick_analysis" = "10 PhotoPick analysis";
 "data_package_for_turkcell" = "Data package for Turkcell subscribers";
-"delete_duplicated_contacts" = "Delete duplicated contacts";
-"additional_data_advantage" = "Additional Data Advantage";
+"delete_duplicated_contacts" = "Remove Duplicate Contacts from Your Directory";
+"leave_middle_membership" = "Leave Middle Membership";
