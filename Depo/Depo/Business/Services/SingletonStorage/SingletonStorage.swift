@@ -21,7 +21,7 @@ class SingletonStorage {
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
     
-    func getAccountInfoForUser(forceReload: Bool = false, success:@escaping (AccountInfoResponse) -> Void, fail: @escaping (ErrorResponse) -> Void ) {
+    func getAccountInfoForUser(forceReload: Bool = false, success:@escaping (AccountInfoResponse) -> Void, fail: @escaping FailResponse ) {
         if let info = accountInfo, !forceReload {
             success(info)
         } else {
@@ -55,7 +55,7 @@ class SingletonStorage {
         return accountInfo?.projectID ?? ""
     }
     
-    func getUniqueUserID(success:@escaping ((_ unigueUserID: String) -> Void), fail:@escaping VoidHandler) {
+    func getUniqueUserID(success:@escaping ((_ unigueUserID: String) -> Void), fail: @escaping FailResponse) {
         if !uniqueUserID.isEmpty {
             success(uniqueUserID)
             return
@@ -63,9 +63,7 @@ class SingletonStorage {
         
         getAccountInfoForUser(success: { info in
             success(info.projectID ?? "")
-        }) { error in
-            fail()
-        }
+        }, fail: fail)
     }
     
     private func getFaceImageRecognitionSettingsForUser(completion: @escaping (_ result: SettingsInfoPermissionsResponse) -> Void, fail: @escaping (ErrorResponse) -> Void) {

@@ -218,7 +218,7 @@ final class FilterPhotoCard: BaseView {
 //        bottomButton.isEnabled = false
         LocalMediaStorage.default.saveFilteredImage(filteredImage: image, originalImage: originalItemUnwraped, success: { [weak self] in
             self?.cardType = .display
-        }, fail: {
+        }, fail: { _ in
             ///PH access popup
             LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: true, completion: { granted,_  in
                 debugPrint("granted \(granted)")
