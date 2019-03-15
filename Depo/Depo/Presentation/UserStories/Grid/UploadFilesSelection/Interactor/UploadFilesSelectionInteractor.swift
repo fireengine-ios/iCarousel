@@ -76,6 +76,8 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             return
         }
         
+        uploadOutput?.addToUploadStarted()
+        
         UploadService.default.uploadFileList(items: uploadItems, uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
             debugLog("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList success")
 
@@ -87,7 +89,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             DispatchQueue.main.async {
                 self?.uploadOutput?.addToUploadFailedWith(errorMessage: errorResponse.description)
             }
-            }, returnedUploadOperation: {_ in})
+        }, returnedUploadOperation: {_ in})
     }
     
     fileprivate func verify(items: [WrapData]) -> String? {
@@ -95,15 +97,16 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             return TextConstants.uploadFromLifeBoxNoSelectedPhotosError
         }
         
-        guard items.filter({ $0.fileSize > NumericConstants.fourGigabytes }).isEmpty else {
+        var filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes }
+        guard !filteredItems.isEmpty else {
             return TextConstants.syncFourGbVideo
         }
         
         let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes()
-        guard !items.filter({ $0.fileSize < freeDiskSpaceInBytes }).isEmpty else {
+        filteredItems = filteredItems.filter { $0.fileSize < freeDiskSpaceInBytes }
+        guard !filteredItems.isEmpty else {
             return TextConstants.syncNotEnoughMemory
         }
-        
         return nil
     }
 }
