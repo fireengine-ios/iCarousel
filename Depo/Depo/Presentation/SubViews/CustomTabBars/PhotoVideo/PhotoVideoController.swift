@@ -217,10 +217,10 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             return
         }
         let mediaItem = dataSource.object(at: indexPath)
-        guard let creationDate = mediaItem.creationDateValue as Date? else {
+        guard let date = mediaItem.sortingDate as Date? else {
             return
         }
-        let title = creationDate.getDateInTextForCollectionViewHeader()
+        let title = date.getDateInTextForCollectionViewHeader()
         scrollBarManager.scrollBar.setText(title)
     }
 }
