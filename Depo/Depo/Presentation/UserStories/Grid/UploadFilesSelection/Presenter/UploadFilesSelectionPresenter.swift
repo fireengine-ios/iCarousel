@@ -6,8 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelectionModuleInput, UploadFilesSelectionViewOutput, UploadFilesSelectionInteractorOutput {
-    
+class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelectionModuleInput, UploadFilesSelectionViewOutput {
+
     init() {
         super.init(sortedRule: .timeDownWithoutSection)
     }
@@ -23,7 +23,7 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     override func viewWillAppear() {
-        
+        super.viewWillAppear()
     }
     
     override func reloadData() {
@@ -62,23 +62,27 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     override func getContentWithSuccessEnd() {
         asyncOperationSuccess()
     }
+}
     
-    //MARK: - UploadFilesSelectionInteractorOutput
-    
+//MARK: - UploadFilesSelectionInteractorOutput
+
+extension UploadFilesSelectionPresenter: UploadFilesSelectionInteractorOutput {
     func networkOperationStopped() {
         debugLog("UploadFilesSelectionPresenter networkOperationStopped")
-
+        
         asyncOperationSuccess()
+    }
+    
+    func addToUploadStarted() {
+        debugLog("UploadFilesSelectionPresenter addToUploadStarted")
+        
+        router.showBack()
     }
     
     func addToUploadSuccessed() {
         debugLog("UploadFilesSelectionPresenter addToUploadSuccessed")
         
         asyncOperationSuccess()
-        if let uploadVC = view as? UploadFilesSelectionViewInput {
-            uploadVC.currentVC.navigationController?.viewControllers.first?.dismiss(animated: true)
-            uploadVC.currentVC.navigationController?.popViewController(animated: true)
-        }
     }
     
     func addToUploadFailedWith(errorMessage: String) {
@@ -86,5 +90,4 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
         
         asyncOperationFail(errorMessage: errorMessage)
     }
-    
 }
