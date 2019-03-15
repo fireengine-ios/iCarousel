@@ -62,14 +62,14 @@ final class PhotoVideoDataSource: NSObject {
     private lazy var fetchedResultsController: NSFetchedResultsController<MediaItem> = {
         let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
         
-        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.creationDateValue), ascending: false)
+        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.sortingDate), ascending: false)
         let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.idValue), ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
         
         if Device.isIpad {
-            fetchRequest.fetchBatchSize = 50
+            fetchRequest.fetchBatchSize = 64
         } else {
-            fetchRequest.fetchBatchSize = 20
+            fetchRequest.fetchBatchSize = 32
         }
         
         //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]

@@ -214,7 +214,7 @@ final class MediaItemOperationsService {
             return
         }
 
-        let predicateForRemoteFiles = NSPredicate(format: "(trimmedLocalFileID == %@ OR md5Value == %@) AND isLocalItemValue == false)", uuid, md5)
+        let predicateForRemoteFiles = NSPredicate(format: "(trimmedLocalFileID == %@ OR md5Value == %@) AND isLocalItemValue == false", uuid, md5)
         
         executeRequest(predicate: predicateForRemoteFiles, context: context) { alreadySavedRemoteItems in
             alreadySavedRemoteItems.forEach({ savedItem in
@@ -289,7 +289,7 @@ final class MediaItemOperationsService {
         
         let context = CoreDataStack.default.newChildBackgroundContext
         
-        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND (creationDateValue <= %@ AND creationDateValue >= %@)", fileType.valueForCoreDataMapping(), firstRemote.metaDate as NSDate, lastRemote.metaDate as NSDate)
+        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@)", fileType.valueForCoreDataMapping(), firstRemote.metaDate as NSDate, lastRemote.metaDate as NSDate)
         
         executeRequest(predicate: inDateRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
 

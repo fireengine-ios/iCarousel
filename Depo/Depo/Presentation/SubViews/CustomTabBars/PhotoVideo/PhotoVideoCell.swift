@@ -95,7 +95,7 @@ final class PhotoVideoCell: UICollectionViewCell {
                     }
                 }
             }
-        case let .remoteUrl(url):
+        case .remoteUrl(_):
             if let meta = wraped.metaData {
                 setImage(with: meta)
             }

@@ -1091,9 +1091,9 @@ extension WrapData {
         return uuid == wrapData.uuid &&
             id == wrapData.id &&
             name == wrapData.name &&
-            creationDate == wrapData.creationDate &&
-            lastModifiDate == wrapData.lastModifiDate &&
             md5 == wrapData.md5 &&
+            metaDate == wrapData.metaDate &&
+            lastModifiDate == wrapData.lastModifiDate &&
             metaData == wrapData.metaData
     }
 }

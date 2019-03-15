@@ -324,9 +324,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
             return Date.distantFuture
         }
         
-        let item = WrapData(mediaItem: dataSource.object(at: objectIndex))
-    
-        return item.metaDate
+        return dataSource.object(at: objectIndex).sortingDate as Date?
     }
     
 }

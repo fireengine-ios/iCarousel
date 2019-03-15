@@ -16,6 +16,7 @@ extension MediaItem {
         return NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
     }
 
+    @NSManaged public var sortingDate: NSDate?
     @NSManaged public var creationDateValue: NSDate?
     @NSManaged public var favoritesValue: Bool
     @NSManaged public var fileSizeValue: Int64
@@ -47,13 +48,13 @@ extension MediaItem {
 
 extension MediaItem {
     public var albumsUUIDs: [String] {
-        return self.albums?.flatMap({ album -> String? in
+        return self.albums?.compactMap({ album -> String? in
             (album as? MediaItemsAlbum)?.uuid
         }) ?? []
     }
     
     public var syncStatusesArray: [String] {
-        return objectSyncStatus?.allObjects.flatMap({ syncStatus -> String? in
+        return objectSyncStatus?.allObjects.compactMap({ syncStatus -> String? in
             (syncStatus as? MediaItemsObjectSyncStatus)?.userID
         }) ?? []
     }

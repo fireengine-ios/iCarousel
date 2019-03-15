@@ -35,7 +35,7 @@ final class PhotoVideoScrollBarManager {
     
         // TODO: getCellSizeForList must be called in main queue. for a while it is woking without it
         //        let cellHeight = delegate?.getCellSizeForGreed().height ?? 0
-        let dates = allItems.flatMap({ $0 }).flatMap({ $0.metaDate })
+        let dates = allItems.compactMap { $0.metaDate }
         scrollBar.updateLayout(by: cellHeight)
         yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
         

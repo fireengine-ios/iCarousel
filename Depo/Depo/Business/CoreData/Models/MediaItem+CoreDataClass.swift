@@ -31,9 +31,9 @@ public class MediaItem: NSManagedObject {
         syncStatusValue = wrapData.syncStatus.valueForCoreDataMapping()
         favoritesValue = wrapData.favorites
         isLocalItemValue = wrapData.isLocalItem
-        creationDateValue = wrapData.metaDate as NSDate?//wrapData.creationDate as NSDate?
-        ///need to discuss that, we might use creation date after all.
+        creationDateValue = wrapData.creationDate as NSDate?
         lastModifiDateValue = wrapData.lastModifiDate as NSDate?
+        sortingDate = (wrapData.metaData?.takenDate ?? wrapData.creationDate) as NSDate?
         urlToFileValue = wrapData.urlToFile?.absoluteString
         
         isFolder = wrapData.isFolder ?? false
@@ -67,13 +67,10 @@ public class MediaItem: NSManagedObject {
         
         if !isLocalItemValue, let md5 = md5Value, let trimmedID = trimmedLocalFileID,
             (md5.isEmpty || trimmedID.isEmpty) {
-            debugPrint("!!! REMOTE ITEM MD5 EMPY \(md5Value) AND LOCAL ID \(trimmedLocalFileID)")
+            debugPrint("!!! REMOTE ITEM MD5 EMPTY \(md5Value) AND LOCAL ID \(trimmedLocalFileID)")
         }
         
-        let dateValue = self.creationDateValue as Date?
-        
-        monthValue = dateValue?.getDateForSortingOfCollectionView()
-        
+        monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
         let metaData = MediaItemsMetaData(metadata: wrapData.metaData,
                                           context: context)
         self.metadata = metaData
@@ -98,7 +95,7 @@ public class MediaItem: NSManagedObject {
     }
     
     private func convertToMediaItems(syncStatuses: [String], context: NSManagedObjectContext) -> NSSet {
-        return NSSet(array: syncStatuses.flatMap { MediaItemsObjectSyncStatus(userID: $0, context: context) })
+        return NSSet(array: syncStatuses.compactMap { MediaItemsObjectSyncStatus(userID: $0, context: context) })
     }
 
     var wrapedObject: WrapData {
@@ -114,8 +111,10 @@ public class MediaItem: NSManagedObject {
         
         metadata?.copyInfo(metaData: item.metaData)
         
-        creationDateValue = item.metaDate as NSDate?
+        creationDateValue = item.creationDate as NSDate?
         lastModifiDateValue = item.lastModifiDate as NSDate?
+        sortingDate = (item.metaData?.takenDate ?? item.creationDate) as NSDate?
+        monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
         urlToFileValue = item.tmpDownloadUrl?.absoluteString
         
         switch item.patchToPreview {
@@ -129,7 +128,6 @@ public class MediaItem: NSManagedObject {
         
         trimmedLocalFileID = item.getTrimmedLocalID()
         parent = item.parent
-        monthValue = item.creationDate?.getDateForSortingOfCollectionView()
         md5Value = item.md5
         isFolder = item.isFolder ?? false
         favoritesValue = item.favorites

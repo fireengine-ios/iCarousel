@@ -29,7 +29,7 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
     
     func setup(with object: MediaItem) {
         let title: String
-        if let date = object.creationDateValue as Date? {
+        if let date = object.sortingDate as Date? {
             title = date.getDateInTextForCollectionViewHeader()
         } else {
             title = TextConstants.photosVideosViewMissingDatesHeaderText
