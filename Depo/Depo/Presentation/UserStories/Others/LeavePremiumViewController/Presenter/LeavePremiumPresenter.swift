@@ -23,8 +23,9 @@ enum LeavePremiumType {
         case .premium:
             types = PremiumListType.allTypes
         }
-        
-        return isTurkcell ? types : types.filter { return !($0 == .additionalData || $0 == .dataPackage) }
+        ///FE-953 Deleting "Extra Data Package" icon and text
+//        return isTurkcell ? types : types.filter { return !($0 == .additionalData || $0 == .dataPackage) }
+        return types
     }
     
     var title: String {

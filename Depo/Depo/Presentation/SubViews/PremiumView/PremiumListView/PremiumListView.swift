@@ -24,15 +24,21 @@ enum PremiumListType {
     case deleteDublicates
     
     static var allTypes: [PremiumListType] {
-        return [.backup, .removeDuplicate, .faceRecognition, .placeRecognition, .objectRecognition, .unlimitedPhotopick, .additionalData]
+        ///FE-953 Deleting "Extra Data Package" icon and text
+//        return [.backup, .removeDuplicate, .faceRecognition, .placeRecognition, .objectRecognition, .unlimitedPhotopick, .additionalData]
+        return [.backup, .removeDuplicate, .faceRecognition, .placeRecognition, .objectRecognition, .unlimitedPhotopick]
     }
     
     static var standardTypes: [PremiumListType] {
-        return [.storeInHQ, .fiveAnalysis, .dataPackage]
+        ///FE-953 Deleting "Extra Data Package" icon and text
+//        return [.storeInHQ, .fiveAnalysis, .dataPackage]
+        return [.storeInHQ, .fiveAnalysis]
     }
     
     static var midTypes: [PremiumListType] {
-        return [.storeInHQ, .deleteDublicates, .faceRecognition, .placeRecognition, .objectRecognition, .tenAnalysis, .additionalData]
+        ///FE-953 Deleting "Extra Data Package" icon and text
+//        return [.storeInHQ, .deleteDublicates, .faceRecognition, .placeRecognition, .objectRecognition, .tenAnalysis, .additionalData]
+        return [.storeInHQ, .deleteDublicates, .faceRecognition, .placeRecognition, .objectRecognition, .tenAnalysis]
     }
     
     var image: UIImage? {

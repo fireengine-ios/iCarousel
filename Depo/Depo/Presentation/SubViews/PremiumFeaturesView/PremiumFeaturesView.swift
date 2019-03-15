@@ -59,19 +59,23 @@ final class PremiumFeaturesView: UIView {
             }
         }
         
-        private let isTurkcell: Bool
+        ///FE-953 Deleting "Extra Data Package" icon and text
+//        private let isTurkcell: Bool
 
         var all: [Feature] {
-            if isTurkcell {
-                return [.backUp, .contacts, .places, .face, .object, .photoPick, .dataAdvantage]
-            } else {
-                return [.backUp, .contacts, .places, .face, .object, .photoPick]
-            }
+            ///FE-953 Deleting "Extra Data Package" icon and text
+//            if isTurkcell {
+//                return [.backUp, .contacts, .places, .face, .object, .photoPick, .dataAdvantage]
+//            } else {
+//                return [.backUp, .contacts, .places, .face, .object, .photoPick]
+//            }
+            return [.backUp, .contacts, .places, .face, .object, .photoPick]
         }
         
-        init() {
-            self.isTurkcell = SingletonStorage.shared.accountInfo?.accountType == AccountType.turkcell.rawValue
-        }
+        ///FE-953 Deleting "Extra Data Package" icon and text
+//        init() {
+//            self.isTurkcell = SingletonStorage.shared.accountInfo?.accountType == AccountType.turkcell.rawValue
+//        }
     }
     
     internal var currentFeatureIndex: Int = 0 {
