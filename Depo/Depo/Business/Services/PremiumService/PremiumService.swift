@@ -25,27 +25,24 @@ final class PremiumService {
     func showPopupForNewUserIfNeeded() {
         DispatchQueue.toMain {
             if AuthoritySingleton.shared.isShowPopupAboutPremiumAfterSync {
-                if self.router.getViewControllerForPresent()?.presentedViewController == nil {
-                    AuthoritySingleton.shared.setShowPopupAboutPremiumAfterSync(isShow: false)
+                AuthoritySingleton.shared.setShowPopupAboutPremiumAfterSync(isShow: false)
                     
-                    let controller = PopUpController.with(title: nil,
-                                                          message: TextConstants.syncPopup,
-                                                          image: .none,
-                                                          firstButtonTitle: TextConstants.noForUpgrade,
-                                                          secondButtonTitle: TextConstants.yesForUpgrade,
-                                                          secondAction: { [weak self] vc in
-                                                            vc.dismiss(animated: true, completion: {
-                                                                self?.moveToPremium()
-                                                            })
-                    })
+                let controller = PopUpController.with(title: nil,
+                                                        message: TextConstants.syncPopup,
+                                                        image: .none,
+                                                        firstButtonTitle: TextConstants.noForUpgrade,
+                                                        secondButtonTitle: TextConstants.yesForUpgrade,
+                                                        secondAction: { [weak self] vc in
+                                                        vc.dismiss(animated: true, completion: {
+                                                            self?.moveToPremium()
+                                                        })
+                })
                     
-                    UIApplication.topController()?.present(controller, animated: true, completion: nil)
-                } else if !AuthoritySingleton.shared.isShowPopupAboutPremiumAfterRegistration {
-                    AuthoritySingleton.shared.setShowPopupAboutPremiumAfterSync(isShow: false)
-                }
+                UIApplication.topController()?.present(controller, animated: true, completion: nil)
             }
         }
     }
+    
     
     // MARK: Utility methods
     @objc private func onAutoSyncStatusDidChange(notification: NSNotification) {
