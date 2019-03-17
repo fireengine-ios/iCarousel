@@ -274,8 +274,7 @@ class AuthenticationService: BaseRequestService {
         storageVars.currentUserID = user.login
         
         let params: [String: Any] = ["username": user.login,
-                                     "password": user.password,
-                                     "deviceInfo": Device.deviceInfo]
+                                     "password": user.password] + Device.deviceInfo
         
         SessionManager.customDefault.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
                 .responseString { [weak self] response in
