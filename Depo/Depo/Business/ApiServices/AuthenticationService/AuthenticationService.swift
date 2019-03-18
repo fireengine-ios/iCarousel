@@ -274,7 +274,8 @@ class AuthenticationService: BaseRequestService {
         storageVars.currentUserID = user.login
         
         let params: [String: Any] = ["username": user.login,
-                                     "password": user.password] + Device.deviceInfo
+                                     "password": user.password,
+                                     LbRequestkeys.deviceInfo: Device.deviceInfo]
         
         SessionManager.customDefault.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
                 .responseString { [weak self] response in
@@ -483,7 +484,7 @@ class AuthenticationService: BaseRequestService {
     func checkEmptyEmail(handler: @escaping ResponseBool) {
         let headers = [HeaderConstant.RememberMeToken: tokenStorage.refreshToken ?? ""]
         let refreshAccessTokenUrl = RouteRequests.baseUrl +/ RouteRequests.authificationByRememberMe
-        let params: [String: Any] = [LbRequestkeys.deviceInfo: Device.deviceInfo]
+        let params: [String: Any] = Device.deviceInfo//[LbRequestkeys.deviceInfo: Device.deviceInfo]
         
         sessionManagerWithoutToken
             .request(refreshAccessTokenUrl, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)
