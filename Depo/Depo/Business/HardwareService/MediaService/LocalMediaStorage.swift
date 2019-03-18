@@ -446,11 +446,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             if status {
                 if let album = album, let assetPlaceholder = assetPlaceholder {
                     self?.add(asset: assetPlaceholder.localIdentifier, to: album)
+                    success?()
                 }
                 if let item = item, let assetIdentifier = assetPlaceholder?.localIdentifier {
-                    self?.merge(asset: assetIdentifier, with: item)
+                    self?.merge(asset: assetIdentifier, with: item, success: success, fail: fail)
                 }
-                success?()
             } else {
                 fail?(.error(error!))
             }
@@ -464,34 +464,28 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return queue
     }()
     
-    func saveFilteredImage(filteredImage: UIImage, originalImage: Item, success: VoidHandler?, fail: VoidHandler?) {
+    func saveFilteredImage(filteredImage: UIImage, originalImage: Item, success: VoidHandler?, fail: FailResponse?) {
         guard photoLibraryIsAvailible() else {
-            fail?()
+            fail?(.failResponse(nil))
             return
         }
         var localTempoID = ""
         PHPhotoLibrary.shared().performChanges({
             let request = PHAssetChangeRequest.creationRequestForAsset(from: filteredImage)
             guard let localID = request.placeholderForCreatedAsset?.localIdentifier else {
-                fail?()
+                fail?(.failResponse(nil))
                 return
             }
             localTempoID = localID
         }, completionHandler: { [weak self] status, error in
-            self?.merge(asset: localTempoID, with: originalImage, isFilteredItem: true,
-            success: {
-                success?()
-            }, fail: {
-                fail?()
-            })
-            
+            self?.merge(asset: localTempoID, with: originalImage, isFilteredItem: true, success: success, fail: fail)
         })
         
     }
     
-    private func merge(asset assetIdentifier: String, with item: WrapData, isFilteredItem: Bool = false, success: VoidHandler? = nil, fail: VoidHandler? = nil) {
+    private func merge(asset assetIdentifier: String, with item: WrapData, isFilteredItem: Bool = false, success: VoidHandler? = nil, fail: FailResponse? = nil) {
         guard photoLibraryIsAvailible() else {
-            fail?()
+            fail?(.failResponse(nil))
             return
         }
         if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
@@ -504,14 +498,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 let mediaItem: MediaItem
                 if let existingMediaItem = fetchedMediaItems.first {//(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
                     mediaItem = existingMediaItem
+                    mediaItem.trimmedLocalFileID = wrapData.getTrimmedLocalID()
+                    mediaItem.md5Value = wrapData.md5
                 } else {
                     mediaItem = MediaItem(wrapData: wrapData, context: context)
                 }
                 
                 mediaItem.localFileID = assetIdentifier
-                mediaItem.trimmedLocalFileID = item.getTrimmedLocalID() //assetIdentifier.components(separatedBy: "/").first ?? assetIdentifier
                 mediaItem.syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
-                mediaItem.md5Value = item.md5
                 
                 if isFilteredItem {
                     mediaItem.isFiltered = true
@@ -526,14 +520,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     context.perform {
                         mediaItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
                         userObjectSyncStatus.insert(MediaItemsObjectSyncStatus(userID: currentUserID, context: context))
-                        MediaItemOperationsService.shared.updateRelatedRemoteItems(mediaItem: mediaItem, context: context)
-                        CoreDataStack.default.saveDataForContext(context: context, savedCallBack: {
-                            success?()
+                        MediaItemOperationsService.shared.updateRelatedRemoteItems(mediaItem: mediaItem, context: context, completion: {
+                            CoreDataStack.default.saveDataForContext(context: context, savedCallBack: {
+                                success?()
+                            })
                         })
                     }
-                }, fail: {
-                    fail?()
-                    /// nothing, status not going to be saved
+                }, fail: { error in
+                    fail?(error)
                 })
             }
         }

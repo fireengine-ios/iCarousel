@@ -62,9 +62,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                 UserDefaults.standard.synchronize()
                 yesWeNeed()
             }
-        }) {
-            
-        }
+        }, fail: { _ in })
     }
     
     func showIfNeedLocationPermissionAllert() {

@@ -70,12 +70,12 @@ final class MediaItemOperationsService {
         getLocalDuplicates { [weak self] localItems in
             self?.privateQueue.async {
                 var array = [WrapData]()
-                let uuids = Set(remoteItems.map {$0.uuid})
+                let uuids = Set(remoteItems.map {$0.getTrimmedLocalID()})
                 
                 for localItem in localItems {
                     autoreleasepool {
                         if let relatedRemotes = localItem.relatedRemotes as? Set<MediaItem> {
-                            let relatedUuids = relatedRemotes.compactMap {$0.uuid}
+                            let relatedUuids = relatedRemotes.compactMap {$0.trimmedLocalFileID}
                             if !uuids.intersection(relatedUuids).isEmpty {
                                 array.append(WrapData(mediaItem: localItem))
                             }
@@ -209,7 +209,7 @@ final class MediaItemOperationsService {
         }
     }
     
-    func updateRelatedRemoteItems(mediaItem: MediaItem, context: NSManagedObjectContext) {
+    func updateRelatedRemoteItems(mediaItem: MediaItem, context: NSManagedObjectContext, completion: @escaping VoidHandler) {
         guard let uuid = mediaItem.trimmedLocalFileID, let md5 = mediaItem.md5Value else {
             return
         }
@@ -217,9 +217,13 @@ final class MediaItemOperationsService {
         let predicateForRemoteFiles = NSPredicate(format: "(trimmedLocalFileID == %@ OR md5Value == %@) AND isLocalItemValue == false", uuid, md5)
         
         executeRequest(predicate: predicateForRemoteFiles, context: context) { alreadySavedRemoteItems in
-            alreadySavedRemoteItems.forEach({ savedItem in
-                savedItem.relatedLocal = mediaItem
-            })
+            context.performAndWait {
+                alreadySavedRemoteItems.forEach({ savedItem in
+                    savedItem.relatedLocal = mediaItem
+                    mediaItem.addToRelatedRemotes(savedItem)
+                })
+                completion()
+            }
         }
     }
     
