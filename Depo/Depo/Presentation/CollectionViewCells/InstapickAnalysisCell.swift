@@ -65,16 +65,17 @@ final class InstapickAnalysisCell: UICollectionViewCell {
     
     @IBOutlet private weak var purchaseView: UIView!
     
-    @IBOutlet private weak var purchaseButton: UIButton! {
+    @IBOutlet private weak var purchaseButton: InsetsButton! {
         willSet {
+            newValue.insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
             newValue.setTitle(TextConstants.instaPickButtonNoAnalysis, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            newValue.backgroundColor = .clear
             newValue.clipsToBounds = true
             newValue.layer.cornerRadius = newValue.bounds.height * 0.5
             newValue.layer.borderColor = UIColor.white.cgColor
             newValue.layer.borderWidth = 1
-            newValue.backgroundColor = .clear
         }
     }
     
