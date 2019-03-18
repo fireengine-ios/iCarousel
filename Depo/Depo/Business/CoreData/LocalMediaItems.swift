@@ -52,8 +52,17 @@ extension CoreDataStack {
                 }
             }
             LocalMediaStorage.default.assetsCache.append(list: newAssets)
+            let context = self.newChildBackgroundContext
             
-            self.save(items: newAssets, context: self.newChildBackgroundContext, completion: completion)
+            let alreadySavedMediaItems = self.executeRequest(predicate: NSPredicate(format: " (\(#keyPath(MediaItem.isLocalItemValue)) == true) AND (\(#keyPath(MediaItem.localFileID)) IN %@)", newAssets.map{$0.localIdentifier}), context: context)
+            
+            debugLog("new assets to add without trimming \(newAssets.count)")
+            alreadySavedMediaItems.forEach { alreadySavedItem in
+                newAssets.removeAll(where: {  $0.localIdentifier == alreadySavedItem.localFileID })
+            }
+            debugLog("new assets to add after trimming \(newAssets.count)")
+                
+            self.save(items: newAssets, context: context, completion: completion)
         }
     }
     
@@ -129,7 +138,7 @@ extension CoreDataStack {
             return
         }
         
-        print("LOCAL_ITEMS: \(items.count) local files to add")
+        debugLog("LOCAL_ITEMS: \(items.count) local files to add")
         let start = Date()
         let nextItemsToSave = Array(items.prefix(NumericConstants.numberOfLocalItemsOnPage))
         privateQueue.async { [weak self] in
