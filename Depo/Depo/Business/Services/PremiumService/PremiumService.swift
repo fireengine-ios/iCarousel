@@ -24,20 +24,22 @@ final class PremiumService {
     
     func showPopupForNewUserIfNeeded() {
         DispatchQueue.toMain {
-            if AuthoritySingleton.shared.isShowPopupAboutPremiumAfterSync {
+            if AuthoritySingleton.shared.isShowPopupAboutPremiumAfterSync,
+                !(UIApplication.topController()?.isKind(of: UploadFilesSelectionViewController.self) ?? true) {
+                
                 AuthoritySingleton.shared.setShowPopupAboutPremiumAfterSync(isShow: false)
-                    
+                
                 let controller = PopUpController.with(title: nil,
-                                                        message: TextConstants.syncPopup,
-                                                        image: .none,
-                                                        firstButtonTitle: TextConstants.noForUpgrade,
-                                                        secondButtonTitle: TextConstants.yesForUpgrade,
-                                                        secondAction: { [weak self] vc in
+                                                      message: TextConstants.syncPopup,
+                                                      image: .none,
+                                                      firstButtonTitle: TextConstants.noForUpgrade,
+                                                      secondButtonTitle: TextConstants.yesForUpgrade,
+                                                      secondAction: { [weak self] vc in
                                                         vc.dismiss(animated: true, completion: {
                                                             self?.moveToPremium()
                                                         })
                 })
-                    
+                
                 UIApplication.topController()?.present(controller, animated: true, completion: nil)
             }
         }
@@ -63,7 +65,5 @@ final class PremiumService {
             }
         }
     }
+    
 }
-
-
-
