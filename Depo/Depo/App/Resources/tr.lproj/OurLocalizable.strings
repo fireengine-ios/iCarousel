@@ -2,7 +2,7 @@
 "Welcome1SubInfo" = "Tüm anılarını, dosyalarını ve kontaklarını lifebox'a güvenle yedekle!";
 "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Cihaz ayarlarındaki konum servisleri devre dışı durumda. Arka planda lifebox’un otomatik yedekleme özelliğini kullanmak için “Ayarlar – Gizlilik – Konum Servisleri” üzerinden konum servislerini etkinleştirmen gerek.";
 "This file will be removed only from your album. You can access this file from Photos tab" = "Bu dosya sadece albümünden kaldırılacak. Fotoğraflar sekmesi üzerinden bu dosyaya erişebilirsin. Çıkarmak istediğine emin misin?";
-"Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Bu albümü sildiğinde albümün içindeki dosyalar lifebox'ından kalmaya devam edecek. Dosyalarına Fotoğraflar sekmesinden ulaşabilirsin. Silmek istdiğine emin misin?";
+"Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Bu albümü sildiğinde albümün içindeki dosyalar lifebox'ında kalmaya devam edecek. Dosyalarına Fotoğraflar sekmesinden ulaşabilirsin. Silmek istediğine emin misin?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Bu dosyayı silersen, lifebox'ından da tamamen silinir. Silmek istediğine emin misin?";
 "Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Bu dosyaları silersen, lifebox'ından da tamamen silinir. Silmek istediğine emin misin?";
 "Purchase" = "Satın Al";
@@ -549,7 +549,7 @@
 "Animation" = "Animasyon";
 "We have created an animation from your photos!" = "Fotoğraflarından bir animasyon oluşturduk!";
 "Save Animation" = "Kaydet";
-"Delete Duplicated" = "Tekrarlayanları Sil";
+"Delete Duplicated" = "Tekrarlayanları\\nSil";
 "Lifebox %@ and Passcode" = "lifebox %@ ve Parola";
 "We make easier to manage your memories with homepage" = "Anasayfa ile tüm anılarını yönetmeni senin için daha kolay hale getirdik.";
 "You can reach your recent activites and suggestions that are special for you from this page" = "Bu alandan güncel hareketlerine ve sana özel önerilerimize ulaşabilirsin.";
@@ -763,7 +763,7 @@
 "feature_albanian_cancel_text" = "ALBtelecom kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
 "no_analyses_left_title" = "Analiz hakkın kalmadı";
 "no_analyses_left_message" = "Hakkın bitti diye üzülme, yeni fotoğraflar sorgulamak için hemen paket satın alabilirsin!";
-"no_analyses_left_button" = "PhotoPick Al";
+"no_analyses_left_button" = "Premium Ol";
 "analyze_history_empty_title" = "Henüz fotoğraflarını analiz etmeye başlamadın mı?";
 "analyze_history_empty_subtitle" = "Hangi fotoğrafının daha yüksek puan alacağını öğrenmek ve sosyal medyada paylaşmak için hemen analize başla";
 "analyze_history_analyze_left" = "Analiz Hakkı";
@@ -844,6 +844,27 @@
 "you_are_connected" = "Bağlı";
 "insta_pick_picture_not_found" = "Fotoğraf \nbulunamadı";
 "phone_updated_needs_login" = "Başarılı biçimde telefon numaranızı güncellediniz, lütfen kullanıcı adınız ve şifren ile giriş yap";
-"server_under_maintenance" = "";
+"server_under_maintenance" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
 "unlimited_photopick_analysis" = "";
+"data_advantage_short" = "";
 "additional_data_advantage" = "";
+"connection_problem_occured" = "";
+"turkcell_purchase_popup_title" = "%@";
+"mid_user" = "Ara Paket Kullanıcı";
+"instapick_no_available_units_left" = "";
+"middle_user" = "Ara Paket Kullanıcı";
+"lifebox_middle" = "Ara Paket Kullanıcı";
+"lifebox_standart" = "Standart Kullanıcı";
+"account_detail_middle_title" = "";
+"account_detail_middle_description" = "";
+"account_detail_standart_title" = "";
+"account_detail_standart_description" = "";
+
+/*AnalyzeHistoryController*/
+"instapick_see_details" = "Premium Ol";
+"store_in_high_quality" = "";
+"5_photopick_analysis" = "";
+"10_photopick_analysis" = "";
+"data_package_for_turkcell" = "";
+"delete_duplicated_contacts" = "Rehberindeki Tekrarlayan Kontakları Sil!";
+"leave_middle_membership" = "";
