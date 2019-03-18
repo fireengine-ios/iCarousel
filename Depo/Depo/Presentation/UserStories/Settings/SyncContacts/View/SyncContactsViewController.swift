@@ -94,7 +94,8 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         backUpButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
         restoreButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
         deleteDuplicatedButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
-        
+
+        deleteDuplicatedButton.insets = UIEdgeInsets(top: 0, left: 6.0, bottom: 0, right: 6.0)
         
         backUpButton.adjustsFontSizeToFitWidth()
         restoreButton.adjustsFontSizeToFitWidth()
