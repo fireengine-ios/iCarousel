@@ -62,9 +62,10 @@ final class PhotoVideoDataSource: NSObject {
     private lazy var fetchedResultsController: NSFetchedResultsController<MediaItem> = {
         let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
         
-        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.sortingDate), ascending: false)
-        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.idValue), ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
+        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.monthValue), ascending: false)
+        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.sortingDate), ascending: false)
+        let sortDescriptor3 = NSSortDescriptor(key: #keyPath(MediaItem.idValue), ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2, sortDescriptor3]
         
         if Device.isIpad {
             fetchRequest.fetchBatchSize = 64
@@ -74,7 +75,10 @@ final class PhotoVideoDataSource: NSObject {
         
         //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
         let context = CoreDataStack.default.mainContext
-        let frController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: #keyPath(MediaItem.monthValue), cacheName: nil)
+        let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                      managedObjectContext: context,
+                                                      sectionNameKeyPath: #keyPath(MediaItem.monthValue),
+                                                      cacheName: nil)
         frController.delegate = self
         return frController
     }()

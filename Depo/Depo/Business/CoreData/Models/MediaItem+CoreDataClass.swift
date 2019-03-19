@@ -70,7 +70,16 @@ public class MediaItem: NSManagedObject {
             debugPrint("!!! REMOTE ITEM MD5 EMPTY \(md5Value) AND LOCAL ID \(trimmedLocalFileID)")
         }
         
-        monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
+        //empty monthValue for missing dates section
+        switch wrapData.patchToPreview {
+        case .remoteUrl(let url):
+            if url != nil {
+                fallthrough
+            }
+        default:
+            monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
+        }
+        
         let metaData = MediaItemsMetaData(metadata: wrapData.metaData,
                                           context: context)
         self.metadata = metaData
@@ -114,7 +123,17 @@ public class MediaItem: NSManagedObject {
         creationDateValue = item.creationDate as NSDate?
         lastModifiDateValue = item.lastModifiDate as NSDate?
         sortingDate = (item.metaData?.takenDate ?? item.creationDate) as NSDate?
-        monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
+        
+        //empty monthValue for missing dates section
+        switch item.patchToPreview {
+        case .remoteUrl(let url):
+            if url != nil {
+                fallthrough
+            }
+        default:
+            monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
+        }
+        
         urlToFileValue = item.tmpDownloadUrl?.absoluteString
         
         switch item.patchToPreview {
