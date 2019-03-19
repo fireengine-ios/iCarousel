@@ -15,10 +15,12 @@ struct FileForDownload {
     
     init?(forMediumURL wrapData: WrapData) {
         let url: URL?
-        if wrapData.fileType == .video {
-            url = wrapData.metaData?.videoPreviewURL
+        if wrapData.fileType == .video, let videoPreview = wrapData.metaData?.videoPreviewURL {
+            url = videoPreview
+        } else if let photoPreview = wrapData.metaData?.mediumUrl {
+            url = photoPreview
         } else {
-            url = wrapData.metaData?.mediumUrl
+            url = wrapData.tmpDownloadUrl
         }
         
         guard let _url = url, let name = wrapData.name else { return nil }
