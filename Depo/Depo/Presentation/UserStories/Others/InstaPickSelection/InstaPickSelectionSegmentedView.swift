@@ -10,7 +10,7 @@ final class InstaPickSelectionSegmentedView: UIView {
     
     let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
-        segmentedControl.tintColor = ColorConstants.darcBlueColor
+        segmentedControl.tintColor = ColorConstants.darkBlueColor
         segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)], for: .normal)
         return segmentedControl
     }()
@@ -23,8 +23,8 @@ final class InstaPickSelectionSegmentedView: UIView {
         
         button.setTitleColor(UIColor.white, for: .normal)
         button.setTitleColor(UIColor.white.darker(by: 30), for: .highlighted)
-        button.setBackgroundColor(ColorConstants.darcBlueColor, for: .normal)
-        button.setBackgroundColor(ColorConstants.darcBlueColor.darker(by: 30), for: .highlighted)
+        button.setBackgroundColor(ColorConstants.darkBlueColor, for: .normal)
+        button.setBackgroundColor(ColorConstants.darkBlueColor.darker(by: 30), for: .highlighted)
         
         button.titleLabel?.font = ApplicationPalette.bigRoundButtonFont
         button.adjustsFontSizeToFitWidth()
@@ -37,7 +37,7 @@ final class InstaPickSelectionSegmentedView: UIView {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.textColor = ColorConstants.darcBlueColor
+        label.textColor = ColorConstants.darkBlueColor
         label.font = UIFont.TurkcellSaturaBolFont(size: 16)
         label.backgroundColor = ColorConstants.fileGreedCellColor.withAlphaComponent(0.9)
         let edgeInset: CGFloat = Device.isIpad ? 90 : 15
@@ -45,17 +45,6 @@ final class InstaPickSelectionSegmentedView: UIView {
         label.layer.cornerRadius = 3
         label.layer.masksToBounds = true
         label.isHidden = true
-        return label
-    }()
-    
-    let emptyMessageLabel: InsetsLabel = {
-        let label = InsetsLabel()
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.textColor = ColorConstants.textGrayColor
-        label.font = UIFont.TurkcellSaturaRegFont(size: 14)
-        label.text = TextConstants.loading
-        label.insets = UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30)
         return label
     }()
     
@@ -83,7 +72,6 @@ final class InstaPickSelectionSegmentedView: UIView {
         view.addSubview(transparentGradientView)
         view.addSubview(analyzeButton)
         view.addSubview(analyzesLeftLabel)
-        view.addSubview(emptyMessageLabel)
         
         let edgeOffset: CGFloat = Device.isIpad ? 75 : 35
         let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
@@ -136,10 +124,5 @@ final class InstaPickSelectionSegmentedView: UIView {
             analyzesLeftLabel.trailingAnchor
                 .constraint(equalTo: topView.trailingAnchor, constant: -14).activate()
         }
-        
-        emptyMessageLabel.translatesAutoresizingMaskIntoConstraints = false
-        emptyMessageLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).activate()
-        emptyMessageLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
-        emptyMessageLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
     }
 }

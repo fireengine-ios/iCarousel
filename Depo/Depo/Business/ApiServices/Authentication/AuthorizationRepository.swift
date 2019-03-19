@@ -194,7 +194,10 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                         strongSelf.refreshTokens(completion: completion)
                     }
 //                    return
-                } else {  
+                } else {
+                    #if MAIN_APP
+                    debugLog("can't take accessToken refreshAccessToken")
+                    #endif
                     completion(false, nil)
                     strongSelf.isRefreshing = false
                     strongSelf.refreshTokensCompletions.forEach { $0(false, nil) }

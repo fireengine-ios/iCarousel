@@ -427,7 +427,7 @@
 "Folder Items" = "Elementos %d";
 "Contact Backup" = "Copia de seguridad de contactos";
 "Your last contact update was %@ months ago!" = "¡Su última actualización de contacto fue hace %@ meses!";
-"It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Han pasado% @ meses desde la última vez que actualizó sus contactos, realice la actualización ya para no perder ninguno de sus contactos.";
+"It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Han pasado %@ meses desde la última vez que actualizó sus contactos, realice la actualización ya para no perder ninguno de sus contactos.";
 "Your contact list looks empty" = "Su lista de contactos parece vacía";
 "You don’t have any contacts in your profile, backup your contacts now!" = "¡No tiene contactos en su perfil, haga una copia de seguridad de sus contactos ya!";
 "Backup" = "Copia de seguridad";
@@ -544,7 +544,7 @@
 "We have created an animation from your photos!" = "¡Hemos creado una animación de sus fotos!";
 "Save Animation" = "Guardar";
 "Delete Duplicated" = "Eliminar duplicado";
-"Lifebox %@ and Passcode" = "lifebox y contraseña";
+"Lifebox %@ and Passcode" = "lifebox %@ y contraseña";
 "We make easier to manage your memories with homepage" = "Hacemos que sea más fácil administrar sus momentos con la página de inicio";
 "You can reach your recent activites and suggestions that are special for you from this page" = "Puede acceder a sus actividades recientes y sugerencias personalizadas desde esta página";
 "Discover your first story" = "Descubra su primera historia";
@@ -754,7 +754,7 @@
 "package_albanian_cancel_text" = "Cuota albanesa, cancelar texto";
 "feature_albanian_cancel_text" = "Puedes seguir utilizando las funciones de Premium de forma gratuita ya que eres un usuario de ALBtelecom.";
 "no_analyses_left_title" = "No ha quedado ningún análisis.";
-"no_analyses_left_message" = "No ha quedado ningún análisis.";
+"no_analyses_left_message" = "No estés triste, puede comprar un paquete nuevo todavía para analizar tus fotos!";
 "no_analyses_left_button" = "Compra el PhotoPick.";
 "analyze_history_empty_title" = "¿No has empezado a analizar tus fotos todavía?";
 "analyze_history_empty_subtitle" = "Ahora empieze realizar el análisis para averiguar las cuales fotos se pueden obtener el rango más alto y compartalas en las redes sociales.";
@@ -836,3 +836,6 @@
 "you_are_connected" = "";
 "insta_pick_picture_not_found" = "La imagen no se \nha encontrada";
 "phone_updated_needs_login" = "Ha actualizado su número de teléfono con éxito, inicie sesión con sus credenciales";
+"server_under_maintenance" = "";
+"unlimited_photopick_analysis" = "";
+"additional_data_advantage" = "";

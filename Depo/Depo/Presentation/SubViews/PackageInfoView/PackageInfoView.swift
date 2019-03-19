@@ -10,8 +10,10 @@ import UIKit
 
 enum ControlPackageType {
     case myStorage
+    case premiumBanner
+    case standardUser
+    case middleUser
     case premiumUser
-    case standard
 }
 
 protocol PackageInfoViewDelegate: class {
@@ -61,22 +63,30 @@ final class PackageInfoView: UIView, NibInit {
             } else {
                 storageSizeLabel.isHidden = true
             }
-        case .premiumUser:
-            titleLabel.text = TextConstants.premiumUser
-            seeDetailsLabel.text = TextConstants.seeDetails
-            storageSizeLabel.isHidden = true
-        case .standard:
+        case .premiumBanner:
             let packagePremiumView = PackagePremiumView.initFromNib()
             addSubview(packagePremiumView)
-
+            
             packagePremiumView.translatesAutoresizingMaskIntoConstraints = false
 
             packagePremiumView.topAnchor.constraint(equalTo: topAnchor).isActive = true
             packagePremiumView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
             packagePremiumView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             packagePremiumView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-
+            
             self.packagePremiumView = packagePremiumView
+        case .premiumUser:
+            titleLabel.text = TextConstants.premiumUser
+            seeDetailsLabel.text = TextConstants.seeDetails
+            storageSizeLabel.isHidden = true
+        case .standardUser:
+            titleLabel.text = TextConstants.standardUser
+            seeDetailsLabel.text = TextConstants.seeDetails
+            storageSizeLabel.isHidden = true
+        case .middleUser:
+            titleLabel.text = TextConstants.middleUser
+            seeDetailsLabel.text = TextConstants.seeDetails
+            storageSizeLabel.isHidden = true
         }
     }
 

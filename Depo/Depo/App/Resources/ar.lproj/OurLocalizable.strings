@@ -766,7 +766,7 @@
 "package_albanian_cancel_text" = "اقتباس ألباني إلغاء النص";
 "feature_albanian_cancel_text" = "بإمكانك الإستمرار باستخدام الخصائص الاستثنائية مجانا طالما انك مستخدم لاتصالات ALB";
 "no_analyses_left_title" = "لايوجد تحاليل متبقية";
-"no_analyses_left_message" = "لايوجد تحاليل متبقية";
+"no_analyses_left_message" = "لا تحزن, لازال بإمكانك شراء حزمة جديدة لتحليل صورك";
 "no_analyses_left_button" = "شراء PhotoPick";
 "analyze_history_empty_title" = "لم تبدأ بتحليل صورك بعد؟";
 "analyze_history_empty_subtitle" = "ابدء بالتحليل الآن لتكتشف أي صورة ستحظى بالمرتبة الأعلى وشاركها على وسائل التواصل";
@@ -848,3 +848,6 @@
 "you_are_connected" = "";
 "insta_pick_picture_not_found" = "الصورة \nغير موجودة";
 "phone_updated_needs_login" = "لقد أتممت تحديث رقم هاتفك بنجاح. يرجى تسجيل الدخول بكتابة بيانات الاعتماد.";
+"server_under_maintenance" = "";
+"unlimited_photopick_analysis" = "";
+"additional_data_advantage" = "";

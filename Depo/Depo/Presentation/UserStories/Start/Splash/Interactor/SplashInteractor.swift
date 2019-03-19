@@ -10,8 +10,6 @@ class SplashInteractor: SplashInteractorInput {
 
     weak var output: SplashInteractorOutput!
     
-    let authService = AuthenticationService()
-    
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
@@ -21,7 +19,7 @@ class SplashInteractor: SplashInteractorInput {
         return passcodeStorage.isEmpty
     }
 
-    func startLoginInBackroung() {
+    func startLoginInBackground() {
         if tokenStorage.accessToken == nil {
             if ReachabilityService().isReachableViaWiFi {
                 analyticsService.trackLoginEvent(error: .serverError)
@@ -37,9 +35,9 @@ class SplashInteractor: SplashInteractorInput {
                     }, fail: { [weak self] error in
                         let loginError = LoginResponseError(with: error)
                         self?.analyticsService.trackLoginEvent(error: loginError)
-                        self?.output.asyncOperationSucces()
-                        
-                        if error.isWorkWillIntroduced {
+
+                        self?.output.asyncOperationSuccess()
+                        if error.isServerUnderMaintenance {
                             self?.output.onFailGetAccountInfo(error: error)
                         } else {
                             self?.failLogin()
@@ -48,9 +46,9 @@ class SplashInteractor: SplashInteractorInput {
                 }, fail: { [weak self] response in
                     let loginError = LoginResponseError(with: response)
                     self?.analyticsService.trackLoginEvent(error: loginError)
-                    self?.output.asyncOperationSucces()
-                    
-                    if response.isWorkWillIntroduced {
+
+                    self?.output.asyncOperationSuccess()
+                    if response.isServerUnderMaintenance {
                         self?.output.onFailGetAccountInfo(error: response)
                     } else {
                         self?.failLogin()
@@ -119,7 +117,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func checkEmptyEmail() {
-        authService.checkEmptyEmail { [weak self] result in
+        authenticationService.checkEmptyEmail { [weak self] result in
             DispatchQueue.toMain {
                 switch result {
                 case .success(let show):
@@ -136,7 +134,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func updateUserLanguage() {
-        authService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
+        authenticationService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
             DispatchQueue.toMain {
                 switch result {
                 case .success(_):

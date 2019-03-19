@@ -232,18 +232,21 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
     }
     
     func showLocationPermissionPopup(completion: @escaping VoidHandler) {
-        let controller = PopUpController.with(title: TextConstants.errorAlert,
-                                              message: TextConstants.locationServiceDisable,
-                                              image: .error,
-                                              buttonTitle: TextConstants.ok) { (vc) in
-                                                vc.close {
-                                                    completion()
-                                                }
+        guard onStartUsingButtonTapped else {
+            let controller = PopUpController.with(title: TextConstants.errorAlert,
+                                                  message: TextConstants.locationServiceDisable,
+                                                  image: .error,
+                                                  buttonTitle: TextConstants.ok) { (vc) in
+                                                    vc.close {
+                                                        completion()
+                                                    }
+            }
+            DispatchQueue.toMain {
+                self.present(controller, animated: true, completion: nil)
+            }
+            return
         }
-        DispatchQueue.toMain {
-            self.present(controller, animated: true, completion: nil)
-        }
-        
+        completion()
     }
     
     private func showAccessAlert(message: String) {

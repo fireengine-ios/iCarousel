@@ -37,7 +37,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
             let rootVC = window.rootViewController,
             !interactor.isPasscodeEmpty
         else {
-            interactor.startLoginInBackroung()
+            interactor.startLoginInBackground()
             return
         }
         
@@ -45,7 +45,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         
         vc.success = {
             rootVC.dismiss(animated: true, completion: {
-                self.interactor.startLoginInBackroung()
+                self.interactor.startLoginInBackground()
             })
         }
         
@@ -153,15 +153,15 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     private func openAutoSyncIfNeeded() {
-        view.showSpiner()
+        view.showSpinner()
         autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.view.hideSpiner()
+            self?.view.hideSpinner()
             
             if needToOpenAutoSync {
                 self?.router.goToSyncSettingsView(fromSplash: true)
             }
         }) { [weak self] error in
-            self?.view.hideSpiner()
+            self?.view.hideSpinner()
         }
     }
     
@@ -172,5 +172,5 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     func onFailGetAccountInfo(error: Error) {
         router.showError(error)
     }
-    
+
 }

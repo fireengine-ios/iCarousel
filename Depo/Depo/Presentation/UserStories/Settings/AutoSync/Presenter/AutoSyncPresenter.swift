@@ -60,6 +60,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
             return
         }
         
+        /// location access is optional
         if !locationAccessGranted {
             view.showLocationPermissionPopup { [weak self] in
                 self?.view.checkPermissionsSuccessed()

@@ -25,8 +25,8 @@ protocol SearchViewInput: class {
     
     func setNavBarRigthItem(active isActive: Bool)
     
-    func showSpinner()
-    func hideSpinner()
+    func showSpiner()
+    func hideSpiner()
     
     func setEnabledSearchBar(_ isEnabled: Bool)
     func setVisibleTabBar(_ isVisible: Bool)

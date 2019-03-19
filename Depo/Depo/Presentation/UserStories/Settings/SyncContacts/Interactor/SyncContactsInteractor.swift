@@ -79,10 +79,14 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         let auth: AuthorizationRepository = factory.resolve()
         output?.asyncOperationStarted()
         auth.refreshTokens { [weak self] _, accessToken in
-            let tokenStorage: TokenStorage = factory.resolve()
-            tokenStorage.accessToken = accessToken
-            self?.contactsSyncService.updateAccessToken()
-            complition()
+            if let accessToken = accessToken {
+                let tokenStorage: TokenStorage = factory.resolve()
+                tokenStorage.accessToken = accessToken
+                self?.contactsSyncService.updateAccessToken()
+                complition()
+            } else {
+                self?.output?.showError(errorType: .failed)
+            }
         }
     }
     func performOperation(forType type: SYNCMode) {

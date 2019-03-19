@@ -219,7 +219,7 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }
     }
     
-    func startSearchDuplicates(finished: @escaping() -> Void) {
+    func startSearchDuplicates(finished: @escaping VoidHandler) {
         if (isSearchRunning) {
             needSearchAgain = true
             return
@@ -236,43 +236,46 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         serverDuplicatesArray.removeAll()
         
         dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            self.localtemsArray.append(self.allLocalItems().sorted { item1, item2 -> Bool in
-                if let date1 = item1.creationDate, let date2 = item2.creationDate {
-                    if (date1 > date2) {
-                        return true
-                    }
+            
+            self?.allLocalItems(completion: { [weak self] localItems in
+                guard let `self` = self else {
+                    return
                 }
-                return false
-            })
-            
-            self.localMD5Array.append( self.localtemsArray.flatMap{ $0.md5 })
-            self.localTrimmedID.append( self.localtemsArray.flatMap{ $0.getTrimmedLocalID() })
-            let latestDate = self.localtemsArray.last?.creationDate ?? Date()
-            
-            //need to check have we duplicates
-            if self.localtemsArray.count > 0 {
-                self.photoVideoService = PhotoAndVideoService(requestSize: self.numberElementsInRequest)
-                self.getDuplicatesObjects(latestDate: latestDate, success: { [weak self] in
-                    guard let self_ = self else {
-                        return
+                
+                self.localtemsArray.append(localItems.sorted { item1, item2 -> Bool in
+                    if let date1 = item1.creationDate, let date2 = item2.creationDate {
+                        if (date1 > date2) {
+                            return true
+                        }
                     }
-                    if (self_.duplicatesArray.count > 0) {
-                        debugPrint("duplicates count = ", self_.duplicatesArray.count)
-                    } else {
-                        debugPrint("have no duplicates")
-                    }
-                    finished()
-                    }, fail: {
-                        finished()
+                    return false
                 })
-            } else {
-                finished()
-            }
+                
+                self.localMD5Array.append( self.localtemsArray.flatMap{ $0.md5 })
+                self.localTrimmedID.append( self.localtemsArray.flatMap{ $0.getTrimmedLocalID() })
+                let latestDate = self.localtemsArray.last?.creationDate ?? Date()
+                
+                //need to check have we duplicates
+                if self.localtemsArray.count > 0 {
+                    self.photoVideoService = PhotoAndVideoService(requestSize: self.numberElementsInRequest)
+                    self.getDuplicatesObjects(latestDate: latestDate, success: { [weak self] in
+                        guard let self_ = self else {
+                            return
+                        }
+                        if (self_.duplicatesArray.count > 0) {
+                            debugPrint("duplicates count = ", self_.duplicatesArray.count)
+                        } else {
+                            debugPrint("have no duplicates")
+                        }
+                        finished()
+                        }, fail: {
+                            finished()
+                    })
+                } else {
+                    finished()
+                }
+            })
         }
-        
     }
     
     private func getDuplicatesObjects(latestDate: Date,
@@ -342,8 +345,8 @@ class FreeAppSpace: NSObject, ItemOperationManagerViewProtocol {
         }, newFieldValue: nil)
     }
     
-    private func allLocalItems() -> [WrapData] {
-        return CoreDataStack.default.allLocalItems()
+    private func allLocalItems(completion: @escaping LocalFilesCallBack) {
+        CoreDataStack.default.allLocalItems(completion: completion)
     }
     
 

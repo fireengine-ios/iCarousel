@@ -19,7 +19,7 @@ protocol PackagesViewOutput {
 
     func openTermsOfUseScreen()
 
-    func configureViews(_ views: [PackageInfoView])
+    func configureCard(_ card: PackageInfoView)
 
     var availableOffers: [SubscriptionPlan] { get }
 }

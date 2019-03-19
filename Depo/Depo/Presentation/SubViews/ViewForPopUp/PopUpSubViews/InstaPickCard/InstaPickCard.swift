@@ -233,7 +233,7 @@ final class InstaPickCard: BaseView {
 
         switch cardType {
         case .noAnalysis:
-            InstaPickRoutingService.showUpdgradePopup()
+            InstaPickRoutingService.openPremium()
         case .trial, .noUsedBefore, .usedBefore:
             openInstaPickHistory()
         }

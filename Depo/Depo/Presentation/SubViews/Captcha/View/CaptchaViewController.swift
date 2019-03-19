@@ -53,6 +53,8 @@ final class CaptchaViewController: ViewController {
         getImageCaptcha()
         captchaPlaceholderLabel.text = TextConstants.captchaPlaceholder
         imageBackground.layer.cornerRadius = 5
+        inputTextField.delegate = self
+        inputTextField.returnKeyType = .done
         inputTextField.autocorrectionType = .no
         inputTextField.tag = 33
     }
@@ -98,9 +100,12 @@ final class CaptchaViewController: ViewController {
             }
             
         }, fail: { error in
-//            DispatchQueue.main.async {
-//                UIApplication.showErrorAlert(message: error.description)
-//            }
+            /// When you open the LoginViewController, another request is made to the server, which will already show 503 error
+            if !error.isServerUnderMaintenance || !(UIApplication.topController() is LoginViewController) {
+                DispatchQueue.main.async {
+                    UIApplication.showErrorAlert(message: error.description)
+                }
+            }
         })
         
         currentCaptchaID = captchaService.uuid
@@ -122,5 +127,12 @@ final class CaptchaViewController: ViewController {
                 UIApplication.showErrorAlert(message: error.description)
             }
         })
+    }
+}
+
+extension CaptchaViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

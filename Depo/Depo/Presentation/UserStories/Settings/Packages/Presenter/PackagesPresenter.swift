@@ -73,8 +73,10 @@ extension PackagesPresenter: PackagesViewOutput {
         }
         switch model.type {
         case .SLCM?:
+            let title = String(format: TextConstants.turkcellPurchasePopupTitle, model.quota?.bytesString ?? "")
+
             let price = interactor.getPriceInfo(for: model, accountType: accountType)
-            view?.showActivateOfferAlert(with: price, for: model, planIndex: planIndex)
+            view?.showActivateOfferAlert(with: title, price: price, for: model, planIndex: planIndex)
         case .apple?:
             view?.startActivityIndicator()
             interactor.activate(offer: model, planIndex: planIndex)
@@ -109,10 +111,8 @@ extension PackagesPresenter: PackagesViewOutput {
         router.openTermsOfUse()
     }
 
-    func configureViews(_ views: [PackageInfoView]) {
-        for view in views {
-            view.delegate = self
-        }
+    func configureCard(_ card: PackageInfoView) {
+        card.delegate = self
     }
 
 }
@@ -266,9 +266,18 @@ extension PackagesPresenter: PackageInfoViewDelegate {
         switch type {
         case .myStorage:
             router.openMyStorage(storageUsage: storageUsage)
-        case .premiumUser:
-            router.openLeavePremium()
-        case .standard: break
+        case .premiumUser, .standardUser, .middleUser:
+            let leavePremiumType: LeavePremiumType
+            if type == .standardUser {
+                leavePremiumType = .standard
+            } else if type == .middleUser {
+                leavePremiumType = .middle
+            } else {
+                leavePremiumType = .premium
+            }
+            router.openLeavePremium(type: leavePremiumType)
+        case .premiumBanner:
+            break
         }
     }
 }

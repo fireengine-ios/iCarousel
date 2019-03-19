@@ -55,16 +55,17 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func getAccountType() {
-        accountService.info(
+        SingletonStorage.shared.getAccountInfoForUser(
             success: { [weak self] response in
-                guard let response = response as? AccountInfoResponse,
-                    let accountType = response.accountType else { return }
+                guard let accountType = response.accountType else {
+                    return
+                }
                 DispatchQueue.main.async {
                     self?.output.successed(accountTypeString: accountType)
                 }
-            }, fail: { [weak self] errorResponse in
+            }, fail: { [weak self] error in
                 DispatchQueue.main.async {
-                    self?.output.failedUsage(with: errorResponse)
+                    self?.output.failed(with: error.localizedDescription)
                 }
         })
     }

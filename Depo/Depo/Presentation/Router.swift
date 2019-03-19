@@ -213,13 +213,13 @@ class RouterVC: NSObject {
         
     func showSpiner() {
         if let lastViewController = getViewControllerForPresent() {
-            lastViewController.showSpinerIncludeNavigatinBar()
+            lastViewController.showSpinnerIncludeNavigationBar()
         }
     }
     
     func hideSpiner() {
         if let lastViewController = getViewControllerForPresent() {
-            lastViewController.hideSpinerIncludeNavigatinBar()
+            lastViewController.hideSpinnerIncludeNavigationBar()
         }
     }
     
@@ -855,9 +855,10 @@ class RouterVC: NSObject {
     }
     
     // MARK: - Leave Premium
-
-    func leavePremium(title: String) -> UIViewController{
-        let controller = LeavePremiumModuleInitializer.initializeLeavePremiumController(with: "LeavePremiumViewController", title: title)
+    
+    func leavePremium(type: LeavePremiumType) -> UIViewController {
+        let controller = LeavePremiumModuleInitializer.initializeLeavePremiumController(with: "LeavePremiumViewController",
+                                                                                        type: type)
         return controller
     }
 

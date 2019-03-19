@@ -35,7 +35,7 @@ class MailVerificationViewController: BaseViewController {
         super.viewDidLoad()
 //        UIBlurEffect()
         titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
-        titleLabel.textColor = ColorConstants.darcBlueColor
+        titleLabel.textColor = ColorConstants.darkBlueColor
         titleLabel.text = TextConstants.registrationCellPlaceholderEmail
         
         inputTextField.font = UIFont.TurkcellSaturaRegFont(size: 20)
@@ -87,18 +87,18 @@ class MailVerificationViewController: BaseViewController {
             return
         }
         
-        showSpiner()
+        showSpinner()
         authService.updateEmail(emailUpdateParameters: EmailUpdate(mail: email),
             sucess: { [weak self] response in
                 DispatchQueue.main.async {
                     self?.actionDelegate?.mailVerified(mail: email)
-                    self?.hideSpiner()
+                    self?.hideSpinner()
                     self?.dismiss(animated: true, completion: nil)
                 }
             }, fail: { [weak self] error in
                 DispatchQueue.main.async {
                     self?.actionDelegate?.mailVerificationFailed()
-                    self?.hideSpiner()
+                    self?.hideSpinner()
                     UIApplication.showErrorAlert(message: error.description)
                 }
         })

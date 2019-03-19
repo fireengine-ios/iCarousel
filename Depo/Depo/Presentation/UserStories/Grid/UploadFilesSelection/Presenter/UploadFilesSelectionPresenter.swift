@@ -6,8 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelectionModuleInput, UploadFilesSelectionViewOutput, UploadFilesSelectionInteractorOutput {
-    
+class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelectionModuleInput, UploadFilesSelectionViewOutput {
+
     init() {
         super.init(sortedRule: .timeDownWithoutSection)
     }
@@ -23,7 +23,7 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     override func viewWillAppear() {
-        
+        super.viewWillAppear()
     }
     
     override func reloadData() {
@@ -40,7 +40,6 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
             startAsyncOperation()
             if let interactor_ = interactor as? UploadFilesSelectionInteractor, let dataSource = dataSource as? ArrayDataSourceForCollectionView {
                 interactor_.addToUploadOnDemandItems(items: dataSource.getSelectedItems())
-                router.showBack()
             }
             dataSource.selectAll(isTrue: false)
         } else {
@@ -61,25 +60,29 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     override func getContentWithSuccessEnd() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
+}
     
-    //MARK: - UploadFilesSelectionInteractorOutput
-    
+//MARK: - UploadFilesSelectionInteractorOutput
+
+extension UploadFilesSelectionPresenter: UploadFilesSelectionInteractorOutput {
     func networkOperationStopped() {
         debugLog("UploadFilesSelectionPresenter networkOperationStopped")
-
-        asyncOperationSucces()
+        
+        asyncOperationSuccess()
+    }
+    
+    func addToUploadStarted() {
+        debugLog("UploadFilesSelectionPresenter addToUploadStarted")
+        
+        router.showBack()
     }
     
     func addToUploadSuccessed() {
         debugLog("UploadFilesSelectionPresenter addToUploadSuccessed")
         
-        asyncOperationSucces()
-        if let uploadVC = view as? UploadFilesSelectionViewInput {
-            uploadVC.currentVC.navigationController?.viewControllers.first?.dismiss(animated: true)
-            uploadVC.currentVC.navigationController?.popViewController(animated: true)
-        }
+        asyncOperationSuccess()
     }
     
     func addToUploadFailedWith(errorMessage: String) {
@@ -87,5 +90,4 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
         
         asyncOperationFail(errorMessage: errorMessage)
     }
-    
 }

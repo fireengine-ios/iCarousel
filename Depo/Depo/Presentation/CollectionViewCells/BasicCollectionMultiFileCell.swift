@@ -107,7 +107,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         }
     }
     
-    override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
+    override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
         guard let wrappered = wrappedObj as? Item else {
             return
         }
@@ -287,11 +287,11 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         smallCellSelectionView.contentMode = .center
         
         smallSelectonView.layer.borderWidth = 3
-        smallSelectonView.layer.borderColor = ColorConstants.darcBlueColor.cgColor
+        smallSelectonView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
         smallSelectonView.alpha = 0
         
         bigSelectionView.layer.borderWidth = 3
-        bigSelectionView.layer.borderColor = ColorConstants.darcBlueColor.cgColor
+        bigSelectionView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
         bigSelectionView.alpha = 0
         
         fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)

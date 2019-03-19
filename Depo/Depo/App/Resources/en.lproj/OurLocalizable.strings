@@ -782,8 +782,8 @@
 "package_albanian_cancel_text" = "Albanian quota cancel text";
 "feature_albanian_cancel_text" = "You can continue to use Premium features for free since you are a ALBtelecom user";
 "no_analyses_left_title" = "No Analyzes Left";
-"no_analyses_left_message" = "No Analyzes Left";
-"no_analyses_left_button" = "Purchase PhotoPick";
+"no_analyses_left_message" = "Don't be sad, you can still purchase new package to analyze your photos!";
+"no_analyses_left_button" = "Become Premium";
 "analyze_history_empty_title" = "Didn't you start analyzing your photos yet?";
 "analyze_history_empty_subtitle" = "Start analyzing now to find out which photo gets the highest rank and share on social media.";
 "analyze_history_analyze_left" = "Analyses Left";
@@ -864,3 +864,27 @@
 "you_are_connected" = "You are connected";
 "insta_pick_picture_not_found" = "Picture not found";
 "phone_updated_needs_login" = "You have successfully updated your phone number, please log in with your credentials";
+"server_under_maintenance" = "There is currently a maintenance work on lifebox, please try again later.";
+"unlimited_photopick_analysis" = "Unlimited PhotoPick analysis";
+"data_advantage_short" = "Additional Data Advantage";
+"additional_data_advantage" = "Additional Data Advantage";
+"connection_problem_occured" = "3106 error";
+"turkcell_purchase_popup_title" = "%@";
+"mid_user" = "Middle User";
+"instapick_no_available_units_left" = "3105 error";
+"middle_user" = "Middle User";
+"lifebox_middle" = "Middle User";
+"lifebox_standart" = "Standard User";
+"account_detail_middle_title" = "account_detail_middle_title";
+"account_detail_middle_description" = "account_detail_middle_description";
+"account_detail_standart_title" = "account_detail_standart_title";
+"account_detail_standart_description" = "account_detail_standart_description";
+
+/*AnalyzeHistoryController*/
+"instapick_see_details" = "Become Premium";
+"store_in_high_quality" = "Store in High Quality";
+"5_photopick_analysis" = "5 PhotoPick analysis";
+"10_photopick_analysis" = "10 PhotoPick analysis";
+"data_package_for_turkcell" = "Data package for Turkcell subscribers";
+"delete_duplicated_contacts" = "Remove Duplicate Contacts from Your Directory";
+"leave_middle_membership" = "Leave Middle Membership";

@@ -71,7 +71,7 @@ class ContactBackupOld: BaseView {
     
     func getMonthesAfterLastBacup() -> String {
         if let dateLastBackup = cardObject?.details?["lastBackupDate"].date {
-            return String(format: "%d", dateLastBackup.getTimeIntervalBetweenDateAndCurrentDate())
+            return String(format: "%d", dateLastBackup.getMonthsBetweenDateAndCurrentDate())
         }
         
         return ""

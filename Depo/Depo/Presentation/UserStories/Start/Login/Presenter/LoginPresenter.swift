@@ -83,7 +83,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     func viewAppeared() {}
     
     func captchaRequred(requred: Bool) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         if requred {
             captchaShowed = true
             view.showCapcha()
@@ -91,11 +91,11 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func captchaRequredFailed() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     func captchaRequredFailed(with message: String) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         view.showErrorMessage(with: message)
     }
     
@@ -189,15 +189,15 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     private func openAutoSyncIfNeeded() {
-        view.showSpiner()
+        view.showSpinner()
         autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.view.hideSpiner()
+            self?.view.hideSpinner()
             
             if needToOpenAutoSync {
                 self?.router.goToSyncSettingsView()
             }
         }) { [weak self] error in
-            self?.view.hideSpiner()
+            self?.view.hideSpinner()
         }
     }
     

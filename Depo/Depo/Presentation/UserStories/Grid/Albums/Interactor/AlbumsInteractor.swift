@@ -59,7 +59,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
 
             DispatchQueue.main.async {
                 print("success")
-                self?.output.asyncOperationSucces()
+                self?.output.asyncOperationSuccess()
                 
                 if let presenter = self?.output as? AlbumSelectionPresenter {
                     presenter.photoAddedToAlbum()

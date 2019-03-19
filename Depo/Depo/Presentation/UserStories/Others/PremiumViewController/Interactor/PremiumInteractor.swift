@@ -48,7 +48,7 @@ extension PremiumInteractor: PremiumInteractorInput {
                 }
             case .failed(let error):
                 DispatchQueue.toMain {
-                    if error.isWorkWillIntroduced {
+                    if error.isServerUnderMaintenance {
                         self?.output.failed(with: error.description)
                     } else {
                         self?.output.switchToTextWithoutPrice(isError: true)
@@ -65,7 +65,7 @@ extension PremiumInteractor: PremiumInteractorInput {
             }
             }, fail: { [weak self] error in
                 DispatchQueue.toMain {
-                    if error.isWorkWillIntroduced {
+                    if error.isServerUnderMaintenance {
                         self?.output.failed(with: error.description)
                     } else {
                         self?.output.switchToTextWithoutPrice(isError: true)

@@ -70,7 +70,7 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
             pageControll.currentPageIndicatorTintColor = ColorConstants.lightGrayColor
         } else {
             pageControll.pageIndicatorTintColor = ColorConstants.blueColor
-            pageControll.currentPageIndicatorTintColor = ColorConstants.darcBlueColor
+            pageControll.currentPageIndicatorTintColor = ColorConstants.darkBlueColor
         }
     }
 
@@ -85,16 +85,16 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
     }
     
     private func openAutoSyncIfNeeded() {
-        showSpiner()
+        showSpinner()
         
         autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.hideSpiner()
+            self?.hideSpinner()
             
             if needToOpenAutoSync {
                 self?.goToSyncSettingsView()
             }
         }) { [weak self] error in
-            self?.hideSpiner()
+            self?.hideSpinner()
         }
     }
     

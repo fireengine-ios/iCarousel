@@ -50,7 +50,7 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
     }
     
     func operationSucces(operation: SelectNameScreenType) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         switch operation {
         case .selectAlbumName:
             view.hideView()
@@ -62,7 +62,7 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
     }
     
     func operationFaildWithError(errorMessage: String) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         UIApplication.showErrorAlert(message: errorMessage)
         view.setupInitialState()
     }

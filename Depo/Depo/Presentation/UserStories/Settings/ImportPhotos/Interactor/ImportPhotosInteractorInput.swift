@@ -11,22 +11,28 @@ import Foundation
 // MARK: - Facebook
 
 protocol ImportFromFBInteractorInput {
+    
+    func getAllStatuses()
+    func disconnectAccount()
+    func setImport(status: Bool)
+    
     func requestPermissions()
     func requestToken(permissions: [String])
-    func requestConnect(withToken token: String)
-    func requestStatus()
-    func requestStart()
-    func requestStop()
+    func connect(withToken token: String)
+    func requestSyncStatus()
     func trackImportActivationFB()
 }
 
 // MARK: - Dropbox
 
 protocol ImportFromDropboxInteractorInput {
-    func requestStatus()
-    func requestStatusForStart()
+    func disconnectAccount()
+    func startImport()
+    func getAllStatuses()
+
     func login()
-    func requestConnect(withToken token: String)
+    func requestStatusForStart()
+    func connect(withToken token: String)
     func requestStart()
     func requestStatusForCompletion()
     func trackImportActivationDropBox()

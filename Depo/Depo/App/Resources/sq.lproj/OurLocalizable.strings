@@ -437,7 +437,7 @@
 "Backup" = "Kopje Rezervë ";
 "Last update:" = "Përditësimi i fundit:";
 "Your storage is empty!" = "Arkiva juaj është bosh!";
-"You are using %f of your disk space! It’s a great time to expand your storage." = "Ju jeni duke përdorur% d %% të kuotës suaj të lifebox. Është moment i duhur për të zgjeruar arkivën tuaj.";
+"You are using %f of your disk space! It’s a great time to expand your storage." = "Ju jeni duke përdorur%d%% të kuotës suaj të lifebox. Është moment i duhur për të zgjeruar arkivën tuaj.";
 "You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "Ju nuk keni ende asnjë skedar në lifebox-in tuaj. Filloni ngarkimin e kujtimeve tua në lifebox!";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "Ju jeni duke përdorur %d%% të arkivës së pajisjes suaj. Erdhi momenti të lironi hapesirë në të.";
 "Upload Files" = "Ngarkoni Skedarët";
@@ -782,7 +782,7 @@
 "package_albanian_cancel_text" = "Teksti i anulimit të kuotës shqiptare";
 "feature_albanian_cancel_text" = "Ju mund të vazhdoni të përdorni mundësitë Premium falas me qënë se jeni abonent ALBtelecom.";
 "no_analyses_left_title" = "Nuk ka më Analiza";
-"no_analyses_left_message" = "Nuk ka më Analiza";
+"no_analyses_left_message" = "Mos u mërzisni! Ju mundeni ende të blini një paketë të re për të analizuar fotot tuaja!";
 "no_analyses_left_button" = "Blini PhotoPick";
 "analyze_history_empty_title" = "Ende nuk keni filluar të analizoni fotot tuaja?";
 "analyze_history_empty_subtitle" = "Filloni analizën tani, për të kuptuar cila foto merr vlersimin më të lartë në rrjetet sociale.";
@@ -873,3 +873,6 @@
 "you_are_connected" = "";
 "insta_pick_picture_not_found" = "Fotoja nuk\nu gjet";
 "phone_updated_needs_login" = "Ju keni përditësuar me sukses numrin tuaj të telefonit. Ju lutem, hyni me kredencialet tuaja.";
+"server_under_maintenance" = "";
+"unlimited_photopick_analysis" = "";
+"additional_data_advantage" = "";

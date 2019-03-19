@@ -48,7 +48,7 @@ final class SegmentedController: BaseViewController, NibInit {
     
     @IBOutlet private weak var segmentedControl: UISegmentedControl! {
         willSet {
-            newValue.tintColor = ColorConstants.darcBlueColor
+            newValue.tintColor = ColorConstants.darkBlueColor
             newValue.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)],
                                             for: .normal)
         }

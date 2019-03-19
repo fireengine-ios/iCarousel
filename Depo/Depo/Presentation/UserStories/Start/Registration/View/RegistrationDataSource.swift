@@ -16,7 +16,7 @@ protocol DataSourceOutput {
     func infoButtonGotPressed(withType: UserValidationResults)
 }
 
-class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
+class RegistrationDataSource: NSObject {
     var output: DataSourceOutput?
     var cells: [BaseCellModel] = []
     var gsmModels: [GSMCodeModel] = []
@@ -47,41 +47,6 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     func getGSMCode(forRow row: Int) -> String {
         let gsmModel = gsmModels[row]
         return gsmModel.gsmCode
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cells.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var tempoRow: UITableViewCell
-        
-        if indexPath.row == 0 {
-            tempoRow = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.gSMUserInputCellID, for: indexPath)
-        } else if indexPath.row == 1 {
-            tempoRow = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.baseUserInputCellViewID,
-                                                     for: indexPath)
-        } else {
-            tempoRow = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.passwordCellID,
-                                                     for: indexPath)
-        }
-        
-        setupCell(withCell: tempoRow, atIndex: indexPath.row)
-        
-        return tempoRow
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.needsUpdateConstraints()
-        cell.layoutIfNeeded()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 84
     }
     
     private func setupCell(withCell cell: UITableViewCell, atIndex index: Int) {
@@ -124,45 +89,37 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     }
 }
 
-extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate, ProtoInputCellProtocol, GSMCodeCellDelegate, InfoButtonCellProtocol {
+// MARK: - ProtoInputCellProtocol
+
+extension RegistrationDataSource: ProtoInputCellProtocol {
+    func textFinishedEditing(withCell cell: ProtoInputTextCell) {
+        output?.protoCellTextFinishedEditing(cell: cell)
+    }
     
+    func textStartedEditing(withCell cell: ProtoInputTextCell) {
+        output?.protoCellTextStartedEditing(cell: cell)
+    }
+}
+
+// MARK: - GSMCodeCellDelegate
+
+extension RegistrationDataSource: GSMCodeCellDelegate {
     func codeViewGotTapped() {
         output?.pickerGotTapped()
     }
     
     func phoneNumberChanged(toNumber number: String) {
-//        let phoneNumber = number.count > 0 ? number : TextConstants.registrationCellPlaceholderPhone
-//        let oldPhoneModel = cells[0]
-//        let newPhoneModel = BaseCellModel(withTitle: oldPhoneModel.title, initialText: phoneNumber)
-//        cells[0] = newPhoneModel
+        //        let phoneNumber = number.count > 0 ? number : TextConstants.registrationCellPlaceholderPhone
+        //        let oldPhoneModel = cells[0]
+        //        let newPhoneModel = BaseCellModel(withTitle: oldPhoneModel.title, initialText: phoneNumber)
+        //        cells[0] = newPhoneModel
         currentPhoneNumber = number
     }
-    
-    func textFinishedEditing(withCell cell: ProtoInputTextCell) {
-        output?.protoCellTextFinishedEditing(cell: cell)
-    }
+}
 
-    func textStartedEditing(withCell cell: ProtoInputTextCell) {
-        output?.protoCellTextStartedEditing(cell: cell)
-    }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return gsmModels.count
-    }
-        
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        var pickerTitle = ""
-        if !gsmModels.isEmpty {
-            let model = gsmModels[row]
-            pickerTitle = model.gsmCode + "    " + model.countryName
-        }        
-        return NSAttributedString(string: pickerTitle, attributes: [.foregroundColor: UIColor.black])
-    }
-    
+// MARK: - InfoButtonCellProtocol
+
+extension RegistrationDataSource: InfoButtonCellProtocol {
     func infoButtonGotPressed(with sender: Any?, andType type: UserValidationResults) {
         var errorType = type
         if let cell = sender as? PasswordCell, cell.type == .reEnter {
@@ -171,6 +128,64 @@ extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate, 
         
         output?.infoButtonGotPressed(withType: errorType)
     }
+}
+
+// MARK: - UIPickerView
+
+extension RegistrationDataSource: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return gsmModels.count
+    }
+}
+
+extension RegistrationDataSource: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        var pickerTitle = ""
+        if !gsmModels.isEmpty {
+            let model = gsmModels[row]
+            pickerTitle = model.gsmCode + "    " + model.countryName
+        }        
+        return NSAttributedString(string: pickerTitle, attributes: [.foregroundColor: UIColor.black])
+    }
+}
+
+// MARK: - UITableView
+
+extension RegistrationDataSource: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 84
+    }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.needsUpdateConstraints()
+        cell.layoutIfNeeded()
+    }
+}
+
+extension RegistrationDataSource: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cells.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var tempoRow: UITableViewCell
+        
+        if indexPath.row == 0 {
+            tempoRow = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.gSMUserInputCellID, for: indexPath)
+        } else if indexPath.row == 1 {
+            tempoRow = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.baseUserInputCellViewID,
+                                                     for: indexPath)
+        } else {
+            tempoRow = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.passwordCellID,
+                                                     for: indexPath)
+        }
+        
+        setupCell(withCell: tempoRow, atIndex: indexPath.row)
+        
+        return tempoRow
+    }
 }

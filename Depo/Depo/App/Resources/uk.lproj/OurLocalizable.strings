@@ -617,7 +617,7 @@
 "LifeboxSmallPopUpFirstButtonText" = "OK";
 "LifeboxSmallPopUpSecondButtonText" = "Покращити";
 "has_remained_lifebox_usage" = "% @ з% @ залишилося (тільки для використання lifebox)";
-"Renewal Date: %@" = "Дата поновлення:% @";
+"Renewal Date: %@" = "Дата поновлення: %@";
 "created" = "Створено";
 "uploaded" = "Завантажено";
 "updated" = "оновлено";
@@ -754,7 +754,7 @@
 "package_albanian_cancel_text" = "Albanian quota cancel text";
 "feature_albanian_cancel_text" = "Ви можете безкоштовно користуватися Преміум підпискою як абонент ALBtelecom";
 "no_analyses_left_title" = "Немає оцінок";
-"no_analyses_left_message" = "Немає оцінок";
+"no_analyses_left_message" = "Не cумуйте, ви все ще можете активувати новий пакет для оцінки ваших фото!";
 "no_analyses_left_button" = "Активувати PhotoPick";
 "analyze_history_empty_title" = "Ще не оцінювали ваші фото?";
 "analyze_history_empty_subtitle" = "Почніть оцінювати та дізнайтеся, які фото отримають найбільше вподобань, щоб потім поділитися у соцмережах";
@@ -836,3 +836,6 @@
 "you_are_connected" = "";
 "insta_pick_picture_not_found" = "Картинку не \nзнайдено";
 "phone_updated_needs_login" = "Ви успішно оновили свій номер телефону, будь ласка, увійдіть у свій обліковий запис";
+"server_under_maintenance" = "";
+"unlimited_photopick_analysis" = "";
+"additional_data_advantage" = "";

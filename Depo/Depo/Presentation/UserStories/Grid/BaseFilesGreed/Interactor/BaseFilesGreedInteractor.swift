@@ -80,7 +80,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                     self.isUpdating = false
                     /// TODO: Add receiving error with text
                     if self.needShowServerError() {
-                        output.getContentWithFail(errorString: TextConstants.errorWorkWillIntroduced)
+                        output.getContentWithFail(errorString: TextConstants.errorServerUnderMaintenance)
                     } else {
                         output.getContentWithFail(errorString: nil)
                     }

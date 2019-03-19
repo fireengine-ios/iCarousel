@@ -102,16 +102,16 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     // MARK: Utility Methods
     private func openAutoSyncIfNeeded() {
-        view.showSpiner()
+        view.showSpinner()
         
         autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.view.hideSpiner()
+            self?.view.hideSpinner()
             
             if needToOpenAutoSync {
                 self?.router.goToAutoSync()
             }
         }) { [weak self] error in
-            self?.view.hideSpiner()
+            self?.view.hideSpinner()
         }
     }
     

@@ -36,7 +36,7 @@ final class FaceImageAddNamePresenter: BaseFilesGreedPresenter {
     override func getContentWithSuccess(items: [WrapData]) {
         dataSource.dropData()
         super.getContentWithSuccess(items: items.filter { $0.id != currentItem?.id })
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {

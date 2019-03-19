@@ -25,7 +25,7 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
         contentView.layer.cornerRadius = 5
         
         titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
-        titleLabel.textColor = ColorConstants.darcBlueColor
+        titleLabel.textColor = ColorConstants.darkBlueColor
         titleLabel.text = TextConstants.createStoryNameTitle
         
         storyNameTextField.placeholder = TextConstants.createStoryNamePlaceholder

@@ -417,7 +417,7 @@ class FileService: BaseRequestService {
             success?()
             return
         }
-        executeDownloadRequest(param: downloadParam) { url, urlResponse, error in
+        executeDownloadRequest(param: downloadParam) { [weak self] url, urlResponse, error in
             
             if let err = error {
                 fail?(.error(err))
@@ -430,51 +430,38 @@ class FileService: BaseRequestService {
                     
                     let destination = Device.documentsFolderUrl(withComponent: downloadParam.fileName)
                     
-                    let removeDestinationFile: () -> Void = {
-
-                        do {
-                            try FileManager.default.removeItem(at: destination)
-                        } catch { }
-                    }
-                    
                     do {
                         try FileManager.default.moveItem(at: location, to: destination)
                     } catch {
-                        
-                        fail?(.string("Downoad move file error"))
+                        fail?(.string("Download move file error"))
                         return
                     }
                     
-                    var type = PHAssetMediaType.unknown
-                    
+                    let type: PHAssetMediaType
                     switch downloadParam.contentType {
                         case .image : type = .image
                         case .video : type = .video
-                        default     : break
+                        default     : type = .unknown
                     }
                     
-                    if let item = downloadParam.item, let mediaItem = CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()]).first {
-                        ///For now we do not update local files by remotes
-//                        CoreDataStack.default.updateSavedItems(savedItems: [mediaItem],
-//                                                               remoteItems: [item],
-//                                                               context: CoreDataStack.default.newChildBackgroundContext)
-                        removeDestinationFile()
-                        success?()
-                    } else {
-                        LocalMediaStorage.default.appendToAlboum(fileUrl: destination,
-                                                                 type: type,
-                                                                 album: downloadParam.albumName,
-                                                                 item: downloadParam.item,
-                        success: {
-                            removeDestinationFile()
-                            success?()
-                        }, fail: { error in
-                            removeDestinationFile()
-                            fail?(error)
+                    if let item = downloadParam.item {
+                        CoreDataStack.default.mediaItemByLocalID(trimmedLocalIDS: [item.getTrimmedLocalID()], completion: { [weak self] mediaItems in
+                            if let mediaItem = mediaItems.first {
+                                ///For now we do not update local files by remotes
+//                                CoreDataStack.default.updateSavedItems(savedItems: [mediaItem],
+//                                                                       remoteItems: [item],
+//                                                                       context: CoreDataStack.default.newChildBackgroundContext)
+                                self?.removeFile(at: destination)
+                                success?()
+                            } else {
+                                self?.saveToAlbum(fileUrl: destination, type: type, album: downloadParam.albumName, item: downloadParam.item, success: success, fail: fail)
+                            }
                         })
+                    } else {
+                        self?.saveToAlbum(fileUrl: destination, type: type, album: downloadParam.albumName, item: downloadParam.item, success: success, fail: fail)
                     }
                     
-                    self.debugLogTransIdIfNeeded(headers: httpResponse.allHeaderFields, method: "downloadToCameraRoll")
+                    self?.debugLogTransIdIfNeeded(headers: httpResponse.allHeaderFields, method: "downloadToCameraRoll")
                 } else {
                     fail?(.string("Incorrect response "))
                     return
@@ -484,6 +471,24 @@ class FileService: BaseRequestService {
                 return
             }
         }
+    }
+    
+    private func removeFile(at url: URL) {
+        do {
+            try FileManager.default.removeItem(at: url)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func saveToAlbum(fileUrl: URL, type: PHAssetMediaType, album: String?, item: WrapData?, success: FileOperation?, fail: FailResponse?) {
+        LocalMediaStorage.default.appendToAlboum(fileUrl: fileUrl, type: type, album: album, item: item, success: { [weak self] in
+            self?.removeFile(at: fileUrl)
+            success?()
+        }, fail: { [weak self] error in
+            self?.removeFile(at: fileUrl)
+            fail?(error)
+        })
     }
     
     private func trackDownloaded(lastQueueItems: [Item]) {

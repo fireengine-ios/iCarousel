@@ -97,24 +97,6 @@ class SigngOutParametes: BaseRequestParametrs {
     }
 }
 
-class AuthenticationUserByToken: BaseRequestParametrs {
-    
-    override var requestParametrs: Any {
-        let dict: [String: Any] = [LbRequestkeys.deviceInfo : Device.deviceInfo]
-        return dict
-    }
-    
-    override var patch: URL {
-        return URL(string: RouteRequests.authificationByToken,
-                   relativeTo: super.patch)!
-    }
-    
-    override var header: RequestHeaderParametrs {
-        return RequestHeaders.authification()
-    }
-}
-
-
 class SignUpUser: BaseRequestParametrs {
     
     let phone: String
@@ -282,6 +264,7 @@ class AuthenticationService: BaseRequestService {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
+    private lazy var authorizationSevice: AuthorizationRepository = factory.resolve()
 
     // MARK: - Login
     
@@ -292,7 +275,7 @@ class AuthenticationService: BaseRequestService {
         
         let params: [String: Any] = ["username": user.login,
                                      "password": user.password,
-                                     "deviceInfo": Device.deviceInfo]
+                                     LbRequestkeys.deviceInfo: Device.deviceInfo]
         
         SessionManager.customDefault.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
                 .responseString { [weak self] response in
@@ -333,18 +316,6 @@ class AuthenticationService: BaseRequestService {
                     case .failure(let error):
                         fail?(ErrorResponse.error(error))
                     }
-        }
-    }
-    
-    func autificationByToken(sucess: SuccessLogin?, fail: FailResponse?) {
-        debugLog("AuthenticationService autificationByToken")
-        
-        let user = AuthenticationUserByToken()
-        let params: [String: Any] = [LbRequestkeys.deviceInfo: Device.deviceInfo]
-        
-        SessionManager.customDefault.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
-            .responseString { [weak self] response in
-                self?.loginHandler(response, sucess, fail)
         }
     }
     
@@ -484,7 +455,20 @@ class AuthenticationService: BaseRequestService {
         let user = Authentication3G()
         debugLog("Authentication3G")
         self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
-            self?.autificationByToken(sucess: success, fail: fail)
+            if self?.tokenStorage.refreshToken == nil {
+                let error = ErrorResponse.string(TextConstants.errorServer)
+                fail?(error)
+            } else {
+                self?.authorizationSevice.refreshTokens { [weak self] isSuccess, accessToken in
+                    if let accessToken = accessToken, isSuccess {
+                        self?.tokenStorage.accessToken = accessToken
+                        success?()
+                    } else {
+                        let error = ErrorResponse.string(TextConstants.errorServer)
+                        fail?(error)
+                    }
+                }
+            }
         })
     }
     
@@ -500,7 +484,7 @@ class AuthenticationService: BaseRequestService {
     func checkEmptyEmail(handler: @escaping ResponseBool) {
         let headers = [HeaderConstant.RememberMeToken: tokenStorage.refreshToken ?? ""]
         let refreshAccessTokenUrl = RouteRequests.baseUrl +/ RouteRequests.authificationByRememberMe
-        let params: [String: Any] = [LbRequestkeys.deviceInfo: Device.deviceInfo]
+        let params: [String: Any] = Device.deviceInfo//[LbRequestkeys.deviceInfo: Device.deviceInfo]
         
         sessionManagerWithoutToken
             .request(refreshAccessTokenUrl, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)

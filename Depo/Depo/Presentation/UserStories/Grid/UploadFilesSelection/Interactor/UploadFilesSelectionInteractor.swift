@@ -22,7 +22,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             return
         }
         
-        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) {[weak self] accessGranted, _ in
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] accessGranted, _ in
             debugLog("UploadFilesSelectionInteractor getAllItems LocalMediaStorage askPermissionForPhotoFramework")
             guard accessGranted else {
                 return
@@ -37,22 +37,22 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                         assets.append(asset)
                     })
                     
-                    var items = CoreDataStack.default.allLocalItems(with: assets)
-                    
-                    items.sort {
-                        guard let firstDate = $0.creationDate else {
-                            return false
-                        }
-                        guard let secondDate = $1.creationDate else {
-                            return true
+                    CoreDataStack.default.allLocalItems(with: assets, completion: { [weak self] localItems in
+                        let items = localItems.sorted {
+                            guard let firstDate = $0.creationDate else {
+                                return false
+                            }
+                            guard let secondDate = $1.creationDate else {
+                                return true
+                            }
+                            
+                            return firstDate > secondDate
                         }
                         
-                        return firstDate > secondDate
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self?.output.getContentWithSuccess(array: [items])
-                    }
+                        DispatchQueue.main.async {
+                            self?.output.getContentWithSuccess(array: [items])
+                        }
+                    })
                 }
             }
         }
@@ -76,6 +76,8 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             return
         }
         
+        uploadOutput?.addToUploadStarted()
+        
         UploadService.default.uploadFileList(items: uploadItems, uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
             debugLog("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList success")
 
@@ -87,7 +89,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             DispatchQueue.main.async {
                 self?.uploadOutput?.addToUploadFailedWith(errorMessage: errorResponse.description)
             }
-            }, returnedUploadOperation: {_ in})
+        }, returnedUploadOperation: {_ in})
     }
     
     fileprivate func verify(items: [WrapData]) -> String? {
@@ -105,7 +107,6 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         guard !filteredItems.isEmpty else {
             return TextConstants.syncNotEnoughMemory
         }
-        
         return nil
     }
 }

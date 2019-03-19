@@ -392,7 +392,7 @@
 "ServiceError" = "Сервисная ошибка";
 "Too many verification code requested for this msisdn. Please try again later" = "Для данного номера запрошено слишком много кодов. Пожалуйста, попробуйте позже.";
 "This GSM Number is already registered. Please enter another GSM Number." = "Данный номер телефона уже зарегистрирован. Пожалуйста, введите другой номер.";
-"Albums with %@" = "Альбом с";
+"Albums with %@" = "Альбом с %@";
 "Deselect All" = "Отменить выбор всех";
 "Change cover photo" = "Изменить фото на обложке";
 "Photo uploaded" = "Фото загружено";
@@ -411,7 +411,7 @@
 "There are %d duplicated contacts." = "Дубликатов: %d";
 "Are you sure you want to delete?" = "Вы уверены, что хотите удалить?";
 "This duplicated contacts will be deleted from your contacts." = "Данные дубликаты будут удалены из вашего списка контактов.";
-"%%%d Restored…" = "%d%% восстановлено";
+"%%%d Restored…" = "%%%d восстановлено";
 "%%%d Analyzed…" = "%%%d Проанализировано…";
 "%%%d Backed up…" = "Резервное копирование...";
 "Restored %d Contacts" = "Восстановлено %d контактов";
@@ -428,8 +428,8 @@
 "Folder is Empty" = "Папка пуста";
 "Folder Items" = "Файлов: %d";
 "Contact Backup" = "Резервная копия контактов";
-"Your last contact update was %@ months ago!" = "Вы обновляли данные о контактах %d месяц(-а, -ев) назад!";
-"It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Прошло %d месяц(-а, -ев) с момента, когда вы последний раз обновляли контакты. Обновите их сейчас, чтобы никогда не потерять.";
+"Your last contact update was %@ months ago!" = "Вы обновляли данные о контактах %@ месяц(-а, -ев) назад!";
+"It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Прошло %@ месяц(-а, -ев) с момента, когда вы последний раз обновляли контакты. Обновите их сейчас, чтобы никогда не потерять.";
 "Your contact list looks empty" = "Ваш список контактов пуст.";
 "You don’t have any contacts in your profile, backup your contacts now!" = "В вашем профиле нет контактов. Создайте резервную копию сейчас!";
 "Backup" = "Копировать";
@@ -756,7 +756,7 @@
 "package_albanian_cancel_text" = "Albanian quota cancel text";
 "feature_albanian_cancel_text" = "Вы можете бесплатно пользоваться функциями Премиум подписки как абонент ALBtelecom";
 "no_analyses_left_title" = "Нет оценок";
-"no_analyses_left_message" = "Нет оценок";
+"no_analyses_left_message" = "Не грустите, вы все еще можете активировать новый пакет для анализа ваших фото!";
 "no_analyses_left_button" = "Активировать PhotoPick";
 "analyze_history_empty_title" = "Вы еще не пользовались оценкой ваших фото?";
 "analyze_history_empty_subtitle" = "Воспользуйтесь функцией оценки и узнайте, какие фото будут самыми популярными, чтобы поделиться в соцсетях";
@@ -838,3 +838,6 @@
 "you_are_connected" = "";
 "insta_pick_picture_not_found" = "Картинка не \nнайдена";
 "phone_updated_needs_login" = "Вы успешно обновили номер телефона, пожалуйста, авторизуйтесь, используя ваши учётные данные.";
+"server_under_maintenance" = "";
+"unlimited_photopick_analysis" = "";
+"additional_data_advantage" = "";

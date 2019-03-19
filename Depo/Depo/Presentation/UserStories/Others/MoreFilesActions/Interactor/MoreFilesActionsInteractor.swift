@@ -46,7 +46,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func showSharingMenu(sourceRect: CGRect?) {
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        controler.view.tintColor = ColorConstants.darcBlueColor
+        controler.view.tintColor = ColorConstants.darkBlueColor
         
         let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
             MenloworksAppEvents.onShareClicked()

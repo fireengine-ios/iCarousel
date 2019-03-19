@@ -74,7 +74,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     
     func resendCodeRequestSuccesed() {
         completeAsyncOperationEnableScreen()
-        asyncOperationSucces()
+        asyncOperationSuccess()
         view.setupButtonsInitialState()
         view.setupTimer(withRemainingTime: interactor.remainingTimeInMinutes * 60 )
     }
@@ -87,7 +87,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     }
     
     func failLogin(message: String) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         completeAsyncOperationEnableScreen(errorMessage: message)
     }
     
@@ -104,13 +104,13 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     // MARK: - Utility methods
     private func openAutoSyncIfNeeded() {
         autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.view.hideSpiner()
+            self?.view.hideSpinner()
 
             if needToOpenAutoSync {
                 self?.router.goAutoSync()
             }
         }) { [weak self] error in
-            self?.view.hideSpiner()
+            self?.view.hideSpinner()
         }
     }
     

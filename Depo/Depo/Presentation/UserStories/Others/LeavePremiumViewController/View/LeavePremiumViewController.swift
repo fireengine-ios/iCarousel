@@ -11,11 +11,10 @@ import Foundation
 import UIKit
 
 final class LeavePremiumViewController: BaseViewController {
-    
-    var output: LeavePremiumViewOutput!
         
     @IBOutlet private weak var leavePremiumView: LeavePremiumView!
     
+    var output: LeavePremiumViewOutput!
     private lazy var activityManager = ActivityIndicatorManager()
 
     override func viewDidLoad() {
@@ -35,16 +34,16 @@ final class LeavePremiumViewController: BaseViewController {
     
     // MARK: Utility methods
     private func setup() {
-        setTitle(withString: TextConstants.lifeboxPremium)
+        setTitle(withString: output.title)
         
-        leavePremiumView.configure(with: "", types: PremiumListType.allTypes)
+        leavePremiumView.configure(with: "", type: output.controllerType, hideButton: output.controllerType == .standard)
     }
     
 }
 
 // MARK: - LeavePremiumViewInput
 extension LeavePremiumViewController: LeavePremiumViewInput {
-    func display(price: String) {
-        leavePremiumView.configure(with: price, types: PremiumListType.allTypes)
+    func display(price: String, hideLeaveButton: Bool) {
+        leavePremiumView.configure(with: price, type: output.controllerType, hideButton: hideLeaveButton)
     }
 }

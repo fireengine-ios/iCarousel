@@ -1,5 +1,5 @@
 //
-//  DropDovnTableViewCell.swift
+//  DropDownTableViewCell.swift
 //  Depo
 //
 //  Created by Oleg on 05.09.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DropDovnTableViewCell: UITableViewCell {
+class DropDownTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleTextLabel: UILabel!
 
@@ -17,7 +17,7 @@ class DropDovnTableViewCell: UITableViewCell {
         // Initialization code
         
         titleTextLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
-        titleTextLabel.textColor = ColorConstants.darcBlueColor
+        titleTextLabel.textColor = ColorConstants.darkBlueColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

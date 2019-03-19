@@ -182,8 +182,9 @@ extension IAPManager {
     private func failedTransaction(_ transaction: SKPaymentTransaction) {
         debugLog("IAPManager failedTransaction...")
         
-        if purchaseInProgress, let error = transaction.error {
-            if let skError = error as? SKError.Code, skError == .paymentCancelled {
+        if purchaseInProgress {
+            let error = transactionError(for: transaction.error as NSError?)
+            if error.code == .paymentCancelled {
                 purchaseHandler(.canceled)
             } else {
                 purchaseHandler(.error(error))
@@ -196,5 +197,12 @@ extension IAPManager {
         debugLog("IAPManager restoreTransaction...")
         
         SKPaymentQueue.default().finishTransaction(transaction)
+    }
+    
+    private func transactionError(for error: NSError?) -> SKError {
+        let message = "Unknown error"
+        let altError = NSError(domain: SKErrorDomain, code: SKError.unknown.rawValue, userInfo: [ NSLocalizedDescriptionKey: message ])
+        let nsError = error ?? altError
+        return SKError(_nsError: nsError)
     }
 }

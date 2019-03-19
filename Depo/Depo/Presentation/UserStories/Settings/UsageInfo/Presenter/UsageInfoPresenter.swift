@@ -37,11 +37,11 @@ extension UsageInfoPresenter: UsageInfoViewOutput {
 extension UsageInfoPresenter: UsageInfoInteractorOutput {
     func successed(usage: UsageResponse) {
         view.display(usage: usage)
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     func failedUsage(with error: ErrorResponse) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         view.display(error: error)
     }
 }
