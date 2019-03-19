@@ -15,13 +15,18 @@ struct FileForDownload {
     
     init?(forMediumURL wrapData: WrapData) {
         let url: URL?
-        if wrapData.fileType == .video {
-            url = wrapData.metaData?.videoPreviewURL
+        //TODO: in future preview URL should optional, if there is no preview url - we show gray thubnail(create story)
+        if wrapData.fileType == .video, let videoPreview = wrapData.metaData?.videoPreviewURL {
+            url = videoPreview
+        } else if let photoPreview = wrapData.metaData?.mediumUrl {
+            url = photoPreview
         } else {
-            url = wrapData.metaData?.mediumUrl
+            url = wrapData.tmpDownloadUrl
         }
         
-        guard let _url = url, let name = wrapData.name else { return nil }
+        guard let name = wrapData.name, let _url = url else {
+            return nil
+        }
         self.url = _url
         self.name = name
         self.type = wrapData.fileType
