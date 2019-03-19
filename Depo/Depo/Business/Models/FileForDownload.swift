@@ -15,7 +15,7 @@ struct FileForDownload {
     
     init?(forMediumURL wrapData: WrapData) {
         let url: URL?
-        //FIXME: in future URL should optional, and if there is no preview - we shouw gray thubnail(create story), but for now its too much work to change
+        //TODO: in future preview URL should optional, if there is no preview url - we show gray thubnail(create story)
         if wrapData.fileType == .video, let videoPreview = wrapData.metaData?.videoPreviewURL {
             url = videoPreview
         } else if let photoPreview = wrapData.metaData?.mediumUrl {
