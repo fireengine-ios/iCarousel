@@ -52,36 +52,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func checkDoWeNeedShowLocationPermissionAllert(yesWeNeed:@escaping VoidHandler) {
-        debugLog("LocationManager checkDoWeNeedShowLocationPermissionAllert")
-        SingletonStorage.shared.getUniqueUserID(success: { uniqueUserID in
-            let key = uniqueUserID + "locationPermission"
-            let permission = UserDefaults.standard.integer(forKey: key)
-            if permission == 0 {
-                UserDefaults.standard.set(1, forKey: key)
-                UserDefaults.standard.synchronize()
-                yesWeNeed()
-            }
-        }) {
-            
-        }
-    }
-    
-    func showIfNeedLocationPermissionAllert() {
-        debugLog("LocationManager showIfNeedLocationPermissionAllert")
-
-        self.checkDoWeNeedShowLocationPermissionAllert(yesWeNeed: {
-            let controller = UIAlertController.init(title: "", message: TextConstants.locationServiceDisable, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: TextConstants.ok, style: .default, handler: { action in
-//                UIApplication.shared.openSettings()
-            })
-//            let cancelAction = UIAlertAction(title: TextConstants.cancel, style: .cancel, handler: nil)
-            controller.addAction(okAction)
-//            controller.addAction(cancelAction)
-            RouterVC().presentViewController(controller: controller)
-        })
-    }
-    
     func startUpdateLocationInBackground() {
         debugLog("LocationManager startUpdateLocationInBackground")
         let settings = AutoSyncDataStorage().settings
@@ -111,8 +81,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                     locationManager.allowsBackgroundLocationUpdates = true
                     locationManager.startMonitoringSignificantLocationChanges()
                 }
-            } else {
-                showIfNeedLocationPermissionAllert()
             }
         }
     }

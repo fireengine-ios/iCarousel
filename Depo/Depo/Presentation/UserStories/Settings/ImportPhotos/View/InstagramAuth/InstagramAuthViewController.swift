@@ -137,8 +137,6 @@ extension InstagramAuthViewController: WKNavigationDelegate {
             instagramAccessToken = String(currentUrl.suffix(from: index))
             isLoginStarted = true
             removeCache()
-        } else if currentUrl.contains("access_denied") {
-            isLoginCanceled = true
         }
         
         decisionHandler(.allow)
