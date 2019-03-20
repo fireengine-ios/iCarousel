@@ -676,8 +676,8 @@
 "Become Premium" = "Premium Ol";
 "Become Premium Member!" = "Premium Ol!";
 "leave_premium_membership" = "Premium'dan Ayrıl";
-"Standard User" = "Standart Hesap";
-"Premium User" = "Premium Hesap";
+"Standard User" = "lifebox Standart";
+"Premium User" = "lifebox Premium";
 "lifebox Premium" = "lifebox Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "Telefon rehberindeki tekrarlayan kontakları silmek ve Premium hesabın diğer avantajlı özelliklerinden faydalanmak için Premium ol!";
 
@@ -750,11 +750,11 @@
 "my_storage_usage" = "%2$@’nin %1$@'si kaldı";
 "package_section_title" = "Saklama alanını yükselt";
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "lifebox'a standart kullanıcı olarak giriş yapıyorsun. Hesabını Premium'a yükseltmezsen içeriklerin orijinal olarak saklanmaya devam edemeyecek. Orijinal kalitede saklanabilmesi için Premium olup ayrıcalıklardan faydalanmak ister misin?";
-"sync_page_pop_up" = "lifebox'a standart kullanıcı olarak giriş yapıyorsun. Hesabını Premium'a yükseltmezsen içeriklerin orijinal olarak saklanmaya devam edemeyecek. Orijinal kalitede saklanabilmesi için Premium olup ayrıcalıklardan faydalanmak ister misin?";
+"home_page_pop_up" = "Anılarını orijinal kalitede saklamak ve tüm premium özelliklere erişmek için Premium üye olmak ister misin?";
+"sync_page_pop_up" = "Anılarını orijinal kalitede saklamak ve tüm premium özelliklere erişmek için Premium üye olmak ister misin?";
 "ok_for_upgrade" = "Evet, Premium Ol";
 "no_for_upgrade" = "Hayır, Devam Et";
-"uploded_photos_high_quality" = "lifebox'a standart kullanıcı olarak giriş yapıyorsun. Hesabını Premium'a yükseltmezsen içeriklerin orijinal olarak saklanmaya devam edemeyecek. Orijinal kalitede saklanabilmesi için Premium olup ayrıcalıklardan faydalanmak ister misin?";
+"uploded_photos_high_quality" = "Anılarını orijinal kalitede saklamak ve tüm premium özelliklere erişmek için Premium üye olmak ister misin?";
 "NSFaceIDUsageDescription" = "Uygulamamız güvenliğin için Face ID özelliğini kullanmanı sağlayabilir";
 
 /*AnalyzeHistoryController*/
@@ -838,33 +838,33 @@
 "work_will_introduced" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
 "facebook_remove_connection_warning_title" = "Facebook bağlantını kaldırmak üzeresin.";
 "dropbox_remove_connection_warning_title" = "Dropbox bağlantını kaldırmak üzeresin.";
-"facebook_remove_connection_warning_message" = "Facebook ile olan bağlantını kaldırmak istediğine emin misin?";
+"facebook_remove_connection_warning_message" = "Facebook ile olan bağlantını kaldırmak istediğine emin misin? \n\n";
 "dropbox_remove_connection_warning_message" = "Dropbox ile olan bağlantını kaldırmak istediğine emin misin?";
 "remove_connection" = "Bağlantıyı kaldır";
 "you_are_connected" = "Bağlı";
 "insta_pick_picture_not_found" = "Fotoğraf \nbulunamadı";
 "phone_updated_needs_login" = "Başarılı biçimde telefon numaranızı güncellediniz, lütfen kullanıcı adınız ve şifren ile giriş yap";
 "server_under_maintenance" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
-"unlimited_photopick_analysis" = "";
-"data_advantage_short" = "";
-"additional_data_advantage" = "";
-"connection_problem_occured" = "";
+"unlimited_photopick_analysis" = "Sınırsız PhotoPick Hakkı!";
+"data_advantage_short" = "Ek data paketi";
+"additional_data_advantage" = "Ek data paketi";
+"connection_problem_occured" = "Bağlantı hatası. Lütfen daha sonra tekrar deneyin.";
 "turkcell_purchase_popup_title" = "%@";
-"mid_user" = "Ara Paket Kullanıcı";
-"instapick_no_available_units_left" = "";
-"middle_user" = "Ara Paket Kullanıcı";
-"lifebox_middle" = "Ara Paket Kullanıcı";
-"lifebox_standart" = "Standart Kullanıcı";
-"account_detail_middle_title" = "";
-"account_detail_middle_description" = "";
-"account_detail_standart_title" = "";
-"account_detail_standart_description" = "";
+"mid_user" = "lifebox Standart+";
+"instapick_no_available_units_left" = "Analiz hakkın kalmadı";
+"middle_user" = "lifebox Standart+";
+"lifebox_middle" = "lifebox Standart+";
+"lifebox_standart" = "lifebox Standart";
+"account_detail_middle_title" = "Standart+ üyeliğin ile lifebox'ın aşağıdaki tüm gelişmiş özelliklerini kullanabiliyorsun.";
+"account_detail_middle_description" = "Standart+ üyeliğini sonlandırdığında bu özelliklerden faydalanamayacaksın.";
+"account_detail_standart_title" = "lifebox'ı Standart hesap olarak kullanıyorsun.";
+"account_detail_standart_description" = "lifebox Standart ile aşağıdaki özellikleri kullanabilirsin.";
 
 /*AnalyzeHistoryController*/
 "instapick_see_details" = "Premium Ol";
-"store_in_high_quality" = "";
-"5_photopick_analysis" = "";
-"10_photopick_analysis" = "";
-"data_package_for_turkcell" = "";
-"delete_duplicated_contacts" = "Rehberindeki Tekrarlayan Kontakları Sil!";
-"leave_middle_membership" = "";
+"store_in_high_quality" = "Anılarını yüksek kalitede yedekle";
+"5_photopick_analysis" = "5 PhotoPick Analiz Hakkı";
+"10_photopick_analysis" = "10 PhotoPick Analiz Hakkı";
+"data_package_for_turkcell" = "Ek data paketi";
+"delete_duplicated_contacts" = "Rehberindeki tekrarlayan kontakları sil!";
+"leave_middle_membership" = "Standart+ üyeliğini sonlandır";
