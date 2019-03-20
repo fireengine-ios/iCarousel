@@ -232,7 +232,7 @@
 "Updated" = "Updated";
 "New Contact" = "New Contact";
 "Back Up My Contacts" = "Backup My Contacts";
-"UPGRADE" = "UPGRADE";
+"UPGRADE" = "DETAILS";
 "Album Info" = "Album Info";
 "Title" = "Title";
 "Artist" = "Artist";
@@ -696,8 +696,8 @@
 "Become Premium" = "Become Premium";
 "Become Premium Member!" = "Become Premium Member!";
 "leave_premium_membership" = "Leave Premium Membership";
-"Standard User" = "Standard User";
-"Premium User" = "Premium Account";
+"Standard User" = "lifebox Standard";
+"Premium User" = "lifebox Premium";
 "lifebox Premium" = "lifebox Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "To delete all duplicated contacts from phone directory and unlock many more features, become a Premium member!";
 
@@ -770,11 +770,11 @@
 "my_storage_usage" = "%1$@ of %2$@ has remained";
 "package_section_title" = "Upgrade Your Storage";
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "You are loging in to lifebox as a standard user. If you don't upgrade to Premium, your memories will be kept in high quality. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
-"sync_page_pop_up" = "You are loging in to lifebox as a standard user. If you don't upgrade to Premium, your memories will be kept in high quality. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
+"home_page_pop_up" = "Would you like to be a Premium member to store your memories in original quality and get access to all the premium features?";
+"sync_page_pop_up" = "Would you like to be a Premium member to store your memories in original quality and get access to all the premium features?";
 "ok_for_upgrade" = "Yes, Upgrade";
 "no_for_upgrade" = "No, I'm OK";
-"uploded_photos_high_quality" = "You are loging in to lifebox as a standard user. If you don't upgrade to Premium, your memories will be kept in high quality. Do you want to be a Premium user to store your memories in original quality and benefit from Premium privileges?";
+"uploded_photos_high_quality" = "Would you like to be a Premium member to store your memories in original quality and get access to all the premium features?";
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
 
 /*AnalyzeHistoryController*/
@@ -858,7 +858,7 @@
 "work_will_introduced" = "There is currently a maintenance work on lifebox, please try again later.";
 "facebook_remove_connection_warning_title" = "You're about to remove your Facebook connection.";
 "dropbox_remove_connection_warning_title" = "You're about to remove your Dropbox connection.";
-"facebook_remove_connection_warning_message" = "Are you sure you want to remove your Facebook connection?\n\n";
+"facebook_remove_connection_warning_message" = "Are you sure you want to remove your Facebook connection? \n\n";
 "dropbox_remove_connection_warning_message" = "Are you sure you want to remove your Dropbox connection?\n\n";
 "remove_connection" = "Remove Connection";
 "you_are_connected" = "You are connected";
@@ -868,23 +868,23 @@
 "unlimited_photopick_analysis" = "Unlimited PhotoPick analysis";
 "data_advantage_short" = "Additional Data Advantage";
 "additional_data_advantage" = "Additional Data Advantage";
-"connection_problem_occured" = "3106 error";
+"connection_problem_occured" = "There is a connection error now, please try again later";
 "turkcell_purchase_popup_title" = "%@";
-"mid_user" = "Middle User";
-"instapick_no_available_units_left" = "3105 error";
-"middle_user" = "Middle User";
-"lifebox_middle" = "Middle User";
-"lifebox_standart" = "Standard User";
-"account_detail_middle_title" = "account_detail_middle_title";
-"account_detail_middle_description" = "account_detail_middle_description";
-"account_detail_standart_title" = "account_detail_standart_title";
-"account_detail_standart_description" = "account_detail_standart_description";
+"mid_user" = "lifebox Standard+";
+"instapick_no_available_units_left" = "No analysis left";
+"middle_user" = "lifebox Standard+";
+"lifebox_middle" = "lifebox Standard+";
+"lifebox_standart" = "lifebox Standard";
+"account_detail_middle_title" = "You can use advanced features with your lifebox Standard+ membership";
+"account_detail_middle_description" = "You will not be able to benefit from Standard+ privileges if you cancel your membership";
+"account_detail_standart_title" = "You are using lifebox as a Standard user";
+"account_detail_standart_description" = "You can use standard features with your membership";
 
 /*AnalyzeHistoryController*/
 "instapick_see_details" = "Become Premium";
-"store_in_high_quality" = "Store in High Quality";
+"store_in_high_quality" = "Back up with High Quality";
 "5_photopick_analysis" = "5 PhotoPick analysis";
 "10_photopick_analysis" = "10 PhotoPick analysis";
-"data_package_for_turkcell" = "Data package for Turkcell subscribers";
-"delete_duplicated_contacts" = "Remove Duplicate Contacts from Your Directory";
-"leave_middle_membership" = "Leave Middle Membership";
+"data_package_for_turkcell" = "Additional data advantage";
+"delete_duplicated_contacts" = "Remove Duplicate Contacts from Your Phone Directory";
+"leave_middle_membership" = "Leave Standard+ Membership";
