@@ -57,9 +57,7 @@ public class MediaItem: NSManagedObject {
             let relatedTothisItemsRemotes = getAllRelatedItems(wrapItem: wrapData, findRelatedLocals: !isLocalItemValue, context: context)
             relatedRemotes = NSSet(array: relatedTothisItemsRemotes)
             updateLocalRelated(remotesMediaItems: relatedTothisItemsRemotes)
-        }
-            //TODO:CODE BELOW NEED TO BE TESTED
-        else {
+        } else {
             let relatedTothisItemsLocals = getAllRelatedItems(wrapItem: wrapData, findRelatedLocals: isLocalItemValue, context: context)
             relatedLocal = relatedTothisItemsLocals.first
             updateRemoteRelated(localMediaItems: relatedTothisItemsLocals)
@@ -173,7 +171,7 @@ extension MediaItem {
     
     private func updateRemoteRelated(localMediaItems: [MediaItem]) {
         localMediaItems.forEach {
-            $0.relatedRemotes.adding(self)
+            $0.addToRelatedRemotes(self)
         }
     }
 }
