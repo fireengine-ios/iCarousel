@@ -11,7 +11,7 @@ import UIKit
 protocol PhotoVideoDataSourceDelegate: class {
     func selectedModeDidChange(_ selectingMode: Bool)
     func fetchPredicateCreated()
-    func contentDidChange(_ fetchedObjects: [WrapData])
+    func contentDidChange(_ fetchedObjects: [WrapData], emptyMetaItems: [WrapData])
 }
 
 // TODO: selectedIndexPaths NSFetchedResultsController changes
@@ -46,7 +46,9 @@ final class PhotoVideoDataSource: NSObject {
     
     var lastFetchedObjects: [WrapData]? {
         didSet {
-            delegate?.contentDidChange(lastFetchedObjects ?? [])
+            let emptyMetaMediaItems = fetchedResultsController.fetchedObjects?.filter { $0.monthValue == nil }
+            let emptyMetaItems = emptyMetaMediaItems?.map { WrapData(mediaItem: $0) }
+            delegate?.contentDidChange(lastFetchedObjects ?? [], emptyMetaItems: emptyMetaItems ?? [])
         }
     }
     var canUpdateLastFecthed = true
