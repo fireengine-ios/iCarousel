@@ -28,17 +28,18 @@ final class PhotoVideoScrollBarManager {
         scrollBar.delegate = delegate
     }
     
-    func updateYearsView(with allItems: [Item], emptyMetaItems: [Item], cellHeight: CGFloat, numberOfColumns: Int) {
+    func updateYearsView(with allItems: [MediaItem], cellHeight: CGFloat, numberOfColumns: Int) {
         if allItems.isEmpty {
             return
         }
     
         // TODO: getCellSizeForList must be called in main queue. for a while it is woking without it
         //        let cellHeight = delegate?.getCellSizeForGreed().height ?? 0
-        let dates = allItems.compactMap { $0.metaDate }
+        let dates = allItems.compactMap { $0.sortingDate as Date? }
         scrollBar.updateLayout(by: cellHeight)
         yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
         
+        let emptyMetaItems = allItems.filter {$0.monthValue == nil}
         if !emptyMetaItems.isEmpty {
             yearsView.update(additionalSections: [(TextConstants.photosVideosViewMissingDatesHeaderText, emptyMetaItems.count)])
         }
