@@ -82,13 +82,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         homePageNavigationBarStyle()
         // TODO: Set title?
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
-        collectionViewManager.scrolliblePopUpView.isActive = true
+        collectionViewManager.setScrolliblePopUpView(isActive: true)
         scrollBarManager.startTimerToHideScrollBar()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        collectionViewManager.scrolliblePopUpView.isActive = false
+        collectionViewManager.setScrolliblePopUpView(isActive: false)
     }
 
     

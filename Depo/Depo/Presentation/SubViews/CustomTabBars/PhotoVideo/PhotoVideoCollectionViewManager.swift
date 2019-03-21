@@ -75,6 +75,13 @@ final class PhotoVideoCollectionViewManager {
         setupSlider()
     }
     
+    func setScrolliblePopUpView(isActive: Bool) {
+        scrolliblePopUpView.isActive = isActive
+        if isActive {
+            CardsManager.default.updateAllProgressesInCardsForView(view: scrolliblePopUpView)
+        }
+    }
+    
     private func setupCollectionView() {
         collectionView.register(nibCell: PhotoVideoCell.self)
         collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)        
@@ -90,10 +97,6 @@ final class PhotoVideoCollectionViewManager {
     
     private func setupViewForPopUp() {
         CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
-        CardsManager.default.updateAllProgressesInCardsForView(view: scrolliblePopUpView)
-        if !CacheManager.shared.allLocalAdded {
-            CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
-        }
         
         scrolliblePopUpView.delegate = self
         scrolliblePopUpView.isEnable = true

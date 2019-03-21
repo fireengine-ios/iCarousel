@@ -231,10 +231,8 @@ class CardsManager: NSObject {
     }
 
     func stopOperationWithType(type: OperationType) {
-        
-        print("operation stopped ", type.rawValue)
-        
         DispatchQueue.main.async {
+            print("operation stopped ", type.rawValue)
             self.progresForOperation[type] = nil
             for notificationView in self.foloversArray {
                 notificationView.stopOperationWithType(type: type)
