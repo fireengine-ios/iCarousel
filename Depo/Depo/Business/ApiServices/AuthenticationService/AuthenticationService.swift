@@ -389,7 +389,7 @@ class AuthenticationService: BaseRequestService {
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
-            MediaItemOperationsService.shared.clearDataBase()
+            CellImageManager.clear()
             FreeAppSpace.default.clear()
             CardsManager.default.stopAllOperations()
             CardsManager.default.clear()
@@ -412,7 +412,9 @@ class AuthenticationService: BaseRequestService {
             self.storageVars.currentUserID = nil
             self.storageVars.emptyEmailUp = false
             
-            success?()
+            MediaItemOperationsService.shared.deleteRemoteFiles { _ in
+                success?()
+            }
         }
         if async {
             DispatchQueue.main.async {

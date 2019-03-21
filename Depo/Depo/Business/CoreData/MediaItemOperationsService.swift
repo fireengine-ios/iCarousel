@@ -29,11 +29,7 @@ final class MediaItemOperationsService {
     var originalAssetsBeingAppended = AssetsCache()
     var nonCloudAlreadySavedAssets = AssetsCache()
     
-    func clearDataBase() {
-        deleteRemoteFiles()
-    }
-    
-    func deleteRemoteFiles() {
+    func deleteRemoteFiles(_ completion: BoolHandler?) {
         // Album has remote status by default for now
         let albumFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItemsAlbum.Identifier)
         
@@ -44,10 +40,10 @@ final class MediaItemOperationsService {
         }
         mediaItemFetchRequest.predicate = predicate
         
-        self.deleteObjects(fromFetches: [albumFetchRequest, mediaItemFetchRequest])
+        self.deleteObjects(fromFetches: [albumFetchRequest, mediaItemFetchRequest], completion: completion)
     }
     
-    func deleteLocalFiles() {
+    func deleteLocalFiles(completion: BoolHandler?) {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
         let predicateRules = PredicateRules()
@@ -55,7 +51,8 @@ final class MediaItemOperationsService {
             return
         }
         fetchRequest.predicate = predicate
-        self.deleteObjects(fromFetch: fetchRequest)
+        let context = CoreDataStack.default.newChildBackgroundContext
+        self.deleteObjects(fromFetch: fetchRequest, context: context, completion: nil)
         
     }
     
@@ -103,31 +100,43 @@ final class MediaItemOperationsService {
                 return
             }
             var array = [Item]()
-            array = localDuplicatesMediaItems.flatMap { WrapData(mediaItem: $0) }
+            array = localDuplicatesMediaItems.compactMap { WrapData(mediaItem: $0) }
             localFilteredPhotosCallBack(array.first)
         }
         
     }
     
-    private func deleteObjects(fromFetches fetchRequests: [NSFetchRequest<NSFetchRequestResult>]) {
+    private func deleteObjects(fromFetches fetchRequests: [NSFetchRequest<NSFetchRequestResult>], completion: BoolHandler?) {
+        let context = CoreDataStack.default.newChildBackgroundContext
+        let group = DispatchGroup()
+        
         for fetchRequest in fetchRequests {
-            self.deleteObjects(fromFetch: fetchRequest)
+            group.enter()
+            self.deleteObjects(fromFetch: fetchRequest, context:context, completion: { _ in
+                group.leave()
+            })
+        }
+        group.notify(queue: .main) {
+            completion?(true)
         }
     }
     
-    private func deleteObjects(fromFetch fetchRequest: NSFetchRequest<NSFetchRequestResult>) {
-        let context = CoreDataStack.default.newChildBackgroundContext
-        context.perform { [weak self] in
+    private func deleteObjects(fromFetch fetchRequest: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext, completion: BoolHandler?) {
+//        let context = CoreDataStack.default.newChildBackgroundContext
+        context.perform {
             guard let fetchResult = try? context.fetch(fetchRequest),
                 let unwrapedObjects = fetchResult as? [NSManagedObject],
-                unwrapedObjects.count > 0 else {
-                    
-                    return
+                unwrapedObjects.count > 0
+            else {
+                completion?(false)
+                return
             }
+            
             for object in unwrapedObjects {
                 context.delete(object)
             }
             CoreDataStack.default.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
+                completion?(true)
                 debugPrint("Data base deleted objects")
             })
             
@@ -371,7 +380,9 @@ final class MediaItemOperationsService {
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] _, status in
             switch status {
             case .denied:
-                MediaItemOperationsService.shared.deleteLocalFiles()
+                MediaItemOperationsService.shared.deleteLocalFiles(completion: { _ in
+                    completion?()
+                })
             case .authorized:
                 self?.insertFromGallery(completion: completion)
             case .restricted, .notDetermined:
@@ -432,7 +443,7 @@ final class MediaItemOperationsService {
         
         updateICloudStatus(for: assetsList)
         let context = CoreDataStack.default.newChildBackgroundContext
-        listAssetIdIsNotSaved(allList: assetsList, context: context) {[weak self] notSavedAssets in
+        listAssetIdIsNotSaved(allList: assetsList, context: context) { [weak self] notSavedAssets in
             self?.originalAssetsBeingAppended.append(list: notSavedAssets)///tempo assets
             
             let start = Date()

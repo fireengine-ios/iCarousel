@@ -58,13 +58,13 @@ extension NSManagedObjectContext {
             completion?(.hasNoChanges)
             return
         }
-        /// weak ???
-        let performBlock = {
+
+        let performBlock = { [weak self] in
             do {
-                try self.save()
+                try self?.save()
                 completion?(.saved)
             } catch {
-                self.rollback()
+                self?.rollback()
                 completion?(.rolledBack(error))
             }
         }
