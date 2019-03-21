@@ -51,9 +51,6 @@ def core_pods
   pod 'SQLite.swift', '0.11.4'
   
   pod 'GPUImage', '~> 0.1'
-
-  #network debugging
-  pod 'netfox', :configurations => ['Debug']
 end
 
 target 'Depo_LifeTech' do

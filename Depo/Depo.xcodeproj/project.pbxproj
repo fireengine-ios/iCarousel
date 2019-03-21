@@ -1931,8 +1931,8 @@
 		8C0E8EC51FDEBDFF00789C91 /* CreateStorySelectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F691F31E4C900536DB6 /* CreateStorySelectionConfigurator.swift */; };
 		8C0E8EC61FDEBDFF00789C91 /* SearchViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB216B1F3C858A00BAFE1E /* SearchViewPresenter.swift */; };
 		8C0E8EC71FDEBDFF00789C91 /* InternetDataUsageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9B4EA1F78FD85002DAF81 /* InternetDataUsageCell.swift */; };
-		8C0E8EC91FDEBDFF00789C91 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		8C0E8ECA1FDEBDFF00789C91 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C0E8EC91FDEBDFF00789C91 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		8C0E8ECA1FDEBDFF00789C91 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		8C0E8ECB1FDEBDFF00789C91 /* UsageInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E31F3F18FA00EFDC6D /* UsageInfoInteractor.swift */; };
 		8C0E8ECC1FDEBDFF00789C91 /* AudioSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2FA61F3304D700536DB6 /* AudioSelectionDataSource.swift */; };
 		8C0E8ECD1FDEBDFF00789C91 /* LocalAlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873204EE1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift */; };
@@ -2863,7 +2863,7 @@
 		A2268EC321A68C1A002F2611 /* LeavePremiumHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2268EC121A68C1A002F2611 /* LeavePremiumHeaderView.xib */; };
 		A2268EC521A68C2A002F2611 /* LeavePremiumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2268EC421A68C2A002F2611 /* LeavePremiumView.xib */; };
 		A2268EC621A68C2A002F2611 /* LeavePremiumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2268EC421A68C2A002F2611 /* LeavePremiumView.xib */; };
-		A22A3BEE2215A5B700FF03C1 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A22A3BEE2215A5B700FF03C1 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		A253D62921A210690049AC15 /* PremiumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A253D62821A210690049AC15 /* PremiumViewController.xib */; };
 		A253D62A21A210690049AC15 /* PremiumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A253D62821A210690049AC15 /* PremiumViewController.xib */; };
 		A253D62B21A212020049AC15 /* PremiumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079901219F131B00AD5037 /* PremiumViewController.swift */; };
@@ -3027,7 +3027,7 @@
 		B5B6B1522170A01E00463260 /* PrepareQuickScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B6B14F2170A01E00463260 /* PrepareQuickScroll.swift */; };
 		B5B6B1532170A01E00463260 /* PrepareQuickScroll.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5B6B1502170A01E00463260 /* PrepareQuickScroll.xib */; };
 		B5B6B1542170A01E00463260 /* PrepareQuickScroll.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5B6B1502170A01E00463260 /* PrepareQuickScroll.xib */; };
-		B5BA987B2068C6F200CA3BF9 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B5BA987B2068C6F200CA3BF9 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		B5C4C8A22049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */; };
 		B5C4C8A32049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */; };
 		B5C4C8A42049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */; };
@@ -3233,9 +3233,9 @@
 		CE292C2421BE5DE9004FC745 /* AuthoritySingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921423E921B562D500B44574 /* AuthoritySingleton.swift */; };
 		CE292C2521BE5DE9004FC745 /* PackageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A745FF21B91A4F00386C37 /* PackageService.swift */; };
 		CE292C2621BE5DE9004FC745 /* ShareWormholeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D282E207E4A14003AE4FB /* ShareWormholeListener.swift */; };
-		CE292C2721BE5DE9004FC745 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CE292C2821BE5DE9004FC745 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CE292C2921BE5DE9004FC745 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CE292C2721BE5DE9004FC745 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CE292C2821BE5DE9004FC745 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CE292C2921BE5DE9004FC745 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CE292C3021C2419C004FC745 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE292C2F21C2419C004FC745 /* PassthroughView.swift */; };
 		CE2976DD1FD58E2000350F3A /* LocalAlbumPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976D31FD58E1F00350F3A /* LocalAlbumPresenter.swift */; };
 		CE2976DE1FD58E2000350F3A /* LocalAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976D51FD58E1F00350F3A /* LocalAlbumViewController.swift */; };
@@ -3367,8 +3367,8 @@
 		CE4D282F207E4A14003AE4FB /* ShareWormholeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D282E207E4A14003AE4FB /* ShareWormholeListener.swift */; };
 		CE4F4DC01F14AD2A00EF1F0C /* BaseRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F4DBF1F14AD2A00EF1F0C /* BaseRequestService.swift */; };
 		CE4F4DC11F14BCC900EF1F0C /* EULAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AF76F1F01D63D002AD17C /* EULAService.swift */; };
-		CE4F6195206D1E7B00B179DA /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CE51AB051EF90853005DCEE0 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CE4F6195206D1E7B00B179DA /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CE51AB051EF90853005DCEE0 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E931EF5D0B100072983 /* ValidationResults.swift */; };
 		CE51AB121EF90853005DCEE0 /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
 		CE51AB201EF90853005DCEE0 /* LoginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */; };
@@ -3683,7 +3683,7 @@
 		CECA95971F163CC80054BDC0 /* WrapperedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA95961F163CC80054BDC0 /* WrapperedItems.swift */; };
 		CECD4E4D1FDFD69500978BE7 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
 		CECD4E4E1FDFD69500978BE7 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E4C1FDFD69400978BE7 /* PopUpController.swift */; };
-		CECD4E561FE1152600978BE7 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CECD4E561FE1152600978BE7 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CECE42BB21A53F45007625F2 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		CED4B0242017505300D06CA9 /* HomeCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */; };
 		CED4B0262017505300D06CA9 /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E020174D7500F49E41 /* ResponseParser.swift */; };
@@ -14959,7 +14959,6 @@
 				"${BUILT_PRODUCTS_DIR}/XYPieChart/XYPieChart.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${BUILT_PRODUCTS_DIR}/netfox/netfox.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -14989,7 +14988,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XYPieChart.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/netfox.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -15047,7 +15045,6 @@
 				"${BUILT_PRODUCTS_DIR}/XYPieChart/XYPieChart.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${BUILT_PRODUCTS_DIR}/netfox/netfox.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -15077,7 +15074,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XYPieChart.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/netfox.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -15166,7 +15162,6 @@
 				"${BUILT_PRODUCTS_DIR}/XYPieChart/XYPieChart.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${BUILT_PRODUCTS_DIR}/netfox/netfox.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -15196,7 +15191,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XYPieChart.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/netfox.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -15356,9 +15350,9 @@
 				CE292C2421BE5DE9004FC745 /* AuthoritySingleton.swift in Sources */,
 				CE292C2521BE5DE9004FC745 /* PackageService.swift in Sources */,
 				CE292C2621BE5DE9004FC745 /* ShareWormholeListener.swift in Sources */,
-				CE292C2721BE5DE9004FC745 /* (null) in Sources */,
-				CE292C2821BE5DE9004FC745 /* (null) in Sources */,
-				CE292C2921BE5DE9004FC745 /* (null) in Sources */,
+				CE292C2721BE5DE9004FC745 /* BuildFile in Sources */,
+				CE292C2821BE5DE9004FC745 /* BuildFile in Sources */,
+				CE292C2921BE5DE9004FC745 /* BuildFile in Sources */,
 				8C0E8C641FDEBDFF00789C91 /* ActivitiesByDay.swift in Sources */,
 				8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */,
 				8C0B919420170E3800A5BA81 /* DuplicatedContactsModuleInput.swift in Sources */,
@@ -16098,8 +16092,8 @@
 				8C0E8EC51FDEBDFF00789C91 /* CreateStorySelectionConfigurator.swift in Sources */,
 				8C0E8EC61FDEBDFF00789C91 /* SearchViewPresenter.swift in Sources */,
 				8C0E8EC71FDEBDFF00789C91 /* InternetDataUsageCell.swift in Sources */,
-				8C0E8EC91FDEBDFF00789C91 /* (null) in Sources */,
-				8C0E8ECA1FDEBDFF00789C91 /* (null) in Sources */,
+				8C0E8EC91FDEBDFF00789C91 /* BuildFile in Sources */,
+				8C0E8ECA1FDEBDFF00789C91 /* BuildFile in Sources */,
 				8C0E8ECB1FDEBDFF00789C91 /* UsageInfoInteractor.swift in Sources */,
 				8CB478AF20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */,
 				8C0E8ECC1FDEBDFF00789C91 /* AudioSelectionDataSource.swift in Sources */,
@@ -16635,7 +16629,7 @@
 				CEC3C2421FB99AF800C3D67F /* PasscodeSettingsPresenter.swift in Sources */,
 				7CD1F8D51F014F150028F51A /* Router.swift in Sources */,
 				B5C7C582211C6A21006E94DB /* AugmentedRealityItem.swift in Sources */,
-				CE51AB051EF90853005DCEE0 /* (null) in Sources */,
+				CE51AB051EF90853005DCEE0 /* BuildFile in Sources */,
 				8C449CF6216632960060785C /* String+CyrillicCompare.swift in Sources */,
 				CE51AB0D1EF90853005DCEE0 /* ValidationResults.swift in Sources */,
 				CE51AB121EF90853005DCEE0 /* GSMUserInputCell.swift in Sources */,
@@ -17161,7 +17155,7 @@
 				78D6C8FF1FCEBA5700210801 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				CE8F44F11F6AC1550062C2E0 /* ActivityTimelineHeader.swift in Sources */,
 				EFA74FB01FBF378F00CF946E /* PrintViewInput.swift in Sources */,
-				CE4F6195206D1E7B00B179DA /* (null) in Sources */,
+				CE4F6195206D1E7B00B179DA /* BuildFile in Sources */,
 				CE00B24821F5A79400A5A696 /* PhotoSelectionController.swift in Sources */,
 				C4A38BA221EE1F2300ECCCEA /* TransparentGradientView.swift in Sources */,
 				D47863FD1F3F18FA00EFDC6D /* UsageInfoViewOutput.swift in Sources */,
@@ -17324,9 +17318,9 @@
 				CE2F56221F7552A900F49DA1 /* ColumnsCollectionLayout.swift in Sources */,
 				8C0097201F6BDB1700FA069C /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
 				CE6A8F1720737E230001EB54 /* ServerMessageError.swift in Sources */,
-				A22A3BEE2215A5B700FF03C1 /* (null) in Sources */,
+				A22A3BEE2215A5B700FF03C1 /* BuildFile in Sources */,
 				78E3D51A203FFEC800FA3478 /* MenloworksTags.swift in Sources */,
-				B5BA987B2068C6F200CA3BF9 /* (null) in Sources */,
+				B5BA987B2068C6F200CA3BF9 /* BuildFile in Sources */,
 				CEFFA8F521B0089800B34F36 /* ViewSortStorage.swift in Sources */,
 				4A9B3905201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
 				A207990E219F137E00AD5037 /* PremiumInteractor.swift in Sources */,
@@ -17387,7 +17381,7 @@
 				B5AB2F062204356400E3AF23 /* InstaPickSmartAlbumCell.swift in Sources */,
 				CEF73B9D1FCEAC30004C3ADF /* KeyboardHideManager.swift in Sources */,
 				38BA503099842E5840815A3A /* BaseFilesGreedPresenter.swift in Sources */,
-				CECD4E561FE1152600978BE7 /* (null) in Sources */,
+				CECD4E561FE1152600978BE7 /* BuildFile in Sources */,
 				CE170F6A21E76DFD00BE352D /* InstapickService.swift in Sources */,
 				FDC8F998E27D9EA9B6B95F47 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				CE9487D985CF5DEAC28D4438 /* BaseFilesGreedInteractorOutput.swift in Sources */,
