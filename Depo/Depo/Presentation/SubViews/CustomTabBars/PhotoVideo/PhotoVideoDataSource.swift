@@ -100,7 +100,6 @@ final class PhotoVideoDataSource: NSObject {
     }
     
     func setupOriginalPredicates(isPhotos: Bool, predicateSetupedCallback: @escaping VoidHandler) {
-        
         predicateManager.getMainCompoundedPredicate(isPhotos: isPhotos) { [weak self] compoundedPredicate in
             self?.fetchedResultsController.fetchRequest.predicate = compoundedPredicate
             predicateSetupedCallback()
@@ -197,15 +196,17 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        DispatchQueue.toMain {
-            self.collectionView.performBatchUpdates({ [weak self] in
-                self?.sectionChanges.forEach { $0() }
-                self?.objectChanges.forEach { $0() }
-                }, completion: { [weak self] _ in
-                    self?.reloadSupplementaryViewsIfNeeded()
-                    self?.updateLastFetchedObjects()
-            })
-        }
+        let sectionChangesStatic = sectionChanges
+        let objectChangesStatic = objectChanges
+        sectionChanges.removeAll()
+        objectChanges.removeAll()
+        collectionView.performBatchUpdates({
+            sectionChangesStatic.forEach { $0() }
+            objectChangesStatic.forEach { $0() }
+            }, completion: { [weak self] _ in
+                self?.reloadSupplementaryViewsIfNeeded()
+                self?.updateLastFetchedObjects()
+        })
     }
     
     private func updateLastFetchedObjects() {
@@ -215,7 +216,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     }
     
     private func reloadSupplementaryViewsIfNeeded() {
-        if !sectionChanges.isEmpty {
+        if !sectionChanges.isEmpty || !objectChanges.isEmpty {
             CellImageManager.clear()
             collectionView.reloadData()
         }
