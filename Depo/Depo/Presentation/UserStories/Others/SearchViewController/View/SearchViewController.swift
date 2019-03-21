@@ -462,13 +462,13 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     // MARK: - TabBar
     
     private func showTabBar() {
-        needShowTabBar = true
-        showTabBarIfNeed()
+        needToShowTabBar = true
+        showTabBarIfNeeded()
     }
     
     private func hideTabBar() {
-        needShowTabBar = false
-        showTabBarIfNeed()
+        needToShowTabBar = false
+        showTabBarIfNeeded()
     }
     
     func showSpiner() {
