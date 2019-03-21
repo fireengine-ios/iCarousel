@@ -21,7 +21,7 @@ enum FloatingButtonsType {
 enum TabScreenIndex: Int {
     case homePageScreenIndex = 0
     case photosScreenIndex = 1
-    case musicScreenIndex = 3
+    case contactsSyncScreenIndex = 3
     case documentsScreenIndex = 4
 }
 
@@ -358,7 +358,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                     router.segmentedMedia(),
                     syncContactsVC,
                     router.segmentedFiles]
-        customNavigationControllers = list.flatMap { NavigationController(rootViewController: $0!) }
+        customNavigationControllers = list.compactMap { NavigationController(rootViewController: $0!) }
     }
     
     @objc func gearButtonAction(sender: Any) {
@@ -598,8 +598,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 MenloworksTagsService.shared.onAutosyncVideosStatusOff()
                 MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
             }
-        case .musicScreenIndex:
-            MenloworksAppEvents.onMusicOpen()
+        case .contactsSyncScreenIndex:
+            MenloworksAppEvents.onContactSyncPageOpen()
         case .documentsScreenIndex:
             MenloworksAppEvents.onDocumentsOpen()
         default:
@@ -652,7 +652,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
             
-            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.musicScreenIndex.rawValue,
+            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.contactsSyncScreenIndex.rawValue,
                                                                 TabScreenIndex.documentsScreenIndex.rawValue,
                                                                 TabScreenIndex.homePageScreenIndex.rawValue]
             if tabbarSelectedIndex == selectedIndex && arrayOfIndexesOfViewsThatShouldntBeRefreshed.contains(tabbarSelectedIndex) {

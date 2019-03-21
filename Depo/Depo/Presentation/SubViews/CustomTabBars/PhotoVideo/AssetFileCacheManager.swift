@@ -29,7 +29,7 @@ class AssetFileCacheManager {
             let view = collectionView.superview,
             view.window != nil
         else {
-                return
+            return
         }
         
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {

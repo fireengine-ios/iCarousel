@@ -115,13 +115,11 @@ final class PushNotificationService {
         
         if tabBarVC.selectedIndex != index.rawValue {
             switch index {
-            case .homePageScreenIndex, .musicScreenIndex, .documentsScreenIndex:
+            case .homePageScreenIndex, .contactsSyncScreenIndex, .documentsScreenIndex:
                 tabBarVC.tabBar.selectedItem = tabBarVC.tabBar.items?[index.rawValue]
                 tabBarVC.selectedIndex = index.rawValue
             case .photosScreenIndex:
                 tabBarVC.showPhotosScreen(self)
-//            case .videosScreenIndex:
-//                tabBarVC.showVideosScreen(self)
             }
         }
     }
@@ -173,7 +171,7 @@ final class PushNotificationService {
     }
     
     private func openMusic() {
-        openTabBarItem(index: .musicScreenIndex)
+        pushTo(router.musics)
     }
     
     private func openDocuments() {
@@ -181,7 +179,7 @@ final class PushNotificationService {
     }
     
     private func openContactSync() {
-        pushTo(router.syncContacts)
+        openTabBarItem(index: .contactsSyncScreenIndex)
     }
     
     private func openPeriodicContactSync() {
