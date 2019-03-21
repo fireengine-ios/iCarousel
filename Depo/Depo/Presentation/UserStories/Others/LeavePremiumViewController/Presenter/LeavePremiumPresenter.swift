@@ -186,7 +186,6 @@ extension LeavePremiumPresenter: LeavePremiumInteractorOutput {
 extension LeavePremiumPresenter: LeavePremiumViewDelegate {
     
     func onLeavePremiumTap() {
-        controllerType = .middle
         switch controllerType {
         case .standard:
             return
