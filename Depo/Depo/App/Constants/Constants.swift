@@ -1010,6 +1010,8 @@ struct TextConstants {
     static let accountDetailStandartTitle = NSLocalizedString("account_detail_standart_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accountDetailStandartDescription = NSLocalizedString("account_detail_standart_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let leaveMiddleTurkcell = NSLocalizedString("leave_middle_turkcell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let featureAppleCancelText = NSLocalizedString("feature_apple_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let featureSLCMCancelText = NSLocalizedString("feature_slcm_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let featureGoogleCancelText = NSLocalizedString("feature_google_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
