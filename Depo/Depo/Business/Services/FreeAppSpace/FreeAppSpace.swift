@@ -11,7 +11,11 @@ import UIKit
 final class FreeAppSpace: NSObject {
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private lazy var cacheManager = CacheManager.shared
+    private lazy var cacheManager: CacheManager = {
+        let manager = CacheManager.shared
+        manager.delegates.add(self)
+        return manager
+    }()
     
     static let `default` = FreeAppSpace()
     
@@ -25,6 +29,7 @@ final class FreeAppSpace: NSObject {
     //MARK: -
     
     deinit {
+        cacheManager.delegates.remove(self)
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -43,13 +48,11 @@ final class FreeAppSpace: NSObject {
     }
     
     func checkFreeAppSpace() {
-        if !cacheManager.allLocalAdded || cacheManager.processingRemoteItems {
-            cacheManager.prepareDBCompletion = { [weak self] in
-                self?.onDatabasePrepareComplete()
-            }
-        } else {
-            onDatabasePrepareComplete()
+        guard cacheManager.isCacheActualized else {
+            return
         }
+        
+        onDatabasePrepareComplete()
     }
    
     func clear() {
@@ -260,5 +263,11 @@ class FreeAppService: RemoteItemsService {
 
     func clear() {
         isGotAll = false
+    }
+}
+
+extension FreeAppSpace: CacheManagerDelegate {
+    func didCompleteCacheActualization() {
+        onDatabasePrepareComplete()
     }
 }

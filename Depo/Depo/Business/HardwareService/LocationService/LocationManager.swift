@@ -131,7 +131,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         
         if UIApplication.shared.applicationState == .background {
             if BackgroundTaskService.shared.appWasSuspended {
-                MediaItemOperationsService.shared.appendLocalMediaItems(completion: nil)
+                CacheManager.shared.actualizeCache(completion: nil)
             }
             SyncServiceManager.shared.updateInBackground()
         }

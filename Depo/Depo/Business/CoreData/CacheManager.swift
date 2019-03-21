@@ -6,47 +6,61 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-final class CacheManager {///adding files TO DB // managing cache
+
+/*
+ //
+ //adding files TO DB // managing cache
+ //
+ */
+
+protocol CacheManagerDelegate: class {
+    func didCompleteCacheActualization()
+}
+
+final class CacheManager {
     
     static let shared = CacheManager()
     
-
-    
-//    private static let firstPageSize: Int = 100
     private static let pageSize: Int = 1000
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
                                                          type: .imageAndVideo)
-    var processingRemoteItems = false
-    var allLocalAdded = false
+    private(set) var processingRemoteItems = false
+    private(set) var processingLocalItems = false
+    private(set) var isCacheActualized = false
     
-    //TODO: place  blocks here?
-//    var remotePageAdded: VoidHandler?
-    var prepareDBCompletion: VoidHandler?
+    let delegates = MulticastDelegate<CacheManagerDelegate>()
+    
     
     func actualizeCache(completion: VoidHandler?) {
+        CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
+        isCacheActualized = false
         MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
             if isNoRemotes {
                 self?.startAppendingAllRemotes(completion: { [weak self] in
                     self?.startAppendingAllLocals(completion: {
-                        self?.prepareDBCompletion?()
+                        self?.isCacheActualized = true
+                        CardsManager.default.stopOperationWithType(type: .preparePhotosQuickScroll)
+                        self?.delegates.invoke { $0.didCompleteCacheActualization() }
                         completion?()
                     })
                 })
             } else {
                 self?.startAppendingAllLocals(completion: {
-                    self?.prepareDBCompletion?()
+                    self?.isCacheActualized = true
+                    CardsManager.default.stopOperationWithType(type: .preparePhotosQuickScroll)
+                    self?.delegates.invoke { $0.didCompleteCacheActualization() }
                     completion?()
                 })
             }
         }
     }
     
-    func startAppendingAllRemotes(completion: @escaping VoidHandler) {
+    private func startAppendingAllRemotes(completion: @escaping VoidHandler) {
         /// we save remotes everytime, no metter if acces to PH libriary denied
             guard !self.processingRemoteItems else {
-                //completion()
                 return
             }
+        
             self.processingRemoteItems = true
             self.addNextRemoteItemsPage { [weak self] in
                 self?.processingRemoteItems = false
@@ -74,11 +88,14 @@ final class CacheManager {///adding files TO DB // managing cache
         }
     }
     
-    func startAppendingAllLocals(completion: @escaping VoidHandler) {
-        allLocalAdded = false
+    private func startAppendingAllLocals(completion: @escaping VoidHandler) {
+        guard !self.processingLocalItems else {
+            return
+        }
+        
+        processingLocalItems = true
         MediaItemOperationsService.shared.appendLocalMediaItems { [weak self] in
-            self?.allLocalAdded = true
-            CardsManager.default.stopOperationWithType(type: .preparePhotosQuickScroll)
+            self?.processingLocalItems = false
             completion()
         }
     }

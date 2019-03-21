@@ -274,7 +274,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
     
     private func updateDB() {
         print("updateDB with direction: \(scrollDirectionManager.scrollDirection)")
-        guard !CacheManager.shared.processingRemoteItems, CacheManager.shared.allLocalAdded else {
+        guard CacheManager.shared.isCacheActualized else {
             return
         }
         

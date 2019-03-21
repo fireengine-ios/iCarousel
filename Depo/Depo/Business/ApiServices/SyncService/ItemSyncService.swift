@@ -58,7 +58,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     func start(newItems: Bool) {
         debugLog("ItemSyncServiceImpl start")
         
-        guard !MediaItemOperationsService.shared.inProcessAppendingLocalFiles else {
+        guard CacheManager.shared.isCacheActualized else {
             /// don't need to change status because it's fake preparation until CoreData processing is done
             CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
             return
