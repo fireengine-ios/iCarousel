@@ -8,20 +8,7 @@
 
 import UIKit
 
-class BlueButtonWithWhiteText: WhiteButtonWithRoundedCorner {
-
-    override func configurate() {
-        super.configurate()
-
-        setBackgroundColor(ColorConstants.darkBlueColor, for: .normal)
-        setBackgroundColor(ColorConstants.darkBlueColor.lighter(by: 30.0), for: .disabled)
-        setTitleColor(ColorConstants.whiteColor, for: .normal)
-        setTitleColor(ColorConstants.lightGrayColor, for: .disabled)
-    }
-}
-
 final class BlueButtonWithMediumWhiteText: BlueButtonWithWhiteText {
-    
     override func configurate() {
         super.configurate()
 
@@ -31,8 +18,18 @@ final class BlueButtonWithMediumWhiteText: BlueButtonWithWhiteText {
     }
 }
 
+class BlueButtonWithWhiteText: WhiteButtonWithRoundedCorner {
+    override func configurate() {
+        super.configurate()
+        
+        setBackgroundColor(ColorConstants.darkBlueColor, for: .normal)
+        setBackgroundColor(ColorConstants.darkBlueColor.lighter(by: 30.0), for: .disabled)
+        setTitleColor(ColorConstants.whiteColor, for: .normal)
+        setTitleColor(ColorConstants.lightGrayColor, for: .disabled)
+    }
+}
+
 final class BlueButtonWithNoFilesWhiteText: BlueButtonWithWhiteText {
-    
     override func configurate() {
         super.configurate()
 

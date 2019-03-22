@@ -9,18 +9,18 @@
 import UIKit
 
 class DuplicatedContactsViewController: BaseViewController, DuplicatedContactsViewInput {
-
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var deleteAllButton: BlueButtonWithMediumWhiteText!
     @IBOutlet private weak var keepButton: BlueButtonWithMediumWhiteText!
     
+    private let cellIdentifier = "DuplicatedContactTableViewCell"
+    
     var output: DuplicatedContactsViewOutput!
     var analyzeResponse = [ContactSync.AnalyzedContact]()
     
-    private let cellIdentifier = "DuplicatedContactTableViewCell"
+    // MARK: - Life cycle
     
-    // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,14 +38,6 @@ class DuplicatedContactsViewController: BaseViewController, DuplicatedContactsVi
         output.viewIsReady()
     }
     
-    @IBAction func onDeleteAllTapped(_ sender: Any) {
-        output.onDeleteAllTapped()
-    }
-    
-    @IBAction func onKeepTapped(_ sender: Any) {
-        output.onKeepTapped()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
@@ -57,11 +49,18 @@ class DuplicatedContactsViewController: BaseViewController, DuplicatedContactsVi
         output.onWillDisappear()
     }
     
-    // MARK: Actions
+    // MARK: - IBActions
     
-    // MARK: DuplicatedContactsViewInput
+    @IBAction func onDeleteAllTapped(_ sender: Any) {
+        output.onDeleteAllTapped()
+    }
     
+    @IBAction func onKeepTapped(_ sender: Any) {
+        output.onKeepTapped()
+    }
 }
+
+// MARK: - UITableViewDataSource
 
 extension DuplicatedContactsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
