@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import Alamofire
 
 struct EULAResponseKey {
     static let id = "id"
@@ -128,5 +129,33 @@ class EulaService: BaseRequestService {
         executeGetRequest(param: eula, handler: handler)
 
         
+    }
+    
+    private let sessionManager: SessionManager = factory.resolve()
+    
+    func getEtkAuth(for phoneNumber: String, handler: @escaping ResponseBool) {
+        debugLog("EulaService getEtkAuth")
+        
+        sessionManager
+            .request(RouteRequests.eulaGetEtkAuth,
+                     method: .post,
+                     parameters: ["phoneNumber": phoneNumber],
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .responseString { response in
+                switch response.result {
+                case .success(let text):
+                    if text == "true" {
+                        handler(.success(true))
+                    } else if text == "false" {
+                        handler(.success(false))
+                    } else {
+                        let error = CustomErrors.serverError(text)
+                        handler(.failed(error))
+                    }
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
     }
 }
