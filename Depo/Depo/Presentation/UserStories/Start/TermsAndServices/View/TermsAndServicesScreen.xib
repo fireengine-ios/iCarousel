@@ -45,10 +45,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLj-Qo-ocB">
-                            <rect key="frame" x="23" y="56" width="330" height="63"/>
+                            <rect key="frame" x="23" y="56" width="330" height="181.5"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NavigationBarBackground" translatesAutoresizingMaskIntoConstraints="NO" id="tQP-Dq-V3d">
-                                    <rect key="frame" x="0.0" y="0.0" width="330" height="63"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="330" height="181.5"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -71,7 +71,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmJ-vl-JLz">
-                            <rect key="frame" x="23" y="129" width="18" height="18"/>
+                            <rect key="frame" x="23" y="247.5" width="18" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="18" id="U8I-YI-lpw"/>
                                 <constraint firstAttribute="height" constant="18" id="ffy-CK-bY9"/>
@@ -83,13 +83,13 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS3-vB-bOP">
-                            <rect key="frame" x="49" y="128" width="304" height="20.5"/>
+                            <rect key="frame" x="49" y="246" width="304" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10w-4A-KrN">
-                            <rect key="frame" x="23" y="164.5" width="18" height="18"/>
+                            <rect key="frame" x="23" y="282.5" width="18" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="7nh-Zx-JpW"/>
                                 <constraint firstAttribute="width" constant="18" id="HVl-9W-91r"/>
@@ -100,9 +100,12 @@
                                 <action selector="onCheckbox:" destination="-1" eventType="touchUpInside" id="qwG-r3-gu6"/>
                             </connections>
                         </button>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fhl-UV-ahb">
-                            <rect key="frame" x="49" y="164.5" width="304" height="351.5"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fhl-UV-ahb">
+                            <rect key="frame" x="49" y="282.5" width="304" height="233.5"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" priority="750" constant="30" id="1e5-YD-SSY"/>
+                            </constraints>
                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

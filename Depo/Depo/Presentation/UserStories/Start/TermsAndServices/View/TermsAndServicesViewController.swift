@@ -101,12 +101,18 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         welcomeLabel.font = UIFont.TurkcellSaturaDemFont(size: 25)
         welcomeLabel.textColor = ColorConstants.darkBlueColor
         
-        checkboxLabel.text = " "
+        checkboxLabel.text = TextConstants.termsAndUseCheckboxText
         checkboxLabel.font = UIFont.TurkcellSaturaRegFont(size: 12)
         checkboxLabel.textColor = ColorConstants.darkText
         
+        /// to remove insets
+        /// https://stackoverflow.com/a/42333832/5893286
+        etkTextView.textContainer.lineFragmentPadding = 0
+        etkTextView.textContainerInset = .zero
+        
         etkTextView.text = " "
         etkTextView.delegate = self
+        
         //hideEtk()
         setupEtkText()
         
