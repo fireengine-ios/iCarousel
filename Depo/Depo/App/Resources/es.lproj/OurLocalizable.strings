@@ -706,6 +706,9 @@
 "package_paycell_slcm_cancel_text" = "Para cancelar su paquete, por favor visite a la página de web; \nwww.mylifebox.com\n";
 "package_slcm_paycell_cancel_text" = "Para cancelar su paquete, por favor visite a la página de web; \nwww.mylifebox.com\n";
 "package_default_cancel_text" = "Por favor use el menú de “Contáctenos” (Contact us) para informarnos para procesar su solicitud.";
+"package_albanian_cancel_text" = "Cuota albanesa, cancelar texto";
+"package_FWI_cancel_text" = "package_FWI_cancel_text";
+"package_jamaica_cancel_text" = "package_jamaica_cancel_text";
 
 /*Leave Premium*/
 "leave_premium_premium_description" = "Puede utilizar todas las funciones avanzadas de lifebox con su membresía de Premium.";
@@ -724,6 +727,8 @@
 "feature_slcm_paycell_cancel_text" = "Para cancelar su paquete, por favor visite a la página de web; \nwww.mylifebox.com\n";
 "feature_all_access_paycell_cancel_text" = "Para cancelar su paquete, por favor visite a la página de web; \nwww.mylifebox.com\n";
 "feature_default_cancel_text" = "Por favor use el menú de “Contáctenos” (Contact us) para informarnos para procesar su solicitud.";
+"feature_albanian_cancel_text" = "Puedes seguir utilizando las funciones de Premium de forma gratuita ya que eres un usuario de ALBtelecom.";
+"feature_digicell_cancel_text" = "feature_digicell_cancel_text";
 
 /*PackageInfoView*/
 "my_storage" = "Mi almacenamiento.";
@@ -751,8 +756,6 @@
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "PhotoPick.";
-"package_albanian_cancel_text" = "Cuota albanesa, cancelar texto";
-"feature_albanian_cancel_text" = "Puedes seguir utilizando las funciones de Premium de forma gratuita ya que eres un usuario de ALBtelecom.";
 "no_analyses_left_title" = "No ha quedado ningún análisis.";
 "no_analyses_left_message" = "No estés triste, puede comprar un paquete nuevo todavía para analizar tus fotos!";
 "no_analyses_left_button" = "Compra el PhotoPick.";

@@ -708,6 +708,9 @@
 "package_paycell_slcm_cancel_text" = "Чтобы отменить подписку на ваш пакет, пожалуйста, перейдите на www.mylifebox.com";
 "package_slcm_paycell_cancel_text" = "Чтобы отменить подписку на ваш пакет, пожалуйста, перейдите на www.mylifebox.com";
 "package_default_cancel_text" = "Пожалуйста, воспользуйтесь меню \"Оставить отзыв\", чтобы сообщить нам о вашем запросе.";
+"package_albanian_cancel_text" = "Albanian quota cancel text";
+"package_FWI_cancel_text" = "package_FWI_cancel_text";
+"package_jamaica_cancel_text" = "package_jamaica_cancel_text";
 
 /*Leave Premium*/
 "leave_premium_premium_description" = "Вы можете воспользоваться расширенными преимуществами lifebox с Премиум подпиской";
@@ -726,6 +729,8 @@
 "feature_slcm_paycell_cancel_text" = "Чтобы отменить подписку на пакет, пожалуйста, перейдите на www.mylifebox.com";
 "feature_all_access_paycell_cancel_text" = "Чтобы отменить подписку на пакет, пожалуйста, перейдите на www.mylifebox.com";
 "feature_default_cancel_text" = "Пожалуйста, воспользуйтесь меню \"Оставить отзыв\", чтобы сообщить нам о вашем запросе.";
+"feature_albanian_cancel_text" = "Вы можете бесплатно пользоваться функциями Премиум подписки как абонент ALBtelecom";
+"feature_digicell_cancel_text" = "feature_digicell_cancel_text";
 
 /*PackageInfoView*/
 "my_storage" = "Моё хранилище";
@@ -753,8 +758,6 @@
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "PhotoPick";
-"package_albanian_cancel_text" = "Albanian quota cancel text";
-"feature_albanian_cancel_text" = "Вы можете бесплатно пользоваться функциями Премиум подписки как абонент ALBtelecom";
 "no_analyses_left_title" = "Нет оценок";
 "no_analyses_left_message" = "Не грустите, вы все еще можете активировать новый пакет для анализа ваших фото!";
 "no_analyses_left_button" = "Активировать PhotoPick";

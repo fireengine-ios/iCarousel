@@ -734,6 +734,9 @@
 "package_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
+"package_albanian_cancel_text" = "Albanian quota cancel text";
+"package_FWI_cancel_text" = "package_FWI_cancel_text";
+"package_jamaica_cancel_text" = "package_jamaica_cancel_text";
 
 /*Leave Premium*/
 "leave_premium_premium_description" = "You can use all the advanced features of lifebox with your Premium membership.";
@@ -752,6 +755,8 @@
 "feature_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "feature_all_access_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "feature_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
+"feature_albanian_cancel_text" = "You can continue to use Premium features for free since you are a ALBtelecom user";
+"feature_digicell_cancel_text" = "feature_digicell_cancel_text";
 
 /*PackageInfoView*/
 "my_storage" = "My Storage";
@@ -779,8 +784,6 @@
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "PhotoPick";
-"package_albanian_cancel_text" = "Albanian quota cancel text";
-"feature_albanian_cancel_text" = "You can continue to use Premium features for free since you are a ALBtelecom user";
 "no_analyses_left_title" = "No Analyzes Left";
 "no_analyses_left_message" = "Don't be sad, you can still purchase new package to analyze your photos!";
 "no_analyses_left_button" = "Become Premium";
