@@ -13,14 +13,19 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
 
     var output: TermsAndServicesViewOutput!
 
-    @IBOutlet weak var welcomeLabel: UILabel!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var checkboxButton: UIButton!
-    @IBOutlet weak var checkboxLabel: UILabel!
-    @IBOutlet weak var acceptButton: BlueButtonWithWhiteText!
+    @IBOutlet private weak var welcomeLabel: UILabel!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var checkboxButton: UIButton!
+    @IBOutlet private weak var checkboxLabel: UILabel!
+    @IBOutlet private weak var acceptButton: BlueButtonWithWhiteText!
     
-    @IBOutlet weak var topContraintIOS10: NSLayoutConstraint!
-    @IBOutlet weak var topContraintIOS11: NSLayoutConstraint!
+    @IBOutlet private weak var topContraintIOS10: NSLayoutConstraint!
+    @IBOutlet private weak var topContraintIOS11: NSLayoutConstraint!
+    
+    @IBOutlet private weak var etkCheckboxButton: UIButton!
+    @IBOutlet private weak var etkTextView: UITextView!
+    
+    private let eulaService = EulaService()
     
     private var userWebContentController: WKUserContentController {
         let contentController = WKUserContentController()
@@ -83,7 +88,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         }
         
         configureUI()
-        
+        checkEtk()
         output.viewIsReady()
     }
     
@@ -96,9 +101,14 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         welcomeLabel.font = UIFont.TurkcellSaturaDemFont(size: 25)
         welcomeLabel.textColor = ColorConstants.darkBlueColor
         
-        checkboxLabel.text = TextConstants.termsAndUseCheckboxText
+        checkboxLabel.text = " "
         checkboxLabel.font = UIFont.TurkcellSaturaRegFont(size: 12)
         checkboxLabel.textColor = ColorConstants.darkText
+        
+        etkTextView.text = " "
+        etkTextView.delegate = self
+        //hideEtk()
+        setupEtkText()
         
         acceptButton.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
         
@@ -106,6 +116,74 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         
         contentView.clipsToBounds = true
         contentView.layer.cornerRadius = 10
+    }
+    
+    private func checkEtk() {
+        eulaService.getEtkAuth(for: "+380962868642") { result in
+            switch result {
+            case .success(let isShowEtk):
+                print(isShowEtk)
+                print()
+                //showEtk()
+                //setupEtkText()
+            case .failed(let error):
+                /// nothing to show user
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func showEtk() {
+        etkTextView.isHidden = false
+        etkCheckboxButton.isHidden = false
+    }
+    
+    private func hideEtk() {
+        etkTextView.isHidden = true
+        etkCheckboxButton.isHidden = true
+    }
+    
+    private func setupEtkText() {
+        
+        
+        //        let linkOneRange = TextConstants.termsAndUseETKCheckbox.range(of: "qwe")
+        
+        let baseText = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckbox,
+                                                 attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 12),
+                                                              .foregroundColor: ColorConstants.darkText])
+        
+        let linkAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.TurkcellSaturaRegFont(size: 12),
+                                                             .foregroundColor: UIColor.lrTealishTwo,
+                                                             .underlineStyle: NSUnderlineStyle.styleSingle.rawValue]
+        
+        let rangeLink1 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLink1)
+        baseText.addAttributes([.link: TextConstants.NotLocalized.termsOfUseEtkLink1], range: rangeLink1)
+        baseText.addAttributes(linkAttributes, range: rangeLink1)
+        
+        let rangeLink2 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLink1)
+        baseText.addAttributes([.link: TextConstants.NotLocalized.termsOfUseEtkLink2], range: rangeLink2)
+        baseText.addAttributes(linkAttributes, range: rangeLink2)
+        
+        etkTextView.attributedText = baseText
+        
+//        let attributedString = NSMutableAttributedString(
+//            string: TextConstants.packagesPolicyHeader,
+//            attributes: [.foregroundColor: ColorConstants.textGrayColor,
+//                         .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)])
+//
+//        let policyAttributedString = NSMutableAttributedString(
+//            string: "\n\n" + TextConstants.packagesPolicyText,
+//            attributes: [.foregroundColor: ColorConstants.textGrayColor,
+//                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
+//        attributedString.append(policyAttributedString)
+//
+//        let termsAttributedString = NSMutableAttributedString(
+//            string: TextConstants.termsOfUseLinkText,
+//            attributes: [.link: TextConstants.NotLocalized.termsOfUseLink,
+//                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
+//        attributedString.append(termsAttributedString)
+//
+//        policyTextView.attributedText = attributedString
     }
 
     // MARK: Buttons action
@@ -169,5 +247,31 @@ extension TermsAndServicesViewController: WKNavigationDelegate {
         default:
             decisionHandler(.allow)
         }
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension TermsAndServicesViewController: UITextViewDelegate {
+    
+    @available(iOS 10.0, *)
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        
+        switch URL.absoluteString {
+        case TextConstants.NotLocalized.termsOfUseEtkLink1:
+            DispatchQueue.toMain {
+                //self.output.openTermsOfUseScreen
+            }
+        case TextConstants.NotLocalized.termsOfUseEtkLink2:
+            DispatchQueue.toMain {
+            }
+        default:
+           UIApplication.shared.open(URL, options: [:], completionHandler: nil)
+        }
+        
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        return UIApplication.shared.openURL(URL)
     }
 }

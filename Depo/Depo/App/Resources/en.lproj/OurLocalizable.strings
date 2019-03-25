@@ -891,3 +891,6 @@
 "data_package_for_turkcell" = "Additional data advantage";
 "delete_duplicated_contacts" = "Remove Duplicate Contacts from Your Phone Directory";
 "leave_middle_membership" = "Leave Standard+ Membership";
+"terms_and_use_etk_checkbox" = "some terms at etk_link_1 and some terms at etk_link_2_large";
+"terms_and_use_etk_link_1" = "etk_link_1";
+"terms_and_use_etk_link_2" = "etk_link_2_large";
