@@ -13,7 +13,7 @@ typealias FileOperationSucces = () -> Void
 
 protocol  WrapItemFileOperations {
     
-    func createsFolder(createFolder: CreatesFolder, success: FileOperation?, fail: FailResponse?)
+    func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?)
     
     func delete(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?)
     
@@ -45,7 +45,7 @@ class WrapItemFileService: WrapItemFileOperations {
     let uploadService = UploadService.default
     
     
-    func createsFolder(createFolder: CreatesFolder, success: FileOperation?, fail: FailResponse?) {
+    func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?) {
         remoteFileService.createsFolder(createFolder: createFolder, success: success, fail: fail)
     }
     

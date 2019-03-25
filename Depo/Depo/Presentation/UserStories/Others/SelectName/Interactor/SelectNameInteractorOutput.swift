@@ -10,6 +10,6 @@ import Foundation
 
 protocol SelectNameInteractorOutput: class {
     func startProgress()
-    func operationSucces(operation: SelectNameScreenType)
+    func operationSucces(operation: SelectNameScreenType, item: Item?, isSubFolder: Bool)
     func operationFaildWithError(errorMessage: String)
 }

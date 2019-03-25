@@ -35,6 +35,7 @@ class SelectNameModuleConfigurator {
         interactor.moduleType = moduleType
         
         presenter.interactor = interactor
+        router.presenter = presenter
         viewController.output = presenter
     }
 
