@@ -444,8 +444,6 @@ final class MediaItemOperationsService {
         updateICloudStatus(for: assetsList)
         let context = CoreDataStack.default.newChildBackgroundContext
         listAssetIdIsNotSaved(allList: assetsList, context: context) { [weak self] notSavedAssets in
-            self?.originalAssetsBeingAppended.append(list: notSavedAssets)///tempo assets
-            
             let start = Date()
             
             guard !notSavedAssets.isEmpty else {
@@ -457,6 +455,7 @@ final class MediaItemOperationsService {
             }
             
             print("All local files started  \((start)) seconds")
+            self?.originalAssetsBeingAppended.append(list: notSavedAssets)///tempo assets
             self?.nonCloudAlreadySavedAssets.dropAll()
             self?.saveLocalMediaItemsPaged(items: notSavedAssets, context: context) { [weak self] in
                 self?.originalAssetsBeingAppended.dropAll()///tempo assets
@@ -565,11 +564,11 @@ final class MediaItemOperationsService {
             return
         }
         
-        let currentlyInLibriaryIDs = allList.map { $0.localIdentifier }
-        checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs)
-        let predicate = NSPredicate(format: "localFileID IN %@ AND isLocalItemValue == true", currentlyInLibriaryIDs)
+        let localIdentifiers = allList.map { $0.localIdentifier }
+        checkLocalFilesExistence(actualPhotoLibItemsIDs: localIdentifiers)
+        let predicate = NSPredicate(format: "localFileID IN %@ AND isLocalItemValue == true", localIdentifiers)
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
-            let alredySavedIDs = mediaItems.flatMap { $0.localFileID }
+            let alredySavedIDs = mediaItems.compactMap { $0.localFileID }
             callBack(allList.filter { !alredySavedIDs.contains( $0.localIdentifier ) })
         })
     }

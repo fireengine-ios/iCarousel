@@ -254,8 +254,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
                 
                 var albums = [AlbumItem]()
- 
-                let semaphore = DispatchSemaphore(value: 0)
                 
                 let dispatchGroup = DispatchGroup()
                 
