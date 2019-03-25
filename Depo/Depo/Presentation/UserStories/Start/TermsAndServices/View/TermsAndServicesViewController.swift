@@ -144,46 +144,23 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     }
     
     private func setupEtkText() {
-        
-        
-        //        let linkOneRange = TextConstants.termsAndUseETKCheckbox.range(of: "qwe")
+        etkTextView.linkTextAttributes = [
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
+            NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
+            NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+        ]
         
         let baseText = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckbox,
                                                  attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 12),
                                                               .foregroundColor: ColorConstants.darkText])
         
-        let linkAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.TurkcellSaturaRegFont(size: 12),
-                                                             .foregroundColor: UIColor.lrTealishTwo,
-                                                             .underlineStyle: NSUnderlineStyle.styleSingle.rawValue]
-        
         let rangeLink1 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLink1)
         baseText.addAttributes([.link: TextConstants.NotLocalized.termsOfUseEtkLink1], range: rangeLink1)
-        baseText.addAttributes(linkAttributes, range: rangeLink1)
         
-        let rangeLink2 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLink1)
+        let rangeLink2 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLink2)
         baseText.addAttributes([.link: TextConstants.NotLocalized.termsOfUseEtkLink2], range: rangeLink2)
-        baseText.addAttributes(linkAttributes, range: rangeLink2)
         
         etkTextView.attributedText = baseText
-        
-//        let attributedString = NSMutableAttributedString(
-//            string: TextConstants.packagesPolicyHeader,
-//            attributes: [.foregroundColor: ColorConstants.textGrayColor,
-//                         .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)])
-//
-//        let policyAttributedString = NSMutableAttributedString(
-//            string: "\n\n" + TextConstants.packagesPolicyText,
-//            attributes: [.foregroundColor: ColorConstants.textGrayColor,
-//                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
-//        attributedString.append(policyAttributedString)
-//
-//        let termsAttributedString = NSMutableAttributedString(
-//            string: TextConstants.termsOfUseLinkText,
-//            attributes: [.link: TextConstants.NotLocalized.termsOfUseLink,
-//                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
-//        attributedString.append(termsAttributedString)
-//
-//        policyTextView.attributedText = attributedString
     }
 
     // MARK: Buttons action
