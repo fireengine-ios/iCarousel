@@ -25,8 +25,6 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     @IBOutlet private weak var etkCheckboxButton: UIButton!
     @IBOutlet private weak var etkTextView: UITextView!
     
-    private let eulaService = EulaService()
-    
     private var userWebContentController: WKUserContentController {
         let contentController = WKUserContentController()
         let scriptSource = "document.body.style.color = 'white'; document.body.style.webkitTextSizeAdjust = 'auto';"
@@ -51,7 +49,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         web.isOpaque = false
         web.backgroundColor = .clear
         web.scrollView.backgroundColor = .clear
-
+//        web.scrollView.layer.masksToBounds = false
         web.navigationDelegate = self
         return web
     }()
@@ -88,7 +86,6 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         }
         
         configureUI()
-        checkEtk()
         output.viewIsReady()
     }
     
@@ -112,9 +109,8 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         
         etkTextView.text = " "
         etkTextView.delegate = self
-        
-        //hideEtk()
-        setupEtkText()
+        etkTextView.isHidden = true
+        etkCheckboxButton.isHidden = true
         
         acceptButton.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
         
@@ -124,29 +120,18 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         contentView.layer.cornerRadius = 10
     }
     
-    private func checkEtk() {
-        eulaService.getEtkAuth(for: "+380962868642") { result in
-            switch result {
-            case .success(let isShowEtk):
-                print(isShowEtk)
-                print()
-                //showEtk()
-                //setupEtkText()
-            case .failed(let error):
-                /// nothing to show user
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    private func showEtk() {
+    func showEtk() {
+        setupEtkText()
         etkTextView.isHidden = false
         etkCheckboxButton.isHidden = false
-    }
-    
-    private func hideEtk() {
-        etkTextView.isHidden = true
-        etkCheckboxButton.isHidden = true
+        
+        view.layoutIfNeeded()
+        
+        /// fixing bug of WKWebView contentInset after relayout
+        let minEtkTextViewHeight: CGFloat = 30
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: etkTextView.bounds.height - minEtkTextViewHeight, right: 0)
+        webView.scrollView.contentInset = insets
+        webView.scrollView.scrollIndicatorInsets = insets
     }
     
     private func setupEtkText() {

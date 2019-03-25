@@ -120,4 +120,19 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             }
         })
     }
+    
+    func checkEtk(for phoneNumber: String) {
+        eulaService.getEtkAuth(for: phoneNumber) { [weak self] result in
+            guard let `self` = self else {
+                return
+            }
+            
+            switch result {
+            case .success(let isShowEtk):
+                self.output.setupEtk(isShowEtk: isShowEtk)
+            case .failed(_):
+                self.output.setupEtk(isShowEtk: false)
+            }
+        }
+    }
 }

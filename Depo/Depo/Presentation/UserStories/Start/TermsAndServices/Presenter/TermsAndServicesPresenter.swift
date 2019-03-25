@@ -24,8 +24,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
             view.hideBackButton()
         }
         startAsyncOperationDisableScreen()
-        interactor.loadTermsAndUses()
-        
+        interactor.checkEtk(for: "+380962868642")
     }
     
     func startUsing() {
@@ -119,5 +118,12 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     override func outputView() -> Waiting? {
         return view
+    }
+    
+    func setupEtk(isShowEtk: Bool) {
+        if isShowEtk {
+            view.showEtk()
+        }
+        interactor.loadTermsAndUses()
     }
 }
