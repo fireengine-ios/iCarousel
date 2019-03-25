@@ -78,7 +78,7 @@ final class SegmentedController: BaseViewController, NibInit {
         
 //        homePageNavigationBarStyle()//without refactor
 //        navigationBarWithGradientStyle()
-        needShowTabBar = true
+        needToShowTabBar = true
         setupSegmentedControl()
     }
     

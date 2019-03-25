@@ -838,7 +838,7 @@
 "work_will_introduced" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
 "facebook_remove_connection_warning_title" = "Facebook bağlantını kaldırmak üzeresin.";
 "dropbox_remove_connection_warning_title" = "Dropbox bağlantını kaldırmak üzeresin.";
-"facebook_remove_connection_warning_message" = "Facebook ile olan bağlantını kaldırmak istediğine emin misin? \n\n";
+"facebook_remove_connection_warning_message" = "Facebook ile olan bağlantını kaldırmak istediğine emin misin?\n\n";
 "dropbox_remove_connection_warning_message" = "Dropbox ile olan bağlantını kaldırmak istediğine emin misin?";
 "remove_connection" = "Bağlantıyı kaldır";
 "you_are_connected" = "Bağlı";
@@ -868,3 +868,4 @@
 "data_package_for_turkcell" = "Ek data paketi";
 "delete_duplicated_contacts" = "Rehberindeki tekrarlayan kontakları sil!";
 "leave_middle_membership" = "Standart+ üyeliğini sonlandır";
+"leave_middle_turkcell" = "Paketini iptal etmek için lütfen IPTAL LIFEBOX STANDART+ yazıp 2200’a gönder.";

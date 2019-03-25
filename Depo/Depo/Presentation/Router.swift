@@ -117,7 +117,7 @@ class RouterVC: NSObject {
     }
     
     func pushViewController(viewController: UIViewController, animated: Bool = true) {
-        if let viewController = viewController as? BaseViewController, !viewController.needShowTabBar {
+        if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
             let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
             NotificationCenter.default.post(name: notificationName, object: nil)
         }
@@ -126,12 +126,12 @@ class RouterVC: NSObject {
         viewController.navigationController?.isNavigationBarHidden = false
         
         if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBacgroundColor())
+            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
         }
     }
     
     func pushViewControllerAndRemoveCurrentOnCompletion(_ viewController: UIViewController) {
-        if let viewController = viewController as? BaseViewController, !viewController.needShowTabBar {
+        if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
             let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
             NotificationCenter.default.post(name: notificationName, object: nil)
         }
@@ -140,12 +140,12 @@ class RouterVC: NSObject {
         viewController.navigationController?.isNavigationBarHidden = false
         
         if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBacgroundColor())
+            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
         }
         
     }
     
-    func setBacgroundColor(color: UIColor) {
+    func setBackgroundColor(color: UIColor) {
         if let tabBarViewController = rootViewController as? TabBarViewController {
             tabBarViewController.setBGColor(color: color)
         }

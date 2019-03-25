@@ -246,7 +246,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
     }
     
-    override func getBacgroundColor() -> UIColor {
+    override func getBackgroundColor() -> UIColor {
         return UIColor.black
     }
     
