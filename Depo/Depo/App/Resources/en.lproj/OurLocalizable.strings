@@ -632,7 +632,7 @@
 "Add GSM Number" = "Add GSM Number";
 "The videos larger than 4GB can not be uploaded to lifebox" = "The videos larger than 4GB can not be uploaded to lifebox";
 "You have not enough memory in your device" = "You have not enough memory in your device";
-"The purchase was canceled" = "The purchase was canceled";
+"The purchase was canceled" = "The purchase is canceled.";
 "The purchase in progress" = "The purchase in progress";
 "You have no duplicated contacts!" = "You have no duplicated contacts in your device contact list";
 "Daily" = "Daily";
@@ -858,7 +858,7 @@
 "work_will_introduced" = "There is currently a maintenance work on lifebox, please try again later.";
 "facebook_remove_connection_warning_title" = "You're about to remove your Facebook connection.";
 "dropbox_remove_connection_warning_title" = "You're about to remove your Dropbox connection.";
-"facebook_remove_connection_warning_message" = "Are you sure you want to remove your Facebook connection? \n\n";
+"facebook_remove_connection_warning_message" = "Are you sure you want to remove your Facebook connection?\n\n";
 "dropbox_remove_connection_warning_message" = "Are you sure you want to remove your Dropbox connection?\n\n";
 "remove_connection" = "Remove Connection";
 "you_are_connected" = "You are connected";
@@ -888,3 +888,4 @@
 "data_package_for_turkcell" = "Additional data advantage";
 "delete_duplicated_contacts" = "Remove Duplicate Contacts from Your Phone Directory";
 "leave_middle_membership" = "Leave Standard+ Membership";
+"leave_middle_turkcell" = "To cancel your package, please send an SMS to 2200 with this text: IPTAL LIFEBOX STANDART+";

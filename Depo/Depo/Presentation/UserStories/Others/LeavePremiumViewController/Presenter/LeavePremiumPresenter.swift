@@ -186,12 +186,20 @@ extension LeavePremiumPresenter: LeavePremiumInteractorOutput {
 extension LeavePremiumPresenter: LeavePremiumViewDelegate {
     
     func onLeavePremiumTap() {
-        guard let cancelText = cancelText else {
-            let error = CustomErrors.text("An error occurred while preparing info for cancel description alert.")
-            didErrorMessage(with: error.localizedDescription)
+        switch controllerType {
+        case .standard:
             return
+        case .middle:
+            let cancelText = TextConstants.leaveMiddleTurkcell
+            router.showAlert(with: cancelText)
+        case .premium:
+            guard let cancelText = cancelText else {
+                let error = CustomErrors.text("An error occurred while preparing info for cancel description alert.")
+                didErrorMessage(with: error.localizedDescription)
+                return
+            }
+            router.showAlert(with: cancelText)
         }
-        
-        router.showAlert(with: cancelText)
     }
+    
 }
