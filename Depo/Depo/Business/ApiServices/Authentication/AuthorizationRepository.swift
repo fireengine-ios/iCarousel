@@ -8,7 +8,7 @@
 
 import Alamofire
 
-typealias RefreshCompletion = (_ succeeded: Bool, _ accessToken: String?, _ isNetworkError: Bool?) -> Void
+typealias RefreshCompletion = (_ succeeded: Bool, _ accessToken: String?, _ error: Error?) -> Void
 
 // TODO: Need to test refresh token request for no internet connection and timed out
 
@@ -197,7 +197,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                     #if MAIN_APP
                     debugLog("can't take accessToken refreshAccessToken")
                     #endif
-                    completion(false, nil, response.error?.isNetworkError)
+                    completion(false, nil, response.error)
                     strongSelf.isRefreshing = false
                     strongSelf.refreshTokensCompletions.forEach { $0(false, nil, nil) }
                     strongSelf.refreshTokensCompletions.removeAll()
