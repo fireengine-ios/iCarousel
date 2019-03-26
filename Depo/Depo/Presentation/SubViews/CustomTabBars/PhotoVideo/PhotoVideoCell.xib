@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -51,6 +51,22 @@
                             <constraint firstAttribute="height" constant="12" id="NZD-Y5-VIb"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shs-Gd-W9e">
+                        <rect key="frame" x="21" y="142" width="161" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="YSE-Ts-Gvu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbnailPlay" translatesAutoresizingMaskIntoConstraints="NO" id="Vz7-W6-1DU">
+                        <rect key="frame" x="8" y="146" width="10" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="aDG-vi-hlz"/>
+                            <constraint firstAttribute="width" constant="10" id="bc1-yD-uZd"/>
+                        </constraints>
+                    </imageView>
                     <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3QP-J6-7Bi">
                         <rect key="frame" x="2" y="160" width="182" height="2"/>
                         <constraints>
@@ -73,6 +89,8 @@
                 <constraint firstItem="2HJ-NZ-h8K" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="FSP-Og-aDz"/>
                 <constraint firstItem="3QP-J6-7Bi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="ISV-oz-f8E"/>
                 <constraint firstItem="LrF-OZ-70O" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="JFJ-s6-19G"/>
+                <constraint firstItem="Vz7-W6-1DU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="OZ3-gm-3oy"/>
+                <constraint firstItem="Shs-Gd-W9e" firstAttribute="leading" secondItem="Vz7-W6-1DU" secondAttribute="trailing" constant="3" id="WOY-8m-Sxs"/>
                 <constraint firstItem="ha8-dW-lGP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Wjh-Ca-gb9"/>
                 <constraint firstAttribute="bottom" secondItem="Rtp-Ce-5Aw" secondAttribute="bottom" id="Z56-7g-0sw"/>
                 <constraint firstItem="Rtp-Ce-5Aw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="aX9-hc-XVH"/>
@@ -81,10 +99,13 @@
                 <constraint firstItem="3QP-J6-7Bi" firstAttribute="top" secondItem="D6a-f1-mPS" secondAttribute="bottom" constant="4" id="jtJ-qK-zSE"/>
                 <constraint firstAttribute="bottom" secondItem="3QP-J6-7Bi" secondAttribute="bottom" constant="3" id="mLe-5J-glr"/>
                 <constraint firstAttribute="trailing" secondItem="3QP-J6-7Bi" secondAttribute="trailing" constant="2" id="pbf-VH-c45"/>
+                <constraint firstAttribute="trailing" secondItem="Shs-Gd-W9e" secondAttribute="trailing" constant="4" id="phH-cH-E4t"/>
                 <constraint firstAttribute="trailing" secondItem="D6a-f1-mPS" secondAttribute="trailing" constant="4" id="sAk-zk-Usj"/>
                 <constraint firstItem="Rtp-Ce-5Aw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="u4p-Bn-JXS"/>
+                <constraint firstItem="3QP-J6-7Bi" firstAttribute="top" secondItem="Vz7-W6-1DU" secondAttribute="bottom" constant="4" id="uft-fs-3Zv"/>
                 <constraint firstAttribute="bottom" secondItem="LrF-OZ-70O" secondAttribute="bottom" id="vVR-qQ-508"/>
                 <constraint firstAttribute="trailing" secondItem="5aj-uE-NFD" secondAttribute="trailing" constant="4" id="wdI-YV-Gup"/>
+                <constraint firstAttribute="bottom" secondItem="Shs-Gd-W9e" secondAttribute="bottom" constant="2" id="wre-hI-VEJ"/>
                 <constraint firstAttribute="trailing" secondItem="LrF-OZ-70O" secondAttribute="trailing" id="zuP-X3-Oeo"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -97,11 +118,14 @@
                 <outlet property="progressView" destination="3QP-J6-7Bi" id="L5d-Bw-CY5"/>
                 <outlet property="selectionStateView" destination="Rtp-Ce-5Aw" id="kXL-56-QJN"/>
                 <outlet property="thumbnailImageView" destination="ha8-dW-lGP" id="Wvo-Ho-LOQ"/>
+                <outlet property="videoDurationLabel" destination="Shs-Gd-W9e" id="C4p-Jd-y5B"/>
+                <outlet property="videoPlayIcon" destination="Vz7-W6-1DU" id="zzc-iG-sZV"/>
             </connections>
-            <point key="canvasLocation" x="122" y="111.5"/>
+            <point key="canvasLocation" x="121.59999999999999" y="111.0944527736132"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="favoriteStar" width="13" height="12"/>
+        <image name="thumbnailPlay" width="11" height="11"/>
     </resources>
 </document>

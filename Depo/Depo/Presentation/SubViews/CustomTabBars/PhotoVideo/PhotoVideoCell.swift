@@ -46,6 +46,16 @@ final class PhotoVideoCell: UICollectionViewCell {
         }
     }
     
+    @IBOutlet weak var videoPlayIcon: UIImageView!
+    
+    @IBOutlet weak var videoDurationLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.whiteColor
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        }
+    }
+    
+    
     weak var delegate: PhotoVideoCellDelegate?
     var indexPath: IndexPath?
     private var cellId = ""
@@ -81,6 +91,16 @@ final class PhotoVideoCell: UICollectionViewCell {
             cloudStatusImageView.image = UIImage(named: "objectNotInCloud")
         } else {
             cloudStatusImageView.image = nil
+        }
+        
+        switch wraped.fileType {
+        case .video:
+            videoDurationLabel.text = wraped.duration
+            videoPlayIcon.isHidden = false
+            videoDurationLabel.isHidden = false
+        default:
+            videoPlayIcon.isHidden = true
+            videoDurationLabel.isHidden = true
         }
         
         switch wraped.patchToPreview {
