@@ -459,7 +459,7 @@ class AuthenticationService: BaseRequestService {
                 let error = ErrorResponse.string(TextConstants.errorServer)
                 fail?(error)
             } else {
-                self?.authorizationSevice.refreshTokens { [weak self] isSuccess, accessToken in
+                self?.authorizationSevice.refreshTokens { [weak self] isSuccess, accessToken, _  in
                     if let accessToken = accessToken, isSuccess {
                         self?.tokenStorage.accessToken = accessToken
                         success?()

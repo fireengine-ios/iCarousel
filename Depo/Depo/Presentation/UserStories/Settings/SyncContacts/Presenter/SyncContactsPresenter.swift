@@ -74,6 +74,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         }
         view.setStateWithBackUp()
         contactSyncResponse = nil
+        asyncOperationFinished()
     }
     
     func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
