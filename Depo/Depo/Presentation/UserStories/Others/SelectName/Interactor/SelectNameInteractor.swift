@@ -85,13 +85,13 @@ class SelectNameInteractor: SelectNameInteractorInput {
         PhotosAlbumService().createAlbum(createAlbum: createAlbumParams, success: { [weak self] in
             DispatchQueue.main.async {
                 if let self_ = self {
-                    self_.output.operationSucces(operation: self_.moduleType, item: nil, isSubFolder: false)
+                    self_.output.operationSuccess(operation: self_.moduleType, item: nil, isSubFolder: false)
                     ItemOperationManager.default.newAlbumCreated()
                 }
             }
         }) { error in
             DispatchQueue.main.async {[weak self] in
-                self?.output.operationFaildWithError(errorMessage: error.description)
+                self?.output.operationFailedWithError(errorMessage: error.description)
             }
         }
     }
@@ -110,13 +110,13 @@ class SelectNameInteractor: SelectNameInteractorInput {
                 DispatchQueue.main.async {
                     if let self_ = self {
                         let isSubfolder = self_.rootFolderID != nil
-                        self_.output.operationSucces(operation: self_.moduleType, item: item, isSubFolder: isSubfolder)
+                        self_.output.operationSuccess(operation: self_.moduleType, item: item, isSubFolder: isSubfolder)
                         ItemOperationManager.default.newFolderCreated()
                     }
                 }
             }, fail: {[weak self] error in
                 DispatchQueue.main.async {
-                    self?.output.operationFaildWithError(errorMessage: error.description)
+                    self?.output.operationFailedWithError(errorMessage: error.description)
                 }
         })
     }

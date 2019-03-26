@@ -8,13 +8,13 @@
 
 import UIKit
 
-class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextFieldDelegate {
-    
+class SelectNameViewController: BaseViewController {
     var output: SelectNameViewOutput!
     
     @IBOutlet weak var textField: UITextField!
     
-    // MARK: Life cycle
+    // MARK: - Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,24 +46,8 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
         
         textField.becomeFirstResponder()
     }
-    
-    @objc func onCancelButton() {
-        hideView()
-    }
-    
-    func hideView() {
-        dismiss(animated: true) {
-            
-        }
-    }
-    
-    // MARK: SelectNameViewInput
-    func setupInitialState() {
-        navigationItem.rightBarButtonItem?.isEnabled = true
-    }
-    
-    
-    // MARK: Buttons actions
+
+    // MARK: - Buttons actions
     
     @objc func onNextButton() {
         navigationItem.rightBarButtonItem?.isEnabled = false
@@ -71,13 +55,20 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
         output.onNextButton(name: textField.text ?? "")
     }
     
-    
-    // MARK: UITextFieldDelegate
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        onNextButton()
-        return true
+    @objc func onCancelButton() {
+        hideView()
+    }
+}
+
+// MARK: - SelectNameViewInput
+
+extension SelectNameViewController: SelectNameViewInput {
+    func setupInitialState() {
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
+    func hideView() {
+        dismiss(animated: true) {
+        }
+    }
 }

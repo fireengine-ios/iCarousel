@@ -75,7 +75,6 @@ class RouterVC: NSObject {
                 return n.activeNavigationController
             }
         }
-        
         return nil 
     }
     
