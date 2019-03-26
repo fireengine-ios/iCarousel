@@ -6,25 +6,18 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class SelectNamePresenter: BasePresenter, SelectNameModuleInput {
+class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewOutput, SelectNameInteractorOutput {
     weak var view: SelectNameViewInput!
     var interactor: SelectNameInteractorInput!
-    var router: SelectNameRouterInput!    
+    var router: SelectNameRouterInput!
     
     private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
     private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
         
-    //MARK: - BasePresenter
-
-    override func outputView() -> Waiting? {
-        return view as? Waiting
-    }
-}
-
-// MARK: - SelectNameViewOutput
-
-extension SelectNamePresenter: SelectNameViewOutput {
+    //from view
+    
     func viewIsReady() {
+
     }
     
     func getTitle() -> String {
@@ -50,16 +43,14 @@ extension SelectNamePresenter: SelectNameViewOutput {
             UIApplication.showErrorAlert(message: getTextForEmptyTextFieldAllert())
         }
     }
-}
-
-// MARK: - SelectNameInteractorOutput
-
-extension SelectNamePresenter: SelectNameInteractorOutput {
+    
+    //from interactor
+    
     func startProgress() {
         startAsyncOperation()
     }
     
-    func operationSuccess(operation: SelectNameScreenType, item: Item?, isSubFolder: Bool) {
+    func operationSucces(operation: SelectNameScreenType, item: Item?, isSubFolder: Bool) {
         asyncOperationSuccess()
         switch operation {
         case .selectAlbumName:
@@ -74,14 +65,20 @@ extension SelectNamePresenter: SelectNameInteractorOutput {
         }
     }
     
-    func operationFailedWithError(errorMessage: String) {
+    func operationFaildWithError(errorMessage: String) {
         asyncOperationSuccess()
         UIApplication.showErrorAlert(message: errorMessage)
         view.setupInitialState()
     }
+    
+    //MARK : BasePresenter
+    
+    override func outputView() -> Waiting? {
+        return view as? Waiting
+    }
 }
 
-//MARK: - BaseFilesGreedModuleOutput
+//MARK : BaseFilesGreedModuleOutput
 
 extension SelectNamePresenter: BaseFilesGreedModuleOutput {
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
