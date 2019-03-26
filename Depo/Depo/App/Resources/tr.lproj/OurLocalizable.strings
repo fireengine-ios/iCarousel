@@ -714,6 +714,9 @@
 "package_paycell_slcm_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
 "package_slcm_paycell_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
 "package_default_cancel_text" = "Bize Ulaşın menüsünden iptal talebini bize iletebilirsin.";
+"package_albanian_cancel_text" = "ALB kota iptal text'i";
+"package_FWI_cancel_text" = "package_FWI_cancel_text";
+"package_jamaica_cancel_text" = "package_jamaica_cancel_text";
 
 /*Leave Premium*/
 "leave_premium_premium_description" = "Premium üyeliğin ile lifebox'ın aşağıdaki tüm gelişmiş özelliklerini kullanabiliyorsun.";
@@ -732,6 +735,8 @@
 "feature_slcm_paycell_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
 "feature_all_access_paycell_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
 "feature_default_cancel_text" = "Bize Ulaşın menüsünden iptal talebini bize iletebilirsin.";
+"feature_albanian_cancel_text" = "ALBtelecom kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
+"feature_digicell_cancel_text" = "feature_digicell_cancel_text";
 
 /*PackageInfoView*/
 "my_storage" = "Saklama Alanım";
@@ -759,8 +764,6 @@
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "PhotoPick";
-"package_albanian_cancel_text" = "ALB kota iptal text'i";
-"feature_albanian_cancel_text" = "ALBtelecom kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
 "no_analyses_left_title" = "Analiz hakkın kalmadı";
 "no_analyses_left_message" = "Hakkın bitti diye üzülme, yeni fotoğraflar sorgulamak için hemen paket satın alabilirsin!";
 "no_analyses_left_button" = "Premium Ol";
