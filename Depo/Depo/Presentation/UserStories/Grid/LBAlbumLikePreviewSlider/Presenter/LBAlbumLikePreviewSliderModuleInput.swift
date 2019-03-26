@@ -10,6 +10,6 @@ protocol LBAlbumLikePreviewSliderModuleInput: class {
 
     func setup(withItems items: [SliderItem])
     func reloadAll()
-    func reload(type: MyStreamType)
+    func reload(types: [MyStreamType])
     func countThumbnailsFor(type: MyStreamType) -> Int
 }

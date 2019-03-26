@@ -21,6 +21,7 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         super.init()
         
         instaPickService.delegates.add(self)
+        ItemOperationManager.default.startUpdateView(view: self)
     }
     
     deinit {
@@ -65,29 +66,32 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
         }
     }
     
-    func reload(type: MyStreamType) {
-        guard type.isMyStreamSliderType() else {
+    func reload(types: [MyStreamType]) {
+        let myStreamTypes = types.filter {$0.isMyStreamSliderType()}
+        guard !myStreamTypes.isEmpty else {
             return
         }
         
         let group = DispatchGroup()
         let queue = DispatchQueue(label: DispatchQueueLabels.myStreamAlbums)
         
-        switch type {
-        case .instaPick:
-            getInstaPickThumbnails(group: group)
-        case .story:
-            getStories(group: group)
-        case .albums:
-            getAlbums(group: group)
-        case .people:
-            getThumbnails(forType: .people, group: group)
-        case .things:
-            getThumbnails(forType: .things, group: group)
-        case .places:
-            getThumbnails(forType: .places, group: group)
-        default:
-            break
+        myStreamTypes.forEach { type in
+            switch type {
+            case .instaPick:
+                getInstaPickThumbnails(group: group)
+            case .story:
+                getStories(group: group)
+            case .albums:
+                getAlbums(group: group)
+            case .people:
+                getThumbnails(forType: .people, group: group)
+            case .things:
+                getThumbnails(forType: .things, group: group)
+            case .places:
+                getThumbnails(forType: .places, group: group)
+            default:
+                break
+            }
         }
         
         group.notify(queue: queue) { [weak self] in
@@ -285,10 +289,10 @@ class LBAlbumLikePreviewSliderInteractor: NSObject, LBAlbumLikePreviewSliderInte
 
 extension LBAlbumLikePreviewSliderInteractor: InstaPickServiceDelegate {
     func didFinishAnalysis(_ analyses: [InstapickAnalyze]) {
-        reload(type: .instaPick)
+        reload(types: [.instaPick])
     }
     
     func didRemoveAnalysis() {
-        reload(type: .instaPick)
+        reload(types: [.instaPick])
     }
 }
