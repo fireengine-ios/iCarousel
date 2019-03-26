@@ -12,5 +12,5 @@ protocol SelectNameRouterInput {
     
     func hideScreen()
     
-    func moveToFolderPage(item: Item, isSubFolder: Bool)
+    func moveToFolderPage(presenter: SelectNamePresenter, item: Item, isSubFolder: Bool)
 }

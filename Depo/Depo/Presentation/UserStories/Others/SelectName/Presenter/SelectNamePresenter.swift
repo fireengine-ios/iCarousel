@@ -11,6 +11,9 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
     var interactor: SelectNameInteractorInput!
     var router: SelectNameRouterInput!
     
+    private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
+    private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+        
     //from view
     
     func viewIsReady() {
@@ -57,7 +60,7 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
         case .selectFolderName:
             view.hideView()
             if let item = item {
-                router.moveToFolderPage(item: item, isSubFolder: isSubFolder)
+                router.moveToFolderPage(presenter: self, item: item, isSubFolder: isSubFolder)
             }
         }
     }
@@ -67,7 +70,6 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
         UIApplication.showErrorAlert(message: errorMessage)
         view.setupInitialState()
     }
-    
     
     //MARK : BasePresenter
     
@@ -80,6 +82,9 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
 
 extension SelectNamePresenter: BaseFilesGreedModuleOutput {
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
-        
+        if fieldType == .all {
+            allFilesViewType = type
+            allFilesSortType = sortedType
+        }
     }
 }

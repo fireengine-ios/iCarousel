@@ -8,16 +8,15 @@
 
 class SelectNameRouter: SelectNameRouterInput {
     private let router = RouterVC()
-    weak var presenter: SelectNamePresenter!
 
     func hideScreen() {
         let router = RouterVC()
         router.popViewController()
     }
     
-    func moveToFolderPage(item: Item, isSubFolder: Bool) {
+    func moveToFolderPage(presenter: SelectNamePresenter, item: Item, isSubFolder: Bool) {
         if !isSubFolder {
-            let allFilesVC = router.allFiles(moduleOutput: presenter, sortType: .None, viewType: .Grid)
+            let allFilesVC = router.allFiles(moduleOutput: presenter, sortType: presenter.allFilesSortType, viewType: presenter.allFilesViewType)
             router.pushViewController(viewController: allFilesVC, animated: false)
         }
         
