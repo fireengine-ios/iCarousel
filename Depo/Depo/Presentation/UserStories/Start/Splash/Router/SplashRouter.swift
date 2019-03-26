@@ -27,7 +27,7 @@ class SplashRouter: SplashRouterInput {
     }
     
     func navigateToTermsAndService() {
-        let temsAndServices = router.termsAndServicesScreen(login: true)
+        let temsAndServices = router.termsAndServicesScreen(login: true, phoneNumber: nil)
         router.setNavigationController(controller: router.onboardingScreen)
         router.pushViewControllerWithoutAnimation(viewController: temsAndServices)
     }

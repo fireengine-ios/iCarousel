@@ -24,7 +24,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
             view.hideBackButton()
         }
         startAsyncOperationDisableScreen()
-        interactor.checkEtk(for: "+380962868642")
+        interactor.checkEtk()
     }
     
     func startUsing() {

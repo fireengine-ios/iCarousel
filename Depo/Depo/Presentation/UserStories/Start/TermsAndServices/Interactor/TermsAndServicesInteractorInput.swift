@@ -18,5 +18,5 @@ protocol TermsAndServicesInteractorInput {
     func signUpUser()
     func applyEula()
     func trackScreen()
-    func checkEtk(for phoneNumber: String)
+    func checkEtk()
 }

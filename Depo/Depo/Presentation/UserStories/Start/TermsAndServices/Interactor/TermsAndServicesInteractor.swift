@@ -19,6 +19,8 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     var eula: Eula?
     
+    var phoneNumber: String?
+    
     func loadTermsAndUses() {
         eulaService.eulaGet(sucess: { [weak self] eula in
             guard let eulaR = eula as? Eula else {
@@ -28,10 +30,10 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             DispatchQueue.toMain {
                 self?.output.showLoadedTermsAndUses(eula: eulaR.content ?? "")
             }
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.toMain {
-                    self?.output.failLoadTermsAndUses(errorString: errorResponse.description)
-                }
+        }, fail: { [weak self] errorResponse in
+            DispatchQueue.toMain {
+                self?.output.failLoadTermsAndUses(errorString: errorResponse.description)
+            }
         })
     }
     
@@ -121,17 +123,34 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         })
     }
     
-    func checkEtk(for phoneNumber: String) {
+    func checkEtk() {
+        /// phoneNumber will be exists only for signup
+        if let phoneNumber = phoneNumber {
+            checkEtk2(for: phoneNumber)
+        } else {
+            SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] userInfoResponse in
+                self?.checkEtk2(for: userInfoResponse.fullPhoneNumber)
+            }, fail: { [weak self] _ in
+                DispatchQueue.main.async { [weak self] in
+                    self?.output.setupEtk(isShowEtk: false)
+                }
+            })
+        }
+    }
+    
+    private func checkEtk2(for phoneNumber: String) {
         eulaService.getEtkAuth(for: phoneNumber) { [weak self] result in
-            guard let `self` = self else {
-                return
-            }
-            
-            switch result {
-            case .success(let isShowEtk):
-                self.output.setupEtk(isShowEtk: isShowEtk)
-            case .failed(_):
-                self.output.setupEtk(isShowEtk: false)
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                
+                switch result {
+                case .success(let isShowEtk):
+                    self.output.setupEtk(isShowEtk: isShowEtk)
+                case .failed(_):
+                    self.output.setupEtk(isShowEtk: false)
+                }
             }
         }
     }
