@@ -119,7 +119,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
             return
         }
         
-        refreshTokens { [weak self] succeeded, accessToken, isNetworkError  in
+        refreshTokens { [weak self] succeeded, accessToken, error  in
             guard let strongSelf = self else { return }
             strongSelf.lock.lock() ; defer { strongSelf.lock.unlock() }
             
