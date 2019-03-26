@@ -77,11 +77,11 @@ class SettingsInteractor: SettingsInteractorInput {
     func onLogout() {
         output.asyncOperationStarted()
         authService.serverLogout(complition: { [weak self] success in
-            self?.output.asyncOperationStoped()
             if success {
                 self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .logout, eventLabel: .success)
             }
             self?.authService.logout { [weak self] in
+                self?.output.asyncOperationStoped()
                 MenloworksEventsService.shared.onLoggedOut()
                 self?.output.goToOnboarding()
             }
