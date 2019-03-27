@@ -99,6 +99,14 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         view.popNavigationVC()
     }
     
+    func openTurkcellAndGroupCompanies() {
+        router.goToTurkcellAndGroupCompanies()
+    }
+    
+    func openCommercialEmailMessages() {
+        router.goToCommercialEmailMessages()
+    }
+    
     // MARK: Utility Methods
     private func openAutoSyncIfNeeded() {
         view.showSpinner()

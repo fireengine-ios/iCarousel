@@ -66,7 +66,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        hidenNavigationBarStyle()        
+        hidenNavigationBarStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
@@ -107,7 +107,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         etkTextView.textContainer.lineFragmentPadding = 0
         etkTextView.textContainerInset = .zero
         
-        etkTextView.text = " "
+        etkTextView.text = ""
         etkTextView.delegate = self
         etkTextView.isHidden = true
         etkCheckboxButton.isHidden = true
@@ -145,11 +145,11 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
                                                  attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 12),
                                                               .foregroundColor: ColorConstants.darkText])
         
-        let rangeLink1 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLink1)
-        baseText.addAttributes([.link: TextConstants.NotLocalized.termsOfUseEtkLink1], range: rangeLink1)
+        let rangeLink1 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLinkTurkcellAndGroupCompanies)
+        baseText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies], range: rangeLink1)
         
-        let rangeLink2 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLink2)
-        baseText.addAttributes([.link: TextConstants.NotLocalized.termsOfUseEtkLink2], range: rangeLink2)
+        let rangeLink2 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLinkCommercialEmailMessages)
+        baseText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
         
         etkTextView.attributedText = baseText
     }
@@ -225,12 +225,13 @@ extension TermsAndServicesViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         
         switch URL.absoluteString {
-        case TextConstants.NotLocalized.termsOfUseEtkLink1:
+        case TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies:
             DispatchQueue.toMain {
-                //self.output.openTermsOfUseScreen
+                self.output.openTurkcellAndGroupCompanies()
             }
-        case TextConstants.NotLocalized.termsOfUseEtkLink2:
+        case TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages:
             DispatchQueue.toMain {
+                self.output.openCommercialEmailMessages()
             }
         default:
            UIApplication.shared.open(URL, options: [:], completionHandler: nil)

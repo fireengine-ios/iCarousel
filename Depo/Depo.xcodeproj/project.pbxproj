@@ -3152,6 +3152,10 @@
 		CE3318E61EFCFE1800E25989 /* ApplicationPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E51EFCFE1800E25989 /* ApplicationPalette.swift */; };
 		CE33DFFD1F021F4500706C40 /* ReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AF7731F01D9D7002AD17C /* ReachabilityService.swift */; };
 		CE33DFFF1F0296C000706C40 /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33DFFE1F0296C000706C40 /* RequestHeader.swift */; };
+		CE3435E9224A5A4700AFAABB /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3435E8224A5A4700AFAABB /* WebViewController.swift */; };
+		CE3435EA224A5A8B00AFAABB /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3435E8224A5A4700AFAABB /* WebViewController.swift */; };
+		CE3435FF224B5C4400AFAABB /* FullscreenTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3435FE224B5C4400AFAABB /* FullscreenTextController.swift */; };
+		CE343600224B5C6C00AFAABB /* FullscreenTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3435FE224B5C4400AFAABB /* FullscreenTextController.swift */; };
 		CE3471871F02F38400B97AC3 /* AuthenticationServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3471861F02F38400B97AC3 /* AuthenticationServiceResponse.swift */; };
 		CE37B0221F7B7BDE00DDE209 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37B0211F7B7BDE00DDE209 /* IAPManager.swift */; };
 		CE37FF051F7BD42100EF5FF1 /* SKProduct+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37FF041F7BD42100EF5FF1 /* SKProduct+Localized.swift */; };
@@ -5690,6 +5694,8 @@
 		CE3318E01EFCF9D600E25989 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		CE3318E51EFCFE1800E25989 /* ApplicationPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationPalette.swift; sourceTree = "<group>"; };
 		CE33DFFE1F0296C000706C40 /* RequestHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHeader.swift; sourceTree = "<group>"; };
+		CE3435E8224A5A4700AFAABB /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		CE3435FE224B5C4400AFAABB /* FullscreenTextController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenTextController.swift; sourceTree = "<group>"; };
 		CE3471861F02F38400B97AC3 /* AuthenticationServiceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceResponse.swift; sourceTree = "<group>"; };
 		CE37B0211F7B7BDE00DDE209 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		CE37FF041F7BD42100EF5FF1 /* SKProduct+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKProduct+Localized.swift"; sourceTree = "<group>"; };
@@ -11051,6 +11057,8 @@
 				CE57DFAA1FDE66980065B688 /* DarkPopUp */,
 				CE3E4D09201B131600173045 /* PVViewerController */,
 				CEFFA8F121AFC21C00B34F36 /* SegmentedController */,
+				CE3435E8224A5A4700AFAABB /* WebViewController.swift */,
+				CE3435FE224B5C4400AFAABB /* FullscreenTextController.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -15960,6 +15968,7 @@
 				8C0E8ED51FDEBDFF00789C91 /* ShadowView.swift in Sources */,
 				8C0E8ED61FDEBDFF00789C91 /* CreateStoryNameInteractorOutput.swift in Sources */,
 				8C0E8ED71FDEBDFF00789C91 /* CollectionViewStoryReorderView.swift in Sources */,
+				CE3435EA224A5A8B00AFAABB /* WebViewController.swift in Sources */,
 				92004B6D21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
 				CED4B02E2018594700D06CA9 /* HomeCardResponse.swift in Sources */,
 				92203C3721EA0E8800926469 /* InstaPickRoutingService.swift in Sources */,
@@ -16189,6 +16198,7 @@
 				8CF6A9C6207C8CF9007DEF71 /* CollectionViewSpinnerFooter.swift in Sources */,
 				7C379F42202C37CF0050C055 /* UIView+Utils.swift in Sources */,
 				8C0E8F6A1FDEBDFF00789C91 /* PasscodeSettingsConfigurator.swift in Sources */,
+				CE343600224B5C6C00AFAABB /* FullscreenTextController.swift in Sources */,
 				8C0E8F6B1FDEBDFF00789C91 /* UploadFilesSelectionRouterInput.swift in Sources */,
 				8C0E8F6C1FDEBDFF00789C91 /* UploadFilesSelectionRouter.swift in Sources */,
 				B5CDB34121787FEF006CFA50 /* Message.m in Sources */,
@@ -16898,6 +16908,7 @@
 				8C7786A31F3F38F0005CB432 /* VisualMusicPlayerPresenter.swift in Sources */,
 				A225690B21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */,
 				CE3471871F02F38400B97AC3 /* AuthenticationServiceResponse.swift in Sources */,
+				CE3435FF224B5C4400AFAABB /* FullscreenTextController.swift in Sources */,
 				CE51ACCB1EF90853005DCEE0 /* RegistrationInteractor.swift in Sources */,
 				8C6EF8781F348B5C002AC795 /* BottomSelectionTabBarInteractor.swift in Sources */,
 				CE51ACCC1EF90853005DCEE0 /* RegistrationRouterInput.swift in Sources */,
@@ -16945,6 +16956,7 @@
 				CE51ACD91EF90853005DCEE0 /* TermsAndServicesRouterInput.swift in Sources */,
 				984A515421E87883004525F5 /* AnalyzeHistoryDesigner.swift in Sources */,
 				CEACBEA11F6C0EEA003BE328 /* RingView.swift in Sources */,
+				CE3435E9224A5A4700AFAABB /* WebViewController.swift in Sources */,
 				92A7460021B91A4F00386C37 /* PackageService.swift in Sources */,
 				CE3A3003200F4B030028C900 /* Validator.swift in Sources */,
 				8CF6A9C8207C8DD3007DEF71 /* AssetsCache.swift in Sources */,
