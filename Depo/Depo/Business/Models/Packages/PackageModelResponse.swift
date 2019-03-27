@@ -24,7 +24,8 @@ enum FeaturePackageType: String {
     case allAccessFeature           = "FEATURE_ALL_ACCESS"
     case paycellSLCMFeature         = "FEATURE_PAYCELL_SLCM"
     case allAccessPaycellFeature    = "FEATURE_ALL_ACCESS_PAYCELL"
-    
+    case digicellFeature            = "DIGICELL-FEATURE"
+
     var cancelText: String {
         switch self {
         case .appleFeature:
@@ -55,6 +56,8 @@ enum FeaturePackageType: String {
             return TextConstants.featurePaycellSLCMCancelText
         case .allAccessPaycellFeature:
             return TextConstants.featureAllAccessPaycellCancelText
+        case .digicellFeature:
+            return TextConstants.featureDigicellCancelText
         }
     }
 }
@@ -72,7 +75,9 @@ enum PackageType: String {
     case paycellAllAccess           = "PAYCELL_ALL_ACCESS"
     case paycellSLCM                = "PAYCELL_SLCM"
     case albanian                   = "ALBTELECOM"
-    
+    case FWI                        = "FWI"
+    case jamaica                    = "JAMAICA"
+
     var cancelText: String {
         switch self {
         case .apple:
@@ -99,6 +104,10 @@ enum PackageType: String {
             return TextConstants.packagePaycellSLCMCancelText
         case .albanian:
             return TextConstants.packageAlbanianCancelText
+        case .FWI:
+            return TextConstants.packageFWICancelText
+        case .jamaica:
+            return TextConstants.packageJamaicaCancelText
         }
     }
 }

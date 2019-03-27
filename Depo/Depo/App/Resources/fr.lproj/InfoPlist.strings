@@ -1,0 +1,4 @@
+"NSLocationAlwaysUsageDescription" = "Your location will be used for background syncing";
+"NSPhotoLibraryAddUsageDescription" = "Need access to save your photo";
+"NSPhotoLibraryUsageDescription" = "Your photo library access is needed to display photos/videos in the application";
+"NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";

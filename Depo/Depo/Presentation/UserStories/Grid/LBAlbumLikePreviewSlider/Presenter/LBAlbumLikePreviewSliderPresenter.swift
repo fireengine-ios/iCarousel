@@ -76,8 +76,8 @@ extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput
         interactor.requestAllItems()
     }
     
-    func reload(type: MyStreamType) {
-        interactor.reload(type: type)
+    func reload(types: [MyStreamType]) {
+        interactor.reload(types: types)
     }
     
     func countThumbnailsFor(type: MyStreamType) -> Int {

@@ -722,6 +722,9 @@
 "package_paycell_slcm_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
 "package_slcm_paycell_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
 "package_default_cancel_text" = "Ju lutem, përdorni menunë Kontakt për të na informuar, që të përpunojmë kërkesën tuaj";
+"package_albanian_cancel_text" = "Teksti i anulimit të kuotës shqiptare";
+"package_FWI_cancel_text" = "package_FWI_cancel_text";
+"package_jamaica_cancel_text" = "package_jamaica_cancel_text";
 
 /*Leave Premium*/
 "leave_premium_premium_description" = "Ju mund të përdorni të gjitha mundësitë e avancuara të lifebox me abonimin tuaj Premium.";
@@ -740,6 +743,8 @@
 "feature_slcm_paycell_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
 "feature_all_access_paycell_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
 "feature_default_cancel_text" = "Ju lutem përdorni menunë Kontakt për të na informuar, që të përpunojmë kërkesën tuaj.";
+"feature_albanian_cancel_text" = "Ju mund të vazhdoni të përdorni mundësitë Premium falas me qënë se jeni abonent ALBtelecom.";
+"feature_digicell_cancel_text" = "feature_digicell_cancel_text";
 
 /*PackageInfoView*/
 "my_storage" = "Arkiva ime";
@@ -777,10 +782,6 @@
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "PhotoPick";
-
-/*What does it mean "Albanian quota cancel text"?*/
-"package_albanian_cancel_text" = "Teksti i anulimit të kuotës shqiptare";
-"feature_albanian_cancel_text" = "Ju mund të vazhdoni të përdorni mundësitë Premium falas me qënë se jeni abonent ALBtelecom.";
 "no_analyses_left_title" = "Nuk ka më Analiza";
 "no_analyses_left_message" = "Mos u mërzisni! Ju mundeni ende të blini një paketë të re për të analizuar fotot tuaja!";
 "no_analyses_left_button" = "Blini PhotoPick";

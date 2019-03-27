@@ -16,4 +16,6 @@ enum AccountType: String {
     case moldovian  = "MOLDCELL"
     case life       = "LIFE"
     case albanian   = "ALBTELECOM"
+    case FWI        = "FWI"
+    case jamaica    = "JAMAICA"
 }

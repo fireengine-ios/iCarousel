@@ -104,6 +104,8 @@ final class LeavePremiumPresenter {
             case .moldovian: return TextConstants.featureMoldCellCancelText
             case .albanian: return TextConstants.featureAlbanianCancelText
             case .turkcell: return String(format: TextConstants.offersCancelTurkcell, feature.subscriptionPlanName ?? "")
+            case .FWI: return TextConstants.featureDigicellCancelText
+            case .jamaica: return TextConstants.featureDigicellCancelText
             }
         } else {
             return featureType.cancelText
