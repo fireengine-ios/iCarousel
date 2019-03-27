@@ -16,10 +16,14 @@ class TermsAndServicesModuleInitializer: NSObject {
         self.delegate = delegate
     }
     
-    func setupConfig(withViewController controller: TermsAndServicesViewController, fromLogin: Bool, withSignUpSuccessResponse: SignUpSuccessResponse? = nil, userInfo: RegistrationUserInfoModel? = nil) {
+    func setupConfig(withViewController controller: TermsAndServicesViewController,
+                     fromLogin: Bool,
+                     withSignUpSuccessResponse: SignUpSuccessResponse? = nil,
+                     userInfo: RegistrationUserInfoModel? = nil,
+                     phoneNumber: String?) {
         
         let configurator = TermsAndServicesModuleConfigurator(delegate: delegate)
-        configurator.configureModuleForViewInput(viewInput: controller, fromLogin: fromLogin)
+        configurator.configureModuleForViewInput(viewInput: controller, fromLogin: fromLogin, phoneNumber: phoneNumber)
     }
     
 }

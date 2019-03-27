@@ -13,14 +13,17 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
 
     var output: TermsAndServicesViewOutput!
 
-    @IBOutlet weak var welcomeLabel: UILabel!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var checkboxButton: UIButton!
-    @IBOutlet weak var checkboxLabel: UILabel!
-    @IBOutlet weak var acceptButton: BlueButtonWithWhiteText!
+    @IBOutlet private weak var welcomeLabel: UILabel!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var checkboxButton: UIButton!
+    @IBOutlet private weak var checkboxLabel: UILabel!
+    @IBOutlet private weak var acceptButton: BlueButtonWithWhiteText!
     
-    @IBOutlet weak var topContraintIOS10: NSLayoutConstraint!
-    @IBOutlet weak var topContraintIOS11: NSLayoutConstraint!
+    @IBOutlet private weak var topContraintIOS10: NSLayoutConstraint!
+    @IBOutlet private weak var topContraintIOS11: NSLayoutConstraint!
+    
+    @IBOutlet private weak var etkCheckboxButton: UIButton!
+    @IBOutlet private weak var etkTextView: UITextView!
     
     private var userWebContentController: WKUserContentController {
         let contentController = WKUserContentController()
@@ -46,7 +49,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         web.isOpaque = false
         web.backgroundColor = .clear
         web.scrollView.backgroundColor = .clear
-
+//        web.scrollView.layer.masksToBounds = false
         web.navigationDelegate = self
         return web
     }()
@@ -63,7 +66,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        hidenNavigationBarStyle()        
+        hidenNavigationBarStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
@@ -83,7 +86,6 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         }
         
         configureUI()
-        
         output.viewIsReady()
     }
     
@@ -100,12 +102,56 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         checkboxLabel.font = UIFont.TurkcellSaturaRegFont(size: 12)
         checkboxLabel.textColor = ColorConstants.darkText
         
+        /// to remove insets
+        /// https://stackoverflow.com/a/42333832/5893286
+        etkTextView.textContainer.lineFragmentPadding = 0
+        etkTextView.textContainerInset = .zero
+        
+        etkTextView.text = ""
+        etkTextView.delegate = self
+        etkTextView.isHidden = true
+        etkCheckboxButton.isHidden = true
+        
         acceptButton.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
         
         webView.clearPage()
         
         contentView.clipsToBounds = true
         contentView.layer.cornerRadius = 10
+    }
+    
+    func showEtk() {
+        setupEtkText()
+        etkTextView.isHidden = false
+        etkCheckboxButton.isHidden = false
+        
+        view.layoutIfNeeded()
+        
+        /// fixing bug of WKWebView contentInset after relayout
+        let minEtkTextViewHeight: CGFloat = 30
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: etkTextView.bounds.height - minEtkTextViewHeight, right: 0)
+        webView.scrollView.contentInset = insets
+        webView.scrollView.scrollIndicatorInsets = insets
+    }
+    
+    private func setupEtkText() {
+        etkTextView.linkTextAttributes = [
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
+            NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
+            NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+        ]
+        
+        let baseText = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckbox,
+                                                 attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 12),
+                                                              .foregroundColor: ColorConstants.darkText])
+        
+        let rangeLink1 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLinkTurkcellAndGroupCompanies)
+        baseText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies], range: rangeLink1)
+        
+        let rangeLink2 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLinkCommercialEmailMessages)
+        baseText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
+        
+        etkTextView.attributedText = baseText
     }
 
     // MARK: Buttons action
@@ -169,5 +215,32 @@ extension TermsAndServicesViewController: WKNavigationDelegate {
         default:
             decisionHandler(.allow)
         }
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension TermsAndServicesViewController: UITextViewDelegate {
+    
+    @available(iOS 10.0, *)
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        
+        switch URL.absoluteString {
+        case TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies:
+            DispatchQueue.toMain {
+                self.output.openTurkcellAndGroupCompanies()
+            }
+        case TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages:
+            DispatchQueue.toMain {
+                self.output.openCommercialEmailMessages()
+            }
+        default:
+           UIApplication.shared.open(URL, options: [:], completionHandler: nil)
+        }
+        
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        return UIApplication.shared.openURL(URL)
     }
 }

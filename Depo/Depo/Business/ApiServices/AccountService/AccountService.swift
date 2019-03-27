@@ -271,10 +271,8 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .responseString { response in
                 switch response.result {    
                 case .success(let text):
-                    if text == "true" {
-                        handler(.success(true))
-                    } else if text == "false" {
-                        handler(.success(false))
+                    if let isAllowed = Bool(string: text) {
+                        handler(.success(isAllowed))
                     } else {
                         let error = CustomErrors.serverError(text)
                         handler(.failed(error))
