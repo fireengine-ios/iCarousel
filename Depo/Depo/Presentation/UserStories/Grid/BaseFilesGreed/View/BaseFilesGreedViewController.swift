@@ -230,11 +230,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     @objc func loadData() {
-        if output.isSelectionState() {
+        if !output.isSelectionState() {
             output.onReloadData()
             contentSlider?.reloadAllData()
         } else {
-            stopRefresher()
+            refresher.endRefreshing()
         }
     }
     
