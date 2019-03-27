@@ -116,19 +116,18 @@ class RouterVC: NSObject {
         }
     }
     
-    func pushViewController(viewController: UIViewController) {
+    func pushViewController(viewController: UIViewController, animated: Bool = true) {
         if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
             let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
             NotificationCenter.default.post(name: notificationName, object: nil)
         }
         
-        navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.pushViewController(viewController, animated: animated)
         viewController.navigationController?.isNavigationBarHidden = false
         
         if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
             tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
         }
-        
     }
     
     func pushViewControllerAndRemoveCurrentOnCompletion(_ viewController: UIViewController) {
@@ -447,7 +446,7 @@ class RouterVC: NSObject {
     
     // MARK: All Files
     
-    func allFiles(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController? {
+    func allFiles(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let controller = BaseFilesGreedModuleInitializer.initializeAllFilesViewController(with: "BaseFilesGreedViewController",
                                                                                           moduleOutput: moduleOutput,
                                                                                           sortType: sortType,
@@ -458,7 +457,7 @@ class RouterVC: NSObject {
     
     // MARK: Favorites
     
-    func favorites(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController? {
+    func favorites(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let controller = BaseFilesGreedModuleInitializer.initializeFavoritesViewController(with: "BaseFilesGreedViewController",
                                                                                            moduleOutput: moduleOutput,
                                                                                            sortType: sortType,
