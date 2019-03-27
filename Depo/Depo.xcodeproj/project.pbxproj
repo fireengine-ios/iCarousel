@@ -5219,6 +5219,8 @@
 		8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
 		8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
 		8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionServiceExtension.swift; sourceTree = "<group>"; };
+		8CCAC9CC224B5329006310EB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
+		8CCAC9CD224B5329006310EB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8CD7D8E8211193C00019B4F3 /* GoogleService-Info-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-debug.plist"; sourceTree = "<group>"; };
 		8CD7D8F521119BB10019B4F3 /* container */ = {isa = PBXFileReference; lastKnownFileType = folder; path = container; sourceTree = "<group>"; };
 		8CD8F4F31F1E202600F1257B /* GradientLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLoadingIndicator.swift; sourceTree = "<group>"; };
@@ -13431,6 +13433,7 @@
 				base,
 				ro,
 				sq,
+				fr,
 			);
 			mainGroup = 051E1DEA19CAC2F900FD1E03;
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
@@ -17796,6 +17799,7 @@
 				CEBAB15920945C85002824C6 /* ar */,
 				8C0971BB209F91EC003C5609 /* uk */,
 				8CF541EF22030F35001BB03F /* sq */,
+				8CCAC9CC224B5329006310EB /* fr */,
 			);
 			name = OurLocalizable.strings;
 			path = .;
@@ -17872,6 +17876,7 @@
 				CEEB7AA320A5BC690070FDC2 /* es */,
 				CEEB7AA420A5BC6A0070FDC2 /* ro */,
 				8CF541F022030F36001BB03F /* sq */,
+				8CCAC9CD224B5329006310EB /* fr */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
