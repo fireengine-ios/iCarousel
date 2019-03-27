@@ -1897,7 +1897,6 @@
 		8C0E8E411FDEBDFF00789C91 /* ForgotPasswordInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8335AE67CC88B914BA208EA7 /* ForgotPasswordInitializer.swift */; };
 		8C0E8E421FDEBDFF00789C91 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9681FBC0F5A00487632 /* PasscodeView.swift */; };
 		8C0E8E441FDEBDFF00789C91 /* BiometricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */; };
-		8C0E8E451FDEBDFF00789C91 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDEAB2F1FADA5D20046555F /* AlbumCell.swift */; };
 		8C0E8E4B1FDEBDFF00789C91 /* CreateStoryNameViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E2F8D1F31E4F800536DB6 /* CreateStoryNameViewOutput.swift */; };
 		8C0E8E501FDEBDFF00789C91 /* LocalAlbumRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2976DC1FD58E1F00350F3A /* LocalAlbumRouter.swift */; };
 		8C0E8E511FDEBDFF00789C91 /* SearchViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21691F3C84E800BAFE1E /* SearchViewOutput.swift */; };
@@ -2303,7 +2302,6 @@
 		8C0E90391FDEBDFF00789C91 /* ActivityTimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE44714D1F6962F00017B4F0 /* ActivityTimelineViewController.xib */; };
 		8C0E903B1FDEBDFF00789C91 /* CollectionViewCellForAudio.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF6BDE01F0B97050066709E /* CollectionViewCellForAudio.xib */; };
 		8C0E903C1FDEBDFF00789C91 /* BaseFilesGreedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74321F04DDD300124DF5 /* BaseFilesGreedViewController.xib */; };
-		8C0E903F1FDEBDFF00789C91 /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDEAB301FADA5D20046555F /* AlbumCell.xib */; };
 		8C0E90401FDEBDFF00789C91 /* TurkcellSaturaMedIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE051F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf */; };
 		8C0E90411FDEBDFF00789C91 /* GridListTopBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C5408401F61C0E000D4717A /* GridListTopBar.xib */; };
 		8C0E90421FDEBDFF00789C91 /* CollectionViewCellForPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3A74481F07927200124DF5 /* CollectionViewCellForPhoto.xib */; };
@@ -2623,6 +2621,10 @@
 		98B01C77206BCD7300DD78C7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */; };
 		98B01C79206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */; };
 		98B01C7A206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */; };
+		98BCD711224A615A0090C13D /* SmartAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCD70F224A61590090C13D /* SmartAlbumCell.swift */; };
+		98BCD712224A615A0090C13D /* SmartAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCD70F224A61590090C13D /* SmartAlbumCell.swift */; };
+		98BCD713224A615A0090C13D /* SmartAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98BCD710224A615A0090C13D /* SmartAlbumCell.xib */; };
+		98BCD714224A615A0090C13D /* SmartAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98BCD710224A615A0090C13D /* SmartAlbumCell.xib */; };
 		98C878232074B78A00374177 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878222074B78A00374177 /* ViewController.swift */; };
 		98C878242074B78A00374177 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878222074B78A00374177 /* ViewController.swift */; };
 		98C878262074E1C100374177 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878252074E1C100374177 /* NavigationController.swift */; };
@@ -3621,8 +3623,6 @@
 		CEDA44C5207B8ADF00E653DD /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44C4207B8ADF00E653DD /* BackButton.swift */; };
 		CEDA44D9207CA9E600E653DD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
 		CEDA44DA207CA9FB00E653DD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
-		CEDEAB311FADA5D20046555F /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDEAB2F1FADA5D20046555F /* AlbumCell.swift */; };
-		CEDEAB321FADA5D20046555F /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDEAB301FADA5D20046555F /* AlbumCell.xib */; };
 		CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */; };
 		CEDFDF0F1FBEE616006BFCAE /* FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0E1FBEE616006BFCAE /* FirstResponder.swift */; };
 		CEDFECA51F10C77E003D1A75 /* BasePresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFEC9E1F10C77E003D1A75 /* BasePresentor.swift */; };
@@ -5334,6 +5334,8 @@
 		98A867762080DCBC00D2D4F4 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceConstants.swift; sourceTree = "<group>"; };
+		98BCD70F224A61590090C13D /* SmartAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartAlbumCell.swift; sourceTree = "<group>"; };
+		98BCD710224A615A0090C13D /* SmartAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartAlbumCell.xib; sourceTree = "<group>"; };
 		98C878222074B78A00374177 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		98C878252074E1C100374177 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceResponseError.swift; sourceTree = "<group>"; };
@@ -5922,8 +5924,6 @@
 		CED6442D2060E776009AFC12 /* StorageVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageVars.swift; sourceTree = "<group>"; };
 		CEDA44C4207B8ADF00E653DD /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		CEDA44D8207CA9E600E653DD /* NumericConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericConstants.swift; sourceTree = "<group>"; };
-		CEDEAB2F1FADA5D20046555F /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
-		CEDEAB301FADA5D20046555F /* AlbumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCell.xib; sourceTree = "<group>"; };
 		CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+topController.swift"; sourceTree = "<group>"; };
 		CEDFDF0E1FBEE616006BFCAE /* FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponder.swift; sourceTree = "<group>"; };
 		CEDFEC9E1F10C77E003D1A75 /* BasePresentor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePresentor.swift; sourceTree = "<group>"; };
@@ -12513,8 +12513,8 @@
 		CEDEAB331FADB3AC0046555F /* AlbumCell */ = {
 			isa = PBXGroup;
 			children = (
-				CEDEAB2F1FADA5D20046555F /* AlbumCell.swift */,
-				CEDEAB301FADA5D20046555F /* AlbumCell.xib */,
+				98BCD70F224A61590090C13D /* SmartAlbumCell.swift */,
+				98BCD710224A615A0090C13D /* SmartAlbumCell.xib */,
 				B5AB2F042204356400E3AF23 /* InstaPickSmartAlbumCell.swift */,
 				B5AB2F052204356400E3AF23 /* InstaPickSmartAlbumCell.xib */,
 			);
@@ -13637,6 +13637,7 @@
 				8C06B0C72008AD71003D8E05 /* sample@2x.png in Resources */,
 				8C06B00F2008AD71003D8E05 /* kucuk_ucgen@2x.png in Resources */,
 				8C06AF9F2008AD71003D8E05 /* focus@2x.png in Resources */,
+				98BCD714224A615A0090C13D /* SmartAlbumCell.xib in Resources */,
 				CEA1B6AD213EAA09000B3DF4 /* LaunchCampaignCard.xib in Resources */,
 				8C06AEC12008AD70003D8E05 /* alt_cizgili@3x.png in Resources */,
 				8C06AF272008AD70003D8E05 /* cizgi_2_selected.png in Resources */,
@@ -13744,7 +13745,6 @@
 				8C06AFC72008AD71003D8E05 /* header_icon.png in Resources */,
 				8C06B0D12008AD71003D8E05 /* sample_green@2x.png in Resources */,
 				8C06AEDD2008AD70003D8E05 /* bold_secili@2x.png in Resources */,
-				8C0E903F1FDEBDFF00789C91 /* AlbumCell.xib in Resources */,
 				8C06B1D32008AD72003D8E05 /* TOCropViewController.nib in Resources */,
 				8C06B0352008AD71003D8E05 /* Orta.png in Resources */,
 				927E508721E8AAE600E44CC0 /* InstaPickCard.xib in Resources */,
@@ -14267,6 +14267,7 @@
 				8C06AF882008AD70003D8E05 /* extraOptions@3x.png in Resources */,
 				8C06AFDC2008AD71003D8E05 /* italic@3x.png in Resources */,
 				4A9B3911201F5EC5009FC572 /* FaceImageItemsViewController.xib in Resources */,
+				98BCD713224A615A0090C13D /* SmartAlbumCell.xib in Resources */,
 				8C06B12A2008AD72003D8E05 /* t_kucuk_selected@2x.png in Resources */,
 				8C06B0302008AD71003D8E05 /* ok_selected@2x.png in Resources */,
 				8C06AFE22008AD71003D8E05 /* italic_secili@3x.png in Resources */,
@@ -14386,7 +14387,6 @@
 				8C06AF0A2008AD70003D8E05 /* check-mark@3x.png in Resources */,
 				8C06B04E2008AD71003D8E05 /* parlaklik@2x.png in Resources */,
 				7CEE2724209C560500EF6C79 /* PageForLanding.xib in Resources */,
-				CEDEAB321FADA5D20046555F /* AlbumCell.xib in Resources */,
 				8C06AF722008AD70003D8E05 /* edit.png in Resources */,
 				8C06B0122008AD71003D8E05 /* kup.png in Resources */,
 				CEBBDE0D1F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf in Resources */,
@@ -15421,6 +15421,7 @@
 				8C0E8D071FDEBDFF00789C91 /* CreateStoryPhotosOrderModuleInput.swift in Sources */,
 				8C0E8D081FDEBDFF00789C91 /* SearchViewInput.swift in Sources */,
 				8C0E8D091FDEBDFF00789C91 /* HelpAndSupportRouterInput.swift in Sources */,
+				98BCD712224A615A0090C13D /* SmartAlbumCell.swift in Sources */,
 				8C8711711FDFF47000F66396 /* DarkPopUpController.swift in Sources */,
 				8C0E8D0A1FDEBDFF00789C91 /* AutoSyncDataStorage.swift in Sources */,
 				8C0E8D0B1FDEBDFF00789C91 /* PrintInitializer.swift in Sources */,
@@ -15834,7 +15835,6 @@
 				8C0E8E421FDEBDFF00789C91 /* PasscodeView.swift in Sources */,
 				8C0E8E441FDEBDFF00789C91 /* BiometricsManager.swift in Sources */,
 				8CD2B3B21FE7B3BF00280547 /* UIImage+Color.swift in Sources */,
-				8C0E8E451FDEBDFF00789C91 /* AlbumCell.swift in Sources */,
 				8C06AC1D20066641003D8E05 /* TurkcellSecurityViewIO.swift in Sources */,
 				8C0E8E4B1FDEBDFF00789C91 /* CreateStoryNameViewOutput.swift in Sources */,
 				4AFAEAC22027644800DF6A0B /* FaceImageItemsViewOutput.swift in Sources */,
@@ -17109,7 +17109,6 @@
 				CE51AD031EF90853005DCEE0 /* ForgotPasswordInitializer.swift in Sources */,
 				CE0ED9731FBC0F5A00487632 /* PasscodeView.swift in Sources */,
 				CE0ED96E1FBC0F5A00487632 /* BiometricsManager.swift in Sources */,
-				CEDEAB311FADA5D20046555F /* AlbumCell.swift in Sources */,
 				CE00B2772204248000A5A696 /* PhotoService.swift in Sources */,
 				7C6E2F9A1F31E4F800536DB6 /* CreateStoryNameViewOutput.swift in Sources */,
 				CE2976E21FD58E2000350F3A /* LocalAlbumRouter.swift in Sources */,
@@ -17345,6 +17344,7 @@
 				CE6DE7521FCBE84100C23CBD /* DropboxService.swift in Sources */,
 				8C6EF87C1F348B5C002AC795 /* BaseItemPassingProtocol.swift in Sources */,
 				2B5261513879D04FFE1D241C /* SettingsViewOutput.swift in Sources */,
+				98BCD711224A615A0090C13D /* SmartAlbumCell.swift in Sources */,
 				7764E006C922DEA29D9C0744 /* SettingsViewController.swift in Sources */,
 				CE0ED9721FBC0F5A00487632 /* PasscodeInputView.swift in Sources */,
 				78052962200DCDA70051FA78 /* ManageContactTableViewCell.swift in Sources */,
