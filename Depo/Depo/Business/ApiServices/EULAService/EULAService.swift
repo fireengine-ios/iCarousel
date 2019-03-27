@@ -145,10 +145,8 @@ class EulaService: BaseRequestService {
             .responseString { response in
                 switch response.result {
                 case .success(let text):
-                    if text == "true" {
-                        handler(.success(true))
-                    } else if text == "false" {
-                        handler(.success(false))
+                    if let isShowEtk = Bool(string: text) {
+                        handler(.success(isShowEtk))
                     } else {
                         let error = CustomErrors.serverError(text)
                         handler(.failed(error))
