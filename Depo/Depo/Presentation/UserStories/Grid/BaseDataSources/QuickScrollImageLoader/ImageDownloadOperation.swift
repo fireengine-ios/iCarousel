@@ -17,9 +17,11 @@ final class ImageDownloadOperation: Operation {
     private let semaphore = DispatchSemaphore(value: 0)
     private var url: URL?
     private var task: URLSessionTask?
+    private let queue: DispatchQueue
     
-    init(url: URL?) {
+    init(url: URL?, queue: DispatchQueue) {
         self.url = url
+        self.queue = queue
         super.init()
     }
     
@@ -44,7 +46,11 @@ final class ImageDownloadOperation: Operation {
         
         task = SessionManager.customDefault.request(trimmedURL)
             .customValidate()
-            .responseData { dataResponse in
+            .responseData(queue: queue, completionHandler: { [weak self] dataResponse in
+                guard let self = self, !self.isCancelled else {
+                    return
+                }
+                
                 guard let data = dataResponse.value, let image = UIImage(data: data) else {
                     self.outputBlock?(nil)
                     self.semaphore.signal()
@@ -53,7 +59,7 @@ final class ImageDownloadOperation: Operation {
                 
                 self.outputBlock?(image)
                 self.semaphore.signal()
-            }
+            })
             .task
 
         semaphore.wait()
