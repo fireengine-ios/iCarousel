@@ -734,9 +734,6 @@
 "package_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
-"package_albanian_cancel_text" = "Albanian quota cancel text";
-"package_FWI_cancel_text" = "package_FWI_cancel_text";
-"package_jamaica_cancel_text" = "package_jamaica_cancel_text";
 
 /*Leave Premium*/
 "leave_premium_premium_description" = "You can use all the advanced features of lifebox with your Premium membership.";
@@ -755,8 +752,6 @@
 "feature_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "feature_all_access_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "feature_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
-"feature_albanian_cancel_text" = "You can continue to use Premium features for free since you are a ALBtelecom user";
-"feature_digicell_cancel_text" = "feature_digicell_cancel_text";
 
 /*PackageInfoView*/
 "my_storage" = "My Storage";
@@ -784,6 +779,8 @@
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "PhotoPick";
+"package_albanian_cancel_text" = "Albanian quota cancel text";
+"feature_albanian_cancel_text" = "You can continue to use Premium features for free since you are a ALBtelecom user";
 "no_analyses_left_title" = "No Analyzes Left";
 "no_analyses_left_message" = "Don't be sad, you can still purchase new package to analyze your photos!";
 "no_analyses_left_button" = "Become Premium";
@@ -834,14 +831,14 @@
 "connected_with_instagram_name" = "Connect with Instagram as";
 "continue_without_connecting" = "Continue without connecting";
 "connected_accounts" = "Connected Accounts";
-"analyze_history_free_text" = "Free for Limited Time";
+"analyze_history_free_text" = "Unlimited for You";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "In order to purchase PhotoPick package, you need to update your lifebox application.";
 "instapick_upgrade_popup_button" = "Update";
 "instapick_upgrade_popup_no" = "No";
 "instapick_analysis_left" = "Analysis Left: %1$d / %2$d";
-"instapick_unlimited_analysis" = "Free for Limited Time";
+"instapick_unlimited_analysis" = "Unlimited for You";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
@@ -891,4 +888,11 @@
 "data_package_for_turkcell" = "Additional data advantage";
 "delete_duplicated_contacts" = "Remove Duplicate Contacts from Your Phone Directory";
 "leave_middle_membership" = "Leave Standard+ Membership";
+"terms_and_use_etk_checkbox" = "Some Text, Some Text, some terms at Turkcell and group companies and some terms at commercial email messages some text, some text, some text, some text, some text";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell and group companies";
+"terms_and_use_etk_link_commercial_email_messages" = "commercial email messages";
+"commercial_email_messages" = "WRITTEN CONSENT FOR COMMERCIAL E-MAIL MESSAGES\n\n\nI hereby agree that I give my consent to Turkcell and its Group Companies for sending commercial e-mail messages (messages containing data, voice and video which are sent for commercial purposes and transmitted electronically by using means such as telephone, call center, fax transmission, autodialing device, smart sound recorder, electronic mail, short message system) to me through my contact details which I provided when subscribing to lifebox application or which is already held by Turkcell and its Group Companies, for the purpose of advertising and marketing various new products & services offered as well as announcing general/special opportunities provided by Turkcell and its Group Companies and/or third party entities they cooperate with, pursuant to the Law No.6563 on Regulation of Electronic Commerce (“the Law”) as well as the Regulations on Commercial Communication and Commercial Electronic Mail Messages (“the Regulations”) on perpetual basis until I exercise my right to refuse such messages even if my subscription agreement for aforesaid application expires.\n\nCommercial e-mail messages sent by the operators, which are subject to the Electronic Communication Law No.5809, to their subscribers and users exclusively for advertising and marketing their own products & services or introducing their business are exempted pursuant to the Regulations. Therefore, I hereby agree that the consent, which I gave above, is independent of and apart from the consent I have given to the operator to which I am a subscriber/user in connection with advertisement of its products & services and that such operator shall be entitled to send commercial e-mail messages for the purposes such as advertising, marketing its own products & services within the scope of consent I have given to the operator to which I am a subscriber even if I revoke the consent given under this document by exercising my right to refuse such messages pursuant to the Law and the Regulations and that I am aware of my entitlement to refuse the commercial e-mail messages of my operator as well.";
 "leave_middle_turkcell" = "To cancel your package, please send an SMS to 2200 with this text: IPTAL LIFEBOX STANDART+";
+"package_FWI_cancel_text" = "package_FWI_cancel_text";
+"package_jamaica_cancel_text" = "package_jamaica_cancel_text";
+"feature_digicell_cancel_text" = "feature_digicell_cancel_text";

@@ -47,7 +47,7 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     }
     
     func userValid(email: String, phone: String, passpword: String, captchaID: String?, captchaAnswer: String?) {
-        router.termsAndServices(with: view, email: email)
+        router.termsAndServices(with: view, email: email, phoneNumber: phone)
     }
     
     func userInvalid(withResult result: [UserValidationResults]) {

@@ -10,7 +10,7 @@ import UIKit
 
 protocol RegistrationRouterInput {
     func phoneVerification(sigUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel)
-    func termsAndServices(with delegate: RegistrationViewDelegate?, email: String)
+    func termsAndServices(with delegate: RegistrationViewDelegate?, email: String, phoneNumber: String)
     
     func getCapcha() -> CaptchaViewController?
 }

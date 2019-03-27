@@ -16,14 +16,14 @@ class TermsAndServicesModuleConfigurator {
         self.delegate = delegate
     }
     
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, fromLogin: Bool) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, fromLogin: Bool, phoneNumber: String?) {
 
         if let viewController = viewInput as? TermsAndServicesViewController {
-            configure(viewController: viewController, fromLogin: fromLogin)
+            configure(viewController: viewController, fromLogin: fromLogin, phoneNumber: phoneNumber)
         }
     }
 
-    private func configure(viewController: TermsAndServicesViewController, fromLogin: Bool) {
+    private func configure(viewController: TermsAndServicesViewController, fromLogin: Bool, phoneNumber: String?) {
 
         let router = TermsAndServicesRouter()
 
@@ -33,6 +33,7 @@ class TermsAndServicesModuleConfigurator {
         presenter.delegate = delegate
 
         let interactor = TermsAndServicesInteractor()
+        interactor.phoneNumber = phoneNumber
         interactor.isFromLogin = fromLogin
 //        if !fromLogin {
 //            interactor.saveSignUpResponse(withResponse: withSignUpSuccessResponse!, andUserInfo: userInfo!)//unwrap

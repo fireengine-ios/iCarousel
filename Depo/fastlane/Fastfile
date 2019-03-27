@@ -234,7 +234,7 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
   #--------------- helpers ---------------
 
   lane :poeditor_download do
-    for language in ["en", "uk", "tr", "ru", "ro", "es", "de", "ar", "sq"]
+    for language in ["en", "uk", "tr", "ru", "ro", "es", "de", "ar", "sq", "fr"]
       poeditor_export(
         api_token: "be344da1ca0b150bafc6a74019ecaa12",
         project_id: "113239",
