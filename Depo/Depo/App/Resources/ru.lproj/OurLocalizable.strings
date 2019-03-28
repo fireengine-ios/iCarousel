@@ -545,7 +545,7 @@
 "Animation" = "Анимация";
 "We have created an animation from your photos!" = "Мы создали анимацию из ваших фото!";
 "Save Animation" = "Сохранить";
-"Delete Duplicated" = "Дубликаты";
+"Delete Duplicated" = "\nДубликаты\n";
 "Lifebox %@ and Passcode" = "Lifebox %@ и код-пароль";
 "We make easier to manage your memories with homepage" = "Мы делаем проще управление вашими воспоминаниями на домашней странице";
 "You can reach your recent activites and suggestions that are special for you from this page" = "Вы можете перейти к недавним действиям и рекомендациям, находясь на данной странице";
@@ -670,7 +670,7 @@
 "Become Premium" = "Стать Премиум";
 "Become Premium Member!" = "Стать Премиум пользователем!";
 "leave_premium_membership" = "Отменить Премиум подписку";
-"Standard User" = "Standard пользователь";
+"Standard User" = "Стандарт пользователь";
 "Premium User" = "Премиум пользователь";
 "lifebox Premium" = "lifebox Премиум";
 "Delete Duplicated Contacts For PremiumTitle" = "Чтобы удалить дубликаты контактов и разблокировать больше функций, станьте Премиум пользователем!";
@@ -744,11 +744,11 @@
 "my_storage_usage" = "%@ из %@ осталось";
 "package_section_title" = "Расширьте ваше хранилище";
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "Вы вошли в lifebox как Стандартный пользователь. Если вы не обновитесь до Премиум пользователя, ваши фото и видео будут сохраняться в высоком качестве. Вы хотите стать Премиум пользователем, чтобы сохранять их в оригинальном качестве и пользоваться преимуществами Премиум пользователя?";
-"sync_page_pop_up" = "Вы вошли в lifebox как Стандартный пользователь. Если вы не обновитесь до Премиум пользователя, ваши фото и видео будут сохраняться в высоком качестве. Вы хотите стать Премиум пользователем, чтобы сохранять их в оригинальном качестве и пользоваться преимуществами Премиум пользователя?";
+"home_page_pop_up" = "Хотите стать Премиум пользователем, чтобы ваши воспоминания хранились в оригинальном качестве?";
+"sync_page_pop_up" = "Хотите стать Премиум пользователем, чтобы ваши воспоминания хранились в оригинальном качестве?";
 "ok_for_upgrade" = "Да, хочу";
 "no_for_upgrade" = "Нет, не хочу";
-"uploded_photos_high_quality" = "Вы вошли в lifebox как Стандартный пользователь. Если вы не обновитесь до Премиум пользователя, ваши фото и видео будут сохраняться в высоком качестве. Вы хотите стать Премиум пользователем, чтобы сохранять их в оригинальном качестве и пользоваться преимуществами Премиум пользователя?";
+"uploded_photos_high_quality" = "Хотите стать Премиум пользователем, чтобы ваши воспоминания хранились в оригинальном качестве?";
 "NSFaceIDUsageDescription" = "Это приложение использует Face ID для повышения вашей безопасности";
 
 /*AnalyzeHistoryController*/
@@ -757,7 +757,7 @@
 "feature_albanian_cancel_text" = "Вы можете бесплатно пользоваться функциями Премиум подписки как абонент ALBtelecom";
 "no_analyses_left_title" = "Нет оценок";
 "no_analyses_left_message" = "Не грустите, вы все еще можете активировать новый пакет для анализа ваших фото!";
-"no_analyses_left_button" = "Активировать PhotoPick";
+"no_analyses_left_button" = "Стать Премиум пользователем";
 "analyze_history_empty_title" = "Вы еще не пользовались оценкой ваших фото?";
 "analyze_history_empty_subtitle" = "Воспользуйтесь функцией оценки и узнайте, какие фото будут самыми популярными, чтобы поделиться в соцсетях";
 "analyze_history_analyze_left" = "Оценки";
@@ -805,14 +805,14 @@
 "connected_with_instagram_name" = "Связать с Instagram как";
 "continue_without_connecting" = "Продолжить без связывания";
 "connected_accounts" = "Связанные учетки";
-"analyze_history_free_text" = "Бесплатно на некоторое время";
+"analyze_history_free_text" = "Безлимитно для вас";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "Обновите приложение lifebox, чтобы активировать пакет PhotoPick";
 "instapick_upgrade_popup_button" = "Обновить";
 "instapick_upgrade_popup_no" = "Нет";
 "instapick_analysis_left" = "Осталось оценок: %1$d / %2$d";
-"instapick_unlimited_analysis" = "Бесплатно на некоторое время";
+"instapick_unlimited_analysis" = "Безлимитно для вас";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
@@ -830,14 +830,49 @@
 "instapick_under_construction" = "PhotoPick временно недоступен";
 "instapick_unsupported_file_type" = "Фотографии, которые вы выбрали, имеют некорректный формат. Вы можете использовать PhotoPick, выбрав другие фотографии.";
 "work_will_introduced" = "На данный момент ведутся технические работы. Пожалуйста, попробуйте позже";
-"facebook_remove_connection_warning_title" = "";
-"dropbox_remove_connection_warning_title" = "";
-"facebook_remove_connection_warning_message" = "";
-"dropbox_remove_connection_warning_message" = "";
+"facebook_remove_connection_warning_title" = "Вы отменяете соединение с Facebook";
+"dropbox_remove_connection_warning_title" = "Вы отменяете соединение с Dropbox";
+"facebook_remove_connection_warning_message" = "Вы действительно хотите отменить соединение с Facebook? ";
+"dropbox_remove_connection_warning_message" = "Вы действительно хотите отменить соединение с Dropbox?";
 "remove_connection" = "Удалить связывание";
-"you_are_connected" = "";
+
+/*What does it mean? In which context it should be translated?*/
+"you_are_connected" = "Соединение установлено";
 "insta_pick_picture_not_found" = "Картинка не \nнайдена";
 "phone_updated_needs_login" = "Вы успешно обновили номер телефона, пожалуйста, авторизуйтесь, используя ваши учётные данные.";
-"server_under_maintenance" = "";
-"unlimited_photopick_analysis" = "";
-"additional_data_advantage" = "";
+"server_under_maintenance" = "Проводятся технические работы. Пожалуйста, попробуйте позже";
+"unlimited_photopick_analysis" = "Безлимитный PhotoPick  анализ";
+
+/*What does it mean?*/
+"data_advantage_short" = "No translation";
+
+/*What does it mean?*/
+"additional_data_advantage" = "No translation";
+"connection_problem_occured" = "Ошибка соединения. Пожалуйста, попробуйте позже";
+"turkcell_purchase_popup_title" = "%@";
+"mid_user" = "lifebox Стандарт+";
+"instapick_no_available_units_left" = "Ничего нет для анализа";
+"middle_user" = "lifebox Стандарт+";
+"lifebox_middle" = "lifebox Стандарт+";
+"lifebox_standart" = "lifebox Стандарт";
+"account_detail_middle_title" = "Пользуйтесь дополнительными функциями с пакетом lifebox Стандарт+";
+"account_detail_middle_description" = "Вы не сможете пользоваться преимуществами пакета lifebox Стандарт+, если отмените подписку";
+"account_detail_standart_title" = "Вы пользуетесь lifebox  как Стандарт пользователь";
+"account_detail_standart_description" = "Вы можете пользоваться стандартными функциями с вашей подпиской";
+
+/*AnalyzeHistoryController*/
+"instapick_see_details" = "Станьте Премиум";
+"store_in_high_quality" = "Сохраняйте в высоком качестве";
+"5_photopick_analysis" = "5 оценок PhotoPick";
+"10_photopick_analysis" = "10 оценок PhotoPick";
+"data_package_for_turkcell" = "No translation";
+"delete_duplicated_contacts" = "Удалить дубликаты контактов в вашей телефонной книге";
+"leave_middle_membership" = "Оставить подписку Стандарт+";
+"leave_middle_turkcell" = "Чтобы отменить ваш пакет, пожалуйста, отправьте СМС на 2200 с текстом IPTAL LIFEBOX STANDART+";
+"package_FWI_cancel_text" = "";
+"package_jamaica_cancel_text" = "";
+"feature_digicell_cancel_text" = "";
+"terms_and_use_etk_checkbox" = "";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "";
+"terms_and_use_etk_link_commercial_email_messages" = "";
+"commercial_email_messages" = "";

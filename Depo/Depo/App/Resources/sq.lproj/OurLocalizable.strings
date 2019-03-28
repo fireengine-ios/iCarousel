@@ -682,8 +682,8 @@
 "Become Premium" = "Bëhuni Premium";
 "Become Premium Member!" = "Bëhuni anëtar Premium!";
 "leave_premium_membership" = "Ndërprisni abonimin Premium";
-"Standard User" = "Përdorues Standard";
-"Premium User" = "Llogari Premium";
+"Standard User" = "lifebox Standard";
+"Premium User" = "lifebox Premium";
 "lifebox Premium" = "lifebox Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "Për të fshirë të gjitha kontaktet e përsëritura nga numëratori telefonik e për shumë më tepër mundësi, bëhuni anëtar Premium!";
 
@@ -764,13 +764,13 @@
 
 /*Fuzzy*/
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "Ju po hyni në lifebox si një përdorues standard. Nëse ju nuk kaloni në Premium, kujtimet tuaja do të ruhen në cilësi të lartë. Dëshironi të bëheni përdorues Premium që kujtimet tuaja të ruhen në cilësinë e tyre origjinale, si edhe të përfitoni nga privilegjet Premium?";
-"sync_page_pop_up" = "Ju po hyni në lifebox si një përdorues standard. Nëse ju nuk kaloni në Premium, kujtimet tuaja do të ruhen në cilësi të lartë. Dëshironi të bëheni përdorues Premium që kujtimet tuaja të ruhen në cilësinë e tyre origjinale, si edhe të përfitoni nga privilegjet Premium?";
+"home_page_pop_up" = "Doni të bëheni anëtar Premium, të ruani kujtimet tuaja në cilësi origjinale, si edhe t'i aksesoni të gjitha funksionalitetet Premium?";
+"sync_page_pop_up" = "Doni të bëheni anëtar Premium, të ruani kujtimet tuaja në cilësi origjinale, si edhe t'i aksesoni të gjitha funksionalitetet Premium?";
 "ok_for_upgrade" = "Po, Përmirëso";
 
 /*Fuzzy*/
 "no_for_upgrade" = "Jo";
-"uploded_photos_high_quality" = "Ju po hyni në lifebox si një përdorues standard. Nëse ju nuk kaloni në Premium, kujtimet tuaja do të ruhen në cilësi të lartë. Dëshironi të bëheni përdorues Premium që kujtimet tuaja të ruhen në cilësinë e tyre origjinale, si edhe të përfitoni nga privilegjet Premium?";
+"uploded_photos_high_quality" = "Doni të bëheni anëtar Premium, të ruani kujtimet tuaja në cilësi origjinale, si edhe t'i aksesoni të gjitha funksionalitetet Premium?";
 
 /*Fuzzy*/
 "NSFaceIDUsageDescription" = "Për të shtuar sigurinë, ky aplikacion është projektuar që të përdorë ID me Fytyrë.";
@@ -783,7 +783,7 @@
 "feature_albanian_cancel_text" = "Ju mund të vazhdoni të përdorni mundësitë Premium falas me qënë se jeni abonent ALBtelecom.";
 "no_analyses_left_title" = "Nuk ka më Analiza";
 "no_analyses_left_message" = "Mos u mërzisni! Ju mundeni ende të blini një paketë të re për të analizuar fotot tuaja!";
-"no_analyses_left_button" = "Blini PhotoPick";
+"no_analyses_left_button" = "Bëhuni Premium";
 "analyze_history_empty_title" = "Ende nuk keni filluar të analizoni fotot tuaja?";
 "analyze_history_empty_subtitle" = "Filloni analizën tani, për të kuptuar cila foto merr vlersimin më të lartë në rrjetet sociale.";
 "analyze_history_analyze_left" = "Analizime të mbetura";
@@ -835,7 +835,7 @@
 "connected_with_instagram_name" = "Lidhuni me Instagram si";
 "continue_without_connecting" = "Vazhdoni pa u lidhur";
 "connected_accounts" = "Llogari të lidhura";
-"analyze_history_free_text" = "Përkohësisht Falas";
+"analyze_history_free_text" = "Pa limit për ju";
 
 /*InstapickUpgradePopup*/
 /*Fuzzy*/
@@ -845,7 +845,7 @@
 "instapick_upgrade_popup_button" = "Përditësoni";
 "instapick_upgrade_popup_no" = "Jo";
 "instapick_analysis_left" = "Analizim i mbetur: %1$d / %2$d";
-"instapick_unlimited_analysis" = "Përkohësisht Falas";
+"instapick_unlimited_analysis" = "Pa limit për ju";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
@@ -870,9 +870,44 @@
 "facebook_remove_connection_warning_message" = "Jeni të sigurt që dëshironi të hiqni lidhjen me Facebook?";
 "dropbox_remove_connection_warning_message" = "Jeni të sigurt që dëshironi të hiqni lidhjen me Dropbox?";
 "remove_connection" = "Hiqni lidhjen";
-"you_are_connected" = "";
+"you_are_connected" = "Jeni i lidhur";
 "insta_pick_picture_not_found" = "Fotoja nuk\nu gjet";
 "phone_updated_needs_login" = "Ju keni përditësuar me sukses numrin tuaj të telefonit. Ju lutem, hyni me kredencialet tuaja.";
-"server_under_maintenance" = "";
-"unlimited_photopick_analysis" = "";
-"additional_data_advantage" = "";
+"server_under_maintenance" = "Aktualisht, po kryhen disa punime mirëmbajtjeje. Ju lutem, provoni më vonë.";
+"unlimited_photopick_analysis" = "Analizë e palimituar PhotoPick";
+"data_advantage_short" = "Avantazh të dhënash shtesë";
+"additional_data_advantage" = "Avantazh të dhënash shtesë";
+"connection_problem_occured" = "Ka një gabim lidhjeje. Ju lutem, provoni më vonë. ";
+"turkcell_purchase_popup_title" = "%@";
+"mid_user" = "lifebox Standard+";
+"instapick_no_available_units_left" = "Nuk ka asnjë analizë";
+"middle_user" = "lifebox Standard+";
+"lifebox_middle" = "lifebox Standard+";
+"lifebox_standart" = "lifebox Standard";
+"account_detail_middle_title" = "Me anëtarësimin tuaj lifebox Standard+, ju mund të përdorni funksionalitete të avancuara.";
+"account_detail_middle_description" = "Nëse e anuloni anëtarësimin tuaj, ju nuk do të mund të përfitoni nga privilegjet Standard+.";
+"account_detail_standart_title" = "Jeni duke e përdorur lifebox-in si përdorues Standard. ";
+"account_detail_standart_description" = "Me anëtarësimin tuaj, ju mund të përdorni funksionalitete standarde. ";
+
+/*AnalyzeHistoryController*/
+"instapick_see_details" = "Bëhuni Premium";
+"store_in_high_quality" = "Krijoni kopje rezervë me Cilësi të Lartë";
+"5_photopick_analysis" = "5 analiza PhotoPick";
+"10_photopick_analysis" = "10 analiza PhotoPick";
+"data_package_for_turkcell" = "Avantazh të dhënash shtesë";
+"delete_duplicated_contacts" = "Hiqni kontaktet e përsëritura nga Direktoria e Telefonit tuaj.";
+"leave_middle_membership" = "Largohuni nga Anëtarësimi Standard+";
+"leave_middle_turkcell" = "Për të anuluar paketën tuaj, ju lutem dërgoni një SMS drejt 2200 me tekst: IPTAL LIFEBOX STANDART+";
+
+/*If this shall be translated, please refer to my version*/
+"package_FWI_cancel_text" = "paketa_FWI_anulim_tekst";
+
+/*If this shall be translated, please refer to my version*/
+"package_jamaica_cancel_text" = "paketa_jamaica_anulim_tekst";
+
+/*If this shall be translated, please refer to my version*/
+"feature_digicell_cancel_text" = "funksionalitet_digicell_anulim_tekst";
+"terms_and_use_etk_checkbox" = "";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "";
+"terms_and_use_etk_link_commercial_email_messages" = "";
+"commercial_email_messages" = "";

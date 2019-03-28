@@ -668,8 +668,8 @@
 "Become Premium" = "Станьте Преміум користувачем";
 "Become Premium Member!" = "Приєднуйтесь до Преміум клубу!";
 "leave_premium_membership" = "Відмінити Преміум підписку";
-"Standard User" = "Користувач стандартного пакету";
-"Premium User" = "Преміум користувач";
+"Standard User" = "lifebox Стандарт";
+"Premium User" = "lifebox Преміум";
 "lifebox Premium" = "lifebox Преміум";
 "Delete Duplicated Contacts For PremiumTitle" = "Станьте Преміум користувачем, щоб видаляти дублікати контактів та користуватися розширеними функціями!";
 
@@ -742,11 +742,11 @@
 "my_storage_usage" = "%1$@ of %2$@ залишилося";
 "package_section_title" = "Розширте ваше сховище";
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "Ви входите в lifebox як Стандартний користувач. Якщо ви не оновитесь до Преміум користувача, ваші спогади будуть зберігатися в високій якості. Ви хочете стати Преміум користувачем, щоб зберігати їх в оригінальній якості і користуватися привілеями Преміум користувача?";
-"sync_page_pop_up" = "Ви входите в lifebox як Стандартний користувач. Якщо ви не оновитесь до Преміум користувача, ваші спогади будуть зберігатися в високій якості. Ви хочете стати Преміум користувачем, щоб зберігати їх в оригінальній якості і користуватися привілеями Преміум користувача?";
+"home_page_pop_up" = "Хочете стати Преміум користувачем, щоб зберігати ваші спогади у оригінальній якості?";
+"sync_page_pop_up" = "Хочете стати Преміум користувачем, щоб зберігати ваші спогади у оригінальній якості?";
 "ok_for_upgrade" = "Так, бажаю";
 "no_for_upgrade" = "Ні, не бажаю";
-"uploded_photos_high_quality" = "Ви входите в lifebox як Стандартний користувач. Якщо ви не оновитесь до Преміум користувача, ваші спогади будуть зберігатися в високій якості. Ви хочете стати Преміум користувачем, щоб зберігати їх в оригінальній якості і користуватися привілеями Преміум користувача?";
+"uploded_photos_high_quality" = "Хочете стати Преміум користувачем, щоб зберігати ваші спогади у оригінальній якості?";
 "NSFaceIDUsageDescription" = "Ця програма використовує Face ID для підвищення вашої безпеки";
 
 /*AnalyzeHistoryController*/
@@ -755,7 +755,7 @@
 "feature_albanian_cancel_text" = "Ви можете безкоштовно користуватися Преміум підпискою як абонент ALBtelecom";
 "no_analyses_left_title" = "Немає оцінок";
 "no_analyses_left_message" = "Не cумуйте, ви все ще можете активувати новий пакет для оцінки ваших фото!";
-"no_analyses_left_button" = "Активувати PhotoPick";
+"no_analyses_left_button" = "Стати Преміум";
 "analyze_history_empty_title" = "Ще не оцінювали ваші фото?";
 "analyze_history_empty_subtitle" = "Почніть оцінювати та дізнайтеся, які фото отримають найбільше вподобань, щоб потім поділитися у соцмережах";
 "analyze_history_analyze_left" = "Історія оцінювань";
@@ -803,14 +803,14 @@
 "connected_with_instagram_name" = "Поєднати з Instagram як";
 "continue_without_connecting" = "Продовжувати без об'єднання";
 "connected_accounts" = "Поєднані обликові записи";
-"analyze_history_free_text" = "Безкоштовно на деякий час";
+"analyze_history_free_text" = "Безліміт для вас";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "Будь ласка оновіть lifebox  додаток, щоб активувати пакет PhotoPick";
 "instapick_upgrade_popup_button" = "Оновити";
 "instapick_upgrade_popup_no" = "Ні";
 "instapick_analysis_left" = "Залишилося оцінки: %1$d/%2$d";
-"instapick_unlimited_analysis" = "Безкоштовно на деякий час";
+"instapick_unlimited_analysis" = "Безліміт для вас";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
@@ -828,14 +828,43 @@
 "instapick_under_construction" = "Ми покращуємо сервіс PhotoPick  :)";
 "instapick_unsupported_file_type" = "Фотографії, які ви вибрали, мають некоректний формат. Ви можете використовувати Photopik, вибравши інші фотографії.";
 "work_will_introduced" = "Тривають технічні роботи у lifebox! Будь ласка, спробуйте пізніше";
-"facebook_remove_connection_warning_title" = "";
-"dropbox_remove_connection_warning_title" = "";
-"facebook_remove_connection_warning_message" = "";
-"dropbox_remove_connection_warning_message" = "";
+"facebook_remove_connection_warning_title" = "Ви відміняєте з'єднання з Facebook";
+"dropbox_remove_connection_warning_title" = "Ви відміняєте з'єднання з Dropbox";
+"facebook_remove_connection_warning_message" = "Ви впевнені, що хочете відмінити з'єднання з Facebook?";
+"dropbox_remove_connection_warning_message" = "Ви впевнені, що хочете відмінити з'єднання з Dropbox?";
 "remove_connection" = "Видалити поєднання";
-"you_are_connected" = "";
+"you_are_connected" = "З'єднання встановлено";
 "insta_pick_picture_not_found" = "Картинку не \nзнайдено";
 "phone_updated_needs_login" = "Ви успішно оновили свій номер телефону, будь ласка, увійдіть у свій обліковий запис";
-"server_under_maintenance" = "";
-"unlimited_photopick_analysis" = "";
-"additional_data_advantage" = "";
+"server_under_maintenance" = "Тривають технічні роботи. Будь ласка, спробуйте пізніше";
+"unlimited_photopick_analysis" = "Безліміт оцінок з PhotoPick";
+"data_advantage_short" = "No translation";
+"additional_data_advantage" = "No translation";
+"connection_problem_occured" = "Помилка з'єднання. Будь ласка, спробуйте пізніше";
+"turkcell_purchase_popup_title" = "%@";
+"mid_user" = "lifebox Стандарт+";
+"instapick_no_available_units_left" = "Немає фото для оцінки\n";
+"middle_user" = "lifebox Стандарт+";
+"lifebox_middle" = "lifebox Стандарт+";
+"lifebox_standart" = "lifebox Стандарт";
+"account_detail_middle_title" = "Ви можете користуватися додатковими функціями з lifebox Стандарт+";
+"account_detail_middle_description" = "Ви не зможете користуватися перевагами lifebox Стандарт+, якщо відмінете підписку";
+"account_detail_standart_title" = "Ви користуєтесь lifebox  як Стандарт користувач";
+"account_detail_standart_description" = "Ви можете користуватися стандартними функціями з вашим пакетом";
+
+/*AnalyzeHistoryController*/
+"instapick_see_details" = "Стати Преміум";
+"store_in_high_quality" = "Зберігати у високій якості";
+"5_photopick_analysis" = "5 оцінок PhotoPick";
+"10_photopick_analysis" = "10 оцінок PhotoPick";
+"data_package_for_turkcell" = "No translation";
+"delete_duplicated_contacts" = "Видаліть дублікати контактів з вашої телефонної книги";
+"leave_middle_membership" = "Залишити підписку Стандарт+";
+"leave_middle_turkcell" = "Щоб відмінити ваш пакет, відправте будь ласка СМС на 2200 з текстом: IPTAL LIFEBOX STANDART+";
+"package_FWI_cancel_text" = "";
+"package_jamaica_cancel_text" = "";
+"feature_digicell_cancel_text" = "";
+"terms_and_use_etk_checkbox" = "";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "";
+"terms_and_use_etk_link_commercial_email_messages" = "";
+"commercial_email_messages" = "";

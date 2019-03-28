@@ -811,14 +811,14 @@
 "connected_with_instagram_name" = "Instagram'la Bağlan :";
 "continue_without_connecting" = "Bağlamadan devam et";
 "connected_accounts" = "Bağlı Hesaplar";
-"analyze_history_free_text" = "Sınırlı Bir Süre Ücretsiz!";
+"analyze_history_free_text" = "Senin için Sınırsız";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "PhotoPick paketi almak için uygulamanı güncellemen gerekiyor.";
 "instapick_upgrade_popup_button" = "Güncelle";
 "instapick_upgrade_popup_no" = "Hayır";
 "instapick_analysis_left" = "Analiz hakkı: %1$d / %2$d";
-"instapick_unlimited_analysis" = "Sınırlı Bir Süre Ücretsiz!";
+"instapick_unlimited_analysis" = "Senin için Sınırsız";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
@@ -869,3 +869,10 @@
 "delete_duplicated_contacts" = "Rehberindeki tekrarlayan kontakları sil!";
 "leave_middle_membership" = "Standart+ üyeliğini sonlandır";
 "leave_middle_turkcell" = "Paketini iptal etmek için lütfen IPTAL LIFEBOX STANDART+ yazıp 2200’a gönder.";
+"package_FWI_cancel_text" = "package_FWI_cancel_text";
+"package_jamaica_cancel_text" = "package_jamaica_cancel_text";
+"feature_digicell_cancel_text" = "feature_digicell_cancel_text";
+"terms_and_use_etk_checkbox" = "";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "";
+"terms_and_use_etk_link_commercial_email_messages" = "";
+"commercial_email_messages" = "";
