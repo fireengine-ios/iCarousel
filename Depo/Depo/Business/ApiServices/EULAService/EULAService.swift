@@ -130,7 +130,7 @@ class EulaService: BaseRequestService {
         let eula = EULAApprove(id: eulaId, etkAuth: etkAuth)
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
-        executeGetRequest(param: eula, handler: handler)
+        executePostRequest(param: eula, handler: handler)
 
         
     }
