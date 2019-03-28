@@ -36,7 +36,7 @@ final class LeavePremiumViewController: BaseViewController {
     private func setup() {
         setTitle(withString: output.title)
         
-        leavePremiumView.configure(with: "", type: output.controllerType, hideButton: output.controllerType == .standard)
+        leavePremiumView.configure(with: "", type: output.controllerType, hideButton: true)
     }
     
 }
