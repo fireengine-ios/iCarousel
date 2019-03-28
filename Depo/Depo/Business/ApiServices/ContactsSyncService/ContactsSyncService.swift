@@ -102,12 +102,22 @@ class ContactsSyncService: BaseRequestService {
     }
     
     func constractErrorCallBack(errorCallback: ErrorCallback?) {
-
         switch SyncStatus.shared().status {
         case .RESULT_ERROR_PERMISSION_ADDRESS_BOOK:
             errorCallback?(.accessDenied, getCurrentOperationType())
         case .RESULT_ERROR_REMOTE_SERVER:
-            errorCallback?(.remoteServerError, getCurrentOperationType())
+            let requestService = APIReachabilityRequestService()
+            
+            requestService.sendPingRequest { [weak self] isReachable in
+                guard let `self` = self else {
+                    return
+                }
+                if isReachable == false {
+                    errorCallback?(.networkError, self.getCurrentOperationType())
+                } else {
+                    errorCallback?(.remoteServerError, self.getCurrentOperationType())
+                }
+            }
         case .RESULT_ERROR_NETWORK:
             errorCallback?(.networkError, getCurrentOperationType())
         case .RESULT_ERROR_INTERNAL:
