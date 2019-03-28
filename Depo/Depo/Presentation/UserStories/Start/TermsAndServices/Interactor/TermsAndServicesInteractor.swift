@@ -21,6 +21,8 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     var phoneNumber: String?
     
+    var etkAuth: Bool?
+    
     func loadTermsAndUses() {
         eulaService.eulaGet(sucess: { [weak self] eula in
             guard let eulaR = eula as? Eula else {
@@ -40,6 +42,8 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     func saveSignUpResponse(withResponse response: SignUpSuccessResponse, andUserInfo userInfo: RegistrationUserInfoModel) {
         dataStorage.signUpResponse = response
         dataStorage.signUpUserInfo = userInfo
+        
+        dataStorage.signUpResponse.etkAuth = etkAuth
     }
     
     func trackScreen() {
@@ -79,6 +83,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                     return
                 }
                 self?.dataStorage.signUpResponse = t
+                self?.dataStorage.signUpResponse.etkAuth = self?.etkAuth
                 self?.dataStorage.signUpUserInfo = SingletonStorage.shared.signUpInfo
                 SingletonStorage.shared.referenceToken = t.referenceToken
                 
@@ -112,7 +117,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             return
         }
         
-        eulaService.eulaApprove(eulaId: eulaID, sucess: { [weak self] successResponce in
+        eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, sucess: { [weak self] successResponce in
             DispatchQueue.main.async {
                 self?.output.eulaApplied()
             }
@@ -126,10 +131,10 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     func checkEtk() {
         /// phoneNumber will be exists only for signup
         if let phoneNumber = phoneNumber {
-            checkEtk2(for: phoneNumber)
+            checkEtk(for: phoneNumber)
         } else {
             SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] userInfoResponse in
-                self?.checkEtk2(for: userInfoResponse.fullPhoneNumber)
+                self?.checkEtk(for: userInfoResponse.fullPhoneNumber)
             }, fail: { [weak self] _ in
                 DispatchQueue.main.async { [weak self] in
                     self?.output.setupEtk(isShowEtk: false)
@@ -138,7 +143,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         }
     }
     
-    private func checkEtk2(for phoneNumber: String) {
+    private func checkEtk(for phoneNumber: String) {
         eulaService.getEtkAuth(for: phoneNumber) { [weak self] result in
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else {
@@ -148,6 +153,11 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                 switch result {
                 case .success(let isShowEtk):
                     self.output.setupEtk(isShowEtk: isShowEtk)
+                    
+                    /// if we show etk default value must be false (user didn't check etk)
+                    if isShowEtk {
+                        self.etkAuth = false
+                    }
                 case .failed(_):
                     self.output.setupEtk(isShowEtk: false)
                 }

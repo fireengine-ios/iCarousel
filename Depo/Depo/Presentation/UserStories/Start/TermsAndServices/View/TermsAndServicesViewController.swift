@@ -168,6 +168,15 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         
         output.confirmAgreements(button.isSelected)
     }
+    
+    @IBAction func onEtkCheckbox(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        button.isSelected = !button.isSelected
+        
+        output.confirmEtk(button.isSelected)
+    }
 
     // MARK: TermsAndServicesViewInput
     func setupInitialState() {

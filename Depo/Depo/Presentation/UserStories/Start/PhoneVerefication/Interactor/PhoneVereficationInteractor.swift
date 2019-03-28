@@ -61,7 +61,12 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     func verifyCode(code: String) {
-        authenticationService.verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification(token: dataStorage.signUpResponse.referenceToken ?? "", otp: code, processPersonalData: true), sucess: { [weak self] baseResponse in
+        let signUpProperties = SignUpUserPhoveVerification(
+            token: dataStorage.signUpResponse.referenceToken ?? "",
+            otp: code,
+            processPersonalData: true,
+            etkAuth: dataStorage.signUpResponse.etkAuth)
+        authenticationService.verificationPhoneNumber(phoveVerification: signUpProperties, sucess: { [weak self] baseResponse in
             
             if let response = baseResponse as? ObjectRequestResponse,
                 let silentToken = response.responseHeader?[HeaderConstant.silentToken] as? String {

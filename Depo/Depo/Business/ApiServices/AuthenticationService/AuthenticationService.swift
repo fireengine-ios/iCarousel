@@ -146,11 +146,16 @@ struct SignUpUserPhoveVerification: RequestParametrs {
     let token: String
     let otp: String
     let processPersonalData: Bool
+    let etkAuth: Bool?
     
     var requestParametrs: Any {
-        let dict: [String: Any] = [LbRequestkeys.referenceToken      : token,
+        var dict: [String: Any] = [LbRequestkeys.referenceToken      : token,
                                    LbRequestkeys.otp                 : otp,
                                    LbRequestkeys.processPersonalData : processPersonalData]
+        if let etkAuth = etkAuth {
+            dict[LbRequestkeys.etkAuth] = etkAuth
+        }
+
         return dict
     }
     

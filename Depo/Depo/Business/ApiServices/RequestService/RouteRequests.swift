@@ -80,7 +80,7 @@ struct RouteRequests {
     // MARK: EULA 
     static let eulaGet     = "eula/get/%@"
     static let eulaCheck   = "eula/check/%@"
-    static let eulaApprove = "eula/approve/%i"
+    static let eulaApprove = "eula/approve"
     static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
     
     
