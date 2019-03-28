@@ -82,7 +82,6 @@
 "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Special prices for lifecell users! lifebox 50GB for 24,99 UAH/30 days, lifebox 500GB for 52,99 UAH/30 days.  To order: *888#";
 "%ld docs" = "%ld documents";
 "Quota info" = "Usage info";
-"%@ of %@ has remained" = "%1$@ of %2$@ has remained";
 "%ld documents" = "%ld documents";
 "%ld songs" = "%ld songs";
 "%ld videos" = "%ld videos";
@@ -644,7 +643,6 @@
 "LifeboxSmallPopUpCheckBoxTex" = "Never show again";
 "LifeboxSmallPopUpFirstButtonText" = "OK";
 "LifeboxSmallPopUpSecondButtonText" = "UPGRADE";
-"has_remained_lifebox_usage" = "%@ of %@ has remained (only for lifebox usage)";
 "Renewal Date: %@" = "Renewal date: %@";
 "created" = "created";
 "uploaded" = "uploaded";
@@ -896,3 +894,9 @@
 "package_FWI_cancel_text" = "package_FWI_cancel_text";
 "package_jamaica_cancel_text" = "package_jamaica_cancel_text";
 "feature_digicell_cancel_text" = "feature_digicell_cancel_text";
+
+/*Usage Info*/
+"package_space_details" = "%@ of %@ used (only for lifebox usage)";
+"package_renew_date" = "Will be renewed on: %@";
+"percentage_used" = "%.0f%% used";
+"used_and_left_space" = "%@ of %@ used";

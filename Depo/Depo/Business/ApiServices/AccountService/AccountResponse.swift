@@ -322,6 +322,10 @@ class InternetDataUsage: ObjectRequestResponse {
         return sizeString(for: remaining)
     }
     
+    var usedString: String {
+        return sizeString(for: (total ?? 0) - (remaining ?? 0))
+    }
+    
     private func sizeString(for size: Double?) -> String {
         guard let unit = self.unit, let size = size else {
             return ""

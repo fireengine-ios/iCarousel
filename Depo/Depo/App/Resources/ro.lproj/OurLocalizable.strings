@@ -76,7 +76,6 @@
 "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Preț special pentru abonații lifecell! Pentru activarea pachetului lifebox de 50 GB la preț de 24,99 UAU/30 zile, transmite SMS cu textul 50VKL, pentru 500GB la preț de 52,99 UAH/30 zile, transmite SMS cu text 500VKL la numărul 8080.";
 "%ld docs" = "%ld documente";
 "Quota info" = "Informația de utilizare";
-"%@ of %@ has remained" = "Au rămas %@ din %@";
 "%ld documents" = "%ld documente";
 "%ld songs" = "%ld melodii";
 "%ld videos" = "%ld vidioclipuri";
@@ -616,7 +615,6 @@
 "LifeboxSmallPopUpCheckBoxTex" = "Nu mai arăta niciodată";
 "LifeboxSmallPopUpFirstButtonText" = "Ok";
 "LifeboxSmallPopUpSecondButtonText" = "ACTUALIZARE";
-"has_remained_lifebox_usage" = "Au rămas \"%@ din %@ (doar pentru utilizarea lifebox)";
 "Renewal Date: %@" = "Data reînnoirii: %@";
 "created" = "creat";
 "uploaded" = "încărcat";
