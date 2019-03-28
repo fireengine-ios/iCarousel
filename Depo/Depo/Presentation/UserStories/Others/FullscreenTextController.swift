@@ -18,6 +18,9 @@ final class FullscreenTextController: UIViewController {
         textView.isEditable = false
         textView.font = UIFont.TurkcellSaturaRegFont(size: 15)
         textView.textColor = .black
+        
+        let edgeInset: CGFloat = 16
+        textView.contentInset = UIEdgeInsets(top: edgeInset, left: edgeInset, bottom: edgeInset, right: edgeInset)
         return textView
     }()
     
@@ -43,11 +46,10 @@ final class FullscreenTextController: UIViewController {
     private func setupLayout() {
         view.addSubview(textView)
         
-        let edgeInset: CGFloat = 16
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: edgeInset).activate()
-        textView.topAnchor.constraint(equalTo: view.topAnchor, constant: edgeInset).activate()
-        textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -edgeInset).activate()
-        textView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -edgeInset).activate()
+        textView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
+        textView.topAnchor.constraint(equalTo: view.topAnchor).activate()
+        textView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
+        textView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
     }
 }
