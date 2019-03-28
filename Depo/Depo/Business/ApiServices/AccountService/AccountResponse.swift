@@ -62,7 +62,7 @@ class AccountInfoResponse: ObjectRequestResponse {
     
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
-            return "+\(code)\(number)"
+            return number.contains("+") ? number : "+\(code)\(number)"
         }
         return ""
     }
