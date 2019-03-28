@@ -20,7 +20,7 @@ final class WebViewController: UIViewController {
         let webView = WKWebView(frame: .zero, configuration: webConfig)
         webView.isOpaque = false
         webView.navigationDelegate = self
-        webView.backgroundColor = UIColor.lightGray
+        webView.backgroundColor = UIColor.white
         
         /// there is a bug for iOS 9
         /// https://stackoverflow.com/a/32843700/5893286
@@ -33,6 +33,7 @@ final class WebViewController: UIViewController {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.frame = view.bounds
         activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        activityIndicator.color = UIColor.lightGray
         return activityIndicator
     }()
     
