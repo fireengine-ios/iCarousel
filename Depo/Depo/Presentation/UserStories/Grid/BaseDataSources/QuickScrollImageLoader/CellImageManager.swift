@@ -94,7 +94,7 @@ final class CellImageManager {
         let downloadImage = { [weak self] in
             guard let `self` = self else { return }
             
-            let downloadOperation = ImageDownloadOperation(url: url)
+            let downloadOperation = ImageDownloadOperation(url: url, queue: self.dispatchQueue)
             downloadOperation.outputBlock = { [weak self] outputImage in
                 guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
                 
@@ -112,7 +112,7 @@ final class CellImageManager {
             return
         }
         
-        let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail)
+        let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail, queue: self.dispatchQueue)
         downloadThumbnailOperation.outputBlock = { [weak self] outputImage in
             guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
             

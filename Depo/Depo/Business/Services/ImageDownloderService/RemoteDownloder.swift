@@ -71,7 +71,7 @@ class ImageDownloder {
             return
         }
         
-        let operation = ImageDownloadOperation(url: trimmedUrl)
+        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global())
         operation.outputBlock = { [weak self] image in
             guard let `self` = self, let image = image as? UIImage else {
                 completeImage(nil)
