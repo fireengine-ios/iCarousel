@@ -44,6 +44,10 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         confirmAgreements = confirm
     }
     
+    func confirmEtk(_ etk: Bool) {
+        interactor.etkAuth = etk
+    }
+    
     // MARK: OUT
     
     func showLoadedTermsAndUses(eula: String) {

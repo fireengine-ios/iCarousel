@@ -97,7 +97,7 @@
                             <state key="normal" image="checkBoxNotSelected"/>
                             <state key="selected" image="checkboxSelected"/>
                             <connections>
-                                <action selector="onCheckbox:" destination="-1" eventType="touchUpInside" id="qwG-r3-gu6"/>
+                                <action selector="onEtkCheckbox:" destination="-1" eventType="touchUpInside" id="bz7-d5-DHV"/>
                             </connections>
                         </button>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fhl-UV-ahb">

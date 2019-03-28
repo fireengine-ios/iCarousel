@@ -79,20 +79,24 @@ struct EULACheck: RequestParametrs {
     }
 }
 
-struct  EULAApprove: RequestParametrs {
+struct EULAApprove: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
     }
     
     let id: Int
+    let etkAuth: Bool?
     
     var requestParametrs: Any {
-        return ""
+        var params: [String: Any] = [LbRequestkeys.eulaId: id]
+        if let etkAuth = etkAuth {
+            params[LbRequestkeys.etkAuth] = etkAuth
+        }
+        return params
     }
     
     var patch: URL {
-        let patch = String(format: RouteRequests.eulaApprove, id )
-        return URL(string: patch, relativeTo: RouteRequests.baseUrl)!
+        return URL(string: RouteRequests.eulaApprove, relativeTo: RouteRequests.baseUrl)!
     }
     
     var header: RequestHeaderParametrs {
@@ -120,10 +124,10 @@ class EulaService: BaseRequestService {
         executeGetRequest(param: eula, handler: handler)
     }
 
-    func eulaApprove(eulaId: Int, sucess: SuccessResponse?, fail: FailResponse? ) {
+    func eulaApprove(eulaId: Int, etkAuth: Bool?, sucess: SuccessResponse?, fail: FailResponse? ) {
         debugLog("EulaService eulaApprove")
         
-        let eula = EULAApprove(id: eulaId)
+        let eula = EULAApprove(id: eulaId, etkAuth: etkAuth)
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executeGetRequest(param: eula, handler: handler)
