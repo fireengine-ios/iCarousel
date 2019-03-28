@@ -20,8 +20,8 @@ final class MyStorageViewController: BaseViewController {
     @IBOutlet weak var collectionView: ResizableCollectionView!
     @IBOutlet private weak var storageUsageProgressView: RoundedProgressView! {
         didSet {
-            storageUsageProgressView.trackTintColor = ColorConstants.lightGrayColor
-            storageUsageProgressView.progressTintColor = ColorConstants.greenColor
+            storageUsageProgressView.trackTintColor = UIColor.lrTealish.withAlphaComponent(0.25)
+            storageUsageProgressView.progressTintColor = UIColor.lrTealish
             storageUsageProgressView.progress = 0
         }
     }
@@ -53,10 +53,10 @@ final class MyStorageViewController: BaseViewController {
 
 // MARK: - MyStorageViewInput
 extension MyStorageViewController: MyStorageViewInput {
-    func configureProgress(with full: Int64, left: Int64) {
-        storageUsageProgressView.progress = Float(left) / Float(full)
+    func configureProgress(with full: Int64, used: Int64) {
+        storageUsageProgressView.progress = Float(used) / Float(full)
         
-        let storageString = String(format: TextConstants.usageInfoBytesRemained, left.bytesString, full.bytesString)
+        let storageString = String(format: TextConstants.usedAndLeftSpace, used.bytesString, full.bytesString)
         
         //TODO: - think how to change this code for RTL languages
         
