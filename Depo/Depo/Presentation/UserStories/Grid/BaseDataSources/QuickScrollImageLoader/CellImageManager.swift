@@ -116,26 +116,34 @@ final class CellImageManager {
         downloadThumbnailOperation.outputBlock = { [weak self] outputImage in
             guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
             
-            ///another guard in case if we want to save an unblurred thumbnail image
-            guard let blurredImage = self.blurred(image: outputImage) else { return }
-            
-            self.cache(image: blurredImage, url: thumbnail)
-            self.completionBlock?(blurredImage, false, self.uniqueId)
-            
-            downloadImage()
+            self.blurred(image: outputImage, completion: { [weak self] blurredImage in
+                ///another guard in case if we want to save an unblurred thumbnail image
+                guard let self = self, let blurredImage = blurredImage else {
+                    return
+                }
+                
+                self.cache(image: blurredImage, url: thumbnail)
+                self.completionBlock?(blurredImage, false, self.uniqueId)
+                
+                downloadImage()
+            })
         }
         downloadThumbnailOperation.queuePriority = .high
         start(operation: downloadThumbnailOperation)
     }
     
-    private func blurred(image: UIImage, with radiusInPixels: Float = 2.0) -> UIImage? {
-        guard UIApplication.shared.applicationState == .active else {
-            return image
+    private func blurred(image: UIImage, with radiusInPixels: Float = 2.0, completion: @escaping (_ image: UIImage?) -> Void) {
+        DispatchQueue.main.async {
+            guard UIApplication.shared.applicationState == .active else {
+                return completion(image)
+            }
+            
+            self.dispatchQueue.async {
+                let filter = GPUImageGaussianBlurFilter()
+                filter.blurRadiusInPixels = CGFloat(radiusInPixels)
+                completion(filter.image(byFilteringImage: image))
+            }
         }
-        
-        let filter = GPUImageGaussianBlurFilter()
-        filter.blurRadiusInPixels = CGFloat(radiusInPixels)
-        return filter.image(byFilteringImage: image)
     }
     
     private func start(operation: Operation) {
