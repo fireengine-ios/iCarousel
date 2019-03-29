@@ -668,8 +668,8 @@
 "Become Premium" = "Devino Premium";
 "Become Premium Member!" = "Devino Membru Premium!";
 "leave_premium_membership" = "Renunță la Membru Premium";
-"Standard User" = "Utilizator Standard";
-"Premium User" = "Cont Premium";
+"Standard User" = "";
+"Premium User" = "";
 "lifebox Premium" = "lifebox Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "Poți beneficia de mai multe avantaje, ca de exemplu eliminarea duplicatelor din Contacte al dispozitivului tău, fiind membru Premium.";
 
@@ -706,9 +706,6 @@
 "package_paycell_slcm_cancel_text" = "Pentru a-ți anula pachetul, te rugăm să accesezi www.mylifebox.com";
 "package_slcm_paycell_cancel_text" = "Pentru a-ți anula pachetul, te rugăm să accesezi www.mylifebox.com";
 "package_default_cancel_text" = "Pentru a ne informa de solicitarea ta, te rugăm să folosești meniul Cotactează-ne";
-"package_albanian_cancel_text" = "Albanian quota cancel text";
-"package_FWI_cancel_text" = "package_FWI_cancel_text";
-"package_jamaica_cancel_text" = "package_jamaica_cancel_text";
 
 /*Leave Premium*/
 "leave_premium_premium_description" = "Poți beneficia de toate avantajele lifebox cu pachetul Premium.";
@@ -727,8 +724,6 @@
 "feature_slcm_paycell_cancel_text" = "Pentru a-ți suspenda pachetul, te rugăm să accesezi www.mylifebox.com";
 "feature_all_access_paycell_cancel_text" = "Pentru a-ți suspenda pachetul, te rugăm să accesezi www.mylifebox.com";
 "feature_default_cancel_text" = "Pentru a ne informa de solicitarea ta, te rugăm să utilizezi meniul Contactează-ne";
-"feature_albanian_cancel_text" = "Poți utiliza opțiunii Premium în continuare gratuit, atâta timp cât ești utilizator ALBtelecom";
-"feature_digicell_cancel_text" = "feature_digicell_cancel_text";
 
 /*PackageInfoView*/
 "my_storage" = "Spațiul meu de stocare";
@@ -747,18 +742,20 @@
 "my_storage_usage" = "%1$@ din %2$@ au rămas";
 "package_section_title" = "Actualizează-ți spațiul de stocare";
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "Ești înregistrat în lifebox ca utilizator standard și amintirile tale vor fi păstrate în calitate înaltă. Ți-ai dori să devii utilizator Premium ca să poți stoca amintirile în calitate originală și să beneficiezi de toate avantajele Premium?\n";
-"sync_page_pop_up" = "Ești înregistrat în lifebox ca utilizator standard și amintirile tale vor fi păstrate în calitate înaltă. Ți-ai dori să devii utilizator Premium ca să poți stoca amintirile în calitate originală și să beneficiezi de toate avantajele Premium?";
+"home_page_pop_up" = "";
+"sync_page_pop_up" = "";
 "ok_for_upgrade" = "Da, Actualizează";
 "no_for_upgrade" = "Nu, sunt bine așa";
-"uploded_photos_high_quality" = "Ești înregistrat în lifebox ca utilizator standard și amintirile tale vor fi păstrate în calitate înaltă. Ți-ai dori să devii utilizator Premium ca să poți stoca amintirile în calitate originală și să beneficiezi de toate avantajele Premium?";
+"uploded_photos_high_quality" = "";
 "NSFaceIDUsageDescription" = "Această aplicație a fost proiectată să utilizeze Face ID pentru a-ți spori securitatea";
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "PhotoPick";
+"package_albanian_cancel_text" = "Albanian quota cancel text";
+"feature_albanian_cancel_text" = "Poți utiliza opțiunii Premium în continuare gratuit, atâta timp cât ești utilizator ALBtelecom";
 "no_analyses_left_title" = "nu au mai rămas analize";
 "no_analyses_left_message" = "Nu fi supărat, încă mai poți cumpăra pachet nou pentru a analiza fotografiile tale!";
-"no_analyses_left_button" = "Cumpără PhotoPick";
+"no_analyses_left_button" = "";
 "analyze_history_empty_title" = "Încă nu ai început analiza fotografiilor tale?";
 "analyze_history_empty_subtitle" = "Pornește acum opțiunea de analiză a fotografiilor, pentru a afla care va avea cel mai mare impact pe rețelele de socializare";
 "analyze_history_analyze_left" = "Analize au rămas";
@@ -806,14 +803,14 @@
 "connected_with_instagram_name" = "Conectare cu Instagram ca";
 "continue_without_connecting" = "Continuă fără conectare";
 "connected_accounts" = "Conturile conectate";
-"analyze_history_free_text" = "Gratuit pentru timp limitat";
+"analyze_history_free_text" = "";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "Pentru a cumpăra pachetul PhotoPick, e nevoie să actualizezi aplicația lifebox.";
 "instapick_upgrade_popup_button" = "Actualizare";
 "instapick_upgrade_popup_no" = "Nu";
 "instapick_analysis_left" = "Actualizarea a rămas: %1$d / %2$d ";
-"instapick_unlimited_analysis" = "Gratuit pentru timp limitat";
+"instapick_unlimited_analysis" = "";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
@@ -841,4 +838,33 @@
 "phone_updated_needs_login" = "Ați actualizat cu succes numărul dvs. de telefon, conectați-vă cu datele dvs. de acreditare";
 "server_under_maintenance" = "";
 "unlimited_photopick_analysis" = "";
+"data_advantage_short" = "";
 "additional_data_advantage" = "";
+"connection_problem_occured" = "";
+"turkcell_purchase_popup_title" = "";
+"mid_user" = "";
+"instapick_no_available_units_left" = "";
+"middle_user" = "";
+"lifebox_middle" = "";
+"lifebox_standart" = "";
+"account_detail_middle_title" = "";
+"account_detail_middle_description" = "";
+"account_detail_standart_title" = "";
+"account_detail_standart_description" = "";
+
+/*AnalyzeHistoryController*/
+"instapick_see_details" = "";
+"store_in_high_quality" = "";
+"5_photopick_analysis" = "";
+"10_photopick_analysis" = "";
+"data_package_for_turkcell" = "";
+"delete_duplicated_contacts" = "";
+"leave_middle_membership" = "";
+"leave_middle_turkcell" = "";
+"package_FWI_cancel_text" = "";
+"package_jamaica_cancel_text" = "";
+"feature_digicell_cancel_text" = "";
+"terms_and_use_etk_checkbox" = "Până la o notificare contrară întreprinsă de mine  conform Legii numărul 6563 şi legislațiilor  relevante, doresc să primesc mesaje electronice comerciale cu privire la produsele şi serviciile avantajoase ale lui Turkcell şi Societățile Grupului .";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell şi Societățile Grupului";
+"terms_and_use_etk_link_commercial_email_messages" = "mesaje electronice comerciale";
+"commercial_email_messages" = "INFORMARE PRIVIND APROBAREA MESAJELOR ELECTRONICE COMERCIALE\n\nAccept că mi-am exprimat consimțământul pe termen nelimitat inclusiv şi ulterior expirării contractului de utilizator, până la exercitarea dreptului de respingere, pentru a-mi fi trimise din partea lui Turkcell ve Grup Şirketleri prin intermediul datelor de contact furnizate de mine în momentul autentificării în aplicația lifebox sau a  celorlalte date de contact  care îmi aparțin, existente la Turkcell  şi Grup Şirketleri,  mesaje  electronice comerciale cu scop publicitar şi  de marketing aferente diverselor şi noilor produse-servicii şi anunțării  cu privire la posibilitățile generale/speciale ale lui Turkcell şi Grup Şirketleri şi/sau la întreprinderile cu care acesta din urmă colaborează   (comunicări cu conținut de date, audio şi video, efectuate în mediu electronic  şi trimise în scop comercial prin intermediul mijloacelor cum ar fi telefon, centre  de apel, fax, aparate automate de apelare, sisteme inteligente de înregistrare audio, poștă electronică, sms)  cu respectarea prevederilor Legii numărul 6563 cu Privire la Reglementarea Comerţului Electronic („Lege”)  şi Regulamentul cu Privire la Comunicări Comerciale şi Mesaje  Electronice Comerciale („Regulament”)\n\nConform Regulamentului, mesajele electronice ale operatoriilor economici care se încadrează în incidența Legii Comunicațiilor Electronice numărul 5809, trimise abonaților şi utilizatorilor săi în scopul promovării şi  marketingul produselor lor individuale sau publicității întreprinderilor sale, sunt scutite de prevederile legii. Din acest motiv, aprob faptul că acceptul acordat de mine în rândurile precedente este independent şi separat de acceptul acordat societăţii operatoare al cărui abonat/utilizator sunt, cu privire la promovarea produselor şi serviciilor sale şi chiar şi în cazul anulării prin exercitarea  dreptului de respingere prevăzut de Lege şi  Regulament a aprobării mele  acordate prin prezentul  text, în baza aprobării mele acordate operatorului al cărui abonat  s-ar putea să primesc de la operatorul respectiv mesaje electronice comerciale care conțin scopuri precum promovarea, negocierea etc. cu privire la mărfurile şi serviciile proprii, de asemenea cunosc faptul că dețin dreptul de a respinge şi aceste mesaje electronice comerciale.";
