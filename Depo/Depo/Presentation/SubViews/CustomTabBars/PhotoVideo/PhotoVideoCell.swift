@@ -144,14 +144,20 @@ final class PhotoVideoCell: UICollectionViewCell {
         }
         
         if mediaItem.isLocalItemValue {
-            guard let assetIdentifier = mediaItem.localFileID,
-                let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject else {
+            guard let assetIdentifier = mediaItem.localFileID else {
                 return
             }
             
             cellId = assetIdentifier
+            
             DispatchQueue.toBackground { [weak self] in
-                self?.filesDataSource.getAssetThumbnail(asset: asset) { [weak self] image in
+                guard let self = self,
+                    self.cellId == assetIdentifier,
+                    let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject else {
+                    return
+                }
+            
+                self.filesDataSource.getAssetThumbnail(asset: asset) { [weak self] image in
                     DispatchQueue.main.async {
                         if self?.cellId == asset.localIdentifier, let image = image {
                             self?.setImage(image: image, animated:  false)
