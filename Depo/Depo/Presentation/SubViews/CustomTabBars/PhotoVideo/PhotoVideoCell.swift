@@ -117,13 +117,56 @@ final class PhotoVideoCell: UICollectionViewCell {
             }
         case .remoteUrl(_):
             if let meta = wraped.metaData {
-                setImage(with: meta)
+                setImage(smalUrl: meta.smalURl, mediumUrl: meta.mediumUrl)
             }
         }
     }
     
-    private func setImage(with metaData: BaseMetaData) {
-        let cacheKey = metaData.mediumUrl?.byTrimmingQuery
+    func setup(with mediaItem: MediaItem) {
+        accessibilityLabel = mediaItem.nameValue ?? ""
+        favoriteImageView.isHidden = !mediaItem.favoritesValue
+        
+        if mediaItem.isLocalItemValue, mediaItem.fileSizeValue < NumericConstants.fourGigabytes {
+            cloudStatusImageView.image = UIImage(named: "objectNotInCloud")
+        } else {
+            cloudStatusImageView.image = nil
+        }
+        
+        let fileType = FileType(value: mediaItem.fileTypeValue)
+        switch fileType {
+        case .video:
+            videoDurationLabel.text = WrapData.getDuration(duration: mediaItem.metadata?.duration)
+            videoPlayIcon.isHidden = false
+            videoDurationLabel.isHidden = false
+        default:
+            videoPlayIcon.isHidden = true
+            videoDurationLabel.isHidden = true
+        }
+        
+        if mediaItem.isLocalItemValue {
+            guard let assetIdentifier = mediaItem.localFileID,
+                let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject else {
+                return
+            }
+            
+            cellId = assetIdentifier
+            DispatchQueue.toBackground { [weak self] in
+                self?.filesDataSource.getAssetThumbnail(asset: asset) { [weak self] image in
+                    DispatchQueue.main.async {
+                        if self?.cellId == asset.localIdentifier, let image = image {
+                            self?.setImage(image: image, animated:  false)
+                        }
+                    }
+                }
+            }
+        } else if let metadata = mediaItem.metadata {
+            setImage(smalUrl: URL(string: metadata.smalURl ?? ""),
+                     mediumUrl: URL(string: metadata.mediumUrl ?? ""))
+        }
+    }
+    
+    private func setImage(smalUrl: URL?, mediumUrl: URL?) {
+        let cacheKey = mediumUrl?.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         uuid = cellImageManager?.uniqueId
         let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
@@ -137,7 +180,7 @@ final class PhotoVideoCell: UICollectionViewCell {
             }
         }
         
-        cellImageManager?.loadImage(thumbnailUrl: metaData.smalURl, url: metaData.mediumUrl, completionBlock: imageSetBlock)
+        cellImageManager?.loadImage(thumbnailUrl: smalUrl, url: mediumUrl, completionBlock: imageSetBlock)
     }
     
     private func setImage(image: UIImage, animated: Bool) {
@@ -226,6 +269,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     func didEndDisplay() {
         cancelImageLoading()
+        layer.removeAllAnimations()
     }
     
     private func cancelImageLoading() {
