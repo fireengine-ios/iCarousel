@@ -28,7 +28,6 @@ public class MediaItem: NSManagedObject {
         
         fileTypeValue = wrapData.fileType.valueForCoreDataMapping()
         fileSizeValue = wrapData.fileSize
-        syncStatusValue = wrapData.syncStatus.valueForCoreDataMapping()
         favoritesValue = wrapData.favorites
         isLocalItemValue = wrapData.isLocalItem
         creationDateValue = wrapData.creationDate as NSDate?
@@ -51,16 +50,6 @@ public class MediaItem: NSManagedObject {
         
         md5Value = wrapData.md5
         trimmedLocalFileID = wrapData.getTrimmedLocalID()
-        
-        if isLocalItemValue {
-            let savedRelatedRemotes = getRelatedRemotes(for: wrapData, context: context)
-            relatedRemotes = NSSet(array: savedRelatedRemotes)
-            updateLocalRelated(remotesMediaItems: savedRelatedRemotes)
-        } else {
-            let savedRelatedLocals = getRelatedLocals(for: wrapData, context: context)
-            relatedLocal = savedRelatedLocals.first
-            updateRemoteRelated(localMediaItems: savedRelatedLocals)
-        }
         
         if !isLocalItemValue, let md5 = md5Value, let trimmedID = trimmedLocalFileID,
             (md5.isEmpty || trimmedID.isEmpty) {
@@ -87,9 +76,28 @@ public class MediaItem: NSManagedObject {
         })
         self.albums = NSOrderedSet(array: albums ?? [])
 
-        let syncStatuses = convertToMediaItems(syncStatuses: wrapData.syncStatuses, context: context)
+        syncStatusValue = wrapData.syncStatus.valueForCoreDataMapping()
         
+        let syncStatuses = convertToMediaItems(syncStatuses: wrapData.syncStatuses, context: context)
         objectSyncStatus = syncStatuses
+        
+        if isLocalItemValue {
+            let savedRelatedRemotes = getRelatedRemotes(for: wrapData, context: context)
+            if !savedRelatedRemotes.isEmpty {
+                addToObjectSyncStatus(MediaItemsObjectSyncStatus(userID: SingletonStorage.shared.uniqueUserID, context: context))
+                relatedRemotes = NSSet(array: savedRelatedRemotes)
+                updateLocalRelated(remotesMediaItems: savedRelatedRemotes)
+            }
+        } else {
+            let savedRelatedLocals = getRelatedLocals(for: wrapData, context: context)
+            if !savedRelatedLocals.isEmpty {
+                savedRelatedLocals.forEach {
+                    $0.addToObjectSyncStatus(MediaItemsObjectSyncStatus(userID: SingletonStorage.shared.uniqueUserID, context: context))
+                }
+                relatedLocal = savedRelatedLocals.first
+                updateRemoteRelated(localMediaItems: savedRelatedLocals)
+            }
+        }
     }
     
     private func getRemoteTrimmedID(json: JSON) -> String  {
