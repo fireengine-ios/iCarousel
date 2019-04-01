@@ -76,7 +76,6 @@
 "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Спеціальні ціни для абонентів lifecell! lifebox 50ГБ всього за 24,99 грн/30 днів, lifebox 500ГБ всього за 52,99 грн/30 днів. Підключити: *888#";
 "%ld docs" = "%ld документи";
 "Quota info" = "Інформація про використання";
-"%@ of %@ has remained" = "%@ з %@ залишилося";
 "%ld documents" = "%ld документи";
 "%ld songs" = "%ld треки";
 "%ld videos" = "%ld відео";
@@ -616,7 +615,6 @@
 "LifeboxSmallPopUpCheckBoxTex" = "Ніколи не показувати знову";
 "LifeboxSmallPopUpFirstButtonText" = "OK";
 "LifeboxSmallPopUpSecondButtonText" = "Покращити";
-"has_remained_lifebox_usage" = "% @ з% @ залишилося (тільки для використання lifebox)";
 "Renewal Date: %@" = "Дата поновлення: %@";
 "created" = "Створено";
 "uploaded" = "Завантажено";

@@ -48,9 +48,7 @@ final class MyStoragePresenter {
         let usedStorageSize = usage.usedBytes ?? 0
         let fullStorageSize = usage.quotaBytes ?? 0
         
-        let leftStorageSize = fullStorageSize - usedStorageSize
-        
-        view?.configureProgress(with: fullStorageSize, left: leftStorageSize)
+        view?.configureProgress(with: fullStorageSize, used: usedStorageSize)
     }
     
     private func displayOffers() {

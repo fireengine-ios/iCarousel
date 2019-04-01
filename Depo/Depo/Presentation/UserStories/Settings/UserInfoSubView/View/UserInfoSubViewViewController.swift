@@ -66,8 +66,8 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         uplaodLabel.textColor = UIColor.lrTealish
         uplaodLabel.text = TextConstants.settingsViewUploadPhotoLabel
         
-        usersStorrageUssesProgress.progressTintColor = ColorConstants.greenColor
-        usersStorrageUssesProgress.trackTintColor = ColorConstants.lightGrayColor
+        usersStorrageUssesProgress.progressTintColor = UIColor.lrTealish
+        usersStorrageUssesProgress.trackTintColor = UIColor.lrTealish.withAlphaComponent(0.25)
         
         usersStorrageUssesProgress.setProgress(0, animated: false)
         
@@ -158,15 +158,11 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         guard let quotaBytes = quotoInfo.bytes, let usedBytes = quotoInfo.bytesUsed else { 
             return
         }
-        usersStorrageUssesProgress.progress = 1 - Float(usedBytes) / Float(quotaBytes)
+        usersStorrageUssesProgress.progress = Float(usedBytes) / Float(quotaBytes)
         
         let quotaString = quotaBytes.bytesString
-        var remaind = quotaBytes - usedBytes
-        if remaind < 0 {
-            remaind = 0
-        }
-        let remaindSize = remaind.bytesString
-        userStorrageInformationLabel.text = String(format: TextConstants.usageInfoBytesRemained, remaindSize, quotaString)
+        let usedString = usedBytes.bytesString
+        userStorrageInformationLabel.text = String(format: TextConstants.usedAndLeftSpace, usedString, quotaString)
     }
 
     // MARK: UserInfoSubViewViewInput
