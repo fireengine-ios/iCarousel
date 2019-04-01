@@ -96,7 +96,7 @@ final class CellImageManager {
         let downloadImage = { [weak self] in
             guard let `self` = self else { return }
             
-            let downloadOperation = ImageDownloadOperation(url: url)
+            let downloadOperation = ImageDownloadOperation(url: url, queue: self.dispatchQueue)
             downloadOperation.outputBlock = { [weak self] outputImage in
                 guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
                 
@@ -114,12 +114,16 @@ final class CellImageManager {
             return
         }
         
-        let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail)
+        let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail, queue: self.dispatchQueue)
         downloadThumbnailOperation.outputBlock = { [weak self] outputImage in
-            guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
+            guard let `self` = self, let outputImage = outputImage as? UIImage else {
+                return
+            }
             
             ///another guard in case if we want to save an unblurred thumbnail image
-            guard let blurredImage = CellImageManager.blurService.blur(image: outputImage) else { return }
+            guard let blurredImage = CellImageManager.blurService.blur(image: outputImage) else {
+                return
+            }
             
             self.cache(image: blurredImage, url: thumbnail)
             self.completionBlock?(blurredImage, false, self.uniqueId)
