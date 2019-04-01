@@ -87,10 +87,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7j-Im-F5o">
-                                    <rect key="frame" x="63" y="4" width="150" height="22"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="150" id="fNT-WB-cC7"/>
-                                    </constraints>
+                                    <rect key="frame" x="63" y="4" width="41.666666666666657" height="22"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -104,6 +101,7 @@
                                 <constraint firstItem="Y7j-Im-F5o" firstAttribute="top" secondItem="Kfw-l0-Y4i" secondAttribute="top" constant="4" id="aWp-Gb-rh1"/>
                                 <constraint firstItem="xqD-Ug-1FL" firstAttribute="leading" secondItem="Kfw-l0-Y4i" secondAttribute="leading" constant="25" id="i65-IV-y5g"/>
                                 <constraint firstAttribute="height" constant="30" id="odh-uD-uhV"/>
+                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Y7j-Im-F5o" secondAttribute="trailing" constant="8" id="vIj-ct-CHS"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crD-Uh-f0U" userLabel="view for captcha">

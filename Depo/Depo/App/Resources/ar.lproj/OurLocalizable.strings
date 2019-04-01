@@ -680,8 +680,8 @@
 "Become Premium" = "كن بريميوم";
 "Become Premium Member!" = "احصل على العضوية البريميوم!";
 "leave_premium_membership" = "غادر العضوية البريميوم!";
-"Standard User" = "مستخدم قياسي";
-"Premium User" = "حساب بريميوم";
+"Standard User" = "";
+"Premium User" = "";
 "lifebox Premium" = "لايف بوكس بريميوم";
 "Delete Duplicated Contacts For PremiumTitle" = "لتتمكن من حذف جهات الاتصال المتكررة من دليل الهاتف وإلغاء قفل العديد من الميزات، احصل على العضوية البريميوم!";
 
@@ -718,9 +718,6 @@
 "package_paycell_slcm_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifebox.com.";
 "package_slcm_paycell_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifebox.com.";
 "package_default_cancel_text" = "يرجى استخدام قائمة الاتصال بنا لإبلاغنا بمعالجة طلبك.";
-"package_albanian_cancel_text" = "اقتباس ألباني إلغاء النص";
-"package_FWI_cancel_text" = "package_FWI_cancel_text";
-"package_jamaica_cancel_text" = "package_jamaica_cancel_text";
 
 /*Leave Premium*/
 "leave_premium_premium_description" = "يمكنك استخدام جميع المزايا المتقدمة من لايف بوكس من خلال العضوية البريميوم.";
@@ -739,8 +736,6 @@
 "feature_slcm_paycell_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifebox.com.";
 "feature_all_access_paycell_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifebox.com.";
 "feature_default_cancel_text" = "يرجى استخدام قائمة الاتصال بنا لإبلاغنا لمعالجة طلبك.";
-"feature_albanian_cancel_text" = "بإمكانك الإستمرار باستخدام الخصائص الاستثنائية مجانا طالما انك مستخدم لاتصالات ALB";
-"feature_digicell_cancel_text" = "feature_digicell_cancel_text";
 
 /*PackageInfoView*/
 "my_storage" = "مساحة التخزين";
@@ -759,18 +754,20 @@
 "my_storage_usage" = "متبقي %1$@ من %2$@";
 "package_section_title" = "ترقية مساحة التخزين";
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "نظرًا لأنك مستخدم قياسي، ستتمكن فقط من معالجة 100 صورة من صورك. ويمكنك رؤية 3 مجلدات فقط لفرد وشيء وموقع في الألبومات الذكية الخاصة التي ستنشأ من أجلك.";
-"sync_page_pop_up" = "نظرًا لأنك مستخدم قياسي، ستتمكن فقط من معالجة 100 صورة من صورك. ويمكنك رؤية 3 مجلدات فقط لفرد وشيء وموقع في الألبومات الذكية الخاصة التي ستنشأ من أجلك.";
+"home_page_pop_up" = "";
+"sync_page_pop_up" = "";
 "ok_for_upgrade" = "نعم، ترقية";
 "no_for_upgrade" = "لا، هذا جيد";
-"uploded_photos_high_quality" = "نظرًا لأنك مستخدم قياسي، ستتمكن فقط من معالجة 100 صورة من صورك. ويمكنك رؤية 3 مجلدات فقط لفرد وشيء وموقع في الألبومات الذكية الخاصة التي ستنشأ من أجلك.";
+"uploded_photos_high_quality" = "";
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "PhotoPick";
+"package_albanian_cancel_text" = "اقتباس ألباني إلغاء النص";
+"feature_albanian_cancel_text" = "بإمكانك الإستمرار باستخدام الخصائص الاستثنائية مجانا طالما انك مستخدم لاتصالات ALB";
 "no_analyses_left_title" = "لايوجد تحاليل متبقية";
 "no_analyses_left_message" = "لا تحزن, لازال بإمكانك شراء حزمة جديدة لتحليل صورك";
-"no_analyses_left_button" = "شراء PhotoPick";
+"no_analyses_left_button" = "";
 "analyze_history_empty_title" = "لم تبدأ بتحليل صورك بعد؟";
 "analyze_history_empty_subtitle" = "ابدء بالتحليل الآن لتكتشف أي صورة ستحظى بالمرتبة الأعلى وشاركها على وسائل التواصل";
 "analyze_history_analyze_left" = "يوجد تحليل متبق";
@@ -818,14 +815,14 @@
 "connected_with_instagram_name" = "اتصل بواسطة الانستغرام ك";
 "continue_without_connecting" = "استمر بدون اتصال";
 "connected_accounts" = "الحسابات المتصلة";
-"analyze_history_free_text" = "مجانا لوقت محدود";
+"analyze_history_free_text" = "";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "من أجل شراء حزمة PhotoPick تحتاج الى ترقية تطبيق lifebox ";
 "instapick_upgrade_popup_button" = "ترقية";
 "instapick_upgrade_popup_no" = "لا";
 "instapick_analysis_left" = "يوجد تحليل متبق:%1$d/%2$d";
-"instapick_unlimited_analysis" = "مجانا لوقت محدود";
+"instapick_unlimited_analysis" = "";
 "Facebook" = "فيس بوك";
 "Dropbox" = "Dropbox";
 "Instagram" = "انستغرام";
@@ -853,4 +850,33 @@
 "phone_updated_needs_login" = "لقد أتممت تحديث رقم هاتفك بنجاح. يرجى تسجيل الدخول بكتابة بيانات الاعتماد.";
 "server_under_maintenance" = "";
 "unlimited_photopick_analysis" = "";
+"data_advantage_short" = "";
 "additional_data_advantage" = "";
+"connection_problem_occured" = "";
+"turkcell_purchase_popup_title" = "";
+"mid_user" = "";
+"instapick_no_available_units_left" = "";
+"middle_user" = "";
+"lifebox_middle" = "";
+"lifebox_standart" = "";
+"account_detail_middle_title" = "";
+"account_detail_middle_description" = "";
+"account_detail_standart_title" = "";
+"account_detail_standart_description" = "";
+
+/*AnalyzeHistoryController*/
+"instapick_see_details" = "";
+"store_in_high_quality" = "";
+"5_photopick_analysis" = "";
+"10_photopick_analysis" = "";
+"data_package_for_turkcell" = "";
+"delete_duplicated_contacts" = "";
+"leave_middle_membership" = "";
+"leave_middle_turkcell" = "";
+"package_FWI_cancel_text" = "";
+"package_jamaica_cancel_text" = "";
+"feature_digicell_cancel_text" = "";
+"terms_and_use_etk_checkbox" = "";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "";
+"terms_and_use_etk_link_commercial_email_messages" = "";
+"commercial_email_messages" = "";

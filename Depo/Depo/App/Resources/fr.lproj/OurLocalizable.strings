@@ -95,7 +95,7 @@ sent to your phone number %@"*/
 "Resend" = "Renvoyer";
 "Next" = "Suivant";
 "%.2f %@ / month" = "%.2f %@ / mois";
-"Settings" = "Settings";
+"Settings" = "Paramètres";
 "OK" = "OK";
 "Buy" = "Acquisition";
 "Cancel" = "Annuler";
@@ -224,7 +224,7 @@ sent to your phone number %@"*/
 "Choose a destination folder" = "Choisir un dossier de destination";
 "Ok" = "Ok";
 "Need to select folder" = "Nécessité de sélectionner un dossier";
-"Back" = "Page précédente";
+"Back" = "Retour";
 
 /*Suggested: "Upload from lifebox failed"*/
 "Fail while uploading from LifeBox" = "Taper à côté lors de téléchargement de lifeBox";
@@ -1099,3 +1099,7 @@ Please check I have understood the intended command here*/
 "package_FWI_cancel_text" = "";
 "package_jamaica_cancel_text" = "";
 "feature_digicell_cancel_text" = "";
+"terms_and_use_etk_checkbox" = "J'aimerais recevoir des messages électroniques commerciaux afin de connaître les produits et services avantageux de Turkcell et des sociétés du groupe jusqu'à ce que je déclare le contraire en vertu de la loi n ° 6563 et d'autres législations pertinentes.";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell et des sociétés du groupe";
+"terms_and_use_etk_link_commercial_email_messages" = "messages électroniques commerciaux";
+"commercial_email_messages" = "INFORMATIONS SUR L’AUTORISATION DES MESSAGES ELECTRONIQUES COMMERCIAUX\n\nJ'accepte et j'ai mon approbation valable indéfiniment pour envoi de messages électroniques commerciaux (les messageries contenant des données, d’audio et des vidéos réalisés électroniquement pour but commercial en utilisant les moyens de service telles que le téléphone, les centres d’appel, le fax, les machines d’appels automatiques, les systèmes d’enregistreur vocal intelligent, le courrier électronique, le service de messagerie SMS) par Turkcell et les sociétés du groupe en utilisant mes informations de contact qui j’ai donnés lors d’abonnement  à l’application lifebox ou qui se trouvent auprès de Turkcell et des sociétés du groupe, afin de promouvoir la promotion et la commercialisation de divers produits et services nouveaux liés aux sociétés Turkcell et du groupe et / ou aux sociétés avec lesquelles ils coopèrent ainsi que pour faire savoir les avantages générales et spéciales dans le cadre de la Loi n° 6563 sur la réglementation du commerce électronique (« Loi ») et le règlement relative aux communications commerciales et aux messages électroniques commerciaux (« Règlement ») jusqu'à ce que j’utilise mon droit de refuser, même si le contrat d'utilisateur est expiré.  \n\nSelon le règlement, les envois des messages électroniques commerciaux aux   abonnés et utilisateurs par les opérateurs relevant de la loi sur les communications électroniques no 5809, qui sont exclusivement pour promouvoir leurs propres biens et services, pour commercialiser ou pour promouvoir leur entreprise, sont exceptés. Pour cette raison, j’accepte avoir connaitre que mon approbation ci-dessus est un approbation indépendant et séparé de l’approbation donné pour la promotion de leur propre produit et service de l’operateur dont je suis abonné/utilisateur et même que j’annule mon approbation donné par ce texte dans le cadre de Loi et Règlement en utilisant mon droit de refuser, les messages électroniques commerciaux promotionnels, commerciaux etc. liés à ses propres biens et services peuvent parvenir dans le cadre d’approbation qui j’ai donné à l’opérateur dont je me suis abonné et j’ai reconnais que j’aurais également la possibilité de refuser ces messages électroniques commerciaux.";
