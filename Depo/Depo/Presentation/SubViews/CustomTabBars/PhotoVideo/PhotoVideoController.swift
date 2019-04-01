@@ -170,7 +170,9 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             return
         }
         
-        let currentMediaItem = dataSource.object(at: indexPath)
+        guard let currentMediaItem = dataSource.object(at: indexPath) else {
+            return
+        }
         let currentObject = WrapData(mediaItem: currentMediaItem)
         
         let router = RouterVC()
@@ -216,8 +218,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         guard let indexPath = collectionView.indexPathsForVisibleItems.min(by: <) else {
             return
         }
-        let mediaItem = dataSource.object(at: indexPath)
-        guard let date = mediaItem.sortingDate as Date? else {
+        
+        guard let mediaItem = dataSource.object(at: indexPath), let date = mediaItem.sortingDate as Date? else {
             return
         }
         let title = date.getDateInTextForCollectionViewHeader()
@@ -298,11 +300,12 @@ extension PhotoVideoController: UIScrollViewDelegate {
             
             let category: QuickScrollCategory = self.isPhoto ? .photos : .videos
             let fileType: FileType = self.isPhoto ? .image : .video
-            self.quickScrollService.requestListOfDateRange(startDate: max(firstDate, lastDate), endDate: min(firstDate, lastDate), category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
+            let dateRange = min(firstDate, lastDate)...max(firstDate, lastDate)
+            self.quickScrollService.requestListOfDateRange(startDate: dateRange.upperBound, endDate: dateRange.lowerBound, category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
                 switch response {
                 case .success(let quckScrollResponse):
                     self.dispatchQueue.async {
-                        MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileType: fileType, completion: {
+                        MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileType: fileType, dateRange: dateRange, completion:  {
                             debugPrint("appended and updated")
                         })
                     }
@@ -324,7 +327,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
             return Date.distantFuture
         }
         
-        return dataSource.object(at: objectIndex).sortingDate as Date?
+        return dataSource.object(at: objectIndex)?.sortingDate as Date?
     }
     
 }
@@ -340,7 +343,10 @@ extension PhotoVideoController: UICollectionViewDelegate {
         cell.indexPath = indexPath
         cell.filesDataSource = filesDataSource
         
-        let object = dataSource.object(at: indexPath)
+        guard let object = dataSource.object(at: indexPath) else {
+            return
+        }
+        
         let wraped = WrapData(mediaItem: object)
         cell.setup(with: wraped)
         
@@ -387,8 +393,10 @@ extension PhotoVideoController: UICollectionViewDelegate {
         guard let view = view as? CollectionViewSimpleHeaderWithText else {
             return
         }
-        let mediaItem = dataSource.object(at: indexPath)
-        view.setup(with: mediaItem)
+        
+        if let mediaItem = dataSource.object(at: indexPath) {
+            view.setup(with: mediaItem)
+        }
     }
 }
 
