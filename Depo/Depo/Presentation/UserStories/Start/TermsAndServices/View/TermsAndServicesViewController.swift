@@ -24,6 +24,7 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
     
     @IBOutlet private weak var etkCheckboxButton: UIButton!
     @IBOutlet private weak var etkTextView: UITextView!
+    @IBOutlet private weak var etkTopSpaceConstraint: NSLayoutConstraint!
     
     private var userWebContentController: WKUserContentController {
         let contentController = WKUserContentController()
@@ -109,8 +110,13 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         
         etkTextView.text = ""
         etkTextView.delegate = self
+        
+        // TODO: change this logic for StackView one
         etkTextView.isHidden = true
         etkCheckboxButton.isHidden = true
+        etkTopSpaceConstraint.constant = -30 //magic number for design
+        
+        view.layoutIfNeeded()
         
         acceptButton.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
         
@@ -124,12 +130,15 @@ class TermsAndServicesViewController: ViewController, TermsAndServicesViewInput 
         setupEtkText()
         etkTextView.isHidden = false
         etkCheckboxButton.isHidden = false
+        etkTopSpaceConstraint.constant = 16 //magic number for design
         
         view.layoutIfNeeded()
-        
-        /// fixing bug of WKWebView contentInset after relayout
-        let minEtkTextViewHeight: CGFloat = 30
-        let insets = UIEdgeInsets(top: 0, left: 0, bottom: etkTextView.bounds.height - minEtkTextViewHeight, right: 0)
+        updateWebViewInsets()
+    }
+    
+    /// fixing bug of WKWebView contentInset after relayout
+    private func updateWebViewInsets() {
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: etkTextView.bounds.height + etkTopSpaceConstraint.constant, right: 0)
         webView.scrollView.contentInset = insets
         webView.scrollView.scrollIndicatorInsets = insets
     }

@@ -18,6 +18,7 @@
                 <outlet property="contentView" destination="aLj-Qo-ocB" id="vmZ-Wx-V8R"/>
                 <outlet property="etkCheckboxButton" destination="10w-4A-KrN" id="byK-M1-eqr"/>
                 <outlet property="etkTextView" destination="fhl-UV-ahb" id="7Is-JS-zNg"/>
+                <outlet property="etkTopSpaceConstraint" destination="FRr-br-fl0" id="8Av-Lk-JWM"/>
                 <outlet property="topContraintIOS10" destination="WpD-kj-ClX" id="671-Iu-QVs"/>
                 <outlet property="topContraintIOS11" destination="ezh-vD-O0c" id="IJ3-te-37Y"/>
                 <outlet property="view" destination="iN0-l3-epB" id="dBd-vg-Lh5"/>
