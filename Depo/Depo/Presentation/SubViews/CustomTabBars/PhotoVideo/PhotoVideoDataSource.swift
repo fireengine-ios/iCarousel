@@ -28,9 +28,11 @@ final class PhotoVideoDataSource: NSObject {
     var selectedIndexPaths = Set<IndexPath>()
     
     var selectedObjects: [WrapData] {
-        return selectedIndexPaths.map { indexPath in
-            let object = fetchedResultsController.object(at: indexPath)
-            return WrapData(mediaItem: object)
+        return selectedIndexPaths.compactMap { indexPath in
+            if let object = self.object(at: indexPath) {
+                return WrapData(mediaItem: object)
+            }
+            return nil
         }
     }
     
@@ -86,8 +88,12 @@ final class PhotoVideoDataSource: NSObject {
         self.delegate = delegate
     }
     
-    func object(at indexPath: IndexPath) -> MediaItem {
-        return fetchedResultsController.object(at: indexPath)
+    func object(at indexPath: IndexPath) -> MediaItem? {
+        if let section = fetchedResultsController.sections?[safe: indexPath.section],
+            section.numberOfObjects > indexPath.row {
+            return fetchedResultsController.object(at: indexPath)
+        }
+        return nil
     }
     
     func indexPath(forObject object: MediaItem) -> IndexPath? {
