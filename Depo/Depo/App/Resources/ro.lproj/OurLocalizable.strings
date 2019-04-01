@@ -76,6 +76,7 @@
 "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Preț special pentru abonații lifecell! Pentru activarea pachetului lifebox de 50 GB la preț de 24,99 UAU/30 zile, transmite SMS cu textul 50VKL, pentru 500GB la preț de 52,99 UAH/30 zile, transmite SMS cu text 500VKL la numărul 8080.";
 "%ld docs" = "%ld documente";
 "Quota info" = "Informația de utilizare";
+"%@ of %@ has remained" = "Au rămas %@ din %@";
 "%ld documents" = "%ld documente";
 "%ld songs" = "%ld melodii";
 "%ld videos" = "%ld vidioclipuri";
@@ -615,6 +616,7 @@
 "LifeboxSmallPopUpCheckBoxTex" = "Nu mai arăta niciodată";
 "LifeboxSmallPopUpFirstButtonText" = "Ok";
 "LifeboxSmallPopUpSecondButtonText" = "ACTUALIZARE";
+"has_remained_lifebox_usage" = "Au rămas \"%@ din %@ (doar pentru utilizarea lifebox)";
 "Renewal Date: %@" = "Data reînnoirii: %@";
 "created" = "creat";
 "uploaded" = "încărcat";
@@ -822,7 +824,7 @@
 "there_are_no_albums" = "Aici nu sunt albume";
 "instapick_selection_analyzes_left_max" = "Ai selectat %d fotografii\n(numărul maximal posibil de selectat)";
 "free_trial_title_label" = "Analizează cu PhotoPick";
-"free_trial_detail_label" = "Descoperă care poză anume va avea cel mai mare succes, analizează cu PhotoPick pentru mai multe like-uri! Mai testează gratuit o perioadă limitată de timp!";
+"free_trial_detail_label" = "";
 "instapick_under_construction" = "Facem imbunatatiri pe PhotoPick pentru o experienta mai buna 😉";
 "instapick_unsupported_file_type" = "Fotografiile pe care le-ați selectat sunt în format neacceptat. Puteți continua experiența PhotoPick selectând alte fotografii.";
 "work_will_introduced" = "La moment se efectuiază lucrări de întreținere a lifebox, te rugăm să încerci mai târziu.";
@@ -866,3 +868,12 @@
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell şi Societățile Grupului";
 "terms_and_use_etk_link_commercial_email_messages" = "mesaje electronice comerciale";
 "commercial_email_messages" = "INFORMARE PRIVIND APROBAREA MESAJELOR ELECTRONICE COMERCIALE\n\nAccept că mi-am exprimat consimțământul pe termen nelimitat inclusiv şi ulterior expirării contractului de utilizator, până la exercitarea dreptului de respingere, pentru a-mi fi trimise din partea lui Turkcell ve Grup Şirketleri prin intermediul datelor de contact furnizate de mine în momentul autentificării în aplicația lifebox sau a  celorlalte date de contact  care îmi aparțin, existente la Turkcell  şi Grup Şirketleri,  mesaje  electronice comerciale cu scop publicitar şi  de marketing aferente diverselor şi noilor produse-servicii şi anunțării  cu privire la posibilitățile generale/speciale ale lui Turkcell şi Grup Şirketleri şi/sau la întreprinderile cu care acesta din urmă colaborează   (comunicări cu conținut de date, audio şi video, efectuate în mediu electronic  şi trimise în scop comercial prin intermediul mijloacelor cum ar fi telefon, centre  de apel, fax, aparate automate de apelare, sisteme inteligente de înregistrare audio, poștă electronică, sms)  cu respectarea prevederilor Legii numărul 6563 cu Privire la Reglementarea Comerţului Electronic („Lege”)  şi Regulamentul cu Privire la Comunicări Comerciale şi Mesaje  Electronice Comerciale („Regulament”)\n\nConform Regulamentului, mesajele electronice ale operatoriilor economici care se încadrează în incidența Legii Comunicațiilor Electronice numărul 5809, trimise abonaților şi utilizatorilor săi în scopul promovării şi  marketingul produselor lor individuale sau publicității întreprinderilor sale, sunt scutite de prevederile legii. Din acest motiv, aprob faptul că acceptul acordat de mine în rândurile precedente este independent şi separat de acceptul acordat societăţii operatoare al cărui abonat/utilizator sunt, cu privire la promovarea produselor şi serviciilor sale şi chiar şi în cazul anulării prin exercitarea  dreptului de respingere prevăzut de Lege şi  Regulament a aprobării mele  acordate prin prezentul  text, în baza aprobării mele acordate operatorului al cărui abonat  s-ar putea să primesc de la operatorul respectiv mesaje electronice comerciale care conțin scopuri precum promovarea, negocierea etc. cu privire la mărfurile şi serviciile proprii, de asemenea cunosc faptul că dețin dreptul de a respinge şi aceste mesaje electronice comerciale.";
+"NSLocationAlwaysUsageDescription" = "";
+"NSPhotoLibraryAddUsageDescription" = "";
+"NSPhotoLibraryUsageDescription" = "";
+
+/*Usage Info*/
+"package_space_details" = "";
+"package_renew_date" = "";
+"percentage_used" = "";
+"used_and_left_space" = "";

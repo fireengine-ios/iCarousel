@@ -303,7 +303,7 @@ sent to your phone number %@"*/
 "Are you sure you want to exit the application?" = "Êtes-vous sûr de vouloir quitter l'application?";
 "Auto-login" = "Ouverture automatique de session";
 "Logout" = "Clôture de session";
-"Help & Support" = "FOIRE AUX QUESTIONS";
+"Help & Support" = "Foire Aux Questions";
 "Lifebox Touch ID and Passcode" = "Lifebox ID tactile et code d'accès";
 "Usage Info and Packages" = "Usage Info et Paquets";
 "Recently Deleted Files" = "Fichiers Récemment Supprimés";
@@ -391,7 +391,7 @@ sent to your phone number %@"*/
 "Overwrite backup?" = "Remplacer backup?";
 "Verification code is invalid. Please try again." = "Code de vérification est invalide. Veuillez essayer encore une fois.";
 "Type the text" = "Entrez le texte affiché dans l'image";
-"E-MAIL" = "COURRIEL";
+"E-MAIL" = "Courriel";
 "Send password reset link" = "Envoyer le lien de réinitialisation du mot de passe";
 "Forgot My Password" = "J’ai oublié mon mot de passe";
 "Sign Up" = "S’inscrire";
@@ -778,7 +778,7 @@ Full stop added*/
 "Show only synced items" = "Afficher uniquement les éléments synchronisés";
 "Your lifebox storage is almost full!" = "Votre capacité de Lifebox est presque pleine!";
 "This edited photo will be saved as a new photo in your device gallery" = "Cette photo révisée sera enregistrée comme une nouvelle photo dans la galerie de votre dispositif.";
-"We couldn’t find any place on your Lifebox yet." = "";
+"We couldn’t find any place on your Lifebox yet." = "Nous n'avons pas encore trouvé de place";
 "*Average figure. Total number of documents depends on the size of each document." = "*Nombre moyen. Le nombre total des documents dépend à la taille de chaque document.";
 "We couldn’t find anything on your Lifebox yet." = "Nous n'avons encore rien trouvé dans votre lifebox.";
 "Expiration Date: %@" = "Date d’Expiration: %@";
@@ -833,8 +833,8 @@ Please check I have understood the intended command here*/
 /*Suggested: "Become a Premium Member!"*/
 "Become Premium Member!" = "Devenir Membre de Premium";
 "leave_premium_membership" = "Quitter l’Adhésion de Premium";
-"Standard User" = "";
-"Premium User" = "";
+"Standard User" = "lifebox Standard ";
+"Premium User" = "lifebox Premium";
 "lifebox Premium" = "lifebox Premium";
 
 /*Suggested: "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!"*/
@@ -941,161 +941,161 @@ Please check I have understood the intended command here*/
 /*Suggested: "You are currently a standard user. Upgrade to premium to store your photos in higher quality and get access to all the premium features"
 
 Please check I have understood the intended command here*/
-"home_page_pop_up" = "";
+"home_page_pop_up" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium?";
 
 /*Suggested: "You are currently a standard user. Upgrade to premium to store your photos in higher quality and get access to all the premium features"
 
 Please check I have understood the intended command here*/
-"sync_page_pop_up" = "";
+"sync_page_pop_up" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium?";
 "ok_for_upgrade" = "Oui, Mettre à Niveau";
 "no_for_upgrade" = "Non, ça va";
 
 /*Suggested: "You are currently a standard user. Upgrade to premium to store your photos in higher quality and get access to all the premium features"
 
 Please check I have understood the intended command here*/
-"uploded_photos_high_quality" = "";
-"NSFaceIDUsageDescription" = "";
+"uploded_photos_high_quality" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium?";
+"NSFaceIDUsageDescription" = "Notre application peut vous permettre d'utiliser l'identifiant de visage Face ID pour votre sécurité";
 
 /*AnalyzeHistoryController*/
-"InstaPick" = "";
-"package_albanian_cancel_text" = "";
-"feature_albanian_cancel_text" = "";
+"InstaPick" = "PhotoPick";
+"package_albanian_cancel_text" = "Texte d'annulation de quota ALB";
+"feature_albanian_cancel_text" = "Puisque vous êtes un utilisateur d’ALBtelecom, vous pouvez continuer d’utiliser les fonctionnalités Premium gratuitement.";
 
 /*Suggested: "No Analysis Left"
 
 Please check I have understood the intended command here*/
-"no_analyses_left_title" = "";
-"no_analyses_left_message" = "";
-"no_analyses_left_button" = "";
+"no_analyses_left_title" = "Vous n’avez plus le droit d'analyse";
+"no_analyses_left_message" = "Ne soyez pas tristes pour ne plus avoir le droit, vous pouvez acheter immédiatement un paquet pour  interroger de nouvelles photos !";
+"no_analyses_left_button" = "Je veux devenir Premium";
 
 /*Suggested: "Have you started analyzing your photos yet?"*/
-"analyze_history_empty_title" = "";
-"analyze_history_empty_subtitle" = "";
+"analyze_history_empty_title" = "Vous n'avez pas encore commencé à analyser vos photos?";
+"analyze_history_empty_subtitle" = "Commencez immédiatement à analyser pour savoir quelle photo obtient le meilleur score et à partager sur les médias sociaux";
 
 /*Suggested: "Analysis Left"*/
-"analyze_history_analyze_left" = "";
-"analyze_history_analyze_count" = "";
-"analyze_with_instapick" = "";
-"analyze_history_photos_count" = "";
-"analyze_history_start_here" = "";
-"analyze_confirm_delete_title" = "";
-"analyze_confirm_delete_text" = "";
-"analyze_confirm_delete_yes" = "";
-"analyze_confirm_delete_no" = "";
+"analyze_history_analyze_left" = "Droit à l'analyse";
+"analyze_history_analyze_count" = "%1$d / %2$d";
+"analyze_with_instapick" = "Analyser avec PhotoPick!";
+"analyze_history_photos_count" = "%d photos";
+"analyze_history_start_here" = "Commencer maintenant";
+"analyze_confirm_delete_title" = "Êtes-vous sûr de vouloir supprimer?";
+"analyze_confirm_delete_text" = "Ceux que vous sélectionnés seront supprimées de l'historique d'analyse. ";
+"analyze_confirm_delete_yes" = "Oui ";
+"analyze_confirm_delete_no" = "Non";
 
 /*InstaPick three dots*/
-"new_insta_pick" = "";
+"new_insta_pick" = "Nouvelle PhotoPick";
 
 /*InstaPickCard*/
-"used_before_title_label" = "";
-"no_used_before_title_label" = "";
-"no_analysis_title_label" = "";
+"used_before_title_label" = "Plus de « j’aime » avec PhotoPick !";
+"no_used_before_title_label" = "Analyser avec PhotoPick!";
+"no_analysis_title_label" = "Plus de PhotoPick!";
 
 /*Suggested: "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! You have more PhotoPick analysis waiting for your photos😉"*/
-"used_before_detail_label" = "";
-"no_used_before_detail_label" = "";
+"used_before_detail_label" = "Découvrez votre quelle photo obtiendra des points plus élevés, analysez-la avec PhotoPick pour plus de « j’aime ». Les droits que vous n'utilisez pas attendent que vos photos soient analysées😉";
+"no_used_before_detail_label" = "Découvrez votre quelle photo obtiendra des points plus élevés, analysez-la avec PhotoPick pour plus de « j’aime ». Ou ne l'avez-vous pas encore essayé?";
 
 /*Suggested: "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Don't forget to purchase a new package for more PhotoPick😉"*/
-"no_analysis_detail_label" = "";
-"instapick_button_has_analysis" = "";
+"no_analysis_detail_label" = "Découvrez votre quelle photo obtiendra des points plus élevés, analysez-la avec PhotoPick pour plus de « j’aime ». N'oubliez pas de prendre un paquet pour augmenter votre droit d’analyse.";
+"instapick_button_has_analysis" = "Allez, vas-y!";
 
 /*InstaPickDetailViewController*/
-"you_are_ready_to_share" = "";
-"instaPick_analysis_left" = "";
-"engage_with_more_hastags" = "";
-"copy_hashtags_to_clipboard" = "";
-"share_on_social_media" = "";
-"picked" = "";
-"insta_pick_analyzing_bottom" = "";
+"you_are_ready_to_share" = "Votre photo est prête à partager!";
+"instaPick_analysis_left" = "Droit d’analyse : %1$d / %2$d";
+"engage_with_more_hastags" = "Augmentez votre interaction avec plus de #hashtag (mot-dièse)!";
+"copy_hashtags_to_clipboard" = "Copier  les #hashtags (mot-dièse)";
+"share_on_social_media" = "Partager !";
+"picked" = "FAVORI !";
+"insta_pick_analyzing_bottom" = "Profitez du temps lors de l'analyse de vos photos! 😊";
 
 /*Suggested: "We are looking for the photo that will get the most likes."*/
-"insta_pick_analyzing_0" = "";
-"insta_pick_analyzing_1" = "";
-"insta_pick_analyzing_2" = "";
-"insta_pick_analyzing_3" = "";
-"insta_pick_analyzing_4" = "";
+"insta_pick_analyzing_0" = "Nous recherchons la photo la plus préférée!";
+"insta_pick_analyzing_1" = "Vous avez choisi de superbes photos!";
+"insta_pick_analyzing_2" = "Quel plaisir de partager avec vos amis les moments que vous aimez!";
+"insta_pick_analyzing_3" = "La vie est juste les moments que vous avez vécu!";
+"insta_pick_analyzing_4" = "Vous avez un super album photo!";
 
 /*InstaPickPopUp*/
-"dont_show_this_again" = "";
-"instapick_analyze" = "";
-"connected_account" = "";
+"dont_show_this_again" = "Ne plus afficher ";
+"instapick_analyze" = "Analyser avec PhotoPick!";
+"connected_account" = "Vous obtenez de meilleurs résultats avec votre compte Instagram lié!";
 
 /*Suggested: "If you choose to connect with your Instagram account, we'll be able to provide a personalized, enhanced experience by performing custom analysis on each new PhotoPick."*/
-"instapick_description" = "";
-"connected_with_instagram" = "";
-"connected_with_instagram_name" = "";
-"continue_without_connecting" = "";
-"connected_accounts" = "";
-"analyze_history_free_text" = "";
+"instapick_description" = "Si vous choisissez de lier votre compte Instagram, nous pourrons fournir une expérience personnalisée bien meilleure en effectuant une analyse personnalisée à chaque nouvelle interrogation PhotoPick.";
+"connected_with_instagram" = "Connecter avec Instagram";
+"connected_with_instagram_name" = "Connecter avec Instagram :";
+"continue_without_connecting" = "Continuer sans liaison";
+"connected_accounts" = "Comptes liés";
+"analyze_history_free_text" = "Gratuit pour un temps limité !";
 
 /*InstapickUpgradePopup*/
-"instapick_upgrade_popup_text" = "";
-"instapick_upgrade_popup_button" = "";
-"instapick_upgrade_popup_no" = "";
-"instapick_analysis_left" = "";
+"instapick_upgrade_popup_text" = "Vous devez mettre à jour votre application pour obtenir le paquet PhotoPick.";
+"instapick_upgrade_popup_button" = "Mettre à jour";
+"instapick_upgrade_popup_no" = "Non";
+"instapick_analysis_left" = "Droit d’analyse : %1$d / %2$d";
 
 /*suggested: "Free for a Limited Time'*/
-"instapick_unlimited_analysis" = "";
-"Facebook" = "";
-"Dropbox" = "";
-"Instagram" = "";
-"connected_as_format" = "";
-"instagram_remove_connection_warning_title" = "";
-"instagram_remove_connection_warning_message" = "";
-"instapick_selection_photos_selected" = "";
-"instapick_selection_analyzes_left" = "";
-"loading" = "";
-"there_are_no_photos" = "";
-"there_are_no_albums" = "";
-"instapick_selection_analyzes_left_max" = "";
-"free_trial_title_label" = "";
+"instapick_unlimited_analysis" = "Gratuit pour un temps limité !";
+"Facebook" = "Facebook";
+"Dropbox" = "Dropbox";
+"Instagram" = "Instagram";
+"connected_as_format" = "Compte lié : @%@";
+"instagram_remove_connection_warning_title" = "Vous êtes sur le point de supprimer le lien Instagram";
+"instagram_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer votre lien Instagram?";
+"instapick_selection_photos_selected" = "Photo sélectionnée (%d)";
+"instapick_selection_analyzes_left" = "Il ne vous reste que %d analyses";
+"loading" = "Téléchargement en cours…";
+"there_are_no_photos" = "Il n’y a aucune photo ";
+"there_are_no_albums" = "Il n’y a aucun album";
+"instapick_selection_analyzes_left_max" = "Vous avez sélectionné %d photos\n(Le plus grand nombre que vous pouvez sélectionner dans 1 interrogation)";
+"free_trial_title_label" = "Analyser avec PhotoPick!";
 
 /*Suggested: "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Try free for a limited time!"*/
-"free_trial_detail_label" = "";
+"free_trial_detail_label" = "Découvrez votre quelle photo obtiendra des points plus élevés, analysez-la avec PhotoPick pour plus de « j’aime ». De plus, gratuitement pour un temps limité pour vous essayer d’avantages!";
 
 /*Suggested: "We are making improvements on PhotoPick for a better experience 😉"*/
-"instapick_under_construction" = "";
+"instapick_under_construction" = "Nous améliorons PhotoPick pour  vous avoir une meilleure expérience 😉";
 
 /*Suggested: "The Photos you selected are in an unsupported format. You can continue the PhotoPick experience by selecting other photos."*/
-"instapick_unsupported_file_type" = "";
+"instapick_unsupported_file_type" = "Les photos que vous avez sélectionnées sont dans un format non pris en charge. Vous pouvez continuer à utiliser PhotoPick en choisissant d'autres photos.";
 
 /*Suggested: "There is currently maintenance ongoing on lifebox, please try again later."*/
-"work_will_introduced" = "";
-"facebook_remove_connection_warning_title" = "";
-"dropbox_remove_connection_warning_title" = "";
-"facebook_remove_connection_warning_message" = "";
-"dropbox_remove_connection_warning_message" = "";
-"remove_connection" = "";
-"you_are_connected" = "";
-"insta_pick_picture_not_found" = "";
-"phone_updated_needs_login" = "";
+"work_will_introduced" = "Actuellement il y a un travail de maintenance sur  lifebox. Veuillez réessayer ultérieurement.";
+"facebook_remove_connection_warning_title" = "Vous êtes sur le point de supprimer le lien Facebook.";
+"dropbox_remove_connection_warning_title" = "Vous êtes sur le point de supprimer le lien Dropbox.";
+"facebook_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer votre lien Facebook?";
+"dropbox_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer votre lien Dropbox?";
+"remove_connection" = "Supprimer le lien";
+"you_are_connected" = "Lié ";
+"insta_pick_picture_not_found" = "Aucune photo trouvée";
+"phone_updated_needs_login" = "Vous avez mis à jour votre numéro de téléphone avec succès. Veuillez-vous connecter avec votre nom d'utilisateur et votre mot de passe.";
 
 /*Suggested:"There is currently maintenance ongoing on lifebox, please try again later."*/
-"server_under_maintenance" = "";
-"unlimited_photopick_analysis" = "";
-"data_advantage_short" = "";
-"additional_data_advantage" = "";
-"connection_problem_occured" = "";
-"turkcell_purchase_popup_title" = "";
-"mid_user" = "";
-"instapick_no_available_units_left" = "";
-"middle_user" = "";
-"lifebox_middle" = "";
-"lifebox_standart" = "";
-"account_detail_middle_title" = "";
-"account_detail_middle_description" = "";
-"account_detail_standart_title" = "";
-"account_detail_standart_description" = "";
+"server_under_maintenance" = "Actuellement il y a un travail de maintenance sur  lifebox. Veuillez réessayer ultérieurement.";
+"unlimited_photopick_analysis" = "Droit de PhotoPick illimité ";
+"data_advantage_short" = "Paquet de données supplémentaire";
+"additional_data_advantage" = "Paquet de données supplémentaire";
+"connection_problem_occured" = "Erreur de connexion. Veuillez réessayer plus tard.";
+"turkcell_purchase_popup_title" = "%@";
+"mid_user" = "lifebox Standard+";
+"instapick_no_available_units_left" = "Vous n’avez plus le droit d'analyse";
+"middle_user" = "lifebox Standard+";
+"lifebox_middle" = "lifebox Standard+";
+"lifebox_standart" = "lifebox Standard";
+"account_detail_middle_title" = "Vous pouvez utiliser toutes les fonctionnalités avancées de lifebox avec votre abonnement standard +.";
+"account_detail_middle_description" = "Vous ne pourrez plus bénéficier de ces fonctionnalités lorsque vous résiliez votre abonnement Standard +.";
+"account_detail_standart_title" = "Vous utilisez lifebox comme le compte standard.";
+"account_detail_standart_description" = "Avec Lifebox Standard, vous pouvez utiliser les fonctionnalités suivantes.";
 
 /*AnalyzeHistoryController*/
-"instapick_see_details" = "";
-"store_in_high_quality" = "";
-"5_photopick_analysis" = "";
-"10_photopick_analysis" = "";
-"data_package_for_turkcell" = "";
-"delete_duplicated_contacts" = "";
-"leave_middle_membership" = "";
-"leave_middle_turkcell" = "";
+"instapick_see_details" = "Je veux devenir Premium";
+"store_in_high_quality" = "Sauvegardez vos souvenirs en haute qualité";
+"5_photopick_analysis" = "5 droits d’analyse PhotoPick";
+"10_photopick_analysis" = "+10 droits d’analyse PhotoPick";
+"data_package_for_turkcell" = "Paquet de données supplémentaire";
+"delete_duplicated_contacts" = "Supprimer les contacts en double dans votre répertoire!";
+"leave_middle_membership" = "Mettre fin à l’abonnement Standard+";
+"leave_middle_turkcell" = "Pour annuler votre paquet, veuillez écrire ANNULE LIFEBOX STANDARD + et envoyer à 2200.";
 "package_FWI_cancel_text" = "";
 "package_jamaica_cancel_text" = "";
 "feature_digicell_cancel_text" = "";
@@ -1103,3 +1103,12 @@ Please check I have understood the intended command here*/
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell et des sociétés du groupe";
 "terms_and_use_etk_link_commercial_email_messages" = "messages électroniques commerciaux";
 "commercial_email_messages" = "INFORMATIONS SUR L’AUTORISATION DES MESSAGES ELECTRONIQUES COMMERCIAUX\n\nJ'accepte et j'ai mon approbation valable indéfiniment pour envoi de messages électroniques commerciaux (les messageries contenant des données, d’audio et des vidéos réalisés électroniquement pour but commercial en utilisant les moyens de service telles que le téléphone, les centres d’appel, le fax, les machines d’appels automatiques, les systèmes d’enregistreur vocal intelligent, le courrier électronique, le service de messagerie SMS) par Turkcell et les sociétés du groupe en utilisant mes informations de contact qui j’ai donnés lors d’abonnement  à l’application lifebox ou qui se trouvent auprès de Turkcell et des sociétés du groupe, afin de promouvoir la promotion et la commercialisation de divers produits et services nouveaux liés aux sociétés Turkcell et du groupe et / ou aux sociétés avec lesquelles ils coopèrent ainsi que pour faire savoir les avantages générales et spéciales dans le cadre de la Loi n° 6563 sur la réglementation du commerce électronique (« Loi ») et le règlement relative aux communications commerciales et aux messages électroniques commerciaux (« Règlement ») jusqu'à ce que j’utilise mon droit de refuser, même si le contrat d'utilisateur est expiré.  \n\nSelon le règlement, les envois des messages électroniques commerciaux aux   abonnés et utilisateurs par les opérateurs relevant de la loi sur les communications électroniques no 5809, qui sont exclusivement pour promouvoir leurs propres biens et services, pour commercialiser ou pour promouvoir leur entreprise, sont exceptés. Pour cette raison, j’accepte avoir connaitre que mon approbation ci-dessus est un approbation indépendant et séparé de l’approbation donné pour la promotion de leur propre produit et service de l’operateur dont je suis abonné/utilisateur et même que j’annule mon approbation donné par ce texte dans le cadre de Loi et Règlement en utilisant mon droit de refuser, les messages électroniques commerciaux promotionnels, commerciaux etc. liés à ses propres biens et services peuvent parvenir dans le cadre d’approbation qui j’ai donné à l’opérateur dont je me suis abonné et j’ai reconnais que j’aurais également la possibilité de refuser ces messages électroniques commerciaux.";
+"NSLocationAlwaysUsageDescription" = "";
+"NSPhotoLibraryAddUsageDescription" = "";
+"NSPhotoLibraryUsageDescription" = "";
+
+/*Usage Info*/
+"package_space_details" = "";
+"package_renew_date" = "";
+"percentage_used" = "";
+"used_and_left_space" = "";

@@ -76,6 +76,7 @@
 "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Çmime speciale për të gjithë përdoruesit lifecell! Për të aktivizuar lifebox 50GB për 24,99UAH/30 ditë, dërgoni SMS me tekst  50VKL; për lifebox 500GB për 52,99UAH/30 ditë, dërgoni SMS me tekst 500VKL në numrin 8080.";
 "%ld docs" = "Dokumente %ld";
 "Quota info" = "Info përdorimi";
+"%@ of %@ has remained" = "Ka mbetur %1$@ of %2$@ ";
 "%ld documents" = "Dokumente %ld";
 "%ld songs" = "Këngë %ld";
 "%ld videos" = "Video %ld";
@@ -623,6 +624,7 @@
 "LifeboxSmallPopUpCheckBoxTex" = "Mos e Shfaq Përsëri";
 "LifeboxSmallPopUpFirstButtonText" = "OK";
 "LifeboxSmallPopUpSecondButtonText" = "PËRMIRËSO";
+"has_remained_lifebox_usage" = "\"%@ of %@ ka mbetur (vetëm për përdorim në lifebox)";
 "Renewal Date: %@" = "Data e rinovimit: %@";
 "created" = "krijuar";
 "uploaded" = "ngarkuar";
@@ -859,7 +861,7 @@
 "there_are_no_albums" = "Nuk ka albume";
 "instapick_selection_analyzes_left_max" = "Ju keni përzgjedhur %d foto\n(numri maksimal që mund të përzgjidhni)";
 "free_trial_title_label" = "Analizoni me PhotoPick";
-"free_trial_detail_label" = "Zbuloni se cilat foto do të marrin vlerësim më të lartë; analizoni me PhotoPick për më shumë pëlqime! Provojeni falas për një periudhë të limituar!";
+"free_trial_detail_label" = "Zbuloni cila foto do të marrë vlerësimin më të lartë; analizoni me PhotoPick për më shumë pëlqime! Pa limit, vetëm për ju!";
 "instapick_under_construction" = "Ne po bëjmë përmirësime në PhotoPick për një eksperiencë më të mirë 😉";
 "instapick_unsupported_file_type" = "Fotot që keni zgjedhur janë në format të pambështetur. Ju mund të vazhdoni përvojën e PhotoPick duke përzgjedhur fotot e tjera.";
 "work_will_introduced" = "Janë duke u kryer disa punë mirëmbajtjeje në lifebox. Ju lutem, provoni përsëri më vonë.";
@@ -891,7 +893,7 @@
 "instapick_see_details" = "Bëhuni Premium";
 "store_in_high_quality" = "Krijoni kopje rezervë me Cilësi të Lartë";
 "5_photopick_analysis" = "5 analiza PhotoPick";
-"10_photopick_analysis" = "10 analiza PhotoPick";
+"10_photopick_analysis" = "+10 analiza PhotoPick";
 "data_package_for_turkcell" = "Avantazh të dhënash shtesë";
 "delete_duplicated_contacts" = "Hiqni kontaktet e përsëritura nga Direktoria e Telefonit tuaj.";
 "leave_middle_membership" = "Largohuni nga Anëtarësimi Standard+";
@@ -908,4 +910,13 @@
 "terms_and_use_etk_checkbox" = "Deri në një vendim të ndryshëm nga ana ime, Unë jap miratimin tim për marrjen e mesazheve elektronike komerciale në mënyrë që të informohem për produktet dhe shërbimet e favorshme të Turkcell dhe kompanive të grupit të tij, në pajtim me ligjin nr. 6563 dhe legjislacionin në fuqi";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell dhe kompanive të grupit të tij";
 "terms_and_use_etk_link_commercial_email_messages" = "mesazheve elektronike komerciale";
-"commercial_email_messages" = "";
+"commercial_email_messages" = "INFORMIM NË LIDHJE ME MIRATIMIN NË LIDHJE ME MARRJEN E MESAZHEVE ELEKTRONIKE KOMERCIALE\n\nUnë jap pëlqimin tim për marrjen e mesazheve elektronike komerciale nga Turkcell dhe kompanitë e grupit të tij, (mesazhe që përmbajnë të dhëna, zë dhe video të cilat dërgohen për qëllime komerciale dhe transmetohen në mënyrë elektronike duke përdorur mjete siç janë telefoni, qendra e thirrjeve, pajisje për transmetimin e zërit, regjistrues smart të zërit, postë elektronike, sisteme të  mesazhit të shkurtër) nëpërmjet informacionit të kontaktit që kam dhënë kur kam nënshkruar aplikacionin Lifebox ose që tashmë disponohet nga Turkcell dhe kompanitë e grupit të tij, pët qëllime reklamimi dhe marketingu të produkteve  dhe shërbimeve të ofruara si dhe për qëllime njoftimi të mundësive të përgjithshme/të veçanta të ofruara nga Turkcell dhe kompanitë e grupit të tij dhe/ose subjektet e palët e treta me të cilën ato bashkëpunojnë, në përputhje me Ligjin Nr. 6563 për Rregullimin e Tregtisë Elektronike (\"Ligji\"), Rregulloren për Komunikimin Tregtar dhe Mesazhet e Postës Elektronike (\"Rregullorja\"), në mënyrë të përhershme derisa unë të ushtroj të drejtën time për të refuzuar marrjen e  mesazheve të tilla, edhe në qoftë se skadon afati i abonimit tim për aplikimin e lartpërmendur.\n\nMesazhet komerciale të postës elektronike të dërguara nga operatorët, të cilët i nënshtrohen Ligjit Nr.5809 mbi Komunikimin Elektronik, për abonentët dhe shfrytëzuesit e tyre, ekskluzivisht për reklamimin dhe marketingun e produkteve dhe shërbimeve të tyre ose prezantimin e biznesit të tyre konsiderohen si përjashtime, në pajtim me Rregulloret në fuqi. Unë bie dakord që miratim i mësipërm është dhënë në mënyrë të pavarur nga miratimi që unë i kam dhënë operatorit tim në të cilin jam abonuar/ tek i cili jam përdorues, në lidhje me reklamimin e produkteve dhe shërbimeve të tij; dhe se ky operator ka të drejtë të dërgojë mesazhe elektronike komerciale për qëllime të tilla si reklamimi, marketingu i produkteve dhe shërbimeve të tij brenda fushëveprimit të miratimit që i kam dhënë operatorit në të cilin jam abonuar, edhe nëse unë revokoj miratimin e dhënë në këtë dokument duke ushtruar të drejtën time për të refuzuar mesazhe të tilla në pajtim me Ligjin dhe rregulloret e sipërpërmendura; unë deklaroj gjithashtu se unë jam i vetëdijshëm për të drejtën time për të refuzuar mesazhet komerciale të operatorit tim.";
+"NSLocationAlwaysUsageDescription" = "";
+"NSPhotoLibraryAddUsageDescription" = "";
+"NSPhotoLibraryUsageDescription" = "";
+
+/*Usage Info*/
+"package_space_details" = "";
+"package_renew_date" = "";
+"percentage_used" = "";
+"used_and_left_space" = "";

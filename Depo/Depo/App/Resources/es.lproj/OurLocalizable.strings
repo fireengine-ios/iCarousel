@@ -76,6 +76,7 @@
 "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Precios especiales para los suscriptores de Lifecell Para activar lifebox 50GB por 24,99UAH / 30 días envíe SMS con el texto 50VKL, para lifebox 500GB por 52,99UAH / 30 días envíe SMS con el texto 500VKL al número 8080.";
 "%ld docs" = "%ld documentos";
 "Quota info" = "Información de uso";
+"%@ of %@ has remained" = "%@ de %@ ha quedado";
 "%ld documents" = "%ld documentos";
 "%ld songs" = "%ld canciones";
 "%ld videos" = "%ld videos";
@@ -615,6 +616,7 @@
 "LifeboxSmallPopUpCheckBoxTex" = "No mostrar de nuevo";
 "LifeboxSmallPopUpFirstButtonText" = "De acuerdo";
 "LifeboxSmallPopUpSecondButtonText" = "Actualizar";
+"has_remained_lifebox_usage" = "%@ de %@ ha permanecido (solo para el uso de lifebox)";
 "Renewal Date: %@" = "Fecha de renovación: %@";
 "created" = "Creado";
 "uploaded" = "cargado";
@@ -801,14 +803,14 @@
 "connected_with_instagram_name" = "Conéctate con Instagram  as";
 "continue_without_connecting" = "Continuar sin conectar.";
 "connected_accounts" = "Las cuentas conectadas.";
-"analyze_history_free_text" = "";
+"analyze_history_free_text" = "Ilimitado para ti";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "Para comprar el paquete de PhotoPick, necesitas actualizar tu aplicación de Lifebox.";
 "instapick_upgrade_popup_button" = "Actualizar. ";
 "instapick_upgrade_popup_no" = "No.";
 "instapick_analysis_left" = "Análisis que se han quedado: %1$d / %2$d";
-"instapick_unlimited_analysis" = "";
+"instapick_unlimited_analysis" = "Ilimitado para ti";
 "Facebook" = "Facebook.";
 "Dropbox" = "Dropbox.";
 "Instagram" = "Instagram.";
@@ -822,7 +824,7 @@
 "there_are_no_albums" = "No hay álbum.";
 "instapick_selection_analyzes_left_max" = "Has seleccionado %d de fotos\n(la maxima cantidad que puedes seleccionar)";
 "free_trial_title_label" = "Analizar con PhotoPick";
-"free_trial_detail_label" = "¡Descubre cual foto obtendrá el rango más alto, analiza con PhotoPick para conseguir más “me gusta”(likes)! ¡Prueba más gratis por un tiempo limitado!";
+"free_trial_detail_label" = "¡Descubre qué foto obtendrá el rango más alto, analiza con PhotoPick para más Me gusta! Ilimitado solo para ti!";
 "instapick_under_construction" = "Estamos mejorando en PhotoPick para una mejor experiencia 😉";
 "instapick_unsupported_file_type" = "Las fotos que ha seleccionado están en formato no compatible. Puedes continuar la experiencia de PhotoPick seleccionando otras fotos.";
 "work_will_introduced" = "Actualmente hay un trabajo de mantenimiento en LifeBox, porfavor inténtalo de nuevo más tarde.";
@@ -854,7 +856,7 @@
 "instapick_see_details" = "Ser Premium.";
 "store_in_high_quality" = "Copiar tus recuerdos en la calidad alta. ";
 "5_photopick_analysis" = "Derecho de análisis de 5 PhotoPick";
-"10_photopick_analysis" = "Derecho de análisis de 10 PhotoPick";
+"10_photopick_analysis" = "Derecho de análisis de +10 PhotoPick";
 "data_package_for_turkcell" = "Paquete de datos adicional. ";
 "delete_duplicated_contacts" = "Eliminar los contactos repetidos en su guía telefónica.";
 "leave_middle_membership" = "Terminar la membresía Estándar+";
@@ -866,3 +868,12 @@
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell y las Compañias del Grupo";
 "terms_and_use_etk_link_commercial_email_messages" = "correo electrónico comercial";
 "commercial_email_messages" = "INFORMACIÓN SOBRE LA AUTORIZACIÓN DE MENSAJE ELECTRÓNICO COMERCIAL\n\nACEPTO Y APRUEBO  válidamente que la información que proporciono durante la suscripción de la aplicación Lifebox o que constan en el banco de datos de Turkcell y las Compañias del Grupo puede ser utilizado con el fin de promover y comercializar novedades, productos y servicios de Turkcell y las Compañias del Grupo, así como para el anuncio de las oportunidades exclusivas o generales por parte de Turkcell y las Compañias del Grupo mediante el envío de mensajes electrónicos comerciales (mensajes de datos, audio y video enviados electrónicamente y enviados con fines comerciales por teléfono, centros de llamadas, fax, máquinas de búsqueda automática, sistemas inteligentes de grabación de voz, correo electrónico, servicios de mensajería de texto, etc.) de conformidad con la Ley N° 6563 del Reglamento de Comercio Electrónico (“La Ley”) y dentro del marco del Reglamento sobre comunicación comercial y mensajes electrónicos comerciales (“El Reglamento”) y indefinidamente, hasta que haya usado mi derecho a rechazar.  \nSegún el Reglamento, los mensajes electrónicos comerciales que se envían a los suscriptores y usuarios exclusivamente por parte de los Operadores dentro del ámbito de la Ley 5809 de Comunicación Electrónica, para promocionar sus propios bienes y servicios, para comercializar o para promocionar sus negocios están cubiertos por la excepción. Por este motivo, ACEPTO que la aprobación concedad en el anterior es independiente de la aprobación que he dado para la promoción de los productos y servicios ofertados por la empresa que de la cual soy un suscriptor /usuario, y según mi previa aprobación podría recibir mensajes electrónicos comerciales, promocionales acerca de los  productos y servicios de esta empresa con este texto en el ámbito de la Ley y el Reglamento incluso si cancelo la aprobación que he concedido anteriormente; y también puedo rechazar dichos mensajes electrónicos comerciales.";
+"NSLocationAlwaysUsageDescription" = "";
+"NSPhotoLibraryAddUsageDescription" = "";
+"NSPhotoLibraryUsageDescription" = "";
+
+/*Usage Info*/
+"package_space_details" = "";
+"package_renew_date" = "";
+"percentage_used" = "";
+"used_and_left_space" = "";

@@ -78,6 +78,7 @@
 "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "أسعار خاصة لمشتركي لايف سل! إن رغبت بتنشيط لايف بوكس 50 غيغابايت مقابل 24,99 هريفنا أوكرانية /كل 30 يوماً، أرسل 50VKL برسالة نصية قصيرة SMS إلى 8080، وإن رغبت بلايف بوكس 500 غيغابايت مقابل 52,99 هريفنا أوكرانية/كل 30 يوماً، أرسل 500VKL برسالة نصية قصيرة SMS إلى 8080.";
 "%ld docs" = "%ld مستند";
 "Quota info" = "معلومات الاستعمال";
+"%@ of %@ has remained" = "بقي %@ من %@";
 "%ld documents" = "%ld مستند";
 "%ld songs" = "%ld أغنية";
 "%ld videos" = "%ld مقطع فيديو";
@@ -627,6 +628,7 @@
 "LifeboxSmallPopUpCheckBoxTex" = "لا تظهر مرة أخرى";
 "LifeboxSmallPopUpFirstButtonText" = "موافق";
 "LifeboxSmallPopUpSecondButtonText" = "ترقية";
+"has_remained_lifebox_usage" = "%@ of %@ بقيت (فقط لاستخدام Lifebox)";
 "Renewal Date: %@" = "تاريخ التجديد: %@";
 "created" = "تم الإنشاء";
 "uploaded" = "تم التحميل";
@@ -678,8 +680,8 @@
 "Become Premium" = "كن بريميوم";
 "Become Premium Member!" = "احصل على العضوية البريميوم!";
 "leave_premium_membership" = "غادر العضوية البريميوم!";
-"Standard User" = "";
-"Premium User" = "";
+"Standard User" = "لايف بوكس القياسي";
+"Premium User" = "لايف بوكس الممتاز";
 "lifebox Premium" = "لايف بوكس بريميوم";
 "Delete Duplicated Contacts For PremiumTitle" = "لتتمكن من حذف جهات الاتصال المتكررة من دليل الهاتف وإلغاء قفل العديد من الميزات، احصل على العضوية البريميوم!";
 
@@ -752,11 +754,11 @@
 "my_storage_usage" = "متبقي %1$@ من %2$@";
 "package_section_title" = "ترقية مساحة التخزين";
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "";
-"sync_page_pop_up" = "";
+"home_page_pop_up" = "هل ترغب في عضوية ممتازة من أجل حفظ ذكرياتك بالجودة الأصلية و الحصول على جميع المميزات الممتازة؟";
+"sync_page_pop_up" = "هل ترغب في عضوية ممتازة من أجل حفظ ذكرياتك بالجودة الأصلية و الحصول على جميع المميزات الممتازة؟";
 "ok_for_upgrade" = "نعم، ترقية";
 "no_for_upgrade" = "لا، هذا جيد";
-"uploded_photos_high_quality" = "";
+"uploded_photos_high_quality" = "هل ترغب في عضوية ممتازة من أجل حفظ ذكرياتك بالجودة الأصلية و الحصول على جميع المميزات الممتازة؟";
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
 
 /*AnalyzeHistoryController*/
@@ -765,7 +767,7 @@
 "feature_albanian_cancel_text" = "بإمكانك الإستمرار باستخدام الخصائص الاستثنائية مجانا طالما انك مستخدم لاتصالات ALB";
 "no_analyses_left_title" = "لايوجد تحاليل متبقية";
 "no_analyses_left_message" = "لا تحزن, لازال بإمكانك شراء حزمة جديدة لتحليل صورك";
-"no_analyses_left_button" = "";
+"no_analyses_left_button" = "اصبح عضو ممتاز";
 "analyze_history_empty_title" = "لم تبدأ بتحليل صورك بعد؟";
 "analyze_history_empty_subtitle" = "ابدء بالتحليل الآن لتكتشف أي صورة ستحظى بالمرتبة الأعلى وشاركها على وسائل التواصل";
 "analyze_history_analyze_left" = "يوجد تحليل متبق";
@@ -813,14 +815,14 @@
 "connected_with_instagram_name" = "اتصل بواسطة الانستغرام ك";
 "continue_without_connecting" = "استمر بدون اتصال";
 "connected_accounts" = "الحسابات المتصلة";
-"analyze_history_free_text" = "";
+"analyze_history_free_text" = "غير محدود بالنسبة لك";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "من أجل شراء حزمة PhotoPick تحتاج الى ترقية تطبيق lifebox ";
 "instapick_upgrade_popup_button" = "ترقية";
 "instapick_upgrade_popup_no" = "لا";
 "instapick_analysis_left" = "يوجد تحليل متبق:%1$d/%2$d";
-"instapick_unlimited_analysis" = "";
+"instapick_unlimited_analysis" = "غير محدود بالنسبة لك";
 "Facebook" = "فيس بوك";
 "Dropbox" = "Dropbox";
 "Instagram" = "انستغرام";
@@ -834,43 +836,43 @@
 "there_are_no_albums" = "لايوجد البومات";
 "instapick_selection_analyzes_left_max" = "لقد قمت باختيار %d من الصور (الحد الأقصى الذي تستطيع اختياره)";
 "free_trial_title_label" = "تحليل مع PhotoPick";
-"free_trial_detail_label" = "احصل على اختبار تحقق سمعي";
+"free_trial_detail_label" = "اكتشف الصورة التي ستحصل على أعلى رتبة ، وقم بالتحليل باستخدام PhotoPick لمزيد من الإعجابات غير محدود فقط لأجلك!";
 "instapick_under_construction" = "نحن نحقق تحسينًا على تطبيق PhotoPick للحصول على تجربة أفضل";
 "instapick_unsupported_file_type" = "تكون الصور التي حددتها بتنسيق غير متوافق. يمكنك متابعة تجربة PhotoPick بتحديد صور أخرى.";
 "work_will_introduced" = "يوجد أعمال صيانة حاليًا في لايف بوكس، يرجى المحاولة مرة أخرى في وقت لاحق.";
-"facebook_remove_connection_warning_title" = "";
-"dropbox_remove_connection_warning_title" = "";
-"facebook_remove_connection_warning_message" = "";
-"dropbox_remove_connection_warning_message" = "";
+"facebook_remove_connection_warning_title" = "أنت على وشك حذف ربط فيس بوك.";
+"dropbox_remove_connection_warning_title" = "أنت على وشك حذف ربط دروب بوكس.";
+"facebook_remove_connection_warning_message" = "هل أنت متأكد من رغبتك لحذف ربط فيس بوك الخاص بك؟";
+"dropbox_remove_connection_warning_message" = "هل أنت متأكد من رغبتك لحذف ربط دروب بوكس الخاص بك؟";
 "remove_connection" = "اقطع الاتصال";
-"you_are_connected" = "";
+"you_are_connected" = "متصل";
 "insta_pick_picture_not_found" = "الصورة \nغير موجودة";
 "phone_updated_needs_login" = "لقد أتممت تحديث رقم هاتفك بنجاح. يرجى تسجيل الدخول بكتابة بيانات الاعتماد.";
-"server_under_maintenance" = "";
-"unlimited_photopick_analysis" = "";
-"data_advantage_short" = "";
-"additional_data_advantage" = "";
-"connection_problem_occured" = "";
-"turkcell_purchase_popup_title" = "";
-"mid_user" = "";
-"instapick_no_available_units_left" = "";
-"middle_user" = "";
-"lifebox_middle" = "";
-"lifebox_standart" = "";
-"account_detail_middle_title" = "";
-"account_detail_middle_description" = "";
-"account_detail_standart_title" = "";
-"account_detail_standart_description" = "";
+"server_under_maintenance" = "يوجد بعض العمليات الآن في لايف بوكس، الرجاء حاول مرة ثانية.";
+"unlimited_photopick_analysis" = "حق فوتوبيك الغير محدد!";
+"data_advantage_short" = "حزمة بيانات إضافية";
+"additional_data_advantage" = "حزمة بيانات إضافية";
+"connection_problem_occured" = "خطأ في الربط.  الرجاء حاول مرة ثانية.";
+"turkcell_purchase_popup_title" = "%@";
+"mid_user" = "لايف بوكس قياسي +";
+"instapick_no_available_units_left" = "لم يعد لديك حق التحليل";
+"middle_user" = "لايف بوكس قياسي +";
+"lifebox_middle" = "لايف بوكس قياسي +";
+"lifebox_standart" = "لايف بوكس قياسي";
+"account_detail_middle_title" = "بواسطة العضوية القياسية + يمكنك إستخدام جميع مميزات لايف بوكس المتطورة المبينة أدناه,";
+"account_detail_middle_description" = "عند إنتهاء العضوية القياسية + لن تتمكن من الإستفادة من هذه المميزات.";
+"account_detail_standart_title" = "أنت تستخدم لايف بوكس على شكل حساب مقياسي";
+"account_detail_standart_description" = "يمكنك إستخدام المميزات التالية مع لايف بوكس القياسي.";
 
 /*AnalyzeHistoryController*/
-"instapick_see_details" = "";
-"store_in_high_quality" = "";
-"5_photopick_analysis" = "";
-"10_photopick_analysis" = "";
-"data_package_for_turkcell" = "";
-"delete_duplicated_contacts" = "";
-"leave_middle_membership" = "";
-"leave_middle_turkcell" = "";
+"instapick_see_details" = "اصبح عضو ممتاز";
+"store_in_high_quality" = "قم بالحفظ الإحتياطي لذكرياتك بجودة عالية";
+"5_photopick_analysis" = "5 حق تحليل فوتوبيك";
+"10_photopick_analysis" = "10 حق تحليل فوتوبيك";
+"data_package_for_turkcell" = "حزمة بيانات إضافية";
+"delete_duplicated_contacts" = "احذف الاسماء المتكررة في الدليل الخاص بي!";
+"leave_middle_membership" = "انهي العضوية القياسية + ";
+"leave_middle_turkcell" = "من أجل الغاء الحزمة الرجاء اكتب IPTAL LIFEBOX STANDART+ وارسلها على الرقم 2200.";
 "package_FWI_cancel_text" = "";
 "package_jamaica_cancel_text" = "";
 "feature_digicell_cancel_text" = "";
@@ -878,3 +880,12 @@
 "terms_and_use_etk_link_turkcell_and_group_companies" = "";
 "terms_and_use_etk_link_commercial_email_messages" = "";
 "commercial_email_messages" = "";
+"NSLocationAlwaysUsageDescription" = "";
+"NSPhotoLibraryAddUsageDescription" = "";
+"NSPhotoLibraryUsageDescription" = "";
+
+/*Usage Info*/
+"package_space_details" = "";
+"package_renew_date" = "";
+"percentage_used" = "";
+"used_and_left_space" = "";
