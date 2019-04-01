@@ -896,7 +896,7 @@
 "feature_digicell_cancel_text" = "feature_digicell_cancel_text";
 
 /*Usage Info*/
-"package_space_details" = "%@ of %@ used (only for lifebox usage)";
+"package_space_details" = "%1$@ of %2$@ used (only for lifebox usage)";
 "package_renew_date" = "Will be renewed on: %@";
 "percentage_used" = "%.0f%% used";
 "used_and_left_space" = "%@ of %@ used";

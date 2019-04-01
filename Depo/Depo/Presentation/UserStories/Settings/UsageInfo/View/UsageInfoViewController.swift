@@ -168,7 +168,13 @@ final class UsageInfoViewController: ViewController {
         models.forEach { model in
             var cellHeight = UsageInfoViewController.constantForCell
             
-            let usedVolume = ((model.remaining ?? 0) / (model.total ?? 0)) * 100
+            let usedVolume: CGFloat
+            if let remaining = model.remaining, let total = model.total {
+                usedVolume = CGFloat((remaining / total) * 100)
+            } else {
+                usedVolume = 0
+            }
+            
             let textHeight: CGFloat = 25
             let widthForName = commonWidth - String(format: TextConstants.usagePercentage, usedVolume.rounded(.toNearestOrAwayFromZero))
                 .width(for: textHeight, font: .TurkcellSaturaDemFont(size: 16))

@@ -58,7 +58,13 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
             renewDateLabel.text = String(format: TextConstants.renewDate, dateString)
         }
         
-        let usedVolume = (((model.remaining ?? 0) / (model.total ?? 0)) * 100).rounded(.toNearestOrAwayFromZero)
+        let usedVolume: CGFloat
+        if let remaining = model.remaining, let total = model.total {
+            usedVolume = CGFloat((remaining / total) * 100).rounded(.toNearestOrAwayFromZero)
+        } else {
+            usedVolume = 0
+        }
+        
         usedPercentageLabel.text =  String(format: TextConstants.usagePercentage, usedVolume)
         
         nameLabel.text = model.offerName
