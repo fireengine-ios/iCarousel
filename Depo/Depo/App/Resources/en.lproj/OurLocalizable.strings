@@ -32,10 +32,10 @@
 "Change Passcode" = "Change Passcode";
 "Passcode" = "Passcode";
 "The package activation code is not active" = "The package activation code is not active";
-"You will not be able to use the this package activation code from this campaign for the second time because you have already benefited from it" = "You will not be able to use the this package activation code from this campaign for the second time because you have already activated it";
-"This package activation code definition time has not yet begun" = "This package activation code activation has not yet started";
+"You will not be able to use the this package activation code from this campaign for the second time because you have already benefited from it" = "This campaign's package activation code can be used only once. You have already activated it.";
+"This package activation code definition time has not yet begun" = "This package activation code's activation time has not yet started.";
 "This package activation code has not been activated  yet" = "This package activation code has not been activated yet";
-"This package activation code has been used before, please try different code" = "This package activation code has been used before, please try different code";
+"This package activation code has been used before, please try different code" = "This package activation code is defined for a different user, please try a different code.";
 "Package activation process is in progress" = "Package activation process is in progress";
 "This package activation code is defined for different user" = "This package activation code is activated for different user";
 "This package activation code has expired" = "This package activation code has expired";
@@ -45,25 +45,25 @@
 "Server error" = "Server error";
 "Unknown error" = "Unknown error";
 "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry." = "Too many OTP verification attempts. Please try again later.";
-"The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response." = "The password is too short. Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.";
-"The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response." = "The password is too long. Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.";
-"It is not allowed that the password consists of all the same characters." = "Your password has consecutive numbers or letters. Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.";
-"It is not allowed that the password consists of consecutive characters." = "Your password has consecutive numbers or letters. Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.";
+"The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response." = "The password is too short. Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters.";
+"The password consists of more number of characters than is allowed. The length allowed is provided in the value field of the response." = "The password is too long. Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters.";
+"It is not allowed that the password consists of all the same characters." = "Your password has consecutive numbers or letters. Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters.";
+"It is not allowed that the password consists of consecutive characters." = "Your password has consecutive numbers or letters. Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters.";
 "Password is invalid" = "Password is invalid";
 "Phone number is in an invalid format." = "Phone number is in an invalid format.";
 "Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation." = "Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation.";
-"This e-mail address is already registered. Please enter another e-mail address." = "This e-mail address is already registered. Please try different e-mail address.";
+"This e-mail address is already registered. Please enter another e-mail address." = "This e-mail address is already registered. Please try a different e-mail address.";
 "E-mail address is in an invalid format." = "E-mail address is in an invalid format.";
 
 /*I can't understans this sentence. Please specify where it will be shown*/
-"Specifies that the phone number parameter is sent  blank." = "Specifies that the phone number parameter is sent  blank.";
+"Specifies that the phone number parameter is sent  blank." = "The phone number field is empty.";
 
 /*I can't understans this sentence. Please specify where it will be shown*/
-"Indicates that the password parameter is sent blank." = "Indicates that the password parameter is sent blank.";
+"Indicates that the password parameter is sent blank." = "The password field is empty.";
 
 /*I can't understans this sentence. Please specify where it will be shown*/
-"Indicates that the e-mail parameter is sent blank." = "Indicates that the e-mail parameter is sent blank.";
-"Enter the verification code\nsent to your number %@" = "Enter verification code\nsent to your phone number %@";
+"Indicates that the e-mail parameter is sent blank." = "The e-mail field is empty.";
+"Enter the verification code\nsent to your number %@" = "Enter the verification code\nsent to your phone number %@";
 "Resend" = "Resend";
 "Next" = "Next";
 "%.2f %@ / month" = "%.2f %@ / month";
@@ -82,6 +82,7 @@
 "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Special prices for lifecell users! lifebox 50GB for 24,99 UAH/30 days, lifebox 500GB for 52,99 UAH/30 days.  To order: *888#";
 "%ld docs" = "%ld documents";
 "Quota info" = "Usage info";
+"%@ of %@ has remained" = "%1$@ of %2$@ has remained";
 "%ld documents" = "%ld documents";
 "%ld songs" = "%ld songs";
 "%ld videos" = "%ld videos";
@@ -92,11 +93,11 @@
 "My Activity Timeline" = "Activity Timeline";
 "file(s)" = "file(s)";
 "My Stream" = "Smart Albums";
-"You have free space for %d more items." = "%d items deleted from your device to free up storage from your device.";
+"You have free space for %d more items." = "%d items deleted from your device to free up storage on your device.";
 "Delete" = "Delete";
 "Some photos will also be deleted from an album." = "Some photos will also be deleted from an album.";
 "Allow lifebox to delete %d photos?" = "Allow lifebox to delete %d photos?";
-"There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete.";
+"There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "There are %d duplicated photos both on your device and lifebox. Clear some space by selecting the photos that you want to delete.";
 "Download to Camera Roll" = "Download to Device Gallery";
 "Share Album" = "Share Album";
 "Album Details" = "Album Details";
@@ -134,7 +135,7 @@
 "Auto Sync Preparation" = "Auto Sync Preparation";
 "Sync with data plan" = "Sync with data plan";
 "Waiting for Wi-Fi connection to auto-sync" = "Waiting for Wi-Fi connection to auto-sync";
-"Auto Upload is off.\nGo to setting to auto sync." = "Auto sync is off.\nGo to setting to auto sync";
+"Auto Upload is off.\nGo to setting to auto sync." = "Auto sync is off.\nGo to settings to auto sync";
 "LTE" = "LTE";
 "4G" = "Mobile Data";
 "3G" = "Mobile Data";
@@ -142,7 +143,7 @@
 "Wi-Fi" = "Wi-Fi";
 "Free up space" = "Free up space";
 "Your device memory is almost full" = "Your device memory is almost full";
-"There are some duplicated items both in your device and lifebox" = "There are some duplicated items both in your device and lifebox";
+"There are some duplicated items both in your device and lifebox" = "There are some duplicated items both on your device and lifebox";
 
 /*which operation??*/
 "Operation is complete" = "Operation completed";
@@ -190,10 +191,10 @@
 "Ok" = "Ok";
 "Need to select folder" = "Need to select folder";
 "Back" = "Back";
-"Fail while uploading from LifeBox" = "Fail while uploading from lifeBox";
+"Fail while uploading from LifeBox" = "Upload from lifebox failed";
 
 /*I don't understand*/
-"Sorry, but photos not selected" = "Sorry, but photos not selected";
+"Sorry, but photos not selected" = "Photos are not selected";
 "Upload from lifebox" = "Upload from lifebox";
 "Upload failed" = "Upload failed";
 "Upload was successful" = "Uploaded successfully";
@@ -204,10 +205,10 @@
 "You can change the sequence " = "You can change the sequence of photos ";
 "Save" = "Save";
 "Add Music" = "Add Music";
-"Sorry, but story audio should not be empty" = "Please choose a music for your story";
+"Sorry, but story audio should not be empty" = "Please choose music for your story";
 "Add music" = "Add music";
 "You did not choose music for your story" = "You did not choose music for your story";
-"Fail while adding to album" = "Fail while adding to album";
+"Fail while adding to album" = "Failed while adding to album";
 "Story not created" = "Story not created";
 "Story created" = "We are preparing your story. Once it is finished, you can access it from Videos Album.";
 "Sorry, but story photos should not be empty" = "Please choose at least one photo";
@@ -225,7 +226,7 @@
 "Back-Up" = "Back Up";
 "Your last back up was a few seconds ago." = "Your last back up was a few seconds ago.";
 "You never backed up your contacts" = "You don't have any contact information in your lifebox yet.";
-"You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "You can backup your contacts to lifebox. You can easily manage your contact\nlist from any device and anywhere.";
+"You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "You can backup your contacts to lifebox. You can easily manage your contact list from any device and anywhere.";
 "Backed up %d Contacts" = "You have %d numbers in your contact backup";
 "Removed" = "Removed";
 "Updated" = "Updated";
@@ -251,7 +252,7 @@
 
 /*?????*/
 "We promise, we won’t sent you spam." = "We promise, we won’t sent you spam.";
-"I’d like hear about news and promotions about lifebox occasionally." = "I’d like hear about news and promotions about lifebox occasionally.";
+"I’d like hear about news and promotions about lifebox occasionally." = "I’d like to occasionally hear about lifebox news and promotions.";
 "GSM Number" = "Phone Number";
 "E-Mail" = "E-Mail";
 "Name and Surname" = "Name and Surname";
@@ -280,7 +281,7 @@
 "info" = "info";
 "Enable photo permissions in settings" = "Enable photo permissions in settings";
 "Start adding your photos" = "Start adding your photos";
-"You don’t have anything on your photo roll." = "You don’t have any photo or video in your lifebox yet.";
+"You don’t have anything on your photo roll." = "You don’t have any photos or videos in your lifebox yet.";
 "View All Pictures" = "View All Photos";
 "View All My Stream" = "View All My Stream";
 "%d Photos" = "%d Photos";
@@ -293,7 +294,7 @@
 "You can apply this filter and my more to your other picures as well" = "You can also apply other filters to your photos";
 "Did you like this filter?" = "Discover the filters";
 "Take a Photo" = "Take a Photo";
-"You don’t have a profile picture, let’s upload a pretty photo!" = "You don’t have a profile picture, let’s upload a pretty photo!";
+"You don’t have a profile picture, let’s upload a pretty photo!" = "You don’t have a profile picture, let’s upload a nice photo!";
 "Your profile looks empty" = "Your profile looks empty";
 "Sync with Data Plan Now" = "Sync with Data Plan Now";
 "Waiting for Wi-Fi to auto sync 14 items" = "Waiting for Wi-Fi to auto sync 14 items";
@@ -346,7 +347,7 @@
 "Nope" = "No";
 
 /*for contact?*/
-"You have already a backup. Do you want to overwrite the existing one?" = "You have already a backup. Do you want to overwrite the existing one?";
+"You have already a backup. Do you want to overwrite the existing one?" = "You already have a backup. Do you want to overwrite the existing one?";
 
 /*??*/
 "Overwrite backup?" = "Overwrite backup?";
@@ -369,9 +370,9 @@
 "Select the items to sync with mobile data." = "Select the items to sync with mobile data.";
 "Mobile Data" = "Mobile Data";
 "Wi-fi" = "Wi-Fi";
-"Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifebox can sync your photos and videos automatically. Would you like to enable auto upload feature now?";
+"Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifebox can sync your photos and videos automatically. Would you like to enable Auto-sync feature now?";
 "You have to fill in a password" = "You have to fill in your password";
-"You have to fill in your mail or GSM Number" = "Fill in your e-mail or GSM Number";
+"You have to fill in your mail or GSM Number" = "Fill in your e-mail or Phone Number.";
 "Password" = "Password";
 "E-Mail or GSM Number" = "E-mail or Phone Number";
 "Remember my credentials" = "Remember my password";
@@ -390,7 +391,7 @@
 "E-mail Usage Information" = "E-mail Usage Information";
 "Password fields do not match." = "Passwords do not match";
 "Please check the e-mail address." = "Please check the e-mail address.";
-"Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters.";
+"Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters.";
 "Please check the GSM number" = "Please check your Phone number";
 "Login denied. Please check your credentials." = "Login denied. Please check your credentials.";
 "Request failed \n Please try again" = "Request failed \n Please try again";
@@ -411,8 +412,8 @@
 "cancelled" = "cancelled";
 "The network connection was lost." = "The network connection was lost.";
 "ServiceError" = "ServiceError";
-"Too many verification code requested for this msisdn. Please try again later" = "Too many verification code requested for this msisdn. Please try again later";
-"This GSM Number is already registered. Please enter another GSM Number." = "This GSM Number is already registered. Please enter another GSM Number.";
+"Too many verification code requested for this msisdn. Please try again later" = "Too many verification code requested for this phone number. Please try again later.";
+"This GSM Number is already registered. Please enter another GSM Number." = "This phone number is already registered. Please enter another phone number.";
 "Albums with %@" = "Albums with %@";
 "Deselect All" = "Unselect all";
 "Change cover photo" = "Change cover photo";
@@ -431,9 +432,9 @@
 "You need to enable access to Contacts to continue" = "You need to enable access to Contacts to continue";
 "Cancel BackUp" = "Cancel BackUp";
 "Clear BackUp" = "Clear BackUp";
-"There are %d duplicated contacts." = "There are %d duplicated contacts in your contact list of your device";
+"There are %d duplicated contacts." = "There are %d duplicated contacts in device's contact list.";
 "Are you sure you want to delete?" = "Are you sure you want to delete?";
-"This duplicated contacts will be deleted from your contacts." = "These duplicated contacts will be removed from your contact list of your device";
+"This duplicated contacts will be deleted from your contacts." = "These duplicated contacts will be removed from the contact list on your device.";
 "%%%d Restored…" = "%%%d Restored…";
 "%%%d Analyzed…" = "%%%d Analyzed…";
 "%%%d Backed up…" = "%%%d Backed up…";
@@ -452,7 +453,7 @@
 "Folder Items" = "Items: %d";
 "Contact Backup" = "Contact Backup";
 "Your last contact update was %@ months ago!" = "Your last contact update was %@ months ago!";
-"It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts.";
+"It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "It has been %@ months since you last updated your contacts. Update now to never lose any of your contacts.";
 "Your contact list looks empty" = "Your contact list looks empty";
 "You don’t have any contacts in your profile, backup your contacts now!" = "You don’t have any contacts in your profile, backup your contacts now!";
 "Backup" = "Backup";
@@ -461,7 +462,7 @@
 
 /*free up spce card or storage full card? which one?*/
 "You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your lifebox quota! It’s a great time to upgrade your storage.";
-"You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "You don't have any file in your lifebox, yet. Start uploading your memories on lifebox!";
+"You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "You don't have any files in your lifebox, yet. Start uploading your memories on lifebox!";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "You are using %d%% of your device storage. It’s a great time to free up space on your device.";
 "Upload Files" = "Upload Files";
 "Free Up Space" = "Free Up Space";
@@ -482,29 +483,29 @@
 "You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "Lifebox storage is almost full!\nLet’s have a look for upgrade options!";
 "Error occurred while accessing your photos.\nPlease check your settings." = "Error occurred while accessing your photos.\nPlease check your settings.";
 "localFilesBeingProcessed" = "Processing local files.";
-"TurkcellSecurityPasscodeWarningText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not to activate login with Turkcell password feature.";
-"TurkcellSecurityAutologinText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not to activate autologin with 3G/LTE feature.";
+"TurkcellSecurityPasscodeWarningText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not activating login with Turkcell password feature.";
+"TurkcellSecurityAutologinText" = "Warning: You have already activated passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not activating the autologin with 3G/LTE feature.";
 "PasscodeActivationWhileTurkcellActivated" = "Auto login to lifebox with 3G/LTE has been deactivated for you to use lifebox passcode and touch id features safely, you can reactivate from login settings anytime you wish.";
-"Error Handling Under Constraction" = "Error Handling Under Constraction";
+"Error Handling Under Constraction" = "Error Handling Under Construction";
 "This e-mail address is not registered. Please try again" = "This e-mail address is not registered. Please try again";
 "Account not found for email" = "Account not found for email";
 "This text doesn't match. Please try again" = "This text doesn't match. Please try again";
-"An error is occurred!" = "An error is occurred!";
+"An error is occurred!" = "An error occurred!";
 "Please check the e-mail address" = "Please check the e-mail address";
-"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2200.";
-"Your password is sent to your e-mail address" = "Your password is sent to your e-mail address";
-"Please enter a valid email adress" = "Please enter a valid email address";
+"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "If you are already a Turkcell subscriber, you can obtain your password by sending a free SMS containing SIFRE to 2200.";
+"Your password is sent to your e-mail address" = "Your password was sent to your e-mail address.";
+"Please enter a valid email adress" = "Please enter a valid email address.";
 "Please type the text" = "Please type the text";
 "You have performed too many attempts. Please try again later." = "You have performed too many attempts. Account blocked. Please, try again later.";
 "The Internet connection appears to be offline." = "The Internet connection appears to be offline.";
 "Authentication with Turkcell Password is disabled for the account" = "You can not login to lifebox with your Turkcell password because you have deactivated login with Turkcell password feature. Please, try to login with your lifebox password.";
-"You don't have any lifebox account. Please signup before using the application" = "You don't have any lifebox account. Please signup before using the application";
+"You don't have any lifebox account. Please signup before using the application" = "You don't have a lifebox account. Please signup before using the application.";
 "This text doesn't match. Please try again." = "This text doesn't match. Please try again.";
 "Email field is invalid" = "Email field is invalid";
-" You have to fill in GSM number" = "You have to fill in GSM number";
+" You have to fill in GSM number" = "You have to fill in your phone number";
 "E-mail is already exist" = "E-mail already exists";
-"Please enter your GSM number" = "Please enter your GSM number";
-"GSM number" = "GSM number";
+"Please enter your GSM number" = "Please enter your phone number";
+"GSM number" = "Phone Number";
 "Plus" = "Plus";
 "Close" = "Close";
 "Photos and videos" = "Photos and videos";
@@ -534,19 +535,19 @@
 "Wi-Fi and Cellular" = "Wi-Fi and Cellular";
 "Video album is automatically created, therefore cannot be deleted" = "Video album is automatically created, therefore cannot be deleted";
 "You cannot upload any video to auto generated video album" = "You cannot upload any video to auto generated video album";
-"You have no any files" = "You have no any files";
+"You have no any files" = "You don't have any files.";
 "You don’t have any albums on your Lifebox yet." = "You don’t have any albums on your lifebox yet.";
 "Start creating albums" = "Start creating albums";
-"You don’t have any stories  on your Lifebox yet." = "You don’t have any story on your lifebox yet.";
+"You don’t have any stories  on your Lifebox yet." = "You don’t have any stories on your lifebox yet.";
 "Start creating stories" = "Start creating stories";
 "Help and Support" = "Help and Support";
 "Album is Empty" = "Album is empty";
-"You don’t have any files on your Lifebox yet." = "You don’t have any file on your lifebox yet.";
-"You don’t have any favorited files on your Lifebox yet." = "You don’t have any favorited file on your lifebox yet.";
+"You don’t have any files on your Lifebox yet." = "You don’t have any files on your lifebox yet.";
+"You don’t have any favorited files on your Lifebox yet." = "You don’t have any favorite files on your lifebox yet.";
 "Start adding your files" = "Start adding your files";
 "Suggestions" = "Suggestions";
 "Recent Searches" = "Recent Searches";
-"Lifebox can sync your files automatically." = "lifebox can sync your files photos and videos automatically.";
+"Lifebox can sync your files automatically." = "lifebox can sync your files, photos and videos automatically.";
 "Get Started" = "Get Started";
 "I have read and accepted terms of use" = "I have read and accepted terms of use";
 "Welcome to Lifebox!" = "Welcome to lifebox!";
@@ -568,12 +569,12 @@
 "Missing Dates" = "Missing Dates";
 "You have successfully registered, please log in with your credentials" = "You have successfully registered, please log in with your credentials.";
 "Animation" = "Animation";
-"We have created an animation from your photos!" = "We have created a animation from your photos!";
+"We have created an animation from your photos!" = "We have created an animation from your photos!";
 "Save Animation" = "Save Animation";
-"Delete Duplicated" = "Delete Duplicated";
+"Delete Duplicated" = "Delete Duplicate";
 "Lifebox %@ and Passcode" = "Lifebox %@ and Passcode";
-"We make easier to manage your memories with homepage" = "We make easier to manage your memories with homepage";
-"You can reach your recent activites and suggestions that are special for you from this page" = "You can reach your recent activites and suggestions that are special for you from this page";
+"We make easier to manage your memories with homepage" = "We make it easier to manage your memories with homepage";
+"You can reach your recent activites and suggestions that are special for you from this page" = "You can reach your recent activites and suggestions that are special for you from this page.";
 "Discover your first story" = "Discover your first story";
 "Discover your first album" = "Discover your first album";
 "Discover your first collage" = "Discover your first collage";
@@ -628,21 +629,22 @@
 "landingSubTitle3" = "Back up your contacts, never lose them";
 "landingTitle6" = "Social media";
 "landingSubTitle6" = "Transfer all your social meadia archives easily to lifebox";
-"Add GSM Number" = "Add GSM Number";
-"The videos larger than 4GB can not be uploaded to lifebox" = "The videos larger than 4GB can not be uploaded to lifebox";
-"You have not enough memory in your device" = "You have not enough memory in your device";
+"Add GSM Number" = "Add Phone Number";
+"The videos larger than 4GB can not be uploaded to lifebox" = "Videos larger than 4GB can not be uploaded to lifebox";
+"You have not enough memory in your device" = "You don't have enough memory on your device";
 "The purchase was canceled" = "The purchase is canceled.";
-"The purchase in progress" = "The purchase in progress";
+"The purchase in progress" = "The purchase is in progress.";
 "You have no duplicated contacts!" = "You have no duplicated contacts in your device contact list";
 "Daily" = "Daily";
 "Weekly" = "Weekly";
 "Monthly" = "Monthly";
-"Up to 5000 contacts can be backed up." = "Contact backup failed since you have more contacts than supported upper limit.";
+"Up to 5000 contacts can be backed up." = "Contact backup failed as you have more contacts than the maximum allowed.";
 "LifeboxSmallPopUpTitle" = "Your lifebox storage is almost full!";
 "LifeboxSmallPopUpSubTitle" = "Let's have a look at upgrade options!";
 "LifeboxSmallPopUpCheckBoxTex" = "Never show again";
 "LifeboxSmallPopUpFirstButtonText" = "OK";
 "LifeboxSmallPopUpSecondButtonText" = "UPGRADE";
+"has_remained_lifebox_usage" = "%@ of %@ has remained (only for lifebox usage)";
 "Renewal Date: %@" = "Renewal date: %@";
 "created" = "created";
 "uploaded" = "uploaded";
@@ -850,7 +852,7 @@
 "there_are_no_albums" = "There are no albums";
 "instapick_selection_analyzes_left_max" = "You’ve selected %d photos\n(the max. number you can select)";
 "free_trial_title_label" = "Analyze with PhotoPick";
-"free_trial_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Try more free for a limited time!";
+"free_trial_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Unlimited just for you!";
 "instapick_under_construction" = "We are making improvement on PhotoPick for a better experience 😉";
 "instapick_unsupported_file_type" = "Photos you have selected are in unsupported format. You can continue PhotoPick experience by selecting other photos.";
 "work_will_introduced" = "There is currently a maintenance work on lifebox, please try again later.";
@@ -882,7 +884,7 @@
 "instapick_see_details" = "Become Premium";
 "store_in_high_quality" = "Back up with High Quality";
 "5_photopick_analysis" = "5 PhotoPick analysis";
-"10_photopick_analysis" = "10 PhotoPick analysis";
+"10_photopick_analysis" = "+10 PhotoPick analysis";
 "data_package_for_turkcell" = "Additional data advantage";
 "delete_duplicated_contacts" = "Remove Duplicate Contacts from Your Phone Directory";
 "leave_middle_membership" = "Leave Standard+ Membership";
@@ -893,10 +895,13 @@
 "terms_and_use_etk_checkbox" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell and its Group Companies";
 "terms_and_use_etk_link_commercial_email_messages" = "commercial e-mail messages";
-"commercial_email_messages" = "WRITTEN CONSENT FOR COMMERCIAL E-MAIL MESSAGES\n\nI hereby agree that I give my consent to Turkcell and its Group Companies for sending commercial e-mail messages (messages containing data, voice and video which are sent for commercial purposes and transmitted electronically by using means such as telephone, call center, fax transmission, autodialing device, smart sound recorder, electronic mail, short message system) to me through my contact details which I provided when subscribing to lifebox application or which is already held by Turkcell and its Group Companies,  for the purpose of advertising and marketing various new products & services offered as well as announcing general/special opportunities provided by Turkcell and its Group Companies and/or third party entities they cooperate with, pursuant to the Law No.6563 on Regulation of Electronic Commerce (“the Law”) as well as the Regulations on Commercial Communication and Commercial Electronic Mail Messages (“the Regulations”) on perpetual basis until I exercise my right to refuse such messages even if my subscription agreement for aforesaid application expires.  \n\nCommercial e-mail messages sent by the operators, which are subject to the Electronic Communication Law No.5809, to their subscribers and users exclusively for advertising and marketing their own products & services or introducing their business are exempted pursuant to the Regulations. Therefore, I hereby agree that the consent, which I gave above, is independent of and apart from the consent I have given to the operator to which I am a subscriber/user in connection with advertisement of its products & services and that such operator shall be entitled to send commercial e-mail messages for the purposes such as advertising, marketing its own products & services within the scope of consent I have given to the operator to which I am a subscriber even if I revoke the consent given under this document by exercising my right to refuse such messages pursuant to the Law and the Regulations and that I am aware of my entitlement to refuse the commercial e-mail messages of my operator as well. ";
+"commercial_email_messages" = "WRITTEN CONSENT FOR COMMERCIAL E-MAIL MESSAGES\n\nI hereby agree that I give my consent to Turkcell and its Group Companies for sending commercial e-mail messages (messages containing data, voice and video which are sent for commercial purposes and transmitted electronically by using means such as telephone, call center, fax transmission, autodialing device, smart sound recorder, electronic mail, short message system) to me through my contact details which I provided when subscribing to lifebox application or which is already held by Turkcell and its Group Companies,  for the purpose of advertising and marketing various new products & services offered as well as announcing general/special opportunities provided by Turkcell and its Group Companies and/or third party entities they cooperate with, pursuant to the Law No.6563 on Regulation of Electronic Commerce (“the Law”) as well as the Regulations on Commercial Communication and Commercial Electronic Mail Messages (“the Regulations”) on perpetual basis until I exercise my right to refuse such messages even if my subscription agreement for aforesaid application expires.  \n\nCommercial e-mail messages sent by the operators, which are subject to the Electronic Communication Law No.5809, to their subscribers and users exclusively for advertising and marketing their own products & services or introducing their business are exempted pursuant to the Regulations. Therefore, I hereby agree that the consent, which I gave above, is independent of and apart from the consent I have given to the operator to which I am a subscriber/user in connection with advertisement of its products & services and that such operator shall be entitled to send commercial e-mail messages for the purposes such as advertising, marketing its own products & services within the scope of consent I have given to the operator to which I am a subscriber even if I revoke the consent given under this document by exercising my right to refuse such messages pursuant to the Law and the Regulations and that I am aware of my entitlement to refuse the commercial e-mail messages of my operator as well.";
+"NSLocationAlwaysUsageDescription" = "Your location will be used for background syncing";
+"NSPhotoLibraryAddUsageDescription" = "Need access to save your photos and videos";
+"NSPhotoLibraryUsageDescription" = "Your photo library access is needed to display photos/videos in the application";
 
 /*Usage Info*/
-"package_space_details" = "%1$@ of %2$@ used (only for lifebox usage)";
+"package_space_details" = "%1$@ / %2$@ used (only for lifebox usage)";
 "package_renew_date" = "Will be renewed on: %@";
 "percentage_used" = "%.0f%% used";
-"used_and_left_space" = "%@ of %@ used";
+"used_and_left_space" = "%@ / %@ used";
