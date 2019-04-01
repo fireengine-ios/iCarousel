@@ -38,40 +38,11 @@ final class UsageInfoViewController: ViewController {
             cardDividerView.backgroundColor = ColorConstants.photoCell
         }
     }
-    
-    @IBOutlet private weak var photosVolumeLabel: UILabel!
-    @IBOutlet private weak var photosCountLabel: UILabel!
-    
-    @IBOutlet private weak var videosVolumeLabel: UILabel!
-    @IBOutlet private weak var videosCountLabel: UILabel!
-    
-    @IBOutlet private weak var musicVolumeLabel: UILabel!
-    @IBOutlet private weak var musicCountLabel: UILabel!
-    
-    @IBOutlet private weak var docsVolumeLabel: UILabel!
-    @IBOutlet private weak var docsCountLabel: UILabel!
-    
-    @IBOutlet var volumeLabels: [UILabel]! {
-        didSet {
-            volumeLabels.forEach { label in
-                label.text = ""
-                label.textAlignment = .right
-                label.textColor = UIColor.lrTealish
-                label.font = UIFont.TurkcellSaturaRegFont(size: 16)
-            }
-        }
-    }
-    
-    @IBOutlet var countLabels: [UILabel]! {
-        didSet {
-            countLabels.forEach { label in
-                label.text = ""
-                label.textAlignment = .right
-                label.textColor = ColorConstants.textGrayColor
-                label.font = UIFont.TurkcellSaturaRegFont(size: 16)
-            }
-        }
-    }
+
+    @IBOutlet private weak var photoUsageInfoView: MediaUsageInfoView!
+    @IBOutlet private weak var videoUsageInfoView: MediaUsageInfoView!
+    @IBOutlet private weak var musicUsageInfoView: MediaUsageInfoView!
+    @IBOutlet private weak var docsUsageInfoView: MediaUsageInfoView!
     
     @IBOutlet private weak var circleProgressView: CircleProgressView! {
         didSet {
@@ -158,6 +129,7 @@ final class UsageInfoViewController: ViewController {
     //MARK: lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupDesign()
         setupCollectionView()
         output.viewIsReady()
@@ -191,14 +163,15 @@ final class UsageInfoViewController: ViewController {
     private func calculateHeightForCollectionView(with models: [InternetDataUsage]) {
         var biggerHeight: CGFloat = 0
         
-        let commonWidth = collectionView.frame.width - 8
+        let commonWidth = collectionView.frame.width
         
         models.forEach { model in
             var cellHeight = UsageInfoViewController.constantForCell
             
             let usedVolume = ((model.remaining ?? 0) / (model.total ?? 0)) * 100
+            let textHeight: CGFloat = 25
             let widthForName = commonWidth - String(format: TextConstants.usagePercentage, usedVolume.rounded(.toNearestOrAwayFromZero))
-                .width(for: 25, font: .TurkcellSaturaDemFont(size: 16))
+                .width(for: textHeight, font: .TurkcellSaturaDemFont(size: 16))
             
             cellHeight += model.offerName?
                 .height(for: widthForName, font: .TurkcellSaturaMedFont(size: 18)) ?? 0
@@ -211,7 +184,7 @@ final class UsageInfoViewController: ViewController {
                     .height(for: commonWidth, font: UIFont.TurkcellSaturaRegFont(size: 14))
             }
             
-            biggerHeight = biggerHeight > cellHeight ? biggerHeight : cellHeight
+            biggerHeight = max(biggerHeight, cellHeight)
         }
         
         collectionViewHeightAnchor.constant = biggerHeight
@@ -224,17 +197,10 @@ final class UsageInfoViewController: ViewController {
 //MARK: - UsageInfoViewInput
 extension UsageInfoViewController: UsageInfoViewInput {
     func display(usage: UsageResponse) {
-        photosCountLabel.text = String(format: TextConstants.usageInfoPhotos, usage.imageCount ?? 0)
-        photosVolumeLabel.text = usage.imageUsage?.bytesString
-        
-        videosCountLabel.text = String(format: TextConstants.usageInfoVideos, usage.videoCount ?? 0)
-        videosVolumeLabel.text = usage.videoUsage?.bytesString
-        
-        musicCountLabel.text = String(format: TextConstants.usageInfoSongs, usage.audioCount ?? 0)
-        musicVolumeLabel.text = usage.audioUsage?.bytesString
-        
-        docsCountLabel.text = String(format: TextConstants.usageInfoDocuments, usage.othersCount ?? 0)
-        docsVolumeLabel.text = usage.othersUsage?.bytesString
+        photoUsageInfoView.configure(type: .photo, count: usage.imageCount, volume: usage.imageUsage)
+        videoUsageInfoView.configure(type: .video, count: usage.videoCount, volume: usage.videoUsage)
+        musicUsageInfoView.configure(type: .music, count: usage.audioCount, volume: usage.audioUsage)
+        docsUsageInfoView.configure(type: .docs, count: usage.othersCount, volume: usage.othersUsage)
         
         guard let quotaBytes = usage.quotaBytes, let usedBytes = usage.usedBytes else {
             return
@@ -251,8 +217,12 @@ extension UsageInfoViewController: UsageInfoViewInput {
         let percentage = (usagePercentage  * 100).rounded(.toNearestOrAwayFromZero)
         usagePercentageLabel.text = String(format: TextConstants.usagePercentage, percentage)
 
-        calculateHeightForCollectionView(with: internetDataUsages)
         self.internetDataUsages = usage.internetDataUsage
+        calculateHeightForCollectionView(with: self.internetDataUsages)
+        
+        ///needs to redraw progress view
+        circleProgressView.layoutIfNeeded()
+        
         collectionView.reloadData()
     }
     
@@ -287,11 +257,15 @@ extension UsageInfoViewController: UICollectionViewDataSource {
 extension UsageInfoViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellHeight = collectionView.frame.height
-        let cellWidth = collectionView.frame.width - 8
+        let cellWidth = collectionView.frame.width
         return CGSize(width: cellWidth, height: cellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return NumericConstants.usageInfoCollectionViewCellsOffset
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return NumericConstants.usageInfoCollectionViewCellsOffset
     }
 }

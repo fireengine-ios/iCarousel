@@ -144,7 +144,7 @@ struct NumericConstants {
     
     static let usageInfoProgressWidth: CGFloat = 8
     
-    static let usageInfoCollectionViewCellsOffset: CGFloat = 8
+    static let usageInfoCollectionViewCellsOffset: CGFloat = 0
 
     static let progressViewBackgroundColorAlpha: CGFloat = 0.25
 }

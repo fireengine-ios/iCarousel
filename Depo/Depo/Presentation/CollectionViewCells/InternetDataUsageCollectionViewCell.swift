@@ -63,15 +63,16 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
         
         nameLabel.text = model.offerName
         ///in some cells this label collapsed, lines below fix this
+        let textHeight: CGFloat = 25
         let maxNameLabelWidth = self.frame.width - String(format: TextConstants.usagePercentage, usedVolume)
-            .width(for: 25, font: UIFont.TurkcellSaturaDemFont(size: 16))
+            .width(for: textHeight, font: UIFont.TurkcellSaturaDemFont(size: 16))
         nameLabel.preferredMaxLayoutWidth = maxNameLabelWidth
         
         let usageInfo = String(format: TextConstants.packageSpaceDetails,
                                model.usedString,
                                model.totalString)
         
-        ///In design(https://zpl.io/aNPYeWk) BG values are bold but we don't have well done logic for both (RTL and LTR) languages
+        ///In design(https://zpl.io/aNPYeWk) volume values are bold but we don't have well done logic for both (RTL and LTR) languages
         let attributedString = NSAttributedString(string: usageInfo,
                                                   attributes: [
             .font               : UIFont.TurkcellSaturaRegFont(size: 18),

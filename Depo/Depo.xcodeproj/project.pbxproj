@@ -27,6 +27,8 @@
 		124B2508A085C281AB2765AF /* SelectNameViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F148DB3DB2A1D9676FE239 /* SelectNameViewOutput.swift */; };
 		1356E354CDA8AA7567B09334 /* UserInfoSubViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CCB3146C622ADE6CFE961E /* UserInfoSubViewConfigurator.swift */; };
 		161684F8B98A4DD3AC164E2F /* Pods_LifeboxShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */; };
+		17E9B7122250AF6C00C0FE70 /* MediaUsageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */; };
+		17E9B7132251E5A300C0FE70 /* MediaUsageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */; };
 		1C8FDD0A3C795F7711BC5822 /* FeedbackViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFFF80AD607CB90108A1537 /* FeedbackViewRouterInput.swift */; };
 		205A9C8FDC29F8AABB22940E /* UserInfoSubViewInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF703F8C0F19668138D30BD /* UserInfoSubViewInteractorOutput.swift */; };
 		2108C2EF8209265F3A1A5B4D /* SelectNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */; };
@@ -3944,6 +3946,7 @@
 		14B63501F537CEC2931A734D /* Pods-LifeboxShared.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.enterprise.xcconfig"; sourceTree = "<group>"; };
 		14DC6D877F96EAC0DCE038CA /* SyncContactsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsViewController.swift; sourceTree = "<group>"; };
 		16AA59CD6753DDEFC61D0212 /* FeedbackViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInput.swift; sourceTree = "<group>"; };
+		17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUsageInfoView.swift; sourceTree = "<group>"; };
 		1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouter.swift; sourceTree = "<group>"; };
 		1AB80F562E2E268C766082D5 /* SettingsInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInitializer.swift; sourceTree = "<group>"; };
 		1BCD54E34E004AFFD765CE3B /* SplashPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
@@ -11144,6 +11147,7 @@
 			children = (
 				CE4CFEBE1F78F18700FB4C3D /* ResizableTableView.swift */,
 				922C24FC224A7E6400FD00D9 /* CircleProgressView.swift */,
+				17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -16198,6 +16202,7 @@
 				CE00B24E2202FB4300A5A696 /* PhotoSelectionController.swift in Sources */,
 				8C0E8F671FDEBDFF00789C91 /* UploadFilesSelectionInteractor.swift in Sources */,
 				8C0E8F681FDEBDFF00789C91 /* FirstResponder.swift in Sources */,
+				17E9B7132251E5A300C0FE70 /* MediaUsageInfoView.swift in Sources */,
 				8C0E8F691FDEBDFF00789C91 /* PasscodeSettingsRouterInput.swift in Sources */,
 				8CF6A9C6207C8CF9007DEF71 /* CollectionViewSpinnerFooter.swift in Sources */,
 				7C379F42202C37CF0050C055 /* UIView+Utils.swift in Sources */,
@@ -17548,6 +17553,7 @@
 				B56FBB1A2122C23D004F4A59 /* TermsOfUseViewController.swift in Sources */,
 				B5711DFF20C13F4200E72A9D /* String+ShareActivity.swift in Sources */,
 				64E35594735C9449EB20343F /* AlbumsPresenter.swift in Sources */,
+				17E9B7122250AF6C00C0FE70 /* MediaUsageInfoView.swift in Sources */,
 				EB0329F2FE28E1F8F2F7ABAE /* AlbumsInteractor.swift in Sources */,
 				8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */,
 				78E8E2B4202360C700A979AB /* FaceImageItemsInteractorInput.swift in Sources */,
