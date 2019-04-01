@@ -1039,7 +1039,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         metaData?.copy(metaData: item.metaData)
     }
     
-    private class func getDuration(duration: Double?) -> String {
+    class func getDuration(duration: Double?) -> String {
         if let d = duration {
             let s = CGFloat(d)
             let seconds = Int(s) % 60
