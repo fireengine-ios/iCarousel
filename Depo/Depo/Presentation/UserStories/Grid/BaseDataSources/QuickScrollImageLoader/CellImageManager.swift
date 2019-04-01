@@ -8,7 +8,7 @@
 
 import Foundation
 import SDWebImage
-
+import MetalPetal
 
 typealias CellImageManagerOperationsFinished = (_ image: UIImage?, _ cached: Bool, _ uuid: String?)->Void
 
@@ -28,6 +28,8 @@ final class CellImageManager {
 
     
     private static var instances = [URL : CellImageManager]()
+    
+    private static let blurService = BlurService()
     
     static func instance(by url: URL?) -> CellImageManager? {
         guard let url = url else {
@@ -55,7 +57,7 @@ final class CellImageManager {
     
     let uniqueId: String = UUID().uuidString
     
-    private lazy var dispatchQueue = DispatchQueue(label: "\(uniqueId)")
+    private lazy var dispatchQueue = CellImageManager.globalDispatchQueue//DispatchQueue(label: "\(uniqueId)")
     private lazy var operationQueue = CellImageManager.globalOperationQueue
     private var currentOperation: Operation?
     
@@ -117,7 +119,7 @@ final class CellImageManager {
             guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
             
             ///another guard in case if we want to save an unblurred thumbnail image
-            guard let blurredImage = self.blurred(image: outputImage) else { return }
+            guard let blurredImage = CellImageManager.blurService.blur(image: outputImage) else { return }
             
             self.cache(image: blurredImage, url: thumbnail)
             self.completionBlock?(blurredImage, false, self.uniqueId)
@@ -126,16 +128,6 @@ final class CellImageManager {
         }
         downloadThumbnailOperation.queuePriority = .high
         start(operation: downloadThumbnailOperation)
-    }
-    
-    private func blurred(image: UIImage, with radiusInPixels: Float = 2.0) -> UIImage? {
-        guard UIApplication.shared.applicationState == .active else {
-            return image
-        }
-        
-        let filter = GPUImageGaussianBlurFilter()
-        filter.blurRadiusInPixels = CGFloat(radiusInPixels)
-        return filter.image(byFilteringImage: image)
     }
     
     private func start(operation: Operation) {
@@ -161,5 +153,49 @@ extension CellImageManager {
         }
         
         imageCache?.store(image, forKey: cacheKey, completion: nil)
+    }
+}
+
+
+private final class BlurService {
+    
+    private var currentContext: MTIContext?
+    private func getCurrentContext() -> MTIContext? {
+        guard currentContext == nil else {
+            return currentContext
+        }
+
+        let options = MTIContextOptions()
+        guard let device = MTLCreateSystemDefaultDevice() else {
+            return nil
+        }
+
+        currentContext = try? MTIContext(device: device, options: options)
+        return currentContext
+    }
+    
+    func blur(image: UIImage, radiusInPixels: Float = 2.0) -> UIImage? {
+        guard let cgImage = image.cgImage,
+            let context = getCurrentContext()
+        else {
+            return nil
+        }
+        
+        let inputImage = MTIImage(cgImage: cgImage)
+        
+        let filter = MTIMPSGaussianBlurFilter()
+        filter.radius = radiusInPixels
+        filter.inputImage = inputImage
+        
+        guard let filteredImage = filter.outputImage else {
+            return nil
+        }
+        
+        do {
+            let cgImage = try context.makeCGImage(from: filteredImage)
+            return UIImage(cgImage: cgImage)
+        } catch {
+            return nil
+        }
     }
 }
