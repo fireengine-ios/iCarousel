@@ -347,10 +347,9 @@ extension PhotoVideoController: UICollectionViewDelegate {
             return
         }
         
-        let wraped = WrapData(mediaItem: object)
-        cell.setup(with: wraped)
+        cell.setup(with: object)
         
-        if let progress = uploadProgress[wraped.getTrimmedLocalID()] {
+        if let trimmedLocalFileID = object.trimmedLocalFileID, let progress = uploadProgress[trimmedLocalFileID] {
             cell.setProgressForObject(progress: progress, blurOn: true)
         } else {
             cell.cancelledUploadForObject()
@@ -359,7 +358,7 @@ extension PhotoVideoController: UICollectionViewDelegate {
         let isSelectedCell = dataSource.selectedIndexPaths.contains(indexPath)
         cell.set(isSelected: isSelectedCell, isSelectionMode: dataSource.isSelectingMode, animated: true)
         
-        if uploadedObjectID.index(of: wraped.uuid) != nil {
+        if let uuid = object.uuid, uploadedObjectID.index(of: uuid) != nil {
             cell.finishedUploadForObject()
         }
 //        else {
