@@ -63,7 +63,6 @@ final class PhotoVideoCell: UICollectionViewCell {
     private var cellImageManager: CellImageManager?
     private var uuid: String?
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLongPressRecognizer()
@@ -106,15 +105,15 @@ final class PhotoVideoCell: UICollectionViewCell {
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
             cellId = local.asset.localIdentifier
-            DispatchQueue.toBackground { [weak self] in
-                self?.filesDataSource.getAssetThumbnail(asset: local.asset) { [weak self] image in
-                    DispatchQueue.main.async {
-                        if self?.cellId == local.asset.localIdentifier, let image = image {
-                            self?.setImage(image: image, animated:  false)
-                        }
+            
+            filesDataSource.getAssetThumbnail(asset: local.asset) { [weak self] image in
+                DispatchQueue.main.async {
+                    if self?.cellId == local.asset.localIdentifier, let image = image {
+                        self?.setImage(image: image, animated:  false)
                     }
                 }
             }
+            
         case .remoteUrl(_):
             if let meta = wraped.metaData {
                 setImage(smalUrl: meta.smalURl, mediumUrl: meta.mediumUrl)
@@ -150,7 +149,7 @@ final class PhotoVideoCell: UICollectionViewCell {
             
             cellId = assetIdentifier
             
-            DispatchQueue.toBackground { [weak self] in
+            FilesDataSource.cacheQueue.async { [weak self] in
                 guard let self = self,
                     self.cellId == assetIdentifier,
                     let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject else {

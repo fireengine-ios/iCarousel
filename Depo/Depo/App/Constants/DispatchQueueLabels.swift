@@ -32,4 +32,5 @@ struct DispatchQueueLabels {
     static let itemsRepositoryBackgroundQueuePhoto = "com.lifebox.itemsRepositoryBackgroundQueuePhoto"
     static let itemsRepositoryBackgroundQueueVideo = "com.lifebox.itemsRepositoryBackgroundQueueVideo"
     static let itemsRepositoryBackgroundQueueConcurent = "com.lifebox.itemsRepositoryBackgroundQueueConcurent"
+    static let filesDataSourceCacheQueue = "com.lifebox.filesDataSourceCache"
 }

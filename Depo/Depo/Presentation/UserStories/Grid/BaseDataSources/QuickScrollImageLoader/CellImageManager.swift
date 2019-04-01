@@ -116,19 +116,32 @@ final class CellImageManager {
         
         let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail, queue: self.dispatchQueue)
         downloadThumbnailOperation.outputBlock = { [weak self] outputImage in
-            guard let `self` = self, let outputImage = outputImage as? UIImage else {
+            guard let self = self, let outputImage = outputImage as? UIImage else {
                 return
             }
             
-            ///another guard in case if we want to save an unblurred thumbnail image
-            guard let blurredImage = CellImageManager.blurService.blur(image: outputImage) else {
-                return
+            DispatchQueue.main.async {
+                guard UIApplication.shared.applicationState == .active else {
+                    return
+                }
+                
+                self.dispatchQueue.async { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    ///another guard in case if we want to save an unblurred thumbnail image
+                    guard let blurredImage = CellImageManager.blurService.blur(image: outputImage) else {
+                        downloadImage()
+                        return
+                    }
+                    
+                    self.cache(image: blurredImage, url: thumbnail)
+                    self.completionBlock?(blurredImage, false, self.uniqueId)
+                    
+                    downloadImage()
+                }
             }
-            
-            self.cache(image: blurredImage, url: thumbnail)
-            self.completionBlock?(blurredImage, false, self.uniqueId)
-            
-            downloadImage()
         }
         downloadThumbnailOperation.queuePriority = .high
         start(operation: downloadThumbnailOperation)
@@ -183,6 +196,14 @@ private final class BlurService {
         return image
         #endif
         
+        if MTIContext.defaultMetalDeviceSupportsMPS {
+            return blurWithMetal(image: image, radiusInPixels: radiusInPixels)
+        } else {
+            return blurWithGPU(image: image, radiusInPixels: radiusInPixels)
+        }
+    }
+    
+    func blurWithMetal(image: UIImage, radiusInPixels: Float = 2.0) -> UIImage? {
         guard let cgImage = image.cgImage,
             let context = getCurrentContext()
         else {
@@ -205,5 +226,11 @@ private final class BlurService {
         } catch {
             return nil
         }
+    }
+    
+    func blurWithGPU(image: UIImage, radiusInPixels: Float = 2.0) -> UIImage? {
+        let filter = GPUImageGaussianBlurFilter()
+        filter.blurRadiusInPixels = CGFloat(radiusInPixels)
+        return filter.image(byFilteringImage: image)
     }
 }

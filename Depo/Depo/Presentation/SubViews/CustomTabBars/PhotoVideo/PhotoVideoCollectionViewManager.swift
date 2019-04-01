@@ -84,7 +84,10 @@ final class PhotoVideoCollectionViewManager {
     
     private func setupCollectionView() {
         collectionView.register(nibCell: PhotoVideoCell.self)
-        collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)        
+        collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)
+        if #available(iOS 10.0, *) {
+            collectionView.isPrefetchingEnabled = false
+        }
         //        collectionView.alwaysBounceVertical = true
         //        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
     }
