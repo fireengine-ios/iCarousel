@@ -179,6 +179,10 @@ private final class BlurService {
     }
     
     func blur(image: UIImage, radiusInPixels: Float = 2.0) -> UIImage? {
+        #if targetEnvironment(simulator)
+        return image
+        #endif
+        
         guard let cgImage = image.cgImage,
             let context = getCurrentContext()
         else {
