@@ -207,12 +207,12 @@ final class MediaItemOperationsService {
                         array.append(MediaItemsObjectSyncStatus(userID: userID, context: context))
                     }
                     savedItem.objectSyncStatus = NSSet(array: array)
-                    if let newRemoteItem = newRemote {
-                        savedItem.addToRelatedRemotes(MediaItem(wrapData: newRemoteItem, context: context))
-                    }
-
                     //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
                 })
+                if let newRemoteItem = newRemote {
+                    //all relation will be setuped inside
+                    _ = MediaItem(wrapData: newRemoteItem, context: context)
+                }
                 context.saveAsync()
             }
         }
@@ -292,17 +292,11 @@ final class MediaItemOperationsService {
         //WARNING:- DO we need notify ItemOperationManager here???
     }
 
-    func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, completion: @escaping VoidHandler) {
-        guard let firstRemote = remoteItems.first, let lastRemote = remoteItems.last else {
-            completion()
-            return
-        }
-        
+    func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, dateRange: ClosedRange<Date>, completion: @escaping VoidHandler) {
         let remoteIds = remoteItems.compactMap { $0.id }
-        
         let context = CoreDataStack.default.newChildBackgroundContext
         
-        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@)", fileType.valueForCoreDataMapping(), firstRemote.metaDate as NSDate, lastRemote.metaDate as NSDate)
+        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@)", fileType.valueForCoreDataMapping(), dateRange.upperBound as NSDate, dateRange.lowerBound as NSDate)
         
         executeRequest(predicate: inDateRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
 
