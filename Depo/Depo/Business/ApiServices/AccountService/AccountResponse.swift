@@ -332,7 +332,13 @@ class InternetDataUsage: ObjectRequestResponse {
         }
         switch unit {
         case .mb:
-            return cleanZero(for: size / BytesType.size, unit: "GB")
+            if size >= BytesType.size {
+                return cleanZero(for: size / BytesType.size, unit: "GB")
+            } else if size >= 1 {
+                return cleanZero(for: size, unit: "MB")
+            } else {
+                return cleanZero(for: size * BytesType.size, unit: "KB")
+            }
         }
     }
     
