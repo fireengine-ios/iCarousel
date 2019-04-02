@@ -904,6 +904,6 @@
 "package_space_details" = "%1$@ / %2$@ used (only for lifebox usage)";
 "package_renew_date" = "Will be renewed on: %@";
 "percentage_used" = "%.0f%% used";
-"percentage_used_two_lines" = "%.0f%%\nused";
 "used_and_left_space" = "%1$@ / %2$@ used";
+"percentage_used_two_lines" = "%.0f%%\nused";
 "my_usage_storage" = "My Usage Storage";

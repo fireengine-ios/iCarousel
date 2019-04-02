@@ -198,7 +198,7 @@ sent to your phone number %@"*/
 "Suggestion" = "Suggestion";
 "Feedback Form" = "Pour toutes suggestions ou réclamations, veuillez nous contacter:";
 "Thanks for leaving a comment!" = "Veuillez nous contacter";
-"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Veuillez ne pas supprimer les informations ci-dessous. La dite information sera utilisée pour résoudre le problème. \n\nVersion d’Application: %@                                                       \nMsisdn: %@                                                                         \nPorteur: %@                                                                          \nDispositif OS: %@                                                                 \nLangue: %@\nLangue de préférence: %@                                                          \nSituation du Réseau: %@                                                          \nStockage Totale: %lld                                                           \nStockage Utilisée: %lld\nPaquets: %@";
+"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Veuillez ne pas supprimer les informations ci-dessous. La dite information sera utilisée pour résoudre le problème. \n\nVersion d’Application: %@                                                       \nMsisdn: %@                                                                         \nPorteur: %@\nDispositif: %@                                                                           \nDispositif OS: %@                                                                 \nLangue: %@\nLangue de préférence: %@                                                          \nSituation du Réseau: %@                                                          \nStockage Totale: %lld                                                           \nStockage Utilisée: %lld\nPaquets: %@";
 "Upload Photos" = "Télécharger des Photos";
 "Add" = "Ajouter";
 "Albums" = "Albums";
@@ -1112,3 +1112,5 @@ Please check I have understood the intended command here*/
 "package_renew_date" = "";
 "percentage_used" = "";
 "used_and_left_space" = "";
+"percentage_used_two_lines" = "";
+"my_usage_storage" = "";
