@@ -30,6 +30,8 @@ protocol AsynImage {
 
 class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     
+    static let cacheQueue = DispatchQueue(label: DispatchQueueLabels.filesDataSourceCacheQueue)
+    
     private let localManager = LocalMediaStorage.default
     
     private let getImageServise = ImageDownloder()
@@ -138,14 +140,23 @@ extension FilesDataSource {
     }
     
     func getAssetThumbnail(asset: PHAsset, indexPath: IndexPath, completion: @escaping (_ image: UIImage?, _ indexPath: IndexPath) -> Void) {
-        assetCache?.requestImage(for: asset, targetSize: targetSize, contentMode: .default, options: defaultImageRequestOptions, resultHandler: { image, _ in
-            completion(image, indexPath)
-        })
+        FilesDataSource.cacheQueue.async { [weak self] in
+            guard let self = self else { return }
+            
+            self.assetCache?.requestImage(for: asset, targetSize: self.targetSize, contentMode: .default, options: self.defaultImageRequestOptions, resultHandler: { image, _ in
+                completion(image, indexPath)
+            })
+        }
+        
     }
     
     func getAssetThumbnail(asset: PHAsset, completion: @escaping (_ image: UIImage?) -> Void) {
-        assetCache?.requestImage(for: asset, targetSize: targetSize, contentMode: .default, options: defaultImageRequestOptions, resultHandler: { image, _ in
-            completion(image)
-        })
+        FilesDataSource.cacheQueue.async { [weak self] in
+            guard let self = self else { return }
+            
+            self.assetCache?.requestImage(for: asset, targetSize: self.targetSize, contentMode: .default, options: self.defaultImageRequestOptions, resultHandler: { image, _ in
+                completion(image)
+            })
+        }
     }
 }

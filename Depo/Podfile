@@ -51,6 +51,7 @@ def core_pods
   pod 'SQLite.swift', '0.11.4'
   
   pod 'MetalPetal'
+  pod 'GPUImage'
 end
 
 target 'Depo_LifeTech' do
