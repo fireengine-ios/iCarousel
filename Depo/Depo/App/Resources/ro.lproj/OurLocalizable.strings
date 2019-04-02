@@ -856,11 +856,11 @@
 "instapick_see_details" = "Devino Premium";
 "store_in_high_quality" = "Fă copii de rezervă de calitate înaltă";
 "5_photopick_analysis" = "5 analize PhotoPick";
-"10_photopick_analysis" = "";
-"data_package_for_turkcell" = "";
-"delete_duplicated_contacts" = "";
-"leave_middle_membership" = "";
-"leave_middle_turkcell" = "";
+"10_photopick_analysis" = "+10 analize PhotoPick";
+"data_package_for_turkcell" = "Avantaje data adiționale";
+"delete_duplicated_contacts" = "Elimină contactele dublicate din directoriul Telefon";
+"leave_middle_membership" = "Renunță la pachetul Standard+";
+"leave_middle_turkcell" = "Trimite textul IPTAL LIFEBOX STANDART+ la 2200, pentru a anula pachetul tău ";
 "package_FWI_cancel_text" = "";
 "package_jamaica_cancel_text" = "";
 "feature_digicell_cancel_text" = "";
