@@ -144,7 +144,7 @@ class EulaService: BaseRequestService {
         if let phoneNumber = phoneNumber {
             params = ["phoneNumber": phoneNumber]
         } else {
-            params = nil
+            params = [:]
         }
         
         sessionManager
