@@ -1,1 +1,4 @@
-
+"NSLocationAlwaysUsageDescription" = "Locația ta va fi folosită pentru sincronizarea de fundal";
+"NSPhotoLibraryAddUsageDescription" = "E nevoie de acces pentru sincronizarea pozelor și fișierelor video";
+"NSPhotoLibraryUsageDescription" = "Pentru vizualizarea pozelor/video în aplicație, e nevoie de acces la biblioteca de fotografii";
+"NSFaceIDUsageDescription" = "Această aplicație a fost proiectată să utilizeze Face ID pentru a-ți spori securitatea";
