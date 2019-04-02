@@ -18,15 +18,17 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static var currentServerEnvironment = SettingsBundleHelper.preferredEnvironment()
+    private static var currentServerEnvironment: ServerEnvironment {
+        return SettingsBundleHelper.preferredEnvironment()
+    }
     
-    static var baseUrl: URL = {
+    static var baseUrl: URL {
         switch currentServerEnvironment {
         case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/api/")!
         case .preProduction: return URL(string: "https://adepotest.turkcell.com.tr/api/")!
         case .production: return URL(string: "https://adepo.turkcell.com.tr/api/")!
         }
-    }()
+    }
     
     static let unsecuredAuthenticationUrl: String = {
         switch currentServerEnvironment {

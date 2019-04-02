@@ -18,14 +18,13 @@ final class SettingsBundleHelper {
     }
     
     static func preferredEnvironment() -> RouteRequests.ServerEnvironment {
-        guard isLifeTechBuild,
-            let selectedEnviroment = UserDefaults.standard.object(forKey: "routeEnviroment") as? String else {
-                return RouteRequests.ServerEnvironment.production
+        guard let selectedEnviroment = UserDefaults.standard.object(forKey: "routeEnviroment") as? String else {
+            return RouteRequests.ServerEnvironment.production
         }
         switch selectedEnviroment {
-        case "1":
+        case "preprod":
             return RouteRequests.ServerEnvironment.preProduction
-        case "2":
+        case "test":
             return RouteRequests.ServerEnvironment.test
         default:
             return RouteRequests.ServerEnvironment.production
