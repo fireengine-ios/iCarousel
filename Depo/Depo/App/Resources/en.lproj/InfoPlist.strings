@@ -2,3 +2,4 @@
 "NSPhotoLibraryAddUsageDescription" = "Need access to save your photos and videos";
 "NSPhotoLibraryUsageDescription" = "Your photo library access is needed to display photos/videos in the application";
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Your location will be used for background syncing";
