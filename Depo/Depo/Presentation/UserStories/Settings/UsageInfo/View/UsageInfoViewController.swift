@@ -183,7 +183,7 @@ final class UsageInfoViewController: ViewController {
             
             let usedVolume: CGFloat
             if let remaining = model.remaining, let total = model.total {
-                usedVolume = CGFloat((remaining / total) * 100)
+                usedVolume = CGFloat((1 - (remaining / total)) * 100)
             } else {
                 usedVolume = 0
             }
