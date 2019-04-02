@@ -57,7 +57,8 @@ final class UsageInfoViewController: ViewController {
     
     @IBOutlet private weak var usagePercentageLabel: UILabel! {
         didSet {
-            usagePercentageLabel.text = ""
+            usagePercentageLabel.text = String(format: TextConstants.usagePercentageTwoLines, 0)
+            usagePercentageLabel.textAlignment = .center
             usagePercentageLabel.numberOfLines = 0
             usagePercentageLabel.textColor = UIColor.lrTealish
             usagePercentageLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
@@ -66,7 +67,8 @@ final class UsageInfoViewController: ViewController {
     
     @IBOutlet private weak var wholeStorageDetailLabel: UILabel! {
         didSet {
-            wholeStorageDetailLabel.text = ""
+            let zero = Int64(0).bytesString
+            wholeStorageDetailLabel.text = String(format: TextConstants.usedAndLeftSpace, zero, zero)
             wholeStorageDetailLabel.numberOfLines = 0
             wholeStorageDetailLabel.textColor = UIColor.lrTealish
             wholeStorageDetailLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
@@ -77,7 +79,7 @@ final class UsageInfoViewController: ViewController {
         didSet {
             upgradeButton.backgroundColor = UIColor.lrTealish
             upgradeButton.setTitleColor(.white, for: .normal)
-            upgradeButton.setTitle(TextConstants.upgrade, for: .normal)
+            upgradeButton.setTitle(TextConstants.fullQuotaSmallPopUpSecondButtonTitle, for: .normal)
             upgradeButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 14)
             upgradeButton.insets = UIEdgeInsets(top: 2, left: 16, bottom: 2, right: 16 )
         }
@@ -85,7 +87,7 @@ final class UsageInfoViewController: ViewController {
     
     @IBOutlet weak var myDataUsageLabel: UILabel! {
         didSet {
-            myDataUsageLabel.text = "My Data Usage"
+            myDataUsageLabel.text = TextConstants.myUsageStorage
             myDataUsageLabel.textColor = UIColor.lrTealish
             myDataUsageLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
         }
@@ -130,13 +132,14 @@ final class UsageInfoViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupDesign()
         setupCollectionView()
         output.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        setupDesign()
         output.viewWillAppear()
     }
     
@@ -154,6 +157,16 @@ final class UsageInfoViewController: ViewController {
     }
 
     private func setupDesign() {
+        myDataUsageLabel.isHidden = true
+        collectionView.isHidden = true
+        
+        let zero: Int = 0
+        let zeroBytes: Int64 = 0
+        photoUsageInfoView.configure(type: .photo, count: zero, volume: zeroBytes)
+        musicUsageInfoView.configure(type: .music, count: zero, volume: zeroBytes)
+        videoUsageInfoView.configure(type: .video, count: zero, volume: zeroBytes)
+        docsUsageInfoView.configure(type: .docs, count: zero, volume: zeroBytes)
+        
         circleProgressView.layoutIfNeeded()
         setTitle(withString: TextConstants.settingsViewCellUsageInfo)
     }
@@ -170,7 +183,7 @@ final class UsageInfoViewController: ViewController {
             
             let usedVolume: CGFloat
             if let remaining = model.remaining, let total = model.total {
-                usedVolume = CGFloat((remaining / total) * 100)
+                usedVolume = CGFloat((1 - (remaining / total)) * 100)
             } else {
                 usedVolume = 0
             }
@@ -221,7 +234,7 @@ extension UsageInfoViewController: UsageInfoViewInput {
                                withAnimation: false)
         
         let percentage = (usagePercentage  * 100).rounded(.toNearestOrAwayFromZero)
-        usagePercentageLabel.text = String(format: TextConstants.usagePercentage, percentage)
+        usagePercentageLabel.text = String(format: TextConstants.usagePercentageTwoLines, percentage)
 
         self.internetDataUsages = usage.internetDataUsage
         calculateHeightForCollectionView(with: self.internetDataUsages)

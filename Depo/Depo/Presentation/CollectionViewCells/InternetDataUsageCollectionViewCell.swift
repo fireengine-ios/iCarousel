@@ -14,7 +14,7 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var progressView: RoundedProgressView! {
         didSet {
             progressView.progressTintColor = UIColor.lrTealish
-            progressView.backgroundColor = UIColor.lrTealish.withAlphaComponent(0.25)
+            progressView.trackTintColor = UIColor.lrTealish.withAlphaComponent(0.25)
         }
     }
     
@@ -60,14 +60,17 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
         
         let usedVolume: CGFloat
         if let remaining = model.remaining, let total = model.total {
-            usedVolume = CGFloat((remaining / total) * 100).rounded(.toNearestOrAwayFromZero)
+            usedVolume = CGFloat((1 - (remaining / total)) * 100)
         } else {
             usedVolume = 0
         }
         
-        usedPercentageLabel.text =  String(format: TextConstants.usagePercentage, usedVolume)
+        progressView.progress = Float(usedVolume / 100)
+        
+        usedPercentageLabel.text =  String(format: TextConstants.usagePercentage, usedVolume.rounded(.toNearestOrAwayFromZero))
         
         nameLabel.text = model.offerName
+        
         ///in some cells this label collapsed, lines below fix this
         let textHeight: CGFloat = 25
         let maxNameLabelWidth = self.frame.width - String(format: TextConstants.usagePercentage, usedVolume)

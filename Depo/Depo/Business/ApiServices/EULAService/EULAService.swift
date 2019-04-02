@@ -137,13 +137,20 @@ class EulaService: BaseRequestService {
     
     private let sessionManager: SessionManager = factory.resolve()
     
-    func getEtkAuth(for phoneNumber: String, handler: @escaping ResponseBool) {
+    func getEtkAuth(for phoneNumber: String?, handler: @escaping ResponseBool) {
         debugLog("EulaService getEtkAuth")
+        
+        let params: Parameters?
+        if let phoneNumber = phoneNumber {
+            params = ["phoneNumber": phoneNumber]
+        } else {
+            params = [:]
+        }
         
         sessionManager
             .request(RouteRequests.eulaGetEtkAuth,
                      method: .post,
-                     parameters: ["phoneNumber": phoneNumber],
+                     parameters: params,
                      encoding: JSONEncoding.prettyPrinted)
             .customValidate()
             .responseString { response in
