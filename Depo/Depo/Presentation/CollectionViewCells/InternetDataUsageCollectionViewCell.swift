@@ -14,7 +14,7 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var progressView: RoundedProgressView! {
         didSet {
             progressView.progressTintColor = UIColor.lrTealish
-            progressView.backgroundColor = UIColor.lrTealish.withAlphaComponent(0.25)
+            progressView.trackTintColor = UIColor.lrTealish.withAlphaComponent(0.25)
         }
     }
     
