@@ -130,20 +130,10 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     func checkEtk() {
         /// phoneNumber will be exists only for signup
-        if let phoneNumber = phoneNumber {
-            checkEtk(for: phoneNumber)
-        } else {
-            SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] userInfoResponse in
-                self?.checkEtk(for: userInfoResponse.fullPhoneNumber)
-            }, fail: { [weak self] _ in
-                DispatchQueue.main.async { [weak self] in
-                    self?.output.setupEtk(isShowEtk: false)
-                }
-            })
-        }
+        checkEtk(for: phoneNumber)
     }
     
-    private func checkEtk(for phoneNumber: String) {
+    private func checkEtk(for phoneNumber: String?) {
         eulaService.getEtkAuth(for: phoneNumber) { [weak self] result in
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else {
