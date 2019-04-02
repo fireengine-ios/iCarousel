@@ -38,7 +38,7 @@ final class CacheManager {
         }
         
         isCacheActualized = false
-        processing = true
+        isProcessing = true
         MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
             if isNoRemotes {
                 self?.startAppendingAllRemotes(completion: { [weak self] in
