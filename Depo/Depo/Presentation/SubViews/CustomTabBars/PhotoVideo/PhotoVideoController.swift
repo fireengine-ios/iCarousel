@@ -128,10 +128,15 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             return
         }
         dataSource.isSelectingMode = true
+        updateVisibleCells()
+        
         if let indexPath = indexPath {
             dataSource.selectedIndexPaths.insert(indexPath)
+            if let selectedCell = collectionView.cellForItem(at: indexPath) as? PhotoVideoCell {
+                selectedCell.set(isSelected: true, isSelectionMode: true, animated: true)
+            }
         }
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        
         onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
         navBarManager.setSelectionMode()
         navigationBarWithGradientStyle()
@@ -140,10 +145,16 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private func stopEditingMode() {
         dataSource.isSelectingMode = false
         dataSource.selectedIndexPaths.removeAll()
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        updateVisibleCells()
         bottomBarManager.hide()
         navBarManager.setDefaultMode()
         homePageNavigationBarStyle()
+    }
+    
+    private func updateVisibleCells() {
+        collectionView.visibleCells.forEach { cell in
+            (cell as? PhotoVideoCell)?.set(isSelected: false, isSelectionMode: dataSource.isSelectingMode, animated: true)
+        }
     }
     
     // MARK: - helpers
