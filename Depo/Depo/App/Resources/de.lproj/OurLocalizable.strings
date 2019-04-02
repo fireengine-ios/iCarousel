@@ -668,8 +668,8 @@
 "Become Premium" = "Werden Sie ein Premium-Mitglied";
 "Become Premium Member!" = "Premium-Mitglied werden!";
 "leave_premium_membership" = "Premium-Mitgliedschaft verlassen";
-"Standard User" = "Standard-Benutzer";
-"Premium User" = "Premium-Konto";
+"Standard User" = "lifebox Premium";
+"Premium User" = "lifebox Standart";
 "lifebox Premium" = "lifebox-Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "Wenn Sie alle doppelten Kontakte aus dem Telefonverzeichnis löschen und viele weitere Funktionen freischalten möchten, werden Sie ein Premium-Mitglied!";
 
@@ -742,11 +742,11 @@
 "my_storage_usage" = "%1$@ von %2$@ ist geblieben";
 "package_section_title" = "Aktualisieren Sie Ihren Speicher";
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "Da Sie kein Premium-Konto besitzen, werden Ihre Fotos und Videos in hoher Qualität gespeichert. Werden Sie Premium, um Ihre Erinnerungen in Originalqualität zu erhalten!";
-"sync_page_pop_up" = "Da Sie kein Premium-Konto besitzen, werden Ihre Fotos und Videos in hoher Qualität gespeichert. Werden Sie ein Premium-Mitglied, um Ihre Erinnerungen in Originalqualität zu erhalten!";
+"home_page_pop_up" = "Möchten Sie Premium-Mitglied werden, um Ihre Erinnerungen in Originalqualität zu erhalten und auf alle Premium-Funktionen zuzugreifen?";
+"sync_page_pop_up" = "Möchten Sie Premium-Mitglied werden, um ‎Ihre Erinnerungen in Originalqualität zu ‎erhalten und auf alle Premium-Funktionen ‎zuzugreifen?‎";
 "ok_for_upgrade" = "Ja, aktualisieren";
 "no_for_upgrade" = "Nein mir geht's gut";
-"uploded_photos_high_quality" = "Sie melden sich gerade als Standardbenutzer bei lifebox an. Wir werden Ihre bestehenden Fotos und Videos zusammen mit neuen hochgeladenen Erinnerungen in hoher Qualität bis zum 1. März aufbewahren. Möchten Sie ein Premium-Benutzer sein, um Ihre Erinnerungen in Originalqualität zu speichern und von Premium-Privilegien zu profitieren?";
+"uploded_photos_high_quality" = "Möchten Sie Premium-Mitglied werden, um ‎Ihre Erinnerungen in Originalqualität zu ‎erhalten und auf alle Premium-Funktionen ‎zuzugreifen?‎";
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
 
 /*AnalyzeHistoryController*/
@@ -755,7 +755,7 @@
 "feature_albanian_cancel_text" = "Sie können die Premium-Funktionen weiterhin kostenlos nutzen, da Sie ALB-Telekom-Benutzer sind";
 "no_analyses_left_title" = "Keine Analysen geblieben";
 "no_analyses_left_message" = "Seien Sie nicht traurig, Sie können immer noch ein neues Paket kaufen, um Ihre Fotos zu analysieren!";
-"no_analyses_left_button" = "PhotoPick kaufen";
+"no_analyses_left_button" = "Holen Sie sich Premium";
 "analyze_history_empty_title" = "Haben Sie noch nicht begonnen, Ihre Fotos zu analysieren?";
 "analyze_history_empty_subtitle" = "Jetzt mit der Analyse beginnen, um herauszufinden, welches Foto den höchsten Rang erreicht, und es in den sozialen Medien teilen.";
 "analyze_history_analyze_left" = "Analysen geblieben";
@@ -803,14 +803,14 @@
 "connected_with_instagram_name" = "Sich mit Instagram als … verbinden";
 "continue_without_connecting" = "Weitergehen, ohne eine Verbindung herzustellen";
 "connected_accounts" = "Verbundene Konten";
-"analyze_history_free_text" = "Kostenlos für begrenzte Zeit";
+"analyze_history_free_text" = "Unbegrenzt für Sie";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "Um ein PhotoPick-Paket zu kaufen, müssen Sie Ihre Lifebox-Anwendung aktualisieren.";
 "instapick_upgrade_popup_button" = "Aktualisieren";
 "instapick_upgrade_popup_no" = "Nein";
 "instapick_analysis_left" = "Analyse geblieben:%1$d / %2$d";
-"instapick_unlimited_analysis" = "Kostenlos für begrenzte Zeit ";
+"instapick_unlimited_analysis" = "Unbegrenzt für Sie";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
@@ -824,18 +824,58 @@
 "there_are_no_albums" = "Es gibt keine Alben";
 "instapick_selection_analyzes_left_max" = "Sie haben %d Fotos ausgewählt \n(die maximale Anzahl, die Sie auswählen können)";
 "free_trial_title_label" = "Mit PhotoPick analysieren";
-"free_trial_detail_label" = "Herausfinden, welches Foto den höchsten Rang erreicht, und für mehr Likes mit PhotoPick analysieren! Für eine begrenzte Zeit mehr ausprobieren!";
+"free_trial_detail_label" = "Finden Sie heraus, welches Foto den höchsten Rang erreicht, und analysieren Sie mit PhotoPick mehr Likes! Unbegrenzt nur für Sie!";
 "instapick_under_construction" = "Wir verbessern PhotoPick für ein besseres Erlebnis 😉";
 "instapick_unsupported_file_type" = "Fotos, die Sie ausgewählt haben, werden nicht unterstützt. Sie können PhotoPick fortführen, indem Sie andere Fotos auswählen.";
 "work_will_introduced" = "lifebox hat derzeit Wartungsarbeiten, bitte versuchen Sie es später erneut.";
-"facebook_remove_connection_warning_title" = "";
-"dropbox_remove_connection_warning_title" = "";
-"facebook_remove_connection_warning_message" = "";
-"dropbox_remove_connection_warning_message" = "";
+"facebook_remove_connection_warning_title" = "Facebook Sie sind dabei, die Verknüpfung mit Facebook ‎aufzuheben.‎";
+"dropbox_remove_connection_warning_title" = "Dropbox Sie sind dabei, die Verknüpfung mit Facebook ‎aufzuheben.‎";
+"facebook_remove_connection_warning_message" = "Möchten Sie die Verknüpfung von Facebook wirklich aufheben?";
+"dropbox_remove_connection_warning_message" = "Dropbox Möchten Sie die Verknüpfung von Facebook ‎wirklich aufheben?‎";
 "remove_connection" = "Verbindung entfernen";
-"you_are_connected" = "";
+"you_are_connected" = "Verknüpft";
 "insta_pick_picture_not_found" = "Bild nicht \ngefunden";
 "phone_updated_needs_login" = "Sie haben Ihre Telefonnummer erfolgreich aktualisiert. Melden Sie sich mit Ihren Zugangsdaten an";
-"server_under_maintenance" = "";
-"unlimited_photopick_analysis" = "";
-"additional_data_advantage" = "";
+"server_under_maintenance" = "lifebox hat derzeit Wartungsarbeiten, bitte versuchen Sie es später erneut.";
+"unlimited_photopick_analysis" = "Unbegrenztes PhotoPick Guthaben!";
+"data_advantage_short" = "Zusätzliches Datenpaket";
+"additional_data_advantage" = "Zusätzliches Datenpaket";
+"connection_problem_occured" = "Verbindungsfehler. Bitte versuchen Sie es später erneut.";
+"turkcell_purchase_popup_title" = "%@";
+"mid_user" = "lifebox Standart+";
+"instapick_no_available_units_left" = "Keine Analyserechte übrig";
+"middle_user" = "lifebox Standart+";
+"lifebox_middle" = "lifebox Standart+";
+"lifebox_standart" = "lifebox Standart";
+"account_detail_middle_title" = "Mit Standart+ Mitgliedschaft können Sie alle erweiterten Funktionen der lifebox nutzen.";
+"account_detail_middle_description" = "Sie können diese Funktionen nicht nutzen, wenn Sie die Mitgliedschaft bei Standart+ beenden.";
+"account_detail_standart_title" = "Sie verwenden lifebox als Ihr Standartkonto.";
+"account_detail_standart_description" = "Mit lifebox Standart können Sie folgende Funktionen nutzen.";
+
+/*AnalyzeHistoryController*/
+"instapick_see_details" = "Holen Sie sich Premium";
+"store_in_high_quality" = "Sichern Sie Ihre Erinnerungen in hoher Qualität";
+"5_photopick_analysis" = "5 PhotoPick-Analyse Guthaben";
+"10_photopick_analysis" = "10 PhotoPick-Analyse Guthaben";
+"data_package_for_turkcell" = "Zusätzliches Datenpaket";
+"delete_duplicated_contacts" = "Löschen Sie Ihre wiederholenden Kontakte aus Ihren Kontakten!";
+"leave_middle_membership" = "Beenden Sie Ihre Standartmitgliedschaft";
+"leave_middle_turkcell" = "Um das Paket zu stornieren, schreiben Sie bitte ''IPTAL ‎LİFEBOX STANDARD+'' und senden die Nachricht an 2200.";
+"package_FWI_cancel_text" = "";
+"package_jamaica_cancel_text" = "";
+"feature_digicell_cancel_text" = "";
+"terms_and_use_etk_checkbox" = "Hiermit erkläre ich mich damit einverstanden, kommerzielle E-Mails zu erhalten, um über vorteilhafte Produkte und Dienstleistungen von Turkcell und seiner Konzerngesellschaften informiert zu werden, sofern und bis ich gemäß Gesetz Nr. 6563 und anderen anwendbaren Gesetzen etwas anderes beantrage.";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell und seiner Konzerngesellschaften informiert";
+"terms_and_use_etk_link_commercial_email_messages" = "kommerzielle E-Mails";
+"commercial_email_messages" = "SCHRIFTLICHE ZUSTIMMUNG FÜR KOMMERZIELLE E-MAILS\n\nHiermit erkläre ich mich damit einverstanden, dass ich Turkcell und seinen Konzerngesellschaften mein Einverständnis erteile, kommerzielle E-Mails (die Daten beinhaltenden Nachrichten, Stimmen und Videos, die zu kommerziellen Zwecken gesendet und auf elektronischem Wege mit Mitteln wie Telefon, Call-Center, Faxübertragung, Autodialing-Gerät, Smart Sound Recorder, E-Mail, Kurzmitteilungssystem übertragen werden) über meine Kontaktdaten, die ich bei der Anmeldung von lifebox angegeben habe oder bereits bei Turkcell und ihren Konzerngesellschaften im Besitz sind, an mich zu senden, um verschiedene neue Produkte und Dienstleistungen zu bewerben und zu vermarkten, sowie allgemeine/besondere Möglichkeiten anzukündigen, die Turkcell und seine Konzerngesellschaften und/oder Drittunternehmen anbieten, mit denen sie gemäß der Gesetzesnummer 6563 über die Regulierung des elektronischen Geschäftsverkehrs (\"das Gesetz\") zusammenarbeiten sowie die Bestimmungen über kommerzielle Kommunikation und kommerzielle elektronische Postnachrichten (\"die Verordnung\") auf unbefristeter Basis, bis ich von meinem Recht Gebrauch mache, solche Nachrichten zu verweigern, selbst wenn mein Abonnementvertrag läuft ab.\n\nKommerzielle E-Mails, die von Betreibern, die dem Gesetz Nr. 5809  über elektronische Kommunikation unterliegen, an ihre Abonnenten und Benutzer ausschließlich zur Werbung und Vermarktung ihrer eigenen Produkte und Dienstleistungen oder zur Einführung ihres Geschäfts gesendet werden, sind gemäß den Verordnungen ausgenommen. Daher stimme ich hiermit zu, dass die Einwilligung, die ich oben gegeben habe, unabhängig von der Einwilligung ist, die ich dem Betreiber, bei dem ich Abonnent/Nutzer bin, im Zusammenhang mit der Werbung für seine Produkte und Dienstleistungen gegeben hat und dass dieser Betreiber dies tun muss berechtigt sein, kommerzielle E-Mail-Nachrichten zu Zwecken wie Werbung, Vermarktung seiner eigenen Produkte und Dienstleistungen im Rahmen der Einwilligung zu versenden, die ich dem Betreiber, bei dem ich Abonnent bin, erteilte, auch wenn ich die unter diesem Dokument erteilte Einwilligung widerrufe Ich über mein Recht aus, solche Nachrichten gemäß dem Gesetz und den Vorschriften abzulehnen, und dass mir bekannt ist, dass ich auch die kommerziellen E-Mails meines Betreibers ablehnen kann.";
+"NSLocationAlwaysUsageDescription" = "";
+"NSPhotoLibraryAddUsageDescription" = "";
+"NSPhotoLibraryUsageDescription" = "";
+
+/*Usage Info*/
+"package_space_details" = "";
+"package_renew_date" = "";
+"percentage_used" = "";
+"used_and_left_space" = "";
+"percentage_used_two_lines" = "";
+"my_usage_storage" = "";

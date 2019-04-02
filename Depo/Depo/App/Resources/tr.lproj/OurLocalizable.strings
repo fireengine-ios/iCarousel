@@ -832,7 +832,7 @@
 "there_are_no_albums" = "Hiç albüm yok";
 "instapick_selection_analyzes_left_max" = "%d fotoğraf seçtin\n(1 sorguda seçebileceğin en yüksek sayı)";
 "free_trial_title_label" = "PhotoPick ile Analiz Et!";
-"free_trial_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Üstelik daha çok dene diye sınırlı bir süre için ücretsiz!";
+"free_trial_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Üstelik senin için sınırsız!";
 "instapick_under_construction" = "Daha iyi bir deneyim yaşaman için PhotoPick'i iyileştiriyoruz 😉";
 "instapick_unsupported_file_type" = "Seçmiş olduğun fotoğraflar desteklenmeyen bir formatta. Başka fotoğraflar seçerek PhotoPick deneyimini yaşamaya devam edebilirsin.";
 "work_will_introduced" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
@@ -864,7 +864,7 @@
 "instapick_see_details" = "Premium Ol";
 "store_in_high_quality" = "Anılarını yüksek kalitede yedekle";
 "5_photopick_analysis" = "5 PhotoPick Analiz Hakkı";
-"10_photopick_analysis" = "10 PhotoPick Analiz Hakkı";
+"10_photopick_analysis" = "+10 PhotoPick Analiz Hakkı";
 "data_package_for_turkcell" = "Ek data paketi";
 "delete_duplicated_contacts" = "Rehberindeki tekrarlayan kontakları sil!";
 "leave_middle_membership" = "Standart+ üyeliğini sonlandır";
@@ -872,7 +872,18 @@
 "package_FWI_cancel_text" = "package_FWI_cancel_text";
 "package_jamaica_cancel_text" = "package_jamaica_cancel_text";
 "feature_digicell_cancel_text" = "feature_digicell_cancel_text";
-"terms_and_use_etk_checkbox" = "";
-"terms_and_use_etk_link_turkcell_and_group_companies" = "";
-"terms_and_use_etk_link_commercial_email_messages" = "";
-"commercial_email_messages" = "";
+"terms_and_use_etk_checkbox" = "Turkcell ve Grup Şirketleri’nin avantajlı ürün ve hizmetlerden haberdar olmak için 6563 sayılı Kanun ve diğer ilgili mevzuat uyarınca aksi tarafımca belirtilene kadar ticari elektronik ileti almak istiyorum.";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell ve Grup Şirketleri";
+"terms_and_use_etk_link_commercial_email_messages" = "ticari elektronik ileti";
+"commercial_email_messages" = "TİCARİ ELEKTRONİK İLETİ İZNİ HAKKINDA BİLGİLENDİRME\n\nlifebox uygulamasına üyelik sırasında verdiğim veya Turkcell ve Grup Şirketleri nezdinde bulunan iletişim bilgilerim aracılığı ile Turkcell ve Grup Şirketleri’ne ve/veya işbirliği içerisinde olduğu kuruluşlara ilişkin çeşitli ve yeni ürün-hizmetlerin tanıtım ve pazarlanması amacıyla ve genel/özel imkanların duyurulması için Turkcell ve Grup Şirketleri’nce tarafıma 6563 sayılı Elektronik Ticaretin Düzenlenmesi Hakkında Kanun ( “Kanun”) ve Ticari İletişim ve Ticari Elektronik İletiler Hakkında Yönetmelik ( “Yönetmelik”) çerçevesince ticari elektronik iletiler (telefon, çağrı merkezleri, faks, otomatik arama makineleri, akıllı ses kaydedici sistemler, elektronik posta, kısa mesaj hizmeti gibi vasıtalar kullanılarak elektronik ortamda gerçekleştirilen ve ticari amaçla gönderilen veri, ses ve görüntü içerikli iletileri)  gönderilmesine  kullanıcı sözleşmesi sona erse dahi reddetme hakkımı kullanıncaya kadar süresiz olarak geçerli şekilde onayım olduğunu kabul ederim.\n \nYönetmelik uyarınca 5809 sayılı Elektronik Haberleşme Kanunu kapsamındaki işletmecilerin abone ve kullanıcılarına; münhasıran kendi mal ve hizmetlerini tanıtmak, pazarlamak ya da işletmesini tanıtmak amacıyla gönderdiği ticari elektronik iletiler istisna kapsamındadır. Bu sebeple yukarıda verdiğim onayın abonesi/kullanıcısı olduğum işletmeci şirkete verdiğim kendi ürün ve hizmetlerinin tanıtımına ilişkin onaydan bağımsız ve ayrı bir onay olduğunu ve reddetme hakkımı kullanarak Kanun ve Yönetmelik kapsamında işbu metin ile vermekte olduğum onayı iptal etsem bile abonesi olduğum  işletmeciye verdiğim onay dahilinde, bu işletmeciden kendi mal ve hizmetlerine ilişkin tanıtım, pazarlama vb. amaçları içeren ticari elektronik ileti gelebileceğini, işbu ticari elektronik iletileri de ayrıca reddetme imkanım olduğunu bildiğimi kabul ederim.";
+"NSLocationAlwaysUsageDescription" = "Lokasyonunuz, arka planda yedekleme yapabilmek için kullanılacaktır.";
+"NSPhotoLibraryAddUsageDescription" = "Fotoğraf ve videolarınızı galerinize indirebilmek için izniniz gerekli";
+"NSPhotoLibraryUsageDescription" = "Fotoğraf ve videolarını yedekleyebilmek için galeri iznin gerekiyor";
+
+/*Usage Info*/
+"package_space_details" = "";
+"package_renew_date" = "";
+"percentage_used" = "";
+"used_and_left_space" = "";
+"percentage_used_two_lines" = "";
+"my_usage_storage" = "";

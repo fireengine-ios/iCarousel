@@ -668,8 +668,8 @@
 "Become Premium" = "Devino Premium";
 "Become Premium Member!" = "Devino Membru Premium!";
 "leave_premium_membership" = "Renunță la Membru Premium";
-"Standard User" = "Utilizator Standard";
-"Premium User" = "Cont Premium";
+"Standard User" = "lifebox Standard";
+"Premium User" = "lifebox Premium";
 "lifebox Premium" = "lifebox Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "Poți beneficia de mai multe avantaje, ca de exemplu eliminarea duplicatelor din Contacte al dispozitivului tău, fiind membru Premium.";
 
@@ -742,11 +742,11 @@
 "my_storage_usage" = "%1$@ din %2$@ au rămas";
 "package_section_title" = "Actualizează-ți spațiul de stocare";
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "Ești înregistrat în lifebox ca utilizator standard și amintirile tale vor fi păstrate în calitate înaltă. Ți-ai dori să devii utilizator Premium ca să poți stoca amintirile în calitate originală și să beneficiezi de toate avantajele Premium?\n";
-"sync_page_pop_up" = "Ești înregistrat în lifebox ca utilizator standard și amintirile tale vor fi păstrate în calitate înaltă. Ți-ai dori să devii utilizator Premium ca să poți stoca amintirile în calitate originală și să beneficiezi de toate avantajele Premium?";
+"home_page_pop_up" = "Ai vrea să devii membru Premium, pentru a putea stoca amintirile tale în calitatea originală și a avea acces la toate opțiunile premium?";
+"sync_page_pop_up" = "Ai vrea să devii membru Premium, pentru a putea stoca amintirile tale în calitatea originală și a avea acces la toate opțiunile premium?";
 "ok_for_upgrade" = "Da, Actualizează";
 "no_for_upgrade" = "Nu, sunt bine așa";
-"uploded_photos_high_quality" = "Ești înregistrat în lifebox ca utilizator standard și amintirile tale vor fi păstrate în calitate înaltă. Ți-ai dori să devii utilizator Premium ca să poți stoca amintirile în calitate originală și să beneficiezi de toate avantajele Premium?";
+"uploded_photos_high_quality" = "Ai vrea să devii membru Premium, pentru a putea stoca amintirile tale în calitatea originală și a avea acces la toate opțiunile premium?";
 "NSFaceIDUsageDescription" = "Această aplicație a fost proiectată să utilizeze Face ID pentru a-ți spori securitatea";
 
 /*AnalyzeHistoryController*/
@@ -755,7 +755,7 @@
 "feature_albanian_cancel_text" = "Poți utiliza opțiunii Premium în continuare gratuit, atâta timp cât ești utilizator ALBtelecom";
 "no_analyses_left_title" = "nu au mai rămas analize";
 "no_analyses_left_message" = "Nu fi supărat, încă mai poți cumpăra pachet nou pentru a analiza fotografiile tale!";
-"no_analyses_left_button" = "Cumpără PhotoPick";
+"no_analyses_left_button" = "Devino Premium";
 "analyze_history_empty_title" = "Încă nu ai început analiza fotografiilor tale?";
 "analyze_history_empty_subtitle" = "Pornește acum opțiunea de analiză a fotografiilor, pentru a afla care va avea cel mai mare impact pe rețelele de socializare";
 "analyze_history_analyze_left" = "Analize au rămas";
@@ -803,14 +803,14 @@
 "connected_with_instagram_name" = "Conectare cu Instagram ca";
 "continue_without_connecting" = "Continuă fără conectare";
 "connected_accounts" = "Conturile conectate";
-"analyze_history_free_text" = "Gratuit pentru timp limitat";
+"analyze_history_free_text" = "Nelimitat pentru tine";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "Pentru a cumpăra pachetul PhotoPick, e nevoie să actualizezi aplicația lifebox.";
 "instapick_upgrade_popup_button" = "Actualizare";
 "instapick_upgrade_popup_no" = "Nu";
 "instapick_analysis_left" = "Actualizarea a rămas: %1$d / %2$d ";
-"instapick_unlimited_analysis" = "Gratuit pentru timp limitat";
+"instapick_unlimited_analysis" = "Nelimitat pentru tine";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
@@ -824,18 +824,58 @@
 "there_are_no_albums" = "Aici nu sunt albume";
 "instapick_selection_analyzes_left_max" = "Ai selectat %d fotografii\n(numărul maximal posibil de selectat)";
 "free_trial_title_label" = "Analizează cu PhotoPick";
-"free_trial_detail_label" = "Descoperă care poză anume va avea cel mai mare succes, analizează cu PhotoPick pentru mai multe like-uri! Mai testează gratuit o perioadă limitată de timp!";
+"free_trial_detail_label" = "Descoperă care poză va avea cel mai înalt scor, fă analiză prin PhotoPick pentru a avea mai multe like-uri! Nelimitat, doar pentru tine!";
 "instapick_under_construction" = "Facem imbunatatiri pe PhotoPick pentru o experienta mai buna 😉";
 "instapick_unsupported_file_type" = "Fotografiile pe care le-ați selectat sunt în format neacceptat. Puteți continua experiența PhotoPick selectând alte fotografii.";
 "work_will_introduced" = "La moment se efectuiază lucrări de întreținere a lifebox, te rugăm să încerci mai târziu.";
-"facebook_remove_connection_warning_title" = "";
-"dropbox_remove_connection_warning_title" = "";
-"facebook_remove_connection_warning_message" = "";
-"dropbox_remove_connection_warning_message" = "";
+"facebook_remove_connection_warning_title" = "Ești pe cale să elimini conexiunea ta Facebook.";
+"dropbox_remove_connection_warning_title" = "Ești pe cale să elimini conexiunea ta Dropbox.";
+"facebook_remove_connection_warning_message" = "Ești sigur că vrei să elimini conexiunea ta Facebook?";
+"dropbox_remove_connection_warning_message" = "Ești sigur că vrei să elimini conexiunea ta Dropbox?";
 "remove_connection" = "Elimină conexiunea";
-"you_are_connected" = "";
+"you_are_connected" = "Ești conectat";
 "insta_pick_picture_not_found" = "Poza nu a \nfost găsită";
 "phone_updated_needs_login" = "Ați actualizat cu succes numărul dvs. de telefon, conectați-vă cu datele dvs. de acreditare";
-"server_under_maintenance" = "";
-"unlimited_photopick_analysis" = "";
-"additional_data_advantage" = "";
+"server_under_maintenance" = "La moment se duc lucrări de mentenanță, te rugăm să încerci mai târziu.";
+"unlimited_photopick_analysis" = "Analiză PhotoPick nelimitată";
+"data_advantage_short" = "Avantaje Data adiționale";
+"additional_data_advantage" = "Avantaje Data adiționale";
+"connection_problem_occured" = "E o eroare de conexiune la moment, încearcă mai târziu";
+"turkcell_purchase_popup_title" = "%@";
+"mid_user" = "lifebox Standard+";
+"instapick_no_available_units_left" = "Nu a mai rămas nici o analiză";
+"middle_user" = "lifebox Standard+";
+"lifebox_middle" = "lifebox Standard+";
+"lifebox_standart" = "lifebox Standard";
+"account_detail_middle_title" = "Cu abonamentul tău Standard+, poți beneficia de opțiuni avansate";
+"account_detail_middle_description" = "Nu vei mai putea beneficia de opțiunile avansate Standard+, din moment ce anulezi abonamentul tău";
+"account_detail_standart_title" = "Ești un utilizator Standard lifebox";
+"account_detail_standart_description" = "Cu abonamentul tău, beneficiezi de opțiuni standarde";
+
+/*AnalyzeHistoryController*/
+"instapick_see_details" = "Devino Premium";
+"store_in_high_quality" = "Fă copii de rezervă de calitate înaltă";
+"5_photopick_analysis" = "5 analize PhotoPick";
+"10_photopick_analysis" = "+10 analize PhotoPick";
+"data_package_for_turkcell" = "Avantaje data adiționale";
+"delete_duplicated_contacts" = "Elimină contactele dublicate din directoriul Telefon";
+"leave_middle_membership" = "Renunță la pachetul Standard+";
+"leave_middle_turkcell" = "Trimite textul IPTAL LIFEBOX STANDART+ la 2200, pentru a anula pachetul tău ";
+"package_FWI_cancel_text" = "";
+"package_jamaica_cancel_text" = "";
+"feature_digicell_cancel_text" = "";
+"terms_and_use_etk_checkbox" = "Până la o notificare contrară întreprinsă de mine  conform Legii numărul 6563 şi legislațiilor  relevante, doresc să primesc mesaje electronice comerciale cu privire la produsele şi serviciile avantajoase ale lui Turkcell şi Societățile Grupului .";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell şi Societățile Grupului";
+"terms_and_use_etk_link_commercial_email_messages" = "mesaje electronice comerciale";
+"commercial_email_messages" = "INFORMARE PRIVIND APROBAREA MESAJELOR ELECTRONICE COMERCIALE\n\nAccept că mi-am exprimat consimțământul pe termen nelimitat inclusiv şi ulterior expirării contractului de utilizator, până la exercitarea dreptului de respingere, pentru a-mi fi trimise din partea lui Turkcell ve Grup Şirketleri prin intermediul datelor de contact furnizate de mine în momentul autentificării în aplicația lifebox sau a  celorlalte date de contact  care îmi aparțin, existente la Turkcell  şi Grup Şirketleri,  mesaje  electronice comerciale cu scop publicitar şi  de marketing aferente diverselor şi noilor produse-servicii şi anunțării  cu privire la posibilitățile generale/speciale ale lui Turkcell şi Grup Şirketleri şi/sau la întreprinderile cu care acesta din urmă colaborează   (comunicări cu conținut de date, audio şi video, efectuate în mediu electronic  şi trimise în scop comercial prin intermediul mijloacelor cum ar fi telefon, centre  de apel, fax, aparate automate de apelare, sisteme inteligente de înregistrare audio, poștă electronică, sms)  cu respectarea prevederilor Legii numărul 6563 cu Privire la Reglementarea Comerţului Electronic („Lege”)  şi Regulamentul cu Privire la Comunicări Comerciale şi Mesaje  Electronice Comerciale („Regulament”)\n\nConform Regulamentului, mesajele electronice ale operatoriilor economici care se încadrează în incidența Legii Comunicațiilor Electronice numărul 5809, trimise abonaților şi utilizatorilor săi în scopul promovării şi  marketingul produselor lor individuale sau publicității întreprinderilor sale, sunt scutite de prevederile legii. Din acest motiv, aprob faptul că acceptul acordat de mine în rândurile precedente este independent şi separat de acceptul acordat societăţii operatoare al cărui abonat/utilizator sunt, cu privire la promovarea produselor şi serviciilor sale şi chiar şi în cazul anulării prin exercitarea  dreptului de respingere prevăzut de Lege şi  Regulament a aprobării mele  acordate prin prezentul  text, în baza aprobării mele acordate operatorului al cărui abonat  s-ar putea să primesc de la operatorul respectiv mesaje electronice comerciale care conțin scopuri precum promovarea, negocierea etc. cu privire la mărfurile şi serviciile proprii, de asemenea cunosc faptul că dețin dreptul de a respinge şi aceste mesaje electronice comerciale.";
+"NSLocationAlwaysUsageDescription" = "Locația ta va fi folosită pentru sincronizarea de fundal";
+"NSPhotoLibraryAddUsageDescription" = "E nevoie de acces pentru sincronizarea pozelor și fișierelor video";
+"NSPhotoLibraryUsageDescription" = "Pentru vizualizarea pozelor/video în aplicație, e nevoie de acces la biblioteca de fotografii";
+
+/*Usage Info*/
+"package_space_details" = "%1$@ / %2$@ utilizat (doar pentru lifebox)";
+"package_renew_date" = "Va fi reînnoit la: %@";
+"percentage_used" = "%.0f%% utilizat";
+"used_and_left_space" = "%1$@ / %2$@ utilizat";
+"percentage_used_two_lines" = "%.0f%%\nutilizat";
+"my_usage_storage" = "Spațiul de stocare de utilizare";
