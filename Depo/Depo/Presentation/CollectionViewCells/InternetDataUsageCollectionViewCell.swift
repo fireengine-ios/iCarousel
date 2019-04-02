@@ -60,14 +60,18 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
         
         let usedVolume: CGFloat
         if let remaining = model.remaining, let total = model.total {
-            usedVolume = CGFloat((remaining / total) * 100).rounded(.toNearestOrAwayFromZero)
+            let usedByted = (total - remaining) / total
+            usedVolume = CGFloat(usedByted * 100).rounded(.toNearestOrAwayFromZero)
         } else {
             usedVolume = 0
         }
         
+        progressView.progress = Float(usedVolume)
+        
         usedPercentageLabel.text =  String(format: TextConstants.usagePercentage, usedVolume)
         
         nameLabel.text = model.offerName
+        
         ///in some cells this label collapsed, lines below fix this
         let textHeight: CGFloat = 25
         let maxNameLabelWidth = self.frame.width - String(format: TextConstants.usagePercentage, usedVolume)

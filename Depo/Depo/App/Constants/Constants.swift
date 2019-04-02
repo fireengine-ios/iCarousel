@@ -667,6 +667,7 @@ struct TextConstants {
     static let pullToRefreshSuccess = NSLocalizedString("Success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - usageInfo
+    static let myUsageStorage = NSLocalizedString("my_usage_storage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let usageInfoPhotos = NSLocalizedString("%ld photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let usageInfoVideos = NSLocalizedString("%ld videos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let usageInfoSongs = NSLocalizedString("%ld songs", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -677,7 +678,8 @@ struct TextConstants {
     static let packageSpaceDetails = NSLocalizedString("package_space_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let renewDate = NSLocalizedString("package_renew_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let usagePercentage = NSLocalizedString("percentage_used", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let usagePercentageTwoLines = NSLocalizedString("percentage_used_two_lines", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     // MARK: - offers
     static let descriptionLabelText = NSLocalizedString("*Average figure. Total number of documents depends on the size of each document.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
