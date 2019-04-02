@@ -151,7 +151,8 @@ class CardsManager: NSObject {
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
+            print("operation is started: \(type.rawValue)")
             if (!self.canShowPopUpByDepends(type: type)) {
                 return
             }
@@ -193,7 +194,7 @@ class CardsManager: NSObject {
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int) {
         hidePopUpsByDepends(type: type)
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
             
             for notificationView in self.foloversArray {
@@ -231,9 +232,9 @@ class CardsManager: NSObject {
     }
 
     func stopOperationWithType(type: OperationType) {
-        DispatchQueue.main.async {
-            print("operation stopped ", type.rawValue)
+        DispatchQueue.toMain {
             self.progresForOperation[type] = nil
+            print("operation stopped ", type.rawValue)
             for notificationView in self.foloversArray {
                 notificationView.stopOperationWithType(type: type)
             }
@@ -310,7 +311,7 @@ class CardsManager: NSObject {
         case .freeAppSpace, .freeAppSpaceLocalWarning:
             let operations: [OperationType] = [.sync, .upload]
             for operation in operations {
-                if (progresForOperation[operation] != nil) {
+                if progresForOperation[operation] != nil {
                     return false
                 }
             }

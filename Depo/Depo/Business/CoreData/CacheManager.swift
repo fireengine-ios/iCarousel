@@ -26,18 +26,24 @@ final class CacheManager {
                                                          type: .imageAndVideo)
     private(set) var processingRemoteItems = false
     private(set) var processingLocalItems = false
+    private(set) var isProcessing = false
     private(set) var isCacheActualized = false
     
     let delegates = MulticastDelegate<CacheManagerDelegate>()
     
     
     func actualizeCache(completion: VoidHandler?) {
-        CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
+        if !isProcessing {
+            CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
+        }
+        
         isCacheActualized = false
+        processing = true
         MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
             if isNoRemotes {
                 self?.startAppendingAllRemotes(completion: { [weak self] in
                     self?.startAppendingAllLocals(completion: {
+                        self?.isProcessing = false
                         self?.isCacheActualized = true
                         CardsManager.default.stopOperationWithType(type: .preparePhotosQuickScroll)
                         self?.delegates.invoke { $0.didCompleteCacheActualization() }
@@ -46,6 +52,7 @@ final class CacheManager {
                 })
             } else {
                 self?.startAppendingAllLocals(completion: {
+                    self?.isProcessing = false
                     self?.isCacheActualized = true
                     CardsManager.default.stopOperationWithType(type: .preparePhotosQuickScroll)
                     self?.delegates.invoke { $0.didCompleteCacheActualization() }
