@@ -10,7 +10,7 @@ import Foundation
 
 struct RouteRequests {
     
-    private enum ServerEnvironment {
+    enum ServerEnvironment {
         case test
         case preProduction
         case production
@@ -18,9 +18,9 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static let currentServerEnvironment = ServerEnvironment.production
+    private static var currentServerEnvironment = SettingsBundleHelper.preferredEnvironment()
     
-    static let baseUrl: URL = {
+    static var baseUrl: URL = {
         switch currentServerEnvironment {
         case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/api/")!
         case .preProduction: return URL(string: "https://adepotest.turkcell.com.tr/api/")!

@@ -36,7 +36,7 @@ final class AppConfigurator {
         clearTokensIfNeed()
         logoutIfNeed()
         prepareSessionManager()
-        setVersionAndBuildNumber()
+        SettingsBundleHelper.setVersionAndBuildNumber()
         configureSDWebImage()
         setupIAPObserver()
         startMenloworks(with: launchOptions)
@@ -142,12 +142,9 @@ final class AppConfigurator {
         static let AppVersionKey = "version_preference"
     }
     
-    private static func setVersionAndBuildNumber() {
-        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-        UserDefaults.standard.set(version, forKey: "version_preference")
-        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
-        UserDefaults.standard.set(build, forKey: "build_preference")
-    }
+    
+    
+   
     
     private static func startCurio(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         guard let appLaunchOptions = launchOptions else {
