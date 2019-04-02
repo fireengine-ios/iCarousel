@@ -128,7 +128,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             return
         }
         dataSource.isSelectingMode = true
-        updateVisibleCells()
+        deselectVisibleCells()
         
         if let indexPath = indexPath {
             dataSource.selectedIndexPaths.insert(indexPath)
@@ -145,13 +145,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private func stopEditingMode() {
         dataSource.isSelectingMode = false
         dataSource.selectedIndexPaths.removeAll()
-        updateVisibleCells()
+        deselectVisibleCells()
         bottomBarManager.hide()
         navBarManager.setDefaultMode()
         homePageNavigationBarStyle()
     }
     
-    private func updateVisibleCells() {
+    private func deselectVisibleCells() {
         collectionView.visibleCells.forEach { cell in
             (cell as? PhotoVideoCell)?.set(isSelected: false, isSelectionMode: dataSource.isSelectingMode, animated: true)
         }
