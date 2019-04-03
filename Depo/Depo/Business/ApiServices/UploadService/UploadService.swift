@@ -428,6 +428,7 @@ final class UploadService: BaseRequestService {
                                 self.trackUploadItemsFinished(items: itemsToSync)
                                 self.stopTracking()
                                 success()
+                                ItemOperationManager.default.syncFinished()
                                 self.logSyncSettings(state: "FinishedSyncFileList")
                                 return
                             }
