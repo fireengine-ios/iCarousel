@@ -71,7 +71,7 @@
 "You can open settings and cancel subscption." = "يمكن إلغاء الاشتراك بفتح الإعدادات.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "يرجى إرسال \"Iptal LIFEBOX %@\" إلى 2222 لإلغاء الحزمة.";
 "You can visit iTunes to cancel your subscription" = "يمكن زيارة iTunes لإلغاء الحزمة.";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "يحزننا ما يحدث! لكن إن قررت إعادة التشيط، فنحن هنا من أجلك :) إن كنت متأكداً مما تفعله أرسل كلمة \"STOP\" إلى الرقم 2.";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB ";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "يمكن لمشتركي لايف سل وبلاتينوم إرسال كلمة LIFE CANCEL إلى 3030 لإلغاء عضويتهم، أما باقي الزبائن، فيمكنهم إرسال LIFEBOX CANCEL إلى الرقم نفسه 3030 لإلغاء عضويتهم.";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "لإلغاء حزمة لايف بوكس 50 غيغابايت، أرسل 50VYLK فى رسالة نصيّة قصيرة إلى 8080، ولإلغاء حزمة لايف بوكس 500 غيغابايت ارسل 500VYLK فى رسالة نصيّة قصيرة إلى 8080.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "يمكن لمشتركي لايف سل وبلاتينوم الاكتفاء بإرسال كلمة LIFE يليها مساحة التخزين التي يرغبون بها إلى الرقم 3030، أما باقي الزبائن فيمكنهم إرسال LIFEBOX 50GB للحصول على حزمة لايف بوكس 50 غيغابايت، وإرسال LIFEBOX 500GB للحصول على حزمة لايف بوكس 500 غيغابايت، وإرسال LIFEBOX 2.5TB للحصول على حزمة لايف بوكس 2.5 تيرابايت، وذلك كله إلى الرقم 3030 لتفعيل عضويتهم.";
@@ -712,7 +712,7 @@
 "package_lifecell_cancel_text" = "يمكنك إرسال رسالة نصية قصيرة إلى 8080، وتكتب فيها “50VYKL” من أجل إلغاء لايف بوكس 50 جيجا، ولإلغاء لايف بوكس 500 جيجا أرسل رسالة مكتوب بها“500VYKL” ";
 "package_promo_cancel_text" = "يرجى استخدام قائمة الاتصال بنا لإبلاغنا بمعالجة طلبك.";
 "package_kktcell_cancel_text" = "عملاء بلاتينيوم ولايف سيل يمكنهم إرسال \" LIFE CANCEL\"، والعملاء الآخرين يمكنهم إرسال \" LIFEBOX CANCEL\" إلى 3030.";
-"package_moldcell_cancel_text" = "مم، لا نصدق أنك تفعل هذا! عندما تقرر إعادة تنشيطه، سنكون هنا من أجلك :) إذا كنت تصر، فأرسل \"STOP\" إلى 2";
+"package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB ";
 "package_life_cancel_text" = "يمكنك إرسال رسالة نصية قصيرة إلى 6767، وتكتب فيها “Stop1” من أجل إلغاء لايف بوكس 25 جيجا، أما“Stop2” من أجل إلغاء لايف بوكس 100 جيجا، أما“Stop3” من أجل إلغاء لايف بوكس 500 جيجا";
 "package_paycell_all_access_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifebox.com.";
 "package_paycell_slcm_cancel_text" = "لإلغاء حزمتك، يرجى زيارة الموقع الإلكتروني www.mylifebox.com.";
@@ -891,3 +891,4 @@
 "used_and_left_space" = "";
 "percentage_used_two_lines" = "";
 "my_usage_storage" = "";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "";

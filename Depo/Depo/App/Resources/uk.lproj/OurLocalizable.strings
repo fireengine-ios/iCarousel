@@ -69,7 +69,7 @@
 "You can open settings and cancel subscption." = "Ви можете відкрити налаштування та скасувати підписку.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Будь ласка, текст \"Iptal LIFEBOX %@\" до 2200, щоб скасувати ваш пакет";
 "You can visit iTunes to cancel your subscription" = "Ви можете відвідати iTunes, щоб скасувати ваш пакет";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Хм, не віриш, що ти робиш це! Коли ви вирішите його повторно активувати, ми будемо тут для вас :) Якщо ви наполягаєте, відправте \"STOP\" до 2";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Клієнти Platinum та lifeecell можуть відправляти LIFE CANCEL, інші клієнти можуть відправити LIFEBOX CANCEL до 3030, щоб скасувати їх членство";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Щоб деактивувати lifebox 50GB, надішліть SMS з текстом 50VYKL, для lifebox 500GB, будь-ласка, відправте SMS з текстом 500VYKL на номер 8080.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Клієнти Platinum та lifeecell можуть відправляти LIFE, інші клієнти можуть надіслати LIFEBOX 50GB для lifebox 50GB, LIFEBOX 500GB для lifebox 500GB та LIFEBOX 2.5TB для lifebox 2.5TB до 3030 для початку членства";
@@ -700,7 +700,7 @@
 "package_lifecell_cancel_text" = "Щоб відмінити підписку lifebox 50ГБ, відправте СМС з текстом 50VYKL, підписку lifebox 500ГБ - відправте СМС з текстом 500VYKL на номер 8080";
 "package_promo_cancel_text" = "Щоб надіслати запит, будь ласка, скористуйтеся меню Залишити відгук";
 "package_kktcell_cancel_text" = "Щоб відмінити підписку, клієнти Платінум клубу та абоненти lifecell можуть відправити LIFE CANCEL, інші користувачі можуть відправити LIFEBOX CANCEL на номер 3030";
-"package_moldcell_cancel_text" = "Хм, неможливо повірити, що ви це робите! Коли ви вирішите повернутися, ми будемо на вас чекати:) Якщо ви наполягаєте, відправте \"STOP\" на 2";
+"package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
 "package_life_cancel_text" = "Щоб деактивувати lifebox  25ГБ, будь ласка, відправте СМС з текстом \"Stop1\", деактивувати lifebox  100ГБ – СМС з текстом \"Stop2\", деактивувати lifebox  500ГБ – СМС з текстом \"Stop3\" на номер 6767";
 "package_paycell_all_access_cancel_text" = "Ви можете відмінити підписку через www.mylifebox.com";
 "package_paycell_slcm_cancel_text" = "Ви можете відмінити підписку через www.mylifebox.com";
@@ -879,3 +879,4 @@
 "used_and_left_space" = "";
 "percentage_used_two_lines" = "";
 "my_usage_storage" = "";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "";

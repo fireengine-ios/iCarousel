@@ -69,7 +69,7 @@
 "You can open settings and cancel subscption." = "Вы можете открыть настройки и отменить подписку.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Пожалуйста, отправьте сообщение с текстом \"Iptal LIFEBOX %@\" на номер 2222, чтобы отменить вашу подписку.";
 "You can visit iTunes to cancel your subscription" = "Войдите в iTunes, чтобы отменить подписку.";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Хмм, не могу поверить, что вы это делаете! Когда вы решите активировать его заново, мы будем рядом :) Но если вы настаиваете, отправьте “STOP” на номер 2.";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Хмм, вы действительно этого хотите? Если решите повторно активировать пакет, ждем вас с нетерпением :) А если все же хотите продолжить, отправьте SMS с цифрой 2 на номер 10010 для деактивации пакета 100 GB, либо на 50030 для пакета 500 GB";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Чтобы отменить подписку, платиновые клиенты и абоненты lifecell могут отправить SMS с текстом LIFE CANCEL на номер 3030, остальные пользователи могут отправить SMS с текстом LIFE CANCEL.";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Чтобы отключить пакет lifebox 50GB, отправьте SMS с текстом 50VYKL на номер 8080. Чтобы отключить пакет lifebox 500GB, отправьте SMS с текстом 500VYKL на номер 8080.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Чтобы зарегистрироваться, платиновые клиенты и абоненты lifecell могут отправить SMS с текстом LIFE на номер 3030. Остальные пользователи могут отправить SMS с текстом LIFEBOX 50GB для подключения пакета lifebox 50GB, LIFEBOX 500GB для подключения пакета lifebox 500GB и LIFEBOX 2.5TB для подключения пакета lifebox 2.5TB.";
@@ -702,7 +702,7 @@
 "package_lifecell_cancel_text" = "Текст отмены LifeCell подписки.";
 "package_promo_cancel_text" = "Пожалуйста, воспользуйтесь меню \"Оставить отзыв\", чтобы сообщить нам о вашем запросе.";
 "package_kktcell_cancel_text" = "Текст отмены KKTCell подписки.";
-"package_moldcell_cancel_text" = "Текст отмены Moldcell подписки.";
+"package_moldcell_cancel_text" = "Хмм, вы действительно этого хотите? Если решите повторно активировать пакет, ждем вас с нетерпением :) А если все же хотите продолжить, отправьте SMS с цифрой 2 на номер 10010 для деактивации пакета 100 GB, либо на 50030 для пакета 500 GB.";
 "package_life_cancel_text" = "Текст отмены Life подписки.";
 "package_paycell_all_access_cancel_text" = "Чтобы отменить подписку на ваш пакет, пожалуйста, перейдите на www.mylifebox.com";
 "package_paycell_slcm_cancel_text" = "Чтобы отменить подписку на ваш пакет, пожалуйста, перейдите на www.mylifebox.com";
@@ -887,3 +887,4 @@
 "used_and_left_space" = "";
 "percentage_used_two_lines" = "";
 "my_usage_storage" = "";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "";

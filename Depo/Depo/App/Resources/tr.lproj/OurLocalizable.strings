@@ -71,7 +71,7 @@
 "You can open settings and cancel subscption." = "Paketini iptal etmek için iTunes’u ziyaret edebilirsin.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Paketini iptal etmek için lütfen “IPTAL LIFEBOX %@” yazıp 2200’a gönder.";
 "You can visit iTunes to cancel your subscription" = "Paketini iptal etmek için iTunes’u ziyaret edebilirsin.";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Bu yaptığına inanamıyorum! Tekrar etkinleştirmeye karar verdiğinde senin için burada olacağız :) Bunu yapmakta kararlıysan “STOP” yaz 2’e gönder.";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, bunu yaptığınıza inanamıyoruz! Yeniden etkinleştirmek istediğinizde, sizi bekliyor olacağız :) Eğer ısrarlı iseniz, 100GB iptali için 2 yazıp 10010'a, 500GB iptali için 2 yazıp 50030'a SMS gönderin.";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Platinum ve lifecell müşterileri üyeliklerini iptal etmek için LIFE CANCEL yazarak, diğer müşteriler ise LIFEBOX CANCEL yazarak 3030’a gönderebilirler.";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "lifebox 50 GB’yi devre dışı bırakmak için 50VYKL yazarak, lifebox 500 GB için ise 500VYKL yazarak 8080’e SMS gönderin.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Platinum ve lifecell müşterileri üyeliklerini başlatmak için LIFE yazarak, diğer müşteriler ise lifebox 50 GB paketi için LIFEBOX 50GB, lifebox 500GB paketi için LIFEBOX 500GB ve lifebox 2.5TB paketi için LIFEBOX 2.5TB yazarak 3030’a SMS gönderebilirler.";
@@ -708,7 +708,7 @@
 "package_lifecell_cancel_text" = "lifebox 50 GB’yi devre dışı bırakmak için 50VYKL yazarak, lifebox 500 GB için ise 500VYKL yazarak 8080’e SMS gönderin.";
 "package_promo_cancel_text" = "Bize Ulaşın menüsünden iptal talebini bize iletebilirsin.";
 "package_kktcell_cancel_text" = "Platinum ve lifecell müşterileri üyeliklerini iptal etmek için LIFE CANCEL yazarak, diğer müşteriler ise LIFEBOX CANCEL yazarak 3030’a gönderebilirler.";
-"package_moldcell_cancel_text" = "Bu yaptığına inanamıyorum! Tekrar etkinleştirmeye karar verdiğinde senin için burada olacağız :) Bunu yapmakta kararlıysan “STOP” yaz 2’e gönder.";
+"package_moldcell_cancel_text" = "Hm, bunu yaptığınıza inanamıyoruz! Yeniden etkinleştirmek istediğinizde, sizi bekliyor olacağız :) Eğer ısrarlı iseniz, 100GB iptali için 2 yazıp 10010'a, 500GB iptali için 2 yazıp 50030'a SMS gönderin.";
 "package_life_cancel_text" = "lifebox 25GB paketini iptal etmek için lütfen “Stop1” metnini kullanarak,  lifebox 100GB paketini iptal etmek için lütfen “Stop2” metnini kullanarak, lifebox 500GB paketini iptal etmek için lütfen “Stop3” metnini kullanarak, 6767'ye SMS atın.";
 "package_paycell_all_access_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
 "package_paycell_slcm_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
@@ -887,3 +887,4 @@
 "used_and_left_space" = "";
 "percentage_used_two_lines" = "";
 "my_usage_storage" = "";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Lokasyonunuz, arka planda yedekleme yapabilmek için kullanılacaktır.";

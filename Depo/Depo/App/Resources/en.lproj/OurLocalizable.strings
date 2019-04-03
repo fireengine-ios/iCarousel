@@ -75,7 +75,7 @@
 "You can open settings and cancel subscption." = "You can visit iTunes to cancel your package.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "To cancel your package, please send an SMS to 2200 with this text: \"IPTAL LIFEBOX %@\"";
 "You can visit iTunes to cancel your subscription" = "You can visit iTunes to cancel your package";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships";
@@ -669,8 +669,8 @@
 "Please enter a valid login." = "Login denied. Please check your credentials.";
 "Please enter the text below" = "Please enter the text below";
 "facebook_photo_tags" = "Facebook Photo Tags";
-"facebook_tags_on" = "You will get your Facebook tags to lifebox when you enable this option";
-"facebook_tags_off" = "You will get your Facebook tags to lifebox when you enable this option";
+"facebook_tags_on" = "You will import your Facebook tags to lifebox when you enable this option.";
+"facebook_tags_off" = "You will import your Facebook tags to lifebox when you enable this option.";
 "facebook_tags_import" = "Please enable \"Import from Facebook\" option to use \"Facebook Tag Transfer\" feature";
 "TermsOfUseLinkText" = "TapHere";
 "launch_campaign_card_detail" = "Details";
@@ -680,7 +680,7 @@
 "Quick Scroll Preparation" = "Preparing your photos and videos";
 
 /*PremiumView*/
-"delete_duplicated_title" = "To delete all duplicated contacts from phone directory and unlock many more features, become a Premium member!";
+"delete_duplicated_title" = "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!";
 "face_recognition_title" = "To see all the faces in your gallery and unlock many more features, become a Premium member!";
 "places_title" = "To see all the places in your gallery and unlock many more features, become a Premium member!";
 "things_title" = "To see all the things in your gallery and unlock many more features, become a Premium member!";
@@ -688,22 +688,22 @@
 "month" = "Month";
 "no_details_message" = "We are processing your request. We will inform you when it is finished.";
 "please_try_again_later" = "Please try again later.";
-"Back up with Original Quality" = "Back up with Original Quality";
+"Back up with Original Quality" = "Back up in Original Quality";
 "Remove Duplicate Contacts from Your Directory" = "Remove Duplicate Contacts from Your Phone Directory";
 "Face Recognition to reach your loved one's memories" = "Face Recognition to reach your loved one's memories";
 "Place Recognition to beam you up to the memories" = "Place Recognition to beam you up to the memories";
 "Object Recognition to remember with things you love" = "Object Recognition to remember with things you love";
 "Become Premium" = "Become Premium";
-"Become Premium Member!" = "Become Premium Member!";
+"Become Premium Member!" = "Become a Premium Member!";
 "leave_premium_membership" = "Leave Premium Membership";
 "Standard User" = "lifebox Standard";
 "Premium User" = "lifebox Premium";
 "lifebox Premium" = "lifebox Premium";
-"Delete Duplicated Contacts For PremiumTitle" = "To delete all duplicated contacts from phone directory and unlock many more features, become a Premium member!";
+"Delete Duplicated Contacts For PremiumTitle" = "To delete all duplicated contacts from your phone directory and unlock many more features, become a Premium member!";
 
 /*PremiumBanner*/
-"standard_banner_message" = "Discover our Premium features that brings you better cloud storage experience!";
-"premium_banner_message" = "Discover now Premium features that brings you better cloud storage experience!";
+"standard_banner_message" = "Discover our Premium features and see how they improve your cloud storage experience!";
+"premium_banner_message" = "Discover our Premium features and see how they improve your cloud storage experience!";
 "standard_banner_title" = "lifebox Premium";
 "premium_banner_title" = "Welcome to lifebox Premium!";
 "back_up_short" = "Back Up With Original Quality";
@@ -724,16 +724,16 @@
 "package_apple_cancel_text" = "To cancel your package, please use iTunes & App Store menu in your device";
 "package_slcm_cancel_text" = "To cancel your package, please send an SMS to 2200 with this text: \"IPTAL LIFEBOX %@\"";
 "package_google_cancel_text" = "To cancel your package, please use Google Play Store";
-"package_free_of_charge_cancel_text" = "Please use Contact Us menu to inform us to process your request";
+"package_free_of_charge_cancel_text" = "Please use the Contact Us menu to inform us about your request so we can process it.";
 "package_lifecell_cancel_text" = "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080.";
-"package_promo_cancel_text" = "Please use Contact Us menu to inform us to process your request";
+"package_promo_cancel_text" = "Please use the Contact Us menu to inform us about your request so we can process it.";
 "package_kktcell_cancel_text" = "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships";
-"package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2";
+"package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
 "package_life_cancel_text" = "To deactivate lifebox 25GB please send SMS with the text “Stop1”, for lifebox 100GB please send SMS with the text “Stop2\", for lifebox 500GB please send SMS with the text “Stop3\" to the number 6767";
 "package_paycell_all_access_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "package_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
-"package_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
+"package_default_cancel_text" = "Please use the Contact Us menu to inform us about your request so we can process it'";
 
 /*Leave Premium*/
 "leave_premium_premium_description" = "You can use all the advanced features of lifebox with your Premium membership.";
@@ -743,7 +743,7 @@
 "feature_google_cancel_text" = "To cancel your package, please use Google Play Store";
 "feature_free_of_charge_cancel_text" = "Please use Contact Us menu to inform us to process your request";
 "feature_lifecell_cancel_text" = "You can continue to use Premium features for free since you are a lifecell user";
-"feature_promo_cancel_text" = "Please use Contact Us menu to inform us to process your request";
+"feature_promo_cancel_text" = "Please use the Contact Us menu to inform us about your request so we can process it.";
 "feature_kktcell_cancel_text" = "You can continue to use Premium features for free since you are a KKTCELL user";
 "feature_moldcell_cancel_text" = "You can continue to use Premium features for free since you are a Moldcell user";
 "feature_life_cancel_text" = "You can continue to use Premium features for free since you are a life:) user";
@@ -751,7 +751,7 @@
 "feature_paycell_slcm_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "feature_slcm_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
 "feature_all_access_paycell_cancel_text" = "To cancel your package, please visit www.mylifebox.com";
-"feature_default_cancel_text" = "Please use Contact Us menu to inform us to process your request";
+"feature_default_cancel_text" = "Please use the Contact Us menu to inform us about your request so we can process it.";
 
 /*PackageInfoView*/
 "my_storage" = "My Storage";
@@ -781,12 +781,12 @@
 "InstaPick" = "PhotoPick";
 "package_albanian_cancel_text" = "Albanian quota cancel text";
 "feature_albanian_cancel_text" = "You can continue to use Premium features for free since you are a ALBtelecom user";
-"no_analyses_left_title" = "No Analyzes Left";
+"no_analyses_left_title" = "No Analysis Left";
 "no_analyses_left_message" = "Don't be sad, you can still purchase new package to analyze your photos!";
 "no_analyses_left_button" = "Become Premium";
-"analyze_history_empty_title" = "Didn't you start analyzing your photos yet?";
+"analyze_history_empty_title" = "Haven't you started analyzing your photos yet?";
 "analyze_history_empty_subtitle" = "Start analyzing now to find out which photo gets the highest rank and share on social media.";
-"analyze_history_analyze_left" = "Analyses Left";
+"analyze_history_analyze_left" = "Analysis Left";
 "analyze_history_analyze_count" = "%1$d / %2$d";
 "analyze_with_instapick" = "Analyze with PhotoPick";
 "analyze_history_photos_count" = "%d photos";
@@ -800,12 +800,12 @@
 "new_insta_pick" = "New PhotoPick";
 
 /*InstaPickCard*/
-"used_before_title_label" = "PhotoPick to get bunch of likes!";
+"used_before_title_label" = "PhotoPick to get a bunch of likes!";
 "no_used_before_title_label" = "Analyze with PhotoPick!";
 "no_analysis_title_label" = "Get more PhotoPick!";
 "used_before_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! You have more analysis waiting for your photos😉";
 "no_used_before_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! You haven't tried yet?";
-"no_analysis_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Don't forget to purchase new package for more PhotoPick😉";
+"no_analysis_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Don't forget to purchase a new package for more PhotoPick😉";
 "instapick_button_has_analysis" = "Let’s Start!";
 
 /*InstaPickDetailViewController*/
@@ -816,7 +816,7 @@
 "share_on_social_media" = "Share on Social Media!";
 "picked" = "PICKED!";
 "insta_pick_analyzing_bottom" = "Enjoy your time while we analyze your photos! 😊";
-"insta_pick_analyzing_0" = "We are looking for the photo you'll get the most likes.";
+"insta_pick_analyzing_0" = "We are looking for the photo that will get the most likes.";
 "insta_pick_analyzing_1" = "You have selected beautiful photos!";
 "insta_pick_analyzing_2" = "How nice of you to share your moments with your friends!";
 "insta_pick_analyzing_3" = "Life is good with great memories!";
@@ -826,7 +826,7 @@
 "dont_show_this_again" = "Don't show this again";
 "instapick_analyze" = "Analyze with PhotoPick!";
 "connected_account" = "It works great with your connected account!";
-"instapick_description" = "If you choose to connect with your Instagram account, we'll be able to provide a personalized, much better experience by performing custom analysis on each new PhotoPick analysis.";
+"instapick_description" = "If you choose to connect with your Instagram account, we'll be able to provide a personalized, enhanced experience by performing custom analysis on each new PhotoPick.";
 "connected_with_instagram" = "Connect with Instagram";
 "connected_with_instagram_name" = "Connect with Instagram as";
 "continue_without_connecting" = "Continue without connecting";
@@ -834,7 +834,7 @@
 "analyze_history_free_text" = "Unlimited for You";
 
 /*InstapickUpgradePopup*/
-"instapick_upgrade_popup_text" = "In order to purchase PhotoPick package, you need to update your lifebox application.";
+"instapick_upgrade_popup_text" = "In order to purchase a PhotoPick package, you need to update your lifebox application.";
 "instapick_upgrade_popup_button" = "Update";
 "instapick_upgrade_popup_no" = "No";
 "instapick_analysis_left" = "Analysis Left: %1$d / %2$d";
@@ -854,8 +854,8 @@
 "free_trial_title_label" = "Analyze with PhotoPick";
 "free_trial_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Unlimited just for you!";
 "instapick_under_construction" = "We are making improvement on PhotoPick for a better experience 😉";
-"instapick_unsupported_file_type" = "Photos you have selected are in unsupported format. You can continue PhotoPick experience by selecting other photos.";
-"work_will_introduced" = "There is currently a maintenance work on lifebox, please try again later.";
+"instapick_unsupported_file_type" = "The photos you selected are in an unsupported format. You can continue the PhotoPick experience by selecting other photos.";
+"work_will_introduced" = "There is currently maintenance ongoing on lifebox, please try again later.\n";
 "facebook_remove_connection_warning_title" = "You're about to remove your Facebook connection.";
 "dropbox_remove_connection_warning_title" = "You're about to remove your Dropbox connection.";
 "facebook_remove_connection_warning_message" = "Are you sure you want to remove your Facebook connection?\n\n";
@@ -864,7 +864,7 @@
 "you_are_connected" = "You are connected";
 "insta_pick_picture_not_found" = "Picture not found";
 "phone_updated_needs_login" = "You have successfully updated your phone number, please log in with your credentials";
-"server_under_maintenance" = "There is currently a maintenance work on lifebox, please try again later.";
+"server_under_maintenance" = "There is currently maintenance ongoing on lifebox, please try again later.";
 "unlimited_photopick_analysis" = "Unlimited PhotoPick analysis";
 "data_advantage_short" = "Additional Data Advantage";
 "additional_data_advantage" = "Additional Data Advantage";
@@ -906,4 +906,5 @@
 "percentage_used" = "%.0f%% used";
 "used_and_left_space" = "%1$@ / %2$@ used";
 "percentage_used_two_lines" = "%.0f%%\nused";
-"my_usage_storage" = "My Usage Storage";
+"my_usage_storage" = "My Data Usage";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Your location will be used for background syncing";

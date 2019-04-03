@@ -69,7 +69,7 @@
 "You can open settings and cancel subscption." = "Ju mund të vizitoni iTunes për të anuluar paketën tuaj.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Për të anuluar paketën, ju lutem dergoni tekstin \"IPTAL LIFEBOX %@\" në numrin 2200";
 "You can visit iTunes to cancel your subscription" = "Ju mund të vizitoni iTunes për të anuluar paketën tuaj.";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hmm, nuk mund ta besojmë që po e bëni këtë gjë! Kur të vendosni që ta riaktivizoni, ne do ju mirëpresim sërish :). Në rast se ende nuk keni ndërruar mendje, dërgoni “STOP” në numrin 2.";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Klientët platinum dhe lifecell mund të dërgojnë LIFE CANCEL; abonentët e tjerë mund të dërgojnë LIFEBOX CANCEL në numrin 3030 për të anuluar anëtarësimet e tyre.";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Për të çaktivizuar lifebox 50GB, ju lutem dërgoni SMS me tekst 50VYKL; për lifebox 500GB, ju lutem dërgoni SMS me tekst 500VYKL në numrin 8080.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Për të filluar anëtarësimet e tyre, klientët platinum dhe lifecell mund të dërgojnë LIFE; klientët e tjerë mund të dërgojnë LIFEBOX 50GB për paketën lifebox 50GB, LIFEBOX 500GB për paketën lifebox 500GB dhe LIFEBOX 2.5TB për paketën lifebox 2.5TB; në numrin 3030. ";
@@ -716,7 +716,7 @@
 "package_lifecell_cancel_text" = "Për të çaktivizuar lifebox 50GB, ju lutem dërgoni një SMS me tekst 50 VYKL; për lifebox 500GB, ju lutem dërgoni SMS me tekst 500VYKL në numrin 8080.";
 "package_promo_cancel_text" = "Ju lutem, përdorni menunë Kontakt për të na informuar që të përpunojmë kërkesën tuaj.";
 "package_kktcell_cancel_text" = "Klientët platinum dhe lifecell mund të dërgojnë LIFE CANCEL; klientët e tjerë mund të dërgojnë LIFEBOX CANCEL tek 3030 për të anuluar abonimin e tyre.";
-"package_moldcell_cancel_text" = "Hmm, s'mund ta besojmë që po e bëni këtë! Kur të vendosni ta riaktivizoni, ne do të jemi këtu për ju :). Nëse ende doni të vazhdoni, dërgoni \"STOP\" tek 2";
+"package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
 "package_life_cancel_text" = "Për të çaktivizuar lifebox 25GB, ju lutem dërgoni një SMS me tekst \"Stop1\"; për lifebox 100GB, ju lutem dërgoni SMS me tekst \"Stop2\"; për lifebox 500GB, ju lutem dërgoni SMS me tekst \"Stop3\"; në numrin 6767.";
 "package_paycell_all_access_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
 "package_paycell_slcm_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
@@ -922,3 +922,4 @@
 "used_and_left_space" = "";
 "percentage_used_two_lines" = "";
 "my_usage_storage" = "";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "";
