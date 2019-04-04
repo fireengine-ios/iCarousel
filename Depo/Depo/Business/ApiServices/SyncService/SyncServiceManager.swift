@@ -340,7 +340,6 @@ extension SyncServiceManager {
         
         CardsManager.default.stopOperationWithType(type: .sync)
         
-        ItemOperationManager.default.syncFinished()
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         if hasPrepairingSync {
@@ -352,7 +351,6 @@ extension SyncServiceManager {
         CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
         
         FreeAppSpace.default.checkFreeAppSpaceAfterAutoSync()
-        ItemOperationManager.default.syncFinished()
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, CacheManager.shared.isCacheActualized {
