@@ -23,6 +23,4 @@ protocol RegistrationViewInput: RegistrationViewDelegate, Waiting {
     func showErrorTitle(withText: String)
     
     func setupCaptchaVC(captchaVC: CaptchaViewController)
-    
-    func setScrollViewOffsetForError()
 }

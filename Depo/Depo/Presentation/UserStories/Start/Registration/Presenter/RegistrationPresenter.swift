@@ -60,7 +60,6 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
                 prioratizedErrorTitle = TextConstants.registrationMailError
             case .passwordNotValid:
                 if prioratizedErrorTitle == "" {
-                    view.setScrollViewOffsetForError()
                     prioratizedErrorTitle = TextConstants.registrationPasswordError
                 }
             case .passwodsNotMatch:
@@ -76,7 +75,6 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
         }
 //        result.forEach {view.showInfoButton(forType:$0)
 //        }
-        
     }
     
     func signUpFailed(withResult result: String?) {

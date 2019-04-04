@@ -168,9 +168,10 @@ class RegistrationViewController: ViewController {
         userRegistrationTable.delegate = dataSource
     }
     
-    func setScrollViewOffsetForError() {
-        let yOffset = 10
-        scrollView.setContentOffset(CGPoint(x: 0, y: yOffset), animated: true)
+    func setScrollViewOffsetForErrorIfNeed() {
+        if scrollView.contentOffset.y > errorLabel.frame.origin.y {
+            scrollView.setContentOffset(CGPoint(x: 0, y: errorLabel.frame.origin.y), animated: true)
+        }
     }
     
     @objc func showKeyBoard(notification: NSNotification) {
@@ -366,6 +367,8 @@ extension RegistrationViewController: RegistrationViewInput {
     }
     
     func showErrorTitle(withText: String) {
+        setScrollViewOffsetForErrorIfNeed()
+        
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 3
         errorLabel.attributedText = NSAttributedString(string: withText, attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
