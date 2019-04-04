@@ -147,6 +147,8 @@ struct NumericConstants {
     static let usageInfoCollectionViewCellsOffset: CGFloat = 0
 
     static let progressViewBackgroundColorAlpha: CGFloat = 0.25
+    
+    static let maxStringLengthForUserProfile = 255
 }
 
 struct RequestSizeConstant {

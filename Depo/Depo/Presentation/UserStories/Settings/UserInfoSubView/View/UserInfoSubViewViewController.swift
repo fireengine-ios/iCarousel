@@ -134,15 +134,16 @@ class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
         if let name_ = userInfo.name {
             string = name_
         }
-///changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
-//        if let surName_ = userInfo.surname {
-//            if !string.isEmpty {
-//                string = string + " "
-//            }
-//            string = string + surName_
-//        }
-        userNameLabel.text = string
         
+        if let surname = userInfo.surname, !surname.isEmpty {
+            if let name = userInfo.name, !name.isEmpty {
+                string = string + " "
+            }
+            
+            string = string + surname
+        }
+        
+        userNameLabel.text = string
         userEmailLabel.text = userInfo.email
         userPhoneNumber.text = userInfo.phoneNumber
         

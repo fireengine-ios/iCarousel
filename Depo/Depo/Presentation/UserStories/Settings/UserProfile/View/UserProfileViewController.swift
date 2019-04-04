@@ -8,26 +8,30 @@
 
 import UIKit
 
-class UserProfileViewController: BaseViewController, UserProfileViewInput, UITextFieldDelegate {
+final class UserProfileViewController: BaseViewController, UserProfileViewInput {
     var output: UserProfileViewOutput!
     
-    @IBOutlet var keyboardHideManager: KeyboardHideManager! /// not weak
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var viewForContent: UIView!
+    @IBOutlet private var keyboardHideManager: KeyboardHideManager! /// not weak
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var viewForContent: UIView!
     
-    @IBOutlet weak var nameSubTitle: UILabel!
-    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet private weak var nameSubTitle: UILabel!
+    @IBOutlet private weak var nameTextField: UITextField!
     
-    @IBOutlet weak var emailSubTitle: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet private weak var surnameLabel: UILabel!
+    @IBOutlet private weak var surnameTextField: UITextField!
     
-    @IBOutlet weak var gsmNumberSubTitle: UILabel!
-    @IBOutlet weak var gsmNumberTextField: UITextField!
+    @IBOutlet private weak var emailSubTitle: UILabel!
+    @IBOutlet private weak var emailTextField: UITextField!
+    
+    @IBOutlet private weak var gsmNumberSubTitle: UILabel!
+    @IBOutlet private weak var gsmNumberTextField: UITextField!
     
     var editButton: UIBarButtonItem?
     var readyButton: UIBarButtonItem?
     
     private var name: String?
+    private var surname: String?
     private var email: String?
     private var number: String?
     
@@ -37,12 +41,19 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         
         automaticallyAdjustsScrollViewInsets = false
         
-        nameSubTitle.text = TextConstants.userProfileNameAndSurNameSubTitle
+        nameSubTitle.text = TextConstants.userProfileName
         nameSubTitle.textColor = ColorConstants.textLightGrayColor
         nameSubTitle.font = UIFont.TurkcellSaturaBolFont(size: 14)
         
+        surnameLabel.text = TextConstants.userProfileSurname
+        surnameLabel.textColor = ColorConstants.textLightGrayColor
+        surnameLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        
         nameTextField.textColor = ColorConstants.textGrayColor
         nameTextField.font = UIFont.TurkcellSaturaBolFont(size: 21)
+        
+        surnameTextField.textColor = ColorConstants.textGrayColor
+        surnameTextField.font = UIFont.TurkcellSaturaBolFont(size: 21)
         
         emailSubTitle.text = TextConstants.userProfileEmailSubTitle
         emailSubTitle.textColor = ColorConstants.textLightGrayColor
@@ -95,20 +106,14 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         button?.isEnabled = true
         navigationItem.setRightBarButton(button, animated: true)
         nameTextField.isUserInteractionEnabled = isEdit
+        surnameTextField.isUserInteractionEnabled = isEdit
         emailTextField.isUserInteractionEnabled = isEdit
         gsmNumberTextField.isUserInteractionEnabled = isEdit
     }
     
     func configurateUserInfo(userInfo: AccountInfoResponse) {
-        var string = userInfo.name ?? ""
-        if let surname = userInfo.surname, !surname.isEmpty {
-            if !string.isEmpty {
-                string = string + " "
-            }
-            string = string + surname
-        }
-        
-        nameTextField.text = string
+        nameTextField.text = userInfo.name
+        surnameTextField.text = userInfo.surname
         emailTextField.text = userInfo.email
         gsmNumberTextField.text = userInfo.phoneNumber
     }
@@ -127,9 +132,9 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     
     // MARK: ButtonsAction
     
-    @IBAction func onValueChanged() {}
+    @IBAction  func onValueChanged() {}
     
-    @objc func onEditButtonAction() {
+    @objc private func onEditButtonAction() {
         nameTextField.becomeFirstResponder()
         output.tapEditButton()
         saveFields()
@@ -138,13 +143,14 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     /// save for "check for no changes" in onReadyButtonAction
     private func saveFields() {
         name = nameTextField.text
+        surname = surnameTextField.text
         email = emailTextField.text
         number = gsmNumberTextField.text
     }
     
-    @objc func onReadyButtonAction() {
+    @objc private func onReadyButtonAction() {
         /// check for no changes
-        if name == nameTextField.text, email == emailTextField.text, number == gsmNumberTextField.text {
+        if name == nameTextField.text, surname == surnameTextField.text, email == emailTextField.text, number == gsmNumberTextField.text {
             setupEditState(false)
             return
         }
@@ -173,7 +179,10 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
                 buttonTitle: TextConstants.ok,
                 action: { [weak self] vc in
                     vc.close { [weak self] in
-                        self?.output.tapReadyButton(name: self?.nameTextField.text ?? "", email: self?.emailTextField.text ?? "", number: self?.gsmNumberTextField.text ?? "")
+                        self?.output.tapReadyButton(name: self?.nameTextField.text ?? "",
+                                                    surname: self?.surnameTextField.text ?? "",
+                                                    email: self?.emailTextField.text ?? "",
+                                                    number: self?.gsmNumberTextField.text ?? "")
                         self?.readyButton?.isEnabled = true
                     }
                 })
@@ -182,17 +191,21 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
             
         } else {
             readyButton?.isEnabled = false
-            output.tapReadyButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
+            output.tapReadyButton(name: nameTextField.text ?? "", surname: surnameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
         }
         
     }
-    
-    // MARK: UITextFieldDelegate
+   
+}
+
+// MARK: - UITextFieldDelegate
+
+extension UserProfileViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let tag = textField.tag
         let view: UIView? = viewForContent.viewWithTag(tag + 1)
-        guard let nextTextField = view as! UITextField!  else {
+        guard let nextTextField = view as? UITextField  else {
             return true
         }
         nextTextField.becomeFirstResponder()
@@ -205,17 +218,22 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text, textField == emailTextField {
-            textField.text = text.removingWhiteSpaces()
+        if let text = textField.text {
+            if textField == emailTextField {
+                textField.text = text.removingWhiteSpaces()
+            } else if textField == nameTextField || textField == surnameTextField {
+                textField.text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            }
         }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if string == " " && textField == emailTextField {
+        if textField == nameTextField || textField == surnameTextField,
+            textField.text?.count == NumericConstants.maxStringLengthForUserProfile {
             return false
         }
         
-        return true
+        return !(string == " " && textField == emailTextField)
     }
     
 }
