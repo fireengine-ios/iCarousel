@@ -256,8 +256,8 @@
 "GSM Number" = "Phone Number";
 "E-Mail" = "E-Mail";
 "Name and Surname" = "Name and Surname";
-"Name" = "Name";
-"Surname" = "Surname";
+"name" = "Name";
+"surname" = "Surname";
 "Your Profile" = "Profile";
 "Import From Cropy" = "Import from Cropy";
 "Import From Instagram" = "Import from Instagram";
