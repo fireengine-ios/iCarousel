@@ -169,7 +169,9 @@ class RegistrationViewController: ViewController {
     }
     
     func setScrollViewOffsetForErrorIfNeed() {
-        if scrollView.contentOffset.y > errorLabel.frame.origin.y {
+        let isErrorLabelVisible = scrollView.contentOffset.y > errorLabel.frame.origin.y
+        
+        if isErrorLabelVisible {
             scrollView.setContentOffset(CGPoint(x: 0, y: errorLabel.frame.origin.y), animated: true)
         }
     }
