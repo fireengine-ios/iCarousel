@@ -168,6 +168,11 @@ class RegistrationViewController: ViewController {
         userRegistrationTable.delegate = dataSource
     }
     
+    func setScrollViewOffsetForError() {
+        let yOffset = 10
+        scrollView.setContentOffset(CGPoint(x: 0, y: yOffset), animated: true)
+    }
+    
     @objc func showKeyBoard(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame: NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue

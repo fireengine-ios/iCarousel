@@ -60,6 +60,7 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
                 prioratizedErrorTitle = TextConstants.registrationMailError
             case .passwordNotValid:
                 if prioratizedErrorTitle == "" {
+                    view.setScrollViewOffsetForError()
                     prioratizedErrorTitle = TextConstants.registrationPasswordError
                 }
             case .passwodsNotMatch:
