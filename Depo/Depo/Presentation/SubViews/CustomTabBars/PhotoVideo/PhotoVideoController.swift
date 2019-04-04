@@ -176,20 +176,20 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private func showDetail(at indexPath: IndexPath) {
         // TODO: trackClickOnPhotoOrVideo(isPhoto: false)
         trackClickOnPhotoOrVideo(isPhoto: true)
-        
-        guard let allObjects = dataSource.lastFetchedObjects else {
-            return
+
+        dataSource.getWrapedFetchedObjects { [weak self] items in
+            guard let currentMediaItem = self?.dataSource.object(at: indexPath) else {
+                return
+            }
+            let currentObject = WrapData(mediaItem: currentMediaItem)
+            
+            DispatchQueue.toMain {
+                let router = RouterVC()
+                let controller = router.filesDetailViewController(fileObject: currentObject, items: items)
+                let nController = NavigationController(rootViewController: controller)
+                router.presentViewController(controller: nController)
+            }
         }
-        
-        guard let currentMediaItem = dataSource.object(at: indexPath) else {
-            return
-        }
-        let currentObject = WrapData(mediaItem: currentMediaItem)
-        
-        let router = RouterVC()
-        let controller = router.filesDetailViewController(fileObject: currentObject, items: allObjects)
-        let nController = NavigationController(rootViewController: controller)
-        router.presentViewController(controller: nController)
     }
     
     private func select(cell: PhotoVideoCell, at indexPath: IndexPath) {
@@ -619,13 +619,11 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
     
     private func getIndexPathForObject(itemUUID: String) -> IndexPath? {
-        let findedObject = dataSource.lastFetchedObjects?.first { object in
-            return object.getTrimmedLocalID() == itemUUID
+        if let findedObject = dataSource.lastFetchedObjects?.first(where: { $0.trimmedLocalFileID == itemUUID }) {
+            return dataSource.indexPath(forObject: findedObject)
         }
-        guard let mediaItem = findedObject?.coreDataObject else {
-            return nil
-        }
-        return dataSource.indexPath(forObject: mediaItem)
+
+        return nil
     }
     
     private func getCellForLocalFile(objectTrimmedLocalID: String, completion: @escaping  (_ cell: PhotoVideoCell?)->Void) {
@@ -637,13 +635,11 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
     
     private func getIndexPathForLocalObject(objectTrimmedLocalID: String) -> IndexPath? {
-        let findedObject = dataSource.lastFetchedObjects?.first { object in
-            return object.getTrimmedLocalID() == objectTrimmedLocalID && object.isLocalItem
+        if let findedObject = dataSource.lastFetchedObjects?.first(where: { $0.trimmedLocalFileID == objectTrimmedLocalID && $0.isLocalItemValue }) {
+            return dataSource.indexPath(forObject: findedObject)
         }
-        guard let mediaItem = findedObject?.coreDataObject else {
-            return nil
-        }
-        return dataSource.indexPath(forObject: mediaItem)
+        
+        return nil
     }
 }
 

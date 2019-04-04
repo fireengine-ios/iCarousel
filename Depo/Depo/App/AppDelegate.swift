@@ -67,9 +67,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var storageVars: StorageVars = factory.resolve()
     
     var window: UIWindow?
+    let watchdog = Watchdog(threshold: 0.05, strictMode: false)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         AppConfigurator.applicationStarted(with: launchOptions)
+        
+        let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        print("Documents: \(documents)")
         
         ///call debugLog only if the Crashlytics is already initialized
         debugLog("AppDelegate didFinishLaunchingWithOptions")

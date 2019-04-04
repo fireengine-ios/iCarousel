@@ -36,7 +36,7 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    var fetchedOriginalObhects: [MediaItem] {
+    var fetchedOriginalObjects: [MediaItem] {
         return fetchedResultsController.fetchedObjects ?? []
     }
     
@@ -46,7 +46,8 @@ final class PhotoVideoDataSource: NSObject {
         } ?? []
     }
     
-    var lastFetchedObjects: [WrapData]?
+//    var lastFetchedObjects: [WrapData]?
+    var lastFetchedObjects: [MediaItem]?
     
     var canUpdateLastFecthed = true
     
@@ -122,6 +123,17 @@ final class PhotoVideoDataSource: NSObject {
                 self?.fetchedResultsController.fetchRequest.predicate = compundedPredicate
                 newPredicateSetupedCallback()
             }
+        }
+    }
+    
+    func getWrapedFetchedObjects(completion: @escaping (_ items: [WrapData])->Void) {
+        DispatchQueue.toBackground { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            let wrapedObjects: [WrapData] = self.lastFetchedObjects?.compactMap { WrapData(mediaItem: $0) } ?? []
+            completion(wrapedObjects)
+            
         }
     }
 }
@@ -217,10 +229,13 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     }
     
     private func updateLastFetchedObjects() {
-        thresholdService.execute { [weak self] in
-            self?.lastFetchedObjects = self?.fetchedObjects
-            self?.delegate?.contentDidChange(self?.fetchedResultsController.fetchedObjects ?? [])
-        }
+//        thresholdService.execute { [weak self] in
+//            self?.lastFetchedObjects = self?.fetchedObjects
+//            self?.delegate?.contentDidChange(self?.fetchedResultsController.fetchedObjects ?? [])
+//        }
+        
+        lastFetchedObjects = fetchedOriginalObjects
+        delegate?.contentDidChange(lastFetchedObjects ?? [])
     }
     
     private func reloadSupplementaryViewsIfNeeded() {
