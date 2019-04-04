@@ -74,15 +74,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         cellografId = json?[AccountJSONConstants.cellografId].string
         name = json?[AccountJSONConstants.name].string
         gapId = json?[AccountJSONConstants.gapID].string
-        
-        ///---changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
-        if let actualSurNaame = json?[AccountJSONConstants.surname].string,
-                !actualSurNaame.isEmpty {
-            name = (name ?? "") + " " + actualSurNaame
-        }
-        surname = ""
-        ///---
-        
+        surname = json?[AccountJSONConstants.surname].string
         username = json?[AccountJSONConstants.username].string
         dob = json?[AccountJSONConstants.birthday].string
         accountType = json?[AccountJSONConstants.accountType].string
