@@ -605,25 +605,45 @@ final class MediaItemOperationsService {
                 return
             }
             
-            let predicate = NSPredicate(format: "uuid in %@", items.map {$0.uuid} )
-            self.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { [weak self] remoteItems in
-                guard let `self` = self else {
-                    return
-                }
+            let mediaItems = items.compactMap { MediaItem(wrapData: $0, context: context) }
+            
+            do {
+                let objectIDs = try mediaItems
+                    .compactMap { $0.entity }
+                    .compactMap { self.batchDeleteRequest(for: $0) }
+                    .compactMap { try context.execute($0) as? NSBatchDeleteResult }
+                    .compactMap { $0.result as? [NSManagedObjectID] }
+                    .flatMap { $0 }
                 
-                let remoteItemsSet = NSSet(array: remoteItems)
-                
-                self.mediaItemByLocalID(trimmedLocalIDS: items.map {$0.getTrimmedLocalID()}, context: context, mediaItemsCallBack: { mediaItems in
-                    mediaItems.forEach { $0.removeFromRelatedRemotes(remoteItemsSet)}
-                    
-                    remoteItems.forEach { context.delete($0) }
-                    
-                    context.saveAsync(completion: { _ in
-                        completion()
-                    })
-                })
-            })
+                let changes = [NSDeletedObjectsKey: objectIDs]
+                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [context.parent ?? CoreDataStack.default.mainContext])
+                completion()
+//                let predicate = NSPredicate(format: "uuid in %@", items.map {$0.uuid} )
+//                self.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { remoteItems in
+//                    remoteItems.forEach { context.delete($0) }
+//
+//                    context.saveAsync(completion: { _ in
+//                        completion()
+//                    })
+//                })
+            } catch {
+                //TODO:
+                completion()
+            }
         }
+    }
+    
+    private func batchDeleteRequest(for entity: NSEntityDescription) -> NSBatchDeleteRequest {
+        let deleteFetchRequest = NSFetchRequest<NSFetchRequestResult>()
+        deleteFetchRequest.entity = entity
+        deleteFetchRequest.includesPropertyValues = false
+        deleteFetchRequest.returnsObjectsAsFaults = false
+        deleteFetchRequest.resultType = .managedObjectIDResultType
+        
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetchRequest)
+        batchDeleteRequest.resultType = .resultTypeObjectIDs
+        
+        return batchDeleteRequest
     }
     
     func allLocalItems(localItems: @escaping LocalFilesCallBack) {
