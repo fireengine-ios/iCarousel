@@ -239,6 +239,7 @@ final class UploadService: BaseRequestService {
                             if self.uploadOperations.filter({ $0.uploadType == .syncToUse }).isEmpty {
                                 self.trackUploadItemsFinished(items: itemsToUpload)
                                 success()
+                                ItemOperationManager.default.syncFinished()
                                 self.logSyncSettings(state: "FinishedSyncToUseFileList")
                                 return
                             }
@@ -428,6 +429,7 @@ final class UploadService: BaseRequestService {
                                 self.trackUploadItemsFinished(items: itemsToSync)
                                 self.stopTracking()
                                 success()
+                                ItemOperationManager.default.syncFinished()
                                 self.logSyncSettings(state: "FinishedSyncFileList")
                                 return
                             }
