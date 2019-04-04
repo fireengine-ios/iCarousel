@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 protocol PhotoVideoCellDelegate: class {
-    func photoVideoCellOnLongPressBegan(at indexPath: IndexPath)
+    func onLongPressBegan(at cell: PhotoVideoCell)
 }
 
 final class PhotoVideoCell: UICollectionViewCell {
@@ -57,7 +57,6 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     
     weak var delegate: PhotoVideoCellDelegate?
-    var indexPath: IndexPath?
     private var cellId = ""
     var filesDataSource: FilesDataSource!
     private var cellImageManager: CellImageManager?
@@ -216,8 +215,8 @@ final class PhotoVideoCell: UICollectionViewCell {
         if sender.state == .began {
             
             set(isSelected: true, isSelectionMode: true, animated: true)
-            if let delegate = delegate, let indexPath = indexPath {
-                delegate.photoVideoCellOnLongPressBegan(at: indexPath)
+            if let delegate = delegate {
+                delegate.onLongPressBegan(at: self)
             }
         }
     }
@@ -288,7 +287,6 @@ final class PhotoVideoCell: UICollectionViewCell {
         favoriteImageView.isHidden = true
         checkmarkImageView.isHidden = true
         uuid = nil
-        indexPath = nil
         cellId = ""
     }
 

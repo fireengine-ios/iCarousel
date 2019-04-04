@@ -240,8 +240,10 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
 
 // MARK: - PhotoVideoCellDelegate
 extension PhotoVideoController: PhotoVideoCellDelegate {
-    func photoVideoCellOnLongPressBegan(at indexPath: IndexPath) {
-        startEditingMode(at: indexPath)
+    func onLongPressBegan(at cell: PhotoVideoCell) {
+        if let indexPath = collectionView.indexPath(for: cell) {
+            startEditingMode(at: indexPath)
+        }
     }
 }
 
@@ -351,7 +353,6 @@ extension PhotoVideoController: UICollectionViewDelegate {
             return
         }
         cell.delegate = self
-        cell.indexPath = indexPath
         cell.filesDataSource = filesDataSource
         
         guard let object = dataSource.object(at: indexPath) else {
