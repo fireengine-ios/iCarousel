@@ -269,7 +269,9 @@ final class UploadService: BaseRequestService {
                         
                         self.showUploadCardProgress()
                         
-                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.inputItem, isAutoSync: false)
+                        if let outputItem = finishedOperation.outputItem {
+                            ItemOperationManager.default.finishedUploadFile(file: outputItem, isAutoSync: false)
+                        }
                         
                         checkIfFinished()
                     }
@@ -365,7 +367,9 @@ final class UploadService: BaseRequestService {
                         
                         self.showUploadCardProgress()
                         
-                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.inputItem, isAutoSync: false)
+                        if let outputItem = finishedOperation.outputItem {
+                            ItemOperationManager.default.finishedUploadFile(file: outputItem, isAutoSync: false)
+                        }
                         
                         checkIfFinished()
                     }
@@ -457,7 +461,9 @@ final class UploadService: BaseRequestService {
                         
                         self.showSyncCardProgress()
                         
-                        ItemOperationManager.default.finishedUploadFile(file: finishedOperation.inputItem, isAutoSync: true)
+                        if let outputItem = finishedOperation.outputItem {
+                            ItemOperationManager.default.finishedUploadFile(file: outputItem, isAutoSync: true)
+                        }
                         
                         checkIfFinished()
                     }

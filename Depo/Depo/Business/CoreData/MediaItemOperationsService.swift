@@ -64,8 +64,8 @@ final class MediaItemOperationsService {
     }
     
     func getLocalDuplicates(remoteItems: [Item], duplicatesCallBack: @escaping LocalFilesCallBack) {
-        getLocalDuplicates { [weak self] localItems in
-            self?.privateQueue.async {
+        getLocalDuplicates { localItems in
+//            self?.privateQueue.async {
                 var array = [WrapData]()
                 let uuids = Set(remoteItems.map {$0.getTrimmedLocalID()})
                 
@@ -83,7 +83,7 @@ final class MediaItemOperationsService {
                 DispatchQueue.main.async {
                     duplicatesCallBack(array)
                 }
-            }
+//            }
         }
     }
     
