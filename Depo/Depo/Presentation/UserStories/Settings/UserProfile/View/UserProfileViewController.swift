@@ -27,6 +27,8 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     @IBOutlet private weak var gsmNumberSubTitle: UILabel!
     @IBOutlet private weak var gsmNumberTextField: UITextField!
     
+    @IBOutlet private weak var changePasswordButton: AdjustsFontSizeInsetsRoundedDarkBlueButton!
+    
     var editButton: UIBarButtonItem?
     var readyButton: UIBarButtonItem?
     
@@ -68,6 +70,11 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
         
         gsmNumberTextField.textColor = ColorConstants.textGrayColor
         gsmNumberTextField.font = UIFont.TurkcellSaturaBolFont(size: 21)
+        
+        changePasswordButton.setTitle(TextConstants.userProfileChangePassword, for: .normal)
+        changePasswordButton.titleLabel?.font = ApplicationPalette.bigRoundButtonFont
+        changePasswordButton.insets = UIEdgeInsets(top: 0, left: 31, bottom: 0, right: 31)
+        changePasswordButton.titleLabel?.numberOfLines = 1
         
         // font: .TurkcellSaturaRegFont(size: 19) ///maybe will be need
         editButton = UIBarButtonItem(title: TextConstants.userProfileEditButton,
@@ -133,6 +140,10 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     // MARK: ButtonsAction
     
     @IBAction  func onValueChanged() {}
+    
+    @IBAction private func onChangePasswordTap(_ sender: Any) {
+        output.tapChangePasswordButton()
+    }
     
     @objc private func onEditButtonAction() {
         nameTextField.becomeFirstResponder()

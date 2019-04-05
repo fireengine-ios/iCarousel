@@ -62,6 +62,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         return interactor.statusTurkcellUser
     }
     
+    func tapChangePasswordButton() {
+        router.goToChangePassword()
+    }
+    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {
