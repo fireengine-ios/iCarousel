@@ -909,3 +909,13 @@
 "used_and_left_space" = "%1$@ / %2$@ used";
 "percentage_used_two_lines" = "%.0f%%\nused";
 "my_usage_storage" = "My Usage Storage";
+
+/*Packages*/
+"account_details" = "Account Details";
+"my_profile" = "My Profile";
+
+"account_type" = "Account Type";
+
+"standard_plus" = "Standard+";
+"standard" = "Standard";
+"premium" = "Premium";
