@@ -75,7 +75,6 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
         }
 //        result.forEach {view.showInfoButton(forType:$0)
 //        }
-        
     }
     
     func signUpFailed(withResult result: String?) {
