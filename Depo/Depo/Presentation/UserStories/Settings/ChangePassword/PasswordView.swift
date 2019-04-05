@@ -4,10 +4,13 @@ final class PasswordView: UIView, NibInit {
     
     @IBOutlet private weak var showPasswordButton: UIButton! {
         willSet {
+            /// in IB: UIButton(type: .custom)
             newValue.isExclusiveTouch = true
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
             newValue.setTitleColor(ColorConstants.lightText, for: .normal)
-            newValue.setTitleColor(ColorConstants.lightText.darker(by: 30), for: .highlighted)
+            newValue.setTitleColor(ColorConstants.lightText.lighter(by: 30), for: .highlighted)
+            newValue.backgroundColor = .white
+            newValue.isOpaque = true
         }
     }
     
@@ -15,6 +18,8 @@ final class PasswordView: UIView, NibInit {
         willSet {
             newValue.textColor = ColorConstants.lightText
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            newValue.backgroundColor = .white
+            newValue.isOpaque = true
         }
     }
     
@@ -23,20 +28,25 @@ final class PasswordView: UIView, NibInit {
             newValue.textColor = ColorConstants.textOrange
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
             newValue.isHidden = true
+            newValue.backgroundColor = .white
+            newValue.isOpaque = true
         }
     }
     
-    @IBOutlet private weak var passwordTextField: UITextField! {
+    @IBOutlet weak var passwordTextField: UITextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 21)
             newValue.textColor = UIColor.lrTealish
             newValue.borderStyle = .none
+            newValue.backgroundColor = .white
+            newValue.isOpaque = true
         }
     }
     
     @IBOutlet private weak var lineView: UIView! {
         willSet {
             newValue.backgroundColor = ColorConstants.lightText
+            newValue.isOpaque = true
         }
     }
     
