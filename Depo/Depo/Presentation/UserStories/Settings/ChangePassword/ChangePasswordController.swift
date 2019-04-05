@@ -68,6 +68,7 @@ extension ChangePasswordController: UITextFieldDelegate {
         case newPasswordView.passwordTextField:
             UIView.animate(withDuration: NumericConstants.animationDuration) {
                 self.newPasswordView.errorLabel.isHidden = true
+                /// https://stackoverflow.com/a/46412621/5893286
                 self.passwordsStackView.layoutIfNeeded()
             }
         default:
