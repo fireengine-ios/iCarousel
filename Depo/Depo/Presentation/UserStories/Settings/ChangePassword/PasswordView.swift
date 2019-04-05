@@ -84,7 +84,7 @@ final class CaptchaView: UIView {
     
     @IBOutlet private weak var captchaImageView: UIImageView! {
         willSet {
-            newValue.contentMode = .center
+            newValue.contentMode = .scaleAspectFit
             newValue.layer.cornerRadius = 5
             newValue.layer.borderWidth = 1
             newValue.layer.borderColor = ColorConstants.darkBorder.cgColor

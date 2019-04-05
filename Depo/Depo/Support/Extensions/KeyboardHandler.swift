@@ -1,16 +1,27 @@
-import Foundation
+import UIKit
 
 protocol KeyboardHandler {}
+
 extension KeyboardHandler where Self: UIViewController {
     func addTapGestureToHideKeyboard() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(view.endEditing))
-        view.addGestureRecognizer(tapGesture)
+        view.addTapGestureToHideKeyboard()
     }
 }
 
-extension UIView: KeyboardHandler {
+extension KeyboardHandler where Self: UIView {
     func addTapGestureToHideKeyboard() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(window?.endEditing))
+        self.addTapGestureToHideKeyboard()
+    }
+}
+
+private extension UIView {
+    func addTapGestureToHideKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
         addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func closeKeyboard() {
+        let view: UIView = window ?? self
+        view.endEditing(true)
     }
 }

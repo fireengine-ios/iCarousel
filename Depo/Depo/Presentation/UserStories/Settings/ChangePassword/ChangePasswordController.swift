@@ -40,12 +40,36 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
         return view
     }()
     
+    @IBOutlet weak var captchaAnswerTextField: InsetsTextField! {
+        willSet {
+            newValue.font = UIFont.TurkcellSaturaItaFont(size: 20)
+            newValue.textColor = UIColor.lrTealish
+            newValue.borderStyle = .none
+            newValue.backgroundColor = .white
+            newValue.isOpaque = true
+            newValue.insetX = 16
+            newValue.attributedPlaceholder = NSAttributedString(string: "Type the text",
+                                                                attributes: [.foregroundColor: UIColor.lrTealish])
+            
+            newValue.layer.cornerRadius = 5
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = ColorConstants.darkBorder.cgColor
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         newPasswordView.passwordTextField.delegate = self
-        //addTapGestureToHideKeyboard()
+        addTapGestureToHideKeyboard()
+        
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(qq))
+//        view.addGestureRecognizer(tapGesture)
     }
+    
+//    @objc func qq() {
+//        view.endEditing(true)
+//    }
 }
 
 extension ChangePasswordController: UITextFieldDelegate {
