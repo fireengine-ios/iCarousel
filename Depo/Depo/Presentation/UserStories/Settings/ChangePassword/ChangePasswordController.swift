@@ -23,20 +23,23 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
     private let oldPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
         view.titleLabel.text = "Old Password"
+        view.passwordTextField.returnKeyType = .next
         return view
     }()
     
     private let newPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
         view.titleLabel.text = "New Password"
-        view.errorLabel.text = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters."
-        view.errorLabel.textColor = UIColor.lrTealish
+        view.underlineLabel.text = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters."
+        view.underlineLabel.textColor = UIColor.lrTealish
+        view.passwordTextField.returnKeyType = .next
         return view
     }()
     
     private let repeatPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
         view.titleLabel.text = "Re-Enter Password"
+        view.passwordTextField.returnKeyType = .next
         return view
     }()
     
@@ -54,22 +57,52 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
             newValue.layer.cornerRadius = 5
             newValue.layer.borderWidth = 1
             newValue.layer.borderColor = ColorConstants.darkBorder.cgColor
+            
+            newValue.returnKeyType = .done
+            
+            /// removes suggestions bar above keyboard
+            newValue.autocorrectionType = .no
+            
+            /// removed useless features
+            newValue.autocapitalizationType = .none
+            newValue.spellCheckingType = .no
+            newValue.autocapitalizationType = .none
+            newValue.enablesReturnKeyAutomatically = true
+            if #available(iOS 11.0, *) {
+                newValue.smartQuotesType = .no
+                newValue.smartDashesType = .no
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        newPasswordView.passwordTextField.delegate = self
-        addTapGestureToHideKeyboard()
-        
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(qq))
-//        view.addGestureRecognizer(tapGesture)
+        initialSetup()
     }
     
-//    @objc func qq() {
-//        view.endEditing(true)
-//    }
+    private func initialSetup() {
+        oldPasswordView.passwordTextField.delegate = self
+        newPasswordView.passwordTextField.delegate = self
+        repeatPasswordView.passwordTextField.delegate = self
+        captchaAnswerTextField.delegate = self
+        
+        addTapGestureToHideKeyboard()
+        
+        let doneButton = UIBarButtonItem(title: "Done",
+                                         font: UIFont.TurkcellSaturaDemFont(size: 19),
+                                         tintColor: .white,
+                                         accessibilityLabel: "Done",
+                                         style: .plain,
+                                         target: self,
+                                         selector: #selector(onDoneButton))
+        navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    @objc private func onDoneButton() {
+        //activity
+        //service call
+    }
 }
 
 extension ChangePasswordController: UITextFieldDelegate {
@@ -77,7 +110,7 @@ extension ChangePasswordController: UITextFieldDelegate {
         switch textField {
         case newPasswordView.passwordTextField:
             UIView.animate(withDuration: NumericConstants.animationDuration) {
-                self.newPasswordView.errorLabel.isHidden = false
+                self.newPasswordView.underlineLabel.isHidden = false
                 /// https://stackoverflow.com/a/46412621/5893286
                 self.passwordsStackView.layoutIfNeeded()
             }
@@ -91,12 +124,29 @@ extension ChangePasswordController: UITextFieldDelegate {
         switch textField {
         case newPasswordView.passwordTextField:
             UIView.animate(withDuration: NumericConstants.animationDuration) {
-                self.newPasswordView.errorLabel.isHidden = true
+                self.newPasswordView.underlineLabel.isHidden = true
                 /// https://stackoverflow.com/a/46412621/5893286
                 self.passwordsStackView.layoutIfNeeded()
             }
         default:
             break
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case oldPasswordView.passwordTextField:
+            newPasswordView.passwordTextField.becomeFirstResponder()
+        case newPasswordView.passwordTextField:
+            repeatPasswordView.passwordTextField.becomeFirstResponder()
+        case repeatPasswordView.passwordTextField:
+            captchaAnswerTextField.becomeFirstResponder()
+        case captchaAnswerTextField:
+            onDoneButton()
+        default:
+            break
+        }
+            
+        return true
     }
 }

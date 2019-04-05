@@ -3426,8 +3426,6 @@
 		CE58FB0820444C00007F3F54 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
 		CE5921D0225623D3005882CE /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5921CE225623D3005882CE /* ChangePasswordController.swift */; };
 		CE5921D1225623D3005882CE /* ChangePasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921CF225623D3005882CE /* ChangePasswordController.xib */; };
-		CE5921D2225623F3005882CE /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5921CE225623D3005882CE /* ChangePasswordController.swift */; };
-		CE5921D3225623F3005882CE /* ChangePasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921CF225623D3005882CE /* ChangePasswordController.xib */; };
 		CE5921D822564465005882CE /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
 		CE5921DA2256446F005882CE /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5921D92256446F005882CE /* PasswordView.swift */; };
 		CE5A612D2060E85200793EB0 /* StorageVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6442D2060E776009AFC12 /* StorageVars.swift */; };
@@ -3667,6 +3665,14 @@
 		CEE3017F2049520C007E70CE /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
 		CEE3B7C522573A1500B99FE7 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B7C422573A1500B99FE7 /* KeyboardHandler.swift */; };
 		CEE3B7C622573A2500B99FE7 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B7C422573A1500B99FE7 /* KeyboardHandler.swift */; };
+		CEE3B7C82257917200B99FE7 /* CaptchaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B7C72257917200B99FE7 /* CaptchaView.swift */; };
+		CEE3B7CA225791AD00B99FE7 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B7C9225791AD00B99FE7 /* UITextField+Extensions.swift */; };
+		CEE3B7CB225791C400B99FE7 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B7C9225791AD00B99FE7 /* UITextField+Extensions.swift */; };
+		CEE3B7CF225791D900B99FE7 /* ChangePasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921CF225623D3005882CE /* ChangePasswordController.xib */; };
+		CEE3B7D0225791D900B99FE7 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5921CE225623D3005882CE /* ChangePasswordController.swift */; };
+		CEE3B7D1225791D900B99FE7 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
+		CEE3B7D2225791D900B99FE7 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5921D92256446F005882CE /* PasswordView.swift */; };
+		CEE3B7D3225791D900B99FE7 /* CaptchaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE3B7C72257917200B99FE7 /* CaptchaView.swift */; };
 		CEEB7A9820A4755B0070FDC2 /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
 		CEEB7A9B20A5BC230070FDC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEEB7A9D20A5BC230070FDC2 /* InfoPlist.strings */; };
 		CEEB7AA620A5D5C80070FDC2 /* GradientOrangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7AA520A5D5C80070FDC2 /* GradientOrangeView.swift */; };
@@ -5978,6 +5984,8 @@
 		CEE1D1F41F714DFE0008F4CF /* MediaItemsMetaData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaItemsMetaData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CEE2843F202C7549003855C1 /* UIScrollView+Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Scroll.swift"; sourceTree = "<group>"; };
 		CEE3B7C422573A1500B99FE7 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
+		CEE3B7C72257917200B99FE7 /* CaptchaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaView.swift; sourceTree = "<group>"; };
+		CEE3B7C9225791AD00B99FE7 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		CEE9A5FA1F23308800ED8610 /* String+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Int.swift"; sourceTree = "<group>"; };
 		CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Main.swift"; sourceTree = "<group>"; };
 		CEEB7A9C20A5BC230070FDC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -11631,6 +11639,7 @@
 				CE00B252220332F000A5A696 /* NSLayoutConstraint+Extensions.swift */,
 				B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */,
 				CE343601224B92BB00AFAABB /* Bool+Init.swift */,
+				CEE3B7C9225791AD00B99FE7 /* UITextField+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -11936,10 +11945,11 @@
 		CE5921CC22562357005882CE /* ChangePassword */ = {
 			isa = PBXGroup;
 			children = (
-				CE5921CE225623D3005882CE /* ChangePasswordController.swift */,
 				CE5921CF225623D3005882CE /* ChangePasswordController.xib */,
+				CE5921CE225623D3005882CE /* ChangePasswordController.swift */,
 				CE5921D722564465005882CE /* PasswordView.xib */,
 				CE5921D92256446F005882CE /* PasswordView.swift */,
+				CEE3B7C72257917200B99FE7 /* CaptchaView.swift */,
 			);
 			path = ChangePassword;
 			sourceTree = "<group>";
@@ -13875,7 +13885,7 @@
 				8C06AEEB2008AD70003D8E05 /* Buyuk@2x.png in Resources */,
 				8C06AF232008AD70003D8E05 /* cizgi_2@2x.png in Resources */,
 				8C0E904E1FDEBDFF00789C91 /* FileInfoViewController.xib in Resources */,
-				CE5921D3225623F3005882CE /* ChangePasswordController.xib in Resources */,
+				CEE3B7CF225791D900B99FE7 /* ChangePasswordController.xib in Resources */,
 				8C06B1632008AD72003D8E05 /* toolbar_ciz_icon@3x.png in Resources */,
 				8C06B1752008AD72003D8E05 /* toolbar_undo_icon@3x.png in Resources */,
 				A2268EC321A68C1A002F2611 /* LeavePremiumHeaderView.xib in Resources */,
@@ -13932,6 +13942,7 @@
 				8C06B10F2008AD72003D8E05 /* status_badge@3x.png in Resources */,
 				8C06B1972008AD72003D8E05 /* vintage.png in Resources */,
 				8C06AF8B2008AD70003D8E05 /* extraOptions_selected.png in Resources */,
+				CEE3B7D1225791D900B99FE7 /* PasswordView.xib in Resources */,
 				7C4F60AD2019E2BC0033C58F /* AlbumCard.xib in Resources */,
 				8C06B1AF2008AD72003D8E05 /* CRYPopupViewController.nib in Resources */,
 				8C06B0D32008AD71003D8E05 /* sample_green@3x.png in Resources */,
@@ -15247,6 +15258,7 @@
 				CE292C1D21BE5DE9004FC745 /* PremiumInteractorInput.swift in Sources */,
 				CE292C1E21BE5DE9004FC745 /* PremiumConfigurator.swift in Sources */,
 				CE292C1F21BE5DE9004FC745 /* PremiumInitializer.swift in Sources */,
+				CEE3B7D0225791D900B99FE7 /* ChangePasswordController.swift in Sources */,
 				CE292C2021BE5DE9004FC745 /* GradientPremiumButton.swift in Sources */,
 				CE292C2121BE5DE9004FC745 /* ViewSortStorage.swift in Sources */,
 				CE292C2221BE5DE9004FC745 /* PackageModelResponse.swift in Sources */,
@@ -15875,6 +15887,7 @@
 				8C0E8E3E1FDEBDFF00789C91 /* ForgotPasswordRouter.swift in Sources */,
 				8C0E8E3F1FDEBDFF00789C91 /* ProgressPopUp.swift in Sources */,
 				8C0E8E401FDEBDFF00789C91 /* ForgotPasswordConfigurator.swift in Sources */,
+				CEE3B7D3225791D900B99FE7 /* CaptchaView.swift in Sources */,
 				4A0AC1422087372E00032CC7 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				8C0E8E411FDEBDFF00789C91 /* ForgotPasswordInitializer.swift in Sources */,
 				8C0E8E421FDEBDFF00789C91 /* PasscodeView.swift in Sources */,
@@ -15956,6 +15969,7 @@
 				8CEE8D25214A472B00150996 /* FaceImageDisplayManager.swift in Sources */,
 				4A56D5BF202AF5F6003A4624 /* FaceImageAddNameInitializer.swift in Sources */,
 				8C0E8EB21FDEBDFF00789C91 /* ImportFromDropboxInteractor.swift in Sources */,
+				CEE3B7D2225791D900B99FE7 /* PasswordView.swift in Sources */,
 				8C0E8EB31FDEBDFF00789C91 /* BaseFilesGreedModuleInput.swift in Sources */,
 				8C0E8EB41FDEBDFF00789C91 /* CreateStoryPhotosOrderViewOutput.swift in Sources */,
 				CEF371AD20887BC3007AD36E /* MD5.swift in Sources */,
@@ -16336,11 +16350,11 @@
 				CE0596F420385E950083D6FC /* ImageFormat.swift in Sources */,
 				98EAC9432080CBFF00AAD5B6 /* ContactService.swift in Sources */,
 				B56FBB322122C84F004F4A59 /* TermsOfUseInteractorInput.swift in Sources */,
+				CEE3B7CB225791C400B99FE7 /* UITextField+Extensions.swift in Sources */,
 				8C0E8FA31FDEBDFF00789C91 /* HelpAndSupportViewOutput.swift in Sources */,
 				8C0E8FA41FDEBDFF00789C91 /* AlbumDetailPresenter.swift in Sources */,
 				8C0E8FA51FDEBDFF00789C91 /* OfferServiceResponse.swift in Sources */,
 				98570AFB208F7558002CCEBA /* SpotlightViewController.swift in Sources */,
-				CE5921D2225623F3005882CE /* ChangePasswordController.swift in Sources */,
 				8C0E8FA61FDEBDFF00789C91 /* AlbumDetailInteractor.swift in Sources */,
 				8C0E8FA71FDEBDFF00789C91 /* PasscodeSettingsInteractor.swift in Sources */,
 				8C0E8FA81FDEBDFF00789C91 /* AlbumDetailRouterInput.swift in Sources */,
@@ -17217,6 +17231,7 @@
 				4A9B3905201F3525009FC572 /* FaceImageItemsInteractor.swift in Sources */,
 				A207990E219F137E00AD5037 /* PremiumInteractor.swift in Sources */,
 				92004B5421AD10E600582C45 /* MyStorageModuleInitializer.swift in Sources */,
+				CEE3B7CA225791AD00B99FE7 /* UITextField+Extensions.swift in Sources */,
 				4BF7CF4F223103E2002DAF37 /* DropDownView.swift in Sources */,
 				CEB2734E205BF57B00E1AE9C /* UnderlineTextField.swift in Sources */,
 				7CF6BDBA1F0B88910066709E /* CollectionViewCellForVideo.swift in Sources */,
@@ -17336,6 +17351,7 @@
 				7809A32D1FED09EF00954A5F /* AsyncOperation.swift in Sources */,
 				473D8B8C69D964CD050C891A /* PhotoVideoDetailInteractor.swift in Sources */,
 				CE2F561A1F7552A900F49DA1 /* PackagesModuleInput.swift in Sources */,
+				CEE3B7C82257917200B99FE7 /* CaptchaView.swift in Sources */,
 				DD99F320480D3A98D286DB95 /* PhotoVideoDetailRouterInput.swift in Sources */,
 				93BB369B3341CED27FDF2EC0 /* PhotoVideoDetailRouter.swift in Sources */,
 				5A3FFF1FDAD804A4043F9E5F /* PhotoVideoDetailConfigurator.swift in Sources */,
