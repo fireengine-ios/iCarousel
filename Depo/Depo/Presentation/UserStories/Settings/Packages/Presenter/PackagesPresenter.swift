@@ -266,16 +266,18 @@ extension PackagesPresenter: PackageInfoViewDelegate {
         switch type {
         case .myStorage:
             router.openMyStorage(storageUsage: storageUsage)
-        case .premiumUser, .standardUser, .middleUser:
-            let leavePremiumType: LeavePremiumType
-            if type == .standardUser {
-                leavePremiumType = .standard
-            } else if type == .middleUser {
-                leavePremiumType = .middle
-            } else {
-                leavePremiumType = .premium
+        case .accountType(let accountType):
+            router.openLeavePremium(type: accountType.leavePremiumType)
+        case .myProfile:
+            guard let userInfo = SingletonStorage.shared.accountInfo else {
+                let error = CustomErrors.text("Unexpected found nil while getting user info. Refresh page may solve this problem.")
+                failed(with: error.localizedDescription)
+                return
             }
-            router.openLeavePremium(type: leavePremiumType)
+            
+            let isTurkcell = SingletonStorage.shared.isTurkcellUser
+            router.openUserProfile(userInfo: userInfo, isTurkcellUser: isTurkcell)
+            break
         case .premiumBanner:
             break
         }
