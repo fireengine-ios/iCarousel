@@ -153,7 +153,7 @@ extension PackagesViewController: PackagesViewInput {
         present(vc, animated: false, completion: nil)
     }
 
-    func setupStackView(with storageCapacity: Int64) {
+    func setupStackView(with percentage: CGFloat) {
         for view in cardsStackView.arrangedSubviews {
             view.removeFromSuperview()
         }
@@ -174,12 +174,12 @@ extension PackagesViewController: PackagesViewInput {
         addNewCard(type: .accountType(type))
 
         ///my storage card
-        addNewCard(type: .myStorage, capacity: storageCapacity)
+        addNewCard(type: .myStorage, percentage: percentage)
     }
     
-    private func addNewCard(type: ControlPackageType, capacity: Int64? = nil) {
+    private func addNewCard(type: ControlPackageType, percentage: CGFloat? = nil) {
         let card = PackageInfoView.initFromNib()
-        card.configure(with: type, capacity: capacity)
+        card.configure(with: type, percentage: percentage)
 
         output.configureCard(card)
         cardsStackView.addArrangedSubview(card)
