@@ -67,14 +67,23 @@ final class CaptchaView: UIView {
         }
     }
     
+    @IBOutlet weak var errorLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.textOrange
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
+            newValue.isHidden = true
+            newValue.backgroundColor = .white
+            newValue.isOpaque = true
+        }
+    }
+    
     @IBAction private func onRefreshCaptchaButton(_ sender: UIButton) {
-        getImageCaptcha()
-        captchaAnswerTextField.text = ""
+        updateCaptcha()
     }
     
     @IBAction private func onSoundCaptchaButton(_ sender: UIButton) {
         getAudioCaptcha()
-        captchaAnswerTextField.text = ""
+        clearCaptchaAnswer()
     }
     
     var currentCaptchaUUID = ""
@@ -86,6 +95,15 @@ final class CaptchaView: UIView {
         super.awakeFromNib()
         
         getImageCaptcha()
+    }
+    
+    func updateCaptcha() {
+        clearCaptchaAnswer()
+        getImageCaptcha()
+    }
+    
+    func clearCaptchaAnswer() {
+        captchaAnswerTextField.text = ""
     }
     
     private func generateCaptchaUUID() {
@@ -139,5 +157,26 @@ final class CaptchaView: UIView {
         player = try? AVAudioPlayer(data: data)
         player?.prepareToPlay()
         player?.play()
+    }
+    
+    func showErrorAnimated() {
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.errorLabel.isHidden = false
+            /// https://stackoverflow.com/a/46412621/5893286
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func hideErrorAnimated() {
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.errorLabel.isHidden = true
+            /// https://stackoverflow.com/a/46412621/5893286
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func showErrorAnimated(text: String) {
+        errorLabel.text = text
+        showErrorAnimated()
     }
 }

@@ -66,4 +66,31 @@ final class PasswordView: UIView, NibInit {
         
         toggleTextFieldSecureType()
     }
+    
+    func showUnderlineAnimated() {
+        guard underlineLabel.isHidden else {
+            return
+        }
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.underlineLabel.isHidden = false
+            /// https://stackoverflow.com/a/46412621/5893286
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func hideUnderlineAnimated() {
+        guard !underlineLabel.isHidden else {
+            return
+        }
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.underlineLabel.isHidden = true
+            /// https://stackoverflow.com/a/46412621/5893286
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func showTextAnimated(text: String) {
+        underlineLabel.text = text
+        showUnderlineAnimated()
+    }
 }

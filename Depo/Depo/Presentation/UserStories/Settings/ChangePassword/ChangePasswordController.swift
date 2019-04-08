@@ -4,6 +4,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
     
     /// in IB:
     /// UIScrollView().delaysContentTouches = false
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     private lazy var accountService = AccountService()
     
@@ -33,7 +34,6 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
         let view = PasswordView.initFromNib()
         view.titleLabel.text = "New Password"
         view.underlineLabel.text = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters."
-        view.underlineLabel.textColor = UIColor.lrTealish
         view.passwordTextField.returnKeyType = .next
         return view
     }()
@@ -97,14 +97,49 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
                                       newPassword: newPassword,
                                       repeatPassword: repeatPassword,
                                       captchaId: captchaView.currentCaptchaUUID,
-                                      captchaAnswer: captchaAnswer) { result in
+                                      captchaAnswer: captchaAnswer) { [weak self] result in
                                         switch result {
                                         case .success(_):
                                             print("success")
                                         case .failure(let error):
-                                            print(error)
+                                            self?.actionOnUpdateError(error)
                                         }
         }
+    }
+    
+    func actionOnUpdateError(_ error: UpdatePasswordErrors) {
+        let errorText = error.localizedDescription
+        
+        switch error {
+        case .unknown, .invalidCaptcha:
+            captchaView.updateCaptcha()
+            captchaView.showErrorAnimated(text: errorText)
+            captchaView.captchaAnswerTextField.becomeFirstResponder()
+            let rect = scrollView.convert(captchaView.frame, to: scrollView)
+            scrollView.scrollRectToVisible(rect, animated: true)
+            
+        case .invalidNewPassword:
+            newPasswordView.underlineLabel.textColor = ColorConstants.textOrange
+            
+            newPasswordView.showTextAnimated(text: errorText)
+            newPasswordView.passwordTextField.becomeFirstResponder()
+            let rect = scrollView.convert(newPasswordView.frame, to: scrollView)
+            scrollView.scrollRectToVisible(rect, animated: true)
+            
+        case .invalidOldPassword:
+            oldPasswordView.showTextAnimated(text: errorText)
+            oldPasswordView.passwordTextField.becomeFirstResponder()
+            let rect = scrollView.convert(oldPasswordView.frame, to: scrollView)
+            scrollView.scrollRectToVisible(rect, animated: true)
+            
+        case .notMatchNewAndRepeatPassword:
+            repeatPasswordView.showTextAnimated(text: errorText)
+            repeatPasswordView.passwordTextField.becomeFirstResponder()
+            let rect = scrollView.convert(repeatPasswordView.frame, to: scrollView)
+            scrollView.scrollRectToVisible(rect, animated: true)
+        }
+        
+        print(errorText)
     }
 }
 
@@ -112,11 +147,8 @@ extension ChangePasswordController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
         case newPasswordView.passwordTextField:
-            UIView.animate(withDuration: NumericConstants.animationDuration) {
-                self.newPasswordView.underlineLabel.isHidden = false
-                /// https://stackoverflow.com/a/46412621/5893286
-                self.passwordsStackView.layoutIfNeeded()
-            }
+            newPasswordView.underlineLabel.textColor = UIColor.lrTealish
+            newPasswordView.showUnderlineAnimated()
             
         default:
             break
@@ -126,13 +158,15 @@ extension ChangePasswordController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
         case newPasswordView.passwordTextField:
-            UIView.animate(withDuration: NumericConstants.animationDuration) {
-                self.newPasswordView.underlineLabel.isHidden = true
-                /// https://stackoverflow.com/a/46412621/5893286
-                self.passwordsStackView.layoutIfNeeded()
-            }
+            newPasswordView.hideUnderlineAnimated()
+        case oldPasswordView.passwordTextField:
+            oldPasswordView.hideUnderlineAnimated()
+        case repeatPasswordView.passwordTextField:
+            repeatPasswordView.hideUnderlineAnimated()
+        case captchaView.captchaAnswerTextField:
+            captchaView.hideErrorAnimated()
         default:
-            break
+            assertionFailure()
         }
     }
     
