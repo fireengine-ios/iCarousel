@@ -190,9 +190,8 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     // MARK: UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let tag = textField.tag
-        let view: UIView? = viewForContent.viewWithTag(tag + 1)
-        guard let nextTextField = view as! UITextField!  else {
+        let view = viewForContent.viewWithTag(textField.tag + 1)
+        guard let nextTextField = view as? UITextField else {
             return true
         }
         nextTextField.becomeFirstResponder()
