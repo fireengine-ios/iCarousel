@@ -35,4 +35,14 @@ extension NSManagedObject {
             
         }
     }
+    
+    static var identifier = String(describing: self)
+    
+    class func entityDescription(context: NSManagedObjectContext) -> NSEntityDescription {
+        if #available(iOS 10.0, *) {
+            return self.entity()
+        } else {
+            return NSEntityDescription.entity(forEntityName: self.identifier, in: context)!
+        }
+    }
 }

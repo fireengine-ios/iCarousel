@@ -29,18 +29,53 @@ final class MediaItemOperationsService {
     var originalAssetsBeingAppended = AssetsCache()
     var nonCloudAlreadySavedAssets = AssetsCache()
     
-    func deleteRemoteFiles(_ completion: BoolHandler?) {
-        // Album has remote status by default for now
-        let albumFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItemsAlbum.Identifier)
+    func deleteRemoteEntities(_ completion: BoolHandler?) {
+        let remoteMediaItemsPredicate = PredicateRules().predicate(filters: [.localStatus(.nonLocal)])
         
-        let mediaItemFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
-        let predicateRules = PredicateRules()
-        guard let predicate = predicateRules.predicate(filters: [.localStatus(.nonLocal)]) else {
-            return
+        let elementsToDelete: [(type: NSManagedObject.Type, predicate: NSPredicate?)]
+        elementsToDelete = [(MediaItemsAlbum.self, nil),
+                            (MediaItem.self, remoteMediaItemsPredicate)]
+        
+        let group = DispatchGroup()
+        
+        for element in elementsToDelete {
+            group.enter()
+            
+            delete(type: element.type, predicate: element.predicate, mergeChanges: false) { _ in
+                group.leave()
+            }
         }
-        mediaItemFetchRequest.predicate = predicate
-        
-        self.deleteObjects(fromFetches: [albumFetchRequest, mediaItemFetchRequest], completion: completion)
+        group.notify(queue: .main) {
+            completion?(true)
+        }
+    }
+    
+    private func delete(type: NSManagedObject.Type, predicate: NSPredicate?, mergeChanges: Bool, _ completion: BoolHandler?) {
+        CoreDataStack.default.performBackgroundTask { [weak self] context in
+            guard let `self` = self else {
+                return
+            }
+            
+            do {
+                let objectIDs = try [type]
+                    .compactMap { $0.entityDescription(context: context)}
+                    .compactMap { self.batchDeleteRequest(for: $0, predicate: predicate) }
+                    .compactMap { try context.execute($0) as? NSBatchDeleteResult }
+                    .compactMap { $0.result as? [NSManagedObjectID] }
+                    .flatMap { $0 }
+                
+                let changes = [NSDeletedObjectsKey: objectIDs]
+
+                if mergeChanges {
+                    NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [context.parent ?? CoreDataStack.default.mainContext])
+                }
+                completion?(true)
+                
+            } catch {
+                //TODO:
+                completion?(false)
+            }
+        }
     }
     
     func deleteLocalFiles(completion: BoolHandler?) {
@@ -595,47 +630,22 @@ final class MediaItemOperationsService {
         }
     }
     
-    func removeRemoteItems(_ items: [WrapData], completion: @escaping VoidHandler) {
+    func deleteItems(_ items: [WrapData], completion: @escaping VoidHandler) {
         guard !items.isEmpty else {
             return
         }
         
-        CoreDataStack.default.performBackgroundTask { [weak self] context in
-            guard let `self` = self else {
-                return
-            }
-            
-            let mediaItems = items.compactMap { MediaItem(wrapData: $0, context: context) }
-            
-            do {
-                let objectIDs = try mediaItems
-                    .compactMap { $0.entity }
-                    .compactMap { self.batchDeleteRequest(for: $0) }
-                    .compactMap { try context.execute($0) as? NSBatchDeleteResult }
-                    .compactMap { $0.result as? [NSManagedObjectID] }
-                    .flatMap { $0 }
-                
-                let changes = [NSDeletedObjectsKey: objectIDs]
-                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [context.parent ?? CoreDataStack.default.mainContext])
-                completion()
-//                let predicate = NSPredicate(format: "uuid in %@", items.map {$0.uuid} )
-//                self.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { remoteItems in
-//                    remoteItems.forEach { context.delete($0) }
-//
-//                    context.saveAsync(completion: { _ in
-//                        completion()
-//                    })
-//                })
-            } catch {
-                //TODO:
-                completion()
-            }
-        }
+        let predicate = NSPredicate(format: "uuid IN %@", items.compactMap { $0.uuid })
+        delete(type: MediaItem.self, predicate: predicate, mergeChanges: true, { _ in
+            completion()
+        })
+        
     }
     
-    private func batchDeleteRequest(for entity: NSEntityDescription) -> NSBatchDeleteRequest {
+    private func batchDeleteRequest(for entityDescription: NSEntityDescription, predicate: NSPredicate?) -> NSBatchDeleteRequest {
         let deleteFetchRequest = NSFetchRequest<NSFetchRequestResult>()
-        deleteFetchRequest.entity = entity
+        deleteFetchRequest.entity = entityDescription
+        deleteFetchRequest.predicate = predicate
         deleteFetchRequest.includesPropertyValues = false
         deleteFetchRequest.returnsObjectsAsFaults = false
         deleteFetchRequest.resultType = .managedObjectIDResultType

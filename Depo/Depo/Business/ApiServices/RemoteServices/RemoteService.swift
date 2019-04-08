@@ -204,7 +204,7 @@ final class NextPageOperation: Operation {
                     return
                 }
                 
-                let list = resultResponse.flatMap { WrapData(remote: $0) }
+                let list = resultResponse.compactMap { WrapData(remote: $0) }
                 self.success?(list)
                 
                 self.searchService.debugLogTransIdIfNeeded(headers: (response as? SearchResponse)?.response?.allHeaderFields, method: "searchByField")
