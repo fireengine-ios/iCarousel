@@ -121,14 +121,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 0) {
-            if output.isPremiumUser {
-                return 186
-            } else {
-                return 224
-            }
-        }
-        return 14
+        return section == 0 ? 201 : 14
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
