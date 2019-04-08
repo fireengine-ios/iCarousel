@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserProfileViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="changePasswordButton" destination="Dsc-fh-tOn" id="PK0-31-Bto"/>
                 <outlet property="emailSubTitle" destination="8Bf-Av-RVT" id="lhW-10-U7u"/>
                 <outlet property="emailTextField" destination="wto-4O-7s3" id="KYD-HT-4VD"/>
                 <outlet property="gsmNumberSubTitle" destination="jdP-LU-Y0j" id="sP4-8d-eB5"/>
@@ -31,7 +32,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="otI-cs-Zfe">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="otI-cs-Zfe">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I5n-S0-6Wf">
@@ -178,13 +179,27 @@
                                         </stackView>
                                     </subviews>
                                 </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dsc-fh-tOn" customClass="AdjustsFontSizeInsetsRoundedDarkBlueButton" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="58.5" y="380" width="218" height="54"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="54" id="BOE-CW-L69"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="onChangePasswordTap:" destination="-1" eventType="touchUpInside" id="YVg-PV-rmw"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="Dsc-fh-tOn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="I5n-S0-6Wf" secondAttribute="leading" constant="8" id="4fU-nr-L3q"/>
                                 <constraint firstAttribute="trailing" secondItem="H45-7p-Jvj" secondAttribute="trailing" id="69Q-aj-6tU"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="H45-7p-Jvj" secondAttribute="bottom" constant="16" id="AsL-XV-s00"/>
                                 <constraint firstItem="H45-7p-Jvj" firstAttribute="top" secondItem="I5n-S0-6Wf" secondAttribute="top" id="FE0-wC-hJR"/>
+                                <constraint firstItem="Dsc-fh-tOn" firstAttribute="centerX" secondItem="I5n-S0-6Wf" secondAttribute="centerX" id="HYq-O5-lta"/>
+                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Dsc-fh-tOn" secondAttribute="trailing" constant="8" id="LMq-kB-Iso"/>
+                                <constraint firstItem="Dsc-fh-tOn" firstAttribute="width" secondItem="I5n-S0-6Wf" secondAttribute="width" multiplier="0.65" priority="750" id="NSW-Qy-sF3"/>
                                 <constraint firstItem="H45-7p-Jvj" firstAttribute="leading" secondItem="I5n-S0-6Wf" secondAttribute="leading" id="Pt2-6l-Rge"/>
+                                <constraint firstItem="Dsc-fh-tOn" firstAttribute="top" secondItem="H45-7p-Jvj" secondAttribute="bottom" constant="28" id="gPd-PQ-Djt"/>
                             </constraints>
                         </view>
                     </subviews>
