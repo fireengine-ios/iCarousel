@@ -908,6 +908,8 @@
 "package_renew_date" = "Will be renewed on: %@";
 "percentage_used" = "%.0f%% used";
 "used_and_left_space" = "%1$@ / %2$@ used";
+"left_space" = "%1$@ / %2$@";
+"account_details" = "Account Details";
 "percentage_used_two_lines" = "%.0f%%\nused";
 "my_usage_storage" = "My Usage Storage";
 
