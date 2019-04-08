@@ -49,6 +49,9 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private lazy var filesDataSource = FilesDataSource()
     
+    private var canShowDetail = true
+    
+    
     // MARK: - life cycle
     
     override func viewDidLoad() {
@@ -175,19 +178,29 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private func showDetail(at indexPath: IndexPath) {
         // TODO: trackClickOnPhotoOrVideo(isPhoto: false)
+        guard canShowDetail else {
+            return
+        }
+        
+        canShowDetail = false
         trackClickOnPhotoOrVideo(isPhoto: true)
 
+        showSpiner()
         dataSource.getWrapedFetchedObjects { [weak self] items in
             guard let currentMediaItem = self?.dataSource.object(at: indexPath) else {
+                self?.canShowDetail = true
+                self?.hideSpiner()
                 return
             }
             let currentObject = WrapData(mediaItem: currentMediaItem)
             
             DispatchQueue.toMain {
+                self?.hideSpiner()
                 let router = RouterVC()
                 let controller = router.filesDetailViewController(fileObject: currentObject, items: items)
                 let nController = NavigationController(rootViewController: controller)
                 router.presentViewController(controller: nController)
+                self?.canShowDetail = true
             }
         }
     }
