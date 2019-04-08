@@ -56,16 +56,6 @@ public class MediaItem: NSManagedObject {
             debugPrint("!!! REMOTE ITEM MD5 EMPTY \(md5Value) AND LOCAL ID \(trimmedLocalFileID)")
         }
         
-        //empty monthValue for missing dates section
-        switch wrapData.patchToPreview {
-        case .remoteUrl(let url):
-            if url != nil {
-                fallthrough
-            }
-        default:
-            monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
-        }
-        
         let metaData = MediaItemsMetaData(metadata: wrapData.metaData,
                                           context: context)
         self.metadata = metaData
@@ -85,6 +75,7 @@ public class MediaItem: NSManagedObject {
             let savedRelatedRemotes = getRelatedRemotes(for: wrapData, context: context)
             if !savedRelatedRemotes.isEmpty {
                 addToObjectSyncStatus(MediaItemsObjectSyncStatus(userID: SingletonStorage.shared.uniqueUserID, context: context))
+                savedRelatedRemotes.forEach { $0.localFileID = localFileID }
                 relatedRemotes = NSSet(array: savedRelatedRemotes)
                 updateLocalRelated(remotesMediaItems: savedRelatedRemotes)
             }
@@ -95,8 +86,20 @@ public class MediaItem: NSManagedObject {
                     $0.addToObjectSyncStatus(MediaItemsObjectSyncStatus(userID: SingletonStorage.shared.uniqueUserID, context: context))
                 }
                 relatedLocal = savedRelatedLocals.first
+                localFileID = relatedLocal?.localFileID
                 updateRemoteRelated(localMediaItems: savedRelatedLocals)
             }
+        }
+        
+        
+        //empty monthValue for missing dates section
+        switch wrapData.patchToPreview {
+        case .remoteUrl(let url):
+            if url != nil || localFileID != nil {
+                fallthrough
+            }
+        default:
+            monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
         }
     }
     
@@ -129,16 +132,6 @@ public class MediaItem: NSManagedObject {
         lastModifiDateValue = item.lastModifiDate as NSDate?
         sortingDate = (item.metaData?.takenDate ?? item.creationDate) as NSDate?
         
-        //empty monthValue for missing dates section
-        switch item.patchToPreview {
-        case .remoteUrl(let url):
-            if url != nil {
-                fallthrough
-            }
-        default:
-            monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
-        }
-        
         urlToFileValue = item.tmpDownloadUrl?.absoluteString
         
         switch item.patchToPreview {
@@ -160,6 +153,17 @@ public class MediaItem: NSManagedObject {
         nameValue = item.name
         idValue = item.id ?? -1
         uuid = item.uuid
+        
+        //empty monthValue for missing dates section
+        switch item.patchToPreview {
+        case .remoteUrl(let url):
+            if url != nil || localFileID != nil {
+                fallthrough
+            }
+        default:
+            monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
+        }
+        
         
         //
         self.albums?.forEach { album in

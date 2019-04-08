@@ -141,20 +141,18 @@ final class PhotoVideoCell: UICollectionViewCell {
             videoDurationLabel.isHidden = true
         }
         
-        if mediaItem.isLocalItemValue {
-            guard let assetIdentifier = mediaItem.localFileID else {
-                return
-            }
-            
+        if let assetIdentifier = mediaItem.localFileID {
             cellId = assetIdentifier
             
             FilesDataSource.cacheQueue.async { [weak self] in
-                guard let self = self,
+                guard
+                    let self = self,
                     self.cellId == assetIdentifier,
-                    let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject else {
+                    let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject
+                else {
                     return
                 }
-            
+                
                 self.filesDataSource.getAssetThumbnail(asset: asset) { [weak self] image in
                     DispatchQueue.main.async {
                         if self?.cellId == asset.localIdentifier, let image = image {
