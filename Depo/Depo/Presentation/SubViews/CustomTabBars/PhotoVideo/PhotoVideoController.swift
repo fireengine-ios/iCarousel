@@ -693,6 +693,8 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
     func fetchPredicateCreated() { }
     
     func contentDidChange(_ fetchedObjects: [MediaItem]) {
-        scrollBarManager.updateYearsView(with: fetchedObjects, cellHeight: itemSize.height, numberOfColumns: columnsNumber)
+        DispatchQueue.toMain {
+            self.scrollBarManager.updateYearsView(with: fetchedObjects, cellHeight: self.itemSize.height, numberOfColumns: self.columnsNumber)
+        }
     }
 }

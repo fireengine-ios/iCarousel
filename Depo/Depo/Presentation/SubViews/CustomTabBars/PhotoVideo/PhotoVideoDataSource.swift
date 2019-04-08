@@ -17,7 +17,7 @@ protocol PhotoVideoDataSourceDelegate: class {
 // TODO: selectedIndexPaths NSFetchedResultsController changes
 final class PhotoVideoDataSource: NSObject {
     
-    private var thresholdService = ThresholdBlockService(threshold: 0.1, queue: DispatchQueue.main)
+    private var thresholdService = ThresholdBlockService(threshold: 0.1)
     
     var isSelectingMode = false {
         didSet {
@@ -67,11 +67,11 @@ final class PhotoVideoDataSource: NSObject {
         let sortDescriptor3 = NSSortDescriptor(key: #keyPath(MediaItem.idValue), ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2, sortDescriptor3]
         
-        if Device.isIpad {
-            fetchRequest.fetchBatchSize = 64
-        } else {
-            fetchRequest.fetchBatchSize = 32
-        }
+//        if Device.isIpad {
+//            fetchRequest.fetchBatchSize = 64
+//        } else {
+//            fetchRequest.fetchBatchSize = 32
+//        }
         
         //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
         let context = CoreDataStack.default.mainContext
@@ -229,13 +229,10 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     }
     
     private func updateLastFetchedObjects() {
-//        thresholdService.execute { [weak self] in
-//            self?.lastFetchedObjects = self?.fetchedObjects
-//            self?.delegate?.contentDidChange(self?.fetchedResultsController.fetchedObjects ?? [])
-//        }
-        
-        lastFetchedObjects = fetchedOriginalObjects
-        delegate?.contentDidChange(lastFetchedObjects ?? [])
+        thresholdService.execute { [weak self] in
+            self?.lastFetchedObjects = self?.fetchedOriginalObjects
+            self?.delegate?.contentDidChange(self?.fetchedOriginalObjects ?? [])
+        }
     }
     
     private func reloadSupplementaryViewsIfNeeded() {
