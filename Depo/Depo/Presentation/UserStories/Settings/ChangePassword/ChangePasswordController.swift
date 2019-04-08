@@ -5,6 +5,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
     /// in IB:
     /// UIScrollView().delaysContentTouches = false
     
+    private lazy var accountService = AccountService()
+    
     @IBOutlet private weak var passwordsStackView: UIStackView! {
         willSet {
             newValue.spacing = 20
@@ -43,49 +45,22 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
         return view
     }()
     
-    @IBOutlet weak var captchaAnswerTextField: InsetsTextField! {
-        willSet {
-            newValue.font = UIFont.TurkcellSaturaItaFont(size: 20)
-            newValue.textColor = UIColor.lrTealish
-            newValue.borderStyle = .none
-            newValue.backgroundColor = .white
-            newValue.isOpaque = true
-            newValue.insetX = 16
-            newValue.attributedPlaceholder = NSAttributedString(string: "Type the text",
-                                                                attributes: [.foregroundColor: UIColor.lrTealish])
-            
-            newValue.layer.cornerRadius = 5
-            newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = ColorConstants.darkBorder.cgColor
-            
-            newValue.returnKeyType = .done
-            
-            /// removes suggestions bar above keyboard
-            newValue.autocorrectionType = .no
-            
-            /// removed useless features
-            newValue.autocapitalizationType = .none
-            newValue.spellCheckingType = .no
-            newValue.autocapitalizationType = .none
-            newValue.enablesReturnKeyAutomatically = true
-            if #available(iOS 11.0, *) {
-                newValue.smartQuotesType = .no
-                newValue.smartDashesType = .no
-            }
-        }
-    }
+    @IBOutlet private weak var captchaView: CaptchaView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initialSetup()
+        oldPasswordView.passwordTextField.text = "qwerty"
+        newPasswordView.passwordTextField.text = "qwertyu"
+        repeatPasswordView.passwordTextField.text = "qwerty"
     }
     
     private func initialSetup() {
         oldPasswordView.passwordTextField.delegate = self
         newPasswordView.passwordTextField.delegate = self
         repeatPasswordView.passwordTextField.delegate = self
-        captchaAnswerTextField.delegate = self
+        captchaView.captchaAnswerTextField.delegate = self
         
         addTapGestureToHideKeyboard()
         
@@ -99,9 +74,37 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
         navigationItem.rightBarButtonItem = doneButton
     }
     
-    @objc private func onDoneButton() {
+    @objc private func onDoneButton(_ button: UIBarButtonItem) {
+//        button.isEnabled = false
         //activity
         //service call
+        updatePassword()
+    }
+    
+    func updatePassword() {
+        
+        guard
+            let oldPassword = oldPasswordView.passwordTextField.text,
+            let newPassword = newPasswordView.passwordTextField.text,
+            let repeatPassword = repeatPasswordView.passwordTextField.text,
+            let captchaAnswer = captchaView.captchaAnswerTextField.text
+        else {
+            assertionFailure("all fields should not be nil")
+            return
+        }
+        
+        accountService.updatePassword(oldPassword: oldPassword,
+                                      newPassword: newPassword,
+                                      repeatPassword: repeatPassword,
+                                      captchaId: captchaView.currentCaptchaUUID,
+                                      captchaAnswer: captchaAnswer) { result in
+                                        switch result {
+                                        case .success(_):
+                                            print("success")
+                                        case .failure(let error):
+                                            print(error)
+                                        }
+        }
     }
 }
 
@@ -140,11 +143,11 @@ extension ChangePasswordController: UITextFieldDelegate {
         case newPasswordView.passwordTextField:
             repeatPasswordView.passwordTextField.becomeFirstResponder()
         case repeatPasswordView.passwordTextField:
-            captchaAnswerTextField.becomeFirstResponder()
-        case captchaAnswerTextField:
-            onDoneButton()
+            captchaView.captchaAnswerTextField.becomeFirstResponder()
+        case captchaView.captchaAnswerTextField:
+            updatePassword()
         default:
-            break
+            assertionFailure()
         }
             
         return true

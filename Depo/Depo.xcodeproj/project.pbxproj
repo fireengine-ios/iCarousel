@@ -11947,9 +11947,9 @@
 			children = (
 				CE5921CF225623D3005882CE /* ChangePasswordController.xib */,
 				CE5921CE225623D3005882CE /* ChangePasswordController.swift */,
+				CEE3B7C72257917200B99FE7 /* CaptchaView.swift */,
 				CE5921D722564465005882CE /* PasswordView.xib */,
 				CE5921D92256446F005882CE /* PasswordView.swift */,
-				CEE3B7C72257917200B99FE7 /* CaptchaView.swift */,
 			);
 			path = ChangePassword;
 			sourceTree = "<group>";
