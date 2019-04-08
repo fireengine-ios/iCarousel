@@ -20,7 +20,7 @@ class PackagesPresenter {
     private var offerToBuy: PackageModelResponse?
     private var offerIndex: Int = 0
     private var optInVC: OptInController?
-    private var storageCapacity: Int64 = 0
+    private var percentage: CGFloat = 0
     private var storageUsage: UsageResponse?
     
     private func refreshPage() {
@@ -40,10 +40,6 @@ class PackagesPresenter {
 extension PackagesPresenter: PackagesViewOutput {
     func getAccountType() -> AccountType {
         return accountType
-    }
-
-    func getStorageCapacity() -> Int64 {
-        return storageCapacity
     }
     
     func submit(promocode: String) {
@@ -190,9 +186,9 @@ extension PackagesPresenter: PackagesInteractorOutput {
     func successed(usage: UsageResponse) {
         view?.stopActivityIndicator()
         storageUsage = usage
-        if let quotaBytes = usage.quotaBytes {
-            storageCapacity = quotaBytes
-            view?.setupStackView(with: quotaBytes)
+        if let used = usage.usedBytes, let total = usage.quotaBytes {
+            percentage = 100 * CGFloat(used) / CGFloat(total)
+            view?.setupStackView(with: percentage)
         }
     }
     
@@ -216,7 +212,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
 
     func successedGotUserAuthority() {
         view?.stopActivityIndicator()
-        view?.setupStackView(with: storageCapacity)
+        view?.setupStackView(with: percentage)
     }
     
     func failedPromocode(with errorString: String) {

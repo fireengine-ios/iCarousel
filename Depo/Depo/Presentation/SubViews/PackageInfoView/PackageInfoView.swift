@@ -77,8 +77,7 @@ final class PackageInfoView: UIView, NibInit {
     }
 
     //MARK: Utility methods(public)
-    func configure(with type: ControlPackageType, capacity: Int64? = nil) {
-
+    func configure(with type: ControlPackageType, percentage: CGFloat? = nil) {
         viewType = type
 
         switch type {
@@ -87,9 +86,9 @@ final class PackageInfoView: UIView, NibInit {
             detailLabel.isHidden = true
         case .myStorage:
             titleLabel.text = TextConstants.myStorage
-            if let capacity = capacity, capacity != 0 {
-                let capacityGB = capacity.bytesString
-                detailLabel.text = capacityGB
+            if let percentage = percentage, percentage != 0 {
+                detailLabel.isHidden = false
+                detailLabel.text = String(format: TextConstants.usagePercentage, percentage.rounded(.toNearestOrAwayFromZero))
             } else {
                 detailLabel.isHidden = true
             }
