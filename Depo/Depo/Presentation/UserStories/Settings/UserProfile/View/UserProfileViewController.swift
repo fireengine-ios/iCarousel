@@ -98,9 +98,9 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     }
     
     private func configureNavBar() {
-        setTitle(withString: TextConstants.backTitle)
+        setTitle(withString: TextConstants.myProfile)
         
-        navigationController?.navigationItem.title = TextConstants.backTitle
+        navigationController?.navigationItem.title = TextConstants.myProfile
     }
 
     // MARK: ViewInput
