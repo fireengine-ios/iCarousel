@@ -49,7 +49,8 @@ final class PhotoVideoDataSource: NSObject {
 //    var lastFetchedObjects: [WrapData]?
     var lastFetchedObjects: [MediaItem]?
     
-    var canUpdateLastFecthed = true
+    var firstVisibleItem: MediaItem?
+    var cellTopOffset: CGFloat = 0
     
     private weak var delegate: PhotoVideoDataSourceDelegate?
     private weak var collectionView: UICollectionView!
@@ -219,12 +220,33 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         let objectChangesStatic = objectChanges
         sectionChanges.removeAll()
         objectChanges.removeAll()
+        
+        if let indexPath = collectionView.indexPathsForVisibleItems.sorted(by: <).first {
+            firstVisibleItem = object(at: indexPath)
+            if let attributes = collectionView.layoutAttributesForItem(at: indexPath) {
+                cellTopOffset = attributes.frame.origin.y - collectionView.contentOffset.y
+            }
+        }
+        
         collectionView.performBatchUpdates({
             sectionChangesStatic.forEach { $0() }
             objectChangesStatic.forEach { $0() }
-            }, completion: { [weak self] _ in
-                self?.reloadSupplementaryViewsIfNeeded()
-                self?.updateLastFetchedObjects()
+        }, completion: { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+            
+            if !self.collectionView.isDragging,
+                let firstVisibleItem = self.firstVisibleItem,
+                let indexPath = self.indexPath(forObject: firstVisibleItem),
+                let attributes = self.collectionView.layoutAttributesForItem(at: indexPath)
+            {
+                let offset = CGPoint(x: 0, y: attributes.frame.origin.y - self.cellTopOffset)
+                self.collectionView.setContentOffset(offset, animated: false)
+            }
+            
+            self.reloadSupplementaryViewsIfNeeded()
+            self.updateLastFetchedObjects()
         })
     }
     
