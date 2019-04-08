@@ -116,17 +116,18 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func turkcellSuccessLogin() {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
-//        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
+
+        analyticsService.trackLoginEvent(loginType: GADementionValues.login.turkcellGSM)
+//        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
+
         DispatchQueue.toMain {
             self.output.onSuccessLoginTurkcell()
         }
     }
     
     func successLogin() {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
-//        ItemsRepository.sharedSession.updateCache()
-//        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
+        analyticsService.trackLoginEvent(loginType: GADementionValues.login.rememberLogin)
+//        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
         DispatchQueue.toMain {
             self.output.onSuccessLogin()
         }
