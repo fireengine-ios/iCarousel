@@ -678,7 +678,6 @@ struct TextConstants {
     static let usageInfoQuotaInfo = NSLocalizedString("Quota info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let usageInfoDocs = NSLocalizedString("%ld docs", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let usedAndLeftSpace = NSLocalizedString("used_and_left_space", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let accountDetails = NSLocalizedString("account_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let leftSpace = NSLocalizedString("left_space", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packageSpaceDetails = NSLocalizedString("package_space_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let renewDate = NSLocalizedString("package_renew_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
