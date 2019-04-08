@@ -21,7 +21,7 @@ final class CacheManager {
     
     static let shared = CacheManager()
     
-    private static let pageSize: Int = 1000
+    private static let pageSize: Int = 100
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
                                                          type: .imageAndVideo)
     private(set) var processingRemoteItems = false
@@ -80,7 +80,7 @@ final class CacheManager {
         photoVideoService.nextItems(fileType: .imageAndVideo, sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remoteItems in
             
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
-//                self?.remotePageAdded?()
+                //                self?.remotePageAdded?()
                 if remoteItems.count < CacheManager.pageSize {
                     self?.photoVideoService.currentPage = 0
                     completion()
