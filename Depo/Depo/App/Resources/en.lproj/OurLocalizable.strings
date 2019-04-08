@@ -913,6 +913,9 @@
 "my_usage_storage" = "My Usage Storage";
 
 /*Packages*/
+
+"packages_i_have" = "Packages I Have";
+
 "account_details" = "Account Details";
 "my_profile" = "My Profile";
 
