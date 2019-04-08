@@ -220,7 +220,7 @@ class WrapItemFileService: WrapItemFileOperations {
         let success_: FileOperationSucces = {
             success?()
             files.forEach {
-                $0.coreDataObject?.favoritesValue = favouritse
+                $0.favorites = favouritse
             }
             if (favouritse) {
                 ItemOperationManager.default.addFilesToFavorites(items: files)
