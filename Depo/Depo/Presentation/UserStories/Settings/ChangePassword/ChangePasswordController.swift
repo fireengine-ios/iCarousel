@@ -1,6 +1,6 @@
 import UIKit
 
-final class ChangePasswordController: UIViewController, KeyboardHandler {
+final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit {
     
     @IBOutlet private weak var scrollView: UIScrollView! {
         willSet {
@@ -35,7 +35,6 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
     private let newPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
         view.titleLabel.text = "New Password"
-        view.underlineLabel.text = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters."
         view.passwordTextField.returnKeyType = .next
         return view
     }()
@@ -50,16 +49,34 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
     private lazy var accountService = AccountService()
     private var showErrorColorInNewPasswordView = false
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        initSetup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initSetup()
+    }
+    
+    private func initSetup() {
+        title = TextConstants.userProfileChangePassword
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initialSetup()
+        initialViewSetup()
 //        oldPasswordView.passwordTextField.text = "qwerty"
 //        newPasswordView.passwordTextField.text = "qwertyu"
-//        repeatPasswordView.passwordTextField.text = "qwerty"
+//        repeatPasswordView.passwordTextField.text = "qwertyu"
     }
     
-    private func initialSetup() {
+    private func initialViewSetup() {
         oldPasswordView.passwordTextField.delegate = self
         newPasswordView.passwordTextField.delegate = self
         repeatPasswordView.passwordTextField.delegate = self
@@ -78,9 +95,6 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
     }
     
     @objc private func onDoneButton(_ button: UIBarButtonItem) {
-//        button.isEnabled = false
-        //activity
-        //service call
         updatePassword()
     }
     
@@ -114,7 +128,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
                                           captchaAnswer: captchaAnswer) { [weak self] result in
                                             switch result {
                                             case .success(_):
-                                                print("success")
+                                                RouterVC().popViewController()
                                             case .failure(let error):
                                                 self?.actionOnUpdateOnError(error)
                                             }
@@ -137,6 +151,11 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
             
         case .invalidNewPassword, .newPasswordIsEmpty:
             showErrorColorInNewPasswordView = true
+            
+            /// important check to show error only once
+            if newPasswordView.passwordTextField.isFirstResponder {
+                updateNewPasswordView()
+            }
             
             newPasswordView.showTextAnimated(text: errorText)
             newPasswordView.passwordTextField.becomeFirstResponder()
@@ -162,21 +181,25 @@ extension ChangePasswordController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
         case newPasswordView.passwordTextField:
-            if showErrorColorInNewPasswordView {
-                newPasswordView.underlineLabel.textColor = ColorConstants.textOrange
-                /// we need to show error with color just once
-                showErrorColorInNewPasswordView = false
-                
-            /// can be "else" only. added chech for optimization without additional flags
-            } else if newPasswordView.underlineLabel.textColor != UIColor.lrTealish {
-                newPasswordView.underlineLabel.textColor = UIColor.lrTealish
-                newPasswordView.underlineLabel.text = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters."
-            }
-            newPasswordView.showUnderlineAnimated()
+            updateNewPasswordView()
             
         default:
             break
         }
+    }
+    
+    private func updateNewPasswordView() {
+        if showErrorColorInNewPasswordView {
+            newPasswordView.underlineLabel.textColor = ColorConstants.textOrange
+            /// we need to show error with color just once
+            showErrorColorInNewPasswordView = false
+            
+        /// can be "else" only. added chech for optimization without additional flags
+        } else if newPasswordView.underlineLabel.textColor != UIColor.lrTealish {
+            newPasswordView.underlineLabel.textColor = UIColor.lrTealish
+            newPasswordView.underlineLabel.text = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters."
+        }
+        newPasswordView.showUnderlineAnimated()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
