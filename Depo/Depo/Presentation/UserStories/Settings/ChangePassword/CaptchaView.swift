@@ -42,7 +42,6 @@ final class CaptchaView: UIView {
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
-            newValue.clearButtonMode = .whileEditing
             newValue.insetX = 16
             newValue.attributedPlaceholder = NSAttributedString(
                 string: TextConstants.changePasswordCaptchaAnswerPlaceholder,
