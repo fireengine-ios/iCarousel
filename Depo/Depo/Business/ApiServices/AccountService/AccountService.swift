@@ -413,6 +413,11 @@ enum UpdatePasswordErrors {
     case invalidNewPassword
     case invalidOldPassword
     case notMatchNewAndRepeatPassword
+    
+    case newPasswordIsEmpty
+    case oldPasswordIsEmpty
+    case repeatPasswordIsEmpty
+    case captchaAnswerIsEmpty
 }
 extension UpdatePasswordErrors: LocalizedError {
     var errorDescription: String? {
@@ -427,6 +432,15 @@ extension UpdatePasswordErrors: LocalizedError {
             return "Old Password does not match"
         case .notMatchNewAndRepeatPassword:
             return "New Password and Repeated Password does not match"
+            
+        case .newPasswordIsEmpty:
+            return "New password is empty"
+        case .oldPasswordIsEmpty:
+            return "Old password is empty"
+        case .repeatPasswordIsEmpty:
+            return "Repeat password is empty"
+        case .captchaAnswerIsEmpty:
+            return "This text is empty"
         }
     }
 }

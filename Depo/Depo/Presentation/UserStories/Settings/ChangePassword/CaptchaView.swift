@@ -160,6 +160,9 @@ final class CaptchaView: UIView {
     }
     
     func showErrorAnimated() {
+        guard errorLabel.isHidden else {
+            return
+        }
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.errorLabel.isHidden = false
             /// https://stackoverflow.com/a/46412621/5893286
@@ -168,6 +171,9 @@ final class CaptchaView: UIView {
     }
     
     func hideErrorAnimated() {
+        guard !errorLabel.isHidden else {
+            return
+        }
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.errorLabel.isHidden = true
             /// https://stackoverflow.com/a/46412621/5893286

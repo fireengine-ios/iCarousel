@@ -2,11 +2,11 @@ import UIKit
 
 final class ChangePasswordController: UIViewController, KeyboardHandler {
     
-    /// in IB:
-    /// UIScrollView().delaysContentTouches = false
-    @IBOutlet private weak var scrollView: UIScrollView!
-    
-    private lazy var accountService = AccountService()
+    @IBOutlet private weak var scrollView: UIScrollView! {
+        willSet {
+            newValue.delaysContentTouches = false
+        }
+    }
     
     @IBOutlet private weak var passwordsStackView: UIStackView! {
         willSet {
@@ -22,6 +22,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
             newValue.addArrangedSubview(repeatPasswordView)
         }
     }
+    
+    @IBOutlet private weak var captchaView: CaptchaView!
     
     private let oldPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
@@ -45,15 +47,16 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
         return view
     }()
     
-    @IBOutlet private weak var captchaView: CaptchaView!
+    private lazy var accountService = AccountService()
+    private var showErrorColorNewPasswordView = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initialSetup()
-        oldPasswordView.passwordTextField.text = "qwerty"
-        newPasswordView.passwordTextField.text = "qwertyu"
-        repeatPasswordView.passwordTextField.text = "qwerty"
+//        oldPasswordView.passwordTextField.text = "qwerty"
+//        newPasswordView.passwordTextField.text = "qwertyu"
+//        repeatPasswordView.passwordTextField.text = "qwerty"
     }
     
     private func initialSetup() {
@@ -93,34 +96,43 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
             return
         }
         
-        accountService.updatePassword(oldPassword: oldPassword,
-                                      newPassword: newPassword,
-                                      repeatPassword: repeatPassword,
-                                      captchaId: captchaView.currentCaptchaUUID,
-                                      captchaAnswer: captchaAnswer) { [weak self] result in
-                                        switch result {
-                                        case .success(_):
-                                            print("success")
-                                        case .failure(let error):
-                                            self?.actionOnUpdateError(error)
-                                        }
+        if oldPassword.isEmpty {
+            actionOnUpdateOnError(.oldPasswordIsEmpty)
+        } else if newPassword.isEmpty {
+            actionOnUpdateOnError(.newPasswordIsEmpty)
+        } else if repeatPassword.isEmpty {
+            actionOnUpdateOnError(.repeatPasswordIsEmpty)
+        } else if captchaAnswer.isEmpty {
+            actionOnUpdateOnError(.captchaAnswerIsEmpty)
+        } else {
+            
+            accountService.updatePassword(oldPassword: oldPassword,
+                                          newPassword: newPassword,
+                                          repeatPassword: repeatPassword,
+                                          captchaId: captchaView.currentCaptchaUUID,
+                                          captchaAnswer: captchaAnswer) { [weak self] result in
+                                            switch result {
+                                            case .success(_):
+                                                print("success")
+                                            case .failure(let error):
+                                                self?.actionOnUpdateOnError(error)
+                                            }
+            }
         }
     }
     
-    var showErrorColorNewPasswordView = false
-    
-    func actionOnUpdateError(_ error: UpdatePasswordErrors) {
+    private func actionOnUpdateOnError(_ error: UpdatePasswordErrors) {
         let errorText = error.localizedDescription
         
         switch error {
-        case .unknown, .invalidCaptcha:
+        case .unknown, .invalidCaptcha, .captchaAnswerIsEmpty:
             captchaView.updateCaptcha()
             captchaView.showErrorAnimated(text: errorText)
             captchaView.captchaAnswerTextField.becomeFirstResponder()
             let rect = scrollView.convert(captchaView.frame, to: scrollView)
             scrollView.scrollRectToVisible(rect, animated: true)
             
-        case .invalidNewPassword:
+        case .invalidNewPassword, .newPasswordIsEmpty:
 //            newPasswordView.underlineLabel.textColor = ColorConstants.textOrange
             showErrorColorNewPasswordView = true
             
@@ -129,13 +141,13 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
             let rect = scrollView.convert(newPasswordView.frame, to: scrollView)
             scrollView.scrollRectToVisible(rect, animated: true)
             
-        case .invalidOldPassword:
+        case .invalidOldPassword, .oldPasswordIsEmpty:
             oldPasswordView.showTextAnimated(text: errorText)
             oldPasswordView.passwordTextField.becomeFirstResponder()
             let rect = scrollView.convert(oldPasswordView.frame, to: scrollView)
             scrollView.scrollRectToVisible(rect, animated: true)
             
-        case .notMatchNewAndRepeatPassword:
+        case .notMatchNewAndRepeatPassword, .repeatPasswordIsEmpty:
             repeatPasswordView.showTextAnimated(text: errorText)
             repeatPasswordView.passwordTextField.becomeFirstResponder()
             let rect = scrollView.convert(repeatPasswordView.frame, to: scrollView)
