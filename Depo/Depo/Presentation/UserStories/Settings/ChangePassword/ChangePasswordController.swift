@@ -10,7 +10,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
     
     @IBOutlet private weak var passwordsStackView: UIStackView! {
         willSet {
-            newValue.spacing = 20
+            newValue.spacing = 18
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
@@ -133,7 +133,6 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
             scrollView.scrollRectToVisible(rect, animated: true)
             
         case .invalidNewPassword, .newPasswordIsEmpty:
-//            newPasswordView.underlineLabel.textColor = ColorConstants.textOrange
             showErrorColorNewPasswordView = true
             
             newPasswordView.showTextAnimated(text: errorText)
@@ -153,8 +152,6 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
             let rect = scrollView.convert(repeatPasswordView.frame, to: scrollView)
             scrollView.scrollRectToVisible(rect, animated: true)
         }
-        
-        print(errorText)
     }
 }
 
