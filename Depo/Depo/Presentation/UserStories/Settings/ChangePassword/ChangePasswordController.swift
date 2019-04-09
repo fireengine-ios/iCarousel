@@ -107,6 +107,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
         }
     }
     
+    var showErrorColorNewPasswordView = false
+    
     func actionOnUpdateError(_ error: UpdatePasswordErrors) {
         let errorText = error.localizedDescription
         
@@ -119,7 +121,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
             scrollView.scrollRectToVisible(rect, animated: true)
             
         case .invalidNewPassword:
-            newPasswordView.underlineLabel.textColor = ColorConstants.textOrange
+//            newPasswordView.underlineLabel.textColor = ColorConstants.textOrange
+            showErrorColorNewPasswordView = true
             
             newPasswordView.showTextAnimated(text: errorText)
             newPasswordView.passwordTextField.becomeFirstResponder()
@@ -147,7 +150,12 @@ extension ChangePasswordController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
         case newPasswordView.passwordTextField:
-            newPasswordView.underlineLabel.textColor = UIColor.lrTealish
+            if showErrorColorNewPasswordView {
+                newPasswordView.underlineLabel.textColor = ColorConstants.textOrange
+                showErrorColorNewPasswordView = false
+            } else {
+                newPasswordView.underlineLabel.textColor = UIColor.lrTealish
+            }
             newPasswordView.showUnderlineAnimated()
             
         default:
