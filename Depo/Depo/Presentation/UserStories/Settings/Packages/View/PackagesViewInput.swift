@@ -17,5 +17,5 @@ protocol PackagesViewInput: class, ActivityIndicator {
     func showInAppPolicy()
     func reloadData()
 
-    func setupStackView(with storageCapacity: Int64)
+    func setupStackView(with storageCapacity: CGFloat)
 }

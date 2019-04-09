@@ -60,15 +60,14 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
         
         let usedVolume: CGFloat
         if let remaining = model.remaining, let total = model.total {
-            let usedByted = (total - remaining) / total
-            usedVolume = CGFloat(usedByted * 100).rounded(.toNearestOrAwayFromZero)
+            usedVolume = CGFloat((1 - (remaining / total)) * 100)
         } else {
             usedVolume = 0
         }
         
-        progressView.progress = Float(usedVolume)
+        progressView.progress = Float(usedVolume / 100)
         
-        usedPercentageLabel.text =  String(format: TextConstants.usagePercentage, usedVolume)
+        usedPercentageLabel.text =  String(format: TextConstants.usagePercentage, usedVolume.rounded(.toNearestOrAwayFromZero))
         
         nameLabel.text = model.offerName
         

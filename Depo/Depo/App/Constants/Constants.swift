@@ -391,6 +391,8 @@ struct TextConstants {
     // MARK: userProfile
     static let userProfileTitle = NSLocalizedString("Your Profile", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileNameAndSurNameSubTitle = NSLocalizedString("Name and Surname", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileName = NSLocalizedString("name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSurname = NSLocalizedString("surname", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileEmailSubTitle = NSLocalizedString("E-Mail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileGSMNumberSubTitle = NSLocalizedString("GSM Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileBottomLabelText1 = NSLocalizedString("I’d like hear about news and promotions about lifebox occasionally.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -399,6 +401,7 @@ struct TextConstants {
     static let userProfileDoneButton = NSLocalizedString("Done", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let emptyEmail = NSLocalizedString("E-mail is empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let emptyEmailTitle = NSLocalizedString("E-Mail Entry", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileChangePassword = NSLocalizedString("change password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: fileInfo
     static let fileInfoFileNameTitle = NSLocalizedString("File Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -675,6 +678,7 @@ struct TextConstants {
     static let usageInfoQuotaInfo = NSLocalizedString("Quota info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let usageInfoDocs = NSLocalizedString("%ld docs", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let usedAndLeftSpace = NSLocalizedString("used_and_left_space", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let leftSpace = NSLocalizedString("left_space", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packageSpaceDetails = NSLocalizedString("package_space_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let renewDate = NSLocalizedString("package_renew_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let usagePercentage = NSLocalizedString("percentage_used", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -791,6 +795,17 @@ struct TextConstants {
     
     // MARK: - Packages
     
+    static let packagesIHave = NSLocalizedString("packages_i_have", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let accountDetails = NSLocalizedString("account_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let myProfile = NSLocalizedString("my_profile", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let accountType = NSLocalizedString("account_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let standardPlus = NSLocalizedString("standard_plus", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let standard = NSLocalizedString("standard", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let premium = NSLocalizedString("premium", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let packages = NSLocalizedString("Packages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let purchase = NSLocalizedString("Purchase", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     

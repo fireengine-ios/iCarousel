@@ -256,6 +256,8 @@
 "GSM Number" = "Phone Number";
 "E-Mail" = "E-Mail";
 "Name and Surname" = "Name and Surname";
+"name" = "Name";
+"surname" = "Surname";
 "Your Profile" = "Profile";
 "Import From Cropy" = "Import from Cropy";
 "Import From Instagram" = "Import from Instagram";
@@ -560,6 +562,7 @@
 "Approve" = "Approve";
 "infomationEmptyEmail" = "Having an e-mail address on your account is one of the easiest and most reliable ways to help keep your account safe and ensure that you can get back into your account. Please add your e-mail address";
 "E-Mail Entry" = "E-Mail Entry";
+"change password" = "Change Password";
 "Importing files" = "Importing files (%@%%)";
 "Dropbox authorisation error" = "Dropbox authorization error";
 "dropboxLastUpdatedFile" = "Last updated on %@ - %d file";
@@ -905,5 +908,19 @@
 "package_renew_date" = "Will be renewed on: %@";
 "percentage_used" = "%.0f%% used";
 "used_and_left_space" = "%1$@ / %2$@ used";
+"left_space" = "%1$@ / %2$@";
 "percentage_used_two_lines" = "%.0f%%\nused";
 "my_usage_storage" = "My Usage Storage";
+
+/*Packages*/
+
+"packages_i_have" = "Packages I Have";
+
+"account_details" = "Account Details";
+"my_profile" = "My Profile";
+
+"account_type" = "Account Type";
+
+"standard_plus" = "Standard+";
+"standard" = "Standard";
+"premium" = "Premium";

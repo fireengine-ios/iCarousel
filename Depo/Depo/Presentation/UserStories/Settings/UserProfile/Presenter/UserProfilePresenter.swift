@@ -50,8 +50,8 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         view.setupEditState(true)
     }
     
-    func tapReadyButton(name: String, email: String, number: String) {
-        interactor.changeTo(name: name, email: email, number: number)
+    func tapReadyButton(name: String, surname: String, email: String, number: String) {
+        interactor.changeTo(name: name, surname: surname, email: email, number: number)
     }
     
     func dataWasUpdate() {
@@ -60,6 +60,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func isTurkcellUser() -> Bool {
         return interactor.statusTurkcellUser
+    }
+    
+    func tapChangePasswordButton() {
+        router.goToChangePassword()
     }
     
     //MARK : BasePresenter

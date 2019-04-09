@@ -28,6 +28,11 @@ extension PackagesRouter: PackagesRouterInput {
         router.pushViewController(viewController: viewController)
     }
     
+    func openUserProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool) {
+        let viewController = router.userProfile(userInfo: userInfo, isTurkcellUser: isTurkcellUser)
+        router.pushViewController(viewController: viewController)
+    }
+    
     func showSuccessPurchasedPopUp(with delegate: PackagesPresenter) {
         self.delegate = delegate
         let successPopUp = PopUpController.with(title: TextConstants.success,
