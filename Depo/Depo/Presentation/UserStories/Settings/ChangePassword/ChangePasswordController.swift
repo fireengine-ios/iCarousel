@@ -143,8 +143,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         case .unknown, .invalidCaptcha, .captchaAnswerIsEmpty:
             captchaView.showErrorAnimated(text: errorText)
             captchaView.captchaAnswerTextField.becomeFirstResponder()
-            let rect = scrollView.convert(captchaView.frame, to: scrollView)
-            scrollView.scrollRectToVisible(rect, animated: true)
+            scrollToView(captchaView)
             
         case .invalidNewPassword, .newPasswordIsEmpty:
             showErrorColorInNewPasswordView = true
@@ -156,21 +155,23 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             
             newPasswordView.showTextAnimated(text: errorText)
             newPasswordView.passwordTextField.becomeFirstResponder()
-            let rect = scrollView.convert(newPasswordView.frame, to: scrollView)
-            scrollView.scrollRectToVisible(rect, animated: true)
+            scrollToView(newPasswordView)
             
         case .invalidOldPassword, .oldPasswordIsEmpty:
             oldPasswordView.showTextAnimated(text: errorText)
             oldPasswordView.passwordTextField.becomeFirstResponder()
-            let rect = scrollView.convert(oldPasswordView.frame, to: scrollView)
-            scrollView.scrollRectToVisible(rect, animated: true)
+            scrollToView(oldPasswordView)
             
         case .notMatchNewAndRepeatPassword, .repeatPasswordIsEmpty:
             repeatPasswordView.showTextAnimated(text: errorText)
             repeatPasswordView.passwordTextField.becomeFirstResponder()
-            let rect = scrollView.convert(repeatPasswordView.frame, to: scrollView)
-            scrollView.scrollRectToVisible(rect, animated: true)
+            scrollToView(repeatPasswordView)
         }
+    }
+    
+    private func scrollToView(_ view: UIView) {
+        let rect = scrollView.convert(view.frame, to: scrollView)
+        scrollView.scrollRectToVisible(rect, animated: true)
     }
 }
 
