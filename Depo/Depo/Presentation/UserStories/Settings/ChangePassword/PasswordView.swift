@@ -40,6 +40,7 @@ final class PasswordView: UIView, NibInit {
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
+            newValue.clearButtonMode = .whileEditing
         }
     }
     
@@ -57,7 +58,7 @@ final class PasswordView: UIView, NibInit {
     private func toggleTextFieldSecureType() {
         passwordTextField.isSecureTextEntry.toggle()
         
-        let showPasswordButtonText = passwordTextField.isSecureTextEntry ? "Show" : "Hide"
+        let showPasswordButtonText = passwordTextField.isSecureTextEntry ? TextConstants.showPassword : TextConstants.hidePassword
         showPasswordButton.setTitle(showPasswordButtonText, for: .normal)
     }
     

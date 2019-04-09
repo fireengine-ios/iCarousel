@@ -27,21 +27,21 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     
     private let oldPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
-        view.titleLabel.text = "Old Password"
+        view.titleLabel.text = TextConstants.oldPassword
         view.passwordTextField.returnKeyType = .next
         return view
     }()
     
     private let newPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
-        view.titleLabel.text = "New Password"
+        view.titleLabel.text = TextConstants.newPassword
         view.passwordTextField.returnKeyType = .next
         return view
     }()
     
     private let repeatPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
-        view.titleLabel.text = "Re-Enter Password"
+        view.titleLabel.text = TextConstants.repeatPassword
         view.passwordTextField.returnKeyType = .next
         return view
     }()
@@ -71,9 +71,6 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         super.viewDidLoad()
         
         initialViewSetup()
-//        oldPasswordView.passwordTextField.text = "qwerty"
-//        newPasswordView.passwordTextField.text = "qwertyu"
-//        repeatPasswordView.passwordTextField.text = "qwertyu"
     }
     
     private func initialViewSetup() {
@@ -84,10 +81,10 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         
         addTapGestureToHideKeyboard()
         
-        let doneButton = UIBarButtonItem(title: "Done",
+        let doneButton = UIBarButtonItem(title: TextConstants.accessibilityDone,
                                          font: UIFont.TurkcellSaturaDemFont(size: 19),
                                          tintColor: .white,
-                                         accessibilityLabel: "Done",
+                                         accessibilityLabel: TextConstants.accessibilityDone,
                                          style: .plain,
                                          target: self,
                                          selector: #selector(onDoneButton))
@@ -182,7 +179,6 @@ extension ChangePasswordController: UITextFieldDelegate {
         switch textField {
         case newPasswordView.passwordTextField:
             updateNewPasswordView()
-            
         default:
             break
         }
@@ -197,7 +193,7 @@ extension ChangePasswordController: UITextFieldDelegate {
         /// can be "else" only. added chech for optimization without additional flags
         } else if newPasswordView.underlineLabel.textColor != UIColor.lrTealish {
             newPasswordView.underlineLabel.textColor = UIColor.lrTealish
-            newPasswordView.underlineLabel.text = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters."
+            newPasswordView.underlineLabel.text = TextConstants.registrationPasswordError
         }
         newPasswordView.showUnderlineAnimated()
     }
@@ -230,7 +226,7 @@ extension ChangePasswordController: UITextFieldDelegate {
         default:
             assertionFailure()
         }
-            
+        
         return true
     }
 }
