@@ -48,7 +48,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
     }()
     
     private lazy var accountService = AccountService()
-    private var showErrorColorNewPasswordView = false
+    private var showErrorColorInNewPasswordView = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +84,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
         updatePassword()
     }
     
-    func updatePassword() {
+    private func updatePassword() {
         
         guard
             let oldPassword = oldPasswordView.passwordTextField.text,
@@ -105,6 +105,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
         } else if captchaAnswer.isEmpty {
             actionOnUpdateOnError(.captchaAnswerIsEmpty)
         } else {
+            showSpinner()
             
             accountService.updatePassword(oldPassword: oldPassword,
                                           newPassword: newPassword,
@@ -117,7 +118,10 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
                                             case .failure(let error):
                                                 self?.actionOnUpdateOnError(error)
                                             }
+                                            self?.hideSpinner()
+                                            self?.captchaView.updateCaptcha()
             }
+            
         }
     }
     
@@ -126,14 +130,13 @@ final class ChangePasswordController: UIViewController, KeyboardHandler {
         
         switch error {
         case .unknown, .invalidCaptcha, .captchaAnswerIsEmpty:
-            captchaView.updateCaptcha()
             captchaView.showErrorAnimated(text: errorText)
             captchaView.captchaAnswerTextField.becomeFirstResponder()
             let rect = scrollView.convert(captchaView.frame, to: scrollView)
             scrollView.scrollRectToVisible(rect, animated: true)
             
         case .invalidNewPassword, .newPasswordIsEmpty:
-            showErrorColorNewPasswordView = true
+            showErrorColorInNewPasswordView = true
             
             newPasswordView.showTextAnimated(text: errorText)
             newPasswordView.passwordTextField.becomeFirstResponder()
@@ -159,11 +162,15 @@ extension ChangePasswordController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
         case newPasswordView.passwordTextField:
-            if showErrorColorNewPasswordView {
+            if showErrorColorInNewPasswordView {
                 newPasswordView.underlineLabel.textColor = ColorConstants.textOrange
-                showErrorColorNewPasswordView = false
-            } else {
+                /// we need to show error with color just once
+                showErrorColorInNewPasswordView = false
+                
+            /// can be "else" only. added chech for optimization without additional flags
+            } else if newPasswordView.underlineLabel.textColor != UIColor.lrTealish {
                 newPasswordView.underlineLabel.textColor = UIColor.lrTealish
+                newPasswordView.underlineLabel.text = "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters."
             }
             newPasswordView.showUnderlineAnimated()
             

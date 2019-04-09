@@ -349,13 +349,14 @@ class AccountService: BaseRequestService, AccountServicePrl {
                      headers: headers)
             .customValidate()
             .responseString { response in
-                print("-- status code:", response.response?.statusCode ?? "nil")
+                /// on main queue by default
                 
                 switch response.result {
                 case .success(let text):
                     print(text)
                     
-                    if text == "" {
+                    /// server logic
+                    if text.isEmpty {
                         handler(.success(()))
                         return
                     }
