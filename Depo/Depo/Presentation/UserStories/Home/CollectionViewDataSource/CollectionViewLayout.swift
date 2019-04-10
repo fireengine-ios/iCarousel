@@ -37,7 +37,7 @@ class CollectionViewLayout: UICollectionViewLayout {
     
     override func prepare() {
         cache.removeAll()
-        if cache.isEmpty, let collectionView = collectionView {
+        if cache.isEmpty, let collectionView = collectionView, let delegate = delegate {
             let columnWidth = contentWidth / CGFloat(numberOfColumns)
             contentHeight = 0.0
             //To Do add sections
