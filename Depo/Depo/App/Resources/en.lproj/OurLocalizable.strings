@@ -929,3 +929,10 @@
 "new_password" = "New Password";
 "repeat_password" = "Re-Enter Password";
 "change_password_captcha_answer_placeholder" = "Type the text";
+"temporary_error_occurred_try_again_later" = "Temporary error occurred, please try again later";
+"old_password_does_not_match" = "Old Password does not match";
+"new_password_and_repeated_password_does_not_match" = "New Password and Repeated Password does not match";
+"new_password_is_empty" = "New password is empty";
+"old_password_is_empty" = "Old password is empty";
+"repeat_password_is_empty" = "Repeat password is empty";
+"this_text_is_empty" = "This text is empty";

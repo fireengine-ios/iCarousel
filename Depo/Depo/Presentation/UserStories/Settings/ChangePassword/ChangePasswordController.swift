@@ -47,6 +47,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     }()
     
     private lazy var accountService = AccountService()
+    private lazy var authenticationService = AuthenticationService()
     private var showErrorColorInNewPasswordView = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -127,7 +128,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                           captchaAnswer: captchaAnswer) { [weak self] result in
                                             switch result {
                                             case .success(_):
-                                                RouterVC().popViewController()
+                                                self?.getAccountInfo()
                                             case .failure(let error):
                                                 self?.actionOnUpdateOnError(error)
                                             }
@@ -138,11 +139,52 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         }
     }
     
+    private func getAccountInfo() {
+        accountService.info(success: {  [weak self] (response) in
+            guard let response = response as? AccountInfoResponse else {
+                let error = CustomErrors.serverError("An error occured while getting account info")
+                DispatchQueue.toMain {
+//                    self?.output.failed(with: error.localizedDescription)
+                }
+                return
+            }
+            let login = response.email ?? response.fullPhoneNumber
+            self?.loginIfCan(with: login)
+            DispatchQueue.toMain {
+//                self?.output.successed(accountInfo: response)
+            }
+        }) { [weak self] (error) in
+            DispatchQueue.toMain {
+//                self?.output.failed(with: error)
+            }
+        }
+    }
+    
+    private func loginIfCan(with login: String) {
+        guard let newPassword = newPasswordView.passwordTextField.text else {
+            assertionFailure("all fields should not be nil")
+            return
+        }
+        
+        let user = AuthenticationUser(login: login,
+                                      password: newPassword,
+                                      rememberMe: true,
+                                      attachedCaptcha: nil)
+        
+        authenticationService.login(user: user, sucess: { [weak self] headers in
+            /// on main queue
+            RouterVC().popToRootViewController()
+        }, fail: { errorResponse  in
+            
+//                errorHandler(errorResponse)
+        })
+    }
+    
     private func actionOnUpdateOnError(_ error: UpdatePasswordErrors) {
         let errorText = error.localizedDescription
         
         switch error {
-        case .unknown, .invalidCaptcha, .captchaAnswerIsEmpty:
+        case .invalidCaptcha, .captchaAnswerIsEmpty:
             captchaView.showErrorAnimated(text: errorText)
             captchaView.captchaAnswerTextField.becomeFirstResponder()
             scrollToView(captchaView)
@@ -168,6 +210,9 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             repeatPasswordView.showTextAnimated(text: errorText)
             repeatPasswordView.passwordTextField.becomeFirstResponder()
             scrollToView(repeatPasswordView)
+            
+        case .unknown:
+            UIApplication.showErrorAlert(message: errorText)
         }
     }
     
@@ -196,7 +241,7 @@ extension ChangePasswordController: UITextFieldDelegate {
         /// can be "else" only. added chech for optimization without additional flags
         } else if newPasswordView.underlineLabel.textColor != UIColor.lrTealish {
             newPasswordView.underlineLabel.textColor = UIColor.lrTealish
-            newPasswordView.underlineLabel.text = TextConstants.registrationPasswordError
+            newPasswordView.underlineLabel.text = TextConstants.errorInvalidPassword
         }
         newPasswordView.showUnderlineAnimated()
     }

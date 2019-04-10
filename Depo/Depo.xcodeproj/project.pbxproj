@@ -3479,6 +3479,8 @@
 		CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4B0292017731400D06CA9 /* Alamofire+Response.swift */; };
 		CE827588203FEC7800067724 /* UIScrollView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE2843F202C7549003855C1 /* UIScrollView+Scroll.swift */; };
 		CE83A3E3206A8D6F00AC247E /* InfinityRotater.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83A3E2206A8D6F00AC247E /* InfinityRotater.swift */; };
+		CE85CFAC225E079B009E4D11 /* UpdatePasswordErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85CFAB225E079B009E4D11 /* UpdatePasswordErrors.swift */; };
+		CE85CFAD225E07FC009E4D11 /* UpdatePasswordErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85CFAB225E079B009E4D11 /* UpdatePasswordErrors.swift */; };
 		CE8F44E41F6AAFA80062C2E0 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
 		CE8F44E61F6AB59C0062C2E0 /* ActivityTimelineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E51F6AB59C0062C2E0 /* ActivityTimelineService.swift */; };
 		CE8F44E81F6AB5CB0062C2E0 /* ActivityTimelineServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E71F6AB5CB0062C2E0 /* ActivityTimelineServiceResponse.swift */; };
@@ -5828,6 +5830,7 @@
 		CE79E4A71F695DA200C1F151 /* Depo_LifeTechUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Depo_LifeTechUITests.swift; sourceTree = "<group>"; };
 		CE79E4A91F695DA200C1F151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE83A3E2206A8D6F00AC247E /* InfinityRotater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfinityRotater.swift; sourceTree = "<group>"; };
+		CE85CFAB225E079B009E4D11 /* UpdatePasswordErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordErrors.swift; sourceTree = "<group>"; };
 		CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		CE8F44E51F6AB59C0062C2E0 /* ActivityTimelineService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTimelineService.swift; sourceTree = "<group>"; };
 		CE8F44E71F6AB5CB0062C2E0 /* ActivityTimelineServiceResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTimelineServiceResponse.swift; sourceTree = "<group>"; };
@@ -8004,6 +8007,7 @@
 				CE6A8F1620737E230001EB54 /* ServerMessageError.swift */,
 				CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */,
 				CEF69DE61FB593AF00FCE6AB /* ServerError.swift */,
+				CE85CFAB225E079B009E4D11 /* UpdatePasswordErrors.swift */,
 				CE7467001FD6B61600D0885D /* ErrorResponse.swift */,
 				781839851FE9140E0046D73C /* FileForDownload.swift */,
 				CED4B02B201858D500D06CA9 /* HomeCardResponse.swift */,
@@ -15899,6 +15903,7 @@
 				8C0E8E501FDEBDFF00789C91 /* LocalAlbumRouter.swift in Sources */,
 				9219B18B21ECA25800098021 /* InstaPickDetailViewController.swift in Sources */,
 				CE7E61E420185D65000F19A9 /* Alamofire+Response.swift in Sources */,
+				CE85CFAD225E07FC009E4D11 /* UpdatePasswordErrors.swift in Sources */,
 				8C0E8E511FDEBDFF00789C91 /* SearchViewOutput.swift in Sources */,
 				8C0E8E521FDEBDFF00789C91 /* OfferApple.swift in Sources */,
 				FA793D89201872E200A02B46 /* PlacesServiceResponse.swift in Sources */,
@@ -17077,6 +17082,7 @@
 				CE6DE7551FCBE84100C23CBD /* InstagramService.swift in Sources */,
 				7CDB43301F8658A000789FA6 /* LocationManager.swift in Sources */,
 				EFA74F9E1FBF371200CF946E /* PrintService.swift in Sources */,
+				CE85CFAC225E079B009E4D11 /* UpdatePasswordErrors.swift in Sources */,
 				7CED0B141F23931C0016CE0C /* WrapperedItemUtil.swift in Sources */,
 				B556CE032184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */,
 				4AC68936202C6B78003400D0 /* FaceImageAddNameInteractrorOutput.swift in Sources */,
