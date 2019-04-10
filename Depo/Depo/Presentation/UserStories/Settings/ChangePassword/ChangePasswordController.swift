@@ -115,6 +115,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             actionOnUpdateOnError(.repeatPasswordIsEmpty)
         } else if captchaAnswer.isEmpty {
             actionOnUpdateOnError(.captchaAnswerIsEmpty)
+        } else if newPassword != repeatPassword {
+            actionOnUpdateOnError(.notMatchNewAndRepeatPassword)
         } else {
             showSpinner()
             
