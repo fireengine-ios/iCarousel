@@ -80,11 +80,15 @@ extension MyStoragePresenter: MyStorageViewOutput {
             router?.showCancelOfferAlert(with: TextConstants.packageDefaultCancelText)
             return
         }
-        if type != .apple {
+        
+        if type == .SLCM {
+            let cancelText = String(format: type.cancelText, plan.getNameForSLCM())
+            router?.showCancelOfferAlert(with: cancelText)
+        } else if type == .apple {
+            router?.showCancelOfferApple()
+        } else {
             let cancelText = String(format: type.cancelText, plan.name)
             router?.showCancelOfferAlert(with: cancelText)
-        } else {
-            router?.showCancelOfferApple()
         }
     }
     
