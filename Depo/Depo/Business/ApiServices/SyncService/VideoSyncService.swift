@@ -23,7 +23,7 @@ final class VideoSyncService: ItemSyncServiceImpl {
     }
 
     override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
-        MediaItemOperationsService.shared.allLocalItemsForSync(video: false, image: true) { items in
+        MediaItemOperationsService.shared.allLocalItemsForSync(video: true, image: false) { items in
             ///reversed video sync interruption fix
             //            let isMobileData = ReachabilityService().isReachableViaWWAN
             let fileSizeLimit = NumericConstants.fourGigabytes //isMobileData ? NumericConstants.hundredMegabytes : NumericConstants.fourGigabytes
