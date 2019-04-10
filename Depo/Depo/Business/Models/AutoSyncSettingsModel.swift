@@ -56,7 +56,7 @@ enum AutoSyncOption {
 
 final class AutoSyncSettings {
 
-    struct SettingsKeys {
+    private struct SettingsKeys {
         private init() {}
         
         static let isAutoSyncEnabledKey = "isAutoSyncEnabled"

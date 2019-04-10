@@ -28,7 +28,7 @@ struct AnalyticsDimension {
     let errorType: String?
     
     let autoSyncState: String?
-    let autoSyncStatus: [String: Any]?
+    let autoSyncStatus: String?
     
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
@@ -74,45 +74,9 @@ struct AnalyticsDimension {
             dimesionDictionary[GADementionsFields.autoSyncState.text] = autoSyncState
         }
         if let autoSyncStatus = autoSyncStatus {
-            dimesionDictionary[GADementionsFields.autoSyncStatus.text] = prepareAutoSyncSettings(autoSyncSettings: autoSyncStatus)
+            dimesionDictionary[GADementionsFields.autoSyncStatus.text] = autoSyncStatus
         }
         
         return dimesionDictionary
     }
-    
-    private func prepareAutoSyncSettings(autoSyncSettings: [String: Any]) -> String {
-        var combinedStatus = ""
-//        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
-
-        if let photoMobileStatus = autoSyncSettings[AutoSyncSettings.SettingsKeys.mobileDataPhotosKey] as? Bool,
-            let photoWifiStatus = autoSyncSettings[AutoSyncSettings.SettingsKeys.wifiPhotosKey] as? Bool
-            {
-                if !photoWifiStatus, !photoMobileStatus {
-                    combinedStatus += "Photos - Never /"
-                } else if photoMobileStatus {
-                    combinedStatus += "Photos - Wifi&LTE /"
-                } else if photoWifiStatus {
-                    combinedStatus += "Photos - Wifi /"
-                }
-        } else {
-            combinedStatus += "Photos - Never /"
-        }
-        
-        if let videoMobileStatus = autoSyncSettings[AutoSyncSettings.SettingsKeys.mobileDataVideoKey] as? Bool,
-            let videoWifiStatus = autoSyncSettings[AutoSyncSettings.SettingsKeys.wifiVideoKey] as? Bool
-        {
-            if !videoMobileStatus, !videoWifiStatus {
-                combinedStatus += "Videos - Never /"
-            } else if videoMobileStatus {
-                combinedStatus += "Videos - Wifi&LTE /"
-            } else if videoWifiStatus {
-                combinedStatus += "Videos - Wifi /"
-            }
-        } else {
-            combinedStatus += "Videos - Never"
-        }
-        
-        return combinedStatus
-    }
-    
 }
