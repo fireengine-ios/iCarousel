@@ -1,7 +1,9 @@
 import Foundation
 
 enum UpdatePasswordErrors {
+    case special(String)
     case unknown
+    
     case invalidCaptcha
     case invalidNewPassword
     case invalidOldPassword
@@ -17,6 +19,8 @@ extension UpdatePasswordErrors: LocalizedError {
         switch self {
         case .unknown:
             return TextConstants.temporaryErrorOccurredTryAgainLater
+        case .special(let text):
+            return text
         case .invalidCaptcha:
             return TextConstants.invalidCaptcha
         case .invalidNewPassword:

@@ -353,7 +353,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
                 
                 switch response.result {
                 case .success(let text):
-                    print(text)
                     
                     /// server logic
                     if text.isEmpty {
@@ -381,7 +380,12 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     
                     handler(.failure(backendError))
                     
-                case .failure(_):
+                case .failure(let error):
+                    
+                    if error.isNetworkSpecialError {
+                        handler(.failure(.special(error.description)))
+                        return
+                    }
                     
                     guard
                         let data = response.data,

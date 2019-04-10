@@ -114,6 +114,16 @@ extension Error {
         return false
     }
     
+    var isNetworkSpecialError: Bool {
+        if isNetworkError {
+            return true
+        } else if isServerUnderMaintenance {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     var description: String {
         if isNetworkError {
             switch urlErrorCode {

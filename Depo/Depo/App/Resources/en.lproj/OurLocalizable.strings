@@ -936,3 +936,4 @@
 "old_password_is_empty" = "Old password is empty";
 "repeat_password_is_empty" = "Repeat password is empty";
 "this_text_is_empty" = "This text is empty";
+"password_changed_successfully" = "Your password has been changed successfully";

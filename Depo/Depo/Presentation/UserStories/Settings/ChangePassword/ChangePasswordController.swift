@@ -131,8 +131,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                                 self?.getAccountInfo()
                                             case .failure(let error):
                                                 self?.actionOnUpdateOnError(error)
+                                                self?.hideSpinner()
                                             }
-                                            self?.hideSpinner()
                                             self?.captchaView.updateCaptcha()
             }
             
@@ -143,21 +143,14 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         accountService.info(success: {  [weak self] (response) in
             guard let response = response as? AccountInfoResponse else {
                 let error = CustomErrors.serverError("An error occured while getting account info")
-                DispatchQueue.toMain {
-//                    self?.output.failed(with: error.localizedDescription)
-                }
+                self?.showError(error)
                 return
             }
             let login = response.email ?? response.fullPhoneNumber
             self?.loginIfCan(with: login)
-            DispatchQueue.toMain {
-//                self?.output.successed(accountInfo: response)
-            }
-        }) { [weak self] (error) in
-            DispatchQueue.toMain {
-//                self?.output.failed(with: error)
-            }
-        }
+        }, fail: { [weak self] error in
+            self?.showError(error)
+        })
     }
     
     private func loginIfCan(with login: String) {
@@ -173,11 +166,29 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
             /// on main queue
-            RouterVC().popToRootViewController()
-        }, fail: { errorResponse  in
-            
-//                errorHandler(errorResponse)
+            self?.showSuccessPopup()
+            self?.hideSpinner()
+        }, fail: { [weak self] errorResponse  in
+            self?.showError(errorResponse)
         })
+    }
+    
+    private func showSuccessPopup() {
+        let popupVC = PopUpController.with(title: TextConstants.passwordChangedSuccessfully,
+                                           message: nil,
+                                           image: .success,
+                                           buttonTitle: TextConstants.ok,
+                                           action: { vc in
+                                            vc.close  {
+                                                RouterVC().popViewController()
+                                            }
+        })
+        RouterVC().presentViewController(controller: popupVC)
+    }
+    
+    private func showError(_ errorResponse: Error) {
+        UIApplication.showErrorAlert(message: errorResponse.description)
+        hideSpinner()
     }
     
     private func actionOnUpdateOnError(_ error: UpdatePasswordErrors) {
@@ -211,7 +222,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             repeatPasswordView.passwordTextField.becomeFirstResponder()
             scrollToView(repeatPasswordView)
             
-        case .unknown:
+        case .special, .unknown:
             UIApplication.showErrorAlert(message: errorText)
         }
     }
