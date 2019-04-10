@@ -196,6 +196,8 @@ struct RouteRequests {
     enum Account {
         static let accountApi = baseUrl +/ "account"
         
+        static let updatePassword = accountApi +/ "updatePassword"
+        
         enum Settings {
             static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
             

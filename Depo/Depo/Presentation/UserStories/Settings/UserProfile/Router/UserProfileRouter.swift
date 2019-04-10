@@ -16,8 +16,7 @@ class UserProfileRouter: UserProfileRouterInput {
     }
     
     func goToChangePassword() {
-        /// TODO: Make the screen open with a password change when it is ready
-        let controller = UIViewController()
+        let controller = ChangePasswordController.initFromNib()
         router.pushViewController(viewController: controller)
     }
     

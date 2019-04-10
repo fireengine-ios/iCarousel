@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
@@ -323,4 +324,124 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
+    /// repeat is key word of Swift
+    func updatePassword(oldPassword: String,
+                        newPassword: String,
+                        repeatPassword: String,
+                        captchaId: String,
+                        captchaAnswer: String,
+                        handler: @escaping (ErrorResult<Void, UpdatePasswordErrors>) -> Void) {
+        
+        debugLog("AccountService updatePassword")
+        
+        let params: Parameters = ["oldPassword": oldPassword,
+                                  "password": newPassword,
+                                  "repeatPassword": repeatPassword]
+        
+        let headers: HTTPHeaders = [HeaderConstant.CaptchaId: captchaId,
+                                    HeaderConstant.CaptchaAnswer: captchaAnswer]
+        
+        sessionManager
+            .request(RouteRequests.Account.updatePassword,
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.prettyPrinted,
+                     headers: headers)
+            .customValidate()
+            .responseString { response in
+                /// on main queue by default
+                
+                switch response.result {
+                case .success(let text):
+                    print(text)
+                    
+                    /// server logic
+                    if text.isEmpty {
+                        handler(.success(()))
+                        return
+                    }
+                    
+                    guard
+                        let data = response.data,
+                        let value = JSON(data: data)["value"].string
+                    else {
+                        handler(.failure(.unknown))
+                        return
+                    }
+                    
+                    let backendError: UpdatePasswordErrors
+                    switch value {
+                    case "Existing Password does not match":
+                        backendError = .invalidOldPassword
+                    case "New Password and Repeated Password does not match":
+                        backendError = .notMatchNewAndRepeatPassword
+                    default:
+                        backendError = .unknown
+                    }
+                    
+                    handler(.failure(backendError))
+                    
+                case .failure(_):
+                    
+                    guard
+                        let data = response.data,
+                        let status = JSON(data: data)["status"].string
+                    else {
+                        handler(.failure(.unknown))
+                        return
+                    }
+                    
+                    let backendError: UpdatePasswordErrors
+                    switch status {
+                    case "4001":
+                        backendError = .invalidCaptcha
+                    case "INVALID_PASSWORD":
+                        backendError = .invalidNewPassword
+                    default:
+                        backendError = .unknown
+                    }
+                    
+                    handler(.failure(backendError))
+                }
+        }
+    }
+    
+}
+
+enum UpdatePasswordErrors {
+    case unknown
+    case invalidCaptcha
+    case invalidNewPassword
+    case invalidOldPassword
+    case notMatchNewAndRepeatPassword
+    
+    case newPasswordIsEmpty
+    case oldPasswordIsEmpty
+    case repeatPasswordIsEmpty
+    case captchaAnswerIsEmpty
+}
+extension UpdatePasswordErrors: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .unknown:
+            return "Temporary error occurred, please try again later"
+        case .invalidCaptcha:
+            return TextConstants.invalidCaptcha
+        case .invalidNewPassword:
+            return "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters."
+        case .invalidOldPassword:
+            return "Old Password does not match"
+        case .notMatchNewAndRepeatPassword:
+            return "New Password and Repeated Password does not match"
+            
+        case .newPasswordIsEmpty:
+            return "New password is empty"
+        case .oldPasswordIsEmpty:
+            return "Old password is empty"
+        case .repeatPasswordIsEmpty:
+            return "Repeat password is empty"
+        case .captchaAnswerIsEmpty:
+            return "This text is empty"
+        }
+    }
 }

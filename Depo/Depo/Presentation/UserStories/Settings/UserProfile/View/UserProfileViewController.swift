@@ -88,6 +88,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
         
         configureNavBar()
         navigationBarWithGradientStyle()
+        backButtonForNavigationItem(title: TextConstants.backTitle)
         
         output.viewIsReady()
     }

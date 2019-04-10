@@ -924,3 +924,8 @@
 "standard_plus" = "Standard+";
 "standard" = "Standard";
 "premium" = "Premium";
+
+"old_password" = "Old Password";
+"new_password" = "New Password";
+"repeat_password" = "Re-Enter Password";
+"change_password_captcha_answer_placeholder" = "Type the text";
