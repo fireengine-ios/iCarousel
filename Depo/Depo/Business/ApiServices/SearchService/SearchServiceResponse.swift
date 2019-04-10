@@ -101,7 +101,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
     var genre =  [String]()
     
     // music & video & story
-    var duration: Double = Double(-1.0)
+    var duration: Double = Double(0.0)
     
     //story
     var videoSlideshow: Bool?
@@ -165,7 +165,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         artist = aDecoder.decodeObject(forKey:SearchJsonKey.Artist) as? String
         album = aDecoder.decodeObject(forKey:SearchJsonKey.Album) as? String
         title = aDecoder.decodeObject(forKey:SearchJsonKey.Title) as? String
-        duration = aDecoder.decodeObject(forKey:SearchJsonKey.Duration) as? Double ?? Double(-1.0)
+        duration = aDecoder.decodeObject(forKey:SearchJsonKey.Duration) as? Double ?? Double(0.0)
         genre = aDecoder.decodeObject(forKey:SearchJsonKey.Genre) as? [String] ?? []
         videoSlideshow = aDecoder.decodeObject(forKey: SearchJsonKey.VideoSlideshow) as? Bool
         videoHLSPreview = aDecoder.decodeObject(forKey:SearchJsonKey.VideoHLSPreview) as? URL

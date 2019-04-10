@@ -1010,7 +1010,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         metaData?.artist = mediaItem.metadata?.artist
 
         
-        metaData?.duration = ((assetDuration == nil) ? mediaItem.metadata?.duration : assetDuration) ?? Double(-1.0)
+        metaData?.duration = ((assetDuration == nil) ? mediaItem.metadata?.duration : assetDuration) ?? Double(0.0)
         
         metaData?.genre = mediaItem.metadata?.genre ?? []
         metaData?.height = Int(mediaItem.metadata?.height ?? 0)
