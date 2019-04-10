@@ -24,8 +24,6 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     private var autoSyncSettings: AutoSyncSettings?
     
-    private let analyticsManager: AnalyticsService = factory.resolve()//FIXME: Idealy we should send all events to presenter->Interactor and then track it(because tracker is a service) OR just rewrite this module to MVC
-    
     weak var delegate: AutoSyncDataSourceDelegate?
     
     func setup(table: UITableView) {
