@@ -177,13 +177,8 @@ final class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewIn
     }
     
     // MARK: buttons actions
-    @IBAction func onEditUserInformationButton(_ sender: UIButton) {
-        sender.isEnabled = false
-        guard let userInfo_ = userInfo else {
-            return
-        }
-        actionsDelegate?.updateUserProfile(userInfo: userInfo_)
-        sender.isEnabled = true
+    @IBAction private func onEditUserInformationButton(_ sender: UIButton) {
+        actionsDelegate?.upgradeButtonPressed()
     }
     
     @IBAction private func onUpdateUserPhoto() {
