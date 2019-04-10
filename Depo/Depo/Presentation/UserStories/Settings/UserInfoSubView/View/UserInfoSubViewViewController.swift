@@ -149,7 +149,7 @@ final class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewIn
         userPhoneNumber.font = UIFont.TurkcellSaturaMedFont(size: 16)
         
         accountDetailsLabel.textColor = ColorConstants.blueColor
-        accountDetailsLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
+        accountDetailsLabel.font = UIFont.TurkcellSaturaDemFont(size: 15)
         accountDetailsLabel.text = TextConstants.accountDetails
         
         userStorrageInformationLabel.textColor = ColorConstants.blueColor
