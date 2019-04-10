@@ -1,6 +1,9 @@
 import UIKit
 
+/// used KeyboardLayoutConstraint as bottom scrollView constraint
 final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit {
+    
+    // MARK: - Properties
     
     @IBOutlet private weak var scrollView: UIScrollView! {
         willSet {
@@ -50,6 +53,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     private lazy var authenticationService = AuthenticationService()
     private var showErrorColorInNewPasswordView = false
     
+    // MARK: - View methods
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -95,6 +100,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     @objc private func onDoneButton(_ button: UIBarButtonItem) {
         updatePassword()
     }
+    
+    // MARK: - API
     
     private func updatePassword() {
         
@@ -169,8 +176,27 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             self?.showSuccessPopup()
             self?.hideSpinner()
         }, fail: { [weak self] errorResponse  in
-            self?.showError(errorResponse)
+            if errorResponse.description.contains("Captcha required") {
+                self?.showLogoutPopup()
+            } else {
+                self?.showError(errorResponse)
+            }
         })
+    }
+    
+    // MARK: - Show
+    
+    private func showLogoutPopup() {
+        let popupVC = PopUpController.with(title: TextConstants.passwordChangedSuccessfullyRelogin,
+                                           message: nil,
+                                           image: .success,
+                                           buttonTitle: TextConstants.ok,
+                                           action: { [weak self] vc in
+                                            vc.close { [weak self] in
+                                                self?.authenticationService.logout(async: false, success: nil)
+                                            }
+        })
+        RouterVC().presentViewController(controller: popupVC)
     }
     
     private func showSuccessPopup() {
@@ -233,6 +259,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension ChangePasswordController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
