@@ -215,6 +215,16 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
         output.checkPermissions()
     }
     
+    func didChangeSettingsOption(settings: AutoSyncSetting) {
+        let eventAction: GAEventAction
+        if fromSettings {
+            eventAction = .settingsAutoSync
+        } else {
+            eventAction = .firstAutoSync
+        }
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: eventAction, eventLabel: GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: settings))
+    }
+    
     func checkPermissionsSuccessed() {
         if onStartUsingButtonTapped {
             onStartUsingButtonTapped = false

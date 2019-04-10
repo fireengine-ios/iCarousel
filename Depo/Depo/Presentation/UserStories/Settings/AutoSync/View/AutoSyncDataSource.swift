@@ -10,6 +10,7 @@ import UIKit
 
 protocol AutoSyncDataSourceDelegate: class {
     func enableAutoSync()
+    func didChangeSettingsOption(settings: AutoSyncSetting)
 }
 
 
@@ -22,6 +23,8 @@ class AutoSyncDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     private var cellModels = [AutoSyncSettingsRowType: AutoSyncModel]()
     
     private var autoSyncSettings: AutoSyncSettings?
+    
+    private let analyticsManager: AnalyticsService = factory.resolve()//FIXME: Idealy we should send all events to presenter->Interactor and then track it(because tracker is a service) OR just rewrite this module to MVC
     
     weak var delegate: AutoSyncDataSourceDelegate?
     
@@ -171,6 +174,8 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
         if autoSyncSettings?.photoSetting.option == .never, autoSyncSettings?.videoSetting.option == .never {
             forceDisableAutoSync()
         }
+      
+        delegate?.didChangeSettingsOption(settings: setting)
     }
     
     func shouldChangeHeight(toExpanded: Bool, cellType: AutoSyncSettingsRowType) {
