@@ -9,14 +9,10 @@
 import Foundation
 import AVFoundation
 
-
-@objc class CameraService: NSObject {
-    
+class CameraService {
     typealias CameraGranted = (_ granted: Bool) -> Void
-    
-    typealias PhotoLibraryGranted = (_ granted: Bool) -> Void
-    
-    typealias  Photo = (_ image: UIImage?) -> Void
+    typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Void
+    typealias Photo = (_ image: UIImage?) -> Void
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
@@ -41,22 +37,29 @@ import AVFoundation
     
     func photoLibraryIsAvailable(photoLibraryGranted: @escaping PhotoLibraryGranted) {
         debugLog("Photo Library IsAvalible")
+        let status = PHPhotoLibrary.authorizationStatus()
         
-        let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
-        
-        switch photoAuthorizationStatus {
-        case .authorized:
-            photoLibraryGranted(true)
+        switch status {
+        case .authorized:            
+            if (Device.operationSystemVersionLessThen(10)) {
+                PHPhotoLibrary.requestAuthorization({ status in
+                    if status == .authorized {
+                        photoLibraryGranted(true, status)
+                    }
+                })
+            } else {
+                photoLibraryGranted(true, status)
+            }
         case .notDetermined, .restricted:
             passcodeStorage.systemCallOnScreen = true
             
             PHPhotoLibrary.requestAuthorization { [weak self] status in
                 self?.passcodeStorage.systemCallOnScreen = false
-                if status == PHAuthorizationStatus.authorized {
-                    photoLibraryGranted(true)
+                if status == .authorized {
+                    photoLibraryGranted(true, status)
                 }
             }
-        case .denied:
+        case .denied:            
             showAccessAlert()
         }
     }
@@ -68,29 +71,28 @@ import AVFoundation
             guard let `self` = self else {
                 return
             }
-            
-            guard accessGranted else {
+
+            if accessGranted {
+                self.showPickerController(type: .camera, onViewController: sourceViewViewController)
+            } else {
                 self.showAccessAlert()
-                return
             }
-            
-            self.showPickerController(type: .camera, onViewController: sourceViewViewController)
         }
     }
     
     func showImagesPicker(onViewController sourceViewViewController: UIViewController) {
         debugLog("CameraService showImagesPicker")
         
-        photoLibraryIsAvailable { [weak self] accessGranted in
+        photoLibraryIsAvailable { [weak self] accessGranted, _ in
             guard let `self` = self else {
                 return
             }
             
-            guard accessGranted else {
+            if accessGranted {
+                self.showPickerController(type: .photoLibrary, onViewController: sourceViewViewController)
+            } else {
                 self.showAccessAlert()
-                return
             }
-            self.showPickerController(type: .photoLibrary, onViewController: sourceViewViewController)
         }
     }
     
