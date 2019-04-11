@@ -353,7 +353,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
                 
                 switch response.result {
                 case .success(let text):
-                    print(text)
                     
                     /// server logic
                     if text.isEmpty {
@@ -381,7 +380,12 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     
                     handler(.failure(backendError))
                     
-                case .failure(_):
+                case .failure(let error):
+                    
+                    if error.isNetworkSpecialError {
+                        handler(.failure(.special(error.description)))
+                        return
+                    }
                     
                     guard
                         let data = response.data,
@@ -406,42 +410,4 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
-}
-
-enum UpdatePasswordErrors {
-    case unknown
-    case invalidCaptcha
-    case invalidNewPassword
-    case invalidOldPassword
-    case notMatchNewAndRepeatPassword
-    
-    case newPasswordIsEmpty
-    case oldPasswordIsEmpty
-    case repeatPasswordIsEmpty
-    case captchaAnswerIsEmpty
-}
-extension UpdatePasswordErrors: LocalizedError {
-    var errorDescription: String? {
-        switch self {
-        case .unknown:
-            return "Temporary error occurred, please try again later"
-        case .invalidCaptcha:
-            return TextConstants.invalidCaptcha
-        case .invalidNewPassword:
-            return "Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters."
-        case .invalidOldPassword:
-            return "Old Password does not match"
-        case .notMatchNewAndRepeatPassword:
-            return "New Password and Repeated Password does not match"
-            
-        case .newPasswordIsEmpty:
-            return "New password is empty"
-        case .oldPasswordIsEmpty:
-            return "Old password is empty"
-        case .repeatPasswordIsEmpty:
-            return "Repeat password is empty"
-        case .captchaAnswerIsEmpty:
-            return "This text is empty"
-        }
-    }
 }

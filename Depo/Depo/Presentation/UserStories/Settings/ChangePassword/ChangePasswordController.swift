@@ -1,6 +1,9 @@
 import UIKit
 
+/// used KeyboardLayoutConstraint as bottom scrollView constraint
 final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit {
+    
+    // MARK: - Properties
     
     @IBOutlet private weak var scrollView: UIScrollView! {
         willSet {
@@ -47,7 +50,10 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     }()
     
     private lazy var accountService = AccountService()
+    private lazy var authenticationService = AuthenticationService()
     private var showErrorColorInNewPasswordView = false
+    
+    // MARK: - View methods
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -95,6 +101,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         updatePassword()
     }
     
+    // MARK: - API
+    
     private func updatePassword() {
         
         guard
@@ -127,22 +135,95 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                           captchaAnswer: captchaAnswer) { [weak self] result in
                                             switch result {
                                             case .success(_):
-                                                RouterVC().popViewController()
+                                                self?.getAccountInfo()
                                             case .failure(let error):
                                                 self?.actionOnUpdateOnError(error)
+                                                self?.hideSpinner()
+                                                self?.captchaView.updateCaptcha()
                                             }
-                                            self?.hideSpinner()
-                                            self?.captchaView.updateCaptcha()
             }
             
         }
+    }
+    
+    private func getAccountInfo() {
+        accountService.info(success: {  [weak self] (response) in
+            guard let response = response as? AccountInfoResponse else {
+                let error = CustomErrors.serverError("An error occured while getting account info")
+                self?.showError(error)
+                return
+            }
+            let login = response.email ?? response.fullPhoneNumber
+            self?.loginIfCan(with: login)
+        }, fail: { [weak self] error in
+            self?.showError(error)
+        })
+    }
+    
+    private func loginIfCan(with login: String) {
+        guard let newPassword = newPasswordView.passwordTextField.text else {
+            assertionFailure("all fields should not be nil")
+            return
+        }
+        
+        let user = AuthenticationUser(login: login,
+                                      password: newPassword,
+                                      rememberMe: true,
+                                      attachedCaptcha: nil)
+        
+        authenticationService.login(user: user, sucess: { [weak self] headers in
+            /// on main queue
+            self?.showSuccessPopup()
+            self?.hideSpinner()
+        }, fail: { [weak self] errorResponse  in
+            if errorResponse.description.contains("Captcha required") {
+                self?.showLogoutPopup()
+                self?.hideSpinner()
+            } else {
+                self?.showError(errorResponse)
+            }
+        })
+    }
+    
+    // MARK: - Show
+    
+    private func showLogoutPopup() {
+        let popupVC = PopUpController.with(title: TextConstants.passwordChangedSuccessfullyRelogin,
+                                           message: nil,
+                                           image: .success,
+                                           buttonTitle: TextConstants.ok,
+                                           action: { [weak self] vc in
+                                            vc.close { [weak self] in
+                                                AppConfigurator.logout()
+                                            }
+        })
+        RouterVC().presentViewController(controller: popupVC)
+    }
+    
+    private func showSuccessPopup() {
+        let popupVC = PopUpController.with(title: TextConstants.passwordChangedSuccessfully,
+                                           message: nil,
+                                           image: .success,
+                                           buttonTitle: TextConstants.ok,
+                                           action: { vc in
+                                            vc.close  {
+                                                RouterVC().popViewController()
+                                            }
+        })
+        RouterVC().presentViewController(controller: popupVC)
+    }
+    
+    private func showError(_ errorResponse: Error) {
+        captchaView.updateCaptcha()
+        UIApplication.showErrorAlert(message: errorResponse.description)
+        hideSpinner()
     }
     
     private func actionOnUpdateOnError(_ error: UpdatePasswordErrors) {
         let errorText = error.localizedDescription
         
         switch error {
-        case .unknown, .invalidCaptcha, .captchaAnswerIsEmpty:
+        case .invalidCaptcha, .captchaAnswerIsEmpty:
             captchaView.showErrorAnimated(text: errorText)
             captchaView.captchaAnswerTextField.becomeFirstResponder()
             scrollToView(captchaView)
@@ -168,6 +249,9 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             repeatPasswordView.showTextAnimated(text: errorText)
             repeatPasswordView.passwordTextField.becomeFirstResponder()
             scrollToView(repeatPasswordView)
+            
+        case .special, .unknown:
+            UIApplication.showErrorAlert(message: errorText)
         }
     }
     
@@ -177,6 +261,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension ChangePasswordController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
@@ -196,7 +281,7 @@ extension ChangePasswordController: UITextFieldDelegate {
         /// can be "else" only. added chech for optimization without additional flags
         } else if newPasswordView.underlineLabel.textColor != UIColor.lrTealish {
             newPasswordView.underlineLabel.textColor = UIColor.lrTealish
-            newPasswordView.underlineLabel.text = TextConstants.registrationPasswordError
+            newPasswordView.underlineLabel.text = TextConstants.errorInvalidPassword
         }
         newPasswordView.showUnderlineAnimated()
     }
