@@ -29,6 +29,7 @@ struct DispatchQueueLabels {
     static let thresholdService = "com.lifebox.thresholdService"
     static let analyticsPrivateQueue = "com.lifebox.analyticsPrivateQueue"
     static let cellImageManagerQueue = "com.lifebox.cellImageManager"
+    static let cellImageManagerOperationQueue = "com.lifebox.cellImageManagerOperation"
     static let itemsRepositoryBackgroundQueuePhoto = "com.lifebox.itemsRepositoryBackgroundQueuePhoto"
     static let itemsRepositoryBackgroundQueueVideo = "com.lifebox.itemsRepositoryBackgroundQueueVideo"
     static let itemsRepositoryBackgroundQueueConcurent = "com.lifebox.itemsRepositoryBackgroundQueueConcurent"

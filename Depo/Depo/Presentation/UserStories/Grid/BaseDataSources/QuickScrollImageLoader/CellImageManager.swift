@@ -17,15 +17,16 @@ final class CellImageManager {
     
     //MARK: - Static vars
     private static let maxConcurrentOperations = 32
-    private static let globalDispatchQueue = DispatchQueue(label: DispatchQueueLabels.cellImageManagerQueue)
+    private static let globalDispatchQueue = DispatchQueue(label: DispatchQueueLabels.cellImageManagerQueue, attributes: .concurrent)
+    private static let operationProcessingQueue = DispatchQueue(label: DispatchQueueLabels.cellImageManagerOperationQueue, attributes: .concurrent)
     
     private static let globalOperationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = maxConcurrentOperations
         queue.qualityOfService = .default
+        queue.underlyingQueue = operationProcessingQueue
         return queue
     }()
-
     
     private static var instances = [URL : CellImageManager]()
     
@@ -59,6 +60,7 @@ final class CellImageManager {
     
     private lazy var dispatchQueue = CellImageManager.globalDispatchQueue//DispatchQueue(label: "\(uniqueId)")
     private lazy var operationQueue = CellImageManager.globalOperationQueue
+    private lazy var processingQueue = CellImageManager.operationProcessingQueue
     private var currentOperation: Operation?
     
     private let imageCache = SDWebImageManager.shared().imageCache
@@ -96,7 +98,7 @@ final class CellImageManager {
         let downloadImage = { [weak self] in
             guard let `self` = self else { return }
             
-            let downloadOperation = ImageDownloadOperation(url: url, queue: self.dispatchQueue)
+            let downloadOperation = ImageDownloadOperation(url: url, queue: self.processingQueue)
             downloadOperation.outputBlock = { [weak self] outputImage in
                 guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
                 
@@ -114,14 +116,14 @@ final class CellImageManager {
             return
         }
         
-        let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail, queue: self.dispatchQueue)
+        let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail, queue: self.processingQueue)
         downloadThumbnailOperation.outputBlock = { [weak self] outputImage in
             guard let outputImage = outputImage as? UIImage else {
                 return
             }
             
             CellImageManager.blurService.blur(image: outputImage, completion: { [weak self] blurredImage in
-                self?.dispatchQueue.async { [weak self] in
+                self?.processingQueue.async { [weak self] in
                     guard let self = self else {
                         return
                     }

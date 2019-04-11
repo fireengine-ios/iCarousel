@@ -163,9 +163,17 @@ extension PhotoVideoDataSource: UICollectionViewDataSource {
 extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        DispatchQueue.toMain {
-            self.sectionChanges.removeAll()
-            self.objectChanges.removeAll()
+        sectionChanges.removeAll()
+        objectChanges.removeAll()
+        
+        firstVisibleItem = nil
+        cellTopOffset = 0
+        
+        if let indexPath = collectionView.indexPathsForVisibleItems.sorted(by: <).first {
+            firstVisibleItem = self.object(at: indexPath)
+            if let attributes = collectionView.layoutAttributesForItem(at: indexPath) {
+                cellTopOffset = attributes.frame.origin.y - collectionView.contentOffset.y
+            }
         }
     }
     
@@ -225,6 +233,12 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         sectionChanges.removeAll()
         objectChanges.removeAll()
         
+        var focusedIndexPath: IndexPath?
+        if let firstVisibleItem = firstVisibleItem {
+            focusedIndexPath = fetchedResultsController.indexPath(forObject: firstVisibleItem)
+            UIView.setAnimationsEnabled(false)
+        }
+        
         collectionView.performBatchUpdates({
             sectionChangesStatic.forEach { $0() }
             objectChangesStatic.forEach { $0() }
@@ -233,10 +247,12 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
                 return
             }
             
-            self.restoreOffset()
+            self.scroll(to: focusedIndexPath)
             
             self.reloadSupplementaryViewsIfNeeded()
             self.updateLastFetchedObjects()
+            
+            UIView.setAnimationsEnabled(true)
         })
     }
     
@@ -249,14 +265,13 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         }
     }
     
-    private func restoreOffset() {
-        if !self.collectionView.isDragging,
-            let firstVisibleItem = self.firstVisibleItem,
-            let indexPath = self.indexPath(forObject: firstVisibleItem),
+    private func scroll(to indexPath: IndexPath?) {
+        if !collectionView.isDragging,
+            let indexPath = indexPath,
             let attributes = self.collectionView.layoutAttributesForItem(at: indexPath)
         {
-            let offset = CGPoint(x: 0, y: attributes.frame.origin.y - self.cellTopOffset)
-            self.collectionView.setContentOffset(offset, animated: false)
+            let offset = CGPoint(x: 0, y: attributes.frame.origin.y - cellTopOffset)
+            collectionView.setContentOffset(offset, animated: false)
         }
     }
     
