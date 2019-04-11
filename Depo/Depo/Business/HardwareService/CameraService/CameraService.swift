@@ -9,18 +9,16 @@
 import Foundation
 import AVFoundation
 
-
-@objc class CameraService: NSObject {
-    
+class CameraService {
     typealias CameraGranted = (_ granted: Bool) -> Void
-    
-    typealias  Photo = (_ image: UIImage?) -> Void
+    typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Void
+    typealias Photo = (_ image: UIImage?) -> Void
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
-    func cameraIsAvalible (cameraGranted: @escaping CameraGranted) {
+    func cameraIsAvailible(cameraGranted: @escaping CameraGranted) {
         debugLog("CameraService cameraIsAvalible")
-
+        
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             cameraGranted(true)
@@ -35,30 +33,67 @@ import AVFoundation
         case .denied:
             showAccessAlert()
         }
-
+    }
+    
+    func photoLibraryIsAvailable(photoLibraryGranted: @escaping PhotoLibraryGranted) {
+        debugLog("Photo Library IsAvalible")
+        let status = PHPhotoLibrary.authorizationStatus()
+        
+        switch status {
+        case .authorized:            
+            if (Device.operationSystemVersionLessThen(10)) {
+                PHPhotoLibrary.requestAuthorization({ status in
+                    if status == .authorized {
+                        photoLibraryGranted(true, status)
+                    }
+                })
+            } else {
+                photoLibraryGranted(true, status)
+            }
+        case .notDetermined, .restricted:
+            passcodeStorage.systemCallOnScreen = true
+            
+            PHPhotoLibrary.requestAuthorization { [weak self] status in
+                self?.passcodeStorage.systemCallOnScreen = false
+                if status == .authorized {
+                    photoLibraryGranted(true, status)
+                }
+            }
+        case .denied:            
+            showAccessAlert()
+        }
     }
     
     func showCamera(onViewController sourceViewViewController: UIViewController) {
         debugLog("CameraService showCamera")
 
-        cameraIsAvalible { [weak self] accessGranted in
+        cameraIsAvailible { [weak self] accessGranted in
             guard let `self` = self else {
                 return
             }
-            
-            guard accessGranted else {
+
+            if accessGranted {
+                self.showPickerController(type: .camera, onViewController: sourceViewViewController)
+            } else {
                 self.showAccessAlert()
-                return
             }
-            
-            self.showPickerController(type: .camera, onViewController: sourceViewViewController)
         }
     }
     
     func showImagesPicker(onViewController sourceViewViewController: UIViewController) {
         debugLog("CameraService showImagesPicker")
-
-        self.showPickerController(type: .photoLibrary, onViewController: sourceViewViewController)
+        
+        photoLibraryIsAvailable { [weak self] accessGranted, _ in
+            guard let `self` = self else {
+                return
+            }
+            
+            if accessGranted {
+                self.showPickerController(type: .photoLibrary, onViewController: sourceViewViewController)
+            } else {
+                self.showAccessAlert()
+            }
+        }
     }
     
     private func showPickerController(type: UIImagePickerControllerSourceType,
@@ -72,7 +107,6 @@ import AVFoundation
             debugPrint("this VC does not support camera picker delegate")
             return
         }
-
         
         let picker = UIImagePickerController()
         picker.sourceType = type
