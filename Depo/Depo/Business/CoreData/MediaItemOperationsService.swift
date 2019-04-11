@@ -635,10 +635,36 @@ final class MediaItemOperationsService {
             return
         }
         
-        let predicate = NSPredicate(format: "uuid IN %@", items.compactMap { $0.uuid })
-        delete(type: MediaItem.self, predicate: predicate, mergeChanges: true, { _ in
-            completion()
-        })
+        CoreDataStack.default.performBackgroundTask { [weak self] context in
+            guard let `self` = self else {
+                return
+            }
+            
+            
+            let predicate = NSPredicate(format: "uuid in %@", items.map {$0.uuid} )
+            self.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { remoteItems in
+                remoteItems.forEach { context.delete($0) }
+                
+                let remoteItemsSet = NSSet(array: remoteItems)
+                
+                self.mediaItemByLocalID(trimmedLocalIDS: items.map {$0.getTrimmedLocalID()}, context: context, mediaItemsCallBack: { mediaItems in
+                    mediaItems.forEach { $0.removeFromRelatedRemotes(remoteItemsSet)}
+                    
+                    remoteItems.forEach { context.delete($0) }
+                    
+                    context.saveAsync(completion: { _ in
+                        completion()
+                    })
+                })
+            })
+        }
+        
+        
+        
+        //        let predicate = NSPredicate(format: "uuid IN %@", items.compactMap { $0.uuid })
+        //        delete(type: MediaItem.self, predicate: predicate, mergeChanges: true, { _ in
+        //            completion()
+        //        })
         
     }
     
