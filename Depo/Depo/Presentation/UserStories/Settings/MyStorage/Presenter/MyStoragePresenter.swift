@@ -28,6 +28,7 @@ final class MyStoragePresenter {
     
     var title: String
     
+    private var isViewDidLoad: Bool = false
     private var allOffers: [SubscriptionPlanBaseResponse] = []
     var displayableOffers: [SubscriptionPlan] = []
 
@@ -45,6 +46,10 @@ final class MyStoragePresenter {
     
     //MARK: - UtilityMethods
     private func calculateProgress() {
+        guard isViewDidLoad, usage != nil else {
+            return
+        }
+        
         let usedStorageSize = usage.usedBytes ?? 0
         let fullStorageSize = usage.quotaBytes ?? 0
         
@@ -68,10 +73,12 @@ extension MyStoragePresenter: MyStorageViewOutput {
         view?.startActivityIndicator()
         interactor.getAccountType()
         interactor.getUsage()
-
-        if usage != nil {
-            calculateProgress()
-        }
+    }
+    
+    func viewDidAppear() {
+        isViewDidLoad = true
+        
+        calculateProgress()
     }
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
