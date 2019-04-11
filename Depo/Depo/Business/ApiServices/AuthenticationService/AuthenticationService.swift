@@ -311,6 +311,16 @@ class AuthenticationService: BaseRequestService {
                             fail?(ErrorResponse.error(error))
                             return
                         }
+                        
+                        if let statusCode = response.response?.statusCode,
+                            statusCode >= 300,
+                            let data = response.data,
+                            let jsonString = String(data: data, encoding: .utf8) {
+                            
+                            fail?(ErrorResponse.string(jsonString))
+                            return
+                        }
+                        
                         SingletonStorage.shared.getAccountInfoForUser(success: { _ in
                             sucess?(headers)
                             MenloworksAppEvents.onLogin()

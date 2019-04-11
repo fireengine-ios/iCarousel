@@ -194,7 +194,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                            buttonTitle: TextConstants.ok,
                                            action: { [weak self] vc in
                                             vc.close { [weak self] in
-                                                self?.authenticationService.logout(async: false, success: nil)
+                                                AppConfigurator.logout()
                                             }
         })
         RouterVC().presentViewController(controller: popupVC)
