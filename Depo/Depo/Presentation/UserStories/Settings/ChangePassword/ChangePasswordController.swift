@@ -139,8 +139,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                             case .failure(let error):
                                                 self?.actionOnUpdateOnError(error)
                                                 self?.hideSpinner()
+                                                self?.captchaView.updateCaptcha()
                                             }
-                                            self?.captchaView.updateCaptcha()
             }
             
         }
@@ -178,6 +178,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         }, fail: { [weak self] errorResponse  in
             if errorResponse.description.contains("Captcha required") {
                 self?.showLogoutPopup()
+                self?.hideSpinner()
             } else {
                 self?.showError(errorResponse)
             }
@@ -213,6 +214,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     }
     
     private func showError(_ errorResponse: Error) {
+        captchaView.updateCaptcha()
         UIApplication.showErrorAlert(message: errorResponse.description)
         hideSpinner()
     }
