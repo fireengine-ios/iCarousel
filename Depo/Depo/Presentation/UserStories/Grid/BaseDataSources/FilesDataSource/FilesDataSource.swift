@@ -99,10 +99,10 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
                 
             case let .remoteUrl(url):
                 if let largeUrl = item.metaData?.largeUrl {
-                    getImageServise.getImage(patch: largeUrl, completeImage: completeImage)
+                    getImageServise.getImageByTrimming(url: largeUrl, completeImage: completeImage)
                     return largeUrl
                 } else {
-                    getImageServise.getImage(patch: url, completeImage: completeImage)
+                    getImageServise.getImageByTrimming(url: url, completeImage: completeImage)
                     return url
                 }
             }
