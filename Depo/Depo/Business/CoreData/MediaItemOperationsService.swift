@@ -611,7 +611,7 @@ final class MediaItemOperationsService {
                 completion()
                 return
             }
-            let predicate = NSPredicate(format: "localFileID IN %@", assetIdList)
+            let predicate = NSPredicate(format: "localFileID IN %@ AND isLocalItemValue == true", assetIdList)
             self.executeRequest(predicate: predicate, context: context) { mediaItems in
                
                 let deletedItems = mediaItems.map{ WrapData(mediaItem: $0) }
