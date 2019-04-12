@@ -126,7 +126,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         } else if captchaAnswer.isEmpty {
             actionOnUpdateOnError(.captchaAnswerIsEmpty)
         } else {
-            showSpinner()
+            showSpinnerIncludeNavigationBar()
             
             accountService.updatePassword(oldPassword: oldPassword,
                                           newPassword: newPassword,
@@ -138,7 +138,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                                 self?.getAccountInfo()
                                             case .failure(let error):
                                                 self?.actionOnUpdateOnError(error)
-                                                self?.hideSpinner()
+                                                self?.hideSpinnerIncludeNavigationBar()
                                                 self?.captchaView.updateCaptcha()
                                             }
             }
@@ -174,11 +174,11 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         authenticationService.login(user: user, sucess: { [weak self] headers in
             /// on main queue
             self?.showSuccessPopup()
-            self?.hideSpinner()
+            self?.hideSpinnerIncludeNavigationBar()
         }, fail: { [weak self] errorResponse  in
             if errorResponse.description.contains("Captcha required") {
                 self?.showLogoutPopup()
-                self?.hideSpinner()
+                self?.hideSpinnerIncludeNavigationBar()
             } else {
                 self?.showError(errorResponse)
             }
@@ -216,7 +216,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     private func showError(_ errorResponse: Error) {
         captchaView.updateCaptcha()
         UIApplication.showErrorAlert(message: errorResponse.description)
-        hideSpinner()
+        hideSpinnerIncludeNavigationBar()
     }
     
     private func actionOnUpdateOnError(_ error: UpdatePasswordErrors) {
