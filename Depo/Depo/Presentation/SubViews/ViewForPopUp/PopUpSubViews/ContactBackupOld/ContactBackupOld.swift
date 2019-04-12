@@ -72,7 +72,10 @@ class ContactBackupOld: BaseView {
     func getMonthesAfterLastBacup() -> String {
         if let dateLastBackup = cardObject?.details?["lastBackupDate"].date {
             var monthsCount = dateLastBackup.getMonthsBetweenDateAndCurrentDate()
-            monthsCount = monthsCount == 0 ? 1 : monthsCount // if the date from last backup is less than a month
+            
+            /// if the date from last backup is less than a month
+            monthsCount = monthsCount == 0 ? 1 : monthsCount 
+            
             return String(format: "%d", monthsCount)
         }
         return ""
