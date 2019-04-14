@@ -31,6 +31,10 @@ final class CacheManager {
     
     let delegates = MulticastDelegate<CacheManagerDelegate>()
     
+    var isPreparing: Bool {
+        return isProcessing
+    }
+    
     
     func actualizeCache(completion: VoidHandler?) {
         if !isProcessing {
@@ -39,6 +43,7 @@ final class CacheManager {
         
         isCacheActualized = false
         isProcessing = true
+
         MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
             if isNoRemotes {
                 self?.startAppendingAllRemotes(completion: { [weak self] in

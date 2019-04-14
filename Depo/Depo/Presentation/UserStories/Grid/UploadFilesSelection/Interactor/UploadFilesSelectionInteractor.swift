@@ -27,6 +27,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             guard accessGranted else {
                 return
             }
+            self?.output.startAsyncOperation()
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [uuid], options: nil)
                 
@@ -37,25 +38,46 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                         assets.append(asset)
                     })
                     
-                    MediaItemOperationsService.shared.allLocalItems(with: assets) { mediaItems in
-                        var items = mediaItems
-                        items.sort {
-                            guard let firstDate = $0.creationDate else {
-                                return false
+                    guard !CacheManager.shared.isPreparing else {
+                        self?.getAllRelatedItemsFromPH(assets: assets) { items in
+                            DispatchQueue.main.async {
+                                self?.output.getContentWithSuccess(array: [items])
                             }
-                            guard let secondDate = $1.creationDate else {
-                                return true
-                            }
-                            
-                            return firstDate > secondDate
                         }
-                        
+                       return
+                    }
+                    self?.getAllRelatedItemsFromDataBase(assets: assets) { items in
                         DispatchQueue.main.async {
                             self?.output.getContentWithSuccess(array: [items])
                         }
                     }
                 }
             }
+        }
+    }
+    
+    private func getAllRelatedItemsFromPH(assets: [PHAsset], itemsCallback: LocalFilesCallBack?) {
+        var wrapItems = [WrapData]()
+        assets.forEach {
+            wrapItems.append(WrapData(asset: $0))
+        }
+        itemsCallback?(wrapItems)
+    }
+    
+    private func getAllRelatedItemsFromDataBase(assets: [PHAsset], itemsCallback: LocalFilesCallBack?) {
+        MediaItemOperationsService.shared.allLocalItems(with: assets) { mediaItems in
+            var items = mediaItems
+            items.sort {
+                guard let firstDate = $0.creationDate else {
+                    return false
+                }
+                guard let secondDate = $1.creationDate else {
+                    return true
+                }
+                
+                return firstDate > secondDate
+            }
+            itemsCallback?(items)
         }
     }
     

@@ -242,7 +242,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     func getAllAlbums(completion: @escaping (_ albums: [AlbumItem]) -> Void) {
         debugLog("LocalMediaStorage getAllAlbums")
-
         askPermissionForPhotoFramework(redirectToSettings: true) { accessGranted, _ in
             guard accessGranted else {
                 completion([])
@@ -295,7 +294,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     private func numberOfItems(in album: PHAssetCollection, completion: @escaping (_ value: Int, _ fromCoreData: Bool) -> Void) {
-        guard !coreDataStack.inProcessAppendingLocalFiles else {
+        guard !CacheManager.shared.isPreparing else {
             completion(album.photosCount + album.videosCount, false)
             return
         }
