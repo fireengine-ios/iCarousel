@@ -747,6 +747,19 @@ class WrapData: BaseDataSourceItem, Wrappered {
         syncStatus = .notSynced
         
         isFolder = false
+        
+        metaData = BaseMetaData()
+        /// metaData filling
+        metaData?.takenDate = baseModel.dateOfCreation
+        metaData?.favourite = false
+//        metaData?.album = mediaItem.metadata?.album
+//        metaData?.artist = mediaItem.metadata?.artist
+    
+        metaData?.duration = baseModel.asset.duration
+        
+//        metaData?.genre = mediaItem.metadata?.genre ?? []
+//        metaData?.height = Int(mediaItem.metadata?.height ?? 0)
+        metaData?.title = baseModel.originalName
     }
     
     init(instaPickAnalyzeModel: InstapickAnalyze) {
@@ -1026,7 +1039,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if let smalURl = mediaItem.metadata?.smalURl {
             metaData?.smalURl = URL(string: smalURl)
         }
-        
+        if let videoUrl = mediaItem.metadata?.videoPreviewUrl {
+            metaData?.videoPreviewURL = URL(string: videoUrl)
+        }
     }
     
     func copyFileData(from item: WrapData) {
