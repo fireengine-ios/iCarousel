@@ -256,6 +256,8 @@
 "GSM Number" = "Phone Number";
 "E-Mail" = "E-Mail";
 "Name and Surname" = "Name and Surname";
+"name" = "Name";
+"surname" = "Surname";
 "Your Profile" = "Profile";
 "Import From Cropy" = "Import from Cropy";
 "Import From Instagram" = "Import from Instagram";
@@ -560,6 +562,7 @@
 "Approve" = "Approve";
 "infomationEmptyEmail" = "Having an e-mail address on your account is one of the easiest and most reliable ways to help keep your account safe and ensure that you can get back into your account. Please add your e-mail address";
 "E-Mail Entry" = "E-Mail Entry";
+"change password" = "Change Password";
 "Importing files" = "Importing files (%@%%)";
 "Dropbox authorisation error" = "Dropbox authorization error";
 "dropboxLastUpdatedFile" = "Last updated on %@ - %d file";
@@ -908,3 +911,33 @@
 "percentage_used_two_lines" = "%.0f%%\nused";
 "my_usage_storage" = "My Data Usage";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Your location will be used for background syncing";
+"left_space" = "%1$@ / %2$@";
+"percentage_used_two_lines" = "%.0f%%\nused";
+"my_usage_storage" = "My Usage Storage";
+
+/*Packages*/
+
+"packages_i_have" = "Packages I Have";
+
+"account_details" = "Account Details";
+"my_profile" = "My Profile";
+
+"account_type" = "Account Type";
+
+"standard_plus" = "Standard+";
+"standard" = "Standard";
+"premium" = "Premium";
+
+"old_password" = "Old Password";
+"new_password" = "New Password";
+"repeat_password" = "Re-Enter Password";
+"change_password_captcha_answer_placeholder" = "Type the text";
+"temporary_error_occurred_try_again_later" = "Temporary error occurred, please try again later";
+"old_password_does_not_match" = "Old Password does not match";
+"new_password_and_repeated_password_does_not_match" = "New Password and Repeated Password does not match";
+"new_password_is_empty" = "New password is empty";
+"old_password_is_empty" = "Old password is empty";
+"repeat_password_is_empty" = "Repeat password is empty";
+"this_text_is_empty" = "This text is empty";
+"password_changed_successfully" = "Your password has been changed successfully";
+"password_changed_successfully_relogin" = "You have successfully changed your passwrod. Please login again with your new password";

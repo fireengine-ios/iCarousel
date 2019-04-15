@@ -44,6 +44,7 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         
         layer.cornerRadius = cornerRadius
         layer.borderWidth = borderWidth
+        layer.borderColor = UIColor.lrTealish.cgColor
         
         cancelButton.titleLabel?.lineBreakMode = .byWordWrapping
         cancelButton.titleLabel?.textAlignment = .center
@@ -77,14 +78,11 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         
         switch plan.type {
         case .default:
-            layer.borderColor = ColorConstants.lightPeach.cgColor
             upgradeButton.isHidden = false
         case .free:
-            layer.borderColor = ColorConstants.lightPeach.cgColor
             priceLabel.isHidden = true
             freeButton.isHidden = false
         case .current:
-            layer.borderColor = ColorConstants.darkBlueColor.cgColor
             cancelButton.isHidden = false
         }
         

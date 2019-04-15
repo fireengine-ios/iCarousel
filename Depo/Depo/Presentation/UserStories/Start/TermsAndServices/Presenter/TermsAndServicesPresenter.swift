@@ -24,8 +24,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
             view.hideBackButton()
         }
         startAsyncOperationDisableScreen()
-        interactor.loadTermsAndUses()
-        
+        interactor.checkEtk()
     }
     
     func startUsing() {
@@ -43,6 +42,10 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func confirmAgreements(_ confirm: Bool) {
         confirmAgreements = confirm
+    }
+    
+    func confirmEtk(_ etk: Bool) {
+        interactor.etkAuth = etk
     }
     
     // MARK: OUT
@@ -100,6 +103,14 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         view.popNavigationVC()
     }
     
+    func openTurkcellAndGroupCompanies() {
+        router.goToTurkcellAndGroupCompanies()
+    }
+    
+    func openCommercialEmailMessages() {
+        router.goToCommercialEmailMessages()
+    }
+    
     // MARK: Utility Methods
     private func openAutoSyncIfNeeded() {
         view.showSpinner()
@@ -119,5 +130,12 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     override func outputView() -> Waiting? {
         return view
+    }
+    
+    func setupEtk(isShowEtk: Bool) {
+        if isShowEtk {
+            view.showEtk()
+        }
+        interactor.loadTermsAndUses()
     }
 }

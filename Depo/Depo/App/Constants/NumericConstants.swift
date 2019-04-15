@@ -137,6 +137,18 @@ struct NumericConstants {
     static let instaPickImageViewTransitionDuration: TimeInterval = 0.25
     
     static let instapickTimeoutForAnalyzePhotos: TimeInterval = 5
+    
+    static let usageInfoCardCornerRadius: CGFloat = 12
+    static let usageInfoCardShadowRadius: CGFloat = 8
+    static let usageInfoCardShadowOpacity: Float = 0.5
+    
+    static let usageInfoProgressWidth: CGFloat = 8
+    
+    static let usageInfoCollectionViewCellsOffset: CGFloat = 0
+
+    static let progressViewBackgroundColorAlpha: CGFloat = 0.25
+    
+    static let maxStringLengthForUserProfile = 255
 }
 
 struct RequestSizeConstant {

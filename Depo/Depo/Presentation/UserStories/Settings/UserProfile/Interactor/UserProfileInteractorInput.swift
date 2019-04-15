@@ -13,5 +13,5 @@ protocol UserProfileInteractorInput {
     
     func viewIsReady()
         
-    func changeTo(name: String, email: String, number: String)
+    func changeTo(name: String, surname: String, email: String, number: String)
 }

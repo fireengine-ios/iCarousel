@@ -27,6 +27,7 @@ struct LbRequestkeys {
     static let osVersion = "osVersion"
     //
     static let fileName = "Folder-Name"
+    static let etkAuth = "etkAuth"
 }
 
 struct LbResponseKey {

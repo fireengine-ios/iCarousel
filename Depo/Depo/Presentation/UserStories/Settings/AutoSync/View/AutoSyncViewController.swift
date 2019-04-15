@@ -24,6 +24,8 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
     var isFirstTime = true
     private var onStartUsingButtonTapped = false
     
+    private let analyticsManager: AnalyticsService = factory.resolve()//FIXME: Idealy we should send all events to presenter->Interactor and then track it(because tracker is a service) OR just rewrite this module to MVC
+    
     let dataSource = AutoSyncDataSource()
 
     // MARK: - Life cycle
@@ -213,6 +215,16 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
     
     func enableAutoSync() {
         output.checkPermissions()
+    }
+    
+    func didChangeSettingsOption(settings: AutoSyncSetting) {
+        let eventAction: GAEventAction
+        if fromSettings {
+            eventAction = .settingsAutoSync
+        } else {
+            eventAction = .firstAutoSync
+        }
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: eventAction, eventLabel: GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: settings))
     }
     
     func checkPermissionsSuccessed() {

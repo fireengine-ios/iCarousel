@@ -50,7 +50,7 @@ final class PVViewerController: BaseViewController, NibInit {
         return .black
     }
     
-    override func getBacgroundColor() -> UIColor {
+    override func getBackgroundColor() -> UIColor {
         return UIColor.black
     }
 

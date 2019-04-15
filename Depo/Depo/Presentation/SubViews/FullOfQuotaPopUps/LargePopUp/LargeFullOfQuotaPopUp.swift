@@ -134,7 +134,7 @@ class LargeFullOfQuotaPopUp: UIViewController {
     
     @IBAction func onExpandButton() {
         let viewController = RouterVC().packages
-        viewController.needShowTabBar = false
+        viewController.needToShowTabBar = false
         delegate?.onOpenExpandTap()
         RouterVC().getViewControllerForPresent()?.dismiss(animated: false, completion: { [weak self] in
             RouterVC().pushViewController(viewController: viewController)

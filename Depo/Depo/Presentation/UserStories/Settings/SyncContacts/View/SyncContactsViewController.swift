@@ -102,7 +102,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         cancelButton.adjustsFontSizeToFitWidth()
         
         if tabBarSetup {
-            needShowTabBar = true
+            needToShowTabBar = true
         }
         
         output.viewIsReady()

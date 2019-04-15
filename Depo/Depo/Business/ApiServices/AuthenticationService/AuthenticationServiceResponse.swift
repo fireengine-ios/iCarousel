@@ -79,6 +79,9 @@ class SignUpSuccessResponse: ObjectRequestResponse {
     var remainingTimeInMinutes: Int?
     var expectedInputLength: Int?
     
+    /// not from server
+    var etkAuth: Bool?
+    
     override func mapping() {
         if (isOkStatus && valueDict != nil) {
             action = valueDict![LbResponseKey.action]?.string

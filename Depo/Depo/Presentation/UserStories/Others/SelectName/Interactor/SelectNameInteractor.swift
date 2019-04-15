@@ -85,7 +85,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
         PhotosAlbumService().createAlbum(createAlbum: createAlbumParams, success: { [weak self] in
             DispatchQueue.main.async {
                 if let self_ = self {
-                    self_.output.operationSucces(operation: self_.moduleType)
+                    self_.output.operationSucces(operation: self_.moduleType, item: nil, isSubFolder: false)
                     ItemOperationManager.default.newAlbumCreated()
                 }
             }
@@ -102,14 +102,15 @@ class SelectNameInteractor: SelectNameInteractorInput {
     
     private func onCreateFolderWithName(name: String) {
         let createfolderParam = CreatesFolder(folderName: name,
-                                               rootFolderName: rootFolderID ?? "",
-                                               isFavourite: isFavorite ?? false)
+                                              rootFolderName: rootFolderID ?? "",
+                                              isFavourite: isFavorite ?? false)
         
         WrapItemFileService().createsFolder(createFolder: createfolderParam,
-            success: { [weak self] in
+            success: { [weak self] (item) in
                 DispatchQueue.main.async {
                     if let self_ = self {
-                        self_.output.operationSucces(operation: self_.moduleType)
+                        let isSubfolder = self_.rootFolderID != nil
+                        self_.output.operationSucces(operation: self_.moduleType, item: item, isSubFolder: isSubfolder)
                         ItemOperationManager.default.newFolderCreated()
                     }
                 }

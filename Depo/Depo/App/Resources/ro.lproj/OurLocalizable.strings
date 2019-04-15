@@ -880,3 +880,5 @@
 "percentage_used_two_lines" = "%.0f%%\nutilizat";
 "my_usage_storage" = "Spațiul de stocare de utilizare";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Locația ta va fi folosită pentru sincronizarea de fundal";
+"percentage_used_two_lines" = "%.0f%%\\n utilizat";
+"my_usage_storage" = "Spațiul de stocare de utilizare";

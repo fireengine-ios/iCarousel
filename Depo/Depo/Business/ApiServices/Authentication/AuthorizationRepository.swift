@@ -8,7 +8,7 @@
 
 import Alamofire
 
-typealias RefreshCompletion = (_ succeeded: Bool, _ accessToken: String?) -> Void
+typealias RefreshCompletion = (_ succeeded: Bool, _ accessToken: String?, _ error: Error?) -> Void
 
 // TODO: Need to test refresh token request for no internet connection and timed out
 
@@ -119,7 +119,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
             return
         }
         
-        refreshTokens { [weak self] succeeded, accessToken in
+        refreshTokens { [weak self] succeeded, accessToken, _  in
             guard let strongSelf = self else { return }
             strongSelf.lock.lock() ; defer { strongSelf.lock.unlock() }
             
@@ -156,12 +156,11 @@ extension AuthorizationRepositoryImp: RequestRetrier {
             .request(urls.refreshAccessToken, method: .post, parameters: Device.deviceInfo,
                      encoding: JSONEncoding.default, headers: headers)
             .responseJSON { [weak self] response in
-                
                 guard let strongSelf = self else {
                     /// must execute never
-                    completion(false, nil)
+                    completion(false, nil, nil)
                     self?.isRefreshing = false
-                    self?.refreshTokensCompletions.forEach { $0(false, nil) }
+                    self?.refreshTokensCompletions.forEach { $0(false, nil, nil) }
                     self?.refreshTokensCompletions.removeAll()
                     return
                 }
@@ -173,17 +172,17 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                     debugLog("failed refreshAccessToken")
                     #endif
                     strongSelf.refreshFailedHandler()
-                    completion(false, nil)
+                    completion(false, nil, nil)
                     strongSelf.isRefreshing = false
-                    strongSelf.refreshTokensCompletions.forEach { $0(false, nil) }
+                    strongSelf.refreshTokensCompletions.forEach { $0(false, nil, nil) }
                     strongSelf.refreshTokensCompletions.removeAll()
                 
                 /// mapping accessToken for completion handler
                 } else if let headers = response.response?.allHeaderFields as? [String: Any],
                     let accessToken = headers[strongSelf.accessTokenKey] as? String {
-                    completion(true, accessToken)
+                    completion(true, accessToken, nil)
                     strongSelf.isRefreshing = false
-                    strongSelf.refreshTokensCompletions.forEach { $0(true, accessToken) }
+                    strongSelf.refreshTokensCompletions.forEach { $0(true, accessToken, nil) }
                     strongSelf.refreshTokensCompletions.removeAll()
                     
                 /// retry refreshTokens request only for bad internet
@@ -198,9 +197,9 @@ extension AuthorizationRepositoryImp: RequestRetrier {
                     #if MAIN_APP
                     debugLog("can't take accessToken refreshAccessToken")
                     #endif
-                    completion(false, nil)
+                    completion(false, nil, response.error)
                     strongSelf.isRefreshing = false
-                    strongSelf.refreshTokensCompletions.forEach { $0(false, nil) }
+                    strongSelf.refreshTokensCompletions.forEach { $0(false, nil, nil) }
                     strongSelf.refreshTokensCompletions.removeAll()
                 }
                 

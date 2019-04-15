@@ -116,23 +116,22 @@ class RouterVC: NSObject {
         }
     }
     
-    func pushViewController(viewController: UIViewController) {
-        if let viewController = viewController as? BaseViewController, !viewController.needShowTabBar {
+    func pushViewController(viewController: UIViewController, animated: Bool = true) {
+        if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
             let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
             NotificationCenter.default.post(name: notificationName, object: nil)
         }
         
-        navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.pushViewController(viewController, animated: animated)
         viewController.navigationController?.isNavigationBarHidden = false
         
         if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBacgroundColor())
+            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
         }
-        
     }
     
     func pushViewControllerAndRemoveCurrentOnCompletion(_ viewController: UIViewController) {
-        if let viewController = viewController as? BaseViewController, !viewController.needShowTabBar {
+        if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
             let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
             NotificationCenter.default.post(name: notificationName, object: nil)
         }
@@ -141,12 +140,12 @@ class RouterVC: NSObject {
         viewController.navigationController?.isNavigationBarHidden = false
         
         if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBacgroundColor())
+            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
         }
         
     }
     
-    func setBacgroundColor(color: UIColor) {
+    func setBackgroundColor(color: UIColor) {
         if let tabBarViewController = rootViewController as? TabBarViewController {
             tabBarViewController.setBGColor(color: color)
         }
@@ -198,7 +197,7 @@ class RouterVC: NSObject {
         return navigationController?.viewControllers.last
     }
     
-    func presentViewController(controller: UIViewController) {
+    func presentViewController(controller: UIViewController, completion: VoidHandler? = nil) {
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         if let lastViewController = getViewControllerForPresent() {
             if controller.popoverPresentationController?.sourceView == nil,
@@ -206,7 +205,7 @@ class RouterVC: NSObject {
                 controller.popoverPresentationController?.sourceView = lastViewController.view
             }
             lastViewController.present(controller, animated: true, completion: {
-            
+                completion?()
             })
         }
     }
@@ -327,12 +326,12 @@ class RouterVC: NSObject {
     
     // MARK: Terms
     
-    func termsAndServicesScreen(login: Bool, delegate: RegistrationViewDelegate? = nil) -> UIViewController {
+    func termsAndServicesScreen(login: Bool, delegate: RegistrationViewDelegate? = nil, phoneNumber: String?) -> UIViewController {
         let conf = TermsAndServicesModuleInitializer(delegate: delegate)
         let viewController = TermsAndServicesViewController(nibName: "TermsAndServicesScreen",
                                                              bundle: nil)
         
-        conf.setupConfig(withViewController: viewController, fromLogin: login)
+        conf.setupConfig(withViewController: viewController, fromLogin: login, phoneNumber: phoneNumber)
         return viewController
     }
     
@@ -447,7 +446,7 @@ class RouterVC: NSObject {
     
     // MARK: All Files
     
-    func allFiles(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController? {
+    func allFiles(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let controller = BaseFilesGreedModuleInitializer.initializeAllFilesViewController(with: "BaseFilesGreedViewController",
                                                                                           moduleOutput: moduleOutput,
                                                                                           sortType: sortType,
@@ -458,7 +457,7 @@ class RouterVC: NSObject {
     
     // MARK: Favorites
     
-    func favorites(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController? {
+    func favorites(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let controller = BaseFilesGreedModuleInitializer.initializeFavoritesViewController(with: "BaseFilesGreedViewController",
                                                                                            moduleOutput: moduleOutput,
                                                                                            sortType: sortType,

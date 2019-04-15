@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
@@ -271,10 +272,8 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .responseString { response in
                 switch response.result {    
                 case .success(let text):
-                    if text == "true" {
-                        handler(.success(true))
-                    } else if text == "false" {
-                        handler(.success(false))
+                    if let isAllowed = Bool(string: text) {
+                        handler(.success(isAllowed))
                     } else {
                         let error = CustomErrors.serverError(text)
                         handler(.failed(error))
@@ -321,6 +320,92 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     handler(.success(features))
                 case .failure(let error):
                     handler(.failed(error))
+                }
+        }
+    }
+    
+    /// repeat is key word of Swift
+    func updatePassword(oldPassword: String,
+                        newPassword: String,
+                        repeatPassword: String,
+                        captchaId: String,
+                        captchaAnswer: String,
+                        handler: @escaping (ErrorResult<Void, UpdatePasswordErrors>) -> Void) {
+        
+        debugLog("AccountService updatePassword")
+        
+        let params: Parameters = ["oldPassword": oldPassword,
+                                  "password": newPassword,
+                                  "repeatPassword": repeatPassword]
+        
+        let headers: HTTPHeaders = [HeaderConstant.CaptchaId: captchaId,
+                                    HeaderConstant.CaptchaAnswer: captchaAnswer]
+        
+        sessionManager
+            .request(RouteRequests.Account.updatePassword,
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.prettyPrinted,
+                     headers: headers)
+            .customValidate()
+            .responseString { response in
+                /// on main queue by default
+                
+                switch response.result {
+                case .success(let text):
+                    
+                    /// server logic
+                    if text.isEmpty {
+                        handler(.success(()))
+                        return
+                    }
+                    
+                    guard
+                        let data = response.data,
+                        let value = JSON(data: data)["value"].string
+                    else {
+                        handler(.failure(.unknown))
+                        return
+                    }
+                    
+                    let backendError: UpdatePasswordErrors
+                    switch value {
+                    case "Existing Password does not match":
+                        backendError = .invalidOldPassword
+                    case "New Password and Repeated Password does not match":
+                        backendError = .notMatchNewAndRepeatPassword
+                    default:
+                        backendError = .unknown
+                    }
+                    
+                    handler(.failure(backendError))
+                    
+                case .failure(let error):
+                    
+                    if error.isNetworkSpecialError {
+                        handler(.failure(.special(error.description)))
+                        return
+                    }
+                    
+                    guard
+                        let data = response.data,
+                        let status = JSON(data: data)["status"].string
+                    else {
+                        handler(.failure(.unknown))
+                        return
+                    }
+                    
+                    let backendError: UpdatePasswordErrors
+                    switch status {
+                    case "4001":
+                        backendError = .invalidCaptcha
+                    case "INVALID_PASSWORD":
+                        backendError = .invalidNewPassword
+                    default:
+                        backendError = .unknown
+                    }
+                    
+                    handler(.failure(backendError))
                 }
         }
     }

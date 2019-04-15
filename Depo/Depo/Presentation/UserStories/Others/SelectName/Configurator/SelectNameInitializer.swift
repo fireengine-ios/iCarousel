@@ -15,7 +15,7 @@ class SelectNameModuleInitializer: NSObject {
 
     class func initializeViewController(with nibName: String, viewType: SelectNameScreenType, rootFolderID: String? = nil, isFavorites: Bool = false) -> UIViewController {
         let viewController = SelectNameViewController(nibName: nibName, bundle: nil)
-        viewController.needShowTabBar = true
+        viewController.needToShowTabBar = true
         let configurator = SelectNameModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController,
                                                  viewType: viewType,
