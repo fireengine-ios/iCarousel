@@ -154,6 +154,7 @@ final class UploadOperation: Operation {
                                 self.addPhotoToTheAlbum(with: uploadParam, response: response)
                                 self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
                                 self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
+                                self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
                                 MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
                             }
                             
