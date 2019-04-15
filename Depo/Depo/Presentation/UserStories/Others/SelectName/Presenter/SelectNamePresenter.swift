@@ -50,11 +50,9 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
         startAsyncOperation()
     }
     
-    func operationSucces(operation: SelectNameScreenType, item: Item?, isSubFolder: Bool) {
+    func operationSuccess(operation: SelectNameScreenType, item: Item?, isSubFolder: Bool) {
         asyncOperationSuccess()
         switch operation {
-        case .selectAlbumName:
-            view.hideView()
         case .selectPlayListName:
             router.hideScreen()
         case .selectFolderName:
@@ -62,10 +60,21 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
             if let item = item {
                 router.moveToFolderPage(presenter: self, item: item, isSubFolder: isSubFolder)
             }
+        default: 
+            break
         }
     }
     
-    func operationFaildWithError(errorMessage: String) {
+    func createAlbumOperationSuccess(item: AlbumItem?) {
+        asyncOperationSuccess()
+        view.hideView()
+        
+        guard let item = item else { return }
+        
+        router.moveToAlbumPage(presenter: self, item: item)
+    }
+    
+    func operationFailedWithError(errorMessage: String) {
         asyncOperationSuccess()
         UIApplication.showErrorAlert(message: errorMessage)
         view.setupInitialState()
