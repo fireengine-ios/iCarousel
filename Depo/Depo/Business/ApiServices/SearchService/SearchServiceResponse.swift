@@ -63,8 +63,8 @@ struct SearchJsonKey {
     
     // story metadata
     
-    static let VideoSlideshow = "Video-Slideshow"
-    static let VideoHLSPreview = "Video-Hls-Preview"
+//    static let VideoSlideshow = "Video-Slideshow"
+//    static let VideoHLSPreview = "Video-Hls-Preview"
 
     //folder
     static let ChildCount = "childCount"
@@ -104,8 +104,8 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
     var duration: Double = Double(0.0)
     
     //story
-    var videoSlideshow: Bool?
-    var videoHLSPreview: URL?
+//    var videoSlideshow: Bool?
+//    var videoHLSPreview: URL?
     
     required init(withJSON: JSON?) {
         super.init(withJSON: withJSON)
@@ -143,11 +143,11 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
             genre = genreresponse.components(separatedBy: ",")
         }
         
-        if let slideshow = json?[SearchJsonKey.VideoSlideshow].string, slideshow.count > 0 {
-            videoSlideshow = slideshow == "true" ? true : false
-        }
+//        if let slideshow = json?[SearchJsonKey.VideoSlideshow].string, slideshow.count > 0 {
+//            videoSlideshow = slideshow == "true" ? true : false
+//        }
         
-        videoHLSPreview = json?[SearchJsonKey.VideoHLSPreview].url
+//        videoHLSPreview = json?[SearchJsonKey.VideoHLSPreview].url
     }
     
     //MARK:- BaseMetaData - Coding
@@ -167,8 +167,8 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         title = aDecoder.decodeObject(forKey:SearchJsonKey.Title) as? String
         duration = aDecoder.decodeObject(forKey:SearchJsonKey.Duration) as? Double ?? Double(0.0)
         genre = aDecoder.decodeObject(forKey:SearchJsonKey.Genre) as? [String] ?? []
-        videoSlideshow = aDecoder.decodeObject(forKey: SearchJsonKey.VideoSlideshow) as? Bool
-        videoHLSPreview = aDecoder.decodeObject(forKey:SearchJsonKey.VideoHLSPreview) as? URL
+//        videoSlideshow = aDecoder.decodeObject(forKey: SearchJsonKey.VideoSlideshow) as? Bool
+//        videoHLSPreview = aDecoder.decodeObject(forKey:SearchJsonKey.VideoHLSPreview) as? URL
     }
     
     func encode(with aCoder: NSCoder) {
@@ -186,8 +186,8 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         aCoder.encode(title, forKey: SearchJsonKey.Title)
         aCoder.encode(duration, forKey: SearchJsonKey.Duration)
         aCoder.encode(genre, forKey: SearchJsonKey.Genre)
-        aCoder.encode(videoSlideshow, forKey: SearchJsonKey.VideoSlideshow)
-        aCoder.encode(videoHLSPreview, forKey: SearchJsonKey.VideoHLSPreview)
+//        aCoder.encode(videoSlideshow, forKey: SearchJsonKey.VideoSlideshow)
+//        aCoder.encode(videoHLSPreview, forKey: SearchJsonKey.VideoHLSPreview)
     }
 }
 
@@ -207,8 +207,8 @@ extension BaseMetaData {
             duration == metaData.duration &&
             genre == metaData.genre &&
             artist == metaData.artist &&
-            videoSlideshow == metaData.videoSlideshow &&
-            videoHLSPreview?.byTrimmingQuery == metaData.videoHLSPreview?.byTrimmingQuery &&
+//            videoSlideshow == metaData.videoSlideshow &&
+//            videoHLSPreview?.byTrimmingQuery == metaData.videoHLSPreview?.byTrimmingQuery &&
             favourite == metaData.favourite &&
             height == metaData.height &&
             width == metaData.width
@@ -228,8 +228,8 @@ extension BaseMetaData {
         title = metaData.title
         duration = metaData.duration
         genre = metaData.genre
-        videoSlideshow = metaData.videoSlideshow
-        videoHLSPreview = metaData.videoHLSPreview
+//        videoSlideshow = metaData.videoSlideshow
+//        videoHLSPreview = metaData.videoHLSPreview
         favourite = metaData.favourite
         height = metaData.height
         width = metaData.width
