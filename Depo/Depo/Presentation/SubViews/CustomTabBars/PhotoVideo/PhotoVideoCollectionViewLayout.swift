@@ -27,16 +27,20 @@ final class PhotoVideoCollectionViewLayout: UICollectionViewFlowLayout {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setup()
     }
     
     override init() {
         super.init()
-        
+        setup()
+    }
+    
+    private func setup() {
         let viewWidth = UIScreen.main.bounds.width
         let columns = CGFloat(columnsNumber)
         let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
         itemSize = CGSize(width: itemWidth, height: itemWidth)
-
+        
         minimumInteritemSpacing = padding
         minimumLineSpacing = padding
         headerReferenceSize = CGSize(width: 0, height: 50)

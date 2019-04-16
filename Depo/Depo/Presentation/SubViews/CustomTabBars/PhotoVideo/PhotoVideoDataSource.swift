@@ -243,7 +243,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         })
     }
     
-    func focusedOffset(velocity: CGFloat = 0) -> CGPoint? {
+    func focusedOffset() -> CGPoint? {
         if !collectionView.isDragging,
             let indexPath = focusedIndexPath,
             let attributes = self.collectionView.layoutAttributesForItem(at: indexPath) {
@@ -284,6 +284,6 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
 
 extension PhotoVideoDataSource: PhotoVideoCollectionViewLayoutDelegate {
     func targetContentOffset() -> CGPoint? {
-        return focusedOffset(velocity: 0)
+        return focusedOffset()
     }
 }
