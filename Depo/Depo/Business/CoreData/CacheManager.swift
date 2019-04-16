@@ -31,7 +31,6 @@ final class CacheManager {
     
     let delegates = MulticastDelegate<CacheManagerDelegate>()
     
-    
     func actualizeCache(completion: VoidHandler?) {
         if !isProcessing {
             CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
@@ -39,6 +38,7 @@ final class CacheManager {
         
         isCacheActualized = false
         isProcessing = true
+
         MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
             if isNoRemotes {
                 self?.startAppendingAllRemotes(completion: { [weak self] in
