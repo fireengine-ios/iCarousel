@@ -265,7 +265,7 @@ extension PhotoVideoController: PhotoVideoCellDelegate {
 extension PhotoVideoController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        assetsFileCacheManager.updateCachedAssets(on: collectionView, itemProviderClosure: itemProviderClosure)
+//        assetsFileCacheManager.updateCachedAssets(on: collectionView, itemProviderClosure: itemProviderClosure)
         updateScrollBarTextIfNeed()
         scrollBarManager.scrollViewDidScroll()
         scrollBarManager.hideScrollBarIfNeed(for: scrollView.contentOffset.y)
