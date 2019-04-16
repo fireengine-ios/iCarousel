@@ -1,1 +1,5 @@
-
+"NSFaceIDUsageDescription" = "Esta aplicación está diseñada para usar Face ID para aumentar tu seguridad”;
+"NSLocationAlwaysUsageDescription" = "Su ubicación se utilizará para la sincronización de fondo";
+"NSPhotoLibraryAddUsageDescription" = "Se necesita su permiso para acceder a la biblioteca de fotos para guardar sus fotos y videos";
+"NSPhotoLibraryUsageDescription" = "Se necesita su permiso para acceder a la biblioteca de fotos para mostrar fotos y videos en la aplicación”;
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Su ubicación se utilizará para la sincronización de fondo";
