@@ -1,5 +1,5 @@
-"NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety”;
+"NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
 "NSLocationAlwaysUsageDescription" = "سيتم استخدام موقعك لمزامنة الخلفية";
 "NSPhotoLibraryAddUsageDescription" = "مطلوب إذن للوصول إلى مكتبة الصور لحفظ الصور ومقاطع الفيديو الخاصة بك";
-"NSPhotoLibraryUsageDescription" = "مطلوب إذن للوصول إلى مكتبة الصور لعرض الصور ومقاطع الفيديو في التطبيق”;
+"NSPhotoLibraryUsageDescription" = "مطلوب إذن للوصول إلى مكتبة الصور لعرض الصور ومقاطع الفيديو في التطبيق";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "سيتم استخدام موقعك لمزامنة الخلفية";
