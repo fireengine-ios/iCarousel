@@ -204,7 +204,7 @@ extension BaseMetaData {
             videoPreviewURL?.byTrimmingQuery == metaData.videoPreviewURL?.byTrimmingQuery &&
             documentPreviewURL?.byTrimmingQuery == metaData.documentPreviewURL?.byTrimmingQuery &&
             title == metaData.title &&
-            duration == metaData.duration &&
+            duration.toInt() == metaData.duration.toInt() &&
             genre == metaData.genre &&
             artist == metaData.artist &&
 //            videoSlideshow == metaData.videoSlideshow &&
