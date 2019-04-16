@@ -16,12 +16,7 @@ final class PhotoVideoCollectionViewLayout: UICollectionViewFlowLayout {
     
     weak var delegate: PhotoVideoCollectionViewLayoutDelegate?
     
-    private(set) lazy var columnsNumber: Int = {
-        let viewWidth = UIScreen.main.bounds.width
-        let desiredItemWidth: CGFloat = 100
-        let preferredCount = Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone
-        return Int(max(floor(viewWidth / desiredItemWidth), CGFloat(preferredCount)))
-    }()
+    let columns = Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone
     
     private let padding: CGFloat = 1
     
@@ -37,7 +32,6 @@ final class PhotoVideoCollectionViewLayout: UICollectionViewFlowLayout {
     
     private func setup() {
         let viewWidth = UIScreen.main.bounds.width
-        let columns = CGFloat(columnsNumber)
         let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
         itemSize = CGSize(width: itemWidth, height: itemWidth)
         

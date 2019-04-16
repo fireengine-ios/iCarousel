@@ -692,7 +692,7 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
         DispatchQueue.toMain {
             self.scrollBarManager.updateYearsView(with: fetchedObjects,
                                                   cellHeight: self.collectionViewManager.collectionViewLayout.itemSize.height,
-                                                  numberOfColumns: self.collectionViewManager.collectionViewLayout.columnsNumber)
+                                                  numberOfColumns: Int(self.collectionViewManager.collectionViewLayout.columns))
         }
     }
 }
