@@ -31,7 +31,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [uuid], options: nil)
                 let options = PHFetchOptions()
-                options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                options.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAsset.creationDate), ascending: false)]
                 if let album = collectionFetchResult.firstObject {
                     let assetsFetchResult = PHAsset.fetchAssets(in: album, options: options)
                     var assets = [PHAsset]()
@@ -63,9 +63,9 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard CacheManager.shared.isProcessing else {
-                self?.getAllRelatedItemsFromDataBase(assets: assets) { [weak self] dataBaseStoredLocalas in
+                self?.getAllRelatedItemsFromDataBase(assets: assets) { [weak self] dataBaseStoredLocals in
                     DispatchQueue.main.async {
-                        self?.uploadOutput?.newLocalItemsReceived(newItems: dataBaseStoredLocalas)
+                        self?.uploadOutput?.newLocalItemsReceived(newItems: dataBaseStoredLocals)
                     }
                 }
                 return

@@ -17,15 +17,14 @@ class UploadFilesSelectionDataSource: ArrayDataSourceForCollectionView {
     }
     
     func appendNewLocalItems(newItems: [BaseDataSourceItem]) {
-        guard var alreadyStoredLocalItems = tableDataMArray.first else {
+        ///tableDataMArray for upload page uses only first row
+        guard let alreadyStoredLocalItems = tableDataMArray.first else {
             tableDataMArray.append(newItems)
             reloadData()
             return
         }
         
-        alreadyStoredLocalItems.append(contentsOf: newItems)
-        tableDataMArray.removeAll()
-        tableDataMArray.append(alreadyStoredLocalItems)
+        tableDataMArray = [alreadyStoredLocalItems + newItems]
         reloadData()
     }
 }
