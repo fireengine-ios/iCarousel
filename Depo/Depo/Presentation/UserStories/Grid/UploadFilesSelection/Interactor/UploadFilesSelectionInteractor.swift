@@ -43,7 +43,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                         self?.getAllRelatedItemsPageFromPH(assets: assets)
                        return
                     }
-                    self?.getAllRelatedItemsFromDataBase(assets: assets){ [weak self] items in
+                    self?.getAllRelatedItemsFromDataBase(assets: assets) { [weak self] items in
                         DispatchQueue.main.async {
                             self?.output.getContentWithSuccess(array: [items])
                         }
@@ -52,8 +52,6 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             }
         }
     }
-    
-    private let pageSize: Int = 100
     
     private func getAllRelatedItemsPageFromPH(assets: [PHAsset]) {
         guard !assets.isEmpty else {
@@ -91,21 +89,8 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         }
     }
     
-    private func getAllRelatedItemsFromDataBase(assets: [PHAsset], itemsCallback: LocalFilesCallBack?) {
-        MediaItemOperationsService.shared.allLocalItems(with: assets) { mediaItems in
-            var items = mediaItems
-            items.sort {
-                guard let firstDate = $0.creationDate else {
-                    return false
-                }
-                guard let secondDate = $1.creationDate else {
-                    return true
-                }
-                
-                return firstDate > secondDate
-            }
-            itemsCallback?(items)
-        }
+    private func getAllRelatedItemsFromDataBase(assets: [PHAsset], itemsCallback: @escaping LocalFilesCallBack) {
+        MediaItemOperationsService.shared.localItemsBy(assets: assets, localItemsCallback: itemsCallback)
     }
     
     func addToUploadOnDemandItems(items: [BaseDataSourceItem]) {

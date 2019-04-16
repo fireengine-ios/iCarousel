@@ -690,6 +690,33 @@ final class MediaItemOperationsService {
         })
     }
     
+    func localItemsBy(assets: [PHAsset], localItemsCallback: @escaping LocalFilesCallBack) {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            localItemsCallback([])
+            return
+        }
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(MediaItem.creationDateValue), ascending: false)
+        let context = CoreDataStack.default.newChildBackgroundContext
+       
+        let predicate = NSPredicate(format:
+        "(\(#keyPath(MediaItem.localFileID)) != nil) AND (\(#keyPath(MediaItem.localFileID)) IN %@) AND \(#keyPath(MediaItem.isLocalItemValue)) == true", assets.map { $0.localIdentifier })
+        
+        let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
+        request.predicate = predicate
+        request.sortDescriptors = [sortDescriptor]
+        context.perform {
+            guard let result = try? context.fetch(request) else {
+                localItemsCallback([])
+                return
+            }
+            var localItems = [WrapData]()
+            for (item, asset) in zip(result, assets) {
+                localItems.append(item.wrapedObject(with: asset))
+            }
+            localItemsCallback(localItems)
+        }
+    }
+    
     func allLocalItems(with assets: [PHAsset], localItemsCallback: @escaping LocalFilesCallBack) {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             localItemsCallback([])
