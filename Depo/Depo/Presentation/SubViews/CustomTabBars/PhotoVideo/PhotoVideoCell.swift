@@ -141,7 +141,8 @@ final class PhotoVideoCell: UICollectionViewCell {
             videoDurationLabel.isHidden = true
         }
         
-        if let assetIdentifier = mediaItem.localFileID {
+        let assetIdentifier = mediaItem.isLocalItemValue ? mediaItem.localFileID : mediaItem.relatedLocal?.localFileID
+        if let assetIdentifier = assetIdentifier {
             cellId = assetIdentifier
             
             FilesDataSource.cacheQueue.async { [weak self] in
