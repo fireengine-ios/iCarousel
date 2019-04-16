@@ -55,7 +55,6 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
     
     private let pageSize: Int = 100
     
-//    , itemsCallback: LocalFilesCallBack?
     private func getAllRelatedItemsPageFromPH(assets: [PHAsset]) {
         guard !assets.isEmpty else {
             uploadOutput?.newLocalItemsReceived(newItems:[])
