@@ -10,6 +10,7 @@ import Foundation
 
 protocol SelectNameInteractorOutput: class {
     func startProgress()
-    func operationSucces(operation: SelectNameScreenType, item: Item?, isSubFolder: Bool)
-    func operationFaildWithError(errorMessage: String)
+    func operationSuccess(operation: SelectNameScreenType, item: Item?, isSubFolder: Bool)
+    func createAlbumOperationSuccess(item: AlbumItem?)
+    func operationFailedWithError(errorMessage: String)
 }

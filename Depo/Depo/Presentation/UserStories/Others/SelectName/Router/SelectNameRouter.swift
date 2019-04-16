@@ -23,4 +23,9 @@ class SelectNameRouter: SelectNameRouterInput {
         let folderVC = router.filesFromFolder(folder: item, type: .Grid, sortType: .None, moduleOutput: presenter) 
         router.pushViewController(viewController: folderVC, animated: false)
     }
+    
+    func moveToAlbumPage(presenter: SelectNamePresenter, item: AlbumItem) {
+         let albumVC = router.albumDetailController(album: item, type: .List, moduleOutput: presenter)
+         router.pushViewController(viewController: albumVC, animated: false)        
+    }
 }

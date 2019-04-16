@@ -251,7 +251,7 @@
 "Logout" = "Ausloggen";
 "Help & Support" = "FAQ";
 "Lifebox Touch ID and Passcode" = "Lifebox Touch ID und Passwort";
-"Usage Info and Packages" = "Nutzungsinformationen und Pakete";
+"Usage Info and Packages" = "Konto- und Nutzungsdetails";
 "Recently Deleted Files" = "Kürzlich gelöschte Dateien";
 "Auto Sync" = "Automatische Synchronisation";
 "Back-up my contacts" = "Sichern Sie meine Kontakte";
@@ -868,9 +868,9 @@
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell und seiner Konzerngesellschaften informiert";
 "terms_and_use_etk_link_commercial_email_messages" = "kommerzielle E-Mails";
 "commercial_email_messages" = "SCHRIFTLICHE ZUSTIMMUNG FÜR KOMMERZIELLE E-MAILS\n\nHiermit erkläre ich mich damit einverstanden, dass ich Turkcell und seinen Konzerngesellschaften mein Einverständnis erteile, kommerzielle E-Mails (die Daten beinhaltenden Nachrichten, Stimmen und Videos, die zu kommerziellen Zwecken gesendet und auf elektronischem Wege mit Mitteln wie Telefon, Call-Center, Faxübertragung, Autodialing-Gerät, Smart Sound Recorder, E-Mail, Kurzmitteilungssystem übertragen werden) über meine Kontaktdaten, die ich bei der Anmeldung von lifebox angegeben habe oder bereits bei Turkcell und ihren Konzerngesellschaften im Besitz sind, an mich zu senden, um verschiedene neue Produkte und Dienstleistungen zu bewerben und zu vermarkten, sowie allgemeine/besondere Möglichkeiten anzukündigen, die Turkcell und seine Konzerngesellschaften und/oder Drittunternehmen anbieten, mit denen sie gemäß der Gesetzesnummer 6563 über die Regulierung des elektronischen Geschäftsverkehrs (\"das Gesetz\") zusammenarbeiten sowie die Bestimmungen über kommerzielle Kommunikation und kommerzielle elektronische Postnachrichten (\"die Verordnung\") auf unbefristeter Basis, bis ich von meinem Recht Gebrauch mache, solche Nachrichten zu verweigern, selbst wenn mein Abonnementvertrag läuft ab.\n\nKommerzielle E-Mails, die von Betreibern, die dem Gesetz Nr. 5809  über elektronische Kommunikation unterliegen, an ihre Abonnenten und Benutzer ausschließlich zur Werbung und Vermarktung ihrer eigenen Produkte und Dienstleistungen oder zur Einführung ihres Geschäfts gesendet werden, sind gemäß den Verordnungen ausgenommen. Daher stimme ich hiermit zu, dass die Einwilligung, die ich oben gegeben habe, unabhängig von der Einwilligung ist, die ich dem Betreiber, bei dem ich Abonnent/Nutzer bin, im Zusammenhang mit der Werbung für seine Produkte und Dienstleistungen gegeben hat und dass dieser Betreiber dies tun muss berechtigt sein, kommerzielle E-Mail-Nachrichten zu Zwecken wie Werbung, Vermarktung seiner eigenen Produkte und Dienstleistungen im Rahmen der Einwilligung zu versenden, die ich dem Betreiber, bei dem ich Abonnent bin, erteilte, auch wenn ich die unter diesem Dokument erteilte Einwilligung widerrufe Ich über mein Recht aus, solche Nachrichten gemäß dem Gesetz und den Vorschriften abzulehnen, und dass mir bekannt ist, dass ich auch die kommerziellen E-Mails meines Betreibers ablehnen kann.";
-"NSLocationAlwaysUsageDescription" = "";
-"NSPhotoLibraryAddUsageDescription" = "";
-"NSPhotoLibraryUsageDescription" = "";
+"NSLocationAlwaysUsageDescription" = "Ihr Standort wird für die Hintergrundsynchronisierung verwendet";
+"NSPhotoLibraryAddUsageDescription" = "Ihre Erlaubnis für den Zugriff auf die Fotobibliothek ist erforderlich, um Ihre Fotos und Videos zu speichern";
+"NSPhotoLibraryUsageDescription" = "Ihre Erlaubnis für den Zugriff auf die Fotobibliothek ist erforderlich, um Fotos und Videos in der Anwendung anzuzeigen";
 
 /*Usage Info*/
 "package_space_details" = "";
@@ -880,3 +880,36 @@
 "percentage_used_two_lines" = "";
 "my_usage_storage" = "";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "";
+"package_space_details" = "%1$@ / %2$@ Internet verwendet (nur für die Verwendung der Lifebox)";
+"package_renew_date" = "Wird erneuert am:% @";
+"percentage_used" = "%.0f %% verwendet";
+"used_and_left_space" = "%1$@ / %2$@ verwendet";
+"percentage_used_two_lines" = "%.0f%% \nverwendet";
+"my_usage_storage" = "Meine Internetnutzung";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Ihr Standort wird für die Hintergrundsynchronisierung verwendet";
+"name" = "Name";
+"surname" = "Nachname";
+"change password" = "Ändere das Passwort";
+"left_space" = "%1$@ / %2$@";
+
+/*Packages*/
+"packages_i_have" = "Pakete, die ich habe";
+"account_details" = "Kontodetails";
+"my_profile" = "Mein Profil";
+"account_type" = "Konto Typ";
+"standard_plus" = "lifebox Standart+";
+"standard" = "lifebox Standart";
+"premium" = "lifebox-Premium";
+"old_password" = "Altes Passwort";
+"new_password" = "Neues Passwort";
+"repeat_password" = "Kennwort erneut eingeben";
+"change_password_captcha_answer_placeholder" = "Tippe den Text";
+"temporary_error_occurred_try_again_later" = "Tippe den Text";
+"old_password_does_not_match" = "Das alte Passwort wurde falsch eingegeben";
+"new_password_and_repeated_password_does_not_match" = "Diese Passwörter stimmen nicht überein";
+"new_password_is_empty" = "Neues Passwortfeld ist leer";
+"old_password_is_empty" = "Das alte Passwortfeld ist leer";
+"repeat_password_is_empty" = "Das Wiederholungskennwortfeld ist leer";
+"this_text_is_empty" = "Dieser Text ist leer";
+"password_changed_successfully" = "Ihr Passwort wurde erfolgreich geändert";
+"password_changed_successfully_relogin" = "Sie haben Ihr Passwort erfolgreich geändert. Bitte melden Sie sich erneut mit Ihrem neuen Passwort an.";

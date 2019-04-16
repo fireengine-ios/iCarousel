@@ -253,7 +253,7 @@
 "Logout" = "تسجيل الدخول تلقائياً";
 "Help & Support" = "الأسئلة المتداولة";
 "Lifebox Touch ID and Passcode" = "Touch ID ورمز مرور لايف بوكس";
-"Usage Info and Packages" = "معلومات الاستعمال والحزم";
+"Usage Info and Packages" = "تفاصيل الحساب والاستخدام";
 "Recently Deleted Files" = "الملفات المحذوفة حديثاً";
 "Auto Sync" = "المزامنة التلقائية";
 "Back-up my contacts" = "إنشاء نسخة احتياطية لجهات الاتصال";
@@ -875,14 +875,14 @@
 "leave_middle_turkcell" = "من أجل الغاء الحزمة الرجاء اكتب IPTAL LIFEBOX STANDART+ وارسلها على الرقم 2200.";
 "package_FWI_cancel_text" = "";
 "package_jamaica_cancel_text" = "";
-"feature_digicell_cancel_text" = "";
-"terms_and_use_etk_checkbox" = "";
-"terms_and_use_etk_link_turkcell_and_group_companies" = "";
-"terms_and_use_etk_link_commercial_email_messages" = "";
-"commercial_email_messages" = "";
-"NSLocationAlwaysUsageDescription" = "";
-"NSPhotoLibraryAddUsageDescription" = "";
-"NSPhotoLibraryUsageDescription" = "";
+"feature_digicell_cancel_text" = "يمكنك الاستمرار في استخدام ميزات Premium مجانًا نظرًا لأنك مستخدم في Digicell";
+"terms_and_use_etk_checkbox" = "أرغب في الحصول على رسائل إلكترونية تجارية من أجل الإطلاع على المنتجات والخدمات المميزة من تركسال وشركات المجموعة لغاية بإبلاغ عكس ذلك من قبلي وفق القانون رقم 6553 واللوائح الأخرى ذات الصلة.";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "تركسال وشركات المجموعة";
+"terms_and_use_etk_link_commercial_email_messages" = "رسائل إلكترونية تجارية";
+"commercial_email_messages" = " \nأوافق بأني أقبل إرسال رسائل إلكترونية تجارية (الرسائل التي تحتوي على بيانات وصوت وفيديو يتم إرسالها بهدف تجاري وتتم في بيئة إلكتروينة بإستخدام الوسائل مثل الهاتف، مراكز الإتصال، الفاكس، ماكينات الإتصال الآلي، أنظمة تسجيل الصوت الذكية، البريد الإلكتروني، خدمة الرسائل القصيرة) في إطارة القانون المتعلق بتنظيم التجارة الإلكترونية رقم 6563 (\"القانون\") و اللوائح بخصوص الإتصالات التجارية و الرسائل الإلكترونية التجارية (\"اللوائح\") من قبل تركسال و شركات المجموعة من أجل التعريف بالمنتجات – الخدمات الجديدة وأنواعها و تسوقيها و إعلان الفرص العامة / الخاصة المتعلقة بتركسل و شركات المجموعة و / أو المؤسسات الموجودة ضمن التعاون بواسطة إستخدام بيانات الإتصال الخاصة بي والتي قدمتها إثناء عضويتي في تطبيق Lifebox أو موجودة لدى تركسل و شركات المجموعة وذلك بشكل دائم حتى ولو إنتها إتفاقية الإستخدام لحين قيامي بإستخدام حقي في الرفض.\nالرسائل الإلكترونية التجارية التي يتم إرسالها بهدف تعريف وتسويق أو تعريف إستخدام البضائع والخدمات الحصرية إلى أعضاء ومستخدمي المؤسسات ضمن إطار قانون التواصل الإلكتروني رقم 5809 تقم خارج الإستثناء. لهذا السبب الموافقة التي أدليت بها أعلاه هي مستقلة عن الموافقة المتعلقة بتعريف المنتجات والخدمات للشركات التي أكون عضو/ مستخدم فيها وأوافق بأني أقبل الرسائل الإلكترونية التجارية التي يتحتوي على أهداف التعريف والتسويق المتعلقة بالبضائع والخدمات من هذه المؤسسات ضمن الموافقة التي أدليت بها إلى المؤسسات التي أكون عضوا بها حتى ولو قمت بإلغاء الموافقة التي أدليت بها في هذا النص ضمن القانون واللوائح باستخدام حقي في الرفض و أنه يوجد حق لي في رفض الرسائل الإلكترونية التجارية هذه.\n";
+"NSLocationAlwaysUsageDescription" = "سيتم استخدام موقعك لمزامنة الخلفية";
+"NSPhotoLibraryAddUsageDescription" = "مطلوب إذن للوصول إلى مكتبة الصور لحفظ الصور ومقاطع الفيديو الخاصة بك";
+"NSPhotoLibraryUsageDescription" = "مطلوب إذن للوصول إلى مكتبة الصور لعرض الصور ومقاطع الفيديو في التطبيق";
 
 /*Usage Info*/
 "package_space_details" = "";
@@ -892,3 +892,36 @@
 "percentage_used_two_lines" = "";
 "my_usage_storage" = "";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "";
+"package_space_details" = "٪2$@ / ٪1$@ الإنترنت المستخدمة (فقط للاستخدام lifebox)";
+"package_renew_date" = "سيتم التجديد في:٪ @";
+"percentage_used" = "٪.0f٪٪ مستخدم";
+"used_and_left_space" = "٪2$@ / ٪1$@ مستخدم";
+"percentage_used_two_lines" = "٪.0f٪٪\n مستخدم";
+"my_usage_storage" = "استخدام الإنترنت الخاص بي";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "سيتم استخدام موقعك لمزامنة الخلفية";
+"name" = "اسم";
+"surname" = "لقب";
+"change password" = "غير كلمة السر";
+"left_space" = "٪2$@ / ٪1$@";
+
+/*Packages*/
+"packages_i_have" = "حزم لدي";
+"account_details" = "تفاصيل الحساب";
+"my_profile" = "ملفي";
+"account_type" = "نوع الحساب";
+"standard_plus" = "lifebox Standart+";
+"standard" = "lifebox Standart";
+"premium" = "lifebox Premium";
+"old_password" = "كلمة المرور القديمة";
+"new_password" = "كلمة السر الجديدة";
+"repeat_password" = "اعادة ادخال كلمة السر";
+"change_password_captcha_answer_placeholder" = "اطبع النص";
+"temporary_error_occurred_try_again_later" = "حدث خطأ مؤقت ، يرجى المحاولة مرة أخرى لاحقًا";
+"old_password_does_not_match" = "تم إدخال كلمة المرور القديمة بشكل غير صحيح";
+"new_password_and_repeated_password_does_not_match" = "كلمات المرور هذه غير متطابقة";
+"new_password_is_empty" = "حقل كلمة المرور الجديد فارغ";
+"old_password_is_empty" = "حقل كلمة المرور القديم فارغ";
+"repeat_password_is_empty" = "كرر حقل كلمة المرور فارغ";
+"this_text_is_empty" = "هذا النص فارغ";
+"password_changed_successfully" = "تم تغيير كلمة مرورك بنجاح";
+"password_changed_successfully_relogin" = "لقد غيرت كلمة سرك بنجاح. يرجى تسجيل الدخول مرة أخرى باستخدام كلمة المرور الجديدة.";

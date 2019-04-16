@@ -251,7 +251,7 @@
 "Logout" = "Ieșire";
 "Help & Support" = "FAQ";
 "Lifebox Touch ID and Passcode" = "Amprenta digitală și Parola lifebox";
-"Usage Info and Packages" = "Informații de utilizare și Pachete";
+"Usage Info and Packages" = "Detalii cont și utilizare";
 "Recently Deleted Files" = "Fișierele Șterse Recent";
 "Auto Sync" = "Sincronizare Automată";
 "Back-up my contacts" = "Copie Contactele mele";
@@ -863,7 +863,7 @@
 "leave_middle_turkcell" = "Trimite textul IPTAL LIFEBOX STANDART+ la 2200, pentru a anula pachetul tău ";
 "package_FWI_cancel_text" = "";
 "package_jamaica_cancel_text" = "";
-"feature_digicell_cancel_text" = "";
+"feature_digicell_cancel_text" = "Poți beneficia în continuare de avantajele Premium, odată ce ești abonat Digicell";
 "terms_and_use_etk_checkbox" = "Până la o notificare contrară întreprinsă de mine  conform Legii numărul 6563 şi legislațiilor  relevante, doresc să primesc mesaje electronice comerciale cu privire la produsele şi serviciile avantajoase ale lui Turkcell şi Societățile Grupului .";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell şi Societățile Grupului";
 "terms_and_use_etk_link_commercial_email_messages" = "mesaje electronice comerciale";
@@ -882,3 +882,30 @@
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Locația ta va fi folosită pentru sincronizarea de fundal";
 "percentage_used_two_lines" = "%.0f%%\\n utilizat";
 "my_usage_storage" = "Spațiul de stocare de utilizare";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Locația ta va fi folosită pentru sincronizarea de fundal";
+"name" = "Nume";
+"surname" = "Prenume";
+"change password" = "Modificare Parolă";
+"left_space" = "%1$@ / %2$@";
+
+/*Packages*/
+"packages_i_have" = "Packetele mele";
+"account_details" = "Detalii Cont";
+"my_profile" = "Profilul Meu";
+"account_type" = "Tip Cont";
+"standard_plus" = "lifebox Standard+";
+"standard" = "lifebox Standard";
+"premium" = "lifebox Premium";
+"old_password" = "Parola veche";
+"new_password" = "Parola nouă";
+"repeat_password" = "Introdu Parola din nou";
+"change_password_captcha_answer_placeholder" = "Culege textul";
+"temporary_error_occurred_try_again_later" = "A intervenit o eroare, te rugăm să încerci mai târziu";
+"old_password_does_not_match" = "Parola veche introdusă greșit";
+"new_password_and_repeated_password_does_not_match" = "Parola nu coincide";
+"new_password_is_empty" = "Câmpul cu Parola nouă e necompletat";
+"old_password_is_empty" = "Câmpul cu Parola veche e necompletat";
+"repeat_password_is_empty" = "Câmpul pentru repetarea Parolei e necompletat";
+"this_text_is_empty" = "Acest text e gol";
+"password_changed_successfully" = "Parola ta a fost modificată cu succes";
+"password_changed_successfully_relogin" = "Ai schimbat cu succes parola, te rugăm să te conectezi cu datele tale";
