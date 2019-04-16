@@ -676,8 +676,9 @@ extension PhotoVideoController {
 extension PhotoVideoController {
     private var itemProviderClosure: ItemProviderClosure {
         return { [weak self] indexPath in
-            if let mediaItem = self?.dataSource.object(at: indexPath) {
-                return WrapData(mediaItem: mediaItem)
+            if let mediaItem = self?.dataSource.object(at: indexPath), let assetId = mediaItem.localFileID {
+                return LocalMediaStorage.default.assetsCache.assetBy(identifier: assetId) ??
+                    PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject
             }
             return nil
         }

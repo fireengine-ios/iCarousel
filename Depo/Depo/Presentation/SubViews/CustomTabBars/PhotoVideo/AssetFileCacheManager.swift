@@ -9,7 +9,7 @@
 import Foundation
 
 
-typealias ItemProviderClosure = ((_ indexPath: IndexPath)->Item?)
+typealias ItemProviderClosure = ((_ indexPath: IndexPath)-> PHAsset?)
 
 class AssetFileCacheManager {
     
@@ -48,33 +48,18 @@ class AssetFileCacheManager {
         let (addedRects, removedRects) = differencesBetweenRects(previousPreheatRect, preheatRect)
         let addedAssets = addedRects
             .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
-            .compactMap { (indexPath) -> PHAsset? in
-                var asset: PHAsset?
-                
-                if let item = itemProviderClosure(indexPath) {
-                    if case let PathForItem.localMediaContent(local) = item.patchToPreview {
-                        asset = local.asset
-                    }
-                }
-                return asset
-        }
+            .compactMap { itemProviderClosure($0) }
         let removedAssets = removedRects
             .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
-            .compactMap {  (indexPath) -> PHAsset? in
-                var asset: PHAsset?
-                if let item = itemProviderClosure(indexPath) {
-                    if case let PathForItem.localMediaContent(local) = item.patchToPreview {
-                        asset = local.asset
-                    }
-                }
-                return asset
-        }
+            .compactMap {  itemProviderClosure($0) }
         
-        // Update the assets the PHCachingImageManager is caching.
-        filesDataSource.startCahcingImages(for: addedAssets)
-        //        print("Started \(addedAssets.count) request(s) of images")
-        filesDataSource.stopCahcingImages(for: removedAssets)
-        //        print("Removed \(removedAssets.count) request(s) of images")
+        DispatchQueue.toBackground { [weak self] in
+            // Update the assets the PHCachingImageManager is caching.
+            self?.filesDataSource.startCahcingImages(for: addedAssets)
+            //        print("Started \(addedAssets.count) request(s) of images")
+            self?.filesDataSource.stopCahcingImages(for: removedAssets)
+            //        print("Removed \(removedAssets.count) request(s) of images")
+        }
         
         // Store the preheat rect to compare against in the future.
         previousPreheatRect = preheatRect

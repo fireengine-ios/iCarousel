@@ -1952,7 +1952,10 @@ extension BaseDataSourceForCollectionView {
     
     private var itemProviderClosure: ItemProviderClosure {
         return { [weak self] indexPath in
-            return self?.itemForIndexPath(indexPath: indexPath) as? Item
+            if let item = self?.itemForIndexPath(indexPath: indexPath) as? Item {
+                return item.asset
+            }
+            return nil
         }
     }
 }
