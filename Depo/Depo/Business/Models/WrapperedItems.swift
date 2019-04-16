@@ -856,7 +856,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         favorites = remote.metadata?.favourite ?? false
         if let fileName = name {
             md5 = "\(fileName.removeAllPreFileExtentionBracketValues())\(fileSize)"
-            debugPrint(md5)
+//            debugPrint(md5)
         }
         
         patchToPreview = .remoteUrl(url)
@@ -921,7 +921,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         if let fileName = name {
             md5 = "\(fileName.removeAllPreFileExtentionBracketValues())\(fileSize)"
-            debugPrint(md5)
+//            debugPrint(md5)
         }
         
         patchToPreview = .remoteUrl(url)

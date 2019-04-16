@@ -62,6 +62,7 @@ final class CellImageManager {
     private lazy var operationQueue = CellImageManager.globalOperationQueue
     private lazy var processingQueue = CellImageManager.operationProcessingQueue
     private var currentOperation: Operation?
+    private var isCancelled = false
     
     private let imageCache = SDWebImageManager.shared().imageCache
     
@@ -72,6 +73,7 @@ final class CellImageManager {
     
     func loadImage(thumbnailUrl: URL?, url: URL?, completionBlock: @escaping CellImageManagerOperationsFinished) {
         dispatchQueue.async { [weak self] in
+            self?.isCancelled = false
             self?.completionBlock = completionBlock
             self?.setupOperations(thumbnail: thumbnailUrl, url: url)
         }
@@ -79,6 +81,7 @@ final class CellImageManager {
     
     func cancelImageLoading() {
         dispatchQueue.async { [weak self] in
+            self?.isCancelled = true
             self?.currentOperation?.cancel()
             self?.currentOperation = nil
         }
@@ -147,6 +150,9 @@ final class CellImageManager {
     }
     
     private func start(operation: Operation) {
+        guard !isCancelled else {
+            return
+        }
         currentOperation = operation
         operationQueue.addOperation(operation)
     }
