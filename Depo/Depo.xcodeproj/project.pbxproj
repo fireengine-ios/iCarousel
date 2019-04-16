@@ -2752,6 +2752,8 @@
 		9849B5B721FF49400059F9A9 /* InstapickFreeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9849B5B521FF49400059F9A9 /* InstapickFreeCell.swift */; };
 		9849B5B921FF49630059F9A9 /* InstapickFreeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9849B5B821FF49630059F9A9 /* InstapickFreeCell.xib */; };
 		9849B5BA21FF49630059F9A9 /* InstapickFreeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9849B5B821FF49630059F9A9 /* InstapickFreeCell.xib */; };
+		9849B8AC2266094900731048 /* PhotoVideoCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9849B8AB2266094800731048 /* PhotoVideoCollectionViewLayout.swift */; };
+		9849B8AD2266094900731048 /* PhotoVideoCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9849B8AB2266094800731048 /* PhotoVideoCollectionViewLayout.swift */; };
 		984A512B21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */; };
 		984A512C21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */; };
 		984A514021E734D2004525F5 /* AnalyzeHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */; };
@@ -5299,6 +5301,7 @@
 		9840C62420AEAD8100A8634F /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		9849B5B521FF49400059F9A9 /* InstapickFreeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickFreeCell.swift; sourceTree = "<group>"; };
 		9849B5B821FF49630059F9A9 /* InstapickFreeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstapickFreeCell.xib; sourceTree = "<group>"; };
+		9849B8AB2266094800731048 /* PhotoVideoCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoVideoCollectionViewLayout.swift; sourceTree = "<group>"; };
 		984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryViewController.swift; sourceTree = "<group>"; };
 		984A513F21E734D2004525F5 /* AnalyzeHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnalyzeHistoryViewController.xib; sourceTree = "<group>"; };
 		984A514321E74458004525F5 /* InstapickAnalyzeHistoryPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickAnalyzeHistoryPhotoCell.swift; sourceTree = "<group>"; };
@@ -9536,6 +9539,7 @@
 				8C449C14216628280060785C /* AssetFileCacheManager.swift */,
 				8C449C15216628280060785C /* PhotoVideoThreeDotMenuManager.swift */,
 				8C449C16216628280060785C /* PhotoVideoCollectionViewManager.swift */,
+				9849B8AB2266094800731048 /* PhotoVideoCollectionViewLayout.swift */,
 				8C449C17216628280060785C /* PhotoVideoCell.swift */,
 				8C449C18216628280060785C /* PhotoVideoController.swift */,
 				8C449C19216628280060785C /* PhotoVideoPredicateManager.swift */,
@@ -15044,6 +15048,7 @@
 				8C0E8C681FDEBDFF00789C91 /* FileServiceResponse.swift in Sources */,
 				8C0E8C691FDEBDFF00789C91 /* CreateStoryPreviewModuleInput.swift in Sources */,
 				B5C7C583211C6A21006E94DB /* AugmentedRealityItem.swift in Sources */,
+				9849B8AD2266094900731048 /* PhotoVideoCollectionViewLayout.swift in Sources */,
 				8C0E8C6A1FDEBDFF00789C91 /* CreateStoryPhotosOrderViewController.swift in Sources */,
 				8C0E8C6B1FDEBDFF00789C91 /* UserProfilePresenter.swift in Sources */,
 				8C449CF7216632960060785C /* String+CyrillicCompare.swift in Sources */,
@@ -16887,6 +16892,7 @@
 				D47864001F3F30BD00EFDC6D /* RoundedProgressView.swift in Sources */,
 				9808A061206A88B00022376D /* PushNotificationServiceConstants.swift in Sources */,
 				2BA37C40202883BF00660394 /* FaceImagePhotosRouterInput.swift in Sources */,
+				9849B8AC2266094900731048 /* PhotoVideoCollectionViewLayout.swift in Sources */,
 				EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */,
 				CE51ACF21EF90853005DCEE0 /* PhoneVereficationRouterInput.swift in Sources */,
 				B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */,

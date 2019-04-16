@@ -51,7 +51,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private var canShowDetail = true
     
-    
     // MARK: - life cycle
     
     override func viewDidLoad() {
@@ -59,6 +58,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
 
         bottomBarManager.setup()
         collectionViewManager.setup()
+        collectionViewManager.collectionViewLayout.delegate = dataSource
         navBarManager.setDefaultMode()
         
         needShowTabBar = true
@@ -73,14 +73,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         ItemOperationManager.default.stopUpdateView(view: self)
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        updateCellSize()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateCellSize()
         // TODO: need layoutIfNeeded?
         homePageNavigationBarStyle()
         // TODO: Set title?
@@ -111,17 +105,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         assetsFileCacheManager.resetCachedAssets()
         dataSource.performFetch()
         collectionView.reloadData()
-    }
-    
-    private lazy var columnsNumber: Int = {
-        let viewWidth = UIScreen.main.bounds.width
-        let desiredItemWidth: CGFloat = 100
-        let preferredCount = Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone
-        return Int(max(floor(viewWidth / desiredItemWidth), CGFloat(preferredCount)))
-    }()
-    private lazy var itemSize = updateCellSize()
-    @discardableResult private func updateCellSize() -> CGSize {
-        return collectionView.saveAndGetItemSize(for: columnsNumber)
     }
     
     // MARK: - Editing Mode
@@ -707,7 +690,9 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
     
     func contentDidChange(_ fetchedObjects: [MediaItem]) {
         DispatchQueue.toMain {
-            self.scrollBarManager.updateYearsView(with: fetchedObjects, cellHeight: self.itemSize.height, numberOfColumns: self.columnsNumber)
+            self.scrollBarManager.updateYearsView(with: fetchedObjects,
+                                                  cellHeight: self.collectionViewManager.collectionViewLayout.itemSize.height,
+                                                  numberOfColumns: self.collectionViewManager.collectionViewLayout.columnsNumber)
         }
     }
 }
