@@ -294,7 +294,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     private func numberOfItems(in album: PHAssetCollection, completion: @escaping (_ value: Int, _ fromCoreData: Bool) -> Void) {
-        guard !CacheManager.shared.isPreparing else {
+        guard !CacheManager.shared.isProcessing else {
             completion(album.photosCount + album.videosCount, false)
             return
         }

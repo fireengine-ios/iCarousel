@@ -39,7 +39,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                         assets.append(asset)
                     })
                     
-                    guard !CacheManager.shared.isPreparing else {
+                    guard !CacheManager.shared.isProcessing else {
                         self?.getAllRelatedItemsPageFromPH(assets: assets)
                        return
                     }
@@ -62,7 +62,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         }
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard CacheManager.shared.isPreparing else {
+            guard CacheManager.shared.isProcessing else {
                 self?.getAllRelatedItemsFromDataBase(assets: assets) { [weak self] dataBaseStoredLocalas in
                     DispatchQueue.main.async {
                         self?.uploadOutput?.newLocalItemsReceived(newItems: dataBaseStoredLocalas)

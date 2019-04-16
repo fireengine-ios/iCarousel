@@ -31,11 +31,6 @@ final class CacheManager {
     
     let delegates = MulticastDelegate<CacheManagerDelegate>()
     
-    var isPreparing: Bool {
-        return isProcessing
-    }
-    
-    
     func actualizeCache(completion: VoidHandler?) {
         if !isProcessing {
             CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
