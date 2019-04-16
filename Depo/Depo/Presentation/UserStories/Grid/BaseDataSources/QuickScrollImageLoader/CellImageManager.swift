@@ -210,7 +210,7 @@ private final class BlurService {
             return nil
         }
         
-        let inputImage = MTIImage(cgImage: cgImage)
+        let inputImage = MTIImage(cgImage: cgImage).unpremultiplyingAlpha()
         
         let filter = MTIMPSGaussianBlurFilter()
         filter.radius = radiusInPixels
