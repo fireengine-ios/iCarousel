@@ -22,7 +22,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             return
         }
         
-        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) {[weak self] accessGranted, _ in
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] accessGranted, _ in
             debugLog("UploadFilesSelectionInteractor getAllItems LocalMediaStorage askPermissionForPhotoFramework")
             guard accessGranted else {
                 return
@@ -30,23 +30,20 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
             self?.output.startAsyncOperation()
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [uuid], options: nil)
-                
+                let options = PHFetchOptions()
+                options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
                 if let album = collectionFetchResult.firstObject {
-                    let assetsFetchResult = PHAsset.fetchAssets(in: album, options: nil)
+                    let assetsFetchResult = PHAsset.fetchAssets(in: album, options: options)
                     var assets = [PHAsset]()
                     assetsFetchResult.enumerateObjects({ asset, index, stop in
                         assets.append(asset)
                     })
                     
                     guard !CacheManager.shared.isPreparing else {
-                        self?.getAllRelatedItemsFromPH(assets: assets) { items in
-                            DispatchQueue.main.async {
-                                self?.output.getContentWithSuccess(array: [items])
-                            }
-                        }
+                        self?.getAllRelatedItemsPageFromPH(assets: assets)
                        return
                     }
-                    self?.getAllRelatedItemsFromDataBase(assets: assets) { items in
+                    self?.getAllRelatedItemsFromDataBase(assets: assets){ [weak self] items in
                         DispatchQueue.main.async {
                             self?.output.getContentWithSuccess(array: [items])
                         }
@@ -56,12 +53,43 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         }
     }
     
-    private func getAllRelatedItemsFromPH(assets: [PHAsset], itemsCallback: LocalFilesCallBack?) {
-        var wrapItems = [WrapData]()
-        assets.forEach {
-            wrapItems.append(WrapData(asset: $0))
+    private let pageSize: Int = 100
+    
+//    , itemsCallback: LocalFilesCallBack?
+    private func getAllRelatedItemsPageFromPH(assets: [PHAsset]) {
+        guard !assets.isEmpty else {
+            uploadOutput?.newLocalItemsReceived(newItems:[])
+            return
         }
-        itemsCallback?(wrapItems)
+        
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard CacheManager.shared.isPreparing else {
+                self?.getAllRelatedItemsFromDataBase(assets: assets) { [weak self] dataBaseStoredLocalas in
+                    DispatchQueue.main.async {
+                        self?.uploadOutput?.newLocalItemsReceived(newItems: dataBaseStoredLocalas)
+                    }
+                }
+                return
+            }
+            let nextItemsToSave = Array(assets.prefix(NumericConstants.numberOfLocalItemsOnPage))
+            
+            var localItems = [WrapData]()
+            LocalMediaStorage.default.getInfo(from: nextItemsToSave, completion: { [weak self] info in
+                DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                    let assetsInfo = info.filter { $0.isValid }
+                    assetsInfo.forEach { element in
+                        autoreleasepool {
+                            let wrapedItem = WrapData(info: element)
+                            localItems.append(wrapedItem)
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        self?.uploadOutput?.newLocalItemsReceived(newItems: localItems)
+                    }
+                    self?.getAllRelatedItemsPageFromPH(assets: Array(assets.dropFirst(nextItemsToSave.count)))
+                }
+            })
+        }
     }
     
     private func getAllRelatedItemsFromDataBase(assets: [PHAsset], itemsCallback: LocalFilesCallBack?) {

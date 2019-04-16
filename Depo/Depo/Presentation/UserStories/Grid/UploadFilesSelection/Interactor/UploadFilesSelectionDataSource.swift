@@ -15,4 +15,17 @@ class UploadFilesSelectionDataSource: ArrayDataSourceForCollectionView {
             cell.cloudStatusImage.isHidden = true
         }
     }
+    
+    func appendNewLocalItems(newItems: [BaseDataSourceItem]) {
+        guard var alreadyStoredLocalItems = tableDataMArray.first else {
+            tableDataMArray.append(newItems)
+            reloadData()
+            return
+        }
+        
+        alreadyStoredLocalItems.append(contentsOf: newItems)
+        tableDataMArray.removeAll()
+        tableDataMArray.append(alreadyStoredLocalItems)
+        reloadData()
+    }
 }

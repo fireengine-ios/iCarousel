@@ -16,4 +16,6 @@ protocol UploadFilesSelectionInteractorOutput: class {
     
     func addToUploadFailedWith(errorMessage: String)
     
+    func newLocalItemsReceived(newItems: [BaseDataSourceItem])
+    
 }
