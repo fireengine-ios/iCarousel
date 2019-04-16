@@ -49,8 +49,9 @@ final class PhotoVideoDataSource: NSObject {
 //    var lastFetchedObjects: [WrapData]?
     var lastFetchedObjects: [MediaItem]?
     
-    var firstVisibleItem: MediaItem?
-    var cellTopOffset: CGFloat = 0
+    private var firstVisibleItem: MediaItem?
+    private var cellTopOffset: CGFloat = 0
+    private(set) var focusedIndexPath: IndexPath?
     
     private weak var delegate: PhotoVideoDataSourceDelegate?
     private weak var collectionView: UICollectionView!
@@ -166,15 +167,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         sectionChanges.removeAll()
         objectChanges.removeAll()
         
-        firstVisibleItem = nil
-        cellTopOffset = 0
-        
-        if let indexPath = collectionView.indexPathsForVisibleItems.sorted(by: <).first {
-            firstVisibleItem = self.object(at: indexPath)
-            if let attributes = collectionView.layoutAttributesForItem(at: indexPath) {
-                cellTopOffset = attributes.frame.origin.y - collectionView.contentOffset.y
-            }
-        }
+        saveOffset()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
@@ -219,22 +212,18 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
                 self.objectChanges.append { [unowned self] in
                     self.collectionView.deleteItems(at: [indexPath])
                     self.collectionView.insertItems(at: [newIndexPath])
-//                    self.collectionView.moveItem(at: indexPath, to: newIndexPath)
                 }
             }
         }
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        saveOffset()
-        
         let sectionChangesStatic = sectionChanges
         let objectChangesStatic = objectChanges
         sectionChanges.removeAll()
         objectChanges.removeAll()
         
-        var focusedIndexPath: IndexPath?
-        if let firstVisibleItem = firstVisibleItem {
+        if !collectionView.isDragging, let firstVisibleItem = firstVisibleItem {
             focusedIndexPath = fetchedResultsController.indexPath(forObject: firstVisibleItem)
             UIView.setAnimationsEnabled(false)
         }
@@ -247,8 +236,6 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
                 return
             }
             
-            self.scroll(to: focusedIndexPath)
-            
             self.reloadSupplementaryViewsIfNeeded()
             self.updateLastFetchedObjects()
             
@@ -256,22 +243,26 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         })
     }
     
+    func focusedOffset() -> CGPoint? {
+        if !collectionView.isDragging,
+            let indexPath = focusedIndexPath,
+            let attributes = self.collectionView.layoutAttributesForItem(at: indexPath) {
+        
+            return CGPoint(x: 0, y: attributes.frame.origin.y - cellTopOffset)
+        }
+        return nil
+    }
+    
     private func saveOffset() {
-        if let indexPath = collectionView.indexPathsForVisibleItems.sorted(by: <).first {
-            firstVisibleItem = object(at: indexPath)
+        firstVisibleItem = nil
+        cellTopOffset = 0
+        focusedIndexPath = nil
+        
+        if let indexPath = collectionView.indexPathsForVisibleItems.sorted().first {
+            firstVisibleItem = self.object(at: indexPath)
             if let attributes = collectionView.layoutAttributesForItem(at: indexPath) {
                 cellTopOffset = attributes.frame.origin.y - collectionView.contentOffset.y
             }
-        }
-    }
-    
-    private func scroll(to indexPath: IndexPath?) {
-        if !collectionView.isDragging,
-            let indexPath = indexPath,
-            let attributes = self.collectionView.layoutAttributesForItem(at: indexPath)
-        {
-            let offset = CGPoint(x: 0, y: attributes.frame.origin.y - cellTopOffset)
-            collectionView.setContentOffset(offset, animated: false)
         }
     }
     
@@ -289,4 +280,10 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         }
     }
     
+}
+
+extension PhotoVideoDataSource: PhotoVideoCollectionViewLayoutDelegate {
+    func targetContentOffset() -> CGPoint? {
+        return focusedOffset()
+    }
 }

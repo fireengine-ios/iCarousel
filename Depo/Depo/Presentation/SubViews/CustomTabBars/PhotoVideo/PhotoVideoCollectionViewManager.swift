@@ -34,6 +34,7 @@ final class PhotoVideoCollectionViewManager {
     
     private weak var collectionView: UICollectionView!
     private weak var delegate: PhotoVideoCollectionViewManagerDelegate?
+    let collectionViewLayout = PhotoVideoCollectionViewLayout()
     
     init(collectionView: UICollectionView, delegate: PhotoVideoCollectionViewManagerDelegate) {
         self.collectionView = collectionView
@@ -83,6 +84,7 @@ final class PhotoVideoCollectionViewManager {
     }
     
     private func setupCollectionView() {
+        collectionView.collectionViewLayout = collectionViewLayout
         collectionView.register(nibCell: PhotoVideoCell.self)
         collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)
         if #available(iOS 10.0, *) {
