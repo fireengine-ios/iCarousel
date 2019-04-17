@@ -655,6 +655,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.contactsSyncScreenIndex.rawValue,
                                                                 TabScreenIndex.documentsScreenIndex.rawValue,
                                                                 TabScreenIndex.homePageScreenIndex.rawValue]
+            
+            if tabbarSelectedIndex > 2 {
+                tabbarSelectedIndex -= 1
+            }
+            
             if tabbarSelectedIndex == selectedIndex && arrayOfIndexesOfViewsThatShouldntBeRefreshed.contains(tabbarSelectedIndex) {
                 return
             }
@@ -662,11 +667,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
                 log(for: tabScreenIndex)
             }
-            
-            if tabbarSelectedIndex > 2 {
-                tabbarSelectedIndex -= 1
-            }
-            
+
             selectedIndex = tabbarSelectedIndex
         }
     }
