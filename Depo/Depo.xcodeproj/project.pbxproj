@@ -3065,6 +3065,8 @@
 		B5E74799208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
 		B5E7479C208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
+		B5ED202E226728D900D6E7C8 /* RangeAPIInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ED202D226728D900D6E7C8 /* RangeAPIInfo.swift */; };
+		B5ED202F226728D900D6E7C8 /* RangeAPIInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ED202D226728D900D6E7C8 /* RangeAPIInfo.swift */; };
 		B5F40BB1204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
 		B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
 		B5FB65761FDE6F6900A02FD7 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
@@ -5520,6 +5522,7 @@
 		B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellUpdaterService.swift; sourceTree = "<group>"; };
 		B5E74797208B3736003A7110 /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTaskService.swift; sourceTree = "<group>"; };
+		B5ED202D226728D900D6E7C8 /* RangeAPIInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeAPIInfo.swift; sourceTree = "<group>"; };
 		B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsModel.swift; sourceTree = "<group>"; };
 		B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationProgressService.swift; sourceTree = "<group>"; };
 		B652E3FD76DE060B9DBD160F /* AlbumDetailViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewController.swift; sourceTree = "<group>"; };
@@ -9543,6 +9546,7 @@
 				8C449C17216628280060785C /* PhotoVideoCell.swift */,
 				8C449C18216628280060785C /* PhotoVideoController.swift */,
 				8C449C19216628280060785C /* PhotoVideoPredicateManager.swift */,
+				B5ED202D226728D900D6E7C8 /* RangeAPIInfo.swift */,
 			);
 			path = PhotoVideo;
 			sourceTree = "<group>";
@@ -15147,6 +15151,7 @@
 				8C7E1F66207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */,
 				8C0E8CBD1FDEBDFF00789C91 /* CollectionViewLayout.swift in Sources */,
 				8C0E8CBF1FDEBDFF00789C91 /* LoginViewInput.swift in Sources */,
+				B5ED202F226728D900D6E7C8 /* RangeAPIInfo.swift in Sources */,
 				8C449CB7216632960060785C /* UIColor+Adjust.swift in Sources */,
 				8C0E8CC21FDEBDFF00789C91 /* Device.swift in Sources */,
 				8C0E8CC31FDEBDFF00789C91 /* ActivityTimelineParameters.swift in Sources */,
@@ -16736,6 +16741,7 @@
 				7CFD0D201F8F44CA002B1FB5 /* ArrayDataSourceForCollectionView.swift in Sources */,
 				921E7C372201EAAA00341F75 /* InstaPickBigPhotoView.swift in Sources */,
 				7C4988161F3320420039C5F2 /* CreateStoryPhotosOrderInteractor.swift in Sources */,
+				B5ED202E226728D900D6E7C8 /* RangeAPIInfo.swift in Sources */,
 				D498865B1F3EFBE200F50C95 /* ImportPhotosInteractorOutput.swift in Sources */,
 				CE5A612F2060F8AE00793EB0 /* Keys.swift in Sources */,
 				8CF89EF91F1351A800F1A2D0 /* LoginPhoneMailCell.swift in Sources */,
