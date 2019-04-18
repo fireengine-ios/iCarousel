@@ -3007,6 +3007,11 @@
 		CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */; };
 		CE109C2B2057A9C9006C9FA0 /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE109C2A2057A9C9006C9FA0 /* ShareController.swift */; };
 		CE125176204E83DC00886F8D /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
+		CE127E902268680F005A4214 /* SupportFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E8E2268680F005A4214 /* SupportFormController.swift */; };
+		CE127E912268680F005A4214 /* SupportFormController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E8F2268680F005A4214 /* SupportFormController.xib */; };
+		CE127E9322686CB0005A4214 /* SupportFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E8E2268680F005A4214 /* SupportFormController.swift */; };
+		CE127E9522689285005A4214 /* ProfileTextEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E9422689285005A4214 /* ProfileTextEnterView.swift */; };
+		CE127E96226892B1005A4214 /* ProfileTextEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E9422689285005A4214 /* ProfileTextEnterView.swift */; };
 		CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1353342004F0F90004CBBE /* TextEnterController.swift */; };
 		CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1353382004F1530004CBBE /* TextEnterController.xib */; };
 		CE1458C62045617600812544 /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
@@ -5638,6 +5643,9 @@
 		CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeManager.swift; sourceTree = "<group>"; };
 		CE109C2A2057A9C9006C9FA0 /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		CE125175204E74CE00886F8D /* LifeboxFileProviderUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxFileProviderUI.entitlements; sourceTree = "<group>"; };
+		CE127E8E2268680F005A4214 /* SupportFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportFormController.swift; sourceTree = "<group>"; };
+		CE127E8F2268680F005A4214 /* SupportFormController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SupportFormController.xib; sourceTree = "<group>"; };
+		CE127E9422689285005A4214 /* ProfileTextEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextEnterView.swift; sourceTree = "<group>"; };
 		CE1353342004F0F90004CBBE /* TextEnterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnterController.swift; sourceTree = "<group>"; };
 		CE1353382004F1530004CBBE /* TextEnterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextEnterController.xib; sourceTree = "<group>"; };
 		CE1458CA2045633D00812544 /* ShareConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareConfigurator.swift; sourceTree = "<group>"; };
@@ -11212,6 +11220,16 @@
 			path = Passcode;
 			sourceTree = "<group>";
 		};
+		CE127E9222686817005A4214 /* SupportFormController */ = {
+			isa = PBXGroup;
+			children = (
+				CE127E8F2268680F005A4214 /* SupportFormController.xib */,
+				CE127E8E2268680F005A4214 /* SupportFormController.swift */,
+				CE127E9422689285005A4214 /* ProfileTextEnterView.swift */,
+			);
+			path = SupportFormController;
+			sourceTree = "<group>";
+		};
 		CE1353332004F0D20004CBBE /* TextEnter */ = {
 			isa = PBXGroup;
 			children = (
@@ -11727,6 +11745,7 @@
 				762FCEFD487BFE9A7ACC832D /* TermsAndServices */,
 				E3F92B477C3B581616EAD04C /* PhoneVerefication */,
 				CB47E015BFEA75771011D20E /* ForgotPassword */,
+				CE127E9222686817005A4214 /* SupportFormController */,
 			);
 			path = Start;
 			sourceTree = "<group>";
@@ -14366,6 +14385,7 @@
 				8C06AF622008AD70003D8E05 /* duz_beyaz.png in Resources */,
 				8C06AEE62008AD70003D8E05 /* bottomright@3x.png in Resources */,
 				4A14AD0821A53FED0094C550 /* OurLocalizable.strings in Resources */,
+				CE127E912268680F005A4214 /* SupportFormController.xib in Resources */,
 				8C06AF202008AD70003D8E05 /* cizgi_2.png in Resources */,
 				8C06B0962008AD71003D8E05 /* polaroid_yeni@2x.png in Resources */,
 				CEBBDE0C1F01E69B00CDF527 /* TurkcellSaturaMed.ttf in Resources */,
@@ -15277,6 +15297,7 @@
 				8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */,
 				8C0B919420170E3800A5BA81 /* DuplicatedContactsModuleInput.swift in Sources */,
 				8C0B91A820170EAD00A5BA81 /* ManageContactsRouterInput.swift in Sources */,
+				CE127E9322686CB0005A4214 /* SupportFormController.swift in Sources */,
 				B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
 				CE46402920B6E28800EFC1AE /* LocalUnsyncedOperation.swift in Sources */,
 				8C0E8C661FDEBDFF00789C91 /* ActivityFileType.swift in Sources */,
@@ -15322,6 +15343,7 @@
 				C62239AF204973330043ED44 /* FaceImageChangeCoverViewController.swift in Sources */,
 				CE924569206D2E22000C7791 /* AnimationFlowManager.swift in Sources */,
 				CE1458D02045734900812544 /* Alamofire+Validate.swift in Sources */,
+				CE127E96226892B1005A4214 /* ProfileTextEnterView.swift in Sources */,
 				7C529689203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */,
 				8C0E8C871FDEBDFF00789C91 /* UIImageView.swift in Sources */,
 				B5C7C580211C699F006E94DB /* AugmentedRealityController.swift in Sources */,
@@ -16856,6 +16878,7 @@
 				78E8E2B22023196B00A979AB /* FaceImagePhotosConfigurator.swift in Sources */,
 				8C00971A1F6BDAD900FA069C /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				CEF41E9B2035B2BF0008FCD5 /* PreventCollectionView.swift in Sources */,
+				CE127E9522689285005A4214 /* ProfileTextEnterView.swift in Sources */,
 				8C6EF8811F348B5C002AC795 /* BottomSelectionTabBarViewController.swift in Sources */,
 				B5AB5B7021F9B040003AABB4 /* InstagramAccountConnectionCell.swift in Sources */,
 				7C3A74361F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift in Sources */,
@@ -17183,6 +17206,7 @@
 				4A0AC1412087372E00032CC7 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				CE51AD011EF90853005DCEE0 /* ForgotPasswordRouter.swift in Sources */,
 				7C1F89881F6FFE0300740177 /* ProgressPopUp.swift in Sources */,
+				CE127E902268680F005A4214 /* SupportFormController.swift in Sources */,
 				CE51AD021EF90853005DCEE0 /* ForgotPasswordConfigurator.swift in Sources */,
 				CE51AD031EF90853005DCEE0 /* ForgotPasswordInitializer.swift in Sources */,
 				CE0ED9731FBC0F5A00487632 /* PasscodeView.swift in Sources */,
