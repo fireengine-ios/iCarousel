@@ -6,17 +6,11 @@ final class CaptchaView: UIView, FromNib {
         willSet {
             newValue.contentMode = .scaleAspectFit
             newValue.backgroundColor = ColorConstants.profileGrayColor
-//            newValue.layer.cornerRadius = 5
-//            newValue.layer.borderWidth = 1
-//            newValue.layer.borderColor = ColorConstants.darkBorder.cgColor
         }
     }
     
     @IBOutlet private weak var soundCaptchaButton: UIButton! {
         willSet {
-//            let image = newValue.image(for: .normal)?.withRenderingMode(.alwaysTemplate)
-//            newValue.setImage(image, for: .normal)
-            
             newValue.isExclusiveTouch = true
             newValue.tintColor = ColorConstants.darkText
             newValue.backgroundColor = .white
@@ -26,9 +20,6 @@ final class CaptchaView: UIView, FromNib {
     
     @IBOutlet private weak var refreshCaptchaButton: UIButton! {
         willSet {
-//            let image = newValue.image(for: .normal)?.withRenderingMode(.alwaysTemplate)
-//            newValue.setImage(image, for: .normal)
-            
             newValue.isExclusiveTouch = true
             newValue.tintColor = ColorConstants.darkText
             newValue.backgroundColor = .white
@@ -55,13 +46,6 @@ final class CaptchaView: UIView, FromNib {
             newValue.isOpaque = true
             newValue.insetX = 16
             newValue.placeholder = TextConstants.captchaAnswerPlaceholder
-//            newValue.attributedPlaceholder = NSAttributedString(
-//                string: TextConstants.changePasswordCaptchaAnswerPlaceholder,
-//                attributes: [.foregroundColor: UIColor.lrTealish])
-            
-//            newValue.layer.cornerRadius = 5
-//            newValue.layer.borderWidth = 1
-//            newValue.layer.borderColor = ColorConstants.darkBorder.cgColor
             
             newValue.returnKeyType = .done
             
