@@ -442,7 +442,16 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
     func operationFailed(withType type: ElementTypes) {}
     func selectAllModeSelected() {}
     func deSelectAll() {}
-    func printSelected() {}
+    func printSelected() {
+        let syncPhotos = selectedItems.filter { !$0.isLocalItem && $0.fileType == .image }
+        
+        if let itemsToPrint = syncPhotos as? [Item], !itemsToPrint.isEmpty {
+            let router = RouterVC()
+            let vc = PrintInitializer.viewController(data: itemsToPrint)
+            router.pushOnPresentedView(viewController: vc)
+        }
+    }
+
     func changeCover() {}
     func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {}
 }
