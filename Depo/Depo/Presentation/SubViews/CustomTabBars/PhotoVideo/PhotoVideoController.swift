@@ -81,6 +81,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
         collectionViewManager.setScrolliblePopUpView(isActive: true)
         scrollBarManager.startTimerToHideScrollBar()
+        updateDB() //trigger Range API for update new items which are uploaded by other clients
     }
     
     override func viewDidDisappear(_ animated: Bool) {
