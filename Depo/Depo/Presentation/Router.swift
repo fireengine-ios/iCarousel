@@ -770,6 +770,12 @@ class RouterVC: NSObject {
         return controller
     }
     
+    // MARK: Change Password
+    
+    var changePassword: UIViewController {
+        return ChangePasswordController.initFromNib()
+    }
+    
     // MARK: - Import photos
     
     var connectedAccounts: UIViewController? {
