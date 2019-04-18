@@ -291,17 +291,16 @@ extension PhotoVideoController: UIScrollViewDelegate {
         
         guard
             let workaroundVisibleIndexes = self.collectionView?.indexPathsForVisibleItems.sorted(by: <),
-            let topRangeAPIInfo = self.rangeAPIInfo(at: workaroundVisibleIndexes.first),
-            let bottomRangeAPIInfo = self.rangeAPIInfo(at: workaroundVisibleIndexes.last),
-            topRangeAPIInfo.date != Date.distantPast
+            let firstDate = self.date(at: workaroundVisibleIndexes.first),
+            var lastDate = self.date(at: workaroundVisibleIndexes.last)
         else {
             return
         }
         
-//        if lastDate > firstDate {
-//            ///it means that the lastDate is Date() because the item is an empty meta item
-//            lastDate = Date.distantPast
-//        }
+        if lastDate > firstDate {
+            ///it means that the lastDate is Date() because the item is an empty meta item
+            lastDate = Date.distantPast
+        }
 
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
@@ -310,20 +309,12 @@ extension PhotoVideoController: UIScrollViewDelegate {
             
             let category: QuickScrollCategory = self.isPhoto ? .photos : .videos
             let fileType: FileType = self.isPhoto ? .image : .video
-//            let dateRange = min(firstDate, lastDate)...max(firstDate, lastDate)
-            var topId: Int64?
-            var bottomId: Int64?
-            if topRangeAPIInfo.date == bottomRangeAPIInfo.date {
-                topId = topRangeAPIInfo.id
-                bottomId = bottomRangeAPIInfo.id
-            }
-            
-            
-            self.quickScrollService.requestListOfDateRange(startDate: topRangeAPIInfo.date, endDate: bottomRangeAPIInfo.date, startID: topId, endID: bottomId, category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
+            let dateRange = min(firstDate, lastDate)...max(firstDate, lastDate)
+            self.quickScrollService.requestListOfDateRange(startDate: dateRange.upperBound, endDate: dateRange.lowerBound, category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
                 switch response {
                 case .success(let quckScrollResponse):
                     self.dispatchQueue.async {
-                        MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileType: fileType, topInfo: topRangeAPIInfo, bottomInfo: bottomRangeAPIInfo, completion: {
+                        MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileType: fileType, dateRange: dateRange, completion:  {
                             debugPrint("appended and updated")
                         })
                     }
@@ -335,25 +326,17 @@ extension PhotoVideoController: UIScrollViewDelegate {
         }
     }
     
-    private func rangeAPIInfo(at index: IndexPath?) -> RangeAPIInfo? {
+    private func date(at index: IndexPath?) -> Date? {
         guard let objectIndex = index else {
             return nil
         }
         
-        let object = dataSource.object(at: objectIndex)
-        let objectId = object?.idValue
-        
         if objectIndex.section == 0 && objectIndex.row == 0 {
             /// return Date.distantFuture to have the latest items, because user may have wrong date on his device.
-            return RangeAPIInfo(date: Date.distantFuture, id: objectId)
+            return Date.distantFuture
         }
         
-        /// check if it's one of missing dates
-        guard object?.monthValue != nil, let sortingDate = object?.sortingDate as Date? else {
-            return RangeAPIInfo(date: Date.distantPast, id: objectId)
-        }
-        
-        return RangeAPIInfo(date: sortingDate, id: objectId)
+        return dataSource.object(at: objectIndex)?.sortingDate as Date?
     }
     
 }
@@ -459,15 +442,7 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
     func operationFailed(withType type: ElementTypes) {}
     func selectAllModeSelected() {}
     func deSelectAll() {}
-    func printSelected() {
-        let syncPhotos = selectedItems.filter { !$0.isLocalItem && $0.fileType == .image }
-        
-        if let itemsToPrint = syncPhotos as? [Item], !itemsToPrint.isEmpty {
-            let router = RouterVC()
-            let vc = PrintInitializer.viewController(data: itemsToPrint)
-            router.pushOnPresentedView(viewController: vc)
-        }
-    }
+    func printSelected() {}
     func changeCover() {}
     func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {}
 }

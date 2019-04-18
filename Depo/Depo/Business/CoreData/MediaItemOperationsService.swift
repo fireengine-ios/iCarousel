@@ -327,11 +327,11 @@ final class MediaItemOperationsService {
         //WARNING:- DO we need notify ItemOperationManager here???
     }
 
-    func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo, completion: @escaping VoidHandler) {
+    func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, dateRange: ClosedRange<Date>, completion: @escaping VoidHandler) {
         let remoteIds = remoteItems.compactMap { $0.id }
         let context = CoreDataStack.default.newChildBackgroundContext
         
-        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@) AND (idValue <= %d AND idValue >= %d)", fileType.valueForCoreDataMapping(), topInfo.date as NSDate, bottomInfo.date as NSDate, topInfo.id ?? Int64.max, bottomInfo.id ?? 0)
+        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@)", fileType.valueForCoreDataMapping(), dateRange.upperBound as NSDate, dateRange.lowerBound as NSDate)
         
         executeRequest(predicate: inDateRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
 
