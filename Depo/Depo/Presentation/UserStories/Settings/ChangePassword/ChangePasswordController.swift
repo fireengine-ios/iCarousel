@@ -76,6 +76,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        trackScreen()
         initialViewSetup()
     }
     
@@ -99,6 +100,13 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     
     @objc private func onDoneButton(_ button: UIBarButtonItem) {
         updatePassword()
+    }
+    
+    //MARK: - Tracking/loging
+    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private func trackScreen() {
+        analyticsService.logScreen(screen: .changePassword)
     }
     
     // MARK: - API
