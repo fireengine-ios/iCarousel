@@ -340,8 +340,6 @@
 "Verification code is invalid. Please try again." = "رمز التحقق غير صحيح. يرجى المحاولة مرة أخرى.";
 "Type the text" = "يرجى إدخال النص الظاهر في الصورة";
 "E-MAIL" = "البريد الإلكتروني";
-"Send password reset link" = "إرسال ارتباط إعادة تعيين كلمة المرور";
-"Forgot My Password" = "نسيت كلمة المرور";
 "Sign Up" = "التسجيل";
 "Turn-on Sync" = "تشغيل المزامنة";
 "Syncing files using cellular data could incur data charges" = "قد ينجم عن استعمال بيانات شبكة الجوّال في المزامنة فرض رسوم على البيانات.";

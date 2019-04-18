@@ -354,8 +354,8 @@
 "Verification code is invalid. Please try again." = "Verification code is invalid. Please try again.";
 "Type the text" = "Enter the text shown in the image";
 "E-MAIL" = "E-MAIL";
-"Send password reset link" = "Send password reset link";
-"Forgot My Password" = "Forgot My Password";
+"Send Link" = "Send Link";
+"Reset Password" = "Reset Password";
 "Sign Up" = "Sign Up";
 
 /*auto-sync?*/
@@ -492,7 +492,10 @@
 "This text doesn't match. Please try again" = "This text doesn't match. Please try again";
 "An error is occurred!" = "An error occurred!";
 "Please check the e-mail address" = "Please check the e-mail address";
-"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "If you are already a Turkcell subscriber, you can obtain your password by sending a free SMS containing SIFRE to 2200.";
+"You can easily reset your password by clicking the password reset link that we will send to your account e-mail." = "You can easily reset your password by clicking the password reset link that we will send to your account e-mail.";
+"To reset your account’s  password, we will send a password reset link to your account email" = "To reset your account’s  password, we will send a password reset link to your account email:";
+"Your Account E-mail" = "Your Account E-mail";
+"Enter your account e-mail" = "Enter your account e-mail";
 "Your password is sent to your e-mail address" = "Your password was sent to your e-mail address.";
 "Please enter a valid email adress" = "Please enter a valid email address.";
 "Please type the text" = "Please type the text";

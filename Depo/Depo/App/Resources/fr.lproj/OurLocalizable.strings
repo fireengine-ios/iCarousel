@@ -408,8 +408,6 @@ Is it "Use "this" to be the album cover?*/
 "Verification code is invalid. Please try again." = "Le code de vérification est incorrect. Veuillez essayer une nouvelle fois.";
 "Type the text" = "Saisissez le texte affiché dans l'image";
 "E-MAIL" = "E-mail";
-"Send password reset link" = "Envoyer le lien de réinitialisation du mot de passe";
-"Forgot My Password" = "J’ai oublié mon mot de passe";
 "Sign Up" = "S’inscrire";
 "Turn-on Sync" = "Activer la Synchronisation";
 "Syncing files using cellular data could incur data charges" = "L'utilisation du réseau mobile pour la synchronisation de fichiers peut entraîner des frais de transmission de données";

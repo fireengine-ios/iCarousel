@@ -334,8 +334,6 @@
 "Verification code is invalid. Please try again." = "Der Bestätigungscode ist ungültig. Bitte versuche es erneut.";
 "Type the text" = "Geben Sie den Text ein, der im Bild angezeigt wird";
 "E-MAIL" = "E-MAIL";
-"Send password reset link" = "Link zum Zurücksetzen des Passworts senden";
-"Forgot My Password" = "Ich habe mein Passwort vergessen";
 "Sign Up" = "Anmelden";
 "Turn-on Sync" = "Synchronisierung beim Einschalten";
 "Syncing files using cellular data could incur data charges" = "Die Verwendung von mobilen Daten während der Synchronisierung von Dateien kann zu Datengebühren führen";

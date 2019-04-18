@@ -336,8 +336,6 @@
 "Verification code is invalid. Please try again." = "Неверный код подтверждения";
 "Type the text" = "Введите текст, изображенный на картинке";
 "E-MAIL" = "Электронный адрес";
-"Send password reset link" = "Отправить ссылку для восстановления пароля";
-"Forgot My Password" = "Забыли пароль";
 "Sign Up" = "Регистрация";
 "Turn-on Sync" = "Включить синхронизацию";
 "Syncing files using cellular data could incur data charges" = "Использование мобильных данных во время синхронизации может повлечь дополнительную плату";

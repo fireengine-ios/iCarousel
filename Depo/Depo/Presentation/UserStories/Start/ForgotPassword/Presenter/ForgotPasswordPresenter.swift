@@ -15,6 +15,7 @@ class ForgotPasswordPresenter: BasePresenter, ForgotPasswordModuleInput, ForgotP
     // MARK: input
     func viewIsReady() {
         checkLanguadge()
+        view.setupVisableTexts()
     }
     
     private func checkLanguadge() {
