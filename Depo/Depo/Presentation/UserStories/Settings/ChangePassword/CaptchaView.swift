@@ -38,7 +38,7 @@ final class CaptchaView: UIView {
     @IBOutlet weak var captchaAnswerTextField: InsetsTextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaItaFont(size: 20)
-            newValue.textColor = UIColor.lrTealish
+            newValue.textColor = UIColor.black
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
