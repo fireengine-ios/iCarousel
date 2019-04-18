@@ -3012,6 +3012,7 @@
 		CE127E9322686CB0005A4214 /* SupportFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E8E2268680F005A4214 /* SupportFormController.swift */; };
 		CE127E9522689285005A4214 /* ProfileTextEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E9422689285005A4214 /* ProfileTextEnterView.swift */; };
 		CE127E96226892B1005A4214 /* ProfileTextEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E9422689285005A4214 /* ProfileTextEnterView.swift */; };
+		CE127E9822689A23005A4214 /* ProfilePhoneEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E9722689A23005A4214 /* ProfilePhoneEnterView.swift */; };
 		CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1353342004F0F90004CBBE /* TextEnterController.swift */; };
 		CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1353382004F1530004CBBE /* TextEnterController.xib */; };
 		CE1458C62045617600812544 /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
@@ -5646,6 +5647,7 @@
 		CE127E8E2268680F005A4214 /* SupportFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportFormController.swift; sourceTree = "<group>"; };
 		CE127E8F2268680F005A4214 /* SupportFormController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SupportFormController.xib; sourceTree = "<group>"; };
 		CE127E9422689285005A4214 /* ProfileTextEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextEnterView.swift; sourceTree = "<group>"; };
+		CE127E9722689A23005A4214 /* ProfilePhoneEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhoneEnterView.swift; sourceTree = "<group>"; };
 		CE1353342004F0F90004CBBE /* TextEnterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnterController.swift; sourceTree = "<group>"; };
 		CE1353382004F1530004CBBE /* TextEnterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextEnterController.xib; sourceTree = "<group>"; };
 		CE1458CA2045633D00812544 /* ShareConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareConfigurator.swift; sourceTree = "<group>"; };
@@ -11226,6 +11228,7 @@
 				CE127E8F2268680F005A4214 /* SupportFormController.xib */,
 				CE127E8E2268680F005A4214 /* SupportFormController.swift */,
 				CE127E9422689285005A4214 /* ProfileTextEnterView.swift */,
+				CE127E9722689A23005A4214 /* ProfilePhoneEnterView.swift */,
 			);
 			path = SupportFormController;
 			sourceTree = "<group>";
@@ -17225,6 +17228,7 @@
 				CE0ED9711FBC0F5A00487632 /* PasscodeState.swift in Sources */,
 				7CDABD051F1E3A6300C8CC16 /* UserProfileConfigurator.swift in Sources */,
 				CE2976E01FD58E2000350F3A /* LocalAlbumConfigurator.swift in Sources */,
+				CE127E9822689A23005A4214 /* ProfilePhoneEnterView.swift in Sources */,
 				7C6B30011FFCC6510066C818 /* ItemOperationManager.swift in Sources */,
 				CEE1D1FA1F714DFE0008F4CF /* MediaItemsMetaData+CoreDataProperties.swift in Sources */,
 				486F7B5A208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift in Sources */,

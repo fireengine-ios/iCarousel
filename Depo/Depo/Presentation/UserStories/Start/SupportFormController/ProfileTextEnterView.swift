@@ -64,9 +64,9 @@ final class ProfileTextEnterView: UIView {
     private func initialSetup() {
         setupStackView()
         setupUnderline()
-        
-        //        textField.translatesAutoresizingMaskIntoConstraints = false
-        //        textField.heightAnchor.constraint(equalToConstant: 33).isActive = true
+
+//        textField.translatesAutoresizingMaskIntoConstraints = false
+//        textField.heightAnchor.constraint(equalToConstant: 33).isActive = true
     }
     
     private func setupStackView() {
@@ -78,6 +78,11 @@ final class ProfileTextEnterView: UIView {
         stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: edgeInset).isActive = true
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -edgeInset).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
+        
+        /// why it is not working instead of constraints???
+        //stackView.frame = bounds
+        //stackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //stackView.translatesAutoresizingMaskIntoConstraints = true
         
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(subtitleLabel)
