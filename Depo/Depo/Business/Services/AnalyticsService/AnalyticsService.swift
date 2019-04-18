@@ -193,6 +193,26 @@ extension AnalyticsService: AnalyticsGA {
             group.leave()
         })
         
+///        For all of the events (not only newly added autosync events but also all GA events that we send in current client), we will also send below dimensions each time. For the events that we send before login, there is no need to send.
+///        AutoSync --> True/False
+///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
+        var autoSyncState: String?
+        var autoSyncStatus: String?
+        let tokenStorage: TokenStorage = factory.resolve()
+        if tokenStorage.accessToken != nil {
+            let autoSyncStorageSettings = AutoSyncDataStorage().settings
+            
+            autoSyncState = autoSyncStorageSettings.isAutoSyncEnabled ? "True" : "False"
+            if autoSyncStorageSettings.isAutoSyncEnabled {
+                let photoSetting = autoSyncStorageSettings.isAutoSyncEnabled ?
+                    GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.photoSetting).text : ""
+                let videoSetting = autoSyncStorageSettings.isAutoSyncEnabled ?
+                    GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : ""
+                autoSyncStatus = "\(photoSetting) | \(videoSetting)"
+            }
+        }
+        
+        
         let screenName: Any = screen?.name ?? NSNull()
         
         group.notify(queue: privateQueue) { 
@@ -207,7 +227,9 @@ extension AnalyticsService: AnalyticsGA {
                 countOfDownloadMetric: downloadsMetrics,
                 gsmOperatorType: SingletonStorage.shared.accountInfo?.accountType ?? "",
                 loginType: loginType,
-                errorType: errorType).productParametrs)
+                errorType: errorType,
+                autoSyncState: autoSyncState,
+                autoSyncStatus: autoSyncStatus).productParametrs)
         }
     }
     

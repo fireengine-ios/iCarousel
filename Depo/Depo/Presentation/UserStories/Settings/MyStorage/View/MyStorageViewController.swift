@@ -72,6 +72,12 @@ final class MyStorageViewController: BaseViewController {
         output.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        output.viewDidAppear()
+    }
+    
     //MARK: UtilityMethods
     private func setup() {
         setTitle(withString: output.title)

@@ -69,7 +69,7 @@
 "You can open settings and cancel subscption." = "Вы можете открыть настройки и отменить подписку.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Пожалуйста, отправьте сообщение с текстом \"Iptal LIFEBOX %@\" на номер 2222, чтобы отменить вашу подписку.";
 "You can visit iTunes to cancel your subscription" = "Войдите в iTunes, чтобы отменить подписку.";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Хмм, не могу поверить, что вы это делаете! Когда вы решите активировать его заново, мы будем рядом :) Но если вы настаиваете, отправьте “STOP” на номер 2.";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Хмм, вы действительно этого хотите? Если решите повторно активировать пакет, ждем вас с нетерпением :) А если все же хотите продолжить, отправьте SMS с цифрой 2 на номер 10010 для деактивации пакета 100 GB, либо на 50030 для пакета 500 GB";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Чтобы отменить подписку, платиновые клиенты и абоненты lifecell могут отправить SMS с текстом LIFE CANCEL на номер 3030, остальные пользователи могут отправить SMS с текстом LIFE CANCEL.";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Чтобы отключить пакет lifebox 50GB, отправьте SMS с текстом 50VYKL на номер 8080. Чтобы отключить пакет lifebox 500GB, отправьте SMS с текстом 500VYKL на номер 8080.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Чтобы зарегистрироваться, платиновые клиенты и абоненты lifecell могут отправить SMS с текстом LIFE на номер 3030. Остальные пользователи могут отправить SMS с текстом LIFEBOX 50GB для подключения пакета lifebox 50GB, LIFEBOX 500GB для подключения пакета lifebox 500GB и LIFEBOX 2.5TB для подключения пакета lifebox 2.5TB.";
@@ -702,7 +702,7 @@
 "package_lifecell_cancel_text" = "Текст отмены LifeCell подписки.";
 "package_promo_cancel_text" = "Пожалуйста, воспользуйтесь меню \"Оставить отзыв\", чтобы сообщить нам о вашем запросе.";
 "package_kktcell_cancel_text" = "Текст отмены KKTCell подписки.";
-"package_moldcell_cancel_text" = "Текст отмены Moldcell подписки.";
+"package_moldcell_cancel_text" = "Хмм, вы действительно этого хотите? Если решите повторно активировать пакет, ждем вас с нетерпением :) А если все же хотите продолжить, отправьте SMS с цифрой 2 на номер 10010 для деактивации пакета 100 GB, либо на 50030 для пакета 500 GB.";
 "package_life_cancel_text" = "Текст отмены Life подписки.";
 "package_paycell_all_access_cancel_text" = "Чтобы отменить подписку на ваш пакет, пожалуйста, перейдите на www.mylifebox.com";
 "package_paycell_slcm_cancel_text" = "Чтобы отменить подписку на ваш пакет, пожалуйста, перейдите на www.mylifebox.com";
@@ -876,12 +876,41 @@
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell и Группы компаний";
 "terms_and_use_etk_link_commercial_email_messages" = "коммерческие электронные сообщения";
 "commercial_email_messages" = "УВЕДОМЛЕНИЕ, КАСАЮЩЕЕСЯ РАЗРЕШЕНИЯ НА ЭЛЕКТРОННЫЕ КОММЕРЧЕСКИЕ СООБЩЕНИЯ\n\nПодтверждаю, что я действительное даю своё согласие на использование моих контактных данных, указанных мной в процессе регистрации в приложении lifebox, или же моих контактных данных, присутствующих в структуре фирмы Turkcell и группы компаний, входящих в ее структуру, в течении неограниченного времени, не зависимо от окончания срока действия пользовательского соглашения, вплоть до тех пор, пока я не использую функцию отказа от получения сообщений, для продвижения различной новой продукции и маркетинга, а также и услугами для объявления общих/специальных возможностей Turkcell и группы компаний в соответствии с предписаниями закона номер 6563 О регулировании коммерческой деятельности в электронной среде (“закон”) и Регламента, касающегося коммерческой связи и коммерческих электронных сообщений (“регламент”), в рамках коммерческих электронных сообщений, (отправляемых посредством телефона, колл-центров, факсов, электронной почты в виде информационных, голосовых и графических сообщений), которые выполняются в электронном виде с использованием таких средств, как автоматические поисковые машины, интеллектуальные системы диктофонов, электронная почта, служба текстовых сообщений, отправляемых в коммерческих целях. \n\nСогласно Регламенту, для абонентов и пользователей операторов, охватываемых законом номер 5809 Об Электронной связи, исключением являются коммерческие электронные сообщения, которые отправляются исключительно для продвижения собственных товаров и услуг, для продвижения на рынок или для продвижения своего бизнеса. По этой причине и в виду вышеизложенного, я даю согласие на отправку компанией, пользователем/абонентом которой я являюсь, мне различных сообщений , связанных с продвижением и маркетингом ее собственных продуктов и услуг, независимо от аннулирования моего согласия, в соответствии с правом, предоставляемым мне законом и регламентом, и признаю за собой право на отклонение и отдельный отказ и аннулирование своего согласия на электронные коммерческие сообщения оператора, связанные с продвижением, маркетингом товаров и услуг.";
-"NSLocationAlwaysUsageDescription" = "";
-"NSPhotoLibraryAddUsageDescription" = "";
-"NSPhotoLibraryUsageDescription" = "";
+"NSLocationAlwaysUsageDescription" = "Ваше местоположение будет использоваться для фоновой синхронизации";
+"NSPhotoLibraryAddUsageDescription" = "Разрешить приложению lifebox доступ к галерее, чтобы сохранять фото и видео?";
+"NSPhotoLibraryUsageDescription" = "Разрешить приложению lifebox доступ к галерее, чтобы отображать фото и видео в приложении?";
 
 /*Usage Info*/
-"package_space_details" = "";
-"package_renew_date" = "";
-"percentage_used" = "";
-"used_and_left_space" = "";
+"package_space_details" = "%1$@ / %2$@ Интернет трафика использовано";
+"package_renew_date" = "Дата возобновления: %@";
+"percentage_used" = "%.из%% использовано";
+"used_and_left_space" = "%1$@ / %2$@ использовано";
+"percentage_used_two_lines" = "%.из%%\nиспользовано";
+"my_usage_storage" = "Потребление Интернет трафика";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Ваше местоположение будет использовано для фоновой синхронизации";
+"name" = "Имя";
+"surname" = "Фамилия";
+"change password" = "Изменить пароль";
+"left_space" = "%1$@ / %2$@";
+
+/*Packages*/
+"packages_i_have" = "Пакеты";
+"account_details" = "Класс учетной записи";
+"my_profile" = "Мой профиль";
+"account_type" = "Тип учетной записи";
+"standard_plus" = "lifebox Стандарт+";
+"standard" = "lifebox Стандарт";
+"premium" = "lifebox Премиум";
+"old_password" = "Старый пароль";
+"new_password" = "Новый пароль";
+"repeat_password" = "Введите пароль еще раз";
+"change_password_captcha_answer_placeholder" = "Введите текст";
+"temporary_error_occurred_try_again_later" = "Произошла ошибка. Пожалуйста, попробуйте позже";
+"old_password_does_not_match" = "Старый пароль введен неверно";
+"new_password_and_repeated_password_does_not_match" = "Пароль введен неверно";
+"new_password_is_empty" = "Введите новый пароль";
+"old_password_is_empty" = "Введите старый пароль";
+"repeat_password_is_empty" = "Введите повторно пароль";
+"this_text_is_empty" = "Текст отсутствует";
+"password_changed_successfully" = "Ваш пароль успешно изменен";
+"password_changed_successfully_relogin" = "Ваш пароль успешно изменен. Пожалуйста, войдите в приложение с вашим новым паролем";

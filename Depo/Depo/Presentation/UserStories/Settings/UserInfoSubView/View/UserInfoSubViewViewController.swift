@@ -149,7 +149,7 @@ final class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewIn
         userPhoneNumber.font = UIFont.TurkcellSaturaMedFont(size: 16)
         
         accountDetailsLabel.textColor = ColorConstants.blueColor
-        accountDetailsLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
+        accountDetailsLabel.font = UIFont.TurkcellSaturaDemFont(size: 15)
         accountDetailsLabel.text = TextConstants.accountDetails
         
         userStorrageInformationLabel.textColor = ColorConstants.blueColor
@@ -177,13 +177,8 @@ final class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewIn
     }
     
     // MARK: buttons actions
-    @IBAction func onEditUserInformationButton(_ sender: UIButton) {
-        sender.isEnabled = false
-        guard let userInfo_ = userInfo else {
-            return
-        }
-        actionsDelegate?.updateUserProfile(userInfo: userInfo_)
-        sender.isEnabled = true
+    @IBAction private func onEditUserInformationButton(_ sender: UIButton) {
+        actionsDelegate?.upgradeButtonPressed()
     }
     
     @IBAction private func onUpdateUserPhoto() {

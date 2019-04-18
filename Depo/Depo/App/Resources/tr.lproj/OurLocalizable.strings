@@ -71,7 +71,7 @@
 "You can open settings and cancel subscption." = "Paketini iptal etmek için iTunes’u ziyaret edebilirsin.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Paketini iptal etmek için lütfen “IPTAL LIFEBOX %@” yazıp 2200’a gönder.";
 "You can visit iTunes to cancel your subscription" = "Paketini iptal etmek için iTunes’u ziyaret edebilirsin.";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Bu yaptığına inanamıyorum! Tekrar etkinleştirmeye karar verdiğinde senin için burada olacağız :) Bunu yapmakta kararlıysan “STOP” yaz 2’e gönder.";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, bunu yaptığınıza inanamıyoruz! Yeniden etkinleştirmek istediğinizde, sizi bekliyor olacağız :) Eğer ısrarlı iseniz, 100GB iptali için 2 yazıp 10010'a, 500GB iptali için 2 yazıp 50030'a SMS gönderin.";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Platinum ve lifecell müşterileri üyeliklerini iptal etmek için LIFE CANCEL yazarak, diğer müşteriler ise LIFEBOX CANCEL yazarak 3030’a gönderebilirler.";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "lifebox 50 GB’yi devre dışı bırakmak için 50VYKL yazarak, lifebox 500 GB için ise 500VYKL yazarak 8080’e SMS gönderin.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Platinum ve lifecell müşterileri üyeliklerini başlatmak için LIFE yazarak, diğer müşteriler ise lifebox 50 GB paketi için LIFEBOX 50GB, lifebox 500GB paketi için LIFEBOX 500GB ve lifebox 2.5TB paketi için LIFEBOX 2.5TB yazarak 3030’a SMS gönderebilirler.";
@@ -255,7 +255,7 @@
 "Logout" = "Çıkış Yap";
 "Help & Support" = "Sıkça Sorulan Sorular";
 "Lifebox Touch ID and Passcode" = "lifebox Touch ID ve Parola";
-"Usage Info and Packages" = "Kullanım Bilgileri ve Paketler";
+"Usage Info and Packages" = "Hesap & Kullanım Bilgileri";
 "Recently Deleted Files" = "Son Silinen Dosyalar";
 "Auto Sync" = "Otomatik Yedekleme";
 "Back-up my contacts" = "Telefon Rehberimi Yedekle";
@@ -708,7 +708,7 @@
 "package_lifecell_cancel_text" = "lifebox 50 GB’yi devre dışı bırakmak için 50VYKL yazarak, lifebox 500 GB için ise 500VYKL yazarak 8080’e SMS gönderin.";
 "package_promo_cancel_text" = "Bize Ulaşın menüsünden iptal talebini bize iletebilirsin.";
 "package_kktcell_cancel_text" = "Platinum ve lifecell müşterileri üyeliklerini iptal etmek için LIFE CANCEL yazarak, diğer müşteriler ise LIFEBOX CANCEL yazarak 3030’a gönderebilirler.";
-"package_moldcell_cancel_text" = "Bu yaptığına inanamıyorum! Tekrar etkinleştirmeye karar verdiğinde senin için burada olacağız :) Bunu yapmakta kararlıysan “STOP” yaz 2’e gönder.";
+"package_moldcell_cancel_text" = "Hm, bunu yaptığınıza inanamıyoruz! Yeniden etkinleştirmek istediğinizde, sizi bekliyor olacağız :) Eğer ısrarlı iseniz, 100GB iptali için 2 yazıp 10010'a, 500GB iptali için 2 yazıp 50030'a SMS gönderin.";
 "package_life_cancel_text" = "lifebox 25GB paketini iptal etmek için lütfen “Stop1” metnini kullanarak,  lifebox 100GB paketini iptal etmek için lütfen “Stop2” metnini kullanarak, lifebox 500GB paketini iptal etmek için lütfen “Stop3” metnini kullanarak, 6767'ye SMS atın.";
 "package_paycell_all_access_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
 "package_paycell_slcm_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
@@ -869,21 +869,48 @@
 "delete_duplicated_contacts" = "Rehberindeki tekrarlayan kontakları sil!";
 "leave_middle_membership" = "Standart+ üyeliğini sonlandır";
 "leave_middle_turkcell" = "Paketini iptal etmek için lütfen IPTAL LIFEBOX STANDART+ yazıp 2200’a gönder.";
-"package_FWI_cancel_text" = "package_FWI_cancel_text";
-"package_jamaica_cancel_text" = "package_jamaica_cancel_text";
-"feature_digicell_cancel_text" = "feature_digicell_cancel_text";
+"package_FWI_cancel_text" = "";
+"package_jamaica_cancel_text" = "";
+"feature_digicell_cancel_text" = "Digicell kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
 "terms_and_use_etk_checkbox" = "Turkcell ve Grup Şirketleri’nin avantajlı ürün ve hizmetlerden haberdar olmak için 6563 sayılı Kanun ve diğer ilgili mevzuat uyarınca aksi tarafımca belirtilene kadar ticari elektronik ileti almak istiyorum.";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell ve Grup Şirketleri";
 "terms_and_use_etk_link_commercial_email_messages" = "ticari elektronik ileti";
 "commercial_email_messages" = "TİCARİ ELEKTRONİK İLETİ İZNİ HAKKINDA BİLGİLENDİRME\n\nlifebox uygulamasına üyelik sırasında verdiğim veya Turkcell ve Grup Şirketleri nezdinde bulunan iletişim bilgilerim aracılığı ile Turkcell ve Grup Şirketleri’ne ve/veya işbirliği içerisinde olduğu kuruluşlara ilişkin çeşitli ve yeni ürün-hizmetlerin tanıtım ve pazarlanması amacıyla ve genel/özel imkanların duyurulması için Turkcell ve Grup Şirketleri’nce tarafıma 6563 sayılı Elektronik Ticaretin Düzenlenmesi Hakkında Kanun ( “Kanun”) ve Ticari İletişim ve Ticari Elektronik İletiler Hakkında Yönetmelik ( “Yönetmelik”) çerçevesince ticari elektronik iletiler (telefon, çağrı merkezleri, faks, otomatik arama makineleri, akıllı ses kaydedici sistemler, elektronik posta, kısa mesaj hizmeti gibi vasıtalar kullanılarak elektronik ortamda gerçekleştirilen ve ticari amaçla gönderilen veri, ses ve görüntü içerikli iletileri)  gönderilmesine  kullanıcı sözleşmesi sona erse dahi reddetme hakkımı kullanıncaya kadar süresiz olarak geçerli şekilde onayım olduğunu kabul ederim.\n \nYönetmelik uyarınca 5809 sayılı Elektronik Haberleşme Kanunu kapsamındaki işletmecilerin abone ve kullanıcılarına; münhasıran kendi mal ve hizmetlerini tanıtmak, pazarlamak ya da işletmesini tanıtmak amacıyla gönderdiği ticari elektronik iletiler istisna kapsamındadır. Bu sebeple yukarıda verdiğim onayın abonesi/kullanıcısı olduğum işletmeci şirkete verdiğim kendi ürün ve hizmetlerinin tanıtımına ilişkin onaydan bağımsız ve ayrı bir onay olduğunu ve reddetme hakkımı kullanarak Kanun ve Yönetmelik kapsamında işbu metin ile vermekte olduğum onayı iptal etsem bile abonesi olduğum  işletmeciye verdiğim onay dahilinde, bu işletmeciden kendi mal ve hizmetlerine ilişkin tanıtım, pazarlama vb. amaçları içeren ticari elektronik ileti gelebileceğini, işbu ticari elektronik iletileri de ayrıca reddetme imkanım olduğunu bildiğimi kabul ederim.";
-"NSLocationAlwaysUsageDescription" = "Lokasyonunuz, arka planda yedekleme yapabilmek için kullanılacaktır.";
-"NSPhotoLibraryAddUsageDescription" = "Fotoğraf ve videolarınızı galerinize indirebilmek için izniniz gerekli";
-"NSPhotoLibraryUsageDescription" = "Fotoğraf ve videolarını yedekleyebilmek için galeri iznin gerekiyor";
+"NSLocationAlwaysUsageDescription" = "Arka planda yedekleme yapabilmek için lokasyonun kullanılacaktır.";
+"NSPhotoLibraryAddUsageDescription" = "Uygulamanın, cihaz galerine ulaşabilmesi için iznin gerekiyor.";
+"NSPhotoLibraryUsageDescription" = "Fotoğraf ve videolarını uygulamada gösterebilmek için iznin gerekiyor.";
 
 /*Usage Info*/
-"package_space_details" = "";
-"package_renew_date" = "";
-"percentage_used" = "";
-"used_and_left_space" = "";
-"percentage_used_two_lines" = "";
-"my_usage_storage" = "";
+"package_space_details" = "%1$@ / %2$@ internet kullanıldı (lifebox kullanımı için)";
+"package_renew_date" = "Yenilenme tarihi: %@";
+"percentage_used" = "%.0f%% kullanıldı";
+"used_and_left_space" = "%1$@ / %2$@ kullanıldı";
+"percentage_used_two_lines" = "%.0f%%\nkullanıldı";
+"my_usage_storage" = "İnternet Kullanımım";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Arka planda yedekleme yapabilmek için lokasyonun kullanılacaktır.";
+"name" = "İsim";
+"surname" = "Soyisim";
+"change password" = "Şifre Değiştir";
+"left_space" = "%1$@ / %2$@";
+
+/*Packages*/
+"packages_i_have" = "Saklama Alanı Paketlerim";
+"account_details" = "Hesap Detayları";
+"my_profile" = "Profil Bilgilerim";
+"account_type" = "Hesap Tipi";
+"standard_plus" = "lifebox Standart+";
+"standard" = "lifebox Standart";
+"premium" = "lifebox Premium";
+"old_password" = "Eski Şifre";
+"new_password" = "Yeni Şifre";
+"repeat_password" = "Yeni Şifre Tekrar";
+"change_password_captcha_answer_placeholder" = "Lütfen metni gir";
+"temporary_error_occurred_try_again_later" = "Geçici bir hata oluştu, lütfen daha sonra tekrar dene.";
+"old_password_does_not_match" = "Eski şifre yanlış girildi.";
+"new_password_and_repeated_password_does_not_match" = "Şifreler uyuşmuyor.";
+"new_password_is_empty" = "Yeni şifre alanı boş.";
+"old_password_is_empty" = "Eski şifre alanı boş.";
+"repeat_password_is_empty" = "Yeni şifre tekrar alanı boş.";
+"this_text_is_empty" = "Bu alan boş.";
+"password_changed_successfully" = "Şifren başarılı bir şekilde değiştirildi.";
+"password_changed_successfully_relogin" = "Şifren başarılı bir şekilde değiştirildi. Lütfen yeni şifren ile tekrar giriş yap.";

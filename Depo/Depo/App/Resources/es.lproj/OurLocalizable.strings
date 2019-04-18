@@ -69,7 +69,7 @@
 "You can open settings and cancel subscption." = "Puede abrir el menú configuraciones y cancelar la suscripción.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Envíe un mensaje de texto con el mensaje \"Iptal LIFEBOX %@\" al 2200 para cancelar su paquete";
 "You can visit iTunes to cancel your subscription" = "Puede visitar iTunes para cancelar su paquete";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, ¡no puedo creer que esté haciendo esto! Cuando decida reactivarlo, estaremos aquí para usted :) Si insiste, envie \"STOP\" al 2";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB ";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Los clientes Platinum y Lifecell pueden enviar LIFE CANCEL, otros clientes pueden enviar LIFEBOX CANCEL al 3030 para cancelar su membresía.";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Para desactivar lifebox 50GB envíe SMS con el texto 50VYKL, para lifebox 500GB envíe SMS con el texto 500VYKL al número 8080.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Los clientes Platinum y Lifecell pueden enviar LIFE, otros clientes pueden enviar LIFEBOX 50GB para el paquete lifebox de 50GB, LIFEBOX 500GB para el paquete lifebox 500GB y LIFEBOX 2.5TB para el paquete lifebox 2.5TB a 3030 para comenzar su membresía";
@@ -251,7 +251,7 @@
 "Logout" = "Salir";
 "Help & Support" = "Preguntas Más Frecuentes";
 "Lifebox Touch ID and Passcode" = "Lifebox Touch ID y clave de acceso";
-"Usage Info and Packages" = "Información de uso y paquetes";
+"Usage Info and Packages" = "Detalles de cuenta y uso";
 "Recently Deleted Files" = "Archivos eliminados recientemente";
 "Auto Sync" = "Sincronización Automática";
 "Back-up my contacts" = "Copia de seguridad de mis contactos";
@@ -700,7 +700,7 @@
 "package_lifecell_cancel_text" = "Para desactivar el lifebox de 50 GB envíe un mensaje con el texto “50VYKL” y para desactivar el lifebox de 500 GB, envíe un mensaje con el texto “500VYKL” al número 8080.";
 "package_promo_cancel_text" = "Por favor use el menú de “Contáctenos” (Contact us) para informarnos para procesar su solicitud.";
 "package_kktcell_cancel_text" = "Para cancelar sus membresías; \nLos clientes de Platinum y LifeCell pueden enviar el texto de “LIFE CANCEL”, otros clientes pueden enviar el texto de “LIFEBOX CANCEL” al número 3030.";
-"package_moldcell_cancel_text" = "Hm, no puedo creer que estés haciendo esto! Cuando decida reactivarlo, estaremos aquí para usted :) Si insiste, envíe un mensaje con el texto de \" STOP\" al número 2.";
+"package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
 "package_life_cancel_text" = "Para desactivar el lifebox de 25GB, envíe un mensaje con el texto \"Stop1\", para desactivar el lifebox de 100GB envíe un mensaje con el texto \"Stop2\", para desactivar el lifebox de 500GB, envíe un mensaje con el texto \"Stop3\" al número 6767.";
 "package_paycell_all_access_cancel_text" = "Para cancelar su paquete, por favor visite a la página de web; \nwww.mylifebox.com\n";
 "package_paycell_slcm_cancel_text" = "Para cancelar su paquete, por favor visite a la página de web; \nwww.mylifebox.com\n";
@@ -868,12 +868,41 @@
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell y las Compañias del Grupo";
 "terms_and_use_etk_link_commercial_email_messages" = "correo electrónico comercial";
 "commercial_email_messages" = "INFORMACIÓN SOBRE LA AUTORIZACIÓN DE MENSAJE ELECTRÓNICO COMERCIAL\n\nACEPTO Y APRUEBO  válidamente que la información que proporciono durante la suscripción de la aplicación Lifebox o que constan en el banco de datos de Turkcell y las Compañias del Grupo puede ser utilizado con el fin de promover y comercializar novedades, productos y servicios de Turkcell y las Compañias del Grupo, así como para el anuncio de las oportunidades exclusivas o generales por parte de Turkcell y las Compañias del Grupo mediante el envío de mensajes electrónicos comerciales (mensajes de datos, audio y video enviados electrónicamente y enviados con fines comerciales por teléfono, centros de llamadas, fax, máquinas de búsqueda automática, sistemas inteligentes de grabación de voz, correo electrónico, servicios de mensajería de texto, etc.) de conformidad con la Ley N° 6563 del Reglamento de Comercio Electrónico (“La Ley”) y dentro del marco del Reglamento sobre comunicación comercial y mensajes electrónicos comerciales (“El Reglamento”) y indefinidamente, hasta que haya usado mi derecho a rechazar.  \nSegún el Reglamento, los mensajes electrónicos comerciales que se envían a los suscriptores y usuarios exclusivamente por parte de los Operadores dentro del ámbito de la Ley 5809 de Comunicación Electrónica, para promocionar sus propios bienes y servicios, para comercializar o para promocionar sus negocios están cubiertos por la excepción. Por este motivo, ACEPTO que la aprobación concedad en el anterior es independiente de la aprobación que he dado para la promoción de los productos y servicios ofertados por la empresa que de la cual soy un suscriptor /usuario, y según mi previa aprobación podría recibir mensajes electrónicos comerciales, promocionales acerca de los  productos y servicios de esta empresa con este texto en el ámbito de la Ley y el Reglamento incluso si cancelo la aprobación que he concedido anteriormente; y también puedo rechazar dichos mensajes electrónicos comerciales.";
-"NSLocationAlwaysUsageDescription" = "";
-"NSPhotoLibraryAddUsageDescription" = "";
-"NSPhotoLibraryUsageDescription" = "";
+"NSLocationAlwaysUsageDescription" = "Su ubicación se utilizará para la sincronización de fondo";
+"NSPhotoLibraryAddUsageDescription" = "Se necesita su permiso para acceder a la biblioteca de fotos para guardar sus fotos y videos";
+"NSPhotoLibraryUsageDescription" = "Se necesita su permiso para acceder a la biblioteca de fotos para mostrar fotos y videos en la aplicación";
 
 /*Usage Info*/
-"package_space_details" = "";
-"package_renew_date" = "";
-"percentage_used" = "";
-"used_and_left_space" = "";
+"package_space_details" = "%1$@ / % 2$@ internet usado (solo para uso de la caja de vida)";
+"package_renew_date" = "Será renovado en: %@";
+"percentage_used" = "%.0f%% utilizado";
+"used_and_left_space" = "%1$@ / %2$@ utilizado";
+"percentage_used_two_lines" = "%.0f%%\nutilizado";
+"my_usage_storage" = "Mi uso de internet";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Su ubicación se utilizará para la sincronización de fondo";
+"name" = "Nombre";
+"surname" = "Apellido";
+"change password" = "Cambia la contraseña";
+"left_space" = "%1$@ / %2$@";
+
+/*Packages*/
+"packages_i_have" = "Paquetes que tengo";
+"account_details" = "Detalles de la cuenta";
+"my_profile" = "Mi perfil";
+"account_type" = "Tipo de cuenta";
+"standard_plus" = "Lifebox Estándar+";
+"standard" = "Lifebox Estándar";
+"premium" = "lifebox Premium";
+"old_password" = "Contraseña anterior";
+"new_password" = "Nueva contraseña";
+"repeat_password" = "Escriba la contraseña otra vez";
+"change_password_captcha_answer_placeholder" = "Escribe el texto";
+"temporary_error_occurred_try_again_later" = "Ocurrió un error temporal, inténtalo de nuevo más tarde.";
+"old_password_does_not_match" = "La contraseña anterior se ingresó incorrectamente";
+"new_password_and_repeated_password_does_not_match" = "Estas contraseñas no coinciden";
+"new_password_is_empty" = "El nuevo campo de contraseña está vacío";
+"old_password_is_empty" = "El campo de contraseña anterior está vacío";
+"repeat_password_is_empty" = "El campo de repetición de contraseña está vacío";
+"this_text_is_empty" = "Este texto esta vacio";
+"password_changed_successfully" = "Tu contraseña ha sido cambiada exitosamente";
+"password_changed_successfully_relogin" = "Has cambiado satisfactoriamente tu contraseña. Por favor, vuelva a iniciar sesión con su nueva contraseña.";

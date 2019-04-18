@@ -13,17 +13,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
     func onSend(selectedLanguage: LanguageModel) {
         output.startAsyncOperation()
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .feedbackForm, eventLabel: .feedbackSend)
-        let parameter = SelectedLanguage(selectedLanguage: selectedLanguage)
-        FeedbackService().sendSelectedLanguage(selectedLanguageParameter: parameter, succes: {[weak self] success in
-            DispatchQueue.main.async {
-                self?.getUserInfoString(with: selectedLanguage.displayLanguage ?? "")
-            }
-            }, fail: { [weak self] fail in
-                DispatchQueue.main.async {
-                    self?.output.fail(text: fail.description)
-                }
-        })
-        
+        getUserInfoString(with: selectedLanguage.displayLanguage ?? "")
     }
     
     func getUserInfoString(with languageName: String) {

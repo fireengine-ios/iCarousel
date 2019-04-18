@@ -69,7 +69,7 @@
 "You can open settings and cancel subscption." = "Poți suspenda abonamentul din setări";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Transmite mesaj cu textul \"Iptal LIFEBOX %@\" la număerul 2200 pentru a suspenda abonamentul";
 "You can visit iTunes to cancel your subscription" = "Poși intra în iTunes pentru a suspenda pachetul tău";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Mmm... nu ne vine a crede că faci asta! Să știi că te așteptăm să revii :). Ei, și dacă tot insiști, transmite \"STOP\" la numărul 2";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, chiar îți dorești asta? Oricând hotărăști să reactivezi pachetul, te așteptăm cu drag :) Dacă tot insiști, expediază un SMS cu cifra 2 la 10010 pentru dezactivarea pachetului de 100GB sau la 50030 pentru cel de 500GB";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Pentru a suspenda abonamentul, abonații Platinum și lifecell pot transmite mesaj cu textul LIFE CANCEL la numărul 3030, ceilalți abonați vor transmite textul LIFEBOX CANCEL";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Pentru dezactivarea pachetului lifebox de 50 GB, transmite SMS cu textul 50VYKL la numărul 8080, si text 500VYKL pentru suspendarea pachetului de 500 GB, respectiv.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Pentru a se abona, clienții Platinum și lifecell pot transmite LIFE; ceilalți abonați trebuie să trasmită LIFEBOX 50GB pentru pachetul lifebox de 50 GB, LIFEBOX 500GB pentru pachetul lifebox de 500 GB, LIFEBOX 2.5TB pentru pachetul lifebox de 2.5 TB.";
@@ -251,7 +251,7 @@
 "Logout" = "Ieșire";
 "Help & Support" = "FAQ";
 "Lifebox Touch ID and Passcode" = "Amprenta digitală și Parola lifebox";
-"Usage Info and Packages" = "Informații de utilizare și Pachete";
+"Usage Info and Packages" = "Detalii cont și utilizare";
 "Recently Deleted Files" = "Fișierele Șterse Recent";
 "Auto Sync" = "Sincronizare Automată";
 "Back-up my contacts" = "Copie Contactele mele";
@@ -700,7 +700,7 @@
 "package_lifecell_cancel_text" = "Pentru suspendarea pachetului lifebox 50GB, transmite SMS cu textul 50VYKL, iar pentru pachetul lifebox 500GB, respectiv cu textul 500VYKL, la numărul 8080.";
 "package_promo_cancel_text" = "Pentru a ne informa de solicitarea ta, te rugăm să folosești meniul Cotactează-ne";
 "package_kktcell_cancel_text" = "Abonații platinum și lifebox pot transmite LIFE CANCEL, ceilalți abonați vir transmite LIFEBOX CANCEL la numărul 3030 pentru a-și suspenda abonamentul";
-"package_moldcell_cancel_text" = "Hm... e incredibil că o faci! Noi rămânem aici pentru tine, în momentul în care decizi să revii :) Dar, dacă tot insiști, transmite \"STOP\" la numărul 2";
+"package_moldcell_cancel_text" = "Hm, chiar îți dorești asta? Oricând hotărăști să reactivezi pachetul, te așteptăm cu drag :) Dacă tot insiști, expediază un SMS cu cifra 2 la 10010 pentru dezactivarea pachetului de 100GB sau la 50030 pentru cel de 500GB";
 "package_life_cancel_text" = "Pentru suspendarea pachetului lifebox 25GB, transmite SMS cu textul \"Stop1\", pentru pachetul lifebox 100GB, SMS cu textul \"Stop2\", iar pentru pachetul lifebox 500GB, SMS cu textul \"Stop3\", la numărul 6767";
 "package_paycell_all_access_cancel_text" = "Pentru a-ți anula pachetul, te rugăm să accesezi www.mylifebox.com";
 "package_paycell_slcm_cancel_text" = "Pentru a-ți anula pachetul, te rugăm să accesezi www.mylifebox.com";
@@ -863,7 +863,7 @@
 "leave_middle_turkcell" = "Trimite textul IPTAL LIFEBOX STANDART+ la 2200, pentru a anula pachetul tău ";
 "package_FWI_cancel_text" = "";
 "package_jamaica_cancel_text" = "";
-"feature_digicell_cancel_text" = "";
+"feature_digicell_cancel_text" = "Poți beneficia în continuare de avantajele Premium, odată ce ești abonat Digicell";
 "terms_and_use_etk_checkbox" = "Până la o notificare contrară întreprinsă de mine  conform Legii numărul 6563 şi legislațiilor  relevante, doresc să primesc mesaje electronice comerciale cu privire la produsele şi serviciile avantajoase ale lui Turkcell şi Societățile Grupului .";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell şi Societățile Grupului";
 "terms_and_use_etk_link_commercial_email_messages" = "mesaje electronice comerciale";
@@ -877,5 +877,32 @@
 "package_renew_date" = "Va fi reînnoit la: %@";
 "percentage_used" = "%.0f%% utilizat";
 "used_and_left_space" = "%1$@ / %2$@ utilizat";
-"percentage_used_two_lines" = "%.0f%%\\n utilizat";
+"percentage_used_two_lines" = "%.0f%%\nutilizat";
 "my_usage_storage" = "Spațiul de stocare de utilizare";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Locația ta va fi folosită pentru sincronizarea de fundal";
+"name" = "Nume";
+"surname" = "Prenume";
+"change password" = "Modificare Parolă";
+"left_space" = "%1$@ / %2$@";
+
+/*Packages*/
+"packages_i_have" = "Packetele mele";
+"account_details" = "Detalii Cont";
+"my_profile" = "Profilul Meu";
+"account_type" = "Tip Cont";
+"standard_plus" = "lifebox Standard+";
+"standard" = "lifebox Standard";
+"premium" = "lifebox Premium";
+"old_password" = "Parola veche";
+"new_password" = "Parola nouă";
+"repeat_password" = "Introdu Parola din nou";
+"change_password_captcha_answer_placeholder" = "Culege textul";
+"temporary_error_occurred_try_again_later" = "A intervenit o eroare, te rugăm să încerci mai târziu";
+"old_password_does_not_match" = "Parola veche introdusă greșit";
+"new_password_and_repeated_password_does_not_match" = "Parola nu coincide";
+"new_password_is_empty" = "Câmpul cu Parola nouă e necompletat";
+"old_password_is_empty" = "Câmpul cu Parola veche e necompletat";
+"repeat_password_is_empty" = "Câmpul pentru repetarea Parolei e necompletat";
+"this_text_is_empty" = "Acest text e gol";
+"password_changed_successfully" = "Parola ta a fost modificată cu succes";
+"password_changed_successfully_relogin" = "Ai schimbat cu succes parola, te rugăm să te conectezi cu datele tale";
