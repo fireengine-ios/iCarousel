@@ -60,8 +60,8 @@ final class PasswordView: UIView, NibInit {
         
         passwordTextField.clearButtonMode = passwordTextField.isSecureTextEntry ? .never : .whileEditing
         
-        let showPasswordButtonText = passwordTextField.isSecureTextEntry ? TextConstants.showPassword : TextConstants.hidePassword
-        showPasswordButton.setTitle(showPasswordButtonText, for: .normal)
+        let showPasswordButtonIconName = passwordTextField.isSecureTextEntry ? "ic_eye_show" : "ic_eye_hide"
+        showPasswordButton.setImage(UIImage(named: showPasswordButtonIconName), for: .normal)
     }
     
     override func awakeFromNib() {

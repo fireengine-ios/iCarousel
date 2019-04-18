@@ -1,20 +1,21 @@
 import UIKit
 
-final class CaptchaView: UIView {
+final class CaptchaView: UIView, FromNib {
     
     @IBOutlet private weak var captchaImageView: UIImageView! {
         willSet {
             newValue.contentMode = .scaleAspectFit
-            newValue.layer.cornerRadius = 5
-            newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = ColorConstants.darkBorder.cgColor
+            newValue.backgroundColor = ColorConstants.profileGrayColor
+//            newValue.layer.cornerRadius = 5
+//            newValue.layer.borderWidth = 1
+//            newValue.layer.borderColor = ColorConstants.darkBorder.cgColor
         }
     }
     
     @IBOutlet private weak var soundCaptchaButton: UIButton! {
         willSet {
-            let image = newValue.image(for: .normal)?.withRenderingMode(.alwaysTemplate)
-            newValue.setImage(image, for: .normal)
+//            let image = newValue.image(for: .normal)?.withRenderingMode(.alwaysTemplate)
+//            newValue.setImage(image, for: .normal)
             
             newValue.isExclusiveTouch = true
             newValue.tintColor = ColorConstants.darkText
@@ -25,8 +26,8 @@ final class CaptchaView: UIView {
     
     @IBOutlet private weak var refreshCaptchaButton: UIButton! {
         willSet {
-            let image = newValue.image(for: .normal)?.withRenderingMode(.alwaysTemplate)
-            newValue.setImage(image, for: .normal)
+//            let image = newValue.image(for: .normal)?.withRenderingMode(.alwaysTemplate)
+//            newValue.setImage(image, for: .normal)
             
             newValue.isExclusiveTouch = true
             newValue.tintColor = ColorConstants.darkText
@@ -35,21 +36,32 @@ final class CaptchaView: UIView {
         }
     }
     
+    @IBOutlet weak var errorLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.textOrange
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
+            newValue.isHidden = true
+            newValue.backgroundColor = .white
+            newValue.isOpaque = true
+        }
+    }
+    
     @IBOutlet weak var captchaAnswerTextField: InsetsTextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaItaFont(size: 20)
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = UIColor.black
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
             newValue.insetX = 16
-            newValue.attributedPlaceholder = NSAttributedString(
-                string: TextConstants.changePasswordCaptchaAnswerPlaceholder,
-                attributes: [.foregroundColor: UIColor.lrTealish])
+            newValue.placeholder = TextConstants.captchaAnswerPlaceholder
+//            newValue.attributedPlaceholder = NSAttributedString(
+//                string: TextConstants.changePasswordCaptchaAnswerPlaceholder,
+//                attributes: [.foregroundColor: UIColor.lrTealish])
             
-            newValue.layer.cornerRadius = 5
-            newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = ColorConstants.darkBorder.cgColor
+//            newValue.layer.cornerRadius = 5
+//            newValue.layer.borderWidth = 1
+//            newValue.layer.borderColor = ColorConstants.darkBorder.cgColor
             
             newValue.returnKeyType = .done
             
@@ -68,12 +80,9 @@ final class CaptchaView: UIView {
         }
     }
     
-    @IBOutlet weak var errorLabel: UILabel! {
+    @IBOutlet private weak var lineView: UIView! {
         willSet {
-            newValue.textColor = ColorConstants.textOrange
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
-            newValue.isHidden = true
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = ColorConstants.profileGrayColor
             newValue.isOpaque = true
         }
     }
@@ -92,6 +101,20 @@ final class CaptchaView: UIView {
     private let captchaService = CaptchaService()
     private var player: AVAudioPlayer?
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        setupFromNib()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -109,7 +132,6 @@ final class CaptchaView: UIView {
     
     private func generateCaptchaUUID() {
         currentCaptchaUUID = UUID().uuidString
-        print("---", currentCaptchaUUID)
     }
     
     private func getImageCaptcha() {
