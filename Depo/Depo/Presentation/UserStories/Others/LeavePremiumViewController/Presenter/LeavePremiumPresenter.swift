@@ -142,6 +142,7 @@ extension LeavePremiumPresenter: LeavePremiumViewOutput {
         
         if controllerType != .standard {
             view?.startActivityIndicator()
+            interactor.trackScreen(screenType: controllerType)
             interactor.getActiveSubscription()
         }
     }
