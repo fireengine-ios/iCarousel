@@ -933,4 +933,5 @@
 "repeat_password_is_empty" = "Repeat password field is empty";
 "this_text_is_empty" = "This text is empty";
 "password_changed_successfully" = "Your password has been changed successfully";
-"password_changed_successfully_relogin" = "You have successfully changed your password. Please login again with your new password.";
+"password_changed_successfully_relogin" = "You have successfully changed your password. Please login again with your new password";
+"captcha_answer_placeholder" = "Enter the text shown in the image";
