@@ -42,8 +42,13 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             
             /// true from IB by default
             newValue.adjustsFontSizeToFitWidth = false
+            newValue.keyboardType = .numberPad
             
             newValue.underlineColor = ColorConstants.profileGrayColor
+            
+            newValue.addToolBarWithButton(title: TextConstants.nextTitle,
+                                          target: self,
+                                          selector: #selector(nextAfterCode))
         }
     }
     
@@ -74,11 +79,17 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.adjustsFontSizeToFitWidth = false
             
             newValue.underlineColor = ColorConstants.profileGrayColor
+            
+            newValue.addToolBarWithButton(title: TextConstants.nextTitle,
+                                          target: self,
+                                          selector: #selector(nextAfterNumber))
         }
     }
     
     /// use for background color or add subviews
     @IBOutlet private weak var contentView: UIView!
+    
+    var responderAfterNumber: UIResponder?
     
     /// awakeFromNib will not be called bcz of File Owner.
     /// it will be called only for "init?(coder".
@@ -95,5 +106,37 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     private func setup() {
         setupFromNib()
+    }
+    
+    
+    @objc private func nextAfterCode() {
+        numberTextField.becomeFirstResponder()
+    }
+    
+    @objc private func nextAfterNumber() {
+        //_ = numberTextField.delegate?.textFieldShouldReturn?(numberTextField)
+        responderAfterNumber?.becomeFirstResponder()
+    }
+}
+
+//UITextField+Extensions
+extension UITextField {
+    func addToolBarWithButton(title: String, target: Any, selector: Selector) {
+        let doneButton = UIBarButtonItem(title: title,
+                                         font: UIFont.TurkcellSaturaRegFont(size: 19),
+                                         tintColor: UIColor.lrTealish,
+                                         accessibilityLabel: title,
+                                         style: .plain,
+                                         target: target,
+                                         selector: selector)
+        
+        let keyboardToolbar = UIToolbar()
+        keyboardToolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            doneButton
+        ]
+        keyboardToolbar.sizeToFit()
+        
+        inputAccessoryView = keyboardToolbar
     }
 }
