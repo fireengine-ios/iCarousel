@@ -160,7 +160,8 @@ extension AnalyticsService: AnalyticsGA {
                                             errorType: String? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
-        let loginStatus = SingletonStorage.shared.referenceToken != nil
+        let tokenStorage: TokenStorage = factory.resolve()
+        let loginStatus = tokenStorage.accessToken != nil
         let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
         var payment: String?
         if let unwrapedisNativePayment = isPaymentMethodNative {
@@ -194,11 +195,12 @@ extension AnalyticsService: AnalyticsGA {
 ///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
         var autoSyncState: String?
         var autoSyncStatus: String?
-        let tokenStorage: TokenStorage = factory.resolve()
-        if tokenStorage.accessToken != nil {
+    
+        if loginStatus {
             let autoSyncStorageSettings = AutoSyncDataStorage().settings
             
             autoSyncState = autoSyncStorageSettings.isAutoSyncEnabled ? "True" : "False"
+            debugPrint("!!!! autosync \(autoSyncStorageSettings.isAutoSyncEnabled) and random autosync falg \(autoSyncStorageSettings.isAutoSyncOptionEnabled)")
             if autoSyncStorageSettings.isAutoSyncEnabled {
                 let photoSetting = autoSyncStorageSettings.isAutoSyncEnabled ?
                     GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.photoSetting).text : ""
