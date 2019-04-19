@@ -1161,8 +1161,8 @@
 "delete_duplicated_contacts" = "Supprimer les contacts en doublon dans votre répertoire!";
 "leave_middle_membership" = "Mettre fin à l’abonnement Standard+";
 "leave_middle_turkcell" = "Pour annuler votre option, veuillez écrire ANNULE LIFEBOX STANDARD + et envoyer à 2200.";
-"package_FWI_cancel_text" = "package_FWI_cancel_text";
-"package_jamaica_cancel_text" = "package_jamaica_cancel_text";
+"package_FWI_cancel_text" = "Vous pouvez annuler ou gérer votre abonnement Digicel depuis l'application My Digicel, le service clientèle ou en magasin.";
+"package_jamaica_cancel_text" = "Vous pouvez annuler ou gérer votre abonnement Digicel depuis l'application My Digicel, le service clientèle ou en magasin.";
 "feature_digicell_cancel_text" = "Étant donné que vous êtes un utilisateur de Digicell, vous pouvez continuer à utiliser les fonctionnalités Premium gratuitement.";
 "terms_and_use_etk_checkbox" = "J'aimerais recevoir des messages électroniques commerciaux afin de connaître les produits et services avantageux de Turkcell et des sociétés du groupe jusqu'à ce que je déclare le contraire en vertu de la loi n ° 6563 et d'autres législations pertinentes.";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell et des sociétés du groupe";
