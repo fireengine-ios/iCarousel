@@ -76,12 +76,24 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // TODO: need layoutIfNeeded?
-        homePageNavigationBarStyle()
-        // TODO: Set title?
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
         collectionViewManager.setScrolliblePopUpView(isActive: true)
         scrollBarManager.startTimerToHideScrollBar()
-        updateDB() //trigger Range API for update new items which are uploaded by other clients
+
+        if !selectedItems.isEmpty {
+            onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
+            navBarManager.setSelectionMode()
+            navigationBarWithGradientStyle()
+        }
+        
+        ///trigger Range API for update new items which are uploaded by other clients
+        updateDB()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        homePageNavigationBarStyle()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
