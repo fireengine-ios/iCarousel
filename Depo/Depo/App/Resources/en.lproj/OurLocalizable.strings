@@ -935,4 +935,3 @@
 "password_changed_successfully" = "Your password has been changed successfully";
 "password_changed_successfully_relogin" = "You have successfully changed your passwrod. Please login again with your new password";
 "captcha_answer_placeholder" = "Enter the text shown in the image";
-"password_changed_successfully_relogin" = "You have successfully changed your password. Please login again with your new password.";
