@@ -21,7 +21,7 @@ final class SupportFormController: UIViewController {
             
             newValue.addArrangedSubview(fullnameStackView)
             newValue.addArrangedSubview(emailTextField)
-//            newValue.addArrangedSubview(profilePhoneEnterView)
+            newValue.addArrangedSubview(profilePhoneEnterView)
         }
     }
     
@@ -49,11 +49,11 @@ final class SupportFormController: UIViewController {
         return newValue
     }()
     
-//    let profilePhoneEnterView: ProfilePhoneEnterView = {
-//        let newValue = ProfilePhoneEnterView()
-//        newValue.titleLabel.text = "Phone Number"
-//        return newValue
-//    }()
+    let profilePhoneEnterView: ProfilePhoneEnterView = {
+        let newValue = ProfilePhoneEnterView()
+        newValue.titleLabel.text = "Phone Number"
+        return newValue
+    }()
     
     
     
