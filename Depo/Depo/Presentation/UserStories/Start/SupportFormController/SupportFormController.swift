@@ -11,7 +11,7 @@ final class SupportFormController: UIViewController {
             newValue.backgroundColor = .white
             newValue.isOpaque = true
             
-            let fullnameStackView = UIStackView(arrangedSubviews: [nameTextField, surnameTextField])
+            let fullnameStackView = UIStackView(arrangedSubviews: [nameView, surnameView])
             fullnameStackView.spacing = 20
             fullnameStackView.axis = .horizontal
             fullnameStackView.alignment = .fill
@@ -20,12 +20,12 @@ final class SupportFormController: UIViewController {
             fullnameStackView.isOpaque = true
             
             newValue.addArrangedSubview(fullnameStackView)
-            newValue.addArrangedSubview(emailTextField)
-            newValue.addArrangedSubview(profilePhoneEnterView)
+            newValue.addArrangedSubview(emailView)
+            newValue.addArrangedSubview(phoneView)
         }
     }
     
-    let nameTextField: ProfileTextEnterView = {
+    let nameView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = "Name"
         newValue.subtitleLabel.text = "Please enter your name"
@@ -33,7 +33,7 @@ final class SupportFormController: UIViewController {
         return newValue
     }()
     
-    let surnameTextField: ProfileTextEnterView = {
+    let surnameView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = "Surname"
         newValue.subtitleLabel.text = "Please enter your surname"
@@ -41,7 +41,7 @@ final class SupportFormController: UIViewController {
         return newValue
     }()
     
-    let emailTextField: ProfileTextEnterView = {
+    let emailView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = "Email"
         newValue.subtitleLabel.text = "Please enter your e-mail"
@@ -49,7 +49,7 @@ final class SupportFormController: UIViewController {
         return newValue
     }()
     
-    let profilePhoneEnterView: ProfilePhoneEnterView = {
+    let phoneView: ProfilePhoneEnterView = {
         let newValue = ProfilePhoneEnterView()
         return newValue
     }()
@@ -58,6 +58,7 @@ final class SupportFormController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        phoneView.responderAfterNumber = nameView.textField
         
     }
 }
