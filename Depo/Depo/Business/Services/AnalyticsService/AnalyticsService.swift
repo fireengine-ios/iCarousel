@@ -140,12 +140,8 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
 extension AnalyticsService: AnalyticsGA {
     
     func logScreen(screen: AnalyticsAppScreens) {
-        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
-            let logScreenParametrs: [String: Any] = [
-                "screenName": screen.name,
-                "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
-            ]
-            Analytics.logEvent("screenView", parameters: logScreenParametrs + dimentionParametrs)
+        prepareDimentionsParametrs(screen: screen, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+            Analytics.logEvent("screenView", parameters: dimentionParametrs)
         }
     }
     

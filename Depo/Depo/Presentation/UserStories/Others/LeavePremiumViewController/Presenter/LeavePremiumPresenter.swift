@@ -140,9 +140,9 @@ extension LeavePremiumPresenter: LeavePremiumViewOutput {
     func onViewDidLoad(with premiumView: LeavePremiumView) {
         premiumView.delegate = self
         
+        interactor.trackScreen(screenType: controllerType)
         if controllerType != .standard {
             view?.startActivityIndicator()
-            interactor.trackScreen(screenType: controllerType)
             interactor.getActiveSubscription()
         }
     }
