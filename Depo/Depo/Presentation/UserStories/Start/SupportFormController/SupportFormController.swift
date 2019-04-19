@@ -51,7 +51,6 @@ final class SupportFormController: UIViewController {
     
     let profilePhoneEnterView: ProfilePhoneEnterView = {
         let newValue = ProfilePhoneEnterView()
-        newValue.titleLabel.text = "Phone Number"
         return newValue
     }()
     

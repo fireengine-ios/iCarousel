@@ -935,3 +935,5 @@
 "password_changed_successfully" = "Your password has been changed successfully";
 "password_changed_successfully_relogin" = "You have successfully changed your password. Please login again with your new password";
 "captcha_answer_placeholder" = "Enter the text shown in the image";
+"profile_phone_number_title" = "Phone Number";
+"profile_phone_number_placeholder" = "Enter your 10-digit mobile number";

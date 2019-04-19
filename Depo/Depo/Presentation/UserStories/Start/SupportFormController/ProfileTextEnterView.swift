@@ -64,9 +64,6 @@ final class ProfileTextEnterView: UIView {
     private func initialSetup() {
         setupStackView()
         setupUnderline()
-
-//        textField.translatesAutoresizingMaskIntoConstraints = false
-//        textField.heightAnchor.constraint(equalToConstant: 33).isActive = true
     }
     
     private func setupStackView() {

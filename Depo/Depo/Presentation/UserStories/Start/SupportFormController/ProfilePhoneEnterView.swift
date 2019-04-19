@@ -5,6 +5,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     @IBOutlet weak var titleLabel: UILabel! {
         willSet {
+            newValue.text = TextConstants.profilePhoneNumberTitle
             newValue.textColor = UIColor.lrTealish
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.backgroundColor = .white
@@ -28,7 +29,6 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             /// removed useless features
             newValue.autocapitalizationType = .none
             newValue.spellCheckingType = .no
-            newValue.autocapitalizationType = .none
             newValue.enablesReturnKeyAutomatically = true
             if #available(iOS 11.0, *) {
                 newValue.smartQuotesType = .no
@@ -54,8 +54,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
-//            newValue.insetX = 16
-            newValue.placeholder = TextConstants.captchaAnswerPlaceholder
+            newValue.placeholder = TextConstants.profilePhoneNumberPlaceholder
             
             newValue.returnKeyType = .done
             
@@ -65,7 +64,6 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             /// removed useless features
             newValue.autocapitalizationType = .none
             newValue.spellCheckingType = .no
-            newValue.autocapitalizationType = .none
             newValue.enablesReturnKeyAutomatically = true
             if #available(iOS 11.0, *) {
                 newValue.smartQuotesType = .no
@@ -82,6 +80,9 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     /// use for background color or add subviews
     @IBOutlet private weak var contentView: UIView!
     
+    /// awakeFromNib will not be called bcz of File Owner.
+    /// it will be called only for "init?(coder".
+    /// don't use it for setup with "init(frame"
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -95,7 +96,4 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     private func setup() {
         setupFromNib()
     }
-    
-    /// will not be called bcz of File Owner. don't use awakeFromNib
-    override func awakeFromNib() {}
 }

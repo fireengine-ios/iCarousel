@@ -55,7 +55,6 @@ final class CaptchaView: UIView, FromNib {
             /// removed useless features
             newValue.autocapitalizationType = .none
             newValue.spellCheckingType = .no
-            newValue.autocapitalizationType = .none
             newValue.enablesReturnKeyAutomatically = true
             if #available(iOS 11.0, *) {
                 newValue.smartQuotesType = .no
