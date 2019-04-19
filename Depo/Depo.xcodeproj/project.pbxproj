@@ -3007,6 +3007,7 @@
 		CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */; };
 		CE109C2B2057A9C9006C9FA0 /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE109C2A2057A9C9006C9FA0 /* ShareController.swift */; };
 		CE125176204E83DC00886F8D /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
+		CE127E9A2268A025005A4214 /* CaptchaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E992268A025005A4214 /* CaptchaView.xib */; };
 		CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1353342004F0F90004CBBE /* TextEnterController.swift */; };
 		CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1353382004F1530004CBBE /* TextEnterController.xib */; };
 		CE1458C62045617600812544 /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
@@ -5638,6 +5639,7 @@
 		CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeManager.swift; sourceTree = "<group>"; };
 		CE109C2A2057A9C9006C9FA0 /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		CE125175204E74CE00886F8D /* LifeboxFileProviderUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxFileProviderUI.entitlements; sourceTree = "<group>"; };
+		CE127E992268A025005A4214 /* CaptchaView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaptchaView.xib; sourceTree = "<group>"; };
 		CE1353342004F0F90004CBBE /* TextEnterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnterController.swift; sourceTree = "<group>"; };
 		CE1353382004F1530004CBBE /* TextEnterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextEnterController.xib; sourceTree = "<group>"; };
 		CE1458CA2045633D00812544 /* ShareConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareConfigurator.swift; sourceTree = "<group>"; };
@@ -11951,6 +11953,7 @@
 			children = (
 				CE5921CF225623D3005882CE /* ChangePasswordController.xib */,
 				CE5921CE225623D3005882CE /* ChangePasswordController.swift */,
+				CE127E992268A025005A4214 /* CaptchaView.xib */,
 				CEE3B7C72257917200B99FE7 /* CaptchaView.swift */,
 				CE5921D722564465005882CE /* PasswordView.xib */,
 				CE5921D92256446F005882CE /* PasswordView.swift */,
@@ -14282,6 +14285,7 @@
 				8C06B1BC2008AD72003D8E05 /* lookup.png in Resources */,
 				CEC05B671F05333800332EBA /* PhoneVereficationScreen~ipad.xib in Resources */,
 				8C06B1062008AD72003D8E05 /* slider_thumb@2x.png in Resources */,
+				CE127E9A2268A025005A4214 /* CaptchaView.xib in Resources */,
 				8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */,
 				8C06AF442008AD70003D8E05 /* crop_icon.png in Resources */,
 				8C06B0942008AD71003D8E05 /* polaroid_yeni.png in Resources */,
