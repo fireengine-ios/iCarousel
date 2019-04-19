@@ -3009,9 +3009,7 @@
 		CE125176204E83DC00886F8D /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
 		CE127E902268680F005A4214 /* SupportFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E8E2268680F005A4214 /* SupportFormController.swift */; };
 		CE127E912268680F005A4214 /* SupportFormController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E8F2268680F005A4214 /* SupportFormController.xib */; };
-		CE127E9322686CB0005A4214 /* SupportFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E8E2268680F005A4214 /* SupportFormController.swift */; };
 		CE127E9522689285005A4214 /* ProfileTextEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E9422689285005A4214 /* ProfileTextEnterView.swift */; };
-		CE127E96226892B1005A4214 /* ProfileTextEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E9422689285005A4214 /* ProfileTextEnterView.swift */; };
 		CE127E9822689A23005A4214 /* ProfilePhoneEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E9722689A23005A4214 /* ProfilePhoneEnterView.swift */; };
 		CE127E9A2268A025005A4214 /* CaptchaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E992268A025005A4214 /* CaptchaView.xib */; };
 		CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1353342004F0F90004CBBE /* TextEnterController.swift */; };
@@ -3043,6 +3041,13 @@
 		CE18CC92204E894100FA3F44 /* ErrorIdentificators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */; };
 		CE18CC93204E895D00FA3F44 /* ErrorIdentificators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */; };
 		CE18CC95204E8AC000FA3F44 /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
+		CE18D44E2269BCCE0007C178 /* ProfilePhoneEnterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE18D44D2269BCCE0007C178 /* ProfilePhoneEnterView.xib */; };
+		CE18D44F2269BD190007C178 /* CaptchaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E992268A025005A4214 /* CaptchaView.xib */; };
+		CE18D4532269C1D80007C178 /* SupportFormController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E8F2268680F005A4214 /* SupportFormController.xib */; };
+		CE18D4542269C1D80007C178 /* SupportFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E8E2268680F005A4214 /* SupportFormController.swift */; };
+		CE18D4552269C1D80007C178 /* ProfileTextEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E9422689285005A4214 /* ProfileTextEnterView.swift */; };
+		CE18D4562269C1D80007C178 /* ProfilePhoneEnterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE18D44D2269BCCE0007C178 /* ProfilePhoneEnterView.xib */; };
+		CE18D4572269C1D80007C178 /* ProfilePhoneEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127E9722689A23005A4214 /* ProfilePhoneEnterView.swift */; };
 		CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */; };
 		CE19CE01208F016600DB903E /* UIAlertController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CE00208F016600DB903E /* UIAlertController+Action.swift */; };
 		CE19CE02208F017200DB903E /* UIAlertController+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19CE00208F016600DB903E /* UIAlertController+Action.swift */; };
@@ -5661,6 +5666,7 @@
 		CE18CC7C204E84DE00FA3F44 /* DocumentActionCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentActionCustomizator.swift; sourceTree = "<group>"; };
 		CE18CC8F204E87CE00FA3F44 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		CE18CC91204E894100FA3F44 /* ErrorIdentificators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorIdentificators.swift; sourceTree = "<group>"; };
+		CE18D44D2269BCCE0007C178 /* ProfilePhoneEnterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePhoneEnterView.xib; sourceTree = "<group>"; };
 		CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxInteractor.swift; sourceTree = "<group>"; };
 		CE19CE00208F016600DB903E /* UIAlertController+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Action.swift"; sourceTree = "<group>"; };
 		CE1B761F204D2E4000B5E12A /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
@@ -11230,6 +11236,7 @@
 				CE127E8F2268680F005A4214 /* SupportFormController.xib */,
 				CE127E8E2268680F005A4214 /* SupportFormController.swift */,
 				CE127E9422689285005A4214 /* ProfileTextEnterView.swift */,
+				CE18D44D2269BCCE0007C178 /* ProfilePhoneEnterView.xib */,
 				CE127E9722689A23005A4214 /* ProfilePhoneEnterView.swift */,
 			);
 			path = SupportFormController;
@@ -13756,6 +13763,7 @@
 				7C849215201CB990007C502A /* LatestUpladsCard.xib in Resources */,
 				8C0E902A1FDEBDFF00789C91 /* InstagramAuthViewController.xib in Resources */,
 				8C06AF092008AD70003D8E05 /* check-mark@2x.png in Resources */,
+				CE18D4562269C1D80007C178 /* ProfilePhoneEnterView.xib in Resources */,
 				8C06AF672008AD70003D8E05 /* duz_cizgi@2x.png in Resources */,
 				8C06B1992008AD72003D8E05 /* vintage@2x.png in Resources */,
 				4A56D5CB202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
@@ -13971,12 +13979,14 @@
 				8C06B10F2008AD72003D8E05 /* status_badge@3x.png in Resources */,
 				8C06B1972008AD72003D8E05 /* vintage.png in Resources */,
 				8C06AF8B2008AD70003D8E05 /* extraOptions_selected.png in Resources */,
+				CE18D4532269C1D80007C178 /* SupportFormController.xib in Resources */,
 				CEE3B7D1225791D900B99FE7 /* PasswordView.xib in Resources */,
 				7C4F60AD2019E2BC0033C58F /* AlbumCard.xib in Resources */,
 				8C06B1AF2008AD72003D8E05 /* CRYPopupViewController.nib in Resources */,
 				8C06B0D32008AD71003D8E05 /* sample_green@3x.png in Resources */,
 				8C06B0912008AD71003D8E05 /* paylas_whatsapp@2x.png in Resources */,
 				8C06AF1B2008AD70003D8E05 /* cizgi_1_selected.png in Resources */,
+				CE18D44F2269BD190007C178 /* CaptchaView.xib in Resources */,
 				8C06B0B72008AD71003D8E05 /* rotation.png in Resources */,
 				8C06B0192008AD71003D8E05 /* kup_selected.png in Resources */,
 				8C06AF712008AD70003D8E05 /* duz_siyah.png in Resources */,
@@ -14720,6 +14730,7 @@
 				8C06AF1E2008AD70003D8E05 /* cizgi_1_selected@3x.png in Resources */,
 				8C06AF342008AD70003D8E05 /* cizgi_3_selected@2x.png in Resources */,
 				8C06B03C2008AD71003D8E05 /* Orta_Selected@2x.png in Resources */,
+				CE18D44E2269BCCE0007C178 /* ProfilePhoneEnterView.xib in Resources */,
 				8C06B1702008AD72003D8E05 /* toolbar_undo_icon.png in Resources */,
 				8C06B1C22008AD72003D8E05 /* lookup_soft_elegance_1.png in Resources */,
 				8C06AF1C2008AD70003D8E05 /* cizgi_1_selected@2x.png in Resources */,
@@ -15297,6 +15308,7 @@
 				CE292C2421BE5DE9004FC745 /* AuthoritySingleton.swift in Sources */,
 				CE292C2521BE5DE9004FC745 /* PackageService.swift in Sources */,
 				CE292C2621BE5DE9004FC745 /* ShareWormholeListener.swift in Sources */,
+				CE18D4572269C1D80007C178 /* ProfilePhoneEnterView.swift in Sources */,
 				CE292C2721BE5DE9004FC745 /* UICollectionView+Layout.swift in Sources */,
 				CE292C2821BE5DE9004FC745 /* Error+Alamofire.swift in Sources */,
 				CE292C2921BE5DE9004FC745 /* NSFileCoordinator+Coordinate.swift in Sources */,
@@ -15304,7 +15316,7 @@
 				8C0E8C651FDEBDFF00789C91 /* ActivitiesByMinutesAndType.swift in Sources */,
 				8C0B919420170E3800A5BA81 /* DuplicatedContactsModuleInput.swift in Sources */,
 				8C0B91A820170EAD00A5BA81 /* ManageContactsRouterInput.swift in Sources */,
-				CE127E9322686CB0005A4214 /* SupportFormController.swift in Sources */,
+				CE18D4542269C1D80007C178 /* SupportFormController.swift in Sources */,
 				B5C4C8A8204928CC00886F21 /* AutoSyncSettingsOptionView.swift in Sources */,
 				CE46402920B6E28800EFC1AE /* LocalUnsyncedOperation.swift in Sources */,
 				8C0E8C661FDEBDFF00789C91 /* ActivityFileType.swift in Sources */,
@@ -15350,7 +15362,7 @@
 				C62239AF204973330043ED44 /* FaceImageChangeCoverViewController.swift in Sources */,
 				CE924569206D2E22000C7791 /* AnimationFlowManager.swift in Sources */,
 				CE1458D02045734900812544 /* Alamofire+Validate.swift in Sources */,
-				CE127E96226892B1005A4214 /* ProfileTextEnterView.swift in Sources */,
+				CE18D4552269C1D80007C178 /* ProfileTextEnterView.swift in Sources */,
 				7C529689203EFE9D00BF3FBE /* SyncedBlock.swift in Sources */,
 				8C0E8C871FDEBDFF00789C91 /* UIImageView.swift in Sources */,
 				B5C7C580211C699F006E94DB /* AugmentedRealityController.swift in Sources */,
