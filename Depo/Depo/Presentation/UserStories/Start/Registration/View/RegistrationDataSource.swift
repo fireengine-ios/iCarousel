@@ -147,7 +147,7 @@ extension RegistrationDataSource: UIPickerViewDelegate {
         var pickerTitle = ""
         if !gsmModels.isEmpty {
             let model = gsmModels[row]
-            pickerTitle = model.countryName + "    " + model.gsmCode
+            pickerTitle = model.gsmCode + "    " + model.countryName//
         }        
         return NSAttributedString(string: pickerTitle, attributes: [.foregroundColor: UIColor.black])
     }
