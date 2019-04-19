@@ -199,15 +199,18 @@ extension AnalyticsService: AnalyticsGA {
         if loginStatus {
             let autoSyncStorageSettings = AutoSyncDataStorage().settings
             
-            autoSyncState = autoSyncStorageSettings.isAutoSyncEnabled ? "True" : "False"
-            debugPrint("!!!! autosync \(autoSyncStorageSettings.isAutoSyncEnabled) and random autosync falg \(autoSyncStorageSettings.isAutoSyncOptionEnabled)")
-            if autoSyncStorageSettings.isAutoSyncEnabled {
-                let photoSetting = autoSyncStorageSettings.isAutoSyncEnabled ?
-                    GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.photoSetting).text : ""
-                let videoSetting = autoSyncStorageSettings.isAutoSyncEnabled ?
-                    GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : ""
-                autoSyncStatus = "\(photoSetting) | \(videoSetting)"
-            }
+            let confirmedAutoSyncSettingsState = autoSyncStorageSettings.isAutoSyncEnabled && autoSyncStorageSettings.isAutosyncSettingsApplied
+            
+            autoSyncState = confirmedAutoSyncSettingsState ? "True" : "False"
+            debugPrint("!!!! autosync \(autoSyncStorageSettings.isAutoSyncEnabled) also a is firstAutosync set \(autoSyncStorageSettings.isAutosyncSettingsApplied)")
+            
+            let photoSetting = confirmedAutoSyncSettingsState ?
+                GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.photoSetting).text : GAEventLabel.photosNever.text
+            let videoSetting = confirmedAutoSyncSettingsState ?
+                GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : GAEventLabel.videosNever.text
+            autoSyncStatus = "\(photoSetting) | \(videoSetting)"
+            debugPrint("!!!! autoSyncStatus is \(autoSyncStatus)")
+
         }
         
         
