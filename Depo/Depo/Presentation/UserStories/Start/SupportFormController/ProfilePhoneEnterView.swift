@@ -5,7 +5,7 @@ import UIKit
 /// down arrow setup as codeTextField.rightView
 final class ProfilePhoneEnterView: UIView, FromNib {
     
-    @IBOutlet weak var titleLabel: UILabel! {
+    @IBOutlet public weak var titleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.profilePhoneNumberTitle
             newValue.textColor = UIColor.lrTealish
@@ -15,15 +15,13 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         }
     }
     
-    @IBOutlet private weak var codeTextField: UnderlineTextField! {
+    @IBOutlet public weak var codeTextField: UnderlineTextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = UIColor.black
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
-            
-            newValue.returnKeyType = .done
             
             /// removes suggestions bar above keyboard
             newValue.autocorrectionType = .no
@@ -48,7 +46,6 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             
             /// empty for simulator
             newValue.text = CoreTelephonyService().callingCountryCode()
-            
             #if targetEnvironment(simulator)
             newValue.text = "+375"
             #endif
@@ -65,7 +62,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         }
     }
     
-    @IBOutlet private weak var numberTextField: UnderlineTextField! {
+    @IBOutlet public weak var numberTextField: UnderlineTextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = UIColor.black
@@ -100,7 +97,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     }
     
     /// use for background color or add subviews
-    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet public weak var contentView: UIView!
     
     /// setup for Next button
     var responderAfterNumber: UIResponder?
