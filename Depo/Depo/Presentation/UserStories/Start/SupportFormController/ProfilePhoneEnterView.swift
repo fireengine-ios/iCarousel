@@ -5,6 +5,17 @@ import UIKit
 /// down arrow setup as codeTextField.rightView
 final class ProfilePhoneEnterView: UIView, FromNib {
     
+    @IBOutlet public weak var stackView: UIStackView! {
+        willSet {
+            newValue.spacing = 8
+            newValue.axis = .vertical
+            newValue.alignment = .fill
+            newValue.distribution = .fill
+            newValue.backgroundColor = .white
+            newValue.isOpaque = true
+        }
+    }
+    
     @IBOutlet public weak var titleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.profilePhoneNumberTitle
@@ -12,6 +23,16 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.backgroundColor = .white
             newValue.isOpaque = true
+        }
+    }
+    
+    @IBOutlet public weak var subtitleLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.textOrange
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            newValue.backgroundColor = .white
+            newValue.isOpaque = true
+            newValue.isHidden = true
         }
     }
     
@@ -127,5 +148,34 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     @objc private func nextAfterNumber() {
         //_ = numberTextField.delegate?.textFieldShouldReturn?(numberTextField)
         responderAfterNumber?.becomeFirstResponder()
+    }
+    
+    func showUnderlineAnimated() {
+        guard subtitleLabel.isHidden else {
+            return
+        }
+        stackView.spacing = 2
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.subtitleLabel.isHidden = false
+            /// https://stackoverflow.com/a/46412621/5893286
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func hideUnderlineAnimated() {
+        guard !subtitleLabel.isHidden else {
+            return
+        }
+        stackView.spacing = 8
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.subtitleLabel.isHidden = true
+            /// https://stackoverflow.com/a/46412621/5893286
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func showTextAnimated(text: String) {
+        subtitleLabel.text = text
+        showUnderlineAnimated()
     }
 }
