@@ -49,18 +49,15 @@ final class SupportFormController: UIViewController {
         return newValue
     }()
     
-    let phoneView: ProfilePhoneEnterView = {
-        let newValue = ProfilePhoneEnterView()
-        return newValue
-    }()
+    let phoneView = ProfilePhoneEnterView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         phoneView.responderAfterNumber = nameView.textField
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.phoneView.showTextAnimated(text: "Please enter 10-digit mobile number 5xxxxxxxxx")
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            self.phoneView.showTextAnimated(text: "Please enter 10-digit mobile number 5xxxxxxxxx")
+//        }
     }
 }

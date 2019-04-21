@@ -33,7 +33,7 @@ final class ProfileTextEnterView: UIView {
     
     let stackView: UIStackView = {
         let newValue = UIStackView()
-        newValue.spacing = 8
+        newValue.spacing = NumericConstants.profileStackViewHiddenSubtitleSpacing
         newValue.axis = .vertical
         newValue.alignment = .fill
         newValue.distribution = .fill
@@ -104,7 +104,7 @@ final class ProfileTextEnterView: UIView {
         guard subtitleLabel.isHidden else {
             return
         }
-        stackView.spacing = 2
+        stackView.spacing = NumericConstants.profileStackViewShowSubtitleSpacing
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.subtitleLabel.isHidden = false
             /// https://stackoverflow.com/a/46412621/5893286
@@ -116,7 +116,7 @@ final class ProfileTextEnterView: UIView {
         guard !subtitleLabel.isHidden else {
             return
         }
-        stackView.spacing = 8
+        stackView.spacing = NumericConstants.profileStackViewHiddenSubtitleSpacing
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.subtitleLabel.isHidden = true
             /// https://stackoverflow.com/a/46412621/5893286

@@ -7,7 +7,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     @IBOutlet public weak var stackView: UIStackView! {
         willSet {
-            newValue.spacing = 8
+            newValue.spacing = 2
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
@@ -154,7 +154,6 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         guard subtitleLabel.isHidden else {
             return
         }
-        stackView.spacing = 2
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.subtitleLabel.isHidden = false
             /// https://stackoverflow.com/a/46412621/5893286
@@ -166,7 +165,6 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         guard !subtitleLabel.isHidden else {
             return
         }
-        stackView.spacing = 8
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.subtitleLabel.isHidden = true
             /// https://stackoverflow.com/a/46412621/5893286

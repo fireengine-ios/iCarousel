@@ -149,6 +149,9 @@ struct NumericConstants {
     static let progressViewBackgroundColorAlpha: CGFloat = 0.25
     
     static let maxStringLengthForUserProfile = 255
+    
+    static let profileStackViewHiddenSubtitleSpacing: CGFloat = 8
+    static let profileStackViewShowSubtitleSpacing: CGFloat = 2
 }
 
 struct RequestSizeConstant {
