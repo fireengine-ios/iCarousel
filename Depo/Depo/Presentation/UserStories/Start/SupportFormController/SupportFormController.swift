@@ -27,6 +27,23 @@ final class SupportFormController: UIViewController {
         }
     }
     
+    @IBOutlet private weak var sendButton: RoundedInsetsButton! {
+        willSet {
+            /// Custom type in IB
+            newValue.isExclusiveTouch = true
+            newValue.setTitle(TextConstants.feedbackViewSendButton, for: .normal)
+            newValue.insets = UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30)
+            
+            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.setTitleColor(UIColor.white.darker(by: 30), for: .highlighted)
+            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
+            newValue.setBackgroundColor(UIColor.lrTealish.darker(by: 30), for: .highlighted)
+            
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.adjustsFontSizeToFitWidth()
+        }
+    }
+    
     let nameView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = "Name"
@@ -89,5 +106,9 @@ final class SupportFormController: UIViewController {
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 //            self.phoneView.showTextAnimated(text: "Please enter 10-digit mobile number 5xxxxxxxxx")
 //        }
+    }
+    
+    @IBAction private func onSendButton(_ sender: UIButton) {
+        print("open email")
     }
 }
