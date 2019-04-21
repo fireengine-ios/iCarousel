@@ -387,7 +387,7 @@ final class MediaItemOperationsService {
     }
     
     func isNoRemotesInDB(result: @escaping (_ noRemotes: Bool) -> Void) {
-        let predicate = NSPredicate(format: "isLocalItemValue = false")
+        let predicate = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) = false")
         let fetchRequest = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
         fetchRequest.fetchLimit = 1
         fetchRequest.predicate = predicate
