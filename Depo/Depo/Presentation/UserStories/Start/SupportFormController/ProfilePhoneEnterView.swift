@@ -1,5 +1,7 @@
 import UIKit
 
+// TODO: only numbers for iPad in numberTextField
+
 /// down arrow setup as codeTextField.rightView
 final class ProfilePhoneEnterView: UIView, FromNib {
     
@@ -39,12 +41,23 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             let imageView = UIImageView(image: image)
             newValue.rightView = imageView
             newValue.rightViewMode = .always
+            newValue.underlineColor = ColorConstants.profileGrayColor
             
             /// true from IB by default
             newValue.adjustsFontSizeToFitWidth = false
-            newValue.keyboardType = .numberPad
             
-            newValue.underlineColor = ColorConstants.profileGrayColor
+            /// empty for simulator
+            newValue.text = CoreTelephonyService().callingCountryCode()
+            
+            #if targetEnvironment(simulator)
+            newValue.text = "+375"
+            #endif
+            
+            let phoneCodeInputView = PhoneCodeInputView()
+            phoneCodeInputView.didSelect = { [weak newValue] gsmModel in
+                newValue?.text = gsmModel.gsmCode
+            }
+            newValue.inputView = phoneCodeInputView
             
             newValue.addToolBarWithButton(title: TextConstants.nextTitle,
                                           target: self,
@@ -77,7 +90,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             
             /// true from IB by default
             newValue.adjustsFontSizeToFitWidth = false
-            
+            newValue.keyboardType = .numberPad
             newValue.underlineColor = ColorConstants.profileGrayColor
             
             newValue.addToolBarWithButton(title: TextConstants.nextTitle,
@@ -89,6 +102,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     /// use for background color or add subviews
     @IBOutlet private weak var contentView: UIView!
     
+    /// setup for Next button
     var responderAfterNumber: UIResponder?
     
     /// awakeFromNib will not be called bcz of File Owner.
@@ -116,27 +130,5 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     @objc private func nextAfterNumber() {
         //_ = numberTextField.delegate?.textFieldShouldReturn?(numberTextField)
         responderAfterNumber?.becomeFirstResponder()
-    }
-}
-
-//UITextField+Extensions
-extension UITextField {
-    func addToolBarWithButton(title: String, target: Any, selector: Selector) {
-        let doneButton = UIBarButtonItem(title: title,
-                                         font: UIFont.TurkcellSaturaRegFont(size: 19),
-                                         tintColor: UIColor.lrTealish,
-                                         accessibilityLabel: title,
-                                         style: .plain,
-                                         target: target,
-                                         selector: selector)
-        
-        let keyboardToolbar = UIToolbar()
-        keyboardToolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            doneButton
-        ]
-        keyboardToolbar.sizeToFit()
-        
-        inputAccessoryView = keyboardToolbar
     }
 }

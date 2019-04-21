@@ -3653,6 +3653,8 @@
 		CEDA44C5207B8ADF00E653DD /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44C4207B8ADF00E653DD /* BackButton.swift */; };
 		CEDA44D9207CA9E600E653DD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
 		CEDA44DA207CA9FB00E653DD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
+		CEDB33CD226C4D6D00C9F748 /* PhoneCodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB33CC226C4D6D00C9F748 /* PhoneCodeInputView.swift */; };
+		CEDB33CE226C4D6D00C9F748 /* PhoneCodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB33CC226C4D6D00C9F748 /* PhoneCodeInputView.swift */; };
 		CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */; };
 		CEDFDF0F1FBEE616006BFCAE /* FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0E1FBEE616006BFCAE /* FirstResponder.swift */; };
 		CEDFECA51F10C77E003D1A75 /* BasePresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFEC9E1F10C77E003D1A75 /* BasePresentor.swift */; };
@@ -5982,6 +5984,7 @@
 		CED6442D2060E776009AFC12 /* StorageVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageVars.swift; sourceTree = "<group>"; };
 		CEDA44C4207B8ADF00E653DD /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		CEDA44D8207CA9E600E653DD /* NumericConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericConstants.swift; sourceTree = "<group>"; };
+		CEDB33CC226C4D6D00C9F748 /* PhoneCodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneCodeInputView.swift; sourceTree = "<group>"; };
 		CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+topController.swift"; sourceTree = "<group>"; };
 		CEDFDF0E1FBEE616006BFCAE /* FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponder.swift; sourceTree = "<group>"; };
 		CEDFEC9E1F10C77E003D1A75 /* BasePresentor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePresentor.swift; sourceTree = "<group>"; };
@@ -11238,6 +11241,7 @@
 				CE127E9422689285005A4214 /* ProfileTextEnterView.swift */,
 				CE18D44D2269BCCE0007C178 /* ProfilePhoneEnterView.xib */,
 				CE127E9722689A23005A4214 /* ProfilePhoneEnterView.swift */,
+				CEDB33CC226C4D6D00C9F748 /* PhoneCodeInputView.swift */,
 			);
 			path = SupportFormController;
 			sourceTree = "<group>";
@@ -16225,6 +16229,7 @@
 				B56E0DEA20B5644D0082044D /* NotificationName+Extensions.swift in Sources */,
 				8C0E8F3D1FDEBDFF00789C91 /* MailVerificationViewController.swift in Sources */,
 				8C0B919C20170E5C00A5BA81 /* DuplicatedContactsRouter.swift in Sources */,
+				CEDB33CE226C4D6D00C9F748 /* PhoneCodeInputView.swift in Sources */,
 				8C0E8F3E1FDEBDFF00789C91 /* SplashRouterInput.swift in Sources */,
 				B5E7479C208DC43F003A7110 /* BackgroundTaskService.swift in Sources */,
 				B5390D83216605F600A02002 /* CellImageManager.swift in Sources */,
@@ -17728,6 +17733,7 @@
 				865630C8BE985198C2339934 /* ActivityTimelineRouter.swift in Sources */,
 				78624ADA201C8A3A00C969D3 /* ManageContactsModuleOutput.swift in Sources */,
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
+				CEDB33CD226C4D6D00C9F748 /* PhoneCodeInputView.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
 				B53DCE8820EF634900400DBA /* SyncDB.m in Sources */,
 				CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */,
