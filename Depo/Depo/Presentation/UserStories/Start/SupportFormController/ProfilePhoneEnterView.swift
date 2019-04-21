@@ -60,6 +60,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             let imageView = UIImageView(image: image)
             newValue.rightView = imageView
             newValue.rightViewMode = .always
+            
             newValue.underlineColor = ColorConstants.profileGrayColor
             
             /// true from IB by default
@@ -76,6 +77,9 @@ final class ProfilePhoneEnterView: UIView, FromNib {
                 newValue?.text = gsmModel.gsmCode
             }
             newValue.inputView = phoneCodeInputView
+            
+            /// to remove cursor bcz we have picker
+            newValue.tintColor = .clear
             
             newValue.addToolBarWithButton(title: TextConstants.nextTitle,
                                           target: self,
@@ -120,8 +124,8 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     /// use for background color or add subviews
     @IBOutlet public weak var contentView: UIView!
     
-    /// setup for Next button
-    var responderAfterNumber: UIResponder?
+    /// setup for Next button after numberTextField
+    var responderOnNext: UIResponder?
     
     /// awakeFromNib will not be called bcz of File Owner.
     /// it will be called only for "init?(coder".
@@ -147,7 +151,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     @objc private func nextAfterNumber() {
         //_ = numberTextField.delegate?.textFieldShouldReturn?(numberTextField)
-        responderAfterNumber?.becomeFirstResponder()
+        responderOnNext?.becomeFirstResponder()
     }
     
     func showUnderlineAnimated() {

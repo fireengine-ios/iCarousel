@@ -3655,6 +3655,8 @@
 		CEDA44DA207CA9FB00E653DD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
 		CEDB33CD226C4D6D00C9F748 /* PhoneCodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB33CC226C4D6D00C9F748 /* PhoneCodeInputView.swift */; };
 		CEDB33CE226C4D6D00C9F748 /* PhoneCodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB33CC226C4D6D00C9F748 /* PhoneCodeInputView.swift */; };
+		CEDB33D0226C8D6500C9F748 /* ProfileTextPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB33CF226C8D6500C9F748 /* ProfileTextPickerView.swift */; };
+		CEDB33D1226C8D6500C9F748 /* ProfileTextPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB33CF226C8D6500C9F748 /* ProfileTextPickerView.swift */; };
 		CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */; };
 		CEDFDF0F1FBEE616006BFCAE /* FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0E1FBEE616006BFCAE /* FirstResponder.swift */; };
 		CEDFECA51F10C77E003D1A75 /* BasePresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFEC9E1F10C77E003D1A75 /* BasePresentor.swift */; };
@@ -5985,6 +5987,7 @@
 		CEDA44C4207B8ADF00E653DD /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		CEDA44D8207CA9E600E653DD /* NumericConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericConstants.swift; sourceTree = "<group>"; };
 		CEDB33CC226C4D6D00C9F748 /* PhoneCodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneCodeInputView.swift; sourceTree = "<group>"; };
+		CEDB33CF226C8D6500C9F748 /* ProfileTextPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextPickerView.swift; sourceTree = "<group>"; };
 		CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+topController.swift"; sourceTree = "<group>"; };
 		CEDFDF0E1FBEE616006BFCAE /* FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponder.swift; sourceTree = "<group>"; };
 		CEDFEC9E1F10C77E003D1A75 /* BasePresentor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePresentor.swift; sourceTree = "<group>"; };
@@ -11239,6 +11242,7 @@
 				CE127E8F2268680F005A4214 /* SupportFormController.xib */,
 				CE127E8E2268680F005A4214 /* SupportFormController.swift */,
 				CE127E9422689285005A4214 /* ProfileTextEnterView.swift */,
+				CEDB33CF226C8D6500C9F748 /* ProfileTextPickerView.swift */,
 				CE18D44D2269BCCE0007C178 /* ProfilePhoneEnterView.xib */,
 				CE127E9722689A23005A4214 /* ProfilePhoneEnterView.swift */,
 				CEDB33CC226C4D6D00C9F748 /* PhoneCodeInputView.swift */,
@@ -16327,6 +16331,7 @@
 				8C0E8F771FDEBDFF00789C91 /* PackagesViewInput.swift in Sources */,
 				8C0E8F781FDEBDFF00789C91 /* SelectNameViewOutput.swift in Sources */,
 				B53DCE8D20EF634900400DBA /* ContactSyncSDK.m in Sources */,
+				CEDB33D1226C8D6500C9F748 /* ProfileTextPickerView.swift in Sources */,
 				8C0E8F791FDEBDFF00789C91 /* SelectNameViewController.swift in Sources */,
 				8C0E8F7A1FDEBDFF00789C91 /* SelectNameModuleInput.swift in Sources */,
 				8C0E8F7B1FDEBDFF00789C91 /* SelectNamePresenter.swift in Sources */,
@@ -16937,6 +16942,7 @@
 				CE27C3211EF9515F00D4D156 /* AuthenticationService.swift in Sources */,
 				CE51AC871EF90853005DCEE0 /* LoginViewController.swift in Sources */,
 				CE33DFFD1F021F4500706C40 /* ReachabilityService.swift in Sources */,
+				CEDB33D0226C8D6500C9F748 /* ProfileTextPickerView.swift in Sources */,
 				CE51AC8D1EF90853005DCEE0 /* AutoNextEditingRowPasser.swift in Sources */,
 				B5390D7B2164F2C600A02002 /* TextInsetsLabel.swift in Sources */,
 				8C54084C1F62C77200D4717A /* FloatingContainerVC.swift in Sources */,

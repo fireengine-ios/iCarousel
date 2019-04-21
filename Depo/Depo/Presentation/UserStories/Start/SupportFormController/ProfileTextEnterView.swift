@@ -1,6 +1,6 @@
 import UIKit
 
-final class ProfileTextEnterView: UIView {
+class ProfileTextEnterView: UIView {
     
     let titleLabel: UILabel = {
         let newValue = UILabel()

@@ -22,6 +22,7 @@ final class SupportFormController: UIViewController {
             newValue.addArrangedSubview(fullnameStackView)
             newValue.addArrangedSubview(emailView)
             newValue.addArrangedSubview(phoneView)
+            newValue.addArrangedSubview(subjectView)
         }
     }
     
@@ -51,10 +52,27 @@ final class SupportFormController: UIViewController {
     
     let phoneView = ProfilePhoneEnterView()
     
+    let subjectView: ProfileTextPickerView = {
+        let newValue = ProfileTextPickerView()
+        newValue.titleLabel.text = "Subject"
+        newValue.subtitleLabel.text = "Please enter your subject"
+        newValue.textField.placeholder = "Please choose a subject..."
+        newValue.models = ["E-mail",
+                           "Phone Number",
+                           "Password",
+                           "Security text",
+                           "Turkcell Password",
+                           "Automatic Log-in",
+                           "Other"]
+        return newValue
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        phoneView.responderAfterNumber = nameView.textField
+        phoneView.responderOnNext = subjectView.textField
+        subjectView.responderOnNext = nameView.textField
+//        subjectView.textField.text
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 //            self.phoneView.showTextAnimated(text: "Please enter 10-digit mobile number 5xxxxxxxxx")
