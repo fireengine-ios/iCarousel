@@ -23,6 +23,7 @@ final class SupportFormController: UIViewController {
             newValue.addArrangedSubview(emailView)
             newValue.addArrangedSubview(phoneView)
             newValue.addArrangedSubview(subjectView)
+            newValue.addArrangedSubview(problemView)
         }
     }
     
@@ -31,6 +32,7 @@ final class SupportFormController: UIViewController {
         newValue.titleLabel.text = "Name"
         newValue.subtitleLabel.text = "Please enter your name"
         newValue.textField.placeholder = "Enter your name"
+        newValue.textField.autocorrectionType = .no
         return newValue
     }()
     
@@ -39,6 +41,7 @@ final class SupportFormController: UIViewController {
         newValue.titleLabel.text = "Surname"
         newValue.subtitleLabel.text = "Please enter your surname"
         newValue.textField.placeholder = "Enter your surname"
+        newValue.textField.autocorrectionType = .no
         return newValue
     }()
     
@@ -47,6 +50,7 @@ final class SupportFormController: UIViewController {
         newValue.titleLabel.text = "Email"
         newValue.subtitleLabel.text = "Please enter your e-mail"
         newValue.textField.placeholder = "Enter your e-mail adress"
+        newValue.textField.keyboardType = .emailAddress
         return newValue
     }()
     
@@ -64,6 +68,14 @@ final class SupportFormController: UIViewController {
                            "Turkcell Password",
                            "Automatic Log-in",
                            "Other"]
+        return newValue
+    }()
+    
+    let problemView: ProfileTextEnterView = {
+        let newValue = ProfileTextEnterView()
+        newValue.titleLabel.text = "Your Problem"
+        newValue.subtitleLabel.text = "Please enter your problem shortly"
+        newValue.textField.placeholder = "Explain your problem shortly"
         return newValue
     }()
     
