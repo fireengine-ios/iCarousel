@@ -55,7 +55,7 @@ class CreateStoryPhotoSelectionViewController: BaseFilesGreedViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    override func isNeedShowTabBar() -> Bool {
+    override func isNeedToShowTabBar() -> Bool {
         return false
     }
 }

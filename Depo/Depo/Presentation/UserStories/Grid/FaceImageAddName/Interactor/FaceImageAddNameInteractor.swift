@@ -50,7 +50,7 @@ extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
         currentName = text
         
         peopleService.changePeopleName(personId: personId, name: text, success: { [weak self] response in
-            self?.output.asyncOperationSucces()
+            self?.output.asyncOperationSuccess()
             if let output = self?.output as? FaceImageAddNameInteractorOutput,
                 let name = self?.currentName {
                 output.didChangeName(name)
@@ -69,7 +69,7 @@ extension FaceImageAddNameInteractor: FaceImageAddNameInteractorInput {
         }
 
         peopleService.mergePeople(personId: otherPersonId, targetPersonId: currentPersonId, success: { [weak self] response in
-            self?.output.asyncOperationSucces()
+            self?.output.asyncOperationSuccess()
 
             if let output = self?.output as? FaceImageAddNameInteractorOutput {
                 output.didMergePeople()

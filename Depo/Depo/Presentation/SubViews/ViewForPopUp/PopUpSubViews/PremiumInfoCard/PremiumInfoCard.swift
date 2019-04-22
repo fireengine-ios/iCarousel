@@ -40,7 +40,7 @@ final class PremiumInfoCard: BaseView {
     func configurateWithType(viewType: OperationType) {
         if viewType == .premium {
 
-            let isPremium = AuthoritySingleton.shared.isPremium
+            let isPremium = AuthoritySingleton.shared.accountType.isPremium
             self.isPremium = isPremium
             
             buttonContentView.isHidden = isPremium

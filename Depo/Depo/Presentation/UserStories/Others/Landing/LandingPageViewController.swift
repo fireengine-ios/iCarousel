@@ -13,6 +13,8 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControll: UIPageControl!
     
+    private lazy var autoSyncRoutingService = AutoSyncRoutingService()
+    
     @IBOutlet private weak var startUsingButton: BlueButtonWithMediumWhiteText! {
         didSet {
             startUsingButton.setTitle(TextConstants.landingStartUsing, for: .normal)
@@ -24,7 +26,7 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
         storageVars.isNewAppVersionFirstLaunchTurkcellLanding = false
         let router = RouterVC()
         if isTurkcell {
-            router.setNavigationController(controller: router.synchronyseScreen)
+            openAutoSyncIfNeeded()
         } else {
             let settings = router.onboardingScreen
             router.setNavigationController(controller: settings)
@@ -77,7 +79,29 @@ class LandingPageViewController: ViewController, UIScrollViewDelegate {
         scrollToPage(currentPage)
     }
 
+    // MARK: - Utility methods
     private func scrollToPage(_ page: Int) {
         scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(currentPage), y: 0), animated: true)
     }
+    
+    private func openAutoSyncIfNeeded() {
+        showSpinner()
+        
+        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
+            self?.hideSpinner()
+            
+            if needToOpenAutoSync {
+                self?.goToSyncSettingsView()
+            }
+        }) { [weak self] error in
+            self?.hideSpinner()
+        }
+    }
+    
+    func goToSyncSettingsView() {
+        let router = RouterVC()
+        router.setNavigationController(controller: router.synchronyseScreen)
+
+    }
+    
 }

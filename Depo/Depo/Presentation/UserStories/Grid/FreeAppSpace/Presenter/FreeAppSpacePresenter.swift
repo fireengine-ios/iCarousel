@@ -57,7 +57,7 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
     }
     
     func canceled() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         if let view = view as? BaseFilesGreedViewController {
             view.requestStopped()
         }

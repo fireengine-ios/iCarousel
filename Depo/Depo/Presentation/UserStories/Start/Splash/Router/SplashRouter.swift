@@ -27,13 +27,17 @@ class SplashRouter: SplashRouterInput {
     }
     
     func navigateToTermsAndService() {
-        let temsAndServices = router.termsAndServicesScreen(login: true)
+        let temsAndServices = router.termsAndServicesScreen(login: true, phoneNumber: nil)
         router.setNavigationController(controller: router.onboardingScreen)
         router.pushViewControllerWithoutAnimation(viewController: temsAndServices)
     }
     
     func showNetworkError() {
         UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+    }
+    
+    func showError(_ error: Error) {
+        UIApplication.showErrorAlert(message: error.description)
     }
     
     func goToSyncSettingsView(fromSplash: Bool = false) {
@@ -46,7 +50,4 @@ class SplashRouter: SplashRouterInput {
         }
     }
     
-    func showError(_ error: Error) {
-        UIApplication.showErrorAlert(message: error.localizedDescription)
-    }
 }

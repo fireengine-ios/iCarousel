@@ -44,11 +44,11 @@ extension ActivityTimelinePresenter: ActivityTimelineInteractorOutput {
     }
     func refreshTimelineActivities(with array: [ActivityTimelineServiceResponse]) {
         view.refreshTimelineActivities(with: array)
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     func failedTimelineActivities(with error: ErrorResponse) {
         UIApplication.showErrorAlert(message: error.description)
         view.endInfinityScrollWithNoMoreData()
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
 }

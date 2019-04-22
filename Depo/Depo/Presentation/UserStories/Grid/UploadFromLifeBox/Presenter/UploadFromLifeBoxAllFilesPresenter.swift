@@ -95,7 +95,7 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
     
     func asyncOperationFail(errorResponse: ErrorResponse) {
         if errorResponse.isOutOfSpaceError {
-            asyncOperationSucces()
+            asyncOperationSuccess()
             dataSource.setSelectionState(selectionState: false)
             stopModeSelected()
             guard let uploadView = view as? UploadFromLifeBoxViewInput else {

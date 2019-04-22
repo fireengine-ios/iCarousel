@@ -14,9 +14,9 @@ protocol ActivityIndicator {
 }
 extension ActivityIndicator where Self: UIViewController {
     func startActivityIndicator() {
-        showSpiner()
+        showSpinner()
     }
     func stopActivityIndicator() {
-        hideSpiner()
+        hideSpinner()
     }
 }

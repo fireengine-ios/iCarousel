@@ -27,7 +27,7 @@ class Device {
     
     static let applicationId = "665036334"
     
-    static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es", "sq"]
+    static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es", "sq", "fr"]
     static private let defaultLocale = "en"
     
     static func documentsFolderUrl(withComponent: String) -> URL {
@@ -96,8 +96,8 @@ class Device {
     static func getFreeDiskSpaceInBytesIOS11() -> Int64 {
         let fileURL = URL(fileURLWithPath: Device.homeFolderString())
         do {
-            let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityKey])
-            if let availableCapacity = values.volumeAvailableCapacity {
+            let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
+            if let availableCapacity = values.volumeAvailableCapacityForImportantUsage {
                 return Int64(availableCapacity)
             }
         } catch {

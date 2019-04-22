@@ -9,50 +9,78 @@
 import UIKit
 
 final class PremiumFeaturesView: UIView {
-
-    private enum Feature {
-        case backUp
-        case contacts
-        case places
-        case face
-        case object
-
-        static let allFeatureTypes: [Feature] = [.backUp, .contacts, .places, .face, .object]
-
-        var title: String {
-            switch self {
-            case .backUp:
-                return TextConstants.backUpShort
-            case .contacts:
-                return TextConstants.removeDuplicateShort
-            case .places:
-                return TextConstants.placesRecognitionShort
-            case .face:
-                return TextConstants.faceRecognitionShort
-            case .object:
-                return TextConstants.objectRecognitionShort
+    
+    private struct Features {
+        enum Feature {
+            case backUp
+            case contacts
+            case places
+            case face
+            case object
+            case photoPick
+            case dataAdvantage
+        
+            var title: String {
+                switch self {
+                case .backUp:
+                    return TextConstants.backUpShort
+                case .contacts:
+                    return TextConstants.removeDuplicateShort
+                case .places:
+                    return TextConstants.placesRecognitionShort
+                case .face:
+                    return TextConstants.faceRecognitionShort
+                case .object:
+                    return TextConstants.objectRecognitionShort
+                case .photoPick:
+                    return TextConstants.photoPickShort
+                case .dataAdvantage:
+                    return TextConstants.additionalDataAdvantage
+                }
+            }
+            
+            var image: UIImage? {
+                switch self {
+                case .backUp:
+                    return UIImage(named: "back_up_HQ")
+                case .contacts:
+                    return UIImage(named: "contacts")
+                case .places:
+                    return UIImage(named: "place_recognition")
+                case .face:
+                    return UIImage(named: "face_recognition")
+                case .object:
+                    return UIImage(named: "object_recognition")
+                case .photoPick:
+                    return UIImage(named: "photo_pick")
+                case .dataAdvantage:
+                    return UIImage(named: "data_advantage")
+                }
             }
         }
+        
+        ///FE-953 Deleting "Extra Data Package" icon and text
+//        private let isTurkcell: Bool
 
-        var image: UIImage? {
-            switch self {
-            case .backUp:
-                return UIImage(named: "back_up_HQ")
-            case .contacts:
-                return UIImage(named: "contacts")
-            case .places:
-                return UIImage(named: "place_recognition")
-            case .face:
-                return UIImage(named: "face_recognition")
-            case .object:
-                return UIImage(named: "object_recognition")
-            }
+        var all: [Feature] {
+            ///FE-953 Deleting "Extra Data Package" icon and text
+//            if isTurkcell {
+//                return [.backUp, .contacts, .places, .face, .object, .photoPick, .dataAdvantage]
+//            } else {
+//                return [.backUp, .contacts, .places, .face, .object, .photoPick]
+//            }
+            return [.backUp, .contacts, .places, .face, .object, .photoPick]
         }
+        
+        ///FE-953 Deleting "Extra Data Package" icon and text
+//        init() {
+//            self.isTurkcell = SingletonStorage.shared.accountInfo?.accountType == AccountType.turkcell.rawValue
+//        }
     }
     
     internal var currentFeatureIndex: Int = 0 {
         didSet {
-            if currentFeatureIndex == Feature.allFeatureTypes.count {
+            if currentFeatureIndex == features.all.count {
                 currentFeatureIndex = 0
             }
         }
@@ -62,6 +90,7 @@ final class PremiumFeaturesView: UIView {
     private var imageView = UIImageView()
     private let descriptionLabel = UILabel()
     private var timer: Timer?
+    private let features = Features()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -117,8 +146,8 @@ final class PremiumFeaturesView: UIView {
         descriptionLabel.layer.add(transition, forKey: kCATransitionFade)
         imageView.layer.add(transition, forKey: kCATransitionFade)
         
-        descriptionLabel.text = Feature.allFeatureTypes[currentFeatureIndex].title
-        imageView.image = Feature.allFeatureTypes[currentFeatureIndex].image
+        descriptionLabel.text = features.all[currentFeatureIndex].title
+        imageView.image = features.all[currentFeatureIndex].image
         
         currentFeatureIndex += 1
     }

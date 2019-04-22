@@ -20,7 +20,7 @@ class CollectionViewCellForFaceImageAddName: BaseCollectionViewCell {
         contentView.backgroundColor = .white
     }
     
-    override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
+    override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
         guard let item = wrappedObj as? Item else {
             return
         }

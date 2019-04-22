@@ -25,4 +25,14 @@ class TermsAndServicesRouter: TermsAndServicesRouterInput {
     func closeModule() {
         routerVC.popViewController()
     }
+    
+    func goToTurkcellAndGroupCompanies() {
+        let vc = WebViewController(urlString: RouteRequests.turkcellAndGroupCompanies)
+        RouterVC().pushViewController(viewController: vc)
+    }
+    
+    func goToCommercialEmailMessages() {
+        let vc = FullscreenTextController(text: TextConstants.commercialEmailMessages)
+        RouterVC().pushViewController(viewController: vc)
+    }
 }

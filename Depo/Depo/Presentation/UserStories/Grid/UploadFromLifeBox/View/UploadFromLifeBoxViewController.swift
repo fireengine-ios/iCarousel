@@ -16,7 +16,7 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        scrolliblePopUpView.isEnable = false
+        scrollablePopUpView.isEnable = false
         super.viewDidAppear(animated)
     }
     
@@ -52,7 +52,7 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
         dismiss(animated: true, completion: nil)
     }
     
-    override func isNeedShowTabBar() -> Bool {
+    override func isNeedToShowTabBar() -> Bool {
         return false
     }
     

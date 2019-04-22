@@ -10,8 +10,9 @@ import Foundation
 
 protocol PackagesRouterInput {
     func openTermsOfUse()
-    func openLeavePremium()
+    func openLeavePremium(type: LeavePremiumType)
     func openMyStorage(storageUsage: UsageResponse?)
+    func openUserProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool)
     
     func showSuccessPurchasedPopUp(with delegate: PackagesPresenter)
 }

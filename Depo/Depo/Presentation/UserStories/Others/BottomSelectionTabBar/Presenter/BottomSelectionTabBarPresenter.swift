@@ -147,9 +147,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             interactor.download(item: selectedItems)
         case .edit:
             MenloworksTagsService.shared.onEditClicked()
-            RouterVC().getViewControllerForPresent()?.showSpiner()
+            RouterVC().getViewControllerForPresent()?.showSpinner()
             self.interactor.edit(item: selectedItems, complition: {
-                RouterVC().getViewControllerForPresent()?.hideSpiner()
+                RouterVC().getViewControllerForPresent()?.hideSpinner()
             })
         case .info:
             if let firstSelected = selectedItems.first as? Item {
@@ -312,9 +312,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 
             case .edit:
                 action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
-                    RouterVC().tabBarVC?.showSpiner()
+                    RouterVC().tabBarVC?.showSpinner()
                     self.interactor.edit(item: currentItems, complition: {
-                        RouterVC().tabBarVC?.hideSpiner()
+                        RouterVC().tabBarVC?.hideSpinner()
                     })
                 })
             case .download:

@@ -69,7 +69,7 @@
 "You can open settings and cancel subscption." = "Puede abrir el menú configuraciones y cancelar la suscripción.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Envíe un mensaje de texto con el mensaje \"Iptal LIFEBOX %@\" al 2200 para cancelar su paquete";
 "You can visit iTunes to cancel your subscription" = "Puede visitar iTunes para cancelar su paquete";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, ¡no puedo creer que esté haciendo esto! Cuando decida reactivarlo, estaremos aquí para usted :) Si insiste, envie \"STOP\" al 2";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB ";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Los clientes Platinum y Lifecell pueden enviar LIFE CANCEL, otros clientes pueden enviar LIFEBOX CANCEL al 3030 para cancelar su membresía.";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Para desactivar lifebox 50GB envíe SMS con el texto 50VYKL, para lifebox 500GB envíe SMS con el texto 500VYKL al número 8080.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Los clientes Platinum y Lifecell pueden enviar LIFE, otros clientes pueden enviar LIFEBOX 50GB para el paquete lifebox de 50GB, LIFEBOX 500GB para el paquete lifebox 500GB y LIFEBOX 2.5TB para el paquete lifebox 2.5TB a 3030 para comenzar su membresía";
@@ -251,7 +251,7 @@
 "Logout" = "Salir";
 "Help & Support" = "Preguntas Más Frecuentes";
 "Lifebox Touch ID and Passcode" = "Lifebox Touch ID y clave de acceso";
-"Usage Info and Packages" = "Información de uso y paquetes";
+"Usage Info and Packages" = "Detalles de cuenta y uso";
 "Recently Deleted Files" = "Archivos eliminados recientemente";
 "Auto Sync" = "Sincronización Automática";
 "Back-up my contacts" = "Copia de seguridad de mis contactos";
@@ -427,7 +427,7 @@
 "Folder Items" = "Elementos %d";
 "Contact Backup" = "Copia de seguridad de contactos";
 "Your last contact update was %@ months ago!" = "¡Su última actualización de contacto fue hace %@ meses!";
-"It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Han pasado% @ meses desde la última vez que actualizó sus contactos, realice la actualización ya para no perder ninguno de sus contactos.";
+"It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Han pasado %@ meses desde la última vez que actualizó sus contactos, realice la actualización ya para no perder ninguno de sus contactos.";
 "Your contact list looks empty" = "Su lista de contactos parece vacía";
 "You don’t have any contacts in your profile, backup your contacts now!" = "¡No tiene contactos en su perfil, haga una copia de seguridad de sus contactos ya!";
 "Backup" = "Copia de seguridad";
@@ -544,7 +544,7 @@
 "We have created an animation from your photos!" = "¡Hemos creado una animación de sus fotos!";
 "Save Animation" = "Guardar";
 "Delete Duplicated" = "Eliminar duplicado";
-"Lifebox %@ and Passcode" = "lifebox y contraseña";
+"Lifebox %@ and Passcode" = "lifebox %@ y contraseña";
 "We make easier to manage your memories with homepage" = "Hacemos que sea más fácil administrar sus momentos con la página de inicio";
 "You can reach your recent activites and suggestions that are special for you from this page" = "Puede acceder a sus actividades recientes y sugerencias personalizadas desde esta página";
 "Discover your first story" = "Descubra su primera historia";
@@ -668,8 +668,8 @@
 "Become Premium" = "Conviértete un Premium";
 "Become Premium Member!" = "Conviértete en un miembro de Premium";
 "leave_premium_membership" = "Deja la Membresía de Premium";
-"Standard User" = "Usuario estándar.";
-"Premium User" = "Cuenta de Premium.";
+"Standard User" = "Lifebox Estándar";
+"Premium User" = "lifebox Premium";
 "lifebox Premium" = "Lifebox de Premium.";
 "Delete Duplicated Contacts For PremiumTitle" = "Conviértete en un miembro de Premium para borrar todos los contactos duplicados de tu directorio de telefóno y para desbloquear muchas más funciones.";
 
@@ -700,7 +700,7 @@
 "package_lifecell_cancel_text" = "Para desactivar el lifebox de 50 GB envíe un mensaje con el texto “50VYKL” y para desactivar el lifebox de 500 GB, envíe un mensaje con el texto “500VYKL” al número 8080.";
 "package_promo_cancel_text" = "Por favor use el menú de “Contáctenos” (Contact us) para informarnos para procesar su solicitud.";
 "package_kktcell_cancel_text" = "Para cancelar sus membresías; \nLos clientes de Platinum y LifeCell pueden enviar el texto de “LIFE CANCEL”, otros clientes pueden enviar el texto de “LIFEBOX CANCEL” al número 3030.";
-"package_moldcell_cancel_text" = "Hm, no puedo creer que estés haciendo esto! Cuando decida reactivarlo, estaremos aquí para usted :) Si insiste, envíe un mensaje con el texto de \" STOP\" al número 2.";
+"package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
 "package_life_cancel_text" = "Para desactivar el lifebox de 25GB, envíe un mensaje con el texto \"Stop1\", para desactivar el lifebox de 100GB envíe un mensaje con el texto \"Stop2\", para desactivar el lifebox de 500GB, envíe un mensaje con el texto \"Stop3\" al número 6767.";
 "package_paycell_all_access_cancel_text" = "Para cancelar su paquete, por favor visite a la página de web; \nwww.mylifebox.com\n";
 "package_paycell_slcm_cancel_text" = "Para cancelar su paquete, por favor visite a la página de web; \nwww.mylifebox.com\n";
@@ -742,11 +742,11 @@
 "my_storage_usage" = "%1$@ de %2$@ ha permanecido";
 "package_section_title" = "Actualice su almacenamiento";
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "Si no tiene una cuenta de Premium, sus fotos y videos se almacenarán en alta calidad. Conviértete en un miembro de Premium para mantener tus recuerdos en calidad original. ";
-"sync_page_pop_up" = "Si no tiene una cuenta de Premium, sus fotos y videos se almacenarán en alta calidad. Conviértete en un miembro de Premium para mantener tus recuerdos en calidad original.";
+"home_page_pop_up" = "¿Querrías convertirte en miembro Premium para archivar tus recuerdos en calidad original y acceder a todas las funciones premium?";
+"sync_page_pop_up" = "¿Querrías convertirte en miembro Premium para archivar tus recuerdos en calidad original y acceder a todas las funciones premium?";
 "ok_for_upgrade" = "Sí, actualice.";
 "no_for_upgrade" = "No, estoy bien.";
-"uploded_photos_high_quality" = "Estás iniciando a la sesión en lifebox como un usuario estándar. Nosotros mantendremos todos sus fotos y videos existentes junto con los nuevos recuerdos cargados nuevamente en alta calidad hasta el 1 de marzo. ¿Desea ser un usuario Premium para guardar sus recuerdos en la calidad original y beneficiarse de los privilegios de Premium?";
+"uploded_photos_high_quality" = "¿Querrías convertirte en miembro Premium para archivar tus recuerdos en calidad original y acceder a todas las funciones premium?";
 "NSFaceIDUsageDescription" = "Esta aplicación está diseñada para usar Face ID para aumentar tu seguridad";
 
 /*AnalyzeHistoryController*/
@@ -754,8 +754,8 @@
 "package_albanian_cancel_text" = "Cuota albanesa, cancelar texto";
 "feature_albanian_cancel_text" = "Puedes seguir utilizando las funciones de Premium de forma gratuita ya que eres un usuario de ALBtelecom.";
 "no_analyses_left_title" = "No ha quedado ningún análisis.";
-"no_analyses_left_message" = "No ha quedado ningún análisis.";
-"no_analyses_left_button" = "Compra el PhotoPick.";
+"no_analyses_left_message" = "No estés triste, puede comprar un paquete nuevo todavía para analizar tus fotos!";
+"no_analyses_left_button" = "Ser Premium";
 "analyze_history_empty_title" = "¿No has empezado a analizar tus fotos todavía?";
 "analyze_history_empty_subtitle" = "Ahora empieze realizar el análisis para averiguar las cuales fotos se pueden obtener el rango más alto y compartalas en las redes sociales.";
 "analyze_history_analyze_left" = "Análisis que se han quedado.";
@@ -803,14 +803,14 @@
 "connected_with_instagram_name" = "Conéctate con Instagram  as";
 "continue_without_connecting" = "Continuar sin conectar.";
 "connected_accounts" = "Las cuentas conectadas.";
-"analyze_history_free_text" = "Gratis por tiempo limitado.";
+"analyze_history_free_text" = "Ilimitado para ti";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "Para comprar el paquete de PhotoPick, necesitas actualizar tu aplicación de Lifebox.";
 "instapick_upgrade_popup_button" = "Actualizar. ";
 "instapick_upgrade_popup_no" = "No.";
 "instapick_analysis_left" = "Análisis que se han quedado: %1$d / %2$d";
-"instapick_unlimited_analysis" = "Gratis por tiempo limitado.";
+"instapick_unlimited_analysis" = "Ilimitado para ti";
 "Facebook" = "Facebook.";
 "Dropbox" = "Dropbox.";
 "Instagram" = "Instagram.";
@@ -824,6 +824,85 @@
 "there_are_no_albums" = "No hay álbum.";
 "instapick_selection_analyzes_left_max" = "Has seleccionado %d de fotos\n(la maxima cantidad que puedes seleccionar)";
 "free_trial_title_label" = "Analizar con PhotoPick";
-"free_trial_detail_label" = "¡Descubre cual foto obtendrá el rango más alto, analiza con PhotoPick para conseguir más “me gusta”(likes)! ¡Prueba más gratis por un tiempo limitado!";
+"free_trial_detail_label" = "¡Descubre qué foto obtendrá el rango más alto, analiza con PhotoPick para más Me gusta! Ilimitado solo para ti!";
 "instapick_under_construction" = "Estamos mejorando en PhotoPick para una mejor experiencia 😉";
 "instapick_unsupported_file_type" = "Las fotos que ha seleccionado están en formato no compatible. Puedes continuar la experiencia de PhotoPick seleccionando otras fotos.";
+"work_will_introduced" = "Actualmente hay un trabajo de mantenimiento en LifeBox, porfavor inténtalo de nuevo más tarde.";
+"facebook_remove_connection_warning_title" = "Estás a punto de eliminar la conexión de Facebook.";
+"dropbox_remove_connection_warning_title" = "Estás a punto de eliminar la conexión de Dropbox.";
+"facebook_remove_connection_warning_message" = "¿Estás seguro de que quieres eliminar tu conexión de Facebook?";
+"dropbox_remove_connection_warning_message" = "¿Estás seguro de que quieres eliminar tu conexión de Dropbox?";
+"remove_connection" = "Eliminar la conexión.";
+"you_are_connected" = "Conectado";
+"insta_pick_picture_not_found" = "La imagen no se \nha encontrada";
+"phone_updated_needs_login" = "Ha actualizado su número de teléfono con éxito, inicie sesión con sus credenciales";
+"server_under_maintenance" = "En Lifebox ahora se lleva a cabo un mantenimiento, por favor intentarlo de nuevo más tarde. ";
+"unlimited_photopick_analysis" = "Derecho PhotoPick ilimitado!";
+"data_advantage_short" = "Paquete de datos adicional";
+"additional_data_advantage" = "Paquete de datos adicional";
+"connection_problem_occured" = "Error de conexión. Por favor intentarlo de nuevo más tarde.";
+"turkcell_purchase_popup_title" = "%@";
+"mid_user" = "Lifebox estándar+";
+"instapick_no_available_units_left" = "No tienes derecho de análisis.";
+"middle_user" = "Lifebox estándar+";
+"lifebox_middle" = "Lifebox estándar+";
+"lifebox_standart" = "Lifebox estándar+";
+"account_detail_middle_title" = "Puedes utilizar todas las siguientes funciones avanzadas de lifebox con la membresía Estándar+";
+"account_detail_middle_description" = "No podrás beneficiarte de estas funciones cuando termines la membresía Estándar+";
+"account_detail_standart_title" = "Estás utilizando lifebox como la cuenta estándar.";
+"account_detail_standart_description" = "Puedes utilizar las siguientes funciones con lifebox estándar.";
+
+/*AnalyzeHistoryController*/
+"instapick_see_details" = "Ser Premium.";
+"store_in_high_quality" = "Copiar tus recuerdos en la calidad alta. ";
+"5_photopick_analysis" = "Derecho de análisis de 5 PhotoPick";
+"10_photopick_analysis" = "Derecho de análisis de +10 PhotoPick";
+"data_package_for_turkcell" = "Paquete de datos adicional. ";
+"delete_duplicated_contacts" = "Eliminar los contactos repetidos en su guía telefónica.";
+"leave_middle_membership" = "Terminar la membresía Estándar+";
+"leave_middle_turkcell" = "Para cancelar el paquete por favor escribir CANCELACIÓN LIFEBOX ESTÁNDAR+ y enviarlo a 2200.";
+"package_FWI_cancel_text" = "";
+"package_jamaica_cancel_text" = "";
+"feature_digicell_cancel_text" = "";
+"terms_and_use_etk_checkbox" = "Acepto recibir mensajes de correo electrónico comercial acerca de las propuestas de productos y servicios ventajosos de Turkcell y las Compañias del Grupo de conformidad con la Ley 6563 y demás legislación pertinente, hasta que haya dicho lo contrario";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell y las Compañias del Grupo";
+"terms_and_use_etk_link_commercial_email_messages" = "correo electrónico comercial";
+"commercial_email_messages" = "INFORMACIÓN SOBRE LA AUTORIZACIÓN DE MENSAJE ELECTRÓNICO COMERCIAL\n\nACEPTO Y APRUEBO  válidamente que la información que proporciono durante la suscripción de la aplicación Lifebox o que constan en el banco de datos de Turkcell y las Compañias del Grupo puede ser utilizado con el fin de promover y comercializar novedades, productos y servicios de Turkcell y las Compañias del Grupo, así como para el anuncio de las oportunidades exclusivas o generales por parte de Turkcell y las Compañias del Grupo mediante el envío de mensajes electrónicos comerciales (mensajes de datos, audio y video enviados electrónicamente y enviados con fines comerciales por teléfono, centros de llamadas, fax, máquinas de búsqueda automática, sistemas inteligentes de grabación de voz, correo electrónico, servicios de mensajería de texto, etc.) de conformidad con la Ley N° 6563 del Reglamento de Comercio Electrónico (“La Ley”) y dentro del marco del Reglamento sobre comunicación comercial y mensajes electrónicos comerciales (“El Reglamento”) y indefinidamente, hasta que haya usado mi derecho a rechazar.  \nSegún el Reglamento, los mensajes electrónicos comerciales que se envían a los suscriptores y usuarios exclusivamente por parte de los Operadores dentro del ámbito de la Ley 5809 de Comunicación Electrónica, para promocionar sus propios bienes y servicios, para comercializar o para promocionar sus negocios están cubiertos por la excepción. Por este motivo, ACEPTO que la aprobación concedad en el anterior es independiente de la aprobación que he dado para la promoción de los productos y servicios ofertados por la empresa que de la cual soy un suscriptor /usuario, y según mi previa aprobación podría recibir mensajes electrónicos comerciales, promocionales acerca de los  productos y servicios de esta empresa con este texto en el ámbito de la Ley y el Reglamento incluso si cancelo la aprobación que he concedido anteriormente; y también puedo rechazar dichos mensajes electrónicos comerciales.";
+"NSLocationAlwaysUsageDescription" = "Su ubicación se utilizará para la sincronización de fondo";
+"NSPhotoLibraryAddUsageDescription" = "Se necesita su permiso para acceder a la biblioteca de fotos para guardar sus fotos y videos";
+"NSPhotoLibraryUsageDescription" = "Se necesita su permiso para acceder a la biblioteca de fotos para mostrar fotos y videos en la aplicación";
+
+/*Usage Info*/
+"package_space_details" = "%1$@ / % 2$@ internet usado (solo para uso de la caja de vida)";
+"package_renew_date" = "Será renovado en: %@";
+"percentage_used" = "%.0f%% utilizado";
+"used_and_left_space" = "%1$@ / %2$@ utilizado";
+"percentage_used_two_lines" = "%.0f%%\nutilizado";
+"my_usage_storage" = "Mi uso de internet";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Su ubicación se utilizará para la sincronización de fondo";
+"name" = "Nombre";
+"surname" = "Apellido";
+"change password" = "Cambia la contraseña";
+"left_space" = "%1$@ / %2$@";
+
+/*Packages*/
+"packages_i_have" = "Paquetes que tengo";
+"account_details" = "Detalles de la cuenta";
+"my_profile" = "Mi perfil";
+"account_type" = "Tipo de cuenta";
+"standard_plus" = "Lifebox Estándar+";
+"standard" = "Lifebox Estándar";
+"premium" = "lifebox Premium";
+"old_password" = "Contraseña anterior";
+"new_password" = "Nueva contraseña";
+"repeat_password" = "Escriba la contraseña otra vez";
+"change_password_captcha_answer_placeholder" = "Escribe el texto";
+"temporary_error_occurred_try_again_later" = "Ocurrió un error temporal, inténtalo de nuevo más tarde.";
+"old_password_does_not_match" = "La contraseña anterior se ingresó incorrectamente";
+"new_password_and_repeated_password_does_not_match" = "Estas contraseñas no coinciden";
+"new_password_is_empty" = "El nuevo campo de contraseña está vacío";
+"old_password_is_empty" = "El campo de contraseña anterior está vacío";
+"repeat_password_is_empty" = "El campo de repetición de contraseña está vacío";
+"this_text_is_empty" = "Este texto esta vacio";
+"password_changed_successfully" = "Tu contraseña ha sido cambiada exitosamente";
+"password_changed_successfully_relogin" = "Has cambiado satisfactoriamente tu contraseña. Por favor, vuelva a iniciar sesión con su nueva contraseña.";

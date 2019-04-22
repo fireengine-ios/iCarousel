@@ -53,7 +53,7 @@ extension FileInfoPresenter: FileInfoInteractorOutput {
     }
     
     func updated() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         view.goBack()
     }
     
@@ -70,12 +70,12 @@ extension FileInfoPresenter: FileInfoInteractorOutput {
     }
 
     func cancelSave(use name: String) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         view.show(name: name)
     }
     
     func failedUpdate(error: Error) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         view.showErrorAlert(message: error.description)
     }
     

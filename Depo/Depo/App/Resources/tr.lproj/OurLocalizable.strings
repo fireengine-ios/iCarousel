@@ -2,7 +2,7 @@
 "Welcome1SubInfo" = "Tüm anılarını, dosyalarını ve kontaklarını lifebox'a güvenle yedekle!";
 "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Cihaz ayarlarındaki konum servisleri devre dışı durumda. Arka planda lifebox’un otomatik yedekleme özelliğini kullanmak için “Ayarlar – Gizlilik – Konum Servisleri” üzerinden konum servislerini etkinleştirmen gerek.";
 "This file will be removed only from your album. You can access this file from Photos tab" = "Bu dosya sadece albümünden kaldırılacak. Fotoğraflar sekmesi üzerinden bu dosyaya erişebilirsin. Çıkarmak istediğine emin misin?";
-"Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Bu albümü sildiğinde albümün içindeki dosyalar lifebox'ından kalmaya devam edecek. Dosyalarına Fotoğraflar sekmesinden ulaşabilirsin. Silmek istdiğine emin misin?";
+"Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Bu albümü sildiğinde albümün içindeki dosyalar lifebox'ında kalmaya devam edecek. Dosyalarına Fotoğraflar sekmesinden ulaşabilirsin. Silmek istediğine emin misin?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Bu dosyayı silersen, lifebox'ından da tamamen silinir. Silmek istediğine emin misin?";
 "Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Bu dosyaları silersen, lifebox'ından da tamamen silinir. Silmek istediğine emin misin?";
 "Purchase" = "Satın Al";
@@ -71,7 +71,7 @@
 "You can open settings and cancel subscption." = "Paketini iptal etmek için iTunes’u ziyaret edebilirsin.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Paketini iptal etmek için lütfen “IPTAL LIFEBOX %@” yazıp 2200’a gönder.";
 "You can visit iTunes to cancel your subscription" = "Paketini iptal etmek için iTunes’u ziyaret edebilirsin.";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Bu yaptığına inanamıyorum! Tekrar etkinleştirmeye karar verdiğinde senin için burada olacağız :) Bunu yapmakta kararlıysan “STOP” yaz 2’e gönder.";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, bunu yaptığınıza inanamıyoruz! Yeniden etkinleştirmek istediğinizde, sizi bekliyor olacağız :) Eğer ısrarlı iseniz, 100GB iptali için 2 yazıp 10010'a, 500GB iptali için 2 yazıp 50030'a SMS gönderin.";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Platinum ve lifecell müşterileri üyeliklerini iptal etmek için LIFE CANCEL yazarak, diğer müşteriler ise LIFEBOX CANCEL yazarak 3030’a gönderebilirler.";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "lifebox 50 GB’yi devre dışı bırakmak için 50VYKL yazarak, lifebox 500 GB için ise 500VYKL yazarak 8080’e SMS gönderin.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Platinum ve lifecell müşterileri üyeliklerini başlatmak için LIFE yazarak, diğer müşteriler ise lifebox 50 GB paketi için LIFEBOX 50GB, lifebox 500GB paketi için LIFEBOX 500GB ve lifebox 2.5TB paketi için LIFEBOX 2.5TB yazarak 3030’a SMS gönderebilirler.";
@@ -255,7 +255,7 @@
 "Logout" = "Çıkış Yap";
 "Help & Support" = "Sıkça Sorulan Sorular";
 "Lifebox Touch ID and Passcode" = "lifebox Touch ID ve Parola";
-"Usage Info and Packages" = "Kullanım Bilgileri ve Paketler";
+"Usage Info and Packages" = "Hesap & Kullanım Bilgileri";
 "Recently Deleted Files" = "Son Silinen Dosyalar";
 "Auto Sync" = "Otomatik Yedekleme";
 "Back-up my contacts" = "Telefon Rehberimi Yedekle";
@@ -390,7 +390,7 @@
 "Start using Lifebox now!" = "Yeni hesap oluştur";
 "E-mail field is invalid" = "E-posta alanı geçersiz";
 "Delete Device Original" = "Orijinalini cihazdan silin";
-"Please check your internet connection is active and Mobile Data is ON." = "Lütfen internet bağlantınıın aktif ve mobil verinin açık olduğunu kontrol et.";
+"Please check your internet connection is active and Mobile Data is ON." = "Lütfen internet bağlantının aktif ve mobil verinin açık olduğunu kontrol et.";
 "cancelled" = "Iptal edildi";
 "The network connection was lost." = "Ağ bağlantısı kaybedildi";
 "ServiceError" = "Servis Hatası";
@@ -432,7 +432,7 @@
 "Folder is Empty" = "Klasör Boş";
 "Folder Items" = "%d Öğeler";
 "Contact Backup" = "Kontak Yedekleme";
-"Your last contact update was %@ months ago!" = "Kontaklarını en son%@ ay önce yedekledin!";
+"Your last contact update was %@ months ago!" = "Kontaklarını en son %@ ay önce yedekledin!";
 "It has been %@ months since you last updated your contacts, update now to never loose any of your contacts." = "Kontak listenizi en son güncellediğiniz tarihten bu yana %@ ay oldu. Kontaklarını hiçbir zaman kaybetmemek için şimdi yeniden yedekle.";
 "Your contact list looks empty" = "Kişi listen boş görünüyor";
 "You don’t have any contacts in your profile, backup your contacts now!" = "Hesabında hiçbir kontak bulunmuyor, kontaklarını hemen yedekle!";
@@ -549,7 +549,7 @@
 "Animation" = "Animasyon";
 "We have created an animation from your photos!" = "Fotoğraflarından bir animasyon oluşturduk!";
 "Save Animation" = "Kaydet";
-"Delete Duplicated" = "Tekrarlayanları Sil";
+"Delete Duplicated" = "Tekrarlayanları\nSil";
 "Lifebox %@ and Passcode" = "lifebox %@ ve Parola";
 "We make easier to manage your memories with homepage" = "Anasayfa ile tüm anılarını yönetmeni senin için daha kolay hale getirdik.";
 "You can reach your recent activites and suggestions that are special for you from this page" = "Bu alandan güncel hareketlerine ve sana özel önerilerimize ulaşabilirsin.";
@@ -676,8 +676,8 @@
 "Become Premium" = "Premium Ol";
 "Become Premium Member!" = "Premium Ol!";
 "leave_premium_membership" = "Premium'dan Ayrıl";
-"Standard User" = "Standart Hesap";
-"Premium User" = "Premium Hesap";
+"Standard User" = "lifebox Standart";
+"Premium User" = "lifebox Premium";
 "lifebox Premium" = "lifebox Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "Telefon rehberindeki tekrarlayan kontakları silmek ve Premium hesabın diğer avantajlı özelliklerinden faydalanmak için Premium ol!";
 
@@ -708,7 +708,7 @@
 "package_lifecell_cancel_text" = "lifebox 50 GB’yi devre dışı bırakmak için 50VYKL yazarak, lifebox 500 GB için ise 500VYKL yazarak 8080’e SMS gönderin.";
 "package_promo_cancel_text" = "Bize Ulaşın menüsünden iptal talebini bize iletebilirsin.";
 "package_kktcell_cancel_text" = "Platinum ve lifecell müşterileri üyeliklerini iptal etmek için LIFE CANCEL yazarak, diğer müşteriler ise LIFEBOX CANCEL yazarak 3030’a gönderebilirler.";
-"package_moldcell_cancel_text" = "Bu yaptığına inanamıyorum! Tekrar etkinleştirmeye karar verdiğinde senin için burada olacağız :) Bunu yapmakta kararlıysan “STOP” yaz 2’e gönder.";
+"package_moldcell_cancel_text" = "Hm, bunu yaptığınıza inanamıyoruz! Yeniden etkinleştirmek istediğinizde, sizi bekliyor olacağız :) Eğer ısrarlı iseniz, 100GB iptali için 2 yazıp 10010'a, 500GB iptali için 2 yazıp 50030'a SMS gönderin.";
 "package_life_cancel_text" = "lifebox 25GB paketini iptal etmek için lütfen “Stop1” metnini kullanarak,  lifebox 100GB paketini iptal etmek için lütfen “Stop2” metnini kullanarak, lifebox 500GB paketini iptal etmek için lütfen “Stop3” metnini kullanarak, 6767'ye SMS atın.";
 "package_paycell_all_access_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
 "package_paycell_slcm_cancel_text" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
@@ -750,11 +750,11 @@
 "my_storage_usage" = "%2$@’nin %1$@'si kaldı";
 "package_section_title" = "Saklama alanını yükselt";
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "lifebox'a standart kullanıcı olarak giriş yapıyorsun. Hesabını Premium'a yükseltmezsen içeriklerin orijinal olarak saklanmaya devam edemeyecek. Orijinal kalitede saklanabilmesi için Premium olup ayrıcalıklardan faydalanmak ister misin?";
-"sync_page_pop_up" = "lifebox'a standart kullanıcı olarak giriş yapıyorsun. Hesabını Premium'a yükseltmezsen içeriklerin orijinal olarak saklanmaya devam edemeyecek. Orijinal kalitede saklanabilmesi için Premium olup ayrıcalıklardan faydalanmak ister misin?";
+"home_page_pop_up" = "Anılarını orijinal kalitede saklamak ve tüm premium özelliklere erişmek için Premium üye olmak ister misin?";
+"sync_page_pop_up" = "Anılarını orijinal kalitede saklamak ve tüm premium özelliklere erişmek için Premium üye olmak ister misin?";
 "ok_for_upgrade" = "Evet, Premium Ol";
 "no_for_upgrade" = "Hayır, Devam Et";
-"uploded_photos_high_quality" = "lifebox'a standart kullanıcı olarak giriş yapıyorsun. Hesabını Premium'a yükseltmezsen içeriklerin orijinal olarak saklanmaya devam edemeyecek. Orijinal kalitede saklanabilmesi için Premium olup ayrıcalıklardan faydalanmak ister misin?";
+"uploded_photos_high_quality" = "Anılarını orijinal kalitede saklamak ve tüm premium özelliklere erişmek için Premium üye olmak ister misin?";
 "NSFaceIDUsageDescription" = "Uygulamamız güvenliğin için Face ID özelliğini kullanmanı sağlayabilir";
 
 /*AnalyzeHistoryController*/
@@ -763,7 +763,7 @@
 "feature_albanian_cancel_text" = "ALBtelecom kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
 "no_analyses_left_title" = "Analiz hakkın kalmadı";
 "no_analyses_left_message" = "Hakkın bitti diye üzülme, yeni fotoğraflar sorgulamak için hemen paket satın alabilirsin!";
-"no_analyses_left_button" = "PhotoPick Al";
+"no_analyses_left_button" = "Premium Ol";
 "analyze_history_empty_title" = "Henüz fotoğraflarını analiz etmeye başlamadın mı?";
 "analyze_history_empty_subtitle" = "Hangi fotoğrafının daha yüksek puan alacağını öğrenmek ve sosyal medyada paylaşmak için hemen analize başla";
 "analyze_history_analyze_left" = "Analiz Hakkı";
@@ -811,20 +811,20 @@
 "connected_with_instagram_name" = "Instagram'la Bağlan :";
 "continue_without_connecting" = "Bağlamadan devam et";
 "connected_accounts" = "Bağlı Hesaplar";
-"analyze_history_free_text" = "Sınırlı Bir Süre Ücretsiz!";
+"analyze_history_free_text" = "Senin için Sınırsız";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "PhotoPick paketi almak için uygulamanı güncellemen gerekiyor.";
 "instapick_upgrade_popup_button" = "Güncelle";
 "instapick_upgrade_popup_no" = "Hayır";
 "instapick_analysis_left" = "Analiz hakkı: %1$d / %2$d";
-"instapick_unlimited_analysis" = "Sınırlı Bir Süre Ücretsiz!";
+"instapick_unlimited_analysis" = "Senin için Sınırsız";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
 "connected_as_format" = "Bağlı hesap: @%@";
 "instagram_remove_connection_warning_title" = "Instagram bağlantını kaldırmak üzeresin";
-"instagram_remove_connection_warning_message" = "Instagram ile olan bağlantını kaldırmak istediğine emin misin?\\n\\n";
+"instagram_remove_connection_warning_message" = "Instagram ile olan bağlantını kaldırmak istediğine emin misin?\n\n";
 "instapick_selection_photos_selected" = "Seçili Fotoğraf (%d)";
 "instapick_selection_analyzes_left" = "Sadece %d analiz hakkın kaldı";
 "loading" = "Yükleniyor...";
@@ -832,6 +832,85 @@
 "there_are_no_albums" = "Hiç albüm yok";
 "instapick_selection_analyzes_left_max" = "%d fotoğraf seçtin\n(1 sorguda seçebileceğin en yüksek sayı)";
 "free_trial_title_label" = "PhotoPick ile Analiz Et!";
-"free_trial_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Üstelik daha çok dene diye sınırlı bir süre için ücretsiz!";
+"free_trial_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Üstelik senin için sınırsız!";
 "instapick_under_construction" = "Daha iyi bir deneyim yaşaman için PhotoPick'i iyileştiriyoruz 😉";
 "instapick_unsupported_file_type" = "Seçmiş olduğun fotoğraflar desteklenmeyen bir formatta. Başka fotoğraflar seçerek PhotoPick deneyimini yaşamaya devam edebilirsin.";
+"work_will_introduced" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
+"facebook_remove_connection_warning_title" = "Facebook bağlantını kaldırmak üzeresin.";
+"dropbox_remove_connection_warning_title" = "Dropbox bağlantını kaldırmak üzeresin.";
+"facebook_remove_connection_warning_message" = "Facebook ile olan bağlantını kaldırmak istediğine emin misin?\n\n";
+"dropbox_remove_connection_warning_message" = "Dropbox ile olan bağlantını kaldırmak istediğine emin misin?";
+"remove_connection" = "Bağlantıyı kaldır";
+"you_are_connected" = "Bağlı";
+"insta_pick_picture_not_found" = "Fotoğraf \nbulunamadı";
+"phone_updated_needs_login" = "Başarılı biçimde telefon numaranızı güncellediniz, lütfen kullanıcı adınız ve şifren ile giriş yap";
+"server_under_maintenance" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
+"unlimited_photopick_analysis" = "Sınırsız PhotoPick Hakkı!";
+"data_advantage_short" = "Ek data paketi";
+"additional_data_advantage" = "Ek data paketi";
+"connection_problem_occured" = "Bağlantı hatası. Lütfen daha sonra tekrar deneyin.";
+"turkcell_purchase_popup_title" = "%@";
+"mid_user" = "lifebox Standart+";
+"instapick_no_available_units_left" = "Analiz hakkın kalmadı";
+"middle_user" = "lifebox Standart+";
+"lifebox_middle" = "lifebox Standart+";
+"lifebox_standart" = "lifebox Standart";
+"account_detail_middle_title" = "Standart+ üyeliğin ile lifebox'ın aşağıdaki tüm gelişmiş özelliklerini kullanabiliyorsun.";
+"account_detail_middle_description" = "Standart+ üyeliğini sonlandırdığında bu özelliklerden faydalanamayacaksın.";
+"account_detail_standart_title" = "lifebox'ı Standart hesap olarak kullanıyorsun.";
+"account_detail_standart_description" = "lifebox Standart ile aşağıdaki özellikleri kullanabilirsin.";
+
+/*AnalyzeHistoryController*/
+"instapick_see_details" = "Premium Ol";
+"store_in_high_quality" = "Anılarını yüksek kalitede yedekle";
+"5_photopick_analysis" = "5 PhotoPick Analiz Hakkı";
+"10_photopick_analysis" = "+10 PhotoPick Analiz Hakkı";
+"data_package_for_turkcell" = "Ek data paketi";
+"delete_duplicated_contacts" = "Rehberindeki tekrarlayan kontakları sil!";
+"leave_middle_membership" = "Standart+ üyeliğini sonlandır";
+"leave_middle_turkcell" = "Paketini iptal etmek için lütfen IPTAL LIFEBOX STANDART+ yazıp 2200’a gönder.";
+"package_FWI_cancel_text" = "";
+"package_jamaica_cancel_text" = "";
+"feature_digicell_cancel_text" = "Digicell kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
+"terms_and_use_etk_checkbox" = "Turkcell ve Grup Şirketleri’nin avantajlı ürün ve hizmetlerden haberdar olmak için 6563 sayılı Kanun ve diğer ilgili mevzuat uyarınca aksi tarafımca belirtilene kadar ticari elektronik ileti almak istiyorum.";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell ve Grup Şirketleri";
+"terms_and_use_etk_link_commercial_email_messages" = "ticari elektronik ileti";
+"commercial_email_messages" = "TİCARİ ELEKTRONİK İLETİ İZNİ HAKKINDA BİLGİLENDİRME\n\nlifebox uygulamasına üyelik sırasında verdiğim veya Turkcell ve Grup Şirketleri nezdinde bulunan iletişim bilgilerim aracılığı ile Turkcell ve Grup Şirketleri’ne ve/veya işbirliği içerisinde olduğu kuruluşlara ilişkin çeşitli ve yeni ürün-hizmetlerin tanıtım ve pazarlanması amacıyla ve genel/özel imkanların duyurulması için Turkcell ve Grup Şirketleri’nce tarafıma 6563 sayılı Elektronik Ticaretin Düzenlenmesi Hakkında Kanun ( “Kanun”) ve Ticari İletişim ve Ticari Elektronik İletiler Hakkında Yönetmelik ( “Yönetmelik”) çerçevesince ticari elektronik iletiler (telefon, çağrı merkezleri, faks, otomatik arama makineleri, akıllı ses kaydedici sistemler, elektronik posta, kısa mesaj hizmeti gibi vasıtalar kullanılarak elektronik ortamda gerçekleştirilen ve ticari amaçla gönderilen veri, ses ve görüntü içerikli iletileri)  gönderilmesine  kullanıcı sözleşmesi sona erse dahi reddetme hakkımı kullanıncaya kadar süresiz olarak geçerli şekilde onayım olduğunu kabul ederim.\n \nYönetmelik uyarınca 5809 sayılı Elektronik Haberleşme Kanunu kapsamındaki işletmecilerin abone ve kullanıcılarına; münhasıran kendi mal ve hizmetlerini tanıtmak, pazarlamak ya da işletmesini tanıtmak amacıyla gönderdiği ticari elektronik iletiler istisna kapsamındadır. Bu sebeple yukarıda verdiğim onayın abonesi/kullanıcısı olduğum işletmeci şirkete verdiğim kendi ürün ve hizmetlerinin tanıtımına ilişkin onaydan bağımsız ve ayrı bir onay olduğunu ve reddetme hakkımı kullanarak Kanun ve Yönetmelik kapsamında işbu metin ile vermekte olduğum onayı iptal etsem bile abonesi olduğum  işletmeciye verdiğim onay dahilinde, bu işletmeciden kendi mal ve hizmetlerine ilişkin tanıtım, pazarlama vb. amaçları içeren ticari elektronik ileti gelebileceğini, işbu ticari elektronik iletileri de ayrıca reddetme imkanım olduğunu bildiğimi kabul ederim.";
+"NSLocationAlwaysUsageDescription" = "Arka planda yedekleme yapabilmek için lokasyonun kullanılacaktır.";
+"NSPhotoLibraryAddUsageDescription" = "Uygulamanın, cihaz galerine ulaşabilmesi için iznin gerekiyor.";
+"NSPhotoLibraryUsageDescription" = "Fotoğraf ve videolarını uygulamada gösterebilmek için iznin gerekiyor.";
+
+/*Usage Info*/
+"package_space_details" = "%1$@ / %2$@ internet kullanıldı (lifebox kullanımı için)";
+"package_renew_date" = "Yenilenme tarihi: %@";
+"percentage_used" = "%.0f%% kullanıldı";
+"used_and_left_space" = "%1$@ / %2$@ kullanıldı";
+"percentage_used_two_lines" = "%.0f%%\nkullanıldı";
+"my_usage_storage" = "İnternet Kullanımım";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Arka planda yedekleme yapabilmek için lokasyonun kullanılacaktır.";
+"name" = "İsim";
+"surname" = "Soyisim";
+"change password" = "Şifre Değiştir";
+"left_space" = "%1$@ / %2$@";
+
+/*Packages*/
+"packages_i_have" = "Saklama Alanı Paketlerim";
+"account_details" = "Hesap Detayları";
+"my_profile" = "Profil Bilgilerim";
+"account_type" = "Hesap Tipi";
+"standard_plus" = "lifebox Standart+";
+"standard" = "lifebox Standart";
+"premium" = "lifebox Premium";
+"old_password" = "Eski Şifre";
+"new_password" = "Yeni Şifre";
+"repeat_password" = "Yeni Şifre Tekrar";
+"change_password_captcha_answer_placeholder" = "Lütfen metni gir";
+"temporary_error_occurred_try_again_later" = "Geçici bir hata oluştu, lütfen daha sonra tekrar dene.";
+"old_password_does_not_match" = "Eski şifre yanlış girildi.";
+"new_password_and_repeated_password_does_not_match" = "Şifreler uyuşmuyor.";
+"new_password_is_empty" = "Yeni şifre alanı boş.";
+"old_password_is_empty" = "Eski şifre alanı boş.";
+"repeat_password_is_empty" = "Yeni şifre tekrar alanı boş.";
+"this_text_is_empty" = "Bu alan boş.";
+"password_changed_successfully" = "Şifren başarılı bir şekilde değiştirildi.";
+"password_changed_successfully_relogin" = "Şifren başarılı bir şekilde değiştirildi. Lütfen yeni şifren ile tekrar giriş yap.";

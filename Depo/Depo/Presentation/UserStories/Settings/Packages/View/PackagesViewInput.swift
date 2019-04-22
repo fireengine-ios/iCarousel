@@ -9,7 +9,7 @@
 protocol PackagesViewInput: class, ActivityIndicator {
     func display(error: ErrorResponse)
     func display(errorMessage: String)
-    func showActivateOfferAlert(with price: String, for offer: PackageModelResponse, planIndex: Int)
+    func showActivateOfferAlert(with title: String, price: String, for offer: PackageModelResponse, planIndex: Int)
     func show(promocodeError: String)
     func successedPromocode()
     
@@ -17,5 +17,5 @@ protocol PackagesViewInput: class, ActivityIndicator {
     func showInAppPolicy()
     func reloadData()
 
-    func setupStackView(with storageCapacity: Int64)
+    func setupStackView(with storageCapacity: CGFloat)
 }

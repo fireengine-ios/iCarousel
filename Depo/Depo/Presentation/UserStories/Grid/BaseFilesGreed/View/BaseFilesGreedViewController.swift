@@ -44,7 +44,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var noFilesTopLabel: UILabel?
     
-    var scrolliblePopUpView = ViewForPopUp()
+    var scrollablePopUpView = ViewForPopUp()
     
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
     
@@ -118,8 +118,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         if let searchController = navigationController?.topViewController as? SearchViewController {
             searchController.dismissController(animated: false)
         }
-        scrolliblePopUpView.isActive = true
-        CardsManager.default.updateAllProgressesInCardsForView(view: scrolliblePopUpView)
+        scrollablePopUpView.isActive = true
+        CardsManager.default.updateAllProgressesInCardsForView(view: scrollablePopUpView)
         output.needToReloadVisibleCells()
     }
     
@@ -131,12 +131,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        scrolliblePopUpView.isActive = false
+        scrollablePopUpView.isActive = false
         super.viewDidDisappear(animated)
     }
     
     func configurateViewForPopUp() {
-        CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
+        CardsManager.default.addViewForNotification(view: scrollablePopUpView)
     }
     
     func configurateNavigationBar() {
@@ -150,7 +150,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     deinit {
-         CardsManager.default.removeViewForNotification(view: scrolliblePopUpView)
+         CardsManager.default.removeViewForNotification(view: scrollablePopUpView)
          NotificationCenter.default.removeObserver(self)
     }
     
@@ -295,7 +295,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func showNoFilesTop(text: String) {
         noFilesTopLabel?.text = text
-        noFilesTopLabel?.isHidden = !scrolliblePopUpView.viewsArray.isEmpty
+        noFilesTopLabel?.isHidden = !scrollablePopUpView.viewsArray.isEmpty
         topBarContainer.isHidden = true
         floatingHeaderContainerHeightConstraint.constant = 0
         view.layoutIfNeeded()
@@ -359,7 +359,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     private func setupSlider(sliderController: LBAlbumLikePreviewSliderViewController) {
         contentSlider = sliderController
 
-        var height = scrolliblePopUpView.frame.size.height + BaseFilesGreedViewController.sliderH
+        var height = scrollablePopUpView.frame.size.height + BaseFilesGreedViewController.sliderH
         if showOnlySyncItemsCheckBox != nil {
             height += showOnlySyncItemsCheckBoxHeight
         }
@@ -379,7 +379,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         subView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        let relatedView = showOnlySyncItemsCheckBox ?? scrolliblePopUpView
+        let relatedView = showOnlySyncItemsCheckBox ?? scrollablePopUpView
         
         var constraintsArray = [NSLayoutConstraint]()
         constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .top, relatedBy: .equal, toItem: relatedView, attribute: .bottom, multiplier: 1, constant: 0))
@@ -402,21 +402,21 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     private func setupViewForPopUp() {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        collectionView.addSubview(scrolliblePopUpView)
+        collectionView.addSubview(scrollablePopUpView)
         
-        scrolliblePopUpView.translatesAutoresizingMaskIntoConstraints = false
+        scrollablePopUpView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         var constraintsArray = [NSLayoutConstraint]()
-        contentSliderTopY = NSLayoutConstraint(item: scrolliblePopUpView, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: 0)
+        contentSliderTopY = NSLayoutConstraint(item: scrollablePopUpView, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: 0)
         constraintsArray.append(contentSliderTopY!)
-        constraintsArray.append(NSLayoutConstraint(item: scrolliblePopUpView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
-        constraintsArray.append(NSLayoutConstraint(item: scrolliblePopUpView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
-        contentSliderH = NSLayoutConstraint(item: scrolliblePopUpView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
+        constraintsArray.append(NSLayoutConstraint(item: scrollablePopUpView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: scrollablePopUpView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
+        contentSliderH = NSLayoutConstraint(item: scrollablePopUpView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
         constraintsArray.append(contentSliderH!)
         
         NSLayoutConstraint.activate(constraintsArray)
-        scrolliblePopUpView.delegate = self
+        scrollablePopUpView.delegate = self
     }
     
     private func setup(checkBox: CheckBoxView) {
@@ -426,7 +426,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         var constraintsArray = [NSLayoutConstraint]()
-        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .top, relatedBy: .equal, toItem: scrolliblePopUpView, attribute: .bottom, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .top, relatedBy: .equal, toItem: scrollablePopUpView, attribute: .bottom, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: showOnlySyncItemsCheckBoxHeight))

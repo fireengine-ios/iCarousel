@@ -10,6 +10,7 @@ import UIKit
 
 protocol AutoSyncDataSourceDelegate: class {
     func enableAutoSync()
+    func didChangeSettingsOption(settings: AutoSyncSetting)
 }
 
 
@@ -171,6 +172,8 @@ extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
         if autoSyncSettings?.photoSetting.option == .never, autoSyncSettings?.videoSetting.option == .never {
             forceDisableAutoSync()
         }
+      
+        delegate?.didChangeSettingsOption(settings: setting)
     }
     
     func shouldChangeHeight(toExpanded: Bool, cellType: AutoSyncSettingsRowType) {

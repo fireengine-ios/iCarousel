@@ -37,11 +37,11 @@ class CollectionViewLayout: UICollectionViewLayout {
     
     override func prepare() {
         cache.removeAll()
-        if cache.isEmpty {
+        if cache.isEmpty, let collectionView = collectionView, let delegate = delegate {
             let columnWidth = contentWidth / CGFloat(numberOfColumns)
             contentHeight = 0.0
             //To Do add sections
-            let headerH = delegate.collectionView(collectionView: collectionView!, heightForHeaderinSection: 0)
+            let headerH = delegate.collectionView(collectionView: collectionView, heightForHeaderinSection: 0)
             let headerAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: IndexPath(row: 0, section: 0))
             headerAttribute.frame = CGRect(x: 0.0, y: 0.0, width: contentWidth, height: headerH)
             cache.append(headerAttribute)
@@ -54,12 +54,12 @@ class CollectionViewLayout: UICollectionViewLayout {
             var column = 0
             var yOffset = [CGFloat](repeating: headerH, count: numberOfColumns)
             
-            for item in 0 ..< collectionView!.numberOfItems(inSection: 0) {
+            for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
                 
                 let indexPath = IndexPath(item: item, section: 0)
                 
                 let width = columnWidth - cellPadding * 2
-                let cellHeight = delegate.collectionView(collectionView: collectionView!, heightForCellAtIndexPath: indexPath, withWidth: width)
+                let cellHeight = delegate.collectionView(collectionView: collectionView, heightForCellAtIndexPath: indexPath, withWidth: width)
                 let height = cellPadding + cellHeight + cellPadding
                 let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
                 let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)

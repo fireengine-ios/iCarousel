@@ -158,7 +158,7 @@ class AlbumService: RemoteItemsService {
     
 }
 
-
+typealias AlbumCreatedOperation = (AlbumItem?) -> Void
 typealias PhotosAlbumOperation = () -> Void
 typealias PhotosAlbumDeleteOperation = (_ deletedItems: [AlbumItem]) -> Void
 typealias PhotosFromAlbumsOperation = (_ items: [Item]) -> Void
@@ -168,13 +168,18 @@ class PhotosAlbumService: BaseRequestService {
     
     private lazy var albumService = AlbumDetailService(requestSize: Device.isIpad ? 200 : 100)
     
-    func createAlbum(createAlbum: CreatesAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
+    func createAlbum(createAlbum: CreatesAlbum, success: AlbumCreatedOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService createAlbum")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+        let handler = BaseResponseHandler<AlbumServiceResponse, ObjectRequestResponse>(success: { response in
             debugLog("PhotosAlbumService createAlbum success")
-
-            success?()
+            
+            if let albumResponse = response as? AlbumServiceResponse { 
+                let item = AlbumItem(remote: albumResponse)
+                success?(item)
+            } else {
+                success?(nil)
+            }
         }, fail: fail)
         executePostRequest(param: createAlbum, handler: handler)
     }

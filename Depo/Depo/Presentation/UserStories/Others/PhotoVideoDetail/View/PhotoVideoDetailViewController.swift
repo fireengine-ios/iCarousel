@@ -246,7 +246,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
     }
     
-    override func getBacgroundColor() -> UIColor {
+    override func getBackgroundColor() -> UIColor {
         return UIColor.black
     }
     
@@ -282,6 +282,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         localPlayer?.replaceCurrentItem(with: item)
         playerController = FixedAVPlayerViewController()
         playerController?.player = localPlayer
+        ///needs to expend from everywhere
+        playerController?.delegate = RouterVC().rootViewController as? TabBarViewController
         present(playerController!, animated: true) { [weak self] in
             self?.playerController?.player?.play()
             self?.output.videoStarted()
@@ -419,5 +421,17 @@ extension PhotoVideoDetailViewController: UIScrollViewDelegate {
             currentPage = objects.count - 1
         }
         selectedIndex = currentPage
+    }
+}
+
+///extension of different class( Need to expand picture-in-picture everywhere)
+extension TabBarViewController: AVPlayerViewControllerDelegate {
+
+    func playerViewController(_ playerViewController: AVPlayerViewController,
+                              restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
+        RouterVC().presentViewController(controller: playerViewController) {
+            playerViewController.allowsPictureInPicturePlayback = true
+            completionHandler(true)
+        }
     }
 }

@@ -1,2 +1,5 @@
-"NSPhotoLibraryUsageDescription" = "Uygulamada fotoğraflarınızı gösterebilmek için lifebox’ın fotoğraf galerinize erişmesi gereklidir";
 "NSFaceIDUsageDescription" = "Uygulamamız güvenliğin için Face ID özelliğini kullanmanı sağlayabilir";
+"NSLocationAlwaysUsageDescription" = "Arka planda yedekleme yapabilmek için lokasyonun kullanılacaktır.";
+"NSPhotoLibraryAddUsageDescription" = "Uygulamanın, cihaz galerine ulaşabilmesi için iznin gerekiyor.";
+"NSPhotoLibraryUsageDescription" = "Fotoğraf ve videolarını uygulamada gösterebilmek için iznin gerekiyor.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Arka planda yedekleme yapabilmek için lokasyonun kullanılacaktır.";

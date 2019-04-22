@@ -42,7 +42,7 @@ enum MyStreamType: Int {
     var placeholderBorderColor: CGColor {
         switch self {
         case .instaPick:
-            return UIColor.clear.cgColor
+            return UIColor.white.cgColor
         default:
             return ColorConstants.blueColor.cgColor
         }

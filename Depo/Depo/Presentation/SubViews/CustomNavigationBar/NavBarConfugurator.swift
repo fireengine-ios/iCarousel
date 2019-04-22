@@ -90,7 +90,7 @@ class NavigationBarConfigurator {
     private var left: [NavBarWithAction]?
     
     var rightItems: [UIBarButtonItem]? {
-        return self.right?.flatMap { $0.navItem }
+        return self.right?.compactMap { $0.navItem }
     }
     
     func configure(right: [NavBarWithAction]?, left: [NavBarWithAction]?) {

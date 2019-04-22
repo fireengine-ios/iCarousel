@@ -34,8 +34,8 @@ final class PasswordCell: ProtoInputTextCell {
     @IBOutlet weak var textInput: UITextField! {
         didSet {
             inputTextField = textInput
-            textInput.delegate = self
             textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
+            textInput.keyboardType = .default
         }
     }
     
@@ -80,7 +80,7 @@ final class PasswordCell: ProtoInputTextCell {
             titleLabel.textColor = ColorConstants.yellowColor
             if let savedPlaceholder = placeholderText {
                 if textInput.text?.count == 0 {
-                    textInput.font = UIFont.TurkcellSaturaBolFont(size: 16)
+                    textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
                 }
                 placeholder = savedPlaceholder
             }

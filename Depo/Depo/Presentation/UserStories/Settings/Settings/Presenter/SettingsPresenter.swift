@@ -19,7 +19,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     var isPremiumUser: Bool {
-        return AuthoritySingleton.shared.isPremium
+        return AuthoritySingleton.shared.accountType.isPremium
     }
     
     func viewIsReady() {
@@ -33,7 +33,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func cellsDataForSettings(array: [[String]]) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         view.showCellsData(array: array)
     }
     
@@ -58,7 +58,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func asyncOperationStoped() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     func goToOnboarding() {
@@ -172,17 +172,17 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func didObtainUserStatus() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         view.updateStatusUser()
     }
     
     func didFailToObtainUserStatus(errorMessage: String) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         router.showError(errorMessage: errorMessage)
     }
     
     func connectToNetworkFailed() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         router.goToConnectedToNetworkFailed()
     }
     

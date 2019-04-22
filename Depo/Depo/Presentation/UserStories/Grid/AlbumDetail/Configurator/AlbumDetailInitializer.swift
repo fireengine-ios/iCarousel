@@ -18,10 +18,10 @@ class AlbumDetailModuleInitializer: NSObject {
     class func initializeAlbumDetailController(with nibName: String, album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
         let viewController = AlbumDetailViewController(nibName: nibName, bundle: nil)
         viewController.album = album
-        viewController.needShowTabBar = true
+        viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .uploadFromLifebox])
-        viewController.scrolliblePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
-        viewController.scrolliblePopUpView.isEnable = true
+        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
+        viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
         
         var bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .addToAlbum, .removeFromAlbum],

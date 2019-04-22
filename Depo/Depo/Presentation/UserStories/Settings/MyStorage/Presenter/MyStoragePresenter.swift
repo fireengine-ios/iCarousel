@@ -21,13 +21,14 @@ final class MyStoragePresenter {
                 router.showSubTurkcellOpenAlert(with: TextConstants.offersActivateUkranian)
             case .cyprus:
                 router.showSubTurkcellOpenAlert(with: TextConstants.offersActivateCyprus)
-            case .moldovian, .turkcell, .life, .all, .albanian: break
+            case .moldovian, .turkcell, .life, .all, .albanian, .FWI, .jamaica: break
             }
         }
     }
     
     var title: String
     
+    private var isViewDidLoad: Bool = false
     private var allOffers: [SubscriptionPlanBaseResponse] = []
     var displayableOffers: [SubscriptionPlan] = []
 
@@ -45,12 +46,14 @@ final class MyStoragePresenter {
     
     //MARK: - UtilityMethods
     private func calculateProgress() {
+        guard isViewDidLoad, usage != nil else {
+            return
+        }
+        
         let usedStorageSize = usage.usedBytes ?? 0
         let fullStorageSize = usage.quotaBytes ?? 0
         
-        let leftStorageSize = fullStorageSize - usedStorageSize
-        
-        view?.configureProgress(with: fullStorageSize, left: leftStorageSize)
+        view?.configureProgress(with: fullStorageSize, used: usedStorageSize)
     }
     
     private func displayOffers() {
@@ -68,12 +71,15 @@ final class MyStoragePresenter {
 extension MyStoragePresenter: MyStorageViewOutput {
     func viewDidLoad() {
         view?.startActivityIndicator()
+        interactor.trackScreen()
         interactor.getAccountType()
         interactor.getUsage()
-
-        if usage != nil {
-            calculateProgress()
-        }
+    }
+    
+    func viewDidAppear() {
+        isViewDidLoad = true
+        
+        calculateProgress()
     }
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
@@ -82,11 +88,15 @@ extension MyStoragePresenter: MyStorageViewOutput {
             router?.showCancelOfferAlert(with: TextConstants.packageDefaultCancelText)
             return
         }
-        if type != .apple {
+        
+        if type == .SLCM {
+            let cancelText = String(format: type.cancelText, plan.getNameForSLCM())
+            router?.showCancelOfferAlert(with: cancelText)
+        } else if type == .apple {
+            router?.showCancelOfferApple()
+        } else {
             let cancelText = String(format: type.cancelText, plan.name)
             router?.showCancelOfferAlert(with: cancelText)
-        } else {
-            router?.showCancelOfferApple()
         }
     }
     

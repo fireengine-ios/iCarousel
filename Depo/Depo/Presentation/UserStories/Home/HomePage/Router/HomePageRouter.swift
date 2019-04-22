@@ -37,12 +37,12 @@ class HomePageRouter: HomePageRouterInput {
     }
     
     func moveToAllFilesPage() {
-        let allFiles = router.allFiles(moduleOutput: presenter, sortType: presenter.allFilesSortType, viewType: presenter.allFilesViewType)!
+        let allFiles = router.allFiles(moduleOutput: presenter, sortType: presenter.allFilesSortType, viewType: presenter.allFilesViewType)
         router.pushViewController(viewController: allFiles)
     }
     
     func moveToFavouritsFilesPage() {
-        let favourites = router.favorites(moduleOutput: presenter, sortType: presenter.favoritesSortType, viewType: presenter.favoritesViewType)!
+        let favourites = router.favorites(moduleOutput: presenter, sortType: presenter.favoritesSortType, viewType: presenter.favoritesViewType)
         router.pushViewController(viewController: favourites)
     }
     

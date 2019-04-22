@@ -20,7 +20,7 @@ class PackagesPresenter {
     private var offerToBuy: PackageModelResponse?
     private var offerIndex: Int = 0
     private var optInVC: OptInController?
-    private var storageCapacity: Int64 = 0
+    private var percentage: CGFloat = 0
     private var storageUsage: UsageResponse?
     
     private func refreshPage() {
@@ -40,10 +40,6 @@ class PackagesPresenter {
 extension PackagesPresenter: PackagesViewOutput {
     func getAccountType() -> AccountType {
         return accountType
-    }
-
-    func getStorageCapacity() -> Int64 {
-        return storageCapacity
     }
     
     func submit(promocode: String) {
@@ -73,8 +69,10 @@ extension PackagesPresenter: PackagesViewOutput {
         }
         switch model.type {
         case .SLCM?:
+            let title = String(format: TextConstants.turkcellPurchasePopupTitle, model.quota?.bytesString ?? "")
+
             let price = interactor.getPriceInfo(for: model, accountType: accountType)
-            view?.showActivateOfferAlert(with: price, for: model, planIndex: planIndex)
+            view?.showActivateOfferAlert(with: title, price: price, for: model, planIndex: planIndex)
         case .apple?:
             view?.startActivityIndicator()
             interactor.activate(offer: model, planIndex: planIndex)
@@ -109,10 +107,8 @@ extension PackagesPresenter: PackagesViewOutput {
         router.openTermsOfUse()
     }
 
-    func configureViews(_ views: [PackageInfoView]) {
-        for view in views {
-            view.delegate = self
-        }
+    func configureCard(_ card: PackageInfoView) {
+        card.delegate = self
     }
 
 }
@@ -190,9 +186,9 @@ extension PackagesPresenter: PackagesInteractorOutput {
     func successed(usage: UsageResponse) {
         view?.stopActivityIndicator()
         storageUsage = usage
-        if let quotaBytes = usage.quotaBytes {
-            storageCapacity = quotaBytes
-            view?.setupStackView(with: quotaBytes)
+        if let used = usage.usedBytes, let total = usage.quotaBytes {
+            percentage = 100 * CGFloat(used) / CGFloat(total)
+            view?.setupStackView(with: percentage)
         }
     }
     
@@ -216,7 +212,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
 
     func successedGotUserAuthority() {
         view?.stopActivityIndicator()
-        view?.setupStackView(with: storageCapacity)
+        view?.setupStackView(with: percentage)
     }
     
     func failedPromocode(with errorString: String) {
@@ -266,9 +262,20 @@ extension PackagesPresenter: PackageInfoViewDelegate {
         switch type {
         case .myStorage:
             router.openMyStorage(storageUsage: storageUsage)
-        case .premiumUser:
-            router.openLeavePremium()
-        case .standard: break
+        case .accountType(let accountType):
+            router.openLeavePremium(type: accountType.leavePremiumType)
+        case .myProfile:
+            guard let userInfo = SingletonStorage.shared.accountInfo else {
+                let error = CustomErrors.text("Unexpected found nil while getting user info. Refresh page may solve this problem.")
+                failed(with: error.localizedDescription)
+                return
+            }
+            
+            let isTurkcell = SingletonStorage.shared.isTurkcellUser
+            router.openUserProfile(userInfo: userInfo, isTurkcellUser: isTurkcell)
+            break
+        case .premiumBanner:
+            break
         }
     }
 }

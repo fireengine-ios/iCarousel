@@ -1,0 +1,12 @@
+import UIKit
+
+extension UITextField {
+    func toggleTextFieldSecureType() {
+        isSecureTextEntry.toggle()
+        
+        /// https://stackoverflow.com/a/35295940/5893286
+        let font = self.font
+        self.font = nil
+        self.font = font
+    }
+}

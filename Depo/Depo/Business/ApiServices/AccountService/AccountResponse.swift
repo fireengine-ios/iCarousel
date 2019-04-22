@@ -62,7 +62,7 @@ class AccountInfoResponse: ObjectRequestResponse {
     
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
-            return "+\(code)\(number)"
+            return number.contains("+") ? number : "+\(code)\(number)"
         }
         return ""
     }
@@ -74,15 +74,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         cellografId = json?[AccountJSONConstants.cellografId].string
         name = json?[AccountJSONConstants.name].string
         gapId = json?[AccountJSONConstants.gapID].string
-        
-        ///---changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
-        if let actualSurNaame = json?[AccountJSONConstants.surname].string,
-                !actualSurNaame.isEmpty {
-            name = (name ?? "") + " " + actualSurNaame
-        }
-        surname = ""
-        ///---
-        
+        surname = json?[AccountJSONConstants.surname].string
         username = json?[AccountJSONConstants.username].string
         dob = json?[AccountJSONConstants.birthday].string
         accountType = json?[AccountJSONConstants.accountType].string
@@ -322,13 +314,23 @@ class InternetDataUsage: ObjectRequestResponse {
         return sizeString(for: remaining)
     }
     
+    var usedString: String {
+        return sizeString(for: (total ?? 0) - (remaining ?? 0))
+    }
+    
     private func sizeString(for size: Double?) -> String {
         guard let unit = self.unit, let size = size else {
             return ""
         }
         switch unit {
         case .mb:
-            return cleanZero(for: size / BytesType.size, unit: "GB")
+            if size >= BytesType.size {
+                return cleanZero(for: size / BytesType.size, unit: "GB")
+            } else if size >= 1 {
+                return cleanZero(for: size, unit: "MB")
+            } else {
+                return cleanZero(for: size * BytesType.size, unit: "KB")
+            }
         }
     }
     
@@ -346,6 +348,41 @@ class InternetDataUsage: ObjectRequestResponse {
         unit = json?[InternetDataUsageKeys.unit].bytesType
         expiryDate = json?[InternetDataUsageKeys.expiryDate].date
     }
+}
+
+final class FeaturesResponse: ObjectRequestResponse {
+    
+    private enum ResponseKey {
+        static let nonTcellPaycellSubscription = "non-tcell-paycell-subscription"
+        static let autoVideoUpload = "auto-video-upload"
+        static let faceImageRecognition = "face-image-recognition"
+        static let autoMusicUpload = "auto-music-upload"
+        static let autoPhotoUpload = "auto-photo-upload"
+        static let autoVideoUploadV2 = "auto-video-upload-v2"
+        static let tcellPaycellSubscription = "tcell-paycell-subscription"
+        static let autoSyncDisabled = "auto-sync-disabled"
+    }
+    
+    var isNonTcellPaycellSubscription: Bool?
+    var isAutoVideoUpload: Bool?
+    var isFaceImageRecognition: Bool?
+    var isAutoMusicUpload: Bool?
+    var isAutoPhotoUpload: Bool?
+    var isAutoVideoUploadV2: Bool?
+    var isTcellPaycellSubscription: Bool?
+    var isAutoSyncDisabled: Bool?
+
+    override func mapping() {
+        isNonTcellPaycellSubscription = json?[ResponseKey.nonTcellPaycellSubscription].bool
+        isAutoVideoUpload = json?[ResponseKey.autoVideoUpload].bool
+        isFaceImageRecognition = json?[ResponseKey.faceImageRecognition].bool
+        isAutoMusicUpload = json?[ResponseKey.autoMusicUpload].bool
+        isAutoPhotoUpload = json?[ResponseKey.autoPhotoUpload].bool
+        isAutoVideoUploadV2 = json?[ResponseKey.autoVideoUploadV2].bool
+        isTcellPaycellSubscription = json?[ResponseKey.tcellPaycellSubscription].bool
+        isAutoSyncDisabled = json?[ResponseKey.autoSyncDisabled].bool
+    }
+    
 }
 
 /// MAYBE WILL BE USED

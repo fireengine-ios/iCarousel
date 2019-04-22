@@ -808,7 +808,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 return
             }
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
-            cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
+            cell_.configureWithWrapper(wrappedObj: unwrapedObject)
             
             if let cell = cell as? BasicCollectionMultiFileCell {
                 cell.moreButton.isHidden = !needShow3DotsInCell
@@ -1021,7 +1021,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             
             cell_.setSelection(isSelectionActive: isSelectionStateActive,
                                isSelected: isObjctSelected(object: object))
-            cell_.confireWithWrapperd(wrappedObj: object)
+            cell_.configureWithWrapper(wrappedObj: object)
             
         }
         if isSelectionStateActive {
@@ -1048,7 +1048,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
             cell_.set(name: unwrapedObject.name)
             ///TODO: confireWithWrapperd call may be meaningless because of isAlreadyConfigured flag inside
-            cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
+            cell_.configureWithWrapper(wrappedObj: unwrapedObject)
             
             if let cell = cell as? BasicCollectionMultiFileCell {
                 cell.moreButton.isHidden = !needShow3DotsInCell
@@ -1189,7 +1189,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         cell_.updating()
         cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
-        cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
+        cell_.configureWithWrapper(wrappedObj: unwrapedObject)
         cell_.setDelegateObject(delegateObject: self)
         
         guard let wraped = unwrapedObject as? Item else {
@@ -1199,15 +1199,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
             cell_.setAssetId(local.asset.localIdentifier)
-            self.filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
-                DispatchQueue.main.async {
-                    if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
-                        cell_.setImage(image: image, animated:  false)
-                    } else {
-                        cell_.setPlaceholderImage(fileType: wraped.fileType)
+            DispatchQueue.global().async { [weak self] in
+                self?.filesDataSource.getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
+                    DispatchQueue.main.async {
+                        if cell_.getAssetId() == local.asset.localIdentifier, let image = image {
+                            cell_.setImage(image: image, animated:  false)
+                        } else {
+                            cell_.setPlaceholderImage(fileType: wraped.fileType)
+                        }
                     }
-                }
-            })
+                })
+            }
+            
         case .remoteUrl(let url) :
             if let url = url {
                 cell_.setImage(with: url)

@@ -51,4 +51,9 @@ class LocalAlbumViewController: BaseFilesGreedChildrenViewController {
         output.onReloadData()
     }
     
+    override func loadData() {
+        output.onReloadData()
+        contentSlider?.reloadAllData()
+        refresher.endRefreshing()
+    }
 }

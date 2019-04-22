@@ -7,10 +7,10 @@
 //
 
 protocol TermsAndServicesViewOutput {
-    
     func viewIsReady()
-    
     func startUsing()
-    
     func confirmAgreements(_ confirm: Bool)
+    func openTurkcellAndGroupCompanies()
+    func openCommercialEmailMessages()
+    func confirmEtk(_ etk: Bool)
 }
