@@ -71,6 +71,7 @@ final class MyStoragePresenter {
 extension MyStoragePresenter: MyStorageViewOutput {
     func viewDidLoad() {
         view?.startActivityIndicator()
+        interactor.trackScreen()
         interactor.getAccountType()
         interactor.getUsage()
     }

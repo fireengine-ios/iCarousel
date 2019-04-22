@@ -892,8 +892,8 @@
 "delete_duplicated_contacts" = "Remove Duplicate Contacts from Your Phone Directory";
 "leave_middle_membership" = "Leave Standard+ Membership";
 "leave_middle_turkcell" = "To cancel your package, please send an SMS to 2200 with this text: IPTAL LIFEBOX STANDART+";
-"package_FWI_cancel_text" = "package_FWI_cancel_text";
-"package_jamaica_cancel_text" = "package_jamaica_cancel_text";
+"package_FWI_cancel_text" = "You can cancel or manage your Digicel subscription from the My Digicel App, Customer Care, or In Store.";
+"package_jamaica_cancel_text" = "You can cancel or manage your Digicel subscription from the My Digicel App, Customer Care, or In Store.";
 "feature_digicell_cancel_text" = "You can continue to use Premium features for free since you are a Digicell user";
 "terms_and_use_etk_checkbox" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell and its Group Companies";

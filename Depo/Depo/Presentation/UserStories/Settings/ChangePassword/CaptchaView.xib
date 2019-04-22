@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptchaView" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="captchaAnswerTextField" destination="25l-fN-bcD" id="ZvL-Cy-lXE"/>
+                <outlet property="captchaImageView" destination="kWg-Vf-Rlr" id="KGs-Nd-rh1"/>
+                <outlet property="errorLabel" destination="gik-gC-tNq" id="QBq-3w-faJ"/>
+                <outlet property="lineView" destination="6WV-XE-0Ht" id="Vlw-Qp-JUO"/>
+                <outlet property="refreshCaptchaButton" destination="e7k-Vf-1iy" id="QGP-F7-9Kt"/>
+                <outlet property="soundCaptchaButton" destination="Hbt-Eu-EcI" id="w9T-Zd-sf1"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="358" height="144"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jt2-sq-4mO">
+                    <rect key="frame" x="0.0" y="0.0" width="358" height="144"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3h7-gb-EgQ">
+                            <rect key="frame" x="0.0" y="0.0" width="358" height="44"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kWg-Vf-Rlr">
+                                    <rect key="frame" x="0.0" y="6" width="262" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" priority="250" constant="240" id="07l-3f-BQs"/>
+                                        <constraint firstAttribute="height" constant="32" id="DRE-Nk-6Fa"/>
+                                    </constraints>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hbt-Eu-EcI">
+                                    <rect key="frame" x="270" y="0.0" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="44" id="scC-DT-eZ6"/>
+                                    </constraints>
+                                    <state key="normal" image="ic_sound"/>
+                                    <connections>
+                                        <action selector="onSoundCaptchaButton:" destination="-1" eventType="touchUpInside" id="4ou-YG-ab6"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7k-Vf-1iy">
+                                    <rect key="frame" x="314" y="0.0" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="44" id="Val-hg-T9I"/>
+                                    </constraints>
+                                    <state key="normal" image="ic_refresh"/>
+                                    <connections>
+                                        <action selector="onRefreshCaptchaButton:" destination="-1" eventType="touchUpInside" id="F6j-1I-NmX"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="e7k-Vf-1iy" firstAttribute="top" secondItem="3h7-gb-EgQ" secondAttribute="top" id="3Sc-AD-bLn"/>
+                                <constraint firstAttribute="height" constant="44" id="8Pz-Tv-sW7"/>
+                                <constraint firstAttribute="bottom" secondItem="e7k-Vf-1iy" secondAttribute="bottom" id="FMg-77-hsw"/>
+                                <constraint firstAttribute="bottom" secondItem="Hbt-Eu-EcI" secondAttribute="bottom" id="LFQ-fW-ZXQ"/>
+                                <constraint firstItem="Hbt-Eu-EcI" firstAttribute="leading" secondItem="kWg-Vf-Rlr" secondAttribute="trailing" constant="8" id="SlV-YB-BOC"/>
+                                <constraint firstAttribute="trailing" secondItem="e7k-Vf-1iy" secondAttribute="trailing" id="TOF-zG-OGT"/>
+                                <constraint firstItem="e7k-Vf-1iy" firstAttribute="leading" secondItem="Hbt-Eu-EcI" secondAttribute="trailing" id="VKh-jx-jy2"/>
+                                <constraint firstItem="kWg-Vf-Rlr" firstAttribute="centerY" secondItem="3h7-gb-EgQ" secondAttribute="centerY" id="fCh-f5-VNo"/>
+                                <constraint firstItem="kWg-Vf-Rlr" firstAttribute="leading" secondItem="3h7-gb-EgQ" secondAttribute="leading" id="jKe-Di-lGg"/>
+                                <constraint firstItem="Hbt-Eu-EcI" firstAttribute="top" secondItem="3h7-gb-EgQ" secondAttribute="top" id="vAl-zv-DA2"/>
+                                <constraint firstItem="e7k-Vf-1iy" firstAttribute="centerY" secondItem="3h7-gb-EgQ" secondAttribute="centerY" id="zTS-ux-TpI"/>
+                            </constraints>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="0fs-JI-gHt">
+                            <rect key="frame" x="0.0" y="44" width="358" height="96"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gik-gC-tNq">
+                                    <rect key="frame" x="0.0" y="0.0" width="358" height="58"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="25l-fN-bcD" customClass="InsetsTextField" customModule="lifebox" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="62" width="358" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="34" id="qWy-9n-9ir"/>
+                                    </constraints>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6WV-XE-0Ht">
+                            <rect key="frame" x="0.0" y="143.5" width="358" height="0.5"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="FJl-dj-bOD"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="0fs-JI-gHt" firstAttribute="top" secondItem="3h7-gb-EgQ" secondAttribute="bottom" id="4Uc-j4-xeq"/>
+                        <constraint firstAttribute="bottom" secondItem="0fs-JI-gHt" secondAttribute="bottom" constant="4" id="7Te-ci-mZp"/>
+                        <constraint firstItem="3h7-gb-EgQ" firstAttribute="leading" secondItem="Jt2-sq-4mO" secondAttribute="leading" id="CFt-Ct-sWW"/>
+                        <constraint firstAttribute="trailing" secondItem="6WV-XE-0Ht" secondAttribute="trailing" id="E9m-sg-tjl"/>
+                        <constraint firstAttribute="trailing" secondItem="0fs-JI-gHt" secondAttribute="trailing" id="KbC-m1-SKL"/>
+                        <constraint firstAttribute="bottom" secondItem="6WV-XE-0Ht" secondAttribute="bottom" id="TIc-cq-qvp"/>
+                        <constraint firstItem="0fs-JI-gHt" firstAttribute="leading" secondItem="Jt2-sq-4mO" secondAttribute="leading" id="YSz-jq-Ccr"/>
+                        <constraint firstAttribute="trailing" secondItem="3h7-gb-EgQ" secondAttribute="trailing" id="acN-bu-5a0"/>
+                        <constraint firstItem="3h7-gb-EgQ" firstAttribute="top" secondItem="Jt2-sq-4mO" secondAttribute="top" id="h52-JA-YV4"/>
+                        <constraint firstItem="6WV-XE-0Ht" firstAttribute="leading" secondItem="Jt2-sq-4mO" secondAttribute="leading" id="kBy-GP-b9c"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Jt2-sq-4mO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="MQT-h7-Rvc"/>
+                <constraint firstItem="Jt2-sq-4mO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="asY-K3-d9Z"/>
+                <constraint firstAttribute="bottom" secondItem="Jt2-sq-4mO" secondAttribute="bottom" id="nGr-st-oV0"/>
+                <constraint firstAttribute="trailing" secondItem="Jt2-sq-4mO" secondAttribute="trailing" id="xQC-RL-jcU"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="152" y="-81.859070464767626"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_refresh" width="32" height="32"/>
+        <image name="ic_sound" width="32" height="32"/>
+    </resources>
+</document>

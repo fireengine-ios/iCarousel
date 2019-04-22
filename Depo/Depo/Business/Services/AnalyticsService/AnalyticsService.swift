@@ -140,12 +140,8 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
 extension AnalyticsService: AnalyticsGA {
     
     func logScreen(screen: AnalyticsAppScreens) {
-        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
-            let logScreenParametrs: [String: Any] = [
-                "screenName": screen.name,
-                "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
-            ]
-            Analytics.logEvent("screenView", parameters: logScreenParametrs + dimentionParametrs)
+        prepareDimentionsParametrs(screen: screen, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+            Analytics.logEvent("screenView", parameters: dimentionParametrs)
         }
     }
     
@@ -164,7 +160,8 @@ extension AnalyticsService: AnalyticsGA {
                                             errorType: String? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
-        let loginStatus = SingletonStorage.shared.referenceToken != nil
+        let tokenStorage: TokenStorage = factory.resolve()
+        let loginStatus = tokenStorage.accessToken != nil
         let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
         var payment: String?
         if let unwrapedisNativePayment = isPaymentMethodNative {
@@ -198,18 +195,22 @@ extension AnalyticsService: AnalyticsGA {
 ///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
         var autoSyncState: String?
         var autoSyncStatus: String?
-        let tokenStorage: TokenStorage = factory.resolve()
-        if tokenStorage.accessToken != nil {
+    
+        if loginStatus {
             let autoSyncStorageSettings = AutoSyncDataStorage().settings
             
-            autoSyncState = autoSyncStorageSettings.isAutoSyncEnabled ? "True" : "False"
-            if autoSyncStorageSettings.isAutoSyncEnabled {
-                let photoSetting = autoSyncStorageSettings.isAutoSyncEnabled ?
-                    GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.photoSetting).text : ""
-                let videoSetting = autoSyncStorageSettings.isAutoSyncEnabled ?
-                    GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : ""
-                autoSyncStatus = "\(photoSetting) | \(videoSetting)"
-            }
+            let confirmedAutoSyncSettingsState = autoSyncStorageSettings.isAutoSyncEnabled && autoSyncStorageSettings.isAutosyncSettingsApplied
+            
+            autoSyncState = confirmedAutoSyncSettingsState ? "True" : "False"
+            debugPrint("!!!! autosync \(autoSyncStorageSettings.isAutoSyncEnabled) also a is firstAutosync set \(autoSyncStorageSettings.isAutosyncSettingsApplied)")
+            
+            let photoSetting = confirmedAutoSyncSettingsState ?
+                GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.photoSetting).text : GAEventLabel.photosNever.text
+            let videoSetting = confirmedAutoSyncSettingsState ?
+                GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : GAEventLabel.videosNever.text
+            autoSyncStatus = "\(photoSetting) | \(videoSetting)"
+            debugPrint("!!!! autoSyncStatus is \(autoSyncStatus)")
+
         }
         
         
