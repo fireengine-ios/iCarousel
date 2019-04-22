@@ -36,6 +36,10 @@ final public class KeyboardLayoutConstraint: NSLayoutConstraint {
         if isTabBar {
             constant -= KeyboardLayoutConstraint.tabBarHeight
         }
+        if Device.isIphoneX {
+            // TODO: safeAreaInsets.bottom
+            constant -= 34
+        }
         layoutIfNeededWithAnimation()
     }
     

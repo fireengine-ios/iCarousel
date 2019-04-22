@@ -140,12 +140,8 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
 extension AnalyticsService: AnalyticsGA {
     
     func logScreen(screen: AnalyticsAppScreens) {
-        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
-            let logScreenParametrs: [String: Any] = [
-                "screenName": screen.name,
-                "userId": SingletonStorage.shared.accountInfo?.gapId ?? NSNull()
-            ]
-            Analytics.logEvent("screenView", parameters: logScreenParametrs + dimentionParametrs)
+        prepareDimentionsParametrs(screen: screen, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
+            Analytics.logEvent("screenView", parameters: dimentionParametrs)
         }
     }
     
@@ -164,7 +160,8 @@ extension AnalyticsService: AnalyticsGA {
                                             errorType: String? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
-        let loginStatus = SingletonStorage.shared.referenceToken != nil
+        let tokenStorage: TokenStorage = factory.resolve()
+        let loginStatus = tokenStorage.accessToken != nil
         let version =  (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
         var payment: String?
         if let unwrapedisNativePayment = isPaymentMethodNative {
@@ -193,6 +190,30 @@ extension AnalyticsService: AnalyticsGA {
             group.leave()
         })
         
+///        For all of the events (not only newly added autosync events but also all GA events that we send in current client), we will also send below dimensions each time. For the events that we send before login, there is no need to send.
+///        AutoSync --> True/False
+///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
+        var autoSyncState: String?
+        var autoSyncStatus: String?
+    
+        if loginStatus {
+            let autoSyncStorageSettings = AutoSyncDataStorage().settings
+            
+            let confirmedAutoSyncSettingsState = autoSyncStorageSettings.isAutoSyncEnabled && autoSyncStorageSettings.isAutosyncSettingsApplied
+            
+            autoSyncState = confirmedAutoSyncSettingsState ? "True" : "False"
+            debugPrint("!!!! autosync \(autoSyncStorageSettings.isAutoSyncEnabled) also a is firstAutosync set \(autoSyncStorageSettings.isAutosyncSettingsApplied)")
+            
+            let photoSetting = confirmedAutoSyncSettingsState ?
+                GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.photoSetting).text : GAEventLabel.photosNever.text
+            let videoSetting = confirmedAutoSyncSettingsState ?
+                GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : GAEventLabel.videosNever.text
+            autoSyncStatus = "\(photoSetting) | \(videoSetting)"
+            debugPrint("!!!! autoSyncStatus is \(autoSyncStatus)")
+
+        }
+        
+        
         let screenName: Any = screen?.name ?? NSNull()
         
         group.notify(queue: privateQueue) { 
@@ -207,7 +228,9 @@ extension AnalyticsService: AnalyticsGA {
                 countOfDownloadMetric: downloadsMetrics,
                 gsmOperatorType: SingletonStorage.shared.accountInfo?.accountType ?? "",
                 loginType: loginType,
-                errorType: errorType).productParametrs)
+                errorType: errorType,
+                autoSyncState: autoSyncState,
+                autoSyncStatus: autoSyncStatus).productParametrs)
         }
     }
     

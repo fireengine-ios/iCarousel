@@ -13,11 +13,15 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     var router: UserInfoSubViewRouterInput!
     
     var isPremiumUser: Bool {
-        return AuthoritySingleton.shared.isPremium ?? false
+        return AuthoritySingleton.shared.accountType.isPremium
+    }
+    
+    var isMiddleUser: Bool {
+        return AuthoritySingleton.shared.accountType.isMiddle
     }
     
     func requestsFinished() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     func setUserInfo(userInfo: AccountInfoResponse) {
@@ -38,12 +42,12 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     }
 
     private func showSpinner() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         startAsyncOperation()
     }
     
     func loadingIndicatorDismissalRequired() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     func failedWith(error: Error) {

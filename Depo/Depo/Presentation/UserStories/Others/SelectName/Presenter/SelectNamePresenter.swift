@@ -7,12 +7,13 @@
 //
 
 class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewOutput, SelectNameInteractorOutput {
-
     weak var view: SelectNameViewInput!
     var interactor: SelectNameInteractorInput!
     var router: SelectNameRouterInput!
-
     
+    private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
+    private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+        
     //from view
     
     func viewIsReady() {
@@ -49,28 +50,50 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
         startAsyncOperation()
     }
     
-    func operationSucces(operation: SelectNameScreenType) {
-        asyncOperationSucces()
+    func operationSuccess(operation: SelectNameScreenType, item: Item?, isSubFolder: Bool) {
+        asyncOperationSuccess()
         switch operation {
-        case .selectAlbumName:
-            view.hideView()
         case .selectPlayListName:
             router.hideScreen()
         case .selectFolderName:
             view.hideView()
+            if let item = item {
+                router.moveToFolderPage(presenter: self, item: item, isSubFolder: isSubFolder)
+            }
+        default: 
+            break
         }
     }
     
-    func operationFaildWithError(errorMessage: String) {
-        asyncOperationSucces()
+    func createAlbumOperationSuccess(item: AlbumItem?) {
+        asyncOperationSuccess()
+        view.hideView()
+        
+        guard let item = item else { return }
+        
+        router.moveToAlbumPage(presenter: self, item: item)
+    }
+    
+    func operationFailedWithError(errorMessage: String) {
+        asyncOperationSuccess()
         UIApplication.showErrorAlert(message: errorMessage)
         view.setupInitialState()
     }
-    
     
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {
         return view as? Waiting
+    }
+}
+
+//MARK : BaseFilesGreedModuleOutput
+
+extension SelectNamePresenter: BaseFilesGreedModuleOutput {
+    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
+        if fieldType == .all {
+            allFilesViewType = type
+            allFilesSortType = sortedType
+        }
     }
 }

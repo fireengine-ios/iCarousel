@@ -23,7 +23,7 @@ protocol BaseAsyncOperationInteractorOutput {
     
     func completeAsyncOperationEnableScreen()
     
-    func asyncOperationSucces()
+    func asyncOperationSuccess()
     
     func asyncOperationFail(errorMessage: String?)
 }
@@ -45,32 +45,32 @@ class BasePresenter: BaseAsyncOperationInteractorOutput {
     }
     
     func startAsyncOperation() {
-        outputView()?.showSpiner()
+        outputView()?.showSpinner()
     }
     
     func startAsyncOperation(progress: Int) {
-        outputView()?.showSpiner()
+        outputView()?.showSpinner()
     }
     
     func startAsyncOperationDisableScreen() {
-        outputView()?.showSpinerIncludeNavigatinBar()
+        outputView()?.showSpinnerIncludeNavigationBar()
     }
     
     func completeAsyncOperationEnableScreen(errorMessage: String?) {
-        outputView()?.hideSpinerIncludeNavigatinBar()
+        outputView()?.hideSpinnerIncludeNavigationBar()
         showMessage(errorMessage: errorMessage)
     }
     
     func completeAsyncOperationEnableScreen() {
-        outputView()?.hideSpinerIncludeNavigatinBar()
+        outputView()?.hideSpinnerIncludeNavigationBar()
     }
     
-    func asyncOperationSucces() {
-        outputView()?.hideSpiner()
+    func asyncOperationSuccess() {
+        outputView()?.hideSpinner()
     }
     
     func asyncOperationFail(errorMessage: String?) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         showMessage(errorMessage: errorMessage)
     }
     

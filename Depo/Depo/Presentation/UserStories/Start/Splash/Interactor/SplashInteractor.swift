@@ -6,24 +6,61 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import Reachability
+
 class SplashInteractor: SplashInteractorInput {
 
     weak var output: SplashInteractorOutput!
-    
-    let authService = AuthenticationService()
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var reachabilityService = Reachability()
+    
+    private var isTryingToLogin = false
+    private var isReachabilityStarted = false
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
+    
+    deinit {
+        reachabilityService?.stopNotifier()
+    }
+    
+    private func setupReachabilityIfNeed() {
+        if isReachabilityStarted {
+            return
+        }
+        isReachabilityStarted = true
+        
+        guard let reachability = reachabilityService else {
+            assertionFailure()
+            return
+        }
+        
+        reachability.whenReachable = { [weak self] reachability in
+            self?.startLoginInBackground()
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            assertionFailure("\(#function): can't start reachability notifier")
+        }
+    }
 
-    func startLoginInBackroung() {
+    func startLoginInBackground() {
+        if isTryingToLogin {
+            return
+        }
+        isTryingToLogin = true
+        setupReachabilityIfNeed()
+        
         if tokenStorage.accessToken == nil {
             if ReachabilityService().isReachableViaWiFi {
+                isTryingToLogin = false
                 analyticsService.trackLoginEvent(error: .serverError)
                 failLogin()
             } else {
@@ -32,30 +69,43 @@ class SplashInteractor: SplashInteractorInput {
                     self?.tokenStorage.isRememberMe = true
 //                    ItemsRepository.sharedSession.updateCache()
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
+                        self?.isTryingToLogin = false
 //                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
                         self?.turkcellSuccessLogin()
                     }, fail: { [weak self] error in
+                        self?.isTryingToLogin = false
                         let loginError = LoginResponseError(with: error)
                         self?.analyticsService.trackLoginEvent(error: loginError)
-                        self?.output.asyncOperationSucces()
-                        self?.output.onFailLogin()
+                        self?.output.asyncOperationSuccess()
+                        if error.isServerUnderMaintenance {
+                            self?.output.onFailGetAccountInfo(error: error)
+                        } else {
+                            self?.failLogin()
+                        }
                     })
                 }, fail: { [weak self] response in
+                    self?.isTryingToLogin = false
                     let loginError = LoginResponseError(with: response)
                     self?.analyticsService.trackLoginEvent(error: loginError)
-                    self?.output.asyncOperationSucces()
-                    self?.output.onFailLogin()
+                    self?.output.asyncOperationSuccess()
+                    if response.isServerUnderMaintenance {
+                        self?.output.onFailGetAccountInfo(error: response)
+                    } else {
+                        self?.failLogin()
+                    }
                 })
             }
         } else {
             SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                 CacheManager.shared.actualizeCache(completion: nil)
+                self?.isTryingToLogin = false
                 self?.successLogin()
             }, fail: { [weak self] error in
                 /// we don't need logout here
                 /// only internet error
                 //self?.failLogin()
                 DispatchQueue.toMain {
+                    self?.isTryingToLogin = false
                     if ReachabilityService().isReachable {
                         self?.output.onFailGetAccountInfo(error: error)
                     } else {
@@ -67,17 +117,18 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func turkcellSuccessLogin() {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
-//        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
+
+        analyticsService.trackLoginEvent(loginType: GADementionValues.login.turkcellGSM)
+//        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
+
         DispatchQueue.toMain {
             self.output.onSuccessLoginTurkcell()
         }
     }
     
     func successLogin() {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
-//        ItemsRepository.sharedSession.updateCache()
-//        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
+        analyticsService.trackLoginEvent(loginType: GADementionValues.login.rememberLogin)
+//        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
         DispatchQueue.toMain {
             self.output.onSuccessLogin()
         }
@@ -110,7 +161,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func checkEmptyEmail() {
-        authService.checkEmptyEmail { [weak self] result in
+        authenticationService.checkEmptyEmail { [weak self] result in
             DispatchQueue.toMain {
                 switch result {
                 case .success(let show):
@@ -123,7 +174,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func updateUserLanguage() {
-        authService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
+        authenticationService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
             DispatchQueue.toMain {
                 switch result {
                 case .success(_):

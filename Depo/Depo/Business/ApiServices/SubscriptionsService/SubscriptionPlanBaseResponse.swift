@@ -113,8 +113,16 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
             subscriptionPlanAuthorities = authorities.flatMap({ PackagePackAuthoritiesResponse(withJSON: $0) })
         }
         if let type = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanType]?.string {
-            subscriptionPlanType = PackageType(rawValue: type)
-            subscriptionPlanFeatureType = FeaturePackageType(rawValue: type)
+            if type == "DIGICELL", let role = subscriptionPlanRole {
+                if role.uppercased().contains(PackageType.FWI.rawValue) {
+                    subscriptionPlanType = .FWI
+                } else if role.uppercased().contains(PackageType.jamaica.rawValue) {
+                    subscriptionPlanType = .jamaica
+                }
+            } else {
+                subscriptionPlanType = PackageType(rawValue: type)
+                subscriptionPlanFeatureType = FeaturePackageType(rawValue: type)
+            }
         }
         subscriptionPlanSlcmOfferId = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanSlcmOfferId]?.string
         subscriptionPlanCometOfferId = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanCometOfferId]?.string

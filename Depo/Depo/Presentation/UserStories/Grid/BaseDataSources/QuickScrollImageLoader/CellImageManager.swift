@@ -101,8 +101,14 @@ final class CellImageManager {
         ///prepare download operation for url
         let downloadImage = { [weak self] in
             guard let `self` = self else { return }
+
+            guard let url = url else {
+                self.completionBlock?(nil, false, self.uniqueId)
+                return
+            }
             
             let downloadOperation = ImageDownloadOperation(url: url, queue: self.processingQueue)
+            //DEVELOP let downloadOperation = ImageDownloadOperation(url: url, queue: self.dispatchQueue)
             downloadOperation.outputBlock = { [weak self] outputImage in
                 guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
                 
@@ -114,6 +120,11 @@ final class CellImageManager {
         }
         
         ///check if image is already downloaded with thumbnail url
+        guard let thumbnail = thumbnail else {
+            downloadImage()
+            return
+        }
+        
         if let image = getImageFromCache(url: thumbnail) {
             completionBlock?(image, true, uniqueId)
             downloadImage()
@@ -121,6 +132,7 @@ final class CellImageManager {
         }
         
         let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail, queue: self.processingQueue)
+        //DEVELOP let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail, queue: self.dispatchQueue)
         downloadThumbnailOperation.outputBlock = { [weak self] outputImage in
             guard let outputImage = outputImage as? UIImage else {
                 return

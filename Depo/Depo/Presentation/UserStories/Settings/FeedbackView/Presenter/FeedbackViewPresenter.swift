@@ -13,7 +13,7 @@ class FeedbackViewPresenter: BasePresenter, FeedbackViewModuleInput, FeedbackVie
     var router: FeedbackViewRouterInput!
 
     func viewIsReady() {
-        view.languagesUploaded(lanuages: LanguageModel.availableLanguages())
+        view.languagesUploaded(languages: LanguageModel.availableLanguages())
         interactor.trackScreen()
     }
     
@@ -24,7 +24,7 @@ class FeedbackViewPresenter: BasePresenter, FeedbackViewModuleInput, FeedbackVie
     //interactor output
     
     func fail(text: String) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         view.fail(text: text)
     }
     

@@ -48,7 +48,8 @@ final class PremiumView: UIView {
                    isHiddenTitleImageView: Bool? = false,
                    titleEdgeInsets: UIEdgeInsets,
                    isNeedScroll: Bool = true,
-                   isNeedPolicy: Bool) {
+                   isNeedPolicy: Bool,
+                   isTurkcell: Bool) {
         scrollView.isScrollEnabled = isNeedScroll
         
         if isNeedPolicy {
@@ -57,19 +58,10 @@ final class PremiumView: UIView {
         
         premiumHeaderView.configure(with: title, price: price, description: description, isHiddenTitleImageView: isHiddenTitleImageView, titleEdgeInsets: titleEdgeInsets)
         for premiumListView in premiumListViews.enumerated() {
-            switch types[premiumListView.offset] {
-            case .backup:
-                premiumListView.element.configure(with: TextConstants.backUpOriginalQuality, image: UIImage(named: "backupPremiumIcon") ?? UIImage())
-            case .removeDuplicate:
-                premiumListView.element.configure(with: TextConstants.removeDuplicateContacts, image: UIImage(named: "removeDuplicatePremiumIcon") ?? UIImage())
-            case .faceRecognition:
-                premiumListView.element.configure(with: TextConstants.faceRecognitionToReach, image: UIImage(named: "faceImagePremiumIcon") ?? UIImage())
-            case .placeRecognition:
-                premiumListView.element.configure(with: TextConstants.placeRecognitionToBeam, image: UIImage(named: "placeRecognitionPremiumIcon") ?? UIImage())
-            case .objectRecognition:
-                premiumListView.element.configure(with: TextConstants.objectRecognitionToRemember, image: UIImage(named: "objectRecognitionPremiumIcon") ?? UIImage())
-            case .unlimitedPhotopick:
-                premiumListView.element.configure(with: TextConstants.unlimitedPhotopickAnalysis, image: UIImage(named: "unlimitedPhotopickIcon") ?? UIImage())
+            if let type = types[safe: premiumListView.offset] {
+                premiumListView.element.configure(with: type.message, image: type.image ?? UIImage())
+            } else {
+                premiumListView.element.isHidden = true
             }
         }
     }

@@ -104,7 +104,7 @@ final class InstaPickRoutingService {
             switch result {
             case .success(let analysisCount):
                 DispatchQueue.toMain {
-                    if analysisCount.left > 0 {
+                    if analysisCount.left > 0 || analysisCount.isFree {
                         self?.prepareToOpenController()
                     } else {
                         self?.didOpenHistoryPopUp()
@@ -164,7 +164,7 @@ final class InstaPickRoutingService {
                                          message: TextConstants.analyzeHistoryPopupMessage,
                                          image: .custom(UIImage(named: "popup_info")),
                                          firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.analyzeHistoryPopupButton,
+                                         secondButtonTitle: TextConstants.instaPickButtonNoAnalysis,
                                          firstAction: {  controller in
                                             controller.close()
                                          },
@@ -181,7 +181,7 @@ final class InstaPickRoutingService {
     
     private func onPurchase() {
         //TODO: - Open Purchase Screen
-        InstaPickRoutingService.showUpdgradePopup()
+        InstaPickRoutingService.openPremium()
     }
     
     private func clearInfo() {
@@ -212,19 +212,12 @@ extension InstaPickRoutingService: InstapickPopUpControllerDelegate {
     
 }
 
-// MARK: - Instapick Upgrade Popup
+// MARK: - Instapick Upgrade
 extension InstaPickRoutingService {
-    static func showUpdgradePopup() {
-        let controller = PopUpController.with(title: nil,
-                                              message: TextConstants.instapickUpgradePopupText,
-                                              image: .none,
-                                              firstButtonTitle: TextConstants.instapickUpgradePopupNoButton,
-                                              secondButtonTitle: TextConstants.instapickUpgradePopupButton,
-                                              secondAction: { vc in
-                                                vc.close {
-                                                    UIApplication.shared.openAppstore()
-                                                }
-        })
-        RouterVC().presentViewController(controller: controller)
+    static func openPremium() {
+        let router = RouterVC()
+        
+        let controller = router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
+        router.pushViewController(viewController: controller)
     }
 }

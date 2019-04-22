@@ -16,4 +16,5 @@ protocol RegistrationInteractorOutput: class {
     
     func captchaRequred(requred: Bool)
     func captchaRequredFailed()
+    func captchaRequredFailed(with message: String)
 }

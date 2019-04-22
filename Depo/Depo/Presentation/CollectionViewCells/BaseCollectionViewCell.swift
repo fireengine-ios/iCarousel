@@ -66,7 +66,7 @@ class BaseCollectionViewCell: UICollectionViewCell, CollectionViewCellDataProtoc
     }
     
     
-    func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
+    func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
         
     }
     

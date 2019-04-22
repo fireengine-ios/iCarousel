@@ -27,6 +27,9 @@ struct AnalyticsDimension {
     let loginType: GADementionValues.login?
     let errorType: String?
     
+    let autoSyncState: String?
+    let autoSyncStatus: String?
+    
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
         userPackagesNames.forEach {
@@ -67,6 +70,13 @@ struct AnalyticsDimension {
         if let errorType = errorType {
             dimesionDictionary[GADementionsFields.errorType.text] = errorType
         }
+        if let autoSyncState = autoSyncState {
+            dimesionDictionary[GADementionsFields.autoSyncState.text] = autoSyncState
+        }
+        if let autoSyncStatus = autoSyncStatus {
+            dimesionDictionary[GADementionsFields.autoSyncStatus.text] = autoSyncStatus
+        }
+        
         return dimesionDictionary
     }
 }

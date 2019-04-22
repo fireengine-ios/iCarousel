@@ -27,7 +27,7 @@ class AudioSelectionCollectionViewCell: BaseCollectionViewCell {
         contentView.backgroundColor = ColorConstants.whiteColor
     }
     
-    override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
+    override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
         nameLabel.text = wrappedObj.name
     }
     

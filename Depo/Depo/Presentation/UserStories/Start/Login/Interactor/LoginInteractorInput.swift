@@ -14,7 +14,6 @@ protocol LoginInteractorInput {
     
     func rememberMe(state: Bool)
     
-    func relogin()
     func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?)
     
     func findCoutryPhoneCode(plus: Bool)

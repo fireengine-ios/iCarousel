@@ -43,7 +43,10 @@ class LoginInteractor: LoginInteractorInput {
         rememberMe = state
     }
     
-    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?) {
+    private func authificate(login: String,
+                             password: String,
+                             atachedCaptcha: CaptchaParametrAnswer?,
+                             errorHandler: @escaping (ErrorResponse) -> Void) {
         
         if login.isEmpty {
             output?.loginFieldIsEmpty()
@@ -59,7 +62,7 @@ class LoginInteractor: LoginInteractorInput {
             output?.userStillBlocked(user: login)
             return
         } else if (maxAttemps <= attempts) {
-            output?.allAttemtsExhausted(user: login)//block here
+            output?.allAttemtsExhausted(user: login)
             return
         }
         if !Validator.isValid(email: login) && !Validator.isValid(phone: login) {
@@ -70,8 +73,8 @@ class LoginInteractor: LoginInteractorInput {
         
         let user = AuthenticationUser(login: login,
                                       password: password,
-                                      rememberMe: true, //rememberMe,
-                                      attachedCaptcha: atachedCaptcha)
+                                      rememberMe: true,
+            attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
             guard let `self` = self else {
@@ -91,12 +94,18 @@ class LoginInteractor: LoginInteractorInput {
             } else {
                 self.analyticsService.trackLoginEvent(loginType: .gsm)
             }
-//            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .clickOtherTurkcellServices, eventLabel: .clickOtherTurkcellServices)
-//            ItemsRepository.sharedSession.updateCache()
+            
             DispatchQueue.main.async {
                 self.output?.succesLogin()
             }
-        }, fail: { [weak self] errorResponse  in
+        }, fail: { errorResponse  in
+            errorHandler(errorResponse)
+        })
+    }
+    
+    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?) {
+        authificate(login: login, password: password, atachedCaptcha: atachedCaptcha) { [weak self] errorResponse in
+        
             DispatchQueue.main.async {
                 guard let `self` = self else {
                     return
@@ -133,7 +142,7 @@ class LoginInteractor: LoginInteractorInput {
                     self.output?.openEmptyPhone()
                 }
             }
-        })
+        }
     }
     
     func trackScreen() {
@@ -149,12 +158,6 @@ class LoginInteractor: LoginInteractorInput {
         let contactSyncSettings = PeriodicContactsSyncSettings(with: contactSettings)
         periodicContactSyncDataStorage.save(periodicContactSyncSettings: contactSyncSettings)
         contactsService.setPeriodicForContactsSync(periodic: contactSyncSettings.syncPeriodic)
-    }
-    
-    func relogin() {
-        if let login = login, let password = password {
-            authificate(login: login, password: password, atachedCaptcha: atachedCaptcha)
-        }
     }
     
     func blockUser(user: String) {
@@ -269,10 +272,18 @@ class LoginInteractor: LoginInteractorInput {
     
     func verifyPhoneNumber(token: String, code: String) {
         let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: token)
-        accountService.verifyPhoneNumber(parameters: parameters, success: { [weak self] responce in
-            DispatchQueue.main.async {
-                self?.output?.successedVerifyPhone()
+        accountService.verifyPhoneNumber(parameters: parameters, success: { [weak self] baseResponse in
+            
+            if let response = baseResponse as? ObjectRequestResponse,
+                let silentToken = response.responseHeader?[HeaderConstant.silentToken] as? String {
+                
+                self?.silentLogin(token: silentToken)
+            } else {
+                DispatchQueue.main.async {
+                    self?.tryToRelogin()
+                }
             }
+            
         }) { [weak self] errorRespose in
             DispatchQueue.main.async {
                 self?.output?.failedVerifyPhone(errorString: TextConstants.phoneVereficationNonValidCodeErrorText)
@@ -298,8 +309,12 @@ class LoginInteractor: LoginInteractorInput {
             switch response {
             case .success(let boolResult):
                 self?.output?.captchaRequred(requred: boolResult)
-            case .failed(_):
-                self?.output?.captchaRequredFailed()
+            case .failed(let error):
+                if error.isServerUnderMaintenance {
+                    self?.output?.captchaRequredFailed(with: error.description)
+                } else {
+                    self?.output?.captchaRequredFailed()
+                }
             }
         }
         ///Implementation with old request bellow
@@ -313,4 +328,41 @@ class LoginInteractor: LoginInteractorInput {
 //            self?.output?.captchaRequredFailed()
 //        }
     }
+    
+    private func silentLogin(token: String) {
+        authenticationService.silentLogin(token: token, success: { [weak self] in
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                self.tokenStorage.isRememberMe = self.rememberMe
+                self.output?.successedSilentLogin()
+                self.output?.succesLogin()
+            }
+        }, fail: { [weak self] errorResponse in
+            DispatchQueue.main.async { [weak self] in
+                self?.tryToRelogin()
+            }
+        })
+    }
+    
+    private func tryToRelogin() {
+        guard let login = login, let password = password else {
+            assertionFailure()
+            return
+        }
+        
+        authificate(login: login, password: password, atachedCaptcha: nil) { [weak self] errorResponse in
+            DispatchQueue.main.async {
+                guard let `self` = self else {
+                    return
+                }
+                
+                let loginError = LoginResponseError(with: errorResponse)
+                self.analyticsService.trackLoginEvent(error: loginError)
+                self.output?.successedVerifyPhone()
+            }
+        }
+    }
+    
 }

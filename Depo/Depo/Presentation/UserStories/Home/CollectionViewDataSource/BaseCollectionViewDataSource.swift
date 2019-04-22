@@ -320,7 +320,7 @@ class BaseCollectionViewDataSource: NSObject, UICollectionViewDataSource, Collec
 
     private func refreshPremiumCard() {
         if let view = popUps.filter({ $0 is PremiumInfoCard }).first as? PremiumInfoCard,
-            (view.isPremium != AuthoritySingleton.shared.isPremium || AuthoritySingleton.shared.isLosePremiumStatus) {
+            (view.isPremium != AuthoritySingleton.shared.accountType.isPremium || AuthoritySingleton.shared.isLosePremiumStatus) {
             view.configurateWithType(viewType: .premium)
             collectionView.reloadData()
         }

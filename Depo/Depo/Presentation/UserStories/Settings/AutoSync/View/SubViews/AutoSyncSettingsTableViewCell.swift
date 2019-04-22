@@ -20,9 +20,8 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var optionsStackView: UIStackView!
     @IBOutlet private weak var dropDownArrow: UIImageView!
-    @IBOutlet private weak var optionLabel: UILabel! {
-        didSet { optionLabel.font = UIFont.TurkcellSaturaRegFont(size: 18.0) }
-    }
+    @IBOutlet private weak var optionLabel: UILabel! 
+    @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var expandButton: UIButton!
     @IBOutlet private var optionsViews: [AutoSyncSettingsOptionView]!
     
@@ -71,7 +70,7 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
         optionLabel.textColor = textColor
         cellSeparator.backgroundColor = textColor
         dropDownArrow.tintColor = textColor
-        expandButton.setTitleColor(textColor, for: .normal)
+        titleLabel.textColor = textColor
         
         for view in optionsViews {
             view.setColors(isFromSettings: isFromSettings)
@@ -81,7 +80,6 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
             separator.backgroundColor = isFromSettings ? ColorConstants.lightGrayColor : ColorConstants.whiteColor
         }
     }
-    
     
     // MARK: - Private
 
@@ -107,12 +105,11 @@ final class AutoSyncSettingsTableViewCell: UITableViewCell {
             view.setup(with: option, isSelected: autoSyncSetting.option == option)
             view.delegate = self
         }
-        expandButton.setTitle(autoSyncSetting.syncItemType.localizedText, for: .normal)
+        titleLabel.text = autoSyncSetting.syncItemType.localizedText
         optionLabel.text = isSelected ? TextConstants.autoSyncSettingsSelect : autoSyncSetting.option.localizedText
         optionsStackView.isHidden = !isSelected
     }
 }
-
 
 extension AutoSyncSettingsTableViewCell: AutoSyncSettingsOptionViewDelegate {
     func didSelect(option: AutoSyncOption) {

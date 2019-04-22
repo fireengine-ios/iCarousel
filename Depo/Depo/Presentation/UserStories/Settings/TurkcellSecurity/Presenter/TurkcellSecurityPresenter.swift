@@ -87,16 +87,16 @@ extension TurkcellSecurityPresenter: TurkcellSecurityViewOutput {
 extension TurkcellSecurityPresenter: TurkcellSecurityInteractorOutput {
     func changeTurkcellSecurityFailed(error: ErrorResponse) {
         UIApplication.showErrorAlert(message: error.description)
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     func acquiredTurkcellSecurityState(passcode: Bool, autoLogin: Bool) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         view?.setupSecuritySettings(passcode: passcode, autoLogin: autoLogin)
     }
     
     func failedToAcquireTurkcellSecurityState() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         view?.setupSecuritySettings(passcode: interactor.turkcellPasswordOn, autoLogin: interactor.turkcellAutoLoginOn)
     }
 }

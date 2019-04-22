@@ -26,7 +26,7 @@ class LoginRouter: LoginRouterInput {
     }
     
     func goToTermsAndServices() {
-        let temsAndServices = router.termsAndServicesScreen(login: true)
+        let temsAndServices = router.termsAndServicesScreen(login: true, phoneNumber: nil)
         router.pushViewController(viewController: temsAndServices)
     }
     

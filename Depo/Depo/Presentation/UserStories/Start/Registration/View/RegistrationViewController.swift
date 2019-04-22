@@ -13,7 +13,7 @@ protocol RegistrationViewDelegate: class {
     func showCaptcha()
 }
 
-class RegistrationViewController: ViewController, RegistrationViewInput, DataSourceOutput {
+class RegistrationViewController: ViewController {
     
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var userRegistrationTable: UITableView!
@@ -49,10 +49,15 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
     private let captchaContainerHeight: CGFloat = 150
     private var isCaptchaVisible = false
     
-    // MARK: Life cycle
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
+    
+    // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if !Device.isIpad {
             setNavigationTitle(title: TextConstants.registerTitle)
         }
@@ -66,6 +71,7 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
             iPadTitleLabel.font = UIFont.TurkcellSaturaDemFont(size: 22)
             errorLabel.font = UIFont.TurkcellSaturaMedFont(size: 22)
         }
+        
         iPadTitleLabel.textColor = ColorConstants.whiteColor
         
         nextBtn.setTitle(TextConstants.registrationNextButtonText, for: .normal)
@@ -77,6 +83,7 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
                                          target: self,
                                          selector: #selector(donePicker(sender:)))
         doneButton.tintColor = UIColor.blue
+        
         let pickerToolBar = barButtonItemsWithRitht(button: doneButton)
         
         pickerContainer.addSubview(pickerToolBar)
@@ -87,26 +94,17 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
         output.viewIsReady()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    @objc func donePicker(sender: AnyObject) {
-        chooseButtonPressed()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         hidenNavigationBarStyle()
-
+        
         userRegistrationTable.register(UINib(nibName: "inputCell", bundle: nil),
-                                            forCellReuseIdentifier: CellsIdConstants.baseUserInputCellViewID)
+                                       forCellReuseIdentifier: CellsIdConstants.baseUserInputCellViewID)
         userRegistrationTable.register(UINib(nibName: "GSMUInputCell", bundle: nil),
-                                            forCellReuseIdentifier: CellsIdConstants.gSMUserInputCellID)
+                                       forCellReuseIdentifier: CellsIdConstants.gSMUserInputCellID)
         userRegistrationTable.register(UINib(nibName: "PasswordCell", bundle: nil),
-                                            forCellReuseIdentifier: CellsIdConstants.passwordCellID)
+                                       forCellReuseIdentifier: CellsIdConstants.passwordCellID)
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showKeyBoard),
@@ -119,21 +117,27 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
         view.layoutSubviews()
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        originBottomH = bottomConstraint.constant
+        originSpaceBetweenNextButtonAndTable = spaceBetweenNextButtonAndTable.constant
     }
     
-    func setupCaptchaVC(captchaVC: CaptchaViewController) {
-        if isCaptchaVisible {
-            return
-        }
-        isCaptchaVisible = true
-        
-        captchaContainerHeightConstraint.constant = captchaContainerHeight
-        captchaController = captchaVC
-        captchaContainer.addSubview(captchaVC.view)
-        
-        setupConstraintsForCaptchaVC()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - IBActions
+    
+    @IBAction func nextActionHandler(_ sender: Any) {
+        handleNextAction()
+    }
+    
+    // MARK: - Actions
+    
+    @objc func donePicker(sender: AnyObject) {
+        chooseButtonPressed()
     }
     
     private func refreshCaptcha() {
@@ -143,20 +147,6 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
     
     private func setupConstraintsForCaptchaVC() {
         captchaController?.view.frame = captchaContainer.bounds
-    }
-    
-    func showErrorTitle(withText: String) {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 3
-        errorLabel.attributedText = NSAttributedString(string: withText, attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
-        changeErrorLabelAppearance(status: true)
-//        if (Device.isIpad){
-//          errorLabelHeight.constant = errorLabelConstraintOriginalHeight * 1.5
-//        }
-        
-        if isCaptchaVisible {
-            refreshCaptcha()
-        }
     }
     
     func changeErrorLabelAppearance(status: Bool) {
@@ -169,12 +159,6 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
         view.layoutIfNeeded()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        originBottomH = bottomConstraint.constant
-        originSpaceBetweenNextButtonAndTable = spaceBetweenNextButtonAndTable.constant
-    }
-    
     private func setupDelegates() {
         pickerView.dataSource = dataSource
         pickerView.delegate = dataSource
@@ -182,6 +166,14 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
         dataSource.output = self
         userRegistrationTable.dataSource = dataSource
         userRegistrationTable.delegate = dataSource
+    }
+    
+    func setScrollViewOffsetForErrorIfNeed() {
+        let isErrorLabelVisible = scrollView.contentOffset.y < errorLabel.frame.origin.y
+        
+        if !isErrorLabelVisible {
+            scrollView.setContentOffset(CGPoint(x: 0, y: errorLabel.frame.origin.y), animated: true)
+        }
     }
     
     @objc func showKeyBoard(notification: NSNotification) {
@@ -212,10 +204,8 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
             }
         }
     }
-    
-    
+
     private func searchActiveTextField(view: UIView) -> UITextField? {
-        
         if let textField = view as? UITextField {
             if textField.isFirstResponder {
                 return textField
@@ -257,11 +247,6 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
         
         spaceBetweenNextButtonAndTable.constant = errorLabel.text!.isEmpty ? originSpaceBetweenNextButtonAndTable : erroredSpaceBetweenNextButtonAndTable
         view.layoutIfNeeded()
-    }
-    
-    private func handleNextAction() {
-        hideKeyboardAndPicker()
-        output.nextButtonPressed()
     }
     
     private func reloadGSMCell() {
@@ -316,6 +301,54 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
         showPicker()
     }
     
+    private func handleNextAction() {
+        hideKeyboardAndPicker()
+        output.nextButtonPressed()
+    }
+    
+    private func setupInitialtGSMCode() {
+        let telephonyService = CoreTelephonyService()
+        let phoneCode = telephonyService.callingCountryCode()
+        if phoneCode == "" || UIDevice.current.modelName == "iPad Pro 12.9 Inch 2. Generation" || UIDevice.current.modelName == "iPad Pro 10.5 Inch" || UIDevice.current.modelName == "iPad Pro 9.7 Inch"{
+            self.dataSource.currentGSMCode = telephonyService.countryCodeByLang()
+        }
+    }
+    
+    // MARK: - Picker Choose
+    
+    func chooseButtonPressed() {
+        hidePicker()
+        let currentRow = pickerView.selectedRow(inComponent: 0)
+        dataSource.changeGSMCodeLabel(withRow: currentRow)
+        reloadGSMCell()
+    }
+}
+
+// MARK: - RegistrationViewInput
+
+extension RegistrationViewController: RegistrationViewInput {
+    func setupInitialState(withModels: [BaseCellModel]) {
+        shadowView.isHidden = true //TODO: create in popup service something like "show shadow view"
+        shadowView.isUserInteractionEnabled = false
+        dataSource.setupCells(withModels: withModels)
+        setupInitialtGSMCode()
+        userRegistrationTable.reloadData()
+    }
+    
+    func setupPicker(withModels: [GSMCodeModel]) {
+        dataSource.setupPickerCells(withModels: withModels)
+        pickerView.reloadAllComponents()
+    }
+    
+    func setupCurrentGSMCode(toGSMCode gsmCode: String) {
+        dataSource.changeGSMCode(withCode: gsmCode)
+        reloadGSMCell()
+    }
+    
+    func collectInputedUserInfo() {
+        output.collectedUserInfo(email: getTextFieldValue(forRow: 1), code: dataSource.currentGSMCode, phone: getTextFieldValue(forRow: 0), password: getTextFieldValue(forRow: 2), repassword: getTextFieldValue(forRow: 3), captchaID: captchaController?.getCaptchaID(), captchaAnswer: captchaController?.getCaptchaAnswer())
+    }
+    
     func showInfoButton(forType type: UserValidationResults) {
         var textCell: ProtoInputTextCell?
         switch type {//FIXME: change it to more reasanble way 
@@ -335,44 +368,39 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
         }
     }
     
-    // MARK: - Actions
-    
-    @IBAction func nextActionHandler(_ sender: Any) {
-        handleNextAction()
-    }
-    
-    func setupInitialState(withModels: [BaseCellModel]) {
-        shadowView.isHidden = true //TODO: create in popup service something like "show shadow view"
-        shadowView.isUserInteractionEnabled = false
-        dataSource.setupCells(withModels: withModels)
-        setupInitialtGSMCode()
-        userRegistrationTable.reloadData()
-    }
-    
-    private func setupInitialtGSMCode() {
-        let telephonyService = CoreTelephonyService()
-        let phoneCode = telephonyService.callingCountryCode()
-        if phoneCode == "" || UIDevice.current.modelName == "iPad Pro 12.9 Inch 2. Generation" || UIDevice.current.modelName == "iPad Pro 10.5 Inch" || UIDevice.current.modelName == "iPad Pro 9.7 Inch"{
-            self.dataSource.currentGSMCode = telephonyService.countryCodeByLang()
+    func showErrorTitle(withText: String) {
+        setScrollViewOffsetForErrorIfNeed()
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 3
+        errorLabel.attributedText = NSAttributedString(string: withText, attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
+        changeErrorLabelAppearance(status: true)
+        //        if (Device.isIpad){
+        //          errorLabelHeight.constant = errorLabelConstraintOriginalHeight * 1.5
+        //        }
+        
+        if isCaptchaVisible {
+            refreshCaptcha()
         }
     }
     
-    func setupPicker(withModels: [GSMCodeModel]) {
-        dataSource.setupPickerCells(withModels: withModels)
-        pickerView.reloadAllComponents()
+    func setupCaptchaVC(captchaVC: CaptchaViewController) {
+        if isCaptchaVisible {
+            return
+        }
+        isCaptchaVisible = true
+        
+        captchaContainerHeightConstraint.constant = captchaContainerHeight
+        captchaController = captchaVC
+        captchaContainer.addSubview(captchaVC.view)
+        
+        setupConstraintsForCaptchaVC()
     }
-    
-    func setupCurrentGSMCode(toGSMCode gsmCode: String) {
-        dataSource.changeGSMCode(withCode: gsmCode)
-        reloadGSMCell()
-    }
-    
-    func collectInputedUserInfo() {
-        output.collectedUserInfo(email: getTextFieldValue(forRow: 1), code: dataSource.currentGSMCode, phone: getTextFieldValue(forRow: 0), password: getTextFieldValue(forRow: 2), repassword: getTextFieldValue(forRow: 3), captchaID: captchaController?.getCaptchaID(), captchaAnswer: captchaController?.getCaptchaAnswer())
-    }
-    
-    
-    // MARK: - DataSource output
+}
+
+// MARK: - DataSource output
+
+extension RegistrationViewController: DataSourceOutput {
     
     func protoCellTextFinishedEditing(cell: ProtoInputTextCell) {
         findNextProtoCell(fromEditedCell: cell)
@@ -386,16 +414,6 @@ class RegistrationViewController: ViewController, RegistrationViewInput, DataSou
     func infoButtonGotPressed(withType: UserValidationResults) {
         output.infoButtonGotPressed(with: withType)
     }
-    
-    
-    // MARK: - Picker Choose
-    
-    func chooseButtonPressed() {
-        hidePicker()
-        let currentRow = pickerView.selectedRow(inComponent: 0)
-        dataSource.changeGSMCodeLabel(withRow: currentRow)
-        reloadGSMCell()
-    }
 }
 
 extension RegistrationViewController: RegistrationViewDelegate {
@@ -406,3 +424,5 @@ extension RegistrationViewController: RegistrationViewDelegate {
         output.captchaRequred(requred: true)
     }
 }
+
+

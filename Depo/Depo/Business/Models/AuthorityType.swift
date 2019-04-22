@@ -12,4 +12,5 @@ enum AuthorityType: String {
     case faceRecognition    = "AUTH_FACE_IMAGE_LOCATION"
     case deleteDublicate    = "AUTH_DELETE_DUPLICATE"
     case premiumUser        = "AUTH_PREMIUM_USER"
+    case middleUser         = "AUTH_MID_USER"
 }

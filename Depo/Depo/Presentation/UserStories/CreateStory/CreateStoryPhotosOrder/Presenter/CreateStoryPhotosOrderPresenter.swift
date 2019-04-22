@@ -30,7 +30,7 @@ class CreateStoryPhotosOrderPresenter: BasePresenter, CreateStoryPhotosOrderModu
     }
     
     func storyCreated() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         
         let controller = PopUpController.with(title: TextConstants.success,
                                               message: TextConstants.createStoryCreated,
@@ -45,7 +45,7 @@ class CreateStoryPhotosOrderPresenter: BasePresenter, CreateStoryPhotosOrderModu
     }
     
     func createdStoryFailed(with error: ErrorResponse) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         
         let errorMessage = error.isNetworkError ? error.description : TextConstants.createStoryNotCreated
         view.showErrorAlert(message: errorMessage)
@@ -61,14 +61,14 @@ class CreateStoryPhotosOrderPresenter: BasePresenter, CreateStoryPhotosOrderModu
     }
     
     func audioNotSelectedError() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         router.showMusicEmptyPopUp { [weak self] in
             self?.interactor.onMusicSelection()
         }
     }
     
     func goToStoryPreview(story: PhotoStory, responce: CreateStoryResponce) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         router.goToStoryPreviewViewController(forStory: story, responce: responce, navigationController: view.getNavigationControllet())
     }
     

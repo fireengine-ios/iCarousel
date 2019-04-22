@@ -17,6 +17,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     var faceImageType: FaceImageType
     var heightDescriptionLabel: CGFloat = 0
     var heightTitleLabel: CGFloat = 0
+    var accountType: AccountType = .all
     
     weak var premiumDelegate: FaceImageItemsDataSourceDelegate?
     
@@ -30,7 +31,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
             return super.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
         } else {
             let premiumView = collectionView.dequeue(supplementaryView: PremiumFooterCollectionReusableView.self, kind: kind, for: indexPath)
-            premiumView.configure(price: price, description: detailMessage, type: faceImageType)
+            premiumView.configure(price: price, description: detailMessage, type: faceImageType, isTurkcell: accountType == .turkcell)
             premiumView.delegate = self
             return premiumView
         }
@@ -40,7 +41,12 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
         if AuthoritySingleton.shared.faceRecognition {
             return super.collectionView(collectionView, layout: collectionViewLayout, referenceSizeForFooterInSection: section)
         } else {
-            return CGSize(width: UIScreen.main.bounds.width, height: NumericConstants.premiumViewHeight + heightDescriptionLabel + heightTitleLabel)
+            var height: CGFloat = NumericConstants.premiumViewHeight + heightDescriptionLabel + heightTitleLabel
+            if accountType == .turkcell {
+                height += NumericConstants.plusPremiumViewHeightForTurkcell
+            }
+            
+            return CGSize(width: UIScreen.main.bounds.width, height: height)
         }
     }
     
@@ -63,7 +69,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     // MARK: Utility methods
     func didAnimationForPremiumButton(with indexPath: IndexPath) {
         if let footerView = collectionView?.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewPremiumFooter, for: indexPath) as? PremiumFooterCollectionReusableView {
-            footerView.configure(price: price, description: detailMessage, type: faceImageType, isSelectedAnimation: true)
+            footerView.configure(price: price, description: detailMessage, type: faceImageType, isSelectedAnimation: true, isTurkcell: accountType == .turkcell)
             footerView.delegate = self
         }
     }

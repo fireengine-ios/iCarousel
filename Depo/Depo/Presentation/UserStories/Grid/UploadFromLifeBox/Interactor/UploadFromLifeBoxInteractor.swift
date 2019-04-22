@@ -17,7 +17,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
             PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: { [weak self] in
                 DispatchQueue.main.async {
                     if let `self` = self {
-                        self.output.asyncOperationSucces()
+                        self.output.asyncOperationSuccess()
                         guard let out = self.output as? UploadFromLifeBoxInteractorOutput else {
                             return
                         }
@@ -38,7 +38,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
             FileService().copy(copyparam: parametr, success: { [weak self] in
                 DispatchQueue.main.async {
                     if let `self` = self {
-                        self.output.asyncOperationSucces()
+                        self.output.asyncOperationSuccess()
                         guard let out = self.output as? UploadFromLifeBoxInteractorOutput else {
                             return
                         }
@@ -69,7 +69,7 @@ final class UploadFromLifeBoxFavoritesInteractor: UploadFromLifeBoxInteractor {
     override func onUploadItems(items: [Item]) {
         fileService.addToFavourite(files: items, success: { [weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self?.output.asyncOperationSucces()
+                self?.output.asyncOperationSuccess()
                 guard let output = self?.output as? UploadFromLifeBoxInteractorOutput else {
                     return
                 }

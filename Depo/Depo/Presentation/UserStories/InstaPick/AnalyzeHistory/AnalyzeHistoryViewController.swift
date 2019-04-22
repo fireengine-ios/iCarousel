@@ -54,6 +54,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         
         configure()
         reloadData()
+        trackScreen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +62,16 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
         
         navigationBarWithGradientStyle()
         editingTabBar?.view.layoutIfNeeded()
+    }
+    
+    func updateAnalyzeCount(with analyzesCount: InstapickAnalyzesCount) {
+        self.dataSource.reloadCards(with: analyzesCount)
+    }
+    
+    private func trackScreen() {
+        let analyticsService: AnalyticsService = factory.resolve()
+        analyticsService.logScreen(screen: .photoPickHistory)
+        analyticsService.trackDimentionsEveryClickGA(screen: .photoPickHistory)
     }
     
     private func configure() {
@@ -158,7 +169,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                                          message: TextConstants.analyzeHistoryPopupMessage,
                                          image: .custom(UIImage(named: "popup_info")),
                                          firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.analyzeHistoryPopupButton,
+                                         secondButtonTitle: TextConstants.analyzeHistorySeeDetails,
                                          secondAction: { [weak self] controller in
                                             controller.close {
                                                 self?.onPurchase()
@@ -418,13 +429,11 @@ extension AnalyzeHistoryViewController: AnalyzeHistoryDataSourceDelegate {
     }
     
     func onPurchase() {
-        //TODO: - Open Purchase Screen
-        InstaPickRoutingService.showUpdgradePopup()
+        InstaPickRoutingService.openPremium()
     }
     
     func onSeeDetails() {
-        //TODO: - Open Details Screen
-        InstaPickRoutingService.showUpdgradePopup()
+        InstaPickRoutingService.openPremium()
     }
     
     func onSelectAnalyze(_ analyze: InstapickAnalyze) {

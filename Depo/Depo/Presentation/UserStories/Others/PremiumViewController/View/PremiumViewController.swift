@@ -41,7 +41,8 @@ final class PremiumViewController: BaseViewController {
                               description: description,
                               types: PremiumListType.allTypes,
                               titleEdgeInsets: titleEdgeInsets,
-                              isNeedPolicy: false)
+                              isNeedPolicy: false,
+                              isTurkcell: output.accountType == .turkcell)
     }
 }
 
@@ -54,7 +55,8 @@ extension PremiumViewController: PremiumViewInput {
                               description: description,
                               types: PremiumListType.allTypes,
                               titleEdgeInsets: titleEdgeInsets,
-                              isNeedPolicy: isNeedPolicy)
+                              isNeedPolicy: isNeedPolicy,
+                              isTurkcell: output.accountType == .turkcell)
     }
 }
 

@@ -577,7 +577,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func albumDetails(items: [BaseDataSourceItem]) {
         let albumDetailVC = router.fileInfo as? FileInfoViewController
-        albumDetailVC?.needShowTabBar = false
+        albumDetailVC?.needToShowTabBar = false
         albumDetailVC?.interactor.setObject(object: items.first!)
         router.pushViewController(viewController: albumDetailVC!)
     }

@@ -52,9 +52,14 @@ class CreatesFolder: BaseRequestParametrs {
 
 
 class CreateFolderResponse: ObjectRequestResponse {
+    var folder: WrapData?
     
     override func mapping() {
-        print("A")
+        guard let json = json else { 
+            return 
+        }
+        
+        folder = WrapData(remote: SearchItemResponse(withJSON: json))
     }
 }
 
@@ -233,6 +238,7 @@ class DetailResponse: ObjectRequestResponse {
 }
 
 typealias FileOperation = () -> Void
+typealias FolderOperation = (Item?) -> Void
 
 class FileService: BaseRequestService {
     
@@ -281,13 +287,15 @@ class FileService: BaseRequestService {
         executeDeleteRequest(param: deleteFiles, handler: handler)
     }
     
-    func createsFolder(createFolder: CreatesFolder, success: FileOperation?, fail: FailResponse?) {
+    func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?) {
         debugLog("FileService createFolder \(createFolder.folderName)")
         
         let handler = BaseResponseHandler<CreateFolderResponse, ObjectRequestResponse>(success: { _  in
             debugLog("FileService createFolder success")
-
-            success?()
+            self?.debugLogTransIdIfNeeded(headers: (response as? ObjectRequestResponse)?.response?.allHeaderFields, method: "createFolder")
+            let item = (response as? CreateFolderResponse)?.folder
+            success?(item)
+            ///used to be: success?()
         }, fail: fail)
         executePostRequest(param: createFolder, handler: handler)
     }
