@@ -212,12 +212,11 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                 buttonTitle: TextConstants.ok,
                 action: { [weak self] vc in
                     vc.close { [weak self] in
-                        self?.output.setNewBirthday(self?.birthdayDetailView.editableText ?? "")
-
                         self?.output.tapReadyButton(name: self?.nameDetailView.editableText ?? "",
                                                     surname: self?.surnameDetailView.editableText ?? "",
                                                     email: self?.emailDetailView.editableText ?? "",
-                                                    number: self?.gsmDetailView.editableText ?? "")
+                                                    number: self?.gsmDetailView.editableText ?? "",
+                                                    birthday: self?.birthdayDetailView.editableText ?? "")
                         self?.readyButton?.isEnabled = true
                     }
                 })
@@ -225,12 +224,11 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
             self.present(controller, animated: true, completion: nil)
             
         } else {
-            output.setNewBirthday(birthdayDetailView.editableText ?? "")
-            
             output.tapReadyButton(name: nameDetailView.editableText ?? "",
                                         surname: surnameDetailView.editableText ?? "",
                                         email: emailDetailView.editableText ?? "",
-                                        number: gsmDetailView.editableText ?? "")
+                                        number: gsmDetailView.editableText ?? "",
+                                        birthday: birthdayDetailView.editableText ?? "")
             readyButton?.isEnabled = false
         }
     }

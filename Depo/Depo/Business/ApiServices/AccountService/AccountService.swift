@@ -156,7 +156,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executePostRequest(param: parameters, handler: handler)
     }
 
-    func updateUserBirthday(_ birthday: String, handler: @escaping (Error) -> Void) {
+    func updateUserBirthday(_ birthday: String, handler: @escaping ResponseVoid) {
         debugLog("AccountService updateBirthday")
         
         let birthdayDigits = birthday
@@ -171,9 +171,9 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .responseData { response in
                 switch response.result {
                 case .success(_):
-                    break
+                    handler(.success(()))
                 case .failure(let error):
-                    handler(error)
+                    handler(.failed(error))
                 }
         }
     }
