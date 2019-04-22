@@ -106,6 +106,9 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     func updateBirthday(_ birthday: String) {
+        AccountService().updateUserBirthday(birthday) { error in
+            self.output.showError(error: error.localizedDescription)
+        }
     }
     
     func needSendOTP(responce: SignUpSuccessResponse) {
