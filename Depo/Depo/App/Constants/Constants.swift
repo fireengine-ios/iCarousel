@@ -113,6 +113,7 @@ struct TextConstants {
     static let resetPasswordSendPassword = NSLocalizedString("Send Link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let resetPasswordEmailTitle = NSLocalizedString("Your Account E-mail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let resetPasswordEmailPlaceholder = NSLocalizedString("Enter your account e-mail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let resetPasswordCaptchaPlaceholder = NSLocalizedString("Enter the text shown in the image", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let forgotPasswordSentEmailAddres = NSLocalizedString("Your password is sent to your e-mail address", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let captchaPlaceholder = NSLocalizedString("Type the text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

@@ -21,12 +21,9 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     @IBOutlet weak var emailTitle: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     
-    @IBOutlet weak var viewForCapcha: UIView!
+    @IBOutlet private weak var captchaView: CaptchaView!
     
     @IBOutlet weak var sendPasswordButton: WhiteButtonWithRoundedCorner!
-
-    
-    var captchaModuleView = CaptchaViewController.initFromXib()
 
     fileprivate let keyboard = Typist.shared
 
@@ -40,11 +37,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         
         scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         
-        viewForCapcha.addSubview(captchaModuleView.view)
-        captchaModuleView.view.frame = viewForCapcha.bounds
-        
         output.viewIsReady()
-        
         configureKeyboard()
     }
     
@@ -76,6 +69,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         setupEmailTitle()
         setupEmailField()
         setupButton()
+        setupCaptchaView()
     }
     
     private func setupSubTitle() {
@@ -154,13 +148,19 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         updateButtonState()
     }
     
+    private func setupCaptchaView() {
+        captchaView.captchaAnswerTextField.insetX = 0
+        captchaView.captchaAnswerTextField.placeholder = TextConstants.resetPasswordCaptchaPlaceholder
+        captchaView.captchaAnswerTextField.delegate = self
+    }
+    
     @objc private func textFieldDidChange(_ textField: UITextField) {
         updateButtonState()
     }
     
     private func updateButtonState() {
         guard Validator.isValid(email: emailTextField.text),
-            let captchaEntered = captchaModuleView.inputTextField.text,
+            let captchaEntered = captchaView.captchaAnswerTextField.text,
             !captchaEntered.isEmpty else {
                 sendPasswordButton.isEnabled = false
                 sendPasswordButton.backgroundColor = UIColor.lrTealishTwo.withAlphaComponent(0.5)
@@ -209,6 +209,8 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     }
 
     private func updateContentInsetWithKeyboardFrame(_ keyboardFrame: CGRect) {
+//        let buttonBottomInset = view.bounds.height - sendPasswordButton.frame.maxY
+//        let bottomInset = buttonBottomInset > keyboardFrame.height ? 0 : keyboardFrame.height - buttonBottomInset + 30
         let bottomInset = keyboardFrame.height + UIScreen.main.bounds.height - keyboardFrame.maxY
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
         scrollView.contentInset = insets
@@ -231,8 +233,8 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     }
     
     func showCapcha() {
-        captchaModuleView.refreshCapthcha()
-        captchaModuleView.inputTextField.text = ""
+        captchaView.updateCaptcha()
+        captchaView.captchaAnswerTextField.text = ""
     }
     
     // MARK: Buttons actions 
@@ -240,8 +242,8 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     @IBAction func onSendPasswordButton() {
         endEditing()
         
-        let captchaUdid = captchaModuleView.currentCaptchaID
-        let captchaEntered = captchaModuleView.inputTextField.text
+        let captchaUdid = captchaView.currentCaptchaUUID
+        let captchaEntered = captchaView.captchaAnswerTextField.text
         
         output.onSendPassword(withEmail: emailTextField.text ?? "", enteredCaptcha: captchaEntered ?? "", captchaUDID: captchaUdid)
     }
@@ -257,7 +259,9 @@ extension ForgotPasswordViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        captchaModuleView.inputTextField.becomeFirstResponder()
-        scrollToFirstResponderIfNeeded(animated: true)
+        if captchaView.captchaAnswerTextField != textField {
+            captchaView.captchaAnswerTextField.becomeFirstResponder()
+            scrollToFirstResponderIfNeeded(animated: true)
+        }
     }
 }
