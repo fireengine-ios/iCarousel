@@ -80,7 +80,7 @@ final class ProfileFieldView: UIView {
     private let dividerLineView: UIView = {
         let newValue = UIView()
         
-        newValue.backgroundColor = ColorConstants.lightGrayColor
+        newValue.backgroundColor = ColorConstants.profileGrayColor
         
         return newValue
     }()
@@ -103,7 +103,7 @@ final class ProfileFieldView: UIView {
     
     var isEditState: Bool = false {
         didSet {
-            textField.isUserInteractionEnabled = isEditState && type != .password
+            textField.isUserInteractionEnabled = (isEditState && type != .password)
             if type == .gsmNumber, SingletonStorage.shared.isTurkcellUser {
                 alertLabel.isHidden = !isEditState
                 let textColor = isEditState ? UIColor.black.withAlphaComponent(0.25) : ColorConstants.textGrayColor

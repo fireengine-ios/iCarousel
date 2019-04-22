@@ -113,7 +113,6 @@ class UserProfileInteractor: UserProfileInteractorInput {
                 switch response {
                 case .success(_):
                     self?.allUpdated()
-                    break
                 case .failed(let error):
                     self?.fail(error: error.localizedDescription)
                 }
