@@ -351,7 +351,7 @@
 "Lifebox can sync your files automatically. Would you like to have this feature right now?" = "Lifebox puede sincronizar sus fotos y videos automáticamente. ¿Desea habilitar la función de carga automática ahora?";
 "You have to fill in a password" = "Debes escribir su contraseña";
 "You have to fill in your mail or GSM Number" = "Debe completar su dirección de correo electrónico o número de teléfono";
-"Password" = "Contraseña";
+"password" = "Contraseña";
 "E-Mail or GSM Number" = "Correo electrónico o número de teléfono";
 "Remember my credentials" = "Recordar mi contraseña";
 "I can't login" = "Olvidé mi contraseña";

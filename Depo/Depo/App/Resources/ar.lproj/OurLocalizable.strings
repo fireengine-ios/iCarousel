@@ -357,7 +357,7 @@
 "Lifebox can sync your files automatically. Would you like to have this feature right now?" = "يُزامن لايف بوكس الصور ومقاطع الفيديو تلقائياً. هل تريد تمكين ميزة المزامنة التلقائية؟";
 "You have to fill in a password" = "يرجى كتابة كلمة المرور";
 "You have to fill in your mail or GSM Number" = "يرجى كتابة عنوان البريد الإلكتروني أو رقم الهاتف";
-"Password" = "كلمة المرور";
+"password" = "كلمة المرور";
 "E-Mail or GSM Number" = "البريد الإلكتروني أو رقم الهاتف";
 "Remember my credentials" = "تذكر كلمة المرور";
 "I can't login" = "نسيت كلمة المرور";

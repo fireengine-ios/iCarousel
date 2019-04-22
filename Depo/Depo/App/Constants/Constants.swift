@@ -25,7 +25,7 @@ struct TextConstants {
     
     static let registrationCellTitleEmail = NSLocalizedString("E-MAIL", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationCellTitleGSMNumber = NSLocalizedString("GSM Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let registrationCellTitlePassword = NSLocalizedString("Password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let registrationCellTitlePassword = NSLocalizedString("password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationCellTitleReEnterPassword = NSLocalizedString("Re-Enter Password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationCellPlaceholderPhone = NSLocalizedString(" You have to fill in GSM number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let registrationCellPlaceholderEmail = NSLocalizedString(" You have to fill in your mail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -81,7 +81,7 @@ struct TextConstants {
     static let loginCantLoginButtonTitle = NSLocalizedString("I can't login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginRememberMyCredential = NSLocalizedString("Remember my credentials", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginCellTitleEmail = NSLocalizedString("E-Mail or GSM Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let loginCellTitlePassword = NSLocalizedString("Password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginCellTitlePassword = NSLocalizedString("password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginCellEmailPlaceholder = NSLocalizedString( "You have to fill in your mail or GSM Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginCellPasswordPlaceholder = NSLocalizedString("You have to fill in a password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -401,9 +401,9 @@ struct TextConstants {
     static let emptyEmailTitle = NSLocalizedString("E-Mail Entry", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileChangePassword = NSLocalizedString("change password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileBirthday = NSLocalizedString("birthday", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let userProfilePassword = NSLocalizedString("Password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfilePassword = NSLocalizedString("password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileBirthdayPlaceholder = NSLocalizedString("user_profile_birthday_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let userProfileTurkcellGSMAlert = NSLocalizedString("user_profile_turkcell_GSM_alert", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileTurkcellGSMAlert = NSLocalizedString("user_profile_turkcell_gsm_alert", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: fileInfo
     static let fileInfoFileNameTitle = NSLocalizedString("File Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

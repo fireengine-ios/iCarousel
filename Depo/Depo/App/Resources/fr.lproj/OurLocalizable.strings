@@ -432,7 +432,7 @@
 
 /*Suggested: "Fill in your e-mail or Phone Number"*/
 "You have to fill in your mail or GSM Number" = "Saisissez votre email ou votre numéro de Mobile";
-"Password" = "Mot de Passe";
+"password" = "Mot de Passe";
 "E-Mail or GSM Number" = "E-mail ou Numéro de Mobile";
 "Remember my credentials" = "Se souvenir de mon mot de passe";
 "I can't login" = "J’ai oublié mon mot de passe";
