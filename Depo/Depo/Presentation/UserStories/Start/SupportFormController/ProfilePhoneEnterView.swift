@@ -96,8 +96,6 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.isOpaque = true
             newValue.placeholder = TextConstants.profilePhoneNumberPlaceholder
             
-            newValue.returnKeyType = .done
-            
             /// removes suggestions bar above keyboard
             newValue.autocorrectionType = .no
             
@@ -154,10 +152,11 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         responderOnNext?.becomeFirstResponder()
     }
     
-    func showUnderlineAnimated() {
+    func showSubtitleAnimated() {
         guard subtitleLabel.isHidden else {
             return
         }
+        stackView.spacing = NumericConstants.profileStackViewShowSubtitleSpacing
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.subtitleLabel.isHidden = false
             /// https://stackoverflow.com/a/46412621/5893286
@@ -165,10 +164,11 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         }
     }
     
-    func hideUnderlineAnimated() {
+    func hideSubtitleAnimated() {
         guard !subtitleLabel.isHidden else {
             return
         }
+        stackView.spacing = NumericConstants.profileStackViewHiddenSubtitleSpacing
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.subtitleLabel.isHidden = true
             /// https://stackoverflow.com/a/46412621/5893286
@@ -178,6 +178,6 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     func showTextAnimated(text: String) {
         subtitleLabel.text = text
-        showUnderlineAnimated()
+        showSubtitleAnimated()
     }
 }

@@ -28,6 +28,7 @@ class ProfileTextEnterView: UIView {
         newValue.borderStyle = .none
         newValue.backgroundColor = .white
         newValue.isOpaque = true
+        newValue.returnKeyType = .next
         return newValue
     }()
     
@@ -100,7 +101,7 @@ class ProfileTextEnterView: UIView {
                                       height: underlineWidth);
     }
     
-    func showUnderlineAnimated() {
+    func showSubtitleAnimated() {
         guard subtitleLabel.isHidden else {
             return
         }
@@ -112,7 +113,7 @@ class ProfileTextEnterView: UIView {
         }
     }
     
-    func hideUnderlineAnimated() {
+    func hideSubtitleAnimated() {
         guard !subtitleLabel.isHidden else {
             return
         }
@@ -122,5 +123,10 @@ class ProfileTextEnterView: UIView {
             /// https://stackoverflow.com/a/46412621/5893286
             self.layoutIfNeeded()
         }
+    }
+    
+    func showSubtitleTextAnimated(text: String) {
+        subtitleLabel.text = text
+        showSubtitleAnimated()
     }
 }

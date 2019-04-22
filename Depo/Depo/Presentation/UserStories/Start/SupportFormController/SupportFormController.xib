@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SupportFormController" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="scrollView" destination="2pQ-Xv-lt4" id="ttU-FV-q58"/>
                 <outlet property="sendButton" destination="CHb-qr-U2J" id="GCh-vx-Gos"/>
                 <outlet property="stackView" destination="6Tq-17-xxS" id="akV-8I-pPg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -50,6 +51,7 @@
                                 <constraint firstItem="6Tq-17-xxS" firstAttribute="leading" secondItem="qei-N7-1wp" secondAttribute="leading" constant="20" id="fsx-lf-5RX"/>
                                 <constraint firstItem="CHb-qr-U2J" firstAttribute="top" secondItem="6Tq-17-xxS" secondAttribute="bottom" constant="20" id="hFt-kd-eQz"/>
                                 <constraint firstItem="CHb-qr-U2J" firstAttribute="centerX" secondItem="qei-N7-1wp" secondAttribute="centerX" id="lei-cn-c53"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="CHb-qr-U2J" secondAttribute="bottom" constant="20" id="yDH-pB-4pf"/>
                                 <constraint firstAttribute="trailing" secondItem="6Tq-17-xxS" secondAttribute="trailing" constant="20" id="zKx-BI-Pw5"/>
                                 <constraint firstItem="CHb-qr-U2J" firstAttribute="width" secondItem="qei-N7-1wp" secondAttribute="width" multiplier="0.55" id="zlX-cz-NQW"/>
                             </constraints>
