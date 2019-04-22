@@ -85,9 +85,9 @@ final class ProfileFieldView: UIView {
         return newValue
     }()
     
-    lazy private var datePicker: UIDatePicker = {
+    private lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
-        datePicker.addTarget(self, action: #selector(dateDidChanged(_:)), for: .valueChanged)
+        datePicker.addTarget(self, action: #selector(dateDidChanged), for: .valueChanged)
         datePicker.maximumDate = Date()
         datePicker.datePickerMode = .date
         
@@ -98,9 +98,7 @@ final class ProfileFieldView: UIView {
     var type: ProfileFieldType = .firstName
     
     var editableText: String? {
-        get {
-            return textField.text
-        }
+        return textField.text
     }
     
     var isEditState: Bool = false {
@@ -108,8 +106,8 @@ final class ProfileFieldView: UIView {
             textField.isUserInteractionEnabled = isEditState && type != .password
             if type == .gsmNumber, SingletonStorage.shared.isTurkcellUser {
                 alertLabel.isHidden = !isEditState
-                let alpha: CGFloat = isEditState ? 0.25 : 1
-                textField.textColor = UIColor.black.withAlphaComponent(alpha)
+                let textColor = isEditState ? UIColor.black.withAlphaComponent(0.25) : ColorConstants.textGrayColor
+                textField.textColor = textColor
             }
         }
     }

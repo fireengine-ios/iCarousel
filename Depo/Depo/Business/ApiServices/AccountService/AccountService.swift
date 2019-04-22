@@ -170,7 +170,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .customValidate()
             .responseData { response in
                 switch response.result {
-                case .success(let _):
+                case .success(_):
                     break
                 case .failure(let error):
                     handler(error)

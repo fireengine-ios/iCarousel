@@ -118,9 +118,8 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
             return
         }
         
-        let frameOnWindow = firstResponser.frameOnWindow
-        let frameOnWindowWithInset = frameOnWindow.offsetBy(dx: 0.0, dy: 50.0)
-        scrollView.scrollRectToVisible(frameOnWindowWithInset, animated: animated)
+        let rect = scrollView.convert(view.frame, to: scrollView).offsetBy(dx: 0.0, dy: 50.0)
+        scrollView.scrollRectToVisible(rect, animated: animated)
     }
     
     private func configureNavBar() {
@@ -181,18 +180,17 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     }
     
     @objc private func onReadyButtonAction() {
-        if name == nameDetailView.editableText,
+        guard name == nameDetailView.editableText,
             surname == surnameDetailView.editableText,
             email == emailDetailView.editableText,
             number == gsmDetailView.editableText,
-            birthday == birthdayDetailView.editableText {
+            birthday == birthdayDetailView.editableText else {
                 setupEditState(false)
                 return
         }
         
         if email != emailDetailView.editableText {
-        
-            if emailDetailView.editableText?.isEmpty == true {
+            guard let email = emailDetailView.editableText, !email.isEmpty else {
                 output.showError(error: TextConstants.emptyEmail)
                 return
             }
