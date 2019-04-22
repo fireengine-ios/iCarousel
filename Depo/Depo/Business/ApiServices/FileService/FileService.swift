@@ -290,7 +290,7 @@ class FileService: BaseRequestService {
     func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?) {
         debugLog("FileService createFolder \(createFolder.folderName)")
         
-        let handler = BaseResponseHandler<CreateFolderResponse, ObjectRequestResponse>(success: { _  in
+        let handler = BaseResponseHandler<CreateFolderResponse, ObjectRequestResponse>(success: { [weak self] response  in
             debugLog("FileService createFolder success")
             self?.debugLogTransIdIfNeeded(headers: (response as? ObjectRequestResponse)?.response?.allHeaderFields, method: "createFolder")
             let item = (response as? CreateFolderResponse)?.folder

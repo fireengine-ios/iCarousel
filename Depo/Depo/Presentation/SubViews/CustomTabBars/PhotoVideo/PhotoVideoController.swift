@@ -61,7 +61,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionViewManager.collectionViewLayout.delegate = dataSource
         navBarManager.setDefaultMode()
         
-        needShowTabBar = true
+        needToShowTabBar = true
         floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
         ItemOperationManager.default.startUpdateView(view: self)
         
@@ -181,17 +181,17 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         canShowDetail = false
         trackClickOnPhotoOrVideo(isPhoto: true)
 
-        showSpiner()
+        showSpinner()
         dataSource.getWrapedFetchedObjects { [weak self] items in
             guard let currentMediaItem = self?.dataSource.object(at: indexPath) else {
                 self?.canShowDetail = true
-                self?.hideSpiner()
+                self?.hideSpinner()
                 return
             }
             let currentObject = WrapData(mediaItem: currentMediaItem)
             
             DispatchQueue.toMain {
-                self?.hideSpiner()
+                self?.hideSpinner()
                 let router = RouterVC()
                 let controller = router.filesDetailViewController(fileObject: currentObject, items: items)
                 let nController = NavigationController(rootViewController: controller)
@@ -425,9 +425,9 @@ extension PhotoVideoController: UICollectionViewDelegate {
 extension PhotoVideoController: BaseItemInputPassingProtocol {
 
     func openInstaPick() {
-        showSpiner()
+        showSpinner()
         instaPickRoutingService.getViewController(isCheckAnalyzesCount: true, success: { [weak self] vc in
-            self?.hideSpiner()
+            self?.hideSpinner()
             if vc is InstapickPopUpController {
                 //FIXME: add router
                 let router = RouterVC()

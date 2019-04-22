@@ -2662,6 +2662,8 @@
 		8CD9FA3A226DADE2006A9B49 /* InternetDataUsageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD9FA35226DADE1006A9B49 /* InternetDataUsageCollectionViewCell.swift */; };
 		8CD9FA3B226DADE2006A9B49 /* InternetDataUsageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CD9FA36226DADE1006A9B49 /* InternetDataUsageCollectionViewCell.xib */; };
 		8CD9FA3C226DADE2006A9B49 /* InternetDataUsageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CD9FA36226DADE1006A9B49 /* InternetDataUsageCollectionViewCell.xib */; };
+		8CD9FA3E226DB6A2006A9B49 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD9FA3D226DB6A2006A9B49 /* KeyboardHandler.swift */; };
+		8CD9FA3F226DB6A2006A9B49 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD9FA3D226DB6A2006A9B49 /* KeyboardHandler.swift */; };
 		8CE20071207CD12900EF3483 /* ServerMessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A8F1620737E230001EB54 /* ServerMessageError.swift */; };
 		8CEE8D25214A472B00150996 /* FaceImageDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AFAD0211D73D0006AF836 /* FaceImageDisplayManager.swift */; };
 		8CEE8D26214A473200150996 /* FaceImageDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA164C2121CA1E006D96A5 /* FaceImageDesigner.swift */; };
@@ -5255,6 +5257,7 @@
 		8CD9FA31226DAB57006A9B49 /* UIView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 		8CD9FA35226DADE1006A9B49 /* InternetDataUsageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetDataUsageCollectionViewCell.swift; sourceTree = "<group>"; };
 		8CD9FA36226DADE1006A9B49 /* InternetDataUsageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InternetDataUsageCollectionViewCell.xib; sourceTree = "<group>"; };
+		8CD9FA3D226DB6A2006A9B49 /* KeyboardHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
 		8CF541EF22030F35001BB03F /* sq */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sq; path = sq.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
 		8CF541F022030F36001BB03F /* sq */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sq; path = sq.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -9585,6 +9588,7 @@
 		8C449C41216632950060785C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8CD9FA3D226DB6A2006A9B49 /* KeyboardHandler.swift */,
 				8CD9FA31226DAB57006A9B49 /* UIView+Utils.swift */,
 				8C449C61216632950060785C /* ActivityIndicator.swift */,
 				8C449C49216632950060785C /* Alamofire+Request.swift */,
@@ -15247,6 +15251,7 @@
 				8C0E8CD51FDEBDFF00789C91 /* CreateStoryNameInteractorInput.swift in Sources */,
 				8C0E8CD61FDEBDFF00789C91 /* HomePageModuleInput.swift in Sources */,
 				8C449C99216632950060785C /* URL+Video.swift in Sources */,
+				8CD9FA3F226DB6A2006A9B49 /* KeyboardHandler.swift in Sources */,
 				8C0E8CD71FDEBDFF00789C91 /* GSMCodeModel.swift in Sources */,
 				8C0E8CD81FDEBDFF00789C91 /* PlanType.swift in Sources */,
 				C65DCBE1204683820083A965 /* MenloworksEventsConstants.swift in Sources */,
@@ -17146,6 +17151,7 @@
 				DE10EF65DE653E0EDBEC8C17 /* BaseFilesGreedViewInput.swift in Sources */,
 				CE00B27B220424C800A5A696 /* InstaPickSelectionSegmentedView.swift in Sources */,
 				B5CDB33021787FEF006CFA50 /* UpdateServerIntegration.m in Sources */,
+				8CD9FA3E226DB6A2006A9B49 /* KeyboardHandler.swift in Sources */,
 				228C4DD0339279189CC9619C /* BaseFilesGreedViewOutput.swift in Sources */,
 				CE3E4D13201C70A100173045 /* ImageManager.swift in Sources */,
 				CE2F55F81F7551A100F49DA1 /* SubscriptionPlan.swift in Sources */,
