@@ -353,7 +353,7 @@
 "Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifebox может автоматически синхронизировать ваши фото и видео.\nХотите воспользоваться данной возможностью прямо сейчас?";
 "You have to fill in a password" = "Введите пароль";
 "You have to fill in your mail or GSM Number" = "Укажите эл. адрес или номер телефона";
-"password" = "Пароль";
+"Password" = "Пароль";
 "E-Mail or GSM Number" = "Электронный адрес или номер телефона";
 "Remember my credentials" = "Запомнить пароль";
 "I can't login" = "Забыли пароль?";

@@ -351,7 +351,7 @@
 "Lifebox can sync your files automatically. Would you like to have this feature right now?" = "Lifebox може автоматично синхронізувати ваші файли. Хочете увімкнути автосинхронізацію зараз?";
 "You have to fill in a password" = "Заповніть пароль";
 "You have to fill in your mail or GSM Number" = "Введіть ел. пошту або номер телефону";
-"password" = "Пароль";
+"Password" = "Пароль";
 "E-Mail or GSM Number" = "E-mail або номер телефону";
 "Remember my credentials" = "Запам'ятати пароль";
 "I can't login" = "Я забув свій пароль";

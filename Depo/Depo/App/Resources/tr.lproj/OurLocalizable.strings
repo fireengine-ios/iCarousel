@@ -357,7 +357,7 @@
 "Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifebox, fotoğraf ve videolarını otomatik olarak güvenle yedekler. Fotoğraf ve videolarını anında güvene almak için bu özelliği aktif hale getirmek ister misin?";
 "You have to fill in a password" = "Şifreni girmelisin";
 "You have to fill in your mail or GSM Number" = "e-mailini veya telefon numaranı girmelisin";
-"password" = "Şifre";
+"Password" = "Şifre";
 "E-Mail or GSM Number" = "E-Posta veya Telefon Numarası";
 "Remember my credentials" = "Şifremi hatırla";
 "I can't login" = "Şifremi unuttum";

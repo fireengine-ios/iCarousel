@@ -351,7 +351,7 @@
 "Lifebox can sync your files automatically. Would you like to have this feature right now?" = "Lifebox-ul poate sincroniza automat pozele și videoclipurile tale. Ai vrea să activezi acum această opțiune?";
 "You have to fill in a password" = "Trebuie să completezi cu parola ta";
 "You have to fill in your mail or GSM Number" = "Trebuie să completezi cu adresa e-mail sau numărul tău de telefon";
-"password" = "Parola";
+"Password" = "Parola";
 "E-Mail or GSM Number" = "E-mail sau Număr de telefon";
 "Remember my credentials" = "Memorizează parola mea";
 "I can't login" = "Am uitat parola mea";

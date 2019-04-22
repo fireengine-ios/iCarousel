@@ -376,7 +376,7 @@
 "Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifebox can sync your photos and videos automatically. Would you like to enable Auto-sync feature now?";
 "You have to fill in a password" = "You have to fill in your password";
 "You have to fill in your mail or GSM Number" = "Fill in your e-mail or Phone Number.";
-"password" = "Password";
+"Password" = "Password";
 "E-Mail or GSM Number" = "E-mail or Phone Number";
 "Remember my credentials" = "Remember my password";
 "I can't login" = "I forgot my password";

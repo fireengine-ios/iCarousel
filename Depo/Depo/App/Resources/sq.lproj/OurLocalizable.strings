@@ -355,7 +355,7 @@
 "Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifebox mund t'i sinkronizojë fotot dhe videot tuaja automatikisht. Doni ta aktivizoni funksionin e ngarkimit automatik tani?";
 "You have to fill in a password" = "Ju duhet të plotësoni fjalëkalimin tuaj ";
 "You have to fill in your mail or GSM Number" = "Plotësoni adresën tuaj të e-mail ose numrin tuaj mobile. ";
-"password" = "Fjalëkalim";
+"Password" = "Fjalëkalim";
 "E-Mail or GSM Number" = "E-mail ose Numër Telefoni";
 "Remember my credentials" = "Kujtoni fjalëkalimin tim";
 "I can't login" = "Kam harruar fjalëkalimin.";
