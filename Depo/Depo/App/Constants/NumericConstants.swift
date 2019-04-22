@@ -149,6 +149,8 @@ struct NumericConstants {
     static let progressViewBackgroundColorAlpha: CGFloat = 0.25
     
     static let maxStringLengthForUserProfile = 255
+    
+    static let firstResponderBottomOffset: CGFloat = 50
 }
 
 struct RequestSizeConstant {

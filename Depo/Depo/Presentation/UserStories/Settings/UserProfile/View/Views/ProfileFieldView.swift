@@ -80,7 +80,7 @@ final class ProfileFieldView: UIView {
     private let dividerLineView: UIView = {
         let newValue = UIView()
         
-        newValue.backgroundColor = ColorConstants.lightGrayColor.withAlphaComponent(0.5)
+        newValue.backgroundColor = ColorConstants.lightGrayColor
         
         return newValue
     }()
@@ -108,6 +108,7 @@ final class ProfileFieldView: UIView {
                 alertLabel.isHidden = !isEditState
                 let textColor = isEditState ? UIColor.black.withAlphaComponent(0.25) : ColorConstants.textGrayColor
                 textField.textColor = textColor
+                textField.isUserInteractionEnabled = false
             }
         }
     }
@@ -214,7 +215,11 @@ final class ProfileFieldView: UIView {
     
     @discardableResult
     override func becomeFirstResponder() -> Bool {
-        return textField.becomeFirstResponder()
+        if type == .gsmNumber, SingletonStorage.shared.isTurkcellUser {
+            return false
+        } else {
+            return textField.becomeFirstResponder()
+        }
     }
     
     @discardableResult

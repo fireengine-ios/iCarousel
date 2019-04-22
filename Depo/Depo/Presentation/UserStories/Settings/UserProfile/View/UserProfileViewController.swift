@@ -118,7 +118,8 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
             return
         }
         
-        let rect = scrollView.convert(view.frame, to: scrollView).offsetBy(dx: 0.0, dy: 50.0)
+        let rect = scrollView.convert(firstResponser.frame, to: scrollView)
+            .offsetBy(dx: 0.0, dy: NumericConstants.firstResponderBottomOffset)
         scrollView.scrollRectToVisible(rect, animated: animated)
     }
     
@@ -180,11 +181,11 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     }
     
     @objc private func onReadyButtonAction() {
-        guard name == nameDetailView.editableText,
-            surname == surnameDetailView.editableText,
-            email == emailDetailView.editableText,
-            number == gsmDetailView.editableText,
-            birthday == birthdayDetailView.editableText else {
+        guard name != nameDetailView.editableText ||
+            surname != surnameDetailView.editableText ||
+            email != emailDetailView.editableText ||
+            number != gsmDetailView.editableText ||
+            birthday != birthdayDetailView.editableText else {
                 setupEditState(false)
                 return
         }
@@ -250,11 +251,13 @@ extension UserProfileViewController: UITextFieldDelegate {
         case .secondName:
             emailDetailView.becomeFirstResponder()
         case .email:
-            gsmDetailView.becomeFirstResponder()
+            if !gsmDetailView.becomeFirstResponder() {
+                birthdayDetailView.becomeFirstResponder()
+            }
         case .gsmNumber:
             birthdayDetailView.becomeFirstResponder()
         case .birthday:
-            passwordDetailView.becomeFirstResponder()
+            break
         case .password:
             break
         }
