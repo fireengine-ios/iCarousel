@@ -12,6 +12,8 @@ protocol UserProfileInteractorInput {
     var statusTurkcellUser: Bool { get }
     
     func viewIsReady()
+    
+    func updateBirthday(_ birthday: String)
         
     func changeTo(name: String, surname: String, email: String, number: String)
 }

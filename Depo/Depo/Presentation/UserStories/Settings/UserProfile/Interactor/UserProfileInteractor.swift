@@ -105,6 +105,9 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }
     }
     
+    func updateBirthday(_ birthday: String) {
+    }
+    
     func needSendOTP(responce: SignUpSuccessResponse) {
         DispatchQueue.main.async { [weak self] in
             if let info = self?.userInfo {

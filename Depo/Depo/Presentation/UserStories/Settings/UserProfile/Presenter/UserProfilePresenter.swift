@@ -58,6 +58,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         view.setupEditState(false)
     }
     
+    func setNewBirthday(_ birthday: String) {
+        interactor.updateBirthday(birthday)
+    }
+    
     func isTurkcellUser() -> Bool {
         return interactor.statusTurkcellUser
     }
