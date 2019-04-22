@@ -9,10 +9,11 @@
 import Foundation
 
 protocol LeavePremiumInteractorInput: class {
-    func getAccountType()
     func getActiveSubscription()
     
     func getPrice(for offer: SubscriptionPlanBaseResponse, accountType: AccountType) -> String
     func getAppleInfo(for offer: SubscriptionPlanBaseResponse)
     func getAccountType(with accountType: String, offers: [Any]) -> AccountType
+    
+    func trackScreen(screenType: LeavePremiumType)
 }

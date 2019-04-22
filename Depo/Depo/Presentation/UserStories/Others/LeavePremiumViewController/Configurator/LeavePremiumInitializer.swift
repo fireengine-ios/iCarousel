@@ -10,10 +10,10 @@ import Foundation
 
 final class LeavePremiumModuleInitializer: NSObject {
     
-    class func initializeLeavePremiumController(with nibName: String, title: String) -> UIViewController {
+    class func initializeLeavePremiumController(with nibName: String, type: LeavePremiumType) -> UIViewController {
         let viewController = LeavePremiumViewController(nibName: nibName, bundle: nil)
         let configurator = LeavePremiumModuleConfigurator()
-        configurator.configure(viewController: viewController, title: title)
+        configurator.configure(viewController: viewController, type: type)
         
         return viewController
     }

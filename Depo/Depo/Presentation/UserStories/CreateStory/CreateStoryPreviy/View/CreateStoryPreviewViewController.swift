@@ -76,7 +76,7 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
         output.onSaveStory()
     }
     
-    override func getBacgroundColor() -> UIColor {
+    override func getBackgroundColor() -> UIColor {
         return viewForPlayer.backgroundColor ?? UIColor.black
     }
     

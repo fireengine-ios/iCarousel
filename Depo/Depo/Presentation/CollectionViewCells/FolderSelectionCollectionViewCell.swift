@@ -15,7 +15,7 @@ class FolderSelectionCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var fileNameLabel: UILabel!
     @IBOutlet weak var rightIconImageView: UIImageView!
 
-    override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
+    override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
         
         guard let wrappered = wrappedObj as? WrapData,
             isAlreadyConfigured

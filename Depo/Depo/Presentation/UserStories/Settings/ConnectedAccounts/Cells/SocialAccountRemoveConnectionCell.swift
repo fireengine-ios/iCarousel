@@ -26,15 +26,17 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         }
     }
     
-    @IBOutlet private weak var removeConnectionButton: RoundedInsetsButton! {
+    @IBOutlet private weak var removeConnectionButton: UIButton! {
         didSet {
-            removeConnectionButton.tintColor = ColorConstants.removeConnection
-            removeConnectionButton.layer.borderColor = removeConnectionButton.tintColor.cgColor
-            removeConnectionButton.layer.borderWidth = 2.0
-            removeConnectionButton.insets = UIEdgeInsets(topBottom: 8.0, rightLeft: 16.0)
+            let attributes: [NSAttributedStringKey : Any] = [
+                .font               : UIFont.TurkcellSaturaBolFont(size: 16),
+                .foregroundColor    : UIColor.lrTealishTwo,
+                .underlineStyle     : NSUnderlineStyle.styleSingle.rawValue
+            ]
             
-            removeConnectionButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 20.0)
-            removeConnectionButton.setTitle(TextConstants.removeConnection, for: .normal)
+            let attributeString = NSMutableAttributedString(string: TextConstants.removeConnection,
+                                                            attributes: attributes)
+            removeConnectionButton.setAttributedTitle(attributeString, for: .normal)
         }
     }
     

@@ -19,6 +19,7 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
         interactor.trackScreen()
         startAsyncOperation()
         interactor.checkCaptchaRequerement()
+        interactor.prepareModels()
     }
 
     func nextButtonPressed() {
@@ -46,7 +47,7 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     }
     
     func userValid(email: String, phone: String, passpword: String, captchaID: String?, captchaAnswer: String?) {
-        router.termsAndServices(with: view, email: email)
+        router.termsAndServices(with: view, email: email, phoneNumber: phone)
     }
     
     func userInvalid(withResult result: [UserValidationResults]) {
@@ -74,7 +75,6 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
         }
 //        result.forEach {view.showInfoButton(forType:$0)
 //        }
-        
     }
     
     func signUpFailed(withResult result: String?) {
@@ -105,16 +105,20 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     }
     
     func captchaRequred(requred: Bool) {
-        interactor.prepareModels()
         interactor.requestGSMCountryCodes()
         if requred, let captchaVC = router.getCapcha() {
             view.setupCaptchaVC(captchaVC: captchaVC)
         }
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
     func captchaRequredFailed() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
+    }
+    
+    func captchaRequredFailed(with message: String) {
+        asyncOperationSuccess()
+        view.showErrorTitle(withText: message)
     }
     
     // MARK: BasePresenter

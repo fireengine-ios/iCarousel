@@ -24,6 +24,8 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
     var isFirstTime = true
     private var onStartUsingButtonTapped = false
     
+    private let analyticsManager: AnalyticsService = factory.resolve()//FIXME: Idealy we should send all events to presenter->Interactor and then track it(because tracker is a service) OR just rewrite this module to MVC
+    
     let dataSource = AutoSyncDataSource()
 
     // MARK: - Life cycle
@@ -135,6 +137,7 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
                 MenloworksTagsService.shared.onAutosyncVideosStatusOff()
             }
             
+            storageVars.autoSyncSet = true
             output.save(settings: settings)
         }
     }
@@ -214,6 +217,16 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
         output.checkPermissions()
     }
     
+    func didChangeSettingsOption(settings: AutoSyncSetting) {
+        let eventAction: GAEventAction
+        if fromSettings {
+            eventAction = .settingsAutoSync
+        } else {
+            eventAction = .firstAutoSync
+        }
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: eventAction, eventLabel: GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: settings))
+    }
+    
     func checkPermissionsSuccessed() {
         if onStartUsingButtonTapped {
             onStartUsingButtonTapped = false
@@ -231,18 +244,21 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
     }
     
     func showLocationPermissionPopup(completion: @escaping VoidHandler) {
-        let controller = PopUpController.with(title: TextConstants.errorAlert,
-                                              message: TextConstants.locationServiceDisable,
-                                              image: .error,
-                                              buttonTitle: TextConstants.ok) { (vc) in
-                                                vc.close {
-                                                    completion()
-                                                }
+        guard onStartUsingButtonTapped else {
+            let controller = PopUpController.with(title: TextConstants.errorAlert,
+                                                  message: TextConstants.locationServiceDisable,
+                                                  image: .error,
+                                                  buttonTitle: TextConstants.ok) { (vc) in
+                                                    vc.close {
+                                                        completion()
+                                                    }
+            }
+            DispatchQueue.toMain {
+                self.present(controller, animated: true, completion: nil)
+            }
+            return
         }
-        DispatchQueue.toMain {
-            self.present(controller, animated: true, completion: nil)
-        }
-        
+        completion()
     }
     
     private func showAccessAlert(message: String) {

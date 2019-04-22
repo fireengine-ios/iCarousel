@@ -66,6 +66,7 @@ final class InstaPickDetailViewController: UIViewController, ControlTabBarProtoc
         super.viewDidLoad()
 
         setup()
+        trackScreen()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +88,13 @@ final class InstaPickDetailViewController: UIViewController, ControlTabBarProtoc
     }
     
     //MARK: - Utility Methods(private)
+    
+    private func trackScreen() {
+        let analyticsService: AnalyticsService = factory.resolve()
+        analyticsService.logScreen(screen: .photoPickAnalysisDetail)
+        analyticsService.trackDimentionsEveryClickGA(screen: .photoPickAnalysisDetail)
+    }
+    
     private func open() {
         if isShown {
             self.statusBarColor = .clear

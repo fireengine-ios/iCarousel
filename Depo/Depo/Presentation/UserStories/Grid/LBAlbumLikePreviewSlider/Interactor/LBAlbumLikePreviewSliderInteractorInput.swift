@@ -10,7 +10,7 @@ protocol LBAlbumLikePreviewSliderInteractorInput {
         
     func requestAllItems()
     
-    func reload(type: MyStreamType) 
+    func reload(types: [MyStreamType]) 
     
     var currentItems: [SliderItem] { get set }
    

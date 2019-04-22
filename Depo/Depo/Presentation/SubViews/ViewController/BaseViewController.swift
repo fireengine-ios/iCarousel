@@ -9,13 +9,9 @@
 import UIKit
 
 class BaseViewController: ViewController {
-
     var keyboardHeight: CGFloat = 0
-    
-    var needShowTabBar: Bool = false
-    
+    var needToShowTabBar: Bool = false
     var floatingButtonsArray = [FloatingButtonsType]()
-    
     var parentUUID: String = ""
     
     override func viewDidLoad() {
@@ -34,14 +30,14 @@ class BaseViewController: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //showTabBarIfNeed()
+        //showTabBarIfNeeded()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        showTabBarIfNeed()
-        RouterVC().setBacgroundColor(color: getBacgroundColor())
+        showTabBarIfNeeded()
+        RouterVC().setBackgroundColor(color: getBackgroundColor())
     }
     
     deinit {
@@ -68,11 +64,9 @@ class BaseViewController: ViewController {
     }
     
     @objc func hideKeyboard() {
-        
     }
     
     func searchActiveTextField(view: UIView) -> UITextField? {
-        
         if let textField = view as? UITextField {
             if textField.isFirstResponder {
                 return textField
@@ -80,15 +74,15 @@ class BaseViewController: ViewController {
         }
         for subView in view.subviews {
             let textField = searchActiveTextField(view: subView)
-            if (textField != nil) {
+            if textField != nil {
                 return textField
             }
         }
         return nil
     }
     
-    func showTabBarIfNeed() {
-        if isNeedShowTabBar() {
+    func showTabBarIfNeeded() {
+        if isNeedToShowTabBar() {
             let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar)
             NotificationCenter.default.post(name: notificationName, object: nil)
         } else {
@@ -97,26 +91,22 @@ class BaseViewController: ViewController {
         }
     }
     
-    func isNeedShowTabBar() -> Bool {
-        return needShowTabBar
+    func isNeedToShowTabBar() -> Bool {
+        return needToShowTabBar
     }
     
-    func getBacgroundColor() -> UIColor {
+    func getBackgroundColor() -> UIColor {
         return UIColor.white
     }
-    
 }
 
-extension BaseViewController: UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
-    
+// MARK: - UIViewControllerTransitioningDelegate
+
+extension BaseViewController: UIViewControllerTransitioningDelegate {
     private func pushPopAnimatorForPresentation(presenting: Bool) -> UIViewControllerAnimatedTransitioning? {
         let animator = PushPopAnimator()
         animator.presenting = presenting
         return animator
-    }
-    
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return pushPopAnimatorForPresentation(presenting: operation == .push)
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -125,5 +115,13 @@ extension BaseViewController: UIViewControllerTransitioningDelegate, UINavigatio
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return pushPopAnimatorForPresentation(presenting: false)
+    }
+}
+
+// MARK: - UINavigationControllerDelegate
+
+extension BaseViewController: UINavigationControllerDelegate  {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return pushPopAnimatorForPresentation(presenting: operation == .push)
     }
 }

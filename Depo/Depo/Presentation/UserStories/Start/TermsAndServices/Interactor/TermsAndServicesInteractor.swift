@@ -19,6 +19,10 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     var eula: Eula?
     
+    var phoneNumber: String?
+    
+    var etkAuth: Bool?
+    
     func loadTermsAndUses() {
         eulaService.eulaGet(sucess: { [weak self] eula in
             guard let eulaR = eula as? Eula else {
@@ -28,16 +32,18 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             DispatchQueue.toMain {
                 self?.output.showLoadedTermsAndUses(eula: eulaR.content ?? "")
             }
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.toMain {
-                    self?.output.failLoadTermsAndUses(errorString: errorResponse.description)
-                }
+        }, fail: { [weak self] errorResponse in
+            DispatchQueue.toMain {
+                self?.output.failLoadTermsAndUses(errorString: errorResponse.description)
+            }
         })
     }
     
     func saveSignUpResponse(withResponse response: SignUpSuccessResponse, andUserInfo userInfo: RegistrationUserInfoModel) {
         dataStorage.signUpResponse = response
         dataStorage.signUpUserInfo = userInfo
+        
+        dataStorage.signUpResponse.etkAuth = etkAuth
     }
     
     func trackScreen() {
@@ -77,6 +83,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                     return
                 }
                 self?.dataStorage.signUpResponse = t
+                self?.dataStorage.signUpResponse.etkAuth = self?.etkAuth
                 self?.dataStorage.signUpUserInfo = SingletonStorage.shared.signUpInfo
                 SingletonStorage.shared.referenceToken = t.referenceToken
                 
@@ -110,7 +117,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             return
         }
         
-        eulaService.eulaApprove(eulaId: eulaID, sucess: { [weak self] successResponce in
+        eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, sucess: { [weak self] successResponce in
             DispatchQueue.main.async {
                 self?.output.eulaApplied()
             }
@@ -119,5 +126,32 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                 self?.output.applyEulaFaild(errorResponce: errorResponce)
             }
         })
+    }
+    
+    func checkEtk() {
+        /// phoneNumber will be exists only for signup
+        checkEtk(for: phoneNumber)
+    }
+    
+    private func checkEtk(for phoneNumber: String?) {
+        eulaService.getEtkAuth(for: phoneNumber) { [weak self] result in
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                
+                switch result {
+                case .success(let isShowEtk):
+                    self.output.setupEtk(isShowEtk: isShowEtk)
+                    
+                    /// if we show etk default value must be false (user didn't check etk)
+                    if isShowEtk {
+                        self.etkAuth = false
+                    }
+                case .failed(_):
+                    self.output.setupEtk(isShowEtk: false)
+                }
+            }
+        }
     }
 }

@@ -88,6 +88,9 @@ final class PushNotificationService {
         case .freeUpSpace: break
         case .settings: openSettings()
         case .profileEdit: openProfileEdit()
+        case .changePassword: openChangePassword()
+        case .photopickHistory: openPhotoPickHistory()
+        case .myStorage: openMyStorage()
         }
         notificationAction = nil
     }
@@ -286,5 +289,17 @@ final class PushNotificationService {
             /// we don't need error handling here
         }, fail: {_ in})
         
+    }
+    
+    private func openChangePassword() {
+        pushTo(router.changePassword)
+    }
+    
+    private func openPhotoPickHistory() {
+        pushTo(router.analyzesHistoryController())
+    }
+    
+    private func openMyStorage() {
+        pushTo(router.myStorage(usageStorage: nil))
     }
 }

@@ -79,6 +79,9 @@ class SignUpSuccessResponse: ObjectRequestResponse {
     var remainingTimeInMinutes: Int?
     var expectedInputLength: Int?
     
+    /// not from server
+    var etkAuth: Bool?
+    
     override func mapping() {
         if (isOkStatus && valueDict != nil) {
             action = valueDict![LbResponseKey.action]?.string
@@ -153,11 +156,17 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
                     #if DEBUG
                         if let text = String(data: data, encoding: .utf8) {
                             fail?(.string(text))
+                        } else if httpResponse.statusCode == 503 {
+                            fail?(.string(TextConstants.errorServerUnderMaintenance))
                         } else {
                             fail?(.string(TextConstants.errorServer))
                         }
                     #else
+                    if httpResponse.statusCode == 503 {
+                        fail?(.string(TextConstants.errorServerUnderMaintenance))
+                    } else {
                         fail?(.string(TextConstants.errorServer))
+                    }
                     #endif
                 }
             } else {
@@ -177,8 +186,7 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
         }
         if httpResponse.statusCode == 401, let url = httpResponse.url?.absoluteString,
                 !url.contains("http://adepo.turkcell.com.tr/api/auth/gsm/login"),
-                !url.contains(RouteRequests.authificationByRememberMe),
-                !url.contains(RouteRequests.authificationByToken) {
+                !url.contains(RouteRequests.authificationByRememberMe) {
             return
         } else {
             analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .serviceError, eventLabel: .serverError, eventValue: "\(httpResponse.statusCode) \(error?.description ?? "")")

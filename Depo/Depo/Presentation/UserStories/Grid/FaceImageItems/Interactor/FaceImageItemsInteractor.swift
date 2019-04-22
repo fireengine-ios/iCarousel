@@ -90,7 +90,9 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
                 AuthoritySingleton.shared.refreshStatus(with: response)
                 
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    output.didObtainAccountPermision(isAllowed: response.hasPermissionFor(.faceRecognition))
+                    DispatchQueue.main.async {
+                        output.didObtainAccountPermision(isAllowed: response.hasPermissionFor(.faceRecognition))
+                    }
                 }
             case .failed(let error):
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
@@ -115,10 +117,12 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
             
             peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] album in
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    output.didLoadAlbum(album, forItem: item)
+                    DispatchQueue.main.async {
+                        output.didLoadAlbum(album, forItem: item)
+                    }
                 }
                 
-                self?.output.asyncOperationSucces()
+                self?.output.asyncOperationSuccess()
                 }, fail: { [weak self] fail in
                     self?.output.asyncOperationFail(errorMessage: fail.description)
             })
@@ -127,10 +131,12 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
             
             thingsService.getThingsAlbum(id: Int(id), success: { [weak self] album in
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    output.didLoadAlbum(album, forItem: item)
+                    DispatchQueue.main.async {
+                        output.didLoadAlbum(album, forItem: item)
+                    }
                 }
                 
-                self?.output.asyncOperationSucces()
+                self?.output.asyncOperationSuccess()
                 }, fail: { [weak self] fail in
                     self?.output.asyncOperationFail(errorMessage: fail.description)
             })
@@ -139,10 +145,12 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
             
             placesService.getPlacesAlbum(id: Int(id), success: { [weak self] album in
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    output.didLoadAlbum(album, forItem: item)
+                    DispatchQueue.main.async {
+                        output.didLoadAlbum(album, forItem: item)
+                    }
                 }
                 
-                self?.output.asyncOperationSucces()
+                self?.output.asyncOperationSuccess()
                 }, fail: { [weak self] fail in
                     self?.output.asyncOperationFail(errorMessage: fail.description)
             })
@@ -154,8 +162,10 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         
         peopleService.changePeopleVisibility(peoples: items, success: { [weak self] _ in
             if let output = self?.output as? FaceImageItemsInteractorOutput {
-                output.didSaveChanges(items)
-            }            
+                DispatchQueue.main.async {
+                    output.didSaveChanges(items)
+                }
+            }
             }, fail: { [weak self] error in
                 self?.output.asyncOperationFail(errorMessage: error.description)
         })
@@ -174,7 +184,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
                 }
                 
                 guard let output = self?.output else { return }
-                output.asyncOperationSucces()
+                output.asyncOperationSuccess()
                 }, fail: { [weak self] in
                     guard let output = self?.output else { return }
                     output.getContentWithFail(errorString: nil)//asyncOperationFail(errorMessage: nil)
@@ -192,7 +202,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
             switch result {
             case .success(let response):
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         output.didObtainFeaturePacks(response)
                     }
                 }
@@ -209,7 +219,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
     func getPriceInfo(offer: PackageModelResponse, accountType: AccountType) {
         if let output = output as? FaceImageItemsInteractorOutput, accountType == .turkcell {
             let price = packageService.getPriceInfo(for: offer, accountType: accountType)
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 output.didObtainFeaturePrice(price)
             }
             return
@@ -218,7 +228,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         packageService.getInfoForAppleProducts(offers: [offer], success: { [weak self] in
             if let output = self?.output as? FaceImageItemsInteractorOutput {
                 let price = self?.packageService.getPriceInfo(for: offer, accountType: accountType)
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     if let price = price {
                         output.didObtainFeaturePrice(price)
                     } else {
@@ -249,7 +259,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
                 }
                 
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         output.didObtainAccountType(accountType)
                     }
                 }

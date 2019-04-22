@@ -70,7 +70,7 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
             return
         }
         
-        showSpiner()
+        showSpinner()
         
         /// to test popup sucess close without email update
         /// also comment "authService.updateEmail..."
@@ -82,13 +82,13 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
         authService.updateEmail(emailUpdateParameters: EmailUpdate(mail: email),
             sucess: { [weak self] response in
                 DispatchQueue.main.async {
-                    self?.hideSpiner()
+                    self?.hideSpinner()
                     self?.showEmailConfirmation(for: email)
                 }
             }, fail: { [weak self] error in
                 DispatchQueue.main.async {
                     self?.showErrorAlert(message: error.description)
-                    self?.hideSpiner()
+                    self?.hideSpinner()
                 }
         })
     }

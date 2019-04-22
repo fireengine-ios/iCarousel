@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SplashInteractorInput {
-    func startLoginInBackroung()
+    func startLoginInBackground()
     func checkEULA()
     var isPasscodeEmpty: Bool { get }
     func checkEmptyEmail()

@@ -46,13 +46,13 @@ final class AugmentedRealityController: QLPreviewController {
 
 extension AugmentedRealityController: AugmentedRealityDataSourceDelegate {
     func didUpdateARItem() {
-        hideSpinerIncludeNavigatinBar()
+        hideSpinnerIncludeNavigationBar()
         DispatchQueue.toMain {
             self.reloadData()
         }
     }
     
     func didFailToUpdateARItem(with errorMessage: String?) {
-        hideSpinerIncludeNavigatinBar()
+        hideSpinnerIncludeNavigationBar()
     }
 }

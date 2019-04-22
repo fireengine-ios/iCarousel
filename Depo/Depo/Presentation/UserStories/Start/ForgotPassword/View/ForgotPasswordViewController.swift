@@ -9,7 +9,7 @@
 import UIKit
 import Typist
 
-class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput, UITableViewDelegate, UITableViewDataSource, ProtoInputCellProtocol {
+class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
 
     var output: ForgotPasswordViewOutput!
     
@@ -24,6 +24,10 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput, UIT
     var captchaModuleView = CaptchaViewController.initFromXib()
     
     private var originBottomH: CGFloat = -1
+
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .clear
+    }
 
     fileprivate let keyboard = Typist.shared
 
@@ -68,11 +72,6 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput, UIT
             return
         }
         baseCell.textInputField.becomeFirstResponder()
-
-    }
-    
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -112,38 +111,55 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput, UIT
     
     fileprivate func configureKeyboard() {
         
-        keyboard.on(event: .didChangeFrame) { [weak self] options in
-            guard let wSelf = self else {
+        keyboard.on(event: .willChangeFrame) { [weak self] options in
+            guard let `self` = self else {
                 return
             }
-            let insets = UIEdgeInsets(top: 0, left: 0, bottom: options.endFrame.height + UIScreen.main.bounds.height - options.endFrame.maxY, right: 0)
-            wSelf.scrollView.contentInset = insets
-            wSelf.scrollView.scrollIndicatorInsets = insets
-            
-            let bottomOffset = CGPoint(x: 0, y: wSelf.scrollView.contentSize.height - wSelf.scrollView.bounds.size.height + wSelf.scrollView.contentInset.bottom)
-            if(bottomOffset.y > 0) {
-                wSelf.scrollView.setContentOffset(bottomOffset, animated: true)
+            self.updateContentInsetWithKeyboardFrame(options.endFrame)
+            self.scrollToFirstResponderIfNeeded(animated: false)
             }
-            }
-            .on(event: .willHide) { [weak self] _ in
-                guard let wSelf = self else {
+            .on(event: .willShow) { [weak self] options in
+                guard let `self` = self else {
                     return
                 }
-                var inset = wSelf.scrollView.contentInset
+                self.updateContentInsetWithKeyboardFrame(options.endFrame)
+                self.scrollToFirstResponderIfNeeded(animated: false)
+            }
+            .on(event: .willHide) { [weak self] _ in
+                guard let `self` = self else {
+                    return
+                }
+                var inset = self.scrollView.contentInset
                 inset.bottom = 0
 
-                wSelf.scrollView.contentInset = inset
-                wSelf.scrollView.setContentOffset(CGPoint.zero, animated: true)
+                self.scrollView.contentInset = inset
+                self.scrollView.setContentOffset(.zero, animated: true)
             }
             .start()
     }
     
     @objc private func hideKeyboard() {
         view.endEditing(true)
-        bottomSpace.constant = self.originBottomH
+        bottomSpace.constant = originBottomH
         view.layoutIfNeeded()
     }
-    
+
+    private func updateContentInsetWithKeyboardFrame(_ keyboardFrame: CGRect) {
+        let bottomInset = keyboardFrame.height + UIScreen.main.bounds.height - keyboardFrame.maxY
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
+        scrollView.contentInset = insets
+        scrollView.scrollIndicatorInsets = insets
+    }
+
+    private func scrollToFirstResponderIfNeeded(animated: Bool) {
+        guard let firstResponser = view.firstResponder as? UIView else {
+            return
+        }
+
+        let frameOnWindow = firstResponser.frameOnWindow
+        let frameOnWindowWithInset = frameOnWindow.offsetBy(dx: 0.0, dy: 50.0)
+        scrollView.scrollRectToVisible(frameOnWindowWithInset, animated: animated)
+    }
 
     // MARK: IN
     func setupInitialState() {
@@ -179,21 +195,23 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput, UIT
         
         return mailCell.textInputField.text ?? ""
     }
-    
-    
-    // MARK: UITableViewDelegate
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
+}
+
+// MARK: UITableViewDelegate
+
+extension ForgotPasswordViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 88.0
     }
-    
+}
+
+// MARK: UITableViewDataSource
+
+extension ForgotPasswordViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return 1
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.baseUserInputCellViewID,
                                                  for: indexPath) as! BaseUserInputCellView
@@ -201,33 +219,21 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput, UIT
         cell.titleLabel.textColor = ColorConstants.whiteColor
         cell.titleLabel.text = TextConstants.forgotPasswordCellTitle
         cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.textInputField.returnKeyType = .done
+        cell.textInputField.returnKeyType = .next
         cell.textInputField.autocorrectionType = .no
         cell.textInputField.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.whiteColor])
         return cell
     }
-    
-    // MARK: ProtoInputCellProtocol
-    
+}
+
+// MARK: ProtoInputCellProtocol
+
+extension ForgotPasswordViewController: ProtoInputCellProtocol {
     func textFinishedEditing(withCell cell: ProtoInputTextCell) {
-        endEditing()
+        captchaModuleView.inputTextField.becomeFirstResponder()
+        scrollToFirstResponderIfNeeded(animated: true)
     }
-    
+
     func textStartedEditing(withCell cell: ProtoInputTextCell) {
-        // TODO : OLEG
-        if (view.frame.size.height <= 568) {
-            let index = tableView.indexPath(for: cell)
-            
-            var topY = scrollView.frame.origin.y + tableView.frame.origin.y
-            topY = topY + CGFloat((index?.row)! + 1) * cell.frame.size.height
-            let dy = view.frame.size.height - 216
-            var y: CGFloat = 0
-            if (dy < topY) {
-                y = (topY - dy)
-            }
-            let point = CGPoint(x: 0, y: y)
-            scrollView.setContentOffset(point, animated: true)
-        }
     }
-    
 }

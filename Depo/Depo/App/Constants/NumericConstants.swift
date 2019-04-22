@@ -119,6 +119,7 @@ struct NumericConstants {
     static let heightForPackageCell: CGFloat = 255
     
     static let premiumViewHeight: CGFloat = 508
+    static let plusPremiumViewHeightForTurkcell: CGFloat = 30
     
     static let instaPickSelectionSegmentedTransparentGradientViewHeight: CGFloat = 130
     static let instaPickHashtagCellHeight: CGFloat = 35
@@ -134,6 +135,20 @@ struct NumericConstants {
     static let instaPickDetailsPopUpCornerRadius: CGFloat = 2
     
     static let instaPickImageViewTransitionDuration: TimeInterval = 0.25
+    
+    static let instapickTimeoutForAnalyzePhotos: TimeInterval = 5
+    
+    static let usageInfoCardCornerRadius: CGFloat = 12
+    static let usageInfoCardShadowRadius: CGFloat = 8
+    static let usageInfoCardShadowOpacity: Float = 0.5
+    
+    static let usageInfoProgressWidth: CGFloat = 8
+    
+    static let usageInfoCollectionViewCellsOffset: CGFloat = 0
+
+    static let progressViewBackgroundColorAlpha: CGFloat = 0.25
+    
+    static let maxStringLengthForUserProfile = 255
 }
 
 struct RequestSizeConstant {

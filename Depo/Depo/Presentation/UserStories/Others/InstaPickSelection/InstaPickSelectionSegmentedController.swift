@@ -36,17 +36,12 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     
     private let selectionControllerPageSize = Device.isIpad ? 200 : 100
     private var currentSelectingCount = 0
-    private let maxSelectingLimit = 5
-    private var selectingLimit = 0
+    private let selectingLimit = 5
     
     private var segmentedViewControllers: [UIViewController] = []
     private var delegates = MulticastDelegate<InstaPickSelectionSegmentedControllerDelegate>()
     
     private let instapickService: InstapickService = factory.resolve()
-    private let reachabilityService = Reachability()
-    
-    private var isGettingSelectingLimit = false
-    private var isGettingSelectingLimitFinished = false
     
     private lazy var albumsTabIndex: Int = {
         if let index = segmentedViewControllers.index(of: albumsVC) {
@@ -83,10 +78,6 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         setup()
     }
     
-    deinit {
-        reachabilityService?.stopNotifier()
-    }
-    
     private func setup() {
         vcView.segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
         vcView.analyzeButton.addTarget(self, action: #selector(analyzeWithInstapick), for: .touchUpInside)
@@ -112,70 +103,19 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getSelectingLimitAndStart()
-        setupReachability()
+        setupScreenWithSelectingLimit(selectingLimit)
+        trackScreen()
     }
     
-    // MARK: methods
-    
-    private func setupReachability() {
-        guard let reachability = reachabilityService else {
-            assertionFailure()
-            return
-        }
-        
-        reachability.whenReachable = { [weak self] reachability in
-            guard let `self` = self, !self.isGettingSelectingLimitFinished else {
-                return
-            }
-            self.getSelectingLimitAndStart()
-        }
-        
-        do {
-            try reachability.startNotifier()
-        } catch {
-            assertionFailure("can't start reachability notifier: \(error.localizedDescription)")
-        }
-    }
-    
-    /// one time called
-    private func getSelectingLimitAndStart() {
-        guard !isGettingSelectingLimit else {
-            return
-        }
-        isGettingSelectingLimit = true
-        vcView.emptyMessageLabel.text = TextConstants.loading
-        
-        instapickService.getAnalyzesCount { [weak self] result in
-            guard let `self` = self else {
-                return
-            }
-            
-            switch result {
-            case .success(let analyzesCount):
-                
-                if analyzesCount.left < self.maxSelectingLimit {
-                    self.selectingLimit = analyzesCount.left
-                } else {
-                    self.selectingLimit = self.maxSelectingLimit
-                }
-                self.setupScreenWithSelectingLimit(self.selectingLimit)
-                self.isGettingSelectingLimitFinished = true
-                self.vcView.emptyMessageLabel.isHidden = true
-                
-            case .failed(let error):
-                self.showErrorAlert(message: error.description)
-                self.vcView.emptyMessageLabel.text = error.description
-            }
-            self.isGettingSelectingLimit = false
-        }
+    private func trackScreen() {
+        let analyticsService: AnalyticsService = factory.resolve()
+        analyticsService.logScreen(screen: .photoPickPhotoSelection)
+        analyticsService.trackDimentionsEveryClickGA(screen: .photoPickPhotoSelection)
     }
     
     /// one time called
     private func setupScreenWithSelectingLimit(_ selectingLimit: Int) {
-        let formatedAnalyzesLeft = (selectingLimit == maxSelectingLimit) ?
-            TextConstants.instapickSelectionAnalyzesLeftMax :
-            TextConstants.instapickSelectionAnalyzesLeft
+        let formatedAnalyzesLeft = TextConstants.instapickSelectionAnalyzesLeftMax
         vcView.analyzesLeftLabel.text = String(format: formatedAnalyzesLeft, selectingLimit)
         
         let allPhotosDataSource = AllPhotosSelectionDataSource(pageSize: selectionControllerPageSize)

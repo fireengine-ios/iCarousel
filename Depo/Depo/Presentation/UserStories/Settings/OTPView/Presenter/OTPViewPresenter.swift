@@ -11,6 +11,14 @@ class OTPViewPresenter: PhoneVereficationPresenter {
     
     override func verificationSucces() {
         tokenStorage.isClearTokens = true
+        successedVerification()
+    }
+    
+    override func verificationSilentSuccess() {
+        successedVerification()
+    }
+    
+    private func successedVerification() {
         completeAsyncOperationEnableScreen()
         view.getNavigationController()?.popViewController(animated: true)
     }

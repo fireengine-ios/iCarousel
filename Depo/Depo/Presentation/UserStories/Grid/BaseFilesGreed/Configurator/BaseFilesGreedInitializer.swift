@@ -19,10 +19,10 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializePhotoVideosViewController(with nibName: String, screenFilterType: MoreActionsConfig.MoreActionsFileType) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)//PhotoVideoController(nibName: nibName, bundle: nil)
-        viewController.needShowTabBar = true
+        viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
-        viewController.scrolliblePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
-        viewController.scrolliblePopUpView.isEnable = true
+        viewController.scrollablePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
+        viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()//PhotoVideoFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .sync, .addToAlbum, .delete],
                                                style: .default, tintColor: nil)
@@ -59,9 +59,9 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializeMusicViewController(with nibName: String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
-        viewController.needShowTabBar = true
+        viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto])
-        viewController.scrolliblePopUpView.isEnable = false
+        viewController.scrollablePopUpView.isEnable = false
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
@@ -85,9 +85,9 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializeDocumentsViewController(with nibName: String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
-        viewController.needShowTabBar = true
+        viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto])
-        viewController.scrolliblePopUpView.isEnable = false
+        viewController.scrollablePopUpView.isEnable = false
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
@@ -111,10 +111,10 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializeAllFilesViewController(with nibName: String, moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
-        viewController.needShowTabBar = true
+        viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .newFolder])
-        viewController.scrolliblePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
-        viewController.scrolliblePopUpView.isEnable = true
+        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
+        viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
@@ -143,7 +143,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializeFavoritesViewController(with nibName: String, moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
-        viewController.needShowTabBar = true
+        viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .uploadFromLifeboxFavorites, .createAStory])
         viewController.isFavorites = true
         let configurator = BaseFilesGreedModuleConfigurator()
@@ -174,10 +174,10 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializeFilesFromFolderViewController(with nibName: String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
-        viewController.needShowTabBar = true
+        viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .newFolder, .uploadFromLifebox])
-        viewController.scrolliblePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
-        viewController.scrolliblePopUpView.isEnable = true
+        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
+        viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)

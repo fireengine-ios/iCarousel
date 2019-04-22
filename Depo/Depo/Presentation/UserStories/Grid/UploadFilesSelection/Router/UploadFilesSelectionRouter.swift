@@ -6,6 +6,10 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-//class UploadFilesSelectionRouter: BaseFilesGreedRouter {
-//
-//}
+class UploadFilesSelectionRouter: BaseFilesGreedRouter {
+    @objc override func showBack() {
+        view.dismiss(animated: true, completion: {
+            PremiumService.shared.showPopupForNewUserIfNeeded()
+        })
+    }
+}

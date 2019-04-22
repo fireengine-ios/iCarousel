@@ -77,6 +77,7 @@ final class InstapickPopUpController: UIViewController {
         
         setupFonts()
         setupTextColors()
+        setupWithoutConnectingButton()
         configure()
     }
     
@@ -148,7 +149,6 @@ final class InstapickPopUpController: UIViewController {
         descriptionLabel.attributedText = NSAttributedString(string: TextConstants.instaPickDescription,
                                                              attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
         descriptionLabel.text = TextConstants.instaPickDescription
-        withoutConnectingButton.setTitle(TextConstants.instaPickConnectedWithoutInstagram, for: .normal)
         checkBoxLabel.text = TextConstants.instaPickDontShowThisAgain
     }
     
@@ -157,7 +157,6 @@ final class InstapickPopUpController: UIViewController {
         subtitleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
         descriptionLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         checkBoxLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
-        withoutConnectingButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
     }
     
     private func setupTextColors() {
@@ -165,7 +164,6 @@ final class InstapickPopUpController: UIViewController {
         subtitleLabel.textColor = ColorConstants.darkBlueColor
         descriptionLabel.textColor = ColorConstants.darkGrayTransperentColor
         checkBoxLabel.textColor = ColorConstants.textGrayColor
-        withoutConnectingButton.setTitleColor(.lrTealishTwo, for: .normal)
     }
     
     private func getParagraphStyle() -> NSMutableParagraphStyle {
@@ -173,6 +171,15 @@ final class InstapickPopUpController: UIViewController {
         paragraphStyle.lineSpacing = 2
         paragraphStyle.alignment = .center
         return paragraphStyle
+    }
+    
+    private func setupWithoutConnectingButton() {
+        let attributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey.font : UIFont.TurkcellSaturaBolFont(size: 16),
+                                          NSAttributedStringKey.foregroundColor : UIColor.lrTealishTwo,
+                                          NSAttributedStringKey.underlineStyle : NSUnderlineStyle.styleSingle.rawValue]
+        let attributeString = NSMutableAttributedString(string: TextConstants.instaPickConnectedWithoutInstagram,
+                                                        attributes: attributes)
+        withoutConnectingButton.setAttributedTitle(attributeString, for: .normal)
     }
     
     private func openInstagramAuth(param: InstagramConfigResponse) {
@@ -270,7 +277,7 @@ extension InstapickPopUpController: InstagramAuthViewControllerDelegate {
     
     func instagramAuthSuccess() {
         accountService.changeInstapickAllowed(isInstapickAllowed: true) { [weak self] response in
-            self?.hideSpiner()
+            self?.hideSpinner()
             
             switch response {
             case .success(_):

@@ -15,6 +15,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
     private let routerVC = RouterVC()
+    private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     var optInVC: OptInController?
     var textEnterVC: TextEnterController?
@@ -82,7 +83,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     func viewAppeared() {}
     
     func captchaRequred(requred: Bool) {
-        asyncOperationSucces()
+        asyncOperationSuccess()
         if requred {
             captchaShowed = true
             view.showCapcha()
@@ -90,7 +91,12 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func captchaRequredFailed() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
+    }
+    
+    func captchaRequredFailed(with message: String) {
+        asyncOperationSuccess()
+        view.showErrorMessage(with: message)
     }
     
     func needShowCaptcha() {
@@ -105,6 +111,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func succesLogin() {
+        tokenStorage.isClearTokens = false
         MenloworksTagsService.shared.onStartWithLogin(true)
         interactor.checkEULA()
     }
@@ -168,7 +175,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     private func openApp() {
         storageVars.emptyEmailUp = false
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
-        router.goToSyncSettingsView()
+        openAutoSyncIfNeeded()
     }
     
     private func openEmptyEmail() {
@@ -179,6 +186,19 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         }
         let navVC = NavigationController(rootViewController: vc)
         routerVC.presentViewController(controller: navVC)
+    }
+    
+    private func openAutoSyncIfNeeded() {
+        view.showSpinner()
+        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
+            self?.view.hideSpinner()
+            
+            if needToOpenAutoSync {
+                self?.router.goToSyncSettingsView()
+            }
+        }) { [weak self] error in
+            self?.view.hideSpinner()
+        }
     }
     
     func allAttemtsExhausted(user: String) {
@@ -258,13 +278,17 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     func successedVerifyPhone() {
-        optInVC?.stopActivityIndicator()
-        optInVC?.resignFirstResponder()
+        stopOptInVC()
         
-        tokenStorage.isClearTokens = false
-        
-        startAsyncOperationDisableScreen()
-        interactor.relogin()
+        let popupVC = PopUpController.with(title: nil,
+                                           message: TextConstants.phoneUpdatedNeedsLogin,
+                                           image: .none,
+                                           buttonTitle: TextConstants.ok) { vc in
+                                            vc.close {
+                                                AppConfigurator.logout()
+                                            }
+        }
+        UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
     }
     
     func failedVerifyPhone(errorString: String) {
@@ -286,6 +310,15 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     func updateUserLanguageFailed(error: Error) {
         view.showErrorMessage(with: error.description)
         completeAsyncOperationEnableScreen()
+    }
+    
+    func successedSilentLogin() {
+        stopOptInVC()
+    }
+    
+    private func stopOptInVC() {
+        optInVC?.stopActivityIndicator()
+        optInVC?.resignFirstResponder()
     }
 }
 
