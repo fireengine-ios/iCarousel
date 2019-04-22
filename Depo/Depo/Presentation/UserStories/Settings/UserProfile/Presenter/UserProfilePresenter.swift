@@ -54,7 +54,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         interactor.changeTo(name: name, surname: surname, email: email, number: number)
     }
     
-    func dataWasUpdate() {
+    func dataWasUpdated() {
         view.setupEditState(false)
     }
     

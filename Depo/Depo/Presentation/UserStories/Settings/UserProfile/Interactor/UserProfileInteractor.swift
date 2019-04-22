@@ -122,7 +122,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     
     func allUpdated() {
         DispatchQueue.main.async { [weak self] in
-            self?.output.dataWasUpdate()
+            self?.output.dataWasUpdated()
             self?.output.stopNetworkOperation()
         }
     }

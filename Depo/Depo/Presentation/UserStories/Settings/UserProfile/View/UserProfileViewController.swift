@@ -103,7 +103,6 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
             }
             .start()
     }
-    func setupInitialState() {
     
     private func updateContentInsetWithKeyboardFrame(_ keyboardFrame: CGRect) {
         let screenHeight = UIScreen.main.bounds.height
