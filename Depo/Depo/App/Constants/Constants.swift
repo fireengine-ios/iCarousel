@@ -106,14 +106,14 @@ struct TextConstants {
     
     static let registerTitle = NSLocalizedString("Sign Up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    static let resetPasswordTitle = NSLocalizedString("Reset Password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let resetPasswordSubTitle = NSLocalizedString("You can easily reset your password by clicking the password reset link that we will send to your account e-mail.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let resetPasswordInfo = NSLocalizedString("To reset your account’s  password, we will send a password reset link to your account email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let resetPasswordTitle = NSLocalizedString("reset_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let resetPasswordSubTitle = NSLocalizedString("you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let resetPasswordInfo = NSLocalizedString("to_reset_your_accounts_password_we_will_send_a_password_reset_link_to_your_account_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    static let resetPasswordSendPassword = NSLocalizedString("Send Link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let resetPasswordEmailTitle = NSLocalizedString("Your Account E-mail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let resetPasswordEmailPlaceholder = NSLocalizedString("Enter your account e-mail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let resetPasswordCaptchaPlaceholder = NSLocalizedString("Enter the text shown in the image", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let resetPasswordSendPassword = NSLocalizedString("send_link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let resetPasswordEmailTitle = NSLocalizedString("your_account_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let resetPasswordEmailPlaceholder = NSLocalizedString("enter_your_account_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let resetPasswordCaptchaPlaceholder = NSLocalizedString("enter_the_text_shown_in_the_image", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let forgotPasswordSentEmailAddres = NSLocalizedString("Your password is sent to your e-mail address", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let captchaPlaceholder = NSLocalizedString("Type the text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
