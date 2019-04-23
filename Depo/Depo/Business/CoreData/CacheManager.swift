@@ -26,7 +26,7 @@ final class CacheManager {
     private static let pageSize: Int = 100
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
                                                          type: .imageAndVideo)
-    private lazy var reachabilityService = Reachability()
+    private lazy var reachabilityService = APIReachabilityService()
     private(set) var processingRemoteItems = false
     private(set) var processingLocalItems = false
     private(set) var isProcessing = false
@@ -39,8 +39,13 @@ final class CacheManager {
             return UserDefaults.standard.integer(forKey: Keys.lastRemotesPageSaved)
         }
         set {
-            UserDefaults.standard.set(currentRemotesPage, forKey: Keys.lastRemotesPageSaved)
+            UserDefaults.standard.set(newValue, forKey: Keys.lastRemotesPageSaved)
         }
+    }
+    
+    deinit {
+        reachabilityService.stopNotifier()
+        NotificationCenter.default.removeObserver(self)
     }
     
     func actualizeCache(completion: VoidHandler?) {
@@ -56,8 +61,10 @@ final class CacheManager {
                 completion?()
                 return
             }
+            debugPrint("!!!! \(self.currentRemotesPage)")
             if isNoRemotes || self.currentRemotesPage > 0 {
                 self.startAppendingAllRemotes(completion: { [weak self] in
+                    self?.currentRemotesPage = 0
                     self?.startAppendingAllLocals(completion: {
                         self?.isProcessing = false
                         self?.isCacheActualized = true
@@ -111,20 +118,31 @@ final class CacheManager {
             }
             
         }) { [weak self] in
-            guard let `self` = self,
-                let reachabilityService = self.reachabilityService else {
+            guard let `self` = self else { //, let reachabilityService = self.reachabilityService
                 completion()
                 return
             }
+            //should I check here if reachability?
             ///start subscribing
-            switch reachabilityService.connection {
-            case .cellular, .wifi:
-                self.addNextRemoteItemsPage(completion: completion)
-            case .none:
-                self.reachabilityService?.whenReachable = { [weak self] reachability in
-                    self?.addNextRemoteItemsPage(completion: completion)
-                }
-            }
+            ///option 3
+//            let requestService = APIReachabilityRequestService()
+//
+            
+            ///option 2
+            NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityDidChanged), name: .apiReachabilityDidChange, object: nil)
+            self.reachabilityService.startNotifier()
+            ///option 1
+//            switch reachabilityService.connection {
+//            case .cellular, .wifi:
+//                self.addNextRemoteItemsPage(completion: completion)
+//            case .none:
+            
+//                try? self.reachabilityService?.startNotifier()
+//                self.reachabilityService?.whenReachable = { [weak self] reachability in
+//                    self?.reachabilityService?.stopNotifier()
+//                    self?.addNextRemoteItemsPage(completion: completion)
+//                }
+//            }
             
             
             
@@ -132,7 +150,17 @@ final class CacheManager {
         }
     }
     
-    
+    @objc private func reachabilityDidChanged() {
+        guard reachabilityService.connection == .reachable else {
+            return
+        }
+        reachabilityService.stopNotifier()
+        NotificationCenter.default.removeObserver(self)
+        isProcessing = false
+        processingRemoteItems = false
+        
+        actualizeCache(completion: nil)
+    }
     
     private func startAppendingAllLocals(completion: @escaping VoidHandler) {
         guard !self.processingLocalItems else {
