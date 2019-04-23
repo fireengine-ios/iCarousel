@@ -31,6 +31,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     private let oldPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
         view.titleLabel.text = TextConstants.oldPassword
+        view.passwordTextField.placeholder = TextConstants.enterYourOldPassword
         view.passwordTextField.returnKeyType = .next
         return view
     }()
@@ -38,6 +39,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     private let newPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
         view.titleLabel.text = TextConstants.newPassword
+        view.passwordTextField.placeholder = TextConstants.enterYourNewPassword
         view.passwordTextField.returnKeyType = .next
         return view
     }()
@@ -45,6 +47,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     private let repeatPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
         view.titleLabel.text = TextConstants.repeatPassword
+        view.passwordTextField.placeholder = TextConstants.enterYourRepeatPassword
         view.passwordTextField.returnKeyType = .next
         return view
     }()

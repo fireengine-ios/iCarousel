@@ -937,3 +937,7 @@
 "this_text_is_empty" = "This text is empty";
 "password_changed_successfully" = "Your password has been changed successfully";
 "password_changed_successfully_relogin" = "You have successfully changed your password. Please login again with your new password.";
+
+"enter_your_old_password" = "Enter your old password";
+"enter_your_new_password" = "Enter your new password";
+"enter_your_repeat_password" = "Re-enter your new password";
