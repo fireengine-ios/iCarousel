@@ -130,6 +130,11 @@ final class SupportFormController: UIViewController, KeyboardHandler {
     
     private func openEmail() {
         
+        guard Mail.canSendEmail() else {
+            UIApplication.showErrorAlert(message: TextConstants.feedbackEmailError)
+            return
+        }
+        
         guard
             let name = nameView.textField.text,
             let surname = surnameView.textField.text,
@@ -157,15 +162,27 @@ final class SupportFormController: UIViewController, KeyboardHandler {
             actionOnError(.emptyProblem)
         } else {
             
-            var body = ""
+            let versionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
+            let body = String(format: TextConstants.supportFormEmailBody,
+                              name,
+                              surname,
+                              email,
+                              "\(phoneCode)\(phoneNumber)",
+                              versionString,
+                              CoreTelephonyService().operatorName() ?? "",
+                              UIDevice.current.model,
+                              UIDevice.current.systemVersion,
+                              Device.locale,
+                              ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN")
             
-            if email.isEmpty {
-                body += "\(phoneCode)\(phoneNumber)\n"
-            } else {
-                body += "\(email)\n"
-            }
-            
-            print("open email")
+            Mail.shared().sendEmail(emailBody: body,
+                                    subject: subject,
+                                    //emails: [TextConstants.feedbackEmail], success: {
+                                    emails: ["zdaecq@gmail.com"], success: {
+                                        RouterVC().popViewController()
+            }, fail: { error in
+                UIApplication.showErrorAlert(message: error?.description ?? TextConstants.feedbackEmailError)
+            })
         }
     }
     

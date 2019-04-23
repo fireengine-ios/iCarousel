@@ -157,6 +157,7 @@
 
 /*Fuzzy*/
 "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Пожалуйста, не удаляйте следующую информацию. Данная информация будет использована для отправки сообщения о проблеме:\n\nВерсия приложения: %@\nНомер телефона: %@\nОператор: %@\nУстройство: %@\nОперационная система: %@\nЯзык: %@\nПредпочтительный язык: %@\nСтатус сети: %@\nОбщий объём хранилища: %lld\nИспользованный объём хранилища: %lld\nПакеты: %@";
+"support_form_email_body" = "Please do not delete the information below. The information will be used to address the problem.\n\nName: %@\nSurname: %@\nE-mail: %@\nMsisdn: %@\nApplication Version: %@\nCarrier: %@\nDevice: %@\nDevice OS: %@\nLanguage: %@\nNetwork Status: %@";
 "Upload Photos" = "Загрузить фото";
 "Add" = "Добавить";
 "Albums" = "Альбомы";

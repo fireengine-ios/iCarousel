@@ -165,6 +165,7 @@
 "Feedback Form" = "For any suggestions or complaints, please contact us:";
 "Thanks for leaving a comment!" = "Contact Us";
 "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n";
+"support_form_email_body" = "Please do not delete the information below. The information will be used to address the problem.\n\nName: %@\nSurname: %@\nE-mail: %@Msisdn: %@\nApplication Version: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@";
 "Upload Photos" = "Upload Photos";
 "Add" = "Add";
 "Albums" = "Albums";
