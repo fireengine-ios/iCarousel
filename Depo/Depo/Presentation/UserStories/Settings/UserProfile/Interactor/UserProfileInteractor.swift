@@ -130,10 +130,15 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     func allUpdated() {
-        DispatchQueue.main.async { [weak self] in
-            self?.output.dataWasUpdated()
-            self?.output.stopNetworkOperation()
-        }
+        ///need to refresh local info after change
+        SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: { [weak self] response in
+            DispatchQueue.main.async { [weak self] in
+                self?.output.dataWasUpdated()
+                self?.output.stopNetworkOperation()
+            }
+        }, fail: { [weak self] error in
+            self?.fail(error: error.localizedDescription)
+        })
     }
     
     func fail(error: String) {

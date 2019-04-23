@@ -67,11 +67,12 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                                       target: self,
                                       selector: #selector(onReadyButtonAction))
         
+        setupFields()
+        configureKeyboard()
+
         configureNavBar()
         navigationBarWithGradientStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
-        
-        configureKeyboard()
         
         output.viewIsReady()
     }
@@ -102,6 +103,25 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                 self.scrollView.setContentOffset(.zero, animated: true)
             }
             .start()
+    }
+    
+    private func setupFields() {
+        nameDetailView.title = TextConstants.userProfileName
+        surnameDetailView.title = TextConstants.userProfileSurname
+        emailDetailView.title = TextConstants.userProfileEmailSubTitle
+        gsmDetailView.title = TextConstants.userProfileGSMNumberSubTitle
+        birthdayDetailView.title = TextConstants.userProfileBirthday
+
+        nameDetailView.responderOnNext = surnameDetailView
+        surnameDetailView.responderOnNext = emailDetailView
+        gsmDetailView.responderOnNext = birthdayDetailView
+        emailDetailView.responderOnNext = SingletonStorage.shared.isTurkcellUser ?
+            birthdayDetailView : gsmDetailView
+        
+        gsmDetailView.setupAsTurkcellGSMIfNeeded()
+        birthdayDetailView.setupAsBirthday()
+        passwordDetailView.setupAsPassword()
+        emailDetailView.setupAsEmail()
     }
     
     private func updateContentInsetWithKeyboardFrame(_ keyboardFrame: CGRect) {
@@ -225,10 +245,10 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
             
         } else {
             output.tapReadyButton(name: nameDetailView.editableText ?? "",
-                                        surname: surnameDetailView.editableText ?? "",
-                                        email: emailDetailView.editableText ?? "",
-                                        number: gsmDetailView.editableText ?? "",
-                                        birthday: birthdayDetailView.editableText ?? "")
+                                  surname: surnameDetailView.editableText ?? "",
+                                  email: emailDetailView.editableText ?? "",
+                                  number: gsmDetailView.editableText ?? "",
+                                  birthday: birthdayDetailView.editableText ?? "")
             readyButton?.isEnabled = false
         }
     }
@@ -239,25 +259,21 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
 extension UserProfileViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let type = ProfileFieldType(rawValue: textField.tag) else {
-            return true
-        }
         
-        switch type {
-        case .firstName:
-            surnameDetailView.becomeFirstResponder()
-        case .secondName:
-            emailDetailView.becomeFirstResponder()
-        case .email:
-            if !gsmDetailView.becomeFirstResponder() {
-                birthdayDetailView.becomeFirstResponder()
-            }
-        case .gsmNumber:
-            birthdayDetailView.becomeFirstResponder()
-        case .birthday:
-            break
-        case .password:
-            break
+        switch textField {
+        case nameDetailView.getTextField():
+            nameDetailView.responderOnNext?.becomeFirstResponder()
+        case surnameDetailView.getTextField():
+            surnameDetailView.responderOnNext?.becomeFirstResponder()
+        case emailDetailView.getTextField():
+            emailDetailView.responderOnNext?.becomeFirstResponder()
+        case gsmDetailView.getTextField():
+            gsmDetailView.responderOnNext?.becomeFirstResponder()
+        case birthdayDetailView.getTextField():
+            ///last field
+            birthdayDetailView.resignFirstResponder()
+        default:
+            fatalError("Unknown responder")
         }
         
         return true
