@@ -51,7 +51,7 @@ final class SupportFormController: UIViewController, KeyboardHandler {
     
     let nameView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
-        newValue.titleLabel.text = "Name"
+        newValue.titleLabel.text = TextConstants.userProfileName
         newValue.subtitleLabel.text = "Please enter your name"
         newValue.textField.placeholder = "Enter your name"
         newValue.textField.autocorrectionType = .no
@@ -60,7 +60,7 @@ final class SupportFormController: UIViewController, KeyboardHandler {
     
     let surnameView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
-        newValue.titleLabel.text = "Surname"
+        newValue.titleLabel.text = TextConstants.userProfileSurname
         newValue.subtitleLabel.text = "Please enter your surname"
         newValue.textField.placeholder = "Enter your surname"
         newValue.textField.autocorrectionType = .no
@@ -69,7 +69,7 @@ final class SupportFormController: UIViewController, KeyboardHandler {
     
     let emailView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
-        newValue.titleLabel.text = "Email"
+        newValue.titleLabel.text = TextConstants.userProfileEmailSubTitle
         /// not set bcz of showEmptyCredentialsPopup
         //newValue.subtitleLabel.text
         newValue.textField.placeholder = "Enter your e-mail adress"
