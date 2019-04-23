@@ -255,7 +255,10 @@
 "I’d like hear about news and promotions about lifebox occasionally." = "I’d like to occasionally hear about lifebox news and promotions.";
 "GSM Number" = "Phone Number";
 "E-Mail" = "E-Mail";
+"birthday" = "Birthday";
 "Name and Surname" = "Name and Surname";
+"user_profile_turkcell_gsm_alert" = "Contact call-center to change your number";
+"user_profile_birthday_placeholder" = "DD MM YYYY";
 "Your Profile" = "Profile";
 "Import From Cropy" = "Import from Cropy";
 "Import From Instagram" = "Import from Instagram";
