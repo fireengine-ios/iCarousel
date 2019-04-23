@@ -227,7 +227,6 @@ final class MediaItemOperationsService {
             }
             let predicateForRemoteFile = NSPredicate(format: "trimmedLocalFileID == %@ AND isLocalItemValue == true", item.getTrimmedLocalID())
             
-            
             self.executeRequest(predicate: predicateForRemoteFile, context: context) { alreadySavedMediaItems in
                 alreadySavedMediaItems.forEach({ savedItem in
                     //for locals
@@ -355,26 +354,21 @@ final class MediaItemOperationsService {
                             existed.coreDataObject?.copyInfo(item: newItem, context: context)
                         }
                         allSavedItems.remove(existed)
-                    } else if !allSavedItems.contains(where: {$0.uuid == newItem.uuid }) {
+                    } else {
                         newSavedItems.append(newItem)
-                        allSavedItems.remove(newItem)
                     }
                 }
                 deletedItems.append(contentsOf: allSavedItems)
-                
-                deletedItems.forEach {
-                    if let coreDataObject = $0.coreDataObject {
-                        context.delete(coreDataObject)
+
+                self.deleteItems(deletedItems, completion: {
+                    newSavedItems.forEach {
+                        ///Relations being setuped in the MediaItem init
+                        _ = MediaItem(wrapData: $0, context: context)
                     }
-                }
-                
-                newSavedItems.forEach {
-                    ///Relations being setuped in the MediaItem init
-                    _ = MediaItem(wrapData: $0, context: context)
-                }
-                
-                context.saveAsync(completion: { status in
-                    completion()
+                    
+                    context.saveAsync(completion: { status in
+                        completion()
+                    })
                 })
             })
         }
@@ -648,7 +642,14 @@ final class MediaItemOperationsService {
                 let remoteItemsSet = NSSet(array: remoteItems)
                 
                 self.mediaItemByLocalID(trimmedLocalIDS: items.map {$0.getTrimmedLocalID()}, context: context, mediaItemsCallBack: { mediaItems in
-                    mediaItems.forEach { $0.removeFromRelatedRemotes(remoteItemsSet)}
+                    mediaItems.forEach {
+                        $0.removeFromRelatedRemotes(remoteItemsSet)
+                        if let relatedRemotes = $0.relatedRemotes as? Set<MediaItem> {
+                            $0.hasTranscodedRemote = relatedRemotes.filter { !$0.isTranscoded }.count > 0
+                        } else {
+                            $0.hasTranscodedRemote = false
+                        }
+                    }
                     
                     remoteItems.forEach { context.delete($0) }
                     

@@ -160,22 +160,22 @@ final class UploadOperation: Operation {
                             
                             customSucces()
                         }
-                        }, fail: customFail)
+                    }, fail: customFail)
                     
-                    }, fail: { [weak self] error in
-                        guard let `self` = self else {
-                            return
-                        }
-                        
-                        if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
-                            let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
-                            self.dispatchQueue.asyncAfter(deadline: delay, execute: {
-                                self.attemptsCount += 1
-                                self.attempmtUpload()
-                            })
-                        } else {
-                            customFail(error)
-                        }
+                }, fail: { [weak self] error in
+                    guard let `self` = self else {
+                        return
+                    }
+                    
+                    if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                        let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
+                        self.dispatchQueue.asyncAfter(deadline: delay, execute: {
+                            self.attemptsCount += 1
+                            self.attempmtUpload()
+                        })
+                    } else {
+                        customFail(error)
+                    }
                 })
                 
                 ///If upload service can't create upload request task for some reason

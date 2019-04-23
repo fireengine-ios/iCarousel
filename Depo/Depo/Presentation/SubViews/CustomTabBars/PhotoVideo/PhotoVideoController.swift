@@ -529,64 +529,37 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
     
     func finishedUploadFile(file: WrapData){
-//        dispatchQueue.async { [weak self] in
-//            guard let `self` = self else {
-//                return
-//            }
+        let uuid = file.getTrimmedLocalID()
+        if uploadedObjectID.index(of: file.uuid) == nil {
+            uploadedObjectID.append(uuid)
+        }
         
-//            if let unwrapedFilters = self.originalFilters,
-//                self.isAlbumDetail(filters: unwrapedFilters) {
-//                return
-//            }
-//            
-            
-            let uuid = file.getTrimmedLocalID()
-            if self.uploadedObjectID.index(of: file.uuid) == nil {
-                self.uploadedObjectID.append(uuid)
-            }
-//            
-//            finished: for (section, array) in self.allItems.enumerated() {
-//                for (row, object) in array.enumerated() {
-//                    if object.getTrimmedLocalID() == uuid, object.isLocalItem {
-//                        file.isLocalItem = false
-//                        
-//                        guard section < self.allItems.count, row < self.allItems[section].count else {
-//                            /// Collection was reloaded from different thread
-//                            return
-//                        }
-//                        
-//                        self.allItems[section][row] = file
-//                        
-//                        break finished
-//                    }
-//                }
-//            }
-//            
-//            for (index, object) in self.allMediaItems.enumerated(){
-//                if object.uuid == file.uuid {
-//                    file.isLocalItem = false
-//                    self.allMediaItems[index] = file
-//                }
-//            }
-        
-            uploadProgress.removeValue(forKey: uuid)
-        
-            DispatchQueue.toMain {
+        uploadProgress.removeValue(forKey: uuid)
+    
+        DispatchQueue.toMain {
+            if file.status == .active {
                 if let cell = self.getCellForFile(objectUUID: uuid) {
                     cell.finishedUploadForObject()
                 }
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
-                if let `self` = self, let cell = self.getCellForFile(objectUUID: uuid) {
-                    cell.resetCloudImage()
-                    
-                    if let index = self.uploadedObjectID.index(of: uuid){
-                        self.uploadedObjectID.remove(at: index)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
+                    if let `self` = self, let cell = self.getCellForFile(objectUUID: uuid) {
+                        cell.resetCloudImage()
+                        
+                        if let index = self.uploadedObjectID.index(of: uuid){
+                            self.uploadedObjectID.remove(at: index)
+                        }
                     }
+                })
+            } else if let cell = self.getCellForFile(objectUUID: uuid) {
+                //Photo should be displayed as unsynced while it is not transcoded. then it should be displayed as synced when trigger Range API (if it is transcoded)
+                cell.cancelledUploadForObject()
+                
+                if let index = self.uploadedObjectID.index(of: uuid){
+                    self.uploadedObjectID.remove(at: index)
                 }
-            })
-//        }
+            }
+        }
     }
     
     func cancelledUpload(file: WrapData) {
