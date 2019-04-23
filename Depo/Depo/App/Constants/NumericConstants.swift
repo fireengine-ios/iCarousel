@@ -152,6 +152,7 @@ struct NumericConstants {
     
     static let profileStackViewHiddenSubtitleSpacing: CGFloat = 8
     static let profileStackViewShowSubtitleSpacing: CGFloat = 2
+    static let firstResponderBottomOffset: CGFloat = 50
 }
 
 struct RequestSizeConstant {

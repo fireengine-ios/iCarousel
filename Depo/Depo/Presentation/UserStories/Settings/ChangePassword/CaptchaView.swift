@@ -44,7 +44,7 @@ final class CaptchaView: UIView, FromNib {
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
-            newValue.insetX = 16
+            newValue.insetX = 0
             newValue.placeholder = TextConstants.captchaAnswerPlaceholder
             
             newValue.returnKeyType = .done

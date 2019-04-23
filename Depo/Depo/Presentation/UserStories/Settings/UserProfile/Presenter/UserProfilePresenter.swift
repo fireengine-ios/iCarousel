@@ -50,11 +50,11 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         view.setupEditState(true)
     }
     
-    func tapReadyButton(name: String, surname: String, email: String, number: String) {
-        interactor.changeTo(name: name, surname: surname, email: email, number: number)
+    func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String) {
+        interactor.changeTo(name: name, surname: surname, email: email, number: number, birthday: birthday)
     }
     
-    func dataWasUpdate() {
+    func dataWasUpdated() {
         view.setupEditState(false)
     }
     
