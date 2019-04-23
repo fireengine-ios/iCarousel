@@ -53,14 +53,8 @@ extension Date: Components {
         return formatter.string(from: self)
     }
     
-    func getTimeIntervalBetweenDateAndCurrentDate() -> Int {
-        let curentDate = Date()
-        let deltaDate = curentDate - self.timeIntervalSince1970
-        let calendar = Calendar.current
-        
-        let years = calendar.component(.year, from: deltaDate) - 1970
-        let monthes = calendar.component(.month, from: deltaDate) - 1
-        return monthes + years * 12
+    func getMonthsBetweenDateAndCurrentDate() -> Int {
+        return Calendar.current.dateComponents([.month], from: self, to: Date()).month ?? 0
     }
     
     var withoutSeconds: Date {

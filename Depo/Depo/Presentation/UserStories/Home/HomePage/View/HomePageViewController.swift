@@ -41,7 +41,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
-        needShowTabBar = true
+        needToShowTabBar = true
         
         let headerNib = UINib(nibName: "HomeViewTopView", bundle: nil)
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
@@ -52,7 +52,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
         
         configurateRefreshControl()
         
-        showSpiner()
+        showSpinner()
         output.homePagePresented()
         
         output.needCheckQuota()
@@ -129,11 +129,11 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     // MARK: HomePageViewInput
     
     func stopRefresh() {
-        hideSpiner()
+        hideSpinner()
     }
     
     func startSpinner() {
-        showSpiner()
+        showSpinner()
     }
     
     func needPresentPopUp(popUpView: UIViewController) {
@@ -296,7 +296,7 @@ class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollect
     func previewSearchResultsHide() { }
     
     @objc func reloadData() {
-        showSpiner()
+        showSpinner()
         refreshControl.endRefreshing()
         output.needRefresh()
     }

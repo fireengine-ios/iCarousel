@@ -14,6 +14,7 @@ protocol MyStorageInteractorInput {
     
     func restorePurchases()
     func trackPackageClick(plan packages: SubscriptionPlan, planIndex: Int)
+    func trackScreen()
     
     func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse],
                                     accountType: AccountType) -> [SubscriptionPlan]

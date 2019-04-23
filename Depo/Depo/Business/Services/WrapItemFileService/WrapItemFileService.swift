@@ -13,7 +13,7 @@ typealias FileOperationSucces = () -> Void
 
 protocol  WrapItemFileOperations {
     
-    func createsFolder(createFolder: CreatesFolder, success: FileOperation?, fail: FailResponse?)
+    func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?)
     
     func delete(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?)
     
@@ -45,7 +45,7 @@ class WrapItemFileService: WrapItemFileOperations {
     let uploadService = UploadService.default
     
     
-    func createsFolder(createFolder: CreatesFolder, success: FileOperation?, fail: FailResponse?) {
+    func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?) {
         remoteFileService.createsFolder(createFolder: createFolder, success: success, fail: fail)
     }
     
@@ -222,7 +222,7 @@ class WrapItemFileService: WrapItemFileOperations {
         let success_: FileOperationSucces = {
             success?()
             files.forEach {
-                $0.coreDataObject?.favoritesValue = favouritse
+                $0.favorites = favouritse
             }
             if (favouritse) {
                 ItemOperationManager.default.addFilesToFavorites(items: files)
@@ -267,7 +267,9 @@ class WrapItemFileService: WrapItemFileOperations {
                     itemToUpdate.status = item.status
                 }
             }
-            let isCompleted = !items.contains(where: { $0.status != .active })
+            let isCompleted = items.contains(where: { $0.tmpDownloadUrl != nil || $0.status == .active })
+            /// old logic, now we consider its ok, neither if its active or tempo url online
+            //!items.contains(where: { $0.status != .active})
             if isCompleted {
                 success?()
             } else if currentAttempt < maxAttempts {

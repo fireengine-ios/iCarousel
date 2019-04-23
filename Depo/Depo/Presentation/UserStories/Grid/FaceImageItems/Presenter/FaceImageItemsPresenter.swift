@@ -174,7 +174,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     }
     
     override func startAsyncOperation() {
-        outputView()?.showSpiner()
+        outputView()?.showSpinner()
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -203,7 +203,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             if let type = faceImageType?.myStreamType,
                 let count = albumSliderModuleOutput?.countThumbnailsFor(type: type),
                 count < NumericConstants.myStreamSliderThumbnailsCount, count != allItems.count  {
-                albumSliderModuleOutput?.reload(type: type)
+                albumSliderModuleOutput?.reload(types: [type])
             }
             updatedMyStream = true
         }
@@ -267,7 +267,7 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
                 
         view.stopSelection()
         
-        albumSliderModuleOutput?.reload(type: .people)
+        albumSliderModuleOutput?.reload(types: [.people])
         reloadData()
     }
     
@@ -340,6 +340,9 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
         if accountType == "TURKCELL" {
             self.accountType = .turkcell
         }
+        
+        (dataSource as? FaceImageItemsDataSource)?.accountType = self.accountType
+        
         if let interactor = interactor as? FaceImageItemsInteractor {
             interactor.getFeaturePacks()
         }

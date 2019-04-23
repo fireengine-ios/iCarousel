@@ -52,13 +52,15 @@ class UploadFilesSelectionModuleInitializer: NSObject {
         let configurator = BaseFilesGreedModuleConfigurator()
         let service = LocalPhotoAndVideoService()
         let interactor = UploadFilesSelectionInteractor(remoteItems: service)
+        let router = UploadFilesSelectionRouter()
+
         interactor.rootUIID = rootUUID
         
         
         configurator.configure(viewController: viewController,
                                fileFilters: [.localStatus(.local)], //[.duplicates],//
                                bottomBarConfig: nil,
-                               router: BaseFilesGreedRouter(),
+                               router: router,
                                presenter: UploadFilesSelectionPresenter(),
                                interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [],

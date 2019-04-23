@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,6 +20,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PackagesViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
+                <outlet property="cardsStackView" destination="FWc-7v-dob" id="uZx-Xq-Fd6"/>
                 <outlet property="collectionView" destination="YAO-ir-hJp" id="1Vf-KB-ZSS"/>
                 <outlet property="descriptionLabel" destination="X3N-5r-5TB" id="Dv5-tS-hAH"/>
                 <outlet property="keyboardHideManager" destination="2I8-Re-xUl" id="aFr-EU-UJX"/>
@@ -28,7 +28,6 @@
                 <outlet property="promoView" destination="5bp-6o-N2u" id="9NB-9L-Bts"/>
                 <outlet property="scrollView" destination="TRR-B7-lJ8" id="V89-Ic-Tct"/>
                 <outlet property="subtitleLabel" destination="LS1-hD-FRu" id="00P-TY-Gbd"/>
-                <outlet property="topStackView" destination="FWc-7v-dob" id="yM7-NJ-6Xm"/>
                 <outlet property="view" destination="iN0-l3-epB" id="fj3-X7-Fa4"/>
             </connections>
         </placeholder>

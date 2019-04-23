@@ -13,4 +13,5 @@ protocol PremiumViewOutput {
     
     var title: String { get }
     var headerTitle: String { get }
+    var accountType: AccountType { get }
 }

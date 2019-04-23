@@ -462,21 +462,21 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     // MARK: - TabBar
     
     private func showTabBar() {
-        needShowTabBar = true
-        showTabBarIfNeed()
+        needToShowTabBar = true
+        showTabBarIfNeeded()
     }
     
     private func hideTabBar() {
-        needShowTabBar = false
-        showTabBarIfNeed()
+        needToShowTabBar = false
+        showTabBarIfNeeded()
     }
     
-    func showSpinner() {
+    func showSpiner() {
         searchTextField?.isUserInteractionEnabled = false
         showSpinnerOnView(outputView)
     }
     
-    func hideSpinner() {
+    func hideSpiner() {
         searchTextField?.isUserInteractionEnabled = true
         hideSpinerForView(outputView)
     }

@@ -16,6 +16,8 @@ final class LeavePremiumInteractor {
     private let packageService: PackageService
     private let subscriptionsService: SubscriptionsService
 
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     init(accountService: AccountServicePrl = AccountService(),
          subscriptionsService: SubscriptionsService = SubscriptionsServiceIml(),
          packageService: PackageService = PackageService()) {
@@ -28,21 +30,6 @@ final class LeavePremiumInteractor {
 
 // MARK: LeavePremiumInteractorInput
 extension LeavePremiumInteractor: LeavePremiumInteractorInput {
-    func getAccountType() {
-        accountService.info(
-            success: { [weak self] response in
-                guard let response = response as? AccountInfoResponse,
-                    let accountType = response.accountType else { return }
-                DispatchQueue.main.async {
-                    self?.output.didLoadAccountType(accountTypeString: accountType)
-                }
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
-                    self?.output.didErrorMessage(with: errorResponse.description)
-                }
-        })
-    }
-    
     func getActiveSubscription() {
         subscriptionsService.activeSubscriptions(success: { [weak self] response in
             guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else {
@@ -81,5 +68,18 @@ extension LeavePremiumInteractor: LeavePremiumInteractorInput {
     
     func getAccountType(with accountType: String, offers: [Any]) -> AccountType {
         return packageService.getAccountType(for: accountType, offers: offers)
+    }
+    
+    func trackScreen(screenType: LeavePremiumType) {
+        let screenTypeGA: AnalyticsAppScreens
+        switch screenType {
+        case .standard:
+            screenTypeGA = .standartAccountDetails
+        case .middle:
+            screenTypeGA = .standartPlusAccountDetails
+        case .premium:
+            screenTypeGA = .premiumAccountDetails
+        }
+        analyticsService.logScreen(screen: screenTypeGA)
     }
 }

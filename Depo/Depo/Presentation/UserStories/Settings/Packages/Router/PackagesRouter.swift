@@ -18,13 +18,18 @@ extension PackagesRouter: PackagesRouterInput {
         router.pushViewController(viewController: router.termsOfUseScreen)
     }
 
-    func openLeavePremium() {
-        let vc = router.leavePremium(title: TextConstants.lifeboxPremium)
+    func openLeavePremium(type: LeavePremiumType) {
+        let vc = router.leavePremium(type: type)
         router.pushViewController(viewController: vc)
     }
     
     func openMyStorage(storageUsage: UsageResponse?) {
         let viewController = router.myStorage(usageStorage: storageUsage)
+        router.pushViewController(viewController: viewController)
+    }
+    
+    func openUserProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool) {
+        let viewController = router.userProfile(userInfo: userInfo, isTurkcellUser: isTurkcellUser)
         router.pushViewController(viewController: viewController)
     }
     

@@ -55,11 +55,18 @@ struct RouteRequests {
         }
     }()
     
+    static let silentLogin: String = {
+        switch currentServerEnvironment {
+        case .test: return "https://tcloudstb.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
+        case .preProduction: return "https://adepotest.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
+        case .production: return "https://adepo.turkcell.com.tr/api/auth/silent/token?rememberMe=on"
+        }
+    }()
+    
     // MARK: Authentication
     
     static let httpsAuthification = "auth/token?rememberMe=%@"
     static let authificationByRememberMe = "auth/rememberMe"
-    static let authificationByToken = "auth/token"
     static let signUp = "signup"
     static let logout = "auth/logout"
     
@@ -73,7 +80,8 @@ struct RouteRequests {
     // MARK: EULA 
     static let eulaGet     = "eula/get/%@"
     static let eulaCheck   = "eula/check/%@"
-    static let eulaApprove = "eula/approve/%i"
+    static let eulaApprove = "eula/approve"
+    static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
     
     
     //MARK: Social Connections
@@ -194,6 +202,8 @@ struct RouteRequests {
     enum Account {
         static let accountApi = baseUrl +/ "account"
         
+        static let updatePassword = accountApi +/ "updatePassword"
+        
         enum Settings {
             static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
             
@@ -205,6 +215,7 @@ struct RouteRequests {
             static let authority = Account.accountApi +/ "authority"
             static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
             static let availableOffers = Account.accountApi +/ "available-offers/IOS"
+            static let features = baseUrl +/ "features"
         }
     }
     
@@ -219,4 +230,6 @@ struct RouteRequests {
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
+    
+    static let turkcellAndGroupCompanies = "https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz"
 }

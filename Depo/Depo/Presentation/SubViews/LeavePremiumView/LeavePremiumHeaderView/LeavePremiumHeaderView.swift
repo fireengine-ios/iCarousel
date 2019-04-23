@@ -22,7 +22,7 @@ final class LeavePremiumHeaderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        setup()
+        setupDesign()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,13 +31,14 @@ final class LeavePremiumHeaderView: UIView {
         setupView()
     }
     
-    // MARK: Utility methods(Private)
-    private func setup() {
-        
-        topMessageLabel.text = TextConstants.leavePremiumPremiumDescription
-        detailsLabel.text = TextConstants.leavePremiumCancelDescription
-        setupDesign()
+    // MARK: Utility methods(Public)
+    
+    func setupTexts(with type: LeavePremiumType) {
+        topMessageLabel.text = type.topMessage
+        detailsLabel.text = type.detailMessage
     }
+    
+    // MARK: Utility methods(Private)
     
     private func setupView() {
         let nibNamed = String(describing: LeavePremiumHeaderView.self)

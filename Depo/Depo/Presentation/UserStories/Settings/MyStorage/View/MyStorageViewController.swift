@@ -16,13 +16,48 @@ final class MyStorageViewController: BaseViewController {
     
     //MARK: IBOutlet
     @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var storageUsageTextView: UITextView!
-    @IBOutlet weak var collectionView: ResizableCollectionView!
-    @IBOutlet private weak var storageUsageProgressView: RoundedProgressView! {
+    @IBOutlet private weak var collectionView: ResizableCollectionView!
+    
+    @IBOutlet private weak var dividerView: UIView! {
         didSet {
-            storageUsageProgressView.trackTintColor = ColorConstants.lightGrayColor
-            storageUsageProgressView.progressTintColor = ColorConstants.greenColor
-            storageUsageProgressView.progress = 0
+            dividerView.backgroundColor = ColorConstants.photoCell
+        }
+    }
+
+    @IBOutlet private weak var usageLabel: UILabel! {
+        didSet {
+            usageLabel.text = ""
+            usageLabel.textColor = UIColor.lrTealish
+            usageLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        }
+    }
+    
+    @IBOutlet private weak var packagesLabel: UILabel! {
+        didSet {
+            packagesLabel.text = TextConstants.packagesIHave
+            packagesLabel.textColor = ColorConstants.darkText
+            packagesLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        }
+    }
+    
+    @IBOutlet private weak var percentageLabel: UILabel! {
+        didSet {
+            percentageLabel.text = String(format: TextConstants.usagePercentageTwoLines, 0)
+            percentageLabel.numberOfLines = 0
+            percentageLabel.textAlignment = .center
+            percentageLabel.textColor = UIColor.lrTealish
+            percentageLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
+        }
+    }
+    
+    @IBOutlet private weak var storageUsageProgressView: CircleProgressView! {
+        didSet {
+            storageUsageProgressView.backColor = UIColor.lrTealish.withAlphaComponent(0.25)
+            storageUsageProgressView.progressColor = UIColor.lrTealish
+            storageUsageProgressView.backWidth = 8
+            storageUsageProgressView.progressWidth = 8
+            storageUsageProgressView.layoutIfNeeded()
+            storageUsageProgressView.set(progress: 0, withAnimation: false)
         }
     }
     
@@ -35,6 +70,12 @@ final class MyStorageViewController: BaseViewController {
         
         setup()
         output.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        output.viewDidAppear()
     }
     
     //MARK: UtilityMethods
@@ -53,28 +94,14 @@ final class MyStorageViewController: BaseViewController {
 
 // MARK: - MyStorageViewInput
 extension MyStorageViewController: MyStorageViewInput {
-    func configureProgress(with full: Int64, left: Int64) {
-        storageUsageProgressView.progress = Float(left) / Float(full)
+    func configureProgress(with full: Int64, used: Int64) {
+        let usage = CGFloat(used) / CGFloat(full)
         
-        let storageString = String(format: TextConstants.usageInfoBytesRemained, left.bytesString, full.bytesString)
+        storageUsageProgressView.set(progress: usage, withAnimation: true)
         
-        //TODO: - think how to change this code for RTL languages
+        percentageLabel.text = String(format: TextConstants.usagePercentageTwoLines, (usage * 100).rounded(.toNearestOrAwayFromZero))
         
-//        guard let lastWord = storageString.lastIndex(of: " ") else { return }
-//        let lastWordLocation = storageString.distance(from: storageString.startIndex,
-//                                                      to: lastWord)
-//        let lastWordLength = storageString.distance(from: lastWord,
-//                                                    to: storageString.endIndex)
-//        let range = NSRange(location: lastWordLocation, length: lastWordLength)
-        
-        let attributedString = NSMutableAttributedString(string: storageString, attributes: [
-            .font: UIFont.TurkcellSaturaBolFont(size: 20),
-            .foregroundColor: ColorConstants.textGrayColor,
-            .kern: 0.0
-            ])
-//        attributedString.addAttribute(.font, value: UIFont.TurkcellSaturaMedFont(size: 20), range: range)
-        
-        storageUsageTextView.attributedText = attributedString
+        usageLabel.text = String(format: TextConstants.packageApplePrice, used.bytesString, full.bytesString)
     }
     
     func reloadCollectionView() {

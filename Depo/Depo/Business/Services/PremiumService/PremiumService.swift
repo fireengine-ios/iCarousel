@@ -24,28 +24,27 @@ final class PremiumService {
     
     func showPopupForNewUserIfNeeded() {
         DispatchQueue.toMain {
-            if AuthoritySingleton.shared.isShowPopupAboutPremiumAfterSync {
-                if self.router.getViewControllerForPresent()?.presentedViewController == nil {
-                    AuthoritySingleton.shared.setShowPopupAboutPremiumAfterSync(isShow: false)
-                    
-                    let controller = PopUpController.with(title: nil,
-                                                          message: TextConstants.syncPopup,
-                                                          image: .none,
-                                                          firstButtonTitle: TextConstants.noForUpgrade,
-                                                          secondButtonTitle: TextConstants.yesForUpgrade,
-                                                          secondAction: { [weak self] vc in
-                                                            vc.dismiss(animated: true, completion: {
-                                                                self?.moveToPremium()
-                                                            })
-                    })
-                    
-                    UIApplication.topController()?.present(controller, animated: true, completion: nil)
-                } else if !AuthoritySingleton.shared.isShowPopupAboutPremiumAfterRegistration {
-                    AuthoritySingleton.shared.setShowPopupAboutPremiumAfterSync(isShow: false)
-                }
+            if AuthoritySingleton.shared.isShowPopupAboutPremiumAfterSync,
+                !(UIApplication.topController()?.isKind(of: UploadFilesSelectionViewController.self) ?? true) {
+                
+                AuthoritySingleton.shared.setShowPopupAboutPremiumAfterSync(isShow: false)
+                
+                let controller = PopUpController.with(title: nil,
+                                                      message: TextConstants.syncPopup,
+                                                      image: .none,
+                                                      firstButtonTitle: TextConstants.noForUpgrade,
+                                                      secondButtonTitle: TextConstants.yesForUpgrade,
+                                                      secondAction: { [weak self] vc in
+                                                        vc.dismiss(animated: true, completion: {
+                                                            self?.moveToPremium()
+                                                        })
+                })
+                
+                UIApplication.topController()?.present(controller, animated: true, completion: nil)
             }
         }
     }
+    
     
     // MARK: Utility methods
     @objc private func onAutoSyncStatusDidChange(notification: NSNotification) {
@@ -58,10 +57,13 @@ final class PremiumService {
     private func moveToPremium() {
         let controller = router.premium(title: TextConstants.lifeboxPremium,
                                         headerTitle: TextConstants.becomePremiumMember)
-        router.pushViewController(viewController: controller)
+        DispatchQueue.toMain { [weak self] in
+            if let navController = self?.router.navigationController?.presentedViewController as? UINavigationController {
+                navController.pushViewController(controller, animated: true)
+            } else {
+                self?.router.pushViewController(viewController: controller)
+            }
+        }
     }
     
 }
-
-
-

@@ -69,7 +69,7 @@
 "You can open settings and cancel subscption." = "Ju mund të vizitoni iTunes për të anuluar paketën tuaj.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Për të anuluar paketën, ju lutem dergoni tekstin \"IPTAL LIFEBOX %@\" në numrin 2200";
 "You can visit iTunes to cancel your subscription" = "Ju mund të vizitoni iTunes për të anuluar paketën tuaj.";
-"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hmm, nuk mund ta besojmë që po e bëni këtë gjë! Kur të vendosni që ta riaktivizoni, ne do ju mirëpresim sërish :). Në rast se ende nuk keni ndërruar mendje, dërgoni “STOP” në numrin 2.";
+"Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Klientët platinum dhe lifecell mund të dërgojnë LIFE CANCEL; abonentët e tjerë mund të dërgojnë LIFEBOX CANCEL në numrin 3030 për të anuluar anëtarësimet e tyre.";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Për të çaktivizuar lifebox 50GB, ju lutem dërgoni SMS me tekst 50VYKL; për lifebox 500GB, ju lutem dërgoni SMS me tekst 500VYKL në numrin 8080.";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Për të filluar anëtarësimet e tyre, klientët platinum dhe lifecell mund të dërgojnë LIFE; klientët e tjerë mund të dërgojnë LIFEBOX 50GB për paketën lifebox 50GB, LIFEBOX 500GB për paketën lifebox 500GB dhe LIFEBOX 2.5TB për paketën lifebox 2.5TB; në numrin 3030. ";
@@ -253,7 +253,7 @@
 "Logout" = "Dalje";
 "Help & Support" = "Pyetje të shpeshta";
 "Lifebox Touch ID and Passcode" = "ID me prekje dhe kodi i kalimit të lifebox";
-"Usage Info and Packages" = "Info për përdorimin dhe paketat ";
+"Usage Info and Packages" = "";
 "Recently Deleted Files" = "Skedarët e fshirë së fundmi";
 "Auto Sync" = "Vetësinkronizim ";
 "Back-up my contacts" = "Krijoni kopje rezervë për Kontaktet e Mia ";
@@ -437,7 +437,7 @@
 "Backup" = "Kopje Rezervë ";
 "Last update:" = "Përditësimi i fundit:";
 "Your storage is empty!" = "Arkiva juaj është bosh!";
-"You are using %f of your disk space! It’s a great time to expand your storage." = "Ju jeni duke përdorur% d %% të kuotës suaj të lifebox. Është moment i duhur për të zgjeruar arkivën tuaj.";
+"You are using %f of your disk space! It’s a great time to expand your storage." = "Ju jeni duke përdorur%d%% të kuotës suaj të lifebox. Është moment i duhur për të zgjeruar arkivën tuaj.";
 "You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "Ju nuk keni ende asnjë skedar në lifebox-in tuaj. Filloni ngarkimin e kujtimeve tua në lifebox!";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "Ju jeni duke përdorur %d%% të arkivës së pajisjes suaj. Erdhi momenti të lironi hapesirë në të.";
 "Upload Files" = "Ngarkoni Skedarët";
@@ -682,8 +682,8 @@
 "Become Premium" = "Bëhuni Premium";
 "Become Premium Member!" = "Bëhuni anëtar Premium!";
 "leave_premium_membership" = "Ndërprisni abonimin Premium";
-"Standard User" = "Përdorues Standard";
-"Premium User" = "Llogari Premium";
+"Standard User" = "lifebox Standard";
+"Premium User" = "lifebox Premium";
 "lifebox Premium" = "lifebox Premium";
 "Delete Duplicated Contacts For PremiumTitle" = "Për të fshirë të gjitha kontaktet e përsëritura nga numëratori telefonik e për shumë më tepër mundësi, bëhuni anëtar Premium!";
 
@@ -716,7 +716,7 @@
 "package_lifecell_cancel_text" = "Për të çaktivizuar lifebox 50GB, ju lutem dërgoni një SMS me tekst 50 VYKL; për lifebox 500GB, ju lutem dërgoni SMS me tekst 500VYKL në numrin 8080.";
 "package_promo_cancel_text" = "Ju lutem, përdorni menunë Kontakt për të na informuar që të përpunojmë kërkesën tuaj.";
 "package_kktcell_cancel_text" = "Klientët platinum dhe lifecell mund të dërgojnë LIFE CANCEL; klientët e tjerë mund të dërgojnë LIFEBOX CANCEL tek 3030 për të anuluar abonimin e tyre.";
-"package_moldcell_cancel_text" = "Hmm, s'mund ta besojmë që po e bëni këtë! Kur të vendosni ta riaktivizoni, ne do të jemi këtu për ju :). Nëse ende doni të vazhdoni, dërgoni \"STOP\" tek 2";
+"package_moldcell_cancel_text" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
 "package_life_cancel_text" = "Për të çaktivizuar lifebox 25GB, ju lutem dërgoni një SMS me tekst \"Stop1\"; për lifebox 100GB, ju lutem dërgoni SMS me tekst \"Stop2\"; për lifebox 500GB, ju lutem dërgoni SMS me tekst \"Stop3\"; në numrin 6767.";
 "package_paycell_all_access_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
 "package_paycell_slcm_cancel_text" = "Për të anuluar paketën tuaj, ju lutem vizitoni www.mylifebox.com";
@@ -764,13 +764,13 @@
 
 /*Fuzzy*/
 "available_head_name_title" = "+ %@";
-"home_page_pop_up" = "Ju po hyni në lifebox si një përdorues standard. Nëse ju nuk kaloni në Premium, kujtimet tuaja do të ruhen në cilësi të lartë. Dëshironi të bëheni përdorues Premium që kujtimet tuaja të ruhen në cilësinë e tyre origjinale, si edhe të përfitoni nga privilegjet Premium?";
-"sync_page_pop_up" = "Ju po hyni në lifebox si një përdorues standard. Nëse ju nuk kaloni në Premium, kujtimet tuaja do të ruhen në cilësi të lartë. Dëshironi të bëheni përdorues Premium që kujtimet tuaja të ruhen në cilësinë e tyre origjinale, si edhe të përfitoni nga privilegjet Premium?";
+"home_page_pop_up" = "Doni të bëheni anëtar Premium, të ruani kujtimet tuaja në cilësi origjinale, si edhe t'i aksesoni të gjitha funksionalitetet Premium?";
+"sync_page_pop_up" = "Doni të bëheni anëtar Premium, të ruani kujtimet tuaja në cilësi origjinale, si edhe t'i aksesoni të gjitha funksionalitetet Premium?";
 "ok_for_upgrade" = "Po, Përmirëso";
 
 /*Fuzzy*/
 "no_for_upgrade" = "Jo";
-"uploded_photos_high_quality" = "Ju po hyni në lifebox si një përdorues standard. Nëse ju nuk kaloni në Premium, kujtimet tuaja do të ruhen në cilësi të lartë. Dëshironi të bëheni përdorues Premium që kujtimet tuaja të ruhen në cilësinë e tyre origjinale, si edhe të përfitoni nga privilegjet Premium?";
+"uploded_photos_high_quality" = "Doni të bëheni anëtar Premium, të ruani kujtimet tuaja në cilësi origjinale, si edhe t'i aksesoni të gjitha funksionalitetet Premium?";
 
 /*Fuzzy*/
 "NSFaceIDUsageDescription" = "Për të shtuar sigurinë, ky aplikacion është projektuar që të përdorë ID me Fytyrë.";
@@ -782,8 +782,8 @@
 "package_albanian_cancel_text" = "Teksti i anulimit të kuotës shqiptare";
 "feature_albanian_cancel_text" = "Ju mund të vazhdoni të përdorni mundësitë Premium falas me qënë se jeni abonent ALBtelecom.";
 "no_analyses_left_title" = "Nuk ka më Analiza";
-"no_analyses_left_message" = "Nuk ka më Analiza";
-"no_analyses_left_button" = "Blini PhotoPick";
+"no_analyses_left_message" = "Mos u mërzisni! Ju mundeni ende të blini një paketë të re për të analizuar fotot tuaja!";
+"no_analyses_left_button" = "Bëhuni Premium";
 "analyze_history_empty_title" = "Ende nuk keni filluar të analizoni fotot tuaja?";
 "analyze_history_empty_subtitle" = "Filloni analizën tani, për të kuptuar cila foto merr vlersimin më të lartë në rrjetet sociale.";
 "analyze_history_analyze_left" = "Analizime të mbetura";
@@ -835,7 +835,7 @@
 "connected_with_instagram_name" = "Lidhuni me Instagram si";
 "continue_without_connecting" = "Vazhdoni pa u lidhur";
 "connected_accounts" = "Llogari të lidhura";
-"analyze_history_free_text" = "Falas për një periudhë të kufizuar";
+"analyze_history_free_text" = "Pa limit për ju";
 
 /*InstapickUpgradePopup*/
 /*Fuzzy*/
@@ -845,7 +845,7 @@
 "instapick_upgrade_popup_button" = "Përditësoni";
 "instapick_upgrade_popup_no" = "Jo";
 "instapick_analysis_left" = "Analizim i mbetur: %1$d / %2$d";
-"instapick_unlimited_analysis" = "Falas për një periudhë të kufizuar";
+"instapick_unlimited_analysis" = "Pa limit për ju";
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
@@ -861,6 +861,91 @@
 "there_are_no_albums" = "Nuk ka albume";
 "instapick_selection_analyzes_left_max" = "Ju keni përzgjedhur %d foto\n(numri maksimal që mund të përzgjidhni)";
 "free_trial_title_label" = "Analizoni me PhotoPick";
-"free_trial_detail_label" = "Zbuloni se cilat foto do të marrin vlerësim më të lartë; analizoni me PhotoPick për më shumë pëlqime! Provojeni falas për një periudhë të limituar!";
+"free_trial_detail_label" = "Zbuloni cila foto do të marrë vlerësimin më të lartë; analizoni me PhotoPick për më shumë pëlqime! Pa limit, vetëm për ju!";
 "instapick_under_construction" = "Ne po bëjmë përmirësime në PhotoPick për një eksperiencë më të mirë 😉";
 "instapick_unsupported_file_type" = "Fotot që keni zgjedhur janë në format të pambështetur. Ju mund të vazhdoni përvojën e PhotoPick duke përzgjedhur fotot e tjera.";
+"work_will_introduced" = "Janë duke u kryer disa punë mirëmbajtjeje në lifebox. Ju lutem, provoni përsëri më vonë.";
+"facebook_remove_connection_warning_title" = "Jeni duke hequr lidhjen me Facebook";
+"dropbox_remove_connection_warning_title" = "Jeni duke hequr lidhjen me Dropbox";
+"facebook_remove_connection_warning_message" = "Jeni të sigurt që dëshironi të hiqni lidhjen me Facebook?";
+"dropbox_remove_connection_warning_message" = "Jeni të sigurt që dëshironi të hiqni lidhjen me Dropbox?";
+"remove_connection" = "Hiqni lidhjen";
+"you_are_connected" = "Jeni i lidhur";
+"insta_pick_picture_not_found" = "Fotoja nuk\nu gjet";
+"phone_updated_needs_login" = "Ju keni përditësuar me sukses numrin tuaj të telefonit. Ju lutem, hyni me kredencialet tuaja.";
+"server_under_maintenance" = "Aktualisht, po kryhen disa punime mirëmbajtjeje. Ju lutem, provoni më vonë.";
+"unlimited_photopick_analysis" = "Analizë e palimituar PhotoPick";
+"data_advantage_short" = "Avantazh të dhënash shtesë";
+"additional_data_advantage" = "Avantazh të dhënash shtesë";
+"connection_problem_occured" = "Ka një gabim lidhjeje. Ju lutem, provoni më vonë. ";
+"turkcell_purchase_popup_title" = "%@";
+"mid_user" = "lifebox Standard+";
+"instapick_no_available_units_left" = "Nuk ka asnjë analizë";
+"middle_user" = "lifebox Standard+";
+"lifebox_middle" = "lifebox Standard+";
+"lifebox_standart" = "lifebox Standard";
+"account_detail_middle_title" = "Me anëtarësimin tuaj lifebox Standard+, ju mund të përdorni funksionalitete të avancuara.";
+"account_detail_middle_description" = "Nëse e anuloni anëtarësimin tuaj, ju nuk do të mund të përfitoni nga privilegjet Standard+.";
+"account_detail_standart_title" = "Jeni duke e përdorur lifebox-in si përdorues Standard. ";
+"account_detail_standart_description" = "Me anëtarësimin tuaj, ju mund të përdorni funksionalitete standarde. ";
+
+/*AnalyzeHistoryController*/
+"instapick_see_details" = "Bëhuni Premium";
+"store_in_high_quality" = "Krijoni kopje rezervë me Cilësi të Lartë";
+"5_photopick_analysis" = "5 analiza PhotoPick";
+"10_photopick_analysis" = "+10 analiza PhotoPick";
+"data_package_for_turkcell" = "Avantazh të dhënash shtesë";
+"delete_duplicated_contacts" = "Hiqni kontaktet e përsëritura nga Direktoria e Telefonit tuaj.";
+"leave_middle_membership" = "Largohuni nga Anëtarësimi Standard+";
+"leave_middle_turkcell" = "Për të anuluar paketën tuaj, ju lutem dërgoni një SMS drejt 2200 me tekst: IPTAL LIFEBOX STANDART+";
+
+/*If this shall be translated, please refer to my version*/
+"package_FWI_cancel_text" = "paketa_FWI_anulim_tekst";
+
+/*If this shall be translated, please refer to my version*/
+"package_jamaica_cancel_text" = "paketa_jamaica_anulim_tekst";
+
+/*If this shall be translated, please refer to my version*/
+"feature_digicell_cancel_text" = "funksionalitet_digicell_anulim_tekst";
+"terms_and_use_etk_checkbox" = "Deri në një vendim të ndryshëm nga ana ime, Unë jap miratimin tim për marrjen e mesazheve elektronike komerciale në mënyrë që të informohem për produktet dhe shërbimet e favorshme të Turkcell dhe kompanive të grupit të tij, në pajtim me ligjin nr. 6563 dhe legjislacionin në fuqi";
+"terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell dhe kompanive të grupit të tij";
+"terms_and_use_etk_link_commercial_email_messages" = "mesazheve elektronike komerciale";
+"commercial_email_messages" = "INFORMIM NË LIDHJE ME MIRATIMIN NË LIDHJE ME MARRJEN E MESAZHEVE ELEKTRONIKE KOMERCIALE\n\nUnë jap pëlqimin tim për marrjen e mesazheve elektronike komerciale nga Turkcell dhe kompanitë e grupit të tij, (mesazhe që përmbajnë të dhëna, zë dhe video të cilat dërgohen për qëllime komerciale dhe transmetohen në mënyrë elektronike duke përdorur mjete siç janë telefoni, qendra e thirrjeve, pajisje për transmetimin e zërit, regjistrues smart të zërit, postë elektronike, sisteme të  mesazhit të shkurtër) nëpërmjet informacionit të kontaktit që kam dhënë kur kam nënshkruar aplikacionin Lifebox ose që tashmë disponohet nga Turkcell dhe kompanitë e grupit të tij, pët qëllime reklamimi dhe marketingu të produkteve  dhe shërbimeve të ofruara si dhe për qëllime njoftimi të mundësive të përgjithshme/të veçanta të ofruara nga Turkcell dhe kompanitë e grupit të tij dhe/ose subjektet e palët e treta me të cilën ato bashkëpunojnë, në përputhje me Ligjin Nr. 6563 për Rregullimin e Tregtisë Elektronike (\"Ligji\"), Rregulloren për Komunikimin Tregtar dhe Mesazhet e Postës Elektronike (\"Rregullorja\"), në mënyrë të përhershme derisa unë të ushtroj të drejtën time për të refuzuar marrjen e  mesazheve të tilla, edhe në qoftë se skadon afati i abonimit tim për aplikimin e lartpërmendur.\n\nMesazhet komerciale të postës elektronike të dërguara nga operatorët, të cilët i nënshtrohen Ligjit Nr.5809 mbi Komunikimin Elektronik, për abonentët dhe shfrytëzuesit e tyre, ekskluzivisht për reklamimin dhe marketingun e produkteve dhe shërbimeve të tyre ose prezantimin e biznesit të tyre konsiderohen si përjashtime, në pajtim me Rregulloret në fuqi. Unë bie dakord që miratim i mësipërm është dhënë në mënyrë të pavarur nga miratimi që unë i kam dhënë operatorit tim në të cilin jam abonuar/ tek i cili jam përdorues, në lidhje me reklamimin e produkteve dhe shërbimeve të tij; dhe se ky operator ka të drejtë të dërgojë mesazhe elektronike komerciale për qëllime të tilla si reklamimi, marketingu i produkteve dhe shërbimeve të tij brenda fushëveprimit të miratimit që i kam dhënë operatorit në të cilin jam abonuar, edhe nëse unë revokoj miratimin e dhënë në këtë dokument duke ushtruar të drejtën time për të refuzuar mesazhe të tilla në pajtim me Ligjin dhe rregulloret e sipërpërmendura; unë deklaroj gjithashtu se unë jam i vetëdijshëm për të drejtën time për të refuzuar mesazhet komerciale të operatorit tim.";
+"NSLocationAlwaysUsageDescription" = "";
+"NSPhotoLibraryAddUsageDescription" = "";
+"NSPhotoLibraryUsageDescription" = "";
+
+/*Usage Info*/
+"package_space_details" = "";
+"package_renew_date" = "";
+"percentage_used" = "";
+"used_and_left_space" = "";
+"percentage_used_two_lines" = "";
+"my_usage_storage" = "";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "";
+"name" = "";
+"surname" = "";
+"change password" = "";
+"left_space" = "%1$@ / %2$@";
+
+/*Packages*/
+"packages_i_have" = "";
+"account_details" = "";
+"my_profile" = "";
+"account_type" = "";
+"standard_plus" = "";
+"standard" = "";
+"premium" = "";
+"old_password" = "";
+"new_password" = "";
+"repeat_password" = "";
+"change_password_captcha_answer_placeholder" = "";
+"temporary_error_occurred_try_again_later" = "";
+"old_password_does_not_match" = "";
+"new_password_and_repeated_password_does_not_match" = "";
+"new_password_is_empty" = "";
+"old_password_is_empty" = "";
+"repeat_password_is_empty" = "";
+"this_text_is_empty" = "";
+"password_changed_successfully" = "";
+"password_changed_successfully_relogin" = "";

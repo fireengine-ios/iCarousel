@@ -52,7 +52,6 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
         authenticationService.resendVerificationSMS(resendVerification: ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken!), sucess: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.output.resendCodeRequestSuccesed()
-                
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.main.async {
@@ -62,10 +61,21 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     func verifyCode(code: String) {
-        authenticationService.verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification(token: dataStorage.signUpResponse.referenceToken ?? "", otp: code, processPersonalData: true), sucess: { [weak self]  _ in
-            DispatchQueue.main.async {
-                self?.output.verificationSucces()
+        let signUpProperties = SignUpUserPhoveVerification(
+            token: dataStorage.signUpResponse.referenceToken ?? "",
+            otp: code,
+            processPersonalData: true,
+            etkAuth: dataStorage.signUpResponse.etkAuth)
+        authenticationService.verificationPhoneNumber(phoveVerification: signUpProperties, sucess: { [weak self] baseResponse in
+            
+            if let response = baseResponse as? ObjectRequestResponse,
+                let silentToken = response.responseHeader?[HeaderConstant.silentToken] as? String {
                 
+                self?.silentLogin(token: silentToken)
+            } else {
+                DispatchQueue.main.async {
+                    self?.output.verificationSucces()
+                }
             }
             
         }, fail: { [weak self] errorRespose in
@@ -102,15 +112,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] _ in
-            self?.tokenStorage.isRememberMe = true
-            self?.analyticsService.track(event: .login)
-            self?.analyticsService.trackLoginEvent(loginType: .gsm)
-            AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: true)
-            AuthoritySingleton.shared.setShowPopupAboutPremiumAfterSync(isShow: true)
-            
-            DispatchQueue.main.async {
-                self?.output.succesLogin()
-            }
+            self?.onSuccessLogin()
         }, fail: { [weak self] errorResponse  in
             guard let `self` = self else {
                 return
@@ -133,9 +135,34 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
             }
         })
     }
-    
+
     private func isRedirectToSplash(forResponse errorResponse: ErrorResponse) -> Bool {
         return errorResponse.description.contains("Captcha required") ||
         errorResponse.description.contains("Invalid captcha")
     }
+    
+    private func onSuccessLogin() {
+        tokenStorage.isRememberMe = true
+        analyticsService.track(event: .login)
+        analyticsService.trackLoginEvent(loginType: .gsm)
+        AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: true)
+        AuthoritySingleton.shared.setShowPopupAboutPremiumAfterSync(isShow: true)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.output.succesLogin()
+        }
+    }
+    
+    private func silentLogin(token: String) {
+        authenticationService.silentLogin(token: token, success: { [weak self] in
+            DispatchQueue.main.async { [weak self] in
+                self?.onSuccessLogin()
+            }
+        }, fail: { [weak self] errorResponse in
+            DispatchQueue.main.async { [weak self] in
+                self?.output.verificationSucces()
+            }
+        })
+    }
+    
 }

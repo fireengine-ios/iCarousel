@@ -227,7 +227,6 @@ final class MediaItemOperationsService {
             }
             let predicateForRemoteFile = NSPredicate(format: "trimmedLocalFileID == %@ AND isLocalItemValue == true", item.getTrimmedLocalID())
             
-            
             self.executeRequest(predicate: predicateForRemoteFile, context: context) { alreadySavedMediaItems in
                 alreadySavedMediaItems.forEach({ savedItem in
                     //for locals
@@ -328,7 +327,7 @@ final class MediaItemOperationsService {
         }
     }
 
-    func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo, completion: @escaping VoidHandler) {
+    func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, dateRange: ClosedRange<Date>, completion: @escaping VoidHandler) {
         let remoteIds = remoteItems.compactMap { $0.id }
         let context = CoreDataStack.default.newChildBackgroundContext
     
@@ -670,7 +669,14 @@ final class MediaItemOperationsService {
                 let remoteItemsSet = NSSet(array: remoteItems)
                 
                 self.mediaItemByLocalID(trimmedLocalIDS: items.map {$0.getTrimmedLocalID()}, context: context, mediaItemsCallBack: { mediaItems in
-                    mediaItems.forEach { $0.removeFromRelatedRemotes(remoteItemsSet)}
+                    mediaItems.forEach {
+                        $0.removeFromRelatedRemotes(remoteItemsSet)
+                        if let relatedRemotes = $0.relatedRemotes as? Set<MediaItem> {
+                            $0.hasTranscodedRemote = relatedRemotes.filter { !$0.isTranscoded }.count > 0
+                        } else {
+                            $0.hasTranscodedRemote = false
+                        }
+                    }
                     
                     remoteItems.forEach { context.delete($0) }
                     

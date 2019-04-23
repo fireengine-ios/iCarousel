@@ -43,6 +43,8 @@ extension MediaItem {
     @NSManaged public var relatedLocal: MediaItem?
     @NSManaged public var relatedRemotes: NSSet
     @NSManaged public var session: Session?
+    @NSManaged public var isTranscoded: Bool
+    @NSManaged public var hasTranscodedRemote: Bool
 }
 
 

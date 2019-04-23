@@ -109,8 +109,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                     locationManager.allowsBackgroundLocationUpdates = true
                     locationManager.startMonitoringSignificantLocationChanges()
                 }
-            } else {
-                showIfNeedLocationPermissionAllert()
+//             else {
+//                showIfNeedLocationPermissionAllert()
+
             }
         }
     }

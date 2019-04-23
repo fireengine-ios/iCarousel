@@ -141,6 +141,17 @@ enum AnalyticsAppScreens {
     ///Misc
     case nativeGalleryShare
     case welcomePage(Int)
+    ///PhotoPick
+    case photoPickHistory
+    case photoPickPhotoSelection
+    case photoPickAnalysisDetail
+    ///PackageDetails
+    case standartAccountDetails
+    case standartPlusAccountDetails
+    case premiumAccountDetails
+    ///
+    case myStorage
+    case changePassword
     
     var name: String {
         switch self {
@@ -240,6 +251,25 @@ enum AnalyticsAppScreens {
         ///Misc
         case .nativeGalleryShare:
             return "Native Share from Gallery"
+        ///PhotoPick
+        case .photoPickHistory:
+            return "PhotoPick History"
+        case .photoPickPhotoSelection:
+            return "PhotoPick Photo Selection"
+        case .photoPickAnalysisDetail:
+            return "PhotoPick Analysis Detail"
+        ///PackageDetails
+        case .standartAccountDetails:
+            return "Standard Details"
+        case .standartPlusAccountDetails:
+            return "Standard Plus Details"
+        case .premiumAccountDetails:
+            return "Premium Details"
+        ///
+        case .myStorage:
+            return "My Storage"
+        case .changePassword:
+            return "Change Password"
         }
     }
 }
@@ -386,6 +416,8 @@ enum GAEventAction {
     case serviceError
     case paymentErrors
     case photopickAnalysis
+    case firstAutoSync
+    case settingsAutoSync
     
     var text: String {
         switch self {
@@ -457,6 +489,10 @@ enum GAEventAction {
             return "Payment Errors"
         case .photopickAnalysis:
             return "Photopick Analysis"
+        case .firstAutoSync:
+            return "First Auto Sync"
+        case .settingsAutoSync:
+            return "Auto Sync"
         }
     }
 }
@@ -565,6 +601,13 @@ enum GAEventLabel {
     //
     case serverError
     case paymentError(String)
+    //
+    case photosNever
+    case photosWifi
+    case photosWifiLTE
+    case videosNever
+    case videosWifi
+    case videosWifiLTE
     
     var text: String {
         switch self {
@@ -659,8 +702,42 @@ enum GAEventLabel {
             return "Server error"// \(errorCode)"
         case .paymentError(let paymentError):
             return "Definition(\(paymentError)"
+        //
+        case .photosNever:
+            return "Photos - Never"
+        case .photosWifi:
+            return "Photos - Wifi"
+        case .photosWifiLTE:
+            return "Photos - Wifi&LTE"
+        case .videosNever:
+            return "Videos - Never"
+        case .videosWifi:
+            return "Videos - Wifi"
+        case .videosWifiLTE:
+            return "Videos - Wifi&LTE"
         }
     }
+    
+    static func getAutoSyncSettingEvent(autoSyncSettings: AutoSyncSetting) -> GAEventLabel {
+        switch autoSyncSettings {
+        case AutoSyncSetting(syncItemType: .photo, option: .never):
+            return .photosNever
+        case AutoSyncSetting(syncItemType: .photo, option: .wifiAndCellular):
+            return .photosWifiLTE
+        case AutoSyncSetting(syncItemType: .photo, option: .wifiOnly):
+            return .photosWifi
+        case AutoSyncSetting(syncItemType: .video, option: .never):
+            return .videosNever
+        case AutoSyncSetting(syncItemType: .video, option: .wifiAndCellular):
+            return .videosWifiLTE
+        case AutoSyncSetting(syncItemType: .video, option: .wifiOnly):
+            return .videosWifi
+        default:
+            return .empty
+        }
+        
+    }
+    
 }
 
 enum GADementionsFields {
@@ -681,6 +758,8 @@ enum GADementionsFields {
     case gsmOperatorType
     case deviceId
     case errorType
+    case autoSyncState
+    case autoSyncStatus
     
     var text: String {
         switch self {
@@ -718,6 +797,10 @@ enum GADementionsFields {
             return "deviceid"
         case .errorType:
             return "errorType"
+        case .autoSyncState:
+            return "AutoSync"
+        case .autoSyncStatus:
+            return "SyncStatus"
         }
     }
     

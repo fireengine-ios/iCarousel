@@ -9,7 +9,6 @@
 import Foundation
 
 protocol LeavePremiumInteractorOutput: class {
-    func didLoadAccountType(accountTypeString: String)
     func didLoadActiveSubscriptions(_ offers: [SubscriptionPlanBaseResponse])
     func didLoadInfoFromApple()
     

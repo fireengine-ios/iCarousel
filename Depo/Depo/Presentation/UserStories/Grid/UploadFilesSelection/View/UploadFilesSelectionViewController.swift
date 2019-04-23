@@ -32,8 +32,4 @@ class UploadFilesSelectionViewController: BaseFilesGreedChildrenViewController, 
     @objc func onNextButton() {
         output.onNextButton()
     }
-    
-    var currentVC: UIViewController {
-        return self//.navigationController?.popViewController(animated: true)
-    }
 }

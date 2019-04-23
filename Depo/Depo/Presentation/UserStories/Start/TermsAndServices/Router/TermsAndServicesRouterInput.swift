@@ -13,4 +13,6 @@ protocol TermsAndServicesRouterInput {
     func goToHomePage()
     func goToPhoneVerefication(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel)
     func closeModule()
+    func goToTurkcellAndGroupCompanies()
+    func goToCommercialEmailMessages()
 }

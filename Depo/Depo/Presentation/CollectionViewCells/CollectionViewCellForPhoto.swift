@@ -54,7 +54,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         
     }
     
-    override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
+    override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
         guard let wrappered = wrappedObj as? WrapData, !isAlreadyConfigured else {
             return
         }
@@ -105,21 +105,23 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     override func setImage(with url: URL) {
-        imageView.contentMode = .center
-        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) {[weak self] image, error, cacheType, url in
-            guard let `self` = self else {
-                return
+        let cacheKey = url.byTrimmingQuery
+        cellImageManager = CellImageManager.instance(by: cacheKey)
+        uuid = cellImageManager?.uniqueId
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, uniqueId in
+            DispatchQueue.toMain {
+                guard let image = image, let uuid = self?.uuid, uuid == uniqueId else {
+                    return
+                }
+                
+                self?.setImage(image: image, animated: false)
             }
-            
-            guard error == nil else {
-                print("SD_WebImage_setImage error: \(error!.description)")
-                return
-            }
-            
-            self.setImage(image: image, animated: true)
         }
         
+        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
+        
         isAlreadyConfigured = true
+        
     }
     
     override func setImage(with metaData: BaseMetaData) {

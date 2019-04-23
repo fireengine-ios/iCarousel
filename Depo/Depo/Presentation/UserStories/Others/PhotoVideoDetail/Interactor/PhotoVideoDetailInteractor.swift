@@ -167,6 +167,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     func replaceUploaded(_ item: WrapData) {
         if let indexToChange = array.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {
+            item.isLocalItem = false
             array[indexToChange] = item
         }
     }

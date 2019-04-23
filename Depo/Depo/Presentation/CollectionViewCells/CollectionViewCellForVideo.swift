@@ -20,13 +20,13 @@ class CollectionViewCellForVideo: CollectionViewCellForPhoto {
         videoLengthLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
     }
     
-    override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
-        guard let wrappered = wrappedObj as? WrapData else {
+    override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
+        guard let wrapper = wrappedObj as? WrapData else {
             return
         }
         
-        videoLengthLabel.text = wrappered.duration
-        super.confireWithWrapperd(wrappedObj: wrappered)
+        videoLengthLabel.text = wrapper.duration
+        super.configureWithWrapper(wrappedObj: wrapper)
     }
     
 }

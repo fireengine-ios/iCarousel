@@ -15,7 +15,7 @@ class CreateStoryNameModuleInitializer: NSObject {
 
     class func initializeViewController(with nibName: String, needSelectionItems: Bool, isFavorites: Bool) -> CreateStoryNameViewController {
         let viewController = CreateStoryNameViewController(nibName: nibName, bundle: nil)
-        viewController.needShowTabBar = true
+        viewController.needToShowTabBar = true
         let configurator = CreateStoryNameModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController, needSelectionItems: needSelectionItems, isFavorites: isFavorites)
         return viewController

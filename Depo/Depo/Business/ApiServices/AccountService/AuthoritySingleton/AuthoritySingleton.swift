@@ -10,9 +10,29 @@ import Foundation
 
 final class AuthoritySingleton {
     
-    static let shared: AuthoritySingleton = AuthoritySingleton()
-    
-    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    enum AccountType {
+        case premium
+        case middle
+        case standart
+        
+        var isPremium: Bool {
+            return self == .premium
+        }
+        
+        var isMiddle: Bool {
+            return self == .middle
+        }
+        
+        static func convert(from response: PermissionsResponse) -> AccountType {
+            if response.hasPermissionFor(.premiumUser) {
+                return .premium
+            } else if response.hasPermissionFor(.middleUser) {
+                return .middle
+            } else {
+                return .standart
+            }
+        }
+    }
     
     private enum Keys {
         //Took from StorageVars to get userID instead of creating storageVars
@@ -28,27 +48,30 @@ final class AuthoritySingleton {
         static let isNewAppVersionKey = "isNewAppVersionKey"
     }
     
+    static let shared: AuthoritySingleton = AuthoritySingleton()
+    
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    
+    var isNewAppVersion: Bool = false
+    var deleteDublicate: Bool = false
+    var faceRecognition: Bool = false
+    
     var currentAppVersion: String? {
         get { return UserDefaults.standard.string(forKey: Keys.currentAppVersionKey) }
         set { UserDefaults.standard.set(newValue, forKey: Keys.currentAppVersionKey) }
     }
     
-    var isNewAppVersion: Bool = false
-    
-    var isPremium: Bool = false {
+    var accountType: AccountType = .standart {
         willSet {
-            let currentFlag = isPremium
-            let newFlag = newValue
-            
-            if currentFlag != newFlag {
+            let newType = newValue
+
+            let isLosePremium = accountType != newType
+            if isLosePremium {
                 let userID = UserDefaults.standard.string(forKey: Keys.currentUserID) ?? ""
-                UserDefaults.standard.set(currentFlag, forKey: Keys.isLosePremiumStatus + userID)
+                UserDefaults.standard.set(isLosePremium, forKey: Keys.isLosePremiumStatus + userID)
             }
         }
     }
-    
-    var deleteDublicate: Bool = false
-    var faceRecognition: Bool = false
     
     var isBannerShowedForPremium: Bool {
         let userID = SingletonStorage.shared.uniqueUserID
@@ -62,16 +85,14 @@ final class AuthoritySingleton {
     
     func hideBannerForSecondLogin() {
         let userID = SingletonStorage.shared.uniqueUserID
-        if isPremium == true {
-            UserDefaults.standard.set(true, forKey: Keys.isBannerShowedForPremium + userID)
-        } else {
-            UserDefaults.standard.set(false, forKey: Keys.isBannerShowedForPremium + userID)
-        }
+        
+        let isHideBanner = accountType.isPremium
+        UserDefaults.standard.set(isHideBanner, forKey: Keys.isBannerShowedForPremium + userID)
     }
     
     var isShowPopupAboutPremiumAfterRegistration: Bool {
         let userID = SingletonStorage.shared.uniqueUserID
-        return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterRegistration + userID) && isPremium == false
+        return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterRegistration + userID) && !accountType.isPremium
     }
     
     func setShowPopupAboutPremiumAfterRegistration(isShow: Bool) {
@@ -91,7 +112,7 @@ final class AuthoritySingleton {
     
     var isShowPopupAboutPremiumAfterSync: Bool {
         let userID = SingletonStorage.shared.uniqueUserID
-        return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterStartSync + userID) && isPremium == false
+        return UserDefaults.standard.bool(forKey: Keys.isShowPopupAboutPremiumAfterStartSync + userID) && !accountType.isPremium
     }
     
     func setShowPopupAboutPremiumAfterSync(isShow: Bool) {
@@ -107,22 +128,18 @@ final class AuthoritySingleton {
         UserDefaults.standard.set(isLoginAlready, forKey: Keys.isLoginAlready)
     }
     
-    func refreshStatus(premium: Bool, dublicates: Bool, faces: Bool) {
-        faceRecognition = faces
-        deleteDublicate = dublicates
-        isPremium = premium
-    }
-    
     func refreshStatus(with storage: PermissionsResponse) {
-        isPremium = storage.hasPermissionFor(.premiumUser)
         deleteDublicate = storage.hasPermissionFor(.deleteDublicate)
         faceRecognition = storage.hasPermissionFor(.faceRecognition)
+        
+        accountType = AccountType.convert(from: storage)
     }
     
     func clear() {
-        isPremium = false
         faceRecognition = false
         deleteDublicate = false
+        
+        accountType = .standart
     }
     
     func checkNewVersionApp() {

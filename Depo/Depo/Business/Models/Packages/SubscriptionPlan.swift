@@ -28,4 +28,18 @@ class SubscriptionPlan {
         self.type = type
         self.model = model
     }
+    
+    ///FE-990 2.5TB SLCM (Turkcell) quota package cancel text
+    ///https://jira.turkcell.com.tr/browse/FE-990
+    func getNameForSLCM() -> String {
+        if let range = name.range(of: "2.5") {
+            let changedName = name.replacingCharacters(in: range, with: "25")
+            return changedName
+        } else if let range = name.range(of: "2,5") {
+            let changedName = name.replacingCharacters(in: range, with: "25")
+            return changedName
+        } else {
+            return name
+        }
+    }
 }

@@ -44,7 +44,7 @@ extension PrintPresenter: PrintViewOutput {
     }
     
     func didEndLoad() {
-        asyncOperationSucces()
+        asyncOperationSuccess()
     }
     
 }

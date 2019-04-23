@@ -17,10 +17,10 @@ class RegistrationRouter: RegistrationRouterInput {
         router.pushViewController(viewController: phoneVerification)
     }
     
-    func termsAndServices(with delegate: RegistrationViewDelegate?, email: String) {
+    func termsAndServices(with delegate: RegistrationViewDelegate?, email: String, phoneNumber: String) {
         
         let okHandler: VoidHandler = { [weak self] in
-            guard let termsAndServices = self?.router.termsAndServicesScreen(login: false, delegate: delegate) else {
+            guard let termsAndServices = self?.router.termsAndServicesScreen(login: false, delegate: delegate, phoneNumber: phoneNumber) else {
                 return
             }
             self?.router.pushViewController(viewController: termsAndServices)

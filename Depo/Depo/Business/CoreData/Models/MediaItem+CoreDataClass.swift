@@ -36,6 +36,7 @@ public class MediaItem: NSManagedObject {
         urlToFileValue = wrapData.urlToFile?.absoluteString
         
         isFolder = wrapData.isFolder ?? false
+        isTranscoded = wrapData.status == .active
         
         parent = wrapData.parent
         
@@ -78,6 +79,7 @@ public class MediaItem: NSManagedObject {
                 savedRelatedRemotes.forEach { $0.localFileID = localFileID }
                 relatedRemotes = NSSet(array: savedRelatedRemotes)
                 updateLocalRelated(remotesMediaItems: savedRelatedRemotes)
+                hasTranscodedRemote = savedRelatedRemotes.map { !$0.isTranscoded }.count > 0
             }
         } else {
             let savedRelatedLocals = getRelatedLocals(for: wrapData, context: context)
@@ -88,6 +90,10 @@ public class MediaItem: NSManagedObject {
                 relatedLocal = savedRelatedLocals.first
                 localFileID = relatedLocal?.localFileID
                 updateRemoteRelated(localMediaItems: savedRelatedLocals)
+                
+                if relatedLocal?.hasTranscodedRemote == false, isTranscoded == false {
+                    relatedLocal?.hasTranscodedRemote = true
+                }
             }
         }
         
@@ -176,6 +182,18 @@ public class MediaItem: NSManagedObject {
             MediaItemsAlbum(uuid: albumUuid, context: context)
         })
         self.albums = NSOrderedSet(array: albums ?? [])
+        
+        isTranscoded = item.status == .active
+        
+        if !isLocalItemValue {
+            if !isTranscoded {
+                relatedLocal?.hasTranscodedRemote = true
+            } else if let relatedRemotes = relatedLocal?.relatedRemotes as? Set<MediaItem> {
+                relatedLocal?.hasTranscodedRemote = relatedRemotes.filter { !$0.isTranscoded && $0 != self }.count > 0
+            } else {
+                relatedLocal?.hasTranscodedRemote = false
+            }
+        }
     }
 }
 

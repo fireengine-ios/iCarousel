@@ -37,18 +37,6 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         } else {
             isFirstAppear = false
         }
-        
-        if isShowPopupQuota {
-            isShowPopupQuota = false
-            interactor.needCheckQuota()
-        }
-        
-        if isShowPopupAboutPremium {
-            isShowPopupAboutPremium = false
-            router.showPopupForNewUser(with: TextConstants.descriptionAboutStandartUser,
-                                       title: TextConstants.lifeboxPremium,
-                                       headerTitle: TextConstants.becomePremiumMember, completion: nil)
-        }
     }
     
     func homePagePresented() {
@@ -123,17 +111,8 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
             AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: false)
             AuthoritySingleton.shared.setShowedPopupAboutPremiumAfterLogin(isShow: true)
             router.showPopupForNewUser(with: TextConstants.homePagePopup,
-                                                                  title: TextConstants.lifeboxPremium,
-                                                                  headerTitle: TextConstants.becomePremiumMember, completion: nil)
-        } else if !AuthoritySingleton.shared.isShowedPopupAboutPremiumAfterLogin,
-            !AuthoritySingleton.shared.isPremium,
-            AuthoritySingleton.shared.isLoginAlready {
-            AuthoritySingleton.shared.setShowedPopupAboutPremiumAfterLogin(isShow: true)
-            router.showPopupForNewUser(with: TextConstants.descriptionAboutStandartUser,
                                        title: TextConstants.lifeboxPremium,
-                                       headerTitle: TextConstants.becomePremiumMember, completion: { [weak self] in
-                                        self?.isShowPopupQuota = true
-            })
+                                       headerTitle: TextConstants.becomePremiumMember, completion: nil)
         }
     }
     
@@ -170,10 +149,7 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
             view.stopRefresh()
         }
     }
-    
-    func didOpenExpand() {
-        isShowPopupAboutPremium = true
-    }
+
 }
 
 extension HomePagePresenter: SpotlightManagerDelegate {

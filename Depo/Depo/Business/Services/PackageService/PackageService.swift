@@ -59,6 +59,24 @@ final class PackageService {
                                     priceString: priceString,
                                     type: type,
                                     model: model)
+        } else if name.contains("10") {
+            return SubscriptionPlan(name: name,
+                                    photosCount: 10_000,
+                                    videosCount: 1_000,
+                                    songsCount: 5_000,
+                                    docsCount: 100_000,
+                                    priceString: priceString,
+                                    type: type,
+                                    model: model)
+        } else if name.contains("20") {
+            return SubscriptionPlan(name: name,
+                                    photosCount: 20_000,
+                                    videosCount: 2_000,
+                                    songsCount: 10_000,
+                                    docsCount: 200_000,
+                                    priceString: priceString,
+                                    type: type,
+                                    model: model)
         } else {
             return SubscriptionPlan(name: name,
                                     photosCount: 0,
@@ -84,6 +102,8 @@ final class PackageService {
             return "BYN"
         case .albanian:
             return "ALL"
+        case .FWI, .jamaica:
+            return "JMD"
         case .all:
             return "$" /// temp
         }
@@ -194,12 +214,18 @@ final class PackageService {
         } else {
             let roles: [String] = offers.flatMap { return getOfferRole(for: $0) }
             for role in roles {
-                guard let index = role.index(of: "-"),
-                    let accountType = AccountType(rawValue: String(role[..<index])) else {
-                        continue
+                if role.starts(with: "DIGICELL-") {
+                    ///FeaturePackageType need for leave premium
+                    if role.contains(AccountType.FWI.rawValue) || FeaturePackageType(rawValue: role) != nil {
+                        return .FWI
+                    } else if role.contains(AccountType.jamaica.rawValue) {
+                        return .jamaica
+                    }
+                } else if let index = role.index(of: "-"), let accountType = AccountType(rawValue: String(role[..<index])) {
+                    return accountType
                 }
-                return accountType
             }
+            
             return .all
         }
     }

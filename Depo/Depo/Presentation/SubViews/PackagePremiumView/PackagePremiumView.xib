@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,17 +25,17 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="ixG-VK-R5k">
                                     <rect key="frame" x="0.0" y="0.0" width="194" height="164"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aLB-yt-rVj">
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="194" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="aLB-yt-rVj">
                                             <rect key="frame" x="0.0" y="0.0" width="194" height="50"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbf-FG-5FA">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbf-FG-5FA">
                                                     <rect key="frame" x="0.0" y="0.0" width="29" height="50"/>
                                                     <accessibility key="accessibilityConfiguration" identifier="title"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nUn-7g-cck">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nUn-7g-cck">
                                                     <rect key="frame" x="37" y="30" width="24" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="aXB-nk-Tu9"/>
@@ -43,16 +43,17 @@
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="nUn-7g-cck" firstAttribute="leading" secondItem="Gbf-FG-5FA" secondAttribute="trailing" constant="8" id="Ri6-14-vke"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nUn-7g-cck" secondAttribute="trailing" id="WVd-mi-Wf7"/>
                                                 <constraint firstItem="Gbf-FG-5FA" firstAttribute="top" secondItem="aLB-yt-rVj" secondAttribute="top" id="ezq-op-m7h"/>
                                                 <constraint firstItem="Gbf-FG-5FA" firstAttribute="leading" secondItem="aLB-yt-rVj" secondAttribute="leading" id="foE-1f-7Jf"/>
+                                                <constraint firstItem="nUn-7g-cck" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aLB-yt-rVj" secondAttribute="top" id="luo-Tg-Gct"/>
                                                 <constraint firstAttribute="bottom" secondItem="Gbf-FG-5FA" secondAttribute="bottom" id="qCa-ei-RvU"/>
                                                 <constraint firstItem="nUn-7g-cck" firstAttribute="bottom" secondItem="Gbf-FG-5FA" secondAttribute="bottom" constant="-4" id="uq3-ho-Kzc"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0b-7h-EyJ">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0b-7h-EyJ">
                                             <rect key="frame" x="0.0" y="59" width="194" height="105"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -68,9 +69,6 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <constraints>
-                                <constraint firstItem="dwW-ta-p6I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nUn-7g-cck" secondAttribute="trailing" constant="20" id="dUc-CJ-EcW"/>
-                            </constraints>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MTc-oi-VUN">
                             <rect key="frame" x="0.0" y="178" width="347" height="30"/>
