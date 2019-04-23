@@ -8,13 +8,6 @@
 
 protocol UserProfileViewInput: class {
 
-    /**
-        @author Oleg
-        Setup initial state of the view
-    */
-
-    func setupInitialState()
-    
     func setupEditState(_ isEdit: Bool)
 
     func configurateUserInfo(userInfo: AccountInfoResponse)
