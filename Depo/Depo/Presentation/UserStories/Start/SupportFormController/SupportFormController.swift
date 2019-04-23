@@ -177,8 +177,7 @@ final class SupportFormController: UIViewController, KeyboardHandler {
             
             Mail.shared().sendEmail(emailBody: body,
                                     subject: subject,
-                                    //emails: [TextConstants.feedbackEmail], success: {
-                                    emails: ["zdaecq@gmail.com"], success: {
+                                    emails: [TextConstants.feedbackEmail], success: {
                                         RouterVC().popViewController()
             }, fail: { error in
                 UIApplication.showErrorAlert(message: error?.description ?? TextConstants.feedbackEmailError)
