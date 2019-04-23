@@ -305,30 +305,31 @@ extension PhotoVideoController: UIScrollViewDelegate {
         
         guard
             let workaroundVisibleIndexes = self.collectionView?.indexPathsForVisibleItems.sorted(by: <),
-            let firstDate = self.date(at: workaroundVisibleIndexes.first),
-            var lastDate = self.date(at: workaroundVisibleIndexes.last)
+            let topAPIInfo = self.rangeAPIInfo(at: workaroundVisibleIndexes.first),
+            let bottomAPIInfo = self.rangeAPIInfo(at: workaroundVisibleIndexes.last)
         else {
             return
-        }
-        
-        if lastDate > firstDate {
-            ///it means that the lastDate is Date() because the item is an empty meta item
-            lastDate = Date.distantPast
         }
 
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 return
             }
+
+            var startId: Int64?
+            var endId: Int64?
+            if topAPIInfo.date == bottomAPIInfo.date {
+                startId = topAPIInfo.id
+                endId = bottomAPIInfo.id
+            }
             
             let category: QuickScrollCategory = self.isPhoto ? .photos : .videos
             let fileType: FileType = self.isPhoto ? .image : .video
-            let dateRange = min(firstDate, lastDate)...max(firstDate, lastDate)
-            self.quickScrollService.requestListOfDateRange(startDate: dateRange.upperBound, endDate: dateRange.lowerBound, category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
+            self.quickScrollService.requestListOfDateRange(startDate: topAPIInfo.date, endDate: bottomAPIInfo.date, startID: startId, endID: endId, category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
                 switch response {
                 case .success(let quckScrollResponse):
                     self.dispatchQueue.async {
-                        MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileType: fileType, dateRange: dateRange, completion:  {
+                        MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileType: fileType, topInfo: topAPIInfo, bottomInfo: bottomAPIInfo, completion: {
                             debugPrint("appended and updated")
                         })
                     }
@@ -340,7 +341,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
         }
     }
     
-    private func date(at index: IndexPath?) -> Date? {
+    private func rangeAPIInfo(at index: IndexPath?) -> RangeAPIInfo? {
         guard let objectIndex = index else {
             return nil
         }
@@ -365,7 +366,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
             return RangeAPIInfo(date: Date.distantPast, id: nil)
         }
         
-        return dataSource.object(at: objectIndex)?.sortingDate as Date?
+        return RangeAPIInfo(date: sortingDate, id: objectId)
     }
     
     private func isLast(indexPath: IndexPath) -> Bool {

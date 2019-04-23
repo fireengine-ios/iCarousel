@@ -279,6 +279,17 @@ final class MediaItemOperationsService {
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
     
+    func executeSortedRequest(predicate: NSPredicate, limit: Int = 0, context: NSManagedObjectContext, mediaItemsCallBack: @escaping MediaItemsCallBack) {
+        let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
+        request.fetchLimit = limit
+        request.predicate = predicate
+        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.monthValue), ascending: false)
+        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.sortingDate), ascending: false)
+        let sortDescriptor3 = NSSortDescriptor(key: #keyPath(MediaItem.idValue), ascending: false)
+        request.sortDescriptors = [sortDescriptor1, sortDescriptor2, sortDescriptor3]
+        execute(request: request, context: context, mediaItemsCallBack: mediaItemsCallBack)
+    }
+    
     func executeRequest(predicate: NSPredicate, limit: Int = 0, context: NSManagedObjectContext, mediaItemsCallBack: @escaping MediaItemsCallBack) {
         let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
         request.fetchLimit = limit
@@ -327,37 +338,19 @@ final class MediaItemOperationsService {
         }
     }
 
-    func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, dateRange: ClosedRange<Date>, completion: @escaping VoidHandler) {
+    func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo, completion: @escaping VoidHandler) {
         let remoteIds = remoteItems.compactMap { $0.id }
         let context = CoreDataStack.default.newChildBackgroundContext
     
-        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@)", fileType.valueForCoreDataMapping(), topInfo.date as NSDate, bottomInfo.date as NSDate)
+        let inRangePredicate = createInRangePredicate(fileType: fileType, topInfo: topInfo, bottomInfo: bottomInfo)
         
-        let inIdRangePredicate: NSPredicate
-        if topInfo.date != bottomInfo.date {
-            inIdRangePredicate = NSPredicate(value: true)
-        } else {
-            if let topId = topInfo.id {
-                if let bottomId = bottomInfo.id {
-                    inIdRangePredicate = NSPredicate(format:" (idValue <= %ld AND idValue >= %ld)", topId, bottomId)
-                } else {
-                    inIdRangePredicate = NSPredicate(format:"idValue <= %ld", topId)
-                }
-            } else if let bottomId = bottomInfo.id {
-                inIdRangePredicate = NSPredicate(format:"idValue >= %ld", bottomId)
-            } else {
-                inIdRangePredicate = NSPredicate(value: true)
-            }
-        }
-        
-        let inRangePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [inDateRangePredicate, inIdRangePredicate])
-        
-        executeRequest(predicate: inRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
+        executeSortedRequest(predicate: inRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
 
             debugPrint("--- remotes in date range count \(remoteItems.count)")
             debugPrint("--- count of already saved in date range \(inDateRangeItems.count)")
             
-            let inIdRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND (idValue IN %@) AND NOT (idValue IN %@)", fileType.valueForCoreDataMapping(), remoteIds, inDateRangeItems.compactMap { $0.idValue })
+            let inDateRangeItemIds = inDateRangeItems.compactMap { $0.idValue }
+            let inIdRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND (idValue IN %@) AND NOT (idValue IN %@)", fileType.valueForCoreDataMapping(), remoteIds, inDateRangeItemIds)
             
             self.executeRequest(predicate: inIdRangePredicate, context: context, mediaItemsCallBack: { inIdRangeItems in
                 debugPrint("--- count of already saved in id range \(inIdRangeItems.count)")
@@ -378,7 +371,7 @@ final class MediaItemOperationsService {
                         newSavedItems.append(newItem)
                     }
                 }
-                deletedItems.append(contentsOf: allSavedItems)
+                deletedItems.append(contentsOf: allSavedItems.filter {$0.status == .active} )
                 
 //                deletedItems.forEach {
 //                    if let coreDataObject = $0.coreDataObject {
@@ -387,19 +380,40 @@ final class MediaItemOperationsService {
 //                }
                 
                 self.deleteItems(deletedItems, completion: {
-                    //
-                })
-                
-                newSavedItems.forEach {
-                    ///Relations being setuped in the MediaItem init
-                    _ = MediaItem(wrapData: $0, context: context)
-                }
-                
-                context.saveAsync(completion: { status in
-                    completion()
-                })
+                    newSavedItems.forEach {
+                        ///Relations being setuped in the MediaItem init
+                        _ = MediaItem(wrapData: $0, context: context)
+                    }
+                    
+                    context.saveAsync(completion: { status in
+                        completion()
+                    })
+                })  
             })
         }
+    }
+    
+    private func createInRangePredicate(fileType: FileType, topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo) -> NSCompoundPredicate {
+        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@)", fileType.valueForCoreDataMapping(), topInfo.date as NSDate, bottomInfo.date as NSDate)
+        
+        let inIdRangePredicate: NSPredicate
+        if topInfo.date != bottomInfo.date {
+            inIdRangePredicate = NSPredicate(value: true)
+        } else {
+            if let topId = topInfo.id {
+                if let bottomId = bottomInfo.id {
+                    inIdRangePredicate = NSPredicate(format:" (idValue <= %ld AND idValue >= %ld)", topId, bottomId)
+                } else {
+                    inIdRangePredicate = NSPredicate(format:"idValue <= %ld", topId)
+                }
+            } else if let bottomId = bottomInfo.id {
+                inIdRangePredicate = NSPredicate(format:"idValue >= %ld", bottomId)
+            } else {
+                inIdRangePredicate = NSPredicate(value: true)
+            }
+        }
+        
+       return NSCompoundPredicate(andPredicateWithSubpredicates: [inDateRangePredicate, inIdRangePredicate])
     }
     
     func getAllRemotesMediaItem(allRemotes: @escaping MediaItemsCallBack) {
@@ -654,6 +668,7 @@ final class MediaItemOperationsService {
     
     func deleteItems(_ items: [WrapData], completion: @escaping VoidHandler) {
         guard !items.isEmpty else {
+            completion()
             return
         }
         
