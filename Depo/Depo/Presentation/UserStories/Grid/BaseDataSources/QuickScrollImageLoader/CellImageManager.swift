@@ -82,7 +82,6 @@ final class CellImageManager {
     func cancelImageLoading() {
         dispatchQueue.async { [weak self] in
             self?.isCancelled = true
-            self?.completionBlock = nil
             self?.currentOperation?.cancel()
             self?.currentOperation = nil
         }

@@ -75,16 +75,10 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // TODO: need layoutIfNeeded?
+
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
         collectionViewManager.setScrolliblePopUpView(isActive: true)
         scrollBarManager.startTimerToHideScrollBar()
-
-        if !selectedItems.isEmpty {
-            onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
-            navBarManager.setSelectionMode()
-            navigationBarWithGradientStyle()
-        }
         
         ///trigger Range API for update new items which are uploaded by other clients
         updateDB()
@@ -94,6 +88,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         super.viewDidAppear(animated)
         
         homePageNavigationBarStyle()
+
+        if !selectedItems.isEmpty {
+            onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
+            navBarManager.setSelectionMode()
+            navigationBarWithGradientStyle()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -464,7 +464,6 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
             router.pushOnPresentedView(viewController: vc)
         }
     }
-
     func changeCover() {}
     func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {}
 }

@@ -301,29 +301,30 @@ final class MediaItemOperationsService {
     // MARK: - Remote Items
     
     func appendRemoteMediaItems(remoteItems: [Item], completion: @escaping VoidHandler) {
-        let context = CoreDataStack.default.newChildBackgroundContext
-        ///TODO: add check on existing files?
         // OR should we mark sync status and etc here. And also affect free app?
 
-        ///TODO: check if files exist
         guard !remoteItems.isEmpty else {
             debugPrint("REMOTE_ITEMS: no files to add")
             completion()
             return
         }
-        debugPrint("REMOTE_ITEMS: \(remoteItems.count) remote files to add")
         
-        context.perform { 
-            remoteItems.forEach { item in
-                autoreleasepool {
-                    _ = MediaItem(wrapData: item, context: context)
+        checkRemoteItemsExistence(wrapData: remoteItems) { newItems in
+            debugPrint("REMOTE_ITEMS: \(newItems.count) of \(remoteItems.count) remote files to add")
+            
+            let context = CoreDataStack.default.newChildBackgroundContext
+            context.perform {
+                newItems.forEach { item in
+                    autoreleasepool {
+                        _ = MediaItem(wrapData: item, context: context)
+                    }
                 }
+                CoreDataStack.default.saveDataForContext(context: context, savedCallBack: completion)
             }
-            CoreDataStack.default.saveDataForContext(context: context, savedCallBack: completion)
+            
+            //      ItemOperationManager.default.addedLocalFiles(items: addedObjects)
+            //WARNING:- DO we need notify ItemOperationManager here???
         }
-        
-        //      ItemOperationManager.default.addedLocalFiles(items: addedObjects)
-        //WARNING:- DO we need notify ItemOperationManager here???
     }
 
     func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, dateRange: ClosedRange<Date>, completion: @escaping VoidHandler) {
@@ -370,6 +371,7 @@ final class MediaItemOperationsService {
                         completion()
                     })
                 })
+                
             })
         }
     }
@@ -760,7 +762,7 @@ final class MediaItemOperationsService {
     }
     
     func hasLocalItemsForSync(video: Bool, image: Bool, completion: @escaping  (_ has: Bool) -> Void) {
-        getUnsyncsedMediaItems(video: video, image: image, completion: { items in
+        getUnsyncedMediaItems(video: video, image: image, completion: { items in
             let wrappedItems = items.map { $0.wrapedObject }
             completion(!AppMigrator.migrateSyncStatus(for: wrappedItems).isEmpty)
         })
@@ -768,7 +770,7 @@ final class MediaItemOperationsService {
     }
     
     func allLocalItemsForSync(video: Bool, image: Bool, completion: @escaping (_ items: [WrapData]) -> Void) {
-        getUnsyncsedMediaItems(video: video, image: image, completion: { items in
+        getUnsyncedMediaItems(video: video, image: image, completion: { items in
             let wrappedItems = items
                 .filter { $0.fileSizeValue < NumericConstants.fourGigabytes }
                 .sorted { $0.fileSizeValue < $1.fileSizeValue }
@@ -778,7 +780,7 @@ final class MediaItemOperationsService {
         })
     }
     
-    private func getUnsyncsedMediaItems(video: Bool, image: Bool, completion: @escaping MediaItemsCallBack) {
+    private func getUnsyncedMediaItems(video: Bool, image: Bool, completion: @escaping MediaItemsCallBack) {
         let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
         let currentlyInLibriaryLocalIDs = assetList.map { $0.localIdentifier }
         
@@ -815,6 +817,27 @@ final class MediaItemOperationsService {
                     ItemOperationManager.default.deleteItems(items: items)
                     complition?()
                 })
+            }
+        }
+    }
+    
+    private func checkRemoteItemsExistence(wrapData: [WrapData], completion: @escaping (_ filteredItems: [WrapData])->Void) {
+        CoreDataStack.default.performBackgroundTask { [weak self] context in
+            guard let `self` = self else {
+                return
+            }
+            
+            let predicate = NSPredicate(format: "(isLocalItemValue == false) AND (uuid IN %@)", wrapData.compactMap { $0.uuid })
+            
+            self.executeRequest(predicate: predicate, context: context) { mediaItems in
+                let existedUUIDS = mediaItems.compactMap { $0.uuid }
+                
+                guard existedUUIDS.isEmpty else {
+                    completion(wrapData.filter { !existedUUIDS.contains($0.uuid) })
+                    return
+                }
+                
+                completion(wrapData)
             }
         }
     }
