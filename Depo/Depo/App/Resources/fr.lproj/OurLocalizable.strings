@@ -58,8 +58,6 @@
 /*Suggested: "This package activation code has been activated by a different user"
 
 Note: Please check I have understood the intended command here.*/
- 
- Note: Please check I have understood the intended command here.*/
 "This package activation code is defined for different user" = "Ce Code d’activation de paquet est activé par des différents utilisateurs.";
 "This package activation code has expired" = "Ce Code d’activation d'offre a expiré.";
 "Account cannot be found" = "Ce compte est introuvable.";
@@ -93,7 +91,6 @@ Note: Please check I have understood the intended command here.*/
 
 /*Suggested: "Enter the verification code
 sent to your phone number %@"*/
- sent to your phone number %@"*/
 "Enter the verification code\nsent to your number %@" = "Entrer le code de vérification, envoyer votre numéro de téléphone %@";
 "Resend" = "Renvoyer";
 "Next" = "Suivant";
@@ -222,7 +219,7 @@ sent to your phone number %@"*/
 "Print" = "Imprimer";
 
 /*In what case is that used for?
- Is it "Use "this" to be the album cover?*/
+Is it "Use "this" to be the album cover?*/
 /*Fuzzy*/
 "Make album cover" = "Utiliser comme la pochette de l'album";
 "Add To Album" = "Ajouter à l’Album";
@@ -411,6 +408,8 @@ sent to your phone number %@"*/
 "Verification code is invalid. Please try again." = "Le code de vérification est incorrect. Veuillez essayer une nouvelle fois.";
 "Type the text" = "Saisissez le texte affiché dans l'image";
 "E-MAIL" = "E-mail";
+"Send password reset link" = "Envoyer le lien de réinitialisation du mot de passe";
+"Forgot My Password" = "J’ai oublié mon mot de passe";
 "Sign Up" = "S’inscrire";
 "Turn-on Sync" = "Activer la Synchronisation";
 "Syncing files using cellular data could incur data charges" = "L'utilisation du réseau mobile pour la synchronisation de fichiers peut entraîner des frais de transmission de données";
@@ -461,7 +460,7 @@ sent to your phone number %@"*/
 "Verify Your Phone Number" = "Vérifier votre numéro de mobile";
 
 /*is it for a double checking to confirm the cart?
- If yes please use : veuillez confirmer votre achat*/
+If yes please use : veuillez confirmer votre achat*/
 "Verify Your Purchase" = "Vérifier votre achat";
 " You have to fill in a password" = "Vous devez remplir votre mot de passe";
 "Please enter valid Email" = "Veuillez entrer un e-mail valide";
@@ -482,8 +481,6 @@ sent to your phone number %@"*/
 /*Suggested: "This Phone Number is already registered. Please enter another Phone Number"
 
 Note: English is correct. GSM may be confusing to the customer*/
- 
- Note: English is correct. GSM may be confusing to the customer*/
 "This GSM Number is already registered. Please enter another GSM Number." = "Ce numéro de mobile est déjà enregistré. Veuillez entrer un autre numéro de mobile..";
 "Albums with %@" = "Albums avec %@";
 "Deselect All" = "Tout décocher";
@@ -602,8 +599,6 @@ Note: English is correct. GSM may be confusing to the customer*/
 /*Suggested: "You have to fill in your phone number"
 
 English is correct. GSM may be confusing to the customer*/
- 
- English is correct. GSM may be confusing to the customer*/
 " You have to fill in GSM number" = "Vous devez remplir le numéro de mobile";
 "E-mail is already exist" = "Cet e-mail existe déjà";
 
@@ -615,13 +610,6 @@ English is correct. GSM may be confusing to the customer*/
 /*Suggested: "Phone Number"
 
 English is correct. GSM may be confusing to the customer*/
- 
- English is correct. GSM may be confusing to the customer*/
-"Please enter your GSM number" = "Veuillez entrer votre numéro de mobile";
-
-/*Suggested: "Phone Number"
- 
- English is correct. GSM may be confusing to the customer*/
 "GSM number" = "Numéro de mobile";
 "Plus" = "Plus";
 "Close" = "Fermer";
@@ -683,8 +671,6 @@ English is correct. GSM may be confusing to the customer*/
 /*Suggested: "lifebox can sync your files, photos and videos automatically."
 
 Comma added*/
- 
- Comma added*/
 "Lifebox can sync your files automatically." = "lifebox peut synchroniser vos fichiers photos et vidéos automatiquement.";
 "Get Started" = "Commencer";
 "I have read and accepted terms of use" = "J'ai lu et accepté les conditions d'utilisation";
@@ -717,15 +703,6 @@ Privacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik
 Terms of Use:"
 
 Full stop added*/
- Payment will be charged to iTunes Account at confirmation of purchase
- Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period
- Account will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen.
- Subscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase.
- Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable
- Privacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik
- Terms of Use:"
- 
- Full stop added*/
 "PackagesPolicyText" = "Les adhésions sont renouvelables mensuellement. \nLe paiement sera versé au compte iTunes lors de la confirmation de l'achat.                                                             L'adhésion se renouvelle automatiquement au moins 24 heures avant la fin de la période en cours sauf si le renouvellement automatique est désactivé. \nLe compte sera débité pour renouvellement avant 24 heures de la fin de la période en cours. Les frais sont sont indiqués dans l'écran in-app.\nLes adhésions peuvent être gérés par l'utilisateur et le renouvellement automatique peut être désactivé en accédant aux Paramètres du Compte de l'utilisateur après l'achat.\nToute période de la période d'essai gratuite, sera perdue lorsque l'utilisateur opter pour une formule payante.\n Politique de Confidentialité: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik Terms of Use:";
 "Missing Dates" = "Dates manquantes";
 "You have successfully registered, please log in with your credentials" = "Vous avez crée votre compte avec succès, veuillez ouvrir la session avec vos identifiants.";
@@ -896,18 +873,6 @@ Please check I have understood the intended command here*/
 /*Suggested: "Object Recognition helps you group the things you love"
 
 Please check I have understood the intended command here*/
- 
- Please check I have understood the intended command here.*/
-"Face Recognition to reach your loved one's memories" = "Reconnaissance faciale pour retrouver les souvenirs de vos proches";
-
-/*Suggested: "Use Place Recognition to group your memories from the same location"
- 
- Please check I have understood the intended command here*/
-"Place Recognition to beam you up to the memories" = "Reconnaissance de lieux pour vous téléporter dans vos souvenirs";
-
-/*Suggested: "Object Recognition helps you group the things you love"
- 
- Please check I have understood the intended command here*/
 "Object Recognition to remember with things you love" = "Reconnaissance des objets pour se souvenir des choses que vous aimez";
 "Become Premium" = "Devenir Premium";
 
@@ -934,8 +899,6 @@ Please check I have understood the intended command here*/
 /*Suggested: "Use Place Recognition to group your memories from the same location"
 
 Please check I have understood the intended command here*/
- 
- Please check I have understood the intended command here*/
 "places_recognition_short" = "Reconnaissance de lieux pour vous téléporter les souvenirs";
 "face_recognition_short" = "Reconnaissance faciale pour retrouver les souvenirs de votre bien-aimé";
 
@@ -958,8 +921,6 @@ Please check I have understood the intended command here*/
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it'
 
 Please check I have understood the intended command here*/
- 
- Please check I have understood the intended command here*/
 /*Fuzzy*/
 "package_free_of_charge_cancel_text" = "Veuillez utiliser le menu Contactez nous pour toute question";
 "package_lifecell_cancel_text" = "Pour désactiver lifebox 50GB veuillez envoyer un SMS avec la mention 50VYKL, pour désactiver lifebox 500GB veuillez envoyer un SMS avec la mention 500VYKL au numéro 8080";
@@ -978,8 +939,6 @@ Please check I have understood the intended command here*/
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
 Please check I have understood the intended command here*/
- 
- Please check I have understood the intended command here*/
 /*Fuzzy*/
 "package_default_cancel_text" = "Veuillez utiliser le menu Contact Us pour nous informer de traiter votre demande";
 
@@ -999,8 +958,6 @@ Please check I have understood the intended command here*/
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
 Please check I have understood the intended command here*/
- 
- Please check I have understood the intended command here*/
 "feature_promo_cancel_text" = "Veuillez utiliser le menu Contact Us pour nous informer de traiter votre demande";
 
 /*Lifecell?*/
@@ -1017,8 +974,6 @@ Please check I have understood the intended command here*/
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
 Please check I have understood the intended command here*/
- 
- Please check I have understood the intended command here*/
 "feature_default_cancel_text" = "Veuillez utiliser le menu Contact Us pour nous informer de traiter votre demande";
 
 /*PackageInfoView*/
@@ -1047,13 +1002,6 @@ Please check I have understood the intended command here*/
 /*Suggested: "You are currently a standard user. Upgrade to premium to store your photos in higher quality and get access to all the premium features"
 
 Please check I have understood the intended command here*/
- 
- Please check I have understood the intended command here*/
-"home_page_pop_up" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium?";
-
-/*Suggested: "You are currently a standard user. Upgrade to premium to store your photos in higher quality and get access to all the premium features"
- 
- Please check I have understood the intended command here*/
 "sync_page_pop_up" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium?";
 "ok_for_upgrade" = "Oui, passer à une offre premium";
 "no_for_upgrade" = "Non merci";
@@ -1061,8 +1009,6 @@ Please check I have understood the intended command here*/
 /*Suggested: "You are currently a standard user. Upgrade to premium to store your photos in higher quality and get access to all the premium features"
 
 Please check I have understood the intended command here*/
- 
- Please check I have understood the intended command here*/
 "uploded_photos_high_quality" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium?";
 "NSFaceIDUsageDescription" = "Notre application est compatible avec Face ID afin d'améliorer le niveau  de sécurité de votre lifebox";
 
@@ -1076,8 +1022,6 @@ Please check I have understood the intended command here*/
 /*Suggested: "No Analysis Left"
 
 Please check I have understood the intended command here*/
- 
- Please check I have understood the intended command here*/
 /*Fuzzy*/
 "no_analyses_left_title" = "Vous n’avez plus le droit d'analyse";
 "no_analyses_left_message" = "Ne soyez pas tristes ! Vous pouvez acheter de nouvelles options fin de pouvoir analyser à nouveau vos photos!";
@@ -1235,9 +1179,9 @@ Please check I have understood the intended command here*/
 /*Usage Info*/
 "package_space_details" = "\n%1$@ / %2$@ utilisés (uniquement pour l'espace de stockage lifebox)\n";
 "package_renew_date" = "Sera renouvelé le: %@";
-"percentage_used" = "\n%.0f%% utilisé\n";
+"percentage_used" = "%.0f%% utilisé";
 "used_and_left_space" = "\n%1$@ / %2$@ utilisé\n";
-"percentage_used_two_lines" = "\n%.0f%%\nutilisé\n";
+"percentage_used_two_lines" = "%.0f%%\nutilisé";
 "my_usage_storage" = "Mon utilisation de data";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Votre localisation sera utilisée pour synchroniser les données";
 "name" = "Prénom";
@@ -1266,3 +1210,14 @@ Please check I have understood the intended command here*/
 "this_text_is_empty" = "Ce texte est vide";
 "password_changed_successfully" = "Votre mot de passe a été changé avec succès";
 "password_changed_successfully_relogin" = "Vous avez changé votre mot de passe avec succès. Veuillez vous reconnecter avec votre nouveau mot de passe.";
+"captcha_answer_placeholder" = "";
+"birthday" = "";
+"user_profile_turkcell_gsm_alert" = "";
+"user_profile_birthday_placeholder" = "";
+"send_link" = "";
+"reset_password" = "";
+"you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "";
+"to_reset_your_accounts_password_we_will_send_a_password_reset_link_to_your_account_email" = "";
+"your_account_email" = "";
+"enter_your_account_email" = "";
+"enter_the_text_shown_in_the_image" = "";
