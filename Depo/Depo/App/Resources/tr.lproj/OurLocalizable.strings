@@ -340,8 +340,6 @@
 "Verification code is invalid. Please try again." = "Doğrulama kodu geçersiz. Lütfen tekrar deneyin.";
 "Type the text" = "Görselde yer alan yazıyı girin.";
 "E-MAIL" = "E-POSTA";
-"Send password reset link" = "Şifre sıfırlama linki gönder";
-"Forgot My Password" = "Şifremi unuttum";
 "Sign Up" = "Kaydol";
 "Turn-on Sync" = "Kullan";
 "Syncing files using cellular data could incur data charges" = "Dosyalar yedeklenirken mobil verilerin kullanılması veri ücretlerine neden olabilir.";

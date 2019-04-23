@@ -334,8 +334,6 @@
 "Verification code is invalid. Please try again." = "Код підтвердження недійсний. Будь ласка спробуйте ще раз.";
 "Type the text" = "Введіть текст, показаний на зображенні";
 "E-MAIL" = "E-mail";
-"Send password reset link" = "Надіслати посилання для зміни пароля";
-"Forgot My Password" = "Забули свій пароль";
 "Sign Up" = "Зареєструватися";
 "Turn-on Sync" = "Увімкнення синхронізації";
 "Syncing files using cellular data could incur data charges" = "Використання мобільних даних під час синхронізації файлів може спричинити втрату даних";

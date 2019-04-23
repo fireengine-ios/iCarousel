@@ -56,6 +56,8 @@
 "Package activation process is in progress" = "Processus d’activation de paquet est en progression.";
 
 /*Suggested: "This package activation code has been activated by a different user"
+
+Note: Please check I have understood the intended command here.*/
  
  Note: Please check I have understood the intended command here.*/
 "This package activation code is defined for different user" = "Ce Code d’activation de paquet est activé par des différents utilisateurs.";
@@ -90,6 +92,7 @@
 "Indicates that the e-mail parameter is sent blank." = "Noter que le paramètre de courriel est envoyé vide";
 
 /*Suggested: "Enter the verification code
+sent to your phone number %@"*/
  sent to your phone number %@"*/
 "Enter the verification code\nsent to your number %@" = "Entrer le code de vérification, envoyer votre numéro de téléphone %@";
 "Resend" = "Renvoyer";
@@ -408,8 +411,6 @@
 "Verification code is invalid. Please try again." = "Le code de vérification est incorrect. Veuillez essayer une nouvelle fois.";
 "Type the text" = "Saisissez le texte affiché dans l'image";
 "E-MAIL" = "E-mail";
-"Send password reset link" = "Envoyer le lien de réinitialisation du mot de passe";
-"Forgot My Password" = "J’ai oublié mon mot de passe";
 "Sign Up" = "S’inscrire";
 "Turn-on Sync" = "Activer la Synchronisation";
 "Syncing files using cellular data could incur data charges" = "L'utilisation du réseau mobile pour la synchronisation de fichiers peut entraîner des frais de transmission de données";
@@ -479,6 +480,8 @@
 "Too many verification code requested for this msisdn. Please try again later" = "Trop de codes de vérification demandéspour ce numéro de mobile. Veuillez essayer de nouveau";
 
 /*Suggested: "This Phone Number is already registered. Please enter another Phone Number"
+
+Note: English is correct. GSM may be confusing to the customer*/
  
  Note: English is correct. GSM may be confusing to the customer*/
 "This GSM Number is already registered. Please enter another GSM Number." = "Ce numéro de mobile est déjà enregistré. Veuillez entrer un autre numéro de mobile..";
@@ -597,12 +600,21 @@
 "Email field is invalid" = "Le champ e-mail est incorrect";
 
 /*Suggested: "You have to fill in your phone number"
+
+English is correct. GSM may be confusing to the customer*/
  
  English is correct. GSM may be confusing to the customer*/
 " You have to fill in GSM number" = "Vous devez remplir le numéro de mobile";
 "E-mail is already exist" = "Cet e-mail existe déjà";
 
 /*Suggested: "Please enter your Phone number"
+
+English is correct. GSM may be confusing to the customer*/
+"Please enter your GSM number" = "Veuillez entrer votre numéro de mobile";
+
+/*Suggested: "Phone Number"
+
+English is correct. GSM may be confusing to the customer*/
  
  English is correct. GSM may be confusing to the customer*/
 "Please enter your GSM number" = "Veuillez entrer votre numéro de mobile";
@@ -669,6 +681,8 @@
 "Recent Searches" = "Recherches Récentes";
 
 /*Suggested: "lifebox can sync your files, photos and videos automatically."
+
+Comma added*/
  
  Comma added*/
 "Lifebox can sync your files automatically." = "lifebox peut synchroniser vos fichiers photos et vidéos automatiquement.";
@@ -694,6 +708,15 @@
 "PackagesPolicyHeader" = "Nature de l'adhésion auto-renouvelable de l'achat in-app:";
 
 /*Suggested: "Subsriptions are renewed on a monthly basis
+Payment will be charged to iTunes Account at confirmation of purchase 
+Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period 
+Account will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. 
+Subscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase. 
+Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable 
+Privacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik
+Terms of Use:"
+
+Full stop added*/
  Payment will be charged to iTunes Account at confirmation of purchase
  Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period
  Account will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen.
@@ -861,6 +884,18 @@
 "Remove Duplicate Contacts from Your Directory" = "Supprimer les Contacts en doublon de Votre Annuaire Téléphonique";
 
 /*Suggested: "Face Recognition can help to reach your loved one's memories quickly"
+
+Please check I have understood the intended command here.*/
+"Face Recognition to reach your loved one's memories" = "Reconnaissance faciale pour retrouver les souvenirs de vos proches";
+
+/*Suggested: "Use Place Recognition to group your memories from the same location"
+
+Please check I have understood the intended command here*/
+"Place Recognition to beam you up to the memories" = "Reconnaissance de lieux pour vous téléporter dans vos souvenirs";
+
+/*Suggested: "Object Recognition helps you group the things you love"
+
+Please check I have understood the intended command here*/
  
  Please check I have understood the intended command here.*/
 "Face Recognition to reach your loved one's memories" = "Reconnaissance faciale pour retrouver les souvenirs de vos proches";
@@ -897,6 +932,8 @@
 "remove_duplicate_short" = "Supprimer les contacts en doublon de votre annulaire téléphonique";
 
 /*Suggested: "Use Place Recognition to group your memories from the same location"
+
+Please check I have understood the intended command here*/
  
  Please check I have understood the intended command here*/
 "places_recognition_short" = "Reconnaissance de lieux pour vous téléporter les souvenirs";
@@ -919,6 +956,8 @@
 "package_google_cancel_text" = "Pour annuler votre abonnemement, veuillez utiliser Google Play Store";
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it'
+
+Please check I have understood the intended command here*/
  
  Please check I have understood the intended command here*/
 /*Fuzzy*/
@@ -937,6 +976,8 @@
 "package_slcm_paycell_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre abonnement";
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
+
+Please check I have understood the intended command here*/
  
  Please check I have understood the intended command here*/
 /*Fuzzy*/
@@ -956,6 +997,8 @@
 "feature_lifecell_cancel_text" = "Vous pouvez continuer à utiliser gratuitement les fonctionnalités Premium puisque vous êtes un utilisateur de lifecell";
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
+
+Please check I have understood the intended command here*/
  
  Please check I have understood the intended command here*/
 "feature_promo_cancel_text" = "Veuillez utiliser le menu Contact Us pour nous informer de traiter votre demande";
@@ -972,6 +1015,8 @@
 "feature_all_access_paycell_cancel_text" = "Veuillez visiter www.mylifebox.com pour annuler votre offre";
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
+
+Please check I have understood the intended command here*/
  
  Please check I have understood the intended command here*/
 "feature_default_cancel_text" = "Veuillez utiliser le menu Contact Us pour nous informer de traiter votre demande";
@@ -995,6 +1040,13 @@
 "available_head_name_title" = "+ %@";
 
 /*Suggested: "You are currently a standard user. Upgrade to premium to store your photos in higher quality and get access to all the premium features"
+
+Please check I have understood the intended command here*/
+"home_page_pop_up" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium?";
+
+/*Suggested: "You are currently a standard user. Upgrade to premium to store your photos in higher quality and get access to all the premium features"
+
+Please check I have understood the intended command here*/
  
  Please check I have understood the intended command here*/
 "home_page_pop_up" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium?";
@@ -1007,6 +1059,8 @@
 "no_for_upgrade" = "Non merci";
 
 /*Suggested: "You are currently a standard user. Upgrade to premium to store your photos in higher quality and get access to all the premium features"
+
+Please check I have understood the intended command here*/
  
  Please check I have understood the intended command here*/
 "uploded_photos_high_quality" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium?";
@@ -1020,6 +1074,8 @@
 "feature_albanian_cancel_text" = "Puisque vous êtes un utilisateur d’ALBtelecom, vous pouvez continuer d’utiliser les fonctionnalités Premium gratuitement.";
 
 /*Suggested: "No Analysis Left"
+
+Please check I have understood the intended command here*/
  
  Please check I have understood the intended command here*/
 /*Fuzzy*/
