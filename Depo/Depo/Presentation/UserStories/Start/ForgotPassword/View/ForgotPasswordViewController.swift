@@ -82,7 +82,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         }
         
         subTitle.textColor = ColorConstants.removeConnection
-        if (Device.isIpad) {
+        if Device.isIpad {
             subTitle.font = UIFont.TurkcellSaturaRegFont(size: 24)
             subTitle.textAlignment = .center
         } else {
@@ -96,7 +96,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         infoTitle.text = TextConstants.resetPasswordInfo
         
         infoTitle.textColor = UIColor.black
-        if (Device.isIpad) {
+        if Device.isIpad {
             infoTitle.font = UIFont.TurkcellSaturaBolFont(size: 20)
             infoTitle.textAlignment = .center
         } else {
@@ -110,7 +110,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         emailTitle.text = TextConstants.resetPasswordEmailTitle
         
         emailTitle.textColor = UIColor.lrTealishTwo
-        if (Device.isIpad) {
+        if Device.isIpad {
             emailTitle.font = UIFont.TurkcellSaturaDemFont(size: 24)
             emailTitle.textAlignment = .center
         } else {
@@ -149,7 +149,6 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     }
     
     private func setupCaptchaView() {
-        captchaView.captchaAnswerTextField.insetX = 0
         captchaView.captchaAnswerTextField.placeholder = TextConstants.resetPasswordCaptchaPlaceholder
         captchaView.captchaAnswerTextField.delegate = self
     }
@@ -209,8 +208,6 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     }
 
     private func updateContentInsetWithKeyboardFrame(_ keyboardFrame: CGRect) {
-//        let buttonBottomInset = view.bounds.height - sendPasswordButton.frame.maxY
-//        let bottomInset = buttonBottomInset > keyboardFrame.height ? 0 : keyboardFrame.height - buttonBottomInset + 30
         let bottomInset = keyboardFrame.height + UIScreen.main.bounds.height - keyboardFrame.maxY
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
         scrollView.contentInset = insets
@@ -234,7 +231,6 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     
     func showCapcha() {
         captchaView.updateCaptcha()
-        captchaView.captchaAnswerTextField.text = ""
     }
     
     // MARK: Buttons actions 
@@ -255,13 +251,13 @@ extension ForgotPasswordViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if captchaView.captchaAnswerTextField != textField {
+        
+        if emailTextField == textField {
             captchaView.captchaAnswerTextField.becomeFirstResponder()
             scrollToFirstResponderIfNeeded(animated: true)
+        } else {
+            onSendPasswordButton()
         }
+        return true
     }
 }
