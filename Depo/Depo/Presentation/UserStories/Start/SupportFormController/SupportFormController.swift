@@ -163,19 +163,19 @@ final class SupportFormController: UIViewController, KeyboardHandler {
         } else {
             
             let versionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
-            let body = String(format: TextConstants.supportFormEmailBody,
-                              name,
-                              surname,
-                              email,
-                              "\(phoneCode)\(phoneNumber)",
-                              versionString,
-                              CoreTelephonyService().operatorName() ?? "",
-                              UIDevice.current.model,
-                              UIDevice.current.systemVersion,
-                              Device.locale,
-                              ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN")
+            let emailBody = String(format: TextConstants.supportFormEmailBody,
+                                   name,
+                                   surname,
+                                   email,
+                                   "\(phoneCode)\(phoneNumber)",
+                                   versionString,
+                                   CoreTelephonyService().operatorName() ?? "",
+                                   UIDevice.current.model,
+                                   UIDevice.current.systemVersion,
+                                   Device.locale,
+                                   ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN")
             
-            Mail.shared().sendEmail(emailBody: body,
+            Mail.shared().sendEmail(emailBody: emailBody,
                                     subject: subject,
                                     emails: [TextConstants.feedbackEmail], success: {
                                         RouterVC().popViewController()
