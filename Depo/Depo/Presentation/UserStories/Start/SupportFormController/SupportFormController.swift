@@ -52,8 +52,8 @@ final class SupportFormController: UIViewController, KeyboardHandler {
     let nameView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = TextConstants.userProfileName
-        newValue.subtitleLabel.text = "Please enter your name"
-        newValue.textField.placeholder = "Enter your name"
+        newValue.subtitleLabel.text = TextConstants.pleaseEnterYourName
+        newValue.textField.placeholder = TextConstants.enterYourName
         newValue.textField.autocorrectionType = .no
         return newValue
     }()
@@ -61,8 +61,8 @@ final class SupportFormController: UIViewController, KeyboardHandler {
     let surnameView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = TextConstants.userProfileSurname
-        newValue.subtitleLabel.text = "Please enter your surname"
-        newValue.textField.placeholder = "Enter your surname"
+        newValue.subtitleLabel.text = TextConstants.pleaseEnterYourSurname
+        newValue.textField.placeholder = TextConstants.enterYourSurname
         newValue.textField.autocorrectionType = .no
         return newValue
     }()
@@ -72,7 +72,7 @@ final class SupportFormController: UIViewController, KeyboardHandler {
         newValue.titleLabel.text = TextConstants.userProfileEmailSubTitle
         /// not set bcz of showEmptyCredentialsPopup
         //newValue.subtitleLabel.text
-        newValue.textField.placeholder = "Enter your e-mail adress"
+        newValue.textField.placeholder = TextConstants.enterYourEmailAddress
         newValue.textField.keyboardType = .emailAddress
         return newValue
     }()
@@ -81,24 +81,24 @@ final class SupportFormController: UIViewController, KeyboardHandler {
     
     let subjectView: ProfileTextPickerView = {
         let newValue = ProfileTextPickerView()
-        newValue.titleLabel.text = "Subject"
-        newValue.subtitleLabel.text = "Please enter your subject"
-        newValue.textField.placeholder = "Please choose a subject..."
-        newValue.models = ["E-mail",
-                           "Phone Number",
-                           "Password",
-                           "Security text",
-                           "Turkcell Password",
-                           "Automatic Log-in",
-                           "Other"]
+        newValue.titleLabel.text = TextConstants.subject
+        newValue.subtitleLabel.text = TextConstants.pleaseEnterYourSubject
+        newValue.textField.placeholder = TextConstants.pleaseChooseSubject
+        newValue.models = [TextConstants.supportFormSubject1,
+                           TextConstants.supportFormSubject2,
+                           TextConstants.supportFormSubject3,
+                           TextConstants.supportFormSubject4,
+                           TextConstants.supportFormSubject5,
+                           TextConstants.supportFormSubject6,
+                           TextConstants.supportFormSubject7]
         return newValue
     }()
     
     let problemView: ProfileTextEnterView = {
         let newValue = ProfileTextEnterView()
-        newValue.titleLabel.text = "Your Problem"
-        newValue.subtitleLabel.text = "Please enter your problem shortly"
-        newValue.textField.placeholder = "Explain your problem shortly"
+        newValue.titleLabel.text = TextConstants.yourProblem
+        newValue.subtitleLabel.text = TextConstants.pleaseEnterYourProblemShortly
+        newValue.textField.placeholder = TextConstants.explainYourProblemShortly
         newValue.textField.returnKeyType = .done
         return newValue
     }()
@@ -220,7 +220,7 @@ final class SupportFormController: UIViewController, KeyboardHandler {
     }
     
     private func showEmptyCredentialsPopup() {
-        UIApplication.showErrorAlert(message: "Please enter msisdn or email field in order to proceed")
+        UIApplication.showErrorAlert(message: TextConstants.pleaseEnterMsisdnOrEmail)
     }
     
     private func scrollToView(_ view: UIView) {

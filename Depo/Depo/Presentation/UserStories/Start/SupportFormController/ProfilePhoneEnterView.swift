@@ -148,7 +148,6 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     }
     
     @objc private func nextAfterNumber() {
-        //_ = numberTextField.delegate?.textFieldShouldReturn?(numberTextField)
         responderOnNext?.becomeFirstResponder()
     }
     
