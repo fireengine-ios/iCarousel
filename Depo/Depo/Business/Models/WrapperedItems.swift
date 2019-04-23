@@ -954,7 +954,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         coreDataObject = mediaItem
         fileSize = mediaItem.fileSizeValue
         favorites = mediaItem.favoritesValue
-        status = .unknown
+        status = mediaItem.isTranscoded ? .active : .unknown
         var url: URL? = nil
         if let url_ = mediaItem.urlToFileValue {
             url = URL(string: url_)
