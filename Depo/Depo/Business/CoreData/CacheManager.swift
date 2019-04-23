@@ -118,7 +118,7 @@ final class CacheManager {
                 self.addNextRemoteItemsPage(completion: completion)
             case .none:
                 self.reachabilityService?.whenReachable = { [weak self] reachability in
-                    
+                    self?.addNextRemoteItemsPage(completion: completion)
                 }
             }
             
