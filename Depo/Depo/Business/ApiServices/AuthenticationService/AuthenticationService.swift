@@ -398,7 +398,7 @@ class AuthenticationService: BaseRequestService {
             self.storageVars.currentUserID = nil
             self.storageVars.emptyEmailUp = false
             
-            MediaItemOperationsService.shared.deleteRemoteEntities { _ in
+            CacheManager.shared.dropAllRemotes {
                 success?()
             }
         }

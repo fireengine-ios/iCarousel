@@ -13,6 +13,8 @@
  //
  */
 
+import Reachability
+
 protocol CacheManagerDelegate: class {
     func didCompleteCacheActualization()
 }
@@ -24,12 +26,22 @@ final class CacheManager {
     private static let pageSize: Int = 100
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
                                                          type: .imageAndVideo)
+    private lazy var reachabilityService = Reachability()
     private(set) var processingRemoteItems = false
     private(set) var processingLocalItems = false
     private(set) var isProcessing = false
     private(set) var isCacheActualized = false
     
     let delegates = MulticastDelegate<CacheManagerDelegate>()
+    
+    private var currentRemotesPage: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: Keys.lastRemotesPageSaved)
+        }
+        set {
+            UserDefaults.standard.set(currentRemotesPage, forKey: Keys.lastRemotesPageSaved)
+        }
+    }
     
     func actualizeCache(completion: VoidHandler?) {
         if !isProcessing {
@@ -64,6 +76,7 @@ final class CacheManager {
     
     private func startAppendingAllRemotes(completion: @escaping VoidHandler) {
         /// we save remotes everytime, no metter if acces to PH libriary denied
+            photoVideoService.currentPage = currentRemotesPage
             guard !self.processingRemoteItems else {
                 return
             }
@@ -78,7 +91,10 @@ final class CacheManager {
     
     private func addNextRemoteItemsPage(completion: @escaping VoidHandler) {
         photoVideoService.nextItems(fileType: .imageAndVideo, sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remoteItems in
-            
+            guard let `self` = self else {
+                return
+            }
+            self.currentRemotesPage = self.photoVideoService.currentPage
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
                 //                self?.remotePageAdded?()
                 if remoteItems.count < CacheManager.pageSize {
@@ -87,13 +103,32 @@ final class CacheManager {
                 }
             }
             if remoteItems.count >= CacheManager.pageSize {
-                self?.addNextRemoteItemsPage(completion: completion)
+                self.addNextRemoteItemsPage(completion: completion)
             }
             
-        }) {
-            completion()///// create some kind of system where we wait till the internet is back and send request again
+        }) { [weak self] in
+            guard let `self` = self,
+                let reachabilityService = self.reachabilityService else {
+                completion()
+                return
+            }
+            ///start subscribing
+            switch reachabilityService.connection {
+            case .cellular, .wifi:
+                self.addNextRemoteItemsPage(completion: completion)
+            case .none:
+                self.reachabilityService?.whenReachable = { [weak self] reachability in
+                    
+                }
+            }
+            
+            
+            
+//            completion()///// create some kind of system where we wait till the internet is back and send request again
         }
     }
+    
+    
     
     private func startAppendingAllLocals(completion: @escaping VoidHandler) {
         guard !self.processingLocalItems else {
@@ -106,7 +141,15 @@ final class CacheManager {
             completion()
         }
     }
+    
+    func dropAllRemotes(completion: VoidHandler?) {
+        currentRemotesPage = 0
+        MediaItemOperationsService.shared.deleteRemoteEntities { _ in
+            completion?()
+        }
+    }
+    
+    
     //TODO: move method of QS DB update here.
 
-    
 }
