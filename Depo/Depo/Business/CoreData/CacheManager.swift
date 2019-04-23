@@ -52,8 +52,12 @@ final class CacheManager {
         isProcessing = true
 
         MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
-            if isNoRemotes {
-                self?.startAppendingAllRemotes(completion: { [weak self] in
+            guard let `self` = self else {
+                completion?()
+                return
+            }
+            if isNoRemotes || self.currentRemotesPage > 0 {
+                self.startAppendingAllRemotes(completion: { [weak self] in
                     self?.startAppendingAllLocals(completion: {
                         self?.isProcessing = false
                         self?.isCacheActualized = true
@@ -63,7 +67,7 @@ final class CacheManager {
                     })
                 })
             } else {
-                self?.startAppendingAllLocals(completion: {
+                self.startAppendingAllLocals(completion: { [weak self] in
                     self?.isProcessing = false
                     self?.isCacheActualized = true
                     CardsManager.default.stopOperationWithType(type: .preparePhotosQuickScroll)
