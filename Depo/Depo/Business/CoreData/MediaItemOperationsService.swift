@@ -311,7 +311,7 @@ final class MediaItemOperationsService {
         }
         
         checkRemoteItemsExistence(wrapData: remoteItems) { newItems in
-            debugPrint("REMOTE_ITEMS: \(newItems.count) remote files to add")
+            debugPrint("REMOTE_ITEMS: \(newItems.count) of \(remoteItems.count) remote files to add")
             
             let context = CoreDataStack.default.newChildBackgroundContext
             context.perform {
@@ -331,10 +331,29 @@ final class MediaItemOperationsService {
     func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo, completion: @escaping VoidHandler) {
         let remoteIds = remoteItems.compactMap { $0.id }
         let context = CoreDataStack.default.newChildBackgroundContext
+    
+        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@)", fileType.valueForCoreDataMapping(), topInfo.date as NSDate, bottomInfo.date as NSDate)
         
-        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@) AND (idValue <= %ld AND idValue >= %ld)", fileType.valueForCoreDataMapping(), topInfo.date as NSDate, bottomInfo.date as NSDate, topInfo.id ?? Int64.max, bottomInfo.id ?? 0)
+        let inIdRangePredicate: NSPredicate
+        if topInfo.date != bottomInfo.date {
+            inIdRangePredicate = NSPredicate(value: true)
+        } else {
+            if let topId = topInfo.id {
+                if let bottomId = bottomInfo.id {
+                    inIdRangePredicate = NSPredicate(format:" (idValue <= %ld AND idValue >= %ld)", topId, bottomId)
+                } else {
+                    inIdRangePredicate = NSPredicate(format:"idValue <= %ld", topId)
+                }
+            } else if let bottomId = bottomInfo.id {
+                inIdRangePredicate = NSPredicate(format:"idValue >= %ld", bottomId)
+            } else {
+                inIdRangePredicate = NSPredicate(value: true)
+            }
+        }
         
-        executeRequest(predicate: inDateRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
+        let inRangePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [inDateRangePredicate, inIdRangePredicate])
+        
+        executeRequest(predicate: inRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
 
             debugPrint("--- remotes in date range count \(remoteItems.count)")
             debugPrint("--- count of already saved in date range \(inDateRangeItems.count)")
@@ -356,18 +375,21 @@ final class MediaItemOperationsService {
                             existed.coreDataObject?.copyInfo(item: newItem, context: context)
                         }
                         allSavedItems.remove(existed)
-                    } else if !allSavedItems.contains(where: {$0.uuid == newItem.uuid }) {
+                    } else {
                         newSavedItems.append(newItem)
-                        allSavedItems.remove(newItem)
                     }
                 }
                 deletedItems.append(contentsOf: allSavedItems)
                 
-                deletedItems.forEach {
-                    if let coreDataObject = $0.coreDataObject {
-                        context.delete(coreDataObject)
-                    }
-                }
+//                deletedItems.forEach {
+//                    if let coreDataObject = $0.coreDataObject {
+//                        context.delete(coreDataObject)
+//                    }
+//                }
+                
+                self.deleteItems(deletedItems, completion: {
+                    //
+                })
                 
                 newSavedItems.forEach {
                     ///Relations being setuped in the MediaItem init
@@ -641,7 +663,6 @@ final class MediaItemOperationsService {
                 return
             }
             
-            
             let predicate = NSPredicate(format: "uuid in %@", items.map {$0.uuid} )
             self.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { remoteItems in
                 remoteItems.forEach { context.delete($0) }
@@ -829,8 +850,9 @@ final class MediaItemOperationsService {
             
             self.executeRequest(predicate: predicate, context: context) { mediaItems in
                 let existedUUIDS = mediaItems.compactMap { $0.uuid }
-                
-                completion(wrapData.filter { !existedUUIDS.contains($0.uuid) })
+                let filteredItems = wrapData.filter { !existedUUIDS.contains($0.uuid) }
+                print("--- filtered \(wrapData.count - filteredItems.count) existed uuids")
+                completion(filteredItems)
             }
         }
     }
