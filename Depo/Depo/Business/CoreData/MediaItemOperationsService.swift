@@ -311,7 +311,7 @@ final class MediaItemOperationsService {
         }
         
         checkRemoteItemsExistence(wrapData: remoteItems) { newItems in
-            debugPrint("REMOTE_ITEMS: \(newItems.count) remote files to add")
+            debugPrint("REMOTE_ITEMS: \(newItems.count) of \(remoteItems.count) remote files to add")
             
             let context = CoreDataStack.default.newChildBackgroundContext
             context.perform {
@@ -332,7 +332,12 @@ final class MediaItemOperationsService {
         let remoteIds = remoteItems.compactMap { $0.id }
         let context = CoreDataStack.default.newChildBackgroundContext
         
-        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@) AND (idValue <= %ld AND idValue >= %ld)", fileType.valueForCoreDataMapping(), topInfo.date as NSDate, bottomInfo.date as NSDate, topInfo.id ?? Int64.max, bottomInfo.id ?? 0)
+        let inDateRangePredicate: NSPredicate
+        if let topId = topInfo.id, let bottomId = bottomInfo.id {
+            inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@) AND (idValue <= %ld AND idValue >= %ld)", fileType.valueForCoreDataMapping(), topInfo.date as NSDate, bottomInfo.date as NSDate, topId, bottomId)
+        } else {
+             inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@)", fileType.valueForCoreDataMapping(), topInfo.date as NSDate, bottomInfo.date as NSDate)
+        }
         
         executeRequest(predicate: inDateRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
 
@@ -369,14 +374,18 @@ final class MediaItemOperationsService {
                     }
                 }
                 
-                newSavedItems.forEach {
-                    ///Relations being setuped in the MediaItem init
-                    _ = MediaItem(wrapData: $0, context: context)
-                }
-                
-                context.saveAsync(completion: { status in
-                    completion()
+                self.checkRemoteItemsExistence(wrapData: newSavedItems, completion: { realNewItems in
+                    print("--- filtered out \(newSavedItems.count - realNewItems.count) new items")
+                    realNewItems.forEach {
+                        ///Relations being setuped in the MediaItem init
+                        _ = MediaItem(wrapData: $0, context: context)
+                    }
+                    
+                    context.saveAsync(completion: { status in
+                        completion()
+                    })
                 })
+                
             })
         }
     }
@@ -830,7 +839,12 @@ final class MediaItemOperationsService {
             self.executeRequest(predicate: predicate, context: context) { mediaItems in
                 let existedUUIDS = mediaItems.compactMap { $0.uuid }
                 
-                completion(wrapData.filter { !existedUUIDS.contains($0.uuid) })
+                guard existedUUIDS.isEmpty else {
+                    completion(wrapData.filter { !existedUUIDS.contains($0.uuid) })
+                    return
+                }
+                
+                completion(wrapData)
             }
         }
     }

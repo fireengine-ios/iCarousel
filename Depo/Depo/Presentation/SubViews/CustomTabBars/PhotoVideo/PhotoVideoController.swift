@@ -75,12 +75,25 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // TODO: need layoutIfNeeded?
-        homePageNavigationBarStyle()
-        // TODO: Set title?
+        
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
         collectionViewManager.setScrolliblePopUpView(isActive: true)
         scrollBarManager.startTimerToHideScrollBar()
+        
+        ///trigger Range API for update new items which are uploaded by other clients
+        updateDB()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        homePageNavigationBarStyle()
+        
+        if !selectedItems.isEmpty {
+            onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
+            navBarManager.setSelectionMode()
+            navigationBarWithGradientStyle()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -341,18 +354,31 @@ extension PhotoVideoController: UIScrollViewDelegate {
         
         let object = dataSource.object(at: objectIndex)
         let objectId = object?.idValue
+        let isLastIndex = isLast(indexPath: objectIndex)
         
         if objectIndex.section == 0 && objectIndex.row == 0 {
             /// return Date.distantFuture to have the latest items, because user may have wrong date on his device.
             return RangeAPIInfo(date: Date.distantFuture, id: objectId)
         }
         
+        guard !isLastIndex else {
+            return RangeAPIInfo(date: Date.distantPast, id: objectId)
+        }
+        
         /// check if it's one of missing dates
         guard object?.monthValue != nil, let sortingDate = object?.sortingDate as Date? else {
-            return RangeAPIInfo(date: Date.distantPast, id: 0)
+            return RangeAPIInfo(date: Date.distantPast, id: objectId)
         }
         
         return RangeAPIInfo(date: sortingDate, id: objectId)
+    }
+    
+    private func isLast(indexPath: IndexPath) -> Bool {
+        let lastSectionNumber = dataSource.numberOfSections(in: collectionView) - 1
+        let lastRowNumber = dataSource.collectionView(collectionView, numberOfItemsInSection: lastSectionNumber) - 1
+        let lastIndexPath = IndexPath(row: lastRowNumber, section: lastSectionNumber)
+        
+        return indexPath == lastIndexPath
     }
     
 }

@@ -10,10 +10,10 @@ import Foundation
 
 
 final class RangeAPIInfo {
-    private(set) var date: Date = .distantPast
-    private(set) var id: Int64?
+    private(set) var date: Date?
+    private(set) var id: Int64
     
-    init(date: Date, id: Int64?) {
+    init(date: Date?, id: Int64) {
         self.date = date
         self.id = id
     }

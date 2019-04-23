@@ -2945,6 +2945,8 @@
 		B54BFF50202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
 		B54BFF5B202C8E180018AF82 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		B5513AF9205BAED70016C344 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
+		B55661D2226EE09100448868 /* RangeAPIRulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55661D1226EE09100448868 /* RangeAPIRulesProvider.swift */; };
+		B55661D3226EE09100448868 /* RangeAPIRulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55661D1226EE09100448868 /* RangeAPIRulesProvider.swift */; };
 		B556CE032184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
 		B556CE042184652A0086D0F1 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */; };
 		B5624791212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
@@ -5449,6 +5451,7 @@
 		B54BFF4B202C73790018AF82 /* SharedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
 		B54BFF4E202C74090018AF82 /* SharedEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedEnums.swift; sourceTree = "<group>"; };
 		B5513AF8205BAED70016C344 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
+		B55661D1226EE09100448868 /* RangeAPIRulesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeAPIRulesProvider.swift; sourceTree = "<group>"; };
 		B556CE02218465290086D0F1 /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
 		B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AugmentedRealityDataSource.swift; sourceTree = "<group>"; };
 		B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityFileProvider.swift; sourceTree = "<group>"; };
@@ -9547,6 +9550,7 @@
 				8C449C18216628280060785C /* PhotoVideoController.swift */,
 				8C449C19216628280060785C /* PhotoVideoPredicateManager.swift */,
 				B5ED202D226728D900D6E7C8 /* RangeAPIInfo.swift */,
+				B55661D1226EE09100448868 /* RangeAPIRulesProvider.swift */,
 			);
 			path = PhotoVideo;
 			sourceTree = "<group>";
@@ -15164,6 +15168,7 @@
 				FA793D8D201872EA00A02B46 /* ThingsService.swift in Sources */,
 				8C0E8CC71FDEBDFF00789C91 /* IntroduceDataSource.swift in Sources */,
 				8C0E8CC81FDEBDFF00789C91 /* CreateStoryResponce.swift in Sources */,
+				B55661D3226EE09100448868 /* RangeAPIRulesProvider.swift in Sources */,
 				8C0E8CC91FDEBDFF00789C91 /* UserProfileInteractor.swift in Sources */,
 				8C0E8CCA1FDEBDFF00789C91 /* HomePagePresenter.swift in Sources */,
 				8C449C362166282B0060785C /* PhotoVideoCell.swift in Sources */,
@@ -17339,6 +17344,7 @@
 				92004B6921AD197800582C45 /* MyStorageInteractorInput.swift in Sources */,
 				34EB62653F5454C7AC298EE3 /* SelectFolderInitializer.swift in Sources */,
 				7CE825BE1F823D9700356AD2 /* FreeUpSpacePopUp.swift in Sources */,
+				B55661D2226EE09100448868 /* RangeAPIRulesProvider.swift in Sources */,
 				8C77869F1F3F38EF005CB432 /* VisualMusicPlayerInteractor.swift in Sources */,
 				8C449CC6216632960060785C /* ActivityIndicator.swift in Sources */,
 				8734DA0D1FD846DF00977752 /* BaseFilesGreedModuleOutput.swift in Sources */,
