@@ -76,7 +76,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         subTitle.isHidden = false
         
         if Locale.current.languageCode == "en" || Locale.current.languageCode == "tr" {
-            subTitle.text = TextConstants.resetPasswordSubTitle
+            subTitle.text = String(format: "%@ \n \n %@", TextConstants.forgotPasswordSubTitle, TextConstants.resetPasswordSubTitle)
         } else {
             subTitle.text = ""
         }
