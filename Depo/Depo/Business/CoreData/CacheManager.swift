@@ -43,6 +43,8 @@ final class CacheManager {
         }
     }
     
+    private var internetConnectionIsBackCallback: VoidHandler?
+    
     deinit {
         reachabilityService.stopNotifier()
         NotificationCenter.default.removeObserver(self)
@@ -95,7 +97,6 @@ final class CacheManager {
             self.processingRemoteItems = true
             self.addNextRemoteItemsPage { [weak self] in
                 self?.processingRemoteItems = false
-//                self?.remotePageAdded?()
                 completion()
             }
     }
@@ -107,7 +108,6 @@ final class CacheManager {
             }
             self.currentRemotesPage = self.photoVideoService.currentPage
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
-                //                self?.remotePageAdded?()
                 if remoteItems.count < CacheManager.pageSize {
                     self?.photoVideoService.currentPage = 0
                     completion()
@@ -118,36 +118,28 @@ final class CacheManager {
             }
             
         }) { [weak self] in
-            guard let `self` = self else { //, let reachabilityService = self.reachabilityService
+            guard let `self` = self else {
                 completion()
                 return
             }
-            //should I check here if reachability?
             ///start subscribing
-            ///option 3
-//            let requestService = APIReachabilityRequestService()
-//
-            
-            ///option 2
-            NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityDidChanged), name: .apiReachabilityDidChange, object: nil)
-            self.reachabilityService.startNotifier()
-            ///option 1
-//            switch reachabilityService.connection {
-//            case .cellular, .wifi:
-//                self.addNextRemoteItemsPage(completion: completion)
-//            case .none:
-            
-//                try? self.reachabilityService?.startNotifier()
-//                self.reachabilityService?.whenReachable = { [weak self] reachability in
-//                    self?.reachabilityService?.stopNotifier()
-//                    self?.addNextRemoteItemsPage(completion: completion)
-//                }
-//            }
-            
-            
-            
-//            completion()///// create some kind of system where we wait till the internet is back and send request again
+            self.checkInternetConnection { [weak self] in
+                self?.addNextRemoteItemsPage(completion: completion)
+            }
         }
+    }
+    
+    private func checkInternetConnection(iternetConnectionBackCallback: @escaping VoidHandler) {
+        guard reachabilityService.connection == .reachable else {
+            NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityDidChanged), name: .apiReachabilityDidChange, object: nil)
+            reachabilityService.startNotifier()
+            internetConnectionIsBackCallback = { [weak self] in
+                self?.internetConnectionIsBackCallback = nil
+                self?.checkInternetConnection(iternetConnectionBackCallback: iternetConnectionBackCallback)
+            }
+            return
+        }
+        iternetConnectionBackCallback()
     }
     
     @objc private func reachabilityDidChanged() {
@@ -156,10 +148,7 @@ final class CacheManager {
         }
         reachabilityService.stopNotifier()
         NotificationCenter.default.removeObserver(self)
-        isProcessing = false
-        processingRemoteItems = false
-        
-        actualizeCache(completion: nil)
+        internetConnectionIsBackCallback?()
     }
     
     private func startAppendingAllLocals(completion: @escaping VoidHandler) {
@@ -180,7 +169,6 @@ final class CacheManager {
             completion?()
         }
     }
-    
     
     //TODO: move method of QS DB update here.
 
