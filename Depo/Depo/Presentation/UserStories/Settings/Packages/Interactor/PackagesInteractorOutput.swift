@@ -15,7 +15,6 @@ protocol PackagesInteractorOutput: class {
     func successed(tokenForResend: String)
     
     func successed(accountTypeString: String)
-    func successed(usage: UsageResponse)
     func successedGotUserAuthority()
     
     func successedVerifyOffer()
