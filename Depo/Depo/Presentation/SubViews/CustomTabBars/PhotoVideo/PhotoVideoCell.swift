@@ -270,6 +270,10 @@ final class PhotoVideoCell: UICollectionViewCell {
         cloudStatusImageView.image = nil
     }
     
+    func showCloudImage() {
+        cloudStatusImageView.image = UIImage(named: "objectNotInCloud")
+    }
+    
     func didEndDisplay() {
         cancelImageLoading()
         layer.removeAllAnimations()
