@@ -379,7 +379,7 @@ extension PhotoVideoController: UICollectionViewDelegate {
         let isSelectedCell = dataSource.selectedIndexPaths.contains(indexPath)
         cell.set(isSelected: isSelectedCell, isSelectionMode: dataSource.isSelectingMode, animated: true)
         
-        if let uuid = object.uuid, uploadedObjectID.index(of: uuid) != nil {
+        if let uuid = object.trimmedLocalFileID, uploadedObjectID.index(of: uuid) != nil {
             cell.finishedUploadForObject()
         }
 //        else {
@@ -548,28 +548,28 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         uploadProgress.removeValue(forKey: uuid)
     
         DispatchQueue.toMain {
-            if file.status == .active {
-                if let cell = self.getCellForFile(objectUUID: uuid) {
-                    cell.finishedUploadForObject()
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
-                    if let `self` = self, let cell = self.getCellForFile(objectUUID: uuid) {
-                        cell.resetCloudImage()
-                        
-                        if let index = self.uploadedObjectID.index(of: uuid){
-                            self.uploadedObjectID.remove(at: index)
-                        }
-                    }
-                })
-            } else if let cell = self.getCellForFile(objectUUID: uuid) {
-                //Photo should be displayed as unsynced while it is not transcoded. then it should be displayed as synced when trigger Range API (if it is transcoded)
-                cell.cancelledUploadForObject()
-                
-                if let index = self.uploadedObjectID.index(of: uuid){
-                    self.uploadedObjectID.remove(at: index)
-                }
+            if let cell = self.getCellForFile(objectUUID: uuid) {
+                cell.finishedUploadForObject()
             }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
+                if let `self` = self,
+                    let path = self.getIndexPathForObject(itemUUID: uuid),
+                    let object = self.dataSource.object(at: path),
+                    let cell = self.collectionView?.cellForItem(at: path) as? PhotoVideoCell {
+                    
+                    if object.isTranscoded {
+                        cell.resetCloudImage()
+                    } else {
+                        //Photo should be displayed as unsynced while it is not transcoded. then it should be displayed as synced when trigger Range API (if it is transcoded)
+                        cell.showCloudImage()
+                    }
+                    
+                    if let index = self.uploadedObjectID.index(of: uuid){
+                        self.uploadedObjectID.remove(at: index)
+                    }
+                }
+            })
         }
     }
     

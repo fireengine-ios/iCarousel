@@ -359,7 +359,8 @@ final class MediaItemOperationsService {
                         newSavedItems.append(newItem)
                     }
                 }
-                deletedItems.append(contentsOf: allSavedItems)
+                //transcoding remotes not need delete
+                deletedItems.append(contentsOf: allSavedItems.filter {$0.status == .active})
 
                 self.deleteItems(deletedItems, completion: {
                     newSavedItems.forEach {
@@ -628,6 +629,7 @@ final class MediaItemOperationsService {
     
     func deleteItems(_ items: [WrapData], completion: @escaping VoidHandler) {
         guard !items.isEmpty else {
+            completion()
             return
         }
         
