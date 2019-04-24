@@ -57,6 +57,7 @@ final class CacheManager {
             if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
                 self.startAppendingAllRemotes(completion: { [weak self] in
                     self?.userDefaultsVars.currentRemotesPage = 0
+                    debugPrint("!!!! all REMOTES are in DB")
                     self?.startAppendingAllLocals(completion: { [weak self] in
                         self?.isProcessing = false
                         self?.isCacheActualized = true
@@ -79,6 +80,7 @@ final class CacheManager {
     
     private func startAppendingAllRemotes(completion: @escaping VoidHandler) {
         /// we save remotes everytime, no metter if acces to PH libriary denied
+        debugPrint("!!!! LAST stored PAGE \(userDefaultsVars.currentRemotesPage)")
             photoVideoService.currentPage = userDefaultsVars.currentRemotesPage
             guard !self.processingRemoteItems else {
                 return
@@ -96,7 +98,13 @@ final class CacheManager {
             guard let `self` = self else {
                 return
             }
+            guard self.processingRemoteItems else {
+                return
+            }
             self.userDefaultsVars.currentRemotesPage = self.photoVideoService.currentPage
+            
+            debugPrint("!!!! current API PAGE \(self.photoVideoService.currentPage)")
+            
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
                 if remoteItems.count < CacheManager.pageSize {
                     self?.photoVideoService.currentPage = 0
@@ -109,9 +117,14 @@ final class CacheManager {
             
         }) { [weak self] in
             guard let `self` = self else {
+                debugPrint("!!!! self does not exist")
                 completion()
                 return
             }
+            guard self.processingRemoteItems else {
+                return
+            }
+            debugPrint("!!!! remotes request failed")
             ///start subscribing
             self.checkInternetConnection { [weak self] in
                 self?.addNextRemoteItemsPage(completion: completion)
@@ -129,6 +142,7 @@ final class CacheManager {
             }
             return
         }
+        debugPrint("!!!! internet IS BACKK!!")
         iternetConnectionBackCallback()
     }
     
@@ -153,8 +167,23 @@ final class CacheManager {
         }
     }
     
+    func stopActualizeCache() {
+        processingRemoteItems = false
+//        processingLocalItems = false//still need to test what would ahppen in parallel downlaod
+        isProcessing = false
+        isCacheActualized = false
+        photoVideoService.stopAllOperations() //Dont know if it actualy affects opration by cancell all
+        ///unsubscribe
+        reachabilityService.stopNotifier()
+        NotificationCenter.default.removeObserver(self)
+        internetConnectionIsBackCallback = nil
+    }
+    
     func dropAllRemotes(completion: VoidHandler?) {
         userDefaultsVars.currentRemotesPage = 0
+        processingRemoteItems = false
+        isProcessing = false
+        isCacheActualized = false
         MediaItemOperationsService.shared.deleteRemoteEntities { _ in
             completion?()
         }
