@@ -30,8 +30,8 @@ protocol SettingsRouterInput {
     
     func goToActivityTimeline()
     
-    func goToPackages()
-    
+    func goToPackagesWith(quotaInfo: QuotaInfoResponse?)
+
     func goToPremium()
     
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needReplaceOfCurrentController: Bool)

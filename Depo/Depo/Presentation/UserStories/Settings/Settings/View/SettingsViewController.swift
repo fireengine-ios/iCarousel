@@ -334,8 +334,8 @@ extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
         output.onUpdatUserInfo(userInfo: userInfo)
     }
     
-    func upgradeButtonPressed() {
-        output.goToPackages()
+    func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?) {
+        output.goToPackagesWith(quotaInfo: quotaInfo)
     }
     
     func premiumButtonPressed() {

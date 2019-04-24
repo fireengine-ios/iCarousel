@@ -39,7 +39,7 @@ protocol SettingsViewOutput {
     
     func goToActivityTimeline()
     
-    func goToPackages()
+    func goToPackagesWith(quotaInfo: QuotaInfoResponse?)
     
     func goToPremium()
     

@@ -842,6 +842,16 @@ class RouterVC: NSObject {
     }
     // MARK: - Packages
     
+    func packagesWith(quotoInfo: QuotaInfoResponse?) -> PackagesViewController{
+        
+        let nibName = String(describing: PackagesViewController.self)
+        let viewController = PackagesViewController(nibName: nibName, bundle: nil)
+        let configurator = PackagesModuleConfigurator()
+        configurator.configureModuleForViewInput(viewInput: viewController, quotoInfo: quotoInfo)
+        
+        return viewController
+    }
+    
     var packages: PackagesViewController {
         return PackagesModuleInitializer.viewController
     }
