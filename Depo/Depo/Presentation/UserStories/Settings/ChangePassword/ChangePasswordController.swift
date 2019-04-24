@@ -158,7 +158,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     }
     
     private func getAccountInfo() {
-        accountService.info(success: {  [weak self] (response) in
+        accountService.info(success: { [weak self] (response) in
             guard let response = response as? AccountInfoResponse else {
                 let error = CustomErrors.serverError("An error occured while getting account info")
                 self?.showError(error)
@@ -203,8 +203,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                            message: nil,
                                            image: .success,
                                            buttonTitle: TextConstants.ok,
-                                           action: { [weak self] vc in
-                                            vc.close { [weak self] in
+                                           action: { vc in
+                                            vc.close {
                                                 AppConfigurator.logout()
                                             }
         })
@@ -289,7 +289,7 @@ extension ChangePasswordController: UITextFieldDelegate {
             /// we need to show error with color just once
             showErrorColorInNewPasswordView = false
             
-        /// can be "else" only. added chech for optimization without additional flags
+        /// can be "else" only. added check for optimization without additional flags
         } else if newPasswordView.underlineLabel.textColor != UIColor.lrTealish {
             newPasswordView.underlineLabel.textColor = UIColor.lrTealish
             newPasswordView.underlineLabel.text = TextConstants.errorInvalidPassword
