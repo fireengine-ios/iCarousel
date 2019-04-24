@@ -100,25 +100,21 @@ final class MediaItemOperationsService {
     
     func getLocalDuplicates(remoteItems: [Item], duplicatesCallBack: @escaping LocalFilesCallBack) {
         getLocalDuplicates { localItems in
-//            self?.privateQueue.async {
-                var array = [WrapData]()
-                let uuids = Set(remoteItems.map {$0.getTrimmedLocalID()})
-                
-                for localItem in localItems {
-                    autoreleasepool {
-                        if let relatedRemotes = localItem.relatedRemotes as? Set<MediaItem> {
-                            let relatedUuids = relatedRemotes.compactMap {$0.trimmedLocalFileID}
-                            if !uuids.intersection(relatedUuids).isEmpty {
-                                array.append(WrapData(mediaItem: localItem))
-                            }
+            var array = [WrapData]()
+            let uuids = Set(remoteItems.map {$0.getTrimmedLocalID()})
+            
+            for localItem in localItems {
+                autoreleasepool {
+                    if let relatedRemotes = localItem.relatedRemotes as? Set<MediaItem> {
+                        let relatedUuids = relatedRemotes.compactMap {$0.trimmedLocalFileID}
+                        if !uuids.intersection(relatedUuids).isEmpty {
+                            array.append(WrapData(mediaItem: localItem))
                         }
                     }
                 }
-                
-                DispatchQueue.main.async {
-                    duplicatesCallBack(array)
-                }
-//            }
+            }
+            
+            duplicatesCallBack(array)
         }
     }
     
