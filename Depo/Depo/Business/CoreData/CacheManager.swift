@@ -24,12 +24,22 @@ final class CacheManager {
     private static let pageSize: Int = 100
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
                                                          type: .imageAndVideo)
+    private lazy var reachabilityService = APIReachabilityService()
     private(set) var processingRemoteItems = false
     private(set) var processingLocalItems = false
     private(set) var isProcessing = false
     private(set) var isCacheActualized = false
     
     let delegates = MulticastDelegate<CacheManagerDelegate>()
+    
+    private let userDefaultsVars = UserDefaultsVars()
+    
+    private var internetConnectionIsBackCallback: VoidHandler?
+    
+    deinit {
+        reachabilityService.stopNotifier()
+        NotificationCenter.default.removeObserver(self)
+    }
     
     func actualizeCache(completion: VoidHandler?) {
         if !isProcessing {
@@ -40,9 +50,14 @@ final class CacheManager {
         isProcessing = true
 
         MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
-            if isNoRemotes {
-                self?.startAppendingAllRemotes(completion: { [weak self] in
-                    self?.startAppendingAllLocals(completion: {
+            guard let `self` = self else {
+                completion?()
+                return
+            }
+            if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
+                self.startAppendingAllRemotes(completion: { [weak self] in
+                    self?.userDefaultsVars.currentRemotesPage = 0
+                    self?.startAppendingAllLocals(completion: { [weak self] in
                         self?.isProcessing = false
                         self?.isCacheActualized = true
                         CardsManager.default.stopOperationWithType(type: .preparePhotosQuickScroll)
@@ -51,7 +66,7 @@ final class CacheManager {
                     })
                 })
             } else {
-                self?.startAppendingAllLocals(completion: {
+                self.startAppendingAllLocals(completion: { [weak self] in
                     self?.isProcessing = false
                     self?.isCacheActualized = true
                     CardsManager.default.stopOperationWithType(type: .preparePhotosQuickScroll)
@@ -64,6 +79,7 @@ final class CacheManager {
     
     private func startAppendingAllRemotes(completion: @escaping VoidHandler) {
         /// we save remotes everytime, no metter if acces to PH libriary denied
+            photoVideoService.currentPage = userDefaultsVars.currentRemotesPage
             guard !self.processingRemoteItems else {
                 return
             }
@@ -71,28 +87,58 @@ final class CacheManager {
             self.processingRemoteItems = true
             self.addNextRemoteItemsPage { [weak self] in
                 self?.processingRemoteItems = false
-//                self?.remotePageAdded?()
                 completion()
             }
     }
     
     private func addNextRemoteItemsPage(completion: @escaping VoidHandler) {
         photoVideoService.nextItems(fileType: .imageAndVideo, sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remoteItems in
-            
+            guard let `self` = self else {
+                return
+            }
+            self.userDefaultsVars.currentRemotesPage = self.photoVideoService.currentPage
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
-                //                self?.remotePageAdded?()
                 if remoteItems.count < CacheManager.pageSize {
                     self?.photoVideoService.currentPage = 0
                     completion()
                 }
             }
             if remoteItems.count >= CacheManager.pageSize {
-                self?.addNextRemoteItemsPage(completion: completion)
+                self.addNextRemoteItemsPage(completion: completion)
             }
             
-        }) {
-            completion()///// create some kind of system where we wait till the internet is back and send request again
+        }) { [weak self] in
+            guard let `self` = self else {
+                completion()
+                return
+            }
+            ///start subscribing
+            self.checkInternetConnection { [weak self] in
+                self?.addNextRemoteItemsPage(completion: completion)
+            }
         }
+    }
+    
+    private func checkInternetConnection(iternetConnectionBackCallback: @escaping VoidHandler) {
+        guard reachabilityService.connection == .reachable else {
+            NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityDidChanged), name: .apiReachabilityDidChange, object: nil)
+            reachabilityService.startNotifier()
+            internetConnectionIsBackCallback = { [weak self] in
+                self?.internetConnectionIsBackCallback = nil
+                self?.checkInternetConnection(iternetConnectionBackCallback: iternetConnectionBackCallback)
+            }
+            return
+        }
+        iternetConnectionBackCallback()
+    }
+    
+    @objc private func reachabilityDidChanged() {
+        guard reachabilityService.connection == .reachable else {
+            return
+        }
+        reachabilityService.stopNotifier()
+        NotificationCenter.default.removeObserver(self)
+        internetConnectionIsBackCallback?()
     }
     
     private func startAppendingAllLocals(completion: @escaping VoidHandler) {
@@ -106,7 +152,14 @@ final class CacheManager {
             completion()
         }
     }
+    
+    func dropAllRemotes(completion: VoidHandler?) {
+        userDefaultsVars.currentRemotesPage = 0
+        MediaItemOperationsService.shared.deleteRemoteEntities { _ in
+            completion?()
+        }
+    }
+    
     //TODO: move method of QS DB update here.
 
-    
 }
