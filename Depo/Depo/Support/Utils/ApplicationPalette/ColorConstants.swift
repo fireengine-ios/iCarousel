@@ -19,6 +19,7 @@ struct ColorConstants {
     static let textLightGrayColor = UIColor(red: 95 / 255, green: 95 / 255, blue: 95 / 255, alpha: 0.5)
     static let greenColor = UIColor(red: 80 / 255, green: 227 / 255, blue: 119 / 255, alpha: 1)
     static let lightGrayColor = UIColor(red: 216 / 255, green: 216 / 255, blue: 216 / 255, alpha: 1)
+    static let profileGrayColor = UIColor(red: 234 / 255, green: 234 / 255, blue: 234 / 255, alpha: 1)
     static let selectedCellBlueColor = UIColor(red: 80 / 255, green: 220 / 255, blue: 220 / 255, alpha: 0.2)
     static let selectedBottomBarButtonColor = UIColor(red: 255 / 255, green: 171 / 255, blue: 141 / 255, alpha: 1)
     static let fileGreedCellColor = UIColor(red: 247 / 255, green: 247 / 255, blue: 247 / 255, alpha: 1)

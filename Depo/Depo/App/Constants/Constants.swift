@@ -395,13 +395,15 @@ struct TextConstants {
     static let userProfileSurname = NSLocalizedString("surname", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileEmailSubTitle = NSLocalizedString("E-Mail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileGSMNumberSubTitle = NSLocalizedString("GSM Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let userProfileBottomLabelText1 = NSLocalizedString("I’d like hear about news and promotions about lifebox occasionally.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let userProfileBottomLabelText2 = NSLocalizedString("We promise, we won’t sent you spam.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileEditButton = NSLocalizedString("Edit", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileDoneButton = NSLocalizedString("Done", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let emptyEmail = NSLocalizedString("E-mail is empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let emptyEmailTitle = NSLocalizedString("E-Mail Entry", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileChangePassword = NSLocalizedString("change password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileBirthday = NSLocalizedString("birthday", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfilePassword = NSLocalizedString("Password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileBirthdayPlaceholder = NSLocalizedString("user_profile_birthday_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileTurkcellGSMAlert = NSLocalizedString("user_profile_turkcell_gsm_alert", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: fileInfo
     static let fileInfoFileNameTitle = NSLocalizedString("File Name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1169,4 +1171,10 @@ struct TextConstants {
     static let thisTextIsEmpty = NSLocalizedString("this_text_is_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let passwordChangedSuccessfully = NSLocalizedString("password_changed_successfully", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let passwordChangedSuccessfullyRelogin = NSLocalizedString("password_changed_successfully_relogin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let captchaAnswerPlaceholder = NSLocalizedString("change_password_captcha_answer_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let enterYourOldPassword = NSLocalizedString("enter_your_old_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let enterYourNewPassword = NSLocalizedString("enter_your_new_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let enterYourRepeatPassword = NSLocalizedString("enter_your_repeat_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

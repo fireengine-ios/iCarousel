@@ -145,6 +145,13 @@ enum AnalyticsAppScreens {
     case photoPickHistory
     case photoPickPhotoSelection
     case photoPickAnalysisDetail
+    ///PackageDetails
+    case standartAccountDetails
+    case standartPlusAccountDetails
+    case premiumAccountDetails
+    ///
+    case myStorage
+    case changePassword
     
     var name: String {
         switch self {
@@ -251,6 +258,18 @@ enum AnalyticsAppScreens {
             return "PhotoPick Photo Selection"
         case .photoPickAnalysisDetail:
             return "PhotoPick Analysis Detail"
+        ///PackageDetails
+        case .standartAccountDetails:
+            return "Standard Details"
+        case .standartPlusAccountDetails:
+            return "Standard Plus Details"
+        case .premiumAccountDetails:
+            return "Premium Details"
+        ///
+        case .myStorage:
+            return "My Storage"
+        case .changePassword:
+            return "Change Password"
         }
     }
 }

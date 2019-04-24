@@ -31,6 +31,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     private let oldPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
         view.titleLabel.text = TextConstants.oldPassword
+        view.passwordTextField.placeholder = TextConstants.enterYourOldPassword
         view.passwordTextField.returnKeyType = .next
         return view
     }()
@@ -38,6 +39,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     private let newPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
         view.titleLabel.text = TextConstants.newPassword
+        view.passwordTextField.placeholder = TextConstants.enterYourNewPassword
         view.passwordTextField.returnKeyType = .next
         return view
     }()
@@ -45,6 +47,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     private let repeatPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
         view.titleLabel.text = TextConstants.repeatPassword
+        view.passwordTextField.placeholder = TextConstants.enterYourRepeatPassword
         view.passwordTextField.returnKeyType = .next
         return view
     }()
@@ -76,6 +79,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        trackScreen()
         initialViewSetup()
     }
     
@@ -99,6 +103,13 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     
     @objc private func onDoneButton(_ button: UIBarButtonItem) {
         updatePassword()
+    }
+    
+    //MARK: - Tracking/loging
+    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private func trackScreen() {
+        analyticsService.logScreen(screen: .changePassword)
     }
     
     // MARK: - API
@@ -147,7 +158,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     }
     
     private func getAccountInfo() {
-        accountService.info(success: {  [weak self] (response) in
+        accountService.info(success: { [weak self] (response) in
             guard let response = response as? AccountInfoResponse else {
                 let error = CustomErrors.serverError("An error occured while getting account info")
                 self?.showError(error)
@@ -192,8 +203,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                            message: nil,
                                            image: .success,
                                            buttonTitle: TextConstants.ok,
-                                           action: { [weak self] vc in
-                                            vc.close { [weak self] in
+                                           action: { vc in
+                                            vc.close {
                                                 AppConfigurator.logout()
                                             }
         })
@@ -278,7 +289,7 @@ extension ChangePasswordController: UITextFieldDelegate {
             /// we need to show error with color just once
             showErrorColorInNewPasswordView = false
             
-        /// can be "else" only. added chech for optimization without additional flags
+        /// can be "else" only. added check for optimization without additional flags
         } else if newPasswordView.underlineLabel.textColor != UIColor.lrTealish {
             newPasswordView.underlineLabel.textColor = UIColor.lrTealish
             newPasswordView.underlineLabel.text = TextConstants.errorInvalidPassword

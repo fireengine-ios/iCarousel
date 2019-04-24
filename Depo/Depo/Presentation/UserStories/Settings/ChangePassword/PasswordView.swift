@@ -7,8 +7,8 @@ final class PasswordView: UIView, NibInit {
             /// in IB: UIButton(type: .custom)
             newValue.isExclusiveTouch = true
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            newValue.setTitleColor(ColorConstants.lightText, for: .normal)
-            newValue.setTitleColor(ColorConstants.lightText.lighter(by: 30), for: .highlighted)
+            newValue.setTitleColor(UIColor.lrTealish, for: .normal)
+            newValue.setTitleColor(UIColor.lrTealish.lighter(by: 30), for: .highlighted)
             newValue.backgroundColor = .white
             newValue.isOpaque = true
         }
@@ -16,7 +16,7 @@ final class PasswordView: UIView, NibInit {
     
     @IBOutlet weak var titleLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.lightText
+            newValue.textColor = UIColor.lrTealish
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 16)
             newValue.backgroundColor = .white
             newValue.isOpaque = true
@@ -35,8 +35,8 @@ final class PasswordView: UIView, NibInit {
     
     @IBOutlet weak var passwordTextField: UITextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 21)
-            newValue.textColor = UIColor.lrTealish
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.textColor = UIColor.black
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
@@ -60,8 +60,8 @@ final class PasswordView: UIView, NibInit {
         
         passwordTextField.clearButtonMode = passwordTextField.isSecureTextEntry ? .never : .whileEditing
         
-        let showPasswordButtonText = passwordTextField.isSecureTextEntry ? TextConstants.showPassword : TextConstants.hidePassword
-        showPasswordButton.setTitle(showPasswordButtonText, for: .normal)
+        let showPasswordButtonIconName = passwordTextField.isSecureTextEntry ? "ic_eye_show" : "ic_eye_hide"
+        showPasswordButton.setImage(UIImage(named: showPasswordButtonIconName), for: .normal)
     }
     
     override func awakeFromNib() {

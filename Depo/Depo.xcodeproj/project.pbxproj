@@ -27,6 +27,8 @@
 		124B2508A085C281AB2765AF /* SelectNameViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F148DB3DB2A1D9676FE239 /* SelectNameViewOutput.swift */; };
 		1356E354CDA8AA7567B09334 /* UserInfoSubViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CCB3146C622ADE6CFE961E /* UserInfoSubViewConfigurator.swift */; };
 		161684F8B98A4DD3AC164E2F /* Pods_LifeboxShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */; };
+		17035BAB226DABE000FE7362 /* ProfileFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */; };
+		17035BAC226DABE000FE7362 /* ProfileFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */; };
 		17E9B7122250AF6C00C0FE70 /* MediaUsageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */; };
 		17E9B7132251E5A300C0FE70 /* MediaUsageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */; };
 		1C8FDD0A3C795F7711BC5822 /* FeedbackViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFFF80AD607CB90108A1537 /* FeedbackViewRouterInput.swift */; };
@@ -3007,6 +3009,7 @@
 		CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */; };
 		CE109C2B2057A9C9006C9FA0 /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE109C2A2057A9C9006C9FA0 /* ShareController.swift */; };
 		CE125176204E83DC00886F8D /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FB0520444BE8007F3F54 /* ColorConstants.swift */; };
+		CE127E9A2268A025005A4214 /* CaptchaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E992268A025005A4214 /* CaptchaView.xib */; };
 		CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1353342004F0F90004CBBE /* TextEnterController.swift */; };
 		CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1353382004F1530004CBBE /* TextEnterController.xib */; };
 		CE1458C62045617600812544 /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
@@ -3962,6 +3965,7 @@
 		14B63501F537CEC2931A734D /* Pods-LifeboxShared.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.enterprise.xcconfig"; sourceTree = "<group>"; };
 		14DC6D877F96EAC0DCE038CA /* SyncContactsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsViewController.swift; sourceTree = "<group>"; };
 		16AA59CD6753DDEFC61D0212 /* FeedbackViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInput.swift; sourceTree = "<group>"; };
+		17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFieldView.swift; sourceTree = "<group>"; };
 		17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUsageInfoView.swift; sourceTree = "<group>"; };
 		1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouter.swift; sourceTree = "<group>"; };
 		1AB80F562E2E268C766082D5 /* SettingsInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInitializer.swift; sourceTree = "<group>"; };
@@ -5638,6 +5642,7 @@
 		CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeManager.swift; sourceTree = "<group>"; };
 		CE109C2A2057A9C9006C9FA0 /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		CE125175204E74CE00886F8D /* LifeboxFileProviderUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxFileProviderUI.entitlements; sourceTree = "<group>"; };
+		CE127E992268A025005A4214 /* CaptchaView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaptchaView.xib; sourceTree = "<group>"; };
 		CE1353342004F0F90004CBBE /* TextEnterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEnterController.swift; sourceTree = "<group>"; };
 		CE1353382004F1530004CBBE /* TextEnterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextEnterController.xib; sourceTree = "<group>"; };
 		CE1458CA2045633D00812544 /* ShareConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareConfigurator.swift; sourceTree = "<group>"; };
@@ -6437,6 +6442,14 @@
 				FB7C949A95C197C80ACC503C /* OTPViewInteractorIO.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		17035BA6226D9E4100FE7362 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		17499C603204732CC217594D /* Interactor */ = {
@@ -8725,6 +8738,7 @@
 		7CDABD001F1E3A6300C8CC16 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				17035BA6226D9E4100FE7362 /* Views */,
 				7CDABD011F1E3A6300C8CC16 /* UserProfileViewController.swift */,
 				7CDABD021F1E3A6300C8CC16 /* UserProfileViewController.xib */,
 				7CDABD031F1E3A6300C8CC16 /* UserProfileViewInput.swift */,
@@ -11951,6 +11965,7 @@
 			children = (
 				CE5921CF225623D3005882CE /* ChangePasswordController.xib */,
 				CE5921CE225623D3005882CE /* ChangePasswordController.swift */,
+				CE127E992268A025005A4214 /* CaptchaView.xib */,
 				CEE3B7C72257917200B99FE7 /* CaptchaView.swift */,
 				CE5921D722564465005882CE /* PasswordView.xib */,
 				CE5921D92256446F005882CE /* PasswordView.swift */,
@@ -14282,6 +14297,7 @@
 				8C06B1BC2008AD72003D8E05 /* lookup.png in Resources */,
 				CEC05B671F05333800332EBA /* PhoneVereficationScreen~ipad.xib in Resources */,
 				8C06B1062008AD72003D8E05 /* slider_thumb@2x.png in Resources */,
+				CE127E9A2268A025005A4214 /* CaptchaView.xib in Resources */,
 				8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */,
 				8C06AF442008AD70003D8E05 /* crop_icon.png in Resources */,
 				8C06B0942008AD71003D8E05 /* polaroid_yeni.png in Resources */,
@@ -15868,6 +15884,7 @@
 				8C0E8E291FDEBDFF00789C91 /* AutoSyncViewOutput.swift in Sources */,
 				8C0E8E2A1FDEBDFF00789C91 /* ImportFromInstagramInteractor.swift in Sources */,
 				8C0E8E2B1FDEBDFF00789C91 /* ForgotPasswordInteractor.swift in Sources */,
+				17035BAC226DABE000FE7362 /* ProfileFieldView.swift in Sources */,
 				8C0E8E2C1FDEBDFF00789C91 /* OffersService.swift in Sources */,
 				C62239B4204973CC0043ED44 /* FaceImagePhotosInitializer.swift in Sources */,
 				8C0E8E2D1FDEBDFF00789C91 /* LocalMediaStorage.swift in Sources */,
@@ -16556,6 +16573,7 @@
 				CE6DE7621FCD8A8000C23CBD /* CodeTextField.swift in Sources */,
 				B56FBB2E2122C811004F4A59 /* TermsOfUseInteractor.swift in Sources */,
 				7C6E2F7A1F31E4C900536DB6 /* CreateStoryPhotoSelectionViewController.swift in Sources */,
+				17035BAB226DABE000FE7362 /* ProfileFieldView.swift in Sources */,
 				CE51AB201EF90853005DCEE0 /* LoginDataSource.swift in Sources */,
 				7CC11AAE1FE276DC00AF022D /* WaitingForWiFiPopUp.swift in Sources */,
 				CE51AB231EF90853005DCEE0 /* Constants.swift in Sources */,

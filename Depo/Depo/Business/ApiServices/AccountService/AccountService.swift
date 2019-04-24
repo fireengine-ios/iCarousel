@@ -155,6 +155,28 @@ class AccountService: BaseRequestService, AccountServicePrl {
         let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: success, fail: fail)
         executePostRequest(param: parameters, handler: handler)
     }
+
+    func updateUserBirthday(_ birthday: String, handler: @escaping ResponseVoid) {
+        debugLog("AccountService updateBirthday")
+        
+        let birthdayDigits = birthday
+            .components(separatedBy: CharacterSet.decimalDigits.inverted)
+            .joined()
+        
+        sessionManager
+            .request(RouteRequests.Account.updateBirthday,
+                     method: .post,
+                     encoding: birthdayDigits)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(_):
+                    handler(.success(()))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
     
     func verifyPhoneNumber(parameters: VerifyPhoneNumberParameter, success: SuccessResponse?, fail: @escaping FailResponse) {
         debugLog("AccountService verifyPhoneNumber")
