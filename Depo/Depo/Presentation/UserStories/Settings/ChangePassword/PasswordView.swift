@@ -35,7 +35,7 @@ final class PasswordView: UIView, NibInit {
     
     @IBOutlet weak var passwordTextField: UITextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 21)
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = UIColor.black
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
