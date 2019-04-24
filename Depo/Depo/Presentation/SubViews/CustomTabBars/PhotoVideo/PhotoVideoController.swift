@@ -487,6 +487,7 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
             let vc = PrintInitializer.viewController(data: itemsToPrint)
             router.pushOnPresentedView(viewController: vc)
         }
+        stopEditingMode()
     }
     func changeCover() {}
     func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {}
