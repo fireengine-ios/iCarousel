@@ -70,25 +70,6 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
 
-    func getStorageCapacity() {
-        accountService.usage(success: { [weak self]  (response) in
-            if let response = response as? UsageResponse {
-                DispatchQueue.main.async {
-                    self?.output.successed(usage: response)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    let error = CustomErrors.serverError("An error occurred while getting storage info.")
-                    self?.output.failed(with: error.description)
-                }
-            }
-        }) { [weak self] errorResponse in
-            DispatchQueue.main.async {
-                self?.output.failedUsage(with: errorResponse)
-            }
-        }
-    }
-
     func getUserAuthority() {
         accountService.permissions { [weak self] (result) in
             switch result {

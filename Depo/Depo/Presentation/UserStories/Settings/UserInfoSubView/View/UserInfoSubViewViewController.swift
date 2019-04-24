@@ -12,7 +12,7 @@ import SDWebImage
 protocol UserInfoSubViewViewControllerActionsDelegate: class {
     func changePhotoPressed()
     func updateUserProfile(userInfo: AccountInfoResponse)
-    func upgradeButtonPressed()
+    func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?)
     func premiumButtonPressed()
 }
 
@@ -178,7 +178,7 @@ final class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewIn
     
     // MARK: buttons actions
     @IBAction private func onEditUserInformationButton(_ sender: UIButton) {
-        actionsDelegate?.upgradeButtonPressed()
+        actionsDelegate?.upgradeButtonPressed(quotaInfo: output.quotaInfo)
     }
     
     @IBAction private func onUpdateUserPhoto() {
