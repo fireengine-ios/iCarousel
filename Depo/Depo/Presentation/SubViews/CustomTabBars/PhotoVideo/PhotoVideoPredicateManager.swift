@@ -40,7 +40,7 @@ final class PhotoVideoPredicateManager {
             return
         }
         ///This Predicate based on assomption that all remotes will be downloaded before all remotes
-        let duplicationPredicateTmp = NSPredicate(format: "(isLocalItemValue = true AND (hasTranscodedRemote = true || relatedRemotes.@count = 0)) OR (isLocalItemValue = false AND isTranscoded = true)")
+        let duplicationPredicateTmp = NSPredicate(format: "(isLocalItemValue = true AND (hasMissingDateRemotes = true || relatedRemotes.@count = 0)) OR isLocalItemValue = false")
         duplicationPredicate = duplicationPredicateTmp
         createdPredicateCallback(duplicationPredicateTmp)
     }

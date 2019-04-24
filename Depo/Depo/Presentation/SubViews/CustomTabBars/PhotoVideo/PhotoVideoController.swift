@@ -581,12 +581,11 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
                     let path = self.getIndexPathForObject(itemUUID: uuid),
                     let object = self.dataSource.object(at: path),
                     let cell = self.collectionView?.cellForItem(at: path) as? PhotoVideoCell {
-                    
-                    if object.isTranscoded {
-                        cell.resetCloudImage()
+
+                    if object.isLocalItemValue {
+                        cell.showCloudImage()                        
                     } else {
-                        //Photo should be displayed as unsynced while it is not transcoded. then it should be displayed as synced when trigger Range API (if it is transcoded)
-                        cell.showCloudImage()
+                        cell.resetCloudImage()
                     }
                     
                     if let index = self.uploadedObjectID.index(of: uuid){
