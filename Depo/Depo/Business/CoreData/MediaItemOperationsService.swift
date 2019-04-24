@@ -168,6 +168,13 @@ final class MediaItemOperationsService {
             }
             
             for object in unwrapedObjects {
+                if let mediaItem = object as? MediaItem,
+                    let relatedRemotes = mediaItem.relatedRemotes as? Set<MediaItem> {
+                    relatedRemotes.forEach {
+                        $0.relatedLocal = nil
+                        $0.localFileID = nil
+                    }
+                }
                 context.delete(object)
             }
             CoreDataStack.default.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
@@ -359,9 +366,8 @@ final class MediaItemOperationsService {
                         newSavedItems.append(newItem)
                     }
                 }
-                //transcoding remotes not need delete
-                deletedItems.append(contentsOf: allSavedItems.filter {$0.status == .active})
 
+                deletedItems.append(contentsOf: allSavedItems)
                 self.deleteItems(deletedItems, completion: {
                     newSavedItems.forEach {
                         ///Relations being setuped in the MediaItem init
@@ -648,11 +654,7 @@ final class MediaItemOperationsService {
                 self.mediaItemByLocalID(trimmedLocalIDS: items.map {$0.getTrimmedLocalID()}, context: context, mediaItemsCallBack: { mediaItems in
                     mediaItems.forEach {
                         $0.removeFromRelatedRemotes(remoteItemsSet)
-                        if let relatedRemotes = $0.relatedRemotes as? Set<MediaItem> {
-                            $0.hasTranscodedRemote = relatedRemotes.filter { !$0.isTranscoded }.count > 0
-                        } else {
-                            $0.hasTranscodedRemote = false
-                        }
+                        $0.updateMissingDateRelations()
                     }
                     
                     remoteItems.forEach { context.delete($0) }

@@ -79,7 +79,6 @@ public class MediaItem: NSManagedObject {
                 savedRelatedRemotes.forEach { $0.localFileID = localFileID }
                 relatedRemotes = NSSet(array: savedRelatedRemotes)
                 updateLocalRelated(remotesMediaItems: savedRelatedRemotes)
-                hasTranscodedRemote = savedRelatedRemotes.map { !$0.isTranscoded }.count > 0
             }
         } else {
             let savedRelatedLocals = getRelatedLocals(for: wrapData, context: context)
@@ -90,10 +89,6 @@ public class MediaItem: NSManagedObject {
                 relatedLocal = savedRelatedLocals.first
                 localFileID = relatedLocal?.localFileID
                 updateRemoteRelated(localMediaItems: savedRelatedLocals)
-                
-                if relatedLocal?.hasTranscodedRemote == false, isTranscoded == false {
-                    relatedLocal?.hasTranscodedRemote = true
-                }
             }
         }
         
@@ -107,6 +102,8 @@ public class MediaItem: NSManagedObject {
         default:
             monthValue = (sortingDate as Date?)?.getDateForSortingOfCollectionView()
         }
+        
+        updateMissingDateRelations()
     }
     
     private func getRemoteTrimmedID(json: JSON) -> String  {
@@ -184,15 +181,17 @@ public class MediaItem: NSManagedObject {
         self.albums = NSOrderedSet(array: albums ?? [])
         
         isTranscoded = item.status == .active
+        updateMissingDateRelations()
+    }
+    
+    func updateMissingDateRelations() {
+        guard isLocalItemValue else {
+            relatedLocal?.updateMissingDateRelations()
+            return
+        }
         
-        if !isLocalItemValue {
-            if !isTranscoded {
-                relatedLocal?.hasTranscodedRemote = true
-            } else if let relatedRemotes = relatedLocal?.relatedRemotes as? Set<MediaItem> {
-                relatedLocal?.hasTranscodedRemote = relatedRemotes.filter { !$0.isTranscoded && $0 != self }.count > 0
-            } else {
-                relatedLocal?.hasTranscodedRemote = false
-            }
+        if let relatedRemotes = relatedRemotes as? Set<MediaItem> {
+            hasMissingDateRemotes = relatedRemotes.filter { $0.monthValue == nil }.count == relatedRemotes.count
         }
     }
 }
