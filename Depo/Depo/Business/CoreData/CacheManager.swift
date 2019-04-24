@@ -13,8 +13,6 @@
  //
  */
 
-import Reachability
-
 protocol CacheManagerDelegate: class {
     func didCompleteCacheActualization()
 }
@@ -34,14 +32,7 @@ final class CacheManager {
     
     let delegates = MulticastDelegate<CacheManagerDelegate>()
     
-    private var currentRemotesPage: Int {
-        get {
-            return UserDefaults.standard.integer(forKey: Keys.lastRemotesPageSaved)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Keys.lastRemotesPageSaved)
-        }
-    }
+    private let userDefaultsVars = UserDefaultsVars()
     
     private var internetConnectionIsBackCallback: VoidHandler?
     
@@ -63,11 +54,10 @@ final class CacheManager {
                 completion?()
                 return
             }
-            debugPrint("!!!! \(self.currentRemotesPage)")
-            if isNoRemotes || self.currentRemotesPage > 0 {
+            if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
                 self.startAppendingAllRemotes(completion: { [weak self] in
-                    self?.currentRemotesPage = 0
-                    self?.startAppendingAllLocals(completion: {
+                    self?.userDefaultsVars.currentRemotesPage = 0
+                    self?.startAppendingAllLocals(completion: { [weak self] in
                         self?.isProcessing = false
                         self?.isCacheActualized = true
                         CardsManager.default.stopOperationWithType(type: .preparePhotosQuickScroll)
@@ -89,7 +79,7 @@ final class CacheManager {
     
     private func startAppendingAllRemotes(completion: @escaping VoidHandler) {
         /// we save remotes everytime, no metter if acces to PH libriary denied
-            photoVideoService.currentPage = currentRemotesPage
+            photoVideoService.currentPage = userDefaultsVars.currentRemotesPage
             guard !self.processingRemoteItems else {
                 return
             }
@@ -106,7 +96,7 @@ final class CacheManager {
             guard let `self` = self else {
                 return
             }
-            self.currentRemotesPage = self.photoVideoService.currentPage
+            self.userDefaultsVars.currentRemotesPage = self.photoVideoService.currentPage
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
                 if remoteItems.count < CacheManager.pageSize {
                     self?.photoVideoService.currentPage = 0
@@ -164,7 +154,7 @@ final class CacheManager {
     }
     
     func dropAllRemotes(completion: VoidHandler?) {
-        currentRemotesPage = 0
+        userDefaultsVars.currentRemotesPage = 0
         MediaItemOperationsService.shared.deleteRemoteEntities { _ in
             completion?()
         }
