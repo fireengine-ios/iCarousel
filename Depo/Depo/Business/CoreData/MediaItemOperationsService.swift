@@ -100,25 +100,21 @@ final class MediaItemOperationsService {
     
     func getLocalDuplicates(remoteItems: [Item], duplicatesCallBack: @escaping LocalFilesCallBack) {
         getLocalDuplicates { localItems in
-//            self?.privateQueue.async {
-                var array = [WrapData]()
-                let uuids = Set(remoteItems.map {$0.getTrimmedLocalID()})
-                
-                for localItem in localItems {
-                    autoreleasepool {
-                        if let relatedRemotes = localItem.relatedRemotes as? Set<MediaItem> {
-                            let relatedUuids = relatedRemotes.compactMap {$0.trimmedLocalFileID}
-                            if !uuids.intersection(relatedUuids).isEmpty {
-                                array.append(WrapData(mediaItem: localItem))
-                            }
+            var array = [WrapData]()
+            let uuids = Set(remoteItems.map {$0.getTrimmedLocalID()})
+            
+            for localItem in localItems {
+                autoreleasepool {
+                    if let relatedRemotes = localItem.relatedRemotes as? Set<MediaItem> {
+                        let relatedUuids = relatedRemotes.compactMap {$0.trimmedLocalFileID}
+                        if !uuids.intersection(relatedUuids).isEmpty {
+                            array.append(WrapData(mediaItem: localItem))
                         }
                     }
                 }
-                
-                DispatchQueue.main.async {
-                    duplicatesCallBack(array)
-                }
-//            }
+            }
+            
+            duplicatesCallBack(array)
         }
     }
     
@@ -286,6 +282,17 @@ final class MediaItemOperationsService {
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
     
+    func executeSortedRequest(predicate: NSPredicate, limit: Int = 0, context: NSManagedObjectContext, mediaItemsCallBack: @escaping MediaItemsCallBack) {
+        let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
+        request.fetchLimit = limit
+        request.predicate = predicate
+        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.monthValue), ascending: false)
+        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.sortingDate), ascending: false)
+        let sortDescriptor3 = NSSortDescriptor(key: #keyPath(MediaItem.idValue), ascending: false)
+        request.sortDescriptors = [sortDescriptor1, sortDescriptor2, sortDescriptor3]
+        execute(request: request, context: context, mediaItemsCallBack: mediaItemsCallBack)
+    }
+    
     func executeRequest(predicate: NSPredicate, limit: Int = 0, context: NSManagedObjectContext, mediaItemsCallBack: @escaping MediaItemsCallBack) {
         let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
         request.fetchLimit = limit
@@ -334,18 +341,19 @@ final class MediaItemOperationsService {
         }
     }
 
-    func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, dateRange: ClosedRange<Date>, completion: @escaping VoidHandler) {
+    func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo, completion: @escaping VoidHandler) {
         let remoteIds = remoteItems.compactMap { $0.id }
         let context = CoreDataStack.default.newChildBackgroundContext
+    
+        let inRangePredicate = createInRangePredicate(fileType: fileType, topInfo: topInfo, bottomInfo: bottomInfo)
         
-        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@)", fileType.valueForCoreDataMapping(), dateRange.upperBound as NSDate, dateRange.lowerBound as NSDate)
-        
-        executeRequest(predicate: inDateRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
+        executeSortedRequest(predicate: inRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
 
             debugPrint("--- remotes in date range count \(remoteItems.count)")
             debugPrint("--- count of already saved in date range \(inDateRangeItems.count)")
             
-            let inIdRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND (idValue IN %@) AND NOT (idValue IN %@)", fileType.valueForCoreDataMapping(), remoteIds, inDateRangeItems.compactMap { $0.idValue })
+            let inDateRangeItemIds = inDateRangeItems.compactMap { $0.idValue }
+            let inIdRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND (idValue IN %@) AND NOT (idValue IN %@)", fileType.valueForCoreDataMapping(), remoteIds, inDateRangeItemIds)
             
             self.executeRequest(predicate: inIdRangePredicate, context: context, mediaItemsCallBack: { inIdRangeItems in
                 debugPrint("--- count of already saved in id range \(inIdRangeItems.count)")
@@ -377,10 +385,32 @@ final class MediaItemOperationsService {
                     context.saveAsync(completion: { status in
                         completion()
                     })
-                })
-                
+                })  
             })
         }
+    }
+    
+    private func createInRangePredicate(fileType: FileType, topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo) -> NSCompoundPredicate {
+        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@)", fileType.valueForCoreDataMapping(), topInfo.date as NSDate, bottomInfo.date as NSDate)
+        
+        let inIdRangePredicate: NSPredicate
+        if topInfo.date != bottomInfo.date {
+            inIdRangePredicate = NSPredicate(value: true)
+        } else {
+            if let topId = topInfo.id {
+                if let bottomId = bottomInfo.id {
+                    inIdRangePredicate = NSPredicate(format:" (idValue <= %ld AND idValue >= %ld)", topId, bottomId)
+                } else {
+                    inIdRangePredicate = NSPredicate(format:"idValue <= %ld", topId)
+                }
+            } else if let bottomId = bottomInfo.id {
+                inIdRangePredicate = NSPredicate(format:"idValue >= %ld", bottomId)
+            } else {
+                inIdRangePredicate = NSPredicate(value: true)
+            }
+        }
+        
+       return NSCompoundPredicate(andPredicateWithSubpredicates: [inDateRangePredicate, inIdRangePredicate])
     }
     
     func getAllRemotesMediaItem(allRemotes: @escaping MediaItemsCallBack) {
@@ -390,7 +420,7 @@ final class MediaItemOperationsService {
     }
     
     func isNoRemotesInDB(result: @escaping (_ noRemotes: Bool) -> Void) {
-        let predicate = NSPredicate(format: "isLocalItemValue = false")
+        let predicate = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) = false")
         let fetchRequest = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
         fetchRequest.fetchLimit = 1
         fetchRequest.predicate = predicate
@@ -644,7 +674,6 @@ final class MediaItemOperationsService {
                 return
             }
             
-            
             let predicate = NSPredicate(format: "uuid in %@", items.map {$0.uuid} )
             self.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { remoteItems in
                 remoteItems.forEach { context.delete($0) }
@@ -835,13 +864,9 @@ final class MediaItemOperationsService {
             
             self.executeRequest(predicate: predicate, context: context) { mediaItems in
                 let existedUUIDS = mediaItems.compactMap { $0.uuid }
-                
-                guard existedUUIDS.isEmpty else {
-                    completion(wrapData.filter { !existedUUIDS.contains($0.uuid) })
-                    return
-                }
-                
-                completion(wrapData)
+                let filteredItems = wrapData.filter { !existedUUIDS.contains($0.uuid) }
+                print("--- filtered \(wrapData.count - filteredItems.count) existed uuids")
+                completion(filteredItems)
             }
         }
     }
