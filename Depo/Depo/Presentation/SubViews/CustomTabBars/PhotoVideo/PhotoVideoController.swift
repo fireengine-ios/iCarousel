@@ -88,13 +88,14 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         super.viewDidAppear(animated)
         
         homePageNavigationBarStyle()
-
+        
         if !selectedItems.isEmpty {
             onChangeSelectedItemsCount(selectedItemsCount: dataSource.selectedIndexPaths.count)
             navBarManager.setSelectionMode()
             navigationBarWithGradientStyle()
         }
     }
+
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -304,30 +305,31 @@ extension PhotoVideoController: UIScrollViewDelegate {
         
         guard
             let workaroundVisibleIndexes = self.collectionView?.indexPathsForVisibleItems.sorted(by: <),
-            let firstDate = self.date(at: workaroundVisibleIndexes.first),
-            var lastDate = self.date(at: workaroundVisibleIndexes.last)
+            let topAPIInfo = self.rangeAPIInfo(at: workaroundVisibleIndexes.first),
+            let bottomAPIInfo = self.rangeAPIInfo(at: workaroundVisibleIndexes.last)
         else {
             return
-        }
-        
-        if lastDate > firstDate {
-            ///it means that the lastDate is Date() because the item is an empty meta item
-            lastDate = Date.distantPast
         }
 
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 return
             }
+
+            var startId: Int64?
+            var endId: Int64?
+            if topAPIInfo.date == bottomAPIInfo.date {
+                startId = topAPIInfo.id
+                endId = bottomAPIInfo.id
+            }
             
             let category: QuickScrollCategory = self.isPhoto ? .photos : .videos
             let fileType: FileType = self.isPhoto ? .image : .video
-            let dateRange = min(firstDate, lastDate)...max(firstDate, lastDate)
-            self.quickScrollService.requestListOfDateRange(startDate: dateRange.upperBound, endDate: dateRange.lowerBound, category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
+            self.quickScrollService.requestListOfDateRange(startDate: topAPIInfo.date, endDate: bottomAPIInfo.date, startID: startId, endID: endId, category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
                 switch response {
                 case .success(let quckScrollResponse):
                     self.dispatchQueue.async {
-                        MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileType: fileType, dateRange: dateRange, completion:  {
+                        MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileType: fileType, topInfo: topAPIInfo, bottomInfo: bottomAPIInfo, completion: {
                             debugPrint("appended and updated")
                         })
                     }
@@ -339,19 +341,41 @@ extension PhotoVideoController: UIScrollViewDelegate {
         }
     }
     
-    private func date(at index: IndexPath?) -> Date? {
+    private func rangeAPIInfo(at index: IndexPath?) -> RangeAPIInfo? {
         guard let objectIndex = index else {
             return nil
         }
         
-        if objectIndex.section == 0 && objectIndex.row == 0 {
-            /// return Date.distantFuture to have the latest items, because user may have wrong date on his device.
-            return Date.distantFuture
+        let object = dataSource.object(at: objectIndex)
+        let objectId = object?.idValue
+        let isLastIndex = isLast(indexPath: objectIndex)
+        let isFirstIndex = (objectIndex.section == 0 && objectIndex.row == 0)
+
+        if isFirstIndex {
+            /// return Date.distantFuture to have the top items, because user may have wrong date on his device.
+            return RangeAPIInfo(date: Date.distantFuture, id: nil)
         }
         
-        return dataSource.object(at: objectIndex)?.sortingDate as Date?
+        if isLastIndex {
+            /// return Date.distantPast to have the bottom items
+            return RangeAPIInfo(date: Date.distantPast, id: nil)
+        }
+        
+        /// check if it's one of missing dates
+        guard object?.monthValue != nil, let sortingDate = object?.sortingDate as Date? else {
+            return RangeAPIInfo(date: Date.distantPast, id: nil)
+        }
+        
+        return RangeAPIInfo(date: sortingDate, id: objectId)
     }
     
+    private func isLast(indexPath: IndexPath) -> Bool {
+        let lastSectionNumber = dataSource.numberOfSections(in: collectionView) - 1
+        let lastRowNumber = dataSource.collectionView(collectionView, numberOfItemsInSection: lastSectionNumber) - 1
+        let lastIndexPath = IndexPath(row: lastRowNumber, section: lastSectionNumber)
+        
+        return indexPath == lastIndexPath
+    }
 }
 
 // MARK: - UICollectionViewDelegate
