@@ -97,8 +97,8 @@ final class ProfileFieldView: UIView {
     
     var isEditState: Bool = false {
         didSet {
-            blockFieldIfNeeded?()
             textField.isUserInteractionEnabled = isEditState
+            blockFieldIfNeeded?()
         }
     }
     
@@ -217,7 +217,8 @@ final class ProfileFieldView: UIView {
             
             let alpha: CGFloat = self.isEditState ? 0.25 : 1
             self.textField.textColor = UIColor.black.withAlphaComponent(alpha)
-
+            self.textField.isUserInteractionEnabled = false
+            
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: { [weak self] in
                 guard let `self` = self else {
                     return
