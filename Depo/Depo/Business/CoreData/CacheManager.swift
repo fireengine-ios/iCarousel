@@ -42,7 +42,7 @@ final class CacheManager {
     }
     
     func actualizeCache(completion: VoidHandler?) {
-        if !isProcessing {
+        if !isProcessing || processingLocalItems || processingRemoteItems {
             CardsManager.default.startOperationWith(type: .preparePhotosQuickScroll)
         }
         
@@ -57,16 +57,24 @@ final class CacheManager {
             if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
                 self.startAppendingAllRemotes(completion: { [weak self] in
                     self?.userDefaultsVars.currentRemotesPage = 0
-                    debugPrint("!!!! all REMOTES are in DB")
                     self?.startAppendingAllLocals(completion: { [weak self] in
-                        self?.isProcessing = false
-                        self?.isCacheActualized = true
+                        guard let `self` = self,
+                            !self.processingLocalItems else {
+                            completion?()
+                            return
+                        }
+                        self.isProcessing = false
+                        self.isCacheActualized = true
                         CardsManager.default.stopOperationWithType(type: .preparePhotosQuickScroll)
-                        self?.delegates.invoke { $0.didCompleteCacheActualization() }
+                        self.delegates.invoke { $0.didCompleteCacheActualization() }
                         completion?()
                     })
                 })
             } else {
+                guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessAppendingLocalFiles flag in MediaItemsOperationService insertFromGallery method
+                    completion?()
+                    return
+                }
                 self.startAppendingAllLocals(completion: { [weak self] in
                     self?.isProcessing = false
                     self?.isCacheActualized = true
@@ -80,7 +88,6 @@ final class CacheManager {
     
     private func startAppendingAllRemotes(completion: @escaping VoidHandler) {
         /// we save remotes everytime, no metter if acces to PH libriary denied
-        debugPrint("!!!! LAST stored PAGE \(userDefaultsVars.currentRemotesPage)")
             photoVideoService.currentPage = userDefaultsVars.currentRemotesPage
             guard !self.processingRemoteItems else {
                 return
@@ -103,8 +110,6 @@ final class CacheManager {
             }
             self.userDefaultsVars.currentRemotesPage = self.photoVideoService.currentPage
             
-            debugPrint("!!!! current API PAGE \(self.photoVideoService.currentPage)")
-            
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
                 if remoteItems.count < CacheManager.pageSize {
                     self?.photoVideoService.currentPage = 0
@@ -117,14 +122,12 @@ final class CacheManager {
             
         }) { [weak self] in
             guard let `self` = self else {
-                debugPrint("!!!! self does not exist")
                 completion()
                 return
             }
             guard self.processingRemoteItems else {
                 return
             }
-            debugPrint("!!!! remotes request failed")
             ///start subscribing
             self.checkInternetConnection { [weak self] in
                 self?.addNextRemoteItemsPage(completion: completion)
@@ -142,7 +145,6 @@ final class CacheManager {
             }
             return
         }
-        debugPrint("!!!! internet IS BACKK!!")
         iternetConnectionBackCallback()
     }
     
@@ -167,10 +169,10 @@ final class CacheManager {
         }
     }
     
-    func stopActualizeCache() {
+    func stopRemotesActualizeCache() {
         processingRemoteItems = false
 //        processingLocalItems = false//still need to test what would ahppen in parallel downlaod
-        isProcessing = false
+//        isProcessing = false
         isCacheActualized = false
         photoVideoService.stopAllOperations() //Dont know if it actualy affects opration by cancell all
         ///unsubscribe
@@ -182,7 +184,6 @@ final class CacheManager {
     func dropAllRemotes(completion: VoidHandler?) {
         userDefaultsVars.currentRemotesPage = 0
         processingRemoteItems = false
-        isProcessing = false
         isCacheActualized = false
         MediaItemOperationsService.shared.deleteRemoteEntities { _ in
             completion?()
