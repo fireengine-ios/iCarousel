@@ -970,3 +970,6 @@
 "enter_your_old_password" = "Enter your old password";
 "enter_your_new_password" = "Enter your new password";
 "enter_your_repeat_password" = "Re-enter your new password";
+"user_profile_day_placeholder" = "DD";
+"user_profile_month_placeholder" = "MM";
+"user_profile_year_placeholder" = "YYYY";

@@ -869,8 +869,8 @@
 "delete_duplicated_contacts" = "Удалить дубликаты контактов в вашей телефонной книге";
 "leave_middle_membership" = "Оставить подписку Стандарт+";
 "leave_middle_turkcell" = "Чтобы отменить ваш пакет, пожалуйста, отправьте СМС на 2200 с текстом IPTAL LIFEBOX STANDART+";
-"package_FWI_cancel_text" = "";
-"package_jamaica_cancel_text" = "";
+"package_FWI_cancel_text" = "Вы можете отменить подписку Digicel через приложение My Digicel, представителя обслуживания или в магазине";
+"package_jamaica_cancel_text" = "Вы можете отменить подписку Digicel через приложение My Digicel, представителя обслуживания или в магазине";
 "feature_digicell_cancel_text" = "Вы можете продолжать использовать функции Премиум пользователя, поскольку вы являетесь абонентом Digicell";
 "terms_and_use_etk_checkbox" = "Я хотел бы получать коммерческие электронные сообщения, чтобы получать уведомления о выгодных продуктах и услугах компаний Turkcell и Группы компаний в соответствии с Законом номер 6563 и другими соответствующими законами, пока мной не будет указано иное";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell и Группы компаний";
@@ -924,7 +924,7 @@
 "captcha_answer_placeholder" = "";
 "birthday" = "";
 "user_profile_turkcell_gsm_alert" = "";
-"user_profile_birthday_placeholder" = "";
+"user_profile_birthday_placeholder" = "ДД ММ ГГГГ";
 "send_link" = "";
 "reset_password" = "";
 "you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "";
@@ -954,6 +954,9 @@
 "support_form_subject_5" = "";
 "support_form_subject_6" = "";
 "support_form_subject_7" = "";
-"enter_your_old_password" = "";
-"enter_your_new_password" = "";
-"enter_your_repeat_password" = "";
+"enter_your_old_password" = "Введите старый пароль";
+"enter_your_new_password" = "Введите новый пароль";
+"enter_your_repeat_password" = "Введите новый пароль еще раз";
+"user_profile_day_placeholder" = "";
+"user_profile_month_placeholder" = "";
+"user_profile_year_placeholder" = "";

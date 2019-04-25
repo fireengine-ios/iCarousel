@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserProfileViewController" customModule="lifebox" customModuleProvider="target">
             <connections>
-                <outlet property="birthdayDetailView" destination="cwO-vl-dbK" id="gCQ-Sg-L1z"/>
+                <outlet property="birthdayDetailView" destination="cwO-vl-dbK" id="qk5-cb-Jnw"/>
                 <outlet property="changePasswordButton" destination="Dsc-fh-tOn" id="PK0-31-Bto"/>
                 <outlet property="emailDetailView" destination="eoW-oX-wHG" id="71Z-hr-osB"/>
                 <outlet property="gsmDetailView" destination="o82-7l-zhk" id="DKw-UT-gW9"/>
@@ -54,7 +54,7 @@
                                             <rect key="frame" x="0.0" y="246" width="335" height="50"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cwO-vl-dbK" customClass="ProfileFieldView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cwO-vl-dbK" customClass="ProfileBirthdayFieldView" customModule="lifebox" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="320" width="335" height="50"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>

@@ -861,8 +861,8 @@
 "delete_duplicated_contacts" = "Eliminar los contactos repetidos en su guía telefónica.";
 "leave_middle_membership" = "Terminar la membresía Estándar+";
 "leave_middle_turkcell" = "Para cancelar el paquete por favor escribir CANCELACIÓN LIFEBOX ESTÁNDAR+ y enviarlo a 2200.";
-"package_FWI_cancel_text" = "";
-"package_jamaica_cancel_text" = "";
+"package_FWI_cancel_text" = "Puede cancelar o administrar su suscripción a Digicel desde la aplicación My Digicel, Atención al cliente o En la tienda";
+"package_jamaica_cancel_text" = "Puede cancelar o administrar su suscripción a Digicel desde la aplicación My Digicel, Atención al cliente o En la tienda";
 "feature_digicell_cancel_text" = "Ya que eres el usuario de Digicell puede seguir utilizando gratuito las características Premium.";
 "terms_and_use_etk_checkbox" = "Acepto recibir mensajes de correo electrónico comercial acerca de las propuestas de productos y servicios ventajosos de Turkcell y las Compañias del Grupo de conformidad con la Ley 6563 y demás legislación pertinente, hasta que haya dicho lo contrario";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell y las Compañias del Grupo";
@@ -921,7 +921,7 @@
 "captcha_answer_placeholder" = "";
 "birthday" = "";
 "user_profile_turkcell_gsm_alert" = "";
-"user_profile_birthday_placeholder" = "";
+"user_profile_birthday_placeholder" = "DD MM AAAA";
 "send_link" = "";
 "reset_password" = "";
 "you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "";
@@ -951,6 +951,9 @@
 "support_form_subject_5" = "";
 "support_form_subject_6" = "";
 "support_form_subject_7" = "";
-"enter_your_old_password" = "";
-"enter_your_new_password" = "";
-"enter_your_repeat_password" = "";
+"enter_your_old_password" = "Ingrese su contraseña anterior";
+"enter_your_new_password" = "Introduzca su nueva contraseña";
+"enter_your_repeat_password" = "Vuelve a ingresar tu nueva contraseña";
+"user_profile_day_placeholder" = "";
+"user_profile_month_placeholder" = "";
+"user_profile_year_placeholder" = "";
