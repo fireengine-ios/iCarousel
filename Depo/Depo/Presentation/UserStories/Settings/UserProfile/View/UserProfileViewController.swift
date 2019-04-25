@@ -20,7 +20,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     @IBOutlet private weak var surnameDetailView: ProfileFieldView!
     @IBOutlet private weak var emailDetailView: ProfileFieldView!
     @IBOutlet private weak var gsmDetailView: ProfileFieldView!
-    @IBOutlet private weak var birthdayDetailView: ProfileFieldView!
+    @IBOutlet private weak var birthdayDetailView: ProfileBirthdayFieldView!
     @IBOutlet private weak var passwordDetailView: ProfileFieldView!
     
     @IBOutlet private weak var changePasswordButton: UIButton!
@@ -119,7 +119,6 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
             birthdayDetailView : gsmDetailView
         
         gsmDetailView.setupAsTurkcellGSMIfNeeded()
-        birthdayDetailView.setupAsBirthday()
         passwordDetailView.setupAsPassword()
         emailDetailView.setupAsEmail()
     }

@@ -29,6 +29,8 @@
 		161684F8B98A4DD3AC164E2F /* Pods_LifeboxShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */; };
 		17035BAB226DABE000FE7362 /* ProfileFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */; };
 		17035BAC226DABE000FE7362 /* ProfileFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */; };
+		17052DEE2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
+		17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
 		17E9B7122250AF6C00C0FE70 /* MediaUsageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */; };
 		17E9B7132251E5A300C0FE70 /* MediaUsageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */; };
 		1C8FDD0A3C795F7711BC5822 /* FeedbackViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFFF80AD607CB90108A1537 /* FeedbackViewRouterInput.swift */; };
@@ -3966,6 +3968,7 @@
 		14DC6D877F96EAC0DCE038CA /* SyncContactsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SyncContactsViewController.swift; sourceTree = "<group>"; };
 		16AA59CD6753DDEFC61D0212 /* FeedbackViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInput.swift; sourceTree = "<group>"; };
 		17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFieldView.swift; sourceTree = "<group>"; };
+		17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBirthdayFieldView.swift; sourceTree = "<group>"; };
 		17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUsageInfoView.swift; sourceTree = "<group>"; };
 		1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouter.swift; sourceTree = "<group>"; };
 		1AB80F562E2E268C766082D5 /* SettingsInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInitializer.swift; sourceTree = "<group>"; };
@@ -6448,6 +6451,7 @@
 			isa = PBXGroup;
 			children = (
 				17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */,
+				17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -15307,6 +15311,7 @@
 				8CDB21EB20AC10B100739700 /* DispatchQueue+Main.swift in Sources */,
 				8C0E8C6D1FDEBDFF00789C91 /* PasscodeSettingsPresenter.swift in Sources */,
 				8C0E8C6E1FDEBDFF00789C91 /* Router.swift in Sources */,
+				17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */,
 				C62239B2204973830043ED44 /* ItemSyncOperation.swift in Sources */,
 				8C0B91B320170F5B00A5BA81 /* ContactSyncParametrs.swift in Sources */,
 				8C0E8C701FDEBDFF00789C91 /* ValidationResults.swift in Sources */,
@@ -17129,6 +17134,7 @@
 				8C06AC1220066641003D8E05 /* TurkcellSecurityPresenter.swift in Sources */,
 				EF1B60461FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift in Sources */,
 				7859298D20060E7D003F8AB3 /* ManageContactsViewController.swift in Sources */,
+				17052DEE2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */,
 				B53DCDC220E3A75400400DBA /* WKWebView+Extensions.swift in Sources */,
 				CE51ACF11EF90853005DCEE0 /* PhoneVereficationInteractor.swift in Sources */,
 				D47864001F3F30BD00EFDC6D /* RoundedProgressView.swift in Sources */,
