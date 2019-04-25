@@ -21,7 +21,7 @@ class ProfileFieldView: UIView {
         return newValue
     }()
     
-    internal let textField: UITextField = {
+    let textField: UITextField = {
         let newValue = UITextField()
         
         newValue.textColor = UIColor.black
@@ -48,7 +48,7 @@ class ProfileFieldView: UIView {
         return newValue
     }()
     
-    internal let textFieldStackView: UIStackView = {
+    let textFieldStackView: UIStackView = {
         let newValue = UIStackView()
         
         newValue.spacing = 1
@@ -59,9 +59,9 @@ class ProfileFieldView: UIView {
         return newValue
     }()
     
-    internal let underlineLayer = CALayer()
-    internal let underlineHeight: CGFloat = 0.5
-    internal let stackViewTopOffset: CGFloat = 4
+    let underlineLayer = CALayer()
+    let underlineHeight: CGFloat = 0.5
+    let stackViewTopOffset: CGFloat = 4
     
     private var blockFieldIfNeeded: (() -> ())?
     private var stackViewTopConstraint: NSLayoutConstraint?
@@ -113,7 +113,7 @@ class ProfileFieldView: UIView {
     }
     
     //MARK: Utility Methods (private)
-    internal func setup() {
+    func setup() {
         setupViews()
         setupUnderline()
         textField.isUserInteractionEnabled = false

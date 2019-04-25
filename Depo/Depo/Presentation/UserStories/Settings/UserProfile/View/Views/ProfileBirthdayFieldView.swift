@@ -60,6 +60,8 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let twoDigitsUnderlineWidth: CGFloat = 30
     private let underlineOffset: CGFloat = 16
     
+    private lazy var dateFormatter = DateFormatter()
+    
     override var editableText: String? {
         get {
             return String(format: "%@ %@ %@",
@@ -155,7 +157,6 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     }
     
     @objc private func dateDidChanged(_ datePicker: UIDatePicker) {
-        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MM YYYY"
         
         let dateString = dateFormatter.string(from: datePicker.date)
