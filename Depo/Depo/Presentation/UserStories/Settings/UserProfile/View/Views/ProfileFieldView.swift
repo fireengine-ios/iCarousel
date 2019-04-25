@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ProfileFieldView: UIView {
+class ProfileFieldView: UIView {
     
     //MARK: Vars (private)
     private let descriptionLabel: UILabel = {
@@ -21,7 +21,7 @@ final class ProfileFieldView: UIView {
         return newValue
     }()
     
-    private let textField: UITextField = {
+    let textField: UITextField = {
         let newValue = UITextField()
         
         newValue.textColor = UIColor.black
@@ -47,45 +47,21 @@ final class ProfileFieldView: UIView {
 
         return newValue
     }()
-
-    private lazy var datePicker: UIDatePicker = {
-        let datePicker = UIDatePicker()
-        datePicker.addTarget(self, action: #selector(dateDidChanged), for: .valueChanged)
-        datePicker.maximumDate = Date()
-        datePicker.datePickerMode = .date
-        datePicker.isOpaque = true
-
-        return datePicker
+    
+    let textFieldStackView: UIStackView = {
+        let newValue = UIStackView()
+        
+        newValue.spacing = 1
+        newValue.axis = .horizontal
+        newValue.alignment = .fill
+        newValue.distribution = .fill
+        
+        return newValue
     }()
     
-    private lazy var toolbar: UIToolbar = {
-        let toolbar = UIToolbar()
-        toolbar.barStyle = .default
-        toolbar.isTranslucent = true
-        toolbar.isOpaque = true
-        
-        toolbar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 50)
-        toolbar.sizeToFit()
-        
-        let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-                                   target: nil,
-                                   action: nil)
-        
-        ///for now it's last editable field
-        let done = UIBarButtonItem(barButtonSystemItem: .done,
-                                   target: self,
-                                   action: #selector(resignFirstResponder))
-        done.tintColor = UIColor.lrTealish
-        
-        toolbar.setItems([flex, done], animated: false)
-        
-        return toolbar
-    }()
-    
-    private let underlineLayer = CALayer()
-    private let underlineHeight: CGFloat = 0.5
-    
-    private let stackViewTopOffset: CGFloat = 4
+    let underlineLayer = CALayer()
+    let underlineHeight: CGFloat = 0.5
+    let stackViewTopOffset: CGFloat = 4
     
     private var blockFieldIfNeeded: (() -> ())?
     private var stackViewTopConstraint: NSLayoutConstraint?
@@ -137,17 +113,18 @@ final class ProfileFieldView: UIView {
     }
     
     //MARK: Utility Methods (private)
-    private func setup() {
+    func setup() {
         setupViews()
         setupUnderline()
         textField.isUserInteractionEnabled = false
     }
     
     private func setupViews() {
+        addSubview(textFieldStackView)
         addSubview(descriptionLabel)
         addSubview(alertLabel)
         addSubview(textField)
-        
+
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         descriptionLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -160,8 +137,10 @@ final class ProfileFieldView: UIView {
         stackView.isOpaque = true
         addSubview(stackView)
         
+        textFieldStackView.addArrangedSubview(textField)
+
         stackView.addArrangedSubview(alertLabel)
-        stackView.addArrangedSubview(textField)
+        stackView.addArrangedSubview(textFieldStackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -179,14 +158,6 @@ final class ProfileFieldView: UIView {
         underlineLayer.backgroundColor = ColorConstants.lightGrayColor.cgColor
     }
     
-    @objc private func dateDidChanged(_ datePicker: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MM YYYY"
-        
-        let dateString = dateFormatter.string(from: datePicker.date)
-        textField.text = dateString
-    }
-    
     //MARK: Utility Methods (public)
     func configure(with text: String?, delegate: UITextFieldDelegate) {
         textField.text = text
@@ -197,12 +168,6 @@ final class ProfileFieldView: UIView {
         title = TextConstants.userProfilePassword
         textField.text = "* * * * * * * * *"
         textField.isUserInteractionEnabled = false
-    }
-    
-    func setupAsBirthday() {
-        textField.inputView = datePicker
-        textField.inputAccessoryView = toolbar
-        textField.placeholder = TextConstants.userProfileBirthdayPlaceholder
     }
     
     func setupAsTurkcellGSMIfNeeded() {
