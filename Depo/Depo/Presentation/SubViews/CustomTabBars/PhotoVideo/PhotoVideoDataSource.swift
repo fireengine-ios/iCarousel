@@ -139,15 +139,17 @@ final class PhotoVideoDataSource: NSObject {
     }
     
     private func convertFetchedObjects(_ completion: WrapObjectsCallBack? = nil) {
-        let ids = lastFetchedObjects?.map { $0.idValue } ?? []
-        MediaItemOperationsService.shared.mediaItemsByIDs(ids: ids) { [weak self] items in
-            guard let `self` = self else {
-                return
+        DispatchQueue.toBackground { [weak self] in
+            let ids = self?.lastFetchedObjects?.map { $0.idValue } ?? []
+            MediaItemOperationsService.shared.mediaItemsByIDs(ids: ids) { [weak self] items in
+                guard let `self` = self else {
+                    return
+                }
+                let wrapedObjects: [WrapData] = items.compactMap { WrapData(mediaItem: $0) }
+                completion?(wrapedObjects)
+                self.lastWrapedObjects.removeAll()
+                self.lastWrapedObjects.append(wrapedObjects)
             }
-            let wrapedObjects: [WrapData] = items.compactMap { WrapData(mediaItem: $0) }
-            completion?(wrapedObjects)
-            self.lastWrapedObjects.removeAll()
-            self.lastWrapedObjects.append(wrapedObjects)
         }
     }
 }
