@@ -275,6 +275,13 @@ final class MediaItemOperationsService {
     
     // MARK: MediaItem
     
+    func mediaItemsByIDs(ids: [Int64],
+                         context: NSManagedObjectContext = CoreDataStack.default.newChildBackgroundContext,
+                         mediaItemsCallBack: @escaping MediaItemsCallBack) {
+        let predicate = NSPredicate(format: "idValue IN %@", ids)
+        executeSortedRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
+    }
+
     func mediaItemByLocalID(trimmedLocalIDS: [String],
                             context: NSManagedObjectContext = CoreDataStack.default.newChildBackgroundContext,
                             mediaItemsCallBack: @escaping MediaItemsCallBack) {

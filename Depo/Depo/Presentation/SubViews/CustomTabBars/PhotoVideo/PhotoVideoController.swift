@@ -182,7 +182,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         canShowDetail = false
         trackClickOnPhotoOrVideo(isPhoto: true)
 
-        let fromCache = dataSource.getWrapedFetchedObjects { [weak self] items in
+        dataSource.getWrapedFetchedObjects { [weak self] items in
             guard let currentMediaItem = self?.dataSource.object(at: indexPath) else {
                 self?.canShowDetail = true
                 self?.hideSpinner()
@@ -198,10 +198,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 router.presentViewController(controller: nController)
                 self?.canShowDetail = true
             }
-        }
-        
-        if fromCache {
-            showSpinner()
         }
     }
     
@@ -716,5 +712,9 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
                                                   cellHeight: self.collectionViewManager.collectionViewLayout.itemSize.height,
                                                   numberOfColumns: Int(self.collectionViewManager.collectionViewLayout.columns))
         }
+    }
+    
+    func convertFetchedObjectsDidStart() {
+        showSpinner()
     }
 }

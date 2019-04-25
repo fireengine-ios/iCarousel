@@ -12,6 +12,7 @@ protocol PhotoVideoDataSourceDelegate: class {
     func selectedModeDidChange(_ selectingMode: Bool)
     func fetchPredicateCreated()
     func contentDidChange(_ fetchedObjects: [MediaItem])
+    func convertFetchedObjectsDidStart()
 }
 
 // TODO: selectedIndexPaths NSFetchedResultsController changes
@@ -128,22 +129,22 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    func getWrapedFetchedObjects(completion: @escaping WrapObjectsCallBack) -> Bool {
+    func getWrapedFetchedObjects(completion: @escaping WrapObjectsCallBack) {
         if !lastWrapedObjects.isEmpty {
             completion(lastWrapedObjects.getArray())
-            return true
         } else {
+            delegate?.convertFetchedObjectsDidStart()
             convertFetchedObjects(completion)
-            return false
         }
     }
     
     private func convertFetchedObjects(_ completion: WrapObjectsCallBack? = nil) {
-        DispatchQueue.toBackground { [weak self] in
+        let ids = lastFetchedObjects?.map { $0.idValue } ?? []
+        MediaItemOperationsService.shared.mediaItemsByIDs(ids: ids) { [weak self] items in
             guard let `self` = self else {
                 return
             }
-            let wrapedObjects: [WrapData] = self.lastFetchedObjects?.compactMap { WrapData(mediaItem: $0) } ?? []
+            let wrapedObjects: [WrapData] = items.compactMap { WrapData(mediaItem: $0) }
             completion?(wrapedObjects)
             self.lastWrapedObjects.removeAll()
             self.lastWrapedObjects.append(wrapedObjects)
