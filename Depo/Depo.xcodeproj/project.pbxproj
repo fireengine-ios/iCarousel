@@ -2425,6 +2425,7 @@
 		8CB478AF20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB478AD20F73CAF003AB0C8 /* CaptchaSignUpRequrementResponse.swift */; };
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
 		8CB780631F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780621F700B84003410A2 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift */; };
+		8CB83F68227192700020B6D4 /* CaptchaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E992268A025005A4214 /* CaptchaView.xib */; };
 		8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */; };
 		8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
 		8CCA070520C4412800558AB0 /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
@@ -13967,6 +13968,7 @@
 				8C06B0D32008AD71003D8E05 /* sample_green@3x.png in Resources */,
 				8C06B0912008AD71003D8E05 /* paylas_whatsapp@2x.png in Resources */,
 				8C06AF1B2008AD70003D8E05 /* cizgi_1_selected.png in Resources */,
+				8CB83F68227192700020B6D4 /* CaptchaView.xib in Resources */,
 				8C06B0B72008AD71003D8E05 /* rotation.png in Resources */,
 				8C06B0192008AD71003D8E05 /* kup_selected.png in Resources */,
 				8C06AF712008AD70003D8E05 /* duz_siyah.png in Resources */,
