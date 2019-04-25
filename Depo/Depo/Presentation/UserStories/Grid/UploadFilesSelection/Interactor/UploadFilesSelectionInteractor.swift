@@ -89,7 +89,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         }
     }
     
-    private func getAllRelatedItemsFromDataBase(assets: [PHAsset], itemsCallback: @escaping LocalFilesCallBack) {
+    private func getAllRelatedItemsFromDataBase(assets: [PHAsset], itemsCallback: @escaping WrapObjectsCallBack) {
         MediaItemOperationsService.shared.localItemsBy(assets: assets, localItemsCallback: itemsCallback)
     }
     

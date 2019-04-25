@@ -9,7 +9,7 @@
 import Foundation
 import Photos
 
-typealias LocalFilesCallBack = (_ localFiles: [WrapData]) -> Void
+typealias WrapObjectsCallBack = (_ items: [WrapData]) -> Void
 typealias MediaItemsCallBack = (_ mediaItems: [MediaItem]) -> Void
 typealias PhotoAssetsCallback = (_ assets: [PHAsset]) -> Void
 typealias AppendingLocaclItemsFinishCallback = () -> Void
@@ -98,7 +98,7 @@ final class MediaItemOperationsService {
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: localItems)
     }
     
-    func getLocalDuplicates(remoteItems: [Item], duplicatesCallBack: @escaping LocalFilesCallBack) {
+    func getLocalDuplicates(remoteItems: [Item], duplicatesCallBack: @escaping WrapObjectsCallBack) {
         getLocalDuplicates { localItems in
             var array = [WrapData]()
             let uuids = Set(remoteItems.map {$0.getTrimmedLocalID()})
@@ -718,7 +718,7 @@ final class MediaItemOperationsService {
         return batchDeleteRequest
     }
     
-    func allLocalItems(localItems: @escaping LocalFilesCallBack) {
+    func allLocalItems(localItems: @escaping WrapObjectsCallBack) {
         let context = CoreDataStack.default.newChildBackgroundContext
         let predicate = NSPredicate(format: "localFileID != nil")
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
@@ -726,7 +726,7 @@ final class MediaItemOperationsService {
         })
     }
     
-    func localItemsBy(assets: [PHAsset], localItemsCallback: @escaping LocalFilesCallBack) {
+    func localItemsBy(assets: [PHAsset], localItemsCallback: @escaping WrapObjectsCallBack) {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             localItemsCallback([])
             return
@@ -753,7 +753,7 @@ final class MediaItemOperationsService {
         }
     }
     
-    func allLocalItems(with assets: [PHAsset], localItemsCallback: @escaping LocalFilesCallBack) {
+    func allLocalItems(with assets: [PHAsset], localItemsCallback: @escaping WrapObjectsCallBack) {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             localItemsCallback([])
             return
@@ -786,7 +786,7 @@ final class MediaItemOperationsService {
 
     }
     
-    func allLocalItems(trimmedLocalIds: [String], localItemsCallBack: @escaping LocalFilesCallBack) {
+    func allLocalItems(trimmedLocalIds: [String], localItemsCallBack: @escaping WrapObjectsCallBack) {
         let context = CoreDataStack.default.newChildBackgroundContext
         let predicate = NSPredicate(format: "(trimmedLocalFileID != nil) AND (trimmedLocalFileID IN %@ AND isLocalItemValue == true)", trimmedLocalIds)
         executeRequest(predicate: predicate, context: context) { mediaItems in
@@ -802,7 +802,7 @@ final class MediaItemOperationsService {
         
     }
     
-    func allLocalItemsForSync(video: Bool, image: Bool, completion: @escaping (_ items: [WrapData]) -> Void) {
+    func allLocalItemsForSync(video: Bool, image: Bool, completion: @escaping WrapObjectsCallBack) {
         getUnsyncedMediaItems(video: video, image: image, completion: { items in
             let wrappedItems = items
                 .filter { $0.fileSizeValue < NumericConstants.fourGigabytes }
@@ -854,7 +854,7 @@ final class MediaItemOperationsService {
         }
     }
     
-    private func checkRemoteItemsExistence(wrapData: [WrapData], completion: @escaping (_ filteredItems: [WrapData])->Void) {
+    private func checkRemoteItemsExistence(wrapData: [WrapData], completion: @escaping WrapObjectsCallBack) {
         CoreDataStack.default.performBackgroundTask { [weak self] context in
             guard let `self` = self else {
                 return

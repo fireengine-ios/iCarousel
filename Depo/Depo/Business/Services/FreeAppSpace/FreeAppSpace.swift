@@ -37,7 +37,7 @@ final class FreeAppSpace: NSObject {
         return duplicatesArray.getArray()
     }
     
-    func getDuplicatesItems(_ localItemsCallback: @escaping LocalFilesCallBack) {
+    func getDuplicatesItems(_ localItemsCallback: @escaping WrapObjectsCallBack) {
         if duplicatesArray.isEmpty {
             MediaItemOperationsService.shared.getLocalDuplicates { localItems in
                 localItemsCallback(localItems.map { WrapData(mediaItem: $0)} )

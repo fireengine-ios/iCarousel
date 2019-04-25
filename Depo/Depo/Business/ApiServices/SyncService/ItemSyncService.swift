@@ -224,6 +224,6 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     // MARK: - Override me
     
-    func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {}
+    func itemsSortedToUpload(completion: @escaping WrapObjectsCallBack) {}
 
 }

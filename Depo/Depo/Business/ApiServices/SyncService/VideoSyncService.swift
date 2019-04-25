@@ -22,7 +22,7 @@ final class VideoSyncService: ItemSyncServiceImpl {
         self.getUnsyncedOperationQueue.maxConcurrentOperationCount = 1
     }
 
-    override func itemsSortedToUpload(completion: @escaping (_ items: [WrapData]) -> Void) {
+    override func itemsSortedToUpload(completion: @escaping WrapObjectsCallBack) {
         MediaItemOperationsService.shared.allLocalItemsForSync(video: true, image: false) { items in
             ///reversed video sync interruption fix
             //            let isMobileData = ReachabilityService().isReachableViaWWAN

@@ -46,7 +46,7 @@ final class PhotoVideoDataSource: NSObject {
         } ?? []
     }
     
-//    var lastFetchedObjects: [WrapData]?
+    private var lastWrapedObjects = SynchronizedArray<WrapData>()
     var lastFetchedObjects: [MediaItem]?
     
     private var firstVisibleItem: MediaItem?
@@ -128,14 +128,25 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    func getWrapedFetchedObjects(completion: @escaping (_ items: [WrapData])->Void) {
+    func getWrapedFetchedObjects(completion: @escaping WrapObjectsCallBack) -> Bool {
+        if !lastWrapedObjects.isEmpty {
+            completion(lastWrapedObjects.getArray())
+            return true
+        } else {
+            convertFetchedObjects(completion)
+            return false
+        }
+    }
+    
+    private func convertFetchedObjects(_ completion: WrapObjectsCallBack? = nil) {
         DispatchQueue.toBackground { [weak self] in
             guard let `self` = self else {
                 return
             }
             let wrapedObjects: [WrapData] = self.lastFetchedObjects?.compactMap { WrapData(mediaItem: $0) } ?? []
-            completion(wrapedObjects)
-            
+            completion?(wrapedObjects)
+            self.lastWrapedObjects.removeAll()
+            self.lastWrapedObjects.append(wrapedObjects)
         }
     }
 }
@@ -166,6 +177,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         sectionChanges.removeAll()
         objectChanges.removeAll()
+        lastWrapedObjects.removeAll()
         
         saveOffset()
     }
@@ -270,6 +282,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         thresholdService.execute { [weak self] in
             self?.lastFetchedObjects = self?.fetchedOriginalObjects
             self?.delegate?.contentDidChange(self?.fetchedOriginalObjects ?? [])
+            self?.convertFetchedObjects()
         }
     }
     
