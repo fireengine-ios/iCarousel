@@ -60,7 +60,13 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let twoDigitsUnderlineWidth: CGFloat = 30
     private let underlineOffset: CGFloat = 16
     
-    private lazy var dateFormatter = DateFormatter()
+    private lazy var dateFormatter: DateFormatter = {
+        let newValue = DateFormatter()
+        
+        newValue.dateFormat = "dd MM YYYY"
+
+        return newValue
+    }()
     
     override var editableText: String? {
         get {
@@ -76,18 +82,10 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
             }
             
             let numbers = newValue.components(separatedBy: " ")
-            switch numbers.count {
-            case 1:
-                textField.text = numbers[0]
-            case 2:
-                textField.text = numbers[0]
-                monthTextField.text = numbers[1]
-            case 3:
+            if numbers.count == 3 {
                 textField.text = numbers[0]
                 monthTextField.text = numbers[1]
                 yearTextField.text = numbers[2]
-            default:
-                break
             }
         }
     }
@@ -157,10 +155,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     }
     
     @objc private func dateDidChanged(_ datePicker: UIDatePicker) {
-        dateFormatter.dateFormat = "dd MM YYYY"
-        
-        let dateString = dateFormatter.string(from: datePicker.date)
-        editableText = dateString
+        editableText = dateFormatter.string(from: datePicker.date)
     }
     
     @discardableResult
