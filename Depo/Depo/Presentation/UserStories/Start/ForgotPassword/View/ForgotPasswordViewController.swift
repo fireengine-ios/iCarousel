@@ -76,7 +76,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         subTitle.isHidden = false
         
         if Locale.current.languageCode == "en" || Locale.current.languageCode == "tr" {
-            subTitle.text = TextConstants.resetPasswordSubTitle
+            subTitle.text = String(format: "%@ \n \n %@", TextConstants.forgotPasswordSubTitle, TextConstants.resetPasswordSubTitle)
         } else {
             subTitle.text = ""
         }
@@ -134,8 +134,6 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         emailTextField.textColor = UIColor.black
         emailTextField.font = font
         emailTextField.delegate = self
-        
-        emailTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     private func setupButton() {
@@ -144,29 +142,11 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         sendPasswordButton.backgroundColor = UIColor.lrTealishTwo
         sendPasswordButton.setTitleColor(ColorConstants.whiteColor, for: UIControlState.normal)
         sendPasswordButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        
-        updateButtonState()
     }
     
     private func setupCaptchaView() {
         captchaView.captchaAnswerTextField.placeholder = TextConstants.resetPasswordCaptchaPlaceholder
         captchaView.captchaAnswerTextField.delegate = self
-    }
-    
-    @objc private func textFieldDidChange(_ textField: UITextField) {
-        updateButtonState()
-    }
-    
-    private func updateButtonState() {
-        guard Validator.isValid(email: emailTextField.text),
-            let captchaEntered = captchaView.captchaAnswerTextField.text,
-            !captchaEntered.isEmpty else {
-                sendPasswordButton.isEnabled = false
-                sendPasswordButton.backgroundColor = UIColor.lrTealishTwo.withAlphaComponent(0.5)
-            return
-        }
-        sendPasswordButton.isEnabled = true
-        sendPasswordButton.backgroundColor = UIColor.lrTealishTwo
     }
     
     deinit {
