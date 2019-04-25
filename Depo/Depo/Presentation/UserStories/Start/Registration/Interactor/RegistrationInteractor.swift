@@ -78,9 +78,12 @@ class RegistrationInteractor: RegistrationInteractorInput {
                                     captchaID: captchaID,
                                     captchaAnswer: captchaAnswer)
         
-        authenticationService.signUp(user: signUpUser, sucess: { [weak self] result in
+        authenticationService.signUp(user: signUpUser, sucess: { [weak self] response in
                 DispatchQueue.main.async {
-                    guard let result = result as? SignUpSuccessResponse else {
+                    guard let result = response as? SignUpSuccessResponse else {
+                        let error = CustomErrors.serverError("An error has occurred while register new user")
+                        let errorResponse = ErrorResponse.error(error)
+                        self?.output.signUpFailed(errorResponce: errorResponse)
                         return
                     }
 

@@ -29,10 +29,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                 return
             }
             self.eula = eulaR
-            
-            if self.dataStorage.signUpResponse.eulaId != nil {
-                self.dataStorage.signUpResponse.eulaId = eulaR.id
-            }
+            self.dataStorage.signUpResponse.eulaId = eulaR.id
             
             DispatchQueue.toMain {
                 self.output.showLoadedTermsAndUses(eula: eulaR.content ?? "")

@@ -48,13 +48,13 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     func resendCode() {
-        let verificationProperties = ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken!,
+        let verificationProperties = ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken ?? "",
                                                           eulaId: dataStorage.signUpResponse.eulaId ?? 0,
                                                           processPersonalData: true,
                                                           etkAuth: dataStorage.signUpResponse.etkAuth ?? false)
         attempts = 0
         authenticationService.resendVerificationSMS(resendVerification: verificationProperties,
-                                                    sucess: { [weak self] result in
+                                                    sucess: { [weak self] response in
             DispatchQueue.main.async {
                 self?.output.resendCodeRequestSuccesed()
             }
