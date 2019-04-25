@@ -47,7 +47,11 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     }
     
     func userValid(email: String, phone: String, passpword: String, captchaID: String?, captchaAnswer: String?) {
-        router.termsAndServices(with: view, email: email, phoneNumber: phone)
+        interactor.signUpUser(email: email,
+                              phone: phone,
+                              passpword: passpword,
+                              captchaID: captchaID,
+                              captchaAnswer: captchaAnswer)
     }
     
     func userInvalid(withResult result: [UserValidationResults]) {
@@ -79,6 +83,19 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     
     func signUpFailed(withResult result: String?) {
         completeAsyncOperationEnableScreen(errorMessage: result)
+    }
+    
+    func signUpFailed(errorResponce: ErrorResponse) {
+        completeAsyncOperationEnableScreen()
+        view.showErrorTitle(withText: errorResponce.description)
+    }
+    
+    func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?) {
+        completeAsyncOperationEnableScreen()
+        router.termsAndServices(with: view, email: signUpUserInfo?.mail ?? "",
+                                phoneNumber: signUpUserInfo?.phone ?? "",
+                                signUpResponse: signUpResponse,
+                                userInfo: signUpUserInfo)
     }
     
     func signUpSucces(withResult result: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {

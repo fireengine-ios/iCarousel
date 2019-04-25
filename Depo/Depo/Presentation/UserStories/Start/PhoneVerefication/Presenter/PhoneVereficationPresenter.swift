@@ -20,6 +20,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         view.setupInitialState()
         configure()
         view.setupButtonsInitialState()
+        interactor.resendCode()
     }
     
     func configure() {
@@ -69,7 +70,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
         } else {
             router.presentErrorPopUp(with: TextConstants.phoneVereficationResendRequestFailedErrorText)
         }
-        
+        view.dropTimer()
     }
     
     func resendCodeRequestSuccesed() {

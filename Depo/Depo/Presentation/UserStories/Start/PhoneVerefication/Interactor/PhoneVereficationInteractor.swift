@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class PhoneVereficationInteractor: PhoneVereficationInteractorInput {    
+class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     lazy var analyticsService: AnalyticsService = factory.resolve()
@@ -48,8 +48,13 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     func resendCode() {
+        let verificationProperties = ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken!,
+                                                          eulaId: dataStorage.signUpResponse.eulaId ?? 0,
+                                                          processPersonalData: true,
+                                                          etkAuth: dataStorage.signUpResponse.etkAuth ?? false)
         attempts = 0
-        authenticationService.resendVerificationSMS(resendVerification: ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken!), sucess: { [weak self] _ in
+        authenticationService.resendVerificationSMS(resendVerification: verificationProperties,
+                                                    sucess: { [weak self] result in
             DispatchQueue.main.async {
                 self?.output.resendCodeRequestSuccesed()
             }
@@ -61,11 +66,9 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     }
     
     func verifyCode(code: String) {
-        let signUpProperties = SignUpUserPhoveVerification(
-            token: dataStorage.signUpResponse.referenceToken ?? "",
-            otp: code,
-            processPersonalData: true,
-            etkAuth: dataStorage.signUpResponse.etkAuth)
+        let signUpProperties = SignUpUserPhoveVerification(token: dataStorage.signUpResponse.referenceToken ?? "",
+                                                           otp: code)
+        
         authenticationService.verificationPhoneNumber(phoveVerification: signUpProperties, sucess: { [weak self] baseResponse in
             
             if let response = baseResponse as? ObjectRequestResponse,

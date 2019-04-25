@@ -25,12 +25,17 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     func loadTermsAndUses() {
         eulaService.eulaGet(sucess: { [weak self] eula in
-            guard let eulaR = eula as? Eula else {
+            guard let `self` = self, let eulaR = eula as? Eula else {
                 return
             }
-            self?.eula = eulaR
+            self.eula = eulaR
+            
+            if self.dataStorage.signUpResponse.eulaId != nil {
+                self.dataStorage.signUpResponse.eulaId = eulaR.id
+            }
+            
             DispatchQueue.toMain {
-                self?.output.showLoadedTermsAndUses(eula: eulaR.content ?? "")
+                self.output.showLoadedTermsAndUses(eula: eulaR.content ?? "")
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.toMain {
@@ -63,69 +68,6 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     
     var cameFromLogin: Bool {
         return isFromLogin
-    }
-    
-    func signUpUser() {
-        guard let sigUpInfo = SingletonStorage.shared.signUpInfo,
-            let eulaId = eula?.id
-            else { return }
-        
-        let signUpUser = SignUpUser(phone: sigUpInfo.phone,
-                                    mail: sigUpInfo.mail,
-                                    password: sigUpInfo.password,
-                                    eulaId: eulaId,
-                                    captchaID: sigUpInfo.captchaID,
-                                    captchaAnswer: sigUpInfo.captchaAnswer)
-        
-        authenticationService.signUp(user: signUpUser, sucess: { [weak self] result in
-            DispatchQueue.main.async {
-                guard let t = result as? SignUpSuccessResponse else {
-                    return
-                }
-                self?.dataStorage.signUpResponse = t
-                self?.dataStorage.signUpResponse.etkAuth = self?.etkAuth
-                self?.dataStorage.signUpUserInfo = SingletonStorage.shared.signUpInfo
-                SingletonStorage.shared.referenceToken = t.referenceToken
-                
-                self?.analyticsService.track(event: .signUp)
-                self?.analyticsService.trackSignupEvent()
-                
-                self?.output.signUpSuccessed()
-            }
-        }, fail: { [weak self] errorResponce in
-            DispatchQueue.main.async {
-                if case ErrorResponse.error(let error) = errorResponce,
-                    let statusError = error as? ServerStatusError,
-                    let signUpError = SignupResponseError(with: statusError) {
-                    
-                    self?.analyticsService.trackSignupEvent(error: signUpError)
-                    
-                    if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
-                        self?.output.signupFailedCaptchaRequired()
-                    }
-                } else {
-                    self?.analyticsService.trackSignupEvent(error: .serverError)
-                }
-
-                self?.output.signupFailed(errorResponce: errorResponce)
-            }
-        })
-    }
-    
-    func applyEula() {
-        guard let eula_ = eula, let eulaID = eula_.id else {
-            return
-        }
-        
-        eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, sucess: { [weak self] successResponce in
-            DispatchQueue.main.async {
-                self?.output.eulaApplied()
-            }
-        }, fail: { [weak self] errorResponce in
-            DispatchQueue.main.async {
-                self?.output.applyEulaFaild(errorResponce: errorResponce)
-            }
-        })
     }
     
     func checkEtk() {

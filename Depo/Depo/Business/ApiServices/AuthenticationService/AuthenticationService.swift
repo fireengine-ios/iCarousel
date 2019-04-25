@@ -102,7 +102,7 @@ class SignUpUser: BaseRequestParametrs {
     let phone: String
     let mail: String
     let password: String
-    let eulaId: Int
+    let sendOtp: Bool
     let captchaID: String?
     let captchaAnswer: String?
     
@@ -112,7 +112,7 @@ class SignUpUser: BaseRequestParametrs {
             LbRequestkeys.phoneNumber: phone,
             LbRequestkeys.password: password,
             LbRequestkeys.language: Device.locale,
-            LbRequestkeys.eulaId: eulaId
+            LbRequestkeys.sendOtp: sendOtp
         ]
     }
 
@@ -128,11 +128,11 @@ class SignUpUser: BaseRequestParametrs {
         return URL(string: RouteRequests.signUp, relativeTo: super.patch)!
     }
 
-    init(phone: String, mail: String, password: String, eulaId: Int, captchaID: String? = nil, captchaAnswer: String? = nil) {
+    init(phone: String, mail: String, password: String, sendOtp: Bool, captchaID: String? = nil, captchaAnswer: String? = nil) {
         self.phone = phone
         self.mail = mail
         self.password = password
-        self.eulaId = eulaId
+        self.sendOtp = sendOtp
         self.captchaID = captchaID
         self.captchaAnswer = captchaAnswer
     }
@@ -145,16 +145,10 @@ struct SignUpUserPhoveVerification: RequestParametrs {
     
     let token: String
     let otp: String
-    let processPersonalData: Bool
-    let etkAuth: Bool?
     
     var requestParametrs: Any {
-        var dict: [String: Any] = [LbRequestkeys.referenceToken      : token,
-                                   LbRequestkeys.otp                 : otp,
-                                   LbRequestkeys.processPersonalData : processPersonalData]
-        if let etkAuth = etkAuth {
-            dict[LbRequestkeys.etkAuth] = etkAuth
-        }
+        let dict: [String: Any] = [LbRequestkeys.referenceToken      : token,
+                                   LbRequestkeys.otp                 : otp]
 
         return dict
     }
@@ -242,9 +236,15 @@ struct ResendVerificationSMS: RequestParametrs {
     }
     
     let refreshToken: String
+    let eulaId: Int
+    let processPersonalData: Bool
+    let etkAuth: Bool
     
     var requestParametrs: Any {
-        return [LbRequestkeys.referenceToken : refreshToken]
+        return [LbRequestkeys.referenceToken : refreshToken,
+                LbRequestkeys.eulaId : eulaId,
+                LbRequestkeys.processPersonalData : processPersonalData,
+                LbRequestkeys.etkAuth : etkAuth]
     }
     
     var patch: URL {

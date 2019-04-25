@@ -14,10 +14,7 @@ protocol TermsAndServicesInteractorInput {
     var userInfo: RegistrationUserInfoModel { get }
     var cameFromLogin: Bool { get }
     var etkAuth: Bool?  { get set }
-    
     func loadTermsAndUses()
-    func signUpUser()
-    func applyEula()
     func trackScreen()
     func checkEtk()
 }

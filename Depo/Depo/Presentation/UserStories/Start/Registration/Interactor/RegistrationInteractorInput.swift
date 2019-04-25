@@ -18,5 +18,7 @@ protocol RegistrationInteractorInput {
     
     func checkCaptchaRequerement()
     
+    func signUpUser(email: String, phone: String, passpword: String, captchaID: String?, captchaAnswer: String?)
+    
     func trackScreen()
 }
