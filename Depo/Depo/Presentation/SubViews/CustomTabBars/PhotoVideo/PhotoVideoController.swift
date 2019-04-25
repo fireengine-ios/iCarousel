@@ -182,7 +182,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         canShowDetail = false
         trackClickOnPhotoOrVideo(isPhoto: true)
 
-        showSpinner()
         dataSource.getWrapedFetchedObjects { [weak self] items in
             guard let currentMediaItem = self?.dataSource.object(at: indexPath) else {
                 self?.canShowDetail = true
@@ -713,5 +712,9 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
                                                   cellHeight: self.collectionViewManager.collectionViewLayout.itemSize.height,
                                                   numberOfColumns: Int(self.collectionViewManager.collectionViewLayout.columns))
         }
+    }
+    
+    func convertFetchedObjectsDidStart() {
+        showSpinner()
     }
 }

@@ -41,7 +41,7 @@ final class CellImageManager {
             return instance
         }
         
-        let newInstance = CellImageManager()
+        let newInstance = CellImageManager(with: url)
         instances[url] = newInstance
         return newInstance
     }
@@ -53,10 +53,10 @@ final class CellImageManager {
         }
     }
     
-    
     //MARK: - Instance vars
     
     let uniqueId: String = UUID().uuidString
+    private let key: URL
     
     private lazy var dispatchQueue = CellImageManager.globalDispatchQueue//DispatchQueue(label: "\(uniqueId)")
     private lazy var operationQueue = CellImageManager.globalOperationQueue
@@ -71,6 +71,10 @@ final class CellImageManager {
     
     //MARK: - Interface
     
+    required init(with key: URL) {
+        self.key = key
+    }
+    
     func loadImage(thumbnailUrl: URL?, url: URL?, completionBlock: @escaping CellImageManagerOperationsFinished) {
         dispatchQueue.async { [weak self] in
             self?.isCancelled = false
@@ -80,6 +84,8 @@ final class CellImageManager {
     }
     
     func cancelImageLoading() {
+        CellImageManager.instances.removeValue(forKey: key)
+        
         dispatchQueue.async { [weak self] in
             self?.isCancelled = true
             self?.currentOperation?.cancel()
@@ -134,6 +140,7 @@ final class CellImageManager {
         //DEVELOP let downloadThumbnailOperation = ImageDownloadOperation(url: thumbnail, queue: self.dispatchQueue)
         downloadThumbnailOperation.outputBlock = { [weak self] outputImage in
             guard let outputImage = outputImage as? UIImage else {
+                downloadImage()
                 return
             }
             

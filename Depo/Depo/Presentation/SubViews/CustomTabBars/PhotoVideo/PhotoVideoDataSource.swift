@@ -12,6 +12,7 @@ protocol PhotoVideoDataSourceDelegate: class {
     func selectedModeDidChange(_ selectingMode: Bool)
     func fetchPredicateCreated()
     func contentDidChange(_ fetchedObjects: [MediaItem])
+    func convertFetchedObjectsDidStart()
 }
 
 // TODO: selectedIndexPaths NSFetchedResultsController changes
@@ -46,7 +47,7 @@ final class PhotoVideoDataSource: NSObject {
         } ?? []
     }
     
-//    var lastFetchedObjects: [WrapData]?
+    private var lastWrapedObjects = SynchronizedArray<WrapData>()
     var lastFetchedObjects: [MediaItem]?
     
     private var firstVisibleItem: MediaItem?
@@ -128,14 +129,27 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    func getWrapedFetchedObjects(completion: @escaping (_ items: [WrapData])->Void) {
+    func getWrapedFetchedObjects(completion: @escaping WrapObjectsCallBack) {
+        if !lastWrapedObjects.isEmpty {
+            completion(lastWrapedObjects.getArray())
+        } else {
+            delegate?.convertFetchedObjectsDidStart()
+            convertFetchedObjects(completion)
+        }
+    }
+    
+    private func convertFetchedObjects(_ completion: WrapObjectsCallBack? = nil) {
         DispatchQueue.toBackground { [weak self] in
-            guard let `self` = self else {
-                return
+            let ids = self?.lastFetchedObjects?.map { $0.idValue } ?? []
+            MediaItemOperationsService.shared.mediaItemsByIDs(ids: ids) { [weak self] items in
+                guard let `self` = self else {
+                    return
+                }
+                let wrapedObjects: [WrapData] = items.compactMap { WrapData(mediaItem: $0) }
+                completion?(wrapedObjects)
+                self.lastWrapedObjects.removeAll()
+                self.lastWrapedObjects.append(wrapedObjects)
             }
-            let wrapedObjects: [WrapData] = self.lastFetchedObjects?.compactMap { WrapData(mediaItem: $0) } ?? []
-            completion(wrapedObjects)
-            
         }
     }
 }
@@ -166,6 +180,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         sectionChanges.removeAll()
         objectChanges.removeAll()
+        lastWrapedObjects.removeAll()
         
         saveOffset()
     }
@@ -270,6 +285,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         thresholdService.execute { [weak self] in
             self?.lastFetchedObjects = self?.fetchedOriginalObjects
             self?.delegate?.contentDidChange(self?.fetchedOriginalObjects ?? [])
+            self?.convertFetchedObjects()
         }
     }
     
