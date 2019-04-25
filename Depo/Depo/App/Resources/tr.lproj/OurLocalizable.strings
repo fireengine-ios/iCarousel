@@ -869,8 +869,8 @@
 "delete_duplicated_contacts" = "Rehberindeki tekrarlayan kontakları sil!";
 "leave_middle_membership" = "Standart+ üyeliğini sonlandır";
 "leave_middle_turkcell" = "Paketini iptal etmek için lütfen IPTAL LIFEBOX STANDART+ yazıp 2200’a gönder.";
-"package_FWI_cancel_text" = "";
-"package_jamaica_cancel_text" = "";
+"package_FWI_cancel_text" = "Digicel aboneliğini My Digicel uygulamasından, müşteri hizmetlerinden veya mağazadan iptal edebilir veya yönetebilirsin.";
+"package_jamaica_cancel_text" = "Digicel aboneliğini My Digicel uygulamasından, müşteri hizmetlerinden veya mağazadan iptal edebilir veya yönetebilirsin.";
 "feature_digicell_cancel_text" = "Digicell kullanıcısı olduğun için Premium özelliklerini ücretsiz olarak kullanmaya devam edebilirsin.";
 "terms_and_use_etk_checkbox" = "Turkcell ve Grup Şirketleri’nin avantajlı ürün ve hizmetlerden haberdar olmak için 6563 sayılı Kanun ve diğer ilgili mevzuat uyarınca aksi tarafımca belirtilene kadar ticari elektronik ileti almak istiyorum.";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell ve Grup Şirketleri";
@@ -917,7 +917,7 @@
 "captcha_answer_placeholder" = "Görselde yer alan yazıyı girin.";
 "birthday" = "Doğum Tarihi";
 "user_profile_turkcell_gsm_alert" = "";
-"user_profile_birthday_placeholder" = "";
+"user_profile_birthday_placeholder" = "GG AA YYYY";
 "send_link" = "";
 "reset_password" = "";
 "you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "";
@@ -947,6 +947,9 @@
 "support_form_subject_5" = "";
 "support_form_subject_6" = "";
 "support_form_subject_7" = "";
-"enter_your_old_password" = "";
-"enter_your_new_password" = "";
-"enter_your_repeat_password" = "";
+"enter_your_old_password" = "Eski şifreni gir";
+"enter_your_new_password" = "Yeni şifreni gir";
+"enter_your_repeat_password" = "Yeni şifreni tekrar gir";
+"user_profile_day_placeholder" = "";
+"user_profile_month_placeholder" = "";
+"user_profile_year_placeholder" = "";

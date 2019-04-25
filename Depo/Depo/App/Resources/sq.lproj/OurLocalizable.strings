@@ -900,10 +900,10 @@
 "leave_middle_turkcell" = "Për të anuluar paketën tuaj, ju lutem dërgoni një SMS drejt 2200 me tekst: IPTAL LIFEBOX STANDART+";
 
 /*If this shall be translated, please refer to my version*/
-"package_FWI_cancel_text" = "paketa_FWI_anulim_tekst";
+"package_FWI_cancel_text" = "Ju mund ta anuloni apo menaxhoni abonimin tuaj Digicel nëpërmjet aplikacionit My Digicel, Kujdesit të Klientit apo në dyqan.";
 
 /*If this shall be translated, please refer to my version*/
-"package_jamaica_cancel_text" = "paketa_jamaica_anulim_tekst";
+"package_jamaica_cancel_text" = "Ju mund ta anuloni apo menaxhoni abonimin tuaj Digicel nëpërmjet aplikacionit My Digicel, Kujdesit të Klientit apo në dyqan.";
 
 /*If this shall be translated, please refer to my version*/
 "feature_digicell_cancel_text" = "funksionalitet_digicell_anulim_tekst";
@@ -952,7 +952,7 @@
 "captcha_answer_placeholder" = "";
 "birthday" = "";
 "user_profile_turkcell_gsm_alert" = "";
-"user_profile_birthday_placeholder" = "";
+"user_profile_birthday_placeholder" = "DD MM VVVV";
 "send_link" = "";
 "reset_password" = "";
 "you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "";
@@ -982,6 +982,9 @@
 "support_form_subject_5" = "";
 "support_form_subject_6" = "";
 "support_form_subject_7" = "";
-"enter_your_old_password" = "";
-"enter_your_new_password" = "";
-"enter_your_repeat_password" = "";
+"enter_your_old_password" = "Vendosni fjalëkalimin e vjetër";
+"enter_your_new_password" = "Vendosni fjalëkalimin e ri";
+"enter_your_repeat_password" = "Rivendosni fjalëkalimin e ri";
+"user_profile_day_placeholder" = "";
+"user_profile_month_placeholder" = "";
+"user_profile_year_placeholder" = "";

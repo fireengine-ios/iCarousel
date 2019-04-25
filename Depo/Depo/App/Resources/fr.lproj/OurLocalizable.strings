@@ -1180,7 +1180,7 @@ Please check I have understood the intended command here*/
 "package_space_details" = "\n%1$@ / %2$@ utilisés (uniquement pour l'espace de stockage lifebox)\n";
 "package_renew_date" = "Sera renouvelé le: %@";
 "percentage_used" = "%.0f%% utilisé";
-"used_and_left_space" = "\n%1$@ / %2$@ utilisé\n";
+"used_and_left_space" = "%1$@ / %2$@ utilisé\n";
 "percentage_used_two_lines" = "%.0f%%\nutilisé";
 "my_usage_storage" = "Mon utilisation de data";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Votre localisation sera utilisée pour synchroniser les données";
@@ -1213,7 +1213,7 @@ Please check I have understood the intended command here*/
 "captcha_answer_placeholder" = "";
 "birthday" = "";
 "user_profile_turkcell_gsm_alert" = "";
-"user_profile_birthday_placeholder" = "";
+"user_profile_birthday_placeholder" = "JJ MM AAAA";
 "send_link" = "";
 "reset_password" = "";
 "you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "";
@@ -1243,6 +1243,9 @@ Please check I have understood the intended command here*/
 "support_form_subject_5" = "";
 "support_form_subject_6" = "";
 "support_form_subject_7" = "";
-"enter_your_old_password" = "";
-"enter_your_new_password" = "";
-"enter_your_repeat_password" = "";
+"enter_your_old_password" = "Entrez votre ancien mot de passe";
+"enter_your_new_password" = "Entrez votre nouveau mot de passe";
+"enter_your_repeat_password" = "Ressaisissez votre nouveau mot de passe";
+"user_profile_day_placeholder" = "";
+"user_profile_month_placeholder" = "";
+"user_profile_year_placeholder" = "";

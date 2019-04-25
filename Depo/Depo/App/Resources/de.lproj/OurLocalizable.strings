@@ -861,8 +861,8 @@
 "delete_duplicated_contacts" = "Löschen Sie Ihre wiederholenden Kontakte aus Ihren Kontakten!";
 "leave_middle_membership" = "Beenden Sie Ihre Standartmitgliedschaft";
 "leave_middle_turkcell" = "Um das Paket zu stornieren, schreiben Sie bitte ''IPTAL ‎LİFEBOX STANDARD+'' und senden die Nachricht an 2200.";
-"package_FWI_cancel_text" = "";
-"package_jamaica_cancel_text" = "";
+"package_FWI_cancel_text" = "Sie können Ihr Digicel-Abonnement über die My Digicel App, den Kundenservice oder im Store kündigen oder verwalten.";
+"package_jamaica_cancel_text" = "Sie können Ihr Digicel-Abonnement über die My Digicel App, den Kundenservice oder im Store kündigen oder verwalten.";
 "feature_digicell_cancel_text" = "Da Sie Digicell-Benutzer sind, können Sie die Premium-Funktionen weiterhin kostenlos nutzen.";
 "terms_and_use_etk_checkbox" = "Hiermit erkläre ich mich damit einverstanden, kommerzielle E-Mails zu erhalten, um über vorteilhafte Produkte und Dienstleistungen von Turkcell und seiner Konzerngesellschaften informiert zu werden, sofern und bis ich gemäß Gesetz Nr. 6563 und anderen anwendbaren Gesetzen etwas anderes beantrage.";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell und seiner Konzerngesellschaften informiert";
@@ -909,7 +909,7 @@
 "captcha_answer_placeholder" = "";
 "birthday" = "";
 "user_profile_turkcell_gsm_alert" = "";
-"user_profile_birthday_placeholder" = "";
+"user_profile_birthday_placeholder" = "DD MM JJJJ";
 "send_link" = "";
 "reset_password" = "";
 "you_can_easily_reset_your_password_by_clicking_the_password_reset_link_that_we_will_send_to_your_account_e-mail" = "";
@@ -939,6 +939,9 @@
 "support_form_subject_5" = "";
 "support_form_subject_6" = "";
 "support_form_subject_7" = "";
-"enter_your_old_password" = "";
-"enter_your_new_password" = "";
-"enter_your_repeat_password" = "";
+"enter_your_old_password" = "Geben Sie Ihr altes Passwort ein";
+"enter_your_new_password" = "Gib dein neues Passwort ein";
+"enter_your_repeat_password" = "Geben Sie Ihr neues Passwort erneut ein";
+"user_profile_day_placeholder" = "";
+"user_profile_month_placeholder" = "";
+"user_profile_year_placeholder" = "";
