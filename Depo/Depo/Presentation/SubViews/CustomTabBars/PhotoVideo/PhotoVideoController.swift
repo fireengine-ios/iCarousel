@@ -563,9 +563,9 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         
     }
     
-    func finishedUploadFile(file: WrapData){
+    func finishedUploadFile(file: WrapData) {
         let uuid = file.getTrimmedLocalID()
-        if uploadedObjectID.index(of: file.uuid) == nil {
+        if uploadedObjectID.index(of: uuid) == nil {
             uploadedObjectID.append(uuid)
         }
         
@@ -577,20 +577,24 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
-                if let `self` = self,
-                    let path = self.getIndexPathForObject(itemUUID: uuid),
+                guard let self = self else {
+                    return
+                }
+                
+                if let path = self.getIndexPathForObject(itemUUID: uuid),
+                    self.collectionView.indexPathsForVisibleItems.contains(path),
                     let object = self.dataSource.object(at: path),
-                    let cell = self.collectionView?.cellForItem(at: path) as? PhotoVideoCell {
+                    let cell = self.collectionView.cellForItem(at: path) as? PhotoVideoCell {
 
                     if object.isLocalItemValue {
                         cell.showCloudImage()                        
                     } else {
                         cell.resetCloudImage()
                     }
-                    
-                    if let index = self.uploadedObjectID.index(of: uuid){
-                        self.uploadedObjectID.remove(at: index)
-                    }
+                }
+                
+                if let index = self.uploadedObjectID.index(of: uuid) {
+                    self.uploadedObjectID.remove(at: index)
                 }
             })
         }
