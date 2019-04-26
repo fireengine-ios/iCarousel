@@ -209,6 +209,8 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                 return
         }
         
+        readyButton?.isEnabled = false
+        
         if email != emailDetailView.editableText {
             guard let email = emailDetailView.editableText, !email.isEmpty else {
                 output.showError(error: TextConstants.emptyEmail)
@@ -219,8 +221,6 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                 output.showError(error: TextConstants.notValidEmail)
                 return
             }
-            
-            readyButton?.isEnabled = false
             
             let message = String(format: TextConstants.registrationEmailPopupMessage, emailDetailView.editableText ?? "")
             
@@ -248,7 +248,6 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                                   email: emailDetailView.editableText ?? "",
                                   number: gsmDetailView.editableText ?? "",
                                   birthday: birthdayDetailView.editableText ?? "")
-            readyButton?.isEnabled = false
         }
     }
 }
