@@ -68,4 +68,51 @@ class RegistrationInteractor: RegistrationInteractorInput {
 //            self?.output.captchaRequredFailed()
 //        }
     }
+    
+    func signUpUser(email: String, phone: String, passpword: String, captchaID: String?, captchaAnswer: String?) {
+        
+        let signUpUser = SignUpUser(phone: phone,
+                                    mail: email,
+                                    password: passpword,
+                                    sendOtp: false,
+                                    captchaID: captchaID,
+                                    captchaAnswer: captchaAnswer)
+        
+        authenticationService.signUp(user: signUpUser, sucess: { [weak self] response in
+                DispatchQueue.main.async {
+                    guard let result = response as? SignUpSuccessResponse else {
+                        let error = CustomErrors.serverError("An error has occurred while register new user")
+                        let errorResponse = ErrorResponse.error(error)
+                        self?.output.signUpFailed(errorResponce: errorResponse)
+                        return
+                    }
+
+                    SingletonStorage.shared.referenceToken = result.referenceToken
+                    
+                    self?.analyticsService.track(event: .signUp)
+                    self?.analyticsService.trackSignupEvent()
+                    
+                    self?.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
+                }
+            }, fail: { [weak self] errorResponce in
+                DispatchQueue.main.async { [weak self] in
+                    switch errorResponce {
+                    case .error(let error):
+                        if let statusError = error as? ServerStatusError,
+                           let signUpError = SignupResponseError(with: statusError) {
+                            
+                            self?.analyticsService.trackSignupEvent(error: signUpError)
+                            
+                            if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
+                                self?.output.captchaRequred(requred: true)
+                            }
+                        }
+                    default:
+                        self?.analyticsService.trackSignupEvent(error: .serverError)
+                    }
+
+                    self?.output.signUpFailed(errorResponce: errorResponce)
+                }
+        })
+    }
 }
