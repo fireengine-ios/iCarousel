@@ -654,7 +654,12 @@ final class MediaItemOperationsService {
             let predicate = NSPredicate(format: "localFileID IN %@ AND isLocalItemValue == true", assetIdList)
             self.executeRequest(predicate: predicate, context: context) { mediaItems in
                
-                let deletedItems = mediaItems.map{ WrapData(mediaItem: $0) }
+                let deletedItems = mediaItems.map { WrapData(mediaItem: $0) }
+                let relatedRemotes = mediaItems.compactMap { Array($0.relatedRemotes) as? Array<MediaItem>}.joined()
+                relatedRemotes.forEach {
+                    $0.localFileID = nil
+                }
+                
                 LocalMediaStorage.default.assetsCache.remove(identifiers: assetIdList)
                 ItemOperationManager.default.deleteItems(items: deletedItems)
                 mediaItems.forEach { context.delete($0) }
