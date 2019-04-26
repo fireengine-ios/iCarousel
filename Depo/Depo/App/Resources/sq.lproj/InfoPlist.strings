@@ -1,4 +1,5 @@
-"NSLocationAlwaysUsageDescription" = "Your location will be used for background syncing";
-"NSPhotoLibraryAddUsageDescription" = "Need access to save your photo";
-"NSPhotoLibraryUsageDescription" = "Your photo library access is needed to display photos/videos in the application";
 "NSFaceIDUsageDescription" = "Për të shtuar sigurinë, ky aplikacion është projektuar që të përdorë ID me Fytyrë.";
+"NSLocationAlwaysUsageDescription" = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit";
+"NSPhotoLibraryAddUsageDescription" = "Për të ruajtur fotot dhe videot tuaja, nevojitet leja juaj e aksesit në librarinë e fotove.";
+"NSPhotoLibraryUsageDescription" = "Për të shfaqur fotot dhe videot ne aplikacion, nevojitet leja juaj e aksesit në librarinë e fotove.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit";

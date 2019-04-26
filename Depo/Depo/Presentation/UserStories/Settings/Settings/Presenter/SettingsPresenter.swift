@@ -101,8 +101,8 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToActivityTimeline()
     }
     
-    func goToPackages() {
-        router.goToPackages()
+    func goToPackagesWith(quotaInfo: QuotaInfoResponse?) {
+        router.goToPackagesWith(quotaInfo: quotaInfo)
     }
     
     func goToPremium() {
