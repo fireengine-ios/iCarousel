@@ -134,21 +134,38 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         emailTextField.textColor = UIColor.black
         emailTextField.font = font
         emailTextField.delegate = self
+        emailTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
     private func setupButton() {
         sendPasswordButton.setTitle(TextConstants.resetPasswordSendPassword, for: UIControlState.normal)
-        
-        sendPasswordButton.backgroundColor = UIColor.lrTealishTwo
         sendPasswordButton.setTitleColor(ColorConstants.whiteColor, for: UIControlState.normal)
         sendPasswordButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        sendPasswordButton.setBackgroundColor(UIColor.lrTealishTwo.withAlphaComponent(0.5), for: .disabled)
+        sendPasswordButton.setBackgroundColor(UIColor.lrTealishTwo, for: .normal)
+
+        updateButtonState()
     }
     
     private func setupCaptchaView() {
         captchaView.captchaAnswerTextField.placeholder = TextConstants.resetPasswordCaptchaPlaceholder
         captchaView.captchaAnswerTextField.delegate = self
+        captchaView.captchaAnswerTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
+    @objc private func textFieldDidChange() {
+        updateButtonState()
+    }
+    
+    private func updateButtonState() {
+        guard !(emailTextField.text?.isEmpty ?? true),
+              !(captchaView.captchaAnswerTextField.text?.isEmpty ?? true) else {
+                sendPasswordButton.isEnabled = false
+                return
+        }
+        sendPasswordButton.isEnabled = true
+    }
+
     deinit {
         keyboard.stop()
     }
@@ -211,6 +228,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     
     func showCapcha() {
         captchaView.updateCaptcha()
+        updateButtonState()
     }
     
     // MARK: Buttons actions 
