@@ -17,7 +17,8 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
     
     private let semaphore = DispatchSemaphore(value: 0)
     private var url: URL?
-    private var task: URLSessionTask?
+    ///It is possible that when we use Alamofire Request and then directly cancel task it might cause bug for Alamofire.
+    private var task: DataRequest?//URLSessionTask?
     private let queue: DispatchQueue
     
     init(url: URL?, queue: DispatchQueue) {
@@ -70,7 +71,7 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
                 self.outputBlock?(image)
                 self.semaphore.signal()
             })
-            .task
+            //.task
         
         semaphore.wait()
     }

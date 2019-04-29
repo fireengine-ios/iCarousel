@@ -250,7 +250,7 @@ final class MediaItemOperationsService {
                     //all relation will be setuped inside
                     _ = MediaItem(wrapData: newRemoteItem, context: context)
                 }
-                context.saveAsync()
+                context.saveAsyncWithParantMerge(async: true, completion: nil)
             }
         }
     }
@@ -340,7 +340,9 @@ final class MediaItemOperationsService {
                         _ = MediaItem(wrapData: item, context: context)
                     }
                 }
-                CoreDataStack.default.saveDataForContext(context: context, savedCallBack: completion)
+                context.saveAsyncWithParantMerge(async: true, completion: { _ in
+                    completion()
+                })
             }
             
             //      ItemOperationManager.default.addedLocalFiles(items: addedObjects)
@@ -389,7 +391,7 @@ final class MediaItemOperationsService {
                         _ = MediaItem(wrapData: $0, context: context)
                     }
                     
-                    context.saveAsync(completion: { status in
+                    context.saveAsyncWithParantMerge(async: true, completion: { _ in
                         completion()
                     })
                 })  

@@ -136,9 +136,11 @@ extension MyStorageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if Device.isIpad {
-            return CGSize(width: collectionView.frame.width / 2 - NumericConstants.iPadPackageSumInset, height: NumericConstants.heightForPackageCell)
+            ///https://github.com/wordpress-mobile/WordPress-iOS/issues/10354
+            ///seems like this bug may occur on iOS 12+ when it returns negative value
+            return CGSize(width: max(collectionView.frame.width / 2 - NumericConstants.iPadPackageSumInset, 0), height: NumericConstants.heightForPackageCell)
         } else {
-            return CGSize(width: collectionView.frame.width / 2 - NumericConstants.packageSumInset, height: NumericConstants.heightForPackageCell)
+            return CGSize(width: max(collectionView.frame.width / 2 - NumericConstants.packageSumInset, 0), height: NumericConstants.heightForPackageCell)
         }
     }
     
