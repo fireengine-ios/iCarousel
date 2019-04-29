@@ -277,7 +277,9 @@ extension UsageInfoViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellHeight = collectionView.frame.height
         let cellWidth = collectionView.frame.width
-        return CGSize(width: cellWidth, height: cellHeight)
+        ///https://github.com/wordpress-mobile/WordPress-iOS/issues/10354
+        ///seems like this bug may occur on iOS 12+ when it returns negative value
+        return CGSize(width: max(cellWidth, 0), height: max(cellHeight, 0))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

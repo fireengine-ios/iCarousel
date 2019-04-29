@@ -113,7 +113,7 @@ final class CacheManager {
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
                 if remoteItems.count < CacheManager.pageSize {
                     self?.photoVideoService.currentPage = 0
-                    completion()
+                    completion()///means all files are downloaded
                 }
             }
             if remoteItems.count >= CacheManager.pageSize {

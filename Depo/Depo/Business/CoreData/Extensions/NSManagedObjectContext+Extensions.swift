@@ -24,12 +24,12 @@ extension NSManagedObjectContext {
             return
         }
         /// weak ???
-        perform {
+        perform { [weak self] in
             do {
-                try self.save()
+                try self?.save()
                 completion?(.saved)
             } catch {
-                self.rollback()
+                self?.rollback()
                 completion?(.rolledBack(error))
             }
         }

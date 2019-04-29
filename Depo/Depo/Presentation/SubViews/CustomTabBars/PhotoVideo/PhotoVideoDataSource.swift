@@ -293,6 +293,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         if !sectionChanges.isEmpty || !objectChanges.isEmpty {
             CellImageManager.clear()
             collectionView.reloadData()
+            collectionView.collectionViewLayout.invalidateLayout()
         }
     }
     
