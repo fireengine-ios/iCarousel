@@ -54,7 +54,6 @@ final class PhotoVideoCollectionViewManager {
     
     @objc private func refreshData() {
         delegate?.refreshData(refresher: refresher)
-        //        performFetch()
         refresher.endRefreshing()
     }
     
