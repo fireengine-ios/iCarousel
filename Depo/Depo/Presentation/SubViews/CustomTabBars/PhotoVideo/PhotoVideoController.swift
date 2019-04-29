@@ -108,7 +108,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private func performFetch() {
         dataSource.setupOriginalPredicates(isPhotos: isPhoto) { [weak self] in
             DispatchQueue.main.async {
-                self?.fetchAndReload()
                 self?.collectionViewManager.reloadAlbumsSlider()
             }
         }
