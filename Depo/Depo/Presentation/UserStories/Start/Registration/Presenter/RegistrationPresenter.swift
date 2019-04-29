@@ -20,6 +20,7 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
         startAsyncOperation()
         interactor.checkCaptchaRequerement()
         interactor.prepareModels()
+        interactor.requestGSMCountryCodes()
     }
 
     func nextButtonPressed() {
@@ -105,7 +106,6 @@ class RegistrationPresenter: BasePresenter, RegistrationModuleInput, Registratio
     }
     
     func captchaRequred(requred: Bool) {
-        interactor.requestGSMCountryCodes()
         if requred, let captchaVC = router.getCapcha() {
             view.setupCaptchaVC(captchaVC: captchaVC)
         }
