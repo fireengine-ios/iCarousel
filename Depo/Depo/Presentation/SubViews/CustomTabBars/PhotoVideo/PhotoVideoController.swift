@@ -628,6 +628,10 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         }
     }
     
+    func filesAddedToAlbum() {
+        stopEditingMode()
+    }
+    
     private func getCellForFile(objectUUID: String) -> PhotoVideoCell? {
         guard let path = getIndexPathForObject(itemUUID: objectUUID),
             let cell = collectionView?.cellForItem(at: path) as? PhotoVideoCell
