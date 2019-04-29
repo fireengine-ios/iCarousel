@@ -62,6 +62,9 @@ class CardsManager: NSObject {
     }
     
     func clear() {
+        foloversArray.removeAll()
+        progresForOperation.removeAll()
+        homeCardsObjects.removeAll()
         deletedCards.removeAll()
     }
     
