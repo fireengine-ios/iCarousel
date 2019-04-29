@@ -7,13 +7,16 @@
 //
 
 enum UserValidationResults {
-    case allValid
+    ///Unused (see UserValidator)
+//    case allValid
     case mailNotValid
     case passwordNotValid
     case passwodsNotMatch
-    case phoneNotValid
+    ///Unused (see UserValidator)
+//    case phoneNotValid
     case mailIsEmpty
     case phoneIsEmpty
     case passwordIsEmpty
     case repasswordIsEmpty
+    case captchaIsEmpty
 }

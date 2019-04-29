@@ -40,8 +40,8 @@ class RegistrationRouter: RegistrationRouterInput {
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func getCapcha() -> CaptchaViewController? {
-        let capcha = router.capcha
-        return capcha
+    func openSupport() {
+        let controller = router.supportFormController
+        router.pushViewController(viewController: controller)
     }
 }
