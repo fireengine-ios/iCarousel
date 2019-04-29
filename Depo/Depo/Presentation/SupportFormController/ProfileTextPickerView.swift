@@ -12,6 +12,8 @@ final class ProfileTextPickerView: ProfileTextEnterView {
         }
     }
     
+    var responderOnNext: UIResponder?
+    
     /// returns selected row. -1 if nothing selected
     var selectedIndex: Int {
         return pickerView.selectedRow(inComponent: 0)

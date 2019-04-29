@@ -18,6 +18,7 @@ class ProfileTextEnterView: UIView {
         newValue.backgroundColor = .white
         newValue.isOpaque = true
         newValue.isHidden = true
+        newValue.numberOfLines = 0
         return newValue
     }()
     
@@ -51,9 +52,7 @@ class ProfileTextEnterView: UIView {
     
     private let underlineWidth: CGFloat = 0.5
     private let underlineLayer = CALayer()
-    
-    var responderOnNext: UIResponder?
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         initialSetup()

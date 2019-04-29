@@ -16,6 +16,7 @@ class SignUpErrorView: UIView {
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
         newValue.textColor = ColorConstants.whiteColor
         newValue.numberOfLines = 0
+        newValue.text = ""
         newValue.isOpaque = true
         
         return newValue
@@ -30,39 +31,28 @@ class SignUpErrorView: UIView {
         return newValue
     }()
     
-    private var message: String?
+    var message: String? {
+        didSet {
+            messageLabel.text = message
+        }
+    }
     
     override class var layerClass: Swift.AnyClass {
         return CAGradientLayer.self
     }
     
-    convenience init(errorMessage: String) {
-        self.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        message = errorMessage
-
         setup()
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        
+        setup()
     }
     
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        
-//        setup()
-//    }
-//    
     private func setup() {
         addSubview(messageLabel)
         addSubview(symbolImageView)

@@ -52,20 +52,16 @@ final class SignUpSupportView: UIView {
     
     weak var delegate: SignUpSupportViewDelegate?
     
-    convenience init(delegate: SignUpSupportViewDelegate) {
-        self.init(frame: .zero)
-
-        self.delegate = delegate
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         setup()
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        
+        setup()
     }
     
     private func setup() {

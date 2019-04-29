@@ -34,6 +34,10 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="110" placeholderIntrinsicHeight="0.0" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JO9-w0-uO5" userLabel="Alerts Stack View">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                 </stackView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVV-xV-h3m">
+                                    <rect key="frame" x="0.0" y="16" width="375" height="400"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="400" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="P2f-Nq-OPJ">
                                     <rect key="frame" x="20" y="16" width="335" height="400"/>
                                 </stackView>
@@ -58,6 +62,7 @@
                                 </button>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="bVV-xV-h3m" firstAttribute="bottom" secondItem="P2f-Nq-OPJ" secondAttribute="bottom" id="1yR-EV-QoS"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Iei-Qg-JRc" secondAttribute="bottom" constant="16" id="6OG-L9-Igw"/>
                                 <constraint firstItem="JO9-w0-uO5" firstAttribute="centerX" secondItem="LQn-yz-ygb" secondAttribute="centerX" id="AVJ-uP-gnv"/>
                                 <constraint firstItem="P2f-Nq-OPJ" firstAttribute="leading" secondItem="LQn-yz-ygb" secondAttribute="leading" constant="20" id="Cl2-1I-Yxd"/>
@@ -67,10 +72,13 @@
                                 <constraint firstItem="JO9-w0-uO5" firstAttribute="width" secondItem="LQn-yz-ygb" secondAttribute="width" id="HuQ-zD-nrJ"/>
                                 <constraint firstItem="94P-4Q-I5x" firstAttribute="top" secondItem="P2f-Nq-OPJ" secondAttribute="bottom" constant="24" id="Kgq-3h-C0K"/>
                                 <constraint firstItem="JO9-w0-uO5" firstAttribute="top" secondItem="LQn-yz-ygb" secondAttribute="top" id="Xuz-df-Jsy"/>
+                                <constraint firstItem="bVV-xV-h3m" firstAttribute="centerX" secondItem="LQn-yz-ygb" secondAttribute="centerX" id="aLc-E9-q9Y"/>
+                                <constraint firstItem="bVV-xV-h3m" firstAttribute="width" secondItem="LQn-yz-ygb" secondAttribute="width" id="f3r-Hq-gx6"/>
                                 <constraint firstItem="94P-4Q-I5x" firstAttribute="leading" secondItem="LQn-yz-ygb" secondAttribute="leading" constant="20" id="hrY-KR-UCC"/>
                                 <constraint firstItem="P2f-Nq-OPJ" firstAttribute="top" secondItem="JO9-w0-uO5" secondAttribute="bottom" constant="16" id="mfp-d3-9wY"/>
                                 <constraint firstItem="Iei-Qg-JRc" firstAttribute="width" secondItem="LQn-yz-ygb" secondAttribute="width" multiplier="0.55" id="n2f-DD-ajh"/>
                                 <constraint firstItem="Iei-Qg-JRc" firstAttribute="centerX" secondItem="LQn-yz-ygb" secondAttribute="centerX" id="s1E-Z6-Wdu"/>
+                                <constraint firstItem="P2f-Nq-OPJ" firstAttribute="top" secondItem="bVV-xV-h3m" secondAttribute="top" id="ycU-I7-v3n"/>
                             </constraints>
                         </view>
                     </subviews>

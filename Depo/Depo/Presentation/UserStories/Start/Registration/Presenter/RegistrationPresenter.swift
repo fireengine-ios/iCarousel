@@ -39,6 +39,11 @@ extension RegistrationPresenter: RegistrationViewOutput {
                                     password: password, repassword: repassword,
                                     captchaID: captchaID, captchaAnswer: captchaAnswer)
     }
+    
+    func openSupport() {
+        isSupportFormPresenting = true
+        router.openSupport()
+    }
 }
 
 // MARK: - RegistrationInteractorOutput
@@ -95,15 +100,6 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     }
     
     func showSupportView() {
-        let supportView = SignUpSupportView(delegate: self)
-        view.showSupportView(supportView)
-    }
-}
-
-// MARK: - RegistrationInteractorOutput
-extension RegistrationPresenter: SignUpSupportViewDelegate {
-    func openSupport() {
-        isSupportFormPresenting = true
-        router.openSupport()
+        view.showSupportView()
     }
 }

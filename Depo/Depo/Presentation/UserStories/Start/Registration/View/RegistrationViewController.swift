@@ -76,6 +76,9 @@ final class RegistrationViewController: ViewController {
         let newValue = ProfilePhoneEnterView()
         newValue.numberTextField.enablesReturnKeyAutomatically = true
         
+        let attributedPlaceholder = NSAttributedString(string: TextConstants.profilePhoneNumberPlaceholder,
+                                                       attributes: [ .foregroundColor : UIColor.lightGray ])
+        newValue.numberTextField.attributedPlaceholder = attributedPlaceholder
         newValue.titleLabel.text = TextConstants.registrationCellTitleGSMNumber
         
         return newValue
@@ -86,7 +89,9 @@ final class RegistrationViewController: ViewController {
         newValue.textField.keyboardType = .emailAddress
         newValue.textField.autocapitalizationType = .none
         newValue.textField.autocorrectionType = .no
-        newValue.textField.placeholder = TextConstants.enterYourEmailAddress
+        let attributedPlaceholder = NSAttributedString(string: TextConstants.enterYourEmailAddress,
+                                                       attributes: [ .foregroundColor : UIColor.lightGray ])
+        newValue.textField.attributedPlaceholder = attributedPlaceholder
         newValue.textField.enablesReturnKeyAutomatically = true
         
         newValue.titleLabel.text = TextConstants.registrationCellTitleEmail
@@ -96,9 +101,11 @@ final class RegistrationViewController: ViewController {
     
     private let passwordEnterView: ProfilePasswordEnterView = {
         let newValue = ProfilePasswordEnterView()
-        newValue.textField.placeholder = TextConstants.enterYourNewPassword
         newValue.textField.enablesReturnKeyAutomatically = true
         
+        let attributedPlaceholder = NSAttributedString(string: TextConstants.enterYourNewPassword,
+                                                       attributes: [ .foregroundColor : UIColor.lightGray ])
+        newValue.textField.attributedPlaceholder = attributedPlaceholder
         newValue.titleLabel.text = TextConstants.registrationCellTitlePassword
         
         return newValue
@@ -106,11 +113,27 @@ final class RegistrationViewController: ViewController {
     
     private let rePasswordEnterView: ProfilePasswordEnterView = {
         let newValue = ProfilePasswordEnterView()
-        newValue.textField.placeholder = TextConstants.reenterYourPassword
+        let attributedPlaceholder = NSAttributedString(string: TextConstants.reenterYourPassword,
+                                                       attributes: [ .foregroundColor : UIColor.lightGray ])
+        newValue.textField.attributedPlaceholder = attributedPlaceholder
         newValue.textField.enablesReturnKeyAutomatically = true
         
         newValue.titleLabel.text = TextConstants.registrationCellTitleReEnterPassword
         
+        return newValue
+    }()
+    
+    private let supportView: SignUpSupportView = {
+        let newValue = SignUpSupportView()
+        newValue.isHidden = true
+        
+        return newValue
+    }()
+
+    private let errorView: SignUpErrorView = {
+        let newValue = SignUpErrorView()
+        newValue.isHidden = true
+
         return newValue
     }()
     
@@ -137,7 +160,6 @@ final class RegistrationViewController: ViewController {
         super.viewWillDisappear(animated)
         
         if !output.isSupportFormPresenting {
-//            hidenNavigationBarStyle()
             navigationController?.setNavigationBarHidden(true, animated: true)
         }
         output.isSupportFormPresenting = false
@@ -163,6 +185,13 @@ final class RegistrationViewController: ViewController {
     private func setupStackView() {
         prepareFields()
         
+        supportView.delegate = self
+        view.addSubview(supportView)
+        alertsStackView.addArrangedSubview(supportView)
+        
+        view.addSubview(errorView)
+        alertsStackView.addArrangedSubview(errorView)
+
         stackView.addArrangedSubview(phoneEnterView)
         stackView.addArrangedSubview(emailEnterView)
         stackView.addArrangedSubview(passwordEnterView)
@@ -170,16 +199,13 @@ final class RegistrationViewController: ViewController {
     }
     
     private func prepareFields() {
-        phoneEnterView.responderOnNext = emailEnterView.textField
-        emailEnterView.responderOnNext = passwordEnterView.textField
-        passwordEnterView.responderOnNext = rePasswordEnterView.textField
-        rePasswordEnterView.responderOnNext = captchaView.captchaAnswerTextField
-        
         emailEnterView.textField.delegate = self
         passwordEnterView.textField.delegate = self
         rePasswordEnterView.textField.delegate = self
         phoneEnterView.numberTextField.delegate = self
         captchaView.captchaAnswerTextField.delegate = self
+        
+        phoneEnterView.responderOnNext = emailEnterView.textField
     }
     
     private func configureKeyboard() {
@@ -212,18 +238,13 @@ final class RegistrationViewController: ViewController {
                 inset.bottom = 0
                 self.scrollView.contentInset = inset
                 self.scrollView.scrollIndicatorInsets = inset
-                
-                self.scrollView.setContentOffset(.zero, animated: true)
             }
             .start()
     }
     
-    private func removeErrorBanner() {
-        alertsStackView.arrangedSubviews.forEach {
-            if $0 is SignUpErrorView {
-                alertsStackView.removeArrangedSubview($0)
-                $0.removeFromSuperview()
-            }
+    private func hideErrorBanner() {
+        UIView.animate(withDuration: NumericConstants.animationDuration) { [weak self] in
+            self?.errorView.isHidden = true
         }
     }
     
@@ -242,13 +263,13 @@ final class RegistrationViewController: ViewController {
     //MARK: IBActions
     @IBAction func nextActionHandler(_ sender: Any) {
         stopEditing()
-        removeErrorBanner()
+        hideErrorBanner()
         output.nextButtonPressed()
     }
     
     //MARK: Actions
     @objc private func stopEditing() {
-        self.view.firstResponder?.resignFirstResponder()
+        self.view.endEditing(true)
     }
 }
 
@@ -285,24 +306,26 @@ extension RegistrationViewController: RegistrationViewInput {
     }
     
     func showErrorTitle(withText: String) {
-        let errorView = SignUpErrorView(errorMessage: withText)
-        alertsStackView.addArrangedSubview(errorView)
+        UIView.animate(withDuration: NumericConstants.animationDuration) { [weak self] in
+            self?.errorView.message = withText
+            self?.errorView.isHidden = false
+        }
         
         let errorRect = self.view.convert(errorView.frame, to: self.view)
-        scrollView.scrollRectToVisible( errorRect, animated: true)
+        scrollView.scrollRectToVisible(errorRect, animated: true)
     }
     
     func setupCaptcha() {
         presentCaptcha()
     }
     
-    func showSupportView(_ view: SignUpSupportView) {
-        if !alertsStackView.arrangedSubviews.contains(where: { $0 is SignUpSupportView }) {
-            alertsStackView.insertArrangedSubview(view, at: 0)
+    func showSupportView() {
+        UIView.animate(withDuration: NumericConstants.animationDuration) { [weak self] in
+            self?.supportView.isHidden = false
         }
         
-        let supportViewRect = self.view.convert(view.frame, to: self.view)
-        scrollView.scrollRectToVisible( supportViewRect, animated: true)
+        let supportRect = self.view.convert(supportView.frame, to: self.view)
+        scrollView.scrollRectToVisible(supportRect, animated: true)
     }
 }
 
@@ -321,22 +344,27 @@ extension RegistrationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
-        case emailEnterView.textField:
-            emailEnterView.responderOnNext?.becomeFirstResponder()
         case phoneEnterView.numberTextField:
             phoneEnterView.responderOnNext?.becomeFirstResponder()
+            
+        case emailEnterView.textField:
+            passwordEnterView.textField.becomeFirstResponder()
+            
         case passwordEnterView.textField:
-            passwordEnterView.responderOnNext?.becomeFirstResponder()
+            rePasswordEnterView.textField.becomeFirstResponder()
+            
         case rePasswordEnterView.textField:
             if captchaView.isHidden {
                 rePasswordEnterView.textField.resignFirstResponder()
             } else {
-                rePasswordEnterView.responderOnNext?.becomeFirstResponder()
+                captchaView.captchaAnswerTextField.becomeFirstResponder()
             }
+            
         case captchaView.captchaAnswerTextField:
             captchaView.captchaAnswerTextField.resignFirstResponder()
+            
         default:
-            break
+            assertionFailure()
         }
         
         return true
@@ -355,11 +383,36 @@ extension RegistrationViewController: UITextFieldDelegate {
         case captchaView.captchaAnswerTextField:
             captchaView.hideErrorAnimated()
         default:
-            break
+            assertionFailure()
         }
         
-        if textField != phoneEnterView.codeTextField {
-            textField.text = ""
+        guard let attributedPlaceholder = textField.attributedPlaceholder,
+            let range = attributedPlaceholder.string.range(of: attributedPlaceholder.string) else {
+            return
         }
+        
+        let placeholder = NSMutableAttributedString(string: attributedPlaceholder.string)
+        let nsRange = NSRange(range, in: attributedPlaceholder.string)
+        placeholder.addAttribute(.foregroundColor, value: UIColor.clear, range: nsRange)
+        textField.attributedPlaceholder = placeholder
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let attributedPlaceholder = textField.attributedPlaceholder,
+            let range = attributedPlaceholder.string.range(of: attributedPlaceholder.string) else {
+                return
+        }
+        
+        let placeholder = NSMutableAttributedString(string: attributedPlaceholder.string)
+        let nsRange = NSRange(range, in: attributedPlaceholder.string)
+        placeholder.addAttribute(.foregroundColor, value: UIColor.lightGray, range: nsRange)
+        textField.attributedPlaceholder = placeholder
+    }
+}
+
+// MARK: - RegistrationInteractorOutput
+extension RegistrationViewController: SignUpSupportViewDelegate {
+    func openSupport() {
+        output.openSupport()
     }
 }

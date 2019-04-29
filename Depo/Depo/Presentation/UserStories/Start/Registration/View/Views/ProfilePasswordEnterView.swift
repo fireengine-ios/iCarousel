@@ -12,7 +12,7 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
     
     private let eyeButton: UIButton = {
         let newValue = UIButton(frame: .zero)
-        newValue.addTarget(self, action: #selector(changeVisibilityState), for: UIControlEvents.touchUpInside)
+        newValue.addTarget(self, action: #selector(changeVisibilityState), for: .touchUpInside)
         
         let showPasswordImage = UIImage(named: "show")
         let hidePasswordImage = UIImage(named: "hide")
@@ -50,11 +50,6 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
         stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: edgeInset).isActive = true
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -edgeInset).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
-        
-//        eyeButton.translatesAutoresizingMaskIntoConstraints = false
-//
-//        eyeButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
-//        eyeButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
         stackViewForButton.addArrangedSubview(titleLabel)
         stackViewForButton.addArrangedSubview(eyeButton)
