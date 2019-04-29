@@ -512,7 +512,7 @@ extension PhotoVideoController: PhotoVideoNavBarManagerDelegate {
 /// using: PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
 extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
     func refreshData(refresher: UIRefreshControl) {
-        performFetch()
+        collectionViewManager.reloadAlbumsSlider()
         refresher.endRefreshing()
     }
     
