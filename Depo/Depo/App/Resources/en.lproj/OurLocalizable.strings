@@ -936,7 +936,7 @@
 "password_changed_successfully_relogin" = "You have successfully changed your password. Please login again with your new password.";
 "captcha_answer_placeholder" = "Enter the text shown in the image";
 "birthday" = "Birthday";
-"user_profile_turkcell_gsm_alert" = "You cannot update your gsm number, for details: %@";
+"user_profile_turkcell_gsm_alert" = "You cannot update your phone number, for details: %@";
 "user_profile_birthday_placeholder" = "DD MM YYYY";
 "send_link" = "Send Link";
 "reset_password" = "Reset Password";
@@ -973,4 +973,6 @@
 "user_profile_day_placeholder" = "DD";
 "user_profile_month_placeholder" = "MM";
 "user_profile_year_placeholder" = "YYYY";
-"frequently_asked_questions" = "Frequently Asked Questions";
+
+/*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
+"frequently_asked_questions" = "FAQ";
