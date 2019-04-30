@@ -10,12 +10,15 @@ import UIKit
 
 protocol RegistrationViewOutput {
     
+    var isSupportFormPresenting: Bool { get set }
+    
     func viewIsReady()
     
     func nextButtonPressed()
     
     func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?)
     
-    func infoButtonGotPressed(with type: UserValidationResults)
     func captchaRequred(requred: Bool)
+    
+    func openSupport()
 }

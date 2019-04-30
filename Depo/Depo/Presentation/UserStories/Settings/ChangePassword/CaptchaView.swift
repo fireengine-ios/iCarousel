@@ -37,15 +37,14 @@ final class CaptchaView: UIView, FromNib {
         }
     }
     
-    @IBOutlet weak var captchaAnswerTextField: InsetsTextField! {
+    @IBOutlet weak var captchaAnswerTextField: QuickDismissPlaceholderTextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = UIColor.black
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
-            newValue.insetX = 0
-            newValue.placeholder = TextConstants.captchaAnswerPlaceholder
+            newValue.quickDismissPlaceholder = TextConstants.captchaAnswerPlaceholder
             
             newValue.returnKeyType = .done
             

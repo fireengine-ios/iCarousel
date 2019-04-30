@@ -9,36 +9,45 @@
 class RegistrationInteractor: RegistrationInteractorInput {
     
     weak var output: RegistrationInteractorOutput!
-    private let dataStorage = DataStorage()
     private lazy var validationService = UserValidator()
     private lazy var authenticationService = AuthenticationService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var captchaService = CaptchaService()
+    
+    private var  retriesCount = 0 {
+        didSet {
+            if retriesCount > 2 {
+                showSupportView()
+            }
+        }
+    }
     
     func trackScreen() {
         analyticsService.logScreen(screen: .signUpScreen)
         analyticsService.trackDimentionsEveryClickGA(screen: .signUpScreen)
     }
     
-    func prepareModels() {
-        output.prepearedModels(models: dataStorage.getModels())
-    }
-    
-    func requestGSMCountryCodes() {
-        let gsmCompositor = CounrtiesGSMCodeCompositor()
-        let models = gsmCompositor.getGSMCCModels()
-        dataStorage.gsmModels = models
-        output.composedGSMCCodes(models: models)
-    }
-    
     func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?) {
-       
-        let validationResult = validationService.validateUserInfo(mail: email, code: code, phone: phone, password: password, repassword: repassword)
+        
+        let validationResult = validationService.validateUserInfo(mail: email,
+                                                                  code: code,
+                                                                  phone: phone,
+                                                                  password: password,
+                                                                  repassword: repassword,
+                                                                  captchaAnswer: captchaAnswer ?? "")
         if validationResult.count == 0 {//== .allValid {
-            dataStorage.userRegistrationInfo = RegistrationUserInfoModel(mail: email, phone: code + phone, password: password, captchaID: captchaID, captchaAnswer: captchaAnswer)
-            SingletonStorage.shared.signUpInfo = dataStorage.userRegistrationInfo
-            output.userValid(email: email, phone: code + phone, passpword: password, captchaID: captchaID, captchaAnswer: captchaAnswer)
+            let signUpInfo = RegistrationUserInfoModel(mail: email,
+                                                       phone: code + phone,
+                                                       password: password,
+                                                       captchaID: captchaID,
+                                                       captchaAnswer: captchaAnswer)
+            
+            SingletonStorage.shared.signUpInfo = signUpInfo
+            
+            output.userValid(signUpInfo)
         } else {
+            retriesCount += 1
+            
             output.userInvalid(withResult: validationResult)
         }
     }
@@ -69,37 +78,37 @@ class RegistrationInteractor: RegistrationInteractorInput {
 //        }
     }
     
-    func signUpUser(email: String, phone: String, passpword: String, captchaID: String?, captchaAnswer: String?) {
+    func signUpUser(_ userInfo: RegistrationUserInfoModel) {
         
-        let signUpUser = SignUpUser(phone: phone,
-                                    mail: email,
-                                    password: passpword,
-                                    sendOtp: false,
-                                    captchaID: captchaID,
-                                    captchaAnswer: captchaAnswer)
+        ///sentOtp = false as a task requirements (FE-1055)
+        let signUpUser = SignUpUser(registrationUserInfo: userInfo, sentOtp: false)
         
         authenticationService.signUp(user: signUpUser, sucess: { [weak self] response in
-                DispatchQueue.main.async {
-                    guard let result = response as? SignUpSuccessResponse else {
-                        let error = CustomErrors.serverError("An error has occurred while register new user")
-                        let errorResponse = ErrorResponse.error(error)
-                        self?.output.signUpFailed(errorResponce: errorResponse)
-                        return
-                    }
-
-                    SingletonStorage.shared.referenceToken = result.referenceToken
-                    
-                    self?.analyticsService.track(event: .signUp)
-                    self?.analyticsService.trackSignupEvent()
-                    
-                    self?.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
+            DispatchQueue.main.async {
+                guard let result = response as? SignUpSuccessResponse else {
+                    let error = CustomErrors.serverError("An error has occurred while register new user.")
+                    let errorResponse = ErrorResponse.error(error)
+                    self?.output.signUpFailed(errorResponce: errorResponse)
+                    return
                 }
+                
+                self?.retriesCount = 0
+                
+                SingletonStorage.shared.referenceToken = result.referenceToken
+                
+                self?.analyticsService.track(event: .signUp)
+                self?.analyticsService.trackSignupEvent()
+                
+                self?.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
+            }
             }, fail: { [weak self] errorResponce in
+                self?.retriesCount += 1
+                
                 DispatchQueue.main.async { [weak self] in
                     switch errorResponce {
                     case .error(let error):
                         if let statusError = error as? ServerStatusError,
-                           let signUpError = SignupResponseError(with: statusError) {
+                            let signUpError = SignupResponseError(with: statusError) {
                             
                             self?.analyticsService.trackSignupEvent(error: signUpError)
                             
@@ -114,5 +123,9 @@ class RegistrationInteractor: RegistrationInteractorInput {
                     self?.output.signUpFailed(errorResponce: errorResponce)
                 }
         })
+    }
+    
+    func showSupportView() {
+        output.showSupportView()
     }
 }

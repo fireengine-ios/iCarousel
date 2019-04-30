@@ -8,10 +8,7 @@
 
 protocol RegistrationInteractorOutput: class {
     
-    func prepearedModels(models: [BaseCellModel])
-    func composedGSMCCodes(models: [GSMCodeModel])
-    
-    func userValid(email: String, phone: String, passpword: String, captchaID: String?, captchaAnswer: String?)
+    func userValid(_ userInfo: RegistrationUserInfoModel)
     func userInvalid(withResult result: [UserValidationResults])
     
     func captchaRequred(requred: Bool)
@@ -20,4 +17,6 @@ protocol RegistrationInteractorOutput: class {
     
     func signUpFailed(errorResponce: ErrorResponse)
     func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?)
- }
+    
+    func showSupportView()
+}

@@ -119,7 +119,7 @@ class SignUpUser: BaseRequestParametrs {
     override var header: RequestHeaderParametrs {
         guard let unwrapedCaptchaID = captchaID,
             let unwrapedCaptchaAnswer = captchaAnswer else {
-              return RequestHeaders.authification()
+                return RequestHeaders.authification()
         }
         return RequestHeaders.authificationWithCaptcha(id: unwrapedCaptchaID, answer: unwrapedCaptchaAnswer)
     }
@@ -135,6 +135,15 @@ class SignUpUser: BaseRequestParametrs {
         self.sendOtp = sendOtp
         self.captchaID = captchaID
         self.captchaAnswer = captchaAnswer
+    }
+    
+    init(registrationUserInfo: RegistrationUserInfoModel, sentOtp: Bool) {
+        self.phone = registrationUserInfo.phone
+        self.mail = registrationUserInfo.mail
+        self.password = registrationUserInfo.password
+        self.sendOtp = sentOtp
+        self.captchaID = registrationUserInfo.captchaID
+        self.captchaAnswer = registrationUserInfo.captchaAnswer
     }
 }
 

@@ -10,15 +10,11 @@ import Foundation
 
 protocol RegistrationInteractorInput {
     
-    func prepareModels()
-    
-    func requestGSMCountryCodes()
-    
     func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?)
     
     func checkCaptchaRequerement()
     
-    func signUpUser(email: String, phone: String, passpword: String, captchaID: String?, captchaAnswer: String?)
+    func signUpUser(_ userInfo: RegistrationUserInfoModel)
     
     func trackScreen()
 }
