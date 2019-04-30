@@ -923,7 +923,7 @@
 "password_changed_successfully_relogin" = "Ваш пароль успешно изменен. Пожалуйста, войдите в приложение с вашим новым паролем";
 "captcha_answer_placeholder" = "";
 "birthday" = "";
-"user_profile_turkcell_gsm_alert" = "";
+"user_profile_turkcell_gsm_alert" = "Вы не можете обновить свой номер телефона, для деталей: %@";
 "user_profile_birthday_placeholder" = "ДД ММ ГГГГ";
 "send_link" = "";
 "reset_password" = "";
@@ -957,6 +957,9 @@
 "enter_your_old_password" = "Введите старый пароль";
 "enter_your_new_password" = "Введите новый пароль";
 "enter_your_repeat_password" = "Введите новый пароль еще раз";
-"user_profile_day_placeholder" = "";
-"user_profile_month_placeholder" = "";
-"user_profile_year_placeholder" = "";
+"user_profile_day_placeholder" = "ДД";
+"user_profile_month_placeholder" = "ММ";
+"user_profile_year_placeholder" = "ГГГГ";
+
+/*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
+"frequently_asked_questions" = "Помощь и поддержка";
