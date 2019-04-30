@@ -70,11 +70,8 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput {
     }
     
     private func disableCancelButtonIfNeeded() {
-        if textField.text?.isEmpty == true {
-            navigationItem.rightBarButtonItem?.isEnabled = true
-        } else {
-            navigationItem.rightBarButtonItem?.isEnabled = false
-        }
+        let textFieldIsEmpty = textField.text?.isEmpty ?? false
+        navigationItem.rightBarButtonItem?.isEnabled = textFieldIsEmpty
     }
 }
 
