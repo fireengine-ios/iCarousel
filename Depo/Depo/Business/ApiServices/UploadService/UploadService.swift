@@ -272,6 +272,7 @@ final class UploadService: BaseRequestService {
                         
                         if let outputItem = finishedOperation.outputItem {
                             ItemOperationManager.default.finishedUploadFile(file: outputItem, isAutoSync: false)
+                            finishedOperation.inputItem.copyFileData(from: outputItem)
                         }
                         
                         checkIfFinished()
@@ -370,6 +371,7 @@ final class UploadService: BaseRequestService {
                         
                         if let outputItem = finishedOperation.outputItem {
                             ItemOperationManager.default.finishedUploadFile(file: outputItem, isAutoSync: false)
+                            finishedOperation.inputItem.copyFileData(from: outputItem)
                         }
                         
                         checkIfFinished()
@@ -465,6 +467,7 @@ final class UploadService: BaseRequestService {
                         
                         if let outputItem = finishedOperation.outputItem {
                             ItemOperationManager.default.finishedUploadFile(file: outputItem, isAutoSync: true)
+                            finishedOperation.inputItem.copyFileData(from: outputItem)
                         }
                         
                         checkIfFinished()
