@@ -10,18 +10,10 @@ import UIKit
 
 final class ProfilePasswordEnterView: ProfileTextEnterView {
     
-    private let showPasswordImage = UIImage(named: "show")
-    private let hidePasswordImage = UIImage(named: "hide")
+    private let showPasswordImage = UIImage(named: "ic_eye_show")
+    private let hidePasswordImage = UIImage(named: "ic_eye_hide")
     
-    //TODO: change to button
-    private let eyeImageView: UIImageView = {
-        let newValue = UIImageView()
-        newValue.contentMode = .scaleAspectFill
-        ///without it tapGuesture not work
-        newValue.isUserInteractionEnabled = true
-        
-        return newValue
-    }()
+    private let eyeButton = UIButton()
     
     private let topStackView: UIStackView = {
         let newValue = UIStackView()
@@ -36,10 +28,9 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
     override func initialSetup() {
         super.initialSetup()
         
-        let tapGesture = UITapGestureRecognizer(target: self,
-                                                action: #selector(changeVisibilityState))
-        eyeImageView.addGestureRecognizer(tapGesture)
-        eyeImageView.image = showPasswordImage
+        eyeButton.setImage(showPasswordImage, for: .normal)
+        eyeButton.setImage(hidePasswordImage, for: .selected)
+        eyeButton.addTarget(self, action: #selector(changeVisibilityState), for: .touchUpInside)
         
         textField.isSecureTextEntry = true
         textField.autocorrectionType = .no
@@ -57,7 +48,7 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
         
         topStackView.addArrangedSubview(titleLabel)
-        topStackView.addArrangedSubview(eyeImageView)
+        topStackView.addArrangedSubview(eyeButton)
         
         stackView.addArrangedSubview(topStackView)
         stackView.addArrangedSubview(subtitleLabel)
@@ -66,6 +57,6 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
     
     @objc private func changeVisibilityState() {
         textField.toggleTextFieldSecureType()
-        eyeImageView.image = textField.isSecureTextEntry ? showPasswordImage : hidePasswordImage
+        eyeButton.isSelected.toggle()
     }
 }
