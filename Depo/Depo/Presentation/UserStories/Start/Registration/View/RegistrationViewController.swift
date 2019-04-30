@@ -70,14 +70,17 @@ final class RegistrationViewController: ViewController {
     //MARK: Vars
     private let keyboard = Typist.shared
     var output: RegistrationViewOutput!
-    
+    var placeholderColor = UIColor.lightGray
+
     ///Fields (in right order)
     private let phoneEnterView: ProfilePhoneEnterView = {
         let newValue = ProfilePhoneEnterView()
         newValue.numberTextField.enablesReturnKeyAutomatically = true
         
         let attributedPlaceholder = NSAttributedString(string: TextConstants.profilePhoneNumberPlaceholder,
-                                                       attributes: [ .foregroundColor : UIColor.lightGray ])
+                                                       attributes: [
+                                                        .foregroundColor : UIColor.lightGray
+            ])
         newValue.numberTextField.attributedPlaceholder = attributedPlaceholder
         newValue.titleLabel.text = TextConstants.registrationCellTitleGSMNumber
         
@@ -90,7 +93,9 @@ final class RegistrationViewController: ViewController {
         newValue.textField.autocapitalizationType = .none
         newValue.textField.autocorrectionType = .no
         let attributedPlaceholder = NSAttributedString(string: TextConstants.enterYourEmailAddress,
-                                                       attributes: [ .foregroundColor : UIColor.lightGray ])
+                                                       attributes: [
+                                                        .foregroundColor : UIColor.lightGray
+            ])
         newValue.textField.attributedPlaceholder = attributedPlaceholder
         newValue.textField.enablesReturnKeyAutomatically = true
         
@@ -104,7 +109,9 @@ final class RegistrationViewController: ViewController {
         newValue.textField.enablesReturnKeyAutomatically = true
         
         let attributedPlaceholder = NSAttributedString(string: TextConstants.enterYourNewPassword,
-                                                       attributes: [ .foregroundColor : UIColor.lightGray ])
+                                                       attributes: [
+                                                        .foregroundColor : UIColor.lightGray
+            ])
         newValue.textField.attributedPlaceholder = attributedPlaceholder
         newValue.titleLabel.text = TextConstants.registrationCellTitlePassword
         
@@ -114,7 +121,9 @@ final class RegistrationViewController: ViewController {
     private let rePasswordEnterView: ProfilePasswordEnterView = {
         let newValue = ProfilePasswordEnterView()
         let attributedPlaceholder = NSAttributedString(string: TextConstants.reenterYourPassword,
-                                                       attributes: [ .foregroundColor : UIColor.lightGray ])
+                                                       attributes: [
+                                                        .foregroundColor : UIColor.lightGray
+            ])
         newValue.textField.attributedPlaceholder = attributedPlaceholder
         newValue.textField.enablesReturnKeyAutomatically = true
         
@@ -186,10 +195,8 @@ final class RegistrationViewController: ViewController {
         prepareFields()
         
         supportView.delegate = self
-        view.addSubview(supportView)
-        alertsStackView.addArrangedSubview(supportView)
         
-        view.addSubview(errorView)
+        alertsStackView.addArrangedSubview(supportView)
         alertsStackView.addArrangedSubview(errorView)
 
         stackView.addArrangedSubview(phoneEnterView)
@@ -215,19 +222,14 @@ final class RegistrationViewController: ViewController {
                     return
                 }
                 
-                let keyboardFrame = options.endFrame
-                let bottomInset = keyboardFrame.height + UIScreen.main.bounds.height - keyboardFrame.maxY
-                let insets = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
-                self.scrollView.contentInset = insets
-                self.scrollView.scrollIndicatorInsets = insets
-                
-                guard let firstResponser = self.view.firstResponder as? UIView else {
+                self.updateScroll(with: options.endFrame)
+            }
+            .on(event: .didChangeFrame) { [weak self] options in
+                guard let `self` = self else {
                     return
                 }
                 
-                let rectToShow = self.view.convert(firstResponser.frame, to: self.view)
-                let rectToShowWithInset = rectToShow.offsetBy(dx: 0, dy: NumericConstants.firstResponderBottomOffset)
-                self.scrollView.scrollRectToVisible(rectToShowWithInset, animated: true)
+                self.updateScroll(with: options.endFrame)
             }
             .on(event: .willHide) { [weak self] _ in
                 guard let `self` = self else {
@@ -242,10 +244,28 @@ final class RegistrationViewController: ViewController {
             .start()
     }
     
-    private func hideErrorBanner() {
-        UIView.animate(withDuration: NumericConstants.animationDuration) { [weak self] in
-            self?.errorView.isHidden = true
+    private func updateScroll(with keyboardFrame: CGRect) {
+        var bottomInset = keyboardFrame.height + UIScreen.main.bounds.height - keyboardFrame.maxY
+        
+        if #available(iOS 11.0, *) {
+            bottomInset -= scrollView.safeAreaInsets.bottom
         }
+        
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
+        self.scrollView.contentInset = insets
+        self.scrollView.scrollIndicatorInsets = insets
+        
+        guard let firstResponser = self.view.firstResponder as? UIView else {
+            return
+        }
+        
+        let rectToShow = self.view.convert(firstResponser.frame, to: self.view)
+        let rectToShowWithInset = rectToShow.offsetBy(dx: 0, dy: NumericConstants.firstResponderBottomOffset)
+        self.scrollView.scrollRectToVisible(rectToShowWithInset, animated: true)
+    }
+    
+    private func hideErrorBanner() {
+        self.errorView.isHidden = true
     }
     
     private func updateCaptcha() {
@@ -253,10 +273,10 @@ final class RegistrationViewController: ViewController {
     }
     
     private func presentCaptcha() {
-        UIView.animate(withDuration: NumericConstants.animationDuration) { [weak self] in
-            self?.captchaView.isHidden = false
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.captchaView.isHidden = false
             
-            self?.view.layoutIfNeeded()
+            self.view.layoutIfNeeded()
         }
     }
     
@@ -306,9 +326,11 @@ extension RegistrationViewController: RegistrationViewInput {
     }
     
     func showErrorTitle(withText: String) {
-        UIView.animate(withDuration: NumericConstants.animationDuration) { [weak self] in
-            self?.errorView.message = withText
-            self?.errorView.isHidden = false
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.errorView.message = withText
+            self.errorView.isHidden = false
+            
+            self.view.layoutIfNeeded()
         }
         
         let errorRect = self.view.convert(errorView.frame, to: self.view)
@@ -320,8 +342,10 @@ extension RegistrationViewController: RegistrationViewInput {
     }
     
     func showSupportView() {
-        UIView.animate(withDuration: NumericConstants.animationDuration) { [weak self] in
-            self?.supportView.isHidden = false
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.supportView.isHidden = false
+            
+            self.view.layoutIfNeeded()
         }
         
         let supportRect = self.view.convert(supportView.frame, to: self.view)
@@ -332,7 +356,9 @@ extension RegistrationViewController: RegistrationViewInput {
 extension RegistrationViewController: RegistrationViewDelegate {
     
     func show(errorString: String) {
-        showErrorTitle(withText: errorString)
+        DispatchQueue.toMain {
+            self.showErrorTitle(withText: errorString)
+        }
     }
     
     func showCaptcha() {
@@ -405,7 +431,7 @@ extension RegistrationViewController: UITextFieldDelegate {
         
         let placeholder = NSMutableAttributedString(string: attributedPlaceholder.string)
         let nsRange = NSRange(range, in: attributedPlaceholder.string)
-        placeholder.addAttribute(.foregroundColor, value: UIColor.lightGray, range: nsRange)
+        placeholder.addAttribute(.foregroundColor, value: placeholderColor, range: nsRange)
         textField.attributedPlaceholder = placeholder
     }
 }

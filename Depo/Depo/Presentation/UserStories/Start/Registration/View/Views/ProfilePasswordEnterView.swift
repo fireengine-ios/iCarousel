@@ -12,8 +12,6 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
     
     private let eyeButton: UIButton = {
         let newValue = UIButton(frame: .zero)
-        newValue.addTarget(self, action: #selector(changeVisibilityState), for: .touchUpInside)
-        
         let showPasswordImage = UIImage(named: "show")
         let hidePasswordImage = UIImage(named: "hide")
         
@@ -39,6 +37,10 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
         textField.isSecureTextEntry = true
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
+        
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(changeVisibilityState))
+        eyeButton.addGestureRecognizer(tapGesture)
     }
     
     override func setupStackView() {
