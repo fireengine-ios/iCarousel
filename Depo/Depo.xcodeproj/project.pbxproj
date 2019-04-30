@@ -31,6 +31,8 @@
 		17035BAC226DABE000FE7362 /* ProfileFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */; };
 		17052DEE2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
 		17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
+		170EB21122783E9D008588C1 /* QuickDismissPlaceholderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */; };
+		170EB21222783E9D008588C1 /* QuickDismissPlaceholderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */; };
 		17589F642275E33900A5DB37 /* SignUpSupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F612275E33800A5DB37 /* SignUpSupportView.swift */; };
 		17589F652275E33900A5DB37 /* SignUpSupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F612275E33800A5DB37 /* SignUpSupportView.swift */; };
 		17589F662275E33900A5DB37 /* ProfilePasswordEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */; };
@@ -3990,6 +3992,7 @@
 		16AA59CD6753DDEFC61D0212 /* FeedbackViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInput.swift; sourceTree = "<group>"; };
 		17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFieldView.swift; sourceTree = "<group>"; };
 		17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBirthdayFieldView.swift; sourceTree = "<group>"; };
+		170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickDismissPlaceholderTextField.swift; sourceTree = "<group>"; };
 		17589F612275E33800A5DB37 /* SignUpSupportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpSupportView.swift; sourceTree = "<group>"; };
 		17589F622275E33800A5DB37 /* ProfilePasswordEnterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePasswordEnterView.swift; sourceTree = "<group>"; };
 		17589F632275E33800A5DB37 /* SignUpErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpErrorView.swift; sourceTree = "<group>"; };
@@ -7858,6 +7861,7 @@
 				CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */,
 				CEBAB15A2094803C002824C6 /* InsetsButton.swift */,
 				A225690A21E8B30E00A9D147 /* IntrinsicTextView.swift */,
+				170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -16053,6 +16057,7 @@
 				8C0E8EA91FDEBDFF00789C91 /* FBResponses.swift in Sources */,
 				8C0B91C3201714CC00A5BA81 /* StoriesInteractor.swift in Sources */,
 				8C0E8EAE1FDEBDFF00789C91 /* BaseFilesGreedViewInput.swift in Sources */,
+				170EB21222783E9D008588C1 /* QuickDismissPlaceholderTextField.swift in Sources */,
 				8CD84C441FDEC570005CD3B8 /* AlbumDetailModuleOutput.swift in Sources */,
 				8C0E8EAF1FDEBDFF00789C91 /* BaseFilesGreedViewOutput.swift in Sources */,
 				8C0E8EB01FDEBDFF00789C91 /* SubscriptionPlan.swift in Sources */,
@@ -17620,6 +17625,7 @@
 				D4F104D678F058E4AF0F2045 /* UploadFilesSelectionViewOutput.swift in Sources */,
 				CE2F562F1F75548500F49DA1 /* SubscriptionPlanBaseResponse.swift in Sources */,
 				39581B8F2C64DF4E66021F77 /* UploadFilesSelectionViewController.swift in Sources */,
+				170EB21122783E9D008588C1 /* QuickDismissPlaceholderTextField.swift in Sources */,
 				87AD15E41FD678B800DE97DB /* String+Subscript.swift in Sources */,
 				DAC81A65DF324B39D22D480E /* UploadFilesSelectionModuleInput.swift in Sources */,
 				001F64B2FEA10A0FC9BC0AB3 /* UploadFilesSelectionPresenter.swift in Sources */,

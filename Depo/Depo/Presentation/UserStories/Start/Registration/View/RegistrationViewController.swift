@@ -70,8 +70,7 @@ final class RegistrationViewController: ViewController {
     //MARK: Vars
     private let keyboard = Typist.shared
     var output: RegistrationViewOutput!
-    var placeholderColor = UIColor.lightGray
-
+    
     ///Fields (in right order)
     private let phoneEnterView: ProfilePhoneEnterView = {
         let newValue = ProfilePhoneEnterView()
@@ -367,6 +366,10 @@ extension RegistrationViewController: RegistrationViewDelegate {
 }
 
 extension RegistrationViewController: UITextFieldDelegate {
+    var showPlaceholderColor: UIColor {
+        return .yellow
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
@@ -411,28 +414,6 @@ extension RegistrationViewController: UITextFieldDelegate {
         default:
             assertionFailure()
         }
-        
-        guard let attributedPlaceholder = textField.attributedPlaceholder,
-            let range = attributedPlaceholder.string.range(of: attributedPlaceholder.string) else {
-            return
-        }
-        
-        let placeholder = NSMutableAttributedString(string: attributedPlaceholder.string)
-        let nsRange = NSRange(range, in: attributedPlaceholder.string)
-        placeholder.addAttribute(.foregroundColor, value: UIColor.clear, range: nsRange)
-        textField.attributedPlaceholder = placeholder
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let attributedPlaceholder = textField.attributedPlaceholder,
-            let range = attributedPlaceholder.string.range(of: attributedPlaceholder.string) else {
-                return
-        }
-        
-        let placeholder = NSMutableAttributedString(string: attributedPlaceholder.string)
-        let nsRange = NSRange(range, in: attributedPlaceholder.string)
-        placeholder.addAttribute(.foregroundColor, value: placeholderColor, range: nsRange)
-        textField.attributedPlaceholder = placeholder
     }
 }
 

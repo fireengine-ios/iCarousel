@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class UnderlineTextField: UITextField {
+class UnderlineTextField: UITextField {
     
     var underlineWidth: CGFloat = 1 {
         didSet { setNeedsDisplay() }

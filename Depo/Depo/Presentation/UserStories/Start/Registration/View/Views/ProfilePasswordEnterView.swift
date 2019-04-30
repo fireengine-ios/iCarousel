@@ -10,18 +10,19 @@ import UIKit
 
 final class ProfilePasswordEnterView: ProfileTextEnterView {
     
-    private let eyeButton: UIButton = {
-        let newValue = UIButton(frame: .zero)
-        let showPasswordImage = UIImage(named: "show")
-        let hidePasswordImage = UIImage(named: "hide")
-        
-        newValue.setImage(showPasswordImage, for: .normal)
-        newValue.setImage(hidePasswordImage, for: .selected)
+    private let showPasswordImage = UIImage(named: "show")
+    private let hidePasswordImage = UIImage(named: "hide")
+    
+    private let eyeImageView: UIImageView = {
+        let newValue = UIImageView()
+        newValue.contentMode = .scaleAspectFill
+        ///without it tapGuesture not work
+        newValue.isUserInteractionEnabled = true
         
         return newValue
     }()
     
-    private let stackViewForButton: UIStackView = {
+    private let topStackView: UIStackView = {
         let newValue = UIStackView()
         newValue.spacing = 8
         newValue.axis = .horizontal
@@ -34,13 +35,14 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
     override func initialSetup() {
         super.initialSetup()
         
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(changeVisibilityState))
+        eyeImageView.addGestureRecognizer(tapGesture)
+        eyeImageView.image = showPasswordImage
+        
         textField.isSecureTextEntry = true
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
-        
-        let tapGesture = UITapGestureRecognizer(target: self,
-                                                action: #selector(changeVisibilityState))
-        eyeButton.addGestureRecognizer(tapGesture)
     }
     
     override func setupStackView() {
@@ -53,16 +55,16 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -edgeInset).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
         
-        stackViewForButton.addArrangedSubview(titleLabel)
-        stackViewForButton.addArrangedSubview(eyeButton)
+        topStackView.addArrangedSubview(titleLabel)
+        topStackView.addArrangedSubview(eyeImageView)
         
-        stackView.addArrangedSubview(stackViewForButton)
+        stackView.addArrangedSubview(topStackView)
         stackView.addArrangedSubview(subtitleLabel)
         stackView.addArrangedSubview(textField)
     }
     
     @objc private func changeVisibilityState() {
-        eyeButton.isSelected.toggle()
         textField.toggleTextFieldSecureType()
+        eyeImageView.image = textField.isSecureTextEntry ? showPasswordImage : hidePasswordImage
     }
 }

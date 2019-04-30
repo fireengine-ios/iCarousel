@@ -87,7 +87,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         }
     }
     
-    @IBOutlet public weak var numberTextField: UnderlineTextField! {
+    @IBOutlet public weak var numberTextField: QuickDismissPlaceholderTextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = UIColor.black

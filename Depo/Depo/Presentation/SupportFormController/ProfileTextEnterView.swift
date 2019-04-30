@@ -22,14 +22,15 @@ class ProfileTextEnterView: UIView {
         return newValue
     }()
     
-    let textField: UITextField = {
-        let newValue = UITextField()
+    let textField: QuickDismissPlaceholderTextField = {
+        let newValue = QuickDismissPlaceholderTextField()
         newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
         newValue.textColor = UIColor.black
         newValue.borderStyle = .none
         newValue.backgroundColor = .white
         newValue.isOpaque = true
         newValue.returnKeyType = .next
+        newValue.underlineColor = .clear
         return newValue
     }()
     
