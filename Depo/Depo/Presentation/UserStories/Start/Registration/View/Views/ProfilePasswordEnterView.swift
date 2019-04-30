@@ -13,6 +13,7 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
     private let showPasswordImage = UIImage(named: "show")
     private let hidePasswordImage = UIImage(named: "hide")
     
+    //TODO: change to button
     private let eyeImageView: UIImageView = {
         let newValue = UIImageView()
         newValue.contentMode = .scaleAspectFill
