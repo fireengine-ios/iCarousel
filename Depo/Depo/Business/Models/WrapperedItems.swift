@@ -1051,6 +1051,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         creationDate = item.creationDate
         lastModifiDate = item.lastModifiDate
         md5 = item.md5
+        tmpDownloadUrl = item.tmpDownloadUrl
         metaData?.copy(metaData: item.metaData)
     }
     
