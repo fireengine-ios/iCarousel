@@ -94,7 +94,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
             newValue.isOpaque = true
-            newValue.placeholder = TextConstants.profilePhoneNumberPlaceholder
+            newValue.quickDismissPlaceholder = TextConstants.profilePhoneNumberPlaceholder
             
             /// removes suggestions bar above keyboard
             newValue.autocorrectionType = .no

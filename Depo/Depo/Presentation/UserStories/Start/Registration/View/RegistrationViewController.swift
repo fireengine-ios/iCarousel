@@ -75,12 +75,8 @@ final class RegistrationViewController: ViewController {
     private let phoneEnterView: ProfilePhoneEnterView = {
         let newValue = ProfilePhoneEnterView()
         newValue.numberTextField.enablesReturnKeyAutomatically = true
-        
-        let attributedPlaceholder = NSAttributedString(string: TextConstants.profilePhoneNumberPlaceholder,
-                                                       attributes: [
-                                                        .foregroundColor : UIColor.lightGray
-            ])
-        newValue.numberTextField.attributedPlaceholder = attributedPlaceholder
+
+        newValue.numberTextField.quickDismissPlaceholder = TextConstants.profilePhoneNumberPlaceholder
         newValue.titleLabel.text = TextConstants.registrationCellTitleGSMNumber
         
         return newValue
@@ -91,11 +87,7 @@ final class RegistrationViewController: ViewController {
         newValue.textField.keyboardType = .emailAddress
         newValue.textField.autocapitalizationType = .none
         newValue.textField.autocorrectionType = .no
-        let attributedPlaceholder = NSAttributedString(string: TextConstants.enterYourEmailAddress,
-                                                       attributes: [
-                                                        .foregroundColor : UIColor.lightGray
-            ])
-        newValue.textField.attributedPlaceholder = attributedPlaceholder
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourEmailAddress
         newValue.textField.enablesReturnKeyAutomatically = true
         
         newValue.titleLabel.text = TextConstants.registrationCellTitleEmail
@@ -106,12 +98,8 @@ final class RegistrationViewController: ViewController {
     private let passwordEnterView: ProfilePasswordEnterView = {
         let newValue = ProfilePasswordEnterView()
         newValue.textField.enablesReturnKeyAutomatically = true
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourNewPassword
         
-        let attributedPlaceholder = NSAttributedString(string: TextConstants.enterYourNewPassword,
-                                                       attributes: [
-                                                        .foregroundColor : UIColor.lightGray
-            ])
-        newValue.textField.attributedPlaceholder = attributedPlaceholder
         newValue.titleLabel.text = TextConstants.registrationCellTitlePassword
         
         return newValue
@@ -119,11 +107,8 @@ final class RegistrationViewController: ViewController {
     
     private let rePasswordEnterView: ProfilePasswordEnterView = {
         let newValue = ProfilePasswordEnterView()
-        let attributedPlaceholder = NSAttributedString(string: TextConstants.reenterYourPassword,
-                                                       attributes: [
-                                                        .foregroundColor : UIColor.lightGray
-            ])
-        newValue.textField.attributedPlaceholder = attributedPlaceholder
+        
+        newValue.textField.quickDismissPlaceholder = TextConstants.reenterYourPassword
         newValue.textField.enablesReturnKeyAutomatically = true
         
         newValue.titleLabel.text = TextConstants.registrationCellTitleReEnterPassword
@@ -217,13 +202,6 @@ final class RegistrationViewController: ViewController {
     private func configureKeyboard() {
         keyboard
             .on(event: .willShow) { [weak self] options in
-                guard let `self` = self else {
-                    return
-                }
-                
-                self.updateScroll(with: options.endFrame)
-            }
-            .on(event: .didChangeFrame) { [weak self] options in
                 guard let `self` = self else {
                     return
                 }

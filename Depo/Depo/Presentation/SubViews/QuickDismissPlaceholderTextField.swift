@@ -16,16 +16,27 @@ final class QuickDismissPlaceholderTextField: UnderlineTextField {
         }
     }
     
+    var quickDismissPlaceholder: String = "" {
+        didSet {
+            self.attributedPlaceholder = NSAttributedString(string: quickDismissPlaceholder)
+            changePlaceholderColor()
+        }
+    }
+    
     override func becomeFirstResponder() -> Bool {
+        let result = super.becomeFirstResponder()
+        
         changePlaceholderColor()
         
-        return super.becomeFirstResponder()
+        return result
     }
     
     override func resignFirstResponder() -> Bool {
+        let result = super.resignFirstResponder()
+        
         changePlaceholderColor()
         
-        return super.resignFirstResponder()
+        return result
     }
     
     private func changePlaceholderColor() {
@@ -33,8 +44,7 @@ final class QuickDismissPlaceholderTextField: UnderlineTextField {
                 return
         }
         
-        ///inversed because called before super
-        let color = isFirstResponder ? placeholderColor : UIColor.clear
+        let color = isFirstResponder ? UIColor.clear : placeholderColor
         let attributes: [NSAttributedStringKey : Any] = [ .foregroundColor : color ]
         let attributedPlaceholder = NSMutableAttributedString(string: placeholder,
                                                     attributes: attributes)
