@@ -9,7 +9,6 @@
 import Foundation
 import Reachability
 
-
 protocol ReachabilityProtocol {
     
     var isReachableViaWWAN: Bool { get }
@@ -19,7 +18,13 @@ protocol ReachabilityProtocol {
     var isReachable: Bool { get }
 }
 
-class ReachabilityService: ReachabilityProtocol {
+protocol ReachabilityServiceDelegate: class {
+    func reachabilityDidChanged(_ service: ReachabilityService)
+}
+
+final class ReachabilityService: ReachabilityProtocol {
+    
+    static let shared = ReachabilityService()
     
     private let reachability = Reachability()
     
@@ -40,25 +45,30 @@ class ReachabilityService: ReachabilityProtocol {
         return self.reachability?.connection.description ?? Reachability.Connection.none.description
     }
     
-    init() {
-        ///DO WE NEED THIS?
-//        self.reachability?.whenReachable = { Reachability in
-//            //
-//        }
-//
-//        self.reachability?.whenUnreachable = { Reachability in
-//            //
-//        }
-        
+    let delegates = MulticastDelegate<ReachabilityServiceDelegate>()
+    
+    private let reachabilityChanged = Notification.Name("reachabilityChanged")
+    private init() {
         do {
-            try self.reachability?.startNotifier()
+            try reachability?.startNotifier()
+            
+            NotificationCenter.default.addObserver(forName: reachabilityChanged, object: nil, queue: .main) { [weak self] notification in
+                guard let self = self else {
+                    return
+                }
+                if let connection = self.reachability?.connection {
+                    debugPrint("ReachabilityService: new connection status \(connection.description)")
+                }
+                self.delegates.invoke { $0.reachabilityDidChanged(self) }
+            }
         } catch {
             print("Can't start REACHABILITY_NOTIFIER")
         }
     }
     
     deinit {
-        self.reachability?.stopNotifier()
+        reachability?.stopNotifier()
+        NotificationCenter.default.removeObserver(self)
     }
 }
 

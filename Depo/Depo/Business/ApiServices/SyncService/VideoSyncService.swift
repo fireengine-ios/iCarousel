@@ -25,7 +25,7 @@ final class VideoSyncService: ItemSyncServiceImpl {
     override func itemsSortedToUpload(completion: @escaping WrapObjectsCallBack) {
         MediaItemOperationsService.shared.allLocalItemsForSync(video: true, image: false) { items in
             ///reversed video sync interruption fix
-            //            let isMobileData = ReachabilityService().isReachableViaWWAN
+            //            let isMobileData = ReachabilityService.shared.isReachableViaWWAN
             let fileSizeLimit = NumericConstants.fourGigabytes //isMobileData ? NumericConstants.hundredMegabytes : NumericConstants.fourGigabytes
             
             completion(items.filter { item in
@@ -48,7 +48,7 @@ final class VideoSyncService: ItemSyncServiceImpl {
         super.start(newItems: newItems)
         
         // This tag triggering when user changes autosync preferences
-//        let isWiFi = ReachabilityService().isReachableViaWiFi
+//        let isWiFi = ReachabilityService.shared.isReachableViaWiFi
 //        isWiFi ? MenloworksTagsService.shared.onAutosyncVideoViaWifi() : MenloworksTagsService.shared.onAutosyncVideoViaLte()
         
     }
@@ -80,7 +80,7 @@ final class VideoSyncService: ItemSyncServiceImpl {
 
 extension VideoSyncService: BackgroundTaskServiceDelegate {
     func backgroundTaskWillExpire() {
-        if status == .executing, ReachabilityService().isReachableViaWWAN, !lastInterruptedItemsUUIDs.isEmpty {
+        if status == .executing, ReachabilityService.shared.isReachableViaWWAN, !lastInterruptedItemsUUIDs.isEmpty {
             storageVars.interruptedSyncVideoQueueItems = lastInterruptedItemsUUIDs
             debugLog("Interrupted autosync queue:")
             

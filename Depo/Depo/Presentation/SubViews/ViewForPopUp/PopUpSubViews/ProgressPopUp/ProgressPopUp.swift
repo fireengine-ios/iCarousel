@@ -75,7 +75,7 @@ final class ProgressPopUp: BaseView, ProgressPopUpProtocol {
     }
     
     func configurateWithType(viewType: OperationType) {
-        let isWiFi = ReachabilityService().isReachableViaWiFi
+        let isWiFi = ReachabilityService.shared.isReachableViaWiFi
         let networkType = isWiFi ? TextConstants.networkTypeWiFi : TextConstants.mobileData
         let iconImage = isWiFi ? UIImage(named: "WiFiIcon") : UIImage(named: "SyncingPopUpImage")
         typeOfOperation = viewType
