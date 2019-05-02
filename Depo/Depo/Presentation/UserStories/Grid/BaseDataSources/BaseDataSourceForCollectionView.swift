@@ -838,6 +838,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         DispatchQueue.toMain {
             if items is [[WrapData]] {
                 self.allItems = items as! [[WrapData]]
+                self.allMediaItems = self.allItems.flatMap { $0 }
             }
         }
     }
