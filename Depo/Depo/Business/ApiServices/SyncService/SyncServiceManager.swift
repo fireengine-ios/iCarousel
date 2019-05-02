@@ -129,10 +129,6 @@ class SyncServiceManager {
     
     // MARK: - Private
     
-    private func setupAPIReachability() {
-        APIReachabilityService.shared.startNotifier()
-    }
-    
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
         debugPrint("AUTOSYNC: checkReachabilityAndSettings")
         dispatchQueue.async { [weak self] in
@@ -152,9 +148,8 @@ class SyncServiceManager {
             
             let photoOption = self.settings.photoSetting.option
             let videoOption = self.settings.videoSetting.option
-            let serverIsReachable = (self.reachabilityService.isReachable && APIReachabilityService.shared.connection != .unreachable)
             
-            if serverIsReachable {
+            if self.reachabilityService.isReachable {
                 let photoEnabled = (self.reachabilityService.isReachableViaWiFi && photoOption.isContained(in: [.wifiOnly, .wifiAndCellular])) ||
                     (self.reachabilityService.isReachableViaWWAN && photoOption == .wifiAndCellular)
                 
@@ -236,7 +231,6 @@ extension SyncServiceManager {
         }
         isSubscribeForNotifications = true
         reachabilityService.delegates.add(self)
-        setupAPIReachability()
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
@@ -247,11 +241,6 @@ extension SyncServiceManager {
         notificationCenter.addObserver(self,
                                        selector: #selector(onAutoSyncStatusDidChange),
                                        name: .autoSyncStatusDidChange,
-                                       object: nil)
-        
-        notificationCenter.addObserver(self,
-                                       selector: #selector(onAPIReachabilityDidChange),
-                                       name: .apiReachabilityDidChange,
                                        object: nil)
         
         notificationCenter.addObserver(self,
@@ -293,10 +282,6 @@ extension SyncServiceManager {
                 self.checkItemsToAppend()
             }
         }
-    }
-    
-    @objc private func onAPIReachabilityDidChange() {
-        self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
     }
     
     @objc private func onLocalFilesHaveBeenLoaded() {
