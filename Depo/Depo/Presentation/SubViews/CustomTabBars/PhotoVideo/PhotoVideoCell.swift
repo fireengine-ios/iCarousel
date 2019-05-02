@@ -58,7 +58,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     weak var delegate: PhotoVideoCellDelegate?
     private var cellId = ""
-    var filesDataSource: FilesDataSource!
+    var filesDataSource: FilesDataSource?
     private var cellImageManager: CellImageManager?
     private var uuid: String?
     
@@ -105,7 +105,7 @@ final class PhotoVideoCell: UICollectionViewCell {
         case .localMediaContent(let local):
             cellId = local.asset.localIdentifier
             
-            filesDataSource.getAssetThumbnail(asset: local.asset) { [weak self] image in
+            filesDataSource?.getAssetThumbnail(asset: local.asset) { [weak self] image in
                 DispatchQueue.main.async {
                     if self?.cellId == local.asset.localIdentifier, let image = image {
                         self?.setImage(image: image, animated:  false)
@@ -154,7 +154,7 @@ final class PhotoVideoCell: UICollectionViewCell {
                     return
                 }
                 
-                self.filesDataSource.getAssetThumbnail(asset: asset) { [weak self] image in
+                self.filesDataSource?.getAssetThumbnail(asset: asset) { [weak self] image in
                     DispatchQueue.main.async {
                         if self?.cellId == asset.localIdentifier, let image = image {
                             self?.setImage(image: image, animated:  false)

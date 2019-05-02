@@ -56,9 +56,11 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
         task = SessionManager.customDefault.request(trimmedURL)
             .customValidate()
             .responseData(queue: queue, completionHandler: { [weak self] dataResponse in
-
-                guard let self = self,
-                    !self.isCancelled else {
+                guard let self = self else {
+                    return
+                }
+                guard !self.isCancelled else {
+                    self.semaphore.signal()
                     return
                 }
                 

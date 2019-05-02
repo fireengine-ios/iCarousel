@@ -119,6 +119,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         assetsFileCacheManager.resetCachedAssets()
         dataSource.performFetch()
         collectionView.reloadData()
+        collectionView.collectionViewLayout.invalidateLayout()
     }
     
     // MARK: - Editing Mode
