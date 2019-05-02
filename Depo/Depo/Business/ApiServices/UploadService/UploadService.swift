@@ -22,7 +22,7 @@ final class UploadService: BaseRequestService {
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var autoSyncStorage = AutoSyncDataStorage()
-    private lazy var reachabilityService = ReachabilityService()
+    private lazy var reachabilityService = ReachabilityService.shared
     
     private var allSyncOperationsCount: Int {
         return uploadOperations.filter({ $0.uploadType == .autoSync && !$0.isCancelled }).count + finishedSyncOperationsCount

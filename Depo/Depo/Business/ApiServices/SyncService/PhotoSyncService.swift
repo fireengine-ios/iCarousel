@@ -27,7 +27,7 @@ final class PhotoSyncService: ItemSyncServiceImpl {
         super.start(newItems: newItems)
         
         // This tag triggering when user changes autosync preferences
-//        let isWiFi = ReachabilityService().isReachableViaWiFi
+//        let isWiFi = ReachabilityService.shared.isReachableViaWiFi
 //        isWiFi ? MenloworksTagsService.shared.onAutosyncPhotosViaWifi() : MenloworksTagsService.shared.onAutosyncPhotosViaLte()
         
     }

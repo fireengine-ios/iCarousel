@@ -16,7 +16,7 @@ class SplashInteractor: SplashInteractorInput {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private lazy var reachabilityService = Reachability()
+    private lazy var reachabilityService = ReachabilityService.shared
     
     private var isTryingToLogin = false
     private var isReachabilityStarted = false
@@ -26,7 +26,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     deinit {
-        reachabilityService?.stopNotifier()
+        reachabilityService.delegates.remove(self)
     }
     
     private func setupReachabilityIfNeed() {
@@ -35,20 +35,7 @@ class SplashInteractor: SplashInteractorInput {
         }
         isReachabilityStarted = true
         
-        guard let reachability = reachabilityService else {
-            assertionFailure()
-            return
-        }
-        
-        reachability.whenReachable = { [weak self] reachability in
-            self?.startLoginInBackground()
-        }
-        
-        do {
-            try reachability.startNotifier()
-        } catch {
-            assertionFailure("\(#function): can't start reachability notifier")
-        }
+        reachabilityService.delegates.add(self)
     }
 
     func startLoginInBackground() {
@@ -59,7 +46,7 @@ class SplashInteractor: SplashInteractorInput {
         setupReachabilityIfNeed()
         
         if tokenStorage.accessToken == nil {
-            if ReachabilityService().isReachableViaWiFi {
+            if reachabilityService.isReachableViaWiFi {
                 isTryingToLogin = false
                 analyticsService.trackLoginEvent(error: .serverError)
                 failLogin()
@@ -106,7 +93,7 @@ class SplashInteractor: SplashInteractorInput {
                 //self?.failLogin()
                 DispatchQueue.toMain {
                     self?.isTryingToLogin = false
-                    if ReachabilityService().isReachable {
+                    if self?.reachabilityService.isReachable == true {
                         self?.output.onFailGetAccountInfo(error: error)
                     } else {
                         self?.output.onNetworkFail()
@@ -137,7 +124,7 @@ class SplashInteractor: SplashInteractorInput {
     func failLogin() {
         DispatchQueue.toMain {
             self.output.onFailLogin()
-            if !ReachabilityService().isReachable {
+            if !self.reachabilityService.isReachable {
                 self.output.onNetworkFail()
             }
         }
@@ -183,6 +170,15 @@ class SplashInteractor: SplashInteractorInput {
                     self?.output.updateUserLanguageFailed(error: error)
                 }
             }
+        }
+    }
+}
+
+//MARK: - ReachabilityServiceDelegate
+extension SplashInteractor: ReachabilityServiceDelegate {
+    func reachabilityDidChanged(_ service: ReachabilityService) {
+        if service.isReachable {
+            startLoginInBackground()
         }
     }
 }

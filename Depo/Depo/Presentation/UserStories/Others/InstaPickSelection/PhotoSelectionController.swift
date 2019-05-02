@@ -33,7 +33,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     private let cellId = String(describing: PhotoCell.self)
     private let footerId = String(describing: CollectionSpinnerFooter.self)
     
-    private let reachabilityService = Reachability()
+    private let reachabilityService = ReachabilityService.shared
     
     private lazy var collectionView: UICollectionView = {
         let isIpad = Device.isIpad
@@ -94,7 +94,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     }
     
     deinit {
-        reachabilityService?.stopNotifier()
+        reachabilityService.delegates.remove(self)
     }
     
     override func viewDidLoad() {
@@ -105,7 +105,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         /// will call loadMore() also in reachability.whenReachable
         loadMore()
         loadingMoreFooterView?.startSpinner()
-        setupReachability()
+        reachabilityService.delegates.add(self)
     }
     
     override func viewWillLayoutSubviews() {
@@ -116,39 +116,6 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()
-    }
-    
-    private func setupReachability() {
-        guard let reachability = reachabilityService else {
-            assertionFailure()
-            return
-        }
-        
-        reachability.whenReachable = { [weak self] reachability in
-            guard let `self` = self, !self.isLoadingMoreFinished else {
-                return
-            }
-            self.loadMore()
-            self.loadingMoreFooterView?.startSpinner()
-            
-            /// reload photos
-            for indexPath in self.collectionView.indexPathsForVisibleItems {
-                guard
-                    let cell = self.collectionView.cellForItem(at: indexPath) as? PhotoCell,
-                    cell.isNeedToUpdate else {
-                        return
-                }
-                let item = self.photos[indexPath.row]
-                //cell.update(for: selectionState)
-                cell.setup(by: item)
-            }
-        }
-        
-        do {
-            try reachability.startNotifier()
-        } catch {
-            assertionFailure("can't start reachability notifier: \(error.localizedDescription)")
-        }
     }
     
     private func updateItemSize() {
@@ -455,5 +422,28 @@ extension PhotoSelectionController: InstaPickSelectionSegmentedControllerDelegat
             return
         }
         updateVisibleCellsForSelectionState()
+    }
+}
+
+//MARK: - ReachabilityServiceDelegate
+extension PhotoSelectionController: ReachabilityServiceDelegate {
+    func reachabilityDidChanged(_ service: ReachabilityService) {
+        guard service.isReachable, !isLoadingMoreFinished else {
+            return
+        }
+        loadMore()
+        loadingMoreFooterView?.startSpinner()
+        
+        /// reload photos
+        for indexPath in collectionView.indexPathsForVisibleItems {
+            guard
+                let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell,
+                cell.isNeedToUpdate else {
+                    return
+            }
+            let item = self.photos[indexPath.row]
+            //cell.update(for: selectionState)
+            cell.setup(by: item)
+        } 
     }
 }

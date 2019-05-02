@@ -24,7 +24,8 @@ final class CacheManager {
     private static let pageSize: Int = 100
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
                                                          type: .imageAndVideo)
-    private lazy var reachabilityService = APIReachabilityService()
+
+    private let reachabilityService = ReachabilityService.shared
     private(set) var processingRemoteItems = false
     private(set) var processingLocalItems = false
     private(set) var isProcessing = false
@@ -36,9 +37,10 @@ final class CacheManager {
     
     private var internetConnectionIsBackCallback: VoidHandler?
     
+    //MARK: -
+    
     deinit {
-        reachabilityService.stopNotifier()
-        NotificationCenter.default.removeObserver(self)
+        reachabilityService.delegates.remove(self)
     }
     
     func actualizeCache(completion: VoidHandler?) {
@@ -102,12 +104,19 @@ final class CacheManager {
     
     private func addNextRemoteItemsPage(completion: @escaping VoidHandler) {
         photoVideoService.nextItems(fileType: .imageAndVideo, sortBy: .imageDate, sortOrder: .desc, success: { [weak self] remoteItems in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             guard self.processingRemoteItems else {
                 return
             }
+            
+            guard !remoteItems.isEmpty, self.reachabilityService.isReachable else {
+                //case when we received a response with statusCode == 200 and an error "The network connection was lost."
+                self.handleLostConnection(completion: completion)
+                return
+            }
+
             self.userDefaultsVars.currentRemotesPage = self.photoVideoService.currentPage
             
             MediaItemOperationsService.shared.appendRemoteMediaItems(remoteItems: remoteItems) { [weak self] in
@@ -120,41 +129,40 @@ final class CacheManager {
                 self.addNextRemoteItemsPage(completion: completion)
             }
             
-        }) { [weak self] in
-            guard let `self` = self else {
+        }, fail: { [weak self] in
+            guard let self = self else {
                 completion()
                 return
             }
+            
             guard self.processingRemoteItems else {
                 return
             }
+            
+            self.handleLostConnection(completion: completion)
+        })
+    }
+    
+    private func handleLostConnection(completion: @escaping VoidHandler) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            //delay need for case when we received a response before changing the status of ReachabilityService
             ///start subscribing
-            self.checkInternetConnection { [weak self] in
+            self?.checkInternetConnection { [weak self] in
                 self?.addNextRemoteItemsPage(completion: completion)
             }
         }
     }
     
-    private func checkInternetConnection(iternetConnectionBackCallback: @escaping VoidHandler) {
-        guard reachabilityService.connection == .reachable else {
-            NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityDidChanged), name: .apiReachabilityDidChange, object: nil)
-            reachabilityService.startNotifier()
+    private func checkInternetConnection(internetConnectionBackCallback: @escaping VoidHandler) {
+        guard reachabilityService.isReachable else {
+            reachabilityService.delegates.add(self)
             internetConnectionIsBackCallback = { [weak self] in
                 self?.internetConnectionIsBackCallback = nil
-                self?.checkInternetConnection(iternetConnectionBackCallback: iternetConnectionBackCallback)
+                self?.checkInternetConnection(internetConnectionBackCallback: internetConnectionBackCallback)
             }
             return
         }
-        iternetConnectionBackCallback()
-    }
-    
-    @objc private func reachabilityDidChanged() {
-        guard reachabilityService.connection == .reachable else {
-            return
-        }
-        reachabilityService.stopNotifier()
-        NotificationCenter.default.removeObserver(self)
-        internetConnectionIsBackCallback?()
+        internetConnectionBackCallback()
     }
     
     private func startAppendingAllLocals(completion: @escaping VoidHandler) {
@@ -176,8 +184,7 @@ final class CacheManager {
         isCacheActualized = false
         photoVideoService.stopAllOperations() //Dont know if it actualy affects opration by cancell all
         ///unsubscribe
-        reachabilityService.stopNotifier()
-        NotificationCenter.default.removeObserver(self)
+        reachabilityService.delegates.remove(self)
         internetConnectionIsBackCallback = nil
     }
     
@@ -192,4 +199,13 @@ final class CacheManager {
     
     //TODO: move method of QS DB update here.
 
+}
+
+//MARK: - ReachabilityServiceDelegate
+extension CacheManager: ReachabilityServiceDelegate {
+    func reachabilityDidChanged(_ service: ReachabilityService) {
+        if service.isReachable {
+            internetConnectionIsBackCallback?()
+        }
+    }
 }

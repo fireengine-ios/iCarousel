@@ -63,7 +63,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
                 .flatMap { $0.subscriptionPlanDisplayName }
                 .joined(separator: ", ")
             }
-            let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "", UIDevice.current.model, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN", quota, quotaUsed, packages)
+            let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "", UIDevice.current.model, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN", quota, quotaUsed, packages)
             
             self?.output.asyncOperationSuccess()
             self?.output.languageRequestSended(text: userInfoString)
