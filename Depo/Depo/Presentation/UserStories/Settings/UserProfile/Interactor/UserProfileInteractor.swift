@@ -10,7 +10,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
 
     weak var output: UserProfileInteractorOutput!
     
-    weak var userInfo: AccountInfoResponse?
+    var userInfo: AccountInfoResponse?
     
     private let analyticsManager: AnalyticsService = factory.resolve()
     
@@ -112,6 +112,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
             AccountService().updateUserBirthday(birthday) { [weak self] response in
                 switch response {
                 case .success(_):
+                    self?.userInfo?.dob = birthday
                     self?.allUpdated()
                 case .failed(let error):
                     self?.fail(error: error.localizedDescription)
