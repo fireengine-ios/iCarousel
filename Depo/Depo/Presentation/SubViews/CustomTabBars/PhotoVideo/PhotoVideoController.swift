@@ -547,8 +547,12 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         
         let id = file.getTrimmedLocalID()
         uploadProgress[id] = progress
-        self.getCellForLocalFile(objectTrimmedLocalID: id) { cell in
-            cell?.setProgressForObject(progress: progress, blurOn: true)
+        
+        collectionView.visibleCells.forEach { cell in
+            if let cell = cell as? PhotoVideoCell, cell.trimmedLocalFileID == id {
+                cell.setProgressForObject(progress: progress, blurOn: true)
+                return
+            }
         }
     }
     

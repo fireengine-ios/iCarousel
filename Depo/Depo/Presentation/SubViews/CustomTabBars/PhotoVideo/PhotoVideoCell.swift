@@ -61,6 +61,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     var filesDataSource: FilesDataSource?
     private var cellImageManager: CellImageManager?
     private var uuid: String?
+    private(set) var trimmedLocalFileID: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -166,6 +167,8 @@ final class PhotoVideoCell: UICollectionViewCell {
             setImage(smalUrl: URL(string: metadata.smalURl ?? ""),
                      mediumUrl: URL(string: metadata.mediumUrl ?? ""))
         }
+        
+        trimmedLocalFileID = mediaItem.trimmedLocalFileID
     }
     
     private func setImage(smalUrl: URL?, mediumUrl: URL?) {
@@ -291,6 +294,7 @@ final class PhotoVideoCell: UICollectionViewCell {
         checkmarkImageView.isHidden = true
         uuid = nil
         cellId = ""
+        trimmedLocalFileID = nil
     }
 
     deinit {
