@@ -129,6 +129,7 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
             if 200...299 ~= httpResponse.statusCode {
                 
                 if let error = error as? URLError, error.code == .networkConnectionLost {
+                    //case when we received a response with statusCode == 200 and an error "The network connection was lost."
                     fail?(.error(error))
                     return
                 }
