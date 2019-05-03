@@ -63,7 +63,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private lazy var dateFormatter: DateFormatter = {
         let newValue = DateFormatter()
         
-        newValue.dateFormat = "dd MM YYYY"
+        newValue.dateFormat = "dd MM yyyy"
 
         return newValue
     }()
@@ -155,7 +155,10 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     }
     
     @objc private func dateDidChanged(_ datePicker: UIDatePicker) {
+        debugPrint("---Date changed \(datePicker.date)")
         editableText = dateFormatter.string(from: datePicker.date)
+        debugPrint("---dateFormatter \(dateFormatter.timeZone)")
+        debugPrint("---editableText \(editableText)")
     }
     
     @discardableResult
