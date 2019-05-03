@@ -239,7 +239,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                                                     email: self?.emailDetailView.editableText ?? "",
                                                     number: self?.gsmDetailView.editableText ?? "",
                                                     birthday: self?.birthdayDetailView.editableText ?? "")
-                        self?.navigationItem.rightBarButtonItem?.fixEnabledState()
+                        self?.readyButton.fixEnabledState()
                     }
                 })
             
