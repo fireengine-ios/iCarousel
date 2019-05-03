@@ -69,16 +69,6 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
             ])
     
         changePasswordButton.setAttributedTitle(attributedString, for: .normal)
-    
-        // font: .TurkcellSaturaRegFont(size: 19) ///maybe will be need
-        editButton = UIBarButtonItem(title: TextConstants.userProfileEditButton,
-                                     target: self,
-                                     selector: #selector(onEditButtonAction))
-        
-        // font: .TurkcellSaturaRegFont(size: 19) ///maybe will be need
-        readyButton = UIBarButtonItem(title: TextConstants.userProfileDoneButton,
-                                      target: self,
-                                      selector: #selector(onReadyButtonAction))
         
         setupFields()
         configureKeyboard()
@@ -170,8 +160,8 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     //MARK: Utility Methods(Public)
     func setupEditState(_ isEdit: Bool) {
         let button = isEdit ? readyButton : editButton
+        button.fixEnabledState()
         navigationItem.setRightBarButton(button, animated: true)
-        fixEnabledState()
         
         nameDetailView.isEditState = isEdit
         surnameDetailView.isEditState = isEdit
@@ -198,7 +188,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     }
     
     func endSaving() {
-        fixEnabledState()
+        navigationItem.rightBarButtonItem?.fixEnabledState()
     }
     
     //MARK: Actions
@@ -249,7 +239,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                                                     email: self?.emailDetailView.editableText ?? "",
                                                     number: self?.gsmDetailView.editableText ?? "",
                                                     birthday: self?.birthdayDetailView.editableText ?? "")
-                        self?.fixEnabledState()
+                        self?.navigationItem.rightBarButtonItem?.fixEnabledState()
                     }
                 })
             
@@ -312,13 +302,4 @@ extension UserProfileViewController: UITextFieldDelegate {
     }
 }
 
-/// if you use the properties for the buttons there is a bug only on ios 11 with the replacement of buttons by clicking on them
-/// https://forums.developer.apple.com/thread/75521
-extension UserProfileViewController {
-    
-    func fixEnabledState() {
-        navigationItem.rightBarButtonItem?.isEnabled = false
-        navigationItem.rightBarButtonItem?.isEnabled = true
-    }
-    
-}
+
