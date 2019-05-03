@@ -34,8 +34,21 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     private var number: String?
     private var birthday: String?
 
-    var editButton: UIBarButtonItem?
-    var readyButton: UIBarButtonItem?
+    private lazy var editButton = UIBarButtonItem(title: TextConstants.userProfileEditButton,
+                                                  font: UIFont.TurkcellSaturaRegFont(size: 19),
+                                                  tintColor: .white,
+                                                  accessibilityLabel: TextConstants.userProfileEditButton,
+                                                  style: .plain,
+                                                  target: self,
+                                                  selector: #selector(onEditButtonAction))
+    
+    private lazy var readyButton = UIBarButtonItem(title: TextConstants.userProfileDoneButton,
+                                                   font: UIFont.TurkcellSaturaRegFont(size: 19),
+                                                   tintColor: .white,
+                                                   accessibilityLabel: TextConstants.userProfileDoneButton,
+                                                   style: .plain,
+                                                   target: self,
+                                                   selector: #selector(onReadyButtonAction))
 
     //MARK: init / deinit
     deinit {
@@ -56,16 +69,6 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
             ])
     
         changePasswordButton.setAttributedTitle(attributedString, for: .normal)
-    
-        // font: .TurkcellSaturaRegFont(size: 19) ///maybe will be need
-        editButton = UIBarButtonItem(title: TextConstants.userProfileEditButton,
-                                     target: self,
-                                     selector: #selector(onEditButtonAction))
-        
-        // font: .TurkcellSaturaRegFont(size: 19) ///maybe will be need
-        readyButton = UIBarButtonItem(title: TextConstants.userProfileDoneButton,
-                                      target: self,
-                                      selector: #selector(onReadyButtonAction))
         
         setupFields()
         configureKeyboard()
@@ -157,7 +160,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     //MARK: Utility Methods(Public)
     func setupEditState(_ isEdit: Bool) {
         let button = isEdit ? readyButton : editButton
-        button?.isEnabled = true
+        button.fixEnabledState()
         navigationItem.setRightBarButton(button, animated: true)
         
         nameDetailView.isEditState = isEdit
@@ -185,7 +188,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
     }
     
     func endSaving() {
-        readyButton?.isEnabled = true
+        navigationItem.rightBarButtonItem?.fixEnabledState()
     }
     
     //MARK: Actions
@@ -209,7 +212,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                 return
         }
         
-        readyButton?.isEnabled = false
+        readyButton.isEnabled = false
         
         if email != emailDetailView.editableText {
             guard let email = emailDetailView.editableText, !email.isEmpty else {
@@ -236,7 +239,7 @@ final class UserProfileViewController: BaseViewController, UserProfileViewInput 
                                                     email: self?.emailDetailView.editableText ?? "",
                                                     number: self?.gsmDetailView.editableText ?? "",
                                                     birthday: self?.birthdayDetailView.editableText ?? "")
-                        self?.readyButton?.isEnabled = true
+                        self?.readyButton.fixEnabledState()
                     }
                 })
             
@@ -298,3 +301,5 @@ extension UserProfileViewController: UITextFieldDelegate {
         return !(string == " " && textField == emailDetailView.getTextField())
     }
 }
+
+
