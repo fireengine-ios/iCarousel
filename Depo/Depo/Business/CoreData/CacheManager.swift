@@ -110,12 +110,6 @@ final class CacheManager {
             guard self.processingRemoteItems else {
                 return
             }
-            
-            guard !remoteItems.isEmpty, self.reachabilityService.isReachable else {
-                //case when we received a response with statusCode == 200 and an error "The network connection was lost."
-                self.handleLostConnection(completion: completion)
-                return
-            }
 
             self.userDefaultsVars.currentRemotesPage = self.photoVideoService.currentPage
             
