@@ -80,7 +80,10 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         router.goToRegistration()
     }
     
-    func viewAppeared() {}
+    func viewAppeared() {
+        CardsManager.default.stopAllOperations()
+        CardsManager.default.clear()
+    }
     
     func captchaRequred(requred: Bool) {
         asyncOperationSuccess()

@@ -377,8 +377,6 @@ class AuthenticationService: BaseRequestService {
             self.tokenStorage.clearTokens()
             CellImageManager.clear()
             FreeAppSpace.default.clear()
-            CardsManager.default.stopAllOperations()
-            CardsManager.default.clear()
             RecentSearchesService.shared.clearAll()
             SyncServiceManager.shared.stopSync()
             UploadService.default.cancelOperations()
@@ -391,6 +389,9 @@ class AuthenticationService: BaseRequestService {
 //            ItemsRepository.sharedSession.dropCache()
             ViewSortStorage.shared.resetToDefault()
             AuthoritySingleton.shared.setLoginAlready(isLoginAlready: false)
+            
+            CardsManager.default.stopAllOperations()
+            CardsManager.default.clear()
             
             self.player.stop()
             self.cancellAllRequests()
