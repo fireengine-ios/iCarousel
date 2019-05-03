@@ -837,7 +837,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     func setAllItems(items: [[BaseDataSourceItem]]) {
         DispatchQueue.toMain {
             if items is [[WrapData]] {
-                self.allItems = items as! [[WrapData]]
+                if let items = items as? [[WrapData]] {
+                    self.allItems = items
+                    self.allMediaItems = self.allItems.flatMap { $0 }
+                }
             }
         }
     }
@@ -1625,10 +1628,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func removeFileFromFavorites(items: [Item]){
+    func removeFileFromFavorites(items: [Item]) {
         if let unwrapedFilters = originalFilters, isFavoritesOnly(filters: unwrapedFilters) {
             updateCellsForObjects(objectsForDelete: items, objectsForUpdate: [Item]())
-        }else{
+        } else {
             updateFavoritesCellStatus(items: items, isFavorites: false)
         }
     }
