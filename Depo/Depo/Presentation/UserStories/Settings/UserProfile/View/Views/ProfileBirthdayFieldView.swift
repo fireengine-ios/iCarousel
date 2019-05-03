@@ -155,10 +155,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     }
     
     @objc private func dateDidChanged(_ datePicker: UIDatePicker) {
-        debugPrint("---Date changed \(datePicker.date)")
         editableText = dateFormatter.string(from: datePicker.date)
-        debugPrint("---dateFormatter \(dateFormatter.timeZone)")
-        debugPrint("---editableText \(editableText)")
     }
     
     @discardableResult
