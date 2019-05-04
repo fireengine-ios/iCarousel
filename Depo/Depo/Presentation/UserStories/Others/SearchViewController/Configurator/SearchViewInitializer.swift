@@ -14,7 +14,7 @@ protocol SearchModuleOutput: class {
 }
 
 class SearchViewInitializer {
-    class func initializeAllFilesViewController(with nibName: String, output: SearchModuleOutput?) -> UIViewController {
+    class func initializeSearchViewController(with nibName: String, output: SearchModuleOutput?) -> SearchViewController {
         let viewController = SearchViewController(nibName: nibName, bundle: nil)
         let configurator = SearchViewConfigurator()
         
