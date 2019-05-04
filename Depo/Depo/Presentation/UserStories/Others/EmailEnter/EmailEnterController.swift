@@ -22,7 +22,7 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Missing Information"
+        title = TextConstants.missingInformation
         emailView.becomeFirstResponder()
         emailView.textField.delegate = self
         emailView.textField.addTarget(self, action: #selector(emailDidChnaged), for: .editingChanged)

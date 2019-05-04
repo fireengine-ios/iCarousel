@@ -3,7 +3,7 @@ import UIKit
 final class EmailEnterDesigner: NSObject {
     @IBOutlet private weak var infoLabel: UILabel! {
         willSet {
-            newValue.text = "Please enter your missing account information:"
+            newValue.text = TextConstants.pleaseEnterYourMissingAccountInformation
             newValue.textColor = UIColor.black
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.backgroundColor = .white
@@ -29,7 +29,7 @@ final class EmailEnterDesigner: NSObject {
         willSet {
             /// Custom type in IB
             newValue.isExclusiveTouch = true
-            newValue.setTitle("Continue", for: .normal)
+            newValue.setTitle(TextConstants.createStoryPhotosContinue, for: .normal)
             newValue.insets = UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30)
             
             newValue.setTitleColor(UIColor.white, for: .normal)
