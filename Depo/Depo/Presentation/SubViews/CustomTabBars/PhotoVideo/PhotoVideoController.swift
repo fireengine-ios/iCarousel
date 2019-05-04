@@ -219,11 +219,9 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: isPhoto ? .clickPhoto : .clickVideo)
     }
     
-    private func showSearchScreen(output: UIViewController?) {
+    private func showSearchScreen() {
         let router = RouterVC()
-        let controller = router.searchView(output: output as? SearchModuleOutput)
-        output?.navigationController?.delegate = controller as? BaseViewController
-        controller.transitioningDelegate = output as? UIViewControllerTransitioningDelegate
+        let controller = router.searchView(navigationController: navigationController)
         router.pushViewController(viewController: controller)
     }
     
@@ -505,7 +503,7 @@ extension PhotoVideoController: PhotoVideoNavBarManagerDelegate {
     }
     
     func onSearchButton() {
-        showSearchScreen(output: self)
+        showSearchScreen()
     }
 }
 
