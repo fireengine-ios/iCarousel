@@ -866,9 +866,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
     init(searchResponse: JSON) {
         let fileUUID = searchResponse[SearchJsonKey.uuid].string ?? ""
         fileSize = searchResponse[SearchJsonKey.bytes].int64 ?? 0
-        favorites = metaData?.favourite ?? false
         patchToPreview = .remoteUrl(URL(string: ""))///????
         status = Status(string:searchResponse[SearchJsonKey.status].string)
+        metaData = BaseMetaData(withJSON: searchResponse[SearchJsonKey.metadata])
+        favorites = metaData?.favourite ?? false
         super.init(uuid: fileUUID)
         
         creationDate = searchResponse[SearchJsonKey.createdDate].date
@@ -880,7 +881,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         mimeType = searchResponse[SearchJsonKey.content_type].string
         fileType = FileType(type: mimeType, fileName: name)
-        metaData = BaseMetaData(withJSON: searchResponse[SearchJsonKey.metadata])
         isFolder = searchResponse[SearchJsonKey.folder].bool
 //        uploaderDeviceType = searchResponse[SearchJsonKey.uploaderDeviceType].string
         parent = searchResponse[SearchJsonKey.parent].string
