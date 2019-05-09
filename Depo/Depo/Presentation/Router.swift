@@ -544,8 +544,10 @@ class RouterVC: NSObject {
     
     // MARK: - SearchView
     
-    func searchView(output: SearchModuleOutput? = nil) -> UIViewController {
-        let controller = SearchViewInitializer.initializeAllFilesViewController(with: "SearchView", output: output)
+    func searchView(navigationController: UINavigationController?, output: SearchModuleOutput? = nil) -> UIViewController {
+        let controller = SearchViewInitializer.initializeSearchViewController(with: "SearchView", output: output)
+        navigationController?.delegate = controller
+        controller.transitioningDelegate = controller
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
         return controller
