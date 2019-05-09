@@ -3105,7 +3105,6 @@
 		CE23A0F5205FF52B0048267D /* UserDefaultsForUserID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23A0EF205FE5B60048267D /* UserDefaultsForUserID.swift */; };
 		CE23A0F6205FF5320048267D /* EmailEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB27347205BE3DC00E1AE9C /* EmailEnterController.xib */; };
 		CE23A0F7205FF5320048267D /* EmailEnterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB27346205BE3DC00E1AE9C /* EmailEnterController.swift */; };
-		CE23A0F8205FF5320048267D /* EmailEnterCustomizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734B205BF56600E1AE9C /* EmailEnterCustomizator.swift */; };
 		CE23A0F9205FF5320048267D /* UnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734D205BF57B00E1AE9C /* UnderlineTextField.swift */; };
 		CE23A0FA205FF5AE0048267D /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFC14152059609F002DE803 /* Images.swift */; };
 		CE23A0FB205FF5AF0048267D /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFC14152059609F002DE803 /* Images.swift */; };
@@ -3598,7 +3597,6 @@
 		CEB1CEAA1F21E11200C9DD8F /* SwiftyJSONExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1CEA91F21E11200C9DD8F /* SwiftyJSONExtension.swift */; };
 		CEB27348205BE3DC00E1AE9C /* EmailEnterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB27346205BE3DC00E1AE9C /* EmailEnterController.swift */; };
 		CEB27349205BE3DC00E1AE9C /* EmailEnterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB27347205BE3DC00E1AE9C /* EmailEnterController.xib */; };
-		CEB2734C205BF56600E1AE9C /* EmailEnterCustomizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734B205BF56600E1AE9C /* EmailEnterCustomizator.swift */; };
 		CEB2734E205BF57B00E1AE9C /* UnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734D205BF57B00E1AE9C /* UnderlineTextField.swift */; };
 		CEB27350205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2734F205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift */; };
 		CEB76EB01FE9094700B679EB /* UIScrollView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB76EAF1FE9094600B679EB /* UIScrollView+Refresh.swift */; };
@@ -3710,6 +3708,8 @@
 		CEEF22AA2063D6E000CE3949 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
 		CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */; };
 		CEEFECC1200F735100E9A4FE /* UISearchBar+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */; };
+		CEF00FDC227B2BC100248A15 /* EmailEnterDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF00FDB227B2BC100248A15 /* EmailEnterDesigner.swift */; };
+		CEF00FDD227B2BC100248A15 /* EmailEnterDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF00FDB227B2BC100248A15 /* EmailEnterDesigner.swift */; };
 		CEF0C2841FC5493200105C31 /* ImportFromInstagramPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2831FC5493200105C31 /* ImportFromInstagramPresenter.swift */; };
 		CEF0C2861FC549C400105C31 /* ImportFromInstagramInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2851FC549C400105C31 /* ImportFromInstagramInteractor.swift */; };
 		CEF0C28A1FC594E300105C31 /* InstagramAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2881FC594E300105C31 /* InstagramAuthViewController.swift */; };
@@ -5949,7 +5949,6 @@
 		CEB1CEA91F21E11200C9DD8F /* SwiftyJSONExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSONExtension.swift; sourceTree = "<group>"; };
 		CEB27346205BE3DC00E1AE9C /* EmailEnterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailEnterController.swift; sourceTree = "<group>"; };
 		CEB27347205BE3DC00E1AE9C /* EmailEnterController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailEnterController.xib; sourceTree = "<group>"; };
-		CEB2734B205BF56600E1AE9C /* EmailEnterCustomizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailEnterCustomizator.swift; sourceTree = "<group>"; };
 		CEB2734D205BF57B00E1AE9C /* UnderlineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineTextField.swift; sourceTree = "<group>"; };
 		CEB2734F205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAttemptsCounterByUnigueUserID.swift; sourceTree = "<group>"; };
 		CEB76EAF1FE9094600B679EB /* UIScrollView+Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Refresh.swift"; sourceTree = "<group>"; };
@@ -6046,6 +6045,7 @@
 		CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
 		CEEFECC0200F735100E9A4FE /* UISearchBar+Cancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Cancel.swift"; sourceTree = "<group>"; };
+		CEF00FDB227B2BC100248A15 /* EmailEnterDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailEnterDesigner.swift; sourceTree = "<group>"; };
 		CEF0C2831FC5493200105C31 /* ImportFromInstagramPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromInstagramPresenter.swift; sourceTree = "<group>"; };
 		CEF0C2851FC549C400105C31 /* ImportFromInstagramInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromInstagramInteractor.swift; sourceTree = "<group>"; };
 		CEF0C2881FC594E300105C31 /* InstagramAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAuthViewController.swift; sourceTree = "<group>"; };
@@ -12466,7 +12466,7 @@
 			children = (
 				CEB27347205BE3DC00E1AE9C /* EmailEnterController.xib */,
 				CEB27346205BE3DC00E1AE9C /* EmailEnterController.swift */,
-				CEB2734B205BF56600E1AE9C /* EmailEnterCustomizator.swift */,
+				CEF00FDB227B2BC100248A15 /* EmailEnterDesigner.swift */,
 				CEB2734D205BF57B00E1AE9C /* UnderlineTextField.swift */,
 			);
 			path = EmailEnter;
@@ -15821,6 +15821,7 @@
 				CE39D3E7216B756E004AB6D7 /* YearsView.swift in Sources */,
 				9807261D203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */,
 				8C0E8DD51FDEBDFF00789C91 /* TermsAndServicesInteractorInput.swift in Sources */,
+				CEF00FDD227B2BC100248A15 /* EmailEnterDesigner.swift in Sources */,
 				CED4B0282017505300D06CA9 /* Mapping.swift in Sources */,
 				8C0E8DD61FDEBDFF00789C91 /* TermsAndServicesInteractorOutput.swift in Sources */,
 				8C0E8DD71FDEBDFF00789C91 /* TermsAndServicesInteractor.swift in Sources */,
@@ -16191,7 +16192,6 @@
 				8C0E8F071FDEBDFF00789C91 /* SyncContactsViewController.swift in Sources */,
 				9219B19B21ECB7B900098021 /* InstaPickHashtagCell.swift in Sources */,
 				8C975E14220DA25000AC3502 /* InstapickAnalyzesCount.swift in Sources */,
-				CE23A0F8205FF5320048267D /* EmailEnterCustomizator.swift in Sources */,
 				C62239AD2049732D0043ED44 /* FaceImageChangeCoverRouter.swift in Sources */,
 				8C0E8F081FDEBDFF00789C91 /* FBService.swift in Sources */,
 				8C0E8F091FDEBDFF00789C91 /* PasscodeSettingsInitializer.swift in Sources */,
@@ -16628,7 +16628,6 @@
 			files = (
 				CE4363411F6FC43F004724BF /* ActivitiesByDay.swift in Sources */,
 				CE4363421F6FC43F004724BF /* ActivitiesByMinutesAndType.swift in Sources */,
-				CEB2734C205BF56600E1AE9C /* EmailEnterCustomizator.swift in Sources */,
 				CE4363431F6FC43F004724BF /* ActivityFileType.swift in Sources */,
 				CE4363441F6FC43F004724BF /* ActivityType.swift in Sources */,
 				78D9BA332007E7E200F2233F /* DuplicatedContactsConfigurator.swift in Sources */,
@@ -17324,6 +17323,7 @@
 				B5AB2F0B2204940800E3AF23 /* InstaPickCircularLoader.swift in Sources */,
 				CEC3C2431FB99AF800C3D67F /* PasscodeSettingsViewIO.swift in Sources */,
 				9808A05E206A88580022376D /* PushNotificationService.swift in Sources */,
+				CEF00FDC227B2BC100248A15 /* EmailEnterDesigner.swift in Sources */,
 				98EAC9422080CBFF00AAD5B6 /* ContactService.swift in Sources */,
 				CE0283A11FE1222A0016FBE2 /* PopUpImage.swift in Sources */,
 				EFA74FAF1FBF378F00CF946E /* PrintViewController.swift in Sources */,
