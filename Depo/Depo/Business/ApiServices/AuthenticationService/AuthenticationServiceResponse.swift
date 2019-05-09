@@ -128,6 +128,12 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
         if let httpResponse = response as? HTTPURLResponse {
             if 200...299 ~= httpResponse.statusCode {
                 
+                if let error = error as? URLError, error.code == .networkConnectionLost {
+                    //case when we received a response with statusCode == 200 and an error "The network connection was lost."
+                    fail?(.error(error))
+                    return
+                }
+                
                 switch expectedDataFormat {
                     case .JSONFormat, .DataFormat:
                         DispatchQueue.toBackground { [weak self] in
