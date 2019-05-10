@@ -96,6 +96,11 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        stopEditingMode()
+    }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
