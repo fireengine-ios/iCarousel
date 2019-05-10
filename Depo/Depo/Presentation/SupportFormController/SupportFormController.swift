@@ -176,7 +176,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
                                    "\(phoneCode)\(phoneNumber)",
                                    versionString,
                                    CoreTelephonyService().operatorName() ?? "",
-                                   UIDevice.current.model,
+                                   UIDevice.current.modelName,
                                    UIDevice.current.systemVersion,
                                    Device.locale,
                                    ReachabilityService().isReachableViaWiFi ? "WIFI" : "WWAN")

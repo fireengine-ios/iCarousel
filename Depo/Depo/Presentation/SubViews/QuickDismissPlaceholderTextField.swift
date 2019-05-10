@@ -23,32 +23,31 @@ final class QuickDismissPlaceholderTextField: UnderlineTextField {
         }
     }
     
+    @discardableResult
     override func becomeFirstResponder() -> Bool {
         let result = super.becomeFirstResponder()
-        
         changePlaceholderColor()
-        
         return result
     }
     
+    @discardableResult
     override func resignFirstResponder() -> Bool {
         let result = super.resignFirstResponder()
-        
         changePlaceholderColor()
-        
         return result
     }
     
     private func changePlaceholderColor() {
         guard let placeholder = self.attributedPlaceholder?.string else {
-                return
+            assertionFailure()
+            return
         }
         
         let color = isFirstResponder ? UIColor.clear : placeholderColor
-        let attributes: [NSAttributedStringKey : Any] = [ .foregroundColor : color ]
+        let attributes: [NSAttributedStringKey: Any] = [.foregroundColor: color]
         let attributedPlaceholder = NSMutableAttributedString(string: placeholder,
-                                                    attributes: attributes)
-
+                                                              attributes: attributes)
+        
         self.attributedPlaceholder = attributedPlaceholder
     }
 }
