@@ -982,3 +982,6 @@
 "enter_your_password" = "Enter your password";
 "re_enter_your_password" = "Re-enter your password";
 "signup_support_info" = "If you are having difficulty signing up, contact us for support.";
+
+"missing_information" = "Missing Information";
+"please_enter_your_missing_account_information" = "Please enter your missing account information:";

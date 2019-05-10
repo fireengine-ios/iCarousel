@@ -145,7 +145,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     private func openEmptyEmail() {
         storageVars.emptyEmailUp = true
         let vc = EmailEnterController.initFromNib()
-        vc.approveCancelHandler = { [weak self] in
+        vc.successHandler = { [weak self] in
             self?.openApp()
         }
         let navVC = NavigationController(rootViewController: vc)

@@ -181,7 +181,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     private func openEmptyEmail() {
         storageVars.emptyEmailUp = true
         let vc = EmailEnterController.initFromNib()
-        vc.approveCancelHandler = { [weak self] in
+        vc.successHandler = { [weak self] in
             self?.interactor.updateUserLanguage()
         }
         let navVC = NavigationController(rootViewController: vc)
