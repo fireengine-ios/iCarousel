@@ -104,8 +104,8 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                         self?.output.signupFailedCaptchaRequired()
                     }
                 } else if case ErrorResponse.error(let error) = errorResponce,
-                    let statusError = error as? ServerValueError,
-                    let signUpError = SignupResponseError(with: statusError) {
+                    let valueError = error as? ServerValueError,
+                    let signUpError = SignupResponseError(with: valueError) {
                     
                     self?.analyticsService.trackSignupEvent(error: signUpError)
                     
