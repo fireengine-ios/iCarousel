@@ -52,6 +52,10 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
         
         authService.updateEmail(emailUpdateParameters: EmailUpdate(mail: email),
                                 sucess: { [weak self] response in
+                                    
+                                    /// email updating without "SingletonStorage.shared.getAccountInfoForUser(forceReload: true"
+                                    SingletonStorage.shared.accountInfo?.email = self?.email
+                                    
                                     DispatchQueue.main.async {
                                         self?.hideSpinner()
                                         self?.showEmailConfirmation()
