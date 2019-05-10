@@ -44,13 +44,25 @@ final class ProfileTextPickerView: ProfileTextEnterView {
         textField.addToolBarWithButton(title: TextConstants.nextTitle,
                                        target: self,
                                        selector: #selector(onNextToolBarButton))
+        
+        textField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
     }
     
     @objc private func onNextToolBarButton() {
         responderOnNext?.becomeFirstResponder()
     }
-}
+    
+    
+    
+    
+    @objc private func textFieldDidBeginEditing() {
+        /// select first model on begin editing
+        if textField.text == "" {
+            textField.text = models.first
+        }
+    }
 
+}
 
 extension ProfileTextPickerView: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
