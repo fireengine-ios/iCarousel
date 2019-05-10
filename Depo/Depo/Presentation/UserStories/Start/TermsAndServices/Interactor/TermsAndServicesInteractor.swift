@@ -103,6 +103,15 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                     if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
                         self?.output.signupFailedCaptchaRequired()
                     }
+                } else if case ErrorResponse.error(let error) = errorResponce,
+                    let valueError = error as? ServerValueError,
+                    let signUpError = SignupResponseError(with: valueError) {
+                    
+                    self?.analyticsService.trackSignupEvent(error: signUpError)
+                    
+                    if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
+                        self?.output.signupFailedCaptchaRequired()
+                    }
                 } else {
                     self?.analyticsService.trackSignupEvent(error: .serverError)
                 }
