@@ -52,16 +52,12 @@ final class ProfileTextPickerView: ProfileTextEnterView {
         responderOnNext?.becomeFirstResponder()
     }
     
-    
-    
-    
     @objc private func textFieldDidBeginEditing() {
         /// select first model on begin editing
         if textField.text == "" {
             textField.text = models.first
         }
     }
-
 }
 
 extension ProfileTextPickerView: UIPickerViewDataSource {
