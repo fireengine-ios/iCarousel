@@ -111,15 +111,17 @@ enum SignupResponseError {
             self = .invalidOtp
         case "TOO_MANY_INVALID_ATTEMPTS":
             self = .tooManyInvalidOtpAttempts
-        case "INVALID_CAPTCHA":
+        case "INVALID_CAPTCHA", "Invalid captcha.":
             self = .incorrectCaptcha
+        case "Captcha required.":
+            self = .captchaRequired
         default:
             return nil
         }
     }
     
-    init?(with error: ServerValueError) {
-        switch error.value {
+    init?(with stringError: String) {
+        switch stringError {
         case "EMAIL_FIELD_IS_INVALID", "EMAIL_IS_INVALID":
             self = .invalidEmail
         case "EMAIL_IS_ALREADY_EXIST":

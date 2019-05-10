@@ -105,7 +105,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                     }
                 } else if case ErrorResponse.error(let error) = errorResponce,
                     let statusError = error as? ServerValueError,
-                    let signUpError = SignupResponseError(with: statusError) {
+                    let signUpError = SignupResponseError(with: statusError.value) {
                     
                     self?.analyticsService.trackSignupEvent(error: signUpError)
                     
