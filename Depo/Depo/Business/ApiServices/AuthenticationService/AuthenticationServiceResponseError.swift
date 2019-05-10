@@ -96,28 +96,11 @@ enum SignupResponseError {
     case unauthorized
     
     init?(with error: ServerStatusError) {
-        switch error.status {
-        case "EMAIL_FIELD_IS_INVALID", "EMAIL_IS_INVALID":
-            self = .invalidEmail
-        case "EMAIL_IS_ALREADY_EXIST":
-            self = .emailAlreadyExists
-        case "PHONE_NUMBER_IS_ALREADY_EXIST":
-            self = .gsmAlreadyExists
-        case "INVALID_PASSWORD":
-            self = .invalidPassword
-        case "TOO_MANY_REQUESTS":
-            self = .tooManyOtpRequests
-        case "INVALID_OTP":
-            self = .invalidOtp
-        case "TOO_MANY_INVALID_ATTEMPTS":
-            self = .tooManyInvalidOtpAttempts
-        case "INVALID_CAPTCHA", "Invalid captcha.":
-            self = .incorrectCaptcha
-        case "Captcha required.":
-            self = .captchaRequired
-        default:
-            return nil
-        }
+        self.init(with: error.status)
+    }
+    
+    init?(with error: ServerValueError) {
+        self.init(with: error.value)
     }
     
     init?(with stringError: String) {
