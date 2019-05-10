@@ -54,7 +54,6 @@ final class ReachabilityService: ReachabilityProtocol {
         setupObservers()
         
         do {
-            reachability?.allowsCellularConnection = false
             try reachability?.startNotifier()
         } catch {
             print("Can't start REACHABILITY_NOTIFIER")
