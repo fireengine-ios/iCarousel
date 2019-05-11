@@ -10,9 +10,9 @@ import Foundation
 
 protocol LoginRouterInput {
     
-    func getEmptyPhoneController() -> TextEnterController?
+    var optInController: OptInController? { get }
     
-    func getOptInController() -> OptInController?
+    var emptyPhoneController: TextEnterController? { get }
     
     func renewOptIn(with optIn: OptInController)
 

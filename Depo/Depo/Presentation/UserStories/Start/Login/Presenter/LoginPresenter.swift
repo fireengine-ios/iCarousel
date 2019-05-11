@@ -79,7 +79,7 @@ class LoginPresenter: BasePresenter {
     }
     
     private func stopOptInVC() {
-        let optInController = router.getOptInController()
+        let optInController = router.optInController
         
         optInController?.stopActivityIndicator()
         optInController?.resignFirstResponder()
@@ -248,7 +248,7 @@ extension LoginPresenter: LoginInteractorOutput {
     
     func successed(tokenUpdatePhone: SignUpSuccessResponse) {
         referenceToken = tokenUpdatePhone.referenceToken
-        let textEnterVC = router.getEmptyPhoneController()
+        let textEnterVC = router.emptyPhoneController
 
         textEnterVC?.stopLoading()
         textEnterVC?.close { [weak self] in
@@ -259,19 +259,19 @@ extension LoginPresenter: LoginInteractorOutput {
             self.isPresenting = true
             
             self.router.openOptIn(phone: newPhone)
-            self.router.getOptInController()?.delegate = self
+            self.router.optInController?.delegate = self
         }
     }
     
     func failedUpdatePhone(errorResponse: ErrorResponse) {
-        let textEnterVC = router.getEmptyPhoneController()
+        let textEnterVC = router.emptyPhoneController
         textEnterVC?.stopLoading()
         textEnterVC?.showErrorAlert(message: errorResponse.description)
     }
     
     func successed(resendUpdatePhone: SignUpSuccessResponse) {
         referenceToken = resendUpdatePhone.referenceToken
-        let optInController = router.getOptInController()
+        let optInController = router.optInController
 
         optInController?.stopActivityIndicator()
         optInController?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
@@ -280,8 +280,8 @@ extension LoginPresenter: LoginInteractorOutput {
     }
     
     func failedResendUpdatePhone(errorResponse: ErrorResponse) {
-        router.getOptInController()?.stopActivityIndicator()
-        router.getEmptyPhoneController()?.showErrorAlert(message: errorResponse.description)
+        router.optInController?.stopActivityIndicator()
+        router.emptyPhoneController?.showErrorAlert(message: errorResponse.description)
     }
     
     func successedVerifyPhone() {
@@ -299,7 +299,7 @@ extension LoginPresenter: LoginInteractorOutput {
     }
     
     func failedVerifyPhone(errorString: String) {
-        let optInController = router.getOptInController()
+        let optInController = router.optInController
         optInController?.stopActivityIndicator()
         optInController?.clearCode()
         optInController?.view.endEditing(true)

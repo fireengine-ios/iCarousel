@@ -10,16 +10,8 @@ class LoginRouter: LoginRouterInput {
     
     let router = RouterVC()
     
-    private var optInController: OptInController?
-    private var emptyPhoneController: TextEnterController?
-    
-    func getEmptyPhoneController() -> TextEnterController? {
-        return emptyPhoneController
-    }
-    
-    func getOptInController() -> OptInController? {
-        return optInController
-    }
+    var optInController: OptInController?
+    var emptyPhoneController: TextEnterController?
     
     func renewOptIn(with optIn: OptInController) {
         optInController = optIn
