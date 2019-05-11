@@ -142,6 +142,11 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     private func openEmptyEmail() {
+        /// guard for two controller due to interactor.startLoginInBackground()
+        if UIApplication.topController() is EmailEnterController {
+            return
+        }
+        
         let vc = EmailEnterController.initFromNib()
         vc.successHandler = { [weak self] in
             self?.openApp()
