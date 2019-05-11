@@ -6,10 +6,9 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-import UIKit
 import SDWebImage
 
-class SmartAlbumCell: UICollectionViewCell {
+class SmartAlbumCell: SimpleSliderCell {
     
     @IBOutlet var noItemsBackgroundImage: UIImageView! {
         willSet {
@@ -69,7 +68,7 @@ class SmartAlbumCell: UICollectionViewCell {
         setupAccessibility()
     }
     
-    func setup(withItem item: SliderItem) {
+    override func setup(withItem item: SliderItem) {
         name.text = item.name
         accessibilityLabel = item.name
         
