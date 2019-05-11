@@ -1718,7 +1718,6 @@
 		8C0E8D541FDEBDFF00789C91 /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C6F1EEE8E7F0086DA84 /* LoginConfigurator.swift */; };
 		8C0E8D561FDEBDFF00789C91 /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
 		8C0E8D571FDEBDFF00789C91 /* PackagesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56021F7552A900F49DA1 /* PackagesInitializer.swift */; };
-		8C0E8D581FDEBDFF00789C91 /* LoginDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */; };
 		8C0E8D591FDEBDFF00789C91 /* BaseMediaContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74381F04F4B800124DF5 /* BaseMediaContent.swift */; };
 		8C0E8D5A1FDEBDFF00789C91 /* IntroduceSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B7C1EEEB792006532C8 /* IntroduceSubView.swift */; };
 		8C0E8D5C1FDEBDFF00789C91 /* LoginInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C741EEE8E7F0086DA84 /* LoginInteractorOutput.swift */; };
@@ -3334,7 +3333,6 @@
 		CE51AC471EF90853005DCEE0 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C601EED63BC0086DA84 /* DataStorage.swift */; };
 		CE51AC481EF90853005DCEE0 /* BaseUserInputCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */; };
 		CE51AC4A1EF90853005DCEE0 /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C6F1EEE8E7F0086DA84 /* LoginConfigurator.swift */; };
-		CE51AC521EF90853005DCEE0 /* LoginDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */; };
 		CE51AC591EF90853005DCEE0 /* IntroduceSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B7C1EEEB792006532C8 /* IntroduceSubView.swift */; };
 		CE51AC641EF90853005DCEE0 /* LoginInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C741EEE8E7F0086DA84 /* LoginInteractorOutput.swift */; };
 		CE51AC6E1EF90853005DCEE0 /* AutoSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814641EF7A93E001DFCF0 /* AutoSyncViewController.swift */; };
@@ -4272,7 +4270,6 @@
 		7C032B7E1EEEB7A8006532C8 /* IntroduceSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroduceSubView.xib; sourceTree = "<group>"; };
 		7C032B811EEFE465006532C8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDataSource.swift; sourceTree = "<group>"; };
-		7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDataStorage.swift; sourceTree = "<group>"; };
 		7C0435051F4DBAAF00193C75 /* AlbumCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumCollectionViewCell.xib; sourceTree = "<group>"; };
 		7C04350A1F4EF3DA00193C75 /* AlbumDetailService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailService.swift; sourceTree = "<group>"; };
@@ -7866,14 +7863,6 @@
 			path = SubViews;
 			sourceTree = "<group>";
 		};
-		7C032B8E1EF0123B006532C8 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
 		7C0435091F4EF3A600193C75 /* AlbumDetailService */ = {
 			isa = PBXGroup;
 			children = (
@@ -9058,7 +9047,6 @@
 		8C049C711EEE8E7F0086DA84 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				7C032B8E1EF0123B006532C8 /* Services */,
 				8C049C721EEE8E7F0086DA84 /* LoginInteractor.swift */,
 				8C049C731EEE8E7F0086DA84 /* LoginInteractorInput.swift */,
 				8C049C741EEE8E7F0086DA84 /* LoginInteractorOutput.swift */,
@@ -15670,7 +15658,6 @@
 				8C0E8D541FDEBDFF00789C91 /* LoginConfigurator.swift in Sources */,
 				8C0E8D561FDEBDFF00789C91 /* RouteRequests.swift in Sources */,
 				8C0E8D571FDEBDFF00789C91 /* PackagesInitializer.swift in Sources */,
-				8C0E8D581FDEBDFF00789C91 /* LoginDataStorage.swift in Sources */,
 				8C0E8D591FDEBDFF00789C91 /* BaseMediaContent.swift in Sources */,
 				8C0E8D5A1FDEBDFF00789C91 /* IntroduceSubView.swift in Sources */,
 				8C0E8D5C1FDEBDFF00789C91 /* LoginInteractorOutput.swift in Sources */,
@@ -16940,7 +16927,6 @@
 				CE27C31F1EF9515800D4D156 /* RouteRequests.swift in Sources */,
 				CE2F56161F7552A900F49DA1 /* PackagesInitializer.swift in Sources */,
 				CE15AFBE20A0846E00015874 /* UINavigationController+Push.swift in Sources */,
-				CE51AC521EF90853005DCEE0 /* LoginDataStorage.swift in Sources */,
 				7859299920060E94003F8AB3 /* ManageContactsInteractor.swift in Sources */,
 				984A515721E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */,
 				7C3A74391F04F4B800124DF5 /* BaseMediaContent.swift in Sources */,
