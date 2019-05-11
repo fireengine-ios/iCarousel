@@ -1215,4 +1215,9 @@ struct TextConstants {
     
     static let missingInformation = NSLocalizedString("missing_information", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let pleaseEnterYourMissingAccountInformation = NSLocalizedString("please_enter_your_missing_account_information", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginEmailOrPhonePlaceholder = NSLocalizedString("login_email_or_phone_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPasswordPlaceholder = NSLocalizedString("login_password_placeholder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let loginEmailOrPhoneError = NSLocalizedString("login_email_or_phone_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPasswordError = NSLocalizedString("login_password_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
