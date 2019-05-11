@@ -6,36 +6,62 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+enum LoginFieldError {
+    case loginIsNotValid
+    case loginIsEmpty
+    
+    case passwordIsEmpty
+    
+    case captchaIsEmpty
+    case captchaIsIncorrect
+}
+
 class LoginInteractor: LoginInteractorInput {
     
     weak var output: LoginInteractorOutput?
     
-    private var dataStorage = LoginDataStorage()
     private let authService = AuthenticationService()
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
     private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var eulaService = EulaService()
+    private lazy var accountService = AccountService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private var periodicContactSyncDataStorage = PeriodicContactSyncDataStorage()
     private let contactsService = ContactService()
     
     private var rememberMe: Bool = true
+    
     private var attempts: Int = 0
+    private var loginRetries = 0 {
+        didSet {
+            if loginRetries > 2 {
+                output?.showSupportView()
+            }
+        }
+    }
     
     private var login: String?
     private var password: String?
+    
     private var atachedCaptcha: CaptchaParametrAnswer?
     private lazy var captchaService = CaptchaService()
+    
+    private let blockedUsersKey = "BlockedUsers"
+    private var blockedUsers: [String : Date] {
+        willSet {
+            UserDefaults.standard.set(newValue, forKey: blockedUsersKey)
+        }
+    }
     
     var isShowEmptyEmail = false
     
     /// from 0 to 11 = 12 attempts
     private let maxAttemps: Int = 11
     
-    func prepareModels() {
-        output?.models(models: dataStorage.getModels())
+    init() {
+        blockedUsers = (UserDefaults.standard.value(forKey: blockedUsersKey) as? [String : Date]) ?? [:]
     }
     
     func rememberMe(state: Bool) {
@@ -47,13 +73,21 @@ class LoginInteractor: LoginInteractorInput {
                              atachedCaptcha: CaptchaParametrAnswer?,
                              errorHandler: @escaping (ErrorResponse) -> Void) {
         
+        let isCaptchaRequired = atachedCaptcha != nil
+        
         if login.isEmpty {
-            output?.loginFieldIsEmpty()
+            output?.fieldError(type: .loginIsEmpty)
         }
+        
         if password.isEmpty {
-            output?.passwordFieldIsEmpty()
+            output?.fieldError(type: .passwordIsEmpty)
         }
-        if login.isEmpty || password.isEmpty {
+        
+        if let captchaAnswer = atachedCaptcha?.answer, captchaAnswer.isEmpty {
+            output?.fieldError(type: .captchaIsEmpty)
+        }
+        
+        if login.isEmpty || password.isEmpty || (isCaptchaRequired && (atachedCaptcha?.answer ?? "").isEmpty) {
             return
         }
         
@@ -64,16 +98,17 @@ class LoginInteractor: LoginInteractorInput {
             output?.allAttemtsExhausted(user: login)
             return
         }
+        
         if !Validator.isValid(email: login) && !Validator.isValid(phone: login) {
             analyticsService.trackLoginEvent(error: .incorrectUsernamePassword)
-            output?.failLogin(message: TextConstants.loginScreenInvalidLoginError)
+            output?.fieldError(type: .loginIsNotValid)
             return
         }
         
         let user = AuthenticationUser(login: login,
                                       password: password,
                                       rememberMe: true,
-            attachedCaptcha: atachedCaptcha)
+                                      attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
             guard let `self` = self else {
@@ -94,10 +129,12 @@ class LoginInteractor: LoginInteractorInput {
                 self.analyticsService.trackLoginEvent(loginType: .gsm)
             }
             
+            self.loginRetries = 0
+
             DispatchQueue.main.async {
                 self.output?.succesLogin()
             }
-        }, fail: { errorResponse  in
+        }, fail: { errorResponse in
             errorHandler(errorResponse)
         })
     }
@@ -119,6 +156,7 @@ class LoginInteractor: LoginInteractorInput {
                     self.output?.failedBlockError()
                 case .needCaptcha:
                     self.output?.needShowCaptcha()
+                    self.loginRetries -= 1 ///it's not a point to show supportView
                 case .authenticationDisabledForAccount:
                     self.output?.failLogin(message: TextConstants.loginScreenAuthWithTurkcellError)
                 case .needSignUp:
@@ -127,12 +165,13 @@ class LoginInteractor: LoginInteractorInput {
                     self.attempts += 1
                     self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 case .incorrectCaptcha:
-                    self.output?.failLogin(message: TextConstants.loginScreenInvalidCaptchaError)
+                    self.output?.fieldError(type: .captchaIsIncorrect)
                 case .networkError, .serverError:
                     self.output?.failLogin(message: errorResponse.description)
                 case .unauthorized:
                     self.output?.failLogin(message: TextConstants.loginScreenCredentialsError)
                 case .noInternetConnection:
+                    self.loginRetries -= 1 ///it's not a point to show supportView
                     self.output?.failLogin(message: TextConstants.errorConnectedToNetwork)
                 case .emptyPhone:
                     self.login = login
@@ -140,6 +179,8 @@ class LoginInteractor: LoginInteractorInput {
                     self.atachedCaptcha = atachedCaptcha
                     self.output?.openEmptyPhone()
                 }
+                
+                self.loginRetries += 1
             }
         }
     }
@@ -161,26 +202,26 @@ class LoginInteractor: LoginInteractorInput {
     
     func blockUser(user: String) {
         attempts = 0
-        if let blockedUsers = dataStorage.blockedUsers {
-            let blockedUsersDic = NSMutableDictionary(dictionary: blockedUsers)
-            blockedUsersDic[user] = Date()
-            dataStorage.blockedUsers = blockedUsersDic
+        if blockedUsers.count == 0 {
+            blockedUsers = [user : Date()]
         } else {
-            dataStorage.blockedUsers = [user: Date()]
+            var blockedUsersDic = blockedUsers
+            blockedUsersDic[user] = Date()
+            blockedUsers = blockedUsersDic
         }
     }
     
     private func isBlocked(userName: String) -> Bool {
-        guard let blockedUsers = dataStorage.blockedUsers, let blokedDate = blockedUsers[userName] as? Date else {
+        guard let blockedDate = blockedUsers[userName] else {
             return false
         }
         
         let currentTime = Date()
-        let timeIntervalFromBlockDate = currentTime.timeIntervalSince(blokedDate)
+        let timeIntervalFromBlockDate = currentTime.timeIntervalSince(blockedDate)
         if timeIntervalFromBlockDate / 60 >= 60 {
-            let blockedUsersDic = NSMutableDictionary(dictionary: blockedUsers)
-            blockedUsersDic.removeObject(forKey: userName)
-            dataStorage.blockedUsers = blockedUsersDic
+            var blockedUsersDic = blockedUsers
+            blockedUsersDic.removeValue(forKey: userName)
+            blockedUsers = blockedUsersDic
             return false
         }
         return true
@@ -234,8 +275,6 @@ class LoginInteractor: LoginInteractorInput {
 //        attempts = 0
 //        dataStorage.blockDate = nil
     }
-    
-    let accountService = AccountService()
     
     func getTokenToUpdatePhone(for phoneNumber: String) {
         let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)

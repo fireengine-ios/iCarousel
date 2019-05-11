@@ -10,6 +10,21 @@ class LoginRouter: LoginRouterInput {
     
     let router = RouterVC()
     
+    private var optInController: OptInController?
+    private var emptyPhoneController: TextEnterController?
+    
+    func getEmptyPhoneController() -> TextEnterController? {
+        return emptyPhoneController
+    }
+    
+    func getOptInController() -> OptInController? {
+        return optInController
+    }
+    
+    func renewOptIn(with optIn: OptInController) {
+        optInController = optIn
+    }
+    
     func goToForgotPassword() {
         let forgotPassword = router.forgotPasswordScreen
         router.pushViewController(viewController: forgotPassword!)
@@ -18,11 +33,6 @@ class LoginRouter: LoginRouterInput {
     func goToHomePage() {
         let homePage = router.tabBarScreen
         router.setNavigationController(controller: homePage)
-    }
-    
-    func getCapcha() -> CaptchaViewController? {
-        let capcha = router.capcha
-        return capcha
     }
     
     func goToTermsAndServices() {
@@ -38,5 +48,46 @@ class LoginRouter: LoginRouterInput {
         if let registrationScreen = router.registrationScreen {
             router.pushViewController(viewController: registrationScreen)
         }
+    }
+    
+    func openEmptyEmail(successHandler: @escaping VoidHandler) {
+        let vc = EmailEnterController.initFromNib()
+        vc.successHandler = successHandler
+        let navVC = NavigationController(rootViewController: vc)
+        router.presentViewController(controller: navVC)
+    }
+    
+    func openTextEnter(buttonAction: @escaping TextEnterHandler) {
+
+        let textEnterVC = TextEnterController.with(title: TextConstants.loginAddGSM,
+                                                   buttonTitle: TextConstants.save,
+                                                   buttonAction: buttonAction)
+        let navVC = NavigationController(rootViewController: textEnterVC)
+        
+        self.emptyPhoneController = textEnterVC
+
+        router.presentViewController(controller: navVC)
+    }
+    
+    func openOptIn(phone: String) {
+        let optInController = OptInController.with(phone: phone)
+        self.optInController = optInController
+        
+        router.pushViewController(viewController: optInController)
+    }
+    
+    func showNeedSignUp(message: String, onClose: @escaping VoidHandler) {
+        let popUp = PopUpController.with(title: TextConstants.errorAlert,
+                                         message: message,
+                                         image: .error,
+                                         buttonTitle: TextConstants.ok) { controller in
+                                            controller.close(completion: onClose)
+        }
+        router.presentViewController(controller: popUp)
+    }
+    
+    func openSupport() {
+        let controller = router.supportFormController
+        router.pushViewController(viewController: controller)
     }
 }

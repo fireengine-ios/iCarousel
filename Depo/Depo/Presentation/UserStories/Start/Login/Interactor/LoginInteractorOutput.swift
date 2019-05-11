@@ -11,32 +11,25 @@ import Foundation
 protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func succesLogin()
-    
+    func successedSilentLogin()
     func failLogin(message: String)
-    
-    func needSignUp(message: String)
-    
-    func models(models: [BaseCellModel])
-    
-    func needShowCaptcha()
-    func failedBlockError()
-    
+
     func foundCoutryPhoneCode(code: String, plus: Bool)
     
-    func loginFieldIsEmpty()
-    func passwordFieldIsEmpty()
-    
+    func fieldError(type: LoginFieldError)
+
     func onSuccessEULA()
     func onFailEULA()
     
-    func allAttemtsExhausted(user: String)
-    
     func preparedTimePassed(date: Date, forUserName name: String)
     
+    func failedBlockError()
     func userStillBlocked(user: String)
-    
+    func allAttemtsExhausted(user: String)
+
     func openEmptyPhone()
-    
+    func needSignUp(message: String)
+
     func successed(tokenUpdatePhone: SignUpSuccessResponse)
     func failedUpdatePhone(errorResponse: ErrorResponse)
     
@@ -49,9 +42,10 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func updateUserLanguageSuccess()
     func updateUserLanguageFailed(error: Error)
     
+    func needShowCaptcha()
     func captchaRequred(requred: Bool)
     func captchaRequredFailed()
     func captchaRequredFailed(with message: String)
     
-    func successedSilentLogin()
+    func showSupportView()
 }
