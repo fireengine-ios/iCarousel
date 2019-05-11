@@ -11,7 +11,6 @@ import Foundation
 protocol StorageVars: class {
     var isAppFirstLaunch: Bool { get set }
     var currentUserID: String? { get set }
-    var emptyEmailUp: Bool { get set }
     var autoSyncSet: Bool { get set }
     var autoSyncSettings: [String: Any]? { get set }
     var autoSyncSettingsMigrationCompleted: Bool { get set }
@@ -74,15 +73,6 @@ final class UserDefaultsVars: StorageVars {
     var periodicContactSyncSet: Bool {
         get { return userDefaults.bool(forKey: periodicContactSyncSetKey) }
         set { userDefaults.set(newValue, forKey: periodicContactSyncSetKey) }
-    }
-    
-    /// need flag for SavingAttemptsCounterByUnigueUserID.emptyEmailCounter
-    /// when user logged in but drop app at EmailEnterController (func openEmptyEmail)
-    /// used in AppConfigurator emptyEmailUpIfNeed()
-    private let emptyEmailUpKey = "emptyEmailUpKey"
-    var emptyEmailUp: Bool {
-        get { return userDefaults.bool(forKey: emptyEmailUpKey) }
-        set { userDefaults.set(newValue, forKey: emptyEmailUpKey) }
     }
     
     private let autoSyncSettingsKey = "autoSyncSettingsKey"

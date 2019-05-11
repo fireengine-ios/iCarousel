@@ -76,8 +76,6 @@ struct NumericConstants {
     static let maxNumberOfUploadAttempts = 5
     static let secondsBeetweenUploadAttempts = 5
     
-    static let emptyEmailUserCloseLimit = 3
-    
     static let logDuration: TimeInterval = 24 * 60 * 60 * 3
     static let logMaxSize: UInt64 = 5_242_880
     

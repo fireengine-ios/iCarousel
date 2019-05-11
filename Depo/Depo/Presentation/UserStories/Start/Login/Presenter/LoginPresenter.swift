@@ -173,13 +173,11 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     }
     
     private func openApp() {
-        storageVars.emptyEmailUp = false
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
         openAutoSyncIfNeeded()
     }
     
     private func openEmptyEmail() {
-        storageVars.emptyEmailUp = true
         let vc = EmailEnterController.initFromNib()
         vc.successHandler = { [weak self] in
             self?.interactor.updateUserLanguage()

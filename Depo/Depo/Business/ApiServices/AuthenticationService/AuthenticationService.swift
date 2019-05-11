@@ -403,7 +403,6 @@ class AuthenticationService: BaseRequestService {
             self.cancellAllRequests()
             
             self.storageVars.currentUserID = nil
-            self.storageVars.emptyEmailUp = false
             
             success?()
         }
