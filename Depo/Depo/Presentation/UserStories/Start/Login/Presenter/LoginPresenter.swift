@@ -12,7 +12,6 @@ class LoginPresenter: BasePresenter {
     var router: LoginRouterInput!
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
-    private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     var newPhone: String?
@@ -50,13 +49,11 @@ class LoginPresenter: BasePresenter {
     }
     
     private func openApp() {
-        storageVars.emptyEmailUp = false
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
         openAutoSyncIfNeeded()
     }
     
     private func openEmptyEmail() {
-        storageVars.emptyEmailUp = true
         let onSuccess: VoidHandler = { [weak self] in
             self?.interactor.updateUserLanguage()
         }

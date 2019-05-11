@@ -32,7 +32,6 @@ final class AppConfigurator {
         
         AppResponsivenessService.shared.startMainAppUpdate()
         firstStart()
-        emptyEmailUpIfNeed()
         clearTokensIfNeed()
         logoutIfNeed()
         prepareSessionManager()
@@ -67,17 +66,6 @@ final class AppConfigurator {
             KeychainSwift().clear()
             /// call migrate after Keychain clear
             AppMigrator.migrateAll()
-        }
-    }
-    
-    private static func emptyEmailUpIfNeed() {
-        if storageVars.emptyEmailUp {
-            debugLog("emptyEmailUpIfNeed")
-            storageVars.emptyEmailUp = false
-            let attemptsCounter = SavingAttemptsCounterByUnigueUserID.emptyEmailCounter
-            attemptsCounter.up(limitHandler: {
-                AuthenticationService().logout(async: false, success: nil)
-            })
         }
     }
     
